@@ -246,22 +246,85 @@ Auth: `--user 'api:{api_key}'`
 - Failed events grouped by recipient and reason
 - Flag: IP reputation issues, permanent bounces still being sent to, 0% engagement
 
-## Subtask 7: Siteground Disk Usage (SSH)
+## Subtask 7: Siteground Statistics (Browser)
 
-Check disk usage via SSH.
+Fetch storage/CPU/RAM stats from Siteground dashboard via Puppeteer.
 
 ### Steps
 
-```bash
-ssh -o ConnectTimeout=10 Bailey.cpanel 'cd ~/www && du -sh */ 2>/dev/null | sort -rh && echo "===" && du -sh *.zip 2>/dev/null | sort -rh && echo "===" && du -sh . 2>/dev/null'
-```
+1. **Run scraper** (headless, uses saved browser profile):
+   ```bash
+   node scripts/siteground-storage.js
+   ```
+   If returns `session_expired`, run with `--login` flag (opens visible browser for manual re-auth).
+
+2. **Also check disk details via SSH**:
+   ```bash
+   ssh -o ConnectTimeout=10 Bailey.cpanel 'cd ~/www && du -sh */ 2>/dev/null | sort -rh && echo "===" && du -sh *.zip 2>/dev/null | sort -rh && echo "===" && du -sh . 2>/dev/null'
+   ```
 
 ### Report Format
 
-- Total disk usage
-- Top directories by size
+- SSD usage: total, used, free, breakdown (site vs system)
+- CPU and Memory from dashboard
+- Top directories by size (from SSH)
 - Flag large zip/backup files that can be cleaned
-- Flag if approaching plan storage limit
+- Flag if storage >80% used
+
+## Subtask 8: Post to Slack #maintenance
+
+After all subtasks complete, post a condensed status summary to the GLOBAL GRAZING SERVICES Slack `#maintenance` channel (ID: `C0338NXK3SB`).
+
+### Setup
+
+Read `.slack-accounts.json`, find "GLOBAL GRAZING SERVICES" workspace token.
+
+### Steps
+
+Post message via Slack API:
+```bash
+curl -s -X POST "https://slack.com/api/chat.postMessage" \
+  -H "Authorization: Bearer {token}" \
+  -H "Content-Type: application/json" \
+  -d '{"channel":"C0338NXK3SB","text":"{message}","mrkdwn":true}'
+```
+
+### Message Format
+
+Use this exact format, filling in status from subtask results:
+
+```
+DD/MM/YYYY
+
+Performance status: OK | WARNING | CRITICAL
+Resource status:
+ Storage:
+  Prestashop: OK | WARNING (xx%) | NOT OK (xx%)
+  Console: OK | WARNING (xx%) | NOT OK (xx%)
+ Swap: OK | WARNING
+ Memory: OK | WARNING
+DB backup status: OK | FAILED
+S3 backup: OK | FAILED
+AWS backup status: OK | WARNING
+Billing: OK | WARNING ($xx anomaly)
+Mailgun: OK (xx.xx%) | WARNING (xx.xx%)
+Run recalculate stock: Done | Skipped
+Check AWS noti: OK | WARNING
+AWS Cloudtrail: OK | WARNING
+AWS RDS: OK | WARNING
+SSL:
+ Console: {expiry date}
+ Prestashop: {expiry date}
+```
+
+### Status Rules
+
+- **OK**: metric within normal range
+- **WARNING**: metric approaching threshold (storage >70%, delivery <99%, billing anomaly <50%)
+- **NOT OK / CRITICAL**: metric exceeded threshold (storage >85%, delivery <95%, alarm in ALARM state)
+- Storage %: from Siteground dashboard data
+- Mailgun %: delivery rate from stats
+- SSL dates: check cert expiry via openssl
 
 ## Rules
 
