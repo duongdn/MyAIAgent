@@ -129,3 +129,50 @@ Top: MySQL 428MB (10.8%), PHP-FPM 2 workers ~66MB each
 | nc_staging | OK (24%) | OK (74% avail) | WARNING (none) | OK | OK |
 
 Trello: Neural Contract - Contract Probe ✓
+
+---
+
+## Fountain
+
+### Staging (ssh staging.fountaingifts.com)
+
+| Metric | Value | Status |
+|--------|-------|--------|
+| Hostname | Staging2 | |
+| Uptime | 92 days | OK |
+| CPU | 4 cores | |
+| Load avg | 0.02, 0.08, 0.17 | OK |
+| RAM | 7.8G total, 4.7G available (60%) | OK |
+| Swap | 4G total, 858M used (21%) | WARNING |
+| Disk (/) | 49G total, 38G used (79%) | WARNING |
+
+Stack: Puma + Sidekiq (Fountain + Infinity Roses) + Next.js, no Docker
+Top: sidekiq 486MB, puma workers ~460MB each, next-server 218MB
+
+**Status: WARNING** — Disk at 79%, swap at 21%
+
+### Production (ssh fountaingifts.com)
+
+| Metric | Value | Status |
+|--------|-------|--------|
+| Hostname | live-20240319 | |
+| Uptime | 731 days | WARNING (kernel) |
+| CPU | 4 cores | |
+| Load avg | 0.41, 0.33, 0.33 | OK |
+| RAM | 7.8G total, 3.5G available (45%) | OK |
+| Swap | 4G total, 1.3G used (33%) | WARNING |
+| Disk (/) | 155G total, 97G used (62%) | OK |
+
+Stack: Puma + Sidekiq (Fountain + Infinity Roses) + Next.js x2, no Docker
+Top: puma worker 823MB (10%), next-server 438MB, sidekiq 401MB
+
+**Status: WARNING** — Swap at 33%, uptime 731 days (kernel updates needed)
+
+### Fountain Summary
+
+| Server | Disk | Memory | Swap | Load | Overall |
+|--------|------|--------|------|------|---------|
+| Staging | WARNING (79%) | OK (60% avail) | WARNING (21%) | OK | **WARNING** |
+| Production | OK (62%) | OK (45% avail) | WARNING (33%) | OK | **WARNING** |
+
+Trello: Fountain ✓
