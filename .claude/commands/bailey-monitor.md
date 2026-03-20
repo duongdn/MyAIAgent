@@ -101,6 +101,39 @@ For each pending maintenance action, explain:
 - **Recommendation**: Urgency, when to schedule
 - **Action needed?**: Yes/No with reasoning
 
+## Subtask 3: Billing Review
+
+Compare current month vs last month. Flag anomalies.
+
+### Steps
+
+1. **Current month by service**:
+   ```bash
+   aws ce get-cost-and-usage --time-period Start=YYYY-MM-01,End=YYYY-MM-DD --granularity MONTHLY --metrics BlendedCost --group-by Type=DIMENSION,Key=SERVICE --region us-east-1
+   ```
+
+2. **Last month by service** (for comparison):
+   ```bash
+   aws ce get-cost-and-usage --time-period Start=YYYY-MM-01,End=YYYY-MM-01 --granularity MONTHLY --metrics BlendedCost --group-by Type=DIMENSION,Key=SERVICE --region us-east-1
+   ```
+
+3. **Daily breakdown** (spot spikes):
+   ```bash
+   aws ce get-cost-and-usage --time-period Start=YYYY-MM-01,End=YYYY-MM-DD --granularity DAILY --metrics BlendedCost --region us-east-1
+   ```
+
+4. **If any service has >50% increase**, drill into usage type:
+   ```bash
+   aws ce get-cost-and-usage --time-period ... --group-by Type=DIMENSION,Key=USAGE_TYPE --filter '{"Dimensions":{"Key":"SERVICE","Values":["<service>"]}}'
+   ```
+
+### Report Format
+
+- Monthly comparison table with projected full-month cost
+- Daily trend highlighting any spikes
+- For each anomaly: root cause analysis, action needed assessment
+- Tax on 1st of month is normal accrual, not a spike
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical
@@ -109,3 +142,6 @@ For each pending maintenance action, explain:
 - If no alarms and metrics look normal, say "All clear" with brief summary
 - For pending maintenance: explain effect in plain language, evaluate urgency
 - Check both eu-west-2 and eu-west-3 regions
+- Billing: project current month to full 31 days for fair comparison
+- Tax accrual on 1st of month is normal, do not flag as anomaly
+- Flag service cost changes >50% for investigation

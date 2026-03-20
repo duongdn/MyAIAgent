@@ -76,3 +76,59 @@ API requires Business/Enterprise Support plan — not available on this account.
 ### Summary
 
 No imminent events. 2 optional maintenance actions pending on RDS `speedventory` — recommend scheduling within 2-4 weeks.
+
+---
+
+## AWS Billing — Mar 2026 vs Feb 2026
+
+### Monthly Comparison
+
+| Service | Feb 2026 (full) | Mar 1-20 (actual) | Mar projected (31d) | Change |
+|---------|----------------|-------------------|---------------------|--------|
+| EC2 - Other | $67.61 | $41.84 | ~$64.85 | -4% OK |
+| **S3** | **$1.78** | **$4.61** | **~$7.15** | **+302%** |
+| VPC | $13.44 | $8.92 | ~$13.83 | +3% OK |
+| RDS | $5.30 | $3.15 | ~$4.89 | -8% OK |
+| CloudWatch | $2.40 | $0.23 | ~$0.36 | -85% |
+| Tax | $18.11 | $11.75 | ~$18.21 | ~same |
+| **Total** | **$108.64** | **$70.50** | **~$109.29** | **+0.6%** |
+
+### Daily Trend
+
+| Date | Cost | Note |
+|------|------|------|
+| Mar 1 | **$14.67** | **SPIKE — $11.75 is Tax (monthly accrual)** |
+| Mar 2-13 | $2.9-3.2/day | Normal baseline |
+| Mar 14 | $4.17 | Slightly elevated |
+| Mar 16 | $4.40 | Slightly elevated |
+| Mar 17-18 | $3.26-3.31/day | Normal |
+| Mar 19 | $1.12 | Data still processing |
+
+### Anomaly: S3 Cost +302% ($1.78 -> projected $7.15)
+
+**Breakdown (eu-west-3):**
+- `Requests-Tier1` (PUT/POST/LIST): **$3.77** — high request volume, main cost driver
+- `Requests-Tier2` (GET): $0.30
+- `TimedStorage-SIA`: $0.20 — Standard-IA storage
+- `EarlyDelete-SIA`: $0.14 — objects deleted before 30-day minimum, penalty charge
+- `Retrieval-SIA`: $0.12 — frequent retrieval from Standard-IA (defeats purpose of IA tier)
+- Standard storage: $0.06
+
+**Root cause**: High PUT/LIST request volume ($3.77) in eu-west-3. Also paying early-delete and retrieval penalties on Standard-IA objects — suggests objects are stored in IA but accessed/deleted frequently, which is more expensive than Standard tier.
+
+**Action needed?** Yes, investigate:
+1. What's generating high PUT/LIST requests on S3 in eu-west-3? (possible: backup jobs, logging, app uploads)
+2. Move frequently accessed objects from Standard-IA to Standard tier — current pattern is costing more, not less
+3. Not critical ($5 increase) but trend should be understood before it grows
+
+### Mar 1 Spike Explained
+
+$14.67 on Mar 1 = $11.75 Tax accrual (first of month) + $2.92 normal daily cost. **Not an anomaly.**
+
+### CloudWatch Drop -85% ($2.40 -> $0.36)
+
+Feb had $2.40, Mar projecting $0.36. Likely reduced custom metrics or dashboard usage. No concern — this is savings.
+
+### Overall Assessment
+
+**Total bill on track** (~$109 vs $108 last month). No strange charges. One item to investigate: S3 request volume increase and IA-tier misuse in eu-west-3.
