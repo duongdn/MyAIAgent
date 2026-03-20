@@ -14,6 +14,7 @@
 .web-monitors.json
 .jira-config.json
 .monitoring-timelines.json
+.bailey-config.json
 daily-agent-*.json
 !daily-agent-*.json.enc
 

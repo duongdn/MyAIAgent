@@ -30,6 +30,7 @@ SECRET_FILES=(
   .web-monitors.json
   .jira-config.json
   .monitoring-timelines.json
+  .bailey-config.json
 )
 
 # Add Google service account key if exists

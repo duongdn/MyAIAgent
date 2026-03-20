@@ -31,6 +31,7 @@ ENC_FILES=(
   .web-monitors.json.enc
   .jira-config.json.enc
   .monitoring-timelines.json.enc
+  .bailey-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
