@@ -33,3 +33,46 @@
 ### Summary
 
 All alarms currently OK. No imminent events. Main concern is **Server Memory** flapping ~2.5x/day avg — not critical now but trending toward needing attention.
+
+---
+
+## AWS Health & Event Log
+
+### Infrastructure
+
+| Resource | Region | Type | State |
+|----------|--------|------|-------|
+| Console LIVE (i-097f6eee5762c82f3) | eu-west-3 | EC2 | running |
+| staging console (i-01a7339df8c663ed6) | eu-west-3 | EC2 | running |
+| staging pretashop (i-0f82e81d2a07a28b9) | eu-west-3 | EC2 | running |
+| speedventory | eu-west-3 | RDS | active |
+| eu-west-2 | — | — | No resources |
+
+### EC2 Scheduled Events
+
+None. No pending maintenance, retirement, or reboot events on any instance.
+
+### RDS Events (14 days)
+
+- **speedventory** (eu-west-3): Daily automated snapshots running normally at 13:00 UTC. All 14 days successful, completing in ~3-6 min. No errors, failovers, or configuration changes.
+
+### RDS Pending Maintenance — ACTION NEEDED
+
+| Resource | Action | Description | Deadline |
+|----------|--------|-------------|----------|
+| **speedventory** | system-update | New OS update available | No forced date |
+| **speedventory** | db-upgrade | Engine patch 17.5.R2 available | No forced date |
+
+**Effect**: Both are optional (no auto-apply date set). OS update = security/kernel patches. DB upgrade (17.5.R2) = PostgreSQL patch with bug fixes and security patches.
+
+**Recommendation**: Schedule during low-traffic window. OS update may cause brief reboot (~30s downtime for single-AZ). DB upgrade takes ~5-10 min depending on instance size. Apply OS update first, then db-upgrade in next maintenance window.
+
+**Action needed?** Not urgent (no deadline), but recommended within 2-4 weeks to stay current on security patches. If the instance is single-AZ, plan for brief downtime.
+
+### AWS Health Dashboard
+
+API requires Business/Enterprise Support plan — not available on this account. Checked via service-level APIs instead (EC2 events, RDS events, pending maintenance).
+
+### Summary
+
+No imminent events. 2 optional maintenance actions pending on RDS `speedventory` — recommend scheduling within 2-4 weeks.

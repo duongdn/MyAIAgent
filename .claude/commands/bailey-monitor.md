@@ -63,9 +63,49 @@ Check the "Monitor" dashboard in eu-west-3 for any concerning events or alarms.
 - ...
 ```
 
+## Subtask 2: AWS Health & Event Log
+
+Check for scheduled events, maintenance, and health issues across eu-west-2 and eu-west-3.
+
+Note: AWS Health API (aws health describe-events) requires Business/Enterprise Support. Use service-level APIs instead.
+
+### Steps
+
+1. **EC2 scheduled events** (both regions):
+   ```bash
+   aws ec2 describe-instance-status --include-all-instances --region eu-west-3 --query 'InstanceStatuses[?Events]'
+   aws ec2 describe-instance-status --include-all-instances --region eu-west-2 --query 'InstanceStatuses[?Events]'
+   ```
+
+2. **EC2 instance inventory**:
+   ```bash
+   aws ec2 describe-instances --region eu-west-3 --query 'Reservations[].Instances[].[InstanceId,State.Name,Tags[?Key==`Name`].Value|[0]]' --output table
+   ```
+
+3. **RDS events** (14 days):
+   ```bash
+   aws rds describe-events --duration 20160 --region eu-west-3
+   aws rds describe-events --duration 20160 --region eu-west-2
+   ```
+
+4. **RDS pending maintenance**:
+   ```bash
+   aws rds describe-pending-maintenance-actions --region eu-west-3
+   aws rds describe-pending-maintenance-actions --region eu-west-2
+   ```
+
+### Report Format
+
+For each pending maintenance action, explain:
+- **Effect**: What the update does, potential downtime
+- **Recommendation**: Urgency, when to schedule
+- **Action needed?**: Yes/No with reasoning
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical
 - INSUFFICIENT_DATA alarms should be flagged as warning
 - Compare metric trends — sudden changes in last 24h vs 14d baseline
 - If no alarms and metrics look normal, say "All clear" with brief summary
+- For pending maintenance: explain effect in plain language, evaluate urgency
+- Check both eu-west-2 and eu-west-3 regions
