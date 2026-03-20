@@ -160,6 +160,58 @@ Deep check on the speedventory PostgreSQL instance.
 - Issues found with severity
 - Recommendations prioritized
 
+## Subtask 5: New Relic APM — Console LIVE
+
+Query New Relic NerdGraph API for application performance data.
+
+### Setup
+
+Read `.bailey-config.json` for `newrelic.user_api_key`, `newrelic.account_id`, `newrelic.entity_guid`.
+
+API endpoint: `https://api.newrelic.com/graphql`
+Header: `API-Key: {user_api_key}`
+
+### Steps
+
+1. **Top transactions by DB time** (find heavy queries):
+   ```
+   SELECT average(databaseDuration), max(databaseDuration), average(duration), count(*)
+   FROM Transaction SINCE 24 hours ago FACET name LIMIT 20
+   ```
+
+2. **Slow DB transactions** (>1s database time):
+   ```
+   SELECT average(databaseDuration), max(databaseDuration), count(*)
+   FROM Transaction WHERE databaseDuration > 1 SINCE 24 hours ago FACET name LIMIT 10
+   ```
+
+3. **Hourly error rate + throughput**:
+   ```
+   SELECT count(*), average(duration), percentage(count(*), WHERE error IS true) as errorRate
+   FROM Transaction SINCE 24 hours ago TIMESERIES 1 hour
+   ```
+
+4. **Errors by class**:
+   ```
+   SELECT count(*), latest(error.message) FROM TransactionError
+   SINCE 24 hours ago FACET error.class LIMIT 10
+   ```
+
+5. **Slow DB queries from spans**:
+   ```
+   SELECT average(duration), max(duration), count(*)
+   FROM Span WHERE category = 'datastore' AND db.statement IS NOT NULL
+   SINCE 24 hours ago FACET db.statement LIMIT 10
+   ```
+
+### Report Format
+
+- Sidekiq jobs table with DB time, frequency, trend
+- Error breakdown with count and impact
+- Hourly error rate timeline highlighting spikes
+- Top DB queries by call volume
+- Recommendations prioritized by impact
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical

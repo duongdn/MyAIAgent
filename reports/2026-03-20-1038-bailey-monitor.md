@@ -189,3 +189,78 @@ Feb had $2.40, Mar projecting $0.36. Likely reduced custom metrics or dashboard 
 | Medium | Apply pending OS + engine patches in maintenance window | Low |
 | Medium | Consider upgrade to db.t4g.medium (4 GB) if memory pressure continues | Low |
 | Low | Enable Auto Minor Version Upgrade | Low |
+
+---
+
+## New Relic APM — Console LIVE (Ruby/Docker)
+
+Account: 3720169 | Agent: ruby 9.11.0 | Entity: Console LIVE
+
+### Sidekiq Jobs — DB Heavy (cause of CPU 97.8% spike)
+
+| Job | Avg DB Time | Max DB Time | Runs/24h | Trend (7d) |
+|-----|-------------|-------------|----------|------------|
+| **UpdateProductTendencyCacheJob** | **30.6 min** | **30.8 min** | 2 | Stable ~30min, spiked to 37min 4 days ago |
+| **SaveCurrencyRateJob** | **18.9 min** | **18.9 min** | 1 | — |
+| **UpdateProductSoldInMonthsJob** | **18.6 min** | **18.6 min** | 1 | — |
+| **UpdateOverallRankingJob** | **14.3 min** | **14.6 min** | 2 | — |
+| ImportRoutingPlanJob | 4.3 min | 4.3 min | 1 | — |
+
+These 5 Sidekiq jobs spend **~87 min/day of pure DB time** on a db.t4g.small. This is the root cause of CPU spikes and memory pressure. `UpdateProductTendencyCacheJob` alone hammers the DB for 30 minutes twice daily.
+
+### N+1 Query Pattern Detected
+
+The `order_lines` query (3,846 calls/24h at 0.17s avg) runs once per product in a loop — classic N+1. Combined with the SUM query (3,849 calls), these two queries account for ~7,695 DB calls from `UpdateProductTendencyCacheJob`.
+
+### Application Errors (24h)
+
+| Error | Count | Impact |
+|-------|-------|--------|
+| **NameError** `json_body` undefined | **178** | `SyncPhysicalQtyToPretashopService` — code bug, likely typo (`json_body` vs `response_body`) |
+| **NoMethodError** `orders` on nil | **76** | Nil reference — missing association or deleted record |
+| **DeserializationError** ShippingLabel not found | 21 | Job queued for deleted record (id=7074) |
+| **RecordNotUnique** duplicate order reference | 17 | Race condition on order import (ref 36172) |
+| **BadRequest** invalid UTF-8 | 4 | User input encoding issue |
+| **HTTPError** 404 | 1 | External API not found |
+
+Total: **297 errors/24h**. Top two (`NameError` + `NoMethodError`) = 254 errors = **85% of all errors** and are code bugs.
+
+### Error Rate Spikes (hourly)
+
+| Time (UTC) | Requests | Error Rate | Avg Duration | Note |
+|------------|----------|------------|--------------|------|
+| ~00:30 | 10 | **80%** | 72ms | Low traffic, errors dominate |
+| ~08:00 | 57 | 8.8% | 6s | Sidekiq batch starting |
+| ~18:30 | 11 | 18% | **246s** | Heavy job running |
+| ~19:30 | 7 | **57%** | **186s** | Heavy job + errors |
+| ~20:00 | 16 | 37.5% | **185s** | Continued |
+| ~22:30 | 6 | **83%** | 136ms | Low traffic, errors dominate |
+
+During off-hours (low traffic), error rate appears high (80%+) but absolute count is low. The 185-246s durations correspond to the heavy Sidekiq jobs running.
+
+### Top DB Queries by Call Volume
+
+| Query | Calls/24h | Avg | Max | Note |
+|-------|-----------|-----|-----|------|
+| order_lines by product (SELECT) | 3,846 | 170ms | 637ms | N+1 pattern |
+| order_lines SUM selling_price | 3,849 | 170ms | 508ms | N+1 pattern |
+| orders with users JOIN (eager load) | 30 | 107ms | 980ms | Wide SELECT * |
+| order_lines by date range | 22 | 117ms | 173ms | OK |
+| orders COUNT by status | 10 | 66ms | 498ms | OK |
+
+### Recommendations
+
+| Priority | Issue | Action |
+|----------|-------|--------|
+| **Critical** | `UpdateProductTendencyCacheJob` runs 30min of DB queries 2x/day, causing CPU 97.8% | Optimize query: batch the 7,695 N+1 calls into bulk queries. Could reduce to seconds. |
+| **High** | 178 NameError in `SyncPhysicalQtyToPretashopService` | Fix typo: `json_body` -> `response_body` |
+| **High** | 76 NoMethodError `orders` on nil | Add nil guard or fix missing association |
+| Medium | 17 RecordNotUnique on order import | Add upsert or find_or_create_by to prevent race condition |
+| Medium | 21 DeserializationError | Clean stale jobs or add guard for missing records |
+| Low | Wide SELECT * on orders table (52+ columns) | Select only needed columns |
+
+### Unresolved Questions
+
+1. Is `UpdateProductTendencyCacheJob` running on a schedule or event-triggered? (Runs exactly 2x/day — likely cron)
+2. Why is `SyncPhysicalQtyToPretashopService` referencing `json_body`? Is this a recent deploy regression?
+3. The 17 duplicate key violations on orders — is Prestashop sending duplicate webhooks?
