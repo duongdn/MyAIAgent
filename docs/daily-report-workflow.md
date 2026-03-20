@@ -80,7 +80,7 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
 - Rory → Slack "Swift Studio". Complete if no alerts.
 
 ### Work checklist (`69bb3c98d4df1ae12858fffe`)
-- Raymond - LegalAtoms → Slack "LegalAtoms". Complete if no critical alerts.
+- Raymond - LegalAtoms → Slack "LegalAtoms" **filtered to Nick only** (mentions, DMs, threads involving Nick). Skip unrelated channel noise. Complete if no alerts relevant to Nick.
 - Marcel → Slack "Equanimity". Complete if no alerts.
 - Colin → Slack "Aigile Dev". Complete if no alerts.
 - Andrew Taraba → Discord "Bizurk" (nuscarrick token). Complete if no alerts.
