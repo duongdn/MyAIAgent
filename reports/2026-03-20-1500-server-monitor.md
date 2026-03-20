@@ -215,3 +215,72 @@ Note: xid_sass_backend.dev and xid_saas_backend.dev resolve to same host (ip-172
 5. **xid_sync_console.dev**: Only 248M RAM available (26%) — low
 
 Trello: Marcel ✓
+
+---
+
+## Rory (cPanel shared hosting)
+
+### Server: rory.cpanel (92.205.13.202)
+
+Host: sxb1plzcpnl487276.prod.sxb1.secureserver.net (GoDaddy shared)
+
+| Metric | cPanel Value | SSH Verified | Status |
+|--------|-------------|--------------|--------|
+| Disk Usage | 11.13 GB / 50 GB (22.25%) | 11 GB | OK |
+| File Usage | 107,567 / 250,000 (43.03%) | 95,312 files | OK |
+
+### Disk Breakdown (11 GB total)
+
+| Path | Size | Notes |
+|------|------|-------|
+| public_html/booking/ | 2.9 GB | Main app |
+| public_html/bxrlondon.com/ | 2.4 GB | 41,554 files |
+| public_html/dev/ | 2.1 GB | Dev environment |
+| **booking.20251003.zip** | **1.5 GB** | Deletable backup |
+| **booking.zip** | **1.4 GB** | Deletable backup |
+| **error_log.bk (booking)** | **879 MB** | Deletable |
+| **error_log.bak (dev)** | **589 MB** | Deletable |
+| error_log (booking) | 124 MB | Active, should rotate |
+| error_log (dev) | 66 MB | Active, should rotate |
+| tmp/ (webalizer+awstats) | 474 MB | Stats cache |
+| access-logs/ | 232 MB | |
+| logs/ | 146 MB | |
+| .cache/composer/ | 102 MB | |
+| selfridges/ | 95 MB | |
+| .mysql_backup/ | 16 MB | Auto backup (3 DBs) |
+| mail/ | 5.7 MB | |
+
+### Deletable (4.4 GB — 40% of total)
+
+| File | Size |
+|------|------|
+| booking.20251003.zip | 1.5 GB |
+| booking.zip | 1.4 GB |
+| booking/error_log.bk | 879 MB |
+| dev/error_log.bak.20251811 | 589 MB |
+| **Total** | **4.4 GB** |
+
+### File Count by Site
+
+| Site | Files |
+|------|-------|
+| bxrlondon.com | 41,554 |
+| booking | 32,337 |
+| dev | 15,716 |
+| selfridges | 1,810 |
+| Other | ~1,895 |
+| **Total** | **~95,312** |
+
+Note: cPanel reports 107,567 files vs SSH 95,312 — difference likely from mail, tmp, hidden dirs, and database file counts.
+
+### How to Monitor Without cPanel
+
+SSH command to replicate cPanel dashboard data:
+```bash
+ssh -i /tmp/rory_key bql6w65kif0q@92.205.13.202 "du -sh ~ 2>/dev/null; find ~ -type f 2>/dev/null | wc -l"
+```
+Note: SSH key requires passphrase `45tgbhu89` — must decrypt key first or add to ssh-agent.
+
+**Status: OK** — Disk at 22%, files at 43%. 4.4 GB of deletable backups/logs.
+
+Trello: Rory ✓
