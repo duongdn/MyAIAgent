@@ -81,17 +81,16 @@ No imminent events. 2 optional maintenance actions pending on RDS `speedventory`
 
 ## AWS Billing — Mar 2026 vs Feb 2026
 
-### Monthly Comparison
+### Current Bill: $58.75 (excl tax, 20 of 31 days)
 
-| Service | Feb 2026 (full) | Mar 1-20 (actual) | Mar projected (31d) | Change |
-|---------|----------------|-------------------|---------------------|--------|
-| EC2 - Other | $67.61 | $41.84 | ~$64.85 | -4% OK |
-| **S3** | **$1.78** | **$4.61** | **~$7.15** | **+302%** |
-| VPC | $13.44 | $8.92 | ~$13.83 | +3% OK |
-| RDS | $5.30 | $3.15 | ~$4.89 | -8% OK |
-| CloudWatch | $2.40 | $0.23 | ~$0.36 | -85% |
-| Tax | $18.11 | $11.75 | ~$18.21 | ~same |
-| **Total** | **$108.64** | **$70.50** | **~$109.29** | **+0.6%** |
+| Service | Feb 2026 (full) | Mar 1-20 | Note |
+|---------|----------------|----------|------|
+| EC2 - Other | $67.61 | $41.84 | On pace, no change |
+| **S3** | **$1.78** | **$4.61** | **Already 2.6x Feb total** |
+| VPC | $13.44 | $8.92 | On pace |
+| RDS | $5.30 | $3.15 | On pace |
+| CloudWatch | $2.40 | $0.23 | Down significantly |
+| Tax | $18.11 | $11.75 | — |
 
 ### Daily Trend
 
@@ -131,4 +130,4 @@ Feb had $2.40, Mar projecting $0.36. Likely reduced custom metrics or dashboard 
 
 ### Overall Assessment
 
-**Total bill on track** (~$109 vs $108 last month). No strange charges. One item to investigate: S3 request volume increase and IA-tier misuse in eu-west-3.
+**No strange charges.** Bill pacing similar to Feb. Only anomaly: **S3 already at $4.61 (2.6x all of Feb)** — investigate request volume and IA-tier misuse in eu-west-3.
