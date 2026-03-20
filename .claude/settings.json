@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/nus/projects/My-AI-Agent && if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m \"auto: $(date +%Y-%m-%d\\ %H:%M)\" && git push origin master; fi 2>/dev/null || true",
+            "timeout": 30,
+            "statusMessage": "Auto-committing and pushing changes..."
+          }
+        ]
+      }
+    ]
+  }
+}
