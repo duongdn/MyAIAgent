@@ -131,3 +131,61 @@ Feb had $2.40, Mar projecting $0.36. Likely reduced custom metrics or dashboard 
 ### Overall Assessment
 
 **No strange charges.** Bill pacing similar to Feb. Only anomaly: **S3 already at $4.61 (2.6x all of Feb)** — investigate request volume and IA-tier misuse in eu-west-3.
+
+---
+
+## RDS Monitoring — speedventory (eu-west-3)
+
+### Instance Config
+
+| Property | Value | Assessment |
+|----------|-------|------------|
+| Engine | PostgreSQL 17.5 | Current |
+| Instance | db.t4g.small (2 vCPU, 2 GB RAM) | Small |
+| Storage | 20 GB gp3 (auto-scale to 100 GB) | 4 GB used, 16 GB free |
+| Multi-AZ | **No** | Single point of failure |
+| **Publicly Accessible** | **Yes** | **Security risk** |
+| Backup Retention | 7 days | OK |
+| Auto Minor Upgrade | **No** | Manual patching required |
+| Deletion Protection | Yes | Good |
+| Enhanced Monitoring | 60s interval | Good |
+| Performance Insights | Enabled (7d retention) | Good |
+| SSL Cert Valid | 2026-12-01 | ~8 months remaining |
+| Created | 2020-09-01 | ~5.5 years old |
+
+### Current Metrics (last 1h vs 24h baseline)
+
+| Metric | Current | Avg 24h | Max 24h | Status |
+|--------|---------|---------|---------|--------|
+| **CPU** | 3.3% | 8.0% | **97.8%** | **SPIKE in last 24h** |
+| Free Memory | 648 MB | 617 MB | 655 MB | 32% free of 2 GB |
+| Free Storage | 16.0 GB | 16.0 GB | 16.0 GB | OK (80% free) |
+| Connections | 0 | 3.6 | 11 | Normal |
+| Read IOPS | 0.3 | 0.6 | 237 | Burst observed |
+| Write IOPS | 2.4 | 3.7 | 53 | Normal |
+| Read Latency | 0 ms | 0.3 ms | 10 ms | OK |
+| **Write Latency** | 1 ms | 1.7 ms | **71 ms** | **Spike correlates with CPU** |
+| Swap | 2.2 MB | 2.2 MB | 2.2 MB | Negligible |
+| Network In | 1.1 KB/s | 12.6 KB/s | 107 KB/s | Normal |
+| Network Out | 11.9 KB/s | 119 KB/s | 3.7 MB/s | Burst observed |
+| Disk Queue | 0.01 | 0.02 | 0.81 | OK |
+
+### Issues Found
+
+1. **CPU spike to 97.8%** — In the last 24h, CPU hit near-100%. Correlates with write latency spike (71ms) and elevated IOPS. Likely a heavy query or batch job. This is a db.t4g.small (burstable) — if CPU credits deplete, performance degrades. Check Performance Insights for the offending query.
+
+2. **Publicly Accessible = Yes** — Database is reachable from the internet. Even with security group restrictions, this is a security risk. Should be set to private and accessed via VPN or bastion host unless there's a specific reason.
+
+3. **Memory tight** — Only 648 MB free (32%) on a 2 GB instance. With connection spikes (up to 11), this could become a bottleneck. Correlates with the Server Memory CloudWatch alarm flapping (36 times/14d on the EC2 host).
+
+4. **Auto Minor Version Upgrade disabled** — Patches require manual action. Two pending (OS update + 17.5.R2) are sitting unapplied.
+
+### Recommendations
+
+| Priority | Action | Effort |
+|----------|--------|--------|
+| **High** | Investigate CPU 97.8% spike — check Performance Insights for slow queries | Low |
+| **High** | Set PubliclyAccessible=No, use VPN/bastion | Medium |
+| Medium | Apply pending OS + engine patches in maintenance window | Low |
+| Medium | Consider upgrade to db.t4g.medium (4 GB) if memory pressure continues | Low |
+| Low | Enable Auto Minor Version Upgrade | Low |

@@ -134,6 +134,32 @@ Compare current month vs last month. Flag anomalies.
 - For each anomaly: root cause analysis, action needed assessment
 - Tax on 1st of month is normal accrual, not a spike
 
+## Subtask 4: RDS Monitoring (speedventory)
+
+Deep check on the speedventory PostgreSQL instance.
+
+### Steps
+
+1. **Instance details**:
+   ```bash
+   aws rds describe-db-instances --db-instance-identifier speedventory --region eu-west-3
+   ```
+   Check: MultiAZ, PubliclyAccessible, AutoMinorVersionUpgrade, storage, cert expiry, pending modifications.
+
+2. **Key metrics** (last 1h current + 24h baseline):
+   - CPUUtilization, FreeableMemory, FreeStorageSpace, DatabaseConnections
+   - ReadIOPS, WriteIOPS, ReadLatency, WriteLatency
+   - SwapUsage, NetworkReceiveThroughput, NetworkTransmitThroughput, DiskQueueDepth
+
+3. **Flag**: CPU spikes, memory pressure, latency spikes, storage filling up, public accessibility
+
+### Report Format
+
+- Instance config table with assessments
+- Metrics table: current vs avg24h vs max24h
+- Issues found with severity
+- Recommendations prioritized
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical
@@ -142,6 +168,7 @@ Compare current month vs last month. Flag anomalies.
 - If no alarms and metrics look normal, say "All clear" with brief summary
 - For pending maintenance: explain effect in plain language, evaluate urgency
 - Check both eu-west-2 and eu-west-3 regions
-- Billing: project current month to full 31 days for fair comparison
+- Billing: show actual current cost, not projections. Flag services exceeding last month's total
 - Tax accrual on 1st of month is normal, do not flag as anomaly
 - Flag service cost changes >50% for investigation
+- RDS: flag PubliclyAccessible=true, MultiAZ=false, disabled auto-upgrade, cert expiring within 6 months
