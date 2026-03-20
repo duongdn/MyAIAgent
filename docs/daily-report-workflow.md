@@ -55,7 +55,7 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
    - LeNH (Franc/Radio Data Center, W{week}): part of LeNH 3-project split
    - LeNH (Aysar/Baamboozle, W{week}): part of LeNH 3-project split
 6. **Scrin.io** — Login + v2 API, company "john yi" (ID 266977), employee 453601. Config in `.scrin-config.json`
-7. **Daily Report Checks** — Kai (Xtreme Soft DM), Nick (Global Grazing #maintenance), Jeff & Vinn (AirAgri Discord)
+7. **Daily Report Checks** — Kai (Xtreme Soft DM), Nick-GG (Global Grazing #maintenance — NOT TuanNT), Jeff & Vinn (AirAgri Discord)
 8. **Matrix/Element** — Fountain room. Get latest weekly plan, compare with task log. Config in `.matrix-config.json`
 9. **GitHub PRs** — Elena-SamGuard: review+merge+deploy+update Redmine. Precognize: check nusken PRs. Config in `.elena-pending-actions.json`
 10. **Redmine** — Update ticket status after deploy. Config in `.redmine-config.json`
@@ -97,6 +97,22 @@ TBD
 ## Trello "Check Mail" Card
 
 Find by name "Check mail" on board. Items map 1:1 to email accounts. Complete each after checking.
+
+## Name Disambiguation
+
+**"Nick" appears in multiple contexts — they are DIFFERENT people:**
+
+| Name | Internal | Project | Context |
+|------|----------|---------|---------|
+| Nick (Global Grazing) | NUS employee (not TuanNT) | Global Grazing Services | Posts daily reports in #maintenance, manages Prestashop |
+| Nick (Amazing Meds) | **TuanNT** | John Yi / Amazing Meds | Developer, external name "Nick". Also works on Rebecca/William Bills + Paturevision |
+| Nick (Scrin.io) | **TuanNT** | Same as above | Scrin.io employee name = "Nick", company = "john yi" |
+
+**NEVER conflate these two Nicks.** When reporting leave/absence, always specify which Nick by including the project name.
+
+Other shared names:
+- **Lucas** = William Bills developer (works with Oliver)
+- **Carrick** = NUS account used across many Slack workspaces (Baamboozle, Swift Studio, Generator, etc.)
 
 ## Key Rules
 
