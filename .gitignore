@@ -20,6 +20,7 @@ daily-agent-*.json
 
 # Runtime
 node_modules/
+tmp/
 
 # Agent intermediate reports
 plans/reports/general-purpose-*
