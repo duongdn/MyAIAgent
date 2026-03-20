@@ -71,11 +71,36 @@ HTTP 200 = success.
 ## Project: Maddy
 
 ### Form Dropdown Value
-`Maddy - Xtreme Soft Solutions`
-(Test form: `Maddy`)
+- Live: `Maddy - Xtreme Soft Solutions`
+- Test: `Maddy`
 
 ### Data Sources
-(User will provide guidance on where to get bugs/hours)
+
+**Internal Bugs**: Redmine
+- URL: `https://redmine.nustechnology.com`
+- Config: `.redmine-config.json` (url, api_key)
+- Project: `maddy-extreme-soft-solutions`
+- Query: tracker_id=1 (Bug), created_on = previous Mon-Sun week
+- API: `GET /issues.json?project_id=maddy-extreme-soft-solutions&created_on=><{mon}|{sun}&tracker_id=1&limit=100&key={api_key}`
+
+**External Bugs**: Slack analysis
+- Workspace: "Xtreme Soft Solutions" (from `.slack-accounts.json`)
+- Search messages from previous Mon-Sun week
+- API: `search.messages?query=after:{sun_before}+before:{mon_after}`
+- Analyze customer messages (madhuraka = client PM, anomawasala = client QA) for bug reports
+- Count distinct bugs reported by customer, not internal team discussions
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Find week sheet by checking which W-sheet's Monday date matches the reporting week
+- Read row 2 col H for total hours
+
+**Note**: Summarize key bugs/issues from the week
+
+### Date Logic
+This runs on Monday. The reporting week = previous Mon-Sun.
+Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-22.
 
 ## Rules
 
