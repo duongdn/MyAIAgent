@@ -1,0 +1,22 @@
+# Secrets / credentials
+.email-accounts.json
+.slack-accounts.json
+.discord-accounts.json
+.google-docs.json
+.trello-config.json
+.scrin-config.json
+.redmine-config.json
+.elena-pending-actions.json
+.matrix-config.json
+.web-monitors.json
+.jira-config.json
+.env
+*.secret
+daily-agent-*.json
+
+# Runtime state (machine-specific)
+.monitoring-timelines.json
+node_modules/
+
+# Agent intermediate reports (only final reports matter)
+plans/reports/general-purpose-*
