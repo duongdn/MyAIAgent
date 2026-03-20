@@ -6,7 +6,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-# Load key from .env
 if [ ! -f .env ]; then
   echo "ERROR: .env file not found. Create it with: SECRETS_KEY=your-secret-key"
   exit 1
@@ -18,7 +17,6 @@ if [ -z "${SECRETS_KEY:-}" ]; then
   exit 1
 fi
 
-# Files to encrypt
 SECRET_FILES=(
   .email-accounts.json
   .slack-accounts.json
@@ -34,26 +32,19 @@ SECRET_FILES=(
   .monitoring-timelines.json
 )
 
-# Google service account key (variable name)
-SA_KEY=$(ls daily-agent-*.json 2>/dev/null | head -1)
+# Add Google service account key if exists
+SA_KEY=$(ls daily-agent-*.json 2>/dev/null | head -1 || true)
 if [ -n "$SA_KEY" ]; then
   SECRET_FILES+=("$SA_KEY")
 fi
 
-encrypted=0
-skipped=0
-
 for file in "${SECRET_FILES[@]}"; do
   if [ -f "$file" ]; then
     openssl enc -aes-256-cbc -salt -pbkdf2 -in "$file" -out "${file}.enc" -pass "pass:${SECRETS_KEY}"
-    echo "✓ Encrypted: $file → ${file}.enc"
-    ((encrypted++))
+    echo "✓ $file"
   else
-    echo "⚠ Skipped (not found): $file"
-    ((skipped++))
+    echo "⚠ skip: $file"
   fi
 done
 
-echo ""
-echo "Done: $encrypted encrypted, $skipped skipped"
-echo "Encrypted files (.enc) are safe to commit to git."
+echo "Done."
