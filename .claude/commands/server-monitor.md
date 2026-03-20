@@ -95,6 +95,27 @@ Mark "Bailey" complete after all 4 sub-checks done.
 | Load avg (per core) | <0.7 | 0.7-1.0 | >1.0 |
 | Redis memory | <50% of system | 50-75% | >75% |
 
+## Elena — WordPress SamGuard
+
+### 1. SamGuard (ssh samguard.co)
+
+```bash
+ssh -o ConnectTimeout=10 samguard.co "
+hostname && uptime && free -h && df -h / && nproc && cat /proc/loadavg
+echo '=== TOP ==='
+ps aux --sort=-%mem | head -8
+echo '=== SWAP ==='
+swapon --show
+"
+```
+
+**Check**: disk %, memory, swap, load, MySQL + Apache process health
+
+### Elena Trello Checklist Item
+Mark "Elena - WordPress SamGuard" complete after check done.
+
+---
+
 ## Rules
 
 - Run all servers in a project group, then mark Trello item
