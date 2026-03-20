@@ -100,3 +100,32 @@ Top: MySQL 344MB (17%), Apache 6 workers ~165MB each (8%)
 | SamGuard | OK (44%) | OK (49% avail) | OK (10%) | OK | OK |
 
 Trello: Elena - WordPress SamGuard ✓
+
+---
+
+## Neural Contract — Contract Probe
+
+### Staging (ssh nc_staging)
+
+| Metric | Value | Status |
+|--------|-------|--------|
+| Hostname | ip-172-31-29-53 | |
+| Uptime | 18 days | OK |
+| CPU | 2 cores | |
+| Load avg | 0.01, 0.00, 0.00 | OK |
+| RAM | 3.8G total, 2.8G available (74%) | OK |
+| Swap | None configured | WARNING |
+| Disk (/) | 49G total, 12G used (24%) | OK |
+
+Stack: PHP-FPM 8.2 + MySQL (bare-metal, no Docker)
+Top: MySQL 428MB (10.8%), PHP-FPM 2 workers ~66MB each
+
+**Status: OK** — Very light usage. No swap configured (risk if memory spikes).
+
+### Neural Contract Summary
+
+| Server | Disk | Memory | Swap | Load | Overall |
+|--------|------|--------|------|------|---------|
+| nc_staging | OK (24%) | OK (74% avail) | WARNING (none) | OK | OK |
+
+Trello: Neural Contract - Contract Probe ✓
