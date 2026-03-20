@@ -4,12 +4,12 @@ description: Generate daily report checklist with status tracking
 
 # Daily Report Checklist
 
-Generate a daily report checklist for today's date. Read the checklist config from `~/projects/My-AI-Agent/daily-checklist.md` to get the checklist items.
+Generate a daily report checklist for today's date. Read the checklist config from `./daily-checklist.md` to get the checklist items.
 
 ## Instructions
 
-1. Read the checklist items from `~/projects/My-AI-Agent/daily-checklist.md`
-2. Create a daily report file at `~/projects/My-AI-Agent/reports/{YYYY-MM-DD}-daily-report.md` (use today's date)
+1. Read the checklist items from `./daily-checklist.md`
+2. Create a daily report file at `./reports/{YYYY-MM-DD}-daily-report.md` (use today's date)
 3. For each checklist item, ask the user for status and notes using `AskUserQuestion`
 4. Write the report with:
    - Date and timestamp
