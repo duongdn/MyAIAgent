@@ -246,6 +246,23 @@ Auth: `--user 'api:{api_key}'`
 - Failed events grouped by recipient and reason
 - Flag: IP reputation issues, permanent bounces still being sent to, 0% engagement
 
+## Subtask 7: Siteground Disk Usage (SSH)
+
+Check disk usage via SSH.
+
+### Steps
+
+```bash
+ssh -o ConnectTimeout=10 Bailey.cpanel 'cd ~/www && du -sh */ 2>/dev/null | sort -rh && echo "===" && du -sh *.zip 2>/dev/null | sort -rh && echo "===" && du -sh . 2>/dev/null'
+```
+
+### Report Format
+
+- Total disk usage
+- Top directories by size
+- Flag large zip/backup files that can be cleaned
+- Flag if approaching plan storage limit
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical
