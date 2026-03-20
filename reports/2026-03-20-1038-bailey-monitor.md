@@ -264,3 +264,69 @@ During off-hours (low traffic), error rate appears high (80%+) but absolute coun
 1. Is `UpdateProductTendencyCacheJob` running on a schedule or event-triggered? (Runs exactly 2x/day — likely cron)
 2. Why is `SyncPhysicalQtyToPretashopService` referencing `json_body`? Is this a recent deploy regression?
 3. The 17 duplicate key violations on orders — is Prestashop sending duplicate webhooks?
+
+---
+
+## Mailgun — mail.paturevision.fr (US region)
+
+### 14-Day Delivery Summary
+
+| Date | Sent | Delivered | Temp Fail | Perm Fail | Delivery Rate |
+|------|------|-----------|-----------|-----------|---------------|
+| Mar 7 (Sat) | 27 | 27 | 2 | 0 | 100% |
+| Mar 8 (Sun) | 29 | 29 | 2 | 0 | 100% |
+| Mar 9 (Mon) | 242 | 239 | 4 | 3 | 98.8% |
+| Mar 10 (Tue) | 260 | 260 | 0 | 0 | 100% |
+| Mar 11 (Wed) | 145 | 141 | 0 | 3 | 97.2% |
+| Mar 12 (Thu) | 191 | 190 | 2 | 1 | 99.5% |
+| Mar 13 (Fri) | 200 | 199 | 11 | 1 | 99.5% |
+| Mar 14 (Sat) | 26 | 26 | 0 | 0 | 100% |
+| Mar 15 (Sun) | 35 | 35 | 0 | 0 | 100% |
+| Mar 16 (Mon) | 198 | 196 | 19 | 2 | 99.0% |
+| Mar 17 (Tue) | 264 | 262 | 14 | 2 | 99.2% |
+| Mar 18 (Wed) | 260 | 258 | 4 | 2 | 99.2% |
+| Mar 19 (Thu) | 197 | 197 | 1 | 0 | 100% |
+| Mar 20 (Fri) | 0 | 0 | 0 | 0 | — |
+| **Total** | **2,074** | **2,059** | **59** | **14** | **99.3%** |
+
+Pattern: ~200-260 emails/weekday, ~25-35/weekend. All transactional (no incoming).
+
+### Failed Deliveries (24h detail)
+
+**43 failed events** in last 24h:
+
+| Type | Recipient | Issue | Count |
+|------|-----------|-------|-------|
+| Temporary | hulotadrien@yahoo.fr | **Yahoo throttling** — IP 143.55.232.6 flagged for "unexpected volume or user complaints" | 6 |
+| Temporary | mathieu.liaigre@inrae.fr | INRAE throttling (recipient rejected) | 3 |
+| Temporary | stephane.clouard@inrae.fr | INRAE throttling | 3 |
+| Temporary | joey@paturevision.fr | Internal retry | 2 |
+| Temporary | clement@paturevision.fr | Internal retry | 1 |
+| Temporary | sarah@paturevision.fr | Internal retry | 1 |
+| **Permanent** | **jeroen.verbeke@desutter-naturally.com** | **Suppress-bounce** — previously bounced, won't retry | 2 |
+| **Permanent** | **fcharvet@ets-bernard.com** | **Mailbox doesn't exist** (Outlook 550 5.4.1) | 2 |
+
+### Issues Found
+
+1. **Yahoo IP reputation warning** — Mailgun IP 143.55.232.6 is being throttled by Yahoo ("unexpected volume or user complaints"). 6 retries for a single recipient. If this persists, emails to Yahoo/AOL addresses may start bouncing permanently.
+
+2. **INRAE throttling** — French research institute is rejecting due to rate limits. 6 retries across 2 recipients. Likely their mail server is strict — emails will eventually deliver on retry.
+
+3. **2 permanently bounced addresses** sitting in suppression list:
+   - `jeroen.verbeke@desutter-naturally.com` — still being sent to despite previous bounce
+   - `fcharvet@ets-bernard.com` — mailbox removed from Outlook
+
+4. **0 opens, 0 clicks** (14 days) — either tracking is disabled or all emails are system notifications (order confirmations, invoices) that recipients don't interact with. If marketing emails are expected to show engagement, tracking may be misconfigured.
+
+### Recommendations
+
+| Priority | Action |
+|----------|--------|
+| **Medium** | Investigate Yahoo IP reputation issue — check if other Mailgun users on shared IP 143.55.232.6 are causing complaints. Consider dedicated IP if volume grows. |
+| Medium | Remove `jeroen.verbeke@desutter-naturally.com` and `fcharvet@ets-bernard.com` from active mailing — they're bouncing permanently |
+| Low | If open/click tracking is expected, verify Mailgun tracking settings are enabled |
+
+### Unresolved Questions
+
+4. Are these transactional emails only (order confirmations) or also marketing? 0% open rate across 2,074 emails suggests tracking is off.
+5. Is the Yahoo throttling new or recurring? Need to check IP reputation at postmaster.yahooinc.com

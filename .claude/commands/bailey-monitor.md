@@ -212,6 +212,40 @@ Header: `API-Key: {user_api_key}`
 - Top DB queries by call volume
 - Recommendations prioritized by impact
 
+## Subtask 6: Mailgun — mail.paturevision.fr
+
+Check email delivery health.
+
+### Setup
+
+Read `.bailey-config.json` for `mailgun.api_key`, `mailgun.domain`, `mailgun.region`.
+API: `https://api.mailgun.net/v3/{domain}` (US) or `https://api.eu.mailgun.net/v3/{domain}` (EU)
+Auth: `--user 'api:{api_key}'`
+
+### Steps
+
+1. **14-day delivery stats**:
+   ```bash
+   curl -s --user 'api:{key}' '{base}/stats/total?event=accepted&event=delivered&event=failed&event=opened&event=clicked&event=complained&duration=14d&resolution=day'
+   ```
+
+2. **Failed events (24h)**:
+   ```bash
+   curl -s --user 'api:{key}' '{base}/events?begin={24h_ago_epoch}&event=failed&limit=50'
+   ```
+
+3. **Bounces and complaints** (if API key has permission):
+   ```bash
+   curl -s --user 'api:{key}' '{base}/bounces?limit=20'
+   curl -s --user 'api:{key}' '{base}/complaints?limit=20'
+   ```
+
+### Report Format
+
+- Daily delivery table (sent, delivered, failed, rate)
+- Failed events grouped by recipient and reason
+- Flag: IP reputation issues, permanent bounces still being sent to, 0% engagement
+
 ## Rules
 
 - Flag any alarm in ALARM state as critical
