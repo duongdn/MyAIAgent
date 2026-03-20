@@ -333,42 +333,54 @@ Pattern: ~200-260 emails/weekday, ~25-35/weekend. All transactional (no incoming
 
 ---
 
-## Siteground Disk Usage (SSH: Bailey.cpanel)
+## Siteground Disk Usage (SSH + Dashboard)
 
-### Total: 41 GB
+### Capacity: 135.23 GB used / 167.24 GB total (80.9% full, 32 GB free)
 
-### Top Directories
+| Category | Size | % of Total |
+|----------|------|------------|
+| paturevision.fr (site data) | 124.62 GB | 74.5% |
+| System (Siteground overhead) | 10.61 GB | 6.3% |
+| Free | 32.01 GB | 19.1% |
+
+### Site Data Breakdown (SSH: ~/www = 41 GB visible)
 
 | Directory | Size | Note |
 |-----------|------|------|
-| **update.paturevision.fr.zip** | **6.1 GB** | **Zip file sitting in www root** |
-| **pre9.paturevision.fr/** | **10 GB** | Largest site |
-| **pre9.paturevision.fr.zip** | **4.3 GB** | **Another zip backup** |
+| **update.paturevision.fr.zip** | **6.1 GB** | **Backup zip sitting in www root** |
+| **pre9.paturevision.fr/** | **10 GB** | Largest site directory |
+| **pre9.paturevision.fr.zip** | **4.3 GB** | **Another backup zip** |
 | staging-sg.paturevision.fr/ | 7.1 GB | Staging |
 | je-pature.paturevision.fr/ | 5.9 GB | Production |
 | queue7.paturevision.fr/ | 5.3 GB | Queue service |
 | paturevision.fr/ | 2.2 GB | Main site |
 | staging-je-pature.paturevision.fr/ | 386 MB | Staging |
 | Everything else | <5 MB | Negligible |
+| **SSH visible total** | **41 GB** | |
+
+**Gap: 124.62 GB (dashboard) - 41 GB (SSH visible) = ~83.6 GB unaccounted.** This is likely: databases (MySQL/PostgreSQL), email storage, logs, backups managed by Siteground, and files outside ~/www (e.g., ~/private, ~/tmp, cron logs).
 
 ### Issues Found
 
-1. **10.4 GB in zip backups** — `update.paturevision.fr.zip` (6.1 GB) + `pre9.paturevision.fr.zip` (4.3 GB) sitting in the www directory. These are likely old backup/migration files. **Deleting them frees 25% of total disk.**
+1. **80.9% disk used** — only 32 GB free. Not critical yet but trending toward full.
 
-2. **pre9.paturevision.fr = 10 GB** — largest directory. If this is a legacy/pre-production site, it may be cleanable.
+2. **10.4 GB in zip backups** in www directory — `update.paturevision.fr.zip` (6.1 GB, dated Feb 27) + `pre9.paturevision.fr.zip` (4.3 GB). Deletable immediately.
 
-3. **41 GB total** — Siteground GrowBig plan allows 20 GB, GoGeek allows 40 GB. If on GoGeek, you're at capacity. Verify your plan storage limit in Siteground dashboard.
+3. **~83.6 GB unaccounted** — not visible via SSH. Likely databases + Siteground-managed backups + email storage. Check via Siteground Site Tools > Dashboard > Storage Usage for breakdown.
+
+4. **pre9.paturevision.fr = 10 GB** — if this is a legacy/pre-production site, it may be cleanable.
 
 ### Recommendations
 
 | Priority | Action | Savings |
 |----------|--------|---------|
-| **High** | Delete `update.paturevision.fr.zip` and `pre9.paturevision.fr.zip` if no longer needed | **10.4 GB** |
-| Medium | Audit `pre9.paturevision.fr/` — is it still used? | Up to 10 GB |
-| Medium | Audit `staging-sg.paturevision.fr/` — 7.1 GB for staging seems large | Up to 7 GB |
-| Low | PHP error log from 2021 (`staging.paturevision.fr`) — stale, no recent errors | — |
+| **High** | Delete `update.paturevision.fr.zip` + `pre9.paturevision.fr.zip` | **10.4 GB** |
+| **High** | Check Siteground Site Tools for database sizes — likely the bulk of the 83.6 GB gap | Unknown |
+| Medium | Audit `pre9.paturevision.fr/` — still needed? | Up to 10 GB |
+| Medium | Audit `staging-sg.paturevision.fr/` — 7.1 GB staging | Up to 7 GB |
+| Low | Check Siteground backup retention — auto-backups may be consuming storage | Unknown |
 
 ### Unresolved Questions
 
-6. What Siteground plan is this? (GrowBig 20 GB / GoGeek 40 GB / Cloud?) — determines urgency
-7. Are `pre9.paturevision.fr.zip` and `update.paturevision.fr.zip` needed? Can they be moved to S3 or deleted?
+6. What makes up the 83.6 GB gap? Check Siteground Site Tools > MySQL/PostgreSQL database sizes
+7. Are the zip files needed or can they be deleted/moved to S3?
