@@ -291,30 +291,44 @@ curl -s -X POST "https://slack.com/api/chat.postMessage" \
 
 ### Message Format
 
-Use this exact format, filling in status from subtask results:
+Use this exact Slack mrkdwn format with bullet hierarchy (`•` → `◦` → `▪︎`):
 
 ```
 DD/MM/YYYY
 
-Performance status: OK | WARNING | CRITICAL
-Resource status:
- Storage:
-  Prestashop: OK | WARNING (xx%) | NOT OK (xx%)
-  Console: OK | WARNING (xx%) | NOT OK (xx%)
- Swap: OK | WARNING
- Memory: OK | WARNING
-DB backup status: OK | FAILED
-S3 backup: OK | FAILED
-AWS backup status: OK | WARNING
-Billing: OK | WARNING ($xx anomaly)
-Mailgun: OK (xx.xx%) | WARNING (xx.xx%)
-Run recalculate stock: Done | Skipped
-Check AWS noti: OK | WARNING
-AWS Cloudtrail: OK | WARNING
-AWS RDS: OK | WARNING
-SSL:
- Console: {expiry date}
- Prestashop: {expiry date}
+• Performance status: OK | WARNING | CRITICAL
+
+• Resource status:
+    ◦  Storage:
+        ▪︎ Prestashop: OK | WARNING (xx%) | ~*NOT OK* (xx%)~
+        ▪︎ Console: OK | WARNING (xx%) | NOT OK (xx%)
+    ◦ Swap: OK | WARNING
+    ◦ Memory: OK | WARNING
+
+• DB backup status: OK | FAILED
+• S3 backup: OK | WARNING
+• AWS backup status: OK | WARNING
+
+• Billing: OK | OK ($xx.xx MTD) | WARNING ($xx anomaly)
+
+• Mailgun: OK *(xx.x%)*
+
+• Run recalculate stock: OK | Done
+• Check AWS noti: OK | WARNING
+• AWS Cloudtrail: OK | WARNING
+• AWS RDS: OK | WARNING
+
+• SSL:
+    ◦ Console: {full date from openssl}
+    ◦ Prestashop: {full date from openssl}
+```
+
+### SSL Check
+
+Check cert expiry dates:
+```bash
+echo | openssl s_client -servername console.paturevision.fr -connect console.paturevision.fr:443 2>/dev/null | openssl x509 -noout -enddate
+echo | openssl s_client -servername paturevision.fr -connect paturevision.fr:443 2>/dev/null | openssl x509 -noout -enddate
 ```
 
 ### Status Rules
@@ -324,7 +338,44 @@ SSL:
 - **NOT OK / CRITICAL**: metric exceeded threshold (storage >85%, delivery <95%, alarm in ALARM state)
 - Storage %: from Siteground dashboard data
 - Mailgun %: delivery rate from stats
-- SSL dates: check cert expiry via openssl
+- SSL dates: flag if expiring within 30 days
+
+## Subtask 9: Fill Task Log (Google Sheets)
+
+After posting to Slack, log the monitoring task in the Paturevision task log spreadsheet.
+
+### Setup
+
+- Spreadsheet ID: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Sheet: `W{N}` — find by iterating sheets, read row 4 col A (Monday date), check if today falls within that Mon–Sun range
+
+### Steps
+
+1. **Find correct week sheet**: Check W-sheets, read each row 4 col A (e.g. `Mon, 16/03/26`), find the one whose week contains today.
+
+2. **Find today's date row**: Search column A for today (e.g. `Fri, 20/03/26` — use current day-of-week and DD/MM/YY format).
+
+3. **Find first empty row** after today's date row (col A = `Task dự án` and cols C–J empty).
+
+4. **Write task entry** with columns:
+   | Col | Value |
+   |-----|-------|
+   | A | Task dự án |
+   | E | Weekly Monitor {current month name} {current year} (e.g. `Weekly Monitor Mar 2026`) |
+   | G | DuongDN |
+   | H | 1 |
+   | J | 1 |
+
+5. **Use Google Sheets API**:
+   ```
+   PUT /v4/spreadsheets/{id}/values/{sheet}!A{row}:J{row}?valueInputOption=USER_ENTERED
+   Body: {"values": [["Task dự án", "", "", "", "Weekly Monitor Mar 2026", "", "DuongDN", "1", "", "1"]]}
+   ```
+
+### Reference
+
+See W18 row 70 for example format.
 
 ## Rules
 
