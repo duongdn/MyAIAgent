@@ -158,16 +158,17 @@ Flags on actuals:
 Report week 16/03
 
 James Diamond
-Web: 36h/40h
-- PhucVT: 36h/40h (off 0.5 day dùng paid leave)
 
-Mobile: 20h
-- AnhNH2: 20h
+Web: 36h/40h (off 0.5 day dùng paid leave)
+PhucVT: 36h/40h (off 0.5 day dùng paid leave)
+
+Mobile: 20h/20h
+AnhNH2: 20h/20h
 
 ---
 
 Marcel
-- DuongDN: 0h 20m
+DuongDN: 0h 20m
 ```
 
 ---

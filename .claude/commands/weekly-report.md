@@ -41,7 +41,9 @@ For each employee, check Google Sheets hours (filter by Owner column G). Multi-p
 - Extract hours from Google Sheets
 - Send combined message to Matrix room `!oofREYAXHsvPWEOJev:nustechnology.com`
 - Format: "Report week DD/MM" with hours as Xh Ym (not decimal)
-- PhucVT = Web, AnhNH2 = Mobile, plan: PhucVT 40h
+- Format per line: charge/actual (e.g. 36h/40h). No `-` prefix before names.
+- PhucVT = Web, AnhNH2 = Mobile, plan: PhucVT 40h. AnhNH2 has no plan — use actual as both values.
+- If employee has "Nghỉ nửa ngày"/"Nghỉ cả ngày", append (off X day dùng paid leave) to section and name line
 
 ## Key Rules
 

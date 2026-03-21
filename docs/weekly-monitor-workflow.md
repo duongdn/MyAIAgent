@@ -75,21 +75,24 @@ Extract last week's hours and send as ONE message to Matrix room.
 Report week {DD/MM}
 
 James Diamond
-Web: {actual}/{plan}
-- PhucVT: {actual}/{plan}
 
-Mobile: {actual}/{plan}
-- AnhNH2: {actual}/{plan}
+Web: {charge}/{actual} [(off X day dùng paid leave)]
+PhucVT: {charge}/{actual} [(off X day dùng paid leave)]
+
+Mobile: {charge}/{actual}
+AnhNH2: {charge}/{actual}
 
 ---
 
 Marcel
-- DuongDN: {hours}
+DuongDN: {hours}
 ```
+- Format is **charge/actual** (charged hours first, actual hours second)
 - Title: "Report week DD/MM" where DD/MM = Monday of the reported week
 - **PhucVT = Web**, all other members = **Mobile**
-- Plan hours: PhucVT 40h/week
-- If an employee has a "Nghỉ nửa ngày" or "Nghỉ cả ngày" row, include it in the message as: `(off X day dùng paid leave)`
+- Plan hours: PhucVT 40h/week. AnhNH2 has no fixed plan — use actual as both charge and actual (e.g. 20h/20h)
+- If an employee has a "Nghỉ nửa ngày" or "Nghỉ cả ngày" row, append `(off X day dùng paid leave)` to both the section line and the individual name line
+- No `-` prefix before employee names
 - Format hours as Xh Ym (not decimal). E.g., 1.33h → 1h20m
 - Sheets:
   - James Diamond: `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI`
