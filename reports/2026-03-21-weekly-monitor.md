@@ -159,10 +159,10 @@ Report week 16/03
 
 James Diamond
 Web: 36h/40h
-- PhucVT: 36h/40h
+- PhucVT: 36h/40h (off 0.5 day dùng paid leave)
 
-Mobile: 20h/18h
-- AnhNH2: 20h/18h
+Mobile: 20h
+- AnhNH2: 20h
 
 ---
 
