@@ -34,9 +34,21 @@ Each project started at different times, so W{n} differs per sheet:
 
 **IMPORTANT:** Week tabs shift each week. Always verify by reading row 4 col A (date) to confirm correct tab. To find current week: check a few tabs and match the Monday date.
 
+### Finding the Correct Week Tab — Use Summary Tab
+
+Every task log sheet has a **Summary** tab with week-to-date mapping. This is the fastest way to find the correct W{n}:
+
+1. Read `Summary!A:C` (columns: W{n}, Start date, End date)
+2. Find the row where column B = target Monday (format: "Month DD, YYYY", e.g. "March 16, 2026")
+3. Column A in that row = the correct W{n} tab name (e.g. "W17")
+4. The Summary tab also shows per-employee weekly totals — use these for the total hours check. Only open the W{n} tab when you need daily breakdowns.
+
+Note: Employee names start at column index 8 (col I) in the Summary tab, repeating in groups of 4 (actual, self-rated, charged, rate). Some sheets have many employees, so read to column AM or beyond to capture all.
+
 ### Steps
-1. For each sheet, find correct W{n} tab matching the target week's Monday
-2. Read all rows, filter task entries by Owner column (G) matching target employee
+1. For each sheet, read Summary tab to find correct W{n} and per-employee weekly totals
+2. Open W{n} tab only for daily breakdown when needed (flagging < 8h days)
+3. Filter task entries by Owner column (G) matching target employee
 3. Sum Actual column (H) per day per employee
 4. For multi-project employees (TuanNT, LeNH), sum across all their sheets
 5. Flag if:
