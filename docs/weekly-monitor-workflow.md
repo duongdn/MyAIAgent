@@ -88,7 +88,7 @@ Marcel
 ```
 - Title: "Report week DD/MM" where DD/MM = Monday of the reported week
 - **PhucVT = Web**, all other members = **Mobile**
-- Plan hours: PhucVT 40h/week, AnhNH2 18h/week
+- Plan hours: PhucVT 40h/week
 - Format hours as Xh Ym (not decimal). E.g., 1.33h → 1h20m
 - Sheets:
   - James Diamond: `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI`

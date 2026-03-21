@@ -41,7 +41,7 @@ For each employee, check Google Sheets hours (filter by Owner column G). Multi-p
 - Extract hours from Google Sheets
 - Send combined message to Matrix room `!oofREYAXHsvPWEOJev:nustechnology.com`
 - Format: "Report week DD/MM" with hours as Xh Ym (not decimal)
-- PhucVT = Web, AnhNH2 = Mobile, plan: PhucVT 40h, AnhNH2 18h
+- PhucVT = Web, AnhNH2 = Mobile, plan: PhucVT 40h
 
 ## Key Rules
 
