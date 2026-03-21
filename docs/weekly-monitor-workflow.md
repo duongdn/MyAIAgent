@@ -2,6 +2,10 @@
 
 Run Friday night or Saturday morning. Output: `reports/YYYY-MM-DD-weekly-monitor.md`
 
+## Workflow Maintenance Rule
+
+**Any feedback or correction from the user must be updated in this file immediately.** This workflow is the source of truth for running on any machine — do not store operational knowledge only in Claude's memory.
+
 ## #1: Team Hours = 40h/week
 
 For each team member, check Google Docs hours (filter by Owner column G, NOT day total row). Members who split across projects — sum all project sheets.
@@ -43,7 +47,14 @@ Every task log sheet has a **Summary** tab with week-to-date mapping. This is th
 3. Column A in that row = the correct W{n} tab name (e.g. "W17")
 4. The Summary tab also shows per-employee weekly totals — use these for the total hours check. Only open the W{n} tab when you need daily breakdowns.
 
-Note: Employee names start at column index 8 (col I) in the Summary tab, repeating in groups of 4 (actual, self-rated, charged, rate). Some sheets have many employees, so read to column AM or beyond to capture all.
+Notes on Summary tab structure:
+- Employee names are in row 5 (index 4), starting at column index 8 (col I), repeating each name 4 times (actual, self-rated, charged, rate). Read only the first occurrence (actual column) per employee.
+- Some sheets have many employees — read to column AM or beyond (not just A:Z) to capture all.
+- Week rows start at row 6. Column A = W{n}, Column B = start date ("Month DD, YYYY"), Column D = total actual.
+
+Notes on W tab leave row parsing:
+- "Nghỉ nửa ngày" (half day off) and "Nghỉ cả ngày" (full day off) appear as separate rows with Owner in col G and **empty col H** — do not skip these rows. They explain short/zero hours on that day.
+- When checking for leave, scan all rows under the day header for the employee, including rows with empty col H.
 
 ### Steps
 1. For each sheet, read Summary tab to find correct W{n} and per-employee weekly totals
