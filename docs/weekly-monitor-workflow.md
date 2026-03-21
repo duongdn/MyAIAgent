@@ -114,7 +114,10 @@ DuongDN: {hours}
 ## More requirements TBD
 
 ## Config Files
-- `.google-docs.json` — All spreadsheet IDs and employee mappings
-- `.jira-config.json` — JIRA API credentials and team config
-- `.scrin-config.json` — Scrin.io login + API config
-- `.matrix-config.json` — Matrix/Element auth + room configs
+
+All config files are in the `config/` directory:
+- `config/.google-docs.json` — All spreadsheet IDs and employee mappings
+- `config/.jira-config.json` — JIRA API credentials and team config
+- `config/.scrin-config.json` — Scrin.io login + API config
+- `config/.matrix-config.json` — Matrix/Element auth + room configs
+- `config/daily-agent-*.json` — Google service account key for Sheets API

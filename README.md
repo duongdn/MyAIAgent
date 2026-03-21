@@ -34,13 +34,13 @@ Then decrypt all config files:
 bash scripts/decrypt-secrets.sh
 ```
 
-This generates 13 config files (`.email-accounts.json`, `.slack-accounts.json`, etc.) from their encrypted `.enc` counterparts.
+This generates 13 config files in `config/` (`.email-accounts.json`, `.slack-accounts.json`, etc.) from their encrypted `.enc` counterparts.
 
 ### 3. Verify
 
 ```bash
 # Check configs exist
-ls .email-accounts.json .slack-accounts.json .trello-config.json
+ls config/.email-accounts.json config/.slack-accounts.json config/.trello-config.json
 
 # Run a quick test
 claude "/daily-report-refresh slack"
@@ -76,17 +76,17 @@ claude "/daily-report-refresh elena"      # GitHub + Redmine
 
 | Source | Config File | What It Checks |
 |--------|------------|----------------|
-| Email (6 accounts) | `.email-accounts.json` | IMAP fetch, filtered highlights |
-| Slack (13 workspaces) | `.slack-accounts.json` | `search.messages` API, thread replies |
-| Discord (2 accounts) | `.discord-accounts.json` | AirAgri, Bizurk servers |
-| Matrix/Element | `.matrix-config.json` | Fountain room — weekly plan updates |
+| Email (6 accounts) | `config/.email-accounts.json` | IMAP fetch, filtered highlights |
+| Slack (13 workspaces) | `config/.slack-accounts.json` | `search.messages` API, thread replies |
+| Discord (2 accounts) | `config/.discord-accounts.json` | AirAgri, Bizurk servers |
+| Matrix/Element | `config/.matrix-config.json` | Fountain room — weekly plan updates |
 | GitHub PRs | SSH keys in `~/.ssh/` | Elena-SamGuard (duongdn), Precognize (nusken) |
-| Google Sheets | `.google-docs.json` | Employee task log hours (10 sheets) |
-| Scrin.io | `.scrin-config.json` | Time tracking cross-reference (John Yi only) |
-| Trello | `.trello-config.json` | Check Progress/Mail cards, Fountain board |
-| Redmine | `.redmine-config.json` | Ticket status updates |
-| Web | `.web-monitors.json` | samguard.co health + JS errors |
-| JIRA | `.jira-config.json` | Xtreme Soft worklogs |
+| Google Sheets | `config/.google-docs.json` | Employee task log hours (10 sheets) |
+| Scrin.io | `config/.scrin-config.json` | Time tracking cross-reference (John Yi only) |
+| Trello | `config/.trello-config.json` | Check Progress/Mail cards, Fountain board |
+| Redmine | `config/.redmine-config.json` | Ticket status updates |
+| Web | `config/.web-monitors.json` | samguard.co health + JS errors |
+| JIRA | `config/.jira-config.json` | Xtreme Soft worklogs |
 
 ## Project Structure
 
@@ -95,17 +95,23 @@ claude "/daily-report-refresh elena"      # GitHub + Redmine
 ├── .claude/commands/          # Project-local slash commands
 │   ├── daily-report.md
 │   └── daily-report-refresh.md
+├── config/                    # All config files
+│   ├── *.json.enc             # Encrypted configs (in git)
+│   ├── .google-docs.json      # Decrypted at runtime (NOT in git)
+│   ├── .matrix-config.json
+│   ├── .jira-config.json
+│   ├── daily-agent-*.json     # Google service account key
+│   └── ...
 ├── docs/
 │   ├── daily-report-workflow.md   # Full workflow reference
-│   └── weekly-monitor-workflow.md
+│   ├── weekly-monitor-workflow.md
+│   └── memory/                # Agent operational notes
 ├── reports/                   # Generated reports (committed)
 ├── scripts/
 │   ├── encrypt-secrets.sh     # Encrypt configs before commit
 │   ├── decrypt-secrets.sh     # Decrypt configs after clone
 │   └── discord-token-refresh.js
-├── *.json.enc                 # Encrypted config files (in git)
 ├── .env                       # SECRETS_KEY (NOT in git)
-├── .monitoring-timelines.json # Runtime state (NOT in git)
 └── .gitignore
 ```
 
@@ -115,7 +121,7 @@ If you change any config file (tokens, accounts, etc.), re-encrypt before commit
 
 ```bash
 bash scripts/encrypt-secrets.sh
-git add *.enc .*.enc
+git add config/*.enc config/.*.enc
 git commit -m "Update encrypted configs"
 ```
 

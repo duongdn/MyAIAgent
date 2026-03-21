@@ -17,24 +17,25 @@ if [ -z "${SECRETS_KEY:-}" ]; then
   exit 1
 fi
 
+# All config files are in config/
 SECRET_FILES=(
-  .email-accounts.json
-  .slack-accounts.json
-  .discord-accounts.json
-  .google-docs.json
-  .trello-config.json
-  .scrin-config.json
-  .redmine-config.json
-  .elena-pending-actions.json
-  .matrix-config.json
-  .web-monitors.json
-  .jira-config.json
-  .monitoring-timelines.json
-  .bailey-config.json
+  config/.email-accounts.json
+  config/.slack-accounts.json
+  config/.discord-accounts.json
+  config/.google-docs.json
+  config/.trello-config.json
+  config/.scrin-config.json
+  config/.redmine-config.json
+  config/.elena-pending-actions.json
+  config/.matrix-config.json
+  config/.web-monitors.json
+  config/.jira-config.json
+  config/.monitoring-timelines.json
+  config/.bailey-config.json
 )
 
 # Add Google service account key if exists
-SA_KEY=$(ls daily-agent-*.json 2>/dev/null | head -1 || true)
+SA_KEY=$(ls config/daily-agent-*.json 2>/dev/null | head -1 || true)
 if [ -n "$SA_KEY" ]; then
   SECRET_FILES+=("$SA_KEY")
 fi

@@ -17,25 +17,25 @@ if [ -z "${SECRETS_KEY:-}" ]; then
   exit 1
 fi
 
-# Explicit list to avoid glob issues with dotfiles
+# All config files are in config/
 ENC_FILES=(
-  .email-accounts.json.enc
-  .slack-accounts.json.enc
-  .discord-accounts.json.enc
-  .google-docs.json.enc
-  .trello-config.json.enc
-  .scrin-config.json.enc
-  .redmine-config.json.enc
-  .elena-pending-actions.json.enc
-  .matrix-config.json.enc
-  .web-monitors.json.enc
-  .jira-config.json.enc
-  .monitoring-timelines.json.enc
-  .bailey-config.json.enc
+  config/.email-accounts.json.enc
+  config/.slack-accounts.json.enc
+  config/.discord-accounts.json.enc
+  config/.google-docs.json.enc
+  config/.trello-config.json.enc
+  config/.scrin-config.json.enc
+  config/.redmine-config.json.enc
+  config/.elena-pending-actions.json.enc
+  config/.matrix-config.json.enc
+  config/.web-monitors.json.enc
+  config/.jira-config.json.enc
+  config/.monitoring-timelines.json.enc
+  config/.bailey-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
-for f in daily-agent-*.json.enc; do
+for f in config/daily-agent-*.json.enc; do
   [ -f "$f" ] && ENC_FILES+=("$f")
 done
 
