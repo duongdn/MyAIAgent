@@ -32,6 +32,7 @@ ENC_FILES=(
   config/.jira-config.json.enc
   config/.monitoring-timelines.json.enc
   config/.bailey-config.json.enc
+  config/.upwork-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
