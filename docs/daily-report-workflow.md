@@ -1,19 +1,30 @@
 # Daily Report Workflow
 
-Two modes:
+Three modes:
 1. **Daily report** (morning): `reports/YYYY-MM-DD-daily-report.md` — full yesterday summary
 2. **On-demand update** (anytime): `reports/YYYY-MM-DD-HHMM-update.md` — latest activity since daily report
+3. **Alert monitor** (cron, every N min): `reports/YYYY-MM-DD-HHMM-alert.md` — high-severity alerts with desktop notifications
 
-On-demand updates use separate timestamped files. Never overwrite the daily report. Tomorrow's daily report still covers the full previous day.
+On-demand updates and alerts use separate timestamped files. Never overwrite the daily report. Tomorrow's daily report still covers the full previous day.
 
-## Two-Timeline System
+## Three-Timeline System
 
-Stored in `.monitoring-timelines.json`. Two **independent** timelines:
+Stored in `config/.monitoring-timelines.json`. Three **independent** timelines:
 
 1. **`daily_report`** — Updated when daily report runs (~8AM). Used as start time for next daily report. Only daily-report updates this.
 2. **`refresh`** — Updated when daily-report-refresh runs. Used as start time for next refresh. Only refresh updates this.
+3. **`alert`** — Updated when daily-alert runs (cron). Used as start time for next alert scan. Only daily-alert updates this.
 
-Each run reads its own `last_run` as the start of the monitoring window. End = current time. After run completes, update `last_run` and `output_file` for that timeline only. **Never touch the other timeline.**
+Each run reads its own `last_run` as the start of the monitoring window. End = current time. After run completes, update `last_run` and `output_file` for that timeline only. **Never touch the other timelines.**
+
+### Alert Monitor Config
+
+- Interval: `ALERT_INTERVAL` in `.env` (default: 10 min)
+- Work hours only: Mon-Fri 8AM-8PM
+- Desktop notifications: `scripts/desktop-notify.js` (cross-platform: Linux notify-send, macOS osascript)
+- Only HIGH/CRITICAL severity triggers notification
+- Session cron: `CronCreate */10 * * * 1-5` (auto-expires after 7 days)
+- Persistent cron: `scripts/daily-alert-cron.sh` (add to system crontab)
 
 ## IMPORTANT: Slack Thread Replies & Timestamp Handling
 
@@ -56,7 +67,7 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
    - LeNH (Aysar/Baamboozle, W{week}): part of LeNH 3-project split
 6. **Scrin.io** — Login + v2 API, company "john yi" (ID 266977), employee 453601. Config in `.scrin-config.json`
 7. **Daily Report Checks** — Kai (Xtreme Soft DM), Nick-GG (Global Grazing #maintenance — NOT TuanNT), Jeff & Vinn (AirAgri Discord)
-8. **Matrix/Element** — Fountain room. Get latest weekly plan, compare with task log. Config in `.matrix-config.json`
+8. **Matrix/Element** — Fountain room. Get latest weekly plan message (format: "Em update plan tuần này ạ\nViTHT: Xh\nThinhT: Xh\nVuTQ: Xh\n=> QC X"), extract per-dev plan hours. Then compare with Fountain task log Summary tab weekly actuals (VuTQ, ThinhT, ViTHT = dev; PhatDLT, HungPN = QC). Output a **plan vs actual table** per developer. Never claim "matches plan" without showing the actual numbers. Config in `.matrix-config.json`
 9. **GitHub PRs** — Elena-SamGuard: review+merge+deploy+update Redmine. Precognize: check nusken PRs. Config in `.elena-pending-actions.json`
 10. **Redmine** — Update ticket status after deploy. Config in `.redmine-config.json`
 
@@ -87,7 +98,13 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
 - Elena - SamGuard → Slack "SAM GUARD - Mobile" + GitHub PRs (nustechnology/Elena-SamGuard-Digital-Plant: review+merge+deploy+Redmine update; Precognize/development: check nusken PRs). Complete if no alerts and PRs handled.
 - MPFC → Slack "MyPersonalFootballCoach" + WhatsApp (manual). Complete if no Slack alerts.
 - Bailey → Slack "GLOBAL GRAZING SERVICES" + Google Docs VietPH (Paturevision W{week}) 8h/day. Complete if no alerts and hours OK.
-- Fountain → Matrix "Fountain" room (get weekly plan) + Google Sheet task log (compare dev hours vs plan) + **Trello board** (customer msgs, stuck tasks, hard-to-release). Devs: ViTHT, ThinhT, VuTQ. QC: PhatDLT, HungPN, others. Complete if plan on track and no stuck alerts.
+- Fountain → **MANDATORY 5-part check** (never skip any):
+     1. **Matrix plan**: Fetch weekly plan from Fountain room, cite @sender + timestamp
+     2. **Task log actuals**: Fountain Summary tab W{n}, per-developer weekly totals
+     3. **Plan vs Actual table**: Compare each dev's plan vs actual, flag mismatch
+     4. **Capacity & Runway**: "Est vs Charged" tab — remaining est, runway at dev capacity, delta vs previous report
+     5. **Over-estimate tracking**: Tasks where actual > est +20%, compare with previous report (growing vs stable). Key: #2595, #2615
+     Devs: ViTHT, ThinhT, VuTQ, HaVS. QC: PhatDLT, HungPN. Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`. Complete ONLY if all 5 parts checked and clean.
 - Rebecca (William Bills) → Slack "William Bills" + Google Docs TuanNT task log (Rebecca sheet). Complete if no Slack alerts AND TuanNT task log confirmed (not "Chưa").
 - Neural Contract → Email search "Carrick" + keyword "Neural". Complete if no alerts.
 
@@ -213,7 +230,17 @@ Access tokens expire every 5 minutes. Before any Matrix API call:
 
 ## GitHub Account Mapping
 
-- `nuscarrick` — default account
+**IMPORTANT:** Default `nuscarrick` account CANNOT access Elena or Precognize repos. Always use per-repo tokens:
+
+```bash
+# Elena-SamGuard — MUST use duongdn
+GH_TOKEN=$(gh auth token -h github.com -u duongdn) gh api repos/nustechnology/Elena-SamGuard-Digital-Plant/...
+
+# Precognize — MUST use nusken
+GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/development/...
+```
+
+- `nuscarrick` — default account (other repos)
 - `duongdn` — Elena-SamGuard-Digital-Plant access
 - `nusken` — Precognize/development access
 - SSH key `~/.ssh/duongdn_github/id_rsa` — Elena repo SSH access
