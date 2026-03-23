@@ -32,6 +32,7 @@ SECRET_FILES=(
   config/.jira-config.json
   config/.monitoring-timelines.json
   config/.bailey-config.json
+  config/.upwork-config.json
 )
 
 # Add Google service account key if exists
