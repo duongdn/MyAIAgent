@@ -57,11 +57,10 @@ E_EXTERNAL="entry.1445788968"
 E_HOURS="entry.713237695"
 E_NOTE="entry.1598310231"
 
+# IMPORTANT: Use -d for simple values, --data-urlencode only for text with special chars (Note field)
 curl -s -X POST "$FORM_URL" \
   --data-urlencode "${E_PROJECT}={project_name}" \
-  --data-urlencode "${E_INTERNAL}={internal_bugs}" \
-  --data-urlencode "${E_EXTERNAL}={external_bugs}" \
-  --data-urlencode "${E_HOURS}={total_dev_hours}" \
+  -d "${E_INTERNAL}={internal_bugs}&${E_EXTERNAL}={external_bugs}&${E_HOURS}={total_dev_hours}" \
   --data-urlencode "${E_NOTE}={note}" \
   -o /dev/null -w "%{http_code}"
 ```
@@ -72,7 +71,7 @@ HTTP 200 = success.
 
 ### Form Dropdown Value
 - Live: `Maddy - Xtreme Soft Solutions`
-- Test: `Maddy`
+- Test: `Maddy - Xtreme Soft Solutions`
 
 ### Data Sources
 
@@ -93,8 +92,8 @@ HTTP 200 = success.
 **Total Dev Hours**: Google Sheets task log
 - Spreadsheet: `1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58`
 - Service account key: `daily-agent-490610-7eb7985b33e3.json`
-- Find week sheet by checking which W-sheet's Monday date matches the reporting week
-- Read row 2 col H for total hours
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+- Do NOT scan individual W-sheets — Summary has all weeks in one API call
 
 **Note**: Summarize key bugs/issues from the week
 
@@ -102,11 +101,157 @@ HTTP 200 = success.
 This runs on Monday. The reporting week = previous Mon-Sun.
 Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-22.
 
+## Project: Baamboozle
+
+### Form Dropdown Value
+- Live: `Aysar Khalid - Baamboozle`
+- Test: `Aysar Khalid - Baamboozle`
+
+### Data Sources
+
+**Internal Bugs**: Always 0
+
+**External Bugs**: Slack analysis
+- Workspace: "Baamboozle" (from `.slack-accounts.json`)
+- Search messages from previous Mon-Sun week
+- API: `search.messages?query=after:{sun_before}+before:{mon_after}`
+- Analyze customer messages for bug reports
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+- Do NOT scan individual W-sheets — Summary has all weeks in one API call
+
+## Project: James Diamond
+
+### Form Dropdown Value
+- Live: `James Diamond - Portfolio`
+- Test: `James Diamond - Portfolio`
+
+### Data Sources
+
+**Internal Bugs**: Redmine
+- Project: `james-bonsey-jaden`
+- Query: tracker_id=1 (Bug), created_on = previous Mon-Sun week
+
+**External Bugs**: Discord analysis
+- Config: `config/.discord-accounts.json`
+- Account: `nusvinn`
+- Servers: AirAgri (guild 1105821508716200028), HOMIEAPP (guild 1108644839484039178)
+- Search messages from previous Mon-Sun week using Discord search API with min_id/max_id snowflakes
+- Client users: .jdiamond (James), .pauldiamond (Paul), bellatric02 (relaying client)
+- Search for bug/issue/fix/broken/error/problem keywords
+- Count distinct bugs reported by or involving customer
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+- Do NOT scan individual W-sheets — Summary has all weeks in one API call
+
+## Project: Bailey
+
+### Form Dropdown Value
+- Live: `Bailey Joey - Speedventory`
+- Test: `Bailey Joey - Speedventory`
+
+### Data Sources
+
+**Internal Bugs**: Redmine
+- Project: `bailey-paturevision`
+- Query: tracker_id=1 (Bug), created_on = previous Mon-Sun week
+
+**External Bugs**: Redmine (external prefix) + Slack
+- Redmine: check for bugs with "external" in subject/description
+- Slack: Workspace "Xtreme Soft Solutions", search for Bailey-related bug reports
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1p4smFj2fwSbrIJbYhvLM_IKFYOdq0fNJRqQv0BgQ4U4`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+
+## Project: Marcel
+
+### Form Dropdown Value
+- Live: `Marcel Fuessinger - Tokenlite`
+- Test: `Marcel Fuessinger - Tokenlite`
+
+### Data Sources
+
+**Internal Bugs**: Always 0
+
+**External Bugs**: Always 0
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1z5sNg59eLKpnyGOGM3Eo0n6xfGKEZjhK8CWT1Ja2zRs`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+
+## Project: Neural Contract
+
+### Form Dropdown Value
+- Live: `Neural Contract - Neural Contract - Test Job`
+- Test: `Neural Contract - Neural Contract - Test Job`
+
+### Data Sources
+
+**Internal Bugs**: Always 0
+
+**External Bugs**: Always 0
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1EE9fKmp5iKCqUQ1LqEqvhMKMB6J3mZEjRc5ejJXfs3Q`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+
+## Project: LegalAtoms
+
+### Form Dropdown Value
+- Live: `Raymond Huang - LegalAtoms`
+- Test: `Raymond Huang - LegalAtoms`
+
+### Data Sources
+
+**Internal Bugs**: Always 0
+
+**External Bugs**: Slack analysis
+- Workspace: "LegalAtoms" (from `.slack-accounts.json`)
+- Search messages from previous Mon-Sun week
+- Only count issues relative to the user (not all workspace issues)
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1D7K6NWzBb3kJ0m1m5lOlsXkqe2YRLF80hrfNzQQfb1U`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+
+## Project: Andrew Taraba
+
+### Form Dropdown Value
+- Live: `Andrew Taraba - Portfolio`
+- Test: `Andrew Taraba - Portfolio`
+
+### Data Sources
+
+**Internal Bugs**: Always 0
+
+**External Bugs**: Discord analysis
+- Config: `config/.discord-accounts.json`
+- Account: `nuscarrick`
+- Server: Bizurk (guild 639973831787806721)
+- Search messages from previous Mon-Sun week using Discord search API with min_id/max_id snowflakes
+- Look for bug/issue reports from client
+
+**Total Dev Hours**: Google Sheets task log
+- Spreadsheet: `1KqNkS51c1MJivOXGNOFei3nQN_JVcWmfCMAzwlFJdn8`
+- Service account key: `daily-agent-490610-7eb7985b33e3.json`
+- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+
 ## Rules
 
 - Default to TEST form — only use LIVE form when user explicitly passes --live
 - Always confirm data with user before submitting
-- Project name must match form dropdown value exactly
+- Project name must match form dropdown value exactly (test and live forms have different dropdown values)
 - Submit one form per project
 - Only mark Trello checklist in --live mode
 - Log each submission: project, values, mode (test/live), HTTP status
