@@ -176,20 +176,21 @@ async function extractWithTempProfile(profileDir, accountName) {
 
     const page = await browser.newPage();
 
-    // Intercept network requests to capture the Authorization header
+    // Use CDP to capture network requests (more reliable than puppeteer interception)
+    const client = await page.target().createCDPSession();
+    await client.send('Network.enable');
+
     let capturedToken = null;
-    await page.setRequestInterception(true);
-    page.on('request', (request) => {
-      const authHeader = request.headers()['authorization'];
+    client.on('Network.requestWillBeSent', (params) => {
+      const authHeader = (params.request.headers || {})['Authorization'] || (params.request.headers || {})['authorization'];
       if (authHeader && !authHeader.startsWith('Bot ') && !capturedToken) {
         capturedToken = authHeader;
-        console.log(`[${accountName}] Captured token from request to: ${request.url().substring(0, 80)}`);
+        console.log(`[${accountName}] CDP captured token from: ${params.request.url.substring(0, 80)}`);
       }
-      request.continue();
     });
 
     console.log(`[${accountName}] Navigating to Discord...`);
-    await page.goto('https://discord.com/channels/@me', { waitUntil: 'networkidle2', timeout: 45000 });
+    await page.goto('https://discord.com/channels/@me', { waitUntil: 'networkidle0', timeout: 60000 });
 
     const url = page.url();
     console.log(`[${accountName}] Final URL: ${url}`);
@@ -199,9 +200,13 @@ async function extractWithTempProfile(profileDir, accountName) {
       return null;
     }
 
-    // Wait a bit more for API calls to fire
+    // Wait for Discord to fully initialize and make API calls
+    await new Promise(r => setTimeout(r, 8000));
+
+    // If CDP didn't capture, try webpack extraction
     if (!capturedToken) {
-      await new Promise(r => setTimeout(r, 5000));
+      console.log(`[${accountName}] CDP capture missed, trying webpack extraction...`);
+      capturedToken = await extractTokenFromPage(page);
     }
 
     return capturedToken;
