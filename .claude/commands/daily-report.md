@@ -9,7 +9,7 @@ Generate a daily report checklist for today's date. Read the checklist config fr
 ## Instructions
 
 1. Read the checklist items from `./daily-checklist.md`
-2. Create a daily report file at `./reports/{YYYY-MM-DD}-daily-report.md` (use today's date)
+2. Create a daily report file at `./reports/{YYYY-MM-DD}/daily-report.md` (use today's date)
 3. For each checklist item, ask the user for status and notes using `AskUserQuestion`
 4. Write the report with:
    - Date and timestamp

@@ -4,7 +4,7 @@ description: Weekly monitoring report — team hours, project reports, JIRA cros
 
 # Weekly Report
 
-Run Friday night or Saturday morning. Generates `reports/YYYY-MM-DD-weekly-monitor.md`.
+Run Friday night or Saturday morning. Generates `reports/{YYYY-MM-DD}/weekly-monitor.md`.
 
 ## Instructions
 

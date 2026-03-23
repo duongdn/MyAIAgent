@@ -8,7 +8,7 @@ Run an on-demand monitoring refresh across all channels. This generates a **sepa
 
 ## Output File
 
-`./reports/{YYYY-MM-DD}-{HHMM}-update.md`
+`./reports/{YYYY-MM-DD}/{HHMM}-update.md`
 
 Use current date and time (24h format, local timezone).
 
@@ -17,7 +17,7 @@ Use current date and time (24h format, local timezone).
 1. Read workflow from `./docs/daily-report-workflow.md`
 2. Read all config files listed in the workflow (`.slack-accounts.json`, `.discord-accounts.json`, `.email-accounts.json`, `.matrix-config.json`, `.google-docs.json`, `.scrin-config.json`, `.redmine-config.json`, `.elena-pending-actions.json`)
 3. Read memory files for rules: feedback on Slack threads (must use `search.messages`), alerts (don't complete Trello if alert found), over-estimate tracking (compare with previous report)
-4. Read today's daily report (`reports/{YYYY-MM-DD}-daily-report.md`) and any previous update files to know what was already reported
+4. Read today's daily report (`reports/{YYYY-MM-DD}/daily-report.md`) and any previous update files to know what was already reported
 5. Read `.monitoring-timelines.json` for the two-timeline system:
    - Use `refresh.last_run` as start of monitoring window
    - BUT check previous refresh report — if it only covered some sources, use `daily_report.last_run` for unchecked sources

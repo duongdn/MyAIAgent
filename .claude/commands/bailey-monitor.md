@@ -4,7 +4,7 @@ description: Bailey project monitoring — CloudWatch alarms, events, and infras
 
 # Bailey Monitor
 
-Monitor Bailey project infrastructure. Generates `reports/{YYYY-MM-DD}-{HHMM}-bailey-monitor.md`.
+Monitor Bailey project infrastructure. Generates `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md`.
 
 ## Config
 

@@ -8,7 +8,7 @@ Automated background alert scanner. Runs on a schedule (cron), checks all monito
 
 ## Output File
 
-`./reports/{YYYY-MM-DD}-{HHMM}-alert.md`
+`./reports/{YYYY-MM-DD}/{HHMM}-alert.md`
 
 Use current date and time (24h format, local timezone).
 

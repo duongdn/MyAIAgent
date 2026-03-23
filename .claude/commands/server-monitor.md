@@ -19,7 +19,7 @@ Check server resources for all managed projects. After each server group check, 
 
 ## Report
 
-Generate single combined report: `reports/{YYYY-MM-DD}-{HHMM}-server-monitor.md`
+Generate single combined report: `reports/{YYYY-MM-DD}/{HHMM}-server-monitor.md`
 
 ---
 
