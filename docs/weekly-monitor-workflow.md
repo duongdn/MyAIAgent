@@ -75,8 +75,14 @@ Notes on W tab leave row parsing:
 
 ## #2: Report Project
 
-### Kunal (Fountain)
-Compare planned hours (from Matrix weekly plan) with actual hours in Fountain task log. Flag if mismatch.
+### Kunal (Fountain) — MANDATORY 5-part check
+Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`
+
+1. **Matrix plan**: Fetch from Fountain room (`!EWnVDAxbTGsBxPkaaI:nustechnology.com`), cite source
+2. **Task log actuals**: Summary tab W{n}, per-developer weekly totals
+3. **Plan vs Actual table**: Per-dev comparison, flag mismatch
+4. **Capacity & Runway**: "Est vs Charged" tab — col I=Est Raw, col K=Actual. Exclude "Deployed on Live"/"Cancelled". Calculate remaining, runway at dev h/wk. Delta vs previous report.
+5. **Over-estimate tracking**: actual > est +20%, top offenders table. Compare with previous report — flag STILL GROWING vs stable. Key tasks: #2595 (120h est), #2615 (12h est).
 
 ### James Diamond + Marcel — Combined report to Matrix
 Extract last week's hours and send as ONE message to Matrix room.
