@@ -14,7 +14,7 @@ None.
 |---|----------|--------|---------|
 | 1 | MEDIUM | Discord/nusvinn | Token returns 403 Forbidden — needs refresh (AirAgri, HOMIEAPP servers inaccessible) |
 | 2 | MEDIUM | Matrix/Fountain | Token expired (401), refresh also failed (400) — room monitoring offline |
-| 3 | MEDIUM | Redmine | API returns 403 Forbidden — key may be revoked or expired |
+| 3 | MEDIUM | Redmine/#77827 | New bug in Fountain: "[Card_ID:2595] Error message displays code" — gift drop form, assigned VuTQ | [#77827](https://redmine.nustechnology.com/issues/77827) |
 
 ## Sources Status
 
@@ -26,7 +26,7 @@ None.
 | GitHub/duongdn | OK | 4 push events, no failed CI |
 | GitHub/nusken | OK | 0 events |
 | Matrix/Fountain | AUTH FAIL | Token expired, refresh failed |
-| Redmine | AUTH FAIL | 403 Forbidden |
+| Redmine | OK | 1 new bug (normal priority) |
 | Google Sheets | SKIPPED | Already checked in daily report |
 | Scrin.io | SKIPPED | Already checked in daily report |
 
@@ -38,4 +38,5 @@ None.
 - GGS Slack: Normal maintenance channel activity
 - AmazingMeds Slack: Marketing photo updates, web dev requests
 - WilliamBills Slack: Casual dev check-in
-- Discord/Matrix/Redmine auth failures are recurring — tokens need manual refresh
+- Discord/Matrix auth failures are recurring — tokens need manual refresh
+- Redmine #77827: New Fountain bug (normal priority) — error message showing code in gift drop form when order cancelled in Shipstation, assigned to VuTQ
