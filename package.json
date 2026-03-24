@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "googleapis": "^171.4.0",
+    "imap": "^0.8.19",
+    "mailparser": "^3.9.5",
     "puppeteer": "^24.39.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2"
