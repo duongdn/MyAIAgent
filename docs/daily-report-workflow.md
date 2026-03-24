@@ -15,7 +15,9 @@ Stored in `config/.monitoring-timelines.json`. Three **independent** timelines:
 2. **`refresh`** — Updated when daily-report-refresh runs. Used as start time for next refresh. Only refresh updates this.
 3. **`alert`** — Updated when daily-alert runs (cron). Used as start time for next alert scan. Only daily-alert updates this.
 
-Each run reads its own `last_run` as the start of the monitoring window. End = current time. After run completes, update `last_run` and `output_file` for that timeline only. **Never touch the other timelines.**
+Each run reads its own `last_run` as the start of the monitoring window. End = current time. After run completes, update `last_run` and `output_file` for that timeline only.
+
+**Exception:** When the daily report runs (full scan of all sources), also advance `alert.last_run` to the same time. This prevents the next alert cron from re-scanning the window the daily report already covered. The `refresh` timeline remains independent — only refresh updates it.
 
 ### Alert Monitor Config
 
