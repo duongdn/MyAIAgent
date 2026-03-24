@@ -44,8 +44,25 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 claude -p "/daily-alert" > "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
+# Check if rate-limited — skip notification, create backoff marker
+if grep -q "hit your limit" "$LOG_FILE" 2>/dev/null; then
+  BACKOFF_FILE="$LOG_DIR/.rate-limited"
+  if [ ! -f "$BACKOFF_FILE" ]; then
+    # First rate-limit hit — notify once
+    node "$SCRIPT_DIR/desktop-notify.js" \
+      --title "Alert Cron: Rate Limited" \
+      --body "Claude API quota exhausted. Will auto-resume when limit resets." \
+      --urgency low
+    touch "$BACKOFF_FILE"
+  fi
+  exit 0
+fi
+
+# Clear backoff marker on successful run
+rm -f "$LOG_DIR/.rate-limited"
+
 if [ $EXIT_CODE -ne 0 ]; then
-  # Notify on cron failure
+  # Notify on cron failure (non-rate-limit)
   node "$SCRIPT_DIR/desktop-notify.js" \
     --title "Alert Cron Failed" \
     --body "Exit code $EXIT_CODE — check $LOG_FILE" \
