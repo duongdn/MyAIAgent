@@ -93,6 +93,7 @@ node scripts/desktop-notify.js --title "Alert Scan OK" --body "No high-severity 
 - Uses **`alert` timeline** — independent from daily_report and refresh
 - Only HIGH/CRITICAL trigger desktop notifications
 - Use `search.messages` for Slack (NOT `conversations.history`)
+- **Slack session tokens (xoxc):** Amazing Meds and Equanimity use `auth_type: "session"`. These REQUIRE BOTH headers: `Authorization: Bearer {token}` AND `Cookie: d={cookie}`. If you get `invalid_auth`, check you're sending BOTH headers before flagging as expired. Verify with `auth.test` API first.
 - GitHub: `duongdn` for Elena, `nusken` for Precognize (never default nuscarrick)
 - Discord: ALWAYS verify tokens with `curl -H "Authorization: {token}" https://discord.com/api/v10/users/@me` before flagging expired. If 200 OK, the token works — the issue is in how you're calling the API, not the token itself. Do NOT report false auth failures.
 - Matrix: Token expires every 5 min. Run `scripts/matrix-login.js --login` to get fresh token before each scan. If refresh_token also fails, do browser login.
