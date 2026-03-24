@@ -20,6 +20,7 @@
 | 9 | GitHub | done | Elena PR #290 open, Precognize 4 active PRs |
 | 10 | Redmine | done | #77734 Tested on Staging |
 | 11 | Trello | done | Check Progress/Mail fetched, Fountain board scanned |
+| 12 | Upwork | done | 5 workrooms. LeNH 8h Upwork vs 0h task log mismatch |
 
 ---
 
@@ -143,7 +144,7 @@
 | 7 | Rory/BXR | LeNH | 0h | — |
 | 8 | Francesca/RDC | LeNH | 0h | — |
 | 9 | Aysar/Baamboozle | LeNH | 0h | — |
-| — | *LeNH combined* | LeNH | **0h** | **ALERT** — 0h all 3 projects |
+| — | *LeNH combined* | LeNH | **0h** | **ALERT** — 0h task log but 8h Upwork (task log delay) |
 | 10 | John Yi | TuanNT | 0h | — |
 | 11 | William Bills | TuanNT | 0h | — |
 | — | *TuanNT combined* | TuanNT | **0h** | **ALERT** — 0h all projects |
@@ -220,7 +221,25 @@ No growth in over-estimate tasks (W19 day 1). Continue monitoring.
 
 ---
 
-## 8. GitHub
+## 8. Upwork (This week: Mar 23-29)
+
+| Workroom | Developer | Mon 23 | Week Total | Task Log Mon | Match |
+|----------|-----------|--------|------------|-------------|-------|
+| Rory | LeNH | 4h | 4:20h | 0h | **MISMATCH** — Upwork 4h, task log 0h |
+| Aysar | LeNH | 4h | 4:00h | 0h | **MISMATCH** — Upwork 4h, task log 0h |
+| **LeNH total** | | **8h** | **8:20h** | **0h** | **Task log NOT filled** |
+| Bailey DEV1 | VietPH | 0h | 0:00h | 0h | OK — on leave |
+| Bailey DEV3 | DuongDN | 0h | 0:00h | 0h | OK — adhoc |
+| Neural Contract | external | 0h | 0:00h | — | 0h this week (client msg Mar 16 still unanswered) |
+
+**Key finding:** LeNH worked 8h Monday per Upwork (4h Rory + 4h Aysar) but logged 0h in all 3 task logs. **Task log delay confirmed, not absence.**
+
+### Upwork Messages
+- **Neural Contract:** 0h tracked. Client's Mar 16 bug report (file upload error) still has no visible response from our side — now 8 days.
+
+---
+
+## 9. GitHub
 
 ### Elena-SamGuard (duongdn)
 - **PR #290** (DP-648 async external tag search) — OPEN, awaiting review. Created Mar 23 11:57. [Link](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/290)
@@ -309,7 +328,7 @@ No growth in over-estimate tasks (W19 day 1). Continue monitoring.
 ## Unresolved Questions
 
 1. **PhucVT (James Diamond)** — 0h Mon. Absent or task log delay?
-2. **LeNH** — 0h all 3 projects Mon. Absent or task log delay?
+2. **LeNH** — 0h task log but 8h Upwork (4h Rory + 4h Aysar). **Task log delay confirmed.** Needs to fill task logs.
 3. **TuanNT** — 0h Scrin + task log + "Chua" on William Bills. Absent or not filled?
 4. **Fountain devs all 0h** — Task log delay (Trinhmtt reminded team) or actual absence?
 5. **Fountain build-a-box #2793** — OOS display bugs, multiple customer reports. Who is investigating?
