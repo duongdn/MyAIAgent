@@ -142,6 +142,7 @@ Message format: `"Hi {name}, task log for {date} is missing (0h logged). Please 
 | Developer | Project | Matrix Room ID |
 |-----------|---------|---------------|
 | PhucVT | James Diamond | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
+| LeNH | Rory/Franc/Aysar | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
 
 Add more rooms as they are provided. Skip developers on confirmed leave or adhoc projects (Marcel).
 
