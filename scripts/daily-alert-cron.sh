@@ -38,7 +38,10 @@ LOG_FILE="$LOG_DIR/alert-$TIMESTAMP.log"
 # Run Claude with daily-alert command
 cd "$PROJECT_DIR"
 export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node/ | tail -1)/bin:$PATH"
-claude -p "/daily-alert" --no-input > "$LOG_FILE" 2>&1
+export DISPLAY=:1
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+claude -p "/daily-alert" > "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
 if [ $EXIT_CODE -ne 0 ]; then
