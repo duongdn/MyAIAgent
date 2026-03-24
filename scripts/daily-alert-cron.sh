@@ -22,7 +22,7 @@ fi
 # Prevent concurrent runs
 if [ -f "$LOCK_FILE" ]; then
   LOCK_AGE=$(( $(date +%s) - $(stat -c %Y "$LOCK_FILE" 2>/dev/null || stat -f %m "$LOCK_FILE" 2>/dev/null) ))
-  if [ "$LOCK_AGE" -lt 600 ]; then
+  if [ "$LOCK_AGE" -lt 1800 ]; then
     echo "$(date): Another alert scan is running (lock age: ${LOCK_AGE}s)" >> "$LOG_DIR/skipped.log"
     exit 0
   fi
