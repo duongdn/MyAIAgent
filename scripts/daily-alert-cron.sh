@@ -41,6 +41,10 @@ export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/
 export DISPLAY=:1
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
+# Refresh Matrix token before scan (uses browser with saved SSO session)
+node "$SCRIPT_DIR/matrix-token-refresh.js" >> "$LOG_DIR/matrix-refresh.log" 2>&1
+
 claude -p "/daily-alert" > "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 

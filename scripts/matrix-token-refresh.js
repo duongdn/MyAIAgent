@@ -2,14 +2,14 @@
 /**
  * Automated Matrix Token Refresh
  *
- * Uses OIDC device code flow + Puppeteer to auto-approve.
- * No manual interaction needed — browser profile has SSO session cookies.
+ * Opens browser with saved profile → Element auto-loads with SSO session →
+ * captures fresh access_token from request headers → saves to config.
+ *
+ * Requires DISPLAY env var (runs visible browser briefly).
+ * Skips refresh if current token is still valid.
  *
  * Usage:
  *   node scripts/matrix-token-refresh.js
- *
- * Saves fresh access_token + refresh_token to config/.matrix-config.json
- * Designed to run before each alert scan (cron).
  */
 
 const puppeteer = require('puppeteer-extra');
@@ -19,41 +19,14 @@ puppeteer.use(StealthPlugin());
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const http = require('http');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.matrix-config.json');
 const PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'matrix-browser-profile');
 
-function post(url, data) {
-  return new Promise((resolve, reject) => {
-    const body = typeof data === 'string' ? data : new URLSearchParams(data).toString();
-    const parsed = new URL(url);
-    const mod = parsed.protocol === 'https:' ? https : http;
-    const req = mod.request(parsed, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(body),
-      },
-    }, (res) => {
-      let d = '';
-      res.on('data', c => d += c);
-      res.on('end', () => {
-        try { resolve(JSON.parse(d)); }
-        catch { resolve({ raw: d, status: res.statusCode }); }
-      });
-    });
-    req.on('error', reject);
-    req.write(body);
-    req.end();
-  });
-}
-
 function get(url, headers = {}) {
   return new Promise((resolve, reject) => {
     const parsed = new URL(url);
-    const mod = parsed.protocol === 'https:' ? https : http;
-    mod.get(parsed, { headers }, (res) => {
+    https.get(parsed, { headers }, (res) => {
       let d = '';
       res.on('data', c => d += c);
       res.on('end', () => {
@@ -64,65 +37,20 @@ function get(url, headers = {}) {
   });
 }
 
-async function sleep(ms) {
-  return new Promise(r => setTimeout(r, ms));
-}
-
 async function main() {
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-  const homeserver = config.homeserver;
-  const clientId = config.oidc_client_id;
-  const tokenEndpoint = config.token_endpoint;
 
-  // Step 0: Check if current token is still valid
-  console.log('Checking current token...');
-  const whoami = await get(`${homeserver}/_matrix/client/v3/account/whoami`, {
+  // Quick check — skip if token still valid
+  console.log('[matrix-refresh] Checking current token...');
+  const whoami = await get(`${config.homeserver}/_matrix/client/v3/account/whoami`, {
     Authorization: `Bearer ${config.access_token}`,
   }).catch(() => null);
 
   if (whoami && whoami.user_id) {
-    console.log(`Current token valid (${whoami.user_id}). Skipping refresh.`);
-    process.exit(0);
+    console.log(`[matrix-refresh] Token valid (${whoami.user_id}). Skipping.`);
+    return;
   }
-  console.log('Token expired. Starting refresh...');
-
-  // Step 1: Try refresh_token first (fast path, no browser needed)
-  if (config.refresh_token) {
-    console.log('Trying refresh_token...');
-    const refreshResp = await post(tokenEndpoint, {
-      grant_type: 'refresh_token',
-      refresh_token: config.refresh_token,
-      client_id: clientId,
-    });
-
-    if (refreshResp.access_token) {
-      console.log('Refresh token worked!');
-      config.access_token = refreshResp.access_token;
-      if (refreshResp.refresh_token) config.refresh_token = refreshResp.refresh_token;
-      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
-      console.log('Tokens saved.');
-      process.exit(0);
-    }
-    console.log('Refresh token expired:', refreshResp.error || 'unknown');
-  }
-
-  // Step 2: Device code flow + browser auto-approval
-  console.log('Starting device code flow...');
-  const deviceResp = await post(`${homeserver}/auth/oauth2/device`, {
-    client_id: clientId,
-    scope: 'openid urn:matrix:org.matrix.msc2967.client:api:* urn:matrix:org.matrix.msc2967.client:device:auto',
-  });
-
-  if (!deviceResp.device_code) {
-    console.error('Failed to get device code:', deviceResp);
-    process.exit(1);
-  }
-
-  const { device_code, user_code, verification_uri_complete, interval } = deviceResp;
-  console.log(`Device code obtained. Verification URL: ${verification_uri_complete}`);
-
-  // Step 3: Auto-approve via Puppeteer (uses saved SSO cookies)
-  console.log('Opening browser to auto-approve...');
+  console.log('[matrix-refresh] Token expired. Opening browser...');
 
   if (!fs.existsSync(PROFILE_DIR)) {
     fs.mkdirSync(PROFILE_DIR, { recursive: true });
@@ -134,133 +62,109 @@ async function main() {
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
-      '--window-position=9999,9999',  // off-screen
-      '--window-size=800,600',
+      '--window-size=1280,900',
     ],
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: 800, height: 600 });
+  await page.setViewport({ width: 1280, height: 900 });
 
-  try {
-    await page.goto(verification_uri_complete, { waitUntil: 'networkidle2', timeout: 30000 });
+  let capturedAccessToken = null;
+  let capturedRefreshToken = null;
 
-    // Wait for the approval page and click approve/continue
-    let approved = false;
-    for (let attempt = 0; attempt < 15; attempt++) {
-      const url = page.url();
-      const content = await page.content();
+  // Capture Bearer token from request headers
+  await page.setRequestInterception(true);
+  page.on('request', (req) => {
+    const auth = req.headers()['authorization'];
+    if (auth && auth.startsWith('Bearer mat_') && !capturedAccessToken) {
+      capturedAccessToken = auth.replace('Bearer ', '');
+      console.log(`[matrix-refresh] Captured access_token from header`);
+    }
+    req.continue();
+  });
 
-      // Look for approve/continue/confirm buttons
-      const clicked = await page.evaluate(() => {
-        // Try common button patterns
-        const selectors = [
-          'button[type="submit"]',
-          'button:not([disabled])',
-          'input[type="submit"]',
-          'a.btn',
-          '[data-testid="approve"]',
-        ];
-        for (const sel of selectors) {
-          const btns = document.querySelectorAll(sel);
-          for (const btn of btns) {
-            const text = (btn.textContent || btn.value || '').toLowerCase();
-            if (text.includes('approve') || text.includes('continue') ||
-                text.includes('confirm') || text.includes('accept') ||
-                text.includes('grant') || text.includes('allow') ||
-                text.includes('link') || text.includes('submit')) {
-              btn.click();
-              return text;
-            }
-          }
+  // Capture refresh token from token endpoint responses
+  page.on('response', async (res) => {
+    try {
+      const url = res.url();
+      if (url.includes('/oauth2/token') || (url.includes('/_matrix/client') && res.request().method() === 'POST')) {
+        const text = await res.text().catch(() => '');
+        if (text.includes('refresh_token')) {
+          const data = JSON.parse(text);
+          if (data.access_token) capturedAccessToken = data.access_token;
+          if (data.refresh_token) capturedRefreshToken = data.refresh_token;
+          console.log('[matrix-refresh] Captured tokens from response');
         }
-        return null;
-      });
-
-      if (clicked) {
-        console.log(`Clicked: "${clicked}"`);
-        await sleep(2000);
-        approved = true;
       }
+    } catch {}
+  });
 
-      // Check if we landed on a success page
-      const pageText = await page.evaluate(() => document.body?.innerText || '');
-      if (pageText.toLowerCase().includes('success') ||
-          pageText.toLowerCase().includes('linked') ||
-          pageText.toLowerCase().includes('approved') ||
-          pageText.toLowerCase().includes('device is now connected')) {
-        console.log('Approval successful!');
-        approved = true;
-        break;
-      }
+  const chatUrl = config.chat_url || 'https://chat.nustechnology.com';
+  console.log(`[matrix-refresh] Navigating to ${chatUrl}...`);
+  await page.goto(chatUrl, { waitUntil: 'networkidle2', timeout: 30000 });
 
-      if (approved && attempt > 2) break;
-      await sleep(2000);
-    }
-
-    if (!approved) {
-      console.log('Could not auto-approve. Page content:');
-      const text = await page.evaluate(() => document.body?.innerText?.substring(0, 500));
-      console.log(text);
-    }
-  } catch (err) {
-    console.error('Browser error:', err.message);
-  } finally {
-    await browser.close();
-  }
-
-  // Step 4: Poll for token
-  console.log('Polling for token...');
-  const pollInterval = (interval || 5) * 1000;
-  const deadline = Date.now() + 60000; // 1 min timeout
-
+  // Wait up to 90s for token capture (SSO auto-login + Element init)
+  const deadline = Date.now() + 90000;
   while (Date.now() < deadline) {
-    await sleep(pollInterval);
+    await new Promise(r => setTimeout(r, 2000));
 
-    const tokenResp = await post(tokenEndpoint, {
-      grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
-      device_code: device_code,
-      client_id: clientId,
-    });
+    // Try localStorage extraction
+    if (!capturedAccessToken) {
+      const stored = await page.evaluate(() => {
+        const result = {};
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          const val = localStorage.getItem(key);
+          if (val && val.startsWith('mat_')) result.access_token = val;
+          if (val && val.startsWith('mar_')) result.refresh_token = val;
+        }
+        return result;
+      }).catch(() => ({}));
 
-    if (tokenResp.access_token) {
-      console.log('Got tokens!');
-      config.access_token = tokenResp.access_token;
-      if (tokenResp.refresh_token) config.refresh_token = tokenResp.refresh_token;
-      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+      if (stored.access_token) capturedAccessToken = stored.access_token;
+      if (stored.refresh_token) capturedRefreshToken = stored.refresh_token;
+    }
 
-      // Verify
-      const verify = await get(`${homeserver}/_matrix/client/v3/account/whoami`, {
-        Authorization: `Bearer ${config.access_token}`,
+    // Try MatrixClient instance
+    if (!capturedAccessToken) {
+      const clientToken = await page.evaluate(() => {
+        const client = window.mxMatrixClientPeg?.get?.();
+        return client?.getAccessToken?.() || null;
       }).catch(() => null);
-
-      if (verify && verify.user_id) {
-        console.log(`Verified: ${verify.user_id}`);
+      if (clientToken && clientToken.startsWith('mat_')) {
+        capturedAccessToken = clientToken;
+        console.log('[matrix-refresh] Captured from MatrixClient');
       }
-      console.log('Tokens saved to config.');
-      process.exit(0);
     }
 
-    if (tokenResp.error === 'authorization_pending') {
-      process.stdout.write('.');
-      continue;
-    }
-
-    if (tokenResp.error === 'slow_down') {
-      await sleep(5000);
-      continue;
-    }
-
-    // Other errors (expired, denied, etc.)
-    console.error('Token poll failed:', tokenResp.error, tokenResp.error_description);
-    break;
+    if (capturedAccessToken) break;
   }
 
-  console.error('Failed to obtain tokens within timeout.');
-  process.exit(1);
+  await browser.close();
+
+  if (!capturedAccessToken) {
+    console.error('[matrix-refresh] Failed to capture token. Manual login needed.');
+    process.exit(1);
+  }
+
+  // Save
+  config.access_token = capturedAccessToken;
+  if (capturedRefreshToken) config.refresh_token = capturedRefreshToken;
+  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+
+  // Verify
+  const verify = await get(`${config.homeserver}/_matrix/client/v3/account/whoami`, {
+    Authorization: `Bearer ${capturedAccessToken}`,
+  }).catch(() => null);
+
+  if (verify && verify.user_id) {
+    console.log(`[matrix-refresh] Verified: ${verify.user_id}`);
+  } else {
+    console.log('[matrix-refresh] Token saved but verification failed.');
+  }
 }
 
 main().catch(err => {
-  console.error('Fatal:', err.message);
+  console.error('[matrix-refresh] Fatal:', err.message);
   process.exit(1);
 });
