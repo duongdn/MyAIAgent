@@ -39,7 +39,7 @@ Uses the **`alert`** timeline in `config/.monitoring-timelines.json` — complet
 | Level | Criteria | Notify? |
 |-------|----------|---------|
 | **CRITICAL** | Production down, security breach, client escalation, data loss | YES — urgency: critical |
-| **HIGH** | Failed deploy, CI broken, developer absent unannounced, blocker reported, SLA risk | YES — urgency: critical |
+| **HIGH** | Failed deploy, CI broken, developer absent unannounced, blocker reported, SLA risk, **monitoring source auth failure (blind spot)** | YES — urgency: critical |
 | **MEDIUM** | Customer comment, stuck card >7 days, plan mismatch, over-estimate growing | NO (report only) |
 | **LOW** | Info, FYI, minor updates | NO (report only) |
 
@@ -94,7 +94,8 @@ node scripts/desktop-notify.js --title "Alert Scan OK" --body "No high-severity 
 - Only HIGH/CRITICAL trigger desktop notifications
 - Use `search.messages` for Slack (NOT `conversations.history`)
 - GitHub: `duongdn` for Elena, `nusken` for Precognize (never default nuscarrick)
-- Discord: verify tokens with curl before flagging expired
+- Discord: ALWAYS verify tokens with `curl -H "Authorization: {token}" https://discord.com/api/v10/users/@me` before flagging expired. If 200 OK, the token works — the issue is in how you're calling the API, not the token itself. Do NOT report false auth failures.
+- Matrix: Token expires every 5 min. Run `scripts/matrix-login.js --login` to get fresh token before each scan. If refresh_token also fails, do browser login.
 - Always include clickable URLs for alerts
 - If a source fails (auth error, timeout), log it but don't block other sources
 - Keep it fast — this runs every 5-10min, optimize for speed over completeness
