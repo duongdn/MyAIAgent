@@ -131,6 +131,20 @@ Other shared names:
 - **Lucas** = William Bills developer (works with Oliver)
 - **Carrick** = NUS account used across many Slack workspaces (Baamboozle, Swift Studio, Generator, etc.)
 
+## Post-Report: Task Log Reminder
+
+After daily report is generated, if a developer has **0h logged and is NOT on confirmed leave**, send a reminder via Matrix to their room.
+
+Message format: `"Hi {name}, task log for {date} is missing (0h logged). Please update when you can. Thanks!"`
+
+### Developer Matrix Rooms
+
+| Developer | Project | Matrix Room ID |
+|-----------|---------|---------------|
+| PhucVT | James Diamond | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
+
+Add more rooms as they are provided. Skip developers on confirmed leave or adhoc projects (Marcel).
+
 ## Key Rules
 
 - **Task log hours <= Scrin.io hours** = OK (no hour inflation)
