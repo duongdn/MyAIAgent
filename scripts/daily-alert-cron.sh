@@ -37,6 +37,7 @@ LOG_FILE="$LOG_DIR/alert-$TIMESTAMP.log"
 
 # Run Claude with daily-alert command
 cd "$PROJECT_DIR"
+export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node/ | tail -1)/bin:$PATH"
 claude -p "/daily-alert" --no-input > "$LOG_FILE" 2>&1
 EXIT_CODE=$?
 
