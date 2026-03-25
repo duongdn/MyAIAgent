@@ -27,7 +27,7 @@
 | Slack (12 xoxp) | ✓ OK | Active across 10 ws, no critical alerts |
 | Slack (Amazing Meds) | ✓ OK | 4 msgs — IT/email-marketing, no alerts |
 | Slack (Equanimity) | ✓ OK | 0 msgs |
-| Discord | ⚠️ BLOCKED | Cloudflare 403 (error 1010) — tokens may be valid but IP blocked |
+| Discord | ✓ OK | nusvinn: AirAgri HIGH alert found. nuscarrick: Bizurk 0 msgs (channels role-restricted) |
 | Google Docs | ⚠️ PARTIAL | All devs OK except LongVV Tue 0h |
 | Scrin.io | ✓ OK | TuanNT on leave Mon+Tue — empty data expected |
 | Daily checks | ✓ OK | Kai ✓, Nick-GG late but submitted |
@@ -125,7 +125,7 @@ ViTHT: 22h · ThinhT: 4h · HaVS: 24h · VuTQ: 40h · QC: 22.5h
 - ✅ MPFC · Marcel · Raymond/LegalAtoms · Neural Contract
 - ✅ Bailey · Rebecca/William Bills · Colin · Elena WordPress
 - ⏭️ **Elena/SamGuard Digital Plant** — PR#291 CodeRabbit issues, not merged
-- ⏭️ **Andrew Taraba** — Discord unavailable (Cloudflare block)
+- ✅ **Andrew Taraba** — Bizurk checked (0 msgs in accessible channels; most channels role-restricted)
 - ⏭️ **Fountain** — 8 customer comments, needs review
 
 ---
