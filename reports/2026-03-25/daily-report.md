@@ -9,12 +9,13 @@
 
 | # | Severity | Source | Summary |
 |---|----------|--------|---------|
-| 1 | MEDIUM | Fountain/Trello | 8 customer comments from @kunalsheth today on GiftDrop + build-a-box |
-| 2 | MEDIUM | Google Docs | LongVV Tue 24/03: 0h logged, no leave record found |
-| 3 | MEDIUM | GitHub/Elena | PR#291 CodeRabbit 3× 🟠 Major — NOT merged, team notified via Matrix |
-| 4 | LOW | Email/Carrick | Snyk vulnerability alert for marcel organization |
-| 5 | LOW | Email/Rick | Rollbar production error #857 ChunkLoadError (Fountain, deployment-related) |
-| 6 | INFO | Slack/GGS | Nick-GG daily report submitted today (Mar 25) for yesterday (Mar 24) — late |
+| 1 | **HIGH** | Discord/AirAgri | James Diamond: "huge issues" with stop alarm logic today — requesting urgent PHP8 + DB fix from Vinn |
+| 2 | MEDIUM | Fountain/Trello | 8 customer comments from @kunalsheth today on GiftDrop + build-a-box |
+| 3 | MEDIUM | Google Docs | LongVV Tue 24/03: 0h logged, no leave record found |
+| 4 | MEDIUM | GitHub/Elena | PR#291 CodeRabbit 3× 🟠 Major — NOT merged, team notified via Matrix |
+| 5 | LOW | Email/Carrick | Snyk vulnerability alert for marcel organization |
+| 6 | LOW | Email/Rick | Rollbar production error #857 ChunkLoadError (Fountain, deployment-related) |
+| 7 | INFO | Slack/GGS | Nick-GG daily report submitted today (Mar 25) for yesterday (Mar 24) — late |
 
 ---
 
@@ -119,7 +120,8 @@ ViTHT: 22h · ThinhT: 4h · HaVS: 24h · VuTQ: 40h · QC: 22.5h
 
 **Check Progress (17/20 completed):**
 - ✅ Maddy/Kai/Luis · Blake · John Yi/Amazing Meds
-- ✅ James Diamond/Vinn · Rory · Aysar · Franc · Elliott
+- ⚠️ **James Diamond/Vinn** — un-completed: active production issue (stop alarm logic, James requesting urgent fix)
+- ✅ Rory · Aysar · Franc · Elliott
 - ✅ MPFC · Marcel · Raymond/LegalAtoms · Neural Contract
 - ✅ Bailey · Rebecca/William Bills · Colin · Elena WordPress
 - ⏭️ **Elena/SamGuard Digital Plant** — PR#291 CodeRabbit issues, not merged
