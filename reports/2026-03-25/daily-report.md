@@ -130,7 +130,7 @@ ViTHT: 22h · ThinhT: 4h · HaVS: 24h · VuTQ: 40h · QC: 22.5h
 
 ## Task Log Reminders Sent
 
-- **None** — LongVV (0h Tue) has no configured Matrix room. Flagged in report above.
+- **LongVV**: 0h on Tue 24/03 (no leave record) → reminder sent to `!bvdwOOxprsKJBTjSeQ:nustechnology.com`
 
 ---
 

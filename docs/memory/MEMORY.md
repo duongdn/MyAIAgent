@@ -19,3 +19,4 @@
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
+- [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders (LongVV, PhucVT, LeNH, Elena team)

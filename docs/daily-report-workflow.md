@@ -145,6 +145,7 @@ Message format: `"Hi {name}, task log for {date} is missing (0h logged). Please 
 |-----------|---------|---------------|
 | PhucVT | James Diamond | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
 | LeNH | Rory/Franc/Aysar | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
+| LongVV | Xtreme Soft | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
 
 Add more rooms as they are provided. Skip developers on confirmed leave or adhoc projects (Marcel).
 
