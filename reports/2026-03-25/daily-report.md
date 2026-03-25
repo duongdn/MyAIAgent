@@ -23,7 +23,7 @@
 
 | Source | Status | Key Findings |
 |--------|--------|--------------|
-| Email (6) | ✓ OK | Leave requests, Snyk alert, Redmine bugs (Generator), Rollbar |
+| Email (6) | ✓ OK | 69 emails: leave requests (HaoNV 30-31/03), Snyk alert (carrick), Redmine bugs #77838+#77841 (Generator), Rollbar FountainGifts, 53 Precognize GitHub notifications (5 active PRs) |
 | Slack (12 xoxp) | ✓ OK | Active across 10 ws, no critical alerts |
 | Slack (Amazing Meds) | ✓ OK | 4 msgs — IT/email-marketing, no alerts |
 | Slack (Equanimity) | ✓ OK | 0 msgs |
@@ -36,6 +36,58 @@
 | GitHub/Precognize | ❌ ERROR | nusken token 404 — cannot access |
 | Redmine | ✓ OK | No new deploys this window |
 | Trello | ✓ 17/20 | Elena + Andrew Taraba + Fountain skipped |
+
+---
+
+## Email
+
+**69 emails in window across 6 accounts** (after filtering noise/automated notifications)
+
+### duongdn@nustechnology.com (6 emails)
+| Time | From | Subject |
+|------|------|---------|
+| 03/24 14:16 | Chien Tran | Re: Xin nghỉ phép |
+| 03/24 14:31 | Hao Nguyen (haonv) | **HaoNV_Đơn Xin Nghỉ Phép — 30/03 và 31/03/2026** |
+| 03/24 14:56 | Cuong Nguyen (Google Sheets) | Spreadsheet shared: NUS_HR_Checklist_Employee_Resignation_BinhLQ_0_1 |
+| 03/24 15:29 | Binh Nguyen (binhnt) | Re: Đơn Xin Nghỉ Phép |
+| 03/24 15:29 | Binh Nguyen (binhnt) | Re: HaoNV_Đơn Xin Nghỉ Phép |
+| 03/24 16:58 | Ha Le (halt) | [Finance] V/v Quyết Toán Thuế TNCN 2025 |
+
+### carrick@nustechnology.com (5 emails)
+| Time | From | Subject |
+|------|------|---------|
+| 03/24 16:53 | NUS Redmine | **Bug #77841** — [Generator] Date filter does not work |
+| 03/24 20:51 | Snyk | **Vulnerability alert for the marcel organization** ⚠️ |
+| 03/24 23:00 | Jira | Carrick — weekly update 24 Mar (Swift Studio) |
+| 03/25 08:57 | NUS Redmine | Bug #77838 — [Generator] Evacuation Report absent data |
+| 03/25 08:57 | NUS Redmine | Bug #77841 — [Generator] Date filter does not work (update) |
+
+### rick@nustechnology.com (5 filtered emails)
+| Time | From | Subject |
+|------|------|---------|
+| 03/24 15:06 | Rollbar | InfinityRoses - Daily Summary - Tue 24 Mar (×2) |
+| 03/24 17:00 | BugSnag | [FountainStaging] NameError in shipstation:reconcile_shipments — staging only, INFO |
+| 03/25 08:07 | Rollbar | **FountainGifts - Daily Summary - Wed 25 Mar** (×2) ⚠️ |
+
+### nick@nustechnology.com — 0 filtered emails (filter: John Yi)
+
+### kai@nustechnology.com (1 email)
+| Time | From | Subject |
+|------|------|---------|
+| 03/24 15:50 | Jira | Kai — weekly update 24 Mar (Madhuraka) |
+
+### ken@nustechnology.com — Precognize/development (53 GitHub notification emails)
+Active PRs with discussion:
+- **PR #4785** — SR-7191 unit test for named influencers (nusdavid, majdhajjo08, KfirBernstein)
+- **PR #4791** — SR-7102 hybrid time config API (nusdavid, majdhajjo08, KfirBernstein, mahkris)
+- **PR #4792** — SR-7165 REST→socket adjustments (KfirBernstein, majdhajjo08)
+- **PR #4793** — SR-7105 close API optional fields (mahkris, majdhajjo08, KfirBernstein) — most active
+- **PR #4794** — SR-7196 fix part-type migration for new customer (nustom, KfirBernstein)
+- **PR #4795** — add optional chaining for dateRange fields (Vladimir-precog) — new PR
+- **PR #4796** — SR-7184 late/early creates missed event (mahkris) — new PR
+- **PR #4797** — add optional chaining dateRange fields v2 (Vladimir-precog) — new PR
+
+Note: nusken token returns 404 on Precognize/development via GitHub API — PRs tracked via email only.
 
 ---
 
