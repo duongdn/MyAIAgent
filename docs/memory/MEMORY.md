@@ -17,6 +17,13 @@
 - [feedback_staging_errors_not_alert.md](feedback_staging_errors_not_alert.md) — Staging environment errors (BugSnag, Rollbar) are INFO, not blocking alerts — only production matters
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Upwork comparison: sum ALL hours (official + part-time) to match Upwork tracked time
 
+- [feedback_ignore_checklist_item_name.md](feedback_ignore_checklist_item_name.md) — Never interpret checklist item text as status — completion based only on alerts found
+- [feedback_discord_token_validation.md](feedback_discord_token_validation.md) — MUST verify Discord tokens with 3-step curl check before reporting expired — recurring false alarm
+- [feedback_timeline_update_critical.md](feedback_timeline_update_critical.md) — CRITICAL: MUST update .monitoring-timelines.json at end of EVERY run
+- [feedback_upwork_in_daily_report.md](feedback_upwork_in_daily_report.md) — Upwork monitoring must be included in daily report — 5 workrooms, 3 accounts
+- [feedback_matrix_join_public_room.md](feedback_matrix_join_public_room.md) — Matrix "not in room" = just POST /join, no permission/invite needed
+- [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions are NOT monitoring alerts — don't block Trello checklist for project bugs
+
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders (LongVV, PhucVT, LeNH, Elena team)
