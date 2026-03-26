@@ -29,7 +29,7 @@
 | Discord (2 acct) | OK (tokens valid) | Jeff reports PRESENT all 3 days; Vinn sick Mar 24, no formal report Mar 25, posted Mar 26 |
 | Google Sheets | OK | LongVV 8h, PhucVT 8h, VietPH 8h, KhanhHH **0h**, LeNH **0h**, TuanNT on leave, DuongDN Marcel 0h (adhoc OK) |
 | Scrin.io | OK | TuanNT 0h (consistent with leave). Monthly total: 51h 04m |
-| Daily checks | Kai PRESENT, Nick-GG PRESENT, Jeff PRESENT, Vinn PARTIAL | Vinn missed formal report Mar 25 |
+| Daily checks | Kai PRESENT, Nick-GG PRESENT, Jeff PRESENT, Vinn PRESENT | Vinn sick Mar 24 (expected), back Mar 25 |
 | Matrix/Fountain | OK (retry succeeded) | Weekly plan found: ViTHT 22h, ThinhT 4h, HaVS 24h, VuQT 40h, QC 22.5h |
 | GitHub | Elena: PRs #291 + #292 **merged + deployed**; Precognize: nusken PR #4750 WIP | Redmine #77793 updated |
 | Redmine | OK (13 issues updated) | Fountain Card #2595 bugs (5); Paturevision grazing issues on staging (3); expired promo codes HIGH |
@@ -251,7 +251,6 @@ No readable channels with activity (Missing Access — known limitation).
   - **Elena - SamGuard** — PRs now deployed, can complete next run
   - **Fountain** — plan found but full 5-part check incomplete (capacity & over-estimate data missing)
   - **Rebecca (William Bills)** — subscription duplicate bug (MEDIUM)
-  - **James Diamond - Vinn** — missed formal report Mar 25
 
 ## Task Log Reminders
 
@@ -269,4 +268,3 @@ No readable channels with activity (Missing Access — known limitation).
 5. **Equanimity face scan failure** — Carrick + Will tagged since Mar 25. What's the status?
 6. **Generator serenitypines bug** — Carrick + Violet to investigate today.
 7. **TuanNT leave** — confirmed Mon-Wed. Returning Thu 26?
-8. **Vinn** — missing formal daily report Mar 25. James flagged communication gaps.
