@@ -6,7 +6,6 @@
 
 | Severity | Source | Summary | Link |
 |----------|--------|---------|------|
-| HIGH | Discord | Guild channel access 403 on all 3 servers (AirAgri, HOMIEAPP, Bizurk). Tokens authenticate but lack guild permissions | — |
 | MEDIUM | Email/rick | FountainGifts prod PG::AmbiguousColumn error #254 (new, different from DB connection refused) | Rollbar |
 | MEDIUM | Google Sheets | Fountain team — ViTHT, HungPN, TrinhMTT all **0h entire week**. ThinhT only 4h | |
 | MEDIUM | Scrin.io | TuanNT Scrin tracker active (1h 25m today) despite being on full-day leave in task log | |
@@ -16,7 +15,7 @@
 | Source | Status | New Since 08:21 |
 |--------|--------|-----------------|
 | Slack (14 ws) | OK | 77 msgs across 9 ws — Generator busy (Rudi issues), WilliamBills ticket complaints, Equanimity fix pushed |
-| Discord (2 acct) | **403** | Tokens valid but guild channels forbidden — permission issue |
+| Discord (2 acct) | OK | No new messages since 08:21 across AirAgri, HOMIEAPP, Bizurk |
 | Email (6) | OK | rick@: Fountain PG error; nick@: Azure DevOps PRs; ken@: 7 GitHub PRs; duongdn@: remote work requests |
 | Google Sheets | OK | Most devs 0h today (normal at 10AM). Fountain team concern below |
 | Scrin.io | OK | TuanNT 1h 25m tracked despite leave |
@@ -86,8 +85,7 @@
 
 ## Unresolved Questions
 
-1. **Discord 403** — guild channel access forbidden despite valid tokens. Permissions changed? Needs manual check.
-2. **Fountain team 0h** — ViTHT, HungPN, TrinhMTT all 0h entire week in task log. Different logging system? Or not yet filled?
+1. **Fountain team 0h** — ViTHT, HungPN, TrinhMTT all 0h entire week in task log. Different logging system? Or not yet filled?
 3. **TuanNT Scrin active on leave** — 1h 25m tracked today while marked full-day off.
 4. **LeNH below target** — task log 15.83h in 3 days (~5.3h/day) vs Upwork 22h. Discrepancy.
 5. **WilliamBills ticket visibility** — users complaining again. Same issue or new?
