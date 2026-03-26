@@ -34,6 +34,7 @@
 | GitHub | Elena: PRs #291 + #292 **merged + deployed**; Precognize: nusken PR #4750 WIP | Redmine #77793 updated |
 | Redmine | OK (13 issues updated) | Fountain Card #2595 bugs (5); Paturevision grazing issues on staging (3); expired promo codes HIGH |
 | Trello | 17/22 completed | 12 Check Progress + 5 Check Mail done; 5 progress + 1 mail skipped (alerts) |
+| Upwork (5 rooms) | OK | LeNH 21h (Rory 17h + Aysar 4h); VietPH 14h Bailey; DuongDN 0h; Neural 0h |
 
 ## Email Details
 
@@ -257,6 +258,23 @@ No readable channels with activity (Missing Access — known limitation).
 |-----------|--------------|----------|
 | KhanhHH | 0h, no leave | No Matrix room configured — **manual follow-up needed** |
 | LeNH | 0h, no leave | Reminder sent to Matrix room (event: $r77P2izj9zszpFcAGoMEugcBJcikvKcAuHaeyClXRn8) |
+
+## Upwork Weekly Hours (Mar 23–29)
+
+| Workroom | Client | Developer | This Week | Last Week | Daily Breakdown (Mon–Thu) |
+|----------|--------|-----------|-----------|-----------|---------------------------|
+| Rory | Rory Hackett | LeNH | 17:00 | 40:10 | 4h, 7.83h, 4.17h, 1h |
+| Aysar | Aysar K | LeNH | 4:00 | 0:00 | 4h, 0, 0, 0 |
+| Bailey DEV1 | Bailey Joey | VietPH | 14:00 | 32:00 | 0, 4h, 8h, 2h |
+| Bailey DEV3 | Bailey Joey | DuongDN | 0:00 | 2:40 | 0, 0, 0, 0 |
+| Neural Contract | Neural Contract | external | 0:00 | 2:30 | 0, 0, 0, 0 |
+
+**Notes:**
+- LeNH: Rory 17h + Aysar 4h = **21h total** (Mon–Thu). Note: 0h logged in task log on Mar 25 but 7.83h tracked on Upwork Rory — discrepancy, investigate
+- VietPH: 14h Bailey DEV1 this week so far
+- DuongDN: 0h Bailey DEV3 this week (last week only 2:40h — low activity)
+- Neural Contract: 0h this week (external, messages-only monitoring)
+- Aysar: 4h Mon only — config says "Inactive since ~Mar 9, HẾT TASK" but 4h tracked this Monday
 
 ## Unresolved Questions
 
