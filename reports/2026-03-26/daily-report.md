@@ -228,7 +228,7 @@ No readable channels with activity (Missing Access — known limitation).
 - **PR #292** (fix/redmine/77793): **Merged + deployed** (SHA: 525dfc8). Redmine #77793 → Deployed. [PR](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/292)
 - **PR #291** (DP-648): **Merged + deployed** (SHA: a8497d7). DP ticket, no Redmine. [PR](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/291)
 - Build successful on MayBanServer (15.8s). Check: https://process-digital-plant2.nusdev.net/
-- Matrix announcement failed (duongdn lacks room access to Elena - Digital Plant room — needs invite)
+- Matrix announcement sent (duongdn joined room + deployed message posted)
 
 ### Precognize (nusken)
 - **PR #4750** (WIP DPP upgrade): Open, still WIP
@@ -265,7 +265,7 @@ No readable channels with activity (Missing Access — known limitation).
 1. **FountainGifts DB connection refused** — is this ongoing or recovered? Needs immediate check.
 2. **KhanhHH 0h Mar 25** — was he on leave or forgot to log?
 3. **LeNH 0h Mar 25** — confirm if on leave.
-4. **Matrix Elena room** — duongdn account lacks send permission to Elena - Digital Plant room. Needs invite.
+4. **Matrix Elena room** — Resolved: duongdn joined room and announcement sent.
 5. **Equanimity face scan failure** — Carrick + Will tagged since Mar 25. What's the status?
 6. **Generator serenitypines bug** — Carrick + Violet to investigate today.
 7. **TuanNT leave** — confirmed Mon-Wed. Returning Thu 26?
