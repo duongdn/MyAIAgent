@@ -24,6 +24,8 @@
 - [feedback_matrix_join_public_room.md](feedback_matrix_join_public_room.md) — Matrix "not in room" = just POST /join, no permission/invite needed
 - [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions are NOT monitoring alerts — don't block Trello checklist for project bugs
 
+- [feedback_dual_memory_system.md](feedback_dual_memory_system.md) — ALWAYS save to BOTH Claude memory AND docs/memory/ in project
+
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders (LongVV, PhucVT, LeNH, Elena team)
