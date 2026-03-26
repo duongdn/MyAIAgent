@@ -1,0 +1,7 @@
+#!/bin/bash
+# Auto-decrypt secrets after git pull/merge if .enc files changed
+CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD | grep '\.enc$' || true)
+if [ -n "$CHANGED" ]; then
+  echo "Encrypted config files changed — running decrypt..."
+  bash scripts/decrypt-secrets.sh
+fi
