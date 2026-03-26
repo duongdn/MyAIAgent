@@ -250,7 +250,6 @@ No readable channels with activity (Missing Access — known limitation).
   - **Marcel** — Equanimity face scan failure (HIGH)
   - **Elena - SamGuard** — PRs now deployed, can complete next run
   - **Fountain** — plan found but full 5-part check incomplete (capacity & over-estimate data missing)
-  - **Rebecca (William Bills)** — subscription duplicate bug (MEDIUM)
 
 ## Task Log Reminders
 
