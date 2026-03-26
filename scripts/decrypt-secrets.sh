@@ -26,11 +26,9 @@ ENC_FILES=(
   config/.trello-config.json.enc
   config/.scrin-config.json.enc
   config/.redmine-config.json.enc
-  config/.elena-pending-actions.json.enc
   config/.matrix-config.json.enc
   config/.web-monitors.json.enc
   config/.jira-config.json.enc
-  config/.monitoring-timelines.json.enc
   config/.bailey-config.json.enc
   config/.upwork-config.json.enc
 )

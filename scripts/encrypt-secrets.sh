@@ -26,11 +26,9 @@ SECRET_FILES=(
   config/.trello-config.json
   config/.scrin-config.json
   config/.redmine-config.json
-  config/.elena-pending-actions.json
   config/.matrix-config.json
   config/.web-monitors.json
   config/.jira-config.json
-  config/.monitoring-timelines.json
   config/.bailey-config.json
   config/.upwork-config.json
 )

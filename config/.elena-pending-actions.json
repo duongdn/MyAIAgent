@@ -1,0 +1,94 @@
+{
+  "description": "Elena-SamGuard-Digital-Plant pending deployment/status update actions",
+  "repo": "nustechnology/Elena-SamGuard-Digital-Plant",
+  "default_branch": "process-digital-plant",
+  "deploy": {
+    "ssh_host": "MayBanServer",
+    "project_path": "projects/Elena/Elena-SamGuard-Digital-Plant/process-digital-plant",
+    "build_cmd": "export NVM_DIR=$HOME/.nvm && source $NVM_DIR/nvm.sh && nvm use 22 && npx ng build --configuration development",
+    "node_version": "22"
+  },
+  "announce": {
+    "matrix_room_id": "!kyArBadvcbfPIpIxpD:nustechnology.com",
+    "room_name": "Elena - Digital Plant",
+    "homeserver": "https://matrix.nustechnology.com",
+    "dev_url": "https://process-digital-plant2.nusdev.net/",
+    "on_deploy": "Announce merged PRs with links + dev URL to check result",
+    "on_review_fail": "Announce PR failed review with link + reason (CodeRabbit high-risk or manual concern)"
+  },
+  "merged": [
+    {
+      "pr": 289,
+      "branch": "fix/redmine/77734",
+      "type": "redmine",
+      "ticket_id": "77734",
+      "merged_at": "2026-03-19",
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #77734 marked as Deployed on 2026-03-19"
+    },
+    {
+      "pr": 290,
+      "branch": "DP-648",
+      "type": "dp",
+      "ticket_id": "DP-648",
+      "merged_at": "2026-03-24",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DP-648 merged + deployed on 2026-03-24, announced to Matrix"
+    },
+    {
+      "pr": 292,
+      "branch": "fix/redmine/77793",
+      "type": "redmine",
+      "ticket_id": "77793",
+      "merged_at": "2026-03-26",
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #77793 marked as Deployed on 2026-03-26"
+    },
+    {
+      "pr": 291,
+      "branch": "DP-648",
+      "type": "dp",
+      "ticket_id": "DP-648",
+      "merged_at": "2026-03-26",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DP-648 merged + deployed on 2026-03-26"
+    }
+  ],
+  "blocked": [],
+  "deployed_no_status_update": [
+    {
+      "pr": 288,
+      "branch": "DP-650",
+      "type": "dp",
+      "ticket_id": "DP-650",
+      "merged_at": "2026-03-19",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DP-650 merged + deployed but ticket status not updated (no Redmine for DP tickets)"
+    },
+    {
+      "pr": 290,
+      "branch": "DP-648",
+      "type": "dp",
+      "ticket_id": "DP-648",
+      "merged_at": "2026-03-24",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DP-648 merged + deployed but ticket status not updated (no Redmine for DP tickets)"
+    },
+    {
+      "pr": 291,
+      "branch": "DP-648",
+      "type": "dp",
+      "ticket_id": "DP-648",
+      "merged_at": "2026-03-26",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DP-648 merged + deployed on 2026-03-26"
+    }
+  ]
+}
