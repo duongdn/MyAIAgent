@@ -1,8 +1,12 @@
 const https = require("https");
-const accounts = [
-  {user: "nusvinn", token: "DISCORD_TOKEN_NUSVINN", servers: ["AirAgri","HOMIEAPP"]},
-  {user: "nuscarrick", token: "DISCORD_TOKEN_NUSCARRICK", servers: ["Bizurk"]}
-];
+const fs = require("fs");
+const path = require("path");
+
+// Load accounts from config file (encrypted at rest)
+const configPath = path.join(__dirname, "..", "config", ".discord-accounts.json");
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
+const accounts = config.accounts;
+
 const cutoffMs = new Date("2026-03-24T10:30:00+07:00").getTime();
 const cutoffSnowflake = ((BigInt(cutoffMs) - 1420070400000n) << 22n).toString();
 
