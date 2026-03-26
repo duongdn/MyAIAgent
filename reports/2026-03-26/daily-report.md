@@ -18,6 +18,7 @@
 | MEDIUM | Email/rick | FountainGifts ChunkLoadError #857 (Mar 24), FountainStaging shipstation NameError (repeated) | Rollbar/BugSnag |
 | MEDIUM | Fountain | ThinhT only 4h this week (Tue only), ViTHT 0h (Mon leave + Wed unfilled), HungPN 0h all week | |
 | MEDIUM | Redmine | Paturevision #77819 — expired promo codes accepted at checkout (High priority, New) | https://redmine.nustechnology.com/issues/77819 |
+| MEDIUM | Trello/Fountain | Shipstation missing-order bug recurred (mike62798179: "This issue has happened again") | Fountain Trello board |
 
 ## Source Summary
 
@@ -29,10 +30,10 @@
 | Google Sheets | OK | LongVV 8h, PhucVT 8h, VietPH 8h, KhanhHH **0h**, LeNH **0h**, TuanNT on leave, DuongDN Marcel 0h (adhoc OK) |
 | Scrin.io | OK | TuanNT 0h (consistent with leave). Monthly total: 51h 04m |
 | Daily checks | Kai PRESENT, Nick-GG PRESENT, Jeff PRESENT, Vinn PARTIAL | Vinn missed formal report Mar 25 |
-| Matrix/Fountain | Token OK, **0 messages returned** | Weekly plan data unavailable — room may be inactive or access issue |
-| GitHub | Elena: PRs #291 + #292 open mergeable; Precognize: nusken PR #4750 WIP | Auto-deploy in progress |
+| Matrix/Fountain | OK (retry succeeded) | Weekly plan found: ViTHT 22h, ThinhT 4h, HaVS 24h, VuQT 40h, QC 22.5h |
+| GitHub | Elena: PRs #291 + #292 **merged + deployed**; Precognize: nusken PR #4750 WIP | Redmine #77793 updated |
 | Redmine | OK (13 issues updated) | Fountain Card #2595 bugs (5); Paturevision grazing issues on staging (3); expired promo codes HIGH |
-| Trello | Pending | Completion in progress |
+| Trello | 17/22 completed | 12 Check Progress + 5 Check Mail done; 5 progress + 1 mail skipped (alerts) |
 
 ## Email Details
 
@@ -183,11 +184,26 @@ No readable channels with activity (Missing Access — known limitation).
 | HungPN | QC | 0h | 0h | LOW — no entries this week |
 | HaVS | Dev | 0h | 0h | No entries |
 
-**Matrix weekly plan:** Unavailable — Fountain room returned 0 messages. Cannot compare plan vs actual.
+### Matrix Weekly Plan (from @trinhmtt, Mar 24)
+- ViTHT: 22h | ThinhT: 4h | HaVS: 24h | VuQT: 40h | QC: 22.5h
 
-**Capacity & runway:** Data pending — requires Matrix plan + "Est vs Charged" tab.
+### Plan vs Actual — W19 (partial, Mon-Wed)
 
-**Over-estimate tracking:** Redmine shows Card #2595 has 5 active bugs (2 Resolved, 3 New). Active development ongoing.
+| Dev | Role | Plan | W19 Actual | Status |
+|-----|------|------|-----------|--------|
+| VuTQ | Dev | 40h | 24h | On track (60% at midweek) |
+| ViTHT | Dev | 22h | 0h | **BEHIND** — Mon leave, Wed unfilled |
+| ThinhT | Dev | 4h | 4h | Done (plan met) |
+| HaVS | Dev | 24h | 0h | **BEHIND** — no entries |
+| PhatDLT | QC | ~22.5h (shared) | 9h | On track |
+| HungPN | QC | ~22.5h (shared) | 0h | **BEHIND** — no entries |
+
+**Over-estimate tracking:** Redmine Card #2595 has 5 active bugs (2 Resolved, 3 New). Active development ongoing.
+
+### Fountain Trello Customer Comments (14 since cutoff)
+- **@tmmckay** (5): Smart Link modal, Product page tooltip, GiftDrop redemption flow, Corporate gifting approval, GiftDrop tidy ups
+- **@kunalsheth** (8): GiftDrop push-live coordination, preview links, build-a-box modal, branded packaging, Gift of Choice, corporate gifting QC deadline
+- **@mike62798179** (1): **Shipstation missing-order bug recurred** ("This issue has happened again") — needs investigation
 
 ### Fountain Redmine Activity
 - #77865: [Card 2595] "What include" not shown on swap page → **Resolved** (VuTQ)
@@ -209,9 +225,10 @@ No readable channels with activity (Missing Access — known limitation).
 ## GitHub
 
 ### Elena-SamGuard (duongdn)
-- **PR #292** (fix/redmine/77793): Open, mergeable → auto-deploy in progress
-- **PR #291** (DP-648): Open, mergeable → auto-deploy in progress
-- PR #290 (DP-648): Closed (superseded by #291)
+- **PR #292** (fix/redmine/77793): **Merged + deployed** (SHA: 525dfc8). Redmine #77793 → Deployed. [PR](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/292)
+- **PR #291** (DP-648): **Merged + deployed** (SHA: a8497d7). DP ticket, no Redmine. [PR](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/291)
+- Build successful on MayBanServer (15.8s). Check: https://process-digital-plant2.nusdev.net/
+- Matrix announcement failed (duongdn lacks room access to Elena - Digital Plant room — needs invite)
 
 ### Precognize (nusken)
 - **PR #4750** (WIP DPP upgrade): Open, still WIP
@@ -222,21 +239,33 @@ No readable channels with activity (Missing Access — known limitation).
 
 ## Trello Status
 
-*(Completion in progress — results pending)*
+**Check Mail:** 5/6 completed
+- Completed: DuongDN, Carrick, Nick, Kai, Ken
+- Skipped: **Rick** — FountainGifts DB connection refused (CRITICAL)
+
+**Check Progress:** 12/17+ completed
+- Completed: Maddy, Blake, John Yi, Rory, Aysar, Franc, MPFC, Raymond, Neural Contract, Bailey, Andrew Taraba, Colin
+- NOT completed (with reason):
+  - **Elliott** — post-release Incident Management bug (Generator)
+  - **Marcel** — Equanimity face scan failure (HIGH)
+  - **Elena - SamGuard** — PRs now deployed, can complete next run
+  - **Fountain** — plan found but full 5-part check incomplete (capacity & over-estimate data missing)
+  - **Rebecca (William Bills)** — subscription duplicate bug (MEDIUM)
+  - **James Diamond - Vinn** — missed formal report Mar 25
 
 ## Task Log Reminders
 
 | Developer | Mar 25 Status | Reminder |
 |-----------|--------------|----------|
-| KhanhHH | 0h, no leave | No Matrix room configured — manual follow-up needed |
-| LeNH | 0h, no leave | Reminder sent to Matrix room |
+| KhanhHH | 0h, no leave | No Matrix room configured — **manual follow-up needed** |
+| LeNH | 0h, no leave | Reminder sent to Matrix room (event: $r77P2izj9zszpFcAGoMEugcBJcikvKcAuHaeyClXRn8) |
 
 ## Unresolved Questions
 
 1. **FountainGifts DB connection refused** — is this ongoing or recovered? Needs immediate check.
 2. **KhanhHH 0h Mar 25** — was he on leave or forgot to log?
 3. **LeNH 0h Mar 25** — confirm if on leave.
-4. **Matrix Fountain room 0 messages** — room inactive or access issue? Weekly plan comparison incomplete.
+4. **Matrix Elena room** — duongdn account lacks send permission to Elena - Digital Plant room. Needs invite.
 5. **Equanimity face scan failure** — Carrick + Will tagged since Mar 25. What's the status?
 6. **Generator serenitypines bug** — Carrick + Violet to investigate today.
 7. **TuanNT leave** — confirmed Mon-Wed. Returning Thu 26?
