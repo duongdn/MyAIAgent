@@ -157,15 +157,24 @@
 
 ## Trello Status
 
-*(Pending — completion after report review)*
+**Check Progress:** 14/18 completed, 4 skipped
+**Check Mail:** 6/6 completed
+
+**Completed:** Maddy, Blake, James Diamond/Vinn, Franc, Aysar, Elliott, Raymond/LegalAtoms, Colin/Aigile, Andrew/Bizurk, Elena/SamGuard, MPFC, Neural Contract, Marcel, Bailey
+
+**Not completed (alerts):**
+- **John Yi / Amazing Meds** — TuanNT 0h Thu, Scrin shows 4h53m
+- **Rory** — LeNH 0h Wed+Thu (Upwork discrepancy)
+- **Rebecca / William Bills** — TuanNT 0h Thu
+- **Fountain** — ViTHT 0h entire week, VuTQ 0h Thu, HungPN 0h
 
 ## Task Log Reminders
 
-| Developer | Thu Status | Action |
-|-----------|-----------|--------|
-| LongVV | 0h, no leave | Send Matrix reminder |
-| TuanNT | 0h (Scrin 4h53m) | Send Matrix reminder |
-| LeNH | 0h Wed+Thu | Send Matrix reminder |
+| Developer | Status | Action |
+|-----------|--------|--------|
+| LongVV | 0h Thu, no leave | ✓ Matrix reminder sent |
+| LeNH | 0h Wed+Thu | ✓ Matrix reminder sent |
+| TuanNT | 0h Thu (Scrin 4h53m) | No Matrix room — **manual follow-up needed** |
 
 ## Unresolved Questions
 
