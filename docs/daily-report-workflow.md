@@ -106,7 +106,9 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
      3. **Plan vs Actual table**: Compare each dev's plan vs actual, flag mismatch
      4. **Capacity & Runway**: "Est vs Charged" tab — remaining est, runway at dev capacity, delta vs previous report
      5. **Over-estimate tracking**: Tasks where actual > est +20%, compare with previous report (growing vs stable). Key: #2595, #2615
+     **Plus Trello board:** Customer comments, active task counts, stuck tasks (>5d), hard-to-release (>14d in Doing)
      Devs: ViTHT, ThinhT, VuTQ, HaVS. QC: PhatDLT, HungPN. Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`. Complete ONLY if all 5 parts checked and clean.
+     **VALIDATION GATE:** Before finalizing daily report, verify Fountain section contains ALL 5 parts + Trello board. If ANY part missing, run Fountain agent before declaring report complete. This has been missed multiple days — NEVER skip again.
 - Rebecca (William Bills) → Slack "William Bills" + Google Docs TuanNT task log (Rebecca sheet). Complete if no Slack alerts AND TuanNT task log confirmed (not "Chưa").
 - Neural Contract → Email search "Carrick" + keyword "Neural". Complete if no alerts.
 

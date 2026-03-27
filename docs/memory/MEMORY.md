@@ -26,6 +26,7 @@
 
 - [feedback_dual_memory_system.md](feedback_dual_memory_system.md) — ALWAYS save to BOTH Claude memory AND docs/memory/ in project
 - [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
+- [feedback_fountain_always_5part.md](feedback_fountain_always_5part.md) — CRITICAL: Fountain 5-part check keeps getting missed, MUST validate all parts before finalizing report
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
