@@ -1,128 +1,178 @@
-# Daily Monitoring Report — 2026-03-27 (Friday)
+# Daily Report — 2026-03-27 08:07
 
-**Window:** 2026-03-26 08:21 → 2026-03-27 08:07 (Asia/Saigon)
+**Window:** 2026-03-26T08:21 → 2026-03-27T08:07 (+07:00)
 
----
+## Alerts
 
-## DISCORD
+| Severity | Source | Summary | Link |
+|----------|--------|---------|------|
+| HIGH | Google Sheets | **LongVV 0h** Thu — no leave, task log not written | |
+| HIGH | Google Sheets | **TuanNT 0h** Thu ALL projects despite Scrin 4h53m — task log not written post-leave | |
+| HIGH | Google Sheets | **LeNH 0h** Wed+Thu all 3 projects — Upwork shows 9.5h tracked (4.17h+5.33h Rory). Discrepancy | |
+| HIGH | Google Sheets | Fountain **ViTHT 0h entire week**, HungPN 0h entire week | |
+| MEDIUM | Google Sheets | Fountain **VuTQ 0h Thu** after consistent 8h Mon-Wed. No leave | |
+| MEDIUM | Google Sheets | Fountain **ThinhT 4h Tue only**, 0h rest of week | |
+| MEDIUM | Email/rick | Fountain prod **ChunkLoadError #858** on fountaingifts.com | Rollbar |
+| MEDIUM | Slack/WilliamBills | **Maxwell site malware** — spam injection (lacult.org, docslid.org) since 2024. Oliver planning full rebuild | |
+| INFO | Email/rick | FountainStaging 3 BugSnag errors (staging, not prod) | |
+| INFO | Slack/SwiftStudio | BXR app 2FA bug — phone number already exists on verify popup | |
+| INFO | Slack/AmazingMeds | Mobile questionnaire form missing button (Gil flagged) | |
 
-### AirAgri (nusvinn) — Token OK
+## Source Summary
 
-**#airagri_webapp** — Very active (100+ messages)
+| Source | Status | Key Findings |
+|--------|--------|--------------|
+| Email (6) | OK | rick@: Fountain prod+staging errors; ken@: 13 Precognize PR notifications; kai@: Jira notifications; duongdn@: DatNC leave request |
+| Slack (14 ws) | OK | 11/14 active; WilliamBills Maxwell malware; Swift Studio 2FA bug; Generator active (Carrick fixes); RDC tuner issues |
+| Discord (2 acct) | OK | Jeff ✓ (4h), Vinn ✓. AirAgri very active (Lora fix, incident hotfix, weather conversion) |
+| Google Sheets | ⚠️ | LongVV 0h Thu; TuanNT 0h Thu; LeNH 0h Wed+Thu; Fountain team mostly 0h |
+| Scrin.io | ⚠️ | TuanNT 4h53m Thu vs 0h task log — compliance issue |
+| Upwork (5) | OK | Rory/LeNH 21:20h, Bailey-VietPH 20:10h, Aysar 4h, others 0h |
+| Daily checks | Kai ✓, Nick-GG ✓, Jeff ✓, Vinn ✓ | All posted |
+| Matrix/Fountain | OK | Weekly plan: ViTHT 22h, ThinhT 4h, HaVS 22.5h, VuQT 40h, QC 22h |
+| GitHub | OK | Elena: 0 open PRs (deployed yesterday). Precognize: 6 open, 4 new (SR-7204, SR-7198, SR-7102, nusken) |
+| Redmine | OK | 7 updated: #77836 + #77839 deployed live; #77818 deployed staging; #77876 + #77874 new |
+| Trello | pending | See below |
 
-Key activity:
-- **Lora sensor data issue**: Vinn investigated & fixed Lora sensor not showing on AirAgri. Leon (dapackage) had a related safety-net fix in staging. Confirmed both old and new Lora sensors now showing data.
-- **Incident reporting broken on production**: Brett Millar reported users at processing facility getting server/domain errors. Leon identified root cause — yesterday's production push included notification logic from staging without try/catch. Fix pushed in PR276 (Throwable), merged & deployed to production. Confirmed working.
-- **Weather unit conversion hotfix**: Brett requested wind speed change from knots to km/h. Leon did PR274 (master) + PR275 (staging) with math conversion fix (1.94 -> 3.6). Vinn reviewed, asked for DRY refactor. Leon updated. Email conversion confirmed correct. **Issue**: webapp still showing knots per James — staging fix live but production PR not yet merged.
-- **EROAD sensor fix**: Leon added handling to skip EROAD sensors that crash cron job (same pattern as staging).
-- **PHP upgrade**: Vinn working on PHP 7.2 upgrade for production (in progress).
-- Vinn actively supporting Leon, reviewing code, coordinating with James (.jdiamond) and Mary (bellatric02).
+## Email Details
 
-**#airagri-flutter** — 26 messages
+### rick@nustechnology.com
+- Fountain prod ChunkLoadError #858 (loading chunk 7781 on fountaingifts.com)
+- FountainStaging: 3 BugSnag errors (NameError shipstation, ArgumentError EmailWorker, NoMethodError holiday_deliveries) — staging, INFO
+- InfinityRoses Rollbar daily summaries x2
 
-Key activity:
-- **Android app not loading**: James reported customer complaint. Jeff checked — store version was v152 (2.7) from Oct 2025, pointing to production. Backend changes since then caused incompatibility.
-- Leon built new Android release APK, Jeff submitted to Google Play — under review.
-- **Map pin icon update**: James requested SafeFarm + main app pin updates. Jeff waiting for Leon to send the PLD/device icon file.
-- Jeff working on Lessons Learned module (Save Draft, Distribute APIs) and Incident Approval.
+### ken@nustechnology.com
+- 13 GitHub notifications: PR #4798 (process digital plant), #4799 (SR-7102), #4800 (SR-7198), #4801 (SR-7202), #4802 (SR-7204)
 
-**Daily Reports (Wed Mar 26):**
+### kai@nustechnology.com
+- Jira: LIFM2-268 (email templates), LIFM2-425 (shipping manifest)
 
-| Person | Posted? | Time (UTC) | Summary |
-|--------|---------|------------|---------|
-| **Jeff** | YES | 10:23 | 4h: Lessons Learned APIs (Save Draft, Distribute) deployed iOS TF 3.4.1(14), Android build submitted, Incident Approval in progress |
-| **Vinn** | YES | 10:06 | Lora sensor fix (done), support Leon & Jon, code review, PHP upgrade for production (in progress) |
+### duongdn@nustechnology.com
+- DatNC leave request Fri 27/03, BinhNT approved
 
-**Daily Reports (Thu Mar 27):** Not yet posted (report generated at 08:07).
+### nick@, carrick@
+- No notable items
 
-### HOMIEAPP (nusvinn) — Token OK
+## Slack Details
 
-- **#homieapp_webapp** — 0 messages
-- **#homieapp_mobileapp** — Missing Access (permission issue)
-- **#general** — 0 messages
+**William Bills** (61 msgs) — Oliver reported urgent: MWMX upsell can't edit during live giveaway (Lucas fixed), users can't see tickets (investigating), **Maxwell site malware** (spam injection since 2024, rebuild planned ~24-30h)
 
-No activity in accessible channels during window.
+**Xtreme Soft** (32 msgs) — Kai working on LIFM2-268 (done), LIFM2-425 (shipping manifest 0KB files), LIFM2-429 (done), LIFM2-428 (in progress). Anoma raised padding/gap issue. **Kai daily report 17:18 ✓**
 
-### Bizurk (nuscarrick) — Token OK
+**Generator** (25 msgs) — Rudi hit doctrine/dbal error on prod (missing --no-dev). Carrick approved fix PR #307, fixed CMS seeder PR #309, deployed demo/staging. OTP code length 5→7. Rudi asking about home-settings bug.
 
-- **All dev channels** — Missing Access (50001). Bot can see guild but lacks channel-level read permissions.
-- **#welcome** — 0 messages
+**Swift Studio** (25 msgs) — Roryh reported 2FA verify phone bug (number already exists). Jeff + Carrick fixing. Bug persists after initial fix.
 
-**ALERT**: nuscarrick account has Missing Access on all Bizurk dev channels (fwf-frontend, wooha-frontend, tyqoon-frontend, otto-general, etc.). Channel permissions need to be granted.
+**RDC-FM** (15+ msgs) — Carrick restructured tuners, disabled old fmscan.com users. Dmetiner requested redirect fixes + new subdomain waqdiiqo.fmscan.com. Kocaeli tuner down.
 
----
+**Equanimity** (15 msgs) — Face scan fix pushed by Carrick after client complaint. Marcel asked for AI investigation summary.
 
-## MATRIX / FOUNTAIN
+**Amazing Meds** (14 msgs) — Nick back at work. Gil requested tab/button color changes (completed). **Gil flagged mobile questionnaire form missing button at 06:41 today.**
 
-**Token**: Refreshed successfully via Puppeteer.
+**Global Grazing** (13 msgs) — Amy deployed stock corrections + CSS + print button + permission fixes. Joey confirmed working. **Nick-GG daily report 17:32 ✓**
 
-**Fountain room** — Active
+**SAM GUARD** (6 msgs) — 5 HubSpot MQL leads, Kfir approved Precognize PR #4798, Kfir asking Michelle about PR merge delay
 
-**Weekly plan update (2026-03-26 09:31 by @trinhmtt):**
-> Em update plan tuan nay a
-> - ViTHT: 22h
-> - ThinhT: 4h
-> - HaVS: 22.5h
-> - VuQT: 40h
-> - =>QC: 22h
+**LegalAtoms** — Raymond planning release tonight (after 9pm Seattle). Tyler-journal: duplicate case filing issue flagged.
 
-**Other activity:**
-- @duongdn borrowed HaVS for ~1.5h for urgent Bailey task (HaVS total 1h Bailey, ~23h remaining for Fountain)
-- VuQT fixed product display issue (was showing 0 products)
-- HungPN & VuQT investigating: email missing for Gift Drop orders, order prices mismatch, Personal order emails missing. VuQT fixed 2 of 3 issues, third deferred to separate ticket.
-- ViTHT asking about Smart Link gift selection logic
-- Team discussing Trello cards: #2789 (product catalog revert), #2639 (card categories), #2615 (gift cards), #2380 (delivery dates)
+**Baamboozle** — 2 Typeform cancellation responses
 
----
+**Aigile Dev** — Automated blog draft notifications, 1 Attio alert
 
-## GITHUB
+**No activity:** MPFC, SoCal Auto Wraps
 
-### Elena-SamGuard-Digital-Plant (duongdn)
+## Discord Details
 
-**Open PRs:** 0
+**AirAgri** — Very active: Lora sensor fix deployed, incident reporting hotfix, weather knots→km/h conversion (staging done, prod PR pending), Android app rebuilt + submitted, PHP upgrade in progress
+- Jeff daily report: ✓ (4h — Lessons Learned APIs, Android build, Incident Approval)
+- Vinn daily report: ✓ (Lora fix, code review, PHP upgrade)
 
-**Recently merged (within window):**
-- **PR #292** — fix/redmine/77793: Merged 2026-03-26T01:23 — Settings save button fix. Deployed. Redmine #77793 marked Deployed.
-- **PR #291** — DP-648: Merged 2026-03-26T01:23 — Deployed.
+**HOMIEAPP** — No activity
 
-**Pending actions from config:**
-- PR #290 (DP-648, merged 2026-03-24) — deployed, no Redmine status update (DP ticket)
-- PR #291 (DP-648, merged 2026-03-26) — deployed, no Redmine status update (DP ticket)
-- PR #288 (DP-650, merged 2026-03-19) — deployed, no Redmine status update (DP ticket)
+**Bizurk** — No new messages (token verified OK)
 
-### Precognize (nusken)
+## Developer Hours — Thu Mar 26
 
-**Open PRs: 6** (4 created/updated within window)
+| Developer | Project | Thu Hours | Weekly Total | Status |
+|-----------|---------|-----------|-------------|--------|
+| LongVV | Xtreme Soft | **0h** | 24h (Mon-Wed) | ⚠️ 0h Thu, no leave |
+| PhucVT | James Diamond | 8h | 32h | ✓ |
+| KhanhHH | Generator | 8h | 32h | ✓ Fri on leave |
+| VietPH | Paturevision | 8h | 20h | ✓ (Mon leave, Tue half-day) |
+| TuanNT | All projects | **0h** | 0h | ⚠️ Scrin 4h53m, task log blank |
+| LeNH | Rory+Franc+Aysar | **0h** | 15.83h | ⚠️ Upwork 5.33h Thu, task log 0h |
+| DuongDN | Marcel | 0.83h | 0.83h | OK (adhoc) |
 
-| PR | Title | Author | Created |
-|----|-------|--------|---------|
-| #4802 | SR-7204 fix user's table (edit delete) | Vladimir-precog | 2026-03-26 15:31 |
-| #4800 | SR-7198 added external id to missed event | mahkris | 2026-03-26 12:27 |
-| #4799 | SR-7102 Implement update and get evaluation method APIs | nusdavid | 2026-03-26 10:24 |
-| #4798 | Process digital plant - 2026/03/26 | nusken | 2026-03-26 04:07 |
-| #4793 | SR-7105 investigation close api optional fields | mahkris | 2026-03-23 |
-| #4750 | WIP DPP upgrade | nusken | 2026-02-24 |
+### Fountain Team — Thu Mar 26
 
----
+| Dev | Plan (week) | Mon | Tue | Wed | Thu | Weekly Actual | Status |
+|-----|-------------|-----|-----|-----|-----|---------------|--------|
+| ViTHT | 22h | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h entire week |
+| ThinhT | 4h | 0 | 4h | 0 | 0 | 4h | On target but only Tue |
+| VuTQ | 40h | 8h | 8h | 8h | **0h** | 24h | ⚠️ 0h Thu |
+| HaVS | 22.5h | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h (1h on Paturevision) |
+| PhatDLT (QC) | 22h | 3h | 3h | 3h | 3h | 12h | Consistent |
+| HungPN (QC) | — | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h entire week |
 
-## REDMINE
+### Scrin.io vs Task Log (TuanNT/John Yi)
 
-**7 issues updated** since window start:
+| Day | Scrin.io | Task Log | Status |
+|-----|----------|----------|--------|
+| Mon-Wed | 0h | 0h | Leave ✓ |
+| Thu 26 | 4h 53m | 0h | ⚠️ Task log not written |
 
-| # | Status | Subject | Assigned | Change |
-|---|--------|---------|----------|--------|
-| [#77793](https://redmine.nustechnology.com/issues/77793) | Deployed | Settings save button fix | Tung Dong-Viet | New -> Deployed (via PR #292) |
-| [#77836](https://redmine.nustechnology.com/issues/77836) | Deployed on Live | Block selection not highlighting paddocks | Viet Pham-Hoang | New -> Deployed on Live |
-| [#77839](https://redmine.nustechnology.com/issues/77839) | Deployed on Live | Product accessories toggle missing | Viet Pham-Hoang | New -> Deployed on Live |
-| [#77818](https://redmine.nustechnology.com/issues/77818) | Deployed on Staging | Expand button on short descriptions | Viet Pham-Hoang | New -> Deployed on Staging |
-| [#77819](https://redmine.nustechnology.com/issues/77819) | In Progress | Expired promotion codes accepted | Viet Pham-Hoang | New -> In Progress |
-| [#77876](https://redmine.nustechnology.com/issues/77876) | New | Dis Comments character limit notification | Long Vo-Van | New ticket |
-| [#77874](https://redmine.nustechnology.com/issues/77874) | New | Block multiple clicks on Bulk update price | Long Vo-Van | New ticket |
+## Upwork Weekly Hours (Mar 23–29)
 
----
+| Workroom | Developer | This Week | Daily (Mon-Fri) |
+|----------|-----------|-----------|-----------------|
+| Rory | LeNH | 21:20 | 4h, 7.83h, 4.17h, 5.33h, 0h |
+| Aysar | LeNH | 4:00 | 4h, 0, 0, 0, 0 |
+| Bailey DEV1 | VietPH | 20:10 | 0, 4h, 8h, 8h, 0.17h |
+| Bailey DEV3 | DuongDN | 0:00 | 0, 0, 0, 0, 0 |
+| Neural Contract | external | 0:00 | — |
 
-## ALERTS
+**LeNH discrepancy:** Upwork Rory 21:20h vs task log 15.83h (Mon-Wed only). Wed+Thu Upwork tracked but task log blank.
 
-1. **MEDIUM** — Bizurk Discord: nuscarrick has Missing Access (50001) on ALL dev channels. Cannot monitor any Bizurk project activity. Channel permissions need update.
-2. **LOW** — HOMIEAPP #homieapp_mobileapp: Missing Access. May need permission grant.
-3. **INFO** — AirAgri weather knots->km/h fix: staging live but production PR not yet merged. James noted webapp still showing knots.
+## GitHub
+
+**Elena-SamGuard** — 0 open PRs. PRs #291 + #292 merged & deployed yesterday.
+
+**Precognize** — 6 open PRs, 4 new/updated:
+- PR #4802: SR-7204 fix user's table edit/delete (Vladimir)
+- PR #4801: SR-7202 select all for permissions (Vladimir)
+- PR #4800: SR-7198 external id to missed event (mahkris)
+- PR #4799: SR-7102 evaluation method APIs (nusdavid)
+
+## Redmine
+
+| # | Project | Status | Summary |
+|---|---------|--------|---------|
+| 77876 | New | New | New ticket |
+| 77874 | Maddy | New | Bulk update price button click blocking |
+| 77839 | Elena | Deployed Live | |
+| 77836 | Elena | Deployed Live | |
+| 77819 | Paturevision | In Progress | Expired promo codes accepted at checkout |
+| 77818 | Elena | Deployed Staging | |
+| 77793 | Elena | Deployed | Settings save fix |
+
+## Trello Status
+
+*(Pending — completion after report review)*
+
+## Task Log Reminders
+
+| Developer | Thu Status | Action |
+|-----------|-----------|--------|
+| LongVV | 0h, no leave | Send Matrix reminder |
+| TuanNT | 0h (Scrin 4h53m) | Send Matrix reminder |
+| LeNH | 0h Wed+Thu | Send Matrix reminder |
+
+## Unresolved Questions
+
+1. **LongVV 0h Thu** — late logging (it's Fri morning) or missed day?
+2. **TuanNT 0h Thu** — was leave supposed to extend through Thu? Rebecca shows Mon-Wed leave only.
+3. **LeNH Upwork vs task log** — 9.5h tracked Wed+Thu on Upwork Rory but task log is 0h. Logging compliance issue?
+4. **Fountain ViTHT/HungPN 0h all week** — different logging system? Or genuinely no work?
+5. **VuTQ 0h Thu** — after consistent 8h Mon-Wed, sudden drop. Leave or forgot to log?
+6. **Maxwell malware** — Oliver planning rebuild. Do we need to act or is it client-handled?
+7. **Fountain ChunkLoadError #858** — new prod error, needs investigation.
