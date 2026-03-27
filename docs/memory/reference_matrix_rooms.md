@@ -9,6 +9,7 @@ type: reference
 | PhucVT | James Diamond | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
 | LeNH | Rory/Franc/Aysar | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
 | LongVV | Xtreme Soft | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
+| TuanNT | John Yi/Rebecca/Bailey | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
 | Elena team | Digital Plant | `!kyArBadvcbfPIpIxpD:nustechnology.com` (announce deploys/review fails) |
 
 Room URL format: `https://chat.nustechnology.com/#/room/{room_id}`

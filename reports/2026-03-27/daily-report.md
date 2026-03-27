@@ -174,7 +174,7 @@
 |-----------|--------|--------|
 | LongVV | 0h Thu, no leave | ✓ Matrix reminder sent |
 | LeNH | 0h Wed+Thu | ✓ Matrix reminder sent |
-| TuanNT | 0h Thu (Scrin 4h53m) | No Matrix room — **manual follow-up needed** |
+| TuanNT | 0h Thu (Scrin 4h53m) | ✓ Matrix reminder sent (event: $7uJGERkECKbXrjMsZ-1PzgRFdXls2i7_PRSByTZEm3A) |
 
 ## Unresolved Questions
 
