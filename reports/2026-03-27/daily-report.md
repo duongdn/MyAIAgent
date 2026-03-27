@@ -114,6 +114,68 @@
 | PhatDLT (QC) | 22h | 3h | 3h | 3h | 3h | 12h | Consistent |
 | HungPN (QC) | — | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h entire week |
 
+## Fountain — 5-Part Mandatory Check
+
+### 1. Matrix Plan (from @trinhmtt, Mar 26 09:31)
+ViTHT 22h, ThinhT 4h, HaVS 22.5h, VuQT 40h, QC 22h — total 110.5h
+
+### 2. Task Log Actuals (Mon-Thu, W13)
+
+| Dev | Plan | Mon | Tue | Wed | Thu | Actual | Status |
+|-----|------|-----|-----|-----|-----|--------|--------|
+| ViTHT | 22h | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h entire week |
+| ThinhT | 4h | 0 | 4h | 0 | 0 | 4h | On target (Tue only) |
+| VuTQ | 40h | 8h | 8h | 8h | 0 | 24h | ⚠️ 0h Thu |
+| HaVS | 22.5h | 0 | 0 | 0 | 0 | **0h** | ⚠️ (1h on Paturevision) |
+| PhatDLT (QC) | 22h | 3h | 3h | 3h | 3h | 12h | Consistent |
+| HungPN (QC) | — | 0 | 0 | 0 | 0 | **0h** | ⚠️ 0h entire week |
+
+### 3. Plan vs Actual
+
+| Dev | Plan | Actual | Gap | Flag |
+|-----|------|--------|-----|------|
+| ViTHT | 22h | 0h | -22h | ⚠️ No hours logged at all |
+| ThinhT | 4h | 4h | 0 | ✓ |
+| VuTQ | 40h | 24h | -16h | ⚠️ Missing Thu, needs 16h Fri to hit target |
+| HaVS | 22.5h | 0h | -22.5h | ⚠️ Only 1h on Bailey borrowed task |
+| PhatDLT | 22h | 12h | -10h | On pace if 3h/day continues |
+| HungPN | — | 0h | — | ⚠️ 0h entire week |
+
+### 4. Capacity & Runway
+
+- **Active scope:** 22 tasks (Not Started + In-progress)
+- **Remaining estimate:** 192.75h
+- **Dev capacity:** 86h/week
+- **Raw runway:** 2.2 weeks
+- **Adjusted runway** (1.4x overrun factor): **3.1 weeks**
+- **Project total:** Est 764.25h, Actual 839h (110% — 74.75h overrun)
+- **Billed:** 169.25h (20% of actual)
+
+### 5. Over-Estimate Tracking
+
+| Task | Est | Actual | Overrun | This Week | Trend |
+|------|-----|--------|---------|-----------|-------|
+| **#2595** GiftDrop Redemption | 120h | 168.25h | +40% | 0h | STABLE — no new hours since W16 |
+| **#2615** | 12h | 86.75h | +623% | 7.5h | **STILL GROWING** — W19 spike after 0h W18 |
+| #2501 | 4h | 25.5h | +538% | — | Deployed staging |
+| #2652 | 1.5h | 9h | +500% | — | In-progress |
+| #2742 | 12h | 19.25h | +60% | — | Not started |
+
+### Fountain Trello Board
+
+**Active cards:** 65 (To-Do 37, Bugs 17, Doing 2, QC Internal 4, QA Backlog 1, In QA 3, Not Passed 1)
+
+**Customer comments (5 since last report):**
+- **@kunalsheth**: Approved Stripe webhook integration, requested Corporate gifting push to live, discussed Product page tooltip
+- **@tmmckay**: Asked about GiftDrop Admin field naming, coordinated artwork upload
+
+**Stuck (notable):**
+- "New Redemption flow" in Doing **44 days** (#2595-related)
+- "PayPalHttp::HttpError" bug **120 days**
+- QC Internal: "Finding solution to delivery dates" 55d, "Pro Send" 13d
+
+**Hard to release:** "New Redemption flow (Gift of Choice)" — 44 days in Doing, last activity Feb 10
+
 ### Scrin.io vs Task Log (TuanNT/John Yi)
 
 | Day | Scrin.io | Task Log | Status |
