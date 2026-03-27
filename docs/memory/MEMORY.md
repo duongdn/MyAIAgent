@@ -25,6 +25,7 @@
 - [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions are NOT monitoring alerts — don't block Trello checklist for project bugs
 
 - [feedback_dual_memory_system.md](feedback_dual_memory_system.md) — ALWAYS save to BOTH Claude memory AND docs/memory/ in project
+- [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
