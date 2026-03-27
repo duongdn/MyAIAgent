@@ -28,6 +28,7 @@
 - [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
 - [feedback_fountain_always_5part.md](feedback_fountain_always_5part.md) — CRITICAL: Fountain 5-part check keeps getting missed, MUST validate all parts before finalizing report
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Task log: never use first empty row of a day, write to second row or later
+- [feedback_trello_all_checklists.md](feedback_trello_all_checklists.md) — Trello Check Progress has MULTIPLE checklists, must iterate ALL not just known ones
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
