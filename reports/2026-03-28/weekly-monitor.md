@@ -15,7 +15,7 @@
 | VietPH | Paturevision | **28h** | 28h | ✓ | Mon full-day + Tue half-day leave (paid) |
 | KhanhHH | Generator | **32h** | 32h | ✓ | Fri full-day leave (paid) |
 | LeNH | BXR+RDC+Baamboozle | **40.33h** | 40h | ✓ | |
-| TuanNT | John Yi+WilliamBills | **7.17h** | 16h | ⚠️ | Mon–Wed leave; Thu 3.17h + Fri 4h |
+| TuanNT | John Yi+WilliamBills | **12h** | 16h | ⚠️ | Mon–Wed leave; Thu 8h ✓ + Fri 4h (half-day) |
 
 ### LongVV Daily Breakdown (Xtreme Soft W51)
 
@@ -68,16 +68,18 @@
 
 ### TuanNT Daily Breakdown (John Yi + William Bills)
 
-| Day | Hours | Status |
-|-----|-------|--------|
-| Mon 23/03 | 0h | Full-day leave ✓ |
-| Tue 24/03 | 0h | Full-day leave ✓ |
-| Wed 25/03 | 0h | Full-day leave ✓ |
-| Thu 26/03 | 3.17h | ⚠️ Below 8h target |
-| Fri 27/03 | 4.0h | ⚠️ Below 8h target |
-| **Total** | **7.17h** | ⚠️ |
+| Day | John Yi | WilliamBills | Combined | Status |
+|-----|---------|-------------|---------|--------|
+| Mon 23/03 | 0h | 0h (leave) | 0h | Full-day leave ✓ |
+| Tue 24/03 | 0h | 0h (leave) | 0h | Full-day leave ✓ |
+| Wed 25/03 | 0h | 0h (leave) | 0h | Full-day leave ✓ |
+| Thu 26/03 | 4.83h* | 3.17h | 8h | ✓ |
+| Fri 27/03 | 2.75h | 1.25h | 4h | ⚠️ Half-day |
+| **Total** | **7.58h** | **4.42h** | **12h** | ⚠️ |
 
-**Note:** TuanNT was on leave Mon–Wed (confirmed). Expected 16h for Thu+Fri working days but only logged 7.17h. Paturevision sheet shows 0h for TuanNT — possibly no Bailey tasks assigned post-leave. Total shortfall vs 2-day target: **8.83h**.
+*Thu John Yi entry has empty Owner field — identified as TuanNT's work (matches Scrin 4h53m exactly).
+
+**Note:** Mon–Wed leave confirmed. Thu full day (8h ✓). Fri 4h only — possibly half-day. Shortfall vs 2-day target: **4h**.
 
 ---
 
@@ -191,5 +193,5 @@ DuongDN: 1h40m
 | # | Severity | Item | Action |
 |---|----------|------|--------|
 | 1 | ⚠️ | **LongVV JIRA gap** — 17h unlogged in JIRA (LIFM2-268) | Ask Kai to log LIFM2-268 worklogs in JIRA |
-| 2 | ⚠️ | **TuanNT hours** — Only 7.17h for 2 working days (Thu+Fri). Expected ~16h. | Clarify: was leave extended? Or is Paturevision/Bailey work ongoing? |
+| 2 | ℹ️ | **TuanNT Fri only 4h** — Thu full day (8h ✓), Fri 4h only. John Yi Thu entry had empty Owner — TuanNT forgot to fill it. | Remind TuanNT to fill Owner field in task log. |
 | 3 | ℹ️ | Fountain team logging retrospectively (ViTHT, HaVS) | Worth noting as pattern — daily monitoring shows 0h mid-week |
