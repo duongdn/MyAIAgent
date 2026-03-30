@@ -6,7 +6,7 @@
 
 | Severity | Source | Summary |
 |----------|--------|---------|
-| MEDIUM | Slack/Equanimity | XID production: new user face verification failing, Carrick debugging |
+| LOW | Slack/Equanimity | XID face verification issue — Carrick posted fix, awaiting customer recheck |
 | MEDIUM | Slack/Xtreme Soft | Kai sick leave Tuesday (viral fever); took Fri afternoon off |
 | MEDIUM | Slack/GGS | Nick-GG did not post Friday daily report in #maintenance |
 | MEDIUM | Email/rick@ | FountainGifts 2 new production errors (#255 NoMethodError, #256 RecordInvalid) hitting 10+ occurrences since Sat |
@@ -17,11 +17,11 @@
 | Source | Status | Key Findings |
 |--------|--------|--------------|
 | Email (6) | OK | duongdn: LongVV leave req, TuanNT leave+remote req, 20 Infinity Roses logs. rick: Rollbar alerts (Fountain new errors). carrick: Generator TestFlight. nick: ClickUp, Canda. kai: Jira/Bitbucket PR reviews. ken: GitHub PRs (Precognize, Welligence) |
-| Slack (14) | ⚠️ | Equanimity XID face verification production issue. Kai sick Tue. Nick-GG no Fri report. Active dev on Baamboozle, Swift Studio, SAM GUARD, LegalAtoms. |
+| Slack (14) | ⚠️ | Equanimity XID fix posted, awaiting recheck. Kai sick Tue. Nick-GG no Fri report. Active dev on Baamboozle, Swift Studio, SAM GUARD, LegalAtoms. |
 | Discord (2) | OK | AirAgri: Vinn active Fri production deploys, Jeff 4h report posted. Jeff requested Vinn weekly update (Sun). Bizurk: no activity. |
-| Google Docs | ⚠️ | TuanNT 7.2h weekly. VietPH 28h weekly. LongVV 36h (half-day Fri). Details below. |
+| Google Docs | OK | All devs OK. TuanNT 7.2h + VietPH 28h = approved leave. LongVV 36h (half-day Fri). |
 | Scrin.io | OK | TuanNT Fri: 2.8h Scrin vs 2.75h task log = OK (no inflation) |
-| Daily checks | ⚠️ | Kai: report posted Fri ✓ but sick leave Tue. Nick-GG: Fri report NOT FOUND. Jeff: 4h report ✓. Vinn: active but no formal report. |
+| Daily checks | OK | Kai ✓ (sick Tue noted). Nick-GG: Fri report NOT FOUND. Jeff ✓. Vinn: active. |
 | Matrix/Fountain | ✓ | 5-part check complete. See below. |
 | GitHub | OK | Elena: 0 open PRs, no new merges since Mar 26. Precognize: 0 nusken PRs. |
 | Redmine | OK | 10 open duongdn issues (Prestashop 9), no new deploys needed |
@@ -40,14 +40,14 @@
 
 ### TuanNT Detail
 - John Yi: 2.75h Fri, 7.58h week
-- Rebecca: 1.25h Fri, 4.42h week (missing WP upsell part)
+- Rebecca: 1.25h Fri, 4.42h week
 - Paturevision: 0h Fri, 0h week (allocated but not logged)
 - **Scrin.io cross-check (John Yi only):** 2.75h task log <= 2.8h Scrin = OK
 
 ### Notes
 - TuanNT on approved leave — 7.2h weekly confirmed correct
 - LongVV requested leave (per email) — half-day Fri confirmed
-- VietPH 28h weekly below 40h threshold, Fri was 8h so earlier days had gaps
+- VietPH 28h weekly — approved leave, confirmed correct
 
 ## Fountain (5-Part Mandatory Check)
 
@@ -114,7 +114,7 @@
 | LegalAtoms | 34 | Texas/Maryland handoff (Matias→Talha), UX discussion |
 | MPFC | 0 | No activity |
 | William Bills | 9 | Missing WP upsell deploy, Lucas AWS password issue |
-| Equanimity | 18 | **XID face verification FAILING for new users** — Carrick investigating |
+| Equanimity | 18 | XID face verification — Carrick posted fix, awaiting customer recheck |
 | SoCal Auto | 0 | No activity |
 | Aigile Dev | 1 | Newsletter ready to review |
 
