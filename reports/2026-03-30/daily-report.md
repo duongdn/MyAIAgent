@@ -133,10 +133,10 @@ New week start — all 0h expected.
 ## Trello Status
 
 ### Check Progress — Items NOT completed (alerts found):
-- **Fountain** — #2615 still growing, new bugs #2802/#2803
 - **Rebecca - William Bills** — Lucas AWS password issue, missing WP deploy
 
 ### Items to complete (no alerts):
+- Fountain ✓ (HaVS 22.5h matches plan, #2615/#2802/#2803 are dev topics not person alerts)
 - John Yi - Amazing Meds ✓ (TuanNT confirmed approved leave)
 - Rory ✓ (LeNH 40.3h meets 40h minimum)
 - Maddy/Carrick/Kai/Luis ✓
