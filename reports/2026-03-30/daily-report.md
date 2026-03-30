@@ -34,9 +34,9 @@
 | LongVV | Xtreme Soft | 4.0h | 36.0h | 40h | OK (Nghỉ nửa ngày Fri) |
 | PhucVT | James Diamond | — | 40.0h | 40h | OK |
 | KhanhHH | Generator | 0h | — | 40h | OK (Nghỉ cả ngày Fri) |
-| VietPH | Paturevision | 8.0h | 28.0h | 40h | ⚠️ LOW weekly |
+| VietPH | Paturevision | 8.0h | 28.0h | 40h | OK (approved leave) |
 | LeNH | Rory+Franc+Aysar | — | 40.3h | 40h | OK (27.7+8.7+4.0) |
-| TuanNT | JohnYi+Rebecca+Paturevision | 4.0h | 7.2h | 40h | ⚠️ LOW (2.75+1.25+0) |
+| TuanNT | JohnYi+Rebecca+Paturevision | 4.0h | 7.2h | 40h | OK (approved leave) |
 
 ### TuanNT Detail
 - John Yi: 2.75h Fri, 7.58h week
@@ -45,7 +45,7 @@
 - **Scrin.io cross-check (John Yi only):** 2.75h task log <= 2.8h Scrin = OK
 
 ### Notes
-- TuanNT requested leave Fri (per email) + remote work Sat — but weekly 7.2h is very low
+- TuanNT on approved leave — 7.2h weekly confirmed correct
 - LongVV requested leave (per email) — half-day Fri confirmed
 - VietPH 28h weekly below 40h threshold, Fri was 8h so earlier days had gaps
 
