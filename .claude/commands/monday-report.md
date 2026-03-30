@@ -167,7 +167,7 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 - Slack: Workspace "Xtreme Soft Solutions", search for Bailey-related bug reports
 
 **Total Dev Hours**: Google Sheets task log
-- Spreadsheet: `1p4smFj2fwSbrIJbYhvLM_IKFYOdq0fNJRqQv0BgQ4U4`
+- Spreadsheet: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (V3_NUS_Paturevision_Project_Management)
 - Service account key: `daily-agent-490610-7eb7985b33e3.json`
 - Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
 
@@ -184,7 +184,7 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 **External Bugs**: Always 0
 
 **Total Dev Hours**: Google Sheets task log
-- Spreadsheet: `1z5sNg59eLKpnyGOGM3Eo0n6xfGKEZjhK8CWT1Ja2zRs`
+- Spreadsheet: `1W3sYJkfRdqa6nHkr9pnFdXfjiGuGjzRqCcCgOBzl3WI` (NUS - Marcel 2026)
 - Service account key: `daily-agent-490610-7eb7985b33e3.json`
 - Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
 
@@ -200,10 +200,7 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 
 **External Bugs**: Always 0
 
-**Total Dev Hours**: Google Sheets task log
-- Spreadsheet: `1EE9fKmp5iKCqUQ1LqEqvhMKMB6J3mZEjRc5ejJXfs3Q`
-- Service account key: `daily-agent-490610-7eb7985b33e3.json`
-- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+**Total Dev Hours**: Always 0 — external contract, messages-only monitoring. No NUS task log sheet.
 
 ## Project: LegalAtoms
 
@@ -220,10 +217,7 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 - Search messages from previous Mon-Sun week
 - Only count issues relative to the user (not all workspace issues)
 
-**Total Dev Hours**: Google Sheets task log
-- Spreadsheet: `1D7K6NWzBb3kJ0m1m5lOlsXkqe2YRLF80hrfNzQQfb1U`
-- Service account key: `daily-agent-490610-7eb7985b33e3.json`
-- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+**Total Dev Hours**: Always 0 — Raymond's team manages their own tracking; no NUS task log sheet accessible.
 
 ## Project: Andrew Taraba
 
@@ -242,10 +236,7 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 - Search messages from previous Mon-Sun week using Discord search API with min_id/max_id snowflakes
 - Look for bug/issue reports from client
 
-**Total Dev Hours**: Google Sheets task log
-- Spreadsheet: `1KqNkS51c1MJivOXGNOFei3nQN_JVcWmfCMAzwlFJdn8`
-- Service account key: `daily-agent-490610-7eb7985b33e3.json`
-- Use **Summary sheet** (`Summary!A6:D60`): find row where col B (start date) matches reporting week Monday, read col D (Actual hours)
+**Total Dev Hours**: Always 0 — no NUS task log sheet accessible for this project.
 
 ## Rules
 
