@@ -161,7 +161,7 @@ No reminders needed — TuanNT and VietPH confirmed on approved leave.
 
 ## Unresolved Questions
 
-1. **XID face verification** — Equanimity production issue ongoing since Fri. Carrick actively debugging. Monitor Monday update.
+1. **XID face verification** — Carrick posted fix. Waiting for customer recheck.
 2. **Nick-GG missing Fri report** — was he on leave?
 3. **Fountain #2803 stripe_webhooks error** — appeared same week as webhook deploy. Related?
 4. **HaVS under-delivered** — ~17h vs 22.5h plan. Bailey reallocation + other factors?
