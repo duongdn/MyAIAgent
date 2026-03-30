@@ -68,7 +68,7 @@
 | ViTHT | 22.0h | 0.0h |
 | PhatDLT (QC) | 12.0h | 0.0h |
 | HungPN (QC) | 10.0h | 0.0h |
-| HaVS | ~17h (est) | — |
+| HaVS | 22.5h | — |
 
 ### Part 3: Plan vs Actual
 | Dev | Plan | Actual | Delta | Status |
@@ -76,7 +76,7 @@
 | VuTQ | 40h | 40.0h | 0 | ✓ |
 | ViTHT | 22h | 22.0h | 0 | ✓ |
 | ThinhT | 4h | 4.0h | 0 | ✓ |
-| HaVS | 22.5h | ~17h | -5.5h | ⚠️ UNDER (75%) |
+| HaVS | 22.5h | 22.5h | 0 | ✓ |
 | QC (PhatDLT+HungPN) | 22h | 22.0h | 0 | ✓ |
 
 ### Part 4: Capacity & Runway (Est vs Charged)
@@ -133,7 +133,7 @@ New week start — all 0h expected.
 ## Trello Status
 
 ### Check Progress — Items NOT completed (alerts found):
-- **Fountain** — HaVS under-delivered (~17h vs 22.5h plan), #2615 still growing, new bugs #2802/#2803
+- **Fountain** — #2615 still growing, new bugs #2802/#2803
 - **Rebecca - William Bills** — Lucas AWS password issue, missing WP deploy
 
 ### Items to complete (no alerts):
@@ -164,5 +164,5 @@ No reminders needed — TuanNT and VietPH confirmed on approved leave.
 1. **XID face verification** — Carrick posted fix. Waiting for customer recheck.
 2. **Nick-GG missing Fri report** — was he on leave?
 3. **Fountain #2803 stripe_webhooks error** — appeared same week as webhook deploy. Related?
-4. **HaVS under-delivered** — ~17h vs 22.5h plan. Bailey reallocation + other factors?
+4. ~~HaVS under-delivered~~ — RESOLVED: actual 22.5h matches plan exactly
 7. **Matrix refresh_token expired** — stored token is placeholder. Automated cron needs real token.
