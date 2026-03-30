@@ -10,10 +10,7 @@
 | MEDIUM | Slack/Xtreme Soft | Kai sick leave Tuesday (viral fever); took Fri afternoon off |
 | MEDIUM | Slack/GGS | Nick-GG did not post Friday daily report in #maintenance |
 | MEDIUM | Email/rick@ | FountainGifts 2 new production errors (#255 NoMethodError, #256 RecordInvalid) hitting 10+ occurrences since Sat |
-| MEDIUM | Google Docs | TuanNT weekly total only 7.2h (john_yi 2.75 + rebecca 4.42 + paturevision 0) |
 | LOW | Slack/William Bills | Lucas AWS password invalid again (recurring) |
-| LOW | Google Docs | LongVV 36h weekly (under 40h, but had half-day Fri) |
-| LOW | Google Docs | VietPH 28h weekly (under 40h) |
 
 ## Source Summary
 
@@ -136,12 +133,12 @@ New week start — all 0h expected.
 ## Trello Status
 
 ### Check Progress — Items NOT completed (alerts found):
-- **John Yi - Amazing Meds** — TuanNT 7.2h weekly total, way under 40h
-- **Rory** — no specific alert but LeNH hours split visible
 - **Fountain** — HaVS under-delivered (~17h vs 22.5h plan), #2615 still growing, new bugs #2802/#2803
 - **Rebecca - William Bills** — Lucas AWS password issue, missing WP deploy
 
 ### Items to complete (no alerts):
+- John Yi - Amazing Meds ✓ (TuanNT confirmed approved leave)
+- Rory ✓ (LeNH 40.3h meets 40h minimum)
 - Maddy/Carrick/Kai/Luis ✓
 - Blake ✓
 - James Diamond - Vinn ✓ (Jeff 4h report OK)
@@ -160,17 +157,12 @@ New week start — all 0h expected.
 
 ## Task Log Reminders
 
-| Developer | Issue | Matrix Room | Reminder |
-|-----------|-------|-------------|----------|
-| TuanNT | 7.2h weekly, very low | !knbJbIKzXRJNGVFQNg:nustechnology.com | Pending — need to verify leave status first |
-| VietPH | 28h weekly | — | No Matrix room configured |
+No reminders needed — TuanNT and VietPH confirmed on approved leave.
 
 ## Unresolved Questions
 
-1. **TuanNT 7.2h weekly** — email shows leave request Fri + remote work Sat. But weekly total is extremely low. Approved leave for whole week, or logging issue?
-2. **VietPH 28h weekly** — no leave detected. Missing ~12h of logs.
-3. **XID face verification** — Equanimity production issue ongoing since Fri. Carrick actively debugging. Monitor Monday update.
-4. **Nick-GG missing Fri report** — was he on leave?
-5. **Fountain #2803 stripe_webhooks error** — appeared same week as webhook deploy. Related?
-6. **HaVS under-delivered** — ~17h vs 22.5h plan. Bailey reallocation + other factors?
+1. **XID face verification** — Equanimity production issue ongoing since Fri. Carrick actively debugging. Monitor Monday update.
+2. **Nick-GG missing Fri report** — was he on leave?
+3. **Fountain #2803 stripe_webhooks error** — appeared same week as webhook deploy. Related?
+4. **HaVS under-delivered** — ~17h vs 22.5h plan. Bailey reallocation + other factors?
 7. **Matrix refresh_token expired** — stored token is placeholder. Automated cron needs real token.
