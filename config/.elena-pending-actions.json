@@ -56,6 +56,36 @@
       "deployed": true,
       "status_updated": false,
       "pending_action": "DP-648 merged + deployed on 2026-03-26"
+    },
+    {
+      "pr": 293,
+      "branch": "fix/redmine/77904",
+      "type": "redmine",
+      "ticket_id": "77904",
+      "merged_at": "2026-03-31",
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #77904 marked as Deployed on 2026-03-31"
+    },
+    {
+      "pr": 294,
+      "branch": "fix/redmine/77906",
+      "type": "redmine",
+      "ticket_id": "77906",
+      "merged_at": "2026-03-31",
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #77906 marked as Deployed on 2026-03-31"
+    },
+    {
+      "pr": 295,
+      "branch": "fix/redmine/77905",
+      "type": "redmine",
+      "ticket_id": "77905",
+      "merged_at": "2026-03-31",
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #77905 marked as Deployed on 2026-03-31"
     }
   ],
   "blocked": [],
