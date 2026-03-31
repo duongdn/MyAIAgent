@@ -24,7 +24,12 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report email nick` | nick@ only | Re-check one account |
 | `/daily-report email kai` | kai@ only | Re-check one account |
 | `/daily-report email ken` | ken@ only | Re-check one account |
-| `/daily-report slack` | 13 Slack workspaces | Re-check Slack only |
+| `/daily-report slack` | All 13 Slack workspaces | Re-check all Slack |
+| `/daily-report slack xtreme` | Xtreme Soft only | Re-check one workspace |
+| `/daily-report slack ggs` | Global Grazing only | Re-check one workspace |
+| `/daily-report slack amazingmeds` | Amazing Meds only | Re-check one workspace |
+| `/daily-report slack equanimity` | Equanimity only | Re-check one workspace |
+| `/daily-report slack {slug}` | Any single workspace | Re-check one workspace |
 | `/daily-report discord` | AirAgri + Bizurk | Re-check Discord only |
 | `/daily-report sheets` | All Google Sheets task logs | Re-check developer hours |
 | `/daily-report scrin` | Scrin.io time tracking (TuanNT/John Yi) | Re-check Scrin only |
@@ -85,31 +90,62 @@ Trello: {account} item ✓ complete.
 
 ---
 
-## Piece 2 — Slack (`/daily-report slack`)
+## Piece 2 — Slack (`/daily-report slack [workspace]`)
+
+Supports individual workspace targeting:
+- `/daily-report slack` — check all 13 workspaces
+- `/daily-report slack baamboozle` — check Baamboozle only
+- `/daily-report slack rdc` — check RDC - FM Monitoring only
+- `/daily-report slack swift` — check Swift Studio only
+- `/daily-report slack xtreme` — check Xtreme Soft Solutions only
+- `/daily-report slack samguard` — check SAM GUARD - Mobile only
+- `/daily-report slack ggs` — check Global Grazing Services only
+- `/daily-report slack amazingmeds` — check Amazing Meds only
+- `/daily-report slack generator` — check Generator only
+- `/daily-report slack legalatoms` — check LegalAtoms only
+- `/daily-report slack mpfc` — check MyPersonalFootballCoach only
+- `/daily-report slack williambills` — check William Bills only
+- `/daily-report slack equanimity` — check Equanimity only
+- `/daily-report slack socal` — check SoCal Auto Wraps only
+- `/daily-report slack aigile` — check Aigile Dev only
 
 **Workspaces:** 13 in `config/.slack-accounts.json`
 
-| Workspace | Token type | Key check |
-|-----------|-----------|-----------|
-| Baamboozle | xoxp | General activity |
-| RDC - FM Monitoring | xoxp | dmetiner updates |
-| Swift Studio | xoxp | Carrick activity |
-| Xtreme Soft Solutions | xoxp | **Kai daily report** (search: "progress", "daily report" from kai) |
-| SAM GUARD - Mobile | xoxp | Elena/DP activity |
-| Global Grazing Services | xoxp | **Nick daily report in #maintenance** (NOT TuanNT) |
-| Amazing Meds | xoxc+cookie | General activity. Auto-refresh if invalid_auth. |
-| Generator | xoxp | Elliott/Violet activity, release coordination |
-| LegalAtoms | xoxp | Nick-specific mentions/DMs only (filter noise) |
-| MyPersonalFootballCoach | xoxp | General activity |
-| William Bills | xoxp | Oliver/Lucas tasks |
-| Equanimity | xoxc+cookie | **Carrick/Marcel alerts**. Auto-refresh if invalid_auth. |
-| SoCal Auto Wraps | xoxp | General activity |
-| Aigile Dev | xoxp | General activity |
+| Workspace | Slug | Token type | Key check | Trello item |
+|-----------|------|-----------|-----------|-------------|
+| Baamboozle | baamboozle | xoxp | General activity | Aysar |
+| RDC - FM Monitoring | rdc | xoxp | dmetiner updates | Franc |
+| Swift Studio | swift | xoxp | Carrick activity | Rory |
+| Xtreme Soft Solutions | xtreme | xoxp | **Kai daily report** (search: "progress"/"daily report") | Maddy - Carrick/Kai/Luis |
+| SAM GUARD - Mobile | samguard | xoxp | Elena/DP activity | Elena - SamGuard |
+| Global Grazing Services | ggs | xoxp | **Nick daily report in #maintenance** (NOT TuanNT) | Bailey |
+| Amazing Meds | amazingmeds | xoxc+cookie | General activity. Auto-refresh if invalid_auth. | John Yi - Amazing Meds |
+| Generator | generator | xoxp | Elliott/Violet activity, release coordination | Elliott |
+| LegalAtoms | legalatoms | xoxp | Nick-specific mentions/DMs only (filter noise) | Raymond - LegalAtoms |
+| MyPersonalFootballCoach | mpfc | xoxp | General activity | MPFC |
+| William Bills | williambills | xoxp | Oliver/Lucas tasks | Rebecca (William Bills) |
+| Equanimity | equanimity | xoxc+cookie | **Carrick/Marcel alerts**. Auto-refresh if invalid_auth. | Marcel |
+| SoCal Auto Wraps | socal | xoxp | General activity | Blake |
+| Aigile Dev | aigile | xoxp | General activity | Colin |
 
 **Method:** `search.messages` API with `after:{day_before_cutoff}` + epoch filter (NOT `conversations.history`)
 **Session tokens (Amazing Meds, Equanimity):** Auto-refresh via crumb extraction if invalid_auth — never just report expired.
 
-**Trello:** See Check Progress mappings in `docs/daily-report-workflow.md`. Complete items where no alerts found.
+**Trello — after checking:**
+- Find "Check progress" card by name on board `O83pAyqb`
+- Iterate ALL checklists (Normal, Should do, Closely monitor, Work)
+- Complete the item(s) mapped to the checked workspace(s) — only if no alerts found
+- If checking a single workspace → complete only that workspace's item
+- If checking all → complete all applicable items per workflow rules
+
+**Report — always append to daily report:**
+```
+## Slack [workspace|all] — {HH:MM} (+07:00)
+| Workspace | Msgs | Key content |
+...
+{Alerts if any.}
+Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
+```
 
 ---
 
