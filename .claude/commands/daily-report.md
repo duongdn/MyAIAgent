@@ -44,7 +44,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 - kai@: Jira/Madhuraka mentions
 - ken@: Precognize GitHub PR activity
 
-**Trello:** Complete "Check Mail" card items (one per account) after checking each.
+**Trello:** Complete "Check Mail" card items (one per account) after checking each. **MUST complete all 6 items before finishing the email piece** — find "Check mail" card by name on board `O83pAyqb`, get its checklist, mark all items complete via `PUT /cards/{id}/checkItem/{itemId}?state=complete`.
 
 ---
 
