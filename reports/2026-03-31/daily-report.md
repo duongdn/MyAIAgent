@@ -306,3 +306,20 @@ Full window 08:20 → 15:16. 15 emails total across all accounts.
 Both are existing/recurring errors, no new or reactivated issues. No escalation required unless rick confirms otherwise.
 
 Trello "Check mail" — all 6 items ✓ complete (were already complete from prior run).
+
+---
+
+## Email duongdn — 15:22 (+07:00)
+
+| Date | From | Subject | Summary |
+|------|------|---------|---------|
+| 2026-03-31 01:43 UTC | NUS Redmine | [Bailey - Paturevision - Bug #73849] (Closed) Product with variants duplicated on listing page | Bug closed by Dat Nguyen-Chi; status changed from Tested on Staging to Closed |
+| 2026-03-31 01:43 UTC | NUS Redmine | [Bailey - Paturevision - Bug #73907] (Closed) Unable to create customer order | Bug closed by Dat Nguyen-Chi; status changed from Tested on Staging to Closed |
+| 2026-03-31 01:43 UTC | NUS Redmine | [Bailey - Paturevision - Bug #73912] (Closed) When saving product app throws "imposible to parse parameters" | Bug closed by Dat Nguyen-Chi; status changed from Tested on Staging to Closed |
+| 2026-03-31 01:43 UTC | NUS Redmine | [Bailey - Paturevision - Bug #73908] (Closed) Minor UI issue with quantity text box and add to cart button | Bug closed by Dat Nguyen-Chi; status changed from Tested on Staging to Closed |
+| 2026-03-31 01:43 UTC | NUS Redmine | [Bailey - Paturevision - External bug #73941] (Closed) [Live][Quote] Critical Price Calculation Error for Product 102619 | Bug closed by Dat Nguyen-Chi; status changed from Tested on Staging to Closed |
+| 2026-03-31 14:21 +07 | Thuy Le (HR) | [NUS - HR] Khảo sát góp ý nhân viên định kỳ - Quý 1/2026 | Quarterly employee satisfaction survey for Q1/2026 |
+| 2026-03-31 15:15 +07 | Binh Nguyen (HR) | [NUS - HR] Thông báo chuyển lương tháng 3/2026 | Salary for March 2026 has been transferred to accounts |
+
+No alerts.
+Trello: DuongDn item ✓ complete.
