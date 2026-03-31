@@ -213,30 +213,30 @@ No action needed.
 
 ## Trello Status
 
-**Check Mail:** All 6 accounts checked.
+**Check Mail:** 6/6 completed ✓
 
-**Check Progress — Pending Trello agent completion.** Expected:
+**Check Progress:** 12/18 completed, 6 skipped
 
-| Item | Action | Reason |
+| Item | Status | Reason |
 |------|--------|--------|
-| Maddy - Carrick/Kai/Luis | ✓ Complete | Kai report found |
-| Blake | ✓ Complete | 0 messages |
-| John Yi - Amazing Meds | ❌ Skip | Session token expired |
-| James Diamond - Vinn | ✓ Complete | Jeff+Vinn reports found |
-| Franc | ✓ Complete | OK |
-| Aysar | ✓ Complete | OK |
-| Elliott | ⚠️ Partial | Slack OK, KhanhHH hours unverified |
-| Rory | ✓ Complete | OK |
-| Raymond - LegalAtoms | ✓ Complete | No Nick-specific alerts |
-| Marcel | ❌ Skip | Session token expired |
-| Colin | ✓ Complete | OK |
-| Andrew Taraba | ✓ Complete | Bizurk 0 messages |
-| Elena - SamGuard | ✓ Complete | 3 PRs merged+deployed |
-| MPFC | ✓ Complete | 0 messages |
-| Bailey | ⚠️ Partial | Slack OK, VietPH hours unverified |
-| Fountain | ❌ Skip | ThinhT shortfall, #2615 growing, #2735 overrun |
-| Rebecca | ⚠️ Partial | TuanNT task log unverified (rate limit) |
-| Neural Contract | ✓ Complete | No relevant emails |
+| Maddy - Carrick/Kai/Luis | ✅ Done | Kai report found |
+| Blake | ✅ Done | 0 messages |
+| James Diamond - Vinn | ✅ Done | Jeff+Vinn reports found |
+| Franc | ✅ Done | OK |
+| Aysar | ✅ Done | OK |
+| Rory | ✅ Done | OK |
+| Raymond - LegalAtoms | ✅ Done | No Nick-specific alerts |
+| Colin | ✅ Done | OK |
+| Andrew Taraba | ✅ Done | Bizurk 0 messages |
+| Elena - SamGuard | ✅ Done | 3 PRs merged+deployed |
+| MPFC | ✅ Done | 0 messages |
+| Neural Contract | ✅ Done | No relevant emails |
+| **John Yi - Amazing Meds** | ❌ Skip | Slack session token expired |
+| **Marcel** | ❌ Skip | Equanimity session token expired |
+| **Elliott - Generator** | ❌ Skip | KhanhHH hours unverified (rate limit) |
+| **Bailey** | ❌ Skip | VietPH hours unverified (rate limit) |
+| **Fountain** | ❌ Skip | ThinhT shortfall, #2615 growing, #2735 overrun |
+| **Rebecca - William Bills** | ❌ Skip | TuanNT task log unverified (rate limit) |
 
 ## Task Log Reminders
 
