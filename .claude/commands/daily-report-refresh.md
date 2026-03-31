@@ -120,11 +120,13 @@ After completing a piece: update ONLY that piece's own `last_run`.
 
 ## Piece 1 — Email (`/daily-report-refresh email [account]`)
 
-Window = `refresh.last_run` → now. Report only NEW emails since last refresh.
+Window = `refresh.email.{account}.last_run` → now. Report only NEW emails since last refresh.
 
 Accounts: duongdn, carrick, nick (filter: John Yi), rick (filter: Kunal/Fountain/InfinityRose), kai (filter: Madhuraka), ken (folder: NewsLetter, filter: Precognize/development)
 
-**Method:** IMAP SINCE `{day_before_refresh_last_run}`, filter Date header >= `refresh.last_run`
+**Method:** IMAP SINCE `{day_before_account_last_run}`, filter Date header >= `refresh.email.{account}.last_run`
+
+After completing: update `refresh.email.{account}.last_run` (single account) or all 6 (all email).
 
 If checking a single account → complete only that account's "Check mail" Trello item.
 
@@ -132,9 +134,11 @@ If checking a single account → complete only that account's "Check mail" Trell
 
 ## Piece 2 — Slack (`/daily-report-refresh slack [workspace]`)
 
-Window = `refresh.last_run` → now. Report only NEW messages.
+Window = `refresh.slack.{workspace}.last_run` → now. Report only NEW messages.
 
-**Method:** `search.messages` with `after:{day_before_refresh_cutoff}` + epoch filter `ts > refresh_epoch`
+**Method:** `search.messages` with `after:{day_before_workspace_last_run}` + epoch filter `ts > workspace_last_run_epoch`
+
+After completing: update `refresh.slack.{workspace}.last_run` (single) or all 14 (all slack).
 
 **Also check:** Nick-GG daily report if not yet confirmed today. Kai daily report if not yet confirmed.
 
@@ -146,7 +150,9 @@ If checking a single workspace → complete only its mapped "Check progress" Tre
 
 ## Piece 3 — Discord (`/daily-report-refresh discord [server]`)
 
-Window = `refresh.last_run` → now. AirAgri + Bizurk only (NOT HOMIEAPP). Verify tokens before using.
+Window = `refresh.discord.{server}.last_run` → now. AirAgri + Bizurk only (NOT HOMIEAPP). Verify tokens before using.
+
+After completing: update `refresh.discord.{server}.last_run` (single) or both (all discord).
 
 If checking a single server → complete only its mapped Trello item.
 
@@ -154,21 +160,27 @@ If checking a single server → complete only its mapped Trello item.
 
 ## Piece 4 — Google Sheets (`/daily-report-refresh sheets [developer]`)
 
-Re-check developer hours vs what daily report already showed. Only flag changes:
+Window = `refresh.sheets.{developer}.last_run` → now. Re-check developer hours vs what daily report already showed. Only flag changes:
 - New hours logged (good news)
 - Still 0h at afternoon (≥ 13:00) with no leave → escalate
+
+After completing: update `refresh.sheets.{developer}.last_run` (single) or all 6 (all sheets).
 
 ---
 
 ## Piece 5 — Scrin.io (`/daily-report-refresh scrin`)
 
-Re-fetch TuanNT's today tracked hours. Compare with John Yi task log. Show delta vs morning.
+Window = `refresh.scrin.last_run` → now. Re-fetch TuanNT's today tracked hours. Compare with John Yi task log. Show delta vs morning.
+
+After completing: update `refresh.scrin.last_run`.
 
 ---
 
 ## Piece 6 — Fountain (`/daily-report-refresh fountain [part]`)
 
-Full 5-part check — all 5 parts mandatory when running without sub-arg. Focus on what changed since last check:
+Window = `refresh.fountain.last_run` → now. Full 5-part check — all 5 parts mandatory when running without sub-arg. Focus on what changed since last check:
+
+After completing: update `refresh.fountain.last_run`.
 - New W{n} actuals (devs logging hours)
 - #2615, #2735, #2595 — are they still growing?
 - New customer Trello comments
@@ -180,7 +192,9 @@ If Matrix token fails → run `scripts/matrix-token-refresh.js` immediately. Nev
 
 ## Piece 7 — Elena (`/daily-report-refresh elena [sub]`)
 
-Check for new PRs merged or opened since last refresh.
+Window = `refresh.elena.last_run` → now. Check for new PRs merged or opened since last refresh.
+
+After completing: update `refresh.elena.last_run`.
 
 For each undeployed merged PR in `config/.elena-pending-actions.json`:
 1. Deploy to MayBanServer

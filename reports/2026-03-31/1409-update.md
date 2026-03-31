@@ -247,3 +247,23 @@ Trello: Ken item ✓ already complete.
 **Summary:** 2 new PRs opened (#4809 SR-6940 password validation, #4810 new version 25). Active review on #4809 between mahkris and KfirBernstein. No action needed from nusken on email — run `/daily-report-refresh elena precognize` to check nusken's open PRs.
 
 Trello: Ken item ✓ already complete.
+
+---
+
+## Email duongdn + ken — 17:25 (+07:00)
+
+### duongdn@ — window 15:41 → 17:25
+
+| Time | Subject | From |
+|------|---------|------|
+| 16:32 | [NUS - Part time job] Thông tin job part time Mar 23 – Mar 29, 2026 | NUS Finance Team |
+
+1 email — internal part-time payroll info. No alert.
+
+Trello: DuongDn item ✓ already complete.
+
+### ken@ — window 17:21 → 17:25
+
+0 new emails matching Precognize/development. No alert.
+
+Trello: Ken item ✓ already complete.
