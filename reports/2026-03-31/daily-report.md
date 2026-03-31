@@ -244,9 +244,16 @@ No action needed.
 
 Exception: **LongVV** confirmed on leave today (email request) — no reminder needed.
 
+## Leave Notes (from task log)
+
+- **ViTHT:** "Nghỉ cả ngày" Mon Mar 23 (W19) — explains 22h vs 30h plan (8h gap = 1 day off) ✓
+- **PhatDLT:** "Nghỉ cả ngày" Fri Mar 27 (W19)
+- **ThinhT:** NO leave recorded in W19. Logged 4h on Tue only (Rollbar bug + UI update). **Genuine shortfall — 0h logged Mon/Wed/Thu/Fri with no leave explanation.**
+- **ThinhT W20:** Already logged 4h on Sun Mar 30 (Redmine bugs + What's Included UI). Active.
+
 ## Unresolved Questions
 
-1. ThinhT logged only 4h in W19 vs 20h plan — planned leave or issue?
+1. **ThinhT W19 shortfall confirmed** — no leave recorded, only 4h logged. Needs PM follow-up.
 2. #2742 has 19.25h actual but "Not Started" status — needs correction?
 3. Gift of Choice Flow stuck in Doing 49 days — blocked or abandoned?
 4. #2615 at 91.75h vs 12h est — is estimate outdated due to scope changes?
