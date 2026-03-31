@@ -70,14 +70,32 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Trello** | |
 | `/daily-report trello` | Both cards, all items |
 | `/daily-report trello progress` | Check Progress, all items |
-| `/daily-report trello progress fountain` | Fountain item only |
-| `/daily-report trello progress elena` | Elena item only |
-| `/daily-report trello progress johnyi` | John Yi item only |
-| `/daily-report trello progress {arg}` | Any single progress item |
+| `/daily-report trello progress maddy` | Maddy - Carrick/Kai/Luis |
+| `/daily-report trello progress blake` | Blake |
+| `/daily-report trello progress johnyi` | John Yi - Amazing Meds |
+| `/daily-report trello progress james` | James Diamond - Vinn task |
+| `/daily-report trello progress franc` | Franc |
+| `/daily-report trello progress rory` | Rory |
+| `/daily-report trello progress aysar` | Aysar |
+| `/daily-report trello progress elliott` | Elliott |
+| `/daily-report trello progress swift` | Rory (Swift Studio) |
+| `/daily-report trello progress raymond` | Raymond - LegalAtoms |
+| `/daily-report trello progress marcel` | Marcel |
+| `/daily-report trello progress colin` | Colin |
+| `/daily-report trello progress andrew` | Andrew Taraba |
+| `/daily-report trello progress elena` | Elena - SamGuard |
+| `/daily-report trello progress mpfc` | MPFC |
+| `/daily-report trello progress bailey` | Bailey |
+| `/daily-report trello progress fountain` | Fountain |
+| `/daily-report trello progress rebecca` | Rebecca (William Bills) |
+| `/daily-report trello progress neural` | Neural Contract |
 | `/daily-report trello mail` | Check Mail, all 6 items |
-| `/daily-report trello mail duongdn` | DuongDn item only |
-| `/daily-report trello mail rick` | Rick item only |
-| `/daily-report trello mail {account}` | Any single mail item |
+| `/daily-report trello mail duongdn` | DuongDn only |
+| `/daily-report trello mail carrick` | Carrick only |
+| `/daily-report trello mail nick` | Nick only |
+| `/daily-report trello mail rick` | Rick only |
+| `/daily-report trello mail kai` | Kai only |
+| `/daily-report trello mail ken` | Ken only |
 | **Reminders** | |
 | `/daily-report reminders` | Send Matrix 0h reminders to all devs |
 | `/daily-report reminders lenh` | Send reminder to LeNH only |
@@ -132,7 +150,7 @@ Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
 | Account | Count | Summary |
 ...
 {Alerts if any.}
-Trello: {account} item ✓ complete.
+Trello: {checked account(s)} item ✓ complete.
 ```
 
 ---
@@ -395,7 +413,7 @@ Examples:
 - `/daily-report trello progress elena` — complete Elena item only
 - `/daily-report trello progress johnyi` — complete John Yi item only
 
-**Check Mail — individual items** (`/daily-report trello mail {account}`):
+**Check Mail — individual items** (`/daily-report trello mail duongdn|carrick|nick|rick|kai|ken`):
 
 | Arg | Item name |
 |------|-----------|
