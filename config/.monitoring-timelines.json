@@ -1,8 +1,8 @@
 {
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-03-30T08:35:00+07:00",
-    "output_file": "reports/2026-03-30/daily-report.md"
+    "last_run": "2026-03-31T08:20:00+07:00",
+    "output_file": "reports/2026-03-31/daily-report.md"
   },
   "refresh": {
     "description": "Updated when daily-report-refresh runs. Used as start time for next refresh. Independent from daily_report timeline.",
@@ -11,7 +11,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-03-30T08:35:00+07:00",
-    "output_file": "reports/2026-03-30/daily-report.md"
+    "last_run": "2026-03-31T08:20:00+07:00",
+    "output_file": "reports/2026-03-31/daily-report.md"
   }
 }
