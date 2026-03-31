@@ -5,9 +5,49 @@
     "output_file": "reports/2026-03-31/daily-report.md"
   },
   "refresh": {
-    "description": "Updated when daily-report-refresh runs. Used as start time for next refresh. Independent from daily_report timeline.",
+    "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",
     "last_run": "2026-03-31T15:43:00+07:00",
-    "output_file": "reports/2026-03-31/1409-update.md"
+    "output_file": "reports/2026-03-31/1409-update.md",
+    "email": {
+      "duongdn": { "last_run": "2026-03-31T15:41:00+07:00" },
+      "carrick": { "last_run": "2026-03-31T14:09:00+07:00" },
+      "nick":    { "last_run": "2026-03-31T14:09:00+07:00" },
+      "rick":    { "last_run": "2026-03-31T14:09:00+07:00" },
+      "kai":     { "last_run": "2026-03-31T14:09:00+07:00" },
+      "ken":     { "last_run": "2026-03-31T15:41:00+07:00" }
+    },
+    "slack": {
+      "baamboozle":   { "last_run": "2026-03-31T14:09:00+07:00" },
+      "rdc":          { "last_run": "2026-03-31T14:09:00+07:00" },
+      "swift":        { "last_run": "2026-03-31T14:09:00+07:00" },
+      "xtreme":       { "last_run": "2026-03-31T14:09:00+07:00" },
+      "samguard":     { "last_run": "2026-03-31T14:09:00+07:00" },
+      "ggs":          { "last_run": "2026-03-31T14:09:00+07:00" },
+      "amazingmeds":  { "last_run": "2026-03-31T14:09:00+07:00" },
+      "generator":    { "last_run": "2026-03-31T14:09:00+07:00" },
+      "legalatoms":   { "last_run": "2026-03-31T14:09:00+07:00" },
+      "mpfc":         { "last_run": "2026-03-31T14:09:00+07:00" },
+      "williambills": { "last_run": "2026-03-31T14:09:00+07:00" },
+      "equanimity":   { "last_run": "2026-03-31T14:09:00+07:00" },
+      "socal":        { "last_run": "2026-03-31T14:09:00+07:00" },
+      "aigile":       { "last_run": "2026-03-31T14:09:00+07:00" }
+    },
+    "discord": {
+      "airagri": { "last_run": "2026-03-31T14:09:00+07:00" },
+      "bizurk":  { "last_run": "2026-03-31T14:09:00+07:00" }
+    },
+    "sheets": {
+      "longvv":  { "last_run": "2026-03-31T14:09:00+07:00" },
+      "phucvt":  { "last_run": "2026-03-31T14:09:00+07:00" },
+      "tuannt":  { "last_run": "2026-03-31T14:09:00+07:00" },
+      "vietph":  { "last_run": "2026-03-31T14:09:00+07:00" },
+      "khanhhh": { "last_run": "2026-03-31T14:09:00+07:00" },
+      "lenh":    { "last_run": "2026-03-31T14:09:00+07:00" }
+    },
+    "scrin":    { "last_run": "2026-03-31T14:09:00+07:00" },
+    "fountain": { "last_run": "2026-03-31T14:09:00+07:00" },
+    "elena":    { "last_run": "2026-03-31T15:43:00+07:00" },
+    "discord_all": { "last_run": "2026-03-31T14:09:00+07:00" }
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",

@@ -8,7 +8,20 @@ On-demand re-scan since the last check. Generates a **separate timestamped file*
 
 **Output:** `./reports/{YYYY-MM-DD}/{HHMM}-update.md`
 **Partial runs:** When run with a piece argument, still write/append results to the update file. Create the file if it doesn't exist yet; append a new section if it does.
-**Timeline:** Uses `refresh.last_run` from `config/.monitoring-timelines.json`. If stale (>1 day old), fall back to `daily_report.last_run`. After completing, update ONLY `refresh.last_run`.
+
+**Timeline — per-source timestamps (CRITICAL):**
+Each piece/account has its own `last_run` in `config/.monitoring-timelines.json`. This prevents gaps when pieces run at different times.
+
+Window start lookup order (for a given source/account):
+1. `refresh.{source}.{account}.last_run` — e.g. `refresh.email.carrick.last_run`
+2. `refresh.{source}.last_run` — e.g. `refresh.slack.baamboozle.last_run`
+3. `refresh.last_run` — global fallback
+4. `daily_report.last_run` — if global refresh is stale (>1 day)
+
+After completing a piece: update ONLY that piece's own `last_run`.
+- Single account: update `refresh.email.carrick.last_run`
+- All email: update all 6 `refresh.email.*.last_run`
+- Full refresh: update `refresh.last_run` AND all individual `refresh.*.last_run`
 
 ---
 
@@ -227,12 +240,12 @@ Send Matrix reminders to developers still at 0h by afternoon (≥ 13:00) with no
 
 1. Read configs, timelines, memory
 2. Read today's daily report + any previous update files
-3. Determine window: `refresh.last_run` → now (fall back to `daily_report.last_run` if stale)
+3. Each source uses its own `refresh.{source}.{account}.last_run` as window start (fall back chain: source → global → daily_report)
 4. Launch parallel agents: Slack + Fountain + Email+Discord+GitHub + Sheets+Scrin
 5. Compare all findings — highlight only NEW/CHANGED items
 6. Update Trello items where applicable
 7. Write `reports/{YYYY-MM-DD}/{HHMM}-update.md`
-8. Update ONLY `refresh.last_run` + `refresh.output_file` in timelines
+8. Update `refresh.last_run` AND all individual `refresh.*.last_run` to now
 
 ---
 
@@ -240,6 +253,7 @@ Send Matrix reminders to developers still at 0h by afternoon (≥ 13:00) with no
 
 - NEVER overwrite the daily report file
 - Only report NEW items since last check
+- **Per-source timestamps:** Each piece uses its own `refresh.{source}.{account}.last_run` — never use global `refresh.last_run` for a partial run. Update only the piece's own timestamp after completing.
 - Slack: `search.messages` only, never `conversations.history`
 - Discord: AirAgri + Bizurk only (NOT HOMIEAPP)
 - Matrix token fails → fix via `scripts/matrix-token-refresh.js`. Never report as expired.
