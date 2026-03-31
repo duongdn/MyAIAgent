@@ -86,6 +86,16 @@
       "deployed": true,
       "status_updated": true,
       "pending_action": "DONE — Redmine #77905 marked as Deployed on 2026-03-31"
+    },
+    {
+      "pr": 296,
+      "branch": "external-dp",
+      "type": "dp",
+      "ticket_id": "external-dp",
+      "merged_at": "2026-03-31",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "PR #296 merged 10:28 ICT — PENDING deploy + Matrix announcement (tokens expired)"
     }
   ],
   "blocked": [],
