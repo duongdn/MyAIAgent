@@ -14,58 +14,136 @@ On-demand re-scan since the last check. Generates a **separate timestamped file*
 
 ## Quick Reference — Run by Piece
 
-| Command | What it checks | When to use |
-|---------|---------------|-------------|
-| `/daily-report-refresh` | Everything since last refresh | Afternoon check, anytime |
-| `/daily-report-refresh email` | 6 email accounts | New email suspected |
-| `/daily-report-refresh slack` | 13 Slack workspaces | Check Slack updates |
-| `/daily-report-refresh discord` | AirAgri + Bizurk | Check Discord updates |
-| `/daily-report-refresh sheets` | All Google Sheets task logs | Check developer hours |
-| `/daily-report-refresh scrin` | Scrin.io (TuanNT/John Yi) | Check time tracking |
-| `/daily-report-refresh fountain` | Fountain 5-part (Matrix + Sheets + Trello) | Check Fountain scope |
-| `/daily-report-refresh elena` | Elena GitHub PRs + deploy + Redmine | Handle new Elena PRs |
-| `/daily-report-refresh trello` | Update Trello checklist items | Re-run completions |
-| `/daily-report-refresh reminders` | Send Matrix task log reminders | Afternoon reminder run |
+| Command | What it checks |
+|---------|---------------|
+| `/daily-report-refresh` | Everything since last refresh |
+| **Email** | |
+| `/daily-report-refresh email` | All 6 accounts |
+| `/daily-report-refresh email duongdn` | duongdn@ only |
+| `/daily-report-refresh email carrick` | carrick@ only |
+| `/daily-report-refresh email nick` | nick@ only |
+| `/daily-report-refresh email rick` | rick@ only |
+| `/daily-report-refresh email kai` | kai@ only |
+| `/daily-report-refresh email ken` | ken@ only |
+| **Slack** | |
+| `/daily-report-refresh slack` | All 13 workspaces |
+| `/daily-report-refresh slack baamboozle` | Baamboozle only |
+| `/daily-report-refresh slack rdc` | RDC - FM Monitoring only |
+| `/daily-report-refresh slack swift` | Swift Studio only |
+| `/daily-report-refresh slack xtreme` | Xtreme Soft Solutions only |
+| `/daily-report-refresh slack samguard` | SAM GUARD - Mobile only |
+| `/daily-report-refresh slack ggs` | Global Grazing Services only |
+| `/daily-report-refresh slack amazingmeds` | Amazing Meds only |
+| `/daily-report-refresh slack generator` | Generator only |
+| `/daily-report-refresh slack legalatoms` | LegalAtoms only |
+| `/daily-report-refresh slack mpfc` | MyPersonalFootballCoach only |
+| `/daily-report-refresh slack williambills` | William Bills only |
+| `/daily-report-refresh slack equanimity` | Equanimity only |
+| `/daily-report-refresh slack socal` | SoCal Auto Wraps only |
+| `/daily-report-refresh slack aigile` | Aigile Dev only |
+| **Discord** | |
+| `/daily-report-refresh discord` | AirAgri + Bizurk |
+| `/daily-report-refresh discord airagri` | AirAgri (nusvinn) only |
+| `/daily-report-refresh discord bizurk` | Bizurk (nuscarrick) only |
+| **Google Sheets** | |
+| `/daily-report-refresh sheets` | All developers |
+| `/daily-report-refresh sheets longvv` | LongVV only |
+| `/daily-report-refresh sheets phucvt` | PhucVT only |
+| `/daily-report-refresh sheets tuannt` | TuanNT (John Yi + Rebecca) only |
+| `/daily-report-refresh sheets vietph` | VietPH only |
+| `/daily-report-refresh sheets khanhhh` | KhanhHH only |
+| `/daily-report-refresh sheets lenh` | LeNH (Rory + Franc + Aysar combined) only |
+| **Scrin.io** | |
+| `/daily-report-refresh scrin` | TuanNT/John Yi time tracking |
+| **Fountain** | |
+| `/daily-report-refresh fountain` | Full 5-part check |
+| `/daily-report-refresh fountain matrix` | Part 1 — Matrix plan only |
+| `/daily-report-refresh fountain sheets` | Part 2+3 — Task log actuals + plan vs actual |
+| `/daily-report-refresh fountain runway` | Part 4 — Capacity & runway only |
+| `/daily-report-refresh fountain overest` | Part 5 — Over-estimate tracking only |
+| `/daily-report-refresh fountain trello` | Trello board only (customer comments, stuck cards) |
+| **Elena** | |
+| `/daily-report-refresh elena` | Elena PRs + deploy + Redmine + Precognize |
+| `/daily-report-refresh elena prs` | Check + merge open PRs only (no deploy) |
+| `/daily-report-refresh elena deploy` | Deploy already-merged PRs pending deploy |
+| `/daily-report-refresh elena precognize` | Precognize nusken PRs only |
+| **Trello** | |
+| `/daily-report-refresh trello` | Both cards, all items |
+| `/daily-report-refresh trello progress` | Check Progress, all items |
+| `/daily-report-refresh trello progress maddy` | Maddy - Carrick/Kai/Luis |
+| `/daily-report-refresh trello progress blake` | Blake |
+| `/daily-report-refresh trello progress johnyi` | John Yi - Amazing Meds |
+| `/daily-report-refresh trello progress james` | James Diamond - Vinn task |
+| `/daily-report-refresh trello progress franc` | Franc |
+| `/daily-report-refresh trello progress rory` | Rory |
+| `/daily-report-refresh trello progress aysar` | Aysar |
+| `/daily-report-refresh trello progress elliott` | Elliott |
+| `/daily-report-refresh trello progress swift` | Rory (Swift Studio) |
+| `/daily-report-refresh trello progress raymond` | Raymond - LegalAtoms |
+| `/daily-report-refresh trello progress marcel` | Marcel |
+| `/daily-report-refresh trello progress colin` | Colin |
+| `/daily-report-refresh trello progress andrew` | Andrew Taraba |
+| `/daily-report-refresh trello progress elena` | Elena - SamGuard |
+| `/daily-report-refresh trello progress mpfc` | MPFC |
+| `/daily-report-refresh trello progress bailey` | Bailey |
+| `/daily-report-refresh trello progress fountain` | Fountain |
+| `/daily-report-refresh trello progress rebecca` | Rebecca (William Bills) |
+| `/daily-report-refresh trello progress neural` | Neural Contract |
+| `/daily-report-refresh trello mail` | Check Mail, all 6 items |
+| `/daily-report-refresh trello mail duongdn` | DuongDn only |
+| `/daily-report-refresh trello mail carrick` | Carrick only |
+| `/daily-report-refresh trello mail nick` | Nick only |
+| `/daily-report-refresh trello mail rick` | Rick only |
+| `/daily-report-refresh trello mail kai` | Kai only |
+| `/daily-report-refresh trello mail ken` | Ken only |
+| **Reminders** | |
+| `/daily-report-refresh reminders` | Send Matrix 0h reminders to all devs |
+| `/daily-report-refresh reminders lenh` | Send reminder to LeNH only |
+| `/daily-report-refresh reminders phucvt` | Send reminder to PhucVT only |
+| `/daily-report-refresh reminders tuannt` | Send reminder to TuanNT only |
+| `/daily-report-refresh reminders longvv` | Send reminder to LongVV only |
 
 ---
 
-## Piece 1 — Email (`/daily-report-refresh email`)
+## Piece 1 — Email (`/daily-report-refresh email [account]`)
 
-Same as daily-report but window = `refresh.last_run` → now.
+Window = `refresh.last_run` → now. Report only NEW emails since last refresh.
+
+Accounts: duongdn, carrick, nick (filter: John Yi), rick (filter: Kunal/Fountain/InfinityRose), kai (filter: Madhuraka), ken (folder: NewsLetter, filter: Precognize/development)
 
 **Method:** IMAP SINCE `{day_before_refresh_last_run}`, filter Date header >= `refresh.last_run`
 
-Report only NEW emails since last refresh. If nothing new → "No new emails."
+If checking a single account → complete only that account's "Check mail" Trello item.
 
 ---
 
-## Piece 2 — Slack (`/daily-report-refresh slack`)
+## Piece 2 — Slack (`/daily-report-refresh slack [workspace]`)
 
-Same as daily-report but window = `refresh.last_run` → now.
+Window = `refresh.last_run` → now. Report only NEW messages.
 
-**Method:** `search.messages` with `after:{day_before_refresh_cutoff}` + epoch filter for `ts > refresh_epoch`
+**Method:** `search.messages` with `after:{day_before_refresh_cutoff}` + epoch filter `ts > refresh_epoch`
 
-**Also check:** Nick-GG daily report if not yet confirmed posted. Kai daily report if not yet confirmed.
+**Also check:** Nick-GG daily report if not yet confirmed today. Kai daily report if not yet confirmed.
 
-Report only NEW messages. If nothing new per workspace → skip that workspace in output.
+Session tokens (Amazing Meds, Equanimity): auto-refresh via crumb+POST if invalid_auth — never report as expired.
 
----
-
-## Piece 3 — Discord (`/daily-report-refresh discord`)
-
-Same as daily-report, window = `refresh.last_run` → now.
-
-AirAgri + Bizurk only (NOT HOMIEAPP). Verify tokens before using.
+If checking a single workspace → complete only its mapped "Check progress" Trello item.
 
 ---
 
-## Piece 4 — Google Sheets (`/daily-report-refresh sheets`)
+## Piece 3 — Discord (`/daily-report-refresh discord [server]`)
 
-Re-check developer hours. By afternoon (≥ 13:00 local), alert on any developer with 0h and no leave note.
+Window = `refresh.last_run` → now. AirAgri + Bizurk only (NOT HOMIEAPP). Verify tokens before using.
 
-Compare with what the daily report already showed — only flag changes:
+If checking a single server → complete only its mapped Trello item.
+
+---
+
+## Piece 4 — Google Sheets (`/daily-report-refresh sheets [developer]`)
+
+Re-check developer hours vs what daily report already showed. Only flag changes:
 - New hours logged (good news)
-- Still 0h at afternoon with no leave (escalate)
+- Still 0h at afternoon (≥ 13:00) with no leave → escalate
 
 ---
 
@@ -75,23 +153,21 @@ Re-fetch TuanNT's today tracked hours. Compare with John Yi task log. Show delta
 
 ---
 
-## Piece 6 — Fountain (`/daily-report-refresh fountain`)
+## Piece 6 — Fountain (`/daily-report-refresh fountain [part]`)
 
-Full 5-part check — same as daily-report. All 5 parts mandatory.
-
-Focus on what changed since last check:
+Full 5-part check — all 5 parts mandatory when running without sub-arg. Focus on what changed since last check:
 - New W{n} actuals (devs logging hours)
 - #2615, #2735, #2595 — are they still growing?
 - New customer Trello comments
-- Runway delta vs morning
+- Runway delta vs previous
 
 If Matrix token fails → run `scripts/matrix-token-refresh.js` immediately. Never report as expired.
 
 ---
 
-## Piece 7 — Elena (`/daily-report-refresh elena`)
+## Piece 7 — Elena (`/daily-report-refresh elena [sub]`)
 
-Check for new PRs merged or opened in Elena-SamGuard-Digital-Plant since last refresh.
+Check for new PRs merged or opened since last refresh.
 
 For each undeployed merged PR in `config/.elena-pending-actions.json`:
 1. Deploy to MayBanServer
@@ -102,29 +178,58 @@ Check Precognize for nusken PRs.
 
 ---
 
-## Piece 8 — Trello (`/daily-report-refresh trello`)
+## Piece 8 — Trello (`/daily-report-refresh trello [card] [item]`)
 
-Re-evaluate Trello checklist items based on refresh findings. Complete any items where alerts have been resolved since morning.
+Re-evaluate checklist items based on refresh findings. Complete any items where alerts resolved since morning. Items already completed stay completed — only update incomplete ones.
 
-Note: Items already completed in morning stay completed — only update incomplete ones.
+**Check Progress item → Trello item name mapping:**
+
+| Arg | Checklist | Item name |
+|-----|-----------|-----------|
+| maddy | Normal | Maddy - Carrick/Kai/Luis |
+| blake | Normal | Blake |
+| johnyi | Normal | John Yi - Amazing Meds |
+| james | Should do | James Diamond - Vinn task |
+| franc | Closely monitor | Franc |
+| rory | Closely monitor | Rory |
+| aysar | Closely monitor | Aysar |
+| elliott | Closely monitor | Elliott |
+| swift | Closely monitor | Rory (Swift Studio) |
+| raymond | Work | Raymond - LegalAtoms |
+| marcel | Work | Marcel |
+| colin | Work | Colin |
+| andrew | Work | Andrew Taraba |
+| elena | Work | Elena - SamGuard |
+| mpfc | Work | MPFC |
+| bailey | Work | Bailey |
+| fountain | Work | Fountain |
+| rebecca | Work | Rebecca (William Bills) |
+| neural | Work | Neural Contract |
+
+**Check Mail item → account mapping:** duongdn, carrick, nick, rick, kai, ken
 
 ---
 
-## Piece 9 — Reminders (`/daily-report-refresh reminders`)
+## Piece 9 — Reminders (`/daily-report-refresh reminders [developer]`)
 
-Send Matrix reminders to developers still at 0h by afternoon (≥ 13:00) with no leave note.
+Send Matrix reminders to developers still at 0h by afternoon (≥ 13:00) with no leave note. Skip devs already reminded today.
 
-Same developer rooms as daily-report. Skip devs already reminded today.
+| Developer | Matrix Room |
+|-----------|-------------|
+| PhucVT | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
+| LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
+| LongVV | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
+| TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
 
 ---
 
 ## Full Refresh (`/daily-report-refresh`)
 
 1. Read configs, timelines, memory
-2. Read today's daily report + any previous update files (know what's already reported)
-3. Determine monitoring window: `refresh.last_run` → now (fall back to `daily_report.last_run` if stale)
+2. Read today's daily report + any previous update files
+3. Determine window: `refresh.last_run` → now (fall back to `daily_report.last_run` if stale)
 4. Launch parallel agents: Slack + Fountain + Email+Discord+GitHub + Sheets+Scrin
-5. Compare all findings with daily report — highlight only NEW/CHANGED items
+5. Compare all findings — highlight only NEW/CHANGED items
 6. Update Trello items where applicable
 7. Write `reports/{YYYY-MM-DD}/{HHMM}-update.md`
 8. Update ONLY `refresh.last_run` + `refresh.output_file` in timelines
@@ -134,7 +239,7 @@ Same developer rooms as daily-report. Skip devs already reminded today.
 ## Key Rules
 
 - NEVER overwrite the daily report file
-- Only report NEW items since last check — skip anything already in the daily report
+- Only report NEW items since last check
 - Slack: `search.messages` only, never `conversations.history`
 - Discord: AirAgri + Bizurk only (NOT HOMIEAPP)
 - Matrix token fails → fix via `scripts/matrix-token-refresh.js`. Never report as expired.
