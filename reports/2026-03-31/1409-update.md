@@ -211,3 +211,18 @@ All other items remain as completed from morning report.
 3 emails — all activity on PR #4808 (already seen in prior check at 15:16). No new alerts.
 
 Trello: Ken item ✓ already complete.
+
+---
+
+## Elena Deploy — 15:43 (+07:00)
+
+**PR #296** — branch `external-dp`
+
+| Step | Result |
+|------|--------|
+| git pull origin process-digital-plant | ✅ 4 files updated |
+| ng build --configuration development | ✅ Success (16s) |
+| Redmine update | N/A (no Redmine ticket — DP branch) |
+| Matrix announce → Elena - Digital Plant | ✅ Sent |
+
+`config/.elena-pending-actions.json` updated — PR #296 marked deployed.

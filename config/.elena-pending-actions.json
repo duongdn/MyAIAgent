@@ -93,9 +93,9 @@
       "type": "dp",
       "ticket_id": "external-dp",
       "merged_at": "2026-03-31",
-      "deployed": false,
+      "deployed": true,
       "status_updated": false,
-      "pending_action": "PR #296 merged 10:28 ICT — PENDING deploy + Matrix announcement (tokens expired)"
+      "pending_action": "DONE — external-dp deployed to MayBanServer on 2026-03-31 15:43, announced to Matrix Elena - Digital Plant room"
     }
   ],
   "blocked": [],
