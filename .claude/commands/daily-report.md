@@ -68,9 +68,16 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report elena deploy` | Deploy already-merged PRs pending deploy |
 | `/daily-report elena precognize` | Precognize nusken PRs only |
 | **Trello** | |
-| `/daily-report trello` | Update all Check Progress + Check Mail items |
-| `/daily-report trello progress` | Check Progress card only |
-| `/daily-report trello mail` | Check Mail card only |
+| `/daily-report trello` | Both cards, all items |
+| `/daily-report trello progress` | Check Progress, all items |
+| `/daily-report trello progress fountain` | Fountain item only |
+| `/daily-report trello progress elena` | Elena item only |
+| `/daily-report trello progress johnyi` | John Yi item only |
+| `/daily-report trello progress {slug}` | Any single progress item |
+| `/daily-report trello mail` | Check Mail, all 6 items |
+| `/daily-report trello mail duongdn` | DuongDn item only |
+| `/daily-report trello mail rick` | Rick item only |
+| `/daily-report trello mail {account}` | Any single mail item |
 | **Reminders** | |
 | `/daily-report reminders` | Send Matrix 0h reminders to all devs |
 | `/daily-report reminders lenh` | Send reminder to LeNH only |
@@ -352,16 +359,56 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 
 ---
 
-## Piece 8 — Trello (`/daily-report trello [card]`)
+## Piece 8 — Trello (`/daily-report trello [card] [item]`)
 
-Supports card-level targeting:
+Supports card and item-level targeting:
 - `/daily-report trello` — update both Check Progress + Check Mail
-- `/daily-report trello progress` — Check Progress card only (all 4 checklists)
-- `/daily-report trello mail` — Check Mail card only
+- `/daily-report trello progress` — Check Progress card, all items
+- `/daily-report trello mail` — Check Mail card, all items
 
-**Cards:** Find by NAME each time (IDs change daily):
-- "Check progress" → 4 checklists (Normal, Should do, Closely monitor, Work)
-- "Check mail" → 1 checklist (1 item per email account)
+**Check Progress — individual items** (`/daily-report trello progress {item}`):
+
+| Slug | Checklist | Item name |
+|------|-----------|-----------|
+| `maddy` | Normal | Maddy - Carrick/Kai/Luis |
+| `blake` | Normal | Blake |
+| `johnyi` | Normal | John Yi - Amazing Meds |
+| `james` | Should do | James Diamond - Vinn task |
+| `franc` | Closely monitor | Franc |
+| `rory` | Closely monitor | Rory |
+| `aysar` | Closely monitor | Aysar |
+| `elliott` | Closely monitor | Elliott |
+| `swift` | Closely monitor | Rory (Swift Studio) |
+| `raymond` | Work | Raymond - LegalAtoms |
+| `marcel` | Work | Marcel |
+| `colin` | Work | Colin |
+| `andrew` | Work | Andrew Taraba |
+| `elena` | Work | Elena - SamGuard |
+| `mpfc` | Work | MPFC |
+| `bailey` | Work | Bailey |
+| `fountain` | Work | Fountain |
+| `rebecca` | Work | Rebecca (William Bills) |
+| `neural` | Work | Neural Contract |
+
+Examples:
+- `/daily-report trello progress fountain` — complete/skip Fountain item only
+- `/daily-report trello progress elena` — complete Elena item only
+- `/daily-report trello progress johnyi` — complete John Yi item only
+
+**Check Mail — individual items** (`/daily-report trello mail {account}`):
+
+| Slug | Item name |
+|------|-----------|
+| `duongdn` | DuongDn |
+| `carrick` | Carrick |
+| `nick` | Nick |
+| `rick` | Rick |
+| `kai` | Kai |
+| `ken` | Ken |
+
+Examples:
+- `/daily-report trello mail duongdn` — complete DuongDn item only
+- `/daily-report trello mail rick` — complete Rick item only
 
 **Completion rule:** No alert from monitoring source → complete the item. Alert found → leave incomplete, note in report.
 
@@ -370,7 +417,11 @@ Supports card-level targeting:
 - **Rebecca (William Bills)**: do NOT complete if TuanNT col P = "Chưa"
 - **LegalAtoms**: filter Nick-specific content only (ignore unrelated channel noise)
 
-Run after all sources have been checked (or run inline after each source during a full run).
+**Report — always append to daily report:**
+```
+## Trello [progress|mail] [item] — {HH:MM} (+07:00)
+- {item}: ✓ complete / ⚠️ skipped ({reason})
+```
 
 ---
 
