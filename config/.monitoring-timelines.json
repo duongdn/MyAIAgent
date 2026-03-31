@@ -6,7 +6,7 @@
   },
   "refresh": {
     "description": "Updated when daily-report-refresh runs. Used as start time for next refresh. Independent from daily_report timeline.",
-    "last_run": "2026-03-31T14:09:00+07:00",
+    "last_run": "2026-03-31T15:41:00+07:00",
     "output_file": "reports/2026-03-31/1409-update.md"
   },
   "alert": {
