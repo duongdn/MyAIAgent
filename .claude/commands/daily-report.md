@@ -17,7 +17,13 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | Command | What it checks | When to use |
 |---------|---------------|-------------|
 | `/daily-report` | Everything (full run) | Morning |
-| `/daily-report email` | 6 email accounts | Re-check email only |
+| `/daily-report email` | All 6 email accounts | Re-check all email |
+| `/daily-report email duongdn` | duongdn@ only | Re-check one account |
+| `/daily-report email carrick` | carrick@ only | Re-check one account |
+| `/daily-report email rick` | rick@ only | Re-check one account |
+| `/daily-report email nick` | nick@ only | Re-check one account |
+| `/daily-report email kai` | kai@ only | Re-check one account |
+| `/daily-report email ken` | ken@ only | Re-check one account |
 | `/daily-report slack` | 13 Slack workspaces | Re-check Slack only |
 | `/daily-report discord` | AirAgri + Bizurk | Re-check Discord only |
 | `/daily-report sheets` | All Google Sheets task logs | Re-check developer hours |
@@ -29,23 +35,53 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 
 ---
 
-## Piece 1 — Email (`/daily-report email`)
+## Piece 1 — Email (`/daily-report email [account]`)
+
+Supports individual account targeting:
+- `/daily-report email` — check all 6 accounts
+- `/daily-report email duongdn` — check duongdn@ only
+- `/daily-report email carrick` — check carrick@ only
+- `/daily-report email nick` — check nick@ only
+- `/daily-report email rick` — check rick@ only
+- `/daily-report email kai` — check kai@ only
+- `/daily-report email ken` — check ken@ only
 
 **Accounts:** 6 in `config/.email-accounts.json`
-- duongdn@, carrick@, nick@ (filter: John Yi), rick@ (filter: Kunal/Fountain/InfinityRose), kai@ (filter: Madhuraka), ken@ (folder: NewsLetter, filter: Precognize)
 
-**Method:** IMAP SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`
-**Port:** 993 (IMAPS)
+| Account | Password | Filter | Folder |
+|---------|----------|--------|--------|
+| duongdn@nustechnology.com | rtYVkk1jmreE | none | INBOX |
+| carrick@nustechnology.com | SNUp3Q3WAy76 | none | INBOX |
+| nick@nustechnology.com | iHWa82WJ3q5Q | John Yi | INBOX |
+| rick@nustechnology.com | ij3s9L8AQz0Z | Kunal / Fountain / InfinityRose | INBOX |
+| kai@nustechnology.com | JFDn4fsHiU0m | Madhuraka | INBOX |
+| ken@nustechnology.com | WY60fEDrTfXM | Precognize/development | NewsLetter |
+
+**Method:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
 **What to look for:**
-- rick@: Rollbar/BugSnag production alerts for Fountain, InfinityRoses
-- carrick@: Redmine bug notifications for Generator/Elliott
 - duongdn@: leave requests, New Relic alerts
+- carrick@: Redmine bug notifications for Generator/Elliott
 - nick@: anything from John Yi
+- rick@: Rollbar/BugSnag **production** alerts for Fountain, InfinityRoses
 - kai@: Jira/Madhuraka mentions
 - ken@: Precognize GitHub PR activity
 
-**Trello:** Complete "Check Mail" card items (one per account) after checking each. **MUST complete all 6 items before finishing the email piece** — find "Check mail" card by name on board `O83pAyqb`, get its checklist, mark all items complete via `PUT /cards/{id}/checkItem/{itemId}?state=complete`.
+**Trello — after checking:**
+- Find "Check mail" card by name on board `O83pAyqb`
+- Mark the checklist item(s) for the checked account(s) complete: `PUT /cards/{id}/checkItem/{itemId}?state=complete&key=...&token=...`
+- If checking a single account → complete only that account's item
+- If checking all → complete all 6 items
+
+**Report — always append to daily report:**
+Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
+```
+## Email [account|all] — {HH:MM} (+07:00)
+| Account | Count | Summary |
+...
+{Alerts if any.}
+Trello: {account} item ✓ complete.
+```
 
 ---
 
