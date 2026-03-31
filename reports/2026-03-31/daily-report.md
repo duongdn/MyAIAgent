@@ -16,6 +16,7 @@
 | MEDIUM | Fountain | #2735 (Smart Link) new overrun: 71.75h vs 60h est | [Fountain Report](#fountain) |
 | LOW | Email/Fountain | FountainStaging `Temple::FilterError` in EmailWorker | rick@ email |
 | LOW | Fountain/Trello | kunalsheth flagged Stripe webhook bugs (Mar 30) | [Trello](#trello-board) |
+| MEDIUM | Google Docs | LeNH 0h Mon 30 across all 3 projects — no leave noted | — |
 | INFO | Slack/GG | Nick (Global Grazing) daily report not yet posted — early Monday AM | — |
 
 ## Source Summary
@@ -25,13 +26,13 @@
 | Email (6) | ⚠️ | 40 total. Fountain prod errors, InfinityRoses chunk error, New Relic sync stopped, 3 Redmine bugs for Generator, Precognize PR activity |
 | Slack (13) | ⚠️ | 2 session tokens expired (Amazing Meds, Equanimity). 11 OK workspaces scanned. Kai report ✓. Nick-GG not yet posted (Mon AM) |
 | Discord (2) | ✓ | Both tokens valid. Vinn report ✓, Jeff report ✓ (4h). Bizurk: 0 messages |
-| Google Docs | ⚠️ | Rate-limited (concurrent API calls). Early Mon AM — 0h expected. LongVV leave request for today confirmed via email |
+| Google Docs | ⚠️ | All checked. LeNH 0h Mon 30 (no leave). TuanNT leave Mon 30. LongVV half-day Fri, leave req Mon 31. PhucVT/VietPH/KhanhHH OK |
 | Scrin.io | ✓ | TuanNT: 0h today (Mon AM, expected). 0h Sun (expected). Last tracked: Thu Mar 27 |
 | Daily checks | ⚠️ | Kai ✓, Vinn ✓, Jeff ✓ (4h). Nick-GG pending (early AM) |
 | Matrix | ✓ | Fountain weekly plan fetched. Token refreshed via browser login |
 | GitHub | ✓ | 3 Elena PRs merged+deployed (#293, #294, #295). Redmine #77904/#77905/#77906 → Deployed. Precognize: 2 open PRs (not nusken) |
 | Redmine | ✓ | #77904, #77905, #77906 updated to Deployed |
-| Trello | ⚠️ | Completion pending — see below |
+| Trello | ⚠️ | 15/18 completed, 3 skipped (2 expired tokens, 1 Fountain alerts) |
 
 ## Email Details
 
@@ -92,19 +93,25 @@
 
 ## Google Docs
 
-**⚠️ Rate limited** — multiple concurrent agents exhausted 60 reads/min quota. Partial results only.
+| Developer | Project | Fri 27/03 | Mon 30/03 | Leave Notes | Status |
+|-----------|---------|-----------|-----------|-------------|--------|
+| LongVV | Xtreme Soft | 4h | 8h | Fri: "Nghỉ nửa ngày" (half day). Leave request email for Mon 31 | ✓ OK (Fri half-day = 4h acceptable) |
+| PhucVT | James Diamond | 8h | 8h | None | ✓ OK |
+| VietPH | Paturevision | 8h | 8h | None | ✓ OK |
+| KhanhHH | Generator | 0h | 8h | Fri: "Nghỉ cả ngày" (full day off) | ✓ OK (leave) |
+| TuanNT | John Yi | 2.75h | 0h | Mon 30: "Nghỉ cả ngày" | ⚠️ On leave Mon 30 |
+| TuanNT | Rebecca | 1.25h (DuongDN) | 0.5h (DuongDN) | Mon 30: "Nghỉ cả ngày" | ⚠️ Extended leave |
+| LeNH | Rory | 6.33h | 0h | None | ⚠️ Mon 30 = 0h (TaiTM 3.5h only) |
+| LeNH | Franc | 1.67h | 0h | None | — (part of split) |
+| LeNH | Aysar | 0h | 0h | None | — (part of split) |
+| LeNH | **Total** | **8h** | **0h** | | ⚠️ **Mon 30 = 0h, no leave noted** |
+| DuongDN | Marcel | 0.83h | 0h | None | ✓ Adhoc, 0h OK |
 
-| Developer | Project | Today (Mon AM) | Status |
-|-----------|---------|---------------|--------|
-| LongVV | Xtreme Soft | 0h | **On leave** (confirmed via email) |
-| PhucVT | James Diamond | — | Tab not found (rate limit) |
-| VietPH | Paturevision | — | Tab not found (rate limit) |
-| KhanhHH | Generator | — | Tab not found (rate limit) |
-| TuanNT | John Yi + Rebecca + Bailey | — | Rate limited |
-| LeNH | Rory + Franc + Aysar | — | Rate limited |
-| DuongDN | Marcel | — | Adhoc, 0h OK |
+**Mon 31 (today):** 0h across all devs — early Monday AM, expected.
 
-**Note:** Early Monday morning (~08:08), 0h is expected. Full hours check deferred to refresh run.
+**Alerts:**
+- **LeNH Mon 30 = 0h** across all 3 projects with no leave note
+- **TuanNT on leave** Mon 30 in both John Yi + Rebecca ("Nghỉ cả ngày")
 
 ## Scrin.io
 
@@ -215,7 +222,7 @@ No action needed.
 
 **Check Mail:** 6/6 completed ✓
 
-**Check Progress:** 12/18 completed, 6 skipped
+**Check Progress:** 15/18 completed, 3 skipped
 
 | Item | Status | Reason |
 |------|--------|--------|
@@ -231,12 +238,12 @@ No action needed.
 | Elena - SamGuard | ✅ Done | 3 PRs merged+deployed |
 | MPFC | ✅ Done | 0 messages |
 | Neural Contract | ✅ Done | No relevant emails |
-| **John Yi - Amazing Meds** | ❌ Skip | Slack session token expired |
-| **Marcel** | ❌ Skip | Equanimity session token expired |
-| **Elliott - Generator** | ❌ Skip | KhanhHH hours unverified (rate limit) |
-| **Bailey** | ❌ Skip | VietPH hours unverified (rate limit) |
-| **Fountain** | ❌ Skip | ThinhT shortfall, #2615 growing, #2735 overrun |
-| **Rebecca - William Bills** | ❌ Skip | TuanNT task log unverified (rate limit) |
+| Elliott - Generator | ✅ Done | KhanhHH 8h Mon 30, Fri leave approved. Slack OK |
+| Bailey | ✅ Done | VietPH 8h Fri + 8h Mon. Slack OK |
+| Rebecca - William Bills | ✅ Done | TuanNT on approved leave Mon 30. DuongDN covered |
+| **John Yi - Amazing Meds** | ❌ Skip | Slack session token expired — cannot verify |
+| **Marcel** | ❌ Skip | Equanimity session token expired — cannot verify |
+| **Fountain** | ❌ Skip | ThinhT W19 shortfall (4h/20h), #2615 growing, #2735 overrun |
 
 ## Task Log Reminders
 
