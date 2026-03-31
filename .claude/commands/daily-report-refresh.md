@@ -4,64 +4,141 @@ description: On-demand refresh of all monitoring sources (Slack, Discord, Email,
 
 # Daily Report Refresh
 
-Run an on-demand monitoring refresh across all channels. This generates a **separate timestamped update file** — it does NOT overwrite the daily report.
+On-demand re-scan since the last check. Generates a **separate timestamped file** — never overwrites the daily report.
 
-## Output File
+**Output:** `./reports/{YYYY-MM-DD}/{HHMM}-update.md`
+**Timeline:** Uses `refresh.last_run` from `config/.monitoring-timelines.json`. If stale (>1 day old), fall back to `daily_report.last_run`. After completing, update ONLY `refresh.last_run`.
 
-`./reports/{YYYY-MM-DD}/{HHMM}-update.md`
+---
 
-Use current date and time (24h format, local timezone).
+## Quick Reference — Run by Piece
 
-## Instructions
+| Command | What it checks | When to use |
+|---------|---------------|-------------|
+| `/daily-report-refresh` | Everything since last refresh | Afternoon check, anytime |
+| `/daily-report-refresh email` | 6 email accounts | New email suspected |
+| `/daily-report-refresh slack` | 13 Slack workspaces | Check Slack updates |
+| `/daily-report-refresh discord` | AirAgri + Bizurk | Check Discord updates |
+| `/daily-report-refresh sheets` | All Google Sheets task logs | Check developer hours |
+| `/daily-report-refresh scrin` | Scrin.io (TuanNT/John Yi) | Check time tracking |
+| `/daily-report-refresh fountain` | Fountain 5-part (Matrix + Sheets + Trello) | Check Fountain scope |
+| `/daily-report-refresh elena` | Elena GitHub PRs + deploy + Redmine | Handle new Elena PRs |
+| `/daily-report-refresh trello` | Update Trello checklist items | Re-run completions |
+| `/daily-report-refresh reminders` | Send Matrix task log reminders | Afternoon reminder run |
 
-1. Read workflow from `./docs/daily-report-workflow.md`
-2. Read all config files listed in the workflow (`.slack-accounts.json`, `.discord-accounts.json`, `.email-accounts.json`, `.matrix-config.json`, `.google-docs.json`, `.scrin-config.json`, `.redmine-config.json`, `.elena-pending-actions.json`)
-3. Read memory files for rules: feedback on Slack threads (must use `search.messages`), alerts (don't complete Trello if alert found), over-estimate tracking (compare with previous report)
-4. Read today's daily report (`reports/{YYYY-MM-DD}/daily-report.md`) and any previous update files to know what was already reported
-5. Read `.monitoring-timelines.json` for the two-timeline system:
-   - Use `refresh.last_run` as start of monitoring window
-   - BUT check previous refresh report — if it only covered some sources, use `daily_report.last_run` for unchecked sources
-   - After completing, update ONLY `refresh.last_run` to current time
-6. For each monitoring source, fetch **new activity since last check**:
-   - **Slack**: All 13 workspaces using `search.messages` API with `after:{day_before_cutoff}` + epoch ts filter
-   - **Discord**: Both accounts (nusvinn, nuscarrick)
-   - **Email**: All 6 accounts (IMAP SINCE {previous_day}, filter by Date header)
-   - **Matrix**: Fountain room — check for weekly plan updates only
-   - **GitHub**: Elena-SamGuard PRs (duongdn account) + Precognize/development (nusken account)
-   - **Google Sheets**: Task logs for all monitored spreadsheets
-   - **Scrin.io**: Time tracking for John Yi project only (compare with John Yi task log, NOT total)
-   - **Web**: samguard.co JS errors
-   - **Redmine**: Check status of tracked tickets
-   - **Trello**: Check Progress + Check Mail cards, Fountain board (scope, est vs actual, customer msgs)
-7. Compare findings with the daily report — highlight only **new/changed** items
-8. Complete Trello checklist items where no alerts found
-9. Write the update report
-10. Update `.monitoring-timelines.json` refresh timeline
+---
 
-## Fountain Scope Monitor
+## Piece 1 — Email (`/daily-report-refresh email`)
 
-For Fountain, include:
-- Weekly plan vs actual hours (from Matrix + Google Sheets)
-- Capacity & runway: active scope (Not Started + In-progress only) / 86h per week
-- Over-estimate tracking: tasks where actual > est, flag if still growing
-- Trello board: customer comments, stuck tasks, hard-to-release cards
+Same as daily-report but window = `refresh.last_run` → now.
 
-## Arguments
+**Method:** IMAP SINCE `{day_before_refresh_last_run}`, filter Date header >= `refresh.last_run`
 
-If `$ARGUMENTS` is provided, use it to filter which sources to check. Examples:
-- `/daily-report-refresh slack` — only check Slack
-- `/daily-report-refresh fountain` — only check Fountain (Matrix + Google Sheet + Trello)
-- `/daily-report-refresh elena` — only check Elena GitHub + Redmine
-- `/daily-report-refresh` (no args) — check everything
+Report only NEW emails since last refresh. If nothing new → "No new emails."
+
+---
+
+## Piece 2 — Slack (`/daily-report-refresh slack`)
+
+Same as daily-report but window = `refresh.last_run` → now.
+
+**Method:** `search.messages` with `after:{day_before_refresh_cutoff}` + epoch filter for `ts > refresh_epoch`
+
+**Also check:** Nick-GG daily report if not yet confirmed posted. Kai daily report if not yet confirmed.
+
+Report only NEW messages. If nothing new per workspace → skip that workspace in output.
+
+---
+
+## Piece 3 — Discord (`/daily-report-refresh discord`)
+
+Same as daily-report, window = `refresh.last_run` → now.
+
+AirAgri + Bizurk only (NOT HOMIEAPP). Verify tokens before using.
+
+---
+
+## Piece 4 — Google Sheets (`/daily-report-refresh sheets`)
+
+Re-check developer hours. By afternoon (≥ 13:00 local), alert on any developer with 0h and no leave note.
+
+Compare with what the daily report already showed — only flag changes:
+- New hours logged (good news)
+- Still 0h at afternoon with no leave (escalate)
+
+---
+
+## Piece 5 — Scrin.io (`/daily-report-refresh scrin`)
+
+Re-fetch TuanNT's today tracked hours. Compare with John Yi task log. Show delta vs morning.
+
+---
+
+## Piece 6 — Fountain (`/daily-report-refresh fountain`)
+
+Full 5-part check — same as daily-report. All 5 parts mandatory.
+
+Focus on what changed since last check:
+- New W{n} actuals (devs logging hours)
+- #2615, #2735, #2595 — are they still growing?
+- New customer Trello comments
+- Runway delta vs morning
+
+If Matrix token fails → run `scripts/matrix-token-refresh.js` immediately. Never report as expired.
+
+---
+
+## Piece 7 — Elena (`/daily-report-refresh elena`)
+
+Check for new PRs merged or opened in Elena-SamGuard-Digital-Plant since last refresh.
+
+For each undeployed merged PR in `config/.elena-pending-actions.json`:
+1. Deploy to MayBanServer
+2. Update Redmine if applicable
+3. Announce to Matrix "Elena - Digital Plant" room
+
+Check Precognize for nusken PRs.
+
+---
+
+## Piece 8 — Trello (`/daily-report-refresh trello`)
+
+Re-evaluate Trello checklist items based on refresh findings. Complete any items where alerts have been resolved since morning.
+
+Note: Items already completed in morning stay completed — only update incomplete ones.
+
+---
+
+## Piece 9 — Reminders (`/daily-report-refresh reminders`)
+
+Send Matrix reminders to developers still at 0h by afternoon (≥ 13:00) with no leave note.
+
+Same developer rooms as daily-report. Skip devs already reminded today.
+
+---
+
+## Full Refresh (`/daily-report-refresh`)
+
+1. Read configs, timelines, memory
+2. Read today's daily report + any previous update files (know what's already reported)
+3. Determine monitoring window: `refresh.last_run` → now (fall back to `daily_report.last_run` if stale)
+4. Launch parallel agents: Slack + Fountain + Email+Discord+GitHub + Sheets+Scrin
+5. Compare all findings with daily report — highlight only NEW/CHANGED items
+6. Update Trello items where applicable
+7. Write `reports/{YYYY-MM-DD}/{HHMM}-update.md`
+8. Update ONLY `refresh.last_run` + `refresh.output_file` in timelines
+
+---
 
 ## Key Rules
 
 - NEVER overwrite the daily report file
-- Use `search.messages` for Slack (NOT `conversations.history`)
-- Slack `after:` excludes named date — use `after:{day_before}` + epoch filter
-- IMAP `SINCE` uses server dates — search previous day + filter by Date header
+- Only report NEW items since last check — skip anything already in the daily report
+- Slack: `search.messages` only, never `conversations.history`
+- Discord: AirAgri + Bizurk only (NOT HOMIEAPP)
+- Matrix token fails → fix via `scripts/matrix-token-refresh.js`. Never report as expired.
+- Slack session tokens fail → auto-refresh via crumb+POST. Never report as expired.
 - Alert found = do NOT complete Trello item
-- Scrin.io compares with John Yi task log ONLY, not TuanNT total
-- 0h for unfilled days = show as "—" (not filled), not "0h"
-- For over-estimate tasks, compare with previous actuals and flag if STILL GROWING
-- Keep output concise — only report what's NEW since last check
+- Scrin.io: compare with John Yi task log ONLY, not TuanNT total
+- 0h for unfilled → show as "—" not "0h"
+- Over-estimate tasks: flag if STILL GROWING vs previous report, not just over threshold
