@@ -264,5 +264,22 @@ Exception: **LongVV** confirmed on leave today (email request) — no reminder n
 2. #2742 has 19.25h actual but "Not Started" status — needs correction?
 3. Gift of Choice Flow stuck in Doing 49 days — blocked or abandoned?
 4. #2615 at 91.75h vs 12h est — is estimate outdated due to scope changes?
-5. Amazing Meds + Equanimity session tokens both expired — need manual refresh
+5. ~~Amazing Meds + Equanimity session tokens both expired~~ — tokens valid (resolved in 14:09 refresh)
 6. Google Docs rate limited — full hours check deferred to refresh run
+
+---
+
+## Email Re-check — 15:06 (+07:00)
+
+Full window 08:20 → 15:06. 12 emails total across all accounts.
+
+| Account | Count | Summary |
+|---------|-------|---------|
+| duongdn | 6 | 5× Bailey/Paturevision Redmine bugs Closed (#73849, #73907, #73908, #73912, #73941) at 08:43 + HR Q1 survey at 14:21 |
+| carrick | 2 | 2× Slack login codes at 14:42 + 14:44 (monitoring agent session refresh — not a concern) |
+| nick | 0 | No John Yi emails |
+| rick | 0 | No new Fountain/Kunal/InfinityRose emails |
+| kai | 0 | No new Madhuraka emails |
+| ken | 4 | Precognize PR #4807 windsurf-bot comment (11:09) + PR #4808 opened & merged by Vladimir (agentResponse→agentMessage rename, v24) at 14:51 |
+
+No new alerts. Trello "Check mail" — all 6 items ✓ complete.

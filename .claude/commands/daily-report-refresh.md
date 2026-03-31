@@ -7,6 +7,7 @@ description: On-demand refresh of all monitoring sources (Slack, Discord, Email,
 On-demand re-scan since the last check. Generates a **separate timestamped file** — never overwrites the daily report.
 
 **Output:** `./reports/{YYYY-MM-DD}/{HHMM}-update.md`
+**Partial runs:** When run with a piece argument, still write/append results to the update file. Create the file if it doesn't exist yet; append a new section if it does.
 **Timeline:** Uses `refresh.last_run` from `config/.monitoring-timelines.json`. If stale (>1 day old), fall back to `daily_report.last_run`. After completing, update ONLY `refresh.last_run`.
 
 ---
