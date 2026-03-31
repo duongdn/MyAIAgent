@@ -14,29 +14,69 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 
 ## Quick Reference — Run by Piece
 
-| Command | What it checks | When to use |
-|---------|---------------|-------------|
-| `/daily-report` | Everything (full run) | Morning |
-| `/daily-report email` | All 6 email accounts | Re-check all email |
-| `/daily-report email duongdn` | duongdn@ only | Re-check one account |
-| `/daily-report email carrick` | carrick@ only | Re-check one account |
-| `/daily-report email rick` | rick@ only | Re-check one account |
-| `/daily-report email nick` | nick@ only | Re-check one account |
-| `/daily-report email kai` | kai@ only | Re-check one account |
-| `/daily-report email ken` | ken@ only | Re-check one account |
-| `/daily-report slack` | All 13 Slack workspaces | Re-check all Slack |
-| `/daily-report slack xtreme` | Xtreme Soft only | Re-check one workspace |
-| `/daily-report slack ggs` | Global Grazing only | Re-check one workspace |
-| `/daily-report slack amazingmeds` | Amazing Meds only | Re-check one workspace |
-| `/daily-report slack equanimity` | Equanimity only | Re-check one workspace |
-| `/daily-report slack {slug}` | Any single workspace | Re-check one workspace |
-| `/daily-report discord` | AirAgri + Bizurk | Re-check Discord only |
-| `/daily-report sheets` | All Google Sheets task logs | Re-check developer hours |
-| `/daily-report scrin` | Scrin.io time tracking (TuanNT/John Yi) | Re-check Scrin only |
-| `/daily-report fountain` | Fountain 5-part (Matrix + Sheets + Trello board) | Re-check Fountain only |
-| `/daily-report elena` | Elena GitHub PRs + deploy + Redmine + Matrix announce | Handle new Elena PRs |
-| `/daily-report trello` | Update Check Progress + Check Mail cards | Re-run Trello completions |
-| `/daily-report reminders` | Send Matrix task log reminders to devs with 0h | Afternoon reminder run |
+| Command | What it checks |
+|---------|---------------|
+| `/daily-report` | Everything (full run) |
+| **Email** | |
+| `/daily-report email` | All 6 accounts |
+| `/daily-report email duongdn` | duongdn@ only |
+| `/daily-report email carrick` | carrick@ only |
+| `/daily-report email nick` | nick@ only |
+| `/daily-report email rick` | rick@ only |
+| `/daily-report email kai` | kai@ only |
+| `/daily-report email ken` | ken@ only |
+| **Slack** | |
+| `/daily-report slack` | All 13 workspaces |
+| `/daily-report slack baamboozle` | Baamboozle only |
+| `/daily-report slack rdc` | RDC - FM Monitoring only |
+| `/daily-report slack swift` | Swift Studio only |
+| `/daily-report slack xtreme` | Xtreme Soft Solutions only |
+| `/daily-report slack samguard` | SAM GUARD - Mobile only |
+| `/daily-report slack ggs` | Global Grazing Services only |
+| `/daily-report slack amazingmeds` | Amazing Meds only |
+| `/daily-report slack generator` | Generator only |
+| `/daily-report slack legalatoms` | LegalAtoms only |
+| `/daily-report slack mpfc` | MyPersonalFootballCoach only |
+| `/daily-report slack williambills` | William Bills only |
+| `/daily-report slack equanimity` | Equanimity only |
+| `/daily-report slack socal` | SoCal Auto Wraps only |
+| `/daily-report slack aigile` | Aigile Dev only |
+| **Discord** | |
+| `/daily-report discord` | AirAgri + Bizurk |
+| `/daily-report discord airagri` | AirAgri (nusvinn) only |
+| `/daily-report discord bizurk` | Bizurk (nuscarrick) only |
+| **Google Sheets** | |
+| `/daily-report sheets` | All developers |
+| `/daily-report sheets longvv` | LongVV only |
+| `/daily-report sheets phucvt` | PhucVT only |
+| `/daily-report sheets tuannt` | TuanNT (John Yi + Rebecca) only |
+| `/daily-report sheets vietph` | VietPH only |
+| `/daily-report sheets khanhhh` | KhanhHH only |
+| `/daily-report sheets lenh` | LeNH (Rory + Franc + Aysar combined) only |
+| **Scrin.io** | |
+| `/daily-report scrin` | TuanNT/John Yi time tracking |
+| **Fountain** | |
+| `/daily-report fountain` | Full 5-part check |
+| `/daily-report fountain matrix` | Part 1 — Matrix plan only |
+| `/daily-report fountain sheets` | Part 2+3 — Task log actuals + plan vs actual |
+| `/daily-report fountain runway` | Part 4 — Capacity & runway only |
+| `/daily-report fountain overest` | Part 5 — Over-estimate tracking only |
+| `/daily-report fountain trello` | Trello board only (customer comments, stuck cards) |
+| **Elena** | |
+| `/daily-report elena` | Elena PRs + deploy + Redmine + Precognize |
+| `/daily-report elena prs` | Check + merge open PRs only (no deploy) |
+| `/daily-report elena deploy` | Deploy already-merged PRs pending deploy |
+| `/daily-report elena precognize` | Precognize nusken PRs only |
+| **Trello** | |
+| `/daily-report trello` | Update all Check Progress + Check Mail items |
+| `/daily-report trello progress` | Check Progress card only |
+| `/daily-report trello mail` | Check Mail card only |
+| **Reminders** | |
+| `/daily-report reminders` | Send Matrix 0h reminders to all devs |
+| `/daily-report reminders lenh` | Send reminder to LeNH only |
+| `/daily-report reminders phucvt` | Send reminder to PhucVT only |
+| `/daily-report reminders tuannt` | Send reminder to TuanNT only |
+| `/daily-report reminders longvv` | Send reminder to LongVV only |
 
 ---
 
@@ -149,11 +189,16 @@ Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
 
 ---
 
-## Piece 3 — Discord (`/daily-report discord`)
+## Piece 3 — Discord (`/daily-report discord [server]`)
+
+Supports individual server targeting:
+- `/daily-report discord` — check AirAgri + Bizurk
+- `/daily-report discord airagri` — AirAgri (nusvinn) only
+- `/daily-report discord bizurk` — Bizurk (nuscarrick) only
 
 **Accounts:** 2 in `config/.discord-accounts.json`
-- nusvinn → AirAgri only (NOT HOMIEAPP)
-- nuscarrick → Bizurk only
+- nusvinn → AirAgri only (NOT HOMIEAPP) → Trello items: James Diamond - Vinn
+- nuscarrick → Bizurk only → Trello item: Andrew Taraba
 
 **Before using:** Verify each token with 3-step check (users/@me → guilds → channels). Fix if invalid — never just report expired.
 
@@ -163,31 +208,58 @@ Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
 
 **Snowflake filter:** Convert `daily_report.last_run` epoch → Discord snowflake: `(epoch*1000 - 1420070400000) << 22`
 
+**Trello — after checking:** Complete mapped item(s) if no alerts. Single server → complete only its item.
+
+**Report — always append to daily report:**
+```
+## Discord [server|all] — {HH:MM} (+07:00)
+| Server | Msgs | Key content |
+...
+Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
+```
+
 ---
 
-## Piece 4 — Google Sheets (`/daily-report sheets`)
+## Piece 4 — Google Sheets (`/daily-report sheets [developer]`)
+
+Supports individual developer targeting:
+- `/daily-report sheets` — check all developers
+- `/daily-report sheets longvv` — LongVV only
+- `/daily-report sheets phucvt` — PhucVT only
+- `/daily-report sheets tuannt` — TuanNT (John Yi + Rebecca combined) only
+- `/daily-report sheets vietph` — VietPH only
+- `/daily-report sheets khanhhh` — KhanhHH only
+- `/daily-report sheets lenh` — LeNH (Rory + Franc + Aysar combined) only
 
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
 **Week:** Use Summary tab to find current W{n}. Today's date determines the week.
 
-| Developer | Sheet ID | Min hours | Notes |
-|-----------|----------|-----------|-------|
-| LongVV | 1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58 | 8h/day | Nghỉ nửa ngày = 4h OK |
-| PhucVT | 1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI | 8h/day | Nghỉ nửa ngày = 4h OK |
-| TuanNT (John Yi) | 1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ | 8h/day combined | Splits across 3 projects |
-| TuanNT (Rebecca) | 1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4 | — | Check col P: "Chưa" = not written (normal, not alert) |
-| VietPH | 1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg | 8h/day | Nghỉ cả ngày = 0h OK |
-| KhanhHH | 1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM | 8h/day | Nghỉ cả ngày = 0h OK |
-| LeNH (Rory) | 1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8 | 8h/day combined | Sum all 3 projects |
-| LeNH (Franc) | 1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ | — | Part of LeNH split |
-| LeNH (Aysar) | 1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8 | — | Part of LeNH split |
-| Fountain | 1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o | — | Used by `/daily-report fountain` |
+| Developer | Slug | Sheet ID(s) | Min hours | Notes |
+|-----------|------|-------------|-----------|-------|
+| LongVV | longvv | 1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58 | 8h/day | Nghỉ nửa ngày = 4h OK |
+| PhucVT | phucvt | 1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI | 8h/day | Nghỉ nửa ngày = 4h OK |
+| TuanNT (John Yi) | tuannt | 1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ | 8h/day combined | Splits across 3 projects |
+| TuanNT (Rebecca) | tuannt | 1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4 | — | Check col P: "Chưa" = not written (normal, not alert) |
+| VietPH | vietph | 1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg | 8h/day | Nghỉ cả ngày = 0h OK |
+| KhanhHH | khanhhh | 1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM | 8h/day | Nghỉ cả ngày = 0h OK |
+| LeNH (Rory) | lenh | 1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8 | 8h/day combined | Sum all 3 sheets |
+| LeNH (Franc) | lenh | 1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ | — | Part of LeNH split |
+| LeNH (Aysar) | lenh | 1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8 | — | Part of LeNH split |
+| Fountain | — | 1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o | — | Used by `/daily-report fountain` |
 
 **Rules:**
 - "Nghỉ cả ngày" = full day off → 0h OK
 - "Nghỉ nửa ngày" = half day → 4h min OK
 - 0h with no leave note → ALERT
 - Only count "Task dự án" rows; skip "Part-time" rows in column A
+
+**Report — always append to daily report:**
+```
+## Sheets [developer|all] — {HH:MM} (+07:00)
+| Developer | Today | Status |
+...
+{Alerts if any.}
+```
 
 ---
 
@@ -205,7 +277,15 @@ Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
 
 ---
 
-## Piece 6 — Fountain (`/daily-report fountain`)
+## Piece 6 — Fountain (`/daily-report fountain [part]`)
+
+Supports individual part targeting:
+- `/daily-report fountain` — full 5-part check (all mandatory)
+- `/daily-report fountain matrix` — Part 1: Matrix plan only
+- `/daily-report fountain sheets` — Part 2+3: Task log actuals + plan vs actual table
+- `/daily-report fountain runway` — Part 4: Capacity & runway only
+- `/daily-report fountain overest` — Part 5: Over-estimate tracking only
+- `/daily-report fountain trello` — Trello board only (customer comments, stuck cards)
 
 Full 5-part check. All 5 parts are mandatory — never skip any.
 
@@ -243,7 +323,13 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 
 ---
 
-## Piece 7 — Elena (`/daily-report elena`)
+## Piece 7 — Elena (`/daily-report elena [sub]`)
+
+Supports sub-targeting:
+- `/daily-report elena` — full flow (PRs + deploy + Redmine + Precognize)
+- `/daily-report elena prs` — check + merge open PRs only (no deploy)
+- `/daily-report elena deploy` — deploy pending merged PRs from `.elena-pending-actions.json`
+- `/daily-report elena precognize` — Precognize nusken PRs only
 
 **Repo:** `nustechnology/Elena-SamGuard-Digital-Plant` — MUST use `duongdn` account:
 ```bash
@@ -266,7 +352,12 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 
 ---
 
-## Piece 8 — Trello (`/daily-report trello`)
+## Piece 8 — Trello (`/daily-report trello [card]`)
+
+Supports card-level targeting:
+- `/daily-report trello` — update both Check Progress + Check Mail
+- `/daily-report trello progress` — Check Progress card only (all 4 checklists)
+- `/daily-report trello mail` — Check Mail card only
 
 **Cards:** Find by NAME each time (IDs change daily):
 - "Check progress" → 4 checklists (Normal, Should do, Closely monitor, Work)
@@ -283,7 +374,14 @@ Run after all sources have been checked (or run inline after each source during 
 
 ---
 
-## Piece 9 — Reminders (`/daily-report reminders`)
+## Piece 9 — Reminders (`/daily-report reminders [developer]`)
+
+Supports individual developer targeting:
+- `/daily-report reminders` — send to all devs with 0h (no leave)
+- `/daily-report reminders lenh` — send to LeNH only
+- `/daily-report reminders phucvt` — send to PhucVT only
+- `/daily-report reminders tuannt` — send to TuanNT only
+- `/daily-report reminders longvv` — send to LongVV only
 
 Send Matrix reminders to developers with 0h logged on a workday with no leave note.
 
@@ -294,14 +392,20 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 **Developer rooms:**
 
-| Developer | Matrix Room |
-|-----------|-------------|
-| PhucVT | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
-| LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
-| LongVV | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
-| TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
+| Developer | Slug | Matrix Room |
+|-----------|------|-------------|
+| PhucVT | phucvt | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
+| LeNH | lenh | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
+| LongVV | longvv | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
+| TuanNT | tuannt | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
 
 **Skip if:** developer is on confirmed leave, or it's early morning (< ~10 AM) on the same day.
+
+**Report — always append to daily report:**
+```
+## Reminders [developer|all] — {HH:MM} (+07:00)
+- {name}: reminder sent to {room} / skipped (on leave)
+```
 
 ---
 
