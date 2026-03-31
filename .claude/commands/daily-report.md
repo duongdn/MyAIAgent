@@ -73,7 +73,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report trello progress fountain` | Fountain item only |
 | `/daily-report trello progress elena` | Elena item only |
 | `/daily-report trello progress johnyi` | John Yi item only |
-| `/daily-report trello progress {slug}` | Any single progress item |
+| `/daily-report trello progress {arg}` | Any single progress item |
 | `/daily-report trello mail` | Check Mail, all 6 items |
 | `/daily-report trello mail duongdn` | DuongDn item only |
 | `/daily-report trello mail rick` | Rick item only |
@@ -158,7 +158,7 @@ Supports individual workspace targeting:
 
 **Workspaces:** 13 in `config/.slack-accounts.json`
 
-| Workspace | Slug | Token type | Key check | Trello item |
+| Workspace | Arg | Token type | Key check | Trello item |
 |-----------|------|-----------|-----------|-------------|
 | Baamboozle | baamboozle | xoxp | General activity | Aysar |
 | RDC - FM Monitoring | rdc | xoxp | dmetiner updates | Franc |
@@ -241,7 +241,7 @@ Supports individual developer targeting:
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
 **Week:** Use Summary tab to find current W{n}. Today's date determines the week.
 
-| Developer | Slug | Sheet ID(s) | Min hours | Notes |
+| Developer | Arg | Sheet ID(s) | Min hours | Notes |
 |-----------|------|-------------|-----------|-------|
 | LongVV | longvv | 1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58 | 8h/day | Nghỉ nửa ngày = 4h OK |
 | PhucVT | phucvt | 1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI | 8h/day | Nghỉ nửa ngày = 4h OK |
@@ -368,7 +368,7 @@ Supports card and item-level targeting:
 
 **Check Progress — individual items** (`/daily-report trello progress {item}`):
 
-| Slug | Checklist | Item name |
+| Arg | Checklist | Item name |
 |------|-----------|-----------|
 | `maddy` | Normal | Maddy - Carrick/Kai/Luis |
 | `blake` | Normal | Blake |
@@ -397,7 +397,7 @@ Examples:
 
 **Check Mail — individual items** (`/daily-report trello mail {account}`):
 
-| Slug | Item name |
+| Arg | Item name |
 |------|-----------|
 | `duongdn` | DuongDn |
 | `carrick` | Carrick |
@@ -443,7 +443,7 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 **Developer rooms:**
 
-| Developer | Slug | Matrix Room |
+| Developer | Arg | Matrix Room |
 |-----------|------|-------------|
 | PhucVT | phucvt | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
 | LeNH | lenh | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
