@@ -226,3 +226,24 @@ Trello: Ken item ✓ already complete.
 | Matrix announce → Elena - Digital Plant | ✅ Sent |
 
 `config/.elena-pending-actions.json` updated — PR #296 marked deployed.
+
+---
+
+## Email ken — 17:21 (+07:00)
+
+**Window:** 2026-03-31 15:41 → 17:21 (+07:00)
+**Folder:** NewsLetter | **Filter:** Precognize / development
+
+| Time | PR | Subject | From |
+|------|----|---------|------|
+| 16:33 | #4809 | SR-6940, added to create and update password additional validation (new PR) | mahkris |
+| 16:33–16:48 | #4809 | Re: SR-6940 (code review, 9 replies) | KfirBernstein / mahkris |
+| 16:49 | #4803 | Re: DP-447 incorrect area export file & SR-7190 fix failed tests | majdhajjo08 |
+| 16:55 | #4807 | Re: Add hierarchy tag-of-tag support and fix asset fetching | DanielGavrilkin |
+| 17:12 | #4810 | new version 25 (new PR) | Vladimir-precog |
+| 17:12 | #4810 | Re: new version 25 (windsurf-bot review) | windsurf-bot[bot] |
+| 17:12 | #4810 | Re: new version 25 | Vladimir-precog |
+
+**Summary:** 2 new PRs opened (#4809 SR-6940 password validation, #4810 new version 25). Active review on #4809 between mahkris and KfirBernstein. No action needed from nusken on email — run `/daily-report-refresh elena precognize` to check nusken's open PRs.
+
+Trello: Ken item ✓ already complete.
