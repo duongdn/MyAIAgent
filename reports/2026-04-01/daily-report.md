@@ -145,3 +145,13 @@ No alerts.
 No alerts.
 
 - Franc: ✓ **complete**
+
+## Trello Progress — Aysar — 15:55 (+07:00)
+
+**1. Slack (Baamboozle):** 22 msgs since Mar 31. Active #testing: skjamie25 reported 🔥 team invitation emails not received + 🔥 Quizlet imports failing on production. Carrick diagnosed both as queue worker stopped on production — confirmed working on nusdev. Only Aysar has production access to restart. #engineering: Carrick proposed LTS tech stack upgrade to Aysar. skjamie25 also requested removing common English words from blocking list + asked about open PRs status.
+
+**2. Sheets (LeNH — Aysar W18):** Mon 30/03: 2.33h (PR gif/image keyword detection). Tue 31/03: 0.5h (team invitation emails). Wed 01/04: not yet filled. Combined LeNH totals: Mon 9h ✓, Tue 8h ✓.
+
+No person-status alerts. Project issues (queue worker) are dev topics, not monitoring alerts.
+
+- Aysar: ✓ **complete**
