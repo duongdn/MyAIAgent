@@ -196,3 +196,23 @@ No alerts.
 ## Trello progress andrew — 20:55 (+07:00)
 
 - Andrew Taraba: ✓ **complete**
+
+## Trello progress rebecca — 21:02 (+07:00)
+
+**Sources:** Slack (William Bills) + Sheets (TuanNT/Rebecca)
+
+**Slack William Bills** — 20 msgs since 2026-03-31 14:09:
+- Lucas (TuanNT): daily report posted Apr 1 08:35 — "Today I will continue updating yesterday's tasks. I'm currently working on task number 5."
+- Active back-and-forth with Oliver on MWMX tasks (new pages, header nav, auto-logout)
+- No alerts.
+
+**Sheets TuanNT (Rebecca) — W18 (Mar 30 – Apr 5):**
+| Date | Hours | Col P (TuanNT) |
+|------|-------|----------------|
+| Mon 30/03 | 0.5h | — (Nghỉ cả ngày) |
+| Tue 31/03 | 2.5h | Chưa |
+| Wed 01/04 | 0h | Chưa |
+
+Col P = **Chưa** for today (Apr 1) — task log not yet written.
+
+- Rebecca (William Bills): ⚠️ **skipped** — TuanNT col P = "Chưa" (task log not yet written for Apr 1)
