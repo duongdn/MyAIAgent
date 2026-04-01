@@ -391,34 +391,41 @@ Supports card and item-level targeting:
 - `/daily-report trello progress` — Check Progress card, all items
 - `/daily-report trello mail` — Check Mail card, all items
 
+**CRITICAL: Reuse existing pieces, never duplicate monitoring logic.**
+When running `trello progress {item}`, FIRST run the mapped source piece(s), THEN use findings to complete/skip Trello.
+
 **Check Progress — individual items** (`/daily-report trello progress {item}`):
 
-| Arg | Checklist | Item name |
-|------|-----------|-----------|
-| `maddy` | Normal | Maddy - Carrick/Kai/Luis |
-| `blake` | Normal | Blake |
-| `johnyi` | Normal | John Yi - Amazing Meds |
-| `james` | Should do | James Diamond - Vinn task |
-| `franc` | Closely monitor | Franc |
-| `rory` | Closely monitor | Rory |
-| `aysar` | Closely monitor | Aysar |
-| `elliott` | Closely monitor | Elliott |
-| `swift` | Closely monitor | Rory (Swift Studio) |
-| `raymond` | Work | Raymond - LegalAtoms |
-| `marcel` | Work | Marcel |
-| `colin` | Work | Colin |
-| `andrew` | Work | Andrew Taraba |
-| `elena` | Work | Elena - SamGuard |
-| `mpfc` | Work | MPFC |
-| `bailey` | Work | Bailey |
-| `fountain` | Work | Fountain |
-| `rebecca` | Work | Rebecca (William Bills) |
-| `neural` | Work | Neural Contract |
+| Arg | Checklist | Item name | Run piece first |
+|------|-----------|-----------|-----------------|
+| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `/daily-report slack xtreme` |
+| `blake` | Normal | Blake | `/daily-report slack socal` |
+| `johnyi` | Normal | John Yi - Amazing Meds | `/daily-report slack amazingmeds` |
+| `james` | Should do | James Diamond - Vinn task | `/daily-report discord airagri` |
+| `franc` | Closely monitor | Franc | `/daily-report slack rdc` |
+| `rory` | Closely monitor | Rory | `/daily-report slack swift` |
+| `aysar` | Closely monitor | Aysar | `/daily-report slack baamboozle` |
+| `elliott` | Closely monitor | Elliott | `/daily-report slack generator` |
+| `swift` | Closely monitor | Rory (Swift Studio) | `/daily-report slack swift` |
+| `raymond` | Work | Raymond - LegalAtoms | `/daily-report slack legalatoms` |
+| `marcel` | Work | Marcel | `/daily-report slack equanimity` |
+| `colin` | Work | Colin | `/daily-report slack aigile` |
+| `andrew` | Work | Andrew Taraba | `/daily-report discord bizurk` |
+| `elena` | Work | Elena - SamGuard | `/daily-report slack samguard` |
+| `mpfc` | Work | MPFC | `/daily-report slack mpfc` |
+| `bailey` | Work | Bailey | `/daily-report slack ggs` |
+| `fountain` | Work | Fountain | `/daily-report fountain` |
+| `rebecca` | Work | Rebecca (William Bills) | `/daily-report slack williambills` |
+| `neural` | Work | Neural Contract | (no mapped source) |
 
 Examples:
-- `/daily-report trello progress fountain` — complete/skip Fountain item only
-- `/daily-report trello progress elena` — complete Elena item only
-- `/daily-report trello progress johnyi` — complete John Yi item only
+- `/daily-report trello progress maddy` → runs `/daily-report slack xtreme`, then completes/skips Maddy
+- `/daily-report trello progress fountain` — runs `/daily-report fountain`, then completes/skips Fountain
+- `/daily-report trello progress elena` — runs `/daily-report slack samguard`, then completes/skips Elena
+
+**Check Mail — reuse email piece:**
+`/daily-report trello mail` → runs `/daily-report email` first, then completes all 6 items.
+`/daily-report trello mail {account}` → runs `/daily-report email {account}` first, then completes that item.
 
 **Check Mail — individual items** (`/daily-report trello mail duongdn|carrick|nick|rick|kai|ken`):
 

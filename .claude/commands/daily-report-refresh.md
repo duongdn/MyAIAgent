@@ -222,31 +222,36 @@ After completing: update `refresh.elena.last_run`.
 
 Re-evaluate checklist items based on refresh findings. Complete any items where alerts resolved since morning. Items already completed stay completed — only update incomplete ones.
 
+**CRITICAL: Reuse existing pieces, never duplicate monitoring logic.**
+When running `trello progress {item}`, FIRST run the mapped source piece(s), THEN use findings to complete/skip Trello.
+
 **Check Progress item → Trello item name mapping:**
 
-| Arg | Checklist | Item name |
-|-----|-----------|-----------|
-| maddy | Normal | Maddy - Carrick/Kai/Luis |
-| blake | Normal | Blake |
-| johnyi | Normal | John Yi - Amazing Meds |
-| james | Should do | James Diamond - Vinn task |
-| franc | Closely monitor | Franc |
-| rory | Closely monitor | Rory |
-| aysar | Closely monitor | Aysar |
-| elliott | Closely monitor | Elliott |
-| swift | Closely monitor | Rory (Swift Studio) |
-| raymond | Work | Raymond - LegalAtoms |
-| marcel | Work | Marcel |
-| colin | Work | Colin |
-| andrew | Work | Andrew Taraba |
-| elena | Work | Elena - SamGuard |
-| mpfc | Work | MPFC |
-| bailey | Work | Bailey |
-| fountain | Work | Fountain |
-| rebecca | Work | Rebecca (William Bills) |
-| neural | Work | Neural Contract |
+| Arg | Checklist | Item name | Run piece first |
+|-----|-----------|-----------|-----------------|
+| maddy | Normal | Maddy - Carrick/Kai/Luis | `/daily-report-refresh slack xtreme` |
+| blake | Normal | Blake | `/daily-report-refresh slack socal` |
+| johnyi | Normal | John Yi - Amazing Meds | `/daily-report-refresh slack amazingmeds` |
+| james | Should do | James Diamond - Vinn task | `/daily-report-refresh discord airagri` |
+| franc | Closely monitor | Franc | `/daily-report-refresh slack rdc` |
+| rory | Closely monitor | Rory | `/daily-report-refresh slack swift` |
+| aysar | Closely monitor | Aysar | `/daily-report-refresh slack baamboozle` |
+| elliott | Closely monitor | Elliott | `/daily-report-refresh slack generator` |
+| swift | Closely monitor | Rory (Swift Studio) | `/daily-report-refresh slack swift` |
+| raymond | Work | Raymond - LegalAtoms | `/daily-report-refresh slack legalatoms` |
+| marcel | Work | Marcel | `/daily-report-refresh slack equanimity` |
+| colin | Work | Colin | `/daily-report-refresh slack aigile` |
+| andrew | Work | Andrew Taraba | `/daily-report-refresh discord bizurk` |
+| elena | Work | Elena - SamGuard | `/daily-report-refresh slack samguard` |
+| mpfc | Work | MPFC | `/daily-report-refresh slack mpfc` |
+| bailey | Work | Bailey | `/daily-report-refresh slack ggs` |
+| fountain | Work | Fountain | `/daily-report-refresh fountain` |
+| rebecca | Work | Rebecca (William Bills) | `/daily-report-refresh slack williambills` |
+| neural | Work | Neural Contract | (no mapped source) |
 
-**Check Mail item → account mapping:** duongdn, carrick, nick, rick, kai, ken
+**Check Mail — reuse email piece:**
+`/daily-report-refresh trello mail` → runs `/daily-report-refresh email` first, then completes all 6 items.
+`/daily-report-refresh trello mail {account}` → runs `/daily-report-refresh email {account}` first, then completes that item.
 
 ---
 
