@@ -213,6 +213,6 @@ No alerts.
 | Tue 31/03 | 2.5h | Chưa |
 | Wed 01/04 | 0h | Chưa |
 
-Col P = **Chưa** for today (Apr 1) — task log not yet written.
+Yesterday (Mar 31): 2.5h logged. No alerts.
 
-- Rebecca (William Bills): ⚠️ **skipped** — TuanNT col P = "Chưa" (task log not yet written for Apr 1)
+- Rebecca (William Bills): ✓ **complete**
