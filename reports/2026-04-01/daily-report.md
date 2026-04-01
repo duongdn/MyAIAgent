@@ -233,10 +233,18 @@ No messages since March 27. No alerts.
 
 - Neural Contract: ✓ **complete**
 
-## Trello progress raymond — 21:31 (+07:00)
+## Trello progress raymond — 21:39 (+07:00)
 
 **Source: Slack (LegalAtoms)**
 
-⚠️ **Token invalid** — LegalAtoms xoxp token returned `invalid_auth`. No automated refresh path available (xoxp tokens require manual re-authorization; Slack password for nick@nustechnology.com unknown).
+**Period:** 2026-03-31 14:09 → 2026-04-01 21:39 (+07:00)
 
-- Raymond - LegalAtoms: ⚠️ **skipped** (LegalAtoms Slack token invalid — manual token refresh needed)
+| Channel | Msgs | Summary |
+|---------|------|---------|
+| general | 3 | raymond: "ty" (acknowledging something). anisamahmood: tagging Mir Tariq on injunction workflow. Normal project activity. |
+| tyler-journal | 1 | talha.naeem1920: Texas certification bugs list (tagging Mir Tariq). |
+| standup | 12 | Regular standup updates from team (PR reviews, in-progress tasks). No Nick/NUS mentions. |
+
+No Nick-specific alerts. Normal project activity.
+
+- Raymond - LegalAtoms: ✓ **complete**
