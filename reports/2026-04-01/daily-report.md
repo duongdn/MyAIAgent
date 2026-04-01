@@ -23,14 +23,10 @@
 **Site:** https://www.samguard.co/
 
 **JS Console Errors:** 1
-- CSP violation: `connect-src` blocks Google remarketing (`google.com.vn/rmkt/collect`) — not in CSP allowlist. Low severity, analytics tracking only.
+- **⚠️ CSP violation:** `connect-src` blocks `google.com.vn/rmkt/collect` (Google remarketing). Domain not in CSP allowlist — needs CSP update to add `https://www.google.com.vn`.
 
 **Failed Requests:** 15
-- Google tracking (4): `google.com/ccm/collect`, `google-analytics.com/g/collect`, `google.com.vn/rmkt/collect`, `px.ads.linkedin.com` — all blocked by CSP/ad-blocker. Expected in headless.
-- **⚠️ Video assets (11):** Multiple `.mp4` files returning `ERR_ABORTED`:
-  - `/wp-content/uploads/2025/02/1.mp4` (3 attempts)
-  - `/wp-content/uploads/2025/03/2.mp4` (2 attempts)
-  - `/wp-content/uploads/2025/03/3.mp4` (2 attempts)
-  - `/wp-content/uploads/2025/03/4.mp4` (2 attempts)
+- **CSP-blocked tracking (4):** `google.com/ccm/collect`, `google-analytics.com/g/collect`, `google.com.vn/rmkt/collect`, `px.ads.linkedin.com` — blocked by current CSP `connect-src` policy. May need CSP update if these are intentional integrations.
+- Video assets (11): Multiple `.mp4` files `ERR_ABORTED` — likely headless browser behavior (not playing media), verify in real browser if concerned.
 
-**Assessment:** No actual JS runtime errors. CSP violation is analytics-only (INFO). Video aborts likely due to headless browser not playing media — verify in real browser if concerned.
+**Action needed:** Update CSP `connect-src` directive to include `https://www.google.com.vn` (and review if other blocked domains also need adding).
