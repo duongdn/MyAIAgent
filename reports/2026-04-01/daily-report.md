@@ -30,3 +30,11 @@
 - Video assets (11): Multiple `.mp4` files `ERR_ABORTED` — likely headless browser behavior (not playing media), verify in real browser if concerned.
 
 **Action needed:** Update CSP `connect-src` directive to include `https://www.google.com.vn` (and review if other blocked domains also need adding).
+
+## Trello Progress — Maddy — 08:45 (+07:00)
+
+**Source checked:** Xtreme Soft Solutions Slack (Kai daily report)
+
+**Findings:** No formal daily report, but Kai active today — responding to Madhuraka about discount pricing override issue and JS solutions. General work communication ongoing.
+
+- Maddy - Carrick/Kai/Luis: ✓ complete (no alerts, Kai active)
