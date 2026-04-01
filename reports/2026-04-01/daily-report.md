@@ -53,3 +53,16 @@
 **2. Sheets (LongVV — W52):** Wed 01/04: 0h, all rows "Chưa" (not written). Normal at ~10 AM.
 
 - Maddy - Carrick/Kai/Luis: ✓ **complete** — Tue 31/03 was "Nghỉ cả ngày" (full day off), no daily report needed. Today Wed 01/04 just started, 0h normal at ~10 AM.
+
+## Trello Progress — Blake — 14:44 (+07:00)
+
+**Source: Slack (SoCal Auto Wraps):** 51 msgs since Mar 31. Active #maintenance discussion between joey (Blake), amy, nick. Key activity:
+- Nick deployed fixes for Grazing Software, Quote, Accessories, reduction codes to Live
+- joey reported cart performance degradation after update → Nick resolved it
+- joey testing subsellers, accessories, price range display
+- New issue: rating text too large on mobile in cart
+- Current focus shifting to subseller module full-time
+
+No blocking alerts — normal active project work.
+
+- Blake: ✓ **complete**
