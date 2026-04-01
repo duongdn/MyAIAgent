@@ -37,6 +37,8 @@
 - [feedback_fix_tokens_dont_report.md](feedback_fix_tokens_dont_report.md) — Never report "token expired" — fix it silently. Matrix: use browser profile script. Slack: use auto-refresh flow.
 - [feedback_matrix_browser_profile.md](feedback_matrix_browser_profile.md) — Matrix OIDC refresh expired → use scripts/matrix-token-refresh.js + tmp/matrix-browser-profile/ (headless SSO, works automatically)
 
+- [feedback_ripgrep_execute_permission.md](feedback_ripgrep_execute_permission.md) — Claude Code rg binary loses execute bit after npm update → all skills vanish with "Unknown skill"; fix with chmod +x
+
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders (LongVV, PhucVT, LeNH, Elena team)

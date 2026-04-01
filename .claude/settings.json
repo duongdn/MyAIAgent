@@ -1,5 +1,17 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "find /Users/duongdn/.nvm/versions/node/*/lib/node_modules/@anthropic-ai/claude-code/vendor/ripgrep/x64-darwin/rg -not -executable 2>/dev/null | xargs -r chmod +x",
+            "timeout": 5000,
+            "statusMessage": "Ensuring ripgrep is executable..."
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
