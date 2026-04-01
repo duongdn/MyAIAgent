@@ -9,6 +9,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 **Output:** `./reports/{YYYY-MM-DD}/daily-report.md`
 **Partial runs:** When run with a piece argument (e.g. `email`, `slack`), append the results as a new timestamped section to the existing daily report. Never skip writing results just because it's a partial run.
 **Timeline:** Uses `daily_report.last_run` from `config/.monitoring-timelines.json` as window start. After completing all sources, update both `daily_report.last_run` and `alert.last_run` to current time.
+**Refresh flag:** Adding `--refresh` (or `refresh`) to any command forces a fresh re-check of all mapped sources, even if already scanned in the current session. Always re-fetch live data when this flag is present — never use cached/prior results.
 
 ---
 
