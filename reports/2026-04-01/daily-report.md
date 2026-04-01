@@ -98,6 +98,4 @@ No blocking alerts.
 | Tue 31/03 | 2.5h | TuanNT | MWMX task update + plugin update | Task dự án |
 | Wed 01/04 | — | — | Not yet filled | — |
 
-Col P (TuanNT): "Chưa" — normal default.
-
 No alerts. TuanNT was on leave Mon, worked Tue (5.5h JY + 2.5h Rebecca = 8h combined ✓).
