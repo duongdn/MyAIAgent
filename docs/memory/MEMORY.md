@@ -29,6 +29,7 @@
 - [feedback_fountain_always_5part.md](feedback_fountain_always_5part.md) — CRITICAL: Fountain 5-part check keeps getting missed, MUST validate all parts before finalizing report
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Task log: never use first empty row of a day, write to second row or later
 - [feedback_trello_all_checklists.md](feedback_trello_all_checklists.md) — Trello Check Progress has MULTIPLE checklists, must iterate ALL not just known ones
+- [feedback_trello_mail_must_check_email.md](feedback_trello_mail_must_check_email.md) — /daily-report trello mail MUST check emails first, not just toggle Trello items
 - [feedback_fix_tokens_dont_report.md](feedback_fix_tokens_dont_report.md) — Never report "token expired" — fix it silently. Matrix: use browser profile script. Slack: use auto-refresh flow.
 - [feedback_matrix_browser_profile.md](feedback_matrix_browser_profile.md) — Matrix OIDC refresh expired → use scripts/matrix-token-refresh.js + tmp/matrix-browser-profile/ (headless SSO, works automatically)
 
