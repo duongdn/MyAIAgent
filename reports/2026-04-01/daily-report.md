@@ -33,8 +33,13 @@
 
 ## Trello Progress — Maddy — 08:45 (+07:00)
 
-**Source checked:** Xtreme Soft Solutions Slack (Kai daily report)
+**Sources checked:**
 
-**Findings:** No formal daily report, but Kai active today — responding to Madhuraka about discount pricing override issue and JS solutions. General work communication ongoing.
+**1. Slack (Xtreme):** ⚠️ Kai daily report missing — no "progress"/"daily report" post found. General chat only (discount pricing, JS).
 
-- Maddy - Carrick/Kai/Luis: ⚠️ skipped — **Kai daily report missing** (no "progress"/"daily report" post found in Xtreme Slack)
+**2. Sheets (LongVV — W52):**
+- Mon 30/03: 8h ✓ (LIFM2-409: Anoma feedback 0.5h, LIFM2-430: Mark Order fulfilled 4h, LIFM2-268: Update feedback 3.5h)
+- Tue 31/03: "Nghỉ cả ngày" (full day off) → 0h OK
+- Wed 01/04 (today): 0h — early morning, not yet logged (normal)
+
+- Maddy - Carrick/Kai/Luis: ⚠️ skipped — **Kai daily report missing**

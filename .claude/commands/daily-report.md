@@ -398,7 +398,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 
 | Arg | Checklist | Item name | Run piece first |
 |------|-----------|-----------|-----------------|
-| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `/daily-report slack xtreme` |
+| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `/daily-report slack xtreme` + `/daily-report sheets longvv` |
 | `blake` | Normal | Blake | `/daily-report slack socal` |
 | `johnyi` | Normal | John Yi - Amazing Meds | `/daily-report slack amazingmeds` |
 | `james` | Should do | James Diamond - Vinn task | `/daily-report discord airagri` |
