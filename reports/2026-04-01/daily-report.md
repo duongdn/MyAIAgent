@@ -155,3 +155,21 @@ No alerts.
 No person-status alerts. Project issues (queue worker) are dev topics, not monitoring alerts.
 
 - Aysar: ✓ **complete**
+
+## Trello Progress — Elliott — 15:58 (+07:00)
+
+**1. Slack (Generator):** 46 msgs since Mar 31. Very active project:
+- **Release completed Tue 31/03** (7pm AEST): 10 tickets including Evacuation Report, User Contact Info, Vehicle Types, Incidents. Violet coordinated. Post-release: Elliott flagged regression — "Operations" nav label reverted to "Operation".
+- Rudi: urgent fix for user-profile-requests defect, PR reviews (MR#278, #285, #330), large attachment size concern (proposed 15MB cap). Carrick approved + implementing.
+- Elliott: reviewing Events navigation improvements (Jeff completed), planning early/mid April release with "Targetted Next Release" tickets.
+- Violet posted daily reports Mar 31 + Apr 1 ✓. Carrick: sub-task date fix, payments investigation, Redmine defects.
+- Today: Rudi requesting Carrick pick up new task urgently (end of week target).
+
+**2. Sheets (KhanhHH — W34):**
+- Mon 30/03: 8h (review PRs, handle tasks, fix redmine issues, fix production issue, verify bookings API, global search fix) ✓
+- Tue 31/03: 8h (sub-task date fix, payments defect, prepare release PRs, review Rudi code, scheduled maintenance defect) ✓
+- Wed 01/04: 0h — tasks listed (Rudi task, payments, redmine, PR reviews) but hours not yet filled (afternoon)
+
+No alerts.
+
+- Elliott: ✓ **complete**
