@@ -52,4 +52,4 @@
 
 **2. Sheets (LongVV — W52):** Wed 01/04: 0h, all rows "Chưa" (not written). Normal at ~10 AM.
 
-- Maddy - Carrick/Kai/Luis: ⚠️ **incomplete** — Kai daily report still missing
+- Maddy - Carrick/Kai/Luis: ✓ **complete** — Tue 31/03 was "Nghỉ cả ngày" (full day off), no daily report needed. Today Wed 01/04 just started, 0h normal at ~10 AM.
