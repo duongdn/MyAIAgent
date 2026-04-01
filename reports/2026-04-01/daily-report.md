@@ -43,3 +43,13 @@
 - Wed 01/04 (today): 0h — early morning, not yet logged (normal)
 
 - Maddy - Carrick/Kai/Luis: ⚠️ skipped — **Kai daily report missing**
+
+## Trello Progress — Maddy (refresh) — 10:00 (+07:00)
+
+**Sources re-checked (--refresh):**
+
+**1. Slack (Xtreme):** 16 msgs since Mar 31. Kai yesterday: "I have take a day off on today, so tomorrow will back". Today: "Okay", "Yes, we can do it with JS" (responding to Madhuraka re discount hotfix + filter feature). Madhuraka: discount override bug + auto-select filter request. **Still no formal daily report** — 0 matches for "progress"/"daily report"/"My progress".
+
+**2. Sheets (LongVV — W52):** Wed 01/04: 0h, all rows "Chưa" (not written). Normal at ~10 AM.
+
+- Maddy - Carrick/Kai/Luis: ⚠️ **incomplete** — Kai daily report still missing
