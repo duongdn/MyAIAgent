@@ -79,3 +79,25 @@ No blocking alerts — normal active project work.
 No blocking alerts.
 
 - John Yi - Amazing Meds: ✓ **complete**
+
+## Sheets TuanNT — 15:22 (+07:00)
+
+**John Yi (W17, Mar 30 – Apr 5):**
+
+| Day | Hours | Owner | Details | Col A |
+|-----|-------|-------|---------|-------|
+| Mon 30/03 | — | TuanNT | Nghỉ cả ngày | ✓ leave |
+| Tue 31/03 | 5.5h | TuanNT | AM Method feedback, care plan styling, PayPal plugin (Paid Membership Subscriptions) | Task dự án |
+| Wed 01/04 | — | — | Not yet filled | — |
+
+**Rebecca / William Bills (W18, Mar 30 – Apr 5):**
+
+| Day | Hours | Owner | Details | Col A |
+|-----|-------|-------|---------|-------|
+| Mon 30/03 | 0.5h | DuongDN | jersey.com.au is down. TuanNT: Nghỉ cả ngày | TuanNT leave |
+| Tue 31/03 | 2.5h | TuanNT | MWMX task update + plugin update | Task dự án |
+| Wed 01/04 | — | — | Not yet filled | — |
+
+Col P (TuanNT): "Chưa" — normal default.
+
+No alerts. TuanNT was on leave Mon, worked Tue (5.5h JY + 2.5h Rebecca = 8h combined ✓).
