@@ -173,3 +173,11 @@ No person-status alerts. Project issues (queue worker) are dev topics, not monit
 No alerts.
 
 - Elliott: ✓ **complete**
+
+## Trello Progress — Colin — 16:00 (+07:00)
+
+**Source: Slack (Aigile Dev):** 14 msgs since Mar 31. All automated — `make` bot in #braiking-news: 4 blog draft notifications (AI workforce planning, shadow AI risk), 9 newsletter ready-to-send alerts, 1 unpublished blog warning. No human activity.
+
+No alerts.
+
+- Colin: ✓ **complete**
