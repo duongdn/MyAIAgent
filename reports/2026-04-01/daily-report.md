@@ -99,3 +99,23 @@ No blocking alerts.
 | Wed 01/04 | — | — | Not yet filled | — |
 
 No alerts. TuanNT was on leave Mon, worked Tue (5.5h JY + 2.5h Rebecca = 8h combined ✓).
+
+## Trello Progress — James Diamond — 15:40 (+07:00)
+
+**1. Discord (AirAgri):** Very active — 50+ msgs in #airagri_webapp, 37 in #airagri-flutter.
+- **Vinn (nusvinn):** Daily report Mar 30 posted ✓ (support Leon/Jon, review PRs 279-280, pre-prod DB). Mar 31: active code reviews, PR 281 comments, pre-prod testing with James. Requesting cronjob feature testing confirmation.
+- **Jeff (jeff_trinh):** Daily report Mar 30 ✓ (4h: activity creation incidents, visitor/main app builds). Daily report Mar 31 ✓ (4h: Incident Settings UI/API, submitted app to Apple). Today: confirming door sensor feature + asking about 6h day.
+- **Leon (dapackage):** PR 281 door sensor UI, PR 283 active properties hotfix, incident investigation. Shared task plan with Jon.
+- **James (.jdiamond):** Active — testing active property feature, requesting training session ticket, confirming Leon's approach, asking Jeff for store submission.
+
+**2. Sheets (PhucVT — W19, Mar 30 – Apr 5):**
+
+| Day | Hours | Details |
+|-----|-------|---------|
+| Mon 30/03 | 12h | PhucVT 8h (support Leon/Jon, review PRs, pre-prod DB) + AnhNH2 4h (incidents, app builds) |
+| Tue 31/03 | 12h | PhucVT 8h (active property flow, PR 281 review, stop alarm, movement monitoring) + AnhNH2 4h (Incident Settings, Apple submission) |
+| Wed 01/04 | — | Not yet filled |
+
+No alerts.
+
+- James Diamond - Vinn task: ✓ **complete**
