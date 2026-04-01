@@ -67,6 +67,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report elena prs` | Check + merge open PRs only (no deploy) |
 | `/daily-report elena deploy` | Deploy already-merged PRs pending deploy |
 | `/daily-report elena precognize` | Precognize nusken PRs only |
+| `/daily-report elena wordpress` | Check samguard.co for JS console errors |
 | **Trello** | |
 | `/daily-report trello` | Both cards, all items |
 | `/daily-report trello progress` | Check Progress, all items |
@@ -351,10 +352,11 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 ## Piece 7 — Elena (`/daily-report elena [sub]`)
 
 Supports sub-targeting:
-- `/daily-report elena` — full flow (PRs + deploy + Redmine + Precognize)
+- `/daily-report elena` — full flow (PRs + deploy + Redmine + Precognize + WordPress)
 - `/daily-report elena prs` — check + merge open PRs only (no deploy)
 - `/daily-report elena deploy` — deploy pending merged PRs from `.elena-pending-actions.json`
 - `/daily-report elena precognize` — Precognize nusken PRs only
+- `/daily-report elena wordpress` — check samguard.co for JS console errors
 
 **Repo:** `nustechnology/Elena-SamGuard-Digital-Plant` — MUST use `duongdn` account:
 ```bash
@@ -374,6 +376,11 @@ GH_TOKEN=$(gh auth token -h github.com -u duongdn) gh api repos/nustechnology/El
 ```bash
 GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/development/pulls
 ```
+
+**WordPress SamGuard:** Check `https://www.samguard.co/` for JS console errors.
+- Use Puppeteer/headless browser to load the page and capture console errors
+- Report any JS errors found; no errors = clean
+- This is a simple health check, no PR/deploy flow
 
 ---
 

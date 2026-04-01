@@ -80,6 +80,7 @@ After completing a piece: update ONLY that piece's own `last_run`.
 | `/daily-report-refresh elena prs` | Check + merge open PRs only (no deploy) |
 | `/daily-report-refresh elena deploy` | Deploy already-merged PRs pending deploy |
 | `/daily-report-refresh elena precognize` | Precognize nusken PRs only |
+| `/daily-report-refresh elena wordpress` | Check samguard.co for JS console errors |
 | **Trello** | |
 | `/daily-report-refresh trello` | Both cards, all items |
 | `/daily-report-refresh trello progress` | Check Progress, all items |
@@ -206,6 +207,10 @@ For each undeployed merged PR in `config/.elena-pending-actions.json`:
 3. Announce to Matrix "Elena - Digital Plant" room
 
 Check Precognize for nusken PRs.
+
+**WordPress SamGuard:** Check `https://www.samguard.co/` for JS console errors.
+- Use Puppeteer/headless browser to load the page and capture console errors
+- Report any JS errors found; no errors = clean
 
 **Report:** Append timestamped section to `reports/{YYYY-MM-DD}/{HHMM}-update.md`. ALWAYS write.
 
