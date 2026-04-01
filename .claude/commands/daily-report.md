@@ -428,7 +428,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `bailey` | Work | Bailey | `slack ggs` + `sheets vietph` |
 | `fountain` | Work | Fountain | `fountain` (full 5-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
-| `neural` | Work | Neural Contract | (no mapped source) |
+| `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
 
 Examples:
 - `/daily-report trello progress maddy` → runs `/daily-report slack xtreme`, then completes/skips Maddy

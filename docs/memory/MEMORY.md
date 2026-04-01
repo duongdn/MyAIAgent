@@ -39,6 +39,7 @@
 
 - [feedback_ripgrep_execute_permission.md](feedback_ripgrep_execute_permission.md) — Claude Code rg binary loses execute bit after npm update → all skills vanish with "Unknown skill"; fix with chmod +x
 - [feedback_andrew_taraba_animworld_dm.md](feedback_andrew_taraba_animworld_dm.md) — Andrew Taraba check: use nuscarrick DM with "animeworld" user, NOT Bizurk server channels
+- [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract check = Upwork workroom 38901192, NOT "no mapped source"
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
