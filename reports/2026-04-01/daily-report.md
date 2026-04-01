@@ -135,3 +135,13 @@ No alerts.
 No alerts.
 
 - Rory: ✓ **complete**
+
+## Trello Progress — Franc — 15:51 (+07:00)
+
+**1. Slack (RDC - FM Monitoring):** 24 msgs since Mar 31. #rpi-reboot-logs: 3 instability alerts + 1 recovery (automated tuner monitoring, normal). #user-access-logs: 6 tuner access logs. #all-rdc-fm-monitoring: Carrick updated admin panel users on fmscan.com, fixed delete user FK constraint. dmetiner requested plugin updates from upstream + Slack notifications. Normal project activity.
+
+**2. Sheets (LeNH — Franc W18):** Mon 30/03: 2h (Kocaeli tuner, MetricsMonitor, user panel). Tue 31/03: 2h (deploy user panel, map options, fix delete). Wed 01/04: not yet filled. Combined LeNH totals: Mon 9h ✓, Tue 8h ✓.
+
+No alerts.
+
+- Franc: ✓ **complete**
