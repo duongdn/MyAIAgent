@@ -1,16 +1,19 @@
 # Daily Report — 2026-04-01 (Tuesday)
 
-## Trello Mail — 08:19 (+07:00)
+## Email (all) + Trello Mail — 08:20 (+07:00)
 
-All 6 Check Mail items marked complete on card `69cc675bb72f6874eba15e69`.
+**Period:** 2026-03-31 08:20 → 2026-04-01 08:20 (+07:00)
 
-| Account | Status |
-|---------|--------|
-| DuongDn | ✓ complete |
-| Carrick | ✓ complete |
-| Rick | ✓ complete |
-| Kai | ✓ complete |
-| Ken | ✓ complete |
-| Nick | ✓ complete |
+| Account | Count | Summary | Trello |
+|---------|-------|---------|--------|
+| duongdn@ | 9 | Redmine Bailey bug closures (routine), HR emails (salary Q1 survey, payslip 03/2026, part-time job info). No leave requests, no New Relic alerts. | ✓ complete |
+| carrick@ | 8 | Redmine [Generator Bug #77954](https://redmine.nustechnology.com/issues/77954) NEW — Leads Engagement Dashboard issue. Jira BXR-178 assigned by Rory (Telephone Number not Saving). Rollbar SoCal daily summary. Slack confirmation codes. | ✓ complete |
+| nick@ | 8 | ClickUp notifications (3D Admin Role, Jobs on hold). Azure DevOps PRs #1347-1349 from Emir LLaneza (CNA.Operations.App). No John Yi emails. | ✓ complete |
+| rick@ | 10 | Rollbar daily summaries: InfinityRoses, FirstProject, FountainGifts. **⚠️ New Rollbar error: [FirstProject] production #972 ChunkLoadError (loading chunk 3148)**. Upwork msg from Gil C. | ✓ complete |
+| kai@ | 8 | Xtreme Soft order cancellations (#1205, #1206). Madhuraka Jira: LIFM2-429, 395, 394, 427, 268 (Discount Price, Buy tab, Sell Types, Email templates). Weekly Jira summary. | ✓ complete |
+| ken@ | 219 | GitHub notification noise (dependabot, welligence, zeroco84/rentle PRs). No Precognize/development activity found. | ✓ complete |
 
-> Note: This is a Trello-only run — email content not checked in this piece. Items marked complete per `/daily-report trello mail` command.
+**Alerts:**
+- ⚠️ **rick@**: Rollbar production error #972 ChunkLoadError on FirstProject (Fountain) — chunk 3148 failed to load. May indicate deployment/build issue.
+
+**Trello:** All 6 Check Mail items ✓ complete on card `69cc675bb72f6874eba15e69`.
