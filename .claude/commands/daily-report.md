@@ -398,24 +398,24 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 
 | Arg | Checklist | Item name | Run piece first |
 |------|-----------|-----------|-----------------|
-| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `/daily-report slack xtreme` + `/daily-report sheets longvv` |
-| `blake` | Normal | Blake | `/daily-report slack socal` |
-| `johnyi` | Normal | John Yi - Amazing Meds | `/daily-report slack amazingmeds` |
-| `james` | Should do | James Diamond - Vinn task | `/daily-report discord airagri` |
-| `franc` | Closely monitor | Franc | `/daily-report slack rdc` |
-| `rory` | Closely monitor | Rory | `/daily-report slack swift` |
-| `aysar` | Closely monitor | Aysar | `/daily-report slack baamboozle` |
-| `elliott` | Closely monitor | Elliott | `/daily-report slack generator` |
-| `swift` | Closely monitor | Rory (Swift Studio) | `/daily-report slack swift` |
-| `raymond` | Work | Raymond - LegalAtoms | `/daily-report slack legalatoms` |
-| `marcel` | Work | Marcel | `/daily-report slack equanimity` |
-| `colin` | Work | Colin | `/daily-report slack aigile` |
-| `andrew` | Work | Andrew Taraba | `/daily-report discord bizurk` |
-| `elena` | Work | Elena - SamGuard | `/daily-report slack samguard` |
-| `mpfc` | Work | MPFC | `/daily-report slack mpfc` |
-| `bailey` | Work | Bailey | `/daily-report slack ggs` |
-| `fountain` | Work | Fountain | `/daily-report fountain` |
-| `rebecca` | Work | Rebecca (William Bills) | `/daily-report slack williambills` |
+| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `slack xtreme` + `sheets longvv` |
+| `blake` | Normal | Blake | `slack socal` |
+| `johnyi` | Normal | John Yi - Amazing Meds | `slack amazingmeds` + `sheets tuannt` |
+| `james` | Should do | James Diamond - Vinn task | `discord airagri` + `sheets phucvt` |
+| `franc` | Closely monitor | Franc | `slack rdc` + `sheets lenh` |
+| `rory` | Closely monitor | Rory | `slack swift` + `sheets lenh` |
+| `aysar` | Closely monitor | Aysar | `slack baamboozle` + `sheets lenh` |
+| `elliott` | Closely monitor | Elliott | `slack generator` + `sheets khanhhh` |
+| `swift` | Closely monitor | Rory (Swift Studio) | `slack swift` + `sheets lenh` |
+| `raymond` | Work | Raymond - LegalAtoms | `slack legalatoms` |
+| `marcel` | Work | Marcel | `slack equanimity` |
+| `colin` | Work | Colin | `slack aigile` |
+| `andrew` | Work | Andrew Taraba | `discord bizurk` |
+| `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
+| `mpfc` | Work | MPFC | `slack mpfc` |
+| `bailey` | Work | Bailey | `slack ggs` + `sheets vietph` |
+| `fountain` | Work | Fountain | `fountain` (full 5-part) |
+| `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | (no mapped source) |
 
 Examples:

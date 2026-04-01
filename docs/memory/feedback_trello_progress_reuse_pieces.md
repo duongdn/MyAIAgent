@@ -1,23 +1,45 @@
 ---
-name: Trello progress must reuse existing daily-report pieces
-description: /daily-report trello progress X should run the mapped source piece (e.g. /daily-report slack xtreme) instead of duplicating logic
+name: Trello progress must reuse existing daily-report pieces (multi-source)
+description: Each Trello progress item maps to multiple source pieces (Slack+Sheets, Discord+Sheets, etc.) — run ALL mapped pieces, never duplicate logic
 type: feedback
 ---
 
-When running `/daily-report trello progress {item}`, do NOT duplicate the monitoring logic. Instead, run the existing daily-report piece for the mapped source.
+When running `/daily-report trello progress {item}`, run ALL mapped source pieces. Most items need BOTH Slack/Discord AND Sheets checks.
 
-**Why:** User corrected — duplicating Slack search logic in the Trello command creates inconsistency and misses rules embedded in the piece (e.g. search terms, session token handling, timestamp updates).
+**Why:** User corrected — items have multiple monitoring sources. Checking only Slack misses task log verification. Each piece handles its own timestamp updates.
 
 **How to apply:**
-- Map each Trello progress item to its source piece(s)
-- Run that piece first (e.g. `/daily-report slack xtreme` for Maddy)
-- Use the piece's findings to decide complete/skip
-- The piece handles its own timestamp updates
-- Then update Trello item based on findings
-- This applies to ALL trello progress items, not just Maddy
+- Run all mapped pieces for the item
+- Use combined findings to decide complete/skip
+- Any alert from ANY source → skip (don't complete Trello item)
 
-**Examples:**
-- `trello progress maddy` → run `/daily-report slack xtreme` first
-- `trello progress bailey` → run `/daily-report slack ggs` first  
-- `trello progress elliott` → run `/daily-report slack generator` first
-- `trello progress elena` → run `/daily-report slack samguard` first
+**Sheet developer → project mapping (verified from sheet titles):**
+- LongVV → Maddy (Xtreme Soft Solutions)
+- PhucVT → James Diamond (Portfolio)
+- TuanNT → John Yi (Amazing Meds) + Rebecca (William Bills)
+- VietPH → Bailey (Paturevision)
+- KhanhHH → Elliott (Generator App)
+- LeNH → Rory (BXR/Swift) + Franc + Aysar
+
+**Full item → source mapping:**
+- `maddy` → `slack xtreme` + `sheets longvv`
+- `blake` → `slack socal`
+- `johnyi` → `slack amazingmeds` + `sheets tuannt`
+- `james` → `discord airagri` + `sheets phucvt`
+- `franc` → `slack rdc` + `sheets lenh`
+- `rory` → `slack swift` + `sheets lenh`
+- `aysar` → `slack baamboozle` + `sheets lenh`
+- `elliott` → `slack generator` + `sheets khanhhh`
+- `swift` → `slack swift` + `sheets lenh`
+- `raymond` → `slack legalatoms`
+- `marcel` → `slack equanimity`
+- `colin` → `slack aigile`
+- `andrew` → `discord bizurk`
+- `elena` → `slack samguard` + `elena`
+- `mpfc` → `slack mpfc`
+- `bailey` → `slack ggs` + `sheets vietph`
+- `fountain` → `fountain` (full 5-part)
+- `rebecca` → `slack williambills` + `sheets tuannt`
+- `neural` → (no mapped source)
+
+**Check Mail:** `trello mail {account}` → run `email {account}` first.
