@@ -119,3 +119,19 @@ No alerts. TuanNT was on leave Mon, worked Tue (5.5h JY + 2.5h Rebecca = 8h comb
 No alerts.
 
 - James Diamond - Vinn task: ✓ **complete**
+
+## Trello Progress — Rory — 15:48 (+07:00)
+
+**1. Slack (Swift Studio):** 7 msgs in #bxr__app. Rory requesting estimation sheet, flagging testing quality, adding new bug. Carrick resolved ticket + checking estimations. Jeff notifying upcoming holidays (Hung Kings'). Normal project activity.
+
+**2. Sheets (LeNH combined — Rory W5, Franc W18, Aysar W18):**
+
+| Day | Rory | Franc | Aysar | LeNH total |
+|-----|------|-------|-------|------------|
+| Mon 30/03 | 4.67h (phone number check, internal API) | 2h (Kocaeli tuner, MetricsMonitor, user panel) | 2.33h (PR gif/image keyword detection) | **9h** ✓ |
+| Tue 31/03 | 5.5h (internal API) | 2h (deploy user panel, map options, fix delete) | 0.5h (team invitation emails) | **8h** ✓ |
+| Wed 01/04 | — | — | — | Not yet filled |
+
+No alerts.
+
+- Rory: ✓ **complete**
