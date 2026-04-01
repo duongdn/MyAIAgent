@@ -66,3 +66,16 @@
 No blocking alerts — normal active project work.
 
 - Blake: ✓ **complete**
+
+## Trello Progress — John Yi — 14:47 (+07:00)
+
+**1. Slack (Amazing Meds):** 54 msgs. Nick posted daily report in #it-dept-all: "update AM Method feedback, change style widget care plan AM, setup plugin paypal (Paid Membership Subscriptions)". Active #web-dev-with-nick: PayPal subscription setup for care plan page, Gil requesting webinar section updates. John Yi engaged throughout. No alerts.
+
+**2. Sheets (TuanNT — W17, Mar 30 – Apr 5):**
+- Mon 30/03: "Nghỉ cả ngày" (full day off) → 0h OK
+- Tue 31/03: 5.5h (TuanNT portion for John Yi; splits across 3 projects)
+- Wed 01/04: 0h — not yet filled (afternoon, may log later)
+
+No blocking alerts.
+
+- John Yi - Amazing Meds: ✓ **complete**
