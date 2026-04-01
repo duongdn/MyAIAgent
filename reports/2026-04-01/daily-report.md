@@ -232,3 +232,11 @@ Yesterday (Mar 31): 2.5h logged. No alerts.
 No messages since March 27. No alerts.
 
 - Neural Contract: ✓ **complete**
+
+## Trello progress raymond — 21:31 (+07:00)
+
+**Source: Slack (LegalAtoms)**
+
+⚠️ **Token invalid** — LegalAtoms xoxp token returned `invalid_auth`. No automated refresh path available (xoxp tokens require manual re-authorization; Slack password for nick@nustechnology.com unknown).
+
+- Raymond - LegalAtoms: ⚠️ **skipped** (LegalAtoms Slack token invalid — manual token refresh needed)
