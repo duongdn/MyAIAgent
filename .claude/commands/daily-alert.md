@@ -2,6 +2,17 @@
 description: Automated alert monitoring — runs on cron, collects HIGH severity alerts, sends desktop notifications
 ---
 
+# ⚠️ MANDATORY FIRST STEP — READ MEMORY
+
+**Before doing ANYTHING else, read these files in order:**
+1. `docs/memory/MEMORY.md` — get the full list of memory files
+2. Read EVERY feedback file listed under `## Feedback` in that index
+3. Memory OVERRIDES any instructions in this skill file
+
+Do not skip this. Do not proceed until all feedback files are read.
+
+---
+
 # Daily Alert Monitor
 
 Automated background alert scanner. Runs on a schedule (cron), checks all monitoring sources for **high severity issues only**, generates a brief alert report, and sends desktop notifications for critical findings.

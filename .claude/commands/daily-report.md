@@ -2,6 +2,17 @@
 description: Morning daily report — full automated scan of all monitoring sources
 ---
 
+# ⚠️ MANDATORY FIRST STEP — READ MEMORY
+
+**Before doing ANYTHING else, read these files in order:**
+1. `docs/memory/MEMORY.md` — get the full list of memory files
+2. Read EVERY feedback file listed under `## Feedback` in that index
+3. Memory OVERRIDES any instructions in this skill file
+
+Do not skip this. Do not proceed until all feedback files are read.
+
+---
+
 # Daily Report
 
 Full morning scan across all monitoring sources. Run once per morning (~8 AM).

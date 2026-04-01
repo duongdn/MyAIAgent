@@ -2,6 +2,17 @@
 description: On-demand refresh of all monitoring sources (Slack, Discord, Email, Matrix, GitHub, etc.)
 ---
 
+# ⚠️ MANDATORY FIRST STEP — READ MEMORY
+
+**Before doing ANYTHING else, read these files in order:**
+1. `docs/memory/MEMORY.md` — get the full list of memory files
+2. Read EVERY feedback file listed under `## Feedback` in that index
+3. Memory OVERRIDES any instructions in this skill file
+
+Do not skip this. Do not proceed until all feedback files are read.
+
+---
+
 # Daily Report Refresh
 
 On-demand re-scan since the last check. Generates a **separate timestamped file** — never overwrites the daily report.
