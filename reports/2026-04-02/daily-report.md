@@ -185,9 +185,35 @@ Nothing to deploy. All pending actions already DONE (last batch 2026-03-31).
 
 ---
 
-## Trello — 08:40 (+07:00)
+## Trello — 08:47 (+07:00)
 
-*(Pending — Trello agent updating)*
+### Check Progress (5 checklists, 22 items)
+
+| Item | Checklist | Status |
+|------|-----------|--------|
+| Maddy - Carrick/Kai/Luis | Normal | ✓ complete |
+| Blake | Normal | ✓ complete |
+| John Yi - Amazing Meds | Normal | ✓ complete |
+| James Diamond - Vinn | Should do | ⚠️ skipped (Vinn missing daily report) |
+| Rory | Closely monitor | ✓ complete |
+| Aysar | Closely monitor | ✓ complete |
+| Franc | Closely monitor | ✓ complete |
+| Elliott | Closely monitor | ✓ complete |
+| MPFC | Work | ✓ complete |
+| Marcel | Work | ✓ complete |
+| Elena - SamGuard | Work | ✓ complete |
+| Raymond - LegalAtoms | Work | ✓ complete |
+| Neural Contract | Work | ✓ complete |
+| Bailey | Work | ✓ complete |
+| Andrew Taraba | Work | ✓ complete |
+| Rebecca - William Bills | Work | ✓ complete |
+| Colin | Work | ✓ complete |
+| Fountain | Work | ⚠️ skipped (VuTQ pacing, #2735/#2615 overruns) |
+
+**Result:** 16/18 completed, 2 skipped (alerts).
+
+### Check Mail (6 items)
+All ✓ complete: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
 ---
 
