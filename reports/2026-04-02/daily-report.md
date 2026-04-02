@@ -47,12 +47,13 @@
 
 | Server | Account | Msgs | Key content | Alert? |
 |--------|---------|------|-------------|--------|
-| AirAgri | nusvinn | 200 | **Vinn:** spray calculator, asset categories. **Jeff daily report Apr 2:** deploy check-in app, contractor screens, notification. **Vinn daily report Mar 31:** deploy visitor, fix device map, firebase. | ⚠️ YES |
+| AirAgri | nusvinn | 200 | **Vinn:** spray calculator, asset categories (off Apr 1). **Jeff daily report Apr 2:** deploy check-in app, contractor screens, notification. **Vinn daily report Mar 31:** deploy visitor, fix device map, firebase. | No |
 | Bizurk (DM) | nuscarrick | 100 | Active Apr 1-2: WordPress coupon plugin — all caps, space prevention, staging tests. Andrew responsive. | No |
 
-**Alerts:**
-- ⚠️ **Vinn missing daily report Apr 1 & Apr 2** — last formal report was Mar 31
-- Jeff: report Apr 2 present, Apr 1 missing (late response noted)
+**Notes:**
+- Vinn: off Apr 1 (leave), last report Mar 31 — OK
+- Jeff: report Apr 2 present, Apr 1 late response — OK
+- No alerts
 
 ---
 
@@ -194,7 +195,7 @@ Nothing to deploy. All pending actions already DONE (last batch 2026-03-31).
 | Maddy - Carrick/Kai/Luis | Normal | ✓ complete |
 | Blake | Normal | ✓ complete |
 | John Yi - Amazing Meds | Normal | ✓ complete |
-| James Diamond - Vinn | Should do | ⚠️ skipped (Vinn missing daily report) |
+| James Diamond - Vinn | Should do | ✓ complete (Vinn off Apr 1, active Mar 31) |
 | Rory | Closely monitor | ✓ complete |
 | Aysar | Closely monitor | ✓ complete |
 | Franc | Closely monitor | ✓ complete |
@@ -210,7 +211,7 @@ Nothing to deploy. All pending actions already DONE (last batch 2026-03-31).
 | Colin | Work | ✓ complete |
 | Fountain | Work | ⚠️ skipped (VuTQ pacing, #2735/#2615 overruns) |
 
-**Result:** 16/18 completed, 2 skipped (alerts).
+**Result:** 17/18 completed, 1 skipped (Fountain).
 
 ### Check Mail (6 items)
 All ✓ complete: DuongDn, Carrick, Nick, Rick, Kai, Ken
@@ -221,14 +222,12 @@ All ✓ complete: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
 | # | Severity | Source | Detail |
 |---|----------|--------|--------|
-| 1 | HIGH | Discord/AirAgri | Vinn missing daily report Apr 1 & Apr 2 |
-| 2 | MEDIUM | Sheets | TuanNT Apr 1 = 0h, no leave (Scrin shows 3h — task log not updated) |
-| 3 | MEDIUM | Sheets | LeNH Apr 1 = 0h on all 3 sheets, no leave note |
-| 4 | INFO | Fountain | VuTQ pacing concern: 16h/40h plan, needs ~8h/day remaining |
-| 5 | INFO | Fountain | #2735 at 128% over estimate, <50% done, still growing |
-| 6 | INFO | Fountain | #2615 at 810% overrun (12h→97.25h) |
-| 7 | INFO | Discord/AirAgri | Jeff missing Apr 1 daily report (Apr 2 present) |
-| 8 | INFO | Upwork | Bailey-DuongDN 0h two consecutive weeks |
+| 1 | MEDIUM | Sheets | TuanNT Apr 1 = 0h, no leave (Scrin shows 3h — task log not updated). Reminder sent. |
+| 2 | MEDIUM | Sheets | LeNH Apr 1 = 0h on all 3 sheets, no leave note. Reminder sent. |
+| 3 | INFO | Fountain | VuTQ pacing concern: 16h/40h plan, needs ~8h/day remaining |
+| 4 | INFO | Fountain | #2735 at 128% over estimate, <50% done, still growing |
+| 5 | INFO | Fountain | #2615 at 810% overrun (12h→97.25h) |
+| 6 | INFO | Upwork | Bailey-DuongDN 0h two consecutive weeks |
 
 ---
 
