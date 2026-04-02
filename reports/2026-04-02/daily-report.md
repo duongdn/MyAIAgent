@@ -211,7 +211,10 @@ Nothing to deploy. All pending actions already DONE (last batch 2026-03-31).
 | Colin | Work | ✓ complete |
 | Fountain | Work | ⚠️ skipped (VuTQ pacing, #2735/#2615 overruns) |
 
-**Result:** 17/18 completed, 1 skipped (Fountain).
+**Pending:**
+| Elena - WordPress SamGuard | Pending | ✓ complete (site UP, no CSP violations) |
+
+**Result:** 18/19 completed, 1 skipped (Fountain).
 
 ### Check Mail (6 items)
 All ✓ complete: DuongDn, Carrick, Nick, Rick, Kai, Ken
