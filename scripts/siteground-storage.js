@@ -11,7 +11,7 @@ puppeteer.use(StealthPlugin());
 const fs = require('fs');
 const path = require('path');
 
-const CONFIG_PATH = path.join(__dirname, '..', '.bailey-config.json');
+const CONFIG_PATH = path.join(__dirname, '..', 'config', '.bailey-config.json');
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'tmp');
 const PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'sg-browser-profile');
 
