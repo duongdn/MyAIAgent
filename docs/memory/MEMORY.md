@@ -45,3 +45,4 @@
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, and weekly report comparison setup
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders (LongVV, PhucVT, LeNH, Elena team)
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Always run decrypt-secrets.sh before reading config — .enc files may be newer than .json files
+- [feedback_ssh_passphrase_in_config.md](feedback_ssh_passphrase_in_config.md) — SSH passphrases stored as #passphase: comments in ~/.ssh/config above Host entry
