@@ -162,12 +162,11 @@ def main():
 
     report = '\n'.join(lines)
 
-    # Write report file
-    report_dir = 'plans/reports'
+    # Write report file to reports/{YYYY-MM-DD}/{HHMM}-{slug}.md
+    report_dir = os.path.join('reports', now.strftime('%Y-%m-%d'))
     os.makedirs(report_dir, exist_ok=True)
-    date_slug = now.strftime('%y%m%d')
     time_slug = now.strftime('%H%M')
-    report_path = os.path.join(report_dir, f'bailey-task-monitor-{date_slug}-{time_slug}-est-vs-charged.md')
+    report_path = os.path.join(report_dir, f'{time_slug}-bailey-task-monitor.md')
     with open(report_path, 'w') as f:
         f.write(report + '\n')
 
