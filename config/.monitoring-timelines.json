@@ -1,8 +1,8 @@
 {
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-04-02T08:45:00+07:00",
-    "output_file": "reports/2026-04-02/daily-report.md"
+    "last_run": "2026-04-03T08:42:00+07:00",
+    "output_file": "reports/2026-04-03/daily-report.md"
   },
   "refresh": {
     "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",
@@ -123,7 +123,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-04-03T08:20:00+07:00",
-    "output_file": "reports/2026-04-03/0820-alert.md"
+    "last_run": "2026-04-03T08:42:00+07:00",
+    "output_file": "reports/2026-04-03/daily-report.md"
   }
 }
