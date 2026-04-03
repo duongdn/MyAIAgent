@@ -27,7 +27,7 @@ COL_ACTUAL = 10    # K: Actual hours
 COL_CHARGED = 11   # L: Charged hours
 
 # Statuses that mean "released/done"
-RELEASED_STATUSES = ['Tested on Live', 'Deployed on Live', 'Dev Done']
+RELEASED_STATUSES = ['Tested on Live', 'Deployed on Live']
 BUG_STATUSES = ['Has Bug on Staging', 'Has Bug on Live', 'Has Bug']
 
 
