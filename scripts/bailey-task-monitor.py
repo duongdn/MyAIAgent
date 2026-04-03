@@ -170,10 +170,27 @@ def main():
     else:
         lines.append("None found.")
 
+    # Section 3: All other active tasks (not paid, not in released_not_paid or has_bugs)
+    alert_rows = {t['row'] for t in released_not_paid + has_bugs}
+    other_tasks = [t for t in all_tasks if t['row'] not in alert_rows and not ('PAID' in (t['pay_status'] or '').upper())]
+
+    lines.append(f"\n## Other Active Tasks ({len(other_tasks)} tasks)\n")
+
+    if other_tasks:
+        lines.append("| # | Task | Dev | Status | Type | Est (buf) | Actual | Charged | Link |")
+        lines.append("|---|------|-----|--------|------|-----------|--------|---------|------|")
+        for t in other_tasks:
+            link_md = f"[link]({t['link']})" if t['link'] else ''
+            est = f"{t['est_buffer']}h" if t['type'] == 'fixed' and t['est_buffer'] > 0 else '-'
+            lines.append(f"| {t['row']} | {t['name']} | {t['dev'] or '-'} | {t['dev_status']} | {t['type']} | {est} | {t['actual']}h | {t['charged']}h | {link_md} |")
+    else:
+        lines.append("None found.")
+
     lines.append(f"\n## Summary\n")
-    lines.append(f"- Total tasks tracked: {len(all_tasks)}")
+    lines.append(f"- Total tasks: {len(all_tasks)}")
     lines.append(f"- Released not paid: {len(released_not_paid)}")
     lines.append(f"- Has bugs: {len(has_bugs)}")
+    lines.append(f"- Other active: {len(other_tasks)}")
 
     report = '\n'.join(lines)
 
