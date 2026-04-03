@@ -68,6 +68,7 @@ def main():
     # Skip header rows (0-4), process data rows from row 5+
     data_rows = rows[5:]
 
+    now = datetime.now()
     released_not_paid = []
     has_bugs = []
     all_tasks = []
@@ -104,7 +105,22 @@ def main():
         }
 
         # Check 1: Released but not paid
-        if dev_status in RELEASED_STATUSES and not is_paid:
+        # Regular tasks: must be "Tested on Live" or "Deployed on Live"
+        # Weekly Monitor tasks: payable once the month has passed and hours > 0
+        is_weekly_monitor = name.startswith('Weekly Monitor')
+        if is_weekly_monitor and not is_paid and actual > 0:
+            # Check if the monitor month has ended (e.g. "Weekly Monitor Mar 2026")
+            parts = name.replace('Weekly Monitor ', '').split()
+            if len(parts) == 2:
+                try:
+                    monitor_date = datetime.strptime(f"1 {parts[0]} {parts[1]}", "%d %b %Y")
+                    # Month is done if we're past that month
+                    if now.year > monitor_date.year or (now.year == monitor_date.year and now.month > monitor_date.month):
+                        task_info['alert'] = 'WEEKLY_MONITOR_NOT_PAID'
+                        released_not_paid.append(task_info)
+                except ValueError:
+                    pass
+        elif dev_status in RELEASED_STATUSES and not is_paid:
             task_info['alert'] = 'RELEASED_NOT_PAID'
             released_not_paid.append(task_info)
 
@@ -121,7 +137,6 @@ def main():
             all_tasks.append(task_info)
 
     # Build markdown report
-    now = datetime.now()
     lines = []
     lines.append(f"# Bailey Task Monitor — {now.strftime('%Y-%m-%d %H:%M')}")
     lines.append(f"\nSource: [Est vs Charged](https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit?gid=920993260#gid=920993260)")
