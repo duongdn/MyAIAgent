@@ -47,3 +47,4 @@
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Always run decrypt-secrets.sh before reading config — .enc files may be newer than .json files
 - [feedback_ssh_passphrase_in_config.md](feedback_ssh_passphrase_in_config.md) — SSH passphrases stored as #passphase: comments in ~/.ssh/config above Host entry
 - [feedback_storage_explain_and_alert.md](feedback_storage_explain_and_alert.md) — Storage >= 75%: investigate WHY (du breakdown), explain causes, recommend cleanup actions
+- [feedback_no_cleanup_without_confirmation.md](feedback_no_cleanup_without_confirmation.md) — NEVER run server cleanup/destructive commands without explicit user confirmation
