@@ -19,7 +19,9 @@ Monitor Bailey/Paturevision task log for payment and budget issues.
    python3 scripts/bailey-task-monitor.py
    ```
 
-2. Analyze results and present a concise report with two sections:
+2. Report auto-saves to `plans/reports/bailey-task-monitor-{YYMMDD-HHMM}.md`
+
+3. Analyze results and present a concise report with two sections:
 
 ### Section 1: Released but Not Paid
 Tasks where dev status = "Tested on Live" / "Deployed on Live" / "Dev Done" but payment status doesn't contain "PAID".

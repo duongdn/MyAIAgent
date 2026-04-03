@@ -5,7 +5,9 @@ Spreadsheet: 1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg
 Sheet: Est vs Charged (gid=920993260)
 """
 import json
+import os
 import sys
+from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build as gc
 
@@ -118,53 +120,59 @@ def main():
         if name and dev_status:
             all_tasks.append(task_info)
 
-    # Output report
-    print("=" * 70)
-    print("BAILEY TASK MONITOR — Est vs Charged")
-    print("=" * 70)
+    # Build markdown report
+    now = datetime.now()
+    lines = []
+    lines.append(f"# Bailey Task Monitor — {now.strftime('%Y-%m-%d %H:%M')}")
+    lines.append(f"\nSource: [Est vs Charged](https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit?gid=920993260#gid=920993260)")
+    lines.append(f"\n## Released but Not Paid ({len(released_not_paid)} tasks)\n")
 
-    # Section 1: Released but not paid
-    print(f"\n## RELEASED BUT NOT PAID ({len(released_not_paid)} tasks)")
-    print("-" * 50)
     if released_not_paid:
+        lines.append("| # | Task | Dev | Type | Actual | Charged | Status | Link |")
+        lines.append("|---|------|-----|------|--------|---------|--------|------|")
         for t in released_not_paid:
-            print(f"  Row {t['row']}: {t['name']}")
-            print(f"    Status: {t['dev_status']} | Dev: {t['dev'] or 'N/A'}")
-            print(f"    Type: {t['type']} | Actual: {t['actual']}h | Charged: {t['charged']}h")
-            if t['pay_status']:
-                print(f"    Pay note: {t['pay_status']}")
-            if t['link']:
-                print(f"    Link: {t['link'][:80]}")
-            print()
+            link_md = f"[link]({t['link']})" if t['link'] else ''
+            pay_note = f" ({t['pay_status']})" if t['pay_status'] else ''
+            lines.append(f"| {t['row']} | {t['name']}{pay_note} | {t['dev'] or '-'} | {t['type']} | {t['actual']}h | {t['charged']}h | {t['dev_status']} | {link_md} |")
     else:
-        print("  None found.")
+        lines.append("None found.")
 
-    # Section 2: Tasks with bugs
-    print(f"\n## TASKS WITH BUGS ({len(has_bugs)} tasks)")
-    print("-" * 50)
+    lines.append(f"\n## Tasks with Bugs ({len(has_bugs)} tasks)\n")
+
     if has_bugs:
+        lines.append("| # | Task | Dev | Type | Est (buf) | Actual | Charged | Budget | Link |")
+        lines.append("|---|------|-----|------|-----------|--------|---------|--------|------|")
         for t in has_bugs:
-            print(f"  Row {t['row']}: {t['name']}")
-            print(f"    Status: {t['dev_status']} | Dev: {t['dev'] or 'N/A'}")
-            print(f"    Type: {t['type']} | Actual: {t['actual']}h | Charged: {t['charged']}h")
-            if t['type'] == 'fixed':
-                print(f"    Estimate (buffered): {t['est_buffer']}h")
-                if t.get('overbudget'):
-                    print(f"    ⚠️  OVERBUDGET: +{t['over_pct']:.1f}% ({t['actual'] - t['est_buffer']:.2f}h over)")
-                else:
-                    remaining = t['est_buffer'] - t['actual']
-                    print(f"    Within budget: {remaining:.2f}h remaining")
-            if t['link']:
-                print(f"    Link: {t['link'][:80]}")
-            print()
+            link_md = f"[link]({t['link']})" if t['link'] else ''
+            est = f"{t['est_buffer']}h" if t['type'] == 'fixed' else '-'
+            if t['type'] == 'fixed' and t.get('overbudget'):
+                budget = f"OVER +{t['over_pct']:.1f}% ({t['actual'] - t['est_buffer']:.1f}h)"
+            elif t['type'] == 'fixed' and t['est_buffer'] > 0:
+                budget = f"OK ({t['est_buffer'] - t['actual']:.1f}h left)"
+            else:
+                budget = 'hourly'
+            lines.append(f"| {t['row']} | {t['name']} | {t['dev'] or '-'} | {t['type']} | {est} | {t['actual']}h | {t['charged']}h | {budget} | {link_md} |")
     else:
-        print("  None found.")
+        lines.append("None found.")
 
-    # Summary
-    print(f"\n## SUMMARY")
-    print(f"  Total tasks: {len(all_tasks)}")
-    print(f"  Released not paid: {len(released_not_paid)}")
-    print(f"  Has bugs: {len(has_bugs)}")
+    lines.append(f"\n## Summary\n")
+    lines.append(f"- Total tasks tracked: {len(all_tasks)}")
+    lines.append(f"- Released not paid: {len(released_not_paid)}")
+    lines.append(f"- Has bugs: {len(has_bugs)}")
+
+    report = '\n'.join(lines)
+
+    # Write report file
+    report_dir = 'plans/reports'
+    os.makedirs(report_dir, exist_ok=True)
+    slug = now.strftime('%y%m%d-%H%M')
+    report_path = os.path.join(report_dir, f'bailey-task-monitor-{slug}.md')
+    with open(report_path, 'w') as f:
+        f.write(report + '\n')
+
+    # Print to stdout too
+    print(report)
+    print(f"\nReport saved: {report_path}")
 
 
 if __name__ == '__main__':
