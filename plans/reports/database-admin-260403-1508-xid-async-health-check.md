@@ -292,13 +292,36 @@ The multi-tenant schema-per-tenant design isolates data per tenant. Tenant numbe
 
 ---
 
+## Remediation Log (2026-04-03 15:20–15:36)
+
+### pg_repack executed (online, zero downtime)
+
+| Table | Before | After | Reclaimed |
+|---|---|---|---|
+| tenant126.DeviceCmds | 9,263 MB | 4,489 MB | **~4.7 GB** |
+| tenant112.DeviceCmds | 8,127 MB | 1,759 MB | **~6.2 GB** |
+| tenant99.DeviceCmds | 7,885 MB | 345 MB | **~7.4 GB** |
+| tenant56.DeviceCmds | 660 MB | 269 MB | **~391 MB** |
+| **Database total** | **32 GB** | **14 GB** | **~18 GB** |
+
+**Steps taken:**
+1. Installed `pg_repack 1.4.7` extension on RDS (`CREATE EXTENSION pg_repack`)
+2. Built matching `pg_repack 1.4.7` client from source (apt only had 1.5.0)
+3. Added PRIMARY KEY on `Id` column to DeviceCmds + TmpBioPhotos (required by pg_repack)
+4. Ran `pg_repack --no-superuser-check` on 4 DeviceCmds tables — all succeeded
+5. Ran `pg_repack` on 4 TmpBioPhotos tables — completed but sizes unchanged (minimal live data, space may be reclaimed by OS later)
+
+**NOT done:** TmpBioPhotos still ~145-175 MB each (~99% bloat). Would require `VACUUM FULL` which locks the table — deferred to scheduled maintenance window.
+
+---
+
 ## Alerts Summary
 
 | # | Severity | Alert | Affected Objects |
 |---|---|---|---|
-| 1 | CRITICAL | DeviceCmds bloat: 25+ GB dead space in 3 tables | tenant126/112/99 DeviceCmds |
+| 1 | ~~CRITICAL~~ RESOLVED | DeviceCmds bloat: reclaimed ~18 GB via pg_repack | tenant126/112/99/56 DeviceCmds |
 | 2 | CRITICAL | 5.6+ trillion rows from sequential scans on DeviceCmds | tenant112/99/126/130/56/77/131 |
-| 3 | HIGH | TmpBioPhotos ~99% bloat (667 MB allocated, ~1 MB live) | tenant56/112/126/99 |
+| 3 | HIGH | TmpBioPhotos ~99% bloat (667 MB allocated, ~1 MB live) — pending maintenance window | tenant56/112/126/99 |
 | 4 | HIGH | Buffer cache hit ratio 90.3% (below 95% threshold) | All workloads |
 | 5 | MEDIUM | 25 unused indexes (~80+ MB wasted, write overhead) | Multiple tenants |
 | 6 | MEDIUM | work_mem = 4 MB (too low, causes disk spill on sorts) | All queries |
@@ -484,8 +507,8 @@ If any reporting or analytics queries run against this database, offload them to
 
 ```
 [ ] P1: Set random_page_cost = 1.1 in RDS parameter group
-[ ] P1: Schedule pg_repack run for tenant99/112/126 DeviceCmds (maintenance window)
-[ ] P1: Schedule VACUUM FULL for TmpBioPhotos tables (maintenance window)
+[x] P1: pg_repack on DeviceCmds (tenant99/112/126/56) — DONE 2026-04-03, reclaimed ~18 GB
+[ ] P1: VACUUM FULL for TmpBioPhotos tables (needs maintenance window — locks table)
 [ ] P2: Set work_mem = 16384 in RDS parameter group
 [ ] P2: Increase autovacuum_max_workers to 6
 [ ] P2: Set autovacuum_vacuum_cost_limit = 400
