@@ -48,3 +48,6 @@
 - [feedback_ssh_passphrase_in_config.md](feedback_ssh_passphrase_in_config.md) — SSH passphrases stored as #passphase: comments in ~/.ssh/config above Host entry
 - [feedback_storage_explain_and_alert.md](feedback_storage_explain_and_alert.md) — Storage >= 75%: investigate WHY (du breakdown), explain causes, recommend cleanup actions
 - [feedback_no_cleanup_without_confirmation.md](feedback_no_cleanup_without_confirmation.md) — NEVER run server cleanup/destructive commands without explicit user confirmation
+
+## Project
+- [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log changed to sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I as of 2026-04-06
