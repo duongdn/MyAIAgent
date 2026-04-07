@@ -398,6 +398,40 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 - Report any JS errors found; no errors = clean
 - This is a simple health check, no PR/deploy flow
 
+**`--external` flag (default: off, internal only):**
+
+When `--external` is passed, after the normal internal flow (merge + deploy), push code to the external Precognize repo. Uses `nusken` GitHub account throughout.
+
+**External flow steps:**
+1. **Squash merge internal → external-dp:** On `nustechnology/Elena-SamGuard-Digital-Plant`, squash merge `process-digital-plant` into `external-dp` to clean up history.
+   ```bash
+   # Clone/checkout external-dp, squash merge from process-digital-plant
+   GH_TOKEN=$(gh auth token -h github.com -u nusken) git ...
+   ```
+2. **Review the squash diff:** Review the merged code to ensure it's safe for external push (no internal secrets, debug code, etc.).
+3. **Check Precognize for existing nus/ branch:**
+   ```bash
+   GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/development/pulls?state=open --jq '.[] | select(.head.ref | startswith("nus/"))'
+   ```
+   - If an open PR with `nus/YYYYMMDD` branch exists → push to that existing branch (force-push OK, it's our branch)
+   - If no open PR → create new branch `nus/{YYYYMMDD}` (today's date) on `Precognize/development`
+4. **Push external-dp content to the nus/ branch on Precognize**
+5. **Create PR (if new branch):**
+   ```bash
+   GH_TOKEN=$(gh auth token -h github.com -u nusken) gh pr create \
+     --repo Precognize/development \
+     --head "nus/{YYYYMMDD}" \
+     --base staging \
+     --title "Process digital plant - {YYYY/MM/DD}" \
+     --body "{summary of changes}" \
+     --reviewer vovabrailov,KfirBernsteinSamson
+   ```
+   - Reference format: https://github.com/Precognize/development/pull/4798
+   - Reviewers: `vovabrailov`, `KfirBernsteinSamson`
+   - Base branch: `staging`
+   - Title format: `Process digital plant - YYYY/MM/DD`
+6. **Announce to Matrix room** `!kyArBadvcbfPIpIxpD:nustechnology.com` ("Elena - Digital Plant") that external PR was created/updated
+
 ---
 
 ## Piece 8 — Trello (`/daily-report trello [card] [item]`)
