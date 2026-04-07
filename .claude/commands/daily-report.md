@@ -424,10 +424,10 @@ When `--external` is passed, after the normal internal flow (merge + deploy), pu
      --base staging \
      --title "Process digital plant - {YYYY/MM/DD}" \
      --body "{summary of changes}" \
-     --reviewer Vladimir-precog,vovabrailov,KfirBernsteinSamson
+     --reviewer Vladimir-precog,DanielGavrilkin,vovabrailov,KfirBernsteinSamson
    ```
    - Reference format: https://github.com/Precognize/development/pull/4798
-   - Reviewers: `Vladimir-precog`, `vovabrailov`, `KfirBernsteinSamson`
+   - Reviewers: `Vladimir-precog`, `DanielGavrilkin`, `vovabrailov`, `KfirBernsteinSamson`
    - Base branch: `staging`
    - Title format: `Process digital plant - YYYY/MM/DD`
 6. **Announce to Matrix room** `!kyArBadvcbfPIpIxpD:nustechnology.com` ("Elena - Digital Plant") that external PR was created/updated
