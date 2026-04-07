@@ -274,7 +274,7 @@ Supports individual developer targeting:
 
 | Developer | Arg | Sheet ID(s) | Min hours | Notes |
 |-----------|------|-------------|-----------|-------|
-| LongVV | longvv | 1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58 | 8h/day | Nghỉ nửa ngày = 4h OK |
+| LongVV | longvv | 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I | 16h/wk | Maddy = Xtreme. New template since 2026-04-06. Also 24h/wk on other project. |
 | PhucVT | phucvt | 1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI | 8h/day | Nghỉ nửa ngày = 4h OK |
 | TuanNT (John Yi) | tuannt | 1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ | 8h/day combined | Splits across 3 projects |
 | TuanNT (Rebecca) | tuannt | 1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4 | — | Check col P: "Chưa" = not written (normal, not alert) |
