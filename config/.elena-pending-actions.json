@@ -106,6 +106,26 @@
       "deployed": true,
       "status_updated": true,
       "pending_action": "DONE — Redmine #78030 marked as Deployed on 2026-04-07, deployed to MayBanServer, announced to Matrix"
+    },
+    {
+      "pr": 298,
+      "branch": "enhancements/refactor-api-calls",
+      "type": "enhancement",
+      "ticket_id": "refactor-api-calls",
+      "merged_at": "2026-04-07",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DONE — merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
+    },
+    {
+      "pr": 299,
+      "branch": "DP-652",
+      "type": "dp",
+      "ticket_id": "DP-652",
+      "merged_at": "2026-04-07",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DONE — DP-652 merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
     }
   ],
   "blocked": [],

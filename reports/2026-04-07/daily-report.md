@@ -173,6 +173,30 @@ All items completed: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
 ---
 
+## Elena (re-check) — 16:28 (+07:00)
+
+### Open PRs
+| # | Title | Branch | Author | Files | Action |
+|---|-------|--------|--------|-------|--------|
+| 298 | Refactor API calls | enhancements/refactor-api-calls | nusteam | 4 (+24/-44) | **Merged** |
+| 299 | DP-652 measurement type | DP-652 | nusteam | 1 (+14/-2) | **Merged** |
+
+CodeRabbit reviews: PR #298 had 2 actionable comments (inconsistent `checkHasChildren` filtering, optional `children` type) — code quality, not blocking. PR #299 had 1 actionable (measurement type string ID handling) + 1 nitpick (duplicate import) — minor. Both mergeable_state=clean.
+
+### Precognize (nusken)
+7 open PRs, none by nusken. Active: #4821 (Vladimir tooltip fix), #4820 (majdhajjo unified query), #4817 (nusdavid dashboard API), #4815 (nustom missing mappings), #4814 (mahkris view state), #4813 (majdhajjo agent availability), #4809 (mahkris password validation). No action needed.
+
+### WordPress SamGuard
+- HTTP 200, page renders correctly, SRI integrity attributes present, CSP configured, no server errors detected.
+
+### Deploy Status
+- **PR #298 + #299 DEPLOYED** — git pull fast-forward (4 files changed), `ng build` succeeded (16.2s). Matrix announced to Elena - Digital Plant room. URL: https://process-digital-plant2.nusdev.net/
+
+### Alerts
+None. All clear since morning report.
+
+---
+
 ## Unresolved Questions
 
 1. FountainGifts `cart_items` FK error — who is assigned to fix? Rick's Rollbar shows 10+ occurrences.
