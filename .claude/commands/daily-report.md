@@ -400,7 +400,7 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 
 **`--external` flag (default: off, internal only):**
 
-When `--external` is passed, after the normal internal flow (merge + deploy), push code to the external Precognize repo. Uses `nusken` GitHub account throughout.
+When `--external` is passed, after the normal internal flow (merge + deploy), push code to the external Precognize repo. Uses `nusken` GitHub account throughout (both internal and external repos).
 
 **External flow steps:**
 1. **Squash merge internal → external-dp:** On `nustechnology/Elena-SamGuard-Digital-Plant`, squash merge `process-digital-plant` into `external-dp` to clean up history.

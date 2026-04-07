@@ -197,6 +197,23 @@ None. All clear since morning report.
 
 ---
 
+## Elena PRs + External — 17:03 (+07:00)
+
+### Internal PRs
+No new PRs since last check (PRs #297, #298, #299 already merged earlier today).
+
+### External Push
+- Squash merge: external-dp already in sync with process-digital-plant (no new commits needed)
+- Diff review: 6 files changed (+89/-88) — hierarchy API call refactoring, measurement type store lookup, canvas section loading simplification, thresholds field added. **Safe** — no secrets, no internal refs.
+- Precognize branch: nus/20260407 (new)
+- PR: https://github.com/Precognize/development/pull/4822 (reviewers: vovabrailov, KfirBernsteinSamson)
+- Matrix: announced to Elena - Digital Plant room
+
+### Alerts
+None
+
+---
+
 ## Unresolved Questions
 
 1. FountainGifts `cart_items` FK error — who is assigned to fix? Rick's Rollbar shows 10+ occurrences.
