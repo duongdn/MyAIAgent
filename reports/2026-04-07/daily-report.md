@@ -15,7 +15,7 @@
 | **INFO** | Sheets | LongVV W53 sheet not created — cannot log hours this week. Needs PM/admin action. |
 | **INFO** | Email/carrick@ | Redmine Bug #77954 — Elliott/Generator stats incorrect. |
 | **INFO** | RDC Slack | Carrick reported personal health issue, returning tomorrow. |
-| **INFO** | Elena | PR #297 merged, pending deploy to MayBanServer + Redmine #78030 update. |
+| **INFO** | Elena | PR #297 merged + **deployed** to MayBanServer. Redmine #78030 → Deployed. Matrix announced. |
 
 ---
 
@@ -138,7 +138,7 @@ Latest: @trinhmtt 2026-03-30 (W20): ViTHT 30h, ThinhT 20h, VuTQ 40h, QC 22.5h. *
 - HTTP 200, CSP configured, SRI active, no errors detected
 
 ### Deploy Status
-- **PR #297 pending deploy** to MayBanServer + Redmine #78030 update
+- **PR #297 DEPLOYED** ✓ — git pull + ng build succeeded (16.9s). Redmine #78030 → Deployed. Matrix announced. URL: https://process-digital-plant2.nusdev.net/
 
 ---
 
