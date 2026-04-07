@@ -12,7 +12,7 @@
 | **MEDIUM** | Email/carrick@ | Marcel/Equanimity — Marcel emailed "Prod error xid". Needs investigation. |
 | **INFO** | Fountain | W21 weekly plan not posted yet (Monday morning). Last plan W20 from @trinhmtt 2026-03-30. |
 | **INFO** | Fountain | #2615 massive overrun: 12h est vs 99.25h actual (+727%). #2595 still over: 120h est vs 168.25h (+40%). |
-| **INFO** | Sheets | LongVV W53 sheet not created — cannot log hours this week. Needs PM/admin action. |
+| **INFO** | Sheets | LongVV Xtreme W53 sheet not created — but LongVV splits: 16h Maddy (new sheet) + 24h Xtreme. Maddy sheet OK (W1). |
 | **INFO** | Email/carrick@ | Redmine Bug #77954 — Elliott/Generator stats incorrect. |
 | **INFO** | RDC Slack | Carrick reported personal health issue, returning tomorrow. |
 | **INFO** | Elena | PR #297 merged + **deployed** to MayBanServer. Redmine #78030 → Deployed. Matrix announced. |
@@ -68,7 +68,8 @@ Monday morning — all 0h expected, devs fill throughout day.
 
 | Developer | Project | Today | Status |
 |-----------|---------|-------|--------|
-| LongVV | Xtreme | — | ⚠️ W53 sheet not created |
+| LongVV | Xtreme (24h/wk) | — | W53 sheet not created (client-side) |
+| LongVV | Maddy (16h/wk) | 0h (W1) | Not yet filled |
 | PhucVT | James Diamond | 0h | Not yet filled |
 | TuanNT | John Yi | 0h | Not yet filled |
 | TuanNT | Rebecca | 0h, col P: "Chưa" | Normal |
@@ -176,5 +177,5 @@ All items completed: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
 1. FountainGifts `cart_items` FK error — who is assigned to fix? Rick's Rollbar shows 10+ occurrences.
 2. Marcel "Prod error xid" — what's the xid error? Needs carrick@ investigation.
-3. LongVV W53 sheet — who creates new week sheets? Needs PM action.
+3. LongVV Xtreme W53 sheet not created — client-side issue, LongVV logs 24h/wk there + 16h/wk on Maddy (new template).
 4. Fountain W21 plan — expected Monday morning, check again later today.
