@@ -96,21 +96,20 @@
       "deployed": true,
       "status_updated": false,
       "pending_action": "DONE — external-dp deployed to MayBanServer on 2026-03-31 15:43, announced to Matrix Elena - Digital Plant room"
-    }
-  ],
-  "blocked": [],
-  "pending_deploy": [
+    },
     {
       "pr": 297,
       "branch": "fix/redmine/78030",
       "type": "redmine",
       "ticket_id": "78030",
       "merged_at": "2026-04-07",
-      "deployed": false,
-      "status_updated": false,
-      "pending_action": "PR #297 merged 2026-04-07, needs deploy to MayBanServer + Redmine #78030 status update"
+      "deployed": true,
+      "status_updated": true,
+      "pending_action": "DONE — Redmine #78030 marked as Deployed on 2026-04-07, deployed to MayBanServer, announced to Matrix"
     }
   ],
+  "blocked": [],
+  "pending_deploy": [],
   "deployed_no_status_update": [
     {
       "pr": 288,

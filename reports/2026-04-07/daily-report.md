@@ -154,9 +154,21 @@ Latest: @trinhmtt 2026-03-30 (W20): ViTHT 30h, ThinhT 20h, VuTQ 40h, QC 22.5h. *
 
 ---
 
-## Trello — pending update
+## Trello — 08:53 (+07:00)
 
-*(Trello items will be updated after report compilation)*
+### Check Mail — 6/6 ✓
+All items completed: DuongDn, Carrick, Nick, Rick, Kai, Ken
+
+### Check Progress — 18/19 (1 skipped)
+| Checklist | Items | Status |
+|-----------|-------|--------|
+| Normal | Maddy, Blake, John Yi | 3/3 ✓ |
+| Should do | James Diamond - Vinn | 1/1 ✓ |
+| Closely monitor | Rory, Aysar, Franc, Elliott | 4/4 ✓ |
+| Work | MPFC, Marcel, Elena, Raymond, Neural, Bailey, Andrew, Rebecca, Colin | 9/10 |
+| Pending | Elena WordPress | 1/1 ✓ |
+
+**Skipped:** Fountain — FountainGifts prod FK errors (HIGH alert)
 
 ---
 
