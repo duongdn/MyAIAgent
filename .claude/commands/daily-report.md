@@ -80,6 +80,8 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report elena deploy` | Deploy already-merged PRs pending deploy |
 | `/daily-report elena precognize` | Precognize nusken PRs only |
 | `/daily-report elena wordpress` | Check samguard.co for JS console errors |
+| `/daily-report elena --external` | Full Elena flow + push to Precognize external repo |
+| `/daily-report elena prs --external` | Check + merge PRs + push to external |
 | **Trello** | |
 | `/daily-report trello` | Both cards, all items |
 | `/daily-report trello progress` | Check Progress, all items |
@@ -369,6 +371,8 @@ Supports sub-targeting:
 - `/daily-report elena deploy` — deploy pending merged PRs from `.elena-pending-actions.json`
 - `/daily-report elena precognize` — Precognize nusken PRs only
 - `/daily-report elena wordpress` — check samguard.co for JS console errors
+- `/daily-report elena --external` — full flow + push to Precognize external repo
+- `/daily-report elena prs --external` — check + merge PRs + push to external
 
 **Repo:** `nustechnology/Elena-SamGuard-Digital-Plant` — MUST use `duongdn` account:
 ```bash
