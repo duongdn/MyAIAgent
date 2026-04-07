@@ -50,6 +50,7 @@
 - [feedback_no_cleanup_without_confirmation.md](feedback_no_cleanup_without_confirmation.md) — NEVER run server cleanup/destructive commands without explicit user confirmation
 
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — LongVV splits 16h Maddy + 24h Xtreme; Xtreme sheet issues are client-side
+- [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey fixed-cost invoices use WBS estimates with buffer, not task log actuals
 
 ## Project
 - [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log changed to sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I as of 2026-04-06
