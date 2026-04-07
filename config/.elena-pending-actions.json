@@ -99,6 +99,18 @@
     }
   ],
   "blocked": [],
+  "pending_deploy": [
+    {
+      "pr": 297,
+      "branch": "fix/redmine/78030",
+      "type": "redmine",
+      "ticket_id": "78030",
+      "merged_at": "2026-04-07",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "PR #297 merged 2026-04-07, needs deploy to MayBanServer + Redmine #78030 status update"
+    }
+  ],
   "deployed_no_status_update": [
     {
       "pr": 288,
