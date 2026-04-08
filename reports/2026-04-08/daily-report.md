@@ -8,7 +8,7 @@
 
 | Severity | Source | Issue |
 |----------|--------|-------|
-| **HIGH** | Slack/Equanimity | Session token invalid_auth — auto-refresh failed. Marcel/Carrick monitoring blind spot. Manual token refresh required. |
+| ~~HIGH~~ | ~~Slack/Equanimity~~ | ~~Session token~~ — **RESOLVED** at 14:11. Token refreshed via Puppeteer with new password. Carrick+Mani active on XID issues. Marcel ✓ complete. |
 | **MEDIUM** | Email/rick@ | FirstProject prod Rollbar: #978 TypeError (null reading 'gift_main'), #979 Cannot read property. Needs investigation — server-side or client-side. |
 | **INFO** | Email/carrick@ | Redmine Bug #78065 (Elliott/Generator) — booking reminder sent immediately. New bug. |
 | **INFO** | Email/rick@ | FountainStaging BugSnag 3x errors, InfinityStagingBE CSRF — staging only. |
@@ -47,7 +47,7 @@ Trello: Check Mail — all 6 items ✓ complete.
 | 9 | LegalAtoms | 50 | Talha: Maryland done, Texas envelopes. Raymond syncing. |
 | 10 | MPFC | 0 | No messages |
 | 11 | William Bills | 44 | Lucas: subscription update API done, FE in progress. Winner boxes deployed. |
-| 12 | **Equanimity** | ⚠️ | **invalid_auth** — session token expired, auto-refresh failed |
+| 12 | Equanimity | 3989+ | Carrick+Mani active in #xid-technologies: sync/scanning issues, upload photo bug, staff gate problems. Carrick debugging with tech lead. Normal dev activity. |
 | 13 | SoCal Auto Wraps | 0 | No messages |
 | 14 | Aigile Dev | 3 | Blog draft auto-posted (Atlassian job cuts article) |
 
@@ -178,23 +178,19 @@ No pending deploys.
 ### Check Mail — 6/6 ✓
 All items completed: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
-### Check Progress — 18/20 (2 skipped)
+### Check Progress — 19/19 ✓
 | Checklist | Items | Status |
 |-----------|-------|--------|
 | Normal | Maddy, Blake, John Yi | 3/3 ✓ |
 | Should do | James Diamond - Vinn | 1/1 ✓ |
-| Closely monitor | Rory, Aysar, Franc, Elliott, Swift | 5/5 ✓ |
-| Work | MPFC, Elena, Raymond, Neural, Bailey, Andrew, Rebecca, Colin | 8/8 ✓ |
-| Work | Fountain | 1/1 ✓ |
-
-**Skipped:**
-- **Marcel** — Equanimity Slack invalid_auth, can't verify activity
-- **Rory (Swift Studio)** — included above as Swift, completed
+| Closely monitor | Rory, Aysar, Franc, Elliott | 4/4 ✓ |
+| Work | MPFC, Marcel, Elena, Raymond, Neural, Bailey, Andrew, Rebecca, Colin, Fountain | 10/10 ✓ |
+| Pending | Elena WordPress | 1/1 ✓ |
 
 ---
 
 ## Unresolved Questions
 
-1. **Equanimity session token** — auto-refresh failed (signin.password API returns unknown_method). Needs manual browser login to extract new xoxc+cookie. Marcel monitoring is blind.
+1. ~~Equanimity session token~~ — **RESOLVED**. Token refreshed with new password via Puppeteer. Config updated.
 2. **FirstProject prod errors** — rick@ Rollbar #978/#979 (TypeError). Server-side or client-side? Need investigation to determine severity.
 3. **animeworld/Andrew Taraba** — new project offer from animeworld. Nuscarrick should confirm scope.
