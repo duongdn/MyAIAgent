@@ -54,3 +54,4 @@
 
 ## Project
 - [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log changed to sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I as of 2026-04-06
+- [feedback_no_hardcoded_secrets.md](feedback_no_hardcoded_secrets.md) — NEVER hardcode tokens/passwords in scripts, GitHub Push Protection blocks; load from config/*.json
