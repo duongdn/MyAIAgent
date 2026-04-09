@@ -1,0 +1,398 @@
+[
+  {
+    "name": "Baamboozle",
+    "error": null,
+    "msgs": [
+      {
+        "user": "typeform",
+        "channel": "cancellation-responses",
+        "text": "",
+        "time": "07:16"
+      },
+      {
+        "user": "aysark.pro",
+        "channel": "testing",
+        "text": "Note, we want to explicitly deter account sharing and only allow the last 3 active sessions",
+        "time": "00:27"
+      },
+      {
+        "user": "skjamie25",
+        "channel": "testing",
+        "text": "<@U069WJ0HPQ8|Carrick> Thank you ~ I think users will often have the same IP address if they are sharing the network at schools and academies.",
+        "time": "19:35"
+      },
+      {
+        "user": "carrick",
+        "channel": "testing",
+        "text": "The logic to detect the device from login request is has an issue. I'm trying to find the way to upgrade it",
+        "time": "17:33"
+      },
+      {
+        "user": "carrick",
+        "channel": "testing",
+        "text": "I found out the root season why iPad sessions are not being registered or revoked, and it may be related to why Chrome MacBook was not revoked after the 6th login. This is a limitation of authenticati",
+        "time": "17:31"
+      }
+    ],
+    "count": 14,
+    "total_api": 15,
+    "look_for": "general activity"
+  },
+  {
+    "name": "RDC - FM Monitoring",
+    "error": null,
+    "msgs": [
+      {
+        "user": "user access logs",
+        "channel": "user-access-logs",
+        "text": "Tuner Access Log",
+        "time": "04:32"
+      },
+      {
+        "user": "user access logs",
+        "channel": "user-access-logs",
+        "text": "Tuner Access Log",
+        "time": "04:31"
+      },
+      {
+        "user": "user access logs",
+        "channel": "user-access-logs",
+        "text": "Tuner Access Log",
+        "time": "04:30"
+      },
+      {
+        "user": "user access logs",
+        "channel": "user-access-logs",
+        "text": "Tuner Access Log",
+        "time": "04:29"
+      },
+      {
+        "user": "user access logs",
+        "channel": "user-access-logs",
+        "text": "Tuner Access Log",
+        "time": "02:25"
+      }
+    ],
+    "count": 27,
+    "total_api": 30,
+    "look_for": "dmetiner updates"
+  },
+  {
+    "name": "Swift Studio",
+    "error": null,
+    "msgs": [
+      {
+        "user": "roryh",
+        "channel": "bxr__app",
+        "text": "Thanks",
+        "time": "00:51"
+      },
+      {
+        "user": "jeff",
+        "channel": "bxr__app",
+        "text": "Got it",
+        "time": "21:04"
+      },
+      {
+        "user": "roryh",
+        "channel": "bxr__app",
+        "text": "please could you look at this?",
+        "time": "18:44"
+      },
+      {
+        "user": "roryh",
+        "channel": "bxr__app",
+        "text": "see the bar at the top that is stopping people from clicking, also the nav bar at the bottom isn't sticky so stops people tapping in some areas",
+        "time": "18:44"
+      },
+      {
+        "user": "roryh",
+        "channel": "bxr__app",
+        "text": "",
+        "time": "18:43"
+      }
+    ],
+    "count": 13,
+    "total_api": 13,
+    "look_for": "Carrick activity"
+  },
+  {
+    "name": "Xtreme Soft Solutions",
+    "error": null,
+    "msgs": [],
+    "count": 0,
+    "total_api": 0,
+    "look_for": "Kai daily report"
+  },
+  {
+    "name": "SAM GUARD - Mobile",
+    "error": null,
+    "msgs": [
+      {
+        "user": "hubspot",
+        "channel": "mql-leads",
+        "text": "Hello,  This new MQL was just created: \u00a0 . Please review the following conversion and source details:  Create Date: 4/9/26 Contact ID: 214481917838 Name: Jose Tafula Email: <mailto:jose.tafula@uniluri",
+        "time": "06:39"
+      },
+      {
+        "user": "hubspot",
+        "channel": "mql-leads",
+        "text": "Hello,  This new MQL was just created: \u00a0 . Please review the following conversion and source details:  Create Date: 4/9/26 Contact ID: 214480519593 Name: Paolo Ferrari Email: <mailto:paolo.p.ferrari@i",
+        "time": "05:31"
+      },
+      {
+        "user": "hubspot",
+        "channel": "mql-leads",
+        "text": "Hello,  This new MQL was just created: \u00a0 . Please review the following conversion and source details:  Create Date: 4/8/26 Contact ID: 213681304744 Name: Ricardo Chaves Email: <mailto:ricardo.chaves@a",
+        "time": "03:29"
+      },
+      {
+        "user": "hubspot",
+        "channel": "mql-leads",
+        "text": "Hello,  This new MQL was just created: \u00a0 . Please review the following conversion and source details:  Create Date: 4/8/26 Contact ID: 214455909150 Name: Fabert Issina Email: <mailto:fabert.issinabiss",
+        "time": "00:15"
+      },
+      {
+        "user": "hubspot",
+        "channel": "mql-leads",
+        "text": "Hello,  This new MQL was just created: \u00a0 . Please review the following conversion and source details:  Create Date: 4/8/26 Contact ID: 212951054880 Name: Ademola Adelabu Email: <mailto:a.adelabu@conse",
+        "time": "21:50"
+      }
+    ],
+    "count": 16,
+    "total_api": 22,
+    "look_for": "Elena/DP activity"
+  },
+  {
+    "name": "Global Grazing Services",
+    "error": null,
+    "msgs": [
+      {
+        "user": "joey",
+        "channel": "maintenance",
+        "text": "Let's wait until tomorrow because I just saw an option in pricing in new prestashop that may be causing it <@U01BKAERQJ1|Amy>  I'll check to see tomorrow",
+        "time": "20:38"
+      },
+      {
+        "user": "nick",
+        "channel": "maintenance",
+        "text": "My daily report on Upgrade task: Check and go live some issues - Doofinder search button in mobile menu - Page builder issue (drag-drop function)  Console backup issue -> Fixed and will deploy tomorro",
+        "time": "18:02"
+      },
+      {
+        "user": "amy",
+        "channel": "maintenance",
+        "text": "Nick has developed a potential fix for it, <@U01B7QMKXD1>. However, it\u2019s still on staging-sg at the moment. We\u2019ll deploy it to live tomorrow morning if that\u2019s okay with you.",
+        "time": "15:17"
+      },
+      {
+        "user": "joey",
+        "channel": "maintenance",
+        "text": "Hi <@U01BKAERQJ1|Amy> <@U01BL7N13B3|Nick> just question concerning the prices reduction does it work back to normal ?",
+        "time": "15:01"
+      },
+      {
+        "user": "amy",
+        "channel": "maintenance",
+        "text": "I did, <@U01B7QMKXD1>! I\u2019ll use this as a reference for testing the current feature on staging and notify Nick if we need to update anything before it\u2019s ready to go live.",
+        "time": "14:11"
+      }
+    ],
+    "count": 10,
+    "total_api": 12,
+    "look_for": "Nick daily report in #maintenance"
+  },
+  {
+    "name": "Amazing Meds",
+    "error": null,
+    "msgs": [
+      {
+        "user": "nick",
+        "channel": "web-dev-with-nick",
+        "text": "I've set it up. I'll let you know when it's done.",
+        "time": "08:23"
+      },
+      {
+        "user": "john",
+        "channel": "web-dev-with-nick",
+        "text": "Is this setup now?",
+        "time": "21:13"
+      },
+      {
+        "user": "john",
+        "channel": "web-dev-with-nick",
+        "text": "<https://gateway.uat.sandbox-netvalve.com/login|https://gateway.uat.sandbox-netvalve.com/login>",
+        "time": "11:46"
+      },
+      {
+        "user": "john",
+        "channel": "web-dev-with-nick",
+        "text": "john-amazing-meds dadhev-dewce0-rIxwyj!",
+        "time": "11:45"
+      },
+      {
+        "user": "john",
+        "channel": "web-dev-with-nick",
+        "text": "They are fast",
+        "time": "11:45"
+      }
+    ],
+    "count": 18,
+    "total_api": 23,
+    "look_for": "general activity"
+  },
+  {
+    "name": "Generator",
+    "error": null,
+    "msgs": [
+      {
+        "user": "carrick",
+        "channel": "triage",
+        "text": "Now RsvpCutoffGuestListJob is working. Because I've pushed the RSVP cut-off task to demo at your time, so there might be a processing error during deploy",
+        "time": "14:32"
+      },
+      {
+        "user": "violet",
+        "channel": "mobile",
+        "text": "Jeff will check it as soon as possible.",
+        "time": "13:48"
+      },
+      {
+        "user": "rudi",
+        "channel": "triage",
+        "text": "<@U05LXNNR34K|NUS Carrick> i'm seeing this error in demo... Job is incomplete class: {\"__PHP_Incomplete_Class_Name\":\"App\\\\Jobs\\\\RsvpCutoffGuestListJob\"}",
+        "time": "12:08"
+      },
+      {
+        "user": "rudi",
+        "channel": "mobile",
+        "text": "Hi <@U076RUV983T|Violet> - can <@U05M09650DA|Jeff> please look into Elliott's changes on this ticket? <https://trello.com/c/1sMLfo44> this ticket is a MUST do for the next mobile release",
+        "time": "12:01"
+      },
+      {
+        "user": "jeff",
+        "channel": "mobile",
+        "text": "Yes, it\u2019s okay to merge into develop",
+        "time": "10:57"
+      }
+    ],
+    "count": 8,
+    "total_api": 11,
+    "look_for": "Elliott/Violet activity"
+  },
+  {
+    "name": "LegalAtoms",
+    "error": null,
+    "msgs": [
+      {
+        "user": "miratariq",
+        "channel": "tyler-journal",
+        "text": "so many clerks reject CLETS but important detail is some accept  So what's the problem ?  If there is no problem keep filing",
+        "time": "05:47"
+      },
+      {
+        "user": "talha.naeem1920",
+        "channel": "tyler-journal",
+        "text": "<@UCP0Z10CV> <https://github.com/rhuang/juristium-clone/issues/19205#issuecomment-4209817010> <https://github.com/rhuang/juristium-clone/issues/19242#issuecomment-4209597707>",
+        "time": "04:49"
+      },
+      {
+        "user": "9068mj",
+        "channel": "tyler-journal",
+        "text": "CLETS-001 is the confidential form used so restraining order information can be entered into the California Law Enforcement Telecommunications System (CLETS), the statewide law-enforcement database us",
+        "time": "03:41"
+      },
+      {
+        "user": "galantini99",
+        "channel": "general",
+        "text": "i'll work on this <https://github.com/rhuang/juristium-clone/issues/19245>",
+        "time": "02:46"
+      },
+      {
+        "user": "miratariq",
+        "channel": "tyler-journal",
+        "text": "Tell the whole story",
+        "time": "02:30"
+      }
+    ],
+    "count": 34,
+    "total_api": 67,
+    "look_for": "Nick-specific mentions only"
+  },
+  {
+    "name": "MyPersonalFootballCoach",
+    "error": null,
+    "msgs": [],
+    "count": 0,
+    "total_api": 0,
+    "look_for": "general activity"
+  },
+  {
+    "name": "William Bills",
+    "error": null,
+    "msgs": [
+      {
+        "user": "oliver",
+        "channel": "U051TSQ6SHX",
+        "text": "Okay thanks Lucas",
+        "time": "08:32"
+      },
+      {
+        "user": "lucas",
+        "channel": "U051TSQ6SHX",
+        "text": "hi <@U051TSQ6SHX|Ollie>, Today I will test and deploy subscription staging. After that, I will work on Jersey.",
+        "time": "08:24"
+      },
+      {
+        "user": "oliver",
+        "channel": "U051TSQ6SHX",
+        "text": "Thanks",
+        "time": "13:15"
+      },
+      {
+        "user": "lucas",
+        "channel": "U051TSQ6SHX",
+        "text": "Perhaps today. I'll let you know when it's finished.",
+        "time": "13:09"
+      },
+      {
+        "user": "oliver",
+        "channel": "U051TSQ6SHX",
+        "text": "When do you think it will be completed?",
+        "time": "12:51"
+      }
+    ],
+    "count": 23,
+    "total_api": 27,
+    "look_for": "Oliver/Lucas tasks"
+  },
+  {
+    "name": "Equanimity",
+    "error": "invalid_auth",
+    "msgs": [],
+    "count": 0
+  },
+  {
+    "name": "SoCal Auto Wraps",
+    "error": null,
+    "msgs": [],
+    "count": 0,
+    "total_api": 0,
+    "look_for": "general activity"
+  },
+  {
+    "name": "Aigile Dev",
+    "error": null,
+    "msgs": [
+      {
+        "user": "hendrix",
+        "channel": "wathaga-development",
+        "text": "Hi <@U029SRWPJ>, since the project has been running for a while, Rick and I were reviewing the project and noticed that the Node version and some dependencies might be outdated.  Keeping things up-to-",
+        "time": "11:35"
+      }
+    ],
+    "count": 1,
+    "total_api": 2,
+    "look_for": "general activity"
+  }
+]
