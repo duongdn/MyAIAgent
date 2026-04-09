@@ -20,6 +20,20 @@ This project has TWO memory locations. **ALWAYS save to BOTH** when creating or 
 - **Fountain 5-part check:** MANDATORY in every daily report. Assign ONE dedicated agent. Validate ALL 5 parts exist before finalizing: (1) Matrix plan, (2) Task log actuals, (3) Plan vs Actual table, (4) Capacity & Runway, (5) Over-estimate tracking + Trello board. This has been missed multiple days — NEVER skip.
 - **Discord:** Only monitor AirAgri + Bizurk. NOT HOMIEAPP.
 
+## NEVER Hardcode Secrets (MANDATORY)
+
+**NEVER put tokens, passwords, API keys, or any secrets directly in scripts or source code.**
+GitHub Push Protection WILL block the push. A pre-commit hook (`.githooks/pre-commit`) also enforces this.
+
+Always load from gitignored config files:
+- Slack tokens/cookies: `config/.slack-accounts.json`
+- Email passwords: `config/.email-accounts.json`
+- Discord tokens: `config/.discord-accounts.json`
+- Trello: `config/.trello-config.json`
+- Other: see `config/` directory
+
+**This rule has been violated multiple times. It is NON-NEGOTIABLE.**
+
 ## Key Config Files
 
 - Monitoring timelines: `config/.monitoring-timelines.json` (NOT a secret, tracked in git)
