@@ -104,16 +104,18 @@ Active discussion in Fountain room (2026-04-09):
 - No explicit weekly plan message ("Em update plan tuần này") found in last 40 messages
 
 ### Part 2 — Task Log Actuals
-⚠️ Google Sheets API timeout — unable to fetch Fountain sheet summary for current week.
+⚠️ Google Sheets API quota exhausted (HTTP 429). Multiple retry attempts over 8+ minutes failed. Subagent parallel requests during full daily report run exhausted the service account's daily/per-minute quota.
+
+**Action needed:** Re-run `/daily-report fountain sheets` after quota resets (~1h or next day). Consider batching Sheets API calls or adding quota retry logic.
 
 ### Part 3 — Plan vs Actual
-⚠️ Skipped — no plan message found + sheets API timeout.
+⚠️ Skipped — no plan message found + Sheets API quota exhausted.
 
 ### Part 4 — Capacity & Runway
-⚠️ Skipped — Est vs Charged tab unavailable due to API timeout.
+⚠️ Skipped — Sheets API quota exhausted.
 
 ### Part 5 — Over-Estimate Tracking
-⚠️ Skipped — sheets API timeout. Key tasks #2595, #2615, #2735 not checked.
+⚠️ Skipped — Sheets API quota exhausted. Key tasks #2595, #2615, #2735 not checked.
 
 ### Trello Board (Fountain)
 - **Customer comment**: tmmckay on "Fountain - Pro/Send - Smart Link": user cannot add to previous smartlink order (single gift item limit), suggests hiding list on smartlink selection
