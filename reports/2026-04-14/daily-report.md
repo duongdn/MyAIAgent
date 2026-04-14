@@ -1,7 +1,7 @@
-# Daily Report — Monday 2026-04-14
+# Daily Report — Tuesday 2026-04-14
 
-**Window:** 2026-04-11 08:00 → 2026-04-14 08:30 (+07:00)
-**Leave today:** VietPH, PhucVT
+**Window:** 2026-04-13 09:52 → 2026-04-14 09:12 (+07:00)
+**Leave today (Tue):** VietPH, PhucVT
 
 ---
 
@@ -58,24 +58,22 @@ Trello: James Diamond → ✓ | Andrew Taraba → ✓ (low-activity client, sile
 
 ---
 
-## Sheets (all) — 08:24 (+07:00)
+## Sheets (all) — 09:12 (+07:00) [CORRECTED for Monday]
 
-Week: Apr 7–11, 2026
+| Developer | Mon 04/13 | Min | Status |
+|-----------|-----------|-----|--------|
+| LongVV | 8h | 16h/wk | ✓ |
+| PhucVT | 8h | 8h/day | ✓ |
+| TuanNT | **0h** (JY 0h + Reb 0h) | 8h/day | ⚠️ ALERT |
+| VietPH | 8h (5h + 3h) | 8h/day | ✓ |
+| KhanhHH | 8h | 8h/day | ✓ |
+| LeNH | **0h** (Rory 0h + Franc 0h + Aysar 0h) | 8h/day | ⚠️ ALERT |
 
-| Developer | Fri | Week total | Min | Status |
-|-----------|-----|------------|-----|--------|
-| LongVV | 2.5h | 34.5h | 16h/wk | ✓ |
-| PhucVT | 8h | 40h | 8h/day | ✓ |
-| TuanNT | 8h (JY 4h + Reb 4h) | 39.3h | 8h/day | ✓ |
-| VietPH | 8h | 40h | 8h/day | ✓ |
-| KhanhHH | 8h | 40h | 8h/day | ✓ |
-| LeNH | 8h (Franc 1.67h + Aysar 6.33h) | 40h | 8h/day | ✓ |
+TuanNT (Rebecca) col P Mon: "Chưa" (normal)
 
-Notes:
-- LongVV split: Maddy 16h + Generator 18.5h
-- LeNH split: Rory 12.5h + Franc 7.84h + Aysar 19.66h
-- TuanNT (Rebecca) col P: "Chưa" all days (normal)
-- Alerts: None
+**Alerts:**
+- **TuanNT: 0h Monday** — no leave note, empty template rows
+- **LeNH: 0h Monday** — no leave note across all 3 sheets
 
 ---
 
@@ -180,9 +178,11 @@ No alerts — too early in week for meaningful comparison.
 
 ---
 
-## Reminders — 08:30 (+07:00)
-No reminders needed — all devs logged hours Friday; Monday too early to check today's logs.
-VietPH + PhucVT on leave today.
+## Reminders — 09:15 (+07:00)
+- **TuanNT**: 0h Monday → reminder sent ✓
+- **LeNH**: 0h Monday → reminder sent ✓
+- VietPH + PhucVT on leave today (Tue) — skip
+- Matrix token refreshed (was expired)
 
 ---
 
@@ -220,12 +220,14 @@ DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
 3. **Fountain: LamLQ 0h for 2 weeks** — planned 10h/wk, zero delivered
 5. **Fountain: HaVS inactive since W20** — QC member
 6. **Fountain: #2735 Smart Link over-estimate still growing** (104.75h vs 90h est)
-7. **Scrin vs task log discrepancy:** TuanNT JY 4h Fri, Scrin 0h Fri — monitor
+### 🟡 Task Log Alerts
+7. **TuanNT: 0h Monday** — no leave note, reminder sent
+8. **LeNH: 0h Monday** — no leave note across all 3 sheets, reminder sent
 
 ### ✅ Clean
 - Email: all 6 checked ✓
-- Slack: 12/13 clean (Equanimity excluded)
-- Discord: AirAgri active ✓
-- Sheets: all devs OK ✓
+- Slack: 13/13 ✓ (Equanimity token refreshed)
+- Discord: AirAgri + Bizurk ✓
+- Sheets: 4/6 ✓ (TuanNT + LeNH flagged)
 - Elena: no PRs, no deploys, WordPress clean ✓
 - Upwork: early week, no issues ✓
