@@ -54,7 +54,7 @@ Trello: all 6 mail items ✓ complete.
 | AirAgri | nusvinn | 25 | **airagri_webapp (19):** Vinn merged PR303, deployed symlink zero-downtime, File Manager filtering. .jdiamond: hide incident files from general users. Vinn report Apr 13: device alarm, pre-prod DB, file manager. **airagri-flutter (6):** Jeff report Apr 13 (4h): Classify & Assign Investigation UI+API done, 5 Whys in progress. |
 | Bizurk | nuscarrick | 0 | No activity in channels or Andrew Taraba DM since cutoff |
 
-Trello: James Diamond → ✓ | Andrew Taraba → ⚠️ (silent)
+Trello: James Diamond → ✓ | Andrew Taraba → ✓ (low-activity client, silence normal)
 
 ---
 
@@ -203,8 +203,10 @@ DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
 
 **Skipped (alerts):**
 - Marcel → ⚠️ Equanimity token expired
-- Andrew Taraba → ⚠️ Bizurk silent
 - Fountain → ⚠️ LamLQ 0h, HaVS inactive, #2735 growing, PROD errors
+
+**Completed (late):**
+- Andrew Taraba → ✓ (low-activity client, silence normal)
 
 ---
 
@@ -219,8 +221,7 @@ DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
 4. **Fountain: LamLQ 0h for 2 weeks** — planned 10h/wk, zero delivered
 5. **Fountain: HaVS inactive since W20** — QC member
 6. **Fountain: #2735 Smart Link over-estimate still growing** (104.75h vs 90h est)
-7. **Andrew Taraba: Bizurk completely silent** since Friday
-8. **Scrin vs task log discrepancy:** TuanNT JY 4h Fri, Scrin 0h Fri — monitor
+7. **Scrin vs task log discrepancy:** TuanNT JY 4h Fri, Scrin 0h Fri — monitor
 
 ### ✅ Clean
 - Email: all 6 checked ✓
