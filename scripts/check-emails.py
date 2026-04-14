@@ -1,208 +1,136 @@
 #!/usr/bin/env python3
-"""Check 6 IMAP email accounts for daily monitoring report."""
+"""Check all 6 email accounts via IMAP for the monitoring window."""
 
 import imaplib
 import email
+from email.header import decode_header
 from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone, timedelta
-import json
+import re
 import sys
-from pathlib import Path
 
-TZ_SAIGON = timezone(timedelta(hours=7))
-SCAN_FROM = datetime(2026, 4, 8, 9, 30, 0, tzinfo=TZ_SAIGON)
-IMAP_SINCE = "08-Apr-2026"  # previous day for IMAP SINCE
+TZ7 = timezone(timedelta(hours=7))
+CUTOFF = datetime(2026, 4, 11, 8, 0, 0, tzinfo=TZ7)
+IMAP_SINCE = "10-Apr-2026"
 
-# Account metadata (no secrets — passwords loaded from config/.email-accounts.json)
-ACCOUNT_META = {
-    "duongdn@nustechnology.com": {"folder": "INBOX", "label": "duongdn@", "filter_desc": "leave requests, New Relic alerts"},
-    "carrick@nustechnology.com": {"folder": "INBOX", "label": "carrick@", "filter_desc": "Redmine bug notifications for Generator/Elliott"},
-    "nick@nustechnology.com": {"folder": "INBOX", "label": "nick@", "filter_desc": "anything from John Yi"},
-    "rick@nustechnology.com": {"folder": "INBOX", "label": "rick@", "filter_desc": "Rollbar/BugSnag PRODUCTION alerts for Fountain, InfinityRoses"},
-    "kai@nustechnology.com": {"folder": "INBOX", "label": "kai@", "filter_desc": "Jira/Madhuraka mentions"},
-    "ken@nustechnology.com": {"folder": "NewsLetter", "label": "ken@", "filter_desc": "Precognize GitHub PR activity"},
-}
+ACCOUNTS = [
+    {"user": "duongdn@nustechnology.com", "pass": "rtYVkk1jmreE", "folder": "INBOX", "filter": None, "label": "duongdn@"},
+    {"user": "carrick@nustechnology.com", "pass": "SNUp3Q3WAy76", "folder": "INBOX", "filter": None, "label": "carrick@"},
+    {"user": "nick@nustechnology.com",    "pass": "iHWa82WJ3q5Q", "folder": "INBOX", "filter": "John Yi", "label": "nick@"},
+    {"user": "rick@nustechnology.com",    "pass": "ij3s9L8AQz0Z", "folder": "INBOX", "filter": "Kunal|Fountain|InfinityRose|Rollbar|BugSnag", "label": "rick@"},
+    {"user": "kai@nustechnology.com",     "pass": "JFDn4fsHiU0m", "folder": "INBOX", "filter": "Madhuraka", "label": "kai@"},
+    {"user": "ken@nustechnology.com",     "pass": "WY60fEDrTfXM", "folder": "NewsLetter", "filter": "Precognize", "label": "ken@"},
+]
 
-def load_accounts():
-    """Load email accounts from config/.email-accounts.json, merge with metadata."""
-    config_path = Path(__file__).resolve().parent.parent / "config" / ".email-accounts.json"
-    with open(config_path) as f:
-        data = json.load(f)
-    accounts = []
-    for acct in data["accounts"]:
-        addr = acct["email"]
-        if addr in ACCOUNT_META:
-            meta = ACCOUNT_META[addr]
-            accounts.append({
-                "email": addr,
-                "password": acct["app_password"],
-                "folder": meta["folder"],
-                "label": meta["label"],
-                "filter_desc": meta["filter_desc"],
-            })
-    return accounts
-
-ACCOUNTS = load_accounts()
-
+def decode_hdr(raw):
+    if raw is None:
+        return ""
+    parts = decode_header(raw)
+    result = []
+    for data, charset in parts:
+        if isinstance(data, bytes):
+            result.append(data.decode(charset or "utf-8", errors="replace"))
+        else:
+            result.append(data)
+    return " ".join(result)
 
 def check_account(acct):
-    """Check one IMAP account. Returns (count, summary_lines, alert_lines)."""
-    emails_found = []
+    results = []
     alerts = []
-    error = None
-
+    label = acct["label"]
     try:
         M = imaplib.IMAP4_SSL("imap.zoho.com", 993)
-        M.login(acct["email"], acct["password"])
-        rv, _ = M.select(acct["folder"], readonly=True)
-        if rv != "OK":
-            return 0, [f"Could not select folder {acct['folder']}"], [], None
+        M.login(acct["user"], acct["pass"])
 
-        rv, data = M.search(None, f'(SINCE "{IMAP_SINCE}")')
-        if rv != "OK" or not data[0]:
+        status, data = M.select(acct["folder"], readonly=True)
+        if status != "OK":
+            return label, 0, f"Could not open {acct['folder']}", []
+
+        status, msg_ids = M.search(None, f'(SINCE {IMAP_SINCE})')
+        if status != "OK" or not msg_ids[0]:
             M.logout()
-            return 0, ["No emails in window"], [], None
+            return label, 0, "No emails in window", []
 
-        msg_ids = data[0].split()
-        for mid in msg_ids:
-            rv, msg_data = M.fetch(mid, "(RFC822.HEADER)")
-            if rv != "OK":
-                continue
-            raw = msg_data[0][1]
-            msg = email.message_from_bytes(raw)
+        ids = msg_ids[0].split()
 
-            # Parse date
-            date_str = msg.get("Date", "")
+        for mid in ids:
             try:
-                msg_date = parsedate_to_datetime(date_str)
-                if msg_date.tzinfo is None:
-                    msg_date = msg_date.replace(tzinfo=timezone.utc)
-                if msg_date < SCAN_FROM:
+                status, msg_data = M.fetch(mid, "(RFC822.HEADER)")
+                if status != "OK":
                     continue
-            except Exception:
-                continue  # skip unparseable dates
+                raw = msg_data[0][1]
+                msg = email.message_from_bytes(raw)
 
-            subject = msg.get("Subject", "(no subject)")
-            # Decode subject if encoded
-            decoded_parts = email.header.decode_header(subject)
-            subject = ""
-            for part, charset in decoded_parts:
-                if isinstance(part, bytes):
-                    subject += part.decode(charset or "utf-8", errors="replace")
-                else:
-                    subject += part
+                date_str = msg.get("Date", "")
+                try:
+                    dt = parsedate_to_datetime(date_str)
+                    if dt.tzinfo is None:
+                        dt = dt.replace(tzinfo=timezone.utc)
+                    if dt < CUTOFF:
+                        continue
+                except:
+                    continue
 
-            sender = msg.get("From", "unknown")
-            emails_found.append({"subject": subject, "from": sender, "date": msg_date})
+                subj = decode_hdr(msg.get("Subject", ""))
+                frm = decode_hdr(msg.get("From", ""))
+
+                if acct["filter"]:
+                    pattern = acct["filter"]
+                    combined = f"{subj} {frm}"
+                    if not re.search(pattern, combined, re.IGNORECASE):
+                        continue
+
+                results.append({
+                    "date": dt.astimezone(TZ7).strftime("%m/%d %H:%M"),
+                    "from": frm[:60],
+                    "subject": subj[:100],
+                })
+
+                subj_lower = subj.lower()
+                frm_lower = frm.lower()
+                if any(k in subj_lower or k in frm_lower for k in ["rollbar", "bugsnag", "new relic", "alert", "error", "critical", "urgent", "leave request", "leave"]):
+                    alerts.append(f"[{label}] {subj[:80]}")
+
+            except Exception as e:
+                pass
 
         M.logout()
     except Exception as e:
-        error = str(e)
-        return 0, [f"ERROR: {error}"], [f"{acct['label']}: IMAP error — {error}"], error
+        return label, 0, f"ERROR: {e}", []
 
-    # Build summary
-    summary_lines = []
-    for em in emails_found:
-        summary_lines.append(f"From: {em['from']} — {em['subject']}")
+    if not results:
+        summary = "No matching emails"
+    else:
+        lines = []
+        for r in results[:10]:
+            lines.append(f"{r['date']} — {r['subject'][:70]}")
+        if len(results) > 10:
+            lines.append(f"...and {len(results)-10} more")
+        summary = "; ".join(lines)
 
-    # Detect alerts based on account
-    label = acct["label"]
+    return label, len(results), summary, alerts
 
-    if label == "duongdn@":
-        for em in emails_found:
-            subj_lower = em["subject"].lower()
-            if "leave" in subj_lower or "nghỉ" in subj_lower:
-                alerts.append(f"duongdn@: Leave request — {em['subject']}")
-            if "new relic" in subj_lower:
-                alerts.append(f"duongdn@: New Relic alert — {em['subject']}")
+print("Checking 6 email accounts...", file=sys.stderr)
+all_alerts = []
+rows = []
 
-    elif label == "carrick@":
-        for em in emails_found:
-            subj_lower = em["subject"].lower()
-            if "redmine" in subj_lower or "bug" in subj_lower or "generator" in subj_lower or "elliott" in subj_lower:
-                alerts.append(f"carrick@: Redmine/Bug — {em['subject']}")
+for acct in ACCOUNTS:
+    label, count, summary, alerts = check_account(acct)
+    rows.append((label, count, summary))
+    all_alerts.extend(alerts)
+    print(f"  {label}: {count} emails", file=sys.stderr)
 
-    elif label == "nick@":
-        for em in emails_found:
-            from_lower = em["from"].lower()
-            if "john" in from_lower and "yi" in from_lower:
-                alerts.append(f"nick@: Email from John Yi — {em['subject']}")
+now = datetime.now(TZ7).strftime("%H:%M")
+print(f"\n## Email (all) — {now} (+07:00)")
+print(f"| Account | Count | Summary |")
+print(f"|---------|-------|---------|")
+for label, count, summary in rows:
+    summary = summary.replace("|", "\\|")
+    print(f"| {label} | {count} | {summary} |")
 
-    elif label == "rick@":
-        for em in emails_found:
-            subj_lower = em["subject"].lower()
-            is_production = "production" in subj_lower or "prod" in subj_lower
-            is_staging = "staging" in subj_lower or "stage" in subj_lower
-            is_error_source = any(k in subj_lower for k in ["rollbar", "bugsnag", "error", "exception"])
-            is_relevant_project = any(k in subj_lower for k in ["fountain", "infinityroses", "infinity roses"])
-            if is_error_source and is_production and not is_staging:
-                alerts.append(f"rick@: PRODUCTION error — {em['subject']}")
-
-    elif label == "kai@":
-        for em in emails_found:
-            subj_lower = em["subject"].lower()
-            from_lower = em["from"].lower()
-            if "jira" in subj_lower or "jira" in from_lower or "madhuraka" in subj_lower.lower():
-                alerts.append(f"kai@: Jira/Madhuraka — {em['subject']}")
-
-    elif label == "ken@":
-        for em in emails_found:
-            subj_lower = em["subject"].lower()
-            from_lower = em["from"].lower()
-            if "github" in from_lower or "pull request" in subj_lower or "pr" in subj_lower:
-                alerts.append(f"ken@: GitHub PR — {em['subject']}")
-
-    if not summary_lines:
-        summary_lines = ["No relevant emails"]
-
-    return len(emails_found), summary_lines, alerts, error
-
-
-def main():
-    now = datetime.now(TZ_SAIGON)
-    time_str = now.strftime("%H:%M")
-
-    table_rows = []
-    all_alerts = []
-    auth_errors = []
-
-    for acct in ACCOUNTS:
-        print(f"Checking {acct['email']}...", flush=True)
-        count, summaries, alerts, error = check_account(acct)
-        summary_text = "; ".join(summaries[:10])  # cap at 10
-        if len(summaries) > 10:
-            summary_text += f" (+{len(summaries)-10} more)"
-        table_rows.append(f"| {acct['label']} | {count} | {summary_text} |")
-        all_alerts.extend(alerts)
-        if error and ("LOGIN" in error.upper() or "AUTH" in error.upper()):
-            auth_errors.append(f"- **{acct['label']}**: Auth failure — {error}")
-
-    # Build output
-    lines = []
-    lines.append(f"## Email (all) — {time_str} (+07:00)")
-    lines.append("")
-    lines.append("| Account | Count | Summary |")
-    lines.append("|---------|-------|---------|")
-    lines.extend(table_rows)
-    lines.append("")
-    lines.append("### Alerts")
-    if auth_errors:
-        for ae in auth_errors:
-            lines.append(ae)
-    if all_alerts:
-        for a in all_alerts:
-            lines.append(f"- {a}")
-    if not all_alerts and not auth_errors:
-        lines.append("No alerts.")
-    lines.append("")
-
-    output = "\n".join(lines)
-    print("\n" + output)
-
-    with open("/home/nus/projects/My-AI-Agent/reports/2026-04-09/email-results.md", "w") as f:
-        f.write(output)
-    print("Results written to /home/nus/projects/My-AI-Agent/reports/2026-04-09/email-results.md")
-
-
-if __name__ == "__main__":
-    main()
+if all_alerts:
+    print(f"\n**Alerts:**")
+    for a in all_alerts:
+        print(f"- {a}")
+else:
+    print(f"\nNo alerts found.")
