@@ -71,7 +71,7 @@ Tokens: Both verified (3-step check passed).
 | Developer | Yesterday (04-14) | Status |
 |-----------|-------------------|--------|
 | LongVV | — | ⚠️ Not logged (16h/wk threshold) |
-| PhucVT | — | ⚠️ Not logged |
+| PhucVT | 0h (Nghỉ cả ngày) | ✓ Leave day |
 | TuanNT | 4h (Rebecca 4h, JohnYi 0h) | ⚠️ LOW (4h < 8h combined) |
 | VietPH | 8h | ✓ OK |
 | KhanhHH | 8h | ✓ OK |
@@ -196,7 +196,7 @@ Sent Matrix reminders for 0h on 2026-04-14:
 
 ### Task Log Alerts
 2. **LeNH:** 0h across all 3 sheets (Rory/Franc/Aysar) — no leave note
-3. **PhucVT:** 0h — no leave note
+3. ~~**PhucVT:**~~ Leave day (Nghỉ cả ngày) — NOT an alert, reminder sent in error
 4. **LongVV:** 0h — no leave note
 5. **TuanNT:** 4h only (Rebecca 4h, JohnYi 0h) — below 8h combined
 
