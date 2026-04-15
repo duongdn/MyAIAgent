@@ -60,6 +60,7 @@
 - [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey invoices use WBS estimates, not task log actuals
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — LongVV: 16h Maddy + 24h Xtreme
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel is adhoc, 0h is expected
+- [feedback_bailey_dev3_not_active.md](feedback_bailey_dev3_not_active.md) — Bailey DEV3/DuongDN inactive, 0h is expected
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel Matrix message format
 
 ## Feedback — Report & Workflow

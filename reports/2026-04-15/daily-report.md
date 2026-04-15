@@ -145,7 +145,7 @@ Week: Apr 13-19
 | Neural (38901192) | external | 0:00 | 0:40 | OK (low-activity) |
 | Aysar — Software Dev | LeNH | 4:50 | 19:40 | ✓ Active |
 | Bailey DEV1 | VietPH | 8:00 | 34:20 | ✓ Active |
-| Bailey DEV3 | DuongDN | 0:00 | 0:00 | ⚠ 0h (2 weeks) |
+| Bailey DEV3 | DuongDN | 0:00 | 0:00 | OK (expected) |
 
 ---
 
@@ -213,7 +213,7 @@ Sent Matrix reminders for 0h on 2026-04-14:
 
 ### Upwork
 13. **Rory/LeNH Upwork:** 0h this week (was 12:30 last week)
-14. **Bailey DEV3/DuongDN:** 0h for 2 consecutive weeks
+14. ~~Bailey DEV3/DuongDN:~~ 0h is expected (not active)
 
 ### Info (non-blocking)
 - RDC: fmdx.org outage, Carrick hotfixed, dmetiner wants FMDX dependency removed
