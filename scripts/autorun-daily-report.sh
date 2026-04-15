@@ -1,5 +1,5 @@
 #!/bin/bash
-# Auto-run daily report when PC starts (triggered by systemd user service)
+# Auto-run daily report (triggered by systemd timer at 8AM, or on boot if missed)
 # Waits for network, then runs claude headlessly with /daily-report skill
 
 set -euo pipefail
