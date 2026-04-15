@@ -6,7 +6,14 @@ set -euo pipefail
 
 PROJECT_DIR="/home/nus/projects/My-AI-Agent"
 CLAUDE_BIN="/home/nus/.local/bin/claude"
-LOG_DIR="$PROJECT_DIR/reports/$(date +%Y-%m-%d)"
+TODAY=$(date +%Y-%m-%d)
+REPORT_FILE="$PROJECT_DIR/reports/$TODAY/daily-report.md"
+
+# Skip if today's report already exists
+if [ -f "$REPORT_FILE" ]; then
+  echo "[$TODAY] Daily report already exists, skipping."
+  exit 0
+fi
 
 # Wait for network (max 60s)
 for i in $(seq 1 12); do
@@ -16,6 +23,7 @@ for i in $(seq 1 12); do
   sleep 5
 done
 
+LOG_DIR="$PROJECT_DIR/reports/$TODAY"
 mkdir -p "$LOG_DIR"
 
 cd "$PROJECT_DIR"
