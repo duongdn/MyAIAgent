@@ -6,7 +6,7 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-04-15T08:45:00+07:00",
+    "last_run": "2026-04-15T15:25:00+07:00",
     "output_file": "reports/2026-04-15/daily-report.md"
   },
   "refresh": {

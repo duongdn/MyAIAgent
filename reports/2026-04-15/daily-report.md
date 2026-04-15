@@ -241,3 +241,17 @@ Trello: Neural Contract - Contract Probe ✓ already complete.
 - Generator: Logo regression, Jeff fixing; QC missed issue
 - Giftdrop links not sending (orders 2757765FH, 2214370IP) — Mike reported
 - Kunal: Custom Roses "ready to go", SEO noindex "push live", Smart Link "least important"
+
+## Email all — 15:25 (+07:00)
+| Account | Count | Summary |
+|---------|:-----:|---------|
+| duongdn | 1 | Remote work request from namtv — "Xin làm remote chiều 15/04/2026" |
+| carrick | 3 | Redmine #78208 new external bug for Elliott: "[News] The Read Status Does Not Work" (assigned to Carrick). Google Sheets share request (unitedtecnew). Upwork marketing email. |
+| nick | 0 | No John Yi emails |
+| rick | 4 | Rollbar InfinityRoses Daily Summary (×2, normal digest). ClickUp Fountain task notification. Calendar reminder. |
+| kai | 3 | Jira notifications from Anoma Wasala — LIFM2-431 "Improve performance for bulk update listing price request" (mentioned kai) |
+| ken | 0 | No Precognize/development emails |
+
+No critical alerts. Notable: Redmine #78208 new external bug for Elliott (carrick). namtv remote work request (duongdn).
+
+Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken items ✓ complete.
