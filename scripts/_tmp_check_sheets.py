@@ -28,9 +28,9 @@ SHEETS = [
 # Try W15 and W16 on first sheet to determine mapping
 def find_week_sheet(svc, sid):
     """Find which W-sheet contains April 14."""
-    for w in ['W16', 'W15', 'W14', 'W17']:
+    for w in ['W21', 'W20', 'W22', 'W19', 'W23']:
         try:
-            r = svc.values().get(spreadsheetId=sid, range=f'{w}!A1:A50').execute()
+            r = svc.values().get(spreadsheetId=sid, range=f'{w}!A1:A60').execute()
             rows = r.get('values', [])
             for row in rows:
                 if row and (TARGET_DATE in row[0] or TARGET_DATE_ALT in row[0]):
