@@ -189,6 +189,19 @@ Sent Matrix reminders for 0h on 2026-04-14:
 
 ---
 
+## Trello progress neural — 10:05 (+07:00)
+
+**Upwork — Neural Contract (workroom 38901192)**
+| Workroom | Contract | This Week | Last Week | Since Start |
+|----------|----------|-----------|-----------|-------------|
+| Neural Contract | Ongoing Support of Laravel / mySQL website | 0:00 | 0:40 | 95:00 |
+
+No alerts — maintenance contract, low activity is normal.
+
+Trello: Neural Contract - Contract Probe ✓ already complete.
+
+---
+
 ## Summary — Alerts & Action Items
 
 ### Critical
