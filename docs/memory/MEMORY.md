@@ -51,7 +51,7 @@
 - [feedback_upwork_in_daily_report.md](feedback_upwork_in_daily_report.md) — Must be included in daily report
 - [feedback_upwork_tasklog_by_taskid.md](feedback_upwork_tasklog_by_taskid.md) — Compare by specific task ID, not all rows by person
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Sum ALL hours (official + part-time) to match Upwork
-- [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract = Upwork workroom 38901192
+- [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept, not just timesheet hours
 
 ## Feedback — Project-Specific
 - [feedback_elena_auto_deploy.md](feedback_elena_auto_deploy.md) — Elena PRs: auto review+merge+deploy without asking
