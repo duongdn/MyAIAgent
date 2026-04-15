@@ -196,7 +196,15 @@ Sent Matrix reminders for 0h on 2026-04-14:
 |----------|----------|-----------|-----------|-------------|
 | Neural Contract | Ongoing Support of Laravel / mySQL website | 0:00 | 0:40 | 95:00 |
 
-No alerts — maintenance contract, low activity is normal.
+**Messages (today Apr 15):**
+- **09:58** Michael (client): **URGENT** — "generate reports" button stuck in perpetual spinner on website. File analysis works, `make_table` processes complete, but Laravel side hangs. Asked to investigate and fix ASAP.
+- **10:03** Carrick: "Let me check"
+- **10:41** Carrick: Fixed the issue, pushed code
+- **10:54** Michael: "Thanks for quick response! Tell me, at a high level, what was the issue?" — **awaiting response**
+
+**Also recent (Apr 8-9):** Michael flagged Carrick pushed to wrong branch (staging vs master). Resolved same day.
+
+⚠️ **Action needed:** Carrick needs to respond to Michael explaining what the issue was.
 
 Trello: Neural Contract - Contract Probe ✓ already complete.
 
