@@ -29,6 +29,6 @@ mkdir -p "$LOG_DIR"
 cd "$PROJECT_DIR"
 
 # Run daily report headlessly, log output
-"$CLAUDE_BIN" -p "/daily-report" \
+stdbuf -oL "$CLAUDE_BIN" -p "/daily-report" \
   --dangerously-skip-permissions \
   2>&1 | tee "$LOG_DIR/autorun.log"
