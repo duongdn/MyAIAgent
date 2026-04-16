@@ -29,6 +29,5 @@ mkdir -p "$LOG_DIR"
 cd "$PROJECT_DIR"
 
 # Run daily report headlessly, log output
-stdbuf -oL "$CLAUDE_BIN" -p "/daily-report" \
-  --dangerously-skip-permissions \
-  2>&1 | tee "$LOG_DIR/autorun.log"
+# Use script(1) to force PTY — ensures line-buffered streaming to log
+script -qefc "$CLAUDE_BIN -p /daily-report --dangerously-skip-permissions --output-format text" "$LOG_DIR/autorun.log"
