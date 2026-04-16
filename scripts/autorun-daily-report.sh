@@ -29,5 +29,11 @@ mkdir -p "$LOG_DIR"
 cd "$PROJECT_DIR"
 
 # Run daily report headlessly, log output
-# Use script(1) to force PTY — ensures line-buffered streaming to log
-script -qefc "$CLAUDE_BIN -p /daily-report --dangerously-skip-permissions --output-format text" "$LOG_DIR/autorun.log"
+# stream-json outputs events as they happen (text mode waits until end)
+# Log raw stream for monitoring; final report is written by Claude to reports dir
+"$CLAUDE_BIN" -p "/daily-report" \
+  --dangerously-skip-permissions \
+  --output-format stream-json \
+  2>&1 | while IFS= read -r line; do
+    echo "$line" >> "$LOG_DIR/autorun.log"
+done
