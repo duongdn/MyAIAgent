@@ -39,6 +39,7 @@
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner column (G), not day total. TuanNT splits 3 projects.
 - [feedback_tasklog_summary_sheet.md](feedback_tasklog_summary_sheet.md) — Use Summary sheet for weekly hours, not individual W-sheets
 - [feedback_parttime_official_filter.md](feedback_parttime_official_filter.md) — Only "Task dự án" as official time, exclude "Part-time" rows
+- [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca, must check all 4
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log
 - [feedback_leave_day_no_report_needed.md](feedback_leave_day_no_report_needed.md) — "Nghỉ cả ngày" = leave day, not an alert
@@ -46,12 +47,19 @@
 ## Feedback — Fountain
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — MANDATORY 5-part check: Matrix plan, actuals, plan vs actual, capacity, over-estimate
 - [feedback_over_estimate_tracking.md](feedback_over_estimate_tracking.md) — Track if hours still growing week-over-week
+- [feedback_hungpn_not_sole_qc.md](feedback_hungpn_not_sole_qc.md) — HungPN 0h not alert if other QC (PhatDLT) covers
 
 ## Feedback — Upwork
 - [feedback_upwork_in_daily_report.md](feedback_upwork_in_daily_report.md) — Must be included in daily report
 - [feedback_upwork_tasklog_by_taskid.md](feedback_upwork_tasklog_by_taskid.md) — Compare by specific task ID, not all rows by person
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Sum ALL hours (official + part-time) to match Upwork
+- [feedback_upwork_match_not_alert.md](feedback_upwork_match_not_alert.md) — Upwork matching task log = OK, week-over-week drops are not alerts
 - [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept, not just timesheet hours
+
+## Feedback — Monitoring Exceptions
+- [feedback_kai_16h_no_daily_report.md](feedback_kai_16h_no_daily_report.md) — Kai 16h/wk, daily report in Xtreme not required
+- [feedback_trinhmtt_not_qc.md](feedback_trinhmtt_not_qc.md) — TrinhMTT not QC, exclude from Fountain QC alerts
+- [feedback_ggs_nick_daily_report.md](feedback_ggs_nick_daily_report.md) — GGS Nick daily report absence is not an alert
 
 ## Feedback — Project-Specific
 - [feedback_elena_auto_deploy.md](feedback_elena_auto_deploy.md) — Elena PRs: auto review+merge+deploy without asking

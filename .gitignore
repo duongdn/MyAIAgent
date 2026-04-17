@@ -26,3 +26,6 @@ tmp/
 
 # Agent intermediate reports
 plans/reports/general-purpose-*
+
+# Autorun logs may leak tokens from subagent curl commands
+reports/**/autorun.log

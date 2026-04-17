@@ -14,8 +14,11 @@ When any token fails, fix it silently:
 ## Slack session tokens (xoxc) need both headers
 AmazingMeds and Equanimity use xoxc tokens. MUST send BOTH:
 - `Authorization: Bearer {xoxc_token}`
-- `Cookie: d={cookie_value}`
+- `Cookie: d={cookie_value}` (from `config/.slack-accounts.json` `cookie` field)
 Missing Cookie returns `invalid_auth` — looks like expired but isn't.
+
+**Before flagging ANY Slack token as expired, run:** `node scripts/slack-verify-tokens.js`
+It tests all 14 workspaces with correct headers and prints OK/FAIL per workspace. This is the authoritative check — agent-side `conversations.history`/`search.messages` failures are NOT proof of expiry. Reason: this trap has caused false alarms multiple times (latest 2026-04-17) for AmazingMeds + Equanimity.
 
 ## Auth failure = HIGH severity
 Auth failure on any monitoring source = HIGH (blind spot). But FIRST verify the token works before flagging:
