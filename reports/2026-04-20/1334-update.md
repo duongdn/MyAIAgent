@@ -96,3 +96,110 @@ Fetched latest 20 stories. **Latest 3 messages (sorted desc, +07):**
 
 - Bailey DEV1 task log reconciliation — VietPH had not yet populated W24 row for Mon 20/04 as of 13:34. Parent should re-verify at EOD that VietPH task log ≈ 4.33h Upwork (diff threshold: 1h).
 - 3 non-urgent Neural tasks from Michael (Apr 15 14:06) — Carrick's Apr 16 "I did and pushed code, let check" was ambiguous; status of each of the 3 tasks still not individually confirmed by client.
+
+## Fountain Refresh (08:40 → 13:34, 5-part)
+
+Matrix token: was expired, refreshed silently via `scripts/matrix-token-refresh.js` (browser SSO, verified `@duongdn:nustechnology.com`).
+
+### Part 1 — Matrix Weekly Plan (room `!EWnVDAxbTGsBxPkaaI:nustechnology.com`)
+
+**NEW W23 plan posted after morning report** — @trinhmtt, 2026-04-20T01:44:08Z → edited 2026-04-20T01:48:46Z (≈ 08:44 → 08:48 local):
+
+> Em gửi plan tuần này ạ
+> ViTHT: 40h | ThinhT: 12h | VuTQ: 40h | LamLQ: 10h | DatNT: 40h | => QC: 30.5h
+
+Δ vs morning W22 reference plan (90h dev / 22.5h QC): Dev **+52h** (90h → **142h**), QC **+8h** (22.5h → 30.5h). Team expanded significantly:
+- LamLQ back (10h) after W22 absence
+- **DatNT (Dat Nguyen) NEW DEV** onboarded today — Ruby full-stack; VuTQ to set up; pairing with ViTHT to reduce merge conflicts
+- ViTHT bumped 38h → 40h; VuTQ 32h → 40h; ThinhT 20h → 12h
+
+### Part 2 — W22 Actuals Summary sheet (refresh)
+
+W22 row 27 unchanged since morning. Dev **90.00h** (VuTQ 32 / ThinhT 20 / ViTHT 38), QC **25.50h** (PhatDLT 17.5 / HungPN 8). Team total 115.50h. **No change.**
+W23 row 28 = all 0h (week just started Monday; devs log EOD).
+
+### Part 3 — Plan vs Actual
+
+W22 final: all devs hit Apr 17 revised plan exactly (ON TARGET). QC combined 25.50h vs 22.5h plan = +3h (EXCEEDS, OK). **No new deltas.**
+W23 comparison pending — EOD task log check required.
+
+### Part 4 — Capacity & Runway
+
+Est vs Charged unchanged since morning. Remaining est (NS+IP) = **158.25h** | Runway @ morning's 90h/wk = 1.76 wk.
+**With new W23 plan of 142h/wk, runway shrinks to 1.11 weeks** (158.25 / 142). Replenishment urgency elevated — team capacity just grew 58%, backlog consumption accelerates.
+No new ticket moves (0 tickets completed/added since 08:40 per sheet snapshot).
+
+### Part 5 — Over-Estimate Tracking (DELTAS vs morning)
+
+| Task | Morning actual | Now | Δ since 08:40 | Trend |
+|------|----------------|-----|---------------|-------|
+| #2595 GiftDrop | 168.25h | 168.25h | 0 | STABLE |
+| #2615 Gift of Choice | 102.75h | 102.75h | 0 | STABLE |
+| **#2735 Send Smart Link** | 111.50h | 111.50h | 0 | STABLE (no further growth this window) |
+| #2742 (status mismatch) | 20.25h | 20.25h | 0 | STABLE (status anomaly persists: "Not Started" + 20.25h actual) |
+| #2627 Bug on Live | 8.25h | 8.25h | 0 | STABLE |
+| #2639, #2501, #2380, #2624 | (baseline) | unchanged | 0 | STABLE |
+
+**No STILL-GROWING flags this window.** #2735 devs were in discussion (PhatDLT ↔ ViTHT) on Matrix around 10:46 about smart-link item-switch behavior — QC investigation, not yet new hours logged.
+
+### Part 6 — Trello Board (supplementary)
+
+Board 5475eaf923a9a1309357eb51 (rick570): **0 new customer comments** since 08:40 (via `/boards/{id}/actions?filter=commentCard&since=...`). 4 pending Rick replies on Gift of Choice (#NBzXZigw) from morning still awaiting response.
+No new stuck cards, no list moves detected in window.
+
+### Fountain Alerts (refresh delta)
+
+| # | Alert | Severity |
+|---|-------|----------|
+| 1 | **NEW W23 plan = 142h/wk** (+52h vs W22). Runway @ new plan = **1.11 weeks** (was 1.76 wk). Backlog replenishment now URGENT | MEDIUM |
+| 2 | **DatNT onboarded** — new full-stack dev (Ruby BG); needs setup from VuTQ. Monitor integration this week | INFO |
+| 3 | 4 unanswered customer comments on #NBzXZigw still pending Rick reply (carryover from morning) | MEDIUM |
+| 4 | #2742 status mismatch (Not Started + 20.25h) still not corrected (carryover) | LOW |
+
+## Elena Refresh (08:40 → 13:34)
+
+### A. SamGuard PRs (duongdn @ `nustechnology/Elena-SamGuard-Digital-Plant`)
+
+- Open PRs: **0**
+- PRs updated since 2026-04-20: **0** (searched `updated:>=2026-04-20`)
+- PRs merged since 2026-04-20: **0** (searched `merged:>=2026-04-20`)
+- Pending-actions file (`config/.elena-pending-actions.json`): no new items; `pending_deploy: []`, `blocked: []`. Last merged = PR #299 (DP-652) on 2026-04-07 — already deployed + announced.
+- **No deploys to MayBanServer, no Redmine updates, no Matrix announcements required.**
+
+### B. Precognize (nusken @ `Precognize/development`)
+
+- PRs updated since 2026-04-20 by `nusken`: **0**
+- Open PRs by `nusken`: **0**
+- No action required. (Other team members active per email feed: briannus PR #4831 comments, nusdavid+windsurf-bot PR #4843 — not ours.)
+
+### C. WordPress samguard.co (JS console re-verify)
+
+Method: Puppeteer (headless, `--no-sandbox`), `networkidle2`, CDP Log+Security enabled, in-page `securitypolicyviolation` listener.
+
+| Metric | Morning | Now (13:34) | Δ |
+|---|---|---|---|
+| HTTP status | 200 | **200** | 0 |
+| Console errors | 0 | **0** | 0 |
+| Page errors | 0 | **0** | 0 |
+| CSP violations (CDP) | 0 | **0** | 0 |
+| CSP violations (in-page) | 0 | **0** | 0 |
+| Request failures (ERR_ABORTED) | 13 | 15 | +2 (all aborts — analytics beacons + mp4 autoplay, not errors) |
+
+**Still HEALTHY.** Zero real errors. All 15 failed requests are `ERR_ABORTED` (analytics beacons torn down at unload + mp4 autoplay aborts) — same benign pattern as morning.
+
+### Elena Alerts
+
+- **None.** No PRs, no deploys, no CSP violations, no Matrix announces.
+
+### Trello item verdict (refresh)
+
+- **Fountain** → complete w/ alerts (new W23 plan + runway compression logged)
+- **Elena - SamGuard (Work)** → complete (0 PRs)
+- **Elena - WordPress SamGuard (Pending)** → complete (site healthy)
+- **Precognize** → N/A this run (no nusken PRs)
+
+### Unresolved questions
+
+1. New W23 plan raises dev capacity 58% (90h → 142h) — does backlog of 158.25h justify or will team idle after ~1 wk? Parent may flag to Kunal for ticket replenishment.
+2. DatNT onboarding — no confirmation yet from VuTQ on setup complete; watch next refresh.
+3. #2742 "Not Started" + 20.25h actual — status mismatch persists 3+ days; needs Trinh to correct or Phat to verify state.
