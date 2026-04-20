@@ -1,0 +1,169 @@
+# Slack Piece 2 Scan — 2026-04-20 08:22:41 +07
+Cutoff: 2026-04-17 08:50:00 +07 (epoch 1776390600)
+Query: after:2026-04-16
+
+
+### Baamboozle — 16 msg(s)
+- **#random** (6 msgs)
+  - [04-18 13:43 audreysherchan] We already have a video about students being able to play via class PIN, but none yet about us not gathering student data. 
+  - [04-18 13:42 audreysherchan] I think this would be great! We’re currently working with Alli on a video, so I can ask her to add that info there.  To add, I think we could go further than socials. We should als
+  - [04-18 13:40 notmedesign] Strong positive opinions about Double Vision and Story Dice :game_die::muscle:
+  - [04-18 06:20 skjamie25] <@U066DG1RZNE|Audrey> I wonder if it’d be helpful to just put out there, maybe on socials in a fun post or something, that Baamboozle doesn’t require student logins or use student 
+  - [04-18 03:10 noah] Dang was just reading this too: <https://www.wbur.org/onpoint/2026/04/14/the-teachers-pushing-back-on-screens-in-schools|https://www.wbur.org/onpoint/2026/04/14/the-teachers-pushin
+  - ... and 1 more
+- **#gamedev** (5 msgs)
+  - [04-20 00:40 martin.biruk] <@U017JJ2D6L9|Aysar> good to deploy
+  - [04-20 00:27 github] 
+  - [04-19 23:54 github] 
+  - [04-19 22:36 github] 
+  - [04-19 22:00 github] 
+- **#cancellation-responses** (4 msgs)
+  - [04-19 10:29 typeform] 
+  - [04-18 02:01 typeform] 
+  - [04-17 20:36 typeform] 
+  - [04-17 09:57 typeform] 
+- **#engineering** (1 msgs)
+  - [04-17 15:00 carrick] <@U017JJ2D6L9|Aysar> Just remind about my suggestion
+
+
+### RDC - FM Monitoring — 50 msg(s)
+- **#rpi-reboot-logs** (32 msgs)
+  - [04-19 12:35 reboot service] :white_check_mark: Tuner Recovery Alert
+  - [04-18 17:03 reboot service] :white_check_mark: Tuner Recovery Alert
+  - [04-18 17:00 reboot service] :rotating_light: Tuner Instability Alert
+  - [04-18 16:59 reboot service] :rotating_light: Tuner Instability Alert
+  - [04-18 16:58 reboot service] :rotating_light: Tuner Instability Alert
+  - ... and 27 more
+- **#user-access-logs** (14 msgs)
+  - [04-19 16:12 user access logs] Tuner Access Log
+  - [04-19 16:07 user access logs] Tuner Access Log
+  - [04-18 19:14 user access logs] Tuner Access Log
+  - [04-18 19:14 user access logs] Tuner Access Log
+  - [04-18 19:14 user access logs] Tuner Access Log
+  - ... and 9 more
+- **#all-rdc-fm-monitoring** (4 msgs)
+  - [04-17 14:59 carrick] <@U09KWR3BNQ3> Any news for us?
+  - [04-17 10:37 carrick] As now: • EN + TR: as on main-1.4.0a branch • TR: as on main  branch I can easy to change the branch name to •  EN + TR: as on main-en branch • TR: as on main-tr branch
+  - [04-17 10:34 carrick] The separate branch can adapt it. I think so. I think we don't need to change the repository and add a new repository. Creating the branch and switching branches is easier to use, 
+  - [04-17 10:31 carrick] I updated and pushed it to master device
+
+
+### Swift Studio — 2 msg(s)
+- **#bxr__app** (2 msgs)
+  - [04-18 16:47 roryh] Do you have a breakdown of how you will approach the project?
+  - [04-18 16:47 roryh] We are ready to go, I just haven't had time to build the sprint in Jira
+
+
+### Xtreme Soft Solutions — 4 msg(s)
+- **#U05PM34HQ4F** (2 msgs)
+  - [04-17 15:48 anomawasala] YES
+  - [04-17 08:56 kai] Do you have check yes / no dropdown in email templates?
+- **#U021Q9A8FG9** (2 msgs)
+  - [04-17 15:01 madhuraka] We won't be proceeding with that at the moment. Unfortunately, no budget.
+  - [04-17 14:58 kai] Any news for my suggestion <@U021Q9A8FG9|Madhuraka>
+
+
+### SAM GUARD - Mobile — 19 msg(s)
+- **#mql-leads** (19 msgs)
+  - [04-20 04:27 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/20/26 Contact ID: 216563281734 Name: Fernando Azevedo Email: <
+  - [04-20 03:56 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216559268476 Name: Rui Soares Email: <mailto
+  - [04-20 03:07 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216558663459 Name: Graeme Diston Email: <mai
+  - [04-20 02:51 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216552077864 Name: Carlo Breda Email: <mailt
+  - [04-20 02:51 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216558768262 Name: Raymond Jose Flores Pérez
+  - ... and 14 more
+
+
+### GLOBAL GRAZING SERVICES — 11 msg(s)
+- **#maintenance** (8 msgs)
+  - [04-20 08:09 nick] <@U01B7QMKXD1> Can you take a look ?
+  - [04-17 18:27 joey] And how much money is that all going to cost me ? <@U01BL7N13B3|Nick>  we did the latest updates on android app like a year or so less, it seems we always update but never update. 
+  - [04-17 16:43 nick] And another thing for mobile app  I recommend upgrading the Android stack in this app in phases, because the current project is still on an old baseline and several parts are alrea
+  - [04-17 16:34 nick] As I check git log, this upgrade on 2023/05/10 After nearly 3 years, lot of thing are updated. I eventually find out some normal vulnerable item (just normal risk) of current syste
+  - [04-17 16:15 joey] How much will it cost to? We did an upgrade not long ago <@U01BL7N13B3|Nick> 
+  - ... and 3 more
+- **#change-requests** (3 msgs)
+  - [04-17 15:39 joey] Hi <@U01BKAERQJ1|Amy>  sure I’ll look Monday, i think they're a mix depending when we purchased them 
+  - [04-17 15:24 amy] Hi <@U01B7QMKXD1>! Can you help me figure out which version of Android your Picking Device is running? The one we have here is Android 12, which feels pretty outdated.
+  - [04-17 09:11 amy] Thank you <@U01B7QMKXD1>! I'll take a look at them &amp; get back to you asap!
+
+
+### Amazing Meds — 6 msg(s)
+- **#email-marketing-dept** (4 msgs)
+  - [04-18 18:22 celeenerae] To recap, here are the blogs posted for Week 6:  1. <https://amazing-meds.com/humana-testosterone-coverage-prior-auth-rules/|Humana Testosterone Coverage: Prior Authorization Rules
+  - [04-17 10:47 celeenerae] Thank you
+  - [04-17 10:46 john] Done 
+  - [04-17 10:30 celeenerae] 4th and 5th blog draft already came out. But I need access to them. Pls grant me access to them.  But images for those blog are not there yet.
+- **#web-dev-with-nick** (2 msgs)
+  - [04-20 08:15 nick] Let me check now!
+  - [04-20 03:49 john] <@U0A1YL56G0K|Nick NUS> Vercel had a security breach today. The <http://theamazingmethod.com|theamazingmethod.com> site on Vercel had its environment variables exposed. I need you 
+
+
+### Generator — 18 msg(s)
+- **#business-analysts** (8 msgs)
+  - [04-17 16:45 violet] Thank you:raised_hands:
+  - [04-17 16:45 elliott.bouher] Okay
+  - [04-17 16:43 violet] I checked with team. We think getting the apps submitted on Tuesday would be better for us to ensure qualified release.
+  - [04-17 16:34 elliott.bouher] Thank you. I would like the time zone fix included in the release. We will delay the release if we have to. Can we work towards getting the apps submitted on Monday rather than rel
+  - [04-17 16:32 violet] Hey <@U05LZ3VPFUY>, we have merged all the task to develop and fixing bugs found.  Can you also confirm if we should skip the timezone update for the next release. If skipped, we c
+  - ... and 3 more
+- **#release** (7 msgs)
+  - [04-17 09:18 violet] Let me check with QC again.
+  - [04-17 09:13 elliott.bouher] For most of these, we should actually be releasing the mobile side first..
+  - [04-17 09:12 elliott.bouher] We will also need to thoroughly verify that no breaking changes are introduced and all these are backwards compatible. Have we done extensive testing on that?
+  - [04-17 09:11 rudi] ideally we don't want to release BAU work on Friday's
+  - [04-17 09:11 violet] OKay <@U05LZ3VPFUY>
+  - ... and 2 more
+- **#triage** (2 msgs)
+  - [04-17 10:30 ryan] Approved
+  - [04-17 10:19 rudi] <@U05LXNNR34K|NUS Carrick> <@U076FHDCP96|Ryan> can you please review these MR's thanks :slightly_smiling_face: <https://gitlab.com/generator-tech/generator-api/-/merge_requests/378
+- **#weekly-timesheet** (1 msgs)
+  - [04-17 19:55 violet] HI <@U05LZ3VPFUY>, <@U09DPBQV5SA|Rudi>, this is the report timesheet for 2 weeks from Mar 30 to Apr 06.
+
+
+### LegalAtoms — 5 msg(s)
+- **#general** (5 msgs)
+  - [04-19 02:20 miratariq] people take colors to have special meaning
+  - [04-19 02:20 miratariq] related to a design note you shared earlier on fewer colors
+  - [04-19 02:20 miratariq] we hardly use green on our website and we can change it gradually to all purple
+  - [04-19 02:19 miratariq] hmmm why green ? Just keep purple
+  - [04-18 06:53 raymond] i noticed the start button is green border with purple text on the questionnaires… i’ll just make the text green as well
+
+
+### MyPersonalFootballCoach — 0 msg(s)
+  (no new messages)
+
+
+### William Bills — 70 msg(s)
+- **#U051TSQ6SHX** (65 msgs)
+  - [04-17 17:14 oliver] great thank you
+  - [04-17 17:11 oliver] checking
+  - [04-17 17:10 lucas] Privateer fund is now live
+  - [04-17 17:00 oliver] you can deploy to live now
+  - [04-17 17:00 oliver] okay cool
+  - ... and 60 more
+- **#mx** (5 msgs)
+  - [04-17 09:47 oliver] Thanks <@U09SW451FAB|Lucas>
+  - [04-17 09:42 lucas] Let me arrange to check it
+  - [04-17 09:32 oliver] Backups are being taken how often as well?
+  - [04-17 09:32 oliver] <@U09SW451FAB|Lucas> can we organise a full security and malware scan
+  - [04-17 09:32 oliver] Thanks <@U0510N5F0CX|QuânLee> starting to see more and more infectioned WP sites lately
+
+
+### Equanimity — 4 msg(s)
+- **#xid-technologies** (4 msgs)
+  - [04-17 18:04 komal.bailur] <@U063KV32WH2|NUS Carrick> also note that any person having trade other is not . Also Trade like "Other is not allowed by sgbuildex I have already informed client and they updated 
+  - [04-17 17:51 komal.bailur] <@U063KV32WH2|NUS Carrick> Cleint updated the info please help to check they updated correctly or not if still there is any value missing or incorrect let me know ll update them
+  - [04-17 17:03 marcel] Then we could extend 60 and 90 days or not needed just to make sure we pushed and it worked
+  - [04-17 17:03 marcel] <@U063KV32WH2|NUS Carrick> after this final review of client data - will we be able to push without validation error for this tenant for the last 30 days at least right? 
+
+
+### SoCal Auto Wraps — 0 msg(s)
+  (no new messages)
+
+
+### Aigile Dev — 0 msg(s)
+  (no new messages)
+
+
+---
+SUMMARY COUNTS: {"Baamboozle": {"error": null, "count": 16}, "RDC - FM Monitoring": {"error": null, "count": 50}, "Swift Studio": {"error": null, "count": 2}, "Xtreme Soft Solutions": {"error": null, "count": 4}, "SAM GUARD - Mobile": {"error": null, "count": 19}, "GLOBAL GRAZING SERVICES": {"error": null, "count": 11}, "Amazing Meds": {"error": null, "count": 6}, "Generator": {"error": null, "count": 18}, "LegalAtoms": {"error": null, "count": 5}, "MyPersonalFootballCoach": {"error": null, "count": 0}, "William Bills": {"error": null, "count": 70}, "Equanimity": {"error": null, "count": 4}, "SoCal Auto Wraps": {"error": null, "count": 0}, "Aigile Dev": {"error": null, "count": 0}}
