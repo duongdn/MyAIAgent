@@ -2,6 +2,50 @@
 
 Window: 2026-04-20 08:40 → 13:34 (~5h). Previous daily report: 2026-04-20 08:40.
 
+---
+
+## Summary of Changes Since Morning Report
+
+### New Alerts / Escalations
+
+| Severity | Alert | Source | Owner |
+|---|---|---|---|
+| HIGH | **Fountain W23 plan** posted 08:44 by @trinhmtt: dev **142h/wk** (+58% from W22's 90h) — **runway compresses 1.76 wk → 1.11 wk** @ 158.25h remaining. Backlog replenishment now URGENT. | fountain/matrix | PM/Rick |
+| MEDIUM | **animeworld (Bizurk) client replied 12:30** to nuscarrick's Upwork pitch — asked rate + raised agency-exclusivity objection. Needs Andrew Taraba reply. | discord/bizurk | Andrew |
+| MEDIUM | **6 devs still 0h task log at 13:34** with no leave (LongVV, PhucVT, KhanhHH, VietPH, LeNH, TuanNT) — afternoon reminder candidates. Note: Scrin shows TuanNT working 4h15m, so EOD-log pattern likely rather than no-work. | sheets/scrin | PM |
+| LOW | **Generator release tonight** (rent) + tomorrow (CMS/API) — Violet out today, Jeff covering | slack/generator | Elliott |
+| LOW | Rick 1 Rollbar ChunkLoadError on fountaingifts.com (chunk 2846, stale-cache post-deploy pattern) — monitor only | email/rick | Ops |
+
+### New Positive Progress
+
+- **Amazing Meds Vercel breach** (morning LOW alert): Nick confirmed Vercel vars set, creating new keys at 08:52 → being handled
+- **DatNT onboarded to Fountain** today as new Ruby full-stack dev (pairing with ViTHT to reduce merge conflicts); LamLQ returning
+- **VietPH Bailey DEV1 Upwork:** 0.5h → **4.33h** (+3.83h) — active afternoon tracking resolves morning question #5
+- **Jeff daily report** posted 08:44 (airagri-flutter); **Vinn active** (airagri_webapp: GPS stop, PR review, Leon code review)
+- **Equanimity (Carrick + Komal)** FIN-data cleanup, Carrick 13:32 "confirm all are fixed" — closing Marcel's Apr 17 validation question
+- **Matrix token auto-refreshed** silently via `scripts/matrix-token-refresh.js`
+- **#2735 STABLE** — no further growth in window (still 111.5h, +24%)
+- **Elena samguard.co clean** (0 errors, 0 CSP violations, HTTP 200)
+- **No new Fountain customer comments** since morning (Kunal's 4 still pending Rick reply)
+
+### Carryover / Unchanged
+
+- Carrick New Relic data-cap + sync failure — no follow-up email in window, still OPEN
+- Kunal's 4 Fountain customer comments — still no Rick reply
+- Neural Contract — no new Michael messages since Apr 15
+
+---
+
+## Trello Re-evaluation
+
+**Check Mail** ([card](https://trello.com/c/k7OtoUvt/732-check-mail)): Morning left Carrick item incomplete (New Relic ops alert). No resolution email in window → **Carrick item stays skipped**. Other 5 remain complete.
+
+**Check Progress** ([card](https://trello.com/c/c0RLHDIB/731-check-progress)): Morning had 19/19 complete. Refresh findings do NOT retroactively un-complete items. New W23 plan + Andrew/animeworld reply will roll into tomorrow's report.
+
+No Trello state changes this refresh.
+
+---
+
 ## Slack Refresh (08:40 → 13:34)
 
 Total new msgs across 14 workspaces: **88**. Auth: OK for all (no invalid_auth, no refresh needed).
@@ -203,3 +247,69 @@ Method: Puppeteer (headless, `--no-sandbox`), `networkidle2`, CDP Log+Security e
 1. New W23 plan raises dev capacity 58% (90h → 142h) — does backlog of 158.25h justify or will team idle after ~1 wk? Parent may flag to Kunal for ticket replenishment.
 2. DatNT onboarding — no confirmation yet from VuTQ on setup complete; watch next refresh.
 3. #2742 "Not Started" + 20.25h actual — status mismatch persists 3+ days; needs Trinh to correct or Phat to verify state.
+
+## Discord Refresh (08:40 → 13:34)
+
+Token 3-step verify: nusvinn OK (AirAgri + HOMIEAPP — HOMIEAPP skipped per rule), nuscarrick OK (Bizurk). All `/users/@me`, `/guilds`, `/channels` returned 200.
+
+### nusvinn → AirAgri
+
+| Channel | Msgs | Vinn/Jeff daily report? | Notes |
+|---|---|---|---|
+| airagri_webapp | 30 | Vinn: YES (continuous activity + task self-announcements) | James Diamond multi-thread prodding (NEYOS cron, PHP 8 pre-prod, training module, hazard escalation). Vinn 09:35 "working on GPS stale for stop alarm issue"; 10:13 commented iamjon7 PR; 10:36 approved PR; 13:30 "reviewing Leon's code". James 13:29 "let me know when I can test in staging" — Vinn acknowledged 13:30. dapackage 12:05 "PR321 created for NEYOS devices". |
+| airagri-flutter | 17 | Jeff: YES — formal morning post 08:44 +07 "Hi team. I'll continue working on the Change Investigation Type feature today" | Jeff 09:33/09:54 replying on Visitor module (already deployed by Leon). bellatric02 09:40 reported missing Visitor module in Prod AU sidebar. James 10:51 "Ok that's why". |
+
+**Vinn + Jeff Monday daily reports: both FOUND.**
+
+### nuscarrick → animeworld DM (NOT Bizurk channels)
+
+- **2 inbound msgs** from `animeworld` at 12:30 +07 (reply to nuscarrick's 08:22 Upwork pitch):
+  1. "what the hourly rate?"
+  2. "Normally for this type of job though, we don't accept anyone who working at agency since we need their full attention"
+- **Client engaged!** Requires nuscarrick negotiation reply (rate + agency-exclusivity objection). No outgoing response yet in window → **ACTION ITEM for Andrew Taraba / nuscarrick**.
+- "Low-activity silence = normal" rule does NOT apply today; client is actively engaging.
+
+## Sheets Refresh (Mon 2026-04-20 progress, as of 13:34)
+
+Script: `scripts/check-task-logs-apr20.py` (filter A="Task dự án", owner col G, 11 sheets). 13:34 = afternoon; morning hours SHOULD be logged if dev is active.
+
+| Dev | Mon 20/04 hours | Sheets checked | Leave? | Status | Reminder needed? |
+|---|---|---|---|---|---|
+| LongVV | **0.00h** | maddy W3 (0h) + rebecca_long W21 (0h) | No | ZERO | **YES** — afternoon 0h, no leave |
+| PhucVT | **0.00h** | james_diamond W22 (0h) | No | ZERO | **YES** — afternoon 0h, no leave |
+| KhanhHH | **0.00h** | generator W37 (0h) | No | ZERO | **YES** — afternoon 0h, no leave |
+| VietPH | **0.00h** | paturevision W24 (0h) | No | ZERO | **YES** — afternoon 0h, no leave |
+| LeNH | **0.00h** | rory W8 + franc W21 + aysar W21 + rebecca_lenh W21 (all 0h) | No | ZERO | **YES** — afternoon 0h, no leave |
+| TuanNT | **0.00h** | john_yi W20 + rebecca_tuan W21 (all 0h) | No | ZERO | **YES** — afternoon 0h (Scrin shows 4h15m — see below) |
+
+**All 6/6 devs still at 0h Mon afternoon.** Afternoon escalation candidates — Matrix reminders recommended for all 6. Delta vs morning baseline: no change (same 0h). Note: LongVV maddy W3 = 0h — confirm whether LongVV starts new week on Maddy today or stays on Rebecca only.
+
+## Scrin.io Refresh (13:34 check)
+
+Employee: Nick (TuanNT) | Company: john yi (ID 266977) | Employee ID: 453601 | Date: 2026-04-20
+
+| Metric | Value |
+|---|---|
+| Today day total | **4h 15m** (4.25h) |
+| Tasks | check security vercel ammethod 4h 02m; handle homepage Elementor AM 0h 10m; check security vercel ammethod (offline) 0h 03m |
+| Week total (W4 Mon only so far) | 4h 15m |
+| Month total (Apr) | 49h 55m |
+
+### Delta vs morning baseline
+
+- Morning piece 5 baseline: **0h 00m** (no tracking yet)
+- Now 13:34: **4h 15m** → **+4h 15m in 5h window**. TuanNT tracked actively on John Yi security work.
+
+### Comparison with TuanNT John Yi task log
+
+- Scrin John Yi Mon: **4h 15m**
+- TuanNT John Yi task log Mon (john_yi W20): **0h** (no rows entered)
+- **Delta: +4h 15m Scrin over task log**
+
+Verdict: NOT an alert (task log typically EOD-logged). By EOD TuanNT should log ≥ 4h15m on John Yi sheet. Reinforces the Sheets-section reminder above.
+
+## Unresolved Questions (pieces 3+4+5)
+
+- Should animeworld client reply trigger an immediate Trello card / Matrix ping for Andrew Taraba (deal live) or wait for tomorrow's standard flow?
+- LongVV maddy W3 = 0h Mon — is the Maddy 16h/wk goal still expected this week, or has he shifted entirely to Rebecca?
+- VietPH paturevision 40h/wk goal carryover from morning piece 4 — W24 still 0h at 13:34; needs confirmation whether 40h target applies.
