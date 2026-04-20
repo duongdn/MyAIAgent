@@ -1,0 +1,135 @@
+# Slack Refresh Scan — 2026-04-20 13:35:34 +07
+Cutoff: 2026-04-20 08:40:00 +07 (epoch 1776584400)
+Query: after:2026-04-19
+
+
+### Baamboozle — 5 msg(s)
+- **#engineering** (3 msgs)
+  - [04-20 11:08 github] 
+  - [04-20 10:01 github] 
+  - [04-20 10:01 github] 
+- **#gamedev** (2 msgs)
+  - [04-20 00:40 martin.biruk] <@U017JJ2D6L9|Aysar> good to deploy
+  - [04-20 00:27 github] 
+
+
+### RDC - FM Monitoring — 1 msg(s)
+- **#rpi-reboot-logs** (1 msgs)
+  - [04-20 11:56 reboot service] :white_check_mark: Tuner Recovery Alert
+
+
+### Swift Studio — 1 msg(s)
+- **#bxr__app** (1 msgs)
+  - [04-20 09:21 jeff] Good news, I’ll send you the plan shortly.
+
+
+### Xtreme Soft Solutions — 7 msg(s)
+- **#U021Q9A8FG9** (6 msgs)
+  - [04-20 11:42 kai] Sent on 434
+  - [04-20 10:12 kai] Yes, sure
+  - [04-20 10:10 madhuraka] can you come back to me with an estimation for 434 today?
+  - [04-20 08:57 kai] Thank for let me know. I will note it on my note and remind you later
+  - [04-20 08:55 madhuraka] Please also let Anoma know
+  - [04-20 08:41 kai] <@U021Q9A8FG9|Madhuraka> I’d like to swap my Monday and Thursday schedule for Tuesday and Wednesday next week due to the holiday. I’ll return to my usual Monday and Thursday schedule the following week.
+- **#U05PM34HQ4F** (1 msgs)
+  - [04-20 09:07 kai] <@U05PM34HQ4F|Anoma Wasala> I’d like to swap my Monday and Thursday schedule for Tuesday and Wednesday next week due to the holiday. I’ll return to my usual Monday and Thursday schedule the following week
+
+
+### SAM GUARD - Mobile — 7 msg(s)
+- **#mql-leads** (7 msgs)
+  - [04-20 04:27 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/20/26 Contact ID: 216563281734 Name: Fernando Azevedo Email: <mailto:azevedo.f@ua.pt|azevedo.f@ua.pt> 
+  - [04-20 03:56 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216559268476 Name: Rui Soares Email: <mailto:rui.soares@nokia.com|rui.soares@nokia.c
+  - [04-20 03:07 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216558663459 Name: Graeme Diston Email: <mailto:graeme.diston@dsm-firmenich.com|grae
+  - [04-20 02:51 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216552077864 Name: Carlo Breda Email: <mailto:carlobreda@tutamail.com|carlobreda@tut
+  - [04-20 02:51 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216558768262 Name: Raymond Jose Flores Pérez Email: <mailto:raymond.flores@seidor.es
+  - [04-20 00:34 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216540503429 Name: Gian Mario Borgonovo Email: <mailto:gianmario.borgonovo@ten.com|g
+  - [04-20 00:01 hubspot] Hello,  This new MQL was just created:   . Please review the following conversion and source details:  Create Date: 4/19/26 Contact ID: 216536972045 Name: Javier Antonio Soto Email: <mailto:javisoto@tiscalinet.it|javisot
+
+
+### GLOBAL GRAZING SERVICES — 6 msg(s)
+- **#presta-9-update** (3 msgs)
+  - [04-20 13:12 amy] The one where you can enable it for a specific country, and then the user has to enter their VAT number <@U01B7QMKXD1>! If I remember right, we made this update some time ago.
+  - [04-20 13:00 joey] Hi <@U01BKAERQJ1|Amy>  what's the VAT features ?
+  - [04-20 11:50 amy] Hi <@U01B7QMKXD1>! The fixes have been deployed on Live, so you can check them out when you have a moment.  We’ve also deployed the update for the required VAT features, as I noticed they were missing on Live.
+- **#maintenance** (3 msgs)
+  - [04-20 13:00 joey] Thank you <@U01BL7N13B3|Nick> 
+  - [04-20 09:22 nick] Let me check more
+  - [04-20 08:09 nick] <@U01B7QMKXD1> Can you take a look ?
+
+
+### Amazing Meds — 7 msg(s)
+- **#web-dev-with-nick** (7 msgs)
+  - [04-20 08:52 nick] Okay. I'll create a new keys.
+  - [04-20 08:42 john] I am not sure if we got breached but vercel was hacked and ther customer data was stolen.  How much was taken we don’t know. But good ops sec to rotate out keys in case.  Vercel also owns next.js so if you have other cus
+  - [04-20 08:29 nick] All configuration keys are set in the Vercel Variable.
+  - [04-20 08:28 nick] Sorry, I didn't see any signs of a security breach. How did you find out?
+  - [04-20 08:26 nick] contact form: <https://docs.google.com/spreadsheets/d/10HuDbC2msXLt-NpOll2vYF6KnQBXILrdwqBE0vwlR80/edit?gid=0#gid=0> Anti: <https://docs.google.com/spreadsheets/d/1s9kibhNh9rZq4zqPvbNno8eGcVSe7WU33Qh41eWb-CE/edit?gid=0#g
+  - [04-20 08:15 nick] Let me check now!
+  - [04-20 03:49 john] <@U0A1YL56G0K|Nick NUS> Vercel had a security breach today. The <http://theamazingmethod.com|theamazingmethod.com> site on Vercel had its environment variables exposed. I need you to rotate these immediately:  1. GOOGLE_
+
+
+### Generator — 23 msg(s)
+- **#mobile** (12 msgs)
+  - [04-20 13:26 elliott.bouher] But thank you for picking it up
+  - [04-20 13:26 elliott.bouher] Hi <@U076RUV983T|Violet> and <@U05M09650DA|Jeff> this isn't a new issue. We can ship this without it.
+  - [04-20 13:26 jeff] Hey <@U09DPBQV5SA|Rudi>, everything else looks good on our side. We’re just missing the Directory icon in that color If possible, could you help update it directly? That would be quicker.
+  - [04-20 13:22 violet] Hey <@U09DPBQV5SA|Rudi>, we do not have the icon for directory in that colour, can you please provide?
+  - [04-20 12:22 rudi] cc <@U05LZ3VPFUY>
+  - [04-20 12:21 rudi] Hey <@U05M09650DA|Jeff>, any update on this?
+  - [04-20 10:43 jeff] Okay, I’ll update it on that branch
+  - [04-20 10:26 rudi] ok, can you please update on that branch?
+  - ... and 4 more
+- **#release** (6 msgs)
+  - [04-20 12:46 violet] Here they are: CMS: • F - 799 — Defect | Can't View Documents on Scheduled Maintenance After Upload • F, B - 207 — Increase OTP Length • F, B - 576 — Custom Hub Tiles • F, B - 773 — Mobile | What's On Condensed Cell Desi
+  - [04-20 12:43 violet] Okay!
+  - [04-20 12:25 rudi] Hi <@U076RUV983T|Violet>, please don't release anything tonight, we can do the cms/api release tomorrow night - my plan is to release the rent stuff tonight
+  - [04-20 12:16 elliott.bouher] Hi <@U076RUV983T|Violet> can you please provide a list of: 1. all CMS tickets that are ready for release (or have been requested to be included in the next release) 2. all tickets planned to be included in the upcoming m
+  - [04-20 11:23 violet] Yes <@U05LZ3VPFUY>. We released the BE of 524 previously here: <https://generatortalk.slack.com/archives/C0AGUG9CQBD/p1775545399378659>  But actually, it does not work as it requires the mobile release also. The migratio
+  - [04-20 11:20 elliott.bouher] Hey <@U076RUV983T|Violet> can you confirm that we did NOT release this?
+- **#business-analysts** (4 msgs)
+  - [04-20 13:26 elliott.bouher] HI <@U076RUV983T|Violet> can you please update the trello board? For example this one shows that FE code review is not completed? <https://trello.com/c/M5IMXle8>
+  - [04-20 13:24 violet] FE is going to be out of task today, do we have any new scope, I can support the clarification <@U05LZ3VPFUY>..
+  - [04-20 11:21 elliott.bouher] Yes <@U076RUV983T|Violet>
+  - [04-20 11:17 violet] Hey <@U05LZ3VPFUY>, on Android, the event timeslot has end time, but on iOS, it doesn't. Shall we add in the end time for iOS?
+- **#triage** (1 msgs)
+  - [04-20 10:30 rudi] Hey team, just a heads up that I will be releasing the rent feature this evening (7pm brisbane time)
+
+
+### LegalAtoms — 0 msg(s)
+  (no new messages)
+
+
+### MyPersonalFootballCoach — 0 msg(s)
+  (no new messages)
+
+
+### William Bills — 0 msg(s)
+  (no new messages)
+
+
+### Equanimity — 29 msg(s)
+- **#xid-technologies** (29 msgs)
+  - [04-20 13:33 carrick] let me push the final one
+  - [04-20 13:32 carrick] confirm all are fixed
+  - [04-20 13:03 komal.bailur] <@U063KV32WH2|NUS Carrick> D: 198 | PIN: 1051 | Name: Velvizhi Janarthanan     FIN on DB:  W1006469     FIN on CSV: W1006469 data - deleted as the person no longer working.  Id 308   , 309 (not in cvs updated in existing
+  - [04-20 11:42 komal.bailur] okay
+  - [04-20 11:41 carrick] ```  - Id 308 (K Senthil): G702466M — not in CSV                                                                                                                                              - Id 309 (R Ravichandran): XG2
+  - [04-20 11:40 carrick] ```  ID: 198 | PIN: 1051 | Name: Velvizhi Janarthanan     FIN on DB:  W1006469                                                                                                                                              
+  - [04-20 11:34 carrick] OK
+  - [04-20 11:32 komal.bailur] <@U063KV32WH2|NUS Carrick> can you check?
+  - ... and 21 more
+
+
+### SoCal Auto Wraps — 0 msg(s)
+  (no new messages)
+
+
+### Aigile Dev — 2 msg(s)
+- **#etz-nus** (1 msgs)
+  - [04-20 10:14 hendrix] Hi <@U029SRWPJ>, have you had time to consider the estimate for Apple Pay/Google pay support upgrade? If you want to discuss more on this, please let me know. Thanks!
+- **#wathaga-development** (1 msgs)
+  - [04-20 08:52 rick] Hi Colin, just remind for the upgrade, since the project has been running for a while, I recommend to handle upgrade soon!
+
+
+---
+SUMMARY COUNTS: {"Baamboozle": {"error": null, "count": 5}, "RDC - FM Monitoring": {"error": null, "count": 1}, "Swift Studio": {"error": null, "count": 1}, "Xtreme Soft Solutions": {"error": null, "count": 7}, "SAM GUARD - Mobile": {"error": null, "count": 7}, "GLOBAL GRAZING SERVICES": {"error": null, "count": 6}, "Amazing Meds": {"error": null, "count": 7}, "Generator": {"error": null, "count": 23}, "LegalAtoms": {"error": null, "count": 0}, "MyPersonalFootballCoach": {"error": null, "count": 0}, "William Bills": {"error": null, "count": 0}, "Equanimity": {"error": null, "count": 29}, "SoCal Auto Wraps": {"error": null, "count": 0}, "Aigile Dev": {"error": null, "count": 2}}
