@@ -33,3 +33,33 @@ Total new msgs across 14 workspaces: **88**. Auth: OK for all (no invalid_auth, 
 
 ### Auth issues
 - None. All 14 workspaces returned data successfully including session tokens (Amazing Meds, Equanimity).
+
+## Email Refresh (08:40 → 13:34)
+
+**Window:** 2026-04-20T08:40 +07 → 2026-04-20T13:34 +07 (~5h).
+**Method:** IMAP imap.zoho.com:993 SSL, SINCE 19-Apr-2026, filtered in-memory by Date header >= cutoff. Timeline fallback: `config/.monitoring-timelines.json` per-account values are stale (2026-04-17); used `daily_report.last_run` = 2026-04-20T08:40 +07.
+
+### Per-account counts
+
+| Account | Folder | Filter | Count | Notable |
+|---|---|---|---:|---|
+| duongdn | INBOX | — | 0 | 0 new — no new mail |
+| carrick | INBOX | — | 3 | 2× TestFlight Generator Demo 1.8.6 builds (68 @ 09:43, 69 @ 13:31) — routine. 1× Redmine Bug #78278 Elliott/Generator "App Shows Error When Accessing My Bookings Screen" (internal staging). **No New Relic updates** — morning data-cap/sync alert carryover, still unresolved. |
+| nick | INBOX | John Yi | 0 | 0 new — no new mail |
+| rick | INBOX | Kunal/Fountain/InfinityRose | 8 | 7× BugSnag `[FountainStaging]` (NoMethodError pro_orders#swappable_gifts ×2; PendingMigrationError /api/v1/users/me & /api/v1/meta_tags; StatementInvalid db:migrate; NoMethodError holiday_deliveries#index; ActiveStorage::InvariableError gifts#index) — **all staging/development, per rule = INFO not alert**. 1× Rollbar `[FirstProject] production — ChunkLoadError #868` (fountaingifts.com /_next/static/chunks/2846) — FE chunk-load on production, typically stale-cache post-deploy; LOW severity. No Kunal/Fountain human comments. |
+| kai | INBOX | Madhuraka | 1 | Bitbucket reply from Madhuraka Godahewa on PR #456 "Update quote form feedback" (xtreme-web/rms). Routine review comment, no Redmine Elliott/Generator for Kai. |
+| ken | NewsLetter | Precognize/development | 15 | 2× Precognize/development match filter: Re: PR #4831 SR-6921 alerts header tabs (briannus) @ 09:23; new PR #4843 SR-7528 detach ORI level from admin service (nusdavid + windsurf-bot) @ 12:03. Other 13 off-filter: mimaizumi/amocc-material (PR #7372, #7374, #7363), welligence/WellStack (PR #10304, #10338), Vercel security advisory. Routine PR traffic. |
+
+**Totals:** duongdn 0 | carrick 3 | nick 0 | rick 8 | kai 1 | ken 15 → **27 msgs** raw; **0 new alerts**, 1 carryover (New Relic), 1 LOW (Rollbar production chunk).
+
+### Alert summary (refresh window)
+
+| Severity | Account | Item | Owner | Note |
+|---|---|---|---|---|
+| (carryover) | carrick | New Relic monthly data-cap + sync failure (from morning) | ops/carrick | No update email in window — status unchanged, still OPEN |
+| LOW | rick | Rollbar production ChunkLoadError #868 (fountaingifts.com chunk 2846) | rick/FE | Likely stale-cache after deploy; monitor frequency only |
+
+### Unresolved questions
+
+- New Relic data-cap alert (carrick) — no follow-up email in 5h window. Has it been acked/resolved via the New Relic UI or Trello card? Parent agent should confirm before re-flagging.
+
