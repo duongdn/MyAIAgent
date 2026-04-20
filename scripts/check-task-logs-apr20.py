@@ -28,24 +28,24 @@ checks = [
     ("aysar",        "1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8", "LeNH",    "W20", "W21"),
     ("john_yi",      "1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ", "TuanNT",  "W19", "W20"),
     ("rebecca_tuan", "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4", "TuanNT",  "W20", "W21"),
-    ("rebecca_lenh_QT", "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4", "LeNH",  "W20", "W21"),
+    ("rebecca_lenh", "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4", "LeNH",    "W20", "W21"),
+    ("rebecca_long", "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4", "LongVV",  "W20", "W21"),
 ]
 
 DAY_MARK = ('Sat,', 'Sun,', 'Mon,', 'Tue,', 'Wed,', 'Thu,', 'Fri,')
 
 
-def day_hours(rows, day_prefix, day_tok_list, dev, col_offset=0):
-    """Find day section starting with `day_prefix` (e.g. 'Fri') where col A contains one of day_tok_list.
-    Sum 'Task dự án' rows owner==dev. col_offset shifts all column refs (0=A-K; 16=Q-AA for Rebecca-LeNH)."""
+def day_hours(rows, day_prefix, day_tok_list, dev):
+    """Find day section. Sum 'Task dự án' rows owner==dev (col G).
+    Leave detected on rows where col A is 'Nghỉ cả ngày'/'Nghỉ nửa ngày' AND col G == dev (or G empty → unassigned)."""
     in_day = False
     hours = 0.0
     rows_found = 0
     leave = ""
     for row in rows:
-        # Pad row to safe length
-        if len(row) <= col_offset:
+        if not row:
             continue
-        cell_a = row[col_offset].strip() if row[col_offset] else ""
+        cell_a = row[0].strip() if row[0] else ""
         if not in_day:
             if cell_a.startswith(day_prefix + ',') and any(t in cell_a for t in day_tok_list):
                 in_day = True
@@ -54,16 +54,14 @@ def day_hours(rows, day_prefix, day_tok_list, dev, col_offset=0):
             # Detect next day
             if cell_a and any(cell_a.startswith(d) for d in DAY_MARK):
                 break
-            row_str = ' | '.join(row)
-            if "Nghỉ cả ngày" in row_str:
-                leave = "full_day_off"
-            elif "Nghỉ nửa ngày" in row_str and leave != "full_day_off":
+            owner = row[6].strip() if len(row) > 6 else ""
+            if cell_a == "Nghỉ cả ngày" and (owner == dev or owner == ""):
+                if owner == dev:
+                    leave = "full_day_off"
+            elif cell_a == "Nghỉ nửa ngày" and (owner == dev) and leave != "full_day_off":
                 leave = "half_day"
             if cell_a == "Task dự án":
-                owner_idx = col_offset + 6
-                hour_idx = col_offset + 7
-                owner = row[owner_idx].strip() if len(row) > owner_idx else ""
-                hstr = row[hour_idx].strip() if len(row) > hour_idx else "0"
+                hstr = row[7].strip() if len(row) > 7 else "0"
                 if owner == dev:
                     try:
                         hours += float(hstr.replace(',', '.'))
@@ -73,18 +71,16 @@ def day_hours(rows, day_prefix, day_tok_list, dev, col_offset=0):
     return hours, leave, rows_found
 
 
-def week_sum(rows, dev, col_offset=0):
+def week_sum(rows, dev):
     """Sum all 'Task dự án' rows for dev across the whole sheet."""
     total = 0.0
     for row in rows:
-        if len(row) <= col_offset:
+        if not row:
             continue
-        cell_a = row[col_offset].strip() if row[col_offset] else ""
+        cell_a = row[0].strip() if row[0] else ""
         if cell_a == "Task dự án":
-            owner_idx = col_offset + 6
-            hour_idx = col_offset + 7
-            owner = row[owner_idx].strip() if len(row) > owner_idx else ""
-            hstr = row[hour_idx].strip() if len(row) > hour_idx else "0"
+            owner = row[6].strip() if len(row) > 6 else ""
+            hstr = row[7].strip() if len(row) > 7 else "0"
             if owner == dev:
                 try:
                     total += float(hstr.replace(',', '.'))
@@ -100,14 +96,13 @@ print(f"=== Task log check — Fri 17/04 + Mon 20/04/2026 ===\n")
 
 results = []
 for name, sid, dev, ws_prev, ws_cur in checks:
-    col_off = 16 if name == "rebecca_lenh_QT" else 0  # Q=index 16
-    rng_suffix = "!A1:AA500" if col_off else "!A1:K500"
+    rng_suffix = "!A1:K500"
     try:
         # Fri from prev W-sheet
         res_prev = sheets_api.values().get(spreadsheetId=sid, range=f"'{ws_prev}'{rng_suffix}").execute()
         rows_prev = res_prev.get('values', [])
-        fri_h, fri_leave, fri_nrows = day_hours(rows_prev, 'Fri', FRI_TOK, dev, col_off)
-        prev_week_total = week_sum(rows_prev, dev, col_off)
+        fri_h, fri_leave, fri_nrows = day_hours(rows_prev, 'Fri', FRI_TOK, dev)
+        prev_week_total = week_sum(rows_prev, dev)
         time.sleep(0.6)
 
         # Mon from current W-sheet (try)
@@ -117,8 +112,8 @@ for name, sid, dev, ws_prev, ws_cur in checks:
         try:
             res_cur = sheets_api.values().get(spreadsheetId=sid, range=f"'{ws_cur}'{rng_suffix}").execute()
             rows_cur = res_cur.get('values', [])
-            mon_h, mon_leave, mon_nrows = day_hours(rows_cur, 'Mon', MON_TOK, dev, col_off)
-            cur_week_total = week_sum(rows_cur, dev, col_off)
+            mon_h, mon_leave, mon_nrows = day_hours(rows_cur, 'Mon', MON_TOK, dev)
+            cur_week_total = week_sum(rows_cur, dev)
         except Exception as e:
             cur_err = str(e)[:100]
         time.sleep(0.6)
