@@ -63,3 +63,36 @@ Total new msgs across 14 workspaces: **88**. Auth: OK for all (no invalid_auth, 
 
 - New Relic data-cap alert (carrick) — no follow-up email in 5h window. Has it been acked/resolved via the New Relic UI or Trello card? Parent agent should confirm before re-flagging.
 
+## Upwork + Neural Refresh (08:40 → 13:34)
+
+**Method:** `scripts/upwork-weekly-hours.js` (fresh fetch, all 5 workrooms, status=success). `scripts/upwork-neural-messages.js` (messages via /api/v3 intercept). Task log (Mon 20/04 W24) assumed empty at 13:34 — devs log EOD (no morning piece4 refresh for W24 in this window).
+
+| Dev / Workroom | Mon hrs (Upwork) morning → now | Δ | Task log (Mon 20/04) | Notes |
+|---|---|---:|---|---|
+| Rory — LeNH | 0h → 0h | 0 | 0h (W24 empty) | OK — inactive dev on Rory this wk |
+| Aysar — LeNH | 0h → 0h | 0 | 0h (W24 empty) | OK — Aysar inactive since ~Mar 9 per reference memory |
+| Bailey DEV1 — VietPH | 0.5h → **4.33h** | **+3.83h** | 0h (W24 not yet filled) | ACTIVE. VietPH tracking Mon afternoon. Task log reconcile expected EOD. Not over-inflated vs weekly pace (last wk 23:40h) |
+| Bailey DEV3 — DuongDN | 0h → 0h | 0 | 0h | OK — contract inactive (expected) |
+| Neural Contract — external | n/a (messages only) | — | n/a | See below |
+
+**Week totals (Upwork Apr 20-26):** Rory 0:00, Aysar 0:00, Bailey DEV1 4:20, Bailey DEV3 0:00. Neural messages-only (no timesheet).
+
+### Neural Contract — Messages delta
+
+Fetched latest 20 stories. **Latest 3 messages (sorted desc, +07):**
+- 2026-04-16 17:12 Carrick: "I did and pushed code, let check"
+- 2026-04-16 15:24 Carrick: "Let me check"
+- 2026-04-15 14:06 Michael: 3 non-urgent tasks (Compare tab filenames / "Departures table" rename / manager login analyse routing)
+
+**No new Michael Larov messages since Apr 16 17:12.** No new client messages in the 08:40→13:34 window. Silence is normal for this low-activity contract.
+
+### Flags
+
+- **Bailey DEV1 (VietPH)** — morning 0.5h → now 4.33h (+3.83h). Task log Mon 20/04 still empty at 13:34; VietPH typically logs EOD. Re-check at next refresh / EOD to confirm 4.33h Upwork ≈ task log hours. Not over-inflation yet (within weekly pace).
+- **Neural Contract** — no pending client messages. Carrick's Apr 16 follow-up still the latest. No action needed this window.
+- **Rory / Aysar / Bailey DEV3** — no Upwork activity, matches morning. No alerts.
+
+### Unresolved questions
+
+- Bailey DEV1 task log reconciliation — VietPH had not yet populated W24 row for Mon 20/04 as of 13:34. Parent should re-verify at EOD that VietPH task log ≈ 4.33h Upwork (diff threshold: 1h).
+- 3 non-urgent Neural tasks from Michael (Apr 15 14:06) — Carrick's Apr 16 "I did and pushed code, let check" was ambiguous; status of each of the 3 tasks still not individually confirmed by client.
