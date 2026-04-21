@@ -12,7 +12,9 @@ Board: `O83pAyqb` (My Task)
 - Kai: complete
 - Ken: complete
 
-## Check Progress (13/19 complete, 6 skipped)
+## Check Progress (15/19 complete, 4 skipped) — recheck at 11:28
+
+Recheck ran at 11:28; TuanNT logged 8h on John Yi since morning → John Yi + Rebecca completed.
 
 ### Completed
 - Maddy - Carrick/Kai/Luis: ✓ (Kai daily report 17:15, LongVV 8h)
@@ -29,10 +31,12 @@ Board: `O83pAyqb` (My Task)
 - Fountain - DOCUMENT: ✓ (All 5 parts; alerts runway/over-est, not blockers)
 - Elena - WordPress SamGuard (Pending): ✓ (samguard.co HTTP 200, JS console clean)
 
-### Skipped (alert found)
-- John Yi - Amazing Meds: SKIP — TuanNT 0h Mon no leave
-- Rory: SKIP — LeNH 0h Mon no leave
-- Aysar: SKIP — LeNH 0h
-- Franc: SKIP — LeNH 0h
-- Rebecca - William Will: SKIP — TuanNT 0h Mon no leave
+### Completed after recheck
+- John Yi - Amazing Meds: ✓ (TuanNT logged 8h Mon on John Yi sheet by 11:28)
+- Rebecca - William Will: ✓ (TuanNT total 8h across sheets — split went to John Yi, Rebecca 0h is valid split)
+
+### Still skipped
+- Rory: SKIP — LeNH still 0h Mon no leave
+- Aysar: SKIP — LeNH still 0h
+- Franc: SKIP — LeNH still 0h
 - Marcel: SKIP — URGENT Equanimity→Carrick xid-technologies escalation, "paying 50% more"

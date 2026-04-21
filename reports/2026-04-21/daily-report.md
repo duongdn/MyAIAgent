@@ -179,11 +179,10 @@ Detail: `reports/2026-04-21/piece8-upwork.md`
 ## Piece 9 — Trello Updates
 
 - **Check Mail:** 6/6 complete ✓
-- **Check Progress:** 13/19 complete ✓ · 6 skipped
-- **SKIP (6):**
-  - John Yi - Amazing Meds (TuanNT 0h no leave)
-  - Rory / Aysar / Franc (LeNH 0h no leave)
-  - Rebecca - William Will (TuanNT 0h no leave)
+- **Check Progress:** 15/19 complete ✓ · 4 skipped (after 11:28 recheck)
+- **Recheck outcome:** TuanNT logged 8h on John Yi since morning → John Yi + Rebecca completed
+- **Still SKIP (4):**
+  - Rory / Aysar / Franc (LeNH 0h, no leave — reminder pending response)
   - Marcel (xid-technologies urgent escalation → Carrick)
 - Elena - WordPress SamGuard (Pending): ✓ samguard.co clean
 
