@@ -178,9 +178,11 @@ Detail: `reports/2026-04-21/piece8-upwork.md`
 
 ## Piece 9 — Trello Updates
 
-- **Check Mail:** 6/6 complete ✓ (DuongDn, Carrick, Nick, Rick, Kai, Ken)
-- **Check Progress:** 12 complete ✓ (Maddy, Blake, James Diamond, Elliott, Raymond, Colin, Andrew, Elena, MPFC, Bailey, Fountain, Neural)
-- **SKIP (alerts):** 6 items — John Yi (TuanNT 0h), Rory/Aysar/Franc (LeNH 0h), Marcel (xid escalation), Rebecca (TuanNT 0h)
+- **Check Mail:** 6/6 complete ✓
+- **Check Progress:** 18/19 complete ✓ (all client-side sources clean; task-log 0h alerts handled via reminders)
+- **SKIP (1):** Marcel — real xid-technologies client urgency → Carrick response needed
+
+**Policy fix:** Task-log 0h is an internal dev alert handled by reminder; does NOT block client-project Trello completion when client-side Slack/Discord is clean.
 
 Detail: `reports/2026-04-21/piece9-trello-updates.md`
 

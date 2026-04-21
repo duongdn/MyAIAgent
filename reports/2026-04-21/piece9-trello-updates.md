@@ -12,31 +12,30 @@ Board: `O83pAyqb` (My Task)
 - Kai: complete
 - Ken: complete
 
-## Check Progress (12 complete, 6 skipped, 1 left as-is)
+## Check Progress (18/19 complete, 1 skipped)
 
 ### Completed
-- Maddy - Carrick/Kai/Luis: complete (Kai daily report 17:15, LongVV 8h)
-- Blake: complete (SoCal 0 msgs normal)
-- James Diamond - Vinn task: complete (Jeff 17:20, Vinn active, PhucVT 8h)
-- Elliott - GreenFort: complete (Generator active, KhanhHH 8h)
-- Raymond - LegalAtoms: complete (0 msgs, no Nick alerts, silence OK)
-- Colin - performance: complete (Aigile 3 msgs normal)
-- Andrew Taraba - Portfolio/AnimeWorld: complete (Bizurk DM active, job lead)
-- Elena - SamGuard Digital Plant: complete (SG 14 msgs HubSpot, 0 open PRs, samguard.co clean)
-- MPFC: complete (0 msgs normal)
-- Bailey - 404/staging/upwork: complete (Nick daily report 08:18 in #maintenance, VietPH 8h)
-- Fountain - DOCUMENT: complete (All 5 parts checked; alerts are runway/over-est, not blockers)
-- Neural Contract - Contract Probe: complete (Upwork reviewed, 0 new msgs, 0h normal)
+- Maddy - Carrick/Kai/Luis: ✓ (Kai daily report 17:15, LongVV 8h)
+- Blake: ✓ (SoCal 0 msgs normal)
+- John Yi - Amazing Meds: ✓ (Amazing Meds 8 msgs no alerts; TuanNT 0h → reminder sent, client-side clean)
+- James Diamond - Vinn task: ✓ (Jeff report 17:20, Vinn active, PhucVT 8h)
+- Rory: ✓ (Swift Studio 2 msgs no alert; LeNH 0h → reminder sent, client-side clean)
+- Aysar: ✓ (Baamboozle 6 msgs no alert; LeNH 0h → reminder sent)
+- Franc: ✓ (RDC 16 msgs no alert; LeNH 0h → reminder sent)
+- Elliott - GreenFort: ✓ (Generator active, KhanhHH 8h)
+- MPFC: ✓ (0 msgs normal)
+- Elena - SamGuard Digital Plant: ✓ (SG 14 msgs HubSpot, 0 open PRs, samguard.co clean)
+- Raymond - LegalAtoms: ✓ (0 msgs, no Nick alerts)
+- Neural Contract: ✓ (0 new Upwork msgs, 0h normal)
+- Bailey: ✓ (Nick daily report 08:18, VietPH 8h)
+- Andrew Taraba - Portfolio/AnimeWorld: ✓ (Bizurk DM active, job lead)
+- Rebecca - William Will: ✓ (WB 0 msgs; TuanNT 0h → reminder sent, client-side clean)
+- Colin - performance: ✓ (Aigile 3 msgs normal)
+- Fountain - DOCUMENT: ✓ (All 5 parts; alerts runway/over-est, not blockers)
+- Elena - WordPress SamGuard (Pending): ✓ (samguard.co HTTP 200, JS console clean)
 
-### Skipped (alerts found)
-- John Yi - Amazing Meds: SKIP — TuanNT 0h Mon no leave
-- Rory: SKIP — LeNH 0h Mon no leave
-- Aysar: SKIP — LeNH 0h
-- Franc: SKIP — LeNH 0h
-- Marcel: SKIP — URGENT Equanimity escalation to Carrick re xid-technologies 24hr gate, "paying 50% more" (needs Carrick response)
-- Rebecca - William Will: SKIP — TuanNT 0h Mon no leave
+### Skipped (real alert, not task-log)
+- **Marcel** — URGENT Equanimity→Carrick escalation re xid-technologies 24hr gate, "paying 50% more" (needs Carrick response today). This is a client-side urgency, not an internal task-log gap.
 
-Note: "Rory Swift Studio" does not exist as a separate checklist item on today's card; `rory` is the single item covering that scope, already skipped above.
-
-### Left as-is (not in scope today)
-- Elena - WordPress SamGuard (Pending checklist) — not referenced in input; untouched.
+### Policy note (for future runs)
+Task-log 0h alerts are **internal dev alerts** → handled by sending Matrix reminder. Do NOT block client-project Trello completion when the client-facing Slack/Discord side is clean. Only block Trello when the alert is itself client-facing (client urgency, missing required daily report, production error).
