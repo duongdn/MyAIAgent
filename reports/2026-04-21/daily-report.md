@@ -179,10 +179,13 @@ Detail: `reports/2026-04-21/piece8-upwork.md`
 ## Piece 9 — Trello Updates
 
 - **Check Mail:** 6/6 complete ✓
-- **Check Progress:** 18/19 complete ✓ (all client-side sources clean; task-log 0h alerts handled via reminders)
-- **SKIP (1):** Marcel — real xid-technologies client urgency → Carrick response needed
-
-**Policy fix:** Task-log 0h is an internal dev alert handled by reminder; does NOT block client-project Trello completion when client-side Slack/Discord is clean.
+- **Check Progress:** 13/19 complete ✓ · 6 skipped
+- **SKIP (6):**
+  - John Yi - Amazing Meds (TuanNT 0h no leave)
+  - Rory / Aysar / Franc (LeNH 0h no leave)
+  - Rebecca - William Will (TuanNT 0h no leave)
+  - Marcel (xid-technologies urgent escalation → Carrick)
+- Elena - WordPress SamGuard (Pending): ✓ samguard.co clean
 
 Detail: `reports/2026-04-21/piece9-trello-updates.md`
 
