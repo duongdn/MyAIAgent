@@ -253,3 +253,175 @@ Jeff daily report: **found** ✓ (Apr 21 + Apr 22)
 Bizurk is a **low-activity client** — silence is normal. No action required.
 
 No alerts.
+
+## Fountain — 08:35 (+07:00)
+
+Matrix token refreshed via `scripts/matrix-token-refresh.js` at report start (prior token M_UNKNOWN_TOKEN — SSO profile auto-refresh succeeded, @duongdn verified).
+
+Current week = **W23 (2026-04-20 → 2026-04-26)**, Wed = day 3.
+
+---
+
+### Part 1 — Matrix Weekly Plan
+
+**Latest W23 plan** — @trinhmtt, 2026-04-20T01:48:46Z (2026-04-20 08:48 +07) — edited version:
+
+> Em gửi plan tuần này ạ
+> ViTHT: 40h | ThinhT: 12h | VuTQ: 40h | LamLQ: 10h | DatNT: 40h | => QC: 30.5h
+
+Notes:
+- Dev total plan: 40+12+40+10+40 = **142h/wk**; QC plan: **30.5h/wk**
+- HaVS still not on plan (absent 4+ consecutive weeks)
+- Plan unchanged from W23 — no new Matrix message since Apr 20
+
+---
+
+### Part 2 — Task Log Actuals (W23 — Apr 20–26, 3 days in)
+
+Source: Google Sheet `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`, Summary + W23 tabs.
+
+| Dev | Weekly Hours W23 | Role | vs Yesterday |
+|-----|-----------------|------|--------------|
+| VuTQ | **8.00h** | Dev | +8.00h (logged Mon) |
+| ThinhT | **8.00h** | Dev | +8.00h (logged Mon) |
+| ViTHT | **8.00h** | Dev | +8.00h (logged Mon) |
+| DatNT | **8.00h** | Dev (not in Summary yet) | 0.00h (stable — logged Mon already) |
+| LamLQ | **0.00h** | Dev | 0.00h |
+| HaVS | **0.00h** | Dev (not on plan) | 0.00h |
+| PhatDLT | **4.50h** | QC | +1.00h |
+| HungPN | **0.00h** | QC | 0.00h |
+
+Dev total W23 (VuTQ+ThinhT+ViTHT+DatNT+LamLQ): **24.00h** / plan 142h (16.9%).
+QC total W23 (PhatDLT+HungPN): **4.50h** / plan 30.5h (14.8%).
+Grand total W23: **36.50h** (from Summary row 28 total column).
+
+**Update vs Apr 21:** VuTQ, ThinhT, ViTHT all logged Monday hours (+8h each). Pattern: devs filling Mon log on Tue/Wed morning — consistent with prior weeks.
+
+---
+
+### Part 3 — Plan vs Actual
+
+| Dev | Plan W23 | Actual W23 (3 days) | Expected pace (60%) | Delta |
+|-----|----------|---------------------|---------------------|-------|
+| VuTQ | 40h | 8.00h | ~24h | -16h (behind, only Mon logged) |
+| ThinhT | 12h | 8.00h | ~7.2h | +0.8h (on track) |
+| ViTHT | 40h | 8.00h | ~24h | -16h (behind, only Mon logged) |
+| DatNT | 40h | 8.00h | ~24h | -16h (behind, only Mon logged) |
+| LamLQ | 10h | 0.00h | ~6h | -6h (no log yet) |
+| HaVS | — | 0.00h | — | Not on plan |
+| PhatDLT | (QC 30.5h) | 4.50h | ~18.3h | -13.8h (behind) |
+| HungPN | (QC 30.5h) | 0.00h | — | No log (OK if PhatDLT covering) |
+
+**Note:** Tue+Wed hours not yet logged for most devs. Re-check Thu/Fri when week completes.
+
+---
+
+### Part 4 — Capacity & Runway
+
+Source: Est vs Charged tab, excluding "Deployed on Live" and "Cancelled" statuses.
+
+| Metric | 04-21 | 04-22 | Δ |
+|--------|-------|-------|---|
+| Remaining est (NS+IP only) | 158.25h | **351.00h** | +192.75h |
+| Remaining est (all active excl. Live/Cancelled) | 238.00h | **742.00h** | +504.00h |
+| Runway @ 90h/wk (NS+IP) | 1.76 wk | **3.90 wk** | +2.14 wk |
+| Runway @ 142h/wk (NS+IP) | 1.11 wk | **2.47 wk** | +1.36 wk |
+
+**⚠️ SIGNIFICANT CHANGE:** Runway jumped from 1.76 → 3.90 weeks (NS+IP). New tasks added to Est vs Charged since yesterday:
+- **#2775** (Not Started, est 60h) — newly listed
+- **#2837** (In-progress >50%, est 16h) — newly listed
+- **#2836** (In-progress >50%, est 0h — no est yet)
+- **#2761** (In-progress <50%, est 0h)
+- Other NS/IP tasks may have had status changes
+
+This represents new work in the pipeline — backlog replenishment is positive but unestimated tasks (#2836, #2697) need estimates assigned.
+
+---
+
+### Part 5 — Over-estimate Tracking
+
+Mandatory check: #2595, #2615, #2735.
+
+| Task | Est | Actual 04-21 | Actual 04-22 | Over% | Status | Trend |
+|------|-----|-------------|-------------|-------|--------|-------|
+| #2735 Pro Send Smart Link | 90h | 111.50h | **115.00h** | +28% | In-progress (>50%) | ⚠️ STILL GROWING (+3.5h) |
+| #2615 Gift of Choice | 12h | 102.75h | **106.75h** | +790% | Deployed on Staging | ⚠️ STILL GROWING (+4.0h) |
+| #2595 GiftDrop Redemption | 120h | 168.25h | **168.25h** | +40% | Deployed on Staging | Stable |
+| #2702 Accessibility | 8h | 16.00h | **20.50h** | +156% | In-progress (>50%) | ⚠️ STILL GROWING (+4.5h) |
+| #2742 GoC select/payment | 12h | 20.25h | **20.25h** | +69% | Not Started | Stable (status mismatch persists) |
+| #2640 | 12h | 16.75h | **16.75h** | +40% | In-progress (<50%) | Stable |
+| #2695 | 20h | 26.00h | **26.00h** | +30% | In-progress (<50%) | Stable |
+| #2639 Active/Inactive cats | 2h | 16.50h | **16.50h** | +725% | Deployed on Staging | Stable |
+| #2501 | 4h | 25.50h | **25.50h** | +538% | Deployed on Staging | Stable |
+| #2380 checkout date | 4h | 25.25h | **25.25h** | +531% | Deployed on Staging | Stable |
+| #2627 | 0.5h | 8.25h | **8.25h** | +1550% | Has Bug on Live | Stable |
+| #2624 order complete | 12h | 31.25h | **31.25h** | +160% | Dev Done | Stable |
+| #2604 | 1h | 3.50h | **3.50h** | +250% | Deployed on Staging | Stable |
+| #2666 | 2h | 5.00h | **5.00h** | +150% | Deployed on Staging | Stable |
+| #2629 | 8h | 18.25h | **18.25h** | +128% | Dev Done | Stable |
+| #2816 | 20h | 24.50h | **24.50h** | +22% | Deployed on Staging | Stable |
+| #2815 | 6h | 9.00h | **9.00h** | +50% | Not Started | Stable |
+
+**Active growing tasks:** #2735 (+3.5h today), #2615 (+4h today), #2702 (+4.5h today). All three were tasks where devs logged Monday hours. Watch again Thursday.
+
+**#2742 status anomaly** still unresolved ("Not Started" with 20.25h actual) — needs lead update.
+
+**New over-est tasks noted today (not in prior report):** #2837 est 16h, actual 17.5h → +9% (just under threshold — watch).
+
+---
+
+### Trello
+
+Board: [Web Development (Fountain)](https://trello.com/b/UDrSWage) — id `5475eaf923a9a1309357eb51`, auth as @rick570.
+
+**Customer comments since 2026-04-21 08:40 +07** (kunalsheth, tmmckay, mike62798179, iris63293413) — **9 comments** (all from Apr 21):
+
+1. **2026-04-21T03:40Z** — @kunalsheth on [Fountain - Pro/Send - Smart Link](https://trello.com/c/yrbbFhf9) (#2735): "this is a rare edge case, user can just delete other items if needed." (followup to yesterday's question)
+2. **2026-04-21T13:32Z** — @kunalsheth on [Fountain & Infinity - Add Subtle Scroll Animations](https://trello.com/c/g5SK007L): "for this I like how apple does it — [apple.com/education](https://www.apple.com/education/). However this is low priority."
+3. **2026-04-21T13:32Z** — @mike62798179 on [Shipstation creating a 2nd or even a 3rd shipment](https://trello.com/c/BYu5iwQM): "Order # 6463844QN was 2 shipments and slipped by me." (bug report, order numbers listed)
+4. **2026-04-21T13:34Z** — @mike62798179 on [Shipstation 2nd/3rd shipment](https://trello.com/c/BYu5iwQM): "I am going to cancel the 2nd and 3rd shipments for now. List of order numbers: 6819370EU..." (**URGENT BUG — multiple duplicate shipments**)
+5. **2026-04-21T15:48Z** — @mike62798179 on [Shipstation 2nd/3rd shipment](https://trello.com/c/BYu5iwQM): "Another one: 1632502YI"
+6. **2026-04-21T15:51Z** — @kunalsheth on [Fountain & Infinity - Update order routing to new shipstation](https://trello.com/c/dCuIyKDd): "I am ready to push infinity to new shipstation account tonight if you are" (prod deployment coordination)
+7. **2026-04-21T18:27Z** — @kunalsheth on [Infinity roses - orders not syncing](https://trello.com/c/y8lM8Alq): "Just placed two test orders on infinity and both not syncing to shipstation. Orders earlier are syncing." (**NEW BUG — shipstation sync failure**)
+8. **2026-04-21T18:33Z** — @kunalsheth on [Infinity roses - orders not syncing](https://trello.com/c/y8lM8Alq): "This bug seems caused by user selecting holiday delivery at checkout." (root cause finding)
+9. **2026-04-21T18:40Z** — @kunalsheth on [Infinity roses - orders not syncing](https://trello.com/c/y8lM8Alq): "@rick570 This bug is also affecting fountain. We need to fix this." (**URGENT — affects both Fountain & Infinity**)
+
+**No new comments on Apr 22 yet** (as of 08:35 +07).
+
+**Active per-list counts (today vs yesterday):**
+
+| List | Today | Yesterday | Δ |
+|------|-------|-----------|---|
+| Todo | 32 | 34 | -2 |
+| Bugs | 12 | 12 | 0 |
+| Doing | 7 | 5 | +2 |
+| QC Internal | 6 | 4 | +2 |
+| QA Backlog | 2 | 2 | 0 |
+| In QA | 2 | 2 | 0 |
+| Not Passed | 0 | 0 | 0 |
+
+**Stuck cards (>5 days, active lists): 44 total** (vs 40 yesterday, +4). Top offenders:
+- 420d [todo] Fountain & Infinity — Make sites accessible (QHVN496O)
+- 420d [todo] Fountain & Infinity — Make page title dynamic (GwCJSlvl)
+- 183d [todo] Platform switcher fix (JVLMbyYO)
+- 146d [bugs] PayPalHttp::HttpError in paypals#generate_order (6MTnv0Cc)
+- 139d [todo] Fountain Pro - Backend Updates (kUkibmUS)
+- 117d × 4 [todo] old backlog items (Duplicate Charge, Pro roles, Unit Test, URL case sensitive)
+
+---
+
+## Alerts
+
+| # | Source | Alert | Severity |
+|---|--------|-------|----------|
+| 1 | Trello/Shipstation | **Duplicate shipment bug** — @mike62798179 reporting multiple shipments created for single orders (6463844QN, 6819370EU, 1632502YI). Mike is manually cancelling. **URGENT.** | HIGH |
+| 2 | Trello/Shipstation | **Infinity orders not syncing to ShipStation** when holiday delivery selected. @kunalsheth: also affects Fountain. Needs fix before new shipstation migration. | HIGH |
+| 3 | Over-est | #2735 still growing: 111.5h → 115.0h (+3.5h today) at 28% over 90h est | MEDIUM |
+| 4 | Over-est | #2615 still growing: 102.75h → 106.75h (+4h today) at +790% over 12h est | MEDIUM |
+| 5 | Over-est | #2702 still growing: 16h → 20.5h (+4.5h today) at +156% over 8h est | MEDIUM |
+| 6 | Est vs Charged | **Runway jumped** from 1.76 → 3.90 wk (NS+IP) due to new tasks (#2775 60h, #2837 16h) added | INFO |
+| 7 | Task log | LamLQ 0h W23 (on 10h plan) — no logging or no work started | LOW |
+| 8 | Task log | HungPN 0h W23 — no alerts if PhatDLT is covering QC | INFO |
+| 9 | Trello | Stuck cards +4 (40→44); Doing +2, QC Internal +2 (progress movement positive) | INFO |
+| 10 | Trello | @kunalsheth asking Rick about pushing Infinity to new ShipStation tonight — action needed | LOW |
+| 11 | Matrix | Token expired at start; auto-refresh succeeded | INFO |
