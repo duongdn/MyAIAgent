@@ -201,3 +201,17 @@ Most recent 8 messages (most recent first):
 | 2026-04-15 02:58 | **Michael (client)** | **URGENT (historical, now resolved):** generate reports button perpetual spinner. |
 
 **Status:** Last client message (Apr 15) contained 3 non-urgent tasks. Carrick sent holiday notice Apr 21. No outstanding unanswered client messages as of today. Tasks from Apr 15 may need follow-up confirmation of completion.
+
+## Email — 08:33 (+07:00)
+| Account | Count | Summary |
+|---------|-------|---------|
+| duongdn | 2 | Leave/remote request from Nam Tran ("Xin làm remote - 22/04/2026"); public holidays notice reply from Hang Dang |
+| carrick | 10 | Redmine: 4 Elliott/Generator Lifestyle bugs (#78312 image upload not displaying, #78314 iOS multiple image upload, #78185 requestor email image attachments, #78183 multiple submission error); forwarded AWS cost anomaly for Equanimity AG; TEST Stripe invoice #ENCDU9ZT-0002; Jira weekly digest |
+| nick | 6 | No emails from John Yi. Automated only: 4x Canda Surveyors daily task completions; 1 Azure DevOps PR (fix for add info drafting); 1 Slack confirmation code |
+| rick | 17 | PRODUCTION alerts: InfinityRoses daily summary; [InfinityRoses] NoMethodError #398 (strftime on nil dispatch_date — 100th occurrence); [FirstProject/InfinityRoses] ChunkLoadError chunk 3148 (new error #984); [FirstProject] Minified React error #422 (100th occurrence, #854); FountainGifts daily summary. Also: Kunal Sheth email "Design focus for this week". Staging BugSnag alerts (FountainStaging) — INFO only, ignored |
+| kai | 4 | Jira weekly update; Madhuraka Godahewa mentioned kai on LIFM2-434; Anoma Wasala mentioned kai on LIFM2-430 (2 notifications) |
+| ken | 165 | 2 Precognize/development emails: PR #4849 SR-7222 & SR-7224 fix move nested equipments logic + validation (by nustom). Remaining 163 = Welligence/amocc-material GitHub notifications |
+
+⚠️ rick@: [InfinityRoses] PRODUCTION — NoMethodError: undefined method `strftime' for nil:NilClass on `order_item.dispatch_date` — 100th occurrence (#398). dispatch_date is nil for some order items.
+⚠️ rick@: [FirstProject/InfinityRoses] PRODUCTION — New ChunkLoadError on infinityroses.com chunk 3148 (#984) — JS chunk loading failure in production.
+⚠️ rick@: [FirstProject/InfinityRoses] PRODUCTION — Minified React error #422 reached 100th occurrence (#854) — possible hydration/rendering issue in production.
