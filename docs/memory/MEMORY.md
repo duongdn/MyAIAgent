@@ -8,6 +8,7 @@
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log = sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I (since 2026-04-06)
 - [project_monday_report_sheets.md](project_monday_report_sheets.md) — All 8 Monday report sheet IDs. Neural/LegalAtoms/Taraba DO have sheets (skill said "always 0", wrong)
+- [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond sheets from W23 (2026-04-20); sum both sheets for total
 
 ## Reference
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, weekly report comparison
