@@ -1,3 +1,33 @@
+# Daily Report — 2026-04-22 (Wednesday)
+**Period:** 2026-04-21 08:27 → 2026-04-22 08:40 (+07:00)
+
+---
+
+## 🚨 Critical Alerts
+
+| # | Source | Alert | Severity |
+|---|--------|-------|----------|
+| 1 | Fountain/Trello | **ShipStation duplicate shipments** — @mike62798179 manually cancelling duplicate shipments (orders 6463844QN, 6819370EU, 1632502YI). Active bug, URGENT. [Card](https://trello.com/c/BYu5iwQM) | HIGH |
+| 2 | Fountain/Trello | **Infinity+Fountain orders not syncing to ShipStation** when holiday delivery selected. @kunalsheth confirmed affects both sites. [Card](https://trello.com/c/y8lM8Alq) | HIGH |
+| 3 | Email/rick@ | **[InfinityRoses] PRODUCTION** — NoMethodError: `strftime` on nil `order_item.dispatch_date` — 100th occurrence (#398) | HIGH |
+| 4 | Email/rick@ | **[InfinityRoses] PRODUCTION** — New ChunkLoadError chunk 3148 (#984) | MEDIUM |
+| 5 | Email/rick@ | **[InfinityRoses] PRODUCTION** — Minified React error #422 — 100th occurrence (#854) | MEDIUM |
+| 6 | Slack/William Bills | Oliver flagged **urgent payout update** on MWMX screen. Lucas confirmed deploying — **verify completion** | MEDIUM |
+| 7 | Fountain | #2735 Pro Send Smart Link **still growing**: 111.5h → 115h (+3.5h), est 90h (+28%) | MEDIUM |
+| 8 | Fountain | #2615 Gift of Choice **still growing**: 102.75h → 106.75h (+4h), est 12h (+790%) | MEDIUM |
+| 9 | Fountain | #2702 Accessibility **still growing**: 16h → 20.5h (+4.5h), est 8h (+156%) | MEDIUM |
+
+## ℹ️ Action Items
+- **Precognize PRs**: nusken GitHub token missing — check manually or re-auth `nusken` account
+- **Upwork Bailey**: Sessions expired for `vinn`+`david2` — run `node scripts/upwork-login.js --login --account=vinn/david2`
+- **Neural Contract**: Michael's 3 non-urgent tasks (Apr 15) — confirm actioned: (1) Compare tab export filename, (2) rename Departures→Output tables, (3) Analyse button fix
+- **Email/duongdn**: Nam Tran leave/remote request for 22/04 — confirm approved
+- **LongVV**: 0h logged Tue 21/04 — verify late filing or follow up
+- **VietPH**: 0h logged Tue 21/04 — verify late filing or follow up
+- **Fountain**: @kunalsheth asking Rick about pushing Infinity to new ShipStation tonight — confirm timing
+
+---
+
 ## Scrin.io — 08:31 (+07:00)
 TuanNT (John Yi): 7h 21m tracked yesterday (2026-04-21)
 
@@ -425,3 +455,19 @@ Board: [Web Development (Fountain)](https://trello.com/b/UDrSWage) — id `5475e
 | 9 | Trello | Stuck cards +4 (40→44); Doing +2, QC Internal +2 (progress movement positive) | INFO |
 | 10 | Trello | @kunalsheth asking Rick about pushing Infinity to new ShipStation tonight — action needed | LOW |
 | 11 | Matrix | Token expired at start; auto-refresh succeeded | INFO |
+
+## Google Sheets — 08:39 (+07:00)
+| Developer | Today (h) | Status |
+|-----------|-----------|--------|
+| LongVV | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+| PhucVT | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+| TuanNT | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+| VietPH | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+| KhanhHH | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+| LeNH | 0.0 | ⚠️ 0h — not logged yet (EOD logging expected) |
+
+**Note:** Check run at 08:39 +07:00. All developers show 0h for Wed 22/04 — this is expected at this time of day as task logs are typically filled at end of day. Previous days confirmed present: Mon 20/04 logged by all; Tue 21/04 logged by PhucVT (8h), TuanNT (7.33h), KhanhHH (8h); LongVV and VietPH show 0h Tue (possible missed log or late filing).
+
+**W-sheets used:** LongVV=W3, PhucVT=W22, KhanhHH=W37, VietPH=W24, TuanNT=W20+W21+W24, LeNH=W8+W21+W21+W21
+
+⚠️ **Alerts (pending EOD):** All 6 developers — 0h logged as of 08:39. Re-check recommended at EOD (17:00+).
