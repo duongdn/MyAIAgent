@@ -471,3 +471,33 @@ Board: [Web Development (Fountain)](https://trello.com/b/UDrSWage) — id `5475e
 **W-sheets used:** LongVV=W3, PhucVT=W22, KhanhHH=W37, VietPH=W24, TuanNT=W20+W21+W24, LeNH=W8+W21+W21+W21
 
 ⚠️ **Alerts (pending EOD):** All 6 developers — 0h logged as of 08:39. Re-check recommended at EOD (17:00+).
+
+## Trello Updates — 08:43 (+07:00)
+### Check Progress
+- Maddy (Carrick/Kai/Luis): ✓ Complete
+- Blake: ✓ Complete
+- John Yi (Amazing Meds): ✓ Complete
+- James Diamond (Vinn task): ✓ Complete
+- Franc: ✓ Complete
+- Rory: ✓ Complete
+- Aysar: ✓ Complete
+- Elliott: ✓ Complete
+- Raymond - LegalAtoms: ✓ Complete
+- Marcel: ✓ Complete
+- Colin: ✓ Complete
+- Andrew Taraba: ✓ Complete
+- Elena - SamGuard (Digital Plant): ✓ Complete
+- Elena - WordPress SamGuard (Pending): ✓ Complete
+- MPFC: ✓ Complete
+- Bailey: ✓ Complete
+- Neural Contract: ✓ Complete
+- Fountain: ⚠️ Skipped — HIGH alerts: ShipStation duplicate shipments + holiday delivery sync bug
+- Rebecca (William Bills): ⚠️ Skipped — Oliver urgent payout update, verify Lucas completed
+
+### Check Mail
+- DuongDn: ✓ Complete
+- Carrick: ✓ Complete
+- Nick: ✓ Complete
+- Kai: ✓ Complete
+- Ken: ✓ Complete
+- Rick: ⚠️ Skipped — 3 production InfinityRoses alerts found
