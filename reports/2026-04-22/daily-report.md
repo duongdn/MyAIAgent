@@ -215,3 +215,41 @@ Most recent 8 messages (most recent first):
 ⚠️ rick@: [InfinityRoses] PRODUCTION — NoMethodError: undefined method `strftime' for nil:NilClass on `order_item.dispatch_date` — 100th occurrence (#398). dispatch_date is nil for some order items.
 ⚠️ rick@: [FirstProject/InfinityRoses] PRODUCTION — New ChunkLoadError on infinityroses.com chunk 3148 (#984) — JS chunk loading failure in production.
 ⚠️ rick@: [FirstProject/InfinityRoses] PRODUCTION — Minified React error #422 reached 100th occurrence (#854) — possible hydration/rendering issue in production.
+
+## Discord — 08:34 (+07:00)
+### AirAgri
+
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| airagri_webapp | 10+ | Vinn daily report (Apr 21): almost done with multiple chemicals, pushing to staging tomorrow; active discussion Apr 22 about spray job scope with James Diamond |
+| airagri-flutter | 2 | Jeff daily report (Apr 21 + Apr 22): spray module UI, API integration |
+
+**Vinn daily report (2025-04-21 17:10 +07):**
+> Hi @James Diamond @Royden. Just a report for today, I almost done with multiple chemicals. I will push it to staging tomorrow. The UI will be same like zones. After done, I will move to spray jobs actions on spray dashboard.
+
+**Jeff daily report (2025-04-21 19:03 +07):**
+> Here is my report for today:
+> - Implement UI for the Spray module
+> - Integrate APIs for Spray History and Spray Job
+> - Implement UI for the Create Spray Job screen
+
+**Jeff daily report (2025-04-22 17:27 +07):**
+> Here is my report for today:
+> - Handle adding chemicals and zones when creating Spray Job
+> - Integrate API for creating new Spray Job
+> - Fix issues related to asset creation
+
+Vinn daily report: **found** ✓ (Apr 21)
+Jeff daily report: **found** ✓ (Apr 21 + Apr 22)
+
+### Bizurk
+
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| welcome | 0 | No messages |
+| All other channels | N/A | Missing Access (nuscarrick not a member of project channels) |
+| DM: nuscarrick ↔ animeworld (Andrew Taraba) | 0 | No messages in monitoring window |
+
+Bizurk is a **low-activity client** — silence is normal. No action required.
+
+No alerts.
