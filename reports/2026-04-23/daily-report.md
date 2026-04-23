@@ -11,14 +11,13 @@
 | 1 | Fountain/Trello | **ShipStation / Mother's Day orders not syncing** — @kunalsheth 5 comments 04-22 on 7 affected orders + date/field bugs. [Card](https://trello.com/c/y8lM8Alq) | HIGH |
 | 2 | Fountain/Trello | **ShipStation creating 2nd/3rd duplicate shipments** — @mike62798179 still flagging, bad order list. [Card](https://trello.com/c/BYu5iwQM) | HIGH |
 | 3 | Email/rick@ | **[InfinityRoses] PRODUCTION** 100th occurrence #398 `NoMethodError strftime` for nil `dispatch_date` (2×, 22/04 05:53 +07) | HIGH |
-| 4 | Discord/AirAgri | **Vinn missing explicit daily report Tue 22/04** (active in messages all day but no end-of-day summary post) | MEDIUM |
-| 6 | Sheets/LeNH | **Aysar sheet 0h Wed 22/04** despite Upwork Aysar workroom tracking 8:30h — tracked but not logged. (Rory/Franc/Rebecca 0h is expected, not an alert — LeNH worked on Aysar.) Reminder sent Matrix. | MEDIUM |
-| 7 | Fountain | #2615 Gift of Choice **OVER + STILL GROWING**: 102.75h → 106.75h (+4h), est 12h (+790%) | MEDIUM |
-| 8 | Fountain | #2735 Pro Send Smart Link **OVER + STILL GROWING**: 111.5h → 117.5h (+6h), est 90h (+31%) | MEDIUM |
-| 9 | Fountain | #2702 Accessibility **OVER + STILL GROWING**: 16h → 21.5h (+5.5h), est 8h (+169%) | MEDIUM |
-| 10 | Email/rick@ | [FirstProject] PRODUCTION 6 new Rollbar errors 21–23/04: ChunkLoadError chunks 3148/8658, UnavailableError #985, 3× Minified React #422/#425 | MEDIUM |
-| 11 | Fountain | Dev pace W23 day-4: 68h / 113.6h expected (–45.6h, 47.9% of plan 80% expected) — VuTQ/ViTHT each –16h, LamLQ 0h/10h | MEDIUM |
-| 12 | Fountain | Capacity runway: 150.75h NS+IP remaining → **1.06 wk @ 142h plan / 1.68 wk @ 90h** — Kunal to feed Todo→Dev urgently | MEDIUM |
+| 4 | Sheets/LeNH | **Aysar sheet 0h Wed 22/04** despite Upwork Aysar workroom tracking 8:30h — tracked but not logged. (Rory/Franc/Rebecca 0h is expected, not an alert — LeNH worked on Aysar.) Reminder sent Matrix. | MEDIUM |
+| 5 | Fountain | #2615 Gift of Choice **OVER + STILL GROWING**: 102.75h → 106.75h (+4h), est 12h (+790%) | MEDIUM |
+| 6 | Fountain | #2735 Pro Send Smart Link **OVER + STILL GROWING**: 111.5h → 117.5h (+6h), est 90h (+31%) | MEDIUM |
+| 7 | Fountain | #2702 Accessibility **OVER + STILL GROWING**: 16h → 21.5h (+5.5h), est 8h (+169%) | MEDIUM |
+| 8 | Email/rick@ | [FirstProject] PRODUCTION 6 new Rollbar errors 21–23/04: ChunkLoadError chunks 3148/8658, UnavailableError #985, 3× Minified React #422/#425 | MEDIUM |
+| 9 | Fountain | Dev pace W23 day-4: 68h / 113.6h expected (–45.6h, 47.9% of plan 80% expected) — VuTQ/ViTHT each –16h, LamLQ 0h/10h | MEDIUM |
+| 10 | Fountain | Capacity runway: 150.75h NS+IP remaining → **1.06 wk @ 142h plan / 1.68 wk @ 90h** — Kunal to feed Todo→Dev urgently | MEDIUM |
 
 ## ℹ️ Action Items
 
@@ -205,7 +204,7 @@ Hotspots:
 ## Trello — Check Progress + Check Mail updates
 
 **Cards (found by name):**
-- [Check Progress](https://trello.com/c/1YALj3ba/742-check-progress) — 19 items: 16 completed, 3 skipped (post-correction: James Diamond/Aysar/Fountain)
+- [Check Progress](https://trello.com/c/1YALj3ba/742-check-progress) — 19 items: 17 completed, 2 skipped (post-correction: Aysar/Fountain)
 - [Check Mail](https://trello.com/c/14ghqLAu/743-check-mail) — 6/6 completed
 
 ### Check Progress
@@ -225,7 +224,7 @@ Hotspots:
 | Rebecca | ✓ | TuanNT OK |
 | Colin | ✓ | no alert |
 | Maddy - Carrick/Kai/Luis | ✓ (post-correction) | LongVV 8h/8h in James Diamond (false alert) |
-| **James Diamond - Vinn task** | ⚠️ skip | Vinn missing daily Tue 22 |
+| James Diamond - Vinn task | ✓ (post-correction) | Vinn did post daily report Tue 22 ("Just report my process today: …") — subagent missed it |
 | Rory | ✓ (post-correction) | LeNH worked on Aysar Wed, not Rory — 0h expected |
 | **Aysar** | ⚠️ skip | Upwork 8.5h Wed but task log 0h — real mismatch |
 | Franc | ✓ (post-correction) | LeNH worked on Aysar Wed, not Franc — 0h expected |

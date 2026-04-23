@@ -28,6 +28,7 @@
 - [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
 - [feedback_andrew_taraba_animworld_dm.md](feedback_andrew_taraba_animworld_dm.md) — Andrew Taraba: check nuscarrick DM with "animeworld", not Bizurk channels
 - [feedback_andrew_taraba_low_activity.md](feedback_andrew_taraba_low_activity.md) — Bizurk/Andrew Taraba is low-activity, silence is normal not an alert
+- [feedback_vinn_daily_report_format.md](feedback_vinn_daily_report_format.md) — Vinn's AirAgri daily report opens with "Just report my process today:" — search that phrase
 
 ## Feedback — Trello
 - [feedback_checklist_person_link.md](feedback_checklist_person_link.md) — Checklist items name person; their status gates completion
