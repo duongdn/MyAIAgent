@@ -12,7 +12,7 @@
 | 2 | Fountain/Trello | **ShipStation creating 2nd/3rd duplicate shipments** — @mike62798179 still flagging, bad order list. [Card](https://trello.com/c/BYu5iwQM) | HIGH |
 | 3 | Email/rick@ | **[InfinityRoses] PRODUCTION** 100th occurrence #398 `NoMethodError strftime` for nil `dispatch_date` (2×, 22/04 05:53 +07) | HIGH |
 | 4 | Discord/AirAgri | **Vinn missing explicit daily report Tue 22/04** (active in messages all day but no end-of-day summary post) | MEDIUM |
-| 6 | Sheets/LeNH | **0h Wed 22/04** across all 4 sheets (Rory/Franc/Aysar/Rebecca-QT); Upwork Aysar workroom tracked 8:30h same day. Reminder sent Matrix. | MEDIUM |
+| 6 | Sheets/LeNH | **Aysar sheet 0h Wed 22/04** despite Upwork Aysar workroom tracking 8:30h — tracked but not logged. (Rory/Franc/Rebecca 0h is expected, not an alert — LeNH worked on Aysar.) Reminder sent Matrix. | MEDIUM |
 | 7 | Fountain | #2615 Gift of Choice **OVER + STILL GROWING**: 102.75h → 106.75h (+4h), est 12h (+790%) | MEDIUM |
 | 8 | Fountain | #2735 Pro Send Smart Link **OVER + STILL GROWING**: 111.5h → 117.5h (+6h), est 90h (+31%) | MEDIUM |
 | 9 | Fountain | #2702 Accessibility **OVER + STILL GROWING**: 16h → 21.5h (+5.5h), est 8h (+169%) | MEDIUM |
@@ -205,7 +205,7 @@ Hotspots:
 ## Trello — Check Progress + Check Mail updates
 
 **Cards (found by name):**
-- [Check Progress](https://trello.com/c/1YALj3ba/742-check-progress) — 19 items: 13 completed, 6 skipped
+- [Check Progress](https://trello.com/c/1YALj3ba/742-check-progress) — 19 items: 16 completed, 3 skipped (post-correction: James Diamond/Aysar/Fountain)
 - [Check Mail](https://trello.com/c/14ghqLAu/743-check-mail) — 6/6 completed
 
 ### Check Progress
@@ -226,9 +226,9 @@ Hotspots:
 | Colin | ✓ | no alert |
 | Maddy - Carrick/Kai/Luis | ✓ (post-correction) | LongVV 8h/8h in James Diamond (false alert) |
 | **James Diamond - Vinn task** | ⚠️ skip | Vinn missing daily Tue 22 |
-| **Rory** | ⚠️ skip | LeNH 0h Wed |
-| **Aysar** | ⚠️ skip | LeNH 0h + Upwork mismatch |
-| **Franc** | ⚠️ skip | LeNH 0h Wed |
+| Rory | ✓ (post-correction) | LeNH worked on Aysar Wed, not Rory — 0h expected |
+| **Aysar** | ⚠️ skip | Upwork 8.5h Wed but task log 0h — real mismatch |
+| Franc | ✓ (post-correction) | LeNH worked on Aysar Wed, not Franc — 0h expected |
 | **Fountain** | ⚠️ skip | growing over-est + HIGH customer bugs |
 
 ### Check Mail — all 6 ✓

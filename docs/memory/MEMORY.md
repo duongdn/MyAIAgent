@@ -43,6 +43,7 @@
 - [feedback_parttime_official_filter.md](feedback_parttime_official_filter.md) — Only "Task dự án" as official time, exclude "Part-time" rows
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca, must check all 4
 - [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond ONLY. NOT Rebecca.
+- [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — LeNH 0h in Rory/Franc/Rebecca ≠ alert if working on Aysar that day; only flag actually-worked sheet
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders go to `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
