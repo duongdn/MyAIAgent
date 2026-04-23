@@ -7,12 +7,14 @@ Source: `scripts/check-task-logs-apr21-22.py` (filter A="Task dự án", owner c
 
 | Developer | Tue 21 | Wed 22 | Status |
 |---|---:|---:|---|
-| LongVV (Maddy + Rebecca) | 0.00h | 0.00h | ALERT — 0h, no leave |
+| LongVV (Maddy + James Diamond) | 8.00h | 8.00h | OK — all in James Diamond W22 |
 | PhucVT (James Diamond) | 8.00h | 8.00h | OK |
 | KhanhHH (Generator) | 8.00h | 8.00h | OK |
 | VietPH (Paturevision) | 8.00h | 8.00h | OK |
 | LeNH (Rory+Franc+Aysar+Rebecca-QT) | 8.17h | 0.00h | ALERT — Wed 0h, no leave |
 | TuanNT (JohnYi+Rebecca+Paturevision) | 8.00h | 8.00h | OK |
+
+> **Post-review correction (2026-04-23):** This piece originally listed LongVV as "Maddy + Rebecca" with 0h both days. That is wrong — LongVV's two sheets are Maddy + **James Diamond** (per memory `project_longvv_james_diamond.md`). Rescan of James Diamond sheet W22 confirmed LongVV: **8h Tue + 8h Wed**. No alert. See `scripts/check-longvv-james-apr21-22.py`. Feedback memory saved: `feedback_longvv_not_rebecca.md` + `feedback_longvv_direct_matrix.md`.
 
 ## Per-sheet detail
 
@@ -25,8 +27,8 @@ Source: `scripts/check-task-logs-apr21-22.py` (filter A="Task dự án", owner c
 
 ## Alerts (0h without leave)
 
-1. **LongVV — Tue 21/04 0h, no leave marker.** Maddy W3 + Rebecca W21 (G-col) both empty. → Send Matrix reminder.
-2. **LongVV — Wed 22/04 0h, no leave marker.** Same sheets empty. → Send Matrix reminder.
+1. ~~LongVV Tue 21/04 0h~~ RESOLVED — was checking wrong sheet (Rebecca). Real hours = 8h in James Diamond W22.
+2. ~~LongVV Wed 22/04 0h~~ RESOLVED — same root cause. Real hours = 8h in James Diamond W22.
 3. **LeNH — Wed 22/04 0h, no leave marker across all 4 sheets (Rory W8, Franc W21, Aysar W21, Rebecca W21 Q-T).** Aysar is the usually-active sheet but Wed row is blank. → Send Matrix reminder.
 
 LeNH Tue 21 is OK (Aysar 8.17h). TuanNT both days OK (8h split across John Yi + Rebecca, matches 8h/day target).

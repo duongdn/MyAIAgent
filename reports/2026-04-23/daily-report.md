@@ -11,8 +11,7 @@
 | 1 | Fountain/Trello | **ShipStation / Mother's Day orders not syncing** — @kunalsheth 5 comments 04-22 on 7 affected orders + date/field bugs. [Card](https://trello.com/c/y8lM8Alq) | HIGH |
 | 2 | Fountain/Trello | **ShipStation creating 2nd/3rd duplicate shipments** — @mike62798179 still flagging, bad order list. [Card](https://trello.com/c/BYu5iwQM) | HIGH |
 | 3 | Email/rick@ | **[InfinityRoses] PRODUCTION** 100th occurrence #398 `NoMethodError strftime` for nil `dispatch_date` (2×, 22/04 05:53 +07) | HIGH |
-| 4 | Sheets/LongVV | **0h Tue 21/04 + Wed 22/04** in Maddy W3 + Rebecca W21 — no leave marker. Reminder sent Matrix. | HIGH |
-| 5 | Discord/AirAgri | **Vinn missing explicit daily report Tue 22/04** (active in messages all day but no end-of-day summary post) | MEDIUM |
+| 4 | Discord/AirAgri | **Vinn missing explicit daily report Tue 22/04** (active in messages all day but no end-of-day summary post) | MEDIUM |
 | 6 | Sheets/LeNH | **0h Wed 22/04** across all 4 sheets (Rory/Franc/Aysar/Rebecca-QT); Upwork Aysar workroom tracked 8:30h same day. Reminder sent Matrix. | MEDIUM |
 | 7 | Fountain | #2615 Gift of Choice **OVER + STILL GROWING**: 102.75h → 106.75h (+4h), est 12h (+790%) | MEDIUM |
 | 8 | Fountain | #2735 Pro Send Smart Link **OVER + STILL GROWING**: 111.5h → 117.5h (+6h), est 90h (+31%) | MEDIUM |
@@ -119,14 +118,14 @@ Log ≤ Scrin.io every day — not over-inflated. TuanNT makes up the gap via Re
 
 | Developer | Tue 21 | Wed 22 | Status |
 |---|---:|---:|---|
-| LongVV (Maddy + Rebecca) | 0.00h | 0.00h | **ALERT** — reminder sent |
+| LongVV (Maddy + James Diamond) | 8.00h | 8.00h | OK — all hours in James Diamond W22 |
 | PhucVT (James Diamond) | 8.00h | 8.00h | OK |
 | KhanhHH (Generator) | 8.00h | 8.00h | OK |
 | VietPH (Paturevision) | 8.00h | 8.00h | OK |
 | LeNH (Rory+Franc+Aysar+Rebecca-QT) | 8.17h | 0.00h | **ALERT** Wed — reminder sent |
 | TuanNT (JohnYi+Rebecca+Paturevision) | 8.00h | 8.00h | OK |
 
-No leave markers detected. LongVV 3-day pattern (Mon+Tue+Wed all 0h) — possible unlogged leave or sheet issue; Matrix reminder sent. LeNH Wed could be EOD-logging delay; note Upwork Aysar tracked 8:30h Wed, so hours exist — need task log entry.
+**Correction (post-review):** LongVV's two sheets are Maddy + James Diamond (NOT Rebecca). Re-scan of James Diamond W22 shows LongVV = 8h Tue + 8h Wed. Original piece4 alert was a false positive; no reminder was warranted. LeNH Wed could be EOD-logging delay; note Upwork Aysar tracked 8:30h Wed, so hours exist — need task log entry.
 
 ---
 
@@ -225,7 +224,7 @@ Hotspots:
 | Andrew Taraba | ✓ | low-activity normal |
 | Rebecca | ✓ | TuanNT OK |
 | Colin | ✓ | no alert |
-| **Maddy - Carrick/Kai/Luis** | ⚠️ skip | LongVV 0h Tue+Wed |
+| Maddy - Carrick/Kai/Luis | ✓ (post-correction) | LongVV 8h/8h in James Diamond (false alert) |
 | **James Diamond - Vinn task** | ⚠️ skip | Vinn missing daily Tue 22 |
 | **Rory** | ⚠️ skip | LeNH 0h Wed |
 | **Aysar** | ⚠️ skip | LeNH 0h + Upwork mismatch |
@@ -238,7 +237,7 @@ DuongDn / Carrick / Nick / Rick / Kai / Ken — all mail checked.
 ---
 
 ## Matrix Reminders Sent
-- **LongVV** → `!bvdwOOxprsKJBTjSeQ:nustechnology.com` — "task log for 21/04 and 22/04 is missing (0h logged)"
+- **LongVV** → `!bvdwOOxprsKJBTjSeQ:nustechnology.com` (Maddy Xtreme room) — "task log for 21/04 and 22/04 is missing (0h logged)". **⚠️ SENT IN ERROR**: (1) wrong room — LongVV's direct room is `!mYZBGNoLFVpMVIJtPu:nustechnology.com`; (2) false alert — LongVV actually logged 8h/8h in James Diamond W22 (not Rebecca). Rule saved: feedback_longvv_direct_matrix.md + feedback_longvv_not_rebecca.md.
 - **LeNH** → `!OIrgPraJWrcDTnRVLQ:nustechnology.com` — "task log for 22/04 is missing … Upwork Aysar 8:30h tracked"
 
 Matrix token auto-refreshed on session start (scripts/matrix-token-refresh.js).
@@ -247,7 +246,7 @@ Matrix token auto-refreshed on session start (scripts/matrix-token-refresh.js).
 
 ## Unresolved Questions
 
-1. LongVV 0h Mon+Tue+Wed consistent — unlogged leave or sheet misconfiguration? (Matrix reminder sent, awaiting reply.)
+1. ~~LongVV 0h Mon+Tue+Wed~~ RESOLVED — false positive. LongVV's hours are in James Diamond sheet (W22), not Rebecca. Logged 8h Tue + 8h Wed.
 2. LeNH Wed 22/04 0h despite 8:30h tracked on Upwork Aysar workroom — task log not yet updated, or logged in a sheet not checked?
 3. Aysar Upwork contract status — stale "inactive since Mar 9" flag vs 18:50h tracked this week.
 4. Fountain #2615 (Staging) + #2735/#2702 (IP) still growing — new rework scope or original underestimate? Needs scope review.
