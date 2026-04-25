@@ -10,7 +10,7 @@
 
 | Employee | Project(s) | Week Total | Target | Status | Notes |
 |----------|-----------|-----------|--------|--------|-------|
-| LongVV | Maddy (W3) + James Diamond (W22) | **32h** | 40h | 🔴 | Maddy 16h ✓ + JD 16h. Fri = 0h on both sheets, no leave note. Missing 8h. |
+| LongVV | Maddy (W3) + James Diamond (W22) | **32h** | 32h | ✓ | Maddy 16h + JD 16h. Fri = Nghỉ cả ngày (paid leave). 4 working days × 8h = 32h ✓ |
 | PhucVT | James Diamond (W22) | **40h** | 40h | ✓ | 8h every day |
 | AnhNH2 | James Diamond (W22) | **20h** | — | ⚠️ | Mon 7h, Tue 1h, Wed 4h, Thu 8h, Fri 0h. No fixed plan but lower than usual 24h pattern. |
 | KhanhHH | Generator (W37) | **40h** | 40h | ✓ | All 8h/day ✓ |
@@ -21,7 +21,7 @@
 
 ---
 
-### LongVV Daily Breakdown 🔴 missing 8h Friday
+### LongVV Daily Breakdown ✓ (Fri = paid leave)
 
 **Maddy NEW (W3) — sheet `1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I`**
 
@@ -31,7 +31,7 @@
 | Tue 21/04 | 0h | On JD |
 | Wed 22/04 | 0h | On JD |
 | Thu 23/04 | 8h ✓ | LIFM2 tasks |
-| Fri 24/04 | **0h** 🔴 | No leave note |
+| Fri 24/04 | 0h | **Nghỉ cả ngày** (paid leave, row 69) |
 | **Total** | **16h** | Target: 16h/wk ✓ |
 
 **James Diamond (W22) — sheet `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI`**
@@ -42,8 +42,8 @@
 | Tue 21/04 | 8h ✓ | |
 | Wed 22/04 | 8h ✓ | |
 | Thu 23/04 | 0h | On Maddy |
-| Fri 24/04 | **0h** 🔴 | No leave note |
-| **Total** | **16h** | (target 24h on JD, missing 8h) |
+| Fri 24/04 | 0h | Nghỉ cả ngày (per Maddy sheet) |
+| **Total** | **16h** | 4 working days × ~half-day rotation ✓ |
 
 **JIRA cross-check (Apr 20–24, madhuraka, accountId 5b1ed0bcc175e5207bf80b77):**
 
@@ -61,7 +61,7 @@
 
 **Google Sheets (Maddy): 16h | JIRA: 16h | Delta: 0h ✓**
 
-> 🔴 **LongVV Friday 24/04 = 0h on BOTH Maddy and James Diamond sheets, no leave note.** Combined week total 32h vs 40h target.
+> ✓ **LongVV Friday 24/04 = Nghỉ cả ngày (paid leave)** logged in Maddy W3 row 69. Combined week total 32h matches 4-working-day expectation.
 
 ---
 
@@ -308,14 +308,13 @@ DuongDN: 5h
 
 | # | Severity | Item | Action |
 |---|----------|------|--------|
-| 1 | 🔴 | **LongVV Fri 24/04 = 0h on BOTH Maddy + JD, no leave note** — week total 32h vs 40h target | Ask LongVV: was Friday leave or missing task log? |
-| 2 | 🔴 | **#2615 STILL GROWING 3rd week** — 106.75h vs 12h est. +4h this week (accelerating from +0.55h) | Ask Trinh: when does #2615 go live? Stop the bleed. |
-| 3 | 🔴 | **#2702 STILL GROWING** — 24h vs 8h est (+200%), +8h this week | Re-estimate scope or scope cut |
-| 4 | 🔴 | **#2627 NEW OVERRUN — "Has Bug on Live"** — 0.5h est, 8.25h actual (+1550%) | Investigate live bug scope creep |
-| 5 | ⚠️ | **HaVS 0h THIRD consecutive week** — removed from plan now. No explanation. | Confirm with Trinh: leave? transferred? |
-| 6 | ⚠️ | **AnhNH2 20h** — Tue 1h, Fri 0h, no leave notes. Below usual 24h pattern. | Confirm AnhNH2 status with Thuy |
-| 7 | ⚠️ | **VuTQ -3h vs plan; QC -3.5h vs plan** | Note for next week |
-| 8 | ⚠️ | **Net Fountain scope progress -0.5h** despite 124.5h spent | New work entering at same rate as closure — scope discipline |
-| 9 | ⚠️ | **DatNT joined plan (40h/wk)** — first week, hit 39.5h ✓ | Confirm long-term capacity allocation |
-| 10 | ⚠️ | **Bailey vinn + david2 Upwork sessions expired** | Re-login both accounts |
-| 11 | ❓ | **LongVV on James Diamond** — new in W23. Add to Matrix report to Thuy? | User decision before sending Matrix message |
+| 1 | 🔴 | **#2615 STILL GROWING 3rd week** — 106.75h vs 12h est. +4h this week (accelerating from +0.55h) | Ask Trinh: when does #2615 go live? Stop the bleed. |
+| 2 | 🔴 | **#2702 STILL GROWING** — 24h vs 8h est (+200%), +8h this week | Re-estimate scope or scope cut |
+| 3 | 🔴 | **#2627 NEW OVERRUN — "Has Bug on Live"** — 0.5h est, 8.25h actual (+1550%) | Investigate live bug scope creep |
+| 4 | ⚠️ | **HaVS 0h THIRD consecutive week** — removed from plan now. No explanation. | Confirm with Trinh: leave? transferred? |
+| 5 | ⚠️ | **AnhNH2 20h** — Tue 1h, Fri 0h, no leave notes. Below usual 24h pattern. | Confirm AnhNH2 status with Thuy |
+| 6 | ⚠️ | **VuTQ -3h vs plan; QC -3.5h vs plan** | Note for next week |
+| 7 | ⚠️ | **Net Fountain scope progress -0.5h** despite 124.5h spent | New work entering at same rate as closure — scope discipline |
+| 8 | ✓ | **DatNT joined plan (40h/wk)** — first week, hit 39.5h ✓ | Confirm long-term capacity allocation |
+| 9 | ⚠️ | **Bailey vinn + david2 Upwork sessions expired** | Re-login both accounts |
+| 10 | ✓ | **LongVV Fri = paid leave**, week 32h matches 4-day expectation. Memory updated for JD Web inclusion. | none |
