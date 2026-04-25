@@ -262,17 +262,20 @@ DatNT: 40h
 ## #3 James Diamond + Marcel — Matrix Report
 
 **Room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
-**Status:** ✓ Sent 2026-04-25 (event_id `$ByZw_esfxQjMsNEHossmJoBGiCtoe97qGu-7mYFlSsk`) — standard format (PhucVT + AnhNH2)
+**Status:**
+- First send (without LongVV): event_id `$ByZw_esfxQjMsNEHossmJoBGiCtoe97qGu-7mYFlSsk` — **WRONG format**
+- Correction sent 2026-04-25: event_id `$cWuONENdIGkI81NvEaR-n9CmreV1ALwCsHtW85vO5Qc`
 
-### Message sent:
+### Corrected message sent:
 
 ```
-Report week 20/04
+Correction — Report week 20/04
 
 James Diamond
 
-Web: 40h/40h
+Web: 56h/56h
 PhucVT: 40h/40h
+LongVV: 16h/16h
 
 Mobile: 20h/20h
 AnhNH2: 20h/20h
@@ -283,7 +286,7 @@ Marcel
 DuongDN: 5h
 ```
 
-> 📝 **LongVV question:** Per memory, LongVV started on James Diamond from W23 (this week) — logged 16h on JD this week. Memorized Matrix format only includes PhucVT (Web) and AnhNH2 (Mobile). **Should LongVV be added to the Matrix message?** Awaiting confirmation before sending.
+> Memory updated (`feedback_matrix_report_format.md`): Web section MUST include LongVV from W23 onward.
 
 ---
 
