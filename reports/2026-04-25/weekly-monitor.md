@@ -262,9 +262,9 @@ DatNT: 40h
 ## #3 James Diamond + Marcel — Matrix Report
 
 **Room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
-**Status:** ⏸ NOT YET SENT — pending user confirmation about LongVV
+**Status:** ✓ Sent 2026-04-25 (event_id `$ByZw_esfxQjMsNEHossmJoBGiCtoe97qGu-7mYFlSsk`) — standard format (PhucVT + AnhNH2)
 
-### Draft message (matches memorized format — PhucVT + AnhNH2 only):
+### Message sent:
 
 ```
 Report week 20/04
