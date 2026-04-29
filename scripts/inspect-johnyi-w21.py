@@ -9,14 +9,26 @@ creds = Credentials.from_service_account_file(SA, scopes=['https://www.googleapi
 svc = build('sheets', 'v4', credentials=creds)
 sapi = svc.spreadsheets()
 
-r = sapi.values().get(spreadsheetId=SHEET_ID, range="'W21'!A1:K400").execute()
+# Use FORMULA to see real cell content; also no truncation
+r = sapi.values().get(
+    spreadsheetId=SHEET_ID,
+    range="'W21'!A19:K34",
+    valueRenderOption='FORMATTED_VALUE',
+).execute()
 rows = r.get('values', [])
+print('FORMATTED rows 19-34 (Tue 28/04 + tasks):')
+for j, row in enumerate(rows):
+    # pad to 11 cols
+    row = (row + ['']*(11-len(row)))[:11]
+    print(f'  R{j+19}: {row}')
 
-# Find the row(s) with "28/04" and dump 30 rows after
-for idx, row in enumerate(rows):
-    a = row[0] if row else ''
-    if '28/04' in a or '28/4' in a:
-        print(f'--- Found at row {idx+1}: "{a}" ---')
-        for j in range(idx, min(idx+40, len(rows))):
-            print(f'{j+1}: {rows[j]}')
-        print('---')
+print()
+print('--- UNFORMATTED ---')
+r2 = sapi.values().get(
+    spreadsheetId=SHEET_ID,
+    range="'W21'!A19:K34",
+    valueRenderOption='UNFORMATTED_VALUE',
+).execute()
+for j, row in enumerate(r2.get('values', [])):
+    row = (row + ['']*(11-len(row)))[:11]
+    print(f'  R{j+19}: {row}')
