@@ -97,36 +97,11 @@ def day_hours(rows, dev):
 
 
 def day_hours_lenh_rebecca(rows):
-    """LeNH in Rebecca sheet uses cols Q-T (indices 16, 17, 18, 19)."""
-    in_day = False
-    hours = 0.0
-    rows_found = 0
-    leave = ""
-    for row in rows:
-        if not row:
-            continue
-        cell_a = (row[0].strip() if row[0] else "")
-        if not in_day:
-            if cell_a.startswith(TARGET_DAY + ',') and any(t in cell_a for t in TARGET_TOKS):
-                in_day = True
-                continue
-        else:
-            if cell_a and any(cell_a.startswith(d) for d in DAY_MARK):
-                break
-            cell_q = (row[16].strip() if len(row) > 16 else "")
-            cell_s = (row[18].strip() if len(row) > 18 else "")
-            cell_t = (row[19].strip() if len(row) > 19 else "0")
-            if cell_q == "Task dự án" and cell_s == "LeNH":
-                try:
-                    hours += float(cell_t.replace(',', '.'))
-                    rows_found += 1
-                except Exception:
-                    pass
-            if cell_q == "Nghỉ cả ngày" and (cell_s == "LeNH" or cell_s == ""):
-                leave = "full_day_off"
-            elif cell_q == "Nghỉ nửa ngày" and cell_s == "LeNH" and leave != "full_day_off":
-                leave = "half_day"
-    return hours, leave, rows_found
+    """LeNH in Rebecca sheet: per actual data inspection, LeNH logs in
+    col G (owner) and col H (hours), same layout as everyone else.
+    Cols Q-T contain only 'Chưa' placeholders. So we just call day_hours
+    with dev='LeNH'."""
+    return day_hours(rows, "LeNH")
 
 
 print(f"=== Task log check — Tue 28/04/2026 ===\n")
