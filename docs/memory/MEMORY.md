@@ -45,6 +45,7 @@
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log
 - [feedback_leave_day_no_report_needed.md](feedback_leave_day_no_report_needed.md) — "Nghỉ cả ngày" = leave day, not an alert
+- [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Sheets subagent misses logged hours; verify 0h findings directly before flagging
 
 ## Feedback — Fountain
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — MANDATORY 5-part check: Matrix plan, actuals, plan vs actual, capacity, over-estimate

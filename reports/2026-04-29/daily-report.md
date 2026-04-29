@@ -9,7 +9,7 @@
 |---|----------|--------|--------|
 | 1 | HIGH | Email/Rick | **FirstProject (Fountain) PROD Rollbar #874** — `Cannot read properties of undefined (reading 'amount')` × 10 occurrences in 5 min @ 28/04 18:02 UTC. Needs investigation. |
 | 2 | HIGH | Fountain | **Kunal priority directive 28/04 13:59Z** — "prioritize Infinity Cart/Checkout over anything Fountain related" — confirm work order with team. |
-| 3 | MED  | Sheets | **4 devs 0h on Tue 28/04** — LongVV, TuanNT, KhanhHH, LeNH. No leave note. Matrix reminders sent to LongVV/TuanNT/LeNH. KhanhHH no Matrix room — escalate via Generator Slack. |
+| 3 | MED  | Sheets | **CORRECTION after direct re-verify:** only **LongVV** is genuinely 0h on Tue 28/04. Sheets subagent falsely flagged TuanNT (had 8h in John Yi: "move homepage prod, update feedback, handle AM method edit data"), KhanhHH (had 8h in Generator W38: 5 rows totaling 8h), and partially LeNH (had 4h on Rebecca W22 "Testing Stripe payment", but Rory/Franc/Aysar still empty → 4h vs 8h target). LeNH partial → reminder still appropriate. Matrix reminder to TuanNT was sent in error (already delivered, can't unsend). KhanhHH reminder NOT sent (canceled after correction). |
 | 4 | MED  | Fountain | **VuTQ −5.9h vs pace** (only Mon 0.5h hotfix; nothing logged Tue). |
 | 5 | MED  | Fountain | **Over-est still growing**: #2702 +1h (25h, +212%), #2816 +3h (35h, +75%), #2815 +1.25h + status anomaly (10.25h, +71%). |
 | 6 | MED  | Fountain | **Runway flat 1.68 wk** (150.75h NS+IP @ 90h/wk) — backlog still thin; new estimates needed. |
@@ -24,16 +24,13 @@
 
 **Check Progress card** (https://trello.com/c/YpVcsLfw):
 
-✓ **Completed (11)**: Blake, James Diamond - Vinn task, MPFC, Marcel, Elena - SamGuard, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Colin, Elena - WordPress SamGuard.
+✓ **Completed (14)**: Blake, James Diamond - Vinn task, MPFC, Marcel, Elena - SamGuard, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Colin, Elena - WordPress SamGuard, **John Yi - Amazing Meds (TuanNT 8h verified)**, **Elliott (KhanhHH 8h verified)**, **Rebecca - William Will (TuanNT 8h total verified)**.
 
-⚠ **Skipped (8)**:
-- Maddy - Carrick/Kai/Luis — LongVV 0h alert
-- John Yi - Amazing Meds — TuanNT 0h alert
-- Rory — LeNH 0h alert
-- Aysar — LeNH 0h alert (Upwork shows 4.17h ↔ sheets 0h discrepancy)
-- Franc — LeNH 0h alert
-- Elliott - GreenFort Capital — KhanhHH 0h alert
-- Rebecca - William Will — TuanNT 0h alert
+⚠ **Skipped (5)**:
+- Maddy - Carrick/Kai/Luis — LongVV 0h (genuine, no entries on Maddy or James Diamond sheets)
+- Rory — LeNH 0h on Rory sheet (LeNH total 4h vs 8h target)
+- Aysar — LeNH 0h on Aysar sheet (Upwork shows 4.17h ↔ likely the Rebecca Stripe entry; LeNH still under 8h target)
+- Franc — LeNH 0h on Franc sheet
 - Fountain - DOCUMENT — VuTQ behind, over-est growing, Kunal priority directive, Rollbar #874
 
 ---
@@ -355,7 +352,7 @@ Matrix token refreshed via `scripts/matrix-token-refresh.js` (DISPLAY=:0 — bro
 
 | Developer | Room | Event ID | Status |
 |---|---|---|---|
-| LongVV | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` | `$9NJzLS_q9-GqAbLWoMAKc0-XmuM7x3h0pfm2g9Ms-Lw` | ✓ sent |
+| LongVV | `!mYZBGNoLFVpMVIJtPu:nustechnology.com` | `$Que3plgYwoE5EFJonYhkrFX_Jty6K8AxORFyG4auu58` | ✓ sent (corrected to LongVV's personal channel — first send went to wrong room `!bvdwOOxprsKJBTjSeQ` which is the Maddy/Xtreme room, not LongVV) |
 | TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` | `$2u6bfRSCp0XXwZrQn_uZtwHBdtoVJqrM4HiLBcoOdmM` | ✓ sent |
 | LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | `$QCL910o_TAnvddZlSORCt0WZP5qaAogVIYyBbmclESQ` | ✓ sent |
 
