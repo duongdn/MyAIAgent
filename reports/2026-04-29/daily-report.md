@@ -9,14 +9,14 @@
 |---|----------|--------|--------|
 | 1 | HIGH | Email/Rick | **FirstProject (Fountain) PROD Rollbar #874** — `Cannot read properties of undefined (reading 'amount')` × 10 occurrences in 5 min @ 28/04 18:02 UTC. Needs investigation. |
 | 2 | HIGH | Fountain | **Kunal priority directive 28/04 13:59Z** — "prioritize Infinity Cart/Checkout over anything Fountain related" — confirm work order with team. |
-| 3 | MED  | Sheets | **4 devs 0h on Tue 28/04** — LongVV, TuanNT, KhanhHH, LeNH. No leave note. Matrix reminders attempted but token expired (see Reminders). |
+| 3 | MED  | Sheets | **4 devs 0h on Tue 28/04** — LongVV, TuanNT, KhanhHH, LeNH. No leave note. Matrix reminders sent to LongVV/TuanNT/LeNH. KhanhHH no Matrix room — escalate via Generator Slack. |
 | 4 | MED  | Fountain | **VuTQ −5.9h vs pace** (only Mon 0.5h hotfix; nothing logged Tue). |
 | 5 | MED  | Fountain | **Over-est still growing**: #2702 +1h (25h, +212%), #2816 +3h (35h, +75%), #2815 +1.25h + status anomaly (10.25h, +71%). |
 | 6 | MED  | Fountain | **Runway flat 1.68 wk** (150.75h NS+IP @ 90h/wk) — backlog still thin; new estimates needed. |
 | 7 | LOW  | Fountain | **Status anomalies** persist on #2742 (NS but 20.25h logged) and #2815 (NS but 10.25h logged) — needs lead update. |
-| 8 | LOW  | Upwork | **vinn / david2 Upwork sessions expired** — Bailey DEV1 hours not verified vs task log; needs `node scripts/upwork-login.js --login --account=vinn` (visible browser + CAPTCHA). DEV3 inactive so 0h is OK. |
-| 9 | LOW  | Elena | **Precognize check blocked** — `nusken` GitHub token not in local gh keyring. PR enumeration failed; email signal shows active dev (PRs #4853, #4861, etc.). |
-| 10 | LOW | Reminders | **Matrix token fully expired** — OIDC refresh + browser SSO both failed. Reminders to LongVV, TuanNT, LeNH queued for resend after manual login. |
+| 8 | LOW  | Upwork | **vinn / david2 Upwork profiles missing** — only `tmp/upwork-profile-carrick` exists; Bailey DEV1 hours not verified vs task log. Needs `node scripts/upwork-login.js --login --account=vinn` interactively (visible browser + manual CAPTCHA). DEV3 inactive so 0h is OK regardless. |
+| 9 | LOW  | Elena | **Precognize check blocked** — `nusken` GitHub token not in `gh` keyring, .envrc, .env, or macOS keychain. PR enumeration failed; email signal shows active dev (PRs #4853, #4861, etc.). Needs `gh auth login --hostname github.com --user nusken` interactively. |
+| 10 | RESOLVED | Reminders | Matrix token refreshed (browser SSO with DISPLAY=:0). Reminders ✓ sent to LongVV, TuanNT, LeNH. |
 
 ## Trello — Check Progress + Check Mail (08:30 +07:00)
 
@@ -351,21 +351,13 @@ Aysar Upwork shows LeNH 4.17h this week, but Sheets agent reported LeNH 0h acros
 
 ## Reminders — 08:30 (+07:00)
 
-⚠ **Matrix reminders BLOCKED — token expired and could not be auto-refreshed.**
+Matrix token refreshed via `scripts/matrix-token-refresh.js` (DISPLAY=:0 — browser SSO captured token, saved). Verified `@duongdn:nustechnology.com`. Reminders sent:
 
-Refresh attempts:
-- OIDC refresh (token endpoint): FAIL HTTP 400 `invalid_grant` (refresh token revoked/expired)
-- Browser SSO refresh (`scripts/matrix-token-refresh.js`): "Failed to capture token. Manual login needed." — saved browser profile session also expired.
-
-Action needed: run `node scripts/matrix-token-refresh.js` interactively (visible browser at the user's desktop) to re-establish the SSO session, then re-run reminders.
-
-Queued reminders (for resend after token refresh):
-
-| Developer | Room | Message |
-|---|---|---|
-| LongVV | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` | "Hi LongVV, task log for 2026-04-28 is missing (0h logged). Please update when you can. Thanks!" |
-| TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` | "Hi TuanNT, task log for 2026-04-28 is missing (0h logged). Please update when you can. Thanks!" |
-| LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | "Hi LeNH, task log for 2026-04-28 is missing (0h logged). Please update when you can. Thanks!" |
+| Developer | Room | Event ID | Status |
+|---|---|---|---|
+| LongVV | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` | `$9NJzLS_q9-GqAbLWoMAKc0-XmuM7x3h0pfm2g9Ms-Lw` | ✓ sent |
+| TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` | `$2u6bfRSCp0XXwZrQn_uZtwHBdtoVJqrM4HiLBcoOdmM` | ✓ sent |
+| LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | `$QCL910o_TAnvddZlSORCt0WZP5qaAogVIYyBbmclESQ` | ✓ sent |
 
 ⚠ **KhanhHH** (Generator/Elliott) also 0h Tue 28/04 — no Matrix room mapped; escalate via Generator Slack DM or in weekly stand-up.
 
