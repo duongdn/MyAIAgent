@@ -9,12 +9,14 @@ When running the Aysar piece of the daily report (Slack baamboozle + Trello "Ays
 - https://github.com/baamboozle/baamboozle-web-app
 - https://github.com/baamboozle/bbzl-web-client
 
-**Account:** use `carrick` GitHub account.
+**Account:** use `nuscarrick` GitHub account (the user calls it "carrick"; the actual `gh` login name is `nuscarrick` per `gh auth status`).
 
 ```bash
-GH_TOKEN=$(gh auth token -h github.com -u carrick) gh api repos/baamboozle/baamboozle-web-app/issues?state=open
-GH_TOKEN=$(gh auth token -h github.com -u carrick) gh api repos/baamboozle/bbzl-web-client/issues?state=open
+GH_TOKEN=$(gh auth token -h github.com -u nuscarrick) gh api 'repos/baamboozle/baamboozle-web-app/issues?state=open&per_page=100&sort=updated&direction=desc'
+GH_TOKEN=$(gh auth token -h github.com -u nuscarrick) gh api 'repos/baamboozle/bbzl-web-client/issues?state=open&per_page=100&sort=updated&direction=desc'
 ```
+
+Filter `pull_request == null` to keep only issues (the `/issues` endpoint includes PRs by default).
 
 **Why:** User asked to expand Aysar monitoring beyond Slack — issues filed against these two repos can flag work assigned to / blocking Aysar that wouldn't surface in Slack alone.
 

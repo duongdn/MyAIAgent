@@ -286,3 +286,42 @@ Reasons:
 7. **Michael (Neural)** — Apr 24 Compare-module fix not explicitly verified; recommend Carrick follow-up next week.
 8. **TuanNT Paturevision** — sheet shows 0h all week but JY+Rebecca = 8h. Still on Paturevision?
 9. **LongVV James Diamond** — sheet 0h every workday; project active on his side or all time captured under Maddy this week?
+
+---
+
+## Trello Aysar (re-run) — 08:51 (+07:00)
+
+Reusing this morning's Slack baamboozle + LeNH Aysar findings; adding the new GitHub-issue check.
+
+### Slack Baamboozle (from 08:15 scan)
+- Aysar 6 msgs in #testing — fixed session-query bug Apr 27, role-check & upgrade fix May 4. Active.
+
+### Sheets — LeNH Aysar (from 08:21 scan)
+- 4/24: 1.5h | 4/27: 0h *Nghỉ cả ngày* (OK) | 4/28: 4.17h (short, no half-day note) | 4/29: 0h (alert — universal LeNH 4/29 issue) | 5/4: —
+
+### GitHub issues (NEW per memory `feedback_aysar_github_issues.md`)
+Account: `nuscarrick`. Endpoint: `/repos/{owner}/{repo}/issues?state=open` (filtered `pull_request == null`).
+
+| Repo | Open issues | Updated in window (since 04-24 08:50) | Aysar-assigned (any age) |
+|------|------------:|---------------------------------------:|-------------------------:|
+| [baamboozle/baamboozle-web-app](https://github.com/baamboozle/baamboozle-web-app/issues) | 49 | **0** | 5 |
+| [baamboozle/bbzl-web-client](https://github.com/baamboozle/bbzl-web-client/issues) | 0 | 0 | 0 |
+
+**Aysar-assigned issues (none new in window):**
+- [#596 Upgrading the current tech stack to the latest LTS version](https://github.com/baamboozle/baamboozle-web-app/issues/596) (updated 2026-04-19)
+- [#542 Image Library: some images fail to save](https://github.com/baamboozle/baamboozle-web-app/issues/542) (updated 2026-01-25)
+- [#482 Ezoic Reward Ads](https://github.com/baamboozle/baamboozle-web-app/issues/482) (updated 2025-06-27)
+- [#160 Leverage CDN to serve static assets](https://github.com/baamboozle/baamboozle-web-app/issues/160) (updated 2023-03-19)
+- [#111 Formalize production architecture, aim for 99% availability](https://github.com/baamboozle/baamboozle-web-app/issues/111) (updated 2022-11-06)
+
+**Net: clean.** No issues updated since the window start. Aysar's 5 assigned items are long-standing tech-debt/feature work, none touched in the last 10 days.
+
+### Verdict
+- Slack: ✓ active
+- Sheets: minor LeNH 4/28 short + 4/29 0h (LeNH-level issue, not Aysar-project specific)
+- GitHub issues: ✓ no new activity
+
+**Trello "Aysar" item: ✓ remains complete** (already marked complete in this morning's run).
+
+### Unresolved
+- 5 long-standing Aysar-assigned issues on baamboozle-web-app — most haven't been touched in months/years. Worth a backlog grooming pass with Aysar?
