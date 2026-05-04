@@ -68,6 +68,7 @@
 - [feedback_ggs_nick_daily_report.md](feedback_ggs_nick_daily_report.md) — GGS Nick daily report absence is not an alert
 
 ## Feedback — Project-Specific
+- [feedback_aysar_github_issues.md](feedback_aysar_github_issues.md) — Aysar: also check baamboozle/baamboozle-web-app + baamboozle/bbzl-web-client open issues (carrick token)
 - [feedback_elena_auto_deploy.md](feedback_elena_auto_deploy.md) — Elena PRs: auto review+merge+deploy without asking
 - [feedback_github_account_mapping.md](feedback_github_account_mapping.md) — duongdn for Elena, nusken for Precognize
 - [feedback_bailey_is_paturevision.md](feedback_bailey_is_paturevision.md) — Bailey DEV1+DEV3 hours in Paturevision spreadsheet
