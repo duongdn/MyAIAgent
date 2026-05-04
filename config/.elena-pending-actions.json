@@ -126,6 +126,17 @@
       "deployed": true,
       "status_updated": false,
       "pending_action": "DONE — DP-652 merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
+    },
+    {
+      "pr": 300,
+      "branch": "SR-6921_v2",
+      "type": "sr",
+      "ticket_id": "SR-6921",
+      "merged_at": "2026-04-21",
+      "base_branch": "SR-6921-active-alerts-header-tabs-filter-and-sort-options_fe",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "NOTE — intermediate feature-branch merge (base=SR-6921-active-alerts-...), NOT merged to process-digital-plant; no deploy required. Logged 2026-05-04."
     }
   ],
   "blocked": [],
