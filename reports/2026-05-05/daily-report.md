@@ -134,3 +134,31 @@ None — all devs OK on task log Mon 04/05.
 4. **InfinityRoses Rollbar spike** — needs Fountain dev investigation (likely deploy regression).
 5. **Swift Studio Twilio** — possible account compromise; Carrick + Jeff aware.
 6. **Neural Compare-module fix** — Michael never confirmed Apr 24 fix; recommend mid-week ping.
+
+---
+
+## Sheets — 09:29 (+07:00) — refresh (resume)
+
+**Mon 04/05 (verify):**
+
+| Dev | Hours | Δ vs 09:23 | Status |
+|---|---|---|---|
+| LongVV | Maddy 8.00h + JD 0.00h = 8.00h | 0.00 | OK (unchanged) |
+| PhucVT | 8.00h | 0.00 | OK (unchanged) |
+| TuanNT | JY 4.00h + Rebecca 4.00h + PV 0.00h = 8.00h | 0.00 | OK (unchanged) |
+| VietPH | 8.00h | 0.00 | OK (unchanged) |
+| KhanhHH | 8.00h | 0.00 | OK (unchanged) |
+| LeNH | Rory 0.00h + Franc 4.00h + Aysar 3.83h + Rebecca 0.00h = 7.83h | 0.00 | OK (unchanged, slight short no leave) |
+
+**Tue 05/05 (today, partial — 09:29):**
+
+| Dev | Hours | Note |
+|---|---|---|
+| LongVV | 0.00h (Maddy 0 + JD 0) | Partial — normal at 09:29 |
+| PhucVT | 0.00h | Partial — normal |
+| TuanNT | 0.00h (JY 0 + Rebecca 0 + PV 0) | Partial — normal |
+| VietPH | 0.00h | Partial — normal |
+| KhanhHH | 0.00h | Partial — normal |
+| LeNH | 0.00h (Rory 0 + Franc 0 + Aysar 0 + Rebecca 0) | Partial — normal |
+
+**Alerts:** None. Mon 04/05 hours identical to 09:23 run (no late entries). Tue 05/05 zero hours expected at 09:29.
