@@ -51,6 +51,7 @@
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders go to `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 - [feedback_leave_day_no_report_needed.md](feedback_leave_day_no_report_needed.md) — "Nghỉ cả ngày" = leave day, not an alert
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <8h shortfall (even 0.17h) without leave is an alert, never silently OK
+- [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Sheets subagent misses logged hours; verify 0h findings directly before flagging
 
 ## Feedback — Fountain
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — MANDATORY 5-part check: Matrix plan, actuals, plan vs actual, capacity, over-estimate
