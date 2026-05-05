@@ -17,6 +17,7 @@
 ## Feedback — Monitoring & Alerts
 - [feedback_timeline_system.md](feedback_timeline_system.md) — Three timelines (daily_report/refresh/alert), MUST update at end of EVERY run
 - [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging, xoxc needs Cookie header
+- [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Never write "Matrix token expired" without running matrix-token-refresh.js first
 - [feedback_alert_classification.md](feedback_alert_classification.md) — Only our issues, checklist text is notes not alerts, staging=INFO, "Chưa"=normal
 - [feedback_alert_means_no_complete.md](feedback_alert_means_no_complete.md) — Alert found = do NOT complete Trello item
 - [feedback_missing_daily_report_is_alert.md](feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert
@@ -49,6 +50,7 @@
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders go to `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 - [feedback_leave_day_no_report_needed.md](feedback_leave_day_no_report_needed.md) — "Nghỉ cả ngày" = leave day, not an alert
+- [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <8h shortfall (even 0.17h) without leave is an alert, never silently OK
 
 ## Feedback — Fountain
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — MANDATORY 5-part check: Matrix plan, actuals, plan vs actual, capacity, over-estimate

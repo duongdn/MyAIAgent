@@ -3,34 +3,36 @@
 Active week now = **W25** (May 4 – May 10). Just-completed week = W24 (Apr 27 – May 3).
 Previous report compared against: `reports/2026-05-04/_piece-fountain.md`.
 
-> **Matrix token status: EXPIRED — auto-refresh BLOCKED.**
-> Headless re-auth not possible (browser profile `tmp/matrix-browser-profile` corrupted: Chrome `Trace/breakpoint trap` core-dumps when reused; `refresh_token` returns `invalid_grant`; SSO requires interactive login). Documented as unresolved at end. Falling back to Sheet-derived plan signals + previous report's W24 plan for Part 1.
+> **Matrix token status: RECOVERED.** Re-attempt 2026-05-05 ~10:10 — running `node scripts/matrix-token-refresh.js` succeeded automatically; new token `mat_Jd3Fn…NOH6Z5_aV4l11` written to `config/.matrix-config.json`. `whoami` returns `@duongdn:nustechnology.com`. Recovery path = step 3 (script auto-captured token via existing browser profile SSO; no manual login needed).
 
 ---
 
-## Fountain — Part 1: Matrix Plan
+## Fountain — Part 1: Matrix Plan (UPDATED — W25 plan FOUND)
 
 Room `!EWnVDAxbTGsBxPkaaI:nustechnology.com`.
 
-**Latest known plan (W24, unchanged from yesterday's report):**
-Posted by **@trinhmtt** on 2026-04-28 08:20 (+07):
-> Em gui plan tuan nay ạ
-> VuTQ 16h
-> ViTHY 16h ← (typo for ViTHT)
-> DatNT 16h
-> => QC 10,5h
+**W25 plan POSTED — latest version by @trinhmtt on 2026-05-04 11:56:52 (+07):**
+> Em update plan tuần này ạ
+> ViTHT 40h
+> VuTQ 8h
+> ThinhT 20h
+> DatNT 40h
+> => QC: 27h
 
-**W25 plan (May 4 – May 10): UNKNOWN at this time** — Matrix fetch blocked by token expiry. Yesterday's report flagged "expected by EOD Mon" — cannot confirm whether trinhmtt posted W25 plan yet.
+(Earlier same-day post 09:09:54 had VuTQ 40h; revised down to 8h in the 11:56 update. ViTHT/ThinhT/DatNT unchanged.)
 
-Inferred from W25 actuals already logged (Sheet, Day 1 of week):
-- VuTQ: 0h W25 vs 16.5h W24 → unusual (no log Mon yet)
-- ViTHT: 8h W25 (matches typical pattern)
-- ThinhT: 4h W25 (off-plan but logging — same as W24)
-- DatNT: 7.5h W25 (matches typical 16h plan)
-- HaVS: 0h (off-plan)
-- QC: PhatDLT 2h, HungPN 0.5h
+**HaVS / LamLQ / HungPN: NOT in plan** (consistent with prior weeks — they are off-plan / shared-QC).
 
-Plan compatible with last week's pattern (VuTQ + ViTHT + DatNT). **Action: manually verify W25 plan post in Element after token refresh.**
+**Comparison vs W25 actuals already logged (Day 1 of week, Mon 05-04):**
+| Dev | W25 plan | Day-1 actual | Day-1 target (plan/5) | Pace |
+|-----|---------:|-------------:|---------------------:|------|
+| ViTHT  | 40h | 8.0h  | 8.0h | ON pace |
+| VuTQ   |  8h | 0.0h  | 1.6h | behind day-1, but plan small |
+| ThinhT | 20h | 4.0h  | 4.0h | ON pace |
+| DatNT  | 40h | 7.5h  | 8.0h | ON pace |
+| QC (PhatDLT+HungPN) | 27h | 2.5h | 5.4h | slightly behind day-1 (single day) |
+
+Plan **substantially larger than W24** (was VuTQ 16+ViTHT 16+DatNT 16+QC 10.5 = 58.5h; now ViTHT 40+VuTQ 8+ThinhT 20+DatNT 40+QC 27 = **135h**). ThinhT now officially on plan (was off-plan in W24). VuTQ scaled down (16h → 8h). Big push week.
 
 ---
 
@@ -202,8 +204,8 @@ Both still Doing, ages climbing 1d/day.
 **Status: WARNING — keep unchecked** (do not mark complete)
 
 Justification (alerts found):
-1. **Matrix token expired** — W25 plan **NOT yet verified**. Cannot confirm trinhmtt posted plan today/yesterday.
-2. **VuTQ 0.0h on Tue** — only 1 of 3 on-plan devs not yet logging W25 hours. Watch.
+1. ~~**Matrix token expired** — W25 plan **NOT yet verified**.~~ **RESOLVED 2026-05-05 ~10:10:** token refreshed via `scripts/matrix-token-refresh.js`; W25 plan confirmed posted by @trinhmtt 05-04 11:56 (ViTHT 40h, VuTQ 8h, ThinhT 20h, DatNT 40h, QC 27h).
+2. **VuTQ 0.0h on Mon** — plan only 8h this week (small), so day-1 zero is less concerning than thought. Watch but not alert.
 3. **Stuck cards +5** vs 05-04 (now 52)
 4. **Hard-to-release climbing** ([clSdoRlL](https://trello.com/c/clSdoRlL) 31.8d, [WGsYqu5h](https://trello.com/c/WGsYqu5h) 20.0d) — both +1d
 5. **Customer Build-a-Box NoMethodError** still no resolution comment ~33h after kunalsheth's report
@@ -216,12 +218,13 @@ Justification (alerts found):
 - To-Do −1, flow moving rightward (QC+2, QA+1)
 - #2735 confirmed cooled
 
-**Net: WARNING — keep Fountain checklist item unchecked.** Primary blocker = Matrix token expiry preventing W25 plan verification + VuTQ no Mon log.
+**Net: WARNING — keep Fountain checklist item unchecked.** Primary remaining concerns = stuck cards aging, hard-to-release climbing, kunalsheth Build-a-Box bug ~33h without resolution, broader backlog +4.75h. Matrix plan now verified, VuTQ low-plan reduces that concern.
 
 ---
 
 ## Unresolved Questions
 
-1. **Matrix token expiry handling**: refresh script needs visible browser SSO, but `tmp/matrix-browser-profile` is corrupted (Chrome core-dumps on reuse). Need: rebuild the browser profile via interactive `node scripts/matrix-login.js` from a session with `DISPLAY` set.
-2. **Was W25 plan posted by trinhmtt?** Cannot verify until Matrix accessible.
-3. **VuTQ Mon zero log** — leave day, late entry, or did he work?
+1. ~~Matrix token expiry handling.~~ **Resolved 2026-05-05 10:10** — `scripts/matrix-token-refresh.js` succeeded; saved profile worked, no manual login required.
+2. ~~Was W25 plan posted by trinhmtt?~~ **Resolved** — yes, posted 2026-05-04 11:56 (revision of 09:09 post).
+3. **VuTQ Mon zero log** — plan is only 8h this week so 0h Mon is fine if any logging happens by Wed/Thu. Monitor.
+4. **HungPN 0.5h alone is not alert** if PhatDLT covers (PhatDLT 2h Mon ✓).

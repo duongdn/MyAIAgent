@@ -9,7 +9,7 @@
 |---|---|---|---|
 | HIGH | rick@ Rollbar | InfinityRoses production hydration spike | 10-in-5min React #418/#423/#425 + #875 "credit" + #1000 ChunkLoadError @ 05-05 08:53. Deploy regression suspected. **Rick mail item left incomplete.** |
 | MEDIUM | Slack swift | bxr_app Twilio/SMS verification spam | ~40 recharge SMS; possible Twilio compromise. Jeff acknowledged. **Rory + Rory(Swift Studio) Trello items skipped.** |
-| MEDIUM | Fountain | Matrix token expired + multiple issues | W25 plan unverified, VuTQ 0h Mon, kunalsheth Build-a-Box NoMethodError ~33h unresolved, stuck cards +5. **Fountain Trello item skipped.** |
+| MEDIUM | Fountain | Multiple issues | W25 plan posted (ViTHT 40h/VuTQ 8h/ThinhT 20h/DatNT 40h, QC 27h). VuTQ 0h Mon (8h target — tight), kunalsheth Build-a-Box NoMethodError ~33h unresolved, stuck cards +5. **Fountain Trello item skipped.** |
 | LOW | carrick@ | Twilio account-suspension forward (Rory) + Snyk + Redmine #78232 | Acknowledged |
 
 ---
@@ -70,9 +70,9 @@ Both tokens (nusvinn, nuscarrick) verified.
 | TuanNT | JY 4.00h + Rebecca 4.00h = 8.00h | OK |
 | VietPH | 8.00h Paturevision | OK |
 | KhanhHH | 8.00h Generator | OK |
-| LeNH | Franc 4.00h + Aysar 3.83h = 7.83h | OK |
+| LeNH | Franc 4.00h + Aysar 3.83h = 7.83h | ⚠️ 0.17h short, no leave — Matrix reminder sent |
 
-No 0h-no-leave alerts. No Matrix reminders required.
+LeNH Matrix reminder sent (event_id `$h2-HzhqKa27BhaCIYvq2B6cfQBaqTHhsFSazsXXX0aI`).
 
 ## 5. Scrin.io — see [_piece-scrin.md](./_piece-scrin.md)
 
@@ -82,7 +82,7 @@ No 0h-no-leave alerts. No Matrix reminders required.
 
 | Part | Status |
 |---|---|
-| 1. Matrix Plan | ⚠️ BLOCKED — token expired, headless refresh fails (browser profile corrupted). Falling back to W24 plan; W25 unverified. |
+| 1. Matrix Plan | ✓ W25 plan posted by @trinhmtt 05-04 11:56 — ViTHT 40h, VuTQ 8h, ThinhT 20h, DatNT 40h, QC 27h. (Earlier 09:09 had VuTQ 40h; revised down at 11:56.) Token refreshed via `scripts/matrix-token-refresh.js`. |
 | 2. Task Log Actuals (W25) | Day-1: VuTQ 0h, ViTHT 8h, DatNT 7.5h, ThinhT 4h, HaVS 0h, PhatDLT 2h, HungPN 0.5h. Sheet total D30 = 22h. |
 | 3. Plan vs Actual | ViTHT/DatNT ahead. **VuTQ 0h Mon — watch.** QC pace OK (PhatDLT covers HungPN). |
 | 4. Capacity & Runway | NS+IP remaining = **180.25h** (−1.0h vs yest). Broader = **260.0h** (+4.75h). Runway ~3.76 wk @ 48h/wk. Top backlog: #2775 43h, #1178 40h, #2854 34.5h. |
@@ -122,15 +122,13 @@ No 0h-no-leave alerts. No Matrix reminders required.
 
 ## 10. Reminders
 
-None — all devs OK on task log Mon 04/05.
+- LeNH: reminder sent to `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (Mon 04/05 = 7.83h, 0.17h short, no leave).
 
 ---
 
 ## Unresolved Questions
 
-1. **Matrix token refresh** — headless flow fails (refresh_token invalid_grant + browser profile corrupted). Needs interactive headed Chrome with DISPLAY to redo SSO. Blocks Fountain Part 1 verification.
-2. **W25 Fountain plan** — has trinhmtt posted yet? Cannot verify until Matrix token works.
-3. **VuTQ 0h Mon** — single data point; reason unknown (leave / sick / off-plan).
+1. **VuTQ 0h Mon** — W25 plan = 8h for the whole week (revised down from 40h); 0h Mon makes 8h tight. Reason unknown.
 4. **InfinityRoses Rollbar spike** — needs Fountain dev investigation (likely deploy regression).
 5. **Swift Studio Twilio** — possible account compromise; Carrick + Jeff aware.
 6. **Neural Compare-module fix** — Michael never confirmed Apr 24 fix; recommend mid-week ping.
@@ -190,3 +188,38 @@ None — all devs OK on task log Mon 04/05.
 | LeNH | 0.00h (Rory 0 + Franc 0 + Aysar 0 + Rebecca 0) | Partial — normal |
 
 **Alerts:** None. Mon 04/05 hours identical to 09:23/09:29 runs. Tue 05/05 0h across all devs expected at 09:49.
+
+---
+
+## Fountain Part 1 — Matrix Plan (re-attempt)
+
+**Recovery path:** Step 3 — `node scripts/matrix-token-refresh.js` succeeded automatically. Browser profile `tmp/matrix-browser-profile` was NOT corrupted as previously thought; no Singleton lock files present, no need to wipe. Script's auto-skip detected the prior run already wrote a fresh `mat_Jd3FnTPXuoQ3sDYLJUDfcTW5NOH6Z5_aV4l11` token into config (homeserver `whoami` returns `@duongdn:nustechnology.com`, HTTP 200). Step 1 (current token test) initially failed M_UNKNOWN_TOKEN against the placeholder old token; step 2 (OIDC `refresh_token` grant) returned `invalid_grant` (the config refresh_token was `mar_expired_test_token` placeholder); step 3's silent success made step 4 unnecessary.
+
+**Latest plan message in `!EWnVDAxbTGsBxPkaaI:nustechnology.com`:**
+- Sender: **@trinhmtt:nustechnology.com**
+- Timestamp: **2026-05-04 11:56:52 (+07)** (event `$6GkYPyLj3FrOshnfOTKxFm5CNhFtT0eJ9MNtRQv_B0A`)
+- Body:
+
+  > Em update plan tuần này ạ
+  > ViTHT 40h
+  > VuTQ 8h
+  > ThinhT 20h
+  > DatNT 40h
+  > => QC: 27h
+
+(Earlier same-day post 09:09:54 was the initial plan with VuTQ 40h; 11:56 update revised VuTQ down to 8h. Initial post body: `Em gửi plan tuần này ạ / ViTHT 40h / VuTQ 40h / ThinhT 20h / DatNT 40h / => QC: 30h`.)
+
+**W25 plan numbers (final, posted):**
+| Dev | W25 plan | Note |
+|-----|---------:|------|
+| ViTHT  | 40h | on plan |
+| VuTQ   |  8h | reduced from 40h in revision |
+| ThinhT | 20h | now on plan (was off-plan in W24) |
+| DatNT  | 40h | on plan |
+| HaVS   | – | not in plan |
+| QC total | 27h | PhatDLT + HungPN combined |
+| **Plan total** | **135h** dev + **27h** QC | substantially larger than W24 (~58.5h) |
+
+Day-1 (Mon 05-04) actuals already aligning: ViTHT 8.0h ✓, DatNT 7.5h ✓, ThinhT 4.0h ✓, VuTQ 0.0h (small 8h plan, less concerning), QC 2.5h.
+
+`reports/2026-05-05/_piece-fountain.md` Part 1 updated; previous BLOCKED status replaced.
