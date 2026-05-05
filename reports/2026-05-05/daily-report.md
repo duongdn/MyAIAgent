@@ -162,3 +162,31 @@ None — all devs OK on task log Mon 04/05.
 | LeNH | 0.00h (Rory 0 + Franc 0 + Aysar 0 + Rebecca 0) | Partial — normal |
 
 **Alerts:** None. Mon 04/05 hours identical to 09:23 run (no late entries). Tue 05/05 zero hours expected at 09:29.
+
+---
+
+## Sheets — 09:49 (+07:00) — refresh tick 2
+
+**Mon 04/05:** unchanged Y
+
+| Dev | Hours | Δ vs 09:29 | Status |
+|---|---|---|---|
+| LongVV | Maddy 8.00h + JD 0.00h = 8.00h | 0.00 | OK (unchanged) |
+| PhucVT | 8.00h | 0.00 | OK (unchanged) |
+| TuanNT | JY 4.00h + Rebecca 4.00h + PV 0.00h = 8.00h | 0.00 | OK (unchanged) |
+| VietPH | 8.00h | 0.00 | OK (unchanged) |
+| KhanhHH | 8.00h | 0.00 | OK (unchanged) |
+| LeNH | Rory 0.00h + Franc 4.00h + Aysar 3.83h + Rebecca 0.00h = 7.83h | 0.00 | OK (unchanged) |
+
+**Tue 05/05 (partial):**
+
+| Dev | Hours | Note |
+|---|---|---|
+| LongVV | 0.00h (Maddy 0 + JD 0) | Partial — normal at 09:49 |
+| PhucVT | 0.00h | Partial — normal |
+| TuanNT | 0.00h (JY 0 + Rebecca 0 + PV 0) | Partial — normal |
+| VietPH | 0.00h | Partial — normal |
+| KhanhHH | 0.00h | Partial — normal |
+| LeNH | 0.00h (Rory 0 + Franc 0 + Aysar 0 + Rebecca 0) | Partial — normal |
+
+**Alerts:** None. Mon 04/05 hours identical to 09:23/09:29 runs. Tue 05/05 0h across all devs expected at 09:49.
