@@ -12,24 +12,35 @@ PATTERNS=(
   'password.*=.*"[A-Za-z0-9]{8,}'
 )
 
+# Skip vendored / documentation paths — these contain example credentials, schemas, etc.
+SKIP_PATHS='^(\.claude/skills/|\.claude/agents/|\.claude/hooks/docs/|docs/memory/|reports/|plans/|node_modules/)'
+
 # Lines matching these are OK (regex patterns, encrypted files, etc.)
 ALLOW='(re\.search|startswith|regex|pattern|example|\.enc|\.gitignore|config/\.|MEMORY|memory)'
 
 found=0
-for pat in "${PATTERNS[@]}"; do
-  matches=$(git diff --cached -U0 --diff-filter=ACMR | grep -E "^\+" | grep -v "^+++" | grep -vE "$ALLOW" | grep -E "$pat" 2>/dev/null)
-  if [ -n "$matches" ]; then
-    if [ $found -eq 0 ]; then
-      echo "❌ COMMIT BLOCKED: Hardcoded secrets detected!"
-      echo ""
-      echo "Load secrets from config/*.json files instead."
-      echo ""
-    fi
-    echo "Pattern: $pat"
-    echo "$matches" | head -3
-    echo ""
-    found=1
+# Iterate per file so we can skip vendored paths
+for file in $(git diff --cached --name-only --diff-filter=ACMR); do
+  if echo "$file" | grep -qE "$SKIP_PATHS"; then
+    continue
   fi
+  diff=$(git diff --cached -U0 --diff-filter=ACMR -- "$file" | grep -E "^\+" | grep -v "^+++" | grep -vE "$ALLOW")
+  for pat in "${PATTERNS[@]}"; do
+    matches=$(echo "$diff" | grep -E "$pat" 2>/dev/null)
+    if [ -n "$matches" ]; then
+      if [ $found -eq 0 ]; then
+        echo "❌ COMMIT BLOCKED: Hardcoded secrets detected!"
+        echo ""
+        echo "Load secrets from config/*.json files instead."
+        echo ""
+      fi
+      echo "File: $file"
+      echo "Pattern: $pat"
+      echo "$matches" | head -3
+      echo ""
+      found=1
+    fi
+  done
 done
 
 if [ $found -eq 1 ]; then
