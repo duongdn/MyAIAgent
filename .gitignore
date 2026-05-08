@@ -24,6 +24,9 @@ config/daily-agent-*.json
 node_modules/
 tmp/
 
+# Claude Code hook logs (runtime, may contain sensitive prompts/tool I/O)
+.claude/hooks/.logs/
+
 # Agent intermediate reports
 plans/reports/general-purpose-*
 
