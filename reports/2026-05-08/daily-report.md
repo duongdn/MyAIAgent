@@ -159,3 +159,8 @@ Note: only one "Rory" entry on the board (in "Closely monitor") — same item co
 - TLS cert: Let's Encrypt E8, valid through 2026-06-12.
 - **Elena - WordPress SamGuard: ✓ complete** — Trello item `69fd2801920a572c5860b0f6` in `Pending` checklist of [Check progress #783](https://trello.com/c/uLt2hTnu/783-check-progress) marked complete via PUT /1/cards/{id}/checkItem/{id}?state=complete (after retry — Trello API was returning intermittent 500/504/429).
 - Net Trello tally update: Check progress #783 → **15 ✓ / 4 ⚠️** (was 14 ✓ / 5 ⚠️). Skipped now: Rory, Raymond–LegalAtoms, Rebecca–William Bills, Fountain.
+
+## Trello — Raymond LegalAtoms correction — 09:58 (+07:00)
+
+- Raymond - LegalAtoms: ✓ complete (corrected — single unanswered client ping is project-topic, not person-status alert per memory rules)
+- Check progress #783 tally now: 16 ✓ / 3 ⚠️ (skipped: Rory · Rebecca · Fountain)
