@@ -149,3 +149,13 @@ Note: only one "Rory" entry on the board (in "Closely monitor") — same item co
 8. Rory Upwork +8.33h offline — sub-contract attribution to KhoaTD or LeNH actual offline work?
 9. Bailey-VietPH +13.33h offline pattern — verify timer config or genuine offline?
 10. Scrin Authorize.net "No project" tag — fix at timer-config level?
+
+---
+
+## Trello — Elena WordPress SamGuard recheck — 09:35 (+07:00)
+
+- samguard.co: **UP** (HTTP 200, 152,696 bytes, 1.57s) — backend hang from 08:40 has cleared.
+- Headless browser ([puppeteer](https://www.samguard.co/), Chrome stable, domcontentloaded + 8s settle): **0 JS errors, 0 CSP violations, 0 securitypolicyviolation events**.
+- TLS cert: Let's Encrypt E8, valid through 2026-06-12.
+- **Elena - WordPress SamGuard: ✓ complete** — Trello item `69fd2801920a572c5860b0f6` in `Pending` checklist of [Check progress #783](https://trello.com/c/uLt2hTnu/783-check-progress) marked complete via PUT /1/cards/{id}/checkItem/{id}?state=complete (after retry — Trello API was returning intermittent 500/504/429).
+- Net Trello tally update: Check progress #783 → **15 ✓ / 4 ⚠️** (was 14 ✓ / 5 ⚠️). Skipped now: Rory, Raymond–LegalAtoms, Rebecca–William Bills, Fountain.
