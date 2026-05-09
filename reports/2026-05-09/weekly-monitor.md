@@ -284,7 +284,7 @@ DatNT 40h
 ## #3 James Diamond + Marcel — Matrix Report
 
 **Room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
-**Status:** ⚠️ **NOT YET SENT** — Matrix access_token expired (`mat_VJjbIz…`); auto-refresh script (`scripts/matrix-token-refresh.js`) failed because the saved Element profile's SSO session also expired.
+**Status:** ✅ **SENT 2026-05-09 08:21 +07** — event_id `$QDZKMdz5CGVOvPRewgPs7c_UAIoYg_DHHqLA2wTc05E`. Token refreshed via interactive `scripts/matrix-login.js` (saved Element SSO had expired; auto-refresh failed first attempt).
 
 ### Prepared message (charge/actual format, per `feedback_matrix_report_format`):
 
@@ -359,7 +359,7 @@ JSON
 
 | # | Severity | Item | Action |
 |---|----------|------|--------|
-| 1 | 🔴 | **Matrix token expired + auto-refresh failed** | Run `node scripts/matrix-login.js` interactively (SSO login) before sending JD+Marcel weekly message |
+| 1 | ✓ | **Matrix message sent** — event_id `$QDZKMdz5C…` (after interactive `matrix-login.js` re-login) | none |
 | 2 | ⚠️ | **#2869 (80h) + #2870 (40h) + #2853 (20h, 29.75h actual)** status STILL EMPTY 3+ days | Triage owner needed |
 | 3 | ⚠️ | **AnhNH2 24h pattern** — Wed/Thu half-days + Fri 0h, no leave notes | Confirm with Thuy: status / partial / leave? |
 | 4 | ⚠️ | **HaVS 4th consecutive week 0h** — removed from plan since W23 | Confirm with Trinh: leave / transferred / dropped? |
