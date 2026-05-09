@@ -132,6 +132,29 @@ def _body_text(msg):
 
 SKIP_FOLDERS = {"Drafts", "Templates", "Snoozed", "Sent", "Spam", "Trash",
                 "Junk", "Notes", "Sent Messages"}
+ATTACHMENT_DIR = os.path.join(TMP_DIR, "payslips")
+
+# Password patterns — HR uses different templates over time
+PASSWORD_PATTERNS = [
+    r"password is\s*(\d+)",
+    r"Code\s+(?:để\s+)?mở\s+file[:：]?\s*(\d+)",
+    r"Mã\s+mở[^\d]{0,20}(\d+)",
+    r"file là\s*(\d+)",
+]
+
+
+def _extract_password(body):
+    """Extract per-file password from email body (HR uses 4-7 digit numeric passwords)."""
+    for pat in PASSWORD_PATTERNS:
+        mt = re.search(pat, body or "", re.IGNORECASE)
+        if mt:
+            return mt.group(1)
+    return None
+
+
+def _months_in_subject(subject):
+    """Return all MM/YYYY tokens in subject (combined-month emails: '12/2024 & 01/2025')."""
+    return [{"mm": mm, "yy": yy} for mm, yy in re.findall(r"(\d{2})/(\d{4})", subject or "")]
 
 
 def _list_folders(M):
@@ -175,23 +198,38 @@ def fetch_payslips():
         if not ids:
             continue
         folder_counts[fname] = len(ids)
+        os.makedirs(ATTACHMENT_DIR, exist_ok=True)
         for mid in ids:
             typ, raw = M.fetch(mid, "(RFC822)")
             if typ != "OK" or not raw or not raw[0]:
                 continue
             m = email.message_from_bytes(raw[0][1])
             body = _body_text(m)
+            pwd = _extract_password(body)
+            months = _months_in_subject(_decode(m.get("Subject")))
+            atts = []
+            for part in (m.walk() if m.is_multipart() else []):
+                fn = _decode(part.get_filename() or "")
+                if not fn:
+                    continue
+                payload = part.get_payload(decode=True)
+                if not payload:
+                    atts.append({"name": fn, "saved_to": None})
+                    continue
+                tag = (months[-1]["yy"] + "-" + months[-1]["mm"]) if months else "unknown"
+                outpath = os.path.join(ATTACHMENT_DIR, f"{tag}_{fn}")
+                with open(outpath, "wb") as wf:
+                    wf.write(payload)
+                atts.append({"name": fn, "saved_to": outpath})
             msgs.append({
                 "folder": fname,
                 "uid": mid.decode(),
                 "subject": _decode(m.get("Subject")),
                 "from": _decode(m.get("From")),
                 "date": m.get("Date"),
-                "attachments": [
-                    _decode(p.get_filename())
-                    for p in (m.walk() if m.is_multipart() else [])
-                    if p.get_filename()
-                ],
+                "months": months,
+                "password": pwd,
+                "attachments": atts,
                 "body_excerpt": (body or "")[:4000],
             })
     M.logout()
