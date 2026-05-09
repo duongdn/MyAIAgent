@@ -2,7 +2,7 @@
 
 ## Sources
 - Sheet: `QT_TNCN_2025_NIK - DuongDN.xls` — BANGLUONG tab, row for **Đoàn Nguyên Dương**
-- Payslips: 12 emails for 2025 (of 52 total across all folders in `duongdn@nustechnology.com`; INBOX: 50, important: 2)
+- Payslips: **all 13 months of 2025 accounted for** (12 monthly + 13th-month bonus); 52 payslip emails total across all folders (INBOX: 50, important: 2). 01/2025 was bundled into the combined email `[HR] Payslip - 12/2024 & 01/2025`.
 - Tax rule: Vietnam PIT — OLD 7-bracket (11M personal / 4.4M dependent / 10.5% insurance default)
 
 ## Annual totals — settlement year 2025
@@ -27,7 +27,7 @@ Per-month figures were NOT extracted — attachments are password-protected .ods
 
 | Month | Folder | Attachment | Status |
 |---|---|---|---|
-| 01/2025 | — | — | **MISSING** |
+| 01/2025 | INBOX | Finance_Payslip_202501_DuongDN.ods | found in combined email `[HR] Payslip - 12/2024 & 01/2025` (16 Jan 2025); pwd `6469`; same file also contains 13/2024 sheet |
 | 02/2025 | INBOX | Finance_Payslip_202502_DuongDN.ods | found |
 | 03/2025 | INBOX | Finance_Payslip_202503_DuongDN.ods | found |
 | 04/2025 | INBOX | Finance_Payslip_202504_DuongDN.ods | found |
@@ -45,13 +45,12 @@ Per-month figures were NOT extracted — attachments are password-protected .ods
 - None at the annual level. Sheet, deductions, taxable income, and PIT all reconcile exactly with the 7-bracket law.
 
 ## Missing data
-- **Months without payslip in 2025 (any folder):** **01/2025 only** (1 of 13 months including 13th-month bonus)
-- 08/2025 + 09/2025 found in `important` folder after re-scan across all 41 selectable folders
-- **Other-year payslips found:** 2022: 10, 2023: 12, 2024: 13, 2026: 5
-- **Per-month figures unavailable** — payslip .ods attachments are password-protected; passwords are in each email body (e.g. 04/2025 = `174318`)
+- **No missing months** for 2025. All 13 payslip files present.
+- 08/2025 + 09/2025 live in the `important` folder; 01/2025 lives inside the combined email `[HR] Payslip - 12/2024 & 01/2025` (subject scanner must catch all `MM/YYYY` tokens, not just the first).
+- **Other-year payslips found:** 2022: 10, 2023: 12, 2024: 13, 2026: 5 (incl. one template-change announcement for 01/2026 with attached sample)
+- **Per-month figures unavailable** — payslip .ods attachments are password-protected; passwords are in each email body (e.g. 04/2025 = `174318`, 12/2024 = `639545`, 01/2025 = `6469`)
 
 ## Unresolved questions
-- 01/2025 payslip not in any folder — was it ever sent by HR? (12/2024 has 2 copies; 01/2026 also has 2 copies — possible HR sometimes resends a month and labels overlap.)
-- Should the skill decrypt .ods attachments (libreoffice headless or `odfpy` with the per-email password) and reconcile per-month gross / insurance / tax-withheld against the sheet annual totals?
+- Should the skill decrypt .ods attachments (libreoffice headless or `odfpy` with the per-email password) and reconcile per-month gross / insurance / tax-withheld against the sheet annual totals? Subject parsing must extract **all** `MM/YYYY` tokens (e.g. `12/2024 & 01/2025`).
 - Sheet's "Từ tháng / Đến tháng" cells are empty — confirm settlement period covers full Jan–Dec 2025.
 - Insurance 11,340,000 VND ≈ 945k/month — verify against your BHXH/BHYT/BHTN ceiling (cap base typically 36M/month → ~3.78M/month employee-side, much higher than 945k). Worth checking whether sheet captures only one insurance category.
