@@ -130,6 +130,26 @@ def _body_text(msg):
     return ""
 
 
+SKIP_FOLDERS = {"Drafts", "Templates", "Snoozed", "Sent", "Spam", "Trash",
+                "Junk", "Notes", "Sent Messages"}
+
+
+def _list_folders(M):
+    """Return list of selectable folder names, skipping system/junk folders."""
+    typ, lines = M.list()
+    out = []
+    for line in lines or []:
+        s = line.decode() if isinstance(line, bytes) else line
+        m = re.search(r'"([^"]+)"\s*$', s)
+        if not m:
+            continue
+        name = m.group(1)
+        if name in SKIP_FOLDERS:
+            continue
+        out.append(name)
+    return out
+
+
 def fetch_payslips():
     with open(EMAIL_CFG) as f:
         cfg = json.load(f)
@@ -144,31 +164,45 @@ def fetch_payslips():
     except imaplib.IMAP4.error as e:
         return {"error": "auth_fail", "detail": str(e)[:200]}
 
-    M.select(acct.get("folder", "INBOX"), readonly=True)
-    typ, data = M.search(None, "SUBJECT", f'"{PAYSLIP_QUERY}"')
-    ids = data[0].split() if data and data[0] else []
     msgs = []
-    for mid in ids:
-        typ, raw = M.fetch(mid, "(RFC822)")
-        if typ != "OK" or not raw or not raw[0]:
+    folder_counts = {}
+    for fname in _list_folders(M):
+        typ, _ = M.select(f'"{fname}"', readonly=True)
+        if typ != "OK":
             continue
-        m = email.message_from_bytes(raw[0][1])
-        body = _body_text(m)
-        msgs.append({
-            "uid": mid.decode(),
-            "subject": _decode(m.get("Subject")),
-            "from": _decode(m.get("From")),
-            "date": m.get("Date"),
-            "attachments": [
-                _decode(p.get_filename())
-                for p in (m.walk() if m.is_multipart() else [])
-                if p.get_filename()
-            ],
-            "body_excerpt": (body or "")[:4000],
-        })
+        typ, data = M.search(None, "SUBJECT", f'"{PAYSLIP_QUERY}"')
+        ids = data[0].split() if data and data[0] else []
+        if not ids:
+            continue
+        folder_counts[fname] = len(ids)
+        for mid in ids:
+            typ, raw = M.fetch(mid, "(RFC822)")
+            if typ != "OK" or not raw or not raw[0]:
+                continue
+            m = email.message_from_bytes(raw[0][1])
+            body = _body_text(m)
+            msgs.append({
+                "folder": fname,
+                "uid": mid.decode(),
+                "subject": _decode(m.get("Subject")),
+                "from": _decode(m.get("From")),
+                "date": m.get("Date"),
+                "attachments": [
+                    _decode(p.get_filename())
+                    for p in (m.walk() if m.is_multipart() else [])
+                    if p.get_filename()
+                ],
+                "body_excerpt": (body or "")[:4000],
+            })
     M.logout()
     msgs.sort(key=lambda x: x.get("date") or "", reverse=True)
-    return {"account": EMAIL_USER, "query": PAYSLIP_QUERY, "count": len(msgs), "messages": msgs}
+    return {
+        "account": EMAIL_USER,
+        "query": PAYSLIP_QUERY,
+        "count": len(msgs),
+        "folder_counts": folder_counts,
+        "messages": msgs,
+    }
 
 
 def main():

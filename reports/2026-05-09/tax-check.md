@@ -2,7 +2,7 @@
 
 ## Sources
 - Sheet: `QT_TNCN_2025_NIK - DuongDN.xls` — BANGLUONG tab, row for **Đoàn Nguyên Dương**
-- Payslips: 10 emails for 2025 (of 50 total in `duongdn@nustechnology.com`)
+- Payslips: 12 emails for 2025 (of 52 total across all folders in `duongdn@nustechnology.com`; INBOX: 50, important: 2)
 - Tax rule: Vietnam PIT — OLD 7-bracket (11M personal / 4.4M dependent / 10.5% insurance default)
 
 ## Annual totals — settlement year 2025
@@ -25,32 +25,33 @@
 ## Per-month payslips (2025)
 Per-month figures were NOT extracted — attachments are password-protected .ods files (passwords are embedded in each email body, e.g. `174318` for 04/2025). The fetch script only reads email body text.
 
-| Month | Email date | Attachment | Status |
+| Month | Folder | Attachment | Status |
 |---|---|---|---|
 | 01/2025 | — | — | **MISSING** |
-| 02/2025 | 2025-03-04 | Finance_Payslip_202502_DuongDN.ods | found |
-| 03/2025 | 2025-04-02 | Finance_Payslip_202503_DuongDN.ods | found |
-| 04/2025 | 2025-04-30 | Finance_Payslip_202504_DuongDN.ods | found |
-| 05/2025 | 2025-05-30 | Finance_Payslip_202505_DuongDN.ods | found |
-| 06/2025 | 2025-07-03 | Finance_Payslip_202506_DuongDN.ods | found |
-| 07/2025 | 2025-08-01 | Finance_Payslip_202507_DuongDN.ods | found |
-| 08/2025 | — | — | **MISSING** |
-| 09/2025 | — | — | **MISSING** |
-| 10/2025 | 2025-11-03 | Finance_Payslip_202510_DuongDN.ods | found |
-| 11/2025 | 2025-12-01 | Finance_Payslip_202511_DuongDN.ods | found |
-| 12/2025 | 2026-01-01 | Finance_Payslip_202512_DuongDN.ods | found |
-| 13/2025 (bonus) | 2026-02-05 | Finance_Payslip_202513_DuongDN.ods | found |
+| 02/2025 | INBOX | Finance_Payslip_202502_DuongDN.ods | found |
+| 03/2025 | INBOX | Finance_Payslip_202503_DuongDN.ods | found |
+| 04/2025 | INBOX | Finance_Payslip_202504_DuongDN.ods | found |
+| 05/2025 | INBOX | Finance_Payslip_202505_DuongDN.ods | found |
+| 06/2025 | INBOX | Finance_Payslip_202506_DuongDN.ods | found |
+| 07/2025 | INBOX | Finance_Payslip_202507_DuongDN.ods | found |
+| 08/2025 | **important** | Finance_Payslip_202508_DuongDN.ods | found (re-scan) |
+| 09/2025 | **important** | Finance_Payslip_202509_DuongDN.ods | found (re-scan) |
+| 10/2025 | INBOX | Finance_Payslip_202510_DuongDN.ods | found |
+| 11/2025 | INBOX | Finance_Payslip_202511_DuongDN.ods | found |
+| 12/2025 | INBOX | Finance_Payslip_202512_DuongDN.ods | found |
+| 13/2025 (bonus) | INBOX | Finance_Payslip_202513_DuongDN.ods | found |
 
 ## Discrepancies
 - None at the annual level. Sheet, deductions, taxable income, and PIT all reconcile exactly with the 7-bracket law.
 
 ## Missing data
-- **Months without payslip in 2025 inbox:** 01, 08, 09 (3 of 12 months)
+- **Months without payslip in 2025 (any folder):** **01/2025 only** (1 of 13 months including 13th-month bonus)
+- 08/2025 + 09/2025 found in `important` folder after re-scan across all 41 selectable folders
 - **Other-year payslips found:** 2022: 10, 2023: 12, 2024: 13, 2026: 5
-- **Per-month figures unavailable** — payslip .ods attachments are password-protected; passwords vary per email (e.g. 04/2025 = `174318`)
+- **Per-month figures unavailable** — payslip .ods attachments are password-protected; passwords are in each email body (e.g. 04/2025 = `174318`)
 
 ## Unresolved questions
-- Were the missing 01/08/09 payslip emails for 2025 archived to another folder, or were they never delivered? Worth searching `[Gmail]/All Mail` or trash.
-- Should the skill be extended to decrypt .ods attachments (requires python-pylzma or libreoffice headless) and reconcile per-month gross/insurance/tax-withheld against the sheet annual totals?
-- Sheet's "Từ tháng" / "Đến tháng" cells are empty — confirm settlement period covers full Jan–Dec 2025.
-- Insurance 11,340,000 VND looks low for a year (≈ 945k/month). Verify against your salary cap (BHXH/BHYT/BHTN ceiling ~36M/month base).
+- 01/2025 payslip not in any folder — was it ever sent by HR? (12/2024 has 2 copies; 01/2026 also has 2 copies — possible HR sometimes resends a month and labels overlap.)
+- Should the skill decrypt .ods attachments (libreoffice headless or `odfpy` with the per-email password) and reconcile per-month gross / insurance / tax-withheld against the sheet annual totals?
+- Sheet's "Từ tháng / Đến tháng" cells are empty — confirm settlement period covers full Jan–Dec 2025.
+- Insurance 11,340,000 VND ≈ 945k/month — verify against your BHXH/BHYT/BHTN ceiling (cap base typically 36M/month → ~3.78M/month employee-side, much higher than 945k). Worth checking whether sheet captures only one insurance category.
