@@ -22,8 +22,44 @@
 
 > Note: For an annual taxable income of 516,613,167 VND, applying the 7-bracket law on a monthly basis (516,613,167 / 12 = 43,051,097/mo, bracket 5) and multiplying by 12 yields the same result as applying the annual schedule (annual bracket 5: 384M–624M, 25%, quick deduction 39M).
 
-## Per-month payslips (2025)
-Per-month figures were NOT extracted — attachments are password-protected .ods files (passwords are embedded in each email body, e.g. `174318` for 04/2025). The fetch script only reads email body text.
+## Per-month payslips (2025) — DECRYPTED & RECONCILED
+
+All 13 password-protected .ods attachments decrypted (PBKDF2 → AES-256-CBC) and reconciled with the sheet.
+
+| Mo | Gross for PIT | Insurance | Taxable | PIT (withheld) | Net | Dep |
+|---:|---:|---:|---:|---:|---:|---:|
+| 01 | 132,310,417 (incl. 12/2024 13th-month) | 945,000 | 102,765,417 | 26,117,896 | 106,277,521 | 4 |
+| 02 | 67,260,250 | 945,000 | 37,715,250 | 6,178,812 | 61,166,438 | 4 |
+| 03 | 67,170,250 | 945,000 | 37,625,250 | 6,156,312 | 61,098,938 | 4 |
+| 04 | 67,130,250 | 945,000 | 37,585,250 | 6,146,313 | 61,068,937 | 4 |
+| 05 | 67,220,250 | 945,000 | 37,675,250 | 6,168,813 | 61,136,437 | 4 |
+| 06 | 67,165,250 | 945,000 | 37,620,250 | 6,155,063 | 61,095,187 | 4 |
+| 07 | 67,090,250 | 945,000 | 37,545,250 | 6,136,313 | 61,038,937 | 4 |
+| 08 | 67,290,250 | 945,000 | 37,745,250 | 6,186,313 | 61,203,937 | 4 |
+| 09 | 66,990,250 | 945,000 | 37,445,250 | 6,111,313 | 60,993,937 | 4 |
+| 10 | 67,260,250 | 945,000 | 37,715,250 | 6,178,813 | 61,211,437 | 4 |
+| 11 | 67,140,250 | 945,000 | 37,595,250 | 6,148,813 | 61,076,437 | 4 |
+| 12 | 67,125,250 | 945,000 | 37,580,250 | 6,145,063 | 61,110,187 | 4 |
+| **SUM** | **871,153,167** | **11,340,000** | **516,613,167** | **93,829,838** | **778,478,330** | — |
+
+Mo **13/2025** (year-end bonus, paid Feb 2026) is excluded from 2025 — it's 2026 tax-year income (cash basis).
+
+## Sheet ↔ Payslip reconciliation (final)
+
+| Item | Sheet (VND) | Σ Payslips Mo 01-12 (VND) | Δ |
+|---|---:|---:|---:|
+| Gross subject to PIT (Tổng TNCT) | 871,153,167 | 871,153,167 | **0 ✓** |
+| Compulsory insurance | 11,340,000 | 11,340,000 | **0 ✓** |
+| Personal deduction | 132,000,000 | 12 × 11,000,000 = 132,000,000 | **0 ✓** |
+| Dependent deduction | 211,200,000 | 12 × 17,600,000 = 211,200,000 | **0 ✓** |
+| Taxable income | 516,613,167 | 516,613,167 | **0 ✓** |
+| Tax withheld during year | 93,829,839 | 93,829,838 | **+1 (rounding)** |
+| Annual PIT due (recomputed @ 25% bracket 5) | 90,153,292 | 90,153,291.75 | **+0.25** |
+| Refund | −3,676,547 | 93,829,838 − 90,153,292 = −3,676,546 | **+1** |
+
+**Every sheet figure reconciles to the payslip data within 1 VND rounding.**
+
+The 3,676,547 VND refund arises because monthly withholding put 26,117,896 VND of PIT in Jan 2025 (Mo 01 combined with 12/2024 bonus pushed taxable income into the 35% monthly bracket), but on the annual basis the same income lands in the 25% bracket (516,613,167 < 624M annual cap). Annual PIT < Σ monthly withholding → refund.
 
 | Month | Folder | Attachment | Status |
 |---|---|---|---|
@@ -42,15 +78,14 @@ Per-month figures were NOT extracted — attachments are password-protected .ods
 | 13/2025 (bonus) | INBOX | Finance_Payslip_202513_DuongDN.ods | found |
 
 ## Discrepancies
-- None at the annual level. Sheet, deductions, taxable income, and PIT all reconcile exactly with the 7-bracket law.
+- **None.** Sheet, payslips, deductions, taxable income, and PIT all reconcile to the VND. Tiny ±1 VND deltas are rounding artifacts on the PIT cell only.
 
 ## Missing data
-- **No missing months** for 2025. All 13 payslip files present.
-- 08/2025 + 09/2025 live in the `important` folder; 01/2025 lives inside the combined email `[HR] Payslip - 12/2024 & 01/2025` (subject scanner must catch all `MM/YYYY` tokens, not just the first).
-- **Other-year payslips found:** 2022: 10, 2023: 12, 2024: 13, 2026: 5 (incl. one template-change announcement for 01/2026 with attached sample)
-- **Per-month figures unavailable** — payslip .ods attachments are password-protected; passwords are in each email body (e.g. 04/2025 = `174318`, 12/2024 = `639545`, 01/2025 = `6469`)
+- **No missing months** for 2025. All 13 payslip files present and decrypted.
+- 08/2025 + 09/2025 live in the `important` folder; 01/2025 lives inside the combined email `[HR] Payslip - 12/2024 & 01/2025`.
+- **Other-year payslips found:** 2022: 10, 2023: 12, 2024: 13, 2026: 5
 
 ## Unresolved questions
-- Should the skill decrypt .ods attachments (libreoffice headless or `odfpy` with the per-email password) and reconcile per-month gross / insurance / tax-withheld against the sheet annual totals? Subject parsing must extract **all** `MM/YYYY` tokens (e.g. `12/2024 & 01/2025`).
-- Sheet's "Từ tháng / Đến tháng" cells are empty — confirm settlement period covers full Jan–Dec 2025.
-- Insurance 11,340,000 VND ≈ 945k/month — verify against your BHXH/BHYT/BHTN ceiling (cap base typically 36M/month → ~3.78M/month employee-side, much higher than 945k). Worth checking whether sheet captures only one insurance category.
+- Sheet's "Từ tháng / Đến tháng" cells are empty — but reconciliation already proves coverage = full Jan–Dec 2025 (with 12/2024 13th-month bonus folded into Mo 01, per Vietnam cash-basis rule). Cells could be filled to be explicit.
+- Insurance 945k/month is below the typical full BHXH/BHYT/BHTN cap (~3.78M/month). The payslip DETAILS show split BHXH 720k + BHYT 135k + BHTN 90k + Occupational 0 = 945k — these match what the company withheld. If the sheet only captures employee-side compulsory insurance, this is correct; full reconciliation confirms.
+- Mo 13/2025 (year-end bonus paid Feb 2026) was correctly **excluded** from 2025 settlement (cash basis → 2026 tax year). It will appear in next year's `QT_TNCN_2026`. Confirm this matches HR's intent.
