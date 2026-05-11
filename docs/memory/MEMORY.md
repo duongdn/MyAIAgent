@@ -26,6 +26,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_monday_friday_timestamp.md](feedback_monday_friday_timestamp.md) — Monday daily report starts from last Friday 8AM
 - [feedback_imap_slack_timestamp_gotchas.md](feedback_imap_slack_timestamp_gotchas.md) — IMAP SINCE uses server dates, Slack `after:` excludes named date
 - [feedback_no_duplicate_sends.md](feedback_no_duplicate_sends.md) — Never re-send while background task is pending
+- [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond their explicit task scope
 - [feedback_timeline_system.md](feedback_timeline_system.md) — Three timelines (daily_report/refresh/alert), MUST update at end of EVERY run
 
 ## Alert Classification (when to flag)
