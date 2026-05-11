@@ -6,11 +6,11 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
 
 | Project | Internal | External | Dev Hours | Note |
 |---|---|---|---|---|
-| Maddy - Xtreme Soft Solutions | 0 | 4 | 32.00 | Anoma raised 4 errors on data update flow |
-| Aysar Khalid - Baamboozle | 0 | 3 | 47.66 | Aysar + Jamie (client dev) raised proration/invoice issues |
-| James Diamond - Portfolio | 3 | 9 | 136.00 | Map filter, Harvest, File_Manager bugs + AirAgri webapp & flutter client requests |
-| Bailey Joey - Speedventory | 3 | 0 | 162.50 | PrestaShop 9 invoice/UI + GLS console issues; no Bailey-side Slack bugs this week |
-| Marcel Fuessinger - Tokenlite | 0 | 0 | 7.00 | Maintenance only |
+| Maddy - Xtreme Soft Solutions | 0 | 4 | 16.00 | Anoma raised 4 errors on data update flow |
+| Aysar Khalid - Baamboozle | 0 | 3 | 23.83 | Aysar + Jamie (client dev) raised proration/invoice issues |
+| James Diamond - Portfolio | 3 | 9 | 68.00 | Map filter, Harvest, File_Manager bugs + AirAgri webapp & flutter client requests |
+| Bailey Joey - Speedventory | 3 | 0 | 81.25 | PrestaShop 9 invoice/UI + GLS console issues; no Bailey-side Slack bugs this week |
+| Marcel Fuessinger - Tokenlite | 0 | 0 | 3.50 | Maintenance only |
 | Neural Contract - Neural Contract - Test Job | 0 | 0 | 0.00 | No activity this week |
 | Raymond Huang - LegalAtoms | 0 | 0 | 0.00 | LegalAtoms team filed many GitHub issues, but no Nick-direct bug reports |
 | Andrew Taraba - Portfolio | 0 | 1 | 0.00 | Animeworld DM: mockup vs final UI mismatch feedback |
@@ -26,7 +26,7 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
   - @anomawasala: "another issue. can u fix this?"
   - @anomawasala: "Still the error is there. selected all in 1st page and try to update"
   - @anomawasala: "Can u quickly check this error? cannot recognize the reason"
-- **Dev hours (Summary W5, LongVV):** 32.00h
+- **Dev hours (Summary W5 col D / W5!H2):** 16.00h (LongVV)
 
 ### 2. Aysar Khalid - Baamboozle
 - **Internal:** 0 (no Redmine project tracked)
@@ -34,7 +34,7 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
   - @aysark.pro #engineering: comment on issue 540 dependency
   - @skjamie25 #testing: proration invoice generation wrong (35% discount case)
   - @skjamie25 #testing: 2 new GitHub issues + Issue533 status
-- **Dev hours (Summary W23, all employees):** 47.66h (LeNH, KhanhHH primary)
+- **Dev hours (Summary W23 col D / W23!H2):** 23.83h (KhanhHH 20.00 + LeNH 3.83)
 
 ### 3. James Diamond - Portfolio
 - **Internal (Redmine `james-bonsey-jaden` tracker_id=1):** 3
@@ -46,7 +46,7 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
     - bellatric02: Validity period can't be removed; container size hardcode; rectifier task auto-create flow
     - .jdiamond: "fixed to link be at corporate level"; "huge issue" escalation
   - **#airagri-flutter (4 from .jdiamond):** Form builder, map fix on mobile, "cannot have this not working", green issue
-- **Dev hours (Summary W24, full team):** 136.00h
+- **Dev hours (Summary W24 col D / W24!H2):** 68.00h (full team)
 
 ### 4. Bailey Joey - Speedventory
 - **Internal (Redmine `bailey-paturevision` tracker_id=1):** 3
@@ -55,23 +55,23 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
   - #78444 [Tested on Staging] [Console] [GLS] services list incomplete (2026-05-04)
 - **External (Slack `Xtreme Soft Solutions` filtered Bailey-related from clients):** 0
   - Note: Bailey/Speedventory work tracked through Redmine + internal Slack DMs; no client bug-keyword messages from madhuraka/anomawasala specifically about Bailey/Speedventory this week.
-- **Dev hours (Summary W26, full team):** 162.50h
+- **Dev hours (Summary W26 col D / W26!H2):** 81.25h (full team)
 
 ### 5. Marcel Fuessinger - Tokenlite
 - **Internal:** 0
 - **External:** 0
-- **Dev hours (Summary W8, DuongDN):** 7.00h
+- **Dev hours (Summary W8 col D / W8!H2):** 3.50h (DuongDN; daily: Mon 1.50 + Wed 2.00)
 
 ### 6. Neural Contract - Test Job
 - **Internal:** 0
 - **External:** 0
-- **Dev hours (Summary W19, TuanNT/NamTV/DuongDN):** 0.00h
+- **Dev hours (Summary W19 col D / W19!H2):** 0.00h
 
 ### 7. Raymond Huang - LegalAtoms
 - **Internal:** 0
 - **External (Slack `LegalAtoms` filtered Nick mentions only):** 0
   - Many bug reports filed in #general from LegalAtoms internal devs (sobianadeem, hashimzahid, charsalanazhar, hamidsalamatali, umairraza, etc.) referencing GitHub issues 19610–19628, but **none from Nick directly** and none of the bug-keyword msgs mention "nick" in this week range.
-- **Dev hours (Summary W24, ThongVV/DuongDN):** 0.00h
+- **Dev hours (Summary W24 col D / W24!H2):** 0.00h
 
 ### 8. Andrew Taraba - Portfolio
 - **Internal:** 0
@@ -79,13 +79,13 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
   - **Discord nuscarrick — Bizurk guild:** 0 client bug-keyword messages
   - **Discord nuscarrick — DM with `animeworld` (per memory):** 1 from animeworld
     - 2026-05-04: "if you compare the mockup to your version there's too many differences, colors, icons, (for example wrong back arrow icon) etc..."
-- **Dev hours (Summary W19, TuanNT/DuongDN):** 0.00h
+- **Dev hours (Summary W19 col D / W19!H2):** 0.00h
 
 ---
 
 ## Methodology
 
-- **Hours:** Read `Summary!A4:BZ200` from each spreadsheet, found row where col B contained "May 4, 2026", summed all `Actual` columns (D onwards). All 8 sheets had a matching row — no fallback needed.
+- **Hours (CORRECTED):** Read `Summary!A4:D200`, found row where col B contained "May 4, 2026", returned **col D** (the row-level grand total `Actual`). Cross-validated against `W{n}!H2` ("Total Hours") — all 8 sheets matched exactly. Note: per-employee Actual cols start at col I (idx 8) in 4-col groups (Actual / Self-rated / Charged / Rate); summing col D + per-emp cols would double-count.
 - **Redmine:** `GET /issues.json?project_id={proj}&tracker_id=1&created_on=><2026-05-04|2026-05-10&status_id=*` with API key.
 - **Slack:** `search.messages` paged for `after:2026-05-03 before:2026-05-11`, then client-side filter for ts in [Mon 00:00 UTC, next Mon 00:00 UTC) and bug keyword (bug/issue/error/broken/problem/fix/crash/can't/wrong/fail/stuck/not working). Sender categorized as client (per workspace whitelist), team (NUS staff), or other.
 - **Discord:** Enumerated `/guilds/{id}/channels`, fetched messages with `before={MAX_snowflake}` paging back to MIN_snowflake (Mon 2026-05-04 00:00 +07 → Mon 2026-05-11 00:00 +07). Per memory, monitored AirAgri + Bizurk only (NOT HOMIEAPP). For Andrew, also fetched DM with username `animeworld`.
@@ -108,5 +108,6 @@ Generated: 2026-05-11 (Mon) | Reporting Mon→Sun
 ---
 
 **Status:** DONE_WITH_CONCERNS
-**Summary:** All 8 projects' hours fetched from Summary sheets (week row "May 4, 2026" matched in all). Redmine internal bugs counted via tracker_id=1 created_on range. Slack/Discord external bugs filtered by client-username + bug keywords + week timestamp range. Discord guild→channels properly enumerated (initial 404 was due to passing guild IDs as channel IDs).
+**Summary:** Hours CORRECTED — original report doubled values by summing col D (already the grand total) + per-employee Actual cols. New values match `W{n}!H2` "Total Hours". Redmine internal bugs counted via tracker_id=1 created_on range. Slack/Discord external bugs filtered by client-username + bug keywords + week timestamp range. Discord guild→channels properly enumerated (initial 404 was due to passing guild IDs as channel IDs).
 **Concerns:** (1) Baamboozle skjamie25 client-vs-team classification; (2) LegalAtoms Nick-only filter excluded all 13 #general bug msgs from LegalAtoms internal devs — confirm interpretation; (3) Bailey Slack external = 0 because Xtreme workspace has no Bailey-tagged client bug msgs this week (Bailey work tracked via Redmine).
+**Correction history:** Initial report had Marcel = 7.00h. User flagged 3.3h (actually 3.50h). Root cause: double-counting col D + per-emp cols. All 8 hours updated.

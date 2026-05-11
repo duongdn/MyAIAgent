@@ -68,6 +68,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **Devs no longer have static project assignments — scan ALL sheets, aggregate by Owner col G**
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
 - [feedback_tasklog_summary_sheet.md](feedback_tasklog_summary_sheet.md) — Use Summary sheet for weekly hours, not individual W-sheets
+- [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is already grand total; never also sum per-employee Actual cols (caused 2x bug 2026-05-11)
 - [feedback_parttime_official_filter.md](feedback_parttime_official_filter.md) — Only "Task dự án" as official, exclude "Part-time" rows
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day (Paturevision write)
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log (workday, no leave)
