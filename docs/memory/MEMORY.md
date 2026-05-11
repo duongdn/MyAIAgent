@@ -103,6 +103,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_upwork_match_not_alert.md](feedback_upwork_match_not_alert.md) — Upwork matching task log = OK; week-over-week drops are not alerts
 - [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept
 - [feedback_neural_silence_not_alert.md](feedback_neural_silence_not_alert.md) — Neural Contract long silence ≠ alert; only urgent unanswered client msgs block Trello
+- [feedback_trello_per_client_gates_on_lead_dev.md](feedback_trello_per_client_gates_on_lead_dev.md) — Per-client item gates on lead dev (Nick for John Yi, Elliott for Generator); supporting-dev issues go in report not Trello
 
 ---
 
