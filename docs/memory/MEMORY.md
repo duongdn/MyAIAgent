@@ -97,6 +97,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 ## Upwork & Time Tracking
 - [feedback_upwork_in_daily_report.md](feedback_upwork_in_daily_report.md) — Must be included in daily report
 - [feedback_upwork_tasklog_by_taskid.md](feedback_upwork_tasklog_by_taskid.md) — Compare by specific task ID, not all rows by person
+- [feedback_upwork_filter_by_task_id_strict.md](feedback_upwork_filter_by_task_id_strict.md) — Paturevision col E = Task ID; Bailey contract = "[Maintenance] Update PHP version on Prestashop"; VietPH 21.25h matched Upwork 21.50h once filtered
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Sum ALL hours (official + part-time) to match Upwork
 - [feedback_upwork_match_not_alert.md](feedback_upwork_match_not_alert.md) — Upwork matching task log = OK; week-over-week drops are not alerts
 - [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept
