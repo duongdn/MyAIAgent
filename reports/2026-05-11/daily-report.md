@@ -14,8 +14,8 @@
 | MED | Email/Carrick | [Socalautowraps] Rollbar #35 jQuery missing 10occ/5min @ 2026-05-11 01:12 UTC | Confirm asset pipeline / CDN regression. Trello "Blake" UNCHECKED |
 | MED | Scrin.io | TuanNT John Yi log 6.00h vs Scrin tracked 1h 23m on Fri (over-inflated 4h 37m) | Trello "John Yi - Amazing Meds" UNCHECKED. Confirm with TuanNT |
 | MED | Sheets | KhanhHH Fri aggregate 7.83h vs 8h target (Generator 0 + Aysar 7.83h, no leave) | Matrix reminder SENT to `!rwLbvLBnrRAYMaOPaD` (event $vSU-IWdvg2EZR2g34zXAxOLruFLhElk41At6_8H36G4). Trello "Elliott" UNCHECKED |
-| MED | Upwork | Bailey-VietPH last week Upwork 21.5h vs task log 40h (-18.5h gap) | Trello "Bailey" UNCHECKED. Confirm tracker time with VietPH |
-| MED | Upwork | Rory (LeNH) last week Upwork 16.67h vs task log 31.67h (-15h gap) | Investigate w/ LeNH |
+| ~~MED~~ resolved | Upwork | ~~Bailey-VietPH -18.5h~~ → with Task ID filter on `[Maintenance] Update PHP version on Prestashop`: VietPH 21.25h vs Upwork 21.50h = **-0.25h ✓ match**. Trello Bailey re-completed. |
+| ~~MED~~ resolved | Upwork | ~~Rory (LeNH) -15h~~ → with shared-tracker logic: LeNH-only = 16.67h vs Upwork 16.67h = **exact match**. KhoaTD 15h was a different contract not on this tracker. |
 | MED | Upwork | Neural Contract silent 25 days (since Apr 16) | Trello "Neural Contract" UNCHECKED. Confirm contract status |
 | MED | Fountain | W26 plan NOT yet posted (08:22, expected by 10:00 from @trinhmtt); NS+IP scope grew +27.75h over weekend (+3 new tasks #2883/#2884/#2885 = 56h); clSdoRlL Fountain States 37.7d in Doing | Trello "Fountain" UNCHECKED — keep until W26 plan posted |
 | INFO | Email/Nick | No mail from John Yi in window | Confirm if expected |
