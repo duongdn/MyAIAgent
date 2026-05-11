@@ -33,6 +33,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_missing_daily_report_is_alert.md](feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert
 - [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions ≠ alerts, don't block Trello
 - [feedback_csp_violations_are_real_errors.md](feedback_csp_violations_are_real_errors.md) — samguard.co CSP violations are real errors
+- [feedback_blake_rollbar_not_person_alert.md](feedback_blake_rollbar_not_person_alert.md) — Client website Rollbar errors don't block Blake/per-client Trello items
 
 ## Tokens, Auth & Decryption
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Run decrypt-secrets.sh before reading config
@@ -98,6 +99,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Sum ALL hours (official + part-time) to match Upwork
 - [feedback_upwork_match_not_alert.md](feedback_upwork_match_not_alert.md) — Upwork matching task log = OK; week-over-week drops are not alerts
 - [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept
+- [feedback_neural_silence_not_alert.md](feedback_neural_silence_not_alert.md) — Neural Contract long silence ≠ alert; only urgent unanswered client msgs block Trello
 
 ---
 
