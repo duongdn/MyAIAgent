@@ -15,6 +15,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [project_daily_report_workflow.md](project_daily_report_workflow.md) — Full daily report workflow: data sources, Trello mappings, configs
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond from W23 (2026-04-20)
+- [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
 
 ---
 
