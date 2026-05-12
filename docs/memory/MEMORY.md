@@ -37,6 +37,9 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_csp_violations_are_real_errors.md](feedback_csp_violations_are_real_errors.md) — samguard.co CSP violations are real errors
 - [feedback_blake_rollbar_not_person_alert.md](feedback_blake_rollbar_not_person_alert.md) — Client website Rollbar errors don't block Blake/per-client Trello items
 
+## Scrin.io
+- [feedback_scrin_isyesterday_monday_bug.md](feedback_scrin_isyesterday_monday_bug.md) — scrin-fetch-yesterday.js on Mon returns SUNDAY, not Friday. Never label its output as Friday Scrin data.
+
 ## Tokens, Auth & Decryption
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Run decrypt-secrets.sh before reading config
 - [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging, xoxc needs Cookie header
@@ -117,6 +120,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_trinhmtt_not_qc.md](feedback_trinhmtt_not_qc.md) — TrinhMTT not QC, exclude from Fountain QC alerts
 - [feedback_vutq_small_plan_normal.md](feedback_vutq_small_plan_normal.md) — VuTQ small W{n} plan: once weekly total met, subsequent 0h days are normal
 - [feedback_fountain_dev_0h_no_speculation.md](feedback_fountain_dev_0h_no_speculation.md) — Don't speculate on individual Fountain dev 0h days as unresolved questions
+- [feedback_fountain_monday_plan_timing.md](feedback_fountain_monday_plan_timing.md) — @trinhmtt posts W{n} plan Mon 08:30-09:30 +07. Wait until 09:30 before flagging "plan absent".
 
 ---
 
