@@ -10,7 +10,7 @@
 
 - **3 task-log alerts (Mon 11/05):** LongVV 0h, LeNH 0h-logged-but-Rory-tracker-5h30m, KhanhHH 5h (-3h). Reminders sent.
 - **Trello Check Mail:** all 6 items ✓ ([card](https://trello.com/c/6a0274f34f6b6fd991077d20)).
-- **Trello Check Progress:** 16/18 ✓; **Maddy** skipped (LongVV 0h), **Rory** skipped (LeNH Rory tracker 5h30 unlogged) ([card](https://trello.com/c/6a026dcfbb12ca47499bfc8e)).
+- **Trello Check Progress:** 17/18 ✓; **Rory** skipped (LeNH Rory tracker 5h30 unlogged) ([card](https://trello.com/c/6a026dcfbb12ca47499bfc8e)). Maddy ✓ (LongVV 0h is supporting-dev, item gates on Carrick/Kai/Luis named leads — all active).
 - **Elena queue empty**, samguard.co clean, Precognize no nusken PRs.
 - **Fountain W26 plan posted on time** (Mon 09:03 @trinhmtt, 146h total); day 1 actual 30h with 4 plan devs on pace; capacity tightened −16.5h.
 - **Neural Contract:** 17.9d client silence — normal per memory, no pending question.
@@ -214,12 +214,11 @@ CR (Col J) unchanged: 43.5h total (#2735 +30h, #2837 +10.5h, #2815 +3h).
 ### [Check mail](https://trello.com/c/6a0274f34f6b6fd991077d20) — all 6 ✓
 DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 
-### [Check progress](https://trello.com/c/6a026dcfbb12ca47499bfc8e) — 16/18 ✓
+### [Check progress](https://trello.com/c/6a026dcfbb12ca47499bfc8e) — 17/18 ✓
 **Skipped (alerts):**
-- ⚠️ **Maddy - Carrick/Kai/Luis** — LongVV 0h Mon, reminder sent
-- ⚠️ **Rory** — LeNH 0h logged but Rory Upwork tracker 5h30m Mon (tracked-but-unlogged), reminder sent
+- ⚠️ **Rory** — LeNH 0h logged but Rory Upwork tracker 5h30m Mon (tracked-but-unlogged). LeNH IS the named dev for this item → blocks. Reminder sent.
 
-**Completed:** John Yi ✓ | James Diamond ✓ | Aysar ✓ | Franc ✓ | Elliott (KhanhHH 5h shortfall = reminder + ⚠️ not block per gate-on-lead-dev) ✓ | MPFC ✓ | Marcel ✓ | Elena SamGuard ✓ | Raymond ✓ | Neural ✓ | Bailey ✓ | Andrew Taraba ✓ | Rebecca ✓ | Colin ✓ | Fountain ✓ | Elena WordPress ✓
+**Completed:** Maddy (Carrick/Kai/Luis active — LongVV 0h is supporting-dev, reminder sent + ⚠️ note, not a Maddy gate per per-client-lead-dev rule) ✓ | John Yi ✓ | James Diamond ✓ | Aysar ✓ | Franc ✓ | Elliott (KhanhHH 5h shortfall = reminder + ⚠️ not block) ✓ | MPFC ✓ | Marcel ✓ | Elena SamGuard ✓ | Raymond ✓ | Neural ✓ | Bailey ✓ | Andrew Taraba ✓ | Rebecca ✓ | Colin ✓ | Fountain ✓ | Elena WordPress ✓
 
 ---
 
