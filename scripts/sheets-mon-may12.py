@@ -8,9 +8,9 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
 SVC = "/home/nus/projects/My-AI-Agent/config/daily-agent-490610-7eb7985b33e3.json"
-TARGET_DATE = date(2026, 5, 12)  # Monday
+TARGET_DATE = date(2026, 5, 12)  # Tuesday (2026-05-12 = Tue)
 TARGET_DAY_TOKEN = "12/05/26"
-DAY_PREFIX = "Mon,"
+DAY_PREFIX = "Tue,"
 
 SHEETS = {
     "Maddy": "1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I",
@@ -18,7 +18,7 @@ SHEETS = {
     "JohnYi": "1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ",
     "Rebecca": "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4",
     "Paturevision": "1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg",
-    "Generator": "1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM",
+    "Generator": "1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM",  # KhanhHH
     "Rory": "1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8",
     "Franc": "1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ",
     "Aysar": "1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8",
@@ -57,16 +57,16 @@ def list_tab_names(sheet_id):
 
 
 def find_current_week_tab_by_summary(sheet_id, target_monday="May 11, 2026"):
-    """Find week tab by looking for target Monday in Summary tab."""
+    """Find week tab by looking for target Monday (week start) in Summary tab."""
     rows = fetch(sheet_id, "'Summary'!A4:D80")
     for r in rows:
-        if len(r) < 3:
+        if len(r) < 2:
             continue
         start_str = str(r[1])
-        # Check various date formats for May 11, 2026
+        # Check various date formats for May 11, 2026 (week start Mon)
         if ("May 11, 2026" in start_str or "May 11 2026" in start_str or
                 "5/11/2026" in start_str or "11/05/2026" in start_str or
-                "11/05/26" in start_str):
+                "11/05/26" in start_str or "11 May 2026" in start_str):
             return r[0] if r else None
     return None
 
@@ -237,14 +237,10 @@ def main():
 
     for project, sid in SHEETS.items():
         print(f"\n=== {project} ===", flush=True)
-        if project == "Aysar":
+        # All sheets: week of Mon 11/05/26 → target W-tab starts "Mon, 11/05/26"
+        wk = find_current_week_tab_by_summary(sid)
+        if not wk:
             wk = find_week_tab_by_first_date(sid, target_token="11/05/26")
-            if not wk:
-                wk = find_week_tab_by_first_date(sid, target_token="10/05/26")
-            if not wk:
-                wk = find_week_tab_by_first_date(sid, target_token="12/05/26")
-        else:
-            wk = find_week_tab_for_sheet(sid, project)
         if not wk:
             print(f"  Current-week tab not found")
             week_tab_used[project] = None
