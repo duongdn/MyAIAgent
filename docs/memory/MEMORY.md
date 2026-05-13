@@ -16,6 +16,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond from W23 (2026-04-20)
 - [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
+- [project_vutq_moved_to_bailey.md](project_vutq_moved_to_bailey.md) — VuTQ moved to Bailey (Paturevision) as of 2026-05-13; 0h in Fountain is expected
 
 ---
 

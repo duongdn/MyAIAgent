@@ -113,7 +113,7 @@ Neural Contract: last activity 2026-04-29, no urgent msgs. Trello: Neural Contra
 |-----|---------------------:|-------|
 | ViTHT | 16.0h | Mon #2735/#2872/#2854 + Tue #2884/#2854 |
 | ThinhT | 4.0h | Mon #2871 3h + #2837 1h; Tue pending |
-| VuTQ | 0.0h | No Mon or Tue hours logged |
+| VuTQ | 0.0h | Moved to Bailey — not on Fountain. 0h expected. |
 | HaVS | 0.0h | No hours |
 | PhatDLT (QC) | 2.0h | Mon #2735 2h; Tue pending |
 | HungPN (QC) | 0.0h | No hours |
