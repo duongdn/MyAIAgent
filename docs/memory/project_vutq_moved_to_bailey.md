@@ -12,5 +12,5 @@ VuTQ has moved from Fountain to Bailey (Paturevision). Confirmed 2026-05-13.
 **How to apply:**
 - Do NOT alert or flag VuTQ's 0h in Fountain sheet — they are no longer on Fountain
 - VuTQ hours should be checked in the Paturevision/Bailey spreadsheet instead
-- Fountain W26 plan correctly excludes VuTQ
-- When checking Bailey hours, include VuTQ alongside VietPH
+- When checking Bailey/Paturevision sheet: if VuTQ has 0h on a workday with no leave note → send Matrix reminder to `!SHdFKwrYpRhWJBtiBv:nustechnology.com`
+- Room URL: https://chat.nustechnology.com/#/room/!SHdFKwrYpRhWJBtiBv:nustechnology.com
