@@ -81,10 +81,10 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 
 ## Per-Developer Rules
 ### LongVV
-- [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — 16h Maddy + 24h Xtreme/other; new template since 2026-04-06
+- [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; 0h/day is NOT an alert — check weekly total only
 - [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond ONLY (NOT Rebecca)
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
-- [feedback_longvv_partial_week_may.md](feedback_longvv_partial_week_may.md) — **W25 ONLY (expires 2026-05-10):** sub-8h is expected, no alert
+- [feedback_longvv_partial_week_may.md](feedback_longvv_partial_week_may.md) — W25 ONLY (expired 2026-05-10): sub-8h expected, no alert
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca (Q-T cols)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day

@@ -71,7 +71,7 @@ Check date: **Tue 2026-05-12** | Week: W6 (May 11–17)
 
 | Developer | Tue 05/12 | Week so far | Status |
 |-----------|-----------|-------------|--------|
-| LongVV | 0h (Maddy 0h + JD 0h) | 8h (Mon Maddy only) | ⚠️ ALERT |
+| LongVV | 0h (Maddy 0h + JD 0h) | 8h (Mon Maddy only) | ✅ OK (part-time, 16h/wk target) |
 | PhucVT | 8h | 16h | ✅ OK |
 | TuanNT | 8h (Rebecca 8h; JohnYi 0h) | 16h | ✅ OK |
 | VietPH | 8h | 16h | ✅ OK |
@@ -203,7 +203,7 @@ Trello: Elena - SamGuard ✓, Elena - WordPress SamGuard ✓
 
 | Developer | Room | Status |
 |-----------|------|--------|
-| LongVV | !mYZBGNoLFVpMVIJtPu | ✓ sent — 0h Tue 05/12 (Maddy + JD both empty) |
+| LongVV | !mYZBGNoLFVpMVIJtPu | ⚠️ sent in error — LongVV is part-time (16h/wk), 0h/day is not an alert |
 | LeNH | !OIrgPraJWrcDTnRVLQ | ✓ sent — 0h Mon 05/11 + Tue 05/12 all sheets (2 days) |
 | KhanhHH | !rwLbvLBnrRAYMaOPaD | ✓ sent — 1.17h Tue 05/12 vs 8h target |
 
@@ -216,7 +216,7 @@ Trello: Elena - SamGuard ✓, Elena - WordPress SamGuard ✓
 1. **Fountain production Rollbar** — [FirstProject] #878 TypeError `amount` undefined x3; #848 React error; #937 can't find variable. FountainGifts #266 Stripe min charge x2.
 2. **Elliott/Generator Redmine #78065** — Booking reminder fires immediately within window (internal staging).
 3. **LeNH — 0h Mon 05/11 + Tue 05/12** across ALL sheets (Rory/Franc/Aysar/Rebecca). 2 days, no leave note. Reminder sent.
-4. **LongVV — 0h Tue 05/12**. Reminder sent.
+4. ~~LongVV — 0h Tue 05/12~~ — NOT an alert. LongVV part-time (16h/wk), 0h/day is normal. Reminder sent in error.
 5. **KhanhHH — 1.17h Tue 05/12** (Generator H=0). Reminder sent.
 6. ~~Fountain W26 Matrix plan missing~~ — ✅ plan retrieved (VuTQ not in W26 plan, 0h expected)
 8. **#2702 Accessibility +212.5% over**, no CR, still active.
