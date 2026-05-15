@@ -32,6 +32,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 
 ## Alert Classification (when to flag)
 - [feedback_alert_classification.md](feedback_alert_classification.md) — Only our issues, checklist text is notes not alerts, staging=INFO, "Chưa"=normal
+- [feedback_rebecca_chua_not_trello_block.md](feedback_rebecca_chua_not_trello_block.md) — "Chưa" in Rebecca col P NEVER blocks Trello completion — it's default template state
 - [feedback_alert_means_no_complete.md](feedback_alert_means_no_complete.md) — Alert found = do NOT complete Trello item
 - [feedback_missing_daily_report_is_alert.md](feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert
 - [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions ≠ alerts, don't block Trello
