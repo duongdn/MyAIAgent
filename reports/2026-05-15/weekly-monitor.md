@@ -291,7 +291,7 @@ Also noted in room this week:
 ## #3 James Diamond + Marcel — Matrix Report
 
 **Room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
-**Status:** ⏸ **PREPARED — NOT YET SENT** (user requested prepare-only for review)
+**Status:** ✅ **SENT 2026-05-15 20:02 +07** — event_id `$bQQiUIGpx4ZDwsvbLsqp4EE0kQZnPFIBTn3CmYvhvTk`. Token refreshed via `matrix-token-refresh.js` (first attempt 401, refresh then 200).
 
 ### Prepared message (charge/actual format, per `feedback_matrix_report_format`):
 
@@ -404,7 +404,7 @@ JSON
 | 16 | ℹ️ | **Upwork vinn + david2 sessions expired** still | Re-login if Bailey Upwork tracking matters |
 | 17 | ℹ️ | **TuanNT load shifted heavily to Rebecca** (10.5h W25 → 33h W26) | Just a workload note |
 | 18 | ✓ | **VietPH, ViTHT, ThinhT, TuanNT, KhanhHH** all hit 40h | none |
-| 19 | ⚠️ | **Matrix James Diamond + Marcel msg PREPARED, NOT SENT** | User to review prepared format; LongVV charge format decision needed |
+| 19 | ✓ | **Matrix James Diamond + Marcel msg SENT** — event_id `$bQQiUIGpx4ZD…` after token refresh | none |
 
 ---
 
