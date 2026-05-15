@@ -22,6 +22,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 
 ## Workflow & Reporting Style
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
+- [feedback_customer_facing_messages.md](feedback_customer_facing_messages.md) — NEVER expose internal tool/auth failures in customer Slack channels
 - [feedback_always_include_links.md](feedback_always_include_links.md) — Include clickable URLs for Trello cards, PRs, tickets
 - [feedback_ondemand_updates.md](feedback_ondemand_updates.md) — On-demand = separate timestamped file, don't overwrite daily
 - [feedback_monday_friday_timestamp.md](feedback_monday_friday_timestamp.md) — Monday daily report starts from last Friday 8AM
