@@ -28,7 +28,7 @@ Rules:
 - **James Diamond Web is a 40h/week TEAM contract**, not per-dev. The Web section charge is ALWAYS 40h (the contract), regardless of which dev(s) deliver it.
 - **Web section MUST include LongVV** alongside PhucVT from W23 (2026-04-20) onward. Web total = PhucVT + LongVV (+ any other backfill dev).
 - PhucVT plan = 40h/week (when full week). AnhNH2 has **no fixed plan** — use actual as both values (e.g. 20h/20h).
-- **LongVV on James Diamond = BACKFILL role**, not a fixed 24h/week target. When PhucVT takes paid leave, LongVV (or another dev) covers the missing hours so the team still delivers the 40h contract. The previous "LongVV 24h/week" interpretation was wrong.
+- **LongVV on James Diamond = FLEXIBLE bucket**, not a fixed 24h/week target. LongVV has only 16h/wk static (Maddy); his 24h flex is used wherever needed (most commonly JD when PhucVT/AnhNH2 take paid leave). When delivering JD hours, charge = actual flex hours used. The previous "LongVV 24h/week target" interpretation was wrong.
 - **Paid leave handling — backfill rule:**
   1. PhucVT line: charge = plan − leave hours, actual = on-duty hours. E.g. PhucVT plan 40h, 1 paid day off → `PhucVT: 32h/32h`.
   2. Backfill dev (LongVV) line: charge = actual = backfill hours. E.g. LongVV covered 1 day → `LongVV: 8h/8h`.

@@ -12,7 +12,7 @@
 
 | Employee | Project(s) | Week Total | Target | Status | Notes |
 |----------|-----------|-----------:|-------:|--------|-------|
-| LongVV | Maddy NEW (W6) + James Diamond (W25 backfill) | **24h** | 16h Maddy + flexible backfill | ✓ | Maddy 16h ✓ + JD 8h backfill (covered PhucVT's Wed paid leave). LongVV is BACKFILL on JD, not on a fixed 24h JD plan. JIRA = 16h LIFM2 matches Maddy. |
+| LongVV | Maddy NEW (W6) + JD (W25 flex backfill) | **24h** | 16h Maddy static | ✓ | Maddy 16h ✓ + 8h flex on JD (Wed backfill for PhucVT leave). LongVV = 16h Maddy static + 24h flexible bucket (used as needed). JIRA = 16h LIFM2 matches Maddy. |
 | PhucVT | James Diamond (W25) | **32h** | 40h | ✓ | 4×8h + Wed "Nghỉ cả ngày" (paid leave). 1 day off. |
 | AnhNH2 | James Diamond (W25) | **20h** | — | ⚠️ | Mon 4 / Tue 4 / Wed 4 / Thu 8 / Fri 0. No leave notes. Trending DOWN: W25 24h → W26 20h. |
 | KhanhHH | Generator (W40) + Aysar (W24) | **40h** | 40h | ✓ | Gen 20h + Aysar 20h. Mon 8.34 / Tue 8 / Wed 8 / Thu 8 / Fri 7.66 |
@@ -62,7 +62,7 @@
 
 **Maddy sheet 16h | JIRA 16h | Δ 0h ✓** (within tolerance)
 
-> ✓ **LongVV W26 = 24h aggregate** (Maddy 16h ✓ + JD 8h backfill). Per user clarification: James Diamond Web is a 40h/week TEAM contract; when PhucVT took Wed paid leave, LongVV covered with 8h. LongVV is **not** on a fixed 24h JD plan — he's the flexible backfill. Tue+Fri 0h on JD is expected (no backfill needed). 16h Maddy commitment fully met.
+> ✓ **LongVV W26 = 24h** (16h Maddy static ✓ + 8h flex on JD as Wed backfill for PhucVT leave). Per user clarification: LongVV has **only 16h static commitment** (Maddy) + up to **24h flexible** bucket used as needed. James Diamond Web is a 40h/week team contract; when PhucVT took Wed paid leave, LongVV's flex covered. 0h days on any project are normal — flex is on-demand only.
 
 ---
 
@@ -408,7 +408,7 @@ JSON
 
 | # | Severity | Item | Action |
 |---|----------|------|--------|
-| 1 | ✓ | **LongVV W26 = 16h Maddy ✓ + 8h JD backfill** (covered PhucVT's Wed leave). Not a 24h JD plan — flexible backfill role per user clarification | none |
+| 1 | ✓ | **LongVV W26 = 16h Maddy static ✓ + 8h JD flex backfill** (covered PhucVT Wed leave). Only 16h is contracted/static; 24h flex bucket is on-demand. | none |
 | 2 | ⚠️ | **AnhNH2 trending down** — 24h→24h→24h→24h→**20h** over 5 weeks; no leave notes for half-days/Fri-zeros | Same as W25: ask Thuy. Pattern persists/worsens. |
 | 3 | ⚠️ | **HaVS 5th consecutive 0h Fountain week**, 0.5h Paturevision Mon only | Confirm with Trinh / project lead: leave / transferred / contract end? |
 | 4 | ⚠️ | **LamLQ -10.75h vs plan (9.25h / 20h)** — on plan but only 46% delivered | Ask Trinh: blocked / capacity issue / planning miss? |
@@ -439,5 +439,5 @@ JSON
 5. **Upwork vinn + david2** — should weekly Bailey Upwork tracking continue, or is it OK to skip these sessions until further notice?
 
 **Resolved this turn:**
-- LongVV W26 = 16h Maddy + 8h JD backfill (covers PhucVT's leave); not a 24h JD plan.
-- Matrix message format: Web = team 40h contract; PhucVT charge = plan − leave; backfill dev = actual/actual. Memory updated.
+- LongVV = 16h Maddy STATIC + 24h FLEXIBLE (used on-demand: backfill, gap coverage). W26 = 16h Maddy + 8h JD flex for PhucVT's leave.
+- Matrix message format: Web = team 40h contract; PhucVT charge = plan − leave; flex dev = actual/actual. Memories `feedback_longvv_hour_split` + `feedback_matrix_report_format` rewritten.
