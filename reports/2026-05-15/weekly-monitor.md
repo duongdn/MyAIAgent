@@ -12,7 +12,7 @@
 
 | Employee | Project(s) | Week Total | Target | Status | Notes |
 |----------|-----------|-----------:|-------:|--------|-------|
-| LongVV | Maddy NEW (W6) + James Diamond (W25) | **24h** | 40h (?) | ⚠️ | Maddy 16h + JD 8h. User flagged "something wrong" W26 — Mon 8 Maddy / Tue 0 / Wed 8 JD / Thu 8 Maddy / Fri 0. JIRA = 16h LIFM2 matches Maddy. |
+| LongVV | Maddy NEW (W6) + James Diamond (W25 backfill) | **24h** | 16h Maddy + flexible backfill | ✓ | Maddy 16h ✓ + JD 8h backfill (covered PhucVT's Wed paid leave). LongVV is BACKFILL on JD, not on a fixed 24h JD plan. JIRA = 16h LIFM2 matches Maddy. |
 | PhucVT | James Diamond (W25) | **32h** | 40h | ✓ | 4×8h + Wed "Nghỉ cả ngày" (paid leave). 1 day off. |
 | AnhNH2 | James Diamond (W25) | **20h** | — | ⚠️ | Mon 4 / Tue 4 / Wed 4 / Thu 8 / Fri 0. No leave notes. Trending DOWN: W25 24h → W26 20h. |
 | KhanhHH | Generator (W40) + Aysar (W24) | **40h** | 40h | ✓ | Gen 20h + Aysar 20h. Mon 8.34 / Tue 8 / Wed 8 / Thu 8 / Fri 7.66 |
@@ -62,7 +62,7 @@
 
 **Maddy sheet 16h | JIRA 16h | Δ 0h ✓** (within tolerance)
 
-> ⚠️ **LongVV W26 = 24h aggregate** (Maddy 16h ✓ + JD 8h). Tue + Fri are 0h with no leave note. User flagged "something wrong" — likely continuing partial-schedule, sick, or personal. **No Matrix reminder sent** pending clarification. JD plan/contract is 24h/wk; he hit only 8h (1 day) there.
+> ✓ **LongVV W26 = 24h aggregate** (Maddy 16h ✓ + JD 8h backfill). Per user clarification: James Diamond Web is a 40h/week TEAM contract; when PhucVT took Wed paid leave, LongVV covered with 8h. LongVV is **not** on a fixed 24h JD plan — he's the flexible backfill. Tue+Fri 0h on JD is expected (no backfill needed). 16h Maddy commitment fully met.
 
 ---
 
@@ -291,7 +291,29 @@ Also noted in room this week:
 ## #3 James Diamond + Marcel — Matrix Report
 
 **Room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
-**Status:** ✅ **SENT 2026-05-15 20:02 +07** — event_id `$bQQiUIGpx4ZDwsvbLsqp4EE0kQZnPFIBTn3CmYvhvTk`. Token refreshed via `matrix-token-refresh.js` (first attempt 401, refresh then 200).
+**Status:** ✅ **SENT 2026-05-15 20:02 +07** — event_id `$bQQiUIGpx4ZDwsvbLsqp4EE0kQZnPFIBTn3CmYvhvTk`. **User corrected format afterward and re-updated.** Token had to be refreshed mid-send (first attempt 401).
+
+**Correct format (per user correction 2026-05-15, re-sent by user manually):**
+
+```
+Report week 11/05
+
+James Diamond
+
+Web: 40h/40h (off 1 day dùng paid leave)
+PhucVT: 32h/32h (off 1 day dùng paid leave)
+LongVV: 8h/8h
+
+Mobile: 20h/20h
+AnhNH2: 20h/20h
+
+---
+
+Marcel
+DuongDN: 2h 10m
+```
+
+**Rule learned:** James Diamond Web = 40h/week **TEAM contract** (not per-dev). When a dev is off, another dev backfills OR paid leave is used — total Web charge stays at 40h. LongVV's 8h JD this week was BACKFILL for PhucVT's Wed leave, not a separate 24h target. PhucVT line: charge = plan − leave (32h). LongVV line: charge = actual backfill (8h). Web total: charge = 40h contract, actual = 32+8 = 40h. Memory `feedback_matrix_report_format` rewritten with backfill rule.
 
 ### Prepared message (charge/actual format, per `feedback_matrix_report_format`):
 
@@ -386,7 +408,7 @@ JSON
 
 | # | Severity | Item | Action |
 |---|----------|------|--------|
-| 1 | ⚠️ | **LongVV W26 24h aggregate** — user flagged "something wrong". Maddy 16h ✓ but JD only 8h vs 24h target. Tue+Fri 0h. | Confirm with user/LongVV — partial week again? Personal? Plan adjustment? |
+| 1 | ✓ | **LongVV W26 = 16h Maddy ✓ + 8h JD backfill** (covered PhucVT's Wed leave). Not a 24h JD plan — flexible backfill role per user clarification | none |
 | 2 | ⚠️ | **AnhNH2 trending down** — 24h→24h→24h→24h→**20h** over 5 weeks; no leave notes for half-days/Fri-zeros | Same as W25: ask Thuy. Pattern persists/worsens. |
 | 3 | ⚠️ | **HaVS 5th consecutive 0h Fountain week**, 0.5h Paturevision Mon only | Confirm with Trinh / project lead: leave / transferred / contract end? |
 | 4 | ⚠️ | **LamLQ -10.75h vs plan (9.25h / 20h)** — on plan but only 46% delivered | Ask Trinh: blocked / capacity issue / planning miss? |
@@ -410,10 +432,12 @@ JSON
 
 ## Unresolved Questions
 
-1. **LongVV W26 status** — user flagged "something wrong" but didn't specify. Is he on a partial schedule again, sick, personal leave, or contract change? The previous W25 partial-schedule memory expired 2026-05-10 and was not re-confirmed.
-2. **Matrix message — LongVV format** — when LongVV doesn't hit 24h JD target, should the line be `LongVV: 8h/8h` (actual/actual) or `LongVV: 24h/8h` (plan/actual)? Memory says actual/actual when below target. Need confirmation before sending.
-3. **AnhNH2 / HaVS / LamLQ / VuTQ assignment status** — multiple project moves and shortfalls suggest a planning shift. Confirmation needed from Thuy / Trinh / Kunal.
-4. **#2853** unowned 5+ weeks, over budget, still growing — who owns the decision? Kunal or Trinh?
-5. **#2854 cart/checkout** — picked up +42.25h actual + 20h CR this week but status still "Not Started". Status should be updated to In-progress (>50%) given burn rate.
-6. **HungPN Mon "Nghỉ cả ngày"** — confirmed paid leave or unpaid? No note in sheet besides label.
-7. **Upwork vinn + david2** — should weekly Bailey Upwork tracking continue, or is it OK to skip these sessions until further notice?
+1. **AnhNH2 / HaVS / LamLQ / VuTQ assignment status** — multiple project moves and shortfalls suggest a planning shift. Confirmation needed from Thuy / Trinh / Kunal.
+2. **#2853** unowned 5+ weeks, over budget, still growing — who owns the decision? Kunal or Trinh?
+3. **#2854 cart/checkout** — picked up +42.25h actual + 20h CR this week but status still "Not Started". Status should be updated to In-progress (>50%) given burn rate.
+4. **HungPN Mon "Nghỉ cả ngày"** — confirmed paid leave or unpaid? No note in sheet besides label.
+5. **Upwork vinn + david2** — should weekly Bailey Upwork tracking continue, or is it OK to skip these sessions until further notice?
+
+**Resolved this turn:**
+- LongVV W26 = 16h Maddy + 8h JD backfill (covers PhucVT's leave); not a 24h JD plan.
+- Matrix message format: Web = team 40h contract; PhucVT charge = plan − leave; backfill dev = actual/actual. Memory updated.
