@@ -137,10 +137,30 @@
       "deployed": false,
       "status_updated": false,
       "pending_action": "NOTE — intermediate feature-branch merge (base=SR-6921-active-alerts-...), NOT merged to process-digital-plant; no deploy required. Logged 2026-05-04."
+    },
+    {
+      "pr": 301,
+      "branch": "DP-666-create-and-manage-autoscan",
+      "type": "dp",
+      "ticket_id": "DP-666",
+      "merged_at": "2026-05-15",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DONE — DP-666 merged (squash) + deployed to MayBanServer on 2026-05-15 08:40 +07, build OK (21s), announced to Matrix Elena-Digital-Plant room. Redmine 403 (not a Redmine ticket)."
     }
   ],
   "blocked": [],
   "pending_deploy": [],
+  "last_run": {
+    "date": "2026-05-15",
+    "time": "08:42 +07:00",
+    "prs_checked": 1,
+    "prs_merged": 1,
+    "deploy_status": "OK",
+    "matrix_announced": true,
+    "wordpress_status": "clean",
+    "precognize_nusken_prs": 0
+  },
   "deployed_no_status_update": [
     {
       "pr": 288,
