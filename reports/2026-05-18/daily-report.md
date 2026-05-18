@@ -115,3 +115,38 @@ JS errors: 0. Warnings only (Tailwind CDN, WebGL fallback, HubSpot stub) — non
 No alerts.
 
 Trello "Elena - SamGuard": ✓ complete
+
+---
+
+## Slack — 08:38 (+07:00)
+
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| baamboozle | 12 | Aysar deploy hold (May 17 17:57) → cleared (23:29). GitHub CI active. Resolved. |
+| rdc | 20 | All automated (#user-access-logs, #rpi-reboot-logs). No Franc/dmetiner human msgs. System OK. |
+| swift | 7 | iOS BXR App Store review → **released May 18 01:35**. Carrick/Rory UAE work approved. Staff access question pending. |
+| xtreme | 1 | No Kai msgs since May 15 ("back Monday"). No daily report yet at 08:38 (early). Kai 16h/wk — daily report NOT required. |
+| samguard | 2 | HubSpot MQL leads only. No Elena/DP human activity. |
+| ggs | 0 | No Nick #maintenance post since May 14. Silence = normal (per memory, GGS Nick absence ≠ alert). |
+| amazingmeds | 0 | Nick idle since May 13 (waiting for John Yi tasks). Client-side dependency — not a Nick status alert. |
+| generator | 7 | Elliott/Violet: batch 2 release may slip to May 18. Carrick tagged for MR #349 (pen-test). Coordination ongoing. |
+| legalatoms | 1 | Broadcast only (no Nick content). |
+| mpfc | 0 | Dormant. |
+| williambills | 0 | Quiet since Apr 23. Normal. |
+| equanimity | 0 | Quiet since May 14. Marcel adhoc — normal. |
+| aigile | 1 | Colin active May 17 (replied to Hendrix). |
+
+**Alerts:**
+- ℹ️ [INFO] generator: Batch 2 release may slip to May 18; Carrick tagged for MR #349 review (pen-test)
+- ℹ️ [INFO] swift: iOS BXR released ✓; UAE + staff access pending Carrick response
+- ℹ️ [INFO] amazingmeds: Nick waiting for John Yi tasks since May 13 (client-side, not a status block)
+- ℹ️ [INFO] baamboozle: Deploy hold/clear resolved May 17
+
+**Trello decisions (slack-only pieces):**
+- raymond (LegalAtoms): ✓ complete (no Nick-specific issues)
+- marcel (Equanimity): ✓ complete (adhoc, silence normal)
+- colin (Aigile): ✓ complete (active)
+- mpfc: ✓ complete (dormant = adhoc normal)
+- andrew (Bizurk): ✓ (already from Discord)
+- ggs/bailey piece: ✓ (Nick absence = normal per memory) — needs sheets vietph to finalize
+- All others: pending sheets results
