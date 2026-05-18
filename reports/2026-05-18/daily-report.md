@@ -20,7 +20,7 @@
 | ⚠️ MED | **LeNH W26 shortfall** — Wed -1.67h, Thu -0.50h, Fri -0.50h | Reminder sent ✓ |
 | ⚠️ MED | **Fountain #2735 still growing** — ~136.50h vs 120h Est+CR (+14%) | Monitor |
 | ⚠️ MED | **Fountain confirmation email bug** — multiple customers (May 12+15) | Rick/team |
-| ℹ️ INFO | Fountain W27 Matrix plan not posted (08:53 check) | Re-check after 09:30 |
+| ✅ OK | Fountain W27 Matrix plan posted 09:19 by @trinhmtt | ViTHT 40h / ThinhT 20h / DatNT 40h / LamLQ 20h / QC 26h |
 | ℹ️ INFO | Fountain runway +4.4 wks (new task volume added) | Normal expansion |
 | ℹ️ INFO | Generator batch 2 may slip to May 18 | Elliott/Violet monitoring |
 | ℹ️ INFO | Swift iOS BXR released ✓; UAE work + staff access pending | Carrick to respond |
@@ -186,9 +186,10 @@ Trello "Elena - SamGuard": ✓ complete
 ## Fountain — 08:34 (+07:00)
 
 ### Part 1 — Matrix Plan
-W27 plan: **not yet posted as of 08:34 +07** (expected 08:30–09:30 Mon). Re-checking at 09:30 before flagging as alert.
+W27 plan posted **09:19 +07** by @trinhmtt:
+ViTHT: 40h | ThinhT: 20h | DatNT: 40h | LamLQ: 20h | QC: 26h
 
-Last posted: W26 plan (2026-05-11 09:03 +07) by @trinhmtt: ViTHT 40h | ThinhT 20h | DatNT 40h | LamLQ 20h | QC 26h
+*(Not posted at 08:34 initial check — within expected 08:30–09:30 Mon window. Confirmed posted at 09:19.)*
 
 ### Part 2 — Task Log Actuals W26 (May 11–17)
 
@@ -233,9 +234,9 @@ Delta vs 2026-05-13: **+4.4 wks** (+392.75h — new tasks #2854 80h, #2869 80h, 
 - ℹ️ HaVS W26: 0h — not on W26 plan, expected
 - ⚠️ [MED] #2735 still growing: ~136.50h vs 120h Est+CR (+14%)
 - ℹ️ [INFO] Runway +4.4 wks (new task volume added to pipeline)
-- ⏳ W27 plan: re-check after 09:30
+- ✅ W27 plan posted 09:19 by @trinhmtt: ViTHT 40h / ThinhT 20h / DatNT 40h / LamLQ 20h / QC 26h
 
-Trello "Fountain": ⚠️ SKIP (LamLQ + HaVS issues; also W27 plan pending)
+Trello "Fountain": ⚠️ SKIP (LamLQ W26 -10.75h shortfall unresolved)
 
 ---
 
@@ -350,11 +351,19 @@ All 6 items ✓ complete: DuongDn, Carrick, Nick, Rick, Kai, Ken
 
 ---
 
-## Fountain Matrix W27 Plan — Re-checked 08:53 (+07:00)
+## Fountain Matrix W27 Plan — Re-checked 09:33 (+07:00)
 
-Plan still not posted as of 08:53 +07. Expected up to 09:30. No alert until then.
-Dev activity visible: LamLQ requesting task (08:41), TrinhMTT assigning bugs/cards (08:42-08:44).
-**Action:** Re-check after 09:30 via `/daily-report fountain matrix`.
+**W27 plan posted by @trinhmtt at 09:19 +07:**
+
+| Dev | W27 Plan |
+|-----|----------|
+| ViTHT | 40h |
+| ThinhT | 20h |
+| DatNT | 40h |
+| LamLQ | 20h |
+| **QC total** | **26h** |
+
+Note: HaVS not in W27 plan (same as W26). VuTQ not in plan (moved to Bailey). Plan identical to W26 allocations.
 
 ---
 
@@ -362,7 +371,7 @@ Dev activity visible: LamLQ requesting task (08:41), TrinhMTT assigning bugs/car
 
 1. **LamLQ W26 -10.75h**: Was there leave or a project split? Needs explanation from team.
 2. ~~HaVS W26 0h~~ — not on W26 plan, resolved (not an alert).
-3. **Fountain W27 Matrix plan**: Not posted by 08:53. Re-check at 09:30+ via `/daily-report fountain matrix`.
+3. ~~**Fountain W27 Matrix plan**~~ — posted 09:19 by @trinhmtt. ✅ Resolved.
 4. **VuTQ leave request**: Submitted 07:55 (duongdn inbox) — needs approval/acknowledgement.
 5. **carrick GitLab PAT**: Expires ≤7 days — rotate before it expires.
 6. **Trello daily cards**: Created manually today (Butler automation didn't run before 08:54). Monitor if Butler creates duplicates later.
