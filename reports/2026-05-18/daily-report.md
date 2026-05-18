@@ -66,3 +66,28 @@ Trello Check Mail: pending (will complete after all pieces done)
 
 Trello "James Diamond - Vinn task": ⚠️ SKIP (Vinn + Jeff Fri report missing)
 Trello "Andrew Taraba": ✓ complete (silence = normal)
+
+---
+
+## Upwork — 08:33 (+07:00)
+
+Current week (May 18–24) = 0h across all contracts (Monday, week just started — expected).
+
+| Contract | This Wk | Last Wk (May 11–17) | Status |
+|----------|---------|---------------------|--------|
+| Bailey DEV1 (VietPH) | 0h | 14h | ✓ Mon |
+| Bailey DEV3 (DuongDN) | 0h | 0h | ✓ inactive |
+| Aysar (KhanhHH+LeNH) | 0h | 20h | ✓ Mon |
+| Rory (LeNH) | 0h | 34h | ✓ Mon |
+| Neural | 0h | 0h | ✓ silence normal |
+
+**Neural:** Last Michael msg 2026-04-23 (bug report — addressed by Carrick 2026-04-24). ~3.5 wks silence, all requests resolved. No alert.
+
+## Scrin — 08:33 (+07:00)
+
+Monday limitation: `isYesterday:true` returns Sunday 2026-05-17. Fri 2026-05-16 comparison: N/A.
+Sunday data (informational): TuanNT 0h tracked — expected (weekend).
+
+No alerts.
+
+Trello "Neural Contract": ✓ complete (silence normal, no unaddressed client msgs)
