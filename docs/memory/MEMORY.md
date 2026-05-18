@@ -124,6 +124,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_trinhmtt_not_qc.md](feedback_trinhmtt_not_qc.md) — TrinhMTT not QC, exclude from Fountain QC alerts
 - [feedback_vutq_small_plan_normal.md](feedback_vutq_small_plan_normal.md) — VuTQ small W{n} plan: once weekly total met, subsequent 0h days are normal
 - [feedback_fountain_dev_0h_no_speculation.md](feedback_fountain_dev_0h_no_speculation.md) — Don't speculate on individual Fountain dev 0h days as unresolved questions
+- [feedback_fountain_hasv_not_on_plan.md](feedback_fountain_hasv_not_on_plan.md) — HaVS not always on Fountain plan; only flag 0h if named in that week's Matrix plan
 - [feedback_fountain_monday_plan_timing.md](feedback_fountain_monday_plan_timing.md) — @trinhmtt posts W{n} plan Mon 08:30-09:30 +07. Wait until 09:30 before flagging "plan absent".
 
 ---

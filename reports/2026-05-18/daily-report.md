@@ -16,7 +16,6 @@
 |----------|------|--------|
 | ⚠️ HIGH | **VuTQ leave request** — submitted duongdn inbox 07:55 today | Review & approve |
 | ⚠️ HIGH | **Fountain LamLQ W26: 9.25h vs plan 20h (-10.75h)** — no leave note | Follow up |
-| ⚠️ HIGH | **Fountain HaVS W26: 0h** — no leave entry | Follow up |
 | ⚠️ MED | **carrick GitLab PAT expires ≤7 days** | Rotate token |
 | ⚠️ MED | **LeNH W26 shortfall** — Wed -1.67h, Thu -0.50h, Fri -0.50h | Reminder sent ✓ |
 | ⚠️ MED | **Fountain #2735 still growing** — ~136.50h vs 120h Est+CR (+14%) | Monitor |
@@ -200,7 +199,7 @@ Last posted: W26 plan (2026-05-11 09:03 +07) by @trinhmtt: ViTHT 40h | ThinhT 20
 | DatNT | 40.00h | ✓ |
 | LamLQ | 9.25h | ⚠️ -10.75h vs plan |
 | VuTQ | 0.00h | ✓ expected (moved to Bailey) |
-| HaVS | 0.00h | ⚠️ no leave entry |
+| HaVS | 0.00h | ✓ not on W26 plan |
 | PhatDLT | 10.00h | QC |
 | HungPN | 13.00h | QC |
 | TrinhMTT | 0.00h | not QC |
@@ -231,7 +230,7 @@ Delta vs 2026-05-13: **+4.4 wks** (+392.75h — new tasks #2854 80h, #2869 80h, 
 
 **Alerts:**
 - ⚠️ [HIGH] LamLQ W26 shortfall: 9.25h vs plan 20h (−10.75h), no leave entry
-- ⚠️ [HIGH] HaVS W26: 0h, no leave entry
+- ℹ️ HaVS W26: 0h — not on W26 plan, expected
 - ⚠️ [MED] #2735 still growing: ~136.50h vs 120h Est+CR (+14%)
 - ℹ️ [INFO] Runway +4.4 wks (new task volume added to pipeline)
 - ⏳ W27 plan: re-check after 09:30
@@ -362,7 +361,7 @@ Dev activity visible: LamLQ requesting task (08:41), TrinhMTT assigning bugs/car
 ## Unresolved Questions
 
 1. **LamLQ W26 -10.75h**: Was there leave or a project split? Needs explanation from team.
-2. **HaVS W26 0h**: On leave? Moved off Fountain? No record found.
+2. ~~HaVS W26 0h~~ — not on W26 plan, resolved (not an alert).
 3. **Fountain W27 Matrix plan**: Not posted by 08:53. Re-check at 09:30+ via `/daily-report fountain matrix`.
 4. **VuTQ leave request**: Submitted 07:55 (duongdn inbox) — needs approval/acknowledgement.
 5. **carrick GitLab PAT**: Expires ≤7 days — rotate before it expires.
