@@ -84,7 +84,7 @@ async function scanAccount(acct) {
 
     for (const ch of textChannels) {
       const msgRes = await discordGet(
-        `/channels/${ch.id}/messages?limit=50&after=${WINDOW_SNOWFLAKE}`,
+        `/channels/${ch.id}/messages?limit=100&after=${WINDOW_SNOWFLAKE}`,
         acct.token
       );
       if (msgRes.code === 403) {

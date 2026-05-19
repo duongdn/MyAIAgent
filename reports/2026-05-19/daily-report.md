@@ -25,7 +25,8 @@
 | ⚠️ MED | **Fountain checkout bug** — Mike: Order #6450569DU checked out with out-of-stock item (May 18) | Rick/team |
 | ℹ️ INFO | VuTQ on leave today (OA confirmed) | FYI |
 | ℹ️ INFO | W27 sheets all 0h — normal for early Tue (day 2, devs log throughout day) | No action |
-| ✅ OK | Jeff (AirAgri) reported May 18 ✓ + active today 08:38 | — |
+| ✅ OK | Vinn (AirAgri) reported May 18 17:21 +07 ✓ + active today (deployed to prod) | — |
+| ✅ OK | Jeff (AirAgri) reported May 18 17:23 +07 ✓ + active today | — |
 | ✅ OK | Elena — no open PRs, nothing to deploy | — |
 | ✅ OK | InfinityRoses/Fountain Rollbar alerts — all **staging** (not production) | — |
 | ✅ OK | W27 Matrix plan (live): ViTHT 40h / ThinhT 4h / DatNT 40h / LamLQ 20h / QC 22h | — |
@@ -104,14 +105,15 @@ Trello: Elliott ✓ (active), Marcel ✓ (adhoc — no person alert; Snyk = proj
 
 | Server | Account | Msgs | Key content |
 |--------|---------|------|-------------|
-| AirAgri | nusvinn | 59 | Jeff ✓ reported May 18 (airagri-flutter 10:23); Jeff active today 08:38 (UTC+0) |
+| AirAgri | nusvinn | 79 | Vinn ✓ reported May 18 17:21 +07; Jeff ✓ reported May 18 17:23 +07; both active today |
 | Bizurk | nuscarrick | 0 | Andrew Taraba silent (adhoc = normal) |
 
 **AirAgri details:**
-- Jeff (jeff_trinh) daily report May 18 10:23 UTC: "Handle the logic for showing/hiding the Corporate Library tab - done - IOS TF 3.4.3 (2); Internal Push Notification feature; handle errors; test"
-- Jeff active May 19 08:38 UTC: "I'll continue working on the file download feature and the tasks in the Safety Data Sheets Module"
-- dapackage: "Currently deploying the new safefarm post alarm features (with new alarm configuration tabs, emergency response sections)" — informational deploy msg
-- Vinn (@nusvinn): active May 18 — 5 msgs in airagri_webapp: technical Q&A (02:37 UTC), "Let me check" + "I have fixed" (02:56/03:17 UTC), database lookup (07:22 UTC). No formal "Just report my process today:" opener but clearly working.
+- **Vinn (@nusvinn) daily report May 18 17:21 +07:** "Just report my process today: - Remove incidents for Select Harvests - Richmond property (done). - Update user's email (waiting Mary confirm). - Check and reply about device stop alarm logic. - Review Jon & Leon code PR 408, 409, 410, 411. - Working on Task 2 - Re-allocate function on Corrective Actions page (waiting James confirm). - Working on alarm monitoring."
+- Vinn active today: deployed to prod at 10:53 +07 (user email update)
+- **Jeff (jeff_trinh) daily report May 18 17:23 +07:** "Handle the logic for showing/hiding the Corporate Library tab - done - IOS TF 3.4.3 (2); Internal Push Notification feature; handle errors; test"
+- Jeff active today 08:38 UTC: "I'll continue working on the file download feature and the tasks in the Safety Data Sheets Module"
+- dapackage: deploying new safefarm post alarm features — informational
 
 Trello: Andrew Taraba ✓ (silence normal), James Diamond ✓ (Vinn active May 18, 5 msgs)
 
