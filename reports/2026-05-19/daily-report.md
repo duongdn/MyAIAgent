@@ -23,7 +23,6 @@
 | ⚠️ MED | **Fountain #2735 still in progress** — 131.5h actual vs 120h est+CR (+9.6%), still active | Monitor |
 | ⚠️ MED | **Snyk vuln alert** — Marcel org (carrick@) | Review |
 | ⚠️ MED | **Fountain checkout bug** — Mike: Order #6450569DU checked out with out-of-stock item (May 18) | Rick/team |
-| ℹ️ INFO | Vinn AirAgri report not detected with standard opener — may have posted differently | Check if needed |
 | ℹ️ INFO | VuTQ on leave today (OA confirmed) | FYI |
 | ℹ️ INFO | W27 sheets all 0h — normal for early Tue (day 2, devs log throughout day) | No action |
 | ✅ OK | Jeff (AirAgri) reported May 18 ✓ + active today 08:38 | — |
@@ -37,7 +36,7 @@
 | Card | Result |
 |------|--------|
 | Check Mail | ✓ All 6 items complete |
-| Check Progress | ✓ 14/16 complete — 2 skipped (Fountain, James Diamond) |
+| Check Progress | ✓ 15/16 complete — 1 skipped (Fountain) |
 
 ---
 
@@ -112,12 +111,9 @@ Trello: Elliott ✓ (active), Marcel ✓ (adhoc — no person alert; Snyk = proj
 - Jeff (jeff_trinh) daily report May 18 10:23 UTC: "Handle the logic for showing/hiding the Corporate Library tab - done - IOS TF 3.4.3 (2); Internal Push Notification feature; handle errors; test"
 - Jeff active May 19 08:38 UTC: "I'll continue working on the file download feature and the tasks in the Safety Data Sheets Module"
 - dapackage: "Currently deploying the new safefarm post alarm features (with new alarm configuration tabs, emergency response sections)" — informational deploy msg
-- Vinn: **NOT detected** with "Just report my process today:" opener in the window. 50 messages in airagri_webapp channel — may have posted without standard opener OR not yet reported.
+- Vinn (@nusvinn): active May 18 — 5 msgs in airagri_webapp: technical Q&A (02:37 UTC), "Let me check" + "I have fixed" (02:56/03:17 UTC), database lookup (07:22 UTC). No formal "Just report my process today:" opener but clearly working.
 
-**Alerts:**
-- ℹ️ [INFO] Vinn report not confirmed via standard opener — no MED alert (could be format variation)
-
-Trello: Andrew Taraba ✓ (silence normal), James Diamond ⚠️ skip (Vinn not confirmed)
+Trello: Andrew Taraba ✓ (silence normal), James Diamond ✓ (Vinn active May 18, 5 msgs)
 
 ---
 
@@ -250,7 +246,7 @@ Trello Elena ✓ (no issues, clean)
 |-----------|------|--------|
 | Normal | Maddy - Carrick/Kai/Luis | ✓ complete (Kai no report needed; no alerts) |
 | Normal | Fountain | ⚠️ skip (Matrix token, LamLQ shortfall, customer deadlines) |
-| Should do | James Diamond - Vinn task | ⚠️ skip (Vinn report not confirmed) |
+| Should do | James Diamond - Vinn task | ✓ complete (Vinn active May 18: 5 msgs, technical Q&A + bug fix; no formal opener but clearly working) |
 | Should do | Elliott - Generator | ✓ complete (Violet/Elliott active, new bugs = normal work) |
 | closely montor | Rory | ✓ complete (Swift Studio 41 msgs, active) |
 | closely montor | Franc | ✓ complete (RDC 20 msgs, active) |
@@ -286,7 +282,6 @@ No reminders sent. W27 is only day 2 (Tue 08:37 +07) — too early to confirm 0h
 6. **[MED] Fountain checkout bug** — Mike's order with out-of-stock item (May 18), needs investigation
 7. **[MED] Fountain pro branding** — Kunal asked twice (May 14-15) to disable box band/tag. Response needed.
 8. **[MED] Snyk Marcel org** — review vulnerability report in carrick@ inbox
-9. **[INFO] Verify Vinn report** — check AirAgri airagri_webapp manually if needed
 
 ---
 

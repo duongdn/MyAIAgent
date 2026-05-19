@@ -15,5 +15,6 @@ Vinn (AirAgri dev) posts his daily summary in AirAgri Discord channels (`airagri
 **How to apply:**
 1. When checking Vinn's daily report, search Discord AirAgri channels for the phrase **`Just report my process today`** (case-insensitive).
 2. Treat presence of that bullet-list post within the day's window as daily-report-OK.
-3. Only flag as alert if the phrase is absent AND Vinn had no substantive activity that day.
-4. Don't confuse regular commit/code chatter with the daily report — Vinn's daily is a single structured bullet post.
+3. **If opener not found but Vinn has substantive activity** (technical Q&A, fix confirmations, code responses) → treat as OK, complete James Diamond Trello item. Confirmed 2026-05-19: Vinn had 5 msgs on May 18 with no opener but was clearly working.
+4. Only flag as alert if the phrase is absent AND Vinn had zero substantive activity that day.
+5. Don't confuse regular commit/code chatter with the daily report — but bug fixes and technical responses DO count as evidence of work.
