@@ -17,9 +17,9 @@
 | ⚠️ HIGH | **VuTQ new leave request** — submitted today 07:52, OA replied 08:11 | Review & approve |
 | ⚠️ HIGH | **Fountain #2615 massive overrun** — 106.75h actual vs 12h est (+789%), still Staging | Rick/team |
 | ⚠️ HIGH | **Fountain customer: Custom Roses page** — Kunal wants ready by **Wed May 20** for Tom to QC | Urgent |
-| ⚠️ MED | **Matrix token** — `matrix-token-refresh.js` ran but requires manual browser login | Manual SSO |
 | ⚠️ MED | **William Bills DKIM/DMARC** — Oliver: "emails starting to bounce, need DNS record update" | Action needed |
 | ⚠️ MED | **Generator new bugs** — Redmine #78703 (Error task #776) + #78706 (Event Calendar) created Mon | Elliott/KhanhHH |
+| ⚠️ MED | **Fountain Redmine #78711** — HungPN posted today (10:38 +07), unassigned fix needed | Assign/fix |
 | ⚠️ MED | **Fountain #2735 still in progress** — 131.5h actual vs 120h est+CR (+9.6%), still active | Monitor |
 | ⚠️ MED | **Snyk vuln alert** — Marcel org (carrick@) | Review |
 | ⚠️ MED | **Fountain checkout bug** — Mike: Order #6450569DU checked out with out-of-stock item (May 18) | Rick/team |
@@ -29,7 +29,8 @@
 | ✅ OK | Jeff (AirAgri) reported May 18 ✓ + active today 08:38 | — |
 | ✅ OK | Elena — no open PRs, nothing to deploy | — |
 | ✅ OK | InfinityRoses/Fountain Rollbar alerts — all **staging** (not production) | — |
-| ✅ OK | W27 Matrix plan confirmed yesterday: ViTHT 40h / ThinhT 20h / DatNT 40h / LamLQ 20h / QC 26h | — |
+| ✅ OK | W27 Matrix plan (live): ViTHT 40h / ThinhT 4h / DatNT 40h / LamLQ 20h / QC 22h | — |
+| ✅ OK | Matrix token refreshed ✓ | — |
 
 ### Trello
 
@@ -156,10 +157,10 @@ Tuesday run → isYesterday returns Monday (May 18) data. ✓ (no Mon bug issue)
 ## Fountain — 08:55 (+07:00)
 
 ### Part 1 — Matrix Plan W27
-- **W27 plan confirmed** from yesterday's report (Mon May 18, posted by @trinhmtt at 09:19 +07):
-  - ViTHT: 40h | ThinhT: 20h | DatNT: 40h | LamLQ: 20h | QC: 26h
-- **Matrix token status:** `matrix-token-refresh.js` ran but returned "Manual login needed" (browser SSO required). Cannot re-verify today. Using yesterday's confirmed plan.
-- ⚠️ Action: Manual Matrix SSO login needed to restore monitoring access.
+- **W27 plan** posted by @trinhmtt Mon May 18 at 11:10 +07 (verified live):
+  - ViTHT: 40h | ThinhT: **4h** | DatNT: 40h | LamLQ: 20h | QC: **22h**
+- Matrix token refreshed ✓ (@duongdn:nustechnology.com)
+- **New today (10:38 +07):** @hungpn posted Redmine #78711 — asking someone to fix; @trinhmtt asked HungPN+PhatDLT to prioritize Custom Roses QC for Tom tomorrow (May 20)
 
 ### Part 2 — Task Log Actuals (W27)
 - W27 started Monday May 18. All employees show 0h in Daily Report tab (template 0s, not yet logged)
@@ -171,10 +172,10 @@ Too early to compare — only Mon May 18 elapsed and hours not yet entered.
 | Dev | Plan W27 | Actual so far | Gap |
 |-----|----------|--------------|-----|
 | ViTHT | 40h | 0h (not logged) | TBD |
-| ThinhT | 20h | 0h (not logged) | TBD |
+| ThinhT | 4h | 0h (not logged) | TBD |
 | DatNT | 40h | 0h (not logged) | TBD |
 | LamLQ | 20h | 0h (not logged) | TBD |
-| QC | 26h | 0h (not logged) | TBD |
+| QC | 22h | 0h (not logged) | TBD |
 
 ### Part 4 — Capacity & Runway
 - **Est vs Charged active tasks:** 269h (249h est + 20h CR)
@@ -219,7 +220,7 @@ Too early to compare — only Mon May 18 elapsed and hours not yet entered.
 - "Fountain Pro Template Zip Code Update" — To-Do, last Mar 10
 - "Upgrade to Next.js version 16" — To-Do, last Mar 10
 
-Trello Fountain item: ⚠️ **SKIP** — Matrix token manual refresh needed + LamLQ W26 shortfall unresolved + customer requests pending
+Trello Fountain item: ⚠️ **SKIP** — LamLQ W26 shortfall unresolved + customer requests pending (Custom Roses deadline, checkout bug)
 
 ---
 
@@ -280,7 +281,7 @@ No reminders sent. W27 is only day 2 (Tue 08:37 +07) — too early to confirm 0h
 1. **[HIGH] VuTQ leave request** — review duongdn inbox, approve if valid
 2. **[HIGH] Fountain Custom Roses** — must be ready for Tom (Kunal) by **Wed May 20**
 3. **[HIGH] Fountain #2615** — 789% overrun still on Staging. Discuss with Rick what's blocking Live release.
-4. **[MED] Matrix token** — needs manual SSO login at chat.nustechnology.com to restore monitoring
+4. **[MED] Fountain Redmine #78711** — assign and fix (HungPN posted today 10:38 +07)
 5. **[MED] William Bills DKIM/DMARC** — update DNS records, respond to Oliver
 6. **[MED] Fountain checkout bug** — Mike's order with out-of-stock item (May 18), needs investigation
 7. **[MED] Fountain pro branding** — Kunal asked twice (May 14-15) to disable box band/tag. Response needed.
