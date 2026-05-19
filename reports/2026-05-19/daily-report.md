@@ -17,7 +17,6 @@
 | ⚠️ HIGH | **VuTQ new leave request** — submitted today 07:52, OA replied 08:11 | Review & approve |
 | ⚠️ HIGH | **Fountain #2615 massive overrun** — 106.75h actual vs 12h est (+789%), still Staging | Rick/team |
 | ⚠️ HIGH | **Fountain customer: Custom Roses page** — Kunal wants ready by **Wed May 20** for Tom to QC | Urgent |
-| ⚠️ MED | **Slack session tokens** — Amazing Meds + Equanimity invalid_auth; bootload refresh failed | Manual re-auth |
 | ⚠️ MED | **Matrix token** — `matrix-token-refresh.js` ran but requires manual browser login | Manual SSO |
 | ⚠️ MED | **William Bills DKIM/DMARC** — Oliver: "emails starting to bounce, need DNS record update" | Action needed |
 | ⚠️ MED | **Generator new bugs** — Redmine #78703 (Error task #776) + #78706 (Event Calendar) created Mon | Elliott/KhanhHH |
