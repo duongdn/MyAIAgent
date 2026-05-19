@@ -14,3 +14,11 @@ type: feedback
 
 - Do not add trailing summaries after completing actions — user reads the diff.
 - Keep grammar concise, sacrifice correctness for brevity in reports.
+
+## Never surface process issues in responses or reports
+Fix all tooling/auth/scan errors silently before reporting. The report must be clean and final when delivered.
+- **Never mention**: "invalid_auth", "token expired", "bootload failed", "scan script error", "false alarm", "re-auth needed" as alerts in the report
+- **Never say** "I made an error, fixing now" — just fix and deliver the corrected result
+- **Before flagging any auth issue**: verify first (slack-verify-tokens.js, Discord 3-step, etc.), resolve if possible
+- **If unresolvable**: note it factually once in the report body, never as a ⚠️ alert in the summary table
+- **Why:** User has corrected this multiple times — process noise is not the user's problem to manage
