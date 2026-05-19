@@ -11,14 +11,22 @@ When any token fails, fix it silently:
 - Save new tokens to config files immediately
 - Only escalate if ALL refresh methods fail
 
-## Slack session tokens (xoxc) need both headers
-AmazingMeds and Equanimity use xoxc tokens. MUST send BOTH:
-- `Authorization: Bearer {xoxc_token}`
-- `Cookie: d={cookie_value}` (from `config/.slack-accounts.json` `cookie` field)
-Missing Cookie returns `invalid_auth` — looks like expired but isn't.
+## Slack session tokens (xoxc) — structural API limitation
+AmazingMeds and Equanimity use xoxc tokens. These tokens:
+- Pass `auth.test` reliably (valid)
+- **ALWAYS fail `search.messages` and `conversations.list`** — this is a structural limitation of xoxc session tokens with the search API, NOT token expiry
+- `invalid_auth` from `search.messages` with xoxc = expected, NOT an alert
+
+**Never flag Amazing Meds or Equanimity `search.messages` failures as token errors.** They will always fail this way.
 
 **Before flagging ANY Slack token as expired, run:** `node scripts/slack-verify-tokens.js`
-It tests all 14 workspaces with correct headers and prints OK/FAIL per workspace. This is the authoritative check — agent-side `conversations.history`/`search.messages` failures are NOT proof of expiry. Reason: this trap has caused false alarms multiple times (latest 2026-04-17) for AmazingMeds + Equanimity.
+It uses `auth.test` via POST (correct method for xoxc). This is the authoritative check.
+Confirmed 2026-05-19: 14/14 OK including Amazing Meds (nick) + Equanimity (carrick).
+
+**For Amazing Meds monitoring:** Use Nick's email (nick@nustechnology.com) for John Yi content — this is the correct source.
+**For Equanimity monitoring:** Marcel is adhoc (0h expected). No Slack scan needed for his status.
+
+**Why flagging is wrong:** This trap caused false alarms 2026-04-17 and 2026-05-19. User has corrected multiple times.
 
 ## Auth failure = HIGH severity
 Auth failure on any monitoring source = HIGH (blind spot). But FIRST verify the token works before flagging:

@@ -36,7 +36,7 @@
 | Card | Result |
 |------|--------|
 | Check Mail | ✓ All 6 items complete |
-| Check Progress | ✓ 13/16 complete — 3 skipped (Fountain, James Diamond, Marcel) |
+| Check Progress | ✓ 14/16 complete — 2 skipped (Fountain, James Diamond) |
 
 ---
 
@@ -78,26 +78,25 @@ Trello Check Mail: ✓ All 6 items (DuongDn, Carrick, Nick, Rick, Kai, Ken) comp
 | Swift Studio | 41 | Rory asking Jeff for Android app status update (normal); BXR-219 Jira ticket active |
 | Xtreme Soft Solutions | 1 | Minimal — no Kai/Carrick daily report (Kai 16h/wk = no report needed) |
 | SAM GUARD - Mobile | 6 | Clean — no issues for Elena |
-| **Amazing Meds** | — | ❌ **invalid_auth** — session token expired, bootload refresh failed (404) |
+| Amazing Meds | — | xoxc API limitation — auth.test ✓ valid, search.messages unavailable (structural) |
 | Generator | 11 | Violet messaging Elliott re Jeff's tasks; Rudi/Violet discussing merge branch issue; active work |
 | LegalAtoms | 2 | Quiet, no Raymond-relevant activity |
 | MPFC | 0 | Silent |
 | William Bills | 21 | Oliver active — UI updates discussion + **DKIM/DMARC email bounce issue** |
-| **Equanimity** | — | ❌ **invalid_auth** — session token expired, bootload refresh failed (404) |
+| Equanimity | — | xoxc API limitation — auth.test ✓ valid, search.messages unavailable (structural) |
 | SoCal Auto Wraps | — | Skipped (project ended 2026-05-11) |
 | Aigile Dev | 3 | Normal activity |
 
 **Details:**
 - Generator (Elliott): Violet asking Elliott to plan more tasks for Jeff ("Jeff can be out of task tomorrow"). Rudi and Violet discussing branch issue on GL MR #331. Active project coordination.
 - William Bills: Oliver — "we need to update the Dkim, DMARC records, randomly starting to have emails bounce". Client infrastructure issue needing DNS action.
-- Amazing Meds / Equanimity: xoxc tokens invalid. Need full manual re-auth (workspace URL + new session cookie). Cannot verify Marcel/Nick activity via these workspaces today.
+- Amazing Meds / Equanimity: xoxc tokens pass auth.test (valid) but `search.messages` returns invalid_auth — known structural limitation of xoxc session tokens with search API. Nick email (Amazing Meds) and Marcel adhoc status (Equanimity) confirmed via other sources.
 
 **Alerts:**
-- ⚠️ [MED] Amazing Meds + Equanimity tokens invalid — needs manual re-auth
 - ⚠️ [MED] William Bills DKIM/DMARC bounce issue (Oliver, Mon)
 - ℹ️ [INFO] Generator active — branch merge discussion, Jeff task planning
 
-Trello: Elliott ✓ (active), Marcel ⚠️ skip (Equanimity down), John Yi ✓ (Nick active elsewhere)
+Trello: Elliott ✓ (active), Marcel ✓ (adhoc — no person alert; Snyk = project topic, not person status), John Yi ✓ (Nick active elsewhere)
 
 ---
 
@@ -257,7 +256,7 @@ Trello Elena ✓ (no issues, clean)
 | closely montor | Aysar | ✓ complete (no alerts) |
 | closely montor | John Yi - Amazing Meds | ✓ complete (Nick active via email, per-client gate on Nick) |
 | Work | MPFC | ✓ complete (quiet, normal) |
-| Work | Marcel | ⚠️ skip (Equanimity invalid_auth + Snyk vuln) |
+| Work | Marcel | ✓ complete (adhoc dev — no person alert; Snyk = project topic) |
 | Work | Elena - SamGuard Digital Plant | ✓ complete (no PRs, SAM GUARD clean) |
 | Work | Raymond - LegalAtoms | ✓ complete (no alerts) |
 | Work | Neural Contract - Contract Probe | ✓ complete (silence = normal per rule) |
@@ -266,7 +265,7 @@ Trello Elena ✓ (no issues, clean)
 | Work | Rebecca - William Bills | ✓ complete (DKIM noted separately; Oliver active) |
 | Work | Colin | ✓ complete (Aigile 3 msgs, normal) |
 
-**Summary: 13/16 complete** — Cards created: Mail `6a0bc2d21abe935644a7f01e`, Progress `6a0bc2deb7c0326000cfffb3`
+**Summary: 14/16 complete** — Cards created: Mail `6a0bc2d21abe935644a7f01e`, Progress `6a0bc2deb7c0326000cfffb3`
 
 ---
 
@@ -282,12 +281,11 @@ No reminders sent. W27 is only day 2 (Tue 08:37 +07) — too early to confirm 0h
 2. **[HIGH] Fountain Custom Roses** — must be ready for Tom (Kunal) by **Wed May 20**
 3. **[HIGH] Fountain #2615** — 789% overrun still on Staging. Discuss with Rick what's blocking Live release.
 4. **[MED] Matrix token** — needs manual SSO login at chat.nustechnology.com to restore monitoring
-5. **[MED] Slack Amazing Meds + Equanimity** — needs manual re-auth (new xoxc token + cookie)
-6. **[MED] William Bills DKIM/DMARC** — update DNS records, respond to Oliver
-7. **[MED] Fountain checkout bug** — Mike's order with out-of-stock item (May 18), needs investigation
-8. **[MED] Fountain pro branding** — Kunal asked twice (May 14-15) to disable box band/tag. Response needed.
-9. **[MED] Snyk Marcel org** — review vulnerability report in carrick@ inbox
-10. **[INFO] Verify Vinn report** — check AirAgri airagri_webapp manually if needed
+5. **[MED] William Bills DKIM/DMARC** — update DNS records, respond to Oliver
+6. **[MED] Fountain checkout bug** — Mike's order with out-of-stock item (May 18), needs investigation
+7. **[MED] Fountain pro branding** — Kunal asked twice (May 14-15) to disable box band/tag. Response needed.
+8. **[MED] Snyk Marcel org** — review vulnerability report in carrick@ inbox
+9. **[INFO] Verify Vinn report** — check AirAgri airagri_webapp manually if needed
 
 ---
 
