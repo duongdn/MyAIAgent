@@ -98,11 +98,6 @@ function persistState(stdinData, options) {
       }
       writeAtomic(statePath, content);
       archiveState(stateDir);
-      // Mirror to docs/session-state.md for cross-PC git sync
-      try {
-        const docsPath = path.join(cwd, 'docs', 'session-state.md');
-        if (fs.existsSync(path.dirname(docsPath))) writeAtomic(docsPath, content);
-      } catch { /* fail-open */ }
       return { success: true, path: statePath };
     }
     return { success: false, path: null };
