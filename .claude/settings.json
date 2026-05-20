@@ -38,12 +38,23 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-state.cjs",
+            "_origin": "engineer"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
             "command": "if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m \"auto: $(date +%Y-%m-%d\\ %H:%M)\" && git pull --rebase origin master && git push origin master; fi 2>/dev/null || true",
             "timeout": 30000,
             "statusMessage": "Auto-committing and pushing changes..."
           }
         ]
-      },
+      }
+    ],
+    "SessionEnd": [
       {
         "hooks": [
           {
@@ -52,9 +63,7 @@
             "_origin": "engineer"
           }
         ]
-      }
-    ],
-    "SessionEnd": [
+      },
       {
         "hooks": [
           {
