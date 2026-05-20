@@ -305,7 +305,14 @@ async function main() {
     }
 
     if (sessionStateEnabled && (source === 'startup' || source === 'compact')) {
-      const previousState = loadState(process.cwd());
+      let previousState = loadState(process.cwd());
+      // Fallback: load from git-tracked docs/session-state.md for cross-PC resumability
+      if (!previousState) {
+        try {
+          const docsStatePath = path.join(process.cwd(), 'docs', 'session-state.md');
+          if (fs.existsSync(docsStatePath)) previousState = fs.readFileSync(docsStatePath, 'utf8');
+        } catch { /* fail-open */ }
+      }
       if (previousState) {
         if (source === 'compact') {
           console.log('\n--- Session State (Post-Compaction Recovery) ---');
