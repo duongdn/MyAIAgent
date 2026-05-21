@@ -93,34 +93,52 @@ async function expandAll(page) {
   }
 }
 
-/** Navigate to accounts page via the nav menu link, return actual URL */
+/** Navigate to the accounts page, return actual URL */
 async function gotoAccountsPage(page) {
-  // Try clicking "Tài khoản" in the sidebar nav to get the real URL
   const BASE = 'https://moneykeeperapp.misa.vn';
-  const navClicked = await page.evaluate(() => {
-    // Find nav link with exactly "Tài khoản" text (not sub-items)
-    const links = [...document.querySelectorAll('nav a, aside a, [class*="nav"] a, [class*="sidebar"] a, [class*="menu"] a')];
-    const link = links.find(a => a.innerText.trim() === 'Tài khoản');
-    if (link) { link.click(); return link.href || true; }
-    return false;
-  });
-
-  await wait(2000);
-  const currentUrl = page.url();
-
-  // If nav click didn't navigate (SPA might need direct URL), try known routes
-  if (!navClicked || currentUrl.includes('/dashboard')) {
-    for (const candidate of ['/management/account', '/management/accounts', '/management/wallet']) {
-      await page.goto(`${BASE}${candidate}`, { waitUntil: 'networkidle2', timeout: 20000 });
-      await wait(1500);
-      if (!page.url().includes('/dashboard')) break;
-    }
+  // Direct known URL first (discovered from previous run)
+  for (const candidate of ['/management/wallet', '/management/account', '/management/accounts']) {
+    await page.goto(`${BASE}${candidate}`, { waitUntil: 'networkidle2', timeout: 20000 });
+    await wait(1500);
+    if (!page.url().includes('/dashboard')) return page.url();
   }
-
   return page.url();
 }
 
-/** Extract data from dashboard + full accounts page (all tabs + expanded) */
+/** Paginate through all pages of a tab and collect all bodyText snapshots */
+async function scrapeAllPages(page) {
+  const pages = [];
+  for (let i = 0; i < 20; i++) { // max 20 pages guard
+    await wait(1500);
+    const snap = await page.evaluate(() => {
+      const bodyText = document.body.innerText.slice(0, 15000);
+      const moneyEls = [];
+      document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"]').forEach(el => {
+        const text = el.innerText.trim();
+        if (text && text.length < 120) moneyEls.push({ cls: el.className.slice(0, 80), text });
+      });
+      return { url: location.href, bodyText, moneyEls: moneyEls.slice(0, 80) };
+    });
+    pages.push(snap);
+
+    // Click "next page" — look for > or → or "Tiếp theo" pagination button
+    const hasNext = await page.evaluate(() => {
+      const btn = [...document.querySelectorAll('button, a, li, span')]
+        .find(el => {
+          const t = el.innerText.trim();
+          const cls = el.className || '';
+          return (t === '>' || t === '›' || t === 'Tiếp theo' || /next|chevron-right/.test(cls))
+            && !el.disabled && !el.closest('[disabled]') && !cls.includes('disabled');
+        });
+      if (btn) { btn.click(); return true; }
+      return false;
+    });
+    if (!hasNext) break;
+  }
+  return pages;
+}
+
+/** Extract data from dashboard + full accounts page (all tabs + all pages) */
 async function extractData(page) {
   // 1. Dashboard snapshot
   await wait(3500);
@@ -130,25 +148,30 @@ async function extractData(page) {
   const accountsUrl = await gotoAccountsPage(page);
   console.error(`[misa] Accounts page: ${accountsUrl}`);
 
-  // Expand all "Xem thêm" on the default tab first
-  await expandAll(page);
-  const regularAccounts = await snapPage(page);
+  // 3. Regular accounts tab — paginate all pages
+  console.error('[misa] Scraping regular accounts...');
+  const regularAccountsPages = await scrapeAllPages(page);
 
-  // 3. Click "Sổ tiết kiệm" tab and expand
-  const hasSavings = await clickByText(page, 'Sổ tiết kiệm');
+  // 4. Savings tab — paginate all pages
+  console.error('[misa] Scraping savings...');
+  await clickByText(page, 'Sổ tiết kiệm');
   await wait(2000);
-  if (hasSavings) await expandAll(page);
-  const savings = hasSavings ? await snapPage(page) : null;
+  const savingsPages = await scrapeAllPages(page);
 
-  // 4. Click "Tích lũy" tab and expand
+  // 5. Accumulation tab
+  console.error('[misa] Scraping accumulation...');
   await clickByText(page, 'Tích lũy');
   await wait(2000);
-  await expandAll(page);
-  const accumulation = await snapPage(page);
+  const accumulationPages = await scrapeAllPages(page);
 
   return {
     dashboard,
-    accountsPage: { url: accountsUrl, regularAccounts, savings, accumulation },
+    accountsPage: {
+      url: accountsUrl,
+      regularAccounts: regularAccountsPages,
+      savings: savingsPages,
+      accumulation: accumulationPages,
+    },
   };
 }
 
