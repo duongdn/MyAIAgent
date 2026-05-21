@@ -146,7 +146,7 @@ Trello Check Mail: ✓ DuongDn, Carrick, Kai, Ken, Nick | ⚠️ Rick (productio
 | TuanNT | 0h ⚠️ | 16h (Rebecca only) | 8h/day | ⚠️ JohnYi W24 empty all week |
 | VietPH | 0h ⚠️ | 16h (Mon+Tue) | 8h/day | ⚠️ Task stub entered, no hours |
 | VuTQ | 0h ⚠️ | 4h (Tue half-day) | 8h/day | ⚠️ Bailey — 0h Wed no leave |
-| KhanhHH | 4h ⚠️ | 20h | 8h/day | ⚠️ Short 4h Wed, no leave |
+| KhanhHH | 8h ✓ | 24h | 8h/day | ✓ OK — Generator 7h + Aysar 1h |
 | LeNH | 0h ⚠️ | 16.67h (Mon+Tue) | 8h/day | ⚠️ 0h Wed all sheets (Rory/Franc/Aysar/Rebecca) |
 
 ---
@@ -231,7 +231,7 @@ VuTQ not in plan (moved to Bailey — expected). HaVS not in plan (no alert).
 | John Yi - Amazing Meds | ✓ | BHRT request noted (follow up needed) |
 | James Diamond - Vinn | ✓ | Daily reports ✓, P1 being handled |
 | Rory | ✓ | Upwork: 7.67h Wed tracked (sheet unfilled, reminder sent) |
-| Aysar | ⚠️ SKIP | KhanhHH 4h shortfall Wed |
+| Aysar | ✓ | KhanhHH 8h Wed (Generator 7h + Aysar 1h) — corrected |
 | Franc | ⚠️ SKIP | LeNH 0h Wed all sheets |
 | Elliott | ✓ | Batch 2 live, fixes active |
 | MPFC | ✓ | Quiet, no alerts |
@@ -266,7 +266,7 @@ VuTQ not in plan (moved to Bailey — expected). HaVS not in plan (no alert).
 | TuanNT | !knbJbIKzXRJNGVFQNg | 0h Wed (JohnYi + Rebecca both empty) |
 | VietPH | !kzyLVmJxcRESoTkfnY | 0h Wed (task stub, no hours filled) |
 | VuTQ | !SHdFKwrYpRhWJBtiBv | 0h Wed no leave |
-| KhanhHH | !rwLbvLBnrRAYMaOPaD | 4h Wed (short by 4h, no leave) |
+| KhanhHH | !rwLbvLBnrRAYMaOPaD | ⚠️ FALSE ALERT — sent 4h shortfall but actual = 8h (Generator 7h + Aysar 1h missed) |
 | LeNH | !OIrgPraJWrcDTnRVLQ | 0h Wed all sheets |
 
 LongVV: 0h Wed is normal (part-time) — no reminder.

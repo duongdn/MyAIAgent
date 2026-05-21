@@ -3,59 +3,35 @@
  *
  * Usage:
  *   node scripts/misa-money-report.js              # fetch & print data JSON
- *   node scripts/misa-money-report.js --login      # force re-login (clear session)
+ *   node scripts/misa-money-report.js --login      # force re-login (wipe profile)
  *
- * Auth:
- *   Session cookies stored in config/.misa-session.json (gitignored).
- *   On first run (or expired session), opens headed browser for Google OAuth.
- *   Session reused on subsequent runs until expiry.
+ * Auth strategy: persistent Chrome profile in tmp/misa-chrome-profile/
+ *   - First run: opens headed Chrome → user completes Google OAuth → profile saved
+ *   - Subsequent runs: headless with saved profile → already authenticated
+ *   - Profile is gitignored (tmp/) so it stays per-machine
  */
 
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-const SESSION_FILE = path.join(__dirname, '../config/.misa-session.json');
-const BASE_URL = 'https://moneykeeperapp.misa.vn';
-const DASHBOARD_URL = `${BASE_URL}/management/dashboard`;
-const CHROME_ARGS = ['--no-sandbox', '--disable-setuid-sandbox', '--disable-blink-features=AutomationControlled'];
+const PROFILE_DIR = path.join(__dirname, '../tmp/misa-chrome-profile');
+const DASHBOARD_URL = 'https://moneykeeperapp.misa.vn/management/dashboard';
+const CHROME_ARGS = [
+  '--no-sandbox',
+  '--disable-setuid-sandbox',
+  '--disable-blink-features=AutomationControlled',
+  `--user-data-dir=${PROFILE_DIR}`,
+];
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-function loadSession() {
-  if (!fs.existsSync(SESSION_FILE)) return null;
-  try {
-    const data = JSON.parse(fs.readFileSync(SESSION_FILE, 'utf8'));
-    // Treat session as expired if saved more than 12 hours ago
-    if (Date.now() - (data.savedAt || 0) > 12 * 60 * 60 * 1000) return null;
-    return data.cookies || null;
-  } catch { return null; }
+function clearProfile() {
+  if (fs.existsSync(PROFILE_DIR)) {
+    fs.rmSync(PROFILE_DIR, { recursive: true, force: true });
+    console.error('[misa] Chrome profile cleared.');
+  }
 }
-
-function saveSession(cookies) {
-  const dir = path.dirname(SESSION_FILE);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(SESSION_FILE, JSON.stringify({ savedAt: Date.now(), cookies }, null, 2));
-}
-
-function clearSession() {
-  if (fs.existsSync(SESSION_FILE)) fs.unlinkSync(SESSION_FILE);
-}
-
-/** Wait up to `timeout` ms for URL to match pattern */
-async function waitForRedirect(page, pattern, timeout = 300000) {
-  const re = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
-  return new Promise((resolve, reject) => {
-    const deadline = setTimeout(() => reject(new Error(`Login timeout after ${timeout}ms`)), timeout);
-    const check = async () => {
-      if (re.test(page.url())) { clearTimeout(deadline); return resolve(); }
-      setTimeout(check, 500);
-    };
-    check();
-  });
-}
-
-// ─── Browser ─────────────────────────────────────────────────────────────────
 
 async function launchBrowser(headless) {
   return puppeteer.launch({
@@ -66,123 +42,127 @@ async function launchBrowser(headless) {
   });
 }
 
-// ─── Login ───────────────────────────────────────────────────────────────────
-
-async function interactiveLogin() {
-  console.error('[misa] No valid session — opening browser for Google OAuth login...');
-  console.error('[misa] Complete the login in the browser window, then wait.');
-
-  const browser = await launchBrowser(false); // headed for OAuth
-  const page = await browser.newPage();
-
-  await page.goto(DASHBOARD_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-
-  // Wait for user to complete Google OAuth and land back on dashboard
-  await waitForRedirect(page, /\/management\/(dashboard|overview|home)/, 300000);
-
-  const cookies = await page.cookies();
-  await browser.close();
-
-  if (!cookies.length) throw new Error('No cookies after login — something went wrong');
-  saveSession(cookies);
-  console.error('[misa] Login successful, session saved.');
-  return cookies;
+/** Poll until page URL matches regex, or timeout */
+async function waitForUrl(page, pattern, timeout = 300000) {
+  const re = new RegExp(pattern);
+  const start = Date.now();
+  while (Date.now() - start < timeout) {
+    if (re.test(page.url())) return;
+    await new Promise(r => setTimeout(r, 800));
+  }
+  throw new Error(`Timed out waiting for URL to match ${pattern}. Last URL: ${page.url()}`);
 }
 
-// ─── Scrape ──────────────────────────────────────────────────────────────────
+/** Extract financial data from the dashboard page */
+async function extractData(page) {
+  // Give the SPA time to render fully
+  await new Promise(r => setTimeout(r, 3500));
 
-async function scrapeDashboard(cookies) {
-  const browser = await launchBrowser(true); // headless for data fetch
-  const page = await browser.newPage();
+  return page.evaluate(() => {
+    // Full visible text — primary source for AI parsing
+    const bodyText = document.body.innerText.slice(0, 10000);
 
-  // Inject saved session cookies
-  await page.setCookie(...cookies);
-  await page.goto(DASHBOARD_URL, { waitUntil: 'networkidle2', timeout: 45000 });
-
-  // Check if still on dashboard (not redirected to login)
-  if (!page.url().includes('/management/')) {
-    await browser.close();
-    return null; // session expired
-  }
-
-  // Give JS-rendered content time to load
-  await new Promise(r => setTimeout(r, 3000));
-
-  // Extract financial data from the DOM
-  const data = await page.evaluate(() => {
-    const getText = sel => {
-      const el = document.querySelector(sel);
-      return el ? el.innerText.trim() : null;
-    };
-    const getAll = sel => [...document.querySelectorAll(sel)].map(el => el.innerText.trim());
-
-    // Capture full visible text for fallback analysis
-    const bodyText = document.body.innerText.slice(0, 8000);
-
-    // Try to extract structured data via common patterns
-    // MISA renders tables and cards — grab any monetary values visible
-    const allNumbers = [];
-    document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"]').forEach(el => {
+    // Elements with monetary CSS class hints
+    const amountEls = [];
+    document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"], [class*="Price"], [class*="Revenue"]').forEach(el => {
       const text = el.innerText.trim();
-      if (text) allNumbers.push({ class: el.className.slice(0, 60), text });
+      if (text && text.length < 100) amountEls.push({ cls: el.className.slice(0, 80), text });
     });
 
-    // Grab table rows if any
-    const tableData = [];
-    document.querySelectorAll('table tr').forEach(row => {
-      const cells = [...row.querySelectorAll('td, th')].map(c => c.innerText.trim());
-      if (cells.length > 0 && cells.some(c => c.length > 0)) tableData.push(cells);
+    // Table data
+    const tables = [];
+    document.querySelectorAll('table').forEach(table => {
+      const rows = [];
+      table.querySelectorAll('tr').forEach(row => {
+        const cells = [...row.querySelectorAll('td, th')].map(c => c.innerText.trim());
+        if (cells.some(c => c.length > 0)) rows.push(cells);
+      });
+      if (rows.length > 0) tables.push(rows);
     });
 
-    // Grab card/widget titles with their values
+    // Card / widget blocks (deduplicated, capped)
+    const seen = new Set();
     const cards = [];
-    document.querySelectorAll('[class*="card"], [class*="widget"], [class*="panel"], [class*="box"]').forEach(el => {
-      const text = el.innerText.trim().slice(0, 200);
-      if (text.length > 5) cards.push(text);
+    document.querySelectorAll('[class*="card"], [class*="widget"], [class*="panel"], [class*="summary"]').forEach(el => {
+      const text = el.innerText.trim().slice(0, 300);
+      if (text.length > 10 && !seen.has(text)) { seen.add(text); cards.push(text); }
     });
 
-    return { url: location.href, bodyText, allNumbers, tableData, cards: [...new Set(cards)].slice(0, 20) };
+    return {
+      url: location.href,
+      bodyText,
+      amountEls: amountEls.slice(0, 50),
+      tables: tables.slice(0, 10),
+      cards: cards.slice(0, 25),
+    };
   });
-
-  // Take screenshot for visual reference
-  const screenshotPath = path.join(__dirname, '../tmp/misa-dashboard.png');
-  await page.screenshot({ path: screenshotPath, fullPage: false });
-
-  await browser.close();
-  return { ...data, screenshotPath };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 (async () => {
   const forceLogin = process.argv.includes('--login');
+  if (forceLogin) clearProfile();
 
-  if (forceLogin) {
-    clearSession();
-    console.error('[misa] Cleared session for fresh login.');
-  }
+  // Ensure profile dir exists (puppeteer needs the parent to exist)
+  fs.mkdirSync(path.dirname(PROFILE_DIR), { recursive: true });
 
-  let cookies = loadSession();
+  // First attempt: headless with saved profile (fast path for repeat runs)
+  const hasProfile = fs.existsSync(PROFILE_DIR) && fs.readdirSync(PROFILE_DIR).length > 0;
+
+  let browser;
+  let data;
 
   try {
-    if (!cookies) {
-      cookies = await interactiveLogin();
+    if (hasProfile && !forceLogin) {
+      // Try headless — profile may have a valid Google session
+      console.error('[misa] Trying headless with saved profile...');
+      browser = await launchBrowser(true);
+      const page = await browser.newPage();
+      await page.goto(DASHBOARD_URL, { waitUntil: 'networkidle2', timeout: 40000 });
+
+      if (page.url().includes('/management/')) {
+        // Already authenticated
+        console.error('[misa] Session valid — scraping headlessly.');
+        data = await extractData(page);
+        const screenshotPath = path.join(__dirname, '../tmp/misa-dashboard.png');
+        await page.screenshot({ path: screenshotPath, fullPage: false });
+        data.screenshotPath = screenshotPath;
+        await browser.close();
+        console.log(JSON.stringify(data, null, 2));
+        return;
+      }
+
+      // Redirected to login — fall through to headed login
+      console.error(`[misa] Headless redirected to: ${page.url()} — switching to headed login.`);
+      await browser.close();
     }
 
-    let data = await scrapeDashboard(cookies);
+    // Headed login — opens visible Chrome for Google OAuth
+    console.error('[misa] Opening browser for Google OAuth login...');
+    console.error('[misa] Log in with Google, then the window will close automatically.');
 
-    if (!data) {
-      // Session was stale — re-login once
-      console.error('[misa] Session expired, re-authenticating...');
-      clearSession();
-      cookies = await interactiveLogin();
-      data = await scrapeDashboard(cookies);
+    browser = await launchBrowser(false);
+    const page = await browser.newPage();
+    await page.goto(DASHBOARD_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+    // Wait for user to finish OAuth and land on dashboard
+    if (!page.url().includes('/management/')) {
+      await waitForUrl(page, '/management/', 300000);
     }
 
-    if (!data) throw new Error('Failed to fetch dashboard data after re-login');
+    console.error('[misa] Login detected — scraping data...');
+    data = await extractData(page);
+
+    const screenshotPath = path.join(__dirname, '../tmp/misa-dashboard.png');
+    await page.screenshot({ path: screenshotPath, fullPage: false });
+    data.screenshotPath = screenshotPath;
+
+    await browser.close();
 
     console.log(JSON.stringify(data, null, 2));
   } catch (err) {
+    if (browser) await browser.close().catch(() => {});
     console.error('[misa] Error:', err.message);
     process.exit(1);
   }
