@@ -32,3 +32,6 @@ plans/reports/general-purpose-*
 
 # Autorun logs may leak tokens from subagent curl commands
 reports/**/autorun.log
+
+# MISA MoneyKeeper auth session (contains Google OAuth cookies)
+config/.misa-session.json
