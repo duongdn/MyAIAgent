@@ -230,7 +230,7 @@ VuTQ not in plan (moved to Bailey — expected). HaVS not in plan (no alert).
 | Maddy - Carrick/Kai/Luis | ✓ | Active, no alerts |
 | John Yi - Amazing Meds | ✓ | BHRT request noted (follow up needed) |
 | James Diamond - Vinn | ✓ | Daily reports ✓, P1 being handled |
-| Rory | ⚠️ SKIP | LeNH 0h Wed, no leave |
+| Rory | ✓ | Upwork: 7.67h Wed tracked (sheet unfilled, reminder sent) |
 | Aysar | ⚠️ SKIP | KhanhHH 4h shortfall Wed |
 | Franc | ⚠️ SKIP | LeNH 0h Wed all sheets |
 | Elliott | ✓ | Batch 2 live, fixes active |
