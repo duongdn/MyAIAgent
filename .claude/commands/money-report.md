@@ -1,5 +1,5 @@
 ---
-description: MISA MoneyKeeper — fetch and analyze personal finance data (portfolio, allocation, debt, transactions)
+description: MISA MoneyKeeper — fetch and analyze personal finance data (portfolio, allocation, debt, transactions, finance review)
 ---
 
 # Money Report
@@ -17,13 +17,14 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 
 | Command | What it does | Output file |
 |---------|-------------|-------------|
-| `/money-report` | Full run — all 4 reports | portfolio + allocation + debt + transactions |
+| `/money-report` | Full run — all 5 reports | portfolio + allocation + debt + transactions + review |
 | `/money-report login` | Force re-login (clear Chrome profile) | — |
 | `/money-report summary` | Quick balance + net worth only | `{HHMM}-money-summary.md` |
 | `/money-report portfolio` | All accounts + category breakdown + concentration alerts | `{HHMM}-money-portfolio.md` |
 | `/money-report allocation` | Asset allocation % by type (BĐS/Tiết kiệm/ETF/Fund/Vàng/Cổ phiếu/Tiền mặt) | `{HHMM}-money-allocation.md` |
 | `/money-report debt` | Credit card balance + 12-month usage history + alerts | `{HHMM}-money-debt.md` |
 | `/money-report transactions` | Recent transactions + monthly income/expense summary | `{HHMM}-money-transactions.md` |
+| `/money-report review` | Finance review — strengths, risks, benchmark comparison, recommendations | appended to allocation report |
 
 ---
 
@@ -254,13 +255,62 @@ Recent transaction history + monthly income/expense summary.
 
 ---
 
+## Piece 6 — Finance Review (`/money-report review`)
+
+Analyzes the allocation report through a financial lens. **No new data fetch needed** — runs on top of the latest allocation report. If no allocation report exists for today, run `/money-report allocation` first.
+
+**Input:** Latest `reports/{YYYY-MM-DD}/{HHMM}-money-allocation.md`
+
+**Analysis framework:**
+
+### 1. Điểm mạnh (Strengths)
+List concrete positives: low debt ratio, DCA discipline, diversified income sources, inflation hedge assets.
+
+### 2. Rủi ro (Risks) — with severity
+For each risk, assign severity: 🔴 Cao / 🟡 Trung bình / 🟢 Thấp
+
+Key checks:
+- **Concentration**: Any asset class > 30% net worth → 🔴 if > 40%
+- **Liquidity**: Cash + 30-day liquid < 3 months expenses (assume 110M/month) → 🔴 if < 2 months
+- **Market correlation**: Are all equity positions in same market/sector?
+- **Currency risk**: USD/foreign exposure < 5% → 🟡
+- **Single asset risk**: Any single account > 25% net worth
+- **Credit card**: Spike > 2× 6-month average → 🟡
+
+### 3. Benchmark comparison
+Compare actual allocation vs global personal finance benchmarks:
+
+| Nhóm | Actual | Benchmark | Status |
+|------|--------|-----------|--------|
+| Bất động sản | X% | 20–30% | ⚠️/✅ |
+| Cổ phiếu/ETF/Fund | X% | 30–50% | ⚠️/✅ |
+| Trái phiếu/Tiết kiệm | X% | 10–20% | ⚠️/✅ |
+| Vàng/Commodity | X% | 5–15% | ⚠️/✅ |
+| Tiền mặt | X% | 5–10% | ⚠️/✅ |
+
+### 4. Upcoming decisions
+Flag any time-sensitive decisions (maturities, rebalancing opportunities) within 90 days.
+
+### 5. Khuyến nghị
+Prioritized, actionable recommendations:
+- Short-term (30 days): what to do now
+- Medium-term (6–12 months): structural improvements
+- Long-term (>1 year): strategic rebalancing
+
+**Output:** Appended as `## Finance Review` section to the existing allocation report (same file).
+
+**Note:** Benchmarks are general guidelines for Vietnamese context — RE benchmark slightly higher than Western (20-30% vs 15-25%) given VN property market dynamics. Monthly expense assumption: 110M ₫/month unless user corrects.
+
+---
+
 ## Full Run (`/money-report`)
 
-Runs all 4 substantive pieces. Sequence:
+Runs all 5 pieces. Sequence:
 
 1. Fetch data once (`node scripts/misa-money-report.js`)
 2. Parallel: Portfolio + Allocation + Debt + Transactions
-3. Write 4 separate report files to `reports/{YYYY-MM-DD}/`
+3. Run Review (reads from Allocation output)
+4. Write reports to `reports/{YYYY-MM-DD}/`
 
 ---
 
