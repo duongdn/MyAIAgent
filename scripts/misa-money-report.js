@@ -53,49 +53,103 @@ async function waitForUrl(page, pattern, timeout = 300000) {
   throw new Error(`Timed out waiting for URL to match ${pattern}. Last URL: ${page.url()}`);
 }
 
-/** Extract financial data from the dashboard page */
-async function extractData(page) {
-  // Give the SPA time to render fully
-  await new Promise(r => setTimeout(r, 3500));
+const wait = ms => new Promise(r => setTimeout(r, ms));
 
+/** Grab full visible text + money elements from current page state */
+async function snapPage(page) {
+  await wait(2000);
   return page.evaluate(() => {
-    // Full visible text — primary source for AI parsing
-    const bodyText = document.body.innerText.slice(0, 10000);
-
-    // Elements with monetary CSS class hints
-    const amountEls = [];
-    document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"], [class*="Price"], [class*="Revenue"]').forEach(el => {
+    const bodyText = document.body.innerText.slice(0, 15000);
+    const moneyEls = [];
+    document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"]').forEach(el => {
       const text = el.innerText.trim();
-      if (text && text.length < 100) amountEls.push({ cls: el.className.slice(0, 80), text });
+      if (text && text.length < 120) moneyEls.push({ cls: el.className.slice(0, 80), text });
     });
-
-    // Table data
-    const tables = [];
-    document.querySelectorAll('table').forEach(table => {
-      const rows = [];
-      table.querySelectorAll('tr').forEach(row => {
-        const cells = [...row.querySelectorAll('td, th')].map(c => c.innerText.trim());
-        if (cells.some(c => c.length > 0)) rows.push(cells);
-      });
-      if (rows.length > 0) tables.push(rows);
-    });
-
-    // Card / widget blocks (deduplicated, capped)
-    const seen = new Set();
-    const cards = [];
-    document.querySelectorAll('[class*="card"], [class*="widget"], [class*="panel"], [class*="summary"]').forEach(el => {
-      const text = el.innerText.trim().slice(0, 300);
-      if (text.length > 10 && !seen.has(text)) { seen.add(text); cards.push(text); }
-    });
-
-    return {
-      url: location.href,
-      bodyText,
-      amountEls: amountEls.slice(0, 50),
-      tables: tables.slice(0, 10),
-      cards: cards.slice(0, 25),
-    };
+    return { url: location.href, bodyText, moneyEls: moneyEls.slice(0, 80) };
   });
+}
+
+/** Click element by exact inner text, return true if found */
+async function clickByText(page, text) {
+  return page.evaluate((label) => {
+    const el = [...document.querySelectorAll('a, button, [role="tab"], li, span, div')]
+      .find(e => e.innerText.trim() === label);
+    if (el) { el.click(); return true; }
+    return false;
+  }, text);
+}
+
+/** Click "Xem thêm" / "Xem tất cả" buttons until none remain */
+async function expandAll(page) {
+  for (let i = 0; i < 10; i++) {
+    const clicked = await page.evaluate(() => {
+      const btn = [...document.querySelectorAll('a, button, span')]
+        .find(e => /Xem thêm|Xem tất cả/.test(e.innerText.trim()));
+      if (btn) { btn.click(); return true; }
+      return false;
+    });
+    if (!clicked) break;
+    await wait(1500);
+  }
+}
+
+/** Navigate to accounts page via the nav menu link, return actual URL */
+async function gotoAccountsPage(page) {
+  // Try clicking "Tài khoản" in the sidebar nav to get the real URL
+  const BASE = 'https://moneykeeperapp.misa.vn';
+  const navClicked = await page.evaluate(() => {
+    // Find nav link with exactly "Tài khoản" text (not sub-items)
+    const links = [...document.querySelectorAll('nav a, aside a, [class*="nav"] a, [class*="sidebar"] a, [class*="menu"] a')];
+    const link = links.find(a => a.innerText.trim() === 'Tài khoản');
+    if (link) { link.click(); return link.href || true; }
+    return false;
+  });
+
+  await wait(2000);
+  const currentUrl = page.url();
+
+  // If nav click didn't navigate (SPA might need direct URL), try known routes
+  if (!navClicked || currentUrl.includes('/dashboard')) {
+    for (const candidate of ['/management/account', '/management/accounts', '/management/wallet']) {
+      await page.goto(`${BASE}${candidate}`, { waitUntil: 'networkidle2', timeout: 20000 });
+      await wait(1500);
+      if (!page.url().includes('/dashboard')) break;
+    }
+  }
+
+  return page.url();
+}
+
+/** Extract data from dashboard + full accounts page (all tabs + expanded) */
+async function extractData(page) {
+  // 1. Dashboard snapshot
+  await wait(3500);
+  const dashboard = await snapPage(page);
+
+  // 2. Navigate to dedicated accounts page
+  const accountsUrl = await gotoAccountsPage(page);
+  console.error(`[misa] Accounts page: ${accountsUrl}`);
+
+  // Expand all "Xem thêm" on the default tab first
+  await expandAll(page);
+  const regularAccounts = await snapPage(page);
+
+  // 3. Click "Sổ tiết kiệm" tab and expand
+  const hasSavings = await clickByText(page, 'Sổ tiết kiệm');
+  await wait(2000);
+  if (hasSavings) await expandAll(page);
+  const savings = hasSavings ? await snapPage(page) : null;
+
+  // 4. Click "Tích lũy" tab and expand
+  await clickByText(page, 'Tích lũy');
+  await wait(2000);
+  await expandAll(page);
+  const accumulation = await snapPage(page);
+
+  return {
+    dashboard,
+    accountsPage: { url: accountsUrl, regularAccounts, savings, accumulation },
+  };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -129,7 +183,7 @@ async function extractData(page) {
         await page.screenshot({ path: screenshotPath, fullPage: false });
         data.screenshotPath = screenshotPath;
         await browser.close();
-        console.log(JSON.stringify(data, null, 2));
+        process.stdout.write(JSON.stringify(data, null, 2));
         return;
       }
 
@@ -160,7 +214,7 @@ async function extractData(page) {
 
     await browser.close();
 
-    console.log(JSON.stringify(data, null, 2));
+    process.stdout.write(JSON.stringify(data, null, 2));
   } catch (err) {
     if (browser) await browser.close().catch(() => {});
     console.error('[misa] Error:', err.message);
