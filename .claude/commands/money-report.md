@@ -21,7 +21,8 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 | `/money-report login` | Force re-login (clear Chrome profile) | — |
 | `/money-report summary` | Quick balance + net worth only | `{HHMM}-money-summary.md` |
 | `/money-report portfolio` | All accounts + category breakdown + concentration alerts | `{HHMM}-money-portfolio.md` |
-| `/money-report allocation` | Asset allocation % by type (BĐS/Tiết kiệm/ETF/Fund/Vàng/Cổ phiếu/Tiền mặt) | `{HHMM}-money-allocation.md` |
+| `/money-report allocation` | Investable asset allocation (excl. nhà ở 2.5B) | `{HHMM}-money-allocation.md` |
+| `/money-report allocation --with-home` | Full allocation incl. nhà ở (non-tradeable) | same file, full-view section |
 | `/money-report debt` | Credit card balance + 12-month usage history + alerts | `{HHMM}-money-debt.md` |
 | `/money-report transactions` | Recent transactions + monthly income/expense summary | `{HHMM}-money-transactions.md` |
 | `/money-report review` | Finance review — strengths, risks, benchmark comparison, recommendations | appended to allocation report |
@@ -181,6 +182,8 @@ Fund (Finhay): X ₫
 - Upcoming maturities
 - Investment strategy notes
 ```
+
+**`--with-home` flag:** Default excludes `walletName = "Nhà"` (2.5B, primary residence, non-tradeable). Pass `--with-home` to include it in the allocation table and percentages. Always show a separate "Full View" section at the bottom with home included regardless of flag.
 
 **Note on totals:** `totaldashboard` = market-value-based total from MISA. Cost-basis calc from transactions may differ ±5-10% due to market P&L. Use totaldashboard as authoritative total.
 

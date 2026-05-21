@@ -3,24 +3,28 @@
 Source: MISA MoneyKeeper API
 Accounts+Savings total: 6,317,372,431 ₫ | totaldashboard: 7,897,518,595 ₫
 
+> **Default view: Nhà ở (2.5B) excluded** — nhà đang ở, không thể giao dịch.  
+> Xem tổng kể cả nhà: [Full view (incl. nhà ở)](#full-view-incl-nhà-ở) ở cuối.
+
 ---
 
-## Tỉ lệ tài sản
+## Tỉ lệ tài sản — Investable (~5.45B)
 
-| Loại | Tổng (₫) | % Total | Ghi chú |
-|------|----------|---------|---------|
-| 🏠 Bất động sản | 3,520,000,000 | **44.5%** | Nhà (2.5B) + long an res (1.02B) |
-| 🏦 Tiết kiệm | 1,212,271,771 | **15.3%** | VCB + Tikop term deposits + Tikop balance |
-| 🥇 Vàng | 817,500,000 | **10.3%** | 50 units |
-| 🏢 Cổ phiếu | ~820,000,000 | **~10.4%** | Larion (600M) + FPTS VEA/ADP dividend (220M) |
-| 📈 ETF | ~766,448,575 | **~9.7%** | VCBS VN30/VN100/VN1000 (750M) + FPTS ETF (16M) |
-| 🏛️ Fund | ~668,467,069 | **~8.4%** | VCBF (594M) + Finhay (74M) |
-| 💵 Tiền mặt | 191,574,467 | **2.4%** | Paypal USD + vcb + Ví + Momo |
-| 💳 Nợ (VCB Visa) | 24,990,000 | **0.3%** | Credit card, tháng 5 cao nhất 12m |
+*Loại trừ nhà ở 2.5B. Đây là phần tài sản có thể giao dịch/đầu tư.*
 
-**Total (incl. ETF/Fund/Cổ phiếu):** ~7,971,271,882 ₫  
-**Net (excl. debt):** ~7,946,281,882 ₫  
-*(vs totaldashboard 7,897M — ~49M diff, sát hơn sau khi reclassify FPTS đúng)*
+| Loại | Tổng (₫) | % Investable | Ghi chú |
+|------|----------|-------------|---------|
+| 🏦 Tiết kiệm | 1,212,271,771 | **22.3%** | VCB + Tikop term deposits + Tikop balance |
+| 🏠 BĐS (long an res) | 1,020,000,000 | **18.7%** | Đất/nhà đầu tư, có thể bán |
+| 🥇 Vàng | 817,500,000 | **15.0%** | 50 units |
+| 🏢 Cổ phiếu | ~820,000,000 | **~15.1%** | Larion (600M) + FPTS VEA/ADP dividend (220M) |
+| 📈 ETF | ~766,448,575 | **~14.1%** | VCBS VN30/VN100/VN1000 (750M) + FPTS ETF (16M) |
+| 🏛️ Fund | ~668,467,069 | **~12.3%** | VCBF (594M) + Finhay (74M) |
+| 💵 Tiền mặt | 191,574,467 | **3.5%** | Paypal USD + vcb + Ví + Momo |
+| 💳 Nợ (VCB Visa) | 24,990,000 | **0.5%** | Credit card |
+
+**Investable Gross:** ~5,471,261,882 ₫  
+**Investable Net (excl. debt):** ~5,446,271,882 ₫
 
 ---
 
@@ -129,28 +133,30 @@ Cổ phiếu (riêng) = ~820M
 
 ---
 
-## Visual (Total ~7.9B)
+## Visual — Investable (~5.45B, excl. nhà ở)
 
 ```
-Total ~7.95B ₫
-├── 🏠 Bất động sản  ████████████████████████         44.5%  (3,520M)
-├── 🏦 Tiết kiệm     ████████                         15.3%  (1,212M)
-├── 🥇 Vàng          ██████                           10.3%    (817M)
-├── 🏢 Cổ phiếu      ██████                           10.4%    (820M)  Larion+VEA+ADP
-├── 📈 ETF            █████                             9.7%    (766M)  VCBS+FPTS ETF
-├── 🏛️ Fund           █████                             8.4%    (668M)  VCBF+Finhay
-├── 💵 Tiền mặt       █                                 2.4%    (192M)
-└── 💳 Nợ             ▏                                 0.3%     (25M)
+Investable Net ~5.45B ₫
+├── 🏦 Tiết kiệm     ████████████                     22.3%  (1,212M)
+├── 🏠 Long an res   ██████████                       18.7%  (1,020M)
+├── 🏢 Cổ phiếu      ████████                         15.1%    (820M)  Larion+VEA+ADP
+├── 🥇 Vàng          ████████                         15.0%    (817M)
+├── 📈 ETF            ███████                          14.1%    (766M)  VCBS+FPTS ETF
+├── 🏛️ Fund           ███████                          12.3%    (668M)  VCBF+Finhay
+├── 💵 Tiền mặt       ██                                3.5%    (192M)
+└── 💳 Nợ             ▏                                 0.5%     (25M)
 ```
 
 ---
 
 ## Nhận xét
 
-- BĐS + ETF/Fund + Vàng + Cổ phiếu = **92.8%** — phần lớn tài sản kém thanh khoản
-- Cổ phiếu 10.4%: Larion (cổ tức định kỳ) + FPTS VEA/ADP (dividend stocks, DCA)
-- ETF 9.7%: VCBS DCA VN30/VN100/VN1000 từ Dec 2025 — tập trung nhất Jan 2026 (178M)
-- Fund 8.4%: VCBF (594M, chủ yếu Dec 2025) + Finhay (74M)
+*(Investable view — excl. nhà ở 2.5B)*
+- Long an res (1.02B) vẫn tính là tài sản đầu tư có thể bán
+- Cổ phiếu 15.1%: Larion (cổ tức định kỳ) + FPTS VEA/ADP (dividend stocks, DCA)
+- ETF 14.1%: VCBS DCA VN30/VN100/VN1000 từ Dec 2025 — tập trung nhất Jan 2026 (178M)
+- Fund 12.3%: VCBF (594M, chủ yếu Dec 2025) + Finhay (74M)
+- Equity (Cổ phiếu+ETF+Fund) = **41.5%** của investable assets
 - Tiền mặt ngay: **2.4%** (192M) = 2.7 tháng (70M/tháng)
 - Tiết kiệm 1,212M = emergency fund pool thực tế → tổng 20 tháng → ✅ an toàn
 - Tiết kiệm đáo hạn tháng 6: **+704M** → dự kiến tái gửi 600–650M (thị trường đang bất ổn)
@@ -202,15 +208,17 @@ Phân bổ đề xuất (conservative — ưu tiên tiết kiệm):
 
 ### 📊 Đánh giá theo nhóm tài sản
 
-| Nhóm | Tỉ lệ hiện tại | Benchmark | Đánh giá |
-|------|---------------|-----------|----------|
-| Bất động sản | 44.5% | 20–30% | ⚠️ Quá cao — cân nhắc exit long an res khi có cơ hội |
-| Cổ phiếu | 10.4% | 10–20% | ✅ Ổn — Larion + VEA/ADP dividend |
-| ETF | 9.7% | 10–20% | ✅ Đang tích lũy qua DCA |
-| Fund | 8.4% | 5–15% | ✅ Ổn |
-| Vàng | 10.3% | 5–15% | ✅ Trong ngưỡng tốt |
-| Tiết kiệm | 15.3% | 10–20% | ✅ Ổn, kế hoạch tái gửi tháng 6 |
-| Tiền mặt | 2.4% | 5–10% | ⚠️ Thấp (tiết kiệm bù đắp làm emergency fund) |
+*Tính trên investable assets (~5.45B, excl. nhà ở)*
+
+| Nhóm | Tỉ lệ (investable) | Benchmark | Đánh giá |
+|------|-------------------|-----------|----------|
+| BĐS (long an res) | 18.7% | 15–25% | ✅ Hợp lý khi excl. nhà ở |
+| Cổ phiếu | 15.1% | 10–20% | ✅ Larion + VEA/ADP |
+| ETF | 14.1% | 10–20% | ✅ Đang tích lũy qua DCA |
+| Fund | 12.3% | 5–15% | ✅ Ổn |
+| Vàng | 15.0% | 5–15% | ✅ Hơi cao đầu ngưỡng, vẫn OK |
+| Tiết kiệm | 22.3% | 10–20% | 🟡 Hơi cao nhưng có lý: thị trường bất ổn + emergency fund |
+| Tiền mặt | 3.5% | 5–10% | ⚠️ Thấp (tiết kiệm bù đắp) |
 
 ### 💡 Cơ hội cải thiện (ưu tiên)
 
@@ -219,6 +227,26 @@ Phân bổ đề xuất (conservative — ưu tiên tiết kiệm):
 3. **Trung hạn:** Cân nhắc thêm tài sản quốc tế để phá vỡ correlation 100% VN equity (ETF S&P500 nếu VCBS hỗ trợ, hoặc tăng USD qua Paypal).
 4. **Dài hạn:** Đánh giá long an res — ứng viên để rebalance BĐS về <35% nếu không có kế hoạch phát triển cụ thể.
 5. **Theo dõi liên tục:** VCBF + Finhay NAV vs cost basis — nếu underperform tiết kiệm thì consolidate vào ETF.
+
+---
+
+## Full View (incl. nhà ở)
+
+*Option `--with-home`: bao gồm nhà ở 2.5B để thấy tổng tài sản ròng.*
+
+| Loại | Tổng (₫) | % Total |
+|------|----------|---------|
+| 🏠 Nhà ở *(không giao dịch)* | 2,500,000,000 | 31.4% |
+| 🏠 Long an res | 1,020,000,000 | 12.8% |
+| 🏦 Tiết kiệm | 1,212,271,771 | 15.2% |
+| 🥇 Vàng | 817,500,000 | 10.3% |
+| 🏢 Cổ phiếu | ~820,000,000 | ~10.3% |
+| 📈 ETF | ~766,448,575 | ~9.6% |
+| 🏛️ Fund | ~668,467,069 | ~8.4% |
+| 💵 Tiền mặt | 191,574,467 | 2.4% |
+| 💳 Nợ | -24,990,000 | -0.3% |
+
+**Total Net (incl. nhà ở):** ~7,946,281,882 ₫ (~7.95B)
 
 ---
 
