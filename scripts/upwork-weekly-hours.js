@@ -45,6 +45,8 @@ async function main() {
       continue;
     }
 
+    const account = config.accounts.find(a => a.name === accountName);
+
     const browser = await puppeteer.launch({
       headless: 'new',
       userDataDir: profileDir,
@@ -58,9 +60,21 @@ async function main() {
     await page.setViewport({ width: 1280, height: 900 });
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36');
 
+    // Attempt headless re-login once if session expired
+    let loggedIn = false;
     for (const room of rooms) {
       try {
-        const data = await fetchWorkroomHours(page, room);
+        let data = await fetchWorkroomHours(page, room);
+        if (data.status === 'session_expired' && !loggedIn && account) {
+          console.error(`Session expired for ${accountName}, attempting headless re-login...`);
+          const loginOk = await headlessLogin(page, account);
+          loggedIn = true;
+          if (loginOk) {
+            data = await fetchWorkroomHours(page, room);
+          } else {
+            data = { workroom: room.name, status: 'login_failed', error: 'Headless re-login failed (CAPTCHA/2FA needed). Run: node scripts/upwork-login.js --login --account=' + accountName };
+          }
+        }
         results.push(data);
       } catch (err) {
         console.error(`Error fetching ${room.name}:`, err.message);
@@ -74,20 +88,76 @@ async function main() {
   console.log(JSON.stringify(results, null, 2));
 }
 
+// Attempt headless credential login. Returns true if landed on authenticated page.
+// Only works if Upwork doesn't challenge with CAPTCHA/2FA (common for short-expiry sessions).
+async function headlessLogin(page, account) {
+  try {
+    await page.goto('https://www.upwork.com/nx/login', { waitUntil: 'networkidle2', timeout: 30000 });
+    await new Promise(r => setTimeout(r, 2000));
+
+    // Fill username
+    await page.waitForSelector('input[name="login[username]"]', { timeout: 8000 });
+    await page.type('input[name="login[username]"]', account.username, { delay: 50 });
+    await page.click('button[data-qa="btn-next"]');
+    await new Promise(r => setTimeout(r, 2000));
+
+    // Fill password
+    await page.waitForSelector('input[name="login[password]"]', { timeout: 8000 });
+    await page.type('input[name="login[password]"]', account.password, { delay: 50 });
+    await page.click('button[data-qa="btn-submit"]');
+    await new Promise(r => setTimeout(r, 5000));
+
+    const url = page.url();
+    const authenticated = !url.includes('login') && !url.includes('account-security');
+    console.error(`Headless login result for ${account.name}: ${authenticated ? 'SUCCESS' : 'NEEDS_CAPTCHA'} (${url})`);
+    return authenticated;
+  } catch (err) {
+    console.error(`Headless login error for ${account.name}:`, err.message);
+    return false;
+  }
+}
+
 async function fetchWorkroomHours(page, room) {
   const timesheetUrl = `https://www.upwork.com/nx/wm/workroom/${room.workroom_id}/timesheet`;
   console.error(`Fetching ${room.name} (${room.workroom_id})...`);
 
+  // Intercept Upwork API timesheet response for reliable data extraction
+  let interceptedData = null;
+  const responseHandler = async (response) => {
+    const url = response.url();
+    if (url.includes('/api/v3/contractors/reports/hours/summary') ||
+        url.includes('/api/v2/workrooms') && url.includes('timesheet') ||
+        url.includes('/timereports/v1') ||
+        url.includes('timesheet') && url.includes('json')) {
+      try {
+        const json = await response.json();
+        interceptedData = json;
+      } catch (_) {}
+    }
+  };
+  page.on('response', responseHandler);
+
   await page.goto(timesheetUrl, { waitUntil: 'networkidle2', timeout: 30000 });
   await new Promise(r => setTimeout(r, 5000));
+  page.off('response', responseHandler);
 
-  const url = page.url();
-  if (url.includes('login') || url.includes('account-security')) {
+  const currentUrl = page.url();
+  if (currentUrl.includes('login') || currentUrl.includes('account-security')) {
     return { workroom: room.name, status: 'session_expired' };
   }
 
-  // Extract summary stats from the page
+  // Cloudflare challenge detection — page too short or contains CF challenge text
   const pageText = await page.evaluate(() => document.body.innerText);
+  if (pageText.length < 200 && (pageText.includes('Cloudflare') || pageText.includes('Ray ID') || currentUrl.includes('__cf_chl'))) {
+    console.error(`Cloudflare challenge detected for ${room.name}, waiting 10s and retrying...`);
+    await new Promise(r => setTimeout(r, 10000));
+    const retryText = await page.evaluate(() => document.body.innerText);
+    if (retryText.length < 200) {
+      return { workroom: room.name, status: 'cloudflare_blocked', error: 'Cloudflare challenge not resolved. Try running during off-peak hours or use --login to refresh session.' };
+    }
+  }
+
+  // Extract summary stats from the page
 
   // Parse summary stats
   const thisWeekMatch = pageText.match(/This week\n([\d:]+)\s*hrs/);
