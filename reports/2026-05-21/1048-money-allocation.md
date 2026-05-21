@@ -166,15 +166,23 @@ Investable Net ~5.45B ₫
 
 ## Finance Review
 
+### 🟢 Đánh giá tổng thể: Tài chính tốt hơn mức "OK" — khá vững
+
+- **Net worth ~8B, nợ 0.3%** — không đòn bẩy, không áp lực tài chính
+- **Emergency fund 17 tháng** qua tiết kiệm — rất an toàn
+- **Thu nhập đa dạng** — lương + cổ tức + dividends + lãi tiết kiệm, không phụ thuộc 1 nguồn
+- **Investable assets balanced**: BĐS 18.7%, equity 41.5%, tiết kiệm+vàng 37% — không chỗ nào lệch quá
+- **Quyết định tháng 6 đúng hướng** — tái gửi tiết kiệm trong thị trường bất ổn thay vì ép DCA là kỷ luật tốt
+
 ### ✅ Điểm mạnh
 
 | # | Điểm |
 |---|------|
 | 1 | **Nợ 0.3%** — không có đòn bẩy tài chính, rủi ro thấp tuyệt đối |
-| 2 | **DCA ETF** — chiến lược VN30/VN100/VN1000 theo định kỳ từ Dec 2025, giảm timing risk |
-| 3 | **Vàng 10.3%** — hedge lạm phát hợp lý, dễ thanh khoản hơn BĐS |
+| 2 | **DCA ETF có hệ thống** — VN30/VN100/VN1000 định kỳ từ Dec 2025, giảm timing risk |
+| 3 | **Vàng 15%** — hedge lạm phát tốt, thanh khoản hơn BĐS |
 | 4 | **Đa dạng thu nhập**: lương + cổ tức Larion (209M/Apr 2026) + VEA dividends (175.6M/Jan 2026) + lãi tiết kiệm (~79M/năm) |
-| 5 | **Tiết kiệm phân tán** — VCB + Tikop (không tập trung 1 tổ chức) |
+| 5 | **Tiết kiệm phân tán** — VCB + Tikop, không tập trung 1 tổ chức |
 
 ### ⚠️ Rủi ro
 
@@ -182,10 +190,11 @@ Investable Net ~5.45B ₫
 |---|--------|--------|
 | 1 | **BĐS chiếm 44.5%** — vượt ngưỡng an toàn 20–30% tài sản ròng theo chuẩn quốc tế. Cả 2 BĐS đều kém thanh khoản, không có exit dễ | 🔴 Cao |
 | 2 | **Tiền mặt 2.4% (192M) = 2.7 tháng** (70M/tháng) — nếu tính riêng cash thì thấp, nhưng tiết kiệm 1,212M = emergency fund pool thực tế → tổng 20 tháng, hoàn toàn an toàn. Rủi ro chỉ ở chỗ cần phá tiết kiệm sớm nếu cần tiền ngay | 🟢 Thấp |
-| 3 | **Toàn bộ cổ phiếu/ETF là thị trường Việt Nam** — VN30, VN100, VN1000, VEA, ADP đều 100% VN. Nếu VN market điều chỉnh, toàn bộ vị thế equity cùng giảm | 🟡 Trung bình |
-| 4 | **USD exposure 2%** (Paypal 6,049 USD) — quá thấp để hedge nếu VND mất giá | 🟡 Trung bình |
-| 5 | **Finhay 0.9% (74M)** — quá nhỏ để có tác động ý nghĩa, phân tán quản lý | 🟢 Thấp |
-| 6 | **May card spike 74.5M** — 2.4× avg 6 tháng; 25M học hành (one-off?). Cần theo dõi tháng 6 | 🟢 Thấp |
+| 3 | **100% equity là thị trường VN** — VN30, VN100, VN1000, VEA, ADP đều VN. Nếu VN market gặp cú sốc lớn, toàn bộ vị thế equity bị ảnh hưởng cùng lúc. Không nguy hiểm ngay nhưng cần nghĩ đến long-term | 🟡 Trung bình |
+| 4 | **Long an res 1.02B "nằm im"** — 18.7% investable bị lock nếu không có kế hoạch phát triển. Không urgent nhưng đáng review | 🟡 Trung bình |
+| 5 | **USD exposure 2%** (Paypal 6,049 USD) — thấp để hedge nếu VND mất giá | 🟡 Trung bình |
+| 6 | **Finhay 74M (1.4% investable)** — quá nhỏ để tác động ý nghĩa, phân tán quản lý | 🟢 Thấp |
+| 7 | **May card spike 74.5M** — 2.4× avg 6 tháng; 25M học hành (one-off?). Cần theo dõi tháng 6 | 🟢 Thấp |
 
 ### 🎯 Khuyến nghị — June 2026 Maturity Decision (704M)
 
