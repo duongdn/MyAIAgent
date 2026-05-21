@@ -287,3 +287,28 @@ LongVV: 0h Wed is normal (part-time) — no reminder.
 ---
 
 *Matrix token refreshed (was expired). Timelines updated.*
+
+---
+
+## Aysar Update — 15:00 +07:00
+
+**KhanhHH task log today (Thu 2026-05-21):**
+| Task | Hours |
+|------|-------|
+| Test coverage AuthenticationLog #610 | 2h |
+| k6 load test getDevices/profile #611 | 2h |
+| Handle Change Team Ownership #533 feedbacks | 4h |
+| **Total** | **8h** |
+
+**Matrix room "Jamie, Ronan" (!gjtiuNjeqDarGWkSnf):** No messages since 2026-05-13. No daily report today.
+
+**Baamboozle Slack (today):**
+- @skjamie25 (client): sign-in page still redirecting to old page (~13:27)
+- @carrick: fixed + deployed to nusdev (~13:55). Team game share feature temporarily paused (PR closed).
+- No daily report from KhanhHH in Slack.
+
+**GitHub (baamboozle-web-app):** 8 open issues (last updated 2026-05-15, no new issues today). bbzl-web-client: 0 open issues.
+
+**Action:** Reminder sent to room !gjtiuNjeqDarGWkSnf — asked KhanhHH to post daily report.
+
+**Trello Aysar:** ⚠️ No open "Check progress" card found for today (already recycled from morning run). Alert noted in report.
