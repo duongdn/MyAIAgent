@@ -137,6 +137,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey invoices use WBS estimates (not task log actuals)
 ### Aysar / Baamboozle
 - [feedback_aysar_github_issues.md](feedback_aysar_github_issues.md) — Also check baamboozle/baamboozle-web-app + bbzl-web-client open issues (carrick token)
+- [feedback_aysar_jamie_ronan_room.md](feedback_aysar_jamie_ronan_room.md) — Check Matrix room "Jamie, Ronan" (!gjtiuNjeqDarGWkSnf) for daily reports; no report when tasks exist = remind in room
 ### Other
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel weekly Matrix message format
 
