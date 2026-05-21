@@ -105,13 +105,40 @@ async function gotoAccountsPage(page) {
   return page.url();
 }
 
+/** Expand rows-per-page to 50 to show all records on fewer pages */
+async function expandRowsPerPage(page) {
+  // Click the combobox border to open the dropdown
+  await page.evaluate(() => {
+    const combo = document.querySelector('.combo-pageSize .border');
+    if (combo) combo.click();
+  });
+  await wait(800);
+
+  // Click the "50" option (largest available)
+  const picked = await page.evaluate(() => {
+    const li = [...document.querySelectorAll('li')].find(el => el.innerText.trim() === '50');
+    if (li) { li.click(); return true; }
+    return false;
+  });
+
+  if (picked) {
+    await wait(2000);
+    console.error('[misa] Set rows/page to 50');
+  }
+  return picked;
+}
+
 /** Paginate through all pages of a tab and collect all bodyText snapshots */
 async function scrapeAllPages(page) {
+  // First try to expand rows per page to show all at once
+  await expandRowsPerPage(page);
+  await wait(1500);
+
   const pages = [];
-  for (let i = 0; i < 20; i++) { // max 20 pages guard
+  for (let i = 0; i < 30; i++) { // max 30 pages guard
     await wait(1500);
     const snap = await page.evaluate(() => {
-      const bodyText = document.body.innerText.slice(0, 15000);
+      const bodyText = document.body.innerText.slice(0, 20000);
       const moneyEls = [];
       document.querySelectorAll('[class*="amount"], [class*="balance"], [class*="total"], [class*="money"], [class*="value"]').forEach(el => {
         const text = el.innerText.trim();
@@ -121,16 +148,16 @@ async function scrapeAllPages(page) {
     });
     pages.push(snap);
 
-    // Click "next page" — look for > or → or "Tiếp theo" pagination button
+    // Click next page arrow (icon-arrow-next, enabled only when not on last page)
     const hasNext = await page.evaluate(() => {
-      const btn = [...document.querySelectorAll('button, a, li, span')]
-        .find(el => {
-          const t = el.innerText.trim();
-          const cls = el.className || '';
-          return (t === '>' || t === '›' || t === 'Tiếp theo' || /next|chevron-right/.test(cls))
-            && !el.disabled && !el.closest('[disabled]') && !cls.includes('disabled');
-        });
-      if (btn) { btn.click(); return true; }
+      const btn = document.querySelector('i.icon-arrow-next:not([disabled="true"])');
+      if (btn) {
+        const wrapper = btn.closest('[class*="ms-icon"]') || btn.parentElement;
+        if (wrapper && wrapper.getAttribute('disabled') !== 'true') {
+          wrapper.click();
+          return true;
+        }
+      }
       return false;
     });
     if (!hasNext) break;
@@ -138,41 +165,127 @@ async function scrapeAllPages(page) {
   return pages;
 }
 
-/** Extract data from dashboard + full accounts page (all tabs + all pages) */
+/** Filter by status "Đang hoạt động" to reduce result set */
+async function filterActiveOnly(page) {
+  // Click the Trạng thái combobox (Status filter)
+  const opened = await page.evaluate(() => {
+    const combos = [...document.querySelectorAll('.ms-combobox .border')];
+    // Find the one with "Tất cả" related to Trạng thái
+    const label = [...document.querySelectorAll('label, span, div')]
+      .find(el => el.innerText.trim() === 'Trạng thái:');
+    if (label) {
+      const combo = label.parentElement?.querySelector?.('.border') ||
+                    label.nextElementSibling?.querySelector?.('.border');
+      if (combo) { combo.click(); return true; }
+    }
+    // Fallback: click second combobox (Status is usually 2nd filter)
+    if (combos[1]) { combos[1].click(); return true; }
+    return false;
+  });
+  if (!opened) return false;
+  await wait(800);
+
+  // Click "Đang hoạt động" option
+  const picked = await page.evaluate(() => {
+    const li = [...document.querySelectorAll('li')]
+      .find(el => el.innerText.trim() === 'Đang hoạt động');
+    if (li) { li.click(); return true; }
+    return false;
+  });
+  if (picked) await wait(2000);
+  return picked;
+}
+
+/** Intercept the JWT bearer token via CDP Network events (no interception needed) */
+async function captureAuthToken(page, timeoutMs = 15000) {
+  const client = await page.createCDPSession();
+  await client.send('Network.enable');
+
+  return new Promise((resolve) => {
+    const timer = setTimeout(async () => {
+      await client.detach().catch(() => {});
+      resolve(null);
+    }, timeoutMs);
+
+    client.on('Network.requestWillBeSent', async (event) => {
+      const url = event.request.url;
+      if (url.includes('/api/v1/') || url.includes('/api/business/')) {
+        const auth = event.request.headers?.['Authorization'] || event.request.headers?.['authorization'];
+        if (auth && auth.startsWith('Bearer ')) {
+          clearTimeout(timer);
+          await client.detach().catch(() => {});
+          resolve(auth);
+        }
+      }
+    });
+  });
+}
+
+/** Fetch all data via the app's internal API using captured JWT */
+async function fetchViaApi(page, authToken) {
+  const BASE_API = 'https://moneykeeperapp.misa.vn/g1/api/business/api/v1';
+
+  return page.evaluate(async (baseApi, token) => {
+    const post = async (path, body = {}) => {
+      const res = await fetch(baseApi + path, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) return null;
+      return res.json();
+    };
+
+    const listBody = { searchText: '', walletType: null, inActive: null, excludeReport: null, skip: 0, take: 200 };
+
+    // All regular accounts
+    const accounts = await post('/wallets/accounts', listBody);
+    const accountSummary = await post('/wallets/account/summary', {});
+
+    // All savings books
+    const savings = await post('/wallets/savings', listBody);
+    const savingsSummary = await post('/wallets/saving/summary', {});
+
+    // Monthly summary (current month)
+    const now = new Date();
+    const fromDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+    const toDate = now.toISOString().slice(0, 10);
+    const monthlySummary = await post('/records/summary', { fromDate, toDate });
+
+    return { accounts, accountSummary, savings, savingsSummary, monthlySummary };
+  }, BASE_API, authToken);
+}
+
+/** Extract data from dashboard + API */
 async function extractData(page) {
-  // 1. Dashboard snapshot
+  // 1. Dashboard snapshot (for context + recent transactions)
   await wait(3500);
   const dashboard = await snapPage(page);
 
-  // 2. Navigate to dedicated accounts page
-  const accountsUrl = await gotoAccountsPage(page);
-  console.error(`[misa] Accounts page: ${accountsUrl}`);
+  // 2. Start listening for JWT before navigating (CDP sees headers of outgoing requests)
+  const tokenPromise = captureAuthToken(page, 20000);
+  await gotoAccountsPage(page);
+  let capturedToken = await tokenPromise;
 
-  // 3. Regular accounts tab — paginate all pages
-  console.error('[misa] Scraping regular accounts...');
-  const regularAccountsPages = await scrapeAllPages(page);
+  if (!capturedToken) {
+    // Fallback: reload to trigger the app's own API calls
+    console.error('[misa] Token not captured, reloading to trigger API calls...');
+    const retryPromise = captureAuthToken(page, 15000);
+    await page.reload({ waitUntil: 'networkidle2' });
+    capturedToken = await retryPromise;
+  }
 
-  // 4. Savings tab — paginate all pages
-  console.error('[misa] Scraping savings...');
-  await clickByText(page, 'Sổ tiết kiệm');
-  await wait(2000);
-  const savingsPages = await scrapeAllPages(page);
+  if (!capturedToken) throw new Error('Failed to capture auth token — cannot call API');
+  console.error('[misa] Auth token captured. Fetching data via API...');
 
-  // 5. Accumulation tab
-  console.error('[misa] Scraping accumulation...');
-  await clickByText(page, 'Tích lũy');
-  await wait(2000);
-  const accumulationPages = await scrapeAllPages(page);
+  // 3. Fetch all data via internal API
+  const apiData = await fetchViaApi(page, capturedToken);
 
-  return {
-    dashboard,
-    accountsPage: {
-      url: accountsUrl,
-      regularAccounts: regularAccountsPages,
-      savings: savingsPages,
-      accumulation: accumulationPages,
-    },
-  };
+  return { dashboard, apiData };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
