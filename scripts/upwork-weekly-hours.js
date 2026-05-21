@@ -47,12 +47,14 @@ async function main() {
 
     const account = config.accounts.find(a => a.name === accountName);
 
+    // Run non-headless to match the login session's TLS fingerprint (Cloudflare cf_clearance is fingerprint-bound)
     const browser = await puppeteer.launch({
-      headless: 'new',
+      headless: false,
       userDataDir: profileDir,
       args: [
         '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
         '--disable-blink-features=AutomationControlled', '--window-size=1280,900',
+        '--disable-gpu',
       ],
     });
 
@@ -121,24 +123,18 @@ async function fetchWorkroomHours(page, room) {
   const timesheetUrl = `https://www.upwork.com/nx/wm/workroom/${room.workroom_id}/timesheet`;
   console.error(`Fetching ${room.name} (${room.workroom_id})...`);
 
-  // Intercept Upwork API timesheet response for reliable data extraction
-  let interceptedData = null;
+  // Primary data source: intercept GraphQL providerTimeReport (structured YYYYMMDD + decimal hours)
+  let apiTimeReport = null;
   const responseHandler = async (response) => {
-    const url = response.url();
-    if (url.includes('/api/v3/contractors/reports/hours/summary') ||
-        url.includes('/api/v2/workrooms') && url.includes('timesheet') ||
-        url.includes('/timereports/v1') ||
-        url.includes('timesheet') && url.includes('json')) {
-      try {
-        const json = await response.json();
-        interceptedData = json;
-      } catch (_) {}
+    if (response.url().includes('providerTimeReport')) {
+      try { apiTimeReport = await response.json(); } catch (_) {}
     }
   };
   page.on('response', responseHandler);
 
-  await page.goto(timesheetUrl, { waitUntil: 'networkidle2', timeout: 30000 });
-  await new Promise(r => setTimeout(r, 5000));
+  // domcontentloaded required — Upwork SPA never reaches networkidle2 reliably
+  await page.goto(timesheetUrl, { waitUntil: 'domcontentloaded', timeout: 40000 });
+  await new Promise(r => setTimeout(r, 8000));
   page.off('response', responseHandler);
 
   const currentUrl = page.url();
@@ -146,61 +142,62 @@ async function fetchWorkroomHours(page, room) {
     return { workroom: room.name, status: 'session_expired' };
   }
 
-  // Cloudflare challenge detection — page too short or contains CF challenge text
   const pageText = await page.evaluate(() => document.body.innerText);
-  if (pageText.length < 200 && (pageText.includes('Cloudflare') || pageText.includes('Ray ID') || currentUrl.includes('__cf_chl'))) {
+
+  // Cloudflare challenge: text too short with CF markers
+  if (pageText.length < 500 && (pageText.includes('Cloudflare') || pageText.includes('Ray ID') || currentUrl.includes('__cf_chl'))) {
     console.error(`Cloudflare challenge detected for ${room.name}, waiting 10s and retrying...`);
     await new Promise(r => setTimeout(r, 10000));
     const retryText = await page.evaluate(() => document.body.innerText);
-    if (retryText.length < 200) {
-      return { workroom: room.name, status: 'cloudflare_blocked', error: 'Cloudflare challenge not resolved. Try running during off-peak hours or use --login to refresh session.' };
+    if (retryText.length < 500) {
+      return { workroom: room.name, status: 'cloudflare_blocked', error: 'Cloudflare challenge not resolved. Try --login to refresh session.' };
     }
   }
 
-  // Extract summary stats from the page
+  await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${room.name.toLowerCase()}-weekly.png`) });
 
-  // Parse summary stats
+  // Parse summary stats from page text
   const thisWeekMatch = pageText.match(/This week\n([\d:]+)\s*hrs/);
   const lastWeekMatch = pageText.match(/Last week\n([\d:]+)\s*hrs/);
   const sinceStartMatch = pageText.match(/Since start\n([\d:]+)\s*hrs/);
-  const weeklyLimitMatch = pageText.match(/of (\d+)\s*hrs weekly limit/);
-
-  // Parse daily breakdown (current selected week)
-  const dayPattern = /(\d+)\s+(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\n([\d:]+)\s*hrs/g;
-  const dailyHours = {};
-  let match;
-  while ((match = dayPattern.exec(pageText)) !== null) {
-    dailyHours[match[2]] = match[3];
-  }
-
-  // Parse week date range
   const weekRangeMatch = pageText.match(/((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d+)\s*-\s*((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d+)/);
+  const weekRange = weekRangeMatch ? `${weekRangeMatch[1]} - ${weekRangeMatch[2]}` : 'unknown';
 
-  // If user wants last week, try clicking previous week in calendar
-  let weekData = {
-    range: weekRangeMatch ? `${weekRangeMatch[1]} - ${weekRangeMatch[2]}` : 'unknown',
-    daily: dailyHours,
+  const hmmToDecimal = (hmm) => {
+    const parts = hmm.split(':').map(Number);
+    return Math.round((parts[0] + (parts[1] || 0) / 60) * 100) / 100;
   };
 
-  // Note: Upwork SPA calendar is difficult to navigate headlessly.
-  // We extract daily breakdown for the selected (current) week,
-  // and use summary stats for last week total.
+  const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  let dailyDecimal = {};
 
-  // Convert H:MM to decimal hours
-  const toDecimal = (hhmm) => {
-    const [h, m] = hhmm.split(':').map(Number);
-    return Math.round((h + m / 60) * 100) / 100;
-  };
-
-  const dailyDecimal = {};
-  let totalHrs = 0;
-  for (const [day, time] of Object.entries(weekData.daily)) {
-    const dec = toDecimal(time);
-    dailyDecimal[day] = dec;
-    totalHrs += dec;
+  // Primary: build from GraphQL providerTimeReport rows (most accurate)
+  if (apiTimeReport?.data?.providerTimeReport?.rows?.length) {
+    const timesheetDateMatch = currentUrl.match(/timesheetDate=(\d{4}-\d{2}-\d{2})/);
+    const weekStart = timesheetDateMatch ? new Date(timesheetDateMatch[1] + 'T00:00:00') : null;
+    for (const row of apiTimeReport.data.providerTimeReport.rows) {
+      const cols = row.columnValue;
+      const ds = cols[0].value; // YYYYMMDD
+      const hrs = Math.round((parseFloat(cols[1].value) + parseFloat(cols[2].value)) * 100) / 100;
+      const d = new Date(`${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}T00:00:00`);
+      if (weekStart) {
+        const weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekStart.getDate() + 6);
+        if (d >= weekStart && d <= weekEnd) dailyDecimal[DAY_NAMES[d.getDay()]] = hrs;
+      }
+    }
   }
 
-  await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${room.name.toLowerCase()}-weekly.png`) });
+  // Fallback: parse daily breakdown from page text
+  if (Object.keys(dailyDecimal).length === 0) {
+    const dayPattern = /(\d+)\s+(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\n([\d:]+)\s*hrs/g;
+    let m;
+    while ((m = dayPattern.exec(pageText)) !== null) {
+      dailyDecimal[m[2]] = hmmToDecimal(m[3]);
+    }
+  }
+
+  const totalHrs = Math.round(Object.values(dailyDecimal).reduce((a, b) => a + b, 0) * 100) / 100;
 
   return {
     workroom: room.name,
@@ -208,7 +205,7 @@ async function fetchWorkroomHours(page, room) {
     developer: room.developer,
     contract: room.contract_title,
     status: 'success',
-    week: weekData.range,
+    week: weekRange,
     weekly_limit: room.weekly_limit,
     summary: {
       this_week: thisWeekMatch ? thisWeekMatch[1] : null,
@@ -216,7 +213,7 @@ async function fetchWorkroomHours(page, room) {
       since_start: sinceStartMatch ? sinceStartMatch[1] : null,
     },
     daily_hours: dailyDecimal,
-    total_hours: Math.round(totalHrs * 100) / 100,
+    total_hours: totalHrs,
   };
 }
 
