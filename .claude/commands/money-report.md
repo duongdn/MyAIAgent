@@ -1,203 +1,275 @@
 ---
-description: MISA MoneyKeeper report — login with Google, fetch dashboard data, analyze finances
+description: MISA MoneyKeeper — fetch and analyze personal finance data (portfolio, allocation, debt, transactions)
 ---
 
 # Money Report
 
 Fetches and analyzes personal finance data from MISA MoneyKeeper.
 
-**URL:** https://moneykeeperapp.misa.vn/management/dashboard
-**Auth:** Google OAuth — session cached in `config/.misa-session.json` (gitignored, per-machine)
-**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-report.md`
+**URL:** https://moneykeeperapp.misa.vn/management/dashboard  
+**Auth:** Google OAuth — persistent Chrome profile in `tmp/misa-chrome-profile/` (gitignored, per-machine)  
+**Script:** `node scripts/misa-money-report.js`  
+**Output dir:** `reports/{YYYY-MM-DD}/`
 
 ---
 
-## Commands
+## Quick Reference
 
-| Command | What it does |
-|---------|-------------|
-| `/money-report` | Full fetch + analysis |
-| `/money-report login` | Force re-login (clear cached session) |
-| `/money-report summary` | Quick balance + net worth only |
-| `/money-report transactions` | Recent transactions focus |
-| `/money-report budget` | Budget vs actual spend |
-| `/money-report portfolio` | Total assets + % ratio breakdown by account & category |
+| Command | What it does | Output file |
+|---------|-------------|-------------|
+| `/money-report` | Full run — all 4 reports | portfolio + allocation + debt + transactions |
+| `/money-report login` | Force re-login (clear Chrome profile) | — |
+| `/money-report summary` | Quick balance + net worth only | `{HHMM}-money-summary.md` |
+| `/money-report portfolio` | All accounts + category breakdown + concentration alerts | `{HHMM}-money-portfolio.md` |
+| `/money-report allocation` | Asset allocation % by type (BĐS/Tiết kiệm/ETF/Fund/Vàng/Cổ phiếu/Tiền mặt) | `{HHMM}-money-allocation.md` |
+| `/money-report debt` | Credit card balance + 12-month usage history + alerts | `{HHMM}-money-debt.md` |
+| `/money-report transactions` | Recent transactions + monthly income/expense summary | `{HHMM}-money-transactions.md` |
 
 ---
 
-## Step 1 — Fetch Data
-
-Run the puppeteer script to fetch dashboard data:
+## Step 0 — Fetch Data (always first)
 
 ```bash
-# Normal run (reuses session if valid, opens browser for login if not)
-node scripts/misa-money-report.js
+# Normal run — reuses Chrome profile if valid, opens browser for Google OAuth if not
+node scripts/misa-money-report.js 2>tmp/misa_err.txt
 
-# Force fresh login (clears cached session first)
-node scripts/misa-money-report.js --login
+# Force fresh login (wipes Chrome profile, opens headed browser)
+node scripts/misa-money-report.js --login 2>tmp/misa_err.txt
 ```
 
-**What the script does:**
-1. Loads saved session from `config/.misa-session.json`
-2. If missing/expired → opens **headed** Chrome for Google OAuth
-3. You complete the Google login in the browser window
-4. Script detects redirect back to `/management/dashboard`
-5. Saves new session cookies (valid ~12h)
-6. Scrapes dashboard: balances, amounts, tables, cards
-7. Saves screenshot to `tmp/misa-dashboard.png`
-8. Outputs raw JSON to stdout
+**What the script returns (stdout JSON):**
+- `dashboard` — page snapshot (bodyText, moneyEls)
+- `apiData.accounts` — all wallets/accounts (POST `/wallets/accounts` with `take:200, inActive:null`)
+- `apiData.accountSummary` — account summary with `totaldashboard`
+- `apiData.savings` — all savings books (POST `/wallets/savings`)
+- `apiData.savingsSummary` — savings summary
+- `apiData.monthlySummary` — current month income/expense
 
-**On a new PC:** First run will always open a browser for login. After that, sessions are cached locally.
+**On auth failure:** Check `tmp/misa_err.txt` + `tmp/misa-dashboard.png`. If redirected to login, run with `--login`.
 
----
-
-## Step 2 — Analyze Data
-
-After getting the JSON output, analyze it and produce a structured report:
-
-### Parse the raw data
-
-The JSON contains:
-- `url` — page URL (confirms which page was scraped)
-- `bodyText` — full visible text (8000 chars) — primary source for parsing
-- `allNumbers` — elements with amount/balance/total CSS classes
-- `tableData` — table rows
-- `cards` — card/widget text blocks
-- `screenshotPath` — path to screenshot for visual reference
-
-### Extract and organize
-
-From `bodyText` and `cards`, extract:
-
-1. **Balance / Net Worth**
-   - Total balance across all accounts
-   - Per-account balances (wallet, bank, etc.)
-
-2. **This Month**
-   - Total income
-   - Total expenses
-   - Net (income − expenses)
-
-3. **Budget Status**
-   - Categories with budgets set
-   - Spent vs budget per category
-   - Over-budget items (flag as ⚠️)
-
-4. **Recent Transactions** (last 5–10)
-   - Date, category, amount, note
-
-5. **Trends** (if visible)
-   - Month-over-month change
-   - Top spending categories
+**On a new PC:** First run opens headed Chrome → complete Google OAuth → profile saved to `tmp/misa-chrome-profile/`.
 
 ---
 
-## Step 3 — Write Report
+## Piece 1 — Summary (`/money-report summary`)
 
-Save to `reports/{YYYY-MM-DD}/{HHMM}-money-report.md`:
+Quick overview — no deep analysis. Fast.
+
+**Compute from `apiData`:**
+1. Sum all account `convertCurrentAmount` (positive only) = gross assets
+2. Sum all savings `currentAmount` = savings total
+3. `totaldashboard` from `accountSummary` = full net worth including ETF/Fund loans
+4. Liabilities = sum of negative account balances
+
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-summary.md`
 
 ```markdown
-# Money Report — {YYYY-MM-DD} {HH:MM}
+# Money Summary — {YYYY-MM-DD} {HH:MM}
 
-## Net Worth / Balance
-| Account | Balance |
-|---------|---------|
-| ...     | ...     |
-**Total: X,XXX,XXX ₫**
-
-## This Month (MM/YYYY)
-| | Amount |
-|-|--------|
-| Income     | +X,XXX,XXX ₫ |
-| Expenses   | −X,XXX,XXX ₫ |
-| **Net**    | **±X,XXX,XXX ₫** |
-
-## Budget Status
-| Category | Budget | Spent | % | Status |
-|----------|--------|-------|---|--------|
-| ...      | ...    | ...   |...|  ✅/⚠️  |
-
-## Recent Transactions
-| Date | Category | Amount | Note |
-|------|----------|--------|------|
-| ...  | ...      | ...    | ...  |
-
-## Alerts
-- ⚠️ [Any over-budget categories]
-- ℹ️ [Notable patterns]
+| | Amount (₫) |
+|-|-----------|
+| Net Worth (totaldashboard) | X,XXX,XXX |
+| Accounts + Savings | X,XXX,XXX |
+| ETF/Fund/Investments (est.) | X,XXX,XXX |
+| Liquid (tiền mặt ngay) | X,XXX,XXX |
+| Liabilities | −X,XXX,XXX |
 ```
 
 ---
 
-## `/money-report portfolio` — Asset Ratio Report
+## Piece 2 — Portfolio (`/money-report portfolio`)
 
-Fetch data (same script), then produce a portfolio breakdown.
+Full account-by-account breakdown with category grouping and concentration alerts.
 
-### Compute
+**Compute from `apiData.accounts` + `apiData.savings`:**
+1. All accounts: use `convertCurrentAmount` for foreign currency (Paypal USD), `currentAmount` for VND
+2. All savings: use `currentAmount`
+3. Gross = sum all positive; Net = gross − |liabilities|
+4. USD FX rate: derive from Paypal entry (`convertCurrentAmount / fcAmount`)
 
-From `bodyText` account list, extract every account and its balance. Then:
+**Category mapping:**
+| Wallet type | Category |
+|------------|----------|
+| 0 = cash, 7 = e-wallet | 💵 Liquid |
+| 1 = bank (vcb, nam á) | 💵 Liquid |
+| 2 = credit card (VCB Visa) | 💳 Debt |
+| 3 = investment (VCBS, FPTS, Larion) | 📈 Investment |
+| 4 = real estate (Nhà, long an res) | 🏠 Real Estate |
+| 5 = savings book | 🏦 Savings |
+| walletName = vàng | 🥇 Gold |
 
-1. **Gross assets** = sum of all positive balances (VND equivalent)
-2. **Total liabilities** = sum of all negative balances (absolute value)
-3. **Net worth** = gross assets − liabilities
-4. **% of gross** = account balance / gross assets × 100
-5. **% of net** = account balance / net worth × 100
-6. **USD → VND**: use exchange rate shown in Paypal entry (e.g. `6,049 $ ≈ 159,639,159 ₫` → rate = 159,639,159 / 6,049)
-
-Group accounts by category:
-- **Liquid** (Ví, vcb, Paypal — accessible immediately)
-- **Savings** (Tikop, Finhay — fixed/term deposits)
-- **Investment** (VCBS, FPTS, VCBF — securities/funds)
-- **Debt** (VCB Visa, any negative — money owed)
-
-### Output format
-
-Save to `reports/{YYYY-MM-DD}/{HHMM}-money-portfolio.md`:
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-portfolio.md`
 
 ```markdown
 # Portfolio Report — {YYYY-MM-DD} {HH:MM}
 
 ## Summary
-| | Amount | % of Gross | % of Net |
-|-|--------|-----------|---------|
-| Gross Assets | X,XXX,XXX ₫ | 100% | — |
-| Liabilities  | −X,XXX,XXX ₫ | X% | — |
-| **Net Worth**| **X,XXX,XXX ₫** | — | **100%** |
+| | Amount (₫) | % Gross | % Net |
+|-|-----------|---------|-------|
+| Gross Assets | ... | 100% | — |
+| Liabilities  | −... | −X% | — |
+| **Net Worth**| **...** | — | **100%** |
 
-## By Account
-| Account | Balance (₫) | % of Gross | % of Net | Category |
-|---------|------------|-----------|---------|----------|
-| Paypal  | X,XXX,XXX  | XX.X%     | XX.X%   | Liquid   |
-| Tikop   | X,XXX,XXX  | XX.X%     | XX.X%   | Savings  |
-| ...     | ...        | ...       | ...     | ...      |
-| VCB Visa| −X,XXX,XXX | XX.X%     | −XX.X%  | Debt     |
+## By Account (sorted by balance desc)
+| Account | Balance (₫) | % Gross | % Net | Category |
+|---------|------------|---------|-------|----------|
+...
 
 ## By Category
-| Category | Total (₫) | % of Gross | % of Net |
-|----------|----------|-----------|---------|
-| Liquid | X,XXX,XXX | XX.X% | XX.X% |
-| Savings | X,XXX,XXX | XX.X% | XX.X% |
-| Investment | X,XXX,XXX | XX.X% | XX.X% |
-| Debt | −X,XXX,XXX | −XX.X% | −XX.X% |
+| Category | Total (₫) | % Gross | % Net |
+|----------|----------|---------|-------|
+...
 
-## Notes
-- FX rate used: X,XXX ₫/USD
-- ⚠️ [Any concentration risk — e.g. >50% in one account/currency]
-- ℹ️ [Liquidity note — % instantly accessible]
+## Upcoming Maturities
+| Deposit | Amount (₫) | Maturity |
+...
+
+## Liquidity Check
+Instantly accessible: X ₫
+Due within 30 days: +X ₫
+
+## Alerts
+- ⚠️/✅ concentration, liquidity, leverage
 ```
 
-### Alerts to flag
-- Single account > 50% of net worth → concentration risk
-- Debt > 20% of gross assets → leverage warning
-- Liquid assets < 3× monthly expenses → liquidity warning
+**Alerts to flag:**
+- Single account > 50% net worth → ⚠️ concentration
+- Liquid < 3× monthly expenses (~110M) → ⚠️ liquidity
+- Debt > 20% gross → ⚠️ leverage
+
+---
+
+## Piece 3 — Allocation (`/money-report allocation`)
+
+Asset allocation % by type, with ETF vs Fund split (by "người cho vay").
+
+**Data sources:**
+- Accounts + savings from API → BĐS, Vàng, Cổ phiếu, Tiết kiệm, Tiền mặt, Nợ
+- ETF/Fund/Cổ tức: fetch via `transactions/pagingdashboard` (POST, `reportType: -1, take: 9999, startDate: 2024-01-01`) → filter `category === "Cho vay"` and `category === "Thu nợ"` → sum by wallet
+
+**Investment wallets and their types:**
+| Wallet | Type | Holds |
+|--------|------|-------|
+| VCBS | 📈 ETF | VN30, VN100, VN1000 index ETFs |
+| VCBF | 🏛️ Fund | VCBF managed fund |
+| FPTS | 📊 Cổ tức stocks | VEA, ADP dividend stocks + small ETF |
+| Finhay | 🏛️ Fund | Finhay platform fund |
+
+**Net position per wallet** = `sum(|cho_vay.amount|) − sum(thu_no.amount)` where `wallet === walletName`
+
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-allocation.md`
+
+```markdown
+# Asset Allocation — {YYYY-MM-DD} {HH:MM}
+
+## Tỉ lệ tài sản
+| Loại | Tổng (₫) | % Total | Ghi chú |
+...
+
+## Chi tiết ETF + Fund
+ETF (VCBS) — VN30/VN100/VN1000: X ₫
+Fund (VCBF) — managed fund: X ₫
+Cổ tức (FPTS) — VEA/ADP/ETF: X ₫
+Fund (Finhay): X ₫
+
+## Visual ASCII bar chart
+...
+
+## Nhận xét
+- Liquidity ratio
+- Upcoming maturities
+- Investment strategy notes
+```
+
+**Note on totals:** `totaldashboard` = market-value-based total from MISA. Cost-basis calc from transactions may differ ±5-10% due to market P&L. Use totaldashboard as authoritative total.
+
+---
+
+## Piece 4 — Debt (`/money-report debt`)
+
+Credit card + outstanding liabilities analysis.
+
+**Compute from `apiData.accounts`:** filter `currentAmount < 0`
+
+**Monthly card history:** fetch via `transactions/pagingdashboard` (POST, filter by walletName containing "Visa" or "credit"), group by month, sum `totalSpend`.
+
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-debt.md`
+
+```markdown
+# Debt Report — {YYYY-MM-DD} {HH:MM}
+
+## Current Outstanding Debt
+| Account | Balance | Type |
+...
+
+## VCB Visa — Monthly Usage (12 months)
+| Month | Charged (₫) | Notes |
+...
+
+## Recent Transactions (VCB Visa)
+...
+
+## Debt vs Assets
+| | Amount | % Net Worth |
+...
+
+## Alerts
+- ⚠️/✅ spend spike, debt ratio
+```
+
+**Alerts to flag:**
+- Month spend > 2× 6-month average → ⚠️ spike
+- Balance still unpaid → ⚠️ payment due
+
+---
+
+## Piece 5 — Transactions (`/money-report transactions`)
+
+Recent transaction history + monthly income/expense summary.
+
+**Compute from:**
+- `apiData.monthlySummary` → this month's income/expense totals
+- `transactions/pagingdashboard` (POST, last 30 days, `take: 50`) → recent transactions list
+
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-transactions.md`
+
+```markdown
+# Transactions — {YYYY-MM-DD} {HH:MM}
+
+## This Month ({MM/YYYY})
+| | Amount (₫) |
+|-|-----------|
+| Thu nhập | +X,XXX,XXX |
+| Chi tiêu | −X,XXX,XXX |
+| **Net** | **±X,XXX,XXX** |
+
+## Recent Transactions (last 30 days)
+| Date | Category | Wallet | Amount (₫) | Note |
+...
+
+## Top Categories (this month)
+| Category | Spent (₫) | % of total |
+...
+```
+
+---
+
+## Full Run (`/money-report`)
+
+Runs all 4 substantive pieces. Sequence:
+
+1. Fetch data once (`node scripts/misa-money-report.js`)
+2. Parallel: Portfolio + Allocation + Debt + Transactions
+3. Write 4 separate report files to `reports/{YYYY-MM-DD}/`
 
 ---
 
 ## Key Rules
 
-- If script exits with error, check `tmp/misa-dashboard.png` for what the browser saw
-- Session is **per-machine** (gitignored) — each PC needs its own first-time login
-- Reports are committed to git so analysis history syncs across PCs
-- If page structure changed (empty data), re-check `bodyText` raw and adapt selectors
-- Currency is VND (₫) — format large numbers with commas for readability
-- Never commit `config/.misa-session.json` — it contains Google session cookies
+- **Per-machine auth:** Chrome profile in `tmp/misa-chrome-profile/` (gitignored). First run on new PC needs headed browser login.
+- **Reports sync via git** — commit after each run so history is available on all PCs.
+- **On script error:** Check `tmp/misa_err.txt` (stderr) + `tmp/misa-dashboard.png` (screenshot).
+- **Savings `currentAmount`:** Use this field, NOT `convertCurrentAmount` (which is 0 for savings books).
+- **Foreign currency wallets (Paypal):** Use `convertCurrentAmount` for VND-equivalent balance.
+- **Investment totals:** MISA's `totaldashboard` is authoritative — includes loan-tracked ETF/Fund at current values.
+- **NEVER commit Chrome profile** (`tmp/` is gitignored) — it contains Google session cookies.
