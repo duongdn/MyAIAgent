@@ -21,6 +21,7 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 | `/money-report summary` | Quick balance + net worth only |
 | `/money-report transactions` | Recent transactions focus |
 | `/money-report budget` | Budget vs actual spend |
+| `/money-report portfolio` | Total assets + % ratio breakdown by account & category |
 
 ---
 
@@ -125,6 +126,70 @@ Save to `reports/{YYYY-MM-DD}/{HHMM}-money-report.md`:
 - ⚠️ [Any over-budget categories]
 - ℹ️ [Notable patterns]
 ```
+
+---
+
+## `/money-report portfolio` — Asset Ratio Report
+
+Fetch data (same script), then produce a portfolio breakdown.
+
+### Compute
+
+From `bodyText` account list, extract every account and its balance. Then:
+
+1. **Gross assets** = sum of all positive balances (VND equivalent)
+2. **Total liabilities** = sum of all negative balances (absolute value)
+3. **Net worth** = gross assets − liabilities
+4. **% of gross** = account balance / gross assets × 100
+5. **% of net** = account balance / net worth × 100
+6. **USD → VND**: use exchange rate shown in Paypal entry (e.g. `6,049 $ ≈ 159,639,159 ₫` → rate = 159,639,159 / 6,049)
+
+Group accounts by category:
+- **Liquid** (Ví, vcb, Paypal — accessible immediately)
+- **Savings** (Tikop, Finhay — fixed/term deposits)
+- **Investment** (VCBS, FPTS, VCBF — securities/funds)
+- **Debt** (VCB Visa, any negative — money owed)
+
+### Output format
+
+Save to `reports/{YYYY-MM-DD}/{HHMM}-money-portfolio.md`:
+
+```markdown
+# Portfolio Report — {YYYY-MM-DD} {HH:MM}
+
+## Summary
+| | Amount | % of Gross | % of Net |
+|-|--------|-----------|---------|
+| Gross Assets | X,XXX,XXX ₫ | 100% | — |
+| Liabilities  | −X,XXX,XXX ₫ | X% | — |
+| **Net Worth**| **X,XXX,XXX ₫** | — | **100%** |
+
+## By Account
+| Account | Balance (₫) | % of Gross | % of Net | Category |
+|---------|------------|-----------|---------|----------|
+| Paypal  | X,XXX,XXX  | XX.X%     | XX.X%   | Liquid   |
+| Tikop   | X,XXX,XXX  | XX.X%     | XX.X%   | Savings  |
+| ...     | ...        | ...       | ...     | ...      |
+| VCB Visa| −X,XXX,XXX | XX.X%     | −XX.X%  | Debt     |
+
+## By Category
+| Category | Total (₫) | % of Gross | % of Net |
+|----------|----------|-----------|---------|
+| Liquid | X,XXX,XXX | XX.X% | XX.X% |
+| Savings | X,XXX,XXX | XX.X% | XX.X% |
+| Investment | X,XXX,XXX | XX.X% | XX.X% |
+| Debt | −X,XXX,XXX | −XX.X% | −XX.X% |
+
+## Notes
+- FX rate used: X,XXX ₫/USD
+- ⚠️ [Any concentration risk — e.g. >50% in one account/currency]
+- ℹ️ [Liquidity note — % instantly accessible]
+```
+
+### Alerts to flag
+- Single account > 50% of net worth → concentration risk
+- Debt > 20% of gross assets → leverage warning
+- Liquid assets < 3× monthly expenses → liquidity warning
 
 ---
 
