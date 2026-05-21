@@ -150,7 +150,7 @@ By type:
 - FPTS VEA: DCA cổ tức, nhận cổ tức 175.6M Jan 2026, tiếp tục mua thêm
 - Tiền mặt ngay: **2.4%** (192M) = 2.7 tháng (70M/tháng)
 - Tiết kiệm 1,212M = emergency fund pool thực tế → tổng 20 tháng → ✅ an toàn
-- Tiết kiệm đáo hạn tháng 6: **+704M** → cơ hội DCA thêm ETF/Fund 200–300M
+- Tiết kiệm đáo hạn tháng 6: **+704M** → dự kiến tái gửi 600–650M (thị trường đang bất ổn)
 - Nợ/Total = **0.3%** — không đáng kể
 
 ---
@@ -209,10 +209,11 @@ Phân bổ đề xuất (conservative — ưu tiên tiết kiệm):
 
 ### 💡 Cơ hội cải thiện (ưu tiên)
 
-1. **Ngắn hạn (tháng 6):** Giữ 450-500M từ đáo hạn làm emergency fund. Chỉ tái đầu tư phần còn lại.
-2. **Trung hạn (6–12 tháng):** Cân nhắc thêm 1 loại tài sản quốc tế (e.g., ETF S&P500 nếu VCBS hỗ trợ, hoặc giữ USD nhiều hơn qua Paypal).
-3. **Dài hạn:** Đánh giá long an res — nếu không có kế hoạch phát triển cụ thể, đây là ứng viên tốt để rebalance BĐS về <35%.
-4. **Theo dõi:** VCBF + Finhay NAV vs cost basis — nếu fund underperform thì consolidate vào ETF.
+1. **Tháng 6/2026 — Tái gửi 704M:** Tái gửi 600–650M tiết kiệm 6 tháng, DCA nhỏ 50–100M vào ETF/Fund nếu thị trường có tín hiệu tốt. Giữ nguyên tỉ trọng tiết kiệm trong bối cảnh bất ổn địa chính trị + giá dầu.
+2. **Oct 13/2026 — Tikcop 1 week (401.9M) đáo hạn:** Đánh giá lại market. Nếu VN market đã stabilize → tăng DCA ETF/Fund. Nếu chưa → tái gửi tiếp.
+3. **Trung hạn:** Cân nhắc thêm tài sản quốc tế để phá vỡ correlation 100% VN equity (ETF S&P500 nếu VCBS hỗ trợ, hoặc tăng USD qua Paypal).
+4. **Dài hạn:** Đánh giá long an res — ứng viên để rebalance BĐS về <35% nếu không có kế hoạch phát triển cụ thể.
+5. **Theo dõi liên tục:** VCBF + Finhay NAV vs cost basis — nếu underperform tiết kiệm thì consolidate vào ETF.
 
 ---
 
