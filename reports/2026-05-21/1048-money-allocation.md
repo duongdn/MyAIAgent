@@ -182,24 +182,20 @@ By type:
 
 > **Đây là quyết định quan trọng nhất trong 30 ngày tới.**
 
-**Giả định đúng:** Lương 70M/tháng → emergency fund 6 tháng = **420M**. Tiết kiệm 1,212M chính là emergency fund pool → đã vượt ngưỡng an toàn từ lâu.
+**Giả định đúng:** Lương 70M/tháng → emergency fund 6 tháng = **420M**. Tiết kiệm 1,212M chính là emergency fund pool → đã vượt ngưỡng an toàn.
+
+**Context thị trường (May 2026):** Thị trường chứng khoán đang không thuận lợi — áp lực từ giá dầu và rủi ro địa chính trị. Không phải thời điểm tốt để tăng mạnh tỉ trọng equity.
 
 ```
-Tình trạng emergency fund hiện tại:
-  Tiết kiệm (semi-liquid)   1,212M  =  17.3 tháng chi tiêu ✅✅
-  Tiền mặt (immediate)        192M  =   2.7 tháng
-  Target tối thiểu            420M  =   6 tháng
-  → KHÔNG cần giữ thêm liquid từ đáo hạn tháng 6
+Phân bổ đề xuất (conservative — ưu tiên tiết kiệm):
+├── Tái gửi tiết kiệm 6 tháng     600–650M  → duy trì tỉ trọng tiết kiệm, chờ thị trường ổn định
+├── DCA nhỏ ETF/Fund (tùy chọn)   ~50–100M  → chỉ nếu thị trường có dấu hiệu phục hồi
+└── Trả VCB Visa + buffer            ~30M
 ```
 
-Khi 704M đáo hạn (vcb 1m + tikcop 1m ngày 02/06, vcb 1 month ngày 09/06):
+**Lý do:** Giá dầu + địa chính trị tạo áp lực lên VN market; tái gửi tiết kiệm vừa bảo toàn vốn vừa hưởng lãi suất trong giai đoạn bất ổn. Tiếp tục theo dõi — nếu thị trường stabilize thì có thể shift sang DCA khi tikcop 1 week đáo hạn tháng 10.
 
-```
-Phân bổ đề xuất (aggressive hơn vì tiết kiệm đã đủ):
-├── Tái gửi tiết kiệm ngắn hạn   300–400M  → duy trì buffer, hưởng lãi suất
-├── Tăng ETF/Fund (DCA tiếp)     200–300M  → VCBS (ETF) hoặc VCBF (Fund)
-└── Trả VCB Visa + buffer          ~30M
-```
+**Next decision point — Oct 13, 2026:** Tikcop 1 week (401.9M) đáo hạn → đánh giá lại market conditions khi đó.
 
 ### 📊 Đánh giá theo nhóm tài sản
 
