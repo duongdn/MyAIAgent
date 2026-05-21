@@ -271,7 +271,7 @@ For each risk, assign severity: 🔴 Cao / 🟡 Trung bình / 🟢 Thấp
 
 Key checks:
 - **Concentration**: Any asset class > 30% net worth → 🔴 if > 40%
-- **Liquidity**: Cash + 30-day liquid < 3 months expenses (assume 110M/month) → 🔴 if < 2 months
+- **Liquidity**: Cash (immediate) + Tiết kiệm (semi-liquid) vs 6-month target (70M × 6 = 420M). Tiết kiệm counts as emergency fund. Flag 🔴 only if cash+savings < 420M.
 - **Market correlation**: Are all equity positions in same market/sector?
 - **Currency risk**: USD/foreign exposure < 5% → 🟡
 - **Single asset risk**: Any single account > 25% net worth
@@ -299,7 +299,7 @@ Prioritized, actionable recommendations:
 
 **Output:** Appended as `## Finance Review` section to the existing allocation report (same file).
 
-**Note:** Benchmarks are general guidelines for Vietnamese context — RE benchmark slightly higher than Western (20-30% vs 15-25%) given VN property market dynamics. Monthly expense assumption: 110M ₫/month unless user corrects.
+**Note:** Benchmarks are general guidelines for Vietnamese context — RE benchmark slightly higher than Western (20-30% vs 15-25%) given VN property market dynamics. Monthly expense assumption: **70M ₫/month** → 6-month emergency fund target = 420M. Tiết kiệm accounts count as emergency fund pool (semi-liquid), not just cash.
 
 ---
 

@@ -148,8 +148,9 @@ By type:
 - ETF (VCBS) dùng chiến lược DCA định kỳ, mua tập trung Dec 2025 – Mar 2026
 - VCBF là vị thế Fund lớn nhất (594M), bắt đầu Dec 2025
 - FPTS VEA: DCA cổ tức, nhận cổ tức 175.6M Jan 2026, tiếp tục mua thêm
-- Tiền mặt thực sự thanh khoản ngay: **2.4%** (192M)
-- Tiết kiệm đáo hạn tháng 6: **+704M** → effective liquid sau tháng 6 = **896M (11.3%)**
+- Tiền mặt ngay: **2.4%** (192M) = 2.7 tháng (70M/tháng)
+- Tiết kiệm 1,212M = emergency fund pool thực tế → tổng 20 tháng → ✅ an toàn
+- Tiết kiệm đáo hạn tháng 6: **+704M** → cơ hội DCA thêm ETF/Fund 200–300M
 - Nợ/Total = **0.3%** — không đáng kể
 
 ---
@@ -171,7 +172,7 @@ By type:
 | # | Rủi ro | Mức độ |
 |---|--------|--------|
 | 1 | **BĐS chiếm 44.5%** — vượt ngưỡng an toàn 20–30% tài sản ròng theo chuẩn quốc tế. Cả 2 BĐS đều kém thanh khoản, không có exit dễ | 🔴 Cao |
-| 2 | **Tiền mặt 2.4% (192M) = 1.7 tháng chi tiêu** — dưới chuẩn 3–6 tháng (330–660M). Nếu có sự cố khẩn cấp trước tháng 6 thì sẽ phải phá tiết kiệm sớm | 🔴 Cao |
+| 2 | **Tiền mặt 2.4% (192M) = 2.7 tháng** (70M/tháng) — nếu tính riêng cash thì thấp, nhưng tiết kiệm 1,212M = emergency fund pool thực tế → tổng 20 tháng, hoàn toàn an toàn. Rủi ro chỉ ở chỗ cần phá tiết kiệm sớm nếu cần tiền ngay | 🟢 Thấp |
 | 3 | **Toàn bộ cổ phiếu/ETF là thị trường Việt Nam** — VN30, VN100, VN1000, VEA, ADP đều 100% VN. Nếu VN market điều chỉnh, toàn bộ vị thế equity cùng giảm | 🟡 Trung bình |
 | 4 | **USD exposure 2%** (Paypal 6,049 USD) — quá thấp để hedge nếu VND mất giá | 🟡 Trung bình |
 | 5 | **Finhay 0.9% (74M)** — quá nhỏ để có tác động ý nghĩa, phân tán quản lý | 🟢 Thấp |
@@ -181,16 +182,24 @@ By type:
 
 > **Đây là quyết định quan trọng nhất trong 30 ngày tới.**
 
+**Giả định đúng:** Lương 70M/tháng → emergency fund 6 tháng = **420M**. Tiết kiệm 1,212M chính là emergency fund pool → đã vượt ngưỡng an toàn từ lâu.
+
+```
+Tình trạng emergency fund hiện tại:
+  Tiết kiệm (semi-liquid)   1,212M  =  17.3 tháng chi tiêu ✅✅
+  Tiền mặt (immediate)        192M  =   2.7 tháng
+  Target tối thiểu            420M  =   6 tháng
+  → KHÔNG cần giữ thêm liquid từ đáo hạn tháng 6
+```
+
 Khi 704M đáo hạn (vcb 1m + tikcop 1m ngày 02/06, vcb 1 month ngày 09/06):
 
 ```
-Phân bổ đề xuất:
-├── Giữ liquid / tái gửi ngắn hạn   450–500M  → nâng emergency fund lên ~640M (5.8 tháng) ✅
-├── Tăng ETF/Fund (nếu market OK)   150–200M  → tiếp tục DCA vào VCBS/VCBF
-└── Tùy ý / flexibility buffer       50–100M
+Phân bổ đề xuất (aggressive hơn vì tiết kiệm đã đủ):
+├── Tái gửi tiết kiệm ngắn hạn   300–400M  → duy trì buffer, hưởng lãi suất
+├── Tăng ETF/Fund (DCA tiếp)     200–300M  → VCBS (ETF) hoặc VCBF (Fund)
+└── Trả VCB Visa + buffer          ~30M
 ```
-
-**Lý do giữ 450-500M liquid:** Hiện chỉ có 192M tiền mặt — sau khi trả VCB Visa ~25M còn ~167M. Emergency fund tiêu chuẩn = 6 tháng × 110M = 660M. Cần thêm ~470M để đạt mức an toàn.
 
 ### 📊 Đánh giá theo nhóm tài sản
 
