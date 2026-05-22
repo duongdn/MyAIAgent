@@ -15,8 +15,8 @@ PATTERNS=(
 # Skip vendored / documentation paths — these contain example credentials, schemas, etc.
 SKIP_PATHS='^(\.claude/skills/|\.claude/agents/|\.claude/hooks/docs/|docs/memory/|reports/|plans/|node_modules/)'
 
-# Lines matching these are OK (regex patterns, encrypted files, etc.)
-ALLOW='(re\.search|startswith|regex|pattern|example|\.enc|\.gitignore|config/\.|MEMORY|memory)'
+# Lines matching these are OK (regex patterns, encrypted files, CSS selectors, etc.)
+ALLOW='(re\.search|startswith|regex|pattern|example|\.enc|\.gitignore|config/\.|MEMORY|memory|input\[type=|input\[name=|querySelector|pwField|passSel)'
 
 found=0
 # Iterate per file so we can skip vendored paths
