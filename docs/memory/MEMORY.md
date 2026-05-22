@@ -20,6 +20,9 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 
 ---
 
+## News Digest
+- [feedback_news_digest_new_topic.md](feedback_news_digest_new_topic.md) — Unknown topic → add as new topic with own RSS sources in fetch-news.py, never alias existing topics
+
 ## Workflow & Reporting Style
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
 - [feedback_customer_facing_messages.md](feedback_customer_facing_messages.md) — NEVER expose internal tool/auth failures in customer Slack channels
@@ -48,6 +51,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Run decrypt-secrets.sh before reading config
 - [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging, xoxc needs Cookie header
 - [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Never write "Matrix token expired" without running matrix-token-refresh.js first
+- [feedback_never_report_token_expired.md](feedback_never_report_token_expired.md) — NEVER report token expired as blocker — always fix/rerun, never skip a piece for token failure
 - [feedback_matrix_join_public_room.md](feedback_matrix_join_public_room.md) — Matrix M_FORBIDDEN = just POST /join
 - [feedback_github_account_mapping.md](feedback_github_account_mapping.md) — duongdn for Elena, nusken for Precognize, nuscarrick default
 - [feedback_ssh_passphrase_in_config.md](feedback_ssh_passphrase_in_config.md) — SSH passphrases in ~/.ssh/config comments (#passphase:)

@@ -6,27 +6,25 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 
 ## ALERTS
 
-### 🔴 HIGH — Amazing Meds (Slack token expired)
+### Amazing Meds — Token refreshed, data retrieved
 
-- xoxc cookie for Amazing Meds expired, auth.test returns `invalid_auth`. Auto-refresh failed (bootload crumb extraction unsuccessful).
-- **No Slack data** — cannot confirm John Yi / Nick activity status.
-- Trello: ⚠️ John Yi - Amazing Meds **SKIPPED** (no data)
-- **Action:** Manually refresh Amazing Meds xoxc cookie in `.slack-accounts.json`
+- John (John Yi) in `#web-dev-with-nick` at 15:47 UTC: "Can you add a data layer? [loom] Need it for tracking" — task request to Nick, normal dev workflow.
+- No production alerts. Nick is gate dev; request awaiting response (after hours VN time).
+- Trello: ✓ John Yi - Amazing Meds **COMPLETE**
 
-### 🔴 HIGH — Equanimity (Slack token expired)
+### Equanimity — Token refreshed, data retrieved
 
-- xoxc cookie for Equanimity expired, same failure as Amazing Meds.
-- **No Slack data** — cannot confirm Marcel / Carrick activity.
-- Trello: ⚠️ Marcel **SKIPPED** (no data)
-- **Action:** Manually refresh Equanimity xoxc cookie in `.slack-accounts.json`
+- komal.bailur in `#xid-technologies` tagged @NUS Carrick: "Thanks i have checked the file n sent to sgbuildex i hope this time it ll pass all their test" — client confirming file sent for testing. Routine.
+- No alerts for Marcel or Carrick.
+- Trello: ✓ Marcel **COMPLETE**
 
-### 🔴 HIGH — LeNH — 0h all projects Thu 21/05
+### 🟡 LeNH — Franc 0h all week / Rory+Aysar: corrected
 
-- LeNH logged **0h** across all 3 task log sheets (Rory W12 + Franc W25 + Aysar W25) on Thursday 21/05.
-- No leave note found.
-- Matrix reminder **NOT sent** — Matrix token expired (`M_UNKNOWN_TOKEN`). Token refresh via xvfb failed (SSO session needs manual re-login).
-- Trello: ⚠️ Rory, Aysar, Franc — all **SKIPPED** (LeNH 0h)
-- **Action:** (1) Refresh Matrix token manually (`node scripts/matrix-token-refresh.js` with live browser), (2) Send reminder to `!OIrgPraJWrcDTnRVLQ:nustechnology.com`
+- **Rory W12 Thu**: LeNH logged **7.83h** (BXR-220 UAE Multi-Region Backend Architecture). ✓ Working.
+- **Aysar W25 Thu**: 6h total, all from **KhanhHH** (redirect fix 1.5h + Change Team Ownership 4.5h). LeNH 0h on Aysar but was on Rory — expected split.
+- **Franc W25 Thu**: LeNH logged **0h** — no tasks logged Mon–Thu all week. No leave note. ⚠️ Alert.
+- Matrix reminder was sent based on incorrect initial read (all 3 sheets showed 0h). Rory/Aysar were valid; Franc is the real concern.
+- Trello: ✓ Rory **COMPLETE**, ✓ Aysar **COMPLETE**, ⚠️ Franc **SKIPPED** (LeNH 0h all week)
 
 ---
 
@@ -60,11 +58,12 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 - Billing action or wait for month reset needed.
 - Trello: ✓ Carrick mail **COMPLETE** (checked; alert noted here)
 
-### 🟡 Vinn — No Formal Daily Report Thu 21/05
+### Vinn — Active, No Formal Report Format
 
-- Discord AirAgri: Vinn was actively working (spraying/IoT SOS data with Jeff) but did NOT post "Just report my process today:" format in window.
-- Jeff daily report ✓ found at 10:33 UTC in airagri-flutter.
-- Trello: ⚠️ James Diamond / Vinn task **SKIPPED** (no formal Vinn report)
+- Discord AirAgri: Vinn responded to James Diamond's alarm issues all day (01:53–10:07 UTC), fixed login issue, deployed spray module to prod at 09:06 UTC.
+- No formal "Just report my process today:" post, but work clearly visible and James Diamond was satisfied.
+- Jeff posted formal daily report at 10:42 UTC in airagri-flutter (4h: Hazard/Incident Android fix + audio/video playback).
+- Trello: ✓ James Diamond / Vinn task **COMPLETE** (active all day, Jeff formal report ✓)
 
 ---
 
@@ -81,6 +80,14 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 - Lucas daily report submitted (09:46 UTC, 7.5h: Klaviyo Next JS, cart/checkout pages).
 - No further mention of subscription data leak.
 - Trello: ✓ Rebecca - William Bills **COMPLETE**
+
+### Neural Contract (Upwork) — No Urgent Messages
+
+- Last 20 messages fetched via CDP intercept (carrick account).
+- Last CLIENT message: **Apr 24** — "Thanks Carrick. Enjoy your holiday on Monday! Michael" (holiday wishes, acknowledged).
+- Last Carrick message: **Apr 29** — holiday reminder for Apr 30.
+- No messages since Apr 29. No unresolved client requests.
+- Trello: ✓ Neural Contract **COMPLETE**
 
 ### Stripe Webhook — Dev URL Expired (Fountaingreetings)
 
@@ -142,9 +149,10 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 
 ### Leave / Remote
 
-- **LongVV:** Remote day 2 (today Fri 22/05). W27 weekly total = 28.5h (above 16h part-time target). ✓
+- **LongVV:** Requested remote today (sick) → ChienTX rejected: "không cần làm remote nữa" → LongVV is OFF today 22/05. W27 weekly total = 28.5h (above 16h part-time target). ✓
 - **ChienTX:** Off today 22/05 (NUS staff, not a monitored dev).
-- **TuanNT:** Leave request submitted Thu 21 May at 14:15 — dates TBD, check if today.
+- **TuanNT:** Leave dates are **11/6 and 12/6** (June 11-12, family trip). NOT today. TuanNT working normally Fri 22/05.
+- **VietPH:** NEW leave request (Fri 22/05 08:45 +07) — off **Mon 25/05/2026** for medical check-up. No response yet.
 
 ### GitLab Security Note (carrick@)
 
@@ -157,7 +165,7 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 
 | Account | In Window | Key Findings |
 |---|---|---|
-| duongdn@ | 20 | Leave requests: TuanNT, ChienTX, LongVV remote. 15x Bailey Redmine closures (routine) |
+| duongdn@ | 20 | TuanNT leave 11-12/6 (not today). VietPH leave Mon 25/05. LongVV remote rejected → off today. ChienTX off. 15x Bailey Redmine closures (routine) |
 | carrick@ | 19 | New Relic cap exceeded. GitLab sign-in+SSH. Elliott/Generator Redmine #78565/#78801. SoCal Rollbar ignored. |
 | rick@ | 10 | FirstProject #857 Rollbar (prod). InfinityRoses daily summary. Stripe webhook dev URL. Twilio notice. |
 | nick@ | 17 | No John Yi emails. Azure DevOps PR (CNA). AuShare ClickUp. Candasurveyors automated reports. |
@@ -175,7 +183,7 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 | TuanNT | 7.5h (all Rebecca) | NOTE: 0h JohnYi; leave request context |
 | VietPH | 8h | NO ✓ |
 | KhanhHH | 6h (all Aysar) | NOTE: under 8h, no leave |
-| LeNH | **0h** | 🔴 ALERT — no leave note |
+| LeNH | 7.83h (Rory) + 0h Franc + 0h Aysar | ✓ Rory OK; ⚠️ Franc 0h all week |
 | VuTQ (Bailey) | 8h | NO ✓ (Fountain 0h expected) |
 
 ---
@@ -203,17 +211,17 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 | Item | Status |
 |---|---|
 | Maddy - Carrick/Kai/Luis | ✓ complete |
-| John Yi - Amazing Meds | ⚠️ skip (Slack token expired) |
-| James Diamond - Vinn task | ⚠️ skip (Vinn no daily report) |
-| Rory | ⚠️ skip (LeNH 0h) |
-| Aysar | ⚠️ skip (LeNH 0h) |
-| Franc | ⚠️ skip (LeNH 0h + not visible in Slack) |
+| John Yi - Amazing Meds | ✓ complete |
+| James Diamond - Vinn task | ✓ complete (Vinn active all day + Jeff formal report) |
+| Rory | ✓ complete (LeNH 7.83h Thu) |
+| Aysar | ✓ complete (KhanhHH 6h, no rework issues) |
+| Franc | ⚠️ skip (LeNH 0h all week, no leave note) |
 | Elliott - GreenFort | ✓ complete |
 | MPFC | ✓ complete |
-| Marcel | ⚠️ skip (Equanimity token expired) |
+| Marcel | ✓ complete |
 | Elena - SamGuard Digital Plant | ✓ complete |
 | Raymond - LegalAtoms | ✓ complete |
-| Neural Contract | ⚠️ skip (Upwork unavailable) |
+| Neural Contract | ✓ complete |
 | Bailey | ✓ complete |
 | Andrew Taraba | ✓ complete |
 | Rebecca - William Bills | ✓ complete |
@@ -225,7 +233,7 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 
 ## Reminders
 
-- **LeNH:** ⚠️ Reminder NOT sent — Matrix token expired. Needs manual refresh + send to `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for Thu 21/05 shows 0h across all projects. Please update when you can."
+- **LeNH (Franc):** ✓ Reminder sent (based on initial read showing 0h all projects) — Matrix token refreshed via OIDC device auth (code PRVYIF). Note: Rory 7.83h and Aysar/KhanhHH 6h were confirmed after reminder sent. Franc remains 0h all week — reminder still valid for Franc.
 
 ---
 
@@ -233,12 +241,12 @@ Window: 2026-05-21 08:34 → 2026-05-22 08:18 (+07:00)
 
 | Priority | Item | Owner |
 |---|---|---|
-| HIGH | Refresh Amazing Meds Slack xoxc cookie | Manual |
-| HIGH | Refresh Equanimity Slack xoxc cookie | Manual |
-| HIGH | Refresh Matrix token + send LeNH 0h reminder | Manual |
+| ✓ | Amazing Meds + Equanimity tokens refreshed | Done |
+| ✓ | Matrix token refreshed (OIDC device auth PRVYIF) + LeNH 0h reminder sent | Done |
 | MED | Rick: confirm FirstProject #857 fix status | Rick |
 | MED | Fountain: QC needs to log hours today (Fri) — PhatDLT push | trinhmtt |
 | MED | New Relic billing: upgrade or wait for month reset | carrick@ account |
 | MED | Stripe: remove expired ngrok webhook from Fountaingreetings Stripe dashboard | Dev team |
-| INFO | TuanNT: confirm if on leave today (Fri 22/05) | — |
+| INFO | TuanNT: leave is 11-12 Jun (not today) — working normally today | ✓ resolved |
+| INFO | VietPH: leave request Mon 25/05 — needs approval from manager | Pending |
 | INFO | Baamboozle: confirm Carrick patch PRs reviewed/deployed | Carrick/Aysar |

@@ -87,7 +87,7 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
 
 ### Closely monitor checklist (`69bb3c98d4df1ae12858fff4`)
 - Franc → Slack "RDC - FM Monitoring". Complete if no alerts.
-- Rory → ???
+- Rory → JIRA (swiftstudio: BXR project, Carrick account) + Google Docs LeNH BXR App sheet. Compare JIRA worklogs vs task log hours. Complete if no mismatch > 2h.
 - Aysar → Slack "Baamboozle". Complete if no alerts.
 - Elliott → Slack "Generator" + Google Docs KhanhHH 8h/day. Complete if no Slack alerts AND hours OK.
 - Rory → Slack "Swift Studio". Complete if no alerts.
@@ -269,12 +269,17 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 
 ## JIRA API
 
-- Instance: `madhuraka-godahewa.atlassian.net`
-- Auth: Basic auth `email:api_token` (kai@nustechnology.com)
-- **Search endpoint changed**: Old `/rest/api/3/search` removed. Use `POST /rest/api/3/search/jql` with JSON body `{"jql":"...","maxResults":N,"fields":[...]}`
-- Worklogs: Include `worklog` in fields, filter by `worklogAuthor={accountId}` and date range
-- **Pagination trap**: Search results only embed max 20 worklogs per issue. If `worklog.total > worklog.maxResults`, must fetch full worklogs via `GET /issue/{key}/worklog?startAt=N` and paginate through all pages
-- Config: `.jira-config.json`
+Two instances — config: `.jira-config.json`
+
+| Instance | URL | Auth email | Used for |
+|----------|-----|------------|---------|
+| madhuraka | `madhuraka-godahewa.atlassian.net` | kai@nustechnology.com | Maddy (LongVV) — projects LIFM2, TP, XS |
+| swiftstudio | `swiftstudio.atlassian.net` | carrick@nustechnology.com | Rory (LeNH/Carrick) — project BXR |
+
+- **Search endpoint**: `POST /rest/api/3/search/jql` with JSON body `{"jql":"...","maxResults":N,"fields":[...]}`
+- **Worklogs**: Include `worklog` in fields, filter by `worklogAuthor={accountId}` and date range
+- **Pagination trap**: Search results only embed max 20 worklogs per issue. If `worklog.total > worklog.maxResults`, fetch full worklogs via `GET /issue/{key}/worklog?startAt=N` and paginate
+- **Mismatch threshold**: Flag if JIRA vs Google Docs differ > 2h
 
 ## Report Style
 

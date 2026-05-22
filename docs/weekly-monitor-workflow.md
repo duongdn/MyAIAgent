@@ -15,7 +15,7 @@ For each team member, check Google Docs hours (filter by Owner column G, NOT day
 | LongVV | Kai | Maddy | Google Docs (Xtreme Soft) + JIRA (madhuraka: LIFM2, TP, XS) |
 | TuanNT | TuanNT/Nick | Bailey + Rebecca + John Yi | Google Docs (Paturevision + William Bills + John Yi/Amazing Meds) |
 | KhanhHH | KhanhHH | Elliott | Google Docs (Generator App) |
-| LeNH | LeNH | Rory + Franc + Aysar | Google Docs (BXR App + Radio Data Center + Baamboozle) |
+| LeNH | LeNH/Carrick | Rory + Franc + Aysar | Google Docs (BXR App + Radio Data Center + Baamboozle) + JIRA (swiftstudio: BXR, Carrick account) |
 | PhucVT | PhucVT | James Diamond | Google Docs (James Diamond) |
 | VietPH | VietPH | Bailey | Google Docs (Paturevision) |
 
@@ -68,10 +68,16 @@ Notes on W tab leave row parsing:
    - Off reason: default = "use paid leave". Check Notes column (K) for non-default reasons, only report if different.
 6. For LongVV/Kai only: also check JIRA worklogs and compare (docs vs JIRA, flag if differ > 2h)
 
-### JIRA (LongVV/Kai only)
+### JIRA (LongVV/Kai + LeNH/Carrick)
+
+**Maddy (madhuraka instance):**
 - `POST /rest/api/3/search/jql` with `worklogAuthor=5b1ed0bcc175e5207bf80b77 AND worklogDate >= "{monday}"`
-- Paginate worklogs for issues with >20 entries: `GET /issue/{key}/worklog?startAt=N`
-- Config: `.jira-config.json`
+
+**Rory (swiftstudio instance):**
+- `POST /rest/api/3/search/jql` with `worklogAuthor=5a9390547a13c34d34cef5bd AND worklogDate >= "{monday}"`
+- Project filter: `project = BXR`
+
+**Both:** Paginate worklogs for issues with >20 entries: `GET /issue/{key}/worklog?startAt=N`. Flag if JIRA vs Google Docs differ > 2h. Config: `.jira-config.json`
 
 ## #2: Report Project
 
