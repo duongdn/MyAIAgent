@@ -1,6 +1,26 @@
 # Memory Index
 
-Categorized by the question you're trying to answer. Reorganized 2026-05-07.
+Categorized by the question you're trying to answer. Reorganized 2026-05-23.
+
+---
+
+## 🔴 CRITICAL — READ FIRST (rules that have failed multiple times)
+
+Skim these every single run. If your output contradicts any of them, you have a bug.
+
+- [feedback_leave_day_handling.md](feedback_leave_day_handling.md) — **"Nghỉ cả ngày" / "Nghỉ nửa ngày" → pro-rate weekly target before computing shortfall.** Never write `actual vs full_target` when any leave day exists in the week.
+- [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is **already** the grand total; never also sum per-employee Actual cols (caused 2× bug 2026-05-11).
+- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — Devs no longer have static project assignments — **scan ALL sheets, aggregate by Owner col G**.
+- [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly before flagging / reminding.
+- [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond explicit scope.
+- [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Run `scripts/matrix-token-refresh.js` BEFORE claiming Matrix token expired.
+- [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging. xoxc needs Cookie header.
+- [feedback_timeline_system.md](feedback_timeline_system.md) — MUST update `.monitoring-timelines.json` at end of EVERY run; verify by re-reading.
+- [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — Fountain total estimate = Col I **+** Col J (CR). Both capacity AND over-estimate use the sum.
+- [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — Fountain 5-part check is MANDATORY every run; never skip any part.
+- [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/...`, **NOT** `plans/reports/`.
+
+---
 
 ## User
 - [user_role.md](user_role.md) — PM at NUS Technology, oversees 10+ client projects, daily monitoring workflow
@@ -26,20 +46,17 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 ## Workflow & Reporting Style
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
 - [feedback_customer_facing_messages.md](feedback_customer_facing_messages.md) — NEVER expose internal tool/auth failures in customer Slack channels
-- [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/{HHMM}-{name}.md`, NOT plans/reports/
 - [feedback_always_include_links.md](feedback_always_include_links.md) — Include clickable URLs for Trello cards, PRs, tickets
 - [feedback_ondemand_updates.md](feedback_ondemand_updates.md) — On-demand = separate timestamped file, don't overwrite daily
 - [feedback_monday_friday_timestamp.md](feedback_monday_friday_timestamp.md) — Monday daily report starts from last Friday 8AM
 - [feedback_imap_slack_timestamp_gotchas.md](feedback_imap_slack_timestamp_gotchas.md) — IMAP SINCE uses server dates, Slack `after:` excludes named date
 - [feedback_no_duplicate_sends.md](feedback_no_duplicate_sends.md) — Never re-send while background task is pending
-- [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond their explicit task scope
-- [feedback_timeline_system.md](feedback_timeline_system.md) — Three timelines (daily_report/refresh/alert), MUST update at end of EVERY run
 
 ## Alert Classification (when to flag)
 - [feedback_alert_classification.md](feedback_alert_classification.md) — Only our issues, checklist text is notes not alerts, staging=INFO, "Chưa"=normal
 - [feedback_rebecca_chua_not_trello_block.md](feedback_rebecca_chua_not_trello_block.md) — "Chưa" in Rebecca col P NEVER blocks Trello completion — it's default template state
 - [feedback_alert_means_no_complete.md](feedback_alert_means_no_complete.md) — Alert found = do NOT complete Trello item
-- [feedback_missing_daily_report_is_alert.md](feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert
+- [feedback_missing_daily_report_is_alert.md](feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert (unless leave day — see leave_day_handling)
 - [feedback_project_topics_not_alerts.md](feedback_project_topics_not_alerts.md) — Slack dev discussions ≠ alerts, don't block Trello
 - [feedback_csp_violations_are_real_errors.md](feedback_csp_violations_are_real_errors.md) — samguard.co CSP violations are real errors
 - [feedback_blake_rollbar_not_person_alert.md](feedback_blake_rollbar_not_person_alert.md) — Client website Rollbar errors don't block Blake/per-client Trello items
@@ -49,8 +66,6 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 
 ## Tokens, Auth & Decryption
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Run decrypt-secrets.sh before reading config
-- [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging, xoxc needs Cookie header
-- [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Never write "Matrix token expired" without running matrix-token-refresh.js first
 - [feedback_never_report_token_expired.md](feedback_never_report_token_expired.md) — NEVER report token expired as blocker — always fix/rerun, never skip a piece for token failure
 - [feedback_matrix_join_public_room.md](feedback_matrix_join_public_room.md) — Matrix M_FORBIDDEN = just POST /join
 - [feedback_github_account_mapping.md](feedback_github_account_mapping.md) — duongdn for Elena, nusken for Precognize, nuscarrick default
@@ -77,26 +92,21 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 ---
 
 ## Sheets & Task Logs (general rules)
-- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **Devs no longer have static project assignments — scan ALL sheets, aggregate by Owner col G**
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
 - [feedback_tasklog_summary_sheet.md](feedback_tasklog_summary_sheet.md) — Use Summary sheet for weekly hours, not individual W-sheets
-- [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is already grand total; never also sum per-employee Actual cols (caused 2x bug 2026-05-11)
 - [feedback_parttime_official_filter.md](feedback_parttime_official_filter.md) — Only "Task dự án" as official, exclude "Part-time" rows
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day (Paturevision write)
 - [feedback_tasklog_reminder_matrix.md](feedback_tasklog_reminder_matrix.md) — Send Matrix reminder to devs with 0h task log (workday, no leave)
-- [feedback_leave_day_no_report_needed.md](feedback_leave_day_no_report_needed.md) — "Nghỉ cả ngày" = leave day, not an alert
-- [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly; subagent has missed entries
 
 ## Per-Developer Rules
 ### LongVV
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; 0h/day is NOT an alert — check weekly total only
 - [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond ONLY (NOT Rebecca)
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
-- [feedback_longvv_partial_week_may.md](feedback_longvv_partial_week_may.md) — W25 ONLY (expired 2026-05-10): sub-8h expected, no alert
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca (Q-T cols)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
-- [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <8h shortfall (even 0.17h) without leave = alert + reminder
+- [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
 - [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — Multi-project rule (resolved → Aysar)
@@ -121,8 +131,6 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-07.
 ---
 
 ## Fountain
-- [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — MANDATORY 5-part check
-- [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — **CRITICAL:** Col J = CR; total estimate = I + J (capacity AND over-est)
 - [feedback_over_estimate_tracking.md](feedback_over_estimate_tracking.md) — Track if hours still growing week-over-week
 - [feedback_hungpn_not_sole_qc.md](feedback_hungpn_not_sole_qc.md) — HungPN 0h not alert if other QC (PhatDLT) covers
 - [feedback_trinhmtt_not_qc.md](feedback_trinhmtt_not_qc.md) — TrinhMTT not QC, exclude from Fountain QC alerts

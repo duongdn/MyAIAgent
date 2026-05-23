@@ -10,7 +10,7 @@
 
 | Issue | Status |
 |-------|--------|
-| LongVV W27 Maddy shortfall | 8h vs 16h target — follow up Monday |
+| LongVV W27 Maddy gap | 8h vs ~12.8h pro-rated (Fri = Nghỉ cả ngày, leave OK). Tue–Thu 0h no leave — follow up Mon |
 
 ---
 
@@ -20,7 +20,7 @@
 
 | Developer | Project | W27 Hours | Target | Status |
 |-----------|---------|-----------|--------|--------|
-| LongVV | Maddy (Xtreme Soft) | 8h | 16h | ⚠️ SHORTFALL −8h |
+| LongVV | Maddy (Xtreme Soft) | 8h | 12.8h (Fri leave) | ⚠️ −4.8h (Tue–Thu 0h, no leave) |
 | LongVV | James Diamond | 0h | flexible | (Maddy-only week) |
 | PhucVT | James Diamond | 40h | 40h | ✓ OK |
 | AnhNH2 | James Diamond (Mobile) | 20h | — | ✓ (no fixed plan) |
@@ -43,7 +43,7 @@
 
 ### Developer Notes
 
-**LongVV W27**: Mon 8h, Fri = Nghỉ cả ngày (leave, 0h OK), Tue–Thu = 0h (no leave note in sheets). JIRA confirms 8h total. Maddy target = 16h/week → −8h shortfall. JD flex = 0h this week. Follow up Monday.
+**LongVV W27**: Mon 8h, Fri = Nghỉ cả ngày (leave, excused), Tue–Thu = 0h (no leave note). JIRA confirms 8h total. Pro-rated Maddy target = 16h × 4/5 = 12.8h → −4.8h gap concentrated in Tue–Thu unexplained 0h. JD flex = 0h. Follow up Monday on Tue–Thu.
 
 **KhanhHH W27**: Gen 22h + Aysar 14h = 36h. Fri = 4h only (no leave note). Supporting dev; Elliott (Generator lead) check governs Trello gate per normal rules. Note-only, no PM block.
 
@@ -155,7 +155,7 @@ DuongDN: 1h
 
 | Metric | W26 | W27 | Change |
 |--------|-----|-----|--------|
-| LongVV (Maddy) | 24h | 8h | ⚠️ −16h (shortfall) |
+| LongVV (Maddy) | 24h | 8h | ⚠️ −4.8h vs pro-rated 12.8h (Fri leave) |
 | LongVV (JD flex) | 0h | 0h | — |
 | PhucVT | 40h | 40h | Stable |
 | AnhNH2 (JD Mobile) | 20h | 20h | Stable |
@@ -171,7 +171,7 @@ DuongDN: 1h
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| 🟡 HIGH | LongVV W27: 8h/16h Maddy shortfall — Tue–Thu 0h unexplained — follow up Mon | PM |
+| 🟡 MED | LongVV W27 Maddy: Tue–Thu 0h no leave (Mon 8h + Fri Nghỉ cả ngày). Pro-rated target 12.8h; actual 8h. Ask LongVV Tue–Thu status | PM |
 | 🟡 MEDIUM | Respond to Fountain Trello iris63293413 "Cannot swap gift" | rick / Kunal |
 | 🟡 MEDIUM | Clarify LamLQ: 38.75h vs 20h plan — intentional? | Kunal |
 | 🟡 MEDIUM | Confirm #2837 + #2853 over-est status in W28 | PM |
