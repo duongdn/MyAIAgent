@@ -125,23 +125,29 @@ VuTQ: not in plan (on Bailey ✓). HaVS: not in plan (normal). DatNT = new devel
 
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`
 
-**Message:**
+**Message (sent):**
 ```
 Report week 18/05
 
 James Diamond
-Web
+
+Web: 40h/40h
 PhucVT: 40h/40h
 LongVV: 0h/0h
 
-Mobile
+Mobile: 20h/20h
 AnhNH2: 20h/20h
+
+---
+
+Marcel
+DuongDN: 1h
 ```
 
-- Web charge = 40h (team contract, always 40h)
-- Web actual = PhucVT 40h + LongVV 0h = 40h
-- LongVV: 0h JD this week (all 8h Maddy Xtreme); included per W23+ rule
+- Web: 40h/40h (team contract always 40h; PhucVT covered full week)
+- LongVV: 0h JD this week (all 8h on Maddy Xtreme); included per W23+ rule
 - AnhNH2 Mobile: no fixed plan → actual/actual (20h/20h)
+- Marcel DuongDN: 1h actual (W10 of Marcel sheet = May 18–22)
 
 ---
 
