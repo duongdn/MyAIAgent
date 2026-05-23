@@ -10,7 +10,6 @@
 
 | Issue | Status |
 |-------|--------|
-| Matrix token expired | Manual browser login required — JD+Marcel Matrix message CANNOT be sent this week. Fountain Part 1 sourced from cache. |
 | LongVV W27 Maddy shortfall | 8h vs 16h target — follow up Monday |
 
 ---
@@ -58,9 +57,7 @@
 
 ## #2 — Fountain Weekly Check (W27)
 
-> ⚠️ Matrix token expired. Part 1 (weekly plan) sourced from 2026-05-22 daily report cache (@trinhmtt, 2026-05-18 11:10 ICT).
-
-### Part 1 — Matrix Weekly Plan (W27)
+### Part 1 — Matrix Weekly Plan (W27, @trinhmtt 2026-05-18 11:10 ICT)
 
 | Dev | Plan |
 |-----|------|
@@ -126,12 +123,9 @@ VuTQ: not in plan (on Bailey ✓). HaVS: not in plan (normal). DatNT = new devel
 
 ## #3 — James Diamond + Marcel Matrix Report
 
-> ⚠️ **CANNOT SEND THIS WEEK** — Matrix token expired. Manual browser login required to restore Matrix session before next run.
-
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`
 
-**Prepared message (send manually or next run):**
-
+**Message:**
 ```
 Report week 18/05
 
@@ -144,12 +138,10 @@ Mobile
 AnhNH2: 20h/20h
 ```
 
-**Format notes:**
-- Web charge = 40h (team contract, always 40h regardless of actual)
-- Web actual = PhucVT (40h) + LongVV (0h) = 40h → 40h/40h
-- LongVV included per W23+ rule; 0h JD this week (Maddy-only)
-- AnhNH2 Mobile: no fixed plan → both values = actual (20h/20h)
-- Marcel section: not separately tracked this run — include in next Matrix send
+- Web charge = 40h (team contract, always 40h)
+- Web actual = PhucVT 40h + LongVV 0h = 40h
+- LongVV: 0h JD this week (all 8h Maddy Xtreme); included per W23+ rule
+- AnhNH2 Mobile: no fixed plan → actual/actual (20h/20h)
 
 ---
 
@@ -173,11 +165,8 @@ AnhNH2: 20h/20h
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| 🔴 URGENT | Restore Matrix token (browser login) before next daily report | PM |
 | 🟡 HIGH | LongVV W27: 8h/16h Maddy shortfall — Tue–Thu 0h unexplained — follow up Mon | PM |
-| 🟡 HIGH | Send JD+Marcel Matrix message manually (or on next token restore) | PM |
 | 🟡 MEDIUM | Respond to Fountain Trello iris63293413 "Cannot swap gift" | rick / Kunal |
 | 🟡 MEDIUM | Clarify LamLQ: 38.75h vs 20h plan — intentional? | Kunal |
 | 🟡 MEDIUM | Confirm #2837 + #2853 over-est status in W28 | PM |
 | 🟡 LOW | Fix LeNH JIRA account ID in `config/.jira-config.json` (Carrick → Jeff/LeNH) | PM |
-| 🟡 LOW | Authenticate `nusken` in gh CLI for Precognize PR checks | PM |
