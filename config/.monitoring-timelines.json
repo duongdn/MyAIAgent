@@ -1,8 +1,8 @@
 {
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
-    "last_run": "2026-04-03T17:00:00+07:00",
-    "output_file": "reports/2026-04-03/weekly-monitor.md"
+    "last_run": "2026-05-23T09:15:00+07:00",
+    "output_file": "reports/2026-05-23/weekly-monitor.md"
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
