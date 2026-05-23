@@ -101,12 +101,18 @@ async function main() {
 
   const chatUrl = config.chat_url || 'https://chat.nustechnology.com';
   console.log(`[matrix-refresh] Navigating to ${chatUrl}...`);
-  await page.goto(chatUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+  console.log(`[matrix-refresh] >>> A browser window is opening. Please log in if prompted. <<<`);
+  await page.goto(chatUrl, { waitUntil: 'networkidle2', timeout: 60000 }).catch(() => {});
 
-  // Wait up to 90s for token capture (SSO auto-login + Element init)
-  const deadline = Date.now() + 90000;
+  // Wait up to 5 minutes for user to login
+  const deadline = Date.now() + 300000;
+  let lastPrint = 0;
   while (Date.now() < deadline) {
     await new Promise(r => setTimeout(r, 2000));
+    if (Date.now() - lastPrint > 15000) {
+      console.log(`[matrix-refresh] Waiting for login... ${Math.round((deadline - Date.now()) / 1000)}s remaining`);
+      lastPrint = Date.now();
+    }
 
     // Try localStorage extraction
     if (!capturedAccessToken) {
