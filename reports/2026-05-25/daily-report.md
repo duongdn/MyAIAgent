@@ -148,4 +148,47 @@ W28: cannot compare — plan not yet posted.
 - **W28 plan:** not yet posted (08:38) — re-check after 09:30
 - **ViTHT W27:** 32h vs 40h plan (−8h under)
 
-**Aysar Matrix room (Jamie, Ronan):** Last message May 21 — room silent since then. Will check if Aysar hours logged on Fri May 23 once Sheets data arrives (to determine if reminder needed).
+**Aysar Matrix room (Jamie, Ronan):** Room silent since May 21. KhanhHH logged 4h Aysar on Fri May 22 (confirmed via sheets) with no daily report in room → alert, reminder needed.
+
+---
+
+## Sheets all — 08:53 (+07:00)
+
+**Note:** May 23 = Saturday; last workday = **Fri May 22**. W25 = Mon May 25 (new week, 0h expected at 08:53).
+
+| Dev | Sheets checked | Fri May 22 | Prev week total | Adj target | Status |
+|-----|----------------|-----------|----------------|------------|--------|
+| LongVV | Maddy (W7) | 0h (Nghỉ cả ngày) | **8h** (Mon only) | **12.8h** (16h × 4/5, Fri leave) | ⚠️ −4.8h |
+| PhucVT | JamesDiamond (W26) | 8h | 40h | 40h | ✓ |
+| TuanNT | JohnYi+Rebecca | 2h+6h=8h | 40h total | 40h | ✓ |
+| VietPH | Paturevision (W28) | 8h | 40h | 40h | ✓ |
+| KhanhHH | Generator+Aysar | 0h+4h=4h | 36h combined | 40h | ⚠️ −4h |
+| LeNH | Rory+Franc+Aysar+Rebecca | 8h (Rory) | 40.17h | 40h | ✓ |
+| VuTQ | Paturevision | 8h | 28h | **28h** (Mon full+Tue half leave) | ✓ |
+
+**LongVV detail:** Maddy sheet total 36.5h includes LuHX (mobile dev); LongVV's own rows = 8h Mon + Nghỉ cả ngày Fri, Tue-Thu 0h. Need to verify if LongVV also logged in James Diamond sheet.
+
+**KhanhHH detail:** Generator W41: Mon 8h, Tue 5h, Wed 7h, Thu 2h, Fri 0h = 22h. Aysar W25: Mon 0h, Tue 3h, Wed 1h, Thu 6h, Fri 4h = 14h. Combined 36h.
+
+**Fountain W27 (for reference, via Fountain agent):** ViTHT 32h (−8h vs 40h plan), ThinhT 4h, DatNT 40h, LamLQ 38.75h, PhatDLT 10h QC, HungPN 18h QC.
+
+**TuanNT/Scrin cross-check:** JohnYi sheet Fri = 2h; Scrin JohnYi Fri = 0h, week = 2h (Thu only). Close enough — no over-inflation flag.
+
+**Alerts:**
+- ⚠️ **LongVV Maddy W7:** 8h vs adjusted 12.8h (−4.8h). Tue–Thu 0h unexplained. Verify JD sheet for any LongVV hours.
+- ⚠️ **KhanhHH W41+W25:** 36h vs 40h (−4h). Fri: only Aysar 4h, Generator 0h.
+- ⚠️ **Aysar reminder needed:** KhanhHH 4h Aysar on Fri May 22, no daily report in Jamie+Ronan room since May 21.
+
+---
+
+## Upwork Neural Contract — 08:53 (+07:00)
+
+Last client msg: **2026-04-24** (Michael: "Thanks Carrick. Enjoy your holiday!")
+Last Carrick msg: **2026-04-29** (holiday reminder)
+Urgent msgs awaiting reply: **No**
+
+Note: Upwork carrick session expired (Cloudflare Turnstile blocking automated login). Conclusion based on historical continuity — silence since Apr 24 is normal for this contract (Michael only messages when bugs arise). Same assessment as May 19–22 runs.
+
+**Action needed:** `node scripts/upwork-login.js --login --account=carrick` (interactive login required for session refresh)
+
+**Alerts:** None — Neural Contract silence is normal.
