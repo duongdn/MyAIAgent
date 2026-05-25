@@ -61,12 +61,12 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 ```
 
 **Rules — chế độ mặc định:**
-- Max 3 bài mỗi nguồn trong output
+- Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)
 - Tóm tắt mỗi bài trong 1 câu tiếng Việt
 - Không hiển thị ngày đăng
 
 **Rules — khi có `--more`:**
-- Max 5 bài mỗi nguồn trong output (fetch thêm bằng cách tăng `--limit` nếu cần)
+- Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)
 - Tóm tắt mỗi bài 2–3 câu tiếng Việt, chi tiết hơn
 - Hiển thị ngày đăng sau tiêu đề: `· {pubDate}`
 - Điểm nổi bật mở rộng: 4–6 gạch đầu dòng
