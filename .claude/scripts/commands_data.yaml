@@ -1,0 +1,96 @@
+- argument_hint: ''
+  category: me
+  description: Verify Bailey/Paturevision invoice against WBS billing and task log
+    data
+  name: /me:bailey-invoice-verify
+  path: me/bailey-invoice-verify.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Bailey project monitoring — CloudWatch alarms, events, and infrastructure
+    health
+  name: /me:bailey-monitor
+  path: me/bailey-monitor.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Bailey task monitor — check Est vs Charged sheet for unpaid released
+    tasks and bug/overbudget issues
+  name: /me:bailey-task-monitor
+  path: me/bailey-task-monitor.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: CDF reviewer monitor — check assigned evaluation forms, audit unreviewed
+    evidence, compare with examples
+  name: /me:cdf-monitor
+  path: me/cdf-monitor.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Automated alert monitoring — runs on cron, collects HIGH severity alerts,
+    sends desktop notifications
+  name: /me:daily-alert
+  path: me/daily-alert.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: On-demand refresh of all monitoring sources (Slack, Discord, Email,
+    Matrix, GitHub, etc.)
+  name: /me:daily-report-refresh
+  path: me/daily-report-refresh.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Morning daily report — full automated scan of all monitoring sources
+  name: /me:daily-report
+  path: me/daily-report.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Monday project status report — gather metrics per project and submit
+    to Google Form
+  name: /me:monday-report
+  path: me/monday-report.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: MISA MoneyKeeper — fetch and analyze personal finance data (portfolio,
+    allocation, debt, transactions, finance review)
+  name: /me:money-report
+  path: me/money-report.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: News digest — fetch and synthesize news by topic (stocks, vn-stocks,
+    ai, it, finance, vinfast, security) with optional tag filter
+  name: /me:news-digest
+  path: me/news-digest.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Server resource monitoring — check all managed servers and update Trello
+    checklist
+  name: /me:server-monitor
+  path: me/server-monitor.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Personal tax YTD check — payslip emails vs tax-summary sheet vs Vietnam
+    PIT (old 7-bracket law)
+  name: /me:tax-check
+  path: me/tax-check.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Fetch Vietnamese bank interest rates (lãi suất 1 tháng, 3 tháng, 6
+    tháng, 1 năm) and append to Google Sheets
+  name: /me:vn-bank-rates
+  path: me/vn-bank-rates.md
+  power_level: 0
+- argument_hint: ''
+  category: me
+  description: Weekly monitoring report — team hours, project reports, JIRA cross-check
+  name: /me:weekly-report
+  path: me/weekly-report.md
+  power_level: 0
