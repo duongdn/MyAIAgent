@@ -256,7 +256,29 @@ async function fetchViaApi(page, authToken) {
     const toDate = now.toISOString().slice(0, 10);
     const monthlySummary = await post('/records/summary', { fromDate, toDate });
 
-    return { accounts, accountSummary, savings, savingsSummary, monthlySummary };
+    // All investment transactions (cho vay / thu nợ tracking) — full history via pagination
+    const userId = 'd451be1d-e933-4208-a391-e1240177ff1c';
+    const txnBase = { walletIds: '', excludeReport: false, calculateLoans: true, searchText: '', userId };
+    const allTxns = [];
+    let skip = 0;
+    const PAGE = 200;
+    while (true) {
+      const batch = await post('/transactions/day', { ...txnBase, startDate: '2020-01-01T00:00:00', endDate: toDate + 'T23:59:59', skip, take: PAGE });
+      if (!batch || batch.length === 0) break;
+      allTxns.push(...batch);
+      if (batch.length < PAGE) break;
+      skip += PAGE;
+    }
+    const transactions = allTxns;
+
+    // Recent transactions (last 30 days)
+    const d30 = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
+    const recentTransactions = await post('/transactions/day', { ...txnBase, startDate: d30 + 'T00:00:00', endDate: toDate + 'T23:59:59', skip: 0, take: 100 });
+
+    // Monthly income/expense situation (all time)
+    const situation = await post('/transactions/situation', { walletIds: '', isCalculateLoan: true });
+
+    return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, situation };
   }, BASE_API, authToken);
 }
 
