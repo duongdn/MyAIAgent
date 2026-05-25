@@ -15,8 +15,8 @@ Fetch and synthesize news digest by topic and optional tag filter.
 **Topics:** `all` (default) | `stocks` | `vn-stocks` | `ai` | `it` | `finance` | `vinfast` | `security`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
-- `--limit=N` — số bài fetch mỗi nguồn (default: 5, tăng lên để có thêm dữ liệu)
-- `--more` — fetch thêm bài (tự dùng limit=10), hiển thị 5 bài/nguồn thay vì 3, tóm tắt 2-3 câu, kèm ngày đăng
+- `--limit=N` — số bài fetch mỗi nguồn (default: 100)
+- `--more` — hiển thị 5 bài/nguồn thay vì 3, tóm tắt 2-3 câu, kèm ngày đăng
 - `--raw` — giữ ngôn ngữ gốc, không dịch
 
 **Examples:**
@@ -32,15 +32,10 @@ Fetch and synthesize news digest by topic and optional tag filter.
 
 ## Run
 
-Khi có `--more` và không có `--limit` tường minh → tự động dùng `--limit=10`.
-Khi không có `--more` → dùng `--limit=5` (default).
+Default limit = 100 (đủ để lấy toàn bộ bài từ RSS feed). Chỉ cần truyền `--limit` khi muốn giới hạn khác.
 
 ```bash
-# Không có --more:
-python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] --limit=5
-
-# Có --more (tăng limit để lấy bài khác):
-python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] --limit=10
+python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]
 ```
 
 `--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
