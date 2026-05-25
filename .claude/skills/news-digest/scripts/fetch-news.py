@@ -105,8 +105,8 @@ SOURCES = {
             "url": "https://vnexpress.net/rss/so-hoa.rss",
         },
         {
-            "name": "ICTNews",
-            "url": "https://ictnews.vn/rss",
+            "name": "Tuổi Trẻ – Nhịp sống số",
+            "url": "https://tuoitre.vn/rss/nhip-song-so.rss",
         },
         {
             "name": "Google News – Công nghệ VN",
@@ -175,8 +175,8 @@ SOURCES = {
             "url": "https://vnexpress.net/rss/kinh-doanh.rss",
         },
         {
-            "name": "CafeF – Kinh tế vĩ mô",
-            "url": "https://cafef.vn/kinh-te-vi-mo.rss",
+            "name": "Tuổi Trẻ – Kinh doanh",
+            "url": "https://tuoitre.vn/rss/kinh-doanh.rss",
         },
         {
             "name": "Thanh Niên – Kinh tế",
