@@ -14,7 +14,7 @@
 3. **LongVV Maddy W7** — 8h vs 12.8h adjusted target (Fri leave, −4.8h shortfall). Tue–Thu 0h unexplained. Verify JD sheet.
 4. **KhanhHH W41+W25** — 36h vs 40h (−4h shortfall). Fri: only 4h Aysar, 0h Generator.
 5. **FountainStaging BugSnag (05-24 21:57–23:26)** — `PendingMigrationError` + `ECONNREFUSED` on staging. Not production but suggests a deploy issue (migration not run).
-6. ~~**Aysar daily report**~~ — KhanhHH posted screenshot report at 09:11 after reminder. Resolved ✅ — Trello completed.
+6. ~~**Aysar daily report**~~ — Report existed in Baamboozle Slack MPDM at 17:13 +07 Fri (Carrick → Ronan/Jamie). Matrix reminder sent in error. Trello complete ✅.
 
 ### ⚠️ Pending (follow-up needed today)
 - **Fountain W28 plan** — Not posted as of 09:05. Expected by 09:30. Re-run `/daily-report fountain matrix` after 09:30 to confirm + complete Trello Fountain item.
@@ -173,7 +173,7 @@ W28: cannot compare — plan not yet posted.
 - **W28 plan:** not yet posted (08:38) — re-check after 09:30
 - **ViTHT W27:** 32h vs 40h plan (−8h under)
 
-**Aysar Matrix room (Jamie, Ronan):** Room silent since May 21. KhanhHH logged 4h Aysar on Fri May 22 (confirmed via sheets) with no daily report in room → alert, reminder needed.
+**Aysar Slack (Baamboozle MPDM — Carrick/Ronan/Jamie):** Carrick posted "Today's update" at 17:13 +07 Fri May 22 covering KhanhHH's work (AuthenticationLog test coverage #610, k6 load test #611). Report existed — no alert. ⚠️ Matrix reminder to KhanhHH sent in error at 08:57 (AI checked Matrix room instead of Baamboozle Slack MPDM).
 
 ---
 
@@ -202,7 +202,7 @@ W28: cannot compare — plan not yet posted.
 **Alerts:**
 - ⚠️ **LongVV Maddy W7:** 8h vs adjusted 12.8h (−4.8h). Tue–Thu 0h unexplained. Verify JD sheet for any LongVV hours.
 - ⚠️ **KhanhHH W41+W25:** 36h vs 40h (−4h). Fri: only Aysar 4h, Generator 0h.
-- ✅ **Aysar resolved:** Reminder sent 08:57 → KhanhHH posted screenshot report at 09:11. Trello complete.
+- ✅ **Aysar:** Report existed in Baamboozle Slack MPDM at 17:13 +07 Fri (Carrick → Ronan/Jamie). Matrix reminder was sent in error at 08:57. Trello complete (correctly).
 
 ---
 
@@ -222,7 +222,7 @@ Note: Upwork carrick session expired (Cloudflare Turnstile blocking automated lo
 
 ## Reminders — 09:05 (+07:00)
 
-- **KhanhHH (Aysar):** Reminder sent 08:57 → KhanhHH responded with screenshot report at 09:11 +07. ✅ Trello Aysar item completed.
+- **KhanhHH (Aysar):** ⚠️ Reminder sent at 08:57 IN ERROR — Carrick had already posted Aysar update at 17:13 +07 Fri in Baamboozle Slack MPDM (Ronan/Jamie). AI checked Matrix room instead of Slack. Trello Aysar item correctly complete.
 - No 0h reminders for individual devs — all had hours or confirmed leave on Fri May 22 (Monday too early for today's reminders).
 
 ---

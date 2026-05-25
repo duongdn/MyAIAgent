@@ -149,7 +149,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey invoices use WBS estimates (not task log actuals)
 ### Aysar / Baamboozle
 - [feedback_aysar_github_issues.md](feedback_aysar_github_issues.md) — Also check baamboozle/baamboozle-web-app + bbzl-web-client open issues (carrick token)
-- [feedback_aysar_jamie_ronan_room.md](feedback_aysar_jamie_ronan_room.md) — Check Matrix room "Jamie, Ronan" (!gjtiuNjeqDarGWkSnf) for daily reports; no report when tasks exist = remind in room
+- [feedback_aysar_jamie_ronan_room.md](feedback_aysar_jamie_ronan_room.md) — **CORRECTED** Aysar report = Baamboozle Slack MPDM C07SQ4HAUHZ (Carrick→Ronan/Jamie). Matrix `!gjtiuNjeqDarGWkSnf` = send reminders only, not for checking.
+- [feedback_aysar_daily_report_slack.md](feedback_aysar_daily_report_slack.md) — General rule: check Slack for daily reports, send Matrix reminder only if missing.
 ### Other
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel weekly Matrix message format
 
