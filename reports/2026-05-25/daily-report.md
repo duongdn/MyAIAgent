@@ -1,7 +1,32 @@
 # Daily Report — Monday 2026-05-25
 
-**Window:** 2026-05-23 08:00 +07:00 → 2026-05-25 08:38 +07:00 (Fri 8AM–Mon 8:38AM)
+**Window:** 2026-05-22 08:00 +07:00 → 2026-05-25 09:05 +07:00 (Fri 8AM–Mon 9AM)
 **Coverage:** Email · Slack · Discord · Scrin.io · Sheets · Fountain · Elena · Trello · Reminders
+**Completed:** 09:05 +07:00
+
+---
+
+## Summary
+
+### 🔴 Alerts (action needed)
+1. **Fountain #2615** — 106.75h actual vs 12h estimate (+790%). Critically over, still on staging, no CR applied.
+2. **Fountain #2595** — 168.25h vs 120h (+40%). Still on staging, over threshold.
+3. **LongVV Maddy W7** — 8h vs 12.8h adjusted target (Fri leave, −4.8h shortfall). Tue–Thu 0h unexplained. Verify JD sheet.
+4. **KhanhHH W41+W25** — 36h vs 40h (−4h shortfall). Fri: only 4h Aysar, 0h Generator.
+5. **FountainStaging BugSnag (05-24 21:57–23:26)** — `PendingMigrationError` + `ECONNREFUSED` on staging. Not production but suggests a deploy issue (migration not run).
+6. **Aysar daily report** — KhanhHH 4h Aysar on Fri May 22, no report in Jamie+Ronan room. Reminder sent.
+
+### ⚠️ Pending (follow-up needed today)
+- **Fountain W28 plan** — Not posted as of 09:05. Expected by 09:30. Re-run `/daily-report fountain matrix` after 09:30 to confirm + complete Trello Fountain item.
+- **Vinn + Jeff AirAgri** — No formal daily reports seen (window mostly weekend). Monitor for today's reports.
+- **Upwork carrick session** — Expired (Cloudflare Turnstile). Run `node scripts/upwork-login.js --login --account=carrick` interactively.
+
+### ✅ All Clear
+Email (6/6) · Slack workspaces (10/13 active ones) · Discord Bizurk · Elena PRs · WordPress SamGuard · PhucVT · TuanNT · VietPH · LeNH · VuTQ · Neural Contract
+
+### Trello
+- Check Mail: 6/6 complete
+- Check Progress: 15 complete, 3 skipped (Maddy, Aysar, Fountain)
 
 ---
 
@@ -192,3 +217,38 @@ Note: Upwork carrick session expired (Cloudflare Turnstile blocking automated lo
 **Action needed:** `node scripts/upwork-login.js --login --account=carrick` (interactive login required for session refresh)
 
 **Alerts:** None — Neural Contract silence is normal.
+
+---
+
+## Reminders — 09:05 (+07:00)
+
+- **KhanhHH (Aysar):** Reminder sent to Matrix room `!gjtiuNjeqDarGWkSnf:nustechnology.com` — logged 4h Aysar on Fri May 22 with no daily report posted since May 21. Event: `$wU6IbDXMPKS-O571MxXFEnUc-GhJCGgAgZo0C9iAHbE`
+- No 0h reminders for individual devs — all had hours or confirmed leave on Fri May 22 (Monday too early for today's reminders).
+
+---
+
+## Trello — 09:05 (+07:00)
+
+### Check Mail — all 6 ✓
+- DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
+
+### Check Progress
+| Item | Decision | Reason |
+|------|----------|--------|
+| John Yi - Amazing Meds | ✓ complete | Nick active today (amazingmeds) |
+| James Diamond - Vinn task | ✓ complete | Weekend in window, PhucVT 40h |
+| Rory | ✓ complete | LeNH 40.17h, meeting with Rory today |
+| Franc | ✓ complete | RDC automated only, no issues |
+| Elliott | ✓ complete | No Generator alerts (weekend) |
+| MPFC | ✓ complete | No alerts |
+| Marcel | ✓ complete | Adhoc — 0h expected |
+| Elena - SamGuard | ✓ complete | Clean PRs, WordPress OK |
+| Raymond - LegalAtoms | ✓ complete | Raymond active May 23 |
+| Neural Contract | ✓ complete | Silence normal, no urgent msgs |
+| Bailey | ✓ complete | VietPH 40h, VuTQ 28h (leave-adjusted) |
+| Andrew Taraba | ✓ complete | Bizurk silence = normal |
+| Rebecca (William Bills) | ✓ complete | Lucas/Oliver active, TuanNT 38h |
+| Colin | ✓ complete | No alerts |
+| **Maddy - Carrick/Kai/Luis** | ⚠️ **skipped** | LongVV W7: 8h vs 12.8h adjusted (−4.8h) |
+| **Aysar** | ⚠️ **skipped** | KhanhHH Fri 4h logged, no daily report in Jamie+Ronan room |
+| **Fountain** | ⚠️ **skipped** | W28 plan not posted yet; #2615 +790% over-estimate |
