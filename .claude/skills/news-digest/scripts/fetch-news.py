@@ -15,7 +15,7 @@ Topics:
 
 Options:
   --tag=xxx  Filter articles whose title or description contains xxx (case-insensitive, word-boundary for short tags)
-  --limit=N  Max articles per source (default: 5)
+  --limit=N  Max articles per source (default: 100)
 
 Output: JSON { topic, tag, fetchedAt, results: [{ topic, sources: [{ name, url, articles, error }] }] }
 """
@@ -264,7 +264,7 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
 def parse_args(argv):
     topic = "all"
     tag = None
-    limit = 5
+    limit = 100
 
     for arg in argv[1:]:
         if arg.startswith("--tag="):
