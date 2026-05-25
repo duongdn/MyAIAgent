@@ -12,7 +12,7 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest [topic] [--tag=xxx] [--limit=N] [--more] [--raw]
 ```
 
-**Topics:** `all` (default) | `stocks` | `vn-stocks` | `ai` | `it` | `finance` | `vinfast` | `security`
+**Topics:** `all` (default) | `stocks` | `vn-stocks` | `vn-business` | `ai` | `it` | `finance` | `vinfast` | `security`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
 - `--limit=N` — số bài fetch mỗi nguồn (default: 100)

@@ -6,12 +6,14 @@ Usage:
   python3 fetch-news.py [topic] [--tag=xxx] [--limit=N]
 
 Topics:
-  all        All topics (default)
-  stocks     Global stock market / indices / trading
-  vn-stocks  Vietnamese securities / chứng khoán
-  ai         AI / machine learning news
-  it         IT / tech / software news
-  finance    Global finance: banking, economy, central banks, M&A, crypto
+  all         All topics (default)
+  stocks      Global stock market / indices / trading
+  vn-stocks   Vietnamese securities / chứng khoán
+  vn-business Vietnamese business / economy / doanh nghiệp
+  ai          AI / machine learning news (VN + global)
+  it          IT / tech / software news (VN + global)
+  security    Cybersecurity news (VN + global)
+  finance     Finance: banking, economy, central banks, M&A, crypto (VN + global)
 
 Options:
   --tag=xxx  Filter articles whose title or description contains xxx (case-insensitive, word-boundary for short tags)
@@ -77,6 +79,10 @@ SOURCES = {
     ],
     "ai": [
         {
+            "name": "Google News – AI Việt Nam",
+            "url": _gnews("trí tuệ nhân tạo AI công nghệ", hl="vi", gl="VN"),
+        },
+        {
             "name": "TechCrunch AI",
             "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
         },
@@ -94,6 +100,18 @@ SOURCES = {
         },
     ],
     "it": [
+        {
+            "name": "VnExpress – Số hóa",
+            "url": "https://vnexpress.net/rss/so-hoa.rss",
+        },
+        {
+            "name": "ICTNews",
+            "url": "https://ictnews.vn/rss",
+        },
+        {
+            "name": "Google News – Công nghệ VN",
+            "url": _gnews("công nghệ thông tin phần mềm lập trình", hl="vi", gl="VN"),
+        },
         {
             "name": "Hacker News",
             "url": "https://news.ycombinator.com/rss",
@@ -116,6 +134,10 @@ SOURCES = {
         },
     ],
     "security": [
+        {
+            "name": "Google News – An ninh mạng VN",
+            "url": _gnews("an ninh mạng bảo mật an toàn thông tin", hl="vi", gl="VN"),
+        },
         {
             "name": "The Hacker News",
             "url": "https://feeds.feedburner.com/TheHackersNews",
@@ -147,7 +169,37 @@ SOURCES = {
             "url": _gnews("VinFast xe điện", hl="vi", gl="VN"),
         },
     ],
+    "vn-business": [
+        {
+            "name": "VnExpress – Kinh doanh",
+            "url": "https://vnexpress.net/rss/kinh-doanh.rss",
+        },
+        {
+            "name": "CafeF – Kinh tế vĩ mô",
+            "url": "https://cafef.vn/kinh-te-vi-mo.rss",
+        },
+        {
+            "name": "Thanh Niên – Kinh tế",
+            "url": "https://thanhnien.vn/rss/kinh-te.rss",
+        },
+        {
+            "name": "Google News – Kinh doanh VN",
+            "url": _gnews("kinh doanh doanh nghiệp Việt Nam khởi nghiệp startup", hl="vi", gl="VN"),
+        },
+    ],
     "finance": [
+        {
+            "name": "CafeF – Tài chính",
+            "url": "https://cafef.vn/tai-chinh-ngan-hang.rss",
+        },
+        {
+            "name": "VnExpress – Kinh tế",
+            "url": "https://vnexpress.net/rss/kinh-te.rss",
+        },
+        {
+            "name": "Google News – Tài chính VN",
+            "url": _gnews("tài chính ngân hàng lãi suất kinh tế Việt Nam", hl="vi", gl="VN"),
+        },
         {
             "name": "Reuters Finance",
             "url": "https://feeds.reuters.com/reuters/businessNews",
