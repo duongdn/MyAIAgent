@@ -14,7 +14,7 @@
 3. **LongVV Maddy W7** — 8h vs 12.8h adjusted target (Fri leave, −4.8h shortfall). Tue–Thu 0h unexplained. Verify JD sheet.
 4. **KhanhHH W41+W25** — 36h vs 40h (−4h shortfall). Fri: only 4h Aysar, 0h Generator.
 5. **FountainStaging BugSnag (05-24 21:57–23:26)** — `PendingMigrationError` + `ECONNREFUSED` on staging. Not production but suggests a deploy issue (migration not run).
-6. **Aysar daily report** — KhanhHH 4h Aysar on Fri May 22, no report in Jamie+Ronan room. Reminder sent.
+6. ~~**Aysar daily report**~~ — KhanhHH posted screenshot report at 09:11 after reminder. Resolved ✅ — Trello completed.
 
 ### ⚠️ Pending (follow-up needed today)
 - **Fountain W28 plan** — Not posted as of 09:05. Expected by 09:30. Re-run `/daily-report fountain matrix` after 09:30 to confirm + complete Trello Fountain item.
@@ -202,7 +202,7 @@ W28: cannot compare — plan not yet posted.
 **Alerts:**
 - ⚠️ **LongVV Maddy W7:** 8h vs adjusted 12.8h (−4.8h). Tue–Thu 0h unexplained. Verify JD sheet for any LongVV hours.
 - ⚠️ **KhanhHH W41+W25:** 36h vs 40h (−4h). Fri: only Aysar 4h, Generator 0h.
-- ⚠️ **Aysar reminder needed:** KhanhHH 4h Aysar on Fri May 22, no daily report in Jamie+Ronan room since May 21.
+- ✅ **Aysar resolved:** Reminder sent 08:57 → KhanhHH posted screenshot report at 09:11. Trello complete.
 
 ---
 
@@ -222,7 +222,7 @@ Note: Upwork carrick session expired (Cloudflare Turnstile blocking automated lo
 
 ## Reminders — 09:05 (+07:00)
 
-- **KhanhHH (Aysar):** Reminder sent to Matrix room `!gjtiuNjeqDarGWkSnf:nustechnology.com` — logged 4h Aysar on Fri May 22 with no daily report posted since May 21. Event: `$wU6IbDXMPKS-O571MxXFEnUc-GhJCGgAgZo0C9iAHbE`
+- **KhanhHH (Aysar):** Reminder sent 08:57 → KhanhHH responded with screenshot report at 09:11 +07. ✅ Trello Aysar item completed.
 - No 0h reminders for individual devs — all had hours or confirmed leave on Fri May 22 (Monday too early for today's reminders).
 
 ---
@@ -250,5 +250,5 @@ Note: Upwork carrick session expired (Cloudflare Turnstile blocking automated lo
 | Rebecca (William Bills) | ✓ complete | Lucas/Oliver active, TuanNT 38h |
 | Colin | ✓ complete | No alerts |
 | **Maddy - Carrick/Kai/Luis** | ⚠️ **skipped** | LongVV W7: 8h vs 12.8h adjusted (−4.8h) |
-| **Aysar** | ⚠️ **skipped** | KhanhHH Fri 4h logged, no daily report in Jamie+Ronan room |
+| **Aysar** | ✓ **complete** | KhanhHH posted screenshot report at 09:11 (after 08:57 reminder) |
 | **Fountain** | ⚠️ **skipped** | W28 plan not posted yet; #2615 +790% over-estimate |
