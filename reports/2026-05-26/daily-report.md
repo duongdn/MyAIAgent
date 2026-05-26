@@ -94,22 +94,36 @@ No Monday tracked time for TuanNT (John Yi) on Scrin.io. Consistent with 0h task
 ## Fountain [all 5 parts] — 08:38 (+07:00)
 
 ### Part 1 — Matrix Plan
-**⚠️ ALERT: W28 plan NOT posted.** Checked Matrix room `!EWnVDAxbTGsBxPkaaI:nustechnology.com`. 46 messages from Monday in dev room. No weekly plan message matching "Em update plan tuần này ạ" format found. @TrinhMTT absent from Monday messages. Plan not yet posted as of 08:38 +07.
+Plan posted by @trinhmtt at 09:03 +07 today (after initial scan at 08:38):
+
+> Em gửi plan tuần này ạ
+> ViTHT: 40h | DatNT: 40h | LamLQ: 20h | ThinhT: 16h
+> => QC: 25h
+
+VuTQ and HaVS NOT on W28 plan.
 
 ### Part 2 — Task Log Actuals (W28, early week — Mon only)
 
 | Dev | Mon | Notes |
 |-----|-----|-------|
 | ViTHT | — | Early week |
+| DatNT | — | Early week (new on W28 plan) |
+| LamLQ | — | Early week (new on W28 plan) |
 | ThinhT | — | Early week |
-| VuTQ | 0h | ✓ Expected (moved to Bailey/Paturevision) |
-| HaVS | 0h | Not named in W28 plan (plan not yet posted), not flagged |
+| VuTQ | 0h | ✓ Not on W28 plan, moved to Bailey/Paturevision |
+| HaVS | 0h | ✓ Not on W28 plan |
 | PhatDLT (QC) | — | Early week |
 | HungPN (QC) | — | Early week |
 
 ### Part 3 — Plan vs Actual
 
-Unable to compare (W28 plan not posted). Will populate once plan is available.
+| Dev | Plan W28 | Mon actual | Status |
+|-----|----------|------------|--------|
+| ViTHT | 40h | — | Early week |
+| DatNT | 40h | — | Early week |
+| LamLQ | 20h | — | Early week |
+| ThinhT | 16h | — | Early week |
+| QC total | 25h | — | Early week |
 
 ### Part 4 — Capacity & Runway
 
@@ -180,7 +194,7 @@ All 6 items ✓ complete:
 - **Franc** — 0h task log Monday ⚠️
 - **Bailey** — DEV1+DEV3 tracking via Paturevision (0h noted, verify separately)
 - **Rebecca** — TuanNT 0h Monday ⚠️
-- **Fountain** — W28 Matrix plan not posted ⚠️
+- **Fountain** — #2615 +789.6% still growing ⚠️ (plan posted 09:03, Trello item to complete)
 
 ---
 
@@ -213,11 +227,11 @@ Upwork weekly hours check: `node scripts/upwork-weekly-hours.js`
 | Discord | ✓ Clean | None |
 | Sheets | ⚠️ | TuanNT, KhanhHH, LeNH: 0h Mon (VietPH: leave) |
 | Scrin | ✓ | Consistent with 0h |
-| Fountain | ⚠️ | W28 plan NOT posted; #2615 +789.6% still growing |
+| Fountain | ⚠️ | Plan posted 09:03 (ViTHT/DatNT/LamLQ/ThinhT/QC); #2615 +789.6% still growing |
 | Elena | ✓ | 0 PRs; WordPress partial check |
 | Trello | ✓ / ⚠️ | 13 complete, 5 skipped (alerts) |
 | Reminders | ✓ | Sent TuanNT, LeNH, KhanhHH, VuTQ, Aysar→Carrick |
 
 **Unresolved questions:**
-1. W28 Fountain plan — not posted by 08:45. Follow up with ThinhT/ViTHT.
-2. WordPress samguard.co — `console.error`/`Uncaught` in source; need headless browser run for real console verification.
+1. WordPress samguard.co — `console.error`/`Uncaught` in source; need headless browser run for real console verification.
+2. #2615 over-estimate +789.6% — still growing, needs investigation.
