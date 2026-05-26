@@ -174,9 +174,9 @@ All 6 items ✓ complete:
 - Ken ✓
 - Nick ✓
 
-### Check Progress — Items Completed (16)
+### Check Progress — Items Completed (14)
 - Maddy - Carrick/Kai/Luis ✓
-- John Yi - Amazing Meds ✓
+- John Yi - Amazing Meds ⚠️ skipped (TuanNT 0h)
 - James Diamond - Vinn task ✓
 - Rory ✓
 - Elliott ✓
@@ -189,10 +189,12 @@ All 6 items ✓ complete:
 - Colin ✓
 - Aysar ✓ (daily report posted 08:36 today)
 - Franc ✓ (RDC Slack clean)
-- Bailey ✓ (GGS Slack clean, 0h expected)
+- Bailey ⚠️ skipped (TuanNT 0h — TuanNT works on Paturevision/Bailey)
 - Elena - WordPress SamGuard ✓
 
-### Check Progress — Items Skipped ⚠️ (2 alerts)
+### Check Progress — Items Skipped ⚠️ (4 alerts — all TuanNT 0h)
+- **John Yi - Amazing Meds** — TuanNT 0h Monday ⚠️
+- **Bailey** — TuanNT 0h Monday (TuanNT = Bailey DEV1) ⚠️
 - **Rebecca** — TuanNT 0h Monday ⚠️
 - **Fountain** — #2615 +789.6% still growing ⚠️
 
@@ -229,7 +231,7 @@ Upwork weekly hours check: `node scripts/upwork-weekly-hours.js`
 | Scrin | ✓ | Consistent with 0h |
 | Fountain | ⚠️ | Plan posted 09:03 (ViTHT/DatNT/LamLQ/ThinhT/QC); #2615 +789.6% still growing |
 | Elena | ✓ | 0 PRs; WordPress partial check |
-| Trello | ✓ / ⚠️ | 16 complete, 2 skipped (Rebecca, Fountain) |
+| Trello | ✓ / ⚠️ | 14 complete, 4 skipped (John Yi, Bailey, Rebecca, Fountain) |
 | Reminders | ✓ | Sent TuanNT, LeNH, KhanhHH, VuTQ, Aysar→Carrick |
 
 **Unresolved questions:**
