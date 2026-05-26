@@ -36,7 +36,9 @@ function clearProfile() {
 async function launchBrowser(headless) {
   return puppeteer.launch({
     headless,
-    executablePath: '/usr/bin/google-chrome',
+    executablePath: process.platform === 'darwin'
+      ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      : '/usr/bin/google-chrome',
     args: CHROME_ARGS,
     defaultViewport: { width: 1280, height: 800 },
   });
