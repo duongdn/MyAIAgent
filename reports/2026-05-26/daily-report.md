@@ -71,7 +71,7 @@ Trello: James Diamond (Vinn) ✓ complete. Andrew Taraba ✓ complete.
 | PhucVT | PhucVT (W27?) | 8h | ✓ |
 | TuanNT (John Yi) | TuanNT JohnYi | 0h | ⚠️ No Monday hours logged |
 | TuanNT (Rebecca) | TuanNT Rebecca | — | col P = "Chưa" (default, not alert) |
-| VietPH | VietPH | 0h | ⚠️ No Monday hours logged |
+| VietPH | VietPH | 0h | ✓ Nghỉ cả ngày (leave day) |
 | KhanhHH | KhanhHH | 0h | ⚠️ No Monday hours logged |
 | LeNH (Rory) | LeNH Rory | 0h | ⚠️ No Monday hours (Rory check) |
 | LeNH (Franc) | LeNH Franc | 0h | ⚠️ Part of 0h total |
@@ -79,7 +79,7 @@ Trello: James Diamond (Vinn) ✓ complete. Andrew Taraba ✓ complete.
 
 **Alerts:**
 - TuanNT: 0h Monday → reminder sent
-- VietPH: 0h Monday → no Matrix room documented; cannot send reminder, noted only
+- VietPH: 0h Monday → nghỉ cả ngày, no alert
 - KhanhHH: 0h Monday → reminder sent
 - LeNH: 0h Monday → reminder sent
 
@@ -211,7 +211,7 @@ Upwork weekly hours check: `node scripts/upwork-weekly-hours.js`
 | Email | ✓ Clean | None (staging + Snyk = INFO) |
 | Slack | ✓ Clean | None |
 | Discord | ✓ Clean | None |
-| Sheets | ⚠️ | TuanNT, VietPH, KhanhHH, LeNH: 0h Mon |
+| Sheets | ⚠️ | TuanNT, KhanhHH, LeNH: 0h Mon (VietPH: leave) |
 | Scrin | ✓ | Consistent with 0h |
 | Fountain | ⚠️ | W28 plan NOT posted; #2615 +789.6% still growing |
 | Elena | ✓ | 0 PRs; WordPress partial check |
@@ -220,5 +220,4 @@ Upwork weekly hours check: `node scripts/upwork-weekly-hours.js`
 
 **Unresolved questions:**
 1. W28 Fountain plan — not posted by 08:45. Follow up with ThinhT/ViTHT.
-2. VietPH 0h — no Matrix room to send reminder. Manual follow-up needed.
-3. WordPress samguard.co — `console.error`/`Uncaught` in source; need headless browser run for real console verification.
+2. WordPress samguard.co — `console.error`/`Uncaught` in source; need headless browser run for real console verification.
