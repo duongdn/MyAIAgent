@@ -8,6 +8,7 @@ Categorized by the question you're trying to answer. Reorganized 2026-05-23.
 
 Skim these every single run. If your output contradicts any of them, you have a bug.
 
+- [reference_trello_gate_mapping.md](reference_trello_gate_mapping.md) — **Exact gate sources per Check Progress item. Check this before completing OR skipping any item.**
 - [feedback_leave_day_handling.md](feedback_leave_day_handling.md) — **"Nghỉ cả ngày" / "Nghỉ nửa ngày" → pro-rate weekly target before computing shortfall.** Never write `actual vs full_target` when any leave day exists in the week.
 - [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is **already** the grand total; never also sum per-employee Actual cols (caused 2× bug 2026-05-11).
 - [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — Devs no longer have static project assignments — **scan ALL sheets, aggregate by Owner col G**.
