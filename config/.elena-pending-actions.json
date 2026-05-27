@@ -162,14 +162,14 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-05-23",
-    "time": "08:36 +07:00",
+    "date": "2026-05-27",
+    "time": "08:38 +07:00",
     "prs_checked": 0,
     "prs_merged": 0,
     "deploy_status": "skipped_no_prs",
     "matrix_announced": false,
     "wordpress_status": "ok_no_errors",
-    "precognize_nusken_prs": "unknown_no_auth"
+    "precognize_open_prs": 8
   },
   "deployed_no_status_update": [
     {
