@@ -113,6 +113,9 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
 - [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — Multi-project rule (resolved → Aysar)
+### TuanNT
+- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT 0h gates John Yi, Rebecca, AND Bailey Trello items simultaneously
+- [feedback_leave_2026-05-27_tuannt_chientx.md](feedback_leave_2026-05-27_tuannt_chientx.md) — **TuanNT + ChienTX full-day leave 2026-05-27 (Wed), email-confirmed. 0h OK, no reminder, pro-rate weekly target.**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected
 - [feedback_kai_16h_no_daily_report.md](feedback_kai_16h_no_daily_report.md) — Kai 16h/wk, daily report in Xtreme not required
