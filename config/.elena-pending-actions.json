@@ -18,6 +18,16 @@
   },
   "merged": [
     {
+      "pr": 303,
+      "branch": "redmine-78803",
+      "type": "redmine",
+      "ticket_id": "78803",
+      "merged_at": "2026-05-29",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "PENDING DEPLOY — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer unreachable (local LAN). Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy."
+    },
+    {
       "pr": 302,
       "branch": "DP-667-fix-import-remaining-bugs",
       "type": "dp",
@@ -162,14 +172,14 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-05-27",
-    "time": "08:38 +07:00",
-    "prs_checked": 0,
-    "prs_merged": 0,
-    "deploy_status": "skipped_no_prs",
-    "matrix_announced": false,
+    "date": "2026-05-29",
+    "time": "21:41 +07:00",
+    "prs_checked": 1,
+    "prs_merged": 1,
+    "deploy_status": "pending_maybanserver_unreachable",
+    "matrix_announced": true,
     "wordpress_status": "ok_no_errors",
-    "precognize_open_prs": 8
+    "precognize_open_prs": "unknown_nusken_token_not_available"
   },
   "deployed_no_status_update": [
     {
