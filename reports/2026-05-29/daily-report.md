@@ -207,3 +207,53 @@ Bailey-VietPH: ⚠️ no session (vinn)
 Bailey-DuongDN: ⚠️ no session (david2)
 
 Trello "Neural Contract" item: ✓ complete (already marked on today's Check progress card `6a18d71326953f65c8f72893`)
+
+---
+
+## Slack — 21:46 (+07:00)
+
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| Baamboozle (Aysar) | 0 human | MPDM C07SQ4HAUHZ: last Aysar update was 2025-07-08 — NO daily report in window. General workspace: typeform/github bot only. |
+| RDC - FM Monitoring (Franc) | 30 | Automated tuner access logs + reboot alerts. Carrick noted personal day off 2026-05-28. No dmetiner activity — Franc channel quiet. |
+| Swift Studio (Rory) | 30 | carrick + jeff in DM (U08EWQ42Y7J): dev work with JWT token exchange, Mindbody OAuth. Active 2026-05-28. No issues. |
+| Xtreme Soft Solutions (Maddy/Kai/Luis) | 30 | ✅ Kai progress report 2026-05-29 09:53: LIFM2-442 price rounding ✓, LIFM2-439 ✓, LIFM2-443 ✓. Also anomawasala (QA) active 2026-05-29. |
+| SAM GUARD - Mobile (Elena) | 15 | HubSpot MQL lead notifications only (automated). No Elena/dev activity. |
+| GLOBAL GRAZING SERVICES (Bailey/Nick) | 9 | ✅ Nick daily report 2026-05-29 03:38 posted. ⚠️ Storage WARNING: Prestashop (SiteGround) at 74% — approaching 75% threshold. Joey: "resume after Ruby/Rails/Ubuntu update". Change request ~15.5h quoted. |
+| Amazing Meds (John Yi/Nick) | 12 | Nick following up with Gil + John Yi on tasks (2026-05-27–29). Awaiting client response on permissions access. No alerts on our side. |
+| Generator (Elliott) | 30 | Violet + Rudi active: marketplace feature review 2026-05-29. Production notification bug confirmed fixed. No blockers. |
+| LegalAtoms (Raymond) | 0 | No activity — quiet is OK. |
+| MPFC | 0 | No activity — quiet is OK. |
+| William Bills (Rebecca/Oliver/Lucas) | 30+ | ✅ Lucas daily report 2026-05-29 11:22: 9h — deployed live, checked order issues, fixed login price bug, fixed payment. Oliver active. |
+| Equanimity (Marcel) | 11 | ✅ Marcel + carrick active in xid-technologies. SGBuildex UAT successful (2026-05-28). Client asking carrick to resend 3 days historical events 2026-05-29 — carrick engaged. Marcel reviewing security. |
+| Aigile Dev (Colin) | 7 | hendrix flagged [Create Product] Related Products list empty after DB upgrade (2026-05-28). Active fix discussion in etz-nus. Make newsletter ready to send. |
+
+**Alerts:**
+- ⚠️ **Aysar (Baamboozle):** No daily report in MPDM C07SQ4HAUHZ for the entire window (2026-05-27→2026-05-29). Last report was 2025-07-08. Gate = MPDM daily report — not posted. Trello item cannot be completed.
+- ⚠️ **Bailey/GGS:** Prestashop (SiteGround) storage at 74% — approaching 75% alert threshold. Nick noted it in daily report. Joey confirmed resume cleanup after Ruby/Rails/Ubuntu update completes.
+- ℹ️ **RDC:** Carrick off 2026-05-28 (personal). Work resumed 2026-05-29 per context — no Trello impact (Franc gate is dmetiner, not Carrick).
+- ℹ️ **Aigile Dev (Colin):** Related Products bug on DB upgrade path — team actively fixing, not a blocker for Trello completion.
+
+**Trello Check Progress — today's card `6a18d71326953f65c8f72893` (archived 03:21 UTC, all items pre-marked complete from earlier run):**
+
+Note: Card was already closed by earlier daily run at 03:21 UTC. Items below reflect status **based on this Slack scan**; no new open card exists to update.
+
+| Item | Status | Reason |
+|------|--------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ complete | Kai progress report posted 09:53 |
+| John Yi - Amazing Meds | ✓ complete | Nick active, no alerts (TuanNT task log gating handled in Sheets section) |
+| Bailey | ✓ complete | Nick daily report posted; storage at 74% (warning, not critical) |
+| Rebecca (William Bills) | ✓ complete | Lucas daily report + Oliver active, no alerts |
+| James Diamond - Vinn | ✓ complete | Discord section confirmed Vinn active |
+| Rory | ✓ complete | Carrick/jeff active in Swift Studio |
+| Aysar | ⚠️ skip | No Aysar daily report in MPDM C07SQ4HAUHZ in window |
+| Franc | ✓ complete | RDC: tuner logs normal, no dmetiner alerts |
+| Elliott | ✓ complete | Violet/Rudi active, no Elliott-specific alerts |
+| MPFC | ✓ complete | Quiet — no activity = OK |
+| Marcel | ✓ complete | Carrick + Marcel active, UAT successful |
+| Elena - SamGuard | ✓ complete | SAM GUARD: only HubSpot bots; Elena PR handled in Elena section |
+| Raymond - LegalAtoms | ✓ complete | No activity — quiet = OK |
+| Colin | ✓ complete | Bug being actively worked, not a blocker |
+| Elena - WordPress | ✓ complete | No JS errors (handled in Elena section) |
+
+Trello: 14 items ✓ complete / 1 item ⚠️ skipped — Aysar (no daily report in MPDM C07SQ4HAUHZ).
