@@ -191,3 +191,19 @@ All 4 stuck cards above are also hard-to-release.
 Trello "Fountain" checklist item: ✓ already complete (card `6a18d71326953f65c8f72893`, Work checklist item `6a18d71326953f65c8f728f2` — state: complete). All 5 parts clean: plan posted, actuals within range, no new over-estimate spikes.
 
 ---
+
+## Scrin.io — 21:45 (+07:00)
+Yesterday (2026-05-28, Thu): Nick (TuanNT) = 8.00h tracked | John Yi task log = 0h | Status: ⚠️ ALERT — TuanNT logged 0h in John Yi spreadsheet (W25, Thu 28/05) but Scrin shows 8h active. Task log must be updated.
+
+**Scrin detail:** 7 sessions, 08:36–04:43 + 10:09–10:50, 480 min total. Activity avg high (56–100%).
+
+## Upwork — 21:45 (+07:00)
+Upwork puppeteer sessions (Rory, Neural Contract, Aysar) are Cloudflare-blocked — carrick session requires manual refresh via `node scripts/upwork-login.js --login --account=carrick`. vinn and david2 have no saved sessions.
+
+Rory: ⚠️ blocked (cloudflare)
+Neural Contract: ⚠️ blocked (cloudflare)
+Aysar: ⚠️ blocked (cloudflare)
+Bailey-VietPH: ⚠️ no session (vinn)
+Bailey-DuongDN: ⚠️ no session (david2)
+
+Trello "Neural Contract" item: ✓ complete (already marked on today's Check progress card `6a18d71326953f65c8f72893`)
