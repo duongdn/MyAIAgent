@@ -152,28 +152,7 @@ Key tasks from W27 tracking:
 
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`
 
-**⚠️ NOT SENT — Matrix token expired.** To send:
-1. Run `node scripts/matrix-token-refresh.js` (interactive browser login)
-2. Then run:
-
-```
-node scripts/matrix-send-message.js "!oofREYAXHsvPWEOJev:nustechnology.com" \
-"Report week 25/05
-
-James Diamond
-
-Web: 40h/40h
-PhucVT: 40h/40h
-LongVV: 0h/0h
-
-Mobile: 20h/20h
-AnhNH2: 20h/20h
-
----
-
-Marcel
-DuongDN: 0h"
-```
+**✅ SENT** — event_id `$YaikukYeSyddxmoJfrGww-8tn139yTv4QewnB6aYPVE`
 
 **Message data:**
 - **Web 40h/40h**: PhucVT full week, LongVV 0h JD (all on Maddy). Contract stays 40h.
@@ -206,7 +185,6 @@ DuongDN: 0h"
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| 🔴 HIGH | Send JD+Marcel Matrix message after token refresh | PM |
 | 🔴 HIGH | KhanhHH: Thu 5.5h + Fri 0h W28 — confirm leave or flag | PM |
 | 🟡 MED | VuTQ Bailey Fri 4h W28 — confirm leave or send Matrix reminder | PM |
 | 🟡 MED | LongVV: Sheets 18h vs JIRA 22h delta (Δ4h) — investigate | PM |
