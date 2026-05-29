@@ -73,3 +73,121 @@ Trello "Elena - SamGuard" item: ✓ already complete (today's Check progress car
 
 Trello: All 6 Check Mail items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick — card `6a192f11e7860561232c4ec0`).
 
+---
+
+## Fountain — 21:43 (+07:00)
+
+### Part 1 — Matrix Plan
+
+**@trinhmtt** posted W28 plan on Mon 2026-05-26 at 09:03 +07:
+
+> Em gửi plan tuần này ạ
+> ViTHT: 40h
+> DatNT: 40h
+> LamLQ: 20h
+> ThinhT: 16h
+> => QC: 25h
+
+VuTQ + HaVS: NOT on W28 plan (expected — VuTQ moved to Bailey/Paturevision; HaVS not assigned this week).
+
+### Part 2 — Task Log Actuals
+
+**W28 (May 25–29, 2026) — end of week totals from Summary tab:**
+
+| Dev | Weekly Hours | Notes |
+|-----|-------------|-------|
+| ViTHT | 40.0h | Full week complete |
+| ThinhT | 12.0h | Plan = 16h; 4h gap (week may not be fully logged yet) |
+| VuTQ | 0.0h | ✓ Expected — moved to Bailey/Paturevision as of 2026-05-13 |
+| PhatDLT (QC) | 13.0h | Plan = 25h QC total |
+| HungPN (QC) | 16.0h | Combined QC = 29h (plan 25h ✓ exceeded) |
+| HaVS | 0.0h | ✓ Not on W28 plan — not an alert |
+| TrinhMTT | — | Not tracked as QC (excluded per rule) |
+
+Note: DatNT and LamLQ not tracked in Summary sheet (added to Fountain team after sheet was set up). Their actuals tracked via individual W-sheets only.
+
+Previous week W27 for comparison: ViTHT=32h, ThinhT=4h, PhatDLT=10h, HungPN=18h.
+
+### Part 3 — Plan vs Actual
+
+| Dev | Plan | Actual | Delta | Status |
+|-----|------|--------|-------|--------|
+| ViTHT | 40h | 40.0h | 0h | ✓ On target |
+| DatNT | 40h | — | — | Not in Summary sheet |
+| LamLQ | 20h | — | — | Not in Summary sheet |
+| ThinhT | 16h | 12.0h | −4h | ⚠️ 4h short (may be late entry) |
+| VuTQ | 0h (not on plan) | 0.0h | — | ✓ Expected |
+| HaVS | 0h (not on plan) | 0.0h | — | ✓ Expected |
+| QC total | 25h | 29.0h | +4h | ✓ Exceeded |
+
+### Part 4 — Capacity & Runway
+
+| Metric | Value |
+|--------|-------|
+| Remaining est (Not Started + In-progress tasks) | 691.0h |
+| Dev capacity / week | 116h/wk (ViTHT 40 + DatNT 40 + LamLQ 20 + ThinhT 16) |
+| Runway | **5.96 weeks** (~late June / early July 2026) |
+| Delta vs 2026-05-27 report | +244.5h (+35 tasks since last check, 13 new In-progress added) |
+
+Note: Delta jump is due to new tasks entering the sheet (2912, 2870, 2869, 2885, 2854, etc.).
+
+### Part 5 — Over-Estimate Tracking
+
+| Task | Est (I+J) | Actual | Over% | Status | Trend vs 2026-05-27 |
+|------|-----------|--------|-------|--------|---------------------|
+| #2595 (giftdrop redemption) | 120h | 168.25h | +40% | Deployed on Staging | Stable (no new hours) |
+| #2615 | 12h | 106.75h | +789% | Deployed on Staging | Stable (same as May 27) |
+| #2735 (send smart link) | 120h (90+30 CR) | 136.0h | +13% | In-progress (>50%) | ⚠️ Growing (+1.75h since May 27) |
+| #2702 | 8h | 25.5h | +219% | In-progress (>50%) | Stable (same as May 27) |
+| #2872 | 32h | 46.25h | +45% | In-progress (>50%) | Growing |
+| #2853 | 40h | 48.75h | +22% | In-progress (>50%) | Growing |
+
+Total over-estimate tasks (actual > est +20%): **37 tasks**
+
+Key notes:
+- #2615: +789% over-estimate but status is "Deployed on Staging" — hours no longer growing (stable since May 27)
+- #2735: actively in-progress, growing (+1.75h this week) — monitor closely; at 120h est, 136h actual, only ~13% over, below spike threshold
+- #2595: stable at +40%, Deployed on Staging
+- No new spike entries detected this week
+
+### Trello Board
+
+**Active card counts:**
+| List | Cards |
+|------|-------|
+| To-Do | 27 |
+| Bugs | 11 |
+| Doing | 12 |
+| QC Internal Backlog (Staging/Beta) | 16 |
+| QA Backlog | 1 |
+| In QA | 1 |
+| Not Passed | 1 |
+
+**Stuck cards in Doing (>5 days inactive):**
+| Days | Card |
+|------|------|
+| 38d | Fountain & Infinity - Add Subtle Scroll Animations |
+| 37d | ActiveRecord::RecordNotFound in admin/users#show |
+| 31d | Finding solution to customers receiving incorrect delivery dates |
+| 14d | Infinity - Order flow updates |
+
+**Hard-to-release in Doing (14+ days without reaching Done):**
+All 4 stuck cards above are also hard-to-release.
+
+**Customer comments (window 2026-05-27 → 2026-05-29):**
+| Date | Customer | Card | Comment summary |
+|------|----------|------|-----------------|
+| 2026-05-29 | @kunalsheth | Infinity - Custom printed gift item | Each design same price ($224.95 no matter design) |
+| 2026-05-29 | @kunalsheth | Fountain - States need to be updated + scrolling | Any update? Still see old list on beta. Some states 2-letter, others full |
+| 2026-05-28 | @kunalsheth | Infinity Shipstation store | Guest checkout email passed incorrectly |
+| 2026-05-27 | @kunalsheth | Fountain - Unlimited scroll on card page | Seems fixed |
+| 2026-05-27 | @kunalsheth | Fountain - Personal landing page Updates | Push live with nav refactor |
+| 2026-05-27 | @tmmckay | Fountain - Custom engraving on Wine Gifts | Yes it is (confirming req), this ticket is the best one to go on |
+
+**Alerts from Trello:**
+- ⚠️ 4 cards stuck in Doing (31–38 days inactive) — no recent progress
+- ℹ️ 6 customer comments in window, all routine feedback/questions (no urgent unresolved issues)
+
+Trello "Fountain" checklist item: ✓ already complete (card `6a18d71326953f65c8f72893`, Work checklist item `6a18d71326953f65c8f728f2` — state: complete). All 5 parts clean: plan posted, actuals within range, no new over-estimate spikes.
+
+---
