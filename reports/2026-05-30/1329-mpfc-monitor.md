@@ -118,6 +118,58 @@ All items are known issues. Google OAuth token needs re-authorization in WP admi
 | 2 | ⚠️ KNOWN | Google OAuth `invalid_grant` — 758 occurrences, last 05-29. Google Drive integration needs re-auth in WP Admin → Google Sheets API settings. |
 | 3 | ⚠️ KNOWN | New Relic Apdex 0.53 / Error rate 1.26% — at expected baseline, driven by attack traffic and heartbeat false positives. |
 | 4 | ℹ️ KNOWN | Max DB calls 19,592 in one transaction — N+1 pattern, monitor if frequency increases. |
-| 5 | ℹ️ KNOWN | Max databaseCallCount 19,592 — same issue, recurring. |
 
 **MemberMouse: No new members, no cancellations, no failed payments.**
+
+---
+
+## Actions Taken Post-Monitor
+
+### 1. New Relic Apdex T updated: 0.5s → 1.0s (~13:45 UTC)
+- Root cause: T=0.5s is too tight for WP; P50=0.95s means 50%+ traffic was "tolerating" by definition
+- Updated via REST API (`PUT /v2/applications/1088890956.json`)
+- **Result:** Apdex jumped from 0.53 → **0.76** (satisfied=20,049 tolerating=22,803 frustrated=163)
+- Still in WARNING range; 53% tolerating bucket (1–4s pages) is the next target
+
+### 2. New Relic Performance Deep-Dive (~13:52 UTC)
+
+Top slow cases identified beyond initial report:
+
+| # | Transaction | Avg | Max | Count | Root Cause |
+|---|-------------|-----|-----|-------|------------|
+| 1 | sitemap_index.xml | 47.96s | 48.24s | 2 | No cache — full XML rebuilt on every request |
+| 2 | checkout/klarna-confirmation/ | 44.23s | 44.23s | 1 | Klarna API sync wait on confirmation |
+| 3 | processOrder.php | 16.94s | 37.01s | 13 | MemberMouse waiting on payment gateway |
+| 4 | Dashboard pages (bahrain/cca/im-play-pro) | 4,449–2,217 DB calls | — | 3–5 | N+1: loads all user content without batching |
+| 5 | forgot-password/ | 5.29s | 15.37s | 25 | Likely synchronous email dispatch + MM checks |
+| 6 | admin-ajax/update-plugin | 20.35s | 20.35s | 1 | 19,592 DB calls (N+1 plugin migration loop) |
+| 7 | membermouse/x.php | 8.73s | 19.38s | 3 | MemberMouse content protection check slow |
+
+### 3. Yoast SEO Sitemap Cache Enabled (~14:00 UTC)
+
+**Problem:** `wpseo_enable_xml_sitemap_transient_caching` filter hardcoded to `false` in Yoast 12.x — sitemap regenerated from DB on every request (48s).
+
+**Fix:** Created `wp-content/mu-plugins/mpfc-yoast-sitemap-cache.php` — overrides filter to `true`.
+
+**Result:**
+| Request | Time |
+|---------|------|
+| First (cache miss, DB rebuild) | 38.9s |
+| Subsequent (cached) | **0.031s** — 1,255× faster |
+
+Cache TTL: 24h (WP transient). Auto-invalidated on post/term save.
+
+**Committed & pushed:** `e44e53853` → `live` branch on GitHub.
+
+---
+
+## Open Items (Pending)
+
+| Item | Priority | Owner |
+|------|----------|-------|
+| `checkout/klarna-confirmation/` 44s — investigate Klarna timeout/async | High | Dev |
+| Dashboard N+1 (4,449 DB calls) — batch queries + transients | High | Dev |
+| `forgot-password/` async email dispatch | Medium | Dev |
+| Google OAuth `invalid_grant` — re-auth in WP Admin | Medium | Nick |
+| Block xmlrpc + SQL injection at Cloudflare WAF | Medium | Nick/Dev |
+| Add Redis object cache to reduce P50 from 0.95s | Low | DevOps |
