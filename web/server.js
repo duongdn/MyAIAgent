@@ -121,6 +121,7 @@ function startRun(runId, prompt) {
   const proc = spawn('claude', [
     '-p', prompt,
     '--output-format', 'stream-json',
+    '--verbose',
     '--dangerously-skip-permissions',
   ], {
     cwd: PROJECT_DIR,
