@@ -32,48 +32,19 @@ async function loadSkills() {
   }
 }
 
-function groupSkills(skills) {
-  const groups = {};
-  for (const skill of skills) {
-    const prefix = skill.name.includes(':') ? skill.name.split(':')[0] : 'other';
-    const label = prefixLabel(prefix);
-    if (!groups[label]) groups[label] = [];
-    groups[label].push(skill);
-  }
-  // Sort: me first, then ck, then others
-  const order = ['Personal', 'ClaudeKit', 'Other'];
-  return Object.entries(groups).sort(([a], [b]) => {
-    const ai = order.indexOf(a) === -1 ? 99 : order.indexOf(a);
-    const bi = order.indexOf(b) === -1 ? 99 : order.indexOf(b);
-    return ai - bi || a.localeCompare(b);
-  });
-}
-
-function prefixLabel(prefix) {
-  if (prefix === 'me') return 'Personal';
-  if (prefix === 'ck' || prefix === 'ckm') return 'ClaudeKit';
-  return 'Other';
-}
-
 function renderSkillList(skills) {
   if (!skills.length) {
     skillListEl.innerHTML = '<div class="loading-skills">No skills found</div>';
     return;
   }
 
-  const groups = groupSkills(skills);
-  skillListEl.innerHTML = groups.map(([label, items]) => `
-    <div class="skill-group">
-      <div class="skill-group-label">${label}</div>
-      ${items.map(skill => `
-        <div class="skill-item${selectedSkill?.id === skill.id ? ' active' : ''}"
-             data-id="${skill.id}"
-             data-name="${escHtml(skill.name)}"
-             title="${escHtml(skill.description)}">
-          <div class="skill-name">${escHtml(skill.name)}</div>
-          <div class="skill-desc">${escHtml(skill.description)}</div>
-        </div>
-      `).join('')}
+  skillListEl.innerHTML = skills.map(skill => `
+    <div class="skill-item${selectedSkill?.id === skill.id ? ' active' : ''}"
+         data-id="${skill.id}"
+         data-name="${escHtml(skill.name)}"
+         title="${escHtml(skill.description)}">
+      <div class="skill-name">${escHtml(skill.name.replace('me:', ''))}</div>
+      <div class="skill-desc">${escHtml(skill.description)}</div>
     </div>
   `).join('');
 

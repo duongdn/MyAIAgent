@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.WEB_PORT || 3333;
 const PROJECT_DIR = path.resolve(__dirname, '..');
 const SKILLS_DIR = path.join(PROJECT_DIR, '.claude', 'skills');
+const COMMANDS_ME_DIR = path.join(PROJECT_DIR, '.claude', 'commands', 'me');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -63,42 +64,41 @@ function parseFrontmatter(content) {
 
 function scanSkills() {
   const skills = [];
+  const seen = new Set();
 
-  function walkDir(dir) {
-    let entries;
-    try {
-      entries = fs.readdirSync(dir, { withFileTypes: true });
-    } catch (_) {
-      return;
+  // Commands in .claude/commands/me/ — each .md file is a me: command
+  try {
+    for (const entry of fs.readdirSync(COMMANDS_ME_DIR, { withFileTypes: true })) {
+      if (!entry.isFile() || !entry.name.endsWith('.md')) continue;
+      const slug = entry.name.replace(/\.md$/, '');
+      const name = `me:${slug}`;
+      if (seen.has(name)) continue;
+      try {
+        const content = fs.readFileSync(path.join(COMMANDS_ME_DIR, entry.name), 'utf8');
+        const fm = parseFrontmatter(content);
+        skills.push({ id: slug, name, description: (fm.description || '').slice(0, 120) });
+        seen.add(name);
+      } catch (_) { /* skip */ }
     }
+  } catch (_) { /* dir missing */ }
 
-    for (const entry of entries) {
+  // Skills in .claude/skills/ with name: me:* (e.g. mpfc-monitor)
+  try {
+    for (const entry of fs.readdirSync(SKILLS_DIR, { withFileTypes: true })) {
       if (!entry.isDirectory()) continue;
-
-      // Nested skill dirs (e.g. document-skills/)
-      const skillFile = path.join(dir, entry.name, 'SKILL.md');
-      const nestedDir = path.join(dir, entry.name);
-
-      if (fs.existsSync(skillFile)) {
-        try {
-          const content = fs.readFileSync(skillFile, 'utf8');
-          const fm = parseFrontmatter(content);
-          if (fm.name) {
-            skills.push({
-              id: entry.name,
-              name: fm.name,
-              description: (fm.description || '').slice(0, 120),
-            });
-          }
-        } catch (_) { /* skip */ }
-      } else {
-        // Maybe nested (e.g. document-skills/pdf/SKILL.md)
-        walkDir(nestedDir);
-      }
+      const skillFile = path.join(SKILLS_DIR, entry.name, 'SKILL.md');
+      if (!fs.existsSync(skillFile)) continue;
+      try {
+        const content = fs.readFileSync(skillFile, 'utf8');
+        const fm = parseFrontmatter(content);
+        if (fm.name && fm.name.startsWith('me:') && !seen.has(fm.name)) {
+          skills.push({ id: entry.name, name: fm.name, description: (fm.description || '').slice(0, 120) });
+          seen.add(fm.name);
+        }
+      } catch (_) { /* skip */ }
     }
-  }
+  } catch (_) { /* dir missing */ }
 
-  walkDir(SKILLS_DIR);
   return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
