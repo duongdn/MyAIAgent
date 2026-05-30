@@ -19,7 +19,7 @@ Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-
 | `/mpfc-monitor wordpress` | WP errors, PHP errors, cron log |
 | `/mpfc-monitor members` | MemberMouse recent activity via DB |
 | `/mpfc-monitor slack` | MyPersonalFootballCoach Slack workspace |
-| `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks |
+| `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks, performance (apdex, percentiles, slowest txns, DB) |
 | `/mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
 | `/mpfc-monitor cloudflare` | Cloudflare: traffic, threats, firewall, SSL |
 | `/mpfc-monitor github` | Open GitHub PRs (nuscarrick account) |
@@ -169,18 +169,67 @@ def nrql(query):
 ```
 
 **Key queries:**
-- Overview: `SELECT count(*), average(duration) FROM Transaction WHERE appName = 'MPFC-live2' SINCE 24 hours ago`
-- P95: key is `row['percentile.duration']['95']` (NOT `percentile(duration,95)`)
-- Errors: `SELECT count(*) FROM TransactionError WHERE appName = 'MPFC-live2' FACET transactionName SINCE 24 hours ago LIMIT 10`
-- HTTP codes: `SELECT count(*) FROM Transaction WHERE appName = 'MPFC-live2' FACET numeric(http.statusCode) SINCE 24 hours ago`
-- Attack traffic: `SELECT count(*) FROM Transaction WHERE appName = 'MPFC-live2' FACET name SINCE 24 hours ago LIMIT 10` — flag xmlrpc, login, waitfor, DBMS_PIPE patterns
+
+```python
+# Overview: total requests + avg response time
+nrql("SELECT count(*), average(duration) FROM Transaction WHERE appName = 'MPFC-live2' SINCE 24 hours ago")
+
+# Percentiles: P50/P75/P90/P95/P99 — key is row['percentile.duration']['50'] etc.
+nrql("SELECT percentile(duration, 50, 75, 90, 95, 99) FROM Transaction WHERE appName = 'MPFC-live2' SINCE 24 hours ago")
+
+# Apdex (T=0.5s)
+nrql("SELECT apdex(duration, 0.5) FROM Transaction WHERE appName = 'MPFC-live2' SINCE 24 hours ago")
+# key: row['apdex.duration']['score']
+
+# Error rate
+nrql("SELECT percentage(count(*), WHERE error IS TRUE) AS errRate FROM Transaction WHERE appName = 'MPFC-live2' SINCE 24 hours ago")
+
+# Slowest transactions (exclude attack patterns, sort locally by average.duration DESC)
+nrql("SELECT average(duration), max(duration), count(*) FROM Transaction WHERE appName = 'MPFC-live2' AND name NOT LIKE '%waitfor%' AND name NOT LIKE '%DBMS_PIPE%' AND name NOT LIKE '%SELECT%' FACET name SINCE 24 hours ago LIMIT 20")
+# Sort result: sorted(res, key=lambda x: x.get('average.duration', 0), reverse=True)
+
+# DB performance (transactions with DB calls)
+nrql("SELECT average(databaseCallCount), max(databaseCallCount), average(databaseDuration) FROM Transaction WHERE appName = 'MPFC-live2' AND databaseCallCount > 0 SINCE 24 hours ago")
+
+# Error breakdown by transaction
+nrql("SELECT count(*) FROM TransactionError WHERE appName = 'MPFC-live2' FACET transactionName SINCE 24 hours ago LIMIT 10")
+
+# HTTP status codes
+nrql("SELECT count(*) FROM Transaction WHERE appName = 'MPFC-live2' FACET numeric(http.statusCode) SINCE 24 hours ago")
+
+# Attack traffic (top transactions — flag xmlrpc, login, waitfor, DBMS_PIPE, SELECT patterns)
+nrql("SELECT count(*) FROM Transaction WHERE appName = 'MPFC-live2' FACET name SINCE 24 hours ago LIMIT 10")
+```
+
+**Performance thresholds:**
+
+| Metric | OK | WARNING | CRITICAL |
+|--------|-----|---------|----------|
+| Apdex (T=0.5s) | >0.7 | 0.5–0.7 | <0.5 |
+| Error rate | <1% | 1–3% | >3% |
+| P95 response | <2s | 2–5s | >5s |
+| P99 response | <5s | 5–10s | >10s |
+| Avg DB duration | <0.5s | 0.5–1s | >1s |
+| Max DB calls/txn | <500 | 500–2000 | >2000 |
+
+**Flag:**
+- Any non-attack transaction with avg > 10s (likely N+1 query or external API hang)
+- `processOrder.php` avg > 20s (payment processing too slow)
+- `sitemap_index.xml` > 30s (regenerating large sitemap)
+- Max databaseCallCount > 5000 (N+1 query problem)
+- Error rate spike above 3%
 
 **Known issues (pre-existing):**
 - `include_once(): Failed opening '/Users/duongdn/...'` — stale dev path in MemberMouse files; 14 processOrder events/day; low impact
-- Heartbeat "errors" (475/day) are HTTP 200 false positives (PHP notices, no real error)
+- Heartbeat "errors" (~300/day) are HTTP 200 false positives (PHP notices, no real error)
 - Attack traffic ~31% of total (xmlrpc brute force + SQL injection timing attacks)
+- `sitemap_index.xml` — 2 occurrences at ~48s avg; large sitemap generation, low priority
+- `processOrder.php` — avg 16.9s, max 37s, 13/day; MemberMouse payment API latency, monitor for increase
+- Max databaseCallCount hit 19,592 in one txn — investigate if recurring
 
-**Apdex target:** 0.85. Current: 0.712 (affected by attacks).
+**Apdex baseline:** Current 0.53 (T=0.5s). Affected by attacks inflating slow transaction count. Legitimate traffic apdex likely higher.
+
+**Percentile baseline (24h):** P50=0.95s | P75=1.28s | P90=1.66s | P99=3.06s
 
 ## Check 6 — Rollbar (`/mpfc-monitor rollbar`)
 
