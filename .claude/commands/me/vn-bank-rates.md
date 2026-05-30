@@ -7,7 +7,7 @@ description: Fetch Vietnamese bank interest rates (lãi suất 1 tháng, 3 thán
 Run the fetch script and report results.
 
 ```bash
-python3 ~/.claude/skills/vn-bank-rates/scripts/fetch-vn-bank-rates.py
+node ~/.claude/skills/vn-bank-rates/scripts/fetch-vn-bank-rates.js
 ```
 
 Report output inline — no file needed. Show:
