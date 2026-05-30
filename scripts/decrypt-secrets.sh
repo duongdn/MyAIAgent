@@ -32,6 +32,7 @@ ENC_FILES=(
   config/.bailey-config.json.enc
   config/.upwork-config.json.enc
   config/.newrelic-config.json.enc
+  config/.rollbar-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
