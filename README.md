@@ -46,7 +46,28 @@ ls config/.email-accounts.json config/.slack-accounts.json config/.trello-config
 claude "/daily-report-refresh slack"
 ```
 
-## Usage
+## Web UI
+
+Access the agent dashboard at:
+
+```
+https://dailyagent.mypersonalfootballcoach.com/
+```
+
+- Login with the same credentials as `admin.mypersonalfootballcoach.com`
+- Browse and run any skill from the sidebar
+- Output streams in real-time in the terminal pane
+- Keyboard shortcuts: `Ctrl+K` to filter skills, `Escape` to stop a run
+
+The web server runs as a systemd service (`mydailyagent-web`) — starts automatically on boot.
+
+```bash
+sudo systemctl status mydailyagent-web
+sudo systemctl restart mydailyagent-web
+sudo journalctl -u mydailyagent-web -f    # live logs
+```
+
+## Usage (CLI)
 
 ### Daily Report (morning ~8AM)
 
@@ -92,6 +113,9 @@ claude "/daily-report-refresh elena"      # GitHub + Redmine
 
 ```
 .
+├── web/
+│   ├── server.js              # Express server (port 3334 internal)
+│   └── public/                # Static assets (HTML, CSS, JS)
 ├── .claude/commands/          # Project-local slash commands
 │   ├── daily-report.md
 │   └── daily-report-refresh.md
