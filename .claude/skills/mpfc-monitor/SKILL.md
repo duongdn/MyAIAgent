@@ -20,6 +20,7 @@ Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-
 | `/mpfc-monitor members` | MemberMouse recent activity via DB |
 | `/mpfc-monitor slack` | MyPersonalFootballCoach Slack workspace |
 | `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks |
+| `/mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
 | `/mpfc-monitor github` | Open GitHub PRs (nuscarrick account) |
 
 ## Check 1 — Server Health (`/mpfc-monitor server`)
@@ -180,7 +181,33 @@ def nrql(query):
 
 **Apdex target:** 0.85. Current: 0.712 (affected by attacks).
 
-## Check 6 — GitHub (`/mpfc-monitor github`)
+## Check 6 — Rollbar (`/mpfc-monitor rollbar`)
+
+**Config:** `config/.rollbar-config.json` (encrypted) — keys: `read_token`, `post_server_token`, `project` (mpfc), `environment` (production)
+**Project ID:** 773475 | **Account ID:** 554643
+
+```bash
+TOKEN=$(python3 -c "import json; print(json.load(open('config/.rollbar-config.json'))['read_token'])")
+
+# Active items
+curl -s "https://api.rollbar.com/api/1/items/?access_token=$TOKEN&status=active&environment=production&order=desc&per_page=20" | python3 -c "
+import json,sys,datetime
+d=json.load(sys.stdin)
+for it in d.get('result',{}).get('items',[]):
+    ts=it.get('last_occurrence_timestamp',0)
+    last=datetime.datetime.utcfromtimestamp(ts).strftime('%m-%d %H:%M') if ts else '?'
+    print(f\"[{it.get('level').upper()}] {it.get('title','?')[:80]} | count={it.get('total_occurrences')} | last={last} UTC\")
+"
+```
+
+**Flag:** CRITICAL level items, any MemberMouse errors, memory exhaustion, errors with count > 10 in last 7 days.
+
+**Known active issues:**
+- `Google_AuthException: invalid_grant` — 758 occurrences, last 05-29. Google OAuth token expired. Needs re-authorization of Google integration in WP admin.
+- `MM_Product::findAll()/getPaymentType()` undefined method — MemberMouse version mismatch, 1-2 occurrences/week, low frequency
+- Memory exhausted (1GB limit hit) — 9 occurrences on 05-19/20, not recent, monitor if recurs
+
+## Check 7 — GitHub (`/mpfc-monitor github`)
 
 ```bash
 # Check open PRs (nuscarrick default account)
@@ -191,14 +218,15 @@ echo "No repo found or no access"
 
 ## Full Run
 
-Run all 6 checks in order:
+Run all 7 checks in order:
 1. Server health
 2. WordPress health + cron
 3. MemberMouse activity
 4. Slack
 5. New Relic APM
-6. GitHub
-7. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
+6. Rollbar
+7. GitHub
+8. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
 
 ## Report Format
 
