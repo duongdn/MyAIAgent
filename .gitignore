@@ -16,6 +16,7 @@ config/.bailey-config.json
 config/.upwork-config.json
 config/.newrelic-config.json
 config/.rollbar-config.json
+config/.cloudflare-config.json
 config/daily-agent-*.json
 
 # Legacy root-level config (moved to config/)

@@ -31,6 +31,7 @@ SECRET_FILES=(
   config/.jira-config.json
   config/.bailey-config.json
   config/.upwork-config.json
+  config/.cloudflare-config.json
 )
 
 # Add Google service account key if exists

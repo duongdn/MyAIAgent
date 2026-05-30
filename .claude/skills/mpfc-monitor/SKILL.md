@@ -1,6 +1,6 @@
 ---
 name: me:mpfc-monitor
-description: MyPersonalFootballCoach (MPFC) project monitor — check server health, WordPress errors, MemberMouse activity, cron job health, and Slack workspace. Use when user asks to monitor MPFC, check the football coach website, review MPFC server status, check memberships or payments, inspect WordPress errors, or review recent Slack activity for MyPersonalFootballCoach.
+description: MyPersonalFootballCoach (MPFC) project monitor — check server health, WordPress errors, MemberMouse activity, cron job health, Slack workspace, New Relic APM, Rollbar errors, Cloudflare traffic/firewall, and GitHub PRs. Use when user asks to monitor MPFC, check the football coach website, review MPFC server status, check memberships or payments, inspect WordPress errors, or review recent Slack/Cloudflare/Rollbar activity for MyPersonalFootballCoach.
 ---
 
 # MPFC Monitor
@@ -21,6 +21,7 @@ Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-
 | `/mpfc-monitor slack` | MyPersonalFootballCoach Slack workspace |
 | `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks |
 | `/mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
+| `/mpfc-monitor cloudflare` | Cloudflare: traffic, threats, firewall, SSL |
 | `/mpfc-monitor github` | Open GitHub PRs (nuscarrick account) |
 
 ## Check 1 — Server Health (`/mpfc-monitor server`)
@@ -207,26 +208,89 @@ for it in d.get('result',{}).get('items',[]):
 - `MM_Product::findAll()/getPaymentType()` undefined method — MemberMouse version mismatch, 1-2 occurrences/week, low frequency
 - Memory exhausted (1GB limit hit) — 9 occurrences on 05-19/20, not recent, monitor if recurs
 
-## Check 7 — GitHub (`/mpfc-monitor github`)
+## Check 7 — Cloudflare (`/mpfc-monitor cloudflare`)
+
+**Config:** `config/.cloudflare-config.json` (encrypted) — keys: `api_token`, `zone_id` (ded47d2c4247118dac024d793372b069), `zone_name` (mypersonalfootballcoach.com)
+
+**Plan:** Pro Website | Nameservers: jillian + yevgen.ns.cloudflare.com | SSL: full | Security level: medium
+
+```python
+import json, urllib.request, datetime
+
+with open('config/.cloudflare-config.json') as f:
+    cfg = json.load(f)
+
+token = cfg['api_token']
+zone_id = cfg['zone_id']
+
+def cf_graphql(query):
+    req = urllib.request.Request('https://api.cloudflare.com/client/v4/graphql',
+        data=json.dumps({'query': query}).encode(),
+        headers={'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return json.loads(r.read())
+
+def cf_get(path):
+    req = urllib.request.Request(f'https://api.cloudflare.com/client/v4{path}',
+        headers={'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return json.loads(r.read())
+```
+
+**Key queries:**
+
+```python
+# Daily traffic (last 2 days) — use httpRequests1dGroups
+today = datetime.date.today().isoformat()
+yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+q = f'{{viewer{{zones(filter:{{zoneTag:"{zone_id}"}}){{httpRequests1dGroups(limit:2,orderBy:[date_DESC],filter:{{date_geq:"{yesterday}",date_leq:"{today}"}}){{dimensions{{date}}sum{{requests cachedRequests threats bytes pageViews}}uniq{{uniques}}}}}}}}}}'
+
+# Firewall events (24h) — MUST keep window strictly < 1d (use 23h span)
+now_str = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+h23_ago = (datetime.datetime.utcnow() - datetime.timedelta(hours=23)).strftime('%Y-%m-%dT%H:%M:%SZ')
+q_fw = f'{{viewer{{zones(filter:{{zoneTag:"{zone_id}"}}){{firewallEventsAdaptiveGroups(limit:15,orderBy:[count_DESC],filter:{{datetime_geq:"{h23_ago}",datetime_leq:"{now_str}"}}){{count dimensions{{action ruleId source clientCountryName}}}}}}}}}}'
+
+# SSL cert status
+cf_get(f'/zones/{zone_id}/ssl/certificate_packs?per_page=5')
+
+# Zone security settings
+cf_get(f'/zones/{zone_id}/settings/security_level')
+cf_get(f'/zones/{zone_id}/settings/ssl')
+```
+
+**IMPORTANT — time range constraint:** `firewallEventsAdaptiveGroups` on Pro plan cannot span > 1d. Always use a window of 23h or less to avoid quota errors.
+
+**Flag:**
+- Threats spike (>>0 in daily summary)
+- Firewall block/challenge count unusually high
+- SSL cert status != `active`
+- Security level changed from `medium`
+
+**Known baseline:**
+- 2026-05-29: 218,361 requests, 121,296 cached (55%), 0 threats, ~15.6GB bandwidth, 32,596 pageviews, 10,253 uniques
+- 2026-05-30 (partial): 66,442 requests, 45,407 cached (68%), 0 threats so far
+- WAF packages: OWASP ModSecurity + CloudFlare + USER
+- Firewall events: 0 blocks/challenges recorded (attack traffic hitting origin directly, not blocked at CF edge)
+
+## Check 8 — GitHub (`/mpfc-monitor github`)
 
 ```bash
-# Check open PRs (nuscarrick default account)
-gh pr list --repo nustechnology/mypersonalfootballcoach 2>/dev/null || \
-gh pr list --repo mpfc/mypersonalfootballcoach 2>/dev/null || \
-echo "No repo found or no access"
+# Check open PRs — repo: mypersonalfootballcoach/wp (nuscarrick account)
+gh pr list --repo mypersonalfootballcoach/wp 2>&1
 ```
 
 ## Full Run
 
-Run all 7 checks in order:
-1. Server health
-2. WordPress health + cron
-3. MemberMouse activity
-4. Slack
+Run all 8 checks in order:
+1. Server health (SSH: mpfc.mpfc.live)
+2. WordPress health + cron (SSH: mpfc.mpfc.live)
+3. MemberMouse activity (SSH: mpfc.mpfc.live)
+4. Slack (MyPersonalFootballCoach workspace)
 5. New Relic APM
 6. Rollbar
-7. GitHub
-8. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
+7. Cloudflare
+8. GitHub (mypersonalfootballcoach/wp)
+9. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
 
 ## Report Format
 

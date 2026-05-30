@@ -33,6 +33,7 @@ ENC_FILES=(
   config/.upwork-config.json.enc
   config/.newrelic-config.json.enc
   config/.rollbar-config.json.enc
+  config/.cloudflare-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
