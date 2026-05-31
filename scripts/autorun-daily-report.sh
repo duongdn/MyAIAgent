@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-PROJECT_DIR="/home/nus/projects/My-AI-Agent"
-CLAUDE_BIN="/home/nus/.local/bin/claude"
+PROJECT_DIR="/var/www/MyDailyAgent"
+CLAUDE_BIN="/usr/bin/claude"
 TODAY=$(date +%Y-%m-%d)
 REPORT_FILE="$PROJECT_DIR/reports/$TODAY/daily-report.md"
 

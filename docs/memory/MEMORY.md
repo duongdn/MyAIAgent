@@ -34,6 +34,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log = sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I (since 2026-04-06)
 
 ## Project (Dynamic State)
+- [project_timezone_utc7.md](project_timezone_utc7.md) — All time references use UTC+7 (Vietnam/ICT); convert by subtracting 7h for cron/UTC
 - [project_daily_report_workflow.md](project_daily_report_workflow.md) — Full daily report workflow: data sources, Trello mappings, configs
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond from W23 (2026-04-20)
