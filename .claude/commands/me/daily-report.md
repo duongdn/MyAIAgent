@@ -31,12 +31,12 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report` | Everything (full run) |
 | **Email** | |
 | `/daily-report email` | All 6 accounts |
-| `/daily-report email duongdn` | duongdn@ only |
-| `/daily-report email carrick` | carrick@ only |
-| `/daily-report email nick` | nick@ only |
-| `/daily-report email rick` | rick@ only |
-| `/daily-report email kai` | kai@ only |
-| `/daily-report email ken` | ken@ only |
+| `/daily-report email duongdn` | duongdn@ email + calendar |
+| `/daily-report email carrick` | carrick@ email + calendar |
+| `/daily-report email nick` | nick@ email + calendar |
+| `/daily-report email rick` | rick@ email + calendar |
+| `/daily-report email kai` | kai@ email + calendar |
+| `/daily-report email ken` | ken@ email + calendar |
 | **Slack** | |
 | `/daily-report slack` | All 13 workspaces |
 | `/daily-report slack baamboozle` | Baamboozle only |
@@ -123,7 +123,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 ## Piece 1 — Email (`/daily-report email [account]`)
 
 Supports individual account targeting:
-- `/daily-report email` — check all 6 accounts
+- `/daily-report email` — check all 6 accounts (email + calendar)
 - `/daily-report email duongdn` — check duongdn@ only
 - `/daily-report email carrick` — check carrick@ only
 - `/daily-report email nick` — check nick@ only
@@ -142,15 +142,21 @@ Supports individual account targeting:
 | kai@nustechnology.com | JFDn4fsHiU0m | Madhuraka | INBOX |
 | ken@nustechnology.com | WY60fEDrTfXM | Precognize/development | NewsLetter |
 
-**Method:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
+**Method — Email:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
-**What to look for:**
+**What to look for (email):**
 - duongdn@: leave requests, New Relic alerts
 - carrick@: Redmine bug notifications for Generator/Elliott
 - nick@: anything from John Yi
 - rick@: Rollbar/BugSnag **production** alerts for Fountain, InfinityRoses
 - kai@: Jira/Madhuraka mentions
 - ken@: Precognize GitHub PR activity
+
+**Method — Calendar:** Run `node scripts/fetch-zoho-calendar.js [account]` in parallel with IMAP check.
+- Config: `config/.zoho-calendar-config.json` (OAuth2 tokens per account)
+- Fetches today's events from each account's primary Zoho Calendar
+- If `no_refresh_token` error → skip calendar for that account, note in report (run `zoho-calendar-oauth-setup.js` to fix)
+- Report all events: title, time, allday flag, attendees
 
 **Trello — after checking:**
 - Find "Check mail" card by name on board `O83pAyqb`
@@ -162,9 +168,13 @@ Supports individual account targeting:
 Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
 ```
 ## Email [account|all] — {HH:MM} (+07:00)
-| Account | Count | Summary |
+| Account | Emails | Calendar events today |
+|---------|--------|-----------------------|
+| duongdn@ | 3 msgs | 09:00 Standup (30m), 14:00 Client call |
+| carrick@ | 1 msg  | — |
 ...
-{Alerts if any.}
+{Email alerts if any.}
+{Calendar alerts if any (e.g. leave events, back-to-back meetings).}
 Trello: {checked account(s)} item ✓ complete.
 ```
 
