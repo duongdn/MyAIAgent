@@ -2,7 +2,7 @@
 description: On-demand refresh of all monitoring sources (Slack, Discord, Email, Matrix, GitHub, etc.)
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 

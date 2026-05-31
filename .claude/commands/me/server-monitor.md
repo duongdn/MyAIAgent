@@ -2,7 +2,7 @@
 description: Server resource monitoring — check all managed servers and update Trello checklist
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 

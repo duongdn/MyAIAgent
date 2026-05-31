@@ -3,7 +3,7 @@ description: Monday project status report — gather metrics per project and sub
 allowed-tools: Bash, Read, Grep, Glob, Write, Edit, AskUserQuestion, WebFetch
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 

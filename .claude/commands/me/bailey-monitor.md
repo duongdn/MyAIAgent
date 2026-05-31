@@ -2,7 +2,7 @@
 description: Bailey project monitoring — CloudWatch alarms, events, and infrastructure health
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 

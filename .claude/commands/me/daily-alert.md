@@ -2,7 +2,7 @@
 description: Automated alert monitoring — runs on cron, collects HIGH severity alerts, sends desktop notifications
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 

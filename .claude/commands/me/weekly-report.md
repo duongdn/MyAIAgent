@@ -2,7 +2,7 @@
 description: Weekly monitoring report — team hours, project reports, JIRA cross-check
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util-read-memory.md` before anything else.
+> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
 
 ---
 
