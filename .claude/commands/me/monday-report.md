@@ -3,7 +3,12 @@ description: Monday project status report — gather metrics per project and sub
 allowed-tools: Bash, Read, Grep, Glob, Write, Edit, AskUserQuestion, WebFetch
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:trello` | After each project submission (live mode only) | board `O83pAyqb`; card `Report project status`; complete item per project |
 
 ---
 

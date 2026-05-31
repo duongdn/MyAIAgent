@@ -4,6 +4,13 @@ description: MISA MoneyKeeper — fetch and analyze personal finance data (portf
 
 # Money Report
 
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:report` | Every piece output | `reports/{YYYY-MM-DD}/{HHMM}-money-{type}.md` |
+
+
 Fetches and analyzes personal finance data from MISA MoneyKeeper.
 
 **URL:** https://moneykeeperapp.misa.vn/management/dashboard  

@@ -2,7 +2,15 @@
 description: On-demand refresh of all monitoring sources (Slack, Discord, Email, Matrix, GitHub, etc.)
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:timeline` | Start: per-source window; End: update | read `refresh.{source}[.{account}].last_run`; write same key after each piece |
+| `/util:trello` | After each source piece | board `O83pAyqb`; cards `Check Progress` + `Check Mail` |
+| `/util:matrix-send` | Reminders piece | rooms: per-dev table (same as daily-report Piece 9) |
+| `/util:report` | Every piece output | `reports/{YYYY-MM-DD}/{HHMM}-update.md` — append, never overwrite daily |
 
 ---
 

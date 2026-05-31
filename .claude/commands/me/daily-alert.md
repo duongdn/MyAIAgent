@@ -2,7 +2,14 @@
 description: Automated alert monitoring — runs on cron, collects HIGH severity alerts, sends desktop notifications
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:timeline` | Start: read window; End: update | read `alert.last_run`; write `alert.last_run` only — NEVER touch `daily_report` |
+| `/util:notify` | Step 8: alert found; Step 9: all-clear | HIGH/CRITICAL → urgency `critical`; all-clear → urgency `low` |
+| `/util:report` | Step 7 output | `reports/{YYYY-MM-DD}/{HHMM}-alert.md` |
 
 ---
 

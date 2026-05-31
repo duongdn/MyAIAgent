@@ -2,7 +2,12 @@
 description: Weekly monitoring report — team hours, project reports, JIRA cross-check
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:matrix-send` | #2 James Diamond + Marcel report | room `!oofREYAXHsvPWEOJev:nustechnology.com` |
 
 ---
 

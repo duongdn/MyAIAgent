@@ -2,7 +2,13 @@
 description: Bailey project monitoring — CloudWatch alarms, events, and infrastructure health
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:report` | Write output | `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md` |
+| `/util:tasklog-write` | Subtask 9: log monitoring task | sheet `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`; task `Weekly Monitor {Month} {Year}`; owner `DuongDN`; hours `1` |
 
 ---
 

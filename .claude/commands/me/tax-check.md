@@ -2,7 +2,12 @@
 description: Personal tax YTD check — payslip emails vs tax-summary sheet vs Vietnam PIT (old 7-bracket law)
 ---
 
-> **MANDATORY FIRST STEP:** Read `.claude/commands/me/util/read-memory.md` before anything else.
+## Utils
+
+| Util | When | Params |
+|------|------|--------|
+| `/util:read-memory` | First — before anything | — |
+| `/util:report` | Write output | `reports/{YYYY-MM-DD}/tax-check.md` |
 
 ---
 
