@@ -153,9 +153,8 @@ Supports individual account targeting:
 - ken@: Precognize GitHub PR activity
 
 **Method — Calendar:** Run `node scripts/fetch-zoho-calendar.js [account]` in parallel with IMAP check.
-- Config: `config/.zoho-calendar-config.json` (OAuth2 tokens per account)
-- Fetches today's events from each account's primary Zoho Calendar
-- If `no_refresh_token` error → skip calendar for that account, note in report (run `zoho-calendar-oauth-setup.js` to fix)
+- Uses same app password from `config/.email-accounts.json` via CalDAV (no separate OAuth setup)
+- CalDAV host: `calendar.zoho.com` — discovers calendar home, then fetches today's events
 - Report all events: title, time, allday flag, attendees
 
 **Trello — after checking:**

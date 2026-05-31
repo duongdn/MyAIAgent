@@ -51,7 +51,7 @@ For workspaces without `search:read` (LegalAtoms, session-token workspaces), fal
 
 ## Checklist Items
 
-1. **Monitor Email + Calendar** — 6 accounts in `.email-accounts.json` (IMAP) + `.zoho-calendar-config.json` (Zoho Calendar OAuth2). Run both in parallel per account: IMAP inbox scan + today's calendar events via `scripts/fetch-zoho-calendar.js`.
+1. **Monitor Email + Calendar** — 6 accounts in `.email-accounts.json`. Run both in parallel per account: IMAP inbox scan + today's Zoho Calendar events via CalDAV (`scripts/fetch-zoho-calendar.js`). CalDAV reuses the same app password — no separate OAuth setup.
 2. **Monitor Slack** — 13 workspaces in `.slack-accounts.json` (2 use session tokens: Amazing Meds, Equanimity — login fresh before each fetch)
 3. **Monitor Discord** — 2 accounts in `.discord-accounts.json` (nusvinn: AirAgri/HOMIEAPP, nuscarrick: Bizurk)
 4. **Monitor Web** — samguard.co JS console errors check
@@ -165,8 +165,7 @@ Add more rooms as they are provided. Skip developers on confirmed leave or adhoc
 
 - `.slack-accounts.json` — 13 Slack workspaces with tokens
 - `.discord-accounts.json` — 2 Discord accounts with tokens
-- `.email-accounts.json` — 6 email accounts (IMAP credentials)
-- `.zoho-calendar-config.json` — Zoho Calendar OAuth2 tokens (client_id, client_secret, per-account refresh/access tokens). Setup: `node scripts/zoho-calendar-oauth-setup.js`. Scope: `ZohoCalendar.calendar.READ`.
+- `.email-accounts.json` — 6 email accounts (IMAP + CalDAV credentials — same app password for both)
 - `.web-monitors.json` — Web monitoring targets
 - `.google-docs.json` — Google Sheets monitor config
 - `.scrin-config.json` — Scrin.io login + API config
