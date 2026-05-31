@@ -102,6 +102,12 @@ function scanSkills() {
   return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+// --- Utilities ---
+
+// Strip ANSI escape codes (colors, cursor moves, etc.)
+const ANSI_RE = /\x1B\[[0-9;]*[A-Za-z]|\x1B[()][A-B]/g;
+function stripAnsi(str) { return str.replace(ANSI_RE, ''); }
+
 // --- SSE broadcast helper ---
 
 function broadcast(run, data) {
@@ -125,7 +131,14 @@ function startRun(runId, prompt) {
     '--dangerously-skip-permissions',
   ], {
     cwd: PROJECT_DIR,
-    env: { ...process.env, FORCE_COLOR: '1', CLAUDE_PROJECT_DIR: PROJECT_DIR },
+    stdio: ['ignore', 'pipe', 'pipe'], // ignore stdin → no "waiting for stdin" warning
+    env: {
+      ...process.env,
+      NO_COLOR: '1',           // disable ANSI color codes in output
+      FORCE_COLOR: '0',
+      CLAUDE_PROJECT_DIR: PROJECT_DIR,
+      MYDAILYAGENT_WEB: '1',   // flag for scripts to detect web context
+    },
   });
 
   run.process = proc;
@@ -147,13 +160,14 @@ function startRun(runId, prompt) {
         const parsed = JSON.parse(line);
         handleStreamEvent(run, parsed);
       } catch (_) {
-        broadcast(run, { type: 'raw', text: line });
+        broadcast(run, { type: 'raw', text: stripAnsi(line) });
       }
     }
   });
 
   proc.stderr.on('data', (chunk) => {
-    broadcast(run, { type: 'stderr', text: chunk.toString() });
+    const text = stripAnsi(chunk.toString()).trim();
+    if (text) broadcast(run, { type: 'stderr', text });
   });
 
   proc.on('close', (code) => {
@@ -163,7 +177,7 @@ function startRun(runId, prompt) {
         const parsed = JSON.parse(stdoutBuf);
         handleStreamEvent(run, parsed);
       } catch (_) {
-        broadcast(run, { type: 'raw', text: stdoutBuf });
+        broadcast(run, { type: 'raw', text: stripAnsi(stdoutBuf) });
       }
     }
     run.status = code === 0 ? 'done' : 'error';
