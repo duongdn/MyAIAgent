@@ -125,7 +125,7 @@ function startRun(runId, prompt) {
     '--dangerously-skip-permissions',
   ], {
     cwd: PROJECT_DIR,
-    env: { ...process.env, FORCE_COLOR: '1' },
+    env: { ...process.env, FORCE_COLOR: '1', CLAUDE_PROJECT_DIR: PROJECT_DIR },
   });
 
   run.process = proc;
