@@ -117,7 +117,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — Multi-project rule (resolved → Aysar)
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT 0h gates John Yi, Rebecca, AND Bailey Trello items simultaneously
-- [feedback_leave_2026-05-27_tuannt_chientx.md](feedback_leave_2026-05-27_tuannt_chientx.md) — **TuanNT + ChienTX full-day leave 2026-05-27 (Wed), email-confirmed. 0h OK, no reminder, pro-rate weekly target.**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected
 - [feedback_kai_16h_no_daily_report.md](feedback_kai_16h_no_daily_report.md) — Kai 16h/wk, daily report in Xtreme not required
@@ -168,3 +167,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_no_cleanup_without_confirmation.md](feedback_no_cleanup_without_confirmation.md) — NEVER run server cleanup without user confirmation
 - [feedback_no_vacuum_full_production.md](feedback_no_vacuum_full_production.md) — NEVER VACUUM FULL on production, use pg_repack
 - [feedback_storage_explain_and_alert.md](feedback_storage_explain_and_alert.md) — Storage >= 75%: investigate causes, recommend cleanup
+
+## Dev Environment
+- [feedback_ripgrep_execute_permission.md](feedback_ripgrep_execute_permission.md) — After Claude Code npm update: `chmod +x` the bundled rg binary — npm strips execute bit on macOS, causing all skills to vanish
