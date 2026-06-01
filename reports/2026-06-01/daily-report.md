@@ -331,3 +331,41 @@ Based on Sheets check (Fri 29/05 actuals from today's Sheets section above):
 | KhanhHH | 0h (nghỉ T6) | ✓ Leave day — no reminder |
 
 No reminders needed.
+
+---
+
+## Email all — 23:28 (+07:00)
+
+**Window:** 2026-06-01T09:00+07:00 → 23:28+07:00
+
+| Account | Emails | Calendar today |
+|---------|--------|----------------|
+| duongdn@nustechnology.com | 8 | no events |
+| carrick@nustechnology.com | 3 | no events |
+| nick@nustechnology.com | 9 | no events |
+| rick@nustechnology.com | 12 | no events |
+| kai@nustechnology.com | 3 | no events |
+| ken@nustechnology.com | 50 | no events |
+
+**duongdn@** — Leave requests:
+- "Re: [NUS] Xin off chiều 1/6" from ChienTX (11:47) — afternoon off today
+- "Re: Xin về sớm lúc 16h từ ng" from ChienTX (14:10) — early leave at 16:00
+- ⚠️ **"LongVV_Đơn xin nghỉ phép buổi chi"** from LongVV (14:58) — **LongVV half-day leave request filed today**
+- "Re: Xin nghỉ phép" from ChienTX (17:07) — leave reply
+- Spreadsheet shared: "NUS - Cline - OhCleo" by Minh Trinh (Google Sheets)
+
+**carrick@** — ⚠️ **[snyk] Vulnerability alert for the marcel organization** (Snyk, 13:51 UTC) — security scan flagged a vulnerability in Marcel project. Needs review.
+
+**nick@** — AuShare ClickUp (Xero Migration tasks × 5, automated), Azure DevOps (PRs 1572/1573/1574 from Emir LLaneza on CNA.Operations.App). No John Yi emails.
+
+**rick@** — [FountainStaging] BugSnag × 6 (all **STAGING**, not production — INFO only): `StandardError in cart_items#create`, `AbstractController::ActionNotFound`, `NoMethodError in application#not_found`, `NoMethodError in orders#create`, `ActionView::MissingTemplate in settings#show`. InfinityRoses Daily Summary × 2, FirstProject Daily Summary × 2, LiveChat invoice.
+
+**kai@** — Shopify orders fulfilled (fwd from Madhuraka), Jira mention on LIFM2-428 ([Shopify] Product Authenticity Certificate).
+
+**ken@** — 50 GitHub notification emails (Precognize/welligence/mimaizumi repos), routine PR activity.
+
+**⚠️ Alerts:**
+1. LongVV half-day leave request (duongdn@) — check if 0h in task log today is leave-related
+2. Snyk vulnerability alert for Marcel organization (carrick@) — needs security review
+
+Trello: all 6 "Check mail" items ✓ complete (card 6a1d23a9dfef4a635ff6d65d)
