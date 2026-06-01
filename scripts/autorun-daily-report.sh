@@ -30,7 +30,8 @@ mkdir -p "$PROJECT_DIR/reports/$TODAY"
 
 cd "$PROJECT_DIR"
 
-# Run daily report headlessly, log output
+# Run daily report headlessly with Haiku (cheaper quota than Sonnet)
 "$CLAUDE_BIN" -p "/me:daily-report" \
+  --model claude-haiku-4-5-20251001 \
   --dangerously-skip-permissions \
   2>&1 | tee -a "$LOG_DIR/daily-report-cron.log"
