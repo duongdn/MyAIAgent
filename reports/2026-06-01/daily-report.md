@@ -3,13 +3,13 @@
 **Window:** 2026-05-29T08:21+07:00 → 2026-06-01T09:00+07:00 (Friday → Monday, 3-day window)
 
 ## Summary
-- **Alerts:** 4 (Aysar no report, FirstProject ChunkLoadError, Rollbar quota, KhanhHH 0h Fri)
+- **Alerts:** 3 (Aysar no report, FirstProject ChunkLoadError, Rollbar quota)
 - **LeNH Upwork W28:** 40h ✓ (Rory 37h + Franc 3h from task log — Upwork API unavailable, task log used as proxy)
 - **Info:** GGS storage 74%, GGS AWS RDS warnings, Sentry OpenURI (fix in PR)
 - **Trello Check Progress:** 16 ✓ complete | 1 ⚠️ skipped (Aysar)
 - **Trello Check Mail:** 6/6 ✓ complete
 - **Fountain:** W29 plan posted (ViTHT 16h, VuTQ 40h, DatNT 40h, QC 20h). VuTQ returns to Fountain from Bailey.
-- **Reminders needed:** KhanhHH (0h Fri 29/05) — NOT sent (use `--send-reminder` to send)
+- **Reminders:** none
 
 ---
 
@@ -274,12 +274,12 @@ Tabs used: Maddy=W8, JohnYi=W25, Rebecca=W26, JamesDiamond=W27, Rory=W13, Franc=
 | PhucVT | 8h (JamesDiamond) | — | ✓ |
 | TuanNT (all sheets) | 9h (Rebecca only; JohnYi=0h, Pat=0h) | — | ✓ |
 | VietPH | 8h (Paturevision) | — | ✓ |
-| KhanhHH | 0h (not in Generator Fri; Mon–Thu only this week) | W42=20h total | ⚠️ 0h Fri |
+| KhanhHH | 0h (nghỉ T6) | W42=20h total | ✓ |
 | LeNH (combined) | 7.5h (Rory=6.5h + Franc=1h; Aysar=0h, Rebecca=0h) | — | ✓ |
 | LongVV (weekly) | 8h Fri (Maddy) | W8=24h (target 16h/wk, overage expected) | ✓ |
 
 **Notes:**
-- **KhanhHH — 0h Friday May 29** ⚠️: No entries in Generator (or any other sheet) for Fri 29/05. Mon–Thu logged 20h total this week. Send Matrix reminder.
+- KhanhHH: nghỉ T6 29/05 — 0h expected, no alert.
 - VietPH: 8h logged on Paturevision — Rail 7 console upgrade work. DuongDN 1h also logged (adhoc/expected).
 - LongVV: 24h weekly vs 16h target — significantly over target this week. Part-time rule, no alert on 0h days, but weekly overage is noted.
 - Aysar (LeNH): 0h on Fri — but LeNH covered by Rory + Franc activity. No alert.
@@ -328,9 +328,6 @@ Based on Sheets check (Fri 29/05 actuals from today's Sheets section above):
 | VietPH | 8h | ✓ OK | — |
 | LeNH | 7.5h (Rory+Franc) | ✓ OK | — |
 | LongVV | 8h | ✓ OK | — |
-| **KhanhHH** | **0h** | ⚠️ Needs reminder | 0h Fri 29/05 across all sheets; W28 total 29.5h vs 40h |
+| KhanhHH | 0h (nghỉ T6) | ✓ Leave day — no reminder |
 
-**Reminder list:**
-
-- **KhanhHH**: 0h Fri 29/05 (no entries in any sheet). W28 combined ~29.5h vs 40h target (−10.5h shortfall). [NOT sent — use --send-reminder to send]
-  - Matrix room: `!rwLbvLBnrRAYMaOPaD:nustechnology.com`
+No reminders needed.
