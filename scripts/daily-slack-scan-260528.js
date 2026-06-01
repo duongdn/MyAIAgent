@@ -1,4 +1,4 @@
-// Daily Slack scan for 2026-05-29 — window: 2026-05-28T08:55+07 → now
+// Daily Slack scan for 2026-05-28 — window: 2026-05-27T08:56+07 → now
 // Uses search.messages (NOT conversations.history) per monitoring rules
 // SoCal/Blake dropped per project memory 2026-05-11
 const { execSync } = require("child_process");
@@ -6,15 +6,18 @@ const path = require("path");
 const fs = require("fs");
 const https = require("https");
 
+// Re-read config fresh (called after a token refresh)
 function reloadAccounts() {
   return JSON.parse(fs.readFileSync(path.join(__dirname, "../config/.slack-accounts.json"), "utf8")).accounts;
 }
 
-const WINDOW_EPOCH = new Date("2026-05-28T08:55:00+07:00").getTime() / 1000;
-const SEARCH_AFTER = "2026-05-27"; // after: excludes this date → returns May 28+
+const WINDOW_EPOCH = new Date("2026-05-27T08:56:29+07:00").getTime() / 1000;
+const SEARCH_AFTER = "2026-05-26"; // after: excludes this date → returns May 27+
 
+// Workspace name → skip flag (SoCal dropped 2026-05-11)
 const SKIP_WORKSPACES = ["SoCal Auto Wraps"];
 
+// Full workspace name → search signals
 const WS_SIGNALS = {
   "Xtreme Soft Solutions":    ["progress", "daily report", "daily", "update", "task", "kai"],
   "GLOBAL GRAZING SERVICES":  ["progress", "daily", "report", "nick", "maintenance", "update"],
@@ -31,12 +34,8 @@ const WS_SIGNALS = {
   "Aigile Dev":               ["colin", "update", "deploy", "task"],
 };
 
+// Special: Aysar check uses MPDM channel C07SQ4HAUHZ directly
 const AYSAR_MPDM_CHANNEL = "C07SQ4HAUHZ";
-
-const XOXC_REFRESH_SCRIPTS = {
-  "Amazing Meds": "slack-xoxc-refresh-amazingmeds.js",
-  "Equanimity":   "slack-xoxc-refresh-equanimity.js",
-};
 
 function slackRequest(url, headers, timeout = 20000) {
   return new Promise((resolve) => {
@@ -53,18 +52,8 @@ function slackRequest(url, headers, timeout = 20000) {
   });
 }
 
-function refreshXoxcToken(wsName) {
-  const script = XOXC_REFRESH_SCRIPTS[wsName];
-  if (!script) return false;
-  try {
-    execSync(`node ${path.join(__dirname, script)}`, { timeout: 150000, stdio: "pipe" });
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
 async function fetchAysarMPDM(acct) {
+  // Direct channel history for Aysar MPDM C07SQ4HAUHZ
   const headers = { Authorization: `Bearer ${acct.token}` };
   if (acct.cookie) headers.Cookie = `d=${acct.cookie}`;
   const oldest = WINDOW_EPOCH.toString();
@@ -79,14 +68,34 @@ async function fetchAysarMPDM(acct) {
   return { channel: AYSAR_MPDM_CHANNEL, error: result.data?.error || result.error };
 }
 
+// xoxc workspaces: map workspace name → refresh script
+const XOXC_REFRESH_SCRIPTS = {
+  "Amazing Meds": "slack-xoxc-refresh-amazingmeds.js",
+  "Equanimity":   "slack-xoxc-refresh-equanimity.js",
+};
+
+// Proactively refresh xoxc token before scanning — runs Puppeteer login, saves new token to config
+function refreshXoxcToken(wsName) {
+  const script = XOXC_REFRESH_SCRIPTS[wsName];
+  if (!script) return false;
+  try {
+    execSync(`node ${path.join(__dirname, script)}`, { timeout: 150000, stdio: "pipe" });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function searchWorkspace(acctIn) {
   const wsName = acctIn.workspace || acctIn.name || "unknown";
   if (SKIP_WORKSPACES.includes(wsName)) return { workspace: wsName, skipped: true };
 
+  // Proactively refresh xoxc tokens BEFORE scanning — never report invalid_auth
   if (XOXC_REFRESH_SCRIPTS[wsName]) {
     refreshXoxcToken(wsName);
   }
 
+  // Re-read config to pick up fresh token after any refresh
   const freshAccounts = reloadAccounts();
   const acct = freshAccounts.find(a => (a.workspace || a.name) === wsName) || acctIn;
 
@@ -111,6 +120,7 @@ async function searchWorkspace(acctIn) {
       ts: m.ts,
     }));
 
+  // For Baamboozle: also fetch Aysar MPDM directly
   let aysarMPDM = null;
   if (wsName === "Baamboozle") {
     aysarMPDM = await fetchAysarMPDM(acct);

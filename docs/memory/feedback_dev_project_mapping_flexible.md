@@ -4,7 +4,24 @@ description: Devs no longer have fixed project assignments. Sheets piece must sc
 type: feedback
 ---
 
-The dev → project sheet mapping is no longer static. Any dev may log hours in any project sheet (Maddy, James Diamond, John Yi, Rebecca, Paturevision, Generator, Rory, Franc, Aysar, Fountain, etc.) and the assignment changes week to week.
+The dev → project sheet mapping is no longer static. Any dev may log hours in any project sheet and the assignment changes week to week.
+
+**Complete sheet list (ALL must be scanned every run):**
+| Sheet name | ID | Week numbering |
+|------------|-----|----------------|
+| Maddy | `1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I` | standard calendar |
+| JohnYi | `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` | standard |
+| Rebecca | `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` | standard |
+| JamesDiamond | `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI` | standard |
+| Rory | `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` | standard |
+| Franc | `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` | standard |
+| Aysar | `1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8` | non-calendar |
+| Generator | `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` | standard |
+| Paturevision | `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` | standard |
+| Fountain | `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | standard |
+| **Elena** | `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ` | **own epoch (W1=2026-03-23); use Summary tab to map date→W{n}** |
+
+**Added 2026-05-29:** Elena sheet confirmed — KhanhHH logged 2.5h there on Thu 28/05. Without it, KhanhHH appeared as 5.5h (shortfall) when actual total was 8.0h (fine). Also has KietNHT, TriNM, TamHVH.
 
 **Why:** User corrected on 2026-05-06 — daily-report skill currently has a hard-coded mapping (e.g. KhanhHH → Generator, LongVV → Maddy + JamesDiamond). KhanhHH 6.5h on Generator was flagged as -1.5h shortfall, but user clarified KhanhHH "work multiple project now". User then directed: "please check all spreadsheet for employee hour, project of them are flexible now".
 

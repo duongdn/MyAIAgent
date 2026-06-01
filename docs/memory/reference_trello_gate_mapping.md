@@ -32,6 +32,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 | Franc | RDC Slack (dmetiner updates) | dmetiner alert |
 | Fountain | Matrix plan posted + no over-est spike | Plan missing OR spike |
 | Elena - WordPress | samguard.co JS console check | JS errors |
+| Philip | MS Teams (`will@nustechnology.com`) → Philip Briggs (Six Star Rentals, pbriggs@sixstarrentals.com.au) DM | Customer complaint or unresolved request |
 | Blake/SoCal | **DROPPED** as of 2026-05-11 | — |
 
 ## Key Rules

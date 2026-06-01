@@ -1,194 +1,165 @@
-#!/usr/bin/env node
-// Fetch today's Zoho Calendar events via CalDAV (app password — no OAuth needed)
-// Usage: node scripts/fetch-zoho-calendar.js [account1] [account2] ...
-//   e.g. node scripts/fetch-zoho-calendar.js duongdn carrick
-//   No args = all accounts in config/.email-accounts.json
-// Output: JSON array of { email, events[], error? }
-
+// Fetch today's calendar events from Zoho Mail CalDAV for all 6 accounts
+// Usage: node scripts/fetch-zoho-calendar.js [account]
+//   account = duongdn|carrick|nick|rick|kai|ken (optional, default: all)
+// Output: JSON array of { email, events: [{summary, start, end, location, description}] }
 const https = require("https");
-const fs = require("fs");
-const path = require("path");
+const accounts = require("../config/.email-accounts.json").accounts;
 
-const EMAIL_CONFIG = path.resolve(__dirname, "../config/.email-accounts.json");
-const CALDAV_HOST = "calendar.zoho.com";
+const TARGET_ACCOUNT = process.argv[2] ? process.argv[2].toLowerCase() : null;
 
-// YYYYMMDD in UTC+7
-function todayLocalStr() {
-  const d = new Date(Date.now() + 7 * 3600_000);
-  return d.toISOString().replace(/-/g, "").slice(0, 8);
+// Today's date range in UTC accounting for Asia/Ho_Chi_Minh (UTC+7)
+function getTodayRangeUTC() {
+  const now = new Date();
+  // "Today" in +07:00
+  const offset = 7 * 60 * 60 * 1000;
+  const localToday = new Date(now.getTime() + offset);
+  const y = localToday.getUTCFullYear();
+  const m = String(localToday.getUTCMonth() + 1).padStart(2, "0");
+  const d = String(localToday.getUTCDate()).padStart(2, "0");
+  // Start = today 00:00 +07 = today - 7h in UTC
+  const startLocal = new Date(`${y}-${m}-${d}T00:00:00+07:00`);
+  const endLocal = new Date(`${y}-${m}-${d}T23:59:59+07:00`);
+  const fmt = (dt) => dt.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  return { start: fmt(startLocal), end: fmt(endLocal), dateLabel: `${y}-${m}-${d}` };
 }
 
-// "20260531T000000Z" format
-function toUtcStamp(yyyymmdd, time = "000000") {
-  // Convert YYYY-MM-DD 00:00 UTC+7 → UTC
-  const y = yyyymmdd.slice(0, 4), mo = yyyymmdd.slice(4, 6), dd = yyyymmdd.slice(6, 8);
-  const local = new Date(`${y}-${mo}-${dd}T${time.slice(0,2)}:${time.slice(2,4)}:${time.slice(4,6)}+07:00`);
-  return local.toISOString().replace(/[-:]/g, "").replace(/\.\d+/, "");
-}
-
-function basicAuth(email, password) {
-  return "Basic " + Buffer.from(`${email}:${password}`).toString("base64");
-}
-
-function caldavRequest(method, path, auth, body, extraHeaders = {}) {
+// HTTP request helper (returns body string)
+function request(method, path, auth, body = null, extraHeaders = {}) {
   return new Promise((resolve, reject) => {
     const headers = {
-      Authorization: auth,
-      "Content-Type": "application/xml; charset=utf-8",
-      Depth: "1",
+      "Authorization": "Basic " + Buffer.from(auth).toString("base64"),
+      "Content-Type": "application/xml",
       ...extraHeaders,
     };
     if (body) headers["Content-Length"] = Buffer.byteLength(body);
-
     const req = https.request(
-      { hostname: CALDAV_HOST, path, method, headers },
+      { hostname: "calendar.zoho.com", path, method, headers, timeout: 20000 },
       (res) => {
-        let raw = "";
-        res.on("data", (c) => (raw += c));
-        res.on("end", () => resolve({ status: res.statusCode, body: raw }));
+        let data = "";
+        res.on("data", (c) => (data += c));
+        res.on("end", () => resolve({ status: res.statusCode, body: data }));
       }
     );
     req.on("error", reject);
+    req.on("timeout", () => { req.destroy(); reject(new Error("timeout")); });
     if (body) req.write(body);
     req.end();
   });
 }
 
-// Extract VEVENT fields from iCalendar text
-function parseVEvents(icalText) {
+// Discover the CalDAV principal path for an account
+async function discoverPrincipal(auth) {
+  const body = `<?xml version="1.0" encoding="utf-8"?>
+<D:propfind xmlns:D="DAV:"><D:prop><D:current-user-principal/></D:prop></D:propfind>`;
+  const res = await request("PROPFIND", "/.well-known/caldav", auth, body, { Depth: "0" });
+  const m = res.body.match(/<D:href>([^<]+\/user\/)<\/D:href>/);
+  return m ? m[1] : null;
+}
+
+// Get calendar home set path
+async function getCalendarHome(auth, principalPath) {
+  const body = `<?xml version="1.0" encoding="utf-8"?>
+<D:propfind xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
+  <D:prop><C:calendar-home-set/></D:prop>
+</D:propfind>`;
+  const res = await request("PROPFIND", principalPath, auth, body, { Depth: "0" });
+  const m = res.body.match(/<D:href>([^<]+)<\/D:href>/g);
+  // Find the caldav home path (not /user/)
+  for (const href of (m || [])) {
+    const path = href.replace(/<\/?D:href>/g, "");
+    if (path !== principalPath && path.includes("/caldav/") && !path.includes("/user/")) return path;
+  }
+  return null;
+}
+
+// Fetch event hrefs for today via REPORT
+async function fetchEventHrefs(auth, calendarPath, startUTC, endUTC) {
+  const body = `<?xml version="1.0" encoding="utf-8"?>
+<C:calendar-query xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
+  <D:prop><D:getetag/></D:prop>
+  <C:filter>
+    <C:comp-filter name="VCALENDAR">
+      <C:comp-filter name="VEVENT">
+        <C:time-range start="${startUTC}" end="${endUTC}"/>
+      </C:comp-filter>
+    </C:comp-filter>
+  </C:filter>
+</C:calendar-query>`;
+  const res = await request("REPORT", calendarPath + "events/", auth, body, { Depth: "1" });
+  const hrefs = [];
+  const matches = res.body.matchAll(/<D:href>([^<]+\.ics)<\/D:href>/g);
+  for (const m of matches) hrefs.push(m[1]);
+  return hrefs;
+}
+
+// Multiget ICS data for given hrefs
+async function fetchICSData(auth, calendarPath, hrefs) {
+  if (!hrefs.length) return [];
+  const hrefXml = hrefs.map((h) => `  <D:href>${h}</D:href>`).join("\n");
+  const body = `<?xml version="1.0" encoding="utf-8"?>
+<C:calendar-multiget xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
+  <D:prop><C:calendar-data/></D:prop>
+${hrefXml}
+</C:calendar-multiget>`;
+  const res = await request("REPORT", calendarPath + "events/", auth, body, { Depth: "1" });
+  // Extract calendar-data blocks
+  const blocks = [];
+  const regex = /<calendar-data[^>]*>([\s\S]*?)<\/calendar-data>/g;
+  let m;
+  while ((m = regex.exec(res.body)) !== null) blocks.push(m[1]);
+  return blocks;
+}
+
+// Parse VEVENT block from ICS text
+function parseVEvents(icsText) {
   const events = [];
-  const blocks = icalText.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
-  for (const block of blocks) {
+  const eventBlocks = icsText.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
+  for (const block of eventBlocks) {
     const get = (key) => {
-      const m = block.match(new RegExp(`^${key}(?:;[^:]+)?:(.+)$`, "m"));
-      return m ? m[1].trim().replace(/\\n/g, " ").replace(/\\,/g, ",") : "";
+      const m = block.match(new RegExp(`^${key}(?:;[^:]*)?:(.+)$`, "m"));
+      return m ? m[1].trim().replace(/\\n/g, "\n").replace(/\\,/g, ",") : "";
     };
-    const getAll = (key) => {
-      const re = new RegExp(`^${key}(?:;[^:]+)?:(.+)$`, "gm");
-      const vals = [];
-      let m;
-      while ((m = re.exec(block))) vals.push(m[1].trim());
-      return vals;
-    };
-
-    const dtstart = get("DTSTART");
-    const dtend = get("DTEND");
-    const allday = /^\d{8}$/.test(dtstart); // no time component = all-day
-
-    // Parse attendee emails from ATTENDEE:mailto:xxx lines
-    const attendees = getAll("ATTENDEE")
-      .map((v) => v.replace(/^mailto:/i, ""))
-      .filter((v) => v.includes("@"));
-
     events.push({
-      title: get("SUMMARY") || "(no title)",
-      start: dtstart,
-      end: dtend,
-      allday,
+      summary: get("SUMMARY"),
+      start: get("DTSTART"),
+      end: get("DTEND"),
       location: get("LOCATION"),
       description: get("DESCRIPTION").slice(0, 200),
-      attendees,
+      status: get("STATUS"),
     });
   }
   return events;
 }
 
-async function fetchAccountCalendar(acct, dateStr) {
-  const auth = basicAuth(acct.email, acct.app_password);
-  const rangeStart = toUtcStamp(dateStr, "000000");
-  const rangeEnd = toUtcStamp(dateStr, "235959");
+async function fetchCalendarForAccount(acct) {
+  const auth = `${acct.email}:${acct.app_password}`;
+  try {
+    const principal = await discoverPrincipal(auth);
+    if (!principal) return { email: acct.email, error: "no_principal" };
 
-  // 1. Discover calendar home set for this user
-  const principalPath = `/principals/${encodeURIComponent(acct.email)}/`;
-  const propfindBody = `<?xml version="1.0" encoding="utf-8"?>
-<D:propfind xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
-  <D:prop><C:calendar-home-set/></D:prop>
-</D:propfind>`;
+    const calHome = await getCalendarHome(auth, principal);
+    if (!calHome) return { email: acct.email, error: "no_calendar_home" };
 
-  const discoverResp = await caldavRequest("PROPFIND", principalPath, auth, propfindBody);
+    const { start, end } = getTodayRangeUTC();
+    const hrefs = await fetchEventHrefs(auth, calHome, start, end);
 
-  // Extract calendar-home-set href
-  let homeSetMatch = discoverResp.body.match(/<[^>]*:?calendar-home-set[^>]*>[\s\S]*?<[^>]*:?href[^>]*>(.*?)<\/[^>]*:?href>/i);
-  let homePath = homeSetMatch ? homeSetMatch[1].trim() : `/home/${encodeURIComponent(acct.email)}/`;
+    if (!hrefs.length) return { email: acct.email, events: [] };
 
-  // 2. List calendars in home set
-  const calListResp = await caldavRequest("PROPFIND", homePath, auth, `<?xml version="1.0" encoding="utf-8"?>
-<D:propfind xmlns:D="DAV:">
-  <D:prop>
-    <D:resourcetype/>
-    <D:displayname/>
-  </D:prop>
-</D:propfind>`);
+    const icsBlocks = await fetchICSData(auth, calHome, hrefs);
+    const events = icsBlocks.flatMap(parseVEvents);
 
-  // Extract calendar hrefs (paths with resourcetype = calendar)
-  const calHrefs = [];
-  const hrefBlocks = calListResp.body.match(/<D:response>[\s\S]*?<\/D:response>/g) || [];
-  for (const block of hrefBlocks) {
-    if (block.includes("calendar") && block.includes("<D:href>")) {
-      const hrefMatch = block.match(/<D:href>(.*?)<\/D:href>/);
-      if (hrefMatch) calHrefs.push(hrefMatch[1].trim());
-    }
+    return { email: acct.email, events };
+  } catch (err) {
+    return { email: acct.email, error: err.message };
   }
-
-  // Fall back to default calendar path if discovery failed
-  const calPaths = calHrefs.length > 0 ? calHrefs : [`${homePath}Calendar/`];
-
-  // 3. Fetch events from each calendar for today
-  const reportBody = `<?xml version="1.0" encoding="utf-8"?>
-<C:calendar-query xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
-  <D:prop>
-    <D:getetag/>
-    <C:calendar-data/>
-  </D:prop>
-  <C:filter>
-    <C:comp-filter name="VCALENDAR">
-      <C:comp-filter name="VEVENT">
-        <C:time-range start="${rangeStart}" end="${rangeEnd}"/>
-      </C:comp-filter>
-    </C:comp-filter>
-  </C:filter>
-</C:calendar-query>`;
-
-  const allEvents = [];
-  for (const calPath of calPaths) {
-    const reportResp = await caldavRequest("REPORT", calPath, auth, reportBody, { Depth: "1" });
-    if (reportResp.status === 207 || reportResp.status === 200) {
-      // Extract calendar-data from each response block
-      const calDataBlocks = reportResp.body.match(/<[^>]*:?calendar-data[^>]*>([\s\S]*?)<\/[^>]*:?calendar-data>/gi) || [];
-      for (const block of calDataBlocks) {
-        const ical = block.replace(/<[^>]+>/g, "").trim();
-        allEvents.push(...parseVEvents(ical));
-      }
-    }
-  }
-
-  return { email: acct.email, events: allEvents };
 }
 
-async function main() {
-  const config = JSON.parse(fs.readFileSync(EMAIL_CONFIG, "utf8"));
-  const args = process.argv.slice(2);
-  const targets = args.length > 0
-    ? config.accounts.filter((a) => args.some((arg) => a.email.startsWith(arg)))
-    : config.accounts;
+(async () => {
+  const filtered = TARGET_ACCOUNT
+    ? accounts.filter((a) => a.email.toLowerCase().startsWith(TARGET_ACCOUNT))
+    : accounts;
 
-  if (targets.length === 0) {
-    console.error(`No accounts match: ${args.join(", ")}`);
-    process.exit(1);
-  }
-
-  const dateStr = todayLocalStr();
-  const results = await Promise.all(
-    targets.map((acct) =>
-      fetchAccountCalendar(acct, dateStr).catch((e) => ({
-        email: acct.email,
-        events: [],
-        error: e.message,
-      }))
-    )
-  );
-
-  console.log(JSON.stringify(results, null, 2));
-}
-
-main().catch((e) => { console.error(e); process.exit(1); });
+  const results = await Promise.all(filtered.map(fetchCalendarForAccount));
+  const { dateLabel } = getTodayRangeUTC();
+  console.log(JSON.stringify({ date: dateLabel, accounts: results }, null, 2));
+})();

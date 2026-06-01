@@ -15,7 +15,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly before flagging / reminding.
 - [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond explicit scope.
 - [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Run `scripts/matrix-token-refresh.js` BEFORE claiming Matrix token expired.
-- [feedback_token_handling.md](feedback_token_handling.md) — Fix tokens silently, verify before flagging. xoxc needs Cookie header.
+- [feedback_token_handling.md](feedback_token_handling.md) — **⚠️ MUST READ BEFORE SLACK SCAN** — Amazing Meds + Equanimity xoxc: run refresh scripts PROACTIVELY before scanning, NEVER report invalid_auth. Scripts: slack-xoxc-refresh-amazingmeds.js / slack-xoxc-refresh-equanimity.js
 - [feedback_timeline_system.md](feedback_timeline_system.md) — MUST update `.monitoring-timelines.json` at end of EVERY run; verify by re-reading.
 - [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — Fountain total estimate = Col I **+** Col J (CR). Both capacity AND over-estimate use the sum.
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — Fountain 5-part check is MANDATORY every run; never skip any part.
@@ -40,11 +40,13 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond from W23 (2026-04-20)
 - [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
 - [project_vutq_moved_to_bailey.md](project_vutq_moved_to_bailey.md) — VuTQ moved to Bailey (Paturevision) as of 2026-05-13; 0h in Fountain is expected
+- [project_php_team.md](project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH
 
 ---
 
 ## News Digest
 - [feedback_news_digest_new_topic.md](feedback_news_digest_new_topic.md) — Unknown topic → add as new topic with own RSS sources in fetch-news.py, never alias existing topics
+- [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — **ALWAYS use `link` field from fetched JSON, NEVER fabricate/guess article URLs. fetch-news.py resolves relative URLs automatically (fixed 2026-05-29)**
 
 ## Workflow & Reporting Style
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
@@ -108,9 +110,11 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; 0h/day is NOT an alert — check weekly total only
 - [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond ONLY (NOT Rebecca)
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
+### TuanNT
+- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (all 3 sheets) blocks John Yi + Rebecca + Bailey. Working any one sheet = no alert.
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca (Q-T cols)
-- [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
+- [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day (same rule applies to TuanNT)
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
@@ -132,7 +136,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_upwork_vs_tasklog_all_hours.md](feedback_upwork_vs_tasklog_all_hours.md) — Sum ALL hours (official + part-time) to match Upwork
 - [feedback_upwork_match_not_alert.md](feedback_upwork_match_not_alert.md) — Upwork matching task log = OK; week-over-week drops are not alerts
 - [feedback_neural_upwork.md](feedback_neural_upwork.md) — Neural Contract: MUST fetch messages via API intercept
-- [feedback_neural_silence_not_alert.md](feedback_neural_silence_not_alert.md) — Neural Contract long silence ≠ alert; only urgent unanswered client msgs block Trello
+- [feedback_neural_silence_not_alert.md](feedback_neural_silence_not_alert.md) — Neural silence / Cloudflare block / auth failure = NEVER an alert. Complete Trello unless urgent unread client msg.
 - [feedback_trello_per_client_gates_on_lead_dev.md](feedback_trello_per_client_gates_on_lead_dev.md) — Per-client item gates on lead dev (Nick for John Yi, Elliott for Generator); supporting-dev issues go in report not Trello
 
 ---

@@ -1,17 +1,21 @@
 ---
 name: feedback_tuannt_trello_gates
-description: "TuanNT 0h blocks John Yi, Rebecca, AND Bailey Trello items (TuanNT is dev on all three)"
+description: "TuanNT COMBINED 0h (all 3 sheets) blocks John Yi + Rebecca + Bailey. Working any one sheet = no alert."
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: af2513cb-f81f-4d95-9e41-d22b3d7382e4
 ---
 
-TuanNT's task log (0h) gates THREE Trello Check Progress items — not just Rebecca:
-- **John Yi - Amazing Meds** (TuanNT's primary client project)
-- **Rebecca (William Bills)** (TuanNT's second client project)
+TuanNT's task log gates THREE Trello Check Progress items:
+- **John Yi - Amazing Meds**
+- **Rebecca (William Bills)**
 - **Bailey** (TuanNT = Bailey DEV1 on Paturevision)
 
-**Why:** TuanNT works across all three projects. 0h on any workday = alert on all three items simultaneously.
+**How to apply:**
+- Sum TuanNT's hours across JohnYi + Rebecca + Bailey sheets for the day.
+- COMBINED = 0h → alert on all three + send reminder.
+- COMBINED > 0h (e.g. 9h on Rebecca, 0h on JohnYi) → **NO alert**. Complete all three Trello items. Working one project while 0h on another is NORMAL.
+- Do NOT fire per-sheet alerts. Only COMBINED 0h triggers anything.
 
-**How to apply:** When TuanNT has 0h alert → skip/leave incomplete all three Trello items. When TuanNT hours confirmed OK → complete all three. Do NOT complete John Yi or Bailey independently of TuanNT's task log check.
+**CORRECTED 2026-05-29:** Old wording "0h on any workday = alert" was wrong — contradicted [[feedback_lenh_per_sheet_not_alert]]. Same multi-sheet rule applies to TuanNT as to LeNH.

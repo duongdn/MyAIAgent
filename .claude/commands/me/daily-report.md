@@ -2,15 +2,14 @@
 description: Morning daily report — full automated scan of all monitoring sources
 ---
 
-## Utils
+# ⚠️ MANDATORY FIRST STEP — READ MEMORY
 
-| Util | When | Params |
-|------|------|--------|
-| `/util:read-memory` | First — before anything | — |
-| `/util:timeline` | Start: read window; End: update | read `daily_report.last_run`; write `daily_report.last_run` + `alert.last_run` |
-| `/util:trello` | After each source piece | board `O83pAyqb`; cards `Check Progress` + `Check Mail` |
-| `/util:matrix-send` | Piece 9 (reminders) + Elena deploy announce | rooms: per-dev table in Piece 9 |
-| `/util:report` | Every piece output | `reports/{YYYY-MM-DD}/daily-report.md` — append timestamped section |
+**Before doing ANYTHING else, read these files in order:**
+1. `docs/memory/MEMORY.md` — get the full list of memory files
+2. Read EVERY feedback file listed under `## Feedback` in that index
+3. Memory OVERRIDES any instructions in this skill file
+
+Do not skip this. Do not proceed until all feedback files are read.
 
 ---
 
@@ -22,6 +21,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 **Partial runs:** When run with a piece argument (e.g. `email`, `slack`), append the results as a new timestamped section to the existing daily report. Never skip writing results just because it's a partial run.
 **Timeline:** Uses `daily_report.last_run` from `config/.monitoring-timelines.json` as window start. After completing all sources, update both `daily_report.last_run` and `alert.last_run` to current time.
 **Refresh flag:** Adding `--refresh` (or `refresh`) to any command forces a fresh re-check of all mapped sources, even if already scanned in the current session. Always re-fetch live data when this flag is present — never use cached/prior results.
+**Reminder flag:** By default, reminders are **printed to the report only** — NOT sent to Matrix. Add `--send-reminder` to actually send them. Example: `/me:daily-report --send-reminder` or `/me:daily-report reminders --send-reminder`.
 
 ---
 
@@ -32,12 +32,12 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report` | Everything (full run) |
 | **Email** | |
 | `/daily-report email` | All 6 accounts |
-| `/daily-report email duongdn` | duongdn@ email + calendar |
-| `/daily-report email carrick` | carrick@ email + calendar |
-| `/daily-report email nick` | nick@ email + calendar |
-| `/daily-report email rick` | rick@ email + calendar |
-| `/daily-report email kai` | kai@ email + calendar |
-| `/daily-report email ken` | ken@ email + calendar |
+| `/daily-report email duongdn` | duongdn@ only |
+| `/daily-report email carrick` | carrick@ only |
+| `/daily-report email nick` | nick@ only |
+| `/daily-report email rick` | rick@ only |
+| `/daily-report email kai` | kai@ only |
+| `/daily-report email ken` | ken@ only |
 | **Slack** | |
 | `/daily-report slack` | All 13 workspaces |
 | `/daily-report slack baamboozle` | Baamboozle only |
@@ -113,18 +113,20 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report trello mail kai` | Kai only |
 | `/daily-report trello mail ken` | Ken only |
 | **Reminders** | |
-| `/daily-report reminders` | Send Matrix 0h reminders to all devs |
-| `/daily-report reminders lenh` | Send reminder to LeNH only |
-| `/daily-report reminders phucvt` | Send reminder to PhucVT only |
-| `/daily-report reminders tuannt` | Send reminder to TuanNT only |
-| `/daily-report reminders longvv` | Send reminder to LongVV only |
+| `/daily-report reminders` | Print 0h devs to report (no send) |
+| `/daily-report reminders --send-reminder` | Print + actually send Matrix reminders |
+| `/daily-report reminders lenh` | LeNH only (print, no send) |
+| `/daily-report reminders lenh --send-reminder` | LeNH only + send |
+| `/daily-report reminders phucvt` | PhucVT only (print, no send) |
+| `/daily-report reminders tuannt` | TuanNT only (print, no send) |
+| `/daily-report reminders longvv` | LongVV only (print, no send) |
 
 ---
 
 ## Piece 1 — Email (`/daily-report email [account]`)
 
 Supports individual account targeting:
-- `/daily-report email` — check all 6 accounts (email + calendar)
+- `/daily-report email` — check all 6 accounts
 - `/daily-report email duongdn` — check duongdn@ only
 - `/daily-report email carrick` — check carrick@ only
 - `/daily-report email nick` — check nick@ only
@@ -143,9 +145,9 @@ Supports individual account targeting:
 | kai@nustechnology.com | JFDn4fsHiU0m | Madhuraka | INBOX |
 | ken@nustechnology.com | WY60fEDrTfXM | Precognize/development | NewsLetter |
 
-**Method — Email:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
+**Method:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
-**What to look for (email):**
+**What to look for:**
 - duongdn@: leave requests, New Relic alerts
 - carrick@: Redmine bug notifications for Generator/Elliott
 - nick@: anything from John Yi
@@ -153,10 +155,14 @@ Supports individual account targeting:
 - kai@: Jira/Madhuraka mentions
 - ken@: Precognize GitHub PR activity
 
-**Method — Calendar:** Run `node scripts/fetch-zoho-calendar.js [account]` in parallel with IMAP check.
-- Uses same app password from `config/.email-accounts.json` via CalDAV (no separate OAuth setup)
-- CalDAV host: `calendar.zoho.com` — discovers calendar home, then fetches today's events
-- Report all events: title, time, allday flag, attendees
+**Calendar — run alongside email check:**
+```bash
+node scripts/fetch-zoho-calendar.js [account]   # omit account for all 6
+```
+- Fetches today's events from each account's Zoho Mail CalDAV calendar
+- Uses same `app_password` as IMAP — no extra auth needed
+- Include events in the report section below (even if count = 0, show "no events")
+- Events with `STATUS:CANCELLED` or `PARTSTAT=DECLINED` note as cancelled/declined
 
 **Trello — after checking:**
 - Find "Check mail" card by name on board `O83pAyqb`
@@ -168,13 +174,12 @@ Supports individual account targeting:
 Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
 ```
 ## Email [account|all] — {HH:MM} (+07:00)
-| Account | Emails | Calendar events today |
-|---------|--------|-----------------------|
-| duongdn@ | 3 msgs | 09:00 Standup (30m), 14:00 Client call |
-| carrick@ | 1 msg  | — |
+| Account | Emails | Calendar today |
+|---------|--------|----------------|
+| duongdn@... | 3 | no events |
+| nick@...    | 1 | 14:30 Weekly Meeting with Devs (Teams) |
 ...
-{Email alerts if any.}
-{Calendar alerts if any (e.g. leave events, back-to-back meetings).}
+{Alerts if any.}
 Trello: {checked account(s)} item ✓ complete.
 ```
 
@@ -517,18 +522,22 @@ Examples:
 
 ---
 
-## Piece 9 — Reminders (`/daily-report reminders [developer]`)
+## Piece 9 — Reminders (`/daily-report reminders [developer] [--send-reminder]`)
+
+**Default behavior: print to report only. Do NOT send to Matrix unless `--send-reminder` flag is present.**
 
 Supports individual developer targeting:
-- `/daily-report reminders` — send to all devs with 0h (no leave)
-- `/daily-report reminders lenh` — send to LeNH only
-- `/daily-report reminders phucvt` — send to PhucVT only
-- `/daily-report reminders tuannt` — send to TuanNT only
-- `/daily-report reminders longvv` — send to LongVV only
+- `/daily-report reminders` — print 0h devs to report (no Matrix send)
+- `/daily-report reminders --send-reminder` — print + actually send to Matrix
+- `/daily-report reminders lenh` — LeNH only (print only)
+- `/daily-report reminders lenh --send-reminder` — LeNH only + send
+- `/daily-report reminders phucvt` — PhucVT only (print only)
+- `/daily-report reminders tuannt` — TuanNT only (print only)
+- `/daily-report reminders longvv` — LongVV only (print only)
 
-Send Matrix reminders to developers with 0h logged on a workday with no leave note.
+Find developers with COMBINED 0h across all sheets on the reporting day, no leave note.
 
-**Message:**
+**Message (only used when `--send-reminder` present):**
 ```
 Hi {name}, task log for {date} is missing (0h logged). Please update when you can. Thanks!
 ```
@@ -542,12 +551,13 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 | LongVV | longvv | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
 | TuanNT | tuannt | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
 
-**Skip if:** developer is on confirmed leave, or it's early morning (< ~10 AM) on the same day.
+**Skip if:** developer has COMBINED > 0h across all sheets, is on confirmed leave, or it's early morning (< ~10 AM).
 
 **Report — always append to daily report:**
 ```
 ## Reminders [developer|all] — {HH:MM} (+07:00)
-- {name}: reminder sent to {room} / skipped (on leave)
+- {name}: needs reminder (0h, no leave) [sent / not sent — use --send-reminder to send]
+- {name}: skipped (on leave / has hours)
 ```
 
 ---
@@ -560,7 +570,7 @@ Runs all 9 pieces in order. Uses parallel agents where possible:
 2. Launch parallel: Email + Slack + Discord + Scrin.io
 3. Launch parallel: Sheets + Fountain + Elena
 4. Update Trello (Piece 8) based on all findings
-5. Send reminders (Piece 9) for any 0h devs
+5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
 7. Update `daily_report.last_run` + `alert.last_run` in timelines
 

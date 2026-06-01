@@ -38,3 +38,4 @@ reports/**/autorun.log
 
 # MISA MoneyKeeper auth session (contains Google OAuth cookies)
 config/.misa-session.json
+config/.msteams-accounts.json

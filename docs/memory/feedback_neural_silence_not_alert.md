@@ -10,7 +10,11 @@ Neural Contract Upwork workroom 38901192 going silent for weeks is NOT, by itsel
 
 **How to apply:**
 1. Run Neural Contract messages check via API intercept (per `feedback_neural_upwork`).
-2. **Complete** the Trello "Neural Contract - Contract Probe" item if there are no urgent client messages awaiting reply, regardless of how long the silence has been.
-3. **Skip** the item only if there are URGENT client messages from Michael (or another Neural client contact) sitting unanswered, OR if Carrick is named in an active production outage on the contract.
-4. Continue surfacing long silences as INFO in the daily report (so the user can decide whether to confirm contract status), but do NOT treat them as alerts on their own.
-5. Pair with `feedback_neural_upwork` (which mandates the messages check) — the messages check is required, but absent messages = OK.
+2. **If Upwork is Cloudflare-blocked or auth fails**: fix it silently (retry, refresh session). NEVER report "Cloudflare blocked" or any auth/access failure as an alert — ever.
+3. **Complete** the Trello "Neural Contract - Contract Probe" item if there are no urgent client messages awaiting reply, regardless of how long the silence has been.
+4. **Skip** the item only if there are URGENT client messages from Michael (or another Neural client contact) sitting unanswered, OR if Carrick is named in an active production outage on the contract.
+5. Long silences = INFO at most (no alert, no Trello skip, no action item).
+6. **CORRECTED 2026-05-29**: Agent reported "Neural Cloudflare blocked" as alert #2. This is WRONG. Auth/access failures are NEVER alerts — fix or skip gracefully.
+
+[[feedback_never_report_token_expired]]
+[[feedback_neural_upwork]]

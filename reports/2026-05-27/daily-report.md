@@ -199,7 +199,7 @@ All 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick).
 | Work | Marcel | ✓ | Adhoc, 0h expected |
 | Work | Elena - SamGuard | ✓ | No PRs, clean |
 | Work | Raymond - LegalAtoms | ✓ | Staging alert = INFO, no Nick alert |
-| Work | Neural Contract | ✓ | Silence = OK per rule |
+| Work | Neural Contract | ✓ | New feature request from Michael (multi-doc upload, 1-week deadline) — not urgent |
 | Work | Bailey | ✓ | Nick active GGS + TuanNT 8.5h + VietPH 8h |
 | Work | Andrew Taraba | ✓ | Bizurk silence = normal |
 | Work | Rebecca - William Bills | ✓ | Lucas 8.5h + TuanNT 8.5h |
@@ -215,6 +215,22 @@ All 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick).
 |-----------|------|--------|
 | KhanhHH | !rwLbvLBnrRAYMaOPaD:nustechnology.com | ✓ Sent |
 | LeNH | !OIrgPraJWrcDTnRVLQ:nustechnology.com | ✓ Sent |
+
+---
+
+## Neural Contract Upwork Messages — 09:39 (+07:00)
+
+**Latest message (2026-05-26 10:02 UTC) from Michael:**
+
+> Hi Carrick. Another task for you. I would like users to be able to upload multiple documents (up to 4) for a single analysis. This would be available for all review options EXCEPT for the Compare options and the Convert Track changes to table option.
+>
+> UX flow: user selects Primary Document → ctrl-click to add up to 3 more → Analyse combines all into one txt file (Primary txt first) → live.pl receives Combined File with primary filename as arg. Each additional doc gets a `<new_contract_begins file_name>` tag separator. Deadline: **within the next week**.
+
+**Carrick's reply (2026-05-27 02:03 UTC):** "Hi Michael, Let me arrange to check it"
+
+**Assessment:** Normal new feature request. No emergency. No payment hold. No urgent blocker.
+
+**Trello NeuralContract:** ✓ COMPLETE
 
 ---
 

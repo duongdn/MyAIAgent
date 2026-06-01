@@ -87,12 +87,32 @@ SOURCES = {
             "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
         },
         {
+            "name": "The Verge – AI",
+            "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+        },
+        {
+            "name": "OpenAI News",
+            "url": "https://openai.com/news/rss.xml",
+        },
+        {
+            "name": "Google DeepMind Blog",
+            "url": "https://deepmind.google/blog/rss.xml",
+        },
+        {
+            "name": "Google Blog – AI",
+            "url": "https://blog.google/innovation-and-ai/technology/ai/rss/",
+        },
+        {
+            "name": "Hugging Face Blog",
+            "url": "https://huggingface.co/blog/feed.xml",
+        },
+        {
             "name": "MIT Technology Review",
             "url": "https://www.technologyreview.com/feed/",
         },
         {
-            "name": "ArXiv cs.AI (papers)",
-            "url": "https://arxiv.org/rss/cs.AI",
+            "name": "Google News – AI Model Releases",
+            "url": _gnews("Claude Anthropic OpenAI GPT Gemini model release launch 2026"),
         },
         {
             "name": "Google News – AI",
@@ -187,6 +207,28 @@ SOURCES = {
             "url": _gnews("kinh doanh doanh nghiệp Việt Nam khởi nghiệp startup", hl="vi", gl="VN"),
         },
     ],
+    "php": [
+        {
+            "name": "Laravel News",
+            "url": "https://laravel-news.com/feed",
+        },
+        {
+            "name": "PHP.net News",
+            "url": "https://www.php.net/feed.atom",
+        },
+        {
+            "name": "Reddit r/PHP",
+            "url": "https://www.reddit.com/r/PHP/.rss",
+        },
+        {
+            "name": "php[architect]",
+            "url": "https://www.phparch.com/feed/",
+        },
+        {
+            "name": "Google News – PHP Laravel",
+            "url": _gnews("PHP Laravel Symfony backend web development 2026"),
+        },
+    ],
     "finance": [
         {
             "name": "CafeF – Tài chính",
@@ -271,6 +313,10 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
                 channel = root
             items = channel.findall("item")
 
+        # base URL for resolving relative links (e.g. phparch.com returns /2026/05/...)
+        from urllib.parse import urljoin
+        base_url = url
+
         count = 0
         for item in items:
             if count >= limit:
@@ -287,6 +333,10 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
                 link = _find_text(item, "link")
                 pub = _find_text(item, "pubDate", "{http://purl.org/dc/elements/1.1/}date")
                 summary = _find_text(item, "description", "content:encoded")
+
+            # resolve relative links to absolute using the feed's base URL
+            if link and not link.startswith("http"):
+                link = urljoin(base_url, link)
 
             title = _strip_html(title)
             summary = _strip_html(summary)[:300]
