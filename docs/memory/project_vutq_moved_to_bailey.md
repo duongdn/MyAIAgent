@@ -1,16 +1,17 @@
 ---
 name: VuTQ moved to Bailey project
-description: VuTQ is no longer on Fountain — now works on Bailey (Paturevision). 0h in Fountain sheet is expected.
+description: VuTQ moved to Bailey (Paturevision) 2026-05-13, returned to Fountain from W29 (2026-06-01).
 metadata:
   type: project
 ---
 
-VuTQ has moved from Fountain to Bailey (Paturevision). Confirmed 2026-05-13.
+VuTQ moved from Fountain to Bailey (Paturevision) on 2026-05-13. Returned to Fountain from W29 (week Jun 1-7, 2026).
 
-**Why:** User stated "VuTQ is on Bailey" when 0h appeared in Fountain W26 task log.
+**W29 Fountain plan:** VuTQ=40h (posted by @trinhmtt 2026-06-01 09:08 +07).
 
-**How to apply:**
-- Do NOT alert or flag VuTQ's 0h in Fountain sheet — they are no longer on Fountain
-- VuTQ hours should be checked in the Paturevision/Bailey spreadsheet instead
-- When checking Bailey/Paturevision sheet: if VuTQ has 0h on a workday with no leave note → send Matrix reminder to `!SHdFKwrYpRhWJBtiBv:nustechnology.com`
-- Room URL: https://chat.nustechnology.com/#/room/!SHdFKwrYpRhWJBtiBv:nustechnology.com
+**Why (original move):** User stated "VuTQ is on Bailey" when 0h appeared in Fountain W26 task log.
+
+**How to apply (current):**
+- From W29 onwards: VuTQ is back on Fountain. Expect 40h/wk in Fountain sheet.
+- Do NOT flag VuTQ 0h in Fountain W27/W28 — those were the Bailey period.
+- W29 onwards: if VuTQ 0h in Fountain without leave = alert + reminder to `!SHdFKwrYpRhWJBtiBv:nustechnology.com`

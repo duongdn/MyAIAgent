@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 // Daily email scan for 2026-06-01 — window: 2026-05-30T08:00+07 → 2026-06-01T08:36+07
 const tls = require("tls");
 const accounts = require("../config/.email-accounts.json").accounts;
 
 const WINDOW_START = new Date("2026-05-30T08:00:00+07:00");
+=======
+// Daily email scan for 2026-06-01 — window: 2026-05-29T08:21+07 → now (Monday, covers Fri–Mon)
+const tls = require("tls");
+const accounts = require("../config/.email-accounts.json").accounts;
+
+const WINDOW_START = new Date("2026-05-29T08:21:00+07:00");
+>>>>>>> bc4d7f7 (auto: 2026-06-01 09:19)
 const IMAP_SINCE = "29-May-2026";
 
 const ALERT_KEYWORDS = [
   "alert", "error", "fail", "down", "urgent", "warning", "critical",
   "incident", "outage", "security", "escalat", "breach", "crash",
   "leave request", "nghỉ phép", "xin nghỉ", "production", "rollbar", "bugsnag",
+<<<<<<< HEAD
   "expires", "expir", "deploy", "expired", "new relic", "newrelic",
+=======
+  "expires", "expir", "deploy", "expired"
+>>>>>>> bc4d7f7 (auto: 2026-06-01 09:19)
 ];
 
 function checkIMAP(acct) {
@@ -42,7 +54,11 @@ function checkIMAP(acct) {
           socket.write("A9 LOGOUT\r\n"); socket.destroy();
           resolve({ email: acct.email, count: 0, subjects: [], alerts: [] }); return;
         }
+<<<<<<< HEAD
         const range = ids.slice(-50).join(",");
+=======
+        const range = ids.slice(-30).join(",");
+>>>>>>> bc4d7f7 (auto: 2026-06-01 09:19)
         step = 4; buffer = "";
         socket.write(`A4 FETCH ${range} (BODY.PEEK[HEADER.FIELDS (Subject Date From)])\r\n`);
       } else if (step === 4 && buffer.includes("A4 ")) {
@@ -53,6 +69,7 @@ function checkIMAP(acct) {
         for (const blk of blocks) {
           const subM = blk.match(/^Subject:\s*(.+)$/im);
           const dateM = blk.match(/^Date:\s*(.+)$/im);
+<<<<<<< HEAD
           const fromM = blk.match(/^From:\s*(.+)$/im);
           if (!subM) continue;
           const subj = subM[1].trim();
@@ -66,6 +83,19 @@ function checkIMAP(acct) {
           if (ALERT_KEYWORDS.some(k => sl.includes(k))) alerts.push(subj);
         }
         resolve({ email: acct.email, count: subjects.length, subjects: subjects.slice(0, 20), alerts });
+=======
+          if (!subM) continue;
+          const subj = subM[1].trim();
+          const dateStr = dateM ? dateM[1].trim() : "";
+          let emailDate = null;
+          try { emailDate = new Date(dateStr); } catch(_) {}
+          if (emailDate && emailDate < WINDOW_START) continue;
+          subjects.push(subj);
+          const sl = subj.toLowerCase();
+          if (ALERT_KEYWORDS.some(k => sl.includes(k))) alerts.push(subj);
+        }
+        resolve({ email: acct.email, count: subjects.length, subjects: subjects.slice(0, 10), alerts });
+>>>>>>> bc4d7f7 (auto: 2026-06-01 09:19)
       }
     });
   });
