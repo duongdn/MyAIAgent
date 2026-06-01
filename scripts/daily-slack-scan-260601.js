@@ -1,6 +1,10 @@
 // Daily Slack scan for 2026-06-01 — window: 2026-05-29T08:21+07 → now
 // Uses search.messages (NOT conversations.history) per monitoring rules
+<<<<<<< HEAD
 // SoCal/Blake dropped per project memory 2026-05-11
+=======
+// SoCal dropped per project memory 2026-05-11
+>>>>>>> auto: 2026-06-01 08:30
 const { execSync } = require("child_process");
 const path = require("path");
 const fs = require("fs");
@@ -10,8 +14,13 @@ function reloadAccounts() {
   return JSON.parse(fs.readFileSync(path.join(__dirname, "../config/.slack-accounts.json"), "utf8")).accounts;
 }
 
+<<<<<<< HEAD
 const WINDOW_EPOCH = new Date("2026-05-29T08:21:00+07:00").getTime() / 1000;
 const SEARCH_AFTER = "2026-05-28"; // after: excludes this date → returns May 29+
+=======
+const WINDOW_EPOCH = 1780017660; // 2026-05-29T01:21:00Z = 2026-05-29T08:21:00+07:00
+const SEARCH_AFTER = "2026-05-28"; // after: returns May 29+
+>>>>>>> auto: 2026-06-01 08:30
 
 const SKIP_WORKSPACES = ["SoCal Auto Wraps"];
 
@@ -33,12 +42,16 @@ const WS_SIGNALS = {
 
 const AYSAR_MPDM_CHANNEL = "C07SQ4HAUHZ";
 
+<<<<<<< HEAD
 const XOXC_REFRESH_SCRIPTS = {
   "Amazing Meds": "slack-xoxc-refresh-amazingmeds.js",
   "Equanimity":   "slack-xoxc-refresh-equanimity.js",
 };
 
 function slackRequest(url, headers, timeout = 20000) {
+=======
+function slackRequest(url, headers, timeout = 25000) {
+>>>>>>> auto: 2026-06-01 08:30
   return new Promise((resolve) => {
     const req = https.get(url, { headers }, (res) => {
       let data = "";
@@ -53,6 +66,7 @@ function slackRequest(url, headers, timeout = 20000) {
   });
 }
 
+<<<<<<< HEAD
 function refreshXoxcToken(wsName) {
   const script = XOXC_REFRESH_SCRIPTS[wsName];
   if (!script) return false;
@@ -64,6 +78,8 @@ function refreshXoxcToken(wsName) {
   }
 }
 
+=======
+>>>>>>> auto: 2026-06-01 08:30
 async function fetchAysarMPDM(acct) {
   const headers = { Authorization: `Bearer ${acct.token}` };
   if (acct.cookie) headers.Cookie = `d=${acct.cookie}`;
@@ -83,6 +99,7 @@ async function searchWorkspace(acctIn) {
   const wsName = acctIn.workspace || acctIn.name || "unknown";
   if (SKIP_WORKSPACES.includes(wsName)) return { workspace: wsName, skipped: true };
 
+<<<<<<< HEAD
   if (XOXC_REFRESH_SCRIPTS[wsName]) {
     refreshXoxcToken(wsName);
   }
@@ -94,6 +111,13 @@ async function searchWorkspace(acctIn) {
   const searchQuery = `after:${SEARCH_AFTER} (${signals.join(" OR ")})`;
   const headers = { Authorization: `Bearer ${acct.token}` };
   if (acct.cookie) headers.Cookie = `d=${acct.cookie}`;
+=======
+  const acct = acctIn;
+  const signals = WS_SIGNALS[wsName] || ["update", "task", "daily"];
+  const searchQuery = `after:${SEARCH_AFTER} (${signals.join(" OR ")})`;
+  const headers = { Authorization: `Bearer ${acct.token}` };
+  if (acct.cookie) headers.Cookie = acct.cookie;
+>>>>>>> auto: 2026-06-01 08:30
 
   const url = `https://slack.com/api/search.messages?query=${encodeURIComponent(searchQuery)}&count=20&sort=timestamp&sort_dir=desc`;
   let result = await slackRequest(url, headers);
@@ -126,6 +150,11 @@ async function searchWorkspace(acctIn) {
 }
 
 (async () => {
+<<<<<<< HEAD
   const results = await Promise.all(reloadAccounts().map(searchWorkspace));
+=======
+  const accounts = reloadAccounts();
+  const results = await Promise.all(accounts.map(searchWorkspace));
+>>>>>>> auto: 2026-06-01 08:30
   console.log(JSON.stringify(results, null, 2));
 })();
