@@ -155,6 +155,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ## Per-Project Rules
 ### Elena / SamGuard
 - [feedback_elena_auto_deploy.md](feedback_elena_auto_deploy.md) — Auto review+merge+deploy without asking
+- [feedback_elena_check_pending_actions_first.md](feedback_elena_check_pending_actions_first.md) — **MUST check `.elena-pending-actions.json` for `deployed:false` BEFORE checking GitHub PRs — missed deploys won't appear as open PRs**
 ### Bailey / Paturevision
 - [feedback_bailey_is_paturevision.md](feedback_bailey_is_paturevision.md) — Bailey DEV1+DEV3 hours in Paturevision spreadsheet (not Marcel)
 - [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey invoices use WBS estimates (not task log actuals)
