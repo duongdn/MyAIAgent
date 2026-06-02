@@ -238,3 +238,89 @@ All 3 key tasks: **not growing** ✓
 **Trello Fountain item:** ✓ complete
 
 ---
+
+## Sheets — 08:42 (+07:00)
+
+> Note: Sheets week May 25–31 labels the last workday as **"Fri, 29/05/26"** (Friday May 29). May 30 is Saturday (0h expected, non-workday). Friday check below covers May 29.
+
+### Friday 2026-05-29 Check
+
+| Developer | Hours Fri 29 | Leave? | Status |
+|-----------|-------------|--------|--------|
+| LongVV (Maddy W8) | 8h | No | ✓ |
+| PhucVT (JamesDiamond W27) | 8h | No | ✓ |
+| TuanNT (JohnYi W25 + Rebecca W26 + Pat W29) | 0h JohnYi + 9h Rebecca + 0h Pat = **9h combined** | No | ✓ |
+| VietPH (Paturevision W29) | 8h | No | ✓ |
+| VuTQ (Paturevision W29) | 4h | No | ⚠️ Under 8h — no leave noted |
+| KhanhHH (Generator W42) | 0h | **Nghỉ cả ngày** | ✓ Leave day |
+| LeNH (Rory W13 + Franc W26 + Aysar W26 + Rebecca Q-T) | Rory 6.5h + Franc 1h + Aysar 0h + Rebecca 0h = **7.5h** | No | ⚠️ 0.5h short of 8h target |
+
+**Other owners visible Fri 29/05:** AnhNH2 (JamesDiamond) 4h ✓; DuongDN (Paturevision) 1h (inactive dev — ignore); Generator: NamNN 5h, LucNT 2h, HangNTT 4h; Rory: KhoaTD 4h, TinPC 4h.
+
+---
+
+### W28 (May 25–31) Weekly Close — LongVV Maddy
+
+| Developer | Sheet | W8 Actual (LongVV only) | Target | Status |
+|-----------|-------|------------------------|--------|--------|
+| LongVV | Maddy W8 | **24h** | 16h/wk | ✓ Exceeded |
+
+> W8 grand total = 40h (LuHX 16h + LongVV 24h). LongVV target met with margin.
+
+---
+
+### W29 Weekly Totals (partial — Mon Jun 1 only)
+
+New week tabs: Maddy→W9, JohnYi→W26, Rebecca→W27, JamesDiamond→W28, Rory→W14, Franc→W27, Aysar→W27, Generator→W43, Paturevision→W30
+
+| Developer | Sheet/Tab | Mon Jun 1 | W29 partial | Notes |
+|-----------|----------|-----------|-------------|-------|
+| LongVV | Maddy W9 | 8h | 8h | ✓ On track (target 16h/wk) |
+| PhucVT | JamesDiamond W28 | 8h | 12h (incl. AnhNH2 4h) | ✓ |
+| TuanNT | Rebecca W27 | 6h | 6h | ⚠️ JohnYi W26 = 0h, no leave |
+| VietPH | Paturevision W30 | 8h | 8h | ✓ |
+| VuTQ | Paturevision W30 | 0h | 0h | ⚠️ 0h, no leave |
+| KhanhHH | Generator W43 | 0h | 0h | ⚠️ 0h, no leave |
+| LeNH | Rory W14 + Franc W27 + Aysar W27 | 0h | 0h | ⚠️ 0h all sheets, no leave |
+
+---
+
+### Trello Gate Impact
+
+- **TuanNT Fri 29/05:** 9h combined → **John Yi / Rebecca / Bailey gate: PASS**
+- **TuanNT Mon Jun 1:** 6h combined (Rebecca only) → gate PASS (combined non-zero)
+- **KhanhHH Fri 29/05:** Leave "Nghỉ cả ngày" → ✓ no alert
+- **KhanhHH Mon Jun 1:** 0h, no leave → reminder candidate
+- **LeNH Fri 29/05:** 7.5h (0.5h shortfall, no leave) → ⚠️ alert per partial-hour rule
+- **LeNH Mon Jun 1:** 0h all sheets, no leave → reminder candidate
+- **VuTQ Fri 29/05:** 4h (under 8h, no leave) → ⚠️ alert
+- **VuTQ Mon Jun 1:** 0h, no leave → reminder candidate
+
+---
+
+### 0h / Shortfall Alerts (for reminder piece)
+
+| Developer | Day | Situation | Action |
+|-----------|-----|-----------|--------|
+| LeNH | Fri 29/05 | 7.5h logged — 0.5h short, no leave | ⚠️ Alert |
+| VuTQ | Fri 29/05 | 4h logged — under 8h, no leave (Bailey W28) | ⚠️ Alert |
+| KhanhHH | Mon Jun 1 | 0h, no leave | Matrix reminder |
+| LeNH | Mon Jun 1 | 0h all sheets, no leave | Matrix reminder |
+| VuTQ | Mon Jun 1 | 0h, no leave (now on Fountain W29) | Matrix reminder |
+
+---
+
+## Reminders — 08:42 (+07:00)
+
+> **Mode: print only** — reminders NOT sent (no `--send-reminder` flag). Run with `--send-reminder` to send. Also note: current time is 08:42 +07, before typical 10 AM send window.
+
+| Developer | Status | Matrix Room | Reason |
+|-----------|--------|-------------|--------|
+| LeNH | ⚠️ needs reminder | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | 0h Mon Jun 1 (all 4 sheets); also 7.5h Fri (0.5h short) |
+| KhanhHH | ⚠️ needs reminder | `!rwLbvLBnrRAYMaOPaD:nustechnology.com` | 0h Mon Jun 1, no leave |
+| VuTQ | ⚠️ needs reminder | `!SHdFKwrYpRhWJBtiBv:nustechnology.com` | 0h Mon Jun 1 on Fountain W29, no leave |
+| TuanNT | ✓ skip | — | 6h Mon (Rebecca) — combined non-zero |
+| LongVV | ✓ skip | — | 8h Mon ✓, 0h daily is normal for part-time |
+| PhucVT | ✓ skip | — | 8h Mon ✓ |
+| VietPH | ✓ skip | — | 8h Mon ✓ |
+
