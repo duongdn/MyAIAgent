@@ -427,3 +427,30 @@ Fresh check of all 8 skipped items from 14:35 run. Window: since 14:10 +07:00.
 6. **samguard.co CSP** — `region1.google-analytics.com` needs adding to `connect-src` policy.
 
 ---
+
+## Reminders all — 18:53 (+07:00)
+
+Live scan at end-of-day (18:52 UTC+7). Verified directly from sheets API (not subagent inference).
+
+| Developer | Combined today | Sheets checked | Leave? | Status |
+|-----------|---------------|---------------|--------|--------|
+| LongVV | 0h (Maddy W9) | Maddy | ✓ Sick leave confirmed (duongdn@ email) | ✓ skip — leave excused |
+| PhucVT | 8h (JamesDiamond W28) | JamesDiamond | none | ✓ logged — no reminder |
+| TuanNT | 0h combined | JohnYi W26 + Rebecca W27 + Paturevision W30 | none | ⚠️ 0h all-day — needs reminder |
+| LeNH | 0h combined | Rory W14 + Franc W27 + Aysar W27 + Rebecca W27 | none | ⚠️ 0h all-day — needs reminder |
+| KhanhHH | 5h (Aysar W27) | Generator W43 + Aysar W27 | none | ✓ logged — no reminder |
+| VietPH | 0h (Paturevision W30) | Paturevision W30 | none | ⚠️ 0h all-day — needs reminder |
+
+**Verification notes:**
+- TuanNT: JohnYi W26 Tue 02/06 rows empty; Rebecca W27 Tue 02/06 rows empty; Paturevision W30 Tue 02/06 has NamNN 2.5h only (no TuanNT rows). Combined = 0h confirmed.
+- LeNH: Rory W14 Tue 02/06 has TinPC 4h + KhoaTD 4h (not LeNH); Aysar W27 has KhanhHH 5h (not LeNH); Franc W27 = 0h; Rebecca W27 cols Q-T = 0h. Combined = 0h confirmed.
+- VietPH: Paturevision W30 Tue 02/06 has NamNN 2.5h only — VietPH row empty. Combined = 0h confirmed.
+- KhanhHH: 5h confirmed in Aysar W27 (aysarOwners = {KhanhHH: 5}). No alert.
+- LongVV: 0h/day normal (part-time 16h/wk). Sick leave today confirmed via email.
+
+**Reminders to send (print only — use `--send-reminder` to actually send):**
+- **TuanNT** → `!knbJbIKzXRJNGVFQNg:nustechnology.com`: "Hi TuanNT, task log for 2026-06-02 is missing (0h logged). Please update when you can. Thanks!"
+- **LeNH** → `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-02 is missing (0h logged). Please update when you can. Thanks!"
+- **VietPH** → `!kzyLVmJxcRESoTkfnY:nustechnology.com`: "Hi VietPH, task log for 2026-06-02 is missing (0h logged). Please update when you can. Thanks!"
+
+Not sent — `--send-reminder` flag not present.
