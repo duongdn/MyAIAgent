@@ -54,14 +54,20 @@ run_piece() {
     return 0
   fi
   log "Running: $piece"
+  # Capture output in tmp file so rate-limit check is scoped to this piece only
+  local tmp_out
+  tmp_out=$(mktemp)
   "$CLAUDE_BIN" -p "/me:daily-report $piece" \
     --dangerously-skip-permissions \
-    >> "$LOG" 2>&1
+    > "$tmp_out" 2>&1
   local exit_code=$?
-  if grep -q "hit your limit" "$LOG" 2>/dev/null; then
+  cat "$tmp_out" >> "$LOG"
+  if grep -q "hit your limit" "$tmp_out"; then
+    rm -f "$tmp_out"
     log "Rate limit hit, stopping."
     exit 1
   fi
+  rm -f "$tmp_out"
   mark_done "$piece"
   log "Done: $piece (exit $exit_code)"
   sleep 10  # brief pause between pieces
