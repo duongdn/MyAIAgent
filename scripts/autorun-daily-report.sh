@@ -2,40 +2,25 @@
 # Auto-run daily report headlessly via claude -p
 # Cron: 0 22 * * * (22:00 UTC = 05:00 UTC+7)
 #
-# Runs each piece sequentially to minimize token usage:
-# - No parallel subagents (each spawn = fresh context overhead)
-# - Each piece is a small focused task (~5-10k tokens vs 50k+ for full run)
-# - Resumes from last completed piece if interrupted (e.g. rate limit)
+# Runs as a SINGLE claude -p session with --cron flag.
+# Memory loads once; pieces execute inline (no subagents).
+# This matches terminal behavior: 1 session, 1 memory load.
 
 PROJECT_DIR="/var/www/MyDailyAgent"
 CLAUDE_BIN="/usr/bin/claude"
 TODAY=$(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)
-REPORT_DIR="$PROJECT_DIR/reports/$TODAY"
-DONE_FILE="$REPORT_DIR/.pieces-done"
+REPORT_FILE="$PROJECT_DIR/reports/$TODAY/daily-report.md"
 LOG_DIR="$PROJECT_DIR/tmp/alert-logs"
 
-mkdir -p "$LOG_DIR" "$REPORT_DIR"
+mkdir -p "$LOG_DIR" "$PROJECT_DIR/reports/$TODAY"
 
 LOG="$LOG_DIR/daily-report-cron.log"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
 
-ALL_PIECES="email slack discord sheets scrin fountain elena trello reminders"
-
-# Check if all pieces are done
-all_done() {
-  for p in $ALL_PIECES; do
-    grep -qxF "$p" "$DONE_FILE" 2>/dev/null || return 1
-  done
-  return 0
-}
-
-is_done() { grep -qxF "$1" "$DONE_FILE" 2>/dev/null; }
-mark_done() { echo "$1" >> "$DONE_FILE"; }
-
-# Skip only when all pieces are complete
-if all_done; then
-  log "All pieces already done, skipping."
+# Skip only when report is complete (has substantial content)
+if [ -f "$REPORT_FILE" ] && [ $(wc -l < "$REPORT_FILE") -gt 50 ]; then
+  log "Report already complete ($TODAY), skipping."
   exit 0
 fi
 
@@ -47,34 +32,22 @@ done
 
 cd "$PROJECT_DIR"
 
-run_piece() {
-  local piece="$1"
-  if is_done "$piece"; then
-    log "Skip (done): $piece"
-    return 0
-  fi
-  log "Running: $piece"
-  # Capture output in tmp file so rate-limit check is scoped to this piece only
-  local tmp_out="$LOG_DIR/.piece-$piece.tmp"
-  "$CLAUDE_BIN" -p "/me:daily-report $piece" \
-    --dangerously-skip-permissions \
-    > "$tmp_out" 2>&1
-  local exit_code=$?
-  cat "$tmp_out" >> "$LOG"
-  if grep -q "hit your limit" "$tmp_out"; then
-    rm -f "$tmp_out"
-    log "Rate limit hit, stopping."
-    exit 1
-  fi
-  rm -f "$tmp_out"
-  mark_done "$piece"
-  log "Done: $piece (exit $exit_code)"
-  sleep 10  # brief pause between pieces
-}
+log "Starting daily report (single session, --cron mode)"
 
-# Run pieces sequentially — resumes automatically if interrupted
-for piece in $ALL_PIECES; do
-  run_piece "$piece"
-done
+out_file="$LOG_DIR/.cron-run.tmp"
 
-log "All pieces complete."
+"$CLAUDE_BIN" -p "/me:daily-report --cron" \
+  --dangerously-skip-permissions \
+  > "$out_file" 2>&1
+
+exit_code=$?
+cat "$out_file" >> "$LOG"
+
+if grep -q "hit your limit" "$out_file"; then
+  rm -f "$out_file"
+  log "Rate limit hit."
+  exit 1
+fi
+
+rm -f "$out_file"
+log "Done (exit $exit_code)"

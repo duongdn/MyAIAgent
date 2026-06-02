@@ -22,6 +22,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 **Timeline:** Uses `daily_report.last_run` from `config/.monitoring-timelines.json` as window start. After completing all sources, update both `daily_report.last_run` and `alert.last_run` to current time.
 **Refresh flag:** Adding `--refresh` (or `refresh`) to any command forces a fresh re-check of all mapped sources, even if already scanned in the current session. Always re-fetch live data when this flag is present — never use cached/prior results.
 **Reminder flag:** By default, reminders are **printed to the report only** — NOT sent to Matrix. Add `--send-reminder` to actually send them. Example: `/me:daily-report --send-reminder` or `/me:daily-report reminders --send-reminder`.
+**Cron flag:** `--cron` = headless mode. Run ALL 9 pieces **sequentially inline** — do NOT spawn subagents or parallel agents. Execute each piece's logic directly in this single session. Reason: each spawned subagent in headless starts a fresh session, reloads all memory files, and exhausts the daily quota.
 
 ---
 
@@ -564,8 +565,13 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 ## Full Run (`/daily-report`)
 
-Runs all 9 pieces in order. Uses parallel agents where possible:
+**If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
+1. Read configs + timelines + memory
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders
+3. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
+4. Update `daily_report.last_run` + `alert.last_run` in timelines
 
+**Normal (interactive terminal)** — parallel agents:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io
 3. Launch parallel: Sheets + Fountain + Elena
