@@ -1,42 +1,48 @@
 ---
 name: feedback_sheets_wrong_tab_numbering
-description: Sheet tab W29 does NOT mean calendar week 29 — each project has its own week counter. MUST find the tab containing the actual target date, not assume tab name = calendar week.
+description: Tab W{n} ≠ calendar week n. ALWAYS use the Summary tab to find the correct week tab — never scan individual W tabs or hardcode tab names.
 metadata:
   type: feedback
 ---
 
-# Sheet Tab Numbering ≠ Calendar Week
+# Sheet Tab Numbering ≠ Calendar Week — USE SUMMARY TAB
 
-## Rule
+## Rule (repeated correction — this has failed multiple times)
 
-**Never assume W29 tab = week of Jun 1–7.** Each project sheet started its own W1 counter independently. W29 in Rory sheet = June 1 week. W27 in Franc sheet = June 15 week. W43 in Generator = June 1 week.
+**ALWAYS read the Summary tab first** to find which W{n} tab corresponds to the target week. Never scan individual tabs. Never hardcode a tab name.
 
-## How to find the correct tab
-
-Scan week tabs (those starting with "W") for the one whose first date row contains the target date:
+## Correct method
 
 ```python
-for tab in week_tabs:
-    result = sheets.values().get(spreadsheetId=sid, range=f"'{tab}'!A1:A5").execute()
-    for row in result.get('values', []):
-        if '01/06' in row[0]:  # target date
-            return tab  # this is the right tab
+# Step 1: Read Summary tab → find row where start date matches target week
+summary = sheets.values().get(spreadsheetId=sid, range="'Summary'!A1:D60").execute().get('values', [])
+for row in summary:
+    if len(row) >= 2 and '01/06' in str(row[1]):  # col B = start date
+        tab = row[0]  # e.g. "W14"
+        break
+
+# Step 2: Read that tab for the dev's hours
 ```
 
-**Do NOT use the last tab or a hardcoded tab name like W29.**
+Summary tab structure:
+- Col A = week label (W1, W2…)
+- Col B = start date
+- Col C = end date
+- Col D = total actual hours
 
-## Real example (2026-06-02 incident)
+## Why this keeps failing
 
-Sheets agent reported LeNH and KhanhHH as 0h Mon Jun 1 because it looked at W29:
-- LeNH-Rory W29 = future week (different date), no Jun 1 entries
-- KhanhHH W29 = Feb 2026 dates, no Jun 1 entries
+Each project started its own W1 counter independently:
+- LeNH-Rory W14 = week of Jun 1
+- LeNH-Franc W27 = week of Jun 15 (NOT Jun 1!)
+- KhanhHH-Generator W43 = week of Jun 1
 
-Correct tabs:
-- LeNH: Rory **W14** contains Mon 01/06/26 → 7.67h ✓
-- KhanhHH: Generator **W43** contains Mon 01/06/26 → 4.83h ✓
+Using W29 for all sheets returns wrong weeks → false 0h → false reminders.
 
-User caught the false 0h report and false reminders were almost sent.
+## Incident 2026-06-02
 
-**Why:** User feedback 2026-06-02: "Check lại, thấy có task log LeNH và KhanhHH"
+Agent looked at W29 for all sheets → reported LeNH + KhanhHH as 0h Mon Jun 1.
+Correct: LeNH 7.67h (Rory W14), KhanhHH 4.83h (Generator W43).
+User: "Check lại, thấy có task log LeNH và KhanhHH" — caught before false reminders sent.
 
-Related: [[feedback_sheets_subagent_unreliable]]
+Related: [[feedback_tasklog_summary_sheet]], [[feedback_sheets_subagent_unreliable]]

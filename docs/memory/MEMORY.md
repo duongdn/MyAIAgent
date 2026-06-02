@@ -97,7 +97,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ---
 
 ## Sheets & Task Logs (general rules)
-- [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W29 ≠ calendar week 29. MUST scan tabs to find the one containing the target date — never hardcode tab name.**
+- [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W{n} ≠ calendar week n. ALWAYS use Summary tab (col A=week, col B=start date) to find correct tab — NEVER scan individual tabs or hardcode.**
 - [feedback_tasklog_0h_reminder_complete.md](feedback_tasklog_0h_reminder_complete.md) — **0h task log + reminder sent = COMPLETE Trello item. Reminder IS the action, nothing more to do.**
 - [feedback_no_activity_not_skip.md](feedback_no_activity_not_skip.md) — **"No Slack activity" is NOT a skip reason. Quiet = OK → COMPLETE. Only skip on specific positive alerts.**
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
