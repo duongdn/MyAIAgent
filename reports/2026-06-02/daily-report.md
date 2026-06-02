@@ -1,7 +1,7 @@
 # Daily Report — 2026-06-02 (Monday)
 
-**Period:** 2026-05-29 08:00 +07 → 2026-06-02 08:14 +07 (Mon, covers Fri–Sun)
-**Generated:** 2026-06-02 08:14 +07
+**Period:** 2026-06-01 09:00 +07 → 2026-06-02 08:40 +07 (Tuesday — window from previous day's run)
+**Generated:** 2026-06-02 08:14 +07 *(initial scan used wrong Mon window — see CORRECTED section below)*
 
 ---
 
