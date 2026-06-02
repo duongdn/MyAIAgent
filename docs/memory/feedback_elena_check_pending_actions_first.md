@@ -13,12 +13,16 @@ At the START of every Elena monitoring run, read `config/.elena-pending-actions.
 - `"deployed": false` AND
 - `"pending_action"` does NOT start with "DONE" AND "NOTE"
 
-If any such entry exists → **raise a WARNING alert** immediately:
+If any such entry exists → **send a Matrix alert to the Elena Digital Plant room AND deploy immediately**, before checking GitHub for new open PRs.
+
+**Matrix room:** `!kyArBadvcbfPIpIxpD:nustechnology.com`
+
+**Matrix message format:**
 ```
-⚠️ [ALERT] Elena pending deploy: PR #NNN (branch-name, merged YYYY-MM-DD) — not yet deployed. Deploy now.
+⚠️ Pending deploy detected: PR #NNN (branch-name, merged YYYY-MM-DD) was not deployed. Deploying now...
 ```
 
-Then proceed to deploy those pending entries BEFORE checking GitHub for new open PRs.
+Then follow up with the deploy result in the same room.
 
 ## Why
 
@@ -30,7 +34,7 @@ User feedback 2026-06-02: "sao ko có alert?" (why no alert?)
 
 1. Read `.elena-pending-actions.json`
 2. Filter: `merged[]` where `deployed == false` and `pending_action` not starting with "DONE" or "NOTE"
-3. For each hit → raise alert + deploy immediately
+3. For each hit → send Matrix alert to `!kyArBadvcbfPIpIxpD:nustechnology.com` + deploy immediately
 4. Then continue to check GitHub open PRs as normal
 5. After deploying pending entries → update their `deployed: true` in the JSON
 
