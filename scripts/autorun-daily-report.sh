@@ -8,7 +8,7 @@
 
 PROJECT_DIR="/var/www/MyDailyAgent"
 CLAUDE_BIN="/usr/bin/claude"
-TODAY=$(date +%Y-%m-%d)
+TODAY=$(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)
 REPORT_FILE="$PROJECT_DIR/reports/$TODAY/daily-report.md"
 LOG_DIR="$PROJECT_DIR/tmp/alert-logs"
 
