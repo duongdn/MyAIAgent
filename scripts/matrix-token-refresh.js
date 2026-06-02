@@ -56,12 +56,17 @@ async function main() {
     fs.mkdirSync(PROFILE_DIR, { recursive: true });
   }
 
+  const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
+  fs.mkdirSync(SOCKS_DIR, { recursive: true });
+
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: 'new',
     userDataDir: PROFILE_DIR,
+    env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':99' },
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
       '--window-size=1280,900',
     ],
   });

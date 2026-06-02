@@ -47,10 +47,14 @@ async function main() {
 
     const account = config.accounts.find(a => a.name === accountName);
 
-    // Run non-headless to match the login session's TLS fingerprint (Cloudflare cf_clearance is fingerprint-bound)
+    const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
+    fs.mkdirSync(SOCKS_DIR, { recursive: true });
+
+    // Run headless (no X server in cron). Session may fail Cloudflare fingerprint check.
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: 'new',
       userDataDir: profileDir,
+      env: { ...process.env, TMPDIR: SOCKS_DIR },
       args: [
         '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
         '--disable-blink-features=AutomationControlled', '--window-size=1280,900',

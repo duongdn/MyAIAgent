@@ -45,10 +45,14 @@ function apiGet(url, headers) {
 
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
 
+  const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
+  fs.mkdirSync(SOCKS_DIR, { recursive: true });
+  // TMPDIR required: sandbox restricts writes to /tmp, Chrome needs writable socket dir
   const browser = await puppeteer.launch({
     headless: 'new',
     executablePath: '/usr/bin/google-chrome',
     userDataDir: PROFILE_DIR,
+    env: { ...process.env, TMPDIR: SOCKS_DIR },
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--window-size=1280,900'],
     defaultViewport: { width: 1280, height: 900 },
   });
