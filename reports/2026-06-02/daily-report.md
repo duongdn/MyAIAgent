@@ -353,9 +353,9 @@ DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
 
 | Developer | Status | Matrix Room | Reason |
 |-----------|--------|-------------|--------|
-| LeNH | ⚠️ needs reminder | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | 0h Mon Jun 1 (all 4 sheets); also 7.5h Fri (0.5h short) |
-| KhanhHH | ⚠️ needs reminder | `!rwLbvLBnrRAYMaOPaD:nustechnology.com` | 0h Mon Jun 1, no leave |
-| VuTQ | ⚠️ needs reminder | `!SHdFKwrYpRhWJBtiBv:nustechnology.com` | 0h Mon Jun 1 on Fountain W29, no leave |
+| LeNH | ✓ has hours — NO reminder | — | 7.67h Mon Jun 1 (Rory W14). Previous 0h finding was WRONG tab. |
+| KhanhHH | ✓ has hours — NO reminder | — | 4.83h Mon Jun 1 (Generator W43). Previous 0h finding was WRONG tab. |
+| VuTQ | ⚠️ verify needed | `!SHdFKwrYpRhWJBtiBv:nustechnology.com` | Need to re-check correct VuTQ tab for Jun 1 |
 | TuanNT | ✓ skip | — | 6h Mon (Rebecca) — combined non-zero |
 | LongVV | ✓ skip | — | 8h Mon ✓, 0h daily is normal for part-time |
 | PhucVT | ✓ skip | — | 8h Mon ✓ |
