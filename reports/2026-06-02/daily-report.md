@@ -298,3 +298,81 @@ nusken GitHub account not configured in `gh` CLI. Cannot check open PRs. Last kn
 - ⚠️ **Elena - WordPress**: skipped — CSP violations on samguard.co (Google Analytics blocked)
 
 ---
+
+## Discord all — 14:32 (+07:00)
+
+Token verify: nusvinn ✓ (user confirmed), nuscarrick ✓ (user confirmed). Guilds: AirAgri + Bizurk found.
+
+| Server | Account | Msgs since 07:10 | Key content |
+|--------|---------|-----------------|-------------|
+| AirAgri #airagri_webapp | nusvinn | 24 | Active work: password resets (Tony Lotito/Select Harvests), batch access requests (Brett Millar). nusvinn + bellatric02 coordinating client requests. No Vinn daily report today. |
+| AirAgri #airagri-flutter | nusvinn | 5 | jeff_trinh: Canary Speech API 400 error debug + PR review request (SOS alarms pipeline). No Jeff daily report today. |
+| Bizurk DM (animeworld) | nuscarrick | 0 | Silence — normal per feedback (low activity expected) |
+
+**Daily report status:**
+- **Vinn (nusvinn)**: Last daily report 2026-06-01T10:12 ("Just report my process today: ..."). NOT posted today 2026-06-02. Active in webapp chat but no progress report.
+- **Jeff (jeff_trinh)**: Active in flutter channel (API debug, PR review) but no formal daily report posted today.
+
+**Alert:** ⚠️ Vinn daily report not posted for 2026-06-02 → James Diamond - Vinn Trello item SKIPPED.
+
+---
+
+## Sheets TuanNT end-of-day — 14:33 (+07:00)
+
+End-of-day rescan (was 0h at mid-day snapshot 13:56).
+
+| Developer | Sheet | Today | Weekly so far | Status |
+|-----------|-------|-------|--------------|--------|
+| TuanNT | JohnYi W26 | 0h | 0h | ⚠️ No log today |
+| TuanNT | Rebecca W27 | 0h | 6h | ⚠️ No log today |
+| TuanNT | Paturevision W30 | 0h | 0h | ⚠️ No log today |
+| **TuanNT COMBINED** | all 3 | **0h** | 6h (Rebecca) | ⚠️ 0h alert — John Yi + Bailey + Rebecca SKIP |
+| PhucVT | JamesDiamond W28 | 0h | 12h | ⚠️ No log today |
+| VietPH | Paturevision W30 | 0h | 8h | ⏳ End of day |
+| KhanhHH | Generator W43 | 4h (NamNN) | 12.83h | ✓ Active (NamNN 4h logged today) |
+| LeNH | Aysar W27 | 5h | 20.17h | ✓ Active (KhanhHH 5h in Aysar) |
+| LongVV | Maddy W9 | 0h | 8h | ✓ Sick leave — expected |
+
+**TuanNT combined 0h confirmed at end of day** → John Yi (Amazing Meds), Bailey (Paturevision), Rebecca (William Bills) Trello items all SKIPPED.
+
+---
+
+## Neural / Upwork — 14:34 (+07:00)
+
+`node scripts/upwork-weekly-hours.js` failed: Puppeteer browser lock (`upwork-profile-carrick` singleton lock). No Chrome processes running — stale lock after previous session.
+
+Per memory `feedback_neural_silence_not_alert.md`: Upwork script failure / Cloudflare block / silence = NEVER an alert. Neural Contract item marked ✓ complete.
+
+No Neural client messages to verify (browser session unavailable).
+
+---
+
+## Trello Check Progress — 14:35 (+07:00)
+
+New card created (6a1e88ddbf1cd13da48dfe7a) for afternoon run. Previous morning card (6a1e1d... from 02:59 UTC) was already closed.
+
+| Item | Decision | Reason |
+|------|----------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ complete | Xtreme quiet, Kai 16h/wk no daily report required |
+| John Yi - Amazing Meds | ⚠️ skipped | TuanNT 0h combined today (confirmed end-of-day) |
+| James Diamond - Vinn | ⚠️ skipped | Vinn no daily report today (last: 2026-06-01) |
+| Rory | ✓ complete | Swift Studio quiet |
+| Aysar | ⚠️ skipped | No MPDM C07SQ4HAUHZ daily report (per Slack piece) |
+| Franc | ✓ complete | RDC new API = normal dev activity |
+| Elliott | ✓ complete | Generator Violet release = normal |
+| MPFC | ✓ complete | Quiet |
+| Marcel | ✓ complete | Quiet |
+| Elena - SamGuard | ⚠️ skipped | PR #303+#304 pending deploy + GitHub auth unavailable |
+| Raymond - LegalAtoms | ✓ complete | No Nick-specific alerts |
+| Neural Contract | ✓ complete | Script failure = no alert (per feedback) |
+| Bailey | ⚠️ skipped | TuanNT 0h combined today |
+| Andrew Taraba | ✓ complete | Bizurk silence = normal (per feedback) |
+| Rebecca - William Bills | ⚠️ skipped | TuanNT 0h combined today |
+| Colin | ✓ complete | Only automated alerts, not person alerts |
+| Fountain | ⚠️ skipped | Matrix token fail + kunalsheth comments unresolved |
+| Philip | ✓ complete | No alerts found |
+| Elena - WordPress SamGuard | ⚠️ skipped | CSP violations on samguard.co |
+
+**11 ✓ complete / 8 ⚠️ skipped** (Blake/SoCal dropped as of 2026-05-11)
+
+---
