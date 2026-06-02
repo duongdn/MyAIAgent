@@ -246,3 +246,55 @@ Total active (excl. Done/Seasonal/Notes/Shelf): **72 cards**
 **Comparison:** 0h (log) ≤ 7h 54m (Scrin) → ✓ No over-inflation.
 
 Note: TuanNT tracked 7.9h on Monday but logged 0h for John Yi (Amazing Meds). Hours may have been attributed to other projects (Rebecca/William Bills). The 0h John Yi log is a separate concern tracked in the Sheets piece — the Scrin check confirms no inflation.
+
+---
+
+## Elena — 07:18 (+07:00)
+
+### PRs — nustechnology/Elena-SamGuard-Digital-Plant
+
+**GitHub CLI not authenticated** (no `gh` accounts configured). Used SSH key (duongdn) + git to check branch state.
+
+**Recent commits on `process-digital-plant`:**
+| PR | Commit | Date | Title | Status |
+|----|--------|------|-------|--------|
+| #304 | cf44153 | 2026-06-02 08:19 +07 | Merge PR #304: Dp 666 create and manage autoscan | ⚠️ Merged today, NOT deployed |
+| #303 | 376fc2a | 2026-05-29 21:39 +07 | Adjust circle progress positioning (#303, Redmine #78803) | ⚠️ Merged 2026-05-29, NOT deployed |
+
+**Open PRs**: Cannot verify via API (no GitHub auth). Branch listing shows active feature branches still open.
+
+### Deploy — PENDING (MayBanServer unreachable)
+
+SSH to `192.168.2.117` (MayBanServer): **Connection timed out** (same as 2026-05-29 — local LAN, not accessible from this server).
+
+- PR #303 (Redmine #78803) — CSS fix, merged 2026-05-29 → pending git pull + ng build on MayBanServer
+- PR #304 (DP-666 autoscan continuation) — merged today 08:19 → also pending deploy
+- Redmine #78803 status update to "Deployed" — pending (after deploy completes)
+- Matrix announcement pending
+
+**Manual action required:** SSH to MayBanServer (192.168.2.117) and run:
+```bash
+cd projects/Elena/Elena-SamGuard-Digital-Plant/process-digital-plant
+git pull origin process-digital-plant
+export NVM_DIR=$HOME/.nvm && source $NVM_DIR/nvm.sh && nvm use 22 && npx ng build --configuration development
+```
+Then update Redmine #78803 to Deployed.
+
+### Precognize
+
+nusken GitHub account not configured in `gh` CLI. Cannot check open PRs. Last known: 8+ open PRs as of 2026-05-27.
+
+### WordPress (samguard.co)
+
+⚠️ **2 CSP violations found** (real errors per policy):
+- `Refused to connect to 'https://region1.google-analytics.com/g/collect?...'` — CSP `connect-src` blocking Google Analytics
+- `Fetch API cannot load https://region1.google-analytics.com/g/collect?...` — same violation, Fetch API path
+
+**Action needed:** Update samguard.co CSP policy to allow `region1.google-analytics.com` in `connect-src`.
+
+### Trello
+
+- ⚠️ **Elena - SamGuard**: skipped — pending deploy (PR #303 + #304) + GitHub API unavailable
+- ⚠️ **Elena - WordPress**: skipped — CSP violations on samguard.co (Google Analytics blocked)
+
+---

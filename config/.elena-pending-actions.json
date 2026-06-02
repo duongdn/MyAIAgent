@@ -18,6 +18,16 @@
   },
   "merged": [
     {
+      "pr": 304,
+      "branch": "DP-666-create-and-manage-autoscan",
+      "type": "dp",
+      "ticket_id": "DP-666",
+      "merged_at": "2026-06-02",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "PENDING DEPLOY — PR #304 merged (squash) on 2026-06-02 08:19 +07. MayBanServer unreachable (local LAN). Announce to Matrix Elena-Digital-Plant room after deploy."
+    },
+    {
       "pr": 303,
       "branch": "redmine-78803",
       "type": "redmine",
@@ -25,7 +35,7 @@
       "merged_at": "2026-05-29",
       "deployed": false,
       "status_updated": false,
-      "pending_action": "PENDING DEPLOY — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer unreachable (local LAN). Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy."
+      "pending_action": "PENDING DEPLOY — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer still unreachable as of 2026-06-02. Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy."
     },
     {
       "pr": 302,
@@ -172,14 +182,15 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-05-29",
-    "time": "21:41 +07:00",
-    "prs_checked": 1,
+    "date": "2026-06-02",
+    "time": "07:18 +07:00",
+    "prs_checked": "git_only_no_api",
     "prs_merged": 1,
+    "new_merged": "PR #304 (DP-666, merged 2026-06-02 08:19 +07)",
     "deploy_status": "pending_maybanserver_unreachable",
-    "matrix_announced": true,
-    "wordpress_status": "ok_no_errors",
-    "precognize_open_prs": "unknown_nusken_token_not_available"
+    "matrix_announced": false,
+    "wordpress_status": "csp_violations_google_analytics",
+    "precognize_open_prs": "unknown_nusken_not_configured"
   },
   "deployed_no_status_update": [
     {
