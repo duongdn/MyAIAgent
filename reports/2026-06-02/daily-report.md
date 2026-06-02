@@ -376,3 +376,54 @@ New card created (6a1e88ddbf1cd13da48dfe7a) for afternoon run. Previous morning 
 **11 ✓ complete / 8 ⚠️ skipped** (Blake/SoCal dropped as of 2026-05-11)
 
 ---
+
+## Trello re-check — 18:42 (+07:00)
+
+Fresh check of all 8 skipped items from 14:35 run. Window: since 14:10 +07:00.
+
+### Source re-checks
+
+| Source | Result |
+|--------|--------|
+| TuanNT sheets (all 3) | **0h combined today** (no leave note). End-of-day confirmed. PhucVT: **8h** in JamesDiamond W28 ✓ |
+| Vinn (AirAgri Discord) | No "Just report my process today:" posted since 14:10. Last report: 2026-06-01. |
+| Aysar (Baamboozle MPDM C07SQ4HAUHZ) | No daily report found. Channel silent since May 28. |
+| Fountain Matrix (W29 plan) | Token still expired. Browser profile lock prevents refresh. W29 plan unverifiable. |
+| Elena SamGuard | MayBanServer (192.168.2.117) still unreachable — deploy pending manual action. |
+| Elena WordPress | CSP violations unchanged (structural config issue). |
+
+### Updated Check Progress status
+
+| Item | Status | Change |
+|------|--------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ complete (morning) | — |
+| John Yi - Amazing Meds | ⚠️ skipped | TuanNT 0h confirmed end-of-day |
+| James Diamond - Vinn | ⚠️ skipped | Vinn no daily report (active in chat, no progress report) |
+| Rory | ✓ complete (morning) | — |
+| Aysar | ⚠️ skipped | No MPDM daily report all day |
+| Franc | ✓ complete (morning) | — |
+| Elliott | ✓ complete (morning) | — |
+| MPFC | ✓ complete (morning) | — |
+| Marcel | ✓ complete (morning) | — |
+| Elena - SamGuard | ⚠️ skipped | Deploy pending, MayBanServer unreachable |
+| Raymond - LegalAtoms | ✓ complete (morning) | — |
+| Neural Contract | ✓ complete (morning) | — |
+| Bailey | ⚠️ skipped | TuanNT 0h confirmed end-of-day |
+| Andrew Taraba | ✓ complete (morning) | — |
+| Rebecca - William Bills | ⚠️ skipped | TuanNT 0h confirmed end-of-day |
+| Colin | ✓ complete (morning) | — |
+| Fountain | ⚠️ skipped | Matrix token expired, W29 plan unverified; kunalsheth comments unresolved |
+| Philip | ✓ complete (morning) | — |
+| Elena - WordPress SamGuard | ⚠️ skipped | CSP violations on samguard.co |
+
+**No changes from 14:35 run. 11 ✓ complete / 8 ⚠️ skipped.**
+
+### Open items requiring manual action
+1. **TuanNT 0h today** — no task log for 2026-06-02 across all 3 projects. Send reminder if needed.
+2. **Vinn no daily report** — active in AirAgri chat but no progress report posted.
+3. **Aysar no daily report** — MPDM silent all day.
+4. **Fountain** — Matrix token needs manual browser re-login. Kunalsheth asked about deploy timeline for "Personal landing page" and approved "States/scrolling" for live — @rick570 action needed.
+5. **Elena deploy** — PRs #303 + #304 merged, pending manual SSH to MayBanServer (192.168.2.117).
+6. **samguard.co CSP** — `region1.google-analytics.com` needs adding to `connect-src` policy.
+
+---
