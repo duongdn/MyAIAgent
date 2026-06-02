@@ -79,6 +79,161 @@ Week tabs: Maddy W9 · JohnYi W26 · Rebecca W27 · JamesDiamond W28 · Rory W14
 
 ---
 
+## Fountain — 14:10 (+07:00)
+
+### Part 1 — Matrix Weekly Plan
+
+**Status: Matrix token expired — refresh failed (browser profile locked by concurrent process).**
+
+Attempted token refresh via `scripts/matrix-token-refresh.js`; Puppeteer reported "browser is already running for matrix-browser-profile" — singleton lock present. Token refresh could not complete.
+
+**Fallback — last known plan (W28, posted 2026-05-26 ~09:03 +07:00 by @trinhmtt):**
+
+> Em gửi plan tuần này ạ
+> ViTHT: 40h | DatNT: 40h | LamLQ: 20h | ThinhT: 16h
+> => QC: 25h
+
+W29 plan (week starting June 1): **NOT yet posted** as of this run. New week began Monday — plan typically posted Monday morning. No W29 Matrix message confirmed.
+
+- VuTQ: NOT on Fountain plan (moved to Bailey project, expected).
+- HaVS: NOT on W28 plan — 0h not an alert.
+
+### Part 2 — Task Log Actuals (W29, June 1–7 2026)
+
+Sheet tab W29 confirmed present. Today is day 2 of the week (Tue 02/06/26).
+
+| Dev | Role | W29 Actual so far | Notes |
+|-----|------|-------------------|-------|
+| ViTHT | Dev | 0h | Early week — no tasks logged yet |
+| ThinhT | Dev | 0h | Early week |
+| VuTQ | Dev | 0h | Off Fountain plan (Bailey) |
+| HaVS | Dev | 0h | Not on plan → no alert |
+| PhatDLT | QC | 0h | Early week |
+| HungPN | QC | 0h | Early week — not an alert (PhatDLT covers QC) |
+
+W29 summary row shows 0.00h total for all devs. This is expected — it is only Tuesday and tasks are typically logged end-of-day. No alerts warranted at this stage.
+
+### Part 3 — Plan vs Actual
+
+Using W28 plan as reference (W29 plan not yet posted).
+
+| Dev | Plan (W28 ref) | W29 Actual | Delta | Status |
+|-----|----------------|------------|-------|--------|
+| ViTHT | 40h | 0h | -40h | ⏳ Early week (Day 2) |
+| ThinhT | 16h | 0h | -16h | ⏳ Early week |
+| DatNT | 40h | 0h | -40h | ⏳ Early week |
+| LamLQ | 20h | 0h | -20h | ⏳ Early week |
+| VuTQ | 0h (off plan) | 0h | 0 | ✓ Expected |
+| HaVS | 0h (off plan) | 0h | 0 | ✓ Not on plan |
+| PhatDLT (QC) | 25h | 0h | -25h | ⏳ Early week |
+
+> Note: W29 plan has not been posted yet. All devs at 0h is normal on Day 2 — no alerts.
+
+### Part 4 — Capacity & Runway
+
+**Source:** Est vs Charged sheet — computed from Col I (Est Dev Raw) + Col J (CR) = Total Est, Col K = Actual.
+
+**NS+IP bucket** (Not Started + In-progress variants only):
+
+| Task | Status | Est (I+J) | Actual | Remaining |
+|------|--------|-----------|--------|-----------|
+| 2912 | In-progress (<50%) | 40h | 2h | 38h |
+| 2912 (main) | In-progress (<50%) | 40h | 2h | 38h |
+| 2870 | In-progress (>50%) | 80h | 63.25h | 16.75h |
+| 2869 | In-progress (<50%) | 40h | 28.75h | 11.25h |
+| 2885 | In-progress (<50%) | 20h | 7h | 13h |
+| 2775 | Not Started | 60h | 21.25h | 38.75h |
+| 1178 | Not Started | 40h | 0h | 40h |
+| 2854 | Not Started | 80h | 81.5h | 0h |
+| 2872 | In-progress (>50%) | 32h | 46.25h | 0h |
+| 2524 | Not Started | 24h | 0h | 24h |
+| 2695 | In-progress (<50%) | 20h | 26h | 0h |
+| 2735 | In-progress (>50%) | 120h | 136h | 0h |
+| others | various | — | — | — |
+
+**NS+IP total remaining: 219h**
+
+**Broader bucket** (+ Pending, On Hold, Dev Done, Deployed on Staging, not yet on Live/Cancelled):
+- Additional remaining beyond NS+IP: ~93.75h (Dev Done tasks with est > actual, Pending/On Hold)
+- **Broader total remaining: ~312.75h**
+
+**Dev capacity:** W29 plan not yet posted. Using W28 as reference: ViTHT(40h) + DatNT(40h) + LamLQ(20h) + ThinhT(16h) = **116h/wk dev** + QC 25h.
+
+| Bucket | Remaining | Capacity/wk | Runway |
+|--------|-----------|-------------|--------|
+| NS+IP | 219h | 116h dev | ~1.9 weeks |
+| Broader | 312.75h | 116h dev | ~2.7 weeks |
+
+**Delta vs prev (2026-05-26):** Previous run had pending full calc for Part 4. Current: NS+IP 219h, Broader 312.75h. NS+IP baseline from 2026-05-04 was ~181.25h → **+37.75h growth** since then (new tasks added: #2912 +40h, #2913 +60h, #2914 +20h, etc.).
+
+### Part 5 — Over-Estimate Tracking
+
+Threshold: actual > (Col I + Col J) × 1.2
+
+**Mandatory tracked tasks:**
+
+| Task# | Est (I+J) | Actual | Over% | Status | Trend |
+|-------|-----------|--------|-------|--------|-------|
+| #2595 | 120h | 168.25h | +40% | Deployed on Staging | STABLE (same as 2026-05-26 — no growth) |
+| #2615 | 12h | 106.75h | +790% | Deployed on Staging | STABLE (same as 2026-05-26 — no growth) |
+
+**Other notable over-estimates (active/in-progress only):**
+
+| Task# | Est (I+J) | Actual | Over% | Status | Trend |
+|-------|-----------|--------|-------|--------|-------|
+| #2702 | 8h | 25.5h | +219% | In-progress (>50%) | STILL GROWING |
+| #2872 | 32h | 46.25h | +45% | In-progress (>50%) | STILL GROWING |
+| #2640 | 12h | 16.75h | +40% | In-progress (<50%) | STILL GROWING |
+| #2695 | 20h | 26h | +30% | In-progress (<50%) | STILL GROWING |
+| #2854 | 80h | 81.5h | +2% | Not Started | borderline |
+
+> #2595 and #2615 both remain at same values as seen in 2026-05-04 / 2026-05-26 — STABLE (not growing). Still significant overruns but no new hours added.
+
+### Trello Board
+
+**Board:** Web Development (Fountain) — `5475eaf923a9a1309357eb51`
+
+**Active card counts:**
+
+| List | Count |
+|------|-------|
+| To-Do | 27 |
+| Bugs | 16 |
+| Doing | 11 |
+| QC Internal Backlog (In Staging/Beta) | 14 |
+| QA Backlog (In Staging) | 2 |
+| In QA | 1 |
+| Not Passed | 1 |
+
+Total active (excl. Done/Seasonal/Notes/Shelf): **72 cards**
+
+**Customer comments (since Jun 1, 2026):**
+- ⚠️ **kunalsheth** on "Fountain - Personal landing page - Updates" (2026-06-02T03:20Z): `@rick570 What else is needed here to push live? Were you waiting for other tasks?` — customer asking for deploy timeline
+- ⚠️ **kunalsheth** on "Fountain - States need to be updated + scrolling..." (2026-06-02T03:19Z): `@rick570 This looks good we can push live` — customer approved for live deploy
+
+**Stuck cards (>5 days no activity, active lists only):**
+- "Infinity & Fountain - Implement Open Graph Image Strategy" — To-Do, last activity 2026-05-13
+- "Fountain & Infinity Blog" — To-Do, last activity 2026-05-26
+- "Fountain - Pro roles" — To-Do, last activity 2026-05-06
+- "Fountain Pro Template Zip Code Update" — To-Do, last activity 2026-03-10
+- "Upgrade to Next.js version 16" — To-Do, last activity 2026-03-10
+- "Fountain & Infinity - Patch vulnerabilities" — To-Do, last activity 2026-04-08
+- And others in older archived lists (pre-2019, unrelated)
+
+**Hard-to-release (Doing 14+ days):**
+- "Fountain & Infinity - Add Subtle Scroll Animations" — last activity 2026-04-21 (~42 days)
+- "ActiveRecord::RecordNotFound in admin/users#show" — last activity 2026-04-22 (~41 days)
+- "Finding solution to customers receiving incorrect delivery dates" — last activity 2026-04-28 (~35 days)
+
+**Summary:** ⚠️ ALERTS
+1. **Matrix token expired** — W29 plan not confirmed (refresh failed, browser lock). Cannot verify new week plan until token restored.
+2. **kunalsheth (2 comments today)** — Requesting deploy timeline for "Personal landing page" and approving "States/scrolling" for live. @rick570 action needed.
+3. **#2702 over-estimate +219%** (In-progress) — still growing, needs review.
+4. **3 hard-to-release Doing cards** — 35–42 days in Doing without reaching Done.
+5. **W29 task log: 0h** — Early week (Day 2), expected. Re-check end-of-day.
+
+---
+
 ## Scrin — 07:10 (+07:00)
 **Date checked:** Monday 2026-06-01 (isYesterday=true from Tuesday run)
 
