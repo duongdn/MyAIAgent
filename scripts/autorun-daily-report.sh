@@ -5,22 +5,37 @@
 # Runs each piece sequentially to minimize token usage:
 # - No parallel subagents (each spawn = fresh context overhead)
 # - Each piece is a small focused task (~5-10k tokens vs 50k+ for full run)
+# - Resumes from last completed piece if interrupted (e.g. rate limit)
 
 PROJECT_DIR="/var/www/MyDailyAgent"
 CLAUDE_BIN="/usr/bin/claude"
 TODAY=$(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)
-REPORT_FILE="$PROJECT_DIR/reports/$TODAY/daily-report.md"
+REPORT_DIR="$PROJECT_DIR/reports/$TODAY"
+DONE_FILE="$REPORT_DIR/.pieces-done"
 LOG_DIR="$PROJECT_DIR/tmp/alert-logs"
 
-mkdir -p "$LOG_DIR" "$PROJECT_DIR/reports/$TODAY"
+mkdir -p "$LOG_DIR" "$REPORT_DIR"
 
 LOG="$LOG_DIR/daily-report-cron.log"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
 
-# Skip if today's report already exists and has content
-if [ -f "$REPORT_FILE" ] && [ -s "$REPORT_FILE" ]; then
-  log "Report already exists, skipping."
+ALL_PIECES="email slack discord sheets scrin fountain elena trello reminders"
+
+# Check if all pieces are done
+all_done() {
+  for p in $ALL_PIECES; do
+    grep -qxF "$p" "$DONE_FILE" 2>/dev/null || return 1
+  done
+  return 0
+}
+
+is_done() { grep -qxF "$1" "$DONE_FILE" 2>/dev/null; }
+mark_done() { echo "$1" >> "$DONE_FILE"; }
+
+# Skip only when all pieces are complete
+if all_done; then
+  log "All pieces already done, skipping."
   exit 0
 fi
 
@@ -34,6 +49,10 @@ cd "$PROJECT_DIR"
 
 run_piece() {
   local piece="$1"
+  if is_done "$piece"; then
+    log "Skip (done): $piece"
+    return 0
+  fi
   log "Running: $piece"
   "$CLAUDE_BIN" -p "/me:daily-report $piece" \
     --dangerously-skip-permissions \
@@ -43,19 +62,14 @@ run_piece() {
     log "Rate limit hit, stopping."
     exit 1
   fi
+  mark_done "$piece"
   log "Done: $piece (exit $exit_code)"
   sleep 10  # brief pause between pieces
 }
 
-# Run pieces sequentially — each is a small focused task
-run_piece "email"
-run_piece "slack"
-run_piece "discord"
-run_piece "sheets"
-run_piece "scrin"
-run_piece "fountain"
-run_piece "elena"
-run_piece "trello"
-run_piece "reminders"
+# Run pieces sequentially — resumes automatically if interrupted
+for piece in $ALL_PIECES; do
+  run_piece "$piece"
+done
 
 log "All pieces complete."
