@@ -76,3 +76,18 @@ Week tabs: Maddy W9 · JohnYi W26 · Rebecca W27 · JamesDiamond W28 · Rory W14
 - ↷ James Diamond: pending PhucVT end-of-day log
 - ✓ Maddy (LongVV): sick leave + Slack clear → complete (no alert)
 - ⚠️ Aysar: already skipped (no Slack daily report — unchanged)
+
+---
+
+## Scrin — 07:10 (+07:00)
+**Date checked:** Monday 2026-06-01 (isYesterday=true from Tuesday run)
+
+| Employee | Scrin tracked | Sessions | Activity |
+|----------|--------------|----------|----------|
+| Nick (TuanNT) | **7h 54m** (474 min) | 08:49–12:45 (236m, 95%) · 13:15–17:13 (238m, 79%) | Active |
+
+**TuanNT John Yi task log (W26, Mon 01/06/26):** 0h
+
+**Comparison:** 0h (log) ≤ 7h 54m (Scrin) → ✓ No over-inflation.
+
+Note: TuanNT tracked 7.9h on Monday but logged 0h for John Yi (Amazing Meds). Hours may have been attributed to other projects (Rebecca/William Bills). The 0h John Yi log is a separate concern tracked in the Sheets piece — the Scrin check confirms no inflation.
