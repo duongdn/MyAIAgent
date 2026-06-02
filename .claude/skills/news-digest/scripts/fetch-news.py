@@ -12,8 +12,10 @@ Topics:
   vn-business Vietnamese business / economy / doanh nghiệp
   ai          AI / machine learning news (VN + global)
   it          IT / tech / software news (VN + global)
+  php         PHP / Laravel / Symfony / backend web dev
   security    Cybersecurity news (VN + global)
   finance     Finance: banking, economy, central banks, M&A, crypto (VN + global)
+  vinfast     VinFast EV news (VN + global)
 
 Options:
   --tag=xxx  Filter articles whose title or description contains xxx (case-insensitive, word-boundary for short tags)
