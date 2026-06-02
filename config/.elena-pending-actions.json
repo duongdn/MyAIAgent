@@ -25,7 +25,7 @@
       "merged_at": "2026-05-29",
       "deployed": false,
       "status_updated": false,
-      "pending_action": "PENDING DEPLOY — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer unreachable (local LAN). Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy."
+      "pending_action": "DONE — PR #303 merged 2026-05-29, deployed to MayBanServer on 2026-06-02 (included in PR #304 deploy pull). Redmine #78803 updated to Deployed (status_id=10) on 2026-06-02."
     },
     {
       "pr": 302,
@@ -166,20 +166,21 @@
       "merged_at": "2026-05-15",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 DP-666 merged (squash) + deployed to MayBanServer on 2026-05-15 08:40 +07, build OK (21s), announced to Matrix Elena-Digital-Plant room. Redmine 403 (not a Redmine ticket)."
+      "pending_action": "DONE \u2014 DP-666 (PR #301) previous iteration merged 2026-05-15. PR #304 (new DP-666 iteration) merged + deployed to MayBanServer on 2026-06-02 08:18 +07, build OK (23.7s), announced to Matrix Elena-Digital-Plant room."
     }
   ],
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-05-29",
-    "time": "21:41 +07:00",
+    "date": "2026-06-02",
+    "time": "08:18 +07:00",
     "prs_checked": 1,
     "prs_merged": 1,
-    "deploy_status": "pending_maybanserver_unreachable",
+    "deploy_status": "deployed_ok",
     "matrix_announced": true,
     "wordpress_status": "ok_no_errors",
-    "precognize_open_prs": "unknown_nusken_token_not_available"
+    "precognize_open_prs": "none_for_nusken",
+    "pending_resolved": "PR #303 redmine-78803 deployed + Redmine #78803 updated to Deployed"
   },
   "deployed_no_status_update": [
     {
