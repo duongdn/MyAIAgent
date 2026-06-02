@@ -310,6 +310,43 @@ New week tabs: Maddy→W9, JohnYi→W26, Rebecca→W27, JamesDiamond→W28, Rory
 
 ---
 
+## Upwork — 08:50 (+07:00)
+
+- **Rory:** 7h 40m this week (Mon Jun 1 only) | W28 = 37h 00m ✓
+- **Neural Contract (workroom 38901192):** 0h this week (Mon start). Latest client msg 2026-05-26 (Michael) — already replied 2026-05-27 by Carrick. No urgent unread. → **gate: ✓ COMPLETE**
+
+---
+
+## Trello Updates — 08:50 (+07:00)
+
+### Check Mail (6/6 ✓)
+DuongDn ✓ | Carrick ✓ | Nick ✓ | Rick ✓ | Kai ✓ | Ken ✓
+
+### Check Progress (17/19)
+| Item | Result |
+|------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ |
+| John Yi - Amazing Meds | ✓ |
+| Bailey | ✓ |
+| Rebecca (William Bills) | ✓ |
+| James Diamond - Vinn task | ✓ |
+| Rory | ✓ |
+| Elliott | ✓ |
+| MPFC | ✓ |
+| Marcel | ✓ |
+| Elena - SamGuard | ✓ |
+| Raymond - LegalAtoms | ✓ |
+| Andrew Taraba | ✓ |
+| Colin | ✓ |
+| Aysar | ✓ |
+| Franc | ✓ |
+| Fountain | ✓ |
+| Neural Contract | ✓ |
+| Philip | ⚠️ skipped — MS Teams not in monitoring scripts |
+| Elena - WordPress (Pending list) | ⚠️ skipped — separate Pending checklist, outside today's scope |
+
+---
+
 ## Reminders — 08:42 (+07:00)
 
 > **Mode: print only** — reminders NOT sent (no `--send-reminder` flag). Run with `--send-reminder` to send. Also note: current time is 08:42 +07, before typical 10 AM send window.
@@ -323,4 +360,73 @@ New week tabs: Maddy→W9, JohnYi→W26, Rebecca→W27, JamesDiamond→W28, Rory
 | LongVV | ✓ skip | — | 8h Mon ✓, 0h daily is normal for part-time |
 | PhucVT | ✓ skip | — | 8h Mon ✓ |
 | VietPH | ✓ skip | — | 8h Mon ✓ |
+
+---
+
+## Upwork — 08:42 (+07:00)
+
+| Workroom | This Week | Last Week | Developer |
+|----------|-----------|-----------|-----------|
+| Rory | 7:40 | 37:00 | LeNH |
+| Neural Contract | 0:00 | 1:00 | external |
+| Aysar | — | — | LeNH |
+| Bailey-VietPH | 0:00 | 0:00 | VietPH |
+| Bailey-DuongDN | 0:00 | 0:00 | DuongDN |
+
+Neural Contract: 0h this week (Mon start), latest client message 2026-05-26 already replied 2026-05-27 — no unread urgent messages → gate: ✓
+
+---
+
+## Trello Updates — 08:42 (+07:00)
+
+### Check Mail
+All 6 items already complete (pre-completed from prior run):
+- DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
+
+### Check Progress
+- Maddy ✓ | John Yi ✓ | James Diamond ✓
+- Rory ✓ | Aysar ✓ | Franc ✓ | Elliott ✓
+- MPFC ✓ | Marcel ✓ | Elena - SamGuard ✓ | Raymond ✓
+- Neural Contract ✓ | Bailey ✓ | Andrew Taraba ✓ | Rebecca ✓ | Colin ✓ | Fountain ✓
+- Philip: ⚠️ skipped (MS Teams not checked)
+
+---
+
+## Summary — 08:52 (+07:00)
+
+### 🔴 Action Required
+
+| Priority | Item | Detail |
+|----------|------|--------|
+| CRITICAL | FirstProject production error #887 | ChunkLoadError in production (Sun 31 May 16:49 UTC) — investigate JS chunk loading. See rick@ email. |
+| WARNING | Rollbar free tier exhausted | `rickfountain` account hit limit — errors may go untracked. Upgrade plan. |
+| WARNING | LeNH shortfall Fri 29 May | 7.5h logged vs 8h target (0.5h short, no leave). Send reminder via Matrix. |
+| WARNING | VuTQ shortfall Fri 29 May | 4h on Bailey W28 (under 8h, no leave). Noted. |
+| INFO | Fountain DatNT no sheet column | New dev DatNT on W29 plan (40h) but no Fountain Summary sheet column yet. |
+| INFO | Fountain: Kunal awaiting response | 3 unresolved comments (States update + ShipStation guest email). |
+| INFO | Snyk alert (marcel org) | Review carrick@ vulnerability alert when possible. |
+
+### ✅ Completed Actions
+
+- Elena PRs #303 (redmine-78803) + #304 (DP-666-autoscan) → merged, deployed, Redmine #78803 → Deployed
+- xoxc tokens refreshed: Amazing Meds ✓, Equanimity ✓
+- Trello: 17/19 Check Progress items ✓, 6/6 Check Mail ✓
+
+### ⏰ Reminders to Send (~10 AM)
+
+Run `/daily-report reminders --send-reminder` after 10 AM:
+- **LeNH** — `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (0h Mon Jun 1)
+- **KhanhHH** — `!rwLbvLBnrRAYMaOPaD:nustechnology.com` (0h Mon Jun 1)
+- **VuTQ** — `!SHdFKwrYpRhWJBtiBv:nustechnology.com` (0h Mon Jun 1, now on Fountain)
+
+### 📋 All-Clear
+
+Email ✓ | Calendar (no meetings today) ✓ | Slack (all 13 clean) ✓ | Discord ✓ | Scrin.io ✓ (Sunday data) | Sheets (alerts noted above) | Fountain (5/5 parts ✓) | Elena ✓ | Trello ✓ | Upwork ✓
+
+### ❓ Unresolved Questions
+
+1. **Philip (MS Teams)** — no monitoring script for `will@nustechnology.com` Teams DMs. Is this item active?
+2. **VuTQ Bailey W28 Fri** — was 4h an expected workday target (vs 8h) on Bailey? No documented Bailey hour target for VuTQ.
+3. **Fountain runway methodology** — "broad" (1,024.5h) vs "narrow" (356.5h) filter for remaining est. Which should be used consistently?
+
 
