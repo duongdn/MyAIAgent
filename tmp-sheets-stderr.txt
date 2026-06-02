@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "scripts/daily-sheets-scan-260602-tue.py", line 24, in <module>
+    from googleapiclient.discovery import build
+ModuleNotFoundError: No module named 'googleapiclient'

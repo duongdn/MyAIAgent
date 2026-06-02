@@ -55,8 +55,7 @@ run_piece() {
   fi
   log "Running: $piece"
   # Capture output in tmp file so rate-limit check is scoped to this piece only
-  local tmp_out
-  tmp_out=$(mktemp)
+  local tmp_out="$LOG_DIR/.piece-$piece.tmp"
   "$CLAUDE_BIN" -p "/me:daily-report $piece" \
     --dangerously-skip-permissions \
     > "$tmp_out" 2>&1

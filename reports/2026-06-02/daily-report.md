@@ -49,3 +49,30 @@ Window: 2026-06-01 09:00 +07:00 → now. `after:2026-06-01` search.
 - ↷ John Yi, Bailey, Rebecca: Slack clear, pending TuanNT task log check
 - ↷ Elena: Slack clear (SAM GUARD clean), pending Elena PRs check
 - ↷ James Diamond, Andrew Taraba, Neural, Fountain, Philip: not in this run
+
+---
+
+## Sheets all — 13:56 (+07:00) [mid-day snapshot]
+Week tabs: Maddy W9 · JohnYi W26 · Rebecca W27 · JamesDiamond W28 · Rory W14 · Franc W27 · Aysar W27 · Generator W43 · Paturevision W30 · Elena W11 (June 1–7)
+
+| Developer | Today | Weekly so far | Target | Status |
+|-----------|-------|--------------|--------|--------|
+| LongVV | 0h (Maddy W9) | 8h | 16h/wk | ✓ Sick leave today per email — 0h expected. Prorated target = 12.8h (Mon–Thu). 8h logged Mon. |
+| PhucVT | 0h (JamesDiamond W28) | 12h (sheet total) | 8h/day | ⏳ Mid-day, not yet logged |
+| TuanNT | 0h (JohnYi W26 + Rebecca W27 + Paturevision W30) | 6h (Rebecca W27) | 8h/day combined | ⏳ Mid-day, not yet logged |
+| VietPH | 0h (Paturevision W30) | 8h | 8h/day | ⏳ Mid-day, not yet logged |
+| KhanhHH | 0h (Generator W43 + Aysar W27) | Generator W43: 12.83h (incl NamNN 4h today) | 8h/day | ⏳ Mid-day — KhanhHH 0h in Generator+Aysar today; NamNN 4h logged in Generator |
+| LeNH | 0h (Rory W14 + Franc W27 + Aysar W27 + Rebecca W27) | Rory 11.67h + Franc 0.33h + Aysar 3.17h = 15.17h | 8h/day combined | ⏳ Mid-day, not yet logged |
+| Elena (TriNM) | 0h | 4h (TriNM W11 Mon: DP-666 2h + Active Alerts bug 2h) | varies | ⏳ Mid-day |
+
+**Notes:**
+- LongVV sick leave confirmed (duongdn@ email). 0h today = OK. Weekly 8h/12.8h adj. target — needs 4.8h over Wed–Fri.
+- All other devs show 0h for today's task rows (date blocks found). Normal at 14:00 — most log at end of day.
+- TuanNT combined 0h → John Yi, Rebecca, Bailey Trello items still pending end-of-day confirmation.
+- Elena W11: new KhanhHH not present (no sign since Mon scan showed only TriNM active).
+
+**Trello (sheets-dependent items):**
+- ↷ John Yi, Rebecca, Bailey: pending TuanNT end-of-day log
+- ↷ James Diamond: pending PhucVT end-of-day log
+- ✓ Maddy (LongVV): sick leave + Slack clear → complete (no alert)
+- ⚠️ Aysar: already skipped (no Slack daily report — unchanged)
