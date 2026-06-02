@@ -1,4 +1,4 @@
-# Daily Report — 2026-06-02 (Monday)
+# Daily Report — 2026-06-02 (Tuesday)
 
 **Period:** 2026-06-01 09:00 +07 → 2026-06-02 08:40 +07 (Tuesday — window from previous day's run)
 **Generated:** 2026-06-02 08:14 +07 *(initial scan used wrong Mon window — see CORRECTED section below)*
@@ -43,12 +43,12 @@ No meetings scheduled today across all accounts.
 
 ## Scrin.io — 08:16 (+07:00)
 
-- Data for: **Sunday 2026-06-01** (Monday `isYesterday` bug — returns Sunday, not Friday; Sunday = no workday check needed)
+- Data for: **Monday 2026-06-01** (Tuesday `isYesterday` = yesterday = workday ✓)
 - Employee tracked: **Nick** only
 - Hours: **7h 54m** (474 min — sessions 08:49–12:45 and 13:15–17:13, activity 95%/79%)
 - Applications: chrome, gnome-terminal-server, windsurf, cursor, Slack
 - TuanNT: not in Scrin data
-- **Status: OK** — Sunday, no obligation. Nick logged a full day.
+- **Status: OK** — Nick logged 7h 54m Mon Jun 1 ✓
 
 ---
 
@@ -392,41 +392,127 @@ All 6 items already complete (pre-completed from prior run):
 
 ---
 
-## Summary — 08:52 (+07:00)
+## Summary — 08:55 (+07:00)
+
+> Initial scan used wrong Monday window (Fri–Mon); corrected re-scan applied Jun 1 09:00 → Jun 2 08:40 window.
 
 ### 🔴 Action Required
 
 | Priority | Item | Detail |
 |----------|------|--------|
-| CRITICAL | FirstProject production error #887 | ChunkLoadError in production (Sun 31 May 16:49 UTC) — investigate JS chunk loading. See rick@ email. |
-| WARNING | Rollbar free tier exhausted | `rickfountain` account hit limit — errors may go untracked. Upgrade plan. |
-| WARNING | LeNH shortfall Fri 29 May | 7.5h logged vs 8h target (0.5h short, no leave). Send reminder via Matrix. |
-| WARNING | VuTQ shortfall Fri 29 May | 4h on Bailey W28 (under 8h, no leave). Noted. |
-| INFO | Fountain DatNT no sheet column | New dev DatNT on W29 plan (40h) but no Fountain Summary sheet column yet. |
-| INFO | Fountain: Kunal awaiting response | 3 unresolved comments (States update + ShipStation guest email). |
-| INFO | Snyk alert (marcel org) | Review carrick@ vulnerability alert when possible. |
+| CRITICAL | **FirstProject production error #887** | ChunkLoadError in production (Sun 31 May 23:49 +07). Outside today's window — likely missed by yesterday's report too. Needs investigation. |
+| WARNING | **Rollbar free tier exhausted** | `rickfountain` hit limit (Sun 31 May). Errors untracked until upgraded. |
+| WARNING | **LeNH shortfall Mon Jun 1** | 0h all 4 sheets, no leave. Send reminder after 10 AM. |
+| WARNING | **KhanhHH 0h Mon Jun 1** | No leave. Send reminder after 10 AM. |
+| WARNING | **VuTQ 0h Mon Jun 1** | On Fountain W29, no leave. Send reminder after 10 AM. |
+| INFO | **Fountain: Kunal 3 unresolved comments** | States update + ShipStation guest email. 4 stuck cards (17–41 days). |
+| INFO | **Fountain DatNT no sheet column** | New dev DatNT (40h W29) not yet in Summary sheet. |
+| INFO | **Snyk alert (marcel org)** | Review carrick@ when possible. |
+| INFO | **FountainStaging errors** | 2 errors in window (staging only, not production). |
 
 ### ✅ Completed Actions
 
-- Elena PRs #303 (redmine-78803) + #304 (DP-666-autoscan) → merged, deployed, Redmine #78803 → Deployed
+- Elena PRs #303 (redmine-78803) + #304 (DP-666-autoscan) → merged, deployed ✓, Redmine #78803 → Deployed ✓
 - xoxc tokens refreshed: Amazing Meds ✓, Equanimity ✓
-- Trello: 17/19 Check Progress items ✓, 6/6 Check Mail ✓
+- Trello: 17/19 Check Progress ✓, 6/6 Check Mail ✓
+- Vinn Mon Jun 1 report confirmed (10:12 +07) ✓
 
-### ⏰ Reminders to Send (~10 AM)
+### 📋 All-Clear (in-window)
 
-Run `/daily-report reminders --send-reminder` after 10 AM:
-- **LeNH** — `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (0h Mon Jun 1)
-- **KhanhHH** — `!rwLbvLBnrRAYMaOPaD:nustechnology.com` (0h Mon Jun 1)
-- **VuTQ** — `!SHdFKwrYpRhWJBtiBv:nustechnology.com` (0h Mon Jun 1, now on Fountain)
+Slack (13 clean) ✓ | Discord ✓ | Calendar (no meetings) ✓ | Scrin.io (Nick 7h 54m Mon ✓) | Fountain 5/5 parts ✓ | Elena ✓ | Neural Contract ✓
 
-### 📋 All-Clear
+### ⏰ Reminders — send after 10 AM (`/daily-report reminders --send-reminder`)
 
-Email ✓ | Calendar (no meetings today) ✓ | Slack (all 13 clean) ✓ | Discord ✓ | Scrin.io ✓ (Sunday data) | Sheets (alerts noted above) | Fountain (5/5 parts ✓) | Elena ✓ | Trello ✓ | Upwork ✓
+| Developer | Room | Reason |
+|-----------|------|--------|
+| LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | 0h Mon Jun 1, all 4 sheets |
+| KhanhHH | `!rwLbvLBnrRAYMaOPaD:nustechnology.com` | 0h Mon Jun 1, no leave |
+| VuTQ | `!SHdFKwrYpRhWJBtiBv:nustechnology.com` | 0h Mon Jun 1, Fountain W29 |
 
 ### ❓ Unresolved Questions
 
-1. **Philip (MS Teams)** — no monitoring script for `will@nustechnology.com` Teams DMs. Is this item active?
-2. **VuTQ Bailey W28 Fri** — was 4h an expected workday target (vs 8h) on Bailey? No documented Bailey hour target for VuTQ.
-3. **Fountain runway methodology** — "broad" (1,024.5h) vs "narrow" (356.5h) filter for remaining est. Which should be used consistently?
+1. **Philip (MS Teams)** — no monitoring script for `will@nustechnology.com` Teams DMs. Is this item still active?
+2. **Fountain runway** — broad (1,024h) vs narrow (356h) filter. Which is canonical for tracking?
 
+---
+
+## CORRECTED Re-scan (Tuesday window: Jun 1 09:00 → Jun 2 08:40 +07) — 08:55 (+07:00)
+
+> Previous run used wrong Mon window (from Fri May 29 08:00+07). This corrected section applies the proper window: 2026-06-01T09:00+07 (= epoch 1748746800 = 02:00 UTC Jun 1).
+
+### Email (corrected)
+
+| Account | Emails since Jun 1 09:00+07 | Key content |
+|---------|----------------------------|-------------|
+| duongdn@nustechnology.com | 5 | Leave requests: HungPN early leave 16h (Mon 1/6 14:05+07); LongVV leave request (Mon 1/6 14:58+07); Reply from ChienTX (Mon 1/6 17:07+07). Google Sheets "NUS - Cline - OhCleo" shared (Mon 1/6 14:41+07). |
+| carrick@nustechnology.com | 3 | Slack confirmation codes ×2 (Mon 1/6 ~09:52 UTC). **Snyk vulnerability alert — marcel org** (Mon 1/6 13:51 UTC). |
+| nick@nustechnology.com | 25 | ClickUp: Xero migration tasks ×5 (Mon 09:07–09:08 UTC). Azure DevOps CNA.Operations.App PRs #1572–1574 (Mon 12:17–12:18 UTC). candasurveyors daily task completions ×9 (Mon 21:00 UTC). No John Yi mentions. |
+| rick@nustechnology.com | 12 | **FountainStaging BugSnag:** cart_items#create StandardError (07:24 UTC — before window), ActionNotFound GET (07:48 — before), NoMethodError not_found ×2 (07:51 + 08:35 — before), NoMethodError orders#create (08:43 — before). **In-window only:** AbstractController::ActionNotFound POST (09:32 UTC ✓), ActionView::MissingTemplate settings#show (10:42 UTC ✓). Rollbar InfinityRoses daily summary Mon Jun 1 (08:07 UTC — before window). Rollbar FirstProject + FirstProject ×2 (15:08 UTC ✓). LiveChat invoice (15:05 UTC ✓). |
+| kai@nustechnology.com | 3 | Jira: Madhuraka mentioned Kai on LIFM2-428 (Mon 12:27 UTC). LIFM2-428 Product Authenticity Certificate update (Mon 12:31 UTC). LIFM2-442 Price rounding (Mon 17:36 UTC). |
+| ken@nustechnology.com | 50 | GitHub PR activity on welligence/web, country-manager, WellStack, amocc-material (Mon 14:57–16:42 UTC). No Precognize alerts. |
+
+### Email Alerts (corrected — only items with Date >= Jun 1 09:00+07 = 02:00 UTC)
+
+- **[INFO] FountainStaging errors (in-window):** AbstractController::ActionNotFound POST (Mon 1/6 09:32 UTC ✓), ActionView::MissingTemplate in settings#show (Mon 1/6 10:42 UTC ✓) — staging only, not production.
+- **[INFO] Snyk vulnerability alert** — marcel org (carrick@, Mon 1/6 13:51 UTC) — review when possible.
+- **[INFO] Rollbar FirstProject Daily Summary** — Mon Jun 1 15:08 UTC — routine daily digest, no new production error in this window.
+- **[DROPPED] FirstProject production error #887** — Sun 31 May 16:49 UTC — **outside corrected window** (before Jun 1 02:00 UTC). Already noted in prior scan; remains an open action item.
+- **[DROPPED] Rollbar free tier exhausted** — Sun 31 May — **outside corrected window**. Already noted; remains an open action item.
+- **[DROPPED] InfinityRoses Rollbar daily summary** — Mon Jun 1 08:07 UTC — before 09:00+07 cutoff, excluded.
+- **[DROPPED] FountainStaging errors ×4** — before 02:00 UTC Jun 1 (cart_items, ActionNotFound GET, NoMethodError ×2 before 08:43 UTC) — outside window.
+
+**Net change:** 2 critical/warning email alerts removed (FirstProject #887, Rollbar free tier) — both were May 31 events outside the corrected window. They remain open action items but belong to the prior report period.
+
+### Calendar (Jun 2 events)
+
+| Account | Events today Jun 2 |
+|---------|-------------------|
+| duongdn | None |
+| carrick | None |
+| nick | None |
+| rick | None (CalDAV returned stale past entries — HEAL Meeting May 25, OmniGPT Daily Sync Dec 2024) |
+| kai | None |
+| ken | None |
+
+No meetings today.
+
+### Slack (corrected — since Jun 1 09:00+07 = epoch 1748746800)
+
+| Workspace | Msgs (filtered) | Key content | Gate |
+|-----------|----------------|-------------|------|
+| Baamboozle (Aysar MPDM) | 1 | Carrick update Jun 1 17:33+07: invoice memo/footer deployed to nusdev; Admin tool for game cover images (#599) in-progress | ✓ |
+| William Bills | 1 | Lucas → Oliver Jun 1 ~16:00+07: shop-page 66h scope breakdown in #mx — dev discussion, not a person-status alert | ✓ |
+| Xtreme Soft Solutions | 0 | **No messages in corrected window** (Kai's 2 messages were from May 29 — outside Jun 1 09:00+07) | ⚠️ No Tue Jun 2 Kai report yet (08:40+07, expected later) |
+| RDC - FM Monitoring | 0 | No dmetiner alerts | ✓ |
+| Swift Studio | 0 | No issues | ✓ |
+| SAM GUARD - Mobile | 0 | No activity | ✓ |
+| GLOBAL GRAZING SERVICES | 0 | No alerts | ✓ |
+| Amazing Meds | 0 | No activity | ✓ |
+| Generator | 0 | No Elliott/Violet alerts | ✓ |
+| LegalAtoms | 0 | No alerts | ✓ |
+| MyPersonalFootballCoach | 0 | No activity | ✓ |
+| Equanimity | 0 | Quiet — normal | ✓ |
+| Aigile Dev | 0 | No activity | ✓ |
+
+**Net change vs old scan:** Xtreme now shows 0 (the 2 Kai messages on May 29 were in the old window but are outside the corrected Jun 1+ window). No new Kai Tue report yet — expected after ~09:00+07.
+
+### Discord (corrected — since Jun 1 09:00+07)
+
+- **AirAgri (nusvinn):** Vinn Mon report **found** — Jun 1 10:12:35+07 "Just report my process today: Check and discuss about project. Review Jon & Leon code PR 458, 459, 460. Working on External Trainer Support…" ✓. Vinn also active Jun 2 01:32+07 (response to Paul re: Traccar device). **Tue Jun 2 daily report: not yet posted** (it's 08:40+07 — expected later today). Jeff (airagri-flutter) Mon report ✓ Jun 1 10:20+07.
+- **Bizurk (nuscarrick):** 0 messages, 0 Andrew DMs — silence normal per rules ✓.
+
+**Net change vs old scan:** AirAgri Vinn Mon report confirmed in-window (was "not yet" in old scan due to wrong window start). Fri May 29 report no longer in scope. Jeff Mon report confirmed.
+
+### What Changed vs Friday-Window Scan
+
+| Item | Old scan (May 29 window) | Corrected (Jun 1 09:00+07 window) |
+|------|--------------------------|-----------------------------------|
+| FirstProject #887 production error | [CRITICAL] included | **Dropped** — May 31, outside window (still open action) |
+| Rollbar free tier exhausted | [WARNING] included | **Dropped** — May 31, outside window (still open action) |
+| Xtreme Slack (Kai) | 2 messages (May 29) | **0 messages** — May 29 is outside Jun 1+ window; no Tue report yet |
+| AirAgri Vinn Mon report | "not yet" | **Confirmed** — Jun 1 10:12+07 ✓ |
+| FountainStaging BugSnag | 7 errors | **2 in-window** (09:32 + 10:42 UTC Mon) — others before Jun 1 02:00 UTC |
+| InfinityRoses Rollbar summary | Included | **Dropped** — 08:07 UTC before cutoff |
+| Aysar MPDM | 1 message Jun 1 | Same ✓ |
+| William Bills Lucas msg | 1 message Jun 1 | Same ✓ |
 
