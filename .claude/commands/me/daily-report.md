@@ -329,6 +329,8 @@ Supports individual developer targeting:
 2. Extract `apiToken` from page (`var apiToken = "..."`)
 3. POST `/api/v2/GetReport` with `X-SSM-Token` header, `isYesterday: true`
 
+**Timezone:** Scrin.io returns session times in UTC. Always convert to UTC+7 (+07:00) before reporting. Display sessions in chronological UTC+7 order.
+
 **Rule:** TuanNT task log (John Yi) hours ≤ Scrin.io hours = OK (not over-inflated). Compare John Yi log ONLY — not TuanNT's total across all projects.
 
 ---
