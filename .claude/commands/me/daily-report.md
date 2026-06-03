@@ -457,7 +457,7 @@ Supports card and item-level targeting:
 - `/daily-report trello progress` — Check Progress card, all items
 - `/daily-report trello mail` — Check Mail card, all items
 
-**⚠️ IDEMPOTENCY — MANDATORY: Before creating any Trello card or checklist, always search the "Daily" list (`GET /1/lists/{DAILY_LIST}/cards`) for a card whose name contains today's date (e.g. "2026-06-03"). If it already exists, use that card's ID — do NOT create a new one. Only create if no matching card exists. This prevents duplicate cards when the script runs more than once.**
+**⚠️ NEVER CREATE TRELLO CARDS OR CHECKLISTS. Cards are auto-created by Trello Power-Up (recurring). Only find the existing card and mark checklist items complete/incomplete. If today's card is not found yet, log it and skip — do not create.**
 
 **CRITICAL: Reuse existing pieces, never duplicate monitoring logic.**
 When running `trello progress {item}`, FIRST run the mapped source piece(s), THEN use findings to complete/skip Trello.
