@@ -27,6 +27,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [user_role.md](user_role.md) — PM at NUS Technology, oversees 10+ client projects, daily monitoring workflow
 
 ## Reference (Static Lookup)
+- [reference_workstream.md](reference_workstream.md) — **Workstream (workstream.nustechnology.com)** — Maddy=Xtreme Soft Solutions, Rebecca=MissSwimwear. Scripts: workstream-login.js, workstream-fetch-project-week.js
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, weekly report comparison
 - [reference_mpfc_github.md](reference_mpfc_github.md) — MPFC GitHub repo is mypersonalfootballcoach/wp (not nustechnology/...)

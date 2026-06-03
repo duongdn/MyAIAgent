@@ -34,6 +34,7 @@ ENC_FILES=(
   config/.newrelic-config.json.enc
   config/.rollbar-config.json.enc
   config/.cloudflare-config.json.enc
+  config/.workstream-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
