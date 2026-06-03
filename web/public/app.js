@@ -21,18 +21,13 @@ const costTextEl     = document.getElementById('costText');
 const durationTextEl = document.getElementById('durationText');
 
 // Chat DOM refs
-const tabSkillsEl    = document.getElementById('tabSkills');
-const tabChatEl      = document.getElementById('tabChat');
-const terminalWrapEl = document.getElementById('terminalWrap');
-const chatWrapEl     = document.getElementById('chatWrap');
-const skillsCtrlEl   = document.getElementById('skillsControls');
-const chatCtrlEl     = document.getElementById('chatControls');
-const skillsActEl    = document.getElementById('skillsActions');
-const chatActEl      = document.getElementById('chatActions');
+const chatPanelEl    = document.getElementById('chatPanel');
+const chatToggleBtnEl= document.getElementById('chatToggleBtn');
+const closeChatBtnEl = document.getElementById('closeChatBtn');
+const clearChatBtnEl = document.getElementById('clearChatBtn');
 const chatMessagesEl = document.getElementById('chatMessages');
 const chatInputEl    = document.getElementById('chatInput');
 const sendBtnEl      = document.getElementById('sendBtn');
-const clearChatBtnEl = document.getElementById('clearChatBtn');
 
 // ── Skill loading ──────────────────────────────────────────────────────────
 
@@ -62,7 +57,6 @@ function renderSkillList(skills) {
     </div>
   `).join('');
 
-  // Attach click handlers
   skillListEl.querySelectorAll('.skill-item').forEach(el => {
     el.addEventListener('click', () => selectSkill(el.dataset.id, el.dataset.name));
   });
@@ -74,7 +68,6 @@ function selectSkill(id, name) {
   activeBadgeEl.classList.remove('empty', 'running');
   runBtnEl.disabled = activeRunId !== null;
 
-  // Update active state in list
   skillListEl.querySelectorAll('.skill-item').forEach(el => {
     el.classList.toggle('active', el.dataset.id === id);
   });
@@ -106,7 +99,6 @@ async function startRun() {
 
   const args = argsInputEl.value.trim();
 
-  // UI state
   runBtnEl.disabled = true;
   stopBtnEl.classList.remove('hidden');
   activeBadgeEl.classList.add('running');
@@ -164,11 +156,9 @@ function handleStreamEvent(ev, runId) {
 
   switch (ev.type) {
     case 'init':
-      // silence
       break;
 
     case 'started':
-      // already shown prompt
       break;
 
     case 'text':
@@ -185,7 +175,6 @@ function handleStreamEvent(ev, runId) {
       break;
 
     case 'result':
-      // stats shown in done
       break;
 
     case 'done': {
@@ -271,14 +260,11 @@ function appendDoneBanner(ok, duration) {
   terminalEl.appendChild(div);
 }
 
-// Simple markdown-to-DOM renderer (handles headers, code blocks, inline code, bold)
 function renderMarkdownText(text) {
-  // Split into code blocks and normal text
   const parts = text.split(/(```[\s\S]*?```)/g);
 
   for (const part of parts) {
     if (part.startsWith('```')) {
-      // Code block
       const inner = part.replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
       const pre = document.createElement('pre');
       const code = document.createElement('code');
@@ -287,7 +273,6 @@ function renderMarkdownText(text) {
       pre.className = 'term-text';
       terminalEl.appendChild(pre);
     } else if (part.trim()) {
-      // Normal text — split by lines and handle inline formatting
       const lines = part.split('\n');
       let buffer = '';
 
@@ -301,8 +286,6 @@ function renderMarkdownText(text) {
           hdr.textContent = line.replace(/^#{1,3} /, '');
           div.appendChild(hdr);
           terminalEl.appendChild(div);
-        } else if (/^\s*[-*+] /.test(line) || /^\s*\d+\. /.test(line)) {
-          buffer += line + '\n';
         } else {
           buffer += line + '\n';
         }
@@ -359,41 +342,34 @@ function setStatus(msg) {
 // ── Keyboard shortcuts ─────────────────────────────────────────────────────
 
 document.addEventListener('keydown', e => {
-  // Ctrl+K → focus search
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault();
     skillSearchEl.focus();
     skillSearchEl.select();
   }
-  // Escape → clear search or stop run
   if (e.key === 'Escape') {
     if (activeRunId) { stopRun(); }
     else if (document.activeElement === skillSearchEl) { skillSearchEl.value = ''; renderSkillList(allSkills); }
   }
 });
 
-// ── Tab switching ──────────────────────────────────────────────────────────
+// ── Chat panel toggle ──────────────────────────────────────────────────────
 
-let activeTab = 'skills';
-
-function switchTab(tab) {
-  activeTab = tab;
-  const isChat = tab === 'chat';
-
-  tabSkillsEl.classList.toggle('active', !isChat);
-  tabChatEl.classList.toggle('active', isChat);
-  terminalWrapEl.classList.toggle('hidden', isChat);
-  chatWrapEl.classList.toggle('hidden', !isChat);
-  skillsCtrlEl.classList.toggle('hidden', isChat);
-  chatCtrlEl.classList.toggle('hidden', !isChat);
-  skillsActEl.classList.toggle('hidden', isChat);
-  chatActEl.classList.toggle('hidden', !isChat);
-
-  if (isChat) chatInputEl.focus();
+function openChat() {
+  chatPanelEl.classList.remove('hidden');
+  chatToggleBtnEl.classList.add('active');
+  chatInputEl.focus();
 }
 
-tabSkillsEl.addEventListener('click', () => switchTab('skills'));
-tabChatEl.addEventListener('click', () => switchTab('chat'));
+function closeChat() {
+  chatPanelEl.classList.add('hidden');
+  chatToggleBtnEl.classList.remove('active');
+}
+
+chatToggleBtnEl.addEventListener('click', () => {
+  chatPanelEl.classList.contains('hidden') ? openChat() : closeChat();
+});
+closeChatBtnEl.addEventListener('click', closeChat);
 
 // ── Chat ───────────────────────────────────────────────────────────────────
 
@@ -420,6 +396,10 @@ async function sendChatMessage() {
 
   chatInputEl.value = '';
   chatInputEl.style.height = 'auto';
+
+  // Remove welcome hint on first message
+  const hint = chatMessagesEl.querySelector('.chat-hint');
+  if (hint) hint.remove();
 
   appendChatMessage('user', msg);
 
@@ -487,7 +467,6 @@ chatInputEl.addEventListener('keydown', e => {
   }
 });
 
-// Auto-resize textarea
 chatInputEl.addEventListener('input', () => {
   chatInputEl.style.height = 'auto';
   chatInputEl.style.height = Math.min(chatInputEl.scrollHeight, 160) + 'px';
@@ -495,7 +474,7 @@ chatInputEl.addEventListener('input', () => {
 
 clearChatBtnEl.addEventListener('click', () => {
   chatHistory = [];
-  chatMessagesEl.innerHTML = '<div class="chat-hint">Ask me anything — daily reports, monitoring, code, or general questions.</div>';
+  chatMessagesEl.innerHTML = '<div class="chat-hint">Ask me anything while your skill runs…</div>';
 });
 
 // ── Init ───────────────────────────────────────────────────────────────────

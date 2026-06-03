@@ -29,6 +29,9 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 /* ── Layout ── */
 .layout { display: grid; grid-template-columns: var(--sidebar-w) 1fr; height: 100vh; }
 
+/* main-area splits terminal + chat panel side by side */
+.main-area { display: flex; flex-direction: row; overflow: hidden; }
+
 /* ── Sidebar ── */
 .sidebar {
   background: var(--bg2);
@@ -128,12 +131,14 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 
 .loading-skills { padding: 20px 14px; color: var(--text-dim); font-size: 13px; }
 
-/* ── Main ── */
+/* ── Main (terminal side) ── */
 .main {
+  flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: var(--bg);
+  min-width: 0;
 }
 
 /* ── Toolbar ── */
@@ -350,57 +355,76 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 .skill-badge.running { animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0.5; } }
 
-/* ── Tabs ── */
-.tabs {
-  display: flex;
-  gap: 4px;
-  padding-right: 12px;
-  border-right: 1px solid var(--border);
-  margin-right: 4px;
-  flex-shrink: 0;
-}
-.tab-btn {
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--radius);
+/* ── Chat toggle button ── */
+.btn-chat-toggle {
+  padding: 6px 10px;
+  font-size: 15px;
   color: var(--text-dim);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 5px 11px;
-  transition: all 0.12s;
-  white-space: nowrap;
+  border-color: transparent;
 }
-.tab-btn:hover { color: var(--text-bright); background: var(--bg3); }
-.tab-btn.active { color: var(--text-bright); background: var(--bg3); border-color: var(--border); }
+.btn-chat-toggle:hover { color: var(--text-bright); background: var(--bg3); border-color: var(--border); }
+.btn-chat-toggle.active { color: var(--blue); background: var(--bg3); border-color: var(--border); }
 
-/* ── Chat panel ── */
-.chat-wrap {
-  flex: 1;
+/* ── Chat side panel ── */
+.chat-panel {
+  width: 340px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  border-left: 1px solid var(--border);
   background: var(--bg);
+  overflow: hidden;
 }
+.chat-panel.hidden { display: none; }
+
+.chat-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: var(--toolbar-h);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  flex-shrink: 0;
+}
+.chat-panel-title {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+.btn-icon-sm {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: all 0.12s;
+}
+.btn-icon-sm:hover { color: var(--text-bright); background: var(--bg3); }
 
 .chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 20px 24px;
+  padding: 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
-.chat-messages::-webkit-scrollbar { width: 5px; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
 .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
 .chat-hint {
   color: var(--text-dim);
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
-  padding: 40px 0 10px;
+  padding: 24px 0 8px;
+  line-height: 1.6;
 }
 
 .chat-msg { display: flex; }
@@ -408,32 +432,35 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 .chat-msg-assistant { justify-content: flex-start; }
 
 .chat-bubble {
-  max-width: 72%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 13.5px;
-  line-height: 1.65;
+  max-width: 88%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
   word-break: break-word;
   white-space: pre-wrap;
 }
 .chat-msg-user .chat-bubble {
   background: #1a3a5c;
   color: #e0f0ff;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 3px;
 }
 .chat-msg-assistant .chat-bubble {
   background: var(--bg3);
   color: var(--text);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 3px;
   border: 1px solid var(--border);
 }
 .chat-msg-assistant .chat-bubble strong { color: var(--text-bright); }
-.chat-msg-assistant .chat-bubble code { background: var(--bg2); padding: 1px 5px; border-radius: 3px; font-size: 12px; color: var(--cyan); font-family: var(--font-mono); }
+.chat-msg-assistant .chat-bubble code {
+  background: var(--bg2); padding: 1px 4px; border-radius: 3px;
+  font-size: 11.5px; color: var(--cyan); font-family: var(--font-mono);
+}
 
 @keyframes blink-cursor { 50% { opacity: 0; } }
 .chat-cursor {
   display: inline-block;
-  width: 2px; height: 14px;
+  width: 2px; height: 13px;
   background: var(--accent);
   margin-left: 2px;
   vertical-align: text-bottom;
@@ -442,7 +469,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 
 .chat-footer {
   border-top: 1px solid var(--border);
-  padding: 12px 16px;
+  padding: 10px 12px;
   background: var(--bg2);
   flex-shrink: 0;
 }
@@ -450,11 +477,11 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
 .chat-input-wrap {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 6px;
   background: var(--bg3);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 8px 8px 8px 14px;
+  padding: 7px 7px 7px 12px;
   transition: border-color 0.15s;
 }
 .chat-input-wrap:focus-within { border-color: var(--accent); }
@@ -465,22 +492,22 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(-
   border: none;
   color: var(--text);
   font-family: var(--font-ui);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
   outline: none;
   resize: none;
-  max-height: 160px;
+  max-height: 120px;
   overflow-y: auto;
 }
 .chat-input::placeholder { color: var(--text-dim); }
 
 .btn-send {
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   padding: 0;
-  border-radius: 8px;
+  border-radius: 7px;
   border-color: var(--green-dim);
   color: var(--green);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1;
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
