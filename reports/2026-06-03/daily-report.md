@@ -311,3 +311,95 @@ No reminders warranted at this time. Re-check at standard morning window (after 
 ---
 
 *Report generated: 2026-06-03T05:38+07:00 | cron mode | Window: 2026-06-02T18:42 → 2026-06-03T05:38 +07*
+
+---
+
+## Refresh — 09:11 (+07:00)
+
+Window: 2026-06-03T05:38 → 09:11 +07. Manual check triggered by user.
+
+### Elena — DEPLOYED ✓
+
+MayBanServer now reachable (was LAN issue during cron). Deployed PRs #303 + #304:
+- `git pull` → Already up to date
+- `npx ng build --configuration development` → 23.357s ✓
+- PR #303 (redmine-78803): Redmine already at "Deployed" (status_id=10) ✓
+- PR #304 (DP-666): Deployed. Announce to Matrix Elena room pending (token expired).
+
+`config/.elena-pending-actions.json` updated: PRs #303 + #304 marked `deployed: true`.
+
+⚠️ **SAM GUARD alert (missed by 5AM cron):** `process-digital-plant` channel has 2 client messages from Jun 2 ~02:24 AM +07:
+- `michelle`: "I tested it and saw there are still some bugs opened..."
+- `lena`: "Can you estimate how quickly it will be fixed?"
+
+Elena SamGuard Trello item stays ⚠️ incomplete — client asking about bug fix ETA.
+
+### Slack — Partial re-scan
+
+| Workspace | Msgs since 5:38AM | Notes |
+|-----------|------------------|-------|
+| Baamboozle (MPDM) | 1 (pre-5:38AM) | Aysar daily report: "Today's update: Admin tool + 55% discount..." Jun 2 20:50 ✓ |
+| RDC - FM Monitoring | 5 (pre-5:38AM) | Carrick: deployed MapViewer to turkiye.fmscan.com (Jun 3 00:20 +07) |
+| SAM GUARD | 3 (pre-5:38AM) | HubSpot MQL (auto) + client bug messages (⚠️ see Elena above) |
+| Generator | 1 (08:46 +07) | rudi: "Just following up on this" (business-analysts ch) |
+| Amazing Meds | 0 | quiet |
+| Swift/Xtreme/WilliamBills | 0 | quiet |
+| Equanimity/Aigile | 0 | quiet (Aigile: 1 auto blog-draft warning) |
+
+xoxc tokens: Amazing Meds ✓ valid, Equanimity ✓ valid.
+
+### Discord — AirAgri active
+
+| Server | Msgs | Notes |
+|--------|------|-------|
+| AirAgri (nusvinn) | 25 | Vinn active: responded to Mary re External Trainer feature ✓. Jeff: continuing offline Investigation impl ✓. jdiamond/pauldiamond: aa-00026 device add issue in airagri-testing (investigating, need prod for tomorrow). |
+| Bizurk (nuscarrick) | 0 | quiet |
+
+No Vinn formal "Just report my process today:" daily report found yet (9 AM). Activity confirmed.
+
+### Google Sheets — All 0h (normal 9AM)
+
+| Developer | Today | Weekly | Notes |
+|-----------|-------|--------|-------|
+| LongVV | 0h | 8h/16h | ⏳ normal |
+| PhucVT | 0h | 24h/40h | ✓ ahead |
+| TuanNT | 0h | — | ⏳ normal |
+| VietPH | 0h | 18.5h/40h | ✓ ahead |
+| KhanhHH | 0h | 12.83h/40h | ⏳ normal |
+| LeNH | 0h | — | ⏳ normal |
+
+### Matrix token — Still expired
+
+`matrix-token-refresh.js` ran but SSO browser profile session expired ("Failed to capture token. Manual login needed."). Manual action required: `node scripts/matrix-login.js` (needs browser).
+
+### Trello — Updated 09:11 (+07:00)
+
+Card `6a1f6e8d20600cebc7d8aaa5` (top Check Progress card):
+
+| Item | Status | Reason |
+|------|--------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ complete | Xtreme quiet; Kai 16h/wk no daily report needed |
+| John Yi - Amazing Meds | ✓ complete | Amazing Meds quiet; Scrin 8h Jun 2 ✓ |
+| James Diamond - Vinn | ✓ complete | Vinn + Jeff active in AirAgri ✓ |
+| Rory | ✓ complete | Swift quiet |
+| Aysar | ✓ complete | MPDM: daily report Jun 2 20:50 ✓ |
+| Franc | ✓ complete | RDC quiet |
+| Elliott | ✓ complete | Generator quiet |
+| MPFC | ✓ complete | quiet |
+| Marcel | ✓ complete | Equanimity quiet |
+| Raymond - LegalAtoms | ✓ complete | quiet |
+| Neural Contract | ✓ complete | quiet |
+| Andrew Taraba | ✓ complete | Bizurk quiet |
+| Rebecca - William Bills | ✓ complete | William Bills quiet |
+| Colin | ✓ complete | Aigile quiet |
+| Philip | ✓ complete | quiet |
+| Elena - SamGuard Digital Plant | ⚠️ incomplete | Client bugs reported ("still bugs opened" + fix ETA asked) |
+| Bailey | ⚠️ incomplete | Upwork expired — cannot verify |
+| Fountain | ⚠️ incomplete | Customer comments need action + Matrix token expired |
+| Elena - WordPress SamGuard | ⚠️ incomplete | No headless browser available |
+
+Check Mail: all 6 ✓ complete (done by 5AM cron, card archived).
+
+### Reminders — 09:11 (+07:00)
+
+All devs at 0h today — normal at 9AM. No reminders sent (--send-reminder not set).

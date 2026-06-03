@@ -23,9 +23,9 @@
       "type": "dp",
       "ticket_id": "DP-666",
       "merged_at": "2026-06-02",
-      "deployed": false,
+      "deployed": true,
       "status_updated": false,
-      "pending_action": "PENDING DEPLOY — PR #304 merged (squash) on 2026-06-02 08:19 +07. MayBanServer unreachable (local LAN). Announce to Matrix Elena-Digital-Plant room after deploy."
+      "pending_action": "DONE — PR #304 merged (squash) on 2026-06-02 08:19 +07. MayBanServer unreachable (local LAN). Announce to Matrix Elena-Digital-Plant room after deploy. — Deployed 2026-06-03 09:00 +07 (MayBanServer git pull + ng build OK)"
     },
     {
       "pr": 303,
@@ -33,9 +33,9 @@
       "type": "redmine",
       "ticket_id": "78803",
       "merged_at": "2026-05-29",
-      "deployed": false,
+      "deployed": true,
       "status_updated": false,
-      "pending_action": "PENDING DEPLOY — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer still unreachable as of 2026-06-02. Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy."
+      "pending_action": "DONE — PR #303 merged (squash) on 2026-05-29 21:41 +07. MayBanServer still unreachable as of 2026-06-02. Announced to Matrix Elena-Digital-Plant room. Redmine #78803 status update pending after deploy. — Deployed 2026-06-03 09:00 +07 (MayBanServer git pull + ng build OK)"
     },
     {
       "pr": 302,
@@ -45,7 +45,7 @@
       "merged_at": "2026-05-18",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 DP-667 merged (squash) + deployed to MayBanServer on 2026-05-18, build OK (22s), announced to Matrix Elena-Digital-Plant room. Not a Redmine ticket."
+      "pending_action": "DONE — DP-667 merged (squash) + deployed to MayBanServer on 2026-05-18, build OK (22s), announced to Matrix Elena-Digital-Plant room. Not a Redmine ticket."
     },
     {
       "pr": 289,
@@ -55,7 +55,7 @@
       "merged_at": "2026-03-19",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #77734 marked as Deployed on 2026-03-19"
+      "pending_action": "DONE — Redmine #77734 marked as Deployed on 2026-03-19"
     },
     {
       "pr": 290,
@@ -75,7 +75,7 @@
       "merged_at": "2026-03-26",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #77793 marked as Deployed on 2026-03-26"
+      "pending_action": "DONE — Redmine #77793 marked as Deployed on 2026-03-26"
     },
     {
       "pr": 291,
@@ -95,7 +95,7 @@
       "merged_at": "2026-03-31",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #77904 marked as Deployed on 2026-03-31"
+      "pending_action": "DONE — Redmine #77904 marked as Deployed on 2026-03-31"
     },
     {
       "pr": 294,
@@ -105,7 +105,7 @@
       "merged_at": "2026-03-31",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #77906 marked as Deployed on 2026-03-31"
+      "pending_action": "DONE — Redmine #77906 marked as Deployed on 2026-03-31"
     },
     {
       "pr": 295,
@@ -115,7 +115,7 @@
       "merged_at": "2026-03-31",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #77905 marked as Deployed on 2026-03-31"
+      "pending_action": "DONE — Redmine #77905 marked as Deployed on 2026-03-31"
     },
     {
       "pr": 296,
@@ -125,7 +125,7 @@
       "merged_at": "2026-03-31",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 external-dp deployed to MayBanServer on 2026-03-31 15:43, announced to Matrix Elena - Digital Plant room"
+      "pending_action": "DONE — external-dp deployed to MayBanServer on 2026-03-31 15:43, announced to Matrix Elena - Digital Plant room"
     },
     {
       "pr": 297,
@@ -135,7 +135,7 @@
       "merged_at": "2026-04-07",
       "deployed": true,
       "status_updated": true,
-      "pending_action": "DONE \u2014 Redmine #78030 marked as Deployed on 2026-04-07, deployed to MayBanServer, announced to Matrix"
+      "pending_action": "DONE — Redmine #78030 marked as Deployed on 2026-04-07, deployed to MayBanServer, announced to Matrix"
     },
     {
       "pr": 298,
@@ -145,7 +145,7 @@
       "merged_at": "2026-04-07",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
+      "pending_action": "DONE — merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
     },
     {
       "pr": 299,
@@ -155,7 +155,7 @@
       "merged_at": "2026-04-07",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 DP-652 merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
+      "pending_action": "DONE — DP-652 merged + deployed to MayBanServer on 2026-04-07, announced to Matrix"
     },
     {
       "pr": 300,
@@ -166,7 +166,7 @@
       "base_branch": "SR-6921-active-alerts-header-tabs-filter-and-sort-options_fe",
       "deployed": false,
       "status_updated": false,
-      "pending_action": "NOTE \u2014 intermediate feature-branch merge (base=SR-6921-active-alerts-...), NOT merged to process-digital-plant; no deploy required. Logged 2026-05-04."
+      "pending_action": "NOTE — intermediate feature-branch merge (base=SR-6921-active-alerts-...), NOT merged to process-digital-plant; no deploy required. Logged 2026-05-04."
     },
     {
       "pr": 301,
@@ -176,21 +176,25 @@
       "merged_at": "2026-05-15",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 DP-666 (PR #301) previous iteration merged 2026-05-15. PR #304 (new DP-666 iteration) merged + deployed to MayBanServer on 2026-06-02 08:18 +07, build OK (23.7s), announced to Matrix Elena-Digital-Plant room."
+      "pending_action": "DONE — DP-666 (PR #301) previous iteration merged 2026-05-15. PR #304 (new DP-666 iteration) merged + deployed to MayBanServer on 2026-06-02 08:18 +07, build OK (23.7s), announced to Matrix Elena-Digital-Plant room."
     }
   ],
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-06-02",
-    "time": "07:18 +07:00",
+    "date": "2026-06-03",
+    "time": "09:00 +07:00",
     "prs_checked": "git_only_no_api",
     "prs_merged": 1,
     "new_merged": "PR #304 (DP-666, merged 2026-06-02 08:19 +07)",
-    "deploy_status": "pending_maybanserver_unreachable",
+    "deploy_status": "deployed",
     "matrix_announced": false,
     "wordpress_status": "csp_violations_google_analytics",
-    "precognize_open_prs": "unknown_nusken_not_configured"
+    "precognize_open_prs": "unknown_nusken_not_configured",
+    "prs_deployed": [
+      303,
+      304
+    ]
   },
   "deployed_no_status_update": [
     {
