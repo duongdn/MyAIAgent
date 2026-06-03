@@ -14,6 +14,7 @@ const ALL_SHEETS = {
   Paturevision: '1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg',
   Elena:        '1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ',
   Fountain:     '1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o',
+  LongVV2:      '1eZoRo_zqarndr2TS5RiN_PcBtjcSCTP2_kYX66oBugA',
 };
 
 // Use yesterday in +07 timezone as the reporting date
@@ -69,7 +70,8 @@ async function main() {
       const a = (row[0]||'').trim();
       if (TODAY_TOKENS.some(t => a.includes(t))) { inToday = true; continue; }
       if (inToday && DAY_PAT.test(a)) inToday = false;
-      if (a.includes('Ngh') && row[6]) { leaveByOwner[(row[6]||'').trim()] = a; continue; }
+      // Only capture leave notes within the target day block
+      if (inToday && a.includes('Ngh') && row[6]) { leaveByOwner[(row[6]||'').trim()] = a; continue; }
       const al = a.toLowerCase();
       if (!al.includes('task d') && !al.includes('task du')) continue;
       const owner = (row[6]||'').trim();
