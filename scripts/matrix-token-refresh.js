@@ -60,9 +60,9 @@ async function main() {
   fs.mkdirSync(SOCKS_DIR, { recursive: true });
 
   const browser = await puppeteer.launch({
-    headless: 'new',
+    headless: false,
     userDataDir: PROFILE_DIR,
-    env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':99' },
+    env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':1' },
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',

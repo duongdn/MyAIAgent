@@ -368,9 +368,15 @@ No Vinn formal "Just report my process today:" daily report found yet (9 AM). Ac
 | KhanhHH | 0h | 12.83h/40h | ⏳ normal |
 | LeNH | 0h | — | ⏳ normal |
 
-### Matrix token — Still expired
+### Matrix token — FIXED ✓
 
-`matrix-token-refresh.js` ran but SSO browser profile session expired ("Failed to capture token. Manual login needed."). Manual action required: `node scripts/matrix-login.js` (needs browser).
+`matrix-login.js` on DISPLAY :1 → browser opened → auto-confirmed → `@duongdn:nustechnology.com` verified.
+Token saved to `config/.matrix-config.json`. `matrix-token-refresh.js` patched: `headless: 'new'` → `headless: false` (was the root cause of repeated failures).
+
+**W29 Fountain plan (posted by @trinhmtt, 2026-06-01T14:12 +07):**
+> ViTHT: 16h | VuTQ: 40h | DatNT: 40h → QC: 25h
+
+Note: ThinhT not on W29 plan. DatNT replacing ThinhT this week.
 
 ### Trello — Updated 09:11 (+07:00)
 

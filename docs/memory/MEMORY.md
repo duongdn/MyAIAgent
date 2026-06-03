@@ -70,6 +70,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_scrin_isyesterday_monday_bug.md](feedback_scrin_isyesterday_monday_bug.md) — scrin-fetch-yesterday.js on Mon returns SUNDAY, not Friday. Never label its output as Friday Scrin data.
 
 ## Tokens, Auth & Decryption
+- [feedback_matrix_refresh_headless_bug.md](feedback_matrix_refresh_headless_bug.md) — **matrix-token-refresh.js must be headless:false on DISPLAY:1. Was headless:'new' — fixed 2026-06-03. When fails: `DISPLAY=:1 node scripts/matrix-login.js`**
 - [feedback_decrypt_before_reading.md](feedback_decrypt_before_reading.md) — Run decrypt-secrets.sh before reading config
 - [feedback_never_report_token_expired.md](feedback_never_report_token_expired.md) — NEVER report token expired as blocker — always fix/rerun, never skip a piece for token failure
 - [feedback_matrix_join_public_room.md](feedback_matrix_join_public_room.md) — Matrix M_FORBIDDEN = just POST /join
