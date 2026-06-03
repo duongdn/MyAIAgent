@@ -293,7 +293,7 @@ def _tag_matches(tag: str, haystack: str) -> bool:
     return t in haystack
 
 
-def _fetch_hn_scores(item_ids: list[int]) -> dict[int, int]:
+def _fetch_hn_scores(item_ids, ) -> dict:
     """Fetch scores for HN items in parallel via Firebase API."""
     scores = {}
     def get_score(item_id):
