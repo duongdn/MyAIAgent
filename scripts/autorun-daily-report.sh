@@ -32,6 +32,9 @@ done
 
 cd "$PROJECT_DIR"
 
+# Expose real display so Puppeteer scripts (matrix-token-refresh, check-samguard) can open browsers
+export DISPLAY=:1
+
 log "Starting daily report (single session, --cron mode)"
 
 out_file="$LOG_DIR/.cron-run.tmp"
