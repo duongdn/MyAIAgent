@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 CONFIG_PATH = Path(__file__).parents[4] / "config" / ".trello-config.json"
-CARD_ID = "6a1e2b27d1558923ff5eb915"  # "Check news" card in Daily list
+CARD_ID = "6a1f7ce2c1e3a2539439fb70"  # "Check news" card in Daily list
 
 
 def main():
