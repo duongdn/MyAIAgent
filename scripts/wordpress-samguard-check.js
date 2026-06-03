@@ -14,11 +14,16 @@ const puppeteer = require('puppeteer');
   const pageErrors = [];
   const failedRequests = [];
 
+  // Server has no /tmp write access — point TMPDIR to project tmp dir
+  process.env.TMPDIR = '/var/www/MyDailyAgent/tmp/chrome-tmp';
+  require('fs').mkdirSync(process.env.TMPDIR, { recursive: true });
+
   let browser;
   try {
     browser = await puppeteer.launch({
       headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: '/usr/bin/google-chrome',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });

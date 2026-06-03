@@ -410,9 +410,10 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 ```
 
 **WordPress SamGuard:** Check `https://www.samguard.co/` for JS console errors.
-- Use Puppeteer/headless browser to load the page and capture console errors
-- Report any JS errors found; no errors = clean
-- This is a simple health check, no PR/deploy flow
+- Run: `node scripts/wordpress-samguard-check.js` (script sets TMPDIR internally — no extra env needed)
+- Filter out Google Analytics / CSP network errors (these are false positives from GA being blocked)
+- Report only real JS errors (`pageErrors` + `jsErrors` excluding analytics domains)
+- No errors = clean; this is a simple health check, no PR/deploy flow
 
 **`--external` flag (default: off, internal only):**
 
