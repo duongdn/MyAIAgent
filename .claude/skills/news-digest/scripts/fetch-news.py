@@ -33,6 +33,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from typing import Optional
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 # ── Google News RSS builder ───────────────────────────────────────────────────
@@ -292,6 +293,28 @@ def _tag_matches(tag: str, haystack: str) -> bool:
     return t in haystack
 
 
+def _fetch_hn_scores(item_ids: list[int]) -> dict[int, int]:
+    """Fetch scores for HN items in parallel via Firebase API."""
+    scores = {}
+    def get_score(item_id):
+        try:
+            url = f"https://hacker-news.firebaseio.com/v0/item/{item_id}.json"
+            req = urllib.request.Request(url, headers={"User-Agent": "NewsDigest/1.0"})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                data = json.loads(resp.read())
+                return item_id, data.get("score", 0)
+        except Exception:
+            return item_id, 0
+
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        futures = [pool.submit(get_score, i) for i in item_ids]
+        for f in as_completed(futures):
+            item_id, score = f.result()
+            scores[item_id] = score
+    return scores
+
+
+
 def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
     url = source["url"]
     result = {"name": source["name"], "url": url, "articles": [], "error": None}
@@ -315,15 +338,16 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
                 channel = root
             items = channel.findall("item")
 
-        # base URL for resolving relative links (e.g. phparch.com returns /2026/05/...)
         from urllib.parse import urljoin
         base_url = url
 
-        count = 0
-        for item in items:
-            if count >= limit:
-                break
+        # Detect HN feed by URL
+        is_hn = "ycombinator.com" in url
 
+        articles = []
+        hn_ids = []  # collect HN item IDs for score enrichment
+
+        for item in items:
             if is_atom:
                 title = _find_text(item, "{http://www.w3.org/2005/Atom}title")
                 link_el = item.find("{http://www.w3.org/2005/Atom}link")
@@ -336,7 +360,6 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
                 pub = _find_text(item, "pubDate", "{http://purl.org/dc/elements/1.1/}date")
                 summary = _find_text(item, "description", "content:encoded")
 
-            # resolve relative links to absolute using the feed's base URL
             if link and not link.startswith("http"):
                 link = urljoin(base_url, link)
 
@@ -349,13 +372,36 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
             if tag and not any(_tag_matches(t, (title + " " + summary).lower()) for t in tag):
                 continue
 
-            result["articles"].append({
+            article = {
                 "title": title,
                 "link": link,
                 "pubDate": pub,
                 "summary": summary,
-            })
-            count += 1
+                "score": None,
+            }
+
+            # Extract HN item ID from <comments> tag
+            if is_hn:
+                comments_el = item.find("comments")
+                comments_url = comments_el.text if comments_el is not None else ""
+                hn_m = re.search(r"item\?id=(\d+)", comments_url or "")
+                if hn_m:
+                    article["_hn_id"] = int(hn_m.group(1))
+                    hn_ids.append(int(hn_m.group(1)))
+
+            articles.append(article)
+
+        # Enrich HN articles with scores
+        if hn_ids:
+            scores = _fetch_hn_scores(hn_ids)
+            for a in articles:
+                if "_hn_id" in a:
+                    a["score"] = scores.get(a["_hn_id"], 0)
+                    del a["_hn_id"]
+            # Sort HN by score desc
+            articles.sort(key=lambda x: x.get("score") or 0, reverse=True)
+
+        result["articles"] = articles[:limit]
 
     except Exception as exc:
         result["error"] = str(exc)
