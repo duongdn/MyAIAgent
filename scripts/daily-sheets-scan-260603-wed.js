@@ -220,9 +220,18 @@ async function main() {
   if (tabs.Aysar) ({ ownerHours: aysarH, leaveNotes: aysarL, err: aysarE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Aysar, `${tabs.Aysar}!A:I`), tokens));
   let rbLeNH = 0, rbLeNHE = null;
   if (tabs.Rebecca) { const r = await checkRebeccaLeNH(api, SHEETS.Rebecca, tabs.Rebecca, tokens); rbLeNH = r.leNHHours; rbLeNHE = r.err; }
+  // Filter to LeNH-only hours (sheets shared with KhoaTD, TinPC, etc.)
+  const leNHFilter = obj => Object.fromEntries(Object.entries(obj).filter(([k]) => k.toLowerCase().includes("lenh")));
+  const roryLeNH = leNHFilter(roryH);
+  const francLeNH = leNHFilter(francH);
+  const aysarLeNH = leNHFilter(aysarH);
+  // No fallback — absence of LeNH key means 0h today, not other owners' hours
+  const roryHrsLeNH = sum(roryLeNH);
+  const francHrsLeNH = sum(francLeNH);
+  const aysarHrsLeNH = sum(aysarLeNH);
   results.LeNH = {
-    roryHours: sum(roryH), francHours: sum(francH), aysarHours: sum(aysarH), rebeccaLeNHHours: rbLeNH,
-    totalHours: sum(roryH) + sum(francH) + sum(aysarH) + rbLeNH,
+    roryHours: roryHrsLeNH, francHours: francHrsLeNH, aysarHours: aysarHrsLeNH, rebeccaLeNHHours: rbLeNH,
+    totalHours: roryHrsLeNH + francHrsLeNH + aysarHrsLeNH + rbLeNH,
     leave: { ...roryL, ...francL, ...aysarL },
     errors: { rory: roryE, franc: francE, aysar: aysarE, rebecca: rbLeNHE },
     roryOwners: roryH, francOwners: francH, aysarOwners: aysarH,
