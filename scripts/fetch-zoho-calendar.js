@@ -92,17 +92,21 @@ async function fetchEventHrefs(auth, calendarPath, startUTC, endUTC) {
   return hrefs;
 }
 
-// Multiget ICS data for given hrefs
-async function fetchICSData(auth, calendarPath, hrefs) {
+// Multiget ICS data for given hrefs, requesting server-side expansion of recurring events
+async function fetchICSData(auth, calendarPath, hrefs, startUTC, endUTC) {
   if (!hrefs.length) return [];
   const hrefXml = hrefs.map((h) => `  <D:href>${h}</D:href>`).join("\n");
+  // Request expand so recurring events come back with actual occurrence dates
   const body = `<?xml version="1.0" encoding="utf-8"?>
 <C:calendar-multiget xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
-  <D:prop><C:calendar-data/></D:prop>
+  <D:prop>
+    <C:calendar-data>
+      <C:expand start="${startUTC}" end="${endUTC}"/>
+    </C:calendar-data>
+  </D:prop>
 ${hrefXml}
 </C:calendar-multiget>`;
   const res = await request("REPORT", calendarPath + "events/", auth, body, { Depth: "1" });
-  // Extract calendar-data blocks
   const blocks = [];
   const regex = /<calendar-data[^>]*>([\s\S]*?)<\/calendar-data>/g;
   let m;
@@ -110,8 +114,8 @@ ${hrefXml}
   return blocks;
 }
 
-// Parse VEVENT block from ICS text
-function parseVEvents(icsText) {
+// Parse VEVENT blocks. todayDate = "YYYYMMDD" used to fix recurring events if server didn't expand.
+function parseVEvents(icsText, todayDate) {
   const events = [];
   const eventBlocks = icsText.match(/BEGIN:VEVENT[\s\S]*?END:VEVENT/g) || [];
   for (const block of eventBlocks) {
@@ -119,13 +123,27 @@ function parseVEvents(icsText) {
       const m = block.match(new RegExp(`^${key}(?:;[^:]*)?:(.+)$`, "m"));
       return m ? m[1].trim().replace(/\\n/g, "\n").replace(/\\,/g, ",") : "";
     };
+    let start = get("DTSTART");
+    let end = get("DTEND");
+    const isRecurring = /RRULE/.test(block);
+
+    // If server didn't expand (DTSTART date ≠ today) and it's a recurring event,
+    // synthesize today's occurrence by swapping the date part — time stays the same.
+    if (isRecurring && todayDate && start && !start.startsWith(todayDate)) {
+      const timePart = start.replace(/^\d{8}/, "");  // e.g. "T083000" or "T083000Z"
+      const endTimePart = end ? end.replace(/^\d{8}/, "") : "";
+      start = todayDate + timePart;
+      if (end) end = todayDate + endTimePart;
+    }
+
     events.push({
       summary: get("SUMMARY"),
-      start: get("DTSTART"),
-      end: get("DTEND"),
+      start,
+      end,
       location: get("LOCATION"),
       description: get("DESCRIPTION").slice(0, 200),
       status: get("STATUS"),
+      recurring: isRecurring,
     });
   }
   return events;
