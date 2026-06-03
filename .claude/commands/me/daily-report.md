@@ -331,7 +331,11 @@ Supports individual developer targeting:
 
 **Timezone:** Scrin.io returns session times in UTC. Always convert to UTC+7 (+07:00) before reporting. Display sessions in chronological UTC+7 order.
 
-**Rule:** TuanNT task log (John Yi) hours ≤ Scrin.io hours = OK (not over-inflated). Compare John Yi log ONLY — not TuanNT's total across all projects.
+**Rule:** Scrin.io tracks TuanNT's TOTAL screen time across ALL projects. Cross-check against John Yi task log ONLY. Report format must be:
+- Scrin: Xh total screen time (sessions: ...)
+- John Yi task log: Yh logged
+- Result: Y ≤ X = OK (not over-inflated) OR Y > X = ⚠️ alert
+Never say "matches task log" without showing both numbers explicitly. 0h on John Yi task log is normal and valid.
 
 ---
 
