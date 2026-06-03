@@ -322,15 +322,15 @@ Supports individual developer targeting:
 ## Piece 5 — Scrin.io (`/daily-report scrin`)
 
 **Config:** `config/.scrin-config.json`
-**Company:** john yi (ID 266977) | **Employee:** Nick (ID 453601) — this is Nick's own Scrin, NOT TuanNT.
+**Company:** john yi (ID 266977) | **Employee:** TuanNT / Nick (ID 453601) — same person, two names.
 
 Run: `node scripts/scrin-login.js --fetch --date=YYYY-MM-DD` (yesterday's date in UTC+7).
 
-Report Nick's hours logged at John Yi. Use employee_name "Nick" in the report — never label this as TuanNT.
+Report TuanNT's hours logged at John Yi.
 
 **Output format:**
 ```
-**Scrin.io (Nick / John Yi — {date}):** {Xh Ym} logged. Sessions: {list from timeline}.
+**Scrin.io (TuanNT / John Yi — {date}):** {Xh Ym} logged. Sessions: {list from timeline}.
 ```
 
 ---
