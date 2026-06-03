@@ -92,18 +92,13 @@ async function fetchEventHrefs(auth, calendarPath, startUTC, endUTC) {
   return hrefs;
 }
 
-// Multiget ICS data for given hrefs, requesting server-side expansion of recurring events
+// Multiget ICS data for given hrefs
 async function fetchICSData(auth, calendarPath, hrefs, startUTC, endUTC) {
   if (!hrefs.length) return [];
   const hrefXml = hrefs.map((h) => `  <D:href>${h}</D:href>`).join("\n");
-  // Request expand so recurring events come back with actual occurrence dates
   const body = `<?xml version="1.0" encoding="utf-8"?>
 <C:calendar-multiget xmlns:D="DAV:" xmlns:C="urn:ietf:params:xml:ns:caldav">
-  <D:prop>
-    <C:calendar-data>
-      <C:expand start="${startUTC}" end="${endUTC}"/>
-    </C:calendar-data>
-  </D:prop>
+  <D:prop><C:calendar-data/></D:prop>
 ${hrefXml}
 </C:calendar-multiget>`;
   const res = await request("REPORT", calendarPath + "events/", auth, body, { Depth: "1" });
@@ -158,13 +153,16 @@ async function fetchCalendarForAccount(acct) {
     const calHome = await getCalendarHome(auth, principal);
     if (!calHome) return { email: acct.email, error: "no_calendar_home" };
 
-    const { start, end } = getTodayRangeUTC();
+    const { start, end, dateLabel } = getTodayRangeUTC();
+    const todayDate = dateLabel.replace(/-/g, ""); // "YYYYMMDD"
     const hrefs = await fetchEventHrefs(auth, calHome, start, end);
 
     if (!hrefs.length) return { email: acct.email, events: [] };
 
-    const icsBlocks = await fetchICSData(auth, calHome, hrefs);
-    const events = icsBlocks.flatMap(parseVEvents);
+    const icsBlocks = await fetchICSData(auth, calHome, hrefs, start, end);
+    const allEvents = icsBlocks.flatMap((b) => parseVEvents(b, todayDate));
+    // Keep only events that fall on today — deduplicates old occurrences from recurring series
+    const events = allEvents.filter((e) => e.start && e.start.startsWith(todayDate));
 
     return { email: acct.email, events };
   } catch (err) {
