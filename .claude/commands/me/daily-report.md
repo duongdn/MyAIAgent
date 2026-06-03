@@ -324,18 +324,7 @@ Supports individual developer targeting:
 **Config:** `config/.scrin-config.json`
 **Company:** john yi (ID 266977) | **Employee:** Nick / TuanNT (ID 453601)
 
-**Method:**
-1. POST `https://scrin.io/login` with `__RequestVerificationToken` + email + password
-2. Extract `apiToken` from page (`var apiToken = "..."`)
-3. POST `/api/v2/GetReport` with `X-SSM-Token` header, `isYesterday: true`
-
-**Timezone:** Scrin.io returns session times in UTC. Always convert to UTC+7 (+07:00) before reporting. Display sessions in chronological UTC+7 order.
-
-**Rule:** Scrin.io tracks TuanNT's TOTAL screen time across ALL projects. Cross-check against John Yi task log ONLY. Report format must be:
-- Scrin: Xh total screen time (sessions: ...)
-- John Yi task log: Yh logged
-- Result: Y ≤ X = OK (not over-inflated) OR Y > X = ⚠️ alert
-Never say "matches task log" without showing both numbers explicitly. 0h on John Yi task log is normal and valid.
+**⚠️ TuanNT does NOT have Scrin.io running for John Yi. Do NOT fetch or report Scrin data for TuanNT. Skip this piece entirely — report "Scrin: N/A (TuanNT not tracking)".**
 
 ---
 
