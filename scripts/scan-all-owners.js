@@ -13,10 +13,19 @@ const ALL_SHEETS = {
   Generator:    '1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM',
   Paturevision: '1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg',
   Elena:        '1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ',
+  Fountain:     '1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o',
 };
 
-const TARGET = new Date(2026, 5, 3);
-const TODAY_TOKENS = ['Wed, 03/06/26', '03/06/26'];
+// Use yesterday in +07 timezone as the reporting date
+const now7 = new Date(Date.now() + 7*3600*1000);
+const yesterday7 = new Date(now7); yesterday7.setUTCDate(yesterday7.getUTCDate() - 1);
+const TARGET = new Date(yesterday7.getUTCFullYear(), yesterday7.getUTCMonth(), yesterday7.getUTCDate());
+const dd = String(TARGET.getDate()).padStart(2,'0');
+const mm = String(TARGET.getMonth()+1).padStart(2,'0');
+const yy = String(TARGET.getFullYear()).slice(-2);
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const dayName = DAY_NAMES[TARGET.getDay()];
+const TODAY_TOKENS = [dayName+', '+dd+'/'+mm+'/'+yy, dd+'/'+mm+'/'+yy];
 const DAY_PAT = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/;
 const MONTHS = {January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,December:11};
 
@@ -71,13 +80,15 @@ async function main() {
     }
   }
 
-  const owners = [...new Set([...Object.keys(byOwnerToday), ...Object.keys(byOwnerWeek)])].sort();
-  console.log('\n=== TASK LOG BY OWNER — Wed 03/06 ===');
-  for (const o of owners) {
+  // Only managed devs
+  const MANAGED = ['LongVV', 'PhucVT', 'TuanNT', 'KhanhHH', 'LeNH', 'VietPH', 'VuTQ'];
+  const ts = new Date().toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' });
+  console.log('\n=== TASK LOG TEAM — ' + ts + ' +07 ===');
+  for (const o of MANAGED) {
     const today = byOwnerToday[o]||0, week = byOwnerWeek[o]||0;
     const leave = leaveByOwner[o] ? ' ['+leaveByOwner[o]+']' : '';
-    const flag = today>0 ? 'x' : week>0 ? '~' : '!';
-    console.log(flag, o.padEnd(14), 'today:', String(today)+'h  week:', week+'h'+leave);
+    const flag = today>0 ? '[x]' : week>0 ? '[ ]' : '[!]';
+    console.log(flag, o.padEnd(10), 'today:', String(today).padStart(4)+'h   week:', week+'h'+leave);
   }
 }
 main().catch(e => console.error('FATAL:', e.message));
