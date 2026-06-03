@@ -26,11 +26,18 @@
     <main class="main">
       <!-- Toolbar -->
       <header class="toolbar">
-        <div class="toolbar-left">
+        <div class="tabs">
+          <button class="tab-btn active" id="tabSkills" title="Skills">⚡ Skills</button>
+          <button class="tab-btn" id="tabChat" title="Chat">💬 Chat</button>
+        </div>
+        <div class="toolbar-left" id="skillsControls">
           <span class="skill-badge" id="activeSkillBadge">No skill selected</span>
           <input class="args-input" id="argsInput" type="text" placeholder="Arguments (optional)…" autocomplete="off">
         </div>
-        <div class="toolbar-right">
+        <div class="toolbar-left hidden" id="chatControls">
+          <span class="skill-badge" style="color:var(--blue)">Claude AI</span>
+        </div>
+        <div class="toolbar-right" id="skillsActions">
           <button class="btn btn-run" id="runBtn" disabled>
             <span class="btn-icon">▶</span> Run
           </button>
@@ -40,10 +47,13 @@
           <button class="btn btn-clear" id="clearBtn" title="Clear terminal">⌫</button>
           <button class="btn btn-copy" id="copyBtn" title="Copy output">⎘</button>
         </div>
+        <div class="toolbar-right hidden" id="chatActions">
+          <button class="btn btn-clear" id="clearChatBtn" title="Clear chat">⌫</button>
+        </div>
       </header>
 
       <!-- Terminal -->
-      <div class="terminal-wrap">
+      <div class="terminal-wrap" id="terminalWrap">
         <div class="terminal" id="terminal">
           <div class="term-welcome">
             <pre class="ascii-logo">
@@ -54,6 +64,19 @@
  |_|  |_|\__, |____/ \__,_|_|_|\__, /_/   \_\__, |\___|_| |_|\__|
           |___/                 |___/        |___/</pre>
             <p class="welcome-hint">← Select a skill and press <kbd>Run</kbd></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat panel -->
+      <div class="chat-wrap hidden" id="chatWrap">
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-hint">Ask me anything — daily reports, monitoring, code, or general questions.</div>
+        </div>
+        <div class="chat-footer">
+          <div class="chat-input-wrap">
+            <textarea id="chatInput" class="chat-input" placeholder="Message Claude…" rows="1"></textarea>
+            <button id="sendBtn" class="btn btn-send" title="Send (Enter)">↑</button>
           </div>
         </div>
       </div>

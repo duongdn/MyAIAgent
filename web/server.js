@@ -325,6 +325,33 @@ app.delete('/api/run/:id', (req, res) => {
   res.json({ killed: true });
 });
 
+app.post('/api/chat', (req, res) => {
+  const { message, history = [] } = req.body;
+  if (!message?.trim()) return res.status(400).json({ error: 'message required' });
+
+  const runId = crypto.randomUUID();
+
+  let fullPrompt = message.trim();
+  if (history.length) {
+    const ctx = history.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n\n');
+    fullPrompt = `Previous conversation:\n${ctx}\n\nUser: ${message.trim()}`;
+  }
+
+  activeRuns.set(runId, {
+    status: 'starting',
+    skillName: 'chat',
+    prompt: fullPrompt,
+    clients: [],
+    buffer: [],
+    process: null,
+    startedAt: null,
+    exitCode: null,
+  });
+
+  res.json({ runId });
+  setImmediate(() => startRun(runId, fullPrompt));
+});
+
 app.get('/api/runs', (_req, res) => {
   const runs = [];
   for (const [id, run] of activeRuns) {

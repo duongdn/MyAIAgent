@@ -7,18 +7,32 @@ let activeRunId = null;
 let activeEventSource = null;
 
 // ── DOM refs ───────────────────────────────────────────────────────────────
-const skillListEl   = document.getElementById('skillList');
-const skillSearchEl = document.getElementById('skillSearch');
-const activeBadgeEl = document.getElementById('activeSkillBadge');
-const argsInputEl   = document.getElementById('argsInput');
-const runBtnEl      = document.getElementById('runBtn');
-const stopBtnEl     = document.getElementById('stopBtn');
-const clearBtnEl    = document.getElementById('clearBtn');
-const copyBtnEl     = document.getElementById('copyBtn');
-const terminalEl    = document.getElementById('terminal');
-const statusTextEl  = document.getElementById('statusText');
-const costTextEl    = document.getElementById('costText');
-const durationTextEl= document.getElementById('durationText');
+const skillListEl    = document.getElementById('skillList');
+const skillSearchEl  = document.getElementById('skillSearch');
+const activeBadgeEl  = document.getElementById('activeSkillBadge');
+const argsInputEl    = document.getElementById('argsInput');
+const runBtnEl       = document.getElementById('runBtn');
+const stopBtnEl      = document.getElementById('stopBtn');
+const clearBtnEl     = document.getElementById('clearBtn');
+const copyBtnEl      = document.getElementById('copyBtn');
+const terminalEl     = document.getElementById('terminal');
+const statusTextEl   = document.getElementById('statusText');
+const costTextEl     = document.getElementById('costText');
+const durationTextEl = document.getElementById('durationText');
+
+// Chat DOM refs
+const tabSkillsEl    = document.getElementById('tabSkills');
+const tabChatEl      = document.getElementById('tabChat');
+const terminalWrapEl = document.getElementById('terminalWrap');
+const chatWrapEl     = document.getElementById('chatWrap');
+const skillsCtrlEl   = document.getElementById('skillsControls');
+const chatCtrlEl     = document.getElementById('chatControls');
+const skillsActEl    = document.getElementById('skillsActions');
+const chatActEl      = document.getElementById('chatActions');
+const chatMessagesEl = document.getElementById('chatMessages');
+const chatInputEl    = document.getElementById('chatInput');
+const sendBtnEl      = document.getElementById('sendBtn');
+const clearChatBtnEl = document.getElementById('clearChatBtn');
 
 // ── Skill loading ──────────────────────────────────────────────────────────
 
@@ -356,6 +370,132 @@ document.addEventListener('keydown', e => {
     if (activeRunId) { stopRun(); }
     else if (document.activeElement === skillSearchEl) { skillSearchEl.value = ''; renderSkillList(allSkills); }
   }
+});
+
+// ── Tab switching ──────────────────────────────────────────────────────────
+
+let activeTab = 'skills';
+
+function switchTab(tab) {
+  activeTab = tab;
+  const isChat = tab === 'chat';
+
+  tabSkillsEl.classList.toggle('active', !isChat);
+  tabChatEl.classList.toggle('active', isChat);
+  terminalWrapEl.classList.toggle('hidden', isChat);
+  chatWrapEl.classList.toggle('hidden', !isChat);
+  skillsCtrlEl.classList.toggle('hidden', isChat);
+  chatCtrlEl.classList.toggle('hidden', !isChat);
+  skillsActEl.classList.toggle('hidden', isChat);
+  chatActEl.classList.toggle('hidden', !isChat);
+
+  if (isChat) chatInputEl.focus();
+}
+
+tabSkillsEl.addEventListener('click', () => switchTab('skills'));
+tabChatEl.addEventListener('click', () => switchTab('chat'));
+
+// ── Chat ───────────────────────────────────────────────────────────────────
+
+/** @type {{ role: 'user'|'assistant', content: string }[]} */
+let chatHistory = [];
+let chatRunId = null;
+let chatEventSource = null;
+
+function appendChatMessage(role, text) {
+  const wrap = document.createElement('div');
+  wrap.className = `chat-msg chat-msg-${role}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble';
+  if (text) bubble.innerHTML = inlineFormat(escHtml(text));
+  wrap.appendChild(bubble);
+  chatMessagesEl.appendChild(wrap);
+  chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+  return bubble;
+}
+
+async function sendChatMessage() {
+  const msg = chatInputEl.value.trim();
+  if (!msg || chatRunId) return;
+
+  chatInputEl.value = '';
+  chatInputEl.style.height = 'auto';
+
+  appendChatMessage('user', msg);
+
+  const botBubble = appendChatMessage('assistant', '');
+  botBubble.innerHTML = '<span class="chat-cursor"></span>';
+
+  let fullText = '';
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg, history: chatHistory }),
+    });
+    const { runId, error } = await res.json();
+    if (error) throw new Error(error);
+
+    chatRunId = runId;
+    sendBtnEl.disabled = true;
+
+    const es = new EventSource(`/api/run/${runId}/stream`);
+    chatEventSource = es;
+
+    es.onmessage = (e) => {
+      if (!e.data) return;
+      const ev = JSON.parse(e.data);
+
+      if (ev.type === 'text') {
+        fullText += ev.text;
+        botBubble.innerHTML = inlineFormat(escHtml(fullText)) + '<span class="chat-cursor"></span>';
+        chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+      } else if (ev.type === 'done') {
+        botBubble.innerHTML = inlineFormat(escHtml(fullText || '(no response)'));
+        chatHistory.push({ role: 'user', content: msg });
+        chatHistory.push({ role: 'assistant', content: fullText });
+        finishChat();
+      }
+    };
+
+    es.onerror = () => {
+      es.close();
+      if (!fullText) botBubble.textContent = '(error)';
+      else botBubble.innerHTML = inlineFormat(escHtml(fullText));
+      finishChat();
+    };
+  } catch (err) {
+    botBubble.textContent = `Error: ${err.message}`;
+    finishChat();
+  }
+}
+
+function finishChat() {
+  chatRunId = null;
+  if (chatEventSource) { chatEventSource.close(); chatEventSource = null; }
+  sendBtnEl.disabled = false;
+  chatInputEl.focus();
+}
+
+sendBtnEl.addEventListener('click', sendChatMessage);
+
+chatInputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChatMessage();
+  }
+});
+
+// Auto-resize textarea
+chatInputEl.addEventListener('input', () => {
+  chatInputEl.style.height = 'auto';
+  chatInputEl.style.height = Math.min(chatInputEl.scrollHeight, 160) + 'px';
+});
+
+clearChatBtnEl.addEventListener('click', () => {
+  chatHistory = [];
+  chatMessagesEl.innerHTML = '<div class="chat-hint">Ask me anything — daily reports, monitoring, code, or general questions.</div>';
 });
 
 // ── Init ───────────────────────────────────────────────────────────────────
