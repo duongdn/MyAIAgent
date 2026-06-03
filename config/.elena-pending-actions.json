@@ -176,7 +176,7 @@
       "merged_at": "2026-05-15",
       "deployed": true,
       "status_updated": false,
-      "pending_action": "DONE \u2014 DP-666 merged (squash) + deployed to MayBanServer on 2026-05-15 08:40 +07, build OK (21s), announced to Matrix Elena-Digital-Plant room. Redmine 403 (not a Redmine ticket)."
+      "pending_action": "DONE \u2014 DP-666 (PR #301) previous iteration merged 2026-05-15. PR #304 (new DP-666 iteration) merged + deployed to MayBanServer on 2026-06-02 08:18 +07, build OK (23.7s), announced to Matrix Elena-Digital-Plant room."
     }
   ],
   "blocked": [],

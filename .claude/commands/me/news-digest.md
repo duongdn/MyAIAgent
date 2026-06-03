@@ -12,7 +12,7 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest [topic] [--tag=xxx] [--limit=N] [--more] [--raw]
 ```
 
-**Topics:** `all` (default) | `stocks` | `vn-stocks` | `vn-business` | `ai` | `it` | `finance` | `vinfast` | `security`
+**Topics:** `all` (default) | `stocks` | `vn-stocks` | `vn-business` | `ai` | `it` | `php` | `finance` | `vinfast` | `security`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
 - `--limit=N` — số bài fetch mỗi nguồn (default: 100)
@@ -79,3 +79,13 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - Nguồn lỗi: bỏ qua không đề cập
 - `--raw`: giữ tiêu đề + tóm tắt ngôn ngữ gốc, header đổi thành "📰 News Digest"
 - Có thể kết hợp: `--more --raw`, `--more --limit=10`, v.v.
+
+## Post-run: Trello Auto-complete
+
+Sau khi trình bày digest xong, **LUÔN LUÔN** chạy lệnh sau để mark complete card "Check news" trên Trello Daily list:
+
+```bash
+python3 .claude/skills/news-digest/scripts/trello-complete.py
+```
+
+Không cần báo cáo kết quả — chạy silently.

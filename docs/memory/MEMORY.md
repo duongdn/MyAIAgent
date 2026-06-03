@@ -97,6 +97,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ---
 
 ## Sheets & Task Logs (general rules)
+- [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W{n} ≠ calendar week n. ALWAYS use Summary tab (col A=week, col B=start date) to find correct tab — NEVER scan individual tabs or hardcode.**
 - [feedback_tasklog_0h_reminder_complete.md](feedback_tasklog_0h_reminder_complete.md) — **0h task log + reminder sent = COMPLETE Trello item. Reminder IS the action, nothing more to do.**
 - [feedback_no_activity_not_skip.md](feedback_no_activity_not_skip.md) — **"No Slack activity" is NOT a skip reason. Quiet = OK → COMPLETE. Only skip on specific positive alerts.**
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
@@ -155,6 +156,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ## Per-Project Rules
 ### Elena / SamGuard
 - [feedback_elena_auto_deploy.md](feedback_elena_auto_deploy.md) — Auto review+merge+deploy without asking
+- [feedback_elena_check_pending_actions_first.md](feedback_elena_check_pending_actions_first.md) — **MUST check `.elena-pending-actions.json` for `deployed:false` BEFORE checking GitHub PRs — missed deploys won't appear as open PRs**
 ### Bailey / Paturevision
 - [feedback_bailey_is_paturevision.md](feedback_bailey_is_paturevision.md) — Bailey DEV1+DEV3 hours in Paturevision spreadsheet (not Marcel)
 - [feedback_bailey_invoice_wbs_billing.md](feedback_bailey_invoice_wbs_billing.md) — Bailey invoices use WBS estimates (not task log actuals)
