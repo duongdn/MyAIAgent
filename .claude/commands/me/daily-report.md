@@ -576,10 +576,11 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 ## Full Run (`/daily-report`)
 
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
+0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
 2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders
-3. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
-4. Update `daily_report.last_run` + `alert.last_run` in timelines
+3. Write report to `reports/{UTC+7 today}/daily-report.md`
+4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 
 **Normal (interactive terminal)** — parallel agents:
 1. Read configs + timelines + memory
