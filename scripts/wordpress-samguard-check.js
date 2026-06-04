@@ -15,14 +15,22 @@ const puppeteer = require('puppeteer');
   const failedRequests = [];
 
   // Server has no /tmp write access — point TMPDIR to project tmp dir
-  process.env.TMPDIR = '/var/www/MyDailyAgent/tmp/chrome-tmp';
+  process.env.TMPDIR = process.env.TMPDIR_OVERRIDE || '/var/www/MyDailyAgent/tmp/chrome-tmp';
   require('fs').mkdirSync(process.env.TMPDIR, { recursive: true });
 
   let browser;
   try {
+    const chromePaths = [
+      process.env.CHROME_PATH,
+      '/usr/bin/google-chrome',
+      '/usr/bin/chromium-browser',
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+      '/Applications/Chromium.app/Contents/MacOS/Chromium',
+    ].filter(Boolean);
+    const executablePath = chromePaths.find(p => { try { require('fs').accessSync(p); return true; } catch { return false; } }) || '/usr/bin/google-chrome';
     browser = await puppeteer.launch({
       headless: 'new',
-      executablePath: '/usr/bin/google-chrome',
+      executablePath,
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
     });
     const page = await browser.newPage();
