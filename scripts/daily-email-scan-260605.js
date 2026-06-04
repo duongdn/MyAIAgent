@@ -1,13 +1,9 @@
-// Daily email scan for 2026-06-04 — window: 2026-06-03T22:09+07 → now
+// Daily email scan for 2026-06-05 — window: 2026-06-04T09:10+07 → now
 const tls = require("tls");
 const accounts = require("../config/.email-accounts.json").accounts;
 
-const WINDOW_START = new Date("2026-06-03T22:09:00+07:00");
-<<<<<<< HEAD
-const IMAP_SINCE = "3-Jun-2026"; // safe to catch all, filter by Date in code
-=======
-const IMAP_SINCE = "03-Jun-2026";
->>>>>>> auto: 2026-06-04 02:08
+const WINDOW_START = new Date("2026-06-04T09:10:00+07:00");
+const IMAP_SINCE = "4-Jun-2026"; // catch Wed+Thu, filter by Date in code
 
 const ALERT_KEYWORDS = [
   "alert", "error", "fail", "down", "urgent", "warning", "critical",

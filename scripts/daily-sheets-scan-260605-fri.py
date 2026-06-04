@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Daily sheets scan for 2026-06-04 (Thursday).
-<<<<<<< HEAD
-Checks Wednesday 2026-06-03 hours — W29 (June 1-7, 2026).
-=======
+"""Daily sheets scan for 2026-06-05 (Friday run).
 Checks Thursday 2026-06-04 hours — W29 (June 1-7, 2026).
 
 Notes:
@@ -10,7 +7,6 @@ Notes:
 - LongVV: Part-time 16h/wk (Maddy + James Diamond). Check weekly total only.
 - TuanNT: JohnYi + Rebecca + Paturevision sheets.
 - LeNH: Rory + Franc + Aysar + Rebecca sheets.
->>>>>>> auto: 2026-06-04 02:08
 """
 import json
 import re
@@ -19,11 +15,7 @@ from datetime import date
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 
-<<<<<<< HEAD
-SVC = "/Users/duongdn/projects/MyAIAgent/config/daily-agent-490610-7eb7985b33e3.json"
-=======
 SVC = "/var/www/MyDailyAgent/config/daily-agent-490610-7eb7985b33e3.json"
->>>>>>> auto: 2026-06-04 02:08
 
 SHEETS = {
     "Maddy":         "1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I",
@@ -42,31 +34,17 @@ FALLBACK_TABS = {
     "Maddy":         "W9",
     "JohnYi":        "W27",
     "Rebecca":       "W27",
-<<<<<<< HEAD
-    "JamesDiamond":  "W29",
-    "Rory":          "W14",
-    "Franc":         "W27",
-    "Aysar":         "W27",
-    "Generator":     "W44",
-=======
     "JamesDiamond":  "W28",
     "Rory":          "W14",
     "Franc":         "W27",
     "Aysar":         "W27",
     "Generator":     "W43",
->>>>>>> auto: 2026-06-04 02:08
     "Paturevision":  "W30",
     "Elena":         None,
 }
 
-<<<<<<< HEAD
-# Wednesday 2026-06-03
-WED_JUN03_TOKENS = ["Wed, 03/06/26", "03/06/26"]
-TARGET_DATE = date(2026, 6, 3)
-=======
 THU_JUN04_TOKENS = ["Thu, 04/06/26", "04/06/26"]
 TARGET_DATE = date(2026, 6, 4)
->>>>>>> auto: 2026-06-04 02:08
 
 creds = service_account.Credentials.from_service_account_file(
     SVC, scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
@@ -235,11 +213,7 @@ def get_weekly_summary(sheet_id, week_tab):
 
 
 results = {}
-<<<<<<< HEAD
-date_tokens = WED_JUN03_TOKENS
-=======
 date_tokens = THU_JUN04_TOKENS
->>>>>>> auto: 2026-06-04 02:08
 
 print("Discovering week tabs...", file=sys.stderr)
 curr_tabs = {}

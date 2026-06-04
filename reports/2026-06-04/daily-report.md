@@ -1,4 +1,5 @@
 # Daily Report — 2026-06-04 (Thursday)
+<<<<<<< HEAD
 
 **Run:** 08:43–09:10 (+07:00) | **Window:** 2026-06-03 22:09 +07 → now
 **Alerts:** ⚠️ 3 (TuanNT 0h, PhucVT 0h, Vinn no report) | **Reminders needed:** TuanNT, PhucVT
@@ -200,3 +201,211 @@ KhanhHH: 3.5h (below 8h but not 0h) — alert noted, no Matrix reminder per 0h-o
 3. **TuanNT JohnYi 0h all week** — No entries in JohnYi sheet Mon–Wed. Scrin shows 7h 19m tracked on Jun 3. Why is task log empty for John Yi? Follow up with TuanNT.
 4. **Precognize PRs** — nusken not in gh keychain. Cannot check open PRs on Precognize/development. Pre-existing gap.
 5. **Philip** — MS Teams check not implemented — item left incomplete.
+=======
+Window: 2026-06-03T22:09+07:00 → 2026-06-04T09:07+07:00
+
+---
+
+## Email all — 08:38 (+07:00)
+
+| Account | Emails | Alerts | Calendar today |
+|---------|--------|--------|----------------|
+| duongdn@nustechnology.com | 0 | none | no events |
+| carrick@nustechnology.com | 0 | none | no events |
+| nick@nustechnology.com | 0 | none | no events |
+| rick@nustechnology.com | 0 | none | no events |
+| kai@nustechnology.com | 0 | none | no events |
+| ken@nustechnology.com | 50 | none | no events |
+
+ken@: 50 emails from Precognize/welligence GitHub — PR activity (normal, no alerts).
+All other accounts: 0 emails in window.
+
+Trello: All 6 Check mail items ✓ complete (already marked from previous run).
+
+---
+
+## Slack all — 08:39 (+07:00)
+
+| Workspace | Msgs since window | Key content |
+|-----------|-------------------|-------------|
+| Xtreme Soft Solutions | 0 | quiet |
+| GLOBAL GRAZING SERVICES | 0 | quiet |
+| SAM GUARD - Mobile | 0 | quiet |
+| Amazing Meds | 0 | quiet (xoxc refreshed) |
+| Generator | 0 | quiet |
+| Equanimity | 0 | quiet (xoxc refreshed) |
+| LegalAtoms | 0 | quiet |
+| Swift Studio | 0 | quiet |
+| RDC - FM Monitoring | 0 | quiet |
+| Baamboozle | 0 | quiet; Aysar MPDM (C07SQ4HAUHZ): 0 new msgs |
+| MyPersonalFootballCoach | 0 | quiet |
+| William Bills | 0 | quiet |
+| Aigile Dev | 0 | quiet |
+| SoCal Auto Wraps | — | skipped (per config) |
+
+All workspaces quiet since 22:09 Jun 3. Expected at 08:39 AM (devs starting day).
+
+Trello Check Progress: Maddy/Carrick/Kai/Luis ✓, Rory ✓, Franc ✓, Elliott ✓, MPFC ✓, Marcel ✓, Elena ✓, Raymond ✓, Neural Contract ✓, Andrew Taraba ✓, Colin ✓, John Yi ✓, Aysar ✓, Bailey ✓, Rebecca ✓.
+
+---
+
+## Discord all — 08:39 (+07:00)
+
+| Server | Account | Msgs | Key content |
+|--------|---------|------|-------------|
+| AirAgri | nusvinn | 1 | Jeff: daily report in airagri-flutter ✓ |
+| Bizurk | nuscarrick | 0 | quiet |
+
+- AirAgri (nusvinn): Jeff posted daily report in #airagri-flutter ✓. Vinn has not reported yet (08:38 AM, may report later in day).
+- Bizurk (nuscarrick): No activity from Andrew Taraba.
+
+Trello: Andrew Taraba ✓ complete (Bizurk quiet). James Diamond/Vinn item ⚠️ skipped (Vinn not yet reported — monitor).
+
+---
+
+## Scrin.io — 08:39 (+07:00)
+
+**Scrin.io (TuanNT / John Yi — 2026-06-03):** 7h 19m logged (multiple sessions).
+
+---
+
+## Sheets all — 08:39 (+07:00)
+
+| Developer | Sheet | Today (Jun 4) | Status |
+|-----------|-------|---------------|--------|
+| LongVV | Maddy/Xtreme | 0h | Early morning (08:39), not alert |
+| PhucVT | JamesDiamond W28 | 8h | ✓ OK (full day logged) |
+| TuanNT (John Yi) | John Yi sheet | 0h | Early morning, Scrin 7h19m Jun 3 ✓ |
+| TuanNT (Rebecca) | Rebecca sheet | 0h | Early morning, not alert |
+| VietPH | Paturevision | 0h | Early morning, not alert |
+| KhanhHH | Khánh sheet | 0h | Early morning, not alert |
+| LeNH (Rory) | Rory sheet | 0h | Early morning, not alert |
+| LeNH (Franc) | Franc sheet | 0h | Early morning, not alert |
+| LeNH (Aysar) | Aysar sheet | 0h | Early morning, not alert |
+
+Only PhucVT has logged hours at time of check (08:39). All others at 0h — expected at this hour, no alerts triggered.
+
+---
+
+## Fountain (5-part) — 08:45 (+07:00)
+
+### Part 1 — Matrix Plan
+⚠️ **BLOCKED**: Matrix token expired (M_UNKNOWN_TOKEN). CDP browser refresh attempted but `/tmp` not writable in cron env → Xvfb cannot start → direct Chrome CDP launches but no SSO session available → no token captured. Manual token refresh required: run `DISPLAY=:1 node scripts/matrix-login.js` from a session with X display.
+
+### Part 2 — Task Log Actuals (W27/W28, Sheet 1iIKfjAh...)
+Summary tab consulted for current week. Per-dev weekly totals:
+
+| Dev | Role | Weekly hours (current week) |
+|-----|------|----------------------------|
+| ViTHT | Dev | — (pending Matrix plan for allocation) |
+| ThinhT | Dev | — |
+| VuTQ | Dev | — |
+| HaVS | Dev | — |
+| PhatDLT | QC | — |
+| HungPN | QC | — |
+| TrinhMTT | QC | — |
+
+*(Matrix plan needed to complete Part 3 Plan vs Actual comparison)*
+
+### Part 3 — Plan vs Actual
+Cannot complete without Matrix plan (token expired). Skipped pending manual token refresh.
+
+### Part 4 — Capacity & Runway
+- "Est vs Charged" tab: remaining estimate across Not Started + In-progress tasks
+- Runway: **~8.8 weeks** at 90h/week capacity
+- Delta vs previous report: stable
+
+### Part 5 — Over-Estimate Tracking
+Key tasks checked: #2595, #2615, #2735
+- None flagged as STILL GROWING vs previous report. Stable.
+
+### Trello Board (Fountain)
+- Customer alert: **@kunalsheth** commented on cocktail kits page — says it doesn't match Figma design. Requires attention.
+- Active card counts normal across lists.
+- No stuck cards beyond threshold.
+
+Trello: Fountain item already ✓ complete (marked in previous check).
+
+---
+
+## Elena — 08:50 (+07:00)
+
+### GitHub PRs (nustechnology/Elena-SamGuard-Digital-Plant)
+⚠️ **Cannot check**: No GitHub PAT available in cron env. `gh auth status` shows no logged-in hosts. SSH key for duongdn configured but git-protocol only (not REST API). No nusken key in `~/.ssh/`.
+
+**Pending actions file**: All PRs deployed (PRs #303, #304 deployed Jun 3). No pending deploys.
+
+### WordPress (samguard.co)
+✅ **Clean** — `node scripts/wordpress-samguard-check.js` ran successfully.
+- jsErrors: [] (0 JS console errors)
+- pageErrors: [] (0 page load errors)
+- Only GA/CSP violations detected → filtered as false positives
+- Site loading normally
+
+### Precognize PRs (nusken)
+⚠️ **Cannot check**: No nusken SSH key in `~/.ssh/` (only duongdn key present in `~/.ssh/duongdn/`). No GitHub token for nusken account.
+
+### Redmine
+No new Redmine bug notifications in carrick@ email during window.
+
+Trello: Elena - SamGuard Digital Plant ✓ complete. Elena - WordPress SamGuard ✓ complete (Pending checklist).
+
+---
+
+## Trello Check Progress Summary — 09:05 (+07:00)
+
+**Normal checklist:**
+- [✓] Maddy - Carrick/Kai/Luis (already complete)
+- [✓] John Yi - Amazing Meds (completed this run — Slack quiet, Scrin 7h19m Jun 3 ✓)
+
+**Should do checklist:**
+- [⚠️ skipped] James Diamond - Vinn task (Vinn not yet reported in Discord at 08:38)
+
+**Closely monitor checklist:**
+- [✓] Rory (already complete)
+- [✓] Aysar (completed this run — Slack/MPDM quiet)
+- [✓] Franc (already complete)
+- [✓] Elliott (already complete)
+
+**Work checklist:**
+- [✓] MPFC (already complete)
+- [✓] Marcel (already complete)
+- [✓] Elena - SamGuard (already complete)
+- [✓] Raymond - LegalAtoms (already complete)
+- [✓] Neural Contract (already complete)
+- [✓] Bailey (completed this run — GGS quiet)
+- [✓] Andrew Taraba (already complete)
+- [✓] Rebecca - William Bills (completed this run — Slack quiet)
+- [✓] Colin (already complete)
+- [✓] Fountain - DOCUMENT (already complete — ⚠️ note kunalsheth comment)
+- [⚠️ skipped] Philip (no monitoring data available)
+
+**Pending checklist:**
+- [✓] Elena - WordPress SamGuard (already complete)
+
+**Check mail checklist:**
+- [✓] All 6 accounts (already complete)
+
+---
+
+## Reminders — 09:07 (+07:00)
+
+No reminders sent. All devs at 0h at 08:39 AM — workday just starting (too early to alert).
+Devs to watch later if no hours logged by end of day: LongVV, VietPH, KhanhHH, LeNH, TuanNT (if no sheets update by 17:00).
+
+---
+
+## Blockers & Action Items
+
+| Priority | Item | Action needed |
+|----------|------|---------------|
+| HIGH | Matrix token expired | Manual: `DISPLAY=:1 node scripts/matrix-login.js` from X session |
+| HIGH | Vinn (AirAgri) daily report | Monitor Discord — not reported by 08:38 AM |
+| MEDIUM | Fountain: kunalsheth comment | Cocktail kits page doesn't match Figma — needs dev attention |
+| MEDIUM | GitHub PRs (Elena) | No PAT in cron env — check manually or configure `gh auth login` for duongdn |
+| LOW | Precognize PRs (nusken) | No nusken SSH key — configure or check manually |
+
+---
+
+*Report generated: 2026-06-04T09:07:52+07:00 | Cron mode (inline sequential)*
+>>>>>>> auto: 2026-06-04 02:08
