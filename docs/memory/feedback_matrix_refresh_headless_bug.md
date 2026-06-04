@@ -15,8 +15,9 @@ metadata:
 **Fixed:** Changed `headless: 'new'` → `headless: false` in the script on 2026-06-03.
 
 ## When it fails again
-Run `DISPLAY=:1 node scripts/matrix-login.js` — opens a visible browser, user clicks confirm (SSO auto-login), token captured in ~10s.
+1. Clear stale profile locks first: `rm -f tmp/matrix-browser-profile/Default/LOCK tmp/matrix-browser-profile/SingletonLock`
+2. Run `DISPLAY=:1 node scripts/matrix-login.js` — NUS SSO has an active system session, browser auto-confirms, token captured in ~10s. **NO manual user interaction needed.**
 
-**Why it works:** `matrix-login.js` is already `headless: false`. The NUS SSO has an active session (system-level), so the browser auto-confirms without typing credentials.
+**Why it works:** `matrix-login.js` is `headless: false` on DISPLAY=:1. The NUS SSO has a live system-level session so no credentials need to be typed.
 
-**How to apply:** If `matrix-token-refresh.js` ever outputs "Failed to capture token", run `matrix-login.js` on real display. Do NOT use Xvfb (virtual display) — SSO needs visible interaction.
+**How to apply:** If `matrix-token-refresh.js` fails → clear locks → run `matrix-login.js` on DISPLAY=:1. Fully automated, no user action required. Do NOT ask user to run it manually.
