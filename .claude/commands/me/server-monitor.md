@@ -246,7 +246,6 @@ Mark "Rory" complete after check done.
 
 - Run all servers in a project group, then mark Trello item
 - Flag any container that is Down or restarting frequently
-- Flag uptime >365 days as "consider reboot for kernel updates"
 - Flag servers with no swap configured
 - Compare disk usage trend if previous report exists
 - Report format: table per server with metrics + status column

@@ -247,3 +247,65 @@ Checking Thursday June 4, 2026 hours:
 1. Fountain W29 task log: is the team logging hours elsewhere, or genuinely not filling the sheet?
 2. Matrix SSO: when was the last valid session? May need full browser re-login by user.
 3. Elena GitHub PRs: need manual auth refresh for gh CLI on this server.
+
+---
+
+## Checklist Completion — 08:35 (+07:00)
+
+### Check Progress (board O83pAyqb)
+
+| Item | Checklist | Result |
+|------|-----------|--------|
+| Maddy - Carrick/Kai/Luis | Normal | ✓ Complete (Xtreme quiet, Kai 16h/wk OK) |
+| John Yi - Amazing Meds | Normal | ✓ Complete (TuanNT 8h47m via Scrin.io) |
+| James Diamond - Vinn | Should do | ✓ Complete (Vinn daily report Thu ✓) |
+| Rory | Closely monitor | ✓ Complete (Swift quiet = OK) |
+| Aysar | Closely monitor | ⚠️ SKIP — no Carrick update in MPDM C07SQ4HAUHZ since Thu 09:10 |
+| Franc | Closely monitor | ✓ Complete (RDC quiet, no dmetiner alert) |
+| Elliott | Closely monitor | ✓ Complete (Violet daily update Thu ✓) |
+| MPFC | Work | ✓ Complete (quiet = OK) |
+| Marcel | Work | ✓ Complete (adhoc, quiet expected) |
+| Elena - SamGuard Digital Plant | Work | ✓ Complete (0 open PRs, SAM GUARD quiet) |
+| Raymond - LegalAtoms | Work | ✓ Complete (quiet = OK) |
+| Neural Contract | Work | ✓ Complete (Cloudflare block = not an alert per rule) |
+| Bailey | Work | ✓ Complete (TuanNT 8h47m ✓, GGS quiet) |
+| Andrew Taraba | Work | ✓ Complete (Bizurk silence = normal) |
+| Rebecca - William Bills | Work | ✓ Complete (TuanNT working ✓) |
+| Colin | Work | ✓ Complete (Aigile quiet = OK) |
+| Fountain | Work | ⚠️ SKIP — W29 task log all 0h (Mon–Thu), Matrix SSO expired |
+| Philip | Work | ✓ Complete (last message May 27 — no new requests since) |
+| Elena - WordPress SamGuard | Pending | ✓ Complete (JS check clean, no errors) |
+
+### Check Mail
+
+| Account | Result |
+|---------|--------|
+| DuongDn | ✓ Complete (0 emails, no events) |
+| Carrick | ✓ Complete (1 email — Snyk INFO) |
+| Rick | ✓ Complete (6 emails — Fountain staging BugSnag INFO) |
+| Kai | ✓ Complete (1 email — Jira LIFM2 routine) |
+| Ken | ✓ Complete (50 emails — Precognize SR activity) |
+| Nick | ✓ Complete (18 emails — ClickUp automated, no John Yi issues) |
+
+### Precognize (nusken)
+Open PRs from nusken: 0 — clean ✓
+
+### Philip MS Teams
+Last message: May 27 ("I have to uninstall my latest version and install again.") — 9 days ago, no follow-up request. Clean ✓.
+
+---
+
+## Final Alerts Summary
+
+| Priority | Alert |
+|----------|-------|
+| ⚠️ ACTION | Fountain: 3 Kunal deploy approvals pending (@rick570) |
+| ⚠️ ACTION | Matrix SSO expired — needs manual login at chat.nustechnology.com |
+| ⚠️ ALERT | Fountain W29 task log all 0h (Mon–Thu entire week blank) |
+| ⚠️ ALERT | Aysar: no Thu daily report in Baamboozle MPDM C07SQ4HAUHZ |
+| ⚠️ ALERT | VietPH: 0h Thursday (no leave note) — reminder pending |
+| ⚠️ ALERT | LeNH: 0h all sheets Thursday (no leave note) — reminder pending |
+| ℹ️ INFO | Upwork: Rory/Neural/Aysar Cloudflare blocked (normal — not alerts) |
+| ℹ️ INFO | carrick@: Snyk vulnerability alert (marcel org) |
+| ℹ️ INFO | rick@: FountainStaging BugSnag FK violation (staging only) |
+| ℹ️ INFO | AirAgri memory issue: resolved by Vinn |
