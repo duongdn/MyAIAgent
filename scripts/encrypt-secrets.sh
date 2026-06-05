@@ -32,6 +32,7 @@ SECRET_FILES=(
   config/.bailey-config.json
   config/.upwork-config.json
   config/.cloudflare-config.json
+  config/.gmail-service-account.json
 )
 
 # Add Google service account key if exists
