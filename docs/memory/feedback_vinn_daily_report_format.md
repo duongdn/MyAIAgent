@@ -19,3 +19,4 @@ Vinn (AirAgri dev) posts his daily summary in AirAgri Discord channels (`airagri
 4. Only flag as alert if the phrase is absent AND Vinn had zero substantive activity that day.
 5. Don't confuse regular commit/code chatter with the daily report — but bug fixes, technical responses, AND posting warning logs they're investigating all count.
 6. **Common mistake (2026-06-03):** Vinn posted warning log in #airagri-testing at 09:59+07 — this IS work evidence. Do not require the exact opener phrase before marking James Diamond complete.
+7. **Date window rule (corrected 2026-06-04):** When running the Jun N daily report, check for Jun N-1's report (previous workday). Do NOT require a same-day report — the morning run fires before Vinn posts. Vinn posted Jun 3 17:24 → Jun 4 morning run = COMPLETE, no alert.
