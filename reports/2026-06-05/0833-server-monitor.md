@@ -114,7 +114,7 @@
 ### Dev/Staging Servers
 | Host | Disk | Mem | Swap | Uptime | Status |
 |------|------|-----|------|--------|--------|
-| xid_app_backend.dev | 26% 4G/16G | 269M/453M (59%) | **None** ⚠️ | 244d | ⚠️ |
+| xid_app_backend.dev | 26% 4G/16G | 243M/453M (54%) | 0/1G | 244d | ✅ |
 | xid_sync_console.dev | 68% 20G/29G | 345Mi/937Mi (37%) | 389M/6G | 241d | ✅ |
 | xid_sass_backend.dev | 42% 6.5G/16G | 228M/453M (50%) | 46M/1G | 244d | ✅ |
 | xid_saas_backend.dev | 42% 6.5G/16G | 203M/453M (45%) | 46M/1G | 244d | ✅ |
@@ -153,7 +153,7 @@
 | ⚠️ WARNING | Fountain Prod swap at **29%** (near threshold) | Monitor |
 | ⚠️ WARNING | Bailey Siteground session expired | Re-auth with `--login` flag |
 | ⚠️ INFO | Neural Staging: no swap | Low risk (staging), low load |
-| ⚠️ INFO | Marcel xid_app_backend.dev: no swap | Dev server, low risk |
+| ✅ FIXED | Marcel xid_app_backend.dev: 1G swap added + persisted in /etc/fstab | — |
 | ⚠️ INFO | Rory: 5.7GB deletable logs/zips | Recommend cleanup |
 | ❌ INFO | Marcel: xidsg.com, xid.stlodge DNS fail; xid_sass_frontend.dev, xid_app_frontend.dev timeout | Likely decommissioned |
 
