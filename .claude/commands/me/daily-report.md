@@ -593,15 +593,22 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 **Token failure:** If Matrix returns 401/403, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` first. Never report expired as a skip reason.
 
-**Report — always append to daily report:**
+**Output — two files, not one:**
+- **Full details** → `reports/YYYY-MM-DD/matrix-rooms-HHMM.md` (written by script automatically, room-by-room breakdown with all messages)
+- **Summary** → stdout only (copy into daily-report)
+
+**Action item detection:** Script automatically flags messages directed at duongdn (patterns: "a Dương", "anh Dương", "@duongdn", "duongdn", "mày") combined with action verbs. Flagged lines get ` ⚠️` suffix. All flagged items collected and printed as a warning block at the end of stdout.
+
+**Report — append summary block to daily-report:**
 ```
-## Matrix — {HH:MM} (+07:00)
-### {RoomName} — {N} messages
-  [{HH:MM}] {sender}: {message text} [thread: N replies]
-    └ [{HH:MM}] {sender}: {reply text}
-...
-Total: {N} messages across {N} rooms
+## Matrix — {since-datetime} +07:00
+Active rooms: {N} / {total} | Messages: {N}
+Full details: reports/YYYY-MM-DD/matrix-rooms-HHMM.md
+
+⚠️ ACTION ITEMS FOR YOU ({N}):
+  [{RoomName}] {HH:MM} {sender}: {message text}
 ```
+If no action items, omit the warning block. Do NOT paste room details into daily-report — link to the file instead.
 
 ---
 
