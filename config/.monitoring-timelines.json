@@ -130,5 +130,10 @@
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
     "last_run": "2026-06-05T05:00:00+07:00",
     "output_file": "reports/2026-06-05/daily-report.md"
+  },
+  "server_monitor": {
+    "description": "Updated when server-monitor skill runs.",
+    "last_run": "2026-06-05T08:33:00+07:00",
+    "output_file": "reports/2026-06-05/0833-server-monitor.md"
   }
 }
