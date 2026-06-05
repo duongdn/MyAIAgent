@@ -19,13 +19,12 @@ const ALERT_KEYWORDS = [
 async function fetchGmailMessages(email, windowStart) {
   const key = JSON.parse(fs.readFileSync(SERVICE_ACCOUNT_PATH, "utf8"));
 
-  const auth = new google.auth.JWT(
-    key.client_email,
-    null,
-    key.private_key,
-    ["https://www.googleapis.com/auth/gmail.readonly"],
-    email  // impersonate this user
-  );
+  const auth = new google.auth.JWT({
+    email: key.client_email,
+    key: key.private_key,
+    scopes: ["https://www.googleapis.com/auth/gmail.readonly"],
+    subject: email,  // impersonate this user via domain-wide delegation
+  });
 
   const gmail = google.gmail({ version: "v1", auth });
 
