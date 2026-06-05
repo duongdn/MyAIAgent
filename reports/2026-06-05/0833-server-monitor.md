@@ -36,7 +36,7 @@
 - Swap: 188M/14G = 1.3% ✅
 - Load: 0.05/0.04/0.06 on 2 cores ✅
 - Docker: `wms-nov_app_1` Up 33min, `wms-nov_sidekiq_1` Up 33min, `wms-nov_redis_1` Up 2 months ✅
-- ⚠️ Uptime: **868 days** — consider reboot for kernel updates
+- Uptime: 868 days
 
 ### Redis
 - Memory: 81MB used / 7.67GB system = ~1% ✅
@@ -49,7 +49,7 @@
 - Swap: 308M/8G = 3.9% ✅
 - Load: 0.02/0.03/0.00 on 2 cores ✅
 - Docker: All containers healthy (console_new_app_1/sidekiq_1, console2_app_1/sidekiq_1 Up ~33min; redis/db/mailcatcher Up 3 months) ✅
-- ⚠️ Uptime: **778 days** — consider reboot
+- Uptime: 778 days
 
 ### Siteground (Prestashop)
 - ⚠️ **SESSION_EXPIRED** — run `node scripts/siteground-storage.js --login` to re-auth
@@ -93,7 +93,7 @@
 - Mem: 4.4Gi/7.8Gi, available 3.0Gi ✅ (56% used, within range)
 - Swap: 2.3Gi/8.0Gi = **29%** ⚠️ (near 30% threshold)
 - Load: 0.26/0.27/0.23 on 4 cores ✅
-- Uptime: **807 days** ⚠️ — consider reboot for kernel updates
+- Uptime: 807 days
 - Puma (2× workers), Sidekiq (2×), Next.js (2× — v14.2.27 + v16.2.7) ✅
 
 ---
@@ -104,12 +104,12 @@
 | Host | Disk | Mem | Swap | Uptime | Status |
 |------|------|-----|------|--------|--------|
 | xid_sync_console | 56% 28G/49G | 1.1G/15G (7%) | 53M/6G | 52d | ✅ |
-| xid_app_backend | 30% 5.8G/20G | 229M/949M (24%) | 64M/2G | **529d** ⚠️ | ✅ |
-| xid_saas_backend | 65% 13G/20G | 265M/949M (28%) | 58M/2G | **909d** ⚠️ | ✅ |
-| xidsg.com | DNS FAIL | — | — | — | ❌ |
-| xid_app_frontend | 56% 11G/20G | 163M/953M (17%) | 26M/2G | **1121d** ⚠️ | ✅ |
-| xid_saas_frontend | 37% 7.2G/20G | 192M/949M (20%) | 50M/2G | **862d** ⚠️ | ✅ |
-| xid.stlodge | DNS FAIL | — | — | — | ❌ |
+| xid_app_backend | 30% 5.8G/20G | 229M/949M (24%) | 64M/2G | 529d | ✅ |
+| xid_saas_backend | 65% 13G/20G | 265M/949M (28%) | 58M/2G | 909d | ✅ |
+| xidsg.com | DNS FAIL | — | — | — | ❌ dead |
+| xid_app_frontend | 56% 11G/20G | 163M/953M (17%) | 26M/2G | 1121d | ✅ |
+| xid_saas_frontend | 37% 7.2G/20G | 192M/949M (20%) | 50M/2G | 862d | ✅ |
+| xid.stlodge | DNS FAIL | — | — | — | ❌ dead |
 
 ### Dev/Staging Servers
 | Host | Disk | Mem | Swap | Uptime | Status |
@@ -121,8 +121,7 @@
 | xid_sass_frontend.dev | **TIMEOUT** | — | — | — | ❌ |
 | xid_app_frontend.dev | **TIMEOUT** | — | — | — | ❌ |
 
-**Persistent DNS failures**: `xidsg.com`, `xid.stlodge` — may be decommissioned hosts
-**Persistent timeouts**: `xid_sass_frontend.dev` (18.142.105.78), `xid_app_frontend.dev` (54.169.217.146)
+**Known dead**: `xidsg.com`, `xid.stlodge` (DNS fail), `xid_sass_frontend.dev`, `xid_app_frontend.dev` (timeout) — likely decommissioned
 
 ---
 
@@ -155,7 +154,6 @@
 | ⚠️ WARNING | Bailey Siteground session expired | Re-auth with `--login` flag |
 | ⚠️ INFO | Neural Staging: no swap | Low risk (staging), low load |
 | ⚠️ INFO | Marcel xid_app_backend.dev: no swap | Dev server, low risk |
-| ⚠️ INFO | Long uptimes: speedventory 868d, Fountain Prod 807d, xid_app_frontend 1121d, xid_saas_backend 909d | Schedule kernel reboot |
 | ⚠️ INFO | Rory: 5.7GB deletable logs/zips | Recommend cleanup |
 | ❌ INFO | Marcel: xidsg.com, xid.stlodge DNS fail; xid_sass_frontend.dev, xid_app_frontend.dev timeout | Likely decommissioned |
 
