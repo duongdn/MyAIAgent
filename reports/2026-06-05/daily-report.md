@@ -309,3 +309,44 @@ Last message: May 27 ("I have to uninstall my latest version and install again."
 | ℹ️ INFO | carrick@: Snyk vulnerability alert (marcel org) |
 | ℹ️ INFO | rick@: FountainStaging BugSnag FK violation (staging only) |
 | ℹ️ INFO | AirAgri memory issue: resolved by Vinn |
+
+---
+
+## Matrix Token Refresh + Fountain Update — 08:56 (+07:00)
+
+**Matrix token:** Refreshed successfully via browser SSO ✓ (was expired since ~Jun 4 05:00)
+
+### Fountain Part 1 — W29 Matrix Plan (FOUND)
+Posted by @trinhmtt on **Mon Jun 1, 14:12 +07**:
+```
+Em gửi plan tuần này ạ
+ViTHT: 16h
+VuTQ: 40h
+DatNT: 40H
+→ QC: 25h
+```
+Team activity confirmed in Matrix (Jun 3–5): VuTQ deploying, DatNT fixing bugs, LamLQ on tasks, TrinhMTT coordinating, HungPN doing QC. Team is working ✓.
+
+### Fountain W29 Task Log — Confirmed 0h
+- W29 tab (Jun 1–7): **0.00h** — all rows are blank templates
+- W28 (May 25–31): 165h ✓ — team was logging normally last week
+- **Root cause:** Team not filling Google Sheet this week (TrinhMTT reminded Jun 3: "mn nhớ tasklog trong workstream")
+- **Action needed:** TrinhMTT / team to fill in W29 task log in Google Sheet
+
+### Fountain Trello item: ⚠️ SKIP (W29 task log 0h — team not logging)
+
+---
+
+## Friday Jun 5 Sheets Scan — 08:56 (+07:00)
+
+| Developer | Today (Fri) | Weekly | Status |
+|-----------|-------------|--------|--------|
+| TuanNT | "Nghỉ cả ngày" (Rebecca sheet) | — | ✓ Leave day today |
+| PhucVT | 8h (PhucVT) + 4h (AnhNH2) | — | ✓ |
+| VietPH | 8h ✓ (was 0h Thu — now logged) | — | ✓ |
+| KhanhHH | 4h | — | ✓ |
+| LeNH | 11h total (Rory=8h, Aysar=3h) | — | ✓ (was 0h Thu) |
+| LongVV | 4h today, 12h/16h | 12h/16h | on track |
+
+**VietPH and LeNH: Thu 0h alerts remain valid (yesterday they didn't log), but both are working today ✓**
+
