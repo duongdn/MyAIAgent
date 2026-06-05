@@ -286,6 +286,9 @@ Checking Thursday June 4, 2026 hours:
 | Kai | ✓ Complete (1 email — Jira LIFM2 routine) |
 | Ken | ✓ Complete (50 emails — Precognize SR activity) |
 | Nick | ✓ Complete (18 emails — ClickUp automated, no John Yi issues) |
+| vuongtrancr@gmail | ✓ Complete (20 emails — 3x New Relic incidents, Swish support tickets, Atlassian subscription warning) |
+| freelancer@mpfc | ⚠️ ALERT — 4 alerts: Security alert, Rollbar Daily Summary, 2x Rollbar prod errors (`MM_Member` + `MM_MemberSearch` not found) |
+| dnduongus@gmail | ✓ Complete (20 emails — Vietcombank notifications, LinkedIn, PayPal invoice, Instagram recap) |
 
 ### Precognize (nusken)
 Open PRs from nusken: 0 — clean ✓

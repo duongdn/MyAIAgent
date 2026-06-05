@@ -1,9 +1,16 @@
-// Daily email scan for 2026-06-05 — window: 2026-06-04T09:10+07 → now
+// Daily email scan for 2026-06-05 — window: 2026-06-04T09:00+07 → now
 const tls = require("tls");
-const accounts = require("../config/.email-accounts.json").accounts;
+const { google } = require("googleapis");
+const fs = require("fs");
+const path = require("path");
+const allAccounts = require("../config/.email-accounts.json").accounts;
 
-const WINDOW_START = new Date("2026-06-04T09:10:00+07:00");
-const IMAP_SINCE = "4-Jun-2026"; // catch Wed+Thu, filter by Date in code
+// Split accounts by auth method
+const accounts = allAccounts.filter(a => !a.gmail_api);
+const gmailApiAccounts = allAccounts.filter(a => a.gmail_api);
+
+const WINDOW_START = new Date("2026-06-05T09:00:00+07:00");
+const IMAP_SINCE = "5-Jun-2026"; // filter by Date in code
 
 const ALERT_KEYWORDS = [
   "alert", "error", "fail", "down", "urgent", "warning", "critical",
@@ -72,7 +79,43 @@ function checkIMAP(acct) {
   });
 }
 
+async function checkGmailAPI(acct) {
+  try {
+    const key = JSON.parse(fs.readFileSync(path.join(__dirname, "../config/.gmail-service-account.json"), "utf8"));
+    const auth = new google.auth.JWT({
+      email: key.client_email,
+      key: key.private_key,
+      scopes: ["https://www.googleapis.com/auth/gmail.readonly"],
+      subject: acct.email,
+    });
+    const gmail = google.gmail({ version: "v1", auth });
+    const afterTs = Math.floor(WINDOW_START.getTime() / 1000);
+    const listRes = await gmail.users.messages.list({ userId: "me", q: `after:${afterTs}`, maxResults: 50 });
+    const messages = listRes.data.messages || [];
+    if (messages.length === 0) return { email: acct.email, count: 0, subjects: [], alerts: [] };
+    const batch = messages.slice(0, 20);
+    const details = await Promise.all(
+      batch.map(m => gmail.users.messages.get({ userId: "me", id: m.id, format: "metadata", metadataHeaders: ["Subject", "From", "Date"] }).catch(() => null))
+    );
+    const subjects = [], alerts = [];
+    for (const msg of details) {
+      if (!msg) continue;
+      const hdr = msg.data.payload?.headers || [];
+      const get = n => hdr.find(h => h.name === n)?.value || "";
+      const subject = get("Subject"), from = get("From"), date = get("Date");
+      subjects.push({ subject, from, date });
+      if (ALERT_KEYWORDS.some(k => (subject + " " + from).toLowerCase().includes(k))) alerts.push(subject);
+    }
+    return { email: acct.email, count: messages.length, subjects, alerts };
+  } catch (err) {
+    return { email: acct.email, error: err.message };
+  }
+}
+
 (async () => {
-  const results = await Promise.all(accounts.map(checkIMAP));
-  console.log(JSON.stringify(results, null, 2));
+  const [imapResults, apiResults] = await Promise.all([
+    Promise.all(accounts.map(checkIMAP)),
+    Promise.all(gmailApiAccounts.map(checkGmailAPI)),
+  ]);
+  console.log(JSON.stringify([...imapResults, ...apiResults], null, 2));
 })();
