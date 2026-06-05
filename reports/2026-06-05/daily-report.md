@@ -579,3 +579,13 @@ Task log reminder sent 14:08 for 04/06.
 | 8 | PhucNH tasklog disappearing in MyID | 🟡 Medium | Possibly view/access issue — not fully resolved |
 | 9 | AutoAccessible Stripe sandbox key needed | 🟡 Medium | DaiDV to update staging env |
 | 10 | LongVV Cloudflare OhCleo admin env fix | ✅ Done | Fixed during day |
+
+---
+
+## ⚠️ WARNING — Action Items for duongdn (from Matrix yesterday)
+
+| # | Message | From | Room | Time |
+|---|---------|------|------|------|
+| 🔴 | **143 CDF evidence cần verify** — "Mày có 143 evidence cần verify nha ku" | namtv | Senior discussion room | 10:33 |
+
+**Action required:** Check https://cdf.nustechnology.com/ for pending evidence (Waiting for verification). Run `/me:cdf-monitor` for full audit.

@@ -2,7 +2,8 @@
 /**
  * fetch-matrix-daily.js
  * Fetch ALL joined Matrix rooms for messages since last daily report run.
- * Handles thread replies: timeline events + explicit /relations for thread roots.
+ * Full details → reports/YYYY-MM-DD/matrix-rooms-HHMM.md
+ * Summary     → stdout (for daily-report)
  *
  * Usage:
  *   node scripts/fetch-matrix-daily.js
@@ -10,10 +11,10 @@
  *   node scripts/fetch-matrix-daily.js --room "!roomId:nustechnology.com"
  */
 
-const fs = require('fs');
+const fs    = require('fs');
 const https = require('https');
 
-const CONFIG_PATH = 'config/.matrix-config.json';
+const CONFIG_PATH    = 'config/.matrix-config.json';
 const TIMELINES_PATH = 'config/.monitoring-timelines.json';
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────
@@ -32,12 +33,10 @@ function get(url, token) {
   });
 }
 
-// ── Cutoff: yesterday 8:00 AM UTC+7
-// Use last_run only if it was from a PREVIOUS day (not today) — avoids using
-// today's already-updated last_run which would miss yesterday's messages.
+// ── Cutoff: yesterday 8:00 AM UTC+7 ──────────────────────────────────────────
+// Only use last_run if it predates yesterday 08:00 (avoids today's already-updated value).
 function getCutoffMs() {
   const nowUTC7 = new Date(Date.now() + 7 * 3600000);
-  // yesterday 08:00 UTC+7 = yesterday 01:00 UTC
   const yest = new Date(nowUTC7);
   yest.setUTCDate(yest.getUTCDate() - 1);
   yest.setUTCHours(8, 0, 0, 0);
@@ -48,7 +47,6 @@ function getCutoffMs() {
     const lastRun = timelines.daily_report?.last_run;
     if (lastRun) {
       const lastRunMs = new Date(lastRun).getTime();
-      // Only use last_run if it predates yesterday 08:00 (i.e. report hasn't run today yet)
       if (lastRunMs < yesterdayMs) return lastRunMs;
     }
   } catch {}
@@ -56,19 +54,17 @@ function getCutoffMs() {
   return yesterdayMs;
 }
 
-// ── Discover all joined rooms, resolve display names ─────────────────────────
+// ── Discover all joined rooms, resolve display names ──────────────────────────
 async function resolveRoomName(homeserver, token, id) {
-  // 1) m.room.name
   try {
     const s = await get(`${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.name`, token);
     if (s.name) return s.name;
   } catch {}
-  // 2) canonical alias (e.g. #general:nustechnology.com)
   try {
     const s = await get(`${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.canonical_alias`, token);
     if (s.alias) return s.alias;
   } catch {}
-  return id; // last resort
+  return id;
 }
 
 async function getJoinedRooms(homeserver, token) {
@@ -90,12 +86,9 @@ async function fetchTimeline(homeserver, token, roomId, cutoffMs) {
     const resp = await get(url, token);
     const chunk = resp.chunk || [];
     if (!chunk.length) break;
-
     for (const ev of chunk) {
       if (ev.origin_server_ts >= cutoffMs) events.push(ev);
     }
-
-    // Stop paginating when oldest event in chunk predates cutoff
     if (chunk[chunk.length - 1]?.origin_server_ts < cutoffMs) break;
     from = resp.end;
     if (!from) break;
@@ -104,7 +97,7 @@ async function fetchTimeline(homeserver, token, roomId, cutoffMs) {
   return events;
 }
 
-// ── Fetch thread replies via /relations (catches replies not in main timeline) ─
+// ── Fetch thread replies via /relations ───────────────────────────────────────
 async function fetchThreadReplies(homeserver, token, roomId, eventId, cutoffMs) {
   const replies = [];
   let from = '';
@@ -118,12 +111,20 @@ async function fetchThreadReplies(homeserver, token, roomId, eventId, cutoffMs) 
       replies.push(...chunk.filter(e => e.origin_server_ts >= cutoffMs));
       if (!resp.next_batch || !chunk.length) break;
       from = resp.next_batch;
-    } catch {
-      break; // /relations may 404 on old servers — not fatal
-    }
+    } catch { break; }
   }
 
   return replies;
+}
+
+// ── Action item detection (messages directed at duongdn) ──────────────────────
+const OWNER_PATTERNS = /a\s+dương|anh\s+dương|@duongdn|duongdn|\bmày\b/i;
+const ACTION_PATTERNS = /cần|verify|check|review|làm|xem|nhớ|confirm|update|fix|approve|hú|báo|gởi/i;
+
+function isActionItemForOwner(body, sender) {
+  if (!body) return false;
+  if (sender && sender.includes('duongdn')) return false; // FROM duongdn, not FOR
+  return OWNER_PATTERNS.test(body) && ACTION_PATTERNS.test(body);
 }
 
 // ── Formatting helpers ────────────────────────────────────────────────────────
@@ -131,21 +132,17 @@ function fmtTs(ms) {
   const d = new Date(ms + 7 * 3600000);
   return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`;
 }
-
-function fmtSender(sender) {
-  return (sender || '').replace(/^@/, '').split(':')[0];
-}
-
-function fmtBody(body, maxLen) {
-  return (body || '').replace(/\n+/g, ' ').trim().slice(0, maxLen);
-}
+function fmtSender(sender) { return (sender || '').replace(/^@/, '').split(':')[0]; }
+function fmtBody(body, maxLen) { return (body || '').replace(/\n+/g, ' ').trim().slice(0, maxLen); }
 
 // ── Process a single room ─────────────────────────────────────────────────────
+// Returns { total, actionItems, lines } — lines written to separate file, NOT stdout
 async function processRoom(homeserver, token, room, cutoffMs) {
   const timeline = await fetchTimeline(homeserver, token, room.id, cutoffMs);
+  const actionItems = [];
+  const lines = [];
 
-  // Partition: thread replies vs root messages
-  const replyMap   = new Map(); // rootEventId → Map<eventId, event>
+  const replyMap   = new Map();
   const rootEvents = [];
 
   for (const ev of timeline) {
@@ -158,7 +155,6 @@ async function processRoom(homeserver, token, room, cutoffMs) {
     }
   }
 
-  // For roots with thread aggregation, fetch via /relations to catch non-timeline replies
   for (const ev of rootEvents) {
     const threadAgg = ev.unsigned?.relations?.['m.thread'];
     if (threadAgg?.count > 0) {
@@ -169,30 +165,35 @@ async function processRoom(homeserver, token, room, cutoffMs) {
   }
 
   rootEvents.sort((a, b) => a.origin_server_ts - b.origin_server_ts);
-
   const replyCount = [...replyMap.values()].reduce((s, m) => s + m.size, 0);
   const total = rootEvents.length + replyCount;
 
-  if (!total) return 0; // skip rooms with no activity
+  if (!total) return { total: 0, actionItems, lines };
 
-  console.log(`### ${room.name} — ${total} message${total !== 1 ? 's' : ''}`);
+  lines.push(`### ${room.name} — ${total} message${total !== 1 ? 's' : ''}`);
 
   if (!rootEvents.length) {
-    console.log('  (thread replies only — no root messages in window)\n');
-    return total;
+    lines.push('  (thread replies only — no root messages in window)\n');
+    return { total, actionItems, lines };
   }
 
   for (const ev of rootEvents) {
     const replies = [...(replyMap.get(ev.event_id)?.values() || [])];
     const threadTag = replies.length ? ` [thread: ${replies.length} repl${replies.length === 1 ? 'y' : 'ies'}]` : '';
-    console.log(`  [${fmtTs(ev.origin_server_ts)}] ${fmtSender(ev.sender)}: ${fmtBody(ev.content?.body, 120)}${threadTag}`);
+    const body = ev.content?.body;
+    const flag = isActionItemForOwner(body, ev.sender) ? ' ⚠️' : '';
+    if (flag) actionItems.push({ room: room.name, time: fmtTs(ev.origin_server_ts), sender: fmtSender(ev.sender), body: fmtBody(body, 200) });
+    lines.push(`  [${fmtTs(ev.origin_server_ts)}] ${fmtSender(ev.sender)}: ${fmtBody(body, 120)}${threadTag}${flag}`);
 
     for (const rep of replies.sort((a, b) => a.origin_server_ts - b.origin_server_ts)) {
-      console.log(`    └ [${fmtTs(rep.origin_server_ts)}] ${fmtSender(rep.sender)}: ${fmtBody(rep.content?.body, 100)}`);
+      const rbody = rep.content?.body;
+      const rflag = isActionItemForOwner(rbody, rep.sender) ? ' ⚠️' : '';
+      if (rflag) actionItems.push({ room: room.name, time: fmtTs(rep.origin_server_ts), sender: fmtSender(rep.sender), body: fmtBody(rbody, 200) });
+      lines.push(`    └ [${fmtTs(rep.origin_server_ts)}] ${fmtSender(rep.sender)}: ${fmtBody(rbody, 100)}${rflag}`);
     }
   }
-  console.log('');
-  return total;
+  lines.push('');
+  return { total, actionItems, lines };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
@@ -206,9 +207,12 @@ async function main() {
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
   const { homeserver, access_token: token } = config;
 
+  const nowUTC7    = new Date(Date.now() + 7 * 3600000);
+  const dateStr    = nowUTC7.toISOString().slice(0, 10);
+  const timeStr    = nowUTC7.toISOString().slice(11, 16).replace(':', '');
   const sinceLabel = new Date(cutoffMs + 7 * 3600000).toISOString().slice(0, 16).replace('T', ' ') + ' +07:00';
-  console.log(`Matrix daily check | since: ${sinceLabel}`);
-  console.log('Discovering joined rooms...\n');
+
+  process.stderr.write('Discovering joined rooms...\n');
 
   const allRooms = await getJoinedRooms(homeserver, token);
   const rooms = roomArg ? allRooms.filter(r => r.id === roomArg) : allRooms;
@@ -218,16 +222,42 @@ async function main() {
     process.exit(1);
   }
 
-  let grandTotal = 0;
+  let grandTotal   = 0;
+  let activeRooms  = 0;
+  const allActionItems = [];
+  const detailLines    = [`# Matrix — since ${sinceLabel}\n`];
+
   for (const room of rooms) {
     try {
-      grandTotal += await processRoom(homeserver, token, room, cutoffMs);
+      const result = await processRoom(homeserver, token, room, cutoffMs);
+      grandTotal += result.total;
+      if (result.total > 0) {
+        activeRooms++;
+        detailLines.push(...result.lines);
+      }
+      allActionItems.push(...result.actionItems);
     } catch (err) {
-      console.log(`### ${room.name} — ERROR: ${err.message}\n`);
+      detailLines.push(`### ${room.name} — ERROR: ${err.message}\n`);
     }
   }
 
-  console.log(`Total: ${grandTotal} message${grandTotal !== 1 ? 's' : ''} across ${rooms.length} room${rooms.length !== 1 ? 's' : ''}`);
+  // Write full details to dated report file
+  const reportDir  = `reports/${dateStr}`;
+  fs.mkdirSync(reportDir, { recursive: true });
+  const reportFile = `${reportDir}/matrix-rooms-${timeStr}.md`;
+  fs.writeFileSync(reportFile, detailLines.join('\n'));
+
+  // Summary to stdout (for daily-report)
+  console.log(`## Matrix — ${sinceLabel}`);
+  console.log(`Active rooms: ${activeRooms} / ${rooms.length} | Messages: ${grandTotal}`);
+  console.log(`Full details: ${reportFile}`);
+
+  if (allActionItems.length) {
+    console.log(`\n⚠️ ACTION ITEMS FOR YOU (${allActionItems.length}):`);
+    for (const item of allActionItems) {
+      console.log(`  [${item.room}] ${item.time} ${item.sender}: ${item.body}`);
+    }
+  }
 }
 
 main().catch(err => {
