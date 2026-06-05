@@ -581,6 +581,15 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders
 3. Write report to `reports/{UTC+7 today}/daily-report.md`
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
+5. **Git commit + push** (inline, fix errors automatically):
+   ```bash
+   git add reports/{today}/ config/.monitoring-timelines.json
+   git add -u
+   git commit -m "auto: {today} {HH:MM}"
+   git pull --rebase origin master
+   git push
+   ```
+   If push fails: read the error, fix it (e.g. `git rebase --skip`, `git rebase --abort && git merge origin/master -X ours`, resolve conflicts), then push again. Keep retrying until push succeeds or 3 attempts exhausted.
 
 **Normal (interactive terminal)** — parallel agents:
 1. Read configs + timelines + memory

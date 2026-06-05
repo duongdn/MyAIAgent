@@ -54,15 +54,3 @@ fi
 
 rm -f "$out_file"
 log "Done (exit $exit_code)"
-
-# Commit and push the completed report
-if [ -f "$REPORT_FILE" ] && [ "$(wc -l < "$REPORT_FILE")" -gt 10 ]; then
-  git -C "$PROJECT_DIR" add "reports/$TODAY/" "config/.monitoring-timelines.json" >> "$LOG" 2>&1
-  git -C "$PROJECT_DIR" add -u >> "$LOG" 2>&1
-  git -C "$PROJECT_DIR" commit -m "auto: $TODAY $(TZ='Asia/Ho_Chi_Minh' date +%H:%M)" >> "$LOG" 2>&1
-  git -C "$PROJECT_DIR" pull --rebase origin master >> "$LOG" 2>&1
-  git -C "$PROJECT_DIR" push >> "$LOG" 2>&1
-  log "Git push done (exit $?)"
-else
-  log "Report incomplete, skipping git push."
-fi
