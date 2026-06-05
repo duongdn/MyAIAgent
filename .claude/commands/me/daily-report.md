@@ -121,6 +121,14 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report reminders phucvt` | PhucVT only (print, no send) |
 | `/daily-report reminders tuannt` | TuanNT only (print, no send) |
 | `/daily-report reminders longvv` | LongVV only (print, no send) |
+| **Matrix** | |
+| `/daily-report matrix` | All 6 developer rooms |
+| `/daily-report matrix phucvt` | PhucVT room only |
+| `/daily-report matrix lenh` | LeNH room only |
+| `/daily-report matrix longvv` | LongVV room only |
+| `/daily-report matrix tuannt` | TuanNT room only |
+| `/daily-report matrix fountain` | Fountain room only |
+| `/daily-report matrix elena` | Elena - Digital Plant room only |
 
 ---
 
@@ -573,12 +581,50 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 ---
 
+## Piece 10 — Matrix Developer Rooms (`/daily-report matrix [room]`)
+
+**Script:** `node scripts/fetch-matrix-daily.js [--room <roomId>]`
+
+**Time window:** `daily_report.last_run` from `config/.monitoring-timelines.json` (default fallback: yesterday 08:00 +07:00)
+
+**Rooms:**
+
+| Arg | Room name | Room ID |
+|-----|-----------|---------|
+| `phucvt` | PhucVT | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
+| `lenh` | LeNH | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
+| `longvv` | LongVV (direct) | `!mYZBGNoLFVpMVIJtPu:nustechnology.com` |
+| `tuannt` | TuanNT | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
+| `fountain` | Fountain | `!EWnVDAxbTGsBxPkaaI:nustechnology.com` |
+| `elena` | Elena - Digital Plant | `!kyArBadvcbfPIpIxpD:nustechnology.com` |
+
+**Thread handling (critical):** The script fetches timeline events **AND** calls `/_matrix/client/v3/rooms/{roomId}/relations/{eventId}/m.thread` for any thread root with `unsigned.relations.m.thread.count > 0`. Thread replies appear indented under their root (prefix `└`). Never ignore threaded messages — replies in threads are often the actual status updates.
+
+**What to look for:**
+- Dev confirming task completion or flagging a blocker
+- Customer or manager messages in Fountain / Elena rooms
+- Any absence, leave, or delay notices posted to a room
+
+**Token failure:** If Matrix returns 401/403, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` first. Never report expired as a skip reason.
+
+**Report — always append to daily report:**
+```
+## Matrix — {HH:MM} (+07:00)
+### {RoomName} — {N} messages
+  [{HH:MM}] {sender}: {message text} [thread: N replies]
+    └ [{HH:MM}] {sender}: {reply text}
+...
+Total: {N} messages across {N} rooms
+```
+
+---
+
 ## Full Run (`/daily-report`)
 
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix**
 3. Write report to `reports/{UTC+7 today}/daily-report.md`
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 5. **Git commit + push** (inline, fix errors automatically):
@@ -594,7 +640,7 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 **Normal (interactive terminal)** — parallel agents:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io
-3. Launch parallel: Sheets + Fountain + Elena
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
