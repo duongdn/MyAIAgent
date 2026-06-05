@@ -388,3 +388,194 @@ Window: 2026-06-04 08:00 → 2026-06-05 08:00 +07:00 | 1188 msgs across 126 room
 3. **NamNN mobile not started** — Bailey BA/QC confirmed. NamNN was busy with Elliott build. Needs follow-up.
 4. **Cameron Appetise pause** — 2-week pause until 24/6. TaiTM 1 remaining task, HiepNT available.
 5. **AA3 scope** — Customer still not confirmed. Anh Trinh following up.
+
+---
+
+## Matrix Full Room Summary — 14:26 (+07:00)
+Window: **2026-06-04 08:00 → 2026-06-05 08:00 +07:00**
+Total: **1188 messages | 27 active rooms | 99 silent rooms**
+
+---
+
+### 🔴 Celine - OhCleo — 610 msgs
+LongVV + duongdn full-day work. Admin panel calling wrong API endpoint (`https://v2-api-h32tt.ondigitalocean.app/` instead of `https://api.v2.ohcleo.com/api`). Root cause: `NEXT_PUBLIC_API_URL` env var not updated on admin server. LongVV fixed. Pre-prod has `allow all` CORS — noted.
+
+---
+
+### 🔴 Kunal - Fountain — 92 msgs
+- ViTHT leading reviews, bug PR #426 merged (UnknownFormat rescue → `head :not_found`)
+- VuTQ reviewed, DatNT pushed fixes
+- Card #2925 (NoMethodError on testuser999@protonmail.com) → likely crawler bot, skipping
+- PhatDLT assigned live bug fixes to DatNT (menu bar card)
+- Threads active all morning
+
+---
+
+### 🔴 Rory Hackett - BXR App — 83 msgs
+Demo expected this week. Multiple issues:
+- Region UAE signup creates wrong siteId (UK instead of UAE) → API `/complete-client-info` bug, TinPC + LeNH fixing
+- LeNH deploying API fixes throughout day (thread: 11 replies on `/api/complete-client-info`)
+- KhoaTD working on payment flow, needs region APIs
+- Membership ID: agreed to auto-assign temporarily
+
+---
+
+### 🔴 Elena - Active Alerts — 69 msgs
+- KhanhHH did 3h20m on AA2 bugs (then back to Elliott)
+- AA3 scope: customer still hasn't confirmed — AnhTTL waiting [thread active]
+- DuyVNA + DongNV logging Redmine issues throughout day
+- New Stripe sandbox account created → DaiDV needs to update staging secret key
+- Pikachu image alt-text dispute with QC (Decorative vs Informative) — noted in Redmine
+- HaVS: payment-related tasks pending QC (ThươngNL busy until afternoon)
+
+---
+
+### 🔴 Elena - Digital Plant — 49 msgs
+**⚠️ Server issue:** studio-02 + studio-03 both lost algorithm service. TienND restarted studio-02, switched traffic over. Studio-03 still not connecting. Customer (LA) noticed. Fixed by ~17:06 but took multiple attempts. Issue: TienND missed a deploy step, fixed on 2nd try.
+
+---
+
+### 🟡 Direct Manager — 41 msgs
+- **Workstream golive** (12:56): BinhNT announced fixes live. Issues list shared — DuongDN confirmed his case is "giả" (not real)
+- **Workstream updates** (TrinhMTT 15:31): new features: CustomerNameAlias, H:MM format, report config
+- **PhucNH tasklog disappearing** in MyID project (AnhTTL reported). NamTV: looks like PhucNH may have been removed from project view. VinhNT checked → activity visible T3-T4. Not resolved cleanly.
+- **WyAsk / Ons Mebarek**: AnhTTL requested NghiepNQ communication level assessment → NamTV approved (14:20)
+
+---
+
+### 🟡 Rebecca - William Bills — 31 msgs
+**⚠️ QA dispute:** Ollie accused Lucas of not QA-ing ("This is becoming a real issue"). Team investigated:
+- TuanNT confirmed "no worries" from Ollie exists in WB Slack (duongdn found screenshot)
+- AnhNVN paused new dev, doing bug payback
+- Resolution: TuanNT must open screen tracker going forward; can't prove work without it
+- Ollie also asking fix for free (no hours logged) → team not agreeing
+
+---
+
+### 🟡 Christina Keefe - AutoAccessible — 31 msgs
+- LucNT + DaiDV doing AA-69, AA-70 Linear tasks
+- HaVS: new Stripe sandbox → DaiDV to update staging env (11:04)
+- ThươngNL doing QC in afternoon; payment tasks paused until Stripe updated
+- AnhNVN: bả (Christina) sent email about "Headings missing on Documents" — DaiDV checking
+- Threads active on multiple bug/feature PRs
+
+---
+
+### 🟡 (unnamed) !oGYjbzEfphvvauBZtq — 26 msgs
+Internal senior discussion (duongdn + namtv):
+- Claude AI usage audit across Fountain team (VuTQ reviewed all devs' prompts)
+- Rick acc had 2 users, resolved
+- Resource planning: LongVV → OhCleo likely next week; VuTQ → Bailey Console tuần sau
+- NamNN has 20h idle Elliott, needs task — priority over learning
+- 143 CDF evidence for duongdn to verify (NamTV noted)
+
+---
+
+### 🟡 Bailey - BA/QC — 18 msgs
+- VietPH: Mobile Menu Modal live ✓
+- DatNC: Console + Prestashop items live (transport scanning, menu modal)
+- **⚠️ NamNN not started mobile** (confirmed 11:08, was doing Elliott build)
+- Prestashop -187h (Grazing Software Desktop) → assigned VietPH
+- Upgrade staging prep done, release to client next week
+
+---
+
+### 🟡 Những chú voi con đáng yêu — 18 msgs
+Dev knowledge sharing: PhucVT shared Microsoft open-source markdown tool. DuongDN sparked debate: HTML is the new Markdown for LLM output. Also shared Laravel security audit tool (Checkpoint).
+
+---
+
+### 🟡 NUS - Bailey - Paturevision 2026 — 15 msgs
+- Multiple items live: Mobile Menu Modal, Console + Prestashop transport scanning
+- NamNN: built Firebase distribution release (android) → NamNN idle after, needed new task
+- DuongDN + DatNC assigning NamNN to new task ~11:12
+
+---
+
+### 🟡 (unnamed) !oofREYAXHsvPWEOJev — 19 msgs
+Private DM: ThuýLTT + duongdn. HR/finance topic — BHXH/tax discussion regarding payment transfer arrangement after resignation. Personal matter, not project-related.
+
+---
+
+### 🟡 (unnamed) !SHdFKwrYpRhWJBtiBv — 10 msgs
+VuTQ + duongdn (likely VuTQ direct room):
+- CDF evaluation: "phù hợp nhưng chưa đủ mạnh" = valid but note weakness
+- AI Kunal usage review: VuTQ audited dev prompts, Rick acc resolved
+- VuTQ full on Kunal this week → Bailey Console next week confirmed
+
+---
+
+### 🟡 NUS - Colin - ETZ — 12 msgs
+- KhanhHH deployed Redmine #79082 to staging (11:26)
+- LucNT tested, asked error message update → KhanhHH fixed
+- HungPN QC tested: done 14:40 ✓
+- LucNT reporting to client
+
+---
+
+### 🟡 Cameron Batty - Appetise — 11 msgs
+**ℹ️ Pause until 24/6.** Cam pausing after this week. TaiTM has 1 remaining task, can finish today/tomorrow. HiepNT setup week not charged. NamTV: if TaiTM can't finish → HiepNT starts today to reduce risk.
+
+---
+
+### 🟡 BDD - Delivery — 8 msgs
+Week 8/6 resource updates (NamTV):
+- ThamTTH + ThienTM: IDLE
+- TuanNTG (Joe Kazzi): pushed to 15/6
+- LiemHTN off 11/6 (thesis defense)
+- HiepNT off 29/6–3/7 (gia đình, pending approve)
+- NamNN → Bailey, VuTQ → Bailey (from Kunal, no offset)
+- KhanhHH → Colin ETZ (from Elena, no offset)
+- HaLT confirmed all leave notes processed
+
+---
+
+### 🟡 (unnamed) !tGBJevbuSmjqVePBPN — 9 msgs
+Payment follow-up with James (client). James ignoring payment messages, only replies to task messages. DuongDN created a dedicated thread to chase payment. HaLT requesting Finance to send email warning re: potential impact on project continuation.
+
+---
+
+### 🟡 Senior Devs — 6 msgs
+CDF self-evaluation issue: HiepNT + NamNN filled Level 2 without Level 1. MinhTV reset to self-evaluation state. NamTV: must complete **tonight**, not "cuối tuần". MinhTV to message all verifiers.
+
+---
+
+### 🟡 (unnamed) !QEbdvaMJkTurMpRPIX — 3 msgs (PhucVT room)
+PhucVT: task log written on wrong date → fixing. Also notified arriving 1h late (family matter, 08:16).
+
+---
+
+### 🟢 Delivery Department — 2 msgs
+AnhTTL requested WyAsk (Ons Mebarek) comms assessment for NghiepNQ. NamTV approved.
+
+---
+
+### 🟢 NUS Technology — 1 msg
+TThaoNM (09:49): Company umbrella announcement — umbrellas available at office for rainy season.
+
+---
+
+### 🟢 Aysar Khalid - Baamboozle — 1 msg
+DuongDN reminder to Carrick: post Aysar daily update to Baamboozle MPDM (Ronan/Jamie), missing since Thu.
+
+---
+
+### 🟢 TuanNT room (!knbJbIKzXRJNGVFQNg) — 1 msg
+Task log reminder sent 14:08 for 04/06.
+
+---
+
+## Matrix Alerts Summary
+
+| # | Alert | Severity | Status |
+|---|-------|----------|--------|
+| 1 | Elena studio-02/03 algorithm crash | 🔴 High | Fixed EOD — confirm stable today |
+| 2 | Rebecca/William Bills — Ollie QA dispute | 🔴 High | Resolved with screenshot; TuanNT using tracker |
+| 3 | NamNN mobile not started (Bailey) | 🟡 Medium | Assigned ~11:12, confirm started today |
+| 4 | James client ignoring payment msgs | 🟡 Medium | Dedicated thread created; Finance email pending |
+| 5 | CDF self-eval incomplete (HiepNT, NamNN) | 🟡 Medium | Required complete last night |
+| 6 | Cameron Appetise pause until 24/6 | 🟡 Medium | Noted, TaiTM finishing this week |
+| 7 | AA3 scope not confirmed by customer | 🟡 Medium | AnhTTL following up |
+| 8 | PhucNH tasklog disappearing in MyID | 🟡 Medium | Possibly view/access issue — not fully resolved |
+| 9 | AutoAccessible Stripe sandbox key needed | 🟡 Medium | DaiDV to update staging env |
+| 10 | LongVV Cloudflare OhCleo admin env fix | ✅ Done | Fixed during day |
