@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * fetch-matrix-daily.js
- * Fetch developer Matrix room messages since last daily report run (default: 8:00 AM +07 yesterday).
- * Handles thread replies: fetches inline timeline events AND explicit /relations for thread roots.
+ * Fetch ALL joined Matrix rooms for messages since last daily report run.
+ * Handles thread replies: timeline events + explicit /relations for thread roots.
  *
  * Usage:
  *   node scripts/fetch-matrix-daily.js
@@ -15,16 +15,6 @@ const https = require('https');
 
 const CONFIG_PATH = 'config/.matrix-config.json';
 const TIMELINES_PATH = 'config/.monitoring-timelines.json';
-
-// Rooms to monitor — order matters for report readability
-const MONITOR_ROOMS = [
-  { name: 'PhucVT',            id: '!kzyLVmJxcRESoTkfnY:nustechnology.com' },
-  { name: 'LeNH',              id: '!OIrgPraJWrcDTnRVLQ:nustechnology.com' },
-  { name: 'LongVV',            id: '!mYZBGNoLFVpMVIJtPu:nustechnology.com' },
-  { name: 'TuanNT',            id: '!knbJbIKzXRJNGVFQNg:nustechnology.com' },
-  { name: 'Fountain',          id: '!EWnVDAxbTGsBxPkaaI:nustechnology.com' },
-  { name: 'Elena-DigitalPlant',id: '!kyArBadvcbfPIpIxpD:nustechnology.com' },
-];
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────
 function get(url, token) {
@@ -53,8 +43,28 @@ function getCutoffMs() {
   const nowUTC7 = new Date(Date.now() + 7 * 3600000);
   const yest = new Date(nowUTC7);
   yest.setUTCDate(yest.getUTCDate() - 1);
-  yest.setUTCHours(8, 0, 0, 0); // 8:00 AM expressed in UTC+7 time
-  return yest.getTime() - 7 * 3600000; // convert back to UTC ms
+  yest.setUTCHours(8, 0, 0, 0);
+  return yest.getTime() - 7 * 3600000;
+}
+
+// ── Discover all joined rooms, resolve display names ─────────────────────────
+async function getJoinedRooms(homeserver, token) {
+  const resp = await get(`${homeserver}/_matrix/client/v3/joined_rooms`, token);
+  const ids = resp.joined_rooms || [];
+
+  const rooms = await Promise.all(ids.map(async id => {
+    let name = id; // fallback: use room ID as name
+    try {
+      const state = await get(
+        `${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.name`,
+        token
+      );
+      if (state.name) name = state.name;
+    } catch {}
+    return { id, name };
+  }));
+
+  return rooms.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // ── Fetch timeline messages going backward until cutoff ───────────────────────
@@ -98,7 +108,7 @@ async function fetchThreadReplies(homeserver, token, roomId, eventId, cutoffMs) 
       if (!resp.next_batch || !chunk.length) break;
       from = resp.next_batch;
     } catch {
-      break; // /relations may return 404 on old servers — not fatal
+      break; // /relations may 404 on old servers — not fatal
     }
   }
 
@@ -107,7 +117,6 @@ async function fetchThreadReplies(homeserver, token, roomId, eventId, cutoffMs) 
 
 // ── Formatting helpers ────────────────────────────────────────────────────────
 function fmtTs(ms) {
-  // HH:MM in +07:00
   const d = new Date(ms + 7 * 3600000);
   return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`;
 }
@@ -120,15 +129,58 @@ function fmtBody(body, maxLen) {
   return (body || '').replace(/\n+/g, ' ').trim().slice(0, maxLen);
 }
 
-// Friendly-name → room ID mapping (accept either form for --room)
-const ROOM_ALIASES = {
-  phucvt:   '!kzyLVmJxcRESoTkfnY:nustechnology.com',
-  lenh:     '!OIrgPraJWrcDTnRVLQ:nustechnology.com',
-  longvv:   '!mYZBGNoLFVpMVIJtPu:nustechnology.com',
-  tuannt:   '!knbJbIKzXRJNGVFQNg:nustechnology.com',
-  fountain: '!EWnVDAxbTGsBxPkaaI:nustechnology.com',
-  elena:    '!kyArBadvcbfPIpIxpD:nustechnology.com',
-};
+// ── Process a single room ─────────────────────────────────────────────────────
+async function processRoom(homeserver, token, room, cutoffMs) {
+  const timeline = await fetchTimeline(homeserver, token, room.id, cutoffMs);
+
+  // Partition: thread replies vs root messages
+  const replyMap   = new Map(); // rootEventId → Map<eventId, event>
+  const rootEvents = [];
+
+  for (const ev of timeline) {
+    const rel = ev.content?.['m.relates_to'];
+    if (rel?.rel_type === 'm.thread' && rel.event_id) {
+      if (!replyMap.has(rel.event_id)) replyMap.set(rel.event_id, new Map());
+      replyMap.get(rel.event_id).set(ev.event_id, ev);
+    } else {
+      rootEvents.push(ev);
+    }
+  }
+
+  // For roots with thread aggregation, fetch via /relations to catch non-timeline replies
+  for (const ev of rootEvents) {
+    const threadAgg = ev.unsigned?.relations?.['m.thread'];
+    if (threadAgg?.count > 0) {
+      const fetched = await fetchThreadReplies(homeserver, token, room.id, ev.event_id, cutoffMs);
+      if (!replyMap.has(ev.event_id)) replyMap.set(ev.event_id, new Map());
+      for (const rep of fetched) replyMap.get(ev.event_id).set(rep.event_id, rep);
+    }
+  }
+
+  rootEvents.sort((a, b) => a.origin_server_ts - b.origin_server_ts);
+
+  const replyCount = [...replyMap.values()].reduce((s, m) => s + m.size, 0);
+  const total = rootEvents.length + replyCount;
+
+  console.log(`### ${room.name} — ${total} message${total !== 1 ? 's' : ''}`);
+
+  if (!rootEvents.length) {
+    console.log('  (no messages)\n');
+    return total;
+  }
+
+  for (const ev of rootEvents) {
+    const replies = [...(replyMap.get(ev.event_id)?.values() || [])];
+    const threadTag = replies.length ? ` [thread: ${replies.length} repl${replies.length === 1 ? 'y' : 'ies'}]` : '';
+    console.log(`  [${fmtTs(ev.origin_server_ts)}] ${fmtSender(ev.sender)}: ${fmtBody(ev.content?.body, 120)}${threadTag}`);
+
+    for (const rep of replies.sort((a, b) => a.origin_server_ts - b.origin_server_ts)) {
+      console.log(`    └ [${fmtTs(rep.origin_server_ts)}] ${fmtSender(rep.sender)}: ${fmtBody(rep.content?.body, 100)}`);
+    }
+  }
+  console.log('');
+  return total;
+}
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
@@ -141,73 +193,22 @@ async function main() {
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
   const { homeserver, access_token: token } = config;
 
-  // Accept either a friendly name (phucvt) or a raw room ID (!xxx:nustechnology.com)
-  let rooms = MONITOR_ROOMS;
-  if (roomArg) {
-    const resolvedId = ROOM_ALIASES[roomArg.toLowerCase()] || roomArg;
-    rooms = MONITOR_ROOMS.filter(r => r.id === resolvedId);
-    if (!rooms.length) { console.error(`Unknown room: ${roomArg}`); process.exit(1); }
+  const sinceLabel = new Date(cutoffMs + 7 * 3600000).toISOString().slice(0, 16).replace('T', ' ') + ' +07:00';
+  console.log(`Matrix daily check | since: ${sinceLabel}`);
+  console.log('Discovering joined rooms...\n');
+
+  const allRooms = await getJoinedRooms(homeserver, token);
+  const rooms = roomArg ? allRooms.filter(r => r.id === roomArg) : allRooms;
+
+  if (!rooms.length) {
+    console.error(roomArg ? `Room not found: ${roomArg}` : 'No joined rooms found.');
+    process.exit(1);
   }
 
-  const sinceLabel = new Date(cutoffMs + 7 * 3600000).toISOString().slice(0, 16).replace('T', ' ') + ' +07:00';
-  console.log(`Matrix daily check | since: ${sinceLabel}\n`);
-
   let grandTotal = 0;
-
   for (const room of rooms) {
     try {
-      const timeline = await fetchTimeline(homeserver, token, room.id, cutoffMs);
-
-      // Partition: thread replies vs root messages
-      const replyMap  = new Map(); // rootEventId → Set of reply events (by event_id)
-      const rootEvents = [];
-
-      for (const ev of timeline) {
-        const rel = ev.content?.['m.relates_to'];
-        if (rel?.rel_type === 'm.thread' && rel.event_id) {
-          if (!replyMap.has(rel.event_id)) replyMap.set(rel.event_id, new Map());
-          replyMap.get(rel.event_id).set(ev.event_id, ev);
-        } else {
-          rootEvents.push(ev);
-        }
-      }
-
-      // For roots with thread aggregation, also fetch via /relations to catch non-timeline replies
-      for (const ev of rootEvents) {
-        const threadAgg = ev.unsigned?.relations?.['m.thread'];
-        if (threadAgg?.count > 0) {
-          const fetched = await fetchThreadReplies(homeserver, token, room.id, ev.event_id, cutoffMs);
-          if (!replyMap.has(ev.event_id)) replyMap.set(ev.event_id, new Map());
-          for (const rep of fetched) replyMap.get(ev.event_id).set(rep.event_id, rep);
-        }
-      }
-
-      // Sort chronologically
-      rootEvents.sort((a, b) => a.origin_server_ts - b.origin_server_ts);
-
-      const replyCount = [...replyMap.values()].reduce((s, m) => s + m.size, 0);
-      const total = rootEvents.length + replyCount;
-      grandTotal += total;
-
-      console.log(`### ${room.name} — ${total} message${total !== 1 ? 's' : ''}`);
-
-      if (!rootEvents.length) {
-        console.log('  (no messages)\n');
-        continue;
-      }
-
-      for (const ev of rootEvents) {
-        const replies = [...(replyMap.get(ev.event_id)?.values() || [])];
-        const threadTag = replies.length ? ` [thread: ${replies.length} repl${replies.length === 1 ? 'y' : 'ies'}]` : '';
-        console.log(`  [${fmtTs(ev.origin_server_ts)}] ${fmtSender(ev.sender)}: ${fmtBody(ev.content?.body, 120)}${threadTag}`);
-
-        // Show thread replies indented
-        for (const rep of replies.sort((a, b) => a.origin_server_ts - b.origin_server_ts)) {
-          console.log(`    └ [${fmtTs(rep.origin_server_ts)}] ${fmtSender(rep.sender)}: ${fmtBody(rep.content?.body, 100)}`);
-        }
-      }
-      console.log('');
-
+      grandTotal += await processRoom(homeserver, token, room, cutoffMs);
     } catch (err) {
       console.log(`### ${room.name} — ERROR: ${err.message}\n`);
     }
