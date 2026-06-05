@@ -32,38 +32,49 @@ function get(url, token) {
   });
 }
 
-// ── Cutoff: yesterday 8:00 AM UTC+7 (or daily_report.last_run) ───────────────
+// ── Cutoff: yesterday 8:00 AM UTC+7
+// Use last_run only if it was from a PREVIOUS day (not today) — avoids using
+// today's already-updated last_run which would miss yesterday's messages.
 function getCutoffMs() {
-  try {
-    const timelines = JSON.parse(fs.readFileSync(TIMELINES_PATH, 'utf8'));
-    const lastRun = timelines.daily_report?.last_run;
-    if (lastRun) return new Date(lastRun).getTime();
-  } catch {}
-  // Fallback: yesterday 8:00 AM UTC+7 = yesterday 01:00 UTC
   const nowUTC7 = new Date(Date.now() + 7 * 3600000);
+  // yesterday 08:00 UTC+7 = yesterday 01:00 UTC
   const yest = new Date(nowUTC7);
   yest.setUTCDate(yest.getUTCDate() - 1);
   yest.setUTCHours(8, 0, 0, 0);
-  return yest.getTime() - 7 * 3600000;
+  const yesterdayMs = yest.getTime() - 7 * 3600000;
+
+  try {
+    const timelines = JSON.parse(fs.readFileSync(TIMELINES_PATH, 'utf8'));
+    const lastRun = timelines.daily_report?.last_run;
+    if (lastRun) {
+      const lastRunMs = new Date(lastRun).getTime();
+      // Only use last_run if it predates yesterday 08:00 (i.e. report hasn't run today yet)
+      if (lastRunMs < yesterdayMs) return lastRunMs;
+    }
+  } catch {}
+
+  return yesterdayMs;
 }
 
 // ── Discover all joined rooms, resolve display names ─────────────────────────
+async function resolveRoomName(homeserver, token, id) {
+  // 1) m.room.name
+  try {
+    const s = await get(`${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.name`, token);
+    if (s.name) return s.name;
+  } catch {}
+  // 2) canonical alias (e.g. #general:nustechnology.com)
+  try {
+    const s = await get(`${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.canonical_alias`, token);
+    if (s.alias) return s.alias;
+  } catch {}
+  return id; // last resort
+}
+
 async function getJoinedRooms(homeserver, token) {
   const resp = await get(`${homeserver}/_matrix/client/v3/joined_rooms`, token);
   const ids = resp.joined_rooms || [];
-
-  const rooms = await Promise.all(ids.map(async id => {
-    let name = id; // fallback: use room ID as name
-    try {
-      const state = await get(
-        `${homeserver}/_matrix/client/v3/rooms/${encodeURIComponent(id)}/state/m.room.name`,
-        token
-      );
-      if (state.name) name = state.name;
-    } catch {}
-    return { id, name };
-  }));
-
+  const rooms = await Promise.all(ids.map(async id => ({ id, name: await resolveRoomName(homeserver, token, id) })));
   return rooms.sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -162,10 +173,12 @@ async function processRoom(homeserver, token, room, cutoffMs) {
   const replyCount = [...replyMap.values()].reduce((s, m) => s + m.size, 0);
   const total = rootEvents.length + replyCount;
 
+  if (!total) return 0; // skip rooms with no activity
+
   console.log(`### ${room.name} — ${total} message${total !== 1 ? 's' : ''}`);
 
   if (!rootEvents.length) {
-    console.log('  (no messages)\n');
+    console.log('  (thread replies only — no root messages in window)\n');
     return total;
   }
 

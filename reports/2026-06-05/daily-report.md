@@ -350,3 +350,41 @@ Team activity confirmed in Matrix (Jun 3–5): VuTQ deploying, DatNT fixing bugs
 
 **VietPH and LeNH: Thu 0h alerts remain valid (yesterday they didn't log), but both are working today ✓**
 
+
+---
+
+## Matrix — 14:26 (+07:00)
+Window: 2026-06-04 08:00 → 2026-06-05 08:00 +07:00 | 1188 msgs across 126 rooms | 27 rooms active
+
+### Active rooms summary
+
+| Room | Msgs | Key notes |
+|------|------|-----------|
+| Celine - OhCleo | 610 | LongVV + duongdn all-day: API endpoint config, env NEXT_PUBLIC_API_URL fix, admin panel pointing to wrong DO server |
+| Kunal - Fountain | 92 | ViTHT leading reviews, DatNT fix PR #426 (UnknownFormat rescue), VuTQ review, PhatDLT bug fixes on LIVE |
+| Rory Hackett - BXR App | 83 | Active dev |
+| Elena - Active Alerts | 69 | KhanhHH did 3h20m on AA2 bugs; AA3 scope not confirmed by customer yet; multiple threads on bug assignments |
+| Elena - Digital Plant | 49 | **⚠️ studio-02 + studio-03 both crashed** (algorithm sập). TienND fixed by switching to studio-02. LA noticed on web. |
+| Direct Manager | 41 | Active |
+| Christina Keefe - AutoAccessible | 31 | Active |
+| Rebecca - William Bills | 31 | **⚠️ Ollie QA dispute** — Ollie says Lucas didn't QA. TuanNT confirmed "no worries" message exists in WB Slack (duongdn found screenshot). Decision: open tracker from now on. |
+| (unnamed) !oGYjbzEfphvvauBZtq | 26 | Claude usage audit discussion, PHP team resource planning for next week (LongVV → OhCleo likely; VuTQ → Bailey Console) |
+| Những chú voi con đáng yêu | 18 | Internal |
+| Bailey - BA/QC | 18 | DatNC: Prestashop -187h needs dev, Console tasks assigned. **⚠️ NamNN hasn't started mobile** (confirmed 11:08) |
+| NUS - Bailey - Paturevision 2026 | 15 | Active |
+| BDD - Delivery | 6 | Week 8/6 plan: ThamTTH + ThienTM idle; TuanNTG Joe Kazzi pushed to 15/6; AnhNVN following AA3 scope |
+| Cameron Batty - Appetise | 11 | **ℹ️ Cam pausing until 24/6** — TaiTM finishing this week, HiepNT setup week not charged |
+| LongVV direct | 10 | Cloudflare tunnel setup for dev env (trycloudflare URL + localhost:3000) |
+| Bailey - Management | 6 | VuTQ → Console tasks next week |
+| Senior Devs | 6 | Self-evaluation dispute: some devs filled level 2 without level 1. NamTV requiring completion tonight. |
+| TuanNT room | 1 | Task log reminder sent (0h Thu 04/06) |
+| Aysar - Baamboozle | 1 | Quiet |
+| NUS Technology | 1 | — |
+
+### Alerts from Matrix
+
+1. **Elena servers** — studio-02 + studio-03 crashed yesterday afternoon (algorithm service). Fixed end of day. Confirm both stable today.
+2. **Rebecca/William Bills** — Ollie QA dispute resolved with screenshot evidence. TuanNT to use tracker going forward.
+3. **NamNN mobile not started** — Bailey BA/QC confirmed. NamNN was busy with Elliott build. Needs follow-up.
+4. **Cameron Appetise pause** — 2-week pause until 24/6. TaiTM 1 remaining task, HiepNT available.
+5. **AA3 scope** — Customer still not confirmed. Anh Trinh following up.
