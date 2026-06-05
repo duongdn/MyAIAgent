@@ -247,3 +247,154 @@ Checking Thursday June 4, 2026 hours:
 1. Fountain W29 task log: is the team logging hours elsewhere, or genuinely not filling the sheet?
 2. Matrix SSO: when was the last valid session? May need full browser re-login by user.
 3. Elena GitHub PRs: need manual auth refresh for gh CLI on this server.
+
+---
+
+## Checklist Completion — 08:35 (+07:00)
+
+### Check Progress (board O83pAyqb)
+
+| Item | Checklist | Result |
+|------|-----------|--------|
+| Maddy - Carrick/Kai/Luis | Normal | ✓ Complete (Xtreme quiet, Kai 16h/wk OK) |
+| John Yi - Amazing Meds | Normal | ✓ Complete (TuanNT 8h47m via Scrin.io) |
+| James Diamond - Vinn | Should do | ✓ Complete (Vinn daily report Thu ✓) |
+| Rory | Closely monitor | ✓ Complete (Swift quiet = OK) |
+| Aysar | Closely monitor | ⚠️ SKIP — no Carrick update in MPDM C07SQ4HAUHZ since Thu 09:10 |
+| Franc | Closely monitor | ✓ Complete (RDC quiet, no dmetiner alert) |
+| Elliott | Closely monitor | ✓ Complete (Violet daily update Thu ✓) |
+| MPFC | Work | ✓ Complete (quiet = OK) |
+| Marcel | Work | ✓ Complete (adhoc, quiet expected) |
+| Elena - SamGuard Digital Plant | Work | ✓ Complete (0 open PRs, SAM GUARD quiet) |
+| Raymond - LegalAtoms | Work | ✓ Complete (quiet = OK) |
+| Neural Contract | Work | ✓ Complete (Cloudflare block = not an alert per rule) |
+| Bailey | Work | ✓ Complete (TuanNT 8h47m ✓, GGS quiet) |
+| Andrew Taraba | Work | ✓ Complete (Bizurk silence = normal) |
+| Rebecca - William Bills | Work | ✓ Complete (TuanNT working ✓) |
+| Colin | Work | ✓ Complete (Aigile quiet = OK) |
+| Fountain | Work | ⚠️ SKIP — W29 task log all 0h (Mon–Thu), Matrix SSO expired |
+| Philip | Work | ✓ Complete (last message May 27 — no new requests since) |
+| Elena - WordPress SamGuard | Pending | ✓ Complete (JS check clean, no errors) |
+
+### Check Mail
+
+| Account | Result |
+|---------|--------|
+| DuongDn | ✓ Complete (0 emails, no events) |
+| Carrick | ✓ Complete (1 email — Snyk INFO) |
+| Rick | ✓ Complete (6 emails — Fountain staging BugSnag INFO) |
+| Kai | ✓ Complete (1 email — Jira LIFM2 routine) |
+| Ken | ✓ Complete (50 emails — Precognize SR activity) |
+| Nick | ✓ Complete (18 emails — ClickUp automated, no John Yi issues) |
+| vuongtrancr@gmail | ✓ Complete (20 emails — 3x New Relic incidents, Swish support tickets, Atlassian subscription warning) |
+| freelancer@mpfc | ⚠️ ALERT — 4 alerts: Security alert, Rollbar Daily Summary, 2x Rollbar prod errors (`MM_Member` + `MM_MemberSearch` not found) |
+| dnduongus@gmail | ✓ Complete (20 emails — Vietcombank notifications, LinkedIn, PayPal invoice, Instagram recap) |
+
+### Precognize (nusken)
+Open PRs from nusken: 0 — clean ✓
+
+### Philip MS Teams
+Last message: May 27 ("I have to uninstall my latest version and install again.") — 9 days ago, no follow-up request. Clean ✓.
+
+---
+
+## Final Alerts Summary
+
+| Priority | Alert |
+|----------|-------|
+| ⚠️ ACTION | Fountain: 3 Kunal deploy approvals pending (@rick570) |
+| ⚠️ ACTION | Matrix SSO expired — needs manual login at chat.nustechnology.com |
+| ⚠️ ALERT | Fountain W29 task log all 0h (Mon–Thu entire week blank) |
+| ⚠️ ALERT | Aysar: no Thu daily report in Baamboozle MPDM C07SQ4HAUHZ |
+| ⚠️ ALERT | VietPH: 0h Thursday (no leave note) — reminder pending |
+| ⚠️ ALERT | LeNH: 0h all sheets Thursday (no leave note) — reminder pending |
+| ℹ️ INFO | Upwork: Rory/Neural/Aysar Cloudflare blocked (normal — not alerts) |
+| ℹ️ INFO | carrick@: Snyk vulnerability alert (marcel org) |
+| ℹ️ INFO | rick@: FountainStaging BugSnag FK violation (staging only) |
+| ℹ️ INFO | AirAgri memory issue: resolved by Vinn |
+
+---
+
+## Matrix Token Refresh + Fountain Update — 08:56 (+07:00)
+
+**Matrix token:** Refreshed successfully via browser SSO ✓ (was expired since ~Jun 4 05:00)
+
+### Fountain Part 1 — W29 Matrix Plan (FOUND)
+Posted by @trinhmtt on **Mon Jun 1, 14:12 +07**:
+```
+Em gửi plan tuần này ạ
+ViTHT: 16h
+VuTQ: 40h
+DatNT: 40H
+→ QC: 25h
+```
+Team activity confirmed in Matrix (Jun 3–5): VuTQ deploying, DatNT fixing bugs, LamLQ on tasks, TrinhMTT coordinating, HungPN doing QC. Team is working ✓.
+
+### Fountain W29 Task Log — Confirmed 0h
+- W29 tab (Jun 1–7): **0.00h** — all rows are blank templates
+- W28 (May 25–31): 165h ✓ — team was logging normally last week
+- **Root cause:** Team not filling Google Sheet this week (TrinhMTT reminded Jun 3: "mn nhớ tasklog trong workstream")
+- **Action needed:** TrinhMTT / team to fill in W29 task log in Google Sheet
+
+### Fountain Trello item: ⚠️ SKIP (W29 task log 0h — team not logging)
+
+---
+
+## Friday Jun 5 Sheets Scan — 08:56 (+07:00)
+
+| Developer | Today (Fri) | Weekly | Status |
+|-----------|-------------|--------|--------|
+| TuanNT | "Nghỉ cả ngày" (Rebecca sheet) | — | ✓ Leave day today |
+| PhucVT | 8h (PhucVT) + 4h (AnhNH2) | — | ✓ |
+| VietPH | 8h ✓ (was 0h Thu — now logged) | — | ✓ |
+| KhanhHH | 4h | — | ✓ |
+| LeNH | 11h total (Rory=8h, Aysar=3h) | — | ✓ (was 0h Thu) |
+| LongVV | 4h today, 12h/16h | 12h/16h | on track |
+
+**VietPH and LeNH: Thu 0h alerts remain valid (yesterday they didn't log), but both are working today ✓**
+
+
+---
+
+## Matrix — 2026-06-04 08:00 +07:00 (15:00)
+Active rooms: 27 / 126 | Messages: 1224
+Full details: reports/2026-06-05/matrix-rooms-1500.md
+
+⚠️ ACTION ITEMS FOR YOU (13):
+- [Direct] 10:23 namtv: Tuần sau mày thấy ném LongVV vào project bên Ons được ko?
+- [Direct] 10:33 namtv: Mày có 143 evidence cần verify nha ku
+- [VuTQ room] 16:12 vutq: anh Dương ơi cho em hỏi tí, phần CDF bằng chứng phù hợp nhưng chưa đủ mạnh thì valid hay invalid?
+- [Bailey - BA/QC] 13:14 datnc: Prestashop Grazing Software -187h E có con này green light rồi nhan a Dương... A coi thử ai làm hộ e nhan.
+- [Celine - OhCleo] 09:24 longvv: nảy kêu a Dương update lại trỏ qua api.v2.ohcleo.com thì work bth
+- [Celine - OhCleo] 09:43 minhtv: xem API nào urgent, những cái gì cần thiết list ra nhờ a Dương xử luôn
+- [Celine - OhCleo] 10:51 longvv: có a Dương lên check mới biết dc hic
+- [Celine - OhCleo] 10:52 longvv: a Dương giúp e lên con api check .env cái password admin
+- [Celine - OhCleo] 15:35 longvv: a Dương confirm giúp e nhe
+- [Celine - OhCleo] 17:11 longvv: a Dương review giúp e PR #9 nha
+
+---
+
+## Matrix Alerts Summary
+
+| # | Alert | Severity | Status |
+|---|-------|----------|--------|
+| 1 | Elena studio-02/03 algorithm crash | 🔴 High | Fixed EOD — confirm stable today |
+| 2 | Rebecca/William Bills — Ollie QA dispute | 🔴 High | Resolved with screenshot; TuanNT using tracker |
+| 3 | NamNN mobile not started (Bailey) | 🟡 Medium | Assigned ~11:12, confirm started today |
+| 4 | James client ignoring payment msgs | 🟡 Medium | Dedicated thread created; Finance email pending |
+| 5 | CDF self-eval incomplete (HiepNT, NamNN) | 🟡 Medium | Required complete last night |
+| 6 | Cameron Appetise pause until 24/6 | 🟡 Medium | Noted, TaiTM finishing this week |
+| 7 | AA3 scope not confirmed by customer | 🟡 Medium | AnhTTL following up |
+| 8 | PhucNH tasklog disappearing in MyID | 🟡 Medium | Possibly view/access issue — not fully resolved |
+| 9 | AutoAccessible Stripe sandbox key needed | 🟡 Medium | DaiDV to update staging env |
+| 10 | LongVV Cloudflare OhCleo admin env fix | ✅ Done | Fixed during day |
+
+---
+
+## ⚠️ WARNING — Action Items for duongdn (from Matrix yesterday)
+
+| # | Message | From | Room | Time |
+|---|---------|------|------|------|
+| 🔴 | **143 CDF evidence cần verify** — "Mày có 143 evidence cần verify nha ku" | namtv | Senior discussion room | 10:33 |
+
+**Action required:** Check https://cdf.nustechnology.com/ for pending evidence (Waiting for verification). Run `/me:cdf-monitor` for full audit.

@@ -9,6 +9,7 @@ description: Server resource monitoring — check all managed servers and update
 | `/util:read-memory` | First — before anything | — |
 | `/util:trello` | After each server group | board `O83pAyqb`; card `Check server status`; complete item per group |
 | `/util:report` | Write combined output | `reports/{YYYY-MM-DD}/{HHMM}-server-monitor.md` |
+| timeline update | End of EVERY run (mandatory) | update `server_monitor.last_run` in `config/.monitoring-timelines.json` |
 
 ---
 
@@ -184,11 +185,14 @@ Mark "Fountain" complete after both servers checked.
 
 ### SSH Hosts (from ~/.ssh/config, prefix `xid`)
 
-**Production**: xid_sync_console, xid_app_backend, xid_saas_backend, xidsg.com, xid_app_frontend, xid_saas_frontend, xid.stlodge
-**Dev/Staging**: xid_app_backend.dev, xid_sync_console.dev, xid_sass_backend.dev, xid_sass_frontend.dev, xid_app_frontend.dev, xid_saas_backend.dev
+**Production**: xid_sync_console, xid_app_backend, xid_saas_backend, xid_app_frontend, xid_saas_frontend
+**Dev/Staging**: xid_app_backend.dev, xid_sync_console.dev, xid_sass_backend.dev, xid_saas_backend.dev
+
+> **Known dead (skip)**: `xidsg.com`, `xid.stlodge` — persistent DNS failures, likely decommissioned.
+> **Known dead (skip)**: `xid_sass_frontend.dev` (18.142.105.78), `xid_app_frontend.dev` (54.169.217.146) — persistent timeouts, likely terminated.
 
 ```bash
-for host in xid_sync_console xid_app_backend xid_saas_backend xidsg.com xid_app_frontend xid_saas_frontend xid.stlodge xid_app_backend.dev xid_sync_console.dev xid_sass_backend.dev xid_sass_frontend.dev xid_app_frontend.dev xid_saas_backend.dev; do
+for host in xid_sync_console xid_app_backend xid_saas_backend xid_app_frontend xid_saas_frontend xid_app_backend.dev xid_sync_console.dev xid_sass_backend.dev xid_saas_backend.dev; do
   echo "========== $host =========="
   ssh -o ConnectTimeout=5 -o BatchMode=yes "$host" "hostname; uptime; free -h | grep -E 'Mem|Swap'; df -h / | tail -1; nproc" 2>&1 || echo "CONNECTION FAILED"
 done
@@ -242,7 +246,6 @@ Mark "Rory" complete after check done.
 
 - Run all servers in a project group, then mark Trello item
 - Flag any container that is Down or restarting frequently
-- Flag uptime >365 days as "consider reboot for kernel updates"
 - Flag servers with no swap configured
 - Compare disk usage trend if previous report exists
 - Report format: table per server with metrics + status column

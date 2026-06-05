@@ -121,6 +121,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report reminders phucvt` | PhucVT only (print, no send) |
 | `/daily-report reminders tuannt` | TuanNT only (print, no send) |
 | `/daily-report reminders longvv` | LongVV only (print, no send) |
+| **Matrix** | |
+| `/daily-report matrix` | All joined rooms |
+| `/daily-report matrix --room "!roomId:..."` | Single room by ID |
 
 ---
 
@@ -573,12 +576,59 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 ---
 
+## Piece 10 — Matrix (`/daily-report matrix`)
+
+**Script:** `node scripts/fetch-matrix-daily.js [--room <roomId>] [--since <ISO8601>]`
+
+**Time window:** `daily_report.last_run` from `config/.monitoring-timelines.json` (default fallback: yesterday 08:00 +07:00)
+
+**Rooms:** ALL joined rooms — discovered dynamically via `/_matrix/client/v3/joined_rooms`. No hardcoded list. Sorted alphabetically by display name. Use `--room "!roomId:..."` to target a single room.
+
+**Thread handling (critical):** Script fetches timeline events AND calls `/_matrix/client/v3/rooms/{roomId}/relations/{eventId}/m.thread` for any thread root with `unsigned.relations.m.thread.count > 0`. Thread replies appear indented under their root (`└`). Never ignore threaded messages — replies in threads are often the actual status updates.
+
+**What to look for:**
+- Dev confirming task completion or flagging a blocker
+- Customer or manager messages in Fountain / Elena rooms
+- Absence, leave, or delay notices
+
+**Token failure:** If Matrix returns 401/403, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` first. Never report expired as a skip reason.
+
+**Two-step flow:**
+
+**Step 1 — Run script** (fetches raw messages):
+```
+node scripts/fetch-matrix-daily.js
+```
+Script writes raw messages to `reports/YYYY-MM-DD/matrix-rooms-HHMM.md` and prints to stdout:
+- Compact summary line (active rooms, message count, file path)
+- ⚠️ action items block (messages directed at duongdn auto-detected by regex)
+
+**Step 2 — Claude summarizes** (read raw file, rewrite with per-room summaries):
+- Read `matrix-rooms-HHMM.md` (raw message dump from script)
+- For each active room: write 2–5 bullet summary (what happened, who said what, any blockers/alerts)
+- Overwrite the file with the summarized version — do NOT keep raw messages in it
+
+**Action item detection:** Script flags messages matching "a Dương / anh Dương / @duongdn / duongdn / mày" + action verb. ⚠️ suffix on flagged lines, warning block at end of stdout. These surface in the daily-report block — do NOT miss them.
+
+**Report — append to daily-report (stdout summary only, no room details):**
+```
+## Matrix — {since-datetime} +07:00
+Active rooms: {N} / {total} | Messages: {N}
+Full details: reports/YYYY-MM-DD/matrix-rooms-HHMM.md
+
+⚠️ ACTION ITEMS FOR YOU ({N}):
+  [{RoomName}] {HH:MM} {sender}: {message text}
+```
+If no action items, omit the warning block. Room details stay in the separate file — never paste them into daily-report.
+
+---
+
 ## Full Run (`/daily-report`)
 
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix**
 3. Write report to `reports/{UTC+7 today}/daily-report.md`
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 5. **Git commit + push** (inline, fix errors automatically):
@@ -594,7 +644,7 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 **Normal (interactive terminal)** — parallel agents:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io
-3. Launch parallel: Sheets + Fountain + Elena
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
