@@ -9,6 +9,7 @@ description: Bailey project monitoring — CloudWatch alarms, events, and infras
 | `/util:read-memory` | First — before anything | — |
 | `/util:report` | Write output | `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md` |
 | `/util:tasklog-write` | Subtask 9: log monitoring task | sheet `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`; task `Weekly Monitor {Month} {Year}`; owner `DuongDN`; hours `1` |
+| Trello API | Subtask 10: complete checklist | card `6a221fe400d53ea9a87d45e5`; create checklist named DD/MM/YYYY; mark all 9 subtasks complete |
 
 ---
 
@@ -350,6 +351,21 @@ echo | openssl s_client -servername paturevision.fr -connect paturevision.fr:443
 - Mailgun %: delivery rate from stats
 - SSL dates: flag if expiring within 30 days
 
+### ⚠️ Customer-Facing Message Rules (MANDATORY)
+
+This Slack channel is customer-visible. **NEVER expose internal details:**
+- ❌ No internal errors: "session expired", "script failed", "N/A (token invalid)"
+- ❌ No security config details: "PubliclyAccessible=True", "MultiAZ=False"
+- ❌ No error counts or stack traces: "86x Redis::TimeoutError", "connection refused"
+- ❌ No tool/auth failures: "Siteground session expired — needs re-auth"
+
+**How to handle unavailable data:**
+- Siteground session expired → write `OK` (no alarms = safe default), omit the detail
+- RDS security config issues → note in local report only, write `OK` in Slack
+- Internal errors → mention in local report, write clean status in Slack
+
+The Slack message should only contain: status labels (OK/WARNING/NOT OK) + delivery %, billing amount, SSL dates.
+
 ## Subtask 9: Fill Task Log (Google Sheets)
 
 After posting to Slack, log the monitoring task in the Paturevision task log spreadsheet.
@@ -386,6 +402,42 @@ After posting to Slack, log the monitoring task in the Paturevision task log spr
 ### Reference
 
 See W18 row 70 for example format.
+
+## Subtask 10: Complete Trello Checklist
+
+After all subtasks complete, mark the "Bailey monitor" Trello card checklist for today's run.
+
+### Setup
+
+- Card ID: `6a221fe400d53ea9a87d45e5` (card name: "Bailey monitor", board: O83pAyqb)
+- API key + token: from `.trello-config.json`
+
+### Steps
+
+1. **Create a new checklist** on the card named `DD/MM/YYYY` (today's date):
+   ```
+   POST /1/checklists?idCard={card_id}&name={date}
+   ```
+
+2. **Add all 9 subtask items** and mark each as `complete`:
+   - CloudWatch Alarms & Dashboard
+   - AWS Health & EC2 Events
+   - Billing Review
+   - RDS Monitoring (speedventory)
+   - New Relic APM
+   - Mailgun Delivery Stats
+   - Siteground Storage
+   - Post to Slack #maintenance (GGS)
+   - Fill Task Log (Google Sheets)
+
+   ```
+   POST /1/checklists/{cl_id}/checkItems?name={item}&checked=false
+   PUT  /1/cards/{card_id}/checkItem/{item_id}?state=complete
+   ```
+
+3. If a subtask couldn't be completed (e.g. Siteground session expired), mark that item `incomplete` and note the reason in the local report only.
+
+---
 
 ## Rules
 
