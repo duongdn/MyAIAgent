@@ -16,7 +16,8 @@ function checkIMAP(acct) {
   return new Promise((resolve) => {
     let buffer = "";
     let step = 0;
-    const socket = tls.connect(993, acct.imap_server || "imap.zoho.com", () => {});
+    const host = acct.imap_server || "imap.zoho.com";
+    const socket = tls.connect({ host, port: 993, servername: host }, () => {});
     socket.setTimeout(30000);
     socket.on("timeout", () => { socket.destroy(); resolve({ email: acct.email, error: "timeout" }); });
     socket.on("error", (e) => resolve({ email: acct.email, error: e.message }));
