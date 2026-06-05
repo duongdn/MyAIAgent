@@ -593,13 +593,24 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 
 **Token failure:** If Matrix returns 401/403, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` first. Never report expired as a skip reason.
 
-**Output — two files, not one:**
-- **Full details** → `reports/YYYY-MM-DD/matrix-rooms-HHMM.md` (written by script automatically, room-by-room breakdown with all messages)
-- **Summary** → stdout only (copy into daily-report)
+**Two-step flow:**
 
-**Action item detection:** Script automatically flags messages directed at duongdn (patterns: "a Dương", "anh Dương", "@duongdn", "duongdn", "mày") combined with action verbs. Flagged lines get ` ⚠️` suffix. All flagged items collected and printed as a warning block at the end of stdout.
+**Step 1 — Run script** (fetches raw messages):
+```
+node scripts/fetch-matrix-daily.js
+```
+Script writes raw messages to `reports/YYYY-MM-DD/matrix-rooms-HHMM.md` and prints to stdout:
+- Compact summary line (active rooms, message count, file path)
+- ⚠️ action items block (messages directed at duongdn auto-detected by regex)
 
-**Report — append summary block to daily-report:**
+**Step 2 — Claude summarizes** (read raw file, rewrite with per-room summaries):
+- Read `matrix-rooms-HHMM.md` (raw message dump from script)
+- For each active room: write 2–5 bullet summary (what happened, who said what, any blockers/alerts)
+- Overwrite the file with the summarized version — do NOT keep raw messages in it
+
+**Action item detection:** Script flags messages matching "a Dương / anh Dương / @duongdn / duongdn / mày" + action verb. ⚠️ suffix on flagged lines, warning block at end of stdout. These surface in the daily-report block — do NOT miss them.
+
+**Report — append to daily-report (stdout summary only, no room details):**
 ```
 ## Matrix — {since-datetime} +07:00
 Active rooms: {N} / {total} | Messages: {N}
@@ -608,7 +619,7 @@ Full details: reports/YYYY-MM-DD/matrix-rooms-HHMM.md
 ⚠️ ACTION ITEMS FOR YOU ({N}):
   [{RoomName}] {HH:MM} {sender}: {message text}
 ```
-If no action items, omit the warning block. Do NOT paste room details into daily-report — link to the file instead.
+If no action items, omit the warning block. Room details stay in the separate file — never paste them into daily-report.
 
 ---
 
