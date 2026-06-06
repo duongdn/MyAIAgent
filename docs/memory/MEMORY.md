@@ -92,8 +92,9 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_slack_threads.md](feedback_slack_threads.md) — MUST use search.messages API (conversations.history misses thread replies)
 - [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
 - [feedback_vinn_daily_report_format.md](feedback_vinn_daily_report_format.md) — Vinn's AirAgri daily report opens with "Just report my process today:" — date window: check N-1 report, not same-day
-- [feedback_philip_msteams_must_run.md](feedback_philip_msteams_must_run.md) — Philip MS Teams: ALWAYS run `fetch-msteams-customer-messages.js`, never skip as "not implemented"
-- [feedback_philip_msteams_config_missing.md](feedback_philip_msteams_config_missing.md) — **CORRECTION:** `.msteams-accounts.json` never existed (verified git log) — skip is genuinely correct, needs user to provide credentials
+- [feedback_philip_msteams_must_run.md](feedback_philip_msteams_must_run.md) — Philip MS Teams: run with FULL NAME query "Philip Briggs" (plain "Philip" = 113 ambiguous matches); config+login now verified working
+- [feedback_philip_msteams_config_missing.md](feedback_philip_msteams_config_missing.md) — **RESOLVED 2026-06-06:** `.msteams-accounts.json` created+encrypted, script verified working — blocker gone
+- [feedback_msteams_url_substring_bug_fixed.md](feedback_msteams_url_substring_bug_fixed.md) — MS Teams script `url.includes()` falsely matched OAuth redirect_uri params, exited login loop pre-password; fixed via exact-hostname `isTeamsHost()`
 - [feedback_scrin_company_not_john_yi.md](feedback_scrin_company_not_john_yi.md) — Scrin.io company 266977 is NOT John Yi — never label TuanNT Scrin hours as "John Yi effort"
 - [feedback_andrew_taraba_animworld_dm.md](feedback_andrew_taraba_animworld_dm.md) — Andrew Taraba: check nuscarrick DM with "animeworld", not Bizurk channels
 - [feedback_andrew_taraba_low_activity.md](feedback_andrew_taraba_low_activity.md) — Bizurk silence is normal, not an alert

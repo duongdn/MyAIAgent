@@ -24,6 +24,10 @@ const CLEAR_PROFILE  = process.argv.includes('--clear-profile');
 const TIMEOUT = 60000;
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function isTeamsHost(url) {
+  try { return ['teams.microsoft.com', 'teams.live.com'].includes(new URL(url).hostname); }
+  catch { return false; }
+}
 function screenshot(page, name) {
   return page.screenshot({ path: path.join(SCREENSHOT_DIR, `msteams-${name}.png`) }).catch(() => {});
 }
@@ -89,12 +93,12 @@ async function doLogin(page, email, password) {
   // Main auth loop
   for (let attempt = 0; attempt < 25; attempt++) {
     const url = page.url();
-    const bodyText = await page.evaluate(() => document.body.innerText || '');
+    const bodyText = await page.evaluate(() => document.body.innerText || '').catch(() => '');
     await screenshot(page, `loop-${attempt}`);
     console.log(`[login] Loop ${attempt} | ${url.slice(0, 80)} | ${bodyText.slice(0, 70).replace(/\n/g, ' ')}`);
 
     // Teams UI loaded — done (works for both teams.microsoft.com and teams.live.com)
-    const isTeamsUrl = url.includes('teams.microsoft.com') || url.includes('teams.live.com');
+    const isTeamsUrl = isTeamsHost(url);
     const teamsUi = isTeamsUrl && await page.evaluate(() => !!(
       document.querySelector('[data-tid="app-bar"]') ||
       document.querySelector('[data-tid="chat-list"]') ||
@@ -102,7 +106,7 @@ async function doLogin(page, email, password) {
       document.querySelector('#teams-app-bar') ||
       document.querySelector('[data-tid="chat-pane-list"]') ||
       document.querySelector('[class*="chatList"]')
-    ));
+    )).catch(() => false);
     // Fallback: if on Teams URL with substantial content (chat list visible), consider loaded
     const teamsBodyReady = isTeamsUrl && bodyText.length > 200 && !/sign in|stay signed in/i.test(bodyText.slice(0, 50));
     if (teamsUi || teamsBodyReady) { console.log('[login] Teams UI confirmed (teamsUi=' + teamsUi + ', bodyReady=' + teamsBodyReady + ')'); break; }
@@ -226,7 +230,7 @@ async function doLogin(page, email, password) {
     }
 
     // On Teams URL but UI not loaded yet — wait
-    if (url.includes('teams.microsoft.com')) {
+    if (isTeamsHost(url)) {
       await sleep(5000);
       continue;
     }
@@ -242,7 +246,7 @@ async function doLogin(page, email, password) {
 
   // Final navigation to Teams if not there yet
   const currentUrl = page.url();
-  if (!currentUrl.includes('teams.microsoft.com') && !currentUrl.includes('teams.live.com')) {
+  if (!isTeamsHost(currentUrl)) {
     console.log('[login] Final navigate to Teams...');
     await page.goto('https://teams.microsoft.com', { waitUntil: 'domcontentloaded', timeout: TIMEOUT });
     await sleep(10000);
@@ -255,7 +259,7 @@ async function doLogin(page, email, password) {
     await screenshot(page, `post-${i}`);
     console.log(`[login] Post-nav ${i} | ${url.slice(0, 80)}`);
 
-    const isTeamsUrl2 = url.includes('teams.microsoft.com') || url.includes('teams.live.com');
+    const isTeamsUrl2 = isTeamsHost(url);
     const hasUi = isTeamsUrl2 && (await page.evaluate(() => !!(
       document.querySelector('[data-tid="app-bar"]') || document.querySelector('[data-tid="chat-list"]') ||
       document.querySelector('[class*="chatList"]')
@@ -296,7 +300,7 @@ async function doLogin(page, email, password) {
   const finalUrl = page.url();
   console.log('[login] Final URL:', finalUrl.slice(0, 120));
 
-  if (!finalUrl.includes('teams.microsoft.com') && !finalUrl.includes('teams.live.com')) {
+  if (!isTeamsHost(finalUrl)) {
     await screenshot(page, '05b-load-failed');
     throw new Error('Teams did not load after login. Check screenshot msteams-05b-load-failed.png');
   }

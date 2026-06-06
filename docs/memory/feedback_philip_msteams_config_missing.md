@@ -1,22 +1,17 @@
 ---
 name: feedback_philip_msteams_config_missing
-description: "config/.msteams-accounts.json has NEVER existed (verified via git log --all) — feedback_philip_msteams_must_run claim that 'script works, last msg 2026-05-27' is stale/unverifiable. Genuine infra blocker, not a lazy skip."
+description: "RESOLVED 2026-06-06: config/.msteams-accounts.json was created with will@nustechnology.com creds and encrypted. Script verified working end-to-end (see feedback_msteams_url_substring_bug_fixed). This blocker no longer applies."
 metadata:
   type: feedback
 ---
 
-Investigated on 2026-06-06 08:50 whether the Philip Trello skip ("no msteams config file") was a lazy/false skip per [[feedback_philip_msteams_must_run]]'s claim that "the script exists and works."
+**RESOLVED on 2026-06-06.** This memory previously documented that `config/.msteams-accounts.json` had never existed (verified `git log --all` returned zero commits) and that the Philip Trello skip was a genuine infra blocker, not a lazy skip.
 
-**Verified facts:**
-- `config/.msteams-accounts.json` does not exist (no plaintext, no `.enc`)
-- `git log --all -- config/.msteams-accounts.json*` returns zero commits — file has NEVER been in the repo
-- No `tmp/msteams-*` artifacts from any prior run
-
-**Conclusion:** [[feedback_philip_msteams_must_run]]'s claim of a working script with "Last known message: 2026-05-27" cannot be substantiated — likely a hallucinated/stale memory. The skip on 2026-06-06 was CORRECT, not lazy.
+**Resolution:** the user provided MS Teams login credentials for `will@nustechnology.com`. The file `config/.msteams-accounts.json` (account `will`) was created, registered in `SECRET_FILES`/`ENC_FILES` arrays of `encrypt-secrets.sh`/`decrypt-secrets.sh`, and encrypted to `.msteams-accounts.json.enc`. The script `scripts/fetch-msteams-customer-messages.js` was then run, hit a login-loop bug (see [[feedback_msteams_url_substring_bug_fixed]]), and after the fix successfully logged in end-to-end and loaded the real Teams chat list.
 
 **How to apply:**
-- Do NOT penalize/flag agents for skipping Philip until `config/.msteams-accounts.json` is created with `will@nustechnology.com` MS Teams credentials and encrypted via `encrypt-secrets.sh`.
-- This requires user action — ask for the credentials, don't try to "fix it silently" (there's nothing to fix without secrets).
-- Once the config exists and the script runs successfully once, update [[feedback_philip_msteams_must_run]] with the verified real "last known message" date/content.
+- The infra blocker is gone — `config/.msteams-accounts.json` exists, is encrypted, and the script works.
+- Do NOT skip the Philip MS Teams check as "config missing" anymore — see [[feedback_philip_msteams_must_run]] for the current run procedure and known remaining issues (search ambiguity, message-extraction).
 
 [[feedback_philip_msteams_must_run]]
+[[feedback_msteams_url_substring_bug_fixed]]
