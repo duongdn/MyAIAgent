@@ -32,6 +32,10 @@ done
 
 cd "$PROJECT_DIR"
 
+# Pull latest code so skill/script updates are applied before Claude runs
+git pull --rebase origin master >> "$LOG" 2>&1
+log "Git pull done (exit $?)"
+
 # Expose real display so Puppeteer scripts (matrix-token-refresh, check-samguard) can open browsers
 export DISPLAY=:1
 
