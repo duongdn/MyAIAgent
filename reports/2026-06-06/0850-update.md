@@ -46,7 +46,7 @@ Context: Thu Jun 4 shows "Nghỉ cả ngày" (full day off) in Rebecca + Neural 
 **WordPress samguard.co:** Re-ran `wordpress-samguard-check.js` — HTTP 200, zero JS errors, zero CSP violations. Earlier "navigation timeout" was transient.
 - → **Trello item completed**
 
-**Side finding (separate, doesn't block any current item):** Precognize (`nusken` GitHub account) has never been authenticated on this machine — `gh auth switch --user nusken` returns "no accounts matched". This has been a gap since at least 2026-06-03. Not currently gating any Trello item, but Precognize PR checks are blind. **Needs `gh auth login` with nusken credentials once.**
+**Precognize (nusken) — RESOLVED, was a false alarm:** Initial subagent reported "nusken not authenticated, no accounts matched". Re-checked directly: `nusken` IS authenticated and is now the active `gh` account (`gh auth status` shows it logged in via keyring). Listed `Precognize/development` open PRs successfully — **11 open PRs** (newest #4967-4965 from Jun 4, oldest #4831 from Apr 13), all normal SR-ticket dev work, none requiring our action. The subagent's "no accounts matched" was a transient/stale gh-CLI state in its session, not a real config gap.
 
 ---
 
@@ -74,5 +74,4 @@ Card "Check progress" (`6a23390158245fb6fafcc1ed`):
 ## Unresolved Questions
 
 1. Philip MS Teams credentials (`config/.msteams-accounts.json`) missing — never existed in repo. Need user to provide `will@nustechnology.com` MS Teams login to set this up.
-2. Precognize (`nusken`) GitHub account never authenticated on this machine — blind to Precognize PRs since at least 2026-06-03. Needs one-time `gh auth login`.
-3. TuanNT — will Friday Jun 5 task log be filled Monday? If COMBINED stays 0h Monday morning, send reminder per normal weekday rule.
+2. TuanNT — will Friday Jun 5 task log be filled Monday? If COMBINED stays 0h Monday morning, send reminder per normal weekday rule.
