@@ -27,6 +27,7 @@ SECRET_FILES=(
   config/.scrin-config.json
   config/.redmine-config.json
   config/.matrix-config.json
+  config/.msteams-accounts.json
   config/.web-monitors.json
   config/.jira-config.json
   config/.bailey-config.json

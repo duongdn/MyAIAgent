@@ -27,6 +27,7 @@ ENC_FILES=(
   config/.scrin-config.json.enc
   config/.redmine-config.json.enc
   config/.matrix-config.json.enc
+  config/.msteams-accounts.json.enc
   config/.web-monitors.json.enc
   config/.jira-config.json.enc
   config/.bailey-config.json.enc

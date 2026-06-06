@@ -438,7 +438,9 @@ async function searchAndExtractMessages(page, customerName) {
 
   const browser = await puppeteer.launch({
     headless: 'new',
-    executablePath: '/usr/bin/google-chrome',
+    executablePath: process.platform === 'darwin'
+      ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+      : '/usr/bin/google-chrome',
     userDataDir: PROFILE_DIR,
     args: [
       '--no-sandbox',
