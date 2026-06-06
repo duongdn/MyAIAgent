@@ -41,6 +41,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV works on Maddy + James Diamond from W23 (2026-04-20)
 - [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
 - [project_vutq_moved_to_bailey.md](project_vutq_moved_to_bailey.md) — VuTQ moved to Bailey (Paturevision) as of 2026-05-13; 0h in Fountain is expected
+- [project_tuannt_25h_excused_jun5.md](project_tuannt_25h_excused_jun5.md) — TuanNT had 2.5h excused time Fri 2026-06-05 (user-confirmed) — explains 0h, John Yi/Bailey/Rebecca completed on this basis (one-off, don't generalize)
 - [project_php_team.md](project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH
 
 ---
