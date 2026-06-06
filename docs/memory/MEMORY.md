@@ -93,6 +93,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_discord_only_airagri_bizurk.md](feedback_discord_only_airagri_bizurk.md) — Discord: only AirAgri + Bizurk, NOT HOMIEAPP
 - [feedback_vinn_daily_report_format.md](feedback_vinn_daily_report_format.md) — Vinn's AirAgri daily report opens with "Just report my process today:" — date window: check N-1 report, not same-day
 - [feedback_philip_msteams_must_run.md](feedback_philip_msteams_must_run.md) — Philip MS Teams: ALWAYS run `fetch-msteams-customer-messages.js`, never skip as "not implemented"
+- [feedback_philip_msteams_config_missing.md](feedback_philip_msteams_config_missing.md) — **CORRECTION:** `.msteams-accounts.json` never existed (verified git log) — skip is genuinely correct, needs user to provide credentials
 - [feedback_scrin_company_not_john_yi.md](feedback_scrin_company_not_john_yi.md) — Scrin.io company 266977 is NOT John Yi — never label TuanNT Scrin hours as "John Yi effort"
 - [feedback_andrew_taraba_animworld_dm.md](feedback_andrew_taraba_animworld_dm.md) — Andrew Taraba: check nuscarrick DM with "animeworld", not Bizurk channels
 - [feedback_andrew_taraba_low_activity.md](feedback_andrew_taraba_low_activity.md) — Bizurk silence is normal, not an alert
