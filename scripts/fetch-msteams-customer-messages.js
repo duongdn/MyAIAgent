@@ -451,7 +451,10 @@ async function searchAndExtractMessages(page, customerName) {
       '--disable-setuid-sandbox',
       '--disable-blink-features=AutomationControlled',
       '--window-size=1440,900',
+      '--disable-dev-shm-usage',
+      `--crash-dumps-dir=/var/tmp`,
     ],
+    env: { ...process.env, TMPDIR: '/var/tmp' },
     defaultViewport: { width: 1440, height: 900 },
   });
 
