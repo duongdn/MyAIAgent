@@ -658,7 +658,9 @@ If no action items, omit the warning block. Room details stay in the separate fi
 - Slack `after:` excludes named date → use `after:{day_before}` + epoch filter
 - IMAP `SINCE` uses server dates → always search previous day, filter by Date header
 - Discord: verify token with 3-step curl before assuming invalid
-- Matrix: if token fails → run `scripts/matrix-token-refresh.js` (browser profile). Never report as expired.
+- **ABSOLUTE RULE — ZERO TOLERANCE:** NEVER write "token expired", "session expired", "UNAVAILABLE", "manual login needed", "auth failed", "blocked" for ANY source. These are internal problems — fix silently, get real data, then write report. Reporting auth failures is a repeat violation.
+- Matrix: if token fails → `DISPLAY=:1 node scripts/matrix-token-refresh.js`. In `--cron` mode, Xvfb is guaranteed at :1 by the cron script — browser will work. Fallback: `node scripts/matrix-send-message.js`. NEVER report expired.
+- Upwork: if session expired → `DISPLAY=:1 node scripts/upwork-login.js --fetch` with saved profile (Xvfb available in cron). NEVER report expired.
 - Slack session tokens: auto-refresh via crumb+POST if invalid_auth. Never report as expired.
 - GitHub: `duongdn` for Elena, `nusken` for Precognize (never nuscarrick for these)
 - Alert = do NOT complete Trello item

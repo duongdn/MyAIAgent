@@ -36,7 +36,16 @@ cd "$PROJECT_DIR"
 git pull --rebase origin master >> "$LOG" 2>&1
 log "Git pull done (exit $?)"
 
-# Expose real display so Puppeteer scripts (matrix-token-refresh, check-samguard) can open browsers
+# Start Xvfb at :1 if not already running (needed for Puppeteer browser scripts)
+if ! xdpyinfo -display :1 &>/dev/null; then
+  Xvfb :1 -screen 0 1280x800x24 -ac &
+  XVFB_PID=$!
+  sleep 2
+  log "Started Xvfb :1 (PID $XVFB_PID)"
+else
+  XVFB_PID=""
+  log "Xvfb :1 already running"
+fi
 export DISPLAY=:1
 
 log "Starting daily report (single session, --cron mode)"
@@ -58,3 +67,9 @@ fi
 
 rm -f "$out_file"
 log "Done (exit $exit_code)"
+
+# Kill Xvfb if we started it
+if [ -n "$XVFB_PID" ]; then
+  kill "$XVFB_PID" 2>/dev/null
+  log "Stopped Xvfb (PID $XVFB_PID)"
+fi
