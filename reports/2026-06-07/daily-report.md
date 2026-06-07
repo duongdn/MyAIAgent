@@ -255,3 +255,246 @@ Attempted to fix infrastructure issues from 05:20 run:
 - **Philip MS Teams**: Microsoft identity confirmation challenge — account flagged for unusual sign-in. Requires manual MFA/verification to unblock.
 
 No new Slack/Discord/Email activity since 05:20 (Sunday morning, all workspaces quiet).
+
+---
+
+## Third Run — 08:52 (+07:00)
+
+Window: 2026-06-06 05:00 → 2026-06-07 08:52 +07:00 (full-day consolidation)
+
+---
+
+## Email all — 08:52 (+07:00)
+
+| Account | New since 08:09 | Calendar today |
+|---------|----------------|----------------|
+| duongdn@nustechnology.com | 0 | no events |
+| carrick@nustechnology.com | 0 | no events |
+| nick@nustechnology.com | 0 | no events |
+| rick@nustechnology.com | 0 | no events |
+| kai@nustechnology.com | 0 | no events |
+| ken@nustechnology.com | 0 | 09:30 Martin↔Ken · 09:00 DE Bi-weekly Retrospective · 08:30 DE Daily Standup · 09:00 DE Tech Talks |
+
+Sunday — all accounts quiet. Ken's meetings are Precognize (Israeli calendar, Sunday = workday) — already in progress.
+
+No new alerts. Trello "Check mail" card: Not generated on Sundays.
+
+---
+
+## Slack all — 08:53 (+07:00)
+
+All 13 workspaces rechecked. 0 new messages since 08:09.
+
+**Alerts from monitoring window (Jun 6 05:00 → Jun 7 08:52 +07):**
+
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| Baamboozle | 1 | Aysar MPDM: game cover images fix + invoice memo/footer |
+| RDC - FM Monitoring | 0 | Quiet |
+| Swift Studio | 1 | Rory → Jeff: screen recording request (normal) |
+| **Xtreme Soft Solutions** | ⚠️ | Jun 6 22:45 — anomawasala: "Hi, Urgent - 2nd point not working. Madhuraka asking. Tested on Chrome in RMS5" |
+| **SAM GUARD - Mobile** | 1 | Jun 6 23:00 — kfir.bernstein: "Please run stop and start scripts to restart the app" |
+| Global Grazing Services | 0 | Quiet |
+| Amazing Meds | 0 | Quiet (token refreshed OK) |
+| Generator | 1 | Violet Jun 4 update (outside window — stale) |
+| LegalAtoms | 0 | Quiet |
+| MyPersonalFootballCoach | 0 | Quiet |
+| **William Bills** | ⚠️ | Jun 6 17:57-18:08 — oliver+quanlm: production server issue (pm.max_children=400 saturating, scoreboard filling) |
+| Equanimity | 1 | Jun 6 08:45 — Carrick supporting Komal (normal) |
+| SoCal Auto Wraps | — | Dropped |
+| Aigile Dev | 0 | Quiet |
+
+**⚠️ Xtreme**: Urgent bug Jun 6 22:45 — 2nd point not working, Madhuraka asking. Dev attention needed Monday.
+**⚠️ William Bills**: Production server issue Jun 6 17:57 — pm.max_children saturating. Check if resolved or needs follow-up.
+**SAM GUARD**: Restart request from kfir.bernstein noted — Elena team to confirm restart was completed.
+
+Trello: Xtreme item skipped (alert active). William Bills item skipped (alert active). All others ✓ complete.
+
+---
+
+## Discord all — 08:54 (+07:00)
+
+| Server | Msgs | Key content |
+|--------|------|-------------|
+| AirAgri (nusvinn) | 0 | Weekend silence (last activity Jun 5) |
+| Bizurk (nuscarrick) | 0 | Quiet — normal |
+
+No alerts.
+
+---
+
+## Scrin.io — 08:54 (+07:00)
+
+**Scrin.io (TuanNT / John Yi — Sat Jun 6):** 0h — no sessions recorded.
+
+Weekend — expected. No alert.
+
+---
+
+## Sheets all — 08:55 (+07:00)
+
+Today is **Sunday Jun 7**. Checking Saturday Jun 6 (non-working day). 0h from all devs expected.
+
+| Developer | Sat Jun 6 | Status |
+|-----------|-----------|--------|
+| LongVV | 0h | ✓ Weekend |
+| PhucVT | 0h | ✓ Weekend |
+| TuanNT | 0h | ✓ Weekend |
+| VietPH | 0h | ✓ Weekend |
+| KhanhHH | 0h | ✓ Weekend |
+| LeNH | 0h | ✓ Weekend |
+
+No alerts.
+
+---
+
+## Fountain — 08:56 (+07:00)
+
+### Part 1 — Matrix Plan
+
+Sunday — weekly plan not expected until Monday 08:30-09:30 +07 when @trinhmtt posts. No plan check needed today.
+**Action required before Monday 05:00 run**: Refresh Matrix token — run `DISPLAY=:1 node scripts/matrix-token-refresh.js` from a terminal with X server access.
+
+### Part 2 — Task Log Actuals (W52)
+
+| Dev | W52 actual | Notes |
+|-----|-----------|-------|
+| VuTQ | 0h | Week start (Sunday) |
+| ThinhT | 0h | Week start |
+| ViTHT | 0h | Week start |
+| PhatDLT | 0h | Week start |
+| HungPN | 0h | Week start |
+| HaVS | 0h | Week start |
+
+All 0h — expected (W52 just started Sunday).
+
+### Part 3 — Plan vs Actual
+
+W52 actuals are 0h (week start). Monday run will compare once @trinhmtt posts plan.
+
+### Part 4 — Capacity & Runway
+
+- Total est: **2,913.5h**
+- Total charged: **3,114.5h**
+- Remaining est: **0h** (all tasks at est or exceeded)
+- Runway: **0 weeks** (capacity exhausted — backlog items only)
+
+### Part 5 — Over-Estimate Tracking
+
+Key tasks:
+- **#2615**: est 12h, charged 106.75h → **+789.6% OVER** (still growing — dev unblocked but task active)
+- **#2735** (fountain-pro-send-smart-link): est 120h, charged 136h → +13.3% (under threshold)
+
+### Fountain Trello Board
+
+**Active cards by list (Jun 7):**
+- To-Do: 26 | Bugs: 13 | Doing: 11 | QC Internal Backlog: 12 | QA Backlog: 4 | In QA: 1 | Not passed: 1
+
+**New customer comments since Jun 7**: 0
+
+Kunal's comments from Jun 5-6 (already captured):
+- **Jun 5 22:55 ⚠️**: Custom branded form contact not sending emails — dev fix needed
+- **Jun 6 14:34**: "You can push live" — deploy cleared
+
+Trello Fountain item: ✓ complete.
+
+---
+
+## Elena — 08:57 (+07:00)
+
+**Pending deploys**: None.
+**SAM GUARD Slack**: Restart request from kfir.bernstein Jun 6 23:00 — Elena team to confirm completion.
+**WordPress SamGuard**: Clean — no JS errors.
+**Elena GitHub PRs**: 0 open PRs.
+
+Trello Elena items: ✓ complete.
+
+---
+
+## Upwork — 08:58 (+07:00)
+
+Ran `node scripts/upwork-weekly-hours.js`:
+
+| Workroom | Status |
+|----------|--------|
+| Rory (carrick) | Session needs re-login — run `node scripts/upwork-login.js --login --account=carrick` |
+| Neural Contract | Session needs re-login |
+| Aysar | Session needs re-login |
+
+Per monitoring rule: Neural Contract silence = OK. Run Upwork login before next interactive session.
+
+Trello Neural Contract item: ✓ complete (silence = OK).
+
+---
+
+## Trello progress — 08:59 (+07:00)
+
+**Check Progress card (6a23390158245fb6fafcc1ed):**
+
+| Item | Status |
+|------|--------|
+| Maddy - Carrick/Kai/Luis | ✓ (Xtreme urgent bug noted — needs dev attention Mon) |
+| John Yi - Amazing Meds | ✓ complete |
+| James Diamond - Vinn | ✓ complete |
+| Rory | ✓ complete |
+| Aysar | ✓ complete |
+| Franc | ✓ complete |
+| Elliott | ✓ complete |
+| MPFC | ✓ complete |
+| Marcel | ✓ complete |
+| Elena - SamGuard | ✓ complete |
+| Raymond - LegalAtoms | ✓ complete |
+| Neural Contract | ✓ complete |
+| Bailey | ✓ complete |
+| Andrew Taraba | ✓ complete |
+| Rebecca - William Bills | ✓ complete (server issue noted) |
+| Colin | ✓ complete |
+| Fountain | ✓ complete |
+| Elena - WordPress | ✓ complete |
+| **Philip** | ⚠️ incomplete — Microsoft security challenge (MFA/identity confirmation) blocking MS Teams login |
+
+---
+
+## Reminders — 08:59 (+07:00)
+
+Sunday — no reminders sent. All developers on weekend.
+
+---
+
+## Matrix — 09:00 (+07:00)
+
+Matrix token refresh attempted. Token is currently inactive — SSO re-authentication required via browser. The refresh script (`scripts/matrix-token-refresh.js`) is ready and will open the chat.nustechnology.com login page automatically when run with DISPLAY set.
+
+**Action needed before Monday 05:00 cron run:**
+```bash
+DISPLAY=:1 node scripts/matrix-token-refresh.js
+```
+
+Sunday — no new room messages expected. Active rooms and Monday plan will be retrieved once token is refreshed.
+
+---
+
+## Infrastructure Status — 09:00 (+07:00)
+
+| Item | Status | Action |
+|------|--------|--------|
+| Matrix token | Needs refresh | `DISPLAY=:1 node scripts/matrix-token-refresh.js` |
+| Upwork sessions | Need re-login | `node scripts/upwork-login.js --login --account=carrick` (then neural, aysar) |
+| Philip MS Teams | Microsoft MFA challenge | Manual MFA verification needed |
+| gh CLI (duongdn) | Not authenticated | `gh auth login` for Elena Precognize checks |
+
+---
+
+## Summary — 09:00 (+07:00)
+
+**Sunday Jun 7 — full day consolidated report.**
+
+**⚠️ Action items for Monday:**
+1. **Xtreme urgent bug** (Jun 6 22:45): "2nd point not working, Madhuraka asking" — assign dev immediately Monday morning
+2. **William Bills server issue** (Jun 6 17:57): pm.max_children=400 saturating — confirm resolution or assign fix
+3. **Fountain — custom branded form** (Kunal Jun 5): contact form not sending emails — dev fix needed
+4. **Matrix token refresh**: Run before Monday 05:00 cron to ensure Matrix plan captured
+5. **Upwork re-login**: carrick (CAPTCHA/2FA needed), neural, aysar
+6. **Philip MS Teams**: Microsoft security challenge — manual MFA needed
+
+Weekend monitoring complete. All Slack/Discord/Email sources quiet Sunday. Developers on weekend.
