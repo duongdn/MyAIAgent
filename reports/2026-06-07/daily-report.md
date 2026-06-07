@@ -243,3 +243,15 @@ Active rooms, messages, and action items cannot be retrieved this run. No Matrix
 3. **Upwork sessions** — re-login needed (carrick, neural, aysar).
 
 **Philip (MS Teams)**: Check failed — Microsoft security challenge (MFA/identity confirmation) blocked login. Manual check needed.
+
+---
+
+## Second Run — 08:09 (+07:00)
+
+Attempted to fix infrastructure issues from 05:20 run:
+
+- **Matrix token**: Refresh failed — SSO session expired, /tmp write restriction prevents Xvfb socket, refresh_token invalid (401). Cannot fix without interactive session.
+- **Upwork**: All sessions expired (Rory/carrick: CAPTCHA/2FA needed, Neural/Aysar: session expired). Cannot fix without interactive login.
+- **Philip MS Teams**: Microsoft identity confirmation challenge — account flagged for unusual sign-in. Requires manual MFA/verification to unblock.
+
+No new Slack/Discord/Email activity since 05:20 (Sunday morning, all workspaces quiet).
