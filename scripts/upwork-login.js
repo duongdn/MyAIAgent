@@ -4,6 +4,12 @@
 // Subsequent runs: headless with saved session
 // Usage: node scripts/upwork-login.js [--login] [--account=NAME]
 
+// Must set TMPDIR before requiring puppeteer (puppeteer calls mkdtemp on /tmp at import time)
+const _fs0 = require('fs'); const _path0 = require('path');
+const _tmpDir = _path0.join(__dirname, '..', 'tmp', 'chrome-tmp');
+_fs0.mkdirSync(_tmpDir, { recursive: true });
+process.env.TMPDIR = _tmpDir;
+
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());

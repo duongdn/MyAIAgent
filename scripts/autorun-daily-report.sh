@@ -33,12 +33,22 @@ done
 cd "$PROJECT_DIR"
 
 # Pull latest code so skill/script updates are applied before Claude runs
+git_before=$(git rev-parse HEAD)
 git pull --rebase origin master >> "$LOG" 2>&1
 log "Git pull done (exit $?)"
 
+# Re-exec this script if it was updated (so new Xvfb/env changes take effect)
+if [ "$(git rev-parse HEAD)" != "$git_before" ]; then
+  if git diff "$git_before" HEAD --name-only 2>/dev/null | grep -q "scripts/autorun-daily-report.sh"; then
+    log "autorun script updated — re-execing"
+    exec "$0" "$@"
+  fi
+fi
+
 # Start Xvfb at :1 if not already running (needed for Puppeteer browser scripts)
-if ! xdpyinfo -display :1 &>/dev/null; then
-  Xvfb :1 -screen 0 1280x800x24 -ac &
+# Use socket check (xdpyinfo not always in PATH); sudo needed since /tmp/.X1-lock is root-owned
+if [ ! -S /tmp/.X11-unix/X1 ]; then
+  sudo Xvfb :1 -screen 0 1280x800x24 -ac &
   XVFB_PID=$!
   sleep 2
   log "Started Xvfb :1 (PID $XVFB_PID)"
