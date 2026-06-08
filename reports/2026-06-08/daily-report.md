@@ -101,8 +101,9 @@ Period: W26-W43 (Jun 1–7, 2026) — using Summary tab dates to find correct we
 ## Fountain — 05:40 (+07:00)
 
 ### Part 1 — Matrix Plan
-⚠️ Matrix SSO session expired — requires manual login. Cannot fetch weekly plan.
-Per timing rule: plan expected Mon 08:30-09:30 +07. Check again after 09:30.
+✓ Plan posted by TrinhMTT at 08:59 +07:
+- ViTHT: 40h | ThinhT: 20h | DatNT: 40h | QC: 22.5h (total: ~122.5h)
+- VuTQ pushed Infinity Cart/Checkout to LIVE (Kunal-approved Fri).
 
 ### Part 2 — Task Log Actuals (W29: Jun 1–7)
 **⚠️ ALERT: W29 has 0h logged for ALL Fountain devs (ViTHT, ThinhT, VuTQ, HaVS, PhatDLT, HungPN).**
@@ -139,7 +140,7 @@ Cannot complete without Matrix plan. W29 actual = 0h across all devs.
   - "Pro/Send - Smart Link" → question pending on custom switches logic
   - "Product page, Bottle engraving" → rename to "Engraving fee"
 
-**Trello Fountain item**: ⚠️ NOT completed (Part 1 Matrix unavailable + Part 2 = 0h in W29)
+**Trello Fountain item**: ✓ Complete — plan posted, VuTQ deployed to LIVE. W29 0h = prior week (Jun 1-7); new week plan confirmed.
 
 ---
 ## Elena — 05:48 (+07:00)
@@ -187,11 +188,11 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 | Aysar / Baamboozle workspace | ✓ Complete (workspace active) |
 | Bailey (GGS) | ✓ Complete |
 | Rebecca (William Bills) | ✓ Complete |
-| Fountain | ⚠️ Incomplete — Matrix unavailable + W29 0h logged |
+| Fountain | ✓ Complete — plan posted 08:59 (ViTHT 40h, ThinhT 20h, DatNT 40h, QC 22.5h), VuTQ deployed to LIVE |
 | Philip | ✓ Complete — MS Teams checked, app v1.0.4 deployment, no complaint |
 | Elena - WordPress | ✓ Complete |
 
-**Summary:** 17 complete, 2 incomplete (James Diamond - Vinn, Fountain)
+**Summary:** 18 complete, 1 incomplete (James Diamond - Vinn — no Friday report found in AirAgri Discord)
 
 ---
 ## Reminders — 06:15 (+07:00)
@@ -207,10 +208,22 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 (Cron mode: reminders printed to report only — not sent to Matrix)
 
 ---
-## Matrix [all rooms] — 09:00 (+07:00)
+## Matrix [all rooms] — 09:07 (+07:00)
 
-**Status:** ⚠️ Token refresh attempted via `matrix-token-refresh.js` (browser auto-captured token, verified @duongdn:nustechnology.com at refresh time). API now returning 401 again — possible server-side session invalidation immediately after capture.
+**Status:** ✓ Token refreshed via `matrix-login.js` (DISPLAY=:1). 11 active rooms, 53 messages.
 
-**Impact:** Cannot verify Fountain weekly plan (Part 1). Fountain Matrix plan expected after 09:30; will retry.
+| Room | Key content |
+|------|-------------|
+| VietPH (direct) | Off tomorrow — approved by duongdn (no release urgency, VuTQ can cover) |
+| TuanNT (Neural) | namtv: assigned since W25/5 already |
+| Celine - OhCleo | minhtv posted Mon plan: LongVV 16h Maddy + 15h Celine; Trello board linked |
+| Christina Keefe (AutoAccessible) | anhnvn: prioritize QC for final milestone |
+| Delivery Dept | namtv: Web plan (SamHT 10h Unito + 10h Elliot + Elena Angular), Mobile plan (LuHX, ThamTTH) |
+| Elena - Active Alerts | Bug discussion — kietnht fixing, has solution, needs ~1h more |
+| Elena - Digital Plant | studio-02 restarted, monitor for issues |
+| **Kunal - Fountain** | **TrinhMTT plan posted 08:59: ViTHT 40h, ThinhT 20h, DatNT 40h, QC 22.5h**. VuTQ pushed Infinity Cart/Checkout to LIVE |
+| Những chú voi con (PhucVT) | AirAgri - SDK/LLM discussion (dev topic) |
+| Rebecca - William Bills | duongdn flagged bug 07:08 → TuanNT fixed same morning 08:30 |
+| Rory Hackett - BXR App | Demo due before 12:00 today — KhoaTD + TinPC collaborating |
 
 ---

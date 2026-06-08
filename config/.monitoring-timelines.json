@@ -6,8 +6,9 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-08T06:15:00+07:00",
-    "output_file": "reports/2026-06-08/daily-report.md"
+    "last_run": "2026-06-08T09:08:59.267255+07:00",
+    "output_file": "reports/2026-06-08/daily-report.md",
+    "last_status": "completed"
   },
   "refresh": {
     "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",
