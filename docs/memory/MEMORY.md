@@ -127,7 +127,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
-- [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — Multi-project rule (resolved → Aysar)
+- [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — KhanhHH = Generator + Aysar + Elena (3 sheets). Elena sheet `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`. Mon timing: Sat-morning monitor may catch pre-Fri log → recheck before flagging shortfall.
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT 0h gates John Yi, Rebecca, AND Bailey Trello items simultaneously
 ### Other devs
