@@ -85,15 +85,17 @@ Period: W26-W43 (Jun 1–7, 2026) — using Summary tab dates to find correct we
 | TuanNT (Neural) | Neural | W23 | 15.0h | — (see combined) |
 | **TuanNT COMBINED** | — | — | **21.5h** | ⚠️ below 40h/wk (not 0h → no Trello block) |
 | VietPH | Bailey/Paturevision | W30 | 57.0h | ✓ |
-| KhanhHH | Generator | W43 | 80.0h | ✓ |
-| LeNH (Rory) | Rory | W14 | 72.34h | ✓ |
-| LeNH (Franc) | Franc | W27 | 1.16h | ⚠️ low (combined with others) |
-| LeNH (Aysar) | Aysar | W27 | 15.67h | — (part of LeNH) |
-| **LeNH COMBINED** | — | — | **89.17h** | ✓ |
+| KhanhHH | Generator | W43 | 80.0h | — (see combined) |
+| KhanhHH | Aysar (Baamboozle) | W27 | 15.67h | — (see combined) |
+| **KhanhHH COMBINED** | — | — | **95.67h** | ✓ |
+| LeNH | Rory | W14 | 72.34h | — (see combined) |
+| LeNH | Franc | W27 | 1.16h | — (see combined) |
+| **LeNH COMBINED** | — | — | **73.5h** | ✓ |
 
 **Notes:**
 - TuanNT combined 21.5h for Jun 1-7 — below 40h target, but > 0h so no Trello block. Possible partial leave week.
-- Franc 1.16h in week — very low, but LeNH combined total is healthy (89.17h).
+- Franc 1.16h in week — very low, but LeNH combined total 73.5h is healthy.
+- **Correction (08:44):** Aysar W27 15.67h owner = KhanhHH (not LeNH). Original report incorrectly read sheet total without filtering by owner. LeNH does NOT work on Aysar project. KhanhHH combined = Generator 80h + Aysar 15.67h = 95.67h. LeNH combined corrected from 89.17h → 73.5h (Rory + Franc only).
 
 ---
 ## Fountain — 05:40 (+07:00)

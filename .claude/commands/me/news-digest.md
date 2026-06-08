@@ -80,9 +80,21 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - `--raw`: giữ tiêu đề + tóm tắt ngôn ngữ gốc, header đổi thành "📰 News Digest"
 - Có thể kết hợp: `--more --raw`, `--more --limit=10`, v.v.
 
+## Save to File (MANDATORY)
+
+Sau khi synthesize xong, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown:
+
+```
+Path: reports/{YYYY-MM-DD}/{HHMM}-news-digest.md
+Example: reports/2026-06-08/0845-news-digest.md
+```
+
+Dùng Write tool để tạo file. Nội dung file = toàn bộ markdown đã synthesize (giống hệt output ra chat).
+Sau khi ghi xong, thông báo path file cho user: `📄 Saved: reports/{date}/{time}-news-digest.md`
+
 ## Post-run: Trello Auto-complete
 
-Sau khi trình bày digest xong, **LUÔN LUÔN** chạy lệnh sau để mark complete card "Check news" trên Trello Daily list:
+Sau khi ghi file xong, **LUÔN LUÔN** chạy lệnh sau để mark complete card "Check news" trên Trello Daily list:
 
 ```bash
 python3 .claude/skills/news-digest/scripts/trello-complete.py
