@@ -46,7 +46,7 @@ Window: 2026-06-07 09:00 → 2026-06-08 05:00 +07 (Sunday → Monday)
 | Aigile Dev | 0 | Quiet |
 
 **Notes:**
-- Baamboozle MPDM C07SQ4HAUHZ: No daily report posted (last message Dec 2025 — team shifted to gamedev channel)
+- Baamboozle MPDM C07SQ4HAUHZ: KhanhHH posts daily updates here regularly (Mon-Thu). Last post: Jun 5 "Handle fix feedback on Admin tool for game cover images task → Dev done + Deployed to nusdev". No post Fri Jun 6 or weekend (expected). Channel IS active.
 - Xtreme Sat Jun 6: Urgent issue flagged by Kai (before window, but awareness item)
 - Amazing Meds + Equanimity: Session tokens refreshed proactively ✓
 
@@ -67,7 +67,7 @@ Window: 2026-06-07 09:00 → 2026-06-08 05:00 +07
 
 Tokens verified: nusvinn ✓, nuscarrick ✓
 
-Trello: James Diamond - Vinn → ⚠️ skipped (no daily report in AirAgri channels, project appears inactive). Andrew Taraba → ✓ complete (Bizurk silence = normal).
+Trello: James Diamond - Vinn → ⚠️ incomplete (no "Just report my process today:" format from Vinn; iamjon7 active asking for tasks). Andrew Taraba → ✓ complete (Bizurk silence = normal).
 
 ---
 ## Scrin.io (TuanNT / John Yi — 2026-06-07 Sun): 0h — no sessions recorded. (Expected — Sunday)
@@ -157,13 +157,13 @@ Last known state (Jun 6): 0 open PRs.
 Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPress clean, no pending deploys).
 
 ---
-## Philip (MS Teams) — 06:10 (+07:00)
+## Philip (MS Teams) — 08:56 (+07:00)
 
 **Account:** will@nustechnology.com → Philip Briggs (Six Star Rentals, pbriggs@sixstarrentals.com.au)
 
-**Status:** ⚠️ Cannot check — Microsoft account hit "Help us protect your account" identity challenge. Browser session profile for will@nustechnology.com expired; SSO verification requires manual completion. MS Teams automation blocked.
+**Status:** ✓ Checked. Latest conversation: NUS deployed native app v1.0.4 to Microsoft Store. Philip replied "My Im downloading" and "I have to uninstall my latest version and install again" — normal update procedure, no complaint or unresolved request.
 
-**Gate:** Philip Trello item → ⚠️ NOT completed (cannot confirm no customer complaint/unresolved request).
+**Gate:** Philip Trello item → ✓ Complete.
 
 ---
 ## Trello Check Progress — Summary — 06:10 (+07:00)
@@ -174,7 +174,7 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 | John Yi - Amazing Meds | ✓ Complete |
 | James Diamond - Vinn | ⚠️ Incomplete — AirAgri inactive since Feb 2026, no Vinn daily report |
 | Rory (Swift Studio) | ✓ Complete |
-| Aysar (Baamboozle MPDM) | ⚠️ Incomplete — no daily report in MPDM C07SQ4HAUHZ since Dec 2025 |
+| Aysar (Baamboozle MPDM) | ✓ Complete — MPDM active, KhanhHH last post Jun 5 (Thu), no weekend post expected |
 | Franc (RDC) | ✓ Complete |
 | Elliott (Generator) | ✓ Complete |
 | MPFC | ✓ Complete |
@@ -188,10 +188,10 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 | Bailey (GGS) | ✓ Complete |
 | Rebecca (William Bills) | ✓ Complete |
 | Fountain | ⚠️ Incomplete — Matrix unavailable + W29 0h logged |
-| Philip | ⚠️ Incomplete — MS Teams SSO challenge, cannot check |
+| Philip | ✓ Complete — MS Teams checked, app v1.0.4 deployment, no complaint |
 | Elena - WordPress | ✓ Complete |
 
-**Summary:** 15 complete, 4 incomplete (James Diamond, Aysar MPDM, Fountain, Philip)
+**Summary:** 17 complete, 2 incomplete (James Diamond - Vinn, Fountain)
 
 ---
 ## Reminders — 06:15 (+07:00)
@@ -207,14 +207,10 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 (Cron mode: reminders printed to report only — not sent to Matrix)
 
 ---
-## Matrix [all rooms] — 06:15 (+07:00)
+## Matrix [all rooms] — 09:00 (+07:00)
 
-**Status:** ⚠️ BLOCKED — Matrix token expired (M_UNKNOWN_TOKEN). SSO session in browser profile also expired. OIDC refresh_token returns 400. Cannot fetch Matrix messages without manual login.
+**Status:** ⚠️ Token refresh attempted via `matrix-token-refresh.js` (browser auto-captured token, verified @duongdn:nustechnology.com at refresh time). API now returning 401 again — possible server-side session invalidation immediately after capture.
 
-**Last successful Matrix read:** previous session (token was valid).
-
-**Action required:** Manual Matrix SSO login needed to refresh token. Run `scripts/matrix-token-refresh.js` after logging in via browser at `tmp/matrix-browser-profile/`.
-
-**Impact:** Cannot verify Fountain weekly plan (Part 1), cannot send any Matrix reminders.
+**Impact:** Cannot verify Fountain weekly plan (Part 1). Fountain Matrix plan expected after 09:30; will retry.
 
 ---
