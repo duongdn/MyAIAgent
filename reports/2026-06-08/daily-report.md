@@ -62,12 +62,13 @@ Window: 2026-06-07 09:00 → 2026-06-08 05:00 +07
 | Bizurk (Andrew DM) | nuscarrick | 0 | animeworld DM last active Jun 2025 |
 
 **Notes:**
-- AirAgri: Project appears largely inactive on Discord since Feb 2026. No Vinn daily report found.
+- AirAgri: Active. Vinn posted Friday Jun 5 17:32 +07: "Just report my process today: Review Leon code PR 453/476/477/479/480, Show visitors deployed to prod, Support Jeff API, Fixed memory limit safefarm (staging), Factual Investigation (Brett), Evaluated AWS SSM (replied James)."
 - Bizurk/animeworld: Silence is normal per monitoring rules — no alert.
+- **Scan error (corrected):** Initial scan used window from Jun 6 (Saturday) 08:00 instead of Jun 5 (Friday) 08:00 — missed Vinn's Friday report.
 
 Tokens verified: nusvinn ✓, nuscarrick ✓
 
-Trello: James Diamond - Vinn → ⚠️ incomplete (no "Just report my process today:" format from Vinn; iamjon7 active asking for tasks). Andrew Taraba → ✓ complete (Bizurk silence = normal).
+Trello: James Diamond - Vinn → ✓ complete (Friday report confirmed). Andrew Taraba → ✓ complete (Bizurk silence = normal).
 
 ---
 ## Scrin.io (TuanNT / John Yi — 2026-06-07 Sun): 0h — no sessions recorded. (Expected — Sunday)
@@ -173,7 +174,7 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 |------|--------|
 | Maddy - Carrick/Kai/Luis | ✓ Complete |
 | John Yi - Amazing Meds | ✓ Complete |
-| James Diamond - Vinn | ⚠️ Incomplete — AirAgri inactive since Feb 2026, no Vinn daily report |
+| James Diamond - Vinn | ✓ Complete — Fri Jun 5 17:32 report: PRs reviewed, visitor feature deployed to prod, safefarm memory fix staged |
 | Rory (Swift Studio) | ✓ Complete |
 | Aysar (Baamboozle MPDM) | ✓ Complete — MPDM active, KhanhHH last post Jun 5 (Thu), no weekend post expected |
 | Franc (RDC) | ✓ Complete |
@@ -192,7 +193,7 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 | Philip | ✓ Complete — MS Teams checked, app v1.0.4 deployment, no complaint |
 | Elena - WordPress | ✓ Complete |
 
-**Summary:** 18 complete, 1 incomplete (James Diamond - Vinn — no Friday report found in AirAgri Discord)
+**Summary:** 19/19 complete ✓ (all items)
 
 ---
 ## Reminders — 06:15 (+07:00)
@@ -210,20 +211,8 @@ Trello Elena - SamGuard: ✓ Completed (no alerts from SAM GUARD Slack, WordPres
 ---
 ## Matrix [all rooms] — 09:07 (+07:00)
 
-**Status:** ✓ Token refreshed via `matrix-login.js` (DISPLAY=:1). 11 active rooms, 53 messages.
+**Status:** ✓ 11 active rooms, 53 messages.
 
-| Room | Key content |
-|------|-------------|
-| VietPH (direct) | Off tomorrow — approved by duongdn (no release urgency, VuTQ can cover) |
-| TuanNT (Neural) | namtv: assigned since W25/5 already |
-| Celine - OhCleo | minhtv posted Mon plan: LongVV 16h Maddy + 15h Celine; Trello board linked |
-| Christina Keefe (AutoAccessible) | anhnvn: prioritize QC for final milestone |
-| Delivery Dept | namtv: Web plan (SamHT 10h Unito + 10h Elliot + Elena Angular), Mobile plan (LuHX, ThamTTH) |
-| Elena - Active Alerts | Bug discussion — kietnht fixing, has solution, needs ~1h more |
-| Elena - Digital Plant | studio-02 restarted, monitor for issues |
-| **Kunal - Fountain** | **TrinhMTT plan posted 08:59: ViTHT 40h, ThinhT 20h, DatNT 40h, QC 22.5h**. VuTQ pushed Infinity Cart/Checkout to LIVE |
-| Những chú voi con (PhucVT) | AirAgri - SDK/LLM discussion (dev topic) |
-| Rebecca - William Bills | duongdn flagged bug 07:08 → TuanNT fixed same morning 08:30 |
-| Rory Hackett - BXR App | Demo due before 12:00 today — KhoaTD + TinPC collaborating |
+VietPH taking tomorrow off (approved — no urgent release, VuTQ covers). Rebecca bug flagged 07:08 → TuanNT fixed by 08:30. Elena Active Alerts: kietnht has fix solution, needs ~1h. Elena Digital Plant: studio-02 restarted. Celine OhCleo: LongVV 16h Maddy + 15h Celine plan posted by minhtv. Rory BXR: demo due before 12:00 today, KhoaTD + TinPC collaborating. Fountain: TrinhMTT posted week plan 08:59 (ViTHT 40h, ThinhT 20h, DatNT 40h, QC 22.5h), VuTQ deployed Infinity Cart/Checkout to LIVE.
 
 ---

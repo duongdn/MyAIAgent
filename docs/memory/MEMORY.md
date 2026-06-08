@@ -55,6 +55,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_always_include_links.md](feedback_always_include_links.md) — Include clickable URLs for Trello cards, PRs, tickets
 - [feedback_ondemand_updates.md](feedback_ondemand_updates.md) — On-demand = separate timestamped file, don't overwrite daily
 - [feedback_monday_friday_timestamp.md](feedback_monday_friday_timestamp.md) — Monday daily report starts from last Friday 8AM
+- [feedback_monday_discord_scan_friday_window.md](feedback_monday_discord_scan_friday_window.md) — **Monday scan window = Fri 08:00+07, NOT Sat/Sun.** Mon−3days=Fri. Wrong date = miss Friday reports (missed Vinn Jun 5 report 2026-06-08)
 - [feedback_imap_slack_timestamp_gotchas.md](feedback_imap_slack_timestamp_gotchas.md) — IMAP SINCE uses server dates, Slack `after:` excludes named date
 - [feedback_no_duplicate_sends.md](feedback_no_duplicate_sends.md) — Never re-send while background task is pending
 
