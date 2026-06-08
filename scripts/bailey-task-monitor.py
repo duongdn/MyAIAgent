@@ -70,6 +70,7 @@ def main():
 
     now = datetime.now()
     released_not_paid = []
+    requesting_payment = []
     has_bugs = []
     all_tasks = []
 
@@ -89,6 +90,7 @@ def main():
         link = get_cell(row, COL_LINK)
 
         is_paid = 'PAID' in pay_status.upper() if pay_status else False
+        is_requesting = 'REQUESTING' in pay_status.upper() if pay_status else False
         hourly = is_hourly(task_type)
 
         task_info = {
@@ -108,7 +110,7 @@ def main():
         # Regular tasks: must be "Tested on Live" or "Deployed on Live"
         # Weekly Monitor tasks: payable once the month has passed and hours > 0
         is_weekly_monitor = name.startswith('Weekly Monitor')
-        if is_weekly_monitor and not is_paid and actual > 0:
+        if is_weekly_monitor and not is_paid and not is_requesting and actual > 0:
             # Check if the monitor month has ended (e.g. "Weekly Monitor Mar 2026")
             parts = name.replace('Weekly Monitor ', '').split()
             if len(parts) == 2:
@@ -120,9 +122,12 @@ def main():
                         released_not_paid.append(task_info)
                 except ValueError:
                     pass
-        elif dev_status in RELEASED_STATUSES and not is_paid:
+        elif dev_status in RELEASED_STATUSES and not is_paid and not is_requesting:
             task_info['alert'] = 'RELEASED_NOT_PAID'
             released_not_paid.append(task_info)
+        elif (dev_status in RELEASED_STATUSES or (is_weekly_monitor and actual > 0)) and is_requesting:
+            task_info['alert'] = 'REQUESTING_PAYMENT'
+            requesting_payment.append(task_info)
 
         # Check 2: Has bug
         if any(bug in dev_status for bug in BUG_STATUSES):
@@ -136,61 +141,83 @@ def main():
         if name and dev_status:
             all_tasks.append(task_info)
 
+    def fmt_task_bullet(t):
+        """Format a task as a bullet line: name – Xh – dev – link"""
+        parts = [t['name']]
+        parts.append(f"{t['actual']}h")
+        if t['dev']:
+            parts.append(t['dev'])
+        if t['link']:
+            parts.append(t['link'])
+        return '- ' + ' – '.join(parts)
+
+    def fmt_bug_bullet(t):
+        """Format a bug task bullet with budget info."""
+        parts = [t['name'], f"{t['actual']}h ({t['type']})"]
+        if t['dev']:
+            parts.append(t['dev'])
+        if t['type'] == 'fixed' and t.get('overbudget'):
+            parts.append(f"⚠️ OVER +{t['over_pct']:.1f}% (+{t['actual'] - t['est_buffer']:.1f}h)")
+        elif t['type'] == 'fixed' and t['est_buffer'] > 0:
+            parts.append(f"OK ({t['est_buffer'] - t['actual']:.1f}h left)")
+        if t['link']:
+            parts.append(t['link'])
+        return '- ' + ' – '.join(parts)
+
     # Build markdown report
     lines = []
     lines.append(f"# Bailey Task Monitor — {now.strftime('%Y-%m-%d %H:%M')}")
-    lines.append(f"\nSource: [Est vs Charged](https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit?gid=920993260#gid=920993260)")
+    lines.append(f"\nSource: https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit?gid=920993260#gid=920993260")
     lines.append(f"\n## Released but Not Paid ({len(released_not_paid)} tasks)\n")
 
     if released_not_paid:
-        lines.append("| # | Task | Dev | Type | Actual | Charged | Status | Link |")
-        lines.append("|---|------|-----|------|--------|---------|--------|------|")
         for t in released_not_paid:
-            link_md = f"[link]({t['link']})" if t['link'] else ''
-            pay_note = f" ({t['pay_status']})" if t['pay_status'] else ''
-            lines.append(f"| {t['row']} | {t['name']}{pay_note} | {t['dev'] or '-'} | {t['type']} | {t['actual']}h | {t['charged']}h | {t['dev_status']} | {link_md} |")
+            lines.append(fmt_task_bullet(t))
+    else:
+        lines.append("None found.")
+
+    lines.append(f"\n## Requesting Payment ({len(requesting_payment)} tasks)\n")
+
+    if requesting_payment:
+        for t in requesting_payment:
+            lines.append(fmt_task_bullet(t))
     else:
         lines.append("None found.")
 
     lines.append(f"\n## Tasks with Bugs ({len(has_bugs)} tasks)\n")
 
     if has_bugs:
-        lines.append("| # | Task | Dev | Type | Est (buf) | Actual | Charged | Budget | Link |")
-        lines.append("|---|------|-----|------|-----------|--------|---------|--------|------|")
         for t in has_bugs:
-            link_md = f"[link]({t['link']})" if t['link'] else ''
-            est = f"{t['est_buffer']}h" if t['type'] == 'fixed' else '-'
-            if t['type'] == 'fixed' and t.get('overbudget'):
-                budget = f"OVER +{t['over_pct']:.1f}% ({t['actual'] - t['est_buffer']:.1f}h)"
-            elif t['type'] == 'fixed' and t['est_buffer'] > 0:
-                budget = f"OK ({t['est_buffer'] - t['actual']:.1f}h left)"
-            else:
-                budget = 'hourly'
-            lines.append(f"| {t['row']} | {t['name']} | {t['dev'] or '-'} | {t['type']} | {est} | {t['actual']}h | {t['charged']}h | {budget} | {link_md} |")
+            lines.append(fmt_bug_bullet(t))
     else:
         lines.append("None found.")
 
-    # Section 3: All other active tasks (not paid, not in released_not_paid or has_bugs)
-    alert_rows = {t['row'] for t in released_not_paid + has_bugs}
-    other_tasks = [t for t in all_tasks if t['row'] not in alert_rows and not ('PAID' in (t['pay_status'] or '').upper())]
+    # Section 4: All other active tasks (not paid, not requesting, not in alert lists)
+    alert_rows = {t['row'] for t in released_not_paid + requesting_payment + has_bugs}
+    other_tasks = [t for t in all_tasks if t['row'] not in alert_rows
+                   and not ('PAID' in (t['pay_status'] or '').upper())
+                   and not ('REQUESTING' in (t['pay_status'] or '').upper())]
 
     lines.append(f"\n## Other Active Tasks ({len(other_tasks)} tasks)\n")
 
     if other_tasks:
-        lines.append("| # | Task | Dev | Status | Type | Est (buf) | Actual | Charged | Link |")
-        lines.append("|---|------|-----|--------|------|-----------|--------|---------|------|")
         for t in other_tasks:
-            link_md = f"[link]({t['link']})" if t['link'] else ''
-            est = f"{t['est_buffer']}h" if t['type'] == 'fixed' and t['est_buffer'] > 0 else '-'
-            lines.append(f"| {t['row']} | {t['name']} | {t['dev'] or '-'} | {t['dev_status']} | {t['type']} | {est} | {t['actual']}h | {t['charged']}h | {link_md} |")
+            est = f"est {t['est_buffer']}h" if t['type'] == 'fixed' and t['est_buffer'] > 0 else t['type']
+            parts = [t['name'], f"{t['actual']}h", est, t['dev_status']]
+            if t['dev']:
+                parts.append(t['dev'])
+            if t['link']:
+                parts.append(t['link'])
+            lines.append('- ' + ' – '.join(parts))
     else:
         lines.append("None found.")
 
     lines.append(f"\n## Summary\n")
-    lines.append(f"- Total tasks: {len(all_tasks)}")
     lines.append(f"- Released not paid: {len(released_not_paid)}")
+    lines.append(f"- Requesting payment: {len(requesting_payment)}")
     lines.append(f"- Has bugs: {len(has_bugs)}")
     lines.append(f"- Other active: {len(other_tasks)}")
+    lines.append(f"- Total tasks: {len(all_tasks)}")
 
     report = '\n'.join(lines)
 
