@@ -13,6 +13,7 @@ const ALL_SHEETS = {
   Generator:    '1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM',
   Paturevision: '1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg',
   Elena:        '1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ',
+  ColinETZ:     '1Y2QU1igccJ_ghirGZn_W36MY8ZwyvIKgE2GHl5j7rSE',
   Fountain:     '1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o',
   LongVV2:      '1eZoRo_zqarndr2TS5RiN_PcBtjcSCTP2_kYX66oBugA',
 };

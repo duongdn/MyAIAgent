@@ -127,7 +127,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
-- [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — KhanhHH = Generator + Aysar + Elena (3 sheets). Elena sheet `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`. Mon timing: Sat-morning monitor may catch pre-Fri log → recheck before flagging shortfall.
+- [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — **KhanhHH = Generator + Aysar + Elena + Colin/ETZ (4 sheets).** Colin/ETZ sheet `1Y2QU1igccJ_ghirGZn_W36MY8ZwyvIKgE2GHl5j7rSE` (calendar W). Missing this sheet caused false -5.5h alert W29 (actual=40h).
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT 0h gates John Yi, Rebecca, AND Bailey Trello items simultaneously
 ### Other devs
