@@ -40,3 +40,4 @@ reports/**/autorun.log
 config/.misa-session.json
 config/.msteams-accounts.json
 config/.gmail-service-account.json
+config/.github-config.json

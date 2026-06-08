@@ -36,6 +36,7 @@ ENC_FILES=(
   config/.rollbar-config.json.enc
   config/.cloudflare-config.json.enc
   config/.workstream-config.json.enc
+  config/.github-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc

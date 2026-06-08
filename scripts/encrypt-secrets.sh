@@ -34,6 +34,7 @@ SECRET_FILES=(
   config/.upwork-config.json
   config/.cloudflare-config.json
   config/.gmail-service-account.json
+  config/.github-config.json
 )
 
 # Add Google service account key if exists
