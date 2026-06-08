@@ -5,7 +5,7 @@ description: MyPersonalFootballCoach (MPFC) project monitor — check server hea
 
 # MPFC Monitor
 
-Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`.
+Monitor the MyPersonalFootballCoach WordPress project. Generates `/var/www/MyDailyAgent/reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`.
 
 **Project root:** `/var/www/mypersonalfootballcoach.com`
 **Staging root:** `/var/www/staging`
@@ -330,7 +330,7 @@ Run all 7 checks in order:
 5. New Relic APM
 6. Rollbar
 7. Cloudflare
-8. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
+8. Write report: `/var/www/MyDailyAgent/reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
 
 ## Report Format
 
