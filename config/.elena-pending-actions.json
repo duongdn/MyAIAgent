@@ -18,6 +18,16 @@
   },
   "merged": [
     {
+      "pr": 305,
+      "branch": "DP-666-create-and-manage-autoscan",
+      "type": "dp",
+      "ticket_id": "DP-666",
+      "merged_at": "2026-06-09",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "PR #305 merged (squash) on 2026-06-09 05:00 +07. MayBanServer unreachable (not on local LAN). Deploy via git pull + ng build when on LAN. Announce to Matrix Elena-Digital-Plant room after deploy."
+    },
+    {
       "pr": 304,
       "branch": "DP-666-create-and-manage-autoscan",
       "type": "dp",
