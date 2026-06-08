@@ -1,6 +1,6 @@
 ---
 name: me:mpfc-monitor
-description: MyPersonalFootballCoach (MPFC) project monitor — check server health, WordPress errors, MemberMouse activity, cron job health, Slack workspace, New Relic APM, Rollbar errors, Cloudflare traffic/firewall, and GitHub PRs. Use when user asks to monitor MPFC, check the football coach website, review MPFC server status, check memberships or payments, inspect WordPress errors, or review recent Slack/Cloudflare/Rollbar activity for MyPersonalFootballCoach.
+description: MyPersonalFootballCoach (MPFC) project monitor — check server health, WordPress errors, MemberMouse activity, cron job health, Slack workspace, New Relic APM, Rollbar errors, Cloudflare traffic/firewall. Use when user asks to monitor MPFC, check the football coach website, review MPFC server status, check memberships or payments, inspect WordPress errors, or review recent Slack/Cloudflare/Rollbar activity for MyPersonalFootballCoach.
 ---
 
 # MPFC Monitor
@@ -22,7 +22,6 @@ Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-
 | `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks, performance (apdex, percentiles, slowest txns, DB) |
 | `/mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
 | `/mpfc-monitor cloudflare` | Cloudflare: traffic, threats, firewall, SSL |
-| `/mpfc-monitor github` | Open GitHub PRs (nuscarrick account) |
 
 ## Check 1 — Server Health (`/mpfc-monitor server`)
 
@@ -321,25 +320,17 @@ cf_get(f'/zones/{zone_id}/settings/ssl')
 - WAF packages: OWASP ModSecurity + CloudFlare + USER
 - Firewall events: 0 blocks/challenges recorded (attack traffic hitting origin directly, not blocked at CF edge)
 
-## Check 8 — GitHub (`/mpfc-monitor github`)
-
-```bash
-# Check open PRs — repo: mypersonalfootballcoach/wp (nuscarrick account)
-gh pr list --repo mypersonalfootballcoach/wp 2>&1
-```
-
 ## Full Run
 
-Run all 8 checks in order:
-1. Server health (SSH: mpfc.mpfc.live)
-2. WordPress health + cron (SSH: mpfc.mpfc.live)
-3. MemberMouse activity (SSH: mpfc.mpfc.live)
+Run all 7 checks in order:
+1. Server health
+2. WordPress health + cron
+3. MemberMouse activity
 4. Slack (MyPersonalFootballCoach workspace)
 5. New Relic APM
 6. Rollbar
 7. Cloudflare
-8. GitHub (mypersonalfootballcoach/wp)
-9. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
+8. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
 
 ## Report Format
 
@@ -361,9 +352,6 @@ Run all 8 checks in order:
 | Failed payments | X | ... |
 
 ### Slack
-...
-
-### GitHub
 ...
 
 ### Summary
