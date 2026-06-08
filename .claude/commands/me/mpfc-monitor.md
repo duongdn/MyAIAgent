@@ -5,7 +5,7 @@ description: MyPersonalFootballCoach (MPFC) project monitor — check server hea
 
 # MPFC Monitor
 
-Monitor the MyPersonalFootballCoach WordPress project. Generates `/var/www/MyDailyAgent/reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`.
+Monitor the MyPersonalFootballCoach WordPress project. Generates `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`.
 
 **Project root:** `/var/www/mypersonalfootballcoach.com`
 **Staging root:** `/var/www/staging`
@@ -14,16 +14,17 @@ Monitor the MyPersonalFootballCoach WordPress project. Generates `/var/www/MyDai
 
 | Command | What it checks |
 |---------|---------------|
-| `/mpfc-monitor` | Full run (all checks) |
-| `/mpfc-monitor server` | Disk, memory, CPU, processes |
-| `/mpfc-monitor wordpress` | WP errors, PHP errors, cron log |
-| `/mpfc-monitor members` | MemberMouse recent activity via DB |
-| `/mpfc-monitor slack` | MyPersonalFootballCoach Slack workspace |
-| `/mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks, performance (apdex, percentiles, slowest txns, DB) |
-| `/mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
-| `/mpfc-monitor cloudflare` | Cloudflare: traffic, threats, firewall, SSL |
+| `/me:mpfc-monitor` | Full run (all checks) |
+| `/me:mpfc-monitor server` | Disk, memory, CPU, processes |
+| `/me:mpfc-monitor wordpress` | WP errors, PHP errors, cron log |
+| `/me:mpfc-monitor members` | MemberMouse recent activity via DB |
+| `/me:mpfc-monitor slack` | MyPersonalFootballCoach Slack workspace |
+| `/me:mpfc-monitor newrelic` | New Relic APM: traffic, errors, attacks, performance (apdex, percentiles, slowest txns, DB) |
+| `/me:mpfc-monitor rollbar` | Rollbar: active errors, occurrences, criticals |
+| `/me:mpfc-monitor cloudflare` | Cloudflare: traffic, threats, firewall, SSL |
+| `/me:mpfc-monitor github` | Open GitHub PRs (nuscarrick account) |
 
-## Check 1 — Server Health (`/mpfc-monitor server`)
+## Check 1 — Server Health (`/me:mpfc-monitor server`)
 
 Run directly on this server (no SSH needed):
 
@@ -49,7 +50,7 @@ swapon --show
 
 **Storage >= 75%:** Investigate causes, recommend specific cleanup targets (logs, backups, uploads). Never run cleanup without user confirmation.
 
-## Check 2 — WordPress Health (`/mpfc-monitor wordpress`)
+## Check 2 — WordPress Health (`/me:mpfc-monitor wordpress`)
 
 ### Error Logs
 
@@ -84,7 +85,7 @@ wp --path=/var/www/mypersonalfootballcoach.com eval "
 "
 ```
 
-## Check 3 — MemberMouse Activity (`/mpfc-monitor members`)
+## Check 3 — MemberMouse Activity (`/me:mpfc-monitor members`)
 
 Query DigitalOcean MySQL directly via WP CLI (credentials in `wp-config.php`):
 
@@ -137,7 +138,7 @@ wp --path=/var/www/mypersonalfootballcoach.com eval "
 
 **Flag:** any failed payments, sudden spike in cancellations, MemberMouse queue stuck.
 
-## Check 4 — Slack (`/mpfc-monitor slack`)
+## Check 4 — Slack (`/me:mpfc-monitor slack`)
 
 **Workspace:** MyPersonalFootballCoach (config in `config/.slack-accounts.json`, key: `mpfc`)
 **Token type:** xoxp
@@ -146,7 +147,7 @@ Fetch recent messages using `search.messages` API with `after:{day_before}` + ep
 
 **Look for:** client messages, errors, deployment notifications, unusual activity.
 
-## Check 5 — New Relic APM (`/mpfc-monitor newrelic`)
+## Check 5 — New Relic APM (`/me:mpfc-monitor newrelic`)
 
 **Config:** `config/.newrelic-config.json` (encrypted) — keys: `user_api_key`, `account_id` (3457746), `app_name` (MPFC-live2)
 
@@ -230,7 +231,7 @@ nrql("SELECT count(*) FROM Transaction WHERE appName = 'MPFC-live2' FACET name S
 
 **Percentile baseline (24h):** P50=0.95s | P75=1.28s | P90=1.66s | P99=3.06s
 
-## Check 6 — Rollbar (`/mpfc-monitor rollbar`)
+## Check 6 — Rollbar (`/me:mpfc-monitor rollbar`)
 
 **Config:** `config/.rollbar-config.json` (encrypted) — keys: `read_token`, `post_server_token`, `project` (mpfc), `environment` (production)
 **Project ID:** 773475 | **Account ID:** 554643
@@ -256,7 +257,7 @@ for it in d.get('result',{}).get('items',[]):
 - `MM_Product::findAll()/getPaymentType()` undefined method — MemberMouse version mismatch, 1-2 occurrences/week, low frequency
 - Memory exhausted (1GB limit hit) — 9 occurrences on 05-19/20, not recent, monitor if recurs
 
-## Check 7 — Cloudflare (`/mpfc-monitor cloudflare`)
+## Check 7 — Cloudflare (`/me:mpfc-monitor cloudflare`)
 
 **Config:** `config/.cloudflare-config.json` (encrypted) — keys: `api_token`, `zone_id` (ded47d2c4247118dac024d793372b069), `zone_name` (mypersonalfootballcoach.com)
 
@@ -320,9 +321,16 @@ cf_get(f'/zones/{zone_id}/settings/ssl')
 - WAF packages: OWASP ModSecurity + CloudFlare + USER
 - Firewall events: 0 blocks/challenges recorded (attack traffic hitting origin directly, not blocked at CF edge)
 
+## Check 8 — GitHub (`/me:mpfc-monitor github`)
+
+```bash
+# Check open PRs — repo: mypersonalfootballcoach/wp (nuscarrick account)
+gh pr list --repo mypersonalfootballcoach/wp 2>&1
+```
+
 ## Full Run
 
-Run all 7 checks in order:
+Run all 8 checks in order:
 1. Server health
 2. WordPress health + cron
 3. MemberMouse activity
@@ -330,7 +338,8 @@ Run all 7 checks in order:
 5. New Relic APM
 6. Rollbar
 7. Cloudflare
-8. Write report: `/var/www/MyDailyAgent/reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
+8. GitHub (mypersonalfootballcoach/wp)
+9. Write report: `reports/{YYYY-MM-DD}/{HHMM}-mpfc-monitor.md`
 
 ## Report Format
 
@@ -352,6 +361,9 @@ Run all 7 checks in order:
 | Failed payments | X | ... |
 
 ### Slack
+...
+
+### GitHub
 ...
 
 ### Summary
