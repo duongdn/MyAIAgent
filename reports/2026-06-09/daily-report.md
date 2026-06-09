@@ -103,10 +103,11 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 | KhanhHH | 0h (Jun 9 early) | 8h (Gen 4 + Aysar 4, Jun 8) | none | ✓ W30 on track |
 | LeNH (Rory) | 0h (early) | — | none | ✓ early morning, no leave note |
 | LeNH (Franc) | 0h | — | none | ✓ normal — Rory is primary sheet |
-| LongVV | 0h Maddy | 0h Maddy W30 | none | ⚠️ 0h in Maddy this week — plan is 16h Maddy + 15h Celine but Celine sheet not scanned |
+| LongVV | 0h (Jun 9 so far) | 8h W30 (Jun 8) | none | ✓ Workstream: 8h Jun 8. Google Sheets = 0h (discrepancy). Plan: 16h Maddy + 15h Celine this week. |
 
 **KhanhHH:** 8h W30 = Generator W44 4h + Aysar W28 4h (Jun 8). Jun 9 = 0h so far (early).
-**LongVV:** Script only scans Maddy. Plan is 16h Maddy + 15h Celine this week (per Matrix 09:00 Jun 9). No Maddy hours yet — Celine hours unknown.
+**LongVV:** Workstream (authoritative for Maddy) = 8h Jun 8. Google Sheets shows 0h — likely not logged in sheet yet. Jun 9 = 0h so far. Celine sheet hours not scanned (no sheet ID configured).
+**Workstream — Maddy W30:** LongVV 8h Jun 8, LuHX 2h Jun 8. missingReportDays: Jun 9–12 (not yet due).
 **TuanNT:** John Yi 0h confirmed correct. Scrin tracks Nick (nick@nustechnology.com), not TuanNT.
 
 Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
@@ -265,13 +266,11 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
 ## Reminders — 05:28 (+07:00)
 
-**Reminders needed — 09:46 refresh (requires --send-reminder flag to send):**
+**Reminders — 09:51 (requires --send-reminder flag to send):**
 
-| Dev | Jun 9 so far | Note |
-|-----|--------------|------|
-| LongVV | 0h Maddy | Plan: 16h Maddy + 15h Celine — no Maddy hours yet. Celine sheet not scanned. |
+No reminders needed at this time.
 
-*(PhucVT: on leave today = no reminder. VietPH: on leave = no reminder. KhanhHH 0h Jun 9 early = monitor, not yet alert. LeNH 0h early = monitor. TuanNT resolved.)*
+*(PhucVT: on leave. VietPH: on leave. LongVV: 8h Jun 8 in Workstream = OK. KhanhHH/LeNH: 0h Jun 9 early morning = monitor. TuanNT: resolved.)*
 
 ---
 
