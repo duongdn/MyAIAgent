@@ -240,7 +240,7 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 - duongdn: "OK e" — confirmed
 - Status: Stop-work decision pending James Diamond response
 
-**VietPH leave Jun 10** — Approved (09:01): "đón người thân vô sg, có gì gấp nhờ VuTQ"
+**VietPH leave today Jun 9** — Approved (requested Jun 8 09:01): "đón người thân vô sg, có gì gấp nhờ VuTQ"
 
 **TuanNT 0h — RESOLVED** (08:41–08:52):
 - tuannt replied: "hôm qua John Yi k làm, có người log nhầm dự án Art rồi" — John Yi had no work yesterday; Art project was logged wrong. Scrin 8h = TienND (Art), NOT TuanNT.
@@ -303,7 +303,7 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 
 1. **🚨 James Diamond — payment overdue, stop-work action** — PhucVT taking Jun 10 off as pressure. DuongDN confirmed via Matrix. Pending client response.
 2. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
-3. **⚠️ VietPH leave Jun 10** — Approved. Notify if any urgent releases.
+3. **ℹ️ VietPH leave today (Jun 9)** — Approved (requested Jun 8). VuTQ covering if urgent release needed.
 4. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
 5. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
 6. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
