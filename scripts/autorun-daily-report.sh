@@ -78,6 +78,17 @@ fi
 rm -f "$out_file"
 log "Done (exit $exit_code)"
 
+# Ensure report + any file changes are pushed (skill may have already pushed; this is a safe fallback)
+if git diff --quiet HEAD 2>/dev/null; then
+  log "Nothing to push (working tree clean)"
+else
+  git add -A
+  git commit -m "auto: $(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d\ %H:%M)" >> "$LOG" 2>&1
+  log "Committed pending changes"
+fi
+git push origin master >> "$LOG" 2>&1
+log "Git push done (exit $?)"
+
 # Kill Xvfb if we started it
 if [ -n "$XVFB_PID" ]; then
   kill "$XVFB_PID" 2>/dev/null
