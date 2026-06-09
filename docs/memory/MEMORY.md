@@ -51,7 +51,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Workflow & Reporting Style
 - [feedback_freelancer_email_must_be_scanned.md](feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com MUST appear in email scan every run. Contains MPFC production errors.
-- [feedback_matrix_tomorrow_is_message_date_plus_one.md](feedback_matrix_tomorrow_is_message_date_plus_one.md) — "Tomorrow/mai" in Matrix = message_date+1, NOT session_date+1. Verify via sheets leave notes.
+- [feedback_matrix_tomorrow_is_message_date_plus_one.md](feedback_matrix_tomorrow_is_message_date_plus_one.md) — Leave dates = check **email** (xin nghỉ/nghỉ phép) or **sheets col A** leave note. NEVER infer from "tomorrow/mai" in chat.
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
 - [feedback_customer_facing_messages.md](feedback_customer_facing_messages.md) — NEVER expose internal tool/auth failures in customer Slack channels
 - [feedback_always_include_links.md](feedback_always_include_links.md) — Include clickable URLs for Trello cards, PRs, tickets
