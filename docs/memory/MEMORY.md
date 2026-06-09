@@ -96,7 +96,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_philip_msteams_must_run.md](feedback_philip_msteams_must_run.md) — Philip MS Teams: run with FULL NAME query "Philip Briggs" (plain "Philip" = 113 ambiguous matches); config+login now verified working
 - [feedback_philip_msteams_config_missing.md](feedback_philip_msteams_config_missing.md) — **RESOLVED 2026-06-06:** `.msteams-accounts.json` created+encrypted, script verified working — blocker gone
 - [feedback_msteams_url_substring_bug_fixed.md](feedback_msteams_url_substring_bug_fixed.md) — MS Teams script `url.includes()` falsely matched OAuth redirect_uri params, exited login loop pre-password; fixed via exact-hostname `isTeamsHost()`
-- [feedback_scrin_company_not_john_yi.md](feedback_scrin_company_not_john_yi.md) — Scrin.io company 266977 is NOT John Yi — never label TuanNT Scrin hours as "John Yi effort"
+- [feedback_scrin_company_not_john_yi.md](feedback_scrin_company_not_john_yi.md) — Scrin.io tracks Nick (nick@nustechnology.com) NOT TuanNT — NEVER attribute Scrin hours to TuanNT
 - [feedback_andrew_taraba_animworld_dm.md](feedback_andrew_taraba_animworld_dm.md) — Andrew Taraba: check nuscarrick DM with "animeworld", not Bizurk channels
 - [feedback_andrew_taraba_low_activity.md](feedback_andrew_taraba_low_activity.md) — Bizurk silence is normal, not an alert
 - [feedback_ggs_nick_daily_report.md](feedback_ggs_nick_daily_report.md) — GGS Nick daily report absence is not an alert
@@ -105,7 +105,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Sheets & Task Logs (general rules)
 - [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W{n} ≠ calendar week n. ALWAYS use Summary tab (col A=week, col B=start date) to find correct tab — NEVER scan individual tabs or hardcode.**
-- [feedback_aysar_sheet_owner_is_khanhhh.md](feedback_aysar_sheet_owner_is_khanhhh.md) — **Aysar sheet owner=KhanhHH (not LeNH)**. LeNH doesn't log in Aysar sheet. KhanhHH combined = Generator + Aysar. LeNH combined = Rory + Franc only.
+- [feedback_aysar_sheet_owner_is_khanhhh.md](feedback_aysar_sheet_owner_is_khanhhh.md) — **Aysar sheet owner=KhanhHH (not LeNH)**. LeNH combined = Rory + Franc + Rebecca (Q-T) only.
 - [feedback_tasklog_0h_reminder_complete.md](feedback_tasklog_0h_reminder_complete.md) — **0h task log + reminder sent = COMPLETE Trello item. Reminder IS the action, nothing more to do.**
 - [feedback_no_activity_not_skip.md](feedback_no_activity_not_skip.md) — **"No Slack activity" is NOT a skip reason. Quiet = OK → COMPLETE. Only skip on specific positive alerts.**
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
@@ -122,12 +122,13 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (all 3 sheets) blocks John Yi + Rebecca + Bailey. Working any one sheet = no alert.
 ### LeNH
-- [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 4 sheets: Rory+Franc+Aysar+Rebecca (Q-T cols)
+- [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH, confirmed 2026-06-09)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day (same rule applies to TuanNT)
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH 2nd project = Aysar; Aysar uses non-calendar W; Upwork billed under LeNH (sub-contract)
-- [feedback_khanhhh_multi_project.md](feedback_khanhhh_multi_project.md) — **KhanhHH = Generator + Aysar + Elena + Colin/ETZ (4 sheets).** Colin/ETZ sheet `1Y2QU1igccJ_ghirGZn_W36MY8ZwyvIKgE2GHl5j7rSE` (calendar W). Missing this sheet caused false -5.5h alert W29 (actual=40h).
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH also logs Aysar; Upwork billed under LeNH (sub-contract); Aysar uses non-calendar W
+- [feedback_khanhhh_weekly_owner_specific.md](feedback_khanhhh_weekly_owner_specific.md) — **Never use project Summary tab for any dev's weekly total — filter by owner col G across ALL sheets; devs move between projects**
+- [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT 0h gates John Yi, Rebecca, AND Bailey Trello items simultaneously
 ### Other devs
