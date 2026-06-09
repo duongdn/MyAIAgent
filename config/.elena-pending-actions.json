@@ -23,9 +23,9 @@
       "type": "dp",
       "ticket_id": "DP-666",
       "merged_at": "2026-06-09",
-      "deployed": false,
+      "deployed": true,
       "status_updated": false,
-      "pending_action": "PR #305 merged (squash) on 2026-06-09 05:00 +07. MayBanServer unreachable (not on local LAN). Deploy via git pull + ng build when on LAN. Announce to Matrix Elena-Digital-Plant room after deploy."
+      "pending_action": "DONE — PR #305 merged (squash) on 2026-06-09 05:00 +07. Deployed 2026-06-09 08:30 +07 (git pull + ng build OK, 17s). Announce to Matrix Elena-Digital-Plant room."
     },
     {
       "pr": 304,
