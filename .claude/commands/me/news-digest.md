@@ -101,3 +101,15 @@ python3 .claude/skills/news-digest/scripts/trello-complete.py
 ```
 
 Không cần báo cáo kết quả — chạy silently.
+
+## Git Commit & Push (MANDATORY)
+
+Sau khi Trello xong, **LUÔN LUÔN** commit và push file report:
+
+```bash
+git add reports/
+git commit -m "auto: news-digest $(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)"
+git push origin master
+```
+
+Nếu push fail, tìm nguyên nhân và fix (rebase nếu cần: `git pull --rebase origin master` rồi push lại). Không được bỏ qua bước này.
