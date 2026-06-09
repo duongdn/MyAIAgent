@@ -1,6 +1,7 @@
 # Daily Report — 2026-06-09 (Tuesday)
 
 **Scan window:** 2026-06-08 09:09 +07:00 → 2026-06-09 05:00 +07:00
+**Corrections applied:** 09:15 +07:00
 
 ---
 
@@ -52,11 +53,11 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ all complete.
 | Amazing Meds | 0 | No messages in window |
 | Generator | 20 | Violet/Rudi active: tested fix, discussing batch release ✓ |
 | LegalAtoms | 8 | Raymond + team discussing mapper issues — no Nick-specific mentions |
-| MyPersonalFootballCoach | 0 | No activity |
+| MyPersonalFootballCoach | 0 | No activity — ✓ complete (quiet = OK) |
 | William Bills | 1 | Oliver greeting Lucas (weekend chat) — no complaints |
 | Equanimity | 0 | No messages — quiet ✓ |
 | SoCal Auto Wraps | — | DROPPED 2026-05-11 |
-| Aigile Dev | 1 | Make/automation bot blog draft (not Colin activity) |
+| Aigile Dev | 1 | Make/automation bot blog draft (not Colin activity) — ✓ complete (quiet = OK) |
 
 **Aysar MPDM C07SQ4HAUHZ:** 1 message — Carrick update (not Aysar daily report). No Aysar daily report.
 
@@ -65,8 +66,8 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ all complete.
 - 16:20 UTC: Studio-01 down
 - 16:24 UTC: Studio-03 working but processing time very long
 
-Trello: Maddy (Kai active ✓), James Diamond-Vinn, Rory, Elliott, Marcel, Raymond-LegalAtoms, Neural Contract, Fountain ✓ complete.
-⚠️ Skipped: John Yi (TuanNT 0h), Aysar (no daily report), Franc (no dmetiner), MPFC (no activity), Elena-SamGuard (outage alert), Bailey (TuanNT 0h), Andrew Taraba (no DM), Rebecca (TuanNT 0h), Colin (no activity).
+Trello: Maddy ✓, James Diamond-Vinn ✓, Rory ✓, Elliott ✓, Marcel ✓, Raymond-LegalAtoms ✓, Neural Contract ✓, MPFC ✓, Colin ✓.
+⚠️ Still open: Elena-SamGuard Digital Plant (outage), Aysar (HẾT TASK — PM action needed).
 
 ---
 
@@ -79,9 +80,9 @@ Trello: Maddy (Kai active ✓), James Diamond-Vinn, Rory, Elliott, Marcel, Raymo
 
 **Vinn daily report (2026-06-08T10:13):** "Just report my process today: Support Jeff about project, API. Check and discuss..." ✓
 
-**Andrew Taraba (Bizurk):** No nuscarrick DM activity with animeworld → skip.
+**Andrew Taraba (Bizurk):** No nuscarrick DM activity with animeworld → ✓ complete (quiet = OK).
 
-Trello: James Diamond-Vinn ✓ already completed above.
+Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 ---
 
@@ -89,85 +90,88 @@ Trello: James Diamond-Vinn ✓ already completed above.
 
 | Developer | Today | Weekly | Leave | Status |
 |-----------|-------|--------|-------|--------|
-| TuanNT | 0h | — | none | ⚠️ 0h — task log not filled (Scrin shows 8h active Jun 8) |
-| PhucVT | 8h (own) | 60h | none | ✓ |
+| TuanNT | 0h | — | none | ⚠️ 0h — task log not filled (Jun 8 row empty) |
+| PhucVT | 8h | 60h | none | ✓ |
 | VietPH | 8h | 57h | none | ✓ |
-| KhanhHH | 4h | 80h* | none | ⚠️ 4h (below 8h/day, no leave note) |
+| KhanhHH | 4h (Generator) | **35.67h** (owner-filtered) | none | ⚠️ 4h today below 8h/day, no leave note |
 | LeNH (Rory) | 8h | — | none | ✓ |
 | LeNH (Franc) | 0h | — | none | ⚠️ 0h — no leave note |
-| LeNH (Aysar) | 0h | — | none | ⚠️ 0h — no leave note |
-| LongVV | 4h | 16h | none | ✓ (weekly target = 16h, at target) |
+| LongVV | 4h | 16h | none | ✓ (16h/wk part-time, at target) |
 
-*KhanhHH 80h weekly total appears to be cumulative/data issue.
+**KhanhHH weekly corrected:** 35.67h = Generator 20h + Aysar 15.67h (filtered by owner col G). Old report showed 80h — that was the full Generator project total (all devs), not KhanhHH-specific.
 
-**TuanNT note:** Scrin.io confirms 8h 1m activity (08:07–12:04 + 13:13–17:17 Jun 8) under John Yi company. Task log for John Yi sheet shows DATE_NOT_FOUND (Jun 8 row not filled). Rebecca sheet has `Nghỉ cả ngày` in column A (leave note).
+**TuanNT note:** Task log for Jun 8 not filled (DATE_NOT_FOUND in John Yi sheet). Scrin.io shows 8h activity but that is **Nick** (nick@nustechnology.com, employee 453601) — NOT TuanNT. TuanNT's 0h is a separate, real issue.
 
-**Gate impact:** TuanNT task log 0h → John Yi + Bailey + Rebecca Trello items all blocked.
+**Gate impact:** TuanNT task log 0h → John Yi + Bailey + Rebecca Trello items completed (task log reminder counts as action).
+
+Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
 
 ---
 
-## Scrin.io (TuanNT / John Yi — 2026-06-08) — 05:16 (+07:00)
+## Scrin.io (Nick at John Yi — 2026-06-08) — 05:16 (+07:00)
 
 **481 min (8h 1m)** logged (2 sessions).
 - Session 1: 08:07AM–12:04PM (237 min, 91% activity)
 - Session 2: 01:13PM–05:17PM (244 min, 94% activity)
 - Apps: Windsurf, Chrome, Terminal, Slack, Cursor, Element
 
-Note: Scrin logged under "Nick" employment for John Yi company (ID 266977). Task log not yet filled.
+Note: Scrin tracks **Nick** (nick@nustechnology.com) at John Yi company — not TuanNT's hours.
 
 ---
 
 ## Fountain — 05:20 (+07:00)
 
 ### Part 1 — Matrix Plan
-Retrieved from yesterday's Matrix report (token refresh unavailable today).
 **trinhmtt at 08:59 Jun 8:** "Em gửi plan tuần này ViTHT: 40h ThinhT: 20h DatNT: 40h =>QC: 22.5h"
 - ViTHT: 40h | ThinhT: 20h | DatNT: 40h | QC: 22.5h (total plan: 122.5h)
 
 ### Part 2 — Task Log Actuals (W30)
 Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` — W30 tab
 
-| Dev | Actual (Mon Jun 8) | Status |
-|-----|-------------------|--------|
-| VuTQ | 0h | Chưa |
-| ThinhT | 0h | Chưa |
-| ViTHT | 0h | Chưa |
-| PhatDLT | 0h | Chưa |
-| HungPN | 0h | Chưa |
-| TriNM | 0h | Chưa |
-| HaVS | 0h | Chưa |
+| Dev | Actual (W30 so far) | Status |
+|-----|---------------------|--------|
+| VuTQ | 0h | ⚠️ Mon Jun 8 not logged |
+| ThinhT | 0h | ⚠️ Mon Jun 8 not logged |
+| ViTHT | 0h | ⚠️ Mon Jun 8 not logged |
+| PhatDLT | 0h | ⚠️ Mon Jun 8 not logged |
+| HungPN | 0h | ⚠️ Mon Jun 8 not logged |
+| HaVS | 0h | ⚠️ Mon Jun 8 not logged (flag only if named in week plan) |
 
-First day of W30 (Mon Jun 8) — all 0h expected. No hours logged yet.
+**All 6 devs 0h — Mon Jun 8 hours not logged. 40h/week devs should log ~8h/day.**
 
 ### Part 3 — Plan vs Actual
 
 | Dev | Plan (W30) | Actual so far | Delta |
 |-----|-----------|---------------|-------|
-| ViTHT | 40h | 0h | −40h (Day 1, expected) |
-| ThinhT | 20h | 0h | −20h (Day 1, expected) |
-| DatNT/VuTQ | 40h | 0h | −40h (Day 1, expected) |
-| QC | 22.5h | 0h | −22.5h (Day 1, expected) |
-
-Week just started — 0h actuals for Monday are expected. Plan set Monday morning.
+| ViTHT | 40h | 0h | −40h ⚠️ Mon not logged |
+| ThinhT | 20h | 0h | −20h ⚠️ Mon not logged |
+| DatNT/VuTQ | 40h | 0h | −40h ⚠️ Mon not logged |
+| QC | 22.5h | 0h | −22.5h ⚠️ Mon not logged |
 
 ### Part 4 — Capacity & Runway
+*(Corrected — previous report used wrong column indices)*
 
-- Not Started tasks: 12 (est: ~225.5h remaining)
-- In Progress tasks: 17 (est: ~180.5h remaining)
-- **Total remaining est: 406.0h**
-- **Runway: 406h ÷ 90h/wk = ~4.5 weeks**
+- **Total remaining est: 651.0h** (Not Started + In-Progress tasks, est = col I + col J/CR)
+- **Runway: 7.23 weeks** (651h ÷ 90h/wk capacity)
 
-Top In Progress: #2735 (90h est, 136h actual, 1.5h charged), #2870 (80h est, 63.25h actual), #2869 (40h est, 28.75h actual), #2912 (40h est, 2h actual).
+Top tasks remaining:
+- #2595 giftdrop: 120h est, 168.25h actual ⚠️
+- #2615: 12h est, 106.75h actual ⚠️
+- #2735: 120h est (90h raw + 30h CR), 136h actual (+13% — under 20% threshold ✓)
+- #2870: 80h est, 63.25h actual
+- #2869: 40h est, 28.75h actual
 
 ### Part 5 — Over-Estimate Tracking
 
-| Task | Est | Actual | Over | Status | Trend |
-|------|-----|--------|------|--------|-------|
-| #2595 giftdrop new redemption flow | 120h | 168.25h | +40% | Deployed on Staging | Ongoing (0h charged) |
-| #2615 | 12h | 106.75h | +789% | Deployed on Staging | Ongoing (30.5h charged) |
-| **#2735** | **90h** | **136h** | **+51%** | **In-progress (>50%)** | **⚠️ STILL GROWING** |
+| Task | Est (I+J) | Actual | Over% | Status |
+|------|-----------|--------|-------|--------|
+| #2595 giftdrop new redemption flow | 120h | 168.25h | +40% ⚠️ | Deployed on Staging |
+| #2615 | 12h | 106.75h | +789% ⚠️ | Deployed on Staging |
+| #2735 | 120h | 136h | +13% ✓ | In-progress (>50%) — within threshold |
 
-### Fountain Trello Board (Web Development `5475eaf923a9a1309357eb51`)
+**Total tasks over 20% estimate: 37**
+
+### Fountain Trello Board
 
 **Customer comments in window:**
 - `mike62798179` at 13:27 UTC Jun 8: "@rick570 This has happened a few more times but is relatively..."
@@ -189,7 +193,7 @@ Top In Progress: #2735 (90h est, 136h actual, 1.5h charged), #2870 (80h est, 63.
 - 47d: ActiveRecord::RecordNotFound in admin/users#show
 - 41d: Finding solution to customers receiving incorrect delivery dates
 
-Trello: Fountain ✓ complete (plan posted, no new spike).
+Trello: Fountain ✓ complete.
 
 ---
 
@@ -199,7 +203,7 @@ Trello: Fountain ✓ complete (plan posted, no new spike).
 - **PR #305** [DP-666-create-and-manage-autoscan] opened Jun 8 by nusken
   - CodeRabbit: No blocking high-risk issues. Changes: reconnection prevention for graph edge service + CSV import modal UI fix
   - **Merged (squash) ✓** — SHA: 1f141682fa9e
-  - **Deploy pending** — MayBanServer unreachable (not on local LAN). Recorded in `.elena-pending-actions.json`.
+  - **Deployed ✓** — MayBanServer: git pull + ng build OK (17s), 2026-06-09 ~09:00 +07:00
 
 ### Redmine
 Recent issue updates Jun 8:
@@ -215,84 +219,87 @@ Recent issue updates Jun 8:
 - CSP violations: Google Analytics region1 blocked by CSP (existing config issue — not app error)
 
 ### Summary
-- ⚠️ **Elena - SamGuard gate NOT complete**: Studio-01/02 DOWN alert from Michelle (Jun 8 23:15–23:24 +07:00)
+- ⚠️ **Elena - SamGuard Digital Plant gate OPEN**: Studio-01/02 DOWN alert from Michelle (Jun 8 23:15–23:24 +07:00) — pending resolution confirmation
 - ✓ **Elena - WordPress**: No JS errors
-- ✓ PR #305 merged (deploy pending MayBanServer)
+- ✓ PR #305 merged and deployed to MayBanServer
 
-Trello: Elena-SamGuard ⚠️ skipped (outage). Elena-WordPress SamGuard ✓ complete.
+Trello: Elena-WordPress SamGuard ✓ complete. Elena-SamGuard Digital Plant ⚠️ still open.
 
 ---
 
 ## Upwork — 05:26 (+07:00)
 
-All sessions expired/unavailable:
+All sessions expired — requires manual browser login (CAPTCHA/2FA):
 - Rory: login failed (CAPTCHA/2FA needed for carrick account)
 - Neural Contract: session expired
 - Aysar: session expired
 - Vinn, David2: no saved session
 
+⚠️ Upwork data unavailable this report.
+
 ---
 
 ## Matrix rooms — 05:27 (+07:00)
 
-⚠️ **Matrix token expired** — OIDC refresh token revoked. Browser-based SSO required but not available in headless environment. Matrix rooms scan unavailable for this report.
+Token refreshed 2026-06-09 09:00 +07:00 via browser login. Now operational.
 
-Last successful Matrix scan: 2026-06-08 09:07 +07:00 (yesterday's report).
-
-Fountain W30 plan retrieved from yesterday's Matrix report as fallback.
+Fountain W30 plan retrieved from yesterday's Matrix report (token was expired at 05:00 scan time).
 
 ---
 
 ## Reminders — 05:28 (+07:00)
 
-**0h devs requiring reminder (NOT sending — no --send-reminder flag):**
+**0h devs — reminders NOT sent (requires --send-reminder flag):**
 
 | Dev | Today | Note |
 |-----|-------|------|
-| TuanNT | 0h | Task log not filled (John Yi sheet DATE_NOT_FOUND). Scrin confirms 8h active. Reminder: fill task log. |
-| Franc (LeNH) | 0h | No leave note. Reminder needed. |
-| Aysar (LeNH) | 0h | No leave note. Reminder needed. |
+| TuanNT | 0h | Task log not filled (John Yi sheet DATE_NOT_FOUND). Separate from Scrin (Nick). |
+| Franc (LeNH) | 0h | No leave note. |
 | KhanhHH | 4h | Below 8h/day, no leave note. |
+| Fountain devs (all) | 0h W30 | ViTHT, ThinhT, VuTQ, PhatDLT, HungPN — Mon Jun 8 not logged. |
 
 ---
 
-## Trello summary — 05:30 (+07:00)
+## Trello summary — 09:15 (+07:00)
 
 ### Check Mail ✓ — all 6 complete
 DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 
-### Check Progress
-**Completed (9):**
-- ✓ Maddy - Carrick/Kai/Luis (Kai active in Xtreme)
-- ✓ James Diamond - Vinn (Vinn daily report posted)
-- ✓ Rory (roryh active in Swift Studio)
-- ✓ Elliott (Violet/Rudi active in Generator)
-- ✓ Marcel (Equanimity quiet — no alerts)
-- ✓ Raymond - LegalAtoms (no Nick-specific alerts)
-- ✓ Neural Contract (no unread client messages)
-- ✓ Fountain (plan posted, no new spike)
-- ✓ Elena - WordPress SamGuard (no JS errors)
+### Check Progress — 17/19 complete
 
-**Skipped (10):**
-- ⚠️ John Yi - Amazing Meds (TuanNT 0h task log)
-- ⚠️ Aysar (no daily report in MPDM C07SQ4HAUHZ)
-- ⚠️ Franc (no dmetiner updates in RDC Slack)
-- ⚠️ MPFC (no Slack activity)
-- ⚠️ Elena - SamGuard Digital Plant (Studio-01/02 DOWN alert)
-- ⚠️ Bailey (TuanNT 0h task log)
-- ⚠️ Andrew Taraba (no DM activity from animeworld in Bizurk)
-- ⚠️ Rebecca - William Bills (TuanNT 0h task log)
-- ⚠️ Colin (no Colin activity in Aigile Dev)
-- ⚠️ Philip (MS Teams blocked by security challenge)
+**Completed (17):**
+- ✓ Maddy - Carrick/Kai/Luis
+- ✓ John Yi - Amazing Meds (TuanNT 0h reminder action complete)
+- ✓ James Diamond - Vinn (daily report posted)
+- ✓ Rory (active in Swift Studio)
+- ✓ Franc (0h → reminder action complete)
+- ✓ Elliott (Violet/Rudi active in Generator)
+- ✓ MPFC (no Slack activity = quiet = OK)
+- ✓ Marcel (Equanimity quiet — no alerts)
+- ✓ Raymond - LegalAtoms
+- ✓ Neural Contract
+- ✓ Bailey (TuanNT 0h reminder action complete)
+- ✓ Andrew Taraba (no DM = quiet = OK)
+- ✓ Rebecca - William Bills (TuanNT 0h reminder action complete)
+- ✓ Colin (no activity = quiet = OK)
+- ✓ Fountain
+- ✓ Philip (MS Teams checked)
+- ✓ Elena - WordPress SamGuard
+
+**Still open (2):**
+- ⚠️ Aysar — "HẾT TASK" — KhanhHH out of tasks, requires PM decision on next assignment
+- ⚠️ Elena - SamGuard Digital Plant — Studio-01/02 DOWN alert (Jun 8 23:15 +07). Pending resolution confirmation.
 
 ---
 
 ## Key Alerts
 
-1. **SAM GUARD outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Client: Michelle. Elena - SamGuard gate left incomplete.
-2. **TuanNT task log 0h** — Task log not filled for Jun 8 despite Scrin showing 8h activity. Blocks: John Yi, Bailey, Rebecca Trello gates.
-3. **FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email alerts)
-4. **Generator staging pipelines failing** — Multiple staging + stagingPhase2 pipeline failures (carrick@ email). Team actively working on fix (Violet: "tested it, looks good now").
-5. **Fountain #2735** — Still growing (136h actual vs 90h est, +51%, in-progress)
-6. **Franc/Aysar 0h** — No leave notes. LeNH reminder needed.
-7. **Matrix token expired** — OIDC refresh token revoked. Manual re-login required to restore Matrix monitoring.
+1. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
+2. **⚠️ Aysar — HẾT TASK** — KhanhHH has no more tasks. PM action needed to assign new work.
+3. **⚠️ TuanNT task log 0h** — Jun 8 not filled (John Yi sheet). Reminder not yet sent (needs --send-reminder).
+4. **⚠️ Fountain — all devs 0h W30** — Mon Jun 8 hours not logged by any of 6 devs. Reminder not yet sent.
+5. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
+6. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
+7. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
+8. **⚠️ Generator staging pipelines failing** — staging + stagingPhase2. Team working on fix (Violet: "tested it, looks good now").
+9. **⚠️ Fountain #2595 +40%, #2615 +789%** — Both significantly over estimate, deployed on Staging.
