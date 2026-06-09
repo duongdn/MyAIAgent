@@ -31,8 +31,10 @@ const FALLBACK_TABS = {
   Paturevision: "W30", Elena: null,
 };
 
-const TUE_TOKENS = ["Tue, 09/06/26", "09/06/26", "Tue, 9/06/26"];
-const TARGET_DATE = new Date(2026, 5, 9); // June 9, 2026
+const MON_TOKENS = ["Mon, 08/06/26", "08/06/26", "Mon, 8/06/26"]; // Jun 8 (yesterday)
+const TUE_TOKENS = ["Tue, 09/06/26", "09/06/26", "Tue, 9/06/26"]; // Jun 9 (today)
+const TARGET_DATE = new Date(2026, 5, 9);  // June 9, 2026 — today (for leave notes, Jun 9 hours)
+const PREV_DATE   = new Date(2026, 5, 8);  // June 8, 2026 — yesterday (for daily hours report)
 
 function parseHours(val) {
   if (!val || ["", "-", "—", "#DIV/0!", "N/A"].includes(String(val).trim())) return 0;
@@ -187,21 +189,22 @@ async function main() {
     process.stderr.write(`  ${name} → ${tabs[name]}\n`);
   }
 
-  // TuanNT — task log sheets only; Scrin tracks Nick (nick@nustechnology.com), NOT TuanNT
+  // TuanNT — scans JohnYi + Rebecca + Paturevision for PREV_DATE (Jun 8 = yesterday reported).
+  // Scrin tracks Nick (nick@nustechnology.com), NOT TuanNT.
   process.stderr.write("TuanNT...\n");
   let jyH = {}, jyL = {}, jyE = null;
-  if (tabs.JohnYi) ({ ownerHours: jyH, leaveNotes: jyL, err: jyE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JohnYi, `${tabs.JohnYi}!A:I`), tokens));
+  if (tabs.JohnYi) ({ ownerHours: jyH, leaveNotes: jyL, err: jyE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JohnYi, `${tabs.JohnYi}!A:I`), MON_TOKENS));
   let rbH = {}, rbL = {}, rbE = null;
-  if (tabs.Rebecca) ({ ownerHours: rbH, leaveNotes: rbL, err: rbE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Rebecca, `${tabs.Rebecca}!A:I`), tokens));
+  if (tabs.Rebecca) ({ ownerHours: rbH, leaveNotes: rbL, err: rbE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Rebecca, `${tabs.Rebecca}!A:I`), MON_TOKENS));
   let patAll = {}, patL = {}, patE = null;
-  if (tabs.Paturevision) ({ ownerHours: patAll, leaveNotes: patL, err: patE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Paturevision, `${tabs.Paturevision}!A:I`), tokens));
+  if (tabs.Paturevision) ({ ownerHours: patAll, leaveNotes: patL, err: patE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Paturevision, `${tabs.Paturevision}!A:I`), MON_TOKENS));
   const patTuant = Object.fromEntries(Object.entries(patAll).filter(([k]) => k.includes("TuanNT")));
   results.TuanNT = {
     johnyiHours: sum(jyH), rebeccaHours: sum(rbH), paturevisionHours: sum(patTuant),
     totalHours: sum(jyH) + sum(rbH) + sum(patTuant),
     johnyiLeave: jyL, rebeccaLeave: rbL, johnyiErr: jyE, rebeccaErr: rbE,
     johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant,
-    note: "Scrin (nick@nustechnology.com, employee 453601) tracks Nick at John Yi — NOT TuanNT. Do not use Scrin data as TuanNT evidence.",
+    note: "Hours are for Jun 8 (PREV_DATE). Scrin tracks Nick (nick@), NOT TuanNT.",
   };
 
   // PhucVT

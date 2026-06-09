@@ -97,7 +97,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 | Developer | Jun 9 today | W30 weekly | Leave | Status |
 |-----------|-------------|------------|-------|--------|
-| TuanNT | 0h (John Yi) | — | none | ✅ RESOLVED — not working John Yi Jun 8. Scrin 8h = TienND (Art), NOT TuanNT. |
+| TuanNT | 6.5h (Paturevision) | — | none | ✓ Jun 8: 6.5h Paturevision (Prestashop Grazing Software Filters). John Yi = 0h (no John Yi work Jun 8, confirmed via Matrix). |
 | PhucVT | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — James Diamond stop-work (confirmed Jun 8 16:11) |
 | VietPH | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — personal (approved Jun 8) |
 | KhanhHH | 0h (Jun 9 early) | 8h (Gen 4 + Aysar 4, Jun 8) | none | ✓ W30 on track |
@@ -108,7 +108,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 **KhanhHH:** 8h W30 = Generator W44 4h + Aysar W28 4h (Jun 8). Jun 9 = 0h so far (early).
 **LongVV:** Workstream (authoritative for Maddy) = 8h Jun 8. Google Sheets shows 0h — likely not logged in sheet yet. Jun 9 = 0h so far. Celine sheet hours not scanned (no sheet ID configured).
 **Workstream — Maddy W30:** LongVV 8h Jun 8, LuHX 2h Jun 8. missingReportDays: Jun 9–12 (not yet due).
-**TuanNT:** John Yi 0h confirmed correct. Scrin tracks Nick (nick@nustechnology.com), not TuanNT.
+**TuanNT:** 6.5h Jun 8 in Paturevision (Bailey/Prestashop Grazing). John Yi = 0h (no John Yi work that day — confirmed via Matrix 08:41). Script only scanned Jun 9 target date, missed Jun 8 data — bug now identified. Scrin tracks Nick (nick@), not TuanNT.
 
 Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
 
@@ -250,9 +250,9 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
 **VietPH leave today Jun 9** — Approved (requested Jun 8 09:01): "đón người thân vô sg, có gì gấp nhờ VuTQ"
 
-**TuanNT 0h — RESOLVED** (08:41–08:52):
-- tuannt replied: "hôm qua John Yi k làm, có người log nhầm dự án Art rồi" — John Yi had no work yesterday; Art project was logged wrong. Scrin 8h = TienND (Art), NOT TuanNT.
-- ✅ TuanNT 0h in John Yi is correct. No alert needed.
+**TuanNT — Jun 8 clarified** (Matrix 08:41–08:52):
+- tuannt: "hôm qua John Yi k làm, có người log nhầm dự án Art rồi" — John Yi didn't work; Art entry was logged wrong by someone else.
+- TuanNT actually logged **6.5h in Paturevision** (Prestashop Grazing Software Filters). Script bug: only scanned Jun 9, missed Jun 8 data.
 
 **KhanhHH** (!rwLbvLBnrRAYMaOPaD, 14:08): "dạ ok a e cũng update lại thêm details cho ok hơn r nha a" — responded and updated task log.
 
