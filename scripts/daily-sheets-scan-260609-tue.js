@@ -27,7 +27,7 @@ const SHEETS = {
 
 const FALLBACK_TABS = {
   Maddy: "W9", JohnYi: "W30", Rebecca: "W30", JamesDiamond: "W28",
-  Rory: "W14", Franc: "W27", Aysar: "W27", Generator: "W43",
+  Rory: "W14", Franc: "W27", Aysar: "W28", Generator: "W44",
   Paturevision: "W30", Elena: null,
 };
 
@@ -40,11 +40,19 @@ function parseHours(val) {
   return isNaN(n) ? 0 : n;
 }
 
+const MONTH_NAMES = { January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,December:11 };
 function parseDateCell(val) {
   const s = String(val).trim().replace(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*/, "");
-  const m = s.match(/^(\d{1,2})\/(\d{2})\/(\d{2})/);
-  if (!m) return null;
-  return new Date(2000 + parseInt(m[3]), parseInt(m[2]) - 1, parseInt(m[1]));
+  // Format: DD/MM/YY
+  const m1 = s.match(/^(\d{1,2})\/(\d{2})\/(\d{2})/);
+  if (m1) return new Date(2000 + parseInt(m1[3]), parseInt(m1[2]) - 1, parseInt(m1[1]));
+  // Format: Month D, YYYY (e.g. "June 8, 2026")
+  const m2 = s.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+  if (m2) {
+    const mo = MONTH_NAMES[m2[1]];
+    if (mo !== undefined) return new Date(parseInt(m2[3]), mo, parseInt(m2[2]));
+  }
+  return null;
 }
 
 const DAY_PATTERN = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s*\d{1,2}\/\d{2}\/\d{2}/;

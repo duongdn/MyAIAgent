@@ -197,12 +197,37 @@ async function processRoom(homeserver, token, room, cutoffMs) {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
+async function ensureValidToken() {
+  const { execSync } = require('child_process');
+  const path = require('path');
+  const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+
+  // Quick validity check
+  try {
+    const whoami = await get(`${config.homeserver}/_matrix/client/v3/account/whoami`, config.access_token);
+    if (whoami.user_id) return; // token still valid
+  } catch (_) {}
+
+  // Token expired — refresh via browser (requires DISPLAY=:1)
+  process.stderr.write('[matrix] Token expired — running matrix-token-refresh.js...\n');
+  const scriptPath = path.join(__dirname, 'matrix-token-refresh.js');
+  try {
+    execSync(`DISPLAY=:1 node "${scriptPath}"`, { stdio: 'inherit', timeout: 120000 });
+    process.stderr.write('[matrix] Token refreshed OK\n');
+  } catch (e) {
+    process.stderr.write(`[matrix] Token refresh failed: ${e.message}\n`);
+    process.stderr.write('[matrix] Continuing with existing token (may fail)\n');
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const sinceArg = args[args.indexOf('--since') + 1];
   const roomArg  = args[args.indexOf('--room')  + 1];
 
   const cutoffMs = sinceArg ? new Date(sinceArg).getTime() : getCutoffMs();
+
+  await ensureValidToken();
 
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
   const { homeserver, access_token: token } = config;

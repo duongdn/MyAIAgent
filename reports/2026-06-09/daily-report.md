@@ -93,12 +93,12 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 | TuanNT | 0h | — | none | ⚠️ 0h — task log not filled (Jun 8 row empty) |
 | PhucVT | 8h | 60h | none | ✓ |
 | VietPH | 8h | 57h | none | ✓ |
-| KhanhHH | 4h (Generator) | **35.67h** (owner-filtered) | none | ⚠️ 4h today below 8h/day, no leave note |
+| KhanhHH | 4h (Generator) | 8h W30 so far (Generator 4h + Aysar 4h) | none | ⚠️ 4h today below 8h/day, no leave note |
 | LeNH (Rory) | 8h | — | none | ✓ |
 | LeNH (Franc) | 0h | — | none | ⚠️ 0h — no leave note |
 | LongVV | 4h | 16h | none | ✓ (16h/wk part-time, at target) |
 
-**KhanhHH weekly corrected:** 35.67h = Generator 20h + Aysar 15.67h (filtered by owner col G). Old report showed 80h — that was the full Generator project total (all devs), not KhanhHH-specific.
+**KhanhHH weekly:** 8h W30 so far = Generator 4h + Aysar 4h (Mon Jun 8 only). Filtered by owner col G across correct week tabs (Generator W44, Aysar W28).
 
 **TuanNT note:** Task log for Jun 8 not filled (DATE_NOT_FOUND in John Yi sheet). Scrin.io shows 8h activity but that is **Nick** (nick@nustechnology.com, employee 453601) — NOT TuanNT. TuanNT's 0h is a separate, real issue.
 
