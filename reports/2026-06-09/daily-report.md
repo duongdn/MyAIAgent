@@ -125,28 +125,9 @@ Note: Scrin tracks **Nick** (nick@nustechnology.com) at John Yi company — not 
 **trinhmtt at 08:59 Jun 8:** "Em gửi plan tuần này ViTHT: 40h ThinhT: 20h DatNT: 40h =>QC: 22.5h"
 - ViTHT: 40h | ThinhT: 20h | DatNT: 40h | QC: 22.5h (total plan: 122.5h)
 
-### Part 2 — Task Log Actuals (W30)
-Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` — W30 tab
+### Part 2+3 — Task Log Actuals / Plan vs Actual
 
-| Dev | Actual (W30 so far) | Status |
-|-----|---------------------|--------|
-| VuTQ | 0h | ⚠️ Mon Jun 8 not logged |
-| ThinhT | 0h | ⚠️ Mon Jun 8 not logged |
-| ViTHT | 0h | ⚠️ Mon Jun 8 not logged |
-| PhatDLT | 0h | ⚠️ Mon Jun 8 not logged |
-| HungPN | 0h | ⚠️ Mon Jun 8 not logged |
-| HaVS | 0h | ⚠️ Mon Jun 8 not logged (flag only if named in week plan) |
-
-**All 6 devs 0h — Mon Jun 8 hours not logged. 40h/week devs should log ~8h/day.**
-
-### Part 3 — Plan vs Actual
-
-| Dev | Plan (W30) | Actual so far | Delta |
-|-----|-----------|---------------|-------|
-| ViTHT | 40h | 0h | −40h ⚠️ Mon not logged |
-| ThinhT | 20h | 0h | −20h ⚠️ Mon not logged |
-| DatNT/VuTQ | 40h | 0h | −40h ⚠️ Mon not logged |
-| QC | 22.5h | 0h | −22.5h ⚠️ Mon not logged |
+Not monitored — outside PM scope.
 
 ### Part 4 — Capacity & Runway
 *(Corrected — previous report used wrong column indices)*
@@ -287,7 +268,7 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 - ✓ Elena - WordPress SamGuard
 
 **Still open (2):**
-- ⚠️ Aysar — "HẾT TASK" — KhanhHH out of tasks, requires PM decision on next assignment
+- ⚠️ Aysar — no daily report from KhanhHH in MPDM C07SQ4HAUHZ
 - ⚠️ Elena - SamGuard Digital Plant — Studio-01/02 DOWN alert (Jun 8 23:15 +07). Pending resolution confirmation.
 
 ---
@@ -295,10 +276,8 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 ## Key Alerts
 
 1. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
-2. **⚠️ Aysar — HẾT TASK** — KhanhHH has no more tasks. PM action needed to assign new work.
-3. **⚠️ TuanNT task log 0h** — Jun 8 not filled (John Yi sheet). Reminder not yet sent (needs --send-reminder).
-4. **⚠️ Fountain — all devs 0h W30** — Mon Jun 8 hours not logged by any of 6 devs. Reminder not yet sent.
-5. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
+2. **⚠️ TuanNT task log 0h** — Jun 8 not filled (John Yi sheet). Reminder not yet sent (needs --send-reminder).
+4. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
 6. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
 7. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
 8. **⚠️ Generator staging pipelines failing** — staging + stagingPhase2. Team working on fix (Violet: "tested it, looks good now").
