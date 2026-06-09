@@ -7,8 +7,8 @@
 
 ## Email all — 05:05 (+07:00)
 
-| Account | Emails | Alerts | Calendar today |
-|---------|--------|--------|----------------|
+| Account | Regular | Alerts | Calendar today |
+|---------|---------|--------|----------------|
 | duongdn@nustechnology.com | 0 | 0 | no events |
 | carrick@nustechnology.com | 0 | 11 | no events |
 | nick@nustechnology.com | 0 | 0 | no events |
@@ -17,6 +17,9 @@
 | ken@nustechnology.com | 0 | 0 | no events |
 | vuongtrancr@gmail.com | 0 | 17 | — |
 | dnduongus@gmail.com | 0 | 1 | — |
+| freelancer@mypersonalfootballcoach.com | 0 | 2 | — |
+
+*(Regular = non-alert emails; Alerts = alert-classified emails)*
 
 **carrick@ alerts (11):**
 - Generator pipeline failures (staging + stagingPhase2) — multiple pipeline runs
@@ -35,6 +38,10 @@
 - [Swish] URGENT - Programmation badges IRVE
 
 **Calendar:** No events for any account today.
+
+**freelancer@ alerts (2):**
+- MPFC - Daily Summary - Monday, June 8 (automated)
+- **⚠️ [MPFC] production - New Error: #45 Error: Call to a member function _get_option() on null** — PHP production error
 
 Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ all complete.
 
@@ -90,13 +97,13 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 | Developer | Today | Weekly | Leave | Status |
 |-----------|-------|--------|-------|--------|
-| TuanNT | 0h | — | none | ✅ RESOLVED — John Yi had no work Jun 8, someone logged Art wrong. Confirmed by TuanNT via Matrix. |
+| TuanNT | 0h (John Yi) | — | none | ✅ RESOLVED — TuanNT confirmed via Matrix: not working John Yi Jun 8. Scrin 8h was TienND logging Art project under wrong company. TuanNT may have worked Art separately. |
 | PhucVT | 8h | 60h | none | ✓ |
 | VietPH | 8h | 57h | none | ✓ |
-| KhanhHH | 4h (Generator) | 8h W30 so far (Generator 4h + Aysar 4h) | none | ⚠️ 4h today below 8h/day, no leave note |
+| KhanhHH | 8h (Generator 4h + Aysar 4h) | 8h W30 so far | none | ✓ |
 | LeNH (Rory) | 8h | — | none | ✓ |
-| LeNH (Franc) | 0h | — | none | ⚠️ 0h — no leave note |
-| LongVV | 4h | 16h | none | ✓ (16h/wk part-time, at target) |
+| LeNH (Franc) | 0h | — | none | ✓ — total 8h Rory = full day, 0h Franc is normal (multi-sheet dev) |
+| LongVV | 4h | — | none | ✓ (part-time; source: Swift Studio Slack activity + Matrix plan Jun 9 ~16h Maddy + 15h Celine) |
 
 **KhanhHH weekly:** 8h W30 so far = Generator 4h + Aysar 4h (Mon Jun 8 only). Filtered by owner col G across correct week tabs (Generator W44, Aysar W28).
 
@@ -258,12 +265,13 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
 ## Reminders — 05:28 (+07:00)
 
-**0h devs — reminders NOT sent (requires --send-reminder flag):**
+**Reminders needed (requires --send-reminder flag to send):**
 
 | Dev | Today | Note |
 |-----|-------|------|
-| Franc (LeNH) | 0h | No leave note. |
-| KhanhHH | 4h | Below 8h/day, no leave note. KhanhHH responded in Matrix — may have updated task log. |
+| TuanNT | 0h (John Yi) | Art project work unconfirmed — check if TuanNT logged hours elsewhere. |
+
+*(LeNH: 8h Rory = full day, no reminder needed. KhanhHH: 8h total Generator+Aysar = OK, no reminder.)*
 
 ---
 
@@ -304,7 +312,7 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 1. **🚨 James Diamond — payment overdue, stop-work action** — PhucVT taking Jun 10 off as pressure. DuongDN confirmed via Matrix. Pending client response.
 2. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
 3. **ℹ️ VietPH leave today (Jun 9)** — Approved (requested Jun 8). VuTQ covering if urgent release needed.
-4. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
+4. **⚠️ MPFC production error** — #45 PHP fatal: `_get_option() on null` (freelancer@mypersonalfootballcoach.com email).
 5. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
 6. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
 7. **⚠️ Generator staging pipelines failing** — staging + stagingPhase2. Team working on fix (Violet: "tested it, looks good now").
