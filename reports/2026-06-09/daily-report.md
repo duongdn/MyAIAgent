@@ -67,7 +67,7 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ all complete.
 - 16:24 UTC: Studio-03 working but processing time very long
 
 Trello: Maddy ✓, James Diamond-Vinn ✓, Rory ✓, Elliott ✓, Marcel ✓, Raymond-LegalAtoms ✓, Neural Contract ✓, MPFC ✓, Colin ✓.
-⚠️ Still open: Elena-SamGuard Digital Plant (outage), Aysar (HẾT TASK — PM action needed).
+⚠️ Still open: Elena-SamGuard Digital Plant (outage), Aysar (no daily report from KhanhHH).
 
 ---
 
@@ -90,7 +90,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 | Developer | Today | Weekly | Leave | Status |
 |-----------|-------|--------|-------|--------|
-| TuanNT | 0h | — | none | ⚠️ 0h — task log not filled (Jun 8 row empty) |
+| TuanNT | 0h | — | none | ✅ RESOLVED — John Yi had no work Jun 8, someone logged Art wrong. Confirmed by TuanNT via Matrix. |
 | PhucVT | 8h | 60h | none | ✓ |
 | VietPH | 8h | 57h | none | ✓ |
 | KhanhHH | 4h (Generator) | 8h W30 so far (Generator 4h + Aysar 4h) | none | ⚠️ 4h today below 8h/day, no leave note |
@@ -100,9 +100,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 **KhanhHH weekly:** 8h W30 so far = Generator 4h + Aysar 4h (Mon Jun 8 only). Filtered by owner col G across correct week tabs (Generator W44, Aysar W28).
 
-**TuanNT note:** Task log for Jun 8 not filled (DATE_NOT_FOUND in John Yi sheet). Scrin.io shows 8h activity but that is **Nick** (nick@nustechnology.com, employee 453601) — NOT TuanNT. TuanNT's 0h is a separate, real issue.
-
-**Gate impact:** TuanNT task log 0h → John Yi + Bailey + Rebecca Trello items completed (task log reminder counts as action).
+**TuanNT note:** John Yi had no work on Jun 8 — confirmed via Matrix. TuanNT replied the Scrin 8h was TienND logging Art project wrong. 0h in John Yi sheet is correct, no alert. Scrin tracks Nick (nick@nustechnology.com), not TuanNT.
 
 Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
 
@@ -220,11 +218,41 @@ All sessions expired — requires manual browser login (CAPTCHA/2FA):
 
 ---
 
-## Matrix rooms — 05:27 (+07:00)
+## Matrix rooms — 09:25 (+07:00)
 
-Token refreshed 2026-06-09 09:00 +07:00 via browser login. Now operational.
+**Active rooms: 29 / 126 | Messages: 635**
+Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
-Fountain W30 plan retrieved from yesterday's Matrix report (token was expired at 05:00 scan time).
+### ⚠️ Action items for DuongDN (9)
+
+| Room | Time | Message |
+|------|------|---------|
+| Marcel/XiD | 14:40 | anhnvn: "a Dương hỏi collect testimonial giúp e nha" — needs to send client testimonial request |
+| Celine/OhCleo | 09:57 | minhtv: "a Dương xem hỗ trợ xử lý giúp Long, với mấy task mới, cái nào chưa clear đặt câu hỏi trong task" |
+| Delivery-Resource | 16:11 | chientx: "James Diamond nợ tiền lâu… sẽ báo dev phải ngưng lại… A Dương xem kêu PhucVT off 1 ngày" |
+| Elena-Active Alerts | 11:12–13:24 | anhttl/kietnht: discussing QC test environment restore (~2h est) — scoped for next sprint |
+
+### Key updates
+
+**🚨 James Diamond payment — CRITICAL (16:11)**
+- chientx escalating: James Diamond owes payment, ignoring all messages
+- Action: PhucVT to take day off tomorrow (Jun 10) as pressure
+- duongdn: "OK e" — confirmed
+- Status: Stop-work decision pending James Diamond response
+
+**VietPH leave Jun 10** — Approved (09:01): "đón người thân vô sg, có gì gấp nhờ VuTQ"
+
+**TuanNT 0h — RESOLVED** (08:41–08:52):
+- tuannt replied: "hôm qua John Yi k làm, có người log nhầm dự án Art rồi" — John Yi had no work yesterday; Art project was logged wrong. Scrin 8h = TienND (Art), NOT TuanNT.
+- ✅ TuanNT 0h in John Yi is correct. No alert needed.
+
+**KhanhHH** (!rwLbvLBnrRAYMaOPaD, 14:08): "dạ ok a e cũng update lại thêm details cho ok hơn r nha a" — responded and updated task log.
+
+**Bailey payment** (08:35–08:48): Paturevision client paid $727.50. binhnt confirmed checking.
+
+**Aysar/Generator sheet fix** (08:33–08:54): duongdn asked binhnt about sheet formula issue, binhnt confirmed fixed.
+
+**Celine OhCleo** (09:00): LongVV plan this week — 16h Maddy + ~15h Celine.
 
 ---
 
@@ -234,10 +262,8 @@ Fountain W30 plan retrieved from yesterday's Matrix report (token was expired at
 
 | Dev | Today | Note |
 |-----|-------|------|
-| TuanNT | 0h | Task log not filled (John Yi sheet DATE_NOT_FOUND). Separate from Scrin (Nick). |
 | Franc (LeNH) | 0h | No leave note. |
-| KhanhHH | 4h | Below 8h/day, no leave note. |
-| Fountain devs (all) | 0h W30 | ViTHT, ThinhT, VuTQ, PhatDLT, HungPN — Mon Jun 8 not logged. |
+| KhanhHH | 4h | Below 8h/day, no leave note. KhanhHH responded in Matrix — may have updated task log. |
 
 ---
 
@@ -275,10 +301,11 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 
 ## Key Alerts
 
-1. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
-2. **⚠️ TuanNT task log 0h** — Jun 8 not filled (John Yi sheet). Reminder not yet sent (needs --send-reminder).
+1. **🚨 James Diamond — payment overdue, stop-work action** — PhucVT taking Jun 10 off as pressure. DuongDN confirmed via Matrix. Pending client response.
+2. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
+3. **⚠️ VietPH leave Jun 10** — Approved. Notify if any urgent releases.
 4. **⚠️ KhanhHH 4h today** — Below 8h/day, no leave note.
-6. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
-7. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
-8. **⚠️ Generator staging pipelines failing** — staging + stagingPhase2. Team working on fix (Violet: "tested it, looks good now").
-9. **⚠️ Fountain #2595 +40%, #2615 +789%** — Both significantly over estimate, deployed on Staging.
+5. **⚠️ Upwork sessions expired** — Rory, Neural, Aysar require manual login (CAPTCHA/2FA).
+6. **⚠️ FirstProject production errors** — #888 NotFoundError, #1016–#1018 React errors (rick@ email).
+7. **⚠️ Generator staging pipelines failing** — staging + stagingPhase2. Team working on fix (Violet: "tested it, looks good now").
+8. **⚠️ Fountain #2595 +40%, #2615 +789%** — Both significantly over estimate, deployed on Staging.
