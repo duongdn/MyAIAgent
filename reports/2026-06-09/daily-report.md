@@ -1,7 +1,7 @@
 # Daily Report — 2026-06-09 (Tuesday)
 
 **Scan window:** 2026-06-08 09:09 +07:00 → 2026-06-09 05:00 +07:00
-**Corrections applied:** 09:15 +07:00
+**Corrections applied:** 09:15 +07:00 | **Sheets refreshed:** 09:46 +07:00
 
 ---
 
@@ -93,21 +93,21 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 ---
 
-## Sheets all — 05:15 (+07:00)
+## Sheets all — 09:46 (+07:00) *(refreshed)*
 
-| Developer | Today | Weekly | Leave | Status |
-|-----------|-------|--------|-------|--------|
-| TuanNT | 0h (John Yi) | — | none | ✅ RESOLVED — TuanNT confirmed via Matrix: not working John Yi Jun 8. Scrin 8h was TienND logging Art project under wrong company. TuanNT may have worked Art separately. |
-| PhucVT | 8h | 60h | none | ✓ |
-| VietPH | 8h | 57h | none | ✓ |
-| KhanhHH | 8h (Generator 4h + Aysar 4h) | 8h W30 so far | none | ✓ |
-| LeNH (Rory) | 8h | — | none | ✓ |
-| LeNH (Franc) | 0h | — | none | ✓ — total 8h Rory = full day, 0h Franc is normal (multi-sheet dev) |
-| LongVV | 4h | — | none | ✓ (part-time; source: Swift Studio Slack activity + Matrix plan Jun 9 ~16h Maddy + 15h Celine) |
+| Developer | Jun 9 today | W30 weekly | Leave | Status |
+|-----------|-------------|------------|-------|--------|
+| TuanNT | 0h (John Yi) | — | none | ✅ RESOLVED — not working John Yi Jun 8. Scrin 8h = TienND (Art), NOT TuanNT. |
+| PhucVT | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — James Diamond stop-work (confirmed Jun 8 16:11) |
+| VietPH | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — personal (approved Jun 8) |
+| KhanhHH | 0h (Jun 9 early) | 8h (Gen 4 + Aysar 4, Jun 8) | none | ✓ W30 on track |
+| LeNH (Rory) | 0h (early) | — | none | ✓ early morning, no leave note |
+| LeNH (Franc) | 0h | — | none | ✓ normal — Rory is primary sheet |
+| LongVV | 0h Maddy | 0h Maddy W30 | none | ⚠️ 0h in Maddy this week — plan is 16h Maddy + 15h Celine but Celine sheet not scanned |
 
-**KhanhHH weekly:** 8h W30 so far = Generator 4h + Aysar 4h (Mon Jun 8 only). Filtered by owner col G across correct week tabs (Generator W44, Aysar W28).
-
-**TuanNT note:** John Yi had no work on Jun 8 — confirmed via Matrix. TuanNT replied the Scrin 8h was TienND logging Art project wrong. 0h in John Yi sheet is correct, no alert. Scrin tracks Nick (nick@nustechnology.com), not TuanNT.
+**KhanhHH:** 8h W30 = Generator W44 4h + Aysar W28 4h (Jun 8). Jun 9 = 0h so far (early).
+**LongVV:** Script only scans Maddy. Plan is 16h Maddy + 15h Celine this week (per Matrix 09:00 Jun 9). No Maddy hours yet — Celine hours unknown.
+**TuanNT:** John Yi 0h confirmed correct. Scrin tracks Nick (nick@nustechnology.com), not TuanNT.
 
 Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
 
@@ -241,11 +241,11 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
 ### Key updates
 
-**🚨 James Diamond payment — CRITICAL (16:11)**
+**🚨 James Diamond payment — CRITICAL (16:11 Jun 8)**
 - chientx escalating: James Diamond owes payment, ignoring all messages
-- Action: PhucVT to take day off tomorrow (Jun 10) as pressure
+- Action: PhucVT takes day off **today Jun 9** as pressure ("tomorrow" in Jun 8 message = Jun 9)
 - duongdn: "OK e" — confirmed
-- Status: Stop-work decision pending James Diamond response
+- Status: PhucVT off today confirmed in sheets (Nghỉ cả ngày). Stop-work in effect pending client response.
 
 **VietPH leave today Jun 9** — Approved (requested Jun 8 09:01): "đón người thân vô sg, có gì gấp nhờ VuTQ"
 
@@ -265,13 +265,13 @@ Full details: `reports/2026-06-09/matrix-rooms-0925.md`
 
 ## Reminders — 05:28 (+07:00)
 
-**Reminders needed (requires --send-reminder flag to send):**
+**Reminders needed — 09:46 refresh (requires --send-reminder flag to send):**
 
-| Dev | Today | Note |
-|-----|-------|------|
-| TuanNT | 0h (John Yi) | Art project work unconfirmed — check if TuanNT logged hours elsewhere. |
+| Dev | Jun 9 so far | Note |
+|-----|--------------|------|
+| LongVV | 0h Maddy | Plan: 16h Maddy + 15h Celine — no Maddy hours yet. Celine sheet not scanned. |
 
-*(LeNH: 8h Rory = full day, no reminder needed. KhanhHH: 8h total Generator+Aysar = OK, no reminder.)*
+*(PhucVT: on leave today = no reminder. VietPH: on leave = no reminder. KhanhHH 0h Jun 9 early = monitor, not yet alert. LeNH 0h early = monitor. TuanNT resolved.)*
 
 ---
 
@@ -289,7 +289,7 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 - ✓ Rory (active in Swift Studio)
 - ✓ Franc (0h → reminder action complete)
 - ✓ Elliott (Violet/Rudi active in Generator)
-- ✓ MPFC (no Slack activity = quiet = OK)
+- ⚠️ MPFC (production PHP error #45 found in freelancer@ email — Trello gate open)
 - ✓ Marcel (Equanimity quiet — no alerts)
 - ✓ Raymond - LegalAtoms
 - ✓ Neural Contract
@@ -301,15 +301,16 @@ DuongDn ✓ | Carrick ✓ | Rick ✓ | Kai ✓ | Ken ✓ | Nick ✓
 - ✓ Philip (MS Teams checked)
 - ✓ Elena - WordPress SamGuard
 
-**Still open (2):**
-- ⚠️ Aysar — no daily report from KhanhHH in MPDM C07SQ4HAUHZ
+**Still open (3):**
+- ⚠️ MPFC — production PHP error #45 found in freelancer@ email
+- ⚠️ Aysar — KhanhHH daily report in MPDM C07SQ4HAUHZ not found in scan window (user confirmed they saw it — re-check manually)
 - ⚠️ Elena - SamGuard Digital Plant — Studio-01/02 DOWN alert (Jun 8 23:15 +07). Pending resolution confirmation.
 
 ---
 
 ## Key Alerts
 
-1. **🚨 James Diamond — payment overdue, stop-work action** — PhucVT taking Jun 10 off as pressure. DuongDN confirmed via Matrix. Pending client response.
+1. **🚨 James Diamond — payment overdue, stop-work IN EFFECT** — PhucVT off TODAY (Jun 9) confirmed (sheets: Nghỉ cả ngày). Pending client response.
 2. **⚠️ SAM GUARD studio outage** — Studio-01/02 DOWN, Studio-03 slow (~23:15 +07:00 Jun 8). Trello gate open until resolved.
 3. **ℹ️ VietPH leave today (Jun 9)** — Approved (requested Jun 8). VuTQ covering if urgent release needed.
 4. **⚠️ MPFC production error** — #45 PHP fatal: `_get_option() on null` (freelancer@mypersonalfootballcoach.com email).
