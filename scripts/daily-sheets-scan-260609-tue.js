@@ -28,7 +28,7 @@ const SHEETS = {
 const FALLBACK_TABS = {
   Maddy: "W9", JohnYi: "W30", Rebecca: "W30", JamesDiamond: "W28",
   Rory: "W14", Franc: "W27", Aysar: "W28", Generator: "W44",
-  Paturevision: "W30", Elena: null,
+  Paturevision: "W30", Elena: null, TuanNT_Neural: "W24",
 };
 
 const MON_TOKENS = ["Mon, 08/06/26", "08/06/26", "Mon, 8/06/26"]; // Jun 8 (yesterday)
@@ -189,7 +189,7 @@ async function main() {
     process.stderr.write(`  ${name} → ${tabs[name]}\n`);
   }
 
-  // TuanNT — scans JohnYi + Rebecca + Paturevision for PREV_DATE (Jun 8 = yesterday reported).
+  // TuanNT — scans JohnYi + Rebecca + Paturevision + Neural for PREV_DATE (Jun 8 = yesterday).
   // Scrin tracks Nick (nick@nustechnology.com), NOT TuanNT.
   process.stderr.write("TuanNT...\n");
   let jyH = {}, jyL = {}, jyE = null;
@@ -199,11 +199,14 @@ async function main() {
   let patAll = {}, patL = {}, patE = null;
   if (tabs.Paturevision) ({ ownerHours: patAll, leaveNotes: patL, err: patE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Paturevision, `${tabs.Paturevision}!A:I`), MON_TOKENS));
   const patTuant = Object.fromEntries(Object.entries(patAll).filter(([k]) => k.includes("TuanNT")));
+  let neuralH = {}, neuralE = null;
+  if (tabs.TuanNT_Neural) ({ ownerHours: neuralH, err: neuralE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.TuanNT_Neural, `${tabs.TuanNT_Neural}!A:I`), MON_TOKENS));
+  const neuralTuant = Object.fromEntries(Object.entries(neuralH).filter(([k]) => k.includes("TuanNT")));
   results.TuanNT = {
-    johnyiHours: sum(jyH), rebeccaHours: sum(rbH), paturevisionHours: sum(patTuant),
-    totalHours: sum(jyH) + sum(rbH) + sum(patTuant),
-    johnyiLeave: jyL, rebeccaLeave: rbL, johnyiErr: jyE, rebeccaErr: rbE,
-    johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant,
+    johnyiHours: sum(jyH), rebeccaHours: sum(rbH), paturevisionHours: sum(patTuant), neuralHours: sum(neuralTuant),
+    totalHours: sum(jyH) + sum(rbH) + sum(patTuant) + sum(neuralTuant),
+    johnyiLeave: jyL, rebeccaLeave: rbL,
+    johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant, neuralOwners: neuralTuant,
     note: "Hours are for Jun 8 (PREV_DATE). Scrin tracks Nick (nick@), NOT TuanNT.",
   };
 

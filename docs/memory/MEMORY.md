@@ -50,6 +50,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — **ALWAYS use `link` field from fetched JSON, NEVER fabricate/guess article URLs. fetch-news.py resolves relative URLs automatically (fixed 2026-05-29)**
 
 ## Workflow & Reporting Style
+- [feedback_freelancer_email_must_be_scanned.md](feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com MUST appear in email scan every run. Contains MPFC production errors.
+- [feedback_matrix_tomorrow_is_message_date_plus_one.md](feedback_matrix_tomorrow_is_message_date_plus_one.md) — "Tomorrow/mai" in Matrix = message_date+1, NOT session_date+1. Verify via sheets leave notes.
 - [feedback_report_style.md](feedback_report_style.md) — Channel-level summaries, concise grammar, no trailing summaries
 - [feedback_customer_facing_messages.md](feedback_customer_facing_messages.md) — NEVER expose internal tool/auth failures in customer Slack channels
 - [feedback_always_include_links.md](feedback_always_include_links.md) — Include clickable URLs for Trello cards, PRs, tickets
@@ -106,6 +108,9 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Sheets & Task Logs (general rules)
 - [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W{n} ≠ calendar week n. ALWAYS use Summary tab (col A=week, col B=start date) to find correct tab — NEVER scan individual tabs or hardcode.**
+- [feedback_sheets_scan_prev_date_for_daily_hours.md](feedback_sheets_scan_prev_date_for_daily_hours.md) — **Daily hours scan = PREV_DATE (yesterday)**. Using today's tokens at 05:00 = all 0h. Leave notes = today's tokens.
+- [feedback_workstream_authoritative_for_maddy_devs.md](feedback_workstream_authoritative_for_maddy_devs.md) — Workstream authoritative for Maddy/LongVV/LuHX. Sheets may lag. Run workstream-fetch when sheets=0h.
+- [feedback_dev_not_working_project_x_means_that_project_only.md](feedback_dev_not_working_project_x_means_that_project_only.md) — "Not working ProjectX" ≠ 0h total. Scan all sheets before concluding 0h day.
 - [feedback_aysar_sheet_owner_is_khanhhh.md](feedback_aysar_sheet_owner_is_khanhhh.md) — **Aysar sheet owner=KhanhHH (not LeNH)**. LeNH combined = Rory + Franc + Rebecca (Q-T) only.
 - [feedback_tasklog_0h_reminder_complete.md](feedback_tasklog_0h_reminder_complete.md) — **0h task log + reminder sent = COMPLETE Trello item. Reminder IS the action, nothing more to do.**
 - [feedback_no_activity_not_skip.md](feedback_no_activity_not_skip.md) — **"No Slack activity" is NOT a skip reason. Quiet = OK → COMPLETE. Only skip on specific positive alerts.**
@@ -121,7 +126,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond ONLY (NOT Rebecca)
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 ### TuanNT
-- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (all 3 sheets) blocks John Yi + Rebecca + Bailey. Working any one sheet = no alert.
+- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**4 sheets**: JohnYi+Rebecca+Paturevision+Neural) blocks John Yi+Rebecca+Bailey. Any one = no alert.
+- [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — **4 sheets, PREV_DATE tokens**. Neural=1drk_TN7... W-tabs. Missed 1.5h Neural + 6.5h Paturevision on 2026-06-09.
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH, confirmed 2026-06-09)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day (same rule applies to TuanNT)

@@ -97,7 +97,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 
 | Developer | Jun 9 today | W30 weekly | Leave | Status |
 |-----------|-------------|------------|-------|--------|
-| TuanNT | 6.5h (Paturevision) | — | none | ✓ Jun 8: 6.5h Paturevision (Prestashop Grazing Software Filters). John Yi = 0h (no John Yi work Jun 8, confirmed via Matrix). |
+| TuanNT | 8h (Paturevision 6.5h + Neural 1.5h) | — | none | ✓ Jun 8: 8h total. John Yi = 0h (no John Yi work Jun 8, confirmed via Matrix). |
 | PhucVT | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — James Diamond stop-work (confirmed Jun 8 16:11) |
 | VietPH | 0h | — | **Nghỉ cả ngày** | ✓ On leave today — personal (approved Jun 8) |
 | KhanhHH | 0h (Jun 9 early) | 8h (Gen 4 + Aysar 4, Jun 8) | none | ✓ W30 on track |
@@ -108,7 +108,7 @@ Trello: James Diamond-Vinn ✓, Andrew Taraba ✓.
 **KhanhHH:** 8h W30 = Generator W44 4h + Aysar W28 4h (Jun 8). Jun 9 = 0h so far (early).
 **LongVV:** Workstream (authoritative for Maddy) = 8h Jun 8. Google Sheets shows 0h — likely not logged in sheet yet. Jun 9 = 0h so far. Celine sheet hours not scanned (no sheet ID configured).
 **Workstream — Maddy W30:** LongVV 8h Jun 8, LuHX 2h Jun 8. missingReportDays: Jun 9–12 (not yet due).
-**TuanNT:** 6.5h Jun 8 in Paturevision (Bailey/Prestashop Grazing). John Yi = 0h (no John Yi work that day — confirmed via Matrix 08:41). Script only scanned Jun 9 target date, missed Jun 8 data — bug now identified. Scrin tracks Nick (nick@), not TuanNT.
+**TuanNT:** 8h Jun 8 = 6.5h Paturevision (Prestashop Grazing Software Filters) + 1.5h Neural (update feedback multiple upload files). John Yi = 0h — confirmed correct via Matrix. Script now scans all 4 sheets (JohnYi + Rebecca + Paturevision + Neural) using MON_TOKENS. Scrin tracks Nick (nick@), not TuanNT.
 
 Trello: John Yi ✓, Bailey ✓, Rebecca ✓, Franc ✓ complete.
 
