@@ -49,37 +49,53 @@
 
 ---
 
-## Email + Calendar fix — 10:03 (+07:00)
+## Email all — 10:10 (+07:00)
 
-*Fixed 2 bugs: (1) `check-email-imap.py` now includes all 9 accounts incl. Gmail IMAP + API. (2) `fetch-zoho-calendar.js` regex fix — Zoho returns `<C:calendar-data>` namespace prefix, script was matching `<calendar-data>` (no prefix) → no events parsed.*
+**Window:** 2026-06-10T05:00+07 → now
 
-### Email (since 2026-06-10T05:00+07 — window from timelines)
+| Account | Emails | Calendar Jun 10 |
+|---------|--------|-----------------|
+| duongdn@nustechnology.com | 0 | no events |
+| carrick@nustechnology.com | 0 | **Swift x NUS** 15:00–16:00+07 (rory@swiftstudio.co, Google Meet) |
+| nick@nustechnology.com | 0 | Weekly Meeting with Devs 21:30 (Teams) |
+| rick@nustechnology.com | **3** ⚠️ | HEAL Meeting 19:30+07 · OmniGPT Daily Sync 17:30+07 |
+| kai@nustechnology.com | 0 | no events |
+| ken@nustechnology.com | 62 | Martin <> Ken 16:30+07 · DE Standup 15:30+07 · DE Retro 16:00+07 · DE Tech Talks 16:00+07 |
+| vuongtrancr@gmail.com | **4** ⚠️ | — (Gmail, no CalDAV) |
+| dnduongus@gmail.com | 2 | — (Gmail, no CalDAV) |
+| freelancer@mypersonalfootballcoach.com | 0 | — (Gmail, no CalDAV) |
 
-| Account | Count | Notes |
-|---------|-------|-------|
-| duongdn@nustechnology.com | 0 | — |
-| carrick@nustechnology.com | 0 | — |
-| nick@nustechnology.com | 0 | — |
-| rick@nustechnology.com | **3** ⚠️ | #1020/#1021/#1022 Rollbar (confirmed above) |
-| kai@nustechnology.com | 0 | — |
-| ken@nustechnology.com | 62 | Precognize GitHub notifications |
-| **vuongtrancr@gmail.com** | **3** ⚠️ | See below |
-| **dnduongus@gmail.com** | 2 | LinkedIn/fund update — no alert |
-| **freelancer@mypersonalfootballcoach.com** | 0 | Gmail API working (SA key found) |
+---
 
-**⚠️ vuongtrancr@ (Carrick personal Gmail) alert:**
-- `[Delayed-newform] production - 10 occurrences in 5 minutes` — 06-10 06:21 → **MPFC Rollbar production alert** (different project from rick@ FirstProject)
-- `Delayed-newform - Daily Summary - Wednesday, June 10` — 06-10 08:06 (daily summary, no action)
-- Social comment notification — no alert
+### ⚠️ rick@ (3 production errors since 05:00)
+| Time | Subject |
+|------|---------|
+| 08:50+07 | `[FirstProject] production — New Error: #1020 Error: Minified React error #425` |
+| 08:50+07 | `[FirstProject] production — New Error: #1021 Error: Minified React error #418` |
+| 08:50+07 | `[FirstProject] production — New Error: #1022 Error: Minified React error #423` |
 
-### Calendar — carrick (FIXED)
+---
 
-| Account | Event |
-|---------|-------|
-| carrick@nustechnology.com | **Swift x NUS** — 09:00–10:00 BST (= **15:00–16:00 +07**) — Google Meet: https://meet.google.com/bav-cswc-swi — organizer: rory@swiftstudio.co, attendees: carrick@nustechnology.com, jeff@nustechnology.com |
-| other accounts | 0 events today |
+### ⚠️ vuongtrancr@gmail.com (4 emails since 05:00)
+| Time | From | Subject |
+|------|------|---------|
+| 06:21+07 | Rollbar Notification <notifier@mail.rollbar.com> | ⚠️ **[Delayed-newform] production - 10 occurrences in 5 minutes: #277 ActionControl** |
+| 08:06+07 | Rollbar Notification <notifier@mail.rollbar.com> | Delayed-newform - Daily Summary - Wednesday, June 10 |
+| 08:34+07 | Đoàn trên Facebook <close_friend_updates@facebookmail.com> | 💬 Đoàn Nguyên Dương đã bình luận... (personal, no action) |
+| 10:07+07 | Swish's Cybersecurity team <hey@go.tryriot.com> | Cybersecurity doesn't wait ⏰ (marketing, no action) |
 
-*Calendar note: Zoho stores calendar events from Zoho Calendar + synced Google Calendar. The fix (namespace prefix regex) now correctly parses ICS data from Zoho's CalDAV REPORT response.*
+---
+
+### dnduongus@gmail.com (2 emails since 05:00)
+| Time | From | Subject |
+|------|------|---------|
+| 08:47+07 | Instagram <follow-suggestions@mail.instagram.com> | Social suggestion (no action) |
+| 08:50+07 | UOBAM Vietnam - IR <vn-uobam-ir@uobgroup.com> | Cập nhật hoạt động quỹ / Weekly update 01/06–05/06/2026 (no action) |
+
+---
+
+### freelancer@mypersonalfootballcoach.com
+**0 emails** since 05:00+07. Gmail API working (SA key: mpfc-977@mpfc-458507.iam.gserviceaccount.com).
 
 ---
 
