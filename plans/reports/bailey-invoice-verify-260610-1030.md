@@ -6,15 +6,17 @@
 
 ## Line Item Comparison
 
-| # | Task | WBS Source | WBS Task | Inv Hrs | Inv $ | WBS $ | WBS Status | Match? |
-|---|------|-----------|---------|---------|-------|-------|-----------|--------|
-| 1 | Weekly Monitor May 2026 | Maintenance Tasks | Task 160 | 5.0h | $150 | $150 | Unpaid | ✅ |
-| 2 | [Prestashop] Mobile Menu Modal | Misc Tasks | Task 67 | 13.5h | $405 | $405 | Unpaid | ✅ |
-| 3 | [Maintenance] Update GLS on Console | Maintenance Tasks | Task 173 | 10.0h | $300 | $300 | Unpaid | ✅ |
-| 4 | [Prestashop] [GS] Herd Custom Date Selection | Misc Tasks | Task 68 | 5.0h | $150 | $150 | Unpaid | ✅ |
-| 5 | [Prestashop] [GS] Setup Map: Unassigned Paddock Deletion Modal | Misc Tasks | Task 69 | 8.0h | $240 | $240 | Unpaid | ✅ |
-| 6 | [Console][Mobile] Update on Transport Scanning | Misc Tasks | Task 70 | 23.5h | $705 | $705 | Unpaid | ✅ |
-| | **TOTAL** | | | **65.0h** | **$1,950** | **$1,950** | | **✅** |
+| # | Task | WBS Source | WBS Task | Billing | Est Raw | Actual | Inv Hrs | Inv $ | WBS $ | WBS Status | Match? |
+|---|------|-----------|---------|---------|---------|--------|---------|-------|-------|-----------|--------|
+| 1 | Weekly Monitor May 2026 | Maintenance Tasks | Task 160 | Hourly | — | 5.00h | 5.0h | $150 | $150 | Unpaid | ✅ |
+| 2 | [Prestashop] Mobile Menu Modal | Misc Tasks | Task 67 | Fixed | 7.00h | 14.90h | 13.5h | $405 | $405 | Unpaid | ✅ |
+| 3 | [Maintenance] Update GLS on Console | Maintenance Tasks | Task 173 | Hourly | — | 10.00h | 10.0h | $300 | $300 | Unpaid | ✅ |
+| 4 | [Prestashop] [GS] Herd Custom Date Selection | Misc Tasks | Task 68 | Fixed | 3.00h | 2.50h | 5.0h | $150 | $150 | Unpaid | ✅ |
+| 5 | [Prestashop] [GS] Setup Map: Unassigned Paddock Deletion Modal | Misc Tasks | Task 69 | Fixed | 5.00h | 4.00h | 8.0h | $240 | $240 | Unpaid | ✅ |
+| 6 | [Console][Mobile] Update on Transport Scanning | Misc Tasks | Task 70 | Fixed | 15.00h | 20.50h | 23.5h | $705 | $705 | Unpaid | ✅ |
+| | **TOTAL** | | | | | | **65.0h** | **$1,950** | **$1,950** | | **✅** |
+
+> Task 6 Est Raw = Console 4h + Mobile 11h. Actual = Console 4.00h + Mobile 16.50h.
 
 **Verdict: Invoice matches WBS billing entries. All 6 items are unpaid — correct for a pending invoice.**
 
