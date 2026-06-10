@@ -192,3 +192,4 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Dev Environment
 - [feedback_ripgrep_execute_permission.md](feedback_ripgrep_execute_permission.md) — After Claude Code npm update: `chmod +x` the bundled rg binary — npm strips execute bit on macOS, causing all skills to vanish
+- [feedback_matrix_daily_summary.md](feedback_matrix_daily_summary.md) — Matrix daily scan = summarized table per room, NEVER raw message dump
