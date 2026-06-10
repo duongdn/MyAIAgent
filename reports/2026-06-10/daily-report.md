@@ -10,7 +10,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Email carrick@ | ⚠️ Generator pipeline FAILED — staging + stagingPhase2 |
-| 2 | Email rick@ | ⚠️ FirstProject production errors #1018 (10th occurrence) + #1019 (New) |
+| 2 | Email rick@ | ⚠️ FirstProject production errors #1018 (10th) + #1019 (New) + **#1020, #1021, #1022 (3 new React errors 08:50+07)** |
 | 3 | Email kai@ | ⚠️ MPFC New Relic — "Signal lost: Low Application Throughput" ×12 |
 | 4 | Sheets | ⚠️ LeNH 0h on Jun 9 — all 3 sheets empty (Rory, Franc, Rebecca Q-T) |
 | 5 | Fountain | ⚠️ #2615 over-estimate 890% (est=12h, actual=106.75h) STILL GROWING |
@@ -18,6 +18,45 @@
 | 7 | Matrix | ℹ️ LongVV left early Jun 9 (father emergency, cấp cứu) — requested leave Jun 10 |
 
 **Cleared from cron:** TuanNT 0h → FALSE ALARM (had 8h in Paturevision Jun 9). Matrix token refreshed.
+
+---
+
+## Email re-check — 09:43 (+07:00) [since 05:00+07]
+
+*Corrects cron errors: kai@ was overcounted (~12+ → 3 total in window), ken@ was not checked (NewsLetter folder). Calendar: all Zoho accounts show 0 events for Jun 10 — **note: Teams meetings are NOT in Zoho CalDAV** and will never appear here.*
+
+| Account | New emails since 05:00 | Calendar Jun 10 |
+|---------|------------------------|-----------------|
+| duongdn@nustechnology.com | 0 | no events (Zoho only) |
+| carrick@nustechnology.com | 1 | no events (Zoho only) |
+| nick@nustechnology.com | 0 | no events (Zoho only) |
+| rick@nustechnology.com | **3** ⚠️ | no events |
+| kai@nustechnology.com | 0 | no events |
+| ken@nustechnology.com | 56 (Precognize GitHub PRs) | no events |
+| freelancer@mypersonalfootballcoach.com | — (no Gmail SA key) | — |
+
+**carrick@ new:** SoCal Auto Wraps daily summary (08:07) — no alert.
+
+**⚠️ rick@ new alerts (since 05:00):**
+- `[FirstProject] production — New Error: #1020 Error: Minified React error #425` — 08:50+07
+- `[FirstProject] production — New Error: #1021 Error: Minified React error #418` — 08:50+07
+- `[FirstProject] production — New Error: #1022 Error: Minified React error #423` — 08:50+07
+
+**ken@ Precognize PRs (56 since 05:00):** GitHub notifications from Welligence/QueryPlatform + welligence/web — none from nusken directly.
+
+**Calendar note:** `fetch-zoho-calendar.js` reads Zoho CalDAV only. Microsoft Teams / Outlook calendar events (including "Weekly Meeting with Devs") do NOT sync to Zoho and will not appear here. A Teams calendar integration would be needed to see those events.
+
+---
+
+## Reminders lenh — 09:43 (+07:00) [--send-reminder]
+
+| Dev | 0h date | Room | Status |
+|-----|---------|------|--------|
+| LeNH | Jun 9 | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` | ✅ **Sent** (event_id: $y37DD1QGFjgwqkpJCpmpH60sGHYjWv3IaGRKR6yOj4s) |
+
+Message sent: *"Hi LeNH, task log for June 9 is missing (0h logged). Please update when you can. Thanks!"*
+
+Trello: **Rory ✓ complete**, **Franc ✓ complete** (reminder IS the action per rule).
 
 ---
 
