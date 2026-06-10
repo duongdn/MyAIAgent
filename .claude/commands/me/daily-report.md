@@ -124,6 +124,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Matrix** | |
 | `/daily-report matrix` | All joined rooms |
 | `/daily-report matrix --room "!roomId:..."` | Single room by ID |
+| **Re-check** | |
+| `/daily-report recheck` | Re-run sources for all ○ incomplete Trello items, try to complete them |
+| `/daily-report recheck [item]` | Re-run sources for one specific item (same args as `trello progress`) |
 
 ---
 
@@ -620,6 +623,113 @@ Full details: reports/YYYY-MM-DD/matrix-rooms-HHMM.md
   [{RoomName}] {HH:MM} {sender}: {message text}
 ```
 If no action items, omit the warning block. Room details stay in the separate file — never paste them into daily-report.
+
+---
+
+## Piece 11 — Re-check Incomplete Items (`/daily-report recheck [item]`)
+
+**Purpose:** After a cron run, some Trello items may be ○ (incomplete) due to token failures, script bugs, or false 0h alerts. This piece re-runs only the failing sources and tries to complete the remaining items.
+
+**Trigger:** `/daily-report recheck` or when user says "lot of undone, check again".
+
+Supports individual item targeting:
+- `/daily-report recheck` — re-check ALL ○ incomplete items
+- `/daily-report recheck [item]` — re-check one item (same args as `trello progress`, e.g. `rory`, `fountain`, `james`)
+
+### Flow
+
+**Step 1 — Read Trello state**
+```
+GET /1/cards/{cardId}/checklists?key=...&token=...
+```
+- Find "Check progress" card by name on board `O83pAyqb`
+- Collect ALL ○ incomplete items across ALL checklists
+- If targeting a single item, only process that one
+
+**Step 2 — Decrypt configs**
+```bash
+bash scripts/decrypt-secrets.sh
+```
+
+**Step 3 — For each ○ item, look up its gate mapping**
+
+Use this table (derived from `docs/memory/reference_trello_gate_mapping.md`):
+
+| Trello Item (partial match) | Sources to run | Notes |
+|-----------------------------|----------------|-------|
+| Maddy | `slack xtreme` + `sheets longvv` | Kai daily report + LongVV hours |
+| John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined 4 sheets |
+| Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` | TuanNT 0h gates Bailey too |
+| James Diamond / Vinn | `discord airagri` | Vinn daily report |
+| Rory | `slack swift` + `sheets lenh` | LeNH combined 3 sheets |
+| Franc | `slack rdc` + `sheets lenh` | LeNH combined 3 sheets |
+| Aysar | Check Baamboozle MPDM **C07SQ4HAUHZ** | Aysar daily report ONLY — NOT workspace |
+| Elliott | `slack generator` | Elliott/Violet activity |
+| MPFC | `slack mpfc` | No Slack activity = OK → complete |
+| Marcel | `slack equanimity` | Marcel/Carrick alert |
+| Elena - SamGuard | `slack samguard` + `elena` | Elena PRs + deploy |
+| Raymond | `slack legalatoms` | Nick mentions only |
+| Neural Contract | Neural Upwork workroom 38901192 | Silence = never alert → complete |
+| Bailey | `slack ggs` + `sheets vietph` | See John Yi row for TuanNT gate |
+| Rebecca | `slack williambills` + `sheets tuannt` | TuanNT 0h gates Rebecca too |
+| Colin | `slack aigile` | No activity = OK → complete |
+| Andrew Taraba | `discord bizurk` DM "animeworld" | Check nuscarrick DM |
+| Fountain | `fountain` (full 5-part) | Must fix Matrix token first |
+| Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |
+
+**Step 4 — Decrypt + fix auth before re-running**
+
+Before running any Slack/Matrix/Discord source:
+- **Amazing Meds / Equanimity xoxc:** run refresh scripts proactively
+  - `node scripts/slack-xoxc-refresh-amazingmeds.js`
+  - `node scripts/slack-xoxc-refresh-equanimity.js`
+- **Matrix (Fountain):** verify token → if expired run `DISPLAY=:1 node scripts/matrix-token-refresh.js`
+- **Discord:** verify token with 3-step check (users/@me → guilds → channels) before assuming invalid
+
+**Step 5 — Re-run each failing source**
+
+Run the mapped source pieces sequentially (not parallel — fewer resources, no race). For each source:
+- Use the **same logic** as the corresponding piece (Slack uses `search.messages`, Sheets uses PREV_DATE tokens, etc.)
+- Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h
+- TuanNT: always scan all 4 sheets (JohnYi + Rebecca + Paturevision + Neural). If combined > 0h → no alert
+- LeNH: sum all 3 sheets (Rory + Franc + Rebecca Q-T). If combined > 0h → no alert. Aysar NOT in LeNH.
+- LongVV: check Workstream (authoritative), not just sheets. Part-time 16h/wk — 0h/day is normal, check weekly total only.
+
+**Step 6 — Complete or keep incomplete**
+
+For each item:
+- No alert from re-run → `PUT /cards/{cardId}/checkItem/{itemId}?state=complete`
+- Alert found → keep ○, note reason in report
+- 0h dev + reminder sent → complete (reminder IS the action)
+- Neural silence / Cloudflare block → complete (never an alert)
+
+**Step 7 — Append to daily report**
+
+Append a timestamped section:
+```markdown
+## Re-check — {HH:MM} (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Rory | ✓ completed | LeNH 4h found on re-scan |
+| Fountain | ○ still incomplete | #2615 890% over-est still growing |
+| James Diamond | ○ still incomplete | Vinn no daily report confirmed |
+| Rebecca | ✓ completed | TuanNT false alarm — 8h in Paturevision |
+...
+
+**Cleared:** {list}
+**Still open:** {list}
+```
+
+### Rules for Re-check
+
+- **Never re-run email** — email is already done and Trello mail items are handled separately
+- **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
+- **TuanNT 4-sheet rule:** If any one of 4 sheets has hours → combined > 0h → no alert → items gated on TuanNT all complete
+- **LeNH 3-sheet rule:** Sum Rory + Franc + Rebecca Q-T only (NOT Aysar)
+- **Aysar MPDM:** Use correct epoch for the current year when calling `conversations.history` — wrong epoch returns 2025 data
+- **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
+- **Log findings clearly:** state what was checked, what was found, and why each item was completed or kept open
 
 ---
 
