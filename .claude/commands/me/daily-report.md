@@ -125,8 +125,8 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report matrix` | All joined rooms |
 | `/daily-report matrix --room "!roomId:..."` | Single room by ID |
 | **Re-check** | |
-| `/daily-report recheck` | Re-run sources for all ○ incomplete Trello items, try to complete them |
-| `/daily-report recheck [item]` | Re-run sources for one specific item (same args as `trello progress`) |
+| `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
+| `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
 
 ---
 
@@ -630,7 +630,7 @@ If no action items, omit the warning block. Room details stay in the separate fi
 
 **Purpose:** After a cron run, some Trello items may be ○ (incomplete) due to token failures, script bugs, or false 0h alerts. This piece re-runs only the failing sources and tries to complete the remaining items.
 
-**Trigger:** `/daily-report recheck` or when user says "lot of undone, check again".
+**Triggered automatically** when `/daily-report` is run interactively and today's report already exists. Also triggered explicitly via `/daily-report recheck [item]` for a single item.
 
 Supports individual item targeting:
 - `/daily-report recheck` — re-check ALL ○ incomplete items
@@ -735,6 +735,23 @@ Append a timestamped section:
 
 ## Full Run (`/daily-report`)
 
+**Step 0 — Always determine mode first:**
+
+```bash
+TZ='Asia/Ho_Chi_Minh' date  # get current UTC+7 date
+ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
+```
+
+| Condition | Mode |
+|-----------|------|
+| `--cron` flag | Cron mode (sequential inline, always full run) |
+| Report file does NOT exist for today | Full run (all 10 pieces) |
+| Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
+
+Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
+
+---
+
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
@@ -751,7 +768,7 @@ Append a timestamped section:
    ```
    If push fails: read the error, fix it (e.g. `git rebase --skip`, `git rebase --abort && git merge origin/master -X ours`, resolve conflicts), then push again. Keep retrying until push succeeds or 3 attempts exhausted.
 
-**Normal (interactive terminal)** — parallel agents:
+**Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io
 3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10)
@@ -759,6 +776,10 @@ Append a timestamped section:
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
 7. Update `daily_report.last_run` + `alert.last_run` in timelines
+
+**Normal (interactive terminal), report already EXISTS** — recheck mode (Piece 11):
+1. Run Piece 11 directly — no full re-run of all sources
+2. Git commit + push after completing
 
 ---
 
