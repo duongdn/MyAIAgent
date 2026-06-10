@@ -21,6 +21,33 @@
 
 ---
 
+## Re-check — 09:36 (+07:00)
+
+### Philip — CLEARED
+MS Teams (`will` account) checked for Philip Briggs (External — Six Star Rentals). Last message: **May 27** — no messages in monitoring window Jun 9 09:46 → Jun 10 05:00. No complaint or unresolved request. **Philip ✓ completed.**
+
+### James Diamond — CONFIRMED MISS
+AirAgri Discord checked: nusvinn account scanned `#airagri_webapp` (8 msgs) and `#airagri-flutter` (9 msgs) in window. Jeff Trinh posted daily report ✓. **Vinn (nusvinn) posted no daily report.** James Diamond remains ○.
+
+### Rory / Franc — REAL ALERT, NO REMINDER SENT
+LeNH 0h Jun 9 is confirmed real alert (no leave note for Jun 9, leave note is Jun 12). Reminder not sent (no `--send-reminder` flag). Rory and Franc remain ○. Run `/daily-report reminders lenh --send-reminder` to send reminder and clear these items.
+
+### Fountain — REAL ALERT
+#2615 over-estimate 890% (est=12h, actual=106.75h) is a real ongoing alert. Fountain remains ○.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Philip | ✓ completed | No messages in window — last msg May 27 |
+| James Diamond | ○ unchanged | Vinn no daily report confirmed |
+| Rory | ○ unchanged | LeNH 0h real alert, reminder not sent |
+| Franc | ○ unchanged | LeNH 0h real alert, reminder not sent |
+| Fountain | ○ unchanged | #2615 890% over-estimate still growing |
+
+**Cleared this run:** Philip
+**Still open:** James Diamond, Rory, Franc, Fountain
+
+---
+
 ## Re-check — 09:02 (+07:00)
 
 *Manual re-check of undone items from cron run.*
@@ -269,15 +296,16 @@ Last logged data: **W28 (May 25–31):**
 - **Rebecca (William Bills)** ← newly completed (TuanNT 8h confirmed)
 - **Neural Contract** ← newly completed (silence = never alert)
 
-**Check Progress ○ incomplete (final):**
+**Check Progress ○ incomplete (final after 09:36 recheck):**
 | Item | Reason |
 |------|--------|
-| James Diamond - Vinn | ○ reset — Vinn no daily report in window |
-| Rory | LeNH 0h Jun 9 real alert |
-| Franc | LeNH 0h Jun 9 real alert |
+| James Diamond - Vinn | Vinn no daily report confirmed (09:36) |
+| Rory | LeNH 0h Jun 9 real alert — send reminder to clear |
+| Franc | LeNH 0h Jun 9 real alert — send reminder to clear |
 | Fountain | #2615 890% STILL GROWING |
-| Philip | MS Teams: 1 result found, content unreadable |
-- Philip — no monitoring data
+
+**Check Progress ✓ newly completed (09:36):**
+- Philip — no messages in window (last msg May 27)
 
 ---
 
