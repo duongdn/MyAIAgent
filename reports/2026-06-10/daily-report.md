@@ -12,10 +12,59 @@
 | 1 | Email carrick@ | ⚠️ Generator pipeline FAILED — staging + stagingPhase2 |
 | 2 | Email rick@ | ⚠️ FirstProject production errors #1018 (10th occurrence) + #1019 (New) |
 | 3 | Email kai@ | ⚠️ MPFC New Relic — "Signal lost: Low Application Throughput" ×12 |
-| 4 | Sheets | ⚠️ TuanNT 0h on Jun 9 (JohnYi + Paturevision confirmed) |
-| 5 | Sheets | ⚠️ LeNH 0h on Jun 9 (Rory + Franc both empty) |
-| 6 | Fountain | ⚠️ #2615 over-estimate now 890% (est=12h, actual=106.75h) STILL GROWING |
-| 7 | Matrix | ❌ Matrix token expired — Fountain Part 1 + all Matrix rooms unavailable |
+| 4 | Sheets | ⚠️ LeNH 0h on Jun 9 — all 3 sheets empty (Rory, Franc, Rebecca Q-T) |
+| 5 | Fountain | ⚠️ #2615 over-estimate 890% (est=12h, actual=106.75h) STILL GROWING |
+| 6 | Discord | ⚠️ Vinn (AirAgri) — no daily report posted in window |
+| 7 | Matrix | ℹ️ LongVV left early Jun 9 (father emergency, cấp cứu) — requested leave Jun 10 |
+
+**Cleared from cron:** TuanNT 0h → FALSE ALARM (had 8h in Paturevision Jun 9). Matrix token refreshed.
+
+---
+
+## Re-check — 09:02 (+07:00)
+
+*Manual re-check of undone items from cron run.*
+
+### Corrections
+
+**TuanNT:** Re-scan confirmed **8h on Jun 9** in Paturevision (patOwners: TuanNT=8h). Cron used wrong date tokens. Alert was false. This clears John Yi (already ✓), Rebecca (now ✓), Bailey (already ✓).
+
+**LongVV:** Workstream shows 8h Jun 8 (Mon), 0h Jun 9 (Tue). Part-time 16h/wk → weekly total 8h, 4 days remaining → no alert. Matrix confirms: LongVV transferred to OhCleo project (Celine) — no longer on WyAsk. Leave Jun 10 (father stroke emergency).
+
+**Matrix:** Token refreshed. 29/125 rooms active, 631 messages. Full details: `reports/2026-06-10/matrix-rooms-0902.md`
+
+### Matrix Action Items (5)
+- **[Celine - OhCleo]** 17:07 minhtv: "check kịp ko a Dương ơi?" → ✅ RESOLVED — DuongDN fixed API bug at 17:25, deployed
+- **[Delivery Dept]** namtv: LongVV transferred to WyAsk eff Jun 8 (note: Matrix room shows OhCleo is primary)
+- **[Delivery Dept]** namtv: ViTHT sick Jun 9 (cough+fever), LeNH vacation Jun 12 → KhanhHH to cover Rory
+- **[Delivery Dept]** namtv: ThoTNT sick Jun 9 → TamVT covering on Zeke
+- **[binhnt room]** binhnt sent technical article DS dự án (content task for DuongDN to confirm project list)
+
+### Fountain — Part 1 (Matrix Plan) — FOUND
+W30 plan posted by @trinhmtt on **2026-06-08 08:59**:
+```
+ViTHT: 40h
+ThinhT: 20h
+DatNT: 40h
+=> QC: 22.5h
+```
+Note: VuTQ not in W30 plan. ViTHT sick Jun 9 (fever) — no Fountain replacement per namtv.
+
+### Trello Corrections Made
+| Item | Change | Reason |
+|------|--------|--------|
+| James Diamond - Vinn | ✓→○ INCOMPLETE | Vinn no daily report in window |
+| Rebecca (William Bills) | ○→✓ COMPLETE | TuanNT 8h confirmed (false alarm cleared) |
+| Neural Contract | ○→✓ COMPLETE | Silence = never alert per rule |
+
+### Still Incomplete
+| Item | Reason |
+|------|--------|
+| Rory ○ | LeNH 0h Jun 9 real alert |
+| Franc ○ | LeNH 0h Jun 9 real alert |
+| James Diamond ○ | Vinn no daily report |
+| Fountain ○ | #2615 over-estimate 890% STILL GROWING |
+| Philip ○ | MS Teams: search returned 1 result but content unreadable (UI error) |
 
 ---
 
@@ -106,21 +155,25 @@ Trello: James Diamond ✓, Andrew Taraba ✓.
 
 ---
 
-## Sheets — 05:00 (+07:00)
+## Sheets — 05:00 (+07:00) [re-verified 09:02]
 
 | Developer | Jun 9 Hours | Status |
 |-----------|-------------|--------|
-| LongVV (Maddy W10) | 0h | ⚠️ UNVERIFIED — Workstream + Upwork both unavailable this session |
-| PhucVT (JamesDiamond) | 0h | ✓ OK — leave day (Nghỉ cả ngày) |
-| TuanNT/JohnYi (W27) | 0h | ⚠️ ALERT — no task rows logged |
-| TuanNT/Paturevision (W31) | 0h | ⚠️ ALERT — confirmed 0h Tue Jun 9 |
-| TuanNT/Rebecca (W28) | — | ✓ Normal — Chưa (not written yet, expected) |
+| LongVV (Maddy W10) | 0h Sheets / 8h Workstream (Jun 8) | ✓ OK — part-time 16h/wk; transferred to OhCleo, leave Jun 10 |
+| PhucVT (JamesDiamond W29) | 0h | ✓ OK — leave day (Nghỉ cả ngày) |
+| TuanNT — JohnYi (W27) | 0h | ✓ OK — 8h total via Paturevision (combined clears gate) |
+| TuanNT — Paturevision (W31) | **8h** | ✓ CONFIRMED — patOwners TuanNT=8h (cron was wrong) |
+| TuanNT — Rebecca (W28) | — | ✓ Normal — Chưa expected |
+| TuanNT — Neural (W24) | 0h | ✓ OK — 8h total from Paturevision clears gate |
 | VietPH (Paturevision W31) | 0h | ✓ OK — leave day (Nghỉ cả ngày) |
-| KhanhHH/Generator (W44) | 8h | ✓ OK — 1+1+2.5+0.5+3h confirmed |
-| LeNH/Rory | 0h | ⚠️ ALERT — no LeNH rows in Rory sheet |
-| LeNH/Franc | 0h | ⚠️ ALERT — Franc sheet empty for Jun 9 |
+| KhanhHH — Generator (W44) | 4.5h | ✓ OK — partial day, weekly total 12.5h |
+| LeNH — Rory (W15) | 0h | ⚠️ ALERT — no LeNH rows (vacation Jun 12, not Jun 9) |
+| LeNH — Franc (W28) | 0h | ⚠️ ALERT — Franc sheet empty for Jun 9 |
+| LeNH — Rebecca Q-T | 0h | ⚠️ ALERT — no LeNH rows in Rebecca sheet |
 
-**Upwork:** All sessions expired (Rory CAPTCHA/2FA, Neural Contract expired, Aysar expired, vinn/david2 no session). Cannot verify hours via Upwork this run.
+**LeNH combined Jun 9:** 0h across all 3 sheets. Leave note Jun 12 (family trip), NOT Jun 9. Real alert.
+
+**Upwork:** All sessions expired this cron run. Not re-checked in manual re-check.
 
 ---
 
@@ -133,7 +186,14 @@ Trello: James Diamond ✓, Andrew Taraba ✓.
 ## Fountain — 05:00 (+07:00)
 
 ### Part 1 — Matrix Plan
-❌ **Unavailable** — Matrix access token expired. Automated refresh failed (browser SSO login required). Last known plan from previous runs.
+✅ **Found** — @trinhmtt posted W30 plan on 2026-06-08 08:59:
+```
+ViTHT: 40h
+ThinhT: 20h
+DatNT: 40h
+=> QC: 22.5h
+```
+Note: VuTQ not in W30 plan (moved to Bailey). ViTHT sick Jun 9 (fever+cough, confirmed by Delivery Dept).
 
 ### Part 2/3 — Task Log Actuals + Plan vs Actual
 W30 (Jun 8–14) and W29 (Jun 1–7): **0h logged** — Fountain devs have not entered tasks for these weeks.  
@@ -149,7 +209,7 @@ Last logged data: **W28 (May 25–31):**
 | PhatDLT | 6.00h |
 | **Total** | **78.00h** |
 
-Plan vs actual comparison not possible (Matrix plan unavailable + current week 0h).
+**Plan vs Actual W30 (Jun 8-14):** Fountain devs log on Workstream, not Google Sheets (confirmed by @trinhmtt Jun 9 09:02). Sheet W30 shows 0h — expected. Workstream not checked this session. ViTHT sick Jun 9 → 1 day missed expected.
 
 ### Part 4 — Capacity & Runway
 - **Remaining estimate:** 225.00h (11 active tasks — Not Started + In Progress)
@@ -199,48 +259,63 @@ Plan vs actual comparison not possible (Matrix plan unavailable + current week 0
 
 ---
 
-## Trello — 05:00 (+07:00)
+## Trello — 09:02 (+07:00) [updated]
 
-**Check Mail:** All 6 items marked ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick)
+**Check Mail:** All 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick)
 
-**Check Progress marked complete:**
-- Maddy (Carrick/Kai/Luis), John Yi, James Diamond, Aysar (KhanhHH 8h OK), Elliott
-- MPFC, Marcel, Elena-SamGuard, Raymond, Bailey, Andrew Taraba, Colin
-- Elena-WordPress SamGuard (Pending list)
+**Check Progress ✓ complete (final):**
+- Maddy, John Yi, Aysar, Elliott, MPFC, Marcel, Elena-SamGuard, Elena-WordPress
+- Raymond, Bailey, Andrew Taraba, Colin
+- **Rebecca (William Bills)** ← newly completed (TuanNT 8h confirmed)
+- **Neural Contract** ← newly completed (silence = never alert)
 
-**Check Progress SKIPPED (alerts/unverified):**
-- Rory — LeNH 0h alert
-- Franc — LeNH 0h alert
-- Neural Contract — TuanNT 0h (Neural dev)
-- Rebecca (William Bills) — TuanNT 0h
-- Fountain — production Rollbar errors
+**Check Progress ○ incomplete (final):**
+| Item | Reason |
+|------|--------|
+| James Diamond - Vinn | ○ reset — Vinn no daily report in window |
+| Rory | LeNH 0h Jun 9 real alert |
+| Franc | LeNH 0h Jun 9 real alert |
+| Fountain | #2615 890% STILL GROWING |
+| Philip | MS Teams: 1 result found, content unreadable |
 - Philip — no monitoring data
 
 ---
 
-## Reminders — 05:00 (+07:00)
-
-*Printed only (cron mode — no --send-reminder flag)*
+## Reminders — 09:02 (+07:00) [re-verified]
 
 | Dev | Status | Note |
 |-----|--------|------|
-| TuanNT | ⚠️ 0h Jun 9 | JohnYi W27 + Paturevision W31 both 0h confirmed |
-| LeNH | ⚠️ 0h Jun 9 | Rory sheet: no LeNH rows; Franc sheet: empty |
-| LongVV | ❓ unverified | Maddy W10 = 0h but Workstream/Upwork unavailable for confirmation |
+| TuanNT | ✅ CLEARED | Had 8h in Paturevision — cron used wrong date tokens |
+| LeNH | ⚠️ 0h Jun 9 | Rory + Franc + Rebecca Q-T all 0h; leave note is Jun 12 not Jun 9 |
+| LongVV | ✓ OK | Part-time (16h/wk); left early Jun 9 (father ER); emergency leave Jun 10 |
+
+*Reminder: LeNH should be notified — 0h Jun 9 with no leave note. Use --send-reminder flag to send.*
 
 ---
 
-## Matrix — 05:00 (+07:00)
+## Matrix — 09:02 (+07:00) [refreshed]
 
-❌ **All Matrix rooms unavailable** — access token expired (M_UNKNOWN_TOKEN). Automated browser-based refresh failed (manual SSO login required). Run `node scripts/matrix-token-refresh.js` manually.
+✅ Token refreshed. 29/125 rooms active, 631 messages.
+Full room details: `reports/2026-06-10/matrix-rooms-0902.md`
 
-Rooms affected: Fountain planning room, all NUS team rooms.
+**Key highlights:**
+- **Delivery Dept**: ViTHT sick Jun 9 (fever+cough), ThoTNT sick Jun 9 (TamVT covering). LeNH vacation Jun 12 → KhanhHH to cover Rory.
+- **Celine-OhCleo**: LongVV left early (father ER), API bug found → DuongDN fixed + deployed 17:25 ✅. LongVV implemented free-listens FE after hours.
+- **Bailey Mgmt**: Bailey client paid $727.50 — follow up on remaining balance.
+- **TuanNT room**: Confirmed TuanNT worked Jun 9 (Paturevision). John Yi 0h was a mis-log by another dev (Art project).
+- **LeNH room**: 0h task log reminder sent Jun 9 08:41.
+- **BDD Delivery**: Elena Java/Angular scope updated (BE 55.2h + FE 71.4h = 126.6h total).
+
+**Action items for DuongDN:**
+- ~~OhCleo API bug~~ ✅ RESOLVED
+- LongVV leave Jun 10 — confirm with MinhTV on coverage
+- Technical article DS dự án — confirm project list with BinhNT
 
 ---
 
 ## Infrastructure Notes
 
-- **Matrix token**: Expired. Requires manual login via browser (SSO). Run `DISPLAY=:1 node scripts/matrix-token-refresh.js`
-- **Upwork sessions**: All expired — Rory (CAPTCHA), Neural Contract, Aysar, vinn, david2. Requires manual re-login per account.
+- **Matrix token**: ✅ Refreshed at 09:02. Valid.
+- **Upwork sessions**: All expired during cron run. Requires manual re-login.
 - **Gmail SA key**: `config/.gmail-service-account.json` not present for freelancer@mypersonalfootballcoach.com
 
