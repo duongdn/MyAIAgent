@@ -103,7 +103,7 @@ ${hrefXml}
 </C:calendar-multiget>`;
   const res = await request("REPORT", calendarPath + "events/", auth, body, { Depth: "1" });
   const blocks = [];
-  const regex = /<calendar-data[^>]*>([\s\S]*?)<\/calendar-data>/g;
+  const regex = /<[^>]*calendar-data[^>]*>([\s\S]*?)<\/[^>]*calendar-data>/g;
   let m;
   while ((m = regex.exec(res.body)) !== null) blocks.push(m[1]);
   return blocks;
