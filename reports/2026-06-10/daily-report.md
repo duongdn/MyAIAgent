@@ -111,47 +111,51 @@ Trello: **Rory ✓ complete**, **Franc ✓ complete** (reminder IS the action pe
 
 ---
 
-## Matrix — 09:02 (+07:00) [29 rooms active, 631 msgs, window: Jun 9 08:00+07]
+## Matrix rooms — 09:02 (+07:00)
 
-| Room | Msgs | Summary |
+**Active rooms: 29 / 125 | Messages: 631**
+Full details: `reports/2026-06-10/matrix-rooms-0902.md`
+
+### ⚠️ Action items for DuongDN (5)
+
+| Room | Time | Message |
 |------|------|---------|
-| **Celine - OhCleo** | 164 | ⚠️ Prod API `/api/medias/suggest-medias/` broken → DuongDN fixed + deployed 17:25. LongVV: free-listens feature done (PR #11). LongVV left early 16:42 (father stroke emergency). FE iOS build bug (reload loop on Hiệp's build, not LuHX's). |
-| **Elena - Active Alerts** | 249 | ⚠️ AA3 est dispute: Lena questioned BE effort (API + unit tests already exist). Team explained effort = verify+update APIs. Multiple bugs: socket reminder timezone wrong, sub-investigation STT not updating. DuongVN ran migration. LA sent explanation to Lena. AA2 restore complete (ES reindexed 10:31). |
-| **Delivery - Resource Arrangement** | 17 | ThoTNT sick Jun 9 → TamVT bù Zeke. ViTHT sick Jun 9 → no backup Kunal. LeNH vacation Jun 12 → KhanhHH bù Rory (TuanNT also off Jun 11-12). ThanhVM sick Jun 9 PM → PL. KhanhHH vacation Jun 25-26 (pending approval). |
-| **Kunal - Fountain** | 28 | Task log reminder sent. #2918 gift swap bug raised. #2865 address edit fix live. #2881 images fix live. VuTQ pushed to live without QC (corrected). |
-| **NUS Technology** | 19 | World Cup prediction app fun activity. Admin: use annual leave reminder. namtv: CDF evidence reminder to team. |
-| **Rory Hackett - BXR App** | 11 | Tin Pham (client) requested call tomorrow 11AM UK. LeNH off Jun 12 → KhanhHH covers. Meeting today 15:00+07 (carrick + Jeff + Tin). Task status update requested. |
-| **Delivery Department** | 6 | HiepNT joining OhCleo Mobile. LongVV transferred to WyAsk. ⚠️ OhCleo checklist run report sent by Minh Trinh. |
-| **!oGYjbzEfphvvauBZtq** (internal) | 13 | Scrin.io Art project confusion (TienND logged wrong project, not TuanNT). TuanNT to cover Rory → later swapped to KhanhHH (TuanNT off Jun 11-12). |
-| **!mYZBGNoLFVpMVIJtPu** (LongVV DM) | 9 | LongVV got Cloudflare API link (OhCleo). Evening: emergency leave request Jun 10 (father). |
-| **!aaumKvfltGlhqcQjJP** (binhnt DM) | 21 | Sheet 31 formula bug (VietPH task log) → binhnt advised copy from old sheet. binhnt sent technical article project list for DuongDN to confirm. |
-| **Maddy - Extreme Soft Solutions** | 10 | Case study request. LongVV submitted 2 ideas (Google Cloud Vision product photo; auto-pricing second-hand from image). |
-| **Direct Manager** | 8 | Meeting 11:45 room 3L. chientx: collect case studies from ONE person per project (not blast whole team). |
-| **BDD - Delivery** | 2 | Elena new scope est: BE 55.2h + FE 71.4h = 126.6h total (revised from 49.5+74.2). |
-| **Aysar Khalid - Baamboozle** | 8 | Case study request → KhanhHH sent 2 case studies doc. |
-| **NUS - Elliott - New GreenFort Capital** | 6 | Case study request (needs ≥2 articles). KhanhHH to report later. |
-| **Rebecca - William Bills** | 8 | Case study request. Project paused — no client contact recently. |
-| **Rory / Franc reminder** | 1 | LeNH reminder sent (Jun 8 task log, Franc sheet 0h). |
-| **Bailey - Management** | 4 | Bailey paid $727.50. |
-| **Cameron Batty - Appetise** | 4 | Cameron returning next week (Thu+Fri Jun 18-19). |
-| **Elena - Digital Plant** | 3 | PR #305 (DP-666) deployed to MayBanServer. studio-03 slow → switch to studio-02. |
-| **John Yi - Amazing Meds** | 4 | Case study request → TuanNT found no interesting cases for this project. |
-| **Tech Lead** | 7 | Meeting 11:45 room 3L (some remote). |
-| **NUS - Bailey - Paturevision 2026** | 4 | Case study request → HaVS thinking, will review. |
-| **Technology Department** | 4 | Claude Fable 5 released (chientx shared). DuongDN: for free users, check "token" before using. |
-| **Growth Mentor Program** | 11 | hangdtt collecting pilot feedback. DuongDN: program should continue, 1 session/month. |
-| **!QEbdvaMJkTurMpRPIX** (James DM) | 2 | Case study request sent to James team. |
-| **!RlDBmHJkbksrxefMGn** | 4 | datnt: InfinityRoses email alias in DNS → referred to customer. |
-| **Những chú voi con** | 1 | DuongDN shared Zed IDE (lightweight AI IDE). |
-| **!OIrgPraJWrcDTnRVLQ** (LeNH DM) | 1 | Reminder: LeNH fill task log Jun 8. |
+| Celine - OhCleo | 16:42 | longvv: "nhờ a Duong Doan check giúp em với, em xin về sớm gấp, đưa ba em đi cấp cứu" → DuongDN fixed prod API bug, deployed 17:25 ✅ |
+| Celine - OhCleo | 13:55 | longvv: "nhờ a Duong Doan review giúp e PR này https://github.com/OhCleo/ohcleo-backend-api/pull/11" → deployed 14:44 ✅ |
+| Rory Hackett - BXR App | 08:55 | minhtv: "a Dương, ổng hẹn giờ họp trên Calendar hôm nay nhé" → meeting 15:00+07 today with Tin Pham (client) |
+| binhnt DM | 15:36 | binhnt sent DS dự án technical article project list → DuongDN needs to confirm which projects qualify |
+| Delivery - Resource Arr. | 09:18 | namtv: LeNH off Jun 12 → KhanhHH bù Rory (TuanNT also off Jun 11-12) — confirmed |
 
-**Action items from Matrix:**
-- ⚠️ **LongVV leave Jun 10** — father stroke. OhCleo needs coverage (free-listens FE PR #11 to review).
-- ⚠️ **Elena AA3 scope dispute** — Lena questioning BE effort, LA sent explanation.
-- ⚠️ **Rory Jun 12** — LeNH off, KhanhHH covering (TuanNT also off).
-- ℹ️ **Rory meeting TODAY 15:00+07** — Tin Pham client call, carrick+Jeff attending.
-- ℹ️ **OhCleo Delivery checklist** — run by Minh Trinh, details in room.
-- ℹ️ **Technical articles collection** — ongoing across 6+ projects.
+### Key updates
+
+**🚨 LongVV emergency leave Jun 10** (16:34 Jun 9):
+- Father has stroke symptoms (triệu chứng đột quỵ), LongVV going to hospital
+- OhCleo free-listens FE implementation done (PR posted at 21:42) — needs review today
+- Coverage: minhtv aware, LongVV said "mai làm bên Minh" tentatively
+
+**OhCleo prod API fixed** (17:07–17:26 Jun 9):
+- `/api/medias/suggest-medias/` broken in production (missing auth token in code)
+- DuongDN: fixed data bug + code bug (2 separate issues), deployed 17:25
+- Confirmed working by minhtv + HiepNT
+
+**Elena AA3 scope dispute** (13:00–18:00 Jun 9):
+- Lena questioned BE effort: API exists + unit tests exist → why charge more?
+- Team: effort = verify APIs against new UI + update/fix bugs found
+- AA2 restore complete (ES reindexed, data restored). Still open bugs: socket reminder timezone wrong, sub-investigation STT not updating
+- LA sent explanation to Lena evening Jun 9
+
+**Delivery changes Jun 9:**
+- ThoTNT sick → TamVT covers Zeke
+- ViTHT sick → Fountain no backup
+- ThanhVM sick PM → PL
+- LeNH vacation Jun 12 → KhanhHH bù Rory (TuanNT also off Jun 11-12)
+- KhanhHH vacation Jun 25-26 (pending approval)
+
+**Other:**
+- Bailey paid $727.50 (trinhmtt confirmed 08:35)
+- Cameron Batty returning next week (Thu-Fri Jun 18-19)
+- BDD: Elena new scope est revised to 126.6h (FE 71.4 + BE 55.2)
+- Case study collection requested across 6 projects (LongVV submitted 2 for Maddy, KhanhHH submitted 2 for Aysar)
 
 ---
 
