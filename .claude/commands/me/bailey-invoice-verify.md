@@ -4,42 +4,54 @@ description: Verify Bailey/Paturevision invoice against WBS billing and task log
 
 # Bailey Invoice Verify
 
-Verify a Bailey/Paturevision invoice against two data sources:
-1. **WBS Billing** spreadsheet (what we charge client) — the source of truth for invoices
-2. **Est vs Charged** task log (actual hours worked) — for cross-reference
+Verify a Bailey/Paturevision invoice against THREE data sources:
+1. **WBS Billing** spreadsheet — source of truth for billing amounts
+2. **GGS Slack** (#change-requests, #maintenance) — source of truth for quoted hours (client-approved)
+3. **Est vs Charged** task log — internal cross-reference for actual hours worked
 
 ## Data Sources
 
-| Source | Sheet ID | Purpose |
-|--------|----------|---------|
-| WBS Billing | `1rp0URMjhaOnEe3T_M0o6JbC2av1hno_rdkLIEdWeP4U` | Invoice amounts (estimates + buffer) |
-| Est vs Charged | `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` | Task log actuals + charged hours |
+| Source | ID / Location | Purpose |
+|--------|--------------|---------|
+| WBS Billing | `1rp0URMjhaOnEe3T_M0o6JbC2av1hno_rdkLIEdWeP4U` | Billing amounts per task |
+| GGS Slack | `globalgrazingservices.slack.com` (token in `.slack-accounts.json`) | Client-approved hour quotes |
+| Est vs Charged | `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` | Actual hours worked |
 
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
 **Rate:** $30/hour
 
 ## Billing Model
 
-- **Fixed-cost tasks:** Billed at **WBS estimated hours + buffer** (typically 10%), NOT actual hours
-- **Hourly tasks:** Billed at actual hours from task log "Charged" column
-- Buffer formula: Raw estimate × 1.10–1.24 (varies by task complexity)
+- **Fixed-cost tasks:** Hours billed = hours **quoted to and approved by client on Slack**, recorded in WBS. NOT internal buffer formula.
+- **Hourly tasks:** Hours billed = actual hours from Est vs Charged "Actual" column.
+- Invoice hours must match BOTH the WBS entry AND the original Slack quote.
 
 ## Steps
 
 ### Step 1 — Parse the invoice
-Extract line items from user input: task name, hours, amount.
+Extract line items: task name, hours, amount. Compute implied rate (amount ÷ hours) to verify $30/h.
 
 ### Step 2 — Fetch WBS billing data
-Read from `Main Tasks - Payment` and `Miscellaneous Tasks - Payment` sheets:
-- Columns: Task name (B), Estimate for Costs (C/E), Cost (D/F), Status (G/H), Payment Status (I)
-- Match each invoice line item to a row
+Search ALL three payment sheets: `Main Tasks - Payment`, `Miscellaneous Tasks - Payment`, `Maintenance Tasks - Payment`.
+- Match each invoice line item to a WBS row by task name
+- Record WBS hours and cost — flag if invoice hours ≠ WBS hours
 
-### Step 3 — Fetch individual WBS sheets (if needed)
-For large tasks (e.g., Photo Capture, Awaiting Shipments), check the dedicated WBS sheet:
-- Get Console/Mobile/Prestashop breakdown
-- Verify: Total hours + Buffer hours = Global hours (billed)
+### Step 3 — Verify hours against GGS Slack (**MANDATORY for fixed-cost tasks**)
+For each fixed-cost item, search GGS Slack for the original Amy quote to Joey:
+- Search `#change-requests` and `#maintenance` for task name + "hours"
+- Find the message where Amy quoted hours to the client and Joey approved
+- Confirm invoice hours = Slack-quoted hours
+- Use token from `config/.slack-accounts.json` → workspace "GLOBAL GRAZING SERVICES"
+- Search API: `https://slack.com/api/search.messages?query=<task+name+hours>&count=5`
 
-Key WBS sheets:
+### Step 4 — Cross-reference with Est vs Charged (internal awareness)
+Read `Est vs Charged` sheet (gid=920993260):
+- Columns: Task name (A), Status (G), Dev (H), Est Raw (I), Est w/Buffer (J), Actual (K), Charged (L)
+- For hourly tasks: invoice hours must = Actual (col K)
+- For fixed tasks: Actual is internal-only; WBS/Slack quote governs billing
+
+### Step 5 — Fetch individual WBS sheets (if needed)
+For large tasks spanning Console + Mobile, check dedicated WBS sheet:
 | Sheet | gid |
 |-------|-----|
 | WBS - Mandatory Photo Capture | 676218340 |
@@ -47,41 +59,38 @@ Key WBS sheets:
 | WBS - Order Verification Screen | 357245054 |
 | WBS - Awaiting Shipment | 1942930271 |
 
-### Step 4 — Cross-reference with Est vs Charged
-Read `Est vs Charged` sheet (gid=920993260) for each task:
-- Columns: Task name (A), Status (G), Dev (H), Est Raw (I), Est w/Buffer (J), Actual (K), Charged (L)
-- Compare: WBS billing amount vs Est w/Buffer vs Actual
-
-### Step 5 — Generate report
+### Step 6 — Generate report
 
 ```
 ## Bailey Invoice Verification
 
 **Invoice total:** $X,XXX.XX | **Rate:** $30/h
+**Sources:** WBS Billing + GGS Slack + Est vs Charged
 
-### Line Item Comparison
+### Line Item Verification
 
-| # | Task | Invoice Hrs | Invoice $ | WBS Billing $ | WBS Est+Buffer | Actual | Match? |
-|---|------|-------------|-----------|---------------|----------------|--------|--------|
+| # | Task | Billing | Inv Hrs | WBS Hrs | Slack Quote | Actual | Hrs OK? | Inv $ | Match? |
+|---|------|---------|---------|---------|------------|--------|---------|-------|--------|
 
 ### Summary
-- Total match: YES/NO
+- Invoice valid: YES/NO
 - Discrepancies: list any
-- Fixed-cost tasks: verify against WBS estimate+buffer
-- Hourly tasks: verify against task log "Charged" column
+- Payment status: all items unpaid? (expected for pending invoice)
 
-### Cross-Reference (Actual vs Billed)
-Show how actual hours compare to what's being billed (for internal awareness, not invoice validation).
+### Internal Cross-Reference (not blocking)
+Show WBS billed vs Est w/Buffer vs Actual for awareness.
 ```
 
 Save report to `plans/reports/bailey-invoice-verify-{YYMMDD-HHMM}.md`
 
 ## Important Rules
 
-- Fixed-cost invoice amounts come from WBS estimates, NOT task log actuals
-- The "Charged" column in Est vs Charged = actual hours logged, which may differ from invoice
-- Always check BOTH payment sheets (Main Tasks + Miscellaneous Tasks)
-- Some tasks span Console + Mobile — invoice may combine them into one line item
+- **NEVER treat invoice hours as verified without checking WBS + Slack.** Invoice hours are unverified input.
+- Fixed-cost hours are set by client-approved Slack quote, NOT the internal Est w/Buffer formula.
+- Hourly task hours must equal actual worked hours (Est vs Charged col K).
+- Always check ALL three payment sheets (Main + Miscellaneous + Maintenance Tasks).
+- Some tasks span Console + Mobile — search both in Est vs Charged and sum.
+- Always check payment status in WBS — items should be unpaid for a new invoice.
 
 ## Arguments
 
