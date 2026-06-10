@@ -14,8 +14,9 @@
 | 3 | Email kai@ | ⚠️ MPFC New Relic — "Signal lost: Low Application Throughput" ×12 |
 | 4 | Sheets | ⚠️ LeNH 0h on Jun 9 — all 3 sheets empty (Rory, Franc, Rebecca Q-T) |
 | 5 | Fountain | ⚠️ #2615 over-estimate 890% (est=12h, actual=106.75h) STILL GROWING |
-| 6 | Discord | ~~⚠️ Vinn (AirAgri) — no daily report~~ CLEARED — Vinn on leave Jun 9 |
-| 7 | Matrix | ℹ️ LongVV left early Jun 9 (father emergency, cấp cứu) — requested leave Jun 10 |
+| 6 | Email vuongtrancr@ | ⚠️ MPFC Rollbar — [Delayed-newform] production 10 occurrences in 5 min (06:21+07) |
+| 7 | Discord | ~~⚠️ Vinn (AirAgri) — no daily report~~ CLEARED — Vinn on leave Jun 9 |
+| 8 | Matrix | ℹ️ LongVV left early Jun 9 (father emergency, cấp cứu) — requested leave Jun 10 |
 
 **Cleared from cron:** TuanNT 0h → FALSE ALARM (had 8h in Paturevision Jun 9). Matrix token refreshed.
 
@@ -45,6 +46,40 @@
 **ken@ Precognize PRs (56 since 05:00):** GitHub notifications from Welligence/QueryPlatform + welligence/web — none from nusken directly.
 
 **Calendar note:** `fetch-zoho-calendar.js` reads Zoho CalDAV only. Microsoft Teams / Outlook calendar events (including "Weekly Meeting with Devs") do NOT sync to Zoho and will not appear here. A Teams calendar integration would be needed to see those events.
+
+---
+
+## Email + Calendar fix — 10:03 (+07:00)
+
+*Fixed 2 bugs: (1) `check-email-imap.py` now includes all 9 accounts incl. Gmail IMAP + API. (2) `fetch-zoho-calendar.js` regex fix — Zoho returns `<C:calendar-data>` namespace prefix, script was matching `<calendar-data>` (no prefix) → no events parsed.*
+
+### Email (since 2026-06-10T05:00+07 — window from timelines)
+
+| Account | Count | Notes |
+|---------|-------|-------|
+| duongdn@nustechnology.com | 0 | — |
+| carrick@nustechnology.com | 0 | — |
+| nick@nustechnology.com | 0 | — |
+| rick@nustechnology.com | **3** ⚠️ | #1020/#1021/#1022 Rollbar (confirmed above) |
+| kai@nustechnology.com | 0 | — |
+| ken@nustechnology.com | 62 | Precognize GitHub notifications |
+| **vuongtrancr@gmail.com** | **3** ⚠️ | See below |
+| **dnduongus@gmail.com** | 2 | LinkedIn/fund update — no alert |
+| **freelancer@mypersonalfootballcoach.com** | 0 | Gmail API working (SA key found) |
+
+**⚠️ vuongtrancr@ (Carrick personal Gmail) alert:**
+- `[Delayed-newform] production - 10 occurrences in 5 minutes` — 06-10 06:21 → **MPFC Rollbar production alert** (different project from rick@ FirstProject)
+- `Delayed-newform - Daily Summary - Wednesday, June 10` — 06-10 08:06 (daily summary, no action)
+- Social comment notification — no alert
+
+### Calendar — carrick (FIXED)
+
+| Account | Event |
+|---------|-------|
+| carrick@nustechnology.com | **Swift x NUS** — 09:00–10:00 BST (= **15:00–16:00 +07**) — Google Meet: https://meet.google.com/bav-cswc-swi — organizer: rory@swiftstudio.co, attendees: carrick@nustechnology.com, jeff@nustechnology.com |
+| other accounts | 0 events today |
+
+*Calendar note: Zoho stores calendar events from Zoho Calendar + synced Google Calendar. The fix (namespace prefix regex) now correctly parses ICS data from Zoho's CalDAV REPORT response.*
 
 ---
 

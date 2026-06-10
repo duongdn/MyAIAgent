@@ -280,10 +280,14 @@ def main():
                     if "leave" in subj_lower or "new relic" in from_lower or "alert" in subj_lower:
                         is_alert = True
                         alert_reason = f"DuongDn/Personal: {m['subject'][:80]}"
-                elif r["name"] in ("carrick", "vuongtrancr"):
+                elif r["name"] == "carrick":
                     if "redmine" in from_lower or "bug" in subj_lower:
                         is_alert = True
-                        alert_reason = f"Carrick/Personal Redmine: {m['subject'][:80]}"
+                        alert_reason = f"Carrick Redmine: {m['subject'][:80]}"
+                elif r["name"] == "vuongtrancr":
+                    if any(k in subj_lower or k in from_lower for k in ("rollbar", "bugsnag", "production", "error", "alert", "crash", "redmine")):
+                        is_alert = True
+                        alert_reason = f"Carrick Personal alert: {m['subject'][:80]}"
                 elif r["name"] == "nick":
                     if "john yi" in from_lower or "johnyi" in from_lower:
                         is_alert = True
