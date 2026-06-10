@@ -14,7 +14,7 @@
 | 3 | Email kai@ | ⚠️ MPFC New Relic — "Signal lost: Low Application Throughput" ×12 |
 | 4 | Sheets | ⚠️ LeNH 0h on Jun 9 — all 3 sheets empty (Rory, Franc, Rebecca Q-T) |
 | 5 | Fountain | ⚠️ #2615 over-estimate 890% (est=12h, actual=106.75h) STILL GROWING |
-| 6 | Discord | ⚠️ Vinn (AirAgri) — no daily report posted in window |
+| 6 | Discord | ~~⚠️ Vinn (AirAgri) — no daily report~~ CLEARED — Vinn on leave Jun 9 |
 | 7 | Matrix | ℹ️ LongVV left early Jun 9 (father emergency, cấp cứu) — requested leave Jun 10 |
 
 **Cleared from cron:** TuanNT 0h → FALSE ALARM (had 8h in Paturevision Jun 9). Matrix token refreshed.
@@ -26,8 +26,8 @@
 ### Philip — CLEARED
 MS Teams (`will` account) checked for Philip Briggs (External — Six Star Rentals). Last message: **May 27** — no messages in monitoring window Jun 9 09:46 → Jun 10 05:00. No complaint or unresolved request. **Philip ✓ completed.**
 
-### James Diamond — CONFIRMED MISS
-AirAgri Discord checked: nusvinn account scanned `#airagri_webapp` (8 msgs) and `#airagri-flutter` (9 msgs) in window. Jeff Trinh posted daily report ✓. **Vinn (nusvinn) posted no daily report.** James Diamond remains ○.
+### James Diamond — CLEARED (Vinn was off Jun 9)
+~~AirAgri Discord re-scan: no Vinn report~~ — **CORRECTION:** Vinn was off (leave day) on Jun 9. No daily report expected. **James Diamond ✓ completed.**
 
 ### Rory / Franc — REAL ALERT, NO REMINDER SENT
 LeNH 0h Jun 9 is confirmed real alert (no leave note for Jun 9, leave note is Jun 12). Reminder not sent (no `--send-reminder` flag). Rory and Franc remain ○. Run `/daily-report reminders lenh --send-reminder` to send reminder and clear these items.
@@ -38,13 +38,13 @@ LeNH 0h Jun 9 is confirmed real alert (no leave note for Jun 9, leave note is Ju
 | Item | Result | Details |
 |------|--------|---------|
 | Philip | ✓ completed | No messages in window — last msg May 27 |
-| James Diamond | ○ unchanged | Vinn no daily report confirmed |
+| James Diamond | ✓ completed | Vinn on leave Jun 9 — no report expected |
 | Rory | ○ unchanged | LeNH 0h real alert, reminder not sent |
 | Franc | ○ unchanged | LeNH 0h real alert, reminder not sent |
 | Fountain | ○ unchanged | #2615 890% over-estimate still growing |
 
-**Cleared this run:** Philip
-**Still open:** James Diamond, Rory, Franc, Fountain
+**Cleared this run:** Philip, James Diamond
+**Still open:** Rory, Franc, Fountain
 
 ---
 
@@ -299,13 +299,13 @@ Last logged data: **W28 (May 25–31):**
 **Check Progress ○ incomplete (final after 09:36 recheck):**
 | Item | Reason |
 |------|--------|
-| James Diamond - Vinn | Vinn no daily report confirmed (09:36) |
-| Rory | LeNH 0h Jun 9 real alert — send reminder to clear |
-| Franc | LeNH 0h Jun 9 real alert — send reminder to clear |
+| Rory | LeNH 0h Jun 9 real alert — run `reminders lenh --send-reminder` to clear |
+| Franc | LeNH 0h Jun 9 real alert — same as Rory |
 | Fountain | #2615 890% STILL GROWING |
 
 **Check Progress ✓ newly completed (09:36):**
 - Philip — no messages in window (last msg May 27)
+- James Diamond - Vinn — Vinn on leave Jun 9, no report expected
 
 ---
 
