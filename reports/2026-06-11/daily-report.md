@@ -255,40 +255,52 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 
 ## Matrix — 09:37 (+07:00)
 
-**28 rooms active / 762 messages since Jun 10 08:00**
+**Active rooms: 28 / 125 | Messages: 762** *(since Jun 10 08:00)*
 Full details: `reports/2026-06-11/matrix-rooms-0937.md`
 *(Token expired at cron 05:00 — refreshed via matrix-login.js at 09:37)*
 
-| Room | Msgs | Key |
-|------|------|-----|
-| Celine - OhCleo | 91 | LongVV ACTIVE Jun 10 (not on leave) — PR #2 merged+deployed, PR #13 BE API review pending, PR #14 Android payment (Google service account) review pending. BE slowness fixed by DuongDN 16:05 (connection keep-alive). Lambda cold start still under investigation. |
-| Elena - Active Alerts | 275 | DongNV API format change (latestStatusAction field) broke FE (AA2) → fixed same day (added back old field, 15:10). AA2 payment still pending. AA3 est dispute ongoing with Lena — KietNHT reviewing spec gaps. |
-| Elena - Digital Plant | 67 | All 3 studio servers unstable Jun 10 (studio-02/03 rebuilding → 502; studio-01 had stale DB — 22 items). TienND2: restoring studio-01 Jun 11 AM. At 23:01: all 3 need full restore. |
-| Rory Hackett - BXR App | 96 | 177.5h charged (103h BE + 74.5h Mobile) vs 189h est — approaching limit. Mindbody technical acct mgr OOO until Jun 22 → membership flow blocked. Barcode logic clarified with Rory. Missing: Stripe UAE region. |
-| Kunal - Fountain | 72 | Cards 2871 + 2934 tested DONE (HungPN/PhatDLT). PR #453 live. Tom back tomorrow — Kunal asked to push QC backlog to beta. ActiveStorage::Blob warnings 5000+ in Rollbar (ThinhT noted). |
-| Bailey - BA/QC | 42 | Invoice sent by TrinhMTT (Weekly Monitor + Prestashop Mobile Menu). Payment confirmed by BinhNT 22:08 Jun 10 (external + internal updated). |
-| Delivery - Resource Arrangement | 12 | Jun 10 sick: TienND2 (fever), KhoaTD (family), PhongTB (AM), ThinhPVD (AM), AnhNH2 (PM). **Jun 11 today**: ToanNT sick (fever) → idle, no coverage needed. LamLQ off Jun 12 (MinhTC covers). |
-| Maddy - Xtreme | 4 | DuongDN apologized for task 431 overrun — reminded LongVV: est → customer approval → JIRA flow. No shortcutting. |
-| Philip Briggs room | 2 | BinhNT 14:04: "Philip Briggs c moved qua Năm rồi" → project ownership moved to NamTV. |
-| NUS Bailey - Paturevision | 4 | DatNC: Console Order Verification + Mobile going live Jun 11 AM. NamNN sent build link. |
+### ⚠️ Action items for DuongDN (4)
 
-**Action items for DuongDN:**
-| # | Action | Source |
-|---|--------|--------|
-| 1 | ⚠️ Review OhCleo PR #14 (LongVV — Android Google service account payment fix) | LongVV 16:50 |
-| 2 | ⚠️ Review OhCleo PR #13 (LongVV — BE API update) | LongVV 14:56 |
-| 3 | ⚠️ BXR: 177.5h/189h — plan for Mindbody-blocked milestone (OOO until Jun 22) | MinhTV 10:32 |
-| 4 | ℹ️ BXR: Stripe UAE region missing — raise to Rory | LeNH 15:42 |
-| 5 | ℹ️ Elena Digital Plant: verify TienND2 restored all 3 servers this morning | TienND2 17:21 |
+| Room | Time | Message |
+|------|------|---------|
+| Celine - OhCleo | 16:50 | longvv: "Duong Doan a Dương check giúp em nha, deploy lên staging r e check" — PR #14 Android subscription (Google service account 401) ⚠️ pending review |
+| Celine - OhCleo | 14:56 | longvv: "Duong Doan a review giúp e pr này nha https://github.com/OhCleo/ohcleo-backend-api/pull/13" — BE API ⚠️ pending review |
+| Rory Hackett - BXR App | 10:32 | minhtv: "tổng số giờ đã charge là 177.5h (103h BE và 74.5h Mobile), trong khi tổng estimate ban đầu là 18Xh" — ⚠️ estimate risk |
+| Elena - Digital Plant | 17:21 | tiennd2: "để sáng mai tui restore studio-01 nha" — all 3 studio servers unstable Jun 10 |
 
-**Alerts:**
-- ⚠️ **OhCleo PR #14** — Android subscription (Google service account 401) — DuongDN review pending
-- ⚠️ **BXR estimate risk** — 177.5h/189h; membership blocked by Mindbody OOO until Jun 22
-- ⚠️ **Elena Digital Plant** — all 3 studio servers had stale data Jun 10; full restore needed Jun 11
-- ⚠️ **Elena AA2/AA3** — API format change broke FE (fixed); AA2 payment held; AA3 est still disputed
-- ℹ️ **ToanNT sick Jun 11** (Delivery — different person from PHP TuanNT) — idle, no cover needed
-- ✅ **LongVV Jun 10** — was working OhCleo (NOT on leave). Emergency leave was Jun 9 only.
-- ✅ **Bailey invoice** — sent + paid (BinhNT confirmed Jun 10 22:08)
+### Key updates
+
+**LongVV back on OhCleo Jun 10** (NOT on leave):
+- Active all day — PR #2 merged+deployed (DuongDN 14:11 ✅), PR #13 + PR #14 pending review
+- Emergency leave was Jun 9 only (father stroke/ER). Returned Jun 10 on OhCleo project.
+
+**OhCleo BE performance fixed** (16:03–16:05 ✅):
+- Customer complained >15s load. DuongDN fixed (connection keep-alive). MinhTV + HiepNT confirmed resolved.
+- Lambda-style cold start still under investigation (caching behavior)
+
+**BXR estimate risk** (10:32):
+- 177.5h charged (103h BE + 74.5h Mobile) vs 189h est — approaching limit
+- Mindbody technical account manager OOO until Jun 22 → membership flow blocked
+- Stripe UAE region not set up — needs to be raised with Rory
+
+**Elena AA2/AA3 scope issues** (14:00–17:00):
+- DongNV merged API format change that broke AA2 FE (latestStatusAction field changed). Fixed same day — old field added back, deployed 15:10 ✅
+- AA2 payment still partially held. AA3 est under dispute — KietNHT reviewing spec gaps.
+
+**Elena Digital Plant — all 3 servers unstable** (11:11–23:01):
+- studio-02 + studio-03 rebuilding (502). studio-01 stale DB (22 items only).
+- TienND2 to restore studio-01 Jun 11 AM. At 23:01: all 3 need full restore.
+
+**Delivery — sick + absences:**
+- Jun 10 sick: TienND2 (fever), KhoaTD (family), PhongTB AM, ThinhPVD AM, AnhNH2 PM
+- Jun 11 today: ToanNT sick (fever) → idle, no coverage (≠ PHP TuanNT)
+- Jun 12: LamLQ off (MinhTC covers)
+
+**Other:**
+- Fountain: cards 2871 + 2934 DONE. PR #453 live. Tom back tomorrow — beta push requested. ActiveStorage::Blob 5000+ Rollbar warnings.
+- Bailey invoice: TrinhMTT sent, paid (BinhNT confirmed 22:08)
+- Philip Briggs: project moved to NamTV (BinhNT 14:04: "moved qua Năm rồi")
+- Paturevision: Console + Mobile going live Jun 11 AM (DatNC)
 
 ---
 
