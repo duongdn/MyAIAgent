@@ -36,7 +36,7 @@ Dev → project sheet mapping is **not static**. Any dev may log hours in any sh
 7. Only flag shortfall if AGGREGATE < target and no leave note. Per-sheet 0h alone is never an alert.
 
 **Per-dev exceptions:**
-- LongVV: 16h/wk Maddy + variable OhCleo/other; check Matrix weekly plan
-- TuanNT: 8h target combined across 4 sheets (JohnYi + Rebecca + Paturevision + Neural)
+- LongVV: 16h/wk part-time; check Matrix weekly plan for current week target
+- TuanNT: 8h target combined across ALL sheets
 - Marcel/DuongDN: adhoc, 0h expected
 - Bailey-DuongDN (DEV3): inactive, 0h expected
