@@ -219,7 +219,7 @@ async function main() {
     leave: patL, err: patE, allOwners: patAll,
   };
 
-  // KhanhHH — Generator + Aysar + Elena (today Jun 9)
+  // KhanhHH — scan ALL sheets (dev can switch projects freely)
   process.stderr.write("KhanhHH...\n");
   let genH = {}, genL = {}, genE = null;
   if (tabs.Generator) ({ ownerHours: genH, leaveNotes: genL, err: genE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Generator, `${tabs.Generator}!A:I`), tokens));
@@ -227,22 +227,29 @@ async function main() {
   if (tabs.Aysar) ({ ownerHours: aysarAllH, leaveNotes: aysarL, err: aysarE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Aysar, `${tabs.Aysar}!A:I`), tokens));
   let elenaAll = {}, elenaL = {}, elenaE = null;
   if (tabs.Elena) ({ ownerHours: elenaAll, leaveNotes: elenaL, err: elenaE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.Elena, `${tabs.Elena}!A:I`), tokens));
-  const khGen = Object.fromEntries(Object.entries(genH).filter(([k]) => k.includes("KhanhHH")));
-  const khAysar = Object.fromEntries(Object.entries(aysarAllH).filter(([k]) => k.includes("KhanhHH")));
-  const khElena = Object.fromEntries(Object.entries(elenaAll).filter(([k]) => k.includes("KhanhHH")));
+  // Also scan all other sheets — KhanhHH may log anywhere
+  const khAllSheets = {};
+  const khAllLeave = {};
+  for (const [sname, sid] of Object.entries(SHEETS)) {
+    if (!tabs[sname]) continue;
+    const { ownerHours, leaveNotes } = extractDailyHoursByOwner(
+      await fetchRange(api, sid, `${tabs[sname]}!A:I`), tokens);
+    Object.entries(ownerHours).filter(([k]) => k.includes("KhanhHH"))
+      .forEach(([k, v]) => { khAllSheets[sname] = (khAllSheets[sname] || 0) + v; });
+    Object.entries(leaveNotes).filter(([k]) => k.includes("KhanhHH") || k === "ALL")
+      .forEach(([k, v]) => { khAllLeave[`${sname}:${k}`] = v; });
+  }
+  const khTotalHours = Object.values(khAllSheets).reduce((a, b) => a + b, 0);
   const [khGenWeekly, khAysarWeekly] = await Promise.all([
     getOwnerWeeklyTotal(api, SHEETS.Generator, tabs.Generator, "KhanhHH"),
     getOwnerWeeklyTotal(api, SHEETS.Aysar, tabs.Aysar, "KhanhHH"),
   ]);
-  const khWeeklyTotal = (khGenWeekly || 0) + (khAysarWeekly || 0);
   results.KhanhHH = {
-    generatorHours: sum(khGen), aysarHours: sum(khAysar), elenaHours: sum(khElena),
-    totalHours: sum(khGen) + sum(khAysar) + sum(khElena),
-    weeklyTotal: khWeeklyTotal,
-    weeklyBreakdown: { generator: khGenWeekly, aysar: khAysarWeekly },
-    leave: { ...genL, ...aysarL },
+    totalHours: khTotalHours,
+    bySheet: khAllSheets,
+    weeklyTotal: (khGenWeekly || 0) + (khAysarWeekly || 0),
+    leave: khAllLeave,
     err: genE || aysarE || null,
-    generatorOwners: genH, aysarOwners: aysarAllH, elenaOwners: elenaAll,
   };
   results.Elena = { tab: tabs.Elena, todayHours: sum(elenaAll), owners: elenaAll, leave: elenaL, err: elenaE };
 
