@@ -49,6 +49,12 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_news_digest_new_topic.md](feedback_news_digest_new_topic.md) — Unknown topic → add as new topic with own RSS sources in fetch-news.py, never alias existing topics
 - [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — **ALWAYS use `link` field from fetched JSON, NEVER fabricate/guess article URLs. fetch-news.py resolves relative URLs automatically (fixed 2026-05-29)**
 
+## 🔴 Recurring Daily Report Errors (Jun 11 — must not repeat)
+- [feedback_maddy_jira_weekly_check.md](feedback_maddy_jira_weekly_check.md) — **Run EVERY day** `maddy-jira-tasklog-check.js --week` in Sheets piece — never skip; include markdown table in report
+- [feedback_puppeteer_cron_tmpdir.md](feedback_puppeteer_cron_tmpdir.md) — Puppeteer cron /tmp failure → false 0h/unavailable — fix: `TMPDIR=/var/tmp` + `--crash-dumps-dir=/var/tmp` + `--disable-dev-shm-usage`
+- [feedback_vietph_leave_date_cron_bug.md](feedback_vietph_leave_date_cron_bug.md) — Leave note for day N-1 applied to day N by cron — verify leave note row date = PREV_DATE before marking "leave day"
+- [feedback_tuannt_gate_show_breakdown.md](feedback_tuannt_gate_show_breakdown.md) — TuanNT gate label must show per-sheet breakdown (JohnYi Xh | Paturevision Xh | ...) — "combined Xh" alone is misleading
+
 ## Workflow & Reporting Style
 - [feedback_freelancer_email_must_be_scanned.md](feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com MUST appear in email scan every run. Contains MPFC production errors.
 - [feedback_matrix_tomorrow_is_message_date_plus_one.md](feedback_matrix_tomorrow_is_message_date_plus_one.md) — Leave dates = check **email** (xin nghỉ/nghỉ phép) or **sheets col A** leave note. NEVER infer from "tomorrow/mai" in chat.

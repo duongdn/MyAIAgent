@@ -315,29 +315,24 @@ Supports individual developer targeting:
 - 0h with no leave note → ALERT
 - Only count "Task dự án" rows; skip "Part-time" rows in column A
 
-**Maddy JIRA cross-check (run after LongVV hours confirmed > 0):**
+**Maddy JIRA cross-check (run EVERY day — never skip):**
 ```bash
-node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]  # defaults to PREV_DATE
+node scripts/maddy-jira-tasklog-check.js --week [YYYY-MM-DD]  # defaults to week containing PREV_DATE
 ```
-For each JIRA ticket found in the task log for that date, verifies:
+Scans ALL task log entries for the current week, extracts JIRA ticket IDs from col C/D, and for each verifies:
 1. ✅ Ticket has original estimate set (`timeoriginalestimate > 0`)
 2. ✅ Ticket has actual time logged on JIRA (`timespent > 0`)
 3. ✅ est >= actual (not over-budget)
 
-Alerts to raise if any check fails:
-- **No est**: ticket has no estimate → dev must set one before logging time
-- **No actual**: hours in task log but JIRA has 0 logged → dev must log time on ticket
-- **Over budget**: actual > est → flag to PM for review / re-estimate
-
-Output is JSON; include in report as:
+Script outputs a markdown table — append directly to daily report:
 ```
-## Sheets — Maddy JIRA check — {HH:MM} (+07:00)
-| Ticket | Summary | Est | Actual (JIRA) | Task Log | Status |
-|--------|---------|-----|---------------|----------|--------|
-| LIFM2-NNN | ... | Xh | Yh | Zh | ✅ / ⚠️ no est / ⚠️ no actual / ⚠️ over Zh |
-{Alerts if any.}
+## Sheets — Maddy JIRA — W{n} — {HH:MM} (+07:00)
+| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log | Check |
+|--------|---------|--------|-----|---------------|----------|-------|
+| LIFM2-NNN | ... | Status | Xh | Yh | Zh | ✅ / ⚠️ no est / ⚠️ no JIRA log / 🔴 over Xh Ym |
 ```
-Skip this check if LongVV = 0h or on leave.
+Over-budget / no-est / no-JIRA-log summaries appear below table automatically.
+**Run every day. Do NOT skip when LongVV = 0h or no Maddy hours today — check covers full week.**
 
 **Report — always append to daily report:**
 ```
