@@ -232,5 +232,30 @@ No Matrix room messages scanned this run.
 - KhanhHH: 4.5h (half-day or reduced load)
 - AirAgri: Vinn + Jeff both reported
 - Elena/SamGuard: clean, active
+
+---
+
+## Re-check — 08:34 (+07:00)
+
+Rechecked all 4 ○ incomplete items from cron run.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Aysar | ✓ completed | Daily report found: "Wednesday update" at 09:04 + "Today's updates" at 13:29 in MPDM C07SQ4HAUHZ (KhanhHH/Carrick posted after 5 AM cron) |
+| Rebecca (William Bills) | ✓ completed | WB Slack: 0 msgs (quiet = OK). TuanNT 8h combined. "Chưa" col P = normal template state (never blocks per policy) |
+| Fountain | ○ still incomplete | Matrix SSO expired — both `matrix-token-refresh.js` and CDP refresh fail. Browser reaches chat.nustechnology.com but Keycloak SSO requires user interaction. Cannot get Part 1 (W30 plan). W30 task log also shows 0h (no data entered this week yet). |
+| Philip | ○ still incomplete | MS Teams: fixed corrupted profile (SingletonLock removed + backup). Login succeeded through FIDO passkey challenge (45s wait workaround). Teams app loaded but detached Frame error on search — no Philip Briggs data collected. |
+
+**Cleared:** Aysar, Rebecca (2 of 4)
+**Still open:** Fountain (Matrix SSO), Philip (Teams detached frame)
+
+### Fountain note
+Cron used wrong week tab W52 (November 2026 — future). Correct week is **W30** (starts June 8, 2026). W30 task log is empty — no entries logged yet this week. Fountain Parts 2-5 need re-run once Matrix token is fixed.
+
+### Philip note
+Script: `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"`. Fixed: corrupted `tmp/msteams-will-profile` → backed up as `msteams-will-profile-bak-202606110830`. Fresh profile created. Root cause of today's Puppeteer `Target closed` crash: old profile SingletonLock. Now fails at Teams search step (detached frame in SPA). Needs script fix to handle SPA frame transitions.
+
+### LongVV reminder (still pending)
+0h for 2026-06-10 + W10 0h — no leave recorded. Workstream unavailable (Puppeteer /tmp issue). Reminder text printed but not sent (no --send-reminder flag). Manual check recommended.
 - Precognize: no nus/ PRs
 - WordPress SamGuard: no JS errors
