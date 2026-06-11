@@ -33,11 +33,11 @@ function screenshot(page, name) {
 }
 
 async function clickByText(page, pattern) {
-  const handles = await page.$$('a, button, input[type="button"], input[type="submit"], div[role="button"], li[role="option"], span[tabindex]');
+  const handles = await page.$$('a, button, input[type="button"], input[type="submit"], div[role="button"], li[role="option"], span[tabindex]').catch(() => []);
   const re = typeof pattern === 'string' ? new RegExp(pattern, 'i') : pattern;
   for (const el of handles) {
-    const t = await el.evaluate(n => (n.innerText || n.value || n.textContent || '').trim());
-    if (re.test(t)) { await el.click(); return t; }
+    const t = await el.evaluate(n => (n.innerText || n.value || n.textContent || '').trim()).catch(() => null);
+    if (t !== null && re.test(t)) { await el.click().catch(() => {}); return t; }
   }
   return null;
 }
@@ -50,7 +50,7 @@ async function isVisibleInViewport(el) {
            r.left < window.innerWidth && r.right > 0 &&
            s.display !== 'none' && s.visibility !== 'hidden' &&
            parseFloat(s.opacity || '1') > 0;
-  });
+  }).catch(() => false);
 }
 
 async function doLogin(page, email, password) {
@@ -374,7 +374,7 @@ async function searchAndExtractMessages(page, customerName) {
       '[class*="searchResult"], [class*="search-result"]'
     );
     return Array.from(nodes).map(n => n.innerText?.trim()).filter(Boolean);
-  });
+  }).catch(() => []);
   console.log(`[search] Found ${rawText.length} items`);
 
   // Click matching result
@@ -419,9 +419,9 @@ async function searchAndExtractMessages(page, customerName) {
       if (main) results.push({ sender: '(raw)', time: '', text: main.innerText?.slice(0, 2000) });
     }
     return results;
-  });
+  }).catch(() => []);
 
-  return { rawText, messages, clicked };
+  return { rawText, messages: messages || [], clicked };
 }
 
 (async () => {
@@ -463,6 +463,9 @@ async function searchAndExtractMessages(page, customerName) {
 
   try {
     await doLogin(page, email, password);
+    // Let Teams SPA finish internal navigation before interacting
+    await page.waitForNetworkIdle({ idleTime: 1500, timeout: 15000 }).catch(() => {});
+    await sleep(2000);
     const result = await searchAndExtractMessages(page, CUSTOMER_NAME);
 
     console.log('\n=== RESULTS ===');

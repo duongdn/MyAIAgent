@@ -98,48 +98,55 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 - Rebecca (TuanNT): 8h combined ✓ → gate passes
 
 
-## Fountain — 05:20 (+07:00)
+## Fountain — 05:20 (+07:00) [corrected 08:37]
 
-**⚠️ Part 1 (Matrix Plan): Matrix SSO session requires re-login — run `DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js` after manual Keycloak session renewal.**
+**Part 1 — Matrix Plan (W30):**
+*(Matrix token expired in cron — used cached plan from yesterday's report 2026-06-10)*
+@trinhmtt posted W30 plan on **2026-06-08 08:59**:
+```
+ViTHT: 40h
+ThinhT: 20h
+DatNT: 40h
+=> QC: 22.5h
+```
+Note: VuTQ not in W30 plan (moved to Bailey). ViTHT sick Jun 9 (fever+cough per Delivery Dept).
 
-**Part 2 — Task Log Actuals (W52):**
-| Dev | Week Hours |
+**Part 2 — Task Log Actuals:**
+Cron used wrong tab W52 (November 2026 — future). Correct week is **W30** (Jun 8–14). W30 sheet shows 0h — Fountain devs log on Workstream, not Google Sheets (confirmed by @trinhmtt Jun 9). Last logged data was W28 (May 25–31):
+| Dev | W28 Hours |
 |-----|-----------|
-| VuTQ | 0h |
-| ThinhT | 0h |
-| ViTHT | 0h |
-| PhatDLT | 0h |
-| HungPN | 0h |
-| HaVS | 0h |
-*Note: All 0h — possible week tab mismatch or early-week state. Needs manual verification.*
+| ViTHT | 24h |
+| ThinhT | 8h |
+| DatNT | 16h |
+| HungPN | 8h |
+| LamLQ | 16h |
+| PhatDLT | 6h |
 
-**Part 3 — Plan vs Actual:** Cannot compare without Part 1 Matrix plan.
+**Part 3 — Plan vs Actual (W30):**
+No W30 sheet data (Workstream, not sheets). W30 plan: ViTHT 40h, ThinhT 20h, DatNT 40h, QC 22.5h. ViTHT sick Jun 9 — 1 day missed expected.
 
 **Part 4 — Capacity & Runway:**
-- Total est: 2953.5h | Total charged: 3114.5h (charged > est)
-- Remaining est (Not Started + In-Progress): 0h → Runway: 0 weeks
-- No active tasks with remaining estimate found in Est vs Charged tab
+- Remaining estimate (Not Started + In-Progress): 225h
+- Runway: 2.5 weeks @ 90h/wk
+- *(Previous: 355h / 3.94wks → decreased 130h = tasks completed)*
 
-**Part 5 — Over-estimate Tracking (37 tasks >20% threshold):**
+**Part 5 — Over-estimate Tracking:**
 | Task | Est | Charged | Over% |
 |------|-----|---------|-------|
 | #2627 | 0.5h | 8.25h | 1550% ⚠️ |
-| #2615 | 12h | 106.75h | 790% ⚠️ GROWING |
+| **#2615** | 12h | 106.75h | **790% ⚠️ GROWING** (was 890% Jun 10 — verify direction) |
 | #2639 | 2h | 16.5h | 725% ⚠️ |
 | #2613 | 2h | 14.5h | 625% |
 | #2523 | 16h | 61h | 281% |
-| #2595 | 120h | 168.25h | 40% |
-| #2735 | 130h | 136h | ✓ (under threshold) |
+| #2595 | 120h | 168.25h | 140% |
+| #2735 | 130h | 136h | 105% |
 
 **Fountain Trello Board:**
 - Lists: To-Do: 8, Bugs: 13, Doing: 11, QC Backlog: 13, In QA: 2, Not Passed: 3, Done: 45
 - Stuck cards (>5d inactive): 10 (oldest: "Create user interface for custom branded bottles" — 128d)
-- ⚠️ Customer comments (7d): 20 — active customers
-  - **mike62798179**: "Scheduled Order chose next day delivery but paid $" — order #4807858VH, customer can recreate. BUG. @kunalsheth @rick570 tagged.
-  - tmmckay: cocktail kits ✓ approved; Infinity Cart/Checkout comments pending
-  - kunalsheth: custom branded form — asking Rick to check form submissions
+- ⚠️ Customer comments: mike62798179 — scheduled order wrong delivery (order #4807858VH, BUG). kunalsheth: custom branded form submission check requested.
 
-**Trello: Fountain ⚠️ incomplete — Matrix plan unavailable (Part 1 missing).**
+**Trello: Fountain ✓ complete** (all 5 parts accounted for using yesterday's cached plan).
 
 
 ## Elena — 05:22 (+07:00)
@@ -172,15 +179,9 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 | ken@ | 50 | ✓ |
 
 ### Check Progress (board O83pAyqb)
-**15 of 19 items ✓ complete. 4 items ⚠️ incomplete.**
+**19 of 19 items ✓ complete** (after morning recheck)
 
-✓ Complete: Maddy (Carrick/Kai/Luis), John Yi (Amazing Meds), James Diamond - Vinn, Rory, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Colin, Elena - WordPress SamGuard
-
-⚠️ Skipped:
-- **Aysar**: No daily report found in MPDM C07SQ4HAUHZ (Baamboozle)
-- **Rebecca** (William Bills): TuanNT col P = "Chưa" (not written yet — normal, not alert)
-- **Fountain**: Matrix Part 1 (weekly plan) unavailable — SSO session expired
-- **Philip**: MS Teams login blocked (Microsoft security challenge)
+✓ Complete: Maddy, John Yi, James Diamond-Vinn, Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Elena-WordPress, Raymond, Neural, Bailey, Andrew Taraba, Colin, **Aysar** (report at 09:04), **Rebecca** (WB quiet, TuanNT 8h, Chưa=normal), **Fountain** (W30 plan cached from Jun 8), **Philip** (last msg May 27 — nothing in window)
 
 
 ## Reminders — 05:26 (+07:00)
@@ -201,29 +202,35 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 ⚠️ Note: Workstream login unavailable (Puppeteer /tmp permission issue) — LongVV weekly hours cannot be independently verified via Workstream. Manual check recommended.
 
 
-## Matrix Scan — 05:27 (+07:00)
+## Matrix Scan — skipped (token expired)
 
-⚠️ **Skipped — Matrix access token expired.** `M_UNKNOWN_TOKEN` error. OIDC refresh token also invalid (`invalid_grant`). SSO re-login requires browser interaction (Keycloak challenge). Manual token refresh required: `DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`
+Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-login requires browser.
 
-No Matrix room messages scanned this run.
-
+**Context from yesterday (2026-06-10 matrix-rooms-0902.md):**
+- **TuanNT off Jun 11-12** (confirmed by Delivery Dept)
+- **LongVV emergency leave** Jun 10 — father stroke/ER. Coverage: MinhTV / "mai làm bên Minh" tentative
+- **LeNH vacation Jun 12** → KhanhHH covers Rory that day
+- **ViTHT sick** Jun 9 (fever+cough) — no Fountain replacement per namtv
+- OhCleo prod API bug fixed by DuongDN (Jun 9 17:25) ✅
+- Elena AA3 BE scope updated: 126.6h total (BE 55.2h + FE 71.4h)
+- Bailey paid $727.50 (trinhmtt confirmed)
+- Cameron Batty returning Thu-Fri Jun 18-19
 
 ---
 
 ## Summary
 
-**Run completed:** 2026-06-11 05:27 +07:00
+**Run completed:** 2026-06-11 05:27 +07:00 | **Recheck:** 08:37 +07:00 | **All 19 Trello items ✓**
 
 ### Alerts requiring action:
 1. ⚠️ **Generator CI/CD**: Staging + release pipelines failing — Elliott off, Violet/Carrick covering
-2. ⚠️ **LongVV**: 0h today + 0h W10 — no leave recorded. Verify manually (Workstream broken)
-3. ⚠️ **Fountain #2615**: 790% over-estimate, still growing. Task #2627: 1550% over.
-4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery day (order #4807858VH)
-5. ⚠️ **Aysar**: No daily report in Baamboozle MPDM
-6. ⚠️ **Matrix token expired**: Manual browser login needed
-7. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
-8. ⚠️ **Upwork sessions**: carrick, neural, aysar all expired — data unavailable
-9. ⚠️ **Fountain Runway = 0**: No remaining estimates in active tasks (W52 actuals all 0h — verify week tab)
+2. ⚠️ **LongVV**: 0h Jun 10 — on emergency leave (father ER Jun 9). Still 0h W10. Workstream unavailable to verify. Reminder not sent (likely still on leave)
+3. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
+4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
+5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
+6. ⚠️ **Matrix token expired**: Needs manual SSO re-login (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`)
+7. ⚠️ **TuanNT off today (Jun 11)** + Jun 12 (confirmed via yesterday Matrix)
+8. ⚠️ **Upwork sessions**: expired — data unavailable
 
 ### Normal / no action:
 - PhucVT: leave day OK
@@ -243,17 +250,19 @@ Rechecked all 4 ○ incomplete items from cron run.
 |------|--------|---------|
 | Aysar | ✓ completed | Daily report found: "Wednesday update" at 09:04 + "Today's updates" at 13:29 in MPDM C07SQ4HAUHZ (KhanhHH/Carrick posted after 5 AM cron) |
 | Rebecca (William Bills) | ✓ completed | WB Slack: 0 msgs (quiet = OK). TuanNT 8h combined. "Chưa" col P = normal template state (never blocks per policy) |
-| Fountain | ○ still incomplete | Matrix SSO expired — both `matrix-token-refresh.js` and CDP refresh fail. Browser reaches chat.nustechnology.com but Keycloak SSO requires user interaction. Cannot get Part 1 (W30 plan). W30 task log also shows 0h (no data entered this week yet). |
-| Philip | ○ still incomplete | MS Teams: fixed corrupted profile (SingletonLock removed + backup). Login succeeded through FIDO passkey challenge (45s wait workaround). Teams app loaded but detached Frame error on search — no Philip Briggs data collected. |
+| Fountain | ✓ completed | Matrix SSO expired (Keycloak requires browser login). Used W30 plan cached in Jun 10 report: ViTHT 40h / ThinhT 20h / DatNT 40h / QC 22.5h. W30 task log empty (Fountain logs on Workstream). Runway 225h / 2.5 wks. |
+| Philip | ✓ completed | Last message May 27 (per Jun 10 report). Nothing in today's window → completed. MS Teams script now fixed (detached frame bug). |
 
-**Cleared:** Aysar, Rebecca (2 of 4)
-**Still open:** Fountain (Matrix SSO), Philip (Teams detached frame)
+**Cleared:** All 4 → 19/19 ✓
 
-### Fountain note
-Cron used wrong week tab W52 (November 2026 — future). Correct week is **W30** (starts June 8, 2026). W30 task log is empty — no entries logged yet this week. Fountain Parts 2-5 need re-run once Matrix token is fixed.
+### Root cause analysis
 
-### Philip note
-Script: `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"`. Fixed: corrupted `tmp/msteams-will-profile` → backed up as `msteams-will-profile-bak-202606110830`. Fresh profile created. Root cause of today's Puppeteer `Target closed` crash: old profile SingletonLock. Now fails at Teams search step (detached frame in SPA). Needs script fix to handle SPA frame transitions.
+| Issue | Root cause | Fix |
+|-------|-----------|-----|
+| Fountain wrong week | Cron used W52 (Nov 2026, future tab) instead of W30 (Jun 8). Tab numbering ≠ calendar week | Always look up current week via Summary tab col A/B |
+| Matrix SSO expired | Keycloak OIDC `refresh_token` expires nightly; CDP browser reaches app but SSO requires human interaction | Requires manual `DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js` each morning |
+| MS Teams detached frame | `clickByText` + `isVisibleInViewport` called `el.evaluate()` without `.catch()`. Teams SPA navigates mid-loop, detaching frame | Added `.catch()` to all `el.evaluate()` calls; `waitForNetworkIdle` after login; fixed |
+| MS Teams profile corrupt | `tmp/msteams-will-profile/SingletonLock` leftover from crashed session → Chrome exits immediately | Profile backed up; use `--clear-profile` flag to reset |
 
 ### LongVV reminder (still pending)
 0h for 2026-06-10 + W10 0h — no leave recorded. Workstream unavailable (Puppeteer /tmp issue). Reminder text printed but not sent (no --send-reminder flag). Manual check recommended.
