@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Daily sheets scan for 2026-06-10 (Wednesday) — checking June 9 (PREV_DATE) hours.
- * W30 (June 8-14, 2026).
+ * Daily sheets scan for 2026-06-11 (Thursday) — checking June 10 (PREV_DATE) hours.
+ * W44 (June 8-14, 2026).
  */
 
 const { google } = require("googleapis");
@@ -25,14 +25,14 @@ const SHEETS = {
 
 const FALLBACK_TABS = {
   Maddy: "W9", JohnYi: "W30", Rebecca: "W30", JamesDiamond: "W28",
-  Rory: "W14", Franc: "W27", Aysar: "W28", Generator: "W44",
+  Rory: "W15", Franc: "W27", Aysar: "W28", Generator: "W44",
   Paturevision: "W30", Elena: null, TuanNT_Neural: "W24",
 };
 
-// Jun 9 (PREV_DATE) — what we scan for hours today
-const PREV_TOKENS = ["Tue, 09/06/26", "09/06/26", "Tue, 9/06/26"];
-const TARGET_DATE = new Date(2026, 5, 10); // June 10, 2026 — used for week tab discovery
-const PREV_DATE   = new Date(2026, 5, 9);  // June 9, 2026 — daily hours to report
+// Jun 10 (PREV_DATE) — what we scan for hours today
+const PREV_TOKENS = ["Wed, 10/06/26", "10/06/26", "Wed, 10/06/26"];
+const TARGET_DATE = new Date(2026, 5, 11); // June 11, 2026 — used for week tab discovery
+const PREV_DATE   = new Date(2026, 5, 10); // June 10, 2026 — daily hours to report
 
 function parseHours(val) {
   if (!val || ["", "-", "—", "#DIV/0!", "N/A"].includes(String(val).trim())) return 0;
@@ -175,7 +175,7 @@ const sum = obj => Object.values(obj).reduce((a, b) => a + b, 0);
 async function main() {
   const auth = new google.auth.GoogleAuth({ keyFile: SVC, scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"] });
   const api = google.sheets({ version: "v4", auth: await auth.getClient() });
-  const tokens = PREV_TOKENS; // Jun 9 data
+  const tokens = PREV_TOKENS; // Jun 10 data
   const results = {};
 
   process.stderr.write("Discovering week tabs...\n");
@@ -186,7 +186,7 @@ async function main() {
     process.stderr.write(`  ${name} → ${tabs[name]}\n`);
   }
 
-  // TuanNT — 4 sheets, all checking Jun 9 (PREV_DATE)
+  // TuanNT — 4 sheets, all checking Jun 10 (PREV_DATE)
   process.stderr.write("TuanNT...\n");
   let jyH = {}, jyL = {}, jyE = null;
   if (tabs.JohnYi) ({ ownerHours: jyH, leaveNotes: jyL, err: jyE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JohnYi, `${tabs.JohnYi}!A:I`), tokens));
@@ -203,7 +203,7 @@ async function main() {
     totalHours: sum(jyH) + sum(rbH) + sum(patTuant) + sum(neuralTuant),
     johnyiLeave: jyL, rebeccaLeave: rbL,
     johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant, neuralOwners: neuralTuant,
-    note: "Hours for Jun 9 (PREV_DATE). Scrin tracks Nick (nick@), NOT TuanNT.",
+    note: "Hours for Jun 10 (PREV_DATE). Scrin tracks Nick (nick@), NOT TuanNT.",
   };
 
   // PhucVT (JamesDiamond sheet)

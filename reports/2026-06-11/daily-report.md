@@ -120,7 +120,7 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | TuanNT | 8h (Paturevision) | — | ✓ Combined > 0h (JohnYi: 0h, Rebecca: 0h, Paturevision: 8h, Neural: 0h) |
 | PhucVT | 0h (AnhNH2: 4h) | Nghỉ cả ngày | ✓ Leave day OK |
 | VietPH | 8h (Paturevision) | — | ✓ Worked Jun 10 — cron wrong (applied Jun 9 leave note to Jun 10) |
-| KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 20h (Generator 16h + Aysar 4h) |
+| KhanhHH | 7.5h (Generator) | — | ✓ 0.5h below 8h target — Generator W44: 4 rows (0.5+4.5+1+1.5h). Aysar W28: 0h. [Prev report had 4.5h due to bug — rows with empty col A were skipped] |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
 | LongVV | 0h Maddy | Emergency leave Jun 9 only (father stroke/ER). Returned Jun 10 → OhCleo project. | ✓ W30: 8h Jun 8 Maddy via Workstream. Jun 10: active on OhCleo (Matrix confirmed). No reminder. |
 
@@ -160,7 +160,7 @@ Rule: combined > 0h = John Yi + Bailey + Rebecca gates unblocked. ✓
 | Bailey-DuongDN | DuongDN | 0:00 | 0:00 | — | — | — | — |
 
 - Neural 0h = OK (silence not an alert per policy)
-- Aysar 0h — KhanhHH logs task log, Upwork billed under LeNH sub-contract; KhanhHH 4.5h in task log ✓
+- Aysar 0h — KhanhHH logs task log, Upwork billed under LeNH sub-contract; KhanhHH 7.5h in Generator Jun 10 ✓
 - Bailey-VietPH 0h — VietPH on leave this week ✓
 - Bailey-DuongDN 0h — DEV3 inactive ✓
 - Rory 21.67h W30: task log LeNH Wed Jun 10 = 7h, Upwork Wed = 7.17h ✓ match
@@ -263,7 +263,7 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 | PhucVT | 0h | — | Nghỉ cả ngày | ✓ Leave day — skip |
 | TuanNT | 8h (Paturevision) | — | — | ✓ Skip |
 | LeNH | 8h (Rory:7+Franc:1) | — | — | ✓ Skip |
-| KhanhHH | 4.5h | — | — | ✓ Skip |
+| KhanhHH | 7.5h | — | — | ✓ Skip (0.5h below target, no leave noted) |
 
 **LongVV:** Emergency leave Jun 9 (father stroke/ER). Returned Jun 10 — working on OhCleo project (Matrix: active in Celine-OhCleo room, multiple PRs). W30 Maddy: 8h Jun 8 via Workstream. No reminder needed.
 
@@ -440,7 +440,7 @@ Full details: `reports/2026-06-11/matrix-rooms-0937.md`
 - PhucVT: leave day OK
 - VietPH: 8h Jun 10 ✓
 - TuanNT: 8h Paturevision (JohnYi/Rebecca/Scrin all 0h but combined OK)
-- KhanhHH: 4.5h (half-day or reduced load)
+- KhanhHH: 7.5h Generator Jun 10 (was incorrectly reported as 4.5h — rows with empty col A skipped; fixed)
 - AirAgri: Vinn + Jeff both reported
 - Elena/SamGuard: clean, active
 
