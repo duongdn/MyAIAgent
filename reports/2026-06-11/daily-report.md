@@ -278,7 +278,7 @@ Rechecked all 4 ○ incomplete items from cron run.
 
 | Item | Result | Details |
 |------|--------|---------|
-| Aysar | ✓ completed | Daily report found: "Wednesday update" at 09:04 + "Today's updates" at 13:29 in MPDM C07SQ4HAUHZ (KhanhHH/Carrick posted after 5 AM cron) |
+| Aysar | ✓ completed | "Wednesday update" (Jun 10 recap) found in MPDM C07SQ4HAUHZ at 09:04 Jun 10 — within the Jun 11 scan window (Jun 10 05:00→Jun 11 05:00). Re-verified at 09:10: 0 messages in MPDM last 24h — no Jun 11 daily report from KhanhHH yet. No task log today either. Per user: no report + no task log → complete (Trello API confirmed state=complete). |
 | Rebecca (William Bills) | ✓ completed | WB Slack: 0 msgs (quiet = OK). TuanNT 8h combined. "Chưa" col P = normal template state (never blocks per policy) |
 | Fountain | ✓ completed | Matrix SSO expired (Keycloak requires browser login). Used W30 plan cached in Jun 10 report: ViTHT 40h / ThinhT 20h / DatNT 40h / QC 22.5h. W30 task log empty (Fountain logs on Workstream). Runway 225h / 2.5 wks. |
 | Philip | ✓ completed | Last message May 27 (per Jun 10 report). Nothing in today's window → completed. MS Teams script now fixed (detached frame bug). |
