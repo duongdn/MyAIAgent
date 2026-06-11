@@ -22,7 +22,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 **Timeline:** Uses `daily_report.last_run` from `config/.monitoring-timelines.json` as window start. After completing all sources, update both `daily_report.last_run` and `alert.last_run` to current time.
 **Refresh flag:** Adding `--refresh` (or `refresh`) to any command forces a fresh re-check of all mapped sources, even if already scanned in the current session. Always re-fetch live data when this flag is present — never use cached/prior results.
 **Reminder flag:** By default, reminders are **printed to the report only** — NOT sent to Matrix. Add `--send-reminder` to actually send them. Example: `/me:daily-report --send-reminder` or `/me:daily-report reminders --send-reminder`.
-**Cron flag:** `--cron` = headless mode. Run ALL 9 pieces **sequentially inline** — do NOT spawn subagents or parallel agents. Execute each piece's logic directly in this single session. Reason: each spawned subagent in headless starts a fresh session, reloads all memory files, and exhausts the daily quota.
+**Cron flag:** `--cron` = headless mode. Run ALL 10 pieces **sequentially inline** — do NOT spawn subagents or parallel agents. Execute each piece's logic directly in this single session. Reason: each spawned subagent in headless starts a fresh session, reloads all memory files, and exhausts the daily quota.
 
 ---
 
@@ -795,7 +795,7 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Condition | Mode |
 |-----------|------|
 | `--cron` flag | Cron mode (sequential inline, always full run) |
-| Report file does NOT exist for today | Full run (all 10 pieces) |
+| Report file does NOT exist for today | Full run (all 12 pieces) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
@@ -805,7 +805,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix**
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack**
 3. Write report to `reports/{UTC+7 today}/daily-report.md`
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 5. **Git commit + push** (inline, fix errors automatically):
@@ -820,7 +820,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 
 **Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
-2. Launch parallel: Email + Slack + Discord + Scrin.io
+2. Launch parallel: Email + Slack + Discord + Scrin.io + **OhCleo Slack** (Piece 12)
 3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
@@ -891,7 +891,8 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 
 ## Key Rules (All Pieces)
 
-- Slack: always `search.messages`, never `conversations.history`
+- Slack (13 standard workspaces): always `search.messages`, never `conversations.history`
+- OhCleo Slack (Piece 12): use `conversations.history` — xoxc token doesn't support search API
 - Slack `after:` excludes named date → use `after:{day_before}` + epoch filter
 - IMAP `SINCE` uses server dates → always search previous day, filter by Date header
 - Discord: verify token with 3-step curl before assuming invalid
