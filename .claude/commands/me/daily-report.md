@@ -40,7 +40,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report email kai` | kai@ only |
 | `/daily-report email ken` | ken@ only |
 | **Slack** | |
-| `/daily-report slack` | All 13 workspaces |
+| `/daily-report slack` | All 14 workspaces |
 | `/daily-report slack baamboozle` | Baamboozle only |
 | `/daily-report slack rdc` | RDC - FM Monitoring only |
 | `/daily-report slack swift` | Swift Studio only |
@@ -55,6 +55,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report slack equanimity` | Equanimity only |
 | `/daily-report slack socal` | SoCal Auto Wraps only |
 | `/daily-report slack aigile` | Aigile Dev only |
+| `/daily-report slack ohcleo` | OhCleo only |
 | **Discord** | |
 | `/daily-report discord` | AirAgri + Bizurk |
 | `/daily-report discord airagri` | AirAgri (nusvinn) only |
@@ -195,7 +196,7 @@ Trello: {checked account(s)} item ✓ complete.
 ## Piece 2 — Slack (`/daily-report slack [workspace]`)
 
 Supports individual workspace targeting:
-- `/daily-report slack` — check all 13 workspaces
+- `/daily-report slack` — check all 14 workspaces
 - `/daily-report slack baamboozle` — check Baamboozle only
 - `/daily-report slack rdc` — check RDC - FM Monitoring only
 - `/daily-report slack swift` — check Swift Studio only
@@ -210,8 +211,9 @@ Supports individual workspace targeting:
 - `/daily-report slack equanimity` — check Equanimity only
 - `/daily-report slack socal` — check SoCal Auto Wraps only
 - `/daily-report slack aigile` — check Aigile Dev only
+- `/daily-report slack ohcleo` — check OhCleo only
 
-**Workspaces:** 13 in `config/.slack-accounts.json`
+**Workspaces:** 14 in `config/.slack-accounts.json`
 
 | Workspace | Arg | Token type | Key check | Trello item |
 |-----------|------|-----------|-----------|-------------|
@@ -229,9 +231,11 @@ Supports individual workspace targeting:
 | Equanimity | equanimity | xoxc+cookie | **Carrick/Marcel alerts**. Auto-refresh if invalid_auth. | Marcel |
 | SoCal Auto Wraps | socal | xoxp | General activity | Blake |
 | Aigile Dev | aigile | xoxp | General activity | Colin |
+| OhCleo | ohcleo | xoxc+cookie | **Celine DM** — customer messages, bug reports, daily report from Tony. See Piece 12. | — (no Trello item) |
 
 **Method:** `search.messages` API with `after:{day_before_cutoff}` + epoch filter (NOT `conversations.history`)
-**Session tokens (Amazing Meds, Equanimity):** Auto-refresh via crumb extraction if invalid_auth — never just report expired.
+**Session tokens (Amazing Meds, Equanimity, OhCleo):** Auto-refresh via crumb extraction if invalid_auth — never just report expired.
+**OhCleo:** Uses `conversations.history` (not `search.messages`) — small workspace with xoxc token. See Piece 8 for details.
 
 **Trello — after checking:**
 - Find "Check progress" card by name on board `O83pAyqb`
@@ -826,6 +830,62 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **Normal (interactive terminal), report already EXISTS** — recheck mode (Piece 11):
 1. Run Piece 11 directly — no full re-run of all sources
 2. Git commit + push after completing
+
+---
+
+## Piece 12 — OhCleo Slack (`/daily-report slack ohcleo`)
+
+**Workspace:** ohcleo.slack.com | **Account:** tony@nustechnology.com (Chrome Profile 25)
+**Script:** `node scripts/slack-fetch-ohcleo.js --since {last_run_iso}`
+**Token type:** xoxc + d cookie (URL-encoded). Stored in `config/.slack-accounts.json` (workspace: OhCleo).
+
+**Members (small workspace — 4 total):**
+| User ID | Name | Role |
+|---------|------|------|
+| U0B6EF611FC | Tony | Our dev (LongVV) |
+| U01AJ6W6QSZ | Celine Fierro | Customer / admin |
+| U08HHC6JA6P | David Nguyen | Previous developer |
+| USLACKBOT | Slackbot | Bot |
+
+**Channels to monitor:**
+| Channel | ID | What to look for |
+|---------|----|-----------------|
+| DM: Celine Fierro | D0B6846UN8K | Customer questions, bug reports, scope changes, daily report from Tony |
+| #events-code | C01JDPN0EDQ | App event/error logs posted by backend (mostly dormant since 2023) |
+
+**Token refresh:** If `invalid_auth` → re-extract from Chrome Profile 25 LevelDB:
+```bash
+strings "/home/nus/.config/google-chrome/Profile 25/Local Storage/leveldb/000136.log" \
+  | grep -o '"token":"xoxc-[^"]*"' | head -1
+```
+Or run: `node scripts/slack-extract-ohcleo-token.js` (extracts from live Chrome profile, saves to config).
+**Key:** `d` cookie MUST be URL-encoded (`encodeURIComponent`) in Cookie header — raw value contains `+`/`/` that break auth.
+
+**What to flag:**
+- New messages from Celine → customer communication (always include verbatim in report)
+- Tony's daily report present → note time + summary
+- Tony's daily report absent → alert (same as other devs)
+- Production errors in #events-code → flag as alerts
+- Celine asking about feature status / bug reports → alert
+
+**No Trello item** — OhCleo is monitored separately via Trello board `app-20` (Piece 8 OhCleo section).
+
+**Method:** `conversations.history` (NOT `search.messages`) — xoxc tokens don't support search API.
+```bash
+node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
+```
+
+**Report — append to daily report:**
+```
+## OhCleo Slack — {HH:MM} (+07:00)
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| DM:Celine Fierro | N | {summary} |
+| #events-code | N | {summary} |
+{Tony daily report: [present at HH:MM] / [ABSENT — alert]}
+{Customer messages verbatim if any.}
+{Alerts if any.}
+```
 
 ---
 
