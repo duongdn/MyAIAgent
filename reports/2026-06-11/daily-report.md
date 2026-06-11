@@ -1,7 +1,7 @@
 # Daily Report — Thursday, June 11, 2026
 
 **Window:** 2026-06-10 05:00 +07:00 → 2026-06-11 05:00 +07:00
-**Generated:** 2026-06-11 05:00 +07:00 (cron) | **Corrected:** 09:40 +07:00
+**Generated:** 2026-06-11 05:00 +07:00 (cron) | **Corrected:** 10:23 +07:00
 
 ---
 
@@ -123,6 +123,9 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 20h (Generator 16h + Aysar 4h) |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
 | LongVV | 0h Maddy | Emergency leave Jun 9 only (father stroke/ER). Returned Jun 10 → OhCleo project. | ✓ W30: 8h Jun 8 Maddy via Workstream. Jun 10: active on OhCleo (Matrix confirmed). No reminder. |
+
+**Maddy JIRA cross-check (Jun 10):**
+LongVV logged 0h in Maddy sheet Jun 10 (working OhCleo project, not Maddy). No Maddy JIRA entries to check. ✓ Skip.
 
 **Upwork weekly hours:** See Upwork section below (re-run manually — data fetched OK).
 
