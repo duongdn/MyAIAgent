@@ -82,11 +82,17 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 
 ## Save to File (MANDATORY)
 
-Sau khi synthesize xong, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown:
+Sau khi synthesize xong, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown.
 
+**Bước 1 — Lấy ngày giờ UTC+7 (LUÔN chạy lệnh này, không dùng ngày UTC):**
+```bash
+TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d %H%M'
+```
+
+**Bước 2 — Ghi file:**
 ```
 Path: reports/{YYYY-MM-DD}/{HHMM}-news-digest.md
-Example: reports/2026-06-08/0845-news-digest.md
+Example: reports/2026-06-11/0200-news-digest.md
 ```
 
 Dùng Write tool để tạo file. Nội dung file = toàn bộ markdown đã synthesize (giống hệt output ra chat).
