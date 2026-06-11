@@ -19,7 +19,7 @@
 | 8 | Sheets (corrected) | ~~VietPH leave day~~ → VietPH **8h** Jun 10 ✓ (cron applied Jun 9 leave note to Jun 10) |
 | 9 | Fountain | ⚠️ #2615 over-estimate 790–890% STILL GROWING; #2627: 1550% over |
 
-**Cron false alarms:** LongVV "0h/unavailable" → W30 8h Jun 8 Maddy + active OhCleo Jun 10. Upwork "expired" → sessions fine.
+**Cron false alarms:** LongVV "0h/unavailable" → W30 8h Jun 8 Maddy + active OhCleo Jun 10 (Matrix confirmed). Upwork "expired" → sessions fine. Matrix "token expired" → refreshed at 09:37.
 
 ---
 
@@ -122,7 +122,7 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | VietPH | 8h (Paturevision) | — | ✓ Worked Jun 10 — cron wrong (applied Jun 9 leave note to Jun 10) |
 | KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 20h (Generator 16h + Aysar 4h) |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
-| LongVV | 0h (leave) | Emergency leave (father stroke, ER Jun 9) | ✓ W30: 8h Jun 8 via Workstream. Leave approved — no reminder needed. |
+| LongVV | 0h Maddy | Emergency leave Jun 9 only (father stroke/ER). Returned Jun 10 → OhCleo project. | ✓ W30: 8h Jun 8 Maddy via Workstream. Jun 10: active on OhCleo (Matrix confirmed). No reminder. |
 
 **Upwork weekly hours:** See Upwork section below (re-run manually — data fetched OK).
 
@@ -250,22 +250,45 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 | LeNH | 8h (Rory:7+Franc:1) | — | — | ✓ Skip |
 | KhanhHH | 4.5h | — | — | ✓ Skip |
 
-**LongVV:** On approved emergency leave (father stroke/ER Jun 9). W30: 8h Jun 8 confirmed via Workstream. No reminder needed.
+**LongVV:** Emergency leave Jun 9 (father stroke/ER). Returned Jun 10 — working on OhCleo project (Matrix: active in Celine-OhCleo room, multiple PRs). W30 Maddy: 8h Jun 8 via Workstream. No reminder needed.
 
 
-## Matrix Scan — skipped (token expired)
+## Matrix — 09:37 (+07:00)
 
-Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-login requires browser.
+**28 rooms active / 762 messages since Jun 10 08:00**
+Full details: `reports/2026-06-11/matrix-rooms-0937.md`
+*(Token expired at cron 05:00 — refreshed via matrix-login.js at 09:37)*
 
-**Context from yesterday (2026-06-10 matrix-rooms-0902.md):**
-- **TuanNT off Jun 11-12** (confirmed by Delivery Dept)
-- **LongVV emergency leave** Jun 10 — father stroke/ER. Coverage: MinhTV / "mai làm bên Minh" tentative
-- **LeNH vacation Jun 12** → KhanhHH covers Rory that day
-- **ViTHT sick** Jun 9 (fever+cough) — no Fountain replacement per namtv
-- OhCleo prod API bug fixed by DuongDN (Jun 9 17:25) ✅
-- Elena AA3 BE scope updated: 126.6h total (BE 55.2h + FE 71.4h)
-- Bailey paid $727.50 (trinhmtt confirmed)
-- Cameron Batty returning Thu-Fri Jun 18-19
+| Room | Msgs | Key |
+|------|------|-----|
+| Celine - OhCleo | 91 | LongVV ACTIVE Jun 10 (not on leave) — PR #2 merged+deployed, PR #13 BE API review pending, PR #14 Android payment (Google service account) review pending. BE slowness fixed by DuongDN 16:05 (connection keep-alive). Lambda cold start still under investigation. |
+| Elena - Active Alerts | 275 | DongNV API format change (latestStatusAction field) broke FE (AA2) → fixed same day (added back old field, 15:10). AA2 payment still pending. AA3 est dispute ongoing with Lena — KietNHT reviewing spec gaps. |
+| Elena - Digital Plant | 67 | All 3 studio servers unstable Jun 10 (studio-02/03 rebuilding → 502; studio-01 had stale DB — 22 items). TienND2: restoring studio-01 Jun 11 AM. At 23:01: all 3 need full restore. |
+| Rory Hackett - BXR App | 96 | 177.5h charged (103h BE + 74.5h Mobile) vs 189h est — approaching limit. Mindbody technical acct mgr OOO until Jun 22 → membership flow blocked. Barcode logic clarified with Rory. Missing: Stripe UAE region. |
+| Kunal - Fountain | 72 | Cards 2871 + 2934 tested DONE (HungPN/PhatDLT). PR #453 live. Tom back tomorrow — Kunal asked to push QC backlog to beta. ActiveStorage::Blob warnings 5000+ in Rollbar (ThinhT noted). |
+| Bailey - BA/QC | 42 | Invoice sent by TrinhMTT (Weekly Monitor + Prestashop Mobile Menu). Payment confirmed by BinhNT 22:08 Jun 10 (external + internal updated). |
+| Delivery - Resource Arrangement | 12 | Jun 10 sick: TienND2 (fever), KhoaTD (family), PhongTB (AM), ThinhPVD (AM), AnhNH2 (PM). **Jun 11 today**: ToanNT sick (fever) → idle, no coverage needed. LamLQ off Jun 12 (MinhTC covers). |
+| Maddy - Xtreme | 4 | DuongDN apologized for task 431 overrun — reminded LongVV: est → customer approval → JIRA flow. No shortcutting. |
+| Philip Briggs room | 2 | BinhNT 14:04: "Philip Briggs c moved qua Năm rồi" → project ownership moved to NamTV. |
+| NUS Bailey - Paturevision | 4 | DatNC: Console Order Verification + Mobile going live Jun 11 AM. NamNN sent build link. |
+
+**Action items for DuongDN:**
+| # | Action | Source |
+|---|--------|--------|
+| 1 | ⚠️ Review OhCleo PR #14 (LongVV — Android Google service account payment fix) | LongVV 16:50 |
+| 2 | ⚠️ Review OhCleo PR #13 (LongVV — BE API update) | LongVV 14:56 |
+| 3 | ⚠️ BXR: 177.5h/189h — plan for Mindbody-blocked milestone (OOO until Jun 22) | MinhTV 10:32 |
+| 4 | ℹ️ BXR: Stripe UAE region missing — raise to Rory | LeNH 15:42 |
+| 5 | ℹ️ Elena Digital Plant: verify TienND2 restored all 3 servers this morning | TienND2 17:21 |
+
+**Alerts:**
+- ⚠️ **OhCleo PR #14** — Android subscription (Google service account 401) — DuongDN review pending
+- ⚠️ **BXR estimate risk** — 177.5h/189h; membership blocked by Mindbody OOO until Jun 22
+- ⚠️ **Elena Digital Plant** — all 3 studio servers had stale data Jun 10; full restore needed Jun 11
+- ⚠️ **Elena AA2/AA3** — API format change broke FE (fixed); AA2 payment held; AA3 est still disputed
+- ℹ️ **ToanNT sick Jun 11** (Delivery — different person from PHP TuanNT) — idle, no cover needed
+- ✅ **LongVV Jun 10** — was working OhCleo (NOT on leave). Emergency leave was Jun 9 only.
+- ✅ **Bailey invoice** — sent + paid (BinhNT confirmed Jun 10 22:08)
 
 ---
 
@@ -375,12 +398,16 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 5. 🚨 **OhCleo security backlog**: 4 critical cards in General todo (auth bypass, wildcard CORS, shared password) — 5d unactioned
 6. ⚠️ **OhCleo**: FAQ/TOS content from client Jun 4 stuck in Ready to test 7d; subscriber count mismatch unresolved; Sendgrid conflict no follow-up
 7. ⚠️ **OhCleo Testing**: 5 zombie cards stuck 191–222d — needs client triage
-3. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
-4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
-5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
-6. ⚠️ **Matrix token expired**: Needs manual SSO re-login (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`)
-7. ⚠️ **TuanNT off today (Jun 11)** + Jun 12 (confirmed via yesterday Matrix)
-8. ✅ **Upwork**: sessions NOT expired — W30: Rory 21.67h, others 0h (leave/inactive/Neural silence OK)
+3. ⚠️ **OhCleo PR #14** — Android subscription payment (Google service account 401) — DuongDN review pending (LongVV 16:50)
+4. ⚠️ **BXR estimate risk** — 177.5h/189h charged; Mindbody OOO until Jun 22 blocks membership
+5. ⚠️ **Elena Digital Plant** — all 3 studio servers stale/502 Jun 10; TienND2 restoring Jun 11 AM
+6. ⚠️ **Elena AA2/AA3** — API format change broke FE (fixed same day); AA2 payment held; AA3 est disputed
+7. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
+8. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
+9. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
+10. ✅ **Matrix token** — refreshed via matrix-login.js at 09:37
+11. ✅ **Upwork**: sessions NOT expired — W30: Rory 21.67h, others 0h (leave/inactive/Neural silence OK)
+12. ℹ️ **TuanNT (PHP) off Jun 11–12** + **ToanNT (Delivery) sick Jun 11** — both idle, no coverage needed
 
 ### Normal / no action:
 - PhucVT: leave day OK
@@ -430,13 +457,18 @@ Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstrea
 | 5 | ⚠️ | **Fountain #2627** — 1550% over-estimate (est=0.5h, actual=8.25h) | Open |
 | 6 | ⚠️ | **Xtreme task 431 overrun** — Kai acknowledged, LIFM2-409 urgent per Madhuraka | Open |
 | 7 | ⚠️ | **John Yi Xero limit** warning — nick@ (1 alert) | Open |
-| 8 | ℹ️ | **LongVV** — emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 via Workstream ✓ | Expected — approved leave |
-| 9 | ⚠️ | **Matrix token expired** — SSO re-login required each morning (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`) | Recurring |
-| 10 | ✅ | **Upwork** — sessions NOT expired. W30: Rory 21.67h ✓, others see notes above | Cleared |
-| 11 | ℹ️ | **TuanNT off Jun 11–12** (confirmed via Jun 10 Matrix) | Expected |
-| 12 | ℹ️ | **LeNH off Jun 12** → KhanhHH covers Rory | Planned |
-| 13 | ✅ | **Aysar** — daily report found at 09:04 | Cleared |
-| 14 | ✅ | **Rebecca (WB)** — TuanNT 8h combined, "Chưa" = normal | Cleared |
-| 15 | ✅ | **Philip** — no MS Teams message in window (last May 27) | Cleared |
+| 8 | ⚠️ | **OhCleo PR #14** — Android subscription Google service account 401 — DuongDN review pending | Open |
+| 9 | ⚠️ | **BXR estimate risk** — 177.5h/189h; Mindbody OOO until Jun 22 blocks membership feature | Open |
+| 10 | ⚠️ | **Elena Digital Plant** — all 3 studio servers had stale data Jun 10; TienND2 restoring Jun 11 | In progress |
+| 11 | ⚠️ | **Elena AA2** — AA2 payment still held pending; AA3 est dispute ongoing | Open |
+| 12 | ℹ️ | **LongVV** — emergency leave Jun 9 only. Returned Jun 10 on OhCleo. W30 Maddy: 8h Jun 8 ✓ | Resolved |
+| 13 | ℹ️ | **TuanNT (PHP) off Jun 11–12** (confirmed via Jun 10 Matrix) | Expected |
+| 14 | ℹ️ | **LeNH off Jun 12** → KhanhHH covers Rory | Planned |
+| 15 | ✅ | **Matrix token** — refreshed via matrix-login.js at 09:37 ✓ | Cleared |
+| 16 | ✅ | **Upwork** — sessions NOT expired. W30: Rory 21.67h ✓ | Cleared |
+| 17 | ✅ | **Bailey invoice** — sent + paid (BinhNT confirmed Jun 10 22:08) | Cleared |
+| 18 | ✅ | **Aysar** — daily report found at 09:04 | Cleared |
+| 19 | ✅ | **Rebecca (WB)** — TuanNT 8h combined, "Chưa" = normal | Cleared |
+| 20 | ✅ | **Philip** — project moved to NamTV per Matrix (BinhNT 14:04) | Cleared |
 
 **Trello final: 19/19 ✓. No open items.**
