@@ -284,9 +284,9 @@ Trello: All 6 Check Mail items ✓ complete.
 | Baamboozle | 2 | Carrick + Jamie (Aysar) discussion re open PRs — normal |
 | RDC - FM Monitoring | 2 | Carrick API change reply; tuner recovery alert — normal |
 | Swift Studio | 20 | Rory + Carrick + Jeff active on BXR app (region selection UX) |
-| Xtreme Soft Solutions | 0 | No Kai daily report found |
+| Xtreme Soft Solutions | 0 | No messages — quiet ✓ (Kai 16h/wk, daily report NOT required) |
 | SAM GUARD - Mobile | 11 | Elena active — process-digital-plant server rebuild coordination (studio servers) |
-| Global Grazing Services | some | Activity detected; Nick/Bailey daily report status unclear |
+| Global Grazing Services | 4 | Nick absent from #maintenance (normal — GGS absence ≠ alert per rule); Bailey gate = TuanNT task log, confirmed 8h Paturevision ✓ |
 | Amazing Meds | 0 | No activity |
 | Generator | 13 | Elliott active (requesting release branches 07:10 UTC), Violet daily update, Rudi deploying Batch 1 |
 | LegalAtoms | 18 | Raymond active — document generation performance, filing job improvements |
@@ -424,7 +424,18 @@ Last logged data: **W28 (May 25–31):**
 
 ---
 
-## Trello — 09:02 (+07:00) [updated]
+## Upwork — 05:00 (+07:00)
+
+All sessions expired — requires manual browser login (CAPTCHA/2FA):
+- Rory (carrick account): session expired
+- Neural Contract: session expired
+- Aysar: session expired
+
+⚠️ Upwork data unavailable this report. Manual re-login required.
+
+---
+
+## Trello — 09:02 (+07:00) [updated 09:43]
 
 **Check Mail:** All 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick)
 
@@ -434,16 +445,21 @@ Last logged data: **W28 (May 25–31):**
 - **Rebecca (William Bills)** ← newly completed (TuanNT 8h confirmed)
 - **Neural Contract** ← newly completed (silence = never alert)
 
-**Check Progress ○ incomplete (final after 09:36 recheck):**
-| Item | Reason |
-|------|--------|
-| Rory | LeNH 0h Jun 9 real alert — run `reminders lenh --send-reminder` to clear |
-| Franc | LeNH 0h Jun 9 real alert — same as Rory |
-| Fountain | #2615 890% STILL GROWING |
-
 **Check Progress ✓ newly completed (09:36):**
 - Philip — no messages in window (last msg May 27)
 - James Diamond - Vinn — Vinn on leave Jun 9, no report expected
+
+**Check Progress ✓ newly completed (09:43):**
+- Rory — reminder sent to LeNH (0h Jun 9 real alert; reminder IS the action per rule) ✓
+- Franc — reminder sent to LeNH ✓
+  - ⚠️ Note: cron INCORRECTLY blocked Rory/Franc via LeNH task log. Gate mapping says both are Slack-only items (Rory=Swift Studio Carrick activity ✓; Franc=RDC dmetiner no alert ✓) — task log 0h must NEVER block Slack-only gates.
+
+**Check Progress ○ incomplete (final):**
+| Item | Reason |
+|------|--------|
+| Fountain | #2615 890% STILL GROWING |
+
+**Final: 18/19 ✓ complete. Only Fountain open.**
 
 ---
 
@@ -484,4 +500,23 @@ Full room details: `reports/2026-06-10/matrix-rooms-0902.md`
 - **Matrix token**: ✅ Refreshed at 09:02. Valid.
 - **Upwork sessions**: All expired during cron run. Requires manual re-login.
 - **Gmail SA key**: `config/.gmail-service-account.json` not present for freelancer@mypersonalfootballcoach.com
+
+---
+
+## Key Alerts — Final State (as of 09:43)
+
+| # | Priority | Alert | Status |
+|---|----------|-------|--------|
+| 1 | ⚠️ | **Fountain #2615** — over-estimate 890% (est=12h, actual=106.75h), STILL GROWING week-over-week | ○ Open — Trello Fountain item open |
+| 2 | ⚠️ | **FirstProject production errors #1018–#1022** — 5 new React errors (rick@) | Open — needs dev investigation |
+| 3 | ⚠️ | **Generator pipeline FAILED** — staging + stagingPhase2 (carrick@) | Open — Violet: "tested, looks good now" but pipelines not confirmed fixed |
+| 4 | ⚠️ | **MPFC New Relic** — "Signal lost: Low Application Throughput" ×12 (kai@) | Open |
+| 5 | ⚠️ | **MPFC Rollbar** — [Delayed-newform] production 10 occ/5min at 06:21+07 (vuongtrancr@) | Open |
+| 6 | ✅ | **LeNH 0h Jun 9** — reminder sent 09:43, Rory ✓ Franc ✓ | Cleared |
+| 7 | ✅ | **TuanNT 0h (false alarm)** — confirmed 8h in Paturevision | Cleared |
+| 8 | ✅ | **Vinn no daily report** — Vinn on leave Jun 9 | Cleared |
+| 9 | ℹ️ | **LongVV emergency leave Jun 10** — father stroke (cấp cứu), OhCleo API fixed by DuongDN 17:25 ✅ | Monitor coverage |
+| 10 | ℹ️ | **TuanNT off Jun 11–12, LeNH off Jun 12** — KhanhHH covers Rory | Plan confirmed |
+
+**Trello final: 18/19 ✓. Only Fountain ○.**
 
