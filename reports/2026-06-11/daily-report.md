@@ -106,20 +106,31 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
 | LongVV | 0h (leave) | Emergency leave (father stroke, ER Jun 9) | ✓ W30: 8h Jun 8 via Workstream. Leave approved — no reminder needed. |
 
-**Upwork weekly hours:** Session renewal required (Puppeteer /tmp write permission denied). Neural Contract silence = OK per policy.
+**Upwork weekly hours:** See Upwork section below (re-run manually — data fetched OK).
 
 **TuanNT combined: 8h (Paturevision) — 0h on JohnYi/Rebecca/Neural sheets specifically.**
 Rule: combined > 0h = John Yi + Bailey + Rebecca gates unblocked. ✓
 
 
-## Upwork — 05:18 (+07:00)
+## Upwork — 05:18 (+07:00) [corrected 09:28]
 
-All sessions expired — requires manual browser login (CAPTCHA/2FA):
-- Rory (carrick account): session expired
-- Neural Contract: session expired
-- Aysar: session expired
+*(Cron reported sessions expired — sessions were NOT expired. Same transient Puppeteer /tmp issue. Re-run manually: all 5 contracts fetched OK.)*
 
-⚠️ Upwork data unavailable. Manual re-login required.
+**W30 (Jun 8–14):**
+
+| Workroom | Developer | This week | Last week | Mon | Tue | Wed | Thu |
+|----------|-----------|-----------|-----------|-----|-----|-----|-----|
+| Rory | LeNH | 21:40 | 30:50 | 7h | 7h | 7.17h | 0.5h |
+| Neural Contract | external | 0:00 | 15:00 | — | — | — | — |
+| Aysar | LeNH | 0:00 | 15:40 | — | — | — | — |
+| Bailey-VietPH | VietPH | 0:00 | 0:00 | — | — | — | — |
+| Bailey-DuongDN | DuongDN | 0:00 | 0:00 | — | — | — | — |
+
+- Neural 0h = OK (silence not an alert per policy)
+- Aysar 0h — KhanhHH logs task log, Upwork billed under LeNH sub-contract; KhanhHH 4.5h in task log ✓
+- Bailey-VietPH 0h — VietPH on leave this week ✓
+- Bailey-DuongDN 0h — DEV3 inactive ✓
+- Rory 21.67h W30: task log LeNH Wed Jun 10 = 7h, Upwork Wed = 7.17h ✓ match
 
 ---
 
@@ -240,6 +251,47 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 
 ---
 
+## Trello — OhCleo App (app-20) — 09:29 (+07:00)
+
+**Board:** OhCleo App first approach | `trello.com/b/Fv7eDVgT/app-20` | Account: tony@nustechnology.com
+**Access method:** browser_cookie3 (Profile 25) — no API token, web session only
+
+| List | Cards | Notes |
+|------|-------|-------|
+| General todo | 13 | 2 cards 5d+ inactive |
+| To do priority upcoming week | 1 | Backend question and update (3d) |
+| In Progress | 4 | All active (0d) |
+| Dev Done | 8 | 5 recent cards |
+| Ready to test | 13 | ⚠️ 10 cards 5d+ stuck |
+| Testing | 6 | ⚠️ 4 cards 191–222d stuck |
+| Ready for Publish | 0 | Empty |
+| Done | 79 | — |
+
+**In Progress (4 cards):**
+- Subscription Page Redesign
+- Logic when showing tracks in the onboarding
+- Subscription registration validation error
+- Fix back navigation not working on some screens (Ex: track detail)
+
+**⚠️ Stuck in Testing (very old — needs attention):**
+- Home API [Home Page] — **222d** — https://trello.com/c/TetuRSgh
+- Read/Unread on Message — **222d** — https://trello.com/c/eahOwh62
+- Updating Messaging Functionality — **208d** — https://trello.com/c/humSSIvu
+- All IAP flows — **196d** — https://trello.com/c/7q6bAgST
+- Recent Tracks — **191d** — https://trello.com/c/Z9rICJQs
+- Recent-track/suggest-medias APIs not on production — 1d
+
+**⚠️ Stuck in Ready to test (security items, 8d):**
+- [Security] Harden CORS and Host Validation — https://trello.com/c/n2NYFcmA
+- [Security] Prevent Admin Login Bypass — https://trello.com/c/LwkB9RUr
+- Persistent Login / Session Handling Bug — https://trello.com/c/xNEIRlae
+
+**Alerts:**
+- ⚠️ 4 cards stuck in Testing 191–222 days — likely zombie cards, needs triage
+- ⚠️ 2 unresolved security cards (CORS hardening, admin login bypass) in Ready to test 8d
+
+---
+
 ## Summary
 
 **Run completed:** 2026-06-11 05:27 +07:00 | **Recheck:** 08:37 +07:00 | **All 19 Trello items ✓**
@@ -252,7 +304,7 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
 6. ⚠️ **Matrix token expired**: Needs manual SSO re-login (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`)
 7. ⚠️ **TuanNT off today (Jun 11)** + Jun 12 (confirmed via yesterday Matrix)
-8. ⚠️ **Upwork sessions**: expired — data unavailable
+8. ✅ **Upwork**: sessions NOT expired — W30: Rory 21.67h, others 0h (leave/inactive/Neural silence OK)
 
 ### Normal / no action:
 - PhucVT: leave day OK
@@ -304,7 +356,7 @@ Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstrea
 | 7 | ⚠️ | **John Yi Xero limit** warning — nick@ (1 alert) | Open |
 | 8 | ℹ️ | **LongVV** — emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 via Workstream ✓ | Expected — approved leave |
 | 9 | ⚠️ | **Matrix token expired** — SSO re-login required each morning (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`) | Recurring |
-| 10 | ⚠️ | **Upwork sessions expired** — manual re-login required | Recurring |
+| 10 | ✅ | **Upwork** — sessions NOT expired. W30: Rory 21.67h ✓, others see notes above | Cleared |
 | 11 | ℹ️ | **TuanNT off Jun 11–12** (confirmed via Jun 10 Matrix) | Expected |
 | 12 | ℹ️ | **LeNH off Jun 12** → KhanhHH covers Rory | Planned |
 | 13 | ✅ | **Aysar** — daily report found at 09:04 | Cleared |
