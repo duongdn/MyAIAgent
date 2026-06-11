@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /**
- * Daily check: extract JIRA tickets from Maddy task log, verify each ticket has:
- *   1. Original estimate set
+ * Maddy JIRA × task log cross-check.
+ * For each ticket logged in the task log, verifies:
+ *   1. Original estimate set on JIRA
  *   2. Actual time logged on JIRA
  *   3. est >= actual (not over-budget)
  *
  * Usage:
- *   node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]
- *   Date defaults to yesterday (PREV_DATE). Output: JSON to stdout.
+ *   node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]       # one day, JSON output
+ *   node scripts/maddy-jira-tasklog-check.js --week [YYYY-MM-DD] # full week, markdown table
+ *   Date defaults to yesterday (PREV_DATE).
  */
 
 const fs = require('fs');
@@ -56,7 +58,10 @@ async function jiraGet(url, email, token) {
 // ── main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const targetDate = process.argv[2] || prevDate();
+  const args = process.argv.slice(2);
+  const weekMode = args.includes('--week');
+  const dateArg  = args.find(a => !a.startsWith('--')) || prevDate();
+  const targetDate = dateArg;
   const { day, month, year } = parseDate(targetDate);
   // Sheet date header format: "Mon, 10/06/26"
   const datePattern = new RegExp(`${day}/${month}/${year}`, 'i');
@@ -89,44 +94,55 @@ async function main() {
   }
 
   // Fetch week tab rows
-  const weekRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `${weekTab}!A1:K200` });
+  const weekRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `${weekTab}!A1:K250` });
   const rows = weekRes.data.values || [];
 
-  // Find rows belonging to targetDate
-  let inTargetDay = false;
-  const dayTickets = []; // { ticket, description, hours, owner }
+  // Extract task entries — one day (default) or whole week (--week)
+  const allEntries = []; // { date, ticket, description, hours, owner }
+  let currentDay = null;
+  let inScope    = weekMode; // week mode: collect all days; day mode: only target day
 
   for (const row of rows) {
     const cell = (row[0] || '').trim();
-    if (datePattern.test(cell)) { inTargetDay = true; continue; }
-    // Stop at next day header (contains a date pattern like "Tue," or "Wed," etc.)
-    if (inTargetDay && /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/.test(cell)) break;
-    if (!inTargetDay) continue;
-    if (cell !== 'Task dự án') continue;
+    const isDayHeader = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/.test(cell);
+
+    if (isDayHeader) {
+      currentDay = cell;
+      if (!weekMode) {
+        inScope = datePattern.test(cell);
+        if (inScope === false && allEntries.length > 0) break; // past target day, done
+      }
+      continue;
+    }
+    if (!inScope || cell !== 'Task dự án') continue;
 
     const description = (row[2] || '').trim();
     const reference   = (row[3] || '').trim();
     const owner       = (row[6] || '').trim();
     const hours       = parseFloat(row[7]) || 0;
+    if (!description && !reference) continue;
 
     const tickets = [...extractTickets(description), ...extractTickets(reference)];
     for (const t of tickets) {
-      dayTickets.push({ ticket: t, description, hours, owner });
+      allEntries.push({ date: currentDay, ticket: t, description, hours, owner });
     }
   }
 
-  if (dayTickets.length === 0) {
-    console.log(JSON.stringify({ date: targetDate, week: weekTab, tickets: [], summary: 'No ticket entries found for this date' }));
+  if (allEntries.length === 0) {
+    const msg = weekMode
+      ? { week: weekTab, tickets: [], summary: 'No ticket entries in this week' }
+      : { date: targetDate, week: weekTab, tickets: [], summary: 'No ticket entries found for this date' };
+    console.log(JSON.stringify(msg));
     return;
   }
 
-  // Deduplicate tickets but keep all hours entries
-  const uniqueTickets = [...new Set(dayTickets.map(e => e.ticket))];
+  // Deduplicate tickets but aggregate hours across all entries
+  const uniqueTickets = [...new Set(allEntries.map(e => e.ticket))];
 
   // Fetch JIRA for each unique ticket
   const results = [];
   for (const ticketKey of uniqueTickets) {
-    const logEntries = dayTickets.filter(e => e.ticket === ticketKey);
+    const logEntries = allEntries.filter(e => e.ticket === ticketKey);
     const totalHoursLogged = logEntries.reduce((sum, e) => sum + e.hours, 0);
 
     let jiraData = null;
@@ -178,6 +194,33 @@ async function main() {
   const over_budget    = results.filter(r => !r.error && r.overBudget);
   const ok             = results.filter(r => !r.error && r.checks.hasEst && r.checks.hasActual && r.checks.estGteActual);
   const errors         = results.filter(r => r.error);
+
+  if (weekMode) {
+    // Markdown table output for --week
+    const label = `${weekTab} (${targetDate})`;
+    console.log(`## Maddy JIRA — ${label}\n`);
+    console.log(`| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log | Check |`);
+    console.log(`|--------|---------|--------|-----|---------------|----------|-------|`);
+    for (const r of results) {
+      if (r.error) {
+        console.log(`| ${r.ticket} | — | — | — | — | ${r.loggedHours}h | ⚠️ error: ${r.error} |`);
+        continue;
+      }
+      let check = '✅';
+      const flags = [];
+      if (!r.checks.hasEst)      flags.push('⚠️ no est');
+      if (!r.checks.hasActual)   flags.push('⚠️ no JIRA log');
+      if (r.overBudget)          flags.push(`🔴 over ${r.overBy}`);
+      if (flags.length)          check = flags.join(' ');
+      console.log(`| ${r.ticket} | ${r.summary} | ${r.status} | ${r.est} | ${r.actual} | ${r.loggedHours}h | ${check} |`);
+    }
+    console.log('');
+    if (over_budget.length)    console.log(`**Over-budget (${over_budget.length}):** ${over_budget.map(r=>`${r.ticket} est=${r.est} actual=${r.actual} over=${r.overBy}`).join(', ')}`);
+    if (missing_est.length)    console.log(`**No estimate (${missing_est.length}):** ${missing_est.map(r=>r.ticket).join(', ')} — dev must set est before logging`);
+    if (missing_actual.length) console.log(`**No JIRA log (${missing_actual.length}):** ${missing_actual.map(r=>r.ticket).join(', ')} — dev must log time on ticket`);
+    if (!over_budget.length && !missing_est.length && !missing_actual.length) console.log(`All ${ok.length} tickets OK ✅`);
+    return;
+  }
 
   console.log(JSON.stringify({
     date:    targetDate,

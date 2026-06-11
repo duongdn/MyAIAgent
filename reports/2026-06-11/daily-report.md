@@ -125,7 +125,19 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | LongVV | 0h Maddy | Emergency leave Jun 9 only (father stroke/ER). Returned Jun 10 → OhCleo project. | ✓ W30: 8h Jun 8 Maddy via Workstream. Jun 10: active on OhCleo (Matrix confirmed). No reminder. |
 
 **Maddy JIRA cross-check (Jun 10):**
-LongVV logged 0h in Maddy sheet Jun 10 (working OhCleo project, not Maddy). No Maddy JIRA entries to check. ✓ Skip.
+LongVV logged 0h in Maddy sheet Jun 10 (working OhCleo project, not Maddy). No Jun 10 entries to check.
+
+Last worked week W9 (Jun 1–7) — JIRA status:
+
+| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log W9 | Check |
+|--------|---------|--------|-----|---------------|-------------|-------|
+| LIFM2-442 | Price rounding | Ready to deploy | 6h | 7h 30m | 2.5h | 🔴 over 1h 30m |
+| LIFM2-439 | Listed-Cons tab changes | To Do | 12h | 21h 30m | 5.5h | 🔴 over 9h 30m |
+| LIFM2-443 | Order Fulfilment | Testing - Anoma | 0h | 14h | 7h | ⚠️ no est set |
+| LIFM2-409 | Import Shopify payouts | Testing - Anoma | 40h | 97h 15m | 1h | 🔴 over 57h 15m |
+
+**⚠️ 3 over-budget:** LIFM2-409 (+57h 15m), LIFM2-439 (+9h 30m), LIFM2-442 (+1h 30m)
+**⚠️ 1 no estimate:** LIFM2-443 — LongVV must set original estimate on ticket
 
 **Upwork weekly hours:** See Upwork section below (re-run manually — data fetched OK).
 
