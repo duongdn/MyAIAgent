@@ -14,15 +14,33 @@
 | nick@ | 11 | 1 | 04:30 Weekly Meeting with Devs (Teams) |
 | rick@ | 33 | 22 | 17:30 OmniGPT Daily Sync; 19:30 HEAL Meeting |
 | kai@ | 6 | 0 | no events |
-| ken@ | 50 | 0 | 15:30 DE - Daily Standup; 16:00 DE - Bi-weekly retrospective; 16:30 Martin <> Ken |
+| ken@ | 50 | 0 | 15:30 DE Standup; 16:00 DE Retro; 16:30 Martin <> Ken |
+| vuongtrancr@gmail.com | 0 | 0 | — |
+| dnduongus@gmail.com | 7 | 0 | — |
+| freelancer@mypersonalfootballcoach.com | 1 | 0 | — |
 
-**Alerts:**
-- carrick@: Generator CI/CD pipeline failures (staging + stagingPhase2 + release-be-jun-2026-batch-2), Redmine bugs #78866 #78871 #78873 #79101 (new/tested)
-- nick@: "Warning of reaching xero limit" (John Yi Xero account)
-- rick@: InfinityRoses Rollbar daily summaries; [FirstProject] production errors #1018 #1019 (Uncaught React error)
-- vuongtrancr@gmail.com: "Signal lost for 10 minutes on 'Low Application Throughput'" × multiple (server monitoring)
+**carrick@ detail (16 alerts):**
+- ⚠️ Generator CI/CD pipeline FAILED — staging, stagingPhase2, release-be-jun-2026-batch-2
+- Redmine Bug #78866, #78871, #78873, #79101 (new/tested) — Generator/Elliott
 
-**Note:** duongdn@ — HaoNV đơn xin nghỉ phép received + approved (leave request, no action needed)
+**nick@ detail (1 alert):**
+- ⚠️ "Warning of reaching xero limit" — John Yi Xero account
+
+**rick@ detail (22 alerts):**
+- ⚠️ `[FirstProject] production — 10th Error occurrence: #1018 Uncaught React error`
+- ⚠️ `[FirstProject] production — New Error: #1019 Uncaught React error (Minified React)`
+- InfinityRoses Rollbar daily summaries (automated, no production alert)
+- FirstProject Daily Summary (automated)
+
+**kai@ detail:** 6 emails, 0 alerts (no New Relic signal lost this window).
+
+**vuongtrancr@gmail.com:** 0 emails in Jun 10 window. Signal lost alerts were Jun 9 (already in Jun 10 report) — cron mis-attributed them to Jun 11 window.
+
+**dnduongus@gmail.com:** 7 emails — personal/financial (Vietcombank, UOBAM, Anthropic receipt, Payoneer maintenance) — no action.
+
+**freelancer@mypersonalfootballcoach.com:** 1 email — MPFC Daily Summary Wed Jun 10 (Rollbar automated summary). No production alert.
+
+**Note:** duongdn@ — HaoNV đơn xin nghỉ phép received + approved (leave request, no action needed).
 
 Trello: All 6 ✓ complete.
 
@@ -71,7 +89,8 @@ Trello: James Diamond - Vinn ✓ complete (both Vinn + Jeff reports found). Andr
 
 ## Scrin.io — 05:10 (+07:00)
 
-**Scrin.io (TuanNT / John Yi — 2026-06-10):** 0h — no sessions recorded.
+**Scrin.io (Nick / John Yi — 2026-06-10):** 0h — no sessions recorded.
+*(Scrin tracks Nick at nick@nustechnology.com at John Yi company — NOT TuanNT. 0h = Nick did not work at John Yi on Jun 10.)*
 
 
 ## Sheets — 05:15 (+07:00)
@@ -82,7 +101,7 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 |-----------|-------|-------|--------|
 | TuanNT | 8h (Paturevision) | — | ✓ Combined > 0h (JohnYi: 0h, Rebecca: 0h, Paturevision: 8h, Neural: 0h) |
 | PhucVT | 0h (AnhNH2: 4h) | Nghỉ cả ngày | ✓ Leave day OK |
-| VietPH | 12h total (VuTQ:8, NamNN:4) | Nghỉ cả ngày | ✓ Leave day for VietPH, team covering |
+| VietPH | 0h (on leave) | Nghỉ cả ngày | ✓ Leave day OK — VuTQ logged 8h + NamNN 4h on Paturevision project (team coverage) |
 | KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 12.5h |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
 | LongVV | 0h | — | ⚠️ Weekly: 0h (Workstream unavailable to verify) |
@@ -97,6 +116,17 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 - Bailey (TuanNT): 8h combined ✓ → gate passes
 - Rebecca (TuanNT): 8h combined ✓ → gate passes
 
+
+## Upwork — 05:18 (+07:00)
+
+All sessions expired — requires manual browser login (CAPTCHA/2FA):
+- Rory (carrick account): session expired
+- Neural Contract: session expired
+- Aysar: session expired
+
+⚠️ Upwork data unavailable. Manual re-login required.
+
+---
 
 ## Fountain — 05:20 (+07:00) [corrected 08:37]
 
@@ -266,5 +296,27 @@ Rechecked all 4 ○ incomplete items from cron run.
 
 ### LongVV reminder (still pending)
 0h for 2026-06-10 + W10 0h — no leave recorded. Workstream unavailable (Puppeteer /tmp issue). Reminder text printed but not sent (no --send-reminder flag). Manual check recommended.
-- Precognize: no nus/ PRs
-- WordPress SamGuard: no JS errors
+
+---
+
+## Key Alerts — Final State (as of 08:37)
+
+| # | Priority | Alert | Status |
+|---|----------|-------|--------|
+| 1 | ⚠️ | **Generator CI/CD FAILED** — staging + stagingPhase2 + release-be-jun-2026-batch-2 (carrick@) | Open — Violet/Carrick covering; Elliott off Jun 11-12 |
+| 2 | ⚠️ | **FirstProject production errors #1018 #1019** — Uncaught React errors (rick@) | Open |
+| 3 | ⚠️ | **Fountain #2615** — 790% over-estimate (est=12h, actual=106.75h), growing week-over-week | Open — only Trello item remaining |
+| 4 | ⚠️ | **Fountain customer bug** — mike62798179: order #4807858VH wrong delivery date | Open |
+| 5 | ⚠️ | **Fountain #2627** — 1550% over-estimate (est=0.5h, actual=8.25h) | Open |
+| 6 | ⚠️ | **Xtreme task 431 overrun** — Kai acknowledged, LIFM2-409 urgent per Madhuraka | Open |
+| 7 | ⚠️ | **John Yi Xero limit** warning — nick@ (1 alert) | Open |
+| 8 | ⚠️ | **LongVV 0h** Jun 10 + W10 0h total — on emergency leave (father ER Jun 9). Reminder not sent, manual check needed | Monitor |
+| 9 | ⚠️ | **Matrix token expired** — SSO re-login required each morning (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`) | Recurring |
+| 10 | ⚠️ | **Upwork sessions expired** — manual re-login required | Recurring |
+| 11 | ℹ️ | **TuanNT off Jun 11–12** (confirmed via Jun 10 Matrix) | Expected |
+| 12 | ℹ️ | **LeNH off Jun 12** → KhanhHH covers Rory | Planned |
+| 13 | ✅ | **Aysar** — daily report found at 09:04 | Cleared |
+| 14 | ✅ | **Rebecca (WB)** — TuanNT 8h combined, "Chưa" = normal | Cleared |
+| 15 | ✅ | **Philip** — no MS Teams message in window (last May 27) | Cleared |
+
+**Trello final: 19/19 ✓. No open items.**
