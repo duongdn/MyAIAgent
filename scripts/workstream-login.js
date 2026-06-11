@@ -53,8 +53,14 @@ async function main() {
   const browser = await puppeteer.launch({
     headless: false,
     userDataDir: PROFILE_DIR,
-    env: { ...process.env, DISPLAY: process.env.DISPLAY || ':1' },
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1280,900'],
+    env: { ...process.env, DISPLAY: process.env.DISPLAY || ':1', TMPDIR: '/var/tmp' },
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--window-size=1280,900',
+      '--crash-dumps-dir=/var/tmp',
+    ],
   });
 
   const page = await browser.newPage();

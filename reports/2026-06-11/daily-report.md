@@ -104,10 +104,7 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 | VietPH | 0h (on leave) | Nghỉ cả ngày | ✓ Leave day OK — VuTQ logged 8h + NamNN 4h on Paturevision project (team coverage) |
 | KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 12.5h |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
-| LongVV | 0h | — | ⚠️ Weekly: 0h (Workstream unavailable to verify) |
-
-**Alerts:**
-- ⚠️ LongVV: 0h today and 0h this week (W10). Workstream login broken (Puppeteer /tmp issue) — cannot verify authoritative total. Flag for manual check.
+| LongVV | 0h (leave) | Emergency leave (father stroke, ER Jun 9) | ✓ W30: 8h Jun 8 via Workstream. Leave approved — no reminder needed. |
 
 **Upwork weekly hours:** Session renewal required (Puppeteer /tmp write permission denied). Neural Contract silence = OK per policy.
 
@@ -220,16 +217,13 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 
 | Developer | Today | Weekly | Leave | Action |
 |-----------|-------|--------|-------|--------|
-| LongVV | 0h | 0h (W10) | None recorded | ⚠️ REMINDER NEEDED |
+| LongVV | 0h (leave) | 8h W30 (Jun 8 via Workstream) | Emergency leave approved | ✓ Skip — leave approved |
 | PhucVT | 0h | — | Nghỉ cả ngày | ✓ Leave day — skip |
 | TuanNT | 8h (Paturevision) | — | — | ✓ Skip |
 | LeNH | 8h (Rory:7+Franc:1) | — | — | ✓ Skip |
 | KhanhHH | 4.5h | — | — | ✓ Skip |
 
-**Reminder text (LongVV — not sent):**
-> Hi LongVV, bạn chưa log giờ hôm nay (2026-06-10) và tuần này (W10) là 0h. Vui lòng cập nhật timesheet. Cảm ơn!
-
-⚠️ Note: Workstream login unavailable (Puppeteer /tmp permission issue) — LongVV weekly hours cannot be independently verified via Workstream. Manual check recommended.
+**LongVV:** On approved emergency leave (father stroke/ER Jun 9). W30: 8h Jun 8 confirmed via Workstream. No reminder needed.
 
 
 ## Matrix Scan — skipped (token expired)
@@ -254,7 +248,7 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 
 ### Alerts requiring action:
 1. ⚠️ **Generator CI/CD**: Staging + release pipelines failing — Elliott off, Violet/Carrick covering
-2. ⚠️ **LongVV**: 0h Jun 10 — on emergency leave (father ER Jun 9). Still 0h W10. Workstream unavailable to verify. Reminder not sent (likely still on leave)
+2. ℹ️ **LongVV**: Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstream. Leave approved — no action needed.
 3. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
 4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
 5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
@@ -294,8 +288,8 @@ Rechecked all 4 ○ incomplete items from cron run.
 | MS Teams detached frame | `clickByText` + `isVisibleInViewport` called `el.evaluate()` without `.catch()`. Teams SPA navigates mid-loop, detaching frame | Added `.catch()` to all `el.evaluate()` calls; `waitForNetworkIdle` after login; fixed |
 | MS Teams profile corrupt | `tmp/msteams-will-profile/SingletonLock` leftover from crashed session → Chrome exits immediately | Profile backed up; use `--clear-profile` flag to reset |
 
-### LongVV reminder (still pending)
-0h for 2026-06-10 + W10 0h — no leave recorded. Workstream unavailable (Puppeteer /tmp issue). Reminder text printed but not sent (no --send-reminder flag). Manual check recommended.
+### LongVV
+Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstream. No reminder needed — leave approved.
 
 ---
 
@@ -310,7 +304,7 @@ Rechecked all 4 ○ incomplete items from cron run.
 | 5 | ⚠️ | **Fountain #2627** — 1550% over-estimate (est=0.5h, actual=8.25h) | Open |
 | 6 | ⚠️ | **Xtreme task 431 overrun** — Kai acknowledged, LIFM2-409 urgent per Madhuraka | Open |
 | 7 | ⚠️ | **John Yi Xero limit** warning — nick@ (1 alert) | Open |
-| 8 | ⚠️ | **LongVV 0h** Jun 10 + W10 0h total — on emergency leave (father ER Jun 9). Reminder not sent, manual check needed | Monitor |
+| 8 | ℹ️ | **LongVV** — emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 via Workstream ✓ | Expected — approved leave |
 | 9 | ⚠️ | **Matrix token expired** — SSO re-login required each morning (`DISPLAY=:1 node scripts/matrix-token-cdp-refresh.js`) | Recurring |
 | 10 | ⚠️ | **Upwork sessions expired** — manual re-login required | Recurring |
 | 11 | ℹ️ | **TuanNT off Jun 11–12** (confirmed via Jun 10 Matrix) | Expected |
