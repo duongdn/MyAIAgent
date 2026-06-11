@@ -613,16 +613,43 @@ Script writes raw messages to `reports/YYYY-MM-DD/matrix-rooms-HHMM.md` and prin
 
 **Action item detection:** Script flags messages matching "a Dương / anh Dương / @duongdn / duongdn / mày" + action verb. ⚠️ suffix on flagged lines, warning block at end of stdout. These surface in the daily-report block — do NOT miss them.
 
-**Report — append to daily-report (stdout summary only, no room details):**
+**Report — append to daily-report. Use this exact structure:**
 ```
-## Matrix — {since-datetime} +07:00
-Active rooms: {N} / {total} | Messages: {N}
+## Matrix — {HH:MM} (+07:00)
+
+**Active rooms: {N} / {total} | Messages: {N}** *(since {date} {HH:MM})*
 Full details: reports/YYYY-MM-DD/matrix-rooms-HHMM.md
 
-⚠️ ACTION ITEMS FOR YOU ({N}):
-  [{RoomName}] {HH:MM} {sender}: {message text}
+### ⚠️ Action items for DuongDN ({N})
+
+| Room | Time | Message |
+|------|------|---------|
+| {RoomName} | {HH:MM} | {sender}: "{exact quote}" — {brief context} ⚠️/{status} |
 ```
-If no action items, omit the warning block. Room details stay in the separate file — never paste them into daily-report.
+*(If no action items, omit the table and header.)*
+
+```
+### Key updates
+
+**{ProjectName} — {one-line summary}** ({time if relevant}):
+- {concise bullet — what happened, who, outcome}
+- {second bullet if needed}
+
+**{ProjectName} — {one-line summary}**:
+- {bullet}
+
+**Other:**
+- {ProjectA}: {1-line}
+- {ProjectB}: {1-line}
+```
+
+**Format rules:**
+- Action items table: use **exact message quotes** (not paraphrases), include room + time + sender
+- Key updates: one bold header per project with bullets — NOT a room-by-room table
+- Each bullet: max 1–2 lines, concise grammar (sacrifice grammar for concision)
+- Never paste raw message dumps — always summarize
+- Resolved items: mark ✅ inline (e.g. "fixed 16:05 ✅")
+- Room details stay in separate `matrix-rooms-HHMM.md` — never copy full message lists to daily-report
 
 ---
 
