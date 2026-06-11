@@ -292,9 +292,55 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 - Deploy old app — **156d** — https://trello.com/c/mdTCaDLm
 - Gems — **156d** — https://trello.com/c/8oWIFd6w
 
+**Customer comments analysis (Celine Fierro @celinefierro1 — client/product owner):**
+
+**🚨 PASSWORD EXPOSED IN TRELLO (Jun 9, Tony comment on "customer support"):**
+> Tony posted a customer's temporary password in plain text: `lindadeemarasco@123`
+> Context: "Forgot Password" is broken, so Tony manually reset. Password is now visible to all board members.
+> **Action needed:** Rotate that password, fix Forgot Password feature, never post credentials in Trello.
+
+**⚠️ Forgot Password not working (Jun 9, Tony confirmed):**
+> "the 'Forgot Password' functionality is currently not working" — mentioned in passing, no card for it.
+> **Action needed:** Create a card + fix urgently (customer-impacting).
+
+**⏳ "completion rate" feature — awaiting Celine response (Jun 10):**
+> Celine asked to extract completion rate logic from old admin platform.
+> Tony: can't find the logic in old platform, proposed building new. Asked Celine for expectations.
+> Last message Jun 10 09:41 — **no response from Celine yet today**.
+
+**⏳ FAQ / TOS / CG App update — provided by client, 7d stuck in Ready to test:**
+> Celine shared updated FAQ, TOS, CG App content on Jun 4. Card still in Ready to test (6d).
+> https://trello.com/c/j0t3scdl — needs QC + deploy.
+
+**✅ 3 free Premium listens logic — clarified and acknowledged (Jun 3–8):**
+> Celine: 3 listens total per account, same audio = still counted, device-block nice-to-have.
+> Tony confirmed ~4h fix, card now in Dev Done — appears implemented.
+
+**✅ URGENT CHANGE COPY — new vs returning accounts (Jun 4–8):**
+> Celine wanted separate copy for new vs returning. Tony confirmed deployed.
+
+**⚠️ Legacy web subscriber offer — subscriber count mismatch (Jun 3–7):**
+> Tony sees 102 users (60 active); Celine says 70 then corrected to 76 app + 39 web (115 total).
+> Discrepancy unresolved — Tony was checking. No follow-up after Jun 7.
+> https://trello.com/c/awYi27Ue
+
+**⚠️ Sendgrid dynamic template conflict (Jun 8, Tony acknowledged):**
+> Celine flagged old templates conflicting with new in Sendgrid.
+> Tony: "Let me arrange to check it" — no follow-up comment seen.
+> https://trello.com/c/Vk0PkS1f
+
+**⚠️ Google/Apple login — 25–30h budget, in Ready to test (Mar 2026):**
+> Celine approved 25–30h budget Mar 19. Card still stuck in Ready to test.
+> https://trello.com/c/iCUgiI5w
+
 **Alerts:**
+- 🚨 **Password exposed** in Trello comment (Jun 9) — lindadeemarasco@123 visible to board members
+- 🚨 **Forgot Password broken** — customer-impacting, no card, Tony confirmed Jun 9
 - 🚨 4 CRITICAL SECURITY cards in General todo (5d unactioned) — auth bypass, wildcard CORS, shared password, no-expiry reset codes
 - ⚠️ 5 zombie cards in Testing 191–222d — needs triage/close
+- ⚠️ FAQ/TOS/CG content provided by client Jun 4, still in Ready to test 7d
+- ⚠️ Subscriber count mismatch unresolved since Jun 7 (Tony: 60 active vs Celine: 76+39)
+- ⚠️ Sendgrid template conflict — Tony acknowledged Jun 8, no follow-up
 - ⚠️ 2 security items stuck in Ready to test 8d — awaiting QC sign-off
 
 ---
@@ -306,8 +352,11 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 ### Alerts requiring action:
 1. ⚠️ **Generator CI/CD**: Staging + release pipelines failing — Elliott off, Violet/Carrick covering
 2. ℹ️ **LongVV**: Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstream. Leave approved — no action needed.
-3. 🚨 **OhCleo security**: 4 critical security cards in General todo (5d, unactioned) — ADMIN_PASSWORD bypass, wildcard CORS+CORS credentials, shared password, no-expiry reset codes
-4. ⚠️ **OhCleo Testing**: 5 zombie cards stuck 191–222d — needs client triage to close or re-open
+3. 🚨 **OhCleo — password in Trello**: Tony posted customer temp password `lindadeemarasco@123` in a Trello comment (Jun 9). Rotate + fix Forgot Password feature.
+4. 🚨 **OhCleo — Forgot Password broken**: Customer-impacting, Tony confirmed Jun 9, no dedicated card.
+5. 🚨 **OhCleo security backlog**: 4 critical cards in General todo (auth bypass, wildcard CORS, shared password) — 5d unactioned
+6. ⚠️ **OhCleo**: FAQ/TOS content from client Jun 4 stuck in Ready to test 7d; subscriber count mismatch unresolved; Sendgrid conflict no follow-up
+7. ⚠️ **OhCleo Testing**: 5 zombie cards stuck 191–222d — needs client triage
 3. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
 4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
 5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
