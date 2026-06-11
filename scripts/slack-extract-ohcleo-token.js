@@ -31,16 +31,25 @@ function extractCookies() {
 }
 
 function apiTest(token, dCookie) {
+  const body = `token=${encodeURIComponent(token)}`;
+  const dEnc = encodeURIComponent(dCookie);
   return new Promise(resolve => {
-    https.get({
-      hostname: 'slack.com',
+    const req = https.request({
+      hostname: 'ohcleo.slack.com',
       path: '/api/auth.test',
-      headers: { Authorization: 'Bearer ' + token, Cookie: 'd=' + dCookie },
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': 'd=' + dEnc,
+        'Content-Length': Buffer.byteLength(body),
+      },
     }, res => {
       let d = '';
       res.on('data', c => d += c);
       res.on('end', () => { try { resolve(JSON.parse(d)); } catch { resolve({}); } });
     }).on('error', () => resolve({}));
+    req.write(body);
+    req.end();
   });
 }
 

@@ -499,3 +499,26 @@ Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstrea
 | 20 | ✅ | **Philip** — project moved to NamTV per Matrix (BinhNT 14:04) | Cleared |
 
 **Trello final: 19/19 ✓. No open items.**
+
+---
+
+## OhCleo Slack — 10:40 (+07:00)
+
+**Workspace:** ohcleo.slack.com | **Account:** tony@nustechnology.com (Profile 25, xoxc session)
+**Members:** Tony (dev), Celine Fierro (customer/admin), David Nguyen (prev dev), Slackbot
+**Channels monitored:** DM:Celine Fierro (`D0B6846UN8K`), #events-code (`C01JDPN0EDQ`)
+
+| Channel | Today (Jun 11) | Notes |
+|---------|---------------|-------|
+| DM:Celine Fierro | 0 new messages | Last activity Jun 10 10:24 (Tony daily report) |
+| #events-code | 0 new messages | Last activity May 27 (Tony joined channel) |
+
+**Jun 10 DM summary (most recent activity):**
+- **10:24 Tony → daily report**: Mobile X-footer link, track type fix, payment check, FE urgent change
+- **09:12 Celine**: Sent Google Meet link — meeting held
+- **09:02 Celine**: "are you available in 15 min?" (after signup testing)
+- **08:27 Tony**: Investigating backend slowness (~2 days onset)
+- **08:25–08:26 Celine**: Category pages very slow / "Acts & Positions" doesn't load; "data hasn't changed"
+- **08:17 Tony**: Diagnosed: N+1 query problem on category pages — fires multiple slow DB queries per page load
+
+**Status: No new messages today. Performance issue (N+1 query) flagged Jun 10 — under investigation by Tony.**
