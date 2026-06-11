@@ -83,9 +83,13 @@ async function main() {
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
       '--window-size=1400,900',
+      // Avoid bot-detection flags
+      '--disable-blink-features=AutomationControlled',
+      '--disable-features=IsolateOrigins,site-per-process',
     ],
     userDataDir: PROFILE_DIR,
     defaultViewport: { width: 1400, height: 900 },
+    ignoreDefaultArgs: ['--enable-automation'],
   });
 
   let result = null;
@@ -94,8 +98,18 @@ async function main() {
     const page = await browser.newPage();
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
-    console.log('Navigating to board:', BOARD_URL);
-    await page.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(e => {
+    // Override navigator.webdriver to avoid bot detection
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    });
+
+    // For login, go to Trello's email login page (bypasses Google SSO detection)
+    const loginUrl = needsLogin
+      ? 'https://id.atlassian.com/login?continue=https%3A%2F%2Ftrello.com%2Fauth%2Fatlassian%2Fcallback&display=sans_branding'
+      : BOARD_URL;
+
+    console.log('Navigating to:', loginUrl);
+    await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 }).catch(e => {
       console.log('Nav note:', e.message.slice(0, 60));
     });
     await sleep(3000);
@@ -103,6 +117,7 @@ async function main() {
     // Interactive login flow
     if (needsLogin) {
       console.log('\n👆 Please log in to Trello in the browser window.');
+      console.log('   Use email/password login (not Google SSO) to avoid bot-detection block.');
       console.log('   Waiting up to 3 minutes for you to complete login...\n');
 
       const deadline = Date.now() + 3 * 60 * 1000;
