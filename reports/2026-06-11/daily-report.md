@@ -259,13 +259,13 @@ All 6 accounts checked. ✓ All 6 mail checklist items marked complete.
 
 | Developer | Today | Weekly | Leave | Action |
 |-----------|-------|--------|-------|--------|
-| LongVV | 0h (leave) | 8h W30 (Jun 8 via Workstream) | Emergency leave approved | ✓ Skip — leave approved |
+| LongVV | 0h Maddy | 8h W30 (Jun 8 via Workstream) | — | ✓ Skip — working OhCleo/Celine Jun 10 (not Maddy), Matrix confirmed active |
 | PhucVT | 0h | — | Nghỉ cả ngày | ✓ Leave day — skip |
 | TuanNT | 8h (Paturevision) | — | — | ✓ Skip |
 | LeNH | 8h (Rory:7+Franc:1) | — | — | ✓ Skip |
 | KhanhHH | 7.5h | — | — | ✓ Skip (0.5h below target, no leave noted) |
 
-**LongVV:** Emergency leave Jun 9 (father stroke/ER). Returned Jun 10 — working on OhCleo project (Matrix: active in Celine-OhCleo room, multiple PRs). W30 Maddy: 8h Jun 8 via Workstream. No reminder needed.
+**LongVV:** Jun 9 = emergency leave. Jun 10 = returned, working OhCleo/Celine (Matrix confirmed). Maddy sheet shows 0h Jun 10 — expected (not on Maddy that day). No reminder needed.
 
 
 ## Matrix — 09:37 (+07:00)
