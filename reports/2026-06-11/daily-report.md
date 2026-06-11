@@ -1,7 +1,25 @@
-# Daily Report — 2026-06-11 (+07:00)
+# Daily Report — Thursday, June 11, 2026
 
 **Window:** 2026-06-10 05:00 +07:00 → 2026-06-11 05:00 +07:00
-**Generated:** 2026-06-11 05:00 +07:00 (cron)
+**Generated:** 2026-06-11 05:00 +07:00 (cron) | **Corrected:** 09:40 +07:00
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Email carrick@ | ⚠️ Generator pipeline FAILED — staging + stagingPhase2 + release-be-jun-2026-batch-2 |
+| 2 | Email rick@ | ⚠️ FirstProject production errors #1018 + #1019 (Uncaught React errors) |
+| 3 | Email nick@ | ⚠️ John Yi Xero — "Warning of reaching xero limit" |
+| 4 | Matrix | ⚠️ OhCleo BE slow — customer complained, DuongDN fixed 16:05 ✅; PR #14 still needs review |
+| 5 | Matrix | ⚠️ BXR estimate risk — 177.5h charged vs 189h est; membership blocked (Mindbody out-of-office until Jun 22) |
+| 6 | Matrix | ⚠️ Elena AA2/AA3 — DongNV API format change broke FE, hotfixed; AA3 scope dispute; AA2 payment pending |
+| 7 | Matrix | ⚠️ Elena Digital Plant — all 3 studio servers unstable Jun 10; TienND2 restoring Jun 11 |
+| 8 | Sheets (corrected) | ~~VietPH leave day~~ → VietPH **8h** Jun 10 ✓ (cron applied Jun 9 leave note to Jun 10) |
+| 9 | Fountain | ⚠️ #2615 over-estimate 790–890% STILL GROWING; #2627: 1550% over |
+
+**Cron false alarms:** LongVV "0h/unavailable" → W30 8h Jun 8 Maddy + active OhCleo Jun 10. Upwork "expired" → sessions fine.
 
 ---
 
@@ -101,8 +119,8 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 |-----------|-------|-------|--------|
 | TuanNT | 8h (Paturevision) | — | ✓ Combined > 0h (JohnYi: 0h, Rebecca: 0h, Paturevision: 8h, Neural: 0h) |
 | PhucVT | 0h (AnhNH2: 4h) | Nghỉ cả ngày | ✓ Leave day OK |
-| VietPH | 0h (on leave) | Nghỉ cả ngày | ✓ Leave day OK — VuTQ logged 8h + NamNN 4h on Paturevision project (team coverage) |
-| KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 12.5h |
+| VietPH | 8h (Paturevision) | — | ✓ Worked Jun 10 — cron wrong (applied Jun 9 leave note to Jun 10) |
+| KhanhHH | 4.5h (Generator) | — | ✓ Weekly: 20h (Generator 16h + Aysar 4h) |
 | LeNH | 8h (Rory:7 + Franc:1) | — | ✓ Combined OK |
 | LongVV | 0h (leave) | Emergency leave (father stroke, ER Jun 9) | ✓ W30: 8h Jun 8 via Workstream. Leave approved — no reminder needed. |
 
@@ -366,7 +384,7 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 
 ### Normal / no action:
 - PhucVT: leave day OK
-- VietPH: leave day OK, VuTQ covering
+- VietPH: 8h Jun 10 ✓
 - TuanNT: 8h Paturevision (JohnYi/Rebecca/Scrin all 0h but combined OK)
 - KhanhHH: 4.5h (half-day or reduced load)
 - AirAgri: Vinn + Jeff both reported
