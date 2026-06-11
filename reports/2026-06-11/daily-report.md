@@ -251,44 +251,51 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 
 ---
 
-## Trello — OhCleo App (app-20) — 09:29 (+07:00)
+## Trello — OhCleo App (app-20) — 09:35 (+07:00)
 
 **Board:** OhCleo App first approach | `trello.com/b/Fv7eDVgT/app-20` | Account: tony@nustechnology.com
-**Access method:** browser_cookie3 (Profile 25) — no API token, web session only
+**Access:** browser_cookie3 (Profile 25) — no API token, web session only
 
-| List | Cards | Notes |
+| List | Cards | Stuck |
 |------|-------|-------|
-| General todo | 13 | 2 cards 5d+ inactive |
-| To do priority upcoming week | 1 | Backend question and update (3d) |
-| In Progress | 4 | All active (0d) |
-| Dev Done | 8 | 5 recent cards |
-| Ready to test | 13 | ⚠️ 10 cards 5d+ stuck |
-| Testing | 6 | ⚠️ 4 cards 191–222d stuck |
-| Ready for Publish | 0 | Empty |
+| General todo | 13 | 10 (incl. 4 critical security) |
+| To do priority upcoming week | 1 | 0 |
+| In Progress | 3 | 0 |
+| Dev Done | 9 | 0 |
+| Ready to test | 13 | 13 (incl. 2 security, 2 legacy 156d) |
+| Testing | 6 | 5 (zombie 191–222d) |
+| Ready for Publish | 0 | — |
 | Done | 79 | — |
 
-**In Progress (4 cards):**
-- Subscription Page Redesign
+**In Progress (3 cards):**
 - Logic when showing tracks in the onboarding
 - Subscription registration validation error
-- Fix back navigation not working on some screens (Ex: track detail)
+- Fix back navigation not working on some screens
 
-**⚠️ Stuck in Testing (very old — needs attention):**
+**🚨 Critical security (General todo, 5d — unactioned):**
+- Critical Authentication Bypass: ADMIN_PASSWORD Misconfiguration — https://trello.com/c/cqs0s6PE
+- Critical Security Misconfiguration: Wildcard ALLOWED_HOSTS + Credentialed CORS — https://trello.com/c/1IsQplbO
+- Possible Security Issue: Shared Universal Password — https://trello.com/c/1wdp9Fjl
+- Security Issue: Password Reset Codes Never Expire — https://trello.com/c/4D7QyLU8
+
+**⚠️ Stuck in Testing (zombie — 191–222d):**
 - Home API [Home Page] — **222d** — https://trello.com/c/TetuRSgh
 - Read/Unread on Message — **222d** — https://trello.com/c/eahOwh62
 - Updating Messaging Functionality — **208d** — https://trello.com/c/humSSIvu
 - All IAP flows — **196d** — https://trello.com/c/7q6bAgST
 - Recent Tracks — **191d** — https://trello.com/c/Z9rICJQs
-- Recent-track/suggest-medias APIs not on production — 1d
 
-**⚠️ Stuck in Ready to test (security items, 8d):**
-- [Security] Harden CORS and Host Validation — https://trello.com/c/n2NYFcmA
-- [Security] Prevent Admin Login Bypass — https://trello.com/c/LwkB9RUr
-- Persistent Login / Session Handling Bug — https://trello.com/c/xNEIRlae
+**⚠️ Stuck in Ready to test:**
+- [Security] Harden CORS and Host Validation — 8d — https://trello.com/c/n2NYFcmA
+- [Security] Prevent Admin Login Bypass — 8d — https://trello.com/c/LwkB9RUr
+- Persistent Login / Session Handling Bug — 8d — https://trello.com/c/xNEIRlae
+- Deploy old app — **156d** — https://trello.com/c/mdTCaDLm
+- Gems — **156d** — https://trello.com/c/8oWIFd6w
 
 **Alerts:**
-- ⚠️ 4 cards stuck in Testing 191–222 days — likely zombie cards, needs triage
-- ⚠️ 2 unresolved security cards (CORS hardening, admin login bypass) in Ready to test 8d
+- 🚨 4 CRITICAL SECURITY cards in General todo (5d unactioned) — auth bypass, wildcard CORS, shared password, no-expiry reset codes
+- ⚠️ 5 zombie cards in Testing 191–222d — needs triage/close
+- ⚠️ 2 security items stuck in Ready to test 8d — awaiting QC sign-off
 
 ---
 
@@ -299,6 +306,8 @@ Matrix token expired at cron time (05:00). OIDC refresh also invalid. SSO re-log
 ### Alerts requiring action:
 1. ⚠️ **Generator CI/CD**: Staging + release pipelines failing — Elliott off, Violet/Carrick covering
 2. ℹ️ **LongVV**: Emergency leave Jun 9+ (father stroke/ER). W30: 8h Jun 8 confirmed via Workstream. Leave approved — no action needed.
+3. 🚨 **OhCleo security**: 4 critical security cards in General todo (5d, unactioned) — ADMIN_PASSWORD bypass, wildcard CORS+CORS credentials, shared password, no-expiry reset codes
+4. ⚠️ **OhCleo Testing**: 5 zombie cards stuck 191–222d — needs client triage to close or re-open
 3. ⚠️ **Fountain #2615**: 790–890% over-estimate, still growing. Task #2627: 1550% over.
 4. ⚠️ **Fountain customer bug**: mike62798179 — scheduled order wrong delivery (order #4807858VH)
 5. ⚠️ **Xtreme/Kai**: Task 431 time overrun acknowledged; LIFM2-409 marked urgent
