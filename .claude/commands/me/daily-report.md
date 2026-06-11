@@ -315,6 +315,30 @@ Supports individual developer targeting:
 - 0h with no leave note → ALERT
 - Only count "Task dự án" rows; skip "Part-time" rows in column A
 
+**Maddy JIRA cross-check (run after LongVV hours confirmed > 0):**
+```bash
+node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]  # defaults to PREV_DATE
+```
+For each JIRA ticket found in the task log for that date, verifies:
+1. ✅ Ticket has original estimate set (`timeoriginalestimate > 0`)
+2. ✅ Ticket has actual time logged on JIRA (`timespent > 0`)
+3. ✅ est >= actual (not over-budget)
+
+Alerts to raise if any check fails:
+- **No est**: ticket has no estimate → dev must set one before logging time
+- **No actual**: hours in task log but JIRA has 0 logged → dev must log time on ticket
+- **Over budget**: actual > est → flag to PM for review / re-estimate
+
+Output is JSON; include in report as:
+```
+## Sheets — Maddy JIRA check — {HH:MM} (+07:00)
+| Ticket | Summary | Est | Actual (JIRA) | Task Log | Status |
+|--------|---------|-----|---------------|----------|--------|
+| LIFM2-NNN | ... | Xh | Yh | Zh | ✅ / ⚠️ no est / ⚠️ no actual / ⚠️ over Zh |
+{Alerts if any.}
+```
+Skip this check if LongVV = 0h or on leave.
+
 **Report — always append to daily report:**
 ```
 ## Sheets [developer|all] — {HH:MM} (+07:00)
