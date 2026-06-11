@@ -143,8 +143,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH also logs Aysar; Upwork billed under LeNH (sub-contract); Aysar uses non-calendar W
-- [feedback_khanhhh_weekly_owner_specific.md](feedback_khanhhh_weekly_owner_specific.md) — **Never use project Summary tab for any dev's weekly total — filter by owner col G across ALL sheets**
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — Aysar Upwork billed under LeNH (sub-contract); KhanhHH daily total = scan ALL sheets, not just Generator+Aysar
+- [feedback_khanhhh_weekly_owner_specific.md](feedback_khanhhh_weekly_owner_specific.md) — **NEVER use Summary tab for any dev — filter by owner col G across ALL sheets (Summary = all-devs total, caused 80h bug)**
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected
