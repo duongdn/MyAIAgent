@@ -11,7 +11,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [reference_trello_gate_mapping.md](reference_trello_gate_mapping.md) — **Exact gate sources per Check Progress item. Check this before completing OR skipping any item.**
 - [feedback_leave_day_handling.md](feedback_leave_day_handling.md) — **"Nghỉ cả ngày" / "Nghỉ nửa ngày" → pro-rate weekly target before computing shortfall.** Never write `actual vs full_target` when any leave day exists.
 - [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is **already** the grand total; never also sum per-employee Actual cols (caused 2× bug 2026-05-11).
-- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — Devs no longer have static project assignments — **scan ALL sheets, aggregate by Owner col G**.
+- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **ALL devs scan ALL 11 sheets by owner col G — NEVER use Summary tab total (all-devs sum); never hardcode dev→sheet**
 - [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly before flagging / reminding.
 - [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond explicit scope.
 - [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Run `scripts/matrix-token-refresh.js` BEFORE claiming Matrix token expired.
@@ -144,7 +144,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — Aysar Upwork billed under LeNH (sub-contract); KhanhHH daily total = scan ALL sheets, not just Generator+Aysar
-- [feedback_khanhhh_weekly_owner_specific.md](feedback_khanhhh_weekly_owner_specific.md) — **NEVER use Summary tab for any dev — filter by owner col G across ALL sheets (Summary = all-devs total, caused 80h bug)**
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected
