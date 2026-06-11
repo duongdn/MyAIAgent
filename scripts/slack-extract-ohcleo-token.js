@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Extract OhCleo Slack xoxc token using Tony's existing session (d cookie from Chrome Profile 25).
- * Injects session cookie into headless browser, navigates to workspace, intercepts API token.
+ * Extract OhCleo Slack xoxc token — runs fully headless, no screen interaction.
+ * Injects ALL Profile 25 Slack cookies (device trust + session) so Slack skips 2FA.
+ * Intercepts the xoxc token from API requests made by the Slack web app on load.
  *
  * Prerequisites: run decrypt-secrets.sh first.
  * Usage: node scripts/slack-extract-ohcleo-token.js
@@ -16,16 +17,17 @@ const https = require('https');
 
 puppeteer.use(StealthPlugin());
 
-const PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'slack-profiles', 'ohcleo');
-const CONFIG_PATH = path.join(__dirname, '..', 'config', '.slack-accounts.json');
-const HELPER_PY   = path.join(__dirname, 'get-slack-d-cookie.py');
-const PYTHON      = path.join(__dirname, '..', '.claude', 'skills', '.venv', 'bin', 'python3');
-const sleep       = ms => new Promise(r => setTimeout(r, ms));
+const PROFILE_DIR  = path.join(__dirname, '..', 'tmp', 'slack-profiles', 'ohcleo');
+const CONFIG_PATH  = path.join(__dirname, '..', 'config', '.slack-accounts.json');
+const COOKIES_FILE = '/tmp/slack-all-cookies.json';
+const PYTHON       = path.join(__dirname, '..', '.claude', 'skills', '.venv', 'bin', 'python3');
+const COOKIE_PY    = path.join(__dirname, 'get-slack-all-cookies.py');
+const sleep        = ms => new Promise(r => setTimeout(r, ms));
 
-function getDCookie() {
-  const res = spawnSync(PYTHON, [HELPER_PY], { encoding: 'utf8' });
-  if (res.status !== 0) throw new Error('get-slack-d-cookie.py failed: ' + res.stderr);
-  return res.stdout.trim();
+function extractCookies() {
+  const res = spawnSync(PYTHON, [COOKIE_PY], { encoding: 'utf8' });
+  if (res.status !== 0) throw new Error('Cookie extraction failed: ' + res.stderr);
+  return JSON.parse(fs.readFileSync(COOKIES_FILE, 'utf8'));
 }
 
 function apiTest(token, dCookie) {
@@ -43,12 +45,13 @@ function apiTest(token, dCookie) {
 }
 
 (async () => {
-  const dCookie = getDCookie();
+  console.log('Extracting all Slack cookies from Chrome Profile 25...');
+  const cookies = extractCookies();
+  const dCookie = cookies.find(c => c.name === 'd')?.value || '';
   if (!dCookie.startsWith('xoxd-')) {
-    console.error('Invalid d cookie:', dCookie.slice(0, 20));
-    process.exit(1);
+    console.error('No valid d cookie found'); process.exit(1);
   }
-  console.log('d cookie:', dCookie.slice(0, 25) + '...');
+  console.log(`Got ${cookies.length} cookies. d=${dCookie.slice(0, 25)}...`);
 
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
 
@@ -56,8 +59,15 @@ function apiTest(token, dCookie) {
     headless: 'new',
     executablePath: '/usr/bin/google-chrome',
     userDataDir: PROFILE_DIR,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--window-size=1280,900'],
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-blink-features=AutomationControlled',
+      '--window-size=1280,900',
+    ],
     defaultViewport: { width: 1280, height: 900 },
+    ignoreDefaultArgs: ['--enable-automation'],
   });
 
   let xoxcToken = null;
@@ -65,13 +75,23 @@ function apiTest(token, dCookie) {
   try {
     const page = await browser.newPage();
 
-    // Inject Tony's session cookie
-    await page.setCookie(
-      { name: 'd',   value: dCookie,       domain: '.slack.com', path: '/', secure: true, httpOnly: true },
-      { name: 'd-s', value: '1781147530',  domain: '.slack.com', path: '/', secure: true },
-    );
+    // Override webdriver detection
+    await page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+    });
 
-    // Intercept requests to capture workspace-specific xoxc token
+    // Set ALL slack cookies including device-trust cookie (b=...)
+    await page.setCookie(...cookies.map(c => ({
+      name:     c.name,
+      value:    c.value,
+      domain:   c.domain,
+      path:     c.path,
+      secure:   c.secure,
+      httpOnly: c.httpOnly,
+      sameSite: 'None',
+    })));
+
+    // Intercept API calls to capture xoxc token
     await page.setRequestInterception(true);
     page.on('request', req => {
       const auth = req.headers()['authorization'] || '';
@@ -88,16 +108,23 @@ function apiTest(token, dCookie) {
       timeout: 30000,
     }).catch(e => console.log('Nav note:', e.message.slice(0, 60)));
 
-    // Wait up to 15s for API calls to fire
-    for (let i = 0; i < 15 && !xoxcToken; i++) await sleep(1000);
+    // Wait up to 20s for API calls
+    for (let i = 0; i < 20 && !xoxcToken; i++) {
+      await sleep(1000);
+      if (i % 5 === 4) console.log(`Waiting... ${i + 1}s | URL: ${page.url().slice(0, 70)}`);
+    }
 
+    // Fallback: scan page source and localStorage
     if (!xoxcToken) {
-      // Fallback: try page source and localStorage
       xoxcToken = await page.evaluate(() => {
+        // Check TS global object
+        if (typeof TS !== 'undefined' && TS.boot_data?.api_token) return TS.boot_data.api_token;
+        // Check page scripts
         for (const s of document.querySelectorAll('script')) {
           const m = s.textContent.match(/"token":"(xoxc-[^"]+)"/);
           if (m) return m[1];
         }
+        // Check localStorage
         try {
           for (const k of Object.keys(localStorage)) {
             const v = localStorage.getItem(k) || '';
@@ -116,12 +143,11 @@ function apiTest(token, dCookie) {
   }
 
   if (!xoxcToken) {
-    console.error('\n❌ Could not extract xoxc token — session may not have OhCleo Slack access');
-    console.error('   Tony may need to open ohcleo.slack.com in Chrome first to refresh the session.');
+    console.error('\n❌ Could not extract xoxc token');
+    console.error('   Slack may still require device verification for this profile copy.');
     process.exit(1);
   }
 
-  // Verify token
   const check = await apiTest(xoxcToken, dCookie);
   if (!check.ok) {
     console.error('Token verification failed:', check.error);
@@ -129,7 +155,6 @@ function apiTest(token, dCookie) {
   }
   console.log(`\n✅ Token verified: workspace=${check.team}, user=${check.user}`);
 
-  // Update config/.slack-accounts.json
   const config   = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
   const accounts = config.accounts;
   const idx      = accounts.findIndex(a => (a.workspace || '').toLowerCase().includes('ohcleo'));
@@ -142,13 +167,8 @@ function apiTest(token, dCookie) {
     login:     { note: 'Tony Profile 25 — refresh via: node scripts/slack-extract-ohcleo-token.js' },
   };
 
-  if (idx >= 0) {
-    accounts[idx] = entry;
-    console.log('Updated existing OhCleo entry in config');
-  } else {
-    accounts.push(entry);
-    console.log('Added new OhCleo entry to config');
-  }
+  if (idx >= 0) { accounts[idx] = entry; console.log('Updated existing OhCleo entry'); }
+  else          { accounts.push(entry);   console.log('Added new OhCleo entry'); }
 
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
   console.log('Saved. Re-encrypt: bash scripts/encrypt-secrets.sh');
