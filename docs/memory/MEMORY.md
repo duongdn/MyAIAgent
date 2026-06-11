@@ -40,7 +40,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV project assignments change weekly — check Matrix Monday plan (W30: 16h Maddy + 15h Celine/OhCleo)
 - [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
-- [project_vutq_moved_to_bailey.md](project_vutq_moved_to_bailey.md) — VuTQ moved to Bailey (Paturevision) as of 2026-05-13; 0h in Fountain is expected
 - [project_php_team.md](project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH
 
 ---
@@ -133,7 +132,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ## Per-Developer Rules
 ### LongVV
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; check Matrix weekly plan for current project split
-- [feedback_longvv_not_rebecca.md](feedback_longvv_not_rebecca.md) — LongVV sheets = Maddy + James Diamond (NOT Rebecca); W30: also Celine/OhCleo
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**4 sheets**: JohnYi+Rebecca+Paturevision+Neural) blocks John Yi+Rebecca+Bailey. Any one = no alert.
