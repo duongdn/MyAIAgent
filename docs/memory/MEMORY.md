@@ -32,7 +32,6 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, weekly report comparison
 - [reference_mpfc_github.md](reference_mpfc_github.md) — MPFC GitHub repo is mypersonalfootballcoach/wp (not nustechnology/...)
 - [project_monday_report_sheets.md](project_monday_report_sheets.md) — All 8 Monday report sheet IDs (Neural/LegalAtoms/Taraba DO have sheets)
-- [project_maddy_new_tasklog.md](project_maddy_new_tasklog.md) — Maddy task log = sheet 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I (since 2026-04-06)
 
 ## Project (Dynamic State)
 - [project_timezone_utc7.md](project_timezone_utc7.md) — All time references use UTC+7 (Vietnam/ICT); convert by subtracting 7h for cron/UTC
