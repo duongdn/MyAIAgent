@@ -108,10 +108,8 @@ Date checked: 2026-06-10 (PREV_DATE). All hourly figures are for that date.
 
 **Upwork weekly hours:** Session renewal required (Puppeteer /tmp write permission denied). Neural Contract silence = OK per policy.
 
-**Trello gates (TuanNT-dependent):**
-- John Yi (TuanNT): 8h combined ✓ → gate passes
-- Bailey (TuanNT): 8h combined ✓ → gate passes
-- Rebecca (TuanNT): 8h combined ✓ → gate passes
+**TuanNT combined: 8h (Paturevision) — 0h on JohnYi/Rebecca/Neural sheets specifically.**
+Rule: combined > 0h = John Yi + Bailey + Rebecca gates unblocked. ✓
 
 
 ## Upwork — 05:18 (+07:00)
