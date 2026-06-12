@@ -35,6 +35,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Project (Dynamic State)
 - [project_timezone_utc7.md](project_timezone_utc7.md) — All time references use UTC+7 (Vietnam/ICT); convert by subtracting 7h for cron/UTC
+- [project_leave_plan_system.md](project_leave_plan_system.md) — **Leave plan**: run parse-leave-emails.js in email piece; check config/leave-plan.json BEFORE task log checks
 - [project_daily_report_workflow.md](project_daily_report_workflow.md) — Full daily report workflow: data sources, Trello mappings, configs
 - [project_alert_cron_setup.md](project_alert_cron_setup.md) — Alert cron: 30 min interval, env requirements, rate-limit detection
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV project assignments change weekly — check Matrix Monday plan (W30: 16h Maddy + 15h Celine/OhCleo)

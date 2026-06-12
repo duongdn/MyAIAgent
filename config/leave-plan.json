@@ -1,0 +1,20 @@
+{
+  "description": "Approved leave dates for all monitored team members. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
+  "last_updated": "2026-06-12T09:10:00+07:00",
+  "leaves": [
+    {
+      "id": "haonv-2026-06-10",
+      "dev_id": "HaoNV",
+      "dev_email": "haonv@nustechnology.com",
+      "dates": ["2026-06-10"],
+      "type": "full",
+      "reason": "dental appointment",
+      "status": "approved",
+      "requested_at": "2026-06-09T15:02:00+07:00",
+      "approved_by": "binhnt@nustechnology.com",
+      "approved_at": "2026-06-09T15:03:00+07:00",
+      "email_subject": "HaoNV_Đơn Xin Nghỉ Phép_Ngày 10/06/2026",
+      "note": "Dental appointment. Approved by Binh."
+    }
+  ]
+}
