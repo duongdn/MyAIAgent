@@ -21,31 +21,21 @@ const path = require("path");
 const EMAIL_CFG_PATH = path.join(__dirname, "..", "config", ".email-accounts.json");
 const LEAVE_PLAN_PATH = path.join(__dirname, "..", "config", "leave-plan.json");
 
-// Map email prefix → monitoring dev ID
+// Monitored PHP team ONLY — ignore all other senders
+const MONITORED_DEVS = new Set(["LongVV", "PhucVT", "TuanNT", "KhanhHH", "LeNH", "VietPH"]);
+
+// Map email prefix → monitoring dev ID (monitored team only)
 const EMAIL_TO_DEV_ID = {
-  longvv:   "LongVV",
-  phucvt:   "PhucVT",
-  tuannt:   "TuanNT",
-  khanhhh:  "KhanhHH",
-  lenh:     "LeNH",
-  vietph:   "VietPH",
-  haonv:    "HaoNV",
-  tuanntg:  "TuanNTG",
-  datnt:    "DatNT",
-  vutq:     "VuTQ",
-  thinht:   "ThinhT",
-  vitht:    "ViTHT",
-  hungpn:   "HungPN",
-  hasv:     "HaVS",
-  phatdlt:  "PhatDLT",
-  kietnh:   "KietNHT",
-  anhnhtl:  "AnhNHTL",
-  duyvna:   "DuyVNA",
-  namnn:    "NamNN",
-  hiepnt:   "HiepNT",
+  longvv:  "LongVV",
+  phucvt:  "PhucVT",
+  tuannt:  "TuanNT",
+  khanhhh: "KhanhHH",
+  lenh:    "LeNH",
+  vietph:  "VietPH",
 };
 
 // Approval senders (managers/HR who approve leave)
+// Also includes duongdn himself — approvals often sent from his own Sent folder
 const APPROVAL_SENDERS = ["binhnt@", "duongdn@", "namtv@", "hr@", "admin@"];
 // Keywords that indicate approval in reply body
 const APPROVAL_KEYWORDS = ["ok em", "ok nhé", "ok nha", "được rồi", "đồng ý", "approved",
@@ -177,6 +167,43 @@ function listMode() {
   }
 }
 
+function searchBox(imap, box, sinceStr, searchTerms) {
+  return new Promise((resolve, reject) => {
+    imap.openBox(box, true, (err) => {
+      if (err) return resolve([]); // skip missing box silently
+
+      const allUids = new Set();
+      let pending = searchTerms.length;
+
+      searchTerms.forEach(term => {
+        imap.search(["SINCE", sinceStr, "SUBJECT", term], (err, uids) => {
+          if (!err && uids) uids.forEach(uid => allUids.add(uid));
+          if (--pending === 0) {
+            const uidList = [...allUids];
+            if (!uidList.length) return resolve([]);
+
+            const emails = [];
+            const fetch = imap.fetch(uidList, { bodies: "" });
+            fetch.on("message", (msg) => {
+              const chunks = [];
+              msg.on("body", (stream) => {
+                stream.on("data", d => chunks.push(d));
+                stream.on("end", () => {
+                  simpleParser(Buffer.concat(chunks))
+                    .then(parsed => emails.push({ ...parsed, _box: box }))
+                    .catch(() => {});
+                });
+              });
+            });
+            fetch.once("error", reject);
+            fetch.once("end", () => resolve(emails));
+          }
+        });
+      });
+    });
+  });
+}
+
 async function fetchEmails(account) {
   return new Promise((resolve, reject) => {
     const imap = new Imap({
@@ -189,54 +216,71 @@ async function fetchEmails(account) {
       authTimeout: 15000,
     });
 
-    const emails = [];
+    imap.once("ready", async () => {
+      const since = new Date();
+      since.setDate(since.getDate() - 90);
+      const sinceStr = since.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).replace(/ /g, "-");
 
-    imap.once("ready", () => {
-      imap.openBox("INBOX", true, (err) => {
-        if (err) { imap.end(); return reject(err); }
+      // ASCII-safe search terms
+      const leaveTerms = ["nghi", "phep", "leave"];
+      // Also search by monitored dev sender names in INBOX
+      const senderTerms = ["longvv", "phucvt", "tuannt", "khanhhh", "lenh", "vietph"];
 
-        // Search last 90 days for candidate emails
-        const since = new Date();
-        since.setDate(since.getDate() - 90);
-        const sinceStr = since.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }).replace(/ /g, "-");
-
-        // Search multiple ASCII-safe terms
-        const searches = [
-          ["SINCE", sinceStr, "SUBJECT", "nghi"],
-          ["SINCE", sinceStr, "SUBJECT", "phep"],
-          ["SINCE", sinceStr, "SUBJECT", "leave"],
-          ["SINCE", sinceStr, "SUBJECT", "off"],
-        ];
-
-        let allUids = new Set();
-        let pending = searches.length;
-
-        searches.forEach(criteria => {
-          imap.search(criteria, (err, uids) => {
-            if (!err && uids) uids.forEach(uid => allUids.add(uid));
-            if (--pending === 0) {
-              const uidList = [...allUids];
-              if (!uidList.length) { imap.end(); return resolve([]); }
-
-              const fetch = imap.fetch(uidList, { bodies: "" });
-              fetch.on("message", (msg) => {
-                const chunks = [];
-                msg.on("body", (stream) => {
-                  stream.on("data", d => chunks.push(d));
-                  stream.on("end", () => {
-                    simpleParser(Buffer.concat(chunks)).then(parsed => emails.push(parsed)).catch(() => {});
+      try {
+        // INBOX: leave-related subjects + monitored dev senders
+        const inboxBySubject = await searchBox(imap, "INBOX", sinceStr, leaveTerms);
+        const inboxBySender = await Promise.all(
+          senderTerms.map(s => new Promise((res) => {
+            imap.openBox("INBOX", true, () => {
+              imap.search(["SINCE", sinceStr, "FROM", s], (err, uids) => {
+                if (err || !uids || !uids.length) return res([]);
+                const emails = [];
+                const fetch = imap.fetch(uids, { bodies: "" });
+                fetch.on("message", (msg) => {
+                  const chunks = [];
+                  msg.on("body", (stream) => {
+                    stream.on("data", d => chunks.push(d));
+                    stream.on("end", () => {
+                      simpleParser(Buffer.concat(chunks))
+                        .then(p => emails.push({ ...p, _box: "INBOX" }))
+                        .catch(() => {});
+                    });
                   });
                 });
+                fetch.once("end", () => res(emails));
+                fetch.once("error", () => res([]));
               });
-              fetch.once("error", (e) => reject(e));
-              fetch.once("end", () => { imap.end(); });
-            }
-          });
+            });
+          }))
+        );
+
+        // Sent folder: duongdn's own approval replies (Re: + leave keywords)
+        const sentApprovals = await searchBox(imap, "Sent Messages", sinceStr, ["nghi", "phep", "Re"]);
+
+        const all = [
+          ...inboxBySubject,
+          ...inboxBySender.flat(),
+          ...sentApprovals,
+        ];
+
+        // Deduplicate by message-id
+        const seen = new Set();
+        const unique = all.filter(em => {
+          const key = em.messageId || JSON.stringify(em.subject) + em.date;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
         });
-      });
+
+        imap.end();
+        resolve(unique);
+      } catch (e) {
+        imap.end();
+        reject(e);
+      }
     });
 
-    imap.once("end", () => resolve(emails));
+    imap.once("end", () => {});
     imap.once("error", reject);
     imap.connect();
   });
@@ -283,10 +327,11 @@ async function main() {
 
     const isReply = subject.startsWith("Re:") || subject.startsWith("RE:");
 
+    const toAddr = (em.to?.value?.[0]?.address || "").toLowerCase();
     if (isReply) {
-      replies.push({ subject, fromAddr, body, date: em.date });
+      replies.push({ subject, fromAddr, toAddr, body, date: em.date, _box: em._box });
     } else {
-      requests.push({ subject, fromAddr, body, date: em.date });
+      requests.push({ subject, fromAddr, toAddr, body, date: em.date, _box: em._box });
     }
   }
 
@@ -302,20 +347,27 @@ async function main() {
 
   for (const req of requests) {
     const devId = devIdFromEmail(req.fromAddr);
+    if (!MONITORED_DEVS.has(devId)) {
+      process.stderr.write(`  SKIP (not monitored): ${req.fromAddr}\n`);
+      continue;
+    }
     const { dates, type } = parseLeaveInfo(req.subject, req.body);
     if (!dates.length) {
       process.stderr.write(`  SKIP (no dates): ${req.subject}\n`);
       continue;
     }
 
-    // Check for matching approval reply
+    // Check for matching approval reply (INBOX replies + duongdn Sent approvals)
     const baseSubject = req.subject.replace(/^(Re:|RE:)\s*/i, "").trim().toLowerCase();
     const approvalReply = replies.find(r => {
       const replyBase = r.subject.replace(/^(Re:|RE:)\s*/i, "").trim().toLowerCase();
       const senderIsManager = APPROVAL_SENDERS.some(s => r.fromAddr.includes(s));
-      return replyBase.includes(baseSubject.slice(0, 20)) &&
-             senderIsManager &&
-             isApprovalReply(r.body);
+      // Sent-folder match: to field contains dev email, subject matches
+      const isSentApproval = r._box === "Sent Messages" &&
+        (r.toAddr || "").includes(req.fromAddr.split("@")[0]) &&
+        replyBase.includes(baseSubject.slice(0, 15));
+      return (replyBase.includes(baseSubject.slice(0, 20)) && senderIsManager && isApprovalReply(r.body)) ||
+             (isSentApproval && isApprovalReply(r.body));
     });
 
     const status = approvalReply ? "approved" : "pending";
