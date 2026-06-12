@@ -200,3 +200,73 @@ Matrix scan not completed this run. Fountain Part 1 (Matrix plan) also unavailab
 **Action required:** Manual Matrix re-login needed before next cron run.
 Full details: N/A (no matrix-rooms file generated this run)
 
+---
+
+## Matrix — 08:22 (+07:00) *(recheck)*
+
+**Active rooms: 19 / 125 | Messages: 579** *(since 2026-06-11 08:00 +07:00)*
+Full details: reports/2026-06-12/matrix-rooms-0822.md
+
+### ⚠️ Action items for DuongDN (1)
+
+| Room | Time | Message |
+|------|------|---------|
+| Direct Manager | 09:21 | anhnvn: "Này nhớ trước discuss theo plan là sẽ đưa vào dạng gắn tag rồi thống kê, filter theo tag... Dùng cũng dc nhiều use case... Mà ko biết có plan khi nào làm chưa ta." — Asking for timeline on workstream task-tagging feature |
+
+### Key updates
+
+**OhCleo — Android payment fixed, link branding still broken:**
+- HiepNT + LongVV resolved Android subscription package name issue (com.ohcelo.ohcleoapp). PR #15 merged, payment now succeeds.
+- ohcleo.com/app link branding disabled as quick fix. David Nguyen not yet responded.
+- SendGrid password change issue still unresolved.
+
+**Elena - Active Alerts — Server back up after power cut:**
+- nusdev went down overnight (power cut). KietNHT restarted manually. Team discussing automation.
+- TuanNTG onboarding on Elena project. Sam Ha (new FE dev) joined.
+- Multiple Redmine bugs in progress (#79227, #79228, #79237).
+
+**Kunal - Fountain — Bug sprint active:**
+- State names fix (#2854) live. Cart cache bug (#2865) in progress. Snooze/reminder icon bug still open.
+- ViTHT: large feature changes → BETA only, small → direct Live.
+
+**Rory/BXR — Mindbody API migration discussion:**
+- LeNH + KhoaTD investigating v5→v6 migration. v6 dropped username/password login. Proposal to remove signup form.
+- Hours running high — minhtv flagged to report blockers immediately.
+
+**Maddy/Xtreme — LIFM2-409 over-estimate flagged:**
+- LongVV over by 17h (latest Anoma feedback phase not reported to client). duongdn instructed to resume est→approve flow.
+
+**Bailey/Paturevision — Live deploy confirmed:**
+- Console Order Verification & Force Scanning feature went live.
+
+**Other:**
+- BDD Delivery: Multiple leave notices Jun 12-15 (PhucNH, ThangN, TaiTM, DaiDV).
+- NUS Technology: World Cup 2026 starts tomorrow.
+
+---
+
+## Re-check — 08:30 (+07:00)
+
+*Re-checked all ○ incomplete items from cron run. Matrix token refreshed (SSO captured at 08:22).*
+
+| Item | Result | Details |
+|------|--------|---------|
+| James Diamond - Vinn | ✓ completed | Vinn daily report found: 10:29 UTC (17:29 UTC+7) Jun 11 in #airagri_webapp — cron missed it |
+| Franc | ○ still incomplete | 1h only Jun 11 (target 8h), 0 dmetiner messages in RDC Slack after Jun 10, no leave note |
+| Fountain | ○ still incomplete | trinhmtt W30 plan NOT posted in Kunal-Fountain Matrix room this week (searched 300+ msgs back to Jun 9) |
+| Philip | ○ still incomplete | MS Teams script timed out (3min) — login session likely expired |
+| OhCleo | ○ still incomplete | Customer alerts active: link branding broken + SendGrid issue (intentional hold) |
+
+**Cleared:** James Diamond - Vinn ✓
+**Still open:** Franc, Fountain, Philip, OhCleo
+
+### Fountain Part 1 note
+trinhmtt did not post the weekly plan message ("Em update plan tuần này ạ\nViTHT: Xh...") in the Fountain Matrix room for W30 (Jun 9-13). All trinhmtt messages this week are task-level coordination only. Plan absent = alert condition; Fountain item stays ○ incomplete.
+
+### Franc note
+Franc logged 1h on Jun 11 (far below 8h target). No dmetiner activity in RDC - FM Monitoring Slack on Jun 11. No leave note in sheets. LeNH combined = 8.17h (Rory 7.17h + Franc 1h) but Franc item is gated on Franc specifically. Remains ○ incomplete.
+
+### Today's context (Jun 12)
+- TuanNT on leave today (confirmed in Matrix: "Tuấn nay nghĩ :))")
+- PhucVT working remotely (sick, but logged 8h yesterday)
+
