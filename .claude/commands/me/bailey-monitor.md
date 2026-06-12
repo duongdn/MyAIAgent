@@ -437,6 +437,8 @@ After all subtasks complete, mark the "Bailey monitor" Trello card checklist for
 
 3. If a subtask couldn't be completed (e.g. Siteground session expired), mark that item `incomplete` and note the reason in the local report only.
 
+4. **Auto-complete card:** After marking all items, re-fetch the checklist state (`GET /1/cards/{card_id}/checklists?checkItems=all`). If ALL items across ALL checklists are `complete` → mark card done: `PUT /1/cards/{card_id}?dueComplete=true&key={key}&token={token}`
+
 ---
 
 ## Rules
