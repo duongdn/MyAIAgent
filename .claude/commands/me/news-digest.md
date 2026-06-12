@@ -32,7 +32,10 @@ Fetch and synthesize news digest by topic and optional tag filter.
 
 ## Run
 
-Default limit = 100 (đủ để lấy toàn bộ bài từ RSS feed). Chỉ cần truyền `--limit` khi muốn giới hạn khác.
+**Limit mặc định theo topic:**
+- `topic=all` → dùng `--limit=20` (9 topics × nhiều sources × 100 = 1.8MB JSON, vượt context window → chỉ synthesize được ~6/9 topics)
+- `topic=<cụ thể>` → dùng `--limit=100` (1 topic, JSON nhỏ, lấy đủ bài)
+- User truyền `--limit=N` → dùng N (override mọi default ở trên)
 
 ```bash
 python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]
