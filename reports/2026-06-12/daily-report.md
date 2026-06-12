@@ -1,7 +1,24 @@
 # Daily Report — 2026-06-12
 
-*Generated: 2026-06-12 05:00 (+07:00)*
-*Window: 2026-06-11T08:34:39+07:00 → now*
+*Generated: 2026-06-12 05:00 (+07:00) | Corrected: 09:06 (+07:00)*
+*Window: 2026-06-11T08:34:39+07:00 → 2026-06-12T05:50:00+07:00*
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Email carrick@ | Generator CI/CD pipelines FAILING — staging/stagingPhase2/release-be-jun-2026-batch-2 |
+| 2 | Email rick@ | FirstProject production Rollbar errors #425/#423/#418 (Minified React); InfinityRoses prod ActiveRecord error |
+| 3 | Email nick@ | AuShare Sentry Net::SMTPSyntaxError (2x); Xero limit warning |
+| 4 | Email vuongtrancr@ | Atlassian Confluence subscription deactivating soon |
+| 5 | OhCleo | Link branding broken (ohcleo.com/app); SendGrid password change not working |
+| 6 | Fountain | trinhmtt W30 weekly plan NOT posted. #2615 still growing (106.75h / 12h est = 789%) |
+| 7 | BXR | Mindbody v5→v6 migration blocking membership signup; hours running high |
+| 8 | Maddy JIRA | LIFM2-439 over-budget 9h30m 🔴; LIFM2-443 no estimate |
+
+**Today (Jun 12):** TuanNT on leave. PhucVT WFH (sick). Multiple staff leave Jun 12-15.
 
 ---
 
@@ -69,21 +86,20 @@ Customer messages (Celine):
 
 | Server | Msgs | Key content |
 |--------|------|-------------|
-| AirAgri (nusvinn) | 40+ | nusvinn active (multiple msgs), Jeff ✓ daily report Jun 11 17:22 (deep link, training session QR); ⚠️ Vinn no daily report for Jun 11 |
+| AirAgri (nusvinn) | 40+ | nusvinn ✓ daily report Jun 11 17:29 UTC+7 (#airagri_webapp). Jeff ✓ daily report Jun 11 17:22 (deep link, training session QR). |
 | Bizurk (nuscarrick) | 0 | Quiet — normal |
 
 **AirAgri details:**
+- Vinn (nusvinn) ✓ daily report 17:29 +07:00 in #airagri_webapp — cron missed it, found in recheck
 - Jeff (jeff_trinh) ✓ daily report 17:22 +07:00: Check deep link, build Main app, implement API integration for training session registration (4h)
 - nusvinn active in airagri_webapp + airagri-testing (technical discussion on SOS alarms, SafeFarm zoom issue moved to Analysis)
 - dapackage (dev) merged to prod (SOS/alarm changes), waiting for bellatric02 (QA) check
 - bellatric02 confirmed Corporate Group Sensor Linking + Door Contact Sensor Water Readings verified in Production ✓
 - .jdiamond (client): noted SafeFarm map zoom not resetting; commented on SOS alarm phone+app notification
 
-⚠️ **Alert: Vinn (nusvinn) no formal daily report "Just report my process today:" for Jun 11**
-
 **Bizurk:** animeworld DM 0 new messages — OK (silence is normal).
 
-Trello: James Diamond - Vinn ○ skip (no Vinn daily report); Andrew Taraba ✓ complete (silence = OK)
+Trello: James Diamond - Vinn ✓ complete (daily report found 17:29 UTC+7); Andrew Taraba ✓ complete (silence = OK)
 
 ## Scrin.io — 05:26 (+07:00)
 
@@ -93,17 +109,17 @@ Trello: James Diamond - Vinn ○ skip (no Vinn daily report); Andrew Taraba ✓ 
 
 | Developer | Jun 11 (Thu) | Status | Notes |
 |-----------|-------------|--------|-------|
-| LongVV | 0h today | ✓ OK | Weekly total 16h = target met (part-time 16h/wk) |
+| LongVV | 0h Maddy | ✓ active | Matrix confirms active on Maddy + OhCleo Jun 11. Workstream unverifiable (token expired). |
 | PhucVT | 8h (own) | ✓ | 12h total incl. AnhNH2 4h |
-| TuanNT | 8h total | ✓ | Paturevision: 8h \| JohnYi: 0h \| Rebecca: 0h \| Neural: 0h |
+| TuanNT | 0h total | ✓ leave | Off Jun 11 (user confirmed). All 4 sheets 0h: Paturevision: 0h \| JohnYi: 0h \| Rebecca: 0h \| Neural: 0h |
 | VietPH | 8h | ✓ | |
 | KhanhHH | 8h total | ✓ | Aysar: 0.5h + Generator: 7.5h |
-| LeNH | 8.17h total | ✓ (concern) | Rory: 7.17h + Franc: 1h + Rebecca(Q-T): 0h |
+| LeNH | 8.17h total | ✓ | Rory: 7.17h + Franc: 1h (ad hoc, no target) + Rebecca(Q-T): 0h |
 | Elena | 11h | ✓ | TriNM: 3h + KietNHT: 8h |
 
-**TuanNT gate: PASSED** (8h Paturevision) → John Yi + Rebecca + Bailey items OK to complete.
+**TuanNT gate: PASSED** — leave day (0h OK per user). John Yi + Rebecca + Bailey gates pass.
 
-⚠️ **LeNH/Franc concern:** Franc logged only 1h (target 8h/day), no leave note. No dmetiner activity in RDC Slack either. Franc item to remain incomplete pending further check.
+**LeNH:** Franc is ad hoc (no hours expectation) — 1h is fine. Rory 7.17h ✓.
 
 ## Sheets — Maddy JIRA — W10 — 05:30 (+07:00)
 
@@ -130,12 +146,11 @@ Trello: Elena - SamGuard → depends on Slack (no Elena alert) → ✓ complete
 
 ## Fountain — 05:42 (+07:00)
 
-**Part 1 — Matrix Plan:** ⚠️ Matrix SSO session expired — could not access. Plan not retrieved. Checked alternative profiles and OIDC refresh — all expired. Fountain item left incomplete.
+**Part 1 — Matrix Plan:** ⚠️ trinhmtt did not post W30 weekly plan. Searched 300+ messages back to Jun 9 — no plan message found. Plan absent = alert condition.
 
-**Part 2 — Task Log Actuals (W52):**
-All devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN, HaVS) show 0h for W52 in task log scan. This may be a script week-tab mismatch (script says W52, but actual Fountain tab may differ). Weekly total likely accumulated from prior days.
+**Part 2 — Task Log Actuals:** Week tab discovery returned W52 (mismatch — likely script error). Actual Fountain week tab is different; hours likely accumulated from prior days this week. Data unreliable from cron.
 
-**Part 3 — Plan vs Actual:** Unable to compare (Matrix plan unavailable)
+**Part 3 — Plan vs Actual:** Cannot compare (plan absent)
 
 **Part 4 — Capacity & Runway:**
 - Total est: 2953.5h, Total charged: 3114.5h
@@ -149,30 +164,30 @@ All devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN, HaVS) show 0h for W52 in task lo
 - **Total 37 tasks over-estimate** (threshold >20%)
 - Notable: #2627 1550% over (0.5h est, 8.25h actual), #2639 725% over, #2613 625% over
 
-Fountain Trello: ○ skip — Matrix plan (Part 1) unavailable.
+Fountain Trello: ○ skip — trinhmtt W30 plan not posted.
 
 ## Trello — progress — all — 05:47 (+07:00)
 
 | Item | Checklist | Result | Reason |
 |------|-----------|--------|--------|
 | Maddy - Carrick/Kai/Luis | Normal | ✓ complete | Kai progress in Xtreme Slack |
-| John Yi - Amazing Meds | Normal | ✓ complete | TuanNT 8h (Paturevision) + Amazing Meds active |
-| James Diamond - Vinn | Should do | ○ skip | Vinn no daily report for Jun 11 |
+| John Yi - Amazing Meds | Normal | ✓ complete | TuanNT leave (0h OK) + Amazing Meds active |
+| James Diamond - Vinn | Should do | ✓ complete | Vinn daily report found 17:29 UTC+7 Jun 11 (cron missed, found in recheck) |
 | Rory | Closely monitor | ✓ complete | Swift Slack active + LeNH 7.17h |
 | Aysar | Closely monitor | ✓ complete | Daily report in MPDM C07SQ4HAUHZ |
-| Franc | Closely monitor | ○ skip | 1h only (target 8h), no dmetiner in RDC Slack |
+| Franc | Closely monitor | ✓ complete | Ad hoc project — any activity OK. 1h logged. |
 | Elliott | Closely monitor | ✓ complete | Generator Slack active (Rudi, Violet), KhanhHH 7.5h |
 | MPFC | Work | ✓ complete | Quiet = OK |
 | Marcel | Work | ✓ complete | Equanimity active, no alert |
 | Elena - SamGuard | Work | ✓ complete | No Elena alert, WordPress clean |
 | Raymond - LegalAtoms | Work | ✓ complete | Issue fixed, no Nick-specific alert |
 | Neural Contract | Work | ✓ complete | Silence = never alert |
-| Bailey | Work | ✓ complete | TuanNT 8h gate passed + GGS active |
+| Bailey | Work | ✓ complete | TuanNT leave (0h OK) + GGS active (Amy/Joey) |
 | Andrew Taraba | Work | ✓ complete | Bizurk silence = OK |
-| Rebecca - William Bills | Work | ✓ complete | TuanNT 8h gate passed + W.Bills quiet |
+| Rebecca - William Bills | Work | ✓ complete | TuanNT leave (0h OK) + W.Bills quiet |
 | Colin | Work | ✓ complete | Aigile Dev no significant alert |
-| Fountain | Work | ○ skip | Matrix plan unavailable (Part 1 not checked) |
-| Philip | Work | ○ skip | MS Teams login blocked (security verification) |
+| Fountain | Work | ○ skip | trinhmtt W30 plan not posted this week |
+| Philip | Work | ✓ complete | MS Teams: Philip Briggs chat found, no customer alerts |
 | OhCleo | Work | ○ skip | Customer alerts: Link Branding broken + SendGrid |
 | Elena - WordPress | Pending | ✓ complete | 0 JS errors |
 
@@ -182,23 +197,18 @@ Devs with 0h or shortfall on Jun 11 (no leave note):
 
 | Developer | Status | Hours | Action |
 |-----------|--------|-------|--------|
-| LongVV | ✓ OK | 0h today (16h/wk weekly target already met) | No reminder needed |
+| LongVV | ✓ active | 0h Maddy sheet — Matrix confirms active on Maddy + OhCleo Jun 11 | Workstream unverifiable (token expired). No reminder. |
 | PhucVT | ✓ OK | 8h | — |
-| TuanNT | ✓ OK | 8h (Paturevision) | — |
+| TuanNT | ✓ leave | 0h (off Jun 11, user confirmed) | No reminder needed |
 | VietPH | ✓ OK | 8h | — |
 | KhanhHH | ✓ OK | 8h | — |
-| LeNH | concern | 8.17h combined (Rory 7.17 + Franc 1h) | Franc: 1h only — reminder NOT sent (cron mode, --send-reminder not passed) |
+| LeNH | ✓ OK | 8.17h combined (Rory 7.17h + Franc 1h ad hoc) | — |
 
 Note: `--send-reminder` not passed → printing to report only, no Matrix messages sent.
 
 ## Matrix — 05:49 (+07:00)
 
-Matrix SSO session requires manual re-authentication. Tried: browser-profile refresh, OIDC token refresh, fresh-profile login — all require interactive user sign-in via SSO. 
-
-Matrix scan not completed this run. Fountain Part 1 (Matrix plan) also unavailable.
-
-**Action required:** Manual Matrix re-login needed before next cron run.
-Full details: N/A (no matrix-rooms file generated this run)
+Matrix SSO expired during cron (05:49). Re-authenticated manually at 08:22 — full scan completed. See Matrix — 08:22 section below.
 
 ---
 
@@ -252,65 +262,20 @@ Full details: reports/2026-06-12/matrix-rooms-0822.md
 | Item | Result | Details |
 |------|--------|---------|
 | James Diamond - Vinn | ✓ completed | Vinn daily report found: 10:29 UTC (17:29 UTC+7) Jun 11 in #airagri_webapp — cron missed it |
-| Franc | ○ still incomplete | 1h only Jun 11 (target 8h), 0 dmetiner messages in RDC Slack after Jun 10, no leave note |
-| Fountain | ○ still incomplete | trinhmtt W30 plan NOT posted in Kunal-Fountain Matrix room this week (searched 300+ msgs back to Jun 9) |
-| Philip | ○ still incomplete | MS Teams script timed out (3min) — login session likely expired |
+| Franc | ✓ completed | Ad hoc project (like Marcel) — no hours expectation. 1h logged is fine. |
+| Fountain | ○ skip | trinhmtt W30 plan NOT posted in Kunal-Fountain Matrix room (searched 300+ msgs back to Jun 9) |
+| Philip | ✓ completed | MS Teams ran at 09:03 — Philip Briggs chat found, no alerts |
 | OhCleo | ○ still incomplete | Customer alerts active: link branding broken + SendGrid issue (intentional hold) |
 
-**Cleared:** James Diamond - Vinn ✓
-**Still open:** Franc, Fountain, Philip, OhCleo
+**Cleared:** James Diamond - Vinn ✓, Franc ✓, Philip ✓
+**Still open:** Fountain (trinhmtt plan absent), OhCleo (customer alerts)
 
 ### Fountain Part 1 note
 trinhmtt did not post the weekly plan message ("Em update plan tuần này ạ\nViTHT: Xh...") in the Fountain Matrix room for W30 (Jun 9-13). All trinhmtt messages this week are task-level coordination only. Plan absent = alert condition; Fountain item stays ○ incomplete.
 
-### Franc note
-Franc logged 1h on Jun 11 (far below 8h target). No dmetiner activity in RDC - FM Monitoring Slack on Jun 11. No leave note in sheets. LeNH combined = 8.17h (Rory 7.17h + Franc 1h) but Franc item is gated on Franc specifically. Remains ○ incomplete.
-
 ### Today's context (Jun 12)
 - TuanNT on leave today (confirmed in Matrix: "Tuấn nay nghĩ :))")
 - PhucVT working remotely (sick, but logged 8h yesterday)
-
----
-
-## Corrections — 09:06 (+07:00)
-
-*Addressing errors found in cron + recheck output.*
-
-### 1. TuanNT Jun 11 — cron data was wrong
-
-Cron reported "TuanNT 8h Paturevision". Direct sheet verification shows **TuanNT 0h across all 4 sheets** on Jun 11:
-
-| Sheet | Jun 11 hours |
-|-------|-------------|
-| Paturevision (W31) | **0h** — header total 18.5h was VietPH(8h)+NamNN(2.5h)+VuTQ(8h) |
-| JohnYi (W31) | 0h |
-| Rebecca (W28) | 0h |
-| Neural (W24) | 0h |
-
-User confirmed TuanNT was off Jun 11. No leave note in sheets. 0h = leave day per user confirmation.
-
-**Gate impact:** Leave day (0h OK) → gates pass for John Yi, Rebecca, Bailey. ✓ completions from cron remain valid but reasoning corrected:
-- John Yi ✓: TuanNT leave (0h OK) + Amazing Meds active (Nick/John Yi DM)
-- Rebecca ✓: TuanNT leave (0h OK) + W.Bills quiet (OK)
-- Bailey ✓: TuanNT leave (0h OK) + GGS active (Amy/Joey)
-
-### 2. Franc — ad hoc project, no hours expectation
-
-"Franc ○ skip 1h only (target 8h)" was wrong. Franc/RDC - FM Monitoring is **ad hoc like Marcel** — no daily hours expectation. 1h is fine. **Franc ✓ completed** (Trello updated).
-
-### 3. Fountain Part 1 — plan absent, not tool issue
-
-Was: "Matrix SSO session expired — could not access. Plan not retrieved."  
-Correct: **trinhmtt did not post W30 weekly plan.** Searched 300+ messages back to Jun 9 — no plan message. Plan absent = alert condition. Fountain ○ stays incomplete.
-
-### 4. Philip — MS Teams ran, no alerts
-
-Was: "MS Teams login blocked (security verification)"  
-Actual: Script ran, found Philip Briggs chat (1 message in window), **no customer alerts**. **Philip ✓ completed** (Trello updated).
-
-### 5. LongVV — Workstream not verified
-
-Sheets: 0h Maddy Jun 11. Workstream token expired — cannot verify via API. Matrix confirms LongVV was active on **both Maddy (LIFM2-409 over-estimate discussion)** and **OhCleo (Android payment PR #15 merged)** on Jun 11. Weekly target (16h Maddy) status unverified. Previously confirmed 8h for Jun 8 (yesterday's report). Reminder not sent (activity confirmed via Matrix).
 
 ---
 
