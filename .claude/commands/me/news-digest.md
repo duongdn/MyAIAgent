@@ -1,5 +1,5 @@
 ---
-description: News digest — fetch and synthesize news by topic (stocks, vn-stocks, ai, it, finance, vinfast, security) with optional tag filter
+description: News digest — fetch and synthesize news by topic (stocks, vn-stocks, vn-business, ai, it, php, finance, vinfast, security) with optional tag filter
 ---
 
 # News Digest
@@ -32,16 +32,33 @@ Fetch and synthesize news digest by topic and optional tag filter.
 
 ## Run
 
-**Limit mặc định theo topic:**
-- `topic=all` → dùng `--limit=20` (9 topics × nhiều sources × 100 = 1.8MB JSON, vượt context window → chỉ synthesize được ~6/9 topics)
-- `topic=<cụ thể>` → dùng `--limit=100` (1 topic, JSON nhỏ, lấy đủ bài)
-- User truyền `--limit=N` → dùng N (override mọi default ở trên)
+**⚠️ QUAN TRỌNG — Khi `topic=all`: PHẢI fetch từng topic riêng, KHÔNG fetch `all` trong 1 lần.**
 
+Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context window) → Claude chỉ tổng hợp được ~6/9 topics, bỏ sót `it`, `php`, `vinfast`.
+
+**Khi `topic=all` — chạy 9 lệnh riêng, synthesize từng section ngay sau khi nhận kết quả:**
+```bash
+python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
+python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=100
+```
+
+**Khi `topic=<cụ thể>` — fetch 1 lần:**
 ```bash
 python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]
 ```
 
-`--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
+- User truyền `--limit=N` → áp dụng N cho tất cả fetch calls.
+- `--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
+
+**MANDATORY: Khi `topic=all`, output PHẢI có đủ 9 sections:**
+`stocks` · `vn-stocks` · `vn-business` · `ai` · `it` · `php` · `finance` · `vinfast` · `security`
 
 ## Output Format
 
