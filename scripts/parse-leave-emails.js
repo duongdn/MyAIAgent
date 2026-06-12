@@ -176,7 +176,7 @@ function searchBox(imap, box, sinceStr, searchTerms) {
       let pending = searchTerms.length;
 
       searchTerms.forEach(term => {
-        imap.search(["SINCE", sinceStr, "SUBJECT", term], (err, uids) => {
+        imap.search([["SINCE", sinceStr], ["SUBJECT", term]], (err, uids) => {
           if (!err && uids) uids.forEach(uid => allUids.add(uid));
           if (--pending === 0) {
             const uidList = [...allUids];
@@ -232,7 +232,7 @@ async function fetchEmails(account) {
         const inboxBySender = await Promise.all(
           senderTerms.map(s => new Promise((res) => {
             imap.openBox("INBOX", true, () => {
-              imap.search(["SINCE", sinceStr, "FROM", s], (err, uids) => {
+              imap.search([["SINCE", sinceStr], ["FROM", s]], (err, uids) => {
                 if (err || !uids || !uids.length) return res([]);
                 const emails = [];
                 const fetch = imap.fetch(uids, { bodies: "" });

@@ -1,13 +1,23 @@
 {
   "description": "Approved leave dates for monitored PHP team only. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
-  "last_updated": "2026-06-12T10:30:00+07:00",
-  "monitored_devs": ["LongVV", "PhucVT", "TuanNT", "KhanhHH", "LeNH", "VietPH"],
+  "last_updated": "2026-06-13T05:02:00+07:00",
+  "monitored_devs": [
+    "LongVV",
+    "PhucVT",
+    "TuanNT",
+    "KhanhHH",
+    "LeNH",
+    "VietPH"
+  ],
   "leaves": [
     {
       "id": "tuannt-2026-06-11",
       "dev_id": "TuanNT",
       "dev_email": "tuannt@nustechnology.com",
-      "dates": ["2026-06-11", "2026-06-12"],
+      "dates": [
+        "2026-06-11",
+        "2026-06-12"
+      ],
       "type": "full",
       "reason": "gia đình đi du lịch",
       "status": "approved",
@@ -20,7 +30,9 @@
       "id": "lenh-2026-06-12",
       "dev_id": "LeNH",
       "dev_email": "lenh@nustechnology.com",
-      "dates": ["2026-06-12"],
+      "dates": [
+        "2026-06-12"
+      ],
       "type": "full",
       "reason": "gia đình tổ chức chuyến du lịch hè",
       "status": "approved",
@@ -33,7 +45,10 @@
       "id": "khanhhh-2026-06-25",
       "dev_id": "KhanhHH",
       "dev_email": "khanhhh@nustechnology.com",
-      "dates": ["2026-06-25", "2026-06-26"],
+      "dates": [
+        "2026-06-25",
+        "2026-06-26"
+      ],
       "type": "full",
       "reason": "về quê đám giỗ bà ngoại",
       "status": "approved",
@@ -46,7 +61,9 @@
       "id": "lenh-2026-06-03",
       "dev_id": "LeNH",
       "dev_email": "lenh@nustechnology.com",
-      "dates": ["2026-06-03"],
+      "dates": [
+        "2026-06-03"
+      ],
       "type": "full",
       "reason": "bác mất, hỗ trợ gia đình",
       "status": "approved",
@@ -59,7 +76,9 @@
       "id": "phucvt-2026-06-09",
       "dev_id": "PhucVT",
       "dev_email": "phucvt@nustechnology.com",
-      "dates": ["2026-06-09"],
+      "dates": [
+        "2026-06-09"
+      ],
       "type": "full",
       "reason": "việc cá nhân",
       "status": "approved",
@@ -72,7 +91,9 @@
       "id": "vietph-2026-06-09",
       "dev_id": "VietPH",
       "dev_email": "vietph@nustechnology.com",
-      "dates": ["2026-06-09"],
+      "dates": [
+        "2026-06-09"
+      ],
       "type": "full",
       "reason": "nghỉ ngơi",
       "status": "approved",
@@ -85,7 +106,9 @@
       "id": "longvv-2026-05-26",
       "dev_id": "LongVV",
       "dev_email": "longvv@nustechnology.com",
-      "dates": ["2026-05-26"],
+      "dates": [
+        "2026-05-26"
+      ],
       "type": "full",
       "reason": "",
       "status": "approved",
@@ -98,7 +121,9 @@
       "id": "vietph-2026-05-25",
       "dev_id": "VietPH",
       "dev_email": "vietph@nustechnology.com",
-      "dates": ["2026-05-25"],
+      "dates": [
+        "2026-05-25"
+      ],
       "type": "full",
       "reason": "",
       "status": "approved",
@@ -111,7 +136,9 @@
       "id": "longvv-2026-06-03",
       "dev_id": "LongVV",
       "dev_email": "longvv@nustechnology.com",
-      "dates": ["2026-06-03"],
+      "dates": [
+        "2026-06-03"
+      ],
       "type": "half",
       "reason": "đi khám răng",
       "status": "approved",
@@ -119,6 +146,142 @@
       "approved_by": "namtv@nustechnology.com",
       "approved_at": "2026-06-01T00:00:00+07:00",
       "email_subject": "LongVV_Đơn xin nghỉ phép buổi chiều_Ngày 03/06/2026"
+    },
+    {
+      "id": "longvv-2026-03-27",
+      "dev_id": "LongVV",
+      "dev_email": "longvv@nustechnology.com",
+      "dates": [
+        "2026-03-27"
+      ],
+      "type": "half",
+      "reason": "Em đi xả stress",
+      "status": "pending",
+      "requested_at": "2026-03-27T01:49:45.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "LongVV_Đơn xin nghỉ phép buổi chiều_Ngày 27/03/2026"
+    },
+    {
+      "id": "longvv-2026-03-31",
+      "dev_id": "LongVV",
+      "dev_email": "longvv@nustechnology.com",
+      "dates": [
+        "2026-03-31"
+      ],
+      "type": "full",
+      "reason": "Em đi xả stress",
+      "status": "pending",
+      "requested_at": "2026-03-30T01:45:10.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "LongVV_Đơn xin nghỉ phép_Ngày 31/03/2026"
+    },
+    {
+      "id": "longvv-2026-04-24",
+      "dev_id": "LongVV",
+      "dev_email": "longvv@nustechnology.com",
+      "dates": [
+        "2026-04-24"
+      ],
+      "type": "full",
+      "reason": "Em chở mẹ em đi khám tổng quát ạ",
+      "status": "pending",
+      "requested_at": "2026-04-22T02:26:53.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "LongVV_Đơn xin nghỉ phép_Ngày 24/04/2026"
+    },
+    {
+      "id": "phucvt-2026-04-14",
+      "dev_id": "PhucVT",
+      "dev_email": "phucvt@nustechnology.com",
+      "dates": [
+        "2026-04-14"
+      ],
+      "type": "full",
+      "reason": "xin nghỉ phép: Em có việc cá nhân cần giải quyết trong giờ hành chính",
+      "status": "pending",
+      "requested_at": "2026-04-13T10:19:33.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "PhucVT_Đơn xin nghỉ phép_Ngày 14/04/2026"
+    },
+    {
+      "id": "khanhhh-2026-05-29",
+      "dev_id": "KhanhHH",
+      "dev_email": "khanhhh@nustechnology.com",
+      "dates": [
+        "2026-05-29"
+      ],
+      "type": "full",
+      "reason": "nghỉ ngơi",
+      "status": "pending",
+      "requested_at": "2026-05-20T01:31:24.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "KhanhHH - Đơn xin nghỉ phép ngày 29/05/2026"
+    },
+    {
+      "id": "lenh-2026-04-17",
+      "dev_id": "LeNH",
+      "dev_email": "lenh@nustechnology.com",
+      "dates": [
+        "2026-04-17"
+      ],
+      "type": "full",
+      "reason": "em có việc cá nhân cần về quê xử lý vào ngày này",
+      "status": "pending",
+      "requested_at": "2026-04-16T02:52:34.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "LeNH_Đơn xin nghỉ phép ngày 17/04/2026"
+    },
+    {
+      "id": "vietph-2026-03-23",
+      "dev_id": "VietPH",
+      "dev_email": "vietph@nustechnology.com",
+      "dates": [
+        "2026-03-23"
+      ],
+      "type": "full",
+      "reason": "về quê có việc đột xuất",
+      "status": "pending",
+      "requested_at": "2026-03-22T15:47:17.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "VietPH_Đơn xin nghỉ phép_Ngày 23/03/2026"
+    },
+    {
+      "id": "vietph-2026-04-14",
+      "dev_id": "VietPH",
+      "dev_email": "vietph@nustechnology.com",
+      "dates": [
+        "2026-04-14"
+      ],
+      "type": "full",
+      "reason": "có lịch đi khám bệnh",
+      "status": "pending",
+      "requested_at": "2026-04-13T02:57:28.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "VietPH_Đơn xin nghỉ phép_Ngày 14/04/2026"
+    },
+    {
+      "id": "vietph-2026-03-24",
+      "dev_id": "VietPH",
+      "dev_email": "vietph@nustechnology.com",
+      "dates": [
+        "2026-03-24",
+        "2026-03-23"
+      ],
+      "type": "full",
+      "reason": "Lên lại Sài Gòn muộn",
+      "status": "pending",
+      "requested_at": "2026-03-24T01:21:22.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "VietPH_Đơn xin nghỉ phép_Sáng Ngày 24/03/2026"
     }
   ]
 }
