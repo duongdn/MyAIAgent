@@ -270,3 +270,83 @@ Franc logged 1h on Jun 11 (far below 8h target). No dmetiner activity in RDC - F
 - TuanNT on leave today (confirmed in Matrix: "Tuấn nay nghĩ :))")
 - PhucVT working remotely (sick, but logged 8h yesterday)
 
+---
+
+## Corrections — 09:06 (+07:00)
+
+*Addressing errors found in cron + recheck output.*
+
+### 1. TuanNT Jun 11 — cron data was wrong
+
+Cron reported "TuanNT 8h Paturevision". Direct sheet verification shows **TuanNT 0h across all 4 sheets** on Jun 11:
+
+| Sheet | Jun 11 hours |
+|-------|-------------|
+| Paturevision (W31) | **0h** — header total 18.5h was VietPH(8h)+NamNN(2.5h)+VuTQ(8h) |
+| JohnYi (W31) | 0h |
+| Rebecca (W28) | 0h |
+| Neural (W24) | 0h |
+
+User confirmed TuanNT was off Jun 11. No leave note in sheets. 0h = leave day per user confirmation.
+
+**Gate impact:** Leave day (0h OK) → gates pass for John Yi, Rebecca, Bailey. ✓ completions from cron remain valid but reasoning corrected:
+- John Yi ✓: TuanNT leave (0h OK) + Amazing Meds active (Nick/John Yi DM)
+- Rebecca ✓: TuanNT leave (0h OK) + W.Bills quiet (OK)
+- Bailey ✓: TuanNT leave (0h OK) + GGS active (Amy/Joey)
+
+### 2. Franc — ad hoc project, no hours expectation
+
+"Franc ○ skip 1h only (target 8h)" was wrong. Franc/RDC - FM Monitoring is **ad hoc like Marcel** — no daily hours expectation. 1h is fine. **Franc ✓ completed** (Trello updated).
+
+### 3. Fountain Part 1 — plan absent, not tool issue
+
+Was: "Matrix SSO session expired — could not access. Plan not retrieved."  
+Correct: **trinhmtt did not post W30 weekly plan.** Searched 300+ messages back to Jun 9 — no plan message. Plan absent = alert condition. Fountain ○ stays incomplete.
+
+### 4. Philip — MS Teams ran, no alerts
+
+Was: "MS Teams login blocked (security verification)"  
+Actual: Script ran, found Philip Briggs chat (1 message in window), **no customer alerts**. **Philip ✓ completed** (Trello updated).
+
+### 5. LongVV — Workstream not verified
+
+Sheets: 0h Maddy Jun 11. Workstream token expired — cannot verify via API. Matrix confirms LongVV was active on **both Maddy (LIFM2-409 over-estimate discussion)** and **OhCleo (Android payment PR #15 merged)** on Jun 11. Weekly target (16h Maddy) status unverified. Previously confirmed 8h for Jun 8 (yesterday's report). Reminder not sent (activity confirmed via Matrix).
+
+---
+
+## Email — 3 missing accounts — 09:06 (+07:00)
+
+*Window: 2026-06-11T08:34:39+07:00 → 2026-06-12T05:50:00+07:00*
+
+| Account | Emails | Key content |
+|---------|--------|-------------|
+| vuongtrancr@gmail.com | 35 | Atlassian Confluence subscription deactivating soon (Jun 11). 20+ Swish EV charging system support emails (French client, automated). Personal notifications. |
+| dnduongus@gmail.com | 16 | Personal/financial (Vietcombank, UOB, ContentStudio, promotions) — no alerts. |
+| freelancer@mypersonalfootballcoach.com | 2 | MPFC Daily Summary Jun 11: 1 existing `Google_AuthException` (not new). New Relic marketing. |
+
+**Alert:**
+- ⚠️ vuongtrancr: Atlassian Confluence "Your subscription will be deactivated soon" (from Atlassian, Jun 11 09:17). Action: confirm if NUS Confluence subscription needs renewal.
+- freelancer: MPFC 1 existing `Google_AuthException` — same as yesterday, no new errors.
+
+---
+
+## Philip MS Teams — 09:03 (+07:00)
+
+Ran `fetch-msteams-customer-messages.js will "Philip Briggs"` — chat found, 1 message in window, no customer alerts. Trello: Philip ✓ complete.
+
+---
+
+## Yesterday's Alerts — Status vs Jun 11 Report
+
+| Alert (Jun 11) | Today's status |
+|----------------|---------------|
+| Generator CI/CD pipeline failures (carrick@) | 🔴 Still failing — same branches today |
+| FirstProject production Rollbar errors #425/#423/#418 (rick@) | 🔴 Still present today |
+| John Yi Xero limit warning (nick@) | ✅ No new warning email today |
+| OhCleo PR #14 needs review | Status unknown — PR #15 merged Jun 11; PR #14 not mentioned in today's Matrix |
+| BXR estimate risk (177.5h/189h; Mindbody out-of-office Jun 22) | 🔴 Still blocked — Mindbody v5→v6 migration being investigated. Hours still running high. |
+| Elena AA2/AA3 issues | 🟡 In progress — new devs onboarding, bug fixes #79227-#79237 in progress |
+| Elena Digital Plant servers | ✅ Back online — nusdev restarted after power cut |
+| Fountain #2615 over-estimate (GROWING) | 🔴 Still growing — now 106.75h charged (was ~90h yesterday) |
+
+

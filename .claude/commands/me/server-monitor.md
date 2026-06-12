@@ -27,6 +27,7 @@ Check server resources for all managed projects. After each server group check, 
   PUT /1/cards/{cardId}/checkItem/{itemId}?key={key}&token={token}
   Body: {"state":"complete"}
   ```
+- **Auto-complete card:** After marking each item, re-fetch full checklist state (`GET /1/cards/{cardId}/checklists?checkItems=all`). If ALL items across ALL checklists are now `complete` → mark card done: `PUT /1/cards/{cardId}?dueComplete=true&key={key}&token={token}`
 
 ## Report
 
