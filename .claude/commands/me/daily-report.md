@@ -177,6 +177,7 @@ node scripts/fetch-zoho-calendar.js [account]   # omit account for all 6
 - Mark the checklist item(s) for the checked account(s) complete: `PUT /cards/{id}/checkItem/{itemId}?state=complete&key=...&token=...`
 - If checking a single account → complete only that account's item
 - If checking all → complete all 6 items
+- **Auto-complete card:** After marking item(s), fetch full checklist state. If ALL items across ALL checklists are now complete → mark card done: `PUT /1/cards/{cardId}?dueComplete=true&key=...&token=...`
 
 **Report — always append to daily report:**
 Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
@@ -243,6 +244,7 @@ Supports individual workspace targeting:
 - Complete the item(s) mapped to the checked workspace(s) — only if no alerts found
 - If checking a single workspace → complete only that workspace's item
 - If checking all → complete all applicable items per workflow rules
+- **Auto-complete card:** After marking item(s), fetch full checklist state. If ALL items across ALL checklists are now complete → mark card done: `PUT /1/cards/{cardId}?dueComplete=true&key=...&token=...`
 
 **Report — always append to daily report:**
 ```
@@ -548,6 +550,8 @@ Examples:
 - `/daily-report trello mail rick` — complete Rick item only
 
 **Completion rule:** No alert from monitoring source → complete the item. Alert found → leave incomplete, note in report.
+
+**Auto-complete card rule:** After updating any checklist item(s), re-fetch the card's full checklist state (`GET /1/cards/{cardId}/checklists?checkItems=all`). If ALL items across ALL checklists are `complete` → mark the card done: `PUT /1/cards/{cardId}?dueComplete=true`. Applies to both "Check mail" and "Check progress" cards.
 
 **Special items:**
 - **Fountain**: complete ONLY if all 5 parts checked and clean
