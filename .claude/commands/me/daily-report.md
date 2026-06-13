@@ -32,13 +32,16 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 |---------|---------------|
 | `/daily-report` | Everything (full run) |
 | **Email** | |
-| `/daily-report email` | All 6 accounts |
+| `/daily-report email` | All 9 accounts (6 Zoho + 2 Gmail IMAP + 1 Gmail API) |
 | `/daily-report email duongdn` | duongdn@ only |
 | `/daily-report email carrick` | carrick@ only |
 | `/daily-report email nick` | nick@ only |
 | `/daily-report email rick` | rick@ only |
 | `/daily-report email kai` | kai@ only |
 | `/daily-report email ken` | ken@ only |
+| `/daily-report email vuongtran` | vuongtrancr@gmail.com only |
+| `/daily-report email dnduong` | dnduongus@gmail.com only |
+| `/daily-report email mpfc` | freelancer@mypersonalfootballcoach.com only |
 | **Slack** | |
 | `/daily-report slack` | All 14 workspaces |
 | `/daily-report slack baamboozle` | Baamboozle only |
@@ -134,36 +137,50 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 ## Piece 1 — Email (`/daily-report email [account]`)
 
 Supports individual account targeting:
-- `/daily-report email` — check all 6 accounts
+- `/daily-report email` — check all 9 accounts
 - `/daily-report email duongdn` — check duongdn@ only
 - `/daily-report email carrick` — check carrick@ only
 - `/daily-report email nick` — check nick@ only
 - `/daily-report email rick` — check rick@ only
 - `/daily-report email kai` — check kai@ only
 - `/daily-report email ken` — check ken@ only
+- `/daily-report email vuongtran` — check vuongtrancr@gmail.com only
+- `/daily-report email dnduong` — check dnduongus@gmail.com only
+- `/daily-report email mpfc` — check freelancer@mypersonalfootballcoach.com only
 
-**Accounts:** 6 in `config/.email-accounts.json`
+**Accounts:** 9 in `config/.email-accounts.json`
 
-| Account | Password | Filter | Folder |
-|---------|----------|--------|--------|
-| duongdn@nustechnology.com | rtYVkk1jmreE | none | INBOX |
-| carrick@nustechnology.com | SNUp3Q3WAy76 | none | INBOX |
-| nick@nustechnology.com | iHWa82WJ3q5Q | John Yi | INBOX |
-| rick@nustechnology.com | ij3s9L8AQz0Z | Kunal / Fountain / InfinityRose | INBOX |
-| kai@nustechnology.com | JFDn4fsHiU0m | Madhuraka | INBOX |
-| ken@nustechnology.com | WY60fEDrTfXM | Precognize/development | NewsLetter |
+**Group A — Zoho IMAP (6 accounts):** credentials loaded from config
 
-**Method:** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
+| Account | Filter | Folder | What to look for |
+|---------|--------|--------|-----------------|
+| duongdn@nustechnology.com | none | INBOX | leave requests, New Relic alerts |
+| carrick@nustechnology.com | none | INBOX | Redmine bug notifications for Generator/Elliott |
+| nick@nustechnology.com | John Yi | INBOX | anything from John Yi client |
+| rick@nustechnology.com | Kunal / Fountain / InfinityRose | INBOX | Rollbar/BugSnag **production** alerts for Fountain, InfinityRoses |
+| kai@nustechnology.com | Madhuraka | INBOX | Jira/Madhuraka ticket mentions |
+| ken@nustechnology.com | Precognize/development | NewsLetter | Precognize GitHub PR activity |
 
-**What to look for:**
-- duongdn@: leave requests, New Relic alerts
-- carrick@: Redmine bug notifications for Generator/Elliott
-- nick@: anything from John Yi
-- rick@: Rollbar/BugSnag **production** alerts for Fountain, InfinityRoses
-- kai@: Jira/Madhuraka mentions
-- ken@: Precognize GitHub PR activity
+**Method (Zoho):** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
-**Calendar — run alongside email check:**
+**Group B — Gmail IMAP (2 accounts):** credentials loaded from config
+
+| Account | What to look for |
+|---------|-----------------|
+| vuongtrancr@gmail.com | Production monitoring alerts for Swish project (Delayed-newform, APM signal lost, BugSnag). Carrick's personal Gmail receives Swish Zendesk + monitoring. Flag any `[HIGH]` or `Signal lost` subjects. |
+| dnduongus@gmail.com | Personal Gmail (DuongDN). Only flag security alerts (account breach, unauthorized login). Ignore: LinkedIn, newsletters, Finhay, Careerviet, bank notifications. |
+
+**Method (Gmail IMAP):** IMAP SSL port 993, imap.gmail.com. Use `app_password` from config. `rejectUnauthorized: false` for TLS. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
+
+**Group C — Gmail API (1 account):** service account key required
+
+| Account | Auth | What to look for |
+|---------|------|-----------------|
+| freelancer@mypersonalfootballcoach.com | `.gmail-service-account.json` service account key | Client emails from MPFC project (Adam Blackford or team). If key missing → note as unavailable, check previous day's report for known issues. |
+
+**Method (Gmail API):** Requires `config/.gmail-service-account.json`. If file missing: report as unavailable (do NOT say "blocked" or "token expired"). Run `node scripts/daily-email-scan-260610.js` which handles all 3 groups automatically.
+
+**Calendar — run alongside email check (Zoho accounts only):**
 ```bash
 node scripts/fetch-zoho-calendar.js [account]   # omit account for all 6
 ```
@@ -171,12 +188,13 @@ node scripts/fetch-zoho-calendar.js [account]   # omit account for all 6
 - Uses same `app_password` as IMAP — no extra auth needed
 - Include events in the report section below (even if count = 0, show "no events")
 - Events with `STATUS:CANCELLED` or `PARTSTAT=DECLINED` note as cancelled/declined
+- Gmail accounts (vuongtrancr, dnduongus, mpfc) have no Zoho calendar — omit calendar column
 
 **Trello — after checking:**
 - Find "Check mail" card by name on board `O83pAyqb`
 - Mark the checklist item(s) for the checked account(s) complete: `PUT /cards/{id}/checkItem/{itemId}?state=complete&key=...&token=...`
 - If checking a single account → complete only that account's item
-- If checking all → complete all 6 items
+- If checking all → complete all 6 Zoho items (Gmail accounts have no Trello items)
 - **Auto-complete card:** After marking item(s), fetch full checklist state. If ALL items across ALL checklists are now complete → mark card done: `PUT /1/cards/{cardId}?dueComplete=true&key=...&token=...`
 
 **Report — always append to daily report:**
@@ -187,6 +205,9 @@ Append a timestamped section to `reports/{YYYY-MM-DD}/daily-report.md`:
 |---------|--------|----------------|
 | duongdn@... | 3 | no events |
 | nick@...    | 1 | 14:30 Weekly Meeting with Devs (Teams) |
+| vuongtrancr@gmail.com | 5 | — |
+| dnduongus@gmail.com | 0 | — |
+| freelancer@mpfc | — (key missing) | — |
 ...
 {Alerts if any.}
 Trello: {checked account(s)} item ✓ complete.

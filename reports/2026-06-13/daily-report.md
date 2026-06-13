@@ -179,6 +179,29 @@ No Matrix reminders sent (--send-reminder not passed).
 
 ---
 
+## Email [Gmail accounts — missed by cron] — 09:55 (+07:00)
+
+Cron only scanned 6 Zoho accounts. 3 Gmail accounts checked now (window Jun 12 09:06 → Jun 12 22:37):
+
+| Account | Emails | Alerts |
+|---------|--------|--------|
+| vuongtrancr@gmail.com | 50 | ⚠️ 3 production monitoring alerts (Delayed-newform + Low Throughput) |
+| dnduongus@gmail.com | 50 | ℹ️ Personal account — no actionable alerts in window (Jun 10 security emails out of scope) |
+| freelancer@mypersonalfootballcoach.com | — | Gmail service account key not found — 0 emails checked |
+
+**vuongtrancr@ alerts (Swish project monitoring):**
+- ⚠️ [Delayed-newform] production - 10 occurrences in 5 minutes: #154
+- ⚠️ Signal lost for 10 minutes on 'Low Application Throughput' - Issue (×2)
+- ℹ️ Delayed-newform - Daily Summary - Saturday, June 13 (daily digest)
+
+Context: vuongtrancr@gmail.com is Carrick's personal Gmail. Swish (swishforgood.com) customer appears to use this address for Zendesk/monitoring. "Low Application Throughput" = APM alert, likely New Relic or similar. Swish is a client project — Carrick should be aware.
+
+**dnduongus@gmail.com:** LastPass login blocked (Jun 10, out of window) and Cloudflare credentials alert (Jun 10, out of window) — outside Jun 12 monitoring window. Personal account newsletters/LinkedIn not actionable.
+
+**freelancer@mypersonalfootballcoach.com:** `.gmail-service-account.json` not found in `config/`. Gmail API auth unavailable. Previous day showed pre-existing Google_AuthException. No new alerts possible to verify.
+
+---
+
 ## Re-check — 09:24 (+07:00)
 
 | Item | Result | Details |
