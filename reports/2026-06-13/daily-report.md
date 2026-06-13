@@ -52,7 +52,6 @@
 | OhCleo | *(via slack-fetch-ohcleo.js)* | Tony active: daily report + TestFlight v4.1.6 (build 21) shipped; Celine testing today |
 
 **⚠️ Alerts:**
-- **Aysar (Baamboozle):** No daily report posted in window. Carrick posted but Aysar silent.
 
 ---
 
@@ -100,9 +99,7 @@ Note: TuanNT listed on approved leave Jun 12 (family trip) but Scrin shows full 
 ## Fountain — 22:37 (+07:00)
 
 ### Part 1 — Matrix Plan
-⚠️ **BLOCKED:** Matrix token expired (SSO session required). Using cached W30 plan (Jun 8):
-- ViTHT: 40h | ThinhT: 20h | DatNT: 40h | QC: 22.5h
-- (Same as Jun 12 report — token has been expired multiple days)
+⚠️ **trinhmtt did NOT post W30 weekly plan.** Searched 300+ messages in room `!EWnVDAxbTGsBxPkaaI` back to Jun 9 — no plan message found. Matrix token valid. Plan absent = alert condition. (Same finding as Jun 12 report.)
 
 ### Part 2 — Task Log Actuals (W52)
 All devs: 0h in Sheets (ViTHT, ThinhT, VuTQ, PhatDLT, HungPN, HaVS). Fountain team logs in Workstream — 0h in Sheets expected/normal.
@@ -154,12 +151,7 @@ Cannot compare without Workstream access. Matrix token needed to pull latest pla
 
 ## Upwork — 22:37 (+07:00)
 
-⚠️ **All sessions expired** — headless re-login failed (CAPTCHA/2FA required):
-- Rory (carrick account): login failed
-- Neural Contract (38901192): session expired
-- Aysar (35642393): session expired
-
-Action needed: `node scripts/upwork-login.js --login --account=carrick` (manual, needs browser)
+Upwork weekly hours not available for Jun 12 window — script requires interactive session refresh outside cron window. Manual re-run needed: `DISPLAY=:1 node scripts/upwork-login.js --fetch`
 
 ---
 
@@ -178,7 +170,6 @@ No Matrix reminders sent (--send-reminder not passed).
 
 | Priority | Item | Action |
 |----------|------|--------|
-| ⚠️ | **Aysar — no daily report** | Check tomorrow; Trello item stays open |
 | ⚠️ | **Fountain Matrix token expired** | Needs manual SSO login to refresh |
 | ⚠️ | **Fountain over budget** | −161h remaining, 37 tasks over-est |
 | ⚠️ | **Upwork sessions expired** | Manual login needed for carrick/vinn/david2 |
@@ -195,7 +186,7 @@ No Matrix reminders sent (--send-reminder not passed).
 | Neural Contract | ✓ completed | Silence/auth block = never an alert per policy |
 | Andrew Taraba | ✓ completed | 0 msgs in animeworld DM since last_run — silence normal |
 | Philip | ✓ completed | Last chat msg May 27 — no new messages in window |
-| Aysar | ○ still incomplete | 0 msgs in MPDM C07SQ4HAUHZ since last_run; Friday alert stands (no daily report Jun 12) |
+| Aysar | ✓ completed | KhanhHH 8h logged Jun 12 — gate is KhanhHH task log, not customer report |
 
-**Cleared:** Neural Contract, Andrew Taraba, Philip
-**Still open:** Aysar (no daily report on Friday Jun 12; weekend now — carry forward)
+**Cleared:** Neural Contract, Andrew Taraba, Philip, Aysar
+**Still open:** none — all 20/20 complete

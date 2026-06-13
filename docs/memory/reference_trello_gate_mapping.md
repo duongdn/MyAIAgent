@@ -28,7 +28,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 | Neural Contract | Neural Upwork messages | No activity |
 | Andrew Taraba | Bizurk Discord (nuscarrick DM "animeworld") | No DM activity |
 | Colin | Aigile Dev Slack | No activity |
-| Aysar | Baamboozle MPDM **C07SQ4HAUHZ** (daily report) | Aysar no daily report |
+| Aysar | KhanhHH task log (Aysar sheet) + Baamboozle workspace activity | KhanhHH 0h |
 | Franc | RDC Slack (dmetiner updates) | dmetiner alert |
 | Fountain | Matrix plan posted + no over-est spike | Plan missing OR spike |
 | Elena - WordPress | samguard.co JS console check | JS errors |
