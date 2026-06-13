@@ -47,8 +47,9 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ## Per-Project / Per-Person
 - [feedback_franc_adhoc.md](feedback_franc_adhoc.md) — Franc/RDC is ad hoc like Marcel — no hours expectation, always complete Trello item
 
-## 🔴 Recurring Daily Report Errors (Jun 11 — must not repeat)
+## 🔴 Recurring Daily Report Errors (Jun 11–13 — must not repeat)
 - [feedback_maddy_jira_weekly_check.md](feedback_maddy_jira_weekly_check.md) — **Run EVERY day** `maddy-jira-tasklog-check.js --week` in Sheets piece — never skip; include markdown table in report
+- [feedback_recheck_must_fill_missing_data.md](feedback_recheck_must_fill_missing_data.md) — **Recheck must fill missing data** (BLOCKED/expired/unavailable sections), not just fix Trello items
 - [feedback_puppeteer_cron_tmpdir.md](feedback_puppeteer_cron_tmpdir.md) — Puppeteer cron /tmp failure → false 0h/unavailable — fix: `TMPDIR=/var/tmp` + `--crash-dumps-dir=/var/tmp` + `--disable-dev-shm-usage`
 - [feedback_vietph_leave_date_cron_bug.md](feedback_vietph_leave_date_cron_bug.md) — Leave note for day N-1 applied to day N by cron — verify leave note row date = PREV_DATE before marking "leave day"
 - [feedback_tuannt_gate_show_breakdown.md](feedback_tuannt_gate_show_breakdown.md) — TuanNT gate label must show per-sheet breakdown (JohnYi Xh | Paturevision Xh | ...) — "combined Xh" alone is misleading

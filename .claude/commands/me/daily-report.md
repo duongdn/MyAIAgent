@@ -785,6 +785,27 @@ Append a timestamped section:
 - **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
 - **Log findings clearly:** state what was checked, what was found, and why each item was completed or kept open
 
+### ⚠️ ALSO fill in missing data from cron failures
+
+**Recheck is NOT only about Trello items.** After fixing Trello, scan the existing report for any section that has placeholder/failure text, and re-run those sources to supply real data:
+
+| Report text that means data is missing | Action |
+|----------------------------------------|--------|
+| "BLOCKED", "token expired", "session expired" | Refresh token, re-fetch actual data, overwrite the section |
+| "All sessions expired", "headless re-login failed" | Re-run login script, fetch actual data |
+| "script error", "Data unreliable" | Re-run the script, replace with real output |
+| "cached plan (Jun X)" | Fetch real data from the source |
+| "login failed", "CAPTCHA required" | Try alternate login, or document as genuinely unresolvable after 2 attempts |
+
+**For each missing-data section:**
+1. Identify the source (Upwork, Matrix, Sheets, etc.)
+2. Refresh auth (run refresh script)
+3. Re-run the fetch
+4. Overwrite that section in the report with real data
+5. If after 2 genuine attempts the data is still unavailable, write: `{Source}: data unavailable — {brief non-auth reason}. Manual check: {command}`
+
+**Never leave "BLOCKED", "session expired", or "all sessions expired" in the final report.** These are internal failures — fix them silently or document the actual blocker (e.g., "Upwork Cloudflare challenge — requires browser login outside cron window").
+
 ---
 
 ## Full Run (`/daily-report`)
@@ -810,8 +831,41 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
 2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack**
-3. Write report to `reports/{UTC+7 today}/daily-report.md`
+3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
+
+**Cron report format (MANDATORY — same as interactive runs):**
+
+```markdown
+# Daily Report — YYYY-MM-DD (Weekday)
+
+**Run:** {ISO timestamp} (cron)
+**Window:** {start} → {end}
+**Leave plan:** {any known leave for the day}
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | {source} | {alert description} |
+...
+
+**Today ({Mon DD}):** {any staff leave/WFH summary}
+
+---
+
+## Email — all — {HH:MM} (+07:00)
+...
+```
+
+Rules:
+- `⚠️ ALERTS SUMMARY` table MUST appear before any section content — collect all alerts from all pieces and number them
+- If zero alerts: write `No alerts.` under the header
+- Email table MUST have columns: `Account | Emails | Alerts | Calendar today`
+- Each section ends with: `Trello: {item} ✓ complete / ⚠️ skipped ({reason})`
+- Staff summary line under ALERTS SUMMARY shows leave, WFH, or "all present"
 5. **Git commit + push** (inline, fix errors automatically):
    ```bash
    git add reports/{today}/ config/.monitoring-timelines.json
