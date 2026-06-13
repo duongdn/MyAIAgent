@@ -8,4 +8,4 @@ Kai works 16h/week (part-time), so daily report in Xtreme Slack is NOT required.
 
 **Why:** User corrected on 2026-04-16. Kai is part-time and not expected to post daily reports.
 
-**How to apply:** When checking Xtreme Slack for Maddy, do not require Kai daily report. Only check for general activity/PR work.
+**How to apply:** When checking Xtreme Slack for Maddy, do not require Kai daily report. Only check for general activity/PR work. 0 msgs in Xtreme = quiet, NOT an alert. Never write "Kai daily report not found" as an alert — he is part-time and may simply not be working that day.

@@ -38,7 +38,7 @@
 | Baamboozle | 5 | Carrick update (wrong error msg hashtag → done+deployed). Aysar **no daily report** |
 | RDC - FM Monitoring | 4 | User access logs (Tuner access), activity normal |
 | Swift Studio | 11 | Rory active (#bxr__app: dummy classes, API integration with Jeff) |
-| Xtreme Soft Solutions | 0 | ⚠️ No Kai daily report in window |
+| Xtreme Soft Solutions | 0 | Quiet (Kai 16h/wk part-time — daily report not required) |
 | SAM GUARD - Mobile | 4 | HubSpot MQL leads (3 new), no dev/Elena alerts |
 | Global Grazing Services | 0 | No Nick/Bailey activity |
 | Amazing Meds | 0 | TuanNT on leave, expected |
@@ -53,7 +53,6 @@
 
 **⚠️ Alerts:**
 - **Aysar (Baamboozle):** No daily report posted in window. Carrick posted but Aysar silent.
-- **Xtreme:** 0 msgs — Kai daily report not found.
 
 ---
 
@@ -184,7 +183,6 @@ No Matrix reminders sent (--send-reminder not passed).
 | ⚠️ | **Fountain over budget** | −161h remaining, 37 tasks over-est |
 | ⚠️ | **Upwork sessions expired** | Manual login needed for carrick/vinn/david2 |
 | ℹ️ | **rick@ Fountain staging errors** | Multiple BugSnag/Rollbar HIGH alerts (staging only) |
-| ℹ️ | **Xtreme 0 msgs** | Kai daily report not found in window |
 | ℹ️ | **AirAgri — Vinn no formal report** | Jeff reported ✓; Vinn active but no formal post |
 | ℹ️ | **TuanNT Scrin shows 7h43m** | Listed on leave but worked Jun 12 |
 
