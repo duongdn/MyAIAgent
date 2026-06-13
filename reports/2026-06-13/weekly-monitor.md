@@ -16,7 +16,7 @@
 | VuTQ assigned to Paturevision | 40h in Paturevision this week — NOT on Fountain plan. Moved to Bailey/PAT W30. |
 | LongVV JIRA Δ resolved | W30 Sheets=16h, JIRA=16h → **Δ0h** (previous Δ4h W28/W29 resolved) |
 | Fountain Matrix plan | Sent 2026-06-08 08:59 +07 by @trinhmtt. ViTHT:40h ThinhT:20h DatNT:40h QC:22.5h |
-| Matrix JD+Marcel | **✅ SENT** — event_id `$ZgbAmrpMfTslkS_m0IdmsNKnUt56pCk64lpnUvOdmhU` |
+| Matrix JD+Marcel | **✅ SENT** — event_id `$tfJLbGVLMgvR_WD1tHwkf4Pi9avV-qnkL4RumjwRW28` (corrected: DuongDN 10m) |
 
 ---
 
@@ -171,7 +171,7 @@ Previously tracked tasks (deployed/done):
 ## #3 — James Diamond + Marcel Matrix Report
 
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`  
-**Status:** ✅ SENT — event_id `$ZgbAmrpMfTslkS_m0IdmsNKnUt56pCk64lpnUvOdmhU`
+**Status:** ✅ SENT (corrected) — event_id `$tfJLbGVLMgvR_WD1tHwkf4Pi9avV-qnkL4RumjwRW28`
 
 **Draft message:**
 ```
@@ -189,7 +189,7 @@ AnhNH2: 20h/20h
 ---
 
 Marcel
-DuongDN: 0h
+DuongDN: 10m
 ```
 
 **Data basis:**
