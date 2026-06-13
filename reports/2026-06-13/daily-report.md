@@ -187,3 +187,17 @@ No Matrix reminders sent (--send-reminder not passed).
 | ℹ️ | **Xtreme 0 msgs** | Kai daily report not found in window |
 | ℹ️ | **AirAgri — Vinn no formal report** | Jeff reported ✓; Vinn active but no formal post |
 | ℹ️ | **TuanNT Scrin shows 7h43m** | Listed on leave but worked Jun 12 |
+
+---
+
+## Re-check — 09:24 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Neural Contract | ✓ completed | Silence/auth block = never an alert per policy |
+| Andrew Taraba | ✓ completed | 0 msgs in animeworld DM since last_run — silence normal |
+| Philip | ✓ completed | Last chat msg May 27 — no new messages in window |
+| Aysar | ○ still incomplete | 0 msgs in MPDM C07SQ4HAUHZ since last_run; Friday alert stands (no daily report Jun 12) |
+
+**Cleared:** Neural Contract, Andrew Taraba, Philip
+**Still open:** Aysar (no daily report on Friday Jun 12; weekend now — carry forward)
