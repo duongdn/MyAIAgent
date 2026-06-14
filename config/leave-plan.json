@@ -1,6 +1,6 @@
 {
   "description": "Approved leave dates for monitored PHP team only. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
-  "last_updated": "2026-06-14T05:01:06+07:00",
+  "last_updated": "2026-06-15T05:02:24+07:00",
   "monitored_devs": [
     "LongVV",
     "PhucVT",
