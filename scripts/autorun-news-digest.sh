@@ -54,9 +54,14 @@ export DISPLAY=:1
 
 log "Starting news digest (--cron mode)"
 
+# Pre-compute UTC+7 datetime so Claude doesn't need to run date commands
+export REPORT_DATE=$(TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d')
+export REPORT_TIME=$(TZ='Asia/Ho_Chi_Minh' date '+%H%M')
+log "Report datetime (UTC+7): ${REPORT_DATE} ${REPORT_TIME}"
+
 out_file="$LOG_DIR/.news-digest-run.tmp"
 
-"$CLAUDE_BIN" -p "/me:news-digest" \
+"$CLAUDE_BIN" -p "/me:news-digest --report-date=${REPORT_DATE} --report-time=${REPORT_TIME}" \
   --dangerously-skip-permissions \
   > "$out_file" 2>&1
 

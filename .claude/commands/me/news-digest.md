@@ -104,15 +104,21 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 
 Sau khi synthesize xong, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown.
 
-**Bước 1 — Lấy ngày giờ UTC+7 (LUÔN chạy lệnh này, không dùng ngày UTC):**
+**Bước 1 — Xác định ngày giờ UTC+7:**
+
+Ưu tiên theo thứ tự:
+1. Nếu được gọi với `--report-date=YYYY-MM-DD --report-time=HHMM` → dùng luôn giá trị đó (cron truyền vào)
+2. Nếu không có args → chạy lệnh sau để lấy UTC+7:
 ```bash
 TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d %H%M'
 ```
 
+**TUYỆT ĐỐI KHÔNG dùng UTC date/time hay ngày từ context** — phải là UTC+7 thực tế.
+
 **Bước 2 — Ghi file:**
 ```
 Path: reports/{YYYY-MM-DD}/{HHMM}-news-digest.md
-Example: reports/2026-06-11/0200-news-digest.md
+Example: reports/2026-06-15/0200-news-digest.md
 ```
 
 Dùng Write tool để tạo file. Nội dung file = toàn bộ markdown đã synthesize (giống hệt output ra chat).
