@@ -294,27 +294,24 @@ Token refreshed at 08:56. Fetched window: 2026-06-14 08:00 → now.
 **Active rooms: 4 / 125 | Messages: 10** *(since Jun 14 08:00)*
 Full details: reports/2026-06-15/matrix-rooms-0858.md
 
-### Key updates
-
-**LongVV — emergency leave this morning:**
-- 05:14 LongVV → duongdn DM: "E xin off gấp buổi sáng nha a Dương ơi, e đưa ba e đi vô bệnh viện cấp cứu tiếp ạ" (father rushed to hospital)
-- 05:21: Will work remote PM after hospital visit, will send email
-
-**Delivery Department — W15/6 plan posted (namtv, 20:05 Jun 14):**
-- ThienTM: 10h Alissa + some Clarence hours + remaining on New Website
-- ThinhPVD: full Workstream
-- LuHX: 20h Amaury (charged 15h) + some Matthew hours if tasks available
-- ToanNT: full Zoom project (or similar)
-
-**Rebecca - William Bills:**
-- 08:34 TuanNT: "ok a đẻ e quét app xem" (scanning app as requested)
-- 08:50 duongdn: deadline already passed last week reminder
-
-### ⚠️ Action items for DuongDN
+### ⚠️ Action items for DuongDN (1)
 
 | Room | Time | Message |
 |------|------|---------|
-| DM: LongVV | 05:14 | longvv: "Xin off gấp sáng — ba đi bệnh viện cấp cứu" ⚠️ |
+| LongVV (DM) | 05:14 | longvv: "E xin off gấp buổi sáng nha a Dương ơi, e đưa ba e đi vô bệnh viện cấp cứu tiếp ạ" — father rushed to ER, requesting AM off ⚠️ |
+
+### Key updates
+
+**LongVV — father hospitalized (05:14):**
+- Requested emergency AM off; will work remote PM after hospital
+- Will send email update once situation is clear
+
+**Delivery Department — W15/6 plan (namtv, Jun 14 20:05):**
+- Web: ThienTM 10h Alissa + some Clarence + rest on New Website; ThinhPVD full Workstream
+- Mobile: LuHX 20h Amaury (charged 15h) + Matthew if tasks; ToanNT full Zoom project
+
+**Rebecca - William Bills:**
+- TuanNT scanning app as requested (08:34); DuongDN reminder that deadline was last week (08:50)
 
 ---
 

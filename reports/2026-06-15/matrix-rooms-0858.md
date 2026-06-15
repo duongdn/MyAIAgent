@@ -1,19 +1,36 @@
 # Matrix — since 2026-06-14 08:00 +07:00
 
-### !cYxDcwWxBhnuXxpryq:nustechnology.com — 2 messages
-  [08:56] duongdn: image.png
-  [08:56] honght: dạ em cảm ơn anh
+**Active rooms: 4 / 125 | Messages: 10**
 
-### !mYZBGNoLFVpMVIJtPu:nustechnology.com — 4 messages
-  [05:14] longvv: E xin off gấp buổi sáng nha a Dương ơi, e đưa ba e đi vô bệnh viện cấp cứu tiếp ạ
-  [05:14] duongdn: uhm e hic :(
-  [05:21] longvv: Chắc tạm thời em xin làm remote chiều lun á, để sáng e lo xong xuôi r e gửi mail lun
-  [05:22] duongdn: ok e
+---
+
+### LongVV (direct DM) — 4 messages ⚠️
+
+- 05:14 LongVV: father rushed to ER again — requested emergency AM off
+- 05:21 LongVV: will work remote from PM once hospital visit is done, will email update
+- DuongDN acknowledged both messages
+- **⚠️ Action needed: LongVV AM off today (Jun 15), expect PM remote work + email**
+
+---
 
 ### Delivery Department — 2 messages
-  [20:05] namtv: **Plan của Web dev tuần 15/6** - ThienTM 10h Alissa, một số giờ Clarence, còn lại làm New Website - ThinhPVD full Workst
-  [20:06] namtv: --- **Plan của Mobile dev từ tuần 15/6** - LuHX: 20h Amaury charged 15h, một số giờ Matthew nếu có task - ToanNT: full Z
+
+- 20:05 namtv posted **W15/6 weekly plan (Jun 15)**:
+  - Web dev: ThienTM — 10h Alissa + some Clarence hours + remaining on New Website; ThinhPVD — full Workstream
+  - Mobile dev: LuHX — 20h Amaury (charged 15h) + Matthew if tasks available; ToanNT — full Zoom project
+- Routine plan post, no blockers
+
+---
 
 ### Rebecca - William Bills — 2 messages
-  [08:34] tuannt: ok a đẻ e quét app xem
-  [08:50] duongdn: deadline tuần trươc rồi ông ơi
+
+- 08:34 TuanNT: "ok a đẻ e quét app xem" — scanning app as requested by DuongDN
+- 08:50 DuongDN: reminding TuanNT that the deadline was last week
+- **Note: TuanNT is on this task today**
+
+---
+
+### !cYxDcwWxBhnuXxpryq — 2 messages
+
+- 08:56 DuongDN shared an image, HongHT replied "dạ em cảm ơn anh" (thank you)
+- Routine acknowledgment, no action needed
