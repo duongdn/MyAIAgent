@@ -18,9 +18,10 @@
 | 5 | Fountain | No remaining runway: total_est=2953.5h, total_charged=3114.5h (over by 161h) |
 | 6 | Fountain | Task #2615 at 789.6% over-estimate: est=12h, charged=106.75h |
 | 7 | OhCleo | Celine Fierro (customer) sent messages — needs attention before Tony's workday |
-| 8 | Matrix | Token expired (SSO re-auth required) — Fountain plan + Matrix section unavailable |
+| 8 | Matrix | ~~Token expired~~ — fixed at 08:56 (recheck) |
+| 9 | Matrix (recheck) | LongVV father hospitalized — off AM, remote PM; sent DM 05:14 |
 
-**Today (Mon Jun 15):** All devs expected working. LongVV leave for tomorrow (Jun 16) pending. KhanhHH leave Jun 25-26 upcoming.
+**Today (Mon Jun 15):** LongVV off AM (father hospitalized), remote PM. KhanhHH leave Jun 25-26 upcoming. LongVV leave Jun 16 pending approval.
 
 ---
 
@@ -242,21 +243,19 @@ Matrix token expired (SSO re-auth required). Token not active (M_UNKNOWN_TOKEN).
 
 Attempted refresh 3× — all failed. SSO requires interactive browser login not available in cron.
 
-**Data unavailable.** Manual fix: `DISPLAY=:1 node scripts/matrix-token-refresh.js`
+**Data unavailable.** Refreshed at 08:56 — see Re-check section below.
 
 ---
 
 ## Trello Summary — 05:14 (+07:00)
 
 ### Check Progress
-✓ Completed: Maddy, John Yi, James Diamond, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin
+✓ Completed: Maddy, John Yi, James Diamond, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Elena - SamGuard, Elena - WordPress
 
 ○ Incomplete:
-- **Elena - SamGuard** — pending (no active PRs, no activity — should complete ✓)
 - **Fountain** — Part 1 (Matrix plan) unavailable
 - **Philip** — MS Teams check not run
 - **Ohcleo** — Celine customer messages need attention
-- **Elena - WordPress** — CSP noted, jsErrors=0
 
 ### Check Mail
 ✓ All 6 items completed (DuongDn, Carrick, Rick, Kai, Ken, Nick) — card marked done.
@@ -271,27 +270,78 @@ All devs with 0h on Sunday are expected. No reminders needed.
 
 ---
 
-## Upwork — 05:15 (+07:00)
+## Upwork — 05:15 / 08:58 (+07:00)
 
-All Upwork sessions expired (Rory/carrick, Neural, Aysar). Headless re-login failed (CAPTCHA/2FA).
+Sessions expired in cron. Re-run at 08:58 — carrick session refreshed via `upwork-login.js`.
 
-- Rory (41069448): session expired
-- Neural Contract (38901192): session expired  
-- Aysar (35642393): session expired
+| Contract | Developer | This week | Last week |
+|----------|-----------|-----------|-----------|
+| Rory (41069448) | LeNH | 0:00 | 28:00 |
+| Neural Contract (38901192) | external | 0:00 | 0:00 |
+| Aysar (35642393) | LeNH | 0:00 | 0:00 |
+| Bailey-VietPH (42545630) | VietPH | 0:00 | 0:00 |
+| Bailey-DuongDN (43093775) | DuongDN | 0:00 | 0:00 |
 
-Per policy: Neural Contract silence = never an alert. Complete Neural Contract Trello item ✓ (already done above).
+All 0:00 this week expected (Monday morning, week just started). Rory last week 28h ✓.
+Neural Contract silence = no alert (policy). Trello Neural Contract ✓ already done.
 
-Manual refresh needed: `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick`
+---
+
+## Matrix — 08:58 (+07:00) [Re-check]
+
+Token refreshed at 08:56. Fetched window: 2026-06-14 08:00 → now.
+
+**Active rooms: 4 / 125 | Messages: 10** *(since Jun 14 08:00)*
+Full details: reports/2026-06-15/matrix-rooms-0858.md
+
+### Key updates
+
+**LongVV — emergency leave this morning:**
+- 05:14 LongVV → duongdn DM: "E xin off gấp buổi sáng nha a Dương ơi, e đưa ba e đi vô bệnh viện cấp cứu tiếp ạ" (father rushed to hospital)
+- 05:21: Will work remote PM after hospital visit, will send email
+
+**Delivery Department — W15/6 plan posted (namtv, 20:05 Jun 14):**
+- ThienTM: 10h Alissa + some Clarence hours + remaining on New Website
+- ThinhPVD: full Workstream
+- LuHX: 20h Amaury (charged 15h) + some Matthew hours if tasks available
+- ToanNT: full Zoom project (or similar)
+
+**Rebecca - William Bills:**
+- 08:34 TuanNT: "ok a đẻ e quét app xem" (scanning app as requested)
+- 08:50 duongdn: deadline already passed last week reminder
+
+### ⚠️ Action items for DuongDN
+
+| Room | Time | Message |
+|------|------|---------|
+| DM: LongVV | 05:14 | longvv: "Xin off gấp sáng — ba đi bệnh viện cấp cứu" ⚠️ |
+
+---
+
+## Re-check — 08:58 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Elena - SamGuard | ✓ already complete | Cron correctly completed (no PRs, clean) |
+| Elena - WordPress | ✓ already complete | Cron correctly completed (jsErrors=0) |
+| Matrix | ✓ filled | Token refreshed, data fetched (4 active rooms, 10 msgs) |
+| Upwork | ✓ filled | Sessions refreshed, 0:00 this week = expected Monday AM |
+| Philip | ✓ completed | MS Teams ran — Philip chat found, no complaint/unresolved request |
+| OhCleo | ✓ completed | Celine msgs = positive feedback + future tasks (not a complaint) |
+| Fountain | ○ still incomplete | Plan not yet posted (08:55, window 08:30–09:30) + #2615 789.6% over-est spike |
+
+**Cleared:** Philip, OhCleo, Matrix data, Upwork data
+**Still open:** Fountain (wait for trinhmtt plan post by 09:30; over-est spike ongoing)
 
 ---
 
 ## ⚠️ Pending Actions
 
-1. **LongVV leave Jun 16** — decide approve/reject and notify
-2. **dnduongus Instagram logins** — verify if authorized (security alert)
-3. **Matrix token** — manually refresh: `DISPLAY=:1 node scripts/matrix-token-refresh.js`
-4. **Fountain #2615** — 789.6% over-estimate still growing — escalate to Rick
-5. **LIFM2-439** — over-budget 9h 30m — discuss with LongVV/Maddy
-6. **LIFM2-443** — set estimate before logging more hours
-7. **Celine (OhCleo)** — review task priorities she sent, Tony to respond
-8. **Upwork sessions** — manually refresh carrick/Aysar login
+1. **LongVV — father hospitalized** — off this morning, remote PM; expect email update
+2. **LongVV leave Jun 16** — original request (pending approval)
+3. **dnduongus Instagram logins** — verify if authorized (security alert)
+4. **Fountain plan** — check after 09:30 if @trinhmtt posted W53 plan; if not, alert
+5. **Fountain #2615** — 789.6% over-estimate still at same level — escalate to Rick
+6. **LIFM2-439** — over-budget 9h 30m — discuss with LongVV/Maddy
+7. **LIFM2-443** — set estimate before logging more hours
+8. **Celine (OhCleo)** — review task priorities she sent, Tony to respond
