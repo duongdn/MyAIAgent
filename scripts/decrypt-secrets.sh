@@ -37,6 +37,7 @@ ENC_FILES=(
   config/.cloudflare-config.json.enc
   config/.workstream-config.json.enc
   config/.github-config.json.enc
+  config/.gmail-service-account.json.enc
 )
 
 # Add any daily-agent-*.json.enc
