@@ -10,7 +10,7 @@
 
 | # | Severity | Item | Detail |
 |---|----------|------|--------|
-| 1 | 🔴 HIGH | TuanNT 0h Jun 15 | No hours logged across all 4 sheets (JohnYi W28, Rebecca W29, Neural W25, Paturevision W32). No leave recorded. |
+| 1 | ℹ️ INFO | TuanNT task log — cron wrong tab | Cron found 0h (wrong tab). **Actual: 8h in Paturevision W32** ("Grazing Software Desktop view"). Transferred to Family App — 0h in Rebecca/JohnYi sheets expected. Bailey ✓ completed. |
 | 2 | 🔴 HIGH | LeNH 0h Jun 15 | No hours in Rory W16 (only KhoaTD 6h + TinPC 4h), Franc ended, Aysar W29 = 0h. No leave recorded. |
 | 3 | 🟠 MED | Kai urgent personal | Posted in Xtreme: "I have urgent personal issue" + "haven't been busy". Client (Madhuraka/Anoma) informed. |
 | 4 | ℹ️ INFO | Vinn report in #airagri_webapp | nusvinn posted "Just report my process today:" at 17:19+07 in #airagri_webapp. Cron missed (only scanned #airagri-flutter). ✓ |
@@ -213,7 +213,7 @@ Elena: no action needed. ✓
 | Work | Elena - SamGuard | ✓ complete | Elena active + WordPress clean |
 | Work | Raymond - LegalAtoms | ✓ complete | Raymond active, architecture discussion |
 | Work | Neural Contract | ✓ complete | Silence = never alert per policy (fixed in recheck) |
-| Work | Bailey | ⚠️ incomplete | TuanNT 0h confirmed (transferred to Family App, no hours logged Jun 15) |
+| Work | Bailey | ✓ complete | TuanNT 8h in Paturevision W32 ("Grazing Software Desktop view") — cron used wrong tab. Completed 09:10+07 recheck. |
 | Work | Andrew Taraba | ✓ complete | Bizurk silent = normal |
 | Work | Rebecca - William Bills | ⚠️ incomplete | TuanNT 0h no leave Jun 15 |
 | Work | Colin | ✓ complete | Aigile Dev automated, no critical issues |
@@ -224,7 +224,7 @@ Elena: no action needed. ✓
 
 **Check mail card:** ✓ already complete from prior run.
 
-**Check progress card:** 17/19 items complete. Incomplete: Maddy/Kai (Kai issue), Bailey + Rebecca (TuanNT 0h). Neural ✓ + Philip ✓ + James Diamond ✓ completed in recheck.
+**Check progress card:** 18/19 items complete. Incomplete: Maddy/Kai (Kai urgent personal issue). Bailey ✓ completed (TuanNT 8h found in Paturevision W32). Rebecca: TuanNT 0h in William Bills sheet (transferred to Family App — 0h in Rebecca expected). Neural ✓ + Philip ✓ + James Diamond ✓ + Bailey ✓ completed in recheck.
 
 ---
 
@@ -234,7 +234,7 @@ Devs with 0h and no approved leave on Jun 15:
 
 | Dev | Hours | Leave | Action |
 |-----|-------|-------|--------|
-| TuanNT | 0h | None | ⚠️ Reminder needed |
+| TuanNT | 8h (Paturevision W32) | Transitioning to Family App | ✅ No reminder — logged "Grazing Software Desktop view" 8h |
 | LeNH | 0h | None | ⚠️ Reminder needed |
 
 Matrix token unavailable in cron → reminders NOT sent. Token fixed in recheck (08:33+07). Reminders printed below — use `--send-reminder` flag to send.
