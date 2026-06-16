@@ -105,13 +105,16 @@ Trello: James Diamond item → ⚠️ incomplete (Vinn no report). Andrew Taraba
 | Developer | Sheet | Hours Jun 15 | Leave | Status |
 |-----------|-------|-------------|-------|--------|
 | LongVV | Xtreme W11 (Maddy) | 0h | None Jun 15 | ✓ acceptable (part-time 16h/wk, W11 day 1) |
-| PhucVT | PhucVT sheet | 12h | None | ✓ |
-| TuanNT | JohnYi W28 + Rebecca W29 + Neural W25 + Paturevision W32 | 0h combined | None | ⚠️ ALERT |
-| VietPH | VietPH sheet | 8h | None | ✓ |
-| KhanhHH | KhanhHH sheet | 8h | None | ✓ |
+| PhucVT | PhucVT W30 | **8h** | None | ✓ (cron reported 12h = day total incl. AnhNH2 4h) |
+| TuanNT | Paturevision W32 | **8h** | None | ✓ transferred to Family App — Bailey only (cron used wrong tab, found 0h) |
+| VietPH | Paturevision W32 | **0h** | Nghỉ cả ngày (sick) | ✓ on leave (cron incorrectly reported 8h from TuanNT row) |
+| KhanhHH | KhanhHH W45 | **6h** | None | ✓ (cron reported 8h = day total; KhanhHH alone = 6h) |
 | LeNH | Rory W16 (KhoaTD+TinPC) + Franc (ended) + Aysar W29 | 0h for LeNH | None | ⚠️ ALERT |
 
-**TuanNT detail:** JohnYi W28 (Jun 15 row) = 0h. Rebecca W29 = 0h. Neural W25 = 0h. Paturevision W32 has 4h from NamNN only. TuanNT combined = 0h. No leave in leave-plan.json.
+**TuanNT detail (corrected):** Paturevision W32 Jun 15 = TuanNT **8h** ("Grazing Software Desktop view") + NamNN 4h. JohnYi W28 = 0h, Rebecca W29 = 0h (expected — transferring to Family App/Wordpress). TuanNT combined = 8h ✓. Bailey + Rebecca Trello completed.
+**KhanhHH detail (corrected):** W45 Jun 15 = canvasliving Auto Scaling 1.5h + Fix Redmines #79164/#79218 3h + timezone bug (Trello #910) 0.5h + Patch 2 staging release 1h = **6h total** (cron reported 8h = day total; other devs: NamNN 4h, SamHT 5h).
+**PhucVT detail (corrected):** W30 Jun 15 = AirAgri security research, review PR 498/499, Entra SSO support, Additional Property Access button, alarm screen edit = **8h** (cron reported 12h = day total incl. AnhNH2 4h).
+**VietPH detail (corrected):** Paturevision W32 Jun 15 = "Nghỉ cả ngày" (full day sick leave). **0h** is expected and OK. Cron incorrectly attributed TuanNT's 8h to VietPH.
 
 **LeNH detail:** Rory W16 entries on Jun 15 = KhoaTD (6h) + TinPC (4h) = 10h total, no LeNH entry. Franc project: last active W24 (May 11-17), now ended. Aysar W29 Jun 15 = 0h total. LeNH has 0h and no leave on Jun 15.
 
@@ -383,7 +386,7 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 - TuanNT → Family App monitoring gap — need to set up new task log sheet for Charles Chang project
 
 **✅ Normal:**
-- PhucVT 12h, VietPH 8h, KhanhHH 8h ✓
+- PhucVT 8h ✓, VietPH sick leave (0h OK) ✓, KhanhHH 6h ✓, TuanNT 8h ✓
 - Nick 8h 2m (Scrin) ✓
 - Elena clean ✓, Aysar daily report ✓, Jeff (AirAgri) report ✓
 - Check mail complete ✓
