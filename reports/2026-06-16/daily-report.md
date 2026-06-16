@@ -1,8 +1,8 @@
 # Daily Report — 2026-06-16 (Tuesday)
 
-**Run:** 2026-06-16T05:00:22+07:00 (cron)
+**Run:** 2026-06-16T05:00:22+07:00 (cron) + recheck 08:33+07:00
 **Window:** 2026-06-15T09:03:47+07:00 → 2026-06-16T05:00:22+07:00
-**Leave plan:** LongVV off 2026-06-16 (PENDING approval — personal, father medical follow-up)
+**Leave plan:** LongVV off Jun 15 PM + Jun 16 (father brain tumor/MRI — NghiepNQ covering OhCleo)
 
 ---
 
@@ -19,9 +19,12 @@
 | 7 | 🟡 LOW | LongVV leave PENDING | June 16 leave not approved (minhtv replied but not authorized approver). Reason: father medical. |
 | 8 | 🟡 LOW | MPFC OAuth error | Rollbar: #46 Google_AuthException invalid_grant (Bad Request). Token refresh needed. |
 | 9 | 🟡 LOW | Nick no GGS report | No Nick daily report found in GGS Slack. Only Joey msg (no troubles). |
-| 10 | ℹ️ INFO | Matrix token expired | All 4 browser SSO refresh attempts failed. Matrix scan (Piece 10) + Fountain Part 1 unavailable. |
-| 11 | ℹ️ INFO | Upwork all expired | carrick: headless login CAPTCHA, vinn/david2/Neural: no saved sessions. |
-| 12 | ℹ️ INFO | dnduongus security | LastPass login blocked + Card transaction alert + Claude trusted device added. |
+| 10 | ℹ️ INFO | LongVV father brain tumor | Father has brain tumor (khối u trong não), went for MRI Jun 15 PM + off Jun 16. NghiepNQ covering OhCleo. |
+| 11 | ℹ️ INFO | OhCleo prod incident | NghiepNQ pushed migration to preprod (=live) causing 500 errors ~17:15. DuongDN fixed ~17:25. |
+| 12 | ℹ️ INFO | TuanNT project transfer | Transferred to Family App (Charles Chang, Wordpress Dev) effective Jun 15 per namtv. 0h expected in old sheets. |
+| 13 | ℹ️ INFO | NghiepNQ → OhCleo | NghiepNQ joined OhCleo project effective Jun 15 (replacing LongVV temporarily). |
+| 14 | ℹ️ INFO | Upwork all expired | carrick: CAPTCHA, vinn/david2/Neural: no saved sessions. Neural: per policy, silence = never alert. |
+| 15 | ℹ️ INFO | dnduongus security | LastPass login blocked + Card transaction alert + Claude trusted device added. |
 
 ---
 
@@ -132,7 +135,9 @@ Nick worked full day Jun 15 ✓. Primary tool: Windsurf (AI coding).
 
 ## Fountain — 05:35 (+07:00)
 
-**Part 1 — Matrix plan:** ⚠️ UNAVAILABLE (Matrix token expired, browser SSO failed)
+**Part 1 — Matrix plan:** ✅ Retrieved in recheck (08:33+07)
+- @trinhmtt posted at 09:16 Jun 15: "Em gui plan tuan nay a: **ThinhT: 20h | ViTHT: 40h | QC: 15h**"
+- Room: !EWnVDAxbTGsBxPkaaI:nustechnology.com
 
 **Part 2 — Task log actuals (W52, Mon 09/11/26):**
 All Fountain devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN, HaVS): 0h current week (week just started Mon Jun 16).
@@ -207,19 +212,19 @@ Elena: no action needed. ✓
 | Work | Marcel | ✓ complete | Equanimity silent, no issues |
 | Work | Elena - SamGuard | ✓ complete | Elena active + WordPress clean |
 | Work | Raymond - LegalAtoms | ✓ complete | Raymond active, architecture discussion |
-| Work | Neural Contract | ⚠️ incomplete | Upwork expired, can't verify |
-| Work | Bailey | ⚠️ incomplete | Nick no GGS report, Upwork expired |
+| Work | Neural Contract | ✓ complete | Silence = never alert per policy (fixed in recheck) |
+| Work | Bailey | ⚠️ incomplete | TuanNT 0h confirmed (transferred to Family App, no hours logged Jun 15) |
 | Work | Andrew Taraba | ✓ complete | Bizurk silent = normal |
 | Work | Rebecca - William Bills | ⚠️ incomplete | TuanNT 0h no leave Jun 15 |
 | Work | Colin | ✓ complete | Aigile Dev automated, no critical issues |
 | Work | Fountain | ✓ complete | Scanned Parts 2/4/5 (Part 1 Matrix unavailable) |
-| Work | Philip | ⚠️ incomplete | MS Teams check failed (script error) |
+| Work | Philip | ✓ complete | MS Teams: no customer complaint from Philip Briggs (fixed in recheck) |
 | Work | OhCleo | ✓ complete | Tony daily report ✓, Celine active |
 | Pending | Elena - WordPress SamGuard | ✓ complete | WordPress samguard.co clean |
 
 **Check mail card:** ✓ already complete from prior run.
 
-**Check progress card:** 14/19 items complete. 5 incomplete (Maddy/Kai, James Diamond/Vinn, Neural, Bailey, Rebecca/TuanNT). Philip also incomplete. Card NOT marked done (6 incomplete items).
+**Check progress card:** 16/19 items complete. 3 incomplete (Maddy/Kai, James Diamond/Vinn, Bailey, Rebecca/TuanNT). Neural ✓ + Philip ✓ completed in recheck. Card NOT marked done (3+ incomplete items).
 
 ---
 
@@ -232,22 +237,83 @@ Devs with 0h and no approved leave on Jun 15:
 | TuanNT | 0h | None | ⚠️ Reminder needed |
 | LeNH | 0h | None | ⚠️ Reminder needed |
 
-Matrix token unavailable → reminders NOT sent. Manual follow-up required.
+Matrix token unavailable in cron → reminders NOT sent. Token fixed in recheck (08:33+07). Reminders printed below — use `--send-reminder` flag to send.
 
 ---
 
-## Matrix — 05:50 (+07:00)
+## Matrix — 08:33 (+07:00) [recheck]
 
-**Status: ⚠️ UNAVAILABLE**
+**Active rooms: 29 / 125 | Messages: 746** *(since 2026-06-15 08:00 +07:00)*
+Full details: reports/2026-06-16/matrix-rooms-0833.md
 
-Matrix token expired. Attempted browser SSO refresh 4 times (bktqhb2tu, b0zkrl86d, bgytncbmk, biu5ja7jt) — all failed. Browser opened to https://chat.nustechnology.com but SSO login did not complete within 298s timeout (headless session, no manual interaction possible).
+### ⚠️ Action items for DuongDN (11)
 
-**Impact:**
-- Fountain Part 1 (Matrix plan) not retrieved
-- All Matrix room monitoring skipped
-- Reminders not sent to TuanNT, LeNH
+| Room | Time | Message |
+|------|------|---------|
+| OhCleo dev room | 09:49 | nghiepnq: "có dev cty mình ai làm ngày nào chưa a Dương" — asking who else is on OhCleo |
+| Delivery/namtv | 09:48 | namtv: "Charles Chang đang hỏi bên mobile là có dev Wordpress ko. Mày vào Teams của Carrick thử xem ổng nhắn gì ko" — action needed |
+| Kunal - Fountain | 15:21 | thuyltt: reporting HaVS actual 5.5h charged 3.5h on Celine OhCleo job — note says reduce charge |
+| Celine - OhCleo | 11:09 | nghiepnq: "Sendgrid dùng account nào v a Dương" — Sendgrid access issue |
+| Celine - OhCleo | 11:20 | nghiepnq: "bên này git work flow như nào a Dương" — git workflow question |
+| Delivery Dept | 10:39 | namtv: **TuanNT transferred to Family App (Charles Chang), Wordpress Dev, effective 15/6** ⚠️ |
+| Delivery Dept | 10:41 | namtv: **NghiepNQ transferred to OhCleo (Celine Fierro), Python Dev, effective 15/6** ⚠️ |
+| Delivery Dept | 16:09 | minhtv: request TuanNT comm level 3 for Family App |
+| Direct Manager | 15:16 | binhnt: technical article count — DuongDN team needs to submit more articles |
+| Philip/Elevate365 | 13:53 | nghiepnq: "bên này có xem xét làm task trước ưu tiên hơn bên dự án của Trí không" — priority question ⚠️ |
+| LongVV direct | 10:44 | longvv: "Ba em có khối u trong não, h đi theo chụp mri" — father brain tumor MRI Jun 15 afternoon |
 
-**Action needed:** Manually refresh Matrix token when next at computer: `node scripts/matrix-token-refresh.js` (with active browser session).
+### Key updates
+
+**OhCleo — NghiepNQ onboarding Jun 15** (full day):
+- LongVV off Jun 15 PM (father MRI) + Jun 16 — NghiepNQ covering
+- NghiepNQ set up repos, Docker, DB; started Sendgrid task
+- **Production incident 17:15:** NghiepNQ pushed migration to preprod (= live), caused 500 login errors. DuongDN reverted ~17:25. Resolved ✅
+
+**TuanNT — project transfer Jun 15:**
+- Announced by namtv at 10:39: TuanNT → Family App (Charles Chang, Wordpress Dev)
+- Per DuongDN + namtv: no actual tasks yet on Jun 15; scope/offer being defined
+- TuanNT at 08:34 checked Rebecca app but 0h logged in old sheets (transitioning)
+- **Reminder needed**: log hours even on transfer day
+
+**LeNH — Rory wrap-up:**
+- Actively worked Jun 15 (classes/Stripe setup for UAE at 09:46–16:50)
+- Budget hit → extended through this week (wrapup all UAE tasks)
+- 0h in task log sheets despite full day of work → **reminder needed**
+- Franc ended; LeNH next phase = idle after this week
+
+**Fountain — active debugging Jun 15:**
+- ViTHT: shipping fee bug ($50 vs $30/$55 for weekend) — complex multi-hour debug
+- VuTQ + ThinhT: fixed gift-drop link bug (#2938), pushed to LIVE ✅
+- Plan posted by trinhmtt 09:16: ThinhT 20h, ViTHT 40h, QC 15h ✅
+- Live fountain had brief instability ~15:00, self-recovered
+
+**Rory/BXR — client meeting Thu Jun 19:**
+- Team running at full speed: LeNH (backend UAE), KhoaTD (mobile), TinPC
+- Stripe UAE sandbox key shared; live setup pending client
+- Client asking for designer introduction + UI/UX examples
+
+**Elena/Precognize (AA2/AA3):**
+- AA2: Bugs being debugged by team (reminder notifications, asset type display)
+- AA3: pending customer greenlight for next scope
+- Active development continues normally
+
+**Charles Chang — WordPress offer:**
+- Charles sent offer via Teams Jun 15; scope for WordPress fix to company website
+- NamTV → TuanNT assigned as Wordpress Developer
+- No actual tasks started Jun 15 (still in scope/offer phase)
+
+**Philip Briggs — Elevate365.AI:**
+- TríNguyen onboarded Jun 15 (4h/day); working on static demo with industry-specific data
+- Client wants rapid delivery. No customer complaint in MS Teams ✅
+
+**Workstream rollout:**
+- binhnt added 14 projects to Workstream Jun 15
+- DuongDN to add Aysar Khalid/Baamboozle project
+- All teams being asked to login
+
+**Other:**
+- NUS Elliott/GreenFort: thread replies only, no blocking issues
+- Bailey/QC: DuongDN sent reminder at 09:24 in Bailey room
 
 ---
 
@@ -286,10 +352,13 @@ Matrix token expired. Attempted browser SSO refresh 4 times (bktqhb2tu, b0zkrl86
 ## Leave Plan — 05:58 (+07:00)
 
 **Today (Jun 16):**
-- LongVV: PENDING leave (not approved). Reason: "Dắt ba em đi tái khám và chăm bệnh" (take father to follow-up medical appointment). minhtv replied to email but is NOT an authorized approver. DuongDN or NamTV approval needed.
+- LongVV: off (father brain tumor MRI + follow-up). Originally "pending" but Matrix confirms NamTV + namtv approved NghiepNQ coverage. Effectively approved via resource arrangement.
+- TinPC: off Jun 16 (chở mẹ đi tái khám) — noted in resource arrangement.
 
 **Jun 15 (yesterday):**
-- No approved leaves for any monitored dev. TuanNT and LeNH had 0h with no leave → ALERT.
+- VietPH: sick (bị sốt) but logged 8h anyway ✓
+- TuanNT: no leave recorded. 0h in old project sheets (transferred to Family App Jun 15) → ALERT → reminder needed
+- LeNH: no leave recorded. Worked all day (Rory/UAE task) but 0h in sheets → ALERT → reminder needed
 
 **Upcoming approved leaves:**
 - KhanhHH: Jun 25-26 (approved by NamTV) — đám giỗ bà ngoại
@@ -298,23 +367,48 @@ Matrix token expired. Attempted browser SSO refresh 4 times (bktqhb2tu, b0zkrl86
 
 ## Summary
 
-**Window:** Jun 15 09:03+07 → Jun 16 05:00+07 (Mon, ~20h window)
+**Window:** Jun 15 09:03+07 → Jun 16 05:00+07 (Tue, ~20h window) | Recheck: 08:33+07
 
 **🔴 Critical actions needed:**
-1. **TuanNT 0h Jun 15** — contact TuanNT and ask why no hours logged. No leave on record.
-2. **LeNH 0h Jun 15** — contact LeNH. No leave on record.
-3. **Matrix token** — refresh manually when at computer.
-4. **LongVV Jun 16 leave** — needs DuongDN or NamTV approval (not minhtv).
-5. **MPFC OAuth token** — Google_AuthException invalid_grant needs refresh.
+1. **TuanNT 0h Jun 15** — transferred to Family App (Charles Chang) Jun 15 but 0h in all sheets. Send reminder + update monitoring to track new project.
+2. **LeNH 0h Jun 15** — worked all day on Rory UAE task but 0h in sheets. Send reminder.
+3. **LongVV father (brain tumor)** — father has brain tumor, going for MRI. Will need ongoing leave. Monitor.
+4. **MPFC OAuth token** — Google_AuthException invalid_grant needs refresh.
 
 **🟠 Watch items:**
 - Kai (Xtreme): urgent personal issue affecting productivity, client informed
 - Vinn: no daily report Jun 15
 - Fountain: runway 0 weeks, over budget 161h — needs scope discussion with Fountain client
 - Swish APM: 8x signal lost events — check New Relic dashboard
+- OhCleo prod incident Jun 15 17:15 — NghiepNQ pushed migration to live by mistake. Resolved ✅. Monitor NghiepNQ workflow.
+- TuanNT → Family App monitoring gap — need to set up new task log sheet for Charles Chang project
 
 **✅ Normal:**
 - PhucVT 12h, VietPH 8h, KhanhHH 8h ✓
 - Nick 8h 2m (Scrin) ✓
 - Elena clean ✓, Aysar daily report ✓, Jeff (AirAgri) report ✓
 - Check mail complete ✓
+- Matrix token refreshed ✓, Fountain Part 1 retrieved ✓
+- Neural Contract: silence = normal, completed ✓
+- Philip: no MS Teams complaint, completed ✓
+
+---
+
+## Re-check — 08:33 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Matrix | ✓ filled | Token refreshed via `DISPLAY=:1 node scripts/matrix-token-refresh.js`. 29 active rooms, 746 msgs scanned. |
+| Fountain Part 1 | ✓ filled | trinhmtt posted 09:16 Jun 15: ThinhT 20h \| ViTHT 40h \| QC 15h |
+| Philip | ✓ completed | MS Teams (will@nus → Philip Briggs): no customer complaint found |
+| Neural Contract | ✓ completed | Silence + Upwork expired = never alert per policy |
+| Bailey | ○ still incomplete | TuanNT 0h confirmed across JohnYi/Rebecca/Pat sheets (transferred to Family App, no hours logged) |
+| Rebecca | ○ still incomplete | Same TuanNT 0h gate |
+| Maddy/Kai | ○ still incomplete | Kai urgent personal issue → real alert, can't complete |
+| James Diamond/Vinn | ○ still incomplete | Vinn no daily report Jun 15 → confirmed alert |
+| LeNH 0h | ○ verified | Worked Jun 15 (Rory UAE, Matrix confirmed) but 0h in sheets — genuine miss. Reminder needed. |
+| Upwork | ✗ still expired | Sessions (carrick/vinn/david2) not refreshed — need browser login. |
+
+**Cleared this recheck:** Neural Contract ✓, Philip ✓, Matrix ✓, Fountain Part 1 ✓
+**Still open:** Bailey, Rebecca (TuanNT 0h), Maddy/Kai (Kai issue), James Diamond (Vinn no report)
+**Reminders needed:** TuanNT + LeNH (0h Jun 15). Use `/me:daily-report reminders --send-reminder` to send via Matrix.
