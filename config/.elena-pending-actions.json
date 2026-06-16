@@ -18,6 +18,16 @@
   },
   "merged": [
     {
+      "pr": 306,
+      "branch": "fixbug_dp",
+      "type": "dp",
+      "ticket_id": "fixbug_dp",
+      "merged_at": "2026-06-16",
+      "deployed": false,
+      "status_updated": false,
+      "pending_action": "Merged (squash) 2026-06-16 11:47 +07. Bug fixes: connection in progress status, modal overlay layering, duplicate connection prevention, action menu visibility. Deploy pending."
+    },
+    {
       "pr": 305,
       "branch": "DP-666-create-and-manage-autoscan",
       "type": "dp",
@@ -192,14 +202,14 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-06-06",
-    "time": "08:53 +07:00",
+    "date": "2026-06-16",
+    "time": "11:47 +07:00",
     "prs_checked": "api_duongdn_token",
-    "open_prs": 0,
-    "prs_merged": 0,
-    "deploy_status": "none_needed",
-    "wordpress_status": "clean_no_js_errors",
-    "precognize_open_prs": "unknown_nusken_not_in_gh_config"
+    "open_prs": 1,
+    "prs_merged": 1,
+    "deploy_status": "pending_pr306",
+    "wordpress_status": "not_checked_this_run",
+    "precognize_open_prs": "not_checked_this_run"
   },
   "deployed_no_status_update": [
     {

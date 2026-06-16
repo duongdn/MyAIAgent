@@ -412,3 +412,25 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 **Still open:** Maddy/Kai (Kai real alert — urgent personal issue, client informed)
 **Reminders needed:** LeNH only (0h Jun 15, no leave). TuanNT has 8h ✓. Use `/me:daily-report reminders --send-reminder` to send via Matrix.
 **Bug found:** Cron AirAgri Discord scan only checks #airagri-flutter — misses reports posted in #airagri_webapp. Fix script to scan both channels.
+
+---
+
+## Elena PRs — 11:47 (+07:00)
+
+**Pending actions check:** All entries `deployed: true` or `NOTE` — no missed deploys.
+
+**Open PRs check:** 1 open PR found.
+
+| PR | Title | Branch | Author | CodeRabbit | Action |
+|----|-------|--------|--------|------------|--------|
+| [#306](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/306) | Fixbug dp | `fixbug_dp` → `process-digital-plant` | nusken | ✅ No high-risk issues — bug fixes only | **Merged (squash)** |
+
+**Changes in PR #306:**
+- `edgeCanvas.service.ts` — +18/-2: prevent duplicate simultaneous connection attempts
+- `automatic-scan.component.ts` — +6: "Connection in progress" status message
+- `plant-model-sections.component.html` — +123/-120: action menu visibility based on element type, modal overlay z-index fix
+- `en-us.json` — +2/-1: locale string for new status
+- `tag-measurement-type-modal.component.html` — +1/-1: minor template fix
+
+**Merge commit:** `eb0e562`
+**Deploy status:** Pending — run `/me:daily-report elena deploy` to deploy to MayBanServer.
