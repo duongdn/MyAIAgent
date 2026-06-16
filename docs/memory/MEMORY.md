@@ -54,6 +54,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_puppeteer_cron_tmpdir.md](feedback_puppeteer_cron_tmpdir.md) — Puppeteer cron /tmp failure → false 0h/unavailable — fix: `TMPDIR=/var/tmp` + `--crash-dumps-dir=/var/tmp` + `--disable-dev-shm-usage`
 - [feedback_vietph_leave_date_cron_bug.md](feedback_vietph_leave_date_cron_bug.md) — Leave note for day N-1 applied to day N by cron — verify leave note row date = PREV_DATE before marking "leave day"
 - [feedback_tuannt_gate_show_breakdown.md](feedback_tuannt_gate_show_breakdown.md) — TuanNT gate label must show per-sheet breakdown (JohnYi Xh | Paturevision Xh | ...) — "combined Xh" alone is misleading
+- [feedback_airagri_webapp_channel.md](feedback_airagri_webapp_channel.md) — **Vinn posts in #airagri_webapp, NOT only #airagri-flutter** — always scan BOTH channels to find "Just report my process today:"
 
 ## News Digest
 - [feedback_news_digest_new_topic.md](feedback_news_digest_new_topic.md) — Unknown topic → add as new topic with own RSS sources in fetch-news.py, never alias existing topics

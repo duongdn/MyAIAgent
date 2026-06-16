@@ -13,7 +13,7 @@
 | 1 | 🔴 HIGH | TuanNT 0h Jun 15 | No hours logged across all 4 sheets (JohnYi W28, Rebecca W29, Neural W25, Paturevision W32). No leave recorded. |
 | 2 | 🔴 HIGH | LeNH 0h Jun 15 | No hours in Rory W16 (only KhoaTD 6h + TinPC 4h), Franc ended, Aysar W29 = 0h. No leave recorded. |
 | 3 | 🟠 MED | Kai urgent personal | Posted in Xtreme: "I have urgent personal issue" + "haven't been busy". Client (Madhuraka/Anoma) informed. |
-| 4 | 🟠 MED | Vinn no daily report | No nusvinn post in AirAgri window. Jeff posted (4h ✓). James Diamond active. |
+| 4 | ℹ️ INFO | Vinn report in #airagri_webapp | nusvinn posted "Just report my process today:" at 17:19+07 in #airagri_webapp. Cron missed (only scanned #airagri-flutter). ✓ |
 | 5 | 🟠 MED | Fountain runway = 0 | Est 2953.5h vs 3114.5h charged. Over budget 161h. 15 tasks over-estimate. |
 | 6 | 🟡 LOW | Swish APM signal lost | vuongtrancr: 8x "Signal lost 10 min" on Low App Throughput. New Relic Jun 15 report. |
 | 7 | 🟡 LOW | LongVV leave PENDING | June 16 leave not approved (minhtv replied but not authorized approver). Reason: father medical. |
@@ -92,7 +92,7 @@ Trello: No items blocked by Slack alerts (Kai alert → Maddy item left incomple
 - Jeff also posted workflow documentation for James Diamond
 - Paul Diamond (#airagri-testing): Testing feedback, bug reports on alarm/battery features
 - James Diamond (.jdiamond): Discussing code approach in #airagri-flutter
-- **⚠️ Vinn (nusvinn):** No daily report posted in window. James Diamond is active.
+- **nusvinn (Vinn):** Posted "Just report my process today:" at 17:19+07 in **#airagri_webapp** ✓. Active all day: SMS fix 16:05, code review PR 498/499, Entra SSO support, alarm screen config.
 
 Trello: James Diamond item → ⚠️ incomplete (Vinn no report). Andrew Taraba (Bizurk) → ✓.
 
@@ -203,7 +203,7 @@ Elena: no action needed. ✓
 |-----------|------|--------|-------|
 | Normal | Maddy - Carrick/Kai/Luis | ⚠️ incomplete | Kai urgent personal issue, low productivity |
 | Normal | John Yi - Amazing Meds | ✓ complete | John active in Amazing Meds |
-| Should do | James Diamond - Vinn task | ⚠️ incomplete | Vinn no daily report in AirAgri |
+| Should do | James Diamond - Vinn task | ✓ complete | nusvinn posted daily report 17:19+07 in #airagri_webapp (cron missed — only scanned #airagri-flutter) |
 | Closely monitor | Rory | ✓ complete | Carrick+Jeff+KhoaTD+TinPC active on Swift |
 | Closely monitor | Aysar | ✓ complete | Aysar posted MPDM update 17:09+07 |
 | Closely monitor | Franc | ✓ complete | RDC automated only, no client issues |
@@ -224,7 +224,7 @@ Elena: no action needed. ✓
 
 **Check mail card:** ✓ already complete from prior run.
 
-**Check progress card:** 16/19 items complete. 3 incomplete (Maddy/Kai, James Diamond/Vinn, Bailey, Rebecca/TuanNT). Neural ✓ + Philip ✓ completed in recheck. Card NOT marked done (3+ incomplete items).
+**Check progress card:** 17/19 items complete. Incomplete: Maddy/Kai (Kai issue), Bailey + Rebecca (TuanNT 0h). Neural ✓ + Philip ✓ + James Diamond ✓ completed in recheck.
 
 ---
 
@@ -376,8 +376,7 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 4. **MPFC OAuth token** — Google_AuthException invalid_grant needs refresh.
 
 **🟠 Watch items:**
-- Kai (Xtreme): urgent personal issue affecting productivity, client informed
-- Vinn: no daily report Jun 15
+- Kai (Xtreme): urgent personal issue affecting productivity, client (Madhuraka/Anoma) informed directly by Kai
 - Fountain: runway 0 weeks, over budget 161h — needs scope discussion with Fountain client
 - Swish APM: 8x signal lost events — check New Relic dashboard
 - OhCleo prod incident Jun 15 17:15 — NghiepNQ pushed migration to live by mistake. Resolved ✅. Monitor NghiepNQ workflow.
@@ -405,10 +404,11 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 | Bailey | ○ still incomplete | TuanNT 0h confirmed across JohnYi/Rebecca/Pat sheets (transferred to Family App, no hours logged) |
 | Rebecca | ○ still incomplete | Same TuanNT 0h gate |
 | Maddy/Kai | ○ still incomplete | Kai urgent personal issue → real alert, can't complete |
-| James Diamond/Vinn | ○ still incomplete | Vinn no daily report Jun 15 → confirmed alert |
+| James Diamond/Vinn | ✓ completed | nusvinn "Just report my process today:" at 17:19+07 in #airagri_webapp. Cron only scanned #airagri-flutter — missed it. |
 | LeNH 0h | ○ verified | Worked Jun 15 (Rory UAE, Matrix confirmed) but 0h in sheets — genuine miss. Reminder needed. |
 | Upwork | ✗ still expired | Sessions (carrick/vinn/david2) not refreshed — need browser login. |
 
-**Cleared this recheck:** Neural Contract ✓, Philip ✓, Matrix ✓, Fountain Part 1 ✓
-**Still open:** Bailey, Rebecca (TuanNT 0h), Maddy/Kai (Kai issue), James Diamond (Vinn no report)
+**Cleared this recheck:** Neural Contract ✓, Philip ✓, Matrix ✓, Fountain Part 1 ✓, James Diamond ✓ (nusvinn reported in #airagri_webapp, cron missed)
+**Still open:** Bailey, Rebecca (TuanNT 0h confirmed), Maddy/Kai (Kai real alert)
 **Reminders needed:** TuanNT + LeNH (0h Jun 15). Use `/me:daily-report reminders --send-reminder` to send via Matrix.
+**Bug found:** Cron AirAgri Discord scan only checks #airagri-flutter — misses reports posted in #airagri_webapp. Fix script to scan both channels.
