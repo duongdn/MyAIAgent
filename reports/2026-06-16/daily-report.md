@@ -108,11 +108,11 @@ Trello: James Diamond item → ⚠️ incomplete (Vinn no report). Andrew Taraba
 | PhucVT | PhucVT W30 | **8h** | None | ✓ (cron reported 12h = day total incl. AnhNH2 4h) |
 | TuanNT | Paturevision W32 | **8h** | None | ✓ transferred to Family App — Bailey only (cron used wrong tab, found 0h) |
 | VietPH | Paturevision W32 | **0h** | Nghỉ cả ngày (sick) | ✓ on leave (cron incorrectly reported 8h from TuanNT row) |
-| KhanhHH | KhanhHH W45 | **6h** | None | ✓ (cron reported 8h = day total; KhanhHH alone = 6h) |
+| KhanhHH | KhanhHH W45 (6h) + Aysar Workstream (2h) | **8h total** | None | ✓ |
 | LeNH | Rory W16 (KhoaTD+TinPC) + Franc (ended) + Aysar W29 | 0h for LeNH | None | ⚠️ ALERT |
 
 **TuanNT detail (corrected):** Paturevision W32 Jun 15 = TuanNT **8h** ("Grazing Software Desktop view") + NamNN 4h. JohnYi W28 = 0h, Rebecca W29 = 0h (expected — transferring to Family App/Wordpress). TuanNT combined = 8h ✓. Bailey + Rebecca Trello completed.
-**KhanhHH detail (corrected):** W45 Jun 15 = canvasliving Auto Scaling 1.5h + Fix Redmines #79164/#79218 3h + timezone bug (Trello #910) 0.5h + Patch 2 staging release 1h = **6h total** (cron reported 8h = day total; other devs: NamNN 4h, SamHT 5h).
+**KhanhHH detail:** Generator W45 Jun 15 = canvasliving Auto Scaling 1.5h + Fix Redmines #79164/#79218 3h + timezone bug (Trello #910) 0.5h + Patch 2 staging release 1h = 6h. Aysar Workstream (Baamboozle) Jun 15 = 2h ("Fix feedback add memo/footer invoice for Add discount team task"). **Total: 8h ✓**.
 **PhucVT detail (corrected):** W30 Jun 15 = AirAgri security research, review PR 498/499, Entra SSO support, Additional Property Access button, alarm screen edit = **8h** (cron reported 12h = day total incl. AnhNH2 4h).
 **VietPH detail (corrected):** Paturevision W32 Jun 15 = "Nghỉ cả ngày" (full day sick leave). **0h** is expected and OK. Cron incorrectly attributed TuanNT's 8h to VietPH.
 
@@ -386,7 +386,7 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 - TuanNT → Family App monitoring gap — need to set up new task log sheet for Charles Chang project
 
 **✅ Normal:**
-- PhucVT 8h ✓, VietPH sick leave (0h OK) ✓, KhanhHH 6h ✓, TuanNT 8h ✓
+- PhucVT 8h ✓, VietPH sick leave (0h OK) ✓, KhanhHH 8h ✓ (6h Generator + 2h Aysar Workstream), TuanNT 8h ✓
 - Nick 8h 2m (Scrin) ✓
 - Elena clean ✓, Aysar daily report ✓, Jeff (AirAgri) report ✓
 - Check mail complete ✓
