@@ -18,7 +18,6 @@
 | 6 | 🟡 LOW | Swish APM signal lost | vuongtrancr: 8x "Signal lost 10 min" on Low App Throughput. New Relic Jun 15 report. |
 | 7 | 🟡 LOW | LongVV leave PENDING | June 16 leave not approved (minhtv replied but not authorized approver). Reason: father medical. |
 | 8 | 🟡 LOW | MPFC OAuth error | Rollbar: #46 Google_AuthException invalid_grant (Bad Request). Token refresh needed. |
-| 9 | 🟡 LOW | Nick no GGS report | No Nick daily report found in GGS Slack. Only Joey msg (no troubles). |
 | 10 | ℹ️ INFO | LongVV father brain tumor | Father has brain tumor (khối u trong não), went for MRI Jun 15 PM + off Jun 16. NghiepNQ covering OhCleo. |
 | 11 | ℹ️ INFO | OhCleo prod incident | NghiepNQ pushed migration to preprod (=live) causing 500 errors ~17:15. DuongDN fixed ~17:25. |
 | 12 | ℹ️ INFO | TuanNT project transfer | Transferred to Family App (Charles Chang, Wordpress Dev) effective Jun 15 per namtv. 0h expected in old sheets. |
@@ -84,7 +83,7 @@ Trello: No items blocked by Slack alerts (Kai alert → Maddy item left incomple
 
 | Server | Account | Msgs (window) | Key content | Status |
 |--------|---------|---------------|-------------|--------|
-| AirAgri | nusvinn | 11 | Jeff daily report ✓ (4h), client testing activity | ⚠️ Vinn absent |
+| AirAgri | nusvinn | 54+ | Jeff daily report ✓ (4h), nusvinn report ✓ 17:19+07 in #airagri_webapp | ✓ |
 | Bizurk | nuscarrick | 0 | Silent | ✓ normal |
 
 **AirAgri details:**
@@ -94,13 +93,13 @@ Trello: No items blocked by Slack alerts (Kai alert → Maddy item left incomple
 - James Diamond (.jdiamond): Discussing code approach in #airagri-flutter
 - **nusvinn (Vinn):** Posted "Just report my process today:" at 17:19+07 in **#airagri_webapp** ✓. Active all day: SMS fix 16:05, code review PR 498/499, Entra SSO support, alarm screen config.
 
-Trello: James Diamond item → ⚠️ incomplete (Vinn no report). Andrew Taraba (Bizurk) → ✓.
+Trello: James Diamond ✓ completed (nusvinn reported in #airagri_webapp). Andrew Taraba (Bizurk) ✓.
 
 ---
 
 ## Sheets — all — 05:30 (+07:00)
 
-**PREV_DATE:** 2026-06-15 (Monday) | **Week:** W16 (Rory), W29 (Aysar), W28 (JohnYi), W52 (Fountain)
+**PREV_DATE:** 2026-06-15 (Monday) | **Week:** W16 (Rory), W29 (Aysar), W28 (JohnYi), W31 (Fountain), W32 (Paturevision/Bailey)
 
 | Developer | Sheet | Hours Jun 15 | Leave | Status |
 |-----------|-------|-------------|-------|--------|
@@ -116,7 +115,7 @@ Trello: James Diamond item → ⚠️ incomplete (Vinn no report). Andrew Taraba
 **PhucVT detail (corrected):** W30 Jun 15 = AirAgri security research, review PR 498/499, Entra SSO support, Additional Property Access button, alarm screen edit = **8h** (cron reported 12h = day total incl. AnhNH2 4h).
 **VietPH detail (corrected):** Paturevision W32 Jun 15 = "Nghỉ cả ngày" (full day sick leave). **0h** is expected and OK. Cron incorrectly attributed TuanNT's 8h to VietPH.
 
-**LeNH detail:** Rory W16 entries on Jun 15 = KhoaTD (6h) + TinPC (4h) = 10h total, no LeNH entry. Franc project: last active W24 (May 11-17), now ended. Aysar W29 Jun 15 = 0h total. LeNH has 0h and no leave on Jun 15.
+**LeNH detail:** Rory W16 entries on Jun 15 = KhoaTD (4h) + TinPC (4h) = 8h total, no LeNH entry. Franc project: last active W24 (May 11-17), now ended. Aysar W29 Jun 15 = 0h total. LeNH has 0h and no leave on Jun 15.
 
 **LongVV note:** Part-time 16h/week on Xtreme (Maddy). 0h on W11 day 1 (Jun 15) is acceptable — check mid-week for accumulation. June 16 leave PENDING (not approved).
 
@@ -142,11 +141,10 @@ Nick worked full day Jun 15 ✓. Primary tool: Windsurf (AI coding).
 - @trinhmtt posted at 09:16 Jun 15: "Em gui plan tuan nay a: **ThinhT: 20h | ViTHT: 40h | QC: 15h**"
 - Room: !EWnVDAxbTGsBxPkaaI:nustechnology.com
 
-**Part 2 — Task log actuals (W52, Mon 09/11/26):**
-All Fountain devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN, HaVS): 0h current week (week just started Mon Jun 16).
-Prev week (W51): also 0h in script output (may need manual verification).
+**Part 2 — Task log actuals (W31, Jun 15-21 2026):**
+All Fountain devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN, HaVS): 0h in W31 Jun 15. Cron used wrong tab W52 (Nov 2026). Correct tab W31 also shows 0h — devs were active per Matrix (ViTHT shipping fee bug, VuTQ+ThinhT gift-drop fix) but task log not yet filled.
 
-**Part 3 — Plan vs Actual:** W52 = no tasks logged yet (week 1 day 1).
+**Part 3 — Plan vs Actual:** W31 Jun 15 = 0h logged (first day of week, task log likely filled next day).
 
 **Part 4 — Capacity & Runway:**
 | Metric | Value |
@@ -359,8 +357,8 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 - TinPC: off Jun 16 (chở mẹ đi tái khám) — noted in resource arrangement.
 
 **Jun 15 (yesterday):**
-- VietPH: sick (bị sốt) but logged 8h anyway ✓
-- TuanNT: no leave recorded. 0h in old project sheets (transferred to Family App Jun 15) → ALERT → reminder needed
+- VietPH: sick (bị sốt) — logged "Nghỉ cả ngày" (full day off), 0h OK ✓
+- TuanNT: 8h logged in Paturevision W32 ("Grazing Software Desktop view") — no alert ✓
 - LeNH: no leave recorded. Worked all day (Rory/UAE task) but 0h in sheets → ALERT → reminder needed
 
 **Upcoming approved leaves:**
@@ -373,10 +371,9 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 **Window:** Jun 15 09:03+07 → Jun 16 05:00+07 (Tue, ~20h window) | Recheck: 08:33+07
 
 **🔴 Critical actions needed:**
-1. **TuanNT 0h Jun 15** — transferred to Family App (Charles Chang) Jun 15 but 0h in all sheets. Send reminder + update monitoring to track new project.
-2. **LeNH 0h Jun 15** — worked all day on Rory UAE task but 0h in sheets. Send reminder.
-3. **LongVV father (brain tumor)** — father has brain tumor, going for MRI. Will need ongoing leave. Monitor.
-4. **MPFC OAuth token** — Google_AuthException invalid_grant needs refresh.
+1. **LeNH 0h Jun 15** — worked all day on Rory UAE task but 0h in sheets. Send reminder.
+2. **LongVV father (brain tumor)** — father has brain tumor, going for MRI. Will need ongoing leave. Monitor.
+3. **MPFC OAuth token** — Google_AuthException invalid_grant needs refresh.
 
 **🟠 Watch items:**
 - Kai (Xtreme): urgent personal issue affecting productivity, client (Madhuraka/Anoma) informed directly by Kai
@@ -404,14 +401,14 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 | Fountain Part 1 | ✓ filled | trinhmtt posted 09:16 Jun 15: ThinhT 20h \| ViTHT 40h \| QC 15h |
 | Philip | ✓ completed | MS Teams (will@nus → Philip Briggs): no customer complaint found |
 | Neural Contract | ✓ completed | Silence + Upwork expired = never alert per policy |
-| Bailey | ○ still incomplete | TuanNT 0h confirmed across JohnYi/Rebecca/Pat sheets (transferred to Family App, no hours logged) |
-| Rebecca | ○ still incomplete | Same TuanNT 0h gate |
+| Bailey | ✓ completed | TuanNT 8h in Paturevision W32 ("Grazing Software Desktop view") — cron wrong tab. Completed 09:10+07 |
+| Rebecca | ✓ completed | TuanNT 8h combined (not 0h). Completed 09:15+07 |
 | Maddy/Kai | ○ still incomplete | Kai urgent personal issue → real alert, can't complete |
 | James Diamond/Vinn | ✓ completed | nusvinn "Just report my process today:" at 17:19+07 in #airagri_webapp. Cron only scanned #airagri-flutter — missed it. |
 | LeNH 0h | ○ verified | Worked Jun 15 (Rory UAE, Matrix confirmed) but 0h in sheets — genuine miss. Reminder needed. |
 | Upwork | ✗ still expired | Sessions (carrick/vinn/david2) not refreshed — need browser login. |
 
 **Cleared this recheck:** Neural Contract ✓, Philip ✓, Matrix ✓, Fountain Part 1 ✓, James Diamond ✓ (nusvinn reported in #airagri_webapp, cron missed)
-**Still open:** Bailey, Rebecca (TuanNT 0h confirmed), Maddy/Kai (Kai real alert)
-**Reminders needed:** TuanNT + LeNH (0h Jun 15). Use `/me:daily-report reminders --send-reminder` to send via Matrix.
+**Still open:** Maddy/Kai (Kai real alert — urgent personal issue, client informed)
+**Reminders needed:** LeNH only (0h Jun 15, no leave). TuanNT has 8h ✓. Use `/me:daily-report reminders --send-reminder` to send via Matrix.
 **Bug found:** Cron AirAgri Discord scan only checks #airagri-flutter — misses reports posted in #airagri_webapp. Fix script to scan both channels.
