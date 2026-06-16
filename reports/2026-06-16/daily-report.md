@@ -236,7 +236,7 @@ Devs with 0h and no approved leave on Jun 15:
 | Dev | Hours | Leave | Action |
 |-----|-------|-------|--------|
 | TuanNT | 8h (Paturevision W32) | Transitioning to Family App | ✅ No reminder — logged "Grazing Software Desktop view" 8h |
-| LeNH | 0h | None | ⚠️ Reminder needed |
+| LeNH | 0h | None | ✅ Reminder sent 10:43+07 via Matrix (!OIrgPraJWrcDTnRVLQ) |
 
 Matrix token unavailable in cron → reminders NOT sent. Token fixed in recheck (08:33+07). Reminders printed below — use `--send-reminder` flag to send.
 
