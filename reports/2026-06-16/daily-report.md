@@ -434,3 +434,21 @@ Full details: reports/2026-06-16/matrix-rooms-0833.md
 
 **Merge commit:** `eb0e562`
 **Deploy status:** Pending — run `/me:daily-report elena deploy` to deploy to MayBanServer.
+
+---
+
+## Elena Deploy — 11:51 (+07:00)
+
+**Target:** MayBanServer (`projects/Elena/Elena-SamGuard-Digital-Plant/process-digital-plant`)
+
+| Step | Result |
+|------|--------|
+| Pending deploy check | PR #306 (fixbug_dp) — `deployed: false` |
+| git pull origin process-digital-plant | ✅ 15 commits fast-forwarded (conflict resolved: server was on feature branch, stashed server configs, switched to process-digital-plant, re-applied stash) |
+| ng build --configuration development | ✅ 17.4s — no errors |
+| Matrix announce | ✅ Sent to Elena - Digital Plant room |
+| Redmine update | N/A (not a redmine branch) |
+
+**Note:** MayBanServer was on `DP-666-create-and-manage-autoscan` with local server-specific configs (proxy.conf.json → process-digital-plant3.nusdev.net, environment files). Stashed before checkout, restored after pull. Server now on `process-digital-plant` ✓
+
+Dev URL: https://process-digital-plant2.nusdev.net/

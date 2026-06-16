@@ -23,9 +23,9 @@
       "type": "dp",
       "ticket_id": "fixbug_dp",
       "merged_at": "2026-06-16",
-      "deployed": false,
+      "deployed": true,
       "status_updated": false,
-      "pending_action": "Merged (squash) 2026-06-16 11:47 +07. Bug fixes: connection in progress status, modal overlay layering, duplicate connection prevention, action menu visibility. Deploy pending."
+      "pending_action": "DONE — Merged (squash) 2026-06-16 11:47 +07. Deployed 2026-06-16 11:51 +07 (git pull + ng build 17.4s OK). Announced to Matrix Elena-Digital-Plant room."
     },
     {
       "pr": 305,
@@ -207,7 +207,7 @@
     "prs_checked": "api_duongdn_token",
     "open_prs": 1,
     "prs_merged": 1,
-    "deploy_status": "pending_pr306",
+    "deploy_status": "deployed_pr306_ok",
     "wordpress_status": "not_checked_this_run",
     "precognize_open_prs": "not_checked_this_run"
   },
