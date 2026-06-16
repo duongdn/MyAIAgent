@@ -14,6 +14,7 @@ KhanhHH logs hours on the Aysar sheet (`1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SG
 - "LeNH on Aysar Xh" in Upwork = KhanhHH's work billed through LeNH tracker
 
 **How to apply:**
-1. KhanhHH daily total = scan **ALL** sheets (not just Generator + Aysar) — devs switch projects freely. See [[feedback_dev_project_mapping_flexible]].
+1. KhanhHH daily total = Generator sheet (W45 etc.) **+** Aysar Workstream (Baamboozle project `cmqez93ka07q8p81v7035l3td`). Google Sheets Aysar tab will show 0h — that is expected, Aysar hours are in Workstream not Sheets.
 2. Aysar uses non-calendar W{n} numbering — always verify by reading W tab's first date row, not assuming calendar week.
-3. Standard 8h/day rule applies to KhanhHH aggregate across ALL sheets.
+3. Standard 8h/day rule applies to KhanhHH aggregate across ALL sources (Sheets + Workstream).
+4. Workstream API: `GET /api/review/week?projectId=cmqez93ka07q8p81v7035l3td&date=YYYY-MM-DD` — look for `employeeName: KhanhHH` in rows, `actual` field is hours in "H:MM" format.
