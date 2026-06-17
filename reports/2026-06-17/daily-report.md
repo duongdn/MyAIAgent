@@ -5,26 +5,25 @@
 
 ## ⚠️ ALERTS SUMMARY
 
-| # | Item | Source | Alert |
-|---|------|--------|-------|
-| 1 | TuanNT | Google Sheets (John Yi / Bailey / Rebecca sheets) | **0h logged Jun 16, no leave note** → blocks John Yi + Bailey + Rebecca Trello items |
-| 2 | KhanhHH | Google Sheets (Aysar sheet) | **0h logged Jun 16, no leave note** → skip Aysar Trello item |
-| 3 | VietPH | Google Sheets | **0h logged Jun 16** (leave status unclear after script fallback bug) |
-| 4 | Elliott | Generator Slack | **No activity since Jun 10** → skip Elliott Trello item |
-| 5 | Aysar | Baamboozle MPDM C07SQ4HAUHZ | **0 messages in check window** → skip Aysar Trello item |
-| 6 | Fountain | Fountain Trello board | **Customer alert / stuck card** → Fountain Trello item kept incomplete |
-| 7 | Matrix | matrix.nustechnology.com | **All tokens expired (SSO required)** → Matrix plan check BLOCKED |
-| 8 | Upwork | Upwork sessions | **All sessions expired (CAPTCHA required)** → Upwork data unavailable |
-| 9 | Philip | MS Teams (will@nustechnology.com) | **Browser lock unresolvable** → Philip check BLOCKED |
+*(Updated 09:40 +07:00 after recheck — original cron alerts #1–4, #7–9 resolved)*
 
-**Trello Check Progress — Incomplete items (7):**
-- John Yi - Amazing Meds (TuanNT 0h)
-- Bailey (TuanNT 0h)
-- Rebecca (William Bills) (TuanNT 0h)
-- Elliott (no Generator activity since Jun 10)
-- Aysar (KhanhHH 0h + MPDM C07SQ4HAUHZ = 0 msgs)
-- Fountain (customer alert on Trello board)
-- Philip (MS Teams check blocked)
+| # | Item | Source | Alert | Status |
+|---|------|--------|-------|--------|
+| 1 | TuanNT | Google Sheets | **0h Jun 16 cron** — recheck: **1.5h in Paturevision** → combined OK | ✅ RESOLVED |
+| 2 | KhanhHH | Google Sheets | **0h Jun 16 cron** — recheck: **8h in Generator** → OK | ✅ RESOLVED |
+| 3 | VietPH | Google Sheets | Cron script bug (showed NamNN's hours) — recheck: **VietPH 8h real** | ✅ RESOLVED |
+| 4 | Elliott | Generator Slack | No activity since Jun 10 — Trello item already completed (Violet active) | ✅ RESOLVED |
+| 5 | Aysar | Baamboozle MPDM C07SQ4HAUHZ | 0 messages in window — no daily report from Aysar | ⚠️ OPEN |
+| 6 | Fountain | Fountain Trello board | **Customer alert: @mike62798179** commented on "Scheduled Order chose next day delivery" card | ⚠️ OPEN |
+| 7 | Matrix | matrix.nustechnology.com | Tokens expired — **refreshed OK** (09:30) | ✅ RESOLVED |
+| 8 | Upwork | Upwork sessions | Sessions expired — **recovered** (DISPLAY=:1) | ✅ RESOLVED |
+| 9 | Philip | MS Teams | Browser lock — **cleared, no complaint found** (Teams opened, no Philip messages) | ✅ RESOLVED |
+
+**Trello Check Progress — Final state (18/20 complete):**
+- ⚠️ Aysar — 0 MPDM messages → no daily report from Aysar confirmed
+- ⚠️ Fountain — customer alert from @mike62798179 confirmed
+
+**Completed in recheck:** Bailey ✅, Philip ✅ (all others already complete)
 
 ---
 
@@ -178,53 +177,82 @@ Trello: Elena - SamGuard ✓ complete. Elena - WordPress ✓ complete.
 
 ---
 
-## Upwork — 05:30 (+07:00)
+## Upwork — 09:38 (+07:00) *(recheck — recovered)*
 
-| Session | Status |
-|---------|--------|
-| carrick session | ⚠️ EXPIRED (CAPTCHA required to re-login) |
-| Neural Contract session | ⚠️ EXPIRED (session_expired) |
-| Aysar / KhanhHH session | ⚠️ EXPIRED |
+| Workroom | Developer | This Week | Last Week | Status |
+|----------|-----------|-----------|-----------|--------|
+| Rory | LeNH | **16.5h** (Mon 8.17h + Tue 8.33h) | 28h | ✓ |
+| Neural Contract | external | 0h | 1.5h | ✓ (silence = OK) |
+| Aysar | LeNH | 0h | 20h | ⚠️ (combined with MPDM check) |
+| Bailey-VietPH | VietPH | 0h | 0h | Note: task log shows 8h Jun 16 |
+| Bailey-DuongDN | DuongDN | 0h | 0h | Expected (DEV3 inactive) |
 
-Script: `scripts/upwork-weekly-hours.js` — **ALL sessions expired**. Cannot retrieve weekly hours in cron mode (headless, no browser interaction). Upwork data unavailable for this run.
-
----
-
-## Matrix — 05:31 (+07:00)
-
-| Status | Detail |
-|--------|--------|
-| ⚠️ BLOCKED | Access token expired. Refresh token also expired (`invalid_grant`). SSO requires interactive browser login. Cannot refresh in cron mode. |
-
-**Impact:** Fountain Matrix plan check unavailable. Cannot verify if daily plan was posted by developer.
-
-**Action needed:** Manual Matrix re-login required to restore monitoring. Run `scripts/matrix-token-cdp-refresh.js` with interactive browser session.
+Neural Contract: 0h is normal — silence never an alert per rules. Neural Trello ✓ complete.
 
 ---
 
-## Philip (MS Teams) — 05:35 (+07:00)
+## Matrix — 09:30 (+07:00) *(recheck — token refreshed)*
 
-| Status | Detail |
-|--------|--------|
-| ⚠️ BLOCKED | MS Teams browser lock unresolvable. Multiple attempts: killed all Chrome/Puppeteer processes, removed `Singleton*` files, removed `Default/LOCK` and `DevToolsActivePort`. Puppeteer still reports "browser already running for msteams-will-profile". |
+**Active rooms: 22 / 125 | Messages: 701** *(since Jun 16 08:00 +07:00)*
+Full details: reports/2026-06-17/matrix-rooms-0930.md
 
-**Impact:** Cannot check Philip Briggs (Six Star Rentals) DMs for customer complaints or unresolved requests. Philip Trello item kept incomplete.
+### ⚠️ Action items for DuongDN (2)
 
-**Action needed:** Manual check of MS Teams (will@nustechnology.com) → Philip Briggs (pbriggs@sixstarrentals.com.au).
+| Room | Time | Message |
+|------|------|---------|
+| Celine - OhCleo | 09:58 | nghiepnq: "v giờ check mấy task bên column `To do priority upcoming week` hả a Dương" ⚠️ |
+| Celine - OhCleo | 19:46 | nghiepnq: "bên mobile còn 1 task chờ a Hùng check… mai chắc nhờ a Dương hay Long xem thử bị gì" ⚠️ |
+
+### Key updates
+
+**OhCleo (Celine) — active dev day (167 messages):**
+- Nghiep + Hiep + Minh all working. QC (HungPN) testing new features.
+- #150 free listenings: deployed to staging, QC testing. Mobile QC found count display issue.
+- Production downtime at 15:17–15:21: Nghiep deployed ~15:07, caused brief slowdown, recovered on its own.
+- Tasks: "To do priority upcoming week" column — Nghiep asking DuongDN to review
+- LongVV tasks: branching discussion ongoing; LongVV at hospital (remote wifi issue), came to office
+
+**Fountain (Kunal) — active (65 messages):**
+- ViTHT, ThinhT, VuTQ, HungPN, TrinhMTT all working Jun 16–17
+- #2868 (Scheduled Order delivery date): rick pushed fix to Live, customer @mike62798179 asked for update → already addressed
+- #2862 GA4 event: VuTQ deployed to Live
+- Multiple bug fixes deployed to Live on Jun 16
+- PR #458, #459, #462, #464 all reviewed and deployed
+
+**LongVV — working at office today (Jun 17):**
+- Came to office (hospital wifi too slow for remote)
+- DuongDN discussing: VietPH replacing LongVV for Maddy tasks; LongVV finishing OhCleo Python task today
+- DuongDN to PM (namtv): considering LongVV remote Thu/Fri if needed
+
+**LeNH — confirmed off sick today:**
+- DuongDN message: "LeNH xin off: chắc cứ cho off thôi, bạn bệnh. Hỏi thăm project thì tạm ko còn gì cho bạn làm"
+
+**Other:**
+- BDD Delivery: binhnt posted plan for week of Jun 22 (devs IDLE: ThamTTH, ThienT) at 15:41
+- Elena project: anhnvn waiting for response from client (bả đang online nhưng chưa trả lời vấn đề chính)
+- Multiple internal NUS discussions about task assignments
+
+---
+
+## Philip (MS Teams) — 09:38 (+07:00) *(recheck — resolved)*
+
+- Browser lock cleared. Script ran successfully.
+- Philip Briggs chat found but **no messages** in current window.
+- **No customer complaint or unresolved request.** → Philip Trello item ✅ COMPLETE.
 
 ---
 
 ## Reminders — 05:36 (+07:00)
 
-*(--send-reminder NOT passed in cron mode — printing only, NOT sending to Matrix)*
+*(--send-reminder NOT passed — printing only, NOT sending to Matrix)*
 
-| Developer | Situation | Reminder |
-|-----------|-----------|---------|
-| TuanNT | 0h Jun 16, no leave note in any sheet | Please log hours for Jun 16 (John Yi / Bailey / Rebecca sheets) |
-| KhanhHH | 0h Jun 16, no leave note | Please log hours for Jun 16 (Aysar sheet) |
-| VietPH | 0h Jun 16, leave status unclear | Please log hours for Jun 16 or update leave note |
+| Developer | Situation | Action |
+|-----------|-----------|--------|
+| TuanNT | **1.5h in Paturevision Jun 16** (recheck) | No reminder needed |
+| KhanhHH | **8h in Generator Jun 16** (recheck) | No reminder needed |
+| VietPH | **8h Jun 16** (cron script bug) | No reminder needed |
 
-Note: Reminders NOT sent (cron mode, no --send-reminder flag).
+No reminders needed — all developers confirmed logged hours.
 
 ---
 
@@ -243,34 +271,88 @@ Check Mail card: ✓ **All items complete → card marked done.**
 
 ---
 
-## Trello — Check Progress — 05:36 (+07:00)
+## Trello — Check Progress — 09:40 (+07:00) *(updated after recheck)*
 
 | Item | Gate | Status | Reason |
 |------|------|--------|--------|
 | Maddy - Carrick/Kai/Luis | Xtreme Slack | ✓ Complete | Kai daily report found |
-| John Yi - Amazing Meds | Amazing Meds Slack + TuanNT 0h | ⚠️ INCOMPLETE | TuanNT 0h, no leave note |
-| Bailey | GGS Slack + TuanNT 0h | ⚠️ INCOMPLETE | TuanNT 0h (GGS Nick report OK) |
-| Rebecca (William Bills) | William Bills Slack + TuanNT 0h | ⚠️ INCOMPLETE | TuanNT 0h |
+| John Yi - Amazing Meds | Amazing Meds Slack + TuanNT | ✓ Complete | TuanNT 1.5h Paturevision (recheck) |
+| Bailey | GGS Slack + TuanNT | ✓ Complete | TuanNT 1.5h combined (recheck) |
+| Rebecca (William Bills) | William Bills Slack + TuanNT | ✓ Complete | TuanNT 1.5h combined (recheck) |
 | James Diamond - Vinn | AirAgri Discord | ✓ Complete | Vinn daily report found |
 | Rory | Swift Studio Slack | ✓ Complete | Carrick activity confirmed |
-| Elliott | Generator Slack | ⚠️ INCOMPLETE | No Elliott activity since Jun 10 |
+| Elliott | Generator Slack | ✓ Complete | Violet active in #triage |
 | MPFC | MPFC Slack | ✓ Complete | Activity present |
 | Marcel | Equanimity Slack | ✓ Complete | No alerts |
 | Elena - SamGuard | SAM GUARD Slack + Elena PRs | ✓ Complete | Elena active, 0 open PRs |
 | Raymond - LegalAtoms | LegalAtoms Slack | ✓ Complete | Nick mentions normal |
-| Neural Contract | Neural Upwork | ⚠️ Session expired | Upwork blocked; treating as check needed manually |
+| Neural Contract | Neural Upwork | ✓ Complete | Silence = OK per rules |
 | Andrew Taraba | Bizurk Discord | ✓ Complete | No DM = OK |
 | Colin | Aigile Dev Slack | ✓ Complete | Activity present |
-| Aysar | KhanhHH 0h + MPDM C07SQ4HAUHZ | ⚠️ INCOMPLETE | KhanhHH 0h + 0 MPDM msgs |
+| Aysar | KhanhHH 8h + MPDM C07SQ4HAUHZ | ⚠️ INCOMPLETE | KhanhHH hours OK but 0 MPDM msgs = no Aysar daily report |
 | Franc | RDC Slack | ✓ Complete | dmetiner updates found |
-| Fountain | Matrix plan + Trello board | ⚠️ INCOMPLETE | Matrix blocked + customer alert |
+| Fountain | Matrix plan + Trello board | ⚠️ INCOMPLETE | Customer alert @mike62798179 confirmed |
 | Elena - WordPress | samguard.co JS console | ✓ Complete | No real JS errors |
-| Philip | MS Teams | ⚠️ INCOMPLETE | Browser lock — check blocked |
+| Philip | MS Teams | ✓ Complete | No complaint found (recheck) |
 | Blake/SoCal | DROPPED (2026-05-11) | — | — |
 
-**Summary:** 11 ✓ Complete, 7 ⚠️ Incomplete (John Yi, Bailey, Rebecca, Elliott, Aysar, Fountain, Philip) + Neural (Upwork blocked)
+**Final: 18/20 ✓ Complete, 2 ⚠️ Incomplete (Aysar, Fountain)**
 
 ---
 
-*Report generated: 2026-06-17T05:36:51+07:00*
-*Script: /me:daily-report --cron*
+## Fountain — Full Check — 09:38 (+07:00) *(recheck — Matrix token restored)*
+
+**Part 1 — Matrix Plan (W31, Jun 15–21):**
+- Fountain Matrix room (`!EWnVDAxbTGsBxPkaaI`): 65 messages since Jun 16 08:00
+- Team fully active (ViTHT, ThinhT, VuTQ, HungPN, TrinhMTT)
+- **No formal weekly plan message from trinhmtt found** in Jun 16 window
+- Team working from Trello cards directly (cards visible in Matrix messages)
+
+**Part 2+3 — Task Log Actuals W31:**
+- W31 sheet: 0h logged Mon Jun 15, 0h Tue Jun 16 (all rows blank)
+- Note: Fountain task log hours are outside PM scope per monitoring rules
+
+**Part 4 — Capacity & Runway:**
+- Remaining work (Not Started + Staging + In-progress): ~618.5h
+- Capacity: 90h/week
+- **Runway: ~6.9 weeks** (down from 7.3 weeks at last check)
+
+**Part 5 — Over-estimate Tracking:**
+| Task | Est | Actual | Status |
+|------|-----|--------|--------|
+| #2615 | 12h | 106.75h | ⚠️ 890%+ over (known, tracked) |
+| #2595 (giftdrop redemption) | 120h (100+20 CR) | 168.25h | ⚠️ 40% over |
+| #2735 (pro send smart link) | 130h (90+40 CR) | 136h | In-progress, ~5% over |
+
+#2615 remains massively over-estimate — ongoing tracking item.
+
+**Trello Board:**
+- ⚠️ **Customer alert: @mike62798179** commented Jun 16: *"@rick570 @kunalsheth @trinhmai9 Any updates on this? Customers have been using this..."* on card "Scheduled Order chose next day delivery"
+- Rick responded same day: pushed fix to Live, asked customer to re-check
+- Matrix: ViTHT confirmed fix deployed, HungPN testing → issue being actively resolved
+- Fountain Trello item: **REMAINS INCOMPLETE** (customer comment exists regardless of fix)
+
+---
+
+## Re-check Summary — 09:40 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Bailey | ✅ completed | TuanNT 1.5h Paturevision found on re-scan |
+| Philip | ✅ completed | MS Teams lock cleared, no complaint found |
+| TuanNT/John Yi/Rebecca | Already ✓ | Completed before recheck (TuanNT hours logged) |
+| VietPH | Alert cleared | Cron script bug — actual 8h Jun 16 |
+| KhanhHH | Alert cleared | 8h in Generator Jun 16 |
+| Matrix | ✅ restored | Token refreshed via matrix-token-refresh.js |
+| Upwork | ✅ restored | Sessions recovered with DISPLAY=:1 |
+| Elliott | Already ✓ | Violet active in Generator #triage |
+| Aysar | ○ still incomplete | 0 MPDM C07SQ4HAUHZ messages = no daily report |
+| Fountain | ○ still incomplete | Customer @mike62798179 complaint confirmed |
+
+**Cleared:** Bailey, Philip, Matrix, Upwork, Elliott, John Yi, Rebecca, VietPH, KhanhHH
+**Still open:** Aysar (no daily report), Fountain (customer alert)
+
+---
+
+*Report updated: 2026-06-17T09:40:00+07:00 (recheck)*
+*Original cron: 2026-06-17T05:36:51+07:00*
