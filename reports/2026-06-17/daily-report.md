@@ -240,17 +240,18 @@ Full details: reports/2026-06-17/matrix-rooms-0930.md
 
 ---
 
-## Reminders — 05:36 (+07:00)
+## Reminders — 10:20 (+07:00) *(updated — reminders sent)*
 
-*(--send-reminder NOT passed — printing only, NOT sending to Matrix)*
+| Developer | Hours Jun 16 | Target | Shortfall | Status | Action |
+|-----------|-------------|--------|-----------|--------|--------|
+| LongVV | 0h | 0h | — | ✓ On approved leave | No reminder |
+| PhucVT | 8h | 8h | 0h | ✓ Full day | No reminder |
+| TuanNT | **7.67h** | 8h | **-0.33h** | ⚠️ Shortfall | ✉️ **Reminder sent to Matrix** `!knbJbIKzXRJNGVFQNg` |
+| VietPH | 8h | 8h | 0h | ✓ Full day | No reminder |
+| KhanhHH | 8h | 8h | 0h | ✓ Full day | No reminder |
+| LeNH | 8.33h | 8h | 0h | ✓ Full day | No reminder |
 
-| Developer | Situation | Action |
-|-----------|-----------|--------|
-| TuanNT | **1.5h in Paturevision Jun 16** (recheck) | No reminder needed |
-| KhanhHH | **8h in Generator Jun 16** (recheck) | No reminder needed |
-| VietPH | **8h Jun 16** (cron script bug) | No reminder needed |
-
-No reminders needed — all developers confirmed logged hours.
+**Reminder message sent to TuanNT:** "Chào TuanNT, task log hôm qua (16/06) ghi 7.67h (Charles Chang 6.17h + Paturevision 1.5h) — còn thiếu ~0.33h để đủ 8h. Bạn có thể bổ sung vào task log không?"
 
 ---
 
