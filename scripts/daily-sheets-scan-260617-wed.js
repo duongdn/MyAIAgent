@@ -14,6 +14,7 @@ const SHEETS = {
   JohnYi:       "1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ",
   Rebecca:      "1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4",
   TuanNT_Neural:"1drk_TN7-B2xD43jgErH5aWGaeCsIMtNbiIUTNbFYheg",
+  CharlesChang: "19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc", // TuanNT 5th sheet — Family App V2
   JamesDiamond: "1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI",
   Rory:         "1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8",
   Franc:        "1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ",
@@ -27,6 +28,7 @@ const FALLBACK_TABS = {
   Maddy: "W9", JohnYi: "W28", Rebecca: "W28", JamesDiamond: "W28",
   Rory: "W15", Franc: "W27", Aysar: "W28", Generator: "W45",
   Paturevision: "W28", Elena: null, TuanNT_Neural: "W24",
+  CharlesChang: "W48", // Jun 15-21, 2026 in this sheet's per-project W-numbering
 };
 
 // Jun 16 (PREV_DATE, Tuesday) — what we scan for hours
@@ -185,7 +187,7 @@ async function main() {
     process.stderr.write(`  ${name} → ${tabs[name]}\n`);
   }
 
-  // TuanNT — 4 sheets
+  // TuanNT — 5 sheets
   process.stderr.write("TuanNT...\n");
   let jyH = {}, jyL = {}, jyE = null;
   if (tabs.JohnYi) ({ ownerHours: jyH, leaveNotes: jyL, err: jyE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JohnYi, `${tabs.JohnYi}!A:I`), tokens));
@@ -197,11 +199,14 @@ async function main() {
   let neuralH = {}, neuralE = null;
   if (tabs.TuanNT_Neural) ({ ownerHours: neuralH, err: neuralE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.TuanNT_Neural, `${tabs.TuanNT_Neural}!A:I`), tokens));
   const neuralTuant = Object.fromEntries(Object.entries(neuralH).filter(([k]) => k.includes("TuanNT")));
+  let ccH = {}, ccE = null;
+  if (tabs.CharlesChang) ({ ownerHours: ccH, err: ccE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.CharlesChang, `${tabs.CharlesChang}!A:I`), tokens));
+  const ccTuant = Object.fromEntries(Object.entries(ccH).filter(([k]) => k.includes("TuanNT")));
   results.TuanNT = {
-    johnyiHours: sum(jyH), rebeccaHours: sum(rbH), paturevisionHours: sum(patTuant), neuralHours: sum(neuralTuant),
-    totalHours: sum(jyH) + sum(rbH) + sum(patTuant) + sum(neuralTuant),
+    johnyiHours: sum(jyH), rebeccaHours: sum(rbH), paturevisionHours: sum(patTuant), neuralHours: sum(neuralTuant), charlesChangHours: sum(ccTuant),
+    totalHours: sum(jyH) + sum(rbH) + sum(patTuant) + sum(neuralTuant) + sum(ccTuant),
     johnyiLeave: jyL, rebeccaLeave: rbL,
-    johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant, neuralOwners: neuralTuant,
+    johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant, neuralOwners: neuralTuant, ccOwners: ccTuant,
   };
 
   // PhucVT (JamesDiamond sheet)
@@ -209,11 +214,10 @@ async function main() {
   if (tabs.JamesDiamond) ({ ownerHours: jdH, leaveNotes: jdL, err: jdE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JamesDiamond, `${tabs.JamesDiamond}!A:I`), tokens));
   results.PhucVT = { todayHours: sum(jdH), leave: jdL, err: jdE, owners: jdH };
 
-  // VietPH (Paturevision, already fetched)
+  // VietPH (Paturevision, already fetched) — filter by owner only, no fallback
   const vietphH = Object.fromEntries(Object.entries(patAll).filter(([k]) => k.toLowerCase().includes("vietph")));
-  const nonTuantHrs = sum(patAll) - sum(patTuant);
   results.VietPH = {
-    todayHours: sum(vietphH) || (Object.keys(vietphH).length === 0 && nonTuantHrs > 0 ? nonTuantHrs : 0),
+    todayHours: sum(vietphH),
     leave: patL, err: patE, allOwners: patAll,
   };
 

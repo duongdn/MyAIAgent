@@ -141,7 +141,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 ### TuanNT
 - [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**4 sheets**: JohnYi+Rebecca+Paturevision+Neural) blocks John Yi+Rebecca+Bailey. Any one = no alert.
-- [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — **4 sheets, PREV_DATE tokens**. Neural=1drk_TN7... W-tabs. Missed 1.5h Neural + 6.5h Paturevision on 2026-06-09.
+- [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — **5 sheets, PREV_DATE tokens**: +CharlesChang(19gsF1h...) added 2026-06-17; W-tabs per-project, check Summary tab.
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day

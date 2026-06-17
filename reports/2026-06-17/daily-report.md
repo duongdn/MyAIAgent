@@ -10,20 +10,19 @@
 | # | Item | Source | Alert | Status |
 |---|------|--------|-------|--------|
 | 1 | TuanNT | Google Sheets | **0h Jun 16 cron** — recheck: **1.5h in Paturevision** → combined OK | ✅ RESOLVED |
-| 2 | KhanhHH | Google Sheets | **0h Jun 16 cron** — recheck: **8h in Generator** → OK | ✅ RESOLVED |
-| 3 | VietPH | Google Sheets | Cron script bug (showed NamNN's hours) — recheck: **VietPH 8h real** | ✅ RESOLVED |
+| 2 | KhanhHH | Google Sheets | **0h Jun 16 cron** — direct sheet check Generator W45: **8h** (2h+1h+5h) → OK | ✅ RESOLVED |
+| 3 | VietPH | Google Sheets | Cron fallback bug — direct sheet check W32 row 19: **VietPH 8h** ("Note + Todo page") | ✅ RESOLVED |
 | 4 | Elliott | Generator Slack | No activity since Jun 10 — Trello item already completed (Violet active) | ✅ RESOLVED |
-| 5 | Aysar | Baamboozle MPDM C07SQ4HAUHZ | 0 messages in window — no daily report from Aysar | ⚠️ OPEN |
+| 5 | Aysar | Google Sheets (Generator) | KhanhHH gate = 8h in Generator W45 → Trello item completed | ✅ RESOLVED |
 | 6 | Fountain | Fountain Trello board | **Customer alert: @mike62798179** commented on "Scheduled Order chose next day delivery" card | ⚠️ OPEN |
 | 7 | Matrix | matrix.nustechnology.com | Tokens expired — **refreshed OK** (09:30) | ✅ RESOLVED |
 | 8 | Upwork | Upwork sessions | Sessions expired — **recovered** (DISPLAY=:1) | ✅ RESOLVED |
 | 9 | Philip | MS Teams | Browser lock — **cleared, no complaint found** (Teams opened, no Philip messages) | ✅ RESOLVED |
 
-**Trello Check Progress — Final state (18/20 complete):**
-- ⚠️ Aysar — 0 MPDM messages → no daily report from Aysar confirmed
+**Trello Check Progress — Final state (19/20 complete):**
 - ⚠️ Fountain — customer alert from @mike62798179 confirmed
 
-**Completed in recheck:** Bailey ✅, Philip ✅ (all others already complete)
+**Completed in recheck:** Bailey ✅, Philip ✅, Aysar ✅ (KhanhHH 8h in Generator confirmed)
 
 ---
 
@@ -114,13 +113,12 @@ Script: `scripts/daily-sheets-scan-260617-wed.js` (newly created, PREV_DATE=Jun 
 |-----------|-------------|--------|-------|
 | LongVV | 0h | ✓ OK — on leave | Approved leave Jun 16 confirmed via duongdn email |
 | PhucVT | 8h | ✓ | Full day |
-| TuanNT (John Yi sheet) | 0h | ⚠️ ALERT | No leave note found in any of 4 sheets |
-| TuanNT (Rebecca sheet) | 0h | ⚠️ ALERT | No leave note |
-| VietPH | 0h | ⚠️ CHECK | Script had fallback bug (was showing NamNN's 1.5h); actual VietPH = 0h; leave status unclear |
-| KhanhHH | 0h | ⚠️ ALERT | No leave note |
+| TuanNT | **7.67h** | ✓ OK | 1.5h Paturevision + 6.17h Charles Chang (5th sheet — newly added); 0h JohnYi/Rebecca/Neural |
+| VietPH | **8h** | ✓ OK | W32 row 19: "Note + Todo page" [Prestashop Grazing Software Desktop]; Mon Jun 15 = leave ("Nghỉ cả ngày") |
+| KhanhHH | **8h** | ✓ OK | Generator W45: 2h+1h+5h nginx/code tasks |
 | LeNH | 8.33h | ✓ | Combined across Rory + Franc + Aysar sheets |
 
-**TuanNT 0h impact:** Blocks John Yi - Amazing Meds, Bailey, and Rebecca (William Bills) Trello items per gate mapping.
+**TuanNT 7.67h note:** 5th sheet (Charles Chang `19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc`) added today — W48 in that sheet = Jun 15-21. Gates passed.
 
 **Maddy JIRA cross-check (W11):**
 Script: `node scripts/maddy-jira-tasklog-check.js --week 2026-06-16`
@@ -289,14 +287,14 @@ Check Mail card: ✓ **All items complete → card marked done.**
 | Neural Contract | Neural Upwork | ✓ Complete | Silence = OK per rules |
 | Andrew Taraba | Bizurk Discord | ✓ Complete | No DM = OK |
 | Colin | Aigile Dev Slack | ✓ Complete | Activity present |
-| Aysar | KhanhHH 8h + MPDM C07SQ4HAUHZ | ⚠️ INCOMPLETE | KhanhHH hours OK but 0 MPDM msgs = no Aysar daily report |
+| Aysar | KhanhHH task log (Generator) | ✓ Complete | KhanhHH 8h in Generator W45 confirmed — gate passes |
 | Franc | RDC Slack | ✓ Complete | dmetiner updates found |
 | Fountain | Matrix plan + Trello board | ⚠️ INCOMPLETE | Customer alert @mike62798179 confirmed |
 | Elena - WordPress | samguard.co JS console | ✓ Complete | No real JS errors |
 | Philip | MS Teams | ✓ Complete | No complaint found (recheck) |
 | Blake/SoCal | DROPPED (2026-05-11) | — | — |
 
-**Final: 18/20 ✓ Complete, 2 ⚠️ Incomplete (Aysar, Fountain)**
+**Final: 19/20 ✓ Complete, 1 ⚠️ Incomplete (Fountain — customer alert)**
 
 ---
 
