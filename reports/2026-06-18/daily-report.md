@@ -10,14 +10,18 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — TuanNT | **AM still unaccounted**: namtv processed PM leave Jun 17 (charged to Bailey, no makeup — see Matrix "Delivery - Resource Arrangement"), but TuanNT logged 0h even in the morning when not on leave — gates John Yi, Bailey, Rebecca |
+| 1 | Sheets — KhanhHH | 6.5h combined (Generator 5h + Aysar/Workstream 1.5h), -1.5h vs 8h target, no leave note on file (some additional Colin/ETZ work that day is untracked in any known sheet) |
 | 2 | Elena — WordPress | samguard.co CSP `connect-src` missing `ad.doubleclick.net` (confirmed via live re-check + DB inspection — fix documented below, not applied per user decision) |
 
 **LeNH 0h Jun 17 — RESOLVED, not an alert:** Full-day sick leave (sốt, đau đầu) formally processed by namtv in Matrix room "Delivery - Resource Arrangement" 09:18 +07 (charged to Rory project, no makeup), confirmed complete by halt 17:44 +07. No reminder needed, no Trello impact (Rory's Trello gate is Swift Studio Slack, not LeNH hours).
 
+**TuanNT 0h Jun 17 — RESOLVED, not an alert (corrected 09:05 +07):** Earlier in this recheck I reported "0h across all 5 sheets" — wrong. Direct re-query just now found **4h logged on the CharlesChang sheet + an explicit "Nghỉ nửa ngày" (half-day leave) marker** for Jun 17 — the data was entered into the sheet sometime between the 05:36 cron run and this recheck, so neither the cron nor my first pass caught it. 4h logged + half-day leave marker = fully compliant (per leave-day rule, half-day OK ≥4h). **John Yi, Bailey, Rebecca-William Bills Trello items now marked complete.**
+
+**PhucVT 12h "combined" — WRONG, corrected:** The James Diamond sheet's Jun 17 block has two different people: PhucVT (8h, AirAgri/James Diamond work) and **AnhNH2** (4h, a *different* project — "Bullitt Chat" app, unrelated to James Diamond). They are not interchangeable and must never be reported as one person's combined total. See corrected Sheets table below.
+
 **Today (Thu Jun 18):** No confirmed leaves. All present unless leave submitted after last parse.
 
-**Recheck (08:35 +07) — fixed since cron run:** Matrix token refreshed (Fountain plan now fetched, Trello item completed); Workstream script had a double `/api/api/` path bug (404) causing false "login failed" — fixed, confirmed LongVV genuinely 0h on Maddy this week (active on OhCleo instead, no Trello impact); Upwork session worked cleanly on retry (no CAPTCHA this time). See Recheck section at bottom for full detail.
+**Recheck (08:35–09:10 +07) — fixed since cron run:** Matrix token refreshed (Fountain plan now fetched, Trello item completed); Workstream script had a double `/api/api/` path bug (404) causing false "login failed" — fixed, confirmed LongVV genuinely 0h on Maddy this week (active on OhCleo instead, no Trello impact); Upwork session worked cleanly on retry (no CAPTCHA this time); found KhanhHH's missing Aysar/Workstream hours (1.5h, not checked in first pass); corrected PhucVT/AnhNH2 conflation; corrected TuanNT 0h → 4h+half-day-leave (data arrived late); corrected Scrin.io attribution (see below). See Recheck section at bottom for full detail.
 
 ---
 
@@ -85,12 +89,15 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 
 ---
 
-## Scrin.io (Nick / John Yi) — 05:10 (+07:00)
+## Scrin.io (Nick / "john yi" workspace) — 05:10 (+07:00, corrected 09:05 +07)
 
-**Nick on John Yi (Amazing Meds) — Jun 17:**
+**Corrected:** raw API response shows both sessions tagged `Project: "No project"`, `Client: "No client"`, `Note: "No note"` — this is generic screen-activity tracking, NOT confirmed as John Yi/Amazing Meds work specifically. "john yi" is just the name of the Scrin company/workspace Nick tracks under; it does not mean every session within it is John-Yi-task work.
+
+**Nick, "john yi" Scrin workspace — Jun 17 (untagged activity):**
 - Session 1: 08:33–09:30 (57 min, 91% activity)
 - Session 2: 09:46–12:45 (179 min, 93% activity)
-- **Total: 3h 56m (236 min)**
+- **Total: 3h 56m (236 min) tracked, but not attributable to a specific project/task**
+- Apps used: cursor, gnome-terminal-server, chrome, RustDesk, Slack, element-desktop, windsurf — consistent with general dev work, not proof of John Yi-specific work
 
 *Note: Scrin.io tracks Nick@nustechnology.com activity, NOT TuanNT.*
 
@@ -100,13 +107,17 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 
 | Developer | Jun 17 Hours | Status |
 |-----------|-------------|--------|
-| PhucVT | **12h** (AnhNH2 4h + PhucVT 8h) | ✓ |
-| VietPH | **8h** (NamNN 4h + VietPH 8h) | ✓ |
-| KhanhHH | **5h** (Generator sheet only, Aysar sheet 0h) | ✓ (>0h, no leave) |
+| PhucVT | **8h** (James Diamond/AirAgri work) | ✓ |
+| VietPH | **8h** (Paturevision/Grazing Software) | ✓ |
+| KhanhHH | **6.5h** (Generator 5h + Aysar/Workstream 1.5h — corrected, see below) | ⚠️ -1.5h vs 8h target, no leave note (Colin/ETZ task also assigned that day, untracked in any known sheet) |
 | Elena (SamHT+TriNM) | **8.5h** (SamHT 7h + TriNM 1.5h) | ✓ |
-| **TuanNT** | **0h** (JohnYi 0h \| Rebecca 0h \| Paturevision 0h \| Neural 0h \| CharlesChang 0h) | ⚠️ PARTIAL — PM excused (Bailey leave note, no makeup) but AM also 0h, unaccounted even at half-day standard |
+| **TuanNT** | **4h** (CharlesChang) + Nghỉ nửa ngày (half-day leave marker) | ✓ Fully compliant — corrected 09:05, data entered into sheet after the cron run |
 | **LeNH** | **0h** (Rory sheet 0h \| Franc sheet 0h \| Rebecca Q-T 0h) | ✓ Full-day sick leave, formally processed by namtv (Matrix "Delivery - Resource Arrangement" 09:18 +07, charged to Rory, no makeup) |
 | **LongVV** | **0h** on Maddy (sheets + Workstream both confirm) | ✓ No Trello impact — Maddy gate is Kai/Xtreme Slack, not LongVV hours. LongVV active on OhCleo/Celine instead (separate project) per Matrix + OhCleo Slack |
+
+**Not PhucVT's hours — separate person on a separate project:** AnhNH2 logged 4h on Jun 17 in the same James Diamond spreadsheet, but on a completely different app ("Bullitt Chat" — DB schema, conversation list UI, contact-to-message flow), unrelated to PhucVT's AirAgri/James Diamond work. Previously merged into "PhucVT: 12h" — wrong, corrected.
+
+**KhanhHH Workstream check (missed in first pass):** Baamboozle/Aysar Workstream project (`cmqez93ka07q8p81v7035l3td`) shows KhanhHH logged 3 tasks Jun 17 totaling 1h30m ("Check and reply questions from customer" 0:30, "Create new command create bulk users" 0:50, "Check and reply feedback game config type for customer" 0:10) — Google Sheets Aysar tab correctly shows 0h for KhanhHH because that project's hours live in Workstream, not Sheets (per existing memory, just not applied here on the first pass).
 
 **Maddy JIRA check (W11):** No ticket entries this week — clean.
 
@@ -119,7 +130,7 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 | Bailey-VietPH (42545630) | VietPH | 0h this wk (613.67h since start) | — |
 | Bailey-DuongDN (43093775) | DuongDN | 0h (inactive contract) | Expected |
 
-Reminders pending: TuanNT (AM hours only — PM excused) — not sent, no `--send-reminder` flag. LeNH: no reminder needed (excused full-day leave, formally processed).
+Reminders: none needed. TuanNT fully compliant (4h + half-day leave). LeNH fully excused (full-day sick leave, processed). KhanhHH -1.5h gap noted above but not severe enough to warrant a reminder given the same-day untracked Colin/ETZ work — flagging for awareness only.
 
 ---
 
@@ -220,13 +231,14 @@ Trello: OhCleo ✓ complete.
 
 ## Trello Progress — 05:30 (+07:00, updated 08:35 recheck)
 
-### Completed (16/20):
+### Completed (19/20):
 | Item | Checklist | Result |
 |------|-----------|--------|
 | Maddy - Carrick/Kai/Luis | Normal | ✓ Xtreme Slack clean, Kai 16h no report required |
+| John Yi - Amazing Meds | Normal | ✓ TuanNT 4h + half-day leave marker, fully compliant (corrected 09:05) |
 | James Diamond - Vinn | Should do | ✓ Vinn daily report found (17:28+07) |
 | Rory | Closely monitor | ✓ Swift Studio clean |
-| Aysar | Closely monitor | ✓ Daily report in MPDM (17:45+07) + KhanhHH 5h |
+| Aysar | Closely monitor | ✓ Daily report in MPDM (17:45+07) + KhanhHH 6.5h combined (Generator+Workstream) |
 | Franc | Closely monitor | ✓ RDC clean (Franc adhoc) |
 | Elliott | Closely monitor | ✓ Active in #release with Violet |
 | MPFC | Work | ✓ Quiet = OK |
@@ -234,29 +246,29 @@ Trello: OhCleo ✓ complete.
 | Elena - SamGuard Digital Plant | Work | ✓ No PRs, no Slack alerts |
 | Raymond - LegalAtoms | Work | ✓ No Nick alerts |
 | Neural Contract | Work | ✓ Silence = never alert |
+| Bailey | Work | ✓ TuanNT 4h + half-day leave marker, fully compliant (corrected 09:05) |
 | Andrew Taraba | Work | ✓ DM quiet, silence normal |
+| Rebecca - William Bills | Work | ✓ TuanNT 4h + half-day leave marker, fully compliant (corrected 09:05) |
 | Colin | Work | ✓ Quiet = OK |
+| Fountain | Work | ✓ Matrix plan found (W31), over-est stable — recheck 08:35 |
 | Philip | Work | ✓ Not in Teams visible chat — no complaint |
 | OhCleo | Work | ✓ Tony daily report + builds submitted |
-| Fountain | Work | ✓ Matrix plan found (W31), over-est stable — recheck 08:35 |
 
-### Incomplete (4/20):
+### Incomplete (1/20):
 | Item | Checklist | Reason |
 |------|-----------|--------|
-| John Yi - Amazing Meds | Normal | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
-| Bailey | Work | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
-| Rebecca - William Bills | Work | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
 | Elena - WordPress SamGuard | Pending | ⚠️ CSP fix identified, pending manual approval (not auto-applied) |
 
 ---
 
-## Reminders — 05:31 (+07:00)
+## Reminders — 05:31 (+07:00, updated 09:10)
 
 | Developer | Status | Action |
 |-----------|--------|--------|
-| TuanNT | AM 0h (PM excused per Bailey leave note) | Needs reminder for AM hours (not sent — no --send-reminder flag) |
+| TuanNT | 4h + half-day leave marker, fully compliant | No reminder needed (corrected — was wrongly 0h before data arrived) |
 | LeNH | Full-day excused sick leave (processed by namtv) | No reminder needed |
-| LongVV | 0h sheets, Workstream unavailable | OhCleo Tony active, but that's a different account. Maddy LongVV unclear. |
+| KhanhHH | 6.5h combined (Generator+Workstream), -1.5h vs target, no leave note | Minor gap noted, no reminder sent — same-day untracked Colin/ETZ work likely accounts for some of it |
+| LongVV | 0h on Maddy specifically (confirmed via sheets + Workstream) | No reminder — active on OhCleo/Celine instead, no Trello gate on LongVV hours |
 
 ---
 
@@ -297,21 +309,25 @@ No unresolved action items requiring DuongDN's response this window.
 
 ---
 
-## Recheck — 08:45 (+07:00)
+## Recheck — 08:45–09:15 (+07:00)
 
 | Item | Result | Details |
 |------|--------|---------|
 | Fountain | ✓ completed | Matrix token refreshed; W31 plan found (trinhmtt, Mon 09:16); over-est stable |
-| John Yi - Amazing Meds | ○ still incomplete | TuanNT AM 0h unaccounted (PM excused per namtv's Bailey leave note — see Matrix "Delivery - Resource Arrangement") |
-| Bailey | ○ still incomplete | Same TuanNT gate — PM portion excused, AM still 0h |
-| Rebecca - William Bills | ○ still incomplete | Same TuanNT gate — PM portion excused, AM still 0h |
+| John Yi - Amazing Meds | ✓ completed (corrected 09:05) | TuanNT actually has 4h + half-day leave marker on CharlesChang — initial "0h all 5 sheets" was wrong, data was entered into the sheet after the cron run, caught on direct re-verification |
+| Bailey | ✓ completed (corrected 09:05) | Same TuanNT correction |
+| Rebecca - William Bills | ✓ completed (corrected 09:05) | Same TuanNT correction |
 | Elena - WordPress SamGuard | ○ still incomplete | CSP root cause + exact fix identified (wp_options.hsts_csp, missing ad.doubleclick.net); user opted not to auto-apply |
 | LeNH 0h (all 3 sheets) | ✓ resolved, not an alert | Full-day sick leave formally processed by namtv (charged to Rory, no makeup), confirmed by halt — initially mischaracterized as "not yet in leave-plan.json" until caught |
+| PhucVT "12h combined" | ✓ corrected | AnhNH2's 4h (different person, different project — "Bullitt Chat") was wrongly merged into PhucVT's row. PhucVT's actual hours = 8h. |
+| KhanhHH "5h, no alert" | ✓ corrected | Missed checking Workstream — KhanhHH has 1h30m of Aysar/Baamboozle hours there. Combined total 6.5h, not 5h. Still -1.5h vs 8h target, flagged as a minor gap (no reminder sent, same-day Colin/ETZ work likely absorbs some of it). |
+| Scrin.io "Nick on John Yi" | ✓ corrected | Raw API shows sessions tagged "No project/No client" — generic tracked activity, not confirmed John-Yi-specific work. Relabeled accordingly. |
 | Matrix scan | ✓ filled in | Was blocked all cron run; refreshed token, fetched 691 msgs/25 rooms, summarized |
 | Workstream (LongVV) | ✓ fixed | Found+fixed a real bug: scripts used double `/api/api/` path (404), always forced false "login failed". Fixed in workstream-login.js + workstream-fetch-project-week.js. Confirmed LongVV genuinely 0h on Maddy this week. |
 | Upwork | ✓ filled in | Re-ran cleanly, no CAPTCHA this time — all 5 workrooms returned real data |
 
-**Cleared:** Fountain, Matrix, Workstream, Upwork, LeNH (excused leave, not an alert)
-**Still open:** John Yi, Bailey, Rebecca (TuanNT AM hours genuinely unaccounted even after PM leave applied — reminder not sent per no `--send-reminder` flag), Elena-WordPress (fix documented, awaiting manual approval)
+**Cleared:** Fountain, Matrix, Workstream, Upwork, LeNH, TuanNT/John Yi/Bailey/Rebecca (all corrected to compliant)
+**Still open:** Elena-WordPress (fix documented, awaiting manual approval)
+**Data-accuracy corrections this run (not just auth/script fixes):** TuanNT 0h→4h+leave (stale data, now resolved), PhucVT 12h→8h (wrongly merged with AnhNH2), KhanhHH 5h→6.5h (missed Workstream), LeNH "alert"→excused leave (missed Matrix Resource Arrangement room), Scrin "John Yi work"→generic untagged activity (overclaimed attribution).
 
 **Code fix applied this run:** `scripts/workstream-login.js` and `scripts/workstream-fetch-project-week.js` — corrected double `/api/api/` prefix bug that caused every Workstream call to falsely report token-expired/login-failed.

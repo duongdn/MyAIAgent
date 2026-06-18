@@ -100,9 +100,19 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - `--raw`: giữ tiêu đề + tóm tắt ngôn ngữ gốc, header đổi thành "📰 News Digest"
 - Có thể kết hợp: `--more --raw`, `--more --limit=10`, v.v.
 
+## Link Validation (MANDATORY — chạy trước khi save)
+
+**Lý do:** Google News RSS links là chuỗi base64 ~150 ký tự (`https://news.google.com/rss/articles/CBMi...`). Khi viết markdown, model có xu hướng không gõ lại chính xác chuỗi dài này — thay vào đó tự bịa slug giả nhìn giống thật, hoặc thấy title có dạng "Headline - TênNguồn" rồi tự thay link bằng homepage của nguồn đó (`https://vneconomy.vn`, `https://cafef.vn`...). Cả hai đều SAI và đã xảy ra nhiều lần (06-12, 06-15, 06-17).
+
+**Trước khi gọi Write tool, kiểm tra draft markdown:**
+1. Regex check mọi link `\]\((https?://[^)]+)\)` — nếu link nào match `^https?://[a-z0-9.-]+/?$` (domain trần, không có path) → đó là lỗi, link bị bịa.
+2. Với mỗi link lỗi: quay lại JSON đã fetch, tìm đúng article theo title, copy-paste (không gõ lại từ trí nhớ) giá trị `link` chính xác vào markdown.
+3. Nếu không tìm lại được link gốc trong JSON → bỏ hyperlink, chỉ giữ tiêu đề dạng plain text (không link giả).
+4. Lặp lại kiểm tra cho đến khi không còn link domain-trần nào trong draft.
+
 ## Save to File (MANDATORY)
 
-Sau khi synthesize xong, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown.
+Sau khi synthesize xong và validate links, **LUÔN LUÔN** ghi toàn bộ nội dung digest ra file markdown.
 
 **Bước 1 — Xác định ngày giờ UTC+7:**
 
