@@ -21,6 +21,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — Fountain total estimate = Col I **+** Col J (CR). Both capacity AND over-estimate use the sum.
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — Fountain 5-part check is MANDATORY every run; never skip any part.
 - [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/...`, **NOT** `plans/reports/`.
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH's Aysar/Baamboozle hours live in **Workstream**, not Sheets — Sheets-only check missed 1.5h on 2026-06-18, must call Workstream API every time.
+- [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter EVERY dev to their own name in multi-employee sheets (James Diamond sheet has both PhucVT and AnhNH2 on different projects) — never `sum()` all owners in a sheet as one person's total.
 
 ---
 
@@ -149,7 +151,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 ### KhanhHH
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — Aysar Upwork billed under LeNH (sub-contract); KhanhHH daily total = scan ALL sheets, not just Generator+Aysar
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — **🔴 MUST query Workstream Baamboozle project for KhanhHH too** — Sheets-only check missed 1.5h on 2026-06-18, repeat offense
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected

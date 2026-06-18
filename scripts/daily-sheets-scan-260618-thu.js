@@ -209,10 +209,11 @@ async function main() {
     johnyiOwners: jyH, rebeccaOwners: rbH, patOwners: patTuant, neuralOwners: neuralTuant, ccOwners: ccTuant,
   };
 
-  // PhucVT (JamesDiamond sheet)
+  // PhucVT (JamesDiamond sheet) — filter by owner only; AnhNH2 shares this sheet but works a different project (Bullitt Chat), never sum them together
   let jdH = {}, jdL = {}, jdE = null;
   if (tabs.JamesDiamond) ({ ownerHours: jdH, leaveNotes: jdL, err: jdE } = extractDailyHoursByOwner(await fetchRange(api, SHEETS.JamesDiamond, `${tabs.JamesDiamond}!A:I`), tokens));
-  results.PhucVT = { todayHours: sum(jdH), leave: jdL, err: jdE, owners: jdH };
+  const phucvtH = Object.fromEntries(Object.entries(jdH).filter(([k]) => k.toLowerCase().includes("phucvt")));
+  results.PhucVT = { todayHours: sum(phucvtH), leave: jdL, err: jdE, owners: jdH };
 
   // VietPH (Paturevision, already fetched) — filter by owner only, no fallback
   const vietphH = Object.fromEntries(Object.entries(patAll).filter(([k]) => k.toLowerCase().includes("vietph")));
