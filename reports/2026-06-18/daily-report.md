@@ -10,13 +10,13 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — TuanNT | 0h across ALL 5 sheets on Jun 17 (no leave note) — gates John Yi, Bailey, Rebecca |
-| 2 | Sheets — LeNH | 0h across all 3 sheets (Rory+Franc+Rebecca Q-T) on Jun 17 — no leave note |
-| 3 | Sheets — LongVV | 0h Jun 17 on sheets; Workstream unavailable (login failed). Weekly total also 0h. |
-| 4 | Fountain | Matrix token expired — Part 1 (weekly plan) could not be fetched. Requires manual browser login. |
-| 5 | Elena — WordPress | samguard.co CSP violations: `ad.doubleclick.net`, `region1.google-analytics.com` blocked — CSP policy update needed |
+| 1 | Sheets — TuanNT | 0h across ALL 5 sheets on Jun 17 (no leave note, verified by direct re-scan) — gates John Yi, Bailey, Rebecca |
+| 2 | Sheets — LeNH | 0h across all 3 sheets (Rory+Franc+Rebecca Q-T) on Jun 17 — same-day sick report in Matrix (sốt, đau đầu), not yet in formal leave-plan.json |
+| 3 | Elena — WordPress | samguard.co CSP `connect-src` missing `ad.doubleclick.net` (confirmed via live re-check + DB inspection — fix documented below, not applied per user decision) |
 
 **Today (Thu Jun 18):** No confirmed leaves. All present unless leave submitted after last parse.
+
+**Recheck (08:35 +07) — fixed since cron run:** Matrix token refreshed (Fountain plan now fetched, Trello item completed); Workstream script had a double `/api/api/` path bug (404) causing false "login failed" — fixed, confirmed LongVV genuinely 0h on Maddy this week (active on OhCleo instead, no Trello impact); Upwork session worked cleanly on retry (no CAPTCHA this time). See Recheck section at bottom for full detail.
 
 ---
 
@@ -103,23 +103,34 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 | VietPH | **8h** (NamNN 4h + VietPH 8h) | ✓ |
 | KhanhHH | **5h** (Generator sheet only, Aysar sheet 0h) | ✓ (>0h, no leave) |
 | Elena (SamHT+TriNM) | **8.5h** (SamHT 7h + TriNM 1.5h) | ✓ |
-| **TuanNT** | **0h** (JohnYi 0h \| Rebecca 0h \| Paturevision 0h \| Neural 0h \| CharlesChang 0h) | ⚠️ ALERT — 0h all 5 sheets, no leave |
-| **LeNH** | **0h** (Rory sheet 0h \| Franc sheet 0h \| Rebecca Q-T 0h) | ⚠️ ALERT — 0h all 3 sheets, no leave |
-| **LongVV** | **0h** (sheets, weekly total 0h) | ⚠️ uncertain — part-time 16h/wk, Workstream login failed |
+| **TuanNT** | **0h** (JohnYi 0h \| Rebecca 0h \| Paturevision 0h \| Neural 0h \| CharlesChang 0h) | ⚠️ ALERT — 0h all 5 sheets, no leave (verified via direct re-scan, not a subagent error) |
+| **LeNH** | **0h** (Rory sheet 0h \| Franc sheet 0h \| Rebecca Q-T 0h) | ⚠️ Sick same-day (Matrix: namtv noted "Sốt, đau đầu", Rory not backfilled) — not yet in leave-plan.json |
+| **LongVV** | **0h** on Maddy (sheets + Workstream both confirm) | ✓ No Trello impact — Maddy gate is Kai/Xtreme Slack, not LongVV hours. LongVV active on OhCleo/Celine instead (separate project) per Matrix + OhCleo Slack |
 
 **Maddy JIRA check (W11):** No ticket entries this week — clean.
 
-Reminders pending: TuanNT + LeNH + LongVV (not sent — no `--send-reminder` flag).
+**Upwork (re-verified 08:40 +07, all 5 workrooms, no auth issues this run):**
+| Workroom | Developer | This week | Note |
+|----------|-----------|-----------|------|
+| Rory (41069448) | LeNH | 16.5h (Mon 8.17 + Tue 8.33) | 0h Wed Jun 17 matches sheets — consistent with sick day |
+| Neural Contract (38901192) | external | 0h | Last client message ~7wk ago — normal silence |
+| Aysar (35642393) | LeNH/KhanhHH | 0h this wk (20h last wk) | — |
+| Bailey-VietPH (42545630) | VietPH | 0h this wk (613.67h since start) | — |
+| Bailey-DuongDN (43093775) | DuongDN | 0h (inactive contract) | Expected |
+
+Reminders pending: TuanNT + LeNH (not sent — no `--send-reminder` flag).
 
 ---
 
 ## Fountain — Full Check — 05:20 (+07:00)
 
-**Part 1 — Matrix Plan:**
-⚠️ Matrix token expired. Browser-based refresh ran but SSO session not saved in cron profile. Manual login required. Last known: W31 had no formal weekly plan message (Jun 16 report).
+**Part 1 — Matrix Plan (fetched 08:35 +07 after token refresh):**
+@trinhmtt posted W31 plan Mon Jun 15 09:16 +07:
+> "Em gui plan tuan nay a: ThinhT: 20h, ViTHT: 40h => QC: 15h"
+(VuTQ/HaVS not named this week.)
 
-**Part 2+3 — Task Log Actuals (W52) vs Plan:**
-All Fountain devs (VuTQ, ThinhT, ViTHT, PhatDLT, HungPN) = 0h in W52. Note: Fountain dev task log hours are outside PM scope per monitoring rules — not flagged.
+**Part 2+3 — Task Log Actuals (W31, corrected — cron had mislabeled this W52) vs Plan:**
+W31 (Jun 15-21) task log tab shows 0h total logged so far for all Fountain devs. Note: Fountain dev task log hours are outside PM scope per monitoring rules — not flagged as an alert.
 
 **Part 4 — Capacity & Runway:**
 | Metric | Value |
@@ -148,7 +159,7 @@ Key others over 100%: 2639 (725%), 2545 (650%), 2523 (281%).
   - **kunalsheth** (12:49): "universal testimonial calendar" planning comment
   - Previous: mike62798179 Jun 16 bug report (scheduled order — Rick pushed fix, being monitored)
 
-Fountain Trello item: **○ INCOMPLETE** (Matrix plan not checked)
+Fountain Trello item: **✓ COMPLETE** (Matrix plan found, over-est stable — recheck 08:35 +07)
 
 ---
 
@@ -159,14 +170,17 @@ Fountain Trello item: **○ INCOMPLETE** (Matrix plan not checked)
 **Precognize (nusken):** 0 PRs by nusken (11 total open, none from nusken) ✓
 **SAM GUARD Slack:** 0 messages in window ✓
 
-**samguard.co WordPress:**
-⚠️ CSP violations found:
-- `ad.doubleclick.net` blocked by connect-src policy
-- `region1.google-analytics.com` blocked by connect-src policy
-- failedRequests: Google Ads collect endpoints (ERR_ABORTED)
-No real JS errors (jsErrors: [], pageErrors: []). CSP update needed for ad.doubleclick.net.
+**samguard.co WordPress (re-verified 08:42 +07):**
+⚠️ CSP violation confirmed still active: `connect-src` blocks `ad.doubleclick.net` (Google Ads remarketing collect call). No real JS errors (jsErrors: [], pageErrors: []).
 
-Trello: Elena - SamGuard Digital Plant ✓ (no Slack/PR alerts). Elena - WordPress ○ (CSP violations).
+**Root cause + fix (investigated via SSH, read-only):**
+- Plugin: "Headers Security Advanced & HSTS WP" (`headers-security-advanced-hsts-wp`)
+- Policy stored in `wp_samguard.wp_options`, option name `hsts_csp`
+- Current `connect-src` allows `googleads.g.doubleclick.net` but not the bare `ad.doubleclick.net` subdomain used by the remarketing collect call
+- **Fix:** add `https://ad.doubleclick.net` to the `connect-src` directive in that option (SQL UPDATE on live DB)
+- User decision (2026-06-18): do not apply automatically — left for manual review/approval, not touched.
+
+Trello: Elena - SamGuard Digital Plant ✓ (no Slack/PR alerts). Elena - WordPress ○ (CSP fix documented above, pending manual approval).
 
 ---
 
@@ -203,9 +217,9 @@ Trello: OhCleo ✓ complete.
 
 ---
 
-## Trello Progress — 05:30 (+07:00)
+## Trello Progress — 05:30 (+07:00, updated 08:35 recheck)
 
-### Completed (15/20):
+### Completed (16/20):
 | Item | Checklist | Result |
 |------|-----------|--------|
 | Maddy - Carrick/Kai/Luis | Normal | ✓ Xtreme Slack clean, Kai 16h no report required |
@@ -223,15 +237,15 @@ Trello: OhCleo ✓ complete.
 | Colin | Work | ✓ Quiet = OK |
 | Philip | Work | ✓ Not in Teams visible chat — no complaint |
 | OhCleo | Work | ✓ Tony daily report + builds submitted |
+| Fountain | Work | ✓ Matrix plan found (W31), over-est stable — recheck 08:35 |
 
-### Incomplete (5/20):
+### Incomplete (4/20):
 | Item | Checklist | Reason |
 |------|-----------|--------|
-| John Yi - Amazing Meds | Normal | ⚠️ TuanNT 0h all 5 sheets |
-| Bailey | Work | ⚠️ TuanNT 0h all 5 sheets |
-| Rebecca - William Bills | Work | ⚠️ TuanNT 0h all 5 sheets |
-| Fountain | Work | ⚠️ Matrix token expired, Part 1 not checked |
-| Elena - WordPress SamGuard | Pending | ⚠️ CSP violations (ad.doubleclick.net, GA) |
+| John Yi - Amazing Meds | Normal | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
+| Bailey | Work | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
+| Rebecca - William Bills | Work | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
+| Elena - WordPress SamGuard | Pending | ⚠️ CSP fix identified, pending manual approval (not auto-applied) |
 
 ---
 
@@ -245,19 +259,55 @@ Trello: OhCleo ✓ complete.
 
 ---
 
-## Matrix — 05:33 (+07:00)
+## Matrix — 08:35 (+07:00, recheck)
 
-⚠️ Matrix token expired. Browser refresh ran (DISPLAY:1 Xvfb available) but SSO session not saved in profile — 298s timeout, no token captured. Matrix messages for this session unavailable.
+**Active rooms: 25 / 126 | Messages: 691** *(since 2026-06-17 08:00)*
+Full details: reports/2026-06-18/matrix-rooms-0835.md
 
-**Manual refresh required:** `DISPLAY=:1 node scripts/matrix-token-refresh.js`
+### Key updates
 
-Action items from Matrix: Unable to scan. Will be checked in next manual run.
+**Maddy/LongVV staffing:** LongVV stuck at hospital (weak wifi, no remote work) — VietPH set up as Shopify-payouts backup. LongVV has used all paid leave this week. LeNH off sick (fever/headache), Rory not backfilled. KietNHT off Jun 19, backfilled from Elena allocation.
+
+**TuanNT:** duongdn flagged Jun 16 short by 0.33h, fixed. Took Jun 17 PM off (sick child) — approved, told to route future requests to new PHP-project DM.
+
+**OhCleo/Celine (LongVV=Tony):** Active all day — fixed staging 500, found+reported a 100s+ NewRelic slow query, app build submitted to both stores.
+
+**Fountain:** ViTHT found root cause of a staging regression (missing commit from #2735 branch). PR/deploy coordination ongoing, no blockers.
+
+**Elena/Precognize Active Alerts:** Heavy design discussion on error-key translation; 9 cards deployed; server restarted twice for 502 (worth watching for recurrence).
+
+**Other:** Bailey/BA-QC payment-release scope closed with client. Rory/BXR backend stable, full redesign kicked off. Colin/ETZ header-button bug fixed (KhanhHH). Blair Brown (new prospect) scoping continues.
+
+No unresolved action items requiring DuongDN's response this window.
 
 ---
 
-## Upwork — 05:34 (+07:00)
+## Upwork — 08:40 (+07:00, recheck — all 5 workrooms fetched cleanly, no auth issues)
 
-Session expired for all accounts in headless mode:
-- Rory (carrick): CAPTCHA/2FA required
-- Neural Contract: session expired → silence = never alert ✓
-- Aysar: session expired → covered by Slack MPDM report ✓
+| Workroom | Developer | This week | Note |
+|----------|-----------|-----------|------|
+| Rory (41069448) | LeNH | 16.5h (Mon 8.17 + Tue 8.33, 0h Wed) | Matches sheets — Wed 0h is the sick day |
+| Neural Contract (38901192) | external | 0h | Last client message ~7wk ago, normal silence ✓ |
+| Aysar (35642393) | LeNH/KhanhHH | 0h this wk (20h last wk) | Covered by Slack MPDM report ✓ |
+| Bailey-VietPH (42545630) | VietPH | 0h this wk | — |
+| Bailey-DuongDN (43093775) | DuongDN | 0h | Inactive contract, expected |
+
+---
+
+## Recheck — 08:45 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Fountain | ✓ completed | Matrix token refreshed; W31 plan found (trinhmtt, Mon 09:16); over-est stable |
+| John Yi - Amazing Meds | ○ still incomplete | TuanNT 0h all 5 sheets confirmed via direct re-scan (not a subagent error) |
+| Bailey | ○ still incomplete | Same TuanNT gate |
+| Rebecca - William Bills | ○ still incomplete | Same TuanNT gate |
+| Elena - WordPress SamGuard | ○ still incomplete | CSP root cause + exact fix identified (wp_options.hsts_csp, missing ad.doubleclick.net); user opted not to auto-apply |
+| Matrix scan | ✓ filled in | Was blocked all cron run; refreshed token, fetched 691 msgs/25 rooms, summarized |
+| Workstream (LongVV) | ✓ fixed | Found+fixed a real bug: scripts used double `/api/api/` path (404), always forced false "login failed". Fixed in workstream-login.js + workstream-fetch-project-week.js. Confirmed LongVV genuinely 0h on Maddy this week. |
+| Upwork | ✓ filled in | Re-ran cleanly, no CAPTCHA this time — all 5 workrooms returned real data |
+
+**Cleared:** Fountain, Matrix, Workstream, Upwork
+**Still open:** John Yi, Bailey, Rebecca (TuanNT 0h — real, reminder not sent per no `--send-reminder` flag), Elena-WordPress (fix documented, awaiting manual approval)
+
+**Code fix applied this run:** `scripts/workstream-login.js` and `scripts/workstream-fetch-project-week.js` — corrected double `/api/api/` prefix bug that caused every Workstream call to falsely report token-expired/login-failed.

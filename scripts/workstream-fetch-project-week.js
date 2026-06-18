@@ -42,7 +42,7 @@ async function ensureToken() {
   if (fs.existsSync(CONFIG_PATH)) config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
   if (config.access_token) {
-    const test = await fetchWithToken(config.api_base + '/api/me', config.access_token);
+    const test = await fetchWithToken(config.api_base + '/me', config.access_token);
     if (!test._expired && (test.user || test.id)) return config;
   }
 
@@ -53,7 +53,7 @@ async function ensureToken() {
 }
 
 async function fetchProjectWeek(config, projectId, date) {
-  const url = config.api_base + '/api/review/week?projectId=' + projectId + '&date=' + date;
+  const url = config.api_base + '/review/week?projectId=' + projectId + '&date=' + date;
   return fetchWithToken(url, config.access_token);
 }
 

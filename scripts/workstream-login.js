@@ -108,15 +108,13 @@ async function main() {
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
   console.log('[workstream-login] Token saved. Verifying...');
 
-  // API path: browser calls /api/api/me (Cloudflare strips /api prefix before backend)
-  const me = await apiGet(BASE_URL + '/api/api/me', capturedToken);
+  const me = await apiGet(BASE_URL + '/api/me', capturedToken);
   const user = me.user || me;
   if (!user || !user.id) {
     console.error('[workstream-login] Verify failed:', JSON.stringify(me));
     process.exit(1);
   }
   config.user = { id: user.id, email: user.email, name: user.fullName };
-  // API uses /api/api/ prefix (Cloudflare strips outer /api before backend)
   config.api_base = BASE_URL + '/api';
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
   console.log('[workstream-login] Verified. Logged in as:', me.email || me.name);

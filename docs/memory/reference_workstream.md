@@ -35,11 +35,12 @@ node scripts/workstream-fetch-project-week.js [YYYY-MM-DD] [maddy|rebecca]
 
 ## API
 
-Base: `https://workstream.nustechnology.com/api`
-**NOTE:** All endpoints require an extra `/api/` prefix:
-- `/api/review/week?projectId={id}&date={YYYY-MM-DD}` → all member task logs for week
-- `/api/time/projects?date={date}` → projects for current user
-- `/api/me` → current user info
+Base: `https://workstream.nustechnology.com/api` (this already includes `/api` — do NOT append another `/api/` prefix, it 404s)
+- `{api_base}/review/week?projectId={id}&date={YYYY-MM-DD}` → all member task logs for week
+- `{api_base}/time/projects?date={date}` → projects for current user
+- `{api_base}/me` → current user info
+
+**CORRECTED 2026-06-18:** `workstream-login.js` and `workstream-fetch-project-week.js` both had a double `/api/api/` bug (e.g. called `config.api_base + '/api/me'` when `api_base` already ends in `/api`) — every call 404'd, so `ensureToken()` always thought the token was expired and looped into re-login, which then ALSO verified with the same double-prefixed path and failed. This silently produced false "Workstream unavailable / login failed" in daily reports (e.g. LongVV "0h, Workstream login failed" on 2026-06-18 cron run was actually just this bug — the token was valid the whole time, confirmed by calling `{api_base}/me` directly → 200 OK). Fixed both scripts to use the single-prefix path. If "login failed" or "token expired" shows up for Workstream again, check for re-introduction of a double `/api/` prefix before assuming a real auth issue.
 
 ## Auth
 

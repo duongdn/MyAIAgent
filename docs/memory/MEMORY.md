@@ -28,7 +28,8 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Reference (Static Lookup)
 - [reference_email_accounts_all9.md](reference_email_accounts_all9.md) — **9 monitored email accounts** (6 Zoho + 2 Gmail IMAP + 1 Gmail API). Cron only checked 6; mpfc key missing as of Jun 13.
-- [reference_workstream.md](reference_workstream.md) — **Workstream (workstream.nustechnology.com)** — Maddy=Xtreme Soft Solutions, Rebecca=MissSwimwear. Scripts: workstream-login.js, workstream-fetch-project-week.js
+- [reference_workstream.md](reference_workstream.md) — Workstream API — single `/api` prefix only (double prefix 404s, caused false "login failed" — fixed 2026-06-18)
+- [reference_elena_wordpress_csp_config.md](reference_elena_wordpress_csp_config.md) — samguard.co CSP lives in `wp_options.hsts_csp` DB column, not a file — ask before editing
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Developer Matrix room IDs for task log reminders
 - [reference_upwork_workrooms.md](reference_upwork_workrooms.md) — Upwork workroom URLs, account credentials, weekly report comparison
 - [reference_mpfc_github.md](reference_mpfc_github.md) — MPFC GitHub repo is mypersonalfootballcoach/wp (not nustechnology/...)
