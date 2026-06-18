@@ -13,6 +13,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is **already** the grand total; never also sum per-employee Actual cols (caused 2× bug 2026-05-11).
 - [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **ALL devs scan ALL 11 sheets by owner col G — NEVER use Summary tab total (all-devs sum); never hardcode dev→sheet**
 - [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly before flagging / reminding.
+- [feedback_matrix_resource_arrangement_room.md](feedback_matrix_resource_arrangement_room.md) — **Cross-check Matrix room "Delivery - Resource Arrangement" (namtv's leave notes) before flagging ANY dev 0h.**
 - [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond explicit scope.
 - [feedback_matrix_token_never_report_expired.md](feedback_matrix_token_never_report_expired.md) — Run `scripts/matrix-token-refresh.js` BEFORE claiming Matrix token expired.
 - [feedback_token_handling.md](feedback_token_handling.md) — **⚠️ MUST READ BEFORE SLACK SCAN** — Amazing Meds + Equanimity xoxc: run refresh scripts PROACTIVELY, NEVER report invalid_auth.

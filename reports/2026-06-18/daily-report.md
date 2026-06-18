@@ -10,9 +10,10 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — TuanNT | 0h across ALL 5 sheets on Jun 17 (no leave note, verified by direct re-scan) — gates John Yi, Bailey, Rebecca |
-| 2 | Sheets — LeNH | 0h across all 3 sheets (Rory+Franc+Rebecca Q-T) on Jun 17 — same-day sick report in Matrix (sốt, đau đầu), not yet in formal leave-plan.json |
-| 3 | Elena — WordPress | samguard.co CSP `connect-src` missing `ad.doubleclick.net` (confirmed via live re-check + DB inspection — fix documented below, not applied per user decision) |
+| 1 | Sheets — TuanNT | **AM still unaccounted**: namtv processed PM leave Jun 17 (charged to Bailey, no makeup — see Matrix "Delivery - Resource Arrangement"), but TuanNT logged 0h even in the morning when not on leave — gates John Yi, Bailey, Rebecca |
+| 2 | Elena — WordPress | samguard.co CSP `connect-src` missing `ad.doubleclick.net` (confirmed via live re-check + DB inspection — fix documented below, not applied per user decision) |
+
+**LeNH 0h Jun 17 — RESOLVED, not an alert:** Full-day sick leave (sốt, đau đầu) formally processed by namtv in Matrix room "Delivery - Resource Arrangement" 09:18 +07 (charged to Rory project, no makeup), confirmed complete by halt 17:44 +07. No reminder needed, no Trello impact (Rory's Trello gate is Swift Studio Slack, not LeNH hours).
 
 **Today (Thu Jun 18):** No confirmed leaves. All present unless leave submitted after last parse.
 
@@ -103,8 +104,8 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 | VietPH | **8h** (NamNN 4h + VietPH 8h) | ✓ |
 | KhanhHH | **5h** (Generator sheet only, Aysar sheet 0h) | ✓ (>0h, no leave) |
 | Elena (SamHT+TriNM) | **8.5h** (SamHT 7h + TriNM 1.5h) | ✓ |
-| **TuanNT** | **0h** (JohnYi 0h \| Rebecca 0h \| Paturevision 0h \| Neural 0h \| CharlesChang 0h) | ⚠️ ALERT — 0h all 5 sheets, no leave (verified via direct re-scan, not a subagent error) |
-| **LeNH** | **0h** (Rory sheet 0h \| Franc sheet 0h \| Rebecca Q-T 0h) | ⚠️ Sick same-day (Matrix: namtv noted "Sốt, đau đầu", Rory not backfilled) — not yet in leave-plan.json |
+| **TuanNT** | **0h** (JohnYi 0h \| Rebecca 0h \| Paturevision 0h \| Neural 0h \| CharlesChang 0h) | ⚠️ PARTIAL — PM excused (Bailey leave note, no makeup) but AM also 0h, unaccounted even at half-day standard |
+| **LeNH** | **0h** (Rory sheet 0h \| Franc sheet 0h \| Rebecca Q-T 0h) | ✓ Full-day sick leave, formally processed by namtv (Matrix "Delivery - Resource Arrangement" 09:18 +07, charged to Rory, no makeup) |
 | **LongVV** | **0h** on Maddy (sheets + Workstream both confirm) | ✓ No Trello impact — Maddy gate is Kai/Xtreme Slack, not LongVV hours. LongVV active on OhCleo/Celine instead (separate project) per Matrix + OhCleo Slack |
 
 **Maddy JIRA check (W11):** No ticket entries this week — clean.
@@ -118,7 +119,7 @@ No alerts. Trello: James Diamond - Vinn ✓, Andrew Taraba ✓.
 | Bailey-VietPH (42545630) | VietPH | 0h this wk (613.67h since start) | — |
 | Bailey-DuongDN (43093775) | DuongDN | 0h (inactive contract) | Expected |
 
-Reminders pending: TuanNT + LeNH (not sent — no `--send-reminder` flag).
+Reminders pending: TuanNT (AM hours only — PM excused) — not sent, no `--send-reminder` flag. LeNH: no reminder needed (excused full-day leave, formally processed).
 
 ---
 
@@ -242,9 +243,9 @@ Trello: OhCleo ✓ complete.
 ### Incomplete (4/20):
 | Item | Checklist | Reason |
 |------|-----------|--------|
-| John Yi - Amazing Meds | Normal | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
-| Bailey | Work | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
-| Rebecca - William Bills | Work | ⚠️ TuanNT 0h all 5 sheets (verified directly) |
+| John Yi - Amazing Meds | Normal | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
+| Bailey | Work | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
+| Rebecca - William Bills | Work | ⚠️ TuanNT AM 0h unaccounted (PM excused — Bailey leave note) |
 | Elena - WordPress SamGuard | Pending | ⚠️ CSP fix identified, pending manual approval (not auto-applied) |
 
 ---
@@ -253,8 +254,8 @@ Trello: OhCleo ✓ complete.
 
 | Developer | Status | Action |
 |-----------|--------|--------|
-| TuanNT | 0h all 5 sheets, no leave | Needs reminder (not sent — no --send-reminder flag) |
-| LeNH | 0h all 3 sheets, no leave | Needs reminder (not sent — no --send-reminder flag) |
+| TuanNT | AM 0h (PM excused per Bailey leave note) | Needs reminder for AM hours (not sent — no --send-reminder flag) |
+| LeNH | Full-day excused sick leave (processed by namtv) | No reminder needed |
 | LongVV | 0h sheets, Workstream unavailable | OhCleo Tony active, but that's a different account. Maddy LongVV unclear. |
 
 ---
@@ -266,7 +267,9 @@ Full details: reports/2026-06-18/matrix-rooms-0835.md
 
 ### Key updates
 
-**Maddy/LongVV staffing:** LongVV stuck at hospital (weak wifi, no remote work) — VietPH set up as Shopify-payouts backup. LongVV has used all paid leave this week. LeNH off sick (fever/headache), Rory not backfilled. KietNHT off Jun 19, backfilled from Elena allocation.
+**Maddy/LongVV staffing:** LongVV stuck at hospital (weak wifi, no remote work) — VietPH set up as Shopify-payouts backup. LongVV has used all paid leave this week. KietNHT off Jun 19, backfilled from Elena allocation.
+
+**Delivery - Resource Arrangement (leave processing room):** namtv formally processed 3 leaves Jun 17 (full-day = no time marker, half-day = "Chiều"/PM marker): LeNH full-day sick (charged to Rory, no makeup), TuanNT PM only (charged to Bailey, no makeup, child's doctor visit), KietNHT full-day Jun 19 (charged to Elena). halt confirmed all processed 17:44 +07. **This room is an authoritative leave source equal to leave-plan.json/email — must cross-check before flagging any dev's 0h.**
 
 **TuanNT:** duongdn flagged Jun 16 short by 0.33h, fixed. Took Jun 17 PM off (sick child) — approved, told to route future requests to new PHP-project DM.
 
@@ -299,15 +302,16 @@ No unresolved action items requiring DuongDN's response this window.
 | Item | Result | Details |
 |------|--------|---------|
 | Fountain | ✓ completed | Matrix token refreshed; W31 plan found (trinhmtt, Mon 09:16); over-est stable |
-| John Yi - Amazing Meds | ○ still incomplete | TuanNT 0h all 5 sheets confirmed via direct re-scan (not a subagent error) |
-| Bailey | ○ still incomplete | Same TuanNT gate |
-| Rebecca - William Bills | ○ still incomplete | Same TuanNT gate |
+| John Yi - Amazing Meds | ○ still incomplete | TuanNT AM 0h unaccounted (PM excused per namtv's Bailey leave note — see Matrix "Delivery - Resource Arrangement") |
+| Bailey | ○ still incomplete | Same TuanNT gate — PM portion excused, AM still 0h |
+| Rebecca - William Bills | ○ still incomplete | Same TuanNT gate — PM portion excused, AM still 0h |
 | Elena - WordPress SamGuard | ○ still incomplete | CSP root cause + exact fix identified (wp_options.hsts_csp, missing ad.doubleclick.net); user opted not to auto-apply |
+| LeNH 0h (all 3 sheets) | ✓ resolved, not an alert | Full-day sick leave formally processed by namtv (charged to Rory, no makeup), confirmed by halt — initially mischaracterized as "not yet in leave-plan.json" until caught |
 | Matrix scan | ✓ filled in | Was blocked all cron run; refreshed token, fetched 691 msgs/25 rooms, summarized |
 | Workstream (LongVV) | ✓ fixed | Found+fixed a real bug: scripts used double `/api/api/` path (404), always forced false "login failed". Fixed in workstream-login.js + workstream-fetch-project-week.js. Confirmed LongVV genuinely 0h on Maddy this week. |
 | Upwork | ✓ filled in | Re-ran cleanly, no CAPTCHA this time — all 5 workrooms returned real data |
 
-**Cleared:** Fountain, Matrix, Workstream, Upwork
-**Still open:** John Yi, Bailey, Rebecca (TuanNT 0h — real, reminder not sent per no `--send-reminder` flag), Elena-WordPress (fix documented, awaiting manual approval)
+**Cleared:** Fountain, Matrix, Workstream, Upwork, LeNH (excused leave, not an alert)
+**Still open:** John Yi, Bailey, Rebecca (TuanNT AM hours genuinely unaccounted even after PM leave applied — reminder not sent per no `--send-reminder` flag), Elena-WordPress (fix documented, awaiting manual approval)
 
 **Code fix applied this run:** `scripts/workstream-login.js` and `scripts/workstream-fetch-project-week.js` — corrected double `/api/api/` prefix bug that caused every Workstream call to falsely report token-expired/login-failed.
