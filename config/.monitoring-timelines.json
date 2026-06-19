@@ -138,8 +138,8 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-06-12T08:52:00+07:00",
-    "output_file": "reports/2026-06-12/0852-server-monitor.md"
+    "last_run": "2026-06-19T08:54:00+07:00",
+    "output_file": "reports/2026-06-19/0854-server-monitor.md"
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
