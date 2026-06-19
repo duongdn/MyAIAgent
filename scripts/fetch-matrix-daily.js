@@ -222,8 +222,10 @@ async function ensureValidToken() {
 
 async function main() {
   const args = process.argv.slice(2);
-  const sinceArg = args[args.indexOf('--since') + 1];
-  const roomArg  = args[args.indexOf('--room')  + 1];
+  const sinceIdx = args.indexOf('--since');
+  const roomIdx  = args.indexOf('--room');
+  const sinceArg = sinceIdx === -1 ? undefined : args[sinceIdx + 1];
+  const roomArg  = roomIdx === -1 ? undefined : args[roomIdx + 1];
 
   const cutoffMs = sinceArg ? new Date(sinceArg).getTime() : getCutoffMs();
 

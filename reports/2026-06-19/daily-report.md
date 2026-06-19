@@ -1,8 +1,8 @@
 # Daily Report — 2026-06-19 (Friday)
 
-**Run:** 2026-06-19T05:00:00+07:00 (cron)
+**Run:** 2026-06-19T05:00:00+07:00 (cron) — corrected 08:47-09:10 (interactive recheck, see Re-check section)
 **Window:** 2026-06-18T08:41:00+07:00 → 2026-06-19T05:00:00+07:00
-**Leave plan:** LeNH off Jun 18 (full day, sick — pending approval). KhanhHH off Jun 25-26.
+**Leave plan:** LeNH off **Jun 17** (full day, sick — pending approval, confirmed via sheet "Nghỉ cả ngày" marker). KhanhHH off Jun 25-26.
 
 ---
 
@@ -10,15 +10,13 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Discord/AirAgri | Vinn (PhucVT/dapackage) no daily report — last post Jun 11, AirAgri quiet since Jun 16 |
-| 2 | Email/rick | [InfinityRoses] production Error #431 StandardError: Invalid gift (Jun 18) |
-| 3 | Email/rick | [FountainGifts] production Reactivated Error #234 RuntimeError (Jun 18) |
-| 4 | Email/rick | [FirstProject] production ChunkLoadError #1036 (Jun 18) |
-| 5 | Email/vuongtrancr | Swish Signal lost "Low Application Throughput" (Jun 18) |
-| 6 | Sheets/LongVV | 0h entire week in sheets + Maddy JIRA no entries W11; Workstream unavailable for verification |
-| 7 | Matrix | SSO session expired — manual re-login needed to restore Matrix monitoring |
+| 1 | Email/rick | [InfinityRoses] production Error #431 StandardError: Invalid gift (Jun 18) |
+| 2 | Email/rick | [FountainGifts] production Reactivated Error #234 RuntimeError (Jun 18) |
+| 3 | Email/rick | [FirstProject] production ChunkLoadError #1036 (Jun 18) |
+| 4 | Email/vuongtrancr | Swish Signal lost "Low Application Throughput" (Jun 18) |
+| 5 | Sheets/LeNH | Jun 18 task log entry not filled in (Rory sheet) despite real work — Upwork + Matrix confirm 8.17h worked. Needs log reminder, not a leave/absence issue. |
 
-**Today (Jun 19, Fri):** LeNH on sick leave Jun 18 (carry-over context). KhanhHH normal. All PHP devs present.
+**Today (Jun 19, Fri):** All PHP devs present. LeNH leave was Jun 17 (not Jun 18 — corrected, see below). LongVV mid-transition from OhCleo to Maddy as of Jun 18 (see Matrix section) — explains 0h Maddy this week so far, not an attendance gap.
 
 ---
 
