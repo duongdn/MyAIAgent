@@ -15,6 +15,8 @@
 | 3 | Email/rick | [FirstProject] production ChunkLoadError #1036 (Jun 18) |
 | 4 | Email/vuongtrancr | Swish Signal lost "Low Application Throughput" (Jun 18) |
 | 5 | Sheets/LeNH | Jun 18 task log entry not filled in (Rory sheet) despite real work — Upwork + Matrix confirm 8.17h worked. Needs log reminder, not a leave/absence issue. |
+| 6 | Sheets/TuanNT | **Genuine 0h across all 5 sheets on Jun 18, no leave note.** Reminder sent. John Yi/Bailey/Rebecca Trello items reverted to incomplete (see Sheets section). |
+| 7 | Email/MPFC | Recurring production error `Google_AuthException: invalid_grant` on MPFC's own OAuth2 integration, first seen Jun 3, still "existing" as of last Rollbar summary Jun 12. **Rollbar Daily Summary emails have stopped entirely since Jun 13** — possible monitoring blind spot, needs investigation (see Email section). |
 
 **Today (Jun 19, Fri):** All PHP devs present. LeNH leave was Jun 17 (not Jun 18 — corrected, see below). LongVV mid-transition from OhCleo to Maddy as of Jun 18 (see Matrix section) — explains 0h Maddy this week so far, not an attendance gap.
 
@@ -32,13 +34,17 @@
 | ken@nustechnology.com | 50 (20 in window) | Welligence XWWP-4174 portfolio analysis production chart (in window) | Martin<>Ken 09:30 Teams, DE Bi-weekly retro 09:00, DE Daily Standup 08:30 |
 | vuongtrancr@gmail.com | 50 | ⚠️ Swish Delayed-newform + Signal lost "Low Application Throughput" (Jun 18) | — |
 | dnduongus@gmail.com | 50 | OpenAI newsletter (not a security alert) | — |
-| freelancer@mypersonalfootballcoach.com | 17 (1 in window) | MPFC OAuth2 invalid_grant (Jun 10-12, older) | — |
+| freelancer@mypersonalfootballcoach.com | 17 (1 in window, newsletter only) | ⚠️ Real recurring bug, NOT old/dismissable — see below | — |
 
 **Notes:**
 - rick@: Production errors for InfinityRoses (#431 StandardError), FountainGifts (#234 RuntimeError reactivated), FirstProject (ChunkLoadError #1036) — all Jun 18. Staging errors are INFO only.
 - vuongtrancr@: Swish Delayed-newform Rollbar daily summary + signal lost for Low Application Throughput — ongoing monitoring concern.
 - ken@: Welligence XWWP-4174 portfolio analysis chart issue — PR activity ongoing, normal GitHub notifications.
 - dnduongus@: OpenAI/LaunchDarkly newsletter not a security concern.
+- **freelancer@mpfc (corrected 09:15) — this was wrongly dismissed as "older" in past reports:**
+  - MPFC production has a real, recurring `Google_AuthException: Error refreshing the OAuth2 token — invalid_grant` error in its own Google integration (not our scan credential — our Gmail API access works fine, verified live). First appeared as new error #46 on Jun 12 07:51 UTC, and showed as "1 Existing" in every Rollbar Daily Summary from Jun 3 through Jun 12 — over a week unresolved.
+  - **Rollbar's "MPFC - Daily Summary" emails stopped entirely after Jun 12** — none for Jun 13-19. Either the integration broke or errors genuinely stopped, but a week of silence after 10 straight days of daily summaries is itself worth checking — could be a monitoring blind spot, not necessarily good news.
+  - This requires someone with access to MPFC's Google Cloud project / hosting to re-authorize the OAuth2 grant — outside this monitoring tool's reach. Recommend flagging to whoever manages MPFC's codebase (the freelancer@ inbox itself, or Carrick).
 
 Trello: Check Mail — all 6 items ✓ complete. Card marked done.
 
@@ -64,7 +70,7 @@ Trello: Check Mail — all 6 items ✓ complete. Card marked done.
 | OhCleo | 25 (DM) | ✓ Tony daily report 10:23 Jun 18: Android build approved on Google Play. Tasks: BE Completion Rate tracking, Media API, change password (mobile+FE), Support page, Android nav bar fix. Celine: "wow thats great! Well done!" Payment discussion: $2k invoice, Wise account transfer split ($1k+$1k). |
 
 **Notes:**
-- Aysar's MPDM C07SQ4HAUHZ: Only Carrick's update (no direct Aysar daily). Baamboozle confirms Aysar work deployed.
+- Aysar project status (clarified — not an alert): "Aysar" is the client's name, not a NUS employee, so there's no first-person "Aysar daily report" to look for. Per established process, Carrick posts the Aysar project's daily status update in the Baamboozle MPDM (C07SQ4HAUHZ), which he did. Baamboozle workspace separately confirms the work was deployed. This is the complete, normal daily check for this project.
 - OhCleo payment: Celine waiting for Wise internal transfer to complete before sending remaining $1k. Normal payment process.
 
 Trello: Maddy ✓, John Yi ✓, Rory ✓, Aysar ✓, Franc ✓, Elliott ✓, MPFC ✓, Marcel ✓, Elena-SamGuard ✓, Raymond ✓, Neural ✓, Bailey ✓, Andrew ✓, Rebecca ✓, Colin ✓, Fountain ✓, Philip ✓, OhCleo ✓, Elena-WordPress ✓.
@@ -88,20 +94,23 @@ Trello: James Diamond - Vinn ✓ complete (daily reports confirmed present). And
 
 ---
 
-## Sheets — all — 05:16 (+07:00)
+## Sheets — all — 05:16 (+07:00) — MAJOR CORRECTION 09:10-09:20
 
-| Developer | PREV_DATE (Jun 18) | Status |
-|-----------|-------------------|--------|
-| TuanNT | 4h total (CharlesChang: 4h | JohnYi: 0h | Rebecca: 0h | Paturevision: 0h | Neural: 0h) | ✓ Combined > 0h, no alert |
-| PhucVT | 8h (James Diamond sheet, owner PhucVT) | ✓ |
-| VietPH | 8h | ✓ |
-| KhanhHH | 5h Generator sheet + **5.83h Baamboozle (Workstream)** = 10.83h combined | ✓ (corrected 08:50 — Workstream verified, not down) |
-| Elena | 8.5h (SamHT 7h, TriNM 1.5h) | ✓ |
-| LeNH | 0h in **Rory sheet** task description, but Upwork (8.17h) + Matrix (107 msgs, 09:38-20:31 in "Rory Hackett - BXR App" room) confirm he worked the full day | ⚠️ Worked, log not filled — reminder needed (corrected 08:50, see below) |
-| LongVV | 0h Maddy this week (Mon-Thu) | ⚠️ Monitor, not yet a shortfall — mid-transition from OhCleo to Maddy as of Jun 18 (Matrix: minhtv reassigned OhCleo BE to Tien Nguyen "do LongVV qua Maddy làm"). Week ends Sun Jun 21; only the 16h/wk Maddy target matters per [[feedback_longvv_hour_split]]. |
+**Root cause found:** there is no `daily-sheets-scan-260619*.js` script — this morning's cron reused yesterday's `daily-sheets-scan-260618-thu.js`, which has `PREV_TOKENS` hardcoded to `["Wed, 17/06/26", "17/06/26"]` (correct for *yesterday's* cron, checking Jun17, but wrong today — today's PREV_DATE is Jun 18). Every row below was actually reading **Wednesday Jun 17's** data and mislabeling it as Jun 18. Re-verified all 7 rows directly against the sheets for the real Jun 18 block:
 
-**TuanNT gate:** 4h on CharlesChang → combined > 0h → John Yi, Bailey, Rebecca items all complete.
-**LeNH correction (08:50):** The leave note in `leave-plan.json` is for **Jun 17**, not Jun 18 — cron misattributed it to the wrong day (recurring N-1→N bug, see [[feedback_vietph_leave_date_cron_bug]]). Rory sheet confirms: Wed 17/06 row has "Nghỉ cả ngày" marker for LeNH (real leave day, 0h OK); Thu 18/06 row has no LeNH entry at all even though he was clearly working (Upwork tracker logged 8.17h same day, Matrix shows him actively debugging BXR membership/payment issues 09:38-20:31). He simply hasn't written up the task description yet — needs a reminder to log Jun 18, not a leave exemption.
+| Developer | Cron claimed (Jun 17 data, mislabeled) | **Real Jun 18 data** | Status |
+|-----------|------|------|--------|
+| TuanNT | "4h total (CharlesChang 4h)" | **0h across all 5 sheets** (JohnYi, Rebecca, Paturevision, Neural, CharlesChang all show zero TuanNT rows for Thu 18) | 🔴 **Real alert** — no leave note. Reminder sent. |
+| PhucVT | 8h | 8h — confirmed independently for Thu 18, this one was actually correct (coincidence: he logged 8h both days) | ✓ |
+| VietPH | 8h | 8h — also correct by coincidence (8h both days) | ✓ |
+| KhanhHH | "5h Generator + 5.83h Baamboozle = 10.83h" | **1h Generator** (Stripe error fix MR522) + 5.83h Baamboozle (Workstream — this one wasn't affected, fetched live) = **6.83h combined** | ⚠️ Below 8h target by 1.17h, no leave note — minor, watch |
+| Elena | "8.5h (SamHT 7h, TriNM 1.5h)" | **1.5h** (SamHT only — redmine 79265/79028; TriNM 0h) | Not gated to a Trello hours target, but the number was wrong — corrected |
+| LeNH | "0h, full-day leave" | Leave was actually **Jun 17**; Jun 18 he worked full day (8.17h Upwork + 107 Matrix msgs) but hadn't written the task description | ⚠️ Worked, log not filled — reminder sent |
+| LongVV | 0h Maddy this week | Independently verified via live Workstream (not from this buggy script) — genuinely 0h Mon-Thu, mid-transition from OhCleo (see Matrix section) | ⚠️ Monitor, not yet a shortfall |
+
+**Action taken on TuanNT (09:15):** Sent Matrix reminder (room `!knbJbIKzXRJNGVFQNg`) for the genuine Jun 18 0h day. Per [[feedback_tuannt_trello_gates]], TuanNT's combined 0h blocks **John Yi - Amazing Meds**, **Bailey**, and **Rebecca (William Bills)** — all three were wrongly marked complete on the false "4h" gate and have been **reverted to incomplete** in Trello (see Trello Progress section). Check Progress card un-marked done accordingly.
+
+**PhucVT/VietPH note:** these happened to be correct only because they logged identical hours both Wed and Thu — this was luck, not the script working correctly. Don't treat their accuracy here as evidence the underlying bug is benign.
 
 ## Sheets — Maddy JIRA — W11 — 05:17 (+07:00)
 
@@ -188,21 +197,21 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 
 | Checklist | Item | Result | Gate |
 |-----------|------|--------|------|
-| Normal | Maddy - Carrick/Kai/Luis | ✓ complete | Kai daily report ✓ |
-| Normal | John Yi - Amazing Meds | ✓ complete | TuanNT 4h combined |
+| Normal | Maddy - Carrick/Kai/Luis | ✓ complete | Kai daily report ✓ (not gated on TuanNT) |
+| Normal | John Yi - Amazing Meds | 🔴 **reverted to incomplete (09:15)** | Gate was "TuanNT 4h combined" — false, real TuanNT Jun18 = 0h across all 5 sheets. Reminder sent; re-check after he responds. |
 | Should do | James Diamond - Vinn task | ✓ complete (corrected 08:50) | Daily reports confirmed Jun 17 + Jun 18 in #airagri_webapp — original "no report" finding was a scan bug |
 | Closely monitor | Rory | ✓ complete | Swift Studio active, LeNH worked full day Jun18 (8.17h, log writeup pending) |
-| Closely monitor | Aysar | ✓ complete | KhanhHH 5h + Baamboozle active |
+| Closely monitor | Aysar | ✓ complete | KhanhHH 6.83h combined (corrected — was wrongly 10.83h) + Baamboozle active |
 | Closely monitor | Franc | ✓ complete | Ad hoc, always complete |
-| Closely monitor | Elliott | ✓ complete | Generator active, Elliott responded |
-| Work | MPFC | ✓ complete | Quiet = OK |
+| Closely monitor | Elliott | ✓ complete | Generator active, Elliott responded (Slack-gated, not hours-gated — unaffected by the sheets bug) |
+| Work | MPFC | ✓ complete (Slack-gated only — see Email section for a real, separate MPFC alert that doesn't gate this item per current mapping) | Quiet = OK |
 | Work | Marcel | ✓ complete | Adhoc, quiet |
-| Work | Elena-SamGuard | ✓ complete | Active, no open PRs |
+| Work | Elena-SamGuard | ✓ complete | Active, no open PRs (gated on Slack+PRs, not the Elena hours sheet — unaffected) |
 | Work | Raymond | ✓ complete | Raymond active, fixing infra |
 | Work | Neural Contract | ✓ complete | Session = never alert |
-| Work | Bailey | ✓ complete | TuanNT 4h + GGS active |
+| Work | Bailey | 🔴 **reverted to incomplete (09:15)** | Gate was "TuanNT 4h + GGS active" — TuanNT part is false, real Jun18 = 0h. Re-check after he responds. |
 | Work | Andrew Taraba | ✓ complete | Silence = normal |
-| Work | Rebecca (William Bills) | ✓ complete | TuanNT 4h combined |
+| Work | Rebecca (William Bills) | 🔴 **reverted to incomplete (09:15)** | Gate was "TuanNT 4h combined" — false, real Jun18 = 0h. Re-check after he responds. |
 | Work | Colin | ✓ complete | No person alert needed |
 | Work | Fountain | ✓ complete | W31 plan cached, over-est stable |
 | Work | Philip | ✓ complete | Not in Teams visible chat |
@@ -211,19 +220,19 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 | Mail | DuongDn, Carrick, Rick, Kai, Ken, Nick | ✓ all complete | Email scanned |
 
 **Check Mail card:** ✓ Marked done (all 6 items complete).
-**Check Progress card:** ✓ Marked done (corrected 08:50 — 20/20 items complete after Vinn fix).
+**Check Progress card:** ⚠️ **Un-marked done (09:15)** — 17/20 complete after reverting the 3 TuanNT-gated items. Will re-mark once TuanNT logs Jun 18 or genuinely catches up.
 
 ---
 
-## Reminders — corrected 09:05 (+07:00)
+## Reminders — corrected 09:20 (+07:00)
 
 | Developer | Status | Action |
 |-----------|--------|--------|
-| LongVV | 0h Maddy this week so far, but mid-transition from OhCleo (handover Jun 18, confirmed via Matrix) | Monitor, not 0h-task-log type reminder — skip for now, re-check Sunday |
-| LeNH | Worked full day Jun 18 (8.17h Upwork-confirmed) but task description not written in Rory sheet | Needs a task-log-writeup reminder (not the standard 0h-absence reminder) |
+| TuanNT | **Genuine 0h across all 5 sheets Jun 18, no leave note** | ✅ Sent (Matrix `!knbJbIKzXRJNGVFQNg`) — explicit "remind him" instruction from user overrode default print-only |
+| LeNH | Worked full day Jun 18 (8.17h Upwork-confirmed) but task description not written in Rory sheet | ✅ Sent (Matrix `!OIrgPraJWrcDTnRVLQ`) — explicit "remind him" instruction |
+| LongVV | 0h Maddy this week so far, but mid-transition from OhCleo (handover Jun 18, confirmed via Matrix) | Monitor, not a 0h-absence case — skip for now, re-check Sunday |
+| KhanhHH | 6.83h combined Jun 18 (corrected from 10.83h), 1.17h under 8h target, no leave | Minor — not sent, watch tomorrow |
 | All others | Hours logged | Skip |
-
-No reminders sent — `--send-reminder` flag not passed. Both above print-only per default.
 
 ---
 
@@ -282,10 +291,12 @@ Payment: Celine splitting $2k invoice via Wise ($1k now + $1k when internal tran
 
 ## Summary
 
-- **Alerts:** 5 (InfinityRoses/FountainGifts/FirstProject production errors, Swish signal lost, LeNH Jun18 task log not filled). All previously-claimed Vinn/Matrix/Workstream alerts were false — see Re-check.
-- **Trello:** 20/20 Check Progress items complete. Card marked done. Check Mail: all 6 ✓.
+- **Alerts:** 7 — InfinityRoses/FountainGifts/FirstProject production errors, Swish signal lost, LeNH Jun18 log not filled (reminded), **TuanNT genuine 0h Jun18 (reminded)**, **MPFC recurring OAuth2 bug + Rollbar silence since Jun13 (real, needs escalation, not dismissal)**.
+- **Trello:** 17/20 Check Progress items complete (John Yi, Bailey, Rebecca reverted — see Sheets section). Card NOT marked done. Check Mail: all 6 ✓.
 - **Highlights:** OhCleo Android app approved on Google Play. Kai on track (LIFM2-444 done). Elena no open PRs. LongVV transitioning OhCleo→Maddy (Tien Nguyen taking over OhCleo BE).
-- **Follow-up:** LeNH needs Jun 18 task log reminder (real hours, just not written up). LongVV Maddy hours to watch through Sunday given the OhCleo handover. James Diamond invoice (May) still unpaid — duongdn to follow up per halt's Matrix message.
+- **Follow-up:** TuanNT and LeNH both reminded (Matrix sent). LongVV Maddy hours to watch through Sunday given the OhCleo handover. James Diamond invoice (May) still unpaid — duongdn to follow up. MPFC OAuth2 bug needs someone with MPFC hosting access — outside this tool's reach, flag to Carrick or the freelancer contact.
+
+**This run had three confirmed data-quality bugs, all from the same root cause** (no fresh dated sheets-scan script generated this morning — cron silently reused yesterday's script with yesterday's date tokens baked in). See Re-check for the full breakdown and fix.
 
 ---
 
@@ -302,12 +313,28 @@ Cron's 05:00 run had several false findings, caused by tooling bugs and one date
 | Upwork (Rory/Neural/Aysar/Bailey x2) | "Session expired" / "CAPTCHA required" x3 | All 5 workrooms fetched real data on first try with `DISPLAY=:1` | Cron lacks X display for the Puppeteer login step — not an actual auth failure |
 | Also found: `config/.workstream-config.json` (live bearer token) was untracked from git — was missing from `.gitignore` and had been committed/pushed to GitHub since at least Jun 18 | — | Fixed: added to `.gitignore`, `git rm --cached`, pushed | Unrelated to this report's data, but a real security gap closed in passing |
 
-**Pattern across this run:** every "expired/unavailable" claim from the 05:00 cron was actually an environment limitation (no `DISPLAY=:1` / browser available in cron) or a stale-script bug, not a real auth failure — consistent with the project's standing "never report token expired" rule. The one genuine factual error (LeNH's leave date) came from blindly trusting the leave-plan email note's date without cross-checking the sheet's own leave marker.
+**Pattern across this run:** every "expired/unavailable" claim from the 05:00 cron was actually an environment limitation (no `DISPLAY=:1` / browser available in cron) or a stale-script bug, not a real auth failure — consistent with the project's standing "never report token expired" rule.
 
-**Still open (not blocking):** LongVV Maddy hours — re-check Sunday EOD, factoring in the OhCleo→Maddy handover context discovered via Matrix. LeNH needs a nudge to fill in Jun 18's task description (hours aren't in question, just the writeup).
+**Second, more serious pass (09:10-09:20) — the sheets data itself was wrong, not just unavailable:**
+
+| Item | Cron claimed | Actual (verified) | Root cause |
+|------|-------------|--------------------|-------------|
+| TuanNT Jun18 hours | "4h total (CharlesChang 4h)" | **0h across all 5 sheets** — genuine, no leave note | The 4h was Wed Jun17's row (with a half-day-leave marker right after it), misread as Thu Jun18 |
+| Elena Jun18 hours | "8.5h (SamHT 7h, TriNM 1.5h)" | **1.5h** (SamHT only) | Same bug — that was Wed Jun17's total |
+| KhanhHH Generator Jun18 | "5h" | **1h** (combined total corrected from 10.83h to 6.83h) | Same bug — 5h was Wed Jun17's total |
+| PhucVT, VietPH Jun18 | 8h each | 8h each — coincidentally correct (identical hours both days) | Same bug, but the wrong day happened to have the same value |
+
+**Why this happened:** there is no `scripts/daily-sheets-scan-260619*.js`. These per-day scripts are meant to be regenerated fresh every morning with that day's date tokens (`PREV_TOKENS`) hardcoded in. This morning's run silently reused `daily-sheets-scan-260618-thu.js` (yesterday's script, tokens hardcoded to `"Wed, 17/06/26"`) instead of writing a new one with `"Thu, 18/06/26"`. Nothing in that script fails loudly when reused on the wrong day — it just confidently returns the wrong day's numbers labeled as the right one. This is the same general "date off by one" family as [[feedback_vietph_leave_date_cron_bug]] and the LeNH leave issue above, but a new specific cause (whole-script reuse, not a single lookup) — saved as a dedicated critical memory.
+
+**Consequence:** Trello items John Yi - Amazing Meds, Bailey, and Rebecca (William Bills) were marked complete based on TuanNT's false "4h" gate. All three reverted to incomplete. TuanNT reminded via Matrix for the real 0h day. LeNH also reminded (real hours, just unwritten task description).
+
+**Still open (not blocking the data correctness, but pending action):** LongVV Maddy hours — re-check Sunday EOD, factoring in the OhCleo→Maddy handover context discovered via Matrix. John Yi/Bailey/Rebecca Trello items — re-check once TuanNT responds to the reminder or sheets show real Jun18-onward hours.
 
 ---
 
 *Unresolved questions:*
 - James Diamond invoice for May — still unpaid per halt's Matrix message (15:45 Jun 18). Needs follow-up.
 - Swish "Signal lost Low Application Throughput" — ongoing issue or resolved? (not re-checked this run, email content itself wasn't in question)
+- MPFC OAuth2 `invalid_grant` — who has access to MPFC's Google Cloud project to re-authorize it? Needs an owner, not just a recurring report line.
+- Why did Rollbar's MPFC Daily Summary emails stop after Jun 12 — broken integration or genuinely no errors? Worth a direct check on Rollbar's dashboard, not just inbox-based inference.
+- Whoever/whatever generates the daily `daily-sheets-scan-*.js` script each morning needs a fix so it can't silently reuse yesterday's file — see new memory note.
