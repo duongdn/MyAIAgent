@@ -191,7 +191,7 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 | Normal | Maddy - Carrick/Kai/Luis | ✓ complete | Kai daily report ✓ |
 | Normal | John Yi - Amazing Meds | ✓ complete | TuanNT 4h combined |
 | Should do | James Diamond - Vinn task | ✓ complete (corrected 08:50) | Daily reports confirmed Jun 17 + Jun 18 in #airagri_webapp — original "no report" finding was a scan bug |
-| Closely monitor | Rory | ✓ complete | Swift Studio active, LeNH on leave |
+| Closely monitor | Rory | ✓ complete | Swift Studio active, LeNH worked full day Jun18 (8.17h, log writeup pending) |
 | Closely monitor | Aysar | ✓ complete | KhanhHH 5h + Baamboozle active |
 | Closely monitor | Franc | ✓ complete | Ad hoc, always complete |
 | Closely monitor | Elliott | ✓ complete | Generator active, Elliott responded |
@@ -215,15 +215,15 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 
 ---
 
-## Reminders — 05:33 (+07:00)
+## Reminders — corrected 09:05 (+07:00)
 
 | Developer | Status | Action |
 |-----------|--------|--------|
-| LongVV | 0h sheets + 0h Maddy JIRA W11 | Needs reminder (Workstream unavailable) — use --send-reminder to send |
-| LeNH | Confirmed full-day leave Jun 18 | Skip |
+| LongVV | 0h Maddy this week so far, but mid-transition from OhCleo (handover Jun 18, confirmed via Matrix) | Monitor, not 0h-task-log type reminder — skip for now, re-check Sunday |
+| LeNH | Worked full day Jun 18 (8.17h Upwork-confirmed) but task description not written in Rory sheet | Needs a task-log-writeup reminder (not the standard 0h-absence reminder) |
 | All others | Hours logged | Skip |
 
-LongVV: prints only — NOT sending Matrix reminder in cron mode (no --send-reminder flag).
+No reminders sent — `--send-reminder` flag not passed. Both above print-only per default.
 
 ---
 

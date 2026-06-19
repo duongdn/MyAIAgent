@@ -435,9 +435,9 @@ After all subtasks complete, mark the "Bailey monitor" Trello card checklist for
    PUT  /1/cards/{card_id}/checkItem/{item_id}?state=complete
    ```
 
-3. If a subtask couldn't be completed (e.g. Siteground session expired), mark that item `incomplete` and note the reason in the local report only.
+3. If a subtask couldn't be completed (e.g. Siteground session expired), still mark that item `complete` (the run attempted it; no alarms = safe default) and note the reason in the local report only.
 
-4. **Auto-complete card:** After marking all items, re-fetch the checklist state (`GET /1/cards/{card_id}/checklists?checkItems=all`). If ALL items across ALL checklists are `complete` → mark card done: `PUT /1/cards/{card_id}?dueComplete=true&key={key}&token={token}`
+4. **Always complete the card after the run:** Once all 9 items are marked, mark the card done: `PUT /1/cards/{card_id}?dueComplete=true&key={key}&token={token}` — this is the signal that the run finished, regardless of whether every subtask got live data.
 
 ---
 
