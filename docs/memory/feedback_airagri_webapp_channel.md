@@ -14,3 +14,5 @@ Vinn (nusvinn) posts the daily report `"Just report my process today:"` in **#ai
 - Search for `"Just report my process today"` in both channels
 - Also count substantive activity in #airagri_webapp (technical answers, fix confirmations, PR reviews) as OK per [[feedback_vinn_daily_report_format]]
 - Do NOT conclude "Vinn absent" from #airagri-flutter alone
+
+**Repeat miss 2026-06-19:** Cron run (05:00) flagged "Vinn no daily report — last post Jun 11" as a critical alert and skipped the Trello James Diamond item. Interactive recheck the same morning found nusvinn HAD posted full daily reports on Jun 17 (17:28+07) and Jun 18 (17:29+07), both in #airagri_webapp — exact same channel this memory already names. The cron script must be re-dropping the #airagri_webapp channel from its scan list or has a snowflake/window bug — this is the second documented instance of this exact miss. Before flagging Vinn absent, fetch `/channels/{id}/messages?limit=20` directly for #airagri_webapp (channel list under `daily-discord-scan-*.js`) and grep for "Just report my process today" — do not trust a prior "0 messages" result without doing this raw check first.

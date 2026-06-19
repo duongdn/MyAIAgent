@@ -23,6 +23,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/...`, **NOT** `plans/reports/`.
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH's Aysar/Baamboozle hours live in **Workstream**, not Sheets — Sheets-only check missed 1.5h on 2026-06-18, must call Workstream API every time.
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter EVERY dev to their own name in multi-employee sheets (James Diamond sheet has both PhucVT and AnhNH2 on different projects) — never `sum()` all owners in a sheet as one person's total.
+- [feedback_workstream_config_not_gitignored.md](feedback_workstream_config_not_gitignored.md) — Check ANY new `config/.*-config.json` is in `.gitignore` — workstream-config leaked a live token in git history until fixed 2026-06-19.
 
 ---
 
