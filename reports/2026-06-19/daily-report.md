@@ -103,7 +103,7 @@ Trello: James Diamond - Vinn ✓ complete (daily reports confirmed present). And
 | TuanNT | "4h total (CharlesChang 4h)" | **0h across all 5 sheets** (JohnYi, Rebecca, Paturevision, Neural, CharlesChang all show zero TuanNT rows for Thu 18) | 🔴 **Real alert** — no leave note. Reminder sent. |
 | PhucVT | 8h | 8h — confirmed independently for Thu 18, this one was actually correct (coincidence: he logged 8h both days) | ✓ |
 | VietPH | 8h | 8h — also correct by coincidence (8h both days) | ✓ |
-| KhanhHH | "5h Generator + 5.83h Baamboozle = 10.83h" | **1h Generator** (Stripe error fix MR522) + 5.83h Baamboozle (Workstream — this one wasn't affected, fetched live) = **6.83h combined** | ⚠️ Below 8h target by 1.17h, no leave note — minor, watch |
+| KhanhHH | "5h Generator + 5.83h Baamboozle = 10.83h" | **1h Generator** (Stripe error fix MR522) + 5.83h Baamboozle Workstream + **0h Colin/ETZ Workstream** (3rd project, found 09:35 — see below) = **6.83h confirmed-logged** | ⚠️ Below 8h by 1.17h. User confirmed KhanhHH says he's working Colin too — that work isn't logged anywhere (sheet OR Workstream both show 0h for everyone, all week). Reminder sent covers this. |
 | Elena | "8.5h (SamHT 7h, TriNM 1.5h)" | **1.5h** (SamHT only — redmine 79265/79028; TriNM 0h) | Not gated to a Trello hours target, but the number was wrong — corrected |
 | LeNH | "0h, full-day leave" | Leave was actually **Jun 17**; Jun 18 he worked full day (8.17h Upwork + 107 Matrix msgs) but hadn't written the task description | ⚠️ Worked, log not filled — reminder sent |
 | LongVV | 0h Maddy this week | Independently verified via live Workstream (not from this buggy script) — genuinely 0h Mon-Thu, mid-transition from OhCleo (see Matrix section) | ⚠️ Monitor, not yet a shortfall |
@@ -231,7 +231,7 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 | TuanNT | **Genuine 0h across all 5 sheets Jun 18, no leave note** | ✅ Sent (Matrix `!knbJbIKzXRJNGVFQNg`) — explicit "remind him" instruction from user overrode default print-only |
 | LeNH | Worked full day Jun 18 (8.17h Upwork-confirmed) but task description not written in Rory sheet | ✅ Sent (Matrix `!OIrgPraJWrcDTnRVLQ`) — explicit "remind him" instruction |
 | LongVV | 0h Maddy this week so far, but mid-transition from OhCleo (handover Jun 18, confirmed via Matrix) | Monitor, not a 0h-absence case — skip for now, re-check Sunday |
-| KhanhHH | 6.83h combined Jun 18 (corrected from 10.83h, re-verified across all 12 sheets + fresh Workstream fetch), 1.17h under 8h, no leave | ✅ Sent (Matrix `!rwLbvLBnrRAYMaOPaD`) |
+| KhanhHH | 6.83h combined Jun 18 (re-verified across all 12 sheets + Baamboozle Workstream), 1.17h under 8h, no leave. **Update 09:35: found a 3rd project (Colin/ETZ) with 0h logged anywhere** — user confirmed KhanhHH says he's working it | ✅ Sent twice (Matrix `!rwLbvLBnrRAYMaOPaD`) — 1st generic shortfall note, 2nd specifically naming Colin/ETZ as unlogged |
 | All others | Hours logged | Skip |
 
 ---
