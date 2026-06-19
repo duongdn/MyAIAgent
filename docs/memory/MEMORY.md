@@ -49,6 +49,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [project_longvv_james_diamond.md](project_longvv_james_diamond.md) — LongVV project assignments change weekly — check Matrix Monday plan (W30: 16h Maddy + 15h Celine/OhCleo)
 - [project_blake_socal_dropped.md](project_blake_socal_dropped.md) — Blake/SoCal Auto Wraps dropped from monitoring as of 2026-05-11
 - [project_php_team.md](project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH
+- [project_blair_brown_setup.md](project_blair_brown_setup.md) — Blair Brown - Peptide Clyde (WooCommerce): dev=DuongDN, Workstream "WordPress Update" ID `cmqj4tj6v01gfm81vgx7ipkov`, FORBIDDEN (not manager), added to weekly Matrix report W31+
 
 ---
 
