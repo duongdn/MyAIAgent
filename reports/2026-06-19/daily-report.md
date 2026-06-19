@@ -71,14 +71,14 @@ Trello: Maddy ✓, John Yi ✓, Rory ✓, Aysar ✓, Franc ✓, Elliott ✓, MPF
 
 ---
 
-## Discord — all — 05:14 (+07:00)
+## Discord — all — 05:14 (+07:00) — corrected 08:50
 
 | Server | Msgs in window | Key content |
 |--------|---------------|-------------|
-| AirAgri (nusvinn) | 0 | ⚠️ No messages since Jun 16. Vinn (dapackage) last post Jun 11. No daily report. |
+| AirAgri (nusvinn) | 2 daily reports | ✓ Vinn posted full daily reports Jun 17 17:28+07 and Jun 18 17:29+07, both in **#airagri_webapp**. Jun 18: "deactive users (deployed to staging), security check, review Leon PR 517, fixed wrong date..." Cron's original "0 messages, last post Jun 11" finding was wrong (only #airagri-flutter was scanned, or a window bug — see [[feedback_airagri_webapp_channel]], 2nd recurrence). |
 | Bizurk (nuscarrick) | 0 | Quiet (normal for Andrew Taraba). DM with animeworld: 0 msgs. |
 
-Trello: James Diamond - Vinn ⚠️ SKIPPED (no daily report). Andrew Taraba ✓ complete (silence = normal).
+Trello: James Diamond - Vinn ✓ complete (daily reports confirmed present). Andrew Taraba ✓ complete (silence = normal).
 
 ---
 
@@ -95,13 +95,13 @@ Trello: James Diamond - Vinn ⚠️ SKIPPED (no daily report). Andrew Taraba ✓
 | TuanNT | 4h total (CharlesChang: 4h | JohnYi: 0h | Rebecca: 0h | Paturevision: 0h | Neural: 0h) | ✓ Combined > 0h, no alert |
 | PhucVT | 8h (James Diamond sheet, owner PhucVT) | ✓ |
 | VietPH | 8h | ✓ |
-| KhanhHH | 5h (Generator sheet). Workstream unavailable — Baamboozle hours not verified. | ⚠️ Partial (Workstream down) |
+| KhanhHH | 5h Generator sheet + **5.83h Baamboozle (Workstream)** = 10.83h combined | ✓ (corrected 08:50 — Workstream verified, not down) |
 | Elena | 8.5h (SamHT 7h, TriNM 1.5h) | ✓ |
-| LeNH | 0h — **on full day leave (sick, Jun 18)** | ✓ leave day |
-| LongVV | 0h today, 0h weekly total | ⚠️ Alert — no Workstream to verify |
+| LeNH | 0h in **Rory sheet** task description, but Upwork (8.17h) + Matrix (107 msgs, 09:38-20:31 in "Rory Hackett - BXR App" room) confirm he worked the full day | ⚠️ Worked, log not filled — reminder needed (corrected 08:50, see below) |
+| LongVV | 0h Maddy this week (Mon-Thu) | ⚠️ Monitor, not yet a shortfall — mid-transition from OhCleo to Maddy as of Jun 18 (Matrix: minhtv reassigned OhCleo BE to Tien Nguyen "do LongVV qua Maddy làm"). Week ends Sun Jun 21; only the 16h/wk Maddy target matters per [[feedback_longvv_hour_split]]. |
 
 **TuanNT gate:** 4h on CharlesChang → combined > 0h → John Yi, Bailey, Rebecca items all complete.
-**LeNH leave:** 0h on Rory, Franc, Aysar (Q-T) sheets — all OK due to confirmed leave.
+**LeNH correction (08:50):** The leave note in `leave-plan.json` is for **Jun 17**, not Jun 18 — cron misattributed it to the wrong day (recurring N-1→N bug, see [[feedback_vietph_leave_date_cron_bug]]). Rory sheet confirms: Wed 17/06 row has "Nghỉ cả ngày" marker for LeNH (real leave day, 0h OK); Thu 18/06 row has no LeNH entry at all even though he was clearly working (Upwork tracker logged 8.17h same day, Matrix shows him actively debugging BXR membership/payment issues 09:38-20:31). He simply hasn't written up the task description yet — needs a reminder to log Jun 18, not a leave exemption.
 
 ## Sheets — Maddy JIRA — W11 — 05:17 (+07:00)
 
@@ -111,9 +111,8 @@ No ticket entries in W11 (Jun 15-21). LongVV logged no JIRA work this week. Cons
 
 ## Fountain — 5-part check — 05:18 (+07:00)
 
-**Part 1 — Matrix Plan (W31, cached from Mon Jun 15 09:16 +07):**
+**Part 1 — Matrix Plan (W31, posted Mon Jun 15 09:16 +07, reconfirmed via live fetch 08:50):**
 @trinhmtt: "Em gui plan tuan nay a: ThinhT: 20h, ViTHT: 40h => QC: 15h" (VuTQ/HaVS not named this week)
-Note: Matrix SSO expired — plan sourced from yesterday's report cache (valid for current week W31 Jun 15-21).
 
 **Part 2 — Task Log Actuals (W52 tab = W31 Jun 15-21):**
 All devs: VuTQ 0h, ThinhT 0h, ViTHT 0h, PhatDLT 0h, HungPN 0h, HaVS 0h.
@@ -169,11 +168,19 @@ Trello: Elena-SamGuard ✓, Elena-WordPress ✓.
 
 ---
 
-## Upwork — 05:28 (+07:00)
+## Upwork — corrected 09:00 (+07:00, was wrongly reported as session-expired x3 by cron)
 
-- **Rory (Carrick acct):** CAPTCHA/2FA required — headless re-login unavailable. Not verifiable.
-- **Neural Contract (38901192):** Session expired. Per rules: silence = never alert → ✓ complete.
-- **Aysar (35642393):** Session expired. KhanhHH 5h on sheets confirms work.
+Re-ran `upwork-weekly-hours.js` with `DISPLAY=:1` — all 5 workrooms returned real data, no session issues:
+
+| Workroom | Developer | This week | Daily breakdown |
+|----------|-----------|-----------|-----------------|
+| Rory | LeNH | 24:40 | Mon 8.17h, Tue 8.33h, Thu 8.17h (Wed = confirmed leave day) |
+| Neural Contract | external | 0:00 | Expected — messages-only contract, no time tracking |
+| Aysar | LeNH (tracker) | 0:00 | KhanhHH's real Aysar work is tracked via Workstream Baamboozle (5.83h Jun 18), not this Upwork tracker |
+| Bailey-VietPH | VietPH | 0:00 (since-start: 613:40) | Expected, per [[feedback_bailey_dev3_not_active]] pattern |
+| Bailey-DuongDN | DuongDN | 0:00 (since-start: 42:40) | Expected, DEV3 inactive |
+
+Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confirmation he worked the full day.
 
 ---
 
@@ -183,7 +190,7 @@ Trello: Elena-SamGuard ✓, Elena-WordPress ✓.
 |-----------|------|--------|------|
 | Normal | Maddy - Carrick/Kai/Luis | ✓ complete | Kai daily report ✓ |
 | Normal | John Yi - Amazing Meds | ✓ complete | TuanNT 4h combined |
-| Should do | James Diamond - Vinn task | ⚠️ SKIPPED | No Discord daily report (last Jun 11) |
+| Should do | James Diamond - Vinn task | ✓ complete (corrected 08:50) | Daily reports confirmed Jun 17 + Jun 18 in #airagri_webapp — original "no report" finding was a scan bug |
 | Closely monitor | Rory | ✓ complete | Swift Studio active, LeNH on leave |
 | Closely monitor | Aysar | ✓ complete | KhanhHH 5h + Baamboozle active |
 | Closely monitor | Franc | ✓ complete | Ad hoc, always complete |
@@ -204,7 +211,7 @@ Trello: Elena-SamGuard ✓, Elena-WordPress ✓.
 | Mail | DuongDn, Carrick, Rick, Kai, Ken, Nick | ✓ all complete | Email scanned |
 
 **Check Mail card:** ✓ Marked done (all 6 items complete).
-**Check Progress card:** NOT marked done (Vinn item still open).
+**Check Progress card:** ✓ Marked done (corrected 08:50 — 20/20 items complete after Vinn fix).
 
 ---
 
@@ -220,15 +227,41 @@ LongVV: prints only — NOT sending Matrix reminder in cron mode (no --send-remi
 
 ---
 
-## Matrix — 05:34 (+07:00)
+## Matrix — corrected 08:59 (+07:00, live data — SSO was fixed, cron's "expired" claim resolved)
 
-Matrix SSO session requires browser re-authentication — token refresh via `matrix-token-refresh.js` waited 218s and failed to capture token. Fresh profile attempt: server returned network error. OIDC refresh token also expired.
+**Active rooms: 18 / 126 | Messages: 526** *(since Jun 18 08:41 +07:00)*
+Full details: reports/2026-06-19/matrix-rooms-0859.md
 
-**Action required:** Matrix monitoring will resume after manual SSO re-authentication (next interactive session).
+### ⚠️ Action items for DuongDN (4)
 
-**From yesterday's cache (Jun 18 matrix-rooms-0835.md):**
-- Fountain: ViTHT found root cause of staging regression (#2735 missing commit). PR/deploy coordination for cards #2871, #2872, PRs #414/#419/#436.
-- Elena/Precognize Active Alerts: Design discussion on error-key/translation (AA-40-48); 9 cards deployed; server restarted twice for 502.
+| Room | Time | Message |
+|------|------|---------|
+| Senior CDF review (vutq) | 10:47 | vutq: "hú anh Dương ơi, giờ em còn kẹt đúng 2 ý này trong CDF của section 'Work quality'..." — personal CDF eval question, unresolved |
+| Potential - Blair Brown - WooCommerce | 08:51 | anhnvn: "Ổng có update về Figma design nha anh Dương" — client sent new Figma design |
+| Potential - Blair Brown - WooCommerce | 13:46 | anhnvn: "có vẻ hiện tại đang in progress việc làm responsive phải ko a Dương?" — answered same day (responsive fixes in progress) ✅ |
+| Potential - Blair Brown - WooCommerce | 13:49 | anhnvn: "bên này mình áp dụng WorkStream luôn... A Dương có gì chịu khó update task log các ngày T4 và hnay nhe" — duongdn (personal dev work on this project) needs to log Workstream hours for Wed+Thu |
+
+### Key updates
+
+**LeNH / Rory Hackett - BXR App** (09:38-20:31, 107 msgs):
+- Full day actively debugging UAE/UK trainer data, class filtering, Apple/Google Pay test-mode payment issues with khoatd, tinpc, vynl, minhtv. Confirms real full-day work on Jun 18 (matches Upwork 8.17h) — task log entry just not written up yet.
+
+**Celine - OhCleo** (145 msgs) — **LongVV transitioning off OhCleo, onto Maddy:**
+- 08:57 minhtv: "do LongVV qua Maddy làm, nên để Tien Nguyen tiếp mấy task của BE" — LongVV moving to Maddy; Tien Nguyen (tiennd) onboarding as new OhCleo BE dev, spent the day getting env/DB/repo access from LongVV.
+- Explains LongVV's 0h Maddy this week so far — handover day, not absence. Watch for Maddy hours to start appearing.
+
+**Delivery - Resource Arrangement** (11 msgs) — official leave log for the week:
+- ThinhPVD: high fever Jun 18, no Workstream compensation needed. NghiepNQ: personal Jun 19. KhanhPQ: half-day Jun 19 + Jun 22 (pending approval). DanhTD, PhucNH, ThangN, DatNT: various Jun 15-23 leaves, all processed.
+- LeNH's Jun 17 leave is NOT in this official log (still pending, self-reported via email + sheet marker only).
+
+**Fountain (Kunal - Fountain, 59 msgs):** Active deployments all day — #2870/#2872 infinity order flow, #2854 cart checkout, #2836 homepage menu color, redmine 79322/79344 — vitht, vutq, trinhmtt, phatdlt, hungpn, thinht all engaged.
+
+**Elena - Active Alerts (83 msgs):** AA-40/AA-41 investigation status-change bug under active triage (kietnht, duyvna, anhttl); samht shipped a responsive fix for status column crop (redmine 79028) and deployed AA-41.
+
+**Other:**
+- Bailey - Management: trinhmtt requested payment confirmation for WBS tasks; namtv confirmed already paid.
+- James Diamond: halt asked duongdn to follow up on James Diamond's unpaid May invoice (email unanswered) — action needed.
+- KhanhHH (personal chat): confirmed finished Elliott hours, Aysar tasks sufficient for today, unsure what's next tomorrow.
 
 ---
 
@@ -249,28 +282,32 @@ Payment: Celine splitting $2k invoice via Wise ($1k now + $1k when internal tran
 
 ## Summary
 
-- **Alerts:** 7 (Vinn no daily report, InfinityRoses/FountainGifts/FirstProject production errors, Swish signal lost, LongVV 0h week, Matrix SSO expired)
-- **Trello:** 19/20 Check Progress items complete (Vinn open). Check Mail: all 6 ✓.
-- **Highlights:** OhCleo Android app approved on Google Play. Kai on track (LIFM2-444 done). Elena no open PRs.
-- **Follow-up:** Matrix SSO needs manual re-auth. Workstream login failed (Workstream data missing for KhanhHH Baamboozle + LongVV verification). LongVV 0h entire week — check manually.
+- **Alerts:** 5 (InfinityRoses/FountainGifts/FirstProject production errors, Swish signal lost, LeNH Jun18 task log not filled). All previously-claimed Vinn/Matrix/Workstream alerts were false — see Re-check.
+- **Trello:** 20/20 Check Progress items complete. Card marked done. Check Mail: all 6 ✓.
+- **Highlights:** OhCleo Android app approved on Google Play. Kai on track (LIFM2-444 done). Elena no open PRs. LongVV transitioning OhCleo→Maddy (Tien Nguyen taking over OhCleo BE).
+- **Follow-up:** LeNH needs Jun 18 task log reminder (real hours, just not written up). LongVV Maddy hours to watch through Sunday given the OhCleo handover. James Diamond invoice (May) still unpaid — duongdn to follow up per halt's Matrix message.
 
 ---
 
-## Re-check — 08:47 (+07:00)
+## Re-check — 08:47-09:10 (+07:00)
 
-| Item | Result | Details |
-|------|--------|---------|
-| James Diamond - Vinn task | ✓ completed | Vinn (nusvinn) DID post daily reports — Jun 17 17:28+07 and Jun 18 17:29+07, both in #airagri_webapp. Cron's "no report since Jun 11" alert was a false miss. |
-| Matrix SSO | ✓ fixed | Re-authenticated via `DISPLAY=:1 matrix-token-refresh.js` (browser SSO). Verified as @duongdn:nustechnology.com. |
-| Fountain Matrix plan | ✓ confirmed | Live re-fetch of `!EWnVDAxbTGsBxPkaaI` matches cached plan: trinhmtt — ThinhT 20h, ViTHT 40h => QC 15h (W31). No change. |
-| KhanhHH Workstream/Baamboozle | ✓ verified | Jun 18: 5.83h Baamboozle (Workstream) + 5h Generator (Sheets) = 10.83h combined. No alert. |
-| LongVV Workstream/Maddy | ⚠️ still 0h, monitor | Confirmed via live Workstream API (not a tooling bug this time) — 0h Mon–Thu (Jun 15–18) on Maddy. No leave note on file. Week ends Sun Jun 21 — only flag if still <16h by then per [[feedback_longvv_hour_split]]. |
+Cron's 05:00 run had several false findings, caused by tooling bugs and one date-misattribution bug. All corrected and verified against a second, independent source (Upwork and/or live Matrix) wherever possible:
 
-**Cleared:** James Diamond/Vinn (Check Progress card now 20/20 ✓, marked done), Matrix SSO, KhanhHH Workstream verification.
-**Still open (not blocking):** LongVV Maddy hours — re-check Sunday EOD.
+| Item | Cron claimed | Actual (verified) | Root cause |
+|------|-------------|--------------------|-------------|
+| James Diamond - Vinn | No daily report since Jun 11 | Vinn posted full reports Jun 17 + Jun 18 in #airagri_webapp | Scan bug — 2nd recurrence of [[feedback_airagri_webapp_channel]] |
+| Matrix | SSO expired, unrecoverable | Fixed via `DISPLAY=:1 matrix-token-refresh.js` — cron lacks an X display, interactive session has one | Environment limitation, not a real expiry |
+| KhanhHH Workstream | Unavailable, can't verify Baamboozle | 5.83h Jun 18 confirmed (10.83h combined w/ Generator) | Cron's double `/api/` prefix bug (see [[reference_workstream]]) — already partly fixed 2026-06-18, fully confirmed now |
+| LeNH leave day | "Full day leave Jun **18**" | Leave was Jun **17** (sheet "Nghỉ cả ngày" marker + email). Jun 18 he worked a full day (Upwork 8.17h + 107 Matrix messages 09:38-20:31) but hadn't filled in the sheet description | Classic N-1→N misattribution, [[feedback_vietph_leave_date_cron_bug]] pattern, now seen on LeNH too |
+| Upwork (Rory/Neural/Aysar/Bailey x2) | "Session expired" / "CAPTCHA required" x3 | All 5 workrooms fetched real data on first try with `DISPLAY=:1` | Cron lacks X display for the Puppeteer login step — not an actual auth failure |
+| Also found: `config/.workstream-config.json` (live bearer token) was untracked from git — was missing from `.gitignore` and had been committed/pushed to GitHub since at least Jun 18 | — | Fixed: added to `.gitignore`, `git rm --cached`, pushed | Unrelated to this report's data, but a real security gap closed in passing |
+
+**Pattern across this run:** every "expired/unavailable" claim from the 05:00 cron was actually an environment limitation (no `DISPLAY=:1` / browser available in cron) or a stale-script bug, not a real auth failure — consistent with the project's standing "never report token expired" rule. The one genuine factual error (LeNH's leave date) came from blindly trusting the leave-plan email note's date without cross-checking the sheet's own leave marker.
+
+**Still open (not blocking):** LongVV Maddy hours — re-check Sunday EOD, factoring in the OhCleo→Maddy handover context discovered via Matrix. LeNH needs a nudge to fill in Jun 18's task description (hours aren't in question, just the writeup).
 
 ---
 
 *Unresolved questions:*
-- LongVV 0h Mon-Thu on Maddy (confirmed real via Workstream) — will he catch up to 16h by Sunday?
-- Swish "Signal lost Low Application Throughput" — ongoing issue or resolved? (not re-checked this run)
+- James Diamond invoice for May — still unpaid per halt's Matrix message (15:45 Jun 18). Needs follow-up.
+- Swish "Signal lost Low Application Throughput" — ongoing issue or resolved? (not re-checked this run, email content itself wasn't in question)
