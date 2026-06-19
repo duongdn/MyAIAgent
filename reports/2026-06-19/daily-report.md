@@ -231,7 +231,7 @@ Rory's Thursday 8.17h matches the LeNH/Jun18 finding above — independent confi
 | TuanNT | **Genuine 0h across all 5 sheets Jun 18, no leave note** | ✅ Sent (Matrix `!knbJbIKzXRJNGVFQNg`) — explicit "remind him" instruction from user overrode default print-only |
 | LeNH | Worked full day Jun 18 (8.17h Upwork-confirmed) but task description not written in Rory sheet | ✅ Sent (Matrix `!OIrgPraJWrcDTnRVLQ`) — explicit "remind him" instruction |
 | LongVV | 0h Maddy this week so far, but mid-transition from OhCleo (handover Jun 18, confirmed via Matrix) | Monitor, not a 0h-absence case — skip for now, re-check Sunday |
-| KhanhHH | 6.83h combined Jun 18 (corrected from 10.83h), 1.17h under 8h target, no leave | Minor — not sent, watch tomorrow |
+| KhanhHH | 6.83h combined Jun 18 (corrected from 10.83h, re-verified across all 12 sheets + fresh Workstream fetch), 1.17h under 8h, no leave | ✅ Sent (Matrix `!rwLbvLBnrRAYMaOPaD`) |
 | All others | Hours logged | Skip |
 
 ---
