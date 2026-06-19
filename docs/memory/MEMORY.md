@@ -67,6 +67,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_news_digest_new_topic.md](feedback_news_digest_new_topic.md) — Unknown topic → add as new topic with own RSS sources in fetch-news.py, never alias existing topics
 - [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — **ALWAYS use `link` field from fetched JSON, NEVER fabricate/guess article URLs**
 - [feedback_news_digest_php_events.md](feedback_news_digest_php_events.md) — PHP major events (PHPverse, Laracon, PHP Tek) must be fetched with full schedule+speakers
+- [feedback_news_digest_ai_underused_sources.md](feedback_news_digest_ai_underused_sources.md) — AI section must sample ALL 10 sources, not just VN Google News; Facebook can't be scraped (login wall)
 
 ## Workflow & Reporting Style
 - [feedback_freelancer_email_must_be_scanned.md](feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com MUST appear in email scan every run. Contains MPFC production errors.
