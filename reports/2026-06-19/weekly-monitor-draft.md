@@ -11,7 +11,7 @@
 
 | Issue | Status |
 |-------|--------|
-| Blair Brown - Peptide Clyde | **🆕 NEW** this week. Developer confirmed: **DuongDN**. Workstream "WordPress Update" (ID: `cmqj4tj6v01gfm81vgx7ipkov`). API FORBIDDEN — DuongDN is TechLead not Manager. Hours not logged yet (reminded by anhnvn today). |
+| Blair Brown - Peptide Clyde | **🆕 NEW** this week. Developer: **DuongDN**. Workstream "WordPress Update". Access fixed: uses `/time/projects/{id}/week` (TechLead endpoint). Script updated. W31 = **0h** — tasks exist Wed+Thu, time not logged yet (anhnvn reminded DuongDN 13:49). |
 | LongVV moved to Maddy W31 | Celine/OhCleo room confirms LongVV → Maddy this week. GSheets W11 shows 0h — JIRA check needed. Tien Nguyen taking over OhCleo BE. |
 | VietPH leaving Jun 26 | **PENULTIMATE WEEK** (Jun 16–20). Last working day Jun 26. Transfer to DuongDN still pending confirmation. |
 | KhanhHH 9h GSheets only | Generator=9h. Baamboozle + Colin/ETZ via Workstream (not in GSheets). Need Workstream pull for full picture. |
@@ -163,12 +163,11 @@ vs W30 (NS+IP: 219h @ 100h/wk = 2.19wk):
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com` (ThuyLe)
 **Status:** ⚠️ DRAFT — numbers below are **partial** (Mon–Thu). Run again Friday night for final.
 
-**⚠️ BLAIR BROWN — action required before live send:**
-- Developer: **DuongDN** (confirmed from Matrix "Potential - Blair Brown" room)
-- Workstream project: "WordPress Update" ID `cmqj4tj6v01gfm81vgx7ipkov`
-- **Blocker:** DuongDN is `isTechLead=true` but NOT manager → `/review/week` returns FORBIDDEN
-- **Fix:** Grant DuongDN manager role on "WordPress Update" project in Workstream
-- anhnvn reminded DuongDN at 13:49 today to log Wed+Thu hours
+**Blair Brown — API access resolved ✅:**
+- Developer: **DuongDN** | Workstream: "WordPress Update" `cmqj4tj6v01gfm81vgx7ipkov`
+- TechLead endpoint `/time/projects/{id}/week` works (no manager needed)
+- Script: `node scripts/workstream-fetch-project-week.js {date} blair_brown`
+- W31 hours: **0h** — tasks logged Wed+Thu but no time entered yet (anhnvn reminded DuongDN 13:49)
 
 **Matrix draft (expected values for Friday EOD):**
 ```
@@ -206,7 +205,7 @@ DuongDN: —h (Workstream, access not configured — need manager role)
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| 🔴 HIGH | **Blair Brown setup**: Grant DuongDN manager role on "WordPress Update" Workstream project. DuongDN log W31 hours (Wed+Thu+Fri). Add to workstream-fetch script. | PM+DuongDN |
+| 🟡 MED | **Blair Brown W31 hours**: DuongDN has tasks Wed+Thu but no time logged yet. Will show in Friday night run once logged. | DuongDN |
 | 🔴 HIGH | **VietPH leaving Jun 26**: Last day next week. Confirm handover tasks to DuongDN. | PM |
 | 🟡 MED | **LongVV Maddy 0h**: Run JIRA check (madhuraka) for W31 Jun 16+. Verify hours before finalizing. | PM |
 | 🟡 MED | **KhanhHH Workstream**: Pull Baamboozle + Colin/ETZ Workstream hours for complete W31 picture. | PM |

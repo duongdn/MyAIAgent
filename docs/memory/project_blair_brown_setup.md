@@ -23,9 +23,10 @@ DuongDN: Xh
 
 **Why:** ThuyLe said "từ tuần này, t có report thêm job Blair Brown - Peptide Clyde → Dương add thêm vào report" (2026-06-19).
 
-**Blockers as of 2026-06-19:**
-1. DuongDN is TechLead (not Manager) on Workstream project → `/review/week` returns FORBIDDEN
-2. DuongDN needs to log W31 hours (reminded by anhnvn at 13:49 Jun 19 for Wed+Thu+Fri)
-3. Config entry not yet in `.workstream-config.json`
+**Access:** TechLead role CAN fetch own hours via `/api/time/projects/{id}/week?date={date}` (NOT `/review/week` which is manager-only). Script updated 2026-06-19.
 
-**How to apply:** In future weekly runs, after access is granted: fetch hours using `/review/week?projectId=cmqj4tj6v01gfm81vgx7ipkov&date={monday}`. Add Blair Brown section after Marcel in Matrix message. [[reference_workstream]]
+**Script:** `node scripts/workstream-fetch-project-week.js [date] blair_brown` — uses `manager: false` path in `PROJECTS` config.
+
+**W31 status:** 0h logged as of Jun 19 (tasks exist Wed+Thu but no time logged yet — anhnvn reminded DuongDN at 13:49).
+
+**How to apply:** In weekly runs: `node scripts/workstream-fetch-project-week.js {friday_date} blair_brown`. Add Blair Brown section after Marcel in Matrix message. [[reference_workstream]]

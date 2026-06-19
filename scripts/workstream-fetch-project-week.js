@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
- * Fetch Workstream project week data (all members task logs).
- * Supports both Maddy (Xtreme Soft Solutions) and Rebecca (MissSwimwear).
+ * Fetch Workstream project week data.
+ * Supports manager projects (Maddy, Rebecca) via /review/week (all-member view),
+ * and techLead-only projects (Blair Brown) via /time/projects/{id}/week (self view).
  *
  * Usage:
- *   node scripts/workstream-fetch-project-week.js [date]          # both projects
- *   node scripts/workstream-fetch-project-week.js [date] maddy    # Maddy only
- *   node scripts/workstream-fetch-project-week.js [date] rebecca  # Rebecca only
+ *   node scripts/workstream-fetch-project-week.js [date]              # all projects
+ *   node scripts/workstream-fetch-project-week.js [date] maddy        # Maddy only
+ *   node scripts/workstream-fetch-project-week.js [date] rebecca      # Rebecca only
+ *   node scripts/workstream-fetch-project-week.js [date] blair_brown  # Blair Brown only
  *
  * Date defaults to today (YYYY-MM-DD). Output is JSON to stdout.
  * Errors exit 1. Token auto-refreshed if expired.
@@ -18,9 +20,12 @@ const { execSync } = require('child_process');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.workstream-config.json');
 
+// manager: true  → uses /review/week (all members visible)
+// manager: false → uses /time/projects/{id}/week (self hours only, works for techLead)
 const PROJECTS = {
-  maddy:   { id: 'cmpqc1v7v00ahtk1vs1817xt8', name: 'Xtreme Soft Solutions', client: 'Maddy' },
-  rebecca: { id: 'cmpqcflkx00litk1vic3vki6j', name: 'MissSwimwear',           client: 'Rebecca' },
+  maddy:       { id: 'cmpqc1v7v00ahtk1vs1817xt8', name: 'Xtreme Soft Solutions', client: 'Maddy',       manager: true  },
+  rebecca:     { id: 'cmpqcflkx00litk1vic3vki6j', name: 'MissSwimwear',           client: 'Rebecca',     manager: true  },
+  blair_brown: { id: 'cmqj4tj6v01gfm81vgx7ipkov', name: 'WordPress Update',       client: 'Blair Brown', manager: false },
 };
 
 // Parse hours "H:MM" -> decimal
@@ -52,12 +57,19 @@ async function ensureToken() {
   return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 }
 
-async function fetchProjectWeek(config, projectId, date) {
+// Manager endpoint: /review/week — shows all team members
+async function fetchProjectWeekManager(config, projectId, date) {
   const url = config.api_base + '/review/week?projectId=' + projectId + '&date=' + date;
   return fetchWithToken(url, config.access_token);
 }
 
-function summarizeWeek(weekData, projectLabel) {
+// TechLead endpoint: /time/projects/{id}/week — shows self hours only
+async function fetchProjectWeekSelf(config, projectId, date) {
+  const url = config.api_base + '/time/projects/' + projectId + '/week?date=' + date;
+  return fetchWithToken(url, config.access_token);
+}
+
+function summarizeWeekManager(weekData, projectLabel) {
   const byEmployee = {};
   for (const row of (weekData.rows || [])) {
     if (!byEmployee[row.employeeName]) {
@@ -87,20 +99,52 @@ function summarizeWeek(weekData, projectLabel) {
   };
 }
 
+// For self-view (techLead): wraps into same output shape with a single member entry
+function summarizeWeekSelf(weekData, projectLabel, selfName) {
+  const stats = weekData.weekStats || {};
+  const totalMins = stats.totalActualMinutes || 0;
+  const chargedMins = stats.totalChargedMinutes || 0;
+  const days = {};
+  for (const day of (weekData.weekDays || [])) {
+    const mins = (day.stats || {}).totalActualMinutes || 0;
+    if (mins > 0) days[day.date] = parseFloat((mins / 60).toFixed(2));
+  }
+  return {
+    project: projectLabel,
+    weekStart: weekData.weekStart,
+    weekEnd: weekData.weekEnd,
+    missingReportDays: [],
+    members: [{
+      name: selfName || 'DuongDN',
+      weekTotal: parseFloat((totalMins / 60).toFixed(2)),
+      weekCharged: parseFloat((chargedMins / 60).toFixed(2)),
+      isPt: false,
+      days,
+    }],
+  };
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const date = args.find(a => /^\d{4}-\d{2}-\d{2}$/.test(a))
     || new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10);
-  const filter = args.find(a => ['maddy', 'rebecca'].includes(a.toLowerCase()))?.toLowerCase();
+  const filter = args.find(a => Object.keys(PROJECTS).includes(a.toLowerCase()))?.toLowerCase();
 
   const config = await ensureToken();
+  const selfName = config.user?.name || 'DuongDN';
   const results = {};
 
   const targets = filter ? { [filter]: PROJECTS[filter] } : PROJECTS;
   for (const [key, proj] of Object.entries(targets)) {
-    const data = await fetchProjectWeek(config, proj.id, date);
-    if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
-    results[key] = summarizeWeek(data, proj.client);
+    if (proj.manager) {
+      const data = await fetchProjectWeekManager(config, proj.id, date);
+      if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
+      results[key] = summarizeWeekManager(data, proj.client);
+    } else {
+      const data = await fetchProjectWeekSelf(config, proj.id, date);
+      if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
+      results[key] = summarizeWeekSelf(data, proj.client, selfName);
+    }
   }
 
   console.log(JSON.stringify(results, null, 2));
