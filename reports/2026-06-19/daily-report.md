@@ -258,7 +258,21 @@ Payment: Celine splitting $2k invoice via Wise ($1k now + $1k when internal tran
 
 ---
 
+## Re-check — 08:47 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| James Diamond - Vinn task | ✓ completed | Vinn (nusvinn) DID post daily reports — Jun 17 17:28+07 and Jun 18 17:29+07, both in #airagri_webapp. Cron's "no report since Jun 11" alert was a false miss. |
+| Matrix SSO | ✓ fixed | Re-authenticated via `DISPLAY=:1 matrix-token-refresh.js` (browser SSO). Verified as @duongdn:nustechnology.com. |
+| Fountain Matrix plan | ✓ confirmed | Live re-fetch of `!EWnVDAxbTGsBxPkaaI` matches cached plan: trinhmtt — ThinhT 20h, ViTHT 40h => QC 15h (W31). No change. |
+| KhanhHH Workstream/Baamboozle | ✓ verified | Jun 18: 5.83h Baamboozle (Workstream) + 5h Generator (Sheets) = 10.83h combined. No alert. |
+| LongVV Workstream/Maddy | ⚠️ still 0h, monitor | Confirmed via live Workstream API (not a tooling bug this time) — 0h Mon–Thu (Jun 15–18) on Maddy. No leave note on file. Week ends Sun Jun 21 — only flag if still <16h by then per [[feedback_longvv_hour_split]]. |
+
+**Cleared:** James Diamond/Vinn (Check Progress card now 20/20 ✓, marked done), Matrix SSO, KhanhHH Workstream verification.
+**Still open (not blocking):** LongVV Maddy hours — re-check Sunday EOD.
+
+---
+
 *Unresolved questions:*
-- Why is LongVV showing 0h for the entire week? Workstream unavailable to verify. Has any work been logged?
-- Vinn (PhucVT/dapackage) last active Jun 11 on AirAgri — is there a leave/status update missed?
-- Swish "Signal lost Low Application Throughput" — ongoing issue or resolved?
+- LongVV 0h Mon-Thu on Maddy (confirmed real via Workstream) — will he catch up to 16h by Sunday?
+- Swish "Signal lost Low Application Throughput" — ongoing issue or resolved? (not re-checked this run)
