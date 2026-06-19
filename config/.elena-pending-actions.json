@@ -18,6 +18,16 @@
   },
   "merged": [
     {
+      "pr": 307,
+      "branch": "fixbug_dp",
+      "type": "dp",
+      "ticket_id": "fixbug_dp",
+      "merged_at": "2026-06-19",
+      "deployed": true,
+      "status_updated": false,
+      "pending_action": "DONE — PR #307 merged (squash) 2026-06-19 14:55 +07. Deployed 2026-06-19 14:58 +07 (git pull + ng build 17.9s OK). Announced to Matrix Elena-Digital Plant room."
+    },
+    {
       "pr": 306,
       "branch": "fixbug_dp",
       "type": "dp",
@@ -202,12 +212,12 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-06-16",
-    "time": "11:47 +07:00",
+    "date": "2026-06-19",
+    "time": "14:58 +07:00",
     "prs_checked": "api_duongdn_token",
     "open_prs": 1,
     "prs_merged": 1,
-    "deploy_status": "deployed_pr306_ok",
+    "deploy_status": "deployed_pr307_ok",
     "wordpress_status": "not_checked_this_run",
     "precognize_open_prs": "not_checked_this_run"
   },

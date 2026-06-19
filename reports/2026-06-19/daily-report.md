@@ -338,3 +338,15 @@ Cron's 05:00 run had several false findings, caused by tooling bugs and one date
 - MPFC OAuth2 `invalid_grant` — who has access to MPFC's Google Cloud project to re-authorize it? Needs an owner, not just a recurring report line.
 - Why did Rollbar's MPFC Daily Summary emails stop after Jun 12 — broken integration or genuinely no errors? Worth a direct check on Rollbar's dashboard, not just inbox-based inference.
 - Whoever/whatever generates the daily `daily-sheets-scan-*.js` script each morning needs a fix so it can't silently reuse yesterday's file — see new memory note.
+
+## Elena — deploy — 14:58 (+07:00)
+
+**PR #307 — Fixbug dp** ([link](https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/307))
+- Branch: `fixbug_dp` → `process-digital-plant`
+- Change: 1 file, remove debug ` www` text from "Create Canvas" button label (`plant-model-sections.component.html`)
+- CodeRabbit: no high-risk issues; 0 review comments
+- Merged: squash, 14:55 +07
+- Deploy: MayBanServer git pull OK → ng build 17.9s OK
+- Announced: Matrix room "Elena - Digital Plant" ✓
+
+**pending_deploy was empty** — no backlog items.
