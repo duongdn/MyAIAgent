@@ -289,13 +289,21 @@ Supports individual server targeting:
 - nusvinn → AirAgri only (NOT HOMIEAPP) → Trello items: James Diamond - Vinn
 - nuscarrick → Bizurk only → Trello item: Andrew Taraba
 
-**Before using:** Verify each token with 3-step check (users/@me → guilds → channels). Fix if invalid — never just report expired.
+**⚠️ ALWAYS use the script — NEVER make Discord API calls inline or via Python.**
+Python urllib returns false 403 on Discord even with valid tokens. The Node.js script uses correct headers.
 
-**Key checks:**
-- AirAgri: **Vinn daily report** + **Jeff daily report** (channels: airagri_webapp, airagri-flutter)
-- Bizurk: General activity
+**Run:**
+```bash
+node scripts/discord-monitor.js
+```
+- Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically
+- Pass `--since=ISO8601` to override window (e.g. `--since=2026-06-18T05:36:00+07:00`)
+- Output: JSON `{ nusvinn: { tokenValid, messages: [...] }, nuscarrick: { tokenValid, messages: [...], andrewDMs: [...] } }`
 
-**Snowflake filter:** Convert `daily_report.last_run` epoch → Discord snowflake: `(epoch*1000 - 1420070400000) << 22`
+**Key checks in output:**
+- AirAgri (nusvinn): filter `messages` for author=`nusvinn` or `dapackage`, channel=`airagri_webapp`/`airagri-flutter` → **Vinn daily report**
+- AirAgri (nusvinn): filter author=`jeff_trinh` → **Jeff daily report**
+- Bizurk (nuscarrick): general activity + `andrewDMs` for Andrew Taraba
 
 **Trello — after checking:** Complete mapped item(s) if no alerts. Single server → complete only its item.
 

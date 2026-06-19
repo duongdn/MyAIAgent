@@ -35,7 +35,7 @@ Uses the **`alert`** timeline in `config/.monitoring-timelines.json` — complet
 4. Read today's daily report and any previous alert files to avoid duplicate alerts
 5. For each source, fetch **new activity since `alert.last_run`** — **STRICT timestamp filtering required**:
    - **Slack**: All workspaces using `search.messages` API — look for: escalations, urgent keywords, customer complaints, failed deployments, production issues. Filter by `ts >= cutoff_epoch`.
-   - **Discord**: Both accounts — look for: urgent messages, incident reports. Filter by message snowflake >= cutoff.
+   - **Discord**: Both accounts — run `node scripts/discord-monitor.js` (reads `alert.last_run` via `--since` or pass `--since={alert.last_run}`). NEVER call Discord API inline or via Python (false 403). Look for: urgent messages, incident reports.
    - **Email**: All accounts — look for: alert subjects, server notifications, client escalations. Filter by Date header >= cutoff.
    - **Matrix**: Fountain room — look for: blocker reports, plan changes. Filter by `origin_server_ts >= cutoff_ms`.
    - **GitHub**: Elena (duongdn) + Precognize (nusken) — look for: failed CI, security alerts, rejected PRs. Filter by `created_at >= cutoff_iso`.
