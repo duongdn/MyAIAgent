@@ -1,0 +1,24 @@
+Finding W31 tab...
+  W31 = W31 (2026-06-15→2026-06-21)
+Scanning W31 for weekly totals...
+  Owner totals: {}
+  Summary dev hours: {}
+
+Fetching Est vs Charged...
+  Header row 4: ['Work Package / Activity Name', '', '', '', '', 'Note', 'Status', 'Dev', 'Estimated Dev Raw', 'CR', 'Actual ', 'Charged']
+  Total tasks: 92
+  Active narrow: 0, remaining: 0.0h
+  Active broad: 92, remaining: 431.0h
+  Over-estimate tasks (>20%): 37
+    #2627: 1550.0% over | actual=8.25h | est+cr=0.5h | 
+    #2615: 789.6% over | actual=106.75h | est+cr=12.0h | 
+    #2639-fountain-infinity-active-inactive-card-categories: 725.0% over | actual=16.5h | est+cr=2.0h | 
+    #2545_build_a_box_service_modal: 650.0% over | actual=7.5h | est+cr=1.0h | 
+    #2630: 650.0% over | actual=3.75h | est+cr=0.5h | 
+    #2613: 625.0% over | actual=14.5h | est+cr=2.0h | 
+    #2652: 600.0% over | actual=10.5h | est+cr=1.5h | 
+    #2501: 537.5% over | actual=25.5h | est+cr=4.0h | https://trello.com/c/WtWwRVov/2501-fountain-different-position-for-product-catalog?search_id=3f35d485-70e7-46c8-aca4-68a95798db37
+    #2380_check_checkout_date_display: 531.2% over | actual=25.25h | est+cr=4.0h | 
+    #2691: 500.0% over | actual=6.0h | est+cr=1.0h | 
+
+============================================================

@@ -1,0 +1,49 @@
+
+=== Discovering W31 tabs (target: 2026-06-15) ===
+  Maddy: W11 (2026-06-15→2026-06-21)
+  JohnYi: W28 (2026-06-15→2026-06-21)
+  Rebecca: W29 (2026-06-15→2026-06-21)
+  JamesDiamond: W30 (2026-06-15→2026-06-21)
+  Rory: W16 (2026-06-15→2026-06-21)
+  Franc: W29 (2026-06-15→2026-06-21)
+  Aysar: W29 (2026-06-15→2026-06-21)
+  Generator: W45 (2026-06-15→2026-06-21)
+  Paturevision: W32 (2026-06-15→2026-06-21)
+  Elena: W13 (2026-06-15→2026-06-21)
+  Marcel: W14 (2026-06-15→2026-06-21)
+  Neural: W25 (2026-06-15→2026-06-21)
+  Fountain: W31 (2026-06-15→2026-06-21)
+
+=== LongVV ===
+  Maddy owners: {'LongVV': 16.0}
+  Maddy summary total: 16.0
+  JD owners: {'AnhNH2': 20.0, 'PhucVT': 40.0}
+
+=== PhucVT + AnhNH2 ===
+  JD all owners: {'AnhNH2': 20.0, 'PhucVT': 40.0}
+
+=== Paturevision (VietPH, VuTQ, TuanNT) ===
+  Pat owners: {'NamNN': 20.0, 'TuanNT': 9.5, 'VuTQ': 11.0, 'VietPH': 32.0, 'DuongDN': 1.0}
+
+=== TuanNT ===
+  JY owners: {'TuanNT': 0.333}
+  RB owners: {}
+  Neural owners: {'TuanNT': 0.25}
+
+=== KhanhHH ===
+  Gen owners: {'NamNN': 20.0, 'SamHT': 10.0, 'HangNTT': 23.0, 'KhanhHH': 20.0}
+  Elena owners: {'TriNM': 10.0, 'SamHT': 20.0, 'KietNHT': 32.0, 'TuanNTG': 8.0, 'KhanhHH': 5.5}
+  Aysar owners: {}
+
+=== LeNH ===
+  Rory owners: {'KhoaTD': 20.0, 'TinPC': 20.0, 'LeNH': 32.0}
+  Franc owners: {}
+  Rebecca LeNH hours: 0.0
+
+=== Marcel ===
+  Marcel owners: {}
+
+=== Fountain ===
+  Fountain owners: {}
+
+============================================================
