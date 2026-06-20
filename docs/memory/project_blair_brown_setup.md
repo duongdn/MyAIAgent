@@ -27,6 +27,6 @@ DuongDN: Xh
 
 **Script:** `node scripts/workstream-fetch-project-week.js [date] blair_brown` — uses `manager: false` path in `PROJECTS` config.
 
-**W31 status:** 0h logged as of Jun 19 (tasks exist Wed+Thu but no time logged yet — anhnvn reminded DuongDN at 13:49).
+**W31 result:** DuongDN: 8h (Wed 2h + Thu 4.5h + Fri 1.5h). Script bug (`weekStats.totalActualMinutes` → should be `weekStats.actual`) caused false 0h initially — fixed 2026-06-20.
 
 **How to apply:** In weekly runs: `node scripts/workstream-fetch-project-week.js {friday_date} blair_brown`. Add Blair Brown section after Marcel in Matrix message. [[reference_workstream]]

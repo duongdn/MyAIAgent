@@ -10,13 +10,13 @@
 
 | Issue | Status |
 |-------|--------|
-| TuanNT W31 total | **10h** (JY:0.33h, RB:0h, PAT:9.5h, Neural:0.25h) vs 40h → ⚠️ **−30h**. **3rd consecutive short week** (W29:31h, W30:24h, W31:10h). JohnYi+Rebecca 0h for 3 weeks. |
-| KhanhHH W31 total | **25.5h** (Gen:20h, Elena:5.5h, Aysar:0h) vs 40h → ⚠️ **−14.5h**. No leave detected. |
+| TuanNT W31 total | **36h** (JY:0.33h, RB:0h, PAT:9.5h, Neural:0.25h, CharlesChang:25.92h) vs 40h → **−4h**. ⚠️ JohnYi+Rebecca 0h but CharlesChang is main project now (25.92h). |
+| KhanhHH W31 total | **40h** (Gen:20h, Elena:5.5h, Baamboozle:11.83h, Colin/ETZ:2.67h) vs 40h → ✅ **ON TARGET**. |
 | VietPH last full week | Final full week — **last working day 2026-06-26 (Fri)**. Task transfer: JohnYi + Marcel Fussinger → DuongDN. |
 | Fountain capacity | W31 capacity **60h/wk** (ViTHT 40+ThinhT 20) vs W30 100h/wk. DatNT+VuTQ not in plan. Runway NS+IP **3.65wk** (vs 2.19wk W30). |
 | Fountain task log | **UNAVAILABLE** — Workstream migration continues (W31 GSheets all 0h). |
 | LongVV JIRA | W31: Maddy 16h ✓. LIFM2-439 over-budget: est 12h, actual 21h30m cumulative. |
-| Matrix JD+Marcel+Blair | ✅ SENT (corrected) — event_id `$4roqAdfkS_XDgB_QVCr_B7YjNsS6lhDjoRPF-HtHsew` |
+| Matrix JD+Marcel+Blair | ✅ SENT (corrected 2) — event_id `$lfqNXTba9cXzk1C5kzBlZqS8SCCa63ZLb1GUFhOeK4I` |
 
 ---
 
@@ -24,15 +24,15 @@
 
 ### Summary Table
 
-| Developer | Sheet | W31 Hours | Target | Adj Target | Status |
-|-----------|-------|-----------|--------|------------|--------|
-| LongVV | Maddy W11 | 16h | 16h | 16h | ✓ OK |
-| LongVV | JD W30 | 0h | flex | — | ✓ (no JD plan this week) |
-| PhucVT | JD W30 | 40h | 40h | 40h | ✓ OK |
-| AnhNH2 | JD W30 | 20h | — | — | ✓ (no fixed plan) |
-| VietPH | PAT W32 | 32h | 40h | **32h** (Mon leave) | ✓ OK |
-| TuanNT | JY+RB+PAT+Neural | **10h** | 40h | 40h | ⚠️ **−30h** |
-| KhanhHH | Gen+Elena+Aysar | **25.5h** | 40h | 40h | ⚠️ **−14.5h** |
+| Developer | Sources | W31 Hours | Target | Adj Target | Status |
+|-----------|---------|-----------|--------|------------|--------|
+| LongVV | Maddy Workstream | 16h | 16h | 16h | ✓ OK |
+| LongVV | JD sheet W30 | 0h | flex | — | ✓ (Maddy-only this week) |
+| PhucVT | JD sheet W30 | 40h | 40h | 40h | ✓ OK |
+| AnhNH2 | JD sheet W30 | 20h | — | — | ✓ (no fixed plan) |
+| VietPH | PAT sheet W32 | 32h | 40h | **32h** (Mon leave) | ✓ OK |
+| TuanNT | JY+RB+PAT+Neural+CharlesChang | **36h** | 40h | 40h | ⚠️ −4h (JY+RB 0h) |
+| KhanhHH | Gen+Elena+Baamboozle+Colin/ETZ | **40h** | 40h | 40h | ✓ OK |
 | LeNH | Rory+Franc | 32h | 40h | **32h** (Wed leave) | ✓ OK |
 | Marcel | DuongDN | 0h | — | — | ✓ (adhoc) |
 
@@ -67,20 +67,22 @@ Task log W11 total: **16h** ✓ (matches Maddy W11 = 16h)
 - ⚠️ **LAST FULL WEEK**: Final day 2026-06-26. Transfer: JohnYi/Amazing Meds + Marcel Fussinger → DuongDN.
 
 **TuanNT W31:**
-- JohnYi (W28): 0.33h — 3rd consecutive week near-0h
-- Rebecca (W29): 0h — 3rd consecutive week 0h
-- Paturevision (W32): 9.5h (only active project)
+- JohnYi (W28): 0.33h
+- Rebecca (W29): 0h
+- Paturevision (W32): 9.5h
 - Neural (W25): 0.25h
-- Combined: **10h** vs 40h → ⚠️ **−30h**
-- No leave markers found. Trend: W29=31h, W30=24h, W31=10h — accelerating drop.
-- Action: Confirm if TuanNT dropped JohnYi/Rebecca projects. Review current assignment.
+- CharlesChang Family App V2 (W48): **25.92h** (Tue 6.17h + Wed 4h + Thu 8h + Fri 7.75h)
+- Combined: **36h** vs 40h → ⚠️ −4h
+- Note: CharlesChang is now TuanNT's main project. JohnYi+Rebecca 0h 3 consecutive weeks — may have been de-allocated. Overall hours acceptable.
+- Trend: W29=31h, W30=24h (likely missing CharlesChang), W31=36h (corrected)
 
 **KhanhHH W31:**
-- Generator (W45): KhanhHH=20h (Gen total owners: NamNN 20h, SamHT 10h, HangNTT 23h)
-- Elena (W13): KhanhHH=5.5h
-- Aysar (W29): 0h — no entries for KhanhHH found
-- Combined: **25.5h** vs 40h → ⚠️ **−14.5h**
-- No leave detected for KhanhHH. Needs investigation (Aysar 0h + Elena only 5.5h).
+- Generator (GSheets W45): 20h
+- Elena (GSheets W13): 5.5h
+- Baamboozle/Aysar (Workstream): **11.83h** (Mon 2h + Wed 1.5h + Thu 5.83h + Fri 2.5h)
+- Colin/ETZ (Workstream): **2.67h** (Wed 1.5h + Thu 1.17h)
+- Combined: **40h** vs 40h → ✅ ON TARGET
+- Note: Initial report missed Workstream sources (Baamboozle + Colin/ETZ). Always check 3 sources for KhanhHH.
 
 **LeNH W31:**
 - Rory (W16): 32h
@@ -183,8 +185,8 @@ Key tracked tasks (deployed/done):
 ## #3 — James Diamond + Marcel Matrix Report
 
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`  
-**Status:** ✅ SENT (corrected) — event_id `$4roqAdfkS_XDgB_QVCr_B7YjNsS6lhDjoRPF-HtHsew`  
-*(First send `$6B46mYxf-6EZcyrr5jjyPKdGgdt0DLg24otXyqptKn0` missed Blair Brown section)*
+**Status:** ✅ SENT (corrected 2) — event_id `$lfqNXTba9cXzk1C5kzBlZqS8SCCa63ZLb1GUFhOeK4I`  
+*(corrected 1 `$4roqAdfkS_XDgB_QVCr_B7YjNsS6lhDjoRPF-HtHsew` had wrong Blair Brown 0h; corrected 2 has 8h)*
 
 **Message sent:**
 ```
@@ -207,7 +209,7 @@ DuongDN: 0h
 ---
 
 Blair Brown - Peptide Clyde
-DuongDN: 0h
+DuongDN: 8h
 ```
 
 **Data basis:**
@@ -215,7 +217,7 @@ DuongDN: 0h
 - LongVV: 0h on JD (Maddy-only this week). Web contract 40h — PhucVT covered full 40h.
 - AnhNH2: 20h actual → charge=actual (no fixed plan) ✓
 - Marcel DuongDN: 0h (adhoc) ✓
-- Blair Brown DuongDN: 0h (W31 — no hours logged, reminded Jun 19 by anhnvn)
+- Blair Brown DuongDN: 8h (W31 — Wed 2h + Thu 4.5h + Fri 1.5h)
 
 ---
 
@@ -228,8 +230,8 @@ DuongDN: 0h
 | PhucVT | 32h (adj) | 40h | ✓ Better |
 | AnhNH2 | 20h | 20h | Stable |
 | VietPH | 32h (adj) | 32h (adj) | ✓ Stable |
-| TuanNT combined | 24h | **10h** | ⚠️ Worse (−14h) |
-| KhanhHH combined | 40h | **25.5h** | ⚠️ Drop −14.5h |
+| TuanNT combined | 24h | **36h** | ↑ Better (CharlesChang main project) |
+| KhanhHH combined | 40h | **40h** | ✓ On target (Gen+Elena+Baamboozle+Colin) |
 | LeNH | 32h (adj OK) | 32h (adj OK) | ✓ Stable |
 | Fountain capacity | 100h/wk | **60h/wk** | ⚠️ −40h/wk |
 | Fountain runway (NS+IP) | 2.19wk | **3.65wk** | ↑ (capacity drop) |
@@ -241,21 +243,19 @@ DuongDN: 0h
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| 🔴 HIGH | **TuanNT 10h W31 (−30h)**: 3rd consecutive drop. JohnYi+Rebecca 0h for 3 weeks. Is TuanNT still on these projects? | PM |
+| 🟡 MED | **TuanNT 36h W31 (−4h)**: JohnYi+Rebecca 0h 3 consecutive weeks — confirm if de-allocated from those projects. CharlesChang is main project now (25.92h). | PM |
 | 🔴 HIGH | **VietPH last day Jun 26**: Task transfer JohnYi/Amazing Meds + Marcel Fussinger → DuongDN. Finalize succession plan. | PM |
-| 🔴 HIGH | **KhanhHH 25.5h W31 (−14.5h)**: Generator 20h + Elena 5.5h. No Aysar logged. Verify Aysar assignment. | PM |
 | 🟡 MED | **Fountain capacity drop**: W31=60h/wk vs W30=100h/wk. DatNT+VuTQ not in plan. Runway extended to 3.65wk NS+IP. Monitor capacity for W32. | PM/Kunal |
 | 🟡 MED | LIFM2-439 over-budget by 9h30m. LIFM2-260 no estimate set — Kai/LongVV must set estimate before logging more time. | PM |
 | 🟡 LOW | VuTQ on Paturevision (11h W31) — confirm if ongoing or returning to Fountain W32. | PM |
-| ✅ DONE | JD+Marcel Matrix report sent | — |
+| ✅ DONE | JD+Marcel+Blair Brown Matrix report sent (corrected 2: DuongDN Blair Brown 8h) | — |
 
 ---
 
 ## Unresolved Questions
 
-- TuanNT: Officially dropped JohnYi/Rebecca? 3 consecutive weeks of ~0h on those projects.
-- TuanNT W31 10h vs 40h: Is there unreported leave?
-- KhanhHH: Why 0h Aysar this week? Still assigned?
+- TuanNT: Confirm if JohnYi/Rebecca de-allocated (0h 3 consecutive weeks). CharlesChang now primary.
+- TuanNT W30 hours: likely also understated (CharlesChang may have been missing from W30 scan too).
 - Fountain Workstream: Any way to verify W31 actuals without GSheets? Workstream API/export?
 - VuTQ Paturevision assignment: Temporary or permanent shift from Fountain?
 - LongVV Celine/OhCleo: Not in W31 context — returned to Maddy-only? Celine sheet still unconfigured in scan.
