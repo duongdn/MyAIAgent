@@ -16,7 +16,7 @@
 | Fountain capacity | W31 capacity **60h/wk** (ViTHT 40+ThinhT 20) vs W30 100h/wk. DatNT+VuTQ not in plan. Runway NS+IP **3.65wk** (vs 2.19wk W30). |
 | Fountain task log | **UNAVAILABLE** — Workstream migration continues (W31 GSheets all 0h). |
 | LongVV JIRA | W31: Maddy 16h ✓. LIFM2-439 over-budget: est 12h, actual 21h30m cumulative. |
-| Matrix JD+Marcel | ✅ SENT — event_id `$6B46mYxf-6EZcyrr5jjyPKdGgdt0DLg24otXyqptKn0` |
+| Matrix JD+Marcel+Blair | ✅ SENT (corrected) — event_id `$4roqAdfkS_XDgB_QVCr_B7YjNsS6lhDjoRPF-HtHsew` |
 
 ---
 
@@ -183,7 +183,8 @@ Key tracked tasks (deployed/done):
 ## #3 — James Diamond + Marcel Matrix Report
 
 **Target room:** `!oofREYAXHsvPWEOJev:nustechnology.com`  
-**Status:** ✅ SENT — event_id `$6B46mYxf-6EZcyrr5jjyPKdGgdt0DLg24otXyqptKn0`
+**Status:** ✅ SENT (corrected) — event_id `$4roqAdfkS_XDgB_QVCr_B7YjNsS6lhDjoRPF-HtHsew`  
+*(First send `$6B46mYxf-6EZcyrr5jjyPKdGgdt0DLg24otXyqptKn0` missed Blair Brown section)*
 
 **Message sent:**
 ```
@@ -202,6 +203,11 @@ AnhNH2: 20h/20h
 
 Marcel
 DuongDN: 0h
+
+---
+
+Blair Brown - Peptide Clyde
+DuongDN: 0h
 ```
 
 **Data basis:**
@@ -209,6 +215,7 @@ DuongDN: 0h
 - LongVV: 0h on JD (Maddy-only this week). Web contract 40h — PhucVT covered full 40h.
 - AnhNH2: 20h actual → charge=actual (no fixed plan) ✓
 - Marcel DuongDN: 0h (adhoc) ✓
+- Blair Brown DuongDN: 0h (W31 — no hours logged, reminded Jun 19 by anhnvn)
 
 ---
 

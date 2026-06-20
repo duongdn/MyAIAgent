@@ -102,11 +102,17 @@ function summarizeWeekManager(weekData, projectLabel) {
 // For self-view (techLead): wraps into same output shape with a single member entry
 function summarizeWeekSelf(weekData, projectLabel, selfName) {
   const stats = weekData.weekStats || {};
-  const totalMins = stats.totalActualMinutes || 0;
-  const chargedMins = stats.totalChargedMinutes || 0;
+  // API returns 'actual'/'charged' (minutes), not 'totalActualMinutes'/'totalChargedMinutes'
+  const totalMins = stats.actual || stats.totalActualMinutes || 0;
+  const chargedMins = stats.charged || stats.totalChargedMinutes || 0;
   const days = {};
   for (const day of (weekData.weekDays || [])) {
-    const mins = (day.stats || {}).totalActualMinutes || 0;
+    // Per-day: sum from tasks array (no day.stats on self-view endpoint)
+    const dayTaskMins = (day.tasks || []).reduce((sum, t) => {
+      const [h, m] = (t.actual || '0:0').split(':').map(Number);
+      return sum + h * 60 + (m || 0);
+    }, 0);
+    const mins = dayTaskMins || (day.stats || {}).totalActualMinutes || 0;
     if (mins > 0) days[day.date] = parseFloat((mins / 60).toFixed(2));
   }
   return {
