@@ -1,7 +1,9 @@
 # Daily Report — 2026-06-22 (Monday)
 
-**Run:** 2026-06-22 08:49 (+07:00), interactive
+**Run:** 2026-06-22 08:49 (+07:00), interactive — **corrected 09:38** (KhanhHH false alert fixed, see correction note)
 **Window:** 2026-06-19 08:00 +07:00 (Friday) → 2026-06-22 08:49 +07:00 (Monday window rule applied)
+
+> **Correction (09:38):** Initial KhanhHH alert was WRONG — missed a 4th task-log source (dedicated Elena sheet). KhanhHH's real Fri Jun19 total is 8.0h, not 2.5h. Elliott Trello item completed retroactively. See Sheets section + memory updates below.
 **Leave plan:** No approved leave for any of the 6 monitored PHP devs (LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH) in this window. Cross-checked against Matrix "Delivery - Resource Arrangement" room — also clean (namtv's leave notes this window cover ThienVN/ThiHV/AnhNH2 only, none of the 6).
 
 ---
@@ -10,16 +12,16 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — KhanhHH | Fri Jun19 combined 2.5h vs 8h target (Generator 0h, Baamboozle-WS 2.5h, Colin/ETZ-WS 0h), no leave note. Affects **Elliott** + **Aysar** Trello items. |
+| 1 | ~~Sheets — KhanhHH~~ | **RETRACTED** — KhanhHH's real Fri Jun19 total is 8.0h (Generator 0h, Baamboozle-WS 2.5h, Colin/ETZ-WS 0h, **Elena sheet 5.5h** — AA-48/51/52 Active Alerts tickets, missed in initial check). No shortfall. **Elliott** now ✓ complete. |
 | 2 | Sheets — LeNH | Fri Jun19 combined 7.33h vs 8h target (Rory 7.33h, Franc 0h, Rebecca Q-T 0h), 0.67h short, no leave note. |
-| 3 | Trello — Aysar | Baamboozle MPDM (C07SQ4HAUHZ) Carrick "Today's update" not yet posted today — last was Thu Jun18. Carrick typically posts ~10:00-10:30 +07. **Recheck after 10:30.** |
+| 3 | Trello — Aysar | Baamboozle MPDM (C07SQ4HAUHZ) Carrick "Today's update" — **Friday Jun19's update is genuinely missing** (Carrick's real posting pattern is ~17:00-17:45+07 every workday, confirmed via Mon15/Wed17/Thu18 history — Fri19 has no entry at all, a real gap, not just "checked too early"). Today's (Mon22) update also not posted yet (too early — expect ~17:00). **Recheck end of day.** |
 | 4 | Trello — Fountain | This week's (W32) Matrix plan not yet posted as of 08:49 — expected window 08:30-09:30 +07. **Recheck after 09:30.** |
 | 5 | Sheets — Maddy/JIRA | LIFM2-439 over-budget: est 12h, actual 21h30m (+9h30m). |
 | 6 | Sheets — Maddy/JIRA | LIFM2-260 has no original estimate set despite 38h30m logged actual. |
 | 7 | Email — rick@ | FirstProject production errors: #1037/#1038 IntegrationError (Jun19), #1039 ChunkLoadError (Jun20). |
 | 8 | Email — vuongtrancr@gmail.com | Repeated New Relic "Signal lost for 10 minutes" (Swish, 14+ occurrences Fri-Mon) — recurring monitoring gap pattern. |
 | 9 | Fountain — over-estimate | #2615 still +789.6% over (106.75h vs 12h est), plateaued since Jun19/21. #2595 +40.2% over (168.25h vs 120h), stable. Several previously-unflagged tasks newly surfaced this run (full list in Fountain section) — likely a previous report's parsing gap, not a sudden spike. |
-| 10 | Email — carrick@ | Generator/Elliott: GitLab pipeline failure (stagingPhase2) + 3 Redmine bugs (#79164, #79370, #79283) — informational, already reflected in Elliott's KhanhHH-hours alert above. |
+| 10 | Email — carrick@ | Generator/Elliott: GitLab pipeline failure (stagingPhase2) + 3 Redmine bugs (#79164, #79370, #79283) — informational only, not a blocker (Elliott resolved per #1). |
 
 **Today (Mon Jun22):** All 6 monitored devs present, no leave/WFH notes found.
 
@@ -55,7 +57,7 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ comple
 
 | Workspace | Msgs | Key content | Alert |
 |-----------|------|--------------|-------|
-| Baamboozle | 19 | Routine PR/dev bot chatter; Aysar MPDM update not yet posted today (see Alert #3) | partial |
+| Baamboozle | 19 | Routine PR/dev bot chatter; Carrick's Aysar MPDM update missing for Fri19 (real gap, see Alert #3) | partial |
 | RDC | 5 | Automated access logs only | N |
 | Swift Studio | 0 | No activity | N |
 | Xtreme Soft Solutions | 8 | Kai's Fri report present; internal thread resolved amicably | N |
@@ -73,7 +75,7 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ comple
 **OhCleo — Tony's Fri report:** onboarding API, CORS, sitemap, mobile replay-track fix; moved "Completion Rate & Relevance Score" back to In Progress after finding FE/mobile issues.
 **OhCleo — Celine (verbatim):** refund processed notice; SEO priority request for this week; invoice clearing delayed (Swedish bank holiday).
 
-Trello: Maddy ✓, John Yi (Slack side) ✓, Rory ✓, Franc ✓, Elliott (Slack side clean, KhanhHH hours block separately) — see alert, Elena-SamGuard (Slack side) ✓, MPFC ✓, Marcel ✓, Raymond ✓, Rebecca (Slack side) ✓, Colin ✓, Ohcleo ✓ — all complete except Aysar (MPDM pending) and Elliott (KhanhHH hours).
+Trello: Maddy ✓, John Yi (Slack side) ✓, Rory ✓, Franc ✓, Elliott ✓ (corrected — KhanhHH hours confirmed clean), Elena-SamGuard (Slack side) ✓, MPFC ✓, Marcel ✓, Raymond ✓, Rebecca (Slack side) ✓, Colin ✓, Ohcleo ✓ — all complete except Aysar (Carrick's Fri MPDM update genuinely missing, recheck end of day).
 
 ---
 
@@ -114,8 +116,8 @@ Checked **Friday 2026-06-19** (last workday — Monday's "yesterday" is Sunday, 
 | PhucVT | 8h | OK | Full day |
 | VietPH | 8h | OK | Full day |
 | TuanNT | JohnYi 0h \| Rebecca 0h ("Chưa", normal) \| Paturevision 0h \| Neural 0.25h \| CharlesChang 7.75h = **8.0h combined** | OK | Not a 0h day — John Yi/Bailey/Rebecca gates unblocked by this source |
-| KhanhHH | Generator 0h \| Baamboozle-WS 2.5h \| Colin/ETZ-WS 0h = **2.5h combined** | **ALERT** | 5.5h short of 8h target, no leave |
-| LeNH | Rory 7.33h \| Franc 0h \| Rebecca(Q-T) 0h = **7.33h combined** | **ALERT (marginal)** | 0.67h short of 8h target, no leave |
+| KhanhHH | Generator 0h \| Baamboozle-WS 2.5h \| Colin/ETZ-WS 0h \| **Elena sheet 5.5h** (AA-51 1.5h, AA-52 3h, AA-48 1h) = **8.0h combined** | **OK (corrected)** | Initial check missed the Elena sheet (`1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`, tab W13) — KhanhHH is a 4th-source dev, see [[feedback_khanhhh_aysar_second_project]] update. Target met exactly, no alert. |
+| LeNH | Rory 7.33h \| Franc 0h \| Rebecca(Q-T) 0h = **7.33h combined** | **ALERT (marginal)** | 0.67h short of 8h target, no leave. (Checked Elena sheet W13 too — LeNH has no rows there.) |
 
 No leave notes found covering Fri Jun19 for any of the above (KhanhHH's approved leave is Jun25-26, future; LeNH's Jun17 request is unapproved/different date).
 
@@ -219,9 +221,8 @@ Full details: reports/2026-06-22/matrix-rooms-0841.md
 
 ## Reminders — 08:49 (+07:00) — print only, not sent (no --send-reminder flag)
 
-- **KhanhHH**: needs reminder — Fri Jun19 combined 2.5h (Generator 0h + Baamboozle-WS 2.5h + Colin/ETZ-WS 0h), no leave. Room: `!rwLbvLBnrRAYMaOPaD:nustechnology.com`
 - **LeNH**: needs reminder — Fri Jun19 combined 7.33h, 0.67h short, no leave. Room: `!OIrgPraJWrcDTnRVLQ:nustechnology.com`
-- LongVV, PhucVT, VietPH, TuanNT: no reminder needed (hours met).
+- LongVV, PhucVT, VietPH, TuanNT, KhanhHH: no reminder needed (hours met — KhanhHH corrected to 8.0h, see Sheets section).
 
 ---
 
@@ -229,18 +230,18 @@ Full details: reports/2026-06-22/matrix-rooms-0841.md
 
 **Check Mail:** DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ complete. Card marked done.
 
-**Check Progress:** 17 of 20 items ✓ complete. Left incomplete (○):
-- **Aysar** — Baamboozle MPDM update not yet posted today + KhanhHH 2.5h shortfall. Recheck after ~10:30.
-- **Elliott** — KhanhHH 2.5h shortfall (Generator side). Recheck once KhanhHH logs more hours today, or treat Fri shortfall as the standing alert.
+**Check Progress:** 18 of 20 items ✓ complete (Elliott corrected to complete at 09:38 — KhanhHH hours confirmed clean once Elena sheet included). Left incomplete (○):
+- **Aysar** — Carrick's Baamboozle MPDM update missing for Fri Jun19 (real pattern break, not just early-check). Recheck end of day (~17:00+, Carrick's actual posting time).
 - **Fountain** — Matrix plan not yet posted. Recheck after 09:30.
 
-Card not marked done (3 items remain open).
+Card not marked done (2 items remain open).
 
 ---
 
 ## Unresolved Questions
 
-1. Carrick appears to be "out this week" per a Generator Slack message (violet: "Carrick need to review... He's out of our this week") — worth confirming if this affects Swift Studio (Rory gate) responsiveness going forward.
+0. **Root cause of the KhanhHH false alert:** `feedback_dev_project_mapping_flexible.md` already stated "ALL devs scan ALL 11 sheets by owner col G" (including the dedicated Elena sheet) — this was in the 🔴 CRITICAL section of memory but wasn't fully applied when briefing the Sheets-check this run (used the narrower per-dev mapping instead). Memory updated (`feedback_khanhhh_aysar_second_project.md` now lists Elena sheet as a confirmed 4th source; `feedback_aysar_carrick_post_timing.md` corrected to the real ~17:00-17:45 post time). Should future sheets checks always cross every dev against the full 11-sheet list rather than a per-dev shortlist, to prevent this recurring?
+1. Carrick appears to be "out this week" per a Generator Slack message (violet: "Carrick need to review... He's out of our this week") — this may also explain the missing Fri Jun19 Aysar update. Worth confirming if this affects Swift Studio (Rory gate) responsiveness going forward.
 2. Fountain Part 4 capacity figure jumped from 42h (Jun21 report) to 219h (today) — strongly suspected to be a parsing bug in the Jun21 script (missed bare-numeric task names), not a real spike. Should the Jun21 historical report be corrected?
 3. Fountain #2380 has a duplicate row in the Est vs Charged sheet (20h vs 4h est, same actual) — sheet data-quality issue, needs Kunal/Fountain team to fix at the source.
 4. `wordpress-samguard-check.js` has a hardcoded TMPDIR path (`/var/www/MyDailyAgent/...`) that doesn't match this machine's project root — worked around via env override this run, should be fixed in the script for future unattended runs.

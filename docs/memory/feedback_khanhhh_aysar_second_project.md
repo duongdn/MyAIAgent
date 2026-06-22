@@ -1,9 +1,22 @@
 ---
 name: feedback_khanhhh_aysar_second_project
-description: KhanhHH works on THREE sources, not two — Generator sheet + Aysar/Baamboozle Workstream + Colin/ETZ Workstream. All three must be checked every time, no exceptions.
+description: KhanhHH works on FOUR sources — Generator sheet + Aysar/Baamboozle Workstream + Colin/ETZ Workstream + Elena sheet (AA tickets). All four must be checked every time, no exceptions.
 metadata:
   type: feedback
 ---
+
+## 🔴 4th source confirmed 2026-06-22 — Elena sheet (Active Alerts / Precognize AA tickets)
+
+KhanhHH also logs hours on the dedicated **Elena** Google Sheet: `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ` (own epoch, W1=2026-03-23 — use its own Summary tab to map date→W{n}, do not reuse another sheet's W-numbering). This sheet was already listed in `feedback_dev_project_mapping_flexible.md`'s "ALL 11 sheets" table but was not being checked for KhanhHH specifically until this incident.
+
+Rows for KhanhHH use columns: Item/Project blank or "Task dự án", Description = ticket ID (e.g. "AA-51"), Reference = Precognize JIRA URL (`precognize.atlassian.net/browse/AA-NN`), Owner col G = "KhanhHH", Actual col H = hours.
+
+**Why:** 2026-06-22 — daily report flagged KhanhHH at 2.5h vs 8h target for Fri Jun19 (Generator 0h + Baamboozle-WS 2.5h + Colin/ETZ-WS 0h), triggering false alerts on Elliott + Aysar Trello items. User: "He working on Elena, why I keep asking you check all task log/workstream but you keep wrong!!!" Checked Elena sheet W13 tab (covers Jun15-21) → KhanhHH logged AA-51 (1.5h) + AA-52 (3h) + AA-48 (1h) = 5.5h on Fri 19/06/26. True combined total = 2.5h + 5.5h = **8.0h exactly**, no shortfall at all. This is the second time a KhanhHH source was missed despite being told this dev "works multiple projects" repeatedly (see [[feedback_dev_project_mapping_flexible]], first violation 2026-05-06/2026-06-11).
+
+**How to apply:**
+1. KhanhHH daily total = Generator sheet + Baamboozle Workstream + Colin/ETZ Workstream + **Elena sheet (own W-tab via its Summary)**. FOUR sources, every time.
+2. The Elena sheet tracks Precognize "Active Alerts" (AA-NN) ticket work — cross-reference with Matrix "Elena - Digital Plant" room mentions of AA ticket numbers as a sanity check that this source wasn't skipped.
+3. Not a closed list — re-ask "does KhanhHH have any other current project?" if a 5th ever surfaces. This dev has had a new source discovered roughly every 1-2 months (Aysar/Baamboozle Workstream → Colin/ETZ Workstream → Elena sheet) — treat any "shortfall" finding for KhanhHH with extra suspicion before reporting it as an alert; verify all 4 sources first.
 
 KhanhHH logs hours on the Aysar sheet (`1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8`) under their own name in col G, but Upwork billing for Aysar workroom (35642393) runs through **LeNH's** tracker (sub-contract pattern).
 

@@ -21,7 +21,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — Fountain total estimate = Col I **+** Col J (CR). Both capacity AND over-estimate use the sum.
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — Fountain 5-part check is MANDATORY every run; never skip any part.
 - [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/...`, **NOT** `plans/reports/`.
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH = **3 sources**: Generator sheet + Baamboozle Workstream + **Colin/ETZ Workstream** (3rd one found missing 2026-06-19 — not a closed list, re-ask if a 4th surfaces).
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH = **4 sources**: Generator + Baamboozle Workstream + Colin/ETZ Workstream + **Elena sheet** (4th found missing 2026-06-22 — not a closed list, re-ask if a 5th surfaces).
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter EVERY dev to their own name in multi-employee sheets (James Diamond sheet has both PhucVT and AnhNH2 on different projects) — never `sum()` all owners in a sheet as one person's total.
 - [feedback_sheets_scan_script_reuse_wrong_day.md](feedback_sheets_scan_script_reuse_wrong_day.md) — **Verify `daily-sheets-scan-{today}*.js` actually exists before trusting its output** — cron silently reused yesterday's script (wrong date tokens), reported Wed data as Thu for TuanNT/Elena/KhanhHH, falsely auto-completed 3 Trello items.
 - [feedback_mpfc_oauth2_real_unresolved_bug.md](feedback_mpfc_oauth2_real_unresolved_bug.md) — MPFC's recurring OAuth2 invalid_grant (since Jun3) is a REAL unresolved bug, not stale noise — never just relabel as "older".
@@ -157,7 +157,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
 - [feedback_rory_franc_gate_slack_only.md](feedback_rory_franc_gate_slack_only.md) — **Rory/Franc Trello items gate on Slack ONLY (Swift/RDC)** — LeNH hours never block these, only trigger personal reminder
 ### KhanhHH
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — **🔴 3 sources: Generator + Baamboozle Workstream + Colin/ETZ Workstream** — Colin/ETZ missed entirely on 2026-06-19, repeat offense pattern
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — **🔴 4 sources: Generator + Baamboozle WS + Colin/ETZ WS + Elena sheet** — Elena missed entirely on 2026-06-22, repeat offense pattern
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected
