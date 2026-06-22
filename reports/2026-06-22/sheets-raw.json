@@ -1,0 +1,88 @@
+{
+  "TuanNT": {
+    "johnyiHours": 0,
+    "rebeccaHours": 0,
+    "paturevisionHours": 0,
+    "neuralHours": 0,
+    "charlesChangHours": 0,
+    "totalHours": 0,
+    "johnyiLeave": {},
+    "rebeccaLeave": {},
+    "johnyiOwners": {},
+    "rebeccaOwners": {},
+    "patOwners": {},
+    "neuralOwners": {},
+    "ccOwners": {}
+  },
+  "PhucVT": {
+    "todayHours": 0,
+    "leave": {},
+    "err": null,
+    "owners": {}
+  },
+  "VietPH": {
+    "todayHours": 0,
+    "leave": {},
+    "err": null,
+    "allOwners": {
+      "DuongDN": 1
+    }
+  },
+  "KhanhHH": {
+    "sheetsTotal": 0,
+    "baamboozleWorkstream": 0,
+    "colinEtzWorkstream": 0,
+    "totalHours": 0,
+    "bySheet": {},
+    "weeklyTotal": 20,
+    "leave": {},
+    "wsErrors": {
+      "baamboozle": "HTTP 401",
+      "colinEtz": "HTTP 401"
+    },
+    "err": null
+  },
+  "Elena": {
+    "tab": "W13",
+    "todayHours": 0,
+    "owners": {},
+    "leave": {},
+    "err": null
+  },
+  "LeNH": {
+    "roryHours": 0,
+    "francHours": 0,
+    "rebeccaLeNHHours": 0,
+    "totalHours": 0,
+    "leave": {},
+    "errors": {
+      "rory": null,
+      "franc": null,
+      "rebecca": null
+    },
+    "roryOwners": {},
+    "francOwners": {}
+  },
+  "LongVV": {
+    "todayHours": 0,
+    "weeklyTotal": 16,
+    "weeklyTarget": 16,
+    "leave": {},
+    "err": null,
+    "owners": {}
+  },
+  "_tabs": {
+    "Maddy": "W11",
+    "JohnYi": "W28",
+    "Rebecca": "W29",
+    "TuanNT_Neural": "W25",
+    "CharlesChang": "W48",
+    "JamesDiamond": "W30",
+    "Rory": "W16",
+    "Franc": "W29",
+    "Aysar": "W29",
+    "Generator": "W45",
+    "Paturevision": "W32",
+    "Elena": "W13"
+  }
+}
