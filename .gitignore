@@ -42,3 +42,4 @@ config/.msteams-accounts.json
 config/.gmail-service-account.json
 config/.github-config.json
 config/.workstream-config.json
+config/.facebook-config.json
