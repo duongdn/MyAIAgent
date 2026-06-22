@@ -8,33 +8,47 @@ Run Friday night or Saturday morning. Output: `reports/YYYY-MM-DD-weekly-monitor
 
 ## #1: Team Hours = 40h/week
 
-For each team member, check Google Docs hours (filter by Owner column G, NOT day total row). Members who split across projects — sum all project sheets.
+**NEVER pre-assign developers to specific sheets.** Scan ALL 11 Google Sheets for each developer by filtering col G (Owner) = dev name, sum col H (Actual). New sheets surface without notice — the full 11-sheet list is authoritative.
 
-| Internal Name | External Name | Client | Hours Sources |
-|--------------|---------------|--------|---------------|
-| LongVV | Kai | Maddy | Google Docs (Xtreme Soft) + JIRA (madhuraka: LIFM2, TP, XS) |
-| TuanNT | TuanNT/Nick | Bailey + Rebecca + John Yi | Google Docs (Paturevision + William Bills + John Yi/Amazing Meds) |
-| KhanhHH | KhanhHH | Elliott | Google Docs (Generator App) |
-| LeNH | LeNH/Carrick | Rory + Franc + Aysar | Google Docs (BXR App + Radio Data Center + Baamboozle) + JIRA (swiftstudio: BXR, Carrick account) |
-| PhucVT | PhucVT | James Diamond | Google Docs (James Diamond) |
-| VietPH | VietPH | Bailey | Google Docs (Paturevision) |
+For each team member, check Google Docs hours (filter by Owner column G, NOT day total row). Multi-project employees — sum across ALL sheets where their name appears.
+
+| Internal Name | External Name | Weekly Target | JIRA cross-check |
+|--------------|---------------|---------------|-----------------|
+| LongVV | Kai | 16h/wk | madhuraka instance (LIFM2, TP, XS) — compare total vs Sheets |
+| TuanNT | TuanNT/Nick | 40h/wk | — |
+| KhanhHH | KhanhHH | 40h/wk | — (also check ALL Workstream projects) |
+| LeNH | LeNH/Carrick | 40h/wk | swiftstudio instance (BXR project) — compare vs Sheets |
+| PhucVT | PhucVT | 40h/wk | — |
+| VietPH | VietPH | 40h/wk | — |
+
+**Alert thresholds:** < 40h/wk (most devs); < 16h/wk (LongVV). Marginal shortfall < 1h: check weekly total first before flagging.
+
+**Workstream projects** (scan ALL for ALL devs, in addition to sheets):
+- maddy: `cmpqc1v7v00ahtk1vs1817xt8`
+- rebecca: `cmpqcflkx00litk1vic3vki6j`
+- baamboozle: `cmqez93ka07q8p81v7035l3td`
+- colin-etz: `cmqezatb807qvp81vpnzzimmp`
+- blair-brown: `cmqj4tj6v01gfm81vgx7ipkov`
 
 ### Google Sheets — Week Tab Mapping (Mar 16 2026 reference)
 
 Each project started at different times, so W{n} differs per sheet:
 
-| Sheet | Sheet ID | Mar 16 = | Employee |
-|-------|----------|----------|----------|
-| Xtreme Soft (Maddy) | `1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58` | W50 | LongVV |
-| James Diamond | `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI` | W17 | PhucVT, AnhNH2 |
-| Paturevision (Bailey) | `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` | W19 | VietPH, TuanNT |
-| John Yi/Amazing Meds | `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` | W15 | TuanNT |
-| William Bills (Rebecca) | `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` | W16 | TuanNT |
-| Generator App (Elliott) | `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` | W32 | KhanhHH |
-| BXR App (Rory) | `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` | W3 | LeNH |
-| Radio Data Center (Franc) | `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` | W16 | LeNH |
-| Baamboozle (Aysar) | `1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8` | W16 | LeNH |
-| Fountain | `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | W18 | ViTHT, ThinhT, VuTQ, PhatDLT, HungPN |
+| Sheet | Sheet ID | Mar 16 = |
+|-------|----------|----------|
+| Xtreme Soft (Maddy) | `1E3zgSgSMcDWQr3q-aNlu5HuXG5lr8p3yh-Zs-Mowd58` | W50 |
+| James Diamond | `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI` | W17 |
+| Paturevision (Bailey) | `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` | W19 |
+| John Yi/Amazing Meds | `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` | W15 |
+| William Bills (Rebecca) | `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` | W16 |
+| Generator App (Elliott) | `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` | W32 |
+| BXR App (Rory) | `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` | W3 |
+| Radio Data Center (Franc) | `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` | W16 |
+| Baamboozle (Aysar) | `1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8` | W16 |
+| Elena | `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ` | — |
+| Fountain | `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | W18 |
+
+Scan ALL 11 sheets for every dev. Never skip a sheet because "that dev doesn't work there" — assignments change without notice.
 
 **IMPORTANT:** Week tabs shift each week. Always verify by reading row 4 col A (date) to confirm correct tab. To find current week: check a few tabs and match the Monday date.
 
