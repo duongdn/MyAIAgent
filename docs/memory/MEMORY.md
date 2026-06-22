@@ -155,6 +155,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH)
 - [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
+- [feedback_rory_franc_gate_slack_only.md](feedback_rory_franc_gate_slack_only.md) — **Rory/Franc Trello items gate on Slack ONLY (Swift/RDC)** — LeNH hours never block these, only trigger personal reminder
 ### KhanhHH
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — **🔴 3 sources: Generator + Baamboozle Workstream + Colin/ETZ Workstream** — Colin/ETZ missed entirely on 2026-06-19, repeat offense pattern
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
@@ -186,6 +187,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_fountain_dev_0h_no_speculation.md](feedback_fountain_dev_0h_no_speculation.md) — Don't speculate on individual Fountain dev 0h days as unresolved questions
 - [feedback_fountain_hasv_not_on_plan.md](feedback_fountain_hasv_not_on_plan.md) — HaVS not always on Fountain plan; only flag 0h if named in that week's Matrix plan
 - [feedback_fountain_monday_plan_timing.md](feedback_fountain_monday_plan_timing.md) — @trinhmtt posts W{n} plan Mon 08:30-09:30 +07. Wait until 09:30 before flagging "plan absent".
+- [feedback_fountain_capacity_script_regex_bug.md](feedback_fountain_capacity_script_regex_bug.md) — Capacity scripts must match bare-numeric task names too, not just dash-named — caused 5x false discrepancy 2026-06-21→22
 
 ---
 
@@ -200,6 +202,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_aysar_github_issues.md](feedback_aysar_github_issues.md) — Also check baamboozle/baamboozle-web-app + bbzl-web-client open issues (carrick token)
 - [feedback_aysar_jamie_ronan_room.md](feedback_aysar_jamie_ronan_room.md) — **CORRECTED**: Aysar report = Baamboozle Slack MPDM C07SQ4HAUHZ. Matrix = send reminders only.
 - [feedback_aysar_daily_report_slack.md](feedback_aysar_daily_report_slack.md) — General rule: check Slack for daily reports, send Matrix reminder only if missing.
+- [feedback_aysar_carrick_post_timing.md](feedback_aysar_carrick_post_timing.md) — Carrick posts Aysar MPDM update ~10:00-10:30+07, not early morning — don't flag absent before then
 ### Other
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel weekly Matrix message format
 
