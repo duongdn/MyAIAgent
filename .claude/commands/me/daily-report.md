@@ -67,10 +67,10 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report sheets` | All developers |
 | `/daily-report sheets longvv` | LongVV only |
 | `/daily-report sheets phucvt` | PhucVT only |
-| `/daily-report sheets tuannt` | TuanNT (John Yi + Rebecca) only |
+| `/daily-report sheets tuannt` | TuanNT (5 sheets combined) only |
 | `/daily-report sheets vietph` | VietPH only |
-| `/daily-report sheets khanhhh` | KhanhHH only |
-| `/daily-report sheets lenh` | LeNH (Rory + Franc + Aysar combined) only |
+| `/daily-report sheets khanhhh` | KhanhHH (4 sources combined) only |
+| `/daily-report sheets lenh` | LeNH (Rory + Franc + Rebecca Q-T combined) only — NOT Aysar |
 | **Scrin.io** | |
 | `/daily-report scrin` | TuanNT/John Yi time tracking |
 | **Fountain** | |
@@ -239,7 +239,7 @@ Supports individual workspace targeting:
 
 | Workspace | Arg | Token type | Key check | Trello item |
 |-----------|------|-----------|-----------|-------------|
-| Baamboozle | baamboozle | xoxp | General activity | Aysar |
+| Baamboozle | baamboozle | xoxp | General activity. **Aysar gate is the MPDM channel `C07SQ4HAUHZ` specifically** (Carrick's "Today's update", posts ~17:00-17:45+07) — general workspace noise is NOT the gate. | Aysar |
 | RDC - FM Monitoring | rdc | xoxp | dmetiner updates | Franc |
 | Swift Studio | swift | xoxp | Carrick activity | Rory |
 | Xtreme Soft Solutions | xtreme | xoxp | **Kai daily report** (search: "progress"/"daily report") | Maddy - Carrick/Kai/Luis |
@@ -251,13 +251,13 @@ Supports individual workspace targeting:
 | MyPersonalFootballCoach | mpfc | xoxp | General activity | MPFC |
 | William Bills | williambills | xoxp | Oliver/Lucas tasks | Rebecca (William Bills) |
 | Equanimity | equanimity | xoxc+cookie | **Carrick/Marcel alerts**. Auto-refresh if invalid_auth. | Marcel |
-| SoCal Auto Wraps | socal | xoxp | General activity | Blake |
+| SoCal Auto Wraps | socal | xoxp | General activity | **DROPPED 2026-05-11 — Blake no longer monitored, no Trello item exists for it.** |
 | Aigile Dev | aigile | xoxp | General activity | Colin |
-| OhCleo | ohcleo | xoxc+cookie | **Celine DM** — customer messages, bug reports, daily report from Tony. See Piece 12. | — (no Trello item) |
+| OhCleo | ohcleo | xoxc+cookie | **Celine DM** — customer messages, bug reports, daily report from Tony. See Piece 12. | Ohcleo (confirmed present on board as of 2026-06-22 — earlier docs said "no item", that was stale) |
 
 **Method:** `search.messages` API with `after:{day_before_cutoff}` + epoch filter (NOT `conversations.history`)
 **Session tokens (Amazing Meds, Equanimity, OhCleo):** Auto-refresh via crumb extraction if invalid_auth — never just report expired.
-**OhCleo:** Uses `conversations.history` (not `search.messages`) — small workspace with xoxc token. See Piece 8 for details.
+**OhCleo:** Uses `conversations.history` (not `search.messages`) — small workspace with xoxc token. See Piece 12 for details.
 
 **Trello — after checking:**
 - Find "Check progress" card by name on board `O83pAyqb`
@@ -323,32 +323,32 @@ Supports individual developer targeting:
 - `/daily-report sheets` — check all developers
 - `/daily-report sheets longvv` — LongVV only
 - `/daily-report sheets phucvt` — PhucVT only
-- `/daily-report sheets tuannt` — TuanNT (John Yi + Rebecca combined) only
+- `/daily-report sheets tuannt` — TuanNT (5 sheets combined) only
 - `/daily-report sheets vietph` — VietPH only
-- `/daily-report sheets khanhhh` — KhanhHH only
-- `/daily-report sheets lenh` — LeNH (Rory + Franc + Aysar combined) only
+- `/daily-report sheets khanhhh` — KhanhHH (4 sources combined) only
+- `/daily-report sheets lenh` — LeNH (Rory + Franc + Rebecca Q-T combined) only
 
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
-**Week:** Use Summary tab to find current W{n}. Today's date determines the week.
+**Week:** Use Summary tab to find current W{n}. Today's date determines the week. **Every sheet has its own independent W-numbering — never reuse one sheet's W{n} for another.**
 
-| Developer | Arg | Sheet ID(s) | Min hours | Notes |
+🔴 **This table caused a real incident (2026-06-22, KhanhHH false 0h alert: real total was 8.0h, reported as 2.5h because the Elena sheet wasn't checked).** This table is the COMPLETE list per dev as of that date. Do not narrow it back down based on a skill summary elsewhere or assumption — dev↔sheet/workstream assignments change over time (see [[feedback_dev_project_mapping_flexible]]); if checking confirms a new source, add it here immediately.
+
+| Developer | Arg | ALL sources (sheet ID or Workstream projectId) | Daily target | Notes |
 |-----------|------|-------------|-----------|-------|
-| LongVV | longvv | 1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I | 16h/wk | Maddy = Xtreme. New template since 2026-04-06. Also 24h/wk on other project. |
-| PhucVT | phucvt | 1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI | 8h/day | Nghỉ nửa ngày = 4h OK |
-| TuanNT (John Yi) | tuannt | 1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ | 8h/day combined | Splits across 3 projects |
-| TuanNT (Rebecca) | tuannt | 1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4 | — | Check col P: "Chưa" = not written (normal, not alert) |
-| VietPH | vietph | 1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg | 8h/day | Nghỉ cả ngày = 0h OK |
-| KhanhHH | khanhhh | 1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM | 8h/day | Nghỉ cả ngày = 0h OK |
-| LeNH (Rory) | lenh | 1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8 | 8h/day combined | Sum all 3 sheets |
-| LeNH (Franc) | lenh | 1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ | — | Part of LeNH split |
-| LeNH (Aysar) | lenh | 1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8 | — | Part of LeNH split |
-| Fountain | — | 1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o | — | Used by `/daily-report fountain` |
+| LongVV | longvv | Sheet: `1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I` (Maddy) + Workstream `maddy` project (authoritative, run `workstream-fetch-project-week.js`) | 16h/**week** (Maddy only, static) | Part-time. Up to 24h/wk flexible (commonly James Diamond backfill) has NO target — never alert on it. 0h days normal. |
+| PhucVT | phucvt | Sheet: `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI` (JamesDiamond) | 8h/day | Nghỉ nửa ngày = 4h OK |
+| TuanNT | tuannt | **5 sheets**: JohnYi `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` + Rebecca `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` (col P "Chưa" = normal) + Paturevision `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (skip first blank row/day) + Neural `1drk_TN7-B2xD43jgErH5aWGaeCsIMtNbiIUTNbFYheg` + CharlesChang/Family App V2 `19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc` | 8h/day combined | 0h alert ONLY if ALL 5 are 0h. Show per-sheet breakdown, never just "combined Xh". |
+| VietPH | vietph | Sheet: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (Paturevision) | 8h/day | Nghỉ cả ngày = 0h OK |
+| KhanhHH | khanhhh | **4 sources**: Generator sheet `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` + Baamboozle/Aysar Workstream `cmqez93ka07q8p81v7035l3td` + Colin/ETZ Workstream `cmqezatb807qvp81vpnzzimmp` + **Elena sheet `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`** (own epoch W1=2026-03-23, use its Summary tab; rows show ticket IDs like "AA-51", Owner col G = KhanhHH) | 8h/day combined across ALL 4 | This dev has had a new source surface every 1-2 months — treat ANY shortfall finding with suspicion, re-verify all 4 before reporting an alert. Not a closed list — ask "any other current project?" if a 5th surfaces. |
+| LeNH | lenh | **3 sheets**: Rory `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` + Franc `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` + Rebecca **cols Q-T** (NOT col G) in `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` | 8h/day combined | **NOT Aysar** — Aysar sheet (`1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8`) owner is KhanhHH, not LeNH. Any shortfall (even <1h) without leave = real alert + reminder (LeNH has a stricter threshold than other devs). |
+| Fountain | — | Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | — | Used by `/daily-report fountain`, not this piece. |
 
 **Rules:**
 - "Nghỉ cả ngày" = full day off → 0h OK
 - "Nghỉ nửa ngày" = half day → 4h min OK
 - 0h with no leave note → ALERT
 - Only count "Task dự án" rows; skip "Part-time" rows in column A
+- Also count rows where col A is blank but col G (owner) has a value — some devs omit "Task dự án" (caused a 4.5h-vs-8h undercount once)
 
 **Maddy JIRA cross-check (run EVERY day — never skip):**
 ```bash
@@ -416,26 +416,34 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 - Room: `!EWnVDAxbTGsBxPkaaI:nustechnology.com`
 - Fetch latest weekly plan message: "Em update plan tuần này ạ\nViTHT: Xh\nThinhT: Xh\nVuTQ: Xh\n=> QC X"
 - Cite @sender + timestamp
+- **On Monday, @trinhmtt posts the new week's plan ~08:30-09:30+07.** If checked before 09:30, do NOT flag "plan absent" — note "not yet posted, expected by 09:30, using last week's plan for context" and use the previous week's numbers. Recheck after 09:30.
 - If token expired → run `scripts/matrix-token-refresh.js` (uses `tmp/matrix-browser-profile/` SSO). Save new token to `config/.matrix-config.json` immediately.
 
 **Part 2 — Task Log Actuals**
 - Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`, Summary tab, W{n}
-- Devs: ViTHT, ThinhT, VuTQ, HaVS | QC: PhatDLT, HungPN, TrinhMTT
+- Devs: ViTHT, ThinhT, VuTQ | QC: PhatDLT, HungPN
+- **HaVS**: only include/flag if named in Part 1's CURRENT week Matrix plan — not always on the plan, don't assume.
+- **TrinhMTT is NOT QC** — exclude from QC totals/alerts (they post the weekly plan, don't do QC work).
 - Report per-dev weekly totals
 
 **Part 3 — Plan vs Actual Table**
 - Compare each dev's plan (from Matrix) vs actual (from sheets)
 - Never say "matches plan" without showing the numbers
+- VuTQ: once their (often small) weekly plan total is met, subsequent 0h days that week are normal, not an alert.
 
 **Part 4 — Capacity & Runway**
-- "Est vs Charged" tab: sum remaining est for Not Started + In-progress only
-- Runway = remaining / 90h per week (current dev capacity)
-- Show delta vs previous report
+- "Est vs Charged" tab. Columns: Col I (idx 8) = Estimated Dev Raw, **Col J (idx 9) = CR** (Change Request, additional approved estimate), Col K (idx 10) = Actual, Col L (idx 11) = Charged.
+- 🔴 **Total estimate per task = Col I + Col J. Always include CR** — omitting it has caused false "over-estimate" alerts before (e.g. #2735 looked +42% over using Col I alone, but with CR included it's only +4.6%, under threshold).
+- NS+IP bucket: sum `remaining = (ColI+ColJ) - ColK` for Not Started + In-progress (any % variant), EXCLUDING Deployed on Live/Cancelled/Has Bug on Live/Tested on Live. Broader bucket adds Pending/On Hold/Dev Done/Deployed on Staging/blank/N/A.
+- 🔴 **Row-matching bug (found 2026-06-22):** when selecting which rows count as tasks, match ANY row with a non-empty task identifier — do NOT filter by a dash/underscore name-format regex (e.g. matching "2524-duplicate-charge" but not bare "2640"). A prior report undercounted remaining hours 5x (42h/4 tasks vs the real 219h/27 tasks) this way. If a day's figure differs sharply from the previous report, suspect a script bug first, sanity-check row counts before reporting a "spike".
+- Runway = remaining_hours / current_dev_capacity_per_week. **Derive capacity from Part 1's current Matrix plan** (sum of dev-only hours, e.g. ViTHT+ThinhT+VuTQ) — do NOT hardcode a number, team size/hours change week to week.
+- Show delta vs previous report (search `reports/*/daily-report.md` for the most recent Fountain capacity figures).
 
 **Part 5 — Over-Estimate Tracking**
-- Tasks where actual > est (+20% threshold)
-- Key tasks to always check: #2595, #2615, #2735
-- Flag if STILL GROWING vs previous report
+- Tasks where `Actual (ColK) > (ColI+ColJ) * 1.2` (i.e. >20% over the CR-inclusive total estimate)
+- Key tasks to always check by number even if not already flagged: #2595, #2615, #2735
+- Flag if STILL GROWING vs previous report (compare actual hours, not just %)
+- HungPN 0h is not an alert if PhatDLT covers QC that day. Don't speculate on individual Fountain dev 0h days as "unresolved questions" — established pattern, not worth flagging each time.
 
 **Trello Board (Fountain)**
 - Board: Web Development (`5475eaf923a9a1309357eb51`), Rick's account
@@ -532,27 +540,31 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 
 **Check Progress — individual items** (`/daily-report trello progress {item}`):
 
+🔴 **Verify against `docs/memory/reference_trello_gate_mapping.md` before trusting this table** — it's the curated source of truth; this table has drifted from it before (2026-06-22: this row literally said `aysar → sheets lenh`, which is wrong — Aysar's task-log gate is KhanhHH, not LeNH. Fixed below.).
+
 | Arg | Checklist | Item name | Run piece first |
 |------|-----------|-----------|-----------------|
 | `maddy` | Normal | Maddy - Carrick/Kai/Luis | `slack xtreme` + `sheets longvv` |
-| `blake` | Normal | Blake | `slack socal` |
+| `blake` | Normal | Blake | **DROPPED 2026-05-11, no longer on board** |
 | `johnyi` | Normal | John Yi - Amazing Meds | `slack amazingmeds` + `sheets tuannt` |
 | `james` | Should do | James Diamond - Vinn task | `discord airagri` + `sheets phucvt` |
-| `franc` | Closely monitor | Franc | `slack rdc` + `sheets lenh` |
-| `rory` | Closely monitor | Rory | `slack swift` + `sheets lenh` |
-| `aysar` | Closely monitor | Aysar | `slack baamboozle` + `sheets lenh` |
+| `franc` | Closely monitor | Franc | `slack rdc` only — ad hoc, no hours expectation, sheets do NOT gate this item |
+| `rory` | Closely monitor | Rory | `slack swift` only — sheets do NOT gate this item (LeNH hours only drive the Reminders piece, never block Rory/Franc) |
+| `aysar` | Closely monitor | Aysar | `slack baamboozle` (specifically MPDM **C07SQ4HAUHZ**, Carrick's "Today's update" — posts ~17:00-17:45+07, not morning) + **`sheets khanhhh`** (NOT lenh) |
 | `elliott` | Closely monitor | Elliott | `slack generator` + `sheets khanhhh` |
-| `swift` | Closely monitor | Rory (Swift Studio) | `slack swift` + `sheets lenh` |
+| `swift` | Closely monitor | Rory (Swift Studio) | same as `rory` above — Slack only |
 | `raymond` | Work | Raymond - LegalAtoms | `slack legalatoms` |
 | `marcel` | Work | Marcel | `slack equanimity` |
 | `colin` | Work | Colin | `slack aigile` |
 | `andrew` | Work | Andrew Taraba | `discord bizurk` |
 | `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
 | `mpfc` | Work | MPFC | `slack mpfc` |
-| `bailey` | Work | Bailey | `slack ggs` + `sheets vietph` |
+| `bailey` | Work | Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this) |
 | `fountain` | Work | Fountain | `fountain` (full 5-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
+| `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` |
+| `ohcleo` | Work | Ohcleo | `slack ohcleo` (Piece 12) |
 
 Examples:
 - `/daily-report trello progress maddy` → runs `/daily-report slack xtreme`, then completes/skips Maddy
@@ -741,23 +753,24 @@ Use this table (derived from `docs/memory/reference_trello_gate_mapping.md`):
 | Trello Item (partial match) | Sources to run | Notes |
 |-----------------------------|----------------|-------|
 | Maddy | `slack xtreme` + `sheets longvv` | Kai daily report + LongVV hours |
-| John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined 4 sheets |
-| Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` | TuanNT 0h gates Bailey too |
-| James Diamond / Vinn | `discord airagri` | Vinn daily report |
-| Rory | `slack swift` + `sheets lenh` | LeNH combined 3 sheets |
-| Franc | `slack rdc` + `sheets lenh` | LeNH combined 3 sheets |
-| Aysar | Check Baamboozle MPDM **C07SQ4HAUHZ** | Aysar daily report ONLY — NOT workspace |
-| Elliott | `slack generator` | Elliott/Violet activity |
+| John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined **5** sheets (JohnYi+Rebecca+Paturevision+Neural+CharlesChang) |
+| Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Bailey too |
+| James Diamond / Vinn | `discord airagri` | Vinn daily report (check BOTH #airagri_webapp and #airagri-flutter) |
+| Rory | `slack swift` only | Slack-only gate — sheets lenh does NOT block this item |
+| Franc | `slack rdc` only | Ad hoc, no hours expectation — sheets lenh does NOT block this item |
+| Aysar | Baamboozle MPDM **C07SQ4HAUHZ** (Carrick's update, posts ~17:00-17:45+07) + `sheets khanhhh` | NOT sheets lenh — Aysar's task-log owner is KhanhHH |
+| Elliott | `slack generator` + `sheets khanhhh` | KhanhHH 0h-across-4-sources gates this |
 | MPFC | `slack mpfc` | No Slack activity = OK → complete |
 | Marcel | `slack equanimity` | Marcel/Carrick alert |
 | Elena - SamGuard | `slack samguard` + `elena` | Elena PRs + deploy |
 | Raymond | `slack legalatoms` | Nick mentions only |
 | Neural Contract | Neural Upwork workroom 38901192 | Silence = never alert → complete |
-| Bailey | `slack ggs` + `sheets vietph` | See John Yi row for TuanNT gate |
-| Rebecca | `slack williambills` + `sheets tuannt` | TuanNT 0h gates Rebecca too |
+| Rebecca | `slack williambills` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Rebecca too |
 | Colin | `slack aigile` | No activity = OK → complete |
 | Andrew Taraba | `discord bizurk` DM "animeworld" | Check nuscarrick DM |
 | Fountain | `fountain` (full 5-part) | Must fix Matrix token first |
+| Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` | Full name required |
+| Ohcleo | `slack ohcleo` | Piece 12 |
 | Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |
 
 **Step 4 — Decrypt + fix auth before re-running**
@@ -773,8 +786,9 @@ Before running any Slack/Matrix/Discord source:
 
 Run the mapped source pieces sequentially (not parallel — fewer resources, no race). For each source:
 - Use the **same logic** as the corresponding piece (Slack uses `search.messages`, Sheets uses PREV_DATE tokens, etc.)
-- Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h
-- TuanNT: always scan all 4 sheets (JohnYi + Rebecca + Paturevision + Neural). If combined > 0h → no alert
+- Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h. **On Monday, PREV_DATE should resolve to Friday (last workday), not Sunday.**
+- TuanNT: always scan all **5** sheets (JohnYi + Rebecca + Paturevision + Neural + CharlesChang/Family App V2). If combined > 0h → no alert
+- KhanhHH: always scan all **4** sources (Generator sheet + Baamboozle Workstream + Colin/ETZ Workstream + Elena sheet). If combined > 0h → no alert. See [[feedback_khanhhh_aysar_second_project]] — this dev has had a new source surface repeatedly, re-verify all 4 before reporting any shortfall.
 - LeNH: sum all 3 sheets (Rory + Franc + Rebecca Q-T). If combined > 0h → no alert. Aysar NOT in LeNH.
 - LongVV: check Workstream (authoritative), not just sheets. Part-time 16h/wk — 0h/day is normal, check weekly total only.
 
@@ -808,7 +822,8 @@ Append a timestamped section:
 
 - **Never re-run email** — email is already done and Trello mail items are handled separately
 - **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
-- **TuanNT 4-sheet rule:** If any one of 4 sheets has hours → combined > 0h → no alert → items gated on TuanNT all complete
+- **TuanNT 5-sheet rule:** If any one of 5 sheets has hours → combined > 0h → no alert → items gated on TuanNT all complete
+- **KhanhHH 4-source rule:** If any one of 4 sources (Generator/Baamboozle-WS/Colin-ETZ-WS/Elena sheet) has hours → combined > 0h → no alert. Missing the Elena sheet caused a real false alert on 2026-06-22 — always check all 4.
 - **LeNH 3-sheet rule:** Sum Rory + Franc + Rebecca Q-T only (NOT Aysar)
 - **Aysar MPDM:** Use correct epoch for the current year when calling `conversations.history` — wrong epoch returns 2025 data
 - **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
@@ -955,7 +970,7 @@ Or run: `node scripts/slack-extract-ohcleo-token.js` (extracts from live Chrome 
 - Production errors in #events-code → flag as alerts
 - Celine asking about feature status / bug reports → alert
 
-**No Trello item** — OhCleo is monitored separately via Trello board `app-20` (Piece 8 OhCleo section).
+**Trello item:** "Ohcleo" (Work checklist, "Check progress" card) — confirmed present as of 2026-06-22. Complete it if no alerts found above.
 
 **Method:** `conversations.history` (NOT `search.messages`) — xoxc tokens don't support search API.
 ```bash
