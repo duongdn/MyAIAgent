@@ -121,6 +121,10 @@ SOURCES = {
             "name": "Google News – AI",
             "url": _gnews("artificial intelligence LLM generative AI"),
         },
+        {
+            "name": "Thiệu Nguyễn (Facebook AI)",
+            "url": "https://rss.app/feeds/Xdp23RDcoTT7qZHa.xml",
+        },
     ],
     "it": [
         {
