@@ -7,7 +7,7 @@ metadata:
 
 **Rule:** Before flagging a marginal daily shortfall (< ~1h short), check the dev's WEEKLY total across all sources. If weekly total is within 1h of their weekly target, the daily variance is covered — do NOT alert, do NOT send reminder.
 
-**Why (2026-06-22):** LeNH flagged as "ALERT (marginal): 0.67h short Fri Jun19." But LeNH had worked 32h Mon–Thu, making weekly total ~39.33h (~40h target) — fully on track. The per-day check missed the weekly context. User: "he worked 32h last week, add new memory, if a certain day miss partially, check another day if this is more."
+**Why (2026-06-22):** LeNH flagged as "ALERT (marginal): 0.67h short Fri Jun19." But LeNH had 1 day off that week → adjusted target = 4×8h = 32h. Weekly total = 32h exactly on target. Daily 0.67h shortfall on Friday was covered by the weekly hours. The per-day check missed this context entirely. User: "he worked 32h last week, 1 day off, how can you calculate 39.33???"
 
 **How to apply:**
 1. When a daily shortfall is < 1h: pull that dev's hours for ALL days of that week (Mon–Fri).
