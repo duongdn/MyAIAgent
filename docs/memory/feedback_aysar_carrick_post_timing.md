@@ -11,5 +11,10 @@ The Aysar gate (Baamboozle Slack MPDM `C07SQ4HAUHZ`, per [[feedback_aysar_jamie_
 
 **How to apply:**
 - If checked before ~17:00+07, do NOT flag "Aysar absent" for TODAY's update — note "not yet posted, expected ~17:00-17:45, recheck end of day" and leave the Trello item incomplete pending a later recheck (run `/me:daily-report recheck aysar` after ~17:00).
-- This does NOT excuse checking PRIOR days. If a previous workday (e.g. yesterday or Friday on a Monday run) has no update at all in the history — that IS a real gap worth flagging as a genuine alert (e.g. 2026-06-22: Fri Jun19 had no update, despite Mon-Thu all having one — flagged as real, possibly tied to Carrick being reported "out this week" elsewhere).
-- Same category of "too early to judge for today" as [[feedback_fountain_monday_plan_timing]] (Fountain's Monday plan posts 08:30-09:30) — but always separately verify whether a PAST day's expected post is also missing, since that's a different (real) signal than "not yet posted today".
+- Same category of "too early to judge for today" as [[feedback_fountain_monday_plan_timing]] (Fountain's Monday plan posts 08:30-09:30).
+
+## 🔴 Corrected again same day (10:10) — missing formatted message ≠ no work
+
+On 2026-06-22, Fri Jun19 had no "Today's update:" message in the MPDM (a real gap from the usual daily pattern) — flagged as a genuine alert. But a raw `search.messages` pull of ALL Carrick activity in the Baamboozle workspace for that day showed: 09:59 deployed a fix + got PR #638 reviewed, 17:15 responded to Jamie's live bug report, 21:15 fixed it. Carrick was actively working on Aysar the entire day — he simply never got around to posting the end-of-day summary, likely because he was still firefighting the client's bug at 21:15.
+
+**The Aysar gate is "did Carrick do/communicate Aysar work that day", not "did the exact 'Today's update:' bullet-list message get posted".** Before flagging Aysar absent because the formatted message is missing, always run a broader check: `search.messages?query=after:{day_before}` with NO format filter, scoped to the whole Baamboozle workspace (not just the MPDM channel), and look for ANY Carrick message/activity that day. Only flag a real alert if there's no substantive activity anywhere, not just because the specific ritual message is absent.

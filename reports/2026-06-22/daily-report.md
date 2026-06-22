@@ -14,7 +14,7 @@
 |---|--------|-------|
 | 1 | ~~Sheets — KhanhHH~~ | **RETRACTED** — KhanhHH's real Fri Jun19 total is 8.0h (Generator 0h, Baamboozle-WS 2.5h, Colin/ETZ-WS 0h, **Elena sheet 5.5h** — AA-48/51/52 Active Alerts tickets, missed in initial check). No shortfall. **Elliott** now ✓ complete. |
 | 2 | Sheets — LeNH | Fri Jun19 combined 7.33h vs 8h target (Rory 7.33h, Franc 0h, Rebecca Q-T 0h), 0.67h short, no leave note. |
-| 3 | Trello — Aysar | Baamboozle MPDM (C07SQ4HAUHZ) Carrick "Today's update" — **Friday Jun19's update is genuinely missing** (Carrick's real posting pattern is ~17:00-17:45+07 every workday, confirmed via Mon15/Wed17/Thu18 history — Fri19 has no entry at all, a real gap, not just "checked too early"). Today's (Mon22) update also not posted yet (too early — expect ~17:00). **Recheck end of day.** |
+| 3 | ~~Trello — Aysar~~ | **RETRACTED (10:10)** — the formatted "Today's update:" MPDM message was missing for Fri Jun19, but raw Slack history confirms Carrick was actively working on Aysar all day: deployed a fix 09:59, got PR #638 reviewed same time, responded to Jamie's live bug report at 17:15, fixed it at 21:15. Real work happened — just the end-of-day report ritual was skipped (likely because Carrick was still firefighting the client bug at that hour). **Aysar ✓ now complete.** |
 | 4 | Trello — Fountain | This week's (W32) Matrix plan not yet posted as of 08:49 — expected window 08:30-09:30 +07. **Recheck after 09:30.** |
 | 5 | Sheets — Maddy/JIRA | LIFM2-439 over-budget: est 12h, actual 21h30m (+9h30m). |
 | 6 | Sheets — Maddy/JIRA | LIFM2-260 has no original estimate set despite 38h30m logged actual. |
@@ -57,7 +57,7 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ comple
 
 | Workspace | Msgs | Key content | Alert |
 |-----------|------|--------------|-------|
-| Baamboozle | 19 | Routine PR/dev bot chatter; Carrick's Aysar MPDM update missing for Fri19 (real gap, see Alert #3) | partial |
+| Baamboozle | 19 | Routine PR/dev bot chatter; Carrick worked Aysar all day Fri19 (deploy 09:59, PR #638, client bug fixed 21:15) — formatted update just wasn't posted, see #3 | N (corrected) |
 | RDC | 5 | Automated access logs only | N |
 | Swift Studio | 0 | No activity | N |
 | Xtreme Soft Solutions | 8 | Kai's Fri report present; internal thread resolved amicably | N |
@@ -75,7 +75,7 @@ Trello: Check Mail — DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ comple
 **OhCleo — Tony's Fri report:** onboarding API, CORS, sitemap, mobile replay-track fix; moved "Completion Rate & Relevance Score" back to In Progress after finding FE/mobile issues.
 **OhCleo — Celine (verbatim):** refund processed notice; SEO priority request for this week; invoice clearing delayed (Swedish bank holiday).
 
-Trello: Maddy ✓, John Yi (Slack side) ✓, Rory ✓, Franc ✓, Elliott ✓ (corrected — KhanhHH hours confirmed clean), Elena-SamGuard (Slack side) ✓, MPFC ✓, Marcel ✓, Raymond ✓, Rebecca (Slack side) ✓, Colin ✓, Ohcleo ✓ — all complete except Aysar (Carrick's Fri MPDM update genuinely missing, recheck end of day).
+Trello: Maddy ✓, John Yi (Slack side) ✓, Rory ✓, Franc ✓, Elliott ✓ (corrected — KhanhHH hours confirmed clean), Aysar ✓ (corrected — Carrick's real activity confirmed despite missing formatted update), Elena-SamGuard (Slack side) ✓, MPFC ✓, Marcel ✓, Raymond ✓, Rebecca (Slack side) ✓, Colin ✓, Ohcleo ✓ — all complete.
 
 ---
 
@@ -230,11 +230,10 @@ Full details: reports/2026-06-22/matrix-rooms-0841.md
 
 **Check Mail:** DuongDn, Carrick, Rick, Kai, Ken, Nick — all ✓ complete. Card marked done.
 
-**Check Progress:** 18 of 20 items ✓ complete (Elliott corrected to complete at 09:38 — KhanhHH hours confirmed clean once Elena sheet included). Left incomplete (○):
-- **Aysar** — Carrick's Baamboozle MPDM update missing for Fri Jun19 (real pattern break, not just early-check). Recheck end of day (~17:00+, Carrick's actual posting time).
+**Check Progress:** 19 of 20 items ✓ complete (Elliott corrected 09:38 — KhanhHH hours confirmed clean; Aysar corrected 10:10 — Carrick's real Aysar activity confirmed via raw Slack history despite the missing formatted update). Left incomplete (○):
 - **Fountain** — Matrix plan not yet posted. Recheck after 09:30.
 
-Card not marked done (2 items remain open).
+Card not marked done (1 item remains open).
 
 ---
 
