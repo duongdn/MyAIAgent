@@ -13,7 +13,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | ~~Sheets — KhanhHH~~ | **RETRACTED** — KhanhHH's real Fri Jun19 total is 8.0h (Generator 0h, Baamboozle-WS 2.5h, Colin/ETZ-WS 0h, **Elena sheet 5.5h** — AA-48/51/52 Active Alerts tickets, missed in initial check). No shortfall. **Elliott** now ✓ complete. |
-| 2 | Sheets — LeNH | Fri Jun19 combined 7.33h vs 8h target (Rory 7.33h, Franc 0h, Rebecca Q-T 0h), 0.67h short, no leave note. |
+| 2 | Sheets — LeNH | Fri Jun19 combined 7.33h (Rory 7.33h, Franc 0h, Rebecca 0h), 0.67h short, but weekly total 32h+7.33h=~39.33h — within tolerance. ✅ Not a real alert. |
 | 3 | ~~Trello — Aysar~~ | **RETRACTED (10:10)** — the formatted "Today's update:" MPDM message was missing for Fri Jun19, but raw Slack history confirms Carrick was actively working on Aysar all day: deployed a fix 09:59, got PR #638 reviewed same time, responded to Jamie's live bug report at 17:15, fixed it at 21:15. Real work happened — just the end-of-day report ritual was skipped (likely because Carrick was still firefighting the client bug at that hour). **Aysar ✓ now complete.** |
 | 4 | Trello — Fountain | This week's (W32) Matrix plan not yet posted as of 08:49 — expected window 08:30-09:30 +07. **Recheck after 09:30.** |
 | 5 | Sheets — Maddy/JIRA | LIFM2-439 over-budget: est 12h, actual 21h30m (+9h30m). |
@@ -117,7 +117,7 @@ Checked **Friday 2026-06-19** (last workday — Monday's "yesterday" is Sunday, 
 | VietPH | 8h | OK | Full day |
 | TuanNT | JohnYi 0h \| Rebecca 0h ("Chưa", normal) \| Paturevision 0h \| Neural 0.25h \| CharlesChang 7.75h = **8.0h combined** | OK | Not a 0h day — John Yi/Bailey/Rebecca gates unblocked by this source |
 | KhanhHH | Generator 0h \| Baamboozle-WS 2.5h \| Colin/ETZ-WS 0h \| **Elena sheet 5.5h** (AA-51 1.5h, AA-52 3h, AA-48 1h) = **8.0h combined** | **OK (corrected)** | Initial check missed the Elena sheet (`1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`, tab W13) — KhanhHH is a 4th-source dev, see [[feedback_khanhhh_aysar_second_project]] update. Target met exactly, no alert. |
-| LeNH | Rory 7.33h \| Franc 0h \| Rebecca(Q-T) 0h = **7.33h combined** | **ALERT (marginal)** | 0.67h short of 8h target, no leave. (Checked Elena sheet W13 too — LeNH has no rows there.) |
+| LeNH | Rory 7.33h \| Franc 0h \| Rebecca 0h = **7.33h Fri** | ✅ OK | 0.67h short Fri, but weekly total ~39.33h (32h Mon–Thu + 7.33h Fri) — within 1h of 40h target. No alert. |
 
 No leave notes found covering Fri Jun19 for any of the above (KhanhHH's approved leave is Jun25-26, future; LeNH's Jun17 request is unapproved/different date).
 
@@ -221,7 +221,7 @@ Full details: reports/2026-06-22/matrix-rooms-0841.md
 
 ## Reminders — 08:49 (+07:00) — print only, not sent (no --send-reminder flag)
 
-- **LeNH**: needs reminder — Fri Jun19 combined 7.33h, 0.67h short, no leave. Room: `!OIrgPraJWrcDTnRVLQ:nustechnology.com`
+- **LeNH**: ✅ No reminder needed — Fri 7.33h (0.67h short), but weekly total ~39.33h ≈ 40h target. Marginal daily variance covered by weekly hours.
 - LongVV, PhucVT, VietPH, TuanNT, KhanhHH: no reminder needed (hours met — KhanhHH corrected to 8.0h, see Sheets section).
 
 ---

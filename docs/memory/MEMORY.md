@@ -139,6 +139,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_tasklog_0h_reminder_complete.md](feedback_tasklog_0h_reminder_complete.md) — **0h task log + reminder sent = COMPLETE Trello item.**
 - [feedback_no_activity_not_skip.md](feedback_no_activity_not_skip.md) — **"No Slack activity" is NOT a skip reason. Quiet = OK → COMPLETE.**
 - [feedback_leave_day_handling.md](feedback_leave_day_handling.md) — Full leave day rule: 0h OK, pro-rate weekly target, covers daily report / 0h check / shortfall
+- [feedback_marginal_daily_shortfall_check_weekly.md](feedback_marginal_daily_shortfall_check_weekly.md) — Marginal daily shortfall (<1h): check weekly total first — if weekly ≥ target−1h, NOT an alert (LeNH Jun19: 7.33h day but 39.33h week = OK)
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter by Owner col G, not day total. TuanNT splits across projects
 - [feedback_parttime_official_filter.md](feedback_parttime_official_filter.md) — Only "Task dự án" as official, exclude "Part-time" rows
 - [feedback_tasklog_skip_first_row.md](feedback_tasklog_skip_first_row.md) — Never use first empty row of a day (Paturevision write)
