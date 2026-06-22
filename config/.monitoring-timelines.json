@@ -6,9 +6,10 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-19T09:22:00+07:00",
-    "output_file": "reports/2026-06-19/daily-report.md",
-    "last_status": "complete"
+    "last_run": "2026-06-22T08:49:00+07:00",
+    "output_file": "reports/2026-06-22/daily-report.md",
+    "last_status": "complete_with_recheck_pending",
+    "recheck_pending": ["Aysar (Baamboozle MPDM not yet posted, recheck after 10:30)", "Fountain (Matrix plan not yet posted, recheck after 09:30)", "Elliott (KhanhHH shortfall)"]
   },
   "refresh": {
     "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",
@@ -148,7 +149,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-19T08:47:00+07:00",
-    "output_file": "reports/2026-06-19/daily-report.md"
+    "last_run": "2026-06-22T08:49:00+07:00",
+    "output_file": "reports/2026-06-22/daily-report.md"
   }
 }
