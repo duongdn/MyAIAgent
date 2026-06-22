@@ -331,17 +331,19 @@ Supports individual developer targeting:
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
 **Week:** Use Summary tab to find current W{n}. Today's date determines the week. **Every sheet has its own independent W-numbering — never reuse one sheet's W{n} for another.**
 
-🔴 **This table caused a real incident (2026-06-22, KhanhHH false 0h alert: real total was 8.0h, reported as 2.5h because the Elena sheet wasn't checked).** This table is the COMPLETE list per dev as of that date. Do not narrow it back down based on a skill summary elsewhere or assumption — dev↔sheet/workstream assignments change over time (see [[feedback_dev_project_mapping_flexible]]); if checking confirms a new source, add it here immediately.
+🔴 **RULE: NEVER pre-assign developers to specific sheets or Workstream projects.** Developers switch projects without notice. Hardcoding dev→sheet has caused multiple false alerts (KhanhHH Jun22: 8.0h real, reported 2.5h; TuanNT Jun17: missed CharlesChang entirely). Always scan ALL sources for every dev.
 
-| Developer | Arg | ALL sources (sheet ID or Workstream projectId) | Daily target | Notes |
-|-----------|------|-------------|-----------|-------|
-| LongVV | longvv | Sheet: `1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I` (Maddy) + Workstream `maddy` project (authoritative, run `workstream-fetch-project-week.js`) | 16h/**week** (Maddy only, static) | Part-time. Up to 24h/wk flexible (commonly James Diamond backfill) has NO target — never alert on it. 0h days normal. |
-| PhucVT | phucvt | Sheet: `1XUJ7Ww8dyxv6L42wtQ_7jz4GCGvBzDUXEc7YTHrKgeI` (JamesDiamond) | 8h/day | Nghỉ nửa ngày = 4h OK |
-| TuanNT | tuannt | **5 sheets**: JohnYi `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` + Rebecca `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` (col P "Chưa" = normal) + Paturevision `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (skip first blank row/day) + Neural `1drk_TN7-B2xD43jgErH5aWGaeCsIMtNbiIUTNbFYheg` + CharlesChang/Family App V2 `19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc` | 8h/day combined | 0h alert ONLY if ALL 5 are 0h. Show per-sheet breakdown, never just "combined Xh". |
-| VietPH | vietph | Sheet: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (Paturevision) | 8h/day | Nghỉ cả ngày = 0h OK |
-| KhanhHH | khanhhh | **4 sources**: Generator sheet `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` + Baamboozle/Aysar Workstream `cmqez93ka07q8p81v7035l3td` + Colin/ETZ Workstream `cmqezatb807qvp81vpnzzimmp` + **Elena sheet `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`** (own epoch W1=2026-03-23, use its Summary tab; rows show ticket IDs like "AA-51", Owner col G = KhanhHH) | 8h/day combined across ALL 4 | This dev has had a new source surface every 1-2 months — treat ANY shortfall finding with suspicion, re-verify all 4 before reporting an alert. Not a closed list — ask "any other current project?" if a 5th surfaces. |
-| LeNH | lenh | **3 sheets**: Rory `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` + Franc `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` + Rebecca `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4`. **For all 3 sheets: filter col G (Owner)="LeNH", sum col H (Actual). Same method as every other dev — no special columns.** (Cols M-Q in Rebecca are sign-off confirmations, NOT hours.) | 8h/day combined | **NOT Aysar** — Aysar sheet owner is KhanhHH. Any shortfall (even <1h) without leave = real alert + reminder (stricter threshold). |
-| Fountain | — | Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | — | Used by `/daily-report fountain`, not this piece. |
+**For each developer: scan ALL 11 Google Sheets + ALL Workstream projects. Filter each by col G (Owner) = dev name, sum col H (Actual hours). See [[feedback_dev_project_mapping_flexible]] for full sheet ID list. See [[reference_workstream]] for all Workstream project IDs.**
+
+| Developer | Arg | Daily target | Alert threshold | Notes |
+|-----------|------|-------------|-----------------|-------|
+| LongVV | longvv | 16h/**week** | Only if WEEKLY total < 16h, no leave | Part-time. 0h on any single day is NORMAL — never flag daily 0h. |
+| PhucVT | phucvt | 8h/day | 0h no leave = alert | Nghỉ nửa ngày = 4h OK |
+| TuanNT | tuannt | 8h/day combined | 0h across ALL sources = alert | Col P "Chưa" in Rebecca = normal. Show per-source breakdown. Blocks John Yi+Rebecca+Bailey Trello items. |
+| VietPH | vietph | 8h/day | 0h no leave = alert | Nghỉ cả ngày = 0h OK |
+| KhanhHH | khanhhh | 8h/day combined | 0h across ALL sources = alert | New sources surface repeatedly (3 found in 2 months) — treat any shortfall with extra suspicion, verify all sources exhaustively before flagging. |
+| LeNH | lenh | 8h/day combined | ANY shortfall (even <1h) no leave = alert | Stricter threshold than other devs. Aysar sheet owner is KhanhHH, not LeNH. Rebecca cols M-Q = sign-offs only. |
+| Fountain | — | — | — | Used by `/daily-report fountain`, not this piece. |
 
 **Rules:**
 - "Nghỉ cả ngày" = full day off → 0h OK
@@ -787,10 +789,11 @@ Before running any Slack/Matrix/Discord source:
 Run the mapped source pieces sequentially (not parallel — fewer resources, no race). For each source:
 - Use the **same logic** as the corresponding piece (Slack uses `search.messages`, Sheets uses PREV_DATE tokens, etc.)
 - Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h. **On Monday, PREV_DATE should resolve to Friday (last workday), not Sunday.**
-- TuanNT: always scan all **5** sheets (JohnYi + Rebecca + Paturevision + Neural + CharlesChang/Family App V2). If combined > 0h → no alert
-- KhanhHH: always scan all **4** sources (Generator sheet + Baamboozle Workstream + Colin/ETZ Workstream + Elena sheet). If combined > 0h → no alert. See [[feedback_khanhhh_aysar_second_project]] — this dev has had a new source surface repeatedly, re-verify all 4 before reporting any shortfall.
-- LeNH: scan Rory + Franc + Rebecca, filter col G (Owner)="LeNH", sum col H (Actual) for each. If combined > 0h → no alert. Aysar NOT in LeNH. **No Q-T special case — Rebecca cols M-Q are sign-offs, not hours.**
-- LongVV: check Workstream (authoritative), not just sheets. Part-time 16h/wk — 0h/day is normal, check weekly total only.
+- **For every dev: scan ALL 11 Google Sheets + ALL Workstream projects** (see [[feedback_dev_project_mapping_flexible]] + [[reference_workstream]]). Never pre-limit which sources to check.
+- TuanNT: if combined > 0h across all sources → no alert. Blocks John Yi+Rebecca+Bailey Trello items. Show per-source breakdown.
+- KhanhHH: new sources have surfaced 3 times in 2 months — treat any shortfall with extra suspicion, exhaust all sources before flagging.
+- LeNH: filter col G="LeNH" in each sheet. Any shortfall even <1h without leave = alert. Aysar sheet owner is KhanhHH, not LeNH.
+- LongVV: alert only on weekly total < 16h. 0h any single day is normal.
 
 **Step 6 — Complete or keep incomplete**
 
@@ -822,9 +825,10 @@ Append a timestamped section:
 
 - **Never re-run email** — email is already done and Trello mail items are handled separately
 - **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
-- **TuanNT 5-sheet rule:** If any one of 5 sheets has hours → combined > 0h → no alert → items gated on TuanNT all complete
-- **KhanhHH 4-source rule:** If any one of 4 sources (Generator/Baamboozle-WS/Colin-ETZ-WS/Elena sheet) has hours → combined > 0h → no alert. Missing the Elena sheet caused a real false alert on 2026-06-22 — always check all 4.
-- **LeNH 3-sheet rule:** Scan Rory + Franc + Rebecca, filter col G (Owner)="LeNH" in each — no special columns (Q-T are sign-offs). NOT Aysar.
+- **All-sources rule (ALL devs):** Scan ALL 11 Google Sheets + ALL Workstream projects for every developer. Filter by col G = dev name. Never pre-assume which sources a dev uses — assignments change without notice.
+- **TuanNT gate:** Any source with hours → combined > 0h → no alert → complete John Yi+Rebecca+Bailey Trello items.
+- **KhanhHH extra caution:** 3 new sources discovered in 2 months — treat any shortfall as suspect until all sources exhaustively verified.
+- **LeNH stricter:** Even <1h shortfall without leave = alert. Aysar sheet owner = KhanhHH (not LeNH).
 - **Aysar MPDM:** Use correct epoch for the current year when calling `conversations.history` — wrong epoch returns 2025 data
 - **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
 - **Log findings clearly:** state what was checked, what was found, and why each item was completed or kept open

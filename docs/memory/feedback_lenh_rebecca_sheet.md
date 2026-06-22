@@ -1,16 +1,17 @@
 ---
-name: LeNH also logs hours in Rebecca (William Bills) sheet
-description: LeNH works on Rory+Franc+Rebecca ONLY — NOT Aysar (Aysar owner = KhanhHH, confirmed 2026-06-09). Hours found via col G (Owner=LeNH), NOT special Q-T cols.
+name: feedback_lenh_rebecca_sheet
+description: LeNH is NOT owner of Aysar sheet (owner=KhanhHH). Hours found in col G rows same as all devs — no special columns.
 type: feedback
 ---
 
-LeNH logs hours across 3 sheets (NOT 4 — Aysar belongs to KhanhHH):
-1. Rory: 1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8
-2. Franc: 1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ
-3. **Rebecca (William Bills): 1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4**
+## LeNH is NOT the Aysar sheet owner
 
-**⚠️ CORRECTED 2026-06-22:** The old claim "LeNH is in columns Q-T" was **wrong**. Inspecting the Rebecca sheet W29 tab (A1:T80) revealed that columns M-Q contain sign-off confirmation headers ("Xác nhận hoàn thành task log ngày"): DuongDN=col M, TriNM=col N, LeNH=col O, TuanNT=col P, LongVV=col Q. These are approval checkboxes, NOT task log hours. LeNH's actual task hours are in col G (Owner="LeNH") rows, col H (Actual), same as every other developer.
+The Baamboozle/Aysar Google Sheet owner (col G) is **KhanhHH**, not LeNH. LeNH is the Upwork billing contractor for Aysar (sub-contract), but does NOT log task hours there. Never sum the Aysar sheet as "LeNH hours."
 
-**Why:** User confirmed 2026-06-09: "LeNH is Franc and Rory." Aysar sheet owner = KhanhHH per [[feedback_aysar_sheet_owner_is_khanhhh]]. Old memory incorrectly listed Aysar as a LeNH sheet. Q-T column claim was never verified against actual sheet structure.
+**Why:** User confirmed 2026-06-09: "LeNH ko có làm aysar, kiểm tra kỹ lại." Repeated confusion because LeNH appears on Aysar Upwork tracker (billing role, not dev role).
 
-**How to apply:** When computing LeNH combined daily hours, scan Rory + Franc + Rebecca sheets and filter each by col G (Owner) = "LeNH", sum col H (Actual hours). Never include Aysar. Alert if total across all 3 is 0h with no leave.
+**How to apply:**
+- Scan ALL 11 Google Sheets for LeNH by filtering col G (Owner) = "LeNH", sum col H (Actual). Same method as every other dev.
+- No special columns needed. (Cols M-Q in Rebecca sheet are sign-off confirmations, NOT task hours — corrected 2026-06-22.)
+- If LeNH shows 0h across all sheets: check leave note; if no leave, alert + send reminder.
+- Any shortfall even <1h without leave = real alert (LeNH has stricter threshold than other devs).

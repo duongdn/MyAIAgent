@@ -16,10 +16,9 @@ metadata:
 **Why:** LeNH is the billing contractor for Aysar (sub-contract billing), but KhanhHH is the actual developer doing the work and logging hours. The sheet total is KhanhHH's time, not LeNH's.
 
 **How to apply:**
-- When reading the Aysar sheet, filter `owner == "KhanhHH"` to get KhanhHH's hours
-- Report KhanhHH combined = Generator hours + Aysar hours
-- LeNH combined = Rory + Franc only (no Aysar component)
-- Never use Aysar sheet Summary tab total as "LeNH hours"
+- When reading the Aysar sheet (as part of scanning ALL 11 sheets), filter `owner == "KhanhHH"` to count it toward KhanhHH's total
+- Never use the Aysar sheet Summary tab total as "LeNH hours"
+- LeNH's Upwork shows Aysar billing — this is sub-contract billing, not LeNH task hours
 
 ## Incident 2026-06-08
 

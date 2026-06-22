@@ -11,7 +11,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [reference_trello_gate_mapping.md](reference_trello_gate_mapping.md) — **Exact gate sources per Check Progress item. Check this before completing OR skipping any item.**
 - [feedback_leave_day_handling.md](feedback_leave_day_handling.md) — **"Nghỉ cả ngày" / "Nghỉ nửa ngày" → pro-rate weekly target before computing shortfall.** Never write `actual vs full_target` when any leave day exists.
 - [feedback_summary_sheet_no_double_count.md](feedback_summary_sheet_no_double_count.md) — Summary col D is **already** the grand total; never also sum per-employee Actual cols (caused 2× bug 2026-05-11).
-- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **ALL devs scan ALL 11 sheets by owner col G — NEVER use Summary tab total (all-devs sum); never hardcode dev→sheet**
+- [feedback_dev_project_mapping_flexible.md](feedback_dev_project_mapping_flexible.md) — **ALL devs scan ALL 11 sheets + ALL Workstream projects by owner col G / dev name — NEVER hardcode dev→sheet/project**
 - [feedback_sheets_subagent_unreliable.md](feedback_sheets_subagent_unreliable.md) — Verify suspicious 0h findings directly before flagging / reminding.
 - [feedback_matrix_resource_arrangement_room.md](feedback_matrix_resource_arrangement_room.md) — **Cross-check Matrix room "Delivery - Resource Arrangement" (namtv's leave notes) before flagging ANY dev 0h.**
 - [feedback_subagent_no_unauthorized_writes.md](feedback_subagent_no_unauthorized_writes.md) — Subagents must NEVER submit forms / tick Trello / send msgs / push code beyond explicit scope.
@@ -21,7 +21,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_fountain_cr_column.md](feedback_fountain_cr_column.md) — Fountain total estimate = Col I **+** Col J (CR). Both capacity AND over-estimate use the sum.
 - [feedback_fountain_kunal_checklist.md](feedback_fountain_kunal_checklist.md) — Fountain 5-part check is MANDATORY every run; never skip any part.
 - [feedback_report_location.md](feedback_report_location.md) — Reports go in `reports/{YYYY-MM-DD}/...`, **NOT** `plans/reports/`.
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH = **4 sources**: Generator + Baamboozle Workstream + Colin/ETZ Workstream + **Elena sheet** (4th found missing 2026-06-22 — not a closed list, re-ask if a 5th surfaces).
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — KhanhHH Upwork Aysar hours bill through LeNH tracker (sub-contract). New sources surface repeatedly — exhaust ALL sheets+WS before flagging any shortfall.
 - [feedback_google_sheets_per_employee.md](feedback_google_sheets_per_employee.md) — Filter EVERY dev to their own name in multi-employee sheets (James Diamond sheet has both PhucVT and AnhNH2 on different projects) — never `sum()` all owners in a sheet as one person's total.
 - [feedback_sheets_scan_script_reuse_wrong_day.md](feedback_sheets_scan_script_reuse_wrong_day.md) — **Verify `daily-sheets-scan-{today}*.js` actually exists before trusting its output** — cron silently reused yesterday's script (wrong date tokens), reported Wed data as Thu for TuanNT/Elena/KhanhHH, falsely auto-completed 3 Trello items.
 - [feedback_mpfc_oauth2_real_unresolved_bug.md](feedback_mpfc_oauth2_real_unresolved_bug.md) — MPFC's recurring OAuth2 invalid_grant (since Jun3) is a REAL unresolved bug, not stale noise — never just relabel as "older".
@@ -132,7 +132,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 ## Sheets & Task Logs (general rules)
 - [feedback_sheets_wrong_tab_numbering.md](feedback_sheets_wrong_tab_numbering.md) — **🔴 CRITICAL: Tab W{n} ≠ calendar week n. ALWAYS use Summary tab to find correct tab.**
 - [feedback_sheets_scan_prev_date_for_daily_hours.md](feedback_sheets_scan_prev_date_for_daily_hours.md) — **Daily hours scan = PREV_DATE (yesterday)**. Using today's tokens at 05:00 = all 0h.
-- [feedback_workstream_authoritative_for_maddy_devs.md](feedback_workstream_authoritative_for_maddy_devs.md) — Workstream authoritative for Maddy/LongVV/LuHX. Run workstream-fetch when sheets=0h.
+- [feedback_workstream_authoritative_for_maddy_devs.md](feedback_workstream_authoritative_for_maddy_devs.md) — Workstream authoritative for all devs with WS projects. Always scan ALL WS projects alongside sheets.
 - [feedback_dev_not_working_project_x_means_that_project_only.md](feedback_dev_not_working_project_x_means_that_project_only.md) — "Not working ProjectX" ≠ 0h total. Scan all sheets before concluding 0h day.
 - [feedback_aysar_sheet_owner_is_khanhhh.md](feedback_aysar_sheet_owner_is_khanhhh.md) — **Aysar sheet owner=KhanhHH (not LeNH)**. LeNH combined = Rory + Franc + Rebecca (Q-T) only.
 - [feedback_tasklog_summary_sheet.md](feedback_tasklog_summary_sheet.md) — Summary tab: use for W{n} date lookup ONLY. Col D = all-dev total, not per-dev hours.
@@ -146,18 +146,18 @@ Skim these every single run. If your output contradicts any of them, you have a 
 
 ## Per-Developer Rules
 ### LongVV
-- [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; check Matrix weekly plan for current project split
+- [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — Part-time 16h/WEEK. 0h any single day = normal. Alert only on weekly total < 16h.
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 ### TuanNT
-- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**5 sheets**: JohnYi+Rebecca+Paturevision+Neural+CharlesChang) blocks John Yi+Rebecca+Bailey. Any one = no alert.
-- [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — **5 sheets, PREV_DATE tokens**: +CharlesChang(19gsF1h...) added 2026-06-17; W-tabs per-project, check Summary tab.
+- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (scan ALL sources) blocks John Yi+Rebecca+Bailey. Any source with hours = no alert.
+- [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — New sheets surface without notice — always scan ALL 11 sheets; never assume source list complete.
 ### LeNH
-- [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH)
-- [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert if working another that day
+- [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH is NOT Aysar sheet owner (KhanhHH is). Scan ALL 11 sheets via col G filter. Any shortfall = alert.
+- [feedback_lenh_per_sheet_not_alert.md](feedback_lenh_per_sheet_not_alert.md) — 0h in one sheet ≠ alert — check ALL sheets first
 - [feedback_lenh_partial_hour_alert.md](feedback_lenh_partial_hour_alert.md) — Any <adjusted_target shortfall (even 0.17h) without leave = alert + reminder
-- [feedback_rory_franc_gate_slack_only.md](feedback_rory_franc_gate_slack_only.md) — **Rory/Franc Trello items gate on Slack ONLY (Swift/RDC)** — LeNH hours never block these, only trigger personal reminder
+- [feedback_rory_franc_gate_slack_only.md](feedback_rory_franc_gate_slack_only.md) — **Rory/Franc Trello items gate on Slack ONLY (Swift/RDC)** — LeNH hours never block these
 ### KhanhHH
-- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — **🔴 4 sources: Generator + Baamboozle WS + Colin/ETZ WS + Elena sheet** — Elena missed entirely on 2026-06-22, repeat offense pattern
+- [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — Aysar Upwork bills through LeNH tracker (sub-contract). New sources keep surfacing — exhaust ALL sheets+WS before flagging any shortfall.
 - [feedback_fountain_0h_not_expected_day1.md](feedback_fountain_0h_not_expected_day1.md) — **Fountain 0h on first day of week is NOT expected — 40h/week devs should log 8h/day, always flag**
 ### Other devs
 - [feedback_marcel_adhoc_project.md](feedback_marcel_adhoc_project.md) — Marcel adhoc, 0h is expected

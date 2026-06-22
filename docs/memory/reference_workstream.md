@@ -11,10 +11,17 @@ Internal task-log system running parallel to Google Sheets for **Maddy** and **R
 
 ## Projects
 
-| Key | Workstream name | Client | Main devs | Project ID |
-|-----|----------------|--------|-----------|-----------|
-| maddy | Xtreme Soft Solutions | Maddy | LongVV (Long Vo), LuHo | `cmpqc1v7v00ahtk1vs1817xt8` |
-| rebecca | MissSwimwear | Rebecca Pechey | TuanNT (Tuan Nguyen) | `cmpqcflkx00litk1vic3vki6j` |
+Scan ALL of these for every dev's hours. Do NOT pre-assign which projects belong to which dev — any dev may log hours in any project.
+
+| Key | Workstream name | Client | Project ID |
+|-----|----------------|--------|-----------|
+| maddy | Xtreme Soft Solutions | Maddy | `cmpqc1v7v00ahtk1vs1817xt8` |
+| rebecca | MissSwimwear | Rebecca Pechey | `cmpqcflkx00litk1vic3vki6j` |
+| baamboozle | Baamboozle / Aysar | Aysar Siddiqui | `cmqez93ka07q8p81v7035l3td` |
+| colin-etz | ETZ - Wathaga | Colin CardWell | `cmqezatb807qvp81vpnzzimmp` |
+| blair-brown | Blair Brown WordPress | Blair Brown | `cmqj4tj6v01gfm81vgx7ipkov` |
+
+⚠️ New projects surface without notice — if a dev shows 0h across all known sources, check if any new project was added (ask user or query `GET {api_base}/time/projects?date={date}` with manager token to list all).
 
 ## Scripts
 

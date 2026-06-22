@@ -1,6 +1,6 @@
 ---
 name: feedback_tuannt_trello_gates
-description: "TuanNT 0h blocks John Yi, Rebecca, AND Bailey Trello items. Must scan ALL 5 sheets using PREV_DATE."
+description: TuanNT 0h (across ALL scanned sheets+Workstream) blocks John Yi, Rebecca, AND Bailey Trello items.
 metadata: 
   node_type: memory
   type: feedback
@@ -12,19 +12,11 @@ TuanNT's task log gates THREE Trello Check Progress items:
 - **Rebecca (William Bills)**
 - **Bailey** (TuanNT = Bailey DEV1 on Paturevision)
 
-**TuanNT has 5 sheets — ALL must be checked with PREV_DATE (yesterday's) tokens:**
-1. JohnYi: `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ`
-2. Rebecca: `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4`
-3. Paturevision: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` ← Bailey/Prestashop
-4. Neural: `1drk_TN7-B2xD43jgErH5aWGaeCsIMtNbiIUTNbFYheg` ← W-tabs, Summary has dates
-5. **CharlesChang (Family App V2)**: `19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc` ← added 2026-06-17
-
 **How to apply:**
-- Sum TuanNT's hours across ALL FIVE sheets for the previous workday.
-- COMBINED = 0h AND no leave note → alert + send reminder.
-- COMBINED > 0h (any one sheet) → NO alert. Complete all three Trello items.
+- Scan ALL 11 Google Sheets + ALL Workstream projects for TuanNT (filter col G = "TuanNT" in each sheet). See [[feedback_dev_project_mapping_flexible]] for the full 11-sheet list and [[reference_workstream]] for Workstream project IDs.
+- COMBINED = 0h AND no leave note → alert + send reminder. Block all three Trello items.
+- COMBINED > 0h (any one source) → NO alert. Complete all three Trello items.
 - Do NOT fire per-sheet alerts. Only COMBINED 0h triggers.
-- "Not working John Yi" ≠ "not working at all" — see [[feedback_dev_not_working_project_x_means_that_project_only]]
-
-**CORRECTED 2026-06-09:** Paturevision was always TuanNT's sheet but missing from list. Neural hourly scan used wrong date (TARGET vs PREV). Both fixed. See [[feedback_tuannt_four_sheets]].
-**CORRECTED 2026-06-17:** CharlesChang sheet added (TuanNT logged 6.17h there; was invisible to scan). See [[feedback_tuannt_four_sheets]].
+- Show per-source breakdown in report — never just "combined Xh".
+- "Not working John Yi" ≠ "not working at all" — scan all sources before concluding 0h day.
+- Col P "Chưa" in Rebecca sheet = not reviewed yet (normal, not alert).
