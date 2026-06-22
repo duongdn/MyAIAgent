@@ -32,7 +32,7 @@ Dev → project sheet mapping is **not static**. Any dev may log hours in any sh
 3. Filter rows by col G (Owner) = dev name. Sum col H (Actual hours).
 4. Also include rows where col A is empty but col G has owner — some devs omit "Task dự án" in col A. See [[feedback_sheets_empty_col_a_bug]].
 5. Aggregate across ALL sheets → compare to 8h daily target.
-6. **Special case — Rebecca sheet:** LeNH hours sit in cols Q-T (not col G). Read both col G AND Q-T for LeNH.
+6. **⚠️ CORRECTED 2026-06-22 — No Q-T special case for Rebecca:** The old instruction "LeNH hours sit in cols Q-T" was wrong. Rebecca sheet cols M-Q contain sign-off confirmation headers, NOT task hours. Scan LeNH in Rebecca the same way as all other devs: filter by col G (Owner) = "LeNH", sum col H (Actual). No special column needed.
 7. Only flag shortfall if AGGREGATE < target and no leave note. Per-sheet 0h alone is never an alert.
 
 **Per-dev exceptions:**

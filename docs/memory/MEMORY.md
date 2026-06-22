@@ -149,7 +149,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_longvv_hour_split.md](feedback_longvv_hour_split.md) — **Part-time (16h/wk Maddy)**; check Matrix weekly plan for current project split
 - [feedback_longvv_direct_matrix.md](feedback_longvv_direct_matrix.md) — LongVV reminders → `!mYZBGNoLFVpMVIJtPu` (direct), NOT Maddy Xtreme room
 ### TuanNT
-- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**4 sheets**: JohnYi+Rebecca+Paturevision+Neural) blocks John Yi+Rebecca+Bailey. Any one = no alert.
+- [feedback_tuannt_trello_gates.md](feedback_tuannt_trello_gates.md) — TuanNT COMBINED 0h (**5 sheets**: JohnYi+Rebecca+Paturevision+Neural+CharlesChang) blocks John Yi+Rebecca+Bailey. Any one = no alert.
 - [feedback_tuannt_four_sheets.md](feedback_tuannt_four_sheets.md) — **5 sheets, PREV_DATE tokens**: +CharlesChang(19gsF1h...) added 2026-06-17; W-tabs per-project, check Summary tab.
 ### LeNH
 - [feedback_lenh_rebecca_sheet.md](feedback_lenh_rebecca_sheet.md) — LeNH has 3 sheets: Rory+Franc+Rebecca (Q-T) ONLY — NOT Aysar (Aysar=KhanhHH)
@@ -202,7 +202,7 @@ Skim these every single run. If your output contradicts any of them, you have a 
 - [feedback_aysar_github_issues.md](feedback_aysar_github_issues.md) — Also check baamboozle/baamboozle-web-app + bbzl-web-client open issues (carrick token)
 - [feedback_aysar_jamie_ronan_room.md](feedback_aysar_jamie_ronan_room.md) — **CORRECTED**: Aysar report = Baamboozle Slack MPDM C07SQ4HAUHZ. Matrix = send reminders only.
 - [feedback_aysar_daily_report_slack.md](feedback_aysar_daily_report_slack.md) — General rule: check Slack for daily reports, send Matrix reminder only if missing.
-- [feedback_aysar_carrick_post_timing.md](feedback_aysar_carrick_post_timing.md) — Carrick posts Aysar MPDM update ~10:00-10:30+07, not early morning — don't flag absent before then
+- [feedback_aysar_carrick_post_timing.md](feedback_aysar_carrick_post_timing.md) — Carrick posts ~17:00-17:45+07 (end of day). Missing formatted message ≠ no work — check all workspace activity before flagging.
 ### Other
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel weekly Matrix message format
 

@@ -70,7 +70,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report sheets tuannt` | TuanNT (5 sheets combined) only |
 | `/daily-report sheets vietph` | VietPH only |
 | `/daily-report sheets khanhhh` | KhanhHH (4 sources combined) only |
-| `/daily-report sheets lenh` | LeNH (Rory + Franc + Rebecca Q-T combined) only — NOT Aysar |
+| `/daily-report sheets lenh` | LeNH (Rory + Franc + Rebecca — col G filter) only — NOT Aysar |
 | **Scrin.io** | |
 | `/daily-report scrin` | TuanNT/John Yi time tracking |
 | **Fountain** | |
@@ -326,7 +326,7 @@ Supports individual developer targeting:
 - `/daily-report sheets tuannt` — TuanNT (5 sheets combined) only
 - `/daily-report sheets vietph` — VietPH only
 - `/daily-report sheets khanhhh` — KhanhHH (4 sources combined) only
-- `/daily-report sheets lenh` — LeNH (Rory + Franc + Rebecca Q-T combined) only
+- `/daily-report sheets lenh` — LeNH (Rory + Franc + Rebecca, filter col G=LeNH) only
 
 **Service account:** `config/daily-agent-490610-7eb7985b33e3.json`
 **Week:** Use Summary tab to find current W{n}. Today's date determines the week. **Every sheet has its own independent W-numbering — never reuse one sheet's W{n} for another.**
@@ -340,7 +340,7 @@ Supports individual developer targeting:
 | TuanNT | tuannt | **5 sheets**: JohnYi `1xwimT6AFGfAGpVHlDA2PYxKX405Nu77dNExWBmbnytQ` + Rebecca `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` (col P "Chưa" = normal) + Paturevision `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (skip first blank row/day) + Neural `1drk_TN7-B2xD43jgErH5aWGaeCsIMtNbiIUTNbFYheg` + CharlesChang/Family App V2 `19gsF1hFLeuTUZMj2JIrFsRMBvs5pLE7a7j3Q4NalITc` | 8h/day combined | 0h alert ONLY if ALL 5 are 0h. Show per-sheet breakdown, never just "combined Xh". |
 | VietPH | vietph | Sheet: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg` (Paturevision) | 8h/day | Nghỉ cả ngày = 0h OK |
 | KhanhHH | khanhhh | **4 sources**: Generator sheet `1LVj66VKCe8ShqR9YNAet-d3EgEBIUWaY0ooYSdHkeEM` + Baamboozle/Aysar Workstream `cmqez93ka07q8p81v7035l3td` + Colin/ETZ Workstream `cmqezatb807qvp81vpnzzimmp` + **Elena sheet `1dH14D_XShHiVPReInjZ33YDP27cIBuV0q5BS9Nx-DRQ`** (own epoch W1=2026-03-23, use its Summary tab; rows show ticket IDs like "AA-51", Owner col G = KhanhHH) | 8h/day combined across ALL 4 | This dev has had a new source surface every 1-2 months — treat ANY shortfall finding with suspicion, re-verify all 4 before reporting an alert. Not a closed list — ask "any other current project?" if a 5th surfaces. |
-| LeNH | lenh | **3 sheets**: Rory `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` + Franc `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` + Rebecca **cols Q-T** (NOT col G) in `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4` | 8h/day combined | **NOT Aysar** — Aysar sheet (`1DCsXm5SJdIep4qjr_J_tUJPasHxPEc-tzN2q2SGsOq8`) owner is KhanhHH, not LeNH. Any shortfall (even <1h) without leave = real alert + reminder (LeNH has a stricter threshold than other devs). |
+| LeNH | lenh | **3 sheets**: Rory `1jKz9td9NgC_Iebmr3juD5Usi_7iBTu6psXI7eEuZCm8` + Franc `1RqY8DUQg0OD8wlufOO77Lg7cQ44DyonoArNHSyZztaQ` + Rebecca `1wrsg-lAWDnCEFUNk4YUTcqThMN6hy7GnXWOEW_e8NJ4`. **For all 3 sheets: filter col G (Owner)="LeNH", sum col H (Actual). Same method as every other dev — no special columns.** (Cols M-Q in Rebecca are sign-off confirmations, NOT hours.) | 8h/day combined | **NOT Aysar** — Aysar sheet owner is KhanhHH. Any shortfall (even <1h) without leave = real alert + reminder (stricter threshold). |
 | Fountain | — | Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` | — | Used by `/daily-report fountain`, not this piece. |
 
 **Rules:**
@@ -789,7 +789,7 @@ Run the mapped source pieces sequentially (not parallel — fewer resources, no 
 - Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h. **On Monday, PREV_DATE should resolve to Friday (last workday), not Sunday.**
 - TuanNT: always scan all **5** sheets (JohnYi + Rebecca + Paturevision + Neural + CharlesChang/Family App V2). If combined > 0h → no alert
 - KhanhHH: always scan all **4** sources (Generator sheet + Baamboozle Workstream + Colin/ETZ Workstream + Elena sheet). If combined > 0h → no alert. See [[feedback_khanhhh_aysar_second_project]] — this dev has had a new source surface repeatedly, re-verify all 4 before reporting any shortfall.
-- LeNH: sum all 3 sheets (Rory + Franc + Rebecca Q-T). If combined > 0h → no alert. Aysar NOT in LeNH.
+- LeNH: scan Rory + Franc + Rebecca, filter col G (Owner)="LeNH", sum col H (Actual) for each. If combined > 0h → no alert. Aysar NOT in LeNH. **No Q-T special case — Rebecca cols M-Q are sign-offs, not hours.**
 - LongVV: check Workstream (authoritative), not just sheets. Part-time 16h/wk — 0h/day is normal, check weekly total only.
 
 **Step 6 — Complete or keep incomplete**
@@ -824,7 +824,7 @@ Append a timestamped section:
 - **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
 - **TuanNT 5-sheet rule:** If any one of 5 sheets has hours → combined > 0h → no alert → items gated on TuanNT all complete
 - **KhanhHH 4-source rule:** If any one of 4 sources (Generator/Baamboozle-WS/Colin-ETZ-WS/Elena sheet) has hours → combined > 0h → no alert. Missing the Elena sheet caused a real false alert on 2026-06-22 — always check all 4.
-- **LeNH 3-sheet rule:** Sum Rory + Franc + Rebecca Q-T only (NOT Aysar)
+- **LeNH 3-sheet rule:** Scan Rory + Franc + Rebecca, filter col G (Owner)="LeNH" in each — no special columns (Q-T are sign-offs). NOT Aysar.
 - **Aysar MPDM:** Use correct epoch for the current year when calling `conversations.history` — wrong epoch returns 2025 data
 - **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
 - **Log findings clearly:** state what was checked, what was found, and why each item was completed or kept open
