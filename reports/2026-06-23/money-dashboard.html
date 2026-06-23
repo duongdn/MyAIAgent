@@ -136,22 +136,21 @@
 
   <!-- Detail table -->
   <div class="card">
-    <h3>📋 Account-level (việc thật sự thay đổi, theo dữ liệu giao dịch)</h3>
+    <h3>📋 2 sự kiện "Thu nợ/rút" tháng 6 — không lần ra được đích đến</h3>
     <table>
       <thead>
-        <tr><th>Hạng mục</th><th class="right">Δ vs báo cáo trước</th><th>Nguồn</th></tr>
+        <tr><th>Sự kiện</th><th class="right">Số tiền</th><th>Đích đến (theo data MISA)</th></tr>
       </thead>
       <tbody>
-        <tr><td>🏠 BĐS</td><td class="right" style="color:#64748b">Không đổi</td><td>Account balance, chắc chắn</td></tr>
-        <tr><td>🥇 Vàng</td><td class="right red">▼ 64.5M</td><td>Account balance, chắc chắn</td></tr>
-        <tr><td>📈 VCBS</td><td class="right red">▼ 276.15M</td><td>Giao dịch "Thu nợ" 22/06, chắc chắn</td></tr>
-        <tr><td>🏦 tịkcop 1 week</td><td class="right red">▼ 371.8M</td><td>Account balance 401.9M→30.1M, chắc chắn</td></tr>
-        <tr><td>💵 Liquid (vcb+Paypal+Ví)</td><td class="right green">▲ 16M</td><td>Account balance, chắc chắn</td></tr>
-        <tr><td>💳 VCB Visa</td><td class="right red">▼ 14.8M</td><td>Account balance, chắc chắn</td></tr>
-        <tr style="border-top:1px solid #334155"><td><b>Net Worth tổng</b></td><td class="right" style="color:#94a3b8"><b>Xem KPI "verified" trên</b></td><td>App "Tổng số dư" — không cộng dồn các dòng trên</td></tr>
+        <tr><td>VCBS — "Thu nợ" (ETF trả nợ)</td><td class="right">276,150,000 ₫</td><td class="right red">Không tìm thấy giao dịch nhận tiền tương ứng ở bất kỳ ví nào ngày 22/06</td></tr>
+        <tr><td>tịkcop 1 week — account balance giảm</td><td class="right">371,812,327 ₫</td><td class="right red">Không có giao dịch rút/chuyển khoản ghi nhận trong lịch sử</td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px;color:#475569;margin-top:10px">Các thay đổi từng dòng trên là sự kiện giao dịch thật (rút ETF, rút tiết kiệm). Nhưng Net Worth tổng KHÔNG bằng tổng các Δ này cộng lại — vì còn lãi/cổ tức tích lũy trong VCBS/VCBF/FPTS/Finhay mà tôi chưa tính ra số chính xác. Dùng số "Net Worth (verified)" ở KPI phía trên, không tự cộng bảng này.</div>
+    <div style="font-size:12px;color:#94a3b8;margin-top:12px;line-height:1.6">
+      <b>Ý nghĩa thật:</b> "Thu nợ" trong MISA chỉ là ghi chú cá nhân "đã thu hồi khoản đầu tư này" — KHÔNG tự động tạo giao dịch chuyển tiền vào ví khác. Tương tự, số dư tịkcop 1 week giảm nhưng không có log giao dịch rút tương ứng.<br><br>
+      → Tôi <b>không thể xác nhận tiền này hiện đang ở đâu</b> chỉ từ dữ liệu MISA. Có thể: (a) tiền đang trong tài khoản ngân hàng/CTCK không track trong app, (b) bạn mới ghi chú nhưng chưa thực rút, hoặc (c) MISA có ghi nhận ở nơi khác mà script chưa fetch tới.<br><br>
+      <b>Quan trọng:</b> số <b>Net Worth verified 7.345 tỷ</b> ở KPI trên KHÔNG bị ảnh hưởng bởi việc tôi không lần ra đích đến — đó là tổng MISA tự tính, đã bao gồm đúng vị trí hiện tại của mọi khoản tiền (kể cả 2 khoản này), bất kể tôi thấy được luồng tiền hay không.
+    </div>
   </div>
 </div>
 

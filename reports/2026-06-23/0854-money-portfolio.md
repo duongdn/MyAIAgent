@@ -73,22 +73,20 @@
 
 Monthly expense target: ~70M. 3× target = 210M.
 
-## Biến động vs 26/05/2026 (cùng phương pháp)
+## ⚠️ 2 sự kiện "rút" tháng 6 — KHÔNG lần ra được đích đến
 
-| Hạng mục | 26/05 (₫) | 23/06 (₫) | Δ | Lý do |
-|----------|-----------|-----------|---|-------|
-| VCBS | 750,448,575 | 474,298,575 | **−276,150,000** | Thu nợ (redemption) thật, ngày 22/06 |
-| Tiết kiệm (tịkcop 1 week) | 401,917,738 | 30,105,411 | **−371,812,327** | Rút tiết kiệm |
-| Vàng | 807,500,000 | 743,000,000 | −64,500,000 | Giá/số lượng giảm |
-| Liquid | 173,971,731 | 190,147,117 | +16,175,386 | — |
-| VCBF, FPTS, Finhay, Larion | không đổi | không đổi | 0 | — |
-| **Net Worth** | **7,951,868,091** | **7,142,160,369** | **−809,707,722** | Chủ yếu rút ETF + tiết kiệm |
+| Sự kiện | Số tiền | Đích đến (theo data MISA) |
+|---------|---------|---------------------------|
+| VCBS — "Thu nợ" (ETF trả nợ) ngày 22/06 | 276,150,000 ₫ | ❌ Không có giao dịch nhận tiền tương ứng ở vcb/Ví/Paypal/Momo ngày đó |
+| tịkcop 1 week — account balance giảm (401.9M→30.1M) | 371,812,327 ₫ | ❌ Không có giao dịch rút/chuyển khoản ghi nhận trong lịch sử |
 
-→ Khoản giảm ~810M **không phải mất tiền** — là tiền được rút ra từ ETF/tiết kiệm và dùng cho chi tiêu/trả nợ tháng 6 (Trả nợ 100M ngày 02/06, học phí, sinh hoạt...). Tiền chuyển trạng thái từ "đầu tư/tiết kiệm" sang "đã chi tiêu", không biến mất.
+**Ý nghĩa**: "Thu nợ" trong MISA chỉ là ghi chú cá nhân "đã thu hồi khoản đầu tư này" — KHÔNG tự động tạo giao dịch chuyển tiền vào ví khác trong hệ thống. Tôi **không thể xác nhận tiền này hiện đang ở đâu** chỉ từ dữ liệu MISA. Có thể: (a) tiền đang ở tài khoản ngân hàng/CTCK không track trong app, (b) đã ghi chú nhưng chưa thực rút, hoặc (c) MISA ghi nhận đích đến ở nơi tôi chưa fetch tới.
+
+**Quan trọng**: Net Worth verified (7,345,661,716 ₫, xem đầu báo cáo) KHÔNG bị ảnh hưởng bởi việc không lần ra đích đến này — đó là tổng MISA tự tính từ vị trí THẬT của mọi tài sản, không phụ thuộc vào việc tôi truy ngược được giao dịch hay không.
+
+❌ Tuyên bố trước đó ("giảm 810M do rút ETF+tiết kiệm dùng cho chi tiêu/trả nợ") là **suy đoán không có chứng cứ** — không có liên kết giao dịch nào xác nhận khoản rút này được dùng cho Trả nợ 100M hay học phí. Rút lại tuyên bố đó.
 
 ## Alerts
-- ⚠️ **Real Estate**: 49.3% net worth (Nhà + Long An) — vẫn trong vùng cần theo dõi nhưng không tới mức báo động (giảm từ 56% nhờ net worth investment tăng đúng)
-- ⚠️ **Liquid hơi thấp**: 190M < 210M target (3× tháng), nhưng savings 638M bù đắp tốt
-- ✅ Debt ratio thấp: 39.8M = 0.6% gross assets
-- ✅ Savings + Liquid = 828M > quỹ khẩn cấp 6 tháng (420M)
-- ℹ️ **Investment cost-basis, không phải market value** — chưa phản ánh lãi/lỗ thực tế của ETF/Fund
+- ✅ **Net Worth verified**: 7,345,661,716 ₫ — đọc trực tiếp từ app, đáng tin
+- ⚠️ **2 khoản rút (648M) chưa rõ đích đến** — nên tự kiểm tra sao kê ngân hàng/CTCK để xác nhận
+- ℹ️ Category breakdown (BĐS/Đầu tư/Tiết kiệm/Liquid) trong báo cáo này là ước tính, không cộng khớp chính xác với tổng verified

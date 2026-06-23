@@ -69,7 +69,7 @@ Liquid    ███░                                      4.1%
 
 ## Nhận xét
 - Đầu tư (44.6% investable) là nhóm lớn nhất sau khi sửa lỗi tính sai VCBF/FPTS/Finhay
-- VCBS rút thật 276.15M ngày 22/06 (redemption) — không phải mất tiền, chuyển sang dùng cho chi tiêu/trả nợ
+- VCBS rút thật 276.15M ngày 22/06 (redemption) — KHÔNG xác nhận được đích đến (không có giao dịch nhận tiền tương ứng trong MISA, xem cảnh báo cuối báo cáo portfolio)
 - Tiết kiệm tịkcop 1 week giảm 371.8M (401.9M → 30.1M) — đã rút dùng
 - Vàng 15.9% — trong benchmark, không còn vượt ngưỡng như tính sai trước đó
 - Larion (600M, 12.8%) là cổ phần tư nhân — kém thanh khoản nhất trong danh mục
@@ -107,13 +107,13 @@ Liquid    ███░                                      4.1%
 
 ### 4. Quyết định sắp tới (90 ngày)
 - **vcb 1 month** (503.97M): đáo hạn trong ~1–30 ngày — quyết định tái đầu tư hay giữ tiết kiệm
-- **Cần xác nhận thực tế**: Tiền VCBS redemption (276M) + tịkcop 1w rút (371.8M) đã dùng vào đâu — note cho thấy có Trả nợ 100M (02/06), học phí, sinh hoạt — nên track để hiểu rõ luồng tiền tháng 6
+- **Cần xác nhận thực tế**: VCBS redemption (276M) + tịkcop 1w rút (371.8M) — MISA KHÔNG ghi nhận giao dịch nhận tiền tương ứng ở bất kỳ ví nào. Tự kiểm tra sao kê ngân hàng/CTCK để biết tiền đang ở đâu.
 
 ### 5. Khuyến nghị
 
 **Ngắn hạn (30 ngày):**
 1. Khi vcb 1 month đáo hạn — quyết định tái gửi hay bổ sung ETF
-2. Theo dõi: VCBS+tịkcop 1w đã rút tổng ~648M trong tháng 6 — xác nhận khoản này dùng hợp lý (trả nợ, học phí) không bị thất thoát
+2. Theo dõi: VCBS+tịkcop 1w đã rút tổng ~648M trong tháng 6 nhưng KHÔNG có giao dịch nhận tiền tương ứng trong MISA — tự kiểm tra sao kê ngân hàng/CTCK để xác nhận tiền vẫn còn, không bị thất thoát
 
 **Trung hạn (6–12 tháng):**
 1. Tính lại P&L thực tế của VCBS/VCBF/FPTS/Finhay (so cost basis 2,090M với giá trị thị trường hiện tại) — hiện chưa rõ lãi/lỗ
