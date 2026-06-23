@@ -79,20 +79,22 @@
 </div>
 
 <div class="grid full">
-  <div class="card" style="border-color:#422006;background:#1a1407">
-    <h3 style="color:#fb923c">⚠️ Website MISA THIẾU ~400M so với Mobile app — dùng số Mobile</h3>
+  <div class="card" style="border-color:#14532d;background:#0a1f12">
+    <h3 style="color:#4ade80">✅ ĐÃ GIẢI HOÀN TOÀN: website MISA bug, sổ tiết kiệm "tikcop 5 week" vẫn còn nguyên 401.9M</h3>
     <table style="margin-bottom:12px">
-      <thead><tr><th>Nguồn</th><th class="right">Net Worth</th><th>Đánh giá</th></tr></thead>
+      <thead><tr><th>Sổ tiết kiệm</th><th class="right">Số dư</th><th>Đáo hạn</th><th>Lãi suất</th></tr></thead>
       <tbody>
-        <tr><td>Website "Tổng số dư" (API /wallets/totaldashboard)</td><td class="right">7,345,661,716</td><td class="red">Thiếu ~400M</td></tr>
-        <tr><td>Tự tính tay (account balance + cost-basis ETF/Fund)</td><td class="right">7,420,567,195</td><td class="red">Cũng thiếu phần đó</td></tr>
-        <tr style="border-top:1px solid #334155"><td><b>Mobile app "Tài chính hiện tại" (Tổng có − Tổng nợ)</b></td><td class="right green"><b>7,819,879,454</b></td><td class="green"><b>✅ Đầy đủ nhất — DÙNG SỐ NÀY</b></td></tr>
+        <tr><td>vcb 1 month</td><td class="right">503,977,053</td><td>09/07/2026</td><td>4.75%</td></tr>
+        <tr><td>tikcop 1m</td><td class="right">102,087,367</td><td>02/07/2026</td><td>6.3%</td></tr>
+        <tr><td>tịkcop 1 week</td><td class="right">30,105,411</td><td>25/06/2026</td><td>6.1%</td></tr>
+        <tr><td>tikcop 5 week <span style="color:#fb923c">(website API trả về 0₫ — bug)</span></td><td class="right green">401,917,738</td><td>13/10/2026</td><td>7.5%</td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Tổng 4 sổ (khớp mobile app)</b></td><td class="right"><b>1,038,087,569</b></td><td></td><td></td></tr>
       </tbody>
     </table>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.6">
-      Đối chiếu từng dòng mobile app (Tiền mặt, Tài khoản ngân hàng, Tài khoản đầu tư, Ví điện tử, Khác, Cho vay) với dữ liệu website: <b>khớp tuyệt đối</b> (sai số &lt;1đ) cho mọi mục — TRỪ "Tài khoản tiết kiệm" (mobile: 1,038,087,569 vs website: 638,175,310, lệch 399,912,259).<br><br>
-      <b>Nguyên nhân nghi vấn:</b> có 1 sổ tiết kiệm Tikcop cũ (xuất hiện trong lịch sử giao dịch với tên "tikcop 5 week", lãi suất 6.1%, NGỪNG phát sinh lãi từ 07/05/2026 — ngụ ý gốc ~400M) đã biến mất khỏi cả danh sách "Tài khoản" và "Sổ tiết kiệm" hiện tại trên website (đã kiểm tra API <code>/wallets/savings</code> và <code>/wallets/accumulations</code> — cả 2 đều KHÔNG có sổ này). Mobile app có thể đang dùng nguồn dữ liệu đầy đủ hơn hoặc cache cũ hơn website.<br><br>
-      <b>Khuyến nghị:</b> Coi <b>7,819,879,454 ₫ (~7.82 tỷ)</b> là Net Worth chuẩn. Tự kiểm tra mục "Tài khoản tiết kiệm" trong mobile app để xác định sổ ~400M đó là sổ nào — không tự suy ra được từ data website.
+      <b>Root cause xác nhận:</b> wallet "tikcop 5 week" CÓ trong response API <code>/wallets/savings</code> của website (active, đúng ngày đáo hạn, đúng lãi suất) nhưng field <code>currentAmount</code> bị trả về <b>0</b> — lỗi dữ liệu phía MISA website (bản beta), không phải lỗi script. Mobile app hiển thị đúng 401,917,738 ₫.<br><br>
+      <b>Tiền không hề mất hay đáo hạn sớm</b> — đây là chính sổ 401.9M đã xuất hiện trong báo cáo 26/05 cũ (lúc đó tôi đặt nhầm tên là "tikcop 1 week"). Sổ "tịkcop 1 week" (30.1M) là MỘT sổ khác, nhỏ hơn, tồn tại độc lập song song từ trước — không phải sổ lớn "co lại".<br><br>
+      <b>Net Worth chuẩn 7.82 tỷ ở KPI trên đã đúng và đầy đủ.</b> Không còn khoản nào chưa giải thích được.
     </div>
   </div>
 </div>

@@ -92,14 +92,27 @@ Bằng chứng: `currentAmount` của VCBS hôm nay = 277,169,620 ₫ — đúng
 
 → **Tiền 276.15M không hề chi tiêu — vẫn còn 100% trong VCBS**, chỉ đổi từ "ETF" sang "cash chờ".
 
-## ⚠️ Còn 1 điểm chưa rõ: tịkcop 1 week (giảm 371.8M)
+## ✅ ĐÃ GIẢI HOÀN TOÀN: "tịkcop 1 week" không hề giảm — đó là 2 sổ khác nhau
 
-Khác với VCBS, không tìm thấy cơ chế tương tự cho tịkcop 1 week — không có giao dịch nào ghi nhận khoản 371.8M chuyển đi đâu, và không có wallet khác nào tăng tương ứng. Có thể đây là một sổ tiết kiệm đã đáo hạn/đóng thật (kiểm tra lịch sử lãi suất thấy có một sổ tên "tikcop 5 week" ngừng phát sinh lãi từ 07/05 — có thể liên quan). Cần bạn tự kiểm tra app/sao kê để xác nhận khoản này.
+Phát hiện ban đầu ("tịkcop 1 week giảm từ 401.9M xuống 30.1M") là **sai do nhầm tên sổ**. Đối chiếu mobile app (màn "Quản lý sổ tiết kiệm"), thực tế có **4 sổ tiết kiệm** đang active, không phải chỉ 1:
 
-**Quan trọng**: Net Worth verified (7,345,661,716 ₫) đã tự động đúng — không bị ảnh hưởng bởi việc tôi giải thích được hay chưa từng khoản. Dùng số đó làm chuẩn.
+| Sổ | Số dư | Đáo hạn | Lãi suất |
+|----|------|---------|----------|
+| vcb 1 month | 503,977,053 | 09/07/2026 | 4.75% |
+| tikcop 1m | 102,087,367 | 02/07/2026 | 6.3% |
+| tịkcop 1 week | 30,105,411 | 25/06/2026 | 6.1% |
+| **tikcop 5 week** | **401,917,738** | 13/10/2026 | 7.5% |
+| **Tổng** | **1,038,087,569** | | |
+
+**"tikcop 5 week" (401.9M) chính là sổ trong báo cáo 26/05 cũ** — lúc đó tôi đặt nhầm tên thành "tikcop 1 week". Sổ "tịkcop 1 week" thật (30.1M) là một sổ NHỎ HƠN, KHÁC, tồn tại độc lập song song từ trước — không phải sổ lớn "co lại" còn 30.1M.
+
+**Root cause kỹ thuật**: API website `/wallets/savings` CÓ trả về wallet "tikcop 5 week" (active, đúng ngày đáo hạn, đúng lãi suất) nhưng field `currentAmount` bị lỗi = 0 — bug dữ liệu phía MISA website (bản beta), khiến tổng tiết kiệm tính qua website bị thiếu đúng 401.9M. Mobile app không bị lỗi này.
+
+**Net Worth chuẩn cuối cùng: 7,819,879,454 ₫ (~7.82 tỷ)** — đối chiếu mobile app "Tài chính hiện tại", khớp từng dòng. Đây là số đáng tin nhất, KHÔNG còn khoản nào chưa giải thích được.
 
 ## Alerts
 - ✅ **VCBS 276.15M đã xác nhận còn nguyên** — không phải mất tiền, chỉ đổi trạng thái trong cùng wallet
-- ⚠️ **tịkcop 1 week 371.8M chưa rõ đích đến** — tự kiểm tra app/sao kê để xác nhận
-- ✅ **Net Worth verified**: 7,345,661,716 ₫ — đọc trực tiếp từ API `/wallets/totaldashboard`, đáng tin tuyệt đối
-- ℹ️ Script `misa-money-report.js` đã được sửa để tự lấy số này mỗi lần chạy — không cần tái tạo qua công thức nữa
+- ✅ **tikcop 5 week 401.9M đã xác nhận còn nguyên** — website hiển thị sai do bug, mobile app đúng
+- ✅ **Net Worth chuẩn: 7,819,879,454 ₫ (~7.82 tỷ)** — đối chiếu mobile app, khớp từng dòng, không còn gì chưa giải thích
+- ℹ️ Website MISA (API `/wallets/totaldashboard` = 7,345,661,716) THIẾU ~400-475M do bug "tikcop 5 week" — không dùng số website cho đến khi MISA sửa
+- ℹ️ Script `misa-money-report.js` đã ghi chú rõ bug này trong code comment để các lần chạy sau biết cross-check với mobile app

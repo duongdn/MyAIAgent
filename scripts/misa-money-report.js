@@ -9,6 +9,20 @@
  *   - First run: opens headed Chrome → user completes Google OAuth → profile saved
  *   - Subsequent runs: headless with saved profile → already authenticated
  *   - Profile is gitignored (tmp/) so it stays per-machine
+ *
+ * KNOWN MISA WEBSITE BUG (confirmed 2026-06-23): the website (still in beta —
+ * see the banner on the dashboard) sometimes returns currentAmount: 0 for an
+ * otherwise-valid, active savings book via /wallets/savings, while the MOBILE
+ * APP shows the correct nonzero balance for the same book. Confirmed example:
+ * walletName "tikcop 5 week" (inActive: false, savingIsFinalize: false,
+ * matures 2026-10-13) returned currentAmount: 0 on web but 401,917,738 on
+ * mobile. This silently undercounts /wallets/saving/summary's totalAmount by
+ * the same amount, and therefore also /wallets/totaldashboard. There is no
+ * known client-side fix (it's a server-side data bug, not a request param
+ * issue) — if a Net Worth figure from this script looks suspiciously low,
+ * cross-check against the mobile app's "Tài chính hiện tại" screen (Tổng có
+ * − Tổng nợ) and/or "Quản lý sổ tiết kiệm" screen, which have been more
+ * reliable in practice.
  */
 
 const puppeteer = require('puppeteer');
