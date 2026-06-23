@@ -6,7 +6,7 @@ description: Server resource monitoring — check all managed servers and update
 
 | Util | When | Params |
 |------|------|--------|
-| `/util:read-memory` | First — before anything | — |
+| `/util:read-memory` | First — before anything | `server-monitor` |
 | `/util:trello` | After each server group | board `O83pAyqb`; card `Check server status`; complete item per group |
 | `/util:report` | Write combined output | `reports/{YYYY-MM-DD}/{HHMM}-server-monitor.md` |
 | timeline update | End of EVERY run (mandatory) | update `server_monitor.last_run` in `config/.monitoring-timelines.json` |

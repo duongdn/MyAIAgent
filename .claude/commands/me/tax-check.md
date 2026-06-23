@@ -6,7 +6,7 @@ description: Personal tax YTD check — payslip emails vs tax-summary sheet vs V
 
 | Util | When | Params |
 |------|------|--------|
-| `/util:read-memory` | First — before anything | — |
+| `/util:read-memory` | First — before anything | `tax-check` (no dedicated section yet — Global only) |
 | `/util:report` | Write output | `reports/{YYYY-MM-DD}/tax-check.md` |
 
 ---

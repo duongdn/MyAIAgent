@@ -6,7 +6,7 @@ description: Bailey project monitoring — CloudWatch alarms, events, and infras
 
 | Util | When | Params |
 |------|------|--------|
-| `/util:read-memory` | First — before anything | — |
+| `/util:read-memory` | First — before anything | `bailey-monitor` |
 | `/util:report` | Write output | `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md` |
 | `/util:tasklog-write` | Subtask 9: log monitoring task | sheet `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`; task `Weekly Monitor {Month} {Year}`; owner `DuongDN`; hours `1` |
 | Trello API | Subtask 10: complete checklist | card `6a221fe400d53ea9a87d45e5`; create checklist named DD/MM/YYYY; mark all 9 subtasks complete |

@@ -7,7 +7,7 @@ allowed-tools: Bash, Read, Grep, Glob, Write, Edit, AskUserQuestion, WebFetch
 
 | Util | When | Params |
 |------|------|--------|
-| `/util:read-memory` | First — before anything | — |
+| `/util:read-memory` | First — before anything | `monday-report` |
 | `/util:trello` | After each project submission (live mode only) | board `O83pAyqb`; card `Report project status`; complete item per project |
 
 ---

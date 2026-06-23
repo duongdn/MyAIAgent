@@ -6,7 +6,7 @@ description: Weekly monitoring report — team hours, project reports, JIRA cros
 
 | Util | When | Params |
 |------|------|--------|
-| `/util:read-memory` | First — before anything | — |
+| `/util:read-memory` | First — before anything | `weekly-report` |
 | `/util:matrix-send` | #2 James Diamond + Marcel report | room `!oofREYAXHsvPWEOJev:nustechnology.com` |
 
 ---

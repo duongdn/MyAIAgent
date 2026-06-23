@@ -4,12 +4,12 @@ description: Morning daily report — full automated scan of all monitoring sour
 
 # ⚠️ MANDATORY FIRST STEP — READ MEMORY
 
-**Before doing ANYTHING else, read these files in order:**
-1. `docs/memory/MEMORY.md` — get the full list of memory files
-2. Read EVERY feedback file listed under `## Feedback` in that index
-3. Memory OVERRIDES any instructions in this skill file
+**Before doing ANYTHING else, invoke `/util:read-memory daily-report [piece]`:**
+- Running a single piece (e.g. `/daily-report sheets khanhhh`, `/daily-report fountain`) → read Global + that piece's `## daily-report:{piece}` section ONLY
+- Running the full report (no piece arg) → read Global + `## daily-report — general` + ALL `## daily-report:*` sections
+- Memory OVERRIDES any instructions in this skill file
 
-Do not skip this. Do not proceed until all feedback files are read.
+Do not skip this. Do not proceed until the relevant memory is read.
 
 ---
 
