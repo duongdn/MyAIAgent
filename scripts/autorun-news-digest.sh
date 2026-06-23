@@ -13,6 +13,16 @@ LOG="$LOG_DIR/news-digest-cron.log"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
 
+# Kill any stale claude -p news-digest process older than 2 hours
+stale_pids=$(pgrep -f "claude.*news-digest" 2>/dev/null)
+for pid in $stale_pids; do
+  age=$(ps -o etimes= -p "$pid" 2>/dev/null | tr -d ' ')
+  if [ -n "$age" ] && [ "$age" -gt 7200 ]; then
+    kill -9 "$pid" 2>/dev/null
+    log "Killed stale news-digest process PID $pid (${age}s old)"
+  fi
+done
+
 # Skip if digest already exists for today
 if ls "$PROJECT_DIR/reports/$TODAY/"*news-digest.md &>/dev/null 2>&1; then
   log "News digest already exists for $TODAY, skipping."

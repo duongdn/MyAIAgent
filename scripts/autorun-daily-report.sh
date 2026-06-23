@@ -18,6 +18,16 @@ LOG="$LOG_DIR/daily-report-cron.log"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
 
+# Kill any stale claude -p daily-report process older than 2 hours
+stale_pids=$(pgrep -f "claude.*daily-report.*cron" 2>/dev/null)
+for pid in $stale_pids; do
+  age=$(ps -o etimes= -p "$pid" 2>/dev/null | tr -d ' ')
+  if [ -n "$age" ] && [ "$age" -gt 7200 ]; then
+    kill -9 "$pid" 2>/dev/null
+    log "Killed stale daily-report process PID $pid (${age}s old)"
+  fi
+done
+
 # Skip only when report is complete (has substantial content)
 if [ -f "$REPORT_FILE" ] && [ $(wc -l < "$REPORT_FILE") -gt 50 ]; then
   log "Report already complete ($TODAY), skipping."

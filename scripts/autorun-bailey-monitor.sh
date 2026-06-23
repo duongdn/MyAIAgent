@@ -13,6 +13,16 @@ LOG="$LOG_DIR/bailey-monitor-cron.log"
 
 log() { echo "[$(date '+%H:%M:%S')] $*" | tee -a "$LOG"; }
 
+# Kill any stale claude -p bailey-monitor process older than 2 hours
+stale_pids=$(pgrep -f "claude.*bailey-monitor" 2>/dev/null)
+for pid in $stale_pids; do
+  age=$(ps -o etimes= -p "$pid" 2>/dev/null | tr -d ' ')
+  if [ -n "$age" ] && [ "$age" -gt 7200 ]; then
+    kill -9 "$pid" 2>/dev/null
+    log "Killed stale bailey-monitor process PID $pid (${age}s old)"
+  fi
+done
+
 # Skip if monitor report already exists for today
 if ls "$PROJECT_DIR/reports/$TODAY/"*bailey-monitor.md &>/dev/null 2>&1; then
   log "Bailey monitor already exists for $TODAY, skipping."
