@@ -352,3 +352,14 @@ Trello: Neural Contract ✓ complete
 | Workstream project list | ⚠️ memory gap found | `reference_workstream.md` only listed 5 projects (maddy/rebecca/baamboozle/colin-etz/blair-brown). Live API shows 5 more: Portfolio-JamesDiamond, Family App (Charles Chang), **Generator (Elliott)**, Fountain Greetings (Kunal), Others (NUS). Memory needs updating — see below. |
 
 **Cleared:** KhanhHH shortfall alert (false positive)
+
+## Recheck — 10:1x (+07:00) — Trello completeness audit
+
+User caught: Bailey and MPFC checklist items were still **incomplete** on the "Check progress" card despite their underlying gate sources (GGS Slack + TuanNT sheets for Bailey; MPFC Slack for MPFC) already being checked clean earlier today. The Slack piece scanned both workspaces but never ticked these two specific checklist items.
+
+| Item | Gate sources (already checked clean) | Fixed |
+|------|-----------------------------------------|-------|
+| Bailey | GGS Slack (Amy deployed fix, no alert) + TuanNT sheets (8h, gates Bailey) | ✓ marked complete |
+| MPFC | MPFC Slack (0 msgs, quiet=OK per rule) | ✓ marked complete |
+
+Full audit of "Check progress" card after fix: **all 19 checklist items across 5 checklists now complete.**
