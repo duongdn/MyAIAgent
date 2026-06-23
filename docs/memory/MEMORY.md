@@ -23,8 +23,10 @@
 - [feedback_recheck_must_fill_missing_data.md](feedback_recheck_must_fill_missing_data.md) — Recheck mode must re-run sources to fill BLOCKED/expired data, not just fix Trello
 - [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — News links: use JSON `link`; run fix-links.py after save
 - [feedback_check_workstream_before_flagging_shortfall.md](feedback_check_workstream_before_flagging_shortfall.md) — Live-query FULL Workstream project list before any 0h/shortfall line, list itself goes stale
+- [feedback_misa_money_report_net_worth_bugs.md](feedback_misa_money_report_net_worth_bugs.md) — MISA Net Worth: ALWAYS use `trueTotalBalance` API, never reconstruct manually; FX bug undercounts USD income — see [[reference_misa_money_report_skill_file]]
 
 ## User / Project / Reference
+- [reference_misa_money_report_skill_file.md](reference_misa_money_report_skill_file.md) — MISA money-report rules live in `.claude/commands/me/money-report.md`, not memory
 - [user_role.md](user_role.md) — PM at NUS Technology, 10+ client projects, daily monitoring
 - [feedback_investment_analysis_framework.md](feedback_investment_analysis_framework.md) — Growth quality + 3-question conclusion framework
 - [reference_matrix_rooms.md](reference_matrix_rooms.md) — Dev Matrix room IDs for task log reminders
