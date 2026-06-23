@@ -6,13 +6,16 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-23T08:57:00+07:00",
-    "output_file": "reports/2026-06-22/daily-report.md",
+    "last_run": "2026-06-24T06:08:00+07:00",
+    "output_file": "reports/2026-06-24/daily-report.md",
     "last_status": "complete_with_recheck_pending",
     "recheck_pending": [
-      "Aysar (Baamboozle MPDM not yet posted, recheck after 10:30)",
-      "Fountain (Matrix plan not yet posted, recheck after 09:30)",
-      "Elliott (KhanhHH shortfall)"
+      "Aysar (Baamboozle MPDM not yet posted, recheck after 17:00+07)",
+      "Fountain Part 1 (Matrix token expired, plan unavailable)",
+      "Matrix scan (token expired, all rooms pending)",
+      "Kai (Xtreme no Jun 23 report)",
+      "Rory (Swift Studio 0 msgs)",
+      "Franc (RDC no dmetiner update)"
     ]
   },
   "refresh": {
@@ -153,8 +156,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-23T08:57:00+07:00",
-    "output_file": "reports/2026-06-22/daily-report.md"
+    "last_run": "2026-06-24T06:08:00+07:00",
+    "output_file": "reports/2026-06-24/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-06-22T19:17:43Z",
