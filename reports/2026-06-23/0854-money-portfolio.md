@@ -1,14 +1,15 @@
 # Portfolio Report — 2026-06-23 08:54
 
-> **CORRECTED 09:40** — Investment wallets (VCBS/VCBF/FPTS/Finhay) use MISA's "cho vay/thu nợ" (loan) tracking mechanism; the `currentAmount` field does NOT auto-update for them (shows stale/near-zero). Fixed by computing net position = Σcho_vay − Σthu_nợ per wallet from full transaction history. Verified this method exactly reproduces the 26/05 report's numbers.
+> **CORRECTED 09:50 — Net Worth is now VERIFIED, not reconstructed.** Two earlier fixes (account-balance, then loan-tracking cost-basis) both undercounted because investment wallets (VCBS/VCBF/FPTS/Finhay) accrue "Tiền lãi" (interest/dividend) entries my formula missed. Final fix: read MISA's own "Tổng số dư" widget directly from the dashboard (click the hide-balance icon to unmask) — this is the app's authoritative total, not a manual sum.
+>
+> **Verified Net Worth: 7,345,661,716 ₫** (not 5.93B from the first report, not 7.14B from the second). The category breakdown below is still a best-effort manual reconstruction and may not sum exactly to the verified total — trust the headline number, not the per-category math.
 
 ## Summary
-| | Amount (₫) | % Gross | % Net |
-|-|-----------|---------|-------|
-| Gross Assets | 7,181,989,071 | 100% | — |
-| Liabilities | −39,828,702 | −0.6% | — |
-| **Net Worth** | **7,142,160,369** | — | **100%** |
-| USD/VND rate (Paypal) | ~26,441 | — | — |
+| | Amount (₫) |
+|-|-----------|
+| **Net Worth (verified, từ app)** | **7,345,661,716** |
+| Liabilities | −39,828,702 |
+| USD/VND rate (Paypal) | ~26,441 |
 
 ## By Account (sorted by balance desc)
 
@@ -39,13 +40,15 @@
 
 ## By Category
 
+> ⚠️ Bảng dưới dùng số % tính theo tổng tái tạo (7,181,989,071), KHÔNG phải tổng verified (7,345,661,716) — sai lệch ~164M chưa quy được vào category nào cụ thể (nhiều khả năng là lãi/cổ tức tích lũy trong VCBS/VCBF/FPTS/Finhay). Coi % này là gần đúng.
+
 | Category | Total (₫) | % Gross | % Net |
 |----------|----------|---------|-------|
-| 🏠 Real Estate | 3,520,000,000 | 49.0% | 49.3% |
-| 📈 Investment (cost basis) | 2,090,666,644 | 29.1% | 29.3% |
-| 🥇 Gold | 743,000,000 | 10.3% | 10.4% |
-| 🏦 Savings | 638,175,310 | 8.9% | 8.9% |
-| 💵 Liquid | 190,147,117 | 2.6% | 2.7% |
+| 🏠 Real Estate | 3,520,000,000 | 49.0% | 47.9% |
+| 📈 Investment (cost basis, thiếu lãi) | 2,090,666,644 | 29.1% | 28.5% |
+| 🥇 Gold | 743,000,000 | 10.3% | 10.1% |
+| 🏦 Savings | 638,175,310 | 8.9% | 8.7% |
+| 💵 Liquid | 190,147,117 | 2.6% | 2.6% |
 | 💳 Debt | −39,828,702 | −0.6% | −0.6% |
 
 ### Investment Detail (cost basis, từ loan-tracking)

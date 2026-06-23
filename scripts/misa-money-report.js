@@ -41,6 +41,7 @@ async function launchBrowser(headless) {
       : '/usr/bin/google-chrome',
     args: CHROME_ARGS,
     defaultViewport: { width: 1280, height: 800 },
+    protocolTimeout: 120000,
   });
 }
 
@@ -223,65 +224,99 @@ async function captureAuthToken(page, timeoutMs = 15000) {
   });
 }
 
-/** Fetch all data via the app's internal API using captured JWT */
+/**
+ * Fetch all data via the app's internal API using captured JWT.
+ *
+ * IMPORTANT: full transaction-history pagination is done as separate
+ * page.evaluate() calls (one per page) from Node, NOT as a loop inside a
+ * single page.evaluate(). A single evaluate() looping over many pages can
+ * exceed Puppeteer's CDP protocolTimeout and throw "Runtime.callFunctionOn
+ * timed out", silently killing the whole fetch.
+ */
 async function fetchViaApi(page, authToken) {
   const BASE_API = 'https://moneykeeperapp.misa.vn/g1/api/business/api/v1';
 
-  return page.evaluate(async (baseApi, token) => {
-    const post = async (path, body = {}) => {
-      const res = await fetch(baseApi + path, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token,
-        },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) return null;
-      return res.json();
-    };
+  const postOnPage = (path, body) => page.evaluate(async (baseApi, token, path, body) => {
+    const res = await fetch(baseApi + path, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', 'Authorization': token },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) return null;
+    return res.json();
+  }, BASE_API, authToken, path, body);
 
-    const listBody = { searchText: '', walletType: null, inActive: null, excludeReport: null, skip: 0, take: 200 };
+  const listBody = { searchText: '', walletType: null, inActive: null, excludeReport: null, skip: 0, take: 200 };
 
-    // All regular accounts
-    const accounts = await post('/wallets/accounts', listBody);
-    const accountSummary = await post('/wallets/account/summary', {});
+  // All regular accounts
+  const accounts = await postOnPage('/wallets/accounts', listBody);
+  const accountSummary = await postOnPage('/wallets/account/summary', {});
 
-    // All savings books
-    const savings = await post('/wallets/savings', listBody);
-    const savingsSummary = await post('/wallets/saving/summary', {});
+  // All savings books
+  const savings = await postOnPage('/wallets/savings', listBody);
+  const savingsSummary = await postOnPage('/wallets/saving/summary', {});
 
-    // Monthly summary (current month)
-    const now = new Date();
-    const fromDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
-    const toDate = now.toISOString().slice(0, 10);
-    const monthlySummary = await post('/records/summary', { fromDate, toDate });
+  // Monthly summary (current month)
+  const now = new Date();
+  const fromDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+  const toDate = now.toISOString().slice(0, 10);
+  const monthlySummary = await postOnPage('/records/summary', { fromDate, toDate });
 
-    // All investment transactions (cho vay / thu nợ tracking) — full history via pagination
-    const userId = 'd451be1d-e933-4208-a391-e1240177ff1c';
-    const txnBase = { walletIds: '', excludeReport: false, calculateLoans: true, searchText: '', userId };
-    const allTxns = [];
-    let skip = 0;
-    const PAGE = 200;
-    while (true) {
-      const batch = await post('/transactions/day', { ...txnBase, startDate: '2020-01-01T00:00:00', endDate: toDate + 'T23:59:59', skip, take: PAGE });
-      if (!batch || batch.length === 0) break;
-      allTxns.push(...batch);
-      if (batch.length < PAGE) break;
-      skip += PAGE;
-    }
-    const transactions = allTxns;
+  // All investment transactions (cho vay / thu nợ / tiền lãi tracking) — full history,
+  // paginated one page per page.evaluate() call to avoid CDP protocolTimeout.
+  // NOTE: startDate before 2024 causes a 500 error from this endpoint (range too wide),
+  // which would otherwise silently abort the pagination loop. Keep startDate >= 2024-01-01.
+  const userId = 'd451be1d-e933-4208-a391-e1240177ff1c';
+  const txnBase = { walletIds: '', excludeReport: false, calculateLoans: true, searchText: '', userId };
+  const allTxns = [];
+  let skip = 0;
+  const PAGE = 200;
+  for (let i = 0; i < 50; i++) { // safety cap: 50 pages = 10,000 txns
+    const batch = await postOnPage('/transactions/day', { ...txnBase, startDate: '2024-01-01T00:00:00', endDate: toDate + 'T23:59:59', skip, take: PAGE });
+    if (!batch || batch.length === 0) break;
+    allTxns.push(...batch);
+    if (batch.length < PAGE) break;
+    skip += PAGE;
+  }
+  const transactions = allTxns;
 
-    // Recent transactions (last 30 days)
-    const d30 = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
-    const recentTransactions = await post('/transactions/day', { ...txnBase, startDate: d30 + 'T00:00:00', endDate: toDate + 'T23:59:59', skip: 0, take: 100 });
+  // Recent transactions (last 30 days)
+  const d30 = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
+  const recentTransactions = await postOnPage('/transactions/day', { ...txnBase, startDate: d30 + 'T00:00:00', endDate: toDate + 'T23:59:59', skip: 0, take: 100 });
 
-    // Monthly income/expense situation (all time)
-    const situation = await post('/transactions/situation', { walletIds: '', isCalculateLoan: true });
+  // Monthly income/expense situation (all time)
+  const situation = await postOnPage('/transactions/situation', { walletIds: '', isCalculateLoan: true });
 
-    return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, situation };
-  }, BASE_API, authToken);
+  return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, situation };
+}
+
+/**
+ * Read the authoritative "Tổng số dư" (true net worth, MISA-computed) directly
+ * from the dashboard widget. This value already accounts for loan-tracked
+ * investments, accrued interest, etc. — it is NOT reproducible by summing
+ * /wallets/accounts + /wallets/savings balances (those fields are stale for
+ * loan-tracked investment wallets like ETF/Fund accounts). Always prefer this
+ * over manual reconstruction.
+ */
+async function readTrueTotalBalance(page) {
+  await page.goto(DASHBOARD_URL, { waitUntil: 'networkidle2', timeout: 40000 });
+  await wait(3500);
+
+  await page.evaluate(() => {
+    const icon = document.querySelector('.icon-db-password-hidden-white');
+    if (icon) icon.click();
+  });
+  await wait(1500);
+
+  return page.evaluate(() => {
+    const labelEl = [...document.querySelectorAll('.title')].find(el => el.innerText.trim() === 'Tổng số dư');
+    const moneyEl = labelEl ? labelEl.parentElement.querySelector('.money') : null;
+    if (!moneyEl) return null;
+    const text = moneyEl.innerText.trim(); // e.g. "7.345.661.716 ₫"
+    const amount = parseInt(text.replace(/[^\d]/g, ''), 10);
+    return { text, amount };
+  });
 }
 
 /** Extract data from dashboard + API */
@@ -309,7 +344,11 @@ async function extractData(page) {
   // 3. Fetch all data via internal API
   const apiData = await fetchViaApi(page, capturedToken);
 
-  return { dashboard, apiData };
+  // 4. Read the authoritative total balance directly from the dashboard widget
+  //    (navigates back to dashboard; must run after API calls since it reloads the page)
+  const trueTotalBalance = await readTrueTotalBalance(page);
+
+  return { dashboard, apiData, trueTotalBalance };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────

@@ -46,30 +46,30 @@
 
 <div class="header">
   <h1>💰 Money Dashboard</h1>
-  <div class="date">Cập nhật: 23/06/2026 09:40 · MISA MoneyKeeper · <span style="color:#4ade80">đã sửa lỗi tính investment (xem note cuối trang)</span></div>
+  <div class="date">Cập nhật: 23/06/2026 09:50 · <span style="color:#4ade80">Net Worth verified trực tiếp từ app (icon ẩn/hiện số dư) — không suy luận qua API</span></div>
 </div>
 
 <!-- KPI Row -->
 <div class="kpi-row">
   <div class="kpi">
-    <div class="label">Net Worth</div>
-    <div class="value">7.14 tỷ</div>
-    <div class="delta down">▼ 810M vs 26/05 (rút ETF+TK chi tiêu)</div>
-  </div>
-  <div class="kpi">
-    <div class="label">Gross Assets</div>
-    <div class="value">7.18 tỷ</div>
-    <div class="delta down">▼ 795M vs 26/05</div>
+    <div class="label">Net Worth (verified)</div>
+    <div class="value">7.346 tỷ</div>
+    <div class="delta neutral">Đọc trực tiếp từ "Tổng số dư" trong app</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
     <div class="value" style="color:#ef4444">39.8M</div>
-    <div class="delta down">▲ 14.8M vs 26/05 (VCB Visa)</div>
+    <div class="delta down">▲ 14.8M vs báo cáo trước (VCB Visa)</div>
   </div>
   <div class="kpi">
     <div class="label">Liquid</div>
     <div class="value">190.1M</div>
-    <div class="delta up">▲ 16.2M vs 26/05</div>
+    <div class="delta neutral">vcb + Paypal + Ví + Momo</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Tiết kiệm</div>
+    <div class="value">638.2M</div>
+    <div class="delta neutral">4 sổ tiết kiệm</div>
   </div>
   <div class="kpi">
     <div class="label">Tháng 6 Net</div>
@@ -78,10 +78,21 @@
   </div>
 </div>
 
+<div class="grid full">
+  <div class="card" style="border-color:#422006;background:#1a1407">
+    <h3 style="color:#fb923c">⚠️ Lưu ý độ chính xác</h3>
+    <div style="font-size:13px;color:#cbd5e1;line-height:1.6">
+      <b>Net Worth hôm nay (7.346 tỷ)</b> là số <b>verified</b> — đọc trực tiếp từ widget "Tổng số dư" trên app MISA (bấm icon ẩn/hiện), không phải tự tính. Đây là số đúng theo app.<br><br>
+      <b>Các mốc lịch sử (21/05 → 26/05)</b> dưới đây <b>chưa được verify</b> theo cách này — đó là số tôi tự tái tạo từ account balance + lịch sử giao dịch "cho vay/thu nợ", và đã 2 lần tính sai (thiếu lãi/cổ tức phát sinh trong các quỹ). Có thể các số lịch sử này cũng lệch 100-500M so với số thật app từng hiển thị. <b>Không nên tin tuyệt đối vào delta giữa các mốc cũ và hôm nay.</b><br><br>
+      Từ lần chạy sau, script đã được sửa để tự đọc "Tổng số dư" thật mỗi lần — các mốc tương lai sẽ đều là verified.
+    </div>
+  </div>
+</div>
+
 <div class="grid">
   <!-- Net Worth Trend -->
   <div class="card">
-    <h3>📈 Net Worth Trend</h3>
+    <h3>📈 Net Worth Trend <span style="color:#fb923c;font-size:10px;text-transform:none">(21/05–26/05 chưa verify, 23/06 verified)</span></h3>
     <div class="chart-wrap h280">
       <canvas id="chartNetWorth"></canvas>
     </div>
@@ -125,22 +136,22 @@
 
   <!-- Detail table -->
   <div class="card">
-    <h3>📋 Biến động chi tiết (vs 26/05)</h3>
+    <h3>📋 Account-level (việc thật sự thay đổi, theo dữ liệu giao dịch)</h3>
     <table>
       <thead>
-        <tr><th>Hạng mục</th><th class="right">26/05 (₫)</th><th class="right">23/06 (₫)</th><th class="right">Δ</th></tr>
+        <tr><th>Hạng mục</th><th class="right">Δ vs báo cáo trước</th><th>Nguồn</th></tr>
       </thead>
       <tbody>
-        <tr><td>🏠 BĐS</td><td class="right">3,520M</td><td class="right">3,520M</td><td class="right" style="color:#64748b">—</td></tr>
-        <tr><td>🥇 Vàng</td><td class="right">807.5M</td><td class="right">743M</td><td class="right red">▼ 64.5M</td></tr>
-        <tr><td>📈 Đầu tư (cost basis)</td><td class="right">2,367M</td><td class="right">2,091M</td><td class="right red">▼ 276M ¹</td></tr>
-        <tr><td>🏦 Tiết kiệm</td><td class="right">1,109M</td><td class="right">638M</td><td class="right red">▼ 471M ²</td></tr>
-        <tr><td>💵 Liquid</td><td class="right">174M</td><td class="right">190M</td><td class="right green">▲ 16M</td></tr>
-        <tr><td>💳 Nợ</td><td class="right">−25M</td><td class="right">−39.8M</td><td class="right red">▼ 14.8M</td></tr>
-        <tr style="border-top:1px solid #334155"><td><b>Net Worth</b></td><td class="right"><b>7,952M</b></td><td class="right"><b>7,142M</b></td><td class="right red"><b>▼ 810M</b></td></tr>
+        <tr><td>🏠 BĐS</td><td class="right" style="color:#64748b">Không đổi</td><td>Account balance, chắc chắn</td></tr>
+        <tr><td>🥇 Vàng</td><td class="right red">▼ 64.5M</td><td>Account balance, chắc chắn</td></tr>
+        <tr><td>📈 VCBS</td><td class="right red">▼ 276.15M</td><td>Giao dịch "Thu nợ" 22/06, chắc chắn</td></tr>
+        <tr><td>🏦 tịkcop 1 week</td><td class="right red">▼ 371.8M</td><td>Account balance 401.9M→30.1M, chắc chắn</td></tr>
+        <tr><td>💵 Liquid (vcb+Paypal+Ví)</td><td class="right green">▲ 16M</td><td>Account balance, chắc chắn</td></tr>
+        <tr><td>💳 VCB Visa</td><td class="right red">▼ 14.8M</td><td>Account balance, chắc chắn</td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Net Worth tổng</b></td><td class="right" style="color:#94a3b8"><b>Xem KPI "verified" trên</b></td><td>App "Tổng số dư" — không cộng dồn các dòng trên</td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px;color:#475569;margin-top:10px">¹ VCBS thu nợ (rút) 276.15M ngày 22/06 — VCBF/FPTS/Finhay không đổi · ² tịkcop 1 week rút 371.8M (401.9M→30.1M)</div>
+    <div style="font-size:11px;color:#475569;margin-top:10px">Các thay đổi từng dòng trên là sự kiện giao dịch thật (rút ETF, rút tiết kiệm). Nhưng Net Worth tổng KHÔNG bằng tổng các Δ này cộng lại — vì còn lãi/cổ tức tích lũy trong VCBS/VCBF/FPTS/Finhay mà tôi chưa tính ra số chính xác. Dùng số "Net Worth (verified)" ở KPI phía trên, không tự cộng bảng này.</div>
   </div>
 </div>
 
@@ -194,12 +205,15 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [7.971, 7.951, 7.952, 7.142],
+      data: [7.971, 7.951, 7.952, 7.346],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
-      pointBackgroundColor: ['#60a5fa','#60a5fa','#60a5fa','#f59e0b'],
-      pointRadius: 5,
+      pointBackgroundColor: ['#94a3b8','#94a3b8','#94a3b8','#4ade80'],
+      pointRadius: [4,4,4,6],
+      segment: {
+        borderDash: ctx => ctx.p1DataIndex === 3 ? [] : [4, 3],
+      },
       fill: true,
       tension: 0.3,
     }]
@@ -212,7 +226,7 @@ new Chart(document.getElementById('chartNetWorth'), {
         callbacks: {
           label: (ctx) => ` ${ctx.parsed.y.toFixed(3)} tỷ ₫`,
           afterLabel: (ctx) => {
-            const notes = ['Ổn định', 'Ổn định', 'Ổn định', '▼ Rút ETF+TK để chi tiêu'];
+            const notes = ['⚠️ Chưa verify', '⚠️ Chưa verify', '⚠️ Chưa verify', '✅ Verified (app thật)'];
             return notes[ctx.dataIndex];
           }
         }
@@ -332,8 +346,11 @@ new Chart(document.getElementById('chartDebt'), {
 </script>
 
 <div class="note-row">
-  <b style="color:#94a3b8">Đã sửa lỗi (09:40):</b> Báo cáo đầu tiên tính sai Investment bằng account-balance trực tiếp (VCBF/Finhay hiện 0₫ trong MISA vì 2 quỹ này KHÔNG tự cập nhật số dư — chỉ track qua giao dịch "cho vay/thu nợ"). Đã fetch lại 2,171 giao dịch lịch sử và tính net position = Σcho_vay − Σthu_nợ cho từng wallet, verify khớp 100% với báo cáo 26/05 cũ.
-  Kết quả đúng: Net Worth ổn định ~7.95–7.97 tỷ từ 21/05–26/05, sau đó giảm 810M (không phải 2.02 tỷ) xuống 7.14 tỷ vào 23/06 — do rút VCBS 276M (22/06) + tịkcop 1 week 371.8M dùng cho chi tiêu/trả nợ tháng 6 (Trả nợ 100M ngày 02/06 v.v.). Đây là chi tiêu thật, không phải mất tiền hay lỗ đầu tư.
+  <b style="color:#94a3b8">Lịch sử sửa lỗi (09:50):</b><br>
+  1) Báo cáo đầu (08:54) tính Investment bằng account-balance trực tiếp → VCBF/Finhay hiện 0₫ (sai, vì 2 quỹ này không tự cập nhật field đó) → Net Worth báo sai 5.93 tỷ.<br>
+  2) Sửa lần 1 (09:40): tính lại bằng Σcho_vay − Σthu_nợ từ 2,171 giao dịch lịch sử → ra 7.14 tỷ — khớp cost-basis với báo cáo 26/05 cũ nhưng vẫn THIẾU lãi/cổ tức ("Tiền lãi") phát sinh trong các quỹ.<br>
+  3) Sửa lần 2 (09:50, theo phản hồi user "app vẫn gần 8 tỷ"): tìm ra cách đọc trực tiếp widget "Tổng số dư" trên app (bấm icon ẩn/hiện) → ra số CHUẨN <b>7,345,661,716 ₫</b>, khớp với app. Đã sửa <code>scripts/misa-money-report.js</code> để tự động đọc số này mỗi lần chạy — không còn tái tạo qua công thức nữa.<br>
+  Các mốc lịch sử (21/05-26/05) vẫn là số tái tạo, CHƯA verify — không nên tin tuyệt đối delta giữa các mốc đó và hôm nay.
 </div>
 
 </body>
