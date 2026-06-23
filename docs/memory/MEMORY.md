@@ -19,6 +19,8 @@
 - [feedback_workstream_config_not_gitignored.md](feedback_workstream_config_not_gitignored.md) — New `config/.*-config.json` must be gitignored
 - [feedback_sheets_scan_script_reuse_wrong_day.md](feedback_sheets_scan_script_reuse_wrong_day.md) — Verify scan script date matches today before trusting output
 - [feedback_mpfc_oauth2_real_unresolved_bug.md](feedback_mpfc_oauth2_real_unresolved_bug.md) — MPFC OAuth2 invalid_grant is REAL unresolved, not noise
+- [reference_email_accounts_all9.md](reference_email_accounts_all9.md) — 9 email accounts total (6 Zoho+2 Gmail IMAP+1 Gmail API), not 6 — full scans miss 3 if hardcoded
+- [feedback_recheck_must_fill_missing_data.md](feedback_recheck_must_fill_missing_data.md) — Recheck mode must re-run sources to fill BLOCKED/expired data, not just fix Trello
 - [feedback_news_digest_use_actual_links.md](feedback_news_digest_use_actual_links.md) — News links: use JSON `link`; run fix-links.py after save
 - [feedback_check_workstream_before_flagging_shortfall.md](feedback_check_workstream_before_flagging_shortfall.md) — Live-query FULL Workstream project list before any 0h/shortfall line, list itself goes stale
 
@@ -107,11 +109,11 @@
 - [feedback_marginal_daily_shortfall_check_weekly.md](feedback_marginal_daily_shortfall_check_weekly.md) — Marginal shortfall (<1h): check weekly total first
 - [feedback_sheets_empty_col_a_bug.md](feedback_sheets_empty_col_a_bug.md) — extractDailyHoursByOwner must count blank-colA rows w/ col G owner
 - [feedback_longvv_consolidated.md](feedback_longvv_consolidated.md) — LongVV 16h/WEEK target (0h/day normal); reminders → direct Matrix room only
+- [feedback_maddy_kai_longvv_identity_and_quality_escalation.md](feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — UNRESOLVED: Kai/LongVV may be 40h not 16h (ask user); also LIFM2-439 client trust incident
 - [feedback_lenh_consolidated.md](feedback_lenh_consolidated.md) — LeNH: not Aysar owner, per-sheet 0h ≠ alert, any combined shortfall=alert, Rory/Franc gate on Slack only
 - [feedback_tuannt_consolidated.md](feedback_tuannt_consolidated.md) — TuanNT combined 0h gates John Yi+Rebecca+Bailey; scan ALL 11 sheets
 - [feedback_khanhhh_aysar_second_project.md](feedback_khanhhh_aysar_second_project.md) — Aysar bills via LeNH tracker, exhaust all sources first
 - [feedback_low_activity_devs_not_alert.md](feedback_low_activity_devs_not_alert.md) — Marcel/Franc/Kai/Bailey DEV3/Andrew Taraba/GGS Nick: low activity normal
-- [feedback_maddy_kai_longvv_identity_and_quality_escalation.md](feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — Kai=LongVV internal_name (40h?, conflicts w/ 16h memory, unconfirmed); real Jun19 client escalation on LIFM2-439 (+79% over est)
 
 ## Upwork & Time Tracking
 - [feedback_upwork_in_daily_report.md](feedback_upwork_in_daily_report.md) — Must be included in daily report
@@ -134,8 +136,6 @@
 - [feedback_elena_consolidated.md](feedback_elena_consolidated.md) — Elena: auto deploy mergeable PRs; check pending-actions.json deployed:false FIRST
 - [feedback_aysar_consolidated.md](feedback_aysar_consolidated.md) — Aysar gate=Slack MPDM C07SQ4HAUHZ (not Matrix), posts ~17:00-17:45+07, +GitHub issues
 - [feedback_matrix_report_format.md](feedback_matrix_report_format.md) — James Diamond + Marcel weekly Matrix format
-- [feedback_no_cleanup_without_confirmation.md](feedback_no_cleanup_without_confirmation.md) — NEVER server cleanup w/o user confirmation
-- [feedback_no_vacuum_full_production.md](feedback_no_vacuum_full_production.md) — NEVER VACUUM FULL on production, use pg_repack
-- [feedback_storage_explain_and_alert.md](feedback_storage_explain_and_alert.md) — Storage >=75%: investigate, recommend cleanup
+- [feedback_server_safety_consolidated.md](feedback_server_safety_consolidated.md) — Never cleanup/VACUUM FULL w/o confirmation; storage alerts need WHY breakdown
 - [feedback_matrix_daily_summary.md](feedback_matrix_daily_summary.md) — Matrix scan = action table + key updates, never raw dump
 - [feedback_ripgrep_execute_permission.md](feedback_ripgrep_execute_permission.md) — After npm update: chmod +x bundled rg binary
