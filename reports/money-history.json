@@ -1,5 +1,5 @@
 {
-  "_schema_note": "net_worth values marked method='dashboard_verified' are read directly from MISA's 'Tổng số dư' widget (ground truth). method='reconstructed' values are manually summed from account/transaction APIs and may be off by 100-500M due to undiscovered MISA-internal adjustments (accrued interest, NAV timing, etc.) — do NOT treat reconstructed deltas as precise.",
+  "_schema_note": "net_worth values marked method='mobile_app_verified' are read from MISA's mobile app 'Tài chính hiện tại' screen (Tổng có − Tổng nợ) — currently the MOST complete source. method='dashboard_verified' is the website's /wallets/totaldashboard API, which is MISSING ~400M in savings (a Tikcop book named 'tikcop 5 week' that stopped accruing interest 2026-05-07 and vanished from both /wallets/savings and /wallets/accumulations on the website, but is apparently still counted by the mobile app) — do not use website-verified totals without adding back this gap. method='reconstructed' values are manually summed from account/transaction APIs and may be off by 100-500M due to the same kind of undiscovered gaps — do NOT treat reconstructed deltas as precise.",
   "snapshots": [
     {
       "date": "2026-05-21",
@@ -52,12 +52,20 @@
     {
       "date": "2026-06-23",
       "label": "23/06",
-      "net_worth": 7345661716,
-      "gross_assets": null,
-      "liabilities": null,
-      "categories": null,
-      "method": "dashboard_verified",
-      "note": "VERIFIED — read directly from MISA dashboard 'Tổng số dư' widget (clicked hide-balance toggle to unmask). This is the authoritative value going forward. Category breakdown not available at this precision (manual reconstruction attempts undercounted by 113-200M due to missed 'Tiền lãi' interest entries on VCBS/VCBF/FPTS/Finhay) — do not trust the categories field for this date."
+      "net_worth": 7819879454,
+      "gross_assets": 7860304454,
+      "liabilities": 40425000,
+      "categories": {
+        "cash": 400000,
+        "bank": 16151891,
+        "investment_account": 2640406825,
+        "savings_account": 1038087569,
+        "ewallet": 174591524,
+        "other_real_estate_nha": 2500000000,
+        "cho_vay_cost_basis": 1490666644
+      },
+      "method": "mobile_app_verified",
+      "note": "VERIFIED against mobile app 'Tài chính hiện tại' screen (screenshot 2026-06-23 10:19). Every line item cross-checked against website API data and matched exactly EXCEPT savings_account (mobile: 1,038,087,569 vs website /wallets/savings: 638,175,310, gap 399,912,259 — see _schema_note). Website's /wallets/totaldashboard (7,345,661,716) and manual reconstruction (7,420,567,195) both inherit this same ~400-515M gap and should NOT be used until the missing Tikcop book is found."
     }
   ]
 }

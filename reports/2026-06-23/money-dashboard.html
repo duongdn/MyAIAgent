@@ -52,9 +52,9 @@
 <!-- KPI Row -->
 <div class="kpi-row">
   <div class="kpi">
-    <div class="label">Net Worth (verified)</div>
-    <div class="value">7.346 tỷ</div>
-    <div class="delta neutral">Đọc trực tiếp từ "Tổng số dư" trong app</div>
+    <div class="label">Net Worth (đầy đủ nhất — mobile app)</div>
+    <div class="value">7.820 tỷ</div>
+    <div class="delta neutral">Tổng có 7,860.3M − Tổng nợ 40.4M</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -80,11 +80,19 @@
 
 <div class="grid full">
   <div class="card" style="border-color:#422006;background:#1a1407">
-    <h3 style="color:#fb923c">⚠️ Lưu ý độ chính xác</h3>
+    <h3 style="color:#fb923c">⚠️ Website MISA THIẾU ~400M so với Mobile app — dùng số Mobile</h3>
+    <table style="margin-bottom:12px">
+      <thead><tr><th>Nguồn</th><th class="right">Net Worth</th><th>Đánh giá</th></tr></thead>
+      <tbody>
+        <tr><td>Website "Tổng số dư" (API /wallets/totaldashboard)</td><td class="right">7,345,661,716</td><td class="red">Thiếu ~400M</td></tr>
+        <tr><td>Tự tính tay (account balance + cost-basis ETF/Fund)</td><td class="right">7,420,567,195</td><td class="red">Cũng thiếu phần đó</td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Mobile app "Tài chính hiện tại" (Tổng có − Tổng nợ)</b></td><td class="right green"><b>7,819,879,454</b></td><td class="green"><b>✅ Đầy đủ nhất — DÙNG SỐ NÀY</b></td></tr>
+      </tbody>
+    </table>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.6">
-      <b>Net Worth hôm nay (7.346 tỷ)</b> là số <b>verified</b> — đọc trực tiếp từ widget "Tổng số dư" trên app MISA (bấm icon ẩn/hiện), không phải tự tính. Đây là số đúng theo app.<br><br>
-      <b>Các mốc lịch sử (21/05 → 26/05)</b> dưới đây <b>chưa được verify</b> theo cách này — đó là số tôi tự tái tạo từ account balance + lịch sử giao dịch "cho vay/thu nợ", và đã 2 lần tính sai (thiếu lãi/cổ tức phát sinh trong các quỹ). Có thể các số lịch sử này cũng lệch 100-500M so với số thật app từng hiển thị. <b>Không nên tin tuyệt đối vào delta giữa các mốc cũ và hôm nay.</b><br><br>
-      Từ lần chạy sau, script đã được sửa để tự đọc "Tổng số dư" thật mỗi lần — các mốc tương lai sẽ đều là verified.
+      Đối chiếu từng dòng mobile app (Tiền mặt, Tài khoản ngân hàng, Tài khoản đầu tư, Ví điện tử, Khác, Cho vay) với dữ liệu website: <b>khớp tuyệt đối</b> (sai số &lt;1đ) cho mọi mục — TRỪ "Tài khoản tiết kiệm" (mobile: 1,038,087,569 vs website: 638,175,310, lệch 399,912,259).<br><br>
+      <b>Nguyên nhân nghi vấn:</b> có 1 sổ tiết kiệm Tikcop cũ (xuất hiện trong lịch sử giao dịch với tên "tikcop 5 week", lãi suất 6.1%, NGỪNG phát sinh lãi từ 07/05/2026 — ngụ ý gốc ~400M) đã biến mất khỏi cả danh sách "Tài khoản" và "Sổ tiết kiệm" hiện tại trên website (đã kiểm tra API <code>/wallets/savings</code> và <code>/wallets/accumulations</code> — cả 2 đều KHÔNG có sổ này). Mobile app có thể đang dùng nguồn dữ liệu đầy đủ hơn hoặc cache cũ hơn website.<br><br>
+      <b>Khuyến nghị:</b> Coi <b>7,819,879,454 ₫ (~7.82 tỷ)</b> là Net Worth chuẩn. Tự kiểm tra mục "Tài khoản tiết kiệm" trong mobile app để xác định sổ ~400M đó là sổ nào — không tự suy ra được từ data website.
     </div>
   </div>
 </div>
@@ -226,7 +234,7 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [7.971, 7.951, 7.952, 7.346],
+      data: [7.971, 7.951, 7.952, 7.820],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
@@ -257,7 +265,7 @@ new Chart(document.getElementById('chartNetWorth'), {
       x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
       y: {
         grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' },
-        min: 6.8, max: 8.2
+        min: 7.3, max: 8.0
       }
     }
   }
