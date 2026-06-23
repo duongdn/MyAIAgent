@@ -1,448 +1,131 @@
-# Matrix — since 2026-06-15 00:00 +07:00
+# Matrix — since 2026-06-22 08:49 +07:00
 
-### Kunal - Fountain — 523 messages
-  [09:16] trinhmtt: Em gui plan tuan nay a: ThinhT: 20h ViTHT: 40h => QC: 15h
-  [09:20] trinhmtt: https://trello.com/c/MgBGamAN/2868-scheduled-order-chose-next-day-delivery-but-paid-8 Hung Pham con này live đuọc chưa v [thread: 1 reply]
-    └ [09:22] hungpn: đơi xíu anh check lại bug cái nha
-  [09:26] vitht: con này chị đang coi cái bug a hùng báo nha
-  [09:26] vitht: * con 2868 này chị đang coi cái bug a hùng báo nha
-  [09:32] vitht: cái bug này đã bị trên live lun rồi á a Hùng ơi
-  [09:33] hungpn: thì sao nhi? cũng fai fix mà
-  [09:33] vitht: lúc chọn cái ngày phí ship hiện trên calendar là 44 đô
-  [09:33] vitht: xong rồi chọn dô trang checkout là thành 10 đô
-  [09:34] vitht: thì e đang giải thích cho a là không phải từ code của e change mà nó bị lỗi, mà nó bị sẵn trên production rồi
-  [09:34] vitht: chứ e có nói là không fix đâu
-  [09:36] hungpn: nào fix xong hú anh nhé
-  [10:20] vitht: Bên fountain BETA fix cái issue a báo rồi nha, a check lại được rồi á [thread: 9 replies]
-    └ [10:50] hungpn: image.png
-    └ [10:51] hungpn: Vi Tran: giá là 50 mà sang trang cart thì lên 55 nhỉ?
-    └ [11:02] vitht: e đang check lại
-    └ [11:02] vitht: bên infinity cũng bị từ 50 mà giảm còn 30
-    └ [11:47] hungpn: có rule ẩn nào k nhỉ?
-    └ [11:47] hungpn: Vu Tat: Phat Le
-    └ [11:47] hungpn: trước làm có rule nào check in T7 CN dc giảm giá k?
-    └ [11:47] phatdlt: e k nghe nói á a
-    └ [11:51] vutq: không có rule này nha anh
-  [10:21] vitht: * Bên fountain BETA fix cái issue a báo rồi nha, a check lại được rồi á a Hung Pham
-  [10:37] hungpn: okie
-  [11:50] vitht: Cho mình hỏi là xưa ai viết cái hàm tính phí này thế
-  [11:51] vitht: tại nó đang tính ngày cuối tuần là $20 + $10 á
-  [11:51] vitht: là bị sai cái phí trên calendar rồi
-  [11:51] vitht: return currentDateIsLastDateInWeek ? expressFee + EXTRA_FEE : expressFee
-  [11:51] vitht: const determinePriceBasedOnDate = (   longDateFormat: string,   expressFee: number,   isFutureShipping: boolean = false 
-  [11:52] hungpn: vậy thì fai xem cái giá trên calendar hiển thị có đúng k nữa đó, nếu rule trên là đúng
-  [11:52] vitht: giá trên calendar update trên staging là đúng chưa Trinh Mai
-  [11:53] vitht: của cả fountain và infinity á
-  [11:55] vitht: cái này đang bị trên live fountain lun á nha
-  [11:55] vitht: * cái này đang bị trên LIVE FOUNTAIN lun á nha
-  [12:00] vutq: cái hàm không phải là vấn đề đâu nha chị Vi Tran, hiện tại chọn bất cứ ngày nào trong calendar thì FE cũng gửi info sai 
-  [12:01] vitht: thì cái ngày này nó tính gía khi submit chọn ngày cúi tuần là $30 thay vì @50
-  [12:02] vitht: * thì cái ngày này nó tính gía khi submit chọn ngày cúi tuần là $30 thay vì $50. Hiển thị trên calendar là $50 nhưng khi
-  [12:02] vitht: * Bên infinity BETA thì cái ngày này nó tính gía khi submit chọn ngày cúi tuần là $30 thay vì $50. Hiển thị trên calenda
-  [12:03] vitht: * Bên infinity BETA thì cái ngày này nó tính price khi submit chọn ngày cúi tuần là $30 thay vì $50. Hiển thị trên calen
-  [12:14] vitht: Screenshot 2026-06-15 at 12.14.07 pm.png
-  [12:14] vitht: giá trên live fountain cũng đang khác giá với trên staging nữa. V cái giá nào mới là đúng  Trên live
-  [12:14] vitht: trên BETA
-  [12:15] vitht: Screenshot 2026-06-15 at 12.14.50 pm.png
-  [12:16] vitht: * giá trên live fountain cũng đang khác giá với trên staging nữa. V cái giá nào mới là đúng ? Trên live
-  [12:26] vutq: cái giá shipping còn tuỳ thuộc nhiều yếu tố như attribute cụ thể của 1 gift, … nữa - mà hiện tại nó không quan trọng chị
-  [13:25] vitht: cái attribute special_dispatch_date này của orderState đúng không
-  [13:44] vitht: thấy trong cái orderState nó lưu cái này đúng lun rồi mà
-  [13:44] vitht: ý em là cái orderState của attribute nào
-  [13:44] vitht: Screenshot 2026-06-15 at 1.43.40 pm.png [thread: 20 replies]
-    └ [13:46] vutq: cái params mà BE nhận được lúc chị submit có đúng ngày được chọn không á
-    └ [13:51] vitht: checkout_date_display: "Saturday, June 20",
-    └ [13:51] vitht: đúng a
-    └ [13:52] vitht: cái attribute checkout_date_display của cart_item lưu đúng ngày lun mà
-    └ [14:07] vitht: Vậy giờ sao Vũ
-    └ [14:08] vitht: đổi lại cái điều kiện trong hàm đó cho shipping fee đúng vs calendar hay sao
-    └ [14:09] vutq: có shipping price có ngày hết rồi thì debug tiếp dưới BE thôi chị :v
-    └ [14:09] vutq: coi lúc cart_item được tạo ra nó nhận params gì ...
-    └ [14:10] vitht: ý là chị debug nguyên nhân không phải ở BE
-    └ [14:10] vitht: mà là FE truyền xuống sai á
-    └ [14:11] vitht: nó truyền cái shipping fee là giá sai
-    └ [14:11] vitht: thay vì nó truyền $50 mà nó truyền là $30
-    └ [14:11] vitht: chứ ở BE không có sai gì hết
-    └ [14:13] vutq: hm 🤔 em thấy nó đang show $54 đúng nè, tới chỗ này rồi thì đâu còn tính toán gì nữa
-    └ [14:14] vutq: chị chụp full params em coi thử
-    └ [14:14] vitht: thì bởi dị chị nói là do cái hàm trên FE
-    └ [14:15] vitht: chứ k phải là do BE á
-    └ [14:15] vitht: do FE nó truyền xuống sai
-    └ [15:26] vutq: hm ??? em vẫn chưa hiểu chị còn cấn chỗ nào khúc này ------ cách calendar đã calculate đúng hết rồi,
-    └ [16:02] vitht: ý là cái khúc mà nó tạo giỏ hàng á. Lúc chọn trên calendar là hiển thị $50 nhưng khi tạo card thì nó
-  [13:44] vitht: * ý em là cái orderState của attribute nào Vu Tat
-  [13:49] thinht: https://trello.com/c/OUrn7C1z/2918-gift-drop-order-cannot-swap-gift Hung Pham test lại tính năng này trên staing bao gồm
-  [13:51] vitht: * đúng á
-  [13:54] thinht: có cần a tắt rollbar trên staging lại k Vu Tat hay để đó luôn [thread: 1 reply]
-    └ [13:54] vutq: cứ để yên đi anh
-  [13:54] thinht: Trinh Mai: cho a xin ticket mới nha
-  [13:59] trinhmtt: https://trello.com/c/RCfYhnv4/2938-gift-drop-link [thread: 11 replies]
-    └ [14:13] hungpn: image.png
-    └ [14:13] hungpn: Thinh Tran:
-    └ [14:15] thinht: Trinh Mai: lỗi này ở đợt push live trước đã tạm vá rồi nha e.  hiện tại a vừa có bản update mới trên
-    └ [14:16] thinht: cho a xin ticket khác trong khi chờ feedback từ HÙng nha Trinh Mai
-    └ [14:20] trinhmtt: Hung Pham: anh ưu tien cái này nha anh
-    └ [14:22] hungpn: okie em
-    └ [16:15] hungpn: Vu Tat: Trinh Mai lên live được rồi nhé
-    └ [16:23] trinhmtt: Thinh Tran: anh đưa info cho anh Vu Tat live nha anh
-    └ [16:28] thinht: BE: https://github.com/iamksheth/FountainGreetings/pull/435 FE: https://github.com/iamksheth/Fountai
-    └ [16:35] vutq: lên LIVE rồi nha mn Trinh Mai Thinh Tran Hung Pham
-    └ [16:38] thinht: có j báo cus ở ticket lỗi hồi sáng luôn nha e Trinh Mai
-  [13:59] trinhmtt: coi con này gấp nha anh
-  [14:14] hungpn: image.png
-  [14:14] hungpn: có fai của mình hok nhớ cancel nha m.n [thread: 2 replies]
-    └ [14:15] thinht: cancel zúp luôn fen
-    └ [14:16] hungpn: done nha
-  [14:23] vitht: ủa a Hùng ơi
-  [14:23] hungpn: oie em
-  [14:23] vitht: sao e thấy cái này nó save là $50 á
-  [14:24] trinhmtt: anh Vu Tat cos gì transfer card này cho anh Thinh Tran giup em nha  https://trello.com/c/NX5yxK48/2697-upgrade-to-nextjs [thread: 6 replies]
-    └ [14:24] thinht: bữa Vũ nói ticket này chưa làm dc á e
-    └ [14:26] vutq: có thể upgrade dần rồi nha anh Thinh Tran, dựa theo lịch sử bên Fountain mà làm là được fountain/269
-    └ [14:26] thinht: sao transfer thấy gọn zữ e 🤣 có j cần note thêm k :D
-    └ [14:27] vutq: không nha anh, đọc git history rồi làm tương tự là xong
-    └ [14:28] thinht: này là cho Infinity hay là cả 2 vậy Vu Tat
-    └ [14:28] thinht: Fountain là 16 r mà pk
-  [14:25] vitht: sao dạo này thấy BETA chậm dữ dị
-  [14:34] hungpn: đang k add dc item vào cart đây, beta fountain bị chậm á [thread: 1 reply]
-    └ [14:35] thinht: tại nó đi coi WC chưa tỉnh táo á. ráng đi
-  [14:40] vitht: die lun rồi ở đó chậm
-  [14:40] vitht: Screenshot 2026-06-15 at 2.40.10 pm.png
-  [14:43] vitht: ủa
-  [14:43] vitht: có ai dô đc chưa
-  [14:44] vitht: * có ai dô đc BETA chưa
-  [14:59] vitht: ủa aloooo
-  [14:59] vitht: mn ơi Live cũng k dô đc á
-  [15:00] thinht: nãy HÙng zô dc mà bị j ghê vậy
-  [15:01] vitht: nhờ mấy người dô live dùm rồi thấy có ai dô đc đâu
-  [15:01] hungpn: anh vào dc nè, hơi lâu tý thôi
-  [15:01] thinht: Vu Tat: hộ giá
-  [15:02] vitht: ý là a dô a có add giỏ hàng rồi xem được không á
-  [15:02] thinht: ah mới load lại thấy zô live fountain dc r. chắc server đi coi WC thiệt
-  [15:20] vitht: Còn card nào không Trinh Mai , mấy cái kia đang đợi Vũ rep mới làm tiếp đc
-  [15:21] trinhmtt: https://trello.com/c/ItHdgsNc/2823-fountain-infinity-patch-vulnerabilities-and-delete-data Vi Tran chị coi con naỳ thử n
-  [15:23] hungpn: https://staging.infinityroses.com/recipient_address/dsG4M7Ul -- vào link này xem thử Thinh Tran [thread: 8 replies]
-    └ [15:25] thinht: gift này có vấn đề. để check thử
-    └ [15:25] hungpn: cái đó t check xong rồi, giờ vào lại link lần 2, nó k show màn hình đã chọn gift
-    └ [15:26] thinht: nó có lỗi liên quan tới images của variant.
-    └ [15:26] thinht: có swaft j trước đó k?
-    └ [15:28] hungpn: có luôn thì fai
-    └ [15:29] thinht: tái tạo lại thử
-    └ [16:05] hungpn: https://staging.infinityroses.com/recipient_address/pSOJ1k9c
-    └ [16:05] hungpn: nè
-  [15:26] vutq: *  hm ??? em vẫn chưa hiểu chị còn cấn chỗ nào khúc này cách calendar đã calculate đúng hết rồi, mình chỉ cần đưa trực t
-  [15:26] vutq: *  hm ??? em vẫn chưa hiểu chị còn cấn chỗ nào khúc này cái calendar đã calculate đúng hết rồi, mình chỉ cần đưa trực ti
-  [15:26] vutq: *  hm ??? em vẫn chưa hiểu chị còn cấn chỗ nào khúc này cái calendar đã calculate đúng shipping hết rồi, mình chỉ cần đư
-  [16:04] vitht: a Hùng thử cái gift khác xem
-  [16:04] vitht: nó có hiện đúng phí ship hông
-  [16:04] vitht: Screenshot 2026-06-15 at 4.04.25 pm.png
-  [16:05] vitht: E chưa thử gì hết mà hiện nó vẫn đúng á
-  [16:06] hungpn: anh thủ vẫn 55
-  [16:08] vitht: với cái gift này lun á hả
-  [16:16] hungpn: khoan, anh clear cache thì nó về lại 50 rồi nè Vi Tran
-  [16:22] vitht: vậy chắc e chỉ cần fix bên infinity nữa
-  [16:24] vitht: Bên e nó vẫn hiện $55 đối với cái gift này á
-  [16:24] vitht: Screenshot 2026-06-15 at 4.24.06 pm.png
-  [16:25] hungpn: nhưng vãn có item show giá 55😐️
-  [16:28] vitht: ủa cái này có liên quan gì tới giá của shipping hem dị [thread: 1 reply]
-    └ [16:34] vutq: không nha chị, đây chỉ là text thôi
-  [16:28] vitht: Screenshot 2026-06-15 at 4.28.15 pm.png
-  [16:29] vitht: cứu toai
-  [16:29] vitht: Screenshot 2026-06-15 at 4.29.19 pm.png
-  [16:32] vitht: Screenshot 2026-06-15 at 4.32.23 pm.png
-  [16:32] vitht: Description của một cái gift khác
-  [16:33] hungpn: chắc đợi tin của Vu Tat nè
-  [16:33] vitht: không ai có ấn tượng gì lun hả
-  [16:34] vutq: 
-  [16:34] hungpn: mấy cái này chỉ là text show trông mấy cái section thôi em
-  [16:34] hungpn: image.png
-  [16:35] vitht: ý là text show section nhưng giá của nó khác nhau á
-  [16:36] vitht: mọi người không thấy lạ là chọn gift khác nhau trên cùng một ngày, một giá ship nhưng mà cái FE truyền dô khác hả ?
-  [16:54] vitht: ủa nếu mấy cái đó là text thì tại sao lưu cái giá ở chỗ này cho từng cart_item ta
-  [16:54] vitht: fedex_express_saver_shipping_fee
-  [16:54] vitht: Screenshot 2026-06-15 at 4.54.42 pm.png
-  [16:59] vutq: 1. các fields shipping info có thể là bất cứ text gì cũng được, không ảnh hưởng / liên quan đến giá ship được tính toán 
-  [16:59] vitht: vậy thì mỗi gift sẽ có giá ship fedex_express_saver_shipping_fee
-  [17:00] vitht: nếu chỉ hiển thị giá trên calendar là $50 thì cái đó bị sai rồi
-  [17:10] vitht: vậy nếu trường hợp thứ 3 mà sáng giờ mọi người biết là đã tính đúng giá ship lun rồi đó
-  [17:10] vitht: fedex_express_saver_shipping_fee chính là giá ship specific của gift đó, nếu có thì dùng, không thì sẽ dùng giá ship glo
-  [17:11] vitht: * 2. fedex\_express\_saver\_shipping\_fee chính là giá ship specific của gift đó, nếu có thì dùng, không thì sẽ dùng giá
-  [17:11] vitht: * 3. fedex\_express\_saver\_shipping\_fee chính là giá ship specific của gift đó, nếu có thì dùng, không thì sẽ dùng giá
-  [17:14] vitht: cái gift a Hùng thấy là phí $55  á
-  [17:14] vitht: Kết quả mong đợi: $55. Vì ngày 20/06/2026 là Thứ Bảy nên hệ thống chỉ sử dụng phí Standard Overnight ($45) và cộng thêm  [thread: 1 reply]
-    └ [17:15] hungpn: noted
-  [17:14] vitht: a Hùng note lại giúp e đi
-  [17:14] vitht: * a Hung Pham  note lại giúp e đi
-  [08:40] vitht: https://trello.com/c/MgBGamAN/2868-scheduled-order-chose-next-day-delivery-but-paid-8
-  [08:41] vitht: vậy card này test lại bth đc rồi á a Hung Pham [thread: 4 replies]
-    └ [13:36] hungpn: okie, để anh check
-    └ [13:37] hungpn: Vi Tran: đã update bên infinity chưa em nhỉ?
-    └ [13:55] vitht: bên infinity đang đúng á a
-    └ [13:55] vitht: deploy lên BETA infinity lun rồi đó a
-  [09:29] trinhmtt: https://trello.com/c/VWNJOeoB/2862-ga4-event-for-new-account chị check comment nay giúp em vói Vi Tran hình như anh Vu T
-  [09:35] trinhmtt: https://trello.com/c/NX5yxK48/2697-upgrade-to-nextjs-version-16 Vu Tat Thinh Tran card này bacs nói đợi đến con claude b [thread: 1 reply]
-    └ [09:36] thinht: mn nói sao a làm vậy :D
-  [10:56] vitht: Review dùm cái pull request nyaf nha Vu Tat  ơi  https://github.com/iamksheth/FountainNewUI/pull/462/changes [thread: 1 reply]
-    └ [11:07] vutq: để lại cái condition pathname như cũ nha chị Vi Tran - cần làm theo requirement trong ticket
-  [10:56] vitht: cho cái card này  https://trello.com/c/VWNJOeoB/2862-ga4-event-for-new-account
-  [10:56] vitht: * Review dùm cái pull request này nha Vu Tat  ơi https://github.com/iamksheth/FountainNewUI/pull/462/changes
-  [11:58] vitht: chị mới update lại nha Vu Tat  ơi
-  [11:58] vitht: 
-  [11:58] vitht: * [fountain/hot\_fix/2862-ga4-event-for-new-account](https://github.com/iamksheth/FountainNewUI/pull/462/changes)
-  [11:59] vitht: https://github.com/iamksheth/FountainNewUI/pull/462/changes [thread: 2 replies]
-    └ [13:26] vutq: em cho lên LIVE rồi nha chị Vi Tran
-    └ [13:28] vitht: okie để c kêu ổng test lại
-  [11:59] phatdlt: Trinh Mai: Check giúp anh chổ này nha. Mình cần improve chổ này > Show the Smart Link URL + copy icon until it expires ( [thread: 6 replies]
-    └ [13:38] trinhmtt: Phat Le: em thấy phía user thì có chỗ này để show nè anh
-    └ [13:38] trinhmtt: https://www.figma.com/design/ycshVpcLgTBPb0aXnlo5MP/Fountain?node-id=37532-114189&m=dev
-    └ [14:11] phatdlt: Trinh Mai: Vậy khi nào hiện cái expire này á e
-    └ [14:14] trinhmtt: à em hiểu ý anh roi, phía user để em hỏi Thomas xem nha, phía admin thì mình tự thêm đc
-    └ [14:16] phatdlt: ok nè
-    └ [14:16] phatdlt: E hỏi dùm a đi, còn admin chắc nhờ c Vi update khỏi cần hỏi, nào hỏi thomas xong cho a hay với nghe
-  [11:59] phatdlt: * Trinh Mai: Check giúp anh chổ này nha. Mình cần improve chổ này > Show the Smart Link URL + copy icon until it expires
-  [11:59] phatdlt: * Trinh Mai: Check giúp anh chổ này nha. Mình cần improve chổ này > Show the Smart Link URL + copy icon until it expires
-  [13:29] vitht: Card này test lại đc rồi nha a Hung Pham
-  [13:29] vitht: https://trello.com/c/MgBGamAN/2868-scheduled-order-chose-next-day-delivery-but-paid-8
-  [13:29] thinht: cho a ticket moiws nha Trinh Mai
-  [13:30] trinhmtt: https://trello.com/c/OUrn7C1z/2918-gift-drop-order-cannot-swap-gift cái này anh fix song chưa á [thread: 2 replies]
-    └ [13:32] thinht: bữa Vũ note lên Live tạm r e. hôm qua a cũng fix bản mới lên Live báo e hết r á.
-    └ [13:33] trinhmtt: v kéo card đi giúp em đi ạ
-  [13:41] trinhmtt: anh fix bug tiep nha amnh [thread: 4 replies]
-    └ [13:42] thinht: redmine hay rollbar e
-    └ [13:42] trinhmtt: Rollbar á anh
-    └ [13:42] vitht: a phụ a Hùng test card đc không, nó nằm một ề bên kia á =))
-    └ [13:42] thinht: okie e
-  [14:26] vitht: cái bug ổng báo blank page trong cmt này fix lun rồi nha a Hung Pham , check lại giúp e để e báo ổng test lun ạ  https:/
-  [14:40] trinhmtt: https://trello.com/c/BSrIHSmc/2869-fountain-order-flow-message-recipient-delivery-updates https://trello.com/c/lbWnX6N0/ [thread: 1 reply]
-    └ [14:54] hungpn: đợi anh dò lại nhé
-  [16:39] thinht: Hung Pham: có 1 lỗi liên quan tới ProjectName ở ProOrder có thể nhập 1 chuỗi space mà vẫn pass dc Step Pay Action. mới d [thread: 3 replies]
-    └ [16:49] hungpn: go live nha Thinh Tran
-    └ [16:51] thinht: thanh toán checkout order okie hết r pk Hung Pham
-    └ [16:51] hungpn: yeah
-  [16:53] thinht: Vu Tat: e xem qua PR này, a fix lỗi ở trên. Có cần j update không thì a udpate luôn để lên Live nha e https://github.com
-  [16:53] vitht: https://trello.com/c/MgBGamAN/2868-scheduled-order-chose-next-day-delivery-but-paid-8 A ơi cái này ổn chưa a, bug này tr [thread: 2 replies]
-    └ [16:54] hungpn: anh có hoir em đã update bên Infinity chưa thif fai ak Vi Tran
-    └ [16:56] vitht: e có rep là update 2 chỗ lun dòi á
-  [16:54] vitht: *  https://trello.com/c/MgBGamAN/2868-scheduled-order-chose-next-day-delivery-but-paid-8 A ơi Hung Pham cái này ổn chưa 
-  [17:08] vitht: Vu Tat:  ơi cái này a Hùng test ok rồi có gì mai đưa lên live giúp c nha https://github.com/iamksheth/FountainNewUI/pull [thread: 2 replies]
-    └ [09:15] vutq: em cho lên LIVE rồi nha chị Vi Tran
-    └ [09:17] vitht: okie
-  [17:08] vitht: cho cả fountain với infinity lun
-  [17:08] vitht: https://github.com/iamksheth/FountainNewUI/pull/458/changes
-  [17:09] vitht: Ở bên fountain thì cái này có fix lun cái chỗ chọn select delivery date mà nó không có thay đổi giá ship lun nha
-  [09:03] vitht: Vu Tat:  ơi review với deploy live giúp c với, ông Mike ổng hối rồi
-  [09:07] hungpn: list này tested DONE nha Trinh Mai
-  [09:08] trinhmtt: dạ v anh kéo card giúp em nha
-  [09:16] thinht: khi nào rãnh cho a ké issue này luôn nha Vu Tat [thread: 4 replies]
-    └ [09:20] vutq: done nha anh Thinh Tran
-    └ [09:20] thinht: thanks e.
-    └ [09:20] thinht: có j test lại case này trên Live xem còn bị k nhan Hung Pham
-    └ [09:21] hungpn: okei để check cái nè
-  [11:35] vitht: bữa giờ có ai deploy staging BE hông, thấy có một vài chỗ trên staging bị mất code á
-  [11:36] vitht: cái bảng này mất ProOrderItemSmartLinkTemplate attribute card_type với expired_at
-  [11:36] vitht: rồi một số code bị mất nữa
-  [11:36] vitht: Thinh Tran: Vu Tat
-  [11:36] vitht: * bữa giờ có ai deploy fountain staging BE hông, thấy có một vài chỗ trên staging bị mất code á
-  [11:37] thinht: bữa giờ là lâu chưa em. chớ có loy liên tục đó
-  [11:37] vitht: tuần trước thấy còn á a
-  [11:38] vitht: Tuần này e làm cái card 2735 xong lên cái mất tiêu lun. Cái schema.rb cũng mất mất attrbute đó nữa
-  [11:38] vutq: em ngưng deploy bên STAGING/BETA 1 thời gian rồi nha
-  [11:39] thinht: a có loy nhưng k liên quan tới mấy database lắm. chỉ là code config rollbar thôi
-  [11:39] thinht: có check dc xem là mất từ đoạn nào k vậy e.
-  [11:41] vutq: em vừa pull code mới nhất bên staging thấy vẫn có 2 field này nha chị Vi Tran
-  [11:45] vitht: chị mới thêm dô đó =))
-  [11:47] vutq: không, ý em là đâu có commit nào xóa tụi nó đâu 👀
-  [11:48] vitht: ok mốt ae có thấy conflict cái schema thì nhớ đừng remove cái atrribute đó nha
-  [11:49] vitht: Để lát c check lại commit lần nữa
-  [11:55] thinht: Screen Shot 2026-06-17 at 11.54.44.png
-  [11:55] thinht: a cũng thấy hình như nó chưa bị xoá á Vi Tran
-  [11:59] vitht: mà sao hôm qua lúc e deploy cái admin lên, nó bị lỗi do không có field expired at nên e ms thêm dô hôm qua á
-  [12:00] vitht: khó hiểu thiệt
-  [12:00] vitht: nay e check bên staging nó cũng bị thiếu cái hàm trong model nữa
-  [12:17] vitht: Tìm ra nguyên nhân gòi mn ơi, bị thiếu cái commit 28d28b9870894644d239fee01df70cdff2dc17be của branch 2735
-  [13:22] thinht: có j cần làm gấp k Trinh Mai . nếu không a vẫn check issue rollbar tiếp pk?
-  [13:26] trinhmtt: dạ đúng anh
-  [16:05] hungpn: ổng có update ở task này https://trello.com/c/9qY6OlON/2871-infinity-build-a-box
-  [16:07] hungpn: vs cái này có 1 cái ổng yêu cầu có update nhỏ nè: https://trello.com/c/MS5UzAPy/2872-infinity-browse
-  [16:20] thinht: https://github.com/iamksheth/FountainGreetings/pull/436 Vu Tat a có upgrade sitemap_generator lên 7.0.1 , a có deploy nó
-  [16:35] trinhmtt: https://trello.com/c/MS5UzAPy/2872-infinity-browse Vu Tat live con nay giup em nha, Dat Nguyen cho anh Vu Tat info nhe
-  [16:36] trinhmtt: https://trello.com/c/9qY6OlON/2871-infinity-build-a-box Thinh Tran check comment cua Thomas nha anh oi
-  [16:38] hungpn: live xong thì fix cái bug ông báo luôn nha Dat Nguyen
-  [16:38] datnt: Hung Pham em không có giờ bên này á anh
-  [16:39] hungpn: vậy để cho @thinh
-  [16:39] hungpn: * vậy để cho Thinh Tran vậy
-  [16:54] datnt: Thinh Tran, Vi Tran ơi 2 anh chị giúp em cái PR này với em không có time bên này mà nó có conflict á
-  [16:55] datnt: https://github.com/iamksheth/FountainNewUI/pull/414
-  [16:55] vitht: okie để c handle cho
-  [16:55] datnt: Vu Tat em gửi anh trước commit của BE cho cái này nha anh https://github.com/iamksheth/FountainGreetings/pull/419
-  [16:55] vitht: * okie để c handle cho Dat Nguyen
-  [16:56] datnt: vậy chị Vi Tran giúp em nha xong chị đưa lại cho anh Vũ chung cái card này 2872 nha
-  [17:17] vitht: cái này lấy cái nào v Dat Nguyen
-  [17:17] vitht: Screenshot 2026-06-17 at 5.17.02 pm.png [thread: 12 replies]
-    └ [17:19] datnt: cái này chắc chị lấy cái trên đi á
-    └ [17:19] datnt: em thấy Live đang xàig cái trên
-    └ [17:19] datnt: chứ task em không có update fỏoter mà lúc em làm task em không biết em đi chỉnh footer á
-    └ [17:20] datnt: ủa bên beta cũng lấy cái dưới
-    └ [17:20] datnt: vậy chắc lấy cái incoming đi chị
-    └ [17:20] vitht: chắc nha
-    └ [17:20] vitht: =))
-    └ [17:20] vitht: cái này trên live á
-    └ [17:21] datnt: em nhớ mang máng đợt em có bug live về mấy cái footer này
-    └ [17:21] datnt: mà em có fix lên rồi không biết có dính gì cái này không
-    └ [17:23] vitht: vậy c để như cũ có gì change sau nha
-    └ [17:23] datnt: dạ oki chị
-  [17:18] vitht: cái này nữa lấy gap-l hay gap-[40px]
-  [17:18] vitht: Screenshot 2026-06-17 at 5.17.57 pm.png [thread: 5 replies]
-    └ [17:20] datnt: cái này để em mở figma lên check chứ em không nhớ nổi
-    └ [17:24] datnt: này file nào á chị
-    └ [17:24] datnt: Vi Tran chị ơi
-    └ [17:26] vitht: vậy để 40px đi có gì fix sau
-    └ [17:26] datnt: lấy cái trên đi á chị
-  [17:32] vitht: https://github.com/iamksheth/FountainNewUI/pull/414  pull request này nha Vu Tat , đã handle conflict
-  [08:35] trinhmtt: https://trello.com/c/TAopocTs/2854-infinity-cart-checkout-order-received-update https://trello.com/c/HnTvtbk8/2915-fount [thread: 2 replies]
-    └ [09:01] phatdlt: Trinh Mai: con 2854 và 2836 cái update mới nhất a chưa test
-    └ [09:15] trinhmtt: v anh uu tien test cho song nha anh
-  [08:35] trinhmtt: * https://trello.com/c/TAopocTs/2854-infinity-cart-checkout-order-received-update https://trello.com/c/HnTvtbk8/2915-fou
-  [08:40] trinhmtt: https://trello.com/c/BSrIHSmc#comment-6a327c185b7e76e2539510cc
-  [08:41] trinhmtt: * https://trello.com/c/BSrIHSmc#comment-6a327c185b7e76e2539510cc Vi Tran check comment này nha chị
-  [08:42] trinhmtt: Song thi qua cái này luon nha chị Vi Tran  https://trello.com/c/a8jDXbuB#comment-6a3283240fdd4e86c8c63b81
-  [08:43] trinhmtt: https://trello.com/c/lbWnX6N0/2870-infinity-order-flow-updates nó cũng bị bên infinity nữa, nên chị update cho 2 cái luo
-  [08:50] vitht: gì dị =)) ms sáng sớm lun á Trinh Mai
-  [09:04] vutq: đã merge vào infinity_master, checkout qua chạy bản build thử nha chị Vi Tran
-  [09:13] vitht: fix lỗi khi npm run build rồi nha Vu Tat  ơi
-  [09:21] vutq: https://trello.com/c/MS5UzAPy/2872-infinity-browse lên LIVE rồi nha Trinh Mai
-  [09:22] vutq: đồng thời cần chị Vi Tran qua infinity_master fix gấp nha: hiện chọn 1 category thì trên URL dư searchParams category=..
-  [09:25] vitht: okie
-  [10:02] hungpn: anh có 1 cái bug cần fix sớm nh Trinh Mai https://redmine.nustechnology.com/issues/79322
-  [10:05] trinhmtt: Thinh Tran: chieu coi con nay giup em nha anh
-  [10:11] vitht: https://github.com/iamksheth/FountainNewUI/pull/465  Review với deploy live dùm c cái bug bỏ params category trên url nh [thread: 1 reply]
-    └ [10:17] vutq: done nha chị
-  [10:25] phatdlt: https://trello.com/c/TAopocTs/2854-infinity-cart-checkout-order-received-update Trinh Mai con này a xong r nha, e kêu de
-  [10:37] trinhmtt: https://trello.com/c/TAopocTs/2854-infinity-cart-checkout-order-received-update
-  [10:37] trinhmtt: * https://trello.com/c/TAopocTs/2854-infinity-cart-checkout-order-received-update  Vi Tran đưa info cho anh Vu Tat live 
-  [11:04] phatdlt: Trinh Mai con 2836 phần update này ai làm v em
-  [11:04] vitht: https://github.com/iamksheth/FountainNewUI/pull/466/changes  Nguyên nhân của issue này là fetchCartItems đang bị cache t [thread: 7 replies]
-    └ [11:08] vutq: em không thấy trong PR sử dụng https://nextjs.org/docs/14/app/api-reference/next-config-js/increment
-    └ [11:09] vitht: à cái này c làm cho fountain xong apply qua bên infinity lun á
-    └ [11:10] vitht: chứ không có làm riêng cho infinity thôi
-    └ [11:10] vitht: muốn dùng cái revalidate tag thì phải đổi lại
-    └ [11:11] vitht: tại thấy bên fountain cũng bị cái này
-    └ [11:12] vutq: vậy thì cần chỉnh cho cả 2 bên luôn, chị cứ fix issue thử với revalidateTag đã, không được thì mình 
-    └ [11:13] vitht: okie
-  [11:04] vitht: * https://github.com/iamksheth/FountainNewUI/pull/466/changes  Vu Tat  info cái đưa lên live 2854 nha Nguyên nhân của is
-  [11:07] trinhmtt: Dat Nguyen: á nha anh
-  [12:14] vitht: chị mới update lại á. E coi qua thử.  https://github.com/iamksheth/FountainNewUI/pull/466/changes  dùng hàm fetchCartIte [thread: 2 replies]
-    └ [13:36] vutq: thêm cái check hasActiveCartAction vô lúc user xài nút ApplePay hoặc PayPal luôn nha chị Vi Tran, xo
-    └ [13:36] vitht: okie
-  [12:15] vitht: * chị mới update lại á. E coi qua thử Vu Tat  https://github.com/iamksheth/FountainNewUI/pull/466/changes  dùng hàm fetc
-  [13:41] vitht: có ai nhớ cái design của cái menu plaform nằm trong card nào hem. Hiện tại ổng design bảo cái màu menu đang bị sai
-  [13:42] vitht: Screenshot 2026-06-18 at 1.42.17 pm.png
-  [13:43] vitht: Aloo
-  [13:43] vitht: Aloooo
-  [13:44] vitht: thấy dòi nha
-  [14:06] phatdlt: https://trello.com/c/WGsYqu5h/2836-fountain-business-homepage-updates Trinh Mai Ticket này ổ kêu đổi màu chổ menu, mà gi
-  [14:18] trinhmtt: https://trello.com/c/Tq5nQQQr/2775-fountain-navigation-refactor Phat Le phải card này hong anh
-  [14:22] phatdlt: https://trello.com/c/WGsYqu5h/2836-fountain-business-homepage-updates Trinh Mai V card này xong luôn r nha e
-  [14:43] vitht: c mới update lại cái này nha Vu Tat  ơi  https://github.com/iamksheth/FountainNewUI/pull/466/changes [thread: 2 replies]
-    └ [15:11] vutq: lên LIVE rồi nha chị Vi Tran
-    └ [15:12] vitht: ukie để c làm cho fountain lunn
-  [14:43] vitht: * c mới update lại cái này nha Vu Tat  ơi https://github.com/iamksheth/FountainNewUI/pull/466/changes Cho cái dụ blank p
-  [14:43] vitht: * c mới update lại cái này nha Vu Tat  ơi https://github.com/iamksheth/FountainNewUI/pull/466/changes Cho cái dụ blank p
-  [15:03] hungpn: mấy cái update list task bên Not pass đã update hết chưa m.n
-  [15:05] thinht: cho a hỏi ai làm ticket 2872 ấy nhĩ
-  [15:07] thinht: * cho a hỏi ai làm ticket 2872 ấy nhĩ Trinh Mai
-  [15:08] vitht: e á a
-  [15:08] vitht: e đang kéo về doing để làm
-  [15:08] vitht: cái nào mà chưa ghi Done là chưa làm á a
-  [15:09] vitht: 2872 là xưa Đạt làm giờ e fix bug nha.
-  [15:09] vitht: Chứ e k có làm hết
-  [15:11] vitht: e làm cái đống này sáng Trinh kêu á nha
-  [15:11] vitht: Screenshot 2026-06-18 at 3.11.36 pm.png
-  [16:06] hungpn: anh có việc về sớm nên cần gì hú anh tý anh check nehs
-  [16:46] thinht: https://trello.com/c/9qY6OlON/2871-infinity-build-a-box update feedbacks lên Staging r nhan Hung Pham
-  [08:42] thinht: https://redmine.nustechnology.com/issues/79344 lên staging r nhan Hung Pham
-  [09:01] thinht: https://trello.com/c/bsnQgbQh/2914-fountain-update-merch-page a update ticket này nha Trinh Mai a thấy có feedbacks
-  [09:02] thinht: e có đang làm ticket này k Vi Tran
-  [09:03] vitht: Dạ chưa á a. E đang làm cái 2869
-  [09:04] thinht: vậy a xử lý nó nha
-  [09:04] vitht: Dạ okie
-  [09:33] hungpn: lên commnent vào mấy cái fix là DONE nè Thinh Tran [thread: 4 replies]
-    └ [09:34] thinht: hã là sao, chưa hỉu lắm
-    └ [09:34] hungpn: image.png
-    └ [09:34] hungpn: đây nè
-    └ [09:34] hungpn: nhớ là dev fix xong hay báo ổng là fix rồi hay sao đso
-  [09:56] hungpn: có ai check dùm anh cái này vs
-  [09:56] hungpn: image.png
-  [09:56] hungpn: duplicate 1 cái gift của build a box anh k thấy tín hiệu gì hết trơn, giống như nó k có tính năng vậy
-  [09:59] hungpn: có con bug liên quan tới Build a box fix luôn nha Thinh Tran
-  [10:00] vitht: duplicate 1 cái gift của build a box anh k thấy tín hiệu gì hết trơn, giống như nó k có tính năng vậy  post bug đi a. Rồ
-  [10:00] hungpn: okie em
-  [10:02] hungpn: https://redmine.nustechnology.com/issues/79344 -- done nha Vi Tran Thinh Tran
-  [10:09] vitht: có ae nào biết cái hover state của cái chỗ này hem
-  [10:09] vitht: bữa thấy trên live có giờ mất tiêu rồi [thread: 1 reply]
-    └ [10:21] vitht: có rồi nha mn ơi
-  [10:09] vitht: Screenshot 2026-06-19 at 10.09.20 am.png
-  [11:02] thinht: https://trello.com/c/bsnQgbQh/2914-fountain-update-merch-page lên staging r nha Hung Pham [thread: 1 reply]
-    └ [11:57] hungpn: check lại cái note màu nhé
-  [11:09] trinhmtt: https://trello.com/c/WGsYqu5h/2836-fountain-business-homepage-updates#comment-6a34c08d53c14605b9a60817 Live con này giúp [thread: 5 replies]
-    └ [11:10] datnt: Chị Vi Tran chị có update lại trong nhánh này không á fountain/2836-fountain-business-homepage-updat
-    └ [11:12] datnt: anh Vu Tat ơi em gửi anh PR cho card này nha https://github.com/iamksheth/FountainNewUI/pull/398
-    └ [11:26] vitht: https://github.com/iamksheth/FountainNewUI/pull/467
-    └ [11:26] vitht: pull request này lun nha Vu Tat  ơi fix cái dụ màu của menu platform hôm qua Phát báo
-    └ [14:35] vutq: cả 2 PR đều lên LIVE rồi nha mn Trinh Mai Dat Nguyen Vi Tran
-  [11:24] vitht: Mấy cái feedback của ông Thomas đã fix hết rồi nha mn Hung Pham  Phat Le  https://trello.com/c/BSrIHSmc/2869-fountain-or
-  [11:28] thinht: https://github.com/iamksheth/FountainNewUI/pull/468 PR nha Vu Tat [thread: 1 reply]
-    └ [14:45] vutq: fix lại PR này nha anh Thinh Tran, dùng Link wrap Button variant-secondary phía trong, chứ không phả
-  [11:36] trinhmtt: https://trello.com/c/fsBtvRtJ/2945-fountain-pro-order-did-not-upload-all-recipients-order-has-11-only-9-found-on-shipsta [thread: 4 replies]
-    └ [11:39] trinhmtt: Vi Tran: hình nhu hong phải bug chị, cus tự giải quyest song goy
-    └ [11:51] vitht: ủa dị hẻn
-    └ [11:51] vitht: okie v skip lun hẻn
-    └ [11:51] trinhmtt: dạ
-  [13:46] thinht: Branded-merch lên hết r nhan Hung Pham
-  [13:48] hungpn: okie, để check nha
-  [14:00] vitht: https://github.com/iamksheth/FountainNewUI/pull/467  Vu Tat  ơi còn cái pull request này nữa. Chỉnh cái màu cho cái menu
-  [14:00] vitht: * https://github.com/iamksheth/FountainNewUI/pull/467 Vu Tat  ơi còn cái pull request này nữa. Chỉnh cái màu cho cái men
-  [14:27] vitht: c mới update mấy cái e nói á Vũ ơi  https://github.com/iamksheth/FountainNewUI/pull/398/changes
-  [14:31] hungpn: https://redmine.nustechnology.com/issues/79361 --- anh đang có 1 bug liên quan tới card https://trello.com/c/9qY6OlON/28
-  [14:32] hungpn: báo cus nha, tested DONE
-  [14:32] hungpn: báo cus nha Thinh Tran tested DONE [thread: 1 reply]
-    └ [14:34] thinht: kéo card rồi chờ cus nó báo live. có nt báo nó fix trong figma r
-  [14:32] vitht: Dạ okie
-  [14:33] hungpn: You can push this live once you fix based on toms comments -- thấy oognr comment ở 2 ticket đều như nùa
-  [14:33] vitht: ủa sao cái 2869 e k thấy ta
-  [14:34] vitht: a Hùng coi ở đâu dị
-  [14:34] hungpn: anh coi ở 2 task 2871  vs 2914
-  [14:35] hungpn: cái này chắc nhanh nè Vi Tran fix xong live card luôn
-  [14:40] vitht: 2 con lun á hả a
-  [14:40] vitht: cái này trang build-a-box mà
-  [14:40] vitht: a Thinh Tran  ơi
-  [14:41] vitht: * cái này trang build-a-box bên infinity mà
-  [14:41] thinht: a hết giờ oy e, để sang tuần ih
-  [14:43] thinht: mà lỗi này chỉ là thêm view khi result = 0 thì có hết task thì hốt dc nhan Vi. cũng k có rối rắm về logic lắm đâu
-  [14:44] vitht: ủa sao e thấy cái mục này là nó không hiện item lun mà
-  [14:44] vitht: chứ đâu phải như a Thinh Tran  nói
-  [14:44] hungpn: case đó xử lý thiếu 1 chút là search thì có màn hình Not found nhưng filter thì chưa có
-  [14:45] vitht: Screenshot 2026-06-19 at 2.45.38 pm.png
-  [14:45] vitht: này á hẻn
-  [14:46] thinht: uhm e
-  [14:48] hungpn: nếu fix k kịp thì chắc live trước rồi update sau cũng k ảnh hưởng đâu
-  [14:50] vitht: Để thứ 2 tuần sau live đc không. Bây giờ là thứ 6 rồi
-  [14:50] hungpn: anh k chắc vì ổng đang chờ
-  [14:50] hungpn: còn lên hay k thì để Trinh Mai
-  [14:50] trinhmtt: nhắm mắt live luon ii chị
-  [14:51] vitht: để chị check lại cái bug a Hùng vs a Thịnh nói đã
-  [14:51] vitht: tại live đang chạy đúng á
-  [14:51] vitht: e review trước coi có cái nào cần fix hem Vu Tat
-  [14:53] vitht: https://github.com/iamksheth/FountainNewUI/pull/469/changes
-  [14:53] vitht: pull request nè 52 files change lận, thứ 2 ms live đc
-  [14:53] thinht: thứ 2 live đi. chớ h live căng đấy. chỗ này lớn á
-  [14:54] trinhmtt: Dạ okie v để em báo cus
-  [16:19] vitht: https://redmine.nustechnology.com/issues/79361
-  [16:19] vitht: bug này fix lun rồi nha a Hung Pham  ơi
-  [16:20] thinht: Vi Tran: quá zỏi mà. xứng đáng có cái siu thị mini cạnh bàn làm việc :D [thread: 1 reply]
-    └ [16:30] vitht: tài trợ cho e cái siêu thị mini kế bên chỗ e đi a
-  [16:23] hungpn: update cho bên Fountains luôn nha Vi Tran
-  [17:25] trinhmtt: tasklog day du nha mn oi @room
+### !aaumKvfltGlhqcQjJP:nustechnology.com — 3 messages
+  [10:25] binhnt: Tuàn này lên Workstream các job sau nha em:  Nhớ là SWITCH từ google sheet qua WS. E nhắn c ds member và nói mn log in n ⚠️
+  [10:30] duongdn: Dạ
+  [10:35] duongdn: PhucVT LongVV anhnh2 này nha chị
+
+### !mYZBGNoLFVpMVIJtPu:nustechnology.com — 5 messages
+  [10:36] duongdn: a thấy e có báo cuối tuần làm gì đó nhưng ko thấy report cho Maddy ?
+  [10:38] longvv: Cuối e làm task update price, e chưa report
+  [10:38] duongdn: report ngay đi
+  [10:40] duongdn: update các info tương ứng  , workstream / jira  A sẽ nc với ổng về các con số sau
+  [10:54] longvv: ok a
+
+### !oGYjbzEfphvvauBZtq:nustechnology.com — 5 messages
+  [09:47] namtv: LongVV xin làm remote. Có vẻ bên Maddy đang dí gì à?
+  [09:52] duongdn: Cus thì ko dí, nhưng mình có lịch cố định với ông t2, t5 trừ khi có gì urgent thì có thể đổi nhưng trước giờ Maddy ko có
+  [11:00] duongdn: Blair cũng ko thể xem là dự án có nhiều task, ta bỏ thêm LeNH vào Bailey nha  Dù có vẻ cũng ko được nhiêu, bên Bailey cũ
+  [15:21] namtv: OK...
+  [22:47] namtv: Raymond lâu rồi ko có task gì phải ko?
+
+### !oofREYAXHsvPWEOJev:nustechnology.com — 3 messages
+  [16:17] thuyltt: image.png
+  [16:18] thuyltt: Hi mn, T gửi danh sách tổng kết **giờ làm (trong giờ chính thức, ko tính PT) tuần 15-21/6**: Note: **các effort training
+  [16:23] duongdn: OK nha bạn
+
+### !tGBJevbuSmjqVePBPN:nustechnology.com — 5 messages
+  [10:20] halt: Hi a Bên job Celine - OhCleo nhờ a update giờ charge của LongVV, TienND, NghiepNQ giúp e nha.  Bên LongVV thì vẫn có rev
+  [10:24] duongdn: để xem
+  [11:09] duongdn: NghiepNQ: bạn làm cả BE và mobile, a sẽ review task BE thôi
+  [11:22] duongdn: a review xong
+  [18:13] halt: Mai a dí lại ô James Diamond giúp e nha, chắc tag tên ổng vô luôn ạ
+
+### !zfXpcHSkwqWylFrApi:nustechnology.com — 4 messages
+  [12:25] chientx: Blair Brown 10:56 AM https://drive.proton.me/urls/PM7SW2Z7MG#oxmEwfxuHqYM Proton Drive Securely store, share, and access
+  [12:26] chientx: ông này hay kiểu giao tiếp thường xuyên, kêu ổng setup Slack chat cho dễ đi a
+  [13:19] duongdn: OK
+  [15:09] duongdn: đã move qua Slack
+
+### Bailey - BA/QC — 9 messages
+  [15:21] duongdn: > Thì mình sẽ live luôn nguyên đám này tuần sau: Cái này sao rồi mn
+  [15:21] duongdn: Cái Pretashop tiến độ sao Dat Nguyen
+  [15:23] datnc: Hiện theo tasklog thì mới đc cỡ gần 50% giờ est nhan a. Còn cụ thể sao e phải sync với bên Việt trc đã, bạn đang mần con
+  [15:25] datnc: Chờ e test xong: [Console] Location management for products [Mobile] Location management for products Rồi release stagin
+  [15:25] datnc: Chắc là trong ngày mai release staging.
+  [15:28] duongdn: OK, question Hết tuần này VietPH nghỉ rồi nha ... TuanNT làm thay, có ảnh hưởng gì ko :D
+  [15:30] datnc: E chịu, e ko rành về tech lắm 😂. Cơ mà chắc là có, vì a Tuấn trc giờ ít làm bên này + với nhận transfer từ Việt thì ko 
+  [15:30] datnc: Chắc có thể cho mn transfer từ từ dần đi ạ.
+  [15:33] duongdn: OK e
+
+### Bailey transfer  — 1 message
+  [15:36] duongdn: Hi mn Hết tuần này Viet Pham  nghỉ nha ... Từ tuần sau Tuan Nguyen  sẽ làm Bailey A lập room để tiến hành transfer VietP
+
+### Cameron Batty - Appetise — 4 messages
+  [15:35] minhtv: Tai Tran:  ơi, tuần này để Hiep Nguyen  làm bên này nhé, a sẽ add e vào bên khác
+  [15:36] taitm: Thay full luôn hả a
+  [15:36] minhtv: uhm, 16h
+  [15:36] taitm: Oke a
+
+### Celine - OhCleo — 22 messages
+  [09:29] minhtv: a Duong Doan  ơi, bên Maddy sao rùi nhỉ ? Long nay có qua được bên này không ? A Tiến off, cái completion rate bữa chưa 
+  [09:32] duongdn: hiện bên Maddy cus đang complain, a nghĩ ko nên xin off hiện tại đâu  Giờ đâu còn tracker nữa, để mai làm luôn đi
+  [09:35] minhtv: cái mớ SEO có vấn đề gì ko a Dương, có questions gì không? Nếu ổn hết em tạm report trước, mai - mốt team bù sau
+  [09:36] duongdn: chưa check xong
+  [09:59] duongdn: a có hỏi 1 câu thôi, còn lại thì sẽ cần check lại lúc làm thôi
+  [14:44] minhtv: https://trello.com/c/jIm6jNYn/167-related-categories-module
+  [14:44] minhtv: bả có rep
+  [14:58] minhtv: Duong Doan:  ơi, bả rep mọi nơi , a ngó phát giúp e với
+  [14:59] duongdn: OK e
+  [16:10] minhtv: Duong Doan:  bả rep nữa nhé a ơi
+  [16:10] duongdn: >  No, I am just checking in search console. >do you have any tool to recommend?
+  [16:10] duongdn: này mình có được invite vào chưa mn ? [thread: 1 reply]
+    └ [16:27] minhtv: đã invite nhé a ơi
+  [16:11] minhtv: Chưa nhé a ơi
+  [16:19] minhtv: Screenshot 2026-06-22 at 16.19.34.png
+  [16:19] minhtv: Dương support bả phát với
+  [16:20] minhtv: * a @Dương support bả phát với
+  [16:46] minhtv: Mai mình cần done cái này , deploy lên production nhé mọi người ơi,  https://trello.com/c/cSU59AAN/134-completion-rate-r
+  [16:50] duongdn: a cần làm gì ?
+  [16:51] minhtv: em nhờ Hiệp làm luôn rùi, nhưng vẫn phải debug coi sao có user báo failed 🥶
+  [16:52] duongdn: upload thử rồi vào rollbar xem có issue gì ko nếu hok thì có thể ko phải lỗi dạng 500 mả logic gì đó Vậy thì để mobile g
+  [08:35] hiepnt: Task này giờ e cần integration api nào a nhỉ Tien Nguyen  https://trello.com/c/cSU59AAN/134-completion-rate-relevance-sc
+
+### Charles - Family — 6 messages
+  [10:24] duongdn: bên này task của Tuan Nguyen  xong chưa nhỉ ...  lâu thế :D
+  [10:24] duongdn: khi nào chốt được
+  [10:25] tuannt: Xong r anh dang chờ khách xem
+  [10:25] tuannt: Bên này 8 pages mới mà
+  [10:28] duongdn: OK xong qua Bailey làm ha
+  [10:28] tuannt: Ok anh
+
+### Delivery - Resource Arrangement — 4 messages
+  [09:51] namtv: NEW	TienND		22/06/2026	Bé bệnh ==> Tính bên Celine ko bù. Anh đã update note
+  [09:52] namtv: NEW	TuanNTG		22/06/2026	Đau bụng ==> Tính bên Elena ko bù. Anh đã update note
+  [09:57] namtv: NEW TinPC 22/06/2026 Không khoẻ -> Thay đổi thanh off, thay vì remote như plan ban đầu ==> Tính bên MyID ko bù. Anh đã u
+  [18:17] halt: Hi mn, Tất cả các nghỉ phép của Dev đã được xử lí, VÀ ĐÃ ĐƯỢC update note, còn các case chưa xử lý. MN check và confirm 
+
+### Direct Manager — 5 messages
+  [11:11] binhnt: Hi mn ,  Từ hnay thì c có add thêm tầm 1x dự án lên Workstream để ghi tasks log.  C đã nhắn riêng các DM ds. Mn follow t
+  [14:00] binhnt: Technical Article vẫn còn chờ một số bài của các em này nha mn :  AnhNVN MinhTV TienND NamTV VinhNT [thread: 1 reply]
+    └ [14:07] minhtv: Để em check lại chi tiết với chị, theo em note thì đã đủ hết 😅
+  [14:10] binhnt: Nhắc: nếu mà dự án k có tìm ra dc technical article, thì mn submit đủ số lượng bài lên và note là ko có nội dung phù hợp
+  [14:48] binhnt: Hiện còn 3 em nha:  AnhNVN TienND VinhNT
+
+### Elena - Active Alerts — 15 messages
+  [08:53] anhnvn: Plan bên mình tuần này gần như cũ nha: Các bạn BE (Kiet, Tuan): như cũ: FE: - TriNM: full - KhanhHH: còn 4h bên này sau 
+  [08:58] anhttl: anh Khanh Ho tuần trước có làm 1 ít UI của task AA-52, anh làm tiếp nha
+  [08:59] khanhhh: A ưu tiên các bên khác nào các bên khác hết giờ a mới qua đây nha
+  [09:02] anhttl: * anh Khánh tuần trước có làm 1 ít UI của task AA-52, anh Tri Nguyen  làm tiếp nha
+  [13:53] anhttl: anh Kiet Nguyen ơi, anh đang làm sub alert hay previous alert ấy anh
+  [13:53] kietnht: sub alert e, sao vậy
+  [13:54] anhttl: em tính hỏi cho anh Trí làm task, hiện giờ chưa biết tạo mới 1 cái previous alert như nào á
+  [13:55] kietnht: hmmm, sao phải tạo mới ấy
+  [13:55] kietnht: cái đó như là get thôi mà
+  [13:57] anhttl: trong cái table của previous có thêm 1 field là Action taken, value nó lấy từ chỗ close alert đó. giờ API sẽ làm thêm ha
+  [14:05] kietnht: đợi tí, checking ...
+  [14:39] kietnht: hmmm, có vẻ như hiện tại nó ko có data đó
+  [14:48] kietnht: cái này bây giờ có tạo cũng phải update API để nó trả về. Tri Nguyen  e assume nó là 1 text field 'actionTaken' rồi làm 
+  [14:52] trinm: cái field này nó nằm ở ngoài cùng cấp với id đồ luôn phải không anh
+  [14:53] kietnht: uhm, nằm ngoài cùng
+
+### James Diamond - Portfolio — 4 messages
+  [10:30] duongdn: https://workstream.nustechnology.com/ Hi @room  mn công ty mình có app là để quản lý tasklog dự kiến sắp tới sử dụng. Mn
+  [10:31] duongdn: ai done báo nha mn, để BDD add vào
+  [10:32] phucvt: Em done
+  [10:32] anhnh2: em done nha a ơi
+
+### Kunal - Fountain — 79 messages
   [08:52] trinhmtt: https://trello.com/c/BSrIHSmc#comment-6a35584e8368d5db81f84990 Vi Tran check comment nayf nha chi oi
   [08:53] trinhmtt: Em gui plan tuan nay aj ViTHT: 40h ThinhT: 20h => QC: 15h
   [09:08] vitht: Screenshot 2026-06-22 at 9.07.27 am.png [thread: 1 reply]
@@ -522,3 +205,218 @@
   [16:32] vitht: * Deploy này lên live giúp c với Vu Tat  ơi, feedback của ông Thomas cho card 2872 bên INFINITY ROSE https://github.com/
   [16:32] vitht: * https://github.com/iamksheth/FountainNewUI/pull/471  Còn cái này là fix issue trên production dụ cái duplicate item kh
   [16:32] vitht: * https://github.com/iamksheth/FountainNewUI/pull/471  Vu Tat Còn cái này là fix issue trên production dụ cái duplicate 
+
+### Maddy - Extreme Soft Solutions — 4 messages
+  [09:48] duongdn: Bên này còn gì làm ko Long Vo
+  [09:49] longvv: Còn 1 task nha a
+  [10:37] duongdn: xong thì hú ổng để ổng đưa thêm task hết thì có thể qua Cliene làm, nhớ báo a và cus
+
+### Những chú voi con đáng yêu — 4 messages
+  [16:22] vietph: Hi ae, chuyện là thứ 6 tuần này là ngày làm việc cuối cùng của e, thân mời mn t6 sau giờ làm mn ai rảnh mình làm tí gọi  [thread: 2 replies]
+    └ [16:37] khanhhh: T off t5 t6 về quê nên ko tham gia được nha fen. Chúc m thành công và may mắn trong dự định tương la
+    └ [16:38] longvv: Ba em chưa xuất viện nên khả năng cao em ko đi được rồi nha :'(, chúc anh Việt thành công trong chặn
+  [16:23] vietph: Địa điểm chắc là beer house cho gần, mn ai sắp xếp đc react msg này có gì để e đặt bàn 🤩
+
+### NUS - Access Control — 3 messages
+  [15:14] cuongnh: Chào tất cả mọi người, Mình vừa gửi checklist nghỉ việc của bạn TamHVH, VietPH qua email. Mn check mail nhé, nhận đc che
+  [15:17] honght: Hi anh, chị, Hai checklist đợt này khá dài nên mọi người check sớm giúp em với nhé, những phần nào có thể tiến hành trướ
+  [15:18] honght: * Hi anh, chị, Hai checklist đợt này khá dài nên mọi người check sớm giúp em với nhé, những phần nào có thể tiến hành tr
+
+### NUS - Elliott - New GreenFort Capital — 11 messages
+  [10:30] tuantt: Hi @room, từ tuần này, dự án mình switch từ sử dụng task log Google Sheet sang dùng Workstream để log giờ nha. Mn đăng n [thread: 9 replies]
+    └ [10:56] lucnt: Anh Tuan To  nhờ chị Bình add em vô project Elliott với
+    └ [11:38] tuantt: Oke
+    └ [11:40] tuantt: dòi á em
+    └ [11:46] namnn: Add em nữa nha anh Tuan To
+    └ [11:50] tuantt: Mn đăng nhập vào nha, done r báo a add. Đăng nhập xong mới có account để add
+    └ [11:50] tuantt: @room
+    └ [11:50] khanhhh: Tuan To: E done nha a, add e vào với
+    └ [11:50] namnn: em login r ak anh
+    └ [12:02] tuantt: Done nha, ai chưa đc add thì hú nha
+  [10:30] tuantt: Mn có stuck chỗ nào thì raise lên nha
+
+### NUS Technology — 3 messages
+  [11:05] thaonm: 📢 **Bản tin sáng đầu tuần:  Câu chuyện mang tên Cape Verde vẫn chưa có hồi kết!** 🌎 Sau loạt trận cuối tuần và rạng sá
+  [15:36] namtv: Hi mọi người, Trên Element, một số rooms khi tạo ra mọi người tạo ở Home nên ko có trong space NUS Technology dẫn tới mọ
+  [15:36] namtv: Screenshot 2026-06-22 at 3.26.32 PM.png
+
+### Potential - Blair Brown - WooCommerce Site  — 151 messages
+  [08:57] lenh: Dùng upwork account nào vậy anh
+  [08:57] anhnvn: Upwork Rick nha.
+  [08:58] anhnvn: A đang nhờ share
+  [08:58] anhnvn: Done
+  [08:59] duongdn: a Năm share hết rồi
+  [09:02] duongdn: req thì trên Upwork,  code thì ở server, a hiện đang làm trực tiếp trên staging, rồi sau đó đưa lên prod, ko có đưa code
+  [09:04] duongdn: === Task hiện tại kha kha phân mảnh, e có thể làm 2 cái này trước, copy trang này về web https://ironlabs.com.au/lab-res
+  [09:05] lenh: anh có file task log hay gì không?
+  [09:05] lenh: Em chưa có info gì hết?
+  [09:05] lenh: Git repo, ...
+  [09:06] lenh: Hay mình chưa có git repo luôn mà clone source từ server về
+  [09:06] anhnvn: Bên này về log task thì dùng app WorkStream mới của cty. Bên này cần bật tracker Upwork nha.
+  [09:06] lenh: .
+  [09:06] anhnvn: Về git anh Dương confirm giúp e? Hình như chỉ làm việc trên acc admin WordPress? ⚠️
+  [09:06] duongdn: Navigation (1).docx
+  [09:07] duongdn: xong sửa nav lại theo feedback này, có vài thứ chưa rõ có thể confirm (ví dụ trang how to play để đâu)
+  [09:07] duongdn: hiện tại vậy
+  [09:08] duongdn: ==== task có thể review thêm khi làm + mobile friendly: xem chỗ nào mobile chưa ok thì suggest ổng làm + shop page ajax:
+  [09:12] lenh: anh Duong Doan share em access vào "server = info trong Kinsta" với
+  [09:14] duongdn: trong Upwork á
+  [09:16] duongdn: mới copy qua workstream
+  [09:22] lenh: Em login thử kinsta thì có bắt nhập auth code
+  [09:23] lenh: Hostinger thì login ok
+  [09:23] duongdn: vậy thôi gởi key a add vào server đi
+  [09:25] lenh: `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDqp+z6sdluugZdFtOMq4bOORjmoY2FdK1ZPbbw7y7Zi rick@nustechnology.com`
+  [09:26] lenh: anh add key này giúp em
+  [09:28] lenh: ủa, staging và production của mình lần lượt đang dùng domain nào vậy anh Duong Doan, anh Anh Nguyen
+  [09:30] duongdn: Host peptideclyde.com   Hostname 130.162.161.233   User peptidesciences   Port 41232 Host peptideclyde-staging   Hostnam
+  [09:30] duongdn: Staging: https://stg-peptidesciences-staging.kinsta.cloud/ LIVE:  http://peptideclyde.com/
+  [10:04] lenh: https://ironlabs.com.au/lab-results => Page mẫu này mình có access vào không? Hay này là page của người ta. Mình tạo pag
+  [10:06] duongdn: k có access, chỉ là page mẫu
+  [10:06] duongdn: ổng muốn copy qua
+  [10:07] anhnvn: Như anh Dương nói, nhưng rõ hơn thì là page này là cái ổng muốn bắt chước nha. Của người khác, mình reference thôi.
+  [10:13] lenh: Là page này bên site mình có chưa anh Anh Nguyen , em lên xem trong Admin thì chưa thấy
+  [10:15] anhnvn: Page lab results thì a nhớ anh Dương chưa làm tới, chưa có đâu.  HÌnh như trước đó ổng có nói sẽ đưa mình content page đ ⚠️
+  [10:16] duongdn: copy bên kia thôi
+  [10:17] lenh: vậy chắc copy y sì bên kia, rồi nào ổng đưa content  thì update lại
+  [10:19] anhnvn: Uhm, ổng nói layout thì cứ bắt chước iron labs
+  [10:58] duongdn: Download 2026-06-22T03-57-50-305Z.zip
+  [11:15] lenh: Này là gì vậy anh Duong Doan
+  [11:16] lenh: Với cả hình như staging nó lỗi tè le
+  [11:16] duongdn: download
+  [11:16] duongdn: của cái ổng gởi
+  [11:19] lenh: ổng gửi gì cho mình vậy? Có hình, có file PSD, và file excel
+  [11:19] lenh: Hình và file excel thì hình như của products
+  [11:20] lenh: Còn file PSD thì em không có app xem
+  [11:22] duongdn: convert sang png đi
+  [11:23] duongdn: hoặc đem lên mấy tool đọc PSD online
+  [11:26] lenh: Ủa, anh add key của em chưa, sao em ssh thử nó vẫn hỏi password ta
+  [11:26] lenh: prod thì được, nhưng staging thì hỏi password
+  [11:32] lenh: anh Duong Doan
+  [11:32] lenh: anh fix này được không? Allowed memory size of 268435456 bytes exhausted
+  [11:32] lenh: Nó đang báo trên staging
+  [11:47] duongdn: mới add lại key vào staging, thử lại xem
+  [11:48] lenh: vào được rồi anh
+  [11:56] duongdn: chắc e cứ thử đăng nhập rồi nhờ ổng gởi code, để chủ động hơn nếu a ko online, ví dụ chiều mai a off ...
+  [11:59] lenh: mình chat với ổng qua upwork hả anh
+  [12:00] lenh: Log in to MyKinsta → Sites → peptideclyde.com Tools → PHP settings (or Site settings) Set PHP memory limit to 512M or 76
+  [12:00] anhnvn: Đúng rồi e, mình giao tiếp qua Upwork luôn
+  [12:00] lenh: anh Dương update MyKinsta này giúp em ⚠️
+  [12:00] lenh: cho staging á anh
+  [12:02] lenh: Staging nó bị lỗi memory limit rồi
+  [12:02] lenh: .
+  [12:10] lenh: image.png
+  [12:11] lenh: Cục này chắc phải viết custom code rồi. Không dùng Elementor hay mấy component đang có làm được
+  [13:27] duongdn: ok nhưng tại sao phải làm vậy nhỉ?  Trên live và staging tương tự nhau , 512 MB, nếu live ko bị mà staging có issue thì 
+  [13:27] duongdn: BTW, cus có msg, cần trả lời
+  [13:27] lenh: Staging nó bị lỗi memory limit
+  [13:28] lenh: anh check lại xem nó đang set 512MB không
+  [13:28] duongdn: > trên live và staging tương tự nhau , 512 MB
+  [13:29] lenh: em chưa update gì luôn. Em vào products list và mở elementor không được. Em bật debug mode lên thì nó báo lỗi memory
+  [13:29] duongdn: đúng là nó chỉ mới lỗi hôm nay thôi, theo như log trên server
+  [13:30] duongdn: image.png
+  [13:30] duongdn: ko update được nha, trừ khi có lí do hợp lí
+  [13:30] lenh: ủa, kỳ vậy. Nếu giống nhau sao live ok, mà staging lỗi ta
+  [13:31] duongdn: image.png
+  [13:31] duongdn: à, cũng ko được luôn, staging ko cho đổi
+  [13:34] duongdn: >em chưa update gì luôn. Em vào products list và mở elementor không được. Em bật debug mode lên thì nó báo lỗi memory Nà
+  [13:34] duongdn: * > em chưa update gì luôn. Em vào products list và mở elementor không được. Em bật debug mode lên thì nó báo lỗi memory
+  [13:40] lenh: mà products có 33 items, nó cũng tạch luôn
+  [13:49] duongdn: xử lí msg cus đi Le Ngo
+  [13:49] duongdn: pending lâu quá rời
+  [13:49] duongdn: msg tạm a đã gởi từ đầu h chiều
+  [14:02] lenh: image.png
+  [14:03] lenh: ý ổng là sao vậy anh Anh Nguyen , anh Duong Doan  hiểu ý ổng không
+  [14:03] lenh: ý là ổng muốn mình lấy cái logo ở giữa phía trên hả
+  [14:05] duongdn: ổng muốn + bỏ cái watermark  + thay bằng cái logo của mình, vị trí ở đâu thì chưa rõ
+  [14:06] lenh: Ổng hỏi là mình lấy từ file Figma được không? Mình có file Figma đó không
+  [14:07] duongdn: còn cái logo download thì nó đang ở trên web, đưa cho ổng
+  [14:07] duongdn: Figma mình có, dùng nick Rick, info trong UPwork
+  [14:09] duongdn: https://www.figma.com/design/YhDJRMYXg513LhFHlRHXK7/PEPTIDE-CLYDE?node-id=75-2&t=X4DFuSaWKK7VlNmj-0
+  [14:09] duongdn: cái này export được
+  [14:10] duongdn: a có log nó vào Workstream cho dễ track
+  [14:15] lenh: Em reply và gửi cái hình logo rồi
+  [14:37] lenh: anh Duong Doan Giờ làm sao edit cái page anh? Cái elementor nó error, không edit page hay làm gì được,
+  [14:43] lenh: image.png
+  [14:44] lenh: Hình như cái staging nó đang nhận memory limit là 256MB hay sao á anh
+  [14:47] duongdn: A xài AI edit ko à, ko có mở admin
+  [14:47] lenh: Nó ở đâu vậy anh
+  [14:49] duongdn: trong máy a
+  [14:49] lenh: 😮
+  [14:49] lenh: Là anh dùng con AI cho nó làm hả
+  [14:50] lenh: Em mới run phpinfo trên staging. Nó nhận có 256MB thôi anh
+  [14:50] duongdn: tất nhiên, thời đại AI mà, ai dùng tay nữa ...
+  [14:51] lenh: Ôi, thôi chết. Page labs result đưa nó làm không ổn đâu anh
+  [14:52] duongdn: Blair Brown 2:48 PM I agree, communications is very slow
+  [14:52] lenh: sao đây nó ghi là 512MB mà staging nó xài có 256MB
+  [14:52] lenh: kỳ lạ
+  [14:52] duongdn: lưu ý Le Ngo , ổng bắt đầu chê communication chậm
+  [14:54] lenh: ổng hỏi có xài Signal chat không
+  [14:54] duongdn: a thấy cũng ko cần phải xử lí nó đâu có nhiều giải pháp _ Ai _ đem về local Dự án này cũng đơn giản, a làm ngày vài tiến [thread: 2 replies]
+    └ [14:56] lenh: em đang dùng Cursor
+    └ [14:57] lenh: Em sẽ thử dùng Cursor AIs cho nó làm thử trên staging
+  [14:54] duongdn: hoặc cái nào cũng được
+  [14:55] duongdn: --- Lưu ý cần thận performance, nguyên cả tuần trước a chỉ làm tổng cộng ... 8 tiếng  Vẫn có output đều đặn mỗi ngày
+  [15:04] lenh: Vậy mình không làm gì được cho staging hả anh
+  [15:06] duongdn: này thưc sự hơi khó, nếu mình thực sự bắt buộc phải dùng Elementor thì có thể sẽ phải cần 1 cái paid staging Giá 24$/mon
+  [15:06] lenh: Khách báo invite Rick slack
+  [15:07] duongdn: Uhm
+  [15:07] duongdn: peptideclyde.slack.com
+  [15:09] lenh: dùng google account Rick để login hả anh
+  [15:10] lenh: Nếu không thì em chưa có được share account slack của Rick
+  [15:13] lenh: anh Năm share em mail Rick rồi nha
+  [15:14] lenh: em vào slack được rồi nah
+  [15:14] duongdn: thì login theo email code như mọi dự án thôi
+  [15:18] duongdn: Cus đang hỏi về cái water-mark nha
+  [15:19] lenh: chưa hiểu ổng nói gì
+  [15:20] lenh: Hình như anh send logo without background rồi
+  [15:20] lenh: You want to put on the water marks?
+  [15:20] lenh: Là sao, em không hiểu context đang nói là gì?
+  [15:20] duongdn: Chắc e cứ nc trực tiếp với cus nha Đây là task mới, cũng ko ai có info gì thêm cho em cả Chờ discuss ở đây khá là chậm c
+  [15:21] duongdn: A cũng ko hiểu ổng nói gì trong cái watermark
+  [15:22] duongdn: lưu ý cái này nữa nha
+  [15:22] anhnvn: image.png
+  [15:22] anhnvn: Đang nói cái này à mn?
+  [15:23] lenh: đúng rồi anh
+  [15:23] anhnvn: can you put the logo across the coas like a water mark ?
+  [15:23] anhnvn: Phải câu này mình đang ko hiểu ko?
+  [15:24] anhnvn: COAs nó là đống file PNG ổng gửi mình trong cái zip
+  [15:24] anhnvn: Đại khái ổng muốn add logo của app ổng lên trên đó như là 1 watermark
+  [15:24] anhnvn: Tính ra ko phải task development lắm, có khi là kêu AI làm...
+  [15:25] anhnvn: Le Ngo: xài thử tool này xem sao :)) https://www.iloveimg.com/watermark-image
+  [15:26] anhnvn: Thấy search ra cũng nhiều, ko phải mỗi cái này.
+  [15:26] anhnvn: Tóm lại: riêng cái vụ watermark, nghĩa là đưa logo "peptideclyde" của app mình làm watermark trên đống hình COAs
+  [15:27] anhnvn: Mình chắc export dc cái logo rồi nhỉ?
+  [15:28] lenh: Được rồi anh, để em thử chèn logo làm water mark cho 1 cái hình trong list file COAs của ổng gửi
+  [15:29] anhnvn: Bản chất chèn watermark là lấy cái hình cần chèn, chỉnh opacity trong suốt vừa phải rồi đè lên cái hình muốn chèn thôi c
+  [15:30] duongdn: Lễ nhớ cố gắng trả lời cus, dù chỉ là msg tạm, thấy msg toàn của ổng, mình chả có nói gì, a mới msg tạm lại
+  [15:30] duongdn: ổng mới chê communication sáng nay chậm đó
+  [15:37] lenh: em mới đưa ổng 1 sample xem ổng ok không?
+  [17:49] lenh: Gửi lại ổng list file COAs có water mark và share ổng cái Lab Results draft page cho ổng xem. Chắc tạm ổn
+
+### Recruitment — 3 messages
+  [13:49] trucpdt: Hi anh Chien Tran , anh Nam Tran , c Thuy Le , anh Kiet Nguyen  cc c Tham Do , Bạn HaVS có nhắn như sau: Em họ Hà là sv 
+  [14:01] chientx: Không e, đợt thực tập này coi như mình build xây dựng quan hệ với trường BK và sv bên đó theo chương trình của họ, và in
+  [14:02] trucpdt: dạ anh, em noted và sẽ phản hồi Hà ạ
+
+### Rory Hackett - BXR App — 21 messages
+  [08:54] minhtv: okay, vậy tạm thời team mình pause cho đến khi có phản hồi từ khách nhé, riêng bên QC vẫn dạo lại app tìm bugs giúp anh 
+  [10:40] minhtv: Khoa Tran:  , Tin Pham  kéo task hết giúp a, chú ý check list trong task
+  [10:46] khoatd: https://swiftstudio.atlassian.net/browse/BXR-238
+  [10:46] khoatd: Screenshot 2026-06-22 at 10.45.58.png
+  [10:46] khoatd: cái ticket này thì có 1 cái thôi
+  [10:46] khoatd: 3 cài chưa unchecked chắc là remove
+  [10:46] khoatd: à, cái Promotions này thì hình như vẫn có thì phải
+  [10:47] minhtv: kể cả cái themes cũng có , team design đang làm
+  [10:47] khoatd: vậy để lại in-progress
+  [10:47] minhtv: nào các bạn báo done hết , move task , check đủ những check list đã làm báo a , nhảy vào kiểm tra nhé
+  [10:50] khoatd: updated rồi đó anh
+  [10:50] minhtv: https://swiftstudio.atlassian.net/jira/software/c/projects/BXR/boards/2?selectedIssue=BXR-232 Vậy cái này thì sao?
+  [10:51] khoatd: cái ticket đó bị lỗi mẹ hay gì rồi
+  [10:51] khoatd: em checked nó 2 lần mở lên vẫn là uncheckd
+  [10:51] khoatd: vl
+  [10:52] minhtv: Thì lần đầu là check , lần 2 là uncheck , mở lên là unchecked 🤣
+  [10:53] khoatd: kkk
+  [10:53] minhtv: Đùa chứ chắc do 2 người mở cùng 1 task
+  [10:54] khoatd: chắc vậy chứ mỗi lần checked là e đều đóng ticket đi mà :))
+  [10:55] minhtv: thì a còn mở
+  [13:23] minhtv: roryh  [1:20 PM] Only some light testing so far but all seems ok. ổng có feedback về UAE
