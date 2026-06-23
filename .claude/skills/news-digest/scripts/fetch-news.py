@@ -415,24 +415,32 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
+CACHE_FILE = "/tmp/news-digest-cache.json"
+
+
 def parse_args(argv):
     topic = "all"
     tag = None
     limit = 100
+    save_cache = None
 
     for arg in argv[1:]:
         if arg.startswith("--tag="):
             tag = [t.strip() for t in arg.split("=", 1)[1].split(",") if t.strip()]
         elif arg.startswith("--limit="):
             limit = int(arg.split("=", 1)[1])
+        elif arg.startswith("--save-cache="):
+            save_cache = arg.split("=", 1)[1]
+        elif arg == "--save-cache":
+            save_cache = CACHE_FILE
         elif not arg.startswith("--"):
             topic = arg.lower()
 
-    return topic, tag, limit
+    return topic, tag, limit, save_cache
 
 
 def main():
-    topic, tag, limit = parse_args(sys.argv)
+    topic, tag, limit, save_cache = parse_args(sys.argv)
 
     if topic == "all":
         selected = list(SOURCES.items())
@@ -457,7 +465,16 @@ def main():
             topic_result["sources"].append(data)
         output["results"].append(topic_result)
 
-    print(json.dumps(output, ensure_ascii=False, indent=2))
+    json_out = json.dumps(output, ensure_ascii=False, indent=2)
+    print(json_out)
+
+    # Save cache so fix-links.py can post-process the markdown
+    cache_path = save_cache or CACHE_FILE
+    try:
+        with open(cache_path, "w", encoding="utf-8") as f:
+            f.write(json_out)
+    except Exception:
+        pass  # cache is best-effort
 
 
 if __name__ == "__main__":
