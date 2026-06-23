@@ -1,3 +1,28 @@
+# Daily Report — 2026-06-23 (Tuesday)
+
+**Run:** 2026-06-23T08:46 (+07:00)
+**Window:** 2026-06-22T08:49:00+07:00 → 2026-06-23T08:46+07:00
+**Leave plan:** KhanhHH on leave 2026-06-25~26 (full days, family event)
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Sheets | KhanhHH: 2h only (6h shortfall vs 8h target), no leave, Mon 22/06 |
+| 2 | Sheets | LeNH: 0h, no leave, Mon 22/06 — reminder needed |
+| 3 | Matrix | VietPH last day Friday 27/06 — Bailey handover risk (TuanNT replacing, new to project) |
+| 4 | Fountain | Task #2702 NEW over-estimate +218.8% (In-progress >50%) |
+| 5 | Fountain | Bugs list 14→18 (+4 new bugs) |
+| 6 | Fountain | mike62798179 pressing on #2868 (Scheduled Order bug) |
+| 7 | Matrix | Blair Brown: customer complained "communications is very slow" (22/06 14:52) |
+| 8 | Matrix | Blair Brown: MyKinsta staging PHP memory 256MB stuck — Elementor crashes, unresolved |
+| 9 | Discord | Jeff (AirAgri) iOS deploy blocked: Apple PLA update not accepted — external blocker |
+
+**Today (Tue 23/06):** TienND off 22/06 (bé bệnh), TuanNTG off 22/06 (đau bụng), TinPC off 22/06 (không khoẻ). KhanhHH on leave Thu–Fri this week.
+
+---
 
 ## Discord — 01:35 (+07:00)
 | Server | Msgs | Key content |
@@ -247,3 +272,36 @@ Key findings:
 
 Trello: Fountain ✓ **complete** — all 5 parts checked. Plan present, no over-estimate spike (tracked tasks stable). Checklist item "Fountain - DOCUMENT" marked complete.
 
+
+## Sheets — all devs — 01:44 (+07:00)
+
+| Developer | Hours (2026-06-22) | Leave | Status |
+|-----------|-------------------|-------|--------|
+| LongVV | 0h today (week W12 total: 0h / 16h target) | - | ⚠️ Week started Mon — no hours logged yet. Monitor weekly. |
+| PhucVT | 8h (JamesDiamond W31) | - | ✓ |
+| TuanNT | 8h total (Paturevision 7h \| CharlesChang 1h \| JohnYi 0h \| Rebecca 0h \| Neural 0h) | - | ✓ — has hours → gates John Yi + Rebecca + Bailey Trello items |
+| VietPH | 8h (Paturevision W33) | - | ✓ |
+| KhanhHH | 2h total (Baamboozle WS: 1.5h + 0.5h; all Sheets = 0h) | - | ⚠️ SHORT — only 2h vs 8h target. No leave. |
+| LeNH | 0h (Rory W17=0, Franc W30=0, Rebecca W30=0, all other sheets=0) | - | ⚠️ ALERT — 0h, no leave |
+
+**Alerts:**
+- ⚠️ **KhanhHH**: Only 2h logged (Baamboozle WS task logs). All 11 sheets empty. 6h shortfall vs 8h daily target. No leave.
+- ⚠️ **LeNH**: 0h across all 11 sheets. No leave on 2026-06-22. Reminder needed.
+- ⚠️ **LongVV**: 0h for Monday (first day of new week W12). Part-time 16h/week — will monitor weekly total through Friday. Not alerting yet per rules.
+
+**TuanNT gate result:** TuanNT has 8h → John Yi + Rebecca + Bailey Trello items can be completed.
+
+## Sheets — Maddy JIRA — W12 — 01:44 (+07:00)
+
+No ticket entries in W12 task log (week of 2026-06-22). Maddy sheet W12 is empty for Monday — no JIRA cross-check items to report.
+
+## Reminders — 08:46 (+07:00)
+
+| Developer | Status | Action |
+|-----------|--------|--------|
+| LeNH | ⚠️ 0h on Mon 22/06, no leave | Reminder needed (use --send-reminder to send) |
+| KhanhHH | ⚠️ 2h only (shortfall 6h), no leave | Monitor — not 0h, no Matrix reminder triggered |
+| LongVV | 0h Mon (part-time, week just started) | Monitor weekly — not alerting until Fri |
+
+Matrix reminders (printed, NOT sent — add --send-reminder to send):
+- **LeNH** → room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!"
