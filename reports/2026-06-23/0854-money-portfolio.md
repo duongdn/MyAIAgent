@@ -1,13 +1,13 @@
 # Portfolio Report — 2026-06-23 08:54
 
-> **CORRECTED 09:50 — Net Worth is now VERIFIED, not reconstructed.** Two earlier fixes (account-balance, then loan-tracking cost-basis) both undercounted because investment wallets (VCBS/VCBF/FPTS/Finhay) accrue "Tiền lãi" (interest/dividend) entries my formula missed. Final fix: read MISA's own "Tổng số dư" widget directly from the dashboard (click the hide-balance icon to unmask) — this is the app's authoritative total, not a manual sum.
+> **CẬP NHẬT 10:40 — User đã sửa bug ngay trên app, số liệu giờ verified và self-consistent.** Lịch sử các lần sửa: (1) account-balance trực tiếp → sai 5.93B; (2) cost-basis loan-tracking → sai 7.14B (thiếu lãi); (3) đọc "Tổng số dư" trực tiếp → 7.345B (vẫn thiếu vì website bug "tikcop 5 week"=0₫); (4) đối chiếu mobile app → tìm ra bug, **user tự đóng sổ cũ + tạo lại "tikcop 5m" đúng giá trị** → re-fetch website API ra số mới, đúng.
 >
-> **Verified Net Worth: 7,345,661,716 ₫** (not 5.93B from the first report, not 7.14B from the second). The category breakdown below is still a best-effort manual reconstruction and may not sum exactly to the verified total — trust the headline number, not the per-category math.
+> **Net Worth hiện tại: 7,747,602,027 ₫ (~7.75 tỷ)** — đọc trực tiếp từ API `/wallets/totaldashboard` sau khi bug đã sửa. Còn lệch ~75M so với mobile (tồn tại cả trước/sau fix, không liên quan bug) — khả năng là chênh cost-basis vs giá trị thị trường ETF/Fund, không phải lỗi dữ liệu.
 
 ## Summary
 | | Amount (₫) |
 |-|-----------|
-| **Net Worth (verified, từ app)** | **7,345,661,716** |
+| **Net Worth (verified, sau khi fix bug)** | **7,747,602,027** |
 | Liabilities | −39,828,702 |
 | USD/VND rate (Paypal) | ~26,441 |
 

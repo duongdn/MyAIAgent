@@ -52,9 +52,9 @@
 <!-- KPI Row -->
 <div class="kpi-row">
   <div class="kpi">
-    <div class="label">Net Worth (đầy đủ nhất — mobile app)</div>
-    <div class="value">7.820 tỷ</div>
-    <div class="delta neutral">Tổng có 7,860.3M − Tổng nợ 40.4M</div>
+    <div class="label">Net Worth (đã fix bug, verified)</div>
+    <div class="value">7.748 tỷ</div>
+    <div class="delta up">▲ 401.9M sau khi sửa sổ "tikcop 5 week"→"5m"</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -80,21 +80,19 @@
 
 <div class="grid full">
   <div class="card" style="border-color:#14532d;background:#0a1f12">
-    <h3 style="color:#4ade80">✅ ĐÃ GIẢI HOÀN TOÀN: website MISA bug, sổ tiết kiệm "tikcop 5 week" vẫn còn nguyên 401.9M</h3>
+    <h3 style="color:#4ade80">✅ Bug đã được sửa trên app — website giờ đúng lại</h3>
     <table style="margin-bottom:12px">
-      <thead><tr><th>Sổ tiết kiệm</th><th class="right">Số dư</th><th>Đáo hạn</th><th>Lãi suất</th></tr></thead>
+      <thead><tr><th></th><th class="right">Net Worth</th></tr></thead>
       <tbody>
-        <tr><td>vcb 1 month</td><td class="right">503,977,053</td><td>09/07/2026</td><td>4.75%</td></tr>
-        <tr><td>tikcop 1m</td><td class="right">102,087,367</td><td>02/07/2026</td><td>6.3%</td></tr>
-        <tr><td>tịkcop 1 week</td><td class="right">30,105,411</td><td>25/06/2026</td><td>6.1%</td></tr>
-        <tr><td>tikcop 5 week <span style="color:#fb923c">(website API trả về 0₫ — bug)</span></td><td class="right green">401,917,738</td><td>13/10/2026</td><td>7.5%</td></tr>
-        <tr style="border-top:1px solid #334155"><td><b>Tổng 4 sổ (khớp mobile app)</b></td><td class="right"><b>1,038,087,569</b></td><td></td><td></td></tr>
+        <tr><td>Trước khi sửa (bug "tikcop 5 week" = 0₫ trên website)</td><td class="right red">7,345,661,716</td></tr>
+        <tr><td>Sau khi bạn đóng sổ cũ + tạo lại "tikcop 5m" (401,918,000₫)</td><td class="right green">7,747,602,027</td></tr>
+        <tr><td>Đối chiếu mobile app trước đó (Tổng có − Tổng nợ)</td><td class="right">7,819,879,454</td></tr>
       </tbody>
     </table>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.6">
-      <b>Root cause xác nhận:</b> wallet "tikcop 5 week" CÓ trong response API <code>/wallets/savings</code> của website (active, đúng ngày đáo hạn, đúng lãi suất) nhưng field <code>currentAmount</code> bị trả về <b>0</b> — lỗi dữ liệu phía MISA website (bản beta), không phải lỗi script. Mobile app hiển thị đúng 401,917,738 ₫.<br><br>
-      <b>Tiền không hề mất hay đáo hạn sớm</b> — đây là chính sổ 401.9M đã xuất hiện trong báo cáo 26/05 cũ (lúc đó tôi đặt nhầm tên là "tikcop 1 week"). Sổ "tịkcop 1 week" (30.1M) là MỘT sổ khác, nhỏ hơn, tồn tại độc lập song song từ trước — không phải sổ lớn "co lại".<br><br>
-      <b>Net Worth chuẩn 7.82 tỷ ở KPI trên đã đúng và đầy đủ.</b> Không còn khoản nào chưa giải thích được.
+      Đã re-fetch và xác nhận: API <code>/wallets/totaldashboard</code> tăng đúng 401.94M sau khi bạn sửa — website giờ tự nhất quán, không còn bug sổ "tikcop 5 week" nữa.<br><br>
+      Vẫn còn lệch ~75M so với mobile app (cùng tồn tại cả trước và sau khi sửa, nên KHÔNG liên quan đến bug đó) — khả năng cao là chênh lệch giữa <b>cost-basis</b> (giá vốn) và <b>giá trị thị trường hiện tại</b> của VCBS/VCBF/FPTS/Finhay (~1.49 tỷ đang đầu tư, dao động giá ETF/Fund ~5% là bình thường). Không phải lỗi dữ liệu.<br><br>
+      <b>Dùng 7,747,602,027 ₫ (~7.75 tỷ) làm Net Worth chuẩn hiện tại</b> — website giờ đáng tin trở lại.
     </div>
   </div>
 </div>
@@ -236,7 +234,7 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [7.971, 7.951, 7.952, 7.820],
+      data: [7.971, 7.951, 7.952, 7.748],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,

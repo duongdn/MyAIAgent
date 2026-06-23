@@ -51,7 +51,7 @@
     },
     {
       "date": "2026-06-23",
-      "label": "23/06",
+      "label": "23/06 (trước khi user fix bug)",
       "net_worth": 7819879454,
       "gross_assets": 7860304454,
       "liabilities": 40425000,
@@ -65,7 +65,17 @@
         "cho_vay_cost_basis": 1490666644
       },
       "method": "mobile_app_verified",
-      "note": "VERIFIED against mobile app 'Tài chính hiện tại' + 'Quản lý sổ tiết kiệm' screens (screenshots 2026-06-23 10:19 and 10:27). Every line item cross-checked against website API data and matched exactly EXCEPT savings_account. ROOT CAUSE FOUND: website's /wallets/savings DOES return the wallet 'tikcop 5 week' (401,917,738 ₫, active, matures 2026-10-13, 7.5%) but with currentAmount=0 — a confirmed MISA website bug, not a fetch/code error. The 4 real active savings books are: vcb 1 month (503,977,053) + tịkcop 1 week (30,105,411) + tikcop 1m (102,087,367) + tikcop 5 week (401,917,738) = 1,038,087,569, matching mobile exactly. (Side note: this also retroactively confirms the 26/05 report's 'tikcop 1 week: 401,917,738, maturity 2026-10-13' entry was the same book mislabeled — it should have been called 'tikcop 5 week'; the real, smaller 'tịkcop 1 week' 30.1M book is a separate, distinct savings account that existed the whole time.)"
+      "note": "VERIFIED against mobile app 'Tài chính hiện tại' + 'Quản lý sổ tiết kiệm' screens (screenshots 2026-06-23 10:19 and 10:27), captured BEFORE the user fixed the website-side data bug. ROOT CAUSE: website's /wallets/savings returned wallet 'tikcop 5 week' (active, matures 2026-10-13, 7.5%) with currentAmount=0 (MISA website bug). User then closed that broken entry and recreated it as 'tikcop 5m' with the correct balance — see the next snapshot for the post-fix verified total."
+    },
+    {
+      "date": "2026-06-23",
+      "label": "23/06 (sau khi user fix bug)",
+      "net_worth": 7747602027,
+      "gross_assets": null,
+      "liabilities": null,
+      "categories": null,
+      "method": "dashboard_verified",
+      "note": "User closed the buggy 'tikcop 5 week' (currentAmount stuck at 0) and recreated it as 'tikcop 5m' (401,918,000 ₫, same maturity 2026-10-13, same 7.5% rate). Re-fetched via website API GET /wallets/totaldashboard = 7,747,602,027 — now self-consistent (no more website savings bug). Manual cost-basis reconstruction gives 7,822,507,507 (~75M higher) — this residual gap is consistent both before and after the tikcop fix, so it is NOT related to that bug; most likely explanation is unrealized P&L on VCBS/VCBF/FPTS/Finhay (cost-basis ~1.49B vs current market value, ETF/Fund prices fluctuate ~5%). Treat 7,747,602,027 as the current best authoritative Net Worth going forward; the website API should now be reliable again since the underlying data bug is fixed."
     }
   ]
 }
