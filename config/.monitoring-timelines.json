@@ -6,7 +6,7 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-22T08:49:00+07:00",
+    "last_run": "2026-06-23T08:57:00+07:00",
     "output_file": "reports/2026-06-22/daily-report.md",
     "last_status": "complete_with_recheck_pending",
     "recheck_pending": [
@@ -153,7 +153,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-22T08:49:00+07:00",
+    "last_run": "2026-06-23T08:57:00+07:00",
     "output_file": "reports/2026-06-22/daily-report.md"
   },
   "bailey-monitor": {
@@ -163,5 +163,18 @@
   "slack": {
     "last_run": "2026-06-23T01:38:32.440Z",
     "status": "ok"
+  },
+  "philip_msteams": {
+    "last_run": "2026-06-23T01:56:31.362Z",
+    "status": "complete"
+  },
+  "neural_upwork": {
+    "last_run": "2026-06-23T01:56:31.362Z",
+    "status": "complete"
+  },
+  "scrin_io": {
+    "last_run": "2026-06-23T01:56:31.362Z",
+    "status": "complete",
+    "note": "0 sessions 2026-06-22 (Monday)"
   }
 }

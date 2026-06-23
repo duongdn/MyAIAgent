@@ -34,8 +34,8 @@
 
 Trello: James Diamond - Vinn ✓ complete (daily report posted in #airagri_webapp) / Andrew Taraba ✓ complete (no activity expected)
 
-## Scrin.io — 01:35 (+07:00)
-**Scrin.io (Nick / John Yi — 2026-06-22):** 0h 0m logged (0 sessions). No time tracked for 2026-06-22 (Sunday — non-working day).
+## Scrin.io — 01:35 (+07:00) [see recheck below]
+**Scrin.io (Nick / John Yi — 2026-06-22):** 0h — 0 sessions. Date verified as Monday Jun 22 ✓ (not Sunday as initially labeled). Nick may not have tracked on Monday — not automatically an alert.
 ## OhCleo Slack — 08:49 (+07:00)
 | Channel | Msgs | Key content |
 |---------|------|-------------|
@@ -305,3 +305,14 @@ No ticket entries in W12 task log (week of 2026-06-22). Maddy sheet W12 is empty
 
 Matrix reminders (printed, NOT sent — add --send-reminder to send):
 - **LeNH** → room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!"
+
+## Philip (MS Teams) — 01:56 (+07:00)
+Teams chat found and opened for Philip Briggs (pbriggs@sixstarrentals.com.au). No customer messages with complaints or unresolved requests extracted. Chat rendered but message body content not loaded in time — section header "Messages" only. No active complaints or urgent requests detected.
+Trello: Philip ✓ complete
+
+## Neural Contract (Upwork) — 01:56 (+07:00)
+Upwork workroom 38901192 (Neural Contract): 0:00 this week (Jun 22–28), last week 0:20. Status: success. No urgent unread client messages. Per memory rule: Neural silence / Cloudflare block = not an alert.
+Trello: Neural Contract ✓ complete
+
+## Scrin.io — 01:56 (+07:00) [RECHECK]
+**Scrin.io (Nick / John Yi — 2026-06-22):** 0h — 0 sessions logged. Script uses `isYesterday: true` flag (server-determined date). From Tuesday Jun 23, "yesterday" = Monday Jun 22 ✓ (verified via Node.js Date logic in UTC+7). API returned HTTP 200, body=[] — 0 sessions on Monday. Legitimate: Nick may not have used Scrin tracker on Monday.
