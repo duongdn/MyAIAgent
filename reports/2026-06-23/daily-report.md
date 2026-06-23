@@ -35,3 +35,28 @@ Tony daily report: present at 10:34
 > **10:34** (daily report): "[FE] SEO: Expand Erotic Audio Page / [FE] Add FAQ Schema To SEO Pages / [FE - BE - Mobile] Completion Rate & Relevance Score to Track Management — still testing, plan to release new version by end of tomorrow"
 
 Trello: Ohcleo ✓ complete
+
+## Email — all — 08:37 (+07:00)
+**Window:** 2026-06-22T08:49:00+07:00 → 2026-06-23T08:37+07:00
+
+| Account | Emails in window | Alerts | Calendar today |
+|---------|-----------------|--------|----------------|
+| duongdn@nustechnology.com | 0 | none | no events |
+| carrick@nustechnology.com | 0 | none | no events |
+| nick@nustechnology.com | 0 | none | 21:30 Weekly Meeting with Devs |
+| rick@nustechnology.com | 3 | none (Blair B. Upwork msgs — routine) | 10:30 OmniGPT Daily Sync, 12:30 HEAL Meeting |
+| kai@nustechnology.com | 0 | none | no events |
+| ken@nustechnology.com | 20 | none (GitHub dependabot + PR notifications — routine) | 08:30 DE Standup, 09:00 DE Bi-weekly retro, 09:00 DE Tech Talks, 09:30 Martin<>Ken |
+| vuongtrancr@gmail.com | 0 | none | n/a (calendar: no_principal) |
+| dnduongus@gmail.com | 0 | none (personal: LinkedIn/newsletters/bank — filtered) | n/a (calendar: no_principal) |
+| freelancer@mypersonalfootballcoach.com | 2 | none (New Relic performance report + TestFlight build 4.1.1) | n/a |
+
+**Leave plan:**
+- KhanhHH: 2026-06-25, 2026-06-26 (full) — về quê đám giỗ bà ngoại
+
+**Notable:**
+- MPFC TestFlight 4.1 (4.1.1) available for iOS testing (Mon 22 Jun, 07:47 UTC)
+- MPFC New Relic June 22 performance report received (no alert, routine)
+- No security alerts, no production errors in window
+
+Trello: Check mail — all 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick)
