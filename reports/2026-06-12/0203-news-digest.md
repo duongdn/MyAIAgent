@@ -24,7 +24,7 @@
 ### 📊 Chứng khoán Việt Nam
 
 **Google News – Chứng khoán VN**
-- [VN-Index giảm điểm, thanh khoản xuống mức thấp nhất hơn 1 năm](https://news.google.com/rss/articles/stock-vn-index) — Phiên 11/6, VN-Index giảm nhẹ, đặc biệt thanh khoản xuống đáy hơn 1 năm gây lo ngại.
+- [VN-Index giảm điểm, thanh khoản xuống mức thấp nhất hơn 1 năm](https://news.google.com/articles/stock-vn-index) — Phiên 11/6, VN-Index giảm nhẹ, đặc biệt thanh khoản xuống đáy hơn 1 năm gây lo ngại.
 - [VN-Index giảm nhẹ, rủi ro rung lắc tiếp diễn ngày 12/6](https://vneconomy.vn) — Chuyên gia dự báo thị trường tiếp tục dao động, cần quản trị rủi ro ngắn hạn.
 - [VN-Index lại lùi về dưới 1.800 điểm](https://tapchinhodanhnghiep.vn) — Chỉ số VN-Index đã lùi dưới ngưỡng tâm lý 1.800 điểm trong phiên giao dịch ngày 11/6.
 - [Vì sao VN-Index tăng nhưng nhiều nhà đầu tư không có lãi?](https://viettimes.vn) — Phân tích hiện tượng chỉ số tăng nhưng phần lớn cổ phiếu không theo kịp.

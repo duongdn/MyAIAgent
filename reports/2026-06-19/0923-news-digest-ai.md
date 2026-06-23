@@ -40,9 +40,9 @@
 - [Beyond LoRA: kỹ thuật fine-tuning nào vượt được LoRA?](https://huggingface.co/blog/peft-beyond-lora) · 18/6 — So sánh kỹ thuật fine-tuning thay thế LoRA.
 
 ### Model Releases & Benchmark (Google News)
-- [Anthropic ra mắt Claude Opus 4.8](https://news.google.com/rss/articles/CBMiWkFVX3lxTFBVeFZoaVpfX1hnTlJPS05nQWZYRnB6bUdOc3pzSmlyX3dpN3BleUlVQm53Z3Bxd29JOUw1MENDMWk5VF9CX1VSU0Q2eV9zMXZWNUVOb2V4N2VaUQ?oc=5) · 28/5 — Thông báo chính thức từ Anthropic.
-- [Claude Opus 4.8 vượt Gemini và GPT trên nhiều bài test coding](https://news.google.com/rss/articles/CBMiZEFVX3lxTE9fQ0hyLUhmMzBzZHEzX1YxVTUzWHRQMElSZXl5bEI5RGV0RXhtZFNweUpqWHUtMENwVWZFd3dNTVc5bEdJXzI3dEVnMEdlV3RGeEhNejEwZFVlVU1IR3FmTG1WMjc?oc=5) · 29/5 — So sánh benchmark coding giữa các model hàng đầu.
-- ["AI Model War" tháng 6/2026: Claude Opus 4.8 vs GPT-5 vs Gemini 2.5 Pro](https://news.google.com/rss/articles/CBMimwFBVV95cUxPN2FyTDl4dkE3R3ZHZno5NnhQYnh4NGYwRWd2djNCUGtrVU5DcEFSeFA3VmFMNHJDNlliMy1KcWhEbzNRVzFKRURhQXo3UjE1SVoxWmhLOWd5Wk93ajJmbURnMHExZTU4Q0dmeWdjMWpkeHF0VmxFSUxCd2ZGdVFjS3NnR3B2YW9nSWN0OVVzWGMzREs1UnlSSm1aOA?oc=5) · 18/6 — Báo cáo developer so sánh 3 model lớn.
+- [Anthropic ra mắt Claude Opus 4.8](https://news.google.com/articles/CBMiWkFVX3lxTFBVeFZoaVpfX1hnTlJPS05nQWZYRnB6bUdOc3pzSmlyX3dpN3BleUlVQm53Z3Bxd29JOUw1MENDMWk5VF9CX1VSU0Q2eV9zMXZWNUVOb2V4N2VaUQ) · 28/5 — Thông báo chính thức từ Anthropic.
+- [Claude Opus 4.8 vượt Gemini và GPT trên nhiều bài test coding](https://news.google.com/articles/CBMiZEFVX3lxTE9fQ0hyLUhmMzBzZHEzX1YxVTUzWHRQMElSZXl5bEI5RGV0RXhtZFNweUpqWHUtMENwVWZFd3dNTVc5bEdJXzI3dEVnMEdlV3RGeEhNejEwZFVlVU1IR3FmTG1WMjc) · 29/5 — So sánh benchmark coding giữa các model hàng đầu.
+- ["AI Model War" tháng 6/2026: Claude Opus 4.8 vs GPT-5 vs Gemini 2.5 Pro](https://news.google.com/articles/CBMimwFBVV95cUxPN2FyTDl4dkE3R3ZHZno5NnhQYnh4NGYwRWd2djNCUGtrVU5DcEFSeFA3VmFMNHJDNlliMy1KcWhEbzNRVzFKRURhQXo3UjE1SVoxWmhLOWd5Wk93ajJmbURnMHExZTU4Q0dmeWdjMWpkeHF0VmxFSUxCd2ZGdVFjS3NnR3B2YW9nSWN0OVVzWGMzREs1UnlSSm1aOA) · 18/6 — Báo cáo developer so sánh 3 model lớn.
 
 ### MIT Technology Review
 - [AI đang trở thành "cố vấn quân sự" thế hệ mới](https://www.technologyreview.com/2026/06/16/1138905/exclusive-ebook-how-ai-is-becoming-the-next-military-advisor/) · 16/6 — Ebook độc quyền về AI trong quân sự.

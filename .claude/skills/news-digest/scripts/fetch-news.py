@@ -367,6 +367,13 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
             if link and not link.startswith("http"):
                 link = urljoin(base_url, link)
 
+            # Convert Google News RSS redirect URLs to article page URLs.
+            # /rss/articles/CBMi... requires JS to redirect; /articles/CBMi...
+            # works in real browsers (Chromium/Firefox execute the JS redirect).
+            if link and "news.google.com/rss/articles/" in link:
+                link = link.replace("news.google.com/rss/articles/", "news.google.com/articles/")
+                link = link.split("?")[0]  # strip ?oc=5 tracking param
+
             title = _strip_html(title)
             summary = _strip_html(summary)[:300]
 

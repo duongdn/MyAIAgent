@@ -15,17 +15,17 @@
 
 **MarketWatch**
 - [Super Micro cổ phiếu lao dốc sau thông báo huy động $7 tỷ vốn cổ phần](https://www.marketwatch.com/story/super-micro-stock-plunges-as-7-billion-equity-raise-overshadows-booming-backlog-c5df2fc8?mod=mw_rss_topstories) — Nhu cầu AI bùng nổ nhưng bị che khuất bởi áp lực đốt tiền mặt
-- [Thị trường toàn cầu: Dow, S&P 500, Nasdaq giảm khi Mỹ tấn công Iran](https://news.google.com/rss/articles/CBMi1gFBVV95cUxPQ2hNV1VWS3lZajVFUmx1bGJ4Mm12VFp0Qkw3UGlCZnBXcmlhVE5YZ3E4TDNfQmI2ZzdSVnVFTng5X0g1RWxRX0ZwVGw3UVpHSGNINGtMWUliaE05NUR5dnFCam5QXzZZM3RGR1ZkLW9ya3ZfNk1WUWRLTE9LdWk2NVF4Qk1HcjNGTjdBaDdSQVdTTVdDT1R4T2FRTllxYVhiSmRiQlNBSno4TU5lWjRPMzhEZ29oWFJuX0JjMXhhTXRYLVlxandnUW10QTEydVlwOU5kV2ZB?oc=5) — Căng thẳng Mỹ-Iran đẩy futures ba chỉ số chính đều xuống
+- [Thị trường toàn cầu: Dow, S&P 500, Nasdaq giảm khi Mỹ tấn công Iran](https://news.google.com/articles/CBMi1gFBVV95cUxPQ2hNV1VWS3lZajVFUmx1bGJ4Mm12VFp0Qkw3UGlCZnBXcmlhVE5YZ3E4TDNfQmI2ZzdSVnVFTng5X0g1RWxRX0ZwVGw3UVpHSGNINGtMWUliaE05NUR5dnFCam5QXzZZM3RGR1ZkLW9ya3ZfNk1WUWRLTE9LdWk2NVF4Qk1HcjNGTjdBaDdSQVdTTVdDT1R4T2FRTllxYVhiSmRiQlNBSno4TU5lWjRPMzhEZ29oWFJuX0JjMXhhTXRYLVlxandnUW10QTEydVlwOU5kV2ZB) — Căng thẳng Mỹ-Iran đẩy futures ba chỉ số chính đều xuống
 
 ---
 
 ### 📊 Chứng khoán VN
 
 **Google News**
-- [Nhận định 10/6: VN-Index kiểm định vùng hỗ trợ 1.790-1.800](https://news.google.com/rss/articles/CBMisgFBVV95cUxQSUlfdEdDczlrd1RGR0RfMVdEbmt2akVuMW9TX1c3bmhTRGxHWE5hbTU3dFNvRHlOd0NLai0wYzJzNnVSRklNOFk1N0NkekVOeFV6OXEzTmFscWlEbENVYTUtNm9tTEU5M2hrbFJhNmpCYk5BM241RlFka3NhU2xwODdmZ3djSnFzSW1jbG9IdXZWTm9sdEllM2JKTm9uazZrSm84d2xKMkViWjBQU0daZk13?oc=5) — Thị trường đang thử thách vùng hỗ trợ quan trọng sau nhịp điều chỉnh
-- [Nhịp điều chỉnh mở ra cơ hội, VN-Index có thể vượt 2.000 điểm](https://news.google.com/rss/articles/CBMiswFBVV95cUxOY0JlSWI0TjQ1SUdzQXBWd3JpWk8zZjBfUU9URTZTSXFXcFNKVjRxM3Jyd0wwVF9vTElUZENRcnJfWmpSQ0FvMjA1Z1h0UlhiempXYU9ZVFd0cHFfS0Z3TEhpTUFtUklpeUlZZzJKYllTWmVWamhtSmw1LWVfUGVfS0Q5dmN6R3Vyd2xqa1RsRUczbUNEbk9OanV4MG1yRjBUelNQSDkwcHl0a2hQZUNvZVBuTQ?oc=5) — Phân tích cho thấy áp lực ngắn hạn nhưng xu hướng tăng trung dài hạn vẫn nguyên vẹn
-- [Cổ phiếu ngân hàng vẫn sáng cửa dài hạn](https://news.google.com/rss/articles/CBMimwFBVV95cUxQcjMzRjk2N25fTUFQOE90bzlOaGJRa1BnMDhqTmR5MDJNRms1OFRtakRndG05bGlMU08wRlZ5bmJXeVhlSVNMSFBJdUt3d0dzcjZhVmNzMVgzaE9TNkdrd0k4Ymt0Y3dxMkZSSDlPQmJjSk5iYk5Ha29GYlliMERqMWNpaDdzNkJKTG91SFNsanc2MUhMLW5hbGdKY9IBlwFBVV95cUxPNU5rSks2UWFTR0Q3RjhJR1RzcUhXQzVZYzRrbmo2bUJ6bGxId0dVR2hRMndWRV8zOWhkSkpvREMzRU9xOUhzZzVkRVRBN2hYWkE4VVpUQjJRcTB0NEFFRjVlcmJ0NUgyQlc2WVUyakFDNi1XdmFXSlE3Sk1ISGlrM2ZxXy1FRUJHRjNiekJROFVja09Qa3FF?oc=5) — Nhóm ngân hàng được đánh giá tích cực bất chấp biến động ngắn hạn
-- [Đo hiệu ứng World Cup với VN-Index](https://news.google.com/rss/articles/CBMiiAFBVV95cUxPRVREWExHOU1uWmRGQ1pfVlhlVG5KUEJib0p5eHBvRjY5dEJqSnlfOXMwMVhWTG9RR0pjaHAzamNVbmF3SzNZUDBoS1N6TmFGV1l1WmYyRE1qSW9TUkNoUS03VVFPaFdiT3lNNlUyWnM1UnE2c0FiMUtjSHZjSU4zNWpOSmZlREVE0gGIAUFVX3lxTE9FVERYTEc5TW5aZEZDWl9WWGVUbkpQQmJvSnl4cG9GNjl0QmpKeV85czAxWFZMb1FHSmNocDNqY1VuYXdLM1lQMGhLU3pOYUZXWXVaZjJETWpJb1NSQ2hRLTdVUU9oV2JPeU02VTJaczVScTZzQWIxS2NIdmNJTjM1ak5KZmVERUQ?oc=5) — Phân tích tác động lịch sử của các kỳ World Cup đến chứng khoán Việt Nam
+- [Nhận định 10/6: VN-Index kiểm định vùng hỗ trợ 1.790-1.800](https://news.google.com/articles/CBMisgFBVV95cUxQSUlfdEdDczlrd1RGR0RfMVdEbmt2akVuMW9TX1c3bmhTRGxHWE5hbTU3dFNvRHlOd0NLai0wYzJzNnVSRklNOFk1N0NkekVOeFV6OXEzTmFscWlEbENVYTUtNm9tTEU5M2hrbFJhNmpCYk5BM241RlFka3NhU2xwODdmZ3djSnFzSW1jbG9IdXZWTm9sdEllM2JKTm9uazZrSm84d2xKMkViWjBQU0daZk13) — Thị trường đang thử thách vùng hỗ trợ quan trọng sau nhịp điều chỉnh
+- [Nhịp điều chỉnh mở ra cơ hội, VN-Index có thể vượt 2.000 điểm](https://news.google.com/articles/CBMiswFBVV95cUxOY0JlSWI0TjQ1SUdzQXBWd3JpWk8zZjBfUU9URTZTSXFXcFNKVjRxM3Jyd0wwVF9vTElUZENRcnJfWmpSQ0FvMjA1Z1h0UlhiempXYU9ZVFd0cHFfS0Z3TEhpTUFtUklpeUlZZzJKYllTWmVWamhtSmw1LWVfUGVfS0Q5dmN6R3Vyd2xqa1RsRUczbUNEbk9OanV4MG1yRjBUelNQSDkwcHl0a2hQZUNvZVBuTQ) — Phân tích cho thấy áp lực ngắn hạn nhưng xu hướng tăng trung dài hạn vẫn nguyên vẹn
+- [Cổ phiếu ngân hàng vẫn sáng cửa dài hạn](https://news.google.com/articles/CBMimwFBVV95cUxQcjMzRjk2N25fTUFQOE90bzlOaGJRa1BnMDhqTmR5MDJNRms1OFRtakRndG05bGlMU08wRlZ5bmJXeVhlSVNMSFBJdUt3d0dzcjZhVmNzMVgzaE9TNkdrd0k4Ymt0Y3dxMkZSSDlPQmJjSk5iYk5Ha29GYlliMERqMWNpaDdzNkJKTG91SFNsanc2MUhMLW5hbGdKY9IBlwFBVV95cUxPNU5rSks2UWFTR0Q3RjhJR1RzcUhXQzVZYzRrbmo2bUJ6bGxId0dVR2hRMndWRV8zOWhkSkpvREMzRU9xOUhzZzVkRVRBN2hYWkE4VVpUQjJRcTB0NEFFRjVlcmJ0NUgyQlc2WVUyakFDNi1XdmFXSlE3Sk1ISGlrM2ZxXy1FRUJHRjNiekJROFVja09Qa3FF) — Nhóm ngân hàng được đánh giá tích cực bất chấp biến động ngắn hạn
+- [Đo hiệu ứng World Cup với VN-Index](https://news.google.com/articles/CBMiiAFBVV95cUxPRVREWExHOU1uWmRGQ1pfVlhlVG5KUEJib0p5eHBvRjY5dEJqSnlfOXMwMVhWTG9RR0pjaHAzamNVbmF3SzNZUDBoS1N6TmFGV1l1WmYyRE1qSW9TUkNoUS03VVFPaFdiT3lNNlUyWnM1UnE2c0FiMUtjSHZjSU4zNWpOSmZlREVE0gGIAUFVX3lxTE9FVERYTEc5TW5aZEZDWl9WWGVUbkpQQmJvSnl4cG9GNjl0QmpKeV85czAxWFZMb1FHSmNocDNqY1VuYXdLM1lQMGhLU3pOYUZXWXVaZjJETWpJb1NSQ2hRLTdVUU9oV2JPeU02VTJaczVScTZzQWIxS2NIdmNJTjM1ak5KZmVERUQ) — Phân tích tác động lịch sử của các kỳ World Cup đến chứng khoán Việt Nam
 
 ---
 
@@ -53,11 +53,11 @@
 - [Lãnh đạo trong doanh nghiệp AI-người lai: thách thức khi AI agent tăng 300%](https://www.technologyreview.com/2026/06/09/1137830/learning-to-lead-in-a-hybrid-human-ai-enterprise/) — Các tổ chức đang chuẩn bị cho lực lượng lao động hỗn hợp người-AI
 
 **Google News – AI**
-- [Claude Fable 5 sắp ra mắt, khủng hoảng Mythos trở lại tiêu điểm](https://news.google.com/rss/articles/CBMibEFVX3lxTE1tLXpXRHV1eWRNN05MZ3hTaXhMNTJ6YUtNcjM4dDFVSFFyQzZVRksxc3FOdVdzNmJjbTJaa0s2bnE5dGtuVklwQ1Q5MnptRmxmWTRHT2paY2ZvQ3JNTGFsUTkwQnh3RENDNC0zVg?oc=5) — Anthropic sắp ra model Fable 5 trong bối cảnh tranh luận về Mythos
-- [Không, AI không có ý thức — The Atlantic](https://news.google.com/rss/articles/CBMinwFBVV95cUxNUnU3T0NVWVg5MUFYMXlhcHJSc0NhdEF5QlpndHM2RHlBUzlfbEEyaFNVSXdlOHFiaWtrOEFZZndjYllFYkNSX1J4WTF5RlNyUkFhRUpURkF3eVc1UmFEU3FnZ3p1cGJ6c1B3cUNqNHNNN1dIUEdRTW4yQkl0b1p1VVRZX01fcVpCb1VrX2N1WEtITzNOU2J4YWdhUHFkdnM?oc=5) — Phản biện về tranh luận ý thức AI đang nóng trong tuần
+- [Claude Fable 5 sắp ra mắt, khủng hoảng Mythos trở lại tiêu điểm](https://news.google.com/articles/CBMibEFVX3lxTE1tLXpXRHV1eWRNN05MZ3hTaXhMNTJ6YUtNcjM4dDFVSFFyQzZVRksxc3FOdVdzNmJjbTJaa0s2bnE5dGtuVklwQ1Q5MnptRmxmWTRHT2paY2ZvQ3JNTGFsUTkwQnh3RENDNC0zVg) — Anthropic sắp ra model Fable 5 trong bối cảnh tranh luận về Mythos
+- [Không, AI không có ý thức — The Atlantic](https://news.google.com/articles/CBMinwFBVV95cUxNUnU3T0NVWVg5MUFYMXlhcHJSc0NhdEF5QlpndHM2RHlBUzlfbEEyaFNVSXdlOHFiaWtrOEFZZndjYllFYkNSX1J4WTF5RlNyUkFhRUpURkF3eVc1UmFEU3FnZ3p1cGJ6c1B3cUNqNHNNN1dIUEdRTW4yQkl0b1p1VVRZX01fcVpCb1VrX2N1WEtITzNOU2J4YWdhUHFkdnM) — Phản biện về tranh luận ý thức AI đang nóng trong tuần
 
 **Google News – AI Việt Nam**
-- [FPT: Việt Nam và Thái Lan còn nhiều dư địa hợp tác AI và số hóa](https://news.google.com/rss/articles/CBMivwFBVV95cUxOX1hWQmlkNkRzTGkzLVVPNktTQTVidlNwUDk3RWFyRndac3dZZXhlWjlFMWRKdlRLbUJOeDdWNmh1OUNTdllfRk9ka29STlhQOHpDM0pwMTNJUjR0dEFKWDRNdGo3aHRIam5jOTFBVDJYOVYzWUJUVjh5Um1lc2dTV2FZeVZzSnRPLXVJemY4ejJpVUlYSWtEWWhGakN4ZzNCczZqdmhvc2JEM281OFNZMW5YaEtodGhNTGU3bDV0QQ?oc=5) — Chủ tịch FPT phát biểu nhân chuyến thăm Thái Lan
+- [FPT: Việt Nam và Thái Lan còn nhiều dư địa hợp tác AI và số hóa](https://news.google.com/articles/CBMivwFBVV95cUxOX1hWQmlkNkRzTGkzLVVPNktTQTVidlNwUDk3RWFyRndac3dZZXhlWjlFMWRKdlRLbUJOeDdWNmh1OUNTdllfRk9ka29STlhQOHpDM0pwMTNJUjR0dEFKWDRNdGo3aHRIam5jOTFBVDJYOVYzWUJUVjh5Um1lc2dTV2FZeVZzSnRPLXVJemY4ejJpVUlYSWtEWWhGakN4ZzNCczZqdmhvc2JEM281OFNZMW5YaEtodGhNTGU3bDV0QQ) — Chủ tịch FPT phát biểu nhân chuyến thăm Thái Lan
 
 ---
 
@@ -101,24 +101,24 @@
 - [ServiceNow công bố sự cố bảo mật, lộ dữ liệu khách hàng](https://www.bleepingcomputer.com/news/security/servicenow-discloses-security-incident-exposing-customer-data/) — API endpoint không xác thực bị khai thác để query dữ liệu
 
 **Google News – Cybersecurity**
-- [Chrome V8 zero-day CVE-2026-11645 đang bị khai thác - Vá ngay](https://news.google.com/rss/articles/CBMifEFVX3lxTE9PY2Eycmo4WFZ5R1NOdG8wUTlFUXJISUtMOGJxdzFaN1gtVEM1QzBxWVQ5UUN6eVZyT09YeEllMkVLd3hLQnNncUtvdXRhYjV2Y3BKYm1zYjJYWDZhN25xZy15M09OZURKcGVjRWtCRGpodG1mWTFVSFVoS1E?oc=5) — Lỗ hổng trong engine JavaScript của Chrome đang bị tấn công thực tế
-- [LiteLLM CVE-2026-42271 bị tấn công chủ động, CISA cảnh báo](https://news.google.com/rss/articles/CBMisAFBVV95cUxOYUUzUWJGaDVGOGQyWG1hY215YVg0dUV1b3g1NlVVMm9aeGV5NE9jSjlfalVVamZwV0FRWUxVVmtqY1lfVTJremYzdEtLLU1DTnlYNnZHQnU4ZEVOMmhHQXVzVlRGMnR6dTc4WkFJRzFES2NtNUh4Nmx2SHU1cnBidjlEVGN4ekYyLVF4YVk5Vkx2SERHdkFkekVRMmM4bUVzOXA0ejc4YXhHTWp0eVhuSw?oc=5) — Lỗ hổng trong thư viện LLM proxy đang bị khai thác, ảnh hưởng AI workloads
-- [Cisco cảnh báo zero-day trong SD-WAN đang bị khai thác](https://news.google.com/rss/articles/CBMiiwFBVV95cUxPNVNpV0xMSDVDTkJFYUYtSm5uUk12TG5WZ3ZaRFEzblJIOFF2N3lremc1YUF0SU5mMWEtQzlMaVF4R19wc0FxeFBpZ3JvZkF4OEpGYVB1V1VvQUdVX1dXTFZDYUZsTHJIdHJCcU9yQzdaTkNKU3AtRV9qMmVZOUR2RzE0X3YyeG9kQUl3?oc=5) — Lỗ hổng SD-WAN đang bị tấn công, các tổ chức dùng Cisco cần cập nhật gấp
+- [Chrome V8 zero-day CVE-2026-11645 đang bị khai thác - Vá ngay](https://news.google.com/articles/CBMifEFVX3lxTE9PY2Eycmo4WFZ5R1NOdG8wUTlFUXJISUtMOGJxdzFaN1gtVEM1QzBxWVQ5UUN6eVZyT09YeEllMkVLd3hLQnNncUtvdXRhYjV2Y3BKYm1zYjJYWDZhN25xZy15M09OZURKcGVjRWtCRGpodG1mWTFVSFVoS1E) — Lỗ hổng trong engine JavaScript của Chrome đang bị tấn công thực tế
+- [LiteLLM CVE-2026-42271 bị tấn công chủ động, CISA cảnh báo](https://news.google.com/articles/CBMisAFBVV95cUxOYUUzUWJGaDVGOGQyWG1hY215YVg0dUV1b3g1NlVVMm9aeGV5NE9jSjlfalVVamZwV0FRWUxVVmtqY1lfVTJremYzdEtLLU1DTnlYNnZHQnU4ZEVOMmhHQXVzVlRGMnR6dTc4WkFJRzFES2NtNUh4Nmx2SHU1cnBidjlEVGN4ekYyLVF4YVk5Vkx2SERHdkFkekVRMmM4bUVzOXA0ejc4YXhHTWp0eVhuSw) — Lỗ hổng trong thư viện LLM proxy đang bị khai thác, ảnh hưởng AI workloads
+- [Cisco cảnh báo zero-day trong SD-WAN đang bị khai thác](https://news.google.com/articles/CBMiiwFBVV95cUxPNVNpV0xMSDVDTkJFYUYtSm5uUk12TG5WZ3ZaRFEzblJIOFF2N3lremc1YUF0SU5mMWEtQzlMaVF4R19wc0FxeFBpZ3JvZkF4OEpGYVB1V1VvQUdVX1dXTFZDYUZsTHJIdHJCcU9yQzdaTkNKU3AtRV9qMmVZOUR2RzE0X3YyeG9kQUl3) — Lỗ hổng SD-WAN đang bị tấn công, các tổ chức dùng Cisco cần cập nhật gấp
 
 **Google News – An ninh mạng VN**
-- [Sau sự cố CIC, người dân không cần lo nhưng cần cảnh giác](https://news.google.com/rss/articles/CBMirAFBVV95cUxQOHFpTl9Pd01VdGY1WXBwRXczblM4MXAzRVpDMlJnZ0x3ZHZJNjViX2VXcVJzNFV1bVJHcENZYklUWnVMeFhRY2dpb0xzVUZzNi1WQUEwRW42UXhnQ2dmcU0wR2hLcXhvWUMxWEIyUGMyUVZTcVJ5c2JsOWJzV1UxdDlHQTA0WVUzZzhHX2YtYTVMRVVjYmRzWnNDQUMwa1NqSHVkYUphRlpNQWRk?oc=5) — Cơ quan chức năng khuyến cáo sau sự cố an ninh tại CIC
-- [Việt Nam trước bài toán an ninh hậu lượng tử](https://news.google.com/rss/articles/CBMiiAFBVV95cUxOVnVVbDg5M2x5RnJhUXpkQ2QwVjlDSno0czlDeWViNFJmUzI5TUxUUlZGUHpjS3VXcF9QX2hBMDlyQjJoT21jSnN1cXFhdmpObmdfYVJBVUFyLW9GdHY2aENkMHlTa2xrYTYxU3NZVi0wV2NFb1dVeGJPNDhXcFZHekNqN2F4dXU4?oc=5) — Nhận định về thách thức bảo mật khi điện toán lượng tử phát triển
+- [Sau sự cố CIC, người dân không cần lo nhưng cần cảnh giác](https://news.google.com/articles/CBMirAFBVV95cUxQOHFpTl9Pd01VdGY1WXBwRXczblM4MXAzRVpDMlJnZ0x3ZHZJNjViX2VXcVJzNFV1bVJHcENZYklUWnVMeFhRY2dpb0xzVUZzNi1WQUEwRW42UXhnQ2dmcU0wR2hLcXhvWUMxWEIyUGMyUVZTcVJ5c2JsOWJzV1UxdDlHQTA0WVUzZzhHX2YtYTVMRVVjYmRzWnNDQUMwa1NqSHVkYUphRlpNQWRk) — Cơ quan chức năng khuyến cáo sau sự cố an ninh tại CIC
+- [Việt Nam trước bài toán an ninh hậu lượng tử](https://news.google.com/articles/CBMiiAFBVV95cUxOVnVVbDg5M2x5RnJhUXpkQ2QwVjlDSno0czlDeWViNFJmUzI5TUxUUlZGUHpjS3VXcF9QX2hBMDlyQjJoT21jSnN1cXFhdmpObmdfYVJBVUFyLW9GdHY2aENkMHlTa2xrYTYxU3NZVi0wV2NFb1dVeGJPNDhXcFZHekNqN2F4dXU4) — Nhận định về thách thức bảo mật khi điện toán lượng tử phát triển
 
 ---
 
 ### 🚗 VinFast
 
 **Google News – VinFast EN**
-- [VinFast Q1/2026: doanh thu tăng 42%, lỗ ròng $1.12B, giao 58,577 xe](https://news.google.com/rss/articles/CBMiqwFBVV95cUxPMjRYSS1MZHk4VzQxeEdfbXVYR3VJQXR0RXVHcUhfTzdlenZkSzMwdjVBSVFkZjFKOXVsdkxLT0Y5STc0bUhLVmFCSkhNQXZvWENfdUUyN2tNNF9EMXlVTGxQNno2ajFSN3ZmSEhoYUtWaW1xZ1dsaEowSDVETDhTV182ZFk0YjFYQUlWeUhKOUFQamE5QkVZVVdvRE96eXVVNFVrcktHV1B2Q0k?oc=5) — Tăng trưởng doanh thu mạnh nhưng lỗ tiếp tục mở rộng
-- [The Diplomat: Canh bạc EV tốn kém của VinFast sắp kết thúc?](https://news.google.com/rss/articles/CBMihAFBVV95cUxOOFRYUXlIYzROeHlPYTh5ZmMzRTRfMnBvLXBXT2pDRFNMUUJpMmVfY0xjNnNZNG9EY1FQWElNbmFYR3U2Y251T3NzYm9rdmRZbkZMY2E3QzJxTTg2MVEwdVhXZGw2U0FfN1NfSVlaeDVMdlM5S29NNEtYNUpPQm13Q25fQkw?oc=5) — Phân tích hoài nghi về chiến lược toàn cầu trong bối cảnh lỗ tiếp diễn
+- [VinFast Q1/2026: doanh thu tăng 42%, lỗ ròng $1.12B, giao 58,577 xe](https://news.google.com/articles/CBMiqwFBVV95cUxPMjRYSS1MZHk4VzQxeEdfbXVYR3VJQXR0RXVHcUhfTzdlenZkSzMwdjVBSVFkZjFKOXVsdkxLT0Y5STc0bUhLVmFCSkhNQXZvWENfdUUyN2tNNF9EMXlVTGxQNno2ajFSN3ZmSEhoYUtWaW1xZ1dsaEowSDVETDhTV182ZFk0YjFYQUlWeUhKOUFQamE5QkVZVVdvRE96eXVVNFVrcktHV1B2Q0k) — Tăng trưởng doanh thu mạnh nhưng lỗ tiếp tục mở rộng
+- [The Diplomat: Canh bạc EV tốn kém của VinFast sắp kết thúc?](https://news.google.com/articles/CBMihAFBVV95cUxOOFRYUXlIYzROeHlPYTh5ZmMzRTRfMnBvLXBXT2pDRFNMUUJpMmVfY0xjNnNZNG9EY1FQWElNbmFYR3U2Y251T3NzYm9rdmRZbkZMY2E3QzJxTTg2MVEwdVhXZGw2U0FfN1NfSVlaeDVMdlM5S29NNEtYNUpPQm13Q25fQkw) — Phân tích hoài nghi về chiến lược toàn cầu trong bối cảnh lỗ tiếp diễn
 
 **Google News – VinFast VN**
-- [VinFast Evo Lite giảm còn 14,28 triệu đồng: xe máy điện rẻ nhất](https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMms1dXlmNVF5VmZFalByZ1JpZ2VPOWFfcVktbWpXQXN1YnZ0OU9Bb2JUWHFFRDJ0VUNidExNbnc0eTVXYVdLaFNEdENSUXFWbXZZSnc1bkphNUlyVjJUS2JxQWJiX2J3NWJodmJZMU8yMGZ1bkI5RmpuVzVrdThUYlcxMmVNb3dySDdUNVoxeXk3WGZxN0Y4MkJaVmszVnR2RFB5TFIxbDMxZ251U0pBYUozZEYzQU9a?oc=5) — Chiến lược giá để tăng thị phần xe máy điện
+- [VinFast Evo Lite giảm còn 14,28 triệu đồng: xe máy điện rẻ nhất](https://news.google.com/articles/CBMiuAFBVV95cUxPMms1dXlmNVF5VmZFalByZ1JpZ2VPOWFfcVktbWpXQXN1YnZ0OU9Bb2JUWHFFRDJ0VUNidExNbnc0eTVXYVdLaFNEdENSUXFWbXZZSnc1bkphNUlyVjJUS2JxQWJiX2J3NWJodmJZMU8yMGZ1bkI5RmpuVzVrdThUYlcxMmVNb3dySDdUNVoxeXk3WGZxN0Y4MkJaVmszVnR2RFB5TFIxbDMxZ251U0pBYUozZEYzQU9a) — Chiến lược giá để tăng thị phần xe máy điện
 
 ---
 
@@ -133,8 +133,8 @@
 - [Giá USD tăng trong khi EUR và Yen Nhật giảm](https://thanhnien.vn/gia-usd-hom-nay-1062026-giu-da-tang-trong-khi-euro-va-yen-nhat-lien-tuc-giam-185260610082116185.htm) — USD mạnh bất chấp căng thẳng địa chính trị
 
 **Google News – Kinh doanh VN**
-- [TP.HCM thăng hạng trên bản đồ startup toàn cầu](https://news.google.com/rss/articles/CBMiiwFBVV95cUxQUVlYNWFuYVdXT1hCYzk3WTRPRWFlTWxpUHlqTUxXVjBHMjlTWl9hYU9PQ21IYTY0T3dWSUV0SzZZVzFYVkNlVkpSblFWNFFqNF9Sb0ZVQXpWN0JUX3pnY3pKZmdiaWxGcWRNeDMyRkkxWXpud0w5R2szQTktVjN4UnQ4TWxhRDlwakFN?oc=5) — Thành phố được ghi nhận trong hệ sinh thái khởi nghiệp quốc tế
-- [Hợp tác tài chính Việt Nam - EU: Chuyển quan hệ chiến lược thành kết quả thực chất](https://news.google.com/rss/articles/CBMi0AFBVV95cUxObno4TnBSclVwcUZicUVzd1NuSTJRV1BfMVZZaEV6Y29rN3FnVXo4TTdVTzh0OV9vQjlqVTlaWVBqT0Y0V0lWMzdZRzRrcDJNTmlHTDJDRVhOcWo3akplZ0FQWi1qTmNNcUlCS1FvZWRmdUFzeTdLT1A1RzUzRmRxZUdyNUV4amV3bjN3dkVUMzI0ZmNTdjNVYm9abEw1bFZHcklVdERkV3FLSVA2aHRzUXdHR2tmVjY1eGduM25GVk43TmlFUUpZTFpodk82Ymxm?oc=5) — Tiến triển trong quan hệ kinh tế song phương EU-Việt Nam
+- [TP.HCM thăng hạng trên bản đồ startup toàn cầu](https://news.google.com/articles/CBMiiwFBVV95cUxQUVlYNWFuYVdXT1hCYzk3WTRPRWFlTWxpUHlqTUxXVjBHMjlTWl9hYU9PQ21IYTY0T3dWSUV0SzZZVzFYVkNlVkpSblFWNFFqNF9Sb0ZVQXpWN0JUX3pnY3pKZmdiaWxGcWRNeDMyRkkxWXpud0w5R2szQTktVjN4UnQ4TWxhRDlwakFN) — Thành phố được ghi nhận trong hệ sinh thái khởi nghiệp quốc tế
+- [Hợp tác tài chính Việt Nam - EU: Chuyển quan hệ chiến lược thành kết quả thực chất](https://news.google.com/articles/CBMi0AFBVV95cUxObno4TnBSclVwcUZicUVzd1NuSTJRV1BfMVZZaEV6Y29rN3FnVXo4TTdVTzh0OV9vQjlqVTlaWVBqT0Y0V0lWMzdZRzRrcDJNTmlHTDJDRVhOcWo3akplZ0FQWi1qTmNNcUlCS1FvZWRmdUFzeTdLT1A1RzUzRmRxZUdyNUV4amV3bjN3dkVUMzI0ZmNTdjNVYm9abEw1bFZHcklVdERkV3FLSVA2aHRzUXdHR2tmVjY1eGduM25GVk43TmlFUUpZTFpodk82Ymxm) — Tiến triển trong quan hệ kinh tế song phương EU-Việt Nam
 
 ---
 

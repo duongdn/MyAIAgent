@@ -73,13 +73,35 @@ def fix_section(section_text: str, article_urls: list[str]) -> tuple[str, int]:
     return "".join(parts), fixes
 
 
+RSS_GNEWS_RE = re.compile(r"news\.google\.com/rss/articles/([A-Za-z0-9_-]+)(?:\?[^)]*)?")
+
+
+def fix_gnews_rss_links(md: str) -> tuple[str, int]:
+    """
+    Convert /rss/articles/CBMi... links to /articles/CBMi... (no ?oc=5).
+    The /rss/ variant requires JS but doesn't trigger the browser redirect;
+    /articles/ triggers the client-side redirect to the actual article.
+    """
+    def replace(m: re.Match) -> str:
+        return f"news.google.com/articles/{m.group(1)}"
+
+    fixed, count = RSS_GNEWS_RE.subn(replace, md)
+    return fixed, count
+
+
 def fix_markdown(md: str, source_map: dict) -> tuple[str, int]:
     """
     Fix all source sections in the markdown.
-    Processes each known source header and fixes its articles' bare-domain URLs.
+    1. Convert /rss/articles/ Google News links to /articles/ format.
+    2. Replace bare-domain URLs with correct article URLs from the JSON cache.
     """
     total_fixes = 0
 
+    # Pass 1: fix Google News /rss/ links everywhere in the file
+    md, gnews_fixes = fix_gnews_rss_links(md)
+    total_fixes += gnews_fixes
+
+    # Pass 2: fix bare-domain URLs per source section using position-based matching
     for source_name, urls in source_map.items():
         if not urls:
             continue
