@@ -72,9 +72,9 @@
     <div class="delta neutral">4 sổ tiết kiệm</div>
   </div>
   <div class="kpi">
-    <div class="label">Tháng 6 Net</div>
-    <div class="value" style="color:#22c55e">+314.8M</div>
-    <div class="delta neutral">Thu 461M · Chi 146M</div>
+    <div class="label">Tháng 6 Net (thu/chi thật)</div>
+    <div class="value" style="color:#22c55e">+23.6M</div>
+    <div class="delta neutral">Thu 70M · Chi 46.4M (đã loại vay/đầu tư)</div>
   </div>
 </div>
 
@@ -85,6 +85,25 @@
       <b>Net Worth hôm nay (7.346 tỷ)</b> là số <b>verified</b> — đọc trực tiếp từ widget "Tổng số dư" trên app MISA (bấm icon ẩn/hiện), không phải tự tính. Đây là số đúng theo app.<br><br>
       <b>Các mốc lịch sử (21/05 → 26/05)</b> dưới đây <b>chưa được verify</b> theo cách này — đó là số tôi tự tái tạo từ account balance + lịch sử giao dịch "cho vay/thu nợ", và đã 2 lần tính sai (thiếu lãi/cổ tức phát sinh trong các quỹ). Có thể các số lịch sử này cũng lệch 100-500M so với số thật app từng hiển thị. <b>Không nên tin tuyệt đối vào delta giữa các mốc cũ và hôm nay.</b><br><br>
       Từ lần chạy sau, script đã được sửa để tự đọc "Tổng số dư" thật mỗi lần — các mốc tương lai sẽ đều là verified.
+    </div>
+  </div>
+</div>
+
+<div class="grid full">
+  <div class="card" style="border-color:#422006;background:#1a1407">
+    <h3 style="color:#fb923c">⚠️ MISA hiển thị 3 con số "Thu/Chi tháng 6" khác nhau — đã chọn số đúng</h3>
+    <table style="margin-bottom:12px">
+      <thead><tr><th>Nguồn</th><th class="right">Thu</th><th class="right">Chi</th><th class="right">Net</th><th>Vấn đề</th></tr></thead>
+      <tbody>
+        <tr><td>Widget "Lịch chi tiêu tháng" (số tôi dùng sai ban đầu)</td><td class="right">461.2M</td><td class="right">146.4M</td><td class="right green">+314.8M</td><td>Tính "Thu nợ" (rút ETF) là thu nhập — sai</td></tr>
+        <tr><td>Widget "Tổng quan" (đầu dashboard)</td><td class="right">120.1M</td><td class="right">242.7M</td><td class="right red">−122.6M</td><td>Tính "Cho vay" (mua ETF) là chi tiêu — cũng sai theo hướng khác</td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Tự tính từ giao dịch thô (loại bỏ Cho vay/Thu nợ/Đi vay/Trả nợ)</b></td><td class="right"><b>70.0M</b></td><td class="right"><b>46.4M</b></td><td class="right green"><b>+23.6M</b></td><td><b>Đúng — chỉ tính thu nhập/chi tiêu thật, không tính chuyển dịch đầu tư/vay nợ</b></td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:13px;color:#cbd5e1;line-height:1.6">
+      <b>Thu thật:</b> Lương 66.9M + Lãi tiết kiệm 3.08M + Freelancer (không đáng kể) = 70.0M<br>
+      <b>Chi thật:</b> Linh tinh 14.18M, Học phí 13.45M, Hiếu hỉ 5M, Ăn uống 2.9M, Điện 2.08M, Nhà cửa 1.78M, Sữa 1.7M, Sửa chữa 1.5M, Sức khỏe 1M, còn lại nhỏ = 46.4M<br><br>
+      Khoản vay/đầu tư (KHÔNG tính vào Thu/Chi thật): Thu nợ+Đi vay = 376.65M vào · Cho vay+Trả nợ = 100M ra (vay rồi trả ngay 100M "Chị Tin" 6/1→6/2).
     </div>
   </div>
 </div>

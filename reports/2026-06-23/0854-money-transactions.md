@@ -1,15 +1,48 @@
 # Transactions — 2026-06-23 08:54
 
-## Tháng 6/2026
+> **SỬA 10:15** — Số "Thu/Chi tháng 6" ban đầu (461.2M/146.4M) SAI vì đếm "Thu nợ" (rút ETF) như thu nhập và không loại "Cho vay/Đi vay/Trả nợ". MISA tự hiển thị MỘT con số khác nữa ("Tổng quan": 120.1M/242.7M, Net −122.6M) cũng sai theo hướng ngược lại (đếm "Cho vay" mua ETF như chi tiêu). Số đúng dưới đây tính trực tiếp từ giao dịch thô, loại bỏ hoàn toàn 4 category vay/đầu tư.
+
+## Tháng 6/2026 (Thu/Chi THẬT — đã loại Cho vay/Thu nợ/Đi vay/Trả nợ)
 
 | | Amount (₫) |
 |-|-----------|
-| Thu nhập | +461,170,609 |
-| Chi tiêu | −146,374,243 |
-| **Net** | **+314,796,366** |
+| Thu nhập thật | +69,978,060 |
+| Chi tiêu thật | −46,374,243 |
+| **Net thật** | **+23,603,817** |
 
-> Thu cao do: VCBS thu nợ 276.15M (22/06) + Lương 66.9M (01/06)
-> Chi có: Trả nợ 100M (02/06) + Học phí 7.6M + các chi tiêu thường ngày
+**Thu thật theo category:**
+| Category | ₫ |
+|----------|---|
+| Lương | 66,900,000 |
+| Lãi tiết kiệm | 3,077,510 |
+| Freelancer | 550 |
+
+**Chi thật theo category:**
+| Category | ₫ |
+|----------|---|
+| Linh tinh | 14,180,000 |
+| Học phí | 13,452,000 |
+| Hiếu hỉ | 5,000,000 |
+| Ăn uống | 2,900,000 |
+| Điện | 2,075,000 |
+| Nhà cửa | 1,777,243 |
+| Sữa | 1,700,000 |
+| Sửa chữa | 1,500,000 |
+| Sức khỏe | 1,000,000 |
+| Đi chợ/siêu thị | 850,000 |
+| Giầy dép | 560,000 |
+| Vui chơi giải trí | 400,000 |
+| Xăng xe | 350,000 |
+| Thuốc men | 310,000 |
+| Cafe | 120,000 |
+| Ăn sáng | 110,000 |
+| Thú Cưng | 90,000 |
+
+**Hoạt động vay/đầu tư tháng 6 (KHÔNG phải thu/chi thật, tách riêng):**
+| | ₫ | Ghi chú |
+|-|---|---------|
+| Thu nợ + Đi vay (tiền vào) | 376,650,000 | VCBS 276.15M + vcb 500K + Đi vay 100M |
+| Cho vay + Trả nợ (tiền ra) | 100,000,000 | Trả nợ "Chị Tin" 100M (vay 6/1, trả 6/2) |
 
 ## Giao dịch gần đây (61 giao dịch — 30 ngày)
 
