@@ -10,15 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets | KhanhHH: 2h only (6h shortfall vs 8h target), no leave, Mon 22/06 |
-| 2 | Sheets | LeNH: 0h, no leave, Mon 22/06 — reminder needed |
-| 3 | Matrix | VietPH last day Friday 27/06 — Bailey handover risk (TuanNT replacing, new to project) |
-| 4 | Fountain | Task #2702 NEW over-estimate +218.8% (In-progress >50%) |
-| 5 | Fountain | Bugs list 14→18 (+4 new bugs) |
-| 6 | Fountain | mike62798179 pressing on #2868 (Scheduled Order bug) |
-| 7 | Matrix | Blair Brown: customer complained "communications is very slow" (22/06 14:52) |
-| 8 | Matrix | Blair Brown: MyKinsta staging PHP memory 256MB stuck — Elementor crashes, unresolved |
-| 9 | Discord | Jeff (AirAgri) iOS deploy blocked: Apple PLA update not accepted — external blocker |
+| 1 | Sheets | LeNH: 0h, no leave, Mon 22/06 — reminder needed |
+| 2 | Matrix | VietPH last day Friday 27/06 — Bailey handover risk (TuanNT replacing, new to project) |
+| 3 | Fountain | Task #2702 NEW over-estimate +218.8% (In-progress >50%) |
+| 4 | Fountain | Bugs list 14→18 (+4 new bugs) |
+| 5 | Fountain | mike62798179 pressing on #2868 (Scheduled Order bug) |
+| 6 | Matrix | Blair Brown: customer complained "communications is very slow" (22/06 14:52) |
+| 7 | Matrix | Blair Brown: MyKinsta staging PHP memory 256MB stuck — Elementor crashes, unresolved |
+| 8 | Discord | Jeff (AirAgri) iOS deploy blocked: Apple PLA update not accepted — external blocker |
 
 **Today (Tue 23/06):** TienND off 22/06 (bé bệnh), TuanNTG off 22/06 (đau bụng), TinPC off 22/06 (không khoẻ). KhanhHH on leave Thu–Fri this week.
 
@@ -281,11 +280,11 @@ Trello: Fountain ✓ **complete** — all 5 parts checked. Plan present, no over
 | PhucVT | 8h (JamesDiamond W31) | - | ✓ |
 | TuanNT | 8h total (Paturevision 7h \| CharlesChang 1h \| JohnYi 0h \| Rebecca 0h \| Neural 0h) | - | ✓ — has hours → gates John Yi + Rebecca + Bailey Trello items |
 | VietPH | 8h (Paturevision W33) | - | ✓ |
-| KhanhHH | 2h total (Baamboozle WS: 1.5h + 0.5h; all Sheets = 0h) | - | ⚠️ SHORT — only 2h vs 8h target. No leave. |
+| KhanhHH | 8h total (Baamboozle WS 2h + Generator WS 6h; all Sheets = 0h) | - | ✓ — corrected after recheck found Generator WS project (missed in initial scan) |
 | LeNH | 0h (Rory W17=0, Franc W30=0, Rebecca W30=0, all other sheets=0) | - | ⚠️ ALERT — 0h, no leave |
 
 **Alerts:**
-- ⚠️ **KhanhHH**: Only 2h logged (Baamboozle WS task logs). All 11 sheets empty. 6h shortfall vs 8h daily target. No leave.
+- ~~KhanhHH: 2h shortfall~~ — **CORRECTED on recheck**: initial scan only checked Baamboozle WS, missed Generator WS project. Full total = 8h (Baamboozle 2h + Generator 6h). No alert.
 - ⚠️ **LeNH**: 0h across all 11 sheets. No leave on 2026-06-22. Reminder needed.
 - ⚠️ **LongVV**: 0h for Monday (first day of new week W12). Part-time 16h/week — will monitor weekly total through Friday. Not alerting yet per rules.
 
@@ -300,7 +299,7 @@ No ticket entries in W12 task log (week of 2026-06-22). Maddy sheet W12 is empty
 | Developer | Status | Action |
 |-----------|--------|--------|
 | LeNH | ⚠️ 0h on Mon 22/06, no leave | Reminder needed (use --send-reminder to send) |
-| KhanhHH | ⚠️ 2h only (shortfall 6h), no leave | Monitor — not 0h, no Matrix reminder triggered |
+| KhanhHH | ✓ 8h (corrected — Generator WS project was missed) | None needed |
 | LongVV | 0h Mon (part-time, week just started) | Monitor weekly — not alerting until Fri |
 
 Matrix reminders (printed, NOT sent — add --send-reminder to send):
