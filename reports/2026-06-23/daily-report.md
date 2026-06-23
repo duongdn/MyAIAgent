@@ -147,3 +147,103 @@ Full details: reports/2026-06-23/matrix-rooms-0837.md
 - **binhnt - Direct Manager**: Yêu cầu thêm ~10 dự án lên Workstream; Technical Article còn nợ: AnhNVN, TienND, VinhNT.
 - **namtv**: Hỏi Raymond lâu rồi không có task — cần xem xét.
 - **Rory BXR**: Team pause đợi feedback cus, QC tiếp tục tìm bugs. Rory phản hồi tích cực về UAE.
+
+## Fountain — 08:40 (+07:00)
+
+### Part 1 — Matrix Plan (W32, Jun 22–28)
+
+Plan posted by @trinhmtt on Mon 2026-06-22 08:53 +07:
+- **ViTHT**: 40h
+- **ThinhT**: 20h
+- **QC**: 15h (PhatDLT / HungPN — TrinhMTT excluded per rule)
+- VuTQ: not named in plan
+- **Total dev capacity**: 60h/wk
+
+### Part 2 — Task Log Actuals (W32 as of Tue 2026-06-23 08:40)
+
+| Dev | Weekly Hours (W32) |
+|-----|-------------------|
+| ViTHT | 0h |
+| ThinhT | 0h |
+| VuTQ | 0h |
+| PhatDLT | 0h |
+| HungPN | 0h |
+
+All devs show 0h in W32 tab — expected on Monday/early Tuesday (week just started, no entries logged yet).
+
+### Part 3 — Plan vs Actual
+
+| Dev | Plan (W32) | Actual (W32 to date) | Status |
+|-----|-----------|---------------------|--------|
+| ViTHT | 40h | 0h | Early week — no entries yet |
+| ThinhT | 20h | 0h | Early week — no entries yet |
+| VuTQ | not in plan | 0h | Normal (not planned) |
+| PhatDLT (QC) | 15h combined | 0h | Early week |
+| HungPN (QC) | 15h combined | 0h | Early week |
+
+VuTQ: not named in plan; 0h expected for remainder of week unless task assigned.
+
+### Part 4 — Capacity & Runway
+
+Sheet: Est vs Charged tab — NS+IP bucket (Not Started + In-progress, excluding Deployed on Live / Cancelled / Has Bug on Live / Tested on Live):
+
+- **NS+IP tasks**: 17 tasks
+- **Total remaining**: 212.5h (sum of (ColI+ColJ) − ColK for NS+IP rows)
+- **Capacity**: 60h/wk (from W32 plan: ViTHT 40h + ThinhT 20h)
+- **Runway**: 212.5 / 60 = **~3.54 weeks**
+- **Delta vs Jun 22 report**: 219.0h → 212.5h = **−6.5h** (slight decrease, work progressing)
+
+Note: 2853 (48.75h actual vs 40h est, status blank) and 2895 (19.25h vs 40h est, blank status) included in NS+IP bucket.
+
+### Part 5 — Over-Estimate Tracking
+
+Tasks where Actual > (ColI+ColJ) × 1.2:
+
+| Task | Est (I+J) | Actual | % Over | Status | Growing? |
+|------|-----------|--------|--------|--------|----------|
+| #2595 | 120h (120+0 CR) | 168.25h | +40.2% | Deployed on Staging | Stable (same as Jun22) |
+| #2615 | 12h (12+0 CR) | 106.75h | +789.6% | Deployed on Staging | Stable/plateaued (same as Jun22) |
+| #2735 | 130h (90+40 CR) | 136h | +4.6% | In-progress (>50%) | Below 20% threshold — not flagged |
+| #2702 | 8h (8+0 CR) | 25.5h | +218.8% | In-progress (>50%) | NEW — not in Jun22 report |
+| #2872 | 32h (32+0 CR) | 46.25h | +44.5% | In-progress (>50%) | Stable (same as Jun22) |
+| #2640 | 12h (12+0 CR) | 16.75h | +39.6% | In-progress (<50%) | Not in Jun22 top list |
+
+Total tasks over 20% threshold: **37** (same as Jun22).
+
+Key findings:
+- #2595, #2615 stable/plateaued — no spike.
+- #2735 below threshold (+4.6%) — not flagged.
+- **#2702 newly visible at +218.8%** (In-progress >50%) — was not present in Jun22 report, needs monitoring.
+- All other top offenders are Deployed on Live/Staging — historical, not growing.
+
+### Trello Board (Web Development — Fountain)
+
+**Customer comments (last 7 days):** 22 comments from kunalsheth/tmmckay/mike62798179
+- Jun 22: kunalsheth on "Cocktail Kit page" and "infinity - custom branded form" — asking for updates
+- Jun 19: kunalsheth approved several cards for push to live (Merch page, Business Homepage, Infinity Cart/Browse/Build-a-box)
+- Jun 17-19: tmmckay/kunalsheth active feedback on multiple cards via Figma comments
+- mike62798179 (Jun 16): pressing for update on Scheduled Order bug (#2868) — "Customers have been using t..."
+
+**Active card counts:**
+| List | Count |
+|------|-------|
+| Todo | 26 |
+| Bugs | 18 (↑ from 14 on Jun22) |
+| Doing | 9 |
+| QC Internal | 7 |
+| QA Backlog | 2 (↓ from 5 on Jun22) |
+| In QA | 1 |
+
+**Stuck cards** (>5 days no activity): 50
+
+**Hard-to-release** (Doing, 14+ days):
+| Card | Days |
+|------|------|
+| Add Subtle Scroll Animations | 62 days |
+| Small updates to product catalog | 25 days |
+| NoMethodError in orders#show | 25 days |
+| ActionController::UnknownFormat | 24 days |
+| NoMethodError in users#sign_in | 18 days |
+
+Trello: Fountain ✓ **complete** — all 5 parts checked. Plan present, no over-estimate spike (tracked tasks stable). Checklist item "Fountain - DOCUMENT" marked complete.
+
