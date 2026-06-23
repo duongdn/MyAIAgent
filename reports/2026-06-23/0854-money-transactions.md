@@ -1,21 +1,21 @@
 # Transactions — 2026-06-23 08:54
 
-> **SỬA 10:15** — Số "Thu/Chi tháng 6" ban đầu (461.2M/146.4M) SAI vì đếm "Thu nợ" (rút ETF) như thu nhập và không loại "Cho vay/Đi vay/Trả nợ". MISA tự hiển thị MỘT con số khác nữa ("Tổng quan": 120.1M/242.7M, Net −122.6M) cũng sai theo hướng ngược lại (đếm "Cho vay" mua ETF như chi tiêu). Số đúng dưới đây tính trực tiếp từ giao dịch thô, loại bỏ hoàn toàn 4 category vay/đầu tư.
+> **SỬA 10:45** — 2 lỗi liên tiếp: (1) ban đầu dùng số "Lịch chi tiêu tháng" (461.2M/146.4M) tính "Thu nợ" như thu nhập — sai; (2) tự tính lại loại bỏ Cho vay/Thu nợ/Đi vay/Trả nợ nhưng dùng sai field FX cho giao dịch Paypal (currentAmount=USD thô thay vì convertCurrentAmount=VND đúng) → thiếu mất 14.5M Freelancer. Đã sửa, giờ khớp chính xác app "Báo cáo" (Thu 84,543,183 / Chi 46,374,243, lệch <0.03%).
 
-## Tháng 6/2026 (Thu/Chi THẬT — đã loại Cho vay/Thu nợ/Đi vay/Trả nợ)
+## Tháng 6/2026 (Thu/Chi THẬT — khớp app "Báo cáo")
 
 | | Amount (₫) |
 |-|-----------|
-| Thu nhập thật | +69,978,060 |
+| Thu nhập thật | +84,520,610 |
 | Chi tiêu thật | −46,374,243 |
-| **Net thật** | **+23,603,817** |
+| **Net thật** | **+38,146,367** |
 
-**Thu thật theo category:**
-| Category | ₫ |
-|----------|---|
-| Lương | 66,900,000 |
-| Lãi tiết kiệm | 3,077,510 |
-| Freelancer | 550 |
+**Thu thật theo category (đã sửa lỗi FX Paypal):**
+| Category | ₫ | % |
+|----------|---|---|
+| Lương | 66,900,000 | 79.13% |
+| Freelancer (qua Paypal, USD→VND) | 14,543,100 | 17.2% |
+| Lãi tiết kiệm | 3,077,510 | 3.67% |
 
 **Chi thật theo category:**
 | Category | ₫ |
