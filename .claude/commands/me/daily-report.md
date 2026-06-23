@@ -542,7 +542,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 
 **Check Progress — individual items** (`/daily-report trello progress {item}`):
 
-🔴 **Verify against `docs/memory/reference_trello_gate_mapping.md` before trusting this table** — it's the curated source of truth; this table has drifted from it before (2026-06-22: this row literally said `aysar → sheets lenh`, which is wrong — Aysar's task-log gate is KhanhHH, not LeNH. Fixed below.).
+🔴 **Verify against `docs/memory/daily-report/trello/reference_trello_gate_mapping.md` before trusting this table** — it's the curated source of truth; this table has drifted from it before (2026-06-22: this row literally said `aysar → sheets lenh`, which is wrong — Aysar's task-log gate is KhanhHH, not LeNH. Fixed below.).
 
 | Arg | Checklist | Item name | Run piece first |
 |------|-----------|-----------|-----------------|
@@ -750,7 +750,7 @@ bash scripts/decrypt-secrets.sh
 
 **Step 3 — For each ○ item, look up its gate mapping**
 
-Use this table (derived from `docs/memory/reference_trello_gate_mapping.md`):
+Use this table (derived from `docs/memory/daily-report/trello/reference_trello_gate_mapping.md`):
 
 | Trello Item (partial match) | Sources to run | Notes |
 |-----------------------------|----------------|-------|
