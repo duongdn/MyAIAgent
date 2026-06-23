@@ -98,3 +98,52 @@ CSP violations: only `ad.doubleclick.net` blocked (Google Ads network) — false
 Failed requests: Google Analytics/ads network (ERR_ABORTED) + video lazy-loads — all false positives.
 
 Trello: Elena - SamGuard ✓ complete (no alerts; WordPress clean; 0 open PRs)
+
+## Matrix — 08:38 (+07:00)
+
+**Active rooms: 24 / 128 | Messages: 374** *(since 2026-06-22 08:49)*
+Full details: reports/2026-06-23/matrix-rooms-0837.md
+
+### ⚠️ Action items for DuongDN (4)
+
+| Room | Time | Message |
+|------|------|---------|
+| James Diamond - Portfolio | 10:25 | binhnt: Switch James Diamond Portfolio từ Google Sheet → Workstream. Đã reply OK, add PhucVT/LongVV/AnhNH2. |
+| Blair Brown | 09:06 | anhnvn: "Về git anh Dương confirm giúp e? Hình như chỉ làm việc trên acc admin WordPress?" — cần xác nhận git workflow. |
+| Blair Brown | 10:15 | anhnvn: Page lab results chưa có, ổng sẽ đưa content — cần confirm với DuongDN. |
+| Blair Brown | 12:00 | lenh: "anh Dương update MyKinsta này giúp em" — staging memory limit 256MB (Elementor crash), cần tăng hoặc tìm workaround. |
+
+### Key updates
+
+**Blair Brown - WooCommerce Site — Active, cus chê communication chậm**:
+- LeNH onboard sáng 22/06: SSH setup, Kinsta, Slack client đã xong.
+- Staging gặp lỗi PHP memory limit 256MB (Kinsta free staging không cho đổi lên 512MB) — Elementor không dùng được.
+- Task watermark COAs và Lab Results draft page hoàn thành cuối ngày.
+- Cus Blair chê "communications is very slow" (14:52) — DuongDN nhắc LeNH reply nhanh hơn, đã cải thiện.
+- **Pending**: MyKinsta staging memory update (LeNH request 12:00, cần DuongDN xử lý).
+
+**Kunal - Fountain — Active, nhiều deploy LIVE**:
+- PR #469 (breakpoint fix) reviewed OK bởi ViTHT.
+- VuTQ deploy lên LIVE: card 2871 (build-a-box), 2872 (infinity browse feedback), PR #471 (duplicate item fix trên production).
+- HungPN tested DONE: card 2872 + bug #79362.
+- Vấn đề nhỏ: section cocktail-kit mất trong branch, chờ confirm với Thomas.
+- Plan tuần: ViTHT 40h, ThinhT 20h (QC 15h).
+
+**Bailey - BA/QC — VietPH nghỉ hết tuần này (ngày làm việc cuối thứ 6)**:
+- Pretashop ~50% giờ est, staging release dự kiến ngày mai (23/06).
+- TuanNT sẽ thay VietPH từ tuần sau — rủi ro chuyển giao, DuongDN đã lập "Bailey transfer" room.
+
+**Celine - OhCleo — TienND off 22/06 (bé bệnh)**:
+- Completion-rate task: HiepNT đang integration API (chờ TienND confirm), dự kiến deploy production ngày 23/06.
+- Cus rep nhiều lần trên Trello — DuongDN được tag xử lý.
+
+**Charles - Family**: TuanNT xong 8 pages mới, chờ khách review → sẽ chuyển qua Bailey.
+
+**Elliott - GreenFort**: Switch toàn bộ từ Google Sheet → Workstream từ tuần này.
+
+**Other:**
+- **Delivery - Resource Arrangement**: TienND, TuanNTG, TinPC off 22/06 (bé bệnh, đau bụng, không khoẻ) — đã update note, không bù.
+- **VietPH**: Thông báo thứ 6 tuần này là ngày làm việc cuối (cũng xác nhận bởi NUS Access Control checklist).
+- **binhnt - Direct Manager**: Yêu cầu thêm ~10 dự án lên Workstream; Technical Article còn nợ: AnhNVN, TienND, VinhNT.
+- **namtv**: Hỏi Raymond lâu rồi không có task — cần xem xét.
+- **Rory BXR**: Team pause đợi feedback cus, QC tiếp tục tìm bugs. Rory phản hồi tích cực về UAE.
