@@ -60,3 +60,25 @@ Trello: Ohcleo ✓ complete
 - No security alerts, no production errors in window
 
 Trello: Check mail — all 6 items ✓ complete (DuongDn, Carrick, Rick, Kai, Ken, Nick)
+
+## Slack — all — 01:37 (+07:00)
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| Baamboozle | 14 | Carrick fixed choose game modal responsive grid (PR #639), deployed to Nusdev; Jamie reported broken test/guest/plus accounts; Audrey shared customer success post |
+| RDC - FM Monitoring | 2 | Only automated "Tuner Access Log" entries — no dmetiner updates |
+| Swift Studio | 0 | No activity (quiet = OK) |
+| Xtreme Soft Solutions | 2 | Kai posted progress: LIFM2-428 Product Auth Certificate done, LIFM2-445 QA feedback done |
+| SAM GUARD - Mobile | 1 | Lena asked Michelle to change merge branch to develop-9.4 instead of staging |
+| GLOBAL GRAZING SERVICES | 6 | Amy deployed fix to Live (#maintenance); change request for Add Reduction feature (6.5h effort, approved by Joey) |
+| Amazing Meds | 0 | No activity (quiet = OK) |
+| Generator | 27 | Elliott + Violet active: deeplink testing, release planning (tomorrow/Wed), Ryan out of tasks; Carrick + Rudi: SCIM security investigation (dev discussion — resolved in thread) |
+| LegalAtoms | 23 | Raymond active: hotfix-06222026-1 deployment, cherry-pick, PR #10632 merged; email validation issue flagged |
+| MyPersonalFootballCoach | 0 | No activity |
+| William Bills | 0 | No activity (quiet = OK) |
+| Equanimity | 0 | No activity (quiet = OK) |
+| Aigile Dev | 5 | Hendrix completed 3 tasks on staging (Go Back nav, row formatting, GTM script); Colin acknowledged |
+| Baamboozle MPDM (Aysar) | 0 | Not posted yet — morning run, expected |
+
+**No blocking alerts found.** Generator SCIM/JWT issue was a dev security discussion in #triage — Carrick confirmed JWT was never wired up (WIP commit from Jul 2024), no live token exposure, no action needed per thread.
+
+Trello: Maddy ✓ | John Yi ✓ | Rory ✓ | Aysar ✓ | Franc ✓ | Elliott ✓ | Marcel ✓ | Elena SamGuard ✓ | Raymond ✓ | Rebecca ✓ | Colin ✓ (all 11 complete)
