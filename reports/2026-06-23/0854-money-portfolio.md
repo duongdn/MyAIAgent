@@ -73,20 +73,33 @@
 
 Monthly expense target: ~70M. 3× target = 210M.
 
-## ⚠️ 2 sự kiện "rút" tháng 6 — KHÔNG lần ra được đích đến
+## ✅ ĐÃ GIẢI: VCBS "Thu nợ" 276.15M không hề mất
 
-| Sự kiện | Số tiền | Đích đến (theo data MISA) |
-|---------|---------|---------------------------|
-| VCBS — "Thu nợ" (ETF trả nợ) ngày 22/06 | 276,150,000 ₫ | ❌ Không có giao dịch nhận tiền tương ứng ở vcb/Ví/Paypal/Momo ngày đó |
-| tịkcop 1 week — account balance giảm (401.9M→30.1M) | 371,812,327 ₫ | ❌ Không có giao dịch rút/chuyển khoản ghi nhận trong lịch sử |
+Kiểm tra lại field đầy đủ + click vào giao dịch trong app: "Thu nợ" không tạo giao dịch chuyển tiền đi đâu cả — nó chỉ đổi trạng thái tiền TRONG CHÍNH wallet VCBS, từ "đang đầu tư ETF" sang "tiền mặt nằm trong tài khoản chứng khoán" (chưa rút ra ngân hàng).
 
-**Ý nghĩa**: "Thu nợ" trong MISA chỉ là ghi chú cá nhân "đã thu hồi khoản đầu tư này" — KHÔNG tự động tạo giao dịch chuyển tiền vào ví khác trong hệ thống. Tôi **không thể xác nhận tiền này hiện đang ở đâu** chỉ từ dữ liệu MISA. Có thể: (a) tiền đang ở tài khoản ngân hàng/CTCK không track trong app, (b) đã ghi chú nhưng chưa thực rút, hoặc (c) MISA ghi nhận đích đến ở nơi tôi chưa fetch tới.
+Bằng chứng: `currentAmount` của VCBS hôm nay = 277,169,620 ₫ — đúng bằng khoản "Thu nợ" 276.15M (+ chút lãi). Công thức đúng cho mỗi wallet loan-tracked:
 
-**Quan trọng**: Net Worth verified (7,345,661,716 ₫, xem đầu báo cáo) KHÔNG bị ảnh hưởng bởi việc không lần ra đích đến này — đó là tổng MISA tự tính từ vị trí THẬT của mọi tài sản, không phụ thuộc vào việc tôi truy ngược được giao dịch hay không.
+**Giá trị thật = cost_basis_còn_đầu_tư (Σcho_vay − Σthu_nợ) + currentAmount (tiền mặt đang nằm trong wallet)**
 
-❌ Tuyên bố trước đó ("giảm 810M do rút ETF+tiết kiệm dùng cho chi tiêu/trả nợ") là **suy đoán không có chứng cứ** — không có liên kết giao dịch nào xác nhận khoản rút này được dùng cho Trả nợ 100M hay học phí. Rút lại tuyên bố đó.
+| Wallet | Cost basis | + Cash sitting | = Tổng | So với 26/05 |
+|--------|-----------|----------------|--------|--------------|
+| VCBS | 474,298,575 | 277,169,620 | **751,468,195** | 750,448,575 → gần như y nguyên (chênh 1M do chuyển 1tr ra vcb hôm nay) |
+| VCBF | 594,063,000 | 0 | 594,063,000 | Không đổi |
+| FPTS | 347,901,000 | 1,235,151 | 349,136,151 | Không đổi |
+| Finhay | 74,404,069 | 0 | 74,404,069 | Không đổi |
+| Larion | — | — | 600,000,000 | Không đổi |
+| **Tổng Đầu tư** | | | **2,369,071,415** | ≈ 26/05 (2,366,816,644) |
+
+→ **Tiền 276.15M không hề chi tiêu — vẫn còn 100% trong VCBS**, chỉ đổi từ "ETF" sang "cash chờ".
+
+## ⚠️ Còn 1 điểm chưa rõ: tịkcop 1 week (giảm 371.8M)
+
+Khác với VCBS, không tìm thấy cơ chế tương tự cho tịkcop 1 week — không có giao dịch nào ghi nhận khoản 371.8M chuyển đi đâu, và không có wallet khác nào tăng tương ứng. Có thể đây là một sổ tiết kiệm đã đáo hạn/đóng thật (kiểm tra lịch sử lãi suất thấy có một sổ tên "tikcop 5 week" ngừng phát sinh lãi từ 07/05 — có thể liên quan). Cần bạn tự kiểm tra app/sao kê để xác nhận khoản này.
+
+**Quan trọng**: Net Worth verified (7,345,661,716 ₫) đã tự động đúng — không bị ảnh hưởng bởi việc tôi giải thích được hay chưa từng khoản. Dùng số đó làm chuẩn.
 
 ## Alerts
-- ✅ **Net Worth verified**: 7,345,661,716 ₫ — đọc trực tiếp từ app, đáng tin
-- ⚠️ **2 khoản rút (648M) chưa rõ đích đến** — nên tự kiểm tra sao kê ngân hàng/CTCK để xác nhận
-- ℹ️ Category breakdown (BĐS/Đầu tư/Tiết kiệm/Liquid) trong báo cáo này là ước tính, không cộng khớp chính xác với tổng verified
+- ✅ **VCBS 276.15M đã xác nhận còn nguyên** — không phải mất tiền, chỉ đổi trạng thái trong cùng wallet
+- ⚠️ **tịkcop 1 week 371.8M chưa rõ đích đến** — tự kiểm tra app/sao kê để xác nhận
+- ✅ **Net Worth verified**: 7,345,661,716 ₫ — đọc trực tiếp từ API `/wallets/totaldashboard`, đáng tin tuyệt đối
+- ℹ️ Script `misa-money-report.js` đã được sửa để tự lấy số này mỗi lần chạy — không cần tái tạo qua công thức nữa

@@ -136,20 +136,23 @@
 
   <!-- Detail table -->
   <div class="card">
-    <h3>📋 2 sự kiện "Thu nợ/rút" tháng 6 — không lần ra được đích đến</h3>
+    <h3>📋 VCBS "Thu nợ" 276.15M — ĐÃ GIẢI, tiền còn nguyên</h3>
     <table>
       <thead>
-        <tr><th>Sự kiện</th><th class="right">Số tiền</th><th>Đích đến (theo data MISA)</th></tr>
+        <tr><th>Wallet</th><th class="right">Cost basis (còn đầu tư)</th><th class="right">+ Cash sitting</th><th class="right">= Tổng hôm nay</th><th class="right">So với 26/05</th></tr>
       </thead>
       <tbody>
-        <tr><td>VCBS — "Thu nợ" (ETF trả nợ)</td><td class="right">276,150,000 ₫</td><td class="right red">Không tìm thấy giao dịch nhận tiền tương ứng ở bất kỳ ví nào ngày 22/06</td></tr>
-        <tr><td>tịkcop 1 week — account balance giảm</td><td class="right">371,812,327 ₫</td><td class="right red">Không có giao dịch rút/chuyển khoản ghi nhận trong lịch sử</td></tr>
+        <tr><td>VCBS</td><td class="right">474,298,575</td><td class="right">277,169,620</td><td class="right green">751,468,195</td><td class="right" style="color:#64748b">≈ 750,448,575 (y nguyên)</td></tr>
+        <tr><td>VCBF</td><td class="right">594,063,000</td><td class="right">0</td><td class="right">594,063,000</td><td class="right" style="color:#64748b">Không đổi</td></tr>
+        <tr><td>FPTS</td><td class="right">347,901,000</td><td class="right">1,235,151</td><td class="right">349,136,151</td><td class="right" style="color:#64748b">Không đổi</td></tr>
+        <tr><td>Finhay</td><td class="right">74,404,069</td><td class="right">0</td><td class="right">74,404,069</td><td class="right" style="color:#64748b">Không đổi</td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Tổng Đầu tư</b></td><td></td><td></td><td class="right"><b>2,369,071,415</b></td><td class="right green"><b>≈ 26/05 (2,366,816,644)</b></td></tr>
       </tbody>
     </table>
     <div style="font-size:12px;color:#94a3b8;margin-top:12px;line-height:1.6">
-      <b>Ý nghĩa thật:</b> "Thu nợ" trong MISA chỉ là ghi chú cá nhân "đã thu hồi khoản đầu tư này" — KHÔNG tự động tạo giao dịch chuyển tiền vào ví khác. Tương tự, số dư tịkcop 1 week giảm nhưng không có log giao dịch rút tương ứng.<br><br>
-      → Tôi <b>không thể xác nhận tiền này hiện đang ở đâu</b> chỉ từ dữ liệu MISA. Có thể: (a) tiền đang trong tài khoản ngân hàng/CTCK không track trong app, (b) bạn mới ghi chú nhưng chưa thực rút, hoặc (c) MISA có ghi nhận ở nơi khác mà script chưa fetch tới.<br><br>
-      <b>Quan trọng:</b> số <b>Net Worth verified 7.345 tỷ</b> ở KPI trên KHÔNG bị ảnh hưởng bởi việc tôi không lần ra đích đến — đó là tổng MISA tự tính, đã bao gồm đúng vị trí hiện tại của mọi khoản tiền (kể cả 2 khoản này), bất kể tôi thấy được luồng tiền hay không.
+      <b>Tìm ra rồi:</b> "Thu nợ" trong MISA KHÔNG chuyển tiền đi đâu — nó chỉ đổi trạng thái tiền NGAY TRONG wallet VCBS, từ "đang đầu tư ETF" sang "tiền mặt nằm trong tài khoản chứng khoán" (currentAmount = 277,169,620, đúng bằng khoản thu nợ + lãi nhỏ). Công thức đúng: <b>giá trị wallet = cost-basis còn đầu tư + cash đang nằm trong wallet đó</b>.<br><br>
+      → <b>276.15M không hề mất hay bị chi tiêu</b> — vẫn còn 100% trong VCBS, chỉ đổi hình thái.<br><br>
+      ⚠️ Còn 1 khoản chưa rõ: <b>tịkcop 1 week giảm 371.8M</b> không có cơ chế tương tự để giải thích — có thể là sổ tiết kiệm đáo hạn thật. Tự kiểm tra app để xác nhận. Dù vậy, <b>Net Worth verified 7.345 tỷ</b> ở KPI trên vẫn đúng tuyệt đối — không phụ thuộc việc tôi giải thích được từng khoản hay chưa.
     </div>
   </div>
 </div>

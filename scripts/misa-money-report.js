@@ -292,31 +292,29 @@ async function fetchViaApi(page, authToken) {
 }
 
 /**
- * Read the authoritative "Tổng số dư" (true net worth, MISA-computed) directly
- * from the dashboard widget. This value already accounts for loan-tracked
- * investments, accrued interest, etc. — it is NOT reproducible by summing
- * /wallets/accounts + /wallets/savings balances (those fields are stale for
- * loan-tracked investment wallets like ETF/Fund accounts). Always prefer this
- * over manual reconstruction.
+ * Read the authoritative total balance ("Tổng số dư") directly from MISA's own
+ * API. This value already accounts for loan-tracked investments, accrued
+ * interest, residual cash sitting in investment wallets after a partial
+ * redemption, etc. — it is NOT reliably reproducible by manually summing
+ * /wallets/accounts + /wallets/savings + cho-vay/thu-nợ history (tried 3 times,
+ * each attempt missed a different component: stale currentAmount for ETF/Fund
+ * wallets, missing accrued "Tiền lãi" entries, missing residual cash left in a
+ * wallet after a partial redemption). Always prefer this API over manual
+ * reconstruction for the headline Net Worth figure.
  */
-async function readTrueTotalBalance(page) {
-  await page.goto(DASHBOARD_URL, { waitUntil: 'networkidle2', timeout: 40000 });
-  await wait(3500);
-
-  await page.evaluate(() => {
-    const icon = document.querySelector('.icon-db-password-hidden-white');
-    if (icon) icon.click();
-  });
-  await wait(1500);
-
-  return page.evaluate(() => {
-    const labelEl = [...document.querySelectorAll('.title')].find(el => el.innerText.trim() === 'Tổng số dư');
-    const moneyEl = labelEl ? labelEl.parentElement.querySelector('.money') : null;
-    if (!moneyEl) return null;
-    const text = moneyEl.innerText.trim(); // e.g. "7.345.661.716 ₫"
-    const amount = parseInt(text.replace(/[^\d]/g, ''), 10);
-    return { text, amount };
-  });
+async function readTrueTotalBalance(page, authToken) {
+  const BASE_API = 'https://moneykeeperapp.misa.vn/g1/api/business/api/v1';
+  const amount = await page.evaluate(async (baseApi, token) => {
+    const res = await fetch(baseApi + '/wallets/totaldashboard', {
+      method: 'GET',
+      credentials: 'include',
+      headers: { 'Authorization': token },
+    });
+    if (!res.ok) return null;
+    return res.json();
+  }, BASE_API, authToken);
+  if (amount == null) return null;
+  return { amount: Math.round(amount), text: `${Math.round(amount).toLocaleString('vi-VN')} ₫` };
 }
 
 /** Extract data from dashboard + API */
@@ -344,9 +342,8 @@ async function extractData(page) {
   // 3. Fetch all data via internal API
   const apiData = await fetchViaApi(page, capturedToken);
 
-  // 4. Read the authoritative total balance directly from the dashboard widget
-  //    (navigates back to dashboard; must run after API calls since it reloads the page)
-  const trueTotalBalance = await readTrueTotalBalance(page);
+  // 4. Read the authoritative total balance directly from MISA's own API
+  const trueTotalBalance = await readTrueTotalBalance(page, capturedToken);
 
   return { dashboard, apiData, trueTotalBalance };
 }
