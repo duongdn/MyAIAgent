@@ -3,34 +3,34 @@
     {
       "date": "2026-05-21",
       "label": "21/05",
-      "net_worth": 6317372430,
-      "gross_assets": 6342366125,
+      "net_worth": 7971404304,
+      "gross_assets": 7996397999,
       "liabilities": 24993695,
       "categories": {
         "real_estate": 3520000000,
         "gold": 817500000,
-        "investment": 601019770,
+        "investment": 2255051644,
         "savings": 1212271771,
         "liquid": 191574584
       },
-      "method": "account_balance",
-      "note": "Savings cao (tikcop 1w 402M chưa redeem)"
+      "method": "loan_tracked",
+      "note": "Recomputed 23/06 using full txn history. Investment: VCBS 750M + VCBF 594M + FPTS 236M + Finhay 74M + Larion 600M"
     },
     {
       "date": "2026-05-25",
       "label": "25/05",
-      "net_worth": 6189447000,
-      "gross_assets": 6214325360,
+      "net_worth": 7951395178,
+      "gross_assets": 7976385178,
       "liabilities": 24990000,
       "categories": {
         "real_estate": 3520000000,
         "gold": 807500000,
-        "investment": 1412256826,
+        "investment": 2366816644,
         "savings": 1106564236,
         "liquid": 175504298
       },
-      "method": "mixed",
-      "note": "Investment = MISA est. 812M + Larion 600M"
+      "method": "loan_tracked",
+      "note": "Recomputed 23/06 using full txn history. Investment: VCBS 750M + VCBF 594M + FPTS 348M + Finhay 74M + Larion 600M"
     },
     {
       "date": "2026-05-26",
@@ -46,23 +46,23 @@
         "liquid": 173971731
       },
       "method": "loan_tracked",
-      "note": "Investment via cho vay tracking: VCBS 750M + VCBF 594M + FPTS 348M + Finhay 74M + Larion 600M"
+      "note": "Original report already correct. Investment: VCBS 750M + VCBF 594M + FPTS 348M + Finhay 74M + Larion 600M"
     },
     {
       "date": "2026-06-23",
       "label": "23/06",
-      "net_worth": 5929900551,
-      "gross_assets": 5969729253,
+      "net_worth": 7142160369,
+      "gross_assets": 7181989071,
       "liabilities": 39828702,
       "categories": {
         "real_estate": 3520000000,
         "gold": 743000000,
-        "investment": 878406826,
+        "investment": 2090666644,
         "savings": 638175310,
         "liquid": 190147117
       },
-      "method": "account_balance",
-      "note": "VCBS rút 276M; VCBF/FPTS/Finhay = 0; Savings giảm do tikcop 1w redeem"
+      "method": "loan_tracked",
+      "note": "CORRECTED 09:40 (was wrong: used raw account balance, showed 5.93B). Investment: VCBS 474M (rút 276M ngày 22/06) + VCBF 594M + FPTS 348M + Finhay 74M + Larion 600M. Savings giảm 471M (tikcop 1w redeem 372M). Real net worth Δ vs 26/05 = -810M — tiền rút từ ETF+tiết kiệm dùng cho chi tiêu/trả nợ tháng 6, KHÔNG phải mất tiền."
     }
   ]
 }

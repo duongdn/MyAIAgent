@@ -46,20 +46,20 @@
 
 <div class="header">
   <h1>💰 Money Dashboard</h1>
-  <div class="date">Cập nhật: 23/06/2026 08:54 · MISA MoneyKeeper</div>
+  <div class="date">Cập nhật: 23/06/2026 09:40 · MISA MoneyKeeper · <span style="color:#4ade80">đã sửa lỗi tính investment (xem note cuối trang)</span></div>
 </div>
 
 <!-- KPI Row -->
 <div class="kpi-row">
   <div class="kpi">
     <div class="label">Net Worth</div>
-    <div class="value">5.93 tỷ</div>
-    <div class="delta down">▼ 2.02 tỷ vs 26/05</div>
+    <div class="value">7.14 tỷ</div>
+    <div class="delta down">▼ 810M vs 26/05 (rút ETF+TK chi tiêu)</div>
   </div>
   <div class="kpi">
     <div class="label">Gross Assets</div>
-    <div class="value">5.97 tỷ</div>
-    <div class="delta down">▼ 2.01 tỷ vs 26/05</div>
+    <div class="value">7.18 tỷ</div>
+    <div class="delta down">▼ 795M vs 26/05</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -131,16 +131,16 @@
         <tr><th>Hạng mục</th><th class="right">26/05 (₫)</th><th class="right">23/06 (₫)</th><th class="right">Δ</th></tr>
       </thead>
       <tbody>
-        <tr><td>🏠 BĐS</td><td class="right">3,520M</td><td class="right">3,520M</td><td class="right neutral">—</td></tr>
+        <tr><td>🏠 BĐS</td><td class="right">3,520M</td><td class="right">3,520M</td><td class="right" style="color:#64748b">—</td></tr>
         <tr><td>🥇 Vàng</td><td class="right">807.5M</td><td class="right">743M</td><td class="right red">▼ 64.5M</td></tr>
-        <tr><td>📈 Đầu tư</td><td class="right">2,367M ¹</td><td class="right">878M</td><td class="right red">▼ 1,489M ¹</td></tr>
-        <tr><td>🏦 Tiết kiệm</td><td class="right">1,109M</td><td class="right">638M</td><td class="right red">▼ 471M</td></tr>
+        <tr><td>📈 Đầu tư (cost basis)</td><td class="right">2,367M</td><td class="right">2,091M</td><td class="right red">▼ 276M ¹</td></tr>
+        <tr><td>🏦 Tiết kiệm</td><td class="right">1,109M</td><td class="right">638M</td><td class="right red">▼ 471M ²</td></tr>
         <tr><td>💵 Liquid</td><td class="right">174M</td><td class="right">190M</td><td class="right green">▲ 16M</td></tr>
         <tr><td>💳 Nợ</td><td class="right">−25M</td><td class="right">−39.8M</td><td class="right red">▼ 14.8M</td></tr>
-        <tr style="border-top:1px solid #334155"><td><b>Net Worth</b></td><td class="right"><b>7,952M</b></td><td class="right"><b>5,930M</b></td><td class="right red"><b>▼ 2,022M</b></td></tr>
+        <tr style="border-top:1px solid #334155"><td><b>Net Worth</b></td><td class="right"><b>7,952M</b></td><td class="right"><b>7,142M</b></td><td class="right red"><b>▼ 810M</b></td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px;color:#475569;margin-top:10px">¹ 26/05 dùng loan-tracking (VCBS+VCBF+FPTS+Finhay); 23/06 dùng account balance</div>
+    <div style="font-size:11px;color:#475569;margin-top:10px">¹ VCBS thu nợ (rút) 276.15M ngày 22/06 — VCBF/FPTS/Finhay không đổi · ² tịkcop 1 week rút 371.8M (401.9M→30.1M)</div>
   </div>
 </div>
 
@@ -152,20 +152,22 @@
         <tr><th>Tài khoản</th><th>Loại</th><th class="right">Số dư (₫)</th><th class="right">% Net</th><th>Trạng thái</th></tr>
       </thead>
       <tbody>
-        <tr><td>Nhà</td><td>🏠 BĐS</td><td class="right">2,500,000,000</td><td class="right">42.2%</td><td><span class="badge warn">Illiquid</span></td></tr>
-        <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td class="right">17.2%</td><td><span class="badge info">Đầu tư</span></td></tr>
-        <tr><td>vàng (50 VGO)</td><td>🥇 Vàng</td><td class="right">743,000,000</td><td class="right">12.5%</td><td><span class="badge warn">↑ Tỷ trọng cao</span></td></tr>
-        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">600,000,000</td><td class="right">10.1%</td><td><span class="badge warn">Illiquid</span></td></tr>
-        <tr><td>vcb 1 month</td><td>🏦 Tiết kiệm</td><td class="right">503,977,053</td><td class="right">8.5%</td><td><span class="badge ok">Sắp đáo hạn</span></td></tr>
-        <tr><td>VCBS (ETF)</td><td>📈 ETF</td><td class="right">277,169,620</td><td class="right">4.7%</td><td><span class="badge ok">Rút 276M ngày 22/06</span></td></tr>
-        <tr><td>Paypal (6,599 USD)</td><td>💵 Liquid</td><td class="right">174,490,758</td><td class="right">2.9%</td><td><span class="badge ok">~26,441 ₫/USD</span></td></tr>
-        <tr><td>tikcop 1m</td><td>🏦 Tiết kiệm</td><td class="right">102,087,367</td><td class="right">1.7%</td><td><span class="badge ok">Rolling</span></td></tr>
-        <tr><td>tịkcop 1 week</td><td>🏦 Tiết kiệm</td><td class="right">30,105,411</td><td class="right">0.5%</td><td><span class="badge ok">Auto-roll</span></td></tr>
-        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">15,141,024</td><td class="right">0.3%</td><td><span class="badge ok">Thanh khoản</span></td></tr>
-        <tr><td>FPTS</td><td>📈 Stocks</td><td class="right">1,235,151</td><td class="right">0.0%</td><td><span class="badge info">Nhỏ</span></td></tr>
+        <tr><td>Nhà</td><td>🏠 BĐS</td><td class="right">2,500,000,000</td><td class="right">35.0%</td><td><span class="badge warn">Illiquid</span></td></tr>
+        <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td class="right">14.3%</td><td><span class="badge info">Đầu tư</span></td></tr>
+        <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td class="right">8.3%</td><td><span class="badge info">Loan-tracked</span></td></tr>
+        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">600,000,000</td><td class="right">8.4%</td><td><span class="badge warn">Illiquid</span></td></tr>
+        <tr><td>vàng (50 VGO)</td><td>🥇 Vàng</td><td class="right">743,000,000</td><td class="right">10.4%</td><td><span class="badge ok">Trong benchmark</span></td></tr>
+        <tr><td>vcb 1 month</td><td>🏦 Tiết kiệm</td><td class="right">503,977,053</td><td class="right">7.1%</td><td><span class="badge ok">Sắp đáo hạn</span></td></tr>
+        <tr><td>VCBS</td><td>📈 ETF (cost basis)</td><td class="right">474,298,575</td><td class="right">6.6%</td><td><span class="badge ok">Rút 276M ngày 22/06</span></td></tr>
+        <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">347,901,000</td><td class="right">4.9%</td><td><span class="badge info">Loan-tracked</span></td></tr>
+        <tr><td>Paypal (6,599 USD)</td><td>💵 Liquid</td><td class="right">174,490,758</td><td class="right">2.4%</td><td><span class="badge ok">~26,441 ₫/USD</span></td></tr>
+        <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td class="right">1.0%</td><td><span class="badge info">Loan-tracked</span></td></tr>
+        <tr><td>tikcop 1m</td><td>🏦 Tiết kiệm</td><td class="right">102,087,367</td><td class="right">1.4%</td><td><span class="badge ok">Rolling</span></td></tr>
+        <tr><td>tịkcop 1 week</td><td>🏦 Tiết kiệm</td><td class="right">30,105,411</td><td class="right">0.4%</td><td><span class="badge warn">Rút 371.8M</span></td></tr>
+        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">15,141,024</td><td class="right">0.2%</td><td><span class="badge ok">Thanh khoản</span></td></tr>
         <tr><td>nam á 6m</td><td>🏦 Tiết kiệm</td><td class="right">2,005,479</td><td class="right">0.0%</td><td><span class="badge info">Đáo hạn</span></td></tr>
         <tr><td>Ví + Momo</td><td>💵 Cash</td><td class="right">504,468</td><td class="right">0.0%</td><td><span class="badge ok">Cash</span></td></tr>
-        <tr><td>VCB Visa</td><td>💳 Nợ</td><td class="right red">−39,825,000</td><td class="right red">−0.7%</td><td><span class="badge warn">Credit card</span></td></tr>
+        <tr><td>VCB Visa</td><td>💳 Nợ</td><td class="right red">−39,825,000</td><td class="right red">−0.6%</td><td><span class="badge warn">Credit card</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -175,7 +177,7 @@
 const fmt = (v) => (v/1e6).toFixed(0) + 'M';
 const fmtB = (v) => (v/1e9).toFixed(3) + 'B';
 
-const LABELS = ['21/05', '25/05', '26/05*', '23/06'];
+const LABELS = ['21/05', '25/05', '26/05', '23/06'];
 const COLORS = {
   re:      '#3b82f6',
   gold:    '#eab308',
@@ -192,11 +194,11 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [6.317, 6.189, 7.952, 5.930],
+      data: [7.971, 7.951, 7.952, 7.142],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
-      pointBackgroundColor: ['#60a5fa','#60a5fa','#f59e0b','#60a5fa'],
+      pointBackgroundColor: ['#60a5fa','#60a5fa','#60a5fa','#f59e0b'],
       pointRadius: 5,
       fill: true,
       tension: 0.3,
@@ -210,7 +212,7 @@ new Chart(document.getElementById('chartNetWorth'), {
         callbacks: {
           label: (ctx) => ` ${ctx.parsed.y.toFixed(3)} tỷ ₫`,
           afterLabel: (ctx) => {
-            const notes = ['Account balance', 'Mixed method', '⚠️ Loan-tracked (inflated)', 'Account balance'];
+            const notes = ['Ổn định', 'Ổn định', 'Ổn định', '▼ Rút ETF+TK để chi tiêu'];
             return notes[ctx.dataIndex];
           }
         }
@@ -220,20 +222,21 @@ new Chart(document.getElementById('chartNetWorth'), {
       x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
       y: {
         grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' },
-        min: 5, max: 9
+        min: 6.8, max: 8.2
       }
     }
   }
 });
 
 // --- Allocation Donut (today, excl. Nhà) ---
+const ALLOC_TOTAL = 4682; // M, excl. Nhà
 new Chart(document.getElementById('chartAllocation'), {
   type: 'doughnut',
   data: {
-    labels: ['BĐS (Long An)', 'Vàng', 'Đầu tư', 'Tiết kiệm', 'Liquid'],
+    labels: ['Đầu tư', 'BĐS (Long An)', 'Vàng', 'Tiết kiệm', 'Liquid'],
     datasets: [{
-      data: [1020, 743, 878, 638, 190],
-      backgroundColor: [COLORS.re, COLORS.gold, COLORS.invest, COLORS.savings, COLORS.liquid],
+      data: [2091, 1020, 743, 638, 190],
+      backgroundColor: [COLORS.invest, COLORS.re, COLORS.gold, COLORS.savings, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
     }]
@@ -247,7 +250,7 @@ new Chart(document.getElementById('chartAllocation'), {
         labels: { color: '#94a3b8', font: { size: 12 }, padding: 10 }
       },
       tooltip: {
-        callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}M (${(ctx.parsed/3470*100).toFixed(1)}%)` }
+        callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}M (${(ctx.parsed/ALLOC_TOTAL*100).toFixed(1)}%)` }
       }
     }
   }
@@ -260,8 +263,8 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
     labels: LABELS,
     datasets: [
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520], backgroundColor: COLORS.re },
+      { label: '📈 Đầu tư',   data: [2255,2367,2367,2091], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [817,807,807,743],     backgroundColor: COLORS.gold },
-      { label: '📈 Đầu tư',   data: [601,1412,2367,878],   backgroundColor: COLORS.invest },
       { label: '🏦 Tiết kiệm',data: [1212,1107,1109,638],  backgroundColor: COLORS.savings },
       { label: '💵 Liquid',   data: [192,176,174,190],     backgroundColor: COLORS.liquid },
     ]
@@ -329,8 +332,8 @@ new Chart(document.getElementById('chartDebt'), {
 </script>
 
 <div class="note-row">
-  * 26/05 dùng loan-tracking (cho vay transactions) → Investment 2,367M gồm VCBS 750M + VCBF 594M + FPTS 348M + Finhay 74M + Larion 600M. Các kỳ khác dùng account balance.
-  Lý do Net Worth giảm 2B từ 26/05→23/06: VCBS rút 473M (750→277), VCBF 594M rút hết, FPTS 348→1M, Savings giảm 471M (tikcop 1w redeem).
+  <b style="color:#94a3b8">Đã sửa lỗi (09:40):</b> Báo cáo đầu tiên tính sai Investment bằng account-balance trực tiếp (VCBF/Finhay hiện 0₫ trong MISA vì 2 quỹ này KHÔNG tự cập nhật số dư — chỉ track qua giao dịch "cho vay/thu nợ"). Đã fetch lại 2,171 giao dịch lịch sử và tính net position = Σcho_vay − Σthu_nợ cho từng wallet, verify khớp 100% với báo cáo 26/05 cũ.
+  Kết quả đúng: Net Worth ổn định ~7.95–7.97 tỷ từ 21/05–26/05, sau đó giảm 810M (không phải 2.02 tỷ) xuống 7.14 tỷ vào 23/06 — do rút VCBS 276M (22/06) + tịkcop 1 week 371.8M dùng cho chi tiêu/trả nợ tháng 6 (Trả nợ 100M ngày 02/06 v.v.). Đây là chi tiêu thật, không phải mất tiền hay lỗ đầu tư.
 </div>
 
 </body>

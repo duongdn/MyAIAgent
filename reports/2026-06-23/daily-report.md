@@ -18,6 +18,7 @@
 | 6 | Matrix | Blair Brown: customer complained "communications is very slow" (22/06 14:52) |
 | 7 | Matrix | Blair Brown: MyKinsta staging PHP memory 256MB stuck — Elementor crashes, unresolved |
 | 8 | Discord | Jeff (AirAgri) iOS deploy blocked: Apple PLA update not accepted — external blocker |
+| 9 | Maddy/JIRA | Client quality escalation 19/06 (Madhuraka→Kai): LIFM2-439 79% over estimate (12h→21.5h), PR comments unaddressed. Kai apologized, "formal meeting w/ technical lead." Recovering as of 22/06 but watch for recurrence. |
 
 **Today (Tue 23/06):** TienND off 22/06 (bé bệnh), TuanNTG off 22/06 (đau bụng), TinPC off 22/06 (không khoẻ). KhanhHH on leave Thu–Fri this week.
 
@@ -183,27 +184,27 @@ Plan posted by @trinhmtt on Mon 2026-06-22 08:53 +07:
 - VuTQ: not named in plan
 - **Total dev capacity**: 60h/wk
 
-### Part 2 — Task Log Actuals (W32 as of Tue 2026-06-23 08:40)
+### Part 2 — Task Log Actuals (W32 as of Tue 2026-06-23 08:40) — **CORRECTED on recheck**
 
-| Dev | Weekly Hours (W32) |
-|-----|-------------------|
-| ViTHT | 0h |
-| ThinhT | 0h |
-| VuTQ | 0h |
-| PhatDLT | 0h |
-| HungPN | 0h |
+⚠️ Initial scan only checked the Google Sheet (W32 tab = 0h, week just started). Direct query of Workstream project "Fountain Greetings" (id `cmpqcjojh00q2tk1v2qi7gs0j`) shows the team has actually moved task logging there — real hours for Mon 2026-06-22:
 
-All devs show 0h in W32 tab — expected on Monday/early Tuesday (week just started, no entries logged yet).
+| Dev | Mon 22/06 (Workstream) |
+|-----|------------------------|
+| ViTHT | 8.00h |
+| ThinhT | 4.00h |
+| VuTQ | 0h (not found in Workstream either) |
+| PhatDLT (QC) | 0h (not found in Workstream — may log elsewhere or off) |
+| HungPN (QC) | 3.50h |
 
-### Part 3 — Plan vs Actual
+### Part 3 — Plan vs Actual — **CORRECTED**
 
-| Dev | Plan (W32) | Actual (W32 to date) | Status |
+| Dev | Plan (W32) | Actual Mon 22/06 | Status |
 |-----|-----------|---------------------|--------|
-| ViTHT | 40h | 0h | Early week — no entries yet |
-| ThinhT | 20h | 0h | Early week — no entries yet |
+| ViTHT | 40h/wk (~8h/day) | 8.0h | ✓ on pace |
+| ThinhT | 20h/wk (~4h/day) | 4.0h | ✓ on pace |
 | VuTQ | not in plan | 0h | Normal (not planned) |
-| PhatDLT (QC) | 15h combined | 0h | Early week |
-| HungPN (QC) | 15h combined | 0h | Early week |
+| PhatDLT (QC) | 15h combined/wk | 0h | Monitor — no WS entries found Mon |
+| HungPN (QC) | 15h combined/wk | 3.5h | ✓ on pace |
 
 VuTQ: not named in plan; 0h expected for remainder of week unless task assigned.
 
@@ -290,20 +291,46 @@ Trello: Fountain ✓ **complete** — all 5 parts checked. Plan present, no over
 
 **TuanNT gate result:** TuanNT has 8h → John Yi + Rebecca + Bailey Trello items can be completed.
 
-## Sheets — Maddy JIRA — W12 — 01:44 (+07:00)
+## Maddy / Kai — JIRA + Slack deep check — 09:5x (+07:00) **[user-requested recheck]**
 
-No ticket entries in W12 task log (week of 2026-06-22). Maddy sheet W12 is empty for Monday — no JIRA cross-check items to report.
+⚠️ Initial pass ("Maddy sheet W12 empty, nothing to cross-check") missed an active client quality/trust issue. Direct JIRA + Slack DM check (madhuraka-godahewa.atlassian.net, project LIFM2) found:
+
+**Timeline of the incident (Slack DM, Madhuraka ↔ Kai):**
+| Date | Event |
+|------|-------|
+| 19/06 05:54 | Madhuraka: ticket #444 "took 15 seconds, should be instantaneous"; #434 has unaddressed PR comments; questions why #439 needs extra hours when filtering was in original scope |
+| 19/06 13:50 | Kai: "this is the issue of me. My apologize, I will fix it by myself" |
+| 19/06 13:54 | Kai: "I have a formal meeting with my technical lead. He show me some internal issues recently... My team will take a meeting for lesson learn all issues and decide corrective/preventive action" |
+| 20/06 19:19 | Kai: "I'll dedicate some of my personal time this weekend to ensure tasks remain on schedule" |
+| 21/06 19:04 | Madhuraka: "Thank you very much. I appreciate your effort. Hope your father is doing well." (recovering) |
+| 22/06 10:40, 17:16 | Kai: progress reports, LIFM2-445/444/428 marked Done |
+
+**JIRA ticket check (est vs actual + comments), the specific tickets from the dispute:**
+| Ticket | Summary | Est | Actual | Status | Note |
+|--------|---------|-----|--------|--------|------|
+| LIFM2-439 | Listed-Cons tab changes | 12.0h | 21.5h | Testing-Anoma | 🔴 **+79% over** — this IS the "why extra hours" ticket Madhuraka questioned |
+| LIFM2-434 | Quote Tool - AI MVP | 32.0h | 25.5h | Review | OK (under) |
+| LIFM2-444 | Async Queue for Bulk Listing Price | 15.0h | 12.0h | Testing-Anoma | OK (under) — "15 second" complaint ticket, Anoma confirmed (20/06) screen doesn't freeze |
+| LIFM2-445 | Update Price Action button | 2.0h | 1.0h | Testing-Anoma | OK |
+| LIFM2-428 | Shopify Product Authenticity Cert | 44.0h | 39.3h | Review | OK (under) |
+| LIFM2-260 | Shopify images via S3 | **NOT SET** | 38.5h | Customer Feedback | ⚠️ No estimate ever set; open since 2025-02-25 (16 months), 24 comments, recurring rework cycles (folder upload, image order, search bar). Latest (22/06): "Testing ok" — currently resolved pending next round. |
+
+**Assessment:** Real, recently-escalated quality concern — not a false alarm. Root ticket (#439) is genuinely 79% over its estimate, which is what triggered Madhuraka's "why extra hours" question and the internal escalation. Kai owned the issue, committed personal weekend time, and Madhuraka's tone had warmed by 21/06. As of 22/06 progress looks back on track, but this should be watched for recurrence — do not mark this as fully resolved from one quiet day.
+
+🔴 **Identity correction needed:** `config/.jira-config.json` maps **Kai (Slack/JIRA) → internal_name "LongVV"**, with `expected_weekly_hours: 40` — NOT the 16h/week part-time figure in `feedback_longvv_hour_split.md`. Likely explanation: LongVV/Kai is full-time (40h) split across Maddy ("Kai" persona, JIRA LIFM2) + OhCleo ("Tony" persona, per Piece 12 config) — the 16h figure may only be the Maddy-specific portion. **This needs user confirmation before memory is corrected** — flagging as unresolved question.
+
+Trello: Maddy item already marked ✓ earlier today (Slack-only gate, Kai's daily report was present) — **leaving as-is** since the gate is Slack activity, not JIRA budget health, but the over-estimate on #439 and long-tail #260 are noted here for visibility, not as a Trello blocker.
 
 ## Reminders — 08:46 (+07:00)
 
 | Developer | Status | Action |
 |-----------|--------|--------|
-| LeNH | ⚠️ 0h on Mon 22/06, no leave | Reminder needed (use --send-reminder to send) |
+| LeNH | ⚠️ 0h on Mon 22/06, no leave | **Reminder sent** ✓ (09:4x +07, by explicit user request) |
 | KhanhHH | ✓ 8h (corrected — Generator WS project was missed) | None needed |
-| LongVV | 0h Mon (part-time, week just started) | Monitor weekly — not alerting until Fri |
+| LongVV | 0h Mon (part-time, week just started); verified 0h across ALL 8 Workstream projects too | Monitor weekly — not alerting until Fri |
 
-Matrix reminders (printed, NOT sent — add --send-reminder to send):
-- **LeNH** → room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!"
+Matrix reminder sent:
+- **LeNH** → room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!" (event_id `$Rfg4U2as4uIntvg2Zu-PzgOuSTPlWOdmf9rnHFprMmI`)
 
 ## Philip (MS Teams) — 01:56 (+07:00)
 Teams chat found and opened for Philip Briggs (pbriggs@sixstarrentals.com.au). No customer messages with complaints or unresolved requests extracted. Chat rendered but message body content not loaded in time — section header "Messages" only. No active complaints or urgent requests detected.
@@ -315,3 +342,12 @@ Trello: Neural Contract ✓ complete
 
 ## Scrin.io — 01:56 (+07:00) [RECHECK]
 **Scrin.io (Nick / John Yi — 2026-06-22):** 0h — 0 sessions logged. Script uses `isYesterday: true` flag (server-determined date). From Tuesday Jun 23, "yesterday" = Monday Jun 22 ✓ (verified via Node.js Date logic in UTC+7). API returned HTTP 200, body=[] — 0 sessions on Monday. Legitimate: Nick may not have used Scrin tracker on Monday.
+
+## Recheck — 09:35 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| KhanhHH hours | ✓ corrected | Initial scan only checked Baamboozle Workstream project (2h). Direct re-query of all 8 Workstream projects (`/api/review/week`) found KhanhHH also logged 6h on **Generator** project (Elliott client) on 2026-06-22: redmine fixes, AIM removal, Rudi code review, SCIM investigation. **True total: 8h — meets daily target, no shortfall.** |
+| Workstream project list | ⚠️ memory gap found | `reference_workstream.md` only listed 5 projects (maddy/rebecca/baamboozle/colin-etz/blair-brown). Live API shows 5 more: Portfolio-JamesDiamond, Family App (Charles Chang), **Generator (Elliott)**, Fountain Greetings (Kunal), Others (NUS). Memory needs updating — see below. |
+
+**Cleared:** KhanhHH shortfall alert (false positive)

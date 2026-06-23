@@ -20,8 +20,15 @@ Scan ALL of these for every dev's hours. Do NOT pre-assign which projects belong
 | baamboozle | Baamboozle / Aysar | Aysar Siddiqui | `cmqez93ka07q8p81v7035l3td` |
 | colin-etz | ETZ - Wathaga | Colin CardWell | `cmqezatb807qvp81vpnzzimmp` |
 | blair-brown | Blair Brown WordPress | Blair Brown | `cmqj4tj6v01gfm81vgx7ipkov` |
+| james-portfolio | Portfolio - James Diamond | James Diamond | `cmqook9vf0kl8m81vusyo8ppt` |
+| family-app | Family App | Charles Chang | `cmqezfyzv07z6p81vf403t9lp` |
+| generator | Generator | Elliott Bouher | `cmqoou4h10kzum81vovi8rrsk` |
+| fountain | Fountain Greetings | Kunal | `cmpqcjojh00q2tk1v2qi7gs0j` |
+| others | Others | NUS | `cmpqae4pd0006qa1wo85fzvji` |
 
-⚠️ New projects surface without notice — if a dev shows 0h across all known sources, check if any new project was added (ask user or query `GET {api_base}/time/projects?date={date}` with manager token to list all).
+🔴 **List grew from 5→10 projects, found 2026-06-23.** KhanhHH was falsely flagged "2h shortfall" — actual was 8h, the missing 6h was all logged under **Generator** (Elliott's project), which wasn't in the static list above. Also found: Fountain devs (ViTHT/ThinhT/HungPN) log real hours to the **Fountain Greetings** WS project — the Google Sheet W{n} tab can show 0h while Workstream has the true data. **This list is NOT exhaustive and will drift again.**
+
+⚠️ **MANDATORY before flagging ANY dev shortfall/0h:** query `GET {api_base}/time/projects?date={date}` (using YOUR OWN token — returns only projects you're a member of, may also be incomplete) AND cross-check `/review/week?projectId={id}&date={date}` for every ID in the table above, filtering rows by `employeeName`. Do not rely on the static table alone — it has been wrong twice now.
 
 ## Scripts
 
