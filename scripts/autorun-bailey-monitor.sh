@@ -1,6 +1,6 @@
 #!/bin/bash
-# Auto-run Bailey monitor headlessly via claude -p
-# Cron: 5 19 * * * (19:05 UTC = 02:05 UTC+7, offset 5min from news-digest)
+# Auto-run Bailey monitor headlessly via claude -p — WEEKLY on Friday UTC+7
+# Cron: 5 19 * * 4 (Thursday 19:05 UTC = Friday 02:05 UTC+7)
 
 PROJECT_DIR="/var/www/MyDailyAgent"
 CLAUDE_BIN="/usr/bin/claude"
