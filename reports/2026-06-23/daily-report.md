@@ -327,9 +327,10 @@ Trello: Maddy item already marked ✓ earlier today (Slack-only gate, Kai's dail
 |-----------|--------|--------|
 | LeNH | ⚠️ 0h on Mon 22/06, no leave | **Reminder sent** ✓ (09:4x +07, by explicit user request) |
 | KhanhHH | ✓ 8h (corrected — Generator WS project was missed) | None needed |
-| LongVV | 0h Mon (part-time, week just started); verified 0h across ALL 8 Workstream projects too | Monitor weekly — not alerting until Fri |
+| LongVV | 0h Mon (part-time, week just started); verified 0h across ALL 8 Workstream projects too | **Reminder sent** ✓ (09:46 +07, by explicit user request) |
 
-Matrix reminder sent:
+Matrix reminders sent:
+- **LongVV** → room `!bvdwOOxprsKJBTjSeQ:nustechnology.com`: "Hi LongVV, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!" (event_id `$yT5MVFkKIzGt8hQII00rqk8owV5ELa6wK3wmKOQ5USg`)
 - **LeNH** → room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-06-22 is missing (0h logged). Please update when you can. Thanks!" (event_id `$Rfg4U2as4uIntvg2Zu-PzgOuSTPlWOdmf9rnHFprMmI`)
 
 ## Philip (MS Teams) — 01:56 (+07:00)
