@@ -36,9 +36,14 @@ Scan ALL of these for every dev's hours. Do NOT pre-assign which projects belong
 # Login (run once / when token expires)
 DISPLAY=:1 node scripts/workstream-login.js
 
-# Fetch week data (both projects)
+# Canonical shortfall check — scans ALL sheets + ALL live Workstream projects, no per-dev subset
+node scripts/sheets-tasklog-scan.js <YYYY-MM-DD> <dev1> [dev2 ...]
+
+# Fetch week data (single project)
 node scripts/workstream-fetch-project-week.js [YYYY-MM-DD] [maddy|rebecca]
 ```
+
+🔴 **Never write a new dated `daily-sheets-scan-YYMMDD-*.js` script.** That pattern caused the KhanhHH/Generator false-alert to recur on 2026-06-24, one day after first being diagnosed, because the fix applied to one day's copy didn't carry to the next. Old copies archived to `scripts/archive/`. See [[feedback_no_dated_scan_scripts]].
 
 ## Config
 

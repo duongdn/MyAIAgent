@@ -15,9 +15,11 @@ metadata:
 
 **Why:** User caught both same day ("check workstream why you keep wrong for this !!!"). Pattern: any dev/project can silently move Sheets→Workstream, and the WS project list itself grows without notice (was 5 projects in memory, live API showed 10).
 
+🔴 **RECURRED 2026-06-24** — same KhanhHH/Generator gap, one day after this memory was written. Root cause: the script doing the check (`daily-sheets-scan-260623-tue.js`) hardcoded 3 WS projects and never got the fix applied, because each day's check was a fresh dated script copy, not an edit of one canonical file. This memory's *rule* was correct; the *executable tool* didn't implement it. See [[feedback_no_dated_scan_scripts]] for the structural fix.
+
 **How to apply:**
-- Before writing ANY "0h"/"shortfall" line in ANY piece (Sheets, Fountain, per-dev recheck): run `GET {api_base}/time/projects?date={date}` AND iterate `/review/week?projectId={id}&date={date}` for **every** ID — do not stop at projects "known" to belong to that dev/client.
+- Use the canonical script: `node scripts/sheets-tasklog-scan.js <YYYY-MM-DD> <dev1> [dev2 ...]` — it always scans ALL sheets + the FULL live Workstream project list, no per-dev subset to go stale. Do NOT write a new dated script (see [[feedback_no_dated_scan_scripts]]).
 - A 0h/shortfall number is the TRIGGER to re-verify via Workstream directly, not something to write down as-is.
 - If sheets=0h but Workstream>0h → use Workstream figure, note the discrepancy.
 - New WS project found via live query but missing from [[reference_workstream]]'s table → add it immediately.
-- Run `node scripts/workstream-fetch-project-week.js YYYY-MM-DD [project-key]` per project. `weekTotal`=hours worked, `weekCharged`=billed. Login: `DISPLAY=:1 node scripts/workstream-login.js` (auto-refresh on 401). `missingReportDays`>0 on past workdays = flag.
+- `weekTotal`=hours worked, `weekCharged`=billed. Login: `DISPLAY=:1 node scripts/workstream-login.js` (auto-refresh on 401, never report 401 as "unavailable" — fix and retry). `missingReportDays`>0 on past workdays = flag.

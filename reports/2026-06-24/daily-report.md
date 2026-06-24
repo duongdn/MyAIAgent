@@ -12,14 +12,15 @@
 | 3 | 🔴 HIGH | vuongtrancr@ / Swish | Signal lost "Low Application Throughput" ×3; CDPR Incident #4375; Delayed-newform Daily Summary |
 | 4 | 🟡 MED | nick@ / John Yi | Sentry OpenURI::HTTPError ×2 (PR fix already submitted); Xero limit warning ×2 |
 | 5 | 🟡 MED | ken@ / Welligence | WellJenkins XWWP-4653 pipeline failures ×3; security vulnerability alert |
-| 6 | 🟡 MED | KhanhHH | 0h Jun 23 — no leave logged (leave is Jun 25–26); Workstream unavailable |
-| 7 | 🟡 MED | LeNH | 0h Jun 23 — no leave logged (last leave was Jun 17 sick day) |
-| 8 | 🟡 MED | OhCleo | Upwork payment dispute — $1,668 charged; Tony's account blocked, refund pending |
-| 9 | 🟡 MED | Fountain #2615 | Over-estimate +790% critical (12h est → 106.75h actual, Deployed on Staging) |
-| 10 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
-| 11 | 🟡 MED | Xtreme / Maddy | Madhuraka (client) raised unanswered Shopify image-ordering bug 06:26 Jun24 — needs response |
-| 12 | ⚠️ ACTION | Matrix DM (ChienTx) | "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" 08:38 Jun24 — question directed at DuongDN, unanswered |
-| 13 | ○ RECHECK | Aysar | MPDM 0 msgs (posts ~17:00+07); recheck after 17:00 |
+| 6 | 🟡 MED | LeNH | 0h Jun 23 — confirmed via ALL 13 sheets + ALL 10 Workstream projects + Upwork; no leave logged |
+| 7 | 🟡 MED | OhCleo | Upwork payment dispute — $1,668 charged; Tony's account blocked, refund pending |
+| 8 | 🟡 MED | Fountain #2615 | Over-estimate +790% critical (12h est → 106.75h actual, Deployed on Staging) |
+| 9 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
+| 10 | 🔴 HIGH | Xtreme / Maddy | **Customer complaint, unanswered:** Madhuraka — Shopify image-ordering bug, recurrence of LIFM2-260 (open since 2025-02-25, 24 comments of rework). Same client who escalated quality concerns 6/19. See Piece 2 for full detail. |
+| 11 | ⚠️ ACTION | Matrix DM (ChienTx) | "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" 08:38 Jun24 — question directed at DuongDN, unanswered |
+| 12 | ○ RECHECK | Aysar | MPDM 0 msgs (posts ~17:00+07); recheck after 17:00 |
+
+**KhanhHH — REMOVED from alerts (was #6, item 0h/Workstream-unavailable):** Corrected on recheck — KhanhHH actually worked 8h Jun 23, all under Generator (Workstream). Original finding was a script bug (hardcoded WS project subset missing Generator + reported 401 instead of fixing it). See Piece 4 for full root-cause writeup.
 
 **Resolved since 06:08:** Matrix token refreshed (✅); Fountain Part 1 plan recovered (✅); Rory/Franc Slack quiet=OK, completed (✅); Elena WordPress clean, completed (✅); Upwork sessions all working (✅); Philip MS Teams real data confirmed clean (✅). Note: Fountain dev task-log 0h (Part 2/3) is **not monitored/alerted per user instruction** (2026-06-09) — removed from alerts, see Piece 6.
 
@@ -65,7 +66,9 @@
 - FountainGifts - Daily Summary - Monday, June 22 (informational)
 - Blair B. sent you a message ×4 (FountainGifts client activity)
 
-**kai@ alerts:** None ✅ — LIFM2-409 Bitbucket PR feedback threads (normal dev activity)
+**kai@ alerts (at 06:08):** None ✅ — LIFM2-409 Bitbucket PR feedback threads (normal dev activity)
+
+**kai@ recheck (09:15+07):** 🔴 New email 06:25+07 from madhuraka@xtremeweb.com.au, "FW: Dev Tasks" — Shopify image-ordering bug report (LIFM2-260 recurrence), arrived after the 06:08 window closed. See Piece 2/Alerts #10 for full detail — unanswered customer complaint.
 
 **ken@ alerts (MED):**
 - 🟡 [welligence/WellJenkins] XWWP-4653: Surface failed stage in Teams ×3
@@ -115,9 +118,13 @@ Trello: All 6 mail items ✓ complete. Mail card → complete.
 - GGS Amy = Nick (NUS dev); daily report confirmed in #maintenance ✅
 - Aigile Dev blog warning: automated alert, not a dev issue
 
-**Recheck 08:39+07:** RDC + Swift still quiet (no new msgs) → quiet=OK, completed. Xtreme: 1 new msg 06:26 — Madhuraka (client): "I have sent you an email related to image ordering when uploaded to Shopify. Please check and get back to me as to why the ordering is incorrect." Unanswered as of recheck — possible recurrence of LIFM2-260 Shopify image issue.
+**Recheck 08:39+07:** RDC + Swift still quiet (no new msgs) → quiet=OK, completed. Xtreme: 1 new msg 06:26 — Madhuraka (client): "I have sent you an email related to image ordering when uploaded to Shopify. Please check and get back to me as to why the ordering is incorrect."
 
-Trello Progress: Maddy-Kai-Luis ○ (unanswered Madhuraka Shopify bug, not just missing report), Rory ✓ complete, Aysar ○ (recheck after 17:00), Franc ✓ complete
+🔴 **Customer complaint — elevated to HIGH (09:15+07):** Pulled full Madhuraka↔Kai DM history (not just the keyword hit) + the actual email (kai@ inbox, "FW: Dev Tasks", 06:25+07): *"Can you see why the ordering is incorrect here? Client has given the SKUs of the products on Shopify staging and you should be able to get the file names from database."* This is a recurrence of **LIFM2-260** ("Update Shopify products with images uploaded on to S3") — a long-tail ticket open since 2025-02-25 with 24 comments of recurring rework, no original estimate ever set (per [[feedback_maddy_kai_longvv_identity_and_quality_escalation]]). Same client thread that escalated to a formal quality complaint on 6/19 (Kai: "I have a formal meeting with my technical lead... He show me some internal issues recently"). Kai recovered well after that (daily progress posted 6/20-6/22), but this new complaint is **unanswered as of recheck** and lands on the same problem ticket — worth tracking closely for recurrence, not a one-off.
+
+*Note: this email arrived 06:25+07, after the original 06:08 email scan window closed — not a missed item from the original run, genuinely new since then.*
+
+Trello Progress: Maddy-Kai-Luis ○ (unanswered customer complaint, real ticket regression — not just a missing-report formality), Rory ✓ complete, Aysar ○ (recheck after 17:00), Franc ✓ complete
 
 ---
 
@@ -144,14 +151,17 @@ Trello: James Diamond ✓ complete. Andrew Taraba ✓ complete (0 msgs, no alert
 | TuanNT | 8h combined | ✅ OK | Paturevision + CharlesChang confirmed |
 | PhucVT | 8h | ✅ OK | |
 | VietPH | 8h | ✅ OK | |
-| KhanhHH | 0h | ⚠️ ALERT | All 11 sheets + CharlesChang = 0h; Workstream 401; no leave Jun 23 |
-| LeNH | 0h | ⚠️ ALERT | Rory W17 confirmed 0h Jun 23; no leave logged (last leave Jun 17 sick) |
+| KhanhHH | **8h** | ✅ OK (corrected) | See recheck below — original 0h/Workstream-401 finding was wrong |
+| LeNH | 0h | ⚠️ ALERT (confirmed) | 0h across ALL 13 sheets + ALL 10 accessible Workstream projects + Upwork Rory/Aysar; no leave logged |
 | LongVV | 8h/week | ✅ OK | Part-time; weekly target met |
 
-**KhanhHH:** 0h across all sources. Leave plan shows Jun 25–26 only (not Jun 23). **Alert: KhanhHH 0h unexplained.**
-**LeNH:** 0h in Rory + Franc + Rebecca sheets (col G filter). LeNH sick leave was Jun 17; should be back. **Alert: LeNH 0h unexplained.**
+**KhanhHH — CORRECTED on recheck (09:05+07):** Original 06:08 run reported "Workstream 401, 0h" — this was wrong on two counts: (1) the 401 should have been fixed by re-running `workstream-login.js`, not reported as unavailable; (2) the script used (`daily-sheets-scan-260623-tue.js`) only checked 3 hardcoded Workstream projects for KhanhHH (Baamboozle, Colin/ETZ, Blair Brown) — missing **Generator**, which is where the hours actually were. Live re-query of ALL 10 Workstream projects + ALL 13 sheets found **KhanhHH logged 8h on Jun 23, entirely under Generator** (Elliott's project): "Fix redmines" 6:00 + "[API] Work order preview-pdf 500" 1:00 + "716 deep-link" 1:00. **This is the exact same root-cause pattern as the 2026-06-23 incident already in memory** (Generator missing from a hardcoded WS project list) — see root-cause fix below. No alert; KhanhHH worked a full day.
 
-Trello: John Yi ✓ (TuanNT 8h gates it); Bailey ✓ (TuanNT + Nick GGS); Rebecca ✓ (TuanNT gates it).
+**LeNH — CONFIRMED real alert (09:05+07):** Built a canonical scan (`scripts/sheets-tasklog-scan.js`) that checks ALL 13 sheets + ALL 10 live-accessible Workstream projects (the original check only covered 3 of 13 sheets: Rory+Franc+Rebecca). Result: 0h everywhere, no leave note anywhere. Cross-checked Upwork Rory (41069448) + Aysar (35642393) workrooms: both 0:00 this week (Jun22-23). This is a genuine, fully-verified 0h day — leave plan shows last leave Jun 17 (past), nothing for Jun 23. **Alert stands.** Reminder not sent (no `--send-reminder` flag this run) — see Piece 9.
+
+🔴 **Root-cause fix (why this keeps happening):** The daily-report Sheets piece has been implemented by writing a fresh dated script (`scripts/daily-sheets-scan-YYMMDD-day.js`) most days, each hardcoding a per-dev subset of sheets/Workstream projects. Fixes applied to one day's copy (e.g. "add Generator to KhanhHH's WS check" after the 2026-06-23 incident) don't carry forward because the next day's script is a fresh copy, not an edit of the same file. **Fix applied today:** wrote one canonical, permanent script `scripts/sheets-tasklog-scan.js` that always scans ALL 13 sheets + the FULL live Workstream project list for any dev passed as an argument — no per-dev subset to go stale. Archived the 29 old dated scripts to `scripts/archive/` so there's nothing to copy-paste from anymore. Memory updated accordingly (see `reference_workstream.md` / new `feedback_no_dated_scan_scripts.md`).
+
+Trello: John Yi ✓ (TuanNT 8h gates it); Bailey ✓ (TuanNT + Nick GGS); Rebecca ✓ (TuanNT gates it). KhanhHH-gated items (Aysar partial, Elliott) unaffected/already correct — Elliott was already ✓ via Generator Slack activity.
 
 ---
 
@@ -268,8 +278,9 @@ All 6 Zoho accounts checked ✓ → card auto-completed.
 
 | Developer | Hours | Leave | Reminder needed |
 |-----------|-------|-------|-----------------|
-| KhanhHH | 0h Jun 23 | Jun 25–26 only | Yes — send reminder if no update by EOD |
-| LeNH | 0h Jun 23 | Jun 17 (past) | Yes — send reminder if no update by EOD |
+| LeNH | 0h Jun 23 (confirmed, all sources checked) | Jun 17 (past) | Yes — send reminder if no update by EOD |
+
+*KhanhHH removed — corrected to 8h Jun 23 (Generator Workstream) on recheck, see Piece 4.*
 
 ---
 
@@ -345,7 +356,7 @@ Trello: Ohcleo ✓ complete.
 | Email | ✅ Scanned (alerts: Generator CI, InfinityRoses/FirstProject prod, Swish signal lost) |
 | Slack (14 WS) | ✅ Scanned (Aysar MPDM pending recheck after 17:00; new Madhuraka/Xtreme bug unanswered) |
 | Discord | ✅ AirAgri active; Bizurk quiet |
-| Google Sheets | ✅ TuanNT/PhucVT/VietPH/LongVV OK; KhanhHH+LeNH 0h alerts |
+| Google Sheets | ✅ TuanNT/PhucVT/VietPH/LongVV/KhanhHH (corrected, 8h) OK; LeNH 0h confirmed alert |
 | Scrin | ✅ Nick 70m at John Yi |
 | Fountain | ✅ Plan recovered (ViTHT 40h/ThinhT 20h/QC 15h); runway 2.5wk; Parts 4/5 done |
 | Elena | ✅ No open PRs; PR #5014 awaiting branch change; WordPress clean |
