@@ -32,7 +32,7 @@ def is_bare_domain(url: str) -> bool:
 
 def build_source_map(cache_data: dict) -> dict:
     """Return {source_name: [url1, url2, ...]} from the fetched JSON cache."""
-    source_map: dict[str, list[str]] = {}
+    source_map = {}
     for result in cache_data.get("results", []):
         for source in result.get("sources", []):
             name = source["name"]
@@ -45,12 +45,12 @@ def build_source_map(cache_data: dict) -> dict:
     return source_map
 
 
-def fix_section(section_text: str, article_urls: list[str]) -> tuple[str, int]:
+def fix_section(section_text: str, article_urls: list) -> tuple:
     """
     Replace bare-domain URLs in a source section using position-based matching.
     Returns (fixed_text, num_fixes).
     """
-    parts: list[str] = []
+    parts = []
     last_end = 0
     article_idx = 0
     fixes = 0
@@ -76,20 +76,20 @@ def fix_section(section_text: str, article_urls: list[str]) -> tuple[str, int]:
 RSS_GNEWS_RE = re.compile(r"news\.google\.com/rss/articles/([A-Za-z0-9_-]+)(?:\?[^)]*)?")
 
 
-def fix_gnews_rss_links(md: str) -> tuple[str, int]:
+def fix_gnews_rss_links(md: str) -> tuple:
     """
     Convert /rss/articles/CBMi... links to /articles/CBMi... (no ?oc=5).
     The /rss/ variant requires JS but doesn't trigger the browser redirect;
     /articles/ triggers the client-side redirect to the actual article.
     """
-    def replace(m: re.Match) -> str:
+    def replace(m):  # re.Match not subscriptable in py3.8
         return f"news.google.com/articles/{m.group(1)}"
 
     fixed, count = RSS_GNEWS_RE.subn(replace, md)
     return fixed, count
 
 
-def fix_markdown(md: str, source_map: dict) -> tuple[str, int]:
+def fix_markdown(md: str, source_map: dict) -> tuple:
     """
     Fix all source sections in the markdown.
     1. Convert /rss/articles/ Google News links to /articles/ format.
