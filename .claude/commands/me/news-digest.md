@@ -81,15 +81,20 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 ...
 
 ---
+### 📱 Duy Nguyen (mrgoonie) — Facebook AI
+- [{Tiêu đề/nội dung}]({link}) — {tóm tắt 1 câu}
+...
+
+---
 ### Điểm nổi bật
 - {2–4 gạch đầu dòng tổng hợp xu hướng/chủ đề chính}
 ```
 
-**⚠️ MANDATORY — Thiệu Nguyễn section (khi topic=ai hoặc topic=all):**
-- PHẢI có section riêng `### 📱 Thiệu Nguyễn — Facebook AI` đặt SAU các nguồn AI khác, TRƯỚC Điểm nổi bật
-- KHÔNG BAO GIỜ được bỏ qua section này dù context có hạn — đây là nguồn ưu tiên cao
+**⚠️ MANDATORY — Facebook AI sections (khi topic=ai hoặc topic=all):**
+- PHẢI có 2 section riêng: `### 📱 Thiệu Nguyễn — Facebook AI` và `### 📱 Duy Nguyen (mrgoonie) — Facebook AI`, đặt SAU các nguồn AI khác, TRƯỚC Điểm nổi bật
+- KHÔNG BAO GIỜ được bỏ qua 2 section này dù context có hạn — đây là nguồn ưu tiên cao
 - Nếu RSS feed trả về 0 bài (lỗi hoặc trống), ghi: `_(Không có bài mới từ Facebook)_`
-- Hiển thị TẤT CẢ bài từ nguồn này (không cắt bớt)
+- Hiển thị TẤT CẢ bài từ mỗi nguồn (không cắt bớt)
 
 **Rules — chế độ mặc định:**
 - Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)

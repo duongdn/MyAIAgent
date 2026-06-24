@@ -126,6 +126,10 @@ SOURCES = {
             "name": "Thiệu Nguyễn (Facebook AI)",
             "url": "https://rss.app/feeds/Xdp23RDcoTT7qZHa.xml",
         },
+        {
+            "name": "Duy Nguyen / mrgoonie (Facebook AI)",
+            "url": "https://rss.app/feeds/8Qu8UA7eG30zqCbP.xml",
+        },
     ],
     "it": [
         {
