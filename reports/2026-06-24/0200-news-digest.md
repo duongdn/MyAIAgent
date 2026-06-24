@@ -94,7 +94,15 @@
 
 ### 📱 Thiệu Nguyễn — Facebook AI
 
-_(Không có bài mới từ Facebook)_
+- [kk, sắp roy sắp roy tầm này thì vít ga con 5.5...](https://m.facebook.com/shinantori/posts/pfbid02cS95YTBauYBJBRgWoGjpH752PzemE57VCSaSHayQG2WfQjWkQjtdKWCF8S7ab6pWl) — Đùa rằng GPT-5.6 có thể bị delay sang tháng sau.
+- [Dạo này Anthropic khuyến khích phong trào "trực quan hoá"...](https://m.facebook.com/shinantori/posts/pfbid02jsQnEndb3HczTjouTx9xSzaRQJR48c55JK4hZwhVZm8YwCdfTm7rd29AMRPpQR3Ql) — Bài tiếp theo series Inside ClaudeKit, giới thiệu các skill visualize (`/ck:preview`...) của CK.
+- [⚠️ Codex OpenAI đang âm thầm "giết" SSD của bạn!](https://m.facebook.com/shinantori/posts/pfbid02xwL2uJVVvgoSZ2rBJ6QgZn7BY3cMKuCSpi3q1jG3tV4v6z4fzhieXCcUurgEUxBnl) — Cảnh báo Codex ghi log TRACE liên tục vào SSD 24/7 ngay cả khi không dùng.
+- [Được anh Zuey giới thiệu hôm qua, nay mình vọc thử Cowart...](https://m.facebook.com/shinantori/posts/pfbid02dZSu2QsiES6ncwFY75Hi193oUFzxv8oUXdZjQ36k1mEzYo98Q88c8FLuBF3ZYaPAl) — Review plugin Cowart cho Codex, tạo infinite canvas để chú thích trực tiếp lên ảnh khi sửa.
+- [Ổng bận mà ổng cook nhiều tool ngon quá 😘, "maskara"...](https://m.facebook.com/shinantori/posts/pfbid02ZToi3Qa86tJoDJTgtytiYC78JYk5yEa19TNXiS5yTCUVCV2iHAgRkS1PyrjS7KFkl) — Tự build CLI "maskara" để tự động che secrets/env vars trước khi đưa cho AI xử lý.
+- [Really, bro?🤣](https://m.facebook.com/shinantori/posts/pfbid0ZgusSx3EwMMp8tSnPnRcZBa84E3kPGhvCpsqxZY5oPSGREpa39td7nA7CYaT5dw6l) — Bài ngắn, phản ứng kiểu meme.
+- [Ngài bóng gió về GPT-5.6 rồi, nội trong tháng 6 này ra hàng chưa ngài 😌...](https://m.facebook.com/shinantori/posts/pfbid023Y8V8QZyXKwrWoewamkRfBcM4yVFmXZffg5HmiyWPaEQ29x4BXa59eNDSE3vXGSLl) — Kỳ vọng GPT-5.6 ra mắt trong tháng 6, cải thiện frontend skill.
+- [🚀 Giới thiệu tool hay: LiteParse v2.1...](https://m.facebook.com/shinantori/posts/pfbid027LQYFBsQ3Udy1Mref7w2FNXgvaemm2zyx96hzYhxUmiVqSw87edBZDoZB8zxqHiKl) — PDF parser local nhanh từ LlamaIndex, xuất Markdown có cấu trúc không cần cloud.
+- [Chả có nhẽ quay về với GLM-5.2 😱...](https://m.facebook.com/shinantori/posts/pfbid02neiMCtjcQHe3Sk2tc9RJzj6oKoEwLMegCp3WnYpS1D6ezeLAAPh71r9MMF43Dvfsl) — Đùa về việc phải quay lại dùng GLM-5.2.
 
 ### Điểm nổi bật
 - Pháp chính thức đưa AI vào chương trình giảng dạy quốc gia từ 2027, xu hướng giáo dục AI lan rộng toàn cầu.
