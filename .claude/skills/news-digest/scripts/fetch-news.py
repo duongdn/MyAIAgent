@@ -28,6 +28,7 @@ import html
 import json
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -323,14 +324,30 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
     url = source["url"]
     result = {"name": source["name"], "url": url, "articles": [], "error": None}
 
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={"User-Agent": "Mozilla/5.0 (compatible; NewsDigest/1.0)"},
-        )
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            raw = resp.read()
+    raw = None
+    last_exc = None
+    # rss.app feeds render dynamically and can be slow on cold cache —
+    # retry once before giving up so a transient timeout doesn't read as "no posts".
+    for attempt in range(2):
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": "Mozilla/5.0 (compatible; NewsDigest/1.0)"},
+            )
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                raw = resp.read()
+            last_exc = None
+            break
+        except Exception as exc:
+            last_exc = exc
+            if attempt == 0:
+                time.sleep(2)
 
+    if raw is None:
+        result["error"] = str(last_exc)
+        return result
+
+    try:
         root = ET.fromstring(raw)
 
         is_atom = "atom" in root.tag.lower() or root.tag.endswith("}feed")
