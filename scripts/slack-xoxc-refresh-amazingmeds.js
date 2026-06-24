@@ -47,12 +47,15 @@ function apiGet(url, headers) {
   const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
   fs.mkdirSync(SOCKS_DIR, { recursive: true });
 
+  const isDisplay = !!process.env.DISPLAY;
   const browser = await puppeteer.launch({
-    headless: 'new',
+    headless: isDisplay ? false : 'new',
     executablePath: '/usr/bin/google-chrome',
     userDataDir: PROFILE_DIR,
-    env: { ...process.env, TMPDIR: SOCKS_DIR },
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--window-size=1280,900'],
+    env: { ...process.env, TMPDIR: SOCKS_DIR, TEMP: SOCKS_DIR, TMP: SOCKS_DIR },
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
+           ...(isDisplay ? [] : ['--disable-gpu']),
+           '--window-size=1280,900', '--disable-blink-features=AutomationControlled'],
     defaultViewport: { width: 1280, height: 900 },
   });
 
@@ -61,7 +64,7 @@ function apiGet(url, headers) {
 
   try {
     const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36');
+    await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36');
 
     // Intercept API responses to grab token from Authorization header
     page.on('response', async response => {
@@ -91,6 +94,21 @@ function apiGet(url, headers) {
     const body = await page.evaluate(() => document.body.innerText || '');
     console.log('Body snippet:', body.slice(0, 150).replace(/\n/g, ' '));
 
+    // Handle cookie consent overlay if present — wait for page to fully render first
+    await sleep(3000);
+    await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-after-wait.png') });
+    const bodyAfterWait = await page.evaluate(() => document.body.innerText || '');
+    console.log('Body after wait:', bodyAfterWait.slice(0, 200).replace(/\n/g, ' '));
+    try {
+      const clicked = await page.evaluate(() => {
+        const btns = Array.from(document.querySelectorAll('button'));
+        const acceptBtn = btns.find(b => b.innerText && b.innerText.toUpperCase().includes('ACCEPT ALL'));
+        if (acceptBtn && acceptBtn.offsetParent !== null) { acceptBtn.click(); return true; }
+        return false;
+      });
+      if (clicked) { console.log('Cookie consent detected — clicking Accept All Cookies'); await sleep(3000); }
+    } catch(e) { /* no consent overlay */ }
+
     // If on workspace selector (already logged in), click LAUNCH SLACK
     const launchBtn = await page.$('a[data-qa="launch_in_browser"], a.p-home_page__workspace_link, [data-qa="ssb_redirect_open_in_slack"]');
     if (launchBtn) {
@@ -98,34 +116,52 @@ function apiGet(url, headers) {
       await launchBtn.click();
       await sleep(5000);
     } else {
-      // Fill email if present
+      // Both email + password are on the same page — fill both before submitting once
       const emailField = await page.$('input[type="email"], input[name="email"], #email');
-      if (emailField) {
+      const passField = await page.$('input[type="password"], input[name="password"], #password');
+
+      if (emailField && passField) {
+        console.log('Single-page form detected — filling email + password together');
         await emailField.click({ clickCount: 3 });
         await emailField.type(email, { delay: 50 });
-        await sleep(500);
-        const submitBtn = await page.$('button[type="submit"], #submit_btn, .c-button--primary');
-        if (submitBtn) await submitBtn.click();
-        await sleep(2000);
-        await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-02.png') });
-      }
-
-      // Fill password
-      const passField = await page.$('input[type="password"], input[name="password"], #password');
-      if (passField) {
-        console.log('Password field visible — entering password');
+        await sleep(300);
         await passField.click({ clickCount: 3 });
         await passField.type(password, { delay: 50 });
-        await sleep(500);
-        const submitBtn2 = await page.$('button[type="submit"], #submit_btn, .c-button--primary');
-        if (submitBtn2) await submitBtn2.click();
-        else await page.keyboard.press('Enter');
+        await sleep(300);
+        await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-02.png') });
+        const submitBtn = await page.$('button[type="submit"]');
+        if (submitBtn) await submitBtn.click();
+        else await passField.press('Enter');
         await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: TIMEOUT }).catch(() => {});
-        await sleep(4000);
+        await sleep(5000);
         await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-03.png') });
         console.log('Post-login URL:', page.url().slice(0, 80));
+      } else if (emailField) {
+        // Two-step flow: email first, then password on next page
+        console.log('Two-step flow: filling email only');
+        await emailField.click({ clickCount: 3 });
+        await emailField.type(email, { delay: 50 });
+        await sleep(300);
+        const submitBtn = await page.$('button[type="submit"], #submit_btn');
+        if (submitBtn) await submitBtn.click();
+        await sleep(3000);
+        await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-02.png') });
+        const passField2 = await page.$('input[type="password"], input[name="password"], #password');
+        if (passField2) {
+          console.log('Password field visible — entering password');
+          await passField2.click({ clickCount: 3 });
+          await passField2.type(password, { delay: 50 });
+          await sleep(300);
+          const submitBtn2 = await page.$('button[type="submit"], #submit_btn');
+          if (submitBtn2) await submitBtn2.click();
+          else await passField2.press('Enter');
+          await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: TIMEOUT }).catch(() => {});
+          await sleep(5000);
+          await page.screenshot({ path: path.join(__dirname, '../tmp/slack-amazingmeds-03.png') });
+          console.log('Post-login URL:', page.url().slice(0, 80));
+        }
       } else {
-        console.log('No password field found — may already be logged in or different page');
+        console.log('No email/password fields found — may already be logged in or different page');
       }
     }
 

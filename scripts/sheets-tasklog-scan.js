@@ -205,17 +205,23 @@ async function main() {
   }
 
   process.stderr.write(`Live-querying Workstream project list for ${dateStr}...\n`);
-  const wsConfig = await ensureWorkstreamToken();
-  const wsProjects = await listWorkstreamProjects(wsConfig, dateStr);
-  process.stderr.write(`  ${wsProjects.length} projects accessible: ${wsProjects.map(p => p.name).join(", ")}\n`);
-  for (const proj of wsProjects) {
-    const { rows, err } = await fetchWorkstreamWeek(wsConfig, proj.id, dateStr);
-    if (err) { process.stderr.write(`  ${proj.name}: ${err}\n`); continue; }
-    for (const dev of devs) {
-      const matched = rows.filter(r => r.date === dateStr && (r.employeeName || "").toLowerCase().includes(dev.toLowerCase()));
-      const hours = matched.reduce((acc, r) => acc + parseHoursHM(r.actual || "0:00"), 0);
-      if (hours > 0) result[dev].workstream[proj.name] = hours;
+  let wsProjects = [];
+  try {
+    const wsConfig = await ensureWorkstreamToken();
+    wsProjects = await listWorkstreamProjects(wsConfig, dateStr);
+    process.stderr.write(`  ${wsProjects.length} projects accessible: ${wsProjects.map(p => p.name).join(", ")}\n`);
+    for (const proj of wsProjects) {
+      const { rows, err } = await fetchWorkstreamWeek(wsConfig, proj.id, dateStr);
+      if (err) { process.stderr.write(`  ${proj.name}: ${err}\n`); continue; }
+      for (const dev of devs) {
+        const matched = rows.filter(r => r.date === dateStr && (r.employeeName || "").toLowerCase().includes(dev.toLowerCase()));
+        const hours = matched.reduce((acc, r) => acc + parseHoursHM(r.actual || "0:00"), 0);
+        if (hours > 0) result[dev].workstream[proj.name] = hours;
+      }
     }
+  } catch (e) {
+    process.stderr.write(`  [workstream] unavailable: ${e.message} — Sheets-only results follow\n`);
+    for (const dev of devs) result[dev].workstreamUnavailable = true;
   }
 
   for (const dev of devs) {
