@@ -15,7 +15,7 @@ const puppeteer = require('puppeteer');
   const failedRequests = [];
 
   // Server has no /tmp write access — point TMPDIR to project tmp dir
-  process.env.TMPDIR = process.env.TMPDIR_OVERRIDE || '/var/www/MyDailyAgent/tmp/chrome-tmp';
+  process.env.TMPDIR = process.env.TMPDIR_OVERRIDE || require('path').join(process.cwd(), 'tmp/chrome-tmp');
   require('fs').mkdirSync(process.env.TMPDIR, { recursive: true });
 
   let browser;
