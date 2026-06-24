@@ -20,7 +20,7 @@
 | 9 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
 | 10 | 🔴 HIGH | Xtreme / Maddy | **Customer complaint, unanswered:** Madhuraka — Shopify image-ordering bug on LIFM2-260 (no estimate ever set, 38.5h spent, 24 comments) — Kai/Anoma marked it fixed+tested Jun22, **regressed by Jun24**. Same client who escalated quality concerns 6/19. LIFM2-439 still +79% over (12h est, 21.5h actual) from that incident. See Piece 4 (Maddy JIRA) + Piece 2 for full detail. |
 | 11 | ⚠️ ACTION | Matrix DM (ChienTx) | "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" 08:38 Jun24 — question directed at DuongDN, unanswered |
-| 12 | ○ RECHECK | Aysar | MPDM 0 msgs (posts ~17:00+07); recheck after 17:00 |
+~~| 12 | ○ RECHECK | Aysar | ... |~~ — **RESOLVED 09:48+07**, see Piece 2. Carrick's morning-catchup post is normal (timing assumption was wrong, corrected in memory).
 
 **KhanhHH — REMOVED from alerts (was #6, item 0h/Workstream-unavailable):** Corrected on recheck — KhanhHH actually worked 8h Jun 23, all under Generator (Workstream). Original finding was a script bug (hardcoded WS project subset missing Generator + reported 401 instead of fixing it). See Piece 4 for full root-cause writeup.
 
@@ -112,7 +112,7 @@ Trello: All 6 mail items ✓ complete. Mail card → complete.
 | William Bills | 0 | No activity |
 | Equanimity | 0 | No activity |
 | Aigile Dev | 8 | Colin: progress with client (one final requirement); Hendrix: staging updates done; Make: blog draft warning |
-| Baamboozle MPDM (Aysar) | 0 | Not yet posted — expected, posts ~17:00+07 → **recheck** |
+| Baamboozle MPDM (Aysar) | 0 (at 06:08) → 1 (at 09:48 recheck) | Carrick posted 08:48+07 "Monday's update" (PR#638 + grid fix, matches Workstream Jun22 entries exactly). No Tuesday-specific update — but KhanhHH spent all of Jun23 on Generator (verified, 8h), so no Aysar work existed to report that day. ✅ complete |
 
 **Notes:**
 - Generator CI failures match carrick@ email alerts — Elliott was in #release but no comment on CI
@@ -126,7 +126,9 @@ Trello: All 6 mail items ✓ complete. Mail card → complete.
 
 *Note: this email arrived 06:25+07, after the original 06:08 email scan window closed — not a missed item from the original run, genuinely new since then.*
 
-Trello Progress: Maddy-Kai-Luis ○ (unanswered customer complaint, real ticket regression — not just a missing-report formality), Rory ✓ complete, Aysar ○ (recheck after 17:00), Franc ✓ complete
+Trello Progress: Maddy-Kai-Luis ○ (unanswered customer complaint, real ticket regression — not just a missing-report formality), Rory ✓ complete, Aysar ✓ complete (09:48 recheck), Franc ✓ complete
+
+🔴 **Aysar timing assumption corrected (09:48+07):** Previously assumed Carrick only posts ~17:00-17:45+07. Wrong — he also posts morning catch-ups (today 08:48, reporting Monday's work 2 days late). Don't wait until 17:00 to recheck; re-run the broad MPDM search regardless of hour. Memory updated ([[feedback_aysar_consolidated]]).
 
 ---
 
@@ -176,7 +178,7 @@ Only 2 tickets touched so far this week (2 days in) — both within estimate, JI
 
 **KhanhHH — CORRECTED on recheck (09:05+07):** Original 06:08 run reported "Workstream 401, 0h" — this was wrong on two counts: (1) the 401 should have been fixed by re-running `workstream-login.js`, not reported as unavailable; (2) the script used (`daily-sheets-scan-260623-tue.js`) only checked 3 hardcoded Workstream projects for KhanhHH (Baamboozle, Colin/ETZ, Blair Brown) — missing **Generator**, which is where the hours actually were. Live re-query of ALL 10 Workstream projects + ALL 13 sheets found **KhanhHH logged 8h on Jun 23, entirely under Generator** (Elliott's project): "Fix redmines" 6:00 + "[API] Work order preview-pdf 500" 1:00 + "716 deep-link" 1:00. **This is the exact same root-cause pattern as the 2026-06-23 incident already in memory** (Generator missing from a hardcoded WS project list) — see root-cause fix below. No alert; KhanhHH worked a full day.
 
-**LeNH — CONFIRMED real alert (09:05+07):** Built a canonical scan (`scripts/sheets-tasklog-scan.js`) that checks ALL 13 sheets + ALL 10 live-accessible Workstream projects (the original check only covered 3 of 13 sheets: Rory+Franc+Rebecca). Result: 0h everywhere, no leave note anywhere. Cross-checked Upwork Rory (41069448) + Aysar (35642393) workrooms: both 0:00 this week (Jun22-23). This is a genuine, fully-verified 0h day — leave plan shows last leave Jun 17 (past), nothing for Jun 23. **Alert stands.** Reminder not sent (no `--send-reminder` flag this run) — see Piece 9.
+**LeNH — CONFIRMED real alert (09:05+07):** Built a canonical scan (`scripts/sheets-tasklog-scan.js`) that checks ALL 13 sheets + ALL 10 live-accessible Workstream projects (the original check only covered 3 of 13 sheets: Rory+Franc+Rebecca). Result: 0h everywhere, no leave note anywhere. Cross-checked Upwork Rory (41069448) + Aysar (35642393) workrooms: both 0:00 this week (Jun22-23). This is a genuine, fully-verified 0h day — leave plan shows last leave Jun 17 (past), nothing for Jun 23. **Alert stands.** Reminder sent on user request (09:55+07) to `!OIrgPraJWrcDTnRVLQ:nustechnology.com` — see Piece 9.
 
 🔴 **Root-cause fix (why this keeps happening):** The daily-report Sheets piece has been implemented by writing a fresh dated script (`scripts/daily-sheets-scan-YYMMDD-day.js`) most days, each hardcoding a per-dev subset of sheets/Workstream projects. Fixes applied to one day's copy (e.g. "add Generator to KhanhHH's WS check" after the 2026-06-23 incident) don't carry forward because the next day's script is a fresh copy, not an edit of the same file. **Fix applied today:** wrote one canonical, permanent script `scripts/sheets-tasklog-scan.js` that always scans ALL 13 sheets + the FULL live Workstream project list for any dev passed as an argument — no per-dev subset to go stale. Archived the 29 old dated scripts to `scripts/archive/` so there's nothing to copy-paste from anymore. Memory updated accordingly (see `reference_workstream.md` / new `feedback_no_dated_scan_scripts.md`).
 
@@ -262,7 +264,7 @@ Trello: Elena - SamGuard ✓. Elena WordPress ✓ complete.
 ## Piece 8 — Trello — 06:08 (+07:00)
 
 ### Check Progress card
-Completed (18/20):
+Completed (19/20):
 - ✓ John Yi - Amazing Meds
 - ✓ James Diamond - Vinn task
 - ✓ Elliott (present in Generator #release)
@@ -281,10 +283,10 @@ Completed (18/20):
 - ✓ Rory (rechecked 08:39 — Swift Studio quiet, no alert)
 - ✓ Franc (rechecked 08:39 — RDC quiet, no alert)
 - ✓ Elena - WordPress SamGuard (rechecked 08:42 — clean, no real JS errors)
+- ✓ Aysar (rechecked 09:48 — Carrick morning catch-up post found, matches Workstream; KhanhHH worked Generator all of Jun23 so no Aysar work to report that day)
 
-Still open (2):
+Still open (1):
 - ○ Maddy - Carrick/Kai/Luis (Madhuraka unanswered Shopify image-ordering bug, 06:26 Jun24)
-- ○ Aysar (MPDM not yet posted; posts ~17:00-17:45+07, recheck after 17:00)
 
 ### Check Mail card
 All 6 Zoho accounts checked ✓ → card auto-completed.
@@ -297,7 +299,7 @@ All 6 Zoho accounts checked ✓ → card auto-completed.
 
 | Developer | Hours | Leave | Reminder needed |
 |-----------|-------|-------|-----------------|
-| LeNH | 0h Jun 23 (confirmed, all sources checked) | Jun 17 (past) | Yes — send reminder if no update by EOD |
+| LeNH | 0h Jun 23 (confirmed, all sources checked) | Jun 17 (past) | ✅ Sent 09:55+07 (user request) |
 
 *KhanhHH removed — corrected to 8h Jun 23 (Generator Workstream) on recheck, see Piece 4.*
 
@@ -379,7 +381,7 @@ Trello: Ohcleo ✓ complete.
 | Scrin | ✅ Nick 70m at John Yi |
 | Fountain | ✅ Plan recovered (ViTHT 40h/ThinhT 20h/QC 15h); runway 2.5wk; Parts 4/5 done |
 | Elena | ✅ No open PRs; PR #5014 awaiting branch change; WordPress clean |
-| Trello | ✅ 18/20 progress complete (Maddy + Aysar open); mail complete |
+| Trello | ✅ 19/20 progress complete (Maddy open); mail complete |
 | OhCleo | ✅ Tony report; payment dispute noted |
 | Matrix | ✅ Token refreshed; 2 active DMs reviewed (PhucVT leave, ChienTx question) |
 | Upwork | ✅ All sessions working; Neural silence = OK |
@@ -402,8 +404,9 @@ Trello: Ohcleo ✓ complete.
 | Upwork sessions | ✅ fixed | All 5 workrooms working; was wrongly reported expired |
 | Neural Contract | ✅ completed | No unanswered urgent message |
 | Philip MS Teams | ✅ completed | Real chat content confirmed via screenshot; last msg 6/16 outgoing, no complaint |
-| Aysar | ○ still open | Not yet 17:00+07 — genuinely not due yet |
+| Aysar | ✅ completed (09:48 recheck) | Was wrong: assumed evening-only posting. Carrick also posts morning catch-ups — found one at 08:48. Timing memory corrected. |
 
 **Cleared:** Rory, Franc, Elena-WordPress, Philip (re-confirmed), Matrix, Upwork, Fountain Part 1.
-**Still open:** Maddy/Kai (new client bug report), Aysar (timing).
+**Still open:** Maddy/Kai (new client bug report, real and unanswered).
+**Cleared on second recheck:** Aysar (was wrongly held on a bad timing assumption, see correction above).
 
