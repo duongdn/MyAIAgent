@@ -13,6 +13,8 @@ When synthesizing the `ai` topic in news-digest, past runs (e.g. 2026-06-19 02:0
 
 **How to apply:** When doing the `ai` section (or `all` with ai included), explicitly pull a few items from EACH configured source, not just the first one or two. Don't let one noisy/generic source (VN Google News) crowd out OpenAI/DeepMind/HuggingFace/TechCrunch/Verge blog-style sources which tend to have more substantive, less repetitive content.
 
-Also: Facebook pages/profiles (tested `facebook.com/<handle>`) cannot be scraped via WebFetch — returns only the profile name, no post content, due to login wall. Don't attempt to add Facebook as an automated source; if user wants Facebook content, they must paste specific post links for manual summarization.
+Also: Facebook pages/profiles (tested `facebook.com/<handle>`) cannot be scraped via WebFetch — returns only the profile name, no post content, due to login wall. Facebook Graph API is also blocked for public, non-administered pages without Meta's `public_content_access` app review (weeks-long process) — confirmed 2026-06-23 trying to add Thiệu Nguyễn (`shinantori`) as a source, two different access tokens both rejected with permission error code 100/33.
 
-See [[feedback_news_digest_new_topic]], [[feedback_news_digest_use_actual_links]].
+**UPDATE 2026-06-23 — workaround found:** rss.app converts a public Facebook page into a standard RSS feed with zero API/token/login needed. Used this to add Thiệu Nguyễn as a real automated source in `fetch-news.py` (`ai` topic) — see [[feedback_news_digest_thieu_nguyen_rss_timeout]] for a related fetch-reliability bug and fix. If user wants another Facebook page added, generate an rss.app feed URL for it rather than attempting Graph API or WebFetch scraping.
+
+See [[feedback_news_digest_new_topic]], [[feedback_news_digest_use_actual_links]], [[feedback_news_digest_thieu_nguyen_rss_timeout]].

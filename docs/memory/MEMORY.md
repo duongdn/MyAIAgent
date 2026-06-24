@@ -181,8 +181,9 @@
 ## news-digest
 - [feedback_news_digest_new_topic.md](news-digest/feedback_news_digest_new_topic.md) — Unknown topic → new topic w/ own RSS sources, never alias
 - [feedback_news_digest_php_events.md](news-digest/feedback_news_digest_php_events.md) — PHP events (PHPverse, Laracon) need full schedule+speakers
-- [feedback_news_digest_ai_underused_sources.md](news-digest/feedback_news_digest_ai_underused_sources.md) — AI section sample ALL 10 sources; FB unscrapeable
+- [feedback_news_digest_ai_underused_sources.md](news-digest/feedback_news_digest_ai_underused_sources.md) — AI section sample ALL 11 sources; FB via rss.app workaround now live
 - [feedback_news_digest_use_actual_links.md](news-digest/feedback_news_digest_use_actual_links.md) — News links: use JSON `link`; run fix-links.py after save
+- [feedback_news_digest_thieu_nguyen_rss_timeout.md](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — rss.app feed "empty" was a 10s timeout false-negative, not real — fixed w/ retry+20s
 
 ## server-monitor
 - [feedback_server_safety_consolidated.md](server-monitor/feedback_server_safety_consolidated.md) — Never cleanup/VACUUM FULL w/o confirmation; storage alerts need WHY breakdown
