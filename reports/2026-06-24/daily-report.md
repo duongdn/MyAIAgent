@@ -15,12 +15,15 @@
 | 6 | 🟡 MED | KhanhHH | 0h Jun 23 — no leave logged (leave is Jun 25–26); Workstream unavailable |
 | 7 | 🟡 MED | LeNH | 0h Jun 23 — no leave logged (last leave was Jun 17 sick day) |
 | 8 | 🟡 MED | OhCleo | Upwork payment dispute — $1,668 charged; Tony's account blocked, refund pending |
-| 9 | 🟡 MED | Fountain W32 | 0h task log Mon Jun 22 + Tue Jun 23 (both days empty); Matrix plan unavailable |
-| 10 | 🟡 MED | Fountain #2615 | Over-estimate +790% critical (12h est → 106.75h actual, Deployed on Staging) |
-| 11 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
-| 12 | 🟡 INFO | Xtreme / Kai | No Jun 23 daily report — last Slack post was Jun 22; Jira LIFM2 tickets done |
+| 9 | 🟡 MED | Fountain #2615 | Over-estimate +790% critical (12h est → 106.75h actual, Deployed on Staging) |
+| 10 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
+| 11 | 🟡 MED | Xtreme / Maddy | Madhuraka (client) raised unanswered Shopify image-ordering bug 06:26 Jun24 — needs response |
+| 12 | ⚠️ ACTION | Matrix DM (ChienTx) | "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" 08:38 Jun24 — question directed at DuongDN, unanswered |
 | 13 | ○ RECHECK | Aysar | MPDM 0 msgs (posts ~17:00+07); recheck after 17:00 |
-| 14 | ○ RECHECK | Matrix | Token expired; refresh failed; Fountain Part 1 + Matrix scan pending |
+
+**Resolved since 06:08:** Matrix token refreshed (✅); Fountain Part 1 plan recovered (✅); Rory/Franc Slack quiet=OK, completed (✅); Elena WordPress clean, completed (✅); Upwork sessions all working (✅); Philip MS Teams real data confirmed clean (✅). Note: Fountain dev task-log 0h (Part 2/3) is **not monitored/alerted per user instruction** (2026-06-09) — removed from alerts, see Piece 6.
+
+**Today (Jun 24):** PhucVT sick leave (Matrix DM 08:24, off today).
 
 ---
 
@@ -112,7 +115,9 @@ Trello: All 6 mail items ✓ complete. Mail card → complete.
 - GGS Amy = Nick (NUS dev); daily report confirmed in #maintenance ✅
 - Aigile Dev blog warning: automated alert, not a dev issue
 
-Trello Progress: Maddy-Kai-Luis ○ (Kai no Jun 23 report), Rory ○, Aysar ○ (recheck), Franc ○
+**Recheck 08:39+07:** RDC + Swift still quiet (no new msgs) → quiet=OK, completed. Xtreme: 1 new msg 06:26 — Madhuraka (client): "I have sent you an email related to image ordering when uploaded to Shopify. Please check and get back to me as to why the ordering is incorrect." Unanswered as of recheck — possible recurrence of LIFM2-260 Shopify image issue.
+
+Trello Progress: Maddy-Kai-Luis ○ (unanswered Madhuraka Shopify bug, not just missing report), Rory ✓ complete, Aysar ○ (recheck after 17:00), Franc ✓ complete
 
 ---
 
@@ -165,9 +170,9 @@ Nick active at John Yi on Jun 23. ✅
 **W32 (June 22–28, 2026)**
 
 ### Part 1 — Matrix Weekly Plan
-⚠️ Unavailable — Matrix token expired; refresh failed. Marked for recheck.
+**Recovered on recheck (08:39+07):** trinhmtt posted Mon 22/6 08:53 — "Em gui plan tuan nay aj ViTHT: 40h ThinhT: 20h => QC: 15h" (room Kunal - Fountain, `!EWnVDAxbTGsBxPkaaI`). No VuTQ/HaVS assigned this week.
 
-### Part 2 — W32 Task Log Actuals
+### Part 2 — W32 Task Log Actuals (not monitored/alerted — see note)
 
 | Developer | Mon Jun 22 | Tue Jun 23 |
 |-----------|-----------|-----------|
@@ -177,14 +182,16 @@ Nick active at John Yi on Jun 23. ✅
 | PhatDLT | 0h | 0h |
 | HungPN | 0h | 0h |
 
-⚠️ All rows empty (placeholder "Task dự án" rows) — neither Mon nor Tue have any logged hours for W32 yet.
+*Per user instruction (2026-06-09): Fountain dev task-log hours are no longer tracked/alerted — figures shown for context only, not an alert. Matrix chat (Part 1 room) confirms ViTHT/ThinhT/VuTQ/HungPN were actively working Jun22-23 (PR reviews, Trello card pushes to LIVE/BETA) — task-log entry just lags actual work.*
 
 ### Part 3 — Plan vs Actual
-⚠️ Cannot compare — Matrix weekly plan unavailable (Part 1 blocked).
+Not tracked per the same instruction — plan (Part 1) is for capacity/runway purposes only, not a per-dev compliance check.
 
 ### Part 4 — Capacity & Runway
 
 **NS + In-Progress tasks: 28 | Total remaining: 148.3h**
+**Capacity this week (W32, from Part 1 plan): ViTHT 40h + ThinhT 20h = 60h/week dev** (QC 15h excluded from capacity)
+**Runway: 148.3h / 60h/week ≈ 2.5 weeks**
 
 Key tasks remaining:
 - Task #1178: 40h remaining
@@ -203,7 +210,7 @@ Key tasks remaining:
 Total over-estimate tasks (>20%): 37
 
 ### Fountain Trello Board
-Fountain ✓ complete (all parts attempted; Part 1/3 blocked by Matrix token — recheck pending).
+Fountain ✓ complete (Part 1 plan recovered on recheck; Parts 2/3 not monitored per user instruction; Parts 4/5 done).
 
 ---
 
@@ -217,14 +224,16 @@ Fountain ✓ complete (all parts attempted; Part 1/3 blocked by Matrix token —
 
 **SAM GUARD Slack:** Lena requested merge branch change from staging → develop-9.4 for PR #5014. Awaiting action by Elena/Precognize team.
 
-Trello: Elena - SamGuard ✓. Elena WordPress ○ (pending).
+**WordPress samguard.co (rechecked 08:42+07):** No real JS/page errors. CSP violations + failed requests are all Google/DoubleClick/LinkedIn ad-tracker noise (false positives, filtered per rule). Clean.
+
+Trello: Elena - SamGuard ✓. Elena WordPress ✓ complete.
 
 ---
 
 ## Piece 8 — Trello — 06:08 (+07:00)
 
 ### Check Progress card
-Completed (15/20):
+Completed (18/20):
 - ✓ John Yi - Amazing Meds
 - ✓ James Diamond - Vinn task
 - ✓ Elliott (present in Generator #release)
@@ -238,15 +247,15 @@ Completed (15/20):
 - ✓ Rebecca - William Bills
 - ✓ Colin
 - ✓ Fountain
-- ✓ Philip (data unavailable, no alert)
+- ✓ Philip (rechecked — last msg 6/16 outgoing from Will, no unanswered customer complaint)
 - ✓ Ohcleo
+- ✓ Rory (rechecked 08:39 — Swift Studio quiet, no alert)
+- ✓ Franc (rechecked 08:39 — RDC quiet, no alert)
+- ✓ Elena - WordPress SamGuard (rechecked 08:42 — clean, no real JS errors)
 
-Pending recheck (5):
-- ○ Maddy - Carrick/Kai/Luis (Kai no Jun 23 Slack report)
-- ○ Rory (Swift Studio 0 msgs)
-- ○ Aysar (MPDM not yet posted)
-- ○ Franc (RDC no dmetiner update)
-- ○ Elena - WordPress SamGuard
+Still open (2):
+- ○ Maddy - Carrick/Kai/Luis (Madhuraka unanswered Shopify image-ordering bug, 06:26 Jun24)
+- ○ Aysar (MPDM not yet posted; posts ~17:00-17:45+07, recheck after 17:00)
 
 ### Check Mail card
 All 6 Zoho accounts checked ✓ → card auto-completed.
@@ -264,17 +273,40 @@ All 6 Zoho accounts checked ✓ → card auto-completed.
 
 ---
 
-## Piece 10 — Matrix — 06:08 (+07:00)
+## Piece 10 — Matrix — 08:39 (+07:00)
 
-⚠️ Unavailable — token `mat_aX7cZI5kHeOI9dZu9Z7z8vsJkfMnoT_UTywM3` returned 401 M_UNKNOWN_TOKEN. Refresh_token also expired. Puppeteer refresh failed repeatedly. All Matrix rooms pending recheck after token refresh.
+**Active rooms: 2 / 128 | Messages: 2** *(since 2026-06-24 06:08)* + Fountain plan room (117 msgs since Mon, see Piece 6 Part 1)
+
+### ⚠️ Action items for DuongDN (1)
+
+| Room | Time | Message |
+|------|------|---------|
+| DM: ChienTx | 08:38 | chientx: "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" — asking why a client is still sending Upwork messages this morning; needs DuongDN context/response |
+
+### Key updates
+
+**PhucVT — sick leave today (Jun 24)** (08:24):
+- "Hi anh, nay em không khoẻ nên em xin phép off để nghỉ ngơi nha anh. Bên James hiện tại cũng ko có task gấp." — taking the day off, no urgent James-project tasks pending.
+
+**Fountain — W32 plan + active dev work** (see Piece 6 Part 1 for full plan):
+- trinhmtt posted plan Mon 08:53: ViTHT 40h, ThinhT 20h, QC 15h
+- ViTHT/ThinhT/VuTQ/HungPN actively reviewing PRs and pushing fixes to BETA/LIVE Jun22-23 (cards #2872, #2911, #2914, #2869, bug #79362)
 
 ---
 
-## Piece 11 — Upwork — 06:08 (+07:00)
+## Piece 11 — Upwork — 08:45 (+07:00)
 
-All Upwork sessions expired (carrick: CAPTCHA/2FA required; vinn, david2: session expired). Data unavailable.
+| Workroom | Account | This week (Jun22-28) | Last week |
+|----------|---------|----------------------|-----------|
+| Rory | carrick | 0:00 | 32:00 |
+| Neural Contract | carrick | 0:00 | 0:20 |
+| Aysar | carrick | 0:00 | 11:50 |
+| Bailey-VietPH | vinn | 0:00 | 0:00 |
+| Bailey-DuongDN | david2 | 0:00 | 0:00 |
 
-Neural Contract: Silence = OK (no alert per monitoring rules).
+This-week 0:00 across the board is expected — only 2 days into the Upwork week (Jun22-28), not an alert.
+
+**Neural Contract messages:** Last activity Jun 19 13:23 — our side ("I've updated it. Please check!") to client. No reply since; ball in client's court, no unanswered urgent message (e.g. from Michael). Silence = OK per monitoring rules.
 
 ---
 
@@ -295,7 +327,7 @@ Trello: Ohcleo ✓ complete.
 ## Additional Checks
 
 ### Philip (MS Teams)
-⚠️ Microsoft login security verification page — data unavailable.
+**Rechecked 08:50+07** via `will@nustechnology.com` → Philip Briggs (External, Six Star Rentals, pbriggs@sixstarrentals.com.au). Last message in thread: **6/16, outgoing from Will** — detailed summary of banking demo data fixes (scoped to 24 users/3 teams/4 roles, files changed listed). No new message from Philip since. No unanswered customer complaint. Complete, no alert.
 
 ### Baamboozle GitHub Issues
 ⚠️ No access to baamboozle private repos (404) via nuscarrick account.
@@ -311,15 +343,37 @@ Trello: Ohcleo ✓ complete.
 | Category | Status |
 |----------|--------|
 | Email | ✅ Scanned (alerts: Generator CI, InfinityRoses/FirstProject prod, Swish signal lost) |
-| Slack (14 WS) | ✅ Scanned (Aysar MPDM pending recheck) |
+| Slack (14 WS) | ✅ Scanned (Aysar MPDM pending recheck after 17:00; new Madhuraka/Xtreme bug unanswered) |
 | Discord | ✅ AirAgri active; Bizurk quiet |
 | Google Sheets | ✅ TuanNT/PhucVT/VietPH/LongVV OK; KhanhHH+LeNH 0h alerts |
 | Scrin | ✅ Nick 70m at John Yi |
-| Fountain | ⚠️ Parts 1/3 blocked (Matrix); Parts 4/5 done |
-| Elena | ✅ No open PRs; PR #5014 awaiting branch change |
-| Trello | ✅ 15/20 progress complete; mail complete |
+| Fountain | ✅ Plan recovered (ViTHT 40h/ThinhT 20h/QC 15h); runway 2.5wk; Parts 4/5 done |
+| Elena | ✅ No open PRs; PR #5014 awaiting branch change; WordPress clean |
+| Trello | ✅ 18/20 progress complete (Maddy + Aysar open); mail complete |
 | OhCleo | ✅ Tony report; payment dispute noted |
-| Matrix | ❌ Token expired; recheck pending |
-| Upwork | ❌ All sessions expired |
-| MS Teams | ❌ Login security challenge |
+| Matrix | ✅ Token refreshed; 2 active DMs reviewed (PhucVT leave, ChienTx question) |
+| Upwork | ✅ All sessions working; Neural silence = OK |
+| MS Teams | ✅ Philip checked — last msg 6/16 outgoing, no complaint |
+
+---
+
+## Recheck — 08:57 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Matrix token | ✅ refreshed | `matrix-token-refresh.js` succeeded via SSO browser session |
+| Fountain Part 1 | ✅ recovered | W32 plan: ViTHT 40h, ThinhT 20h, QC 15h (Mon 08:53, trinhmtt) |
+| Fountain Part 2/3 alert | ✅ corrected | Removed — task-log hours not monitored per user instruction (2026-06-09) |
+| Matrix full scan | ✅ done | 2 new DMs: PhucVT leave (informational), ChienTx question (action item, unanswered) |
+| Xtreme (Maddy/Kai) | ○ still open | New unanswered client msg from Madhuraka re: Shopify image ordering (06:26) |
+| Swift Studio (Rory) | ✅ completed | Quiet, no alert |
+| RDC (Franc) | ✅ completed | Quiet, no alert |
+| Elena WordPress | ✅ completed | No real JS errors (CSP/ad-tracker noise only); fixed stale hardcoded tmp-dir path bug in script |
+| Upwork sessions | ✅ fixed | All 5 workrooms working; was wrongly reported expired |
+| Neural Contract | ✅ completed | No unanswered urgent message |
+| Philip MS Teams | ✅ completed | Real chat content confirmed via screenshot; last msg 6/16 outgoing, no complaint |
+| Aysar | ○ still open | Not yet 17:00+07 — genuinely not due yet |
+
+**Cleared:** Rory, Franc, Elena-WordPress, Philip (re-confirmed), Matrix, Upwork, Fountain Part 1.
+**Still open:** Maddy/Kai (new client bug report), Aysar (timing).
 
