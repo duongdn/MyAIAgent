@@ -1,5 +1,7 @@
-# Daily Report — 2026-06-24 (Tue)
+# Daily Report — 2026-06-24 (Wed)
 **Generated:** 06:08 (+07:00) | **Window:** 2026-06-23T08:57+07 → 2026-06-24T06:08+07
+
+*(Header corrected on recheck — original said "(Tue)", but Jun 24 2026 is a Wednesday; Jun 22=Mon, Jun 23=Tue. Date math elsewhere in this report already used the correct weekdays.)*
 
 ---
 
@@ -16,7 +18,7 @@
 | 7 | 🟡 MED | OhCleo | Upwork payment dispute — $1,668 charged; Tony's account blocked, refund pending |
 | 8 | 🟡 MED | Fountain #2615 | Over-estimate +790% critical (12h est → 106.75h actual, Deployed on Staging) |
 | 9 | 🟡 INFO | SAM GUARD / Precognize | PR #5014 updated — Lena requests merge to develop-9.4 (not staging) |
-| 10 | 🔴 HIGH | Xtreme / Maddy | **Customer complaint, unanswered:** Madhuraka — Shopify image-ordering bug, recurrence of LIFM2-260 (open since 2025-02-25, 24 comments of rework). Same client who escalated quality concerns 6/19. See Piece 2 for full detail. |
+| 10 | 🔴 HIGH | Xtreme / Maddy | **Customer complaint, unanswered:** Madhuraka — Shopify image-ordering bug on LIFM2-260 (no estimate ever set, 38.5h spent, 24 comments) — Kai/Anoma marked it fixed+tested Jun22, **regressed by Jun24**. Same client who escalated quality concerns 6/19. LIFM2-439 still +79% over (12h est, 21.5h actual) from that incident. See Piece 4 (Maddy JIRA) + Piece 2 for full detail. |
 | 11 | ⚠️ ACTION | Matrix DM (ChienTx) | "sao ổng vẫn gửi msg trên Upwork tiếp sáng nay vậy a?" 08:38 Jun24 — question directed at DuongDN, unanswered |
 | 12 | ○ RECHECK | Aysar | MPDM 0 msgs (posts ~17:00+07); recheck after 17:00 |
 
@@ -154,6 +156,23 @@ Trello: James Diamond ✓ complete. Andrew Taraba ✓ complete (0 msgs, no alert
 | KhanhHH | **8h** | ✅ OK (corrected) | See recheck below — original 0h/Workstream-401 finding was wrong |
 | LeNH | 0h | ⚠️ ALERT (confirmed) | 0h across ALL 13 sheets + ALL 10 accessible Workstream projects + Upwork Rory/Aysar; no leave logged |
 | LongVV | 8h/week | ✅ OK | Part-time; weekly target met |
+
+### Sheets — Maddy JIRA — W12 (2026-06-22) — 09:35 (+07:00)
+
+*Mandatory daily check — was missing from the 06:08 run, ran now.*
+
+| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log (Sheet) | Check |
+|--------|---------|--------|-----|---------------|-------------------|-------|
+| LIFM2-445 | Update Price Action button - Listed Cons | Testing - Anoma | 2h | 1h | 1h | ✅ |
+| LIFM2-428 | [Shopify] Product Authenticity Certificate | Review | 44h | 39h 15m | 7h (this week) | ✅ |
+
+Only 2 tickets touched so far this week (2 days in) — both within estimate, JIRA worklog matches Sheet task log exactly (8h total Jun22, nothing logged Jun23 yet in either system).
+
+**Est/actual health check (asked by user 09:32+07) — known issues, both pre-existing:**
+- 🔴 **LIFM2-439** (Fix bug, Done): est 12h → actual 21.5h = **+79% over**. Already flagged 2026-06-23, this was the ticket Madhuraka originally questioned.
+- 🔴 **LIFM2-260** (image S3 bug): **no original estimate ever set**, 38.5h actual already, 24 comments, open since 2025-02-25. Status "Customer Feedback" — was marked fixed+tested by Kai/Anoma on Jun22, **then broke again** per Madhuraka's Jun24 06:25 message — a genuine regression, not just unaddressed.
+
+**JIRA vs Workstream cross-check (Xtreme Soft Solutions project):** JIRA worklogs and the Google Sheet task log agree (8h Jun22, Kai). The separate Workstream "Xtreme Soft Solutions" project shows **0 entries this week so far** — but checked the last 3 weeks' pattern: LongVV (= Kai, confirmed by `config/.jira-config.json` team mapping — Workstream never shows literal "Kai", always "LongVV") logs Workstream in a Wed/Thu batch, not daily (e.g. last week: 0h Mon/Tue/Fri, 16h logged Wed+Thu). Today being Wed, **too early to call this a gap** — recheck Thu/Fri if still empty. Each week's batch hits exactly 16h, matching the part-time target.
 
 **KhanhHH — CORRECTED on recheck (09:05+07):** Original 06:08 run reported "Workstream 401, 0h" — this was wrong on two counts: (1) the 401 should have been fixed by re-running `workstream-login.js`, not reported as unavailable; (2) the script used (`daily-sheets-scan-260623-tue.js`) only checked 3 hardcoded Workstream projects for KhanhHH (Baamboozle, Colin/ETZ, Blair Brown) — missing **Generator**, which is where the hours actually were. Live re-query of ALL 10 Workstream projects + ALL 13 sheets found **KhanhHH logged 8h on Jun 23, entirely under Generator** (Elliott's project): "Fix redmines" 6:00 + "[API] Work order preview-pdf 500" 1:00 + "716 deep-link" 1:00. **This is the exact same root-cause pattern as the 2026-06-23 incident already in memory** (Generator missing from a hardcoded WS project list) — see root-cause fix below. No alert; KhanhHH worked a full day.
 
