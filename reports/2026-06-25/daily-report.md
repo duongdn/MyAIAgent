@@ -102,7 +102,7 @@ Workstream SSO restored (was a stale token, fixed via login script — re-verifi
 | TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ⚠️ real 0.7h shortfall, no leave note. Mon/Tue were exactly 8h each (no banked surplus to draw on), and the week isn't finished — can't excuse it as "within weekly tolerance" while days are still pending. Does not block JohnYi/Rebecca/Bailey (their gate is just TuanNT >0h), but the 0.7h itself is a real, unexplained gap. |
 | VietPH | 8h (Paturevision) | 0h | 8h | 8h/day | ✅ |
 | KhanhHH | — | 8h (Generator 6.5h + ETZ-Wathaga 1.5h) | 8h | 8h/day | ✅ |
-| LeNH | 0h | 0h | 0h | 8h/day | ⚠️ half-day AM leave confirmed (đi khám bệnh, charged to Bailey), but PM hours unlogged despite confirmed afternoon client work (Blair Brown/Peptide Clyde, 11:18-11:34 Matrix) — apparent logging gap, not absence |
+| LeNH | — | 10.67h (Peptide Clyde: 3:10 navigation/footer-live + 3:30 lab-results-live + 4:00 half-day-off credit) | 10.67h | 8h/day | ✅ **CORRECTED 10:25** — fully logged, over target. Earlier "0h/unlogged" finding was wrong: the live Workstream query silently returned empty for this project during the recheck despite it being in the accessible-projects list. LeNH was right to push back ("ủa, em có log lên workstream rồi mà ta") — apology sent, see Re-check #2 below. |
 
 **Scrin:** Empty session report for Jun 24 — no TuanNT/JohnYi Scrin activity (consistent with TuanNT's hours being in Paturevision, not Scrin-tracked work, that day).
 
@@ -225,7 +225,7 @@ Sessions were actually fine (carrick session authenticated cleanly on retry — 
 ## Reminders — recheck 09:45 (+07:00), sent 10:15 (+07:00)
 
 - PhucVT: full-day leave confirmed (Resource Arrangement room) — no reminder needed.
-- **LeNH: reminder sent** (room `!OIrgPraJWrcDTnRVLQ`) — PM hours unlogged Jun 24 despite confirmed afternoon work. `event_id=$rStTVeGX1rJre9pJVqjqwPhvEkKeUhzRQQ8h0dPxrPM`.
+- **LeNH: reminder sent in error, corrected 10:25** — see Re-check #2 section below. LeNH had actually logged 10.67h (Peptide Clyde), the "unlogged" finding was a script bug, not a real gap.
 - **TuanNT: reminder sent** (room `!knbJbIKzXRJNGVFQNg`) — 0.7h shortfall Jun 24 (7.3h/8h, Paturevision), no leave note. `event_id=$9_XMPMME55usr8_vCuj5wWL2KpSFzUoEIOrxG4Rx9dI`.
 - VietPH, KhanhHH, LongVV: all have logged hours — no reminder needed.
 
