@@ -20,7 +20,7 @@
 
 ## daily-report — general (cross-piece rules)
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full daily report workflow: sources, Trello, configs
-- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md) — On-demand = separate timestamped file; recheck mode must re-run sources to fill BLOCKED/expired data, not just fix Trello
+- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md) — On-demand = separate timestamped file; recheck mode must re-run sources to fill BLOCKED/expired data AND reclassify wrongly-skipped no-activity items, not just fix Trello
 - [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md) — Monday report starts from last Friday 8AM
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md) — Only our issues count as alerts (checklist=notes, staging=INFO); if alert found, do NOT complete Trello item
 - [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md) — Missing daily report = critical alert (unless leave)
@@ -60,6 +60,7 @@
 - [feedback_summary_sheet_no_double_count](daily-report/sheets/feedback_summary_sheet_no_double_count.md) — Summary col D already grand total
 - [feedback_vietph_leave_date_cron_bug](daily-report/sheets/feedback_vietph_leave_date_cron_bug.md), [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — Run parse-leave-emails.js before task log checks; verify leave note date=PREV_DATE; pro-rate weekly target on leave days
 - [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — Workstream API: single `/api` prefix only; run EVERY day `--week` Jira check, include table
+- [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md) — encrypt-secrets.sh was missing workstream/newrelic/rollbar configs, silently dropping every Workstream token refresh (fixed 2026-06-25)
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — Scrin tracks Nick not TuanNT; Mon fetch returns Sunday not Friday
@@ -95,6 +96,7 @@
 - [feedback_matrix_daily_summary](daily-report/matrix/feedback_matrix_daily_summary.md) — Matrix scan = action table + key updates, never raw dump
 - [feedback_matrix_join_public_room](daily-report/matrix/feedback_matrix_join_public_room.md) — Matrix M_FORBIDDEN = just POST /join
 - [feedback_matrix_refresh_headless_bug](daily-report/matrix/feedback_matrix_refresh_headless_bug.md), [feedback_matrix_token_never_report_expired](daily-report/matrix/feedback_matrix_token_never_report_expired.md) — matrix-token-refresh.js must be headless:false; run it BEFORE claiming token expired
+- [feedback_matrix_token_short_lived](daily-report/matrix/feedback_matrix_token_short_lived.md) — access_token expires within minutes; fetch data immediately after refresh, don't delay
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md) — Cross-check "Resource Arrangement" room before flagging 0h
 - [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md) — Leave dates from email/sheets only, never chat
 - [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md) — LongVV assignments change weekly — check Matrix Monday plan
