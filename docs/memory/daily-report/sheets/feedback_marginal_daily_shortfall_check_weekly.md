@@ -17,3 +17,10 @@ metadata:
 5. Weekly targets: 8h/day × 5 = 40h/week (most devs); LongVV = 16h/week; part-timers per contract.
 
 **Note:** For large daily shortfalls (> 2h), still flag regardless of weekly total — a dev can't skip whole days without notice even if they plan to catch up later.
+
+**Corrected 2026-06-25 — only applies to ALREADY-REALIZED hours, never to a still-in-progress week:** The original example (LeNH, Friday) worked because Friday is the LAST workday — by then the full week's hours were already banked and the total was a real, completed fact. User caught a wrong application 2026-06-25: TuanNT was 0.7h short on Wednesday (Mon=8h, Tue=8h exactly, no surplus banked), and this was excused as "within weekly tolerance" by reasoning that Thu/Fri could still make it up — but those days hadn't happened yet, so that's an unrealized assumption, not a fact. User: "ko đúng, 7.3h là thiếu rồi, nếu trước đó làm dư thì ko nói" (not correct, 7.3h IS short — only excuse it if PRIOR days already had genuine surplus).
+
+**Revised rule:** Only excuse a daily shortfall using "weekly tolerance" if:
+- The week (or the days checked so far) are fully in the past — i.e. you're looking at Friday or later, evaluating the whole completed week, OR
+- The PRIOR days in the same week already contain a real, already-logged surplus that offsets today's gap (e.g. Mon=9h, Tue=8.3h would offset a Wed shortfall).
+Never excuse a mid-week shortfall by assuming future days will cover it — that's a prediction, not a fact. Report it as a real (if minor) shortfall, and only revisit once the week is actually complete.

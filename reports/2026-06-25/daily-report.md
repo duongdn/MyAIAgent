@@ -99,7 +99,7 @@ Workstream SSO restored (was a stale token, fixed via login script — re-verifi
 |-----------|--------|------------|-------|--------|--------|
 | LongVV | — | 8h (Portfolio - James Diamond) | 8h | 16h/week | ✅ part-time, on pace |
 | PhucVT | 0h | 0h | 0h | 8h/day | ✅ full-day sick leave confirmed (Delivery - Resource Arrangement room: "Không khoẻ" → James Diamond covered by LongVV) |
-| TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ✅ 0.7h short, no leave note — but week-to-date Mon-Wed = 23.3h/24h target (within 1h tolerance, no alert per rule). Gates JohnYi+Rebecca+Bailey via >0h, also clean. |
+| TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ⚠️ real 0.7h shortfall, no leave note. Mon/Tue were exactly 8h each (no banked surplus to draw on), and the week isn't finished — can't excuse it as "within weekly tolerance" while days are still pending. Does not block JohnYi/Rebecca/Bailey (their gate is just TuanNT >0h), but the 0.7h itself is a real, unexplained gap. |
 | VietPH | 8h (Paturevision) | 0h | 8h | 8h/day | ✅ |
 | KhanhHH | — | 8h (Generator 6.5h + ETZ-Wathaga 1.5h) | 8h | 8h/day | ✅ |
 | LeNH | 0h | 0h | 0h | 8h/day | ⚠️ half-day AM leave confirmed (đi khám bệnh, charged to Bailey), but PM hours unlogged despite confirmed afternoon client work (Blair Brown/Peptide Clyde, 11:18-11:34 Matrix) — apparent logging gap, not absence |
@@ -114,6 +114,12 @@ Workstream SSO restored (was a stale token, fixed via login script — re-verifi
 | LIFM2-428 | [Shopify] Product Authenticity Certificate | Review | 44h | 39h 15m | 7h | ✅ |
 
 All 2 tickets OK — no over-budget, no missing estimate, no missing JIRA log.
+
+**Maddy — communication & open commitments (Slack + JIRA comments, checked 10:05):**
+
+1. **Image ordering on Shopify (Slack DM, not yet a JIRA ticket):** Madhuraka reported Jun 23 23:26 ("image ordering when uploaded to Shopify... ordering is incorrect", sent via email too). Kai investigated Jun 24 02:34-02:38 and explained: "the mannequin image has the lowest image number, so it should appear first in the sequence" — i.e. current behavior is by design (sorted by image number), not a bug. **No reply from Madhuraka since** (31h+ as of this check) — explanation given but not explicitly confirmed/closed by the client. Worth a light follow-up if still silent tomorrow.
+2. **LIFM2-409 "Import Shopify payouts" — new commitment today:** Madhuraka described a new requirement Jun 24 09:59 (payout import needs a validation step before processing, with recovery handling for failed imports). Kai replied Jun 25 02:51 (≈09:51+07, ~1h before this check): **"My estimates is 16 hours."** Ticket still "To Do" — too early to expect progress, but flagging so it's tracked: watch for this estimate holding up over the next few days.
+3. Other recently-touched tickets, no open questions: LIFM2-445 (Testing - Anoma), LIFM2-446 "Row-Locking in Quoting Tool" (To Do, Jun 24), LIFM2-259 "Bulk upload images to S3" (To Do, Jun 24), LIFM2-428 (Review), LIFM2-260 (Customer Feedback, last activity the mannequin explanation above).
 
 ---
 
