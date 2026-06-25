@@ -6,12 +6,10 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-25T09:20:00+07:00",
+    "last_run": "2026-06-25T09:35:00+07:00",
     "output_file": "reports/2026-06-25/daily-report.md",
-    "last_status": "complete_with_caveats",
-    "caveats": [
-      "Amazing Meds Slack: genuine wrong password for nick@nustechnology.com — needs user-provided current password (not an expiry, confirmed via direct login test)"
-    ]
+    "last_status": "complete",
+    "caveats": []
   },
   "refresh": {
     "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",

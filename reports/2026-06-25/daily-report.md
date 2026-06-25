@@ -2,7 +2,7 @@
 
 **Monitoring window:** 2026-06-24 09:00+07 → 2026-06-25 06:13+07  
 **Generated:** 2026-06-25 06:13+07, recheck completed 09:15+07  
-**Status:** Complete. Recheck fixed Workstream, Matrix, and confirmed OhCleo/Upwork were already valid (false alarms). Amazing Meds Slack genuinely has a wrong stored password — needs user input (see end of report).
+**Status:** Complete. Recheck fixed Workstream, Matrix, and confirmed OhCleo/Upwork were already valid (false alarms). Amazing Meds Slack password issue resolved with new password from user (see Amazing Meds section).
 
 ---
 
@@ -42,7 +42,7 @@ Trello: All 6 mail items ✓ complete. Card marked done.
 | Xtreme Soft Solutions | 3 | ✅ Kai active in DM with Madhuraka — mannequin image sequence discussion (dev work). JIRA LIFM2-444/445 active. |
 | SAM GUARD - Mobile | 7 | ℹ️ HubSpot MQL leads; #process-digital-plant "PR merged" (michelle). Elena DP active. |
 | Global Grazing Services | 6 | ⚠️ Joey/Amy in #change-requests. NO Nick daily report in #maintenance. |
-| Amazing Meds | — | ⚠️ Token invalid (invalid_auth). Credentials in config are wrong for this workspace. Manual fix needed. |
+| Amazing Meds | 0 (since Jun 23) | ✅ password updated by user, token refreshed — see Amazing Meds section below |
 | Generator | 20 | ✅ Elliott + Violet very active in #release: deeplink/universal links feature discussion, mobile release cut last week. Jeff fixes on Monday need to be added. |
 | LegalAtoms | 0 | ℹ️ No activity. |
 | MyPersonalFootballCoach | 0 | ℹ️ No activity. |
@@ -55,7 +55,7 @@ Trello: All 6 mail items ✓ complete. Card marked done.
 **Alerts:**
 - **Aysar**: No Wednesday daily update in MPDM gate channel. Posting "@-mentions" seen, work visible. Missing daily update gate. (Resolved on recheck — see Re-check section.)
 - **GGS/Nick**: No daily report in #maintenance. (Not a blocker per memory rule — GGS Nick report presence doesn't gate Bailey; resolved.)
-- **Amazing Meds**: Credential fix needed — password in `.slack-accounts.json` is wrong for nick@nustechnology.com on this workspace. **Confirmed genuine wrong password on recheck — needs user input (see end of report).**
+- **Amazing Meds**: Resolved — user provided current password, token refreshed, no alert found in channel.
 
 Trello (updated after recheck — see Re-check section for details):
 - ✅ Maddy/Kai/Luis — Kai active in DMs
@@ -63,7 +63,7 @@ Trello (updated after recheck — see Re-check section for details):
 - ✅ Rory — confirmed leave Thu-Fri
 - ✅ Elena — no open PRs, no pending deploy
 - ✅ Colin/AigileDev — active
-- ○ John Yi (Amazing Meds) — still blocked, genuine wrong password (needs user input)
+- ✅ John Yi (Amazing Meds) — password fixed by user, no alert
 - ✅ Aysar — broad recheck confirmed ongoing work, KhanhHH aggregate hours clean
 - ✅ Franc — no activity ≠ alert (ad hoc, Slack-only gate)
 - ✅ Elliott — active in Generator #release, no person-status alert
@@ -225,12 +225,11 @@ Today's report (generated 06:13) had 5 caveats. All investigated and resolved:
 | Matrix token expired | Fixed — refreshed via browser SSO (NUS session auto-confirms); access tokens are short-lived (~minutes) so each fetch re-refreshes inline |
 | OhCleo token expired | **False alarm** — token was already valid (`auth.test` passed immediately); original check likely had a cookie-encoding bug |
 | Upwork sessions expired | **False alarm** — all 5 workrooms + Neural messages fetched successfully on first clean retry |
-| Amazing Meds Slack invalid_auth | **Confirmed genuine wrong password** (not an expiry) — login attempt returned "Sorry, you entered an incorrect email address or password." Needs the current password from the user; not something a token refresh can fix. |
+| Amazing Meds Slack invalid_auth | **Confirmed genuine wrong password** (not an expiry) — login attempt returned "Sorry, you entered an incorrect email address or password." User provided the current password 09:31 — token refreshed, channel checked, no alert. Resolved. |
 
 **Trello Check Progress — 12 items completed** after re-running their gate sources: Aysar, Franc, Elliott, MPFC, Marcel, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Philip, Ohcleo. Several had been incorrectly left ○ for "no activity" — per established rule, silence/no-activity is not itself a blocking alert; only person-status issues (absence, 0h, unresolved complaint) block.
 
 **Still incomplete (real reasons):**
-- **John Yi - Amazing Meds**: blocked on the wrong-password issue above.
 - **Fountain**: W32 task log shows 0h for all devs despite an active plan and real shipped work (see Fountain section) — logging gap needs a nudge; also the pre-existing #2615 over-estimate (12h→106.75h) is unresolved.
 - **Elena - WordPress SamGuard**: real CSP violations (Google Analytics + DoubleClick blocked in `connect-src`) — same ones documented 2026-06-18, user previously chose to leave as-is rather than edit the live CSP policy. No new domains found.
 
@@ -242,7 +241,9 @@ Today's report (generated 06:13) had 5 caveats. All investigated and resolved:
 
 ---
 
-## ⚠️ Needs your input
+## Amazing Meds — resolved 09:35 (+07:00)
 
-**Amazing Meds Slack password is wrong.** `config/.slack-accounts.json` has an outdated password for `nick@nustechnology.com` on the Amazing Meds workspace — login was rejected with "incorrect email address or password" (confirmed via direct test, not a token expiry). This blocks the **John Yi - Amazing Meds** Trello item until fixed. Please provide the current password so it can be updated in the (gitignored, encrypted) config.
+User provided the current password. Updated `config/.slack-accounts.json`, refreshed the token (verified: Team "Amazing Meds" / User "nick"), re-encrypted secrets. Searched `#web-dev-with-nick` since Jun 23 — 0 messages in window; broader check back to Jun 15 shows normal site-migration/backup chat (John, Gil, Nick), last topic already resolved Jun 17. No alert.
+
+**Trello: John Yi - Amazing Meds ✅ marked complete.** Only **Fountain** (0h logging gap + over-estimate) and **Elena - WordPress SamGuard** (pre-existing CSP violations) remain open on the Check Progress card.
 
