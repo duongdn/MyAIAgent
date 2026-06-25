@@ -130,6 +130,10 @@ SOURCES = {
             "name": "Duy Nguyen / mrgoonie (Facebook AI)",
             "url": "https://rss.app/feeds/8Qu8UA7eG30zqCbP.xml",
         },
+        {
+            "name": "Nghiện AI (Facebook Group)",
+            "url": "https://rss.app/feeds/tsK3drKBzruaQ1Gc.xml",
+        },
     ],
     "it": [
         {
