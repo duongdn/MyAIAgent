@@ -6,15 +6,11 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-25T06:13:00+07:00",
+    "last_run": "2026-06-25T09:20:00+07:00",
     "output_file": "reports/2026-06-25/daily-report.md",
     "last_status": "complete_with_caveats",
     "caveats": [
-      "Workstream SSO expired — sheet-only results for all devs",
-      "Amazing Meds Slack: wrong credentials (invalid_auth)",
-      "OhCleo Slack: token expired",
-      "Matrix token expired — Fountain Part 1 unavailable",
-      "Upwork all sessions expired"
+      "Amazing Meds Slack: genuine wrong password for nick@nustechnology.com — needs user-provided current password (not an expiry, confirmed via direct login test)"
     ]
   },
   "refresh": {

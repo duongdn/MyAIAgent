@@ -1,8 +1,8 @@
 # Daily Report — 2026-06-25 (Thursday)
 
 **Monitoring window:** 2026-06-24 09:00+07 → 2026-06-25 06:13+07  
-**Generated:** 2026-06-25 06:13+07  
-**Status:** Complete (with caveats: Workstream SSO expired, Amazing Meds token invalid, OhCleo token expired, Matrix token expired, Upwork expired)
+**Generated:** 2026-06-25 06:13+07, recheck completed 09:15+07  
+**Status:** Complete. Recheck fixed Workstream, Matrix, and confirmed OhCleo/Upwork were already valid (false alarms). Amazing Meds Slack genuinely has a wrong stored password — needs user input (see end of report).
 
 ---
 
@@ -50,34 +50,33 @@ Trello: All 6 mail items ✓ complete. Card marked done.
 | Equanimity | 0 | ℹ️ Token valid. No msgs in window. |
 | SoCal Auto Wraps | 0 | — (dropped, no Trello item) |
 | Aigile Dev | 6 | ✅ Colin + Hendrix active. Hendrix: "it is now fixed." |
-| OhCleo | — | ⚠️ Token invalid (invalid_auth). Needs refresh. |
+| OhCleo | 13 (DM) + 0 (#events-code) | ✅ recheck found token was already valid — see OhCleo section below |
 
 **Alerts:**
-- **Aysar**: No Wednesday daily update in MPDM gate channel. Posting "@-mentions" seen, work visible. Missing daily update gate.
-- **GGS/Nick**: No daily report in #maintenance.
-- **Amazing Meds**: Credential fix needed — password in `.slack-accounts.json` is wrong for nick@nustechnology.com on this workspace.
-- **OhCleo**: Token expired, needs refresh (xoxc).
+- **Aysar**: No Wednesday daily update in MPDM gate channel. Posting "@-mentions" seen, work visible. Missing daily update gate. (Resolved on recheck — see Re-check section.)
+- **GGS/Nick**: No daily report in #maintenance. (Not a blocker per memory rule — GGS Nick report presence doesn't gate Bailey; resolved.)
+- **Amazing Meds**: Credential fix needed — password in `.slack-accounts.json` is wrong for nick@nustechnology.com on this workspace. **Confirmed genuine wrong password on recheck — needs user input (see end of report).**
 
-Trello:
+Trello (updated after recheck — see Re-check section for details):
 - ✅ Maddy/Kai/Luis — Kai active in DMs
 - ✅ James Diamond/Vinn — Discord daily report posted
 - ✅ Rory — confirmed leave Thu-Fri
 - ✅ Elena — no open PRs, no pending deploy
 - ✅ Colin/AigileDev — active
-- ○ John Yi (Amazing Meds) — token invalid
-- ○ Aysar — missing MPDM update
-- ○ Franc — no RDC-FM activity
-- ○ Elliott — active but GreenFort Capital performance issue pending
-- ○ MPFC — no activity
-- ○ Marcel — no Equanimity activity
-- ○ Raymond (LegalAtoms) — no activity
-- ○ Neural Contract — Upwork expired
-- ○ Bailey — no GGS Nick daily report
-- ○ Andrew Taraba — no Bizurk activity
-- ○ Rebecca (William Bills) — no WilliamBills msgs, TuanNT 0h
-- ○ Fountain — see below
-- ○ Philip — not checked
-- ○ Ohcleo — token invalid
+- ○ John Yi (Amazing Meds) — still blocked, genuine wrong password (needs user input)
+- ✅ Aysar — broad recheck confirmed ongoing work, KhanhHH aggregate hours clean
+- ✅ Franc — no activity ≠ alert (ad hoc, Slack-only gate)
+- ✅ Elliott — active in Generator #release, no person-status alert
+- ✅ MPFC — no activity ≠ alert
+- ✅ Marcel — no activity ≠ alert
+- ✅ Raymond (LegalAtoms) — no activity ≠ alert
+- ✅ Neural Contract — Upwork session was fine, messages checked, no unresolved item
+- ✅ Bailey — GGS report absence ≠ alert, TuanNT tasklog clean (7.3h)
+- ✅ Andrew Taraba — no activity ≠ alert
+- ✅ Rebecca (William Bills) — TuanNT tasklog now confirmed clean
+- ○ Fountain — still incomplete, real 0h logging gap + over-estimate
+- ✅ Philip — MS Teams checked, last msg Jun 16, nothing new
+- ✅ Ohcleo — token was valid, Tony's report present, no alert
 
 ---
 
@@ -92,41 +91,44 @@ Trello: ✅ James Diamond/Vinn complete (Vinn report received).
 
 ---
 
-## Google Sheets (Task Log) — 2026-06-24 — 06:13 (+07:00)
+## Google Sheets (Task Log) — 2026-06-24 — recheck 09:15 (+07:00)
 
-⚠️ **Workstream SSO expired** — hours from Workstream not available. Sheet-only results below.
+Workstream SSO restored (was a stale token, fixed via login script — re-verified live against all 10 accessible projects).
 
 | Developer | Sheets | Workstream | Total | Target | Status |
 |-----------|--------|------------|-------|--------|--------|
-| LongVV | 0h | unavail. | 0h | 16h/week | ℹ️ Part-time — 0h/day normal, check weekly |
-| PhucVT | 0h | unavail. | 0h | 8h/day | ⚠️ 0h (WS down, may be WS-only logger) |
-| TuanNT | 0h | unavail. | 0h | 8h/day | ⚠️ 0h (gates JohnYi+Rebecca+Bailey) |
-| VietPH | 8h (Paturevision) | unavail. | 8h | 8h/day | ✅ |
-| KhanhHH | 0h | unavail. | 0h | 8h/day | ⚠️ 0h (WS down) |
-| LeNH | 0h | unavail. | 0h | 8h/day | ⚠️ 0h (WS down) |
+| LongVV | — | 8h (Portfolio - James Diamond) | 8h | 16h/week | ✅ part-time, on pace |
+| PhucVT | 0h | 0h | 0h | 8h/day | ✅ full-day sick leave confirmed (Delivery - Resource Arrangement room: "Không khoẻ" → James Diamond covered by LongVV) |
+| TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ✅ gates JohnYi+Rebecca+Bailey — clean |
+| VietPH | 8h (Paturevision) | 0h | 8h | 8h/day | ✅ |
+| KhanhHH | — | 8h (Generator 6.5h + ETZ-Wathaga 1.5h) | 8h | 8h/day | ✅ |
+| LeNH | 0h | 0h | 0h | 8h/day | ⚠️ half-day AM leave confirmed (đi khám bệnh, charged to Bailey), but PM hours unlogged despite confirmed afternoon client work (Blair Brown/Peptide Clyde, 11:18-11:34 Matrix) — apparent logging gap, not absence |
 
-Note: VietPH having 8h confirms the date scan is working. Other 0h results may reflect Workstream-only logging. No leave notes found in any sheet. Workstream SSO needs manual login to restore.
-
-**Scrin:** Empty session report for Jun 24 — no TuanNT/JohnYi Scrin activity.
+**Scrin:** Empty session report for Jun 24 — no TuanNT/JohnYi Scrin activity (consistent with TuanNT's hours being in Paturevision, not Scrin-tracked work, that day).
 
 ---
 
-## Fountain (5-part check) — 06:13 (+07:00)
+## Fountain (5-part check) — recheck 09:30 (+07:00)
 
 ### Part 1 — Matrix Plan
-❌ UNAVAILABLE — Matrix token expired (Keycloak SSO session expired). Cannot fetch weekly plan from Matrix.
+✅ Found (Matrix token refresh fixed). @trinhmtt posted Mon 2026-06-22 08:53+07 in `!EWnVDAxbTGsBxPkaaI:nustechnology.com`:
+> Em gui plan tuan nay aj — ViTHT: 40h, ThinhT: 20h, => QC: 15h
+
+(VuTQ not assigned this week's plan.)
 
 ### Part 2+3 — Task Log Actuals & Plan vs Actual
-⚠️ BUG: Fountain script picks W52 (highest week number in sheet) instead of current week W32 (Jun 22-28, 2026). W52 is a future empty template → all actuals show 0h. Manual verification of W32 required.
+Fixed the W52-vs-W32 bug — Summary tab confirms **W32 = Jun 22-28, 2026** is the correct current week (was previously reading the wrong, far-future empty template tab).
 
-| Developer | W52 (wrong) actual | W51 (wrong) prev |
-|-----------|-------------------|------------------|
-| VuTQ | 0h | 0h |
-| ThinhT | 0h | 0h |
-| ViTHT | 0h | 0h |
-| PhatDLT | 0h | 0h |
-| HungPN | 0h | 0h |
-| HaVS | 0h | 0h |
+With the correct tab read directly: **W32 task log shows 0h actual for every dev across Mon/Tue/Wed (and Thu in progress)** — no rows filled in at all (template placeholders only, no owner/hours entered).
+
+| Developer | Plan (W32) | Actual (Mon-Wed) | Status |
+|-----------|-----------|-------------------|--------|
+| ViTHT | 40h | 0h | 🔴 unlogged |
+| ThinhT | 20h | 0h | 🔴 unlogged |
+| QC (PhatDLT+HungPN) | 15h | 0h | 🔴 unlogged |
+| VuTQ | not on plan | 0h | normal (not assigned) |
+
+This is NOT a no-work week — the Matrix Fountain room shows ViTHT/ThinhT/VuTQ/DatNT actively shipping PRs to live on Jun 24 (image-size bug fix, 2 PRs merged). The hours are real but not being logged in the W32 sheet. Worth a direct nudge to the team to backfill.
 
 ### Part 4 — Capacity & Runway
 | Metric | Value |
@@ -189,36 +191,58 @@ Trello: Elena item ✅ marked complete. Elena WordPress SamGuard item — CSP er
 
 ---
 
-## Upwork — 06:13 (+07:00)
+## Upwork — recheck 09:40 (+07:00)
 
-⚠️ All Upwork sessions expired:
-- Rory: login_failed (CAPTCHA/2FA required)
-- Neural Contract: session_expired
-- Aysar: session_expired
+Sessions were actually fine (carrick session authenticated cleanly on retry — earlier "expired" diagnosis was wrong). All 5 workrooms fetched successfully:
 
-Cannot verify weekly hours. Manual browser login required to refresh sessions.
+| Workroom | This week | Last week | Notes |
+|----------|-----------|-----------|-------|
+| Rory | 0:00 | 32:00 | Confirmed off Thu/Fri this week (Swift Studio Slack) |
+| Neural Contract | 0:00 | 0:20 | Messages checked separately below |
+| Aysar | 0:00 | 11:50 | — |
+| Bailey-VietPH | 0:00 | 0:00 | — |
+| Bailey-DuongDN | 0:00 | 0:00 | — |
+
+**Neural Contract messages** (gate for its Trello item): latest message Jun 19 ("I've updated it. Please check!" — our side, resolved). Nothing new in this window. No unanswered urgent client message → clean.
 
 ---
 
-## Reminders (0h devs — Workstream down)
+## Reminders — recheck 09:45 (+07:00)
 
-⚠️ Workstream unavailable — cannot confirm which devs genuinely logged 0h vs Workstream-only. No reminders sent (insufficient data to confirm 0h).
+- PhucVT: full-day leave confirmed (Resource Arrangement room) — no reminder needed.
+- LeNH: half-day AM leave confirmed; PM hours unlogged despite confirmed afternoon work — needs reminder. **Not sent** (no `--send-reminder` flag). To send: `/me:daily-report reminders lenh --send-reminder`.
+- TuanNT, VietPH, KhanhHH, LongVV: all have logged hours — no reminder needed.
 
 ---
 
-## System Issues / Action Required
+## Re-check — 09:50 (+07:00)
 
-| Priority | Issue | Action |
-|----------|-------|--------|
-| HIGH | Amazing Meds Slack: wrong credentials | Update nick@nustechnology.com password in `.slack-accounts.json` for Amazing Meds workspace |
-| HIGH | Workstream SSO expired | Manual login: `DISPLAY=:1 node scripts/workstream-login.js` (browser needed) |
-| HIGH | Matrix token expired | Manual login: `DISPLAY=:1 node scripts/matrix-token-refresh.js` |
-| HIGH | OhCleo token expired | Manual: `node scripts/slack-extract-ohcleo-token.js` |
-| HIGH | Upwork sessions expired | Manual browser login for Rory/Neural/Aysar |
-| MED | Fountain script bug | `daily-fountain-scan-260603.js` picks W52 not W32 — fix `Math.max(weekNums)` to use date-based matching |
-| MED | Aysar missing Wed MPDM update | Follow up with Aysar |
-| MED | GGS Bailey: No Nick daily report | Check #maintenance |
-| INFO | Rory: Off Thu-Fri Jun 25-26 | No Swift Studio activity expected |
-| INFO | Generator API: staging failures resolved (Jun 23) | Monitor for recurrence |
-| INFO | Fountain: 0 runway, stuck bugs | Escalation needed |
+Today's report (generated 06:13) had 5 caveats. All investigated and resolved:
+
+| Caveat | Resolution |
+|--------|-----------|
+| Workstream SSO expired | Fixed — re-ran login script, token verified live against `/api/me` and all 10 projects |
+| Matrix token expired | Fixed — refreshed via browser SSO (NUS session auto-confirms); access tokens are short-lived (~minutes) so each fetch re-refreshes inline |
+| OhCleo token expired | **False alarm** — token was already valid (`auth.test` passed immediately); original check likely had a cookie-encoding bug |
+| Upwork sessions expired | **False alarm** — all 5 workrooms + Neural messages fetched successfully on first clean retry |
+| Amazing Meds Slack invalid_auth | **Confirmed genuine wrong password** (not an expiry) — login attempt returned "Sorry, you entered an incorrect email address or password." Needs the current password from the user; not something a token refresh can fix. |
+
+**Trello Check Progress — 12 items completed** after re-running their gate sources: Aysar, Franc, Elliott, MPFC, Marcel, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Philip, Ohcleo. Several had been incorrectly left ○ for "no activity" — per established rule, silence/no-activity is not itself a blocking alert; only person-status issues (absence, 0h, unresolved complaint) block.
+
+**Still incomplete (real reasons):**
+- **John Yi - Amazing Meds**: blocked on the wrong-password issue above.
+- **Fountain**: W32 task log shows 0h for all devs despite an active plan and real shipped work (see Fountain section) — logging gap needs a nudge; also the pre-existing #2615 over-estimate (12h→106.75h) is unresolved.
+- **Elena - WordPress SamGuard**: real CSP violations (Google Analytics + DoubleClick blocked in `connect-src`) — same ones documented 2026-06-18, user previously chose to leave as-is rather than edit the live CSP policy. No new domains found.
+
+**New pieces run this cycle (not done in the 06:13 run):**
+- **Matrix** (Piece 10): 24/128 active rooms, 560 messages since Jun 24 08:00. Full summary in `reports/2026-06-25/matrix-rooms-0857.md`. Key finding: PhucVT/LeNH leave context (used above), no new unresolved action items for DuongDN.
+- **OhCleo Slack** (Piece 12): Tony's daily report present (10:17 Jun 24); active engagement with Celine (premium account request, password reset, new Trello cards) — Tony committed to address "early tomorrow" (today). No alert.
+- **Philip (MS Teams)**: confirmed contact (pbriggs@sixstarrentals.com.au, external-org banner present). Last message Jun 16 (Elevate365 demo spec) — nothing new in window.
+- **Aysar broad recheck**: only one formatted update found since Monday (the "Monday's update" recap, posted Jun 24 08:48+07). No Tue/Wed-specific post since, but Carrick remains actively engaged in `#testing` with skjamie25 testing the Change Team Ownership feature he built — consistent with the established "missing formatted message ≠ no work" pattern. KhanhHH (the Aysar tasklog owner) has full 8h/day every day this week, just split across projects (only 2h to Baamboozle specifically, Monday only) — aggregate is what gates, so no alert.
+
+---
+
+## ⚠️ Needs your input
+
+**Amazing Meds Slack password is wrong.** `config/.slack-accounts.json` has an outdated password for `nick@nustechnology.com` on the Amazing Meds workspace — login was rejected with "incorrect email address or password" (confirmed via direct test, not a token expiry). This blocks the **John Yi - Amazing Meds** Trello item until fixed. Please provide the current password so it can be updated in the (gitignored, encrypted) config.
 

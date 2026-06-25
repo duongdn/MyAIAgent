@@ -35,6 +35,9 @@ SECRET_FILES=(
   config/.cloudflare-config.json
   config/.gmail-service-account.json
   config/.github-config.json
+  config/.workstream-config.json
+  config/.newrelic-config.json
+  config/.rollbar-config.json
 )
 
 # Add Google service account key if exists
