@@ -99,12 +99,21 @@ Workstream SSO restored (was a stale token, fixed via login script — re-verifi
 |-----------|--------|------------|-------|--------|--------|
 | LongVV | — | 8h (Portfolio - James Diamond) | 8h | 16h/week | ✅ part-time, on pace |
 | PhucVT | 0h | 0h | 0h | 8h/day | ✅ full-day sick leave confirmed (Delivery - Resource Arrangement room: "Không khoẻ" → James Diamond covered by LongVV) |
-| TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ✅ gates JohnYi+Rebecca+Bailey — clean |
+| TuanNT | 7.3h (Paturevision) | 0h | 7.3h | 8h/day | ✅ 0.7h short, no leave note — but week-to-date Mon-Wed = 23.3h/24h target (within 1h tolerance, no alert per rule). Gates JohnYi+Rebecca+Bailey via >0h, also clean. |
 | VietPH | 8h (Paturevision) | 0h | 8h | 8h/day | ✅ |
 | KhanhHH | — | 8h (Generator 6.5h + ETZ-Wathaga 1.5h) | 8h | 8h/day | ✅ |
 | LeNH | 0h | 0h | 0h | 8h/day | ⚠️ half-day AM leave confirmed (đi khám bệnh, charged to Bailey), but PM hours unlogged despite confirmed afternoon client work (Blair Brown/Peptide Clyde, 11:18-11:34 Matrix) — apparent logging gap, not absence |
 
 **Scrin:** Empty session report for Jun 24 — no TuanNT/JohnYi Scrin activity (consistent with TuanNT's hours being in Paturevision, not Scrin-tracked work, that day).
+
+**Maddy JIRA — W12 (run 09:55, was missed in the 06:13 run — mandatory every day, no skipping):**
+
+| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log | Check |
+|--------|---------|--------|-----|---------------|----------|-------|
+| LIFM2-445 | Update Price Action button - Listed Cons | Testing - Anoma | 2h | 1h | 1h | ✅ |
+| LIFM2-428 | [Shopify] Product Authenticity Certificate | Review | 44h | 39h 15m | 7h | ✅ |
+
+All 2 tickets OK — no over-budget, no missing estimate, no missing JIRA log.
 
 ---
 
