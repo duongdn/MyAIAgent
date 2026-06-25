@@ -222,11 +222,12 @@ Sessions were actually fine (carrick session authenticated cleanly on retry — 
 
 ---
 
-## Reminders — recheck 09:45 (+07:00)
+## Reminders — recheck 09:45 (+07:00), sent 10:15 (+07:00)
 
 - PhucVT: full-day leave confirmed (Resource Arrangement room) — no reminder needed.
-- LeNH: half-day AM leave confirmed; PM hours unlogged despite confirmed afternoon work — needs reminder. **Not sent** (no `--send-reminder` flag). To send: `/me:daily-report reminders lenh --send-reminder`.
-- TuanNT, VietPH, KhanhHH, LongVV: all have logged hours — no reminder needed.
+- **LeNH: reminder sent** (room `!OIrgPraJWrcDTnRVLQ`) — PM hours unlogged Jun 24 despite confirmed afternoon work. `event_id=$rStTVeGX1rJre9pJVqjqwPhvEkKeUhzRQQ8h0dPxrPM`.
+- **TuanNT: reminder sent** (room `!knbJbIKzXRJNGVFQNg`) — 0.7h shortfall Jun 24 (7.3h/8h, Paturevision), no leave note. `event_id=$9_XMPMME55usr8_vCuj5wWL2KpSFzUoEIOrxG4Rx9dI`.
+- VietPH, KhanhHH, LongVV: all have logged hours — no reminder needed.
 
 ---
 
