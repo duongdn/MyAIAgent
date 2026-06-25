@@ -263,3 +263,13 @@ User provided the current password. Updated `config/.slack-accounts.json`, refre
 
 **Trello: John Yi - Amazing Meds ✅ marked complete.** Only **Fountain** (0h logging gap + over-estimate) and **Elena - WordPress SamGuard** (pre-existing CSP violations) remain open on the Check Progress card.
 
+---
+
+## Re-check #2 — LeNH false reminder, corrected 10:25 (+07:00)
+
+LeNH replied to the 10:15 reminder: "ủa, em có log lên workstream rồi mà ta" (I already logged it on Workstream though). Re-queried `Peptide Clyde` project directly — **he was right.** Jun 24 entries: "Work on the navigation and footer on live" 3:10, "Work on the lab results page on live" 3:30, "Half-day off" 4:00 (note: "Nghỉ buổi sáng") = **10.67h total**, over the 8h target.
+
+The earlier recheck (09:15) ran the same canonical scan script and got 0h for LeNH on this exact project, despite Peptide Clyde being in the live-queried accessible-projects list at that time. Root cause not fully confirmed (no creation timestamp on Workstream task-log rows to check whether the entries existed yet at 09:15) — could be either (a) a transient per-project query failure that the script silently treated as empty instead of erroring, or (b) LeNH logged them between 09:15 and 10:15. LeNH's own reaction suggests (a). Apologized to him via Matrix and corrected the report.
+
+**Lesson:** before *sending* a reminder (not just writing a report line), re-verify the 0h finding with a fresh, isolated query for that exact dev+project — the cost of being wrong after sending is real (wastes the dev's time, costs trust), higher than being wrong in a report line alone.
+
