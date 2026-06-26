@@ -71,7 +71,7 @@ log "Starting Bailey monitor"
 
 out_file="$LOG_DIR/.bailey-monitor-run.tmp"
 
-"$CLAUDE_BIN" -p "/me:bailey-monitor" \
+"$CLAUDE_BIN" -p "/me:bailey-monitor --report-date=${REPORT_DATE} --report-time=${REPORT_TIME}" \
   --dangerously-skip-permissions \
   > "$out_file" 2>&1
 

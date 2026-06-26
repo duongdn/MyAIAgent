@@ -33,6 +33,18 @@ Each new piece appends a timestamped section — never overwrites prior sections
 
 Example: `## Slack [baamboozle] — 09:14 (+07:00)`
 
+## Date/Time for Report Path
+
+**NEVER use UTC time or date from conversation context.** Always resolve to UTC+7 (Asia/Ho_Chi_Minh):
+
+1. If called with `--report-date=YYYY-MM-DD --report-time=HHMM` → use those values (cron passes these in)
+2. Otherwise → run this command to get the actual UTC+7 date and time:
+   ```bash
+   TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d %H%M'
+   ```
+
+The system clock is UTC. Cron scripts that run at 19:xx UTC are already past midnight UTC+7 — using UTC date/time will place the report in yesterday's folder with the wrong time.
+
 ## Rules
 
 - Create the `reports/{YYYY-MM-DD}/` directory if it doesn't exist
