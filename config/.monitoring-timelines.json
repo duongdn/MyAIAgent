@@ -9,7 +9,10 @@
     "last_run": "2026-06-26T09:04:00+07:00",
     "output_file": "reports/2026-06-26/daily-report.md",
     "last_status": "complete",
-    "caveats": ["Bailey incomplete: GGS Nick performance WARNING", "Fountain incomplete: budget critical 31.5h remaining + Rollbar prod error #1017"]
+    "caveats": [
+      "Bailey incomplete: GGS Nick performance WARNING",
+      "Fountain incomplete: budget critical 31.5h remaining + Rollbar prod error #1017"
+    ]
   },
   "refresh": {
     "description": "Global fallback when a piece has no individual last_run. Updated when full refresh runs. Individual pieces update only their own last_run.",
@@ -139,8 +142,8 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-06-19T08:54:00+07:00",
-    "output_file": "reports/2026-06-19/0854-server-monitor.md"
+    "last_run": "2026-06-26T02:13:52Z",
+    "output_file": "reports/2026-06-26/0908-server-monitor.md"
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
