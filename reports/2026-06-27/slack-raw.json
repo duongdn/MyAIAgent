@@ -1,0 +1,1475 @@
+[
+  {
+    "workspace": "Baamboozle",
+    "total": 51,
+    "inWindow": 49,
+    "messages": [
+      {
+        "channel": "U0173MQEXDG",
+        "user": "heyitsronanc",
+        "text": "Let me see, thanks",
+        "ts": "2026-06-26T15:04:54.153Z"
+      },
+      {
+        "channel": "U0173MQEXDG",
+        "user": "carrick",
+        "text": "Hi <@U0173MQEXDG>\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:49:12.824Z"
+      },
+      {
+        "channel": "mpdm-heyitsronanc--carrick--skjamie25-1",
+        "user": "heyitsronanc",
+        "text": "No problem, Carrick!",
+        "ts": "2026-06-25T05:49:51.171Z"
+      },
+      {
+        "channel": "mpdm-heyitsronanc--carrick--skjamie25-1",
+        "user": "skjamie25",
+        "text": "No worries ~ thank you for letting us know ",
+        "ts": "2026-06-25T05:10:23.765Z"
+      },
+      {
+        "channel": "mpdm-heyitsronanc--carrick--skjamie25-1",
+        "user": "carrick",
+        "text": "Hi <@U02T67RLQUV> <@U0173MQEXDG>\nI will take leave until next Monday for personal issue,\nSorry for your inconvenience",
+        "ts": "2026-06-25T03:09:45.010Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<@U017JJ2D6L9|Aysar>\n\nPlease review the following PR's for release\n\n<https://github.com/baamboozle/baamboozle-web-app/pull/603> [Change Team Ownership]\n<https://github.com/baamboozle/baamboozle-web-app/pull/632> [Admin Tool for Game Cover Images Iss#599]",
+        "ts": "2026-06-24T22:39:00.512Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<https://github.com/baamboozle/baamboozle-web-app/pull/632> [Add admin tool config images]",
+        "ts": "2026-06-24T22:38:33.470Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<https://github.com/baamboozle/baamboozle-web-app/pull/603> [Change Team Ownership]",
+        "ts": "2026-06-24T22:36:54.661Z"
+      },
+      {
+        "channel": "customer-success",
+        "user": "audreysherchan",
+        "text": ":fire::fire::fire:\n\n<https://www.facebook.com/share/r/18tEaSSfRn/?mibextid=wwXIfr|https://www.facebook.com/share/r/18tEaSSfRn/?mibextid=wwXIfr> ",
+        "ts": "2026-06-24T20:35:22.237Z"
+      },
+      {
+        "channel": "testing",
+        "user": "heyitsronanc",
+        "text": "Looks great! Also I was hoping you would show the various options for the previous owner, which you did at the end of the video :clap:",
+        "ts": "2026-06-24T15:03:38.615Z"
+      },
+      {
+        "channel": "testing",
+        "user": "heyitsronanc",
+        "text": "Looks good to me - nice work on the video!",
+        "ts": "2026-06-24T14:59:36.270Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<@U0173MQEXDG>\nThe change team ownership feature has been tested and is working as expected. If you want to watch the walk-through to verify it for release, I've done one ◡̈\n<https://www.loom.com/share/a4655196fc9d45d5a00cbbe9240137d4>",
+        "ts": "2026-06-24T08:28:54.969Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "Hi <@U069WJ0HPQ8|Carrick>\n\nThe Change Team Owner feature is working correctly. I completed multiple tests but will mention these two.\n\nTest 1 – Team 44\nTransferred from user 416 → user 485\nTest 2 – Team 47\nTransferred from user 419 → user 497\n\nBoth tests confirmed:\nTeam name stays the same\nStripe customer ID stays the same\nStripe email updates to the new owner's email\n\nThis feature appears to be working as expected.",
+        "ts": "2026-06-24T08:23:06.393Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "Hi <@U069WJ0HPQ8|Carrick>\n\nI found some bugs with the error messages. Please make these changes:\n\n1. Show separate error messages for username and email\nIf only the username is not allowed, show: \"This username is not allowed. Please choose a different one.\"\nIf only the email is not allowed, show: \"This email address is not allowed. Please choose a different one.\"\nIf both are not allowed, show: \"This username and email address are not allowed. Please choose different ones.\"\n\n2. The error message",
+        "ts": "2026-06-24T07:13:40.146Z"
+      },
+      {
+        "channel": "U02T67RLQUV",
+        "user": "carrick",
+        "text": "Ok <@U02T67RLQUV>",
+        "ts": "2026-06-24T06:37:18.807Z"
+      },
+      {
+        "channel": "U02T67RLQUV",
+        "user": "skjamie25",
+        "text": "You don't need to start working on it right now",
+        "ts": "2026-06-24T06:33:03.454Z"
+      },
+      {
+        "channel": "U02T67RLQUV",
+        "user": "skjamie25",
+        "text": "<https://github.com/baamboozle/baamboozle-web-app/issues/640>",
+        "ts": "2026-06-24T06:32:55.003Z"
+      },
+      {
+        "channel": "U02T67RLQUV",
+        "user": "skjamie25",
+        "text": "<@U069WJ0HPQ8|Carrick>\nRegarding the new issue let me just get the approval from Aysar that I explained the issue properly",
+        "ts": "2026-06-24T06:32:47.949Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<https://github.com/baamboozle/baamboozle-web-app/issues/640> [Cannot Delete Disabled Teams After Stripe Subscriptions Have Expired Issue#640]",
+        "ts": "2026-06-24T06:32:18.096Z"
+      },
+      {
+        "channel": "engineering",
+        "user": "github",
+        "text": "",
+        "ts": "2026-06-24T06:30:43.976Z"
+      },
+      {
+        "channel": "testing",
+        "user": "skjamie25",
+        "text": "<@U0173MQEXDG>\n<https://www.loom.com/share/c54b099604104366802315876f12297b>\nMy role is 'Creator Lite' so I'm unable to download the video but here is the link to view it! There are captions this time ◡̈\n\nSummary of test:\n\n• Uploaded new images for Baamboozle and Summer Bowling - confirmed updating immediately for plus, free, and guest users\n• Timestamps change each time a new image is uploaded, confirming users always see the latest version\n• Changed image and caption for Summer Bowling at the ",
+        "ts": "2026-06-24T06:02:51.767Z"
+      },
+      {
+        "channel": "mpdm-heyitsronanc--carrick--skjamie25-1",
+        "user": "carrick",
+        "text": "Monday’s update:\n• Fix: choose game modal responsive grid -> Dev done + Deployed on Nusdev\n• Fix Aysar reviews code on <https://github.com/baamboozle/baamboozle-web-app/pull/638>",
+        "ts": "2026-06-24T01:48:33.983Z"
+      },
+      {
+        "channel": "engineering",
+        "user": "github",
+        "text": "",
+        "ts": "2026-06-23T22:18:11.371Z"
+      },
+      {
+        "channel": "engineering",
+        "user": "github",
+        "text": "",
+        "ts": "2026-06-23T21:49:50.541Z"
+      },
+      {
+        "channel": "engineering",
+        "user": "github",
+        "text": "",
+        "ts": "2026-06-23T18:19:58.656Z"
+      },
+      {
+        "channel": "customer-success",
+        "user": "heyitsronanc",
+        "text": "We've been keeping the store for internal use only. Couple of things to confirm before we share the link, if at all :ok_hand:",
+        "ts": "2026-06-23T15:02:38.632Z"
+      },
+      {
+        "channel": "U02T67RLQUV",
+        "user": "carrick",
+        "text": "<@U02T67RLQUV> I just checked our website on production, and it’s still working fine. I’m currently using an internet connection in Vietnam.",
+        "ts": "2026-06-23T14:59:35.519Z"
+      },
+      {
+        "channel": "customer-success",
+        "user": "notmedesign",
+        "text": "We could either\n• send them some\n• let her buy through Redbubble\nEven though I like the first option the most right now",
+        "ts": "2026-06-23T14:50:26.059Z"
+      },
+      {
+        "channel": "customer-success",
+        "user": "noah",
+        "text": "Sending this here before I respond.\n\nShould I just provide a link to the store, or something more? ",
+        "ts": "2026-06-23T14:49:07.798Z"
+      },
+      {
+        "channel": "engineering",
+        "user": "github",
+        "text": "",
+        "ts": "2026-06-23T12:51:40.702Z"
+      }
+    ]
+  },
+  {
+    "workspace": "RDC - FM Monitoring",
+    "total": 40,
+    "inWindow": 40,
+    "messages": [
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:47:58.377Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:41:56.704Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:35:42.534Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:17:03.406Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:16:48.868Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T19:04:26.287Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T18:52:29.588Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T18:37:33.762Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T18:35:26.350Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:33:27.615Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:32:54.466Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:31:50.969Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:31:30.268Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:27:59.965Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T13:27:20.458Z"
+      },
+      {
+        "channel": "U09KWR3BNQ3",
+        "user": "carrick",
+        "text": "BTW, do you have any other task for me? :slightly_smiling_face:",
+        "ts": "2026-06-26T09:54:17.466Z"
+      },
+      {
+        "channel": "U09KWR3BNQ3",
+        "user": "carrick",
+        "text": "Hi <@U09KWR3BNQ3>\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:54:08.361Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T09:24:19.341Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-26T09:23:46.851Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T15:00:47.947Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T12:51:58.903Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T12:50:58.624Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T12:48:28.532Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T10:18:02.342Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T10:17:34.614Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T10:12:29.765Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T10:10:23.861Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-25T06:43:36.474Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-24T21:23:09.326Z"
+      },
+      {
+        "channel": "user-access-logs",
+        "user": "user access logs",
+        "text": "Tuner Access Log",
+        "ts": "2026-06-24T21:05:01.119Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Swift Studio",
+    "total": 0,
+    "inWindow": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Xtreme Soft Solutions",
+    "total": 7,
+    "inWindow": 7,
+    "messages": [
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "My progress to yesterday:\n• LIFM2-446: Implement Row-Locking in Quoting Tool -> Done",
+        "ts": "2026-06-26T02:40:50.181Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "I can see that the mannequin image has the lowest image number, so it should appear first in the sequence",
+        "ts": "2026-06-24T02:38:07.711Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "",
+        "ts": "2026-06-24T02:35:51.016Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "Let me check",
+        "ts": "2026-06-24T02:34:33.020Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "madhuraka",
+        "text": "I have sent you an email related to image ordering when uploaded to Shopify. Please check and get back to me as to why the ordering is incorrect.",
+        "ts": "2026-06-23T23:26:12.605Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "My progress to now:\n• LIFM2-428: Product Authenticity Certificate -> Done\n• LIFM2-445: Update QA feedback -> Done",
+        "ts": "2026-06-22T10:16:23.107Z"
+      },
+      {
+        "channel": "U021Q9A8FG9",
+        "user": "kai",
+        "text": "My progress on yesterday:\n• LIFM2-445: Update Price Action button - Listed Cons -> Done\n• LIFM2-444: Update review code -> Done",
+        "ts": "2026-06-22T03:40:53.413Z"
+      }
+    ]
+  },
+  {
+    "workspace": "SAM GUARD - Mobile",
+    "total": 36,
+    "inWindow": 36,
+    "messages": [
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231161193024\nName: Oraya Harnpattananan\nEmail: <mailto:oraya.h@airportthai.co.th|oraya.h@airportthai.co.th>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-25T15:26:32.652Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231099832083\nName: Alex Bertoli\nEmail: <mailto:alessandro.bertoli@factorysoftware.it|alessandro.bertoli@factorysoftware.it>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T12:08:07.624Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231090020629\nName: Narasyimmha Umapathy\nEmail: <mailto:narasyimmha.umapathy@goldgas.de|narasyimmha.umapathy@goldgas.de>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: list_jul16\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T11:53:13.761Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "thank you!",
+        "ts": "2026-06-25T10:39:36.664Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231061702255\nName: Mahammad Abak\nEmail: <mailto:mohamed-ismail-ibrahim.abdelbaki@iubh.de|mohamed-ismail-ibrahim.abdelbaki@iubh.de>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: list_jul16\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T10:12:25.684Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "michelle",
+        "text": "All done",
+        "ts": "2026-06-25T09:46:53.915Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "and iupdate statuses where needed",
+        "ts": "2026-06-25T09:45:18.127Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "tehn please move them on ella",
+        "ts": "2026-06-25T09:45:07.436Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "michelle",
+        "text": "Hi <@U0831AM8MR7>, \"To verify\" was previously created for Ella to recheck on her side. We forgot to update the tickets' status. All are resolved. Thank you for reminding me.",
+        "ts": "2026-06-25T09:44:44.936Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "<@U0831AWA15F|Michelle> need your quick response here",
+        "ts": "2026-06-25T09:35:35.921Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231058144920\nName: Severus Snape\nEmail: <mailto:matavi1246@adsprite.com|matavi1246@adsprite.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T09:18:50.993Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231061956177\nName: Albus Dumbledore\nEmail: <mailto:david.estrada@westcorp.com|david.estrada@westcorp.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T09:16:33.708Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231054851343\nName: Eduardo Duarte\nEmail: <mailto:eduardo.duarte@ris2048.pt|eduardo.duarte@ris2048.pt>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T08:34:00.311Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "also those",
+        "ts": "2026-06-25T06:48:00.564Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231032734363\nName: Marlene Chenard\nEmail: <mailto:hello@marlenechenard.com|hello@marlenechenard.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-25T06:47:31.040Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231025610759\nName: Petr Lnenicka\nEmail: <mailto:petr.lnenicka@verticalimages.cz|petr.lnenicka@verticalimages.cz>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T06:06:24.620Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "lena",
+        "text": "hi <@U0831AWA15F|Michelle> I still see bugs on your name even if they in status to verify and also there are some open bugs . can you clarify? <https://precognize.atlassian.net/issues/?jql=project%20%3D%20%22DP%22%20AND%20assignee%20%3D%205e81c40f198d0f0c148ad60b%20AND%20statusCategory%20!%3D%20Done|precognize.atlassian.net/issues?jql=…>",
+        "ts": "2026-06-25T05:53:50.358Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231030222129\nName: Davide Bigi\nEmail: <mailto:letimbro@letimbrocomputers.it|letimbro@letimbrocomputers.it>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T05:26:29.098Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231030352927\nName: Emmanuel Briet\nEmail: <mailto:emmanuel.briet@thalesgroup.com|emmanuel.briet@thalesgroup.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T05:19:43.320Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231026324538\nName: JOHN AKOKO\nEmail: <mailto:john.ayieko.akoko@polsl.pl|john.ayieko.akoko@polsl.pl>\nCompany: \nJob Title: \nOriginal Source: Direct Traffic\nOriginal Source Drill-Down 1: <http://hs.samguard.co/en/the-real-roi-of-ai|hs.samguard.co/en/the-real-roi-of-ai>\nOriginal Source Drill-Down 2: \nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T04:05:46.553Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231025497353\nName: Tomas Böhm\nEmail: <mailto:tomas.bohm@rb.cz|tomas.bohm@rb.cz>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: remarketing\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-25T03:47:14.001Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231021931091\nName: Pasamon Pechrasuwan\nEmail: <mailto:pasamon.pechrasuwan@frost.com|pasamon.pechrasuwan@frost.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-25T03:33:02.313Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 231021740356\nName: Patcharaphon Musatawong\nEmail: <mailto:patcharaphon2536@gmaim.com|patcharaphon2536@gmaim.com>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-25T03:14:56.140Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/25/26\nContact ID: 230999929259\nName: Hrang Kap Lian\nEmail: <mailto:hrangkaplian@siam.edu|hrangkaplian@siam.edu>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-25T01:09:25.011Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/24/26\nContact ID: 230737531704\nName: Lisa Yong\nEmail: <mailto:lyong@swinburne.edu.my|lyong@swinburne.edu.my>\nCompany: \nJob Title: \nOriginal Source: Organic Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: \nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-24T11:12:51.618Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/24/26\nContact ID: 221449802386\nName: TEST TEST\nEmail: <mailto:test@inspiredmarketing.co.il|test@inspiredmarketing.co.il>\nCompany: \nJob Title: \nOriginal Source: Other Campaigns\nOriginal Source Drill-Down 1: linkedin\nOriginal Source Drill-Down 2: linkedin / thought-leadership_\nConversation Details:  The Real ROI of AI: Webinar form",
+        "ts": "2026-06-24T10:33:01.342Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "michelle",
+        "text": "PR merged",
+        "ts": "2026-06-24T10:11:28.427Z"
+      },
+      {
+        "channel": "process-digital-plant",
+        "user": "kfir.bernstein",
+        "text": "pr approved",
+        "ts": "2026-06-24T10:07:32.377Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/24/26\nContact ID: 230785816720\nName: Kodchakorn Rattanawichiancharn\nEmail: <mailto:rataanawichianc_k@silpakorn.edu|rataanawichianc_k@silpakorn.edu>\nCompany: \nJob Title: \nOriginal Source: Paid Social\nOriginal Source Drill-Down 1: Facebook\nOriginal Source Drill-Down 2: webinar_building_trust\nConversation Details:  Building Trust in Industrial AI: Webinar form 2",
+        "ts": "2026-06-24T08:24:45.911Z"
+      },
+      {
+        "channel": "mql-leads",
+        "user": "hubspot",
+        "text": "Hello,\n\nThis new MQL was just created:   .\nPlease review the following conversion and source details:\n\nCreate Date: 6/24/26\nContact ID: 230777431692\nName: Pramong Dusadee\nEmail: <mailto:pramong.dusadee@samsongroup.com|pramong.dusadee@samsongroup.com>\nCompany: \nJob Title: \nOriginal Source: Direct Traffic\nOriginal Source Drill-Down 1: <http://hs.samguard.co/building-trust|hs.samguard.co/building-trust>\nOriginal Source Drill-Down 2: \nConversation Details:  Building Trust in Industrial AI: Webinar f",
+        "ts": "2026-06-24T06:21:47.249Z"
+      }
+    ]
+  },
+  {
+    "workspace": "GLOBAL GRAZING SERVICES",
+    "total": 32,
+    "inWindow": 31,
+    "messages": [
+      {
+        "channel": "U01B7QMKXD1",
+        "user": "nick",
+        "text": "Hi <@U01B7QMKXD1>\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:47:15.571Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "joey",
+        "text": "Thank you <@U01BKAERQJ1|Amy> ",
+        "ts": "2026-06-26T07:25:35.364Z"
+      },
+      {
+        "channel": "barcode-stock-and-picking-location",
+        "user": "joey",
+        "text": "Hi <@U01BKAERQJ1|Amy>  thank you that's definitely on my priority list next week ",
+        "ts": "2026-06-26T07:25:27.932Z"
+      },
+      {
+        "channel": "barcode-stock-and-picking-location",
+        "user": "amy",
+        "text": "Hi <@U01B7QMKXD1>! Just in case you missed this.",
+        "ts": "2026-06-26T07:17:32.077Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "nick",
+        "text": "26/06/2026\n\n• Performance status: WARNING _(nightly memory spikes recurring 14+ days, Redis connection failures)_\n\n• Resource status:\n    ◦  Storage:\n        ▪︎ Prestashop: OK\n        ▪︎ Console: OK\n    ◦ Swap: OK\n    ◦ Memory: WARNING _(recurring nightly pattern, cleared each morning)_\n\n• DB backup status: OK\n• S3 backup: OK\n• AWS backup status: OK\n\n• Billing: OK ($138.62 MTD)\n\n• Mailgun: OK *(100.0%)*\n\n• Run recalculate stock: OK\n• Check AWS noti: OK\n• AWS Cloudtrail: OK\n• AWS RDS: OK\n\n• SSL:\n",
+        "ts": "2026-06-26T01:54:19.691Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "amy",
+        "text": "I will take a look into it today <@U01B7QMKXD1>!",
+        "ts": "2026-06-26T01:38:13.738Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "joey",
+        "text": "Hi <@U01BKAERQJ1|Amy> some big bug has happened here, can you guys debug it or try figure out what happened on these two orders ? also i didnt put stock back in on last order 38648 just incase you guys debug it and put it back on",
+        "ts": "2026-06-25T12:16:00.999Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "Works beautifully thank you <@U01BKAERQJ1|Amy>  :clap::clap::clap:",
+        "ts": "2026-06-25T07:57:50.818Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "Thank you <@U01BKAERQJ1|Amy>  I can only look a little later in the day ",
+        "ts": "2026-06-25T06:46:28.051Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "This update is now live, <@U01B7QMKXD1>! You can take a look whenever you have a moment.",
+        "ts": "2026-06-25T03:04:23.898Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "Thank you <@U01BKAERQJ1|Amy>  ! ",
+        "ts": "2026-06-24T11:08:35.068Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "Got it, <@U01B7QMKXD1>! I’ll keep you posted.",
+        "ts": "2026-06-24T09:55:20.373Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "Very very nice thank you <@U01BKAERQJ1|Amy>  can we go live with this tomorrow morning ? ",
+        "ts": "2026-06-24T09:37:52.622Z"
+      },
+      {
+        "channel": "barcode-stock-and-picking-location",
+        "user": "amy",
+        "text": "Hi <@U01B7QMKXD1>! You can review both scopes, Picking &amp; Stock Location Enhancements and Location Management for Products, on staging to confirm if they’re ready for Live. Please let me know if you notice anything unusual.\nHere’s the latest staging mobile build for your convenience.",
+        "ts": "2026-06-24T09:01:55.842Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "joey",
+        "text": "Thank you <@U01BKAERQJ1|Amy>  I've made the team aware if they see any new issues I will let you know ",
+        "ts": "2026-06-24T08:35:56.690Z"
+      },
+      {
+        "channel": "grazing-software",
+        "user": "joey",
+        "text": "Nice perfect actually thank you <@U01BKAERQJ1|Amy> ",
+        "ts": "2026-06-24T07:53:21.830Z"
+      },
+      {
+        "channel": "grazing-software",
+        "user": "amy",
+        "text": "Thank you <@U01B7QMKXD1>, we will add a field in grazing software so that you can input URL of the app page",
+        "ts": "2026-06-24T01:41:40.397Z"
+      },
+      {
+        "channel": "grazing-software",
+        "user": "joey",
+        "text": "Hi <@U01BKAERQJ1|Amy> please find video explaining if that make sense",
+        "ts": "2026-06-23T13:20:02.140Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "Hi <@U01B7QMKXD1>! This has been completed on staging-sg, you can take a look whenever you’re available. We can deploy it to Live as early as tomorrow morning if you’d like!",
+        "ts": "2026-06-23T09:43:55.368Z"
+      },
+      {
+        "channel": "grazing-software",
+        "user": "amy",
+        "text": "Hi <@U01B7QMKXD1> any updates on this?",
+        "ts": "2026-06-23T07:22:51.633Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "joey",
+        "text": "Thank you <@U01BKAERQJ1|Amy>  ",
+        "ts": "2026-06-23T07:01:40.823Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "amy",
+        "text": "I’ll take a look into this right away, <@U01B7QMKXD1>!",
+        "ts": "2026-06-23T07:01:22.759Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "joey",
+        "text": "Hi <@U01BKAERQJ1|Amy>  btw Friday, Monday and this morning I had to manually push for sever to sync between prestashop and console as the synchronisation had stopped during the night  <https://paturevision.fr/resque_monitor.php|https://paturevision.fr/resque_monitor.php> ",
+        "ts": "2026-06-23T06:57:16.294Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "Got it, <@U01B7QMKXD1>! I’ll keep you updated as always.",
+        "ts": "2026-06-23T06:46:47.818Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "I think so yes indeed <@U01BKAERQJ1|Amy>  let's restrict it also, btw I am in meeting all day yesterday and also today, I'll only be back to normal tomorrow afternoon sorry for late reply ",
+        "ts": "2026-06-23T06:23:55.558Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "Got it, <@U01B7QMKXD1>! We’ll proceed right away. Do you also want us to restrict the Reduction feature as I mentioned earlier?",
+        "ts": "2026-06-22T08:03:49.500Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "joey",
+        "text": "Yes please <@U01BKAERQJ1|Amy> ",
+        "ts": "2026-06-22T07:58:53.975Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "The total effort for this update is 6.5 hours <@U01B7QMKXD1>! Should we moving forward with this CR right away?",
+        "ts": "2026-06-22T07:47:30.977Z"
+      },
+      {
+        "channel": "change-requests",
+        "user": "amy",
+        "text": "Hi <@U01B7QMKXD1>! Regarding the Add Reduction feature, do you want us to disable this as well? It seems that the feature can still be used even when the cart has been frozen.",
+        "ts": "2026-06-22T07:31:07.199Z"
+      },
+      {
+        "channel": "maintenance",
+        "user": "amy",
+        "text": "We’ve deployed the fix for this issue on Live, <@U01B7QMKXD1>! You can take a look whenever you have a moment. Please let me know if you notice anything unusual.",
+        "ts": "2026-06-22T07:10:01.409Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Amazing Meds",
+    "total": 1,
+    "inWindow": 1,
+    "messages": [
+      {
+        "channel": "U04QLAGUU8N",
+        "user": "nick",
+        "text": "Hi <@U04QLAGUU8N|John Yi>\n\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:56:38.051Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Generator",
+    "total": 61,
+    "inWindow": 50,
+    "messages": [
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "We have tested it!",
+        "ts": "2026-06-26T09:55:44.738Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Hi <@U05LZ3VPFUY> <@U09DPBQV5SA|Rudi> this has been fixed on the branch for both Android and iOS: fix/926-support-deeplink-universal-link.\n\nThe task for it: <https://trello.com/c/6XJK1jYC/926-improvement-support-deeplink-universal-link-within-the-mobile-apps>",
+        "ts": "2026-06-26T09:55:26.506Z"
+      },
+      {
+        "channel": "triage",
+        "user": "violet",
+        "text": "Hi <@U09DPBQV5SA|Rudi> Carrick and Ryan will check on this next week.\nCarrick is off and Ryan is out of hour this week.",
+        "ts": "2026-06-25T03:44:29.233Z"
+      },
+      {
+        "channel": "triage",
+        "user": "rudi",
+        "text": "<@U076FHDCP96|Ryan> <@U05LXNNR34K|NUS Carrick> can you please review this mr? <https://gitlab.com/generator-tech/generator-cms/-/merge_requests/376> (this is to serve tenant cms assets from s3/cloudfront and to identify tenants dynamically)",
+        "ts": "2026-06-25T02:58:40.187Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "OKay <@U05LZ3VPFUY>",
+        "ts": "2026-06-24T14:10:05.833Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "yes <@U076RUV983T|Violet> as that will be the main use case",
+        "ts": "2026-06-24T10:10:09.216Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "Okay great",
+        "ts": "2026-06-24T06:50:34.275Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Just a font fixing for text. WE can leave it for the next release <@U05LZ3VPFUY>",
+        "ts": "2026-06-24T06:50:15.241Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "We've already done the release.",
+        "ts": "2026-06-24T06:49:36.516Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "I see. Are these fixes related to these features? ",
+        "ts": "2026-06-24T06:49:25.372Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Hi <@U05LZ3VPFUY>, they are all now on develop. However, there is some fixes Jeff added on Monday, please note to add it in the release.",
+        "ts": "2026-06-24T06:44:33.477Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "<@U076RUV983T|Violet> can you confirm if the mobile side of these features have been merged into develop? We cut a release at the end of last week for our features, can we confirm if this includes the mobile work for these features?",
+        "ts": "2026-06-24T06:41:08.937Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "OKay  <@U05LZ3VPFUY> I noted this.",
+        "ts": "2026-06-24T06:38:27.076Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "No <@U076RUV983T|Violet> if Carrick is out of hours and something goes wrong we’ll have an issue. Let's hold off for Monday next week.",
+        "ts": "2026-06-24T06:37:49.767Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Should we add this in <@U05LZ3VPFUY>?",
+        "ts": "2026-06-24T06:30:25.800Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Hi <@U05LZ3VPFUY> <@U09DPBQV5SA|Rudi>, Carrick will be off on Thursday and Friday. He will have finished his 20 hours today. Shall we consider releasing today?",
+        "ts": "2026-06-24T06:20:43.646Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "We can add an internal deep link parser/router. When a user taps a deeplink URL within the app, intercept the URL and route to the corresponding screen directly instead of opening it in the browser. This requires a bit more mobile work.",
+        "ts": "2026-06-24T05:05:49.461Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "<@U076RUV983T|Violet> are you saying that there is no way to just link straight to the form from within the app?",
+        "ts": "2026-06-24T04:50:25.818Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "We'll conduct the live app final check once the source is frozen.",
+        "ts": "2026-06-24T04:44:41.418Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Is this okay <@U05LZ3VPFUY>?\nThe mobile side is good to release for now. Do you need to review the mobile code changes <@U09DPBQV5SA|Rudi>?",
+        "ts": "2026-06-24T04:43:59.122Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "To improve the experience, we have added an \"Open in App\" button on the landing page for both iOS and Android, allowing users to manually continue into the app with one additional tap. We have also configured the page with Apple's Smart App Banner (apple-itunes-app meta tag), so when users open the link in Safari, iOS displays a banner with an Open button at the top of the page, providing another convenient way to return to the app.",
+        "ts": "2026-06-24T03:08:48.567Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Hi <@U05LZ3VPFUY>, <@U09DPBQV5SA|Rudi>\nUniversal Links (iOS) and App Links (Android) are working as designed. They open the app directly when a link is triggered from external apps (e.g., Messages, Mail, Gmail).\n\nHowever, when the user is already in a browser context (Safari/Chrome) or when a link is rendered as a regular web link inside an app/WebView, the OS may intentionally keep the user in the browser to preserve the browsing experience. In these cases, opening the website first and then ta",
+        "ts": "2026-06-24T03:08:35.134Z"
+      },
+      {
+        "channel": "release",
+        "user": "elliott.bouher",
+        "text": "Hey <@U09DPBQV5SA|Rudi> it was the deeplink issue (which is related to the improved form builder updates) so you're both correct :smiley:",
+        "ts": "2026-06-24T02:53:08.293Z"
+      },
+      {
+        "channel": "release",
+        "user": "rudi",
+        "text": "Violet I think it was form builder related. <@U05LZ3VPFUY> can you please provide more details around the issue?",
+        "ts": "2026-06-24T02:47:50.755Z"
+      },
+      {
+        "channel": "release",
+        "user": "violet",
+        "text": "Do you mean the deeplink issue I discussed with Elliott previously <@U09DPBQV5SA|Rudi>? We have fixed that and in testing it.",
+        "ts": "2026-06-24T02:46:05.880Z"
+      },
+      {
+        "channel": "triage",
+        "user": "rudi",
+        "text": "<@U05LXNNR34K|NUS Carrick> <@U076FHDCP96|Ryan> can you please review these central cms changes thanks <https://gitlab.com/generator-tech/generator-api/-/merge_requests/525> and <https://gitlab.com/generator-tech/generator-cms/-/merge_requests/375>",
+        "ts": "2026-06-24T01:40:00.431Z"
+      },
+      {
+        "channel": "release",
+        "user": "rudi",
+        "text": "Hi <@U076RUV983T|Violet>, if we can focus on 58, 361 and 911 to be released. I think Elliott found a defect last time he checked 716, so we're keen to maybe get Parker to re-QA that change.",
+        "ts": "2026-06-24T01:29:39.541Z"
+      },
+      {
+        "channel": "triage",
+        "user": "carrick",
+        "text": "Yes, that’s the right screen (Launch Templates → Actions → Set default version) — that’s what I used.\nAnd correct - since CodeDeploy recreates the ASG on every deploy, you can’t pin it on the ASG. Setting the template’s default version is the durable spot: each new ASG resolves $Default →\nthe right version automatically.",
+        "ts": "2026-06-23T09:36:04.019Z"
+      },
+      {
+        "channel": "triage",
+        "user": "rudi",
+        "text": "is this where you set it?",
+        "ts": "2026-06-23T08:43:14.379Z"
+      },
+      {
+        "channel": "triage",
+        "user": "rudi",
+        "text": "Ok but the asg is dynamically created with each deploy right?",
+        "ts": "2026-06-23T08:38:34.622Z"
+      }
+    ]
+  },
+  {
+    "workspace": "LegalAtoms",
+    "total": 23,
+    "inWindow": 23,
+    "messages": [
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "hotfix-06222026-1 - this is the new one",
+        "ts": "2026-06-22T21:35:51.381Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "ok",
+        "ts": "2026-06-22T21:27:21.177Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "just go again yes",
+        "ts": "2026-06-22T21:27:05.765Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "it succeeded",
+        "ts": "2026-06-22T21:17:26.501Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "should i stop build and do again?",
+        "ts": "2026-06-22T21:16:53.904Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "i missed to cherry pick",
+        "ts": "2026-06-22T21:15:31.736Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "oh",
+        "ts": "2026-06-22T21:15:22.082Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "why not just cherry-pick cbe1bff30782e9112defd55437876b0131986385 your single commit",
+        "ts": "2026-06-22T21:15:09.397Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "why is there so many commits",
+        "ts": "2026-06-22T21:14:54.553Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "<https://github.com/rhuang/jdivorce-ui/commit/fdc692cf04b4950ef0db689751bc6454271ce507> did you merge too much",
+        "ts": "2026-06-22T21:14:46.314Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "ty",
+        "ts": "2026-06-22T21:14:08.654Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "<https://github.com/rhuang/jdivorce-ui/tree/hotfix-06222026|hotfix-06222026>",
+        "ts": "2026-06-22T21:13:01.241Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "ok",
+        "ts": "2026-06-22T21:09:36.424Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "send me the hotfix branch as well;",
+        "ts": "2026-06-22T21:09:09.947Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "im patching",
+        "ts": "2026-06-22T21:06:14.185Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "merged",
+        "ts": "2026-06-22T20:58:09.572Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "lets patch it after you merge",
+        "ts": "2026-06-22T20:56:28.335Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "approved",
+        "ts": "2026-06-22T20:56:25.222Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "<@UCP0Z10CV>",
+        "ts": "2026-06-22T20:56:15.235Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "this is done",
+        "ts": "2026-06-22T20:55:59.211Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "armaghaniqbal",
+        "text": "<https://github.com/rhuang/jdivorce-ui/pull/10632>",
+        "ts": "2026-06-22T20:55:54.683Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "raymond",
+        "text": "should fix this asap",
+        "ts": "2026-06-22T19:11:14.761Z"
+      },
+      {
+        "channel": "tyler-journal",
+        "user": "hashimzahid235",
+        "text": "<@UJE7XHT4L|Armaghan Iqbal> Please check this git for email validation required by the Florida api.\n<https://github.com/rhuang/juristium-clone/issues/20583>",
+        "ts": "2026-06-22T19:10:09.406Z"
+      }
+    ]
+  },
+  {
+    "workspace": "MyPersonalFootballCoach",
+    "total": 3,
+    "inWindow": 3,
+    "messages": [
+      {
+        "channel": "U03G7B08D24",
+        "user": "freelancer",
+        "text": "",
+        "ts": "2026-06-23T03:42:10.396Z"
+      },
+      {
+        "channel": "U03G7B08D24",
+        "user": "freelancer",
+        "text": "",
+        "ts": "2026-06-23T03:27:40.869Z"
+      },
+      {
+        "channel": "U03G7B08D24",
+        "user": "freelancer",
+        "text": "",
+        "ts": "2026-06-23T03:20:34.076Z"
+      }
+    ]
+  },
+  {
+    "workspace": "William Bills",
+    "total": 15,
+    "inWindow": 15,
+    "messages": [
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "Hey <@U09SW451FAB|Lucas> happy Friday",
+        "ts": "2026-06-26T10:00:18.006Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "Hi <@U051TSQ6SHX|Ollie>\n\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:56:30.176Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "I don't have hosting, so I can't check it for you.",
+        "ts": "2026-06-25T06:20:07.768Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "you can check config wp-config.php",
+        "ts": "2026-06-25T06:19:32.886Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "do you remember which one is the live WP one?",
+        "ts": "2026-06-25T06:01:55.315Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "All good I have Ventra log in now, ill reset password through cPanel",
+        "ts": "2026-06-25T03:53:05.957Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "I'll log into Ventra",
+        "ts": "2026-06-25T03:25:28.470Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "The database backup might contain the old password from before the latest change, for example. If you need to check or change your password, you can provide your hosting access information and I will check it quickly for you.",
+        "ts": "2026-06-25T03:24:56.939Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "Yeah not working",
+        "ts": "2026-06-25T03:21:39.359Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "Hi, I didn't change the admin account password.\nIf you need to check, you can provide the information VentraIP.  I'll check it quickly for you.",
+        "ts": "2026-06-25T03:20:35.098Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "We had the normal <mailto:jersey@jersey.com.au|jersey@jersey.com.au> log in and then my admin log in",
+        "ts": "2026-06-25T03:13:12.455Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "Thanks",
+        "ts": "2026-06-25T03:12:47.406Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "lucas",
+        "text": "Let me recall",
+        "ts": "2026-06-25T03:10:04.483Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "What was the password you set for Jersey when you set it up again?",
+        "ts": "2026-06-25T02:39:02.504Z"
+      },
+      {
+        "channel": "U051TSQ6SHX",
+        "user": "oliver",
+        "text": "Hey <@U09SW451FAB|Lucas> how are you today?",
+        "ts": "2026-06-25T02:37:38.012Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Equanimity",
+    "total": 7,
+    "inWindow": 7,
+    "messages": [
+      {
+        "channel": "U03AZ8BD5J4",
+        "user": "carrick",
+        "text": "Hi <@U03AZ8BD5J4>\nI hope you are doing well.\nI wanted to reach out and ask if you know anyone in your network who might be looking for a software development partner. If so, we would greatly appreciate it if you could refer them to us. Please feel free to share our contact or make a quick introduction.\n\nThank you, and hope to hear from you soon.",
+        "ts": "2026-06-26T09:42:51.769Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "carrick",
+        "text": "Hi <@U0646FQQWQ0|Komal>\nI leave until next Monday, sorry for inconvenience",
+        "ts": "2026-06-26T07:56:31.045Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "komal.bailur",
+        "text": "<@U063KV32WH2|NUS Carrick> are u there?",
+        "ts": "2026-06-26T04:50:40.455Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "komal.bailur",
+        "text": "<@U063KV32WH2|NUS Carrick> once done UI enabling let us know so that i can inform client",
+        "ts": "2026-06-25T07:48:31.620Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "komal.bailur",
+        "text": "yes , just UI changes will get enabled right? the actual sending of data ll only happen when we enable it? . So you can enable it.",
+        "ts": "2026-06-25T04:54:12.978Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "carrick",
+        "text": "as we know, we need to enable for all tenant, not only once\nIs this OK?",
+        "ts": "2026-06-25T04:49:59.945Z"
+      },
+      {
+        "channel": "xid-technologies",
+        "user": "komal.bailur",
+        "text": "Hi <@U063KV32WH2|NUS Carrick> our UAT has been successfully confirmed by SGBuildex. The next step is go-live. They are currently providing training and information to clients, and will confirm the go-live date tomorrow.\nIn the meantime, we need to be prepared from our side. The planned go-live order is as follows:\n1. Sim Lian – Rivelle @ Tampines ST95EC (UAT already completed — first priority)\n2. Sim Lian – HDB Bukit Batok (client confirmed 2 days ago)\n3. Ken-Pal\nAs a first step, we need to enab",
+        "ts": "2026-06-25T04:39:31.276Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Aigile Dev",
+    "total": 20,
+    "inWindow": 20,
+    "messages": [
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "Hi <@U029SRWPJ>, there will not be any downtime for the deployment.",
+        "ts": "2026-06-26T07:25:16.076Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Thanks <@U092YFQHWJV|Hendrix>, if you could let me know as soon as possible, that would be great. Thanks!",
+        "ts": "2026-06-26T06:09:07.533Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "OKay <@U029SRWPJ>, we noted this. I'll get back to you then about the downtime.",
+        "ts": "2026-06-26T02:31:27.305Z"
+      },
+      {
+        "channel": "the-gaige-alerts",
+        "user": "the gaige alerts",
+        "text": "",
+        "ts": "2026-06-25T23:07:28.188Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "That's the 29th btw.",
+        "ts": "2026-06-25T06:59:30.430Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Hi <@U092YFQHWJV|Hendrix>, The client wants to bring the deployment to productions to next Monday afternoon (your time), which Monday evening our time. Can I just check, do we need any down time ? If so, about how long? And if so, can we set an exact time so they can tell customers when it will be down?\n\nBig thanks!",
+        "ts": "2026-06-25T06:50:01.982Z"
+      },
+      {
+        "channel": "the-gaige-alerts",
+        "user": "the gaige alerts",
+        "text": "",
+        "ts": "2026-06-24T22:58:42.230Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Thanks, @hendrix!",
+        "ts": "2026-06-24T10:21:35.825Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "Hi <@U029SRWPJ>, it is now fixed. Please take a look. Thanks",
+        "ts": "2026-06-24T10:11:25.477Z"
+      },
+      {
+        "channel": "devopps",
+        "user": "amazon q developer",
+        "text": "",
+        "ts": "2026-06-24T08:41:00.558Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Thanks",
+        "ts": "2026-06-24T05:35:06.340Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "Hi <@U029SRWPJ>, we'll check this now.",
+        "ts": "2026-06-24T03:33:58.800Z"
+      },
+      {
+        "channel": "the-gaige-alerts",
+        "user": "the gaige alerts",
+        "text": "",
+        "ts": "2026-06-23T22:59:09.048Z"
+      },
+      {
+        "channel": "braiking-news",
+        "user": "make",
+        "text": ":warning: BRAiKING NEWS - Blog Not Published Yet!\n\nThis week's blog post is still sitting as a draft.\n\nHeadline: \nDrafted: \n\nReview here: <https://docs.google.com/spreadsheets/d/1ZUTgk0MXyv1NsCM_EVCwT1Lr8kedk6-ufjJpihOx7RQ/edit#gid=682501429>\n\nOnce published, click here to update the spreadsheet: <https://hook.eu2.make.com/8jhergueo3afd3bk83rcd683uwfjbrty>",
+        "ts": "2026-06-23T22:00:06.445Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Hi <@U092YFQHWJV|Hendrix> and <@U04QBDKPS2W|Carrick NUS>, we are just about there. There client has come back with one thing...\n\nI've done a full test on staging including a complete test purchase, and everything is mostly working well.\n•  GTM container (GTM-MH9K7FFP) loading on every page\n• Noscript fallback in place\n• Purchase event firing on the success page with the correct data (transaction ID, AUD currency, product name, price)\n\nOne thing to fix before we go live:\n1.item_id is coming throu",
+        "ts": "2026-06-23T05:37:49.387Z"
+      },
+      {
+        "channel": "the-gaige-alerts",
+        "user": "the gaige alerts",
+        "text": "",
+        "ts": "2026-06-22T23:11:45.221Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Thanks <@U092YFQHWJV|Hendrix>",
+        "ts": "2026-06-22T07:18:05.215Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "Hi <@U029SRWPJ> we have completed these 2 task on staging:\n1. Update the \"Go Back\" button's navigation.\n2. Format the alternate rows in product details page.\n3. Update the GTM script.\nPlease take a look <@U029SRWPJ>. Thanks",
+        "ts": "2026-06-22T07:05:47.403Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "hendrix",
+        "text": "Let me check with team <@U029SRWPJ>",
+        "ts": "2026-06-22T06:59:23.055Z"
+      },
+      {
+        "channel": "etz-nus",
+        "user": "colin",
+        "text": "Hi <@U092YFQHWJV|Hendrix>, can I check on how these fixes are going and especially the tag manager implementation? Thanks, Colin",
+        "ts": "2026-06-22T06:53:12.761Z"
+      }
+    ]
+  },
+  {
+    "workspace": "Baamboozle-MPDM-Aysar",
+    "channel": "MPDM-Aysar-C07SQ4HAUHZ",
+    "inWindow": 4,
+    "messages": [
+      {
+        "user": "U0173MQEXDG",
+        "text": "No problem, Carrick!",
+        "ts": "2026-06-25T05:49:51.171Z"
+      },
+      {
+        "user": "U02T67RLQUV",
+        "text": "No worries ~ thank you for letting us know ",
+        "ts": "2026-06-25T05:10:23.765Z"
+      },
+      {
+        "user": "U069WJ0HPQ8",
+        "text": "Hi <@U02T67RLQUV> <@U0173MQEXDG>\nI will take leave until next Monday for personal issue,\nSorry for your inconvenience",
+        "ts": "2026-06-25T03:09:45.010Z"
+      },
+      {
+        "user": "U069WJ0HPQ8",
+        "text": "Monday’s update:\n• Fix: choose game modal responsive grid -&gt; Dev done + Deployed on Nusdev\n• Fix Aysar reviews code on <https://github.com/baamboozle/baamboozle-web-app/pull/638>",
+        "ts": "2026-06-24T01:48:33.983Z"
+      }
+    ]
+  }
+]
