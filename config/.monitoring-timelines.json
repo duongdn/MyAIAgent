@@ -6,12 +6,16 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-26T09:04:00+07:00",
-    "output_file": "reports/2026-06-26/daily-report.md",
+    "last_run": "2026-06-27T00:00:00+07:00",
+    "output_file": "reports/2026-06-27/daily-report.md",
     "last_status": "complete",
     "caveats": [
-      "Bailey incomplete: GGS Nick performance WARNING",
-      "Fountain incomplete: budget critical 31.5h remaining + Rollbar prod error #1017"
+      "Matrix token expired — cannot scan rooms or send reminders",
+      "Workstream token expired — PhucVT/LeNH 0h unconfirmed (may have Workstream hours)",
+      "nusvinn Discord token expired — Vinn/AirAgri unchecked",
+      "Upwork all sessions expired — Neural Contract/Rory/Aysar Upwork unchecked",
+      "Fountain task log 0h since W29 (Jun 1) — team stopped logging in sheet",
+      "OhCleo: production transcription stuck bug"
     ]
   },
   "refresh": {
@@ -152,8 +156,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-26T09:04:00+07:00",
-    "output_file": "reports/2026-06-26/daily-report.md"
+    "last_run": "2026-06-27T00:00:00+07:00",
+    "output_file": "reports/2026-06-27/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-06-25T12:05:00Z",

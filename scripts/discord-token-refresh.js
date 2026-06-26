@@ -20,7 +20,7 @@ const os = require('os');
 const { execSync, spawn } = require('child_process');
 
 // Chrome paths
-const CHROME_PATH = '/opt/google/chrome/chrome';
+const CHROME_PATH = '/usr/bin/google-chrome';
 const CHROME_USER_DATA = path.join(os.homedir(), '.config/google-chrome');
 const LOCAL_STATE = path.join(CHROME_USER_DATA, 'Local State');
 
