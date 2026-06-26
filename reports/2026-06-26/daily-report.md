@@ -79,9 +79,9 @@ Trello: James Diamond-Vinn ✅, Andrew Taraba ✅ (0 msgs = no activity, gate sa
 | TuanNT | 8.3h (Paturevision) | — | — | 8.3h | ✅ Left early Jun 25, making up Jun 26 |
 | VietPH | — | 8h (Paturevision) | — | 8h | ✅ |
 | KhanhHH | 0h | 0h | ✅ LEAVE Jun 25-26 (approved) | — | ✅ No alert |
-| LeNH | 0h | 0h | — | **0h** | ⚠️ Confirmed 0h across ALL sources for Jun 25 |
+| LeNH | 0h | 0h | — | **0h** | ⚠️ 0h Jun 25 — Matrix reminder sent 09:41+07 |
 
-> LeNH note: Scan **correct** — 0h confirmed across all 13 sheets + all Workstream projects for Jun 25. The "6h40 Peptide Clyde" was Jun 22 (Mon), "4h half-day" was Jun 24 (Wed) — not Jun 25. DuongDN confirmed with LeNH in Matrix at 10:23+07 but was looking at **weekly total** not Jun 25 specifically. Earlier report note was wrong. ⚠️ LeNH Jun 25 = genuine 0h, should be flagged per `feedback_lenh_consolidated` (any combined shortfall = alert).
+> LeNH note: Scan correct — 0h across all 13 sheets + all Workstream projects for Jun 25. "6h40" = Jun 22 (Mon), "half-day" = Jun 24 (Wed) — NOT Jun 25. Earlier ✅ note was wrong (confused week total with day). Matrix reminder sent 09:41+07 to room `!OIrgPraJWrcDTnRVLQ`.
 
 ---
 
