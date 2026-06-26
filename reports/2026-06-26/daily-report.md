@@ -16,6 +16,7 @@
 | 4 | 🔴 HIGH | Fountain | Budget CRITICAL: only 31.5h of est+CR remaining (actual 1557.25h / total 1588.75h) |
 | 5 | 🔴 HIGH | Fountain | Rollbar production error #1017 (same as alert #2 — Fountain project) |
 | 6 | 🟡 ONGOING | MPFC | OAuth2 invalid_grant — real unresolved bug (no new escalation today) |
+| 7 | ⚠️ ALERT | LeNH | 0h Jun 25 across ALL sources (Sheets + Workstream). Earlier ✅ note was wrong — "6h40" = Jun 22, "half-day" = Jun 24. |
 
 ---
 
@@ -78,9 +79,9 @@ Trello: James Diamond-Vinn ✅, Andrew Taraba ✅ (0 msgs = no activity, gate sa
 | TuanNT | 8.3h (Paturevision) | — | — | 8.3h | ✅ Left early Jun 25, making up Jun 26 |
 | VietPH | — | 8h (Paturevision) | — | 8h | ✅ |
 | KhanhHH | 0h | 0h | ✅ LEAVE Jun 25-26 (approved) | — | ✅ No alert |
-| LeNH | 0h scan | 6h40 Peptide Clyde | 4h half-day | 6h40 | ✅ Scan missed new WS project; Matrix confirmed |
+| LeNH | 0h | 0h | — | **0h** | ⚠️ Confirmed 0h across ALL sources for Jun 25 |
 
-> LeNH note: `sheets-tasklog-scan.js` returned 0h because Peptide Clyde is a new WS project (started 22/6) not yet in script's project list. DuongDN confirmed in Matrix chat at 10:23+07 that LeNH logged 6h40 on Workstream Peptide Clyde + 4h half-day off. NOT an alert. Script needs project list update.
+> LeNH note: Scan **correct** — 0h confirmed across all 13 sheets + all Workstream projects for Jun 25. The "6h40 Peptide Clyde" was Jun 22 (Mon), "4h half-day" was Jun 24 (Wed) — not Jun 25. DuongDN confirmed with LeNH in Matrix at 10:23+07 but was looking at **weekly total** not Jun 25 specifically. Earlier report note was wrong. ⚠️ LeNH Jun 25 = genuine 0h, should be flagged per `feedback_lenh_consolidated` (any combined shortfall = alert).
 
 ---
 
