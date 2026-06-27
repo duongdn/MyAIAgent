@@ -12,7 +12,7 @@
 |-------|--------|
 | PhucVT W32 HOURS | ✅ RESOLVED — **32h** via WorkStream (Mon/Tue/Thu/Fri 8h). Off Wed Jun 24 (paid leave). LongVV covered 8h. GSheets only captured 8h (Mon only). |
 | LeNH W32 HOURS | ✅ RESOLVED — **36h 40m** on Blair Brown WorkStream. GSheets 0h because LeNH moved off Rory/Franc to Blair Brown project this week. |
-| KhanhHH W32 HOURS | ⚠️ 24h confirmed (WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h). Elena hours unknown (403). Need Elena to reach 40h. |
+| KhanhHH W32 HOURS | ✅ RESOLVED — **24h = on target**. Leave: Thu Jun 25 + Fri Jun 26 (approved, đám giỗ bà ngoại). Adj target = 40−16 = 24h. WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h = 24h ✓ |
 | CharlesChang sheet (TuanNT) | ⚠️ 403 Forbidden — WS CharlesChang (Family App) blocked. TuanNT 38.6h from PAT only. CharlesChang hours unknown. |
 | VietPH FINAL WEEK | ✅ Last day was Fri Jun 26. Logged 40h (full final week). |
 | Fountain task log (W32) | ⚠️ 4th consecutive week of 0h in GSheets. Team on Workstream since W29. |
@@ -33,7 +33,7 @@
 | AnhNH2 | WS: JD 20h | **20h** | — (no plan) | ✓ OK |
 | VietPH | PAT GSheets W33 | **40h** | 40h | ✓ OK — FINAL WEEK |
 | TuanNT | PAT GSheets W33 | **38.6h** | 40h | ⚠️ −1.4h (CC sheet 403) |
-| KhanhHH | WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h | **24h** | 40h | ⚠️ −16h (Elena 403 — unknown) |
+| KhanhHH | WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h | **24h** | 40h (adj 24h — 2 ngày off) | ✓ OK |
 | LeNH | WS: Blair Brown 36.67h | **36h 40m** | 40h | ✓ OK |
 | Marcel | Marcel GSheets W15 | **0h** | — | ✓ adhoc |
 | DuongDN | PAT GSheets 1h | **1h** | — | ✓ |
