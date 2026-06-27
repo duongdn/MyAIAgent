@@ -10,8 +10,8 @@
 
 | Issue | Status |
 |-------|--------|
-| PhucVT W32 HOURS | ⚠️ ALERT — 8h vs 40h target. No leave found. Significant shortfall. |
-| LeNH W32 HOURS | 🔴 CRITICAL — 0h across ALL sources (Rory, Franc, Rebecca Q-T, JIRA). No leave detected. |
+| PhucVT W32 HOURS | ✅ RESOLVED — **32h** via WorkStream (Mon/Tue/Thu/Fri 8h). Off Wed Jun 24 (paid leave). LongVV covered 8h. GSheets only captured 8h (Mon only). |
+| LeNH W32 HOURS | ✅ RESOLVED — **36h 40m** on Blair Brown WorkStream. GSheets 0h because LeNH moved off Rory/Franc to Blair Brown project this week. |
 | KhanhHH W32 HOURS | ⚠️ ALERT — Only 4h confirmed via Workstream (Baamboozle 2.5h + Colin 1.5h). Generator shows SamHT (not KhanhHH). Elena sheet 403 error. |
 | Elena sheet (KhanhHH) | ⚠️ 403 Permission denied — service account lacks access to Elena sheet `1dH14D_...`. Cannot fetch Elena hours. Needs manual check. |
 | CharlesChang sheet (TuanNT) | ⚠️ 404 Not found — sheet ID `1RGBUq6...` appears invalid or deleted. TuanNT CharlesChang hours unavailable. |
@@ -30,12 +30,12 @@
 | Developer | Sources | W32 Hours | Target | Adj Target | Status |
 |-----------|---------|-----------|--------|------------|--------|
 | LongVV | Maddy GSheets W12 | **16h** | 16h | 16h | ✓ OK |
-| PhucVT | JD GSheets W31 | **8h** | 40h | 40h | ⚠️ ALERT −32h |
-| AnhNH2 | JD GSheets W31 | **4h** | — | — | (no plan) |
+| PhucVT | JD WorkStream | **32h** | 40h | 32h (Wed off) | ✓ OK |
+| AnhNH2 | JD WorkStream | **20h** | — | — | ✓ (no plan) |
 | VietPH | PAT GSheets W33 | **40h** | 40h | 40h | ✓ OK — FINAL WEEK |
 | TuanNT | PAT W33 (38.6h) + others 0h | **38.6h** | 40h | 40h | ⚠️ −1.4h (possible rounding / CC unavailable) |
 | KhanhHH | Baamboozle WS 2.5h + Colin WS 1.5h | **4h+** | 40h | 40h | ⚠️ ALERT — data gaps |
-| LeNH | Rory W17 0h + Franc 0h + Rebecca Q-T 0h | **0h** | 40h | 40h | 🔴 CRITICAL −40h |
+| LeNH | Blair Brown WorkStream | **36h 40m** | 40h | 40h | ✓ OK (on Blair Brown project) |
 | Marcel | Marcel GSheets W15 | **0h** | — | — | ✓ adhoc |
 | DuongDN | PAT 1h + Blair Brown WS 0h | **1h** | — | — | ✓ (Colin/ETZ handoff week) |
 
@@ -255,34 +255,35 @@ Key tasks status (W32):
 
 **Status: NOT YET SENT — awaiting confirmation**
 
-### Data for this week:
+### Data for this week (corrected — source: WorkStream):
 
-| Dev | Project | Charge | Actual |
-|-----|---------|--------|--------|
-| PhucVT | JD Web | 40h | 8h |
-| LongVV | JD Web | 0h | 0h |
-| AnhNH2 | JD Mobile | 4h | 4h |
-| DuongDN | Marcel | 0h | 0h |
-| DuongDN | Blair Brown | 0h | 0h |
+| Dev | Project | Charge | Actual | Source | Notes |
+|-----|---------|--------|--------|--------|-------|
+| PhucVT | JD Web | 32h | 32h | WorkStream | Off Wed Jun 24 |
+| LongVV | JD Web | 8h | 8h | WorkStream | Wed only (cover PhucVT) |
+| AnhNH2 | JD Mobile | 20h | 20h | WorkStream | Mon–Fri 4h/day |
+| DuongDN | Marcel | 0h | 0h | GSheets | adhoc |
+| LeNH | Blair Brown | 36h 40m | 36h 40m | WorkStream | Mon–Fri |
 
-Web total: charge=40h (contract always), actual=8h (PhucVT 8h + LongVV 0h)
-Mobile total: charge=4h, actual=4h (AnhNH2)
+**Why GSheets showed wrong numbers:** JD and Blair Brown teams migrated to WorkStream logging. GSheets only captured partial hours (PhucVT 8h Mon in GSheets, rest in WorkStream; LeNH hours entirely in WorkStream Blair Brown project).
 
-⚠️ **NOTE**: PhucVT showing only 8h this week (vs 40h W31). If PhucVT was on leave or hours not fully logged, the actual and charge numbers will need correction before sending. Verify PhucVT hours before sending.
+Web total: charge=40h (contract), actual=32h (PhucVT) + 8h (LongVV) = 40h
+Mobile total: charge=20h, actual=20h (AnhNH2)
+Note: PhucVT off 1 day Wed Jun 24 — LongVV covered with 8h JD.
 
-**Prepared message (NOT YET SENT — verify PhucVT hours first):**
+**Prepared message (NOT YET SENT — awaiting send confirmation):**
 
 ```
 Report week 23/06
 
 James Diamond
 
-Web: 40h/8h
-PhucVT: 40h/8h
-LongVV: 0h/0h
+Web: 40h/40h (off 1 day dùng paid leave)
+PhucVT: 32h/32h (off 1 day dùng paid leave)
+LongVV: 8h/8h
 
-Mobile: 4h/4h
-AnhNH2: 4h/4h
+Mobile: 20h/20h
+AnhNH2: 20h/20h
 
 ---
 
@@ -291,8 +292,8 @@ DuongDN: 0h
 
 ---
 
-Blair Brown
-DuongDN: 0h
+Blair Brown - Peptide Clyde
+LeNH: 36h 40m
 ```
 
 ---

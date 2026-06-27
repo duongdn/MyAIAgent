@@ -37,6 +37,8 @@ Rules:
 - **Why (2026-05-15):** User corrected my sent message that had `Web: 48h/40h` + `PhucVT: 40h/32h`. Correct was `Web: 40h/40h` + `PhucVT: 32h/32h`. Reason: "for internal, we only have 40h, if dev off, we need use paid leave or use another dev". LongVV's 8h JD W26 was NOT his own contract — it was covering PhucVT's Wed paid leave.
 - Hours as Xh Ym format (not decimal). E.g. 1.33h → 1h 20m
 
+**Data source (W32 onwards):** James Diamond team uses WorkStream (`cmqook9vf0kl8m81vusyo8ppt`, "Portfolio - James Diamond"). Use `/review/week?projectId=...` manager endpoint — GSheets only captures partial hours. Blair Brown also on WorkStream (`cmqj4tj6v01gfm81vgx7ipkov`), LeNH is dev from W32. LeNH in Matrix message section is `LeNH: Xh Ym`.
+
 **Why:** User corrected wrong format (was showing actual/plan with `-` prefix, wrong AnhNH2 plan of 18h). Confirmed via 2026-03-21 weekly report session. **2026-04-25:** User explicitly corrected omission of LongVV from Web — "Why no LongVV on web dev ????". Standalone message sent without LongVV had to be corrected.
 
 **How to apply:** Always use this format when generating the James Diamond + Marcel Matrix message. When in doubt about who belongs on Web/Mobile, ASK before sending — do not default to "old format" if a developer has been added to the project.
