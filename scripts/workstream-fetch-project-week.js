@@ -26,6 +26,8 @@ const PROJECTS = {
   maddy:       { id: 'cmpqc1v7v00ahtk1vs1817xt8', name: 'Xtreme Soft Solutions', client: 'Maddy',       manager: true  },
   rebecca:     { id: 'cmpqcflkx00litk1vic3vki6j', name: 'MissSwimwear',           client: 'Rebecca',     manager: true  },
   blair_brown: { id: 'cmqj4tj6v01gfm81vgx7ipkov', name: 'WordPress Update',       client: 'Blair Brown', manager: false },
+  baamboozle:  { id: 'cmqez93ka07q8p81v7035l3td', name: 'Baamboozle',             client: 'Baamboozle',  manager: true  },
+  colin_etz:   { id: 'cmqezatb807qvp81vpnzzimmp', name: 'Colin/ETZ',               client: 'Colin',       manager: true  },
 };
 
 // Parse hours "H:MM" -> decimal
