@@ -32,8 +32,8 @@ Rules:
 - **Paid leave handling — backfill rule:**
   1. PhucVT line: charge = plan − leave hours, actual = on-duty hours. E.g. PhucVT plan 40h, 1 paid day off → `PhucVT: 32h/32h`.
   2. Backfill dev (LongVV) line: charge = actual = backfill hours. E.g. LongVV covered 1 day → `LongVV: 8h/8h`.
-  3. Web section: charge = 40h (contract), actual = sum of dev actuals (e.g. 32 + 8 = 40h). → `Web: 40h/40h (off 1 day dùng paid leave)`.
-  4. Append `(off X day dùng paid leave)` to both the Web section line and the leaving dev's line. Backfill dev's line does NOT get the annotation.
+  3. Web section: charge = 40h (contract), actual = sum of dev actuals (e.g. 32 + 8 = 40h). → `Web: 40h/40h`.
+  4. **`(off X day dùng paid leave)` annotation ONLY when actual < contract (shortfall not covered by backfill).** If LongVV covers the full leave hours → Web actual = 40h → NO annotation on any line. Annotation is only to explain a remaining shortfall to the client.
 - **Why (2026-05-15):** User corrected my sent message that had `Web: 48h/40h` + `PhucVT: 40h/32h`. Correct was `Web: 40h/40h` + `PhucVT: 32h/32h`. Reason: "for internal, we only have 40h, if dev off, we need use paid leave or use another dev". LongVV's 8h JD W26 was NOT his own contract — it was covering PhucVT's Wed paid leave.
 - Hours as Xh Ym format (not decimal). E.g. 1.33h → 1h 20m
 

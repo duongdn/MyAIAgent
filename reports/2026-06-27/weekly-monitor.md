@@ -278,8 +278,8 @@ Report week 23/06
 
 James Diamond
 
-Web: 40h/40h (off 1 day dùng paid leave)
-PhucVT: 32h/32h (off 1 day dùng paid leave)
+Web: 40h/40h
+PhucVT: 32h/32h
 LongVV: 8h/8h
 
 Mobile: 20h/20h
@@ -295,6 +295,8 @@ DuongDN: 0h
 Blair Brown - Peptide Clyde
 LeNH: 36h 40m
 ```
+
+Note: "(off 1 day dùng paid leave)" bỏ vì LongVV đã bù đủ — Web actual = 40h = contract. Annotation chỉ dùng khi actual < contract (shortfall chưa được cover).
 
 ---
 
