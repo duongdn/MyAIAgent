@@ -116,6 +116,7 @@
 
 ## weekly-report
 - [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — James Diamond + Marcel weekly Matrix format; Blair Brown: dev, Workstream ID, FORBIDDEN status
+- [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md) — **ALWAYS fetch WS /review/week for ALL projects first** — teams log in WS not GSheets (JD, Blair Brown, Fountain, Generator, Baamboozle, Colin all WS-only)
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md) — All 8 Monday report sheet IDs

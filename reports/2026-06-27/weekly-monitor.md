@@ -12,9 +12,8 @@
 |-------|--------|
 | PhucVT W32 HOURS | ✅ RESOLVED — **32h** via WorkStream (Mon/Tue/Thu/Fri 8h). Off Wed Jun 24 (paid leave). LongVV covered 8h. GSheets only captured 8h (Mon only). |
 | LeNH W32 HOURS | ✅ RESOLVED — **36h 40m** on Blair Brown WorkStream. GSheets 0h because LeNH moved off Rory/Franc to Blair Brown project this week. |
-| KhanhHH W32 HOURS | ⚠️ ALERT — Only 4h confirmed via Workstream (Baamboozle 2.5h + Colin 1.5h). Generator shows SamHT (not KhanhHH). Elena sheet 403 error. |
-| Elena sheet (KhanhHH) | ⚠️ 403 Permission denied — service account lacks access to Elena sheet `1dH14D_...`. Cannot fetch Elena hours. Needs manual check. |
-| CharlesChang sheet (TuanNT) | ⚠️ 404 Not found — sheet ID `1RGBUq6...` appears invalid or deleted. TuanNT CharlesChang hours unavailable. |
+| KhanhHH W32 HOURS | ⚠️ 24h confirmed (WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h). Elena hours unknown (403). Need Elena to reach 40h. |
+| CharlesChang sheet (TuanNT) | ⚠️ 403 Forbidden — WS CharlesChang (Family App) blocked. TuanNT 38.6h from PAT only. CharlesChang hours unknown. |
 | VietPH FINAL WEEK | ✅ Last day was Fri Jun 26. Logged 40h (full final week). |
 | Fountain task log (W32) | ⚠️ 4th consecutive week of 0h in GSheets. Team on Workstream since W29. |
 | Upwork | 🔴 BLOCKED — Cloudflare challenge. Cannot fetch Rory, Neural, Aysar hours. Run `node scripts/upwork-weekly-hours.js --login` to refresh. |
@@ -27,17 +26,22 @@
 
 ### Summary Table
 
-| Developer | Sources | W32 Hours | Target | Adj Target | Status |
-|-----------|---------|-----------|--------|------------|--------|
-| LongVV | Maddy GSheets W12 | **16h** | 16h | 16h | ✓ OK |
-| PhucVT | JD WorkStream | **32h** | 40h | 32h (Wed off) | ✓ OK |
-| AnhNH2 | JD WorkStream | **20h** | — | — | ✓ (no plan) |
-| VietPH | PAT GSheets W33 | **40h** | 40h | 40h | ✓ OK — FINAL WEEK |
-| TuanNT | PAT W33 (38.6h) + others 0h | **38.6h** | 40h | 40h | ⚠️ −1.4h (possible rounding / CC unavailable) |
-| KhanhHH | Baamboozle WS 2.5h + Colin WS 1.5h | **4h+** | 40h | 40h | ⚠️ ALERT — data gaps |
-| LeNH | Blair Brown WorkStream | **36h 40m** | 40h | 40h | ✓ OK (on Blair Brown project) |
-| Marcel | Marcel GSheets W15 | **0h** | — | — | ✓ adhoc |
-| DuongDN | PAT 1h + Blair Brown WS 0h | **1h** | — | — | ✓ (Colin/ETZ handoff week) |
+| Developer | Sources | W32 Hours | Target | Status |
+|-----------|---------|-----------|--------|--------|
+| LongVV | WS: Maddy 8h + JD 8h | **16h** | 16h | ✓ OK |
+| PhucVT | WS: JD 32h | **32h** | 40h (Wed off) | ✓ OK |
+| AnhNH2 | WS: JD 20h | **20h** | — (no plan) | ✓ OK |
+| VietPH | PAT GSheets W33 | **40h** | 40h | ✓ OK — FINAL WEEK |
+| TuanNT | PAT GSheets W33 | **38.6h** | 40h | ⚠️ −1.4h (CC sheet 403) |
+| KhanhHH | WS: Generator 20h + Baamboozle 2.5h + Colin 1.5h | **24h** | 40h | ⚠️ −16h (Elena 403 — unknown) |
+| LeNH | WS: Blair Brown 36.67h | **36h 40m** | 40h | ✓ OK |
+| Marcel | Marcel GSheets W15 | **0h** | — | ✓ adhoc |
+| DuongDN | PAT GSheets 1h | **1h** | — | ✓ |
+| **Fountain: ViTHT** | WS: Fountain 32h | **32h** | 40h (Thu off) | ✓ OK |
+| **Fountain: ThinhT** | WS: Fountain 20h | **20h** | 20h | ✓ OK |
+| **Fountain: VuTQ** | WS: Fountain 4h | **4h** | — | ⚠️ low |
+| **Fountain: HungPN** | WS: Fountain 13.25h | **13.25h** | — (QC) | ✓ |
+| **Fountain: PhatDLT** | WS: Fountain 7.5h | **7.5h** | — (QC) | ✓ |
 
 ### Sheet Tab Reference (W32)
 
@@ -165,20 +169,19 @@ Notable activity context from Matrix:
 
 ### Part 2 — Task Log Actuals (W32)
 
-**⚠️ UNAVAILABLE (4th consecutive week)** — Fountain team on Workstream since W29. GSheets tab W32 shows 0h for all devs.
+**Source: WorkStream "Fountain Greetings" project** (`/review/week?projectId=cmpqcjojh00q2tk1v2qi7gs0j`)
 
-| Dev | W32 GSheets | Notes |
-|-----|-------------|-------|
-| ViTHT | 0h | Off Thu Jun 26 (Matrix confirmed) |
-| ThinhT | 0h | Active in Matrix |
-| VuTQ | 0h | Active in Matrix |
-| DatNT | 0h | Active in Matrix |
-| HaVS | 0h | Not observed in Matrix this week |
-| LamLQ | 0h | Not in scope (left team) |
-| PhatDLT | 0h | Not observed |
-| HungPN | 0h | Active in Matrix (QA) |
+| Dev | W32 WorkStream | Notes |
+|-----|----------------|-------|
+| ViTHT | **32h** | Off Thu Jun 26 (5d × 8h − 8h = 32h) ✓ |
+| ThinhT | **20h** | On plan ✓ |
+| VuTQ | **4h** | ⚠️ low — check if on other project |
+| HungPN | **13.25h** | QC ✓ |
+| PhatDLT | **7.5h** | QC ✓ |
+| DatNT | 0h | Not logged this week |
+| HaVS | 0h | Not in W32 WS |
 
-Last filled week = W28 (May 25–31). 4 consecutive weeks (W29–W32) with 0h GSheets.
+GSheets tab W32: still 0h (team fully on WorkStream since W29).
 
 ### Part 3 — Plan vs Actual
 
