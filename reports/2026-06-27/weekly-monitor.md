@@ -397,3 +397,56 @@ Cannot cross-check:
 ---
 
 *Raw data source files: `reports/2026-06-27/sheets-raw.json` (not written separately — data included above). Workstream: `scripts/workstream-fetch-project-week.js` run 2026-06-27. Fountain: `/tmp/fountain-scan-w32.py` output. Matrix: `reports/2026-06-27/matrix-rooms-0919.md`.*
+
+---
+
+## End-of-Day Update (2026-06-27 17:05 +07)
+
+Re-run at end of workday to confirm final W32 hours. **No changes to WorkStream numbers** — all final.
+
+### WorkStream Final (17:05)
+
+| Project | Members | Hours |
+|---------|---------|-------|
+| JD (Web) | PhucVT 32h, LongVV 8h, AnhNH2 20h | Web 40h / Mobile 20h |
+| Generator | KhanhHH 20h, SamHT 10h, LucNT 10h, NamNN 20h | KhanhHH confirmed 20h |
+| Baamboozle | KhanhHH 2.5h | — |
+| Colin/ETZ | KhanhHH 1.5h | — |
+| Blair Brown | LeNH 36.67h | — |
+| Maddy | LongVV 8h | — |
+| Fountain | ViTHT 32h, ThinhT 20h, VuTQ 4h, HungPN 13.25h, PhatDLT 7.5h | Unchanged |
+
+**KhanhHH total final: 20 + 2.5 + 1.5 = 24h** ✓ (adj target 24h — Thu/Fri off)
+**LongVV total final: Maddy 8h (GSheets 16h) + JD 8h = total 24h (WS) / 16h+8h=24h** ✓
+
+### JIRA Update (17:05)
+
+| Dev | Morning | Evening | Change |
+|-----|---------|---------|--------|
+| LongVV (madhuraka) | 0h | **8h** (LIFM2-446 Jun 25) | ↑ updated |
+| LeNH (swiftstudio BXR) | 0h | 0h | expected (moved to Blair Brown) |
+
+LongVV JIRA gap vs GSheets: **8h** (was 16h gap this morning — JIRA caught up partially).
+GSheets Maddy shows 16h; JIRA shows 8h for W32. Possible: Thu 8h logged to LIFM2-446, remaining 8h (Fri or other days) not yet submitted to JIRA.
+
+### Generator New Members
+
+Generator WS shows 3 additional members beyond KhanhHH: **SamHT (10h), LucNT (10h), NamNN (20h)**. These were not in the morning report summary. This confirms KhanhHH is not the only Generator dev this week.
+
+### Upwork (17:05)
+
+Still blocked by Cloudflare for all 3 workrooms (Rory, Neural, Aysar). Requires manual browser login:
+```
+! node scripts/upwork-weekly-hours.js --login
+```
+
+### Final Status
+
+| Item | Status |
+|------|--------|
+| Matrix JD+Marcel+Blair Brown message | ✅ SENT 09:39 |
+| Team hours all captured | ✅ (WS primary, GSheets secondary) |
+| LongVV JIRA gap | ⚠️ 8h gap (vs 16h GSheets — partially caught up) |
+| Upwork cross-check | ⚠️ BLOCKED — Cloudflare |
+| CharlesChang (TuanNT) | ⚠️ 404 — sheet not found |
+| Elena sheet (KhanhHH) | ⚠️ 403 — no service account access |
