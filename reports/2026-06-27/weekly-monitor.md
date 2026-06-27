@@ -271,7 +271,7 @@ Web total: charge=40h (contract), actual=32h (PhucVT) + 8h (LongVV) = 40h
 Mobile total: charge=20h, actual=20h (AnhNH2)
 Note: PhucVT off 1 day Wed Jun 24 — LongVV covered with 8h JD.
 
-**Prepared message (NOT YET SENT — awaiting send confirmation):**
+**✅ SENT 2026-06-27 09:39 +07 — event_id: $XkYPraW7QhaX1dhnGzgobu_F7hTEMom8wF6giAGpeuk**
 
 ```
 Report week 23/06
