@@ -6,17 +6,18 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-28T05:24:00+07:00",
-    "output_file": "reports/2026-06-28/daily-report.md",
+    "last_run": "2026-06-29T05:00:55+07:00",
+    "output_file": "reports/2026-06-29/daily-report.md",
     "last_status": "complete",
     "caveats": [
       "Matrix token expired \u2014 SSO ETIMEDOUT, cannot scan rooms",
-      "Workstream token expired \u2014 SSO failed (all devs 0h weekend anyway)",
+      "Workstream token expired \u2014 SSO failed (KhanhHH leave Jun 25-26 approved anyway)",
       "nusvinn Discord token 401 \u2014 Vinn/AirAgri unchecked",
       "Upwork all sessions expired \u2014 Rory/Aysar unchecked",
-      "Fountain task log 0h since W29 (Jun 1) \u2014 5 weeks no logging",
+      "Fountain task log 0h since W29 (Jun 1) \u2014 6 weeks no logging",
       "Zoho IMAP auth fail for carrick/nick/rick/kai \u2014 app passwords may need rotation",
-      "OhCleo: production transcription stuck bug (ongoing)"
+      "PhucVT 0h alert Jun 26 \u2014 reminder pending (Matrix down)",
+      "LeNH 0h alert Jun 26 \u2014 reminder pending (Matrix down)"
     ]
   },
   "refresh": {
@@ -157,8 +158,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-28T05:24:00+07:00",
-    "output_file": "reports/2026-06-28/daily-report.md"
+    "last_run": "2026-06-29T05:00:55+07:00",
+    "output_file": "reports/2026-06-29/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-06-25T12:05:00Z",
