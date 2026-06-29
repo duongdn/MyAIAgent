@@ -7,7 +7,7 @@ Generated: 2026-06-29 (Mon) | Reporting Mon→Sun
 | Project | Internal | External | Dev Hours | Note |
 |---|---|---|---|---|
 | Maddy - Xtreme Soft Solutions | 4 | 1 | 16.00 | 4 UI bugs (action tag, lock cells, tooltip, double popup); madhuraka: Shopify image ordering issue |
-| Aysar Khalid - Baamboozle | 0 | 3 | 0.00 | skjamie25: error msgs bug, site down Vietnam, responsive grid issue |
+| Aysar Khalid - Baamboozle | 0 | 3 | 2.50 | skjamie25: error msgs bug, site down Vietnam, responsive grid issue; hours from Workstream (KhanhHH) |
 | James Diamond - Portfolio | 0 | 3 | 12.00 | bellatric02: Withcott user issue, File Manager share bug, Assets attachment bug |
 | Bailey Joey - Speedventory | 12 | 0 | 84.60 | UI sprint — 3 new, 9 on staging (Prestashop Grazing Software Desktop) |
 | Marcel Fuessinger - Tokenlite | 0 | 0 | 0.00 | No activity |
@@ -35,7 +35,7 @@ Generated: 2026-06-29 (Mon) | Reporting Mon→Sun
   - @skjamie25 #testing: bugs with error messages on Change Team Owner feature
   - @skjamie25: site not working on production for user in Vietnam
   - @skjamie25: responsive layout issue found during testing video for Ronan
-- **Dev hours (Summary W30 col D):** 0.00h
+- **Dev hours (Workstream):** 2.50h — KhanhHH: 2.5h (Mon Jun 22); GSheet W30 = 0 because Baamboozle logs on Workstream
 
 ### 3. James Diamond - Portfolio
 - **Internal (Redmine `james-bonsey-jaden` tracker_id=1):** 0
