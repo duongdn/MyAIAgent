@@ -6,18 +6,17 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-06-29T09:48:53+07:00",
-    "output_file": "reports/2026-06-29/daily-report.md",
+    "last_run": "2026-06-30T05:01:00+07:00",
+    "output_file": "reports/2026-06-30/daily-report.md",
     "last_status": "complete",
     "caveats": [
-      "Matrix token expired \u2014 SSO ETIMEDOUT, cannot scan rooms",
-      "Workstream token expired \u2014 SSO failed (KhanhHH leave Jun 25-26 approved anyway)",
-      "nusvinn Discord token 401 \u2014 Vinn/AirAgri unchecked",
-      "Upwork all sessions expired \u2014 Rory/Aysar unchecked",
-      "Fountain task log 0h since W29 (Jun 1) \u2014 6 weeks no logging",
-      "Zoho IMAP auth fail for carrick/nick/rick/kai \u2014 app passwords may need rotation",
-      "PhucVT 0h alert Jun 26 \u2014 reminder pending (Matrix down)",
-      "LeNH 0h alert Jun 26 \u2014 reminder pending (Matrix down)"
+      "Matrix token expired \u2014 SSO ETIMEDOUT, cannot scan rooms (Jun 30 cron)",
+      "Workstream token expired \u2014 SSO failed, sheets-only data for all devs (Jun 30 cron)",
+      "Upwork all sessions expired \u2014 Rory/Aysar/Neural unchecked (Jun 30 cron)",
+      "MS Teams security challenge \u2014 Philip Briggs check unavailable (Jun 30 cron)",
+      "TuanNT/PhucVT/KhanhHH/LeNH/VietPH hours unverified \u2014 Workstream down",
+      "LegalAtoms CRITICAL \u2014 Raymond+Talha escalating Proxy API prod issue to Nick (03:53+07)",
+      "MPFC PHP errors #47/#48 \u2014 MM_CoreMembershipUtils + MM_PaymentServiceFactory"
     ]
   },
   "refresh": {
@@ -158,8 +157,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-06-29T09:48:53+07:00",
-    "output_file": "reports/2026-06-29/daily-report.md"
+    "last_run": "2026-06-30T05:01:00+07:00",
+    "output_file": "reports/2026-06-30/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-06-25T12:05:00Z",
