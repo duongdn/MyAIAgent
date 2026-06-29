@@ -8,7 +8,7 @@ Generated: 2026-06-29 (Mon) | Reporting Mon→Sun
 |---|---|---|---|---|
 | Maddy - Xtreme Soft Solutions | 4 | 1 | 16.00 | 4 UI bugs (action tag, lock cells, tooltip, double popup); madhuraka: Shopify image ordering issue |
 | Aysar Khalid - Baamboozle | 0 | 3 | 2.50 | skjamie25: error msgs bug, site down Vietnam, responsive grid issue; hours from Workstream (KhanhHH) |
-| James Diamond - Portfolio | 0 | 3 | 12.00 | bellatric02: Withcott user issue, File Manager share bug, Assets attachment bug |
+| James Diamond - Portfolio | 0 | 3 | 60.00 | bellatric02: Withcott user issue, File Manager share bug, Assets attachment bug; hours from Workstream (AnhNH2 20h + LongVV 8h + PhucVT 32h) |
 | Bailey Joey - Speedventory | 12 | 0 | 84.60 | UI sprint — 3 new, 9 on staging (Prestashop Grazing Software Desktop) |
 | Marcel Fuessinger - Tokenlite | 0 | 0 | 0.00 | No activity |
 | Neural Contract - Neural Contract - Test Job | 0 | 0 | 0.00 | No activity |
@@ -43,7 +43,7 @@ Generated: 2026-06-29 (Mon) | Reporting Mon→Sun
   - bellatric02: Damien Gibbons (Withcott) reported issue needing investigation
   - bellatric02: File Manager — Users cannot share files/SDS to another user
   - bellatric02: Assets module — attachment accessible after successful upload (unexpected behavior)
-- **Dev hours (Summary W31 col D):** 12.00h
+- **Dev hours (Workstream):** 60.00h — AnhNH2: 20h, LongVV: 8h, PhucVT: 32h; GSheet W31=12h ignored (JD is WS-only)
 
 ### 4. Bailey Joey - Speedventory
 - **Internal (Redmine `bailey-paturevision` tracker_id=1):** 12
