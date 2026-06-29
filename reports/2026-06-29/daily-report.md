@@ -12,15 +12,17 @@
 |---|--------|-------|
 | 1 | Sheets | PhucVT: 0h on Fri Jun 26, no approved leave — reminder needed |
 | 2 | Sheets | LeNH: 0h on Fri Jun 26, no approved leave — reminder needed |
-| 3 | Email | Zoho IMAP auth fail: carrick/nick/rick/kai — accounts unreadable (ongoing, app password rotation needed) |
-| 4 | Matrix | SSO unavailable in cron — Fountain Matrix plan not retrieved; Matrix room scan skipped |
-| 5 | Fountain | Task log 0h for 6th consecutive week (W32) — team not logging to Google Sheet |
-| 6 | Fountain | #2615: 890% over-estimate (actual 106.75h vs 12h est) — Deployed on Staging |
-| 7 | Fountain | #2702: 319% over (actual 25.5h vs 8h est) — In-progress >50% (active/growing risk) |
-| 8 | Discord | nusvinn token invalid — AirAgri/Vinn not checked (token needs refresh) |
-| 9 | Upwork | Sessions expired — Rory/Aysar/Bailey Upwork weekly hours unavailable |
+| 3 | Fountain | Task log 0h for 6th consecutive week (W32) — team not logging to Google Sheet |
+| 4 | Fountain | #2615: 890% over-estimate (actual 106.75h vs 12h est) — Deployed on Staging |
+| 5 | Fountain | #2702: 319% over (actual 25.5h vs 8h est) — In-progress >50% (active/growing risk) |
+| 6 | Matrix/Maddy | LIFM2-439 regression — client complaint "lack of dev testing/QA"; QC missed related parts; DuongDN escalating |
+| 7 | Tech Dept | Carrick GitHub account being locked — old password login attempts by team members |
+| 8 | Resource | VuTQ/TriNM/ThoTNT/SamHT/PhucNH sick today — Fountain + Elena capacity down |
+| 9 | Upwork | Rory/Aysar sessions expired — weekly hours unavailable |
 
-**Today (Mon Jun 29):** KhanhHH back from leave. LongVV back from half-day. PhucVT and LeNH missing Jun 26 task logs — reminders due.
+*Resolved since cron: Email carrick/nick/rick/kai auth ✓, Discord nusvinn ✓, Matrix SSO ✓, Workstream ✓*
+
+**Today (Mon Jun 29):** KhanhHH back from leave. LongVV back from half-day. VuTQ/TriNM/ThoTNT/SamHT/PhucNH sick. PhucVT and LeNH missing Jun 26 task logs — reminders due. ViTHT status: active in Fountain Matrix despite Friday "off" note (current day OK).
 
 ---
 
@@ -241,7 +243,8 @@ Trello: Elena-SamGuard ✓ complete, Elena-WordPress ✓ complete.
 | Ohcleo | Work | ✓ complete | 0 msgs (weekend OK) |
 | Elena - WordPress | Pending | ✓ complete | samguard.co clean ✓ |
 
-**15 of 19 items completed.** Remaining: Maddy (await Mon Kai report), James/Vinn (nusvinn token), Aysar (await Mon afternoon), Fountain (Matrix token), Philip (MS Teams SSO).
+**16 of 20 items completed.** Remaining: Maddy (Kai report pending + quality ALERT), Aysar (await Mon ~17:00+07), Fountain (W33 plan pending + task log 0h), Philip (MS Teams content extraction failed).
+Resolved since cron: James Diamond ✓ (Discord working, Vinn morning report confirmed).
 
 ---
 
@@ -256,7 +259,7 @@ Trello: Elena-SamGuard ✓ complete, Elena-WordPress ✓ complete.
 | Rick | ○ pending | Zoho auth issue |
 | Kai | ○ pending | Zoho auth issue |
 
-2 of 6 items completed.
+6 of 6 items completed ✓ — card marked done (recheck 09:40+07: auth fixed, 0 emails in window for all accounts).
 
 ---
 
@@ -297,11 +300,148 @@ Matrix token expired. SSO requires browser interaction — headless cron cannot 
 
 ## Unresolved Questions
 
-1. **Zoho IMAP auth fail (carrick/nick/rick/kai):** App passwords appear expired. Manual rotation required via Zoho Admin panel.
-2. **Matrix SSO:** Persisting across multiple cron runs — likely requires user to complete browser login once to refresh the saved session.
-3. **Fountain task log 0h (6 weeks):** Is the team logging elsewhere? Or have they stopped entirely? Should escalate to TrinhMTT.
-4. **nusvinn Discord token:** Invalid — when was it last rotated? User action needed.
-5. **Upwork sessions:** Require browser login — cannot automate without solving CAPTCHA.
-6. **PhucVT 0h Jun 26:** Was this intentional (undeclared WFH, left early)? No explanation submitted.
-7. **LeNH 0h Jun 26:** Same as PhucVT — needs explanation.
-8. **Workstream token:** Expired — SSO failed in cron. Needs browser login to refresh.
+1. **Fountain task log 0h (6 weeks):** Is the team logging elsewhere? Or have they stopped entirely? Should escalate to TrinhMTT.
+2. **PhucVT 0h Jun 26:** Was this intentional (undeclared WFH, left early)? No explanation submitted.
+3. **LeNH 0h Jun 26:** Same as PhucVT — needs explanation.
+4. **Fountain W33 plan:** Not posted yet as of 09:39+07. VuTQ sick today. Check after 10:00.
+5. **Maddy LIFM2-439 regression:** ThanhNX (QC) admitted test case didn't cover related parts. DuongDN ordered test case audit "gấp". Resolution pending.
+6. **Upwork Rory/Aysar sessions:** Still expired — not resolvable without browser login from carrick/vinn/david2 accounts.
+7. **Philip MS Teams:** Session loaded, 1 message detected, content extraction failed (DOM timing). Manual check: open Teams as will@nustechnology.com and check Philip Briggs (Six Star Rentals) chat.
+
+---
+
+## Re-check — 09:41 (+07:00)
+
+*Recheck triggered: cron had 4 auth failures (email/Discord/Matrix/Workstream). All credentials rotated last session.*
+
+| Item | Result | Details |
+|------|--------|---------|
+| Email — Carrick | ✓ completed | Auth fixed (new app password). 0 emails in window (Sat–Mon). |
+| Email — Nick | ✓ completed | Auth fixed. 0 emails in window. |
+| Email — Rick | ✓ completed | Auth fixed. 0 emails in window. |
+| Email — Kai | ✓ completed | Auth fixed. 0 emails in window. |
+| Check Mail card | ✓ 6/6 card done | All items complete; card marked dueComplete. |
+| Discord — AirAgri | ✓ completed | nusvinn token now valid. Vinn posted at 08:37: "Morning team, continuing Planner tasks." Jeff posted at 09:03: "continue Spray features." James Diamond active in channel. |
+| James Diamond — Vinn | ✓ completed | Morning report ✓. |
+| Matrix | ✓ refreshed | 17 active rooms, 96 messages. 4 action items for DuongDN (see below). |
+| Workstream | ✓ token refreshed | Jun 29 week data empty (new week, normal). Jun 26 data not available retroactively. |
+| Upwork | partial | Bailey-VietPH/DuongDN: new week 0h (normal). Rory + Aysar sessions still expired — skipped. |
+| Maddy — Carrick/Kai/Luis | ○ ALERT | Kai report not yet on Xtreme (09:35). Client complaint active (see below). |
+| Aysar | ○ pending | MPDM C07SQ4HAUHZ: expected Mon ~17:00+07. Checked at 09:41 by DuongDN: LeNH no longer on Rory — KhanhHH now covers Aysar solo (tracker update confirmed). |
+| Fountain | ○ pending | W33 plan not posted by 09:39 (VuTQ sick). No task log (week 7 of 0h). Recheck after 10:00. |
+| Philip | ○ pending | MS Teams session active, chat found, 1 message detected but text not extracted. Manual check needed. |
+
+**Cleared blockers:** email auth ✓, Discord nusvinn ✓, Matrix SSO ✓, Workstream ✓
+
+---
+
+## Matrix — 09:40 (+07:00)
+
+**Active rooms: 17 / 128 | Messages: 96** *(since 2026-06-28 05:24+07)*
+Full details: reports/2026-06-29/matrix-rooms-0940.md
+
+### ⚠️ Action items for DuongDN (4)
+
+| Room | Time | Message |
+|------|------|---------|
+| NamTV-DuongDN | Fri 16:44 | namtv: "PhucVT có tiến hành đánh giá bổ sung CDF, mày verify evidence cho bạn phát." ✅ Done (DuongDN replied 19:02: done, PhucVT đủ slot SSE) |
+| NamTV-DuongDN | 09:19 | namtv: "Tuần này bên Celine chắc thiếu nhiều bên Python. Mày sắp xếp làm bên đó nhiều chút được ko?" → DuongDN: "được chứ" ✅ Resolved at 09:28 |
+| Celine - OhCleo | 09:13 | minhtv: "Long thì sao a Dương? Nay có làm bên này được ko? Toàn task BE" → DuongDN: LongVV tied Mon/Thu Maddy (urgent issue), DuongDN will cover OhCleo tasks this week ✅ Resolved |
+| PHP Projects | Fri 21:18 | chientx: Maddy reply: "it has improved but not quite there yet. Some lack of developer testing / QA." ⚠️ Alert — see Maddy section |
+
+### Key updates
+
+**Maddy — ⚠️ QUALITY ALERT (Xtreme Soft Solutions / LIFM2-439):**
+- Client (Maddy) says "improved but not quite there yet — some lack of developer testing / QA, simple/obvious things getting through"
+- LIFM2-439 regression: LongVV updated email templates without checking sort/group → regression missed by QC
+- ThanhNX (QC) apologized: test case didn't cover related parts
+- DuongDN escalating: "sao QC ko phát hiện ra? Làm ăn thế nào thì sao khách hàng tin tưởng mình được???"
+- Action ordered: "gấp, review test case của app, update xong báo lên room"
+
+**OhCleo / Celine — LongVV arrangement:**
+- LongVV schedule: Mon/Thu fixed for Maddy, cannot redirect today due to Maddy urgency
+- DuongDN personally covering OhCleo tasks this week alongside LongVV
+- MinhTV coordinating LuHX/HiepNT on OhCleo tasks (Hiep off all week)
+- Celine action: MinhTV to ask DuongDN to check "vụ upload track" in OhCleo Slack ⚠️ pending
+
+**Resource Arrangement (today Jun 29 — sick absences):**
+- VuTQ: sick (fever) — Fountain capacity reduced
+- TriNM: flu — Elena, no makeup
+- ThoTNT: tooth pain (morning) — TamVT covering Zeke
+- SamHT: sick + family → Elena, no makeup
+- PhucNH: sick → no makeup
+
+**Delivery plan — Web dev week Jun 29:**
+- SamHT: 10h Unito, 10h Elliott, rest Elena
+- TienND: Arthur + [OhCleo backup]
+
+**Aysar (Baamboozle) — gate update:**
+- DuongDN confirmed at 08:56: "LeNH không làm Rory nữa, Khánh làm Aysar — 2 bật tracker"
+- KhanhHH confirmed at 08:57: ✓ noted
+- Implication: KhanhHH now solely covers Aysar tracker (was dual LeNH+KhanhHH)
+
+**Elena - SamGuard WordPress:**
+- Client asking about Google Tag Manager JS issue origin
+- DuongDN: not our responsibility to explain their GTM — our job is detect + report; fix = add GTM source to valid CSP sources
+
+**Technology Dept — ⚠️ Carrick GitHub lockout risk:**
+- DuongDN posted at 09:36: "alert của github hơi khó chú ý, mn đừng login nick carrick với pass cũ nữa nha, nó đang lock acc..."
+- Old password attempts locking the GitHub account. All team notified.
+
+**LeNH — MCP training:**
+- DuongDN sent MCP Server training plan to LeNH room (Fri evening); LeNH acknowledged 09:05
+
+**Fountain — W33 (as of 09:39):**
+- No weekly plan posted yet by trinhmtt (VuTQ sick). Monitor after 10:00.
+- Team active: HungPN/ViTHT discussing card 2869 (layout 640→600px padding confirm)
+
+**Blair Brown:**
+- LeNH reviewing Figma files, noting improvements to confirm with client
+
+---
+
+## Email — all (recheck) — 09:40 (+07:00)
+
+| Account | Emails in window | Alerts | Calendar Jun 29 |
+|---------|-----------------|--------|----------------|
+| duongdn@ | — (IMAP timeout, prev scan 0) | none | no events |
+| carrick@ | 0 | none (Redmine/GitLab emails all pre-Jun-28) | — |
+| nick@ | 0 | none | — |
+| rick@ | 0 | none | — |
+| kai@ | 0 | none | — |
+| ken@ | 20 | Precognize GitHub PR activity (expected) | DE Daily Standup, Tech Talks, Bi-weekly retro |
+| vuongtrancr@ | 0 | none | — |
+| dnduongus@ | 0 | none | — |
+| freelancer@mpfc | 0 | none | — |
+
+Window Jun 28 05:24+07 → Jun 29 09:40+07 (weekend). No alerts for carrick/nick/rick/kai.
+Trello Check Mail: ✓ 6/6 complete, card marked done.
+
+---
+
+## Discord — recheck — 09:41 (+07:00)
+
+| Server | Account | Msgs | Key content |
+|--------|---------|------|-------------|
+| AirAgri | nusvinn | 14 | Vinn: morning report 08:37 "continuing Planner tasks". Jeff: "continue Spray features" 09:03. James Diamond active: Spray module key, creating ticket for sign-in form cleanup. |
+| Bizurk | nuscarrick | 0 | No Andrew DMs (weekend OK). |
+
+**Vinn daily report:** ✓ posted 08:37+07
+**Jeff daily report:** ✓ posted 09:03+07
+**James Diamond active** in #airagri_webapp: discussing Spray module priority ("target for this month"), sign-in form ticket creation
+
+Trello: James Diamond ✓ complete.
+
+---
+
+## Upwork — recheck — 09:42 (+07:00)
+
+| Workroom | Developer | This week (Jun 29–Jul 5) | Last week | Notes |
+|----------|-----------|--------------------------|-----------|-------|
+| Rory (41069448) | LeNH | — | — | Session expired |
+| Aysar (35642393) | KhanhHH | — | — | Session expired |
+| Bailey-VietPH (42545630) | VietPH | 0:00 | 0:00 | New week Mon, normal |
+| Bailey-DuongDN (43093775) | DuongDN | 0:00 | 0:00 | New week Mon, normal |
+| Neural (38901192) | external | — | — | Silence = no alert |
+
+Rory/Aysar sessions expired — require browser login (carrick/vinn/david2 accounts). No alert for new week 0h.
