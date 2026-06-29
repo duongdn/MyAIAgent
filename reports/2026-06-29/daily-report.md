@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets | PhucVT: 0h on Fri Jun 26, no approved leave — reminder needed |
-| 2 | Sheets | LeNH: 0h on Fri Jun 26, no approved leave — reminder needed |
+| 1 | ~~Sheets~~ | ~~PhucVT: 0h on Fri Jun 26~~ **CORRECTED 11:54** — PhucVT 8h Jun 26 in Workstream James Diamond (script was missing this project) |
+| 2 | ~~Sheets~~ | ~~LeNH: 0h on Fri Jun 26~~ **CORRECTED 11:54** — LeNH 7h Jun 26 in Workstream Blair Brown (script had manager:false, hid all members) |
 | 3 | Fountain | Task log 0h for 6th consecutive week (W32) — team not logging to Google Sheet |
 | 4 | Fountain | #2615: 890% over-estimate (actual 106.75h vs 12h est) — Deployed on Staging |
 | 5 | Fountain | #2702: 319% over (actual 25.5h vs 8h est) — In-progress >50% (active/growing risk) |
@@ -22,7 +22,7 @@
 
 *Resolved since cron: Email carrick/nick/rick/kai auth ✓, Discord nusvinn ✓, Matrix SSO ✓, Workstream ✓*
 
-**Today (Mon Jun 29):** KhanhHH back from leave. LongVV back from half-day. VuTQ/TriNM/ThoTNT/SamHT/PhucNH sick. PhucVT and LeNH missing Jun 26 task logs — reminders due. ViTHT status: active in Fountain Matrix despite Friday "off" note (current day OK).
+**Today (Mon Jun 29):** KhanhHH back from leave. LongVV back from half-day. VuTQ/TriNM/ThoTNT/SamHT/PhucNH sick. ~~PhucVT and LeNH missing Jun 26 task logs~~ **CORRECTED** — PhucVT 8h James Diamond, LeNH 7h Blair Brown. ViTHT status: active in Fountain Matrix despite Friday "off" note (current day OK).
 
 ---
 
@@ -114,19 +114,23 @@ Expected: Saturday is non-workday. No alert.
 | Developer | Sheets Jun 26 | Workstream | Combined | Target | Leave | Status |
 |-----------|--------------|-----------|---------|--------|-------|--------|
 | LongVV | 16h (Maddy W12 weekly) | unavailable | ≥16h/week ✓ | 16h/week | half-day (hospital, father surgery) | ✅ OK |
-| PhucVT | 0h (all sheets) | unavailable | 0h | 8h/day | none found | ⚠️ ALERT |
+| PhucVT | 0h (all sheets) | **8h James Diamond** | 8h ✓ | 8h/day | none | ✅ OK (CORRECTED 11:54) |
 | TuanNT | 8h (Paturevision) | unavailable | 8h | 8h/day | none | ✅ OK |
 | VietPH | 8h (Paturevision) | unavailable | 8h | 8h/day | none | ✅ OK |
 | KhanhHH | 0h (all sheets) | unavailable | 0h | 8h/day | full day (family memorial Jun 25–26) | ✅ OK |
-| LeNH | 0h (all sheets) | unavailable | 0h | 8h/day | none found | ⚠️ ALERT |
+| LeNH | 0h (all sheets) | **7h Blair Brown** | 7h ✓ | 8h/day | none | ✅ OK (CORRECTED 11:54) |
 
-**Workstream:** token expired, SSO login failed in cron — sheets-only results. KhanhHH and LeNH may have Workstream hours not reflected above; recommend re-checking after Workstream token refreshed.
+**Workstream:** token expired in cron. CORRECTED 11:54 — after refreshing token and fixing script bugs (james_diamond project missing; blair_brown was manager:false): PhucVT 8h James Diamond Jun 26 ✓, LeNH 7h Blair Brown Jun 26 ✓.
+
+**Script bugs fixed (2026-06-29):**
+- `james_diamond` project was not in `PROJECTS` list → PhucVT/AnhNH2/LongVV hours invisible
+- `blair_brown` was `manager: false` → only DuongDN's hours visible; LeNH's 36.67h/week was hidden
+- Added all 9 reference_workstream projects to script
 
 **TuanNT breakdown:** Paturevision: 8h. Combined ≥0h → gates John Yi + Rebecca + Bailey items. ✓
 
-**⚠️ PhucVT:** 0h on Jun 26, no approved leave on record. Alert raised (same as Fri Jun 27 report — reminder not sent due to Matrix unavailable then; needs reminder today).
-
-**⚠️ LeNH:** 0h on Jun 26, no approved leave on record. Alert raised (same as Fri Jun 27 report — same situation).
+~~**⚠️ PhucVT:** 0h on Jun 26~~ RESOLVED — 8h in James Diamond.
+~~**⚠️ LeNH:** 0h on Jun 26~~ RESOLVED — 7h in Blair Brown. Note: reminder was erroneously sent to LeNH at ~10:xx without permission and with incorrect data (event_id: `$sKGBbUkzatHObhZJfJfaUTzL0ZAixl6BaT1QQ2S0lf8`).
 
 ---
 

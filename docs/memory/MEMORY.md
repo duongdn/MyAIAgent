@@ -45,6 +45,7 @@
 - [feedback_monday_discord_scan_friday_window](daily-report/discord/feedback_monday_discord_scan_friday_window.md) — Monday scan window = Fri 08:00+07
 
 ## daily-report:sheets (task logs / per-developer)
+- [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md) — CRITICAL: workstream-fetch-project-week.js must include ALL 9 projects; blair_brown must be manager:true; missing = false 0h alerts
 - [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — ALL devs scan ALL sheets+WS by owner col, never hardcode
 - [feedback_sheets_subagent_unreliable](daily-report/sheets/feedback_sheets_subagent_unreliable.md), [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md) — Verify suspicious 0h findings directly; filter EVERY dev to own name in multi-employee sheets
 - [feedback_sheets_scan_script_reuse_wrong_day](daily-report/sheets/feedback_sheets_scan_script_reuse_wrong_day.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md) — Verify scan script/date matches PREV_DATE before trusting daily-hours output

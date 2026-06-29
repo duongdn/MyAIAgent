@@ -5,10 +5,13 @@
  * and techLead-only projects (Blair Brown) via /time/projects/{id}/week (self view).
  *
  * Usage:
- *   node scripts/workstream-fetch-project-week.js [date]              # all projects
- *   node scripts/workstream-fetch-project-week.js [date] maddy        # Maddy only
- *   node scripts/workstream-fetch-project-week.js [date] rebecca      # Rebecca only
- *   node scripts/workstream-fetch-project-week.js [date] blair_brown  # Blair Brown only
+ *   node scripts/workstream-fetch-project-week.js [date]                  # all projects
+ *   node scripts/workstream-fetch-project-week.js [date] maddy            # Maddy only
+ *   node scripts/workstream-fetch-project-week.js [date] rebecca          # Rebecca only
+ *   node scripts/workstream-fetch-project-week.js [date] blair_brown      # Blair Brown only
+ *   node scripts/workstream-fetch-project-week.js [date] james_diamond    # James Diamond only
+ *   node scripts/workstream-fetch-project-week.js [date] generator        # Generator only
+ *   node scripts/workstream-fetch-project-week.js [date] fountain         # Fountain only
  *
  * Date defaults to today (YYYY-MM-DD). Output is JSON to stdout.
  * Errors exit 1. Token auto-refreshed if expired.
@@ -23,11 +26,15 @@ const CONFIG_PATH = path.join(__dirname, '..', 'config', '.workstream-config.jso
 // manager: true  → uses /review/week (all members visible)
 // manager: false → uses /time/projects/{id}/week (self hours only, works for techLead)
 const PROJECTS = {
-  maddy:       { id: 'cmpqc1v7v00ahtk1vs1817xt8', name: 'Xtreme Soft Solutions', client: 'Maddy',       manager: true  },
-  rebecca:     { id: 'cmpqcflkx00litk1vic3vki6j', name: 'MissSwimwear',           client: 'Rebecca',     manager: true  },
-  blair_brown: { id: 'cmqj4tj6v01gfm81vgx7ipkov', name: 'WordPress Update',       client: 'Blair Brown', manager: false },
-  baamboozle:  { id: 'cmqez93ka07q8p81v7035l3td', name: 'Baamboozle',             client: 'Baamboozle',  manager: true  },
-  colin_etz:   { id: 'cmqezatb807qvp81vpnzzimmp', name: 'Colin/ETZ',               client: 'Colin',       manager: true  },
+  maddy:          { id: 'cmpqc1v7v00ahtk1vs1817xt8', name: 'Xtreme Soft Solutions',     client: 'Maddy',          manager: true  },
+  rebecca:        { id: 'cmpqcflkx00litk1vic3vki6j', name: 'MissSwimwear',               client: 'Rebecca',        manager: true  },
+  blair_brown:    { id: 'cmqj4tj6v01gfm81vgx7ipkov', name: 'WordPress Update',           client: 'Blair Brown',    manager: true  },
+  baamboozle:     { id: 'cmqez93ka07q8p81v7035l3td', name: 'Baamboozle',                 client: 'Baamboozle',     manager: true  },
+  colin_etz:      { id: 'cmqezatb807qvp81vpnzzimmp', name: 'Colin/ETZ',                  client: 'Colin',          manager: true  },
+  james_diamond:  { id: 'cmqook9vf0kl8m81vusyo8ppt', name: 'Portfolio - James Diamond',  client: 'James Diamond',  manager: true  },
+  family_app:     { id: 'cmqezfyzv07z6p81vf403t9lp', name: 'Family App',                 client: 'Charles Chang',  manager: true  },
+  generator:      { id: 'cmqoou4h10kzum81vovi8rrsk', name: 'Generator',                  client: 'Elliott',        manager: true  },
+  fountain:       { id: 'cmpqcjojh00q2tk1v2qi7gs0j', name: 'Fountain Greetings',         client: 'Kunal',          manager: true  },
 };
 
 // Parse hours "H:MM" -> decimal
