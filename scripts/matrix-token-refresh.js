@@ -43,6 +43,24 @@ function get(url, headers = {}) {
   });
 }
 
+function post(url, body) {
+  return new Promise((resolve, reject) => {
+    const u = new URL(url);
+    const data = Buffer.from(body, 'utf8');
+    const req = https.request({
+      hostname: u.hostname, path: u.pathname, method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': data.length },
+    }, (res) => {
+      let buf = '';
+      res.on('data', c => buf += c);
+      res.on('end', () => { try { resolve(JSON.parse(buf)); } catch { resolve({ raw: buf }); } });
+    });
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
 async function main() {
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
@@ -56,6 +74,24 @@ async function main() {
     console.log(`[matrix-refresh] Token valid (${whoami.user_id}). Skipping.`);
     return;
   }
+
+  // Try refresh_token via API (no browser needed — works in cron)
+  if (config.refresh_token && config.token_endpoint && config.oidc_client_id) {
+    console.log('[matrix-refresh] Trying refresh_token via API...');
+    const r = await post(config.token_endpoint,
+      `grant_type=refresh_token&refresh_token=${encodeURIComponent(config.refresh_token)}&client_id=${encodeURIComponent(config.oidc_client_id)}`
+    ).catch(() => null);
+
+    if (r && r.access_token) {
+      config.access_token = r.access_token;
+      if (r.refresh_token) config.refresh_token = r.refresh_token;
+      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+      console.log('[matrix-refresh] Refreshed via refresh_token API (no browser). Done.');
+      return;
+    }
+    console.log('[matrix-refresh] Refresh token expired:', r && r.error);
+  }
+
   console.log('[matrix-refresh] Token expired. Opening browser...');
 
   if (!fs.existsSync(PROFILE_DIR)) {
