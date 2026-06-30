@@ -51,17 +51,46 @@ async function fetchWithToken(url, token) {
   return res.json();
 }
 
+async function refreshViaApi(config) {
+  // Try Keycloak refresh_token grant (no browser needed)
+  if (!config.refresh_token) return null;
+  const { default: fetch } = await import('node-fetch');
+  const KEYCLOAK_TOKEN = 'https://auth.nustechnology.com/realms/main/protocol/openid-connect/token';
+  const res = await fetch(KEYCLOAK_TOKEN, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `grant_type=refresh_token&refresh_token=${encodeURIComponent(config.refresh_token)}&client_id=workstream`,
+  }).catch(() => null);
+  if (!res) return null;
+  const data = await res.json().catch(() => null);
+  if (data && data.access_token) {
+    config.access_token = data.access_token;
+    if (data.refresh_token) config.refresh_token = data.refresh_token;
+    config.updated_at = new Date().toISOString();
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+    process.stderr.write('[workstream] Token refreshed via Keycloak API (no browser)\n');
+    return config;
+  }
+  return null;
+}
+
 async function ensureToken() {
   let config = {};
   if (fs.existsSync(CONFIG_PATH)) config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
   if (config.access_token) {
-    const test = await fetchWithToken(config.api_base + '/me', config.access_token);
+    const test = await fetchWithToken((config.api_base || config.base_url + '/api') + '/me', config.access_token);
     if (!test._expired && (test.user || test.id)) return config;
   }
 
-  // Token invalid — refresh
-  process.stderr.write('[workstream] Token expired, refreshing...\n');
+  process.stderr.write('[workstream] Token expired, trying API refresh...\n');
+
+  // Try refresh_token via Keycloak API first (no browser)
+  const refreshed = await refreshViaApi(config);
+  if (refreshed) return refreshed;
+
+  // Fallback: browser login (requires DISPLAY)
+  process.stderr.write('[workstream] API refresh failed, opening browser...\n');
   execSync('DISPLAY=:1 node ' + path.join(__dirname, 'workstream-login.js'), { stdio: 'inherit' });
   return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 }

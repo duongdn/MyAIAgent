@@ -66,17 +66,36 @@ async function main() {
   const page = await browser.newPage();
   let capturedToken = null;
 
-  // Intercept Bearer tokens from API requests
+  let capturedRefreshToken = null;
+
+  // Intercept Bearer tokens from API requests AND refresh_token from Keycloak responses.
+  // Storing the refresh_token means future runs can get new access_tokens via API (no browser).
   await page.setRequestInterception(true);
   page.on('request', (req) => {
     const url = req.url();
     const auth = req.headers()['authorization'];
-    // Only capture from workstream API calls (not Keycloak auth endpoints)
     if (auth && auth.startsWith('Bearer ') && url.startsWith(BASE_URL + '/api/') && !capturedToken) {
       capturedToken = auth.replace('Bearer ', '');
       console.log('[workstream-login] Token captured from API request:', url.replace(BASE_URL, ''));
     }
     req.continue();
+  });
+
+  // Capture refresh_token from Keycloak token endpoint response
+  page.on('response', async (res) => {
+    try {
+      const url = res.url();
+      if (url.includes('/protocol/openid-connect/token') && !capturedRefreshToken) {
+        const text = await res.text().catch(() => '');
+        if (text.includes('refresh_token')) {
+          const data = JSON.parse(text);
+          if (data.refresh_token) {
+            capturedRefreshToken = data.refresh_token;
+            console.log('[workstream-login] Captured refresh_token from Keycloak response');
+          }
+        }
+      }
+    } catch {}
   });
 
   console.log('[workstream-login] Navigating to', BASE_URL);
@@ -101,8 +120,8 @@ async function main() {
     process.exit(1);
   }
 
-  // Save token first before verifying (so we can debug)
   config.access_token = capturedToken;
+  if (capturedRefreshToken) config.refresh_token = capturedRefreshToken;
   config.base_url = BASE_URL;
   config.updated_at = new Date().toISOString();
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));

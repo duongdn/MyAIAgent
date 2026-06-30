@@ -50,15 +50,18 @@ async function main() {
     const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
     fs.mkdirSync(SOCKS_DIR, { recursive: true });
 
-    // Run headless (no X server in cron). Session may fail Cloudflare fingerprint check.
+    // Use headless:false when DISPLAY is available (Xvfb in cron at :1).
+    // Cloudflare bot-detection blocks Chrome headless even with valid cookies —
+    // a visible browser window (rendered by Xvfb) bypasses fingerprint checks.
+    const useVisibleBrowser = !!process.env.DISPLAY;
     const browser = await puppeteer.launch({
-      headless: 'new',
+      headless: useVisibleBrowser ? false : 'new',
       userDataDir: profileDir,
-      env: { ...process.env, TMPDIR: SOCKS_DIR },
+      env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':1' },
       args: [
         '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
         '--disable-blink-features=AutomationControlled', '--window-size=1280,900',
-        '--disable-gpu',
+        ...(useVisibleBrowser ? [] : ['--disable-gpu']),
       ],
     });
 
@@ -137,7 +140,7 @@ async function fetchWorkroomHours(page, room) {
   page.on('response', responseHandler);
 
   // domcontentloaded required — Upwork SPA never reaches networkidle2 reliably
-  await page.goto(timesheetUrl, { waitUntil: 'domcontentloaded', timeout: 40000 });
+  await page.goto(timesheetUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await new Promise(r => setTimeout(r, 8000));
   page.off('response', responseHandler);
 
