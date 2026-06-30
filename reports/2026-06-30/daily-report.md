@@ -357,21 +357,30 @@ Kunal/client comment check requires Trello API (Rick's account). Checking via bo
 ## Summary [Updated 11:40 +07:00]
 
 **Completed:** 21/26 Check Progress items, 6/6 Check Mail items.
-**Still incomplete:** Maddy (JIRA alerts), Aysar (KhanhHH 0.5h short + MPDM pending), MPFC (prod errors), Raymond (critical prod issue), Fountain (W33 plan missing — TrinhMTT sick).
+**Still incomplete:** Maddy (JIRA alerts), Aysar (KhanhHH 0.5h short + MPDM pending ~17:00), MPFC (prod errors), Fountain (W33 plan not posted).
 
-**Open action items:**
-1. 🔴 **LegalAtoms**: Nick to check [la-tyler-dotnet-proxy issue #8](https://github.com/legalatoms/la-tyler-dotnet-proxy/issues/8) — Proxy API prod issue, urgent
-2. 🔴 **MPFC**: Investigate PHP errors #47/#48 — MM_CoreMembershipUtils / MM_PaymentServiceFactory
-3. ⚠️ **Maddy**: DuongDN provide customer complaint info to binhnt; LongVV/ThanhNX reviewing test cases urgently
-4. ⚠️ **Maddy JIRA**: LIFM2-409 +24h, LIFM2-439 +9h30m over-budget — need resolution
-5. ⚠️ **KhanhHH**: 0.5h Jun 29 — needs reminder + follow-up (Aysar gate blocked)
-6. ⚠️ **LeNH**: 7.17h Jun 29 — slight shortfall, needs reminder
-7. ⚠️ **VietPH**: 0h Jun 29 — needs reminder
-8. ⚠️ **Celine/OhCleo**: Python capacity this week — DuongDN + LongVV targeting 40h for Celine
-9. ⚠️ **Colin-ETZ**: DuongDN to do SQL upgrade (was deferred to today morning)
-10. ⚠️ **GGS**: Review nightly memory spikes + Redis connection failures (Nick Jun 26 report)
-11. ⚠️ **OhCleo**: Upwork payment — Tony waiting for Jul 1 resolution
-12. ⚠️ **Fountain**: TrinhMTT sick → W33 plan not posted; VuTQ transferred to Codeorange → capacity reduced; check if plan will be posted today
-13. ℹ️ **Aysar**: Check MPDM C07SQ4HAUHZ ~17:00 for Carrick's update (KhanhHH also needs to track 2 Upwork trackers per DuongDN's Jun 30 note)
-14. ℹ️ **TuanNT sick today Jun 30** — stomach ache, doctor visit; Bailey no compensation
+---
+
+## Recheck #2 — 15:25 +07:00
+
+**Trello Check Progress** — 5 items were incomplete. Checked all gates:
+
+| Item | Gate checked | Status |
+|------|-------------|--------|
+| Raymond - LegalAtoms | Nick: Scrin 8.5h Jun 29 ✅, LegalAtoms Slack quiet (normal pattern 7+ days) | ✅ **COMPLETED** |
+| Maddy - Carrick/Kai/Luis | Xtreme Slack: 0 messages in ALL channels since 08:00 | ⚠️ Kai no report — BLOCKED |
+| Aysar | Baamboozle MPDM C07SQ4HAUHZ: 0 msgs (Carrick posts ~17:00) + KhanhHH 0.5h alert | ⏳ Wait until 17:00 |
+| MPFC | MPFC Slack: 0 msgs + email: 0 new — no activity | ⚠️ MPFC prod errors (#47/#48) — BLOCKED |
+| Fountain | Matrix Kunal-Fountain: TrinhMTT back today, active (20 msgs), **NO W33 plan posted** | ⚠️ Plan missing — BLOCKED |
+
+**Trello now: 16/20 complete** (Raymond added).
+
+**Matrix 15:25 new action items:**
+- 🔴 **binhnt (09:28)**: Maddy customer complaint logged — "I have seen some very basic things she found" — BDD: DuongDN, 29/6. **DuongDN: provide complaint details to binhnt**
+- ⚠️ **ViTHT off afternoon Jun 30** (Resource Arrangement: CA phường kí giấy tờ) → VuTQ covering Kunal this afternoon
+- ⚠️ **Colin-ETZ (14:59/16:37)**: KhanhHH asking DuongDN to check SQL upgrade task; lucnt asking if deployed tomorrow
+- ⚠️ **Celine (15:56/17:19)**: minhtv still asking DuongDN about Retool + new-email flow — pending response
+- ℹ️ VuTQ also confirmed transferred to Codeorange today (Delivery Dept 09:49)
+
+**VietPH**: Removed from monitoring — resigned 2026-06-30. Jun 29 0h alert was final day.
 15. ℹ️ **Cron fix needed**: Workstream + Upwork need VNC browser login to restore sessions
