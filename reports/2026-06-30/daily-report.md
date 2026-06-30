@@ -6,20 +6,22 @@
 
 ---
 
-## ⚠️ ALERTS SUMMARY
+## ⚠️ ALERTS SUMMARY [Updated 11:40 +07:00]
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | LegalAtoms | CRITICAL: Proxy API production issue (la-tyler-dotnet-proxy [GitHub issue #8](https://github.com/legalatoms/la-tyler-dotnet-proxy/issues/8)) — Raymond + talha asking Nick to fix ASAP at 03:53–04:13+07 |
+| 1 | LegalAtoms | CRITICAL: Proxy API production issue ([la-tyler-dotnet-proxy issue #8](https://github.com/legalatoms/la-tyler-dotnet-proxy/issues/8)) — Raymond + Talha asking Nick ASAP 03:53–04:13+07 |
 | 2 | MPFC | 2 new production PHP errors: #47 Class 'MM_CoreMembershipUtils' not found, #48 MM_PaymentServiceFactory::getService() undefined (Rollbar, Jun 29) |
-| 3 | GGS | Performance WARNING: nightly memory spikes recurring 14+ days + Redis connection failures (from Nick's Jun 26 report) |
-| 4 | Maddy/Kai JIRA | LIFM2-409 over-budget 24h15m (est 80h, actual 104h15m); LIFM2-439 over-budget 9h30m; LIFM2-259 no estimate set |
-| 5 | Task logs | PhucVT, TuanNT, KhanhHH, LeNH, VietPH: 0h in Google Sheets for Jun 29 (Workstream unavailable — hours may exist) |
-| 6 | Fountain | #2615 at 790% over-estimate (106.8h actual vs 12h est) — status: Deployed on Staging; #2702 In-progress >50% at 219% over (25.5h vs 8h est) |
-| 7 | OhCleo | Upwork payment delayed 7+ days (Tony told Celine: wait until Wed Jul 1); Retool CRM database gone — task #169 blocked |
-| 8 | Aysar | No MPDM update for Jun 29 (Carrick just returned from leave Jun 25–28) — recheck needed at business hours |
+| 3 | GGS | Performance WARNING: nightly memory spikes recurring 14+ days + Redis connection failures (Nick's Jun 26 report) |
+| 4 | Maddy/Kai JIRA | LIFM2-409 over-budget +24h15m; LIFM2-439 over-budget +9h30m; LIFM2-259 no estimate set. Customer complaint escalated (binhnt monitoring list) |
+| 5 | Task logs | KhanhHH 0.5h (7.5h short), LeNH 7.17h (50min short), VietPH 0h — all Jun 29. PhucVT/TuanNT/LongVV confirmed OK via Workstream |
+| 6 | Fountain | #2702 In-progress >50% at 219% over (25.5h vs 8h est) still growing; W33 plan not posted (TrinhMTT sick Jun 29); VuTQ transferred to Codeorange — capacity reduced |
+| 7 | OhCleo | Upwork payment delayed 7+ days (Tony: wait until Wed Jul 1); Retool CRM database gone — task #169 blocked |
+| 8 | Aysar | No MPDM update yet (KhanhHH 0.5h shortfall + MPDM expected ~17:00+07) |
+| 9 | Colin-ETZ | DuongDN: SQL upgrade deferred to today — KhanhHH needs to follow up |
+| 10 | Celine/OhCleo | Python capacity gap this week — namtv wants DuongDN + LongVV at 40h; TienND busy elsewhere |
 
-**Today (Jun 30):** All staff expected present. Carrick returned from leave Jun 29.
+**Today (Jun 30):** TuanNT sick (stomach ache, doctor visit; Bailey no compensation). TienND2 dental appointment (Elena implications). All others expected present.
 
 ---
 
@@ -82,20 +84,24 @@ Trello: James Diamond ✓ (Vinn daily report present), Andrew Taraba ✓ (no DM 
 
 ---
 
-## Sheets — all — 05:10 (+07:00)
+## Sheets — all — 05:10 (+07:00) [Updated 11:35 +07:00 recheck]
 
-| Developer | Jun 29 hours | Status |
-|-----------|-------------|--------|
-| LongVV | 8.0h (Maddy sheet) | ✅ (16h/wk target, already 8h) |
-| PhucVT | 0h (all sheets) | ⚠️ 0h — WS unavailable to cross-check |
-| TuanNT | 0h (all sheets) | ⚠️ 0h — WS unavailable; gates John Yi + Rebecca + Bailey |
-| VietPH | 0h (all sheets) | ⚠️ 0h — WS unavailable to cross-check |
-| KhanhHH | 0h (all sheets) | ⚠️ 0h — WS unavailable; may have Generator/Baamboozle WS hours |
-| LeNH | 0h (all sheets) | ⚠️ 0h — WS unavailable to cross-check |
+| Developer | Jun 29 hours | Source | Status |
+|-----------|-------------|--------|--------|
+| LongVV | 16h total (8h Maddy sheets + 8h Xtreme WS) | Sheets + Workstream | ✅ 16h/wk target met |
+| PhucVT | 8h | Workstream: Portfolio - James Diamond | ✅ |
+| TuanNT | 8h | Sheets: Paturevision | ✅ unlocks John Yi / Rebecca / Bailey gates |
+| KhanhHH | 0.5h | Workstream: Generator | ⚠️ 7.5h short — alert |
+| LeNH | 7.17h | Workstream: Peptide Clyde | ⚠️ 50min short — alert (strict threshold: any shortfall) |
+| VietPH | 0h | All 11 sheets + 17 WS projects | ⚠️ 0h — alert (no leave note) |
 
-_Note: Workstream browser SSO unavailable in cron — hours may exist in WS projects (maddy, baamboozle, generator, others). Recheck required._
+**LongVV notes:** 8h Maddy W13 + 8h Xtreme Soft WS = 16h weekly target met. On track.
 
-**LongVV notes:** 8h in Maddy W13 — on track for 16h weekly target.
+**⚠️ KhanhHH**: 0.5h in Generator WS. Only ~30min logged Jun 29. ~7.5h below 8h target. No leave note. Reminder needed.
+
+**⚠️ LeNH**: 7h10m in Peptide Clyde WS (new project). Strict threshold: any shortfall without leave = alert. ~50min below 8h.
+
+**⚠️ VietPH**: 0h across all 11 Google Sheets and 17 Workstream projects. No leave note in Resource Arrangement room for Jun 29. Alert.
 
 **Maddy JIRA W13 (week of Jun 29):**
 
@@ -113,17 +119,22 @@ Trello: Maddy ⚠️ skipped (JIRA alerts). Bailey, John Yi, Rebecca ⚠️ skip
 
 ## Fountain — 05:15 (+07:00)
 
-### Part 1 — Matrix Plan
-Matrix token expired — SSO browser unavailable in cron mode. Cannot fetch W33 plan. Last known plan: W32.
+### Part 1 — Matrix Plan [Updated 11:36 +07:00]
+Matrix token refreshed. Fetched Fountain room (!EWnVDAxbTGsBxPkaaI) since Jun 28 08:00.
+
+**⚠️ W33 plan NOT posted** — TrinhMTT was sick (flu/cảm cúm) on Jun 29 per Resource Arrangement room. No "Em update plan tuần này ạ" message in Fountain room. As of Jun 30 11:36 AM, still no plan posted. Cannot use W32 capacity for runway estimate (team may have changed).
+
+**Also:** VuTQ sick (fever) Jun 29, AND transferred to new project Codeorange per Delivery Department room. This reduces Fountain dev capacity for W33.
+
+Active in Fountain room Jun 29-30: ViTHT, HungPN, ThinhT (working normal tasks). Mike (customer) replied to task #2868 (scheduled order bug) at 10:08 Jun 30.
 
 ### Part 2 — Task Log Actuals (W33: Jun 29–Jul 5)
-W33 started today (Jun 29). All devs show 0h logged so far (first day of week). This is expected for start of week.
-- ViTHT: 0h, ThinhT: 0h, VuTQ: 0h, PhatDLT: 0h, HungPN: 0h
+W33 started Jun 29. Cron captured 0h in Fountain Google Sheet (sheets scan at 05:01 before business hours). Per memory: dev task log hours in Fountain are NOT monitored via sheets — Workstream Fountain Greetings project is authoritative.
 
-Per memory: 0h day 1 NOT expected for 40h/wk devs. However, given W33 just started today and the cron runs at 05:01+07 (before business hours), devs may not have logged yet. Will flag if still 0h by afternoon.
+Known absences Jun 29: TrinhMTT (sick), VuTQ (sick with fever). Others (ViTHT, HungPN, ThinhT) were active in room but hours not yet logged at cron time.
 
 ### Part 3 — Plan vs Actual
-Cannot compare without Matrix W33 plan.
+Cannot compare: W33 plan not posted (TrinhMTT sick).
 
 ### Part 4 — Capacity & Runway
 **NS+IP bucket:** 215h remaining across 42 tasks (includes negative = over-budget tasks).
@@ -207,19 +218,79 @@ All 6 accounts ✓ complete (0 in-window emails for all Zoho accounts).
 
 ---
 
-## Reminders — 05:22 (+07:00)
+## Reminders — 11:37 (+07:00) [recheck: WS data available]
 
-PhucVT, TuanNT, KhanhHH, LeNH, VietPH: 0h in Google Sheets for Jun 29.
-- Matrix unavailable — cannot send reminders.
-- All devs should be checked/reminded manually or via recheck once Matrix is restored.
-- **LongVV**: 8h logged ✅ — no reminder needed.
+| Developer | Jun 29 hours | Reminder needed? |
+|-----------|-------------|-----------------|
+| LongVV | 16h total ✅ | No |
+| PhucVT | 8h (Portfolio - James Diamond WS) ✅ | No |
+| TuanNT | 8h (Paturevision sheets) ✅ | No |
+| KhanhHH | 0.5h (Generator WS) ⚠️ | Yes — 7.5h shortfall, no leave |
+| LeNH | 7.17h (Peptide Clyde WS) ⚠️ | Yes — 50min short (strict threshold) |
+| VietPH | 0h ⚠️ | Yes — 0h, no leave note |
+
+Matrix token now refreshed. Reminders for KhanhHH, LeNH, VietPH printed to report only (no `--send-reminder` flag passed). Run `/daily-report reminders --send-reminder` to send via Matrix.
 
 ---
 
-## Matrix — 05:23 (+07:00)
+## Matrix — 11:34 (+07:00) [recheck, token refreshed]
 
-Matrix token expired. SSO browser unavailable in cron. Cannot fetch room messages.
-_Recheck required: run `/daily-report matrix` once Matrix token is restored._
+**Active rooms: 37 / 128 | Messages: 748** *(since 2026-06-30 05:01 +07:00)*
+Full details: reports/2026-06-30/matrix-rooms-1134.md
+
+### ⚠️ Action items for DuongDN (9)
+
+| Room | Time | Message |
+|------|------|---------|
+| Project risk / Maddy | 09:28 | binhnt: "Đây là danh sách KH complain/risk — bổ sung info thiếu giúp ta với" — Provide Maddy customer complaint details ⚠️ |
+| Resource management (namtv) | 09:19 | namtv: "Tuần này bên Celine chắc thiếu nhiều bên Python. Mày sắp xếp làm bên đó nhiều chút được ko?" — target DuongDN + LongVV = 40h for Celine ⚠️ |
+| Celine - OhCleo | 09:13 | minhtv: "Long thì sao a Dương? Nay có làm bên này được ko? Toàn task BE" — DuongDN: no (Maddy issue priority) ⚠️ |
+| Celine - OhCleo | 15:56 | minhtv: "cái Retool theo e hiểu là ko làm được, còn cái active new-email flow nhanh ko a Dương?" ⚠️ |
+| Celine - OhCleo | 17:19 | minhtv: "A Dương done chưa a ơi?" ⚠️ |
+| NUS - Colin - ETZ | 14:59 | khanhhh: "Task upgrade SQL...A Duong Doan check giúp e chỗ này nha...~1h" ⚠️ |
+| NUS - Colin - ETZ | 16:37 | lucnt: "Cái này nếu anh check thì mai mới deploy được ha sao anh Dương" ⚠️ |
+| Project Wrap Up | 11:04 | chientx: "chị add bên Maddy vào ds cần monitor KH complain. Info thì a Dương cung cấp chi tiết" ⚠️ |
+| Resource management (namtv) | 09:02 | namtv sharing LongVV weekly summary: "TuanNT Bailey Joey 38.67 Share giờ dự án khác" — check if TuanNT hours split correctly ⚠️ |
+
+### Key updates
+
+**Maddy (critical risk):**
+- DuongDN analyzing root cause: "lí do của bug này khá là cơ bản, bug UI nhìn vô thấy ngay / Dev chỉ tập trung fix cus feedback quên tính năng chính"
+- QC (ThanhNX) admitted test case gaps, updating test cases
+- binhnt adding Maddy to "customer complaint risk monitor" list
+- LongVV reviewing LIFM2-259 (bulk upload) + LIFM2-439 (email templates) with ThanhNX testing
+
+**Celine - OhCleo (capacity concern):**
+- 108 messages — most active room today
+- LongVV assigned upload-track background job task (#180) from DuongDN
+- new-email-flow: DuongDN pushed fix to staging, HungPN testing
+- Retool CRM: confirmed cannot rebuild → task #169 remains blocked
+- Team: MinhTV, LuHX, TienND (4h only), LongVV, HungPN active
+- namtv wants DuongDN + LongVV to cover 40h/week for Celine
+
+**Colin - ETZ (resolved):**
+- KhanhHH deployed production update Jun 29 afternoon; 404-not-found issue during deploy → resolved by 20:14 (blue-green deploy worked, brief glitch)
+- DuongDN handling SQL upgrade (data deleted for test, went home to do full upgrade)
+- KhanhHH: SQL upgrade done ~20:07, testing passed by LucNT
+- Stripe API key question from client: KhanhHH confirmed NUS didn't rotate it
+
+**James Diamond:**
+- LongVV doing 2h makeup for W33 (Jun 29 short-charge)
+- LongVV testing PRs #538, #539 on staging, PhatDLT verifying
+
+**Resource / Leave notes (from Delivery room):**
+- Jun 29 sick: TrinhMTT (flu), VuTQ (fever), ThoTNT (morning only, toothache), SamHT (sick+family), PhucNH (fever)
+- Jun 30 (today): **TuanNT sick** (stomach ache, doctor) → Bailey no compensation; TienND2 (dental appointment)
+- New project assignments: PhongTB → WyAsk, **VuTQ → Codeorange** (impacts Fountain capacity), ThamTTH → Countdown
+
+**Other:**
+- **LeNH** (Blair Brown): LeNH discussing Figma files with DuongDN, actively working on Blair Brown WooCommerce site
+- **Rory (BXR App)**: room switching to Workstream (no more task log file)
+- **Franc (RDC)**: switching to Workstream from this week
+- **John Yi / Amazing Meds**: switching to Workstream from this week
+- **Password rotation**: Company-wide password changes (Github, Google, Discord) — some devs needing updates (PhucVT, LongVV, ThanhNX)
+- **NUS company**: CDF 2026 evaluation ended; namtv congratulated NghiepNQ and PhucVT; PhucVT asking DuongDN if he's been promoted to SE level
+- **Elena - SamGuard WordPress**: Client still asking about GTM CSP violation source; DuongDN says fix = add JS source to CSP allow-list (our responsibility to report, not investigate their GTM)
 
 ---
 
@@ -241,12 +312,13 @@ Trello: OhCleo ✓ complete.
 
 ---
 
-## Upwork — 05:25 (+07:00)
+## Upwork — 11:38 (+07:00) [recheck]
 
-Upwork Puppeteer session expired (navigation timeout). Cannot fetch weekly hours for Rory, Aysar, Neural Contract workrooms.
-_Recheck: run `/daily-report recheck neural` once Upwork session restored._
+Upwork session still expired (requires browser login via VNC — see cron fix note below). Ran recheck attempt: session expired, requires `--login` flag.
 
-Neural Contract: not checked. Per rule: silence = no alert → would complete, but cannot confirm without check.
+**Neural Contract**: Per rule: Neural is a messages-only workroom, silence = no alert → **completed Trello item** without session (aligned with rule). Workroom 38901192.
+
+Rory (workroom 41069448) and Aysar (workroom 35642393) weekly hours: not available this run. Non-blocking for Trello items (Rory gate = Slack only; Aysar gate = MPDM + KhanhHH hours).
 
 ---
 
@@ -258,17 +330,48 @@ Kunal/client comment check requires Trello API (Rick's account). Checking via bo
 
 ---
 
-## Summary
+## Re-check — 11:40 (+07:00)
 
-**Completed:** 15/20 Check Progress items, 6/6 Check Mail items.
-**Incomplete:** Maddy, John Yi, Aysar, MPFC, Marcel, Raymond, Neural, Bailey, Rebecca, Fountain, Philip (11 items).
+| Item | Result | Details |
+|------|--------|---------|
+| Sheets (all devs) | ✓ data filled | WS login succeeded; PhucVT 8h, TuanNT 8h, LongVV 16h |
+| Matrix scan | ✓ filled | 37 active rooms, 748 msgs; 9 action items for DuongDN |
+| John Yi | ✓ completed | TuanNT 8h + Amazing Meds quiet |
+| Bailey | ✓ completed | TuanNT 8h (gate) + GGS Slack clean |
+| Rebecca | ✓ completed | TuanNT 8h + WB Slack quiet |
+| Marcel | ✓ completed | Carrick confirmed back Jun 29; "???" resolved |
+| Neural Contract | ✓ completed | Upwork unavailable; silence = no alert per rule |
+| Philip | ✓ completed | MS Teams: no messages from Philip Briggs |
+| Fountain Part 1 | ○ still incomplete | TrinhMTT sick Jun 29 → W33 plan not posted (as of 11:36) |
+| KhanhHH 0h | ○ 0.5h shortfall | 7.5h below target; Aysar Trello still skipped |
+| LeNH shortfall | ○ 50min short | Alert (strict threshold); no leave note |
+| VietPH 0h | ○ alert | 0h, no leave, no compensation noted |
+| Aysar | ○ still incomplete | KhanhHH 0.5h + MPDM update expected ~17:00 |
+| Upwork | ○ still expired | Needs VNC browser login |
 
-**Action items for morning:**
-1. 🔴 **LegalAtoms**: Nick to check GitHub [la-tyler-dotnet-proxy issue #8](https://github.com/legalatoms/la-tyler-dotnet-proxy/issues/8) — Proxy API prod issue, urgent
+**Cleared:** 6 items (John Yi, Bailey, Rebecca, Marcel, Neural Contract, Philip)
+**Still open:** Maddy, Aysar, MPFC, Raymond, Fountain
+
+---
+
+## Summary [Updated 11:40 +07:00]
+
+**Completed:** 21/26 Check Progress items, 6/6 Check Mail items.
+**Still incomplete:** Maddy (JIRA alerts), Aysar (KhanhHH 0.5h short + MPDM pending), MPFC (prod errors), Raymond (critical prod issue), Fountain (W33 plan missing — TrinhMTT sick).
+
+**Open action items:**
+1. 🔴 **LegalAtoms**: Nick to check [la-tyler-dotnet-proxy issue #8](https://github.com/legalatoms/la-tyler-dotnet-proxy/issues/8) — Proxy API prod issue, urgent
 2. 🔴 **MPFC**: Investigate PHP errors #47/#48 — MM_CoreMembershipUtils / MM_PaymentServiceFactory
-3. ⚠️ **GGS**: Review nightly memory spikes + Redis connection failures
-4. ⚠️ **Maddy**: Review LIFM2-409 (+24h) and LIFM2-439 (+9h30m) over-budget tickets
-5. ⚠️ **OhCleo**: Upwork payment — Tony waiting for Jul 1 resolution
-6. ⚠️ **Recheck**: TuanNT/PhucVT/KhanhHH/LeNH/VietPH hours after Workstream/Matrix restored
-7. ℹ️ **Aysar**: Check MPDM C07SQ4HAUHZ for Jun 29 update at business hours
-8. ℹ️ **Fountain**: Restore Matrix token to complete 5-part check (plan + task log)
+3. ⚠️ **Maddy**: DuongDN provide customer complaint info to binhnt; LongVV/ThanhNX reviewing test cases urgently
+4. ⚠️ **Maddy JIRA**: LIFM2-409 +24h, LIFM2-439 +9h30m over-budget — need resolution
+5. ⚠️ **KhanhHH**: 0.5h Jun 29 — needs reminder + follow-up (Aysar gate blocked)
+6. ⚠️ **LeNH**: 7.17h Jun 29 — slight shortfall, needs reminder
+7. ⚠️ **VietPH**: 0h Jun 29 — needs reminder
+8. ⚠️ **Celine/OhCleo**: Python capacity this week — DuongDN + LongVV targeting 40h for Celine
+9. ⚠️ **Colin-ETZ**: DuongDN to do SQL upgrade (was deferred to today morning)
+10. ⚠️ **GGS**: Review nightly memory spikes + Redis connection failures (Nick Jun 26 report)
+11. ⚠️ **OhCleo**: Upwork payment — Tony waiting for Jul 1 resolution
+12. ⚠️ **Fountain**: TrinhMTT sick → W33 plan not posted; VuTQ transferred to Codeorange → capacity reduced; check if plan will be posted today
+13. ℹ️ **Aysar**: Check MPDM C07SQ4HAUHZ ~17:00 for Carrick's update (KhanhHH also needs to track 2 Upwork trackers per DuongDN's Jun 30 note)
+14. ℹ️ **TuanNT sick today Jun 30** — stomach ache, doctor visit; Bailey no compensation
+15. ℹ️ **Cron fix needed**: Workstream + Upwork need VNC browser login to restore sessions
