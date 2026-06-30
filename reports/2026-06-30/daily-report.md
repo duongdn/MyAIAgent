@@ -14,10 +14,10 @@
 | 2 | MPFC | 2 new production PHP errors: #47 Class 'MM_CoreMembershipUtils' not found, #48 MM_PaymentServiceFactory::getService() undefined (Rollbar, Jun 29) |
 | 3 | GGS | Performance WARNING: nightly memory spikes recurring 14+ days + Redis connection failures (Nick's Jun 26 report) |
 | 4 | Maddy/Kai JIRA | LIFM2-409 over-budget +24h15m; LIFM2-439 over-budget +9h30m; LIFM2-259 no estimate set. Customer complaint escalated (binhnt monitoring list) |
-| 5 | Task logs | KhanhHH 0.5h (7.5h short), LeNH 7.17h (50min short), VietPH 0h — all Jun 29. PhucVT/TuanNT/LongVV confirmed OK via Workstream |
+| 5 | Task logs | KhanhHH 0.5h (7.5h short — non-Aysar projects only), LeNH 7.17h (50min short) — Jun 29. PhucVT/TuanNT/LongVV confirmed OK via Workstream |
 | 6 | Fountain | #2702 In-progress >50% at 219% over (25.5h vs 8h est) still growing; W33 plan not posted (TrinhMTT sick Jun 29); VuTQ transferred to Codeorange — capacity reduced |
 | 7 | OhCleo | Upwork payment delayed 7+ days (Tony: wait until Wed Jul 1); Retool CRM database gone — task #169 blocked |
-| 8 | Aysar | No MPDM update yet (KhanhHH 0.5h shortfall + MPDM expected ~17:00+07) |
+| 8 | Aysar | ~~Resolved~~ — KhanhHH not on Aysar Jun 29; item completed |
 | 9 | Colin-ETZ | DuongDN: SQL upgrade deferred to today — KhanhHH needs to follow up |
 | 10 | Celine/OhCleo | Python capacity gap this week — namtv wants DuongDN + LongVV at 40h; TienND busy elsewhere |
 
@@ -91,17 +91,14 @@ Trello: James Diamond ✓ (Vinn daily report present), Andrew Taraba ✓ (no DM 
 | LongVV | 16h total (8h Maddy sheets + 8h Xtreme WS) | Sheets + Workstream | ✅ 16h/wk target met |
 | PhucVT | 8h | Workstream: Portfolio - James Diamond | ✅ |
 | TuanNT | 8h | Sheets: Paturevision | ✅ unlocks John Yi / Rebecca / Bailey gates |
-| KhanhHH | 0.5h | Workstream: Generator | ⚠️ 7.5h short — alert |
+| KhanhHH | 0.5h (non-Aysar projects) | Workstream: Generator | ⚠️ 7.5h short — alert |
 | LeNH | 7.17h | Workstream: Peptide Clyde | ⚠️ 50min short — alert (strict threshold: any shortfall) |
-| VietPH | 0h | All 11 sheets + 17 WS projects | ⚠️ 0h — alert (no leave note) |
 
 **LongVV notes:** 8h Maddy W13 + 8h Xtreme Soft WS = 16h weekly target met. On track.
 
-**⚠️ KhanhHH**: 0.5h in Generator WS. Only ~30min logged Jun 29. ~7.5h below 8h target. No leave note. Reminder needed.
+**⚠️ KhanhHH**: 0.5h in Generator WS (not on Aysar Jun 29). ~7.5h below 8h target. No leave note. Reminder needed.
 
 **⚠️ LeNH**: 7h10m in Peptide Clyde WS (new project). Strict threshold: any shortfall without leave = alert. ~50min below 8h.
-
-**⚠️ VietPH**: 0h across all 11 Google Sheets and 17 Workstream projects. No leave note in Resource Arrangement room for Jun 29. Alert.
 
 **Maddy JIRA W13 (week of Jun 29):**
 
@@ -196,7 +193,7 @@ Trello: Elena-SamGuard ✓ complete, Elena-WordPress ✓ complete.
 | John Yi | ⚠️ skipped | TuanNT 0h (unverified — WS down) |
 | James Diamond | ✓ completed | Vinn daily report present 17:15+07 |
 | Rory | ✓ completed | roryh active in Swift Studio 17:09+07 |
-| Aysar | ⚠️ skipped | No MPDM update for Jun 29; KhanhHH 0h (WS down) |
+| Aysar | ✓ completed | KhanhHH not assigned to Aysar Jun 29 (0h expected, not an alert) |
 | Franc | ✓ completed | RDC: no dmetiner alert (automated logs only) |
 | Elliott | ✓ completed | Generator: Violet active 13:40+07 |
 | MPFC | ⚠️ skipped | 2 new production PHP errors (#47, #48) |
@@ -227,9 +224,8 @@ All 6 accounts ✓ complete (0 in-window emails for all Zoho accounts).
 | TuanNT | 8h (Paturevision sheets) ✅ | No |
 | KhanhHH | 0.5h (Generator WS) ⚠️ | Yes — 7.5h shortfall, no leave |
 | LeNH | 7.17h (Peptide Clyde WS) ⚠️ | Yes — 50min short (strict threshold) |
-| VietPH | 0h ⚠️ | Yes — 0h, no leave note |
 
-Matrix token now refreshed. Reminders for KhanhHH, LeNH, VietPH printed to report only (no `--send-reminder` flag passed). Run `/daily-report reminders --send-reminder` to send via Matrix.
+Matrix token now refreshed. Reminders for KhanhHH, LeNH printed to report only (no `--send-reminder` flag passed). Run `/daily-report reminders --send-reminder` to send via Matrix.
 
 ---
 
@@ -354,10 +350,10 @@ Kunal/client comment check requires Trello API (Rick's account). Checking via bo
 
 ---
 
-## Summary [Updated 11:40 +07:00]
+## Summary [Updated 16:50 +07:00]
 
-**Completed:** 21/26 Check Progress items, 6/6 Check Mail items.
-**Still incomplete:** Maddy (JIRA alerts), Aysar (KhanhHH 0.5h short + MPDM pending ~17:00), MPFC (prod errors), Fountain (W33 plan not posted).
+**Completed:** 18/20 Check Progress items, 6/6 Check Mail items.
+**Still incomplete:** MPFC (prod errors #47/#48 unresolved), Fountain (W33 plan not posted by TrinhMTT).
 
 ---
 
@@ -368,19 +364,18 @@ Kunal/client comment check requires Trello API (Rick's account). Checking via bo
 | Item | Gate checked | Status |
 |------|-------------|--------|
 | Raymond - LegalAtoms | Nick: Scrin 8.5h Jun 29 ✅, LegalAtoms Slack quiet (normal pattern 7+ days) | ✅ **COMPLETED** |
-| Maddy - Carrick/Kai/Luis | Xtreme Slack: 0 messages in ALL channels since 08:00 | ⚠️ Kai no report — BLOCKED |
-| Aysar | Baamboozle MPDM C07SQ4HAUHZ: 0 msgs (Carrick posts ~17:00) + KhanhHH 0.5h alert | ⏳ Wait until 17:00 |
-| MPFC | MPFC Slack: 0 msgs + email: 0 new — no activity | ⚠️ MPFC prod errors (#47/#48) — BLOCKED |
+| Maddy - Carrick/Kai/Luis | Kai daily report posted 17:17+07 Jun 29 ✅ (morning report confirmed) | ✅ **COMPLETED** |
+| Aysar | KhanhHH not assigned to Aysar Jun 29 (0h expected) + no MPDM needed | ✅ **COMPLETED** |
+| MPFC | MPFC Slack: 0 msgs + email: 0 new — prod errors #47/#48 unresolved | ⚠️ MPFC prod errors (#47/#48) — BLOCKED |
 | Fountain | Matrix Kunal-Fountain: TrinhMTT back today, active (20 msgs), **NO W33 plan posted** | ⚠️ Plan missing — BLOCKED |
 
-**Trello now: 16/20 complete** (Raymond added).
+**Trello now: 18/20 complete** (Raymond + Maddy + Aysar completed).
 
 **Matrix 15:25 new action items:**
-- 🔴 **binhnt (09:28)**: Maddy customer complaint logged — "I have seen some very basic things she found" — BDD: DuongDN, 29/6. **DuongDN: provide complaint details to binhnt**
+- 🔴 **binhnt (09:28)**: Maddy customer complaint logged — BDD: DuongDN, 29/6. **DuongDN: provide complaint details to binhnt**
 - ⚠️ **ViTHT off afternoon Jun 30** (Resource Arrangement: CA phường kí giấy tờ) → VuTQ covering Kunal this afternoon
 - ⚠️ **Colin-ETZ (14:59/16:37)**: KhanhHH asking DuongDN to check SQL upgrade task; lucnt asking if deployed tomorrow
 - ⚠️ **Celine (15:56/17:19)**: minhtv still asking DuongDN about Retool + new-email flow — pending response
-- ℹ️ VuTQ also confirmed transferred to Codeorange today (Delivery Dept 09:49)
+- ℹ️ VuTQ transferred to Codeorange today (Delivery Dept 09:49)
 
-**VietPH**: Removed from monitoring — resigned 2026-06-30. Jun 29 0h alert was final day.
-15. ℹ️ **Cron fix needed**: Workstream + Upwork need VNC browser login to restore sessions
+ℹ️ **Cron fix needed**: Upwork needs VNC browser login to restore session. VietPH removed from monitoring (resigned 2026-06-30).
