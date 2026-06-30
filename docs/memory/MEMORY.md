@@ -85,6 +85,7 @@
 - [feedback_trello_progress_reuse_pieces](daily-report/trello/feedback_trello_progress_reuse_pieces.md) — Progress items run ALL mapped source pieces (sheets/slack memory applies here too)
 - [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md) — Checklist items name person; status gates completion
 - [feedback_trello_per_client_gates_on_lead_dev](daily-report/trello/feedback_trello_per_client_gates_on_lead_dev.md), [feedback_philip_msteams_must_run](daily-report/trello/feedback_philip_msteams_must_run.md) — Per-client item gates on lead dev; Philip MS Teams check needs FULL NAME "Philip Briggs"
+- [feedback_recheck_uses_morning_report_data](daily-report/trello/feedback_recheck_uses_morning_report_data.md) — CRITICAL: recheck uses data ALREADY in morning report (yesterday's window) — NEVER re-query today's channels
 - [feedback_rebecca_chua_not_trello_block](daily-report/trello/feedback_rebecca_chua_not_trello_block.md), [feedback_blake_rollbar_not_person_alert](daily-report/trello/feedback_blake_rollbar_not_person_alert.md) — Never block Trello: Rebecca col P "Chưa", client Rollbar errors
 - [feedback_tuannt_gate_show_breakdown](daily-report/trello/feedback_tuannt_gate_show_breakdown.md) — TuanNT gate label must show per-sheet breakdown
 
