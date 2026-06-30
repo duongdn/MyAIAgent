@@ -69,20 +69,29 @@ async function main() {
     await page.setViewport({ width: 1280, height: 900 });
     await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36');
 
-    // Attempt headless re-login once if session expired
+    // Attempt recovery if session expired: first try stored cookies, then headless login
     let loggedIn = false;
     for (const room of rooms) {
       try {
         let data = await fetchWorkroomHours(page, room);
         if (data.status === 'session_expired' && !loggedIn && account) {
-          console.error(`Session expired for ${accountName}, attempting headless re-login...`);
-          const loginOk = await headlessLogin(page, account);
-          loggedIn = true;
-          if (loginOk) {
+          // Step 1: try injecting stored session cookies from config
+          const cookieOk = await injectStoredCookies(page, account);
+          if (cookieOk) {
+            console.error(`Cookie injection succeeded for ${accountName}`);
             data = await fetchWorkroomHours(page, room);
-          } else {
-            data = { workroom: room.name, status: 'login_failed', error: 'Headless re-login failed (CAPTCHA/2FA needed). Run: node scripts/upwork-login.js --login --account=' + accountName };
           }
+          if (data.status === 'session_expired') {
+            // Step 2: fall back to headless credential login
+            console.error(`Session expired for ${accountName}, attempting headless re-login...`);
+            const loginOk = await headlessLogin(page, account);
+            if (loginOk) {
+              data = await fetchWorkroomHours(page, room);
+            } else {
+              data = { workroom: room.name, status: 'login_failed', error: 'Headless re-login failed (CAPTCHA/2FA needed). Run: node scripts/upwork-login.js --login --account=' + accountName };
+            }
+          }
+          loggedIn = true;
         }
         results.push(data);
       } catch (err) {
@@ -95,6 +104,36 @@ async function main() {
   }
 
   console.log(JSON.stringify(results, null, 2));
+}
+
+// Try injecting stored session cookies from config. Returns true if authenticated after injection.
+async function injectStoredCookies(page, account) {
+  if (!account.session_cookies || !account.session_cookies.length) return false;
+  const ageDays = account.session_saved_at
+    ? (Date.now() - new Date(account.session_saved_at).getTime()) / 86400000
+    : 999;
+  if (ageDays > 30) {
+    console.error(`Stored cookies are ${Math.round(ageDays)}d old — skipping injection`);
+    return false;
+  }
+  try {
+    console.error(`Injecting ${account.session_cookies.length} stored cookies for ${account.name}...`);
+    await page.goto('https://www.upwork.com/', { waitUntil: 'networkidle2', timeout: 20000 });
+    for (const c of account.session_cookies) {
+      try {
+        await page.setCookie({ ...c, domain: '.upwork.com', url: 'https://www.upwork.com' });
+      } catch (_) {}
+    }
+    await page.reload({ waitUntil: 'networkidle2', timeout: 20000 });
+    await new Promise(r => setTimeout(r, 2000));
+    const url = page.url();
+    const ok = !url.includes('login') && !url.includes('account-security');
+    console.error(`Cookie injection result: ${ok ? 'AUTH' : 'STILL_EXPIRED'} (${url})`);
+    return ok;
+  } catch (err) {
+    console.error('Cookie injection error:', err.message);
+    return false;
+  }
 }
 
 // Attempt headless credential login. Returns true if landed on authenticated page.

@@ -108,6 +108,7 @@
 - [feedback_upwork_vs_tasklog_all_hours](daily-report/upwork/feedback_upwork_vs_tasklog_all_hours.md), [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md) — Sum ALL hours (official+part-time) to match Upwork; matching=OK, week-over-week drops not alerts
 - [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — Neural: messages_only workroom, must intercept API; silence/Cloudflare never an alert
 - [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — Upwork workroom URLs, credentials, weekly comparison
+- [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — After VNC login, extract+store oauth token in config so cron never needs re-login
 
 ## bailey-invoice-verify / bailey-monitor / bailey-task-monitor
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md), [feedback_upwork_filter_by_task_id_strict](daily-report/upwork/feedback_upwork_filter_by_task_id_strict.md) — Bailey hours in Paturevision sheet (col E=Task ID, invoices bill WBS+buffer); never use first empty row of a day

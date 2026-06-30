@@ -196,6 +196,24 @@ async function main() {
 
     await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-reports.png`) });
 
+    // Extract and persist session cookies so future headless runs don't need re-login
+    const allCookies = await page.cookies('https://www.upwork.com');
+    const sessionCookies = allCookies.filter(c =>
+      ['oauth2_global_js_token', 'master_access_token', 'XSRF-TOKEN', 'visitor_id',
+       'oauth2_global_js_token_v2', 'user-id', 'recognized'].includes(c.name)
+      || c.name.startsWith('oauth') || c.name.startsWith('master_')
+    );
+    if (sessionCookies.length > 0) {
+      const updatedConfig = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+      const idx = updatedConfig.accounts.findIndex(a => a.name === account.name);
+      if (idx !== -1) {
+        updatedConfig.accounts[idx].session_cookies = sessionCookies;
+        updatedConfig.accounts[idx].session_saved_at = new Date().toISOString();
+        fs.writeFileSync(CONFIG_PATH, JSON.stringify(updatedConfig, null, 2));
+        console.error(`Session cookies saved (${sessionCookies.length} cookies) to config/.upwork-config.json`);
+      }
+    }
+
     // Extract page data
     const pageData = await page.evaluate(() => ({
       title: document.title,
@@ -208,6 +226,7 @@ async function main() {
       account: account.name,
       url: pageData.url,
       title: pageData.title,
+      cookies_saved: sessionCookies.length,
       text_preview: pageData.text.substring(0, 3000),
       screenshots: [
         `tmp/upwork-${account.name}-dashboard.png`,
