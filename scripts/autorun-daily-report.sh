@@ -68,10 +68,6 @@ else
 fi
 export DISPLAY=:1
 
-# Pre-refresh Matrix token via API (no browser needed if refresh_token is valid)
-node "$PROJECT_DIR/scripts/matrix-token-refresh.js" >> "$LOG" 2>&1
-log "Matrix token refresh done (exit $?)"
-
 log "Starting daily report (single session, --cron mode)"
 
 out_file="$LOG_DIR/.cron-run.tmp"
