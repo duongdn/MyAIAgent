@@ -13,4 +13,7 @@ The dedicated `### 📱 Thiệu Nguyễn — Facebook AI` section (added 2026-06
 
 **How to apply:** Fixed in `fetch-news.py` `fetch_rss()` — timeout raised to 20s, plus one retry with a 2s pause before giving up (see commit `87b8c90`). If this section (or any RSS source) shows empty again, don't trust it at face value — manually re-fetch the URL directly first to confirm whether the source is actually empty or the fetch failed; check `result["error"]` from a direct `fetch_rss()` call rather than assuming the synthesis output is ground truth. The 2026-06-24 0200 report was also manually backfilled with the real 9 posts (commit `2c0fd47`) once this was confirmed.
 
+**UPDATE 2026-07-01 — rss.app replaced with puppeteer scraper:**
+All 3 rss.app feeds (shinantori, mrgoonie, Nghiện AI) returned HTTP 402 Payment Required — free tier quota exhausted. Replaced with `scripts/facebook-page-scraper.js` (puppeteer persistent-profile approach). One-time login: `node scripts/facebook-page-scraper.js --login`. `fetch-news.py` now dispatches sources with `fb_id` field to `fetch_facebook_page()` instead of `fetch_rss()`. FB profile stored at `tmp/facebook-profile/`.
+
 See [[feedback_news_digest_ai_underused_sources]].

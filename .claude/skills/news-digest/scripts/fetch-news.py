@@ -26,7 +26,9 @@ Output: JSON { topic, tag, fetchedAt, results: [{ topic, sources: [{ name, url, 
 
 import html
 import json
+import os
 import re
+import subprocess
 import sys
 import time
 import urllib.parse
@@ -35,6 +37,8 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 
 
 # ── Google News RSS builder ───────────────────────────────────────────────────
@@ -124,15 +128,15 @@ SOURCES = {
         },
         {
             "name": "Thiệu Nguyễn (Facebook AI)",
-            "url": "https://rss.app/feeds/Xdp23RDcoTT7qZHa.xml",
+            "fb_id": "shinantori",
         },
         {
             "name": "Duy Nguyen / mrgoonie (Facebook AI)",
-            "url": "https://rss.app/feeds/8Qu8UA7eG30zqCbP.xml",
+            "fb_id": "mrgoonie",
         },
         {
             "name": "Nghiện AI (Facebook Group)",
-            "url": "https://rss.app/feeds/tsK3drKBzruaQ1Gc.xml",
+            "fb_id": "groups/nghienai",  # TODO: replace with numeric group ID if slug doesn't resolve
         },
     ],
     "it": [
@@ -328,6 +332,61 @@ def _fetch_hn_scores(item_ids, ) -> dict:
 
 
 
+def fetch_facebook_page(source: dict, limit: int, tag: Optional[list]) -> dict:
+    """Scrape a Facebook page/group using the puppeteer script."""
+    fb_id = source["fb_id"]
+    result = {
+        "name": source["name"],
+        "url": f"https://www.facebook.com/{fb_id}",
+        "articles": [],
+        "error": None,
+    }
+
+    script = os.path.join(_PROJECT_ROOT, "scripts", "facebook-page-scraper.js")
+    if not os.path.exists(script):
+        result["error"] = f"scraper not found: {script}"
+        return result
+
+    try:
+        proc = subprocess.run(
+            ["node", script, fb_id, f"--limit={limit}"],
+            capture_output=True, text=True, timeout=90,
+            cwd=_PROJECT_ROOT,
+        )
+        if proc.returncode != 0:
+            result["error"] = (proc.stderr or "scraper exited non-zero")[:300]
+            return result
+
+        data = json.loads(proc.stdout)
+        page_data = data.get(fb_id, {})
+
+        if "error" in page_data:
+            result["error"] = page_data["error"]
+            return result
+
+        articles = page_data.get("articles", [])
+
+        if tag:
+            articles = [
+                a for a in articles
+                if any(
+                    _tag_matches(t, (a.get("title", "") + " " + a.get("content", "")).lower())
+                    for t in tag
+                )
+            ]
+
+        result["articles"] = articles[:limit]
+
+    except subprocess.TimeoutExpired:
+        result["error"] = "scraper timeout (90s)"
+    except json.JSONDecodeError as exc:
+        result["error"] = f"JSON parse error: {exc}"
+    except Exception as exc:
+        result["error"] = str(exc)
+
+    return result
+
+
 def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
     url = source["url"]
     result = {"name": source["name"], "url": url, "articles": [], "error": None}
@@ -493,7 +552,10 @@ def main():
     for topic_name, sources in selected:
         topic_result = {"topic": topic_name, "sources": []}
         for source in sources:
-            data = fetch_rss(source, limit, tag)
+            if source.get("fb_id"):
+                data = fetch_facebook_page(source, limit, tag)
+            else:
+                data = fetch_rss(source, limit, tag)
             topic_result["sources"].append(data)
         output["results"].append(topic_result)
 
