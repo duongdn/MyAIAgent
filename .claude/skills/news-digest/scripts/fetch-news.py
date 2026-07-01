@@ -127,6 +127,12 @@ SOURCES = {
             "url": _gnews("artificial intelligence LLM generative AI"),
         },
         {
+            # Substack RSS - no login needed, updates with tech/AI posts
+            "name": "Thiệu Nguyễn (Substack)",
+            "url": "https://thieunv.substack.com/feed",
+        },
+        {
+            # FB fallback - requires Chrome Profile 9 cookies (auto-extracted)
             "name": "Thiệu Nguyễn (Facebook AI)",
             "fb_id": "shinantori",
         },
@@ -332,6 +338,33 @@ def _fetch_hn_scores(item_ids, ) -> dict:
 
 
 
+def _refresh_fb_cookies() -> None:
+    """Auto-extract Facebook cookies from Chrome Profile 9 into tmp/fb-cookies.json."""
+    try:
+        import browser_cookie3  # type: ignore
+        cookies_file = os.path.join(_PROJECT_ROOT, "tmp", "fb-cookies.json")
+        profile = os.path.expanduser("~/.config/google-chrome/Profile 9")
+        cookie_db = os.path.join(profile, "Cookies")
+        if not os.path.exists(cookie_db):
+            return
+        cj = browser_cookie3.chrome(domain_name=".facebook.com", cookie_file=cookie_db)
+        puppeteer_cookies = []
+        for c in cj:
+            cookie: dict = {
+                "name": c.name, "value": c.value, "domain": c.domain,
+                "path": c.path, "secure": bool(c.secure), "sameSite": "Lax",
+            }
+            if c.expires and c.expires > 0:
+                cookie["expires"] = c.expires
+            puppeteer_cookies.append(cookie)
+        if any(c["name"] in ("c_user", "xs") for c in puppeteer_cookies):
+            os.makedirs(os.path.dirname(cookies_file), exist_ok=True)
+            with open(cookies_file, "w") as f:
+                json.dump(puppeteer_cookies, f)
+    except Exception:
+        pass  # silently skip — scraper falls back to Chrome profile login
+
+
 def fetch_facebook_page(source: dict, limit: int, tag: Optional[list]) -> dict:
     """Scrape a Facebook page/group using the puppeteer script."""
     fb_id = source["fb_id"]
@@ -346,6 +379,9 @@ def fetch_facebook_page(source: dict, limit: int, tag: Optional[list]) -> dict:
     if not os.path.exists(script):
         result["error"] = f"scraper not found: {script}"
         return result
+
+    # Auto-refresh cookies from Chrome Profile 9 before scraping
+    _refresh_fb_cookies()
 
     try:
         proc = subprocess.run(

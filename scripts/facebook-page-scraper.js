@@ -20,10 +20,12 @@ const fs = require('fs');
 const path = require('path');
 
 const FB_PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'facebook-profile');
+const FB_COOKIES_FILE = path.join(__dirname, '..', 'tmp', 'fb-cookies.json');
 const LOGIN_MODE = process.argv.includes('--login');
 const PAGE_IDS = process.argv.slice(2).filter(a => !a.startsWith('--'));
 const LIMIT_ARG = process.argv.find(a => a.startsWith('--limit='));
 const LIMIT = LIMIT_ARG ? parseInt(LIMIT_ARG.split('=')[1]) : 15;
+const USE_COOKIES_FILE = !LOGIN_MODE && fs.existsSync(FB_COOKIES_FILE);
 
 function cleanSingletons() {
   ['SingletonLock', 'SingletonCookie', 'SingletonSocket'].forEach(f => {
@@ -32,7 +34,9 @@ function cleanSingletons() {
 }
 
 async function scrapePage(page, pageId, limit) {
-  const url = `https://mbasic.facebook.com/${pageId}`;
+  // Use www.facebook.com directly (mbasic redirects here anyway)
+  // ?sk=wall forces the posts timeline tab
+  const url = `https://www.facebook.com/${pageId}?sk=wall`;
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
 
   const currentUrl = page.url();
@@ -40,56 +44,103 @@ async function scrapePage(page, pageId, limit) {
     return { error: 'not_logged_in — run: node scripts/facebook-page-scraper.js --login', articles: [] };
   }
 
+  // Scroll progressively to trigger lazy loading
+  for (let i = 0; i < 5; i++) {
+    await page.evaluate(() => window.scrollBy(0, 600));
+    await new Promise(r => setTimeout(r, 1000));
+  }
+  await new Promise(r => setTimeout(r, 2000));
+
+  // Screenshot for debugging
+  if (process.env.FB_DEBUG_SCREENSHOT) {
+    await page.screenshot({ path: process.env.FB_DEBUG_SCREENSHOT });
+    console.error('[facebook] screenshot saved:', process.env.FB_DEBUG_SCREENSHOT);
+  }
+
+
+  // Wait for posts to appear (try multiple selectors)
+  try { await page.waitForSelector('[role="feed"], a[href*="/posts/"]', { timeout: 8000 }); } catch {}
+
   const articles = await page.evaluate((limit) => {
+    // Find all clean post links (NOT comment links or reply links)
+    const postLinks = Array.from(document.querySelectorAll('a[href*="/posts/"]'))
+      .filter(a => {
+        const url = a.href || '';
+        // Exclude comment links and Messenger chat links
+        if (url.includes('comment_id') || url.includes('reply_comment_id')) return false;
+        if (url.includes('/messages/') || url.includes('/chat/')) return false;
+        return url.includes('/posts/');
+      });
+
+    const seen = new Set();
     const posts = [];
-    const seen = new WeakSet();
 
-    // mbasic renders posts as divs with .story_body_container or [data-ft]
-    const candidates = [
-      ...document.querySelectorAll('.story_body_container'),
-      ...document.querySelectorAll('[data-ft]'),
-    ].filter(el => {
-      if (seen.has(el)) return false;
-      seen.add(el);
-      return true;
-    });
-
-    for (const el of candidates) {
+    for (const linkEl of postLinks) {
       if (posts.length >= limit) break;
 
-      // Collect paragraph text
-      const paras = el.querySelectorAll('p, div > span');
-      const text = Array.from(paras)
-        .map(p => p.textContent.trim())
-        .filter(t => t.length > 10)
-        .join(' ')
-        .replace(/\s+/g, ' ')
-        .trim();
+      let link = linkEl.href;
+      try {
+        const u = new URL(link);
+        ['__cft__', '__tn__', '_rdr', '_nc_x'].forEach(p => u.searchParams.delete(p));
+        link = u.toString();
+      } catch {}
 
-      if (!text || text.length < 20) continue;
+      if (seen.has(link)) continue;
+      seen.add(link);
 
-      // Permalink — prefer story/permalink links
-      const linkEl = el.querySelector(
-        'a[href*="/story.php"], a[href*="/permalink/"], a[href*="story_fbid"], a[href*="/posts/"]'
-      );
-      let link = linkEl ? linkEl.href : '';
-      link = link.replace('mbasic.facebook.com', 'www.facebook.com');
-      // Strip mobile tracking params
-      try { const u = new URL(link); u.searchParams.delete('_rdr'); link = u.toString(); } catch {}
+      // Walk up to find the post container (a div that's big enough to be a post)
+      let container = linkEl.parentElement;
+      while (container) {
+        const rect = container.getBoundingClientRect();
+        if (rect.width > 400 && rect.height > 100) break;
+        container = container.parentElement;
+      }
+      if (!container) continue;
 
-      // Timestamp
-      const timeEl = el.querySelector('abbr');
-      const pubDate = timeEl
-        ? (timeEl.getAttribute('data-store')
-            ? (() => { try { return JSON.parse(timeEl.getAttribute('data-store')).time; } catch { return timeEl.textContent.trim(); } })()
-            : timeEl.textContent.trim())
-        : '';
+      // Keep walking up until we don't gain much more text (finds tightest post div)
+      let best = container;
+      let parent = container.parentElement;
+      while (parent) {
+        const pText = (parent.innerText || '').length;
+        const cText = (best.innerText || '').length;
+        // Stop if parent is >3x larger (it contains multiple posts)
+        if (pText > cText * 3) break;
+        const pRect = parent.getBoundingClientRect();
+        if (pRect.width > window.innerWidth * 0.8) break; // full-width = layout container
+        best = parent;
+        parent = parent.parentElement;
+      }
+
+      // Extract clean text from container — strip UI noise
+      const cloned = best.cloneNode(true);
+      cloned.querySelectorAll('[aria-hidden="true"], [role="button"], nav').forEach(n => n.remove());
+      const UI_NOISE = new Set([
+        'Facebook','Xem thêm','Thích','Bình luận','Chia sẻ','Trả lời',
+        'Posts','Bài viết','Filters','Bộ lọc','Shared with Public',
+        'Shared with Friends','Công khai','Bạn bè','Like','Comment','Share','Reply',
+        '...','· ·','·','Tác giả',
+      ]);
+      let rawText = (cloned.innerText || '').replace(/\s+/g, ' ').trim();
+      // Strip Facebook post header: "Posts<author><time> Shared with Public"
+      rawText = rawText.replace(/^(Posts|Bài viết)?\s*(Filters|Bộ lọc)?\s*/, '');
+      // Strip author name + timestamp + privacy (e.g. "Thiệu Nguyễn1h Shared with Public")
+      rawText = rawText.replace(/^[^\n·•]{3,40}?\d+[hm]\s+(Shared with Public|Công khai|Bạn bè|Friends)\s*/, '');
+      rawText = rawText.replace(/^[^\n·•]{3,40}?\s+(Hôm qua|Yesterday|Tháng|ngày)\s[^•]{0,30}(Shared with Public|Công khai|Bạn bè)\s*/, '');
+      // Strip reaction noise at end: "178 38 123" or "All reactions:" or "View X comments"
+      rawText = rawText.replace(/\s*(All reactions:[^.]*|View \d+ comments?|Xem \d+ bình luận)[^.]*$/, '').trim();
+      rawText = rawText.replace(/\s*(\d+\s+){2,}\d*\s*$/, '').trim();
+      rawText = rawText.replace(/…\s*$/, '').trim();
+      const UI_NOISE_INLINE = ['Xem thêm', 'See more'];
+      UI_NOISE_INLINE.forEach(s => { rawText = rawText.replace(new RegExp(s + '$'), '').trim(); });
+      const text = rawText;
+
+      if (text.length < 20) continue;
 
       posts.push({
         title: text.substring(0, 150),
         content: text.substring(0, 600),
         link,
-        pubDate: pubDate ? String(pubDate) : '',
+        pubDate: '',
       });
     }
 
@@ -137,6 +188,13 @@ async function run() {
     await page.evaluateOnNewDocument(() => {
       Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
     });
+
+    // If cookies file exists, inject cookies instead of relying on Chrome profile
+    if (USE_COOKIES_FILE) {
+      const cookies = JSON.parse(fs.readFileSync(FB_COOKIES_FILE, 'utf-8'));
+      await page.setCookie(...cookies);
+      console.error(`[facebook] Loaded ${cookies.length} cookies from ${FB_COOKIES_FILE}`);
+    }
 
     if (LOGIN_MODE) {
       await page.goto('https://www.facebook.com/', { waitUntil: 'networkidle2' });
