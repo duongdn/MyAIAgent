@@ -37,6 +37,7 @@
 - [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — Amazing Meds + Equanimity xoxc: refresh proactively, never invalid_auth
 - [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — Aysar gate=Slack MPDM C07SQ4HAUHZ (not Matrix), posts ~17:00-17:45+07, +GitHub issues
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — UNRESOLVED: Kai/LongVV may be 40h not 16h (ask user); also LIFM2-439 client trust incident
+- [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — Kai daily report only required when Kai has active tasks that day; absence ≠ alert if no work assigned
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — Puppeteer cron /tmp failure → false 0h; TMPDIR=/var/tmp
 
 ## daily-report:discord

@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/WS | **VietPH 0h Jun 30** — all sources (sheets + Workstream), no leave note ⚠️ |
-| 2 | Maddy/Kai | Madhuraka hotfix requests Jun 30 18:46 (listing price bug on Listed-Con/Buy tabs) + 18:56 (payout % boxes on product dropdown) — unanswered; no Kai daily report |
+| 1 | Sheets/WS | VietPH 0h Jun 30 — ✅ resigned (last day Jun 30, removed from monitoring) |
+| 2 | Maddy | Madhuraka hotfix requests Jun 30 18:46 (listing price bug on Listed-Con/Buy tabs) + 18:56 (payout % boxes on product dropdown) — unanswered |
 | 3 | Matrix (internal) | binhnt risk list Jun 30 17:31 — **KH: Maddy, BDD: DuongDN** flagged as client complaint risk (noted 29/6) |
 | 4 | Fountain #2615 | 789% over-estimate (106.75h actual / 12h est) — Deployed on Staging |
 | 5 | Fountain #2702 | 219% over-estimate (25.5h actual / 8h est) — In-progress (>50%) |
@@ -102,7 +102,7 @@ TuanNT worked for John Yi. Sheets not updated yet at cron time — recheck will 
 | LongVV | 0h | 2h (James Diamond) | ⚠️ W13 total ~10h (need 6h more by Fri; off AM today) |
 | PhucVT | 0h | 8h (James Diamond) | ✅ OK |
 | TuanNT | 0h | 0h (Scrin: 6h58m John Yi) | ✅ Scrin authoritative for John Yi |
-| VietPH | 0h | **0h** | ⚠️ ALERT: 0h all sources, no leave note |
+| VietPH | 0h | 0h | ✅ Resigned — last day Jun 30, removed from monitoring |
 | KhanhHH | 0h | 11h (Baamboozle 2h + Generator 6h + ETZ-Wathaga 3h) | ✅ OK |
 | LeNH | 0h | 9.17h (Peptide Clyde — new project) | ✅ OK |
 
@@ -120,7 +120,7 @@ Workstream auto-refreshed 09:15. All devs verified.
 **No estimate (1):** LIFM2-259 — dev must set estimate before logging
 
 Trello: John Yi ✓ (recheck — Scrin 6h58m authoritative), Bailey ✓ (recheck), Rebecca ✓ (recheck).
-All 3 gates cleared via Scrin. VietPH 0h all sources → ⚠️ ALERT (no leave).
+All 3 gates cleared via Scrin. VietPH: resigned (last day Jun 30) — not an alert.
 
 ---
 
@@ -230,7 +230,7 @@ Trello: Rory ✓ Neural Contract ✓
 
 | Item | Result | Details |
 |------|--------|---------|
-| Maddy - Carrick/Kai/Luis | ○ open | No Kai report in Xtreme Slack; Madhuraka hotfix requests Jun 30 18:46+18:56 unanswered; binhnt risk escalation |
+| Maddy - Carrick/Kai/Luis | ○ open | Madhuraka hotfix requests Jun 30 18:46+18:56 unanswered; binhnt risk escalation. (Kai no work Jun 30 — daily report not required) |
 | John Yi - Amazing Meds | ✓ complete | TuanNT Scrin 6h58m Jun 30 confirmed — recheck cleared |
 | James Diamond - Vinn | ✓ complete | nusvinn daily report 17:16 +07 ✅ |
 | Rory | ✓ complete | No Swift Studio alerts — clean |
@@ -281,9 +281,8 @@ All 6 items ✓ complete (0 in-window emails for all accounts).
 
 ## Reminders — 09:18 (+07:00)
 
-**VietPH**: 0h Jun 30 all sources (sheets + Workstream), no leave note. Reminder candidate — run with `--send-reminder` flag to send.
 **LongVV**: W13 ~10h (need 6h more by Fri). Off AM today. Monitor weekly total.
-All other devs confirmed working Jun 30. No other reminders needed.
+All other devs confirmed working Jun 30. No other reminders needed. VietPH: resigned — removed from monitoring.
 
 ---
 
@@ -294,7 +293,7 @@ All other devs confirmed working Jun 30. No other reminders needed.
 **Still open (○):** Maddy, Fountain, Philip (3 items)
 
 **Open alerts requiring action:**
-- VietPH 0h Jun 30 — follow up (no leave recorded)
+- VietPH: resigned, last day Jun 30 — removed from monitoring
 - Madhuraka hotfix requests Jun 30 18:46+18:56 (listing price + payout %) — unanswered
 - binhnt risk list Jun 30: Maddy flagged — DuongDN to address
 - TuanNT sick today (Jul 1) — Bailey Console tasks delayed (datnc informed)
@@ -304,6 +303,5 @@ All other devs confirmed working Jun 30. No other reminders needed.
 - Philip MS Teams status undetermined — check tomorrow or via other channel
 
 **Unresolved questions:**
-- VietPH Jun 30: leave or oversight? (no leave in parse-leave-emails output)
 - Fountain delivery bug — what is fix timeline for Kunal?
 - LongVV Jul 1 AM leave — formally approved or informal?

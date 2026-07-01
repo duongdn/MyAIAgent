@@ -6,8 +6,15 @@
     "PhucVT",
     "TuanNT",
     "KhanhHH",
-    "LeNH",
-    "VietPH"
+    "LeNH"
+  ],
+  "resigned_devs": [
+    {
+      "dev_id": "VietPH",
+      "dev_email": "vietph@nustechnology.com",
+      "last_day": "2026-06-30",
+      "note": "Resigned — confirmed by DuongDN 2026-07-01. No longer monitored."
+    }
   ],
   "leaves": [
     {
