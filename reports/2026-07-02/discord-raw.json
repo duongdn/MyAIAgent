@@ -1,0 +1,155 @@
+Discord monitor: window from 2026-07-01T09:18:00+07:00 (snowflake 1521701376491520000)
+{
+  "nusvinn": {
+    "account": "nusvinn",
+    "tokenValid": true,
+    "messages": [
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "Just report my process today:\n- Review Leon code PR 551, 552.\n- Check and discuss with Jeff about Contractor sign in flow.\n- Working on Dynamic Property Check-In Forms & Contractor Sign-In Configuration (clear questions, working on updates).\n- Checking load task module issue.",
+        "ts": "2026-07-01T10:30:57.853000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "<@268286730078126080> Approved",
+        "ts": "2026-07-01T10:17:31.370000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "dapackage",
+        "content": "<@1106035020856037537> Ready for re-review",
+        "ts": "2026-07-01T08:51:41.715000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "<@268286730078126080> Check my comments on your PRs, regarding new alarm grouping system",
+        "ts": "2026-07-01T06:59:02.852000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "Thanks Mary !",
+        "ts": "2026-07-01T06:57:54.198000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "Hi <@1106035020856037537>, I've sent the video. It's the same issue as yesterday, but it's happening in the production environment while I was creating a task. Thanks!",
+        "ts": "2026-07-01T06:55:09.815000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "<@1106035020856037537> I've tested the hazard fix in production. The hazard icon appears on the map correctly, and clicking the icon opens the correct hazard details. Everything is working as expected on my end.",
+        "ts": "2026-07-01T06:13:28.634000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "Checking on this one now <@1106035020856037537>",
+        "ts": "2026-07-01T05:13:54.088000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "<@268286730078126080>, I've completed testing on staging. The Pre-Start Inspection email is working as expected. I received the email successfully, and the inspection PDF is attached with the correct inspection details and results. Everything looks good on my end.",
+        "ts": "2026-07-01T05:13:38.343000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "> The new alarm grouping system has PRs for review (551, 552)\n<@268286730078126080> I'm reviewing it.",
+        "ts": "2026-07-01T04:44:37.742000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "dapackage",
+        "content": "<@1411407289495191662> Just another heads up, I've pushed the pre-start emails for testing on staging\n\n<@1106035020856037537> The new alarm grouping system has PRs for review (551, 552)",
+        "ts": "2026-07-01T04:17:36.808000+00:00"
+      },
+      {
+        "channel": "airagri_webapp",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "<@1411407289495191662> Please verify again these things when you have time.\n- Fix(task): assignment notifications not firing (deployed to prod).\n- Fix(hazard): Hazard icons not appearing on map (deployed to prod).",
+        "ts": "2026-07-01T03:36:15.190000+00:00"
+      },
+      {
+        "channel": "airagri-flutter",
+        "guild": "AirAgri",
+        "author": "jeff_trinh",
+        "content": "Here is my daily report for today (4 hours):\nMain App \n- Check template creation during spray job creation - done \n- Check the \"Use Existing Template\" flow - done \n- Check Mental Health feature - WIP \n\nNext Plan:\n- Continue working on the Mental Health feature",
+        "ts": "2026-07-01T10:25:55.952000+00:00"
+      },
+      {
+        "channel": "airagri-flutter",
+        "guild": "AirAgri",
+        "author": "jeff_trinh",
+        "content": "Thanks, Mary",
+        "ts": "2026-07-01T03:02:55.691000+00:00"
+      },
+      {
+        "channel": "airagri-flutter",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "<@1070508823577628753> I've tested the new iOS TestFlight build for the Spray module. I was able to create a new spray job, add multiple zones, complete the required fields, configure the equipment settings, and save the job successfully. I didn't encounter any issues during the parts I tested. Than",
+        "ts": "2026-07-01T03:01:08.715000+00:00"
+      },
+      {
+        "channel": "airagri-testing",
+        "guild": "AirAgri",
+        "author": "jeff_trinh",
+        "content": "Can you please check whether newly received notifications are still showing “10h ago”? <@1411407289495191662>",
+        "ts": "2026-07-01T03:13:03.623000+00:00"
+      },
+      {
+        "channel": "airagri-testing",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "<@1070508823577628753>",
+        "ts": "2026-07-01T03:08:47.688000+00:00"
+      },
+      {
+        "channel": "airagri-testing",
+        "guild": "AirAgri",
+        "author": "bellatric02",
+        "content": "<@1106035020856037537>  can you please check. Thanks!",
+        "ts": "2026-07-01T03:06:51.616000+00:00"
+      },
+      {
+        "channel": "airagri-testing",
+        "guild": "AirAgri",
+        "author": "jeff_trinh",
+        "content": "Hi <@1411407289495191662>, could you please help check this display issue on the latest TestFlight build? Thanks, Mary",
+        "ts": "2026-07-01T03:05:25.265000+00:00"
+      },
+      {
+        "channel": "airagri-testing",
+        "guild": "AirAgri",
+        "author": "nusvinn",
+        "content": "Hi <@1411407289495191662>. I'm still waiting your steps to check this issue.",
+        "ts": "2026-07-01T02:24:46.153000+00:00"
+      }
+    ]
+  },
+  "nuscarrick": {
+    "account": "nuscarrick",
+    "tokenValid": true,
+    "messages": [],
+    "andrewDMs": []
+  }
+}

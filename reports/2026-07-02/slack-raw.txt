@@ -1,0 +1,105 @@
+Window: 2026-07-01T09:18:00+07:00 (SEARCH_AFTER: 2026-06-30)
+Baamboozle: 0 msgs
+RDC - FM Monitoring: 0 msgs
+Swift Studio: 0 msgs
+Xtreme Soft Solutions: 0 msgs
+SAM GUARD - Mobile: 0 msgs
+GLOBAL GRAZING SERVICES: 0 msgs
+Amazing Meds: 0 msgs
+Generator: 1 msgs
+LegalAtoms: 1 msgs
+MyPersonalFootballCoach: 0 msgs
+William Bills: 0 msgs
+Equanimity: 0 msgs
+SoCal Auto Wraps: SKIP
+Aigile Dev: 0 msgs
+OhCleo: ERR:invalid_auth
+[
+  {
+    "workspace": "Baamboozle",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "RDC - FM Monitoring",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Swift Studio",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Xtreme Soft Solutions",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "SAM GUARD - Mobile",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "GLOBAL GRAZING SERVICES",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Amazing Meds",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Generator",
+    "count": 1,
+    "messages": [
+      {
+        "ts": "2026-07-01T10:00:03.970Z",
+        "user": "elliott.bouher",
+        "channel": "release",
+        "text": "<@U076RUV983T|Violet> I see what it looks like in staging, I guess it's more that i have some feedback on how it works when there is no RSVP cutoff set.\n\nIf the RSVP cutoff is null\nThen the RSVP by field appears with the start date and time of the event\n\nI would prefer the RSVP by fields not to show"
+      }
+    ]
+  },
+  {
+    "workspace": "LegalAtoms",
+    "count": 1,
+    "messages": [
+      {
+        "ts": "2026-07-01T03:11:25.905Z",
+        "user": "david",
+        "channel": "mpdm-raymond--talha.naeem1920--david-1",
+        "text": "which one you updated <@U0476RCCX39|Talha Naeem> ?"
+      }
+    ]
+  },
+  {
+    "workspace": "MyPersonalFootballCoach",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "William Bills",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "Equanimity",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "SoCal Auto Wraps",
+    "skipped": true
+  },
+  {
+    "workspace": "Aigile Dev",
+    "count": 0,
+    "messages": []
+  },
+  {
+    "workspace": "OhCleo",
+    "error": "invalid_auth"
+  }
+]

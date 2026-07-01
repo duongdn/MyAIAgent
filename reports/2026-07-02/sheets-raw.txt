@@ -1,0 +1,55 @@
+Scanning ALL 13 sheets for 2026-07-01...
+  Elena: no week tab found for date
+Live-querying Workstream project list for 2026-07-01...
+  [workstream] token expired, refreshing via SSO...
+[workstream-login] Token invalid/missing. Opening browser...
+[workstream-login] Navigating to https://workstream.nustechnology.com
+[workstream-login] Failed to capture token.
+  [workstream] unavailable: Command failed: DISPLAY=:1 node /var/www/MyDailyAgent/scripts/workstream-login.js — Sheets-only results follow
+{
+  "LongVV": {
+    "sheets": {},
+    "workstream": {},
+    "leave": {},
+    "sheetsTotal": 0,
+    "workstreamTotal": 0,
+    "workstreamUnavailable": true,
+    "grandTotal": 0
+  },
+  "PhucVT": {
+    "sheets": {},
+    "workstream": {},
+    "leave": {},
+    "sheetsTotal": 0,
+    "workstreamTotal": 0,
+    "workstreamUnavailable": true,
+    "grandTotal": 0
+  },
+  "TuanNT": {
+    "sheets": {},
+    "workstream": {},
+    "leave": {},
+    "sheetsTotal": 0,
+    "workstreamTotal": 0,
+    "workstreamUnavailable": true,
+    "grandTotal": 0
+  },
+  "KhanhHH": {
+    "sheets": {},
+    "workstream": {},
+    "leave": {},
+    "sheetsTotal": 0,
+    "workstreamTotal": 0,
+    "workstreamUnavailable": true,
+    "grandTotal": 0
+  },
+  "LeNH": {
+    "sheets": {},
+    "workstream": {},
+    "leave": {},
+    "sheetsTotal": 0,
+    "workstreamTotal": 0,
+    "workstreamUnavailable": true,
+    "grandTotal": 0
+  }
+}

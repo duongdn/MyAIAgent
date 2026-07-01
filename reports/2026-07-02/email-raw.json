@@ -1,0 +1,962 @@
+[
+  {
+    "email": "duongdn@nustechnology.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "LongVV_Đơn xin phép làm remote_Ngày 1",
+        "from": "Vo Van Long <longvv@nustechnology.com>",
+        "date": "Tue, 16 Jun 2026 20:19:31 +0700"
+      },
+      {
+        "subject": "LeNH_ÄÆ¡n xin nghá» p",
+        "from": "Le Ngo <lenh@nustechnology.com>",
+        "date": "Wed, 17 Jun 2026 06:58:55 +0700"
+      },
+      {
+        "subject": "Re: LongVV_Đơn xin phép làm remote_Ng",
+        "from": "Vo Van Long <longvv@nustechnology.com>",
+        "date": "Wed, 17 Jun 2026 09:50:28 +0700"
+      },
+      {
+        "subject": "Re: Đơn Xin Phép",
+        "from": "Minh Trinh <minhtv@nustechnology.com>",
+        "date": "Wed, 17 Jun 2026 11:33:27 +0700"
+      },
+      {
+        "subject": "DatNC_ÄÆ¡n xin nghá» phÃ©p v",
+        "from": "Dat Nguyen <datnc@nustechnology.com>",
+        "date": "Wed, 17 Jun 2026 14:24:25 +0700"
+      },
+      {
+        "subject": "Re: DatNC_Đơn xin nghỉ phép vào th",
+        "from": "Binh Nguyen <binhnt@nustechnology.com>",
+        "date": "Wed, 17 Jun 2026 15:05:08 +0700"
+      },
+      {
+        "subject": "[NUS - Dept] Chúc Mừng Sinh Nhật Nghi",
+        "from": "Truc Pham <trucpdt@nustechnology.com>",
+        "date": "Thu, 18 Jun 2026 09:40:32 +0700"
+      },
+      {
+        "subject": "LongVV_Đơn xin phép làm remote_Ngày 2",
+        "from": "Vo Van Long <longvv@nustechnology.com>",
+        "date": "Mon, 22 Jun 2026 08:24:22 +0700"
+      },
+      {
+        "subject": "Re: Xin nghỉ phép",
+        "from": "Chien Tran <chientx@nustechnology.com>",
+        "date": "Mon, 22 Jun 2026 08:51:02 +0700"
+      },
+      {
+        "subject": "Re: LongVV_Đơn xin phép làm remote_",
+        "from": "Nam Tran <namtv@nustechnology.com>",
+        "date": "Mon, 22 Jun 2026 09:53:23 +0700"
+      },
+      {
+        "subject": "Spreadsheet shared with you: \"NUS_HR_Checklist_Employee_Resignation_VietPH_0_1\"",
+        "from": "\"Cuong Nguyen (via Google Sheets)\" <drive-shares-dm-noreply@google.com>",
+        "date": "Mon, 22 Jun 2026 08:06:53 +0000"
+      },
+      {
+        "subject": "gitlab.com sign-in from new location",
+        "from": "GitLab <gitlab@mg.gitlab.com>",
+        "date": "Tue, 23 Jun 2026 06:34:12 +0000"
+      },
+      {
+        "subject": "Spreadsheet shared with you: \"NUS_HR_Checklist_Employee_Resignation_TamHVH_0_1\"",
+        "from": "\"Trinh Mai (via Google Sheets)\" <drive-shares-dm-noreply@google.com>",
+        "date": "Tue, 23 Jun 2026 07:11:47 +0000"
+      },
+      {
+        "subject": "LongVV_Đơn xin phép làm remote_Ngày 2",
+        "from": "Vo Van Long <longvv@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 09:42:33 +0700"
+      },
+      {
+        "subject": "Re: LongVV_Đơn xin phép làm remote_",
+        "from": "Nam Tran <namtv@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 09:47:02 +0700"
+      },
+      {
+        "subject": "PhatDLT_Mail xin nghá»",
+        "from": "Phat Dinh <phatdlt@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 14:59:51 +0700"
+      },
+      {
+        "subject": "HaoNV_ÄÆ¡n Xin NghiÌ P",
+        "from": "Hao Nguyen <haonv@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 15:04:01 +0700"
+      },
+      {
+        "subject": "[NUS - CDF] Your CDF Form status has changed",
+        "from": "CDF Team <mailer@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 14:33:47 +0000"
+      },
+      {
+        "subject": "[NUS - CDF] Your CDF Form status has changed",
+        "from": "CDF Team <mailer@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 15:45:08 +0000"
+      },
+      {
+        "subject": "[NUS - CDF] Your CDF Form status has changed",
+        "from": "CDF Team <mailer@nustechnology.com>",
+        "date": "Wed, 24 Jun 2026 15:46:40 +0000"
+      }
+    ],
+    "alerts": [
+      "Re: DatNC_Đơn xin nghỉ phép vào th",
+      "Re: Xin nghỉ phép",
+      "Re: PhatDLT_Mail xin nghỉ phép_Ngày 03",
+      "Re: TrinhMTT_Đơn Xin Nghỉ Phép thứ",
+      "Re: TrinhMTT_Đơn Xin Nghỉ Phép thứ",
+      "Re: DatNC_Đơn xin nghỉ phép vào th"
+    ]
+  },
+  {
+    "email": "carrick@nustechnology.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "Verifying it's you",
+        "from": "Atlassian <noreply+bb416d0@id.atlassian.com>",
+        "date": "Sat, 27 Jun 2026 03:49:32 +0000"
+      },
+      {
+        "subject": "Query - [AIT#9RG]",
+        "from": "naharronak@gmail.com",
+        "date": "Sat, 27 Jun 2026 07:22:23 +0000"
+      },
+      {
+        "subject": "We're updating our Privacy Policy",
+        "from": "Anthropic Team <notice@email.anthropic.com>",
+        "date": "Sat, 27 Jun 2026 08:39:06 +0000"
+      },
+      {
+        "subject": "Generator Demo 1.9.0 (76) for iOS is now available to test.",
+        "from": "Generator Tech via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Mon, 29 Jun 2026 02:26:23 +0000 (GMT)"
+      },
+      {
+        "subject": "Slack confirmation code: ALN-DUZ",
+        "from": "Slack <no-reply-nVrpzH33UvMD8hmxEtDpPqdq@slack.com>",
+        "date": "Mon, 29 Jun 2026 04:43:47 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: 6HD-ASG",
+        "from": "Slack <no-reply-AX08I3Xd6RaurwgV2qeZdtqC@slack.com>",
+        "date": "Mon, 29 Jun 2026 04:44:30 +0000"
+      },
+      {
+        "subject": "[Elliott - Generator Lifestyle - Bug #79458] (In Progress) [869]",
+        "from": "NUS Redmine <mailer@nustechnology.com>",
+        "date": "Mon, 29 Jun 2026 06:19:29 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: VHN-8CA",
+        "from": "Slack <no-reply-uzZq7rmMP5qseSg8tbFirDoq@slack.com>",
+        "date": "Mon, 29 Jun 2026 06:24:49 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: FHI-3MG",
+        "from": "Slack <no-reply-GrqRwaSiWJNlwY6K9iNJSpDW@slack.com>",
+        "date": "Mon, 29 Jun 2026 06:26:10 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: PPT-WBA",
+        "from": "Slack <no-reply-W0lbafAYBAB9RzJKNRqUenRy@slack.com>",
+        "date": "Mon, 29 Jun 2026 07:05:01 +0000"
+      },
+      {
+        "subject": "[Elliott - Generator Lifestyle - Bug #79458] (Tested on Staging)",
+        "from": "NUS Redmine <mailer@nustechnology.com>",
+        "date": "Mon, 29 Jun 2026 07:37:23 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: AXX-QNT",
+        "from": "Slack <no-reply-Hp1tlN9nrgSbkwCBzf7da9LF@slack.com>",
+        "date": "Mon, 29 Jun 2026 07:49:50 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: HIA-NVI",
+        "from": "Slack <no-reply-khtBwGe1A3ndW838UMUhVHyw@slack.com>",
+        "date": "Mon, 29 Jun 2026 07:50:34 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: CIJ-CEO",
+        "from": "Slack <no-reply-hyuC5lbMIHKs7J1VMuucSaJJ@slack.com>",
+        "date": "Mon, 29 Jun 2026 08:09:00 +0000"
+      },
+      {
+        "subject": "Brookland App Dev 1.10.0 (25) for iOS is now available to test.",
+        "from": "Reside Retirement Living via TestFlight",
+        "date": "Mon, 29 Jun 2026 08:59:52 +0000 (GMT)"
+      },
+      {
+        "subject": "Slack confirmation code: G6D-MXF",
+        "from": "Slack <no-reply-q22hdLZif33QZoLKU2x98ElS@slack.com>",
+        "date": "Mon, 29 Jun 2026 09:04:10 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: CYP-UWS",
+        "from": "Slack <no-reply-JAuq6ZcZlmKYTWZa4NqslWze@slack.com>",
+        "date": "Mon, 29 Jun 2026 09:14:42 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: Z3H-KII",
+        "from": "Slack <no-reply-X4u3rMDYkKov31RkZzY8q0H6@slack.com>",
+        "date": "Mon, 29 Jun 2026 09:15:42 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: ZX8-4XE",
+        "from": "Slack <no-reply-1U4xOxgA9ZPVIk8xaYgFX2ut@slack.com>",
+        "date": "Mon, 29 Jun 2026 09:17:06 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: ZE9-37R",
+        "from": "Slack <no-reply-QevOgTtCT3mTfHfTApvw2ZvS@slack.com>",
+        "date": "Mon, 29 Jun 2026 09:17:44 +0000"
+      }
+    ],
+    "alerts": [
+      "[snyk] Vulnerability alert & remediations update for the marcel organization",
+      "XiD SaaS Backend | Failed pipeline for",
+      "XiD SaaS Backend | Failed pipeline for main | 929caf69",
+      "XiD SaaS Backend | Failed pipeline for 20260630 | 929caf69",
+      "XiD SaaS Backend | Failed pipeline for main | 84503938",
+      "generator-api | Failed pipeline for stagingPhase2 | 05ce6333",
+      "generator-api | Failed pipeline for stagingPhase2 | 39c1453f",
+      "generator-api | Failed pipeline for stagingPhase2 | 04945afb",
+      "Your personal access tokens will expire in 30 days or less",
+      "generator-api | Failed pipeline for stagingPhase2 | 1cf585bb",
+      "generator-api | Failed pipeline for stagingPhase2 | 39d17de0",
+      "generator-api | Failed pipeline for stagingPhase2 | e06ad068",
+      "generator-api | Failed pipeline for stagingPhase2 | b966d7d9"
+    ]
+  },
+  {
+    "email": "nick@nustechnology.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "Christina Keefe shared \"Ch 11 12 14 Orgo overview slides chem1010",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:13:12 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"Carbohydrates and lipids chem1010 sp2020\"",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:13:51 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"Ch 9 slides CHEM1010 Remote sp2020\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:15:22 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 slides Chapter 3 Fa2020\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:17:16 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 remote slides Chapter 10_ Acids_",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:18:07 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 organic chapters part 2 SP2020",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:19:06 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 Chapter 4 slides FA2020\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:19:43 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 Quiz 2 _1_\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:24:52 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1010 HW Ch 4 \" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:25:45 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1030 HW Ch 2\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:34:42 +0000"
+      },
+      {
+        "subject": "Christina Keefe shared \"CHEM1030 Exam 1\" with you",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:35:32 +0000"
+      },
+      {
+        "subject": "PDFs with issues",
+        "from": "Christina Keefe <Christina.Keefe@odysseusllc.com>",
+        "date": "Thu, 25 Jun 2026 20:48:09 +0000"
+      },
+      {
+        "subject": "Action needed: Review staff permissions before Aug 3, 2026",
+        "from": "Shopify <email@email.shopify.com>",
+        "date": "Fri, 26 Jun 2026 04:39:39 +0000"
+      },
+      {
+        "subject": "PR - Fix crash from nil.id - CNA.Operations.App 1708 (Emir LLaneza)",
+        "from": "Azure DevOps <azuredevops@microsoft.com>",
+        "date": "Sat, 27 Jun 2026 02:21:19 +0000"
+      },
+      {
+        "subject": "Password changed for your Zoho account",
+        "from": "Zoho Team <noreply@zohoaccounts.com>",
+        "date": "Fri, 26 Jun 2026 19:40:48 -0700 (PDT)"
+      },
+      {
+        "subject": "Your Atlassian account password has changed",
+        "from": "Atlassian <noreply+1868af0@id.atlassian.com>",
+        "date": "Sat, 27 Jun 2026 02:48:22 +0000"
+      },
+      {
+        "subject": "PR - Fix crash from nil.id - CNA.Operations.App 1708 (Emir LLaneza)",
+        "from": "Azure DevOps <azuredevops@microsoft.com>",
+        "date": "Sat, 27 Jun 2026 03:09:21 +0000"
+      },
+      {
+        "subject": "PR - Disable daily task notification on staging - CNA.Operations.App",
+        "from": "Azure DevOps <azuredevops@microsoft.com>",
+        "date": "Sat, 27 Jun 2026 03:13:58 +0000"
+      },
+      {
+        "subject": "Slack confirmation code: 4FE-QNE",
+        "from": "Slack <no-reply-8MxkjCjg0gXtcSTXaktX4byV@slack.com>",
+        "date": "Sat, 27 Jun 2026 09:54:58 +0000"
+      },
+      {
+        "subject": "PR - Disable daily task notification on staging - CNA.Operations.App",
+        "from": "Azure DevOps <azuredevops@microsoft.com>",
+        "date": "Sun, 28 Jun 2026 22:16:29 +0000"
+      }
+    ],
+    "alerts": [
+      "PR - Fix crash from nil.id - CNA.Operations.App 1708 (Emir LLaneza)",
+      "PR - Fix crash from nil.id - CNA.Operations.App 1708 (Emir LLaneza)",
+      "Warning of reaching xero limit",
+      "Warning of reaching xero limit"
+    ]
+  },
+  {
+    "email": "rick@nustechnology.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "Blair B. sent you a message",
+        "from": "\"Blair B. via Upwork\"",
+        "date": "Tue, 30 Jun 2026 02:45:24 +0000 (UTC)"
+      },
+      {
+        "subject": "Reminder: OmniGPT Daily Sync @ Tue Jun 30, 2026 10:30 am - 11:00",
+        "from": "<noreply@zohocalendar.com>",
+        "date": "Mon, 29 Jun 2026 20:15:03 -0700 (PDT)"
+      },
+      {
+        "subject": "peptideclyde sent you a message",
+        "from": "Slack <notification@slack.com>",
+        "date": "Tue, 30 Jun 2026 06:05:58 +0000"
+      },
+      {
+        "subject": "InfinityRoses - Daily Summary - Tuesday, June 30",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 08:07:32 +0000"
+      },
+      {
+        "subject": "InfinityRoses - Daily Summary - Tuesday, June 30",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 08:07:32 +0000"
+      },
+      {
+        "subject": "[FountainStaging] ActiveStorage::InvariableError in gifts#index",
+        "from": "BugSnag <notifications@bugsnag.com>",
+        "date": "Tue, 30 Jun 2026 08:51:24 +0000 (UTC)"
+      },
+      {
+        "subject": "[FountainStaging] Errno::EIO in bin/rails:8 (staging)",
+        "from": "BugSnag <notifications@bugsnag.com>",
+        "date": "Tue, 30 Jun 2026 10:18:05 +0000 (UTC)"
+      },
+      {
+        "subject": "Subscription Activity Successfully Maintained in Records",
+        "from": "Customer <mirsodiqbobojonov712@gmail.com>",
+        "date": "Tue, 30 Jun 2026 08:04:30 -0700 (PDT)"
+      },
+      {
+        "subject": "FirstProject - Daily Summary - Tuesday, June 30",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 15:08:30 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1047 Uncaught Error: Minified React",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 17:51:38 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1049 Uncaught Error: Minified React",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 17:51:37 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1048 Uncaught Error: Minified React",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 17:51:38 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1050 IntegrationError: The code that",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Tue, 30 Jun 2026 23:11:43 +0000"
+      },
+      {
+        "subject": "FountainGifts - Daily Summary - Wednesday, July 1",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Wed, 01 Jul 2026 01:07:21 +0000"
+      },
+      {
+        "subject": "FountainGifts - Daily Summary - Wednesday, July 1",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Wed, 01 Jul 2026 01:07:21 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1051 Error: Minified React error #425;",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Wed, 01 Jul 2026 01:31:24 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1053 Error: Minified React error #423;",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Wed, 01 Jul 2026 01:31:25 +0000"
+      },
+      {
+        "subject": "[FirstProject] production - New Error: #1052 Error: Minified React error #418;",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Wed, 01 Jul 2026 01:31:25 +0000"
+      },
+      {
+        "subject": "[FountainStaging] PG::ForeignKeyViolation in cart_items#destroy",
+        "from": "BugSnag <notifications@bugsnag.com>",
+        "date": "Wed, 01 Jul 2026 02:08:52 +0000 (UTC)"
+      },
+      {
+        "subject": "[FountainStaging] StandardError in cart_items#create (development)",
+        "from": "BugSnag <notifications@bugsnag.com>",
+        "date": "Wed, 01 Jul 2026 02:48:19 +0000 (UTC)"
+      }
+    ],
+    "alerts": [
+      "InfinityRoses - Daily Summary - Tuesday, June 30",
+      "InfinityRoses - Daily Summary - Tuesday, June 30",
+      "[FountainStaging] ActiveStorage::InvariableError in gifts#index",
+      "[FountainStaging] Errno::EIO in bin/rails:8 (staging)",
+      "FirstProject - Daily Summary - Tuesday, June 30",
+      "[FirstProject] production - New Error: #1047 Uncaught Error: Minified React",
+      "[FirstProject] production - New Error: #1049 Uncaught Error: Minified React",
+      "[FirstProject] production - New Error: #1048 Uncaught Error: Minified React",
+      "[FirstProject] production - New Error: #1050 IntegrationError: The code that",
+      "FountainGifts - Daily Summary - Wednesday, July 1",
+      "FountainGifts - Daily Summary - Wednesday, July 1",
+      "[FirstProject] production - New Error: #1051 Error: Minified React error #425;",
+      "[FirstProject] production - New Error: #1053 Error: Minified React error #423;",
+      "[FirstProject] production - New Error: #1052 Error: Minified React error #418;",
+      "[FountainStaging] PG::ForeignKeyViolation in cart_items#destroy",
+      "[FountainStaging] StandardError in cart_items#create (development)",
+      "[InfinityRoses] production - 100th Error occurrence: #395",
+      "[InfinityRoses] production - 100th Error occurrence: #395",
+      "InfinityRoses - Daily Summary - Wednesday, July 1",
+      "InfinityRoses - Daily Summary - Wednesday, July 1",
+      "[FountainStaging] ActionController::InvalidAuthenticityToken in",
+      "WEB: Add \"download the app\" banner on home page",
+      "BUG: Fix promo code limit error showing in Hebrew instead of",
+      "[FirstProject] production - New Error: #1055 Error: Minified React error #423;",
+      "[FirstProject] production - New Error: #1056 Error: Minified React error #425;",
+      "[FirstProject] production - New Error: #1054 Error: Minified React error #418;",
+      "[FirstProject] production - 10th Error occurrence: #1054 Error: Minified React",
+      "[FirstProject] production - 10 occurrences in 5 minutes: #1054 Error: Minified",
+      "[FirstProject] production - 10 occurrences in 5 minutes: #1055 Error: Minified",
+      "[FirstProject] production - 10th Error occurrence: #1056 Error: Minified React",
+      "[FirstProject] production - 10 occurrences in 5 minutes: #1056 Error: Minified",
+      "[FirstProject] production - 10th Error occurrence: #1055 Error: Minified React",
+      "[FirstProject] production - 10th Error occurrence: #1049 Uncaught Error:",
+      "FirstProject - Daily Summary - Wednesday, July 1",
+      "FirstProject - Daily Summary - Wednesday, July 1",
+      "[FirstProject] production - New Error: #1057 IntegrationError: The code that"
+    ]
+  },
+  {
+    "email": "kai@nustechnology.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "Your new API token",
+        "from": "Atlassian <noreply+d58dc4f@id.atlassian.com>",
+        "date": "Sun, 21 Jun 2026 00:31:05 +0000"
+      },
+      {
+        "subject": "Re: [Bitbucket] Pull request #508: LIFM2-445: Update Price Action",
+        "from": "PR Review Token <pullrequests-reply@bitbucket.org>",
+        "date": "Sun, 21 Jun 2026 00:38:35 +0000"
+      },
+      {
+        "subject": "Set your new Atlassian password",
+        "from": "Atlassian <noreply+b509659@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:39:16 +0000"
+      },
+      {
+        "subject": "Your Atlassian account password has changed",
+        "from": "Atlassian <noreply+239fb63@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:40:08 +0000"
+      },
+      {
+        "subject": "Set your new Atlassian password",
+        "from": "Atlassian <noreply+b509659@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:41:24 +0000"
+      },
+      {
+        "subject": "Your Atlassian account password has changed",
+        "from": "Atlassian <noreply+239fb63@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:41:43 +0000"
+      },
+      {
+        "subject": "Set your new Atlassian password",
+        "from": "Atlassian <noreply+b509659@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:42:35 +0000"
+      },
+      {
+        "subject": "Your Atlassian account password has changed",
+        "from": "Atlassian <noreply+239fb63@id.atlassian.com>",
+        "date": "Mon, 22 Jun 2026 06:43:12 +0000"
+      },
+      {
+        "subject": "Re: [Bitbucket] Pull request #509: LIFM2-428 (xtreme-web/rms)",
+        "from": "PR Review Token <pullrequests-reply@bitbucket.org>",
+        "date": "Mon, 22 Jun 2026 10:34:36 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-260) Update Shopify products with images uploaded on",
+        "from": "\"Anoma Wasala (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Mon, 22 Jun 2026 12:15:20 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-260) Update Shopify products with images uploaded on",
+        "from": "\"Madhuraka Godahewa (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Mon, 22 Jun 2026 13:29:48 +0000"
+      },
+      {
+        "subject": "Kai, here is your weekly update for 23 Jun",
+        "from": "Jira <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Tue, 23 Jun 2026 08:49:48 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-409) Import Shopify payouts",
+        "from": "\"Madhuraka Godahewa (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Tue, 23 Jun 2026 11:17:40 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-268) Create email templates",
+        "from": "\"Madhuraka Godahewa (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Tue, 23 Jun 2026 11:17:52 +0000"
+      },
+      {
+        "subject": "FW: Dev Tasks",
+        "from": "<madhuraka@xtremeweb.com.au>",
+        "date": "Wed, 24 Jun 2026 09:25:33 +1000"
+      },
+      {
+        "subject": "New sign-in to your Zoho account",
+        "from": "Zoho Team <noreply@zohoaccounts.com>",
+        "date": "Tue, 23 Jun 2026 19:32:53 -0700 (PDT)"
+      },
+      {
+        "subject": "[JIRA] Anoma Wasala assigned LIFM2-446 to you",
+        "from": "\"Anoma Wasala (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Wed, 24 Jun 2026 05:14:42 +0000"
+      },
+      {
+        "subject": "[JIRA] Anoma Wasala assigned LIFM2-446 to you",
+        "from": "\"Anoma Wasala (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Wed, 24 Jun 2026 05:15:14 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-446) Implement Row-Locking in Quoting Tool",
+        "from": "\"Anoma Wasala (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Wed, 24 Jun 2026 05:17:56 +0000"
+      },
+      {
+        "subject": "[JIRA] (LIFM2-446) Implement Row-Locking in Quoting Tool",
+        "from": "\"Anoma Wasala (Jira)\" <jira@madhuraka-godahewa.atlassian.net>",
+        "date": "Wed, 24 Jun 2026 05:39:07 +0000"
+      }
+    ],
+    "alerts": []
+  },
+  {
+    "email": "ken@nustechnology.com",
+    "error": "auth_fail"
+  },
+  {
+    "email": "vuongtrancr@gmail.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "Metric query deviated from the baseline for at least 5 minutes on",
+        "from": "New Relic Incident Intelligence <noreply@notifications.newrelic.com>",
+        "date": "Sun, 28 Jun 2026 08:56:55 +0000 (UTC)"
+      },
+      {
+        "subject": "[Swish] Re: [Swish] Re: ProblÃ¨me technique",
+        "from": "\"samia arichi (Swish)\" <support@swishforgood.com>",
+        "date": "Sun, 28 Jun 2026 09:33:52 +0000"
+      },
+      {
+        "subject": "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+        "from": "New Relic Incident Intelligence <noreply@notifications.newrelic.com>",
+        "date": "Sun, 28 Jun 2026 10:10:26 +0000 (UTC)"
+      },
+      {
+        "subject": "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+        "from": "New Relic Incident Intelligence <noreply@notifications.newrelic.com>",
+        "date": "Sun, 28 Jun 2026 10:20:38 +0000 (UTC)"
+      },
+      {
+        "subject": "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+        "from": "New Relic Incident Intelligence <noreply@notifications.newrelic.com>",
+        "date": "Sun, 28 Jun 2026 15:05:09 +0000 (UTC)"
+      },
+      {
+        "subject": "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+        "from": "New Relic Incident Intelligence <noreply@notifications.newrelic.com>",
+        "date": "Sun, 28 Jun 2026 15:15:21 +0000 (UTC)"
+      },
+      {
+        "subject": "[New Relic] June 29th performance report for Account 2836256",
+        "from": "New Relic <noreply@newrelic.com>",
+        "date": "Mon, 29 Jun 2026 00:11:33 +0000"
+      },
+      {
+        "subject": "Delayed-newform - Daily Summary - Monday, June 29",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Mon, 29 Jun 2026 01:06:55 +0000"
+      },
+      {
+        "subject": "You've got 3 unread messages",
+        "from": "\"Swish dev (via Slack)\" <notification@slack.com>",
+        "date": "Mon, 29 Jun 2026 02:12:52 +0000"
+      },
+      {
+        "subject": "Cybersecurity doesn't wait â°",
+        "from": "Swish's Cybersecurity team <hey@go.tryriot.com>",
+        "date": "Mon, 29 Jun 2026 02:46:56 +0000"
+      },
+      {
+        "subject": "Về Đoàn và nhữn",
+        "from": "\"Facebook\" <notification@priority.facebookmail.com>",
+        "date": "Sun, 28 Jun 2026 22:21:33 -0700"
+      },
+      {
+        "subject": "[Swish] [BANK_FR]PROBLEME BADGE - FF42C25F",
+        "from": "\"Laneuze, Sebastien (Swish)\" <support@swishforgood.com>",
+        "date": "Mon, 29 Jun 2026 06:03:37 +0000"
+      },
+      {
+        "subject": "[Swish] Your Gateway to the Tokyo Market: X-HUB TOKYO INBOUND Program",
+        "from": "\"x-hub, tokyo (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 06:59:28 +0000"
+      },
+      {
+        "subject": "[Swish] Missed call from Caller +39 351 918 7328",
+        "from": "\"Caller +39 351 918 7328 (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 07:24:08 +0000"
+      },
+      {
+        "subject": "[Swish] Missed call from Caller +33 6 34 51 62 31",
+        "from": "\"Caller +33 6 34 51 62 31 (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 07:24:31 +0000"
+      },
+      {
+        "subject": "[Swish] Borne Hors service _Azureva",
+        "from": "\"Hotline Swish (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 07:34:03 +0000"
+      },
+      {
+        "subject": "[Swish] Bouton grisÃ©_INA",
+        "from": "\"Hotline Swish (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 07:41:56 +0000"
+      },
+      {
+        "subject": "[Swish] caricatore non funziona",
+        "from": "\"Leone Di Lernia (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 08:04:35 +0000"
+      },
+      {
+        "subject": "[Swish] Pack mÃ©dia - juin 2026",
+        "from": "\"Marie Boitard (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 08:12:13 +0000"
+      },
+      {
+        "subject": "[Swish] VÃ©rification de paiement",
+        "from": "\"Hotline Swish (Swish)\" <support@swish7527.zendesk.com>",
+        "date": "Mon, 29 Jun 2026 09:52:21 +0000"
+      }
+    ],
+    "alerts": [
+      "Metric query deviated from the baseline for at least 5 minutes on",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "[New Relic] June 29th performance report for Account 2836256",
+      "Delayed-newform - Daily Summary - Monday, June 29",
+      "Cybersecurity doesn't wait â°",
+      "Metric query deviated from the baseline for at least 5 minutes on",
+      "Metric query deviated from the baseline for at least 5 minutes on",
+      "Your New Relic Now recording is ready.",
+      "Your New Relic Now recording is ready.",
+      "Delayed-newform - Daily Summary - Tuesday, June 30",
+      "[Swish] RE: [Swish] Re: CDPR - Incident NÂ°4375 sur",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Delayed-newform - Daily Summary - Wednesday, July 1",
+      "Cybersecurity doesn't wait â°",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue",
+      "Signal lost for 10 minutes on 'Low Application Throughput' - Issue"
+    ]
+  },
+  {
+    "email": "dnduongus@gmail.com",
+    "count": 50,
+    "subjects": [
+      {
+        "subject": "ð¤ Duong, add An Bui",
+        "from": "LinkedIn <messages-noreply@linkedin.com>",
+        "date": "Tue, 30 Jun 2026 12:13:45 +0000 (UTC)"
+      },
+      {
+        "subject": "You have 1 new invitation",
+        "from": "LinkedIn <notifications-noreply@linkedin.com>",
+        "date": "Tue, 30 Jun 2026 12:23:45 +0000 (UTC)"
+      },
+      {
+        "subject": "Biên lai thanh toán sao kê thẻ",
+        "from": "VCBDigibank@info.vietcombank.com.vn",
+        "date": "30 Jun 2026 20:29:25 +0700"
+      },
+      {
+        "subject": "Thông báo thanh toán sao kê th�",
+        "from": "\"Vietcombank\" <info@info.vietcombank.com.vn>",
+        "date": "30 Jun 2026 20:29:24 +0700"
+      },
+      {
+        "subject": "Thông báo giao dịch thẻ/ Vietc",
+        "from": "\"Vietcombank\" <info@info.vietcombank.com.vn>",
+        "date": "30 Jun 2026 21:05:35 +0700"
+      },
+      {
+        "subject": "Last chance: Your discount expires at midnight!",
+        "from": "ContentStudio <hello@contentstudio.io>",
+        "date": "Tue, 30 Jun 2026 15:01:19 +0000"
+      },
+      {
+        "subject": "Â£349 closes in 8 hours",
+        "from": "\"MyPersonalFootballCoach.com\" <info@mypersonalfootballcoach.com>",
+        "date": "Tue, 30 Jun 2026 15:03:40 +0000"
+      },
+      {
+        "subject": "Â£349 closes in 8 hours",
+        "from": "\"MyPersonalFootballCoach.com\" <info@mypersonalfootballcoach.com>",
+        "date": "Tue, 30 Jun 2026 15:03:52 +0000"
+      },
+      {
+        "subject": "Final Hours: 70% Off Ends Tonight",
+        "from": "GitKraken <no-reply@gitkraken.com>",
+        "date": "Tue, 30 Jun 2026 10:13:55 -0700"
+      },
+      {
+        "subject": "Thông báo giao dịch thẻ/ Vietc",
+        "from": "\"Vietcombank\" <info@info.vietcombank.com.vn>",
+        "date": "1 Jul 2026 00:17:52 +0700"
+      },
+      {
+        "subject": "Thông báo giao dịch thẻ/ Vietc",
+        "from": "\"Vietcombank\" <info@info.vietcombank.com.vn>",
+        "date": "1 Jul 2026 00:27:15 +0700"
+      },
+      {
+        "subject": "ThÃ´ng bÃ¡o káº¿t quáº£ giao dá»ch",
+        "from": "VCBS-EMAIL <no_reply02@info.vcbs.com.vn>",
+        "date": "Tue, 30 Jun 2026 17:59:06 +0000"
+      },
+      {
+        "subject": "Các công việc gợi ý trong tuần cực",
+        "from": "Careerviet.vn <info@careerviet-jobalert.vn>",
+        "date": "Tue, 30 Jun 2026 23:55:53 +0530"
+      },
+      {
+        "subject": "Cơ thể bạn không hỏng — có thể c",
+        "from": "Đỗ Trọng Linh | PBRUN Academy",
+        "date": "Tue, 30 Jun 2026 23:03:34 +0000"
+      },
+      {
+        "subject": "Duong, Google Gemini Omni Flash is now",
+        "from": "\"Envato Market\" <news@m.market.envato.com>",
+        "date": "Wed, 01 Jul 2026 01:20:41 +0000"
+      },
+      {
+        "subject": "Updated Terms of Service",
+        "from": "Cognition Team <support@cognition.ai>",
+        "date": "Wed, 01 Jul 2026 01:36:38 +0000"
+      },
+      {
+        "subject": "Đã lâu không gặp, Grab nhớ bạ",
+        "from": "Grab Việt Nam <no-reply@grab.com>",
+        "date": "Tue, 30 Jun 2026 21:00:42 -0600"
+      },
+      {
+        "subject": "Biên lai chuyển tiền qua tài k",
+        "from": "VCBDigibank@info.vietcombank.com.vn",
+        "date": "1 Jul 2026 10:02:51 +0700"
+      },
+      {
+        "subject": "Náº¡p tiá»n thÃ nh cÃ´ng",
+        "from": "Tikop <no-reply@tikop.vn>",
+        "date": "Wed, 1 Jul 2026 03:02:58 +0000"
+      },
+      {
+        "subject": "Lên đơn cho cả nhà mình thôiii",
+        "from": "Grab Việt Nam <no-reply@grab.com>",
+        "date": "Tue, 30 Jun 2026 21:04:53 -0600"
+      }
+    ],
+    "alerts": [
+      "Last chance: Your discount expires at midnight!",
+      "Các công việc gợi ý trong tuần cực",
+      "Payoneer Scheduled Maintenance (July 12, 2026)"
+    ]
+  },
+  {
+    "email": "freelancer@mypersonalfootballcoach.com",
+    "count": 29,
+    "subjects": [
+      {
+        "subject": "MyPersonalFootballCoach 4.1 (4.1.4) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Tue, 30 Jun 2026 17:56:54 +0000 (GMT)"
+      },
+      {
+        "subject": "Your New Relic Now recording is ready.",
+        "from": "New Relic <marketing@newrelic.com>",
+        "date": "Mon, 29 Jun 2026 10:37:26 -0500 (CDT)"
+      },
+      {
+        "subject": "MPFC - Daily Summary - Monday, June 29",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Mon, 29 Jun 2026 15:08:45 +0000"
+      },
+      {
+        "subject": "You’re not using everything you’re paying for on Mailchimp",
+        "from": "Mailchimp <mc-customersuccess@intuit.com>",
+        "date": "Mon, 29 Jun 2026 10:06:25 +0000 (UTC)"
+      },
+      {
+        "subject": "[New Relic] June 29th performance report for Account 3457746",
+        "from": "New Relic <noreply@newrelic.com>",
+        "date": "Mon, 29 Jun 2026 09:41:28 +0000"
+      },
+      {
+        "subject": "[MPFC] production - New Error: #48 Error: Call to undefined method MM_PaymentServiceFactory::getService()",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Mon, 29 Jun 2026 08:08:05 +0000"
+      },
+      {
+        "subject": "[MPFC] production - New Error: #47 Error: Class 'MM_CoreMembershipUtils' not found",
+        "from": "Rollbar Notification <notifier@mail.rollbar.com>",
+        "date": "Mon, 29 Jun 2026 07:53:18 +0000"
+      },
+      {
+        "subject": "MyPersonalFootballCoach 4.1 (4.1.3) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Wed, 24 Jun 2026 08:26:43 +0000 (GMT)"
+      },
+      {
+        "subject": "Your Mailchimp mid-year review is pending...",
+        "from": "Mailchimp <mc-customersuccess@intuit.com>",
+        "date": "Tue, 23 Jun 2026 09:43:01 +0000 (UTC)"
+      },
+      {
+        "subject": "MyPersonalFootballCoach 4.1 (4.1.2) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Tue, 23 Jun 2026 07:28:40 +0000 (GMT)"
+      },
+      {
+        "subject": "[New Relic] June 22nd performance report for Account 3457746",
+        "from": "New Relic <noreply@newrelic.com>",
+        "date": "Mon, 22 Jun 2026 09:37:35 +0000"
+      },
+      {
+        "subject": "MyPersonalFootballCoach 4.1 (4.1.1) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Mon, 22 Jun 2026 07:47:45 +0000 (GMT)"
+      },
+      {
+        "subject": "OpenAI and LaunchDarkly at New Relic Now",
+        "from": "New Relic Changelog <datanerd@newrelic.com>",
+        "date": "Thu, 18 Jun 2026 12:19:52 -0500 (CDT)"
+      },
+      {
+        "subject": "OpenAI & LaunchDarkly join the New Relic Now agenda",
+        "from": "New Relic <marketing@newrelic.com>",
+        "date": "Wed, 17 Jun 2026 10:12:16 -0500 (CDT)"
+      },
+      {
+        "subject": "Your Mailchimp campaign strategy is missing something.",
+        "from": "Mailchimp <mc-customersuccess@intuit.com>",
+        "date": "Wed, 17 Jun 2026 13:37:58 +0000 (UTC)"
+      },
+      {
+        "subject": "MyPersonalFootballCoach 4.1 (4.1.0) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Tue, 16 Jun 2026 14:24:51 +0000 (GMT)"
+      },
+      {
+        "subject": "Pending: Your Q3 Planning Session",
+        "from": "Mailchimp <mc-customersuccess@intuit.com>",
+        "date": "Mon, 15 Jun 2026 18:20:24 +0000 (UTC)"
+      },
+      {
+        "subject": "[New Relic] June 15th performance report for Account 3457746",
+        "from": "New Relic <noreply@newrelic.com>",
+        "date": "Mon, 15 Jun 2026 09:33:56 +0000"
+      },
+      {
+        "subject": "Review of your MyPersonalFootballCoach (iOS) submission is complete.",
+        "from": "App Store Connect <no_reply@email.apple.com>",
+        "date": "Sat, 13 Jun 2026 17:34:08 +0000 (GMT)"
+      },
+      {
+        "subject": "MyPersonalFootballCoach 4.0 (4.0.11) for iOS is now available to test.",
+        "from": "My Personal Football Coach LTD via TestFlight <testflight_no_reply@email.apple.com>",
+        "date": "Sat, 13 Jun 2026 10:04:04 +0000 (GMT)"
+      }
+    ],
+    "alerts": [
+      "Your New Relic Now recording is ready.",
+      "MPFC - Daily Summary - Monday, June 29",
+      "[New Relic] June 29th performance report for Account 3457746",
+      "[MPFC] production - New Error: #48 Error: Call to undefined method MM_PaymentServiceFactory::getService()",
+      "[MPFC] production - New Error: #47 Error: Class 'MM_CoreMembershipUtils' not found",
+      "[New Relic] June 22nd performance report for Account 3457746",
+      "OpenAI and LaunchDarkly at New Relic Now",
+      "OpenAI & LaunchDarkly join the New Relic Now agenda",
+      "[New Relic] June 15th performance report for Account 3457746"
+    ]
+  }
+]

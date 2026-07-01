@@ -6,15 +6,18 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-01T09:18:00+07:00",
-    "output_file": "reports/2026-07-01/daily-report.md",
-    "last_status": "recheck_complete",
+    "last_run": "2026-07-02T05:01:00+07:00",
+    "output_file": "reports/2026-07-02/daily-report.md",
+    "last_status": "complete",
     "caveats": [
-      "Maddy open: Madhuraka hotfix requests Jun 30 18:46+18:56 unanswered, no Kai daily report",
-      "VietPH 0h Jun 30 all sources, no leave \u2014 alert",
-      "Fountain open: customer overnight delivery bug (mike62798179), #2702+#2872 growing",
-      "Philip MS Teams: message content not extracted \u2014 status undetermined",
-      "Upwork workrooms need re-authentication before next weekly hours check"
+      "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m)",
+      "TuanNT 0h Jul 1 all sheets \u2014 blocks John Yi, Bailey, Rebecca",
+      "PhucVT 0h Jul 1 all sheets",
+      "KhanhHH 0h Jul 1 all sheets \u2014 blocks Aysar",
+      "LeNH 0h Jul 1 all sheets (reminder only)",
+      "FirstProject production React errors ongoing (high volume Jul 1)",
+      "Matrix token expired \u2014 rooms not scanned this run",
+      "Upwork sessions expired \u2014 re-auth needed"
     ]
   },
   "refresh": {
@@ -155,8 +158,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-01T09:18:00+07:00",
-    "output_file": "reports/2026-07-01/daily-report.md"
+    "last_run": "2026-07-02T05:01:00+07:00",
+    "output_file": "reports/2026-07-02/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-06-25T12:05:00Z",
