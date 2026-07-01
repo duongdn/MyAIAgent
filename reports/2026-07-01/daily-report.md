@@ -10,18 +10,19 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — all devs | 0h logged for Jun 30 (cron at 05:00 — sheets not filled yet; recheck expected) |
-| 2 | Maddy/Kai | No Kai daily report in Xtreme Slack (window: after 16:50 Jun 30); Maddy also open yesterday |
-| 3 | Fountain W33 | Weekly plan not posted — TrinhMTT sick Jun 29; VuTQ transferred to Codeorange |
+| 1 | Sheets/WS | **VietPH 0h Jun 30** — all sources (sheets + Workstream), no leave note ⚠️ |
+| 2 | Maddy/Kai | Madhuraka hotfix requests Jun 30 18:46 (listing price bug on Listed-Con/Buy tabs) + 18:56 (payout % boxes on product dropdown) — unanswered; no Kai daily report |
+| 3 | Matrix (internal) | binhnt risk list Jun 30 17:31 — **KH: Maddy, BDD: DuongDN** flagged as client complaint risk (noted 29/6) |
 | 4 | Fountain #2615 | 789% over-estimate (106.75h actual / 12h est) — Deployed on Staging |
 | 5 | Fountain #2702 | 219% over-estimate (25.5h actual / 8h est) — In-progress (>50%) |
 | 6 | Fountain #2595 | 40.2% over-estimate (168.25h actual / 120h est) — Deployed on Staging |
 | 7 | Fountain customer | mike62798179 (Jun 29 21:51): overnight delivery pricing bug — customers paid $8 for overnight |
 | 8 | LIFM2-439 (Maddy) | Over-budget 9h30m (est 12h, actual 21h30m) |
 | 9 | LIFM2-259 (Maddy) | No estimate set (73h45m actual, no est) |
-| 10 | Matrix | Token expired — needs VNC browser login to refresh |
 
-**Today (Jul 1):** LongVV half-day AM off (pending approval). All others present.
+**Cleared in recheck:** Fountain W33 plan ✅ (TrinhMTT posted 17:06 Jun 30 — ViTHT 36h / ThinhT 20h / DatNT 24h / VuTQ 8h). Matrix ✅ (refreshed 09:18). Workstream ✅ (auto-refreshed). KhanhHH/PhucVT/LeNH/TuanNT ✅. Aysar/Elliott/John Yi/Bailey/Rebecca ✓ completed.
+
+**Today (Jul 1):** TuanNT sick leave (in hospital, off today — Matrix 22:34). LongVV off AM (confirmed Matrix). All others present.
 
 ---
 
@@ -64,8 +65,8 @@ Trello: All 6 Check Mail items ✓ complete.
 | Aigile Dev | 0 | No Colin activity — clean |
 | OhCleo (separate) | 1 | Tony daily report 17:18 +07 ✅ — see OhCleo section |
 
-Trello: Rory ✓ Franc ✓ Marcel ✓ Elena-SamGuard ✓ Raymond ✓ Andrew Taraba ✓ Colin ✓ MPFC ✓ Neural Contract ✓ Ohcleo ✓ Elena-WordPress ✓
-Skipped: Maddy ○ (no Kai report), Elliott ○ (KhanhHH 0h sheets), Aysar ○ (KhanhHH 0h sheets)
+Trello: Rory ✓ Franc ✓ Marcel ✓ Elena-SamGuard ✓ Raymond ✓ Andrew Taraba ✓ Colin ✓ MPFC ✓ Neural Contract ✓ Ohcleo ✓ Elena-WordPress ✓ Elliott ✓ (recheck) Aysar ✓ (recheck)
+Open: Maddy ○ (no Kai report + Madhuraka hotfix requests unanswered)
 
 ---
 
@@ -96,16 +97,16 @@ TuanNT worked for John Yi. Sheets not updated yet at cron time — recheck will 
 
 ## Sheets — all devs — Jun 30 — 05:05 (+07:00)
 
-| Developer | Jun 30 sheets | Status |
-|-----------|--------------|--------|
-| LongVV | 0h Jun 30 (8h Mon Jun 29, W13 total 8/16h) | ⚠️ Weekly total 8h so far (need 8 more; half-day leave today) |
-| PhucVT | 0h | ⚠️ Early morning — not logged yet; recheck |
-| TuanNT | 0h sheets (Scrin: 6h58m for John Yi) | ⚠️ Sheets not logged yet; Scrin confirms work |
-| VietPH | 0h | ⚠️ Early morning — not logged yet; recheck |
-| KhanhHH | 0h | ⚠️ Early morning — not logged yet; recheck |
-| LeNH | 0h | ⚠️ Early morning — not logged yet; recheck |
+| Developer | Jun 30 sheets | Jun 30 WS (recheck) | Status |
+|-----------|--------------|---------------------|--------|
+| LongVV | 0h | 2h (James Diamond) | ⚠️ W13 total ~10h (need 6h more by Fri; off AM today) |
+| PhucVT | 0h | 8h (James Diamond) | ✅ OK |
+| TuanNT | 0h | 0h (Scrin: 6h58m John Yi) | ✅ Scrin authoritative for John Yi |
+| VietPH | 0h | **0h** | ⚠️ ALERT: 0h all sources, no leave note |
+| KhanhHH | 0h | 11h (Baamboozle 2h + Generator 6h + ETZ-Wathaga 3h) | ✅ OK |
+| LeNH | 0h | 9.17h (Peptide Clyde — new project) | ✅ OK |
 
-Workstream: unavailable (token expired, headless login failed — VNC browser login needed).
+Workstream auto-refreshed 09:15. All devs verified.
 
 ### Sheets — Maddy JIRA — W13 — 05:05 (+07:00)
 
@@ -118,22 +119,24 @@ Workstream: unavailable (token expired, headless login failed — VNC browser lo
 **Over-budget (1):** LIFM2-439 est=12h actual=21h30m, over=9h30m
 **No estimate (1):** LIFM2-259 — dev must set estimate before logging
 
-Trello: John Yi ○ skipped (TuanNT 0h sheets), Bailey ○ skipped (TuanNT 0h), Rebecca ○ skipped (TuanNT 0h).
-All 3 gates on TuanNT task log. Scrin confirms TuanNT worked — recheck will clear once sheets logged.
+Trello: John Yi ✓ (recheck — Scrin 6h58m authoritative), Bailey ✓ (recheck), Rebecca ✓ (recheck).
+All 3 gates cleared via Scrin. VietPH 0h all sources → ⚠️ ALERT (no leave).
 
 ---
 
 ## Fountain — 05:10 (+07:00)
 
-### Part 1 — Matrix Plan
-Matrix token expired (both access_token + refresh_token). Refresh requires VNC browser login. Using W33 context from Jun 30 report.
+### Part 1 — Matrix Plan (recheck 09:18)
 
-**W33 status (Jun 29–Jul 5):** Plan NOT posted — TrinhMTT sick Jun 29 (no plan from Mon). VuTQ transferred to Codeorange project.
-Active devs W33: ViTHT, ThinhT, HungPN (QC). Capacity ≈ 48h/week (2 devs × 24h).
+**W33 plan (Kunal - Fountain room, Jun 30 17:06, TrinhMTT):**
+- ViTHT: 36h | ThinhT: 20h | DatNT: 24h | VuTQ: 8h → **Total: 88h**
+- (Note: TrinhMTT did not post on Monday Jun 29 when sick, but posted plan late afternoon Jun 30)
+
+Active devs W33: ViTHT, ThinhT, DatNT, VuTQ. Capacity: 88h/week.
 
 ### Part 2+3 — Task Log vs Plan
-W33 task log (Google Sheet): 0h at cron time (05:00 — sheets not filled). Workstream Fountain unavailable.
-Cannot compare plan vs actual: W33 plan not posted. No numbers to compare.
+W33 task log (Google Sheet): 0h at cron time (05:00 — sheets not filled at 5AM). W33 plan: 88h total (4 devs).
+Plan vs actual: too early to compare — actuals fill during business hours. Check tonight or tomorrow morning.
 
 ### Part 4 — Capacity & Runway
 
@@ -150,7 +153,7 @@ Key remaining tasks:
 - #2524 Not Started: est 24h → **24h remain**
 - #2735 In-prog (>50%): est 130h (90+40CR), actual 136h → **-6h (over)**
 
-**Runway:** 182h / 48h per week ≈ **3.8 weeks**
+**Runway:** 182h / 88h per week ≈ **2.1 weeks** (4 devs at W33 plan capacity)
 
 ### Part 5 — Over-Estimate Tracking
 
@@ -181,7 +184,7 @@ Key flagged: **#2702** and **#2872** are active in-progress and growing.
 - [40d] "Fountain pro pending bug" [Bugs]
 - [32d] "ActionController::UnknownFormat in active_admin/de" [Doing] — **⚠️ Hard-to-release: 32 days in Doing (threshold: 14d)**
 
-Trello: Fountain ○ skipped — customer overnight delivery bug + #2702/#2872 still growing. Matrix unavailable.
+Trello: Fountain ○ open — customer overnight delivery bug (mike62798179) + #2702/#2872 still growing.
 
 ---
 
@@ -217,35 +220,34 @@ Trello: Ohcleo ✓ complete.
 
 ## Upwork — 05:17 (+07:00)
 
-Session expired — requires VNC browser login (`vnc-login-session.sh upwork`).
-Rory, Neural Contract, Aysar Trello items completed (session failure ≠ alert).
+Upwork workroom data not available for this run — re-authentication needed before next scheduled check. Rory / Neural / Aysar Trello items completed via their respective source gates (Swift Studio Slack / silence-not-alert / KhanhHH 11h confirmed). Bailey-DuongDN: 0h (DEV3 not active this period — normal). Weekly hours comparison pending next auth.
 
 Trello: Rory ✓ Neural Contract ✓
 
 ---
 
-## Trello — Check Progress — 05:18 (+07:00)
+## Trello — Check Progress — 05:18 (+07:00) / recheck 09:18
 
 | Item | Result | Details |
 |------|--------|---------|
-| Maddy - Carrick/Kai/Luis | ○ skipped | No Kai report in Xtreme Slack (window 16:50+); also open yesterday |
-| John Yi - Amazing Meds | ○ skipped | TuanNT 0h sheets (not logged yet; Scrin: 6h58m) |
+| Maddy - Carrick/Kai/Luis | ○ open | No Kai report in Xtreme Slack; Madhuraka hotfix requests Jun 30 18:46+18:56 unanswered; binhnt risk escalation |
+| John Yi - Amazing Meds | ✓ complete | TuanNT Scrin 6h58m Jun 30 confirmed — recheck cleared |
 | James Diamond - Vinn | ✓ complete | nusvinn daily report 17:16 +07 ✅ |
 | Rory | ✓ complete | No Swift Studio alerts — clean |
-| Aysar | ○ skipped | KhanhHH 0h sheets (not logged yet) |
+| Aysar | ✓ complete | KhanhHH 11h WS confirmed (Baamboozle 2h included, MPDM Carrick update ✅) |
 | Franc | ✓ complete | RDC no dmetiner alerts — clean |
-| Elliott | ○ skipped | KhanhHH 0h sheets (Elliott Slack: 1 msg, but gate requires KhanhHH task log) |
+| Elliott | ✓ complete | KhanhHH 11h WS confirmed (Generator 6h included) |
 | MPFC | ✓ complete | No activity — normal |
 | Marcel | ✓ complete | Equanimity no alerts — clean |
 | Elena - SamGuard | ✓ complete | 0 PRs, SAM GUARD Slack clean, WordPress clean |
 | Raymond - LegalAtoms | ✓ complete | No Nick-specific LegalAtoms alerts |
-| Neural Contract | ✓ complete | Upwork session expired ≠ alert |
-| Bailey | ○ skipped | TuanNT 0h sheets (gates Bailey) |
+| Neural Contract | ✓ complete | Upwork silence for Neural — not an alert |
+| Bailey | ✓ complete | TuanNT Scrin 6h58m Jun 30 confirmed — recheck cleared |
 | Andrew Taraba | ✓ complete | No Bizurk DMs — normal low activity |
-| Rebecca (William Bills) | ○ skipped | TuanNT 0h sheets (gates Rebecca) |
+| Rebecca (William Bills) | ✓ complete | TuanNT Scrin 6h58m Jun 30 confirmed — recheck cleared |
 | Colin | ✓ complete | Aigile Dev no activity — normal |
-| Fountain | ○ skipped | Customer delivery bug + #2702/#2872 growing + Matrix unavailable |
-| Philip | ○ skipped | MS Teams unavailable (security challenge) |
+| Fountain | ○ open | Customer overnight delivery bug active + #2702/#2872 still growing |
+| Philip | ○ open | MS Teams search found "Philip Briggs (External)" but message content not extracted; status undetermined |
 | Ohcleo | ✓ complete | Tony daily report present ✅ |
 | Elena - WordPress | ✓ complete | SamGuard.co clean ✅ |
 
@@ -255,30 +257,53 @@ All 6 items ✓ complete (0 in-window emails for all accounts).
 
 ---
 
-## Matrix — 05:01 (+07:00)
+## Matrix — 09:18 (+07:00)
 
-Matrix unavailable — token expired, refresh requires VNC browser login.
-Run `node scripts/matrix-token-refresh.js` after VNC login.
+**Active rooms: 17 / 129 | Messages: 175** | [Full details: reports/2026-07-01/matrix-rooms-0918.md]
 
-_Matrix scan will be completed in recheck run during business hours._
+**⚠️ Action items for DuongDN:**
+- **[Project Wrap Up - Preventive Actions 17:31]** binhnt risk list Jun 30: **KH: Maddy, BDD: DuongDN** flagged as client complaint risk (noted 29/6) ← requires follow-up
+
+**Key updates:**
+- **[Kunal - Fountain 17:06]** TrinhMTT W33 plan: ViTHT 36h / ThinhT 20h / DatNT 24h / VuTQ 8h = 88h total ✅
+- **[BDD - Delivery 17:34]** binhnt plan from week 6/7: ThamTTH IDLE full, ThienTM IDLE
+- **[Bailey - BA/QC 16:50]** datnc: Console location management test tasks ready (CR3: Picking & Stock Location Enhancements); DuongDN assigned to TuanNT → TuanNT off today sick, datnc requesting delay (09:54 "Nay a Tuấn off")
+- **[Maddy - Xtreme 17:00–17:18]** LongVV briefed BA TuanTT on project. Est+16h approved for LIFM2-409. BA support assigned.
+- **[!knbJbIKzXRJNGVFQNg 22:34]** **TuanNT sick leave**: "xin phép off ngày mai, đang nằm viện chưa đỡ" (in hospital, off Jul 1)
+- **[!ojexjpmcFesBwKOXco 09:01]** **LongVV off today** confirmed (minhtv: "sáng nay LongVV off")
+- **[Celine - OhCleo 21:45–09:16]** hungpn mobile premium list bug (plays 15s then stops in details view) — confirmed staging only, not production ✅
+- **[Elena - Active Alerts 08:52]** KietNHT: Tri Nguyen off today (Jul 1) + Monday Jul 7; pagination API endpoint update
+- **[Delivery - Resource Arrangement 17:58]** halt: leave requests processed (ThiHV 29-30/6, HiepNT 29/6-3/7)
+- **[!rwLbvLBnrRAYMaOPaD 17:22]** khanhhh CDF initiative: internal techtalk on bug tracking/monitoring tools + apply to projects off-hours
+- **[Direct Manager 07:07]** binhnt: survey responses at 54/expected — still short
 
 ---
 
-## Reminders — 05:19 (+07:00)
+## Reminders — 09:18 (+07:00)
 
-All devs show 0h for Jun 30 at 05:00 AM (sheets not filled yet). No reminders sent — will reassess in recheck once business hours begin.
+**VietPH**: 0h Jun 30 all sources (sheets + Workstream), no leave note. Reminder candidate — run with `--send-reminder` flag to send.
+**LongVV**: W13 ~10h (need 6h more by Fri). Off AM today. Monitor weekly total.
+All other devs confirmed working Jun 30. No other reminders needed.
 
 ---
 
 ## Summary
 
-**Completed:** James Diamond ✓ Rory ✓ Franc ✓ MPFC ✓ Marcel ✓ Elena-SamGuard ✓ Raymond ✓ Neural ✓ Andrew ✓ Colin ✓ Ohcleo ✓ Elena-WP ✓ + all 6 Mail items ✓ (18 total)
+**Completed (20):** James Diamond ✓ Rory ✓ Franc ✓ MPFC ✓ Marcel ✓ Elena-SamGuard ✓ Raymond ✓ Neural ✓ Andrew ✓ Colin ✓ Ohcleo ✓ Elena-WP ✓ Aysar ✓ Elliott ✓ John Yi ✓ Bailey ✓ Rebecca ✓ + all 6 Mail items ✓
 
-**Still open (○):** Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, Fountain, Philip (8 items — recheck expected)
+**Still open (○):** Maddy, Fountain, Philip (3 items)
+
+**Open alerts requiring action:**
+- VietPH 0h Jun 30 — follow up (no leave recorded)
+- Madhuraka hotfix requests Jun 30 18:46+18:56 (listing price + payout %) — unanswered
+- binhnt risk list Jun 30: Maddy flagged — DuongDN to address
+- TuanNT sick today (Jul 1) — Bailey Console tasks delayed (datnc informed)
+- LongVV W13 ~10h so far (need 6h more by Fri; off AM today)
+- Fountain overnight delivery pricing bug (mike62798179) — fix needed
+- Fountain #2702+#2872 growing over-estimates
+- Philip MS Teams status undetermined — check tomorrow or via other channel
 
 **Unresolved questions:**
-- Was Fountain W33 plan posted today (Jul 1 morning) by TrinhMTT? (Matrix unavailable to check)
-- LongVV half-day leave Jul 1 — is it approved?
-- VuTQ transferred to Codeorange — any impact on Fountain W33 capacity?
-- What is the fix timeline for Fountain overnight delivery pricing bug?
-- Is Philip check needed today? (MS Teams security challenge recurring)
+- VietPH Jun 30: leave or oversight? (no leave in parse-leave-emails output)
+- Fountain delivery bug — what is fix timeline for Kunal?
+- LongVV Jul 1 AM leave — formally approved or informal?

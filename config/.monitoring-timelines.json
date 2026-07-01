@@ -6,17 +6,15 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-01T05:32:25+07:00",
+    "last_run": "2026-07-01T09:18:00+07:00",
     "output_file": "reports/2026-07-01/daily-report.md",
-    "last_status": "complete",
+    "last_status": "recheck_complete",
     "caveats": [
-      "Matrix token expired \u2014 needs VNC browser login",
-      "Upwork session expired \u2014 needs VNC browser login",
-      "Workstream token expired \u2014 needs VNC browser login",
-      "Sheets 0h (all devs) at cron time \u2014 recheck expected during business hours",
-      "Fountain W33 plan not posted (TrinhMTT sick Jun 29)",
-      "Fountain customer bug: overnight delivery pricing (mike62798179 Jun 29)",
-      "MS Teams (Philip) security challenge \u2014 unavailable"
+      "Maddy open: Madhuraka hotfix requests Jun 30 18:46+18:56 unanswered, no Kai daily report",
+      "VietPH 0h Jun 30 all sources, no leave \u2014 alert",
+      "Fountain open: customer overnight delivery bug (mike62798179), #2702+#2872 growing",
+      "Philip MS Teams: message content not extracted \u2014 status undetermined",
+      "Upwork workrooms need re-authentication before next weekly hours check"
     ]
   },
   "refresh": {
@@ -157,7 +155,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-01T05:32:25+07:00",
+    "last_run": "2026-07-01T09:18:00+07:00",
     "output_file": "reports/2026-07-01/daily-report.md"
   },
   "bailey-monitor": {
