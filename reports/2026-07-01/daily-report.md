@@ -247,7 +247,7 @@ Trello: Rory ✓ Neural Contract ✓
 | Rebecca (William Bills) | ✓ complete | TuanNT Scrin 6h58m Jun 30 confirmed — recheck cleared |
 | Colin | ✓ complete | Aigile Dev no activity — normal |
 | Fountain | ○ open | Customer overnight delivery bug active + #2702/#2872 still growing |
-| Philip | ○ open | MS Teams search found "Philip Briggs (External)" but message content not extracted; status undetermined |
+| Philip | ✓ complete | Last message Jun 16 (Will sent summary); Philip last wrote May 17. No new complaint in window. |
 | Ohcleo | ✓ complete | Tony daily report present ✅ |
 | Elena - WordPress | ✓ complete | SamGuard.co clean ✅ |
 
@@ -300,7 +300,7 @@ All other devs confirmed working Jun 30. No other reminders needed. VietPH: resi
 - LongVV W13 ~10h so far (need 6h more by Fri; off AM today)
 - Fountain overnight delivery pricing bug (mike62798179) — fix needed
 - Fountain #2702+#2872 growing over-estimates
-- Philip MS Teams status undetermined — check tomorrow or via other channel
+- Philip ✓ — last message Jun 16 (our side), no new request from Philip since May 17
 
 **Unresolved questions:**
 - Fountain delivery bug — what is fix timeline for Kunal?
