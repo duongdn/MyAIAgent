@@ -9,17 +9,20 @@
     "last_run": "2026-07-02T05:01:00+07:00",
     "output_file": "reports/2026-07-02/daily-report.md",
     "last_status": "complete",
-    "recheck_last_run": "2026-07-02T08:45:00+07:00",
+    "recheck_last_run": "2026-07-02T09:45:00+07:00",
     "caveats": [
       "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m) \u2014 genuine unresolved, confirmed still open on recheck",
-      "TuanNT 0h Jul 1 RESOLVED on recheck: excused, hospitalized full-day (Matrix Resource Arrangement, charged to Bailey no makeup). John Yi/Bailey/Rebecca unblocked.",
-      "PhucVT 0h Jul 1 RESOLVED on recheck: false alarm, cron Workstream login failed \u2014 8h found in Workstream (James Diamond) on retry",
-      "KhanhHH 0h Jul 1 RESOLVED on recheck: false alarm, cron Workstream login failed \u2014 3.5h found in Workstream (Generator) on retry. Aysar unblocked.",
-      "LeNH 0h Jul 1 confirmed genuine on recheck (Sheets + 18 live WS projects), no leave note \u2014 reminder only",
+      "TuanNT 0h Jul 1 RESOLVED: excused, hospitalized full-day (Matrix Resource Arrangement, charged to Bailey no makeup). John Yi/Bailey/Rebecca unblocked.",
+      "PhucVT 0h Jul 1 RESOLVED: false alarm, cron Workstream login failed \u2014 8h found in Workstream (James Diamond) on retry",
+      "KhanhHH 0h Jul 1 RESOLVED: false alarm + undercounted twice \u2014 true total 6.5h in Workstream Generator (4 tasks), corrected from initial 3.5h. Aysar unblocked.",
+      "LeNH 0h Jul 1 RESOLVED (2nd recheck, user-flagged): true total 7.83h in Workstream 'Peptide Clyde' (Blair Brown project) \u2014 first script pass missed it entirely (4th recurrence of known transient per-project fetch bug, same project as 2026-06-25 incident)",
+      "ken@nustechnology.com IMAP genuinely broken (verified 'Invalid credentials' via direct login test) \u2014 needs user to regenerate Zoho app password, real credential issue not fixable by agent",
+      "freelancer@mpfc email CORRECTED: key is valid, cron's 'unavailable' was a false report \u2014 ran fine on retry, 0 emails/no alerts",
+      "Philip MS Teams CORRECTED: verified via actual screenshot read this time (not script's broken message-extraction) \u2014 confirmed last activity 6/16, nothing since",
       "FirstProject production React errors ongoing (high volume Jul 1)",
       "Matrix token refreshed on recheck \u2014 full 130-room scan completed (25 active/638 msgs), no new alerts beyond leave notes above",
-      "Upwork retried on recheck \u2014 still needs visible-browser/CAPTCHA login, not an alert (silence=no-alert pattern)",
-      "Workstream project list grew to 18 (was 16) \u2014 reference_workstream.md memory needs updating with new projects: Peptide Clyde, BXR App, Elevate365.AI, Neural Contract - Test Job, Radio Data Center, Speedventory, Tokenlite"
+      "Upwork: carrick session expired, headless re-login blocked by CAPTCHA \u2014 Rory/Neural/Aysar workrooms UNVERIFIED this run (not confirmed-clean, just following silence=no-alert policy). Needs interactive VNC login from user: bash scripts/vnc-login-session.sh upwork",
+      "Workstream project list grew to 17+Others (was 10) \u2014 reference_workstream.md updated with new projects: Amazing Meds, Elevate365.AI, Neural Contract - Test Job, Radio Data Center, Speedventory, Tokenlite, LegalAtoms, BXR App (Peptide Clyde = renamed Blair Brown, not new)"
     ]
   },
   "refresh": {

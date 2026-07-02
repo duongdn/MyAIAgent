@@ -12,11 +12,13 @@
 | 1 | 🔴 | Maddy - Kai | Kai unresponsive to Madhuraka "Are you there?" (15:48+07 Jul 1) re LIFM2-439 — same as Jun 30. Task over-budget: 21h30m vs 12h est (+9h30m). |
 | 2 | ✅ | TuanNT 0h | RESOLVED on recheck — hospitalized full-day Jul 1 (Matrix "Delivery - Resource Arrangement", namtv, charged to Bailey no makeup). Not an alert. John Yi/Bailey/Rebecca unblocked. |
 | 3 | ✅ | PhucVT 0h | RESOLVED on recheck — Sheets 0h was false; Workstream shows 8h (Portfolio-James Diamond) Jul 1. Cron missed this (WS login failed). |
-| 4 | ✅ | KhanhHH 0h | RESOLVED on recheck — Sheets 0h was false; Workstream shows 3.5h (Generator) Jul 1. Aysar unblocked. |
-| 5 | 🟡 | LeNH 0h | Confirmed genuine 0h (Sheets + all 18 live Workstream projects), no leave note anywhere incl. Resource Arrangement room. Reminder only (no Trello gate). |
+| 4 | ✅ | KhanhHH 0h | RESOLVED on recheck — Sheets 0h was false; Workstream shows **6.5h** (Generator, 4 tasks Jul 1 — corrected from initial 3.5h finding, see recheck note). Aysar unblocked. |
+| 5 | ✅ | LeNH 0h | RESOLVED on second recheck — Sheets 0h was false; Workstream shows **7.83h** in "Peptide Clyde" (Blair Brown project, renamed) Jul 1, effectively on target. Initial scan hit the known transient per-project fetch bug (4th recurrence, see memory). No reminder needed. |
 | 6 | 🟡 | FirstProject production | Multiple React errors #1051-1057 at 10+ occurrences/5min (Jul 1 01:31+ UTC). Ongoing pattern. |
 | 7 | 🟡 | InfinityRoses prod | Error #395 hit 100th occurrence (Jul 1). |
 | 8 | 🟡 | Swish (vuongtrancr@) | Delayed-newform Daily Summary Jul 1 + Signal lost alerts (recurring). |
+| 9 | 🟡 | ken@ email credentials | Genuine IMAP auth failure ("Invalid credentials" from Zoho) — needs user to regenerate app password, not fixable by me. |
+| 10 | 🟡 | Upwork (carrick session) | Session expired, headless re-login blocked by CAPTCHA. Rory/Neural/Aysar workrooms unverified this run (not confirmed-clean). Needs interactive VNC login from user to clear. |
 
 ---
 
@@ -29,12 +31,13 @@
 | nick@nustechnology.com | ~50 (pre-window) | Azure DevOps PR notifications CNA Operations App (pre-window) | 21:30 Weekly Meeting with Devs (Teams) |
 | rick@nustechnology.com | ~20 in window | ⚠️ FirstProject prod React errors #1051-1057 (10+ occurrences/5min, Jul 1 01:31+UTC). InfinityRoses prod 100th error #395. FountainGifts+FountainStaging daily summaries Jul 1. BugSnag staging errors. | 10:30 OmniGPT Daily Sync; 12:30 HEAL Meeting |
 | kai@nustechnology.com | 0 in window | No new JIRA/Madhuraka alerts in window | no events |
-| ken@nustechnology.com | — | IMAP auth fail — unavailable | no events |
+| ken@nustechnology.com | — | **Genuine IMAP auth failure** (verified via direct login test: "Invalid credentials" from Zoho, not a code/timing issue) — app password needs regenerating, this is not something fixable on my end | no events |
 | vuongtrancr@gmail.com | in window | ⚠️ Delayed-newform Daily Summary Jul 1; Signal lost (Low Throughput) multiple occurrences | — |
 | dnduongus@gmail.com | 0 | No security alerts | — |
-| freelancer@mpfc | — | Service account key — unavailable this run | — |
+| freelancer@mpfc | 0 in window | **Corrected on recheck** — key is valid, ran fine directly (`fetch-gmail-api.js`): 0 emails, no alerts. Cron's "unavailable" was a false report (likely secrets not decrypted yet when that piece ran in cron sequence). | — |
 
 **Alerts:** rick@ FirstProject production errors are active and high-volume. vuongtrancr@ Swish signals lost (recurring pattern). InfinityRoses prod error #395 at 100th occurrence.
+**Action needed from user:** ken@nustechnology.com Zoho app password is genuinely rejected ("Invalid credentials") — please regenerate the app-specific password in Zoho Mail settings and update `config/.email-accounts.json` (encrypted). This is a real credential issue, not a transient auth-token expiry I can fix silently.
 Trello: Check Mail ✓ all 6 items complete + card auto-completed.
 
 ---
@@ -80,7 +83,7 @@ Trello: James Diamond-Vinn ✓ Andrew Taraba ✓
 
 ---
 
-## Google Sheets — all — 05:01 (+07:00, corrected 08:45 recheck)
+## Google Sheets — all — 05:01 (+07:00, corrected 09:40 second recheck)
 
 **Leave plan:** LongVV half-day leave Jul 1 (confirmed). TuanNT full-day hospitalized Jul 1 (Matrix Resource Arrangement, charged to Bailey).
 
@@ -89,10 +92,12 @@ Trello: James Diamond-Vinn ✓ Andrew Taraba ✓
 | LongVV | 16h/wk | 0h | — | ✅ Half-day leave |
 | PhucVT | 8h/day | 0h | 8h (Portfolio-James Diamond) | ✅ on target |
 | TuanNT | 8h/day | 0h | 0h | ✅ excused — hospitalized (charged to Bailey, no makeup) |
-| KhanhHH | 8h/day | 0h | 3.5h (Generator) | ⚠️ under target but not 0h — no alert per threshold rule |
-| LeNH | 8h/day | 0h | 0h (18 live WS projects checked) | ⚠️ genuine 0h, no leave — reminder only |
+| KhanhHH | 8h/day | 0h | **6.5h** (Generator, 4 tasks) | ✅ close to target — no alert |
+| LeNH | 8h/day | 0h | **7.83h** (Peptide Clyde / Blair Brown) | ✅ effectively on target — no alert |
 
-**Recheck correction:** cron's Workstream login failed, causing false "0h no leave" alerts for PhucVT and KhanhHH. Re-ran `sheets-tasklog-scan.js` (isolated, twice) after fixing WS login — both confirmed real hours logged. TuanNT/LeNH sheets+WS both confirm 0h; TuanNT is excused (sick leave), LeNH is not.
+**Recheck corrections (two rounds):**
+1. Cron's Workstream login failed entirely → false "0h no leave" for PhucVT/KhanhHH. Fixed by re-running login + `sheets-tasklog-scan.js`.
+2. User flagged KhanhHH and LeNH again — direct per-project `/review/week` query (bypassing the script's own project-discovery step) found **KhanhHH's true total is 6.5h** (not the 3.5h first reported — the script's own first pass undercounted Generator hours, likely a transient fetch gap) and **LeNH has 7.83h in "Peptide Clyde"** (renamed Blair Brown project) that a first script run missed entirely (project was in the accessible list but returned empty on that pass). Re-running the same canonical script fresh now correctly returns both — this matches the exact "transient per-project fetch returns empty despite project being listed" bug already documented in memory (now a 4th confirmed occurrence). **Lesson: a single script pass on this data source cannot be fully trusted — cross-verify with a second independent run before calling any 0h/shortfall final.**
 
 ---
 
@@ -206,19 +211,20 @@ Trello: Fountain ✓ complete (plan present, no new over-est spike; customer bug
 
 ---
 
-## Upwork — 08:45 (+07:00, recheck)
+## Upwork — 09:45 (+07:00, recheck)
 
-Retried headless login (`upwork-login.js --login --account=carrick`) — timed out after 90s, needs visible-browser/CAPTCHA step outside cron capability. Per established pattern: silence/session-failure on this contract is never an alert. Manual re-auth if needed: `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick`.
+**Honest status (user asked "why no alert" — this needed a clearer answer):** carrick's Upwork session is genuinely expired and headless re-login fails at the CAPTCHA/2FA step (`Waiting for selector input[name="login[username]"] failed` on `upwork-weekly-hours.js`, and a full `--login --account=carrick` retry also timed out at 90s). This affects **Rory, Neural Contract, and Aysar** workrooms (all on carrick's session) — none could be verified live this run. The Bailey-DuongDN workroom (separate "david2" account) still works fine: 0h this week, 42:40 since start.
+Per established policy (confirmed by user multiple times previously): silence/session-failure on carrick's Upwork workrooms is treated as no-alert, NOT as a verified-clean check — this run genuinely could not read Neural's messages, so an urgent unread client message (if one exists) would not have been caught. **This requires an interactive VNC login to fix** (CAPTCHA can't be solved headlessly): `bash scripts/vnc-login-session.sh upwork` or `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick` with a real display attached. Per [[feedback_upwork_session_token_storage]], after that login the OAuth token should be saved to config so cron doesn't need to repeat this.
 
-Trello: Neural Contract ✓ (silence = no alert, unchanged)
+Trello: Neural Contract ✓ (per established silence=no-alert policy — but this run is unverified, not confirmed-clean; see caveat above)
 
 ---
 
-## Philip (MS Teams) — 05:01 (+07:00)
+## Philip (MS Teams) — 09:35 (+07:00, verified on second recheck)
 
-MS Teams script timed out (browser lock conflict). No email from Philip Briggs in window. Last MS Teams activity: Will sent summary Jun 16; Philip last wrote May 17. No new complaint in window.
+Cron script timed out; first recheck attempt also failed to extract real message text (script only captured generic "Messages" header, a known limitation — see [[feedback_philip_msteams_must_run]]). **Corrected this run:** opened the chat and read the actual screen content via screenshot — confirmed correct contact (Philip Briggs, Six Star Rentals, pbriggs@sixstarrentals.com.au). Chat sidebar shows last activity **6/16** (our own outgoing summary message), nothing since — genuinely verified, not assumed from stale memory. No email from Philip in window either.
 
-Trello: Philip ✓
+Trello: Philip ✓ (now backed by actual screenshot evidence, not a timeout fallback)
 
 ---
 
@@ -292,35 +298,37 @@ Recent PRs in window: #5053 (DanielGavrilkin, SR-7176 loading state — Jul 1) �
 
 ---
 
-## Reminders — 08:45 (+07:00, corrected on recheck) [print only — no send]
+## Reminders — 09:40 (+07:00, corrected after 2nd recheck) [print only — no send]
 
-- **LeNH** → 0h, no leave anywhere (Sheets + 18 WS projects + Resource Arrangement room) — reminder would trigger (print only)
+No developers need a reminder for Jul 1 — all accounted for:
 - **TuanNT** → excused, hospitalized Jul 1 (Resource Arrangement) — NO reminder
 - **PhucVT** → 8h found in Workstream (James Diamond) — NO reminder (cron false alarm)
-- **KhanhHH** → 3.5h found in Workstream (Generator) — NO reminder (cron false alarm, not 0h across all sources)
+- **KhanhHH** → 6.5h found in Workstream (Generator) — NO reminder (corrected from initial 3.5h undercount)
+- **LeNH** → 7.83h found in Workstream (Peptide Clyde/Blair Brown) — NO reminder (first script pass missed this project's data entirely, transient bug — see recheck note)
 - **LongVV** → half-day leave Jul 1 — NO reminder
 
-_(Not sent — no --send-reminder flag this session)_
+_(Nothing to send — 0 devs need a reminder this run)_
 
 ---
 
-## Recheck — 08:45 (+07:00)
+## Recheck — 09:40 (+07:00, two rounds)
 
 | Item | Result | Details |
 |------|--------|---------|
-| Aysar | ✓ completed | Workstream login (failed in cron) retried successfully — KhanhHH 3.5h found in Generator project, not 0h |
+| Aysar | ✓ completed | Workstream login (failed in cron) retried — KhanhHH hours found (later corrected 3.5h→6.5h) |
 | John Yi - Amazing Meds | ✓ completed | TuanNT excused — hospitalized full-day Jul 1 per Matrix Resource Arrangement room (charged to Bailey, no makeup) |
 | Bailey | ✓ completed | Same TuanNT excuse; GGS Slack already clean |
 | Rebecca - William Bills | ✓ completed | Same TuanNT excuse; William Bills Slack already clean |
 | Matrix | ✓ data filled | Token refreshed (`matrix-token-refresh.js`); full 130-room scan completed, 25 active/638 msgs — no new alerts beyond the leave notes above |
 | Fountain Part 1 | ✓ confirmed | W33 plan (88h/wk) reconfirmed current — no newer plan posted since Jun 30 |
 | Upwork | attempted, still unavailable | Headless re-login timed out (needs visible browser/CAPTCHA) — no change, Neural stays complete per silence=no-alert pattern |
-| Philip (MS Teams) | attempted, no new data | Script ran but didn't extract readable message text; no conflicting info found, item stays complete |
-| PhucVT / KhanhHH 0h | ✓ reclassified | Root cause: cron's Workstream SSO login failed, sheets-only view showed false 0h. Live WS query (re-verified twice) found real hours for both. |
-| LeNH 0h | ○ stays open (reminder only) | Confirmed genuine — no hours in Sheets or 18 live WS projects, no leave note in Resource Arrangement room either |
+| Philip (MS Teams) | ✓ verified with real evidence | First 2 attempts failed to extract message text; 3rd attempt read the actual chat screenshot directly — confirmed correct contact (Six Star Rentals), last activity 6/16, nothing since. No longer a stale-data fallback. |
+| PhucVT / KhanhHH 0h | ✓ reclassified (round 1) | Root cause: cron's Workstream SSO login failed entirely, sheets-only view showed false 0h |
+| KhanhHH 6.5h (round 2 correction) | ✓ corrected | User flagged for re-check — direct per-project query found round-1 script pass undercounted Generator hours (3.5h reported vs actual 6.5h across 4 tasks) |
+| LeNH 7.83h (round 2 correction) | ✓ reclassified | User flagged for re-check — round-1 script pass found 0h across all 18 projects, but a fresh re-run found 7.83h in "Peptide Clyde" (Blair Brown, renamed) that the first pass missed entirely. Confirmed 4th occurrence of the known transient per-project-fetch bug (see [[feedback_check_workstream_before_flagging_shortfall]]). No alert, no reminder needed. |
 | Maddy - Kai | ○ stays open | Genuine unresolved (client trust incident, Kai unresponsive) — not a data-fetch issue, correctly left open per [[feedback_recheck_uses_morning_report_data]] |
 
-**Cleared:** Aysar, John Yi, Bailey, Rebecca (4 items)
+**Cleared:** Aysar, John Yi, Bailey, Rebecca, LeNH (5 items/false-alerts resolved)
 **Still open:** Maddy (1 item, genuine) — Check Progress now 19/20 complete
-**Root cause found:** Workstream SSO login failure in cron (05:01 run) caused 3 false "0h" readings (PhucVT, KhanhHH, and masked TuanNT's real excuse). Consider adding a retry/backoff to the cron Workstream login step to reduce future false alerts.
+**Root cause found:** (1) Workstream SSO login failure in cron caused the first wave of false 0h (PhucVT, KhanhHH, masked TuanNT's excuse). (2) Even after login succeeded, individual per-project fetches intermittently return empty on a single pass (KhanhHH undercounted, LeNH missed entirely) — this is a recurring, unfixed reliability gap in the Workstream API/script, not a one-off. **Recommendation: sheets-tasklog-scan.js should query each project twice and take the max, or the cron should not treat a single 0h Workstream pass as final without a same-morning re-verify, given this has now recurred 4 times.**
 
