@@ -9,15 +9,17 @@
     "last_run": "2026-07-02T05:01:00+07:00",
     "output_file": "reports/2026-07-02/daily-report.md",
     "last_status": "complete",
+    "recheck_last_run": "2026-07-02T08:45:00+07:00",
     "caveats": [
-      "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m)",
-      "TuanNT 0h Jul 1 all sheets \u2014 blocks John Yi, Bailey, Rebecca",
-      "PhucVT 0h Jul 1 all sheets",
-      "KhanhHH 0h Jul 1 all sheets \u2014 blocks Aysar",
-      "LeNH 0h Jul 1 all sheets (reminder only)",
+      "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m) \u2014 genuine unresolved, confirmed still open on recheck",
+      "TuanNT 0h Jul 1 RESOLVED on recheck: excused, hospitalized full-day (Matrix Resource Arrangement, charged to Bailey no makeup). John Yi/Bailey/Rebecca unblocked.",
+      "PhucVT 0h Jul 1 RESOLVED on recheck: false alarm, cron Workstream login failed \u2014 8h found in Workstream (James Diamond) on retry",
+      "KhanhHH 0h Jul 1 RESOLVED on recheck: false alarm, cron Workstream login failed \u2014 3.5h found in Workstream (Generator) on retry. Aysar unblocked.",
+      "LeNH 0h Jul 1 confirmed genuine on recheck (Sheets + 18 live WS projects), no leave note \u2014 reminder only",
       "FirstProject production React errors ongoing (high volume Jul 1)",
-      "Matrix token expired \u2014 rooms not scanned this run",
-      "Upwork sessions expired \u2014 re-auth needed"
+      "Matrix token refreshed on recheck \u2014 full 130-room scan completed (25 active/638 msgs), no new alerts beyond leave notes above",
+      "Upwork retried on recheck \u2014 still needs visible-browser/CAPTCHA login, not an alert (silence=no-alert pattern)",
+      "Workstream project list grew to 18 (was 16) \u2014 reference_workstream.md memory needs updating with new projects: Peptide Clyde, BXR App, Elevate365.AI, Neural Contract - Test Job, Radio Data Center, Speedventory, Tokenlite"
     ]
   },
   "refresh": {

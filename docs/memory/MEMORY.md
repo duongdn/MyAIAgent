@@ -61,7 +61,7 @@
 - [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md) — TuanNT combined 0h gates John Yi+Rebecca+Bailey; scan ALL 11 sheets
 - [feedback_summary_sheet_no_double_count](daily-report/sheets/feedback_summary_sheet_no_double_count.md) — Summary col D already grand total
 - [feedback_vietph_leave_date_cron_bug](daily-report/sheets/feedback_vietph_leave_date_cron_bug.md), [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — Run parse-leave-emails.js before task log checks; verify leave note date=PREV_DATE; pro-rate weekly target on leave days
-- [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — Workstream API: single `/api` prefix only; run EVERY day `--week` Jira check, include table
+- [reference_workstream](daily-report/sheets/reference_workstream.md) — now 17 projects (+John Yi/Philip/Neural/Franc/Bailey/Marcel/Raymond/Rory, 2026-07-02); [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — run EVERY day `--week` Jira check
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md) — encrypt-secrets.sh was missing workstream/newrelic/rollbar configs, silently dropping every Workstream token refresh (fixed 2026-06-25)
 
 ## daily-report:scrin

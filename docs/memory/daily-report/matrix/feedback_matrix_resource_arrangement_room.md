@@ -1,8 +1,10 @@
 ---
 name: feedback_matrix_resource_arrangement_room
-description: Matrix room "Delivery - Resource Arrangement" is an authoritative same-day leave/absence source — must cross-check before flagging any dev's 0h as an alert
-metadata:
+description: "Matrix room \"Delivery - Resource Arrangement\" is an authoritative same-day leave/absence source — must cross-check before flagging any dev's 0h as an alert"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: 291ec938-3434-4d4e-a750-eb13b544adaa
 ---
 
 Matrix room **"Delivery - Resource Arrangement"** is where namtv posts same-day/short-notice dev absences as they're processed, in the format:
@@ -21,4 +23,6 @@ This room is **authoritative — equal weight to leave-plan.json / email leave r
 4. Cite the exact note (sender, project charged, timestamp) in the report instead of writing a generic "not yet in leave-plan.json" caveat — that phrasing implies the info doesn't exist, when it was sitting in the same Matrix scan.
 5. This room scans automatically as part of the full joined-rooms Matrix fetch (no extra script needed) — the failure mode is forgetting to cross-reference it during the Sheets 0h analysis, not a missing data source.
 
-Related: [[project_leave_plan_system]], [[feedback_leave_day_handling]], [[feedback_vietph_leave_date_cron_bug]]
+**Confirmed 2026-07-02:** Cron's Matrix token expired (missed this room entirely that run), so TuanNT's 0h on John Yi/Bailey/Rebecca was flagged as a plain unexcused alert. Recheck refreshed the token, found TuanNT's note — this time **no time marker (full day)**, "Đang nằm viện" (hospitalized), charged to Bailey no makeup. Per rule #2 above, this fully cleared all 3 gated Trello items (John Yi, Bailey, Rebecca), unlike the 2026-06-18 half-day ("Chiều") precedent which only partially cleared. Also cross-checked KhanhHH's Workstream hours the same run — different root cause (cron WS login failure, not a leave note) but same lesson: a cron auth failure on ANY source (Matrix, Workstream) can manufacture a false "no leave / 0h" alert that a same-morning recheck should catch before reminders go out.
+
+Related: [[project_leave_plan_system]], [[feedback_leave_day_handling]], [[feedback_vietph_leave_date_cron_bug]], [[feedback_check_workstream_before_flagging_shortfall]]
