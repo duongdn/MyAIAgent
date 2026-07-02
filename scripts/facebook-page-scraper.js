@@ -44,8 +44,9 @@ async function scrapePage(page, pageId, limit) {
     return { error: 'not_logged_in — run: node scripts/facebook-page-scraper.js --login', articles: [] };
   }
 
-  // Scroll progressively to trigger lazy loading
-  for (let i = 0; i < 5; i++) {
+  // Scroll progressively to trigger lazy loading — deep enough to get past any
+  // pinned/"Featured" post at the top and reach real chronological feed items.
+  for (let i = 0; i < 8; i++) {
     await page.evaluate(() => window.scrollBy(0, 600));
     await new Promise(r => setTimeout(r, 1000));
   }
@@ -121,11 +122,20 @@ async function scrapePage(page, pageId, limit) {
         '...','· ·','·','Tác giả',
       ]);
       let rawText = (cloned.innerText || '').replace(/\s+/g, ' ').trim();
-      // Strip Facebook post header: "Posts<author><time> Shared with Public"
-      rawText = rawText.replace(/^(Posts|Bài viết)?\s*(Filters|Bộ lọc)?\s*/, '');
-      // Strip author name + timestamp + privacy (e.g. "Thiệu Nguyễn1h Shared with Public")
-      rawText = rawText.replace(/^[^\n·•]{3,40}?\d+[hm]\s+(Shared with Public|Công khai|Bạn bè|Friends)\s*/, '');
-      rawText = rawText.replace(/^[^\n·•]{3,40}?\s+(Hôm qua|Yesterday|Tháng|ngày)\s[^•]{0,30}(Shared with Public|Công khai|Bạn bè)\s*/, '');
+      // Find the LAST "<author><time> Shared with Public"-style header in the text and
+      // keep only what follows it — the container walk-up can accidentally merge sidebar
+      // content (profile Intro panel, etc.) ABOVE the real post header, so anchoring on
+      // the first header (old `^...` approach) picked up sidebar junk instead of the post.
+      const headerRe = /[^\n·•]{1,40}?\d+[hmd]\s+(Shared with Public|Shared with Friends|Công khai|Bạn bè|Friends)/g;
+      let headerMatch, lastHeaderMatch = null;
+      while ((headerMatch = headerRe.exec(rawText)) !== null) { lastHeaderMatch = headerMatch; }
+      if (lastHeaderMatch) {
+        rawText = rawText.substring(lastHeaderMatch.index + lastHeaderMatch[0].length).trim();
+      } else {
+        // Fallback: no header pattern matched (e.g. relative-date posts) — strip leading noise only
+        rawText = rawText.replace(/^(Posts|Bài viết)?\s*(Filters|Bộ lọc)?\s*/, '');
+        rawText = rawText.replace(/^[^\n·•]{3,40}?\s+(Hôm qua|Yesterday|Tháng|ngày)\s[^•]{0,30}(Shared with Public|Công khai|Bạn bè)\s*/, '');
+      }
       // Strip reaction noise at end: "178 38 123" or "All reactions:" or "View X comments"
       rawText = rawText.replace(/\s*(All reactions:[^.]*|View \d+ comments?|Xem \d+ bình luận)[^.]*$/, '').trim();
       rawText = rawText.replace(/\s*(\d+\s+){2,}\d*\s*$/, '').trim();
@@ -135,6 +145,9 @@ async function scrapePage(page, pageId, limit) {
       const text = rawText;
 
       if (text.length < 20) continue;
+      // Skip pinned/"Featured" posts (groups pin these to the top regardless of age) —
+      // they are frequently stale (months/years old) and get mistaken for new content.
+      if (/^(Featured|Đã ghim|Pinned)/.test(text)) continue;
 
       posts.push({
         title: text.substring(0, 150),
