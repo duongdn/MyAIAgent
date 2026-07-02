@@ -38,20 +38,20 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 
 **Khi `topic=all` — chạy 9 lệnh riêng, synthesize từng section ngay sau khi nhận kết quả:**
 ```bash
-python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
-python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=100
 ```
 
 **Khi `topic=<cụ thể>` — fetch 1 lần:**
 ```bash
-python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]
 ```
 
 - User truyền `--limit=N` → áp dụng N cho tất cả fetch calls.
@@ -132,7 +132,7 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 `fetch-news.py` tự động lưu JSON cache vào `/tmp/news-digest-cache.json`. Sau khi ghi file markdown, **LUÔN LUÔN** chạy script để tự động sửa bare-domain URLs:
 
 ```bash
-python3 .claude/skills/news-digest/scripts/fix-links.py reports/{YYYY-MM-DD}/{HHMM}-news-digest.md
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fix-links.py reports/{YYYY-MM-DD}/{HHMM}-news-digest.md
 ```
 
 Script sẽ:
@@ -174,7 +174,7 @@ Sau khi ghi xong:
 Sau khi ghi file xong, **LUÔN LUÔN** chạy lệnh sau để mark complete card "Check news" trên Trello Daily list:
 
 ```bash
-python3 .claude/skills/news-digest/scripts/trello-complete.py
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/trello-complete.py
 ```
 
 Không cần báo cáo kết quả — chạy silently.

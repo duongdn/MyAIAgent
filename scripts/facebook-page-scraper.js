@@ -46,13 +46,7 @@ async function scrapePage(page, pageId, limit) {
     return { error: 'not_logged_in — run: node scripts/facebook-page-scraper.js --login', articles: [] };
   }
 
-  // Scroll progressively to trigger lazy loading — deep enough to get past any
-  // pinned/"Featured" post at the top and reach real chronological feed items.
-  for (let i = 0; i < 8; i++) {
-    await page.evaluate(() => window.scrollBy(0, 600));
-    await new Promise(r => setTimeout(r, 1000));
-  }
-  await new Promise(r => setTimeout(r, 2000));
+  await new Promise(r => setTimeout(r, 1500));
 
   // Screenshot for debugging
   if (process.env.FB_DEBUG_SCREENSHOT) {
@@ -60,17 +54,50 @@ async function scrapePage(page, pageId, limit) {
     console.error('[facebook] screenshot saved:', process.env.FB_DEBUG_SCREENSHOT);
   }
 
-
   // Wait for posts to appear (try multiple selectors)
   try { await page.waitForSelector('[role="feed"], a[href*="/posts/"]', { timeout: 8000 }); } catch {}
 
-  const articles = await page.evaluate((limit) => {
-    // Find all clean post links (NOT comment links or reply links)
+  // IMPORTANT: Facebook virtualizes the feed DOM — posts get unmounted once scrolled
+  // past, so a single "scroll a lot, then extract once" pass only ever sees whatever
+  // is on-screen at that final moment (usually just 1 post). Extract at EVERY scroll
+  // checkpoint instead (including before scrolling at all) and merge by canonical link
+  // in Node, so posts that later get virtualized away are still captured.
+  const merged = new Map();
+  const seenText = new Set();
+  const collect = async () => {
+    const found = await page.evaluate(extractPostsFromDom, limit);
+    for (const post of found) {
+      if (merged.has(post.link)) continue;
+      // Different comment-anchor links can resolve to the same underlying post — also
+      // dedup on a text fingerprint since link alone isn't always enough.
+      const fingerprint = post.content.slice(0, 80);
+      if (seenText.has(fingerprint)) continue;
+      seenText.add(fingerprint);
+      merged.set(post.link, post);
+    }
+  };
+
+  await collect();
+  for (let i = 0; i < 8 && merged.size < limit; i++) {
+    await page.evaluate(() => window.scrollBy(0, 600));
+    await new Promise(r => setTimeout(r, 1200));
+    await collect();
+  }
+
+  return { articles: Array.from(merged.values()).slice(0, limit) };
+}
+
+// Runs inside page.evaluate() — must be a pure, self-contained function (no closures
+// over outer scope) since Puppeteer serializes it into the page context.
+function extractPostsFromDom(limit) {
+    // Find all post-related links. On a fully authenticated session, EVERY /posts/ anchor
+    // on a wall page carries a comment_id/reply_comment_id (they're comment-thread permalinks,
+    // not a separate "clean" top-level link) — excluding them outright yields zero matches.
+    // Instead strip those params below so multiple comment-anchors for the same post collapse
+    // into one canonical post link via the dedup Set.
     const postLinks = Array.from(document.querySelectorAll('a[href*="/posts/"]'))
       .filter(a => {
         const url = a.href || '';
-        // Exclude comment links and Messenger chat links
-        if (url.includes('comment_id') || url.includes('reply_comment_id')) return false;
         if (url.includes('/messages/') || url.includes('/chat/')) return false;
         return url.includes('/posts/');
       });
@@ -84,7 +111,7 @@ async function scrapePage(page, pageId, limit) {
       let link = linkEl.href;
       try {
         const u = new URL(link);
-        ['__cft__', '__tn__', '_rdr', '_nc_x'].forEach(p => u.searchParams.delete(p));
+        ['__cft__', '__tn__', '_rdr', '_nc_x', 'comment_id', 'reply_comment_id'].forEach(p => u.searchParams.delete(p));
         link = u.toString();
       } catch {}
 
@@ -128,15 +155,17 @@ async function scrapePage(page, pageId, limit) {
       // keep only what follows it — the container walk-up can accidentally merge sidebar
       // content (profile Intro panel, etc.) ABOVE the real post header, so anchoring on
       // the first header (old `^...` approach) picked up sidebar junk instead of the post.
-      const headerRe = /[^\n·•]{1,40}?\d+[hmd]\s+(Shared with Public|Shared with Friends|Công khai|Bạn bè|Friends)/g;
+      // Timestamp forms seen: "2h"/"5m" (relative), "Hôm qua lúc 12:05" / "Yesterday at 12:05"
+      // (yesterday, absolute time). No length cap on the leading junk — the container walk-up
+      // can prepend an arbitrarily long "online status" sidebar blob ahead of the real header.
+      const headerRe = /[^\n·•]*?(\d+[hmd]|(Hôm qua lúc|Yesterday at)\s*\d{1,2}:\d{2})\s+(Shared with Public|Shared with Friends|Công khai|Bạn bè|Friends|Đã chia sẻ với Công khai)/g;
       let headerMatch, lastHeaderMatch = null;
       while ((headerMatch = headerRe.exec(rawText)) !== null) { lastHeaderMatch = headerMatch; }
       if (lastHeaderMatch) {
         rawText = rawText.substring(lastHeaderMatch.index + lastHeaderMatch[0].length).trim();
       } else {
-        // Fallback: no header pattern matched (e.g. relative-date posts) — strip leading noise only
+        // Fallback: no header pattern matched — strip leading noise only
         rawText = rawText.replace(/^(Posts|Bài viết)?\s*(Filters|Bộ lọc)?\s*/, '');
-        rawText = rawText.replace(/^[^\n·•]{3,40}?\s+(Hôm qua|Yesterday|Tháng|ngày)\s[^•]{0,30}(Shared with Public|Công khai|Bạn bè)\s*/, '');
       }
       // Strip reaction noise at end: "178 38 123" or "All reactions:" or "View X comments"
       rawText = rawText.replace(/\s*(All reactions:[^.]*|View \d+ comments?|Xem \d+ bình luận)[^.]*$/, '').trim();
@@ -160,9 +189,6 @@ async function scrapePage(page, pageId, limit) {
     }
 
     return posts;
-  }, limit);
-
-  return { articles };
 }
 
 async function run() {
