@@ -91,21 +91,33 @@
 
 ---
 
+### 📰 Thiệu Nguyễn — Substack
+
+- [Khi domain model bắt đầu có hành vi: Value Object, Entity và Repository cho nghiệp vụ phức tạp](https://thieunv.substack.com/p/khi-domain-model-bat-au-co-hanh-vi) — Bàn về cách tổ chức domain model khi nghiệp vụ phức tạp lên, dùng Value Object/Entity/Repository đúng chỗ.
+- [Khi một side project không còn là side project](https://thieunv.substack.com/p/khi-mot-side-project-khong-con-la) — Chia sẻ khi một dự án phụ phát triển vượt quy mô ban đầu, đòi hỏi tư duy nghiêm túc hơn.
+- [Vẽ ranh giới cho code: cách cô lập logic nghiệp vụ khỏi database và framework](https://thieunv.substack.com/p/ve-ranh-gioi-cho-code-cach-co-lap) — Hướng dẫn tách biệt logic nghiệp vụ khỏi hạ tầng (DB, framework) để code dễ bảo trì.
+- [Bản đồ System Design: những khái niệm cần biết trước khi thiết kế hệ thống chịu tải cao](https://thieunv.substack.com/p/ban-o-system-design-nhung-khai-niem) — Tổng hợp các khái niệm nền tảng cần nắm trước khi thiết kế hệ thống chịu tải lớn.
+- [Từ Coder lên Architect: Khi code "chạy được" là chưa đủ](https://thieunv.substack.com/p/tu-coder-len-architect-khi-code-chay) — Bàn về bước chuyển tư duy từ lập trình viên sang kiến trúc sư phần mềm.
+
+_(5 bài cũ hơn — xem đầy đủ tại [thieunv.substack.com](https://thieunv.substack.com/feed))_
+
+---
+
 ### 📱 Thiệu Nguyễn — Facebook AI
 
-_(Không có bài mới từ Facebook)_
+- [Đây rồi đây rồi, lụm...](https://www.facebook.com/shinantori/posts/pfbid02AzcBh2donL3V2pwznFwD9gS5szmJR3W9ix6QJGMKBGTwfDF8x8KCMPfkwh7KrGU7l) — Bài ngắn kèm bình luận trao đổi về một tính năng chỉ có trên CLI, chưa có trên Claude Desktop.
 
 ---
 
 ### 📱 Duy Nguyen (mrgoonie) — Facebook AI
 
-_(Không có bài mới từ Facebook)_
+_(Scraper chỉ lấy được phần "Intro"/bio trang cá nhân, không phải bài đăng mới — dữ liệu không đáng tin, bỏ qua)_
 
 ---
 
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
 
-_(Không có bài mới từ Facebook)_
+_(Scraper chỉ lấy được bài ghim cũ từ 16/09/2025 [cũ], không phải bài mới — không có bài mới đáng tin cậy)_
 
 ---
 

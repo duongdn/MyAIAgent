@@ -76,6 +76,11 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 ...
 
 ---
+### 📰 Thiệu Nguyễn — Substack
+- [{Tiêu đề}]({link}) — {tóm tắt 1 câu}
+...
+
+---
 ### 📱 Thiệu Nguyễn — Facebook AI
 - [{Tiêu đề/nội dung}]({link}) — {tóm tắt 1 câu}
 ...
@@ -95,11 +100,12 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - {2–4 gạch đầu dòng tổng hợp xu hướng/chủ đề chính}
 ```
 
-**⚠️ MANDATORY — Facebook AI sections (khi topic=ai hoặc topic=all):**
-- PHẢI có 3 section riêng: `### 📱 Thiệu Nguyễn — Facebook AI`, `### 📱 Duy Nguyen (mrgoonie) — Facebook AI`, và `### 📱 Nghiện AI (Facebook Group) — Facebook AI`, đặt SAU các nguồn AI khác, TRƯỚC Điểm nổi bật
-- KHÔNG BAO GIỜ được bỏ qua 3 section này dù context có hạn — đây là nguồn ưu tiên cao
-- Nếu RSS feed trả về 0 bài (lỗi hoặc trống), ghi: `_(Không có bài mới từ Facebook)_`
+**⚠️ MANDATORY — Thiệu Nguyễn + Facebook AI sections (khi topic=ai hoặc topic=all):**
+- PHẢI có ĐỦ 4 section riêng, theo đúng thứ tự: `### 📰 Thiệu Nguyễn — Substack`, `### 📱 Thiệu Nguyễn — Facebook AI`, `### 📱 Duy Nguyen (mrgoonie) — Facebook AI`, `### 📱 Nghiện AI (Facebook Group) — Facebook AI`, đặt SAU các nguồn AI khác, TRƯỚC Điểm nổi bật
+- KHÔNG BAO GIỜ được bỏ qua 4 section này dù context có hạn — đây là nguồn ưu tiên cao (đã bị bỏ sót nhiều lần, xem `feedback_news_digest_thieu_nguyen_rss_timeout`)
+- Nếu nguồn trả về 0 bài (lỗi hoặc trống), ghi: `_(Không có bài mới từ Substack)_` / `_(Không có bài mới từ Facebook)_`
 - Hiển thị TẤT CẢ bài từ mỗi nguồn (không cắt bớt)
+- **Verify trước khi lưu file:** sau khi soạn xong markdown, grep cả 4 header trên trong nội dung sắp ghi — nếu thiếu bất kỳ header nào, PHẢI bổ sung trước khi Write, không được lưu file thiếu section
 
 **Rules — chế độ mặc định:**
 - Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)
@@ -159,8 +165,9 @@ Example: reports/2026-06-15/0200-news-digest.md
 
 Dùng Write tool để tạo file. Nội dung file = toàn bộ markdown đã synthesize (giống hệt output ra chat).
 Sau khi ghi xong:
-1. Chạy `fix-links.py` để sửa bare-domain URLs (xem section Link Validation ở trên)
-2. Thông báo path file cho user: `📄 Saved: reports/{date}/{time}-news-digest.md`
+1. Nếu topic=ai hoặc topic=all: chạy `grep -c "^### 📰 Thiệu Nguyễn — Substack\|^### 📱 Thiệu Nguyễn — Facebook AI\|^### 📱 Duy Nguyen (mrgoonie)\|^### 📱 Nghiện AI" {file}` — PHẢI ra 4. Nếu <4, đã bỏ sót section MANDATORY — sửa file ngay (Edit tool), không được tiếp tục bước Trello/Git cho đến khi đủ 4.
+2. Chạy `fix-links.py` để sửa bare-domain URLs (xem section Link Validation ở trên)
+3. Thông báo path file cho user: `📄 Saved: reports/{date}/{time}-news-digest.md`
 
 ## Post-run: Trello Auto-complete
 

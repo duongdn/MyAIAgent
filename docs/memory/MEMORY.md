@@ -133,7 +133,7 @@
 - [feedback_news_digest_php_events](news-digest/feedback_news_digest_php_events.md) — PHP events (PHPverse, Laracon) need full schedule+speakers
 - [feedback_news_digest_ai_underused_sources](news-digest/feedback_news_digest_ai_underused_sources.md) — AI section sample ALL 11 sources; FB via rss.app workaround now live
 - [feedback_news_digest_use_actual_links](news-digest/feedback_news_digest_use_actual_links.md) — News links: use JSON `link`; run fix-links.py after save
-- [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — rss.app feed "empty" was a 10s timeout false-negative, not real — fixed w/ retry+20s
+- [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — Thiệu Nguyễn section recurring empty: 3 diff causes (timeout/quota/spec-gap), check each fresh
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md) — Never cleanup/VACUUM FULL w/o confirmation; storage alerts need WHY breakdown
