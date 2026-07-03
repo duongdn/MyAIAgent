@@ -14,7 +14,7 @@
 - [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md) — Never send/re-send without explicit authorization; subagents never submit/tick/send/push beyond scope
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize, nuscarrick=default
 - [project_alert_cron_setup](global/project_alert_cron_setup.md) — Alert cron: 30 min interval, env reqs, rate-limit detection
-- [project_php_team](global/project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH, VietPH
+- [project_php_team](global/project_php_team.md) — PHP team: LongVV, PhucVT, TuanNT, KhanhHH, LeNH (VietPH resigned 2026-06-30 — do NOT scan/alert/gate)
 - [project_timezone_utc7](global/project_timezone_utc7.md) — All times UTC+7; subtract 7h for cron/UTC
 - [user_role](global/user_role.md) — PM at NUS Technology, 10+ client projects, daily monitoring
 
@@ -63,6 +63,7 @@
 - [feedback_vietph_leave_date_cron_bug](daily-report/sheets/feedback_vietph_leave_date_cron_bug.md), [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — Run parse-leave-emails.js before task log checks; verify leave note date=PREV_DATE; pro-rate weekly target on leave days
 - [reference_workstream](daily-report/sheets/reference_workstream.md) — now 17 projects (+John Yi/Philip/Neural/Franc/Bailey/Marcel/Raymond/Rory, 2026-07-02); [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — run EVERY day `--week` Jira check
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md) — encrypt-secrets.sh was missing workstream/newrelic/rollbar configs, silently dropping every Workstream token refresh (fixed 2026-06-25)
+- [feedback_elena_sheet_permission_error](daily-report/sheets/feedback_elena_sheet_permission_error.md) — svc acct lost access to Elena sheet (KhanhHH 4th source); scan script silently reports "no week tab" instead of surfacing perm error
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — Scrin tracks Nick not TuanNT; Mon fetch returns Sunday not Friday
@@ -74,6 +75,7 @@
 - [feedback_fountain_0h_not_expected_day1](daily-report/fountain/feedback_fountain_0h_not_expected_day1.md), [feedback_fountain_monday_plan_timing](daily-report/fountain/feedback_fountain_monday_plan_timing.md) — 0h day1 NOT expected for 40h/wk devs — flag; Monday plan posts 08:30-09:30+07, wait before flagging
 - [feedback_fountain_capacity_script_regex_bug](daily-report/fountain/feedback_fountain_capacity_script_regex_bug.md), [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md) — Capacity scripts must match bare-numeric task names; dev task log hours NOT monitored
 - [feedback_over_estimate_tracking](daily-report/fountain/feedback_over_estimate_tracking.md) — Track if hours still growing week-over-week
+- [feedback_fountain_est_vs_charged_status_column_bug](daily-report/fountain/feedback_fountain_est_vs_charged_status_column_bug.md) — Status col is idx6 (G) not idx2; idx2-based scripts silently return 0 NS+IP tasks
 
 ## daily-report:elena
 - [feedback_elena_consolidated](daily-report/elena/feedback_elena_consolidated.md) — Elena: auto deploy mergeable PRs; check pending-actions.json deployed:false FIRST
