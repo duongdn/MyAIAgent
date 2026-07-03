@@ -11,8 +11,8 @@
 | # | Source | Alert |
 |---|--------|-------|
 | ~~1~~ | ~~Email ken@~~ | **RESOLVED 09:07** — user provided new Zoho app password, verified login OK, re-encrypted config. 12 normal Precognize/development PR emails found in window, no alerts. Trello Ken item completed. |
-| 2 | Email carrick@ | generator-api GitLab pipeline last state FAILED (unresolved) + Snyk vuln alert |
-| 3 | Email rick@ | FirstProject Rollbar ~13 new errors (known ongoing volume), FountainStaging BugSnag AWS MissingRegionError |
+| 2 | Email carrick@ (FYI only, Trello ✓) | generator-api GitLab pipeline last state FAILED (unresolved) + Snyk vuln alert |
+| 3 | Email rick@ (FYI only, Trello ✓) | FirstProject Rollbar ~13 new errors (known ongoing volume), FountainStaging BugSnag AWS MissingRegionError |
 | 4 | Email vuongtrancr@ | 2x New Relic "Signal lost — Low Application Throughput" (Swish APM) |
 | 5 | Sheets — LeNH | 0h 2026-07-02, no formal leave note (STRICT rule). Context: moved to new project same day, still awaiting Workstream access as of 14:06 — likely explains 0h but not a formal excuse. |
 | 6 | Sheets — KhanhHH | Elena Google Sheet unreachable (service-account permission error) — 4th source unverified, true total uncertain. Blocks Aysar + Elliott Trello completion. |
@@ -44,7 +44,7 @@ kai@: 1 Jira mention (Madhuraka, LIFM2-447) — routine. nick@: no John Yi conte
 
 **Note:** `scripts/daily-email-scan-260610.js` had a hardcoded stale window (June 9) plus a truncation bug — was silently returning June data. Corrected via new `scripts/daily-email-scan-260703.js` (based on the already-fixed 260622 version). All figures above are from the corrected run, hand-verified against the actual window. Recommend consolidating to one canonical non-dated email-scan script (same pattern as the sheets-script rule already in memory).
 
-Trello: Check mail — completed DuongDn, Kai, Nick. Left incomplete: Carrick, Rick, Ken (real findings).
+Trello: Check mail — completed DuongDn, Kai, Nick (all 6 later completed, see Update 09:11 — email content is informational, doesn't gate Check mail unless the fetch itself fails).
 
 ---
 
@@ -192,7 +192,7 @@ Script-based extraction unreliable this run — clicked a duplicate "Philip Brig
 
 ## Trello — 08:45 (+07:00)
 
-**Check mail:** DuongDn ✓, Kai ✓, Nick ✓, Ken ✓ (fixed 09:07) complete. Carrick, Rick incomplete (real alerts).
+**Check mail:** all 6 complete (DuongDn, Kai, Nick, Ken fixed 09:07, Carrick + Rick completed 09:11 — email content is FYI-only, doesn't gate this checklist). Card auto-closed.
 **Check progress:** 13 of 17 items complete (Rory, Franc, Raymond, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi, Bailey, Rebecca, Neural, Elena, Fountain, James Diamond, Andrew Taraba). Incomplete: Aysar, Elliott, Philip.
 Neither card auto-closed (both have genuine open items).
 
@@ -201,6 +201,10 @@ Neither card auto-closed (both have genuine open items).
 ## Update — 09:07 (+07:00)
 
 **Ken@ IMAP fixed.** User provided new Zoho app password. Verified live login (IMAP auth OK), updated `config/.email-accounts.json`, re-encrypted via `scripts/encrypt-secrets.sh` (`.email-accounts.json.enc` regenerated, round-trip verified). Re-scanned ken@'s NewsLetter folder for the report window: 133 raw messages, 12 matching the "Precognize/development" filter — all normal GitHub PR notification traffic, no alerts. Trello "Ken" item marked complete.
+
+## Update — 09:11 (+07:00)
+
+**Policy correction (user):** Check mail Trello items are informational-only — complete regardless of email content found, unless the fetch itself failed. Carrick (GitLab pipeline FAILED + Snyk) and Rick (heavy Rollbar volume) were wrongly left incomplete earlier for content reasons; both fetches actually succeeded. Marked both complete. Check mail card now fully closed (all 6/6). Alert rows for Carrick/Rick kept in the summary above for visibility, marked "FYI only, Trello ✓". This corrects a repeat violation of an existing memory rule (`feedback_email_trello_completion`) — reinforced in both memory locations.
 
 ---
 
