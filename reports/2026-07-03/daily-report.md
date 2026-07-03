@@ -241,6 +241,8 @@ User asked to verify weekly hours for all 5 tracked devs. Ran `scripts/sheets-ta
 
 1. Did DuongDN actually arrange the SamGuard WordPress dev assignment after the client's 08:46 Jul-2 ask, or is Kai's later in-thread confirmation sufficient?
 2. TuanNT 06-30 (Tue) 0h — not covered by the known 07-01/07-02 hospitalization, genuinely unexplained. Needs verification.
+2b. KhanhHH 06-29 (Mon) 4h — no leave email or Matrix Resource Arrangement note found (checked both, none since the 06-25/26 leave which ended before this week). **User pending: asking dev directly.**
+2c. KhanhHH ETZ-Wathaga 06-30 (Tue) — user recalled 1h, raw Workstream API shows 3h across 2 tasks (1:30 "Verify and release the list tasks" + 1:30 "Fix issue deploy to AWS failed on CI/CD", Redmine #78662/#79082/#79366/#79447). **User pending: asking dev directly** to reconcile.
 3. Philip MS Teams: automated check is unreliable (8 duplicate contacts) — may need a one-off manual glance instead of continuing to rely on the script.
 4. Should `daily-email-scan-*.js` be consolidated into one canonical non-dated script (mirroring the sheets-script rule), since a stale hardcoded window in the old version silently returned wrong data?
 5. `fountain-w33-capacity-scan.js` has a wrong-column bug (Status read from idx2 instead of idx6) — not fixed in-place this run, flagged for whoever next touches that script.
