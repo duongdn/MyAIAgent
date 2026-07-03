@@ -118,7 +118,7 @@ async function main() {
     if (!taskId || taskId === "#" || taskId.toLowerCase().startsWith("task")) continue;
 
     const taskName = String(row[1] || "").trim();
-    const status = String(row[2] || "").trim();
+    const status = String(row[6] || "").trim();  // Col G (idx6) = Status (NOT idx2 — bug fixed 2026-07-04)
     const estRaw = parseHours(row[8]);   // Col I = Estimated Dev Raw
     const cr = parseHours(row[9]);       // Col J = CR
     const actual = parseHours(row[10]);  // Col K = Actual
