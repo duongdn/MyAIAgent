@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Email ken@ | Invalid credentials (IMAP) — needs user to regenerate Zoho app password. Unresolved since 07-02. |
+| ~~1~~ | ~~Email ken@~~ | **RESOLVED 09:07** — user provided new Zoho app password, verified login OK, re-encrypted config. 12 normal Precognize/development PR emails found in window, no alerts. Trello Ken item completed. |
 | 2 | Email carrick@ | generator-api GitLab pipeline last state FAILED (unresolved) + Snyk vuln alert |
 | 3 | Email rick@ | FirstProject Rollbar ~13 new errors (known ongoing volume), FountainStaging BugSnag AWS MissingRegionError |
 | 4 | Email vuongtrancr@ | 2x New Relic "Signal lost — Low Application Throughput" (Swish APM) |
@@ -192,9 +192,15 @@ Script-based extraction unreliable this run — clicked a duplicate "Philip Brig
 
 ## Trello — 08:45 (+07:00)
 
-**Check mail:** DuongDn ✓, Kai ✓, Nick ✓ complete. Carrick, Rick, Ken incomplete (real alerts).
+**Check mail:** DuongDn ✓, Kai ✓, Nick ✓, Ken ✓ (fixed 09:07) complete. Carrick, Rick incomplete (real alerts).
 **Check progress:** 13 of 17 items complete (Rory, Franc, Raymond, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi, Bailey, Rebecca, Neural, Elena, Fountain, James Diamond, Andrew Taraba). Incomplete: Aysar, Elliott, Philip.
 Neither card auto-closed (both have genuine open items).
+
+---
+
+## Update — 09:07 (+07:00)
+
+**Ken@ IMAP fixed.** User provided new Zoho app password. Verified live login (IMAP auth OK), updated `config/.email-accounts.json`, re-encrypted via `scripts/encrypt-secrets.sh` (`.email-accounts.json.enc` regenerated, round-trip verified). Re-scanned ken@'s NewsLetter folder for the report window: 133 raw messages, 12 matching the "Precognize/development" filter — all normal GitHub PR notification traffic, no alerts. Trello "Ken" item marked complete.
 
 ---
 

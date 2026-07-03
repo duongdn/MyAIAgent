@@ -16,7 +16,7 @@
       "PhucVT 4h Jul 2: not an alert — DuongDN personally redirected him mid-day (Matrix 11:21) to support LeNH + Python training.",
       "Upwork Neural: session expired, headless re-login blocked (CAPTCHA/hang) — completed Trello item per silence-never-blocks rule, needs interactive VNC re-login.",
       "Philip MS Teams: automated extraction unreliable (8 duplicate 'Philip Briggs' contacts in search) — left Trello item incomplete, last confirmed activity still 6/16.",
-      "ken@nustechnology.com IMAP still broken (Invalid credentials) — needs user to regenerate Zoho app password, unresolved since 07-02.",
+      "ken@nustechnology.com IMAP RESOLVED 09:07 Jul-3: user provided new Zoho app password, verified login, config updated+re-encrypted. 12 normal Precognize/development PR emails in window, no alerts. Trello Ken item complete.",
       "carrick@ generator-api GitLab pipeline FAILED (unresolved) + Snyk vuln alert — Check mail Carrick item left incomplete.",
       "daily-email-scan-260610.js found to have a stale hardcoded window (June 9) + truncation bug, silently returning wrong data — built corrected daily-email-scan-260703.js this run, recommend consolidating to one canonical script.",
       "fountain-w33-capacity-scan.js reads Status from wrong column (idx2 vs correct idx6), masking all NS+IP tasks as 0 — recomputed manually this run (229h/27 tasks, flat vs Jul 2), script itself not yet patched.",
@@ -59,9 +59,8 @@
         "last_run": "2026-07-03T08:33:00+07:00"
       },
       "ken": {
-        "last_run": "2026-07-03T08:33:00+07:00",
-        "status": "auth_fail",
-        "note": "Invalid credentials — needs user to regenerate Zoho app password (unresolved since 2026-07-02)"
+        "last_run": "2026-07-03T09:07:00+07:00",
+        "status": "ok"
       },
       "vuongtrancr_gmail": {
         "last_run": "2026-07-03T08:33:00+07:00"
