@@ -27,6 +27,7 @@
       "daily-email-scan-260610.js found to have a stale hardcoded window (June 9) + truncation bug, silently returning wrong data — built corrected daily-email-scan-260703.js this run, recommend consolidating to one canonical script.",
       "fountain-w33-capacity-scan.js reads Status from wrong column (idx2 vs correct idx6), masking all NS+IP tasks as 0 — recomputed manually this run (229h/27 tasks, flat vs Jul 2), script itself not yet patched.",
       "Matrix action item: client asked DuongDN 08:46 Jul-2 to arrange WordPress dev; DuongDN only replied 'oh', Kai later confirmed as owner in-thread — worth confirming directly.",
+      "Maddy RE-OPENED 10:35 (user-flagged 'Maddy monitor missing', deep recheck): wrongly auto-completed this morning off Slack+JIRA-hours check alone. Client's 06-30 hotfix request (payout % calc, 'hotfix against master') tracked LIFM2-409/PR #513 (hotfix/product-custom-payout) — automated code review found real unresolved bugs (custom % silently reverts), no fix-confirmation/merge since 07-02 19:02. Genuine open item, not a data gap.",
       "OLD (Jul 2 recheck) caveats archived below for reference:"
     ],
     "prior_caveats_20260702": [

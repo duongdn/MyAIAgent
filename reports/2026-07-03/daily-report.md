@@ -20,6 +20,7 @@
 | 7 | Upwork — Neural | Session expired, headless re-login blocked (CAPTCHA/hang). Trello item completed per silence-never-blocks rule, but needs interactive VNC re-login: `bash scripts/vnc-login-session.sh upwork` |
 | 8 | MS Teams — Philip | Could not reliably re-verify (script clicked a duplicate "Philip Briggs" contact, not the correct "(External) Six Star Rentals" one). Last confirmed activity 6/16 (prior report). Left incomplete. |
 | 9 | Matrix — Elena WordPress | Client (anhnvn) asked DuongDN 08:46 Jul-2 to arrange dev for delivered WP work; DuongDN only replied "oh". Kai later confirmed as owner in-thread (09:05) — appears resolved but worth confirming directly. |
+| 10 | Maddy — Kai/Xtreme (re-opened 10:35) | Client's 06-30 urgent hotfix request (payout % calc bug, "create a hotfix against master") tracked under LIFM2-409/PR #513 (`hotfix/product-custom-payout`) — automated review found the fix doesn't reliably work (custom % can silently revert to old value) + a second view has a related bug. No fix-confirmation or merge since 07-02 19:02. Trello Maddy item was wrongly auto-completed this morning; reopened. See Recheck section below. |
 
 **FYI (not alerts):** GGS Nick's Jul-3 report shows infra "Memory: WARNING" (not a person issue). Generator team paused a prod release today after a mobile RSVP regression (dev/release topic). OhCleo/Celine flagged Tony's Upwork account deactivated + pending refund (PM follow-up, outside monitoring scope). Fountain customer bug (mike62798179, overnight delivery $8) unresolved 4+ days, no new update. PhucVT logged 4h not 8h on 07-02 — DuongDN personally redirected him mid-day (Matrix 11:21) to support LeNH + Python training — not an anomaly.
 
@@ -234,6 +235,29 @@ User asked to verify weekly hours for all 5 tracked devs. Ran `scripts/sheets-ta
 **TuanNT 06-30 (Tue) 0h:** not covered by the known hospitalization (which started 07-01) — genuinely unexplained, needs verification (leave note, different reason, or a real gap).
 
 **Systemic issue flagged:** this is the second live-Workstream-vs-stale-Sheets miss today (KhanhHH, now LeNH). Memory already documents "always live-query Workstream before flagging shortfall" — reinforcing this further, see memory update below.
+
+---
+
+## Recheck — Maddy deep dive — 10:35 (+07:00)
+
+**Trigger:** user reported "Maddy monitor is missing" + customer complaint concern. Root cause: this morning's Maddy check (Slack search + JIRA hours table) did NOT run the mandatory "communication & open commitments" sub-check ([[feedback_maddy_jira_weekly_check]]) — 4th time this specific piece has been skipped. Deep-dived Kai↔Madhuraka 1:1 DM (channel D050TGMRFRQ), JIRA comments/PRs, and kai@ email.
+
+**Timeline reconstructed (all times +07):**
+- **06-30 18:46–19:03**: Madhuraka (client) sends urgent bug report + change request directly in Slack DM (not JIRA): payout amount miscalculated when a custom payout % is set on Listed-Con/Listed-Buy tabs — *"please make sure the payout amount is calculated using that payout amount not the standard rate"* — explicitly says **"Please create a hotfix against master"**, plus a second ask: add payout-% boxes to product detail dropdown.
+- **07-01 15:48**: Madhuraka, after ~21h silence, sends **"Are you there?"** — this was correctly flagged as a 🔴 alert and left Maddy ○ open in yesterday's (07-02) report.
+- **07-01 15:49**: Madhuraka adds more detail on a separate item (LIFM2-439 email-template filtering logic).
+- **07-02 08:54**: Kai finally replies, but only addresses the LIFM2-439 filtering item — **no explicit acknowledgment of the hotfix request**.
+- **07-02 09:22**: Kai sends Madhuraka an unrelated message asking for **client referrals** ("do you know anyone... looking for a software development partner") — sent minutes after finally responding to a client who'd just chased him for 21h on an urgent hotfix. Poor optics/timing, worth a word with Kai.
+- **07-02 16:53**: Kai's progress update — LIFM2-436/446/439 QA "Done", **LIFM2-409 "Shopify Payouts Validation" still "In progress"**.
+- **07-02 19:01**: PR **#513 "Apply custom percent for update listing price action"** opened, branch `hotfix/product-custom-payout` (xtreme-web/rms) — this IS the 06-30 hotfix, tracked under LIFM2-409.
+- **07-02 19:02**: Automated Codex review on PR #513 flags **real correctness bugs, not yet resolved**: (1) clearing a previously-saved custom payout % doesn't stick — AJAX recalculation silently repopulates the old value from the product record; (2) `cons-switch-to-buy/edit.phtml` sends `custom_percent: true` without the percent fields, so switching consignment→buy can silently apply the wrong stored %.
+- **No further activity since** (checked Slack DM + kai@ inbox through 07-03 10:33) — no confirmation the review comments were addressed, no PR merge notice, no reply to Madhuraka's original ask beyond the code being drafted.
+
+**Assessment:** Not a monitoring/data-fetch gap this time — a genuine open item. Client asked for a production hotfix "against master"; the hotfix PR exists but has known unresolved bugs per automated review, and there's been no client-facing confirmation it's fixed/deployed. Given Madhuraka already had to chase once this week, shipping this hotfix with the flagged bugs still open risks a second complaint.
+
+**Action taken:** Reopened Trello "Maddy - Carrick / Kai/ Luis" (was wrongly auto-completed this morning off the Slack/JIRA-hours check alone).
+
+**Recommended next step:** ask Kai directly whether PR #513's review comments are fixed and whether it's merged to master + whether Madhuraka was told. Re-check tomorrow regardless of Kai's daily "progress" post — those don't cover this.
 
 ---
 
