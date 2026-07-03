@@ -14,7 +14,8 @@
 | 2 | Email carrick@ (FYI only, Trello ✓) | generator-api GitLab pipeline last state FAILED (unresolved) + Snyk vuln alert |
 | 3 | Email rick@ (FYI only, Trello ✓) | FirstProject Rollbar ~13 new errors (known ongoing volume), FountainStaging BugSnag AWS MissingRegionError |
 | 4 | Email vuongtrancr@ | 2x New Relic "Signal lost — Low Application Throughput" (Swish APM) |
-| 5 | Sheets — LeNH | 0h 2026-07-02, no formal leave note (STRICT rule). Context: moved to new project same day, still awaiting Workstream access as of 14:06 — likely explains 0h but not a formal excuse. |
+| ~~5~~ | ~~Sheets — LeNH~~ | **RESOLVED 09:44** — live Workstream shows LeNH logged 8h on 07-02 (Peptide Clyde 4h + Portfolio-James Diamond 4h), likely backfilled once WS access was granted that afternoon. Original 0h finding was stale-data, same root cause as the KhanhHH miss earlier. |
+| 5b | Sheets — TuanNT | 0h on 06-30 (Tue) — unexplained, separate from the known 07-01/07-02 hospitalization. Needs verification. |
 | ~~6~~ | ~~Sheets — KhanhHH~~ | **RESOLVED 09:33** — live Workstream query (more authoritative than Sheets snapshot) shows 8.0h on 07-02: Baamboozle 3.5h + Generator 4.5h. Earlier report's 5.5h figure was stale (Sheets undercounted, known recurring issue). Elena sheet permission error no longer blocks anything — KhanhHH already hit her daily target from other sources. |
 | 7 | Upwork — Neural | Session expired, headless re-login blocked (CAPTCHA/hang). Trello item completed per silence-never-blocks rule, but needs interactive VNC re-login: `bash scripts/vnc-login-session.sh upwork` |
 | 8 | MS Teams — Philip | Could not reliably re-verify (script clicked a duplicate "Philip Briggs" contact, not the correct "(External) Six Star Rentals" one). Last confirmed activity 6/16 (prior report). Left incomplete. |
@@ -103,7 +104,7 @@ Trello: completed "James Diamond - Vinn task" and "Andrew Taraba".
 | TuanNT | 0h (all 5 sheets + WS) | ✅ Excused — hospitalized, discharged but unwell, charged to Bailey |
 | VietPH | — | ⚪ **Resigned 2026-06-30** — removed from monitoring per updated memory (orchestrator's dev list was stale, corrected mid-run) |
 | KhanhHH | 5.5h found (Baamboozle 1.5h + Generator 4h), **Elena sheet unreachable — service-account permission error, 4th source unverified** | ⚠️ Unverified, not a confirmed shortfall — needs sheet re-share |
-| LeNH | 0h (all sources) | 🔴 Alert per STRICT rule — see alerts summary above |
+| LeNH | 8h (Peptide Clyde 4h + Portfolio-James Diamond 4h, via WS) | ✅ Corrected 09:44 — was falsely reported 0h, see Update below |
 
 **Maddy JIRA — W13 (2026-06-29):**
 
@@ -216,14 +217,33 @@ Neither card auto-closed (both have genuine open items).
 
 **Root cause:** the compact `MEMORY.md` index summarized the detailed Aysar memory file as "posts ~17:00-17:45+07" — losing the file's own two prior corrections that explicitly warn against assuming a fixed evening time. Fixed the index line in both memory locations and added a third correction note to the detail file to stop this recurring.
 
+## Update — 09:44 (+07:00) — Weekly hours check (user requested), LeNH false alert found
+
+User asked to verify weekly hours for all 5 tracked devs. Ran `scripts/sheets-tasklog-scan.js` (all sheets + live Workstream) for each weekday 06-29 → 07-02 (07-03 still in progress, excluded).
+
+| Dev | Week total (Mon-Thu) | Target | Status |
+|---|---|---|---|
+| LongVV | 18h | 16h/week | ✅ |
+| PhucVT | 28h | 32h | ⚠️ -4h, explained (DuongDN's own 07-02 reassignment) |
+| TuanNT | 8h | 32h | 🔴 -24h — 07-01/07-02 excused (hospital), **06-30 0h unexplained** |
+| KhanhHH | 31h | 32h | ✅ (-1h negligible) |
+| LeNH | 32.2h | 32h | ✅ **was reported as an alert this morning — that was wrong** |
+
+**LeNH correction:** this morning's report flagged LeNH 0h on 07-02 as an alert (STRICT rule, no leave note). Live Workstream now shows LeNH logged 8h that day (Peptide Clyde 4h + Portfolio-James Diamond 4h) — likely backfilled once WS access was granted (per Matrix, she was asking for access at 14:06 that afternoon). Full week total is 32.2h, right on target. **This is the same root-cause pattern as the KhanhHH miss earlier (09:33 update) — sheets-based check didn't live-query Workstream before flagging.** No reminder was actually sent to LeNH this morning (only printed, not sent), so no false message went out — but the report/alert was wrong.
+
+**TuanNT 06-30 (Tue) 0h:** not covered by the known hospitalization (which started 07-01) — genuinely unexplained, needs verification (leave note, different reason, or a real gap).
+
+**Systemic issue flagged:** this is the second live-Workstream-vs-stale-Sheets miss today (KhanhHH, now LeNH). Memory already documents "always live-query Workstream before flagging shortfall" — reinforcing this further, see memory update below.
+
 ---
 
 ## Unresolved questions
 
 1. Did DuongDN actually arrange the SamGuard WordPress dev assignment after the client's 08:46 Jul-2 ask, or is Kai's later in-thread confirmation sufficient?
-2. LeNH 0h with no formal leave note, but Matrix context (new-project onboarding, no Workstream access as of 14:06) suggests it may not be a genuine absence — judgment call on whether STRICT rule should apply here.
+2. TuanNT 06-30 (Tue) 0h — not covered by the known 07-01/07-02 hospitalization, genuinely unexplained. Needs verification.
 3. Philip MS Teams: automated check is unreliable (8 duplicate contacts) — may need a one-off manual glance instead of continuing to rely on the script.
 4. Should `daily-email-scan-*.js` be consolidated into one canonical non-dated script (mirroring the sheets-script rule), since a stale hardcoded window in the old version silently returned wrong data?
 5. `fountain-w33-capacity-scan.js` has a wrong-column bug (Status read from idx2 instead of idx6) — not fixed in-place this run, flagged for whoever next touches that script.
 6. Upwork Neural session needs interactive VNC re-login when convenient — not urgent since silence there is never treated as an alert.
 7. KhanhHH's Elena sheet is still permission-broken (unrelated to today's resolution) — worth fixing for future runs since it's a known-recurring 4th tracking source for her.
+8. `workstream-fetch-project-week.js` only has 9 of 17+ projects hardcoded (missing Amazing Meds, Elevate365.AI, Neural Contract, Radio Data Center, Speedventory, Tokenlite, LegalAtoms, BXR App) — `sheets-tasklog-scan.js` fetches the live list dynamically so it's unaffected, but the weekly-fetch script should be fixed to match.
