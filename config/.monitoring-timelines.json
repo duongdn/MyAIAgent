@@ -160,8 +160,8 @@
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
-    "last_run": "2026-06-26T01:56:03Z",
-    "output_file": "reports/2026-06-26/0847-bailey-monitor.md"
+    "last_run": "2026-07-03T01:42:00Z",
+    "output_file": "reports/2026-07-03/0842-bailey-monitor.md"
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
@@ -169,8 +169,8 @@
     "output_file": "reports/2026-07-02/daily-report.md"
   },
   "bailey-monitor": {
-    "last_run": "2026-06-25T12:05:00Z",
-    "last_success": "2026-06-25T12:05:00Z"
+    "last_run": "2026-07-03T01:42:00Z",
+    "last_success": "2026-07-03T01:42:00Z"
   },
   "slack": {
     "last_run": "2026-06-23T01:38:32.440Z",
