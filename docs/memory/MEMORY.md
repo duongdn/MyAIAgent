@@ -139,6 +139,7 @@
 - [feedback_news_digest_ai_underused_sources](news-digest/feedback_news_digest_ai_underused_sources.md) — AI section sample ALL 11 sources; FB via rss.app workaround now live
 - [feedback_news_digest_use_actual_links](news-digest/feedback_news_digest_use_actual_links.md) — News links: use JSON `link`; run fix-links.py after save
 - [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — Thiệu Nguyễn recurring empty/sparse, 5 causes; fetch-news.py MUST use `.claude/skills/.venv/bin/python3` or FB cookie refresh silently no-ops
+- [feedback_news_digest_dedup_rule](news-digest/feedback_news_digest_dedup_rule.md) — Cap each article URL at 2 total appearances (history+cross-source); dedup globally in report order, backfill to 5/source
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md) — Never cleanup/VACUUM FULL w/o confirmation; storage alerts need WHY breakdown
