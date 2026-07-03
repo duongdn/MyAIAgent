@@ -15,7 +15,7 @@
 | 3 | Email rick@ (FYI only, Trello ✓) | FirstProject Rollbar ~13 new errors (known ongoing volume), FountainStaging BugSnag AWS MissingRegionError |
 | 4 | Email vuongtrancr@ | 2x New Relic "Signal lost — Low Application Throughput" (Swish APM) |
 | 5 | Sheets — LeNH | 0h 2026-07-02, no formal leave note (STRICT rule). Context: moved to new project same day, still awaiting Workstream access as of 14:06 — likely explains 0h but not a formal excuse. |
-| 6 | Sheets — KhanhHH | Elena Google Sheet unreachable (service-account permission error) — 4th source unverified, true total uncertain. Blocks Aysar + Elliott Trello completion. |
+| ~~6~~ | ~~Sheets — KhanhHH~~ | **RESOLVED 09:33** — live Workstream query (more authoritative than Sheets snapshot) shows 8.0h on 07-02: Baamboozle 3.5h + Generator 4.5h. Earlier report's 5.5h figure was stale (Sheets undercounted, known recurring issue). Elena sheet permission error no longer blocks anything — KhanhHH already hit her daily target from other sources. |
 | 7 | Upwork — Neural | Session expired, headless re-login blocked (CAPTCHA/hang). Trello item completed per silence-never-blocks rule, but needs interactive VNC re-login: `bash scripts/vnc-login-session.sh upwork` |
 | 8 | MS Teams — Philip | Could not reliably re-verify (script clicked a duplicate "Philip Briggs" contact, not the correct "(External) Six Star Rentals" one). Last confirmed activity 6/16 (prior report). Left incomplete. |
 | 9 | Matrix — Elena WordPress | Client (anhnvn) asked DuongDN 08:46 Jul-2 to arrange dev for delivered WP work; DuongDN only replied "oh". Kai later confirmed as owner in-thread (09:05) — appears resolved but worth confirming directly. |
@@ -75,7 +75,7 @@ No new alerts this window.
 | DM Celine Fierro | 23 | App Store approved (ASMR keyword removed); app-crash resolved (version conflict); **Celine flagged Upwork contract ended/account not restored, payment/refund pending** — needs PM follow-up. Tony daily report present 21:24 Jul-2. |
 | #events-code | 0 | `channel_not_found` (archived, consistent since 6/30 — not an auth issue) |
 
-Trello: Check progress — completed Rory, Franc, Raymond-LegalAtoms, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi-Amazing Meds, Bailey, Rebecca(William Bills), Neural Contract. Left incomplete: Aysar (evening MPDM post not due yet + KhanhHH sheets unverified), Elliott (KhanhHH sheets unverified), Philip (MS Teams unverified this run).
+Trello: Check progress — completed Rory, Franc, Raymond-LegalAtoms, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi-Amazing Meds, Bailey, Rebecca(William Bills), Neural Contract, Elliott, Philip (both resolved on later recheck — see Update 09:33/prior). Left incomplete: Aysar (evening MPDM "Today's update" post not due until ~17:00-17:45 — KhanhHH's hours no longer a blocker, confirmed 8h via Workstream).
 
 ---
 
@@ -193,7 +193,7 @@ Script-based extraction unreliable this run — clicked a duplicate "Philip Brig
 ## Trello — 08:45 (+07:00)
 
 **Check mail:** all 6 complete (DuongDn, Kai, Nick, Ken fixed 09:07, Carrick + Rick completed 09:11 — email content is FYI-only, doesn't gate this checklist). Card auto-closed.
-**Check progress:** 13 of 17 items complete (Rory, Franc, Raymond, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi, Bailey, Rebecca, Neural, Elena, Fountain, James Diamond, Andrew Taraba). Incomplete: Aysar, Elliott, Philip.
+**Check progress:** 16 of 17 items complete (Rory, Franc, Raymond, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi, Bailey, Rebecca, Neural, Elena, Fountain, James Diamond, Andrew Taraba, + Elliott/Philip resolved on recheck). Incomplete: **Aysar only** — waiting on evening MPDM post (~17:00-17:45+07), recheck later today.
 Neither card auto-closed (both have genuine open items).
 
 ---
@@ -206,15 +206,18 @@ Neither card auto-closed (both have genuine open items).
 
 **Policy correction (user):** Check mail Trello items are informational-only — complete regardless of email content found, unless the fetch itself failed. Carrick (GitLab pipeline FAILED + Snyk) and Rick (heavy Rollbar volume) were wrongly left incomplete earlier for content reasons; both fetches actually succeeded. Marked both complete. Check mail card now fully closed (all 6/6). Alert rows for Carrick/Rick kept in the summary above for visibility, marked "FYI only, Trello ✓". This corrects a repeat violation of an existing memory rule (`feedback_email_trello_completion`) — reinforced in both memory locations.
 
+## Update — 09:33 (+07:00)
+
+**KhanhHH confirmed 8.0h on 07-02** via live Workstream query (Baamboozle 3.5h + Generator 4.5h) — supersedes the earlier stale Sheets-based 5.5h figure. This unblocks Elliott (already completed) and clears the sheets-side blocker for Aysar. Elena Google Sheet permission error is now moot (no longer needed to confirm KhanhHH's hours). Also completed "Elena - WordPress SamGuard" (Pending checklist) — was the same WordPress check already run this morning, just sitting in a different checklist than expected. Aysar remains the only open Check progress item, blocked purely on the evening Baamboozle MPDM "Today's update" post timing (~17:00-17:45+07) — recheck after that time.
+
 ---
 
 ## Unresolved questions
 
 1. Did DuongDN actually arrange the SamGuard WordPress dev assignment after the client's 08:46 Jul-2 ask, or is Kai's later in-thread confirmation sufficient?
-2. KhanhHH's true 2026-07-02 total is uncertain — Elena Google Sheet needs re-sharing to the service account before Aysar/Elliott can be confirmed clean.
-3. LeNH 0h with no formal leave note, but Matrix context (new-project onboarding, no Workstream access as of 14:06) suggests it may not be a genuine absence — judgment call on whether STRICT rule should apply here.
-4. Is the "Elena - WordPress SamGuard" item under the Pending checklist part of this flow, or a separate one-off task? Left untouched.
-5. Philip MS Teams: automated check is unreliable (8 duplicate contacts) — may need a one-off manual glance instead of continuing to rely on the script.
-6. Should `daily-email-scan-*.js` be consolidated into one canonical non-dated script (mirroring the sheets-script rule), since a stale hardcoded window in the old version silently returned wrong data?
-7. `fountain-w33-capacity-scan.js` has a wrong-column bug (Status read from idx2 instead of idx6) — not fixed in-place this run, flagged for whoever next touches that script.
-8. Upwork Neural session needs interactive VNC re-login when convenient — not urgent since silence there is never treated as an alert.
+2. LeNH 0h with no formal leave note, but Matrix context (new-project onboarding, no Workstream access as of 14:06) suggests it may not be a genuine absence — judgment call on whether STRICT rule should apply here.
+3. Philip MS Teams: automated check is unreliable (8 duplicate contacts) — may need a one-off manual glance instead of continuing to rely on the script.
+4. Should `daily-email-scan-*.js` be consolidated into one canonical non-dated script (mirroring the sheets-script rule), since a stale hardcoded window in the old version silently returned wrong data?
+5. `fountain-w33-capacity-scan.js` has a wrong-column bug (Status read from idx2 instead of idx6) — not fixed in-place this run, flagged for whoever next touches that script.
+6. Upwork Neural session needs interactive VNC re-login when convenient — not urgent since silence there is never treated as an alert.
+7. KhanhHH's Elena sheet is still permission-broken (unrelated to today's resolution) — worth fixing for future runs since it's a known-recurring 4th tracking source for her.
