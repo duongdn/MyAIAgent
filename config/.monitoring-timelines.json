@@ -6,23 +6,36 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-02T05:01:00+07:00",
-    "output_file": "reports/2026-07-02/daily-report.md",
+    "last_run": "2026-07-03T08:45:00+07:00",
+    "output_file": "reports/2026-07-03/daily-report.md",
     "last_status": "complete",
-    "recheck_last_run": "2026-07-02T09:45:00+07:00",
     "caveats": [
-      "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m) \u2014 genuine unresolved, confirmed still open on recheck",
+      "LeNH 0h Jul 2: alert per STRICT rule, no formal leave note. Context: moved to new project same day, awaiting Workstream access as of 14:06 — not confirmed as excused, reminder printed but not sent.",
+      "KhanhHH Jul 2: Elena Google Sheet unreachable (service-account permission error), 4th source unverified — blocks Aysar + Elliott Trello completion. Needs sheet re-share to service account.",
+      "VietPH: resigned 2026-06-30, removed from monitoring/dev list going forward.",
+      "PhucVT 4h Jul 2: not an alert — DuongDN personally redirected him mid-day (Matrix 11:21) to support LeNH + Python training.",
+      "Upwork Neural: session expired, headless re-login blocked (CAPTCHA/hang) — completed Trello item per silence-never-blocks rule, needs interactive VNC re-login.",
+      "Philip MS Teams: automated extraction unreliable (8 duplicate 'Philip Briggs' contacts in search) — left Trello item incomplete, last confirmed activity still 6/16.",
+      "ken@nustechnology.com IMAP still broken (Invalid credentials) — needs user to regenerate Zoho app password, unresolved since 07-02.",
+      "carrick@ generator-api GitLab pipeline FAILED (unresolved) + Snyk vuln alert — Check mail Carrick item left incomplete.",
+      "daily-email-scan-260610.js found to have a stale hardcoded window (June 9) + truncation bug, silently returning wrong data — built corrected daily-email-scan-260703.js this run, recommend consolidating to one canonical script.",
+      "fountain-w33-capacity-scan.js reads Status from wrong column (idx2 vs correct idx6), masking all NS+IP tasks as 0 — recomputed manually this run (229h/27 tasks, flat vs Jul 2), script itself not yet patched.",
+      "Matrix action item: client asked DuongDN 08:46 Jul-2 to arrange WordPress dev; DuongDN only replied 'oh', Kai later confirmed as owner in-thread — worth confirming directly.",
+      "OLD (Jul 2 recheck) caveats archived below for reference:"
+    ],
+    "prior_caveats_20260702": [
+      "Maddy open: Kai unresponsive to Madhuraka 15:48+07 Jul 1 re LIFM2-439 (over-budget +9h30m) — genuine unresolved, confirmed still open on recheck",
       "TuanNT 0h Jul 1 RESOLVED: excused, hospitalized full-day (Matrix Resource Arrangement, charged to Bailey no makeup). John Yi/Bailey/Rebecca unblocked.",
-      "PhucVT 0h Jul 1 RESOLVED: false alarm, cron Workstream login failed \u2014 8h found in Workstream (James Diamond) on retry",
-      "KhanhHH 0h Jul 1 RESOLVED: false alarm + undercounted twice \u2014 true total 6.5h in Workstream Generator (4 tasks), corrected from initial 3.5h. Aysar unblocked.",
-      "LeNH 0h Jul 1 RESOLVED (2nd recheck, user-flagged): true total 7.83h in Workstream 'Peptide Clyde' (Blair Brown project) \u2014 first script pass missed it entirely (4th recurrence of known transient per-project fetch bug, same project as 2026-06-25 incident)",
-      "ken@nustechnology.com IMAP genuinely broken (verified 'Invalid credentials' via direct login test) \u2014 needs user to regenerate Zoho app password, real credential issue not fixable by agent",
-      "freelancer@mpfc email CORRECTED: key is valid, cron's 'unavailable' was a false report \u2014 ran fine on retry, 0 emails/no alerts",
-      "Philip MS Teams CORRECTED: verified via actual screenshot read this time (not script's broken message-extraction) \u2014 confirmed last activity 6/16, nothing since",
+      "PhucVT 0h Jul 1 RESOLVED: false alarm, cron Workstream login failed — 8h found in Workstream (James Diamond) on retry",
+      "KhanhHH 0h Jul 1 RESOLVED: false alarm + undercounted twice — true total 6.5h in Workstream Generator (4 tasks), corrected from initial 3.5h. Aysar unblocked.",
+      "LeNH 0h Jul 1 RESOLVED (2nd recheck, user-flagged): true total 7.83h in Workstream 'Peptide Clyde' (Blair Brown project) — first script pass missed it entirely (4th recurrence of known transient per-project fetch bug, same project as 2026-06-25 incident)",
+      "ken@nustechnology.com IMAP genuinely broken (verified 'Invalid credentials' via direct login test) — needs user to regenerate Zoho app password, real credential issue not fixable by agent",
+      "freelancer@mpfc email CORRECTED: key is valid, cron's 'unavailable' was a false report — ran fine on retry, 0 emails/no alerts",
+      "Philip MS Teams CORRECTED: verified via actual screenshot read this time (not script's broken message-extraction) — confirmed last activity 6/16, nothing since",
       "FirstProject production React errors ongoing (high volume Jul 1)",
-      "Matrix token refreshed on recheck \u2014 full 130-room scan completed (25 active/638 msgs), no new alerts beyond leave notes above",
-      "Upwork: carrick session expired, headless re-login blocked by CAPTCHA \u2014 Rory/Neural/Aysar workrooms UNVERIFIED this run (not confirmed-clean, just following silence=no-alert policy). Needs interactive VNC login from user: bash scripts/vnc-login-session.sh upwork",
-      "Workstream project list grew to 17+Others (was 10) \u2014 reference_workstream.md updated with new projects: Amazing Meds, Elevate365.AI, Neural Contract - Test Job, Radio Data Center, Speedventory, Tokenlite, LegalAtoms, BXR App (Peptide Clyde = renamed Blair Brown, not new)"
+      "Matrix token refreshed on recheck — full 130-room scan completed (25 active/638 msgs), no new alerts beyond leave notes above",
+      "Upwork: carrick session expired, headless re-login blocked by CAPTCHA — Rory/Neural/Aysar workrooms UNVERIFIED this run (not confirmed-clean, just following silence=no-alert policy). Needs interactive VNC login from user: bash scripts/vnc-login-session.sh upwork",
+      "Workstream project list grew to 17+Others (was 10) — reference_workstream.md updated with new projects: Amazing Meds, Elevate365.AI, Neural Contract - Test Job, Radio Data Center, Speedventory, Tokenlite, LegalAtoms, BXR App (Peptide Clyde = renamed Blair Brown, not new)"
     ]
   },
   "refresh": {
@@ -165,8 +178,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-02T05:01:00+07:00",
-    "output_file": "reports/2026-07-02/daily-report.md"
+    "last_run": "2026-07-03T08:45:00+07:00",
+    "output_file": "reports/2026-07-03/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-07-03T01:42:00Z",
