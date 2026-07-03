@@ -29,6 +29,7 @@
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com every scan
 - [reference_email_accounts_all9](daily-report/email/reference_email_accounts_all9.md) — 9 email accounts total (6 Zoho+2 Gmail IMAP+1 Gmail API), not 6
 - [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md) — IMAP SINCE=server dates, Slack after: excludes named date
+- [feedback_email_scan_stale_window_bug](daily-report/email/feedback_email_scan_stale_window_bug.md) — daily-email-scan-260610.js hardcoded stale window, silently wrong data; use 260622.js logic or newer
 
 ## daily-report:slack
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md) — MUST use search.messages API, not conversations.history
@@ -88,6 +89,7 @@
 - [feedback_trello_progress_reuse_pieces](daily-report/trello/feedback_trello_progress_reuse_pieces.md) — Progress items run ALL mapped source pieces (sheets/slack memory applies here too)
 - [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md) — Checklist items name person; status gates completion
 - [feedback_trello_per_client_gates_on_lead_dev](daily-report/trello/feedback_trello_per_client_gates_on_lead_dev.md), [feedback_philip_msteams_must_run](daily-report/trello/feedback_philip_msteams_must_run.md) — Per-client item gates on lead dev; Philip MS Teams check needs FULL NAME "Philip Briggs"
+- [feedback_philip_msteams_duplicate_contacts](daily-report/trello/feedback_philip_msteams_duplicate_contacts.md) — 8 duplicate "Philip Briggs" contacts in MS Teams search; only "(External) Six Star Rentals" is correct
 - [feedback_recheck_uses_morning_report_data](daily-report/trello/feedback_recheck_uses_morning_report_data.md) — CRITICAL: recheck uses data ALREADY in morning report (yesterday's window) — NEVER re-query today's channels
 - [feedback_rebecca_chua_not_trello_block](daily-report/trello/feedback_rebecca_chua_not_trello_block.md), [feedback_blake_rollbar_not_person_alert](daily-report/trello/feedback_blake_rollbar_not_person_alert.md) — Never block Trello: Rebecca col P "Chưa", client Rollbar errors
 - [feedback_tuannt_gate_show_breakdown](daily-report/trello/feedback_tuannt_gate_show_breakdown.md) — TuanNT gate label must show per-sheet breakdown
