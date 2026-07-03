@@ -118,6 +118,7 @@
 
 ## bailey-invoice-verify / bailey-monitor / bailey-task-monitor
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md), [feedback_upwork_filter_by_task_id_strict](daily-report/upwork/feedback_upwork_filter_by_task_id_strict.md) — Bailey hours in Paturevision sheet (col E=Task ID, invoices bill WBS+buffer); never use first empty row of a day
+- [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md) — Bailey monitor Trello card is recurring like Check progress/Check mail; skill's hardcoded card ID is stale/archived, search by name+open state instead
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md) — OAuth2 invalid_grant is REAL unresolved (not noise); repo is mypersonalfootballcoach/wp
