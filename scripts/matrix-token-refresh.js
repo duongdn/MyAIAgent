@@ -92,6 +92,12 @@ async function main() {
     console.log('[matrix-refresh] Refresh token expired:', r && r.error);
   }
 
+  // Skip browser if no display (cron/headless) — use matrix-device-auth.js instead
+  if (!process.env.DISPLAY) {
+    console.error('[matrix-refresh] Token expired and no DISPLAY set. Run: node scripts/matrix-device-auth.js');
+    process.exit(1);
+  }
+
   console.log('[matrix-refresh] Token expired. Opening browser...');
 
   if (!fs.existsSync(PROFILE_DIR)) {
