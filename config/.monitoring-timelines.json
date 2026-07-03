@@ -168,8 +168,15 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-06-26T02:13:52Z",
-    "output_file": "reports/2026-06-26/0908-server-monitor.md"
+    "last_run": "2026-07-03T02:06:00Z",
+    "output_file": "reports/2026-07-03/0902-server-monitor.md",
+    "last_status": "partial",
+    "caveats": [
+      "Bailey/Siteground session expired, needs manual --login (visible browser) — asked user, no response, left Trello item incomplete",
+      "Fountain staging disk 81% + swap 35% used (CRITICAL) — needs investigation",
+      "nc_staging no swap configured",
+      "Rory: ~5.7G deletable error_logs/zip backups identified, not removed (needs confirmation per safety rule)"
+    ]
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
