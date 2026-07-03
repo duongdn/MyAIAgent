@@ -11,8 +11,9 @@
     "last_status": "complete",
     "caveats": [
       "LeNH 0h Jul 2: alert per STRICT rule, no formal leave note. Context: moved to new project same day, awaiting Workstream access as of 14:06 — not confirmed as excused, reminder printed but not sent.",
-      "KhanhHH Jul 2 RESOLVED 09:33: live Workstream query shows 8.0h (Baamboozle 3.5h + Generator 4.5h), supersedes stale Sheets-based 5.5h figure. Elliott completed. Aysar unblocked on sheets side, still open on Slack timing (evening MPDM post not due until ~17:00-17:45). Elena Google Sheet still permission-broken (unrelated, needs re-share) but no longer blocks anything since target already met elsewhere.",
+      "KhanhHH Jul 2 RESOLVED 09:33: live Workstream query shows 8.0h (Baamboozle 3.5h + Generator 4.5h), supersedes stale Sheets-based 5.5h figure. Elena Google Sheet still permission-broken (unrelated, needs re-share) but no longer blocks anything since target already met elsewhere.",
       "Elena - WordPress SamGuard (Pending checklist) completed 09:33 — was the same WordPress check already run, just sitting in a checklist that was initially overlooked.",
+      "Aysar RESOLVED 09:33 — user caught a repeat mistake: wrongly claimed 'evening MPDM post not due until 17:00', but the window is for YESTERDAY (07-02) which already passed. Broad re-search found 07-03 09:02 post 'Yesterday's update' covering 07-02 work, clean, no risk flags. GitHub issues checked, nothing new. Check progress card now 17/17, fully closed. Root cause: MEMORY.md index line stripped the nuance from feedback_aysar_consolidated.md (which had already been corrected twice for this exact mistake) down to a misleading fixed '~17:00-17:45+07' claim — fixed in both memory locations, 3rd correction note added to detail file.",
       "VietPH: resigned 2026-06-30, removed from monitoring/dev list going forward.",
       "PhucVT 4h Jul 2: not an alert — DuongDN personally redirected him mid-day (Matrix 11:21) to support LeNH + Python training.",
       "Upwork Neural: session expired, headless re-login blocked (CAPTCHA/hang) — completed Trello item per silence-never-blocks rule, needs interactive VNC re-login.",

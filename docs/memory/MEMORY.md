@@ -36,7 +36,7 @@
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_no_activity_not_skip](daily-report/slack/feedback_no_activity_not_skip.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md) — Dev discussions ≠ alerts; "no activity" alone isn't a skip reason; Marcel/Franc/Kai/Bailey DEV3/Andrew Taraba/GGS Nick low activity = normal
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md) — MPFC OAuth2 invalid_grant is REAL unresolved, not noise
 - [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — Amazing Meds + Equanimity xoxc: refresh proactively, never invalid_auth
-- [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — Aysar gate=Slack MPDM C07SQ4HAUHZ (not Matrix), posts ~17:00-17:45+07, +GitHub issues
+- [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — Aysar gate=Slack MPDM C07SQ4HAUHZ (not Matrix). NO FIXED TIME — morning OR evening, may be labeled for an earlier day; ALWAYS re-run broad search regardless of hour, never assume "not due yet". +GitHub issues check
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — UNRESOLVED: Kai/LongVV may be 40h not 16h (ask user); also LIFM2-439 client trust incident
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — Kai daily report only required when Kai has active tasks that day; absence ≠ alert if no work assigned
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — Puppeteer cron /tmp failure → false 0h; TMPDIR=/var/tmp

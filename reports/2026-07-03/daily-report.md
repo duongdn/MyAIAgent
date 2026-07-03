@@ -75,7 +75,7 @@ No new alerts this window.
 | DM Celine Fierro | 23 | App Store approved (ASMR keyword removed); app-crash resolved (version conflict); **Celine flagged Upwork contract ended/account not restored, payment/refund pending** — needs PM follow-up. Tony daily report present 21:24 Jul-2. |
 | #events-code | 0 | `channel_not_found` (archived, consistent since 6/30 — not an auth issue) |
 
-Trello: Check progress — completed Rory, Franc, Raymond-LegalAtoms, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi-Amazing Meds, Bailey, Rebecca(William Bills), Neural Contract, Elliott, Philip (both resolved on later recheck — see Update 09:33/prior). Left incomplete: Aysar (evening MPDM "Today's update" post not due until ~17:00-17:45 — KhanhHH's hours no longer a blocker, confirmed 8h via Workstream).
+Trello: Check progress — all 17 items complete (Elliott, Philip, Aysar resolved on later recheck — see Update 09:33, card fully closed).
 
 ---
 
@@ -193,7 +193,7 @@ Script-based extraction unreliable this run — clicked a duplicate "Philip Brig
 ## Trello — 08:45 (+07:00)
 
 **Check mail:** all 6 complete (DuongDn, Kai, Nick, Ken fixed 09:07, Carrick + Rick completed 09:11 — email content is FYI-only, doesn't gate this checklist). Card auto-closed.
-**Check progress:** 16 of 17 items complete (Rory, Franc, Raymond, Marcel, Colin, MPFC, Ohcleo, Maddy, John Yi, Bailey, Rebecca, Neural, Elena, Fountain, James Diamond, Andrew Taraba, + Elliott/Philip resolved on recheck). Incomplete: **Aysar only** — waiting on evening MPDM post (~17:00-17:45+07), recheck later today.
+**Check progress:** 17/17 complete, card closed (Elliott, Philip, Aysar resolved on recheck — see Update 09:33).
 Neither card auto-closed (both have genuine open items).
 
 ---
@@ -208,7 +208,13 @@ Neither card auto-closed (both have genuine open items).
 
 ## Update — 09:33 (+07:00)
 
-**KhanhHH confirmed 8.0h on 07-02** via live Workstream query (Baamboozle 3.5h + Generator 4.5h) — supersedes the earlier stale Sheets-based 5.5h figure. This unblocks Elliott (already completed) and clears the sheets-side blocker for Aysar. Elena Google Sheet permission error is now moot (no longer needed to confirm KhanhHH's hours). Also completed "Elena - WordPress SamGuard" (Pending checklist) — was the same WordPress check already run this morning, just sitting in a different checklist than expected. Aysar remains the only open Check progress item, blocked purely on the evening Baamboozle MPDM "Today's update" post timing (~17:00-17:45+07) — recheck after that time.
+**KhanhHH confirmed 8.0h on 07-02** via live Workstream query (Baamboozle 3.5h + Generator 4.5h) — supersedes the earlier stale Sheets-based 5.5h figure. This unblocks Elliott (already completed) and clears the sheets-side blocker for Aysar. Elena Google Sheet permission error is now moot (no longer needed to confirm KhanhHH's hours). Also completed "Elena - WordPress SamGuard" (Pending checklist) — was the same WordPress check already run this morning, just sitting in a different checklist than expected.
+
+## Update — 09:33 (+07:00) — Aysar corrected, was a repeat mistake
+
+**Wrong reasoning caught by user:** claimed Aysar was "blocked on evening MPDM post, not due until ~17:00" — but the report window is for **07-02 (yesterday)**, which has already fully passed, so there's no "later today" to wait for. Re-searched the MPDM channel (`C07SQ4HAUHZ`) broad, no title filter: found a message posted **07-03 09:02** (3 min after the mistaken check) titled "Yesterday's update", covering 07-02's actual work — e2e testing (Inprogress), Change Team Ownership fix (Dev done+Deployed), Laravel 12/PHP 8.5/nginx upgrade fixes (Dev done+Deployed). No risk flags. GitHub issues on both Baamboozle repos checked — nothing new/updated in window. **Aysar marked complete.** Check progress card now 17/17, fully closed.
+
+**Root cause:** the compact `MEMORY.md` index summarized the detailed Aysar memory file as "posts ~17:00-17:45+07" — losing the file's own two prior corrections that explicitly warn against assuming a fixed evening time. Fixed the index line in both memory locations and added a third correction note to the detail file to stop this recurring.
 
 ---
 
