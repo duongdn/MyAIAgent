@@ -35,6 +35,7 @@ const PROJECTS = {
   family_app:     { id: 'cmqezfyzv07z6p81vf403t9lp', name: 'Family App',                 client: 'Charles Chang',  manager: true  },
   generator:      { id: 'cmqoou4h10kzum81vovi8rrsk', name: 'Generator',                  client: 'Elliott',        manager: true  },
   fountain:       { id: 'cmpqcjojh00q2tk1v2qi7gs0j', name: 'Fountain Greetings',         client: 'Kunal',          manager: true  },
+  marcel:         { id: 'cmqyvio4s000pqo0xdajw5n2k', name: 'Tokenlite',                  client: 'Marcel',         manager: true  },
 };
 
 // Parse hours "H:MM" -> decimal

@@ -1,0 +1,186 @@
+# Weekly Monitor — W33 (2026-06-29 → 2026-07-03)
+
+**Run at:** 2026-07-04 10:40 +07
+**Report for:** Week of Jun 29 – Jul 3, 2026 (W33)
+**Compared to:** W32 (Jun 23–27)
+
+---
+
+## ⚠️ Critical Notes
+
+| Issue | Status |
+|-------|--------|
+| PhucVT Fri Jul 3 | 🔴 **0h, unexplained** — separate from the known Jul 2 4h redirect (DuongDN moved him to support LeNH + Python training that day, expected). Fri is a new, unexplained gap. |
+| TuanNT Jun 30 (Tue) | 🔴 **0h, still unexplained** — persists after excusing the Jul 1–2 hospitalization. Same gap flagged in daily reports all week, never resolved. |
+| KhanhHH Friday | ⚠️ −5h shortfall (only 3h combined across 3 WS projects vs 8h/day Mon–Thu). No leave on file. Elena sheet still 403 — may be hiding hours. |
+| Elena sheet (KhanhHH 4th source) | ⚠️ Still 403 — recurring, unresolved permission issue (open since W31+). |
+| LeNH JD undercharged | ⚠️ 12h logged vs 7h charged on James Diamond side — 5h uncharged, billing-only issue. |
+| Fountain Matrix token | 🔴 Dead (`M_UNKNOWN_TOKEN`/`invalid_grant`, no DISPLAY for headless refresh). Device-auth link was issued (`.../auth/link?code=PIUA4H`, ~20min TTL from 10:31 — likely expired by now). **Needs user to re-auth Matrix device.** Blocked W33 Fountain plan retrieval. |
+| Fountain GSheets | 5th consecutive week (W29–W33) at 0h — WorkStream is the only real source now. |
+| LongVV JIRA | ✅ Matches GSheets exactly (16h) — the 2-week lag pattern did NOT continue. |
+| VietPH | Resigned 2026-06-30 — correctly excluded from this week's monitoring. |
+
+---
+
+## #1 — Team Hours (W33)
+
+### Summary Table
+
+| Developer | Sources | W33 Hours | Target | Status |
+|-----------|---------|-----------|--------|--------|
+| LongVV | WS: Maddy 16h + JD 2h | **18h** | 16h (Maddy) + JD flex | ✓ OK |
+| PhucVT | WS: JD 28h (Jun29:8, Jun30:8, Jul1:8, Jul2:4, Jul3:0) | **28h** | 40h | 🔴 −12h (4h explained Jul2, 8h Jul3 unexplained) |
+| AnhNH2 | WS: JD 19h (Jun29:8, Jun30:0, Jul1:4, Jul2:4, Jul3:3) | **19h** | — (no plan) | note only |
+| TuanNT | GSheets: Paturevision 15.5h + CharlesChang 0.5h | **16h** | 40h (adj 24h — Jul1/2 hospitalized) | 🔴 −8h vs adj target (Jun30 unexplained) |
+| KhanhHH | WS: Baamboozle 12h + Colin/ETZ 3h + Generator 20h (Elena 403, unknown) | **35h** | 40h | ⚠️ −5h (Friday), Elena unknown |
+| LeNH | WS: Blair Brown 28.17h + JD 12h logged/7h charged | **40.17h** | 40h | ✓ OK (billing flag: 5h uncharged on JD) |
+| Marcel/DuongDN | WS Tokenlite (Marcel) 4h 10m + Paturevision 1h | **5h 10m** | — | ✓ normal (adhoc) |
+| Fountain: ViTHT | WS: Fountain | **36h** | 40h | ⚠️ −4h |
+| Fountain: ThinhT | WS: Fountain | **20h** | 20h | ✓ OK |
+| Fountain: DatNT | WS: Fountain | **24h** (23h charged) | — | ✓ |
+| Fountain: VuTQ | WS: Fountain | **12h** | — | ⚠️ low (consistent w/ prior weeks) |
+| Fountain: HungPN | WS: Fountain | **13.5h** | — (QC) | ✓ |
+| Fountain: PhatDLT | WS: Fountain | **10h** | — (QC) | ✓ |
+
+**JIRA cross-check:**
+- LongVV (madhuraka): JQL `worklogAuthor="5b1ed0bcc175e5207bf80b77" AND worklogDate>="2026-06-29"` → **16.0h** (LIFM2-409 11h, LIFM2-446 3h, LIFM2-436 1h, LIFM2-259 1h). **Matches GSheets Maddy 16h exactly** — no gap, unlike the last 2 weeks' lag.
+- LeNH (swiftstudio BXR): JQL `project=BXR AND worklogAuthor="5a9390547a13c34d34cef5bd" AND worklogDate>="2026-06-29"` → **0h**. Expected — LeNH fully off Rory/BXR, on Blair Brown only.
+
+### Developer Notes
+
+**PhucVT:** Jun29–Jul1 normal (8h/day). Jul2 4h — known, DuongDN personally redirected him mid-day to support LeNH + Python training. **Jul3 (Fri) 0h — new, no explanation on file.** Needs direct follow-up.
+
+**TuanNT:** Mon (Jun29) + Fri (Jul3) fully worked = 16h. Jul1–2 (Wed/Thu) excused — hospitalized/family emergency (per daily-report caveats). **Jun30 (Tue) 0h still unexplained** despite a full week of flagging — this is now 3+ reports old with no resolution. Recommend direct ask.
+
+**KhanhHH:** Mon–Thu solid across Baamboozle/Colin/Generator; Friday drops to 3h combined vs the ~8h/day pattern the rest of the week. No leave filed. Elena sheet 403 unresolved — cannot confirm if Friday hours are sitting there.
+
+**LeNH:** Blair Brown (primary) 28.17h Mon–Thu, no Friday entry on that project. James Diamond side: 12h logged but only 7h charged — 5h uncharged, flag for invoicing, not an hours problem. Combined 40.17h meets target.
+
+**Baamboozle WS quirk:** `missingReportDays` flagged for all 5 days despite valid hour entries — looks like a separate daily-narrative field KhanhHH isn't filling in, not a real hours gap. Worth a sanity check, not blocking.
+
+---
+
+## #2 — Fountain Weekly Check (W33)
+
+### Part 1 — Matrix Weekly Plan
+
+🔴 **BLOCKED, not skipped.** Both `access_token` and `refresh_token` in `config/.matrix-config.json` are dead. Headless refresh impossible (no DISPLAY). Device-auth flow was started (code `PIUA4H`, ~20min TTL from 10:31+07) — requires the user to complete it. Could not confirm whether @trinhmtt posted a W33 plan. **Action needed: user re-auth Matrix device**, then re-fetch Fountain room `!EWnVDAxbTGsBxPkaaI:nustechnology.com` since Mon 08:00+07.
+
+### Part 2 — Task Log Actuals
+
+Source: WorkStream "Fountain Greetings" (`cmpqcjojh00q2tk1v2qi7gs0j`).
+
+| Dev | W33 Hours |
+|-----|-----------|
+| ViTHT | 36h |
+| ThinhT | 20h |
+| DatNT | 24h (23h charged) |
+| VuTQ | 12h |
+| HungPN | 13.5h |
+| PhatDLT | 10h |
+| **Total** | **115.5h** |
+
+GSheets `Summary!W33`: still 0h across all columns — **5th consecutive week (W29–W33)** with 0h in Sheets. WorkStream is the sole real source.
+
+### Part 3 — Plan vs Actual
+
+**CANNOT COMPUTE** — same as W32. No plan message retrievable (Part 1 blocked by dead Matrix token).
+
+### Part 4 — Capacity & Runway
+
+Source: "Est vs Charged" tab, Status col confirmed at idx6/col G (correct — not the old idx2 bug).
+
+| Bucket | Tasks | Remaining | Runway @ 60h/wk | Runway @ actual pace (115.5h/wk) |
+|--------|-------|-----------|------------------|-----------------------------------|
+| Narrow (NS + In-progress) | 28 | **446.0h** | 7.4wk | 3.9wk |
+| Broad (excl. Deployed on Live/Cancelled) | 74 | **534.8h** | 8.9wk | 4.6wk |
+
+W32 → W33 delta:
+| Metric | W32 | W33 | Change |
+|--------|-----|-----|--------|
+| Narrow tasks/remaining | undetected (script bug) | 28 / 446.0h | first clean read |
+| Broad tasks | 95 | 74 | −21 |
+| Broad remaining | 543.0h | 534.8h | −8.2h |
+
+Broad scope shrank slightly this week (−21 tasks, −8.2h) — the +120.2h growth from W32 didn't continue; net small progress.
+
+### Part 5 — Over-Estimate Tracking
+
+37 items >20% over est+CR. Previously-tracked items are **all unchanged from W32** except one:
+
+| Task | Est+CR | Actual | Over% | vs W32 |
+|------|--------|--------|-------|--------|
+| #2595 (Giftdrop Redemption Flow) | 120h | 168.25h | +40% | **NEW** — first week actual populated (was est-only before) |
+| #2615 (Gift of Choice) | 12h | 106.75h | +790% | STABLE |
+| #2735 (Pro Send Smart Link) | 130h | 136h | +5% | STABLE |
+| #2702 (Infinity Accessibility) | 8h | 25.5h | +219% | STABLE |
+| #2816 (Infinity Homepage) | 20h | 44.25h | +121% | STABLE |
+| #2627, #2639, #2545, #2630, #2613, #2652, #2501, #2380, #2691, #2523, #2624, #2837, #2872 | — | — | unchanged | STABLE |
+
+**Data-quality flag:** #2380 has a **duplicate row** (est 20h and est 4h, same actual 25.25h) in the sheet — needs cleanup, don't double-count.
+
+**Note:** The Est vs Charged tab appears frozen/stale — all previously-tracked numbers identical to W32 except the one newly-populated item. Worth confirming with Kunal's team whether this tab is updated live or on a periodic manual cadence.
+
+---
+
+## #3 — James Diamond + Marcel + Blair Brown Matrix Report
+
+**Status: draft ready, holding for final send confirmation.**
+
+Raw data (corrected — LeNH also logged JD hours this week, not just Blair Brown):
+
+| Dev | Project | Charge | Actual | Source |
+|-----|---------|--------|--------|--------|
+| PhucVT | JD Web | 28h | 28h | WorkStream (Jul3 0h unexplained, not padded to contract) |
+| LongVV | JD Web (flex) | 2h | 2h | WorkStream |
+| LeNH | JD Web (extra) | 7h | 12h | WorkStream — logged 12h, only 7h charged (5h uncharged) |
+| AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
+| DuongDN | Marcel (Tokenlite) | 4h 10m | 4h 10m | WorkStream — missed on first pass, GSheets showed 0h (Tokenlite project not yet in canonical script; added this run) |
+| LeNH | Blair Brown | 28h 10m | 28h 10m | WorkStream |
+
+Web total: charge = 40h (fixed contract, per rule) / actual = 28+2+12 = **42h** (over-delivered vs contract, not under — no leave annotation needed).
+
+**Correction:** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
+
+Draft message:
+```
+Report week 29/06
+
+James Diamond
+
+Web: 40h/42h
+PhucVT: 28h/28h
+LongVV: 2h/2h
+LeNH: 7h/12h
+
+Mobile: 19h/19h
+AnhNH2: 19h/19h
+
+---
+
+Marcel
+DuongDN: 4h 10m
+
+---
+
+Blair Brown - Peptide Clyde
+LeNH: 28h 10m
+```
+
+**Still holding on PhucVT's Fri Jul3 0h** — reported as actual (28h), not padded, since it's not a formal leave case. Will send once you confirm.
+
+---
+
+## #4 — Unresolved Questions
+
+1. **PhucVT Fri Jul 3, 0h** — new gap, distinct from the known Jul 2 redirect. What happened, and how should Web be charged this week (40h contract vs 30h actual)?
+2. **TuanNT Jun 30 (Tue), 0h** — persists across multiple daily reports this week with no explanation, even after excusing the Jul 1–2 hospitalization. Needs direct follow-up.
+3. **KhanhHH Friday −5h** — no leave on file; Elena sheet 403 may be hiding hours. Worth fixing Elena access to close this out.
+4. **Fountain Matrix plan** — token dead, device-auth link issued but likely expired by the time this report is read. Need you to re-auth so W33 plan vs actual can be computed.
+5. **Fountain Est vs Charged tab** — looks frozen since W32 except one item. Confirm update cadence with Kunal's team.
+6. **#2380 duplicate row** in Fountain Est vs Charged sheet — needs cleanup.
+7. **LeNH JD 5h uncharged** — logged but not billed; confirm before next invoice cycle.
+
+---
+
+*Data sources: `scripts/workstream-fetch-project-week.js 2026-07-03` (all projects), Google Sheets Summary tabs via service account, JIRA `/rest/api/3/search/jql` (madhuraka + swiftstudio), Fountain "Est vs Charged" tab.*
