@@ -124,8 +124,9 @@
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md) — OAuth2 invalid_grant is REAL unresolved (not noise); repo is mypersonalfootballcoach/wp
 
 ## weekly-report
-- [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — James Diamond + Marcel weekly Matrix format; Blair Brown: dev, Workstream ID, FORBIDDEN status
+- [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — James Diamond + Marcel weekly Matrix format; Web charge = SUM of per-dev charges NOT fixed 40h (corrected 2026-07-04); Blair Brown: dev, Workstream ID, FORBIDDEN status
 - [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md) — **ALWAYS fetch WS /review/week for ALL projects first** — teams log in WS not GSheets (JD, Blair Brown, Fountain, Generator, Baamboozle, Colin all WS-only)
+- [feedback_thuyle_report_explicit_send_flag](weekly-report/feedback_thuyle_report_explicit_send_flag.md) — Never send ThuyLTT weekly report without explicit literal confirmation of the exact final message text
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md) — All 8 Monday report sheet IDs

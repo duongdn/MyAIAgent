@@ -139,32 +139,32 @@ Broad scope shrank slightly this week (−21 tasks, −8.2h) — the +120.2h gro
 
 ## #3 — James Diamond + Marcel + Blair Brown Matrix Report
 
-**Status: ✅ SENT 2026-07-04 ~10:56+07 — event_id `$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs`**
+**Status: ⚠️ CORRECTION NEEDED.** First send (10:56+07, event_id `$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs`) had wrong Web charge — used the old "always 40h contract" shortcut instead of summing per-dev charges. Corrected rule: Web charge = SUM of individual charges (see [[feedback_matrix_report_format]], corrected 2026-07-04). Holding for explicit confirmation on the corrected text below before sending a follow-up (per new [[feedback_thuyle_report_explicit_send_flag]] rule — no more send-on-generic-approval).
 
-Raw data (corrected — LeNH also logged JD hours this week, not just Blair Brown):
+Raw data:
 
 | Dev | Project | Charge | Actual | Source |
 |-----|---------|--------|--------|--------|
 | PhucVT | JD Web | 28h | 28h | WorkStream (Jul3 0h unexplained, not padded to contract) |
-| LongVV | JD Web (flex) | 2h | 2h | WorkStream |
+| LongVV | JD Web (flex) | 2h | 2h | WorkStream — **makeup for prior week's undercharge, not new billable work** |
 | LeNH | JD Web (extra) | 7h | 12h | WorkStream — logged 12h, only 7h charged (5h uncharged) |
 | AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
 | DuongDN | Marcel (Tokenlite) | 4h 10m | 4h 10m | WorkStream — missed on first pass, GSheets showed 0h (Tokenlite project not yet in canonical script; added this run) |
 | LeNH | Blair Brown | 28h 10m | 28h 10m | WorkStream |
 
-Web total: charge = 40h (fixed contract, per rule) / actual = 28+2+12 = **42h** (over-delivered vs contract, not under — no leave annotation needed).
+Web total: charge = 28+2+7 = **37h** (sum of dev charges, NOT the fixed 40h contract) / actual = 28+2+12 = **42h**.
 
-**Correction:** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
+**Correction (Marcel):** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
 
-Sent message:
+Corrected draft (holding for confirmation, then will send as a follow-up correction to the room):
 ```
 Report week 29/06
 
 James Diamond
 
-Web: 40h/42h
+Web: 37h/42h
 PhucVT: 28h/28h
-LongVV: 2h/2h
+LongVV: 2h/2h (bù charge thiếu tuần trước, không charge thêm)
 LeNH: 7h/12h
 
 Mobile: 19h/19h
