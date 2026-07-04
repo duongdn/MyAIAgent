@@ -139,7 +139,7 @@ Broad scope shrank slightly this week (−21 tasks, −8.2h) — the +120.2h gro
 
 ## #3 — James Diamond + Marcel + Blair Brown Matrix Report
 
-**Status: ⚠️ CORRECTION NEEDED.** First send (10:56+07, event_id `$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs`) had wrong Web charge — used the old "always 40h contract" shortcut instead of summing per-dev charges. Corrected rule: Web charge = SUM of individual charges (see [[feedback_matrix_report_format]], corrected 2026-07-04). Holding for explicit confirmation on the corrected text below before sending a follow-up (per new [[feedback_thuyle_report_explicit_send_flag]] rule — no more send-on-generic-approval).
+**Status: ✅ CORRECTED & SENT.** First send (10:56+07, event_id `$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs`) had wrong Web charge — used the old "always 40h contract" shortcut instead of summing per-dev charges. Correction sent 12:47+07, event_id `$nidVkn-lURcvM_b1h4GqHVgBbNpQ6JLZQNzgEBa7uBk`, after explicit confirmation via `config/.weekly-report-send-flags.json` (per new [[feedback_thuyle_report_explicit_send_flag]] gate). Corrected rule: Web charge = SUM of individual charges, and makeup hours for a prior week's undercharge get charge=0 (see [[feedback_matrix_report_format]]).
 
 Raw data:
 
@@ -156,7 +156,7 @@ Web total: charge = 28+0+7 = **35h** (sum of dev charges, NOT the fixed 40h cont
 
 **Correction (Marcel):** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
 
-Corrected draft (holding for confirmation, then will send as a follow-up correction to the room):
+Sent correction message (12:47+07):
 ```
 Report week 29/06
 
@@ -179,6 +179,8 @@ DuongDN: 4h 10m
 
 Blair Brown - Peptide Clyde
 LeNH: 28h 10m
+
+(Correction to the earlier message today — Web total was 40h/42h, correct is 35h/42h)
 ```
 
 PhucVT's Fri Jul3 0h reported as actual (28h), not padded to contract — not a formal leave case, needs separate follow-up (see Unresolved Questions).
