@@ -15,7 +15,7 @@
 | KhanhHH Friday | ⚠️ −5h shortfall (only 3h combined across 3 WS projects vs 8h/day Mon–Thu). No leave on file. Elena sheet still 403 — may be hiding hours. |
 | Elena sheet (KhanhHH 4th source) | ⚠️ Still 403 — recurring, unresolved permission issue (open since W31+). |
 | LeNH JD undercharged | ⚠️ 12h logged vs 7h charged on James Diamond side — 5h uncharged, billing-only issue. |
-| Fountain Matrix token | 🔴 Dead (`M_UNKNOWN_TOKEN`/`invalid_grant`, no DISPLAY for headless refresh). Device-auth link was issued (`.../auth/link?code=PIUA4H`, ~20min TTL from 10:31 — likely expired by now). **Needs user to re-auth Matrix device.** Blocked W33 Fountain plan retrieval. |
+| Matrix token | ✅ RESOLVED — was dead (`M_UNKNOWN_TOKEN`/`invalid_grant`), user completed device-auth re-authorization at 10:53+07. Note: the device-auth-issued token could read but not send messages (500 on all rooms) — sending required falling back to the browser-session capture in `matrix-send-message.js`, which now has a fresh working token saved to config. |
 | Fountain GSheets | 5th consecutive week (W29–W33) at 0h — WorkStream is the only real source now. |
 | LongVV JIRA | ✅ Matches GSheets exactly (16h) — the 2-week lag pattern did NOT continue. |
 | VietPH | Resigned 2026-06-30 — correctly excluded from this week's monitoring. |
@@ -64,7 +64,13 @@
 
 ### Part 1 — Matrix Weekly Plan
 
-🔴 **BLOCKED, not skipped.** Both `access_token` and `refresh_token` in `config/.matrix-config.json` are dead. Headless refresh impossible (no DISPLAY). Device-auth flow was started (code `PIUA4H`, ~20min TTL from 10:31+07) — requires the user to complete it. Could not confirm whether @trinhmtt posted a W33 plan. **Action needed: user re-auth Matrix device**, then re-fetch Fountain room `!EWnVDAxbTGsBxPkaaI:nustechnology.com` since Mon 08:00+07.
+✅ **RESOLVED** (after user re-authorized the Matrix device — token was dead, fixed 10:53+07). Fountain room `!EWnVDAxbTGsBxPkaaI:nustechnology.com`, fetched since Mon 08:00+07.
+
+@trinhmtt posted **two** plan messages this week (revised mid-week):
+- **Tue 2026-06-30 17:06+07** (later than the usual Mon 08:30-09:30 window): "em update plan tuần này ạ — ViTHT: 36h | ThinhT: 20h | DatNT: 24h | VuTQ: 8h"
+- **Fri 2026-07-03 12:01+07** (revision): "em update plan tuần này ạ — ViTHT: 36h | ThinhT: 20h | DatNT: 24h | VuTQ: 12h | => QC: 22.5"
+
+Using the Friday revision as the authoritative W33 plan (VuTQ raised 8h→12h, QC total 22.5h added).
 
 ### Part 2 — Task Log Actuals
 
@@ -84,7 +90,15 @@ GSheets `Summary!W33`: still 0h across all columns — **5th consecutive week (W
 
 ### Part 3 — Plan vs Actual
 
-**CANNOT COMPUTE** — same as W32. No plan message retrievable (Part 1 blocked by dead Matrix token).
+| Dev | Plan (Fri revision) | Actual (WS) | Delta | Status |
+|-----|---------------------|-------------|-------|--------|
+| ViTHT | 36h | 36h | 0h | ✓ exact match |
+| ThinhT | 20h | 20h | 0h | ✓ exact match |
+| DatNT | 24h | 24h (23h charged) | 0h | ✓ exact match |
+| VuTQ | 12h | 12h | 0h | ✓ exact match |
+| QC (HungPN+PhatDLT) | 22.5h | 23.5h (13.5+10) | +1h | ✓ close match |
+
+**Cleanest plan-vs-actual week on record for Fountain** — every dev landed within 1h of plan. Big improvement over W32 (no plan retrievable at all).
 
 ### Part 4 — Capacity & Runway
 
@@ -125,7 +139,7 @@ Broad scope shrank slightly this week (−21 tasks, −8.2h) — the +120.2h gro
 
 ## #3 — James Diamond + Marcel + Blair Brown Matrix Report
 
-**Status: draft ready, holding for final send confirmation.**
+**Status: ✅ SENT 2026-07-04 ~10:56+07 — event_id `$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs`**
 
 Raw data (corrected — LeNH also logged JD hours this week, not just Blair Brown):
 
@@ -142,7 +156,7 @@ Web total: charge = 40h (fixed contract, per rule) / actual = 28+2+12 = **42h** 
 
 **Correction:** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
 
-Draft message:
+Sent message:
 ```
 Report week 29/06
 
@@ -167,19 +181,18 @@ Blair Brown - Peptide Clyde
 LeNH: 28h 10m
 ```
 
-**Still holding on PhucVT's Fri Jul3 0h** — reported as actual (28h), not padded, since it's not a formal leave case. Will send once you confirm.
+PhucVT's Fri Jul3 0h reported as actual (28h), not padded to contract — not a formal leave case, needs separate follow-up (see Unresolved Questions).
 
 ---
 
 ## #4 — Unresolved Questions
 
-1. **PhucVT Fri Jul 3, 0h** — new gap, distinct from the known Jul 2 redirect. What happened, and how should Web be charged this week (40h contract vs 30h actual)?
+1. **PhucVT Fri Jul 3, 0h** — new gap, distinct from the known Jul 2 redirect. What happened? (Matrix report already sent using actual 28h, not padded to 40h contract — may need a correction message if this gets explained as leave.)
 2. **TuanNT Jun 30 (Tue), 0h** — persists across multiple daily reports this week with no explanation, even after excusing the Jul 1–2 hospitalization. Needs direct follow-up.
 3. **KhanhHH Friday −5h** — no leave on file; Elena sheet 403 may be hiding hours. Worth fixing Elena access to close this out.
-4. **Fountain Matrix plan** — token dead, device-auth link issued but likely expired by the time this report is read. Need you to re-auth so W33 plan vs actual can be computed.
-5. **Fountain Est vs Charged tab** — looks frozen since W32 except one item. Confirm update cadence with Kunal's team.
-6. **#2380 duplicate row** in Fountain Est vs Charged sheet — needs cleanup.
-7. **LeNH JD 5h uncharged** — logged but not billed; confirm before next invoice cycle.
+4. **Fountain Est vs Charged tab** — looks frozen since W32 except one item (#2595). Confirm update cadence with Kunal's team.
+5. **#2380 duplicate row** in Fountain Est vs Charged sheet — needs cleanup.
+6. **LeNH JD 5h uncharged** — logged but not billed; confirm before next invoice cycle.
 
 ---
 
