@@ -1,0 +1,22 @@
+{
+  "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
+  "james_diamond_marcel_blair_brown": {
+    "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
+    "week_start": "2026-06-29",
+    "message_text": "Report week 29/06\n\nJames Diamond\n\nWeb: 35h/42h\nPhucVT: 28h/28h\nLongVV: 0h/2h (bù charge thiếu tuần trước, không charge thêm)\nLeNH: 7h/12h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 4h 10m\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 28h 10m",
+    "confirmed": false,
+    "confirmed_at": null,
+    "sent": false,
+    "sent_at": null,
+    "event_id": null,
+    "history": [
+      {
+        "event": "first_send_wrong",
+        "message_text": "Report week 29/06\n\nJames Diamond\n\nWeb: 40h/42h\nPhucVT: 28h/28h\nLongVV: 2h/2h\nLeNH: 7h/12h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 4h 10m\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 28h 10m",
+        "sent_at": "2026-07-04T10:56:00+07:00",
+        "event_id": "$-ZwCAk3KXZWCfnvxnMuaQiawMrZu7CvTKGQ0O6zF7cs",
+        "note": "Web charge wrongly computed as fixed 40h contract instead of sum of per-dev charges (35h). User caught error, correction pending confirmation."
+      }
+    ]
+  }
+}

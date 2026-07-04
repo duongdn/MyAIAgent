@@ -107,6 +107,14 @@ Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`
 ### James Diamond + Marcel — Combined report to Matrix
 Extract last week's hours and send as ONE message to Matrix room.
 - Room: `!oofREYAXHsvPWEOJev:nustechnology.com` (Thuy Le)
+
+**MANDATORY send gate (added 2026-07-04):** Never send this report off a general "yes, send" — a wrong `Web: 40h/42h` slipped through that way once already. Use `config/.weekly-report-send-flags.json`:
+1. Compute the exact message text and write it to `james_diamond_marcel_blair_brown.message_text`, with `confirmed: false`.
+2. Show the user the literal text (not a paraphrase) and ask them to explicitly confirm THAT text.
+3. Only after explicit confirmation, set `confirmed: true` + `confirmed_at`, then send.
+4. After sending, set `sent: true`, `sent_at`, `event_id`.
+5. If the numbers change after feedback, go back to step 1 with `confirmed: false` — never resend without a fresh explicit confirmation of the new text.
+6. **Web charge = SUM of each dev's own charge line, never a fixed 40h contract shortcut.** Makeup hours for a PRIOR week's undercharge get `charge=0` for that dev's line (only `actual` counts them), annotated e.g. `LongVV: 0h/2h (bù charge thiếu tuần trước, không charge thêm)`.
 - Template (combined, with title for traceability):
 ```
 Report week {DD/MM}

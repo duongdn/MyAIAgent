@@ -9,9 +9,13 @@ metadata:
 
 **Why:** 2026-07-04 — sent `Web: 40h/42h` (wrong; used a stale "charge is always the 40h contract" shortcut, see [[feedback_matrix_report_format]]) even though the user had approved sending via a yes/no question that showed the draft. The approval covered "send this draft" in principle, but the underlying numbers were wrong and slipped through anyway. User: "từ bây giờ làm 1 flag như daily report, chỉ gởi report cho ThuyLTT khi có flag đó tường minh" (from now on, make an explicit flag like the daily report — only send the report to ThuyLTT when that flag is explicit).
 
+**Concrete mechanism (added 2026-07-04):** `config/.weekly-report-send-flags.json` — a literal, mechanical gate file, not just a behavioral note. Schema: `james_diamond_marcel_blair_brown.message_text` (exact draft), `confirmed` (bool), `confirmed_at`, `sent` (bool), `sent_at`, `event_id`, plus a `history[]` array logging prior sends (including wrong ones, with a `note` explaining the error).
+
 **How to apply:**
 1. Compute all dev-level charge/actual numbers carefully — sum individual charges, don't shortcut to a fixed contract number (see corrected rule in [[feedback_matrix_report_format]]).
-2. Show the full exact message text (the literal block that will be sent) to the user, not a paraphrase.
-3. Wait for explicit confirmation on that exact text before calling the send script — a prior generic "yes send" on a summary/table is not sufficient once numbers have changed.
-4. If any number changes after user feedback, show the revised exact text again and get confirmation again before sending — never auto-resend.
-5. If a wrong message was already sent to the room, ask the user whether to post a correction rather than silently only fixing the internal report file.
+2. Write the exact draft into `message_text` in the flag file, `confirmed: false`.
+3. Show the full exact message text (the literal block that will be sent) to the user, not a paraphrase.
+4. Wait for explicit confirmation on that exact text — a prior generic "yes send" on a summary/table is not sufficient once numbers have changed. Only on explicit confirmation, flip `confirmed: true` + `confirmed_at`.
+5. If any number changes after user feedback, rewrite `message_text`, reset `confirmed: false`, and repeat from step 3 — never auto-resend on a stale confirmation.
+6. After sending, set `sent: true`, `sent_at`, `event_id`.
+7. If a wrong message was already sent to the room, log it in `history[]` with a `note`, and ask the user whether to post a correction rather than silently only fixing the internal report file.
