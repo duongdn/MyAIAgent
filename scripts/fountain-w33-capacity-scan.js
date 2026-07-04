@@ -16,6 +16,8 @@ const W33_CAPACITY = 88; // ViTHT:36+ThinhT:20+DatNT:24+VuTQ:8
 const DONE_STATUSES = new Set([
   "Deployed on Live", "Cancelled", "Has Bug on Live", "Tested on Live"
 ]);
+// Orchestrator-requested exclusion for Part 4 is narrower: only these two statuses
+const DONE_STATUSES_STRICT = new Set(["Deployed on Live", "Cancelled"]);
 
 function parseHours(val) {
   if (!val || ["", "-", "—", "#DIV/0!", "#REF!", "N/A"].includes(String(val).trim())) return 0;
@@ -114,10 +116,13 @@ async function main() {
       continue;
     }
     if (row.length < 9) continue;
-    const taskId = String(row[0] || "").trim();
-    if (!taskId || taskId === "#" || taskId.toLowerCase().startsWith("task")) continue;
-
-    const taskName = String(row[1] || "").trim();
+    const taskSlug = String(row[0] || "").trim();
+    if (!taskSlug || taskSlug === "#" || taskSlug.toLowerCase().startsWith("task")) continue;
+    // Task slug is e.g. "2502_update_cart_and_checkout_page" or bare "2615" — id is leading digits, name is the rest
+    const slugMatch = taskSlug.match(/^(\d+)[-_ ]?(.*)$/);
+    const taskId = slugMatch ? slugMatch[1] : taskSlug;
+    const slugName = slugMatch && slugMatch[2] ? slugMatch[2].replace(/[-_]+/g, " ").trim() : "";
+    const taskName = slugName || String(row[1] || "").trim();
     const status = String(row[6] || "").trim();  // Col G (idx6) = Status (NOT idx2 — bug fixed 2026-07-04)
     const estRaw = parseHours(row[8]);   // Col I = Estimated Dev Raw
     const cr = parseHours(row[9]);       // Col J = CR
@@ -135,8 +140,30 @@ async function main() {
   const remainingNarrow = nsIpTasks.reduce((s, t) => s + Math.max(0, t.totalEst - t.actual), 0);
   const runwayWk = W33_CAPACITY > 0 ? remainingNarrow / W33_CAPACITY : 0;
 
-  process.stderr.write(`NS+IP: ${nsIpTasks.length} tasks, ${remainingNarrow.toFixed(1)}h remaining\n`);
-  process.stderr.write(`Runway: ${runwayWk.toFixed(2)} weeks at ${W33_CAPACITY}h/wk\n`);
+  // Broad bucket: ALL active (non-excluded) tasks, regardless of status
+  const activeBroad = tasks.filter(t => !DONE_STATUSES.has(t.status));
+  const remainingBroad = activeBroad.reduce((s, t) => s + Math.max(0, t.totalEst - t.actual), 0);
+  const runway60Broad = remainingBroad / 60;
+  const runway100Broad = remainingBroad / 100;
+  const runway60Narrow = remainingNarrow / 60;
+  const runway100Narrow = remainingNarrow / 100;
+
+  // Strict broad bucket (orchestrator spec: exclude ONLY Deployed on Live + Cancelled) — for W32 apples-to-apples comparison
+  const activeBroadStrict = tasks.filter(t => !DONE_STATUSES_STRICT.has(t.status));
+  const remainingBroadStrict = activeBroadStrict.reduce((s, t) => s + Math.max(0, t.totalEst - t.actual), 0);
+  const runway60BroadStrict = remainingBroadStrict / 60;
+  const runway100BroadStrict = remainingBroadStrict / 100;
+  process.stderr.write(`Active broad (strict, excl only Deployed-on-Live+Cancelled): ${activeBroadStrict.length} tasks, ${remainingBroadStrict.toFixed(1)}h remaining\n`);
+  process.stderr.write(`Runway broad strict: 60h/wk=${runway60BroadStrict.toFixed(2)}wk | 100h/wk=${runway100BroadStrict.toFixed(2)}wk\n`);
+
+  // Zero-filter total (matches W32's methodology, which had a status-read bug that excluded nothing)
+  const remainingAll = tasks.reduce((s, t) => s + Math.max(0, t.totalEst - t.actual), 0);
+  process.stderr.write(`ALL tasks (no status filter, for W32 apples-to-apples): ${tasks.length} tasks, ${remainingAll.toFixed(1)}h remaining\n`);
+
+  process.stderr.write(`NS+IP (narrow): ${nsIpTasks.length} tasks, ${remainingNarrow.toFixed(1)}h remaining\n`);
+  process.stderr.write(`Runway narrow: ${runwayWk.toFixed(2)} weeks at ${W33_CAPACITY}h/wk | 60h/wk=${runway60Narrow.toFixed(2)}wk | 100h/wk=${runway100Narrow.toFixed(2)}wk\n`);
+  process.stderr.write(`Active broad: ${activeBroad.length} tasks, ${remainingBroad.toFixed(1)}h remaining\n`);
+  process.stderr.write(`Runway broad: 60h/wk=${runway60Broad.toFixed(2)}wk | 100h/wk=${runway100Broad.toFixed(2)}wk\n`);
 
   for (const t of nsIpTasks) {
     process.stderr.write(`  #${t.id}: est=${t.totalEst}h actual=${t.actual}h rem=${Math.max(0,t.totalEst-t.actual).toFixed(1)}h | ${t.status}\n`);
@@ -160,14 +187,34 @@ async function main() {
     devActuals: { current: currActuals, previous: prevActuals, prevWeek: `W${maxW-1}` },
     capacity: {
       wkCapacity: W33_CAPACITY,
-      nsIpCount: nsIpTasks.length,
-      nsIpRemaining: Math.round(remainingNarrow * 10) / 10,
-      runwayWk: Math.round(runwayWk * 100) / 100,
-      tasks: nsIpTasks.map(t => ({
-        id: t.id, totalEst: t.totalEst, actual: t.actual,
-        remain: Math.round(Math.max(0, t.totalEst - t.actual) * 10) / 10,
-        status: t.status
-      }))
+      narrow: {
+        count: nsIpTasks.length,
+        remaining: Math.round(remainingNarrow * 10) / 10,
+        runwayAtPlanWk: Math.round(runwayWk * 100) / 100,
+        runwayAt60Wk: Math.round(runway60Narrow * 100) / 100,
+        runwayAt100Wk: Math.round(runway100Narrow * 100) / 100,
+        tasks: nsIpTasks.map(t => ({
+          id: t.id, name: t.name, totalEst: t.totalEst, actual: t.actual,
+          remain: Math.round(Math.max(0, t.totalEst - t.actual) * 10) / 10,
+          status: t.status
+        }))
+      },
+      broad: {
+        count: activeBroad.length,
+        remaining: Math.round(remainingBroad * 10) / 10,
+        runwayAt60Wk: Math.round(runway60Broad * 100) / 100,
+        runwayAt100Wk: Math.round(runway100Broad * 100) / 100,
+      },
+      broadStrict: {
+        count: activeBroadStrict.length,
+        remaining: Math.round(remainingBroadStrict * 10) / 10,
+        runwayAt60Wk: Math.round(runway60BroadStrict * 100) / 100,
+        runwayAt100Wk: Math.round(runway100BroadStrict * 100) / 100,
+      },
+      allTasksNoFilter: {
+        count: tasks.length,
+        remaining: Math.round(remainingAll * 10) / 10,
+      }
     },
     overEstimate: overEst.slice(0, 20),
     keyTasks,
