@@ -26,7 +26,7 @@ DuongDN: {hours}
 
 Rules:
 - **CORRECTED 2026-07-04 — Web charge is NOT always 40h.** The old "Web charge is ALWAYS 40h contract" rule below is WRONG whenever the sum of individual dev charges differs from 40h. Correct rule: **Web total charge = SUM of each individual dev's own charge line** (e.g. PhucVT 28 + LongVV 2 + LeNH 7 = 37h), and **Web total actual = SUM of each dev's actual line**. Never substitute the fixed contract number for the real sum.
-- **Makeup hours for a PRIOR week's undercharge:** if a dev's hours this week include time covering a previous week's shortfall (not this week's leave/absence), annotate that dev's line explicitly, e.g. `LongVV: 2h/2h (bù charge thiếu tuần trước, không charge thêm)`. Still summed into charge/actual totals, but the note must make clear it settles a prior period, not new billable work this week.
+- **Makeup hours for a PRIOR week's undercharge are NOT charged (charge=0), only actual counts them.** If a dev's hours this week include time covering a previous week's shortfall (not this week's leave/absence), the charge figure for those hours is **0**, e.g. `LongVV: 0h/2h (bù charge thiếu tuần trước, không charge thêm)` — do NOT put the worked hours in the charge slot just because hours were worked. Corrected 2026-07-04 after a first pass wrongly wrote `LongVV: 2h/2h`.
 - **James Diamond Web is a 40h/week TEAM contract**, not per-dev — historical framing, now superseded by the corrected sum rule above.
 - **Web section MUST include LongVV** alongside PhucVT from W23 (2026-04-20) onward. Web total = PhucVT + LongVV (+ any other backfill dev).
 - PhucVT plan = 40h/week (when full week). AnhNH2 has **no fixed plan** — use actual as both values (e.g. 20h/20h).

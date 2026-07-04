@@ -146,13 +146,13 @@ Raw data:
 | Dev | Project | Charge | Actual | Source |
 |-----|---------|--------|--------|--------|
 | PhucVT | JD Web | 28h | 28h | WorkStream (Jul3 0h unexplained, not padded to contract) |
-| LongVV | JD Web (flex) | 2h | 2h | WorkStream — **makeup for prior week's undercharge, not new billable work** |
+| LongVV | JD Web (flex) | 0h | 2h | WorkStream — **makeup for prior week's undercharge, not chargeable** (charge=0, not the worked hours) |
 | LeNH | JD Web (extra) | 7h | 12h | WorkStream — logged 12h, only 7h charged (5h uncharged) |
 | AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
 | DuongDN | Marcel (Tokenlite) | 4h 10m | 4h 10m | WorkStream — missed on first pass, GSheets showed 0h (Tokenlite project not yet in canonical script; added this run) |
 | LeNH | Blair Brown | 28h 10m | 28h 10m | WorkStream |
 
-Web total: charge = 28+2+7 = **37h** (sum of dev charges, NOT the fixed 40h contract) / actual = 28+2+12 = **42h**.
+Web total: charge = 28+0+7 = **35h** (sum of dev charges, NOT the fixed 40h contract; LongVV's 2h is non-chargeable makeup) / actual = 28+2+12 = **42h**.
 
 **Correction (Marcel):** Marcel/DuongDN was wrongly shown as 0h initially — GSheets doesn't capture it, but Workstream has a "Tokenlite" project (Marcel Fuessinger) added 2026-07-02 that wasn't yet in the canonical fetch script. Added `marcel` entry to `scripts/workstream-fetch-project-week.js` and re-queried — real total is 4h 10m (Jun30: 2.5h, Jul1: 1h, Jul2: 0.67h).
 
@@ -162,9 +162,9 @@ Report week 29/06
 
 James Diamond
 
-Web: 37h/42h
+Web: 35h/42h
 PhucVT: 28h/28h
-LongVV: 2h/2h (bù charge thiếu tuần trước, không charge thêm)
+LongVV: 0h/2h (bù charge thiếu tuần trước, không charge thêm)
 LeNH: 7h/12h
 
 Mobile: 19h/19h
