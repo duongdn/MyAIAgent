@@ -1,0 +1,1083 @@
+{
+  "fetchedAt": "2026-07-05T19:01:50.219863+00:00",
+  "topic": "php",
+  "tag": null,
+  "results": [
+    {
+      "topic": "php",
+      "sources": [
+        {
+          "name": "Laravel News",
+          "url": "https://laravel-news.com/feed",
+          "articles": [
+            {
+              "title": "A Copy/Paste Detector CLI for PHP 8.5+",
+              "link": "https://laravel-news.com/a-copypaste-detector-cli-for-php-85?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews",
+              "pubDate": "Thu, 02 Jul 2026 03:59:11 +0000",
+              "summary": "phpcpd-next is a maintained, dependency-free successor to Sebastian Bergmann's phpcpd that finds duplicated PHP code, including reordered and gapped clones. The post A Copy/Paste Detector CLI for PHP 8.5+ appeared first on Laravel News . Join the Laravel Newsletter to get Laravel articles like this ",
+              "score": null
+            },
+            {
+              "title": "Commune: A Private Community for Founders and Builders",
+              "link": "https://laravel-news.com/commune-a-private-community-for-founders-and-builders?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews",
+              "pubDate": "Thu, 02 Jul 2026 12:53:58 +0000",
+              "summary": "Commune is a gamified social platform for builders to share what they’re working on, connect with other founders, and launch their projects. The post Commune: A Private Community for Founders and Builders appeared first on Laravel News . Join the Laravel Newsletter to get Laravel articles like this ",
+              "score": null
+            },
+            {
+              "title": "Laravel AI Tasks: An AI Orchestration Package for Queues, Logging, and Cost Control",
+              "link": "https://laravel-news.com/laravel-ai-tasks-an-ai-orchestration-package-for-queues-logging-and-cost-control?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews",
+              "pubDate": "Thu, 02 Jul 2026 12:53:13 +0000",
+              "summary": "Laravel AI Tasks is a package by fomvasss that wraps the Laravel AI SDK with reusable task classes, queued and streamed execution, cost tracking, and a built-in dashboard. The post Laravel AI Tasks: An AI Orchestration Package for Queues, Logging, and Cost Control appeared first on Laravel News . Jo",
+              "score": null
+            },
+            {
+              "title": "Worker Metrics on the WorkerStopping Event in Laravel 13.18",
+              "link": "https://laravel-news.com/laravel-13-18-0?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews",
+              "pubDate": "Wed, 01 Jul 2026 02:33:37 +0000",
+              "summary": "Laravel 13.18.0 exposes jobs-processed counts on the WorkerStopping event, adds graceful shutdown to schedule:work, introduces priority-based dev command registration, and hardens the Number helpers against INF/NAN. The post Worker Metrics on the WorkerStopping Event in Laravel 13.18 appeared first ",
+              "score": null
+            },
+            {
+              "title": "Clonio CLI: Clone Production Databases With Anonymized Data",
+              "link": "https://laravel-news.com/clonio-cli-clone-production-databases-with-anonymized-data?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews",
+              "pubDate": "Tue, 30 Jun 2026 03:15:23 +0000",
+              "summary": "A PHP command-line tool that copies production databases into development, CI, and test environments while anonymizing PII and recording a signed audit trail. The post Clonio CLI: Clone Production Databases With Anonymized Data appeared first on Laravel News . Join the Laravel Newsletter to get Lara",
+              "score": null
+            }
+          ],
+          "error": null
+        },
+        {
+          "name": "PHP.net News",
+          "url": "https://www.php.net/feed.atom",
+          "articles": [
+            {
+              "title": "PHP 8.5.8 Released!",
+              "link": "https://www.php.net/index.php#2026-07-02-5",
+              "pubDate": "2026-07-02T19:55:50+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.23 Released!",
+              "link": "https://www.php.net/index.php#2026-07-02-4",
+              "pubDate": "2026-07-02T17:24:56+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.6.0 Alpha 1 available for testing",
+              "link": "https://www.php.net/index.php#2026-07-02-3",
+              "pubDate": "2026-07-02T17:00:52+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.32 Released!",
+              "link": "https://www.php.net/index.php#2026-07-02-2",
+              "pubDate": "2026-07-02T16:38:37+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.2.32 Released!",
+              "link": "https://www.php.net/index.php#2026-07-02-1",
+              "pubDate": "2026-07-02T12:03:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.22 Released!",
+              "link": "https://www.php.net/index.php#2026-06-04-2",
+              "pubDate": "2026-06-04T22:14:47+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.7 Released!",
+              "link": "https://www.php.net/index.php#2026-06-04-1",
+              "pubDate": "2026-06-04T14:05:37+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Laracon US 2026",
+              "link": "https://www.php.net/conferences/index.php#2026-06-01-1",
+              "pubDate": "2026-06-01T16:50:29+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Longhorn PHP 2026 - Call For Papers",
+              "link": "https://www.php.net/conferences/index.php#2026-05-11-1",
+              "pubDate": "2026-05-11T22:03:37+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.6 Released!",
+              "link": "https://www.php.net/index.php#2026-05-07-4",
+              "pubDate": "2026-05-07T17:59:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.2.31 Released!",
+              "link": "https://www.php.net/index.php#2026-05-07-3",
+              "pubDate": "2026-05-07T15:41:42+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.21 Released!",
+              "link": "https://www.php.net/index.php#2026-05-07-2",
+              "pubDate": "2026-05-07T15:34:42+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.31 Released!",
+              "link": "https://www.php.net/index.php#2026-05-07-1",
+              "pubDate": "2026-05-07T13:30:32+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "JetBrains PHPverse 2026",
+              "link": "https://www.php.net/conferences/index.php#2026-05-04-1",
+              "pubDate": "2026-05-04T10:00:00+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.20 Released!",
+              "link": "https://www.php.net/index.php#2026-04-09-2",
+              "pubDate": "2026-04-09T15:24:28+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.5 Released!",
+              "link": "https://www.php.net/index.php#2026-04-09-1",
+              "pubDate": "2026-04-09T15:02:48+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.4 Released!",
+              "link": "https://www.php.net/index.php#2026-03-12-2",
+              "pubDate": "2026-03-12T19:11:52+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.19 Released!",
+              "link": "https://www.php.net/index.php#2026-03-12-1",
+              "pubDate": "2026-03-12T17:28:37+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.3 Released!",
+              "link": "https://www.php.net/index.php#2026-02-12-2",
+              "pubDate": "2026-02-12T19:20:03+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.18 Released!",
+              "link": "https://www.php.net/index.php#2026-02-12-1",
+              "pubDate": "2026-02-12T14:38:11+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Laravel Live Denmark 2026",
+              "link": "https://www.php.net/conferences/index.php#2026-02-09-1",
+              "pubDate": "2026-02-09T00:00:00+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.2 Released!",
+              "link": "https://www.php.net/index.php#2026-01-15-3",
+              "pubDate": "2026-01-15T23:57:49+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.30 Released!",
+              "link": "https://www.php.net/index.php#2026-01-15-2",
+              "pubDate": "2026-01-15T23:05:01+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.17 Released!",
+              "link": "https://www.php.net/index.php#2026-01-15-1",
+              "pubDate": "2026-01-15T19:32:42+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Velho Oeste 2026",
+              "link": "https://www.php.net/conferences/index.php#2026-01-14-1",
+              "pubDate": "2026-01-14T10:00:00+03:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.1.34 Released!",
+              "link": "https://www.php.net/index.php#2025-12-18-5",
+              "pubDate": "2025-12-18T23:59:59+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.16 Released!",
+              "link": "https://www.php.net/index.php#2025-12-18-4",
+              "pubDate": "2025-12-18T23:19:06+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.2.30 Released!",
+              "link": "https://www.php.net/index.php#2025-12-18-3",
+              "pubDate": "2025-12-18T19:26:22+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.29 Released!",
+              "link": "https://www.php.net/index.php#2025-12-18-2",
+              "pubDate": "2025-12-18T15:37:23+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.1 Released!",
+              "link": "https://www.php.net/index.php#2025-12-18-1",
+              "pubDate": "2025-12-18T14:37:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "International PHP Conference Berlin 2026",
+              "link": "https://www.php.net/conferences/index.php#2025-12-17-1",
+              "pubDate": "2025-12-17T09:00:00+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Laravel Live Japan",
+              "link": "https://www.php.net/conferences/index.php#2025-11-30-1",
+              "pubDate": "2025-11-30T04:52:32+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Released!",
+              "link": "https://www.php.net/index.php#2025-11-20-3",
+              "pubDate": "2025-11-20T18:34:19+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.15 Released!",
+              "link": "https://www.php.net/index.php#2025-11-20-2",
+              "pubDate": "2025-11-20T13:48:26+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.28 Released!",
+              "link": "https://www.php.net/index.php#2025-11-20-1",
+              "pubDate": "2025-11-20T10:08:55+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 RC 5 available for testing",
+              "link": "https://www.php.net/index.php#2025-11-13-1",
+              "pubDate": "2025-11-13T22:39:02+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 RC4 available for testing",
+              "link": "https://www.php.net/index.php#2025-11-06-1",
+              "pubDate": "2025-11-06T20:42:30+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "betterCode() PHP 2025",
+              "link": "https://www.php.net/conferences/index.php#id2025-10-31-1",
+              "pubDate": "2025-10-31T12:00:00+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.27 Released!",
+              "link": "https://www.php.net/index.php#2025-10-23-3",
+              "pubDate": "2025-10-23T20:47:41+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.14 Released!",
+              "link": "https://www.php.net/index.php#2025-10-23-2",
+              "pubDate": "2025-10-23T18:19:40+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 RC 3 available for testing",
+              "link": "https://www.php.net/index.php#2025-10-23-1",
+              "pubDate": "2025-10-23T16:59:13+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 RC 2 available for testing",
+              "link": "https://www.php.net/index.php#2025-10-09-2",
+              "pubDate": "2025-10-09T15:54:19+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Kagawa 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-10-09-1",
+              "pubDate": "2025-10-09T06:23:40+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Hiroshima 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-10-08-1",
+              "pubDate": "2025-10-08T09:10:53+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Fukuoka 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-10-03-1",
+              "pubDate": "2025-10-03T14:03:22+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 RC 1 available for testing",
+              "link": "https://www.php.net/index.php#2025-09-25-3",
+              "pubDate": "2025-09-25T23:24:19+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.26 Released!",
+              "link": "https://www.php.net/index.php#2025-09-25-2",
+              "pubDate": "2025-09-25T22:24:19+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.13 Released!",
+              "link": "https://www.php.net/index.php#2025-09-25-1",
+              "pubDate": "2025-09-25T17:56:59+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Brazil 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-09-23-1",
+              "pubDate": "2025-09-23T18:54:43+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Beta 3 available for testing",
+              "link": "https://www.php.net/index.php#2025-09-11-1",
+              "pubDate": "2025-09-11T17:59:49+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHPKonf 2025 Baku",
+              "link": "https://www.php.net/conferences/index.php#2025-09-08-1",
+              "pubDate": "2025-09-08T06:53:09+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Forum PHP 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-09-07-1",
+              "pubDate": "2025-09-07T00:31:17+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Dutch PHP Conference 2026 - Call For Papers",
+              "link": "https://www.php.net/conferences/index.php#2025-09-03-1",
+              "pubDate": "2025-09-03T11:15:38+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Beta 2 available for testing",
+              "link": "https://www.php.net/index.php#2025-08-28-3",
+              "pubDate": "2025-08-28T17:58:45+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.25 Released!",
+              "link": "https://www.php.net/index.php#2025-08-28-2",
+              "pubDate": "2025-08-28T14:53:02+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.12 Released!",
+              "link": "https://www.php.net/index.php#2025-08-28-1",
+              "pubDate": "2025-08-28T12:15:15+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHPeste 2025 - Parnaiba-PI",
+              "link": "https://www.php.net/conferences/index.php#2025-08-25-1",
+              "pubDate": "2025-08-25T23:07:22+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Longhorn PHP 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-08-20-1",
+              "pubDate": "2025-08-20T17:41:57+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Beta 1 available for testing",
+              "link": "https://www.php.net/index.php#2025-08-14-1",
+              "pubDate": "2025-08-14T12:28:04+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Tek 2026",
+              "link": "https://www.php.net/conferences/index.php#2025-08-10-1",
+              "pubDate": "2025-08-10T07:23:31+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "ConFoo Montreal 2026: Call for Papers",
+              "link": "https://www.php.net/conferences/index.php#2025-08-08-1",
+              "pubDate": "2025-08-08T17:41:33+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Alpha 4 available for testing",
+              "link": "https://www.php.net/index.php#2025-07-31-3",
+              "pubDate": "2025-08-01T00:02:33+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.11 Released!",
+              "link": "https://www.php.net/index.php#2025-07-31-2",
+              "pubDate": "2025-07-31T22:42:04+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.24 Released!",
+              "link": "https://www.php.net/index.php#2025-07-31-1",
+              "pubDate": "2025-07-31T19:24:06+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Pyh.conf’25: a new PHP conference for the Russian-speaking community",
+              "link": "https://www.php.net/conferences/index.php#2025-07-30-1",
+              "pubDate": "2025-07-30T09:29:31+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Alpha 2 available for testing",
+              "link": "https://www.php.net/index.php#2025-07-17-1",
+              "pubDate": "2025-07-17T11:45:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.0 Alpha 1 available for testing",
+              "link": "https://www.php.net/index.php#2025-07-03-5",
+              "pubDate": "2025-07-03T17:59:40+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.23 Released!",
+              "link": "https://www.php.net/index.php#2025-07-03-4",
+              "pubDate": "2025-07-03T15:24:35+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.1.33 Released!",
+              "link": "https://www.php.net/index.php#2025-07-03-3",
+              "pubDate": "2025-07-03T14:35:29+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.2.29 Released!",
+              "link": "https://www.php.net/index.php#2025-07-03-2",
+              "pubDate": "2025-07-03T12:03:57+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.10 Released!",
+              "link": "https://www.php.net/index.php#2025-07-03-1",
+              "pubDate": "2025-07-03T11:44:39+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "CakeFest 2025 Madrid: The Official CakePHP Conference",
+              "link": "https://www.php.net/conferences/index.php#2025-06-11-1",
+              "pubDate": "2025-06-11T09:44:39+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Longhorn PHP 2025 - Call For Papers",
+              "link": "https://www.php.net/conferences/index.php#2025-06-09-1",
+              "pubDate": "2025-06-09T12:50:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "International PHP Conference Munich 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-06-06-1",
+              "pubDate": "2025-06-06T08:44:37+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.22 Released!",
+              "link": "https://www.php.net/index.php#2025-06-05-2",
+              "pubDate": "2025-06-05T20:46:27+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.8 Released!",
+              "link": "https://www.php.net/index.php#2025-06-05-1",
+              "pubDate": "2025-06-05T19:12:13+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHPverse 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-06-04-1",
+              "pubDate": "2025-06-04T10:18:07+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Kansai 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-05-12-1",
+              "pubDate": "2025-05-12T14:19:01+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.21 Released!",
+              "link": "https://www.php.net/index.php#2025-05-08-2",
+              "pubDate": "2025-05-08T22:02:15+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.7 Released!",
+              "link": "https://www.php.net/index.php#2025-05-08-1",
+              "pubDate": "2025-05-08T14:51:28+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.6 Released!",
+              "link": "https://www.php.net/index.php#2025-04-10-3",
+              "pubDate": "2025-04-10T21:09:01+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.20 Released!",
+              "link": "https://www.php.net/index.php#2025-04-10-2",
+              "pubDate": "2025-04-10T15:56:49+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Core Undergoes Security Audit – Results Now Available",
+              "link": "https://www.php.net/index.php#2025-04-10-1",
+              "pubDate": "2025-04-10T11:59:24+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Conference Odawara 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-03-14-1",
+              "pubDate": "2025-03-14T00:24:54+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.2.28 Released!",
+              "link": "https://www.php.net/index.php#2025-03-13-5",
+              "pubDate": "2025-03-13T16:51:14+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.1.32 Released!",
+              "link": "https://www.php.net/index.php#2025-03-13-4",
+              "pubDate": "2025-03-13T16:02:34+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.5 Released!",
+              "link": "https://www.php.net/index.php#2025-03-13-3",
+              "pubDate": "2025-03-13T14:47:07+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHPKonf 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-03-13-1",
+              "pubDate": "2025-03-13T12:52:07+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.19 Released!",
+              "link": "https://www.php.net/index.php#2025-03-13-1",
+              "pubDate": "2025-03-13T13:48:14+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.17 Released!",
+              "link": "https://www.php.net/index.php#2025-02-13-2",
+              "pubDate": "2025-02-13T18:53:19+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.4 Released!",
+              "link": "https://www.php.net/index.php#2025-02-13-1",
+              "pubDate": "2025-02-13T17:59:36+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Laravel Live Denmark 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-02-09-1",
+              "pubDate": "2025-01-09T00:00:00+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Velho Oeste 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-01-31-1",
+              "pubDate": "2025-01-31T15:00:00+03:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP Tek 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-01-28-1",
+              "pubDate": "2025-01-28T21:35:08+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHPerKaigi 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-01-17-2",
+              "pubDate": "2025-01-17T14:42:59+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.3 Released!",
+              "link": "https://www.php.net/index.php#2025-01-17-1",
+              "pubDate": "2025-01-17T01:15:24+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.3.16 Released!",
+              "link": "https://www.php.net/index.php#2025-01-16-1",
+              "pubDate": "2025-01-16T16:36:10+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "API Platform Conference 2025",
+              "link": "https://www.php.net/conferences/index.php#2025-01-13-1",
+              "pubDate": "2025-01-13T14:56:53+00:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "Web Summer Camp 2025",
+              "link": "https://www.php.net/conferences/index.php#2024-12-31-1",
+              "pubDate": "2024-12-31T15:56:51+01:00",
+              "summary": "",
+              "score": null
+            },
+            {
+              "title": "PHP 8.4.2 Released!",
+              "link": "https://www.php.net/index.php#2024-12-19-3",
+              "pubDate": "2024-12-19T16:53:11+00:00",
+              "summary": "",
+              "score": null
+            }
+          ],
+          "error": null
+        },
+        {
+          "name": "Reddit r/PHP",
+          "url": "https://www.reddit.com/r/PHP/.rss",
+          "articles": [
+            {
+              "title": "Weekly help thread",
+              "link": "https://www.reddit.com/r/PHP/comments/1uik0vc/weekly_help_thread/",
+              "pubDate": "2026-06-29T06:00:07+00:00",
+              "summary": "Hey there! This subreddit isn't meant for help threads, though there's one exception to the rule: in this thread you can ask anything you want PHP related, someone will probably be able to help you out! submitted by /u/brendt_gd [link] [comments]",
+              "score": null
+            },
+            {
+              "title": "Pitch Your Project 🐘",
+              "link": "https://www.reddit.com/r/PHP/comments/1u9vul4/pitch_your_project/",
+              "pubDate": "2026-06-19T08:00:29+00:00",
+              "summary": "In this monthly thread you can share whatever code or projects you're working on, ask for reviews, get people's input and general thoughts, … anything goes as long as it's PHP related. Let's make this a place where people are encouraged to share their work, and where we can learn from each other 😁 L",
+              "score": null
+            },
+            {
+              "title": "I tried FrankenPHP on our (externally heavy I/O) workload and it wasn't worth it",
+              "link": "https://www.reddit.com/r/PHP/comments/1uo3nj1/i_tried_frankenphp_on_our_externally_heavy_io/",
+              "pubDate": "2026-07-05T14:31:06+00:00",
+              "summary": "I spent a few hours playing around with FrankenPHP on a fleet of servers that run as a microservice, their sole purpose was getting a request in, making external calls to 3rd party APIs/websites, and returning the result (the kind of microservice that should really be rewritten in something like Gol",
+              "score": null
+            },
+            {
+              "title": "PHP 8.5.8 and 8.4.23 are out - important fixes",
+              "link": "https://www.reddit.com/r/PHP/comments/1unz2iw/php_858_and_8423_are_out_important_fixes/",
+              "pubDate": "2026-07-05T10:46:39+00:00",
+              "summary": "PHP pushed maintenance releases for its two active development branches on July 1–2, 2026. PHP 8.5.8 and 8.4.23 are out. Neither is a major feature release, but they fix issues that can cause real harm to production servers. If you’re hosting PHP applications, patch now. https://blog.kalfaoglu.net/p",
+              "score": null
+            },
+            {
+              "title": "I built a static analysis tool that finds require_once statements your Composer autoloader already covers",
+              "link": "https://www.reddit.com/r/PHP/comments/1unb59g/i_built_a_static_analysis_tool_that_finds_require/",
+              "pubDate": "2026-07-04T14:56:40+00:00",
+              "summary": "Working on legacy codebases, I kept running into the same thing: hundreds of require_once statements that predate Composer, still sitting there years after autoloading was set up. Deleting them by hand means answering \"is this class actually autoloadable?\" for every single line — so nobody does it. ",
+              "score": null
+            },
+            {
+              "title": "Ran real PHP applications as TypeScript on Bun 1.3.14; migration from Node was mostly a non-event",
+              "link": "https://www.reddit.com/r/PHP/comments/1uny9xz/ran_real_php_applications_as_typescript_on_bun/",
+              "pubDate": "2026-07-05T09:59:06+00:00",
+              "summary": "submitted by /u/Typical_Ad_6436 [link] [comments]",
+              "score": null
+            },
+            {
+              "title": "AI insulted my ancient PHP code 😁",
+              "link": "https://www.reddit.com/r/PHP/comments/1ummelz/ai_insulted_my_ancient_php_code/",
+              "pubDate": "2026-07-03T18:36:04+00:00",
+              "summary": "A couple of years ago I posted about an old website that I coded in the early-mid 2000s and wanted to start up again via some ancient unmaintained Docker containers. The main conclusion of that thread was that it might be possible to resurrect it with some work, but that it would be better to just (",
+              "score": null
+            },
+            {
+              "title": "I set out to argue against deprecating PHP's metaphone(). Then I read the RFC.",
+              "link": "https://www.reddit.com/r/PHP/comments/1umec1h/i_set_out_to_argue_against_deprecating_phps/",
+              "pubDate": "2026-07-03T13:21:13+00:00",
+              "summary": "A while back an RFC landed on internals to deprecate metaphone() . My first reaction was the reflex of an old release master: leave the legacy string functions alone, people depend on them, deprecation churn is its own tax. I was ready to argue against it. Then I read the reasoning and looked at wha",
+              "score": null
+            },
+            {
+              "title": "I built a Laravel-inspired framework for structuring WordPress plugins: Nikogin (open source)",
+              "link": "https://www.reddit.com/r/PHP/comments/1un8xnf/i_built_a_laravelinspired_framework_for/",
+              "pubDate": "2026-07-04T13:20:41+00:00",
+              "summary": "submitted by /u/PhPWellphant [link] [comments]",
+              "score": null
+            },
+            {
+              "title": "I built a small PHP package for reversible text transformations",
+              "link": "https://www.reddit.com/r/PHP/comments/1umgdsn/i_built_a_small_php_package_for_reversible_text/",
+              "pubDate": "2026-07-03T14:44:31+00:00",
+              "summary": "submitted by /u/Omar_Ess [link] [comments]",
+              "score": null
+            },
+            {
+              "title": "PhpStorm Light — experimental lightweight build",
+              "link": "https://www.reddit.com/r/PHP/comments/1ulsbav/phpstorm_light_experimental_lightweight_build/",
+              "pubDate": "2026-07-02T19:39:47+00:00",
+              "summary": "submitted by /u/thejoyofbeing1 [link] [comments]",
+              "score": null
+            },
+            {
+              "title": "I built a modern, open-source PHP code obfuscator (YakPro alternative)",
+              "link": "https://www.reddit.com/r/PHP/comments/1un6wqt/i_built_a_modern_opensource_php_code_obfuscator/",
+              "pubDate": "2026-07-04T11:41:31+00:00",
+              "summary": "About four months ago, my release pipeline suddenly broke because the official repository for YakPro Obfuscator simply vanished. I was looking for a simple, effective way to add a layer of protection to my suite of AI-driven WordPress plugins before distributing them. I didn't want to rely on someth",
+              "score": null
+            },
+            {
+              "title": "I Updated My Database Backup Guide with a Config Generator Tool. Perfect for self hosted PHP sites",
+              "link": "https://www.reddit.com/r/PHP/comments/1uljidk/i_updated_my_database_backup_guide_with_a_config/",
+              "pubDate": "2026-07-02T14:15:34+00:00",
+              "summary": "I refreshed my most-read article on automated database backups with Docker Compose. The underlying image moved to nfrastack/container-db-backup, so I updated the whole guide with the new multi-job config format. I also built a little JavaScript configurator that generates docker-compose and .env fil",
+              "score": null
+            },
+            {
+              "title": "plPHP v2.0 released",
+              "link": "https://www.reddit.com/r/PHP/comments/1ul6663/plphp_v20_released/",
+              "pubDate": "2026-07-02T02:55:01+00:00",
+              "summary": "PL/php is a procedural-language handler that lets you write database functions in PHP , stored and executed inside PostgreSQL. You get the convenience of PHP's standard library with the full power of a native PostgreSQL function — plain functions, set-returning functions, triggers, event triggers, a",
+              "score": null
+            },
+            {
+              "title": "Bulk-inserting users with batched PDO upserts",
+              "link": "https://www.reddit.com/r/PHP/comments/1ulvt0x/bulkinserting_users_with_batched_pdo_upserts/",
+              "pubDate": "2026-07-02T21:53:59+00:00",
+              "summary": "Chunk a large array into batches and upsert each with a single prepared multi-row INSERT. Three takeaways Chunking huge datasets keeps each SQL statement within safe placeholder and packet limits. A single multi-row INSERT is far faster than one query per record. ON DUPLICATE KEY UPDATE turns an ins",
+              "score": null
+            },
+            {
+              "title": "This Week in PHP Internals | July 1, 2026",
+              "link": "https://www.reddit.com/r/PHP/comments/1ukuuo6/this_week_in_php_internals_july_1_2026/",
+              "pubDate": "2026-07-01T19:06:30+00:00",
+              "summary": "Hello world, it's Canada Day 2026, and here's what happened This Week in PHP Internals. This week's episode is supported by OurCVEs . Hundreds of CVEs ship every week, and almost none of them are about you — until one is. OurCVEs inventories your entire infrastructure and only surfaces the security ",
+              "score": null
+            },
+            {
+              "title": "I've made a lightweight alternative to Laragon",
+              "link": "https://www.reddit.com/r/PHP/comments/1ulwplz/ive_made_a_lightweight_alternative_to_laragon/",
+              "pubDate": "2026-07-02T22:29:47+00:00",
+              "summary": "Here are two tailored posts — one for r/php, one for r/laravel. Same product, different angle for each community. r/php Title DevTent v1.1 — open-source Windows stack for PHP local dev (Nginx/Apache, MySQL, mkcert SSL, Laragon import) Body TL;DR: I built DevTent — a free, open-source local PHP devel",
+              "score": null
+            },
+            {
+              "title": "There are now over 60 free and open source NativePHP Mobile Plugins 🔥",
+              "link": "https://www.reddit.com/r/PHP/comments/1ukiegd/there_are_now_over_60_free_and_open_source/",
+              "pubDate": "2026-07-01T10:58:48+00:00",
+              "summary": "Since NativePHP Mobile went free and open source back in February, the community have been busy building all sorts of plugins. Which is really exciting! It shows demand and growth of the tool. And with what we're about to release next month, it's looking set to get even more exciting. Thanks to ever",
+              "score": null
+            },
+            {
+              "title": "Meet TYPO3: Supporting the Open-Source Foundation of Its Ecosystem",
+              "link": "https://www.reddit.com/r/PHP/comments/1ukmet4/meet_typo3_supporting_the_opensource_foundation/",
+              "pubDate": "2026-07-01T13:55:56+00:00",
+              "summary": "Welcome TYPO3 as a Silver Sponsor of the PHP Foundation! PHP has been at the foundation of TYPO3 for more than two decades. By supporting the PHP Foundation, TYPO3 is helping strengthen the security, stability, and continued development of the language its open-source ecosystem is built on. We also ",
+              "score": null
+            },
+            {
+              "title": "I spent two years rebuilding Azure Storage for PHP after Microsoft dropped it",
+              "link": "https://www.reddit.com/r/PHP/comments/1ujvncg/i_spent_two_years_rebuilding_azure_storage_for/",
+              "pubDate": "2026-06-30T17:28:01+00:00",
+              "summary": "Two years ago Microsoft retired the Azure Storage PHP client libraries , which left PHP developers in an awkward spot. So instead of treating Azure in PHP as a dead end, I started rebuilding the missing pieces as community-maintained packages. Since then I’ve shipped replacements for: microsoft/azur",
+              "score": null
+            },
+            {
+              "title": "Breaking into the remote EU/US market as a Laravel dev. Where should I be looking?",
+              "link": "https://www.reddit.com/r/PHP/comments/1ulb85p/breaking_into_the_remote_euus_market_as_a_laravel/",
+              "pubDate": "2026-07-02T07:20:35+00:00",
+              "summary": "​I have been working with Laravel for a while. Most recently, I finished a large-scale SaaS project as a freelancer, which gave me solid experience with production environments and real business logic. Now I am looking for a full-time remote role in the EU or US market. submitted by /u/Level-Expert2",
+              "score": null
+            },
+            {
+              "title": "The spectrum of multi-tenant data isolation (and why \"database per tenant\" is usually overkill)",
+              "link": "https://www.reddit.com/r/PHP/comments/1uklmsg/the_spectrum_of_multitenant_data_isolation_and/",
+              "pubDate": "2026-07-01T13:24:23+00:00",
+              "summary": "Framework-agnostic write-up on the different ways to isolate tenant data. Separate instance, separate database, schemas/prefixes, partitioning and a discriminator column. Includes the tradeoffs of each, and how they differ across Postgres, MySQL/MariaDB and SQLite. The thesis: most apps reach for th",
+              "score": null
+            },
+            {
+              "title": "PHP AOT Compiler written in PHP",
+              "link": "https://www.reddit.com/r/PHP/comments/1uiumkc/php_aot_compiler_written_in_php/",
+              "pubDate": "2026-06-29T14:49:51+00:00",
+              "summary": "In recent months, I have noticed that more and more people are making attempts to create PHP AOT compilers. In particular, recent ones are Elephc ( https://elephc.dev/ ) and TypePHP from the Swoole team (mentioned here several times). Years earlier, I recall attempts such as jPHP and Peachpie, and t",
+              "score": null
+            },
+            {
+              "title": "Composer in Docker: best practices for production images",
+              "link": "https://www.reddit.com/r/PHP/comments/1uipydy/composer_in_docker_best_practices_for_production/",
+              "pubDate": "2026-06-29T11:34:36+00:00",
+              "summary": "I published this guide today, which explains some of the best practices for building production-ready Docker images for your PHP applications which use Composer to install dependencies. This includes using Composer without leaving the binary in your production image, running the composer install com",
+              "score": null
+            },
+            {
+              "title": "The unreachable method",
+              "link": "https://www.reddit.com/r/PHP/comments/1uk14cw/the_unreachable_method/",
+              "pubDate": "2026-06-30T20:46:49+00:00",
+              "summary": "So, it seems that it is possible to paint oneself in a corner and write an unreachable method. How would you call A::foo() in this code below? Come on, #PHP , there must be something here. #phptip #phptrick ``` abstract class A { private function foo() { print CLASS ; } } abstract class B extends A ",
+              "score": null
+            }
+          ],
+          "error": null
+        },
+        {
+          "name": "php[architect]",
+          "url": "https://www.phparch.com/feed/",
+          "articles": [
+            {
+              "title": "The PHP Podcast 2026.07.02",
+              "link": "https://www.phparch.com/podcast/the-php-podcast-2026-07-02/",
+              "pubDate": "Fri, 03 Jul 2026 01:59:39 +0000",
+              "summary": "🎙️ PHP Podcast – July 2, 2026 Hosts: Eric Van Johnson & John Congdon Eric’s new laptop won’t share its screen. John lost a fight with a leaf blower. PHP 8.6 alpha dropped. 100+ people showed up to make PHP seem cool again. Normal show. 🖥️ Eric’s Fresh Install and the Screen That Wouldn’t Share […] T",
+              "score": null
+            },
+            {
+              "title": "PHP Checkup – Keeping Your Applications Healthy in 2026",
+              "link": "https://www.phparch.com/magazine/2026/06/2026-06-php-checkup-keeping-your-applications-healthy-in-2026/",
+              "pubDate": "Thu, 02 Jul 2026 22:14:41 +0000",
+              "summary": "June has a way of focusing the mind. The conference season has wound down, the hallway conversations and late-night discussions at WurstCon have settled into plans, and now it’s time to build — carefully, thoughtfully, and with an eye toward what happens when real users and real data show up. This m",
+              "score": null
+            },
+            {
+              "title": "How to run multiple AI agents in parallel with git worktrees",
+              "link": "https://www.phparch.com/2026/07/how-to-run-multiple-ai-agents-in-parallel-with-git-worktrees/",
+              "pubDate": "Thu, 02 Jul 2026 15:00:53 +0000",
+              "summary": "Video version: https://youtu.be/uVKXmqYVjpQ One of the more powerful features of AI-assisted development is that you can put multiple AI coding agents to work simultaneously with little effort. For example, you might have one building a new feature, one cleaning up an old API endpoint, and a third d",
+              "score": null
+            },
+            {
+              "title": "MySQL Recursive CTEs for PHP Developers: Querying Hierarchical Data Without the Pain",
+              "link": "https://www.phparch.com/2026/07/mysql-recursive-ctes-for-php-developers-querying-hierarchical-data-without-the-pain/",
+              "pubDate": "Wed, 01 Jul 2026 15:43:39 +0000",
+              "summary": "Recursive CTEs in MySQL let you query trees, org charts, and nested categories in a single query. Here’s how to use them effectively with PHP. Every PHP developer eventually hits the “tree problem.” You have categories with subcategories, employees with managers, comments with replies, or menu items",
+              "score": null
+            },
+            {
+              "title": "Laravel Prompts TUI Guide",
+              "link": "https://www.phparch.com/2026/06/laravel-prompts-tui-guide/",
+              "pubDate": "Tue, 30 Jun 2026 00:02:57 +0000",
+              "summary": "Terminal UIs have had a quiet renaissance in the developer tools world. From Lazygit to btop, the era of the ugly text-only CLI is giving way to rich, interactive interfaces built entirely in the terminal. PHP developers have historically been left out of this movement — our CLI tooling was function",
+              "score": null
+            },
+            {
+              "title": "MySQL JSON Columns",
+              "link": "https://www.phparch.com/2026/06/mysql-json-columns/",
+              "pubDate": "Sat, 27 Jun 2026 17:54:32 +0000",
+              "summary": "MySQL’s JSON column type has been around since version 5.7, but it’s one of those features where the gap between “I know it exists” and “I know when and how to use it well” is surprisingly wide. Used correctly, JSON columns give you schema flexibility exactly where you need it. Used poorly, they bec",
+              "score": null
+            },
+            {
+              "title": "The PHP Podcast 2026.06.25",
+              "link": "https://www.phparch.com/podcast/the-php-podcast-2026-06-25/",
+              "pubDate": "Fri, 26 Jun 2026 02:05:32 +0000",
+              "summary": "🎙️ PHP Podcast – June 25, 2026 Hosts: Eric Van Johnson & John Congdon Eric and John are back. Sara and Holly did a better job. Eric’s computer still hates him. 🔌 Eric’s Connectivity Saga: A Possible Resolution For weeks, Eric has been dealing with a maddening streaming issue — he could see and hear ",
+              "score": null
+            },
+            {
+              "title": "Claude Code for PHP Developers",
+              "link": "https://www.phparch.com/2026/06/claude-code-for-php-developers/",
+              "pubDate": "Thu, 25 Jun 2026 16:00:58 +0000",
+              "summary": "If you’ve been hearing about Claude Code but assumed it’s mostly for the JavaScript and Python crowd, it’s time to take another look. Claude Code is a command-line AI coding tool that works directly in your terminal, and it’s remarkably effective for PHP development. Whether you’re building with Lar",
+              "score": null
+            },
+            {
+              "title": "Asterisk 22.10 Breaks Record App",
+              "link": "https://www.phparch.com/2026/06/asterisk-22-10-breaks-record-app/",
+              "pubDate": "Wed, 24 Jun 2026 18:03:31 +0000",
+              "summary": "I have been using Asterisk for many, many years. Today I release some new code, and upon code release we automatically update Asterisk to the latest version. All of a sudden, I started getting reports from customer service letting me know that recording voice mails was no longer working. I started l",
+              "score": null
+            },
+            {
+              "title": "Community Corner: Spec-Driven Development with Holly Schilling",
+              "link": "https://www.phparch.com/podcast/community-corner-spec-driven-development-with-holly-schilling/",
+              "pubDate": "Wed, 24 Jun 2026 14:55:55 +0000",
+              "summary": "﻿ In this episode, Scott talks Holly Schilling about her work on the php tek 2026 mobile app and spec-driven development. Links: Our Discord – https://discord.gg/aMTxunVx Buy our shirts – https://store.phparch.com/products/community-corner-podcast-t-shirt Holly’s Links: Discord: TheCodeLorax Mastodo",
+              "score": null
+            }
+          ],
+          "error": null
+        },
+        {
+          "name": "Google News – PHP Laravel",
+          "url": "https://news.google.com/rss/search?q=PHP%20Laravel%20Symfony%20backend%20web%20development%202026&hl=en&gl=US&ceid=US:en",
+          "articles": [
+            {
+              "title": "10 best Laravel alternatives for web app development - Hostinger",
+              "link": "https://news.google.com/articles/CBMiZ0FVX3lxTFBxYl9Fc3M1T3ZwSHZjMkpGX1A4bWs0bFAyMHlzd1hyZHJxaXNXeFlFMktfd1phV3VXNTlvd0prSHFGWi05UkN3S1JXOXo4eEJQU1g5SWRudjdwd1dNc2xvZ2lwT1R5eXc",
+              "pubDate": "Fri, 29 May 2026 07:00:00 GMT",
+              "summary": "10 best Laravel alternatives for web app development Hostinger",
+              "score": null
+            },
+            {
+              "title": "Best PHP frameworks for beginners to pro developers in 2026 - Hostinger",
+              "link": "https://news.google.com/articles/CBMiaEFVX3lxTE5xd3o0cWZCRktOa3FYN2xJZ0hyM01QWWkyZ2ozT0hwTUlSWUZxR1pkcExMRmFFblhYTWV0R19vSmFIai0ta1l1clc3OWtxQlkyTDRTTWlEaGNjVUpzbjJUcG1jcFRmdVp3",
+              "pubDate": "Tue, 10 Mar 2026 07:00:00 GMT",
+              "summary": "Best PHP frameworks for beginners to pro developers in 2026 Hostinger",
+              "score": null
+            },
+            {
+              "title": "Most used web frameworks among developers worldwide, as of 2025 - Statista",
+              "link": "https://news.google.com/articles/CBMinAFBVV95cUxOLTlQLTFZeW16TTVWRzlaaVpWaTVYYldVMEROcThRXy1JekoyMHFWSnd4cWNYcFhTTVVtTGJFejh3d2MyaVVwSEdILWVmc250cDZEWks0eEE1bjZIZ0JCZzc3WUg1V2lYeEs2X19oWXNxQUVsTmlQdVlucG5objFOQVAwLVVjVnZkZHJ4a3JWU01HcXFObWxLaDREM2o",
+              "pubDate": "Tue, 06 Jan 2026 08:00:00 GMT",
+              "summary": "Most used web frameworks among developers worldwide, as of 2025 Statista",
+              "score": null
+            },
+            {
+              "title": "The 8 Leading Portal Development Companies for 2026 - Netguru",
+              "link": "https://news.google.com/articles/CBMiaEFVX3lxTE5RcVZ0TjZyNVF5NExuUUc0QmJPTGVwTV9NU1ozMjBjY1llSFpjblZBLU16VVVEc2l6RFZJUWpoUXZMNHNOZWszcHBJZ3BtUDhhQ2dsVWdJYndfREVIQy0zNHNmR3dDa2tj",
+              "pubDate": "Mon, 18 May 2026 07:00:00 GMT",
+              "summary": "The 8 Leading Portal Development Companies for 2026 Netguru",
+              "score": null
+            },
+            {
+              "title": "8 Best AI for PHP: Top Tools for Faster Development - Zencoder",
+              "link": "https://news.google.com/articles/CBMiUkFVX3lxTE0zTTJJbFdwSVVoTUEyeFNLT291emtLMWRpOExmS2ZNSVBtUV94MnFUWFRGbENpRTk3eWQ0SzZuTjVpY185M1FuQ2Q1VkVKYmZUU1HSAWJBVV95cUxPMWtOMldLM1VUeXQ1ZEhhaTBjUWFMODhidWZia0NEN2pCNFcxaVdob1g4dEUtSm45UDIwaERMdGtYR0hsZzExbWhVUnBWWk03ZU1Ecy1qT2ZHaF81QTRwN0owdw",
+              "pubDate": "Wed, 15 Oct 2025 07:00:00 GMT",
+              "summary": "8 Best AI for PHP: Top Tools for Faster Development Zencoder",
+              "score": null
+            },
+            {
+              "title": "Top Laravel Interview Questions and Answers for 2026 - Simplilearn.com",
+              "link": "https://news.google.com/articles/CBMie0FVX3lxTE0zSWhWYnBYS0ZveDFrT1Q0LURFUnNsczhQQTdieFRKblRDdDhENTUtOFpFamxZTUo5djRaQkxqbVZEUExaYWVOVTVWQnU1UV9xRkFsY1hFMThDSlJhVnI3MWZJbnRiMFFlUS1UclpNUHVKRHByUlJBV1Z2QQ",
+              "pubDate": "Fri, 29 May 2026 07:00:00 GMT",
+              "summary": "Top Laravel Interview Questions and Answers for 2026 Simplilearn.com",
+              "score": null
+            },
+            {
+              "title": "Top 10 best programming languages to learn in 2026 - Hostinger",
+              "link": "https://news.google.com/articles/CBMie0FVX3lxTE1PR3NJV0NVd29XTm5WZzI2VGlXQ3hTRmVSOXNYd2ZDZDVxaFJOak1iZmZmRHlrWUJXYWhhWVYxbjh6Y2llZGN3YWJ3VElFQ210YlFIdS1RQlFpcWNOdmd4NVdFVlJHLUsyRlZGRi00dTI0eHpOenBvOTFNcw",
+              "pubDate": "Tue, 13 Jan 2026 08:00:00 GMT",
+              "summary": "Top 10 best programming languages to learn in 2026 Hostinger",
+              "score": null
+            },
+            {
+              "title": "Integrating AI in PHP Development: The Ultimate Guide for 2025 - Vocal",
+              "link": "https://news.google.com/articles/CBMijAFBVV95cUxPcEdmMV9aaV9SbXlxa2VUejJzeWljYjJtc2tPdkZGcTd3MlRZWG1jM09NbDFxUmRlbjdwZm1MdWVIRGtFc0tONnNvNDEzRXdFdndIVEJWRTFIZkxQYmRDX3BYeWljUjdfOGhiQXY2N21VRHZfYW1jeG5VN0RCa3JuR0pyVGdUWVgzLW55WA",
+              "pubDate": "Fri, 10 Oct 2025 05:42:48 GMT",
+              "summary": "Integrating AI in PHP Development: The Ultimate Guide for 2025 Vocal",
+              "score": null
+            }
+          ],
+          "error": null
+        }
+      ]
+    }
+  ]
+}
