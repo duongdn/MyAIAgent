@@ -6,10 +6,11 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-06T05:02:00+07:00",
+    "last_run": "2026-07-06T08:41:00+07:00",
     "output_file": "reports/2026-07-06/daily-report.md",
     "last_status": "complete",
     "caveats": [
+      "Recheck 08:41 Jul-6: Elliott completed (Generator RSVP was project topic, not person-status alert, Violet had activity). Philip completed (precise MS Teams disambiguation via 'Six Star Rentals' subtitle click, verified pbriggs@sixstarrentals.com.au — last msg our own Jul 1 outreach, no reply, no complaint). Matrix token refreshed (matrix-login.js SSO). Workstream re-login succeeded: KhanhHH 8h (Baamboozle 6.5+Generator 1.5) + LeNH 8h (James Diamond) confirmed worked Jul 3 — false alarms cleared. PhucVT 0h Jul 3 CONFIRMED real (no leave note) — genuine alert, reminder pending send. LongVV week total 18h/16h target OK. Fountain plan corrected: trinhmtt revised VuTQ 8h->12h + QC 22h->22.5h on Jul 3 12:01 (missed by earlier cron read) -> capacity 92h/wk not 88h/wk, runway 2.49wk not 2.60wk. Check Progress Trello card: all 20 items complete, card marked done. Upwork Rory/Neural/Aysar still session-expired (CAPTCHA blocks headless retry) but Trello items already complete per silence-never-blocks policy.",
       "LeNH 0h Jul 2 RESOLVED 09:44 (user requested weekly check): live Workstream shows 8h that day (Peptide Clyde 4h + Portfolio-James Diamond 4h), backfilled after WS access granted ~14:06. Week total 32.2h/32h target, on track. Same stale-Sheets-not-live-WS root cause as KhanhHH's miss. Original alert/reminder was NOT sent (print-only, no --send-reminder flag) so no false message went to LeNH.",
       "TuanNT 0h Jun 30 (Tue): NOT covered by the known Jul 1/2 hospitalization — genuinely unexplained, needs verification.",
       "Weekly hours check Jul 3 09:44 (user requested): LongVV 18h/16h OK, PhucVT 28h/32h (explained, DuongDN's reassignment), TuanNT 8h/32h (hospital Jul1-2 + unexplained Jun30), KhanhHH 31h/32h OK, LeNH 32.2h/32h OK (see resolution above).",
@@ -191,7 +192,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-06T05:02:00+07:00",
+    "last_run": "2026-07-06T08:41:00+07:00",
     "output_file": "reports/2026-07-06/daily-report.md"
   },
   "bailey-monitor": {
@@ -203,8 +204,9 @@
     "status": "ok"
   },
   "philip_msteams": {
-    "last_run": "2026-06-23T01:56:31.362Z",
-    "status": "complete"
+    "last_run": "2026-07-06T01:41:00.000Z",
+    "status": "complete",
+    "note": "Verified via precise DOM click on 'Six Star Rentals' subtitle (see feedback_philip_msteams_duplicate_contacts). Last customer msg still Jun 16; our own outreach sent Jul 1, no reply."
   },
   "neural_upwork": {
     "last_run": "2026-06-23T01:56:31.362Z",

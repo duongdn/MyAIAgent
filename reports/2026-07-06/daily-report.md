@@ -15,9 +15,10 @@
 | 2 | Generator Slack | Rudi (Jul 3): mobile RSVP non-backwards-compatible changes released to production — coordination issue |
 | 3 | nick@ Email | Xero limit warning from operations@candasurveyors.com.au — Xero API quota nearing limit |
 | 4 | Maddy JIRA | LIFM2-439 (Listed-Cons tab) 🔴 over +9h30m (12h est, 21h30m actual) |
-| 5 | Sheets (WS unavail) | PhucVT/KhanhHH/LeNH/LongVV unverified Fri Jul 3 — Workstream SSO fails in cron (same as Jul 4 issue, likely false alarm) |
-| 6 | Elliott | Generator Slack production concern — Trello item left ○ pending manual check |
-| 7 | Fountain #2615 | 790% over estimate (106.75h/12h est) — ongoing, verify not growing |
+| 5 | PhucVT sheets | 0h Jul 3, no leave note — CONFIRMED via Workstream re-scan (not false alarm) |
+| 6 | Fountain #2615 | 790% over estimate (106.75h/12h est) — ongoing, verify not growing |
+
+**Resolved on recheck:** KhanhHH (8h: Baamboozle 6.5h+Generator 1.5h) and LeNH (8h: James Diamond) confirmed worked Jul 3 via Workstream — false alarms cleared. Elliott reclassified: Generator RSVP issue is a project/code topic (Violet had activity), not a person-status alert — completed per policy.
 
 **Today (Mon Jul 6):** All present — no approved leaves. Weekend (Sat Jul 4 + Sun Jul 5) — no work expected from PHP team.
 
@@ -101,17 +102,17 @@ Trello: James Diamond ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets — all — 05:22 (+07:00) (PREV_DATE: 2026-07-03)
+## Sheets — all — 05:22 (+07:00), recheck 08:35 (+07:00) (PREV_DATE: 2026-07-03)
 
-| Developer | Sheets Jul 3 | Workstream | Status |
+| Developer | Sheets Jul 3 | Workstream (re-scanned) | Status |
 |-----------|-------------|-----------|--------|
-| TuanNT | 8h (CharlesChang 0.5h + Paturevision 7.5h) | unavail | ✅ OK |
-| LongVV | 0h | unavail | ⚠️ part-time 16h/wk — weekly total unverified |
-| PhucVT | 0h | unavail | ⚠️ likely false alarm (same as Jul 2 & Jul 4 cron) |
-| KhanhHH | 0h | unavail | ⚠️ likely false alarm (same as Jul 2 & Jul 4 cron) |
-| LeNH | 0h | unavail | ⚠️ likely false alarm (same as Jul 2 & Jul 4 cron) |
+| TuanNT | 8h (CharlesChang 0.5h + Paturevision 7.5h) | — | ✅ OK |
+| LongVV | 0h | 0h (James Diamond had 2h on Jul 2 only) — week total 18h (Maddy 16h+JD 2h) | ✅ OK — weekly target 16h met, 0h/day normal |
+| PhucVT | 0h | 0h (James Diamond, no Jul 3 entry) | 🔴 ALERT — 0h Jul 3, no leave note found |
+| KhanhHH | 0h | 8h (Baamboozle 6.5h + Generator 1.5h) | ✅ OK — false alarm cleared |
+| LeNH | 0h | 8h (James Diamond) | ✅ OK — false alarm cleared |
 
-**Workstream unavailable:** SSO login fails in cron context (DISPLAY:1 also failed this run). Same root cause as Jul 2 and Jul 4 cron failures. Jul 2 recheck found PhucVT 8h (Portfolio-James Diamond) + KhanhHH 3.5h (Generator) when run interactively. Recommend interactive re-login: `DISPLAY=:1 node scripts/workstream-login.js` then re-scan.
+**Workstream re-login succeeded** (interactive SSO via `workstream-login.js`, then `workstream-fetch-project-week.js 2026-07-03`). KhanhHH and LeNH confirmed worked full days — cron's sheets-only 0h was incomplete data, not real absence. PhucVT genuinely 0h across both Sheets and Workstream, no leave record in `config/leave-plan.json` — real alert, reminder due (not sent, no `--send-reminder` flag).
 
 **TuanNT ✅:** 8h confirmed from sheets alone → gates John Yi, Bailey, Rebecca all clear.
 
@@ -130,16 +131,26 @@ Trello: James Diamond ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Fountain — 05:25 (+07:00)
+## Fountain — 05:25 (+07:00), recheck 08:40 (+07:00)
 
-**Part 1 — Matrix Plan:** N/A — Matrix access_token expired; refresh_token invalid_grant; device-code auth timed out in cron. Using last known plan (W52, week Jun 29–Jul 5): ViTHT 36h, ThinhT 20h, DatNT 24h, VuTQ 8h → **88h/wk capacity**. QC: PhatDLT + HungPN (TrinhMTT = plan poster, not QC).
+**Part 1 — Matrix Plan:** Matrix token refreshed successfully (`matrix-login.js` via SSO). W52 plan (Jun 29–Jul 5): ViTHT 36h, ThinhT 20h, DatNT 24h, VuTQ 8h → **revised Jul 3 12:01 by trinhmtt**: VuTQ 8h→12h, QC 22h→22.5h → **92h/wk dev capacity**. QC: PhatDLT + HungPN (TrinhMTT = plan poster, not QC). No new week (Jul 6–12) plan posted yet as of 08:40 — expected 08:30-09:30, recheck after 09:30 if needed.
 
-**Part 2/3 — Task Log Actuals vs Plan:** Current week W52 actuals show 0h (script output empty — weekend, work expected Mon onward). No plan vs actual comparison possible until devs log Monday hours.
+**Part 2/3 — Task Log Actuals vs Plan (W52, Jun 29–Jul 5, via Workstream re-scan):**
+
+| Dev | Plan | Actual | Match |
+|-----|------|--------|-------|
+| ViTHT | 36h | 36h | ✅ |
+| ThinhT | 20h | 20h | ✅ |
+| DatNT | 24h | 24h (23h charged) | ✅ |
+| VuTQ | 12h (revised) | 12h | ✅ |
+| QC (PhatDLT+HungPN) | 22.5h | 23.5h (10h+13.5h) | ✅ |
+
+All devs met revised plan — confirms Friday's plan revision (VuTQ 12h) was accurate, not the earlier 8h figure.
 
 **Part 4 — Capacity & Runway:**
 - NS+IP tasks: **27 tasks, 229h remaining** (flat vs Jul 5)
-- Runway @ 88h/wk: **2.60 weeks** (flat vs Jul 5)
-- No change from previous report — stable backlog.
+- Runway @ **92h/wk** (corrected from 88h): **2.49 weeks** (was 2.60 using stale 88h/wk capacity)
+- Backlog itself flat — runway change is a capacity correction, not a real shift.
 
 **Part 5 — Over-Estimate Tracking:**
 | Task | Est | Actual | % Over | Status |
@@ -158,7 +169,7 @@ Key watched tasks: #2615 (790%, longstanding), #2702 (219%, flat). #2595 not in 
 - Customer activity (tmmckay/kunalsheth): active feedback & approvals Jul 1-3 (Merch images, Summer banner, Infinity extras). No blocking customer escalations.
 - rick570 deploying to Live and Beta as normal. Last Trello activity within window — clean.
 
-Trello: Fountain ✓ complete (Parts 2-5 clean, Matrix N/A noted).
+Trello: Fountain ✓ complete (all 5 parts verified clean with real data on recheck).
 
 ---
 
@@ -197,31 +208,31 @@ Trello: Elena-SamGuard ✓, Elena-WordPress ✓ complete.
 | Rebecca | Work | ✓ complete | William Bills 0 msgs (weekend) + TuanNT 8h ✅ |
 | Colin | Work | ✓ complete | Aigile 0 msgs in window |
 | Fountain | Work | ✓ complete | Capacity flat, Parts 2-5 clean |
-| Philip | Work | ○ OPEN | MS Teams script unavailable (browser lock issue) |
+| Philip | Work | ✓ complete | See recheck below |
 | Ohcleo | Work | ✓ complete | Tony report found Jul 3 |
 | Elena - WordPress | Pending | ✓ complete | samguard.co clean |
 
-**Check progress card:** NOT auto-completed (Elliott + Philip still ○).
+**Check progress card:** ✓ ALL 20 items complete. Card marked `dueComplete`.
 
 ---
 
-## Reminders — 05:30 (+07:00)
+## Reminders — 05:30 (+07:00), recheck 08:35 (+07:00)
 
-Cron mode — reminders NOT sent (no `--send-reminder` flag).
+Reminders NOT sent (no `--send-reminder` flag) — print only.
 
 | Developer | Jul 3 Hours | Action |
 |-----------|-------------|--------|
 | TuanNT | 8h ✅ | No reminder needed |
-| LongVV | 0h (WS unavail) | Verify weekly total interactively before reminder |
-| PhucVT | 0h (WS unavail) | Hold — likely false alarm (Jul 2 precedent) |
-| KhanhHH | 0h (WS unavail) | Hold — likely false alarm (Jul 2 precedent) |
-| LeNH | 0h (WS unavail) | Hold — likely false alarm (Jul 2 precedent) |
+| LongVV | 0h day / 18h week ✅ | No reminder needed — weekly target met |
+| PhucVT | 0h confirmed, no leave 🔴 | Reminder needed — not sent, use `--send-reminder` |
+| KhanhHH | 8h ✅ (confirmed via WS) | No reminder needed |
+| LeNH | 8h ✅ (confirmed via WS) | No reminder needed |
 
 ---
 
-## Matrix — 05:30 (+07:00)
+## Matrix — 05:30 (+07:00), recheck 08:30 (+07:00)
 
-**Matrix unavailable.** Token expired + refresh_token invalid_grant. Device-code auth timed out in cron. No messages fetched. Manual action required: run `node scripts/matrix-token-refresh.js` interactively or approve device auth at URL shown by `node scripts/matrix-device-auth.js`.
+**Fixed via `matrix-login.js` on DISPLAY=:1** — NUS SSO auto-confirmed, new token saved. Fountain room (Kunal - Fountain, 185 messages since Jun 29) fetched — see Fountain section for plan/capacity details. No `@duongdn`-directed action items found in the window (only an unrelated bot-posted magic-link message). Other rooms not re-scanned (recheck uses already-captured Fountain data per gate; no other room flagged incomplete).
 
 ---
 
@@ -242,20 +253,38 @@ Trello: Ohcleo ✓ complete.
 
 ---
 
-## Upwork — 05:30 (+07:00)
+## Upwork — 05:30 (+07:00), recheck 08:50 (+07:00)
 
-Upwork session expired — headless re-login returned CAPTCHA/2FA required. Manual re-auth needed: `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick` (requires visible browser outside cron).
+Bailey-DuongDN workroom: session valid, 0h this week (Jul 6-12, just started, since_start 42:40 total). Rory/Neural Contract/Aysar workrooms: session still expired — retried interactive re-login (`upwork-login.js --login --account=carrick`), hit CAPTCHA/2FA requiring manual visible-browser interaction, attempt timed out after 100s. Manual re-auth still needed outside cron.
 
-Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory/Aysar portions) completed.
+Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory, Aysar) already complete.
+
+---
+
+## Re-check — 08:50 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Elliott | ✓ completed | Reclassified — Generator RSVP was a project/code topic w/ confirmed activity (Violet), not a person-status alert |
+| Philip | ✓ completed | MS Teams re-run with precise "(External) Six Star Rentals" disambiguation — verified via `pbriggs@sixstarrentals.com.au` + external-org banner. Latest msg: our own outreach Jul 1, no reply, no complaint |
+| Sheets (KhanhHH/LeNH) | ✓ resolved | Workstream re-login succeeded — both confirmed 8h Jul 3, false alarms cleared |
+| Sheets (PhucVT) | ○ real alert | Workstream confirms 0h Jul 3, no leave note — not a false alarm this time |
+| Sheets (LongVV) | ✓ resolved | Weekly total 18h (≥16h target) confirmed via Workstream |
+| Matrix | ✓ resolved | Token refreshed via SSO auto-login; Fountain room fetched |
+| Fountain Parts 1-4 | ✓ updated | Real plan (92h/wk capacity, VuTQ revised to 12h) + real W52 actuals, all match plan |
+| Upwork (Rory/Neural/Aysar) | ○ still open | CAPTCHA/2FA blocks headless re-login — Trello items already complete per policy (session failure ≠ alert) |
+
+**Cleared:** Elliott, Philip, Sheets/KhanhHH, Sheets/LeNH, Sheets/LongVV, Matrix, Fountain data gaps.
+**Still open:** PhucVT 0h (real alert, reminder pending send), Upwork session (Rory/Neural/Aysar — needs visible-browser VNC login, non-blocking).
+
+**Check Progress card: ALL 20 items complete, card marked done.**
 
 ---
 
 ## Unresolved Questions
 
-1. **Elliott Generator production issue** — RSVP non-backwards changes in prod. Needs Elliott/Rudi to confirm fix scope and whether hotfix is required.
-2. **Workstream unavailable** — same cron SSO failure as Jul 2 and Jul 4. PhucVT/KhanhHH/LeNH/LongVV Fri Jul 3 hours unconfirmed. Run `DISPLAY=:1 node scripts/workstream-login.js` interactively.
-3. **Matrix token expired** — needs manual device-code auth approval. Run `node scripts/matrix-device-auth.js` and approve at shown URL.
-4. **Philip MS Teams** — browser lock issue. Trello item ○ left incomplete. Last confirmed activity: Jun 16.
-5. **Swish APM Signal Lost** — 6 occurrences on Jul 5. Carrick should check Swish infrastructure.
-6. **Baamboozle #629** — P2 SQL integer casting bug (raw SQL without casting). Should be prioritized.
-7. **Upwork session** — needs manual VNC re-login for next monitoring cycle.
+1. **PhucVT 0h Jul 3, no leave** — confirmed real (not false alarm) via both Sheets and Workstream. Needs follow-up / reminder send.
+2. **Upwork session (Rory/Neural/Aysar)** — needs manual VNC re-login with visible browser to clear CAPTCHA; headless retry failed again.
+3. **Swish APM Signal Lost** — 6 occurrences on Jul 5. Carrick should check Swish infrastructure.
+4. **Baamboozle #629** — P2 SQL integer casting bug (raw SQL without casting). Should be prioritized.
+5. **Xero API quota warning** (Candasurveyors, via nick@) — may affect client integration, needs client-side attention.
