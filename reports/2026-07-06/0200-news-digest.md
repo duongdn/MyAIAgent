@@ -33,13 +33,13 @@
 - [Kinh tế 6 tháng: TTCK VN kỳ vọng thêm nhiều động lực mới](https://news.google.com/articles/CBMisAFBVV95cUxOUVJTQkdJdENlREc1SDRjb0lyUUpUQ3kwd3NhZnduTEZOYzM4NzdIMlY1cUQxcU53SVZjbk55OWNYN1ZGOUVhcUU3dWxfS1JCcXM1WE5qSkhLbmNoNWNaOEZyVnh0WWVLaXNIam12VHFRS1pxZm5aUHJoSDRuVXRIRW00ZGdCbTFCU3g0X2NJbGg4WU1EYVZaWjJEalZvTEl4aXIxN2hxbkZNcENZbWNyTQ) — Nhìn lại 6 tháng và kỳ vọng vào quý III/2026.
 - [VN-Index khởi đầu quý III trong sắc xanh](https://news.google.com/articles/CBMiqgFBVV95cUxQUWRqOHpNSFkza0NxeU1qQm8yS0EzU1FIUTJkUjk2U0JhSEx2TGsyTUY5Tm5IcW9oTEV1WGpFREltOHpjNXRUU2ZKUjZ3a2hpRlNrM3hRUnJMZ1oyOWE3QTNxcmV5LTVreWZrRkFnM1o5NzJnMUQyOVdJTHlUTTliWEtkS1dyY1RzbnA4ZV9BS20yUV8wWUh2alJ0eGZwVUZJUjJ6c2tWTlF0dw) — Phiên giao dịch đầu quý III tích cực.
 - [Khối ngoại bán ròng mạnh, TTCK chờ xúc tác mùa BCTC quý II](https://news.google.com/articles/CBMiqgFBVV95cUxOa1ZSMVNMcU9KNWdCNU0yNEZqQ1Z1TjJQUmVWbzlXQU5aaTUwdnlsWXVqVVRXLUF3Wmg3YTNRd0IyaG8xZ2hMcEhZaWpseGRXQkdlazVHRDN6enVza1kyUjFobzZCekwwdXdxclEyVUhFTEVnODBOdUE0Y3VnSEZVM3RvVVJyZUZjbmhRSGNwbno2M0NIYU9vV2thQjlnb2pJaEVkWEJJOU1kQQ) — Khối ngoại tiếp tục rút ròng, thị trường thiếu động lực bứt phá.
-- [Khối ngoại bán ròng gần 80.000 tỷ đồng trong H1/2026](https://news.google.com/articles/CBMiygFBVV95cUxNcWtpN19qby01UTd6bDhZQ1ZFbnA4WXR) — Xu thế rút vốn ngoại kéo dài cả nửa năm.
+- [Khối ngoại bán ròng gần 80.000 tỷ đồng trong H1/2026](https://news.google.com/search?q=Kh%E1%BB%91i%20ngo%E1%BA%A1i%20b%C3%A1n%20r%C3%B2ng%20g%E1%BA%A7n%2080.000%20t%E1%BB%B7%20%C4%91%E1%BB%93ng%20trong%20H1/2026&hl=vi) — Xu thế rút vốn ngoại kéo dài cả nửa năm.
 
 **Google News – Cổ phiếu**
-- [Đón sóng lợi nhuận quý II: Cổ phiếu nào dẫn dắt thị trường?](https://news.google.com/articles/CBMirwFBVV95cUxPUjRzeS1WbU1GQVRteWZoZ2g4TklRNmpUaXNTRDVSYmJGLUdPSWhucmJ4O) — Phân tích cổ phiếu hưởng lợi từ mùa BCTC sắp tới.
-- [Cổ phiếu công ty CK vừa bị xử phạt lại tăng 10-20%](https://news.google.com/articles/CBMirwFBVV95cUxPUjRzeS1WbU1GQVRteWZoZ2g4TklRNmpUaXNTRDVSYmJGLUdPSWhucmJ4O) — Nghịch lý cổ phiếu tăng sau tin phạt.
-- [PNJ mất 2.200 tỷ vốn hóa trước sóng gió ngành kim cương](https://news.google.com/articles/CBMirwFBVV95cUxPUjRzeS1WbU1GQVRteWZoZ2g4TklRNmpUaXNTRDVSYmJGLUdPSWhucmJ4O) — Ngành kim cương toàn cầu biến động kéo theo PNJ.
-- [Làn sóng AI định hình lại thị trường tỷ giá hối đoái](https://news.google.com/articles/CBMiygFBVV95cUxNcWtpN19qby01UTd6bDhZQ1ZFbnA4WXR) — AI tác động đến cả thị trường forex.
+- [Đón sóng lợi nhuận quý II: Cổ phiếu nào dẫn dắt thị trường?](https://news.google.com/search?q=%C4%90%C3%B3n%20s%C3%B3ng%20l%E1%BB%A3i%20nhu%E1%BA%ADn%20qu%C3%BD%20II%3A%20C%E1%BB%95%20phi%E1%BA%BFu%20n%C3%A0o%20d%E1%BA%ABn%20d%E1%BA%AFt%20th%E1%BB%8B%20tr%C6%B0%E1%BB%9Dng%3F&hl=vi) — Phân tích cổ phiếu hưởng lợi từ mùa BCTC sắp tới.
+- [Cổ phiếu công ty CK vừa bị xử phạt lại tăng 10-20%](https://news.google.com/search?q=C%E1%BB%95%20phi%E1%BA%BFu%20c%C3%B4ng%20ty%20CK%20v%E1%BB%ABa%20b%E1%BB%8B%20x%E1%BB%AD%20ph%E1%BA%A1t%20l%E1%BA%A1i%20t%C4%83ng%2010-20%25&hl=vi) — Nghịch lý cổ phiếu tăng sau tin phạt.
+- [PNJ mất 2.200 tỷ vốn hóa trước sóng gió ngành kim cương](https://news.google.com/search?q=PNJ%20m%E1%BA%A5t%202.200%20t%E1%BB%B7%20v%E1%BB%91n%20h%C3%B3a%20tr%C6%B0%E1%BB%9Bc%20s%C3%B3ng%20gi%C3%B3%20ng%C3%A0nh%20kim%20c%C6%B0%C6%A1ng&hl=vi) — Ngành kim cương toàn cầu biến động kéo theo PNJ.
+- [Làn sóng AI định hình lại thị trường tỷ giá hối đoái](https://news.google.com/search?q=L%C3%A0n%20s%C3%B3ng%20AI%20%C4%91%E1%BB%8Bnh%20h%C3%ACnh%20l%E1%BA%A1i%20th%E1%BB%8B%20tr%C6%B0%E1%BB%9Dng%20t%E1%BB%B7%20gi%C3%A1%20h%E1%BB%91i%20%C4%91o%C3%A1i&hl=vi) — AI tác động đến cả thị trường forex.
 
 ---
 
@@ -59,10 +59,10 @@
 - [Sắp hoàn thành tuyến cao tốc nối cửa khẩu đường bộ lớn nhất miền Bắc](https://thanhnien.vn/sap-hoan-thanh-tuyen-cao-toc-noi-cua-khau-duong-bo-lon-nhat-mien-bac-185260705110315101.htm) — Hạ tầng giao thông cửa khẩu miền Bắc sắp được nâng cấp.
 
 **Google News – Kinh doanh VN**
-- [Hợp nhất Bộ Tài chính và KH&ĐT: dự kiến giảm 22 đầu mối](https://news.google.com/articles/CBMiygFBVV95cUxNcWtpN19qby01UTd6bDhZQ1ZFbnA4WXR) — Cải cách bộ máy hành chính nhà nước lớn.
-- [Đề xuất startup chưa có lãi vẫn được lên sàn chứng khoán](https://news.google.com/articles/CBMiygFBVV95cUxNcWtpN19qby01UTd6bDhZQ1ZFbnA4WXR) — Cơ chế mới tạo điều kiện cho startup công nghệ niêm yết sớm.
-- [Tăng tốc thu hút đầu tư, phát triển Trung tâm Tài chính Quốc tế tại Đà Nẵng](https://news.google.com/articles/CBMiuAFBVV95cUxOcDhRdHFDSkJVTnVfZkRXVkRIcm5ISkF) — Đà Nẵng đẩy mạnh mô hình IFC nhằm thu hút vốn quốc tế.
-- [Nghị quyết 10-NQ/TW: Phát triển kinh tế có vốn đầu tư nước ngoài](https://news.google.com/articles/CBMiuAFBVV95cUxOcDhRdHFDSkJVTnVfZkRXVkRIcm5ISkF) — Chính sách mới về thu hút FDI chiến lược.
+- [Hợp nhất Bộ Tài chính và KH&ĐT: dự kiến giảm 22 đầu mối](https://news.google.com/search?q=H%E1%BB%A3p%20nh%E1%BA%A5t%20B%E1%BB%99%20T%C3%A0i%20ch%C3%ADnh%20v%C3%A0%20KH%26%C4%90T%3A%20d%E1%BB%B1%20ki%E1%BA%BFn%20gi%E1%BA%A3m%2022%20%C4%91%E1%BA%A7u%20m%E1%BB%91i&hl=vi) — Cải cách bộ máy hành chính nhà nước lớn.
+- [Đề xuất startup chưa có lãi vẫn được lên sàn chứng khoán](https://news.google.com/search?q=%C4%90%E1%BB%81%20xu%E1%BA%A5t%20startup%20ch%C6%B0a%20c%C3%B3%20l%C3%A3i%20v%E1%BA%ABn%20%C4%91%C6%B0%E1%BB%A3c%20l%C3%AAn%20s%C3%A0n%20ch%E1%BB%A9ng%20kho%C3%A1n&hl=vi) — Cơ chế mới tạo điều kiện cho startup công nghệ niêm yết sớm.
+- [Tăng tốc thu hút đầu tư, phát triển Trung tâm Tài chính Quốc tế tại Đà Nẵng](https://news.google.com/search?q=T%C4%83ng%20t%E1%BB%91c%20thu%20h%C3%BAt%20%C4%91%E1%BA%A7u%20t%C6%B0%2C%20ph%C3%A1t%20tri%E1%BB%83n%20Trung%20t%C3%A2m%20T%C3%A0i%20ch%C3%ADnh%20Qu%E1%BB%91c%20t%E1%BA%BF%20t%E1%BA%A1i%20%C4%90%C3%A0%20N%E1%BA%B5ng&hl=vi) — Đà Nẵng đẩy mạnh mô hình IFC nhằm thu hút vốn quốc tế.
+- [Nghị quyết 10-NQ/TW: Phát triển kinh tế có vốn đầu tư nước ngoài](https://news.google.com/search?q=Ngh%E1%BB%8B%20quy%E1%BA%BFt%2010-NQ/TW%3A%20Ph%C3%A1t%20tri%E1%BB%83n%20kinh%20t%E1%BA%BF%20c%C3%B3%20v%E1%BB%91n%20%C4%91%E1%BA%A7u%20t%C6%B0%20n%C6%B0%E1%BB%9Bc%20ngo%C3%A0i&hl=vi) — Chính sách mới về thu hút FDI chiến lược.
 
 ---
 
@@ -73,7 +73,7 @@
 - [Alibaba cấm nhân viên dùng Claude Code](https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/) — Tập đoàn TQ hạn chế dùng công cụ AI của đối thủ nước ngoài.
 - [Midjourney muốn Hollywood tiết lộ cách dùng AI](https://techcrunch.com/2026/07/04/midjourney-wants-hollywood-studios-to-reveal-the-details-of-their-ai-usage/) — Công ty AI ảnh yêu cầu minh bạch hóa việc sử dụng AI trong điện ảnh.
 - [Google làm quảng cáo về Tuyên ngôn Độc lập được viết với sự hỗ trợ của AI](https://techcrunch.com/2026/07/04/new-google-commercial-imagines-a-declaration-of-independence-written-with-help-from-ai/) — Quảng cáo gây tranh cãi của Google nhân ngày Quốc khánh Mỹ.
-- [Zuckerberg: AI agents chưa tiến triển nhanh như kỳ vọng](https://techcrunch.com/2026/07/02/mark-zuckerberg-tells-staff-that-ai-agents-havent-progressed-as-quickly-as-he-hoped/) — CEO Meta thừa nhận tiến độ AI agents chậm hơn dự kiến với nội bộ.
+- [Zuckerberg: AI agents chưa tiến triển nhanh như kỳ vọng](https://techcrunch.com/2026/07/02/mark-zuckerberg-tells-staff-that-ai-agents-havent-progressed-as-quickly-as-hed-hoped/) — CEO Meta thừa nhận tiến độ AI agents chậm hơn dự kiến với nội bộ.
 
 **The Verge – AI**
 - [Anthropic muốn phát triển thuốc riêng](https://www.theverge.com/ai-artificial-intelligence/961311/anthropic-claude-science-ai-drug-development) — Anthropic mở rộng sang nghiên cứu khoa học và phát triển dược phẩm.
@@ -87,18 +87,18 @@
 - [Previewing GPT-5.6 Sol](https://openai.com/index/previewing-gpt-5-6-sol) — Xem trước mô hình thế hệ tiếp theo của OpenAI.
 
 **MIT Technology Review**
-- [LLMs bị kẹt trong tư duy đám đông — startup đang giải quyết](https://www.technologyreview.com/2026/07/01/1140003/llms-are-stuck-in-a-groupthink-groove-startup-solving/) — Nghiên cứu mới về hiện tượng groupthink trong LLM và cách khắc phục.
+- [LLMs bị kẹt trong tư duy đám đông — startup đang giải quyết](https://www.technologyreview.com/2026/07/01/1140003/llms-are-stuck-in-a-groupthink-rut-this-startup-is-trying-to-get-them-out/) — Nghiên cứu mới về hiện tượng groupthink trong LLM và cách khắc phục.
 - [Đạt xuất sắc trong vận hành với AI](https://www.technologyreview.com/2026/07/02/1140045/achieving-operational-excellence-with-ai/) — Ứng dụng AI vào tối ưu hóa vận hành doanh nghiệp.
 
 **Google News – AI Việt Nam**
-- [Bộ GD&ĐT lần đầu quy định 6 hành vi vi phạm khi dùng AI ở đại học](https://news.google.com/articles/CBMiwgFBVV95cUxNdXJjWURncFRXaHpPVU9DNVlQd1JBWVF) — Khung pháp lý về AI trong giáo dục đại học Việt Nam được định hình.
-- [Nghị quyết 57 sau 18 tháng: Định hình hệ sinh thái AI Việt Nam](https://news.google.com/articles/CBMiqgFBVV95cUxQTHNzTXFPRnRNb0ROOTVpWE1VdHlRVVp) — Đánh giá tiến độ xây dựng hệ sinh thái AI quốc gia.
-- [Xuất khẩu robot Trung Quốc đạt gần 3 tỷ USD trong 5 tháng đầu năm](https://news.google.com/articles/CBMipAFBVV95cUxNQkVjZmF3UUNNU0FEYV9hOVI5QW93TVo) — TQ nổi lên thành cường quốc xuất khẩu robot toàn cầu.
-- [Trí tuệ nhân tạo: Lợi thế nằm ở công nghệ khó sao chép](https://news.google.com/articles/CBMijgFBVV95cUxNLU1kdGJrdDRFQXB6UzlLU1VTOWFxNEM) — Phân tích về moat cạnh tranh trong lĩnh vực AI.
+- [Bộ GD&ĐT lần đầu quy định 6 hành vi vi phạm khi dùng AI ở đại học](https://news.google.com/search?q=B%E1%BB%99%20GD%26%C4%90T%20l%E1%BA%A7n%20%C4%91%E1%BA%A7u%20quy%20%C4%91%E1%BB%8Bnh%206%20h%C3%A0nh%20vi%20vi%20ph%E1%BA%A1m%20khi%20d%C3%B9ng%20AI%20%E1%BB%9F%20%C4%91%E1%BA%A1i%20h%E1%BB%8Dc&hl=vi) — Khung pháp lý về AI trong giáo dục đại học Việt Nam được định hình.
+- [Nghị quyết 57 sau 18 tháng: Định hình hệ sinh thái AI Việt Nam](https://news.google.com/search?q=Ngh%E1%BB%8B%20quy%E1%BA%BFt%2057%20sau%2018%20th%C3%A1ng%3A%20%C4%90%E1%BB%8Bnh%20h%C3%ACnh%20h%E1%BB%87%20sinh%20th%C3%A1i%20AI%20Vi%E1%BB%87t%20Nam&hl=vi) — Đánh giá tiến độ xây dựng hệ sinh thái AI quốc gia.
+- [Xuất khẩu robot Trung Quốc đạt gần 3 tỷ USD trong 5 tháng đầu năm](https://news.google.com/search?q=Xu%E1%BA%A5t%20kh%E1%BA%A9u%20robot%20Trung%20Qu%E1%BB%91c%20%C4%91%E1%BA%A1t%20g%E1%BA%A7n%203%20t%E1%BB%B7%20USD%20trong%205%20th%C3%A1ng%20%C4%91%E1%BA%A7u%20n%C4%83m&hl=vi) — TQ nổi lên thành cường quốc xuất khẩu robot toàn cầu.
+- [Trí tuệ nhân tạo: Lợi thế nằm ở công nghệ khó sao chép](https://news.google.com/search?q=Tr%C3%AD%20tu%E1%BB%87%20nh%C3%A2n%20t%E1%BA%A1o%3A%20L%E1%BB%A3i%20th%E1%BA%BF%20n%E1%BA%B1m%20%E1%BB%9F%20c%C3%B4ng%20ngh%E1%BB%87%20kh%C3%B3%20sao%20ch%C3%A9p&hl=vi) — Phân tích về moat cạnh tranh trong lĩnh vực AI.
 
 **Google News – AI Model Releases**
-- [Anthropic launches Claude Sonnet 5 — cheaper way to run agents](https://news.google.com/articles/CBMiogFBVV95cUxPYlk5UjUzQ3hOVkZIcHQ3cWNBY29hU1J) — Claude Sonnet 5 ra mắt với chi phí thấp hơn, tối ưu cho agentic workflows.
-- [Claude Science ra mắt — Anthropic đối đầu OpenAI và Google trong AI khoa học](https://news.google.com/articles/CBMipgFBVV95cUxQRFJHb05qem5jLXhRaTNhbVZpdHdzSnJ) — Sản phẩm AI chuyên biệt cho nghiên cứu khoa học.
+- [Anthropic launches Claude Sonnet 5 — cheaper way to run agents](https://news.google.com/search?q=Anthropic%20launches%20Claude%20Sonnet%205%20%E2%80%94%20cheaper%20way%20to%20run%20agents&hl=vi) — Claude Sonnet 5 ra mắt với chi phí thấp hơn, tối ưu cho agentic workflows.
+- [Claude Science ra mắt — Anthropic đối đầu OpenAI và Google trong AI khoa học](https://news.google.com/search?q=Claude%20Science%20ra%20m%E1%BA%AFt%20%E2%80%94%20Anthropic%20%C4%91%E1%BB%91i%20%C4%91%E1%BA%A7u%20OpenAI%20v%C3%A0%20Google%20trong%20AI%20khoa%20h%E1%BB%8Dc&hl=vi) — Sản phẩm AI chuyên biệt cho nghiên cứu khoa học.
 
 ---
 
@@ -146,7 +146,7 @@ _(Không có bài mới từ Facebook)_
 - [Cơn khát chip AI lan sang linh kiện, vật liệu bán dẫn](https://vnexpress.net/con-khat-chip-ai-lan-sang-linh-kien-vat-lieu-ban-dan-5092223.html) — Chuỗi cung ứng bán dẫn tiếp tục chịu áp lực từ nhu cầu AI.
 
 **Tuổi Trẻ – Nhịp sống số**
-- [Oppo Reno16 Series 5G ra mắt tại Việt Nam](https://tuoitre.vn/oppo-reno16-series-5g-ra-mat-tai-viet-nam-100260704105458173.html) — Dòng smartphone tầm trung mới của Oppo có mặt tại VN.
+- [Oppo Reno16 Series 5G ra mắt tại Việt Nam](https://tuoitre.vn/oppo-reno16-series-5g-ra-mat-tai-viet-nam-100260704105458173.htm) — Dòng smartphone tầm trung mới của Oppo có mặt tại VN.
 - [Google thử reCAPTCHA mới: vào website có thể phải giơ tay trước camera](https://tuoitre.vn/google-thu-recaptcha-moi-muon-vao-website-co-the-phai-gio-tay-truoc-camera-10026062516122727.htm) — Xác thực người dùng thế hệ mới dùng cử chỉ cơ thể.
 - [OpenClaw ra mắt ứng dụng di động với trợ lý AI điều khiển bằng giọng nói](https://tuoitre.vn/openclaw-ra-mat-ung-dung-di-dong-voi-tro-ly-ai-dieu-khien-bang-giong-noi-100260703112458143.htm) — Startup VN giới thiệu trợ lý AI mobile mới.
 
@@ -168,7 +168,7 @@ _(Không có bài mới từ Facebook)_
 - [PHP 8.6.0 Alpha 1 available for testing (2026-07-02)](https://www.php.net/index.php#2026-07-02-3) — PHP 8.6 alpha mở để cộng đồng test sớm.
 
 **Laravel News**
-- [Laravel AI Tasks: AI Orchestration Package cho Queues, Logging, Cost Control](https://laravel-news.com/laravel-ai-tasks-an-ai-orchestration-package-for-queues) — Package mới cho phép điều phối nhiều AI tasks trong Laravel queue với kiểm soát chi phí.
+- [Laravel AI Tasks: AI Orchestration Package cho Queues, Logging, Cost Control](https://laravel-news.com/laravel-ai-tasks-an-ai-orchestration-package-for-queues-logging-and-cost-control) — Package mới cho phép điều phối nhiều AI tasks trong Laravel queue với kiểm soát chi phí.
 - [Worker Metrics on WorkerStopping Event trong Laravel 13.18](https://laravel-news.com/laravel-13-18-0) — Cải tiến monitoring queue worker trong Laravel 13.18.
 - [Clonio CLI: Clone Production Databases với Anonymized Data](https://laravel-news.com/clonio-cli-clone-production-databases-with-anonymized-data/) — Tool mới giúp clone DB production an toàn cho môi trường dev.
 
@@ -192,12 +192,12 @@ _(Không có bài mới từ Facebook)_
 _(Không xác minh được link gốc — đã bỏ 3 bài không tìm thấy trong nguồn)_
 
 **Google News – M&A / IPO**
-- [SpaceX mua startup AI coding Cursor với giá 60 tỷ USD](https://news.google.com/articles/CBMie0FVX3lxTE1aZktEa28xRmlmckxlLTBpYnN3RlQ2Uk9) — Thương vụ M&A lớn nhất trong lịch sử công cụ lập trình AI.
-- [SpaceX IPO $1.75T: cược lịch sử vào Space, AI và Bitcoin](https://news.google.com/articles/CBMixAFBVV95cUxQbmt4ZE82b010RDgzR2JsSjFmSWcwN2x) — IPO SpaceX được định giá $1.75 nghìn tỷ USD.
+- [SpaceX mua startup AI coding Cursor với giá 60 tỷ USD](https://news.google.com/search?q=SpaceX%20mua%20startup%20AI%20coding%20Cursor%20v%E1%BB%9Bi%20gi%C3%A1%2060%20t%E1%BB%B7%20USD&hl=vi) — Thương vụ M&A lớn nhất trong lịch sử công cụ lập trình AI.
+- [SpaceX IPO $1.75T: cược lịch sử vào Space, AI và Bitcoin](https://news.google.com/search?q=SpaceX%20IPO%20%241.75T%3A%20c%C6%B0%E1%BB%A3c%20l%E1%BB%8Bch%20s%E1%BB%AD%20v%C3%A0o%20Space%2C%20AI%20v%C3%A0%20Bitcoin&hl=vi) — IPO SpaceX được định giá $1.75 nghìn tỷ USD.
 
 **Google News – Crypto**
-- [Bitcoin, Ethereum, XRP vào vùng rủi ro thấp lịch sử](https://news.google.com/articles/CBMilwFBVV95cUxNcmFTRXVtMDYyWFNmZzBxRlhlNGxQZkJ) — Coinpedia phân tích 3 đồng lớn đang trong vùng tích lũy an toàn.
-- [Top 10 tiền điện tử ngày 3/7/2026](https://news.google.com/articles/CBMid0FVX3lxTE5oUjhuSmtHQjNtNEgtcTd0WE1vSWZ6b0J) — Cập nhật xếp hạng crypto tuần đầu tháng 7.
+- [Bitcoin, Ethereum, XRP vào vùng rủi ro thấp lịch sử](https://news.google.com/search?q=Bitcoin%2C%20Ethereum%2C%20XRP%20v%C3%A0o%20v%C3%B9ng%20r%E1%BB%A7i%20ro%20th%E1%BA%A5p%20l%E1%BB%8Bch%20s%E1%BB%AD&hl=vi) — Coinpedia phân tích 3 đồng lớn đang trong vùng tích lũy an toàn.
+- [Top 10 tiền điện tử ngày 3/7/2026](https://news.google.com/search?q=Top%2010%20ti%E1%BB%81n%20%C4%91i%E1%BB%87n%20t%E1%BB%AD%20ng%C3%A0y%203/7/2026&hl=vi) — Cập nhật xếp hạng crypto tuần đầu tháng 7.
 
 ---
 
@@ -206,18 +206,18 @@ _(Không xác minh được link gốc — đã bỏ 3 bài không tìm thấy t
 **Google News – VinFast VN**
 - [VinFast VF 2 trình làng khách Việt, ô tô điện cỡ nhỏ giá 188 triệu đồng](https://news.google.com/articles/CBMiugFBVV95cUxQaTlGbkNjNkhfbHpVX3Voam00dFJlYkVnOXEyOGZjV2tWdVRtT2hEaE9SWFdFUEk0dlZlVlBCR1JVWnh1RkNnUXFIaTc2WFFmdm9hd0NUOVdCTUZ4Vjk2OFdsX08tMm5QNlpiQVVSeGRoSlVjSHdaZDF2dlNNdHEtNXBpTU1uNE1Wa0dBSzh3Sk1sOWt6d1dweV95M3Mtc1k0Q2dBLUl3aHFORjNnT0Jrcy1POFl2ZDZNRGc) — Mẫu xe điện mini giá rẻ nhất của VinFast nhắm đến phân khúc đại chúng.
 - [Chủ xe máy điện và ô tô điện VinFast được 'tặng tiền'](https://news.google.com/articles/CBMimAFBVV95cUxNdzR0REU1OWpDclpWWENaYUw5dFh1c0M0T2RNd1A1Ym5TczJpeGxXRy1PNnl2bTctOVFUUFdCazNYbi0tcE0xWnBaUmtsb2NTZ2ZzcXd1UXJfbzFfOUdPTEFxT0dXcHBRai03Zk1xZUUyX0E5R05OTkF5OXZaQXJsUXZQc2FkcHNUNExhQ1M5UklCX1FtdlVlNg) — VinFast triển khai chương trình ưu đãi tài chính cho chủ xe điện.
-- [Lộ diện bản vẽ SUV điện siêu sang của VinFast](https://news.google.com/articles/CBMi8gFBVV95cUxQVUtQazZ0TVRYRGk1N3RWTmZGSVpUaUJ) — Thiết kế SUV cao cấp mới của VinFast được hé lộ.
-- [VinFast hé lộ mẫu xe máy điện hoàn toàn mới](https://news.google.com/articles/CBMiggFBVV95cUxNN0xyRzM5MlBDTWluVjJ1Z1Q5cTNOeUt) — Dòng xe máy điện mới đang được phát triển.
-- [Có thể mua VinFast VF 3 với mức giá 200 triệu đồng](https://news.google.com/articles/CBMixAFBVV95cUxPNFhzUWVxcDJtay1xR0wyM2FFVjB0Rm5) — Ưu đãi đặc biệt giúp VF 3 tiếp cận tầng lớp thu nhập trung bình.
+- [Lộ diện bản vẽ SUV điện siêu sang của VinFast](https://news.google.com/search?q=L%E1%BB%99%20di%E1%BB%87n%20b%E1%BA%A3n%20v%E1%BA%BD%20SUV%20%C4%91i%E1%BB%87n%20si%C3%AAu%20sang%20c%E1%BB%A7a%20VinFast&hl=vi) — Thiết kế SUV cao cấp mới của VinFast được hé lộ.
+- [VinFast hé lộ mẫu xe máy điện hoàn toàn mới](https://news.google.com/search?q=VinFast%20h%C3%A9%20l%E1%BB%99%20m%E1%BA%ABu%20xe%20m%C3%A1y%20%C4%91i%E1%BB%87n%20ho%C3%A0n%20to%C3%A0n%20m%E1%BB%9Bi&hl=vi) — Dòng xe máy điện mới đang được phát triển.
+- [Có thể mua VinFast VF 3 với mức giá 200 triệu đồng](https://news.google.com/search?q=C%C3%B3%20th%E1%BB%83%20mua%20VinFast%20VF%203%20v%E1%BB%9Bi%20m%E1%BB%A9c%20gi%C3%A1%20200%20tri%E1%BB%87u%20%C4%91%E1%BB%93ng&hl=vi) — Ưu đãi đặc biệt giúp VF 3 tiếp cận tầng lớp thu nhập trung bình.
 
 **Google News – VinFast EN**
-- [VinFast's EV Ecosystem Strategy: Why Cars Alone Won't Win](https://news.google.com/articles/CBMirwFBVV95cUxPb0pCbzF1VkZxSGZxeE9KVUo3RFI3OFF) — Phân tích chiến lược hệ sinh thái EV toàn diện của VinFast.
-- [North Carolina kiện VinFast về nhà máy chưa xây](https://news.google.com/articles/CBMitAFBVV95cUxPLUx2aXJpb0xJNUhiWFU5STRXM0hnOHN) — Bang NC đưa VinFast ra tòa vì vi phạm cam kết xây nhà máy.
-- [VinFast secures order for 2,000 electric cars tại Việt Nam](https://news.google.com/articles/CBMimAFBVV95cUxOUW5UcGZYb2NwY1FZcS0yTlkxem81Rml) — Đơn hàng 2.000 xe điện lớn tại thị trường trong nước.
+- [VinFast's EV Ecosystem Strategy: Why Cars Alone Won't Win](https://news.google.com/search?q=VinFast%27s%20EV%20Ecosystem%20Strategy%3A%20Why%20Cars%20Alone%20Won%27t%20Win&hl=vi) — Phân tích chiến lược hệ sinh thái EV toàn diện của VinFast.
+- [North Carolina kiện VinFast về nhà máy chưa xây](https://news.google.com/search?q=North%20Carolina%20ki%E1%BB%87n%20VinFast%20v%E1%BB%81%20nh%C3%A0%20m%C3%A1y%20ch%C6%B0a%20x%C3%A2y&hl=vi) — Bang NC đưa VinFast ra tòa vì vi phạm cam kết xây nhà máy.
+- [VinFast secures order for 2,000 electric cars tại Việt Nam](https://news.google.com/search?q=VinFast%20secures%20order%20for%202%2C000%20electric%20cars%20t%E1%BA%A1i%20Vi%E1%BB%87t%20Nam&hl=vi) — Đơn hàng 2.000 xe điện lớn tại thị trường trong nước.
 
 **Google News – VinFast VFS Stock**
-- [VFS tăng hơn 33.87% trong vòng 1 tháng](https://news.google.com/articles/CBMikwFBVV95cUxQNWN4YzkxRGlTNjc2bzl5ZW1UWmFDRUt) — Cổ phiếu VFS tăng mạnh trên NASDAQ.
-- [VinFast đổi lãnh đạo chuẩn bị cho giai đoạn mở rộng toàn cầu](https://news.google.com/articles/CBMiuAFBVV95cUxQZ1doZDVyODhTRUtseTBQOHFDVkNlZVF) — Thay đổi cơ cấu ban lãnh đạo hướng đến tham vọng toàn cầu.
+- [VFS tăng hơn 33.87% trong vòng 1 tháng](https://news.google.com/search?q=VFS%20t%C4%83ng%20h%C6%A1n%2033.87%25%20trong%20v%C3%B2ng%201%20th%C3%A1ng&hl=vi) — Cổ phiếu VFS tăng mạnh trên NASDAQ.
+- [VinFast đổi lãnh đạo chuẩn bị cho giai đoạn mở rộng toàn cầu](https://news.google.com/search?q=VinFast%20%C4%91%E1%BB%95i%20l%C3%A3nh%20%C4%91%E1%BA%A1o%20chu%E1%BA%A9n%20b%E1%BB%8B%20cho%20giai%20%C4%91o%E1%BA%A1n%20m%E1%BB%9F%20r%E1%BB%99ng%20to%C3%A0n%20c%E1%BA%A7u&hl=vi) — Thay đổi cơ cấu ban lãnh đạo hướng đến tham vọng toàn cầu.
 
 ---
 
@@ -228,7 +228,7 @@ _(Không xác minh được link gốc — đã bỏ 3 bài không tìm thấy t
 - [Hacker Triều Tiên phát tán 108 gói độc hại trên PolinRider](https://thehackernews.com/2026/07/north-korean-hackers-publish-108.html) — Chiến dịch supply chain attack qua npm/PyPI packages.
 - [Lỗ hổng chưa vá trong filesystem dùng trên hàng triệu thiết bị nhúng](https://thehackernews.com/2026/07/unpatched-flaws-disclosed-in-filesystem.html) — Rủi ro bảo mật lớn ảnh hưởng hệ thống IoT quy mô lớn.
 - [Kẻ tấn công khai thác SimpleHelp CVE-2026-48558 để deploy TaskWeaver và Djinn Stealer](https://news.google.com/articles/CBMiggFBVV95cUxOaG5OSU9HbDk5aWUyWE8wU1ZCbVhoZnRGNW1FYlFxUzJjbnBWdU5tX3BoRVZ5clEyVVlYUDhIZFJCaWdrLUpOSF9sVVpmN1FyR3N1ZXdNMHZEbXhLYkxTdnlGSnRQMDQ0MU9UM2xrSE9Kb20xUWxDVWlQWmRWVVJ4VWpR) — Chuỗi exploit mới nhắm vào công cụ remote support.
-- [BlueHammer Vulnerability bị khai thác trong các cuộc tấn công ransomware](https://news.google.com/articles/CBMijwFBVV95cUxNd1dTMEZkblZENGdJSXY5ek9VQjE2dFQy) — Lỗ hổng mới đang bị ransomware actors tích cực khai thác.
+- [BlueHammer Vulnerability bị khai thác trong các cuộc tấn công ransomware](https://news.google.com/search?q=BlueHammer%20Vulnerability%20b%E1%BB%8B%20khai%20th%C3%A1c%20trong%20c%C3%A1c%20cu%E1%BB%99c%20t%E1%BA%A5n%20c%C3%B4ng%20ransomware&hl=vi) — Lỗ hổng mới đang bị ransomware actors tích cực khai thác.
 
 **Krebs on Security**
 - [FBI thu giữ nền tảng proxy NetNut và botnet Popa](https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/) — FBI đánh sập mạng lưới proxy bất hợp pháp quy mô lớn.
