@@ -171,7 +171,7 @@ Supports individual account targeting:
 |---------|-----------------|
 | vuongtrancr@gmail.com | Production monitoring alerts for Swish project (Delayed-newform, APM signal lost, BugSnag). Carrick's personal Gmail receives Swish Zendesk + monitoring. Flag any `[HIGH]` or `Signal lost` subjects. |
 | dnduongus@gmail.com | Personal Gmail (DuongDN). Only flag security alerts (account breach, unauthorized login). Ignore: LinkedIn, newsletters, Finhay, Careerviet, bank notifications. |
-| davidztv19@gmail.com | Arthur - Meta-Stamp project (Workstream "Crystal lang", roster DuongDN/PhucVT/TienND). No filter — flag all client/project mail. Regular Google password stored (not app-specific) — if IMAP login fails, account likely needs an App Password generated (2FA-enabled Google accounts reject plain passwords over IMAP). |
+| davidztv19@gmail.com | Arthur - Meta-Stamp project (Workstream "Crystal lang", roster DuongDN/PhucVT/TienND). No filter — flag all client/project mail. Uses an App Password (2FA enabled on account); login verified live 2026-07-06. |
 
 **Method (Gmail IMAP):** IMAP SSL port 993, imap.gmail.com. Use `app_password` from config. `rejectUnauthorized: false` for TLS. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
