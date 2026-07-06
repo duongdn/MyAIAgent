@@ -36,6 +36,14 @@ const PROJECTS = {
   generator:      { id: 'cmqoou4h10kzum81vovi8rrsk', name: 'Generator',                  client: 'Elliott',        manager: true  },
   fountain:       { id: 'cmpqcjojh00q2tk1v2qi7gs0j', name: 'Fountain Greetings',         client: 'Kunal',          manager: true  },
   marcel:         { id: 'cmqyvio4s000pqo0xdajw5n2k', name: 'Tokenlite',                  client: 'Marcel',         manager: true  },
+  amazing_meds:   { id: 'cmqyvio8p003dqo0xo6hpf5zv', name: 'Amazing Meds',               client: 'John Yi',        manager: true  },
+  elevate365:     { id: 'cmqyvio7q002pqo0x40bb9os2', name: 'Elevate365.AI',              client: 'Philip',         manager: true  },
+  neural_contract:{ id: 'cmqyvio6k001vqo0x2wzfn4ka', name: 'Neural Contract - Test Job', client: 'Neural Contract',manager: true  },
+  radio_data_center:{ id: 'cmqyvio7z002vqo0x7skarafs', name: 'Radio Data Center',        client: 'Franc',          manager: true  },
+  speedventory:   { id: 'cmqyvio51000vqo0xhocbx5c9', name: 'Speedventory',               client: 'Bailey',         manager: true  },
+  legalatoms:     { id: 'cmqyvio870031qo0xxelwodau', name: 'LegalAtoms',                 client: 'Raymond',        manager: true  },
+  bxr_app:        { id: 'cmqyvio7a002dqo0x54rx6o20', name: 'BXR App',                    client: 'Rory',           manager: true  },
+  crystal_lang:   { id: 'cmqezgh7z080hp81vo5yqd24z', name: 'Crystal lang',               client: 'Arthur',         manager: true  },
 };
 
 // Parse hours "H:MM" -> decimal
