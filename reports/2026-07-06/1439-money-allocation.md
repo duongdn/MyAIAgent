@@ -2,15 +2,17 @@
 
 ## Tỉ lệ tài sản (excl. Nhà 2.5B — non-tradeable primary residence)
 
-Total investable assets: 5,374,796,750 ₫
+Total investable assets: 5,372,791,270 ₫ (excludes confirmed ghost balance, see note below)
 
 | Loại | Tổng (₫) | % Total | Ghi chú |
 |------|---------:|--------:|---------|
-| 📈 Investment (ETF/Fund/Cổ phần) | 2,365,783,206 | 44.01% | VCBS+VCBF+FPTS+Finhay+Tikop+Larion |
-| 🏦 Savings (Tiết kiệm) | 1,040,692,407 | 19.36% | 5 active books |
-| 🏠 Real Estate (long an res) | 1,020,000,000 | 18.98% | Land, not primary residence |
-| 🥇 Gold (Vàng) | 757,000,000 | 14.08% | 50 units VGO |
+| 📈 Investment (ETF/Fund/Cổ phần) | 2,365,783,206 | 44.03% | VCBS+VCBF+FPTS+Finhay+Tikop+Larion |
+| 🏦 Savings (Tiết kiệm) | 1,038,686,927 | 19.33% | 4 active books |
+| 🏠 Real Estate (long an res) | 1,020,000,000 | 18.99% | Land, not primary residence |
+| 🥇 Gold (Vàng) | 757,000,000 | 14.09% | 50 units VGO |
 | 💵 Liquid (Tiền mặt) | 191,317,433 | 3.56% | Bank + e-wallet + Paypal |
+
+**Data bug confirmed 2026-07-06**: excluded a stale 2,005,479 ₫ ghost balance on a closed "nam á 6m" savings book (finalized 2024-06-01) — user confirmed it was fully withdrawn and no longer exists in the app. MISA's `/wallets/savings` API still returns it as nonzero while every other closed duplicate of the same name correctly shows 0.
 
 ## Chi tiết ETF + Fund
 ETF (VCBS) — VN30/VN100/VN1000: 553,155,620 ₫
@@ -23,14 +25,14 @@ Cổ phần tư nhân (Larion): 600,000,000 ₫
 ## Visual ASCII bar chart (excl. home)
 ```
 Investment  ████████████████████████████████████████████ 44.0%
-Savings     ███████████████████                          19.4%
+Savings     ███████████████████                          19.3%
 Real Estate ██████████████████                            19.0%
 Gold        ██████████████                                14.1%
 Liquid      ███                                            3.6%
 ```
 
 ## Nhận xét
-- Liquidity ratio: Liquid+Savings = 1,231,987,840 ₫ ≈ 22.9% of gross (excl home), covers ~17.6× monthly expense target (420M/6mo).
+- Liquidity ratio: Liquid+Savings = 1,230,004,360 ₫ ≈ 22.9% of gross (excl home), covers ~17.6× monthly expense (70M/month).
 - Upcoming maturities: 534M rolling off 2026-07-09 (2 books), 102.6M on 2026-08-02, 401.9M on 2026-10-13 — reinvestment decision needed for the first two soon.
 - Investment book shows active DCA pattern (frequent small "Cho vay" entries Dec 2025–Jun 2026) plus a large VCBS partial redemption (~750M) in June 2026 — recent rebalancing event, residual cash (553M) still shown as VCBS "true value" until redeployed or withdrawn.
 - Gold at 14.1% (excl home) is a meaningful inflation hedge, above typical 5-15% benchmark upper band.
@@ -39,17 +41,17 @@ Liquid      ███                                            3.6%
 
 ## Full View (incl. Nhà 2.5B)
 
-Total gross assets: 7,874,796,750 ₫
+Total gross assets: 7,872,791,270 ₫
 
 | Loại | Tổng (₫) | % Total |
 |------|---------:|--------:|
-| 🏠 Real Estate | 3,520,000,000 | 44.70% |
-| 📈 Investment | 2,365,783,206 | 30.04% |
-| 🏦 Savings | 1,040,692,407 | 13.22% |
-| 🥇 Gold | 757,000,000 | 9.61% |
+| 🏠 Real Estate | 3,520,000,000 | 44.71% |
+| 📈 Investment | 2,365,783,206 | 30.05% |
+| 🏦 Savings | 1,038,686,927 | 13.19% |
+| 🥇 Gold | 757,000,000 | 9.62% |
 | 💵 Liquid | 191,317,433 | 2.43% |
 
-Note: `trueTotalBalance` (dashboard, authoritative) = 7,738,887,566 ₫; the cost-basis reconstruction above (7,874,796,750 ₫) differs by ~0.97%, expected market-value-vs-cost-basis variance.
+Note: `trueTotalBalance` (dashboard, authoritative) = 7,738,887,566 ₫ — likely still includes the ~2M ghost balance above since `/wallets/totaldashboard` aggregates the same savings data (true figure probably ~7,736,882,087 ₫). The cost-basis reconstruction above (7,872,791,270 ₫) differs by ~0.94%, expected market-value-vs-cost-basis variance, unrelated to the ghost-balance bug.
 
 ## Finance Review
 

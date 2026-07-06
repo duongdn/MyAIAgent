@@ -81,17 +81,17 @@
       "date": "2026-07-06",
       "label": "06/07",
       "net_worth": 7738887566,
-      "gross_assets": 7874796750,
+      "gross_assets": 7872791270,
       "liabilities": 61003705,
       "categories": {
         "real_estate": 3520000000,
         "gold": 757000000,
         "investment": 2365783206,
-        "savings": 1040692407,
+        "savings": 1038686927,
         "liquid": 191317433
       },
       "method": "dashboard_verified",
-      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction (accounts+savings+VCBS/VCBF/FPTS/Finhay cost-basis-remaining) gives 7,874,796,750 (~0.97% higher) — consistent with the known unrealized-P&L gap seen on 23/06, not a data bug. Investment recovered to 2.37B (from 2.09B on 23/06) and Savings rebuilt to 1.04B (from 0.64B) after the mid-June VCBS redemption was redeployed into new term deposits (vcb 1 month, tikcop 1m/5m) and fresh VCBS/FPTS/VCBF/Finhay DCA contributions."
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction (accounts+savings+VCBS/VCBF/FPTS/Finhay cost-basis-remaining) gives 7,872,791,270 (~0.94% higher) — consistent with the known unrealized-P&L gap seen on 23/06, not a data bug. Investment recovered to 2.37B (from 2.09B on 23/06) and Savings rebuilt to 1.04B (from 0.64B) after the mid-June VCBS redemption was redeployed into new term deposits (vcb 1 month, tikcop 1m/5m) and fresh VCBS/FPTS/VCBF/Finhay DCA contributions. CONFIRMED DATA BUG: excluded a 2,005,479 ghost balance on a closed 'nam á 6m' savings book (endDate 2024-06-01) that user confirmed is fully withdrawn — /wallets/totaldashboard (net_worth above) likely still includes it, true net worth probably ~7,736,882,087."
     }
   ]
 }
