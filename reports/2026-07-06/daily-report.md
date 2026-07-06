@@ -291,8 +291,11 @@ Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory, Aysa
 - Confirmed live via DB: SSH'd to samguard.co, `wp_options.hsts_csp` `connect-src` list has `googleads.g.doubleclick.net` but not bare `ad.doubleclick.net`.
 - `jsErrors: 0`, `pageErrors: 0` — only the CSP violation, no other real errors.
 
-**Fix (NOT applied — needs user decision, live prod security header):**
-Add `https://ad.doubleclick.net` to the `connect-src` directive in `wp_options.hsts_csp` on samguard.co (`wp_samguard` DB, `Headers Security Advanced & HSTS WP` plugin).
+**Fix — partially applied, needs manual finish:**
+- `wp_options.hsts_csp` (`wp_samguard` DB) updated to include `https://ad.doubleclick.net` in `connect-src` — user approved, applied via SSH (both raw SQL and `wp option update`, confirmed in DB).
+- **Live header still stale.** Root cause: this plugin (`headers-security-advanced-hsts-wp`) doesn't serve CSP from the DB option at runtime — it bakes it into a static `Header set Content-Security-Policy` rule in `.htaccess`, regenerated only via its `update_option_hsts_csp` hook. `.htaccess` is owned `www-data:www-data` (664); our SSH user (`nustech`) isn't in that group and has no passwordless `sudo`, so the hook fires but the file write silently no-ops (`.htaccess` mtime unchanged since Feb 4).
+- **Manual step needed (user to complete):** go to `https://www.samguard.co/wp-admin/options-general.php?page=headers-security-advanced-hsts-wp-plugin`, open the CSP field, click Save (value already correct in DB — the web request runs as `www-data` and can write `.htaccess`). Full corrected CSP string is in this session for reference.
+- After saving, re-run `TMPDIR_OVERRIDE=<short dir> node scripts/wordpress-samguard-check.js` or `curl -sI https://www.samguard.co/ | grep -i content-security-policy` to confirm `ad.doubleclick.net` appears live.
 
 **Trello:** "Elena - WordPress SamGuard" item on today's (now-archived) Check Progress card was wrongly marked complete at 05:28 — leaving as-is since card is archived; corrected status lives in this report instead.
 
@@ -304,5 +307,5 @@ Add `https://ad.doubleclick.net` to the `connect-src` directive in `wp_options.h
 2. **Upwork session (Rory/Neural/Aysar)** — needs manual VNC re-login with visible browser to clear CAPTCHA; headless retry failed again.
 3. **Swish APM Signal Lost** — 6 occurrences on Jul 5. Carrick should check Swish infrastructure.
 4. **Baamboozle #629** — P2 SQL integer casting bug (raw SQL without casting). Should be prioritized.
-5. **Elena WordPress CSP fix** — approve adding `https://ad.doubleclick.net` to `connect-src`? (see correction section above)
+5. **Elena WordPress CSP fix** — DB updated, but live `.htaccess` needs a manual Save via wp-admin (permission issue for our SSH user) to actually regenerate — see correction section above.
 5. **Xero API quota warning** (Candasurveyors, via nick@) — may affect client integration, needs client-side attention.
