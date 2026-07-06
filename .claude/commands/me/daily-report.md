@@ -491,9 +491,9 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 ```
 
 **WordPress SamGuard:** Check `https://www.samguard.co/` for JS console errors.
-- Run: `node scripts/wordpress-samguard-check.js` (script sets TMPDIR internally — no extra env needed)
-- Filter out Google Analytics / CSP network errors (these are false positives from GA being blocked)
-- Report only real JS errors (`pageErrors` + `jsErrors` excluding analytics domains)
+- Run: `TMPDIR_OVERRIDE=<short writable dir, e.g. /tmp/wp-check-tmp> node scripts/wordpress-samguard-check.js` — the script's default TMPDIR is a server-only path; locally, a long TMPDIR path (e.g. nested scratchpad dirs) breaks Chrome's unix socket and causes a silent launch failure with empty results. Use a short path.
+- CSP violations (`cspViolations`) are REAL errors, not noise — flag any as ⚠️ action needed (see `docs/memory/daily-report/elena/feedback_csp_violations_are_real_errors.md`). Only filter out non-CSP analytics network noise (plain GA/ads `failedRequests` with no CSP directive violation).
+- Report all `cspViolations` + `pageErrors` + `jsErrors` as real errors
 - No errors = clean; this is a simple health check, no PR/deploy flow
 
 **`--external` flag (default: off, internal only):**

@@ -281,10 +281,28 @@ Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory, Aysa
 
 ---
 
+## ⚠️ CORRECTION — Elena WordPress (samguard.co) — 11:33 (+07:00)
+
+**05:28 report was WRONG.** It said CSP violations were "Google Analytics false positives (filtered per policy)" and marked the item clean/complete. That's a bug in the daily-report skill instructions (`.claude/commands/me/daily-report.md`), not reality — memory (`feedback_csp_violations_are_real_errors`) explicitly says CSP violations on samguard.co are real errors, not noise. Fixed the skill file to stop filtering CSP as false positive.
+
+**Re-ran `node scripts/wordpress-samguard-check.js` (real check, not cached):**
+- ⚠️ Real CSP violation confirmed, still present: `connect-src` blocks `https://ad.doubleclick.net` (Google Ads remarketing collect call `/ccm/s/collect`).
+- Same domain as the 2026-06-18 incident already on file (`reference_elena_wordpress_csp_config`) — was never actually fixed, or recurred.
+- Confirmed live via DB: SSH'd to samguard.co, `wp_options.hsts_csp` `connect-src` list has `googleads.g.doubleclick.net` but not bare `ad.doubleclick.net`.
+- `jsErrors: 0`, `pageErrors: 0` — only the CSP violation, no other real errors.
+
+**Fix (NOT applied — needs user decision, live prod security header):**
+Add `https://ad.doubleclick.net` to the `connect-src` directive in `wp_options.hsts_csp` on samguard.co (`wp_samguard` DB, `Headers Security Advanced & HSTS WP` plugin).
+
+**Trello:** "Elena - WordPress SamGuard" item on today's (now-archived) Check Progress card was wrongly marked complete at 05:28 — leaving as-is since card is archived; corrected status lives in this report instead.
+
+---
+
 ## Unresolved Questions
 
 1. **PhucVT 0h Jul 3, no leave** — confirmed real (not false alarm) via both Sheets and Workstream. Needs follow-up / reminder send.
 2. **Upwork session (Rory/Neural/Aysar)** — needs manual VNC re-login with visible browser to clear CAPTCHA; headless retry failed again.
 3. **Swish APM Signal Lost** — 6 occurrences on Jul 5. Carrick should check Swish infrastructure.
 4. **Baamboozle #629** — P2 SQL integer casting bug (raw SQL without casting). Should be prioritized.
+5. **Elena WordPress CSP fix** — approve adding `https://ad.doubleclick.net` to `connect-src`? (see correction section above)
 5. **Xero API quota warning** (Candasurveyors, via nick@) — may affect client integration, needs client-side attention.
