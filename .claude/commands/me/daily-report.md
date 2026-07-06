@@ -32,7 +32,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 |---------|---------------|
 | `/daily-report` | Everything (full run) |
 | **Email** | |
-| `/daily-report email` | All 9 accounts (6 Zoho + 2 Gmail IMAP + 1 Gmail API) |
+| `/daily-report email` | All 10 accounts (6 Zoho + 3 Gmail IMAP + 1 Gmail API) |
 | `/daily-report email duongdn` | duongdn@ only |
 | `/daily-report email carrick` | carrick@ only |
 | `/daily-report email nick` | nick@ only |
@@ -41,6 +41,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report email ken` | ken@ only |
 | `/daily-report email vuongtran` | vuongtrancr@gmail.com only |
 | `/daily-report email dnduong` | dnduongus@gmail.com only |
+| `/daily-report email davidztv19` | davidztv19@gmail.com only (Arthur - Meta-Stamp / Crystal lang project) |
 | `/daily-report email mpfc` | freelancer@mypersonalfootballcoach.com only |
 | **Slack** | |
 | `/daily-report slack` | All 14 workspaces |
@@ -137,7 +138,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 ## Piece 1 — Email (`/daily-report email [account]`)
 
 Supports individual account targeting:
-- `/daily-report email` — check all 9 accounts
+- `/daily-report email` — check all 10 accounts
 - `/daily-report email duongdn` — check duongdn@ only
 - `/daily-report email carrick` — check carrick@ only
 - `/daily-report email nick` — check nick@ only
@@ -146,9 +147,10 @@ Supports individual account targeting:
 - `/daily-report email ken` — check ken@ only
 - `/daily-report email vuongtran` — check vuongtrancr@gmail.com only
 - `/daily-report email dnduong` — check dnduongus@gmail.com only
+- `/daily-report email davidztv19` — check davidztv19@gmail.com only (Arthur - Meta-Stamp / Crystal lang project)
 - `/daily-report email mpfc` — check freelancer@mypersonalfootballcoach.com only
 
-**Accounts:** 9 in `config/.email-accounts.json`
+**Accounts:** 10 in `config/.email-accounts.json`
 
 **Group A — Zoho IMAP (6 accounts):** credentials loaded from config
 
@@ -163,12 +165,13 @@ Supports individual account targeting:
 
 **Method (Zoho):** IMAP SSL port 993, imap.zoho.com. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
-**Group B — Gmail IMAP (2 accounts):** credentials loaded from config
+**Group B — Gmail IMAP (3 accounts):** credentials loaded from config
 
 | Account | What to look for |
 |---------|-----------------|
 | vuongtrancr@gmail.com | Production monitoring alerts for Swish project (Delayed-newform, APM signal lost, BugSnag). Carrick's personal Gmail receives Swish Zendesk + monitoring. Flag any `[HIGH]` or `Signal lost` subjects. |
 | dnduongus@gmail.com | Personal Gmail (DuongDN). Only flag security alerts (account breach, unauthorized login). Ignore: LinkedIn, newsletters, Finhay, Careerviet, bank notifications. |
+| davidztv19@gmail.com | Arthur - Meta-Stamp project (Workstream "Crystal lang", roster DuongDN/PhucVT/TienND). No filter — flag all client/project mail. Regular Google password stored (not app-specific) — if IMAP login fails, account likely needs an App Password generated (2FA-enabled Google accounts reject plain passwords over IMAP). |
 
 **Method (Gmail IMAP):** IMAP SSL port 993, imap.gmail.com. Use `app_password` from config. `rejectUnauthorized: false` for TLS. SINCE `{previous_day}`, filter Date header >= `daily_report.last_run`.
 
@@ -188,7 +191,7 @@ node scripts/fetch-zoho-calendar.js [account]   # omit account for all 6
 - Uses same `app_password` as IMAP — no extra auth needed
 - Include events in the report section below (even if count = 0, show "no events")
 - Events with `STATUS:CANCELLED` or `PARTSTAT=DECLINED` note as cancelled/declined
-- Gmail accounts (vuongtrancr, dnduongus, mpfc) have no Zoho calendar — omit calendar column
+- Gmail accounts (vuongtrancr, dnduongus, davidztv19, mpfc) have no Zoho calendar — omit calendar column
 
 **Trello — after checking:**
 - Find "Check mail" card by name on board `O83pAyqb`

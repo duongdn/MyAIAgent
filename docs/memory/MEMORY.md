@@ -27,7 +27,7 @@
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md) — freelancer@mypersonalfootballcoach.com every scan
-- [reference_email_accounts_all9](daily-report/email/reference_email_accounts_all9.md) — 9 email accounts total (6 Zoho+2 Gmail IMAP+1 Gmail API), not 6
+- [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md) — 10 email accounts total (6 Zoho+3 Gmail IMAP+1 Gmail API), not 6
 - [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md) — IMAP SINCE=server dates, Slack after: excludes named date
 - [feedback_email_scan_stale_window_bug](daily-report/email/feedback_email_scan_stale_window_bug.md) — daily-email-scan-260610.js hardcoded stale window, silently wrong data; use 260622.js logic or newer
 
