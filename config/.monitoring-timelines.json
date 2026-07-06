@@ -6,8 +6,8 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-06T08:41:00+07:00",
-    "output_file": "reports/2026-07-06/daily-report.md",
+    "last_run": "2026-07-07T05:00:42+07:00",
+    "output_file": "reports/2026-07-07/daily-report.md",
     "last_status": "complete",
     "caveats": [
       "Recheck 08:41 Jul-6: Elliott completed (Generator RSVP was project topic, not person-status alert, Violet had activity). Philip completed (precise MS Teams disambiguation via 'Six Star Rentals' subtitle click, verified pbriggs@sixstarrentals.com.au — last msg our own Jul 1 outreach, no reply, no complaint). Matrix token refreshed (matrix-login.js SSO). Workstream re-login succeeded: KhanhHH 8h (Baamboozle 6.5+Generator 1.5) + LeNH 8h (James Diamond) confirmed worked Jul 3 — false alarms cleared. PhucVT 0h Jul 3 CONFIRMED real (no leave note) — genuine alert, reminder pending send. LongVV week total 18h/16h target OK. Fountain plan corrected: trinhmtt revised VuTQ 8h->12h + QC 22h->22.5h on Jul 3 12:01 (missed by earlier cron read) -> capacity 92h/wk not 88h/wk, runway 2.49wk not 2.60wk. Check Progress Trello card: all 20 items complete, card marked done. Upwork Rory/Neural/Aysar still session-expired (CAPTCHA blocks headless retry) but Trello items already complete per silence-never-blocks policy.",
@@ -192,8 +192,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-06T08:41:00+07:00",
-    "output_file": "reports/2026-07-06/daily-report.md"
+    "last_run": "2026-07-07T05:00:42+07:00",
+    "output_file": "reports/2026-07-07/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-07-03T01:42:00Z",
