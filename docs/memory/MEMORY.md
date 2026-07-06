@@ -131,6 +131,7 @@
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md) — All 8 Monday report sheet IDs
+- [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md) — Use WS weekTotal not weekCharged; sheet 0.00=stale, cross-check WS; scope=manager+in Form dropdown only
 
 ## money-report
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md) — MISA Net Worth: use `trueTotalBalance` API not manual reconstruct (rules in money-report.md skill); investment analysis: growth quality + 3-question framework
