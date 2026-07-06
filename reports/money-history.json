@@ -86,12 +86,12 @@
       "categories": {
         "real_estate": 3520000000,
         "gold": 757000000,
-        "investment": 2365783206,
+        "investment": 2170758840,
         "savings": 1038686927,
-        "liquid": 191317433
+        "liquid": 386341799
       },
       "method": "dashboard_verified",
-      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction (accounts+savings+VCBS/VCBF/FPTS/Finhay cost-basis-remaining) gives 7,872,791,270 (~0.94% higher) — consistent with the known unrealized-P&L gap seen on 23/06, not a data bug. Investment recovered to 2.37B (from 2.09B on 23/06) and Savings rebuilt to 1.04B (from 0.64B) after the mid-June VCBS redemption was redeployed into new term deposits (vcb 1 month, tikcop 1m/5m) and fresh VCBS/FPTS/VCBF/Finhay DCA contributions. CONFIRMED DATA BUG: excluded a 2,005,479 ghost balance on a closed 'nam á 6m' savings book (endDate 2024-06-01) that user confirmed is fully withdrawn — /wallets/totaldashboard (net_worth above) likely still includes it, true net worth probably ~7,736,882,087."
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction (accounts+savings+VCBS/VCBF/FPTS/Finhay cost-basis-remaining) gives 7,872,791,270 (~0.94% higher) — consistent with the known unrealized-P&L gap seen on 23/06, not a data bug. Investment (VCBS/VCBF/FPTS/Finhay/Larion) at 2.17B, Savings rebuilt to 1.04B (from 0.64B on 23/06) after the mid-June VCBS redemption was redeployed into new term deposits (vcb 1 month, tikcop 1m/5m) and fresh VCBS/FPTS/VCBF/Finhay DCA contributions. CONFIRMED DATA BUG: excluded a 2,005,479 ghost balance on a closed 'nam á 6m' savings book (endDate 2024-06-01) that user confirmed is fully withdrawn — /wallets/totaldashboard (net_worth above) likely still includes it, true net worth probably ~7,736,882,087. RECLASSIFIED (user correction 2026-07-06): Tikop (195,024,366) moved from investment to liquid — it's a robo-savings/cash-parking product, not a growth investment. Prior snapshots (21/05-23/06) still have Tikop bundled into investment (schema/categorization not retroactively changed since per-date Tikop breakdown wasn't tracked separately before) — do not compare investment/liquid deltas across the 23/06→06/07 boundary 1-for-1."
     }
   ]
 }

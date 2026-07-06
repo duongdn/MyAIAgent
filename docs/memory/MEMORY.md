@@ -139,6 +139,7 @@
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md) — MISA Net Worth: use `trueTotalBalance` API not manual reconstruct (rules in money-report.md skill); investment analysis: growth quality + 3-question framework
 - [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — every full run also needs `reports/{date}/money-dashboard.html` + append to `reports/money-history.json`, not in skill doc
 - [feedback_savings_already_matured_check](money-report/feedback_savings_already_matured_check.md) — flag savings w/ endDate<today & balance>0 as "Already Matured", don't just drop from Upcoming Maturities
+- [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md) — Tikop is robo-savings/cash, categorize as Liquid not Investment despite MISA walletType
 
 ## news-digest
 - [feedback_news_digest_new_topic](news-digest/feedback_news_digest_new_topic.md) — Unknown topic → new topic w/ own RSS sources, never alias
