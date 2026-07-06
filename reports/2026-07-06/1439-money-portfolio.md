@@ -45,6 +45,13 @@ VCBS/VCBF/FPTS/Finhay valued via cost-basis-remaining + currentAmount formula (s
 | 💵 Liquid | 191,317,433 | 2.43% | 2.45% |
 | 💳 Debt | −61,000,000 | −0.77% | −0.78% |
 
+## ⚠️ Already Matured — Needs Action
+| Deposit | Amount (₫) | Rate | Matured | Idle for |
+|---------|-----------:|-----:|---------|---------:|
+| nam á 6m | 2,005,479 | 8% | 2024-06-01 | ~2 years 1 month |
+
+Book is still `inActive: false` with a balance sitting on it, but its term ended over 2 years ago — no longer earning the 8% term rate (likely dropped to the bank's unsecured/no-term rate, usually near 0). Close and redeposit, or withdraw.
+
 ## Upcoming Maturities
 | Deposit | Amount (₫) | Rate | Maturity |
 |---------|-----------:|-----:|----------|

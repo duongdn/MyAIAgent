@@ -79,6 +79,7 @@ Note: `trueTotalBalance` (dashboard, authoritative) = 7,738,887,566 ₫; the cos
 | Tiền mặt | 2.43% | 5–10% | ⚠️ Under (offset by Savings acting as semi-liquid buffer) |
 
 ### 4. Upcoming decisions (within 90 days)
+- **Already matured, needs action now**: "nam á 6m" (2.0M₫, 8%) term ended 2024-06-01 — sitting idle over 2 years past maturity, no longer earning the term rate. Close and redeposit.
 - **2026-07-09**: tịkcop 1 week (30.2M₫) + vcb 1 month (504.0M₫) mature — 534M₫ needs a reinvestment/rollover decision within days.
 - **2026-08-02**: tikcop 1m (102.6M₫) matures.
 - **2026-10-13**: tikcop 5m (401.9M₫) matures — just outside the 90-day window but worth planning for now given the size.

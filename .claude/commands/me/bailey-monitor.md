@@ -351,6 +351,19 @@ echo | openssl s_client -servername paturevision.fr -connect paturevision.fr:443
 - Mailgun %: delivery rate from stats
 - SSL dates: flag if expiring within 30 days
 
+### ⚠️ Every WARNING/NOT OK/CRITICAL line MUST carry an inline explanation (MANDATORY)
+
+A bare "WARNING" label with no context is not acceptable — the customer cannot act on it and will ask why (this has happened before: 03/07/2026 report posted "Performance status: WARNING" / "Memory: WARNING" / "AWS RDS: WARNING" with zero detail, customer had to ask what it meant).
+
+Every time any field is not `OK`, append a short italic clause in parens explaining cause + whether it's a known/recurring pattern or a new issue, e.g.:
+```
+• Performance status: WARNING _(nightly memory spikes recurring 14+ days, self-resolving)_
+• Resource status:
+    ◦ Memory: WARNING _(spikes to ~97% nightly ~22:00–01:00 UTC, resolves on its own — likely a scheduled batch job)_
+• AWS RDS: WARNING _(routine OS + engine patch pending on speedventory, not yet applied — schedule during Mon maintenance window)_
+```
+Keep it customer-safe (see Customer-Facing Message Rules above) — plain-language cause and whether action is needed, never internal error text/stack traces/config flags.
+
 ### ⚠️ Customer-Facing Message Rules (MANDATORY)
 
 This Slack channel is customer-visible. **NEVER expose internal details:**
