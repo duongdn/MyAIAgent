@@ -11,29 +11,31 @@
 `nam á 6m` (walletId `9f37c5f5...`, 2023-12-01 to 2024-06-01, 8%) excluded — user confirmed 2026-07-06 it was fully withdrawn long ago and no longer exists in the app. Its `currentAmount` (2,005,479.45) is stale ghost data on MISA's side (all other closed/duplicate "nam á 6m" books correctly show 0). See Alerts.
 
 ## By Account (grouped by category, sorted by balance desc within)
-| Account | Balance (₫) | % Gross | % Net | Category |
-|---------|------------:|--------:|------:|----------|
-| Nhà (inactive) | 2,500,000,000 | 31.76% | 32.00% | 🏠 Real Estate |
-| long an res (inactive) | 1,020,000,000 | 12.96% | 13.06% | 🏠 Real Estate |
-| Larion cổ phần (inactive) | 600,000,000 | 7.62% | 7.68% | 📈 Investment |
-| VCBF | 594,063,000 | 7.55% | 7.60% | 📈 Investment |
-| VCBS | 553,155,620 | 7.03% | 7.08% | 📈 Investment |
-| FPTS | 349,136,151 | 4.43% | 4.47% | 📈 Investment |
-| Tikop | 195,024,366 | 2.48% | 2.50% | 📈 Investment |
-| Finhay | 74,404,069 | 0.95% | 0.95% | 📈 Investment |
-| vcb 1 month (savings) | 503,977,053 | 6.40% | 6.45% | 🏦 Savings |
-| tikcop 5m (savings) | 401,918,000 | 5.11% | 5.15% | 🏦 Savings |
-| tikcop 1m (savings) | 102,615,984 | 1.30% | 1.31% | 🏦 Savings |
-| tịkcop 1 week (savings) | 30,175,891 | 0.38% | 0.39% | 🏦 Savings |
-| ~~nam á 6m (savings) — 2,005,479~~ | — | — | — | 🐛 EXCLUDED (ghost, see Alerts) |
-| vàng (inactive) | 757,000,000 | 9.62% | 9.69% | 🥇 Gold |
-| Paypal | 185,399,778 | 2.35% | 2.37% | 💵 Liquid |
-| vcb | 5,256,024 | 0.07% | 0.07% | 💵 Liquid |
-| Ví | 550,000 | 0.01% | 0.01% | 💵 Liquid |
-| Momo (inactive) | 104,468 | 0.00% | 0.00% | 💵 Liquid |
-| nam á (inactive) | 10,867 | 0.00% | 0.00% | 💵 Liquid |
-| Payoneer (inactive) | −3,705 | −0.00% | −0.00% | 💵 Liquid |
-| VCB visa | −61,000,000 | −0.77% | −0.78% | 💳 Debt |
+
+**Nhà (2,500,000,000 ₫) excluded from this table** — primary residence, currently lived in, not tradeable/sellable, so it distorts % if included. Percentages below are of investable assets ex-Nhà (5,372,791,270 ₫). Nhà is still counted in Summary/By Category above and in Net Worth.
+
+| Account | Balance (₫) | % of investable (excl. Nhà) | Category |
+|---------|------------:|------:|----------|
+| long an res (inactive) | 1,020,000,000 | 18.98% | 🏠 Real Estate |
+| Larion cổ phần (inactive) | 600,000,000 | 11.17% | 📈 Investment |
+| VCBF | 594,063,000 | 11.06% | 📈 Investment |
+| VCBS | 553,155,620 | 10.30% | 📈 Investment |
+| FPTS | 349,136,151 | 6.50% | 📈 Investment |
+| Tikop | 195,024,366 | 3.63% | 📈 Investment |
+| Finhay | 74,404,069 | 1.38% | 📈 Investment |
+| vcb 1 month (savings) | 503,977,053 | 9.38% | 🏦 Savings |
+| tikcop 5m (savings) | 401,918,000 | 7.48% | 🏦 Savings |
+| tikcop 1m (savings) | 102,615,984 | 1.91% | 🏦 Savings |
+| tịkcop 1 week (savings) | 30,175,891 | 0.56% | 🏦 Savings |
+| ~~nam á 6m (savings) — 2,005,479~~ | — | — | 🐛 EXCLUDED (ghost, see Alerts) |
+| vàng (inactive) | 757,000,000 | 14.09% | 🥇 Gold |
+| Paypal | 185,399,778 | 3.45% | 💵 Liquid |
+| vcb | 5,256,024 | 0.10% | 💵 Liquid |
+| Ví | 550,000 | 0.01% | 💵 Liquid |
+| Momo (inactive) | 104,468 | 0.00% | 💵 Liquid |
+| nam á (inactive) | 10,867 | 0.00% | 💵 Liquid |
+| Payoneer (inactive) | −3,705 | −0.00% | 💵 Liquid |
+| VCB visa | −61,000,000 | −1.14% | 💳 Debt |
 
 VCBS/VCBF/FPTS/Finhay valued via cost-basis-remaining + currentAmount formula (see skill notes), not raw currentAmount.
 
