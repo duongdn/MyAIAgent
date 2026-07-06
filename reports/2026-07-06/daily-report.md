@@ -291,11 +291,20 @@ Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory, Aysa
 - Confirmed live via DB: SSH'd to samguard.co, `wp_options.hsts_csp` `connect-src` list has `googleads.g.doubleclick.net` but not bare `ad.doubleclick.net`.
 - `jsErrors: 0`, `pageErrors: 0` — only the CSP violation, no other real errors.
 
-**Fix — partially applied, needs manual finish:**
-- `wp_options.hsts_csp` (`wp_samguard` DB) updated to include `https://ad.doubleclick.net` in `connect-src` — user approved, applied via SSH (both raw SQL and `wp option update`, confirmed in DB).
-- **Live header still stale.** Root cause: this plugin (`headers-security-advanced-hsts-wp`) doesn't serve CSP from the DB option at runtime — it bakes it into a static `Header set Content-Security-Policy` rule in `.htaccess`, regenerated only via its `update_option_hsts_csp` hook. `.htaccess` is owned `www-data:www-data` (664); our SSH user (`nustech`) isn't in that group and has no passwordless `sudo`, so the hook fires but the file write silently no-ops (`.htaccess` mtime unchanged since Feb 4).
-- **Manual step needed (user to complete):** go to `https://www.samguard.co/wp-admin/options-general.php?page=headers-security-advanced-hsts-wp-plugin`, open the CSP field, click Save (value already correct in DB — the web request runs as `www-data` and can write `.htaccess`). Full corrected CSP string is in this session for reference.
-- After saving, re-run `TMPDIR_OVERRIDE=<short dir> node scripts/wordpress-samguard-check.js` or `curl -sI https://www.samguard.co/ | grep -i content-security-policy` to confirm `ad.doubleclick.net` appears live.
+**Fix — FULLY APPLIED AND VERIFIED (11:58):**
+- `wp_options.hsts_csp` (`wp_samguard` DB) updated to include `https://ad.doubleclick.net` in `connect-src`.
+- First attempt via SSH (raw SQL + `wp option update`) updated the DB but did NOT regenerate `.htaccess` — this plugin (`headers-security-advanced-hsts-wp`) bakes CSP into a static `Header set Content-Security-Policy` rule in `.htaccess`, rewritten only via its `update_option_hsts_csp` hook, which needs `www-data` file permission our SSH user (`nustech`) doesn't have (no passwordless sudo either).
+- User saved the value via wp-admin (`options-general.php?page=headers-security-advanced-hsts-wp-plugin`) — first save was a no-op (WP skips the hook when submitted value == current DB value, and DB already had the target value from our SSH attempt). Reverted DB to old value, gave user the new value again, user re-saved through the browser (runs as `www-data`) → `.htaccess` regenerated successfully (mtime now Jul 6 04:54 UTC, contains `ad.doubleclick.net`).
+- **Verified live:** `curl -sI https://www.samguard.co/` now shows `ad.doubleclick.net` in `connect-src`. Re-ran `wordpress-samguard-check.js` on ALL 16 real site pages (from sitemap: home, br, calculadora-roi, contact-us, contate-nos, full-event-demo, partners, partners-2, request-a-demo, roi-calculator, sarona-conference, solicite-uma-demonstracao, submission-success ×3, hello-world) — **`cspViolations: 0` on every page.** Fix confirmed site-wide.
+
+**Unrelated pre-existing JS bugs found while checking all pages (NOT caused by this CSP fix — header-only change, doesn't touch page JS):**
+| Page(s) | Error |
+|---------|-------|
+| calculadora-roi, contact-us, partners, partners-2, request-a-demo, roi-calculator (6 pages) | `Identifier 'BLOCKED_EMAIL_DOMAINS' has already been declared` — a script included twice |
+| calculadora-roi | `translateHeader is not defined` |
+| contate-nos | `Cannot read properties of null (reading 'addEventListener')` at line 659:27 |
+
+Not fixed (out of scope of this task) — flagging for a future pass.
 
 **Trello:** "Elena - WordPress SamGuard" item on today's (now-archived) Check Progress card was wrongly marked complete at 05:28 — leaving as-is since card is archived; corrected status lives in this report instead.
 
@@ -307,5 +316,5 @@ Per policy: session failure ≠ alert. Trello items (Neural Contract, Rory, Aysa
 2. **Upwork session (Rory/Neural/Aysar)** — needs manual VNC re-login with visible browser to clear CAPTCHA; headless retry failed again.
 3. **Swish APM Signal Lost** — 6 occurrences on Jul 5. Carrick should check Swish infrastructure.
 4. **Baamboozle #629** — P2 SQL integer casting bug (raw SQL without casting). Should be prioritized.
-5. **Elena WordPress CSP fix** — DB updated, but live `.htaccess` needs a manual Save via wp-admin (permission issue for our SSH user) to actually regenerate — see correction section above.
 5. **Xero API quota warning** (Candasurveyors, via nick@) — may affect client integration, needs client-side attention.
+6. **Elena WordPress JS bugs (non-CSP)** — `BLOCKED_EMAIL_DOMAINS` double-declared on 6 pages, `translateHeader is not defined`, null `addEventListener` on contate-nos — pre-existing, found during CSP-fix page sweep, not yet fixed.

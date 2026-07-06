@@ -495,6 +495,7 @@ GH_TOKEN=$(gh auth token -h github.com -u nusken) gh api repos/Precognize/develo
 - CSP violations (`cspViolations`) are REAL errors, not noise — flag any as ⚠️ action needed (see `docs/memory/daily-report/elena/feedback_csp_violations_are_real_errors.md`). Only filter out non-CSP analytics network noise (plain GA/ads `failedRequests` with no CSP directive violation).
 - Report all `cspViolations` + `pageErrors` + `jsErrors` as real errors
 - No errors = clean; this is a simple health check, no PR/deploy flow
+- **CSP fix mechanics (samguard.co):** the `headers-security-advanced-hsts-wp` plugin doesn't serve `hsts_csp` dynamically — it bakes it into a static `Header set Content-Security-Policy` rule in `.htaccess`, rewritten only via the `update_option_hsts_csp` hook. `.htaccess` is `www-data`-owned; our SSH user lacks write perms and there's no passwordless sudo, so a raw SQL/`wp option update` over SSH updates the DB but silently fails to rewrite `.htaccess`. Fix must go through wp-admin (`options-general.php?page=headers-security-advanced-hsts-wp-plugin`) so the save runs as `www-data`. **Also:** WP skips the hook entirely if the submitted value equals the current DB value — if you already set the DB value via SSH, the next wp-admin save is a no-op. Revert the DB to the old value first so the wp-admin save registers as a real change. Always verify with `curl -sI https://www.samguard.co/ | grep -i content-security-policy` (not just the DB) after any fix.
 
 **`--external` flag (default: off, internal only):**
 
