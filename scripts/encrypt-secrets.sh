@@ -37,6 +37,7 @@ SECRET_FILES=(
   config/.github-config.json
   config/.workstream-config.json
   config/.newrelic-config.json
+  config/.newrelic-ohcleo-config.json
   config/.rollbar-config.json
 )
 

@@ -33,6 +33,7 @@ ENC_FILES=(
   config/.bailey-config.json.enc
   config/.upwork-config.json.enc
   config/.newrelic-config.json.enc
+  config/.newrelic-ohcleo-config.json.enc
   config/.rollbar-config.json.enc
   config/.cloudflare-config.json.enc
   config/.workstream-config.json.enc
