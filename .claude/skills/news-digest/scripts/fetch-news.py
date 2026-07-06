@@ -598,11 +598,24 @@ def main():
     json_out = json.dumps(output, ensure_ascii=False, indent=2)
     print(json_out)
 
-    # Save cache so fix-links.py can post-process the markdown
+    # Save cache so fix-links.py can post-process the markdown.
+    # The `all` workflow calls this script once per topic (see SKILL.md — a
+    # single `all` call returns too much JSON for the context window), so we
+    # MERGE into any existing cache instead of overwriting it. Overwriting
+    # meant only the last-fetched topic survived to cache, and fix-links.py
+    # silently failed to fix broken links for every earlier topic.
     cache_path = save_cache or CACHE_FILE
     try:
+        existing_results = []
+        if os.path.exists(cache_path):
+            with open(cache_path, "r", encoding="utf-8") as f:
+                existing_results = json.load(f).get("results", [])
+        fetched_topics = {r["topic"] for r in output["results"]}
+        merged = [r for r in existing_results if r["topic"] not in fetched_topics]
+        merged.extend(output["results"])
+        output["results"] = merged
         with open(cache_path, "w", encoding="utf-8") as f:
-            f.write(json_out)
+            json.dump(output, f, ensure_ascii=False, indent=2)
     except Exception:
         pass  # cache is best-effort
 

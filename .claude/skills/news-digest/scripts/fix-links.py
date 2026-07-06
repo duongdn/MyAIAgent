@@ -30,6 +30,14 @@ def is_bare_domain(url: str) -> bool:
     return bool(BARE_DOMAIN_RE.match(url))
 
 
+def same_domain(url_a: str, url_b: str) -> bool:
+    def netloc(u):
+        m = re.match(r"https?://([^/]+)", u)
+        return m.group(1) if m else ""
+
+    return netloc(url_a) == netloc(url_b)
+
+
 def build_source_map(cache_data: dict) -> dict:
     """Return {source_name: [url1, url2, ...]} from the fetched JSON cache."""
     source_map = {}
@@ -47,7 +55,10 @@ def build_source_map(cache_data: dict) -> dict:
 
 def fix_section(section_text: str, article_urls: list) -> tuple:
     """
-    Replace bare-domain URLs in a source section using position-based matching.
+    Replace bare-domain or truncated URLs in a source section using
+    position-based matching against the fetched cache. Any URL that doesn't
+    match the cache URL at its position gets overwritten, as long as they
+    share the same domain (guards against position drift breaking the match).
     Returns (fixed_text, num_fixes).
     """
     parts = []
@@ -59,8 +70,12 @@ def fix_section(section_text: str, article_urls: list) -> tuple:
         parts.append(section_text[last_end : match.start()])
         url = match.group(3)
 
-        if is_bare_domain(url) and article_idx < len(article_urls) and article_urls[article_idx]:
-            correct_url = article_urls[article_idx]
+        correct_url = article_urls[article_idx] if article_idx < len(article_urls) else ""
+        needs_fix = correct_url and url != correct_url and (
+            is_bare_domain(url) or same_domain(url, correct_url)
+        )
+
+        if needs_fix:
             parts.append(f"{match.group(1)}{correct_url}{match.group(4)}")
             fixes += 1
         else:
