@@ -26,6 +26,7 @@
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md) — 10 accounts; davidztv19=Arthur/Meta-Stamp
 - [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md), [feedback_email_scan_stale_window_bug](daily-report/email/feedback_email_scan_stale_window_bug.md) — use 260622.js logic not 260610.js
+- [feedback_davidztv19_new_account_unwired](daily-report/email/feedback_davidztv19_new_account_unwired.md) — davidztv19@ in config but not in cron scan script, silently skipped
 
 ## daily-report:slack
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — use search.messages not conversations.history
