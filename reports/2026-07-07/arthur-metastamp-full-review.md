@@ -21,12 +21,12 @@
 |---|---|---|
 | **Art K** | Arthur | Đầu mối kỹ thuật chính, nhận job từ Chris, chuyển tiếp cho team |
 | **Chris (Chris Coyne)** | Chris | Người quản lý dự án phía khách, chuyển tiếp yêu cầu từ 1 sếp cấp cao hơn ("SVP") |
-| **Nick = TienND** (Tien Nguyen) | ✅ Đã xác nhận (anh Dương) — "Nick" trên Slack chính là TienND | Người làm kỹ thuật chính thật sự (Stripe, MCP, thanh toán, fingerprint...), báo cáo trực tiếp cho Arthur **40-48 giờ/tuần** rất chi tiết (breakdown từng ngày). Nhưng Workstream "Crystal lang" chỉ ghi role "Manager" cho TienND, **không hề có giờ công nào được log** — xem vấn đề #1 bên dưới. |
+| **Nick = TienND** (Tien Nguyen) | ✅ Đã xác nhận (anh Dương) — "Nick" trên Slack chính là TienND | Người làm kỹ thuật chính thật sự (Stripe, MCP, thanh toán, fingerprint...), báo cáo trực tiếp cho Arthur **40-48 giờ/tuần** rất chi tiết (breakdown từng ngày). ✅ **Đã xác nhận: giờ công của TienND CÓ được log đầy đủ trong Workstream** (48h tuần Jun29-Jul5, screenshot anh gửi) — xem phần sửa lỗi bên dưới. |
 | **David Tran** / "David Freelancer" | Danh tính dùng chung — namtv, PhucVT, DuongDN đều có thể đăng nhập bằng tài khoản này | Việc "David Tran" làm (upload track, tạo tài khoản, hỏi yêu cầu Chris) khớp với báo cáo Workstream của PhucVT |
 | **Jack** | Người quen cũ của Arthur, giới thiệu Nam Tran cho Arthur | Ít hoạt động, chủ yếu giai đoạn đầu |
 | **"Dave Pelman"** | Nhắc đến 1 lần (6/7) — có vẻ là **executive/CEO thật của khách hàng cuối** | Người sẽ xem demo thứ Năm |
 
-🔴 **Vấn đề thật sự (đã xác nhận danh tính, không còn là câu hỏi mở):** TienND làm việc trực tiếp với Arthur dưới tên "Nick" trên Slack, báo cáo tỉ mỉ 40-48 giờ/tuần bằng tiếng Anh (breakdown từng task, từng ngày) — nhưng trong Workstream nội bộ "Crystal lang", TienND chỉ được gắn role "Manager" và **không log một giờ nào**. Đây là khoảng trống theo dõi giờ công/lương thật sự cần xử lý, không phải nhầm lẫn danh tính.
+✅ **ĐÍNH CHÍNH (7/7 12:00):** Vấn đề "TienND 0h" ban đầu là **báo động giả do lỗi query của em**, không phải lỗ hổng thật. API Workstream trả về **403 Forbidden** khi gọi đúng ngày đầu tuần (`date=2026-06-29/06-30/07-01`), nhưng gọi với ngày giữa/cuối tuần cùng tuần đó (`date=2026-07-02` đến `07-05`) thì trả về đầy đủ — 8 dòng log, tổng đúng **48h00** (payment flow, audio pocket, music metadata, fingerprinting — toàn việc thật), khớp 100% với screenshot Workstream anh gửi. TienND log giờ đầy đủ, đúng quy trình — không cần hành động gì thêm.
 
 ---
 
@@ -100,7 +100,7 @@
 
 *(Cần đăng nhập `solid-code-team.slack.com` bằng tài khoản namtv/David để mở được link.)*
 
-⚠️ **Vấn đề #1 (TienND 48h) cần làm rõ lại:** Em quét lại kỹ toàn bộ 18 project trong Workstream (cả tuần này lẫn tuần trước) — **không tìm thấy dòng log giờ nào của TienND**. Con số "48 giờ/tuần" duy nhất em thấy là chính Nick TỰ báo cho Arthur qua Slack (link ở trên), không phải log trong Workstream nội bộ. Anh check ở đâu ra 48h — Workstream web UI (project nào?) hay đang nhắc tới con số Nick tự báo trên Slack? Nếu là Workstream thật thì có thể em query nhầm project/quyền hạn API bị giới hạn hơn UI.
+✅ **Vấn đề #1 đã đóng (7/7 12:00):** Anh gửi screenshot Workstream xác nhận TienND có 48h thật (Jun29-Jul5). Tìm ra nguyên nhân: API Workstream trả về **403 Forbidden** khi query đúng ngày đầu tuần, nhưng ngày giữa/cuối tuần thì trả đầy đủ dữ liệu — lỗi ở cách em query, không phải lỗ hổng theo dõi giờ công thật. Đã lưu vào memory để tránh lặp lại.
 
 ---
 
@@ -110,7 +110,7 @@
 
 | # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp |
 |---|--------|--------|------------|---------------------|------------------------------|
-| 1 | TienND ("Nick") làm 40-48h/tuần thật (theo Slack) — nhưng em quét API không thấy log trong Workstream "Crystal lang" hay bất kỳ project nào khác | 🔴 Cao | 🟡 Đang làm rõ | 07/7 11:56 — anh nói đã check thấy 48h, em quét API 18 project không thấy | Cần anh confirm: check ở đâu ra 48h (Workstream UI project nào, hay số Nick tự báo Slack)? Có thể API bị giới hạn quyền so với UI |
+| 1 | ~~TienND ("Nick") không có giờ log trong Workstream~~ | 🟢 Thấp | ✅ Đã đóng — báo động giả | 07/7 12:00 — anh gửi screenshot xác nhận 48h thật, lỗi do em query sai ngày (đầu tuần bị 403) | Không cần hành động — TienND log giờ đầy đủ, đúng quy trình |
 | 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur |
 | 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat |
 | 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit |
@@ -130,7 +130,7 @@
 
 ## 6. Câu hỏi cần anh xác nhận/quyết định
 
-1. TienND (Nick) làm 40-48h/tuần cho Arthur — giờ này có được tính lương qua kênh nào không, hay cần bắt đầu log vào Workstream?
+1. ~~TienND giờ công~~ ✅ đã xác nhận xong (48h thật, log đầy đủ).
 2. Anh có chấp nhận tiếp tục yêu cầu che giấu vị trí (proxy Mexico) hay muốn Nam Tran làm rõ với Arthur?
 3. Có cần thiết lập theo dõi định kỳ (tự động) cho cả 5 kênh (2 Matrix + 3 Slack) để không bị bỏ sót tin nhắn nữa không?
 
