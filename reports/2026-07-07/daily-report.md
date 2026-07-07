@@ -99,9 +99,9 @@ Trello: James Diamond ✓, Andrew Taraba ✓ complete.
 
 | Developer | Sheets Jul 6 | WS Jul 6 | Status |
 |-----------|-------------|----------|--------|
-| LongVV | 0h | 0h | ✅ normal — 16h/**week** target, day 1, not due yet |
+| LongVV | 0h | 0h | ⚠️ CORRECTED — old 16h/wk part-time policy no longer applies. **User confirmed LongVV now works full-time (40h/wk) on Ohcleo** (he's "Tony" in OhCleo Slack — his daily report was already confirmed present ✓ in the Slack section above). 0h in Sheets/WS despite Tony's Slack report being present — needs clarification on where his Ohcleo hours are actually logged. Memory updated. |
 | PhucVT | 0h | **8h** (Crystal lang) | ✅ confirmed working |
-| TuanNT | 0h | 0h (but Scrin.io 8h31m) | ✅ confirmed via Scrin — gate passes |
+| TuanNT | 0h | 0h | ⚠️ unverified — do NOT use Scrin.io as evidence (Scrin tracks Nick @ John Yi, not TuanNT — see [[feedback_scrin_consolidated]]); TuanNT's actual current work is unknown this run |
 | KhanhHH | 0h | **6h** (Baamboozle 4h + Generator 2h) | ✅ confirmed working |
 | LeNH | 0h | 0h (confirmed 2x) | ⚠️ genuine 0h, no leave note — reminder queued (print-only) |
 
@@ -113,9 +113,9 @@ Trello: James Diamond ✓, Andrew Taraba ✓ complete.
 
 | Developer | Date | Hours | Project |
 |-----------|------|-------|---------|
-| Nick (TuanNT) | Jul 6 | 8h31m (511 min) | John Yi - Amazing Meds |
+| Nick | Jul 6 | 8h31m (511 min) | ⚠️ raw API: `Project: "No project"`, `Client: "No client"` — cannot attribute to John Yi/Amazing Meds |
 
-TuanNT confirmed working 8h31m on Jul 6 via Scrin.io.
+**Correction:** This tracks **Nick** (nick@nustechnology.com), not TuanNT — per existing memory this data was never valid evidence of TuanNT's hours, and today's raw fetch additionally shows Scrin itself has no project/client tag for this session (the "john yi" label is just the stale Scrin company account name, not a live project assignment). This section should NOT be used to confirm or deny TuanNT's work status.
 
 ---
 
@@ -170,8 +170,8 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Maddy - Carrick/Kai/Luis | ✅ complete (recheck) | Kai Slack ✓, Maddy OK; LongVV 0h day1 normal (16h/wk target, not due yet) |
-| John Yi - Amazing Meds | ✅ complete (recheck) | TuanNT confirmed via Scrin 8h31m — gate passes |
+| Maddy - Carrick/Kai/Luis | ✅ complete (recheck) — see full detail below | Kai closed 3 tickets; Madhuraka flagged #428 aging + Kai's To Do list empty — see corrected row further down. LongVV note: no longer relevant to this item (he's full-time Ohcleo now, not part of Maddy capacity planning). |
+| John Yi - Amazing Meds | ⚠️ REOPENED — see correction below | Original claim invalid, see corrected row further down |
 | James Diamond - Vinn | ✓ complete | Vinn Discord update ✓ |
 | Rory | ✓ complete | Swift Studio checked, 0 msgs = clean |
 | Aysar | ✅ complete (recheck) | MPDM Carrick update ✓; KhanhHH 6h confirmed (Baamboozle+Generator) |
@@ -181,10 +181,10 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 | Marcel | ✓ complete | Equanimity normal activity |
 | Elena - SamGuard | ✓ complete | SAM GUARD 0 Elena/DP, 0 PRs = clean |
 | Raymond - LegalAtoms | ✓ complete | LegalAtoms 0 msgs = clean |
-| Neural Contract | ✅ complete (recheck) | Upwork still blocked (CAPTCHA) — completed per session-failure≠alert policy |
-| Bailey | ✅ complete (recheck) | GGS Nick ✓; TuanNT gate passes via Scrin |
+| Neural Contract | ⚠️ REOPENED — see correction below | 3 login attempts, all blocked at CAPTCHA/2FA — needs human via VNC, not auto-completable |
+| Bailey | ⚠️ REOPENED — see correction below | GGS Nick Slack ✓ clean; TuanNT gate invalid, see corrected row further down |
 | Andrew Taraba | ✓ complete | Bizurk 0 DMs = clean |
-| Rebecca - William Will | ✅ complete (recheck) | William Bills 0 msgs; TuanNT gate passes via Scrin |
+| Rebecca - William Will | ⚠️ REOPENED — see correction below | William Bills 0 msgs clean; TuanNT gate invalid, see corrected row further down |
 | Colin | ✓ complete | Aigile 0 msgs = clean |
 | Fountain | ✓ complete | 5-part check done (plan data corrected on recheck, see below) |
 | Philip | ✅ complete (recheck) | Sidebar confirms unchanged state: our Jul 1 outreach, no reply, no complaint |
@@ -192,7 +192,7 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 | Arthur - Meta-Stamp | ✅ complete (recheck) | davidztv19 email checked — clean active project + PhucVT 8h confirmed |
 | Elena - WordPress SamGuard | ○ incomplete | CSP violation found (real alert, needs fix — not a data gap) |
 
-**Completed:** 20 items ✓ | **Left incomplete:** 1 item ○ (real alert)
+**Completed:** 16 items ✓ | **Left incomplete:** 5 items ○ (John Yi, Bailey, Rebecca — TuanNT status genuinely unverified; Neural Contract — Upwork CAPTCHA blocks human-required verification; Elena-WordPress — real CSP alert)
 
 ---
 
@@ -201,9 +201,9 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 ~~⚠️ All developers show 0h for Jul 6 in Google Sheets — Workstream unavailable in cron mode.~~ ✅ **Workstream recheck done 08:39** — real results below.
 
 Reminder queue (print only, NOT sent — `--send-reminder` not present):
-- LongVV: 0h Jul 6 confirmed real (WS checked) — normal, day 1, 16h/week target not due yet — NO reminder needed
+- LongVV: 0h Jul 6 in Sheets/WS — but he's now full-time Ohcleo ("Tony"), and Tony's Slack daily report WAS present ✓. This is a tracking-location gap, not an hours gap — no reminder appropriate until it's clear where his hours should be logged.
 - PhucVT: **8h confirmed** (Crystal lang) — NO reminder needed
-- TuanNT: 8h31m confirmed via Scrin.io — NO reminder needed
+- TuanNT: ⚠️ status unknown — Scrin.io 8h31m is NOT valid evidence (tracks Nick, not TuanNT, per [[feedback_scrin_consolidated]]); Sheets+WS combined 0h. Needs direct clarification on TuanNT's current assignment before deciding reminder.
 - KhanhHH: **6h confirmed** (Baamboozle+Generator) — NO reminder needed
 - LeNH: 0h Jul 6 confirmed real (WS checked 2x), no leave note — genuine, queued for reminder
 
@@ -256,14 +256,14 @@ All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA
 | John Yi - Amazing Meds | ⚠️ CORRECTED — do not trust prior "confirmed" claim | Original recheck wrongly claimed Scrin.io "confirmed" 8h31m on John Yi — **raw API data actually shows `Project: "No project"`, `Client: "No client"`** for that session. The Scrin company is literally still named "john yi" in our config but per user, John Yi has had no tasks for a long time — this label is stale and cannot verify John Yi-specific work. TuanNT combined Sheets+WS = 0h (confirmed 2x). Real status: **TuanNT's actual current project assignment is unverified/unknown** — needs direct clarification from user or TuanNT, not inferred from a stale company label. |
 | Aysar | ✓ completed | KhanhHH Workstream: Baamboozle 4h + Generator 2h = 6h. Baamboozle MPDM already clean. |
 | Elliott | ✓ completed | KhanhHH Generator 2h confirmed (real project activity). Generator Slack re-checked live: only Rudi/Carrick (EC2 cleanup, MR review) — no Elliott/Violet message, but no concrete named Elliott issue either → normal per low-activity policy. |
-| Neural Contract | ✓ completed | Upwork login retried 2x (`upwork-neural-refresh.js`, `upwork-login.js --login --account=carrick`) — both failed (Target closed / element not clickable, same CAPTCHA block as Jul 1-6). Session failure ≠ alert (established policy, 6 consecutive days). |
+| Neural Contract | ⚠️ REOPENED — user rejected silence≠alert shortcut here | 3 login attempts made (2 quick + 1 full run that got past username/password this run, further than before). All 3 hit a manual CAPTCHA/2FA wall — final one timed out waiting 3 min for human completion. **This genuinely requires a human to solve the CAPTCHA via VNC** (`bash scripts/vnc-login-session.sh upwork` + connect with a VNC viewer) — cannot be automated further. Reverted to incomplete on Trello per explicit instruction not to auto-complete without real verification. |
 | Bailey | ⚠️ CORRECTED — reopened pending TuanNT clarification | Previously marked complete citing Scrin 8h31m as TuanNT gate-pass — invalid, see John Yi row above (Scrin data has no project/client attribution). GGS Nick Slack is clean, but TuanNT's actual work status is unverified. VietPH no longer scanned (resigned 2026-06-30). Leaving Trello item as-is pending real TuanNT verification (not re-toggling on Trello mid-report; flagging here for next check). |
 | Rebecca (William Bills) | ⚠️ CORRECTED — reopened pending TuanNT clarification | Same issue — Scrin 8h31m is not verified John Yi/TuanNT-specific work. William Bills Slack is clean (0 msgs) but that alone doesn't confirm the TuanNT gate. Flagging for next check. |
 | Philip | ✓ completed | MS Teams sidebar preview re-checked: "Philip Briggs / 7/1 / You: Hi Philip Briggs I hope you are doing well..." — unchanged from the last verified-clean state (our Jul 1 outreach, no client reply, no complaint). |
 | Arthur - Meta-Stamp | ✓ completed | davidztv19@gmail.com (missed by cron email scan — not wired into `daily-email-scan-*.js`, see caveat below) checked directly: genuine project activity (Meta-Stamp POC asset share, MongoDB/Railway/GitHub/Slack infra setup Jul 6) + PhucVT Workstream 8h on Crystal lang same day. Clean, active project. |
 | Elena - WordPress SamGuard | ○ still incomplete | Real alert (CSP violation blocking region1.google-analytics.com) — not a data gap, needs actual fix. |
 
-**Trello Check Progress: 20/21 complete** (was 11/21). Card not auto-marked done — Elena-WordPress genuinely open.
+**Trello Check Progress: 16/21 complete** (corrected down from an invalid 20/21 — John Yi, Neural Contract, Bailey, Rebecca reopened after TuanNT/Scrin mislabeling was caught and Upwork CAPTCHA genuinely blocks Neural Contract verification). Elena-WordPress also genuinely open.
 
 ### Fountain — corrected
 

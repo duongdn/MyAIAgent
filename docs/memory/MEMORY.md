@@ -52,7 +52,7 @@
 - [feedback_sheets_wrong_tab_numbering](daily-report/sheets/feedback_sheets_wrong_tab_numbering.md), [feedback_sheets_empty_col_a_bug](daily-report/sheets/feedback_sheets_empty_col_a_bug.md) — use Summary tab; blank-colA counts if col G owner
 - [feedback_tasklog_summary_sheet](daily-report/sheets/feedback_tasklog_summary_sheet.md), [feedback_summary_sheet_no_double_count](daily-report/sheets/feedback_summary_sheet_no_double_count.md) — Summary col D = grand total, don't re-sum
 - [feedback_khanhhh_aysar_second_project](daily-report/sheets/feedback_khanhhh_aysar_second_project.md), [feedback_aysar_sheet_owner_is_khanhhh](daily-report/sheets/feedback_aysar_sheet_owner_is_khanhhh.md) — Aysar sheet owner=KhanhHH not LeNH
-- [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md) — 16h/week target, 0h/day normal
+- [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md) — UPDATED 260707: now full-time 40h/wk on Ohcleo ("Tony"), old 16h/wk part-time superseded
 - [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md) — LeNH any shortfall=alert; TuanNT combined 0h gates John Yi+Rebecca+Bailey, scan ALL 11 sheets
 - [feedback_vietph_leave_date_cron_bug](daily-report/sheets/feedback_vietph_leave_date_cron_bug.md), [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — parse-leave-emails.js first, leave date=PREV_DATE
 - [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 17 WS projects, run daily --week check
@@ -60,7 +60,7 @@
 - [feedback_tasklog_reminder_matrix](daily-report/sheets/feedback_tasklog_reminder_matrix.md), [feedback_tasklog_0h_reminder_complete](daily-report/sheets/feedback_tasklog_0h_reminder_complete.md), [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md) — 0h+no leave→remind, sent→complete; leave dates from email/sheets only
 
 ## daily-report:scrin
-- [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — tracks Nick not TuanNT; Mon=Sunday not Friday
+- [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴 REPEAT VIOLATION 260707: tracks Nick not TuanNT (never conflate); also check raw Project/Client tag, "john yi" is stale company label not live project
 
 ## daily-report:fountain
 - [feedback_fountain_cr_column](daily-report/fountain/feedback_fountain_cr_column.md), [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — est=ColI+ColJ; 5-part MANDATORY
