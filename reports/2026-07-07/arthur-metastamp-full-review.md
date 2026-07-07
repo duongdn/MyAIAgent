@@ -84,13 +84,33 @@
 
 ---
 
+## 4b. Link Slack để anh tự confirm
+
+| Vấn đề | Link |
+|---|---|
+| Yêu cầu proxy Mexico (Arthur, 19/5) | https://solid-code-team.slack.com/archives/C0B0BG90AUB/p1779154019589459 |
+| Nick lo thiếu thời gian test (9/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1780995774652229 |
+| Arthur nghi ngờ chất lượng "buggy as hell" (16/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1781580208321849 |
+| Ngân sách 120h (26/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1782452837001879 |
+| Nick tự báo "48 hours this week" (3/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783074537638599 |
+| Chris — big picture + 7 bugs (6/7 23:17) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709 |
+| "Attribution = half the test" (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783388123033279 |
+| Nick đang fix metadata (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783391050402099 |
+| Arthur chốt bỏ qua retention/training (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783394853204339 |
+
+*(Cần đăng nhập `solid-code-team.slack.com` bằng tài khoản namtv/David để mở được link.)*
+
+⚠️ **Vấn đề #1 (TienND 48h) cần làm rõ lại:** Em quét lại kỹ toàn bộ 18 project trong Workstream (cả tuần này lẫn tuần trước) — **không tìm thấy dòng log giờ nào của TienND**. Con số "48 giờ/tuần" duy nhất em thấy là chính Nick TỰ báo cho Arthur qua Slack (link ở trên), không phải log trong Workstream nội bộ. Anh check ở đâu ra 48h — Workstream web UI (project nào?) hay đang nhắc tới con số Nick tự báo trên Slack? Nếu là Workstream thật thì có thể em query nhầm project/quyền hạn API bị giới hạn hơn UI.
+
+---
+
 ## 5. BẢNG THEO DÕI (living tracker — cập nhật mỗi lần check, không viết lại từ đầu)
 
 **Trạng thái:** 🔴 Mở (chưa làm gì) | 🟡 Đang xử lý | 🟢 Xong, chờ anh xác nhận | ✅ Anh đã xác nhận xong
 
 | # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp |
 |---|--------|--------|------------|---------------------|------------------------------|
-| 1 | TienND ("Nick") làm 40-48h/tuần thật nhưng Workstream "Crystal lang" ghi role "Manager", 0h log | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Cần hỏi TienND trực tiếp: giờ công tính lương qua đâu, hay cần log vào Workstream |
+| 1 | TienND ("Nick") làm 40-48h/tuần thật (theo Slack) — nhưng em quét API không thấy log trong Workstream "Crystal lang" hay bất kỳ project nào khác | 🔴 Cao | 🟡 Đang làm rõ | 07/7 11:56 — anh nói đã check thấy 48h, em quét API 18 project không thấy | Cần anh confirm: check ở đâu ra 48h (Workstream UI project nào, hay số Nick tự báo Slack)? Có thể API bị giới hạn quyền so với UI |
 | 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur |
 | 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat |
 | 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit |
