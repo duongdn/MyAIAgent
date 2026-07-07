@@ -34,5 +34,41 @@ metadata:
 - **Client-side has 3 people, not 1:** Arthur (main technical contact), Chris (relays requirements, seems to be Arthur's own manager/PM), and an unnamed "SVP" whose requirements get relayed secondhand — this caused real friction on 2026-07-07 (see below).
 - **Scope has expanded 3x with no visible re-estimation**, per Tien's own words 2026-07-07: original task was "get payment/charging working" → then "audio pocket" got added → now "metadata vs mấy thứ khác" (metadata + other things) got added same day. Watch for a 4th expansion.
 - **2026-07-07 specific incident:** Arthur pushed back on his own stakeholder (the SVP) for springing "retention and training tiers" late — our team correctly confirmed this was never discussed with us. Separately, client DID request something genuinely new that day ("new MCP UI with metadata"). Both are worth tracking as separate scope-creep threads.
-- **Reporting rooms:** daily reports (Phúc, reviewed by Tien first) → room `ms-v3`; weekly reports → Chris → room `ms-v3-official`. **`ms-v3-official`'s room ID is not yet resolved/tracked** — find and add it to [[reference_matrix_rooms]] next time.
+- **Reporting rooms:** daily reports (Phúc, reviewed by Tien first) → room `ms-v3`; weekly reports → Chris → room `ms-v3-official`. ✅ **RESOLVED 2026-07-07** — these are Slack channels, not Matrix rooms, in the "Solid Code" workspace (see below).
 - A "dry run" (pre-demo rehearsal with the actual client) happens periodically — team's policy is to skip attending if it conflicts with their night, as long as code is pushed + a one-line Slack summary is sent beforehand.
+
+## 5th data source found 2026-07-07: Slack workspace `solid-code-team.slack.com`
+
+Config already existed as "Solid Code" in `config/.slack-accounts.json` (added 2026-07-06, previously unwired — see [[feedback_solid_code_new_workspace_unwired]]). Session token logged in as `namtv` (real name "David Tran" in this workspace). `auth_type: session` (xoxc+cookie) — use `conversations.history`, NOT `search.messages` (same as OhCleo pattern).
+
+This is a **shared multi-project workspace** (Nam Tran's own consultancy) — most channels/members belong to an unrelated older project ("X3"). Only 3 channels matter for Arthur:
+- `mpdm-art_k--jack--namtv-1` (`C0B0BG90AUB`) — the ORIGINAL relationship-building DM with Arthur+Jack, going back to **2026-04-29** (predates the Jul 2 Matrix room by over a month). This is where the whole arrangement was negotiated.
+- `ms-v3` (`C0B4G8USU3D`) — daily reports + almost all real technical back-and-forth. **842 messages since 2026-05-19**, heavily concentrated in the last 2 weeks (122 msgs on Jul 6 alone). This is the "quá nhiều msg" volume the user complained about.
+- `msv3-official` (`C0BEPFBLGJV`) — Chris's channel, only 4 messages (mostly joins), David Tran gave his GitHub username `davidztv` + email `davidztv19@gmail.com` here.
+
+User IDs worth knowing: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1`.
+
+**Fetch pattern:** `conversations.history?channel={id}&limit=200` paginated via `cursor`/`has_more`. Resolve names via `users.list`.
+
+## MAJOR finding 2026-07-07 — read the FULL Slack history, not just Matrix
+
+Reading only the 2 Matrix rooms (project kickoff Jul 2 onward) gives an incomplete and even misleading picture. The Slack `ms-v3` channel revealed:
+
+1. **🔴 "Nick" is doing the bulk of hands-on engineering (~48h/week, detailed daily reports) and does NOT appear anywhere in the Workstream "Crystal lang" roster/hours** (roster is only DuongDN/PhucVT/TienND). If "Nick" = nick@nustechnology.com (a real NUS employee), there's a real hours/payroll tracking gap — this needs direct confirmation from Nam Tran, not assumption either way.
+2. **🔴 Arthur explicitly asked the team to mask their true location** (Vietnam) using a Mexico proxy or his own mini-PC's IP, so the end client believes Arthur (based in Mexico) is doing the work directly: *"Make sure you don't access anything that belongs to the client without using a Mexican proxy... I'm currently located in 'San Gaspar', near 'Valle de Bravo', in the State of Mexico."* This is a real business/legal/reputational risk if discovered by the end client — flag to user, not something to silently normalize.
+3. Plaintext secrets pasted in chat (already noted above) — confirmed again in Slack, not just Matrix.
+4. **Scope grew via a formal, budget-aware negotiation** — not just ad-hoc creep. Jun 9: client added 40h of new scope; Jun 26: Arthur explicitly said *"due to the budget, we don't want to go with a 3 week, 120 hour option"* — there's a real, ongoing budget ceiling being managed on the client side.
+5. **A real quality-trust incident already happened once** (Jun 16): Arthur asked bluntly *"Or is it buggy as hell, or you barely tested anything?"* — this is not the first friction point, it's at least the second (after the overtime-pay concern).
+6. **Escalating demo stakes**: Monday = Arthur+Chris only, **Wednesday = "an executive"**, **Thursday = the CEO** of the end client (a name "Dave Pelman" appears once, likely the actual decision-maker). Chris sent a detailed 7-item bug list + exact acceptance-test wording from the real client on 2026-07-06 23:17 — this is the highest-signal single message in the whole history, contains the literal acceptance criteria and demo UI spec.
+
+**Full write-up saved to** `reports/2026-07-07/arthur-metastamp-full-review.md` (in Vietnamese, per user's explicit request — see below).
+
+## Standing feature request from user (2026-07-07)
+
+User: *"1 issue lớn là Arthur đang có cực kì nhiều msg trên Slack và matrix, tôi ko theo kịp, yêu cầu 1 tính năng để support tôi: (1) đọc tất cả msg, summary lại bằng tiếng Việt, ko đọc tiếng Anh nổi (2) tìm ra các issue cần giải quyết, sum lại ở cuối, cái nào fix được thì cho tôi cách giải quyết."*
+
+**This is now a standing, repeatable requirement for Arthur checks specifically:**
+1. Read ALL 5 sources every time: 2 Matrix rooms + 3 Slack channels (`mpdm-art_k--jack--namtv-1`, `ms-v3`, `msv3-official`).
+2. Write the output **in Vietnamese** — user cannot read English well, and most raw client messages are in English.
+3. End with an explicit issue list/table: severity, whether it's fixable, and a concrete suggested fix for the ones that are.
+4. Save the full write-up to `reports/{date}/arthur-metastamp-full-review.md` and give a short spoken summary + the issue table in chat (don't make the user open the file to get the important part).

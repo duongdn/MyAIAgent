@@ -336,3 +336,25 @@ User authorized `gh auth login` as the "David Freelancer" GitHub account (userna
 ---
 
 *Arthur deep-check completed 2026-07-07T10:59+07:00*
+
+---
+
+## Correction — Franc/RDC — 11:34 (+07:00)
+
+**User flagged: Franc was wrongly marked complete.** Earlier Slack check only saw "dmetiner update ✓" without reading full message content. Re-read full RDC thread — this was wrong.
+
+**What dmetiner (customer) actually posted, Jul 6 09:07-09:24 (+07:00), channel #all-rdc-fm-monitoring, all directly @-mentioning Carrick:**
+1. 09:07 — First real export to Türkiye (PowerGroup domain) coming up; customs prep delayed; wants issues tidied up **before first shipment**.
+2. 09:11 — **MPX feature failing on both Istanbul and Munich devices** (neither working now). Explicitly asks Carrick to investigate; wants a reboot script for Istanbul if easy.
+3. 09:19-09:22 — Wants plugin repos reorganized: one directory per plugin, single main branch, rename repo ownership, deploy via fmscan.com domain. Concrete scope of work.
+4. 09:24 (DM) — No one currently hiring a dev on their side; shared new task details.
+
+**Only reply:** Carrick, 10:08 — "Thanks, Let me check." No further follow-up visible as of this correction (25+ hours later).
+
+**Why this was missed:** the Franc gate (`RDC Slack — dmetiner updates`) was being satisfied by "dmetiner posted, so it's an update, mark clean" — treating any customer message as routine. That conflates "customer discussing the project" (not an alert) with "customer directly asking us to check/fix something, tied to a shipment deadline, with no substantive response yet" (should be a warning). [[feedback_project_topics_not_alerts]] says dev-topic chatter isn't an alert — this is not that; it's an unaddressed direct customer ask.
+
+**Action taken:**
+- Trello "Franc" checklist item reverted to incomplete (was wrongly checked); card `dueComplete` reverted to false.
+- Real gate: MPX investigation + plugin reorg request need an actual answer from Carrick, not "let me check."
+
+**Unresolved:** whether Carrick has addressed this outside Slack (call, in-person). Worth confirming with Carrick directly given the export deadline.

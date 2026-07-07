@@ -36,6 +36,7 @@
 - [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY every time: Slack+JIRA+est/actual+PR(Bitbucket xtreme-web/rms, creds set 260707); found critical unaddressed PR bugs
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md), [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — cron /tmp fail→TMPDIR=/var/tmp
 - [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md) — "Solid Code" token added 260706, not wired in yet
+- [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴 260707: dmetiner's direct unaddressed asks (MPX fail, plugin reorg, export deadline) wrongly marked clean; must read full msg text not just "posted=clean"
 
 ## daily-report:discord
 - [feedback_airagri_webapp_channel](daily-report/discord/feedback_airagri_webapp_channel.md), [feedback_discord_only_airagri_bizurk](daily-report/discord/feedback_discord_only_airagri_bizurk.md) — only AirAgri (#airagri_webapp) + Bizurk, not HOMIEAPP

@@ -29,7 +29,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 | Andrew Taraba | Bizurk Discord (nuscarrick DM "animeworld") | No DM activity |
 | Colin | Aigile Dev Slack | No activity |
 | Aysar | KhanhHH task log (Aysar sheet) + Baamboozle workspace activity | KhanhHH 0h |
-| Franc | RDC Slack (dmetiner updates) | dmetiner alert |
+| Franc | RDC Slack (dmetiner updates) — read full msg text, not just "posted" | dmetiner posts a direct unanswered/unresolved ask (deadline, bug, request), even if only "let me check" replied |
 | Fountain | Matrix plan posted + no over-est spike | Plan missing OR spike |
 | Elena - WordPress | samguard.co JS console check | JS errors |
 | Philip | MS Teams (`will@nustechnology.com`) → Philip Briggs (Six Star Rentals, pbriggs@sixstarrentals.com.au) DM | Customer complaint or unresolved request |
