@@ -84,22 +84,6 @@
 
 ---
 
-## 4b. Link Slack để anh tự confirm
-
-| Vấn đề | Link |
-|---|---|
-| Yêu cầu proxy Mexico (Arthur, 19/5) | https://solid-code-team.slack.com/archives/C0B0BG90AUB/p1779154019589459 |
-| Nick lo thiếu thời gian test (9/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1780995774652229 |
-| Arthur nghi ngờ chất lượng "buggy as hell" (16/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1781580208321849 |
-| Ngân sách 120h (26/6) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1782452837001879 |
-| Nick tự báo "48 hours this week" (3/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783074537638599 |
-| Chris — big picture + 7 bugs (6/7 23:17) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709 |
-| "Attribution = half the test" (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783388123033279 |
-| Nick đang fix metadata (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783391050402099 |
-| Arthur chốt bỏ qua retention/training (7/7) | https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783394853204339 |
-
-*(Cần đăng nhập `solid-code-team.slack.com` bằng tài khoản namtv/David để mở được link.)*
-
 ✅ **Vấn đề #1 đã đóng (7/7 12:00):** Anh gửi screenshot Workstream xác nhận TienND có 48h thật (Jun29-Jul5). Tìm ra nguyên nhân: API Workstream trả về **403 Forbidden** khi query đúng ngày đầu tuần, nhưng ngày giữa/cuối tuần thì trả đầy đủ dữ liệu — lỗi ở cách em query, không phải lỗ hổng theo dõi giờ công thật. Đã lưu vào memory để tránh lặp lại.
 
 ---
@@ -107,24 +91,25 @@
 ## 5. BẢNG THEO DÕI (living tracker — cập nhật mỗi lần check, không viết lại từ đầu)
 
 **Trạng thái:** 🔴 Mở (chưa làm gì) | 🟡 Đang xử lý | 🟢 Xong, chờ anh xác nhận | ✅ Anh đã xác nhận xong
+*(Link Slack cần đăng nhập `solid-code-team.slack.com` bằng tài khoản namtv/David để mở.)*
 
-| # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp |
-|---|--------|--------|------------|---------------------|------------------------------|
-| 1 | ~~TienND ("Nick") không có giờ log trong Workstream~~ | 🟢 Thấp | ✅ Đã đóng — báo động giả | 07/7 12:00 — anh gửi screenshot xác nhận 48h thật, lỗi do em query sai ngày (đầu tuần bị 403) | Không cần hành động — TienND log giờ đầy đủ, đúng quy trình |
-| 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur |
-| 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat |
-| 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit |
-| 4b | Bug #2 — Tên track sai (URL S3 thay vì tên bài, title rỗng) — **= "attribution", ½ bài test theo Chris** | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 10:24 — Nick: "I'm currently fixing the metadata issue" | Rights holder + Source URL đã xong & test pass (06/7 18:07). Còn thiếu: tên track hiển thị đúng. Chưa có tin xác nhận hoàn tất |
-| 4c | Bug #3 — Trang MCP sidebar bị treo | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 09:43 — David đang bàn thiết kế lại toàn bộ trang MCP.tsx mới với Chris | Sẽ được giải quyết cùng lúc build trang MCP mới |
-| 4d | Bug #4 — URL double-slash | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
-| 4e | Bug #5 — Banner "hoàn tất setup" hiện sai | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
-| 4f | Bug #6 — Meta tag sai endpoint | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
-| 4g | Bug #7 — Xác nhận demo account có tiền thật | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Cần verify trước dry run |
-| 5 | Khách (Chris/Dave Pelman) chưa từng tự tay test sản phẩm | 🟡 TB | 🔴 Mở (rủi ro thường trực) | — | Đề xuất Arthur cho khách test thử ít nhất 1 lần trước demo thật |
-| 6 | Scope creep liên tục (charge tiền → audio pocket → metadata → retention/training) | 🟡 TB | ✅ Xử lý tốt, không cần theo dõi thêm | 07/7 10:27 — Arthur đã chốt bỏ qua retention/training | Không cần hành động thêm |
-| 7 | Không có code review (0 PR mở, push thẳng `main`) | 🟡 TB | 🔴 Mở | (từ lần check trước) | Cân nhắc thêm review trước demo CEO |
-| 8 | Cuộc gọi "dry run" với Chris | 🔴 Cao | 🔴 **Chưa diễn ra** | 06/7 23:17 hẹn lịch | Hẹn "10am PT" = **~0h đêm nay (rạng sáng 8/7 giờ VN), còn ~12 tiếng nữa** — chưa có tin xác nhận đã họp hay dời lịch |
-| 9 | Demo thứ Năm gặp CEO khách hàng cuối | 🔴 Cao (thông tin) | — | — | Theo dõi sát 2 ngày tới |
+| # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp | Link Slack |
+|---|--------|--------|------------|---------------------|------------------------------|------------|
+| 1 | ~~TienND ("Nick") không có giờ log trong Workstream~~ | 🟢 Thấp | ✅ Đã đóng — báo động giả | 07/7 12:00 — anh gửi screenshot xác nhận 48h thật, lỗi do em query sai ngày (đầu tuần bị 403) | Không cần hành động — TienND log giờ đầy đủ, đúng quy trình | [Nick tự báo 48h/tuần](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783074537638599) |
+| 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur | [Arthur yêu cầu proxy Mexico](https://solid-code-team.slack.com/archives/C0B0BG90AUB/p1779154019589459) |
+| 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat | (Matrix, xem báo cáo gốc mục 4) |
+| 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 4b | Bug #2 — Tên track sai (URL S3 thay vì tên bài, title rỗng) — **= "attribution", ½ bài test theo Chris** | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 10:24 — Nick: "I'm currently fixing the metadata issue" | Rights holder + Source URL đã xong & test pass (06/7 18:07). Còn thiếu: tên track hiển thị đúng. Chưa có tin xác nhận hoàn tất | [Attribution=half test](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783388123033279) · [Nick đang fix](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783391050402099) |
+| 4c | Bug #3 — Trang MCP sidebar bị treo | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 09:43 — David đang bàn thiết kế lại toàn bộ trang MCP.tsx mới với Chris | Sẽ được giải quyết cùng lúc build trang MCP mới | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 4d | Bug #4 — URL double-slash | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 4e | Bug #5 — Banner "hoàn tất setup" hiện sai | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 4f | Bug #6 — Meta tag sai endpoint | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 4g | Bug #7 — Xác nhận demo account có tiền thật | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Cần verify trước dry run | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 5 | Khách (Chris/Dave Pelman) chưa từng tự tay test sản phẩm | 🟡 TB | 🔴 Mở (rủi ro thường trực) | 09/6 — Nick lo thiếu thời gian test; 16/6 — Arthur nghi ngờ chất lượng | Đề xuất Arthur cho khách test thử ít nhất 1 lần trước demo thật | [Nick lo thiếu test](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1780995774652229) · ["buggy as hell"](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1781580208321849) |
+| 6 | Scope creep liên tục (charge tiền → audio pocket → metadata → retention/training) | 🟡 TB | ✅ Xử lý tốt, không cần theo dõi thêm | 07/7 10:27 — Arthur đã chốt bỏ qua retention/training | Không cần hành động thêm | [Ngân sách 120h](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1782452837001879) · [Arthur chốt bỏ qua](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783394853204339) |
+| 7 | Không có code review (0 PR mở, push thẳng `main`) | 🟡 TB | 🔴 Mở | (từ lần check trước) | Cân nhắc thêm review trước demo CEO | (GitHub, không phải Slack) |
+| 8 | Cuộc gọi "dry run" với Chris | 🔴 Cao | 🔴 **Chưa diễn ra** | 06/7 23:17 hẹn lịch | Hẹn "10am PT" = **~0h đêm nay (rạng sáng 8/7 giờ VN), còn ~12 tiếng nữa** — chưa có tin xác nhận đã họp hay dời lịch | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
+| 9 | Demo thứ Năm gặp CEO khách hàng cuối | 🔴 Cao (thông tin) | — | — | Theo dõi sát 2 ngày tới | (chưa có tin nhắn cụ thể) |
 
 ---
 
