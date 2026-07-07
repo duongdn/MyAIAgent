@@ -1,4 +1,10 @@
 {
+  "arthur_monitor": {
+    "description": "Updated when /me:arthur-monitor runs (manual, on-demand only, no cron). Used as the start time for the next incremental run.",
+    "last_run": "2026-07-07T14:29:34+07:00",
+    "output_file": "reports/2026-07-07/arthur-metastamp-full-review.md",
+    "note": "This last_run marks when the one-time full-history deep-dive was completed (project origin 2026-04-29 through 2026-07-07). Next run should only fetch messages after this timestamp."
+  },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
     "last_run": "2026-07-04T10:40:00+07:00",
