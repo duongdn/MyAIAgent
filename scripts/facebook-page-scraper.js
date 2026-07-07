@@ -133,6 +133,11 @@ function extractPostsFromDom(limit) {
       .filter(a => {
         const url = a.href || '';
         if (url.includes('/messages/') || url.includes('/chat/')) return false;
+        // Links from the notifications flyout/toast (always present in the DOM on any
+        // logged-in FB page, regardless of which URL was navigated to) carry notif_id —
+        // exclude them so a fast-rendering notification widget can't get scraped in place
+        // of the actual wall/group feed content, which loads slower.
+        if (url.includes('notif_id=') || url.includes('ref=notif')) return false;
         return url.includes('/posts/');
       });
 
