@@ -15,7 +15,7 @@ metadata:
 
 2. **Task tracking:** no formal system — read the Workstream task-log `additionalInfo` notes (per dev, per day) via `GET /review/week?projectId=cmqezgh7z080hp81vo5yqd24z&date={date}` — these contain real substantive daily updates (e.g. PhucVT's Jul 6 note listed exactly what was tested/fixed and what's still being investigated). Don't rely on Matrix alone.
 
-3. **Est/actual:** Workstream "Crystal lang" project, same `sheets-tasklog-scan.js` pattern as other devs. Watch for role-vs-activity mismatches — e.g. TienND is tagged "Manager" in the WS roster but was doing hands-on dev work (MCP config, S3 logic) in Matrix chat on 2026-07-07, yet logged 0h. Worth flagging, not silently accepting the role tag as an excuse for 0h.
+3. **Est/actual:** Workstream "Crystal lang" project, same `sheets-tasklog-scan.js` pattern as other devs. ✅ **CONFIRMED 2026-07-07 (user directly)**: TienND = "Nick" on Slack. He's tagged "Manager" in the WS roster but is actually the primary hands-on engineer (MCP, Stripe, S3, fingerprinting), reporting 40-48h/week directly to Arthur with detailed daily breakdowns — **0h logged in Workstream**. This is a confirmed real hours/payroll tracking gap, not a role mislabel to dismiss.
 
 4. **PR/code status:** ✅ **RESOLVED 2026-07-07.** repo is `github.com/Christebob/Meta_Stamp_V3` (private). Access account: **`gh auth login` as username `davidztv`** (the "David Freelancer" identity) — already authenticated in this environment's `gh` CLI (`gh auth token -h github.com -u davidztv`). Use `GH_TOKEN=$(gh auth token -h github.com -u davidztv) gh api repos/Christebob/Meta_Stamp_V3/...`.
    - Check both `pulls?state=all` (PR history/review status) AND `commits?since=...` (since this repo currently has **0 open PRs and all commits land directly on `main` with no review** — unlike Maddy's Bitbucket repo which has an automated Codex-review bot on every PR). A "no open PRs" result does NOT mean no activity — always check commits too.
@@ -46,7 +46,7 @@ This is a **shared multi-project workspace** (Nam Tran's own consultancy) — mo
 - `ms-v3` (`C0B4G8USU3D`) — daily reports + almost all real technical back-and-forth. **842 messages since 2026-05-19**, heavily concentrated in the last 2 weeks (122 msgs on Jul 6 alone). This is the "quá nhiều msg" volume the user complained about.
 - `msv3-official` (`C0BEPFBLGJV`) — Chris's channel, only 4 messages (mostly joins), David Tran gave his GitHub username `davidztv` + email `davidztv19@gmail.com` here.
 
-User IDs worth knowing: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1`.
+User IDs worth knowing: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity)=`U0B1C5QAZA4`, **Nick=`U0B474QBKP1` = TienND (Tien Nguyen) — confirmed by user 2026-07-07, not a separate untracked person.**
 
 **Fetch pattern:** `conversations.history?channel={id}&limit=200` paginated via `cursor`/`has_more`. Resolve names via `users.list`.
 
@@ -54,7 +54,7 @@ User IDs worth knowing: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFA
 
 Reading only the 2 Matrix rooms (project kickoff Jul 2 onward) gives an incomplete and even misleading picture. The Slack `ms-v3` channel revealed:
 
-1. **🔴 "Nick" is doing the bulk of hands-on engineering (~48h/week, detailed daily reports) and does NOT appear anywhere in the Workstream "Crystal lang" roster/hours** (roster is only DuongDN/PhucVT/TienND). If "Nick" = nick@nustechnology.com (a real NUS employee), there's a real hours/payroll tracking gap — this needs direct confirmation from Nam Tran, not assumption either way.
+1. **🔴 "Nick" = TienND (confirmed by user 2026-07-07).** He's doing the bulk of hands-on engineering (~40-48h/week, detailed daily reports) reported directly to Arthur, but Workstream "Crystal lang" only tags him "Manager" with **0h logged**. This is a confirmed real hours/payroll tracking gap needing resolution (does he get paid another way, or does he need to start logging in Workstream) — not an identity mystery anymore.
 2. **🔴 Arthur explicitly asked the team to mask their true location** (Vietnam) using a Mexico proxy or his own mini-PC's IP, so the end client believes Arthur (based in Mexico) is doing the work directly: *"Make sure you don't access anything that belongs to the client without using a Mexican proxy... I'm currently located in 'San Gaspar', near 'Valle de Bravo', in the State of Mexico."* This is a real business/legal/reputational risk if discovered by the end client — flag to user, not something to silently normalize.
 3. Plaintext secrets pasted in chat (already noted above) — confirmed again in Slack, not just Matrix.
 4. **Scope grew via a formal, budget-aware negotiation** — not just ad-hoc creep. Jun 9: client added 40h of new scope; Jun 26: Arthur explicitly said *"due to the budget, we don't want to go with a 3 week, 120 hour option"* — there's a real, ongoing budget ceiling being managed on the client side.
@@ -72,3 +72,5 @@ User: *"1 issue lớn là Arthur đang có cực kì nhiều msg trên Slack và
 2. Write the output **in Vietnamese** — user cannot read English well, and most raw client messages are in English.
 3. End with an explicit issue list/table: severity, whether it's fixable, and a concrete suggested fix for the ones that are.
 4. Save the full write-up to `reports/{date}/arthur-metastamp-full-review.md` and give a short spoken summary + the issue table in chat (don't make the user open the file to get the important part).
+
+**🔴 Window correction, same day:** The first deep-dive read the ENTIRE history back to 2026-04-29 (project relationship origin). User's reaction: *"xa quá, chỉ cần report từ t5 tuần trước, nhưng cứ giữ cái report trên nha, tôi đọc nắm hết tình hình"* (too far back, only need since last Thursday — but keep the report above, I'll read it to get up to speed). **The full-history pull was correct for the ONE-TIME onboarding/context-building pass** (and the user kept that report) — but for RECURRING/regular checks going forward, default the window to roughly the last 7 days (since last Thursday), not full project history. Only go back further again if explicitly asked or if something recent references an older unresolved thread.

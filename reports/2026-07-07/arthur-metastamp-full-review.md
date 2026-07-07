@@ -21,13 +21,12 @@
 |---|---|---|
 | **Art K** | Arthur | Đầu mối kỹ thuật chính, nhận job từ Chris, chuyển tiếp cho team |
 | **Chris (Chris Coyne)** | Chris | Người quản lý dự án phía khách, chuyển tiếp yêu cầu từ 1 sếp cấp cao hơn ("SVP") |
-| **Nick** (nick@nustechnology.com) | Dev chính, làm việc trực tiếp với Arthur qua Slack, báo cáo **48 giờ/tuần** rất chi tiết | Đây có vẻ là người làm kỹ thuật chính (Stripe, MCP, thanh toán, fingerprint...) — **KHÔNG xuất hiện trong Workstream "Crystal lang"** mà ta đang theo dõi nội bộ! |
+| **Nick = TienND** (Tien Nguyen) | ✅ Đã xác nhận (anh Dương) — "Nick" trên Slack chính là TienND | Người làm kỹ thuật chính thật sự (Stripe, MCP, thanh toán, fingerprint...), báo cáo trực tiếp cho Arthur **40-48 giờ/tuần** rất chi tiết (breakdown từng ngày). Nhưng Workstream "Crystal lang" chỉ ghi role "Manager" cho TienND, **không hề có giờ công nào được log** — xem vấn đề #1 bên dưới. |
 | **David Tran** / "David Freelancer" | Danh tính dùng chung — namtv, PhucVT, DuongDN đều có thể đăng nhập bằng tài khoản này | Việc "David Tran" làm (upload track, tạo tài khoản, hỏi yêu cầu Chris) khớp với báo cáo Workstream của PhucVT |
 | **Jack** | Người quen cũ của Arthur, giới thiệu Nam Tran cho Arthur | Ít hoạt động, chủ yếu giai đoạn đầu |
-| **TienND** | Theo Workstream ghi role "Manager" | Nhưng theo Matrix lại đang code tay (MCP, S3) — cần hỏi lại |
 | **"Dave Pelman"** | Nhắc đến 1 lần (6/7) — có vẻ là **executive/CEO thật của khách hàng cuối** | Người sẽ xem demo thứ Năm |
 
-⚠️ **Cần làm rõ ngay: "Nick" là ai trong hệ thống nội bộ của mình?** Nếu đây là nick@nustechnology.com thật (nhân viên NUS), thì **48 giờ/tuần công việc của bạn ấy không hề xuất hiện trong Workstream "Crystal lang"** — nghĩa là có một luồng giờ công/lương hoàn toàn tách biệt, không được theo dõi qua hệ thống chính thức. Cần xác nhận: Nick có được trả lương qua kênh nào khác không, hay đây là lỗ hổng theo dõi giờ công thật sự.
+🔴 **Vấn đề thật sự (đã xác nhận danh tính, không còn là câu hỏi mở):** TienND làm việc trực tiếp với Arthur dưới tên "Nick" trên Slack, báo cáo tỉ mỉ 40-48 giờ/tuần bằng tiếng Anh (breakdown từng task, từng ngày) — nhưng trong Workstream nội bộ "Crystal lang", TienND chỉ được gắn role "Manager" và **không log một giờ nào**. Đây là khoảng trống theo dõi giờ công/lương thật sự cần xử lý, không phải nhầm lẫn danh tính.
 
 ---
 
@@ -89,21 +88,20 @@
 
 | # | Vấn đề | Mức độ | Có tự sửa được không | Cách xử lý đề xuất |
 |---|--------|--------|----------------------|---------------------|
-| 1 | **"Nick" (nick@nustechnology.com?) làm 48h/tuần nhưng không xuất hiện trong Workstream "Crystal lang"** — có khoảng trống theo dõi giờ công/lương thật sự | 🔴 Cao | Không — cần xác nhận từ anh | Hỏi trực tiếp Nam Tran: Nick có phải nhân viên NUS không, giờ công của bạn ấy được tính lương qua đâu? |
+| 1 | **TienND ("Nick" trên Slack) làm 40-48h/tuần thật nhưng Workstream "Crystal lang" ghi role "Manager" và 0h log** — khoảng trống theo dõi giờ công/lương | 🔴 Cao | Có, giờ đã rõ danh tính | Hỏi TienND trực tiếp: giờ công của bạn cho Arthur có được tính lương qua kênh nào không, hay cần bắt đầu log vào Workstream từ giờ |
 | 2 | **Yêu cầu che giấu vị trí Việt Nam bằng proxy Mexico** — rủi ro uy tín/pháp lý nếu khách hàng cuối phát hiện việc thuê ngoài không được biết trước | 🔴 Cao | Không — quyết định kinh doanh, không phải lỗi kỹ thuật | Cần anh quyết định có chấp nhận rủi ro này tiếp tục hay không, và có nên yêu cầu Arthur minh bạch hơn với khách |
 | 3 | **Secrets thật (.env) dán thẳng vào Matrix chat** — MongoDB, Stripe, Auth0, YouTube API key | 🟡 Trung bình | Có | Nhắc team dùng kênh chia sẻ bảo mật hơn (1Password, Bitwarden...) thay vì paste vào chat, kể cả key test |
 | 4 | **7 bug Chris liệt kê tối 6/7** (làm tròn tiền, tên track sai, MCP page treo, URL lỗi double-slash, banner sai, meta tag sai endpoint, chưa xác nhận demo account có tiền thật) | 🔴 Cao — hạn chót thứ Tư | Có, đều là bug kỹ thuật cụ thể | Theo dõi tiến độ fix qua GitHub commit (dùng `gh auth -u davidztv`) — nếu chưa merge trước thứ Tư thì cần escalate ngay |
 | 5 | **Khách chưa từng tự tay test sản phẩm** (theo lời Arthur) — toàn bộ QA đổ lên team mình, rủi ro phát hiện lỗi ngay lúc demo | 🟡 Trung bình | Một phần | Đảm bảo có "dry run" đầy đủ trước mỗi lần demo (đã có lịch), và có thể đề xuất Arthur cho khách test thử trước 1 lần |
 | 6 | **Phình phạm vi (scope creep) liên tục** — từ "chỉ cần charge tiền" → thêm "audio pocket" → thêm "metadata" → hôm nay thêm "retention/training tiers" | 🟡 Trung bình | Có, đang xử lý tốt | Team đã tự soạn tin từ chối khéo — tiếp tục giữ nguyên tắc "tính năng mới sau demo thứ Năm", không nhận thêm việc miễn phí |
-| 7 | **TienND ghi role "Manager" trong Workstream nhưng đang code tay thật (MCP, S3)** — có thể role bị stale hoặc bạn ấy chưa log giờ | 🟢 Thấp | Có | Hỏi trực tiếp Tien xem có cần cập nhật role hoặc log giờ riêng không |
-| 8 | **Không có review code (PR) nào cho các thay đổi gần đây** (đã xác nhận trước đó: 0 PR mở, code push thẳng vào `main`) | 🟡 Trung bình | Có | Cân nhắc thêm ít nhất 1 bước review trước khi push lên production, nhất là sát ngày demo CEO |
-| 9 | **Demo thứ Năm gặp CEO khách hàng cuối** — mức độ rủi ro/tầm quan trọng rất cao, có thể quyết định có tiếp tục tài trợ dự án hay không | 🔴 Cao (thông tin, không phải lỗi) | — | Theo dõi sát tiến độ 2 ngày tới, cân nhắc hỗ trợ thêm nhân lực nếu cần |
+| 7 | **Không có review code (PR) nào cho các thay đổi gần đây** (đã xác nhận trước đó: 0 PR mở, code push thẳng vào `main`) | 🟡 Trung bình | Có | Cân nhắc thêm ít nhất 1 bước review trước khi push lên production, nhất là sát ngày demo CEO |
+| 8 | **Demo thứ Năm gặp CEO khách hàng cuối** — mức độ rủi ro/tầm quan trọng rất cao, có thể quyết định có tiếp tục tài trợ dự án hay không | 🔴 Cao (thông tin, không phải lỗi) | — | Theo dõi sát tiến độ 2 ngày tới, cân nhắc hỗ trợ thêm nhân lực nếu cần |
 
 ---
 
 ## 6. Câu hỏi còn tồn đọng
 
-1. "Nick" là nhân viên NUS thật hay là 1 identity/contractor khác? Giờ công của bạn ấy tính lương qua đâu?
+1. TienND (Nick) làm 40-48h/tuần cho Arthur — giờ này có được tính lương qua kênh nào không, hay cần bắt đầu log vào Workstream?
 2. Anh có chấp nhận tiếp tục yêu cầu che giấu vị trí (proxy Mexico) hay muốn Nam Tran làm rõ với Arthur?
 3. Có cần thiết lập theo dõi định kỳ (tự động) cho cả 5 kênh (2 Matrix + 3 Slack) để không bị bỏ sót tin nhắn nữa không?
 
