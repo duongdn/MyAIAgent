@@ -84,25 +84,34 @@
 
 ---
 
-## 5. DANH SÁCH VẤN ĐỀ CẦN GIẢI QUYẾT (tổng hợp cuối)
+## 5. BẢNG THEO DÕI (living tracker — cập nhật mỗi lần check, không viết lại từ đầu)
 
-| # | Vấn đề | Mức độ | Có tự sửa được không | Cách xử lý đề xuất |
-|---|--------|--------|----------------------|---------------------|
-| 1 | **TienND ("Nick" trên Slack) làm 40-48h/tuần thật nhưng Workstream "Crystal lang" ghi role "Manager" và 0h log** — khoảng trống theo dõi giờ công/lương | 🔴 Cao | Có, giờ đã rõ danh tính | Hỏi TienND trực tiếp: giờ công của bạn cho Arthur có được tính lương qua kênh nào không, hay cần bắt đầu log vào Workstream từ giờ |
-| 2 | **Yêu cầu che giấu vị trí Việt Nam bằng proxy Mexico** — rủi ro uy tín/pháp lý nếu khách hàng cuối phát hiện việc thuê ngoài không được biết trước | 🔴 Cao | Không — quyết định kinh doanh, không phải lỗi kỹ thuật | Cần anh quyết định có chấp nhận rủi ro này tiếp tục hay không, và có nên yêu cầu Arthur minh bạch hơn với khách |
-| 3 | **Secrets thật (.env) dán thẳng vào Matrix chat** — MongoDB, Stripe, Auth0, YouTube API key | 🟡 Trung bình | Có | Nhắc team dùng kênh chia sẻ bảo mật hơn (1Password, Bitwarden...) thay vì paste vào chat, kể cả key test |
-| 4 | **7 bug Chris liệt kê tối 6/7** (làm tròn tiền, tên track sai, MCP page treo, URL lỗi double-slash, banner sai, meta tag sai endpoint, chưa xác nhận demo account có tiền thật) | 🔴 Cao — hạn chót thứ Tư | Có, đều là bug kỹ thuật cụ thể | Theo dõi tiến độ fix qua GitHub commit (dùng `gh auth -u davidztv`) — nếu chưa merge trước thứ Tư thì cần escalate ngay |
-| 5 | **Khách chưa từng tự tay test sản phẩm** (theo lời Arthur) — toàn bộ QA đổ lên team mình, rủi ro phát hiện lỗi ngay lúc demo | 🟡 Trung bình | Một phần | Đảm bảo có "dry run" đầy đủ trước mỗi lần demo (đã có lịch), và có thể đề xuất Arthur cho khách test thử trước 1 lần |
-| 6 | **Phình phạm vi (scope creep) liên tục** — từ "chỉ cần charge tiền" → thêm "audio pocket" → thêm "metadata" → hôm nay thêm "retention/training tiers" | 🟡 Trung bình | Có, đang xử lý tốt | Team đã tự soạn tin từ chối khéo — tiếp tục giữ nguyên tắc "tính năng mới sau demo thứ Năm", không nhận thêm việc miễn phí |
-| 7 | **Không có review code (PR) nào cho các thay đổi gần đây** (đã xác nhận trước đó: 0 PR mở, code push thẳng vào `main`) | 🟡 Trung bình | Có | Cân nhắc thêm ít nhất 1 bước review trước khi push lên production, nhất là sát ngày demo CEO |
-| 8 | **Demo thứ Năm gặp CEO khách hàng cuối** — mức độ rủi ro/tầm quan trọng rất cao, có thể quyết định có tiếp tục tài trợ dự án hay không | 🔴 Cao (thông tin, không phải lỗi) | — | Theo dõi sát tiến độ 2 ngày tới, cân nhắc hỗ trợ thêm nhân lực nếu cần |
+**Trạng thái:** 🔴 Mở (chưa làm gì) | 🟡 Đang xử lý | 🟢 Xong, chờ anh xác nhận | ✅ Anh đã xác nhận xong
+
+| # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp |
+|---|--------|--------|------------|---------------------|------------------------------|
+| 1 | TienND ("Nick") làm 40-48h/tuần thật nhưng Workstream "Crystal lang" ghi role "Manager", 0h log | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Cần hỏi TienND trực tiếp: giờ công tính lương qua đâu, hay cần log vào Workstream |
+| 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur |
+| 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat |
+| 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit |
+| 4b | Bug #2 — Tên track sai (URL S3 thay vì tên bài, title rỗng) — **= "attribution", ½ bài test theo Chris** | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 10:24 — Nick: "I'm currently fixing the metadata issue" | Rights holder + Source URL đã xong & test pass (06/7 18:07). Còn thiếu: tên track hiển thị đúng. Chưa có tin xác nhận hoàn tất |
+| 4c | Bug #3 — Trang MCP sidebar bị treo | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 09:43 — David đang bàn thiết kế lại toàn bộ trang MCP.tsx mới với Chris | Sẽ được giải quyết cùng lúc build trang MCP mới |
+| 4d | Bug #4 — URL double-slash | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
+| 4e | Bug #5 — Banner "hoàn tất setup" hiện sai | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
+| 4f | Bug #6 — Meta tag sai endpoint | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Theo dõi qua GitHub commit |
+| 4g | Bug #7 — Xác nhận demo account có tiền thật | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 | Cần verify trước dry run |
+| 5 | Khách (Chris/Dave Pelman) chưa từng tự tay test sản phẩm | 🟡 TB | 🔴 Mở (rủi ro thường trực) | — | Đề xuất Arthur cho khách test thử ít nhất 1 lần trước demo thật |
+| 6 | Scope creep liên tục (charge tiền → audio pocket → metadata → retention/training) | 🟡 TB | ✅ Xử lý tốt, không cần theo dõi thêm | 07/7 10:27 — Arthur đã chốt bỏ qua retention/training | Không cần hành động thêm |
+| 7 | Không có code review (0 PR mở, push thẳng `main`) | 🟡 TB | 🔴 Mở | (từ lần check trước) | Cân nhắc thêm review trước demo CEO |
+| 8 | Cuộc gọi "dry run" với Chris | 🔴 Cao | 🔴 **Chưa diễn ra** | 06/7 23:17 hẹn lịch | Hẹn "10am PT" = **~0h đêm nay (rạng sáng 8/7 giờ VN), còn ~12 tiếng nữa** — chưa có tin xác nhận đã họp hay dời lịch |
+| 9 | Demo thứ Năm gặp CEO khách hàng cuối | 🔴 Cao (thông tin) | — | — | Theo dõi sát 2 ngày tới |
 
 ---
 
-## 6. Câu hỏi còn tồn đọng
+## 6. Câu hỏi cần anh xác nhận/quyết định
 
 1. TienND (Nick) làm 40-48h/tuần cho Arthur — giờ này có được tính lương qua kênh nào không, hay cần bắt đầu log vào Workstream?
 2. Anh có chấp nhận tiếp tục yêu cầu che giấu vị trí (proxy Mexico) hay muốn Nam Tran làm rõ với Arthur?
 3. Có cần thiết lập theo dõi định kỳ (tự động) cho cả 5 kênh (2 Matrix + 3 Slack) để không bị bỏ sót tin nhắn nữa không?
 
-*Báo cáo này đọc toàn bộ 190 tin nhắn Matrix + 919 tin nhắn Slack (2/5 kênh liên quan, kênh "random"/"general" không liên quan tới dự án Arthur nên bỏ qua).*
+*Báo cáo này đọc toàn bộ 190 tin nhắn Matrix + 919 tin nhắn Slack (3/5 kênh liên quan, kênh "random"/"general" không liên quan tới dự án Arthur nên bỏ qua). Bảng mục 5 là tracker sống — lần check tiếp theo chỉ cần cập nhật cột "Trạng thái"/"Cập nhật gần nhất", không viết lại toàn bộ.*
