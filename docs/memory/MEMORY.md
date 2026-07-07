@@ -104,6 +104,7 @@
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md) — col E=Task ID, bill WBS+buffer, never first empty row
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md) — search by name+open state, skill's ID stale
 - [feedback_warning_needs_explanation](bailey/feedback_warning_needs_explanation.md), [reference_bailey_monitor_skill_file](bailey/reference_bailey_monitor_skill_file.md) — WARNING needs plain-language explanation
+- [feedback_overbudget_check_missing_from_other_active](bailey/feedback_overbudget_check_missing_from_other_active.md) — 🔴 260707: bailey-task-monitor.py only checks overbudget on bug tasks; 6 fixed-cost tasks (up to +148.7%) silently missed in "Other Active" — manually compute actual vs est_buffer for all fixed tasks
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md) — OAuth2 invalid_grant REAL; repo mypersonalfootballcoach/wp
