@@ -96,7 +96,7 @@
 | # | Vấn đề | Mức độ | Trạng thái | Cập nhật gần nhất | Cách xử lý / theo dõi tiếp | Link Slack |
 |---|--------|--------|------------|---------------------|------------------------------|------------|
 | 1 | ~~TienND ("Nick") không có giờ log trong Workstream~~ | 🟢 Thấp | ✅ Đã đóng — báo động giả | 07/7 12:00 — anh gửi screenshot xác nhận 48h thật, lỗi do em query sai ngày (đầu tuần bị 403) | Không cần hành động — TienND log giờ đầy đủ, đúng quy trình | [Nick tự báo 48h/tuần](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783074537638599) |
-| 2 | Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico | 🔴 Cao | 🔴 Mở | 07/7 11:46 | Chờ anh quyết định: chấp nhận tiếp tục hay yêu cầu Nam Tran làm rõ với Arthur | [Arthur yêu cầu proxy Mexico](https://solid-code-team.slack.com/archives/C0B0BG90AUB/p1779154019589459) |
+| 2 | ~~Arthur yêu cầu che giấu vị trí VN bằng proxy Mexico~~ | 🟢 Thấp | ✅ Anh chốt bỏ qua (14:29 7/7) | 07/7 14:29 — anh nói "ignore issue này" | Không theo dõi tiếp | [Arthur yêu cầu proxy Mexico](https://solid-code-team.slack.com/archives/C0B0BG90AUB/p1779154019589459) |
 | 3 | Secrets thật (.env) dán thẳng vào chat (Matrix + có thể cả Slack) | 🟡 TB | 🔴 Mở | 07/7 11:46 | Nhắc team dùng kênh bảo mật hơn thay vì paste vào chat | (Matrix, xem báo cáo gốc mục 4) |
 | 4a | Bug #1 — Dashboard/Wallet làm tròn sai ($0.0025→$0.00) | 🔴 Cao (hạn thứ Tư) | 🔴 Mở | 07/7 10:27 (tin cuối) | Theo dõi qua GitHub commit | [Chris — big picture + 7 bugs](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783379830570709) |
 | 4b | Bug #2 — Tên track sai (URL S3 thay vì tên bài, title rỗng) — **= "attribution", ½ bài test theo Chris** | 🔴 Cao (hạn thứ Tư) | 🟡 Đang xử lý | 07/7 10:24 — Nick: "I'm currently fixing the metadata issue" | Rights holder + Source URL đã xong & test pass (06/7 18:07). Còn thiếu: tên track hiển thị đúng. Chưa có tin xác nhận hoàn tất | [Attribution=half test](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783388123033279) · [Nick đang fix](https://solid-code-team.slack.com/archives/C0B4G8USU3D/p1783391050402099) |
@@ -116,7 +116,7 @@
 ## 6. Câu hỏi cần anh xác nhận/quyết định
 
 1. ~~TienND giờ công~~ ✅ đã xác nhận xong (48h thật, log đầy đủ).
-2. Anh có chấp nhận tiếp tục yêu cầu che giấu vị trí (proxy Mexico) hay muốn Nam Tran làm rõ với Arthur?
-3. Có cần thiết lập theo dõi định kỳ (tự động) cho cả 5 kênh (2 Matrix + 3 Slack) để không bị bỏ sót tin nhắn nữa không?
+2. ~~Proxy Mexico~~ ✅ anh chốt bỏ qua, không theo dõi tiếp.
+3. ~~Theo dõi định kỳ~~ ✅ không cần tự động — đã tạo command `/me:arthur-monitor` để chạy thủ công, mỗi lần chạy tự cập nhật từ lần trước + tạo file mới.
 
 *Báo cáo này đọc toàn bộ 190 tin nhắn Matrix + 919 tin nhắn Slack (3/5 kênh liên quan, kênh "random"/"general" không liên quan tới dự án Arthur nên bỏ qua). Bảng mục 5 là tracker sống — lần check tiếp theo chỉ cần cập nhật cột "Trạng thái"/"Cập nhật gần nhất", không viết lại toàn bộ.*
