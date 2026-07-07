@@ -151,11 +151,11 @@ async function main() {
         console.error('');
         console.error('=== MANUAL STEP REQUIRED ===');
         console.error('Complete any remaining challenge (CAPTCHA/2FA) in the browser.');
-        console.error('Waiting up to 3 minutes...');
+        console.error('Waiting up to 10 minutes...');
         console.error('');
 
         let attempts = 0;
-        while (attempts < 90) {
+        while (attempts < 300) {
           await new Promise(r => setTimeout(r, 2000));
           url = page.url();
           if (!url.includes('login') && !url.includes('account-security')) break;
