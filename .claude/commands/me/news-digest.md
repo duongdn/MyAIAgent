@@ -30,6 +30,37 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest ai --more --limit=10    → fetch 10, hiển thị 5/nguồn, tóm tắt dài
 ```
 
+## Recheck Mode (chạy lại cùng ngày)
+
+**Trước khi fetch bất cứ gì, LUÔN kiểm tra file report hôm nay đã tồn tại chưa** (giống cơ chế recheck của `/daily-report`):
+
+```bash
+ls reports/{YYYY-MM-DD}/*-news-digest.md 2>/dev/null
+```
+(dùng ngày UTC+7 hiện tại — xem cách lấy ở "Save to File" bước 1)
+
+- **Chưa có file nào hôm nay** → chạy full digest bình thường theo `## Run` bên dưới, tạo file mới như cũ.
+- **Đã có file** (lấy file mới nhất nếu có nhiều) → đây là **recheck**, KHÔNG tạo file mới:
+  1. Đọc file report hiện có
+  2. Grep các placeholder lỗi (bảng dưới) để xác định nguồn nào cần re-fetch
+  3. CHỈ re-fetch những nguồn bị lỗi đó (gọi `fetch-news.py` cho đúng topic chứa nguồn lỗi, không re-fetch toàn bộ)
+  4. Dùng Edit tool sửa trực tiếp đúng section lỗi trong file cũ bằng dữ liệu thật vừa fetch — KHÔNG đụng vào các section đã có bài
+  5. Append 1 dòng log ở cuối file: `**Recheck {HH:MM}:** {nguồn A} đã fix, {nguồn B} vẫn lỗi ({lý do ngắn gọn})`
+  6. Chạy lại `fix-links.py` trên file vừa sửa (xem "Link Validation")
+  7. Git commit + push như bình thường — nội dung đã đổi nên vẫn cần push
+  8. **Bỏ qua bước Trello auto-complete** — card "Check news" đã complete ở lần chạy đầu trong ngày, không cần chạy lại
+
+**Placeholder nghĩa là lỗi kỹ thuật — cần re-fetch:**
+
+| Text trong report | Nguồn tương ứng |
+|---|---|
+| `_(Không có bài mới từ Facebook)_` | 3 nguồn Facebook AI (Thiệu Nguyễn, Duy Nguyen/mrgoonie, Nghiện AI Group) |
+| `_(Không có bài mới từ Substack)_` | Thiệu Nguyễn (Substack) |
+| Ngoặc `_(...)_ ` có chứa `lỗi`, `sandbox`, `error`, `timeout`, `permission` | nguồn tương ứng trong ngoặc đó |
+| Section header MANDATORY bị thiếu hẳn (xem grep ở "Save to File" bước 2) | nguồn đó — re-fetch topic chứa nguồn này |
+
+**Không phải lỗi — đừng re-fetch:** nếu source thực sự không có bài mới (RSS/trang trống thật, không phải do crash/timeout script). Sau khi re-fetch mà vẫn 0 bài và KHÔNG có lỗi kỹ thuật trong stderr → giữ nguyên placeholder, cập nhật log recheck ghi rõ "không phải lỗi — nguồn trống thật".
+
 ## Run
 
 **⚠️ QUAN TRỌNG — Khi `topic=all`: PHẢI fetch từng topic riêng, KHÔNG fetch `all` trong 1 lần.**

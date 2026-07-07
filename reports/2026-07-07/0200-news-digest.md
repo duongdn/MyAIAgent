@@ -78,15 +78,15 @@
 
 **Google News – AI Việt Nam**
 - [Lợi thế AI nằm ở những công nghệ khó sao chép](https://news.google.com/articles/CBMipgFBVV95cUxPcUtvY2VyQVpCX2RGZWlJbFRJZEpTQ2lHdEU5Z1dwRVBMLU1KaXVEdVFjdWx1Sm43NGpiNU5ZY3hWY1JyNlNwMW50N2x1M2w5NUlPS0pRczZDUUluaDR0VXFPWTFDN052T0p2eG4tMzNoYVNMZVdha1FGRk40WkR3aWRfVHp1ZnB4NnZTZklaVThfcnFOXy16c2ZKVjBJb3FGT3U0bk9R) — AI edge nằm ở những công nghệ độc quyền khó bị copy, không phải model phổ biến.
-- [Ứng dụng AI và robotics trong bất động sản](https://news.google.com/articles/CBMipgFBVV95cUxOZEgzQkU2V3lEZXlLdFVRRVRucHRyaU9xTEQ1QWVCQ3l1TjhzWHUyTFJ6VFZvX09MdU1SWXJSZVlvc0o2X1FoUVNFX29TeUNsNXFFcjVOaFgzNGFhSjhqZ3NtMXNXNG0xUl9QTF9NU204dndMZHh4anhlQXd6V3BoOU1HWi1fRklPREJhaWpCNGI0QUkwUmJqaVhtYXhGMzNFbURRYl9B) — AI và robot đang được ứng dụng trong phân tích và quản lý bất động sản.
-- [Tăng cường quản trị trí tuệ nhân tạo](https://news.google.com/articles/CBMie0FVX3lxTE4zb3lLQXV3eWRHVW5TaWVCTmRRN2hqZi1iWXRyY2NIVUFYVTJfdTlSbDYzaEdfUElaNGRqU1VBV1RsTjl6WFU5WXp6TUlPbTlGRFJ2SktxTEVsNzRLNExrOHBXdWotRVZGWmRwV1VYUWtLSjFOam4xdTgySQ) — VTV đưa tin về các chính sách quản trị AI đang được tăng cường.
-- [Người cao tuổi học AI để không tụt hậu](https://news.google.com/articles/CBMivgFBVV95cUxPa2hxU1l2aDUzWjZNcDM4S200UFFxN2F6eDJfRDdBTEo1RjY1NG1pX0JDUkdkOVFHeUdjVGk2OVdXdVJnWElBNTM3dlo4bDh0S1pRb2JUaGUzNXZWdzNQTXd0Z0k1a1Y5c0lveWg4VF9QN1RuZ1YwaUY5RTNUNW4wS0tsSVpFdE8tRElwSnB4T3UySFNSWkFIT0hieVdWcS1tU2JaOUJoMzdiMzQ0MUFsLTlka3lkQmp1QXVvWjNB) — Người lớn tuổi chủ động học AI để theo kịp cách mạng công nghệ số.
+- [Ứng dụng AI và robotics trong bất động sản](https://news.google.com/articles/CBMiygFBVV95cUxQZ29lb1NXRjVKaUlDQWpQdDVhUFM1dlJKMk85VXQ0REpmZU9Nd3JmLVktOXc2NkUtSjVJVHVZN2UwblkxcndiVlJTSFktMWlwRU9vTjRCbmlfYmRMNjZVR0pLV253VmhuaFc4NE5lVlRRclRFWm8tM0E2WmJsb1R2SFo2RzlWMjFYX2hwaDY2NTA1MUZaeUMwZHk2YWtqYkN2dlA0anp6STJsSUNZYndLQ3dxVUxTbG9HaUdtQUVyVGtubDlCYzBWWDln) — AI và robot đang được ứng dụng trong phân tích và quản lý bất động sản.
+- [Tăng cường quản trị trí tuệ nhân tạo](https://news.google.com/articles/CBMipgFBVV95cUxOZEgzQkU2V3lEZXlLdFVRRVRucHRyaU9xTEQ1QWVCQ3l1TjhzWHUyTFJ6VFZvX09MdU1SWXJSZVlvc0o2X1FoUVNFX29TeUNsNXFFcjVOaFgzNGFhSjhqZ3NtMXNXNG0xUl9QTF9NU204dndMZHh4anhlQXd6V3BoOU1HWi1fRklPREJhaWpCNGI0QUkwUmJqaVhtYXhGMzNFbURRYl9B) — VTV đưa tin về các chính sách quản trị AI đang được tăng cường.
+- [Người cao tuổi học AI để không tụt hậu](https://news.google.com/articles/CBMirAFBVV95cUxNdVlPc1NJazlyekJDSTFISnVXbDMtajJOUElaZmVJOGdpR0h4dlRRVFJmYnVuMUNKTWJSWEw1ZFdXSHF5MUZ6XzNYVUxvRFA0UVRYWGEtdXc2T1I3M0xPeVNtRlFVNHNraW51YTBHaDR6cUJaeHhBNUpFSTdYcjlaTFowOUJmU09GcWVnQkc2d3IyUGRUcXduQmVJOHJDQm9nSTFnZFRGbUt3ck1W) — Người lớn tuổi chủ động học AI để theo kịp cách mạng công nghệ số.
 
 **TechCrunch AI**
-- [Danh sách chạy: sa thải lớn 2026 vì AI](https://techcrunch.com/2026/07/06/the-running-list-major-tech-layoffs-in-2026-where-employers-cited-ai/) — Tổng hợp các công ty tech sa thải hàng nghìn người với lý do được nêu là AI năm 2026.
-- [Nếu bạn dùng Google, bạn đang train AI của họ — đây là cách opt out](https://techcrunch.com/2026/07/06/if-you-use-google-youre-training-its-ai-heres-how-to-opt-out/) — Google thay đổi cài đặt privacy, cho phép train AI trên nhiều dữ liệu người dùng hơn.
-- [Microsoft sa thải gần 5.000 nhân viên Xbox và sales thương mại](https://techcrunch.com/2026/07/06/microsoft-lays-off-nearly-5000-employees-across-xbox-commercial-sales/) — Microsoft cắt 4.800 vai trò (2.1% lực lượng toàn cầu), tiếp tục chuỗi sa thải liên quan AI.
-- [Reddit dùng LLM để giải quyết vấn đề do chính LLM tạo ra](https://techcrunch.com/2026/07/06/reddit-is-using-llms-to-solve-a-problem-llms-largely-created/) — Các platform phải "lấy lửa chống lửa" - dùng AI để lọc spam AI.
+- [Danh sách chạy: sa thải lớn 2026 vì AI](https://techcrunch.com/2026/07/06/the-first-ai-run-ransomware-attack-still-needed-a-human/) — Tổng hợp các công ty tech sa thải hàng nghìn người với lý do được nêu là AI năm 2026.
+- [Nếu bạn dùng Google, bạn đang train AI của họ — đây là cách opt out](https://techcrunch.com/2026/07/06/us-investors-will-soon-get-access-to-sk-hynix-another-memory-maker-riding-the-ai-boom/) — Google thay đổi cài đặt privacy, cho phép train AI trên nhiều dữ liệu người dùng hơn.
+- [Microsoft sa thải gần 5.000 nhân viên Xbox và sales thương mại](https://techcrunch.com/2026/07/06/vercel-ceo-guillermo-rauch-on-the-fight-to-split-off-models-from-agents/) — Microsoft cắt 4.800 vai trò (2.1% lực lượng toàn cầu), tiếp tục chuỗi sa thải liên quan AI.
+- [Reddit dùng LLM để giải quyết vấn đề do chính LLM tạo ra](https://techcrunch.com/2026/07/06/you-can-now-customize-siris-pace-and-expressivity-in-the-latest-ios-27-beta/) — Các platform phải "lấy lửa chống lửa" - dùng AI để lọc spam AI.
 - [Anthropic ra mắt Claude Sonnet 5 — cách chạy agent rẻ hơn](https://news.google.com/articles/CBMiogFBVV95cUxPYlk5UjUzQ3hOVkZIcHQ3cWNBY29hU1J4Zm1qcHlPckZvRTZWbzRhLXFaRDdnZkVXZm43SHFoX3BqeVFvaTluSm42eXRkWFpNSjczV3k2R2tYZFJLT2VnUkw0WVdueUhXblJWTDJneG5jcHpFLVRLSlFJZExQUG5CLURiWWNlUFZNdmNSOFdXWklXcTZiVDBXZ24ydGhCS25JREE) — Anthropic ra mắt model mới rẻ hơn cho workload agent.
 
 **The Verge – AI**
@@ -122,17 +122,27 @@
 ---
 
 ### 📱 Thiệu Nguyễn — Facebook AI
-_(Không có bài mới từ Facebook)_
+- [Giờ chia tay đã đến bạn ơi...](https://www.facebook.com/shinantori/posts/pfbid034qP9gHqSh1xAidnJCLJDyJwCRtCH8eJq1BXYmEkZAtfcWfS7czPpkW1N3NRCfa6dl) — Chia sẻ cảm xúc, kèm ảnh minh hoạ.
+- [Rất có khả năng (99.99%) GPT-5.6 Sol Ultra sẽ roll out...](https://www.facebook.com/shinantori/posts/pfbid01A6dSAH2HevEUgS7QjGgsXgQ7mcek58CQi1XhbJiQNgy6jHaWc5ufjoSafacEHT7l) — Dự đoán GPT-5.6 Sol Ultra ra mắt rộng rãi ngay khi Fable 5 hết quota subscription.
+- [Bài viết ghi lại quá trình "tự chế" skills phục vụ workflow hằng ngày](https://www.facebook.com/shinantori/posts/pfbid02yGtKh3k545EUmSNss2JsZgGCFV57VUCjSLwR2y8sbqbes7575vukqJy8sSSA2M27l) — Workflow cá nhân với bộ skills ClaudeKit, tham khảo insight từ bài gốc của Thariq.
 
 ---
 
 ### 📱 Duy Nguyen (mrgoonie) — Facebook AI
-_(Không có bài mới từ Facebook)_
+- [Khả năng vision của Opus từ bản 4.7 đã nâng cấp đáng kể](https://www.facebook.com/mrgoonie/posts/pfbid02v5EBVH46zDaNdemJH9YCMEtrxnYva87u34Q8gAngN3dE4tNKd6cEdMqfgTqdKFz9l) — Vision Opus ngang Gemini/GPT, bản 4.8 thêm khả năng suy luận.
+- [Playing game + codex-ing cùng lúc](https://www.facebook.com/mrgoonie/posts/pfbid0buu1omXzJ6KkaZa8cDM81DareCHX757QqPYpeFSGwJreF2VyXygmNPhEW4cA3Qd6l) — Chia sẻ trải nghiệm vừa chơi game vừa code với AI.
+- [Giả sử OpenAI bán gói limit reset](https://www.facebook.com/mrgoonie/posts/pfbid0bxX2zdeaaQ1KrkGhZ7UHL8gCeWZGCopFGdtjCQh1kMZsU8psNjrYppiDCCedZnVxl) — Đặt câu hỏi vui về việc OpenAI bán gói reset giới hạn sử dụng.
 
 ---
 
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
-_(Không có bài mới từ Facebook)_
+- [Cách lấy Prompt ở bài ghim](https://www.facebook.com/groups/nghienai/posts/2529894627482407/) — Hướng dẫn lấy prompt từ bài ghim trên group.
+- [Full Prompt ở bài ghim](https://www.facebook.com/groups/nghienai/posts/2526927937779076/) — Chia sẻ đầy đủ prompt được ghim.
+- [Bản tin AI số 30: Học sinh dùng AI ra sao cho đúng?](https://www.facebook.com/groups/nghienai/posts/2264173570721182/) — Hướng dẫn dùng chế độ "Học có hướng dẫn" của Gemini thay vì để AI giải hộ.
+
+---
+
+**Recheck 09:42:** cả 3 nguồn Facebook (Thiệu Nguyễn, Duy Nguyen/mrgoonie, Nghiện AI) đã fix — nguyên nhân gốc là 2 bug trong `facebook-page-scraper.js`: (1) crash khi không có live X display trong môi trường cron (thiếu Xvfb fallback), (2) selector bắt nhầm link từ notifications flyout thay vì wall post thật. Đã sửa cả 2, xem `docs/memory/news-digest/feedback_facebook_scraper_missing_x_display.md`.
 
 ---
 
