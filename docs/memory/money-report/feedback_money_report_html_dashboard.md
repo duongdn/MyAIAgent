@@ -9,7 +9,9 @@ metadata:
 
 Every `/me:money-report` full run MUST also produce `reports/{YYYY-MM-DD}/money-dashboard.html` and append a snapshot to `reports/money-history.json`, even though the skill file (`docs-manager`-owned) only documents the 5 markdown pieces + review.
 
-**Why:** User expects this dashboard every run (confirmed 2026-07-06 — user flagged its absence: "sao ko có file html như lúc trước"). It was originally built ad-hoc in an earlier session (first seen 2026-06-23) and has become an implicit standing expectation, not a one-off.
+**Why:** User expects this dashboard every run. Missed twice now — 2026-07-06 ("sao ko có file html như lúc trước") and again 2026-07-07 ("sao sai mãi thế" — user visibly annoyed at the repeat). It was originally built ad-hoc in an earlier session (first seen 2026-06-23) and has become an implicit standing expectation, not a one-off. Root cause of the repeat: the money-report SKILL.md text itself (loaded via the Skill tool) does NOT mention the dashboard at all — it's only in memory — so invoking the skill alone is not enough; memory must be actively consulted before/during the run, not just after the user points it out.
+
+🔴 **STANDING RULE:** Before declaring ANY `/me:money-report` full run finished, produce/update BOTH `money-dashboard.html` and `money-history.json` as part of the SAME turn as the 5 markdown pieces — never as a separate follow-up after the user notices it's missing.
 
 **How to apply:**
 - `reports/money-history.json` — flat list under `snapshots`, one entry per run: `date`, `label` (dd/mm), `net_worth` (always `trueTotalBalance.amount`, never reconstructed), `gross_assets`, `liabilities`, `categories` (`real_estate`, `gold`, `investment`, `savings`, `liquid` — all **with** home included, this is the consistent schema across entries), `method` (`dashboard_verified` when read straight from API/app, `reconstructed` if manually summed), `note` (what changed since last snapshot, in Vietnamese, concise).

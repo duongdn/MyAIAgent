@@ -92,6 +92,22 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction (accounts+savings+VCBS/VCBF/FPTS/Finhay cost-basis-remaining) gives 7,872,791,270 (~0.94% higher) — consistent with the known unrealized-P&L gap seen on 23/06, not a data bug. Investment (VCBS/VCBF/FPTS/Finhay/Larion) at 2.17B, Savings rebuilt to 1.04B (from 0.64B on 23/06) after the mid-June VCBS redemption was redeployed into new term deposits (vcb 1 month, tikcop 1m/5m) and fresh VCBS/FPTS/VCBF/Finhay DCA contributions. CONFIRMED DATA BUG: excluded a 2,005,479 ghost balance on a closed 'nam á 6m' savings book (endDate 2024-06-01) that user confirmed is fully withdrawn — /wallets/totaldashboard (net_worth above) likely still includes it, true net worth probably ~7,736,882,087. RECLASSIFIED (user correction 2026-07-06): Tikop (195,024,366) moved from investment to liquid — it's a robo-savings/cash-parking product, not a growth investment. Prior snapshots (21/05-23/06) still have Tikop bundled into investment (schema/categorization not retroactively changed since per-date Tikop breakdown wasn't tracked separately before) — do not compare investment/liquid deltas across the 23/06→06/07 boundary 1-for-1."
+    },
+    {
+      "date": "2026-07-07",
+      "label": "07/07",
+      "net_worth": 7736052566,
+      "gross_assets": 7869952567,
+      "liabilities": 61003705,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 757000000,
+        "investment": 2172923840,
+        "savings": 1038686928,
+        "liquid": 381341799
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,869,952,567 (~0.93% higher) — same unrealized-P&L gap pattern as 06/07, not a new data bug. Savings unchanged from 06/07 (1,038,686,928 — no book matured/opened since). Liquid down 5.0M (Tikop −45M, vcb +40M from 66.9M salary posted 01/07 net of Học phí/Hiếu hỉ/Nhà cửa spend). Ghost balance on closed 'nam á 6m' (2,005,479) still present in /wallets/savings as of today — excluded from savings total above, consistent with 06/07 treatment; still unresolved by MISA."
     }
   ]
 }
