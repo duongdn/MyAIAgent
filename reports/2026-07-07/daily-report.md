@@ -189,7 +189,7 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. ~~Elena-WordPress SamGuard ⚠�
 | Fountain | ✓ complete | 5-part check done (plan data corrected on recheck, see below) |
 | Philip | ✅ complete (recheck) | Sidebar confirms unchanged state: our Jul 1 outreach, no reply, no complaint |
 | Ohcleo | ✓ complete | Tony daily report ✓ |
-| Arthur - Meta-Stamp | ✅ complete (recheck) | davidztv19 email checked — clean active project + PhucVT 8h confirmed |
+| Arthur - Meta-Stamp | ✅ complete (recheck, corrected) | Active MCP audio-demo project for client Arthur, pushed to Production for his Jul 7 test. Real unanswered client question on metadata/attribution. Flag: team lead noted a pattern of clients disputing overtime pay. See full detail below. |
 | Elena - WordPress SamGuard | ✅ complete (fixed) | CSP fix applied by user via wp-admin — live re-check confirms zero violations |
 
 **Completed:** 21 items ✓ | **Left incomplete:** 0 items — full board clear.
@@ -261,7 +261,7 @@ All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA
 | Bailey | ✅ completed (corrected twice) | GGS Nick Slack clean. TuanNT gate: see John Yi row above — 8h confirmed directly on Paturevision, Bailey's own project (strongest possible evidence for this item specifically). VietPH no longer scanned (resigned 2026-06-30). |
 | Rebecca (William Bills) | ✅ completed (corrected twice) | William Bills Slack clean (0 msgs). TuanNT gate: 8h confirmed (Paturevision) — see John Yi row above. |
 | Philip | ✓ completed | MS Teams sidebar preview re-checked: "Philip Briggs / 7/1 / You: Hi Philip Briggs I hope you are doing well..." — unchanged from the last verified-clean state (our Jul 1 outreach, no client reply, no complaint). |
-| Arthur - Meta-Stamp | ✓ completed | davidztv19@gmail.com (missed by cron email scan — not wired into `daily-email-scan-*.js`, see caveat below) checked directly: genuine project activity (Meta-Stamp POC asset share, MongoDB/Railway/GitHub/Slack infra setup Jul 6) + PhucVT Workstream 8h on Crystal lang same day. Clean, active project. |
+| Arthur - Meta-Stamp | ✓ completed (corrected — full transcript read) | Original pass only grepped 2 lines from a 79-message Matrix room and missed the real content. **Full transcript reveals:** team (namtv/tiennd/phucvt) actively building an audio-fingerprinting MCP demo for client Arthur — S3 upload, signed URLs, MCP server for AI-agent access. Code pushed to Production end of day for **Arthur to test Jul 7**. Real unresolved question: client mentioned "metadata/attribution" requirements in a screenshot, team couldn't parse what he meant, nobody has asked him yet. 🔴 **Real financial risk flag** (previously mis-filed as "internal discussion, no action needed"): Nam Tran (team lead) said *"lately several clients have been difficult about overtime pay, one even refused to pay"* — a genuine pattern of client payment disputes on overtime, worth knowing directly, not routine chatter. davidztv19@gmail.com (missed by cron scan, see caveat) separately confirmed real infra setup (MongoDB/Railway/GitHub/Slack) + PhucVT 8h Workstream on Crystal lang same day. |
 | Elena - WordPress SamGuard | ✅ completed (fixed) | User applied the CSP fix directly via wp-admin (per known mechanic: `.htaccess` is `www-data`-owned, fix must go through wp-admin, not raw SSH/SQL). Live re-check (`wordpress-samguard-check.js`) confirms `cspViolations: []` — genuinely resolved, not just checked off. |
 
 **Trello Check Progress: 21/21 complete — full board clear.** John Yi, Bailey, Rebecca briefly reopened after catching invalid Scrin-based reasoning, then re-completed with real evidence (TuanNT 8h confirmed directly in Paturevision sheet). Neural Contract resolved via user-assisted VNC CAPTCHA solve. Elena-WordPress resolved via user's direct CSP fix.
@@ -286,7 +286,7 @@ Part 4 (capacity/runway): remaining estimate carried forward unchanged (229h/28 
 ### Matrix — full scan (was skipped in cron)
 
 22/131 rooms active, 412 messages since 2026-07-06 08:41. 3 action items for DuongDN:
-- **Arthur - Meta-Stamp** 17:07 namtv: asking about >40h/week policy for a contractor, client budget concerns — informational, no action needed from DuongDN specifically (internal team discussion).
+- **Arthur - Meta-Stamp** — see corrected full write-up in Trello section below (this line originally under-reported a real financial risk signal from a 2-line grep of a 79-message room).
 - **Maddy - Xtreme** 11:22 tuantt: asking about image-upload UX (remove already-uploaded images from selection) — minor product question, not urgent.
 - **PHP Projects** 08:21 chientx: Upwork contract for Marcel paused pending client action ("You will be unable to log time to this contract until the client restarts it") — FYI, matches known Marcel/Upwork contract-pause pattern.
 
