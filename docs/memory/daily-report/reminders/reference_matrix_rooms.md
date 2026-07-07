@@ -14,5 +14,7 @@ type: reference
 | KhanhHH | Generator/Elliott | `!rwLbvLBnrRAYMaOPaD:nustechnology.com` |
 | VuTQ | Bailey/Paturevision | `!SHdFKwrYpRhWJBtiBv:nustechnology.com` (task log reminders) |
 | Elena team | Digital Plant | `!kyArBadvcbfPIpIxpD:nustechnology.com` (announce deploys/review fails) |
+| Arthur/Crystal lang | Arthur - Meta-Stamp (business/demo room) | `!BEXEdVUmvWclPLELFf:nustechnology.com` |
+| Arthur/Crystal lang | Technical setup room (repo/docker/creds, no display name) | `!QEbdvaMJkTurMpRPIX:nustechnology.com` |
 
-Room URL format: `https://chat.nustechnology.com/#/room/{room_id}`
+Room URL format: `https://chat.nustechnology.com/#/room/{room_id}` or `https://app.element.io/#/room/{room_id}`
