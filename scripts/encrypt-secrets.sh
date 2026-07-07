@@ -39,6 +39,7 @@ SECRET_FILES=(
   config/.newrelic-config.json
   config/.newrelic-ohcleo-config.json
   config/.rollbar-config.json
+  config/.bitbucket-config.json
 )
 
 # Add Google service account key if exists

@@ -39,6 +39,7 @@ ENC_FILES=(
   config/.workstream-config.json.enc
   config/.github-config.json.enc
   config/.gmail-service-account.json.enc
+  config/.bitbucket-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
