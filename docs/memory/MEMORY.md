@@ -7,6 +7,7 @@
 - [feedback_decrypt_before_reading](global/feedback_decrypt_before_reading.md), [feedback_ssh_passphrase_in_config](global/feedback_ssh_passphrase_in_config.md) — decrypt-secrets.sh first; SSH passphrase in ~/.ssh/config
 - [feedback_never_report_token_expired](global/feedback_never_report_token_expired.md) — ZERO TOLERANCE: never report invalid_auth, fix silently
 - [feedback_workstream_config_not_gitignored](global/feedback_workstream_config_not_gitignored.md), [feedback_timeline_system](global/feedback_timeline_system.md) — new config/*.json gitignored; update timelines every run
+- [feedback_new_config_file_gitignore_gap](global/feedback_new_config_file_gitignore_gap.md) — recurring: new config/*.json missing from .gitignore blocks push (GH013); fixed via git-filter-repo when unpushed
 - [feedback_report_location](global/feedback_report_location.md) — Reports in `reports/{date}/`, not plans/reports/
 - [feedback_always_include_links](global/feedback_always_include_links.md), [feedback_report_style](global/feedback_report_style.md) — concise, no trailing summary, always URLs
 - [feedback_customer_facing_messages](global/feedback_customer_facing_messages.md) — never expose internal auth failures to customers
