@@ -15,6 +15,7 @@ config/.jira-config.json
 config/.bailey-config.json
 config/.upwork-config.json
 config/.newrelic-config.json
+config/.newrelic-ohcleo-config.json
 config/.rollbar-config.json
 config/.cloudflare-config.json
 config/daily-agent-*.json
