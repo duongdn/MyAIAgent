@@ -90,6 +90,7 @@
 - [feedback_matrix_refresh_headless_bug](daily-report/matrix/feedback_matrix_refresh_headless_bug.md), [feedback_matrix_token_never_report_expired](daily-report/matrix/feedback_matrix_token_never_report_expired.md), [feedback_matrix_token_short_lived](daily-report/matrix/feedback_matrix_token_short_lived.md) — headless:false, verify before claiming expired, fetch immediately (short-lived)
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md), [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md) — cross-check before 0h; LongVV changes weekly
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript for active rooms, grep snippets miss real signals (payment risk, unanswered client Qs)
+- [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — Arthur/Crystal-lang needs Maddy-level depth: 2 Matrix rooms (one unnamed), WS task notes, GitHub PR blocked (David Freelancer acct)
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — must include every run; cron never re-logs in
