@@ -23,7 +23,7 @@
 | 11 | Fountain | #2615 890% over-estimate (ongoing); stuck cards in Doing: 76d, 39d | Review with team |
 | 12 | AirAgri | Traccar disk 29/30GB near full (Vinn resolved server outage Jul 6) | Monitor disk |
 | 13 | nick@ | candasurveyors.com.au approaching Xero limit | Notify client |
-| 14 | Upwork | Sessions still expired (retried 2x on recheck, CAPTCHA blocked, 6th consecutive day). ~~Neural Contract~~ resolved via silence≠alert policy — Rory/Aysar unaffected (Slack-only gates) | Needs interactive VNC login: `bash scripts/vnc-login-session.sh upwork` |
+| ~~14~~ | ~~Upwork~~ | ~~Sessions expired, CAPTCHA blocked~~ | ✅ FIXED 10:0X — user connected via VNC and solved CAPTCHA live, carrick session now valid + password updated in config |
 
 ---
 
@@ -162,7 +162,7 @@ Trello: Fountain ✓ complete.
 
 **Action needed:** Add `region1.google-analytics.com` to `connect-src` in CSP header for samguard.co.
 
-Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️ skipped (CSP alert).
+Trello: Elena-SamGuard (PR/deploy) ✓ complete. ~~Elena-WordPress SamGuard ⚠️ skipped (CSP alert)~~ ✅ FIXED — user applied the CSP fix directly (wp-admin), live re-check confirms `cspViolations: []`. Complete.
 
 ---
 
@@ -181,7 +181,7 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 | Marcel | ✓ complete | Equanimity normal activity |
 | Elena - SamGuard | ✓ complete | SAM GUARD 0 Elena/DP, 0 PRs = clean |
 | Raymond - LegalAtoms | ✓ complete | LegalAtoms 0 msgs = clean |
-| Neural Contract | ⚠️ REOPENED — see correction below | 3 login attempts, all blocked at CAPTCHA/2FA — needs human via VNC, not auto-completable |
+| Neural Contract | ✅ complete (verified) | User connected via VNC and solved CAPTCHA live — see final resolution below |
 | Bailey | ✅ complete (recheck, corrected) | GGS Nick Slack ✓ clean + TuanNT confirmed **8h on Paturevision itself** (Bailey's own project — strongest possible evidence). |
 | Andrew Taraba | ✓ complete | Bizurk 0 DMs = clean |
 | Rebecca - William Will | ✅ complete (recheck, corrected) | William Bills 0 msgs clean + TuanNT confirmed 8h (Paturevision). |
@@ -190,9 +190,9 @@ Trello: Elena-SamGuard (PR/deploy) ✓ complete. Elena-WordPress SamGuard ⚠️
 | Philip | ✅ complete (recheck) | Sidebar confirms unchanged state: our Jul 1 outreach, no reply, no complaint |
 | Ohcleo | ✓ complete | Tony daily report ✓ |
 | Arthur - Meta-Stamp | ✅ complete (recheck) | davidztv19 email checked — clean active project + PhucVT 8h confirmed |
-| Elena - WordPress SamGuard | ○ incomplete | CSP violation found (real alert, needs fix — not a data gap) |
+| Elena - WordPress SamGuard | ✅ complete (fixed) | CSP fix applied by user via wp-admin — live re-check confirms zero violations |
 
-**Completed:** 19 items ✓ | **Left incomplete:** 2 items ○ (Neural Contract — Upwork CAPTCHA blocks human-required verification; Elena-WordPress — real CSP alert)
+**Completed:** 21 items ✓ | **Left incomplete:** 0 items — full board clear.
 
 ---
 
@@ -221,7 +221,7 @@ Reminder queue (print only, NOT sent — `--send-reminder` not present):
 | Workroom | Status | Notes |
 |----------|--------|-------|
 | Rory | session_expired | Still blocked after recheck retry — Trello item unaffected (Slack-only gate) |
-| Neural Contract | session_expired | Still blocked, but Trello item completed per session-failure≠alert policy |
+| Neural Contract | ✅ session fixed | User connected via VNC, solved CAPTCHA, carrick password updated. Messages verified: last exchange Jul 7 (Michael "Shall do" 08:05 → Carrick "Thank you so much!" 09:59) — clean, resolved, no urgent unanswered items. |
 | Aysar | session_expired | Still blocked after recheck retry — Trello item unaffected (Slack-only gate) |
 
 All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA block, 6th consecutive day). Needs interactive VNC login: `bash scripts/vnc-login-session.sh upwork`.
@@ -232,13 +232,14 @@ All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA
 
 1. ~~Workstream login~~ ✓ done on recheck (08:39)
 2. ~~Matrix token~~ ✓ done on recheck (08:39)
-3. **Upwork**: still blocked (CAPTCHA/2FA, 6 consecutive days) — needs interactive VNC login: `bash scripts/vnc-login-session.sh upwork`
-4. **Fix CSP**: Add `region1.google-analytics.com` to `connect-src` for samguard.co
+3. ~~Upwork CAPTCHA~~ ✓ done 10:0X — user solved via VNC, session valid, carrick password updated
+4. ~~Fix CSP~~ ✓ done — user applied fix via wp-admin, live-verified clean
 5. **AirAgri disk**: Coordinate with Vinn to expand/clean Traccar disk (29/30GB)
 6. **Facebook**: Check vuongtrancr Facebook for unauthorized access
 7. **Generator Bug #79427**: Assign to Elliott
 8. **ViTHT 0h Jul 6**: Planned 40h/wk, no leave note — confirm with dev/team lead
 9. **Email scan gap**: Add `davidztv19@gmail.com` to the cron email scan script
+10. **TuanNT scan script**: `sheets-tasklog-scan.js` multi-dev invocations can silently drop a dev's sheet row — worth investigating root cause (see memory)
 
 ---
 
@@ -256,14 +257,14 @@ All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA
 | John Yi - Amazing Meds | ✅ completed (corrected twice) | First correction: Scrin.io's "confirmed 8h31m" was invalid (raw data shows `Project: "No project"`, `Client: "No client"` — Scrin tracks Nick, not TuanNT, and the "john yi" label is a stale company-account name). Second, better correction: 2 earlier combined-name scan runs returned 0h for TuanNT due to transient per-project API flakiness (same known pattern as LeNH/Peptide Clyde) — a 3rd isolated run for TuanNT alone found the real entry immediately: **8h logged Jul 6 in Paturevision** (Bailey's own project), tasks "[Console] Location management for products" + "[Console] [CR3] Picking & Stock Location Enhancements". Confirmed via direct Google Sheets read of W35 tab, dated row "Mon, 06/07/26". |
 | Aysar | ✓ completed | KhanhHH Workstream: Baamboozle 4h + Generator 2h = 6h. Baamboozle MPDM already clean. |
 | Elliott | ✓ completed | KhanhHH Generator 2h confirmed (real project activity). Generator Slack re-checked live: only Rudi/Carrick (EC2 cleanup, MR review) — no Elliott/Violet message, but no concrete named Elliott issue either → normal per low-activity policy. |
-| Neural Contract | ⚠️ REOPENED — user rejected silence≠alert shortcut here | 3 login attempts made (2 quick + 1 full run that got past username/password this run, further than before). All 3 hit a manual CAPTCHA/2FA wall — final one timed out waiting 3 min for human completion. **This genuinely requires a human to solve the CAPTCHA via VNC** (`bash scripts/vnc-login-session.sh upwork` + connect with a VNC viewer) — cannot be automated further. Reverted to incomplete on Trello per explicit instruction not to auto-complete without real verification. |
+| Neural Contract | ✅ completed (verified live) | 3 automated login attempts all hit a CAPTCHA/2FA wall requiring a human. Started x11vnc on display :1 (port 5901), user connected and solved the CAPTCHA directly — login succeeded, session cookies saved. User also corrected carrick's Upwork password mid-session (updated in `config/.upwork-config.json`). Fetched Neural Contract workroom (38901192) messages directly: latest exchange Jul 7 — Michael (client) "Shall do" (08:05) → Carrick "Thank you so much!" (09:59). Clean, resolved, no unanswered urgent items. |
 | Bailey | ✅ completed (corrected twice) | GGS Nick Slack clean. TuanNT gate: see John Yi row above — 8h confirmed directly on Paturevision, Bailey's own project (strongest possible evidence for this item specifically). VietPH no longer scanned (resigned 2026-06-30). |
 | Rebecca (William Bills) | ✅ completed (corrected twice) | William Bills Slack clean (0 msgs). TuanNT gate: 8h confirmed (Paturevision) — see John Yi row above. |
 | Philip | ✓ completed | MS Teams sidebar preview re-checked: "Philip Briggs / 7/1 / You: Hi Philip Briggs I hope you are doing well..." — unchanged from the last verified-clean state (our Jul 1 outreach, no client reply, no complaint). |
 | Arthur - Meta-Stamp | ✓ completed | davidztv19@gmail.com (missed by cron email scan — not wired into `daily-email-scan-*.js`, see caveat below) checked directly: genuine project activity (Meta-Stamp POC asset share, MongoDB/Railway/GitHub/Slack infra setup Jul 6) + PhucVT Workstream 8h on Crystal lang same day. Clean, active project. |
-| Elena - WordPress SamGuard | ○ still incomplete | Real alert (CSP violation blocking region1.google-analytics.com) — not a data gap, needs actual fix. |
+| Elena - WordPress SamGuard | ✅ completed (fixed) | User applied the CSP fix directly via wp-admin (per known mechanic: `.htaccess` is `www-data`-owned, fix must go through wp-admin, not raw SSH/SQL). Live re-check (`wordpress-samguard-check.js`) confirms `cspViolations: []` — genuinely resolved, not just checked off. |
 
-**Trello Check Progress: 19/21 complete.** John Yi, Bailey, Rebecca briefly reopened after catching invalid Scrin-based reasoning, then re-completed with real evidence (TuanNT 8h confirmed directly in Paturevision sheet). Neural Contract and Elena-WordPress remain genuinely open (Upwork CAPTCHA needs human; CSP alert needs a fix).
+**Trello Check Progress: 21/21 complete — full board clear.** John Yi, Bailey, Rebecca briefly reopened after catching invalid Scrin-based reasoning, then re-completed with real evidence (TuanNT 8h confirmed directly in Paturevision sheet). Neural Contract resolved via user-assisted VNC CAPTCHA solve. Elena-WordPress resolved via user's direct CSP fix.
 
 ### Fountain — corrected
 
@@ -297,8 +298,8 @@ LeNH: 0h Jul 6 confirmed (2x re-run), no leave note found — genuine alert per 
 
 `davidztv19@gmail.com` (Arthur/Meta-Stamp account, added 2026-07-06) is missing from the cron email scan script — it checked the other 9 accounts but not this one. Needs to be added to `scripts/daily-email-scan-260703.js` (or its successor) so future cron runs cover it automatically.
 
-**Cleared:** Maddy, John Yi, Aysar, Elliott, Neural Contract, Bailey, Rebecca, Philip, Arthur - Meta-Stamp (9 items)
-**Still open:** Elena - WordPress SamGuard (real CSP alert, needs fix — see Post-run Actions)
+**Cleared:** Maddy, John Yi, Aysar, Elliott, Neural Contract, Bailey, Rebecca, Philip, Arthur - Meta-Stamp, Elena - WordPress SamGuard (10 items)
+**Still open:** none — 21/21 complete.
 
 ---
 
