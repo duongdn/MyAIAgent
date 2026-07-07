@@ -23,7 +23,7 @@
 | 11 | Fountain | #2615 890% over-estimate (ongoing); stuck cards in Doing: 76d, 39d | Review with team |
 | 12 | AirAgri | Traccar disk 29/30GB near full (Vinn resolved server outage Jul 6) | Monitor disk |
 | 13 | nick@ | candasurveyors.com.au approaching Xero limit | Notify client |
-| ~~14~~ | ~~Upwork~~ | ~~Sessions expired, CAPTCHA blocked~~ | ✅ FIXED 10:0X — user connected via VNC and solved CAPTCHA live, carrick session now valid + password updated in config |
+| ~~14~~ | ~~Upwork~~ | ~~Sessions expired, CAPTCHA blocked~~ | ✅ FIXED 10:14 — user connected via VNC and solved CAPTCHA live, carrick session now valid + password updated in config |
 
 ---
 
@@ -232,7 +232,7 @@ All Upwork sessions still expired after 2 retry attempts on recheck (CAPTCHA/2FA
 
 1. ~~Workstream login~~ ✓ done on recheck (08:39)
 2. ~~Matrix token~~ ✓ done on recheck (08:39)
-3. ~~Upwork CAPTCHA~~ ✓ done 10:0X — user solved via VNC, session valid, carrick password updated
+3. ~~Upwork CAPTCHA~~ ✓ done 10:14 — user solved via VNC, session valid, carrick password updated
 4. ~~Fix CSP~~ ✓ done — user applied fix via wp-admin, live-verified clean
 5. **AirAgri disk**: Coordinate with Vinn to expand/clean Traccar disk (29/30GB)
 6. **Facebook**: Check vuongtrancr Facebook for unauthorized access
@@ -303,4 +303,36 @@ LeNH: 0h Jul 6 confirmed (2x re-run), no leave note found — genuine alert per 
 
 ---
 
-*Recheck completed 2026-07-07T08:39+07:00*
+## Arthur (Meta-Stamp / Crystal lang) — full 4-part check — 10:59 (+07:00)
+
+Requested by user as new-project equivalent of the Maddy 4-part check. Roster (Workstream "Crystal lang", `customerAlias: Arthur`): DuongDN (Tech Lead), PhucVT (Developer), TienND (Manager). No JIRA/Trello ticket system — Matrix + Workstream notes only.
+
+**1. Communication — 2 Matrix rooms (1 missed entirely on first pass):**
+- **"Arthur - Meta-Stamp"** (79 msgs): team building audio-fingerprinting MCP demo, pushed to Production for Arthur's Jul 7 test. Client's "metadata/attribution" question unresolved as of end of day. 🔴 Nam Tran (lead): *"lately several clients have been difficult about overtime pay, one even refused to pay"* — real payment-dispute pattern.
+- **Unnamed room `!QEbdvaMJkTurMpRPIX`** (17 msgs, missed first pass): repo link (`github.com/Christebob/Meta_Stamp_V3`), docker/env file sharing, "David Freelancer" account credentials (Stripe/Google/GitHub/MongoDB) shared with PhucVT + DuongDN.
+
+**2. Task tracking:** none formal — Workstream task-log `additionalInfo` notes are the closest thing. PhucVT's Jul 6 note: *"Test and fix bugs on local. Check and clarified Chris's requirements with Arthur. Create accounts/data, upload tracks and update metadata... Working: Investigate metadata synchronization for .aif files."* — this already answers Nam Tran's unresolved metadata question, just not yet reported back.
+
+**3. Est/actual — Workstream "Crystal lang":** Only PhucVT logged (8h, Jul 6). TienND shows 0h despite doing hands-on dev work in Matrix chat that day (MCP config, S3 logic) — his WS role tag says "Manager," worth clarifying if he should be logging too.
+
+**4. PR/code status — RESOLVED this session (was blocked, now fixed):**
+User authorized `gh auth login` as the "David Freelancer" GitHub account (username `davidztv`) — repo access confirmed (`Christebob/Meta_Stamp_V3`, private).
+- **0 open PRs.** All 8 PRs to date are merged (#8 merged Jun 30 — programmatic customer onboarding/API-key auth/billing).
+- **7 commits since Jul 1, all pushed directly to `main` — no PR review for any of them:**
+  | Date | Author | Message |
+  |------|--------|---------|
+  | Jul 6 10:20 | davidztv | chore: update poetry lock |
+  | Jul 6 09:44 | jacobi-78 (Tien) | Update MCP logic |
+  | Jul 6 08:19 | davidztv | chore: remove debug code |
+  | Jul 6 07:37 | jacobi-78 | feat(mcp): return 402 + registration endpoint for unauthenticated MCP requests |
+  | Jul 6 02:45 | jacobi-78 | Add logic support aif file |
+  | Jul 6 02:16 | jacobi-78 | feat: implement Audio POC |
+  | Jul 2 04:36 | jacobi-78 | fix: resolve MCP registration connection failure in AI Agent |
+
+  ⚠️ **Unlike Maddy's repo (which has an automated Codex-review bot on every PR), this repo has no PR review process at all right now** — all real feature work (MCP, AIF support, Audio POC) is landing straight on `main` with no review step. Worth deciding if that's acceptable for a production system or if a PR workflow should be introduced.
+
+**Bottom line:** Real, active, shipping project. Two concrete items worth raising: (1) the client overtime-payment pattern Nam Tran flagged, (2) no code review process on this repo despite direct-to-production pushes.
+
+---
+
+*Arthur deep-check completed 2026-07-07T10:59+07:00*
