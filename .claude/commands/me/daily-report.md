@@ -129,6 +129,8 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Matrix** | |
 | `/daily-report matrix` | All joined rooms |
 | `/daily-report matrix --room "!roomId:..."` | Single room by ID |
+| **Arthur** | |
+| `/daily-report arthur` | Arthur/Meta-Stamp — 2 Matrix rooms + 3 Slack channels, incremental since last run, Vietnamese living-tracker report |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -1000,6 +1002,56 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 {Customer messages verbatim if any.}
 {Alerts if any.}
 ```
+
+---
+
+## Piece 13 — Arthur / Meta-Stamp (`/daily-report arthur`)
+
+**Not a standard client piece — not gated by any Trello item, not part of Full Run.** Run only when explicitly requested (`/daily-report arthur`) or via `/me:arthur-monitor` alias. Manual/on-demand only, never cron. Language: **Vietnamese always** — user cannot read English well and most raw client messages are in English. Full background/history: `docs/memory/daily-report/matrix/feedback_arthur_metastamp_four_part_check.md` and the one-time full deep-dive `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
+
+**5 sources, every run:**
+| # | Source | ID | Notes |
+|---|--------|-----|-------|
+| 1 | Matrix — "Arthur - Meta-Stamp" | `!BEXEdVUmvWclPLELFf:nustechnology.com` | Business/demo discussion |
+| 2 | Matrix — technical setup room (no display name) | `!QEbdvaMJkTurMpRPIX:nustechnology.com` | Repo/docker/credential sharing |
+| 3 | Slack "Solid Code" — Arthur DM | `mpdm-art_k--jack--namtv-1` (`C0B0BG90AUB`) | Original relationship DM, mostly historical |
+| 4 | Slack "Solid Code" — `ms-v3` | `C0B4G8USU3D` | Main technical channel, highest volume |
+| 5 | Slack "Solid Code" — `msv3-official` | `C0BEPFBLGJV` | Chris's channel |
+
+**Slack auth:** `config/.slack-accounts.json`, workspace `Solid Code`, `auth_type: session` (xoxc+cookie) — use `conversations.history`, NOT `search.messages`. IDs: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity — namtv/PhucVT/DuongDN all post as this)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1` (= TienND, confirmed).
+
+**Matrix auth:** `config/.matrix-config.json`, use the `homeserver` field (NOT `chat_url` — that's the web client, wrong API base). Token is short-lived — refresh via `DISPLAY=:1 node scripts/matrix-login.js` immediately before fetching, same command block. Room IDs need `encodeURIComponent()`.
+
+**GitHub (PR/commit status):** `gh auth token -h github.com -u davidztv` — already has access to `Christebob/Meta_Stamp_V3` (private). Check `pulls?state=all` AND `commits?since=...` — repo currently has 0 open PRs, all work direct-to-`main`, so PR list alone misses everything.
+
+**Workstream (est/actual):** project "Crystal lang", `projectId=cmqezgh7z080hp81vo5yqd24z`, roster DuongDN/PhucVT/TienND. ⚠️ **API bug:** `GET /review/week?projectId=...&date=...` returns `403 Forbidden` for the week's start date (or +2 days) — always query with a date from the back half of the target week or you'll wrongly conclude 0h logged.
+
+**Flow:**
+1. Read `arthur_monitor.last_run` from `config/.monitoring-timelines.json` (under `refresh` or top-level — see Key Config Files). Fetch only messages after that timestamp from all 5 sources.
+2. Load the tracker table from the most recent `reports/*/arthur-monitor.md` (or the original full report if this is the first incremental run).
+3. Update rows in place (status + last-updated) based on new messages — never rewrite the whole table. Add new rows only for genuinely new issues. Only mark ✅ on explicit user confirmation in chat; agent-observed "looks resolved" is 🟢 at most.
+4. Every row keeps a `Link Slack` column (permalink via `chat.getPermalink`) — this lives in the SAME table, never a separate links section.
+5. Write **new** file: `reports/{today}/{HHMM}-arthur-monitor.md`.
+6. Update `arthur_monitor.last_run` in timelines.
+
+**Report format:**
+```
+# Arthur / Meta-Stamp V3 — Cập nhật {ngày} (từ {last_run} đến {now})
+
+## Tóm tắt nhanh
+{2-4 câu — có gì mới đáng chú ý}
+
+## Chi tiết mới (nếu có)
+{Chỉ phần MỚI — không lặp lại lịch sử cũ. Trích dẫn nguyên văn, giải thích chi tiết không chung chung.}
+
+## BẢNG THEO DÕI (cập nhật từ lần trước)
+{full tracker table, carried forward + updated, with Link Slack column}
+
+## Câu hỏi cần anh xác nhận/quyết định
+{any new or still-open questions}
+```
+
+**Rules:** Never re-summarize full project history, only what's new. If nothing new on a source, say so briefly. See [[feedback_read_full_room_transcript_not_grep_snippets]] — read actual messages, don't grep-and-assume.
 
 ---
 
