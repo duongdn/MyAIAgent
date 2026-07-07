@@ -1,9 +1,9 @@
 {
   "arthur_monitor": {
-    "description": "Updated when /daily-report arthur (Piece 13) runs (manual, on-demand only, no cron). Used as the start time for the next incremental run.",
-    "last_run": "2026-07-07T14:51:55+07:00",
+    "description": "Updated when /daily-report arthur (Piece 13) runs (manual, on-demand only, no cron). Used as the start time for the next incremental run. IMPORTANT: last_run must equal the actual timestamp through which data was verified/read, NOT the time the feature/command finished running or being built.",
+    "last_run": "2026-07-07T15:46:00+07:00",
     "output_file": "reports/2026-07-07/1449-arthur-monitor.md",
-    "note": "First incremental run after the one-time full-history deep-dive. Only 2 minor Slack messages found (routine payout-threshold Q&A, resolved in-thread), no new Matrix/GitHub activity. Dry-run call still pending (~9h out at time of this run)."
+    "note": "Corrected run (2nd pass) after discovering the first incremental pass (14:29-14:49) had wrongly set last_run to feature-build-completion time, skipping the 10:27-14:29 window which contained the biggest update of the engagement: all 7 client-requested bugs + attribution/metadata fixed and deployed to production, confirmed by Nick at 15:06. This corrected last_run (15:46 VN) reflects the true cutoff of verified data for this run."
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
