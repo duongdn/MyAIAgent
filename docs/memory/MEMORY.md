@@ -17,6 +17,7 @@
 - [project_php_team](global/project_php_team.md) — LongVV,PhucVT,TuanNT,KhanhHH,LeNH (VietPH resigned, don't scan)
 - [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md) — UTC+7; PM at NUS Technology
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md) — new workspace: manual login once, extract xoxc from Local Storage (not cookies)
+- [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 STANDING RULE 260707: EVERY project/source (Slack/Matrix/Discord/Email/Teams), EVERY command — unanswered direct customer ask = warning, read full msg not just "posted=clean"
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
@@ -35,7 +36,7 @@
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — LIFM2-439 trust incident, Kai/LongVV hours unresolved
 - [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY every time: Slack+JIRA+est/actual+PR(Bitbucket xtreme-web/rms, creds set 260707); found critical unaddressed PR bugs
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md), [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — cron /tmp fail→TMPDIR=/var/tmp
-- [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md) — "Solid Code" token added 260706, not wired in yet
+- [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md) — ✅ RESOLVED 260707: IS the Arthur/Meta-Stamp workspace, 3 channels wired into Arthur check
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴 260707: dmetiner's direct unaddressed asks (MPX fail, plugin reorg, export deadline) wrongly marked clean; must read full msg text not just "posted=clean"
 
 ## daily-report:discord
@@ -91,7 +92,7 @@
 - [feedback_matrix_refresh_headless_bug](daily-report/matrix/feedback_matrix_refresh_headless_bug.md), [feedback_matrix_token_never_report_expired](daily-report/matrix/feedback_matrix_token_never_report_expired.md), [feedback_matrix_token_short_lived](daily-report/matrix/feedback_matrix_token_short_lived.md) — headless:false, verify before claiming expired, fetch immediately (short-lived)
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md), [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md) — cross-check before 0h; LongVV changes weekly
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript for active rooms, grep snippets miss real signals (payment risk, unanswered client Qs)
-- [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — Arthur/Crystal-lang needs Maddy-level depth: 2 Matrix rooms (one unnamed), WS notes, GitHub via `gh auth -u davidztv` (0 PRs, direct-to-main commits)
+- [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — 5 sources (2 Matrix+3 Slack "Solid Code"), Vietnamese summary+issue-list mandatory; recurring window=~1wk NOT full history (one-time deep dive only)
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — must include every run; cron never re-logs in
