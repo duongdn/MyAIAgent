@@ -123,6 +123,7 @@
 - [feedback_news_digest_ai_underused_sources](news-digest/feedback_news_digest_ai_underused_sources.md), [feedback_news_digest_use_actual_links](news-digest/feedback_news_digest_use_actual_links.md) — sample ALL 11 sources; JSON `link`+fix-links.py
 - [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — needs venv python3 or FB cookie refresh no-ops
 - [feedback_news_digest_dedup_rule](news-digest/feedback_news_digest_dedup_rule.md) — cap article URL at 2 appearances
+- [feedback_facebook_scraper_missing_x_display](news-digest/feedback_facebook_scraper_missing_x_display.md) — root cause of "no FB posts" 07-05/06/07: crashed w/o live Xvfb; fixed w/ self-start fallback
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md) — never cleanup/VACUUM FULL w/o confirmation

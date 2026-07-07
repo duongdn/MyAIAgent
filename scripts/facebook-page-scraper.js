@@ -20,6 +20,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 const fs = require('fs');
 const path = require('path');
+const { spawn } = require('child_process');
 
 const FB_PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'facebook-profile');
 const FB_COOKIES_FILE = path.join(__dirname, '..', 'tmp', 'fb-cookies.json');
@@ -33,6 +34,39 @@ function cleanSingletons() {
   ['SingletonLock', 'SingletonCookie', 'SingletonSocket'].forEach(f => {
     try { fs.unlinkSync(path.join(FB_PROFILE_DIR, f)); } catch {}
   });
+}
+
+// Chrome must run headful (see launch() below), which needs a live X server.
+// Cron/scheduled invocations don't reliably inherit a DISPLAY with a running
+// Xvfb behind it (depends on whatever wrapper script called this), so rather
+// than trust an inherited DISPLAY, start our own fallback Xvfb on :90 when
+// the current DISPLAY has no socket to back it. Returns the Xvfb child
+// process to kill on exit, or null if an existing display was reused.
+async function ensureDisplay() {
+  const current = process.env.DISPLAY;
+  if (current && fs.existsSync(`/tmp/.X11-unix/X${current.replace(/^:/, '').split('.')[0]}`)) {
+    return null; // inherited DISPLAY already has a live server behind it
+  }
+
+  const FALLBACK_DISPLAY = ':90';
+  if (fs.existsSync('/tmp/.X11-unix/X90')) {
+    process.env.DISPLAY = FALLBACK_DISPLAY;
+    return null; // reuse an Xvfb left running from a previous invocation
+  }
+
+  console.error(`[facebook] no live X server on DISPLAY=${current || '(unset)'}, starting Xvfb ${FALLBACK_DISPLAY}`);
+  const xvfb = spawn('Xvfb', [FALLBACK_DISPLAY, '-screen', '0', '1280x900x24', '-ac'], {
+    stdio: 'ignore',
+    detached: true,
+  });
+  xvfb.unref();
+  process.env.DISPLAY = FALLBACK_DISPLAY;
+
+  for (let i = 0; i < 20; i++) {
+    if (fs.existsSync('/tmp/.X11-unix/X90')) break;
+    await new Promise(r => setTimeout(r, 150));
+  }
+  return xvfb;
 }
 
 async function scrapePage(page, pageId, limit) {
@@ -202,6 +236,8 @@ async function run() {
   fs.mkdirSync(FB_PROFILE_DIR, { recursive: true });
   cleanSingletons();
 
+  const ownXvfb = LOGIN_MODE ? null : await ensureDisplay();
+
   const browser = await puppeteer.launch({
     executablePath: '/opt/google/chrome/chrome',
     headless: false, // xvfb provides the virtual display; Chrome must stay headless:false
@@ -212,11 +248,7 @@ async function run() {
       '--disable-dev-shm-usage',
       '--disable-blink-features=AutomationControlled',
     ],
-    env: {
-      ...process.env,
-      // For cron/headless runs, use xvfb display; login mode uses real display
-      ...(LOGIN_MODE ? {} : { DISPLAY: process.env.DISPLAY || ':99' }),
-    },
+    env: { ...process.env },
     ignoreDefaultArgs: ['--enable-automation'],
     defaultViewport: { width: 1280, height: 900 },
   });
@@ -266,6 +298,9 @@ async function run() {
 
   } finally {
     await browser.close();
+    if (ownXvfb) {
+      try { process.kill(-ownXvfb.pid); } catch { try { ownXvfb.kill(); } catch {} }
+    }
   }
 }
 
