@@ -33,7 +33,7 @@
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_no_activity_not_skip](daily-report/slack/feedback_no_activity_not_skip.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md) — dev talk ≠ alert; low activity often normal
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — Aysar gate=MPDM C07SQ4HAUHZ, no fixed time
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — LIFM2-439 trust incident, Kai/LongVV hours unresolved
-- [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY every time: Slack+JIRA comments+est/actual+PR; PR blocked, no Bitbucket creds (xtreme-web/rms)
+- [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY every time: Slack+JIRA+est/actual+PR(Bitbucket xtreme-web/rms, creds set 260707); found critical unaddressed PR bugs
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md), [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — cron /tmp fail→TMPDIR=/var/tmp
 - [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md) — "Solid Code" token added 260706, not wired in yet
 
