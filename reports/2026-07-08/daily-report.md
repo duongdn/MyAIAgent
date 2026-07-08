@@ -1,0 +1,251 @@
+# Daily Report — 2026-07-08 (Wednesday)
+
+**Run:** 08:39–09:15 (+07:00), interactive
+**Window:** 2026-07-07 10:13 → 2026-07-08 08:39 (+07:00)
+**Leave plan:** LongVV pending half-day leave 07-08; KhanhHH pending full-day leave 07-09. Neither applies to yesterday (07-07), the reporting day for task-log checks.
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Slack — RDC/Franc | dmetiner sent 3 direct technical follow-ups to Carrick 20:22-20:26 (07-07), still unanswered ~12h later |
+| 2 | Slack/Matrix — OhCleo/Celine | Client asked if creator emails actually sent (13:58 07-07, restated with growing concern through 18:58/20:43) — still unanswered by Tony |
+| 3 | Slack/Matrix — Maddy/Xtreme | 5 open Bitbucket PRs (xtreme-web/rms) with unaddressed Critical/High findings, 6-20 days aging, incl. PR #481 where LongVV's committed same-day fix (promised in Matrix 07-07) did not happen; Kai's daily progress report also missing for 07-07 |
+| 4 | Elena — WordPress SamGuard | 3 real CSP violations blocking GA4 analytics endpoints (`analytics.google.com`, `stats.g.doubleclick.net`) — needs user decision before DB/wp-admin change |
+| 5 | Sheets — KhanhHH | Only 2h logged 07-07 vs usual 8h (Generator only); Elena Google Sheet still permission-blocked so this may be incomplete |
+| 6 | Sheets — LeNH | 0h logged across all 4 sheets (Rory/Franc/Aysar/Rebecca) + Workstream, 07-07, no leave note |
+| 7 | Matrix — Bailey BA/QC | Real overbudget tasks (Nam's task, a ~60h-over "mobile picking" task) not proactively flagged by BA — new expectation set to report overbudget immediately |
+| 8 | Slack — Baamboozle/Aysar | No daily update posted for 07-07 work yet (no fixed schedule — pending, not a confirmed miss) |
+
+**Today (Wed 07-08):** LongVV pending half-day leave; KhanhHH pending full-day leave tomorrow (07-09). No one absent today per current data.
+
+---
+
+## Email — all — 08:39 (+07:00)
+
+| Account | Emails | Alerts | Calendar today |
+|---------|--------|--------|-----------------|
+| duongdn@nustechnology.com | 3 | 0 | none |
+| carrick@nustechnology.com | 7 | 0 | none |
+| nick@nustechnology.com | 2 | 0 | Weekly Meeting with Devs 21:30-22:30 |
+| rick@nustechnology.com | 35 | 0 | OmniGPT Daily Sync 10:30, HEAL Meeting 12:30 |
+| kai@nustechnology.com | 4 | 0 | none |
+| ken@nustechnology.com | 80 | 0 | Daily Standup 08:30, Bi-weekly Retro 09:00, Daily Standup 09:00, Tech Talks 09:00 |
+| vuongtrancr@gmail.com | 2 | 0 | — |
+| dnduongus@gmail.com | 29 | 0 | — |
+| davidztv19@gmail.com | 2 | 0 | — |
+| freelancer@mypersonalfootballcoach.com | 1 | 0 | — |
+
+All 10 accounts scanned live, no auth issues. Content is routine engineering traffic (GitHub/Rollbar/Redmine/Jira digests, TestFlight builds) plus 3 LongVV leave requests and personal mail. No unanswered direct customer/client ask found in any account this window.
+
+**Notable:** rick@ FirstProject staging had a burst of errors 03:14-03:15 (known ongoing noise pattern, no full-outage signal). carrick@ Socalautowraps Rollbar had 1 real error occurrence. ken@ received an automated Supabase dependency-scan notice (informational only).
+
+Trello: Check mail — all 6 Zoho items (DuongDn, Carrick, Nick, Rick, Kai, Ken) ✓ complete. Card marked done.
+
+---
+
+## Slack [all except OhCleo] — 08:46 (+07:00)
+
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| Baamboozle | 9 | QA feedback thread (internal, not alert). No Aysar daily update posted yet for 07-07's work (last one 07-06 17:38). |
+| RDC - FM Monitoring | 17 | Mostly automated bot posts. Real thread: dmetiner ↔ Carrick unanswered — see Alert #1. |
+| Swift Studio | 0 | No activity. |
+| Xtreme Soft Solutions | 3 | Internal QA DM to Kai (unanswered ~19h, informational). Kai's daily progress post missing for 07-07 — see Alert #3. |
+| SAM GUARD - Mobile | 12 | Automated HubSpot lead notifications only. |
+| Global Grazing Services | 0 | #maintenance silent, normal. |
+| Amazing Meds | 0 | Quiet, no complaints. |
+| Generator | 0 | Quiet in-window. |
+| LegalAtoms | 0 | No Nick-specific mentions. |
+| MyPersonalFootballCoach | 0 | No activity. |
+| William Bills | 0 | Quiet since 06-26. |
+| Equanimity | 0 | Quiet in-window. |
+| SoCal Auto Wraps | — | Dropped, no Trello item. |
+| Aigile Dev | 1 | Automated Sentry "all clear" bot post. |
+
+### ⚠️ Franc/RDC — unanswered (Alert #1)
+Channel `all-rdc-fm-monitoring`. dmetiner asked Carrick 3 direct follow-up questions 20:22-20:26 (07-07):
+> 20:22 — "[Carrick] thank you for identifying and fixing both problems. For the Munich device, are these folders tracked by Git and can be distributed to any other device if we want?... is Munich device using it's own branch?..."
+> 20:23 — "Yes it is also working for me at the moment. Did you change something regarding the plugin?"
+> 20:26 — "perfect, thank you! ... Do we need to reboot the whole RPi manually when this happens in Istanbul? Will rebooting fix it?"
+
+No reply from Carrick as of 08:46 (~12h later).
+
+Trello: John Yi, Rory, Elliott, MPFC, Marcel, Raymond-LegalAtoms, Bailey, Rebecca, Colin ✓ complete. **Aysar, Franc ⚠️ left incomplete.**
+
+---
+
+## Discord — 08:39 (+07:00)
+| Server | Msgs | Key content |
+|---|---|---|
+| AirAgri (nusvinn) | 20 | Vinn daily report (18:04 07-07): SDS warnings/expiry fix, PR reviews #556-560, alarm-status bug fixed. Jeff Trinh daily report (17:30, 4h): History Feature done. New: bellatric02 requested a new AirAgri account for Jeremy Wu (jwu@selectharvests.com.au), posted 08:38 today — too fresh to flag, note for next check. |
+| Bizurk (nuscarrick) | 0 | Quiet, normal. |
+
+Trello: James Diamond - Vinn task ✓, Andrew Taraba ✓.
+
+## Scrin.io — 08:39 (+07:00)
+**Scrin.io (Nick / John Yi company account — 2026-07-07):** 9h53m logged (5 sessions). Project/Client fields show "No project"/"No client" (stale label). Tracks Nick, not TuanNT.
+
+## OhCleo Slack — 08:39 (+07:00)
+| Channel | Msgs | Key content |
+|---|---|---|
+| DM Celine Fierro | 8 | Tony's daily report (10:32 07-07): password-reset security fix, bulk-email bug, sign-up bug fixed. See Alert #2. |
+| #events-code | — | Channel renamed/removed, only "features" channel exists now, 0 activity. |
+
+Tony daily report: present (10:32).
+
+**⚠️ Unanswered customer messages (Alert #2), verbatim:**
+> 13:58 Celine: "Thanks! And can you confirm if the e-mail to creators I sent on Monday went out or if I need to redo it?"
+> 18:57 Celine: "It looks like they all received this e-mail, is this correct:"
+> 18:58 Celine: "So they got it when I sent it? It was just a problem in the admin? Its just that, no one has e-mailed me back, they usually do!"
+
+No reply from Tony as of scan (~14h). Corroborated by Matrix (LongVV still clarifying as of 20:43, no reply sent).
+
+Trello: Ohcleo ⚠️ left incomplete.
+
+---
+
+## Sheets [all] — 08:54 (+07:00)
+
+Reporting date: 2026-07-07. No approved leave applicable to that day for any of the 5 devs.
+
+| Developer | 07-07 Actual | Status |
+|-----------|---------------|--------|
+| LongVV | 8h (OhCleo/"Tony" — now full-time, target changed) | OK |
+| PhucVT | 9h (Crystal lang/Meta-Stamp) | OK |
+| TuanNT | 8h (Paturevision) | OK |
+| KhanhHH | 2h (Generator only) | ⚠️ ALERT |
+| LeNH | 0h (all 4 sources checked, empty) | ⚠️ ALERT |
+
+**KhanhHH:** Only 2h found (Generator: Fix redmine 1h, Check EC2 0.5h, Review MRs 0.5h). Confirmed 0h in Baamboozle/Aysar, Colin/ETZ, Family App, 20 live Workstream projects checked. Elena Google Sheet still permission-blocked (service account not re-shared) — cannot rule out hours logged there, so this may be an incomplete picture. Worth a direct check with her.
+
+**LeNH:** Verified 0h directly by reading raw day-blocks in all 4 sheets (Rory, Franc, Aysar, Rebecca) — every row empty for 07-07. Workstream cross-check also 0. No leave note. Genuine shortfall.
+
+## Sheets — Maddy JIRA — W14 — 08:54 (+07:00)
+No ticket entries in Maddy sheet W14 (Jul 6-12) — 0h Mon/Tue/Wed, consistent with LongVV's full move to OhCleo. Nothing to cross-check against JIRA this week.
+
+## Maddy — Bitbucket PR check — 09:14 (+07:00)
+**PR #481:** Still OPEN, still `changes_requested` (Madhuraka, unresolved refund/Xero double-post finding from 06-06). No commits since 07-02, no reply since. **LongVV's committed same-day fix (Matrix 07-07) did not happen.**
+
+**Other open PRs with unaddressed Critical/High findings:**
+- #509 (LIFM2-428) — Critical, 16 days, 0 replies
+- #510 (LIFM2-446) — Critical, 13 days, 0 replies
+- #507 (LIFM2-444) — Critical, 20 days, 0 replies
+- #486 (LIFM2-436) — Madhuraka directly asked Kai to address, 0 reply since 06-06
+- #513 — 1 "Important" issue, lower severity, noting only
+
+9 open PRs total; 5 have unaddressed Critical/High findings.
+
+**Combined Maddy verdict:** Slack (Kai's report missing) + JIRA (0h, no tickets) + PR (5 stale critical findings incl. broken same-day-fix promise) all point to real, compounding non-delivery this week.
+
+Trello: Maddy - Carrick/Kai/Luis ⚠️ left incomplete.
+
+---
+
+## Fountain — 08:54 (+07:00)
+
+### Part 1 — Matrix Plan
+@trinhmtt, Mon 07-06 08:40:22: ViTHT 40h, ThinhT 20h, DatNT 40h => QC 24h. (DatNT continues replacing VuTQ.) Capacity 100h/wk (excl. QC).
+
+### Part 2 — Task Log Actuals (W34)
+ViTHT/ThinhT/DatNT/PhatDLT/HungPN/HaVS all 0h so far this week (early in week; task log not PM-tracked per policy, not alerted).
+
+### Part 3 — Plan vs Actual
+All devs -100% vs plan so far (early week, not flagged per policy).
+
+### Part 4 — Capacity & Runway
+NS+IP remaining: **229h across 27 tasks**. Capacity: **100h/wk**. Runway: **2.29 weeks** — unchanged vs 07-07. Broader bucket: 75 tasks, 554.8h, 5.55wk.
+
+### Part 5 — Over-Estimate Tracking
+| Task | Status | Est+CR | Actual | Over% | Trend |
+|------|--------|--------|--------|-------|-------|
+| #2615 | Deployed Staging | 12h | 106.75h | 789.6% | Stable |
+| #2595 | Deployed Staging | 120h | 168.25h | 40.2% | Stable |
+| #2735 | In-progress | 130h | 136h | 4.6% | Under threshold |
+| #2624 | Dev Done | 12h | 31.25h | 160.4% | Stable |
+| #2872 | In-progress | 32h | 46.25h | 44.5% | Stable |
+| #2702 | In-progress | 8h | 25.5h | 218.8% | Stable |
+
+37 tasks >20% over sheet-wide, all unchanged vs prior reports — Est vs Charged tab appears frozen since ~07-01 (no source updates from Kunal's team).
+
+### Trello (Fountain board)
+0 customer comments this window. Doing-list hard-to-release: #2813 (77d), #2921 (39d) — unchanged trend. 50 cards board-wide 5+ days inactive (backlog, not new).
+
+Trello: Fountain ✓ complete.
+
+---
+
+## Elena — 08:39 (+07:00)
+
+**PRs (Elena-SamGuard-Digital-Plant):** 0 open, nothing to merge/deploy. **Precognize (nusken):** 5 open PRs total, 0 by nusken — no action needed.
+
+**WordPress SamGuard:** pageErrors/jsErrors none. **3 real CSP violations** — `connect-src` blocks GA4 endpoints `analytics.google.com` and `stats.g.doubleclick.net` (not in current whitelist). Fix requires SQL/wp-admin change to `wp_options.hsts_csp` — not applied, awaiting user decision (Alert #4).
+
+Trello: Elena - SamGuard, Elena - WordPress SamGuard ⚠️ both left incomplete.
+
+---
+
+## Matrix — 08:52 (+07:00)
+
+**Active rooms: 21 / 131 | Messages: 500** *(since 2026-07-07 10:13)*
+Full details: reports/2026-07-08/matrix-rooms-0851.md
+
+### Key updates
+
+**Bailey - BA/QC — overbudget not proactively flagged (Alert #7):**
+- DuongDN caught Nam's task (est 11h, actual far more, in-progress) and a "mobile picking" task ~60h over during routine review — neither raised by BA beforehand.
+- New expectation: overbudget items must be reported immediately going forward.
+
+**Celine - OhCleo:** Corroborates Alert #2 — client asked if emails sent, LongVV still clarifying as of 20:43, no reply sent yet.
+
+**Maddy - Xtreme:** Corroborates Alert #3 — DuongDN pushed LongVV on stale PR #481, "clean up that evening" commitment — confirmed NOT done (see Bitbucket check above).
+
+**Bailey — dev performance:** DuongDN + minhtv flagged a specific dev's slow ramp-up and repeated est overruns on a Bailey mobile task. Open question on policy — no decision made.
+
+**Francesca - Radio Data Center:** Team assessing client-requested MPX-fail reboot script; findings not yet reported back to client.
+
+**Other:**
+- James Diamond: PhucVT's hours review still pending (tiennd to follow up).
+- Delivery/Resource Arrangement: 5 same-day leave notes processed normally; LongVV's remote-work request declined (release day).
+- Elena Active Alerts: internal bug resolved as "not a bug," no client impact.
+- PHP Projects: contract-closure notice from Marcel F., resolved.
+- Fountain (Kunal), Arthur-Meta-Stamp: active, covered by dedicated pieces (Arthur not run today — on-demand only).
+
+---
+
+## Upwork — 08:52 (+07:00)
+
+| Workroom | Upwork hours (week) | Task log hours | Match? |
+|----------|---------------------|-----------------|--------|
+| Rory (LeNH) | 0h | 0h | ✓ |
+| Aysar (LeNH tracker) | 4h (Mon only) | 0h (W32 Mon-Wed blank) | ⚠️ logging lag, not flagged — 2.7 days into week |
+| Bailey-DuongDN | 0h | 0h expected | ✓ |
+| Neural Contract - Test Job | 0h timesheet | messages-only | ✓ resolved thread |
+
+Neural Contract: client (Michael) said "Shall do." to a referral ask, Carrick replied "Thank you so much!" — no unanswered client message.
+
+Trello: Neural Contract ✓ complete.
+
+---
+
+## Philip (MS Teams) — 08:59 (+07:00)
+Contact verified: Philip Briggs / (External) Six Star Rentals / pbriggs@sixstarrentals.com.au. Last message still our own Jul 1 outreach — no new customer activity since 07-06. Not a customer-ask gate violation (it's our own unanswered outreach, not an unanswered ask from Philip).
+
+Trello: Philip ✓ complete.
+
+---
+
+## Reminders — 08:39 (+07:00)
+- **LeNH:** needs reminder (0h 07-07, no leave) — **not sent** (no `--send-reminder` flag this run). Use `/me:daily-report reminders lenh --send-reminder` to send.
+- KhanhHH: 2h logged (not 0h) — does not trigger reminder threshold, though flagged separately above as a shortfall.
+- PhucVT, TuanNT, LongVV: skipped, all have hours.
+
+---
+
+## Trello — Check Progress summary (board O83pAyqb)
+
+21 items total: **14 ✓ complete**, **7 ⚠️ open** (Maddy, Aysar, Franc, Elena-SamGuard, Elena-WordPress SamGuard, Philip→✓ now 6 open, Ohcleo). Corrected count: **15 ✓, 6 ⚠️ open** (Maddy, Aysar, Franc, Elena-SamGuard, Elena-WordPress, Ohcleo). Arthur-Meta-Stamp intentionally untouched (on-demand piece, not part of full run).
+Card: https://trello.com/c/iM1Qg7x5/1110-check-progress
+Check mail: https://trello.com/c/7mixHtpq/1111-check-mail — 6/6 ✓, card marked done.
