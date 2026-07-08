@@ -61,6 +61,15 @@ ls reports/{YYYY-MM-DD}/*-news-digest.md 2>/dev/null
 
 **Không phải lỗi — đừng re-fetch:** nếu source thực sự không có bài mới (RSS/trang trống thật, không phải do crash/timeout script). Sau khi re-fetch mà vẫn 0 bài và KHÔNG có lỗi kỹ thuật trong stderr → giữ nguyên placeholder, cập nhật log recheck ghi rõ "không phải lỗi — nguồn trống thật".
 
+## 🔴 ANTI-HALLUCINATION RULE (BẮT BUỘC)
+
+**TUYỆT ĐỐI KHÔNG bịa tin tức, URL, hay tiêu đề bài báo.**
+
+- **CHỈ** dùng dữ liệu trả về từ `fetch-news.py`. Không được viết bất kỳ tin tức nào từ training knowledge.
+- Nếu script trả về rỗng hoặc lỗi → viết `_(Không có dữ liệu — fetch-news.py trả về rỗng)_`, KHÔNG bịa tin.
+- Kiểm tra URL sau khi synthesize: URL thật của Google News có dạng `/articles/CBMi...`, KHÔNG phải `/rss/articles/...`. Bất kỳ URL nào dạng `/rss/articles/` là hallucinated — xóa bỏ ngay.
+- **KHÔNG viết bất kỳ section nào trước khi gọi fetch-news.py.** Thứ tự bắt buộc: fetch → nhận kết quả → synthesize từ kết quả đó.
+
 ## Run
 
 **⚠️ QUAN TRỌNG — Khi `topic=all`: PHẢI fetch từng topic riêng, KHÔNG fetch `all` trong 1 lần.**
