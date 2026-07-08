@@ -249,3 +249,23 @@ Trello: Philip ✓ complete.
 21 items total: **14 ✓ complete**, **7 ⚠️ open** (Maddy, Aysar, Franc, Elena-SamGuard, Elena-WordPress SamGuard, Philip→✓ now 6 open, Ohcleo). Corrected count: **15 ✓, 6 ⚠️ open** (Maddy, Aysar, Franc, Elena-SamGuard, Elena-WordPress, Ohcleo). Arthur-Meta-Stamp intentionally untouched (on-demand piece, not part of full run).
 Card: https://trello.com/c/iM1Qg7x5/1110-check-progress
 Check mail: https://trello.com/c/7mixHtpq/1111-check-mail — 6/6 ✓, card marked done.
+
+---
+
+## Re-check — 09:19 (+07:00)
+
+Re-ran all 6 still-open items (~30min after original report). No resolving activity found — all confirmed still genuinely open, not data gaps.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Franc | ○ still incomplete | RDC channel: dmetiner's 13:22-13:26 UTC (20:22-20:26+07) 3 questions still have 0 Carrick reply. Re-queried `search.messages` for Carrick + broad channel history, nothing after original scan. |
+| Aysar | ○ still incomplete | Baamboozle workspace: 0 new messages workspace-wide since 07-07 (search.messages `after:2026-07-07`). No Aysar daily update posted yet. |
+| Maddy | ○ still incomplete | Xtreme Slack: 0 new messages since 07-07 (Kai's report still missing). Bitbucket PR #481: still OPEN, still `changes_requested`, last commit unchanged (07-02) — LongVV's promised same-day fix still not pushed. |
+| Elena - SamGuard Digital Plant | ○ still incomplete | GitHub: still 0 open PRs on Elena-SamGuard-Digital-Plant, nothing to merge/deploy. No new build/API/maxGraph review action taken this recheck. |
+| Elena - WordPress SamGuard | ○ still incomplete | Live `curl -sI https://www.samguard.co/` — CSP `connect-src` still excludes `analytics.google.com`/`stats.g.doubleclick.net`. Fix requires wp-admin change, awaiting user decision (per feedback_elena_consolidated: DB-only edits get silently overwritten by cached `.htaccess` unless applied via wp-admin). |
+| Ohcleo | ○ still incomplete | `slack-fetch-ohcleo.js --since 08:30` — 0 new DM messages from Tony to Celine. Client's creator-email question still unanswered. |
+
+**Cleared:** none.
+**Still open:** Franc, Aysar, Maddy, Elena - SamGuard Digital Plant, Elena - WordPress SamGuard, Ohcleo. (Arthur - Meta-Stamp intentionally untouched — on-demand only.)
+
+Trello Check Progress: unchanged, 15/21 complete, 6 open (same as original report).

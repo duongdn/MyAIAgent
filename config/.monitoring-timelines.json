@@ -12,10 +12,11 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-08T09:15:00+07:00",
+    "last_run": "2026-07-08T09:19:00+07:00",
     "output_file": "reports/2026-07-08/daily-report.md",
     "last_status": "complete",
     "caveats": [
+      "Recheck 09:19 Jul-8: re-ran all 6 open items (Franc, Aysar, Maddy, Elena-SamGuard, Elena-WordPress, Ohcleo) ~30min after original report — no resolving activity on any, all confirmed still genuinely open (not data gaps). No Trello state changes.",
       "Jul-8 09:15: Full run, 8 parallel pieces + Philip/Maddy-PR follow-ups. Check Progress 15/21 complete, 6 open: Maddy (Slack report missing + PR #481 same-day-fix promise broken + 4 more stale critical Bitbucket PRs), Aysar (no daily post yet, pending not confirmed miss), Franc (dmetiner 3 unanswered technical Qs ~12h), Elena-SamGuard + Elena-WordPress SamGuard (3 real CSP violations blocking GA4, needs user decision on wp-admin fix), Ohcleo (Celine's creator-email question unanswered ~14h, corroborated Slack+Matrix). Arthur-Meta-Stamp untouched (on-demand piece only). Sheets: KhanhHH 2h/8h (Elena sheet still perm-blocked, may be incomplete), LeNH 0h/8h (verified genuine, no leave). Matrix: Bailey BA/QC found real overbudget tasks (Nam's task, ~60h-over mobile-picking) not proactively flagged — new expectation set for immediate reporting. Reminder: LeNH 0h queued print-only, not sent (no --send-reminder flag). Matrix token stalled once mid-run on an Element dialog, resumed successfully, no data gap.",
       "Final 10:13 Jul-7: Trello Check Progress reached 21/21 (full clear). Two remaining items resolved with user assistance: (1) Neural Contract \u2014 user connected via VNC (x11vnc on display :1) and solved Upwork CAPTCHA live, carrick password also corrected in config; verified via direct message fetch (Jul 7 exchange clean, no unanswered items). (2) Elena-WordPress SamGuard \u2014 user applied the CSP fix directly via wp-admin; live re-check confirms cspViolations:[]. Also caught and self-corrected a real mistake this run: initially claimed 'TuanNT confirmed via Scrin.io' for the John Yi/Bailey/Rebecca gate \u2014 invalid (Scrin tracks Nick not TuanNT, repeat violation of existing memory; also that Scrin session's own data showed Project:'No project'). User caught it hard. Real evidence found instead: TuanNT logged 8h Jul 6 directly in the Paturevision/Bailey sheet (W35 tab) \u2014 a 3rd isolated single-dev scan run found it after 2 combined-dev runs missed it (new Sheets-side variant of the known multi-pass-required reliability gap, memory updated). LongVV's role also changed per user: now full-time (40h/wk) on Ohcleo as 'Tony', not old 16h/wk part-time \u2014 memory updated in both locations.",
       "Recheck 08:39 Jul-7: Matrix+Workstream logins fixed, 9/10 incomplete items resolved (Maddy, John Yi, Aysar, Elliott, Neural Contract, Bailey, Rebecca, Philip, Arthur-Meta-Stamp) via live re-query. Elena-WordPress SamGuard stays open (real CSP alert). Fountain Part1 corrected: DatNT replaced VuTQ as this week's dev (ViTHT 40h+ThinhT 20h+DatNT 40h=>QC 24h, capacity 100h/wk not 92h/wk carried from stale placeholder), runway recalculated 2.29wk. ViTHT flagged 0h Jul 6 (planned 40h/wk, no leave, confirmed 2x) \u2014 genuine miss per feedback_fountain_0h_not_expected_day1, does not block Fountain Trello (gate=plan+no over-est spike only). TuanNT Sheets/WS 0h but Scrin 8h31m passed the gate for John Yi/Bailey/Rebecca. LeNH 0h Jul 6 confirmed genuine (no gate impact, reminder queued print-only). New gap found: davidztv19@gmail.com (Arthur/Meta-Stamp, added 2026-07-06) missing from cron email scan script \u2014 needs wiring in. Upwork still blocked (CAPTCHA, 6th consecutive day) \u2014 Neural Contract completed per session-failure\u2260alert policy, needs interactive VNC login.",
@@ -205,7 +206,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-08T09:15:00+07:00",
+    "last_run": "2026-07-08T09:19:00+07:00",
     "output_file": "reports/2026-07-08/daily-report.md"
   },
   "bailey-monitor": {
