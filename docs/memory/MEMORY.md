@@ -19,6 +19,7 @@
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md) — new workspace: manual login once, extract xoxc from Local Storage (not cookies)
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 STANDING RULE 260707: EVERY project/source (Slack/Matrix/Discord/Email/Teams), EVERY command — unanswered direct customer ask = warning, read full msg not just "posted=clean"
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — 260708: decrypt-secrets.sh reverted a live-refreshed Matrix token to stale .enc; fixed via saveSecretConfig auto re-encrypt helper
+- [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — 260708: MCP Drive OAuth expired → fallback to service account + Drive `files().export` (text/plain), works even though Slides API disabled
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
