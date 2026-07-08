@@ -45,6 +45,7 @@
 - [feedback_vinn_daily_report_format](daily-report/discord/feedback_vinn_daily_report_format.md), [feedback_monday_discord_scan_friday_window](daily-report/discord/feedback_monday_discord_scan_friday_window.md) — Vinn check N-1; Mon window=Fri 08:00
 
 ## daily-report:sheets (task logs / per-developer)
+- [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md) — 260708: WS reviewStatus=Pending → ALERT to project reviewer (roster Manager), not the dev
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — scan ALL sheets+WS by owner col, never hardcode
 - [feedback_sheets_subagent_unreliable](daily-report/sheets/feedback_sheets_subagent_unreliable.md), [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md) — verify suspicious 0h directly, filter own name
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md) — no date arg = defaults to current empty week

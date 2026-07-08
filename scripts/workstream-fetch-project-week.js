@@ -118,6 +118,9 @@ async function fetchProjectWeekSelf(config, projectId, date) {
 
 function summarizeWeekManager(weekData, projectLabel) {
   const byEmployee = {};
+  // "Pending" = charged hours flagged for review, not yet resolved by the reviewer.
+  // "Reviewed" = resolved. "NotRequired" = no review needed for this row.
+  const needsReview = [];
   for (const row of (weekData.rows || [])) {
     if (!byEmployee[row.employeeName]) {
       byEmployee[row.employeeName] = { total: 0, totalCharged: 0, isPt: false, days: {} };
@@ -129,13 +132,29 @@ function summarizeWeekManager(weekData, projectLabel) {
     if (row.isPt) byEmployee[row.employeeName].isPt = true;
     if (!byEmployee[row.employeeName].days[row.date]) byEmployee[row.employeeName].days[row.date] = 0;
     byEmployee[row.employeeName].days[row.date] += actual;
+    if (row.reviewStatus === 'Pending') {
+      needsReview.push({
+        employeeName: row.employeeName,
+        date: row.date,
+        task: row.task,
+        charged: row.charged,
+      });
+    }
   }
+
+  // Reviewer = the project's Manager (falls back to Tech Lead if no Manager on roster).
+  const roster = weekData.roster || [];
+  const reviewer = roster.find(m => (m.roles || []).includes('Manager'))?.employeeName
+    || roster.find(m => (m.roles || []).includes('Tech Lead'))?.employeeName
+    || null;
 
   return {
     project: projectLabel,
     weekStart: weekData.weekStart,
     weekEnd: weekData.weekEnd,
     missingReportDays: (weekData.dayStrips || []).filter(d => d.clientReportMissing).map(d => d.date),
+    reviewer,
+    needsReview,
     members: Object.entries(byEmployee).map(([name, d]) => ({
       name,
       weekTotal: parseFloat(d.total.toFixed(2)),
