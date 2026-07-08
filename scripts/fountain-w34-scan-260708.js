@@ -64,7 +64,12 @@ async function main() {
     }
     const cell0 = String(summaryRows[i][0] || "").trim();
     if (cell0.startsWith("W") && /^\d+$/.test(cell0.slice(1))) {
-      weekRows[parseInt(cell0.slice(1))] = { label: cell0, row: summaryRows[i] };
+      // Col B (idx1) holds the week's start date (e.g. "July 6, 2026") — the sheet is
+      // pre-templated through W52, so picking max(W-number) grabs a future empty row.
+      // Must pick by actual calendar date <= today instead.
+      const dateStr = String(summaryRows[i][1] || "").trim();
+      const parsed = dateStr ? new Date(dateStr) : null;
+      weekRows[parseInt(cell0.slice(1))] = { label: cell0, row: summaryRows[i], date: parsed && !isNaN(parsed) ? parsed : null };
     }
   }
 
@@ -79,10 +84,14 @@ async function main() {
   process.stderr.write(`Column map: ${JSON.stringify(colMap)}\n`);
   process.stderr.write(`Week rows found: ${Object.keys(weekRows).sort((a,b)=>a-b).join(", ")}\n`);
 
-  const maxW = Math.max(...Object.keys(weekRows).map(Number));
+  const TODAY = new Date("2026-07-08T00:00:00");
+  const withDates = Object.entries(weekRows).filter(([, w]) => w.date && w.date <= TODAY);
+  const maxW = withDates.length
+    ? Math.max(...withDates.map(([w]) => Number(w)))
+    : Math.max(...Object.keys(weekRows).map(Number));
   const currWeek = weekRows[maxW] || null;
   const prevWeek = weekRows[maxW - 1] || null;
-  process.stderr.write(`Current: W${maxW}, prev: W${maxW-1}\n`);
+  process.stderr.write(`Current: W${maxW} (date=${currWeek && currWeek.date}), prev: W${maxW-1}\n`);
 
   const currActuals = {};
   const prevActuals = {};
