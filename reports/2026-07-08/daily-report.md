@@ -15,7 +15,7 @@
 | 3 | Slack/Matrix — Maddy/Xtreme | 5 open Bitbucket PRs (xtreme-web/rms) with unaddressed Critical/High findings, 6-20 days aging, incl. PR #481 where LongVV's committed same-day fix (promised in Matrix 07-07) did not happen; Kai's daily progress report also missing for 07-07 |
 | 4 | Elena — WordPress SamGuard | 3 real CSP violations blocking GA4 analytics endpoints (`analytics.google.com`, `stats.g.doubleclick.net`) — needs user decision before DB/wp-admin change |
 | 5 | ~~Sheets — KhanhHH~~ | **RETRACTED 09:26** — sheets-only figure (2h) was incomplete; live Workstream shows real total 8h (Radio Data Center 6h + Generator 2h). Normal day. |
-| 6 | Sheets — LeNH | 0h logged across all 4 sheets (Rory/Franc/Aysar/Rebecca) + Workstream, 07-07, no leave note |
+| 6 | ~~Sheets — LeNH~~ | **RETRACTED 10:2x** — 8h found in Portfolio - James Diamond (Workstream), missed twice by flaky per-project fetch. Not an alert. |
 | 7 | Matrix — Bailey BA/QC | Real overbudget tasks (Nam's task, a ~60h-over "mobile picking" task) not proactively flagged by BA — new expectation set to report overbudget immediately |
 | 8 | ~~Slack — Baamboozle/Aysar~~ | **RETRACTED 09:26** — KhanhHH had 0h on Baamboozle 07-07 (worked Radio Data Center + Generator instead), so no update was expected that day. Not a miss. |
 
@@ -117,11 +117,11 @@ Reporting date: 2026-07-07. No approved leave applicable to that day for any of 
 | PhucVT | 9h (Crystal lang/Meta-Stamp) | OK |
 | TuanNT | 8h (Paturevision) | OK |
 | KhanhHH | ~~2h (Generator only)~~ **8h** (Radio Data Center 6h + Generator 2h, via Workstream) | ✅ OK — corrected 09:26, see Correction section below |
-| LeNH | 0h (all 4 mapped sheets + all 13 sheets + 20 Workstream projects checked) | ⚠️ ALERT — re-verified 09:5x, see note below |
+| LeNH | ~~0h~~ **8h** (Portfolio - James Diamond, via Workstream) | ✅ OK — corrected 10:2x, see below |
 
 **KhanhHH:** Original sheets-only figure (2h, Generator only) was incomplete — missed a 6h Workstream-only entry in Radio Data Center. Real total = 8h. Retracted as alert, see Correction — 09:26 section.
 
-**LeNH — deep re-verify (09:5x, prompted by user "sai mỗi ngày" — this exact pattern has produced false 0h alerts on 07-02/07-03/07-04/07-06):** Ran the isolated scan twice (fresh Workstream token both times) — 0h both times, all 13 sheets + 20 WS projects. Went further and pulled raw day-block rows directly (bypassing the script) for Franc's W32 tab (the week containing 07-07): **both Mon 07-06 and Tue 07-07 day-blocks are completely blank — every "Task dự án" row has no owner, no hours, for ANYONE**, not just LeNH. Same pattern confirmed via Summary tab: Rory/Franc/Aysar/Rebecca all show **0.00 total actual hours logged by anyone this week** as of this check. This is a genuinely empty week-to-date across the board, not a per-dev fetch gap like the prior false alarms. Unlike 07-02/07-03/07-04, this one holds up — real shortfall.
+**LeNH — 2nd correction (10:2x), user again said "sai, tôi thấy đã đủ giờ":** The 09:5x deep-dive was itself wrong. It scanned the 4 mapped Google Sheets (Rory/Franc/Aysar/Rebecca, genuinely blank) + Workstream — but the per-project Workstream fetch for **"Portfolio - James Diamond" silently returned empty** despite real data existing, the exact transient per-project-fetch bug already documented 4+ times in memory (feedback_check_workstream_before_flagging_shortfall), now confirmed on this specific project for the first time. Direct unfiltered dump of ALL Workstream projects (bypassing the per-dev substring filter entirely) found it: **LeNH logged 8h on 07-06 AND 8h on 07-07 in James Diamond** (`james_diamond` project, weekTotal 16h). Genuinely no shortfall — retracted as alert for the 2nd time today. Root cause: `sheets-tasklog-scan.js`'s per-project loop has no retry; a single flaky fetch silently zeroes out a real project for a dev. Needs a script fix (query twice, take max) — flagged in memory, not yet patched.
 
 ## Maddy (Xtreme/Carrick-Kai-Luis) — consolidated, 08:46-09:26 (+07:00)
 
@@ -239,7 +239,7 @@ Trello: Philip ✓ complete.
 ---
 
 ## Reminders — 08:39 (+07:00)
-- **LeNH:** needs reminder (0h 07-07, no leave) — **not sent** (no `--send-reminder` flag this run). Use `/me:daily-report reminders lenh --send-reminder` to send.
+- **LeNH:** no reminder needed — 8h confirmed in James Diamond, false alarm cleared (was never sent anyway, print-only).
 - KhanhHH: 2h logged (not 0h) — does not trigger reminder threshold, though flagged separately above as a shortfall.
 - PhucVT, TuanNT, LongVV: skipped, all have hours.
 
