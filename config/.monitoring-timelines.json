@@ -130,14 +130,17 @@
       },
       "aigile": {
         "last_run": "2026-05-13T08:32:00+07:00"
+      },
+      "ohcleo": {
+        "last_run": "2026-07-08T08:39:00+07:00"
       }
     },
     "discord": {
       "airagri": {
-        "last_run": "2026-07-03T08:31:06+07:00"
+        "last_run": "2026-07-08T08:39:00+07:00"
       },
       "bizurk": {
-        "last_run": "2026-07-03T08:31:06+07:00"
+        "last_run": "2026-07-08T08:39:00+07:00"
       }
     },
     "sheets": {
@@ -166,7 +169,8 @@
       }
     },
     "scrin": {
-      "last_run": "2026-07-03T08:31:06+07:00"
+      "last_run": "2026-07-08T08:39:00+07:00",
+      "note": "Tracks Nick (nick@nustechnology.com), not TuanNT. 2026-07-07: 9h53m (5 sessions), Project/Client both 'No project'/'No client' — do not attribute to any live project."
     },
     "fountain": {
       "last_run": "2026-05-13T08:40:00+07:00"
