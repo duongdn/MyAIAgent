@@ -116,31 +116,32 @@ Reporting date: 2026-07-07. No approved leave applicable to that day for any of 
 | LongVV | 8h (OhCleo/"Tony" — now full-time, target changed) | OK |
 | PhucVT | 9h (Crystal lang/Meta-Stamp) | OK |
 | TuanNT | 8h (Paturevision) | OK |
-| KhanhHH | 2h (Generator only) | ⚠️ ALERT |
-| LeNH | 0h (all 4 sources checked, empty) | ⚠️ ALERT |
+| KhanhHH | ~~2h (Generator only)~~ **8h** (Radio Data Center 6h + Generator 2h, via Workstream) | ✅ OK — corrected 09:26, see Correction section below |
+| LeNH | 0h (all 4 mapped sheets + all 13 sheets + 20 Workstream projects checked) | ⚠️ ALERT — re-verified 09:5x, see note below |
 
-**KhanhHH:** Only 2h found (Generator: Fix redmine 1h, Check EC2 0.5h, Review MRs 0.5h). Confirmed 0h in Baamboozle/Aysar, Colin/ETZ, Family App, 20 live Workstream projects checked. Elena Google Sheet still permission-blocked (service account not re-shared) — cannot rule out hours logged there, so this may be an incomplete picture. Worth a direct check with her.
+**KhanhHH:** Original sheets-only figure (2h, Generator only) was incomplete — missed a 6h Workstream-only entry in Radio Data Center. Real total = 8h. Retracted as alert, see Correction — 09:26 section.
 
-**LeNH:** Verified 0h directly by reading raw day-blocks in all 4 sheets (Rory, Franc, Aysar, Rebecca) — every row empty for 07-07. Workstream cross-check also 0. No leave note. Genuine shortfall.
+**LeNH — deep re-verify (09:5x, prompted by user "sai mỗi ngày" — this exact pattern has produced false 0h alerts on 07-02/07-03/07-04/07-06):** Ran the isolated scan twice (fresh Workstream token both times) — 0h both times, all 13 sheets + 20 WS projects. Went further and pulled raw day-block rows directly (bypassing the script) for Franc's W32 tab (the week containing 07-07): **both Mon 07-06 and Tue 07-07 day-blocks are completely blank — every "Task dự án" row has no owner, no hours, for ANYONE**, not just LeNH. Same pattern confirmed via Summary tab: Rory/Franc/Aysar/Rebecca all show **0.00 total actual hours logged by anyone this week** as of this check. This is a genuinely empty week-to-date across the board, not a per-dev fetch gap like the prior false alarms. Unlike 07-02/07-03/07-04, this one holds up — real shortfall.
 
-## Sheets — Maddy JIRA — W14 — 08:54 (+07:00)
-No ticket entries in Maddy sheet W14 (Jul 6-12) — 0h Mon/Tue/Wed, consistent with LongVV's full move to OhCleo. Nothing to cross-check against JIRA this week.
+## Maddy (Xtreme/Carrick-Kai-Luis) — consolidated, 08:46-09:26 (+07:00)
 
-## Maddy — Bitbucket PR check — 09:14 (+07:00)
-**PR #481:** Still OPEN, still `changes_requested` (Madhuraka, unresolved refund/Xero double-post finding from 06-06). No commits since 07-02, no reply since. **LongVV's committed same-day fix (Matrix 07-07) did not happen.**
+**1. Slack (Xtreme Soft Solutions):** 3 msgs — internal QA DM to Kai (unanswered ~19h, informational). Kai's formatted daily progress post missing 07-07 — **not an alert** (corrected 09:26: LongVV logged 0h Maddy 07-07, worked OhCleo instead, so no active dev work that day to report on).
 
-**Other open PRs with unaddressed Critical/High findings:**
+**2. JIRA/task-log (W14, Jul 6-12):** 0h Mon/Tue/Wed, no ticket entries — consistent with #1 (no active work this week so far).
+
+**3. Est/actual cross-check:** `maddy-jira-tasklog-check.js` — nothing to cross-check, no ticket entries this week.
+
+**4. Bitbucket PRs (xtreme-web/rms):** 9 open, **5 with unaddressed Critical/High findings**:
+- **#481** — still OPEN, still `changes_requested` (Madhuraka, unresolved refund/Xero double-post finding from 06-06). No commits since 07-02. **LongVV's committed same-day fix (Matrix promise 07-07) did not happen.**
 - #509 (LIFM2-428) — Critical, 16 days, 0 replies
 - #510 (LIFM2-446) — Critical, 13 days, 0 replies
 - #507 (LIFM2-444) — Critical, 20 days, 0 replies
 - #486 (LIFM2-436) — Madhuraka directly asked Kai to address, 0 reply since 06-06
 - #513 — 1 "Important" issue, lower severity, noting only
 
-9 open PRs total; 5 have unaddressed Critical/High findings.
+**Verdict:** No alert driven by today's hours (nobody worked Maddy 07-07, so Slack/JIRA silence is expected). **Real, standing issue:** 5 open PRs with unaddressed Critical/High code-review findings, some 13-20 days stale, incl. a broken same-day-fix promise on #481. This is a code-quality/delivery backlog problem independent of daily hours — treat as ongoing until PRs get addressed.
 
-**Combined Maddy verdict:** Slack (Kai's report missing) + JIRA (0h, no tickets) + PR (5 stale critical findings incl. broken same-day-fix promise) all point to real, compounding non-delivery this week.
-
-Trello: Maddy - Carrick/Kai/Luis ⚠️ left incomplete.
+Trello: Maddy - Carrick/Kai/Luis ⚠️ left incomplete (PR backlog, not report-missing).
 
 ---
 
