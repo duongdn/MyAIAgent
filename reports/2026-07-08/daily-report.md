@@ -14,10 +14,10 @@
 | 2 | Slack/Matrix — OhCleo/Celine | Client asked if creator emails actually sent (13:58 07-07, restated with growing concern through 18:58/20:43) — still unanswered by Tony |
 | 3 | Slack/Matrix — Maddy/Xtreme | 5 open Bitbucket PRs (xtreme-web/rms) with unaddressed Critical/High findings, 6-20 days aging, incl. PR #481 where LongVV's committed same-day fix (promised in Matrix 07-07) did not happen; Kai's daily progress report also missing for 07-07 |
 | 4 | Elena — WordPress SamGuard | 3 real CSP violations blocking GA4 analytics endpoints (`analytics.google.com`, `stats.g.doubleclick.net`) — needs user decision before DB/wp-admin change |
-| 5 | Sheets — KhanhHH | Only 2h logged 07-07 vs usual 8h (Generator only); Elena Google Sheet still permission-blocked so this may be incomplete |
+| 5 | ~~Sheets — KhanhHH~~ | **RETRACTED 09:26** — sheets-only figure (2h) was incomplete; live Workstream shows real total 8h (Radio Data Center 6h + Generator 2h). Normal day. |
 | 6 | Sheets — LeNH | 0h logged across all 4 sheets (Rory/Franc/Aysar/Rebecca) + Workstream, 07-07, no leave note |
 | 7 | Matrix — Bailey BA/QC | Real overbudget tasks (Nam's task, a ~60h-over "mobile picking" task) not proactively flagged by BA — new expectation set to report overbudget immediately |
-| 8 | Slack — Baamboozle/Aysar | No daily update posted for 07-07 work yet (no fixed schedule — pending, not a confirmed miss) |
+| 8 | ~~Slack — Baamboozle/Aysar~~ | **RETRACTED 09:26** — KhanhHH had 0h on Baamboozle 07-07 (worked Radio Data Center + Generator instead), so no update was expected that day. Not a miss. |
 
 **Today (Wed 07-08):** LongVV pending half-day leave; KhanhHH pending full-day leave tomorrow (07-09). No one absent today per current data.
 
@@ -269,3 +269,23 @@ Re-ran all 6 still-open items (~30min after original report). No resolving activ
 **Still open:** Franc, Aysar, Maddy, Elena - SamGuard Digital Plant, Elena - WordPress SamGuard, Ohcleo. (Arthur - Meta-Stamp intentionally untouched — on-demand only.)
 
 Trello Check Progress: unchanged, 15/21 complete, 6 open (same as original report).
+
+---
+
+## Correction — 09:26 (+07:00)
+
+User challenged Aysar and Maddy "report missing" framing — correctly, per existing memory ([[feedback_aysar_consolidated]], [[feedback_kai_daily_report_gate]]) that a missing report is only an alert if there was actual work that day. Verified via live Workstream:
+
+**Aysar:** KhanhHH's `2026-07-07` hours = Radio Data Center 6h + Generator 2h = 8h. **Zero hours on Baamboozle/Aysar.** No Aysar work happened yesterday → no update to post → not a miss. Corrected from ⚠️ alert to ✓. **Trello Aysar item marked complete.**
+
+Side-finding: original report's KhanhHH sheets-only figure (2h, Generator only) was incomplete — the real total via Workstream was 8h all along (Radio Data Center 6h missed). The "KhanhHH shortfall" alert in the ALERTS SUMMARY (row 5) is retracted — she had a normal 8h day.
+
+**Maddy:** Workstream shows LongVV logged 7h on Maddy Monday (07-06), **0h Tuesday (07-07)** — he worked OhCleo instead that day. No active Maddy dev work 07-07 → Kai's "report missing" is not a valid alert for that day, same logic as Aysar. **Corrected — dropping "Kai's report missing" as an alert driver.**
+
+However Maddy stays **○ incomplete** on a different basis: the 5 open Bitbucket PRs with unaddressed Critical/High findings (incl. #481, aging since Jun 6, LongVV's Matrix-promised same-day fix not delivered) are a standing code-quality issue independent of any single day's hours — this is an "our team" issue per alert-classification policy, not tied to yesterday's activity.
+
+**Retracted from ALERTS SUMMARY:** #5 (KhanhHH shortfall — false, real total 8h), #8 (Aysar no update — false, zero work that day, not a miss). **Kept:** Franc, Ohcleo, Elena CSP, Maddy PR backlog, Bailey BA/QC.
+
+Memory updated (both locations) to reinforce: always cross-check Workstream/sheet hours for the specific dev before flagging a missing report/update as an alert.
+
+**Final Check Progress state: 16/21 complete, 5 open** (Maddy — PR backlog only, Franc, Elena-SamGuard, Elena-WordPress SamGuard, Ohcleo).
