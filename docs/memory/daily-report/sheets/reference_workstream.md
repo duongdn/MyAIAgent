@@ -68,6 +68,7 @@ Base: `https://workstream.nustechnology.com/api` (this already includes `/api` �
 - `{api_base}/review/week?projectId={id}&date={YYYY-MM-DD}` → all member task logs for week
 - `{api_base}/time/projects?date={date}` → projects for current user
 - `{api_base}/me` → current user info
+- `{api_base}/pinfo/projects/{id}?date={YYYY-MM-DD}` → project info page data (customer, tech stack, and `members[]` with per-member `isReviewer`/`needsReview`/`isTechLead`/`isManager` booleans). **This is the authoritative source for who reviews a project's charged hours** — found 2026-07-08, backs the "Info" ⓘ icon page on each project card. Do NOT infer reviewer from `/review/week`'s roster role text (see [[feedback_workstream_needs_review_check]]).
 
 **CORRECTED 2026-06-18:** `workstream-login.js` and `workstream-fetch-project-week.js` both had a double `/api/api/` bug — every call 404'd, so `ensureToken()` always thought the token was expired. Fixed to single-prefix path. If "login failed"/"token expired" shows up again, check for re-introduction of a double `/api/` prefix before assuming a real auth issue.
 

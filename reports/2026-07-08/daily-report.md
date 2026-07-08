@@ -309,23 +309,26 @@ All 5 verified via isolated per-dev `sheets-tasklog-scan.js` runs AND a separate
 
 ### ⚠️ NEW — Workstream "needs review" check (first run since feature added today)
 
-Scanned all 19 accessible Workstream projects' current week (07-06→07-12) for `reviewStatus: Pending` rows (charged hours flagged for review, unresolved). Grouped by reviewer:
+**Correction 14:2x:** initial version of this section guessed reviewer = project Manager/Tech Lead role — wrong, per user correction. Real reviewer comes from the `isReviewer` flag on `GET /pinfo/projects/{id}` (the project's "Info" page → "Review Charged Hours" section), which is independently assignable to any Developer, not tied to the Manager/Tech Lead role. Fountain is excluded from this check entirely per user instruction (has its own internal QC flow).
+
+Scanned all live Workstream projects' current week (07-06→07-12) for `reviewStatus: Pending` rows (charged hours flagged for review, unresolved), reviewer sourced from `/pinfo/projects/{id}`:
 
 | Reviewer | Dev | Project | Pending charged hours | Tasks | Dates |
 |----------|-----|---------|----------------------|-------|-------|
-| **DuongDN (you)** | KhanhHH | Radio Data Center | 2:00 | Setup and study project | 07-06 |
-| **DuongDN (you)** | LeNH | Portfolio - James Diamond | 16:00 (7 tasks) | Traccar investigation, SDS warnings, CloudWatch disk alarm, PR reviews #556-560, alarm-status fix, Dynamic Property forms | 07-06, 07-07 |
-| TienND | PhucVT | Crystal lang | 9:00 | Meta-Stamp project tasks | 07-07 |
-| TrinhMTT | PhatDLT, HungPN, DatNT | Fountain Greetings | ~15:00 combined | 15 line items (bug fixes, blog/CMS updates, rose color swatches, test cases) | 07-06, 07-07 |
+| **LeNH** | KhanhHH | Radio Data Center | 2:00 | Setup and study project | 07-06 |
+| **PhucVT** | LeNH | Portfolio - James Diamond | 16:00 (7 tasks) | Traccar investigation, SDS warnings, CloudWatch disk alarm, PR reviews #556-560, alarm-status fix, Dynamic Property forms | 07-06, 07-07 |
+| **TienND** (manual override — Workstream's own `isReviewer` checkbox wrongly flags DuongDN via Tech Lead auto-rule; user confirmed real reviewer is TienND) | PhucVT | Crystal lang | 9:00 | Meta-Stamp project tasks | 07-07 |
 
-**Action needed:** 18h of charged time (KhanhHH + LeNH) is sitting pending **your own** review on Radio Data Center + James Diamond. Fountain's 15h is TrinhMTT's queue, Crystal lang's 9h is TienND's — flagging for visibility only, not something to action here.
+Fountain Greetings also had ~15h pending (PhatDLT/HungPN/DatNT) — **excluded per user instruction**, not shown/alerted.
 
-**New alert added to ALERTS SUMMARY** (#9) for the DuongDN-reviewer items since they're actionable by you; Fountain/Crystal lang items noted but not added as your alerts since you're not the reviewer.
+**None of the above are DuongDN's own action items** — LeNH reviews Radio Data Center, PhucVT reviews James Diamond, TienND reviews Crystal lang. Retracting the earlier "18h pending your review" framing — that was based on the wrong reviewer-derivation logic. These are informational (visibility that reviews are backlogged) rather than a personal action item.
+
+**ALERTS SUMMARY #9 retracted/corrected** — see addendum below.
 
 ---
 
-## ⚠️ ALERTS SUMMARY — addendum
+## ⚠️ ALERTS SUMMARY — addendum (corrected 14:2x)
 
 | # | Source | Alert |
 |---|--------|-------|
-| 9 | Workstream — needs review | 18h charged (KhanhHH 2h Radio Data Center + LeNH 16h James Diamond) pending YOUR review since 07-06/07-07 |
+| ~~9~~ | ~~Workstream — needs review~~ | **RETRACTED/CORRECTED** — original framing said 18h pending DuongDN's own review; reviewer logic was wrong (guessed Manager/Tech Lead instead of the real `isReviewer` flag). Corrected: Radio Data Center 2h pending LeNH's review, James Diamond 16h pending PhucVT's review, Crystal lang 9h pending TienND's review (manual override, system checkbox wrong). None are DuongDN's own action item. Fountain excluded per user instruction. Not added as a numbered alert — informational only. |

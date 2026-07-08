@@ -47,6 +47,15 @@ const PROJECTS = {
   ohcleo:         { id: 'cmqgdtr7s0memp81vfste5stp', name: 'OhCleo',                     client: 'OhCleo',         manager: true  },
 };
 
+// Manual overrides where Workstream's own `isReviewer` checkbox is wrong/unset and the user
+// has confirmed the real reviewer directly (2026-07-08). Do NOT add entries here casually —
+// only when the user explicitly says the isReviewer flag itself is incorrect for that project.
+const REVIEWER_OVERRIDES = {
+  // Crystal lang: system flags DuongDN (Tech Lead auto-rule) as reviewer, but user confirmed
+  // TienND is the real reviewer — checkbox not fixed in Workstream yet.
+  crystal_lang: ['TienND'],
+};
+
 // Parse hours "H:MM" -> decimal
 function parseHours(s) {
   if (!s) return 0;
@@ -221,6 +230,7 @@ async function main() {
       if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
       const projectInfo = await fetchProjectInfo(config, proj.id, date);
       results[key] = summarizeWeekManager(data, proj.client, projectInfo._expired ? null : projectInfo);
+      if (REVIEWER_OVERRIDES[key]) results[key].reviewers = REVIEWER_OVERRIDES[key];
     } else {
       const data = await fetchProjectWeekSelf(config, proj.id, date);
       if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }

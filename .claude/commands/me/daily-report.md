@@ -349,6 +349,7 @@ Workstream lets a dev's charged hours be flagged for review; the row's `reviewSt
 - `Reviewed` rows are resolved — do not alert on them, even if they showed up as `Pending` in a previous day's report.
 - Do this cross-project — a dev can have pending reviews on a project they're not otherwise flagged on (e.g. hours look fine, but a specific task's charged time is still pending review).
 - **Fountain is excluded from this check** (user instruction 2026-07-08: "ignore, ko cần check Fountain") — do not alert on Fountain's `needsReview`/`reviewers` even though the data is technically available.
+- 🔴 **The `isReviewer` field itself can be wrong** — confirmed 2026-07-08 on Crystal lang: system flags DuongDN (Tech Lead auto-rule) as reviewer, but user confirmed the real reviewer is TienND. `scripts/workstream-fetch-project-week.js` has a `REVIEWER_OVERRIDES` map for these confirmed exceptions (currently just `crystal_lang: ['TienND']`) — only add to it when the user explicitly says a project's `isReviewer` flag is wrong, never guess/hardcode preemptively.
 - Alert line format: `Workstream needs review: {employeeName} — {task} ({charged}, {date}) — reviewer(s): {reviewers.join(', ')} ({project})`
 
 | Developer | Arg | Daily target | Alert threshold | Notes |
