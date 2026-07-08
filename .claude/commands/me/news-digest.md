@@ -61,14 +61,25 @@ ls reports/{YYYY-MM-DD}/*-news-digest.md 2>/dev/null
 
 **Không phải lỗi — đừng re-fetch:** nếu source thực sự không có bài mới (RSS/trang trống thật, không phải do crash/timeout script). Sau khi re-fetch mà vẫn 0 bài và KHÔNG có lỗi kỹ thuật trong stderr → giữ nguyên placeholder, cập nhật log recheck ghi rõ "không phải lỗi — nguồn trống thật".
 
-## 🔴 ANTI-HALLUCINATION RULE (BẮT BUỘC)
+## 🔴 ANTI-HALLUCINATION — BẮT BUỘC TUYỆT ĐỐI
 
-**TUYỆT ĐỐI KHÔNG bịa tin tức, URL, hay tiêu đề bài báo.**
+**MỌI bài báo trong output PHẢI có nguồn gốc từ JSON trả về của `fetch-news.py`. KHÔNG CÓ NGOẠI LỆ.**
 
-- **CHỈ** dùng dữ liệu trả về từ `fetch-news.py`. Không được viết bất kỳ tin tức nào từ training knowledge.
-- Nếu script trả về rỗng hoặc lỗi → viết `_(Không có dữ liệu — fetch-news.py trả về rỗng)_`, KHÔNG bịa tin.
-- Kiểm tra URL sau khi synthesize: URL thật của Google News có dạng `/articles/CBMi...`, KHÔNG phải `/rss/articles/...`. Bất kỳ URL nào dạng `/rss/articles/` là hallucinated — xóa bỏ ngay.
-- **KHÔNG viết bất kỳ section nào trước khi gọi fetch-news.py.** Thứ tự bắt buộc: fetch → nhận kết quả → synthesize từ kết quả đó.
+### Quy tắc cứng:
+
+1. **KHÔNG viết bất kỳ nội dung tin tức nào trước khi gọi fetch-news.py.** Không viết template, không viết header section, không viết placeholder news. Thứ tự duy nhất được phép: `fetch` → nhận JSON → đọc JSON → synthesize từ JSON đó.
+
+2. **Sau khi nhận JSON, kiểm tra ngay:** `results[].sources[].articles` — số lượng bài thực tế là bao nhiêu? Số bài viết ra phải ≤ số bài trong JSON. Nếu JSON trả về 0 bài cho một nguồn → viết `_(Không có bài — nguồn trống)_`. KHÔNG bịa bài.
+
+3. **Kiểm tra từng URL trước khi viết:** URL hợp lệ phải lấy trực tiếp từ trường `link` trong JSON. KHÔNG được tự tạo URL. Các pattern URL giả: `/rss/articles/something-2026-07-07`, `https://news.google.com/rss/articles/...`, URL kết thúc bằng slug mô tả (`-stocks-lead-today`). URL thật của Google News phải có dạng `CBMi...` hash.
+
+4. **Sau khi synthesize, TRƯỚC KHI ghi file, tự kiểm tra:**
+   - Đếm số bài viết ra vs số bài trong JSON từng nguồn. Nếu viết ra nhiều hơn JSON → hallucination, xóa phần thừa.
+   - Grep tất cả URLs trong output: có URL nào dạng `/rss/articles/` không? Có URL nào tự tạo không? Nếu có → xóa toàn bộ section đó và viết `_(Dữ liệu bị lỗi — đã xóa để tránh tin giả)_`.
+
+5. **Nếu fetch-news.py crash/timeout:** Ghi `_(fetch-news.py lỗi: {error message})_`. KHÔNG bịa tin để thay thế.
+
+**Vi phạm quy tắc này = tin giả = mất tín nhiệm hoàn toàn.**
 
 ## Run
 
