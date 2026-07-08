@@ -342,12 +342,14 @@ Supports individual developer targeting:
 
 **Workstream unavailable fallback:** If `node scripts/workstream-fetch-project-week.js` fails (token expired, login fails), use Google Sheets data as authoritative. Do NOT add "WS unavailable — unverified" caveats that turn confirmed 0h into uncertain results. Google Sheets 0h = ALERT; Google Sheets >0h = OK. Note in report that WS was skipped. Workstream re-auth: `DISPLAY=:1 node scripts/workstream-login.js`.
 
-**Workstream "needs review" check (run for every project, every dev, every day):**
-Workstream lets a dev's charged hours be flagged for review; the row's `reviewStatus` shows `Pending` until the project's reviewer resolves it (`Reviewed`), or `NotRequired` if no review was ever needed. `node scripts/workstream-fetch-project-week.js` output now includes, per project: `reviewer` (the roster member with role `Manager`, falls back to `Tech Lead`) and `needsReview` (array of `{employeeName, date, task, charged}` rows still `Pending`).
-- Any non-empty `needsReview` array = unresolved → **ALERT**, addressed to that project's `reviewer` (not the dev who logged the hours).
+**Workstream "needs review" check (run for every project, every dev, every day — EXCEPT Fountain, see below):**
+Workstream lets a dev's charged hours be flagged for review; the row's `reviewStatus` shows `Pending` until the project's reviewer resolves it (`Reviewed`), or `NotRequired` if no review was ever needed. `node scripts/workstream-fetch-project-week.js` output includes, per project: `reviewers` (array — see below) and `needsReview` (array of `{employeeName, date, task, charged}` rows still `Pending`).
+- 🔴 **Reviewer is NOT derivable from project role text** (Manager/Tech Lead) — a plain "Developer" can be the real reviewer while the Manager isn't (confirmed live 2026-07-08: Radio Data Center's reviewer is LeNH — a Developer — not DuongDN the Manager; James Diamond's reviewer is PhucVT, also a Developer, not DuongDN). The actual source is the per-member `isReviewer` boolean from `GET {api_base}/pinfo/projects/{id}?date={date}` (the page behind the project's "Info" ⓘ icon → "Review Charged Hours" section). Tech Lead is always auto-marked a reviewer; anyone else can ALSO be independently marked one — there can be more than one reviewer per project (Fountain has both VuTQ and DuongDN/Tech Lead). The script now fetches this endpoint automatically and returns `reviewers: string[]`.
+- Any non-empty `needsReview` array = unresolved → **ALERT**, addressed to `reviewers` for that project (not the dev who logged the hours, and not assumed to be the project Manager).
 - `Reviewed` rows are resolved — do not alert on them, even if they showed up as `Pending` in a previous day's report.
 - Do this cross-project — a dev can have pending reviews on a project they're not otherwise flagged on (e.g. hours look fine, but a specific task's charged time is still pending review).
-- Alert line format: `Workstream needs review: {employeeName} — {task} ({charged}, {date}) — reviewer: {reviewer} ({project})`
+- **Fountain is excluded from this check** (user instruction 2026-07-08: "ignore, ko cần check Fountain") — do not alert on Fountain's `needsReview`/`reviewers` even though the data is technically available.
+- Alert line format: `Workstream needs review: {employeeName} — {task} ({charged}, {date}) — reviewer(s): {reviewers.join(', ')} ({project})`
 
 | Developer | Arg | Daily target | Alert threshold | Notes |
 |-----------|------|-------------|-----------------|-------|
@@ -1077,4 +1079,4 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 - Alert = do NOT complete Trello item
 - Nick (Global Grazing) ≠ Nick/TuanNT (Amazing Meds) — always specify project
 - 0h on unfilled days → show as "—", not "0h" in report
-- Workstream `needsReview` (reviewStatus=Pending) → ALERT addressed to that project's reviewer (roster Manager/Tech Lead), not the dev — see Piece 4
+- Workstream `needsReview` (reviewStatus=Pending) → ALERT addressed to that project's real `isReviewer`-flagged member(s) (via `/pinfo/projects/{id}`, NOT the roster Manager/Tech Lead role), not the dev — see Piece 4. Fountain excluded per user instruction.

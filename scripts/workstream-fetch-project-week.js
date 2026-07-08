@@ -111,13 +111,22 @@ async function fetchProjectWeekManager(config, projectId, date) {
   return fetchWithToken(url, config.access_token);
 }
 
+// Project info endpoint — has the actual per-member isReviewer flag.
+// NOTE: reviewer is NOT derivable from /review/week's roster role text (Manager/Tech Lead) —
+// it can be independently assigned to any Developer (e.g. LeNH is reviewer on Radio Data Center
+// while DuongDN is just Manager there). Tech Lead is always a reviewer, but so can others be.
+async function fetchProjectInfo(config, projectId, date) {
+  const url = config.api_base + '/pinfo/projects/' + projectId + '?date=' + date;
+  return fetchWithToken(url, config.access_token);
+}
+
 // TechLead endpoint: /time/projects/{id}/week — shows self hours only
 async function fetchProjectWeekSelf(config, projectId, date) {
   const url = config.api_base + '/time/projects/' + projectId + '/week?date=' + date;
   return fetchWithToken(url, config.access_token);
 }
 
-function summarizeWeekManager(weekData, projectLabel) {
+function summarizeWeekManager(weekData, projectLabel, projectInfo) {
   const byEmployee = {};
   // "Pending" = charged hours flagged for review, not yet resolved by the reviewer.
   // "Reviewed" = resolved. "NotRequired" = no review needed for this row.
@@ -143,18 +152,16 @@ function summarizeWeekManager(weekData, projectLabel) {
     }
   }
 
-  // Reviewer = the project's Manager (falls back to Tech Lead if no Manager on roster).
-  const roster = weekData.roster || [];
-  const reviewer = roster.find(m => (m.roles || []).includes('Manager'))?.employeeName
-    || roster.find(m => (m.roles || []).includes('Tech Lead'))?.employeeName
-    || null;
+  // Reviewer(s) = members with isReviewer:true from /pinfo/projects/{id} — NOT derivable
+  // from role text (Manager isn't automatically a reviewer; a plain Developer can be).
+  const reviewers = (projectInfo?.members || []).filter(m => m.isReviewer).map(m => m.displayName);
 
   return {
     project: projectLabel,
     weekStart: weekData.weekStart,
     weekEnd: weekData.weekEnd,
     missingReportDays: (weekData.dayStrips || []).filter(d => d.clientReportMissing).map(d => d.date),
-    reviewer,
+    reviewers,
     needsReview,
     members: Object.entries(byEmployee).map(([name, d]) => ({
       name,
@@ -212,7 +219,8 @@ async function main() {
     if (proj.manager) {
       const data = await fetchProjectWeekManager(config, proj.id, date);
       if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
-      results[key] = summarizeWeekManager(data, proj.client);
+      const projectInfo = await fetchProjectInfo(config, proj.id, date);
+      results[key] = summarizeWeekManager(data, proj.client, projectInfo._expired ? null : projectInfo);
     } else {
       const data = await fetchProjectWeekSelf(config, proj.id, date);
       if (data._expired) { process.stderr.write('[workstream] Token still invalid after refresh\n'); process.exit(1); }
