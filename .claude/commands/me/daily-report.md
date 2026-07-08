@@ -131,6 +131,10 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report matrix --room "!roomId:..."` | Single room by ID |
 | **Arthur** | |
 | `/daily-report arthur` | Arthur/Meta-Stamp — 2 Matrix rooms + 3 Slack channels, incremental since last run, Vietnamese living-tracker report |
+| **Performance** | |
+| `/daily-report performance` | New Relic APM check — all configured projects |
+| `/daily-report performance ohcleo` | OhCleo backend API only |
+| `/daily-report performance mpfc` | MyPersonalFootballCoach only |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -1062,6 +1066,48 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 ```
 
 **Rules:** Never re-summarize full project history, only what's new. If nothing new on a source, say so briefly. See [[feedback_read_full_room_transcript_not_grep_snippets]] — read actual messages, don't grep-and-assume.
+
+---
+
+## Piece 14 — Performance / New Relic APM (`/daily-report performance [project]`)
+
+Not gated by any Trello item (no mapped checklist item exists yet) — informational only, does not block card completion. Not part of Full Run by default until proven stable; run on explicit request (`/daily-report performance`) or add to Full Run once user confirms.
+
+**Config:** one JSON file per project, project→file mapped inside `scripts/newrelic-fetch-performance.js` (`PROJECT_CONFIGS`). Add a new project by (1) dropping its `user_api_key`+`account_id`+`app_name` into a new `config/.newrelic-{project}-config.json`, (2) adding it to `.gitignore` + `scripts/encrypt-secrets.sh` + `scripts/decrypt-secrets.sh`, (3) adding one line to `PROJECT_CONFIGS` in the script.
+
+**Currently configured:**
+| Project | Arg | Config file | Account ID | App name (prod) |
+|---------|-----|-------------|------------|------------------|
+| OhCleo backend API | `ohcleo` | `config/.newrelic-ohcleo-config.json` | 8174869 | `ohcleo-backend-api` (staging: `ohcleo-backend-api-staging`) |
+| MyPersonalFootballCoach | `mpfc` | `config/.newrelic-config.json` | 3457746 | `MPFC-live2` |
+
+**Script:**
+```bash
+node scripts/newrelic-fetch-performance.js --project=ohcleo --since={ISO8601}
+node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --since={ISO8601}
+```
+- `--since` defaults to 60 min ago if omitted. Use `performance.last_run` from `config/.monitoring-timelines.json` as the window start (fallback: 24h ago on first run).
+- Queries New Relic NerdGraph (GraphQL) via NRQL against the `Transaction`/`TransactionError` event types — requires a **User API Key** (`NRAK-...`), not the app's ingest license key.
+- Output JSON fields: `summary` (avgResponseMs, requestCount, errorCount, throughputPerMin), `apdex` (score + t/s/f buckets), `topErrors` (faceted by error class+message), `slowestTransactions` (top 5 by avg duration).
+
+**What to flag as alert (informational — does not gate Trello):**
+- Apdex score < 0.7 (New Relic's own "poor" threshold)
+- Error rate (`errorCount/requestCount`) > 5%, EXCLUDING expected `NotAuthenticated`/`rest_framework.exceptions:NotAuthenticated` noise (public endpoints hit without auth — not a real bug, seen as OhCleo's dominant error class)
+- Any `slowestTransactions` entry with `avgMs` > 5000 (5s) — real backend slowness, not query artifact
+- New top error class not seen in the previous report's Performance section
+
+**Report — append to daily report:**
+```
+## Performance [project|all] — {HH:MM} (+07:00)
+| Project | Apdex | Avg response | Error rate | Throughput |
+|---------|-------|--------------|------------|------------|
+| ohcleo (prod) | 0.92 | 1161ms | 4.8% (89/1841) — mostly NotAuthenticated (benign) | 30.7/min |
+...
+{Slow transactions >5s if any, as a sub-list.}
+{New/unusual top errors if any.}
+```
+
+**Open items (fill in as more keys arrive):** thresholds above are first-pass defaults — revisit once user has seen a few real reports. No Trello item exists yet for Performance; ask user whether to add one once this piece is stable.
 
 ---
 

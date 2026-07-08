@@ -102,6 +102,9 @@
 - [feedback_upwork_vs_tasklog_all_hours](daily-report/upwork/feedback_upwork_vs_tasklog_all_hours.md), [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md) — sum ALL hours to match; matching=OK
 - [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md), [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — Neural silence/Cloudflare never alert
 
+## daily-report:performance
+- [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — Piece 14 (New Relic APM), keys for OhCleo+MPFC already existed in config from a prior Cline-OhCleo session — check session transcripts before asking user to resend keys
+
 ## bailey-invoice-verify / bailey-monitor / bailey-task-monitor
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md) — col E=Task ID, bill WBS+buffer, never first empty row
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md) — search by name+open state, skill's ID stale
@@ -130,6 +133,7 @@
 - [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md) — Tikop=Liquid not Investment
 
 ## news-digest
+- [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴 260708: whole report faked (fake Google News URLs); recheck grep must also catch fake-URL patterns not just placeholders
 - [feedback_news_digest_new_topic](news-digest/feedback_news_digest_new_topic.md), [feedback_news_digest_php_events](news-digest/feedback_news_digest_php_events.md) — unknown topic→own RSS; PHP events need full schedule
 - [feedback_news_digest_ai_underused_sources](news-digest/feedback_news_digest_ai_underused_sources.md), [feedback_news_digest_use_actual_links](news-digest/feedback_news_digest_use_actual_links.md) — sample ALL 11 sources; JSON `link`+fix-links.py
 - [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — needs venv python3 or FB cookie refresh no-ops
