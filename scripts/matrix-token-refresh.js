@@ -25,6 +25,7 @@ puppeteer.use(StealthPlugin());
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.matrix-config.json');
 const PROFILE_DIR = path.join(__dirname, '..', 'tmp', 'matrix-browser-profile');
@@ -85,7 +86,7 @@ async function main() {
     if (r && r.access_token) {
       config.access_token = r.access_token;
       if (r.refresh_token) config.refresh_token = r.refresh_token;
-      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+      saveSecretConfig(CONFIG_PATH, config);
       console.log('[matrix-refresh] Refreshed via refresh_token API (no browser). Done.');
       return;
     }
@@ -209,7 +210,7 @@ async function main() {
   // Save
   config.access_token = capturedAccessToken;
   if (capturedRefreshToken) config.refresh_token = capturedRefreshToken;
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
 
   // Verify
   const verify = await get(`${config.homeserver}/_matrix/client/v3/account/whoami`, {

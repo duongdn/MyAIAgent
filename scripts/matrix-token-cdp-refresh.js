@@ -10,6 +10,7 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 const WebSocket = require("ws");
+const { saveSecretConfig } = require("./lib/save-secret-config");
 
 const CONFIG_PATH = path.join(__dirname, "..", "config", ".matrix-config.json");
 const CHROME = "/usr/bin/google-chrome";
@@ -118,7 +119,7 @@ async function main() {
 
   // Save token to config
   config.access_token = capturedToken;
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log("[cdp-refresh] Token saved to config.");
 
   // Verify

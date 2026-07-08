@@ -18,6 +18,7 @@
 - [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md) — UTC+7; PM at NUS Technology
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md) — new workspace: manual login once, extract xoxc from Local Storage (not cookies)
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 STANDING RULE 260707: EVERY project/source (Slack/Matrix/Discord/Email/Teams), EVERY command — unanswered direct customer ask = warning, read full msg not just "posted=clean"
+- [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — 260708: decrypt-secrets.sh reverted a live-refreshed Matrix token to stale .enc; fixed via saveSecretConfig auto re-encrypt helper
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
@@ -117,6 +118,9 @@
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md) — 8 sheet IDs
 - [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md) — use WS weekTotal not weekCharged; scope=manager+Form dropdown
+
+## monday-effort-verify (with-thuyltt)
+- [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md) — new 260708: ThuyLTT's hour image is Workstream-derived not independent; LegalAtoms miss was DuongDN's own missed WS entry
 
 ## money-report
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md) — Net Worth via trueTotalBalance API

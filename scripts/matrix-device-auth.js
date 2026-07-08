@@ -19,6 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.matrix-config.json');
 
@@ -60,7 +61,7 @@ async function main() {
     if (r.access_token) {
       config.access_token = r.access_token;
       if (r.refresh_token) config.refresh_token = r.refresh_token;
-      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+      saveSecretConfig(CONFIG_PATH, config);
       console.log('[matrix-device-auth] Refreshed via refresh_token. Done.');
       return;
     }
@@ -94,7 +95,7 @@ async function main() {
     if (tok.access_token) {
       config.access_token = tok.access_token;
       if (tok.refresh_token) config.refresh_token = tok.refresh_token;
-      fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+      saveSecretConfig(CONFIG_PATH, config);
       console.log('[matrix-device-auth] SUCCESS! Tokens saved to config.');
       console.log('Access token:', tok.access_token.substring(0, 30) + '...');
       if (tok.refresh_token) console.log('Refresh token saved (persists across cron runs).');
