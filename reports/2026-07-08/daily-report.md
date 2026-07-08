@@ -18,6 +18,8 @@
 | 6 | ~~Sheets — LeNH~~ | **RETRACTED 10:2x** — 8h found in Portfolio - James Diamond (Workstream), missed twice by flaky per-project fetch. Not an alert. |
 | 7 | Matrix — Bailey BA/QC | Real overbudget tasks (Nam's task, a ~60h-over "mobile picking" task) not proactively flagged by BA — new expectation set to report overbudget immediately |
 | 8 | ~~Slack — Baamboozle/Aysar~~ | **RETRACTED 09:26** — KhanhHH had 0h on Baamboozle 07-07 (worked Radio Data Center + Generator instead), so no update was expected that day. Not a miss. |
+| 10 | Performance — OhCleo (New Relic, added 14:29) | `ProgrammingError: column app_user.password_reset_code_expires_at does not exist` × 6 in 24h — likely missing DB migration on prod, breaks password reset |
+| 11 | Performance — OhCleo (New Relic, added 14:29) | 3 core endpoints (MediaRecommendsView, HomeMediasView, MediaByKeyView) averaging 15-21s response time over hundreds of calls/day — real backend bottleneck |
 
 **Today (Wed 07-08):** LongVV pending half-day leave; KhanhHH pending full-day leave tomorrow (07-09). No one absent today per current data.
 
@@ -332,3 +334,30 @@ Fountain Greetings also had ~15h pending (PhatDLT/HungPN/DatNT) — **excluded p
 | # | Source | Alert |
 |---|--------|-------|
 | ~~9~~ | ~~Workstream — needs review~~ | **RETRACTED/CORRECTED** — original framing said 18h pending DuongDN's own review; reviewer logic was wrong (guessed Manager/Tech Lead instead of the real `isReviewer` flag). Corrected: Radio Data Center 2h pending LeNH's review, James Diamond 16h pending PhucVT's review, Crystal lang 9h pending TienND's review (manual override, system checkbox wrong). None are DuongDN's own action item. Fountain excluded per user instruction. Not added as a numbered alert — informational only. |
+
+---
+
+## Performance ohcleo — 14:29 (+07:00)
+
+New Relic APM, OhCleo backend API (prod, `ohcleo-backend-api`), window: last 24h (2026-07-07 14:29 → 2026-07-08 14:29).
+
+| Project | Apdex | Avg response | Error rate | Throughput |
+|---------|-------|--------------|------------|------------|
+| ohcleo (prod) | 0.91 | 1373ms | 2.14% (650/30431) — mostly NotAuthenticated (603, benign — public endpoints w/o auth) | 21.1/min |
+
+**⚠️ Real bug found — DB migration issue:** `django.db.utils.ProgrammingError` × 6 — `column app_user.password_reset_code_expires_at does not exist`. This breaks password reset for affected users (500 error). Looks like a missing DB migration on prod. Needs a fix, not informational.
+
+**Slow transactions (>5s avg, high call volume — not one-off):**
+| Endpoint | Avg | Calls (24h) |
+|----------|-----|--------------|
+| `MediaRecommendsView.get` | 21.1s | 766 |
+| `HomeMediasView.get` | 20.0s | 678 |
+| `MediaByKeyView.get` | 15.7s | 463 |
+| `OnboardingMediasView.post` | 6.6s | 4 |
+| `MultiCategoryMediaView.get` | 6.1s | 1 |
+
+The first 3 are core browse/home endpoints hit hundreds of times/day at 15-21s avg — likely a real backend bottleneck (N+1 query, missing index, or slow recommendation logic), not an edge case.
+
+**Other errors (minor):** AuthenticationFailed "User does not exist" ×22, InvalidToken ×15, AuthenticationFailed "Passwords don't match" ×4 — all normal client-side auth noise.
+
+No Trello item gates this piece yet (informational-only, Piece 14 first real run).
