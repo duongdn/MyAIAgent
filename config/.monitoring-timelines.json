@@ -1,9 +1,9 @@
 {
   "arthur_monitor": {
     "description": "Updated when /daily-report arthur (Piece 13) runs (manual, on-demand only, no cron). Used as the start time for the next incremental run. IMPORTANT: last_run must equal the actual timestamp through which data was verified/read, NOT the time the feature/command finished running or being built.",
-    "last_run": "2026-07-07T15:46:00+07:00",
-    "output_file": "reports/2026-07-07/1449-arthur-monitor.md",
-    "note": "Corrected run (2nd pass) after discovering the first incremental pass (14:29-14:49) had wrongly set last_run to feature-build-completion time, skipping the 10:27-14:29 window which contained the biggest update of the engagement: all 7 client-requested bugs + attribution/metadata fixed and deployed to production, confirmed by Nick at 15:06. This corrected last_run (15:46 VN) reflects the true cutoff of verified data for this run."
+    "last_run": "2026-07-08T09:12:49+07:00",
+    "output_file": "reports/2026-07-08/0920-arthur-monitor.md",
+    "note": "2026-07-08 run: cutoff = last verified Matrix message (Room 'Arthur - Meta-Stamp', tiennd's MCP curl message at 09:12:49 VN). Key findings: Thor 3rd-party dry run did NOT happen (Arthur's internet issue, confirmed 08:31 VN); Chris tested /demo himself, found 3 content issues (latency number, 'patented' wording, AllVerified skin needed); Chris demanded push-to-main ASAP but no new GitHub commits since 2026-07-07T11:15:36Z (~15h gap) despite Slack describing lots of completed work; Nam Tran stated internally (Matrix 08:30 VN) project continuation after demo depends on demo result + client funding — real continuity risk, not previously flagged this explicitly. TienND 0h in Workstream this week (Jul 6-7) — likely just not-yet-logged (early week), monitoring not alarming per prior precedent."
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
