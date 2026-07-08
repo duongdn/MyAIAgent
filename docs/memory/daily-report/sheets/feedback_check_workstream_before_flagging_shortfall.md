@@ -7,6 +7,8 @@ metadata:
   originSessionId: 7802f504-a1ff-402a-b985-121eb7c467ce
 ---
 
+**🔴 STRUCTURAL FIX APPLIED 2026-07-08 (after 8 recurrences + user: "trời ạ, đã nói fetch all place cho all dev mà, nói cả triệu lần rồi"):** `scripts/sheets-tasklog-scan.js` now has a built-in `fetchWithRetry()` wrapper (attempts=3, 400ms backoff, keeps the longest/best result) applied to BOTH the per-sheet Google Sheets range fetch AND the per-project Workstream `/review/week` fetch. This is no longer a "remember to re-check" procedural rule — the canonical script retries automatically on every call, every dev, every run. **Do not rely on manually re-running the script or doing a separate unfiltered dump as the primary defense anymore — the tool itself now retries.** Still worth an unfiltered spot-check (`workstream-fetch-project-week.js <date>` no filter) if a 0h result survives 3 retries and seems suspicious, but this should be rare now. If a 0h/shortfall shows up AFTER this fix and doesn't clear on a manual re-run, it's more likely to be genuine — treat with more confidence than pre-fix incidents. If retries still miss real data, that's a NEW bug in the retry logic itself, escalate accordingly.
+
 **Workstream is authoritative when Sheets shows 0h/shortfall** — Sheets may lag or sit unfilled even when hours were worked, for ANY dev with a Workstream project (not just specific ones). First caught 2026-06-09: Sheets showed LongVV 0h W30, Workstream showed 8h Jun 8.
 
 **Deeper bug found 2026-06-23 — the project LIST itself goes stale, not just the sheet data:**
