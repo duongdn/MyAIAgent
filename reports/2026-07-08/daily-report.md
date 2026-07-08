@@ -290,3 +290,42 @@ However Maddy stays **○ incomplete** on a different basis: the 5 open Bitbucke
 Memory updated (both locations) to reinforce: always cross-check Workstream/sheet hours for the specific dev before flagging a missing report/update as an alert.
 
 **Final Check Progress state: 16/21 complete, 5 open** (Maddy — PR backlog only, Franc, Elena-SamGuard, Elena-WordPress SamGuard, Ohcleo).
+
+---
+
+## Sheets [all] — re-run for TODAY (07-08) — 14:03 (+07:00)
+
+Leave check re-verified for 07-08 (all 5 devs): only LongVV has a leave entry, status **pending** (not approved) → treated as WORKING, not leave. Reason: "Sáng ba em mổ, nên em cần phải ở lại bệnh viện ạ" (father's surgery this morning).
+
+| Developer | 07-08 so far (14:03) | Status |
+|-----------|----------------------|--------|
+| LongVV | 0h | Day in progress — not an alert yet. Unapproved half-day leave request pending for this morning (father's surgery); if it gets approved, adjust target to half-day. |
+| PhucVT | 0h | Day in progress — not an alert yet. |
+| TuanNT | 0h | Day in progress — not an alert yet. |
+| KhanhHH | 0h | Day in progress — not an alert yet. |
+| LeNH | 0h | Day in progress — not an alert yet. |
+
+All 5 verified via isolated per-dev `sheets-tasklog-scan.js` runs AND a separate unfiltered all-project Workstream dump (cross-check per [[feedback_check_workstream_before_flagging_shortfall]]) — both agree: genuinely 0h logged for 07-08 across all 13 sheets + 19 live Workstream projects (20th, "Others", 403s as usual). Not flagging as shortfall: it's 14:03, workday not over, devs typically log end-of-day.
+
+### ⚠️ NEW — Workstream "needs review" check (first run since feature added today)
+
+Scanned all 19 accessible Workstream projects' current week (07-06→07-12) for `reviewStatus: Pending` rows (charged hours flagged for review, unresolved). Grouped by reviewer:
+
+| Reviewer | Dev | Project | Pending charged hours | Tasks | Dates |
+|----------|-----|---------|----------------------|-------|-------|
+| **DuongDN (you)** | KhanhHH | Radio Data Center | 2:00 | Setup and study project | 07-06 |
+| **DuongDN (you)** | LeNH | Portfolio - James Diamond | 16:00 (7 tasks) | Traccar investigation, SDS warnings, CloudWatch disk alarm, PR reviews #556-560, alarm-status fix, Dynamic Property forms | 07-06, 07-07 |
+| TienND | PhucVT | Crystal lang | 9:00 | Meta-Stamp project tasks | 07-07 |
+| TrinhMTT | PhatDLT, HungPN, DatNT | Fountain Greetings | ~15:00 combined | 15 line items (bug fixes, blog/CMS updates, rose color swatches, test cases) | 07-06, 07-07 |
+
+**Action needed:** 18h of charged time (KhanhHH + LeNH) is sitting pending **your own** review on Radio Data Center + James Diamond. Fountain's 15h is TrinhMTT's queue, Crystal lang's 9h is TienND's — flagging for visibility only, not something to action here.
+
+**New alert added to ALERTS SUMMARY** (#9) for the DuongDN-reviewer items since they're actionable by you; Fountain/Crystal lang items noted but not added as your alerts since you're not the reviewer.
+
+---
+
+## ⚠️ ALERTS SUMMARY — addendum
+
+| # | Source | Alert |
+|---|--------|-------|
+| 9 | Workstream — needs review | 18h charged (KhanhHH 2h Radio Data Center + LeNH 16h James Diamond) pending YOUR review since 07-06/07-07 |

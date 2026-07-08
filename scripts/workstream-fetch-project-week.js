@@ -44,6 +44,7 @@ const PROJECTS = {
   legalatoms:     { id: 'cmqyvio870031qo0xxelwodau', name: 'LegalAtoms',                 client: 'Raymond',        manager: true  },
   bxr_app:        { id: 'cmqyvio7a002dqo0x54rx6o20', name: 'BXR App',                    client: 'Rory',           manager: true  },
   crystal_lang:   { id: 'cmqezgh7z080hp81vo5yqd24z', name: 'Crystal lang',               client: 'Arthur',         manager: true  },
+  ohcleo:         { id: 'cmqgdtr7s0memp81vfste5stp', name: 'OhCleo',                     client: 'OhCleo',         manager: true  },
 };
 
 // Parse hours "H:MM" -> decimal

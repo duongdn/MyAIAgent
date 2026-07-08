@@ -33,6 +33,7 @@ Internal task-log system running parallel to Google Sheets. **No longer just Mad
 | **legalatoms** 🆕 | LegalAtoms | Raymond Huang | `cmqyvio870031qo0xxelwodau` |
 | **bxr-app** 🆕 | BXR App | Rory Hackett | `cmqyvio7a002dqo0x54rx6o20` |
 | **crystal-lang** 🆕🆕 (found 2026-07-06) | Crystal lang | Arthur (Meta-Stamp) | `cmqezgh7z080hp81vo5yqd24z` — roster: DuongDN (Tech Lead), PhucVT (Developer), TienND (Manager). Untracked — no Trello item yet. |
+| **ohcleo** 🆕🆕🆕 (found 2026-07-08) | OhCleo | OhCleo (Celine/Tony) | `cmqgdtr7s0memp81vfste5stp` — same project as Piece 12's OhCleo Slack. LongVV ("Tony") logs hours here now that he's full-time on it. Added to `workstream-fetch-project-week.js` PROJECTS map 2026-07-08. |
 | others | Others | NUS | `cmpqae4pd0006qa1wo85fzvji` (returns HTTP 403 for our token — skip) |
 
 🔴 **List grew 10→17+Others, found 2026-07-02** (previous growth: 5→10 on 2026-06-23). "Blair Brown WordPress" was renamed to "Peptide Clyde" in the UI — same project ID, not a new project. The 8 genuinely new projects (Amazing Meds, Elevate365.AI, Neural Contract, Radio Data Center, Speedventory, Tokenlite, LegalAtoms, BXR App) mean **John Yi, Philip, Neural, Franc, Bailey, Marcel, Raymond, and Rory Trello gates — previously treated as Slack-only — may now also need a Workstream cross-check**, the same way Maddy/Rebecca/Aysar/Generator/etc. already do. **This list is NOT exhaustive and will drift again — always live-query before trusting it.**
