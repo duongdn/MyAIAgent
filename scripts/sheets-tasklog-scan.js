@@ -116,6 +116,23 @@ async function fetchRange(api, id, range) {
   }
 }
 
+// Sheets/Workstream reads have a long-documented history of intermittently
+// returning empty/short results on an otherwise-valid request (same ID, same
+// token, same params) - confirmed 8+ times, see feedback_check_workstream_before_flagging_shortfall.
+// Retry N times and keep the longest result instead of trusting a single pass.
+async function fetchWithRetry(fn, attempts = 3, delayMs = 400) {
+  let best = null;
+  for (let i = 0; i < attempts; i++) {
+    const result = await fn();
+    const len = Array.isArray(result) ? result.length : (result?.rows?.length || 0);
+    const bestLen = Array.isArray(best) ? best.length : (best?.rows?.length || 0);
+    if (best === null || len > bestLen) best = result;
+    if (len > 0) break; // got real data, no need to keep retrying
+    if (i < attempts - 1) await new Promise(r => setTimeout(r, delayMs));
+  }
+  return best;
+}
+
 async function discoverWeekTab(api, id, targetDate) {
   try {
     const rows = await fetchRange(api, id, "Summary!A:E");
@@ -194,7 +211,8 @@ async function main() {
   for (const [sname, sid] of Object.entries(SHEETS)) {
     const tab = await discoverWeekTab(api, sid, targetDate);
     if (!tab) { process.stderr.write(`  ${sname}: no week tab found for date\n`); continue; }
-    const { ownerHours, leaveNotes } = extractDailyHoursByOwner(await fetchRange(api, sid, `${tab}!A:I`), tokens);
+    const rows = await fetchWithRetry(() => fetchRange(api, sid, `${tab}!A:I`));
+    const { ownerHours, leaveNotes } = extractDailyHoursByOwner(rows, tokens);
     for (const dev of devs) {
       const matchKeys = Object.keys(ownerHours).filter(k => k.toLowerCase().includes(dev.toLowerCase()));
       const hours = matchKeys.reduce((acc, k) => acc + ownerHours[k], 0);
@@ -211,8 +229,8 @@ async function main() {
     wsProjects = await listWorkstreamProjects(wsConfig, dateStr);
     process.stderr.write(`  ${wsProjects.length} projects accessible: ${wsProjects.map(p => p.name).join(", ")}\n`);
     for (const proj of wsProjects) {
-      const { rows, err } = await fetchWorkstreamWeek(wsConfig, proj.id, dateStr);
-      if (err) { process.stderr.write(`  ${proj.name}: ${err}\n`); continue; }
+      const { rows, err } = await fetchWithRetry(() => fetchWorkstreamWeek(wsConfig, proj.id, dateStr));
+      if (err && rows.length === 0) { process.stderr.write(`  ${proj.name}: ${err}\n`); continue; }
       for (const dev of devs) {
         const matched = rows.filter(r => r.date === dateStr && (r.employeeName || "").toLowerCase().includes(dev.toLowerCase()));
         const hours = matched.reduce((acc, r) => acc + parseHoursHM(r.actual || "0:00"), 0);
