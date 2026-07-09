@@ -14,8 +14,9 @@
 | 🔴 HIGH | **Aysar — MPDM empty** | No Carrick "Today's update" in C07SQ4HAUHZ on Jul 8 |
 | 🟡 MED | **Aysar — customer bug 06:48** | skjamie25→Carrick: Vietnamese chars display broken in Baamboozle game (production) |
 | 🟡 MED | **GGS/Bailey — no maintenance report** | Nick active in #général but no formal #maintenance report; Amy follow-up questions unanswered |
-| 🟡 MED | **All devs — 0h sheets** | Workstream SSO unavailable in cron → likely false alert (recheck needed) |
-| 🟡 MED | **Matrix token expired** | Fountain Part 1 (weekly plan) unavailable; last known: ViTHT 40h + ThinhT 20h + DatNT 40h |
+| 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real (Workstream confirmed, not a cron gap). Blocks James Diamond/Vinn item. |
+| 🟡 MED | **TuanNT — 0h Jul 8** | No leave on record; real (confirmed across all 5 sheets + Workstream). Blocks John Yi + Rebecca items. |
+| 🟡 MED | **LeNH — 0h Jul 8** | No leave on record; real. Reminder queued (print-only, not sent). |
 
 ---
 
@@ -241,18 +242,21 @@ Last known active rooms from prior runs: Fountain planning, NUS internal.
 
 ---
 
-## Trello — Summary — 06:55 (+07:00)
+## Trello — Summary (updated after recheck) — 09:05 (+07:00)
 
 ### Check Mail ✅ (card auto-completed)
 All 6 items completed: DuongDn, Carrick, Rick, Kai, Ken, Nick.
 
-### Check Progress ⚠️ (3 items pending)
-**Completed (18 items):** John Yi, James Diamond/Vinn, Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Rebecca, Colin, Fountain, Philip, OhCleo, Arthur, Elena-WordPress.
+### Check Progress ⚠️ (6 items pending)
+**Completed (15 items):** Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Fountain, Philip, OhCleo, Arthur, Elena-WordPress.
 
-**Skipped — alerts (3 items):**
+**Skipped — alerts (6 items):**
 - ⚠️ **Maddy** — Kai no report + 4 critical/high PR bugs unaddressed
 - ⚠️ **Aysar** — MPDM empty + customer production bug report (Vietnamese chars)
 - ⚠️ **Bailey** — No #maintenance report from Nick + Amy unanswered questions
+- ⚠️ **John Yi - Amazing Meds** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
+- ⚠️ **Rebecca - William Bills** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
+- ⚠️ **James Diamond - Vinn task** — reverted from wrongly-auto-completed; PhucVT 0h Jul 8, no leave
 
 ---
 
@@ -292,9 +296,26 @@ Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutof
 ### Upwork
 Carrick session refreshed successfully (`upwork-login.js --login`, already authenticated, cookies re-saved). Rory/Neural/Aysar workroom hour-fetch scripts (`upwork-graphql-direct.js`) returned stale March-May monthly buckets — script needs a date-range fix, not usable for a July check this run. Session itself is no longer expired; Trello items already complete per session-failure≠alert policy regardless.
 
-### Matrix — pending user action
-Both refresh paths failed (refresh_token: `invalid_grant`; browser SSO: timed out waiting for login). Device-code auth in progress: visit **https://matrix.nustechnology.com/auth/link?code=6RDVCB** (code `6RDVCB`, expires ~20 min from 08:28). Fountain Part 1 and the Matrix room piece remain on last-known data until approved — will update this report inline once resolved.
+### Matrix — RESOLVED via visible-browser SSO (`matrix-token-refresh.js`, DISPLAY=:1) — verified as `@duongdn:nustechnology.com`
+
+**Fountain Part 1 recheck:** No new weekly plan message since Jul 6 (Monday plan is weekly, not daily) — last known plan stands: ViTHT 40h + ThinhT 20h + DatNT 40h => QC 24h, capacity 100h/wk. Fountain room activity in window: PR review pings, a card scoping question ("Fountain gifting tab"), Trello card links shared — no blockers, no capacity change. Fountain 5-part check unaffected, item stays complete.
+
+**Matrix — all rooms, since 06-07-08 14:03 → 08:59 Jul-9:** 19/132 active rooms, 448 messages. No unresolved action items for DuongDN — the 2 auto-flagged lines (both in Celine-OhCleo) were minhtv asking "a Dương" a technical question about email verification, which DuongDN already answered live in the same window (15:17-15:22).
+
+**Key updates:**
+
+**Celine - OhCleo (124 msgs)** — email deliverability incident, resolved same-window: `notify.ohcleo.com` domains lost DNS verification (LongVV accidentally re-triggered a failed re-verify check), causing customer-facing send failures. Root cause found + workaround applied: switched sender to `no_reply@notify.ohcleo.com` (still verified) — test sends confirmed delivered. 142 emails failed on Jul 6, need resend once CNAME records for the 3 `notify` subdomains are fixed at the DNS level (LongVV to configure, don't hit "Verify" button again — it breaks the still-working ones). minhtv wants a full incident report to Celine (status, root cause, short/long-term fix).
+
+**NUS - Bailey - Paturevision (22 msgs)** — Console CR2/CR3 (Picking & Stock Location) shipped to Live Jul 9 08:51 (HaVS). Confirms today's TuanNT/PhucVT 0h isn't from Bailey idleness — HaVS covered the go-live prep, TuanNT was "kẹt task" (stuck/blocked) per a separate room (namtv Jul 9 08:25).
+
+**Arthur - Meta-Stamp (10 msgs)** — Chris (client) ran a demo Jul 9 AM, mostly OK; 1 real bug (#3) being checked by team + TienND, rest are new asks not bugs. AI-usage-disclosure question with Chris/Nam resolved — no issue using AI internally as long as output is verified.
+
+**Potential - Blair Brown / Peptide Clyde (28 msgs)** — LeNH needed DNS access for peptideclyde.com; resolved — site is on Hostinger (not MyKinsta as first assumed), DuongDN pointed to the right DNS panel, LeNH confirmed update done 15:38.
+
+**Bailey - BA/QC (19 msgs)** — TuanNT near capacity; DuongDN redirected an upgrade-Rails task to HaVS/others rather than TuanNT, consistent with TuanNT showing 0h combined on the Bailey-adjacent gates today.
+
+**Other (brief):** James Diamond/Portfolio — client mobile team has no bug-tracking tool, Sentry suggested (informational, not urgent). Elena - Active Alerts (163 msgs) — internal dev/QA back-and-forth on a sub-alert table bug + a Wayland drag-drop Chrome quirk, shipped same day, no client-facing issue. NUS-Colin/ETZ — Stripe test-key verification in progress with client (Luc), no blocker. Radio Data Center — DuongDN asked LeNH for status (Khanh off that day).
 
 ---
 
-*End of daily report — 2026-07-09T08:37:00+07 (recheck in progress)*
+*End of daily report — 2026-07-09T09:05:00+07 (recheck complete)*

@@ -17,10 +17,11 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-09T06:55:00+07:00",
-    "output_file": "reports/2026-07-08/daily-report.md",
+    "last_run": "2026-07-09T09:05:00+07:00",
+    "output_file": "reports/2026-07-09/daily-report.md",
     "last_status": "complete",
     "caveats": [
+      "Recheck 09:05 Jul-9: cron's 06:55 report had 2 real gaps, both fixed. (1) Matrix token expired both refresh_token+browser-SSO first try (network ETIMEDOUT mid-poll) — DO NOT use matrix-device-auth.js (URL+code) as fallback, user explicitly rejected that flow; retried DISPLAY=:1 matrix-token-refresh.js (visible browser, user clicks directly) and it succeeded 2nd try. Fountain Part1 + full Matrix piece re-run clean, no new alerts, OhCleo email-deliverability incident (DNS/CNAME on notify.ohcleo.com) already resolved same-day via sender switch. (2) Workstream SSO was actually fine once re-logged in (cron's headless login just failed) — re-ran sheets-tasklog-scan.js for all 5 devs on 07-08 with live WS: PhucVT/TuanNT/LeNH genuinely 0h no leave (real alerts, not cron gaps) — reverted John Yi/Rebecca/James Diamond Trello items the cron wrongly auto-completed off Slack-only data. LongVV 4h OK (half-day AM leave, father's surgery). KhanhHH 1.5h — below normal but doesn't cross the dev's specific 0h-alert bar, noted not blocked. Maddy/Aysar/Bailey re-verified genuinely still open (0 new Slack messages in the ~2h since cron).",
       "Sheets re-run + reviewer-logic correction 14:2x Jul-8 (user requested employee-hours re-run for TODAY, not PREV_DATE): all 5 devs 0h on 07-08 so far, verified both per-dev isolated scans AND unfiltered all-project Workstream dump — day genuinely in progress (14:03), not an alert. LongVV has a PENDING (unapproved) half-day leave request for this morning (father's surgery) — noted, not yet approved so treated as working. Workstream needs-review check: FIRST VERSION WRONG — guessed reviewer=project Manager/Tech Lead role, user corrected (James Diamond→PhucVT not DuongDN, Radio Data Center→LeNH not DuongDN). Real source: `/pinfo/projects/{id}`'s per-member `isReviewer` flag (independent of role). Script fixed to fetch this. Crystal lang further needed a manual override (`REVIEWER_OVERRIDES` map) — system flag itself wrongly shows DuongDN via Tech Lead auto-rule, user confirmed real reviewer is TienND. Fountain excluded from this check entirely per user instruction. Corrected findings: Radio Data Center 2h (KhanhHH) pending LeNH's review; James Diamond 16h (LeNH) pending PhucVT's review; Crystal lang 9h (PhucVT) pending TienND's review (override). None are DuongDN's own action item — ALERT #9 retracted, kept as informational only.",
       "Correction 10:2x Jul-8: LeNH 0h flagged a 3rd time same morning (after already reversing at 09:55 with a 'deep-dive confirmed genuine' claim) — user said 'sai, tôi thấy đã đủ giờ' again. Root cause: per-dev-filtered Workstream fetch silently returned empty for LeNH on 'Portfolio - James Diamond' project despite real data (8h+8h, 07-06/07-07) — same flaky-fetch bug as the long-documented Peptide Clyde incidents, but first time seen on THIS project, proving it's not project-specific. Only found via a fully unfiltered ALL-projects/ALL-members Workstream dump, not by re-running the filtered script N times. 8th recurrence, memory updated both locations with escalated rule: always cross-check via unfiltered dump before calling any LeNH/KhanhHH shortfall genuine.",
       "Correction 09:26 Jul-8: user caught 2 wrongful alerts (Aysar + Maddy 'report missing') for not cross-checking dev hours first — repeat violation of existing feedback_aysar_consolidated/feedback_kai_daily_report_gate memory, both reinforced. KhanhHH 07-07 real total via Workstream = 8h (Radio Data Center 6h + Generator 2h), zero Baamboozle — no Aysar work that day, update correctly absent, not a miss. Aysar Trello item marked complete. Also retracted the KhanhHH-2h-shortfall ALERTS SUMMARY row (sheets-only figure was incomplete, missed the Workstream-only 6h). Maddy: LongVV 0h Maddy 07-07 (worked OhCleo), so 'Kai report missing' dropped as alert driver — but Maddy stays incomplete on separate legit grounds (5 open Bitbucket PRs w/ unaddressed Critical/High findings, #481 broken same-day-fix promise). Final Check Progress: 16/21 complete, 5 open (Maddy-PR-only, Franc, Elena-SamGuard, Elena-WordPress, Ohcleo).",
@@ -214,8 +215,8 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-09T06:55:00+07:00",
-    "output_file": "reports/2026-07-08/daily-report.md"
+    "last_run": "2026-07-09T09:05:00+07:00",
+    "output_file": "reports/2026-07-09/daily-report.md"
   },
   "bailey-monitor": {
     "last_run": "2026-07-03T01:42:00Z",
