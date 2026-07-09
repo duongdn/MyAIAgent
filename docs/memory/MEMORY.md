@@ -102,6 +102,8 @@
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md) — search by name+open, skill's ID stale
 - [feedback_warning_needs_explanation](bailey/feedback_warning_needs_explanation.md), [reference_bailey_monitor_skill_file](bailey/reference_bailey_monitor_skill_file.md) — WARNING needs plain-language explanation
 - [feedback_overbudget_check_missing_from_other_active](bailey/feedback_overbudget_check_missing_from_other_active.md) — 🔴 fixed-cost tasks silently missed — compute actual vs est_buffer manually
+- [feedback_boto3_pyopenssl_broken](bailey/feedback_boto3_pyopenssl_broken.md) — no aws CLI; boto3 needs `pip install --user --upgrade pyOpenSSL` first
+- [feedback_siteground_captcha_no_ssh_fallback](bailey/feedback_siteground_captcha_no_ssh_fallback.md) — Siteground login CAPTCHA-blocked, no Bailey.cpanel SSH host configured
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md) — repo mypersonalfootballcoach/wp

@@ -216,8 +216,9 @@
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
-    "last_run": "2026-07-03T01:42:00Z",
-    "output_file": "reports/2026-07-03/0842-bailey-monitor.md"
+    "last_run": "2026-07-09T19:05:00Z",
+    "output_file": "reports/2026-07-10/0205-bailey-monitor.md",
+    "note": "2026-07-10 02:05 run: all CloudWatch alarms currently OK, recurring nightly Server Memory alarm flap (14+ days, self-resolving) flagged as WARNING same as prior pattern. Storage staging server Pre disk at 9.6% available (threshold <=5%), approaching but not yet alarming. speedventory RDS pending maintenance (OS update + engine patch 17.5.R2), low urgency. Billing $54.26 MTD, well below June's $171.35. New Relic/Mailgun clean. Siteground scrape CAPTCHA-blocked (visible-browser retry attempted via DISPLAY=:1, confirmed CAPTCHA present, unsolvable headlessly); SSH fallback host Bailey.cpanel not configured in this environment — Siteground storage not independently verified this run, defaulted to OK per safe-default customer-facing rule."
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
@@ -225,8 +226,8 @@
     "output_file": "reports/2026-07-09/daily-report.md"
   },
   "bailey-monitor": {
-    "last_run": "2026-07-03T01:42:00Z",
-    "last_success": "2026-07-03T01:42:00Z"
+    "last_run": "2026-07-09T19:05:00Z",
+    "last_success": "2026-07-09T19:05:00Z"
   },
   "slack": {
     "last_run": "2026-06-23T01:38:32.440Z",
