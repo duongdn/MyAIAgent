@@ -9,9 +9,9 @@
 
 | Priority | Item | Detail |
 |----------|------|--------|
-| 🔴 HIGH | **Maddy — Kai no daily report** | 0 Slack messages in Xtreme workspace all day Jul 8 |
+| ~~🔴 HIGH~~ | ~~**Maddy — Kai no daily report**~~ | ~~0 Slack messages in Xtreme workspace all day Jul 8~~ → **WRONG, struck (09:15 recheck): Kai simply didn't work Jul 8, no report was ever expected. Retired this check entirely per user feedback, see memory.** |
 | 🔴 HIGH | **Maddy — 4 PRs unaddressed** | PR #509 CRITICAL (17d), #510 CRITICAL (14d), #507 CRITICAL (21d), #481 HIGH (32d) |
-| 🔴 HIGH | **Aysar — MPDM empty** | No Carrick "Today's update" in C07SQ4HAUHZ on Jul 8 |
+| ~~🔴 HIGH~~ | ~~**Aysar — MPDM empty**~~ | ~~No Carrick "Today's update" in C07SQ4HAUHZ on Jul 8~~ → **WRONG, struck (09:15 recheck): Workstream+Sheets+Upwork all show 0h Baamboozle work Jul 7-8 (only Jul 6: 4h) — no update was expected, not a miss.** |
 | 🟡 MED | **Aysar — customer bug 06:48** | skjamie25→Carrick: Vietnamese chars display broken in Baamboozle game (production) |
 | 🟡 MED | **GGS/Bailey — no maintenance report** | Nick active in #général but no formal #maintenance report; Amy follow-up questions unanswered |
 | 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real (Workstream confirmed, not a cron gap). Blocks James Diamond/Vinn item. |
@@ -46,7 +46,7 @@ Trello: All 6 Zoho mail items ✓ complete. Check Mail card ✓ auto-completed.
 | Baamboozle | 3 | ⚠️ skjamie25→Carrick 06:48 Jul 9: Vietnamese chars broken in game (production bug) |
 | RDC - FM Monitoring | 0 | Clean |
 | Swift Studio | 1 | Rory→Jeff FYI: new bug in BXR App (internal, non-critical) |
-| Xtreme Soft Solutions | 0 | ⚠️ No Kai daily report posted on Jul 8 |
+| Xtreme Soft Solutions | 0 | ~~⚠️ No Kai daily report posted on Jul 8~~ → **WRONG, struck: Kai did not work Jul 8 (confirmed by user), no report expected. Clean.** |
 | SAM GUARD - Mobile | 0 | Clean |
 | GLOBAL GRAZING SERVICES | 6 | ⚠️ Amy follow-up questions unanswered; Nick in #général (not #maintenance) |
 | Amazing Meds | 0 | Clean |
@@ -62,14 +62,14 @@ Trello: All 6 Zoho mail items ✓ complete. Check Mail card ✓ auto-completed.
 
 **Baamboozle detail:** skjamie25 (customer) at 06:48 Jul 9: "@Carrick Good Morning, Can you check (on production) if the Vietnamese characters..." — some letters bold, some not. Production bug report, Carrick not yet seen to respond.
 
-Trello: All alertless items ✓ complete. Skipped: Aysar (MPDM empty + bug report), Bailey (no maintenance report + Amy questions), Maddy (no Kai report).
+Trello: All alertless items ✓ complete. ~~Skipped: Aysar (MPDM empty + bug report), Bailey (no maintenance report + Amy questions), Maddy (no Kai report).~~ → **CORRECTED: Skipped: Aysar (customer bug report ONLY — MPDM empty struck, not an alert), Bailey (no maintenance report + Amy questions), Maddy (PR backlog ONLY — Kai's report struck, not an alert).**
 
 ---
 
 ## Maddy (Xtreme/Carrick-Kai-Luis) — 06:55 (+07:00)
 
 ### 1. Slack — Xtreme Soft Solutions
-⚠️ **0 messages** from Kai in Xtreme workspace on Jul 8 (full day). No daily progress report posted.
+~~⚠️ **0 messages** from Kai in Xtreme workspace on Jul 8 (full day). No daily progress report posted.~~ → **WRONG, struck: Kai did not work that day (confirmed by user), no report was ever expected. This check is retired — see memory, 3rd repeat of this exact false positive.**
 
 ### 2. JIRA tickets (recently updated)
 | Ticket | Status | Assignee | Est | Spent | Note |
@@ -103,12 +103,12 @@ Trello: All alertless items ✓ complete. Skipped: Aysar (MPDM empty + bug repor
 Also open: #485 (71d), #486 (71d), #235 on hold (1y+).
 
 **Verdict: ⚠️ ALERT**
-- Kai posted NO daily report on Jul 8 (full day silence)
+- ~~Kai posted NO daily report on Jul 8 (full day silence)~~ → **WRONG, struck: he didn't work that day, no report expected.**
 - 4 PRs with Critical/High unresolved findings (oldest 32+ days)
 - LIFM2-447 at estimate while still In Progress (overrun)
 - 3 new tickets (449/450/451) with no estimates
 
-Trello: Maddy item ⚠️ SKIPPED.
+Trello: Maddy item ⚠️ SKIPPED — for the PR backlog only (Kai's report struck above, was never a valid reason).
 
 ---
 
@@ -251,8 +251,8 @@ All 6 items completed: DuongDn, Carrick, Rick, Kai, Ken, Nick.
 **Completed (15 items):** Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Fountain, Philip, OhCleo, Arthur, Elena-WordPress.
 
 **Skipped — alerts (6 items):**
-- ⚠️ **Maddy** — Kai no report + 4 critical/high PR bugs unaddressed
-- ⚠️ **Aysar** — MPDM empty + customer production bug report (Vietnamese chars)
+- ⚠️ **Maddy** — ~~Kai no report +~~ 4 critical/high PR bugs unaddressed (Kai's report struck — he didn't work Jul 8, no report expected)
+- ⚠️ **Aysar** — ~~MPDM empty +~~ customer production bug report (Vietnamese chars) unaddressed (MPDM-empty struck — 0h Baamboozle work Jul 7-8 confirmed via Workstream/Sheets/Upwork, no update was expected)
 - ⚠️ **Bailey** — No #maintenance report from Nick + Amy unanswered questions
 - ⚠️ **John Yi - Amazing Meds** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
 - ⚠️ **Rebecca - William Bills** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
@@ -291,7 +291,7 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 - KhanhHH — skip (1.5h > 0)
 
 ### Maddy / Aysar / Bailey — re-verified, still genuinely open
-Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutoff (window: 06:55→08:37, ~1h40m) — **0 new messages** in all three. Not stale data, no auth issue — these are still real open items awaiting Kai's report, Carrick's MPDM update, and Nick's #maintenance report respectively. Kept incomplete.
+Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutoff (window: 06:55→08:37, ~1h40m) — **0 new messages** in all three (not stale data, no auth issue). Maddy stays open for the PR backlog (unrelated to Kai's absence). Aysar stays open for the unanswered customer bug report only — the MPDM "no update" is not a real gap (checked Workstream baamboozle project + dedicated Aysar sheet: 0h Jul 7-8, only Jul 6 had KhanhHH 4h; Upwork Aysar workroom has no task log, messages only — no evidence of any Aysar work happening those 2 days, so nothing for Carrick to report). Bailey stays open for Nick's #maintenance report.
 
 ### Upwork
 Carrick session refreshed successfully (`upwork-login.js --login`, already authenticated, cookies re-saved). Rory/Neural/Aysar workroom hour-fetch scripts (`upwork-graphql-direct.js`) returned stale March-May monthly buckets — script needs a date-range fix, not usable for a July check this run. Session itself is no longer expired; Trello items already complete per session-failure≠alert policy regardless.

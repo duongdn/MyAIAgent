@@ -21,6 +21,7 @@
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — 260708: decrypt-secrets.sh reverted a live-refreshed Matrix token to stale .enc; fixed via saveSecretConfig auto re-encrypt helper
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — 260708: MCP Drive OAuth expired → fallback to service account + Drive `files().export` (text/plain), works even though Slides API disabled
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md) — 🔴 260709: NEVER use matrix-device-auth.js (URL+code); only visible DISPLAY=:1 browser script, user clicks directly
+- [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — 260709: correcting a report after user feedback = strikethrough wrong text + correction, never silently delete
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
@@ -38,7 +39,7 @@
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — Aysar gate=MPDM C07SQ4HAUHZ, no fixed time
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — LIFM2-439 trust incident, Kai/LongVV hours unresolved
 - [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY every time: Slack+JIRA+est/actual+PR(Bitbucket xtreme-web/rms, creds set 260707); found critical unaddressed PR bugs
-- [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md), [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — cron /tmp fail→TMPDIR=/var/tmp
+- [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — 🔴🔴 RETIRED 260709 (3rd repeat): NEVER flag "Kai no report" as Maddy alert; [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md) — cron /tmp fail→TMPDIR=/var/tmp
 - [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md) — ✅ RESOLVED 260707: IS the Arthur/Meta-Stamp workspace, 3 channels wired into Arthur check
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴 260707: dmetiner's direct unaddressed asks (MPX fail, plugin reorg, export deadline) wrongly marked clean; must read full msg text not just "posted=clean"
 
