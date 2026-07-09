@@ -14,28 +14,38 @@
 | ~~🔴 HIGH~~ | ~~**Aysar — MPDM empty**~~ | ~~No Carrick "Today's update" in C07SQ4HAUHZ on Jul 8~~ → **WRONG, struck (09:15 recheck): Workstream+Sheets+Upwork all show 0h Baamboozle work Jul 7-8 (only Jul 6: 4h) — no update was expected, not a miss.** |
 | 🟡 MED | **Aysar — customer bug 06:48** | skjamie25→Carrick: Vietnamese chars display broken in Baamboozle game (production) |
 | 🟡 MED | **GGS/Bailey — no maintenance report** | Nick active in #général but no formal #maintenance report; Amy follow-up questions unanswered |
-| 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real (Workstream confirmed, not a cron gap). Blocks James Diamond/Vinn item. |
-| 🟡 MED | **TuanNT — 0h Jul 8** | No leave on record; real (confirmed across all 5 sheets + Workstream). Blocks John Yi + Rebecca items. |
-| 🟡 MED | **LeNH — 0h Jul 8** | No leave on record; real. Reminder queued (print-only, not sent). |
+| 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real, confirmed via isolated single-dev rescan too. Blocks James Diamond/Vinn. Reminder sent. |
+| ~~🟡 MED~~ | ~~**TuanNT — 0h Jul 8**~~ | ~~No leave on record; real (confirmed across all 5 sheets + Workstream). Blocks John Yi + Rebecca items.~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on the Paturevision/Bailey sheet — combined multi-dev scan silently missed it (known recurring bug). John Yi + Rebecca re-completed.** |
+| ~~🟡 MED~~ | ~~**LeNH — 0h Jul 8**~~ | ~~No leave on record; real. Reminder queued (print-only, not sent).~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on Peptide Clyde/Blair Brown (Workstream) — same combined-scan bug. No reminder sent.** |
+| 🔴 HIGH | **rick@ — Fountain production alerts missed** | Email scan ran a stale dated script, reported false "0 new". Real: BugSnag SocketError/RuntimeError/ActiveStorage errors (FountainStaging), Rollbar RoutingError #80/#81 (FountainStagingBE), FirstProject production error #1054 (10x/5min). See Email section. |
+| 🟡 MED | **vuongtrancr@ — Swish "Signal lost" alerts missed** | Same stale-script bug. 4x New Relic "Signal lost 10 min" (Low App Throughput) Jul 8 13:53-21:02 + Rollbar daily summary. |
 
 ---
 
 ## Email [all] — 01:00 (+07:00)
 
-| Account | Emails | Calendar today |
-|---------|--------|----------------|
-| duongdn@nustechnology.com | 0 new | no events |
-| carrick@nustechnology.com | 0 new | no events |
-| nick@nustechnology.com | 0 new | no events |
-| rick@nustechnology.com | 0 new | no events (no Rollbar/BugSnag alerts) |
-| kai@nustechnology.com | 0 new | no events |
-| ken@nustechnology.com | 0 new | no events |
-| vuongtrancr@gmail.com | 0 new | — |
-| dnduongus@gmail.com | 0 new | — |
-| davidztv19@gmail.com (Arthur) | 0 new | — |
-| freelancer@mpfc.com | 0 new | — |
+~~All 10 accounts showed "0 new" below.~~ → **🔴🔴 WRONG, struck (09:40 recheck, user caught: "vô lý, check thì thấy 1 mớ email mới"). Root cause: the cron ran a dated/hardcoded-window script (`daily-email-scan-260703.js`, window frozen at `2026-07-04T05:22`) instead of using the live `daily_report.last_run` timestamp — same "no dated scan scripts" bug already documented for Sheets, now confirmed on Email too. Re-ran live IMAP against the real window (2026-07-08 14:03 → now) — real counts below, several genuine misses.**
 
-Trello: All 6 Zoho mail items ✓ complete. Check Mail card ✓ auto-completed.
+| Account | Emails | Real findings | Calendar today |
+|---------|--------|----------------|----------------|
+| duongdn@nustechnology.com | ~~0 new~~ → 1 | OA timesheet report — informational | no events |
+| carrick@nustechnology.com | ~~0 new~~ → 2 | Bitbucket billing notice, Snyk weekly report — informational | no events |
+| nick@nustechnology.com | ~~0 new~~ → 4 | Azure DevOps PR notifications (CNA.Operations.App) — no John Yi mentions | no events |
+| rick@nustechnology.com | ~~0 new, no Rollbar/BugSnag alerts~~ → **27, 🔴 REAL PRODUCTION ALERTS MISSED** | See below | no events |
+| kai@nustechnology.com | ~~0 new~~ → 5 | JIRA auto-assign notices for LIFM2-450/451 — already known, no new info | no events |
+| ken@nustechnology.com | ~~0 new~~ → 80 | Normal high-volume Precognize GitHub PR/Sentry noise — informational, not urgent | no events |
+| vuongtrancr@gmail.com | ~~0 new~~ → 5, 🔴 **REAL ALERTS MISSED** | 4x New Relic "Signal lost for 10 minutes" (Swish, Jul 8 13:53-21:02) + Rollbar "Delayed-newform" daily summary | — |
+| dnduongus@gmail.com | ~~0 new~~ → 17 | Personal newsletters/bank notices only, no security alerts | — |
+| davidztv19@gmail.com (Arthur) | ~~0 new~~ → 4 | Basecamp/MongoDB/Trello notifications — informational | — |
+| freelancer@mpfc.com | 0 new | (confirmed correct on recheck) | — |
+
+**🔴 rick@ — real Fountain production alerts missed:**
+- BugSnag `[FountainStaging]`: SocketError in admin/gifts#update, RuntimeError, ActiveStorage::FileNotFoundError (Jul 8, 3 separate errors)
+- Rollbar `[FountainStagingBE]`: new RoutingError #80/#81, 10 occurrences in 5 min on #80
+- Rollbar `[FirstProject]` **production**: 10 occurrences in 5 min, error #1054 "Minified..." (Jul 8 19:02)
+- 2x Rollbar daily summaries (InfinityRoses, FountainGifts) — routine
+
+**Trello:** Check Mail items were already marked complete based on the false "0 new" claim. Per standing policy (email content is FYI-only, only fetch failure blocks Check Mail) the Trello items themselves don't need reverting — but the missed rick@ Fountain alerts are added to ALERTS SUMMARY above and should be manually verified against current Fountain staging/production status. Check Mail card stays ✓ complete.
 
 ---
 
@@ -102,9 +112,11 @@ Trello: All alertless items ✓ complete. ~~Skipped: Aysar (MPDM empty + bug rep
 
 Also open: #485 (71d), #486 (71d), #235 on hold (1y+).
 
+**Comment check (09:35 recheck, user asked "no new comments at all?"):** confirmed via Bitbucket API — the 4 PRs above have genuinely **zero developer replies to the Codex Review bot's findings** (only the bot's original comment exists: #509 posted Jun 22, #510 Jun 25, #507 Jun 18, #481's client comment Jun 6). But this is NOT the same as Kai being totally silent — his JIRA ticket **LIFM2-428 got a real new comment Jul 7 14:29+07** (test instructions for RMS gift-card-style flow), so he is actively working that ticket. The alert is specifically "PR review findings unaddressed," not "Kai unresponsive" — LIFM2-447/446 have zero ticket comments ever (never discussed), LIFM2-409 last commented Jun 26 (Madhuraka "Proceed", 13d silence).
+
 **Verdict: ⚠️ ALERT**
 - ~~Kai posted NO daily report on Jul 8 (full day silence)~~ → **WRONG, struck: he didn't work that day, no report expected.**
-- 4 PRs with Critical/High unresolved findings (oldest 32+ days)
+- 4 PRs with Critical/High unresolved findings (oldest 32+ days) — confirmed zero dev replies to the automated review comments, this part stands
 - LIFM2-447 at estimate while still In Progress (overrun)
 - 3 new tickets (449/450/451) with no estimates
 
@@ -133,7 +145,7 @@ Trello: James Diamond (Vinn) ✓ complete. Andrew Taraba ✓ complete.
 
 ## Scrin.io — 01:30 (+07:00)
 
-Nick: **8h 18m** on Jul 8 ✓ (Normal).
+~~Nick: **8h 18m** on Jul 8 ✓ (Normal).~~ → **CORRECTED (09:25, user feedback): raw Project/Client tag = "No project"/"No client" for all 498 min — this is generic tracked time, NOT attributed to John Yi. We haven't done John Yi work in a long time; do not imply this figure validates any John Yi activity. Scrin.io tracks Nick (Global Grazing), not tied to a specific client project on this data.
 
 ---
 
@@ -159,11 +171,11 @@ Trello: All developer gate items cannot be confirmed. Recommend interactive rech
 
 | Workroom | Status |
 |----------|--------|
-| Rory (carrick) | Session expired — headless re-login failed (CAPTCHA/2FA) |
-| Neural Contract (carrick) | Session expired |
-| Aysar (david2) | No saved session |
+| ~~Rory (carrick)~~ | ~~Session expired — headless re-login failed (CAPTCHA/2FA)~~ → **WRONG, struck (09:45, user caught): stale claim, never rechecked. carrick's session was refreshed successfully at 08:37 via visible-browser login (`DISPLAY=:1 upwork-login.js --login`) — already authenticated, no CAPTCHA hit this time.** |
+| ~~Neural Contract (carrick)~~ | ~~Session expired~~ → **Same correction — carrick session is valid.** |
+| ~~Aysar (david2)~~ | ~~No saved session~~ → **WRONG, struck: checked live via visible browser, david2 already authenticated, session valid.** |
 
-All 3 sessions expired → Trello items completable per policy (session expiry ≠ monitoring alert).
+**🔴 Standing rule going forward (user, 09:45): when an Upwork/any-login session is actually expired, do NOT just print "session expired, headless re-login failed" as passive status text. Open a VISIBLE browser (DISPLAY=:1, same pattern as Matrix) so the user can log in directly, and if that still doesn't resolve it, the item goes in ALERTS SUMMARY as a real alert — not a quiet table row.**
 
 ---
 
@@ -242,21 +254,19 @@ Last known active rooms from prior runs: Fountain planning, NUS internal.
 
 ---
 
-## Trello — Summary (updated after recheck) — 09:05 (+07:00)
+## Trello — Summary (updated after 2nd recheck) — 09:25 (+07:00)
 
 ### Check Mail ✅ (card auto-completed)
 All 6 items completed: DuongDn, Carrick, Rick, Kai, Ken, Nick.
 
-### Check Progress ⚠️ (6 items pending)
-**Completed (15 items):** Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Fountain, Philip, OhCleo, Arthur, Elena-WordPress.
+### Check Progress ⚠️ (4 items pending)
+**Completed (17 items):** Rory, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Fountain, Philip, OhCleo, Arthur, Elena-WordPress, ~~John Yi~~→**re-completed**, ~~Rebecca~~→**re-completed** (both were wrongly reverted on TuanNT's false 0h, now fixed — see Re-check section).
 
-**Skipped — alerts (6 items):**
+**Skipped — alerts (4 items):**
 - ⚠️ **Maddy** — ~~Kai no report +~~ 4 critical/high PR bugs unaddressed (Kai's report struck — he didn't work Jul 8, no report expected)
 - ⚠️ **Aysar** — ~~MPDM empty +~~ customer production bug report (Vietnamese chars) unaddressed (MPDM-empty struck — 0h Baamboozle work Jul 7-8 confirmed via Workstream/Sheets/Upwork, no update was expected)
 - ⚠️ **Bailey** — No #maintenance report from Nick + Amy unanswered questions
-- ⚠️ **John Yi - Amazing Meds** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
-- ⚠️ **Rebecca - William Bills** — reverted from wrongly-auto-completed; TuanNT 0h Jul 8, no leave
-- ⚠️ **James Diamond - Vinn task** — reverted from wrongly-auto-completed; PhucVT 0h Jul 8, no leave
+- ⚠️ **James Diamond - Vinn task** — PhucVT 0h Jul 8, no leave (confirmed genuine via 2 independent scans)
 
 ---
 
@@ -273,20 +283,22 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 | Dev | Sheets | Workstream (2026-07-08) | Total | Leave? | Verdict |
 |-----|--------|--------------------------|-------|--------|---------|
 | LongVV | 0h | OhCleo 4h | 4h | **Half-day AM leave (father's surgery, pending approval)** | ✓ OK — leave covers AM, PM logged |
-| PhucVT | 0h | 0h (Crystal lang last logged Jul 7: 9h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** |
-| TuanNT | 0h (all 5 sheets) | 0h | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (Scrin.io 8h18m belongs to a different "Nick," not TuanNT — never conflate, per memory) |
-| KhanhHH | 0h | Peptide Clyde 0.25h + ETZ-Wathaga 1.25h | 1.5h | Pending leave is for **Jul 9** (today), not Jul 8 | Low but not 0h — doesn't meet KhanhHH's 0h-alert bar, noted for visibility only |
-| LeNH | 0h | 0h (James Diamond last logged Jul 7: 8h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (stricter threshold) |
+| PhucVT | 0h | 0h (Crystal lang last logged Jul 7: 9h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (confirmed twice: combined scan + isolated single-dev rescan, both 0h) |
+| ~~TuanNT~~ | ~~0h (all 5 sheets)~~ | ~~0h~~ | ~~**0h**~~ | ~~None found~~ | ~~⚠️ **ALERT — 0h, no leave**~~ → **WRONG, struck (09:20, user caught): isolated single-dev rescan found 8h on the Paturevision/Bailey sheet — the combined 5-dev scan silently missed it. Real total = 8h. Not an alert.** (Scrin.io's 8h18m is separately unrelated — belongs to Nick/Global Grazing with no project tag, never conflate with TuanNT) |
+| KhanhHH | 0h | Peptide Clyde 0.25h + ETZ-Wathaga 1.25h | 1.5h | Pending leave is for **Jul 9** (today), not Jul 8 | Low but not 0h — doesn't meet KhanhHH's 0h-alert bar. Confirmed via isolated rescan too (same 1.5h), not a combined-scan miss this time. |
+| ~~LeNH~~ | ~~0h~~ | ~~0h (James Diamond last logged Jul 7: 8h)~~ | ~~**0h**~~ | ~~None found~~ | ~~⚠️ **ALERT — 0h, no leave**~~ → **WRONG, struck (09:20, user caught): isolated single-dev rescan found 8h on Peptide Clyde/Blair Brown (Workstream) — same combined-scan miss bug as TuanNT. Real total = 8h. Not an alert.** |
 
-**Trello correction:** John Yi and Rebecca (gated by TuanNT 0h) and James Diamond/Vinn (gated by PhucVT 0h) were wrongly auto-completed by the cron using Slack-only data (Workstream was down). Reverted to incomplete:
-- ⚠️ John Yi - Amazing Meds
-- ⚠️ Rebecca - William Bills
-- ⚠️ James Diamond - Vinn task
+**🔴 Root cause note:** the 5-dev combined `sheets-tasklog-scan.js` call silently dropped TuanNT's Paturevision entry and LeNH's Peptide Clyde entry — both only surfaced when each dev was rescanned alone. This is the same "multi-dev combined scan misses hours" bug already documented in memory (feedback_check_workstream_before_flagging_shortfall) — from now on, ANY dev showing 0h in a combined scan must get an isolated single-dev rescan before being written into the report as an alert.
 
-**Reminders (print-only, no `--send-reminder` flag given):**
-- PhucVT — needs reminder (0h, no leave)
-- TuanNT — needs reminder (0h, no leave)
-- LeNH — needs reminder (0h, no leave)
+**Trello correction (revised):** James Diamond/Vinn (gated by PhucVT, genuinely 0h) stays incomplete. John Yi and Rebecca (gated by TuanNT) — **re-completed**, TuanNT's 0h was wrong.
+- ⚠️ James Diamond - Vinn task (real alert)
+- ✓ John Yi - Amazing Meds (re-completed)
+- ✓ Rebecca - William Bills (re-completed)
+
+**Reminders (print-only unless noted):**
+- PhucVT — needs reminder (0h, no leave, confirmed twice) — **sent per user request**
+- ~~TuanNT — needs reminder (0h, no leave)~~ → struck, TuanNT has 8h, no reminder needed
+- ~~LeNH — needs reminder (0h, no leave)~~ → struck, LeNH has 8h, no reminder needed/sent
 - LongVV — skip (leave covers it)
 - KhanhHH — skip (1.5h > 0)
 
@@ -306,13 +318,13 @@ Carrick session refreshed successfully (`upwork-login.js --login`, already authe
 
 **Celine - OhCleo (124 msgs)** — email deliverability incident, resolved same-window: `notify.ohcleo.com` domains lost DNS verification (LongVV accidentally re-triggered a failed re-verify check), causing customer-facing send failures. Root cause found + workaround applied: switched sender to `no_reply@notify.ohcleo.com` (still verified) — test sends confirmed delivered. 142 emails failed on Jul 6, need resend once CNAME records for the 3 `notify` subdomains are fixed at the DNS level (LongVV to configure, don't hit "Verify" button again — it breaks the still-working ones). minhtv wants a full incident report to Celine (status, root cause, short/long-term fix).
 
-**NUS - Bailey - Paturevision (22 msgs)** — Console CR2/CR3 (Picking & Stock Location) shipped to Live Jul 9 08:51 (HaVS). Confirms today's TuanNT/PhucVT 0h isn't from Bailey idleness — HaVS covered the go-live prep, TuanNT was "kẹt task" (stuck/blocked) per a separate room (namtv Jul 9 08:25).
+**NUS - Bailey - Paturevision (22 msgs)** — Console CR2/CR3 (Picking & Stock Location) shipped to Live Jul 9 08:51 (HaVS). This actually corroborates TuanNT's real 8h on Paturevision Jul 8 (see Re-check correction above) — he was "kẹt task" (stuck/blocked) per namtv Jul 9 08:25, consistent with being loaded on this project, not idle. PhucVT's 0h remains unexplained by anything in this room.
 
 **Arthur - Meta-Stamp (10 msgs)** — Chris (client) ran a demo Jul 9 AM, mostly OK; 1 real bug (#3) being checked by team + TienND, rest are new asks not bugs. AI-usage-disclosure question with Chris/Nam resolved — no issue using AI internally as long as output is verified.
 
 **Potential - Blair Brown / Peptide Clyde (28 msgs)** — LeNH needed DNS access for peptideclyde.com; resolved — site is on Hostinger (not MyKinsta as first assumed), DuongDN pointed to the right DNS panel, LeNH confirmed update done 15:38.
 
-**Bailey - BA/QC (19 msgs)** — TuanNT near capacity; DuongDN redirected an upgrade-Rails task to HaVS/others rather than TuanNT, consistent with TuanNT showing 0h combined on the Bailey-adjacent gates today.
+**Bailey - BA/QC (19 msgs)** — TuanNT near capacity; DuongDN redirected an upgrade-Rails task to HaVS/others rather than TuanNT — consistent with TuanNT's real 8h Paturevision load that day (not the wrongly-struck 0h).
 
 **Other (brief):** James Diamond/Portfolio — client mobile team has no bug-tracking tool, Sentry suggested (informational, not urgent). Elena - Active Alerts (163 msgs) — internal dev/QA back-and-forth on a sub-alert table bug + a Wayland drag-drop Chrome quirk, shipped same day, no client-facing issue. NUS-Colin/ETZ — Stripe test-key verification in progress with client (Luc), no blocker. Radio Data Center — DuongDN asked LeNH for status (Khanh off that day).
 

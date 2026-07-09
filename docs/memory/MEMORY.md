@@ -22,6 +22,7 @@
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — 260708: MCP Drive OAuth expired → fallback to service account + Drive `files().export` (text/plain), works even though Slides API disabled
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md) — 🔴 260709: NEVER use matrix-device-auth.js (URL+code); only visible DISPLAY=:1 browser script, user clicks directly
 - [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — 260709: correcting a report after user feedback = strikethrough wrong text + correction, never silently delete
+- [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 260709: expired session → visible DISPLAY=:1 browser retry, not passive "expired" text; unresolved = ALERT
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
