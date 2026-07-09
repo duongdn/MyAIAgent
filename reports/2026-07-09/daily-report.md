@@ -396,9 +396,31 @@ Yesterday's `password_reset_code_expires_at` DB migration error is **GONE today 
 | `/search/...WAITFOR DELAY...` (variant) | 12.2s | Same scanner |
 | `/feed/` | 11.5s | Possibly same scan burst |
 
-Apdex 0.54 is driven by these slow transactions dragging the response-time distribution into "tolerating," not by error volume (errors are low, 0.06%). **Recommend:** WAF or input sanitization on `/search/` — this is automated scanner traffic, not real users.
+Apdex 0.54 is driven by these slow transactions dragging the response-time distribution into "tolerating," not by error volume (errors are low, 0.06%).
 
-**Not yet added to Trello** — no checklist item exists for Performance yet (ask user whether to add one once this piece has run a few more cycles). Recommend "MPFC — investigate SQLi probe + JSON API error" as a manual action item regardless of Trello wiring.
+**🔴 Deep-dive via SSH (`mpfc.mpfc.live`, 09:46-10:59) — findings correct the initial framing:**
+
+- **Not a successful/exploitable SQLi.** Read active theme `pfc7`'s `search.php`/`searchform.php`/`functions.php` — search goes through core `WP_Query`/`$wpdb->prepare()`, no raw SQL concat found. Payload is treated as a literal harmless string → WP returns "no results" page (~80KB, matches logged response sizes).
+- **Live Apache log (`/var/log/apache2/access.log`, sudo):** 566 requests today (00:12-03:49) with the `WAITFOR DELAY` payload, from **310 distinct IPs** (AWS ranges), all spoofing UA `Amazonbot/0.1` (real Amazonbot doesn't send SQLi payloads — UA spoofed to dodge basic bot filters). Actual response times in raw log: **0.8-2.4s**, not the 12-15s New Relic bucket-averaged — the slowness is real but caused by load, not an actual `WAITFOR` delay executing.
+- **Real consequence: performance/availability, not data breach.** Each hit = uncached `LIKE '%...%'` full-table-scan on `wp_posts` (no FULLTEXT index) + full theme render, hitting a remote managed MySQL that's shared with cron/backups AND a synchronous per-request Apache→MySQL log pipe (`CustomLog "|mysql ... apache_logs"` in vhost conf) — this combination is what's dragging Apdex to 0.54, amplified by scan volume.
+- **No active WAF.** Wordfence was previously installed and fully removed — only orphaned DB tables remain (`wp_wfBlockedIPLog` etc.), zero live protection today.
+- **🔴 Higher-severity findings, unrelated to the SQLi scan, found during the same investigation:**
+  - `adminer-4.8.1.php` (full DB admin GUI) is **publicly reachable, HTTP 200** — anyone can hit it directly, worse than the scanner itself.
+  - `config.error.txt` (1.2MB) is **publicly reachable, HTTP 200** — potential info leak.
+  - Managed-MySQL log password hardcoded in plaintext in `/etc/apache2/sites-enabled/*.conf`.
+  - Webroot permissions are `777` (world-writable) throughout.
+  - Domain is proxied via Cloudflare (104.26.x/172.67.x) — a WAF custom rule can be added there with no server deploy.
+
+**Recommend (priority order):**
+1. Remove/deny public access to `adminer-4.8.1.php` + `config.error.txt` — most urgent, independent of the SQLi scan.
+2. Cloudflare WAF rule: block/challenge `uri.path contains "waitfor"` on `/search/*`, plus rate-limit `/search/*` per IP.
+3. Reinstall Wordfence or equivalent WP firewall (previously present, now removed).
+4. Add FULLTEXT index or cache "no results" search pages; move the Apache→MySQL log pipe off the request's critical path (batch/cron instead of synchronous pipe).
+5. Fix webroot permissions (777→755/644); move the hardcoded log DB password out of plaintext vhost conf.
+
+User informed 2026-07-09 10:59, will review/action later — **not yet applied**, no files touched on the server.
+
+**Not yet added to Trello** — no checklist item exists for Performance yet (ask user whether to add one once this piece has run a few more cycles). Recommend "MPFC — investigate SQLi probe + adminer/config.error.txt exposure" as a manual action item regardless of Trello wiring.
 
 ---
 
