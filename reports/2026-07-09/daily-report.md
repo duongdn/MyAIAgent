@@ -149,21 +149,23 @@ Trello: James Diamond (Vinn) ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets — All devs — 01:30 (+07:00)
+## Sheets — All devs — 01:30 (+07:00) — SUPERSEDED, see "Re-check" section below for real numbers
 
-⚠️ **Workstream SSO unavailable in cron mode** — all devs show 0h. This is the recurring cron login failure pattern (seen Jul 1-8). Sheets-only view, may be false alert. Recheck needed with interactive Workstream login.
+~~⚠️ **Workstream SSO unavailable in cron mode** — all devs show 0h. This is the recurring cron login failure pattern (seen Jul 1-8). Sheets-only view, may be false alert. Recheck needed with interactive Workstream login.~~
 
-| Dev | Sheets | Workstream | Notes |
-|-----|--------|------------|-------|
-| LongVV | 0h | unavailable | Full-time OhCleo — likely logged in WS |
-| PhucVT | 0h | unavailable | Check WS manually |
-| TuanNT | 0h | unavailable | Check WS manually |
-| KhanhHH | 0h | unavailable | Leave request pending (unapproved) |
-| LeNH | 0h | unavailable | Check WS manually |
+~~| Dev | Sheets | Workstream | Notes |~~
+~~|-----|--------|------------|-------|~~
+~~| LongVV | 0h | unavailable | Full-time OhCleo — likely logged in WS |~~
+~~| PhucVT | 0h | unavailable | Check WS manually |~~
+~~| TuanNT | 0h | unavailable | Check WS manually |~~
+~~| KhanhHH | 0h | unavailable | Leave request pending (unapproved) |~~
+~~| LeNH | 0h | unavailable | Check WS manually |~~
+
+→ **This whole table was a placeholder (Workstream login just failed in cron, not actually unavailable). Real, verified numbers — after fixing login AND after catching a 2nd combined-scan bug that missed TuanNT/LeNH's actual hours — are in the "Re-check" section further down: LongVV 4h (leave), PhucVT 0h (real, reminder sent), TuanNT 8h (Paturevision), KhanhHH 1.5h, LeNH 8h (Peptide Clyde). Do not read this table as current.**
 
 **VietPH**: Resigned 2026-06-30 — not scanned.
 
-Trello: All developer gate items cannot be confirmed. Recommend interactive recheck.
+~~Trello: All developer gate items cannot be confirmed. Recommend interactive recheck.~~ → **Resolved in "Re-check" section: James Diamond/Vinn stays incomplete (PhucVT real 0h); John Yi + Rebecca re-completed (TuanNT's 0h was a scan bug, real=8h).**
 
 ---
 
@@ -182,9 +184,9 @@ Trello: All developer gate items cannot be confirmed. Recommend interactive rech
 ## Fountain (5-part check) — 01:30 (+07:00)
 
 ### Part 1 — Matrix weekly plan
-⚠️ **UNAVAILABLE** — Matrix token expired (`M_UNKNOWN_TOKEN`). Browser SSO required for refresh (unavailable in cron).
+~~⚠️ **UNAVAILABLE** — Matrix token expired (`M_UNKNOWN_TOKEN`). Browser SSO required for refresh (unavailable in cron).~~
 
-Last known plan (from Jul 8): ViTHT 40h + ThinhT 20h + DatNT 40h = 100h/wk capacity.
+→ **SUPERSEDED (09:05 recheck): Matrix fixed via visible-browser SSO. Re-fetched Kunal-Fountain room — no new plan posted since Jul 6 (weekly plan, not daily), so the last known plan below stands, now confirmed current: ViTHT 40h + ThinhT 20h + DatNT 40h = 100h/wk capacity.**
 
 ### Part 2 — Task log actuals (W34: Jul 6-12)
 - W34 actuals: **0h** (no time logged yet this week as of Jul 8 14:03 — normal for mid-week check)
@@ -231,26 +233,26 @@ Trello: Elena-SamGuard ✓ complete. Elena-WordPress ✓ complete.
 
 ---
 
-## Matrix [all rooms] — 06:55 (+07:00)
+## Matrix [all rooms] — 06:55 (+07:00) — SUPERSEDED, see "Re-check" section below
 
-**UNAVAILABLE** — Token expired (`M_UNKNOWN_TOKEN`). Browser SSO required.
-No room data available for this run.
+~~**UNAVAILABLE** — Token expired (`M_UNKNOWN_TOKEN`). Browser SSO required.~~
+~~No room data available for this run.~~
 
-Last known active rooms from prior runs: Fountain planning, NUS internal.
+→ **Fixed 09:05 via visible-browser SSO. Full 19-room/448-message scan done — see "Re-check" section below for the real summary (OhCleo email-deliverability incident, Bailey go-live, Arthur demo, etc.). No unresolved action items found.**
 
 ---
 
-## Reminders — 06:55 (+07:00)
+## Reminders — 06:55 (+07:00) — SUPERSEDED, see "Re-check" section below
 
-⚠️ Devs with 0h in sheets today (recheck recommended before sending):
+~~⚠️ Devs with 0h in sheets today (recheck recommended before sending):~~
+~~- **LongVV** — 0h (OhCleo, expected in Workstream but unavailable)~~
+~~- **PhucVT** — 0h (Workstream unavailable)~~
+~~- **TuanNT** — 0h (Workstream unavailable)~~
+~~- **KhanhHH** — 0h (leave request pending — unapproved, counted as working)~~
+~~- **LeNH** — 0h (Workstream unavailable)~~
+~~**No reminders sent** (no `--send-reminder` flag; Workstream unavailable = likely false alerts).~~
 
-- **LongVV** — 0h (OhCleo, expected in Workstream but unavailable)
-- **PhucVT** — 0h (Workstream unavailable)
-- **TuanNT** — 0h (Workstream unavailable)
-- **KhanhHH** — 0h (leave request pending — unapproved, counted as working)
-- **LeNH** — 0h (Workstream unavailable)
-
-**No reminders sent** (no `--send-reminder` flag; Workstream unavailable = likely false alerts).
+→ **Real outcome after 2 rounds of recheck: LongVV OK (leave), PhucVT genuinely 0h (reminder SENT via Matrix), TuanNT 8h (no reminder, combined-scan bug), KhanhHH 1.5h (no reminder), LeNH 8h (no reminder, combined-scan bug). Only PhucVT got a message.**
 
 ---
 
