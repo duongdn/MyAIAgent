@@ -256,4 +256,45 @@ All 6 items completed: DuongDn, Carrick, Rick, Kai, Ken, Nick.
 
 ---
 
-*End of daily report — 2026-07-09T06:55:00+07*
+---
+
+## Re-check — 08:37 (+07:00)
+
+**Decrypted secrets, refreshed Workstream login (success), retried Matrix (refresh_token expired → browser SSO timed out → device-code auth in progress, awaiting user approval), retried Upwork carrick login (session refreshed, already authenticated).**
+
+### Sheets — real data (Workstream was just unavailable in cron, not empty)
+
+Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstream scan) for all 5 devs:
+
+| Dev | Sheets | Workstream (2026-07-08) | Total | Leave? | Verdict |
+|-----|--------|--------------------------|-------|--------|---------|
+| LongVV | 0h | OhCleo 4h | 4h | **Half-day AM leave (father's surgery, pending approval)** | ✓ OK — leave covers AM, PM logged |
+| PhucVT | 0h | 0h (Crystal lang last logged Jul 7: 9h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** |
+| TuanNT | 0h (all 5 sheets) | 0h | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (Scrin.io 8h18m belongs to a different "Nick," not TuanNT — never conflate, per memory) |
+| KhanhHH | 0h | Peptide Clyde 0.25h + ETZ-Wathaga 1.25h | 1.5h | Pending leave is for **Jul 9** (today), not Jul 8 | Low but not 0h — doesn't meet KhanhHH's 0h-alert bar, noted for visibility only |
+| LeNH | 0h | 0h (James Diamond last logged Jul 7: 8h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (stricter threshold) |
+
+**Trello correction:** John Yi and Rebecca (gated by TuanNT 0h) and James Diamond/Vinn (gated by PhucVT 0h) were wrongly auto-completed by the cron using Slack-only data (Workstream was down). Reverted to incomplete:
+- ⚠️ John Yi - Amazing Meds
+- ⚠️ Rebecca - William Bills
+- ⚠️ James Diamond - Vinn task
+
+**Reminders (print-only, no `--send-reminder` flag given):**
+- PhucVT — needs reminder (0h, no leave)
+- TuanNT — needs reminder (0h, no leave)
+- LeNH — needs reminder (0h, no leave)
+- LongVV — skip (leave covers it)
+- KhanhHH — skip (1.5h > 0)
+
+### Maddy / Aysar / Bailey — re-verified, still genuinely open
+Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutoff (window: 06:55→08:37, ~1h40m) — **0 new messages** in all three. Not stale data, no auth issue — these are still real open items awaiting Kai's report, Carrick's MPDM update, and Nick's #maintenance report respectively. Kept incomplete.
+
+### Upwork
+Carrick session refreshed successfully (`upwork-login.js --login`, already authenticated, cookies re-saved). Rory/Neural/Aysar workroom hour-fetch scripts (`upwork-graphql-direct.js`) returned stale March-May monthly buckets — script needs a date-range fix, not usable for a July check this run. Session itself is no longer expired; Trello items already complete per session-failure≠alert policy regardless.
+
+### Matrix — pending user action
+Both refresh paths failed (refresh_token: `invalid_grant`; browser SSO: timed out waiting for login). Device-code auth in progress: visit **https://matrix.nustechnology.com/auth/link?code=6RDVCB** (code `6RDVCB`, expires ~20 min from 08:28). Fountain Part 1 and the Matrix room piece remain on last-known data until approved — will update this report inline once resolved.
+
+---
+
+*End of daily report — 2026-07-09T08:37:00+07 (recheck in progress)*
