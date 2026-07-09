@@ -15,6 +15,7 @@
 | 🟡 MED | **Aysar — customer bug 06:48** | skjamie25→Carrick: Vietnamese chars display broken in Baamboozle game (production) |
 | 🟡 MED | **GGS/Bailey — no maintenance report** | Nick active in #général but no formal #maintenance report; Amy follow-up questions unanswered |
 | 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real, confirmed via isolated single-dev rescan too. Blocks James Diamond/Vinn. Reminder sent. |
+| 🟡 MED | **Workstream needs-review — 3 projects pending** | James Diamond (4 rows, LeNH's hours, reviewer PhucVT), Radio Data Center (1 row, KhanhHH's hours, reviewer LeNH), Crystal lang (1 row, PhucVT's hours, reviewer TienND). Fountain excluded per standing instruction. See Sheets section for detail. |
 | ~~🟡 MED~~ | ~~**TuanNT — 0h Jul 8**~~ | ~~No leave on record; real (confirmed across all 5 sheets + Workstream). Blocks John Yi + Rebecca items.~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on the Paturevision/Bailey sheet — combined multi-dev scan silently missed it (known recurring bug). John Yi + Rebecca re-completed.** |
 | ~~🟡 MED~~ | ~~**LeNH — 0h Jul 8**~~ | ~~No leave on record; real. Reminder queued (print-only, not sent).~~ → **WRONG, struck. CORRECTED AGAIN 10:15 (user: "LeNH: wrong, check again") — real total is 8.58h across TWO projects: Portfolio-James Diamond 8h + Peptide Clyde 0.58h (my first correction mislabeled it as "8h on Peptide Clyde" — wrong project attribution). Verified via isolated rescan + full unfiltered all-20-project dump, both agree. No reminder sent.** |
 | 🔴 HIGH | **rick@ — Fountain production alerts missed** | Email scan ran a stale dated script, reported false "0 new". Real: BugSnag SocketError/RuntimeError/ActiveStorage errors (FountainStaging), Rollbar RoutingError #80/#81 (FountainStagingBE), FirstProject production error #1054 (10x/5min). See Email section. |
@@ -304,6 +305,18 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 - ~~LeNH — needs reminder (0h, no leave)~~ → struck, LeNH has 8.58h (2 projects), no reminder needed/sent
 - LongVV — skip (leave covers it)
 - KhanhHH — **user requested reminder sent 10:21** despite 1.5h>0 (low, not 0h) — 🔴 **sent the wrong template first** ("0h logged" text, factually wrong — she logged 1.5h), caught immediately, sent a correction message right after with the real number. Both messages are now in the Matrix room `!rwLbvLBnrRAYMaOPaD:nustechnology.com`.
+
+### Workstream needs-review — full week (2026-07-06 to 2026-07-12), all projects except Fountain
+
+User asked whether this check was missing — it was in the raw data but hadn't been surfaced. Per skill: `reviewStatus=Pending` → ALERT addressed to the project's real `isReviewer`-flagged member(s), not the dev who logged the hours. Fountain excluded per standing instruction ("ignore, ko cần check Fountain").
+
+| Project | Reviewer(s) | Pending rows | Dev | Detail |
+|---------|-------------|---------------|-----|--------|
+| Portfolio - James Diamond | **PhucVT** | 4 | LeNH | 07-08: "Create Select Harvests employee account" (0:10), "Review PRs #560/#561" (0:20), "Dynamic Property Check-In Forms prototype" (6:00), "Testing/improve Library of Forms" (1:30) — 8h total pending review |
+| Radio Data Center | **LeNH** | 1 | KhanhHH | 07-06: "Setup and study project" (2:00) |
+| Crystal lang | **TienND** | 1 | PhucVT | 07-07: "Meta-Stamp project tasks" (9:00) |
+
+All 3 are genuinely unresolved (not stale from a prior report — this is a live pull from today's Workstream data). Addressed to reviewers, not the logging devs — PhucVT needs to review LeNH's James Diamond hours, LeNH needs to review KhanhHH's Radio Data Center hours, TienND needs to review PhucVT's Crystal lang hours.
 
 ### Maddy / Aysar / Bailey — re-verified, still genuinely open
 Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutoff (window: 06:55→08:37, ~1h40m) — **0 new messages** in all three (not stale data, no auth issue). Maddy stays open for the PR backlog (unrelated to Kai's absence). Aysar stays open for the unanswered customer bug report only — the MPDM "no update" is not a real gap (checked Workstream baamboozle project + dedicated Aysar sheet: 0h Jul 7-8, only Jul 6 had KhanhHH 4h; Upwork Aysar workroom has no task log, messages only — no evidence of any Aysar work happening those 2 days, so nothing for Carrick to report). Bailey stays open for Nick's #maintenance report.
