@@ -335,23 +335,57 @@ Carrick session refreshed successfully (`upwork-login.js --login`, already authe
 
 ## Performance (New Relic APM) — 09:40 (+07:00)
 
-**User asked "where's the performance report I added yesterday?"** — this piece isn't part of the automated Full Run yet (informational-only, no Trello gate), so it doesn't auto-appear unless run explicitly. Running it now since asked.
+**Now a standard piece of every Full Run + cron run going forward (confirmed by user 2026-07-09), both projects, with full error/slow-transaction detail every time — not just on request.**
 
 | Project | Apdex | Avg response | Errors | Throughput |
 |---------|-------|--------------|--------|------------|
-| OhCleo (prod) | 0.93 ✓ | 972ms | 393/24645 (1.6%) — mostly `NotAuthenticated` (349, benign public-endpoint noise) | 21.4/min |
+| OhCleo (prod) | 0.93 ✓ | 972ms | 393/24645 (1.6%) | 21.4/min |
+| MPFC | 🔴 0.54 (poor, <0.7) | 1214ms | 18/29977 (0.06%, low) | 26.1/min |
 
-**OhCleo:** Yesterday's `password_reset_code_expires_at` DB migration error (ALERT from Jul 8 report) is **GONE today — fixed**. But the 3 slow endpoints flagged Jul 8 are **still slow, unaddressed**: MediaRecommendsView 20.0s (506 calls), HomeMediasView 18.0s (376 calls), MediaByKeyView 11.3s (292 calls) — same backend bottleneck, 2nd day running.
+**OhCleo — top errors (7 types, 393 total):**
+| Error | Count |
+|-------|-------|
+| `NotAuthenticated` — "Authentication credentials were not provided" | 349 (benign, public endpoint) |
+| `AuthenticationFailed` — "User does not exist!" | 25 |
+| `InvalidToken` — token expired | 7 |
+| `AuthenticationFailed` — "Passwords don't match!" | 5 |
+| `ValidationError` — email already exists | 4 |
+| `ValidationError` — email+username already exist | 2 |
+| `ValidationError` — username already exists | 1 |
 
-| MPFC | 🔴 **0.54 (poor, <0.7)** | 1214ms | 18/29977 (0.06%, low) | 26.1/min |
+**OhCleo — slowest transactions (2nd day running, still unaddressed):**
+| Endpoint | Avg | Calls |
+|----------|-----|-------|
+| `MediaRecommendsView.get` | 20.0s | 506 |
+| `HomeMediasView.get` | 18.0s | 377 |
+| `MediaByKeyView.get` | 11.3s | 292 |
+| `OnboardingMediasView.post` | 5.7s | 1 |
+| `MultiCategoryMediaView.get` | 5.5s | 1 |
 
-**🔴 MPFC — real issues found:**
-1. **SQL injection probe on `/search/`** — top 3 slowest transactions (12-14s) are heavily URL-encoded `WAITFOR DELAY '0:0:15'` payloads — a classic time-based blind SQLi scanner hitting the search endpoint. Response times suggest requests are hanging near the injected delay. Needs WAF/input-sanitization check on the search route.
-2. **JSON API plugin broken**: `Call to undefined method JSON_API_User_controller::error()` (9x) in `wp-content/plugins/json-api/singletons/api.php:59` — real code error, not user-caused.
-3. **DB connection resolution failures**: `mysqli_real_connect(): getaddrinfo failed` (3x) — transient infra DNS issue, worth monitoring if it recurs.
-4. Apdex 0.54 is driven by the above slow transactions dragging response-time distribution into "tolerating," not by error volume (errors are low).
+Yesterday's `password_reset_code_expires_at` DB migration error is **GONE today — fixed**. The 3 slow endpoints above are unchanged from Jul-8, still real, still unaddressed.
 
-**Not yet added to Trello** — no checklist item exists for Performance yet (per skill, ask user whether to add one once stable). Recommend adding "MPFC — investigate SQLi probe + JSON API error" as an action item regardless of Trello wiring.
+**🔴 MPFC — top errors (7 types, 18 total):**
+| Error | Count | Detail |
+|-------|-------|--------|
+| `Error` — undefined method | 9 | `JSON_API_User_controller::error()` at `json-api/singletons/api.php:59` — real code bug |
+| `E_WARNING` — DNS resolve fail | 3 | `mysqli_real_connect(): getaddrinfo failed` — transient infra |
+| `E_WARNING` — continue/break | 2 | Code style warning, harmless |
+| `E_WARNING` — DB connect no such file | 1 | Same DNS issue as above |
+| `Error` — undefined function `get_header()` | 2 (2 different themes) | Broken 404 template |
+| `Error` — class `MM_Event` not found | 1 | `pfc7/functions.php:3738` |
+
+**🔴 MPFC — slowest transactions, SQL injection scanner confirmed:**
+| Endpoint | Avg | Note |
+|----------|-----|------|
+| `sitemap_index.xml` | 50.1s | Unusually slow, worth checking sitemap size/crawl load |
+| `/search/...WAITFOR DELAY '0:0:15'...` (heavily URL-encoded) | 13.7s | **SQL injection probe** — time-based blind SQLi payload |
+| `/search/...WAITFOR DELAY...` (variant) | 12.5s | Same scanner |
+| `/search/...WAITFOR DELAY...` (variant) | 12.2s | Same scanner |
+| `/feed/` | 11.5s | Possibly same scan burst |
+
+Apdex 0.54 is driven by these slow transactions dragging the response-time distribution into "tolerating," not by error volume (errors are low, 0.06%). **Recommend:** WAF or input sanitization on `/search/` — this is automated scanner traffic, not real users.
+
+**Not yet added to Trello** — no checklist item exists for Performance yet (ask user whether to add one once this piece has run a few more cycles). Recommend "MPFC — investigate SQLi probe + JSON API error" as a manual action item regardless of Trello wiring.
 
 ---
 
