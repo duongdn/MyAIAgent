@@ -16,7 +16,7 @@
 | 🟡 MED | **GGS/Bailey — no maintenance report** | Nick active in #général but no formal #maintenance report; Amy follow-up questions unanswered |
 | 🟡 MED | **PhucVT — 0h Jul 8** | No leave on record; real, confirmed via isolated single-dev rescan too. Blocks James Diamond/Vinn. Reminder sent. |
 | ~~🟡 MED~~ | ~~**TuanNT — 0h Jul 8**~~ | ~~No leave on record; real (confirmed across all 5 sheets + Workstream). Blocks John Yi + Rebecca items.~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on the Paturevision/Bailey sheet — combined multi-dev scan silently missed it (known recurring bug). John Yi + Rebecca re-completed.** |
-| ~~🟡 MED~~ | ~~**LeNH — 0h Jul 8**~~ | ~~No leave on record; real. Reminder queued (print-only, not sent).~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on Peptide Clyde/Blair Brown (Workstream) — same combined-scan bug. No reminder sent.** |
+| ~~🟡 MED~~ | ~~**LeNH — 0h Jul 8**~~ | ~~No leave on record; real. Reminder queued (print-only, not sent).~~ → **WRONG, struck. CORRECTED AGAIN 10:15 (user: "LeNH: wrong, check again") — real total is 8.58h across TWO projects: Portfolio-James Diamond 8h + Peptide Clyde 0.58h (my first correction mislabeled it as "8h on Peptide Clyde" — wrong project attribution). Verified via isolated rescan + full unfiltered all-20-project dump, both agree. No reminder sent.** |
 | 🔴 HIGH | **rick@ — Fountain production alerts missed** | Email scan ran a stale dated script, reported false "0 new". Real: BugSnag SocketError/RuntimeError/ActiveStorage errors (FountainStaging), Rollbar RoutingError #80/#81 (FountainStagingBE), FirstProject production error #1054 (10x/5min). See Email section. |
 | 🟡 MED | **vuongtrancr@ — Swish "Signal lost" alerts missed** | Same stale-script bug. 4x New Relic "Signal lost 10 min" (Low App Throughput) Jul 8 13:53-21:02 + Rollbar daily summary. |
 | 🔴 HIGH | **MPFC — SQL injection probe on /search/** | Slowest transactions (12-14s) are `WAITFOR DELAY '0:0:15'` payloads on `/search/` — automated SQLi scanner. Apdex dropped to 0.54 (poor, <0.7 threshold). |
@@ -162,7 +162,7 @@ Trello: James Diamond (Vinn) ✓ complete. Andrew Taraba ✓ complete.
 ~~| KhanhHH | 0h | unavailable | Leave request pending (unapproved) |~~
 ~~| LeNH | 0h | unavailable | Check WS manually |~~
 
-→ **This whole table was a placeholder (Workstream login just failed in cron, not actually unavailable). Real, verified numbers — after fixing login AND after catching a 2nd combined-scan bug that missed TuanNT/LeNH's actual hours — are in the "Re-check" section further down: LongVV 4h (leave), PhucVT 0h (real, reminder sent), TuanNT 8h (Paturevision), KhanhHH 1.5h, LeNH 8h (Peptide Clyde). Do not read this table as current.**
+→ **This whole table was a placeholder (Workstream login just failed in cron, not actually unavailable). Real, verified numbers — after fixing login AND after catching a 2nd combined-scan bug that missed TuanNT/LeNH's actual hours — are in the "Re-check" section further down: LongVV 4h (leave), PhucVT 0h (real, reminder sent), TuanNT 8h (Paturevision), KhanhHH 1.5h (2 projects: Peptide Clyde + ETZ-Wathaga), LeNH 8.58h (2 projects: Portfolio-James Diamond 8h + Peptide Clyde 0.58h). Do not read this table as current.**
 
 **VietPH**: Resigned 2026-06-30 — not scanned.
 
@@ -253,7 +253,7 @@ Trello: Elena-SamGuard ✓ complete. Elena-WordPress ✓ complete.
 ~~- **LeNH** — 0h (Workstream unavailable)~~
 ~~**No reminders sent** (no `--send-reminder` flag; Workstream unavailable = likely false alerts).~~
 
-→ **Real outcome after 2 rounds of recheck: LongVV OK (leave), PhucVT genuinely 0h (reminder SENT via Matrix), TuanNT 8h (no reminder, combined-scan bug), KhanhHH 1.5h (no reminder), LeNH 8h (no reminder, combined-scan bug). Only PhucVT got a message.**
+→ **Real outcome after 3 rounds of recheck: LongVV OK (leave), PhucVT genuinely 0h (reminder SENT via Matrix), TuanNT 8h (no reminder, combined-scan bug), KhanhHH 1.5h across 2 projects (no reminder), LeNH 8.58h across 2 projects (no reminder, combined-scan bug + a project-attribution error on my first correction, both now fixed). Only PhucVT got a message.**
 
 ---
 
@@ -288,8 +288,8 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 | LongVV | 0h | OhCleo 4h | 4h | **Half-day AM leave (father's surgery, pending approval)** | ✓ OK — leave covers AM, PM logged |
 | PhucVT | 0h | 0h (Crystal lang last logged Jul 7: 9h) | **0h** | None found | ⚠️ **ALERT — 0h, no leave** (confirmed twice: combined scan + isolated single-dev rescan, both 0h) |
 | ~~TuanNT~~ | ~~0h (all 5 sheets)~~ | ~~0h~~ | ~~**0h**~~ | ~~None found~~ | ~~⚠️ **ALERT — 0h, no leave**~~ → **WRONG, struck (09:20, user caught): isolated single-dev rescan found 8h on the Paturevision/Bailey sheet — the combined 5-dev scan silently missed it. Real total = 8h. Not an alert.** (Scrin.io's 8h18m is separately unrelated — belongs to Nick/Global Grazing with no project tag, never conflate with TuanNT) |
-| KhanhHH | 0h | Peptide Clyde 0.25h + ETZ-Wathaga 1.25h | 1.5h | Pending leave is for **Jul 9** (today), not Jul 8 | Low but not 0h — doesn't meet KhanhHH's 0h-alert bar. Confirmed via isolated rescan too (same 1.5h), not a combined-scan miss this time. |
-| ~~LeNH~~ | ~~0h~~ | ~~0h (James Diamond last logged Jul 7: 8h)~~ | ~~**0h**~~ | ~~None found~~ | ~~⚠️ **ALERT — 0h, no leave**~~ → **WRONG, struck (09:20, user caught): isolated single-dev rescan found 8h on Peptide Clyde/Blair Brown (Workstream) — same combined-scan miss bug as TuanNT. Real total = 8h. Not an alert.** |
+| KhanhHH | 0h | Peptide Clyde 0.25h + ETZ-Wathaga 1.25h | **1.5h across 2 projects** | Pending leave is for **Jul 9** (today), not Jul 8 | Confirmed 3x: combined scan, isolated rescan, AND full unfiltered 20-project dump — all agree on 1.5h. Working multiple small-allocation projects that day, correctly reflects a busy-but-fragmented day, not a shortfall. One project bucket ("Others") returns HTTP 403 for everyone, can't rule out hours there but that's a platform-wide gap, not KhanhHH-specific. |
+| ~~LeNH~~ | ~~0h~~ | ~~0h (James Diamond last logged Jul 7: 8h)~~ | ~~**0h**~~ | ~~None found~~ | ~~⚠️ **ALERT — 0h, no leave**~~ → **WRONG, struck TWICE now. 1st correction (09:20) said "8h on Peptide Clyde" — also wrong, mislabeled the project. 2nd correction (10:15, user: "LeNH: wrong, check again"): real total is 8.58h across TWO projects — Portfolio-James Diamond 8h + Peptide Clyde 0.58h. Verified via isolated rescan + full unfiltered 20-project dump, both agree. Not an alert.** |
 
 **🔴 Root cause note:** the 5-dev combined `sheets-tasklog-scan.js` call silently dropped TuanNT's Paturevision entry and LeNH's Peptide Clyde entry — both only surfaced when each dev was rescanned alone. This is the same "multi-dev combined scan misses hours" bug already documented in memory (feedback_check_workstream_before_flagging_shortfall) — from now on, ANY dev showing 0h in a combined scan must get an isolated single-dev rescan before being written into the report as an alert.
 
@@ -301,7 +301,7 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 **Reminders (print-only unless noted):**
 - PhucVT — needs reminder (0h, no leave, confirmed twice) — **sent per user request**
 - ~~TuanNT — needs reminder (0h, no leave)~~ → struck, TuanNT has 8h, no reminder needed
-- ~~LeNH — needs reminder (0h, no leave)~~ → struck, LeNH has 8h, no reminder needed/sent
+- ~~LeNH — needs reminder (0h, no leave)~~ → struck, LeNH has 8.58h (2 projects), no reminder needed/sent
 - LongVV — skip (leave covers it)
 - KhanhHH — skip (1.5h > 0)
 
