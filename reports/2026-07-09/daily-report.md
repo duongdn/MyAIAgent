@@ -19,6 +19,7 @@
 | ~~🟡 MED~~ | ~~**LeNH — 0h Jul 8**~~ | ~~No leave on record; real. Reminder queued (print-only, not sent).~~ → **WRONG, struck (09:20 recheck): isolated single-dev scan found 8h on Peptide Clyde/Blair Brown (Workstream) — same combined-scan bug. No reminder sent.** |
 | 🔴 HIGH | **rick@ — Fountain production alerts missed** | Email scan ran a stale dated script, reported false "0 new". Real: BugSnag SocketError/RuntimeError/ActiveStorage errors (FountainStaging), Rollbar RoutingError #80/#81 (FountainStagingBE), FirstProject production error #1054 (10x/5min). See Email section. |
 | 🟡 MED | **vuongtrancr@ — Swish "Signal lost" alerts missed** | Same stale-script bug. 4x New Relic "Signal lost 10 min" (Low App Throughput) Jul 8 13:53-21:02 + Rollbar daily summary. |
+| 🔴 HIGH | **MPFC — SQL injection probe on /search/** | Slowest transactions (12-14s) are `WAITFOR DELAY '0:0:15'` payloads on `/search/` — automated SQLi scanner. Apdex dropped to 0.54 (poor, <0.7 threshold). |
 
 ---
 
@@ -332,4 +333,26 @@ Carrick session refreshed successfully (`upwork-login.js --login`, already authe
 
 ---
 
-*End of daily report — 2026-07-09T09:05:00+07 (recheck complete)*
+## Performance (New Relic APM) — 09:40 (+07:00)
+
+**User asked "where's the performance report I added yesterday?"** — this piece isn't part of the automated Full Run yet (informational-only, no Trello gate), so it doesn't auto-appear unless run explicitly. Running it now since asked.
+
+| Project | Apdex | Avg response | Errors | Throughput |
+|---------|-------|--------------|--------|------------|
+| OhCleo (prod) | 0.93 ✓ | 972ms | 393/24645 (1.6%) — mostly `NotAuthenticated` (349, benign public-endpoint noise) | 21.4/min |
+
+**OhCleo:** Yesterday's `password_reset_code_expires_at` DB migration error (ALERT from Jul 8 report) is **GONE today — fixed**. But the 3 slow endpoints flagged Jul 8 are **still slow, unaddressed**: MediaRecommendsView 20.0s (506 calls), HomeMediasView 18.0s (376 calls), MediaByKeyView 11.3s (292 calls) — same backend bottleneck, 2nd day running.
+
+| MPFC | 🔴 **0.54 (poor, <0.7)** | 1214ms | 18/29977 (0.06%, low) | 26.1/min |
+
+**🔴 MPFC — real issues found:**
+1. **SQL injection probe on `/search/`** — top 3 slowest transactions (12-14s) are heavily URL-encoded `WAITFOR DELAY '0:0:15'` payloads — a classic time-based blind SQLi scanner hitting the search endpoint. Response times suggest requests are hanging near the injected delay. Needs WAF/input-sanitization check on the search route.
+2. **JSON API plugin broken**: `Call to undefined method JSON_API_User_controller::error()` (9x) in `wp-content/plugins/json-api/singletons/api.php:59` — real code error, not user-caused.
+3. **DB connection resolution failures**: `mysqli_real_connect(): getaddrinfo failed` (3x) — transient infra DNS issue, worth monitoring if it recurs.
+4. Apdex 0.54 is driven by the above slow transactions dragging response-time distribution into "tolerating," not by error volume (errors are low).
+
+**Not yet added to Trello** — no checklist item exists for Performance yet (per skill, ask user whether to add one once stable). Recommend adding "MPFC — investigate SQLi probe + JSON API error" as an action item regardless of Trello wiring.
+
+---
+
+*End of daily report — 2026-07-09T09:40:00+07 (2nd recheck + Performance added)*
