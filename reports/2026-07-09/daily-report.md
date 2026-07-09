@@ -303,7 +303,7 @@ Ran `sheets-tasklog-scan.js 2026-07-08` (full 13-sheet + live 20-project Workstr
 - ~~TuanNT — needs reminder (0h, no leave)~~ → struck, TuanNT has 8h, no reminder needed
 - ~~LeNH — needs reminder (0h, no leave)~~ → struck, LeNH has 8.58h (2 projects), no reminder needed/sent
 - LongVV — skip (leave covers it)
-- KhanhHH — skip (1.5h > 0)
+- KhanhHH — **user requested reminder sent 10:21** despite 1.5h>0 (low, not 0h) — 🔴 **sent the wrong template first** ("0h logged" text, factually wrong — she logged 1.5h), caught immediately, sent a correction message right after with the real number. Both messages are now in the Matrix room `!rwLbvLBnrRAYMaOPaD:nustechnology.com`.
 
 ### Maddy / Aysar / Bailey — re-verified, still genuinely open
 Re-ran `search.messages` on Baamboozle, Xtreme, GGS since the cron's 06:55 cutoff (window: 06:55→08:37, ~1h40m) — **0 new messages** in all three (not stale data, no auth issue). Maddy stays open for the PR backlog (unrelated to Kai's absence). Aysar stays open for the unanswered customer bug report only — the MPDM "no update" is not a real gap (checked Workstream baamboozle project + dedicated Aysar sheet: 0h Jul 7-8, only Jul 6 had KhanhHH 4h; Upwork Aysar workroom has no task log, messages only — no evidence of any Aysar work happening those 2 days, so nothing for Carrick to report). Bailey stays open for Nick's #maintenance report.
