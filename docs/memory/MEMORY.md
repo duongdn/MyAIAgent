@@ -20,6 +20,7 @@
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 STANDING RULE 260707: EVERY project/source (Slack/Matrix/Discord/Email/Teams), EVERY command — unanswered direct customer ask = warning, read full msg not just "posted=clean"
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — 260708: decrypt-secrets.sh reverted a live-refreshed Matrix token to stale .enc; fixed via saveSecretConfig auto re-encrypt helper
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — 260708: MCP Drive OAuth expired → fallback to service account + Drive `files().export` (text/plain), works even though Slides API disabled
+- [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md) — 🔴 260709: NEVER use matrix-device-auth.js (URL+code); only visible DISPLAY=:1 browser script, user clicks directly
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
