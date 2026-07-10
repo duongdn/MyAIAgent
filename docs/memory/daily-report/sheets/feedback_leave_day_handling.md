@@ -63,3 +63,9 @@ Prior recurrence trail:
 5. Cross-check: the prose sentence about leave days must match the table number. If table says `−8h` but prose says "Fri leave excused", one of them is wrong.
 
 Related: [[feedback_longvv_hour_split]] (LongVV-specific 16h target), [[feedback_lenh_partial_hour_alert]] (sub-8h alert rule applies AFTER pro-rating).
+
+## 🔴 Always check leave-plan.json for the EXACT date, not just "today"
+
+**2026-07-10:** `config/leave-plan.json` had TWO separate KhanhHH entries: `khanhhh-2026-07-09` (full day, dentist/wisdom tooth removal) AND `khanhhh-2026-07-10` (full day, recovery) — both approved, both real. Report only surfaced the Jul-10 entry in the header ("Leave plan: KhanhHH — full-day remote/off 2026-07-10") and, when evaluating her Jul-9 0h separately (Sheets/Workstream section), described it as "mid-day dental appointment disruption" instead of checking leave-plan.json again for that date — which would have shown it was ALSO a full approved leave day, not a partial disruption. User caught it: "KhanhHH off 2 hôm nay mà!!!" (she's off 2 days!). This wrongly kept Aysar/Elliott Trello items flagged as "KhanhHH hours unverified" when her 0h both days was fully explained.
+
+**Rule:** when explaining ANY dev's 0h/shortfall for a specific date, re-check `config/leave-plan.json` for THAT exact date (grep by dev_id + date, not just whatever leave was mentioned in the report header or inferred from a Matrix message). A dev can have multiple, separate leave-plan entries covering consecutive days — each needs its own lookup, don't assume "today's leave line" is the only one relevant.
