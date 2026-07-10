@@ -21,3 +21,10 @@ samguard.co's Content-Security-Policy is set by the WordPress plugin **"Headers 
 4. **Do not apply the SQL UPDATE without asking the user first** — this is a live production security-header change, even though it's just a domain whitelist addition. Present the exact before/after value and let the user decide.
 
 **2026-06-18 incident:** `connect-src` was missing `https://ad.doubleclick.net` (Google Ads remarketing collect call), causing real CSP violations. User chose to leave it documented rather than auto-apply the fix.
+
+**2026-07-10 confirmed hard blocker (not just "ask first" caution):** even with explicit user authorization to fix internal issues directly, this CANNOT currently be applied by the agent — verified live:
+- SSH user `nustech` on `samguard.co` is NOT in the `www-data` group; `.htaccess` is `rw-rw-r-- www-data:www-data` → no write access.
+- `sudo -n` fails ("a password is required") — no stored sudo password anywhere in `config/`.
+- No wp-admin login credentials stored anywhere in `config/` to automate the fix via browser.
+- A raw SQL `UPDATE` on `wp_options.hsts_csp` changes the DB but does NOT rewrite `.htaccess` (only the plugin's own `update_option` hook does that, which only fires on a real wp-admin settings-page save) — so a direct DB edit would silently NOT fix the live served header even though it looks fixed in the DB.
+**To actually unblock:** need either wp-admin credentials for samguard.co, or the `nustech` sudo password, or add `nustech` to the `www-data` group. Until one of those exists, treat any samguard.co CSP violation as reportable-only, not agent-fixable.

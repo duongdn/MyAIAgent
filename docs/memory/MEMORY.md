@@ -23,9 +23,11 @@
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 expired session→visible DISPLAY=:1 retry only, never device-code/passive text; unresolved=ALERT
 - [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — correcting a report after feedback = strikethrough wrong text + correction, never silent delete
 - [feedback_reminder_template_content_must_match_data](global/feedback_reminder_template_content_must_match_data.md) — 🔴 check message TEXT against verified number before sending, never reuse a "0h" template for a nonzero figure
+- [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md) — 🔴 agent-fixable technical alerts (our code/infra) → fix directly, don't just re-report; external/human-only blockers → document exact missing credential
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
+- [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md) — OhCleo: zero server access, Tony's own infra, Slack DM only
 - [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md) — recheck fills BLOCKED; Mon=Fri 8AM
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md), [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md) — our issues=alerts; missing report=alert unless leave
 

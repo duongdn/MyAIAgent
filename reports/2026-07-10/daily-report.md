@@ -310,3 +310,24 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 
 **Cleared:** Precognize check, Workstream access.
 **Still open:** Maddy, John Yi, Bailey, Rebecca, Aysar, Elliott, James Diamond, MPFC, Ohcleo, Fountain, Philip, Elena-WordPress, Blair Brown, Check Mail (5 Zoho accounts) — all genuine unresolved blockers/unanswered items, not re-flagged as new alerts beyond what's already listed above.
+
+---
+
+## Internal issue fixes — 08:58 (+07:00)
+
+User asked to fix internal (our-side) issues directly, not just report them. Went through the technical Alerts and fixed what was actually within our access; the rest are blocked by missing credentials, documented below so they don't get re-investigated from scratch next time.
+
+**✅ FIXED — MPFC `db-config.php` fatal error (Alert #8):**
+- Root cause: `/var/www/mypersonalfootballcoach.com/db-config.php` had no `ABSPATH` guard, so it was directly web-accessible (`curl https://mypersonalfootballcoach.com/db-config.php` → HTTP 500). When hit directly (by vulnerability scanners per the New Relic slow-transaction list), `$wpdb` isn't the real HyperDB object, so `$wpdb->add_database()` fatals with `Call to undefined method stdClass::add_database()` — this was both the recorded PHP fatal AND an unrelated security exposure (public access to a DB-topology config file).
+- Fix applied: added `if (!defined("ABSPATH")) { exit; }` as line 2 of the file (standard WP direct-access guard). Backed up original to `/root/backups/db-config.php.bak-202607100856` on `mpfc.live` (moved out of web root, not left as a downloadable `.bak`).
+- Verified: `db-config.php` direct request now returns 200/empty body (silently exits) instead of 500. Homepage still 200, site unaffected.
+
+**❌ BLOCKED — Elena WordPress CSP violation (Alert #9, `region1.google-analytics.com`):**
+- Confirmed exact fix needed: add `https://region1.google-analytics.com` to the `connect-src` directive (current live policy read directly from `wp_samguard.wp_options.hsts_csp` via SSH).
+- Cannot apply: a raw SQL `UPDATE` on the DB value would NOT rewrite `.htaccess` (the plugin only does that inside its own `update_option` hook, which only fires via the wp-admin settings-page save, not a direct DB write). The SSH user (`nustech`) is not in the `www-data` group and `.htaccess` is `rw-rw-r-- www-data:www-data` — no write access. `sudo` requires a password we don't have (`sudo -n` fails). No wp-admin login credentials are stored anywhere in `config/`.
+- **What's needed to unblock:** either (a) wp-admin username/password for samguard.co so this can be automated via browser, or (b) the `nustech` sudo password / adding `nustech` to the `www-data` group.
+
+**❌ BLOCKED — OhCleo `cached_relevance_score` DB column (Alert #7):**
+- Cannot investigate or fix directly — this repo has zero server/SSH/DB access to OhCleo's infrastructure (no host in `~/.ssh/config`, no config file in `config/`). OhCleo is Tony's (LongVV's) own codebase/deployment; our only channel is the Slack DM with Celine (Piece 12).
+- This is very likely from the same track-ranking work Tony logged earlier ("Fix track ranking, replace likes only sorting with a relevance score" — Trello card #299) — the code references `app_media.cached_relevance_score` but the migration adding that column apparently wasn't run on production.
+- **What's needed to unblock:** not fixable by us at all — needs a message to Tony/LongVV via the OhCleo Slack DM flagging the missing migration. Did not send this without asking first (see [[feedback_never_send_messages_without_permission]]) — say the word and I'll send it.
