@@ -8,8 +8,8 @@ const allAccounts = require("../config/.email-accounts.json").accounts;
 const accounts = allAccounts.filter(a => !a.gmail_api);
 const gmailApiAccounts = allAccounts.filter(a => a.gmail_api);
 
-const WINDOW_START = new Date("2026-07-04T05:22:00+07:00");
-const IMAP_SINCE = "3-Jul-2026"; // day before window start (server calendar date)
+const WINDOW_START = new Date("2026-07-09T09:05:00+07:00");
+const IMAP_SINCE = "8-Jul-2026"; // day before window start (server calendar date)
 
 const ALERT_KEYWORDS = [
   "alert", "error", "fail", "down", "urgent", "warning", "critical",
