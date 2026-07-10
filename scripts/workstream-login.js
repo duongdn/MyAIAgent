@@ -101,8 +101,8 @@ async function main() {
   console.log('[workstream-login] Navigating to', BASE_URL);
   await page.goto(BASE_URL, { waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
 
-  // Wait up to 60s for SSO auto-login to complete and API calls to fire
-  const deadline = Date.now() + 60000;
+  // Wait up to 5 minutes for SSO auto-login (or manual credential entry) to complete and API calls to fire
+  const deadline = Date.now() + 300000;
   while (!capturedToken && Date.now() < deadline) {
     await new Promise(r => setTimeout(r, 1000));
     // Trigger an API call to force token emission
