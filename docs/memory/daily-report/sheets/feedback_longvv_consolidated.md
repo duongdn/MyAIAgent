@@ -12,8 +12,9 @@ metadata:
 **How to apply going forward:**
 1. LongVV = "Tony" in the OhCleo Slack workspace (see Piece 12 member table) — his daily report there is the primary check now, same as any other full-time dev.
 2. Treat like a normal 40h/wk dev: 0h on a working day with no leave note = genuine flag (same as ViTHT/Fountain devs), NOT automatically dismissible.
-3. Still need to confirm: does he log hours to the Workstream "OhCleo" project under his real name, or only post Slack daily reports? (Scan on 2026-07-07 for Jul 6 found 0h under both "LongVV" and "Tony" in Workstream/Sheets despite Tony's Slack daily report being present — this needs direct clarification, don't assume either way.)
-4. Reminders for LongVV still go to his direct room `!mYZBGNoLFVpMVIJtPu:nustechnology.com` (unchanged).
+3. **RESOLVED (weekly report, 2026-07-10):** he does log to Workstream OhCleo under his real name "LongVV" — confirmed via `workstream-fetch-project-week.js`, W34 (Jul6-10) shows LongVV 12h there (Jul7:8h, Jul8:4h). The Jul 6 0h in the original 2026-07-07 finding was just a same-day lag, not a tracking-location gap.
+4. **Open question (2026-07-10 weekly report):** he's still also logging Maddy (16h) and James Diamond flex (8h) in the same week as OhCleo (12h) — combined 36h, under the 40h nominal target either way, but unclear whether the 40h target is meant to be OhCleo-only or combined-across-all-projects. Needs a direct answer before calling future weeks short/OK with confidence.
+5. Reminders for LongVV still go to his direct room `!mYZBGNoLFVpMVIJtPu:nustechnology.com` (unchanged).
 
 ---
 

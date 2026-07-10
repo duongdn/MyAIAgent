@@ -16,8 +16,9 @@
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
-    "last_run": "2026-07-04T10:40:00+07:00",
-    "output_file": "reports/2026-07-04/weekly-monitor.md"
+    "last_run": "2026-07-10T22:20:00+07:00",
+    "output_file": "reports/2026-07-10/weekly-monitor.md",
+    "note": "W34 (Jul6-10). Matrix report DRAFTED not sent (config/.weekly-report-send-flags.json confirmed:false) — awaiting user confirmation given PhucVT full week off James Diamond (reassigned to Crystal lang/Arthur crunch) and LongVV's confirmed full-time-OhCleo status change."
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
