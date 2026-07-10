@@ -135,6 +135,7 @@
 - [feedback_news_digest_ai_underused_sources](news-digest/feedback_news_digest_ai_underused_sources.md), [feedback_news_digest_use_actual_links](news-digest/feedback_news_digest_use_actual_links.md), [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md) — sample ALL sources
 - [feedback_news_digest_dedup_rule](news-digest/feedback_news_digest_dedup_rule.md) — cap URL at 2 appearances
 - [feedback_facebook_scraper_missing_x_display](news-digest/feedback_facebook_scraper_missing_x_display.md) — crash root cause: no live Xvfb, fixed w/ self-start fallback
+- [feedback_facebook_scraper_chrome_path_drift](news-digest/feedback_facebook_scraper_chrome_path_drift.md) — 🔴 hardcoded `/opt/google/chrome/chrome` no longer exists, use `/usr/bin/google-chrome` fallback (260711)
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md) — never cleanup/VACUUM FULL w/o confirmation

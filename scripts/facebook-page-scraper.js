@@ -244,7 +244,7 @@ async function run() {
   const ownXvfb = LOGIN_MODE ? null : await ensureDisplay();
 
   const browser = await puppeteer.launch({
-    executablePath: '/opt/google/chrome/chrome',
+    executablePath: fs.existsSync('/opt/google/chrome/chrome') ? '/opt/google/chrome/chrome' : '/usr/bin/google-chrome',
     headless: false, // xvfb provides the virtual display; Chrome must stay headless:false
     args: [
       `--user-data-dir=${FB_PROFILE_DIR}`,
