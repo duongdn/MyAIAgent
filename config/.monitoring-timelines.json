@@ -207,14 +207,15 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-07-03T02:06:00Z",
-    "output_file": "reports/2026-07-03/0902-server-monitor.md",
+    "last_run": "2026-07-10T02:34:00Z",
+    "output_file": "reports/2026-07-10/0934-server-monitor.md",
     "last_status": "partial",
     "caveats": [
-      "Bailey/Siteground session expired, needs manual --login (visible browser) — asked user, no response, left Trello item incomplete",
-      "Fountain staging disk 81% + swap 35% used (CRITICAL) — needs investigation",
-      "nc_staging no swap configured",
-      "Rory: ~5.7G deletable error_logs/zip backups identified, not removed (needs confirmation per safety rule)"
+      "Bailey/Siteground CAPTCHA-blocked again (confirmed via visible DISPLAY=:1 browser retry, login_timeout) — same known unsolvable-headlessly issue, left Trello item incomplete",
+      "Fountain staging disk 86% CRITICAL (worse than 81% on 07-03) + swap 17.7% WARNING — breakdown done, ~5.6G reclaimable (pm2 log 555M, 2 SQL dumps 1.39G, journal 3.7G), needs confirmation to clean up",
+      "Elena samguard.co swap 22% WARNING (new this run)",
+      "nc_staging still no swap configured",
+      "Rory: ~5.7G deletable error_logs/zip backups still identified, not removed (needs confirmation per safety rule, unchanged since 07-03)"
     ]
   },
   "bailey_monitor": {
