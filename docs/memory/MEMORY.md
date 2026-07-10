@@ -24,6 +24,7 @@
 - [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — correcting a report after feedback = strikethrough wrong text + correction, never silent delete
 - [feedback_reminder_template_content_must_match_data](global/feedback_reminder_template_content_must_match_data.md) — 🔴 check message TEXT against verified number before sending, never reuse a "0h" template for a nonzero figure
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md) — 🔴 agent-fixable technical alerts (our code/infra) → fix directly, don't just re-report; external/human-only blockers → document exact missing credential
+- [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴 N accounts fail at once → check `git log` on the config first, don't assume provider-side expiry (260710: 5 Zoho "invalid creds" was actually our own bad commit)
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs

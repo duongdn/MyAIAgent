@@ -14,8 +14,8 @@
 | 2 | Slack (Xtreme/Maddy) | Madhuraka asked Kai for an API-upgrade cost estimate (Jul9 19:35) — still unanswered ~11h later. |
 | 3 | Trello (Fountain board) | Kunal (kunalsheth) posted 2 direct asks — "please fix this and push live asap" (scheduled-delivery bug, 21:17) and a Gift-of-Choice cart-behavior question (01:57) — both still unanswered on the board. |
 | 4 | Slack (OhCleo DM) | Tony flagged a real Google Play Console warning: developer profile + all apps will be **removed Aug 2, 2026** — org name/address no longer verified. Unanswered. |
-| 5 | Email (5 Zoho accounts) | carrick@, nick@, rick@, kai@, ken@ all return `Invalid credentials` on IMAP login — genuine password issue (not fixable by agent), same class as the ken@ incident on 2026-07-03. Needs new Zoho app passwords. |
-| 6 | Email (config gap) | davidztv19@gmail.com (Arthur/Meta-Stamp monitoring account) is **completely missing** from `config/.email-accounts.json` — was added 2026-07-06 per memory but is gone from both the working tree and the last committed `.enc`. Needs re-adding (app password re-entry). |
+| 5 | ~~Email (5 Zoho accounts) carrick@, nick@, rick@, kai@, ken@ all return `Invalid credentials` on IMAP login — genuine password issue (not fixable by agent), same class as the ken@ incident on 2026-07-03. Needs new Zoho app passwords.~~ | **CORRECTED 09:14:** this was WRONG — not a Zoho-side credential issue at all. Git archaeology found commit `2c8240f` (2026-07-09 22:38+07, ~8.5h before this morning's cron) silently overwrote all 5 accounts' `app_password` in `config/.email-accounts.json` with different, non-working values. The pre-22:38 passwords were tested live and still work perfectly. Restored the correct passwords (commit `d2811cb`), verified all 5 accounts authenticate now. Root cause of the *change itself* not fully reconstructed (no session log found for that exact timestamp beyond a Matrix scan), flagging as a real process gap — see [[feedback_verify_config_history_before_blaming_external_credential]]. |
+| 6 | ~~Email (config gap) davidztv19@gmail.com (Arthur/Meta-Stamp monitoring account) is completely missing from `config/.email-accounts.json`~~ | **CORRECTED 09:14:** same commit (`2c8240f`) dropped this account entirely. Re-added from the pre-22:38 version (app password unchanged), verified live IMAP login works. Fixed in commit `d2811cb`. |
 | 7 | New Relic (OhCleo) | New production DB error: `column app_media.cached_relevance_score does not exist` — 36 occurrences, not seen in prior reports. |
 | 8 | New Relic (MPFC) | Apdex dropped to **0.52** (poor). Slowest "transactions" are vulnerability-scanner probes (`.env.php.swm`, `cfgs.php`, `gebase.php69`) taking 400–600s each — security scanning activity, not a real app bug, but dragging the score down. Also one new real PHP fatal: `Call to undefined method stdClass::add_database()` in `db-config.php:284`. |
 | 9 | Elena WordPress (samguard.co) | New CSP violation: `region1.google-analytics.com` (GA4 regional endpoint) blocked by `connect-src` — same class as the earlier doubleclick.net gap, needs wp-admin fix decision. |
@@ -44,7 +44,7 @@
 
 Zoho calendar: only duongdn@ reachable (0 events today); the other 5 Zoho accounts share the same broken app-password issue as their IMAP login, so calendar also unreachable for them. Gmail accounts have no Zoho calendar (expected).
 
-Trello: DuongDn ✓ complete. Carrick/Rick/Kai/Ken/Nick ⚠️ left incomplete — genuine IMAP fetch failure (invalid credentials), not a content issue.
+Trello: DuongDn ✓ complete. Carrick/Rick/Kai/Ken/Nick ⚠️ left incomplete — genuine IMAP fetch failure (invalid credentials), not a content issue. **UPDATE 09:14: all 5 marked ✓ complete after root-cause fix (see Alert #5 correction), Check Mail card now fully done.**
 
 ---
 
@@ -275,10 +275,10 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 ## Unresolved questions
 
 1. Was the "Google Account was recovered successfully" + "Security alert" email on dnduongus@gmail.com you? (Alert #6 note — flagging just in case.)
-2. davidztv19@gmail.com needs its app password re-entered into `config/.email-accounts.json` — it's fully missing, not just misconfigured.
-3. Zoho app passwords needed for carrick@, nick@, rick@, kai@, ken@ — all 5 broke simultaneously, worth checking if something changed on the Zoho admin side.
+2. ~~davidztv19@gmail.com needs its app password re-entered~~ RESOLVED 09:14 — was config corruption, not a real gap, see Alert #6 correction.
+3. ~~Zoho app passwords needed for carrick@, nick@, rick@, kai@, ken@~~ RESOLVED 09:14 — was config corruption (commit `2c8240f`, not Zoho-side), see Alert #5 correction. **Still open: what actually wrote the wrong passwords at 2026-07-09 22:38 — no session log found for that exact timestamp beyond an unrelated Matrix room scan. Worth checking if a session was running unattended around then.**
 4. Workstream needs one human SSO login (visible browser, DISPLAY :1) before dev hours can be trusted again — this blocked 6 Trello items this run.
-5. `gh auth login` needed for `nuscarrick` and `nusken` GitHub accounts in this environment (currently only `duongdn` + `mypersonalfootballcoach` are authenticated) — blocks Baamboozle/Bizurk issue checks and Precognize PR checks.
+5. `gh auth login` needed for `nuscarrick` and `nusken` GitHub accounts in this environment (currently only `duongdn` + `mypersonalfootballcoach` are authenticated) — blocks Baamboozle/Bizurk issue checks and Precognize PR checks. (Note: both were unexpectedly authenticated during the 08:39 recheck, may be transient in this environment.)
 
 ---
 
