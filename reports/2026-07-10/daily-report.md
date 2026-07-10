@@ -279,3 +279,34 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 3. Zoho app passwords needed for carrick@, nick@, rick@, kai@, ken@ — all 5 broke simultaneously, worth checking if something changed on the Zoho admin side.
 4. Workstream needs one human SSO login (visible browser, DISPLAY :1) before dev hours can be trusted again — this blocked 6 Trello items this run.
 5. `gh auth login` needed for `nuscarrick` and `nusken` GitHub accounts in this environment (currently only `duongdn` + `mypersonalfootballcoach` are authenticated) — blocks Baamboozle/Bizurk issue checks and Precognize PR checks.
+
+---
+
+## Re-check — 08:39 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Precognize (nusken) | ✓ resolved | `nusken` GitHub now authenticated (was missing at cron time) — 0 open PRs → clean, no action needed |
+| Workstream access | ✓ resolved | SSO restored, full project data now readable |
+| Maddy (Xtreme) | ○ still incomplete | Madhuraka's 19:35 Jul9 estimate ask still unanswered ~13h later; Kai online this morning (08:34 "Are you there?") but addressed to anomawasala, not Madhuraka |
+| John Yi / Bailey / Rebecca (TuanNT gate) | ○ still incomplete | Workstream now confirms TuanNT = 0h logged Jul9 (matches sheets) — same as cron finding, not a new alert (see standing Matrix-confirmed-real-work caveat), but hours still not logged so gate stays open |
+| Aysar | ○ still incomplete | Baamboozle MPDM (C07SQ4HAUHZ) still silent — now 5 days since last post (Jul 6), one day longer than at cron time. KhanhHH Workstream = 0h Jul9 (matches sheets) |
+| Elliott | ○ still incomplete | Slack Generator quiet (no alert) but KhanhHH Workstream = 0h Jul9, same as Aysar above |
+| James Diamond (Discord) | ○ still incomplete | Retried `discord-token-refresh.js` (DISPLAY=:1) for nusvinn — still lands on login page, token extraction failed again. Genuine blocker, needs human sign-in |
+| MPFC | ○ still incomplete | 0 new Slack messages since Jul8 — customer's notification complaint still unanswered |
+| Ohcleo | ○ still incomplete | 0 new OhCleo Slack messages since cron run — Google Play Console removal warning (Alert #4) still unanswered |
+| Fountain | ○ still incomplete | Checked Trello board comments directly — both kunalsheth asks (14:17 "push live asap", 18:57 GOC cart question) still unanswered by rick570 |
+| Philip (MS Teams) | ○ still incomplete | Login now succeeds (previously blocked by MS security wall) and Philip Briggs chat was found, but message extraction returned only 1 ambiguous item ("Messages" header) — inconclusive, not confirmed clean |
+| Elena - WordPress | ○ still incomplete | Unchanged — CSP violation fix needs your wp-admin decision |
+| Blair Brown - Peptide Clyde | ○ still incomplete | Unchanged — awaiting your review of the overnight reconciliation |
+| Check Mail: Carrick/Nick/Rick/Kai/Ken | ○ still incomplete | Re-tested all 5 Zoho IMAP logins directly — still `Invalid credentials`, unchanged from cron run |
+
+**New finding — Workstream `needsReview` (Pending, not previously visible since Workstream was down at cron time):**
+- Radio Data Center: KhanhHH, 4 tasks Jul 8 (0:35+2:00+1:30+1:30 = 5h35m) — reviewer: **LeNH**
+- Crystal lang: PhucVT, "Metastamp V3 project tasks" Jul 9 (8h) — reviewer: **TienND**
+(Fountain's needsReview excluded per standing instruction.)
+
+**Upwork (carrick):** Session now shows "Already authenticated" (CAPTCHA/challenge cleared since cron run) — login succeeded, though the specific time-reports page 404'd. Not gating any open Trello item (Neural Contract already ✓ per silence policy), noting for visibility only.
+
+**Cleared:** Precognize check, Workstream access.
+**Still open:** Maddy, John Yi, Bailey, Rebecca, Aysar, Elliott, James Diamond, MPFC, Ohcleo, Fountain, Philip, Elena-WordPress, Blair Brown, Check Mail (5 Zoho accounts) — all genuine unresolved blockers/unanswered items, not re-flagged as new alerts beyond what's already listed above.
