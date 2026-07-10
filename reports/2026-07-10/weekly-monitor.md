@@ -145,23 +145,24 @@ Raw data:
 |-----|---------|--------|--------|--------|
 | PhucVT | JD Web | 0h | 0h | WorkStream — 0h all week, reassigned to Crystal lang/Arthur (sanctioned OT there instead) |
 | LeNH | JD Web (extra) | 34h | 40h | WorkStream — 6h still pending review |
-| LongVV | JD Web (flex) | 8h | 8h | WorkStream |
+| LongVV | JD Web (flex) | 3h | 8h | User correction: of the 8h logged, 5h is makeup for a prior week's undercharge (non-chargeable) + 3h is chargeable work covering LeNH's performance |
 | AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
 | DuongDN | Marcel (Tokenlite) | 0h | 0h | WorkStream — no entries this week |
-| LeNH | Blair Brown | 0h 35m | 0h 35m | WorkStream — see Critical Notes for why so low this week |
+| LeNH | Blair Brown | 0h 35m | 0h 35m | WorkStream |
+| KhanhHH | Blair Brown | 0h 5m | 0h 5m | WorkStream — missed in the first draft, added per user correction |
 
-Web total: charge = 0+34+8 = **42h** / actual = 0+40+8 = **48h**.
+Web total: charge = 0+34+3 = **37h** / actual = 0+40+8 = **48h**.
 
-Draft message:
+Draft message (v2, per user correction):
 ```
 Report week 06/07
 
 James Diamond
 
-Web: 42h/48h
+Web: 37h/48h
 PhucVT: 0h/0h (chuyển sang Crystal lang/Arthur tuần này, OT được duyệt)
 LeNH: 34h/40h
-LongVV: 8h/8h
+LongVV: 3h/8h (5h trả nợ giờ thiếu tuần trước không charge thêm, 3h charge làm bù performance cho LeNH)
 
 Mobile: 19h/19h
 AnhNH2: 19h/19h
@@ -175,9 +176,10 @@ DuongDN: 0h
 
 Blair Brown - Peptide Clyde
 LeNH: 0h 35m
+KhanhHH: 0h 5m
 ```
 
-**Please confirm this exact text (or tell me what to change) before I send it** — flagging because PhucVT going to 0h and LeNH carrying almost all of Web is a first for this report, and I'd rather check than guess on a week this different from the usual pattern.
+Awaiting explicit confirmation of this exact text before sending.
 
 ---
 
