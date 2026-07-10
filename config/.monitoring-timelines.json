@@ -245,8 +245,9 @@
     "note": "Verified via existing chat-list entry (scripts/msteams-philip-chat-extract.js) rather than People-search — avoids the 8-duplicate-contact issue entirely since it opens the already-established thread. Confirmed pbriggs@sixstarrentals.com.au, 'External organization' banner. Chat list preview: 'Philip Briggs | 7/1 | You: Hi Philip Briggs I hope you are doing well...' — last message in thread is still OUR Jul 1 outreach, no reply from Philip since. No new customer message since 2026-07-06 check."
   },
   "neural_upwork": {
-    "last_run": "2026-07-08T01:52:14.443133Z",
-    "status": "complete"
+    "last_run": "2026-07-10T03:04:00.309Z",
+    "status": "escalation_unresolved",
+    "note": "2026-07-10 10:03+07: Client escalated (multi-file upload order bug + single-file UX regression), said stop work at 09:41, Carrick 09:43 reply unanswered. See reports/2026-07-10/daily-report.md Upwork-Neural-recheck section."
   },
   "scrin_io": {
     "last_run": "2026-07-03T01:31:06.000Z",

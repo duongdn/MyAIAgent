@@ -23,6 +23,7 @@
 | 11 | Discord (AirAgri/nusvinn) | Session token invalid (401) + visible-browser relogin landed on Discord's login page — needs human sign-in. Vinn's Jul-9 daily report could not be verified this run. |
 | 12 | Upwork (carrick + will/MS Teams) | Both visible-browser retries hit real CAPTCHA/security challenges (Upwork) and a Microsoft "unusual activity" verification wall (Teams/Philip) — genuinely blocked, needs human to complete in browser. |
 | 13 | GitHub (nuscarrick, nusken) | Neither account is authenticated in this environment's `gh` CLI (only `duongdn` + `mypersonalfootballcoach` are) — Baamboozle/Bizurk GitHub issue checks and Precognize PR check could not run. |
+| 14 | Upwork (Neural Contract / Contract Probe) | **NEW 10:03 — corrects item 12/earlier ✓ complete claim.** Client escalated over a multi-file-upload ordering bug + a single-file UX regression, said *"do not do any further work on this"* at 09:41, and Carrick's 09:43 reply (proposing a UI reorder/primary-picker fix) is still unanswered. See Upwork section for full transcript + suggested explanation. |
 
 **Today (Fri Jul 10):** KhanhHH off/remote (dental, approved). All other PHP-team devs expected working.
 
@@ -208,7 +209,35 @@ Full details: `reports/2026-07-10/matrix-rooms-0641.md`
 
 Rory (carrick account) and Neural Contract / Aysar workrooms: session expired. Visible-browser retry (`DISPLAY=:1 upwork-login.js --login --account=carrick`) confirmed this is a **real CAPTCHA/security challenge**, not a stale-session false alarm — script is still waiting on it as this report is written. vinn/david2 (Bailey workrooms) have no saved session at all in this environment.
 
-Trello: Neural Contract ✓ complete (silence/session-failure never blocks this item per standing policy). No other Trello item is Upwork-gated this run.
+~~Trello: Neural Contract ✓ complete (silence/session-failure never blocks this item per standing policy).~~ **CORRECTED at 10:03 — see below, session cleared and a real client escalation was found. Item reverted to incomplete.**
+
+---
+
+## Upwork — Neural Contract recheck — 10:03 (+07:00)
+
+Session had cleared since the earlier 07:05 CAPTCHA block. Fetched messages directly (`upwork-neural-messages.js`, workroom 38901192) — **this is NOT silence, it's an active unresolved client escalation.**
+
+**⚠️ WARNING — client (Neural Contract / Contract Probe) escalated and told Carrick to stop work, last message unanswered:**
+
+| Time (+07) | From | Message |
+|---|---|---|
+| 08:01 | Client | Bug report: multi-file upload doesn't preserve "first-selected = primary" order — files upload in file-explorer order instead, screenshot attached. |
+| 08:48 | Carrick | "Let me check" |
+| 09:13 | Client | 2nd complaint: single-file upload UX regressed to old behavior he rejected back in May — "must be unchanged." |
+| 09:22 | Carrick | "Checking possibilities... bug checking phase, looking for a reasonable solution." |
+| 09:39 | Client | "ok. i just didn't want you going further down a path that was going to be unacceptable." |
+| 09:40 | Carrick | Explained root cause: OS file-picker dialogs don't expose click-order to the browser — `<input type="file" multiple>` only returns files in whatever order the OS dialog hands back (typically name/date sort), so "first clicked = primary" can't be read from the browser at all. |
+| **09:41** | **Client** | **"Carrick is that is the case then you should have raised this a long time ago. My instructions on this were clear and it now seems you cannot meet them. Do not do any further work on this."** |
+| 09:43 | Carrick | "I've also tried to come up with reasonable solutions for this case. But the current UI doesn't allow it. If we improve the UI/UX a little, this would be entirely possible." *(unanswered as of this check)* |
+
+**Carrick's technical explanation is correct** — this is a well-known HTML5 limitation: the native OS "select files" dialog (Explorer/Finder/GNOME) does not pass click-sequence metadata to the browser; `input.files` (FileList) order is OS/browser-dependent (usually alphabetical/date), not selection order. No JS/web API can recover click order after the fact — it's not exposable, on any browser.
+
+**Suggested explanation/fix to send the client** (addresses the real requirement without relying on the unreliable click-order):
+1. Acknowledge: confirm this is a genuine, verifiable browser/OS platform limitation, not something Carrick should've caught in isolation during initial dev — but agree it should have been surfaced the first time "primary = first selected" was specified as a requirement (own the delayed flag, don't just blame the platform).
+2. Propose the concrete fix Carrick already suggested: after file selection, show a small preview list of the selected files (thumbnails/filenames) where the user explicitly marks/reorders which is primary (drag-to-reorder or a "set as primary" radio/star) — this is deterministic and standard practice for multi-upload UIs, and fully satisfies "primary file, others follow" without depending on click order.
+3. For the single-file regression: separately confirm that's an unrelated regression (old UI leaking back in) — fix and re-verify staging is back to the pre-May single-file UX unchanged, since that's a legitimate "you broke something previously accepted" bug, not a platform limitation.
+
+**Trello: Neural Contract reverted to ○ incomplete** — client explicitly said "do not do any further work," Carrick's last message is unanswered. This needs a human reply, not just a code fix.
 
 ---
 
