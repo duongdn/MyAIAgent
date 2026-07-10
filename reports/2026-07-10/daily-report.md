@@ -23,7 +23,7 @@
 | 11 | Discord (AirAgri/nusvinn) | Session token invalid (401) + visible-browser relogin landed on Discord's login page — needs human sign-in. Vinn's Jul-9 daily report could not be verified this run. |
 | 12 | Upwork (carrick + will/MS Teams) | Both visible-browser retries hit real CAPTCHA/security challenges (Upwork) and a Microsoft "unusual activity" verification wall (Teams/Philip) — genuinely blocked, needs human to complete in browser. |
 | 13 | GitHub (nuscarrick, nusken) | Neither account is authenticated in this environment's `gh` CLI (only `duongdn` + `mypersonalfootballcoach` are) — Baamboozle/Bizurk GitHub issue checks and Precognize PR check could not run. |
-| 14 | Upwork (Neural Contract / Contract Probe) | **NEW 10:03 — corrects item 12/earlier ✓ complete claim.** Client escalated over a multi-file-upload ordering bug + a single-file UX regression, said *"do not do any further work on this"* at 09:41, and Carrick's 09:43 reply (proposing a UI reorder/primary-picker fix) is still unanswered. See Upwork section for full transcript + suggested explanation. |
+| 14 | Upwork (Neural Contract / Contract Probe) | **UPDATED 10:20.** Client escalated over a multi-file-upload ordering bug + single-file UX regression, said *"do not do any further work"* at 09:41 — full 605-msg history check confirms the complaint is justified (client's 2026-05-26 spec explicitly flagged this exact risk, Carrick never raised it in ~6 weeks of delivery). Client then sent a complete fix spec + reference code at 10:09, ending with a direct "let me know one way or other" ask — still unanswered. See Upwork section for full transcript + suggested reply. |
 
 **Today (Fri Jul 10):** KhanhHH off/remote (dental, approved). All other PHP-team devs expected working.
 
@@ -230,14 +230,29 @@ Session had cleared since the earlier 07:05 CAPTCHA block. Fetched messages dire
 | **09:41** | **Client** | **"Carrick is that is the case then you should have raised this a long time ago. My instructions on this were clear and it now seems you cannot meet them. Do not do any further work on this."** |
 | 09:43 | Carrick | "I've also tried to come up with reasonable solutions for this case. But the current UI doesn't allow it. If we improve the UI/UX a little, this would be entirely possible." *(unanswered as of this check)* |
 
-**Carrick's technical explanation is correct** — this is a well-known HTML5 limitation: the native OS "select files" dialog (Explorer/Finder/GNOME) does not pass click-sequence metadata to the browser; `input.files` (FileList) order is OS/browser-dependent (usually alphabetical/date), not selection order. No JS/web API can recover click order after the fact — it's not exposable, on any browser.
+~~**Carrick's technical explanation is correct** — genuine unforeseeable browser/OS limitation.~~ **CORRECTED 10:20 after pulling full room history (605 msgs back to 2024-11-03, cursor-paginated fetch) — the client's "you should have raised this a long time ago" complaint is justified. Full trail:**
 
-**Suggested explanation/fix to send the client** (addresses the real requirement without relying on the unreliable click-order):
-1. Acknowledge: confirm this is a genuine, verifiable browser/OS platform limitation, not something Carrick should've caught in isolation during initial dev — but agree it should have been surfaced the first time "primary = first selected" was specified as a requirement (own the delayed flag, don't just blame the platform).
-2. Propose the concrete fix Carrick already suggested: after file selection, show a small preview list of the selected files (thumbnails/filenames) where the user explicitly marks/reorders which is primary (drag-to-reorder or a "set as primary" radio/star) — this is deterministic and standard practice for multi-upload UIs, and fully satisfies "primary file, others follow" without depending on click order.
-3. For the single-file regression: separately confirm that's an unrelated regression (old UI leaking back in) — fix and re-verify staging is back to the pre-May single-file UX unchanged, since that's a legitimate "you broke something previously accepted" bug, not a platform limitation.
+**Original spec, 2026-05-26 (Michael), verbatim — the exact requirement, stated 6 weeks before the bug:**
+> "user selects one document in the document browser. This is the 'Primary Document'... the user can also select up to 3 other documents in the document browser. Each additional document is selected by a 'ctrl click' sequence (like with a standard file explorer navigation)... **The txt for the Primary Document must be the first txt in the Combined File. So you will need to have some way of recording which document was clicked first.**"
 
-**Trello: Neural Contract reverted to ○ incomplete** — client explicitly said "do not do any further work," Carrick's last message is unanswered. This needs a human reply, not just a code fix.
+Two things this proves:
+1. **Michael explicitly flagged the exact technical risk in the original spec** ("you will need to have some way of recording which document was clicked first") — he already knew this wasn't automatic and was delegating the *solution* to Carrick, not asking him to just wire up a plain native file input.
+2. **The spec describes an in-app "document browser" with ctrl-click multi-select** (a custom JS-controlled list), not the native OS "Open File" dialog. A custom in-app list widget CAN track click order trivially (increment a counter in the click handler) — the "OS doesn't preserve click order" limitation Carrick cited on Jul10 only applies to a native OS file-picker dialog. Somewhere during implementation, the feature ended up using a native multi-file `<input>` instead (confirmed by the client's own bug report: "the files are in fact uploaded based on the order they appear in **the file explorer window**") — a deviation from spec that silently dropped the order-tracking capability, never flagged to the client.
+3. **Checked the entire May27–Jun8 delivery window for any Carrick pushback/clarifying question on this point — none found.** Carrick accepted the task ("Let me arrange to check it"), delivered twice (Jun3, Jun8) each time saying it was done/working ("Note: The first file you select will be the primary file"), and only revealed the limitation 5 weeks later, the day the bug was reported live.
+
+**So: yes, the client did state it clearly up front, and did call out the exact risk. The complaint is legitimate — this should have been raised (or the deviation to a native file picker flagged) at delivery time in June, not discovered by the client in production in July.**
+
+**⚠️ NEW — client already sent a full fix spec, unanswered, arrived 10:09 (~6 min before this recheck):** Michael provided a complete working reference implementation — `upload-reorder.html` (standalone HTML/JS demo using SortableJS, drag-to-reorder panel shown only when 2+ files selected, single-file flow untouched) + `UploadController.php` (Laravel backend + migration note for a `position` column) + a screenshot mockup, with detailed step-by-step wiring instructions. Ends with a direct, explicit ask requiring a reply:
+> **"Carrick, before you start, please consider carefully whether you can do all of this and let me know one way or other. if you cannot do all of this, let me know what is the problem and I'll consider path forward."**
+
+This is now the most time-sensitive open item — client has done the design work and is waiting on a yes/no + timeline, not further technical debate.
+
+**Suggested reply approach:**
+1. Own the miss plainly — don't re-litigate the browser-limitation point further; the client already reasoned past it and supplied a working solution. Re-explaining the OS dialog limitation again would read as deflection.
+2. Confirm feasibility of the supplied spec (standard, well-scoped pattern — SortableJS reorder panel + a `position` column is routine work) and give a concrete ETA.
+3. Separately confirm the single-file UX regression is being fixed/reverted, distinct from the reorder work.
+
+**Trello: Neural Contract reverted to ○ incomplete** — client explicitly said "do not do any further work," then sent a direct, unanswered ask requiring a yes/no. This needs a human reply, not just a code fix.
 
 ---
 
@@ -299,12 +314,12 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 
 **Check Mail: 6/6 complete** (verified live — was already fully done, card auto-closed by the recurring Power-Up; the "1/6" line above was never updated after the 09:14 fix).
 
-**Check Progress: 9/22 complete** (Blair Brown - Peptide Clyde now ✓, done directly by you in Trello since the last write-up).
-✓ Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Rory, Franc, Blair Brown - Peptide Clyde
+**Check Progress: 12/22 complete** (updated 10:12 — John Yi, Bailey, Rebecca added after the TuanNT sheet correction below).
+✓ Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Rory, Franc, Blair Brown - Peptide Clyde, John Yi, Bailey, Rebecca
 
-⚠️ **13 still incomplete — each re-verified live this pass, not assumed from the earlier write-up:**
+⚠️ **10 still incomplete — each re-verified live this pass, not assumed from the earlier write-up:**
 - **Maddy** — Kai is actually online and active in the Xtreme DM this morning (07:30-08:30, OTP exchange with Madhuraka) but still has not replied to Madhuraka's 19:35 Jul9 API-upgrade estimate ask (confirmed via fresh `search.messages`, no reply since). Genuinely still open, not a data gap.
-- **John Yi / Bailey / Rebecca** — re-pulled Workstream directly (post-relogin): TuanNT = 0h across every project visible to this token for Jul 9. Real gate, not an access gap this time.
+- ~~**John Yi / Bailey / Rebecca** — re-pulled Workstream directly (post-relogin): TuanNT = 0h across every project visible to this token for Jul 9. Real gate, not an access gap this time.~~ **CORRECTED 10:12 (user caught it):** wrong — only checked Workstream, which TuanNT doesn't use for this project. Direct Google Sheets check (Paturevision/Bailey tab, W35, "Thu, 09/07/26" row) shows **TuanNT logged 8h real work**: hotfix live bulk pdf (0.5h), fix bug Emplacements Picking Disponibles (2h), upgrade latest ruby on rails (5.5h). This clears the combined TuanNT gate (any source >0h) — **John Yi, Bailey, Rebecca marked ✓ complete** in Trello.
 - **Aysar / Elliott** — KhanhHH = 0h across all her projects (Blair Brown, Baamboozle, Colin/ETZ, Generator, Radio Data Center) for Jul 9, re-confirmed live. Baamboozle MPDM still silent since Jul 6 (re-checked `conversations.history` directly, no new post).
 - **James Diamond (Discord)** — 3-step curl check (`/users/@me`, `/guilds`) both genuinely 401 (not a false-403). Opened a new visible Chrome window (Profile 19, DISPLAY :1) for you to log in — still waiting, `discord-token-refresh.js` re-run after opening still fails to extract a token.
 - **MPFC** — re-searched Slack directly: zero messages since the customer's Jul9 06:07 complaint, still unanswered.
@@ -333,7 +348,7 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 | Precognize (nusken) | ✓ resolved | `nusken` GitHub now authenticated (was missing at cron time) — 0 open PRs → clean, no action needed |
 | Workstream access | ✓ resolved | SSO restored, full project data now readable |
 | Maddy (Xtreme) | ○ still incomplete | Madhuraka's 19:35 Jul9 estimate ask still unanswered ~13h later; Kai online this morning (08:34 "Are you there?") but addressed to anomawasala, not Madhuraka |
-| John Yi / Bailey / Rebecca (TuanNT gate) | ○ still incomplete | Workstream now confirms TuanNT = 0h logged Jul9 (matches sheets) — same as cron finding, not a new alert (see standing Matrix-confirmed-real-work caveat), but hours still not logged so gate stays open |
+| John Yi / Bailey / Rebecca (TuanNT gate) | ✓ completed 10:12 | Google Sheets (Paturevision/Bailey, W35) confirms TuanNT logged real 8h Jul 9 — Workstream-only check earlier in this report was wrong (TuanNT doesn't log this project to Workstream) |
 | Aysar | ○ still incomplete | Baamboozle MPDM (C07SQ4HAUHZ) still silent — now 5 days since last post (Jul 6), one day longer than at cron time. KhanhHH Workstream = 0h Jul9 (matches sheets) |
 | Elliott | ○ still incomplete | Slack Generator quiet (no alert) but KhanhHH Workstream = 0h Jul9, same as Aysar above |
 | James Diamond (Discord) | ○ still incomplete | Retried `discord-token-refresh.js` (DISPLAY=:1) for nusvinn — still lands on login page, token extraction failed again. Genuine blocker, needs human sign-in |
@@ -389,9 +404,9 @@ User asked to fix internal (our-side) issues directly, not just report them. Wen
 | LongVV | **9h** | Xtreme Soft Solutions (Maddy) | NEW — previously only Matrix-inferred ("Postmark debugging in Maddy room"), now confirmed actually logged |
 | PhucVT | **8h** | Crystal lang (Arthur) | NEW — previously "unverifiable this run", now confirmed logged |
 | LeNH | **8h** | Portfolio - James Diamond | NEW — previously "not yet reflected in task log", now confirmed logged |
-| TuanNT | 0h (all visible projects) | — | Unchanged — matches 08:39 finding, gate stays open |
+| ~~TuanNT | 0h (all visible projects) | — | Unchanged — matches 08:39 finding, gate stays open~~ | **WRONG, corrected 10:12** — TuanNT logged 8h Jul9 directly in the Bailey/Paturevision Google Sheet (Workstream doesn't cover this project for him). John Yi/Bailey/Rebecca all ✓ complete now.
 | KhanhHH | 0h (all visible projects: Blair Brown, Baamboozle, Colin/ETZ, Generator, Radio Data Center) | — | Unchanged — consistent with mid-day dental appointment, gate stays open |
 
-**Trello impact:** No item flips state — LongVV/PhucVT/LeNH's real hours don't gate any open Trello item directly (John Yi/Bailey/Rebecca/Aysar/Elliott all gate on TuanNT/KhanhHH, both still 0h). This closes the "was it real work or a monitoring gap" ambiguity from the cron run for 3 of the 5 devs, informational only.
+**Trello impact (revised 10:12):** John Yi/Bailey/Rebecca now ✓ complete — TuanNT's real 8h was in the Sheet, not Workstream (see correction above). Aysar/Elliott still gate on KhanhHH, confirmed genuinely 0h.
 
 **Not re-verified this pass** (would need fresh Slack/Trello queries, skipped to stay focused on the two items above — no reason to assume they've changed in ~1hr): Maddy/Madhuraka estimate ask, Fountain Kunal asks, MPFC customer complaint, OhCleo Google Play warning, Discord/Upwork/MS Teams human-login blockers, Elena WordPress CSP fix, Blair Brown review, 5 Zoho Check Mail accounts. All remain as documented in the 08:39 recheck / 08:58 internal-fixes section above.
