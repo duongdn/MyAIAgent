@@ -51,6 +51,7 @@
 
 ## daily-report:discord
 - [feedback_airagri_webapp_channel](daily-report/discord/feedback_airagri_webapp_channel.md), [feedback_discord_only_airagri_bizurk](daily-report/discord/feedback_discord_only_airagri_bizurk.md), [feedback_monday_discord_scan_friday_window](daily-report/discord/feedback_monday_discord_scan_friday_window.md), [feedback_vinn_daily_report_format](daily-report/discord/feedback_vinn_daily_report_format.md) — AirAgri+Bizurk only
+- [feedback_discord_token_refresh_script_broken](daily-report/discord/feedback_discord_token_refresh_script_broken.md) — 🔴 401≠login needed; screenshot first, script itself is broken
 
 ## daily-report:sheets (task logs / per-developer)
 - [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md) — WS reviewStatus=Pending → ALERT to reviewer, not dev
