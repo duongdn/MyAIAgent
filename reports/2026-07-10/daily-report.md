@@ -263,12 +263,27 @@ Password-reset migration bug from Jul 8 is confirmed fixed (no new occurrences).
 
 ## Trello — 07:05 (+07:00)
 
-**Check Progress: 8/22 complete.**
-✓ Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Rory, Franc
-⚠️ Incomplete: Maddy (unanswered client estimate ask), John Yi / Bailey / Rebecca (TuanNT gate unverified — Workstream down), James Diamond (Discord token invalid), Aysar (MPDM silent 4 days + KhanhHH hours unverified), Elliott (KhanhHH hours unverified), MPFC (unanswered customer notification complaint), Fountain (unanswered urgent customer asks), Ohcleo (unanswered Google Play warning), Philip (MS Teams blocked by Microsoft security challenge), Elena-WordPress (real CSP violation), Blair Brown - Peptide Clyde (active billing dispute, needs your review), Arthur - Meta-Stamp (out of scope for daily-report — on-demand piece only, untouched).
+~~**Check Progress: 8/22 complete.**~~
+~~**Check Mail: 1/6 complete.**~~
 
-**Check Mail: 1/6 complete.**
-✓ DuongDn. ⚠️ Carrick/Nick/Rick/Kai/Ken incomplete — genuine IMAP auth failure (Alert #5), not a content gate.
+**CORRECTED 09:57 — the two lines above were stale and contradicted the Email section (which already said all 6 Check Mail items were fixed at 09:14) and the internal-fixes section (Blair Brown got completed by you directly in Trello). Pulled live Trello state directly instead of trusting old notes:**
+
+**Check Mail: 6/6 complete** (verified live — was already fully done, card auto-closed by the recurring Power-Up; the "1/6" line above was never updated after the 09:14 fix).
+
+**Check Progress: 9/22 complete** (Blair Brown - Peptide Clyde now ✓, done directly by you in Trello since the last write-up).
+✓ Marcel, Elena-SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Rory, Franc, Blair Brown - Peptide Clyde
+
+⚠️ **13 still incomplete — each re-verified live this pass, not assumed from the earlier write-up:**
+- **Maddy** — Kai is actually online and active in the Xtreme DM this morning (07:30-08:30, OTP exchange with Madhuraka) but still has not replied to Madhuraka's 19:35 Jul9 API-upgrade estimate ask (confirmed via fresh `search.messages`, no reply since). Genuinely still open, not a data gap.
+- **John Yi / Bailey / Rebecca** — re-pulled Workstream directly (post-relogin): TuanNT = 0h across every project visible to this token for Jul 9. Real gate, not an access gap this time.
+- **Aysar / Elliott** — KhanhHH = 0h across all her projects (Blair Brown, Baamboozle, Colin/ETZ, Generator, Radio Data Center) for Jul 9, re-confirmed live. Baamboozle MPDM still silent since Jul 6 (re-checked `conversations.history` directly, no new post).
+- **James Diamond (Discord)** — 3-step curl check (`/users/@me`, `/guilds`) both genuinely 401 (not a false-403). Opened a new visible Chrome window (Profile 19, DISPLAY :1) for you to log in — still waiting, `discord-token-refresh.js` re-run after opening still fails to extract a token.
+- **MPFC** — re-searched Slack directly: zero messages since the customer's Jul9 06:07 complaint, still unanswered.
+- **Ohcleo** — re-ran `slack-fetch-ohcleo.js` since the 08:39 recheck: 0 new messages, Google Play warning still unanswered.
+- **Fountain** — pulled Trello board comment actions directly: both kunalsheth asks (Jul9 14:17 "push live asap", 18:57 Gift-of-Choice question) still have no rick570 reply after them.
+- **Philip (MS Teams)** — tried twice more this pass with a custom script targeting the correct "(External)/Six Star Rentals" contact specifically (screenshot confirmed 8+ duplicate "Philip Briggs" entries, only one is real) — click landed on a different, unrelated empty duplicate chat, then a follow-up attempt failed to even find the search result in time. Genuinely unresolved via automation; this is a UI-automation reliability limit, not a fresh finding to re-litigate each run.
+- **Elena - WordPress SamGuard** — `curl -sI` against the live site confirms `region1.google-analytics.com` still missing from `connect-src`. Unchanged, still needs wp-admin credentials.
+- **Arthur - Meta-Stamp** — out of scope for daily-report (on-demand piece only), correctly untouched.
 
 ---
 
