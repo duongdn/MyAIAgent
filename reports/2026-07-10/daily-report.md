@@ -16,7 +16,7 @@
 | 4 | Slack (OhCleo DM) | Tony flagged a real Google Play Console warning: developer profile + all apps will be **removed Aug 2, 2026** — org name/address no longer verified. Unanswered. |
 | 5 | ~~Email (5 Zoho accounts) carrick@, nick@, rick@, kai@, ken@ all return `Invalid credentials` on IMAP login — genuine password issue (not fixable by agent), same class as the ken@ incident on 2026-07-03. Needs new Zoho app passwords.~~ | **CORRECTED 09:14:** this was WRONG — not a Zoho-side credential issue at all. Git archaeology found commit `2c8240f` (2026-07-09 22:38+07, ~8.5h before this morning's cron) silently overwrote all 5 accounts' `app_password` in `config/.email-accounts.json` with different, non-working values. The pre-22:38 passwords were tested live and still work perfectly. Restored the correct passwords (commit `d2811cb`), verified all 5 accounts authenticate now. Root cause of the *change itself* not fully reconstructed (no session log found for that exact timestamp beyond a Matrix scan), flagging as a real process gap — see [[feedback_verify_config_history_before_blaming_external_credential]]. |
 | 6 | ~~Email (config gap) davidztv19@gmail.com (Arthur/Meta-Stamp monitoring account) is completely missing from `config/.email-accounts.json`~~ | **CORRECTED 09:14:** same commit (`2c8240f`) dropped this account entirely. Re-added from the pre-22:38 version (app password unchanged), verified live IMAP login works. Fixed in commit `d2811cb`. |
-| 7 | New Relic (OhCleo) | New production DB error: `column app_media.cached_relevance_score does not exist` — 36 occurrences, not seen in prior reports. |
+| 7 | ~~New Relic (OhCleo) — New production DB error: `column app_media.cached_relevance_score does not exist` — 36 occurrences, not seen in prior reports.~~ | **CORRECTED 09:38:** false alarm, resolved. Direct NerdGraph timeseries query (24h, 1h buckets) shows all 36 occurrences confined to a single window, Jul 9 09:36–10:36 (last hit 09:40:50), zero before or since, zero in the last 60 min as of this check. Tied to Tony's Jul 9 track-ranking deploy, self-resolved (rollback or hotfix) — not an active issue. |
 | 8 | New Relic (MPFC) | Apdex dropped to **0.52** (poor). Slowest "transactions" are vulnerability-scanner probes (`.env.php.swm`, `cfgs.php`, `gebase.php69`) taking 400–600s each — security scanning activity, not a real app bug, but dragging the score down. Also one new real PHP fatal: `Call to undefined method stdClass::add_database()` in `db-config.php:284`. |
 | 9 | Elena WordPress (samguard.co) | New CSP violation: `region1.google-analytics.com` (GA4 regional endpoint) blocked by `connect-src` — same class as the earlier doubleclick.net gap, needs wp-admin fix decision. |
 | 10 | Workstream (all devs) | SSO session fully expired — visible-browser login landed on a real email/password form (not auto-SSO like Matrix), no stored credential available to complete it. **Sheets alone show 0h for LongVV/PhucVT/TuanNT/KhanhHH/LeNH on Jul 9**, but Matrix transcripts show all 5 were genuinely active that day (see Sheets section) — needs a human login before hours can be trusted either way. |
@@ -223,7 +223,7 @@ Trello: Neural Contract ✓ complete (silence/session-failure never blocks this 
 | Error | Count |
 |-------|-------|
 | NotAuthenticated (benign, public endpoints) | 509 |
-| **NEW:** `ProgrammingError: column app_media.cached_relevance_score does not exist` (2 query variants) | 29 + 7 = 36 |
+| ~~`ProgrammingError: column app_media.cached_relevance_score does not exist` (2 query variants)~~ **RESOLVED** (see Alert #7 correction — one-time Jul9 09:36-10:36 burst, zero since) | 29 + 7 = 36 |
 | InvalidToken (expired JWT) | 12 |
 | ValidationError: email already exists | 5 |
 | AuthenticationFailed: Passwords don't match | 3 |
@@ -327,7 +327,27 @@ User asked to fix internal (our-side) issues directly, not just report them. Wen
 - Cannot apply: a raw SQL `UPDATE` on the DB value would NOT rewrite `.htaccess` (the plugin only does that inside its own `update_option` hook, which only fires via the wp-admin settings-page save, not a direct DB write). The SSH user (`nustech`) is not in the `www-data` group and `.htaccess` is `rw-rw-r-- www-data:www-data` — no write access. `sudo` requires a password we don't have (`sudo -n` fails). No wp-admin login credentials are stored anywhere in `config/`.
 - **What's needed to unblock:** either (a) wp-admin username/password for samguard.co so this can be automated via browser, or (b) the `nustech` sudo password / adding `nustech` to the `www-data` group.
 
-**❌ BLOCKED — OhCleo `cached_relevance_score` DB column (Alert #7):**
-- Cannot investigate or fix directly — this repo has zero server/SSH/DB access to OhCleo's infrastructure (no host in `~/.ssh/config`, no config file in `config/`). OhCleo is Tony's (LongVV's) own codebase/deployment; our only channel is the Slack DM with Celine (Piece 12).
-- This is very likely from the same track-ranking work Tony logged earlier ("Fix track ranking, replace likes only sorting with a relevance score" — Trello card #299) — the code references `app_media.cached_relevance_score` but the migration adding that column apparently wasn't run on production.
-- **What's needed to unblock:** not fixable by us at all — needs a message to Tony/LongVV via the OhCleo Slack DM flagging the missing migration. Did not send this without asking first (see [[feedback_never_send_messages_without_permission]]) — say the word and I'll send it.
+**✅ RESOLVED — OhCleo `cached_relevance_score` DB column (Alert #7):** confirmed false alarm on recheck (09:38) — see Alert #7 correction. One-time burst tied to the Jul 9 deploy, zero occurrences since. No message to Tony needed.
+
+---
+
+## Re-check — 09:38 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| New Relic (OhCleo) `cached_relevance_score` | ✓ resolved | Confirmed false alarm — see Alert #7 correction above |
+| Workstream access | ✓ re-resolved | SSO expired AGAIN sometime after the 08:39 recheck (visible-browser login landed on a real email/password form a second time, same as cron). Root-caused: `workstream-login.js`'s auto-SSO wait was hardcoded to 60s — too short for a human to switch windows and enter credentials/2FA. Bumped to 5 min (`scripts/workstream-login.js:105`) and relaunched visibly (DISPLAY :1) — user logged in, token+refresh_token captured and saved. |
+
+**New Workstream data now visible (2026-07-09), updates the Sheets section's "0h for all 5" finding:**
+
+| Dev | Jul 9 Workstream hours | Project | Change from 08:39 recheck |
+|-----|------------------------|---------|---------------------------|
+| LongVV | **9h** | Xtreme Soft Solutions (Maddy) | NEW — previously only Matrix-inferred ("Postmark debugging in Maddy room"), now confirmed actually logged |
+| PhucVT | **8h** | Crystal lang (Arthur) | NEW — previously "unverifiable this run", now confirmed logged |
+| LeNH | **8h** | Portfolio - James Diamond | NEW — previously "not yet reflected in task log", now confirmed logged |
+| TuanNT | 0h (all visible projects) | — | Unchanged — matches 08:39 finding, gate stays open |
+| KhanhHH | 0h (all visible projects: Blair Brown, Baamboozle, Colin/ETZ, Generator, Radio Data Center) | — | Unchanged — consistent with mid-day dental appointment, gate stays open |
+
+**Trello impact:** No item flips state — LongVV/PhucVT/LeNH's real hours don't gate any open Trello item directly (John Yi/Bailey/Rebecca/Aysar/Elliott all gate on TuanNT/KhanhHH, both still 0h). This closes the "was it real work or a monitoring gap" ambiguity from the cron run for 3 of the 5 devs, informational only.
+
+**Not re-verified this pass** (would need fresh Slack/Trello queries, skipped to stay focused on the two items above — no reason to assume they've changed in ~1hr): Maddy/Madhuraka estimate ask, Fountain Kunal asks, MPFC customer complaint, OhCleo Google Play warning, Discord/Upwork/MS Teams human-login blockers, Elena WordPress CSP fix, Blair Brown review, 5 Zoho Check Mail accounts. All remain as documented in the 08:39 recheck / 08:58 internal-fixes section above.
