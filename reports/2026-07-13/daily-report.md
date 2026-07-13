@@ -20,6 +20,7 @@
 | 8 | Email (davidztv19 / Arthur) | Chris C. (Meta-Stamp) paused the Upwork contract + sent an unread message (Jul 11); Stripe account update needed to receive payout. |
 | 9 | Email (vuongtrancr) | Swish "Low Application Throughput — signal lost 10 min" recurring ~10× (New Relic), known ongoing watch pattern. |
 | 10 | Email (dnduongus) | 2 personal security alerts (Google, LastPass blocked login attempt) — flagged per account's security-only filter, unconfirmed if user-initiated. |
+| 11 | Upwork (Neural Contract) | Client message 09:41 07-13 (today), unanswered: reported the "unbranded" error message shown when uploading &gt;4 files, asked for it to match the site's standard error-message format. Project is otherwise actively collaborative (file-reorder UI feature, multiple same-day exchanges) — this is a specific unaddressed bug report, not general silence. |
 
 **Today (Mon Jul 13):** No other staff leave/WFH on record besides KhanhHH's approved dental-surgery leave (07-09, 07-10, already past). VietPH resigned 2026-06-30, no longer monitored.
 
@@ -183,7 +184,7 @@ Trello: Ohcleo ✓ complete.
 
 - Maddy, Rick (mail), Fountain, Elena-WordPress-SamGuard: ⚠️ left incomplete (see Alerts #1, #3, #5, #7)
 - John Yi, Elena-SamGuard, Bailey, Rebecca: ✓ marked complete this run
-- Neural Contract: ✓ marked complete 10:2x — ~~Upwork workroom 38901192 silent since 07-07, treated as no activity~~ **CORRECTED (user 10:2x): project is genuinely active, not silent — TuanNT logged 2h this week via Workstream (see Sheets section). Only the Upwork *messages* channel is quiet; real work is ongoing with no customer complaints, that's why it stays complete.**
+- Neural Contract: ~~✓ marked complete 10:2x, "Upwork silent since 07-07"~~ **REVERTED to ○ incomplete 10:3x — this was wrong twice over: (1) messages API returns newest-first, an earlier check only looked at the tail of the response and grabbed the OLDEST entries, missing everything from 07-10/07-13; (2) real content shows an active, unanswered client bug report from 09:41 today (07-13) — see Alert #11.**
 - Blair Brown - Peptide Clyde: ✓ marked complete 10:2x (LeNH 0.58h + KhanhHH 0.08h this week on Workstream project `cmqj4tj6v01gfm81vgx7ipkov` — low but no complaint/alert signal from any source; LeNH's aggregate daily hours already OK)
 - Arthur - Meta-Stamp: now part of Full Run as of today (was on-demand-only) — see dedicated report `reports/2026-07-13/{HHMM}-arthur-monitor.md`
 - Philip: still incomplete — MS Teams script crashes on browser launch (`TargetCloseError: Protocol error (Target.setAutoAttach): Target closed`), reproduced 3x, not a resource/session issue (17GB RAM free, no stale profile lock) — genuine script bug needing investigation, not a monitoring alert
