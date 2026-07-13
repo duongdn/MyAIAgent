@@ -96,6 +96,19 @@ async function main() {
   while (Date.now() < deadline) {
     await new Promise(r => setTimeout(r, 2000));
 
+    // Dismiss the "Element is open in another window" session-lock prompt —
+    // a stale lock from a prior hard-killed (pkill -9) run blocks the actual
+    // app from loading, and the profile is otherwise already logged in.
+    try {
+      const clicked = await page.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button'));
+        const btn = buttons.find(b => b.textContent.trim() === 'Continue');
+        if (btn) { btn.click(); return true; }
+        return false;
+      });
+      if (clicked) console.log('Dismissed stale session-lock prompt ("Continue" clicked).');
+    } catch {}
+
     const url = page.url();
 
     // Try extracting from localStorage
