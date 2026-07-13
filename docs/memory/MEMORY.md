@@ -37,8 +37,7 @@
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md) — 10 accounts; davidztv19=Arthur
-- [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md), [feedback_email_scan_stale_window_bug](daily-report/email/feedback_email_scan_stale_window_bug.md) — 🔴 dated scripts hardcode stale window, caused false "0 new" all 10 accts 260709 (real prod alerts missed) — verify window is live first
-- [feedback_davidztv19_new_account_unwired](daily-report/email/feedback_davidztv19_new_account_unwired.md) — davidztv19@ in config but not cron script
+- [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
 
 ## daily-report:slack
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — search.messages not conversations.history

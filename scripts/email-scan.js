@@ -1,21 +1,55 @@
-// Daily email scan for 2026-06-10 — window: 2026-06-09T09:46+07 → now
+// Canonical daily email scan — single non-dated script, replaces the daily-email-scan-YYMMDD.js
+// copy-per-day pattern (see docs/memory/daily-report/sheets/feedback_no_dated_scan_scripts.md for
+// why dated copies are an anti-pattern: fixes made to one day's copy don't carry to the next day's).
+//
+// Window start is read dynamically from config/.monitoring-timelines.json (daily_report.last_run),
+// same mechanism as every other daily-report piece — see feedback_monday_friday_timestamp.md and
+// the Timeline note in .claude/commands/me/daily-report.md. Falls back to "yesterday 08:00 +07:00"
+// only if last_run is missing or unparseable.
 const tls = require("tls");
 const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
-const allAccounts = require("../config/.email-accounts.json").accounts;
 
+const allAccounts = require("../config/.email-accounts.json").accounts;
 const accounts = allAccounts.filter(a => !a.gmail_api);
 const gmailApiAccounts = allAccounts.filter(a => a.gmail_api);
 
-const WINDOW_START = new Date("2026-06-09T09:46:00+07:00");
-const IMAP_SINCE = "9-Jun-2026";
+function loadWindowStart() {
+  const timelinesPath = path.join(__dirname, "../config/.monitoring-timelines.json");
+  try {
+    const timelines = JSON.parse(fs.readFileSync(timelinesPath, "utf8"));
+    const lastRun = timelines?.daily_report?.last_run;
+    if (lastRun) {
+      const d = new Date(lastRun);
+      if (!isNaN(d.getTime())) return d;
+    }
+  } catch (_) {}
+  // Fallback: yesterday 08:00 +07:00
+  const now = new Date();
+  const fallback = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  fallback.setUTCHours(1, 0, 0, 0); // 08:00 +07:00 == 01:00 UTC
+  return fallback;
+}
+
+const WINDOW_START = loadWindowStart();
+
+// IMAP SINCE needs the calendar day BEFORE window start (server-side date, usually UTC) so
+// UTC+7-morning emails that fall on the previous UTC calendar day aren't missed — see
+// docs/memory/daily-report/email/feedback_imap_slack_timestamp_gotchas.md.
+const IMAP_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function imapSinceDate(windowStart) {
+  const dayBefore = new Date(windowStart.getTime() - 24 * 60 * 60 * 1000);
+  return `${dayBefore.getUTCDate()}-${IMAP_MONTHS[dayBefore.getUTCMonth()]}-${dayBefore.getUTCFullYear()}`;
+}
+const IMAP_SINCE = imapSinceDate(WINDOW_START);
 
 const ALERT_KEYWORDS = [
   "alert", "error", "fail", "down", "urgent", "warning", "critical",
   "incident", "outage", "security", "escalat", "breach", "crash",
   "leave request", "nghỉ phép", "xin nghỉ", "production", "rollbar", "bugsnag",
   "expires", "expir", "deploy", "expired", "new relic", "newrelic",
+  "signal lost", "delayed", "[high]", "apm", "redmine", "jira",
 ];
 
 function decodeMime(str) {
@@ -24,7 +58,7 @@ function decodeMime(str) {
     try {
       if (enc.toUpperCase() === "B") return Buffer.from(data, "base64").toString("utf8");
       return data.replace(/_/g, " ").replace(/=([0-9A-Fa-f]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
-    } catch(e) { return data; }
+    } catch (e) { return data; }
   }).replace(/\s+/g, " ").trim();
 }
 
@@ -33,7 +67,10 @@ function checkIMAP(acct) {
     let buffer = "";
     let step = 0;
     const host = acct.imap_server || "imap.zoho.com";
-    const socket = tls.connect({ host, port: 993, servername: host }, () => {});
+    const isGmail = host.includes("gmail");
+    const tlsOpts = { host, port: 993, servername: host };
+    if (isGmail) tlsOpts.rejectUnauthorized = false; // required for Gmail IMAP
+    const socket = tls.connect(tlsOpts, () => {});
     socket.setTimeout(30000);
     socket.on("timeout", () => { socket.destroy(); resolve({ email: acct.email, error: "timeout" }); });
     socket.on("error", (e) => resolve({ email: acct.email, error: e.message }));
@@ -44,12 +81,15 @@ function checkIMAP(acct) {
         socket.write(`A1 LOGIN ${JSON.stringify(acct.email)} ${JSON.stringify(acct.app_password)}\r\n`);
       } else if (step === 1 && buffer.includes("A1 ")) {
         if (!buffer.includes("A1 OK")) {
-          socket.destroy(); resolve({ email: acct.email, error: "auth_fail" }); return;
+          socket.destroy(); resolve({ email: acct.email, error: "auth_fail", raw: buffer.slice(0, 200) }); return;
         }
         step = 2; buffer = "";
         const folder = acct.folder || "INBOX";
         socket.write(`A2 SELECT ${JSON.stringify(folder)}\r\n`);
       } else if (step === 2 && buffer.includes("A2 ")) {
+        if (!buffer.includes("A2 OK")) {
+          socket.destroy(); resolve({ email: acct.email, error: "select_fail", raw: buffer.slice(0, 200) }); return;
+        }
         step = 3; buffer = "";
         socket.write(`A3 SEARCH SINCE ${IMAP_SINCE}\r\n`);
       } else if (step === 3 && buffer.includes("A3 ")) {
@@ -59,7 +99,7 @@ function checkIMAP(acct) {
           socket.write("A9 LOGOUT\r\n"); socket.destroy();
           resolve({ email: acct.email, count: 0, subjects: [], alerts: [] }); return;
         }
-        const range = ids.slice(-50).join(",");
+        const range = ids.slice(-80).join(",");
         step = 4; buffer = "";
         socket.write(`A4 FETCH ${range} (BODY.PEEK[HEADER.FIELDS (Subject Date From)])\r\n`);
       } else if (step === 4 && buffer.includes("A4 ")) {
@@ -76,13 +116,14 @@ function checkIMAP(acct) {
           const dateStr = dateM ? dateM[1].trim() : "";
           const from = decodeMime(fromM ? fromM[1].trim() : "");
           let emailDate = null;
-          try { emailDate = new Date(dateStr); } catch(_) {}
+          try { emailDate = new Date(dateStr); } catch (_) {}
+          // Post-filter by exact timestamp — SINCE is only day-granularity, this enforces the real cutoff.
           if (emailDate && emailDate < WINDOW_START) continue;
           subjects.push({ subject: subj, from, date: dateStr });
           const sl = subj.toLowerCase() + " " + from.toLowerCase();
-          if (ALERT_KEYWORDS.some(k => sl.includes(k))) alerts.push(subj);
+          if (ALERT_KEYWORDS.some(k => sl.includes(k))) alerts.push({ subject: subj, from, date: dateStr });
         }
-        resolve({ email: acct.email, count: subjects.length, subjects: subjects.slice(0, 20), alerts });
+        resolve({ email: acct.email, count: subjects.length, subjects, alerts });
       }
     });
   });
@@ -104,7 +145,7 @@ async function checkGmailAPI(acct) {
     const listRes = await gmail.users.messages.list({ userId: "me", q: `after:${afterTs}`, maxResults: 50 });
     const messages = listRes.data.messages || [];
     if (messages.length === 0) return { email: acct.email, count: 0, subjects: [], alerts: [] };
-    const batch = messages.slice(0, 20);
+    const batch = messages.slice(0, 30);
     const details = await Promise.all(
       batch.map(m => gmail.users.messages.get({ userId: "me", id: m.id, format: "metadata", metadataHeaders: ["Subject", "From", "Date"] }).catch(() => null))
     );
@@ -115,11 +156,11 @@ async function checkGmailAPI(acct) {
       const get = n => hdr.find(h => h.name === n)?.value || "";
       const subject = get("Subject"), from = get("From"), date = get("Date");
       subjects.push({ subject, from, date });
-      if (ALERT_KEYWORDS.some(k => (subject + " " + from).toLowerCase().includes(k))) alerts.push(subject);
+      if (ALERT_KEYWORDS.some(k => (subject + " " + from).toLowerCase().includes(k))) alerts.push({ subject, from, date });
     }
     return { email: acct.email, count: messages.length, subjects, alerts };
   } catch (err) {
-    return { email: acct.email, error: err.message };
+    return { email: acct.email, error: err.message, errStack: (err.response && JSON.stringify(err.response.data)) || null };
   }
 }
 
@@ -128,5 +169,6 @@ async function checkGmailAPI(acct) {
     Promise.all(accounts.map(checkIMAP)),
     Promise.all(gmailApiAccounts.map(checkGmailAPI)),
   ]);
+  console.error(`[email-scan] window: ${WINDOW_START.toISOString()} -> now (IMAP SINCE ${IMAP_SINCE})`);
   console.log(JSON.stringify([...imapResults, ...apiResults], null, 2));
 })();

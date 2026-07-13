@@ -186,7 +186,7 @@ Supports individual account targeting:
 |---------|------|-----------------|
 | freelancer@mypersonalfootballcoach.com | `.gmail-service-account.json` service account key | Client emails from MPFC project (Adam Blackford or team). If key missing → note as unavailable, check previous day's report for known issues. |
 
-**Method (Gmail API):** Requires `config/.gmail-service-account.json`. If file missing: report as unavailable (do NOT say "blocked" or "token expired"). Run `node scripts/daily-email-scan-260610.js` which handles all 3 groups automatically.
+**Method (Gmail API):** Requires `config/.gmail-service-account.json`. If file missing: report as unavailable (do NOT say "blocked" or "token expired"). Run `node scripts/email-scan.js` (canonical, non-dated script — window computed automatically from `daily_report.last_run`) which handles all 3 groups automatically. 🔴 Never write/use a new dated `daily-email-scan-YYMMDD.js` copy — edit `scripts/email-scan.js` directly if a fix is needed, same rule as [[feedback_no_dated_scan_scripts]] for Sheets.
 
 **Calendar — run alongside email check (Zoho accounts only):**
 ```bash
