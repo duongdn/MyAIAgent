@@ -250,7 +250,7 @@ Supports individual workspace targeting:
 | Baamboozle | baamboozle | xoxp | General activity. **Aysar gate is the MPDM channel `C07SQ4HAUHZ` specifically** (Carrick's "Today's update", posts ~17:00-17:45+07) — general workspace noise is NOT the gate. | Aysar |
 | RDC - FM Monitoring | rdc | xoxp | dmetiner updates | Franc |
 | Swift Studio | swift | xoxp | Carrick activity | Rory |
-| Xtreme Soft Solutions | xtreme | xoxp | **Kai daily report** (search: "progress"/"daily report") | Maddy - Carrick/Kai/Luis |
+| Xtreme Soft Solutions | xtreme | xoxp | 🔴 **Kai daily report — CONDITIONAL on Workstream:** first check Workstream project `maddy` (`cmpqc1v7v00ahtk1vs1817xt8`) for LongVV's hours on the reporting date. If 0h that day, skip the report-presence check entirely (not an alert — see [[feedback_kai_daily_report_gate]]). If >0h, THEN search Slack for "progress"/"daily report" — missing report on a day he worked IS an alert. Always still check for unanswered Madhuraka/client messages + blockers regardless of hours. | Maddy - Carrick/Kai/Luis |
 | SAM GUARD - Mobile | samguard | xoxp | Elena/DP activity | Elena - SamGuard |
 | Global Grazing Services | ggs | xoxp | **Nick daily report in #maintenance** (NOT TuanNT) | Bailey |
 | Amazing Meds | amazingmeds | xoxc+cookie | General activity. Auto-refresh if invalid_auth. | John Yi - Amazing Meds |
@@ -567,7 +567,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 
 | Arg | Checklist | Item name | Run piece first |
 |------|-----------|-----------|-----------------|
-| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `slack xtreme` + `sheets longvv` |
+| `maddy` | Normal | Maddy - Carrick/Kai/Luis | `slack xtreme` (Kai report check gated on Workstream Maddy hours, see Piece 2 workspace table) + `sheets longvv` |
 | `blake` | Normal | Blake | **DROPPED 2026-05-11, no longer on board** |
 | `johnyi` | Normal | John Yi - Amazing Meds | `slack amazingmeds` + `sheets tuannt` |
 | `james` | Should do | James Diamond - Vinn task | `discord airagri` + `sheets phucvt` |
@@ -779,7 +779,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 
 | Trello Item (partial match) | Sources to run | Notes |
 |-----------------------------|----------------|-------|
-| Maddy | `slack xtreme` + `sheets longvv` | Kai daily report + LongVV hours |
+| Maddy | `slack xtreme` + `sheets longvv` | Kai daily report check is CONDITIONAL: check Workstream Maddy hours for the day first, only flag missing report if he logged hours that day (see [[feedback_kai_daily_report_gate]]) |
 | John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined **5** sheets (JohnYi+Rebecca+Paturevision+Neural+CharlesChang) |
 | Bailey | `slack ggs` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Bailey too. VietPH resigned 2026-06-30 — no longer a source. |
 | James Diamond / Vinn | `discord airagri` | Vinn daily report (check BOTH #airagri_webapp and #airagri-flutter) |
