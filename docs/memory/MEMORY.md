@@ -96,7 +96,6 @@
 
 ## daily-report:matrix
 - [feedback_matrix_daily_summary](daily-report/matrix/feedback_matrix_daily_summary.md), [feedback_matrix_join_public_room](daily-report/matrix/feedback_matrix_join_public_room.md) — summarize, never raw dump
-- [feedback_matrix_refresh_headless_bug](daily-report/matrix/feedback_matrix_refresh_headless_bug.md), [feedback_matrix_token_never_report_expired](daily-report/matrix/feedback_matrix_token_never_report_expired.md), [feedback_matrix_token_short_lived](daily-report/matrix/feedback_matrix_token_short_lived.md) — 🔴 all 3 now fallback-only, primary token is static mct_ (see [[project_matrix_static_compat_token]])
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md), [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md), [reference_matrix_rooms](daily-report/reminders/reference_matrix_rooms.md) — cross-check before 0h
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript, grep misses signals
 - [project_matrix_static_compat_token](daily-report/matrix/project_matrix_static_compat_token.md) — 🔴 mct_ non-expiring token from admin (260713), browser-refresh flow now rarely needed

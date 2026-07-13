@@ -1,28 +1,32 @@
 ---
 name: never-report-token-expired-as-blocker
-description: NEVER report token/cookie expired as a blocking issue. Always fix silently — rerun refresh, try alternate method, keep going.
-metadata:
+description: "NEVER report token/cookie expired as a blocking issue. Always fix silently — rerun refresh, try alternate method, keep going. Zero tolerance."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: a1b3cf73-c085-4f4a-b9d5-d024e11a5859
 ---
 
-ABSOLUTE RULE: Token expiry / session expiry / Cloudflare block / auth failure = INTERNAL ISSUE. YOU MUST FIX IT. Then scan. Then write report with real data. Never tell the user. Never show `—`. Never omit. Never skip.
+ABSOLUTE RULE: Token expiry / session expiry / Cloudflare block / auth failure = INTERNAL ISSUE. YOU MUST FIX IT. Then scan. Then write report with real data. Never tell the user. Never show `—`. Never omit data. Never skip.
 
-**Why:** These are internal infrastructure problems. Fix yourself — refresh token, clear Cloudflare, new session, different method. There is no "cannot fix" fallback. Keep trying until it works. Report must have real data for every source.
+**Why:** These are internal infrastructure problems. The user only cares about results. Fix it yourself — refresh token, clear Cloudflare, retry with new session, use a different method. There is no "cannot fix" fallback. Keep trying until it works.
 
-**Corrected 2026-05-29:** Previous memory wrongly said "silently omit / show `—` if cannot fix." WRONG. Always fix. Always get real data.
+**Corrected 2026-05-29:** Previous memory wrongly said "silently omit / show `—` if cannot fix." That is WRONG. The correct rule is: ALWAYS FIX, always get real data, always write complete results.
 
-**Banned phrases — NEVER appear ANYWHERE (alerts, info, tables, notes, every section):**
+**Banned phrases — NEVER appear ANYWHERE (alerts, info, tables, notes, any section):**
 - "cannot send", "CANNOT SEND", "could not send"
-- "token expired", "session expired"
+- "token expired", "session expired", "xoxc session expired"
+- "invalid_auth — couldn't scan"
 - "manual login needed", "manual browser login required"
 - "auth failed", "authentication failed"
 - "blocked by Cloudflare", "Cloudflare blocked", "Cloudflare challenge"
 - "cannot proceed due to"
 - "⚠️ Matrix token expired"
+- "Session token invalid_auth"
 - "Need session refresh" / "needs login to restore"
 - Any ⚠️ on an auth/access issue in any table
 
-**CORRECTED 2026-05-29 (×3):** Zero tolerance = ZERO everywhere, not just in Alerts. If data unavailable, show `—` silently.
+**CORRECTED 2026-05-29 (×3 in one session):** Removed from alerts but left in Upwork table and Trello note. Zero tolerance means ZERO — not "removed from alerts, still in tables". If data unavailable, show `—` with no explanation.
 
 **How to apply:**
 
@@ -38,10 +42,8 @@ ABSOLUTE RULE: Token expiry / session expiry / Cloudflare block / auth failure =
 **Pre-scan mandate for xoxc workspaces:**
 Run `scripts/slack-xoxc-refresh-amazingmeds.js` and `scripts/slack-xoxc-refresh-equanimity.js` **at the start of every Slack scan**, before the first API call. Do not wait for `invalid_auth` — these tokens expire constantly and refresh takes ~60s.
 
-- NEVER write any auth-failure phrase anywhere in any report or message
-- NEVER show `—` or omit data because of auth/access failure — fix it first, then write real data
-- NEVER skip a Trello item because of auth failure — fix, get real data, then decide
-- There is no "cannot fix" fallback — try every available method until it works
+**There is no "cannot fix" scenario:**
+→ Try every method available. Refresh token. Clear session. Use Puppeteer. Try a different endpoint. There is always a way. The report must contain real data for every source.
 
 [[feedback_token_handling]]
-[[feedback_matrix_token_never_report_expired]]
+[[project_matrix_static_compat_token]]
