@@ -59,13 +59,22 @@ async function main() {
     };
   });
 
+  // A real Matrix/OIDC token is a non-trivial opaque string — reject
+  // booleans/short placeholders (e.g. some capability responses literally
+  // contain {"access_token": true} as a feature flag, not a real token;
+  // this previously got captured verbatim as the literal string "true").
+  const looksLikeToken = (v) => typeof v === 'string' && v.length >= 20;
+
   // Intercept requests to capture Bearer tokens
   await page.setRequestInterception(true);
   page.on('request', (req) => {
     const auth = req.headers()['authorization'];
     if (auth && auth.startsWith('Bearer ') && !capturedAccessToken) {
-      capturedAccessToken = auth.replace('Bearer ', '');
-      console.log(`Captured access_token: ${capturedAccessToken.substring(0, 20)}...`);
+      const candidate = auth.replace('Bearer ', '');
+      if (looksLikeToken(candidate)) {
+        capturedAccessToken = candidate;
+        console.log(`Captured access_token: ${capturedAccessToken.substring(0, 20)}...`);
+      }
     }
     req.continue();
   });
@@ -78,9 +87,11 @@ async function main() {
         const text = await res.text().catch(() => '');
         if (text.includes('refresh_token')) {
           const data = JSON.parse(text);
-          if (data.access_token) capturedAccessToken = data.access_token;
-          if (data.refresh_token) capturedRefreshToken = data.refresh_token;
-          console.log('Captured tokens from token response.');
+          if (looksLikeToken(data.access_token)) capturedAccessToken = data.access_token;
+          if (looksLikeToken(data.refresh_token)) capturedRefreshToken = data.refresh_token;
+          if (looksLikeToken(data.access_token) || looksLikeToken(data.refresh_token)) {
+            console.log('Captured tokens from token response.');
+          }
         }
       }
     } catch {}
@@ -141,10 +152,10 @@ async function main() {
         return result;
       }).catch(() => ({}));
 
-      if (stored.access_token) {
+      if (looksLikeToken(stored.access_token)) {
         capturedAccessToken = stored.access_token;
       }
-      if (stored.refresh_token) {
+      if (looksLikeToken(stored.refresh_token)) {
         capturedRefreshToken = stored.refresh_token;
       }
     }
@@ -153,8 +164,11 @@ async function main() {
     if (!capturedAccessToken) {
       const hookedAuth = await page.evaluate(() => window.__auth).catch(() => null);
       if (hookedAuth && hookedAuth.startsWith('Bearer ')) {
-        capturedAccessToken = hookedAuth.replace('Bearer ', '');
-        console.log(`Captured access_token via XHR hook: ${capturedAccessToken.substring(0, 20)}...`);
+        const candidate = hookedAuth.replace('Bearer ', '');
+        if (looksLikeToken(candidate)) {
+          capturedAccessToken = candidate;
+          console.log(`Captured access_token via XHR hook: ${capturedAccessToken.substring(0, 20)}...`);
+        }
       }
     }
 
