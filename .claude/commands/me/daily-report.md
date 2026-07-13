@@ -74,11 +74,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Scrin.io** | |
 | `/daily-report scrin` | TuanNT/John Yi time tracking |
 | **Fountain** | |
-| `/daily-report fountain` | Full 5-part check |
+| `/daily-report fountain` | Full 3-part check (Capacity/Over-estimate dropped 2026-07-13, source sheet gone) |
 | `/daily-report fountain matrix` | Part 1 — Matrix plan only |
 | `/daily-report fountain sheets` | Part 2+3 — Task log actuals + plan vs actual |
-| `/daily-report fountain runway` | Part 4 — Capacity & runway only |
-| `/daily-report fountain overest` | Part 5 — Over-estimate tracking only |
 | `/daily-report fountain trello` | Trello board only (customer comments, stuck cards) |
 | **Elena** | |
 | `/daily-report elena` | Elena PRs + deploy + Redmine + Precognize |
@@ -423,14 +421,12 @@ If empty: `**Scrin.io (TuanNT / John Yi — {date}):** 0h — no sessions record
 ## Piece 6 — Fountain (`/daily-report fountain [part]`)
 
 Supports individual part targeting:
-- `/daily-report fountain` — full 5-part check (all mandatory)
+- `/daily-report fountain` — full 3-part check (all mandatory)
 - `/daily-report fountain matrix` — Part 1: Matrix plan only
 - `/daily-report fountain sheets` — Part 2+3: Task log actuals + plan vs actual table
-- `/daily-report fountain runway` — Part 4: Capacity & runway only
-- `/daily-report fountain overest` — Part 5: Over-estimate tracking only
 - `/daily-report fountain trello` — Trello board only (customer comments, stuck cards)
 
-Full 5-part check. All 5 parts are mandatory — never skip any.
+🔴 **Full 3-part check** (was 5 — Capacity & Runway and Over-estimate tracking DROPPED 2026-07-13: the "Est vs Charged" Google Sheet tab is no longer used, moved to Workstream, and Workstream has no equivalent task-level est/actual+CR feature — this tracking is gone, not migrated. Do not look for a Workstream substitute.). All 3 remaining parts are mandatory — never skip any.
 
 **Part 1 — Matrix Plan**
 - Room: `!EWnVDAxbTGsBxPkaaI:nustechnology.com`
@@ -439,7 +435,7 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 - **On Monday, @trinhmtt posts the new week's plan ~08:30-09:30+07.** If checked before 09:30, do NOT flag "plan absent" — note "not yet posted, expected by 09:30, using last week's plan for context" and use the previous week's numbers. Recheck after 09:30.
 - If token expired → run `scripts/matrix-token-refresh.js` first (tries refresh_token API automatically, no browser). Save new token to `config/.matrix-config.json` immediately.
 - If refresh still fails (both token + refresh_token expired) → run `node scripts/matrix-device-auth.js` for device-code auth (no browser needed — shows URL to approve on any device).
-- **If Matrix unavailable after both attempts:** proceed with Parts 2-5 using LAST KNOWN plan (from prior report). Note "Matrix plan N/A — using W{n-1} capacity" in the report. **Do NOT skip the Fountain Trello item** — if Parts 2-5 show no issues, complete the Trello item and note Matrix was unavailable.
+- **If Matrix unavailable after both attempts:** proceed with Parts 2-3 using LAST KNOWN plan (from prior report). Note "Matrix plan N/A — using prior week's plan for context" in the report. **Do NOT skip the Fountain Trello item** — if Parts 2-3 show no issues, complete the Trello item and note Matrix was unavailable.
 
 **Part 2 — Task Log Actuals**
 - 🔴 **Workstream is now primary** (project `fountain`, id `cmpqcjojh00q2tk1v2qi7gs0j` — user confirmed 2026-07-13, all projects moved to Workstream except Bailey). Query `/review/week?projectId=cmpqcjojh00q2tk1v2qi7gs0j&date=...` first. Fall back to Sheet `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` (Summary tab, W{n}) only if Workstream data looks empty/suspicious.
@@ -452,20 +448,6 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 - Compare each dev's plan (from Matrix) vs actual (from sheets)
 - Never say "matches plan" without showing the numbers
 - VuTQ: once their (often small) weekly plan total is met, subsequent 0h days that week are normal, not an alert.
-
-**Part 4 — Capacity & Runway**
-- "Est vs Charged" tab. Columns: Col I (idx 8) = Estimated Dev Raw, **Col J (idx 9) = CR** (Change Request, additional approved estimate), Col K (idx 10) = Actual, Col L (idx 11) = Charged.
-- 🔴 **Total estimate per task = Col I + Col J. Always include CR** — omitting it has caused false "over-estimate" alerts before (e.g. #2735 looked +42% over using Col I alone, but with CR included it's only +4.6%, under threshold).
-- NS+IP bucket: sum `remaining = (ColI+ColJ) - ColK` for Not Started + In-progress (any % variant), EXCLUDING Deployed on Live/Cancelled/Has Bug on Live/Tested on Live. Broader bucket adds Pending/On Hold/Dev Done/Deployed on Staging/blank/N/A.
-- 🔴 **Row-matching bug (found 2026-06-22):** when selecting which rows count as tasks, match ANY row with a non-empty task identifier — do NOT filter by a dash/underscore name-format regex (e.g. matching "2524-duplicate-charge" but not bare "2640"). A prior report undercounted remaining hours 5x (42h/4 tasks vs the real 219h/27 tasks) this way. If a day's figure differs sharply from the previous report, suspect a script bug first, sanity-check row counts before reporting a "spike".
-- Runway = remaining_hours / current_dev_capacity_per_week. **Derive capacity from Part 1's current Matrix plan** (sum of dev-only hours, e.g. ViTHT+ThinhT+VuTQ) — do NOT hardcode a number, team size/hours change week to week. If Matrix unavailable, reuse last known capacity from the most recent prior report that has it.
-- Show delta vs previous report (search `reports/*/daily-report.md` for the most recent Fountain capacity figures).
-
-**Part 5 — Over-Estimate Tracking**
-- Tasks where `Actual (ColK) > (ColI+ColJ) * 1.2` (i.e. >20% over the CR-inclusive total estimate)
-- Key tasks to always check by number even if not already flagged: #2595, #2615, #2735
-- Flag if STILL GROWING vs previous report (compare actual hours, not just %)
-- HungPN 0h is not an alert if PhatDLT covers QC that day. Don't speculate on individual Fountain dev 0h days as "unresolved questions" — established pattern, not worth flagging each time.
 
 **Trello Board (Fountain)**
 - Board: Web Development (`5475eaf923a9a1309357eb51`), Rick's account
@@ -583,7 +565,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
 | `mpfc` | Work | MPFC | `slack mpfc` |
 | `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source) |
-| `fountain` | Work | Fountain | `fountain` (full 5-part) |
+| `fountain` | Work | Fountain | `fountain` (full 3-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
 | `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` |
@@ -795,7 +777,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 | Rebecca | `slack williambills` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Rebecca too |
 | Colin | `slack aigile` | No activity = OK → complete |
 | Andrew Taraba | `discord bizurk` DM "animeworld" | Check nuscarrick DM |
-| Fountain | `fountain` (full 5-part) | Must fix Matrix token first |
+| Fountain | `fountain` (full 3-part) | Must fix Matrix token first |
 | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` | Full name required |
 | Ohcleo | `slack ohcleo` | Piece 12 |
 | Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |

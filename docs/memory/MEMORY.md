@@ -77,10 +77,10 @@
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴 tracks Nick not TuanNT; raw Project/Client tag usually "No project"/"No client" — never present this figure as validating any specific client's work (260709 repeat)
 
 ## daily-report:fountain
-- [feedback_fountain_cr_column](daily-report/fountain/feedback_fountain_cr_column.md), [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — est=ColI+ColJ; 5-part MANDATORY
+- [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — 🔴 3-part MANDATORY (Capacity/Over-estimate DROPPED 260713, source sheet gone — not migrated to Workstream)
 - [feedback_fountain_dev_specific_consolidated](daily-report/fountain/feedback_fountain_dev_specific_consolidated.md) — HungPN/TrinhMTT QC, VuTQ, HaVS specifics
 - [feedback_fountain_0h_not_expected_day1](daily-report/fountain/feedback_fountain_0h_not_expected_day1.md), [feedback_fountain_monday_plan_timing](daily-report/fountain/feedback_fountain_monday_plan_timing.md) — Mon plan 08:30-09:30
-- [feedback_fountain_capacity_script_regex_bug](daily-report/fountain/feedback_fountain_capacity_script_regex_bug.md), [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md), [feedback_fountain_est_vs_charged_status_column_bug](daily-report/fountain/feedback_fountain_est_vs_charged_status_column_bug.md), [feedback_over_estimate_tracking](daily-report/fountain/feedback_over_estimate_tracking.md) — track growth wk/wk
+- [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md)
 
 ## daily-report:elena
 - [feedback_elena_consolidated](daily-report/elena/feedback_elena_consolidated.md), [feedback_csp_violations_are_real_errors](daily-report/elena/feedback_csp_violations_are_real_errors.md), [reference_elena_wordpress_csp_config](daily-report/elena/reference_elena_wordpress_csp_config.md) — auto-deploy mergeable PRs; CSP violations real
