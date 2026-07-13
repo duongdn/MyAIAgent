@@ -591,6 +591,8 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
 | `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` |
 | `ohcleo` | Work | Ohcleo | `slack ohcleo` (Piece 12) |
+| `arthur` | Work | Arthur - Meta-Stamp | `arthur` (Piece 13, full 5-source check) |
+| `blair_brown` | Work | Blair Brown - Peptide Clyde | `sheets lenh` (LeNH's all-Workstream-projects scan already covers `blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |
 
 Examples:
 - `/daily-report trello progress maddy` → runs `/daily-report slack xtreme`, then completes/skips Maddy
@@ -798,6 +800,8 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` | Full name required |
 | Ohcleo | `slack ohcleo` | Piece 12 |
 | Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |
+| Arthur - Meta-Stamp | `arthur` (Piece 13, full 5-source check) | Vietnamese summary mandatory |
+| Blair Brown - Peptide Clyde | `sheets lenh` | Covered by LeNH's all-Workstream-projects scan (`blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |
 
 **Step 4 — Decrypt + fix auth before re-running**
 
@@ -892,7 +896,7 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Condition | Mode |
 |-----------|------|
 | `--cron` flag | Cron mode (sequential inline, always full run) |
-| Report file does NOT exist for today | Full run (all 13 pieces, incl. Performance — see Piece 14) |
+| Report file does NOT exist for today | Full run (all 14 pieces, incl. Performance + Arthur — see Piece 14, Piece 13) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
@@ -902,7 +906,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance**
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur**
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 
@@ -951,7 +955,7 @@ Rules:
 **Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io + **OhCleo Slack** (Piece 12)
-3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14)
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
@@ -1021,7 +1025,7 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 
 ## Piece 13 — Arthur / Meta-Stamp (`/daily-report arthur`)
 
-**Not a standard client piece — not gated by any Trello item, not part of Full Run.** Run only when explicitly requested (`/daily-report arthur`) or via `/me:arthur-monitor` alias. Manual/on-demand only, never cron. Language: **Vietnamese always** — user cannot read English well and most raw client messages are in English. Full background/history: `docs/memory/daily-report/matrix/feedback_arthur_metastamp_four_part_check.md` and the one-time full deep-dive `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
+**CONFIRMED 2026-07-13 by user: now part of every Full Run** (previously on-demand-only). Gates Trello item "Arthur - Meta-Stamp" (Work checklist, "Check progress" card) — complete it if no new unresolved issues from this run. Also runnable standalone via `/daily-report arthur` or `/me:arthur-monitor` alias. Language: **Vietnamese always** — user cannot read English well and most raw client messages are in English. Full background/history: `docs/memory/daily-report/matrix/feedback_arthur_metastamp_four_part_check.md` and the one-time full deep-dive `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
 
 **5 sources, every run:**
 | # | Source | ID | Notes |
