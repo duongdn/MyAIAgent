@@ -22,10 +22,21 @@ function apiGet(url, headers) {
 
 async function scanWorkspace(acct) {
   if (SKIP.includes(acct.workspace)) return null;
-  const headers = { Authorization: `Bearer ${acct.token}` };
-  if (acct.auth_type === "session" && acct.cookie) headers.Cookie = `d=${encodeURIComponent(acct.cookie)}`;
   const url = `https://slack.com/api/search.messages?query=${encodeURIComponent("after:" + dayBefore)}&count=100&sort=timestamp&sort_dir=desc`;
-  const res = await apiGet(url, headers);
+  // Session cookies vary: some need raw, some need URL-encoded (depends on whether
+  // the cookie value contains chars like +/= that need escaping). Try raw first,
+  // fall back to encoded on invalid_auth rather than assuming one form for all workspaces.
+  let res;
+  if (acct.auth_type === "session" && acct.cookie) {
+    const headersRaw = { Authorization: `Bearer ${acct.token}`, Cookie: `d=${acct.cookie}` };
+    res = await apiGet(url, headersRaw);
+    if (!res.ok && res.error === "invalid_auth") {
+      const headersEncoded = { Authorization: `Bearer ${acct.token}`, Cookie: `d=${encodeURIComponent(acct.cookie)}` };
+      res = await apiGet(url, headersEncoded);
+    }
+  } else {
+    res = await apiGet(url, { Authorization: `Bearer ${acct.token}` });
+  }
   if (!res.ok) return { workspace: acct.workspace, error: res.error || JSON.stringify(res).slice(0,200) };
   const matches = (res.messages && res.messages.matches) || [];
   const filtered = matches.filter(m => parseFloat(m.ts) >= cutoffTs);

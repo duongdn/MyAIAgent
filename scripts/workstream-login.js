@@ -101,6 +101,21 @@ async function main() {
   console.log('[workstream-login] Navigating to', BASE_URL);
   await page.goto(BASE_URL, { waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
 
+  // Landing page requires an explicit "Sign in with SSO" click to trigger the
+  // Keycloak redirect — it does not auto-redirect on its own. Click it (and again
+  // after any subsequent SSO-provider screens) using existing session cookies.
+  for (let i = 0; i < 3 && !capturedToken; i++) {
+    const clicked = await page.evaluate(() => {
+      const btn = Array.from(document.querySelectorAll('button, a')).find(el =>
+        /sign in with sso/i.test(el.textContent || '')
+      );
+      if (btn) { btn.click(); return true; }
+      return false;
+    }).catch(() => false);
+    if (clicked) console.log('[workstream-login] Clicked "Sign in with SSO"');
+    await new Promise(r => setTimeout(r, 2000));
+  }
+
   // Wait up to 5 minutes for SSO auto-login (or manual credential entry) to complete and API calls to fire
   const deadline = Date.now() + 300000;
   while (!capturedToken && Date.now() < deadline) {
