@@ -69,7 +69,6 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report sheets longvv` | LongVV only |
 | `/daily-report sheets phucvt` | PhucVT only |
 | `/daily-report sheets tuannt` | TuanNT (5 sheets combined) only |
-| `/daily-report sheets vietph` | VietPH only |
 | `/daily-report sheets khanhhh` | KhanhHH (4 sources combined) only |
 | `/daily-report sheets lenh` | LeNH (Rory + Franc + Rebecca — col G filter) only — NOT Aysar |
 | **Scrin.io** | |
@@ -326,14 +325,13 @@ Trello: {item(s)} ✓ complete / ⚠️ skipped (alert).
 
 ---
 
-## Piece 4 — Google Sheets (`/daily-report sheets [developer]`)
+## Piece 4 — Task Log Hours: Workstream + Google Sheets (`/daily-report sheets [developer]`)
 
 Supports individual developer targeting:
 - `/daily-report sheets` — check all developers
 - `/daily-report sheets longvv` — LongVV only
 - `/daily-report sheets phucvt` — PhucVT only
 - `/daily-report sheets tuannt` — TuanNT (5 sheets combined) only
-- `/daily-report sheets vietph` — VietPH only
 - `/daily-report sheets khanhhh` — KhanhHH (4 sources combined) only
 - `/daily-report sheets lenh` — LeNH (Rory + Franc + Rebecca, filter col G=LeNH) only
 
@@ -342,7 +340,7 @@ Supports individual developer targeting:
 
 🔴 **RULE: NEVER pre-assign developers to specific sheets or Workstream projects.** Developers switch projects without notice. Hardcoding dev→sheet has caused multiple false alerts (KhanhHH Jun22: 8.0h real, reported 2.5h; TuanNT Jun17: missed CharlesChang entirely). Always scan ALL sources for every dev.
 
-**For each developer: scan ALL 11 Google Sheets + ALL Workstream projects. Filter each by col G (Owner) = dev name, sum col H (Actual hours). See [[feedback_dev_project_mapping_flexible]] for full sheet ID list. See [[reference_workstream]] for all Workstream project IDs.**
+🔴 **Workstream is now the primary source for ALL projects except Bailey — user confirmed 2026-07-13: "tất cả dự án đã chuyển qua workstream, trừ Bailey" (all projects moved to Workstream, except Bailey).** For every dev, query ALL Workstream projects first (see [[reference_workstream]] for full project ID list). Only Bailey/Paturevision hours come from Google Sheets as the sole source (no Workstream project exists for it — see [[feedback-bailey-paturevision-billing]]). For every OTHER dev/project, still cross-check Google Sheets (ALL 11 sheets, see [[feedback_dev_project_mapping_flexible]]) as a fallback/sanity-check when Workstream returns 0h or looks suspicious — per [[feedback_check_workstream_before_flagging_shortfall]]'s extensive false-negative history, a single Workstream query is not sufficient evidence for a 0h/shortfall claim on its own. Filter Sheets rows by col G (Owner) = dev name, sum col H (Actual hours).
 
 **Workstream unavailable fallback:** If `node scripts/workstream-fetch-project-week.js` fails (token expired, login fails), use Google Sheets data as authoritative. Do NOT add "WS unavailable — unverified" caveats that turn confirmed 0h into uncertain results. Google Sheets 0h = ALERT; Google Sheets >0h = OK. Note in report that WS was skipped. Workstream re-auth: `DISPLAY=:1 node scripts/workstream-login.js`.
 
@@ -361,7 +359,6 @@ Workstream lets a dev's charged hours be flagged for review; the row's `reviewSt
 | LongVV | longvv | 16h/**week** | Only if WEEKLY total < 16h, no leave | Part-time. 0h on any single day is NORMAL — never flag daily 0h. |
 | PhucVT | phucvt | 8h/day | 0h no leave = alert | Nghỉ nửa ngày = 4h OK |
 | TuanNT | tuannt | 8h/day combined | 0h across ALL sources = alert | Col P "Chưa" in Rebecca = normal. Show per-source breakdown. Blocks John Yi+Rebecca+Bailey Trello items. |
-| VietPH | vietph | 8h/day | 0h no leave = alert | Nghỉ cả ngày = 0h OK |
 | KhanhHH | khanhhh | 8h/day combined | 0h across ALL sources = alert | New sources surface repeatedly (3 found in 2 months) — treat any shortfall with extra suspicion, verify all sources exhaustively before flagging. |
 | LeNH | lenh | 8h/day combined | ANY shortfall (even <1h) no leave = alert | Stricter threshold than other devs. Aysar sheet owner is KhanhHH, not LeNH. Rebecca cols M-Q = sign-offs only. |
 | Fountain | — | — | — | Used by `/daily-report fountain`, not this piece. |
@@ -445,7 +442,7 @@ Full 5-part check. All 5 parts are mandatory — never skip any.
 - **If Matrix unavailable after both attempts:** proceed with Parts 2-5 using LAST KNOWN plan (from prior report). Note "Matrix plan N/A — using W{n-1} capacity" in the report. **Do NOT skip the Fountain Trello item** — if Parts 2-5 show no issues, complete the Trello item and note Matrix was unavailable.
 
 **Part 2 — Task Log Actuals**
-- Sheet: `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`, Summary tab, W{n}
+- 🔴 **Workstream is now primary** (project `fountain`, id `cmpqcjojh00q2tk1v2qi7gs0j` — user confirmed 2026-07-13, all projects moved to Workstream except Bailey). Query `/review/week?projectId=cmpqcjojh00q2tk1v2qi7gs0j&date=...` first. Fall back to Sheet `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` (Summary tab, W{n}) only if Workstream data looks empty/suspicious.
 - Devs: ViTHT, ThinhT, VuTQ | QC: PhatDLT, HungPN
 - **HaVS**: only include/flag if named in Part 1's CURRENT week Matrix plan — not always on the plan, don't assume.
 - **TrinhMTT is NOT QC** — exclude from QC totals/alerts (they post the weekly plan, don't do QC work).
@@ -585,7 +582,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `andrew` | Work | Andrew Taraba | `discord bizurk` |
 | `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
 | `mpfc` | Work | MPFC | `slack mpfc` |
-| `bailey` | Work | Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this) |
+| `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source) |
 | `fountain` | Work | Fountain | `fountain` (full 5-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
@@ -784,7 +781,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 |-----------------------------|----------------|-------|
 | Maddy | `slack xtreme` + `sheets longvv` | Kai daily report + LongVV hours |
 | John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined **5** sheets (JohnYi+Rebecca+Paturevision+Neural+CharlesChang) |
-| Bailey | `slack ggs` + `sheets vietph` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Bailey too |
+| Bailey | `slack ggs` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Bailey too. VietPH resigned 2026-06-30 — no longer a source. |
 | James Diamond / Vinn | `discord airagri` | Vinn daily report (check BOTH #airagri_webapp and #airagri-flutter) |
 | Rory | `slack swift` only | Slack-only gate — sheets lenh does NOT block this item |
 | Franc | `slack rdc` only | Ad hoc, no hours expectation — sheets lenh does NOT block this item |
@@ -819,7 +816,7 @@ Before running any Slack/Matrix/Discord source:
 Run the mapped source pieces sequentially (not parallel — fewer resources, no race). For each source:
 - Use the **same logic** as the corresponding piece (Slack uses `search.messages`, Sheets uses PREV_DATE tokens, etc.)
 - Sheets re-scan: always use PREV_DATE (yesterday), NOT today — same day tokens are all 0h. **On Monday, PREV_DATE should resolve to Friday (last workday), not Sunday.**
-- **For every dev: scan ALL 11 Google Sheets + ALL Workstream projects** (see [[feedback_dev_project_mapping_flexible]] + [[reference_workstream]]). Never pre-limit which sources to check.
+- **For every dev: query Workstream first (primary source for all projects except Bailey), then cross-check Sheets** (see [[feedback_dev_project_mapping_flexible]] + [[reference_workstream]]). Bailey/Paturevision hours have no Workstream project — Sheets is the sole source there. Never pre-limit which sources to check.
 - TuanNT: if combined > 0h across all sources → no alert. Blocks John Yi+Rebecca+Bailey Trello items. Show per-source breakdown.
 - KhanhHH: new sources have surfaced 3 times in 2 months — treat any shortfall with extra suspicion, exhaust all sources before flagging.
 - LeNH: filter col G="LeNH" in each sheet. Any shortfall even <1h without leave = alert. Aysar sheet owner is KhanhHH, not LeNH.
@@ -855,7 +852,7 @@ Append a timestamped section:
 
 - **Never re-run email** — email is already done and Trello mail items are handled separately
 - **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
-- **All-sources rule (ALL devs):** Scan ALL 11 Google Sheets + ALL Workstream projects for every developer. Filter by col G = dev name. Never pre-assume which sources a dev uses — assignments change without notice.
+- **All-sources rule (ALL devs):** Workstream is primary for every project except Bailey (Sheets-only, no Workstream project). Query Workstream first, cross-check Sheets when WS returns 0h/looks suspicious. Filter Sheets rows by col G = dev name. Never pre-assume which sources a dev uses — assignments change without notice.
 - **TuanNT gate:** Any source with hours → combined > 0h → no alert → complete John Yi+Rebecca+Bailey Trello items.
 - **KhanhHH extra caution:** 3 new sources discovered in 2 months — treat any shortfall as suspect until all sources exhaustively verified.
 - **LeNH stricter:** Even <1h shortfall without leave = alert. Aysar sheet owner = KhanhHH (not LeNH).

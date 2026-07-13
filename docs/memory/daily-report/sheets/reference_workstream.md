@@ -11,9 +11,9 @@ metadata:
 
 Internal task-log system running parallel to Google Sheets. **No longer just Maddy/Rebecca** — as of 2026-07-02 it covers 17 named client projects + Others.
 
-🔴 **Workstream is now PRIORITY/AUTHORITATIVE for hours across ALL projects — user confirmed 2026-07-13: "check hết các dự án đi, chỉ có Bailey là đang không dùng workstream thôi" (check all projects, only Bailey isn't on Workstream).** When Workstream and Sheets disagree for any dev/project, trust Workstream (unless the project is Bailey/Paturevision — see exception below). This supersedes any older per-project "Sheets is primary" framing (e.g. Fountain, which explicitly moved to Workstream — see [[feedback_fountain_kunal_checklist]]).
+🔴 **ALL projects have moved to Workstream, EXCEPT Bailey — user corrected 2026-07-13, twice: "ko phải là chính" (not just "primary") — "tất cả dự án đã chuyển qua workstream, trừ Bailey" (ALL projects have moved to Workstream, except Bailey).** This is a full migration, not a tie-breaker rule: Workstream is now the source of truth for task-log hours on every project. Sheets are not a co-equal parallel source anymore for those projects — they may still be worth a cross-check when a Workstream query returns 0h/looks suspicious (Workstream has a long documented history of transient per-dev/per-project fetch failures, see [[feedback_check_workstream_before_flagging_shortfall]]), but do not scan Sheets as the default/primary method for any project except Bailey.
 
-**Known exception — Bailey/Paturevision:** does NOT use Workstream. Task-log actuals for Bailey (VietPH/TuanNT/DuongDN DEV3) come from the Paturevision Google Sheet only — see [[feedback-bailey-paturevision-billing]]. Don't expect or query a Workstream project for Bailey hours.
+**Known exception — Bailey/Paturevision:** does NOT use Workstream at all. Task-log actuals for Bailey (VietPH/TuanNT/DuongDN DEV3) come from the Paturevision Google Sheet only — see [[feedback-bailey-paturevision-billing]]. Don't expect or query a Workstream project for Bailey hours.
 
 ## Projects (confirmed via live `GET /time/projects` 2026-07-02 — this is the authoritative list, not the static table)
 

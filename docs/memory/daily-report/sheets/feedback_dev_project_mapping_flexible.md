@@ -1,9 +1,13 @@
 ---
 name: feedback_dev_project_mapping_flexible
-description: ALL devs scan ALL 11 sheets aggregated by owner col G — never use Summary tab total (all-devs sum), never hardcode dev→sheet mapping
-metadata:
+description: "ALL devs scan ALL 11 sheets aggregated by owner col G — never use Summary tab total (all-devs sum), never hardcode dev→sheet mapping"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: a61419af-501f-4646-a1fa-5c9991cec471
 ---
+
+🔴 **2026-07-13 update: Workstream is now primary for ALL these projects except Paturevision/Bailey** (see [[reference_workstream]] — full migration, not just a tie-breaker). This file's sheet list is now the FALLBACK/cross-check source (query when Workstream returns 0h or looks suspicious) for every sheet except Paturevision, which remains the sole/primary source since Bailey has no Workstream project. The scanning discipline below (all sheets, filter by owner col G, never hardcode dev→sheet) still applies whenever Sheets IS being queried — it just isn't the first place to look anymore except for Bailey.
 
 Dev → project sheet mapping is **not static**. Any dev may log hours in any sheet and assignments change weekly.
 
@@ -32,7 +36,7 @@ Dev → project sheet mapping is **not static**. Any dev may log hours in any sh
 3. Filter rows by col G (Owner) = dev name. Sum col H (Actual hours).
 4. Also include rows where col A is empty but col G has owner — some devs omit "Task dự án" in col A. See [[feedback_sheets_empty_col_a_bug]].
 5. Aggregate across ALL sheets → compare to 8h daily target.
-6. **⚠️ CORRECTED 2026-06-22 — No Q-T special case for Rebecca:** The old instruction "LeNH hours sit in cols Q-T" was wrong. Rebecca sheet cols M-Q contain sign-off confirmation headers, NOT task hours. Scan LeNH in Rebecca the same way as all other devs: filter by col G (Owner) = "LeNH", sum col H (Actual). No special column needed.
+6. **⚠️ CORRECTED 2026-06-22 — No Q-T special case:** The old "LeNH hours in Q-T" claim was wrong. Rebecca cols M-Q are sign-off confirmations, NOT task hours. Scan LeNH in Rebecca the same as all devs: filter col G (Owner)="LeNH", sum col H (Actual). No special column needed.
 7. Only flag shortfall if AGGREGATE < target and no leave note. Per-sheet 0h alone is never an alert.
 
 **Per-dev exceptions:**
