@@ -11,7 +11,7 @@
 - [feedback_report_location](global/feedback_report_location.md) — Reports in `reports/{date}/`
 - [feedback_always_include_links](global/feedback_always_include_links.md), [feedback_report_style](global/feedback_report_style.md) — concise, no trailing summary, always URLs
 - [feedback_customer_facing_messages](global/feedback_customer_facing_messages.md) — never expose internal auth failures to customers
-- [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md) — never send w/o explicit authorization
+- [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md), [feedback_never_send_without_explicit_flag](feedback_never_send_without_explicit_flag.md) — never send w/o explicit authorization
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize
 - [project_alert_cron_setup](global/project_alert_cron_setup.md) — 30min interval, rate-limit
 - [project_php_team](global/project_php_team.md) — LongVV,PhucVT,TuanNT,KhanhHH,LeNH (VietPH resigned)
@@ -26,6 +26,7 @@
 - [feedback_reminder_template_content_must_match_data](global/feedback_reminder_template_content_must_match_data.md) — 🔴 check message TEXT against verified number before sending, never reuse a "0h" template for a nonzero figure
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md) — 🔴 agent-fixable technical alerts (our code/infra) → fix directly, don't just re-report; external/human-only blockers → document exact missing credential
 - [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴 N accounts fail at once → check `git log` on the config first, don't assume provider-side expiry (260710: 5 Zoho "invalid creds" was actually our own bad commit)
+- [feedback_ripgrep_execute_permission_fix](global/feedback_ripgrep_execute_permission.md) — macOS only, SessionStart hook is a silent no-op on Linux
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
@@ -56,7 +57,8 @@
 
 ## daily-report:sheets (task logs / per-developer)
 - [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md) — WS reviewStatus=Pending → ALERT to reviewer, not dev
-- [feedback_workstream_all_projects_in_script](feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — scan ALL sheets+WS by owner, never hardcode
+- [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — scan ALL sheets+WS by owner, never hardcode
+- [feedback_vietph_leave_date_cron_bug](daily-report/sheets/feedback_vietph_leave_date_cron_bug.md) — leave note may apply to wrong PREV_DATE
 - [feedback_sheets_subagent_unreliable](daily-report/sheets/feedback_sheets_subagent_unreliable.md), [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md), [feedback_sheets_scan_script_reuse_wrong_day](daily-report/sheets/feedback_sheets_scan_script_reuse_wrong_day.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md) — date=PREV_DATE
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md) — no date arg = defaults to empty week
 - [feedback_workstream_vs_sheets_migration_gaps](daily-report/sheets/feedback_workstream_vs_sheets_migration_gaps.md) — Crystal lang/Arthur found; email added, no Trello
@@ -65,6 +67,7 @@
 - [feedback_sheets_wrong_tab_numbering](daily-report/sheets/feedback_sheets_wrong_tab_numbering.md), [feedback_sheets_empty_col_a_bug](daily-report/sheets/feedback_sheets_empty_col_a_bug.md), [feedback_tasklog_summary_sheet](daily-report/sheets/feedback_tasklog_summary_sheet.md), [feedback_summary_sheet_no_double_count](daily-report/sheets/feedback_summary_sheet_no_double_count.md) — use Summary col D
 - [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md) — full-time 40h/wk on Ohcleo ("Tony")
 - [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md) — LeNH any shortfall=alert; TuanNT 0h gates 3 items (3-way cross-check first, see above)
+- [feedback_khanhhh_aysar_consolidated](daily-report/sheets/feedback_khanhhh_aysar_consolidated.md) — Aysar sheet+Upwork hours=KhanhHH not LeNH; scan ALL sources, new sources keep surfacing
 - [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — parse-leave-emails.js first
 - [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 17 WS projects, run daily
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md), [feedback_elena_sheet_permission_error](daily-report/sheets/feedback_elena_sheet_permission_error.md) — perm error masks as "no week tab"
@@ -118,6 +121,8 @@
 
 ## weekly-report
 - [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — Blair Brown FORBIDDEN status
+- [feedback_thuyle_report_explicit_send_flag](weekly-report/feedback_thuyle_report_explicit_send_flag.md) — 🔴 exact-text confirmation gate before sending to ThuyLTT
+- [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md) — fetch WS /review/week for ALL projects, not just GSheets
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md) — 8 sheet IDs
