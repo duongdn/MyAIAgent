@@ -23,4 +23,4 @@ LongVV's project assignments **change by week** — always read the Monday Matri
 - If sheets shows 0h for Maddy → check Workstream FIRST (authoritative for Maddy)
 - Celine sheet not yet configured in scan script — note gap if Celine is in weekly plan
 - Part-time: ~16h Maddy allocation; total week target varies by plan
-- See [[feedback_workstream_authoritative_for_maddy_devs]]
+- See [[feedback_check_workstream_before_flagging_shortfall]] (Workstream authoritative over Sheets when they disagree) and [[feedback_longvv_consolidated]] for LongVV's current two-track state (Maddy 16h + OhCleo full-time, confirmed 2026-07-13) — this file's W23/W30 snapshots are historical, not current.

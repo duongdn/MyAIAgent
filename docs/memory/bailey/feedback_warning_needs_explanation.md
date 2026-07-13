@@ -1,6 +1,6 @@
 ---
 name: feedback_warning_needs_explanation
-description: Bailey Slack
+description: Every non-OK status in the Bailey #maintenance Slack post needs an inline plain-language explanation (cause, recurring/new, action) — a bare "WARNING" word is not actionable and drew a customer question
 metadata: 
   node_type: memory
   type: feedback

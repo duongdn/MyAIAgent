@@ -1,6 +1,6 @@
 ---
 name: reference_workstream
-description: "Workstream (workstream.nustechnology.com) — internal time tracking now covering 8 client projects beyond Maddy/Rebecca. Scripts, API, project IDs."
+description: "Workstream (workstream.nustechnology.com) — internal time tracking now covering 19 client projects total (17 beyond Maddy/Rebecca, growing — check body for latest). Scripts, API, project IDs."
 metadata: 
   node_type: memory
   type: reference

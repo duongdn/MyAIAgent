@@ -1,7 +1,10 @@
 ---
-name: Upwork workroom tracking setup
-description: Upwork account, workroom URLs, and scripts for weekly hour comparison with task logs
-type: reference
+name: upwork-workroom-tracking-setup
+description: "Upwork account, workroom URLs, and scripts for weekly hour comparison with task logs"
+metadata: 
+  node_type: memory
+  type: reference
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 ## Account
@@ -13,7 +16,7 @@ type: reference
 |---------|--------|-------------|-----------|------|
 | Rory | Rory Hackett | 41069448 | LeNH | — |
 | Neural Contract | Neural Contract | 38901192 | external | Messages only, no task log |
-| Aysar | Aysar K | 35642393 | LeNH (tracker) / KhanhHH (actual work) | Active. Sub-contract pattern — KhanhHH does the work, LeNH's Upwork tracker bills it. See `feedback_khanhhh_aysar_second_project.md`. |
+| Aysar | Aysar K | 35642393 | LeNH (tracker) / KhanhHH (actual work) | Active. Sub-contract pattern — KhanhHH does the work, LeNH's Upwork tracker bills it. See `feedback_khanhhh_aysar_consolidated.md`. |
 | Bailey DEV1 | BAILEY JOEY | 42545630 | VietPH | Account: vinn |
 | Bailey DEV3 | BAILEY JOEY | 43093775 | DuongDN | Account: david2 |
 

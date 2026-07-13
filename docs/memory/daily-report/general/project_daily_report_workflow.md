@@ -1,38 +1,17 @@
 ---
-name: Daily Report Workflow - Full Checklist & Trello Mapping
-description: Complete daily monitoring workflow with all data sources, Trello check progress mappings, completion rules, and API details
-type: project
+name: daily-report-workflow-full-checklist-trello-mapping
+description: "SUPERSEDED — the living checklist/Trello-mapping/config-file list is .claude/commands/me/daily-report.md, not this file. This memory snapshot (115+ days old) drifted badly stale (6 vs actual 10 email accounts, HOMIEAPP still listed though dropped, Kai check listed though retired, Blake→SoCal listed though dropped 2026-05-11, VietPH listed though resigned). Do not re-duplicate checklist details into memory — they go stale here and stay fresh in the command file."
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
-## Daily Report Workflow
+## Where the real workflow lives
 
-Run every morning. Monitor yesterday's activity across all channels. Generate report to `reports/YYYY-MM-DD-daily-report.md`.
-Full details in `docs/daily-report-workflow.md`.
+The full, current daily-report checklist, Trello mapping, and config file list live in **`.claude/commands/me/daily-report.md`** — that file is loaded and executed every run, so it can't silently drift the way this memory snapshot did. See also [[reference_email_accounts_all10]] (10 accounts, not 6), [[reference_trello_gate_mapping]] (current Trello mapping), [[feedback_discord_only_airagri_bizurk]] (HOMIEAPP dropped), [[feedback_kai_daily_report_gate]] (Kai check retired), [[project_php_team]] (VietPH resigned).
 
-### Checklist Items
-
-1. **Monitor Email** — 6 accounts in `.email-accounts.json`
-2. **Monitor Slack** — 13 workspaces in `.slack-accounts.json` (2 use session tokens: Amazing Meds, Equanimity)
-3. **Monitor Discord** — 2 accounts in `.discord-accounts.json` (nusvinn: AirAgri/HOMIEAPP, nuscarrick: Bizurk)
-4. **Monitor Web** — samguard.co JS console errors check
-5. **Google Docs** — 5 spreadsheets (LongVV, PhucVT, TuanNT, Fountain, VietPH)
-6. **Scrin.io** — company "john yi", employee 453601. Config in `.scrin-config.json`
-7. **Daily Report Checks** — Kai, Nick, Jeff, Vinn
-8. **Matrix/Element** — Fountain room: weekly plan vs task log. Config in `.matrix-config.json`
-9. **GitHub PRs** — Elena-SamGuard (duongdn acct) + Precognize (nusken acct). Config in `.elena-pending-actions.json`
-10. **Redmine** — Update ticket status after deploy. Config in `.redmine-config.json`
-
-### Trello Mappings (see docs/daily-report-workflow.md for full details)
-
-**Normal**: Maddy→XtremeSoft, Blake→SoCalAutoWraps, JohnYi→AmazingMeds+Scrin.io
-**Should do**: JamesDiamond→AirAgri Discord+PhucVT sheet
-**Closely monitor**: Franc→RDC, Rory→SwiftStudio, Aysar→Baamboozle, Elliott→Generator
-**Work**: Raymond→LegalAtoms, Marcel→Equanimity, Colin→AigileDev, AndrewTaraba→Bizurk, Elena→SAMGuard+GitHub+Redmine, MPFC→MyPersonalFootballCoach, Bailey→GlobalGrazing+VietPH, Fountain→Matrix+TaskLog+Capacity, Rebecca→WilliamBills, NeuralContract→email search
-
-### Config Files
-`.slack-accounts.json`, `.discord-accounts.json`, `.email-accounts.json`, `.web-monitors.json`, `.google-docs.json`, `.scrin-config.json`, `.trello-config.json`, `.matrix-config.json`, `.redmine-config.json`, `.elena-pending-actions.json`, `daily-agent-490610-7eb7985b33e3.json`
-
-### GitHub Account Mapping
+**GitHub account mapping (still current, kept here since it's not in the command file):**
 - `nuscarrick` — default
 - `duongdn` — Elena-SamGuard-Digital-Plant
 - `nusken` — Precognize/development

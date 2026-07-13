@@ -1,8 +1,10 @@
 ---
 name: feedback_workstream_all_projects
-description: Weekly report MUST fetch WorkStream /review/week for ALL projects, not just GSheets — teams have migrated logging to WS
-metadata:
+description: "Weekly report MUST fetch WorkStream /review/week for ALL projects, not just GSheets — teams have migrated logging to WS"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 **Rule:** In every weekly report, fetch WorkStream `/review/week?projectId={id}&date={date}` for ALL accessible projects BEFORE writing any dev's hours. Do NOT rely on GSheets alone.
@@ -28,8 +30,8 @@ metadata:
 - fountain (Fountain Greetings): `cmpqcjojh00q2tk1v2qi7gs0j`
 - others (NUS): `cmpqae4pd0006qa1wo85fzvji` (403 as of W32)
 
-**Who logs where (W32):**
-- LongVV: WS Maddy + WS JD
+**Who logs where (W32 snapshot — LongVV row outdated, see [[feedback_longvv_consolidated]] for current state):**
+- LongVV: WS Maddy + WS JD (as of W32; since 2026-07-07 he's ALSO full-time on WS OhCleo — check that project too)
 - PhucVT/AnhNH2: WS James Diamond
 - LeNH: WS Blair Brown
 - KhanhHH: WS Generator + WS Baamboozle + WS Colin/ETZ (+ Elena GSheets if accessible)

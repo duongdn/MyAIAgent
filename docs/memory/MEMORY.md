@@ -42,7 +42,7 @@
 
 ## daily-report:slack
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — search.messages not conversations.history
-- [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_no_activity_not_skip](daily-report/slack/feedback_no_activity_not_skip.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md) — dev talk≠alert; low activity often normal
+- [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md) — dev talk≠alert; low activity often normal; merged in "no activity = complete" rule 2026-07-13
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — 🔴 Aysar gate=MPDM C07SQ4HAUHZ; MANDATORY pre-check `sheets-tasklog-scan.js <date> KhanhHH` before ever flagging MPDM silence (2x repeat false alert 260708/260709)
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — LIFM2-439 trust incident
 - [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — MANDATORY: Slack+JIRA+est/actual+PR

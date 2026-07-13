@@ -1,7 +1,10 @@
 ---
-name: Upwork tracker can be shared — sum ALL Owners on contract Task ID
-description: A single Upwork tracker (e.g. Aysar 35642393) is often used by multiple developers. When comparing tracker hours vs task log, sum hours across ALL Owners (col G) where Task ID matches the contract — not just one nominal developer.
-type: feedback
+name: upwork-tracker-can-be-shared-sum-all-owners-on-contract-task-id
+description: "A single Upwork tracker (e.g. Aysar 35642393) is often used by multiple developers. When comparing tracker hours vs task log, sum hours across ALL Owners (col G) where Task ID matches the contract — not just one nominal developer."
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 A single Upwork workroom/tracker can be used by multiple developers. When comparing Upwork tracker hours vs task log:
@@ -11,7 +14,7 @@ A single Upwork workroom/tracker can be used by multiple developers. When compar
 
 **Why:** User corrected on 2026-05-11 after the daily report flagged Rory tracker -15h gap and Bailey-VietPH -18.5h gap. After re-running with proper filter:
 - **Rory tracker (41069448)** Upwork 16.67h vs task log: LeNH-only on Rory = 16.67h → **exact match**. The previous "-15h gap" came from also summing KhoaTD's 15h on a different contract (KhoaTD is not on the Rory Upwork tracker).
-- **Aysar tracker (35642393)** Upwork 23.83h vs task log: KhanhHH 20h + LeNH 3.83h on Aysar = **23.83h exact match**. Both share the tracker (KhanhHH does the work as sub-contract under LeNH per `feedback_khanhhh_aysar_second_project`).
+- **Aysar tracker (35642393)** Upwork 23.83h vs task log: KhanhHH 20h + LeNH 3.83h on Aysar = **23.83h exact match**. Both share the tracker (KhanhHH does the work as sub-contract under LeNH per `feedback_khanhhh_aysar_consolidated`).
 - **Bailey-VietPH** Upwork 21.5h vs task log filtered by `[Maintenance] Update PHP version on Prestashop`: VietPH 21.25h → **near-exact** (-0.25h within tolerance).
 
 **How to apply:**

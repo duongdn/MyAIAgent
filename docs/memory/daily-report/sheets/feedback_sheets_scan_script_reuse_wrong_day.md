@@ -1,8 +1,10 @@
 ---
 name: feedback_sheets_scan_script_reuse_wrong_day
-description: daily-sheets-scan-*.js must be freshly written each morning with today's PREV_TOKENS — silently reusing yesterday's script reports an entire day's data under the wrong date, with no error
-metadata:
+description: "daily-sheets-scan-*.js must be freshly written each morning with today's PREV_TOKENS — silently reusing yesterday's script reports an entire day's data under the wrong date, with no error"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: f3f109c8-a37f-4fea-b3a5-822c4dbc59c4
 ---
 
 🔴 **CRITICAL — verify before trusting any sheets row in a daily report.**
@@ -11,7 +13,7 @@ The `daily-sheets-scan-{date}-{day}.js` scripts hardcode `PREV_TOKENS` (e.g. `["
 
 **Why this is dangerous:** unlike a missing-script error, this fails silently and produces plausible-looking wrong numbers. It went undetected through the cron run and an initial interactive recheck pass, and was only caught because the user spotted that TuanNT's reported hours matched a description that read like a Wednesday task.
 
-**Consequence when this happened:** TuanNT's real Jun18 0h (no leave) was masked as "4h, no alert," which gates 3 Trello client items (John Yi, Bailey, Rebecca per [[feedback_tuannt_trello_gates]]) — all 3 were wrongly auto-completed.
+**Consequence when this happened:** TuanNT's real Jun18 0h (no leave) was masked as "4h, no alert," which gates 3 Trello client items (John Yi, Bailey, Rebecca per [[feedback_tuannt_consolidated]]) — all 3 were wrongly auto-completed.
 
 **How to apply:**
 1. Before trusting a daily-sheets-scan output, check that a script dated for *today* actually exists: `ls scripts/daily-sheets-scan-{YYMMDD}*.js`. If it doesn't exist and the cron ran anyway, the data is suspect — re-verify manually.

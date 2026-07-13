@@ -1,8 +1,8 @@
 ---
-name: Leave day handling — ALL aspects in one place
-description: "Nghỉ cả ngày" / "Nghỉ nửa ngày" handling across daily report check, task log 0h check, AND weekly hour-target shortfall calculation. Single canonical rule — supersedes feedback_leave_day_no_report_needed + the leave-day bullet in feedback_google_sheets_per_employee.
-metadata:
-  type: feedback
+name: ""
+metadata: 
+  node_type: memory
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 # 🔴 Leave Day Handling — read EVERY time you compute shortfalls or flag 0h
@@ -62,7 +62,7 @@ Prior recurrence trail:
 4. If `actual ≥ adjusted_target` → ✓ OK, **never** flag as shortfall even when `actual < full_target`.
 5. Cross-check: the prose sentence about leave days must match the table number. If table says `−8h` but prose says "Fri leave excused", one of them is wrong.
 
-Related: [[feedback_longvv_hour_split]] (LongVV-specific 16h target), [[feedback_lenh_partial_hour_alert]] (sub-8h alert rule applies AFTER pro-rating).
+Related: [[feedback_longvv_consolidated]] (LongVV-specific 16h Maddy target, confirmed still active 2026-07-13), [[feedback_lenh_consolidated]] (sub-8h alert rule applies AFTER pro-rating).
 
 ## 🔴 Always check leave-plan.json for the EXACT date, not just "today"
 

@@ -1,8 +1,10 @@
 ---
 name: feedback_tasklog_0h_reminder_complete
-description: If the only issue is a missing task log (0h) and a Matrix reminder was sent, still mark the Trello item COMPLETE — reminder IS the action.
-metadata:
+description: "If the only issue is a missing task log (0h) and a Matrix reminder was sent, still mark the Trello item COMPLETE — reminder IS the action."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: c8b38c94-8dff-471a-8255-30147cfa9ed7
 ---
 
 If a developer has 0h in task log but:
@@ -20,4 +22,4 @@ If a developer has 0h in task log but:
 
 **Note:** Today (2026-05-27) this didn't change any results — KhanhHH/LeNH 0h didn't block their gated Trello items (gates are Slack-only for Rory/Franc/Aysar/Elliott). But applies in future runs where task log is the only blocking factor.
 
-Related: [[reference_trello_gate_mapping]], [[feedback_tuannt_trello_gates]]
+Related: [[reference_trello_gate_mapping]], [[feedback_tuannt_consolidated]]

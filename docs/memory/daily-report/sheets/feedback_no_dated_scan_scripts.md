@@ -1,8 +1,10 @@
 ---
 name: feedback_no_dated_scan_scripts
-description: Never write a new dated copy of a monitoring script (daily-sheets-scan-YYMMDD-*.js) — use the one canonical script so fixes can't get lost on the next day's copy
-metadata:
+description: "Never write a new dated copy of a monitoring script (daily-sheets-scan-YYMMDD-*.js) — use the one canonical script so fixes can't get lost on the next day's copy"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 NEVER create a new dated copy of a monitoring script (e.g. `scripts/daily-sheets-scan-260623-tue.js`, then `-260624-wed.js`, etc). Edit/extend the ONE canonical script for that data source instead.
@@ -21,4 +23,4 @@ NEVER create a new dated copy of a monitoring script (e.g. `scripts/daily-sheets
 3. **General principle beyond Sheets:** before trusting any "the check was done" memory note, verify the actual script/tool that ran the check matches what the rule says — not just that the rule exists in text. If a recurring monitoring task is implemented as a series of dated one-off files, that pattern itself is the bug; consolidate to one parametrized script before trusting its output again.
 4. When checking whether a script is current, prefer `git log --follow` / `ls -t` on the canonical file's own history — there should be no "latest dated copy" to look for anymore.
 
-See [[feedback_check_workstream_before_flagging_shortfall]], [[reference_workstream]], [[feedback_khanhhh_aysar_second_project]].
+See [[feedback_check_workstream_before_flagging_shortfall]], [[reference_workstream]], [[feedback_khanhhh_aysar_consolidated]].

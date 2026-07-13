@@ -1,7 +1,10 @@
 ---
-name: Upwork comparison MUST filter by Task ID column E — never sum all owner rows
-description: When comparing Upwork hours vs Paturevision (Bailey) task log, MUST filter rows by Task ID column E matching the Upwork contract. Summing all VietPH/DuongDN rows without Task ID filter produces false discrepancies.
-type: feedback
+name: upwork-comparison-must-filter-by-task-id-column-e-never-sum-all-owner-rows
+description: "When comparing Upwork hours vs Paturevision (Bailey) task log, MUST filter rows by Task ID column E matching the Upwork contract. Summing all VietPH/DuongDN rows without Task ID filter produces false discrepancies."
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 When comparing Bailey Upwork workrooms (DEV1 VietPH, DEV3 DuongDN) against the Paturevision task log (sheet `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`), you MUST filter rows by Task ID column E matching the Upwork contract task.
@@ -28,4 +31,4 @@ When comparing Bailey Upwork workrooms (DEV1 VietPH, DEV3 DuongDN) against the P
 3. Pair with `feedback_upwork_tasklog_by_taskid` (which already documents the rule but was not applied).
 4. Pair with `feedback_upwork_vs_tasklog_all_hours` — that rule says sum BOTH "Task dự án" + "Part-time" rows; combined with Task ID filter the formula is: `sum hours WHERE owner=X AND task_id=Y AND (col_a='Task dự án' OR col_a='Part-time')`. Both rules apply together.
 5. **Same logic for any future Upwork workroom**: each workroom maps to ONE specific Task ID; never compare against the developer's full sheet total.
-6. The non-Bailey VietPH hours (Console / Prestashop modules above) are billed differently (likely fixed-cost WBS — see `feedback_bailey_invoice_wbs_billing` — or other contracts), not via Upwork tracker.
+6. The non-Bailey VietPH hours (Console / Prestashop modules above) are billed differently (likely fixed-cost WBS — see `feedback_bailey_paturevision_billing` — or other contracts), not via Upwork tracker.
