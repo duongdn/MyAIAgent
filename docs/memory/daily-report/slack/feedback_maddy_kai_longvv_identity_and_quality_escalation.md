@@ -1,20 +1,20 @@
 ---
 name: feedback_maddy_kai_longvv_identity_and_quality_escalation
-description: Kai (Maddy Slack/JIRA persona) maps to internal_name LongVV per config/.jira-config.json with expected_weekly_hours 40 — conflicts with existing 16h/week part-time memory. Also documents a real client quality escalation on LIFM2-439 (19/06).
-metadata:
+description: "Kai (Maddy Slack/JIRA persona) maps to internal_name LongVV per config/.jira-config.json — the file's expected_weekly_hours:40 is LongVV's combined total across Maddy+OhCleo, NOT the Maddy-specific alert threshold. Also documents a real client quality escalation on LIFM2-439 (19/06)."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
-## Identity mapping discrepancy — UNRESOLVED, needs user confirmation
+## Identity mapping — RESOLVED 2026-07-13
 
 `config/.jira-config.json` → `team.kai`:
 ```json
 { "internal_name": "LongVV", "google_docs_name": "LongVV", "client": "Maddy", "expected_weekly_hours": 40 }
 ```
 
-This conflicts with [[feedback_longvv_hour_split]] which says LongVV is part-time 16h/week on Maddy. Likely explanation (unconfirmed): LongVV/Kai is actually full-time (40h), split across **Maddy** (Slack/JIRA persona "Kai", project LIFM2) + **OhCleo** (Slack persona "Tony", per Piece 12 OhCleo config: "U0B6EF611FC | Tony | Our dev (LongVV)"). The 16h figure may only be the Maddy-specific slice of a 40h total, not LongVV's whole employment.
-
-**Do not silently change the 16h alert threshold based on this alone — ask the user to confirm the actual split before editing [[feedback_longvv_hour_split]].**
+User confirmed 2026-07-13: **Maddy alert threshold stays 16h/week** — the config's `expected_weekly_hours: 40` reflects LongVV's combined workload across both Maddy (16h) + OhCleo (40h, full-time since 2026-07-07), not a Maddy-specific figure. See [[feedback_longvv_consolidated]] for the full two-track breakdown. Do NOT use the config's 40 to alert on Maddy-specific shortfall — keep using 16h there.
 
 ## Real quality escalation found 2026-06-23 (during a /me:daily-report deep recheck)
 

@@ -1,21 +1,21 @@
 ---
 name: feedback-longvv-consolidated
-description: "LongVV now works full-time (40h/week) on Ohcleo as of 2026-07-07 — OLD 16h/week part-time/flexible arrangement is SUPERSEDED. He is 'Tony' in the OhCleo Slack workspace."
+description: "LongVV works TWO concurrent tracks: Maddy (Kai persona, 16h/week target — CONFIRMED still active 2026-07-13) + OhCleo (Tony persona, full-time 40h/week since 2026-07-07). Not a replacement — both apply."
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: 9ba04ead-670b-45ea-b6a0-575e6d6d55b2
 ---
 
-**UPDATED 2026-07-07 — assignment changed.** LongVV now works **full-time on Ohcleo (40h/week / 8h/day)**, not the old 16h/week part-time flexible arrangement below. User: "now he working on 'Ohcleo' for the rest of time, so should be 40h again."
+LongVV has **two separate, concurrent work tracks** — do not treat one as replacing the other:
 
-**How to apply going forward:**
-1. LongVV = "Tony" in the OhCleo Slack workspace (see Piece 12 member table) — his daily report there is the primary check now, same as any other full-time dev.
-2. Treat like a normal 40h/wk dev: 0h on a working day with no leave note = genuine flag (same as ViTHT/Fountain devs), NOT automatically dismissible.
-3. **RESOLVED (weekly report, 2026-07-10):** he does log to Workstream OhCleo under his real name "LongVV" — confirmed via `workstream-fetch-project-week.js`, W34 (Jul6-10) shows LongVV 12h there (Jul7:8h, Jul8:4h). The Jul 6 0h in the original 2026-07-07 finding was just a same-day lag, not a tracking-location gap.
-4. **Open question (2026-07-10 weekly report):** he's still also logging Maddy (16h) and James Diamond flex (8h) in the same week as OhCleo (12h) — combined 36h, under the 40h nominal target either way, but unclear whether the 40h target is meant to be OhCleo-only or combined-across-all-projects. Needs a direct answer before calling future weeks short/OK with confidence.
-5. Reminders for LongVV still go to his direct room `!mYZBGNoLFVpMVIJtPu:nustechnology.com` (unchanged).
+1. **Maddy** (client project, Slack/JIRA persona "Kai") — weekly target **16h** (committed; up to 24h/week flexible backfill allowed). NOT 8h/day — 0h on any single day is normal, never alert on a daily 0h. Only flag if WEEKLY total < 16h with no leave note. **Re-confirmed by user 2026-07-13: Maddy target is still 16h** — do not raise this threshold based on the OhCleo assignment below.
+2. **OhCleo** (Slack persona "Tony") — **full-time, 40h/week / 8h/day, since 2026-07-07.** User: "now he working on 'Ohcleo' for the rest of time, so should be 40h again." Treat like a normal 40h/wk dev there: 0h on a working day with no leave note = genuine flag.
 
----
+**How to apply:**
+1. Check BOTH tracks independently — Maddy shortfall uses the 16h/wk target, OhCleo shortfall uses the 40h/wk target. A dev can be fine on one and short on the other.
+2. LongVV = "Tony" in the OhCleo Slack workspace (see Piece 12 member table) — his daily report there is the primary OhCleo check.
+3. Still unconfirmed: does he log hours to the Workstream "OhCleo" project under his real name, or only post Slack daily reports there? (Scan on 2026-07-07 for Jul 6 found 0h under both "LongVV" and "Tony" in Workstream/Sheets despite Tony's Slack daily report being present.)
+4. Reminders for LongVV (Maddy track) go to his direct room `!mYZBGNoLFVpMVIJtPu:nustechnology.com`.
 
-**OLD (superseded 2026-07-07, kept for history):** Weekly target = 16h (committed; up to 24h/week flexible backfill allowed). NOT 8h/day — 0h on any single day was normal, never alert on a daily 0h. Only flagged if WEEKLY total < 16h with no leave note. Why (2026-05-15): repeated confusion over W26 hours. User: "LongVV is only have 16h static, another one can use for flexible purpose." This no longer applies now that he's full-time on Ohcleo.
+**Why (history):** 2026-05-15 — user set the original 16h Maddy target ("LongVV is only have 16h static, another one can use for flexible purpose"). 2026-07-07 — OhCleo full-time assignment added on top, not instead of, Maddy. 2026-07-13 — user re-confirmed Maddy is still 16h when this file was flagged as possibly stale during a memory review, resolving the ambiguity.
