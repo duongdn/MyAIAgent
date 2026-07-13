@@ -10,6 +10,7 @@
 - [feedback_new_config_file_gitignore_gap](global/feedback_new_config_file_gitignore_gap.md) — new config missing .gitignore blocks push; fix via git-filter-repo
 - [feedback_report_location](global/feedback_report_location.md) — Reports in `reports/{date}/`
 - [feedback_always_include_links](global/feedback_always_include_links.md), [feedback_report_style](global/feedback_report_style.md) — concise, no trailing summary, always URLs
+- [feedback_interactive_review_stays_in_chat](global/feedback_interactive_review_stays_in_chat.md) — 🔴 ad-hoc reviews go in chat, not tmp/file+pointer
 - [feedback_customer_facing_messages](global/feedback_customer_facing_messages.md) — never expose internal auth failures to customers
 - [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md) — never send w/o explicit authorization; the reminder-specific version of this rule is now hardcoded in `.claude/commands/me/daily-report.md` Piece 9, not memory
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize
