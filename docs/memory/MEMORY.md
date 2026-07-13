@@ -127,6 +127,7 @@
 
 ## monday-effort-verify (with-thuyltt)
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md) — ThuyLTT's hour image is WS-derived not independent
+- [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 resolves Elena Klebanov/SamGuard blind spot, tab `W{n}` ≠ calendar week
 
 ## money-report
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md) — Net Worth via trueTotalBalance
