@@ -643,7 +643,7 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 |-----------|------|-------------|
 | PhucVT | phucvt | `!kzyLVmJxcRESoTkfnY:nustechnology.com` |
 | LeNH | lenh | `!OIrgPraJWrcDTnRVLQ:nustechnology.com` |
-| LongVV | longvv | `!bvdwOOxprsKJBTjSeQ:nustechnology.com` |
+| LongVV | longvv | `!mYZBGNoLFVpMVIJtPu:nustechnology.com` (his direct/personal room — NOT `!bvdwOOxprsKJBTjSeQ`, that's the shared Xtreme Soft project room, wrong for a personal reminder) |
 | TuanNT | tuannt | `!knbJbIKzXRJNGVFQNg:nustechnology.com` |
 
 **Skip if:** developer has COMBINED > 0h across all sheets, is on confirmed leave, or it's early morning (< ~10 AM).
