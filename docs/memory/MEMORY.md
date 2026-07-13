@@ -21,7 +21,7 @@
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — decrypt-secrets can revert/delete live tokens; use saveSecretConfig
 - [feedback_gui_automation_risk_on_shared_desktop](global/feedback_gui_automation_risk_on_shared_desktop.md) — 🔴 xdotool on DISPLAY=:1 = user's live desktop; verify window every keystroke, abort if user active
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — Drive OAuth expired → service account + `files().export`
-- [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 expired session→visible DISPLAY=:1 retry only, never device-code/passive text; unresolved=ALERT
+- [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 expired session→visible DISPLAY=:1 retry only, never device-code/passive text; unresolved=ALERT (Matrix specifically superseded, see [[project_matrix_static_compat_token]])
 - [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — correcting a report after feedback = strikethrough wrong text + correction, never silent delete
 - [feedback_reminder_template_content_must_match_data](global/feedback_reminder_template_content_must_match_data.md) — 🔴 check message TEXT against verified number before sending, never reuse a "0h" template for a nonzero figure
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md) — 🔴 agent-fixable technical alerts (our code/infra) → fix directly, don't just re-report; external/human-only blockers → document exact missing credential
@@ -100,6 +100,7 @@
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md), [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md), [reference_matrix_rooms](daily-report/reminders/reference_matrix_rooms.md) — cross-check before 0h
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript, grep misses signals
 - [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — 5 sources (2 Matrix+3 Slack), Vietnamese summary mandatory
+- [project_matrix_static_compat_token](daily-report/matrix/project_matrix_static_compat_token.md) — 🔴 mct_ non-expiring token from admin (260713), browser-refresh flow now rarely needed
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — cron never re-logs in
