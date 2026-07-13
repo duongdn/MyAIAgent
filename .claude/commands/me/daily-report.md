@@ -639,6 +639,8 @@ Examples:
 
 **Default behavior: print to report only. Do NOT send to Matrix unless `--send-reminder` flag is present.**
 
+**🔴 Checking/scanning a source (Sheets, Workstream, etc.) is NEVER permission to send.** Only send when `--send-reminder` is literally present in the invocation, or the user explicitly says "send it" / "send reminders now" in this turn. Never infer send permission from report text (e.g. "needs reminder today"), alert severity, or prior conversation context. This applies to ALL outbound messages triggered from this command — Matrix, Slack, Discord, email, Teams — not just this Piece.
+
 Supports individual developer targeting:
 - `/daily-report reminders` — print 0h devs to report (no Matrix send)
 - `/daily-report reminders --send-reminder` — print + actually send to Matrix
