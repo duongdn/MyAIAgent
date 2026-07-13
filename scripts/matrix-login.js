@@ -90,11 +90,20 @@ async function main() {
     if (!capturedAccessToken || !capturedRefreshToken) {
       const stored = await page.evaluate(() => {
         const result = {};
+        // Literal key 'token' holds a JSON blob {access_token, refresh_token, ...}
+        const tokenBlob = localStorage.getItem('token');
+        if (tokenBlob) {
+          try {
+            const parsed = JSON.parse(tokenBlob);
+            if (parsed.access_token) result.access_token = parsed.access_token;
+            if (parsed.refresh_token) result.refresh_token = parsed.refresh_token;
+          } catch {}
+        }
         for (let i = 0; i < localStorage.length; i++) {
           const key = localStorage.key(i);
           const val = localStorage.getItem(key);
-          if (key.includes('access_token') || (val && val.startsWith('mat_'))) result.access_token = val;
-          if (key.includes('refresh_token') || (val && val.startsWith('mar_'))) result.refresh_token = val;
+          if (!result.access_token && (key.includes('access_token') || (val && val.startsWith('mat_')))) result.access_token = val;
+          if (!result.refresh_token && (key.includes('refresh_token') || (val && val.startsWith('mar_')))) result.refresh_token = val;
         }
         return result;
       }).catch(() => ({}));
