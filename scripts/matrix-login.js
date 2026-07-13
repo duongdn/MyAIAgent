@@ -99,15 +99,23 @@ async function main() {
     // Dismiss the "Element is open in another window" session-lock prompt —
     // a stale lock from a prior hard-killed (pkill -9) run blocks the actual
     // app from loading, and the profile is otherwise already logged in.
+    // Use a real Puppeteer ElementHandle.click() (dispatches actual CDP mouse
+    // events) — React's synthetic event system doesn't reliably respond to
+    // an in-page DOM element.click() call.
     try {
-      const clicked = await page.evaluate(() => {
-        const buttons = Array.from(document.querySelectorAll('button'));
-        const btn = buttons.find(b => b.textContent.trim() === 'Continue');
-        if (btn) { btn.click(); return true; }
-        return false;
-      });
-      if (clicked) console.log('Dismissed stale session-lock prompt ("Continue" clicked).');
-    } catch {}
+      const buttons = await page.$$('button');
+      for (const b of buttons) {
+        const text = await page.evaluate(el => el.textContent.trim(), b);
+        if (text === 'Continue') {
+          await b.click();
+          console.log('Dismissed stale session-lock prompt ("Continue" clicked via real mouse event).');
+          await new Promise(r => setTimeout(r, 3000));
+          break;
+        }
+      }
+    } catch (e) {
+      console.log('Continue-click attempt error:', e.message);
+    }
 
     const url = page.url();
 

@@ -156,15 +156,18 @@
         "last_run": "2026-05-13T08:32:00+07:00"
       },
       "ohcleo": {
-        "last_run": "2026-07-08T08:39:00+07:00"
+        "last_run": "2026-07-13T09:10:00+07:00",
+        "note": "2026-07-13: zero new messages both DM:Celine + MPDM(Celine/Mann/Tony) since Jul9 09:18 UTC — matches Matrix note same morning ('LongVV idle this week, Celine đang đi du lịch'/traveling). #events-code (C01JDPN0EDQ) now returns channel_not_found (verified via direct API, not an auth issue — auth.test OK, other channels list fine) — channel likely archived/deleted upstream, not agent-fixable. Discovered 2 channels not in skill's monitored list (features C0BD34FLN5U, MPDM C0B8BEKHLH1) — both also silent in-window, no new info missed."
       }
     },
     "discord": {
       "airagri": {
-        "last_run": "2026-07-08T08:39:00+07:00"
+        "last_run": "2026-07-13T09:10:00+07:00",
+        "note": "2026-07-13: nusvinn token was invalid (401) — token-refresh script's temp-profile method failed again (known broken, see feedback_discord_token_refresh_script_broken). Fixed by extracting fresh token directly from the live logged-in Profile 19 browser via DevTools Network tab request headers, verified 200 on /users/@me + /guilds, saved to config. 74 in-window messages, heavy James Diamond/Jon/Vinn/Jeff activity through Jul10, Jeff's contractor-checkin-API question to Vinn Jul13 01:34 UTC not yet answered in-channel but Vinn actively DMing James Diamond same morning (08:11-09:02+07) — real activity, not absence."
       },
       "bizurk": {
-        "last_run": "2026-07-08T08:39:00+07:00"
+        "last_run": "2026-07-13T09:10:00+07:00",
+        "note": "2026-07-13: zero messages, zero Andrew Taraba DMs in-window — genuinely quiet, token valid throughout."
       }
     },
     "sheets": {
@@ -193,8 +196,8 @@
       }
     },
     "scrin": {
-      "last_run": "2026-07-08T08:39:00+07:00",
-      "note": "Tracks Nick (nick@nustechnology.com), not TuanNT. 2026-07-07: 9h53m (5 sessions), Project/Client both 'No project'/'No client' — do not attribute to any live project."
+      "last_run": "2026-07-13T09:10:00+07:00",
+      "note": "Tracks Nick (nick@nustechnology.com), not TuanNT. 2026-07-13 (Monday): scrin-fetch-yesterday.js's isYesterday:true bug returns Sunday Jul12 (weekend) not Friday Jul10 — body:[] returned, 0h. Per known limitation, Friday data not retrieved this run; not treated as an alert."
     },
     "fountain": {
       "last_run": "2026-05-13T08:40:00+07:00"
