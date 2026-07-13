@@ -1,8 +1,10 @@
 ---
 name: feedback_encrypt_secrets_missing_workstream
-description: encrypt-secrets.sh was missing .workstream-config.json (+newrelic+rollbar) from its file list even though decrypt-secrets.sh handles them — silently dropped every Workstream token refresh, a root cause of the recurring "Workstream SSO expired" pattern
-metadata:
+description: "encrypt-secrets.sh was missing .workstream-config.json (+newrelic+rollbar) from its file list even though decrypt-secrets.sh handles them — silently dropped every Workstream token refresh, a root cause of the recurring \"Workstream SSO expired\" pattern"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: eadc01d0-f29a-44b8-8009-792373f2d6cf
 ---
 
 `scripts/encrypt-secrets.sh`'s `SECRET_FILES` array did not include `config/.workstream-config.json`, `config/.newrelic-config.json`, or `config/.rollbar-config.json` — even though `scripts/decrypt-secrets.sh` decrypts all three at the start of every session. Fixed 2026-06-25 by adding them to the array.
@@ -11,4 +13,4 @@ metadata:
 
 **How to apply:** If Workstream (or NewRelic/Rollbar) token expiry recurs immediately after a session that should have fixed it, check first whether `encrypt-secrets.sh`'s file list still matches `decrypt-secrets.sh`'s — don't re-diagnose as an auth/SSO problem before checking this. Any time a NEW `config/.*.json` secret file is added to `decrypt-secrets.sh`, it MUST also be added to `encrypt-secrets.sh` in the same change.
 
-Related: [[reference_workstream]], [[feedback_workstream_config_not_gitignored]]
+Related: [[reference_workstream]]
