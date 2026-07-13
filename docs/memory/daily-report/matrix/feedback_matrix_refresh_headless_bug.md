@@ -1,23 +1,27 @@
 ---
 name: matrix-refresh-headless-bug-fixed
-description: matrix-token-refresh.js was headless:'new' — worked only while browser profile had valid internal refresh_token. When both tokens expired, needed headless:false to show real browser. Fixed 2026-06-03.
-metadata:
+description: "🔴 FALLBACK-ONLY since 2026-07-13 — Matrix's primary token is now a static non-expiring mct_ compat token (see project_matrix_static_compat_token), rarely needs this flow at all. matrix-token-refresh.js was headless:'new' causing silent failures when browser profile refresh_token expired. Fixed to headless:false. Recovery = DISPLAY=:1 node scripts/matrix-login.js"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: 2c6cc6ec-acad-4e4a-a08e-d64818e03311
 ---
 
-# Matrix Token Refresh — Root Cause & Fix
+🔴 **This whole flow is fallback-only since 2026-07-13** — normal operation uses a static `mct_` token that doesn't need refreshing at all (see [[project_matrix_static_compat_token]]). Only relevant if that static token itself has failed.
 
-## Rule
-`scripts/matrix-token-refresh.js` MUST run with `headless: false` and `DISPLAY=:1` (or real display).
+# Matrix Token Refresh — Headless Bug (Fixed 2026-06-03)
 
-**Why:** The script captures the token by intercepting Element's internal token refresh call. This works headlessly ONLY while the browser profile's internal refresh_token is valid (lasts months). When both the config token AND the browser profile's refresh_token expire, the headless browser redirects to SSO login — but nobody can interact with a headless browser, so it times out.
+**Rule:** When `matrix-token-refresh.js` fails with "Failed to capture token", run:
+```
+DISPLAY=:1 node scripts/matrix-login.js
+```
 
-**Fixed:** Changed `headless: 'new'` → `headless: false` in the script on 2026-06-03.
+**Why:** The script was `headless: 'new'` (invisible browser). It worked for months because Element's internal refresh_token in the browser profile auto-refreshed silently. When that internal token also expired, the headless browser hit the SSO login page — nobody could interact → timeout.
 
-## When it fails again
-1. Clear stale profile locks first: `rm -f tmp/matrix-browser-profile/Default/LOCK tmp/matrix-browser-profile/SingletonLock`
-2. Run `DISPLAY=:1 node scripts/matrix-login.js` — NUS SSO has an active system session, browser auto-confirms, token captured in ~10s. **NO manual user interaction needed.**
+**Fix applied:** Changed `headless: 'new'` → `headless: false` in `scripts/matrix-token-refresh.js`. Now the browser opens visibly on DISPLAY :1, SSO auto-confirms (NUS SSO system session active), token captured in ~10s.
 
-**Why it works:** `matrix-login.js` is `headless: false` on DISPLAY=:1. The NUS SSO has a live system-level session so no credentials need to be typed.
+**Do NOT use Xvfb** for this — SSO needs real display interaction.
 
-**How to apply:** If `matrix-token-refresh.js` fails → clear locks → run `matrix-login.js` on DISPLAY=:1. Fully automated, no user action required. Do NOT ask user to run it manually.
+**How to apply:** Next time Matrix token fails, DO NOT ask user to run it manually. Just:
+1. `rm -f tmp/matrix-browser-profile/Default/LOCK tmp/matrix-browser-profile/SingletonLock` (clear stale locks)
+2. `DISPLAY=:1 node scripts/matrix-login.js` — SSO auto-completes, fully unattended. **NEVER ask the user to run this themselves.**

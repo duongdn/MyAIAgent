@@ -1,11 +1,15 @@
 ---
 name: feedback_matrix_token_short_lived
-description: Matrix OIDC access_token is short-lived (expires within minutes) — must fetch data in the SAME script run immediately after matrix-token-refresh.js, not as a separate later step
-metadata:
+description: "🔴 FALLBACK-ONLY since 2026-07-13 — the PRIMARY Matrix token is now a static non-expiring mct_ compat token (see project_matrix_static_compat_token), no short-lived behavior. This file's 'expires within minutes' warning applies ONLY if you've fallen back to the old OIDC matrix-token-refresh.js flow because the static token itself died."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: eadc01d0-f29a-44b8-8009-792373f2d6cf
 ---
 
-After `matrix-token-refresh.js` saves a new `access_token`, it stays valid for only a few minutes (confirmed 2026-06-25: a token verified working via `whoami` went back to `M_UNKNOWN_TOKEN` ~10 minutes later). The saved `refresh_token` is often ALSO already stale by the time you'd use it for an OAuth2 `grant_type=refresh_token` call, because the refresh script's response-interception logic only captures a new `refresh_token` when it appears in a `/oauth2/token` POST response body — when it captures the access_token via request-header sniffing instead (the common path), `refresh_token` in config is left unchanged from the PREVIOUS (already-consumed) value, so a direct refresh-token-grant retry fails with `invalid_grant`.
+🔴 **Normal operation no longer hits this at all** — the static `mct_` token in `config/.matrix-config.json` doesn't expire in minutes, it's meant to be long-lived (see [[project_matrix_static_compat_token]]). Everything below describes the OLD OIDC `access_token`/`refresh_token` behavior, relevant again only in the rare fallback case where the static token has failed and you're using `matrix-token-refresh.js`.
+
+After `matrix-token-refresh.js` saves a new OIDC `access_token` (fallback path only), it stays valid for only a few minutes (confirmed 2026-06-25: a token verified working via `whoami` went back to `M_UNKNOWN_TOKEN` ~10 minutes later). The saved `refresh_token` is often ALSO already stale by the time you'd use it for an OAuth2 `grant_type=refresh_token` call, because the refresh script's response-interception logic only captures a new `refresh_token` when it appears in a `/oauth2/token` POST response body — when it captures the access_token via request-header sniffing instead (the common path), `refresh_token` in config is left unchanged from the PREVIOUS (already-consumed) value, so a direct refresh-token-grant retry fails with `invalid_grant`.
 
 **Why:** Caused a `M_UNKNOWN_TOKEN` failure on a Fountain Matrix-plan fetch that ran a few minutes after a successful, verified `matrix-token-refresh.js` call — the gap between refresh and use was enough for the token to expire.
 

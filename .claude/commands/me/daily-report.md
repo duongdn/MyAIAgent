@@ -433,9 +433,8 @@ Supports individual part targeting:
 - Fetch latest weekly plan message: "Em update plan tuần này ạ\nViTHT: Xh\nThinhT: Xh\nVuTQ: Xh\n=> QC X"
 - Cite @sender + timestamp
 - **On Monday, @trinhmtt posts the new week's plan ~08:30-09:30+07.** If checked before 09:30, do NOT flag "plan absent" — note "not yet posted, expected by 09:30, using last week's plan for context" and use the previous week's numbers. Recheck after 09:30.
-- If token expired → run `scripts/matrix-token-refresh.js` first (tries refresh_token API automatically, no browser). Save new token to `config/.matrix-config.json` immediately.
-- If refresh still fails (both token + refresh_token expired) → run `node scripts/matrix-device-auth.js` for device-code auth (no browser needed — shows URL to approve on any device).
-- **If Matrix unavailable after both attempts:** proceed with Parts 2-3 using LAST KNOWN plan (from prior report). Note "Matrix plan N/A — using prior week's plan for context" in the report. **Do NOT skip the Fountain Trello item** — if Parts 2-3 show no issues, complete the Trello item and note Matrix was unavailable.
+- Token is a static non-expiring `mct_` compat token (see [[project_matrix_static_compat_token]]) — should just work. If it fails (rare) → run `scripts/matrix-token-refresh.js` (fallback OIDC flow, tries refresh_token API automatically, no browser). Save new token to `config/.matrix-config.json` immediately. NEVER fall back to `matrix-device-auth.js` — banned, see [[feedback_matrix_never_use_device_auth]]; if the fallback refresh also fails, retry the visible-browser flow (`DISPLAY=:1 node scripts/matrix-login.js`), don't switch flows.
+- **If Matrix unavailable after retrying:** proceed with Parts 2-3 using LAST KNOWN plan (from prior report). Note "Matrix plan N/A — using prior week's plan for context" in the report. **Do NOT skip the Fountain Trello item** — if Parts 2-3 show no issues, complete the Trello item and note Matrix was unavailable.
 
 **Part 2 — Task Log Actuals**
 - 🔴 **Workstream is now primary** (project `fountain`, id `cmpqcjojh00q2tk1v2qi7gs0j` — user confirmed 2026-07-13, all projects moved to Workstream except Bailey). Query `/review/week?projectId=cmpqcjojh00q2tk1v2qi7gs0j&date=...` first. Fall back to Sheet `1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o` (Summary tab, W{n}) only if Workstream data looks empty/suspicious.
@@ -671,7 +670,7 @@ Hi {name}, task log for {date} is missing (0h logged). Please update when you ca
 - Customer or manager messages in Fountain / Elena rooms
 - Absence, leave, or delay notices
 
-**Token failure:** If Matrix returns 401/403, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` first. Never report expired as a skip reason.
+**Token:** `config/.matrix-config.json` `access_token` is a **static non-expiring `mct_` compat token** issued by the homeserver admin (2026-07-13) — no refresh needed in normal operation, see [[project_matrix_static_compat_token]]. **Token failure (rare):** If Matrix returns 401/403 with this token unchanged, run `DISPLAY=:1 node scripts/matrix-token-refresh.js` (fallback OIDC flow — old `mat_`/`mar_` tokens, kept only for this case). NEVER fall back further to `matrix-device-auth.js` — that flow is explicitly banned (see [[feedback_matrix_never_use_device_auth]]). Never report expired as a skip reason.
 
 **Two-step flow:**
 
@@ -790,7 +789,7 @@ Before running any Slack/Matrix/Discord source:
 - **Amazing Meds / Equanimity xoxc:** run refresh scripts proactively
   - `node scripts/slack-xoxc-refresh-amazingmeds.js`
   - `node scripts/slack-xoxc-refresh-equanimity.js`
-- **Matrix (Fountain):** verify token → if expired run `DISPLAY=:1 node scripts/matrix-token-refresh.js`
+- **Matrix (Fountain):** static `mct_` token should just work (see [[project_matrix_static_compat_token]]) — if it fails (rare), run `DISPLAY=:1 node scripts/matrix-token-refresh.js` (fallback only)
 - **Discord:** verify token with 3-step check (users/@me → guilds → channels) before assuming invalid
 
 **Step 5 — Re-run each failing source**
@@ -1112,7 +1111,7 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 - IMAP `SINCE` uses server dates → always search previous day, filter by Date header
 - Discord: verify token with 3-step curl before assuming invalid
 - **ABSOLUTE RULE — ZERO TOLERANCE:** NEVER write "token expired", "session expired", "UNAVAILABLE", "manual login needed", "auth failed", "blocked" for ANY source. These are internal problems — fix silently, get real data, then write report. Reporting auth failures is a repeat violation.
-- Matrix: if token fails → run `node scripts/matrix-token-refresh.js` (tries refresh_token API first, no browser). If still fails (both expired) → run `node scripts/matrix-device-auth.js` (device-code, no browser — shows URL to approve on any device). NEVER report expired.
+- Matrix: static `mct_` token should just work (see [[project_matrix_static_compat_token]]). If it fails (rare) → run `node scripts/matrix-token-refresh.js` (fallback OIDC flow). If that also fails, retry `DISPLAY=:1 node scripts/matrix-login.js` (visible browser) — NEVER `matrix-device-auth.js`, that flow is banned (see [[feedback_matrix_never_use_device_auth]]). NEVER report expired.
 - Upwork: if session expired → try `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick` once (headless re-login). If CAPTCHA/2FA blocks it: write `Upwork: session expired — manual re-auth needed; run upwork-login.js --login` in the report and **complete Rory/Neural/Aysar Trello items** (session failure ≠ alert). Upwork auth: requires visible browser outside cron. NEVER leave items ○ just because Upwork session expired.
 - Slack session tokens: auto-refresh via crumb+POST if invalid_auth. Never report as expired.
 - GitHub: `duongdn` for Elena, `nusken` for Precognize (never nuscarrick for these)
