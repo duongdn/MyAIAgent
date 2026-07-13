@@ -9,7 +9,7 @@ metadata:
 
 ## Where the real workflow lives
 
-The full, current daily-report checklist, Trello mapping, and config file list live in **`.claude/commands/me/daily-report.md`** — that file is loaded and executed every run, so it can't silently drift the way this memory snapshot did. See also [[reference_email_accounts_all10]] (10 accounts, not 6), [[reference_trello_gate_mapping]] (current Trello mapping), [[feedback_discord_only_airagri_bizurk]] (HOMIEAPP dropped), [[feedback_kai_daily_report_gate]] (Kai check retired), [[project_php_team]] (VietPH resigned).
+The full, current daily-report checklist, Trello mapping, and config file list live in **`.claude/commands/me/daily-report.md`** — that file is loaded and executed every run, so it can't silently drift the way this memory snapshot did. See also [[reference_email_accounts_all10]] (10 accounts, not 6), [[reference_trello_gate_mapping]] (current Trello mapping), [[feedback_discord_only_airagri_bizurk]] (HOMIEAPP dropped), [[feedback_kai_daily_report_gate]] (un-retired 2026-07-13 — now a Workstream-conditional check, not a blanket skip), [[project_php_team]] (VietPH resigned).
 
 **GitHub account mapping (still current, kept here since it's not in the command file):**
 - `nuscarrick` — default

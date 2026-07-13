@@ -2,7 +2,9 @@
 name: feedback_workstream_needs_review_check
 description: "Workstream 'needs review' feature (260708) — charged hours flagged Pending must alert the project's REAL isReviewer-flagged member(s), not the Manager/Tech Lead role holder, not the dev. Fountain excluded."
 metadata:
+  node_type: memory
   type: feedback
+  originSessionId: ad633ebf-c862-499d-bb7b-9918797c39c4
 ---
 
 Workstream has a per-project review flag on charged hours. Row field `reviewStatus` on `/review/week` API: `NotRequired` (no review needed), `Pending` (flagged, unresolved), `Reviewed` (resolved).
@@ -19,6 +21,6 @@ Workstream has a per-project review flag on charged hours. Row field `reviewStat
 
 **Fountain excluded:** User instruction 260708: "Fountain: càng sai, có vẻ ko cần reviewer, check kĩ lại" → clarified as "ignore, ko cần check Fountain". Do not run/alert this check for Fountain even though the data is technically available (Fountain has its own internal QC process via HungPN/PhatDLT that this check would otherwise double-flag).
 
-**Crystal lang manual override:** even the `isReviewer` field itself can be wrong — live data shows DuongDN (`isTechLead:true` → auto-reviewer) as `isReviewer:true` and TienND (Manager) as `isReviewer:false` for Crystal lang, but user directly confirmed 260708 "Crystal Lang là TienND nha" — the real reviewer is TienND, Workstream's checkbox is just unset/wrong for this project (still informally set up, see [[feedback_workstream_vs_sheets_migration_gaps]]). `scripts/workstream-fetch-project-week.js` has a `REVIEWER_OVERRIDES` map (currently `{ crystal_lang: ['TienND'] }`) applied after the `/pinfo` fetch — only add entries there when the user explicitly says the `isReviewer` flag itself is wrong, don't guess. This means: trust `/pinfo/projects/{id}`'s `isReviewer` field as the default source, but it is NOT infallible — if the user corrects a specific project's reviewer again, add/update the override rather than assuming the live flag is always right.
+**Crystal lang manual override:** even the `isReviewer` field itself can be wrong — live data shows DuongDN (`isTechLead:true` → auto-reviewer) as `isReviewer:true` and TienND (Manager) as `isReviewer:false` for Crystal lang, but user directly confirmed 260708 "Crystal Lang là TienND nha" — the real reviewer is TienND, Workstream's checkbox is just unset/wrong for this project (still informally set up). `scripts/workstream-fetch-project-week.js` has a `REVIEWER_OVERRIDES` map (currently `{ crystal_lang: ['TienND'] }`) applied after the `/pinfo` fetch — only add entries there when the user explicitly says the `isReviewer` flag itself is wrong, don't guess. This means: trust `/pinfo/projects/{id}`'s `isReviewer` field as the default source, but it is NOT infallible — if the user corrects a specific project's reviewer again, add/update the override rather than assuming the live flag is always right.
 
 See [[reference_workstream]] for the `/pinfo/projects/{id}` endpoint reference.

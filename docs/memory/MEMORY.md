@@ -50,7 +50,7 @@
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴 read full msg text, not just "posted=clean"
 
 ## daily-report:discord
-- [feedback_airagri_webapp_channel](daily-report/discord/feedback_airagri_webapp_channel.md), [feedback_discord_only_airagri_bizurk](daily-report/discord/feedback_discord_only_airagri_bizurk.md), [feedback_vinn_daily_report_format](daily-report/discord/feedback_vinn_daily_report_format.md) — AirAgri+Bizurk only; Monday scan window rule moved to [[feedback_monday_friday_timestamp]] (applies to all sources, not just Discord)
+- [feedback_discord_only_airagri_bizurk](daily-report/discord/feedback_discord_only_airagri_bizurk.md), [feedback_vinn_daily_report_format](daily-report/discord/feedback_vinn_daily_report_format.md) — AirAgri+Bizurk only; Monday scan window rule moved to [[feedback_monday_friday_timestamp]] (applies to all sources, not just Discord); channel-scope note merged into vinn file 260713
 - [feedback_discord_token_refresh_script_broken](daily-report/discord/feedback_discord_token_refresh_script_broken.md) — 🔴 401≠login needed; screenshot first, script itself is broken
 
 ## daily-report:sheets (task logs / per-developer)
@@ -83,7 +83,7 @@
 
 ## daily-report:trello (Check Progress / Check Mail)
 - [reference_trello_gate_mapping](daily-report/trello/reference_trello_gate_mapping.md), [feedback_trello_all_checklists](daily-report/trello/feedback_trello_all_checklists.md), [feedback_trello_find_by_name](daily-report/trello/feedback_trello_find_by_name.md) — iterate ALL checklists; find by name
-- [feedback_trello_mail_must_check_email](daily-report/trello/feedback_trello_mail_must_check_email.md), [feedback_email_trello_completion](daily-report/trello/feedback_email_trello_completion.md), [feedback_trello_progress_reuse_pieces](daily-report/trello/feedback_trello_progress_reuse_pieces.md), [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md) — Progress runs ALL mapped pieces
+- [feedback_trello_mail_must_check_email](daily-report/trello/feedback_trello_mail_must_check_email.md), [feedback_email_trello_completion](daily-report/trello/feedback_email_trello_completion.md), [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md)
 - [feedback_trello_per_client_gates_on_lead_dev](daily-report/trello/feedback_trello_per_client_gates_on_lead_dev.md), [feedback_philip_msteams_must_run](daily-report/trello/feedback_philip_msteams_must_run.md), [feedback_philip_msteams_duplicate_contacts](daily-report/trello/feedback_philip_msteams_duplicate_contacts.md) — Philip needs FULL NAME
 - [feedback_philip_msteams_chrome_profile_crash](daily-report/trello/feedback_philip_msteams_chrome_profile_crash.md) — 🔴 profile corruption SIGTRAP crash; rebuild keeping IndexedDB, never drop it
 - [feedback_recheck_uses_morning_report_data](daily-report/trello/feedback_recheck_uses_morning_report_data.md) — recheck uses report data, never re-query
@@ -98,7 +98,7 @@
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — cron never re-logs in
-- [feedback_upwork_tasklog_by_taskid](daily-report/upwork/feedback_upwork_tasklog_by_taskid.md), [feedback_upwork_filter_by_task_id_strict](daily-report/upwork/feedback_upwork_filter_by_task_id_strict.md), [feedback_upwork_tracker_shared_users](daily-report/upwork/feedback_upwork_tracker_shared_users.md), [feedback_upwork_vs_tasklog_all_hours](daily-report/upwork/feedback_upwork_vs_tasklog_all_hours.md), [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md), [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — task ID match; see Global visible-browser-login rule before ever writing "session expired"
+- [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md) — merged from 4 files 260713, ⚠️ VietPH-named assignment needs confirmation; [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md), [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — see Global visible-browser-login rule before ever writing "session expired"
 
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — Piece 14 (New Relic APM); OhCleo+MPFC keys already existed from a prior Cline-OhCleo session

@@ -1,13 +1,15 @@
 ---
 name: feedback_sheets_wrong_tab_numbering
-description: Tab W{n} ≠ calendar week n. ALWAYS use the Summary tab to find the correct week tab — never scan individual W tabs or hardcode tab names.
-metadata:
+description: "Tab W{n} ≠ calendar week n. ALWAYS use the Summary tab to find the correct week tab — never scan individual W tabs or hardcode tab names."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: c5a8413a-3fa2-4280-8d09-e11f71ae470d
 ---
 
 # Sheet Tab Numbering ≠ Calendar Week — USE SUMMARY TAB
 
-## Rule (repeated correction — this has failed multiple times)
+## Rule (repeated correction — failed multiple times)
 
 **ALWAYS read the Summary tab first** to find which W{n} tab corresponds to the target week. Never scan individual tabs. Never hardcode a tab name.
 
@@ -24,25 +26,16 @@ for row in summary:
 # Step 2: Read that tab for the dev's hours
 ```
 
-Summary tab structure:
-- Col A = week label (W1, W2…)
-- Col B = start date
-- Col C = end date
-- Col D = total actual hours
+Summary tab structure: Col A = week label | Col B = start date | Col C = end date | Col D = total hours
 
-## Why this keeps failing
+## Why this fails without Summary tab
 
-Each project started its own W1 counter independently:
-- LeNH-Rory W14 = week of Jun 1
-- LeNH-Franc W27 = week of Jun 15 (NOT Jun 1!)
-- KhanhHH-Generator W43 = week of Jun 1
-
-Using W29 for all sheets returns wrong weeks → false 0h → false reminders.
+Each project started its own W1 counter independently — W29 means different real-world weeks in different sheets. Only the Summary tab gives the authoritative mapping.
 
 ## Incident 2026-06-02
 
-Agent looked at W29 for all sheets → reported LeNH + KhanhHH as 0h Mon Jun 1.
+Used W29 for all sheets → false 0h for LeNH + KhanhHH → almost sent false reminders.
 Correct: LeNH 7.67h (Rory W14), KhanhHH 4.83h (Generator W43).
-User: "Check lại, thấy có task log LeNH và KhanhHH" — caught before false reminders sent.
+User correction (3rd+ time): "Check lại, thấy có task log LeNH và KhanhHH"
 
-Related: [[feedback_tasklog_summary_sheet]], [[feedback_sheets_subagent_unreliable]]
+Related: [[feedback_tasklog_summary_sheet]]

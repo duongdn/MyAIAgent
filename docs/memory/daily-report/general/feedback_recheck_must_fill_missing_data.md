@@ -1,8 +1,10 @@
 ---
 name: feedback_recheck_must_fill_missing_data
-description: Recheck mode must re-run sources to supply missing data (BLOCKED, expired, unavailable), not just fix Trello items
-metadata:
+description: "Recheck mode must re-run sources to supply missing data (BLOCKED, expired, unavailable), not just fix Trello items"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: eadc01d0-f29a-44b8-8009-792373f2d6cf
 ---
 
 Recheck is NOT only about Trello items. If the existing report has any section with missing data, the recheck MUST also re-run those sources and fill in real data.
@@ -11,4 +13,4 @@ Recheck is NOT only about Trello items. If the existing report has any section w
 
 **How to apply:** After fixing Trello, scan the report for: "BLOCKED", "token expired", "session expired", "All sessions expired", "Data unreliable", "cached plan". For each: refresh auth → re-run fetch → overwrite section with real data. Only accept failure after 2 genuine attempts.
 
-**Also re-apply classification rules, not just auth fixes (added 2026-06-25):** Recheck must also catch items left ○ for reasons OTHER than auth failure — e.g. "no activity" was used as a skip reason on Franc/MPFC/Marcel/Raymond/Andrew Taraba/Bailey-GGS even though [[feedback_no_activity_not_skip]] and [[feedback_low_activity_devs_not_alert]] already say silence ≠ alert for those exact items. A recheck that only chases "token expired" strings and ignores wrongly-skipped no-activity items will under-complete the Trello card. Scan the Trello status list itself, not just the report's error strings, and cross-check each ○ item's actual gate condition before assuming it needs new data.
+**Also re-apply classification rules, not just auth fixes (added 2026-06-25):** Recheck must also catch items left ○ for reasons OTHER than auth failure — e.g. "no activity" was used as a skip reason on Franc/MPFC/Marcel/Raymond/Andrew Taraba/Bailey-GGS even though [[feedback_low_activity_devs_not_alert]] already says silence ≠ alert for those exact items. A recheck that only chases "token expired" strings and ignores wrongly-skipped no-activity items will under-complete the Trello card. Scan the Trello status list itself, not just the report's error strings, and cross-check each ○ item's actual gate condition before assuming it needs new data.

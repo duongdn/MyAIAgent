@@ -1,13 +1,15 @@
 ---
 name: feedback_philip_msteams_must_run
-description: Philip MS Teams check MUST run script fetch-msteams-customer-messages.js — never skip as "not implemented"
-metadata:
+description: "Philip MS Teams check MUST run script fetch-msteams-customer-messages.js — never skip as \"not implemented\"; search results are ambiguous even with full name, must disambiguate by \"Six Star Rentals\" subtitle"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: eadc01d0-f29a-44b8-8009-792373f2d6cf
 ---
 
 Philip (Six Star Rentals — pbriggs@sixstarrentals.com.au) is monitored via MS Teams using `will@nustechnology.com` account.
 
-**Rule:** ALWAYS run `node scripts/fetch-msteams-customer-messages.js will <query>` for Philip's check. Never mark as "Not checked"/"not implemented"/"config missing" — the script exists, the config exists (`config/.msteams-accounts.json`, account `will`), and login is verified working end-to-end as of 2026-06-06 (see [[feedback_msteams_url_substring_bug_fixed]]).
+**Rule:** ALWAYS run `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` for Philip's check. Never mark as "Not checked"/"not implemented"/"config missing" — the script exists, the config exists (`config/.msteams-accounts.json`, account `will`), and login is verified working end-to-end as of 2026-06-06.
 
 **Why:** 2026-06-04 a subagent skipped it claiming "not implemented"; 2026-06-06 investigation found it had a real login-loop bug (now fixed) but the password/config were correct all along.
 
