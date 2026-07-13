@@ -183,7 +183,10 @@ Trello: Ohcleo ✓ complete.
 
 - Maddy, Rick (mail), Fountain, Elena-WordPress-SamGuard: ⚠️ left incomplete (see Alerts #1, #3, #5, #7)
 - John Yi, Elena-SamGuard, Bailey, Rebecca: ✓ marked complete this run
-- Philip, Neural Contract, Arthur, Blair Brown: not rechecked this run — carrying prior status
+- Neural Contract: ✓ marked complete 10:2x (Upwork workroom 38901192 silent since 07-07, before window — silence never blocks this item)
+- Blair Brown - Peptide Clyde: ✓ marked complete 10:2x (LeNH 0.58h + KhanhHH 0.08h this week on Workstream project `cmqj4tj6v01gfm81vgx7ipkov` — low but no complaint/alert signal from any source; LeNH's aggregate daily hours already OK)
+- Arthur - Meta-Stamp: now part of Full Run as of today (was on-demand-only) — see dedicated report `reports/2026-07-13/{HHMM}-arthur-monitor.md`
+- Philip: still incomplete — MS Teams script crashes on browser launch (`TargetCloseError: Protocol error (Target.setAutoAttach): Target closed`), reproduced 3x, not a resource/session issue (17GB RAM free, no stale profile lock) — genuine script bug needing investigation, not a monitoring alert
 - All other items already complete from prior state, unchanged
 
 ---
@@ -200,7 +203,8 @@ Trello: Ohcleo ✓ complete.
 ## Unresolved questions
 
 1. Matrix token still not refreshed — root cause (capture bug) fixed in `matrix-login.js`, but needs one more clean login attempt (local machine, visible browser, DISPLAY=:1) to actually get a working token.
-3. Philip (MS Teams) and Neural Contract (Upwork) were not rechecked this run due to a browser-session resource conflict — recommend a follow-up check later today.
-4. GGS barcode-fix Live deploy was promised "Monday morning" — not yet verified as shipped.
-5. Elena WordPress CSP (Alert #7) keeps recurring with different GA/Ads domains each time — worth deciding whether to finally get wp-admin credentials to fix this permanently instead of re-discovering it each run.
-6. MPFC heartbeat endpoint at 30s avg (522 calls) is a new pattern, may warrant dedicated investigation beyond informational Performance piece.
+2. Philip (MS Teams) script has a genuine Puppeteer launch crash, reproduced 3x — needs debugging, not just a retry.
+3. GGS barcode-fix Live deploy was promised "Monday morning" — not yet verified as shipped.
+4. Elena WordPress CSP (Alert #7) keeps recurring with different GA/Ads domains each time — worth deciding whether to finally get wp-admin credentials to fix this permanently instead of re-discovering it each run.
+5. MPFC heartbeat endpoint at 30s avg (522 calls) is a new pattern, may warrant dedicated investigation beyond informational Performance piece.
+6. Blair Brown - Peptide Clyde had very low hours this week (LeNH 0.58h) — worth confirming with the user whether this project is expected to have consistent weekly hours or is genuinely low-priority right now.
