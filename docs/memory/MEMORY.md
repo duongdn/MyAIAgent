@@ -99,7 +99,7 @@
 - [feedback_matrix_refresh_headless_bug](daily-report/matrix/feedback_matrix_refresh_headless_bug.md), [feedback_matrix_token_never_report_expired](daily-report/matrix/feedback_matrix_token_never_report_expired.md), [feedback_matrix_token_short_lived](daily-report/matrix/feedback_matrix_token_short_lived.md) — verify before claiming expired
 - [feedback_matrix_resource_arrangement_room](daily-report/matrix/feedback_matrix_resource_arrangement_room.md), [project_longvv_james_diamond](daily-report/matrix/project_longvv_james_diamond.md), [reference_matrix_rooms](daily-report/reminders/reference_matrix_rooms.md) — cross-check before 0h
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript, grep misses signals
-- [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — 5 sources (2 Matrix+3 Slack), Vietnamese summary mandatory
+- [feedback_arthur_metastamp_four_part_check](daily-report/matrix/feedback_arthur_metastamp_four_part_check.md) — history/incidents only, rule itself now in command Piece 13
 - [project_matrix_static_compat_token](daily-report/matrix/project_matrix_static_compat_token.md) — 🔴 mct_ non-expiring token from admin (260713), browser-refresh flow now rarely needed
 
 ## daily-report:upwork
