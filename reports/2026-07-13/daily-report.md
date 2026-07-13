@@ -23,7 +23,7 @@
 
 **Today (Mon Jul 13):** No other staff leave/WFH on record besides KhanhHH's approved dental-surgery leave (07-09, 07-10, already past). VietPH resigned 2026-06-30, no longer monitored.
 
-**Not rechecked this run:** Philip (MS Teams) — script hit a browser-session conflict with concurrent automation, carrying prior Trello status. Neural Contract — Upwork piece not run this cycle, carrying prior status.
+**Not rechecked this run:** Philip (MS Teams) — genuine Puppeteer launch crash (see Trello section below), carrying prior Trello status.
 
 ---
 
@@ -183,7 +183,7 @@ Trello: Ohcleo ✓ complete.
 
 - Maddy, Rick (mail), Fountain, Elena-WordPress-SamGuard: ⚠️ left incomplete (see Alerts #1, #3, #5, #7)
 - John Yi, Elena-SamGuard, Bailey, Rebecca: ✓ marked complete this run
-- Neural Contract: ✓ marked complete 10:2x (Upwork workroom 38901192 silent since 07-07, before window — silence never blocks this item)
+- Neural Contract: ✓ marked complete 10:2x — ~~Upwork workroom 38901192 silent since 07-07, treated as no activity~~ **CORRECTED (user 10:2x): project is genuinely active, not silent — TuanNT logged 2h this week via Workstream (see Sheets section). Only the Upwork *messages* channel is quiet; real work is ongoing with no customer complaints, that's why it stays complete.**
 - Blair Brown - Peptide Clyde: ✓ marked complete 10:2x (LeNH 0.58h + KhanhHH 0.08h this week on Workstream project `cmqj4tj6v01gfm81vgx7ipkov` — low but no complaint/alert signal from any source; LeNH's aggregate daily hours already OK)
 - Arthur - Meta-Stamp: now part of Full Run as of today (was on-demand-only) — see dedicated report `reports/2026-07-13/{HHMM}-arthur-monitor.md`
 - Philip: still incomplete — MS Teams script crashes on browser launch (`TargetCloseError: Protocol error (Target.setAutoAttach): Target closed`), reproduced 3x, not a resource/session issue (17GB RAM free, no stale profile lock) — genuine script bug needing investigation, not a monitoring alert
