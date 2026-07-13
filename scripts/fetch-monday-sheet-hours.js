@@ -91,7 +91,8 @@ function checkWorkstreamStaleness(projectKey, sheetHours) {
   try {
     const output = execSync(`node scripts/workstream-fetch-project-week.js ${TARGET_DATE} ${projectKey}`, {
       encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
+      timeout: 30000
     });
     const data = JSON.parse(output);
     const projectData = data[projectKey];
@@ -109,31 +110,43 @@ function checkWorkstreamStaleness(projectKey, sheetHours) {
 async function main() {
   const sheets = await getSheets();
   const results = [];
+  const notes = [];
   
   for (const [projectName, sheetId] of Object.entries(SHEETS)) {
     const sheetData = await fetchSheetData(sheets, sheetId, projectName);
     
     let reportLine = `${projectName}: `;
+    let finalHours = sheetData.hours;
+    let note = null;
     
     if (sheetData.error) {
       reportLine += `ERROR`;
     } else if (!sheetData.found) {
-      reportLine += `0h ⚠️ no week row`;
+      reportLine += `0h`;
+      note = `${projectName}: No matching week row found in sheet`;
     } else if (sheetData.hours === 0) {
+      // Always check staleness for zeros
       const wsCheck = checkWorkstreamStaleness(WORKSTREAM_MAP[projectName], sheetData.hours);
       if (wsCheck && wsCheck.workstreamHours > 0) {
-        reportLine += `${wsCheck.workstreamHours}h (Workstream, sheet shows 0)`;
+        finalHours = wsCheck.workstreamHours;
+        reportLine += `${finalHours}h`;
+        note = `${projectName}: Sheet shows 0, Workstream shows ${finalHours}h (staleness correction)`;
       } else {
-        reportLine += `0h`;
+        reportLine += `${finalHours}h`;
       }
     } else {
-      reportLine += `${sheetData.hours}h`;
+      reportLine += `${finalHours}h`;
     }
     
     results.push(reportLine);
+    if (note) notes.push(note);
   }
   
   console.log(results.join('\n'));
+  if (notes.length > 0) {
+    console.log('\nNotes:');
+    notes.forEach(n => console.log('- ' + n));
+  }
 }
 
 main().catch(e => {
