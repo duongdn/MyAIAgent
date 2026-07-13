@@ -635,6 +635,8 @@ Find developers with COMBINED 0h across all sheets on the reporting day, no leav
 Hi {name}, task log for {date} is missing (0h logged). Please update when you can. Thanks!
 ```
 
+🔴 **This template text is ONLY valid for a genuine 0h case. Before sending, re-read the message body against the actual verified number for this specific dev/day — never send this exact wording if the real total is nonzero (e.g. a low-but-nonzero 1.5h day).** For a low-but-nonzero case, write a message stating the real number and concern instead (e.g. "you logged only 1.5h, please add any remaining tasks") — do not reuse the "missing/0h" wording. This has actually been sent wrong to a real employee before (KhanhHH, 2026-07-09 — sent "0h logged" minutes after verifying her real total was 1.5h) — treat this as a hard gate, not a suggestion.
+
 **Developer rooms:**
 
 | Developer | Arg | Matrix Room |
