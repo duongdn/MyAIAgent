@@ -10,7 +10,12 @@ const { execSync } = require('child_process');
 function saveSecretConfig(configPath, config) {
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
   try {
-    execSync(`bash "${path.join(__dirname, '..', 'encrypt-secrets.sh')}"`, { stdio: 'ignore' });
+    // Encrypt only this file - NOT the shared encrypt-secrets.sh full loop.
+    // Re-encrypting all 21 configs on every single-file save collaterally
+    // re-committed whatever stale plaintext happened to be sitting in
+    // config/ for unrelated files (root cause of the 2026-07 repeated
+    // email-accounts.json.enc corruption via matrix-token-refresh.js).
+    execSync(`bash "${path.join(__dirname, '..', 'encrypt-secrets.sh')}" "${configPath}"`, { stdio: 'ignore' });
   } catch (err) {
     console.error(`[save-secret-config] Warning: re-encrypt failed, .enc may be stale: ${err.message}`);
   }

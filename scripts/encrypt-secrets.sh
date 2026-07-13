@@ -17,6 +17,21 @@ if [ -z "${SECRETS_KEY:-}" ]; then
   exit 1
 fi
 
+# Optional: encrypt a single file only (used by saveSecretConfig to avoid
+# collaterally re-encrypting all 21 config files - and re-committing any
+# stale plaintext sitting in config/ for files unrelated to the caller -
+# every time one config is saved. See 2026-07 email-accounts.json corruption.)
+if [ -n "${1:-}" ]; then
+  if [ -f "$1" ]; then
+    openssl enc -aes-256-cbc -salt -pbkdf2 -in "$1" -out "${1}.enc" -pass "pass:${SECRETS_KEY}"
+    echo "✓ $1"
+    exit 0
+  else
+    echo "ERROR: file not found: $1"
+    exit 1
+  fi
+fi
+
 # All config files are in config/
 SECRET_FILES=(
   config/.email-accounts.json
