@@ -46,3 +46,4 @@ config/.github-config.json
 config/.workstream-config.json
 config/.facebook-config.json
 config/.newrelic-fountain-config.json
+config/.newrelic-infinity-config.json

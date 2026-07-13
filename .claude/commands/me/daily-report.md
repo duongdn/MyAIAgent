@@ -1083,6 +1083,7 @@ Not gated by any Trello item (no mapped checklist item exists yet) — informati
 | OhCleo backend API | `ohcleo` | `config/.newrelic-ohcleo-config.json` | 8174869 | `ohcleo-backend-api` (staging: `ohcleo-backend-api-staging`) |
 | MyPersonalFootballCoach | `mpfc` | `config/.newrelic-config.json` | 3457746 | `MPFC-live2` |
 | Fountain Gifts (Kunal) | `fountain` | `config/.newrelic-fountain-config.json` | 4401800 | `Fountain Gifts` |
+| InfinityRoses (Kunal) | `infinity` | `config/.newrelic-infinity-config.json` | 4291822 | `InfinityRoses` (dev: `InfinityRoses (Development)`) |
 
 **Script:**
 ```bash

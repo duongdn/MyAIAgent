@@ -12,6 +12,7 @@ const PROJECT_CONFIGS = {
   ohcleo: 'config/.newrelic-ohcleo-config.json',
   mpfc: 'config/.newrelic-config.json',
   fountain: 'config/.newrelic-fountain-config.json',
+  infinity: 'config/.newrelic-infinity-config.json',
 };
 
 function parseArgs() {

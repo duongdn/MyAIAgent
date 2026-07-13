@@ -54,6 +54,7 @@ SECRET_FILES=(
   config/.newrelic-config.json
   config/.newrelic-ohcleo-config.json
   config/.newrelic-fountain-config.json
+  config/.newrelic-infinity-config.json
   config/.rollbar-config.json
   config/.bitbucket-config.json
 )
