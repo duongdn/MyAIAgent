@@ -132,6 +132,22 @@ async function main() {
     }
   }
 
+  if (!capturedAccessToken) {
+    // Debug aid: dump current URL, page title, and localStorage keys before closing
+    try {
+      const debugInfo = await page.evaluate(() => ({
+        url: location.href,
+        title: document.title,
+        keys: Object.keys(localStorage),
+      }));
+      console.error('DEBUG: url=', debugInfo.url, 'title=', debugInfo.title, 'localStorage keys=', debugInfo.keys);
+      await page.screenshot({ path: path.join(__dirname, '..', 'tmp', 'matrix-login-debug.png') });
+      console.error('DEBUG: screenshot saved to tmp/matrix-login-debug.png');
+    } catch (e) {
+      console.error('DEBUG: could not capture debug info:', e.message);
+    }
+  }
+
   await browser.close();
 
   if (!capturedAccessToken) {
