@@ -2,7 +2,7 @@
 
 **Run:** 2026-07-13T09:33:00+07:00 (interactive, full run)
 **Window:** 2026-07-10T10:27:00+07:00 → 2026-07-13T09:33:00+07:00
-**Leave plan:** KhanhHH — leave requests submitted for 07-09 and 07-10 (dental surgery), status still **pending** (not yet approved) — see Alert #2.
+**Leave plan:** KhanhHH — leave requests for 07-09 and 07-10 (dental surgery) — ~~status still pending~~ **approved by DuongDN 09:43 07-13** — see Alert #2 (resolved).
 
 ---
 
@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Email (rick@) | Fountain/FirstProject production errors recurring: 502 Bad Gateway (10th occurrence), Minified React error (100th+ occurrence). Real, ongoing. |
-| 2 | Sheets (KhanhHH) | 0h logged Thu 07-09 + Fri 07-10 (~16h weekly shortfall). Leave requests exist for both exact dates (dental surgery) but status is **pending**, not approved — needs leave approval, not a task-log reminder. |
+| 2 | Sheets (KhanhHH) | 0h logged Thu 07-09 + Fri 07-10 (~16h weekly shortfall). ~~Leave requests exist but status is pending, not approved — needs leave approval.~~ **RESOLVED 09:43 07-13: DuongDN approved both leave requests. 0h fully explained, no further action.** |
 | 3 | Slack (Maddy/Xtreme) | 3 unaddressed Critical/High Bitbucket PR findings, 18–37 days old (#509, #510, #481) + PR #485 stale/orphaned (76d, no ticket) + new client billing-dispute approval-gate: tickets 446–454 must NOT start without prior approval. |
 | 4 | Performance (MPFC) | Apdex 0.50 (poor, &lt;0.7 threshold). `wp-admin/admin-ajax.php?action=heartbeat` averaging 30.2s over 522 calls. 2 new PHP fatal error classes (`JSON_API_User_controller::error()` undefined ×10, `MM_Event` class not found ×5). |
 | 5 | Fountain (Trello) | 3 new unanswered customer comments from kunalsheth since 07-10, 2 are direct "push live" requests. |
@@ -21,7 +21,7 @@
 | 9 | Email (vuongtrancr) | Swish "Low Application Throughput — signal lost 10 min" recurring ~10× (New Relic), known ongoing watch pattern. |
 | 10 | Email (dnduongus) | 2 personal security alerts (Google, LastPass blocked login attempt) — flagged per account's security-only filter, unconfirmed if user-initiated. |
 
-**Today (Mon Jul 13):** No other staff leave/WFH on record besides KhanhHH's pending dental-surgery leave (07-09, 07-10, already past). VietPH resigned 2026-06-30, no longer monitored.
+**Today (Mon Jul 13):** No other staff leave/WFH on record besides KhanhHH's approved dental-surgery leave (07-09, 07-10, already past). VietPH resigned 2026-06-30, no longer monitored.
 
 **Not rechecked this run:** Philip (MS Teams) — script hit a browser-session conflict with concurrent automation, carrying prior Trello status. Neural Contract — Upwork piece not run this cycle, carrying prior status.
 
@@ -72,7 +72,7 @@ Trello: DuongDn, Carrick, Nick, Kai, Ken ✓ complete. Rick ⚠️ skipped (Aler
 - Sun: new client billing-dispute process — per-task estimate + approval required before starting; **tickets 446–454 on hold**, 409/428/436 OK to proceed.
 - Bitbucket (7 open PRs, all Kai): #509 (Codex Critical, 21d unaddressed), #510 (Codex Critical, 18d unaddressed), #481 (Madhuraka High, 37d unaddressed), #516 (new, 4d), #513 (clean), #486 (no new activity), #485 (stale 76d, no ticket, 0 comments).
 
-**Aysar pre-check:** MPDM C07SQ4HAUHZ silent since 07-06 — KhanhHH's leave requests cover 07-09/07-10 (see Alert #2; status is pending, not approved as initially assumed) — silence explained.
+**Aysar pre-check:** MPDM C07SQ4HAUHZ silent since 07-06 — KhanhHH's approved leave covers 07-09/07-10 (see Alert #2, resolved) — silence explained.
 
 Trello: Rory, Aysar, Franc, Elliott, MPFC, Marcel, Raymond-LegalAtoms, Colin, John Yi, Elena-SamGuard, Bailey, Rebecca ✓ complete. Maddy ⚠️ skipped (Alert #3).
 
@@ -100,7 +100,7 @@ Trello: James Diamond - Vinn, Andrew Taraba ✓ complete.
 | PhucVT | 8h (Crystal lang) | ✅ OK |
 | TuanNT | 8h combined (Paturevision 6h + Neural WS 2h) | ✅ OK |
 | VietPH | — resigned 2026-06-30 | excluded |
-| KhanhHH | **0h** all sources | **Alert #2** — leave requests pending approval |
+| KhanhHH | **0h** all sources | Alert #2 — resolved, leave approved 09:43 07-13 |
 | LeNH | 8h (Portfolio-James Diamond) | ✅ OK |
 
 **Maddy JIRA (W14):** LIFM2-447 ✅, LIFM2-446 ✅, LIFM2-448 ⚠️ no estimate set.
@@ -190,7 +190,7 @@ Trello: Ohcleo ✓ complete.
 
 ## Reminders — 09:33 (+07:00)
 
-- KhanhHH: 0h Thu/Fri, but leave requests exist for both dates (pending approval) — **not sending a task-log reminder**, this is a leave-approval action item, not a discipline gap. Recommend approving the leave requests in the system.
+- KhanhHH: 0h Thu/Fri — leave requests approved by DuongDN 09:43 07-13. No reminder needed, fully resolved.
 - No other 0h-no-leave developers found this run.
 
 *(No --send-reminder flag passed — print-only, nothing sent to Matrix.)*
@@ -200,7 +200,6 @@ Trello: Ohcleo ✓ complete.
 ## Unresolved questions
 
 1. Matrix token still not refreshed — root cause (capture bug) fixed in `matrix-login.js`, but needs one more clean login attempt (local machine, visible browser, DISPLAY=:1) to actually get a working token.
-2. KhanhHH's two leave requests (07-09, 07-10) are still "pending" in `config/leave-plan.json` — needs approval action, not a monitoring fix.
 3. Philip (MS Teams) and Neural Contract (Upwork) were not rechecked this run due to a browser-session resource conflict — recommend a follow-up check later today.
 4. GGS barcode-fix Live deploy was promised "Monday morning" — not yet verified as shipped.
 5. Elena WordPress CSP (Alert #7) keeps recurring with different GA/Ads domains each time — worth deciding whether to finally get wp-admin credentials to fix this permanently instead of re-discovering it each run.

@@ -374,10 +374,10 @@
       ],
       "type": "full",
       "reason": "em đi khám răng và nhổ răng khôn",
-      "status": "pending",
+      "status": "approved",
       "requested_at": "2026-07-07T01:59:34.000Z",
-      "approved_by": null,
-      "approved_at": null,
+      "approved_by": "duongdn@nustechnology.com",
+      "approved_at": "2026-07-13T09:43:00+07:00",
       "email_subject": "KhanhHH - Đơn xin nghỉ phép ngày 09/07/2026"
     },
     {
@@ -389,10 +389,10 @@
       ],
       "type": "full",
       "reason": "em nghỉ ngơi sau khi nhổ răng khôn ạ",
-      "status": "pending",
+      "status": "approved",
       "requested_at": "2026-07-09T19:38:20.000Z",
-      "approved_by": null,
-      "approved_at": null,
+      "approved_by": "duongdn@nustechnology.com",
+      "approved_at": "2026-07-13T09:43:00+07:00",
       "email_subject": "KhanhHH - Đơn xin nghỉ phép ngày 10/07/2026"
     }
   ]
