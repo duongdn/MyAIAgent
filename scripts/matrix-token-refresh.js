@@ -160,6 +160,14 @@ async function main() {
 
   // Wait up to 5 minutes for user to login
   const deadline = Date.now() + 300000;
+  // Grace window after access_token is first seen, to let the paired refresh_token
+  // (from localStorage or the /oauth2/token response body) catch up before we give up on it.
+  // Without this, the header-sniff listener (fires on the very first authenticated request,
+  // often before any loop tick runs) sets capturedAccessToken alone and the loop below used to
+  // break immediately — leaving refresh_token stale/already-rotated in config, which then made
+  // every subsequent headless refresh_token-grant attempt fail with invalid_grant.
+  const REFRESH_TOKEN_GRACE_MS = 10000;
+  let accessTokenCapturedAt = null;
   let lastPrint = 0;
   while (Date.now() < deadline) {
     await new Promise(r => setTimeout(r, 2000));
@@ -168,8 +176,9 @@ async function main() {
       lastPrint = Date.now();
     }
 
-    // Try localStorage extraction
-    if (!capturedAccessToken) {
+    // Try localStorage extraction — keep polling even after access_token is captured
+    // elsewhere, until we also have refresh_token (or the grace window expires).
+    if (!capturedAccessToken || !capturedRefreshToken) {
       const stored = await page.evaluate(() => {
         const result = {};
         for (let i = 0; i < localStorage.length; i++) {
@@ -197,7 +206,15 @@ async function main() {
       }
     }
 
-    if (capturedAccessToken) break;
+    if (capturedAccessToken && !accessTokenCapturedAt) {
+      accessTokenCapturedAt = Date.now();
+    }
+
+    if (capturedAccessToken && capturedRefreshToken) break;
+    if (accessTokenCapturedAt && Date.now() - accessTokenCapturedAt > REFRESH_TOKEN_GRACE_MS) {
+      console.log('[matrix-refresh] access_token captured but no paired refresh_token after grace window — proceeding without it.');
+      break;
+    }
   }
 
   await browser.close();
@@ -209,7 +226,11 @@ async function main() {
 
   // Save
   config.access_token = capturedAccessToken;
-  if (capturedRefreshToken) config.refresh_token = capturedRefreshToken;
+  if (capturedRefreshToken) {
+    config.refresh_token = capturedRefreshToken;
+  } else {
+    console.warn('[matrix-refresh] WARNING: no fresh refresh_token captured — config.refresh_token is now stale, next headless refresh_token-grant attempt will likely fail and require another visible-browser login.');
+  }
   saveSecretConfig(CONFIG_PATH, config);
 
   // Verify
