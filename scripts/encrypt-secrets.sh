@@ -53,6 +53,7 @@ SECRET_FILES=(
   config/.workstream-config.json
   config/.newrelic-config.json
   config/.newrelic-ohcleo-config.json
+  config/.newrelic-fountain-config.json
   config/.rollbar-config.json
   config/.bitbucket-config.json
 )

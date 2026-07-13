@@ -11,6 +11,7 @@ const https = require('https');
 const PROJECT_CONFIGS = {
   ohcleo: 'config/.newrelic-ohcleo-config.json',
   mpfc: 'config/.newrelic-config.json',
+  fountain: 'config/.newrelic-fountain-config.json',
 };
 
 function parseArgs() {
