@@ -1,8 +1,10 @@
 ---
 name: feedback_workstream_config_not_gitignored
-description: config/.workstream-config.json (live Keycloak bearer token) was missing from .gitignore and got committed/pushed to GitHub repeatedly — fixed 2026-06-19, check before adding any new config/.* file
-metadata:
+description: "🔴 SUPERSEDED 2026-07-13 by a structural fix — see feedback_new_config_file_gitignore_gap. .gitignore is now pattern-based (config/*.json auto-ignored), so the manual 'check before adding any new config/.* file' step below is no longer necessary. Kept as historical incident record. config/.workstream-config.json (live Keycloak bearer token) was missing from .gitignore and got committed/pushed to GitHub repeatedly — fixed 2026-06-19, check before adding any new config/.* file"
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: f3f109c8-a37f-4fea-b3a5-822c4dbc59c4
 ---
 
 `config/.workstream-config.json` contains a live Keycloak Bearer access token (auto-refreshed by `workstream-login.js`) but was **never added to `.gitignore`** when Workstream integration was built. It got committed and pushed to `duongdn/MyAIAgent` on GitHub across multiple auto-commits (confirmed present since at least 2026-06-18, likely longer).
