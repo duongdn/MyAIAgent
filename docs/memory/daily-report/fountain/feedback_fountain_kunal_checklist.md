@@ -1,7 +1,10 @@
 ---
-name: Fountain/Kunal daily report — MANDATORY 5-part checklist
-description: Fountain section MUST have all 5 parts: Matrix plan, task log actuals, plan vs actual table, capacity/runway, over-estimate tracking. NEVER skip any.
-type: feedback
+name: fountain-kunal-daily-report-mandatory-5-part-checklist
+description: "Fountain section MUST have all 5 parts: Matrix plan, task log actuals, plan vs actual table, capacity/runway, over-estimate tracking. NEVER skip any."
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: 754a9366-d1fc-446c-b7d4-a6661c260ab2
 ---
 
 Fountain/Kunal report is **FIVE parts**, ALL required. Missing any = report is WRONG.
@@ -10,7 +13,7 @@ Fountain/Kunal report is **FIVE parts**, ALL required. Missing any = report is W
 Fetch latest message from Fountain room (`!EWnVDAxbTGsBxPkaaI:nustechnology.com`) matching "Em update plan tuần này" format. Extract per-dev planned hours (ViTHT, ThinhT, VuTQ, HaVS) and QC total. Cite source (@sender + timestamp).
 
 ## 2. Task log weekly actuals
-From Fountain spreadsheet (`1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`) Summary tab, get per-developer weekly totals for the correct W{n}. Employees: VuTQ, ThinhT, ViTHT (dev); PhatDLT, HungPN (QC); HaVS.
+**Workstream is now the primary/authoritative source** (project `fountain` / "Fountain Greetings", id `cmpqcjojh00q2tk1v2qi7gs0j` — see [[reference_workstream]]). User confirmed 2026-07-13: "Fountain chuyển qua Workstream rồi, ưu tiên Workstream" (Fountain moved to Workstream, prioritize it). Query `/review/week?projectId=cmpqcjojh00q2tk1v2qi7gs0j&date=...` for per-developer weekly totals: VuTQ, ThinhT, ViTHT (dev); PhatDLT, HungPN (QC); HaVS. Fall back to the Fountain spreadsheet (`1iIKfjAh857qzrR2xkUWPcN_9bFAwB1pL8aJWTRk4f4o`) Summary tab only if Workstream data for this project looks empty/suspicious — see [[feedback_check_workstream_before_flagging_shortfall]] for the retry/cross-check discipline (applies here too, this project has no known exemption).
 
 ## 3. Plan vs Actual table
 Compare each developer's plan vs actual. Flag mismatch.

@@ -11,6 +11,10 @@ metadata:
 
 Internal task-log system running parallel to Google Sheets. **No longer just Maddy/Rebecca** — as of 2026-07-02 it covers 17 named client projects + Others.
 
+🔴 **Workstream is now PRIORITY/AUTHORITATIVE for hours across ALL projects — user confirmed 2026-07-13: "check hết các dự án đi, chỉ có Bailey là đang không dùng workstream thôi" (check all projects, only Bailey isn't on Workstream).** When Workstream and Sheets disagree for any dev/project, trust Workstream (unless the project is Bailey/Paturevision — see exception below). This supersedes any older per-project "Sheets is primary" framing (e.g. Fountain, which explicitly moved to Workstream — see [[feedback_fountain_kunal_checklist]]).
+
+**Known exception — Bailey/Paturevision:** does NOT use Workstream. Task-log actuals for Bailey (VietPH/TuanNT/DuongDN DEV3) come from the Paturevision Google Sheet only — see [[feedback-bailey-paturevision-billing]]. Don't expect or query a Workstream project for Bailey hours.
+
 ## Projects (confirmed via live `GET /time/projects` 2026-07-02 — this is the authoritative list, not the static table)
 
 | Key | Workstream name | Client/alias | Project ID |
