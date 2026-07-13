@@ -47,11 +47,23 @@ async function main() {
   let capturedAccessToken = null;
   let capturedRefreshToken = null;
 
+  // Hook XHR setRequestHeader early (before any page script runs) to catch the
+  // Authorization header for XHR-based requests that Puppeteer's network
+  // interception might miss/mis-timestamp relative to page navigation.
+  await page.evaluateOnNewDocument(() => {
+    const orig = XMLHttpRequest.prototype.setRequestHeader;
+    window.__auth = null;
+    XMLHttpRequest.prototype.setRequestHeader = function (k, v) {
+      if (k.toLowerCase() === 'authorization') window.__auth = v;
+      return orig.apply(this, arguments);
+    };
+  });
+
   // Intercept requests to capture Bearer tokens
   await page.setRequestInterception(true);
   page.on('request', (req) => {
     const auth = req.headers()['authorization'];
-    if (auth && auth.startsWith('Bearer mat_') && !capturedAccessToken) {
+    if (auth && auth.startsWith('Bearer ') && !capturedAccessToken) {
       capturedAccessToken = auth.replace('Bearer ', '');
       console.log(`Captured access_token: ${capturedAccessToken.substring(0, 20)}...`);
     }
@@ -108,11 +120,20 @@ async function main() {
         return result;
       }).catch(() => ({}));
 
-      if (stored.access_token && stored.access_token.startsWith('mat_')) {
+      if (stored.access_token) {
         capturedAccessToken = stored.access_token;
       }
-      if (stored.refresh_token && stored.refresh_token.startsWith('mar_')) {
+      if (stored.refresh_token) {
         capturedRefreshToken = stored.refresh_token;
+      }
+    }
+
+    // Check the injected XHR Authorization header hook
+    if (!capturedAccessToken) {
+      const hookedAuth = await page.evaluate(() => window.__auth).catch(() => null);
+      if (hookedAuth && hookedAuth.startsWith('Bearer ')) {
+        capturedAccessToken = hookedAuth.replace('Bearer ', '');
+        console.log(`Captured access_token via XHR hook: ${capturedAccessToken.substring(0, 20)}...`);
       }
     }
 
