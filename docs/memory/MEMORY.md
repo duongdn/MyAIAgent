@@ -18,7 +18,8 @@
 - [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md) — UTC+7; PM at NUS Technology
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md) — new workspace: extract xoxc from Local Storage
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 unanswered direct customer ask = warning, read full msg
-- [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — decrypt-secrets can revert live tokens; use saveSecretConfig
+- [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md) — decrypt-secrets can revert/delete live tokens; use saveSecretConfig
+- [feedback_gui_automation_risk_on_shared_desktop](global/feedback_gui_automation_risk_on_shared_desktop.md) — 🔴 xdotool on DISPLAY=:1 = user's live desktop; verify window every keystroke, abort if user active
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md) — Drive OAuth expired → service account + `files().export`
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 expired session→visible DISPLAY=:1 retry only, never device-code/passive text; unresolved=ALERT
 - [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md) — correcting a report after feedback = strikethrough wrong text + correction, never silent delete
