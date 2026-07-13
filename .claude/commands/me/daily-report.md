@@ -1010,7 +1010,7 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 
 🔴 **Mandatory 4-part depth, every single check — same standard as Maddy (see Piece 2/"Maddy JIRA cross-check"):** (1) communication (both Matrix rooms + all 3 Slack channels — not a surface skim of just one), (2) task tracking (Workstream `additionalInfo` daily notes, since there's no formal ticket system), (3) est/actual hours (Workstream "Crystal lang" project), (4) code/PR status (GitHub `Christebob/Meta_Stamp_V3` — check commits too, not just PRs, since this repo has 0 open PRs and everything lands direct-to-main). Arthur is a real client project same as Maddy, not a lightweight check — user directive 2026-07-07: "Arthur là dự án mới, cần report chi tiết y chang Maddy."
 
-Full background/incident history (not standing rules — read only if you need historical context): `docs/memory/daily-report/matrix/feedback_arthur_metastamp_four_part_check.md` and the one-time full deep-dive `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
+One-time full-history deep-dive: `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
 
 **5 sources, every run:**
 | # | Source | ID | Notes |
