@@ -13,5 +13,5 @@ When a dev's Matrix/Slack message says they didn't work on a specific project, *
 
 **How to apply:**
 - "Not working [project]" → set that project's hours to 0, don't skip the dev's other sheets
-- Always scan ALL known sheets before concluding a dev has 0h for the day
-- For TuanNT specifically: do NOT hardcode a fixed sheet count (has been claimed as 3, 4, and 5 in different old notes — all superseded). Scan ALL 11 sheets + Workstream every time, per [[feedback_tuannt_consolidated]] and [[feedback_check_workstream_before_flagging_shortfall]] — hardcoded subsets are the single most common cause of false 0h/shortfall alerts for this dev.
+- Always check ALL known sources before concluding a dev has 0h for the day — since 2026-07-13, Workstream is primary for every project except Bailey (see [[reference_workstream]]), so "all sources" now means all Workstream projects + the Bailey/Paturevision sheet, not "all 11 Google Sheets" the way it used to.
+- For TuanNT specifically: do NOT hardcode a fixed source count (has been claimed as 3, 4, and 5 sheets in different old notes — all superseded, and now largely moot since most of those projects moved to Workstream). Check all Workstream projects + Bailey/Paturevision sheet every time, per [[feedback_tuannt_consolidated]] and [[feedback_check_workstream_before_flagging_shortfall]] — hardcoded subsets are the single most common cause of false 0h/shortfall alerts for this dev.

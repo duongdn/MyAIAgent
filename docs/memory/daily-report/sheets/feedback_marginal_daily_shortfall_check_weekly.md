@@ -1,8 +1,10 @@
 ---
 name: feedback_marginal_daily_shortfall_check_weekly
-description: Marginal daily shortfall (< 1h) — check weekly total before flagging. If weekly hours on track, per-day variance is NOT an alert.
-metadata:
+description: "Marginal daily shortfall (< 1h) — check weekly total before flagging. If weekly hours on track, per-day variance is NOT an alert."
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: eadc01d0-f29a-44b8-8009-792373f2d6cf
 ---
 
 **Rule:** Before flagging a marginal daily shortfall (< ~1h short), check the dev's WEEKLY total across all sources. If weekly total is within 1h of their weekly target, the daily variance is covered — do NOT alert, do NOT send reminder.
@@ -11,7 +13,7 @@ metadata:
 
 **How to apply:**
 1. When a daily shortfall is < 1h: pull that dev's hours for ALL days of that week (Mon–Fri).
-2. Sum weekly total across ALL 11 sheets + ALL Workstream projects (same scan, different date range).
+2. Sum weekly total across ALL Workstream projects + the Bailey/Paturevision sheet (same scan, different date range) — Workstream is primary for every project except Bailey since 2026-07-13, see [[reference_workstream]].
 3. If weekly_total ≥ weekly_target − 1h → no alert, note "within weekly tolerance."
 4. If weekly_total < weekly_target − 1h → real alert, flag with weekly context shown: "X daily shortfall, Yh weekly vs Zh target."
 5. Weekly targets: 8h/day × 5 = 40h/week (most devs); LongVV = 16h/week; part-timers per contract.
