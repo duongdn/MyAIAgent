@@ -40,7 +40,7 @@
 - [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
 
 ## daily-report:slack
-- [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — search.messages not conversations.history
+- [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md) — search.messages not conversations.history; 🔴 260714: auth.test needs token+FRESH d cookie together, don't assume "signed out" from a stale cookie alone
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md) — dev talk≠alert; low activity often normal; merged in "no activity = complete" rule 2026-07-13
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — 🔴 Aysar gate=MPDM C07SQ4HAUHZ; MANDATORY pre-check `sheets-tasklog-scan.js <date> KhanhHH` before ever flagging MPDM silence (2x repeat false alert 260708/260709); `#testing` customer asks: 👀 react not "let me check" text, check thread_ts not just search.messages (260714)
 - [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md) — LIFM2-439 trust incident
