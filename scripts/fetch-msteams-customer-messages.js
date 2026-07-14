@@ -308,7 +308,7 @@ async function doLogin(page, email, password) {
   return true;
 }
 
-async function searchAndExtractMessages(page, customerName) {
+async function searchAndExtractMessages(page, customerName, disambiguateHint = '') {
   console.log(`[search] Looking for customer: ${customerName}`);
 
   console.log('[search] Waiting for Teams UI...');
@@ -382,7 +382,6 @@ async function searchAndExtractMessages(page, customerName) {
   // "External" or the DISAMBIGUATE_HINT (e.g. a company name), since a plain
   // name-substring match picks whichever duplicate happens to be first in the DOM.
   let clicked = false;
-  const disambiguateHint = process.env.MSTEAMS_DISAMBIGUATE || '';
   const targetedClick = await page.evaluate((name, hint) => {
     const candidates = Array.from(document.querySelectorAll('[role="listitem"], [role="option"], [data-tid*="chat"], [class*="searchResult"], [class*="search-result"]'));
     const matches = candidates.filter(el => (el.innerText || '').includes(name));
@@ -486,7 +485,8 @@ async function searchAndExtractMessages(page, customerName) {
     // Let Teams SPA finish internal navigation before interacting
     await page.waitForNetworkIdle({ idleTime: 1500, timeout: 15000 }).catch(() => {});
     await sleep(2000);
-    const result = await searchAndExtractMessages(page, CUSTOMER_NAME);
+    const disambiguateHint = process.env.MSTEAMS_DISAMBIGUATE || (config.customerHints || {})[CUSTOMER_NAME] || '';
+    const result = await searchAndExtractMessages(page, CUSTOMER_NAME, disambiguateHint);
 
     console.log('\n=== RESULTS ===');
     console.log(`Customer: ${CUSTOMER_NAME}`);
