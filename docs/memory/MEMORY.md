@@ -33,7 +33,7 @@
 - [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md) — OhCleo: zero server access, Tony's own infra, Slack DM only
 - [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md) — recheck fills BLOCKED; 🔴 scan window = last_run always (every source), Monday/Friday is fallback-only not primary
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md), [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md) — our issues=alerts; missing report=alert unless leave
-- [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴 repeat complaint: fix stale cross-references after corrections; "checked <1hr ago" is never a reason to skip a re-check the user asked for
+- [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴🔴 3rd occurrence 260714: after any correction, grep whole file for every mention, MANDATORY final step every recheck
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md) — 10 accounts; davidztv19=Arthur

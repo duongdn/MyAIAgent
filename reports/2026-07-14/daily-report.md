@@ -83,24 +83,24 @@ Trello: Rory, Franc, Elliott, MPFC, Marcel, Raymond, Colin ✓ complete. Maddy, 
 
 Trello: James Diamond, Andrew Taraba ✓ complete.
 
-## Sheets/Workstream — all — 06:30 (+07:00)
+## Sheets/Workstream — all — 06:30 (+07:00, superseded by 08:50 recheck below)
 
 | Developer | Today (13/7) | Status |
 |-----------|--------------|--------|
-| LongVV | Sheets 0h (uninformative — Workstream inaccessible, see Alert #11) | Unverified this run |
-| PhucVT | Sheets 0h (uninformative — Workstream inaccessible) | Unverified this run |
-| KhanhHH | Sheets 0h (uninformative — Workstream inaccessible) | Unverified this run |
-| LeNH | Sheets 0h (uninformative — Workstream inaccessible) | Unverified this run |
-| TuanNT | 0h across all 13 sheets, incl. Paturevision/Bailey | ⚠️ Alert #4 — Scrin.io shows 8h16m activity same day, task log just not filled in |
+| LongVV | **4h (Xtreme Soft Solutions)** | Verified 08:50 — part-time weekly target, no daily alert |
+| PhucVT | **7h (Crystal lang/Arthur)** | Verified 08:50 — 1h short of daily 8h but marginal shortfalls checked weekly, no alert |
+| KhanhHH | **8h (Baamboozle 2.33h + Generator 5.67h)** | Verified 08:50 — full day, no alert |
+| LeNH | **0h — confirmed genuine** (2 independent methods) | ⚠️ Verified 08:50 — real alert, no leave note, see recheck section |
+| TuanNT | **8h (7.5h Paturevision + 0.5h Neural Contract)** | ✅ Verified 08:50 — Alert #4 was a false alarm, John Yi/Bailey/Rebecca Trello items now complete |
 
-Maddy JIRA weekly cross-check: no ticket entries returned this week (Workstream-dependent, blocked). Kai's Slack progress post (LIFM2-450/449) is the only signal available this run.
+Maddy JIRA weekly cross-check: no ticket entries returned this week (Workstream-dependent, blocked at 06:30 — Workstream restored by the 08:50 recheck, not re-run since Kai's Slack progress post (LIFM2-450/449) is a sufficient signal for this piece).
 
-## Fountain — 06:35 (+07:00)
+## Fountain — 06:35 (+07:00, superseded by 08:50 recheck below)
 
-- **Part 1 (Matrix plan):** Not posted for the current week (checked full history through 2026-07-13 17:11) — last plan was 2026-07-06 (ViTHT 40h/ThinhT 20h/DatNT 40h/QC 24h).
-- **Part 2/3 (task log actuals + plan vs actual):** Blocked — Workstream inaccessible (Alert #11); Fountain Google Sheet itself shows 0.00h total for both last week and this week (abandoned, migrated to Workstream).
+- **Part 1 (Matrix plan):** As of 06:35, not yet posted for the current week (last known was 2026-07-06). **UPDATE 08:53:** @trinhmtt posted this week's plan — DatNT 40h/ViTHT 40h/ThinhT 12h → QC 23h.
+- **Part 2/3 (task log actuals + plan vs actual):** As of 06:35, blocked (Workstream inaccessible, Alert #11). **UPDATE 08:50:** Workstream restored — Monday (07-13) actuals: DatNT 8h, ThinhT 4h, PhatDLT(QC) 0.5h, tracking reasonably against the new plan.
 - **Trello board:** No new customer comments in-window (last kunalsheth/tmmckay comment was before window start). 1 long-stuck Doing card (83 days, pre-existing, not new).
-Trello: Fountain ⚠️ skipped (Parts 1-3 incomplete this run).
+Trello: Fountain ✅ completed at 08:53 recheck (all 3 parts now clean) — see Re-check section for full detail.
 
 ## Elena — 06:38 (+07:00)
 
@@ -110,14 +110,15 @@ Trello: Fountain ⚠️ skipped (Parts 1-3 incomplete this run).
 - samguard.co: 0 JS/page errors; 3 CSP violations (region1.analytics.google.com) — Alert #5, not agent-fixable this run.
 Trello: Elena - SamGuard Digital Plant ✓ complete (PR/deploy side clean). Elena - WordPress SamGuard ⚠️ skipped (CSP alert).
 
-## OhCleo Slack — 06:40 (+07:00)
+## OhCleo Slack — 06:40 (+07:00, superseded by 08:50 recheck below)
 
 | Channel | Msgs | Key content |
 |---------|------|-------------|
 | DM:Celine Fierro | 0 | No customer messages; no Tony daily report found for 13/7 |
 | #events-code | — | Channel no longer resolvable (likely renamed/removed, dormant since 2023 — not an auth issue, same credentials work fine on the DM channel) |
 
-Trello: Ohcleo ⚠️ skipped (Alert #8).
+**UPDATE 08:50:** "No Tony report" was flagged as an alert without first checking if Tony actually worked OhCleo that day (same class of mistake as the already-fixed Kai/Aysar gates). Workstream confirms LongVV logged 0h on `ohcleo` but 4h on Xtreme Soft Solutions (Maddy) that day — he worked a different project, no report was ever due.
+Trello: Ohcleo ✅ completed at 08:50 recheck (false alarm resolved).
 
 ## Matrix — 06:44 (+07:00)
 
@@ -126,7 +127,7 @@ Full details: reports/2026-07-14/matrix-rooms-0644.md
 
 ### Key updates
 
-**Maddy (Xtreme)** — duongdn flagged in-room: "Alert thật — 3 PR Bitbucket Critical/High tồn đọng 18-37 ngày (Kai chưa fix)" (Alert #3).
+**Maddy (Xtreme)** — duongdn flagged in-room: "Alert thật — 3 PR Bitbucket Critical/High tồn đọng 18-37 ngày (Kai chưa fix)" (Alert #3). **Corrected 08:5x recheck — this claim was itself wrong** (count/severity/age all off, see Alert #3 above): real issue is 1 Highest-priority PR (#481/LIFM2-409) 84 days old.
 
 **Bailey/Paturevision (Console)** — Extended TuanNT/HaVS/datnc debugging of a stock-quantity/multi-tenant scope bug; root cause found (`ActsAsTenant` scoping), fix pushed but numbers still inconsistent after — flagged for further review. duongdn told the team to proactively notify the customer.
 
@@ -175,17 +176,22 @@ Note: this activity-time signal is what makes TuanNT's 0h task-log day (Alert #4
 Full report: reports/2026-07-14/0648-arthur-monitor.md (Vietnamese, incremental tracker update). Summary: tense scope/communication clash with Art ahead of Tuesday's investor demo — resolved by end of day 13/07 (all P0 items reported done, catalog export done, daily reports posted) but **no confirmation of the demo's outcome** as of this report (silence since 20:01). Fixed a real bug: the Slack "Solid Code" workspace scan was failing `invalid_auth` because of the same cookie-encoding bug found in Piece 2 — token itself is fine.
 Trello: Arthur - Meta-Stamp ⚠️ skipped (Alert #10).
 
-## Trello — Check Progress + Check Mail — 06:52 (+07:00)
+## Trello — Check Progress + Check Mail — 06:52 (+07:00, superseded by 08:50 recheck below)
 
 - Check Mail: 6/6 complete → card marked done.
-- Check Progress: 11/22 complete.
+- Check Progress as of 06:52: 11/22 complete.
   - ✓ Complete: James Diamond, Rory, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond, Neural Contract (Upwork workroom silent — never an alert), Andrew Taraba, Colin.
   - ⚠️ Skipped: Maddy (#3), John Yi (#4), Aysar (#1), Bailey (#4), Rebecca (#4), Fountain (#9), Ohcleo (#8), Arthur - Meta-Stamp (#10), Blair Brown - Peptide Clyde (Workstream-only project, unverifiable this run — #11), Elena - WordPress SamGuard (#5), Philip (automation crashed this run — documented fragile MS Teams/Chrome-profile flow, killed after spawning 40+ zombie processes; not a new finding, just couldn't complete this pass).
 
-## Reminders — 06:53 (+07:00)
+**UPDATE 08:50-08:56 recheck — Check Progress now 16/22 complete:**
+- Newly completed: John Yi, Bailey, Rebecca (TuanNT 8h confirmed), Ohcleo (false alarm resolved), Fountain (plan posted, all 3 parts clean).
+- Still incomplete (6): Maddy (recharacterized, real issue is different — 84-day Highest-priority PR, not the original claim), Aysar (customer ask still open), Blair Brown - Peptide Clyde (LeNH 0h), Arthur - Meta-Stamp (demo pending + new PhucVT needsReview), Elena - WordPress SamGuard (CSP still blocked), Philip (not re-attempted, crash risk).
 
-- TuanNT: needs reminder (0h, no leave) — **not sent** (no `--send-reminder` flag this run).
-- LongVV, PhucVT, KhanhHH, LeNH: skipped — Sheets-only 0h is not reliable evidence while Workstream is inaccessible (see Alert #11); printing a reminder here would very likely be a false alarm per this project's own documented history.
+## Reminders — 06:53 (+07:00, superseded by 08:50 recheck below)
+
+- TuanNT: flagged 0h at 06:53 — **UPDATE 08:50: false alarm, real total 8h, no reminder needed.**
+- LongVV, PhucVT, KhanhHH: skipped at 06:53 due to Workstream outage — **UPDATE 08:50: verified via Workstream, all have real hours logged (4h/7h/8h respectively), no reminder needed.**
+- LeNH: skipped at 06:53 — **UPDATE 08:50: verified 0h combined across all sheets + Workstream, no leave note. This IS a real reminder candidate** (any shortfall = alert per her threshold) — **not sent** (no `--send-reminder` flag this run).
 
 ---
 
