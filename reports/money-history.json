@@ -124,6 +124,22 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,855,319,496 gross / 7,794,319,496 net (~0.94% higher) — same unrealized-P&L gap pattern as prior days, not a new data bug. No report on 07-08 (gap day). Net worth down ~14.6M vs 07/07 (7,736,052,566 -> 7,721,419,496) over 2 days — normal drift, not the stale-savings-book bug pattern (too small). Gold down 12M (price fluctuation). Liquid down 26.6M vs 07/07. Savings up ~2M (interest accrual, no book matured/opened). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from savings total, still unresolved by MISA. Tikop (150,024,366) classified as Liquid per 2026-07-06 user correction (robo-savings/cash-parking, not growth investment)."
+    },
+    {
+      "date": "2026-07-14",
+      "label": "14/07",
+      "net_worth": 7660677088,
+      "gross_assets": 7822580792,
+      "liabilities": 89000000,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 742000000,
+        "investment": 2208923840,
+        "savings": 1038073827,
+        "liquid": 313579421
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,822,580,792 gross / 7,733,577,088 net (~0.95% higher) — same unrealized-P&L gap pattern as prior snapshots, not a new data bug. Net worth down 60.7M vs 09/07 (7,721,419,496 -> 7,660,677,088) — cross-checked against July transactions: net cash flow this month is -59,766,895 (140M expense incl. 61M Hoc phi + 43M Bieu tang on VCB Visa, vs 80.2M income), matches the drop almost exactly, not a data bug. Investment up ~14M (VCBS growth). Savings down ~2.6M (tikcop 1m matured, rolled into new 'tikcop 3 month' 100M book; small net decrease from the old 102.6M balance). Gold down 3M (price fluctuation). Liquid down 41.1M (Tikop -50M, vcb spend). Debt up 28M (VCB Visa 61M->89M, new Bieu tang charge). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded, still unresolved by MISA."
     }
   ]
 }
