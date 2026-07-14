@@ -1,0 +1,290 @@
+<title>Tạo lệnh claude-nus</title>
+<style>
+  :root {
+    --paper: #f6f5f1;
+    --paper-raised: #edeae2;
+    --ink: #1c2129;
+    --ink-soft: #4b5361;
+    --ink-faint: #7c8393;
+    --line: #dbd8d0;
+    --accent: #b4791c;
+    --accent-ink: #7a4e0e;
+    --accent-wash: #f1e3cc;
+    --ok: #1f6f63;
+    --ok-wash: #dcece7;
+    --code-bg: #ede9df;
+    --code-ink: #2a2f38;
+    --shadow: 0 1px 2px rgba(28,33,41,.05), 0 8px 24px -12px rgba(28,33,41,.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12161d; --paper-raised: #1a2029; --ink: #e8e6df; --ink-soft: #9ca3af;
+      --ink-faint: #6b7280; --line: #262c36; --accent: #e3a94a; --accent-ink: #e3a94a;
+      --accent-wash: #332812; --ok: #4fbdae; --ok-wash: #16302b;
+      --code-bg: #171c24; --code-ink: #dcd9d0;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #12161d; --paper-raised: #1a2029; --ink: #e8e6df; --ink-soft: #9ca3af;
+    --ink-faint: #6b7280; --line: #262c36; --accent: #e3a94a; --accent-ink: #e3a94a;
+    --accent-wash: #332812; --ok: #4fbdae; --ok-wash: #16302b;
+    --code-bg: #171c24; --code-ink: #dcd9d0;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+  :root[data-theme="light"] {
+    --paper: #f6f5f1; --paper-raised: #edeae2; --ink: #1c2129; --ink-soft: #4b5361;
+    --ink-faint: #7c8393; --line: #dbd8d0; --accent: #b4791c; --accent-ink: #7a4e0e;
+    --accent-wash: #f1e3cc; --ok: #1f6f63; --ok-wash: #dcece7;
+    --code-bg: #ede9df; --code-ink: #2a2f38;
+    --shadow: 0 1px 2px rgba(28,33,41,.05), 0 8px 24px -12px rgba(28,33,41,.12);
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light dark; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-sans-serif, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-wash); color: var(--accent-ink); }
+  a { color: var(--accent-ink); text-decoration-color: var(--accent); text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  header.hero { border-bottom: 1px solid var(--line); padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 2.5rem; }
+  .hero-inner { max-width: 720px; margin: 0 auto; }
+  .eyebrow {
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: .8rem; letter-spacing: .08em; color: var(--accent-ink);
+    text-transform: uppercase; display: flex; align-items: center; gap: .6em;
+    margin-bottom: 1.1rem;
+  }
+  .eyebrow::before { content: "$"; opacity: .55; }
+  h1 {
+    font-family: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", "URW Palladio", serif;
+    font-weight: 500; font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.15;
+    margin: 0 0 .7rem; text-wrap: balance; letter-spacing: -.01em;
+  }
+  .dek { color: var(--ink-soft); font-size: 1.05rem; max-width: 62ch; margin: 0; text-wrap: pretty; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+
+  .callout {
+    display: grid; grid-template-columns: auto 1fr; gap: .75rem 1rem; align-items: start;
+    background: var(--accent-wash);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+    border-radius: 10px; padding: 1.1rem 1.3rem; margin: 2.2rem 0;
+  }
+  .callout .glyph { font-size: 1.1rem; line-height: 1.5; }
+  .callout p { margin: 0; color: var(--ink); }
+  .callout p + p { margin-top: .5em; }
+  .callout code { background: none; padding: 0; }
+
+  section { margin-top: 3rem; }
+  section:first-of-type { margin-top: 2.4rem; }
+  .step-head { display: flex; align-items: baseline; gap: .85rem; margin-bottom: .9rem; }
+  .step-num {
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: .82rem; color: var(--ink-faint); white-space: nowrap;
+  }
+  h2 {
+    font-family: ui-serif, Georgia, "Iowan Old Style", "Palatino Linotype", "URW Palladio", serif;
+    font-weight: 500; font-size: 1.35rem; margin: 0; letter-spacing: -.005em;
+  }
+  p { margin: .8rem 0; text-wrap: pretty; }
+  ul { padding-left: 1.3rem; }
+  li { margin: .35rem 0; }
+  code {
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    background: var(--code-bg); color: var(--code-ink);
+    padding: .15em .4em; border-radius: 5px; font-size: .88em;
+  }
+
+  .code-block {
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px;
+    overflow-x: auto; margin: 1rem 0; box-shadow: var(--shadow);
+  }
+  .code-block .file {
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: .74rem; letter-spacing: .03em; color: var(--ink-faint);
+    padding: .55rem 1rem .35rem; border-bottom: 1px solid var(--line); text-transform: uppercase;
+  }
+  .code-block pre {
+    margin: 0; padding: 1rem 1.1rem;
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    font-size: .82rem; line-height: 1.65; color: var(--code-ink); white-space: pre;
+  }
+  .code-block code { background: none; padding: 0; border-radius: 0; font-size: 1em; }
+  .tok-cmt { color: var(--ink-faint); font-style: italic; }
+  .tok-str { color: var(--ok); }
+  .tok-key { color: var(--accent-ink); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: .65rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  thead th {
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--ink-faint); background: var(--paper-raised);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td code { white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    font-size: .68rem; letter-spacing: .04em; text-transform: uppercase;
+    padding: .2em .55em; border-radius: 5px;
+    background: var(--ok-wash); color: var(--ok);
+  }
+
+  footer {
+    max-width: 720px; margin: 0 auto; padding: 2.4rem 1.5rem 4rem;
+    border-top: 1px solid var(--line); color: var(--ink-faint); font-size: .85rem;
+  }
+</style>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">setup guide · companion</div>
+    <h1>Tạo lệnh <code style="background:none;padding:0;">claude-nus</code> để dùng NUS LLM tường minh</h1>
+    <p class="dek">Một lệnh riêng, gõ ra là biết ngay đang xài key DeepSeek của công ty &mdash; không probe, không tự chuyển qua lại, chỉ chạy khi bạn chủ động gọi.</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="callout">
+    <div class="glyph">◐</div>
+    <div>
+      <p><strong>Trước khi bắt đầu:</strong> lấy key tại <a href="https://apps.nustechnology.com/other/llm-key" target="_blank" rel="noopener">apps.nustechnology.com/other/llm-key</a> (trang này cũng hiện usage/budget còn lại). Budget <code>$10/tháng</code>, <code>$4/tuần</code>, reset theo lịch. Không có regenerate, không share key.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 01</span>
+      <h2>Cái bẫy: đừng để dư <code>/v1</code> trong base URL</h2>
+    </div>
+    <p>Trang key đưa endpoint dạng <code>https://llm.dev.nustechnology.com/v1</code> &mdash; đúng cho config kiểu OpenAI-compatible. Nhưng Claude Code tự nối thêm <code>/v1/messages</code> vào <code>ANTHROPIC_BASE_URL</code> nó nhận. Giữ nguyên <code>/v1</code> ở cuối thì request thật sự bay tới <code>/v1/v1/messages</code> &rarr; 404, và Claude Code báo nhầm <em>&ldquo;model không tồn tại&rdquo;</em> &mdash; sai hoàn toàn, lỗi thật là path bị lặp. Bỏ <code>/v1</code> cuối là dùng được, vì endpoint này nói được luôn chuẩn Anthropic Messages API song song với chuẩn OpenAI.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Base URL</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge" style="background:var(--accent-wash);color:var(--accent-ink);">sai · 404</span></td><td><code>https://llm.dev.nustechnology.com/v1</code></td></tr>
+          <tr><td><span class="badge">đúng</span></td><td><code>https://llm.dev.nustechnology.com</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 02</span>
+      <h2>File key, quyền riêng tư</h2>
+    </div>
+    <p>Không paste key thẳng vào <code>.bashrc</code> hay commit vào repo. Tạo 1 file riêng, quyền chỉ chủ sở hữu đọc được &mdash; <code>claude-nus</code> sẽ đọc từ đây:</p>
+    <div class="code-block">
+      <div class="file">terminal</div>
+      <pre>mkdir -p ~/.config/nus-llm
+umask 077
+cat &gt; ~/.config/nus-llm/env &lt;&lt; <span class="tok-str">'EOF'</span>
+NUS_LLM_BASE_URL=https://llm.dev.nustechnology.com
+NUS_LLM_API_KEY=YOUR_KEY
+NUS_LLM_MODEL=deepseek-v4-flash
+<span class="tok-str">EOF</span>
+chmod 600 ~/.config/nus-llm/env</pre>
+    </div>
+    <p>Model khả dụng: <code>deepseek-v4-flash</code> (nhanh, rẻ, mặc định) và <code>deepseek-v4-pro</code> (chất lượng cao hơn).</p>
+  </section>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 03</span>
+      <h2>Viết script</h2>
+    </div>
+    <p>Tạo file thực thi, không cần đuôi mở rộng &mdash; đây là 1 lệnh CLI, không phải script gọi qua tên khác:</p>
+    <div class="code-block">
+      <div class="file">~/.local/bin/claude-nus</div>
+      <pre><span class="tok-key">#!/usr/bin/env bash</span>
+<span class="tok-cmt"># Explicit: force Claude Code onto the NUS company DeepSeek key, no probing,</span>
+<span class="tok-cmt"># no fallback. Use when you deliberately want NUS regardless of subscription</span>
+<span class="tok-cmt"># quota (e.g. to save subscription usage on throwaway tasks).</span>
+set -uo pipefail
+
+ENV_FILE=<span class="tok-str">"$HOME/.config/nus-llm/env"</span>
+if [[ ! -f <span class="tok-key">"$ENV_FILE"</span> ]]; then
+  echo <span class="tok-str">"claude-nus: $ENV_FILE not found -- run the setup steps first"</span> &gt;&amp;2
+  exit 1
+fi
+
+<span class="tok-cmt"># shellcheck source=/dev/null</span>
+source <span class="tok-key">"$ENV_FILE"</span>
+MODEL=<span class="tok-str">"${NUS_MODEL:-$NUS_LLM_MODEL}"</span>
+
+echo <span class="tok-str">"[claude-nus] using NUS LLM ($MODEL)"</span> &gt;&amp;2
+exec env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN \
+  ANTHROPIC_BASE_URL=<span class="tok-key">"$NUS_LLM_BASE_URL"</span> \
+  ANTHROPIC_API_KEY=<span class="tok-key">"$NUS_LLM_API_KEY"</span> \
+  claude --model <span class="tok-key">"$MODEL"</span> <span class="tok-key">"$@"</span></pre>
+    </div>
+    <p><strong>Vì sao <code>env ... claude</code> mà không đệ quy lại chính <code>claude-nus</code>?</strong> <code>env</code> là 1 binary ngoài, nó tự tìm <code>claude</code> qua <code>PATH</code> của tiến trình con &mdash; không biết gì về function/alias của shell cha, nên luôn trúng đúng binary Claude Code thật, kể cả khi bạn đã override <code>claude</code> bằng function khác trong <code>.bashrc</code>.</p>
+  </section>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 04</span>
+      <h2>Cấp quyền thực thi</h2>
+    </div>
+    <div class="code-block">
+      <div class="file">terminal</div>
+      <pre>chmod +x ~/.local/bin/claude-nus</pre>
+    </div>
+    <p>Kiểm tra <code>~/.local/bin</code> có trong <code>PATH</code> chưa (thường có sẵn trên máy đã cài Claude Code, vì bản thân <code>claude</code> cũng nằm ở đó):</p>
+    <div class="code-block">
+      <div class="file">terminal</div>
+      <pre>echo <span class="tok-str">"$PATH"</span> | tr <span class="tok-str">':'</span> <span class="tok-str">'\n'</span> | grep local/bin</pre>
+    </div>
+    <p>Không thấy thì thêm vào cuối <code>~/.bashrc</code>: <code>export PATH="$HOME/.local/bin:$PATH"</code></p>
+  </section>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 05</span>
+      <h2>Chạy thử</h2>
+    </div>
+    <div class="code-block">
+      <div class="file">terminal</div>
+      <pre>claude-nus -p <span class="tok-str">"Reply with exactly: OK WORKS"</span></pre>
+    </div>
+    <p>Kỳ vọng: <span class="badge">stderr</span> in ra <code>[claude-nus] using NUS LLM (deepseek-v4-flash)</code>, rồi <code>OK WORKS</code> ở stdout. Không cần tham số gì thêm là vào chế độ chat interactive như <code>claude</code> thường, chỉ khác endpoint.</p>
+  </section>
+
+  <section>
+    <div class="step-head">
+      <span class="step-num mono"># 06</span>
+      <h2>Dùng hằng ngày</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Muốn gì</th><th>Gõ gì</th></tr></thead>
+        <tbody>
+          <tr><td>Chat/coding bình thường qua NUS</td><td><code>claude-nus</code></td></tr>
+          <tr><td>Chạy 1 prompt qua NUS, không tương tác</td><td><code>claude-nus -p "..."</code></td></tr>
+          <tr><td>Đổi sang model chất lượng cao hơn</td><td><code>NUS_MODEL=deepseek-v4-pro claude-nus</code></td></tr>
+          <tr><td>Muốn tự động &mdash; mặc định subscription, tự chuyển khi hết quota</td><td>xem guide fallback wrapper cho <code>claude</code> (companion doc)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>claude-nus</code> không đụng gì đến lệnh <code>claude</code> gốc &mdash; hai lệnh độc lập, dùng song song thoải mái.</p>
+  </section>
+
+</main>
+
+<footer>
+  Nội bộ NUS &middot; companion cho guide fallback tự động của <code>claude</code>.
+</footer>
