@@ -569,7 +569,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
 | `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` |
 | `ohcleo` | Work | Ohcleo | `slack ohcleo` (Piece 12) |
-| `arthur` | Work | Arthur - Meta-Stamp | `arthur` (Piece 13, full 5-source check) |
+| `arthur` | Work | Arthur - Meta-Stamp | `arthur` (Piece 13, full 6-source check) |
 | `blair_brown` | Work | Blair Brown - Peptide Clyde | `sheets lenh` (LeNH's all-Workstream-projects scan already covers `blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |
 
 Examples:
@@ -782,7 +782,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` | Full name required |
 | Ohcleo | `slack ohcleo` | Piece 12 |
 | Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |
-| Arthur - Meta-Stamp | `arthur` (Piece 13, full 5-source check) | Vietnamese summary mandatory |
+| Arthur - Meta-Stamp | `arthur` (Piece 13, full 6-source check) | Vietnamese summary mandatory |
 | Blair Brown - Peptide Clyde | `sheets lenh` | Covered by LeNH's all-Workstream-projects scan (`blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |
 
 **Step 4 — Decrypt + fix auth before re-running**
@@ -1013,16 +1013,19 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 
 One-time full-history deep-dive: `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
 
-**5 sources, every run:**
+**6 sources, every run** (was 5 — #3 renamed, #6 added 2026-07-14 after a real miss, see [[feedback_read_full_room_transcript_not_grep_snippets]]):
 | # | Source | ID | Notes |
 |---|--------|-----|-------|
 | 1 | Matrix — "Arthur - Meta-Stamp" | `!BEXEdVUmvWclPLELFf:nustechnology.com` | Business/demo discussion |
 | 2 | Matrix — technical setup room (no display name) | `!QEbdvaMJkTurMpRPIX:nustechnology.com` | Repo/docker/credential sharing |
-| 3 | Slack "Solid Code" — Arthur DM | `mpdm-art_k--jack--namtv-1` (`C0B0BG90AUB`) | Original relationship DM, mostly historical |
+| 3 | Slack "Solid Code" — group MPDM (Art+Jack+Nam) | `mpdm-art_k--jack--namtv-1` (`C0B0BG90AUB`) | 🔴 NOT a 1:1 Art DM despite the name — a 3-person group chat, mostly historical/quiet |
 | 4 | Slack "Solid Code" — `ms-v3` | `C0B4G8USU3D` | Main technical channel, highest volume |
 | 5 | Slack "Solid Code" — `msv3-official` | `C0BEPFBLGJV` | Chris's channel |
+| 6 | Slack "Solid Code" — **direct 1:1 DM with Art** | `D0B0HSZ7XSN` | 🔴 REAL 1:1 with Art (UM1UZ0ZST) — separate from #3, was never monitored before 2026-07-14 and missed a real unanswered message (David paused project, needed Art's approval to request more hours) sitting unanswered 16+ hours. ALWAYS check this. |
 
-**Slack auth:** `config/.slack-accounts.json`, workspace `Solid Code`, `auth_type: session` (xoxc+cookie) — use `conversations.history`, NOT `search.messages`. IDs: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity — namtv/PhucVT/DuongDN all post as this)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1` (= TienND, confirmed).
+**Slack auth:** `config/.slack-accounts.json`, workspace `Solid Code`, `auth_type: session` (xoxc+cookie) — use `conversations.history`, NOT `search.messages`. IDs: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity — namtv/PhucVT/DuongDN all post as this)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1` (= TienND, confirmed), Casey G=`U0BGDTPCKJT`.
+
+**🔴 If Solid Code `auth.test` ever returns `invalid_auth`:** do NOT assume the account needs a fresh login. First re-extract a CURRENT `d` cookie from David's live Chrome Profile 15 (`.claude/skills/.venv/bin/python3 scripts/get-david-slack-cookies.py`, then update the `cookie` field in `config/.slack-accounts.json`) and retest with token+cookie together — a stale cookie snapshot in config is the far more likely cause than an actual account lockout. See [[feedback_token_handling]] for the full incident.
 
 **Matrix auth:** `config/.matrix-config.json`, use the `homeserver` field (NOT `chat_url` — that's the web client, wrong API base). Token is short-lived — refresh via `DISPLAY=:1 node scripts/matrix-login.js` immediately before fetching, same command block. Room IDs need `encodeURIComponent()`.
 
@@ -1031,7 +1034,7 @@ One-time full-history deep-dive: `reports/2026-07-07/arthur-metastamp-full-revie
 **Workstream (est/actual):** project "Crystal lang", `projectId=cmqezgh7z080hp81vo5yqd24z`, roster DuongDN/PhucVT/TienND. ⚠️ **API bug:** `GET /review/week?projectId=...&date=...` returns `403 Forbidden` for the week's start date (or +2 days) — always query with a date from the back half of the target week or you'll wrongly conclude 0h logged.
 
 **Flow:**
-1. Read `arthur_monitor.last_run` from `config/.monitoring-timelines.json` (under `refresh` or top-level — see Key Config Files). Fetch only messages after that timestamp from all 5 sources.
+1. Read `arthur_monitor.last_run` from `config/.monitoring-timelines.json` (under `refresh` or top-level — see Key Config Files). Fetch only messages after that timestamp from all 6 sources.
 2. Load the tracker table from the most recent `reports/*/arthur-monitor.md` (or the original full report if this is the first incremental run).
 3. Update rows in place (status + last-updated) based on new messages — never rewrite the whole table. Add new rows only for genuinely new issues. Only mark ✅ on explicit user confirmation in chat; agent-observed "looks resolved" is 🟢 at most.
 4. Every row keeps a `Link Slack` column (permalink via `chat.getPermalink`) — this lives in the SAME table, never a separate links section.
