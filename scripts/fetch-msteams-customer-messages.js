@@ -377,13 +377,33 @@ async function searchAndExtractMessages(page, customerName) {
   }).catch(() => []);
   console.log(`[search] Found ${rawText.length} items`);
 
-  // Click matching result
+  // Click matching result. Teams often returns multiple duplicate contacts with the
+  // same name — disambiguate by preferring one whose surrounding text includes
+  // "External" or the DISAMBIGUATE_HINT (e.g. a company name), since a plain
+  // name-substring match picks whichever duplicate happens to be first in the DOM.
   let clicked = false;
-  for (const sel of [`[title*="${customerName}"]`, `[aria-label*="${customerName}"]`, `[data-tid*="${customerName.toLowerCase()}"]`]) {
-    try {
-      const el = await page.$(sel);
-      if (el) { await el.click(); clicked = true; console.log(`[search] Clicked: ${sel}`); break; }
-    } catch (e) { /* continue */ }
+  const disambiguateHint = process.env.MSTEAMS_DISAMBIGUATE || '';
+  const targetedClick = await page.evaluate((name, hint) => {
+    const candidates = Array.from(document.querySelectorAll('[role="listitem"], [role="option"], [data-tid*="chat"], [class*="searchResult"], [class*="search-result"]'));
+    const matches = candidates.filter(el => (el.innerText || '').includes(name));
+    if (matches.length === 0) return null;
+    const preferred = matches.find(el => {
+      const t = el.innerText || '';
+      return t.includes('External') || (hint && t.includes(hint));
+    }) || matches[0];
+    preferred.click();
+    return preferred.innerText?.trim().slice(0, 150) || null;
+  }, customerName, disambiguateHint).catch(() => null);
+  if (targetedClick) {
+    clicked = true;
+    console.log(`[search] Clicked (disambiguated): ${targetedClick.replace(/\n/g, ' | ')}`);
+  } else {
+    for (const sel of [`[title*="${customerName}"]`, `[aria-label*="${customerName}"]`, `[data-tid*="${customerName.toLowerCase()}"]`]) {
+      try {
+        const el = await page.$(sel);
+        if (el) { await el.click(); clicked = true; console.log(`[search] Clicked: ${sel}`); break; }
+      } catch (e) { /* continue */ }
+    }
   }
   if (!clicked) {
     try { await page.keyboard.press('ArrowDown'); await sleep(500); await page.keyboard.press('Enter'); clicked = true; } catch (e) {}
