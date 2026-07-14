@@ -132,7 +132,7 @@
 
 ## money-report
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md) — Net Worth via trueTotalBalance
-- [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — needs dashboard.html + history.json
+- [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — 🔴🔴🔴 4x missed, fix now baked into `.claude/commands/me/money-report.md` itself, not memory
 - [feedback_savings_already_matured_check](money-report/feedback_savings_already_matured_check.md) — flag matured savings
 - [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md) — Tikop=Liquid not Investment
 

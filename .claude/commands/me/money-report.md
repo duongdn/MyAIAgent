@@ -22,9 +22,11 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 
 ## Quick Reference
 
+🔴🔴🔴 **MANDATORY, every `/money-report` full run — NO EXCEPTIONS:** produce BOTH `reports/{YYYY-MM-DD}/money-dashboard.html` AND append a snapshot to `reports/money-history.json`, in the SAME turn as the 5 markdown pieces below. This has been missed FOUR times (2026-07-06, 07-07, 07-09, 07-14) because it lived only in memory, not in this file — memory recall is not reliable enough for this, so it is now written directly here. See Piece 7 below for the exact spec. Do not skip this even if the user doesn't mention it.
+
 | Command | What it does | Output file |
 |---------|-------------|-------------|
-| `/money-report` | Full run — all 5 reports | portfolio + allocation + debt + transactions + review |
+| `/money-report` | Full run — all 5 reports + dashboard (Piece 7) | portfolio + allocation + debt + transactions + review + dashboard.html + history.json |
 | `/money-report login` | Force re-login (clear Chrome profile) | — |
 | `/money-report summary` | Quick balance + net worth only | `{HHMM}-money-summary.md` |
 | `/money-report portfolio` | All accounts + category breakdown + concentration alerts | `{HHMM}-money-portfolio.md` |
@@ -33,6 +35,7 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 | `/money-report debt` | Credit card balance + 12-month usage history + alerts | `{HHMM}-money-debt.md` |
 | `/money-report transactions` | Recent transactions + monthly income/expense summary | `{HHMM}-money-transactions.md` |
 | `/money-report review` | Finance review — strengths, risks, benchmark comparison, recommendations | appended to allocation report |
+| `/money-report dashboard` | (Re)build HTML dashboard + history.json from latest reports | `reports/{YYYY-MM-DD}/money-dashboard.html` + `reports/money-history.json` |
 
 ---
 
@@ -348,14 +351,46 @@ Prioritized, actionable recommendations:
 
 ---
 
+## Piece 7 — Dashboard (`/money-report dashboard`) 🔴 MANDATORY on every full run
+
+Not optional, not a "nice to have" — part of the definition of "done" for `/money-report` with no piece argument. Runs after Pieces 2-6 (needs their numbers). Also runnable standalone to rebuild the dashboard from the latest reports without re-fetching data.
+
+**Outputs (both required):**
+1. `reports/{YYYY-MM-DD}/money-dashboard.html`
+2. `reports/money-history.json` — append one snapshot (never overwrite prior entries)
+
+**`reports/money-history.json` schema** — flat list under `snapshots`, one entry per run:
+```json
+{
+  "date": "YYYY-MM-DD", "label": "dd/mm",
+  "net_worth": 0,        // trueTotalBalance.amount — authoritative, NEVER reconstructed
+  "gross_assets": 0, "liabilities": 0,
+  "categories": { "real_estate": 0, "gold": 0, "investment": 0, "savings": 0, "liquid": 0 },  // WITH home included — consistent schema across all entries
+  "method": "dashboard_verified",  // or "reconstructed" if manually summed
+  "note": "what changed since last snapshot, Vietnamese, concise"
+}
+```
+If a historical entry has `categories: null`, backfill chart literals from that prior dashboard's own embedded chart data rather than leaving a gap in the trend charts.
+
+**`money-dashboard.html` spec:**
+- Dark theme (`#0f1117` bg), Chart.js via CDN (`<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">`) — fine for a static file opened locally. Do NOT use the Artifact tool for this (its CSP blocks the CDN).
+- Sections: KPI row (Net Worth, Liabilities, Liquid, Savings, current-month Net — each with a delta vs the prior snapshot), a highlights callout card (what changed since last run, Vietnamese), Net Worth trend line chart (all historical snapshots), allocation donut (excl. home), category evolution stacked bar, savings+liquid grouped bar, full account detail table.
+- Copy the CSS/JS skeleton from the most recent prior `reports/{date}/money-dashboard.html` and swap in new numbers/labels/dates — don't redesign from scratch.
+- Open the file in a browser after writing it (e.g. `google-chrome file://.../money-dashboard.html`) so the user can see it without asking.
+
+**Why this is written directly in the skill file, not just memory:** missed 4 times (2026-07-06, 07-07, 07-09, 07-14) because it only existed in memory, and memory recall for a one-off command like `/money-report` (not covered by the daily-report `util:read-memory` mandatory-first-step pattern) proved unreliable. This section is the fix — it is injected every time the command runs, so it cannot be forgotten.
+
+---
+
 ## Full Run (`/money-report`)
 
-Runs all 5 pieces. Sequence:
+Runs all 5 report pieces + the dashboard (Piece 7). Sequence:
 
 1. Fetch data once (`node scripts/misa-money-report.js`)
 2. Parallel: Portfolio + Allocation + Debt + Transactions
 3. Run Review (reads from Allocation output)
 4. Write reports to `reports/{YYYY-MM-DD}/`
+5. **Piece 7 — Dashboard: write `money-dashboard.html` + append to `money-history.json`, then open the HTML file in a browser.** Never skip this step; never treat it as a follow-up to do only if the user asks.
 
 ---
 
