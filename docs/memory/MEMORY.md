@@ -97,6 +97,7 @@
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — read FULL transcript, grep misses signals; 🔴 260714: don't derive timing from ONE quote, cross-check every timing mention (Arthur 2-events mixup)
 - [project_matrix_static_compat_token](daily-report/matrix/project_matrix_static_compat_token.md) — 🔴 mct_ non-expiring token from admin (260713), browser-refresh flow now rarely needed
 - [feedback_maddy_bitbucket_pr_alert_needs_live_verification](daily-report/matrix/feedback_maddy_bitbucket_pr_alert_needs_live_verification.md) — 🔴 never restate a prior PR-age/severity claim, recompute live from Bitbucket+Jira every time (260714)
+- [feedback_dont_bury_real_issues_as_context](daily-report/matrix/feedback_dont_bury_real_issues_as_context.md) — 🔴 260714: a real process problem found in a transcript needs its OWN alert line, not a clause inside another paragraph
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_session_token_storage](daily-report/upwork/feedback_upwork_session_token_storage.md) — cron never re-logs in
