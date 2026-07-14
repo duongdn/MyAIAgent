@@ -10,18 +10,19 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack — Baamboozle (Aysar) | Customer (skjamie25) reported "game selection screen broken on mobile after weekend release, needs ASAP fix" in #testing — no substantive reply as of window end. |
+| 1 | Slack — Baamboozle (Aysar) | Customer (skjamie25) reported "game selection screen broken on mobile after weekend release, needs ASAP fix" in #testing — **still no reply as of 08:50 recheck**, ~11h later. |
 | 2 | Email — rick@ | Real production error spikes: FountainGifts #274 (RestClient::InternalServerError, 10 occurrences/5min), InfinityRoses #435 (same pattern, 10/5min), FirstProject #893/#894/#1074 new errors. Matches Fountain Matrix thread — actively being triaged by devs. |
 | 3 | Matrix — Maddy (Xtreme) | User's own flag in-room: 3 Bitbucket PRs (Critical/High) unresolved 18-37 days, Kai has not fixed. |
-| 4 | Sheets — TuanNT | 0h logged in ALL 13 task-log sheets (incl. Paturevision/Bailey, his sole Sheets-primary project) for 2026-07-13, no leave — despite Scrin.io showing 8h16m of desktop activity that day. Blocks John Yi / Rebecca / Bailey Trello items. |
-| 5 | Elena — samguard.co CSP | `connect-src` blocks `region1.analytics.google.com` (GA4 region-routed calls) — real CSP violation, not agent-fixable (no wp-admin creds, no sudo password on file). |
+| ~~4~~ | ~~Sheets — TuanNT~~ | **RESOLVED at 08:50 recheck — false alarm.** TuanNT actually logged 8h (7.5h Paturevision + 0.5h Neural Contract), confirmed twice. Root cause was the same Workstream/Sheets flakiness this project has repeat history of. John Yi/Rebecca/Bailey Trello items completed. |
+| 5 | Elena — samguard.co CSP | `connect-src` blocks `region1.analytics.google.com` (GA4 region-routed calls) — real CSP violation, not agent-fixable (no wp-admin creds, no sudo password on file). Re-verified live at 08:50, still blocking. |
 | 6 | Performance — MPFC | Apdex **0.49 (POOR)**. `membermouse/api/processOrder.php` avg 16.3s (payment processing). Real PHP fatals: `get_header()` undefined in 404.php, `JSON_API_User_controller::error()` undefined method. |
 | 7 | Security — MPFC | Time-based blind SQL-injection probes (`WAITFOR DELAY`) hitting the WordPress search endpoint — not exploited, but active reconnaissance against the site. |
-| 8 | OhCleo | No Tony (LongVV) daily report found in Celine DM for 2026-07-13. `MediaByKeyView.get` avg 14.0s over 264 calls — real, widespread backend slowness. |
-| 9 | Fountain | Weekly Matrix plan (Part 1) never posted this week (last one: 2026-07-06). Parts 2/3 (task log actuals) blocked — see Workstream note below. |
-| 10 | Arthur / Meta-Stamp | Tense scope/communication clash with Art ahead of Tuesday's investor demo (resolved by EOD 13/07, but no message since 20:01 confirming the demo actually happened or its outcome). |
-| 11 | Workstream (internal) | Keycloak SSO session needs a one-time human login (real credential form appeared, not an auto-SSO passthrough) — blocks live hour verification for LongVV/PhucVT/KhanhHH/LeNH (all Workstream-primary projects) and Fountain/Crystal-lang actuals this run. Fixed one real bug along the way (`workstream-login.js` wasn't clicking the "Sign in with SSO" button — now does). Run `DISPLAY=:1 node scripts/workstream-login.js` and log in once to restore. |
+| 8 | OhCleo | No Tony (LongVV) daily report found in Celine DM for 2026-07-13. `MediaByKeyView.get` avg 14.0s over 264 calls — real, widespread backend slowness. Re-checked at 08:50, still no report/messages. |
+| 9 | Fountain | Weekly Matrix plan (Part 1) still not posted at 08:50 recheck — now day 2 of the week with no update, worse than this morning. Parts 2/3 now readable via Workstream (login fixed): DatNT 8h/ThinhT 4h/PhatDLT 0.5h on Monday. |
+| 10 | Arthur / Meta-Stamp | Tense scope/communication clash with Art ahead of Tuesday's investor demo, resolved by EOD 13/07. **Clarified at 08:50 recheck:** demo is scheduled PT afternoon/evening Tuesday (≈ Wed morning VN) — not overdue, genuinely hasn't happened yet. New: PhucVT has 3 pending-review Workstream rows in Crystal lang for 07-13 (reviewer TienND). |
+| ~~11~~ | ~~Workstream (internal)~~ | **RESOLVED at 08:50 recheck.** `DISPLAY=:1 node scripts/workstream-login.js` restored the session (was already valid, no manual login actually needed). LongVV 4h/PhucVT 7h/KhanhHH 8h/LeNH **0h** now verified — LeNH's 0h confirmed genuine via 2 independent methods, no leave note (new alert, see recheck section). Fountain/Crystal-lang actuals also now readable. |
 | 12 | Email — vuongtrancr@ | GitHub notice: Carrick removed from the "Swish" org. |
+| 13 | Sheets — LeNH | **NEW at 08:50 recheck.** 0h combined across all sheets + all Workstream projects for 2026-07-13, no leave note. Confirmed via isolated rescan + full unfiltered Workstream dump, explicitly checked her historically flaky projects (Peptide Clyde, James Diamond, Rebecca) — all empty. Blocks Blair Brown - Peptide Clyde Trello item. |
 
 **Today (Tue 14/7):** Đang chờ đủ hours confirm cho LongVV/PhucVT/KhanhHH/LeNH (Workstream). No other staff absence beyond the above notes. Fountain freeze window (Mon 18:00 PT ≈ Tue 08:00 VN) is in effect per Chris's earlier instruction — no Fountain deploys until after Tuesday's calls.
 
@@ -188,9 +189,41 @@ Trello: Arthur - Meta-Stamp ⚠️ skipped (Alert #10).
 
 ---
 
+## Re-check — 08:50 (+07:00)
+
+Workstream login (Alert #11) fixed this pass (`DISPLAY=:1 node scripts/workstream-login.js` — session was actually valid, no manual login needed this time). All items below re-verified live since this changes the picture significantly.
+
+| Item | Result | Details |
+|------|--------|---------|
+| John Yi - Amazing Meds | ✓ completed | TuanNT confirmed 8h (7.5h Paturevision sheet + 0.5h Neural Contract Workstream), double-checked twice. Alert #4 was a false alarm caused by the AM cron hitting the Workstream/Sheets flakiness this project has repeat history of (see memory). |
+| Bailey | ✓ completed | Same TuanNT 8h finding. |
+| Rebecca (William Bills) | ✓ completed | Same TuanNT 8h finding; no pending "Chưa" row for 07-13 in Rebecca sheet for TuanNT. |
+| Aysar | ○ still incomplete | Alert #1 unresolved — customer (skjamie25) mobile bug report from 2026-07-13 21:17 still has **no reply** as of now (~11h later). KhanhHH's Baamboozle hours confirmed fine (2.33h that day, not an hours issue) — this is purely an unanswered customer ask. |
+| Maddy | ○ still incomplete | Not re-checked this pass (Alert #3 is a standing Bitbucket-PR concern, not tied to the Workstream outage) — unchanged. |
+| Fountain | ○ still incomplete | Part 1 (Matrix plan) still NOT posted — checked full room history through now, nothing since 2026-07-06's plan. Now day 2 of the week (Tuesday) with no new plan, worse than this morning's finding. Part 2/3: Workstream now readable — Monday (07-13) actuals: DatNT 8h, ThinhT 4h, PhatDLT(QC) 0.5h (ViTHT/VuTQ/HungPN/HaVS 0h that day). Compared to last known plan (07-06: ViTHT40h/ThinhT20h/DatNT40h/QC24h) — DatNT/ThinhT roughly on pace for day 1, others too early to judge. Trello board: no new customer comments since window start (last kunalsheth comment was pre-window, 2026-07-13 07:16). |
+| Blair Brown - Peptide Clyde | ○ still incomplete | Gated by LeNH's combined hours — see below, 0h confirmed. |
+| Ohcleo | ○ still incomplete | Still no Tony daily report and no new Celine DM messages since 2026-07-13 morning — unchanged from AM report. |
+| Arthur - Meta-Stamp | ○ still incomplete | Re-checked Matrix (both rooms) + Slack (all 3 Solid Code channels): no new messages since David's 20:01 post on 07-13. **Clarified timing:** the investor demo is scheduled for Tuesday PT afternoon/evening, which lands ≈ Wed morning VN time — it has NOT happened yet, this isn't a stall, just genuinely pending. **New finding:** Workstream Crystal lang project shows 3 pending-review rows for PhucVT on 07-13 (4h+1h+2h charged, task "Metastamp V3 project tasks") — reviewer is TienND (per confirmed override), not DuongDN. Not previously visible while Workstream was down. |
+| Elena - WordPress SamGuard | ○ still incomplete | Re-verified live: `curl -sI https://www.samguard.co/` still missing `region1.analytics.google.com` in connect-src — CSP fix still blocked on missing wp-admin creds/sudo, unchanged. |
+| Philip | ○ still incomplete | Not re-attempted — prior run's MS Teams/Chrome-profile automation crashed with 40+ zombie processes; no new zombies found this session (the one live Chrome process found is from my own Workstream login, not Philip automation), but re-running the same fragile flow wasn't worth the risk on the live desktop this pass. |
+
+**PHP team hours (07-13), now verified via Workstream:**
+| Dev | Hours | Status |
+|-----|-------|--------|
+| LongVV | 4h (Xtreme Soft Solutions) | Part-time, weekly target — not a daily alert |
+| PhucVT | 7h (Crystal lang/Arthur) | 1h short of 8h target but per policy marginal shortfalls are checked weekly, not daily — no alert. See PhucVT needsReview finding above (Arthur row). |
+| KhanhHH | 8h (Baamboozle 2.33h + Generator 5.67h) | Full day, no alert |
+| LeNH | **0h** — confirmed via 2 independent methods (isolated rescan + full unfiltered Workstream dump, explicitly checked her historically-flaky projects Peptide Clyde/James Diamond/Rebecca — all empty) | ⚠️ New alert — any shortfall is an alert for LeNH per her stricter threshold. No leave note on file for 07-13. Reminder not sent (no `--send-reminder` flag). |
+
+**Cleared:** John Yi, Bailey, Rebecca, Workstream/Alert #11 (login restored).
+**New:** LeNH 0h confirmed genuine (was previously "unverified" due to Workstream outage). PhucVT Crystal lang needsReview pending (3 rows, reviewer TienND).
+**Still open:** Aysar, Maddy, Fountain, Blair Brown, Ohcleo, Arthur, Elena WordPress CSP, Philip.
+
+---
+
 ## Unresolved questions
-1. Did the Arthur/Meta-Stamp investor demo happen, and what was the outcome? No Slack activity since 2026-07-13 20:01.
-2. Workstream needs a one-time human interactive login (`DISPLAY=:1 node scripts/workstream-login.js`) to restore hour verification for LongVV/PhucVT/KhanhHH/LeNH and Fountain/Crystal-lang.
-3. samguard.co CSP fix needs wp-admin credentials or SSH sudo access — neither currently on file.
-4. GitHub check for `Christebob/Meta_Stamp_V3` needs the `davidztv` account logged into `gh` in this environment (not currently configured here).
-5. MS Teams Philip Briggs check remains fragile (Chrome profile automation) — consider a manual/alternate check method.
+1. Did the Arthur/Meta-Stamp investor demo happen, and what was the outcome? Demo is scheduled PT afternoon/evening Tuesday (≈ Wed morning VN) — not overdue, check again later today/tomorrow morning.
+2. samguard.co CSP fix needs wp-admin credentials or SSH sudo access — neither currently on file.
+3. GitHub check for `Christebob/Meta_Stamp_V3` needs the `davidztv` account logged into `gh` in this environment (not currently configured here).
+4. MS Teams Philip Briggs check remains fragile (Chrome profile automation) — consider a manual/alternate check method.
+5. LeNH 0h on 2026-07-13 with no leave note — worth a direct check-in with her before treating as a hard gap, given this project's history of dev-side confusion about where hours were logged.
