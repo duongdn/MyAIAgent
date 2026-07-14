@@ -20,9 +20,9 @@
 | ~~8~~ | ~~OhCleo~~ | **RESOLVED at 08:50 recheck — false alarm.** "No Tony daily report" was flagged without checking whether Tony actually worked OhCleo that day. Workstream shows LongVV logged 0h on the `ohcleo` project 07-13 but **4h on Xtreme Soft Solutions (Maddy)** the same day — he simply worked a different project, no report expected. `MediaByKeyView.get` avg 14.0s over 264 calls (real backend slowness) still stands as a separate, valid performance finding. |
 | ~~9~~ | ~~Fountain~~ | **RESOLVED — @trinhmtt posted the weekly plan at 08:53 today** (2026-07-14): DatNT 40h / ViTHT 40h / ThinhT 12h → QC 23h. Parts 2/3 (Monday actuals: DatNT 8h, ThinhT 4h, PhatDLT/QC 0.5h) track reasonably against this plan for day 1. Trello board: no new customer comments. All 3 parts now clean. |
 | 10 | Arthur / Meta-Stamp | Tense scope/communication clash with Art ahead of Tuesday's investor demo, resolved by EOD 13/07. **Clarified at 08:50 recheck:** demo is scheduled PT afternoon/evening Tuesday (≈ Wed morning VN) — not overdue, genuinely hasn't happened yet. New: PhucVT has 3 pending-review Workstream rows in Crystal lang for 07-13 (reviewer TienND). |
-| ~~11~~ | ~~Workstream (internal)~~ | **RESOLVED at 08:50 recheck.** `DISPLAY=:1 node scripts/workstream-login.js` restored the session (was already valid, no manual login actually needed). LongVV 4h/PhucVT 7h/KhanhHH 8h/LeNH **0h** now verified — LeNH's 0h confirmed genuine via 2 independent methods, no leave note (new alert, see recheck section). Fountain/Crystal-lang actuals also now readable. |
+| ~~11~~ | ~~Workstream (internal)~~ | **RESOLVED at 08:50 recheck.** `DISPLAY=:1 node scripts/workstream-login.js` restored the session (was already valid, no manual login actually needed). LongVV 4h/PhucVT 7h/KhanhHH 8h/LeNH **8.25h** (James Diamond 8h + Franc 0.25h) all verified — full team accounted for, no shortfalls. Fountain/Crystal-lang actuals also now readable. |
 | 12 | Email — vuongtrancr@ | GitHub notice: Carrick removed from the "Swish" org. |
-| 13 | Sheets — LeNH | **NEW at 08:50 recheck.** 0h combined across all sheets + all Workstream projects for 2026-07-13, no leave note. Confirmed via isolated rescan + full unfiltered Workstream dump, explicitly checked her historically flaky projects (Peptide Clyde, James Diamond, Rebecca) — all empty. Blocks Blair Brown - Peptide Clyde Trello item. |
+| ~~13~~ | ~~Sheets — LeNH~~ | **FALSE ALARM — corrected after user pushback ("wrong, I see info on James").** The initial "0h everywhere" finding hit the exact per-dev-filtered-fetch flakiness on the James Diamond project already documented in memory for this dev (recurred a 9th+ time). A fresh unfiltered dump found her real total: **8.25h** — 8h on James Diamond (0:10+7:20+0:30, all pending review by PhucVT) + 0.25h on Radio Data Center (Franc). No shortfall, no alert, Blair Brown - Peptide Clyde Trello item unblocked. |
 
 **Today (Tue 14/7):** Đang chờ đủ hours confirm cho LongVV/PhucVT/KhanhHH/LeNH (Workstream). No other staff absence beyond the above notes. Fountain freeze window (Mon 18:00 PT ≈ Tue 08:00 VN) is in effect per Chris's earlier instruction — no Fountain deploys until after Tuesday's calls.
 
@@ -90,7 +90,7 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 | LongVV | **4h (Xtreme Soft Solutions)** | Verified 08:50 — part-time weekly target, no daily alert |
 | PhucVT | **7h (Crystal lang/Arthur)** | Verified 08:50 — 1h short of daily 8h but marginal shortfalls checked weekly, no alert |
 | KhanhHH | **8h (Baamboozle 2.33h + Generator 5.67h)** | Verified 08:50 — full day, no alert |
-| LeNH | **0h — confirmed genuine** (2 independent methods) | ⚠️ Verified 08:50 — real alert, no leave note, see recheck section |
+| LeNH | **8.25h (James Diamond 8h + Franc 0.25h)** | ✅ Corrected 09:10 — initial "0h" was a false alarm (per-dev-filter flakiness on James Diamond, documented recurring issue for this dev), no shortfall |
 | TuanNT | **8h (7.5h Paturevision + 0.5h Neural Contract)** | ✅ Verified 08:50 — Alert #4 was a false alarm, John Yi/Bailey/Rebecca Trello items now complete |
 
 Maddy JIRA weekly cross-check: no ticket entries returned this week (Workstream-dependent, blocked at 06:30 — Workstream restored by the 08:50 recheck, not re-run since Kai's Slack progress post (LIFM2-450/449) is a sufficient signal for this piece).
@@ -183,15 +183,15 @@ Trello: Arthur - Meta-Stamp ⚠️ skipped (Alert #10).
   - ✓ Complete: James Diamond, Rory, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond, Neural Contract (Upwork workroom silent — never an alert), Andrew Taraba, Colin.
   - ⚠️ Skipped: Maddy (#3), John Yi (#4), Aysar (#1), Bailey (#4), Rebecca (#4), Fountain (#9), Ohcleo (#8), Arthur - Meta-Stamp (#10), Blair Brown - Peptide Clyde (Workstream login was down at this point — #11), Elena - WordPress SamGuard (#5), Philip (automation crashed this run — documented fragile MS Teams/Chrome-profile flow, killed after spawning 40+ zombie processes; not a new finding, just couldn't complete this pass).
 
-**UPDATE 08:50-08:56 recheck — Check Progress now 16/22 complete:**
-- Newly completed: John Yi, Bailey, Rebecca (TuanNT 8h confirmed), Ohcleo (false alarm resolved), Fountain (plan posted, all 3 parts clean).
-- Still incomplete (6): Maddy (recharacterized, real issue is different — 84-day Highest-priority PR, not the original claim), Aysar (customer ask still open), Blair Brown - Peptide Clyde (LeNH 0h), Arthur - Meta-Stamp (demo pending + new PhucVT needsReview), Elena - WordPress SamGuard (CSP still blocked), Philip (not re-attempted, crash risk).
+**UPDATE 08:50-09:10 recheck — Check Progress now 17/22 complete:**
+- Newly completed: John Yi, Bailey, Rebecca (TuanNT 8h confirmed), Ohcleo (false alarm resolved), Fountain (plan posted, all 3 parts clean), Blair Brown - Peptide Clyde (LeNH 8.25h confirmed, false alarm resolved).
+- Still incomplete (5): Maddy (recharacterized, real issue is different — 84-day Highest-priority PR, not the original claim), Aysar (customer ask still open), Arthur - Meta-Stamp (demo pending + new PhucVT needsReview), Elena - WordPress SamGuard (CSP still blocked), Philip (not re-attempted, crash risk). Blair Brown - Peptide Clyde also now completed (09:10) — LeNH's "0h" was a false alarm, see below.
 
 ## Reminders — 06:53 (+07:00, superseded by 08:50 recheck below)
 
 - TuanNT: flagged 0h at 06:53 — **UPDATE 08:50: false alarm, real total 8h, no reminder needed.**
 - LongVV, PhucVT, KhanhHH: skipped at 06:53 due to Workstream outage — **UPDATE 08:50: verified via Workstream, all have real hours logged (4h/7h/8h respectively), no reminder needed.**
-- LeNH: skipped at 06:53 — **UPDATE 08:50: verified 0h combined across all sheets + Workstream, no leave note. This IS a real reminder candidate** (any shortfall = alert per her threshold) — **not sent** (no `--send-reminder` flag this run).
+- LeNH: skipped at 06:53 — **UPDATE 09:10: verified 8.25h combined (James Diamond 8h + Franc 0.25h), no shortfall, no reminder needed.** (The 08:50 pass's "0h" finding was itself a false alarm, corrected after user pushback — see recheck section.)
 
 ---
 
@@ -207,7 +207,7 @@ Workstream login (Alert #11) fixed this pass (`DISPLAY=:1 node scripts/workstrea
 | Aysar | ○ still incomplete | **Correction:** initial "no reply" finding was wrong — it only checked `search.messages`, which misses thread replies. The bug report was posted as a thread reply, and the thread shows Carrick actually replied 2026-07-14 08:33 ("Let me check it now.") — ~11h after the customer's message, and only 17min before my first recheck pass caught it. Per the special Aysar rule (customer doesn't want "let me check" filler replies — team should react with 👀 instead to confirm receipt, then investigate), this reply doesn't meet the bar either way: it's a temp/filler message, not an 👀 ack, and no actual fix/investigation update posted yet. Item stays incomplete until either a real fix update lands or (going forward) an 👀 react + resolution. KhanhHH's Baamboozle hours confirmed fine (2.33h that day) — not an hours issue. |
 | Maddy | ○ still incomplete | **User flagged Alert #3 as inaccurate — re-checked live.** Bitbucket (8 open PRs, all Kai) + Jira priority cross-check: real issue is 1 Highest-priority PR (#481/LIFM2-409, "Import Shopify payouts") stuck in review **84 days**, not "3 Critical/High at 18-37 days" as originally posted into the Matrix room. Corrected in Alert #3 above. Still incomplete — genuine backlog exists, just mischaracterized. |
 | Fountain | ✓ completed | **Updated after user asked to recheck Kunal plan:** @trinhmtt posted this week's plan at 08:53 today — DatNT 40h / ViTHT 40h / ThinhT 12h → QC 23h (no VuTQ/HaVS this week). Part 2/3: Monday (07-13) actuals — DatNT 8h (exactly on 8h/day pace for 40h/wk), ThinhT 4h (already 33% of 12h weekly target on day 1), PhatDLT/QC 0.5h (early, fine), ViTHT 0h Monday (needs to pick up over remaining days to hit 40h, not alarming yet on day 1). Trello board: no new customer comments since window start. All 3 parts clean. |
-| Blair Brown - Peptide Clyde | ○ still incomplete | Gated by LeNH's combined hours — see below, 0h confirmed. |
+| Blair Brown - Peptide Clyde | ✓ completed | **Corrected 09:10 after user pushback** ("wrong, I see info on James") — gated by LeNH's combined hours, which are actually 8.25h (James Diamond 8h + Franc 0.25h), not 0h. See below. |
 | Ohcleo | ✓ completed | **Corrected:** no Tony report / no Celine messages is expected, not an alert — Workstream confirms LongVV logged 0h on `ohcleo` project 07-13 but 4h on Xtreme Soft Solutions (Maddy) that day. He worked a different project, didn't touch OhCleo, so no report was ever due. Same class of mistake as the already-fixed Kai/Aysar gates — now generalized into a global rule (see memory). |
 | Arthur - Meta-Stamp | ○ still incomplete | Re-checked Matrix (both rooms) + Slack (all 3 Solid Code channels): no new messages since David's 20:01 post on 07-13. **Clarified timing:** the investor demo is scheduled for Tuesday PT afternoon/evening, which lands ≈ Wed morning VN time — it has NOT happened yet, this isn't a stall, just genuinely pending. **New finding:** Workstream Crystal lang project shows 3 pending-review rows for PhucVT on 07-13 (4h+1h+2h charged, task "Metastamp V3 project tasks") — reviewer is TienND (per confirmed override), not DuongDN. Not previously visible while Workstream was down. |
 | Elena - WordPress SamGuard | ○ still incomplete | Re-verified live: `curl -sI https://www.samguard.co/` still missing `region1.analytics.google.com` in connect-src — CSP fix still blocked on missing wp-admin creds/sudo, unchanged. |
@@ -219,11 +219,11 @@ Workstream login (Alert #11) fixed this pass (`DISPLAY=:1 node scripts/workstrea
 | LongVV | 4h (Xtreme Soft Solutions) | Part-time, weekly target — not a daily alert |
 | PhucVT | 7h (Crystal lang/Arthur) | 1h short of 8h target but per policy marginal shortfalls are checked weekly, not daily — no alert. See PhucVT needsReview finding above (Arthur row). |
 | KhanhHH | 8h (Baamboozle 2.33h + Generator 5.67h) | Full day, no alert |
-| LeNH | **0h** — confirmed via 2 independent methods (isolated rescan + full unfiltered Workstream dump, explicitly checked her historically-flaky projects Peptide Clyde/James Diamond/Rebecca — all empty) | ⚠️ New alert — any shortfall is an alert for LeNH per her stricter threshold. No leave note on file for 07-13. Reminder not sent (no `--send-reminder` flag). |
+| LeNH | **8.25h (James Diamond 8h + Franc 0.25h)** | ✅ **Corrected 09:10** — the earlier "0h confirmed via 2 independent methods" claim was itself wrong. User caught it ("wrong, I see info on James"). A fresh unfiltered dump immediately found her real hours on James Diamond — this is the exact per-dev-filtered-fetch flakiness on this specific project already documented multiple times in memory for this dev; the "2 independent methods" I ran earlier both apparently hit the same underlying bug rather than being truly independent. No shortfall, no reminder needed. |
 
-**Cleared:** John Yi, Bailey, Rebecca, Workstream/Alert #11 (login restored), Ohcleo (false alarm — LongVV worked Xtreme not OhCleo that day), Fountain (plan posted 08:53, all 3 parts clean).
-**New:** LeNH 0h confirmed genuine (was previously "unverified" due to Workstream outage). PhucVT Crystal lang needsReview pending (3 rows, reviewer TienND). Maddy Alert #3 corrected — real issue is 1 Highest-priority PR 84 days old, not "3 Critical/High at 18-37 days."
-**Still open:** Aysar, Maddy (recharacterized), Blair Brown, Arthur, Elena WordPress CSP, Philip.
+**Cleared:** John Yi, Bailey, Rebecca, Workstream/Alert #11 (login restored), Ohcleo (false alarm — LongVV worked Xtreme not OhCleo that day), Fountain (plan posted 08:53, all 3 parts clean), Blair Brown - Peptide Clyde (LeNH's "0h" was itself a false alarm — real total 8.25h, caught by user).
+**New:** PhucVT Crystal lang needsReview pending (3 rows, reviewer TienND). Maddy Alert #3 corrected — real issue is 1 Highest-priority PR 84 days old, not "3 Critical/High at 18-37 days."
+**Still open:** Aysar, Maddy (recharacterized), Arthur, Elena WordPress CSP, Philip.
 
 ---
 
@@ -232,4 +232,5 @@ Workstream login (Alert #11) fixed this pass (`DISPLAY=:1 node scripts/workstrea
 2. samguard.co CSP fix needs wp-admin credentials or SSH sudo access — neither currently on file.
 3. GitHub check for `Christebob/Meta_Stamp_V3` needs the `davidztv` account logged into `gh` in this environment (not currently configured here).
 4. MS Teams Philip Briggs check remains fragile (Chrome profile automation) — consider a manual/alternate check method.
-5. LeNH 0h on 2026-07-13 with no leave note — worth a direct check-in with her before treating as a hard gap, given this project's history of dev-side confusion about where hours were logged.
+5. ~~LeNH 0h on 2026-07-13~~ — RESOLVED, was a false alarm (see recheck section). No action needed.
+6. Given LeNH's project has now had 9+ documented instances of per-dev-filtered Workstream queries silently missing real hours (specifically on James Diamond and Peptide Clyde), worth escalating to whoever maintains the Workstream API as a real bug report rather than continuing to work around it per-incident.
