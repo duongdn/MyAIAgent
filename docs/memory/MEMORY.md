@@ -26,6 +26,7 @@
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md) — 🔴 agent-fixable technical alerts (our code/infra) → fix directly, don't just re-report; external/human-only blockers → document exact missing credential
 - [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴 N accounts fail at once → check `git log` on the config first, don't assume provider-side expiry (260710: 5 Zoho "invalid creds" was actually our own bad commit)
 - [feedback_ripgrep_execute_permission_fix](global/feedback_ripgrep_execute_permission.md) — macOS only, SessionStart hook is a silent no-op on Linux
+- [feedback_missing_report_requires_effort_check](global/feedback_missing_report_requires_effort_check.md) — 🔴🔴🔴 UNIVERSAL: missing report/reply/silence is only an alert if effort on THAT project = 0 first, check every time, every project (260714)
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md) — Full workflow: sources, Trello, configs
