@@ -21,7 +21,7 @@
 | 9 | Maddy — client bug untracked | Madhuraka reported email filtering + grid caching bug Jul14-15 (screen recording sent), Kai only replied "ok", no JIRA ticket created yet |
 | 10 | Maddy — Kai report gate | 2h logged Workstream Jul14, no "My progress" Slack post that day (last was Jul13 23:26) |
 | 11 | Maddy — JIRA discrepancy | Kai's Slack claimed LIFM2-450 "Done" (Jul13), live JIRA status is still "Review" |
-| 12 | Maddy — Bitbucket blocked | Token confirmed dead on Atlassian's side (worked 2026-07-07 w/ real PR data, identical retest today = 401) — not a local config/scope bug. Needs user to check id.atlassian.com token status. |
+| 12 | Maddy — PR backlog, client bugs ignored 39 days | Unblocked w/ new token: PR #481 + #486 have Madhuraka-flagged **High** severity bugs (refund double-posting; Returns process gap) with **zero reply since Jun 6** — plus 3 more PRs (#509 Critical, #510 Critical, #513 Important) unaddressed 13-23 days |
 
 **Today (Wed Jul 15):** Nick (Arthur) sick — asked Art if urgent, may take day off. All other staff present.
 
@@ -128,7 +128,7 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 
 ## Maddy (Xtreme/Carrick-Kai-Luis) — 10:20 (+07:00) *(full 4-part check, re-run after user flagged today's version as "quá ít")*
 
-**Verdict: 🟡 needs attention — 1 open client bug untracked, 1 Slack/JIRA status discrepancy, PR check BLOCKED (dead token).**
+**Verdict: 🔴 escalate — 1 open client bug untracked, 1 Slack/JIRA status discrepancy, and PR check (now unblocked) reveals a systemic pattern: 5 PRs with client/bot-flagged Critical/High/Important findings sitting completely unreplied for 13-39 days.**
 
 **1) Hours (Workstream, W15, Jul13-19):** LongVV 6h week-to-date — Jul13: 4h, Jul14: 2h. Target 16h/wk (part-time, [[feedback_longvv_consolidated]]), Wed/Thu-heavy logger historically so under-pace by Tue is normal. `reviewers: []` on Maddy → **need_review = false**. 🔴 **Gate violation** ([[feedback_kai_daily_report_gate]]): Workstream shows 2h logged Jul14, but no "My progress" post in Slack that day (last progress post was Jul13 23:26) — hours>0 + no report = real alert, not just a data gap.
 
@@ -148,9 +148,22 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 | LIFM2-450 | **Review** | 6h | 6h | 🔴 **Discrepancy:** Kai's Slack post Jul13 23:26 said "LIFM2-450 → Done" — live JIRA shows status **Review**, not Done. Same failure pattern as prior checks (Slack claim ≠ JIRA state). |
 | LIFM2-449 | Review | 8h | 8h | On track hours-wise (Slack said "In progress" earlier same day, consistent with later progressing to Review) |
 
-**4) PR/Bitbucket (`xtreme-web/rms`) — 🔴 BLOCKED, confirmed real (not a config bug).** `config/.bitbucket-config.json` → `instances.kai.api_token` returns `"Token is invalid, expired, or not supported for this endpoint"`. Verified via session history this is NOT scope-related and NOT a decrypt-secrets.sh clobber: traced this exact token in the 2026-07-07 session transcript where it returned real PR data (#193, 16 comments) — re-ran the identical request today with the identical token/method and got the same 401. Token has genuinely died on Atlassian's side sometime between 2026-07-07 and today, despite an expected 2027 expiry. Cannot verify PR #513/#485 review-comment reply status live. **Needs the user to check https://id.atlassian.com/manage-profile/security/api-tokens directly — token may have been revoked/rotated; consider a Bitbucket-native App Password instead of an Atlassian id.atlassian.com API token for longer-term stability, since this token has already needed replacement once before (2026-07-07, first two tokens lacked scope).**
+**4) PR/Bitbucket (`xtreme-web/rms`) — ✅ UNBLOCKED, user provided fresh Bitbucket-scoped token 2026-07-15 (persisted to `.enc`).** Old token confirmed dead on Atlassian's side (not a config bug — see prior entry). New token verified with real data, 9 open PRs fetched with full comment history:
 
-**Trello:** Maddy gate — holding off auto-complete given the untracked client bug + PR check blocker above; recommend keeping open until the new bug gets a ticket and Bitbucket access is restored.
+| PR | Ticket/branch | Comments | Last activity | Finding |
+|----|--------------|----------|----------------|---------|
+| **#519** 🆕 | `hotfix/filter-email` | 0 | **Jul 15 (today)** | Likely the fix for today's untracked client bug (email filtering) — branch name matches, but 0 comments = not yet reviewed, and still no JIRA ticket linked in the title |
+| #481 | LIFM2-409 feedback | 1 | Jun 6 (**39 days stale**) | 🔴 Madhuraka personally flagged **High**: "refund payouts are still double-posted... Shopify clearing will not behave as described" — **zero reply from Kai in 39 days** |
+| #486 | LIFM2-436 Returns | 3 | Jun 6 (**39 days stale**) | 🔴 Madhuraka flagged **High** severity item + a process gap (archived-table field sync) — **zero reply from Kai in 39 days** |
+| #509 | LIFM2-428 | 1 | Jun 22 (**23 days stale**) | 🔴 Codex bot flagged **Critical**: cert-template selection logic bug (`Product.php:449`) — zero reply, though the ticket itself was pushed to Jul 10 (code changed, finding never acknowledged) |
+| #510 | LIFM2-446 quote row locking | 1 | Jun 25 (**20 days stale**) | 🔴 Codex bot flagged **Critical**: `isHeldBy()` returns true incorrectly on null/expired lock — zero reply |
+| #513 | `hotfix/product-custom-payout` | 1 | Jul 2 (**13 days stale**) | Codex bot flagged **Important** issue in Products controller — zero reply. This is the PR Madhuraka asked about Jul11 ("has Anoma tested this?") |
+| #485 | `hotfix/listed-tab` | 0 | Apr 28 (**dead, 78 days**) | Confirmed abandoned — matches Madhuraka's Jul11 "been open a long time, don't remember the issue" comment |
+| #235 | LIFM2-285 [On Hold] | 4 | Sep 2025 | Long-running back-and-forth since 2025, title says "[On Hold]" — likely intentionally paused, not an active red flag but worth periodic re-check |
+
+**Pattern:** this is materially worse than "PR backlog exists" — **2 of the unaddressed findings (#481, #486) were personally reported by Madhuraka himself**, not just an automated bot, and both have sat for 39 days with zero reply. This directly explains and validates the Jul12 client process escalation in Part 2 above (client now requiring pre-approval for every task after "billing issue... tasks taking way more than approved hours") — the client isn't just complaining about cost, they've personally found real unaddressed bugs being ignored for over a month.
+
+**Trello:** Maddy gate — recommend keeping OPEN, do not auto-complete. Untracked client bug (though #519 hotfix branch exists) + the #481/#486 39-day-old client-flagged bugs need a response before this can be considered healthy.
 
 ---
 
