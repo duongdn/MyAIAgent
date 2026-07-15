@@ -214,10 +214,10 @@ async function main() {
     const rows = await fetchWithRetry(() => fetchRange(api, sid, `${tab}!A:I`));
     const { ownerHours, leaveNotes } = extractDailyHoursByOwner(rows, tokens);
     for (const dev of devs) {
-      const matchKeys = Object.keys(ownerHours).filter(k => k.toLowerCase().includes(dev.toLowerCase()));
+      const matchKeys = Object.keys(ownerHours).filter(k => k.toLowerCase() === dev.toLowerCase());
       const hours = matchKeys.reduce((acc, k) => acc + ownerHours[k], 0);
       if (hours > 0) result[dev].sheets[sname] = hours;
-      const leaveKeys = Object.keys(leaveNotes).filter(k => k.toLowerCase().includes(dev.toLowerCase()) || k === "ALL");
+      const leaveKeys = Object.keys(leaveNotes).filter(k => k.toLowerCase() === dev.toLowerCase() || k === "ALL");
       leaveKeys.forEach(k => { result[dev].leave[`${sname}:${k}`] = leaveNotes[k]; });
     }
   }
@@ -232,7 +232,7 @@ async function main() {
       const { rows, err } = await fetchWithRetry(() => fetchWorkstreamWeek(wsConfig, proj.id, dateStr));
       if (err && rows.length === 0) { process.stderr.write(`  ${proj.name}: ${err}\n`); continue; }
       for (const dev of devs) {
-        const matched = rows.filter(r => r.date === dateStr && (r.employeeName || "").toLowerCase().includes(dev.toLowerCase()));
+        const matched = rows.filter(r => r.date === dateStr && (r.employeeName || "").toLowerCase() === dev.toLowerCase());
         const hours = matched.reduce((acc, r) => acc + parseHoursHM(r.actual || "0:00"), 0);
         if (hours > 0) result[dev].workstream[proj.name] = hours;
       }

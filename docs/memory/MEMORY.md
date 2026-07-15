@@ -67,7 +67,7 @@
 - [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md) — LeNH any shortfall=alert; TuanNT 0h gates 3 items (3-way cross-check first, see above)
 - [feedback_khanhhh_aysar_consolidated](daily-report/sheets/feedback_khanhhh_aysar_consolidated.md) — Aysar sheet+Upwork hours=KhanhHH not LeNH; scan ALL sources, new sources keep surfacing
 - [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — parse-leave-emails.js first
-- [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 17 WS projects, run daily
+- [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 17 WS projects, run daily; 🔴 260715: script reads STALE abandoned Sheet not live WS, false "no tickets"
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md), [feedback_elena_sheet_permission_error](daily-report/sheets/feedback_elena_sheet_permission_error.md) — perm error masks as "no week tab"
 - [feedback_tasklog_0h_reminder_complete](daily-report/sheets/feedback_tasklog_0h_reminder_complete.md), [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md) — 0h+no leave→remind (3-way cross-check first!), sent→complete; message TEXT must match verified number, see Global reminder-template rule
 

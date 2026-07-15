@@ -93,22 +93,32 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 
 | Developer | Today | Sources | Status |
 |-----------|-------|---------|--------|
-| LongVV | 6h | WS Portfolio-James Diamond (6h) | ⚠️ Under 8h, no leave note, but part-time (40h/week) — single-day under is normal unless weekly < 40h |
+| LongVV | ~~6h~~ **8h** | ~~WS Portfolio-James Diamond (6h)~~ **WS Maddy (2h, Jul14; week-to-date 6h — 4h Jul13+2h Jul14) + WS Portfolio-James Diamond (6h, Jul14)** | ~~⚠️ Under 8h... part-time (40h/week)~~ **CORRECTED: report omitted Maddy hours entirely. Combined today = 8h across both active tracks (Maddy 16h/wk target + ad-hoc James Diamond per DuongDN's 08:39 Matrix redirect "Maddy + James Diamond"). No shortfall. Maddy `reviewers=[]` → need_review=false; all 3 James Diamond tasks reviewer=PhucVT, status Pending (see needsReview table).** |
 | PhucVT | 8h | WS Crystal lang (8h) | ✅ OK |
-| TuanNT | 16h | Sheet Paturevision (8h) + Elena (8h) | ✅ OK (exceeds target) |
+| TuanNT | ~~16h~~ **8h** | ~~Sheet Paturevision (8h) + Elena (8h)~~ **Sheet Paturevision (8h) only** | ~~✅ OK (exceeds target)~~ **CORRECTED: the "Elena 8h" was a false match — Elena sheet's owner col G has `TuanNTG`, a different person, substring-matched by a bug in `scripts/sheets-tasklog-scan.js` (`.includes()` instead of exact match — fixed same-day). Real total = 8h (Paturevision only), meets 8h/day target, OK.** |
 | KhanhHH | 1.5h | Sheet Elena (1.5h) only | 🔴 1.5h well below 8h, no leave. No Workstream hours found (verified ALL 20 projects — 0 rows for KhanhHH). Aysar gate affected. |
 | LeNH | ~~0h~~ **8h** | WS Portfolio - James Diamond (8h) | ~~🔴 0h~~ ✅ **CORRECTED:** LeNH logged 8h on James Diamond via Workstream. Initial scan missed it (same transient per-project fetch bug from 260706/260707). Report updated. |
 
-### Workstream needsReview
+### Workstream needsReview / review status (per project — need_review=false or live reviewStatus, see [[feedback_workstream_report_needs_dev_reviewer_hours_and_status]])
 
-| Project | Pending rows | Reviewer |
-|---------|-------------|----------|
-| Portfolio - James Diamond | LongVV: 3 tasks (6h, Jul 14) — KMZ export, sensor assignment, machinery asset list | PhucVT |
-| Crystal lang (Arthur) | PhucVT: 8h Jul 14 (Metastamp tasks) + 7h Jul 13 | TienND |
-| Fountain | 17 pending rows (DatNT/PhatDLT/HungPN, Jul 13-14) | VuTQ, DuongDN (excluded from alert per rule) |
+| Project | Dev hours | need_review | Pending rows | Reviewer |
+|---------|-----------|-------------|-------------|----------|
+| Maddy | LongVV 6h (LIFM2-450: 4h, LIFM2-449: 1h, LIFM2-409: 1h) | **false** (no reviewers configured — `reviewers: []`) | — | — |
+| Portfolio - James Diamond | LongVV 6h, Jul 14 | true | 3 tasks Pending (6h) — KMZ export, sensor assignment, machinery asset list | PhucVT |
+| Crystal lang (Arthur) | PhucVT: 8h Jul 14 + 7h Jul 13 (Metastamp tasks) | true | Pending | TienND |
+| Fountain | — | true (excluded from alert per rule) | 17 pending rows (DatNT/PhatDLT/HungPN, Jul 13-14) | VuTQ, DuongDN |
 
 ### Maddy JIRA Cross-check — W15
-No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entries this week (only James Diamond WS hours logged Jul 14).
+~~No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entries this week (only James Diamond WS hours logged Jul 14).~~
+**CORRECTED — this was flat wrong.** `maddy-jira-tasklog-check.js` reads ticket refs from the Maddy Google Sheet task log, which is stale/abandoned since the 2026-07-13 full migration to Workstream (script not yet updated for the migration). Live `GET /review/week?projectId=cmpqc1v7v00ahtk1vs1817xt8` for W15 shows LongVV logged 3 real tickets this week:
+| Date | Ticket | Actual | Charged | Review |
+|------|--------|--------|---------|--------|
+| Jul 13 | LIFM2-450: Buy offer update change → Done | 3:00 | 3:00 | NotRequired |
+| Jul 13 | LIFM2-449: Update QA feedback → In progress | 1:00 | 1:00 | NotRequired |
+| Jul 14 | LIFM2-450: Buy offer update change | 1:00 | 1:00 | NotRequired |
+| Jul 14 | LIFM2-409: Fix bug | 1:00 | 1:00 | NotRequired |
+
+**Unresolved:** `maddy-jira-tasklog-check.js` needs updating to read ticket refs from Workstream `task` field instead of (or in addition to) the Google Sheet, or it will keep reporting false "no entries" for every project migrated off Sheets. Not yet fixed — flagging for follow-up, out of scope for a same-day report correction.
 
 ---
 
