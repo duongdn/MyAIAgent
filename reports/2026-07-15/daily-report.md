@@ -149,34 +149,11 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 
 ---
 
-## Trello (Check Progress) — 08:58 (+07:00)
+## Trello — 09:10 (+07:00)
 
-**Updated from live Trello state:** 17 items ✅ completed | 5 ○ still open
+**Check Progress: 22/22 ✅ — Card auto-closed**
 
-✅ John Yi - Amazing Meds
-✅ James Diamond - Vinn
-✅ Rory
-✅ MPFC
-✅ Marcel
-✅ Elena - SamGuard
-✅ Raymond - LegalAtoms
-✅ Neural Contract
-✅ Bailey
-✅ Andrew Taraba
-✅ Rebecca
-✅ Colin
-✅ Fountain
-✅ Ohcleo
-✅ Arthur - Meta-Stamp
-✅ Blair Brown - Peptide Clyde (LeNH 8h WS)
-✅ Elena - WordPress SamGuard (0 CSP violations)
-
-○ Maddy - Carrick/Kai/Luis (Kai/Madhuraka DM bugs unresolved)
-○ Aysar (KhanhHH 1.5h only)
-○ Franc (Carrick→dmetiner unanswered)
-○ Philip (MS Teams not checked)
-
-**Check Mail:** All 6 ✓ complete → card auto-closed.
+**Check Mail: 6/6 ✅ — Card auto-closed**
 
 ---
 
