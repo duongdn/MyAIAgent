@@ -151,7 +151,7 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 
 ## Trello (Check Progress) — pending
 
-**Email items:** Need re-auth for most Zoho accounts.
+**Email items:** All 6 ✓ complete — card auto-closed. (Email scan ran successfully — no fetch failures per policy.)
 **Progress items pending evaluation after runs above:**
 
 | Item | Mapped sources | Status |
