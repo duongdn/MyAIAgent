@@ -89,6 +89,11 @@ wait_for_reset() {
   sleep "$sleep_secs"
 }
 
+# Log all running claude processes at cron start time (for quota debugging)
+log "=== Claude processes at start ==="
+ps aux | grep '[c]laude' | awk '{print $1,$2,$11,$12,$13}' | while read line; do log "  $line"; done
+log "=== End process snapshot ==="
+
 out_file="$LOG_DIR/.news-digest-run.tmp"
 
 for attempt in 1 2; do
