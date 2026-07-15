@@ -122,7 +122,7 @@ for attempt in 1 2; do
   if grep -qE "hit your (session )?limit" "$out_file"; then
     rm -f "$out_file"
     if [ "$attempt" -eq 1 ]; then
-      wait_for_reset "$LOG_DIR/.news-digest-run.tmp" 2>/dev/null || { log "Rate/session limit hit. Giving up."; exit 1; }
+      wait_for_reset "$LOG" || { log "Rate/session limit hit. Giving up."; exit 1; }
       continue
     fi
     log "Rate/session limit hit on retry. Giving up."
