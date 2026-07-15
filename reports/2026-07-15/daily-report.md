@@ -174,7 +174,6 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 ○ Maddy - Carrick/Kai/Luis (Kai/Madhuraka DM bugs unresolved)
 ○ Aysar (KhanhHH 1.5h only)
 ○ Franc (Carrick→dmetiner unanswered)
-○ Elliott (KhanhHH 1.5h only)
 ○ Philip (MS Teams not checked)
 
 **Check Mail:** All 6 ✓ complete → card auto-closed.
