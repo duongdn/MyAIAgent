@@ -62,30 +62,72 @@ else
 fi
 export DISPLAY=:1
 
-log "Starting news digest (--cron mode)"
+# Parse reset time from limit message and sleep until then (+5min buffer)
+# Handles: "resets 2am (UTC)", "resets 11pm (UTC)", "resets 9pm (UTC)"
+wait_for_reset() {
+  local out_file="$1"
+  local reset_str
+  reset_str=$(grep -oE 'resets [0-9]+(am|pm) \(UTC\)' "$out_file" | head -1)
+  [ -z "$reset_str" ] && { log "Cannot parse reset time from limit message."; return 1; }
 
-# Pre-compute UTC+7 datetime so Claude doesn't need to run date commands
-export REPORT_DATE=$(TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d')
-export REPORT_TIME=$(TZ='Asia/Ho_Chi_Minh' date '+%H%M')
-log "Report datetime (UTC+7): ${REPORT_DATE} ${REPORT_TIME}"
+  local time_part hour ampm
+  time_part=$(echo "$reset_str" | grep -oE '[0-9]+(am|pm)')
+  hour=$(echo "$time_part" | grep -oE '[0-9]+')
+  ampm=$(echo "$time_part" | grep -oE '(am|pm)')
+
+  # Convert to 24h UTC
+  if [ "$ampm" = "pm" ] && [ "$hour" -ne 12 ]; then hour=$((hour + 12))
+  elif [ "$ampm" = "am" ] && [ "$hour" -eq 12 ]; then hour=0; fi
+
+  local now reset_epoch
+  now=$(date -u +%s)
+  reset_epoch=$(date -u -d "$(date -u +%Y-%m-%d) ${hour}:05:00" +%s 2>/dev/null)
+  [ "$reset_epoch" -le "$now" ] && reset_epoch=$(date -u -d "tomorrow ${hour}:05:00" +%s 2>/dev/null)
+
+  local sleep_secs=$(( reset_epoch - now ))
+  log "Session/rate limit hit — sleeping ${sleep_secs}s until ${hour}:05 UTC then retrying."
+  sleep "$sleep_secs"
+}
 
 out_file="$LOG_DIR/.news-digest-run.tmp"
 
-"$CLAUDE_BIN" -p "/me:news-digest --report-date=${REPORT_DATE} --report-time=${REPORT_TIME}" \
-  --dangerously-skip-permissions \
-  > "$out_file" 2>&1
+for attempt in 1 2; do
+  # Re-compute date/time each attempt (day may change after sleeping)
+  TODAY=$(TZ='Asia/Ho_Chi_Minh' date +%Y-%m-%d)
+  export REPORT_DATE=$(TZ='Asia/Ho_Chi_Minh' date '+%Y-%m-%d')
+  export REPORT_TIME=$(TZ='Asia/Ho_Chi_Minh' date '+%H%M')
 
-exit_code=$?
-cat "$out_file" >> "$LOG"
+  # Skip if digest already exists (may have been created while we slept)
+  if ls "$PROJECT_DIR/reports/$TODAY/"*news-digest.md &>/dev/null 2>&1; then
+    log "News digest already exists for $TODAY (after sleep), skipping."
+    rm -f "$out_file"
+    exit 0
+  fi
 
-if grep -q "hit your limit" "$out_file"; then
+  log "Starting news digest (--cron mode, attempt $attempt)"
+  log "Report datetime (UTC+7): ${REPORT_DATE} ${REPORT_TIME}"
+
+  "$CLAUDE_BIN" -p "/me:news-digest --report-date=${REPORT_DATE} --report-time=${REPORT_TIME}" \
+    --dangerously-skip-permissions \
+    > "$out_file" 2>&1
+
+  exit_code=$?
+  cat "$out_file" >> "$LOG"
+
+  if grep -qE "hit your (session )?limit" "$out_file"; then
+    rm -f "$out_file"
+    if [ "$attempt" -eq 1 ]; then
+      wait_for_reset "$LOG_DIR/.news-digest-run.tmp" 2>/dev/null || { log "Rate/session limit hit. Giving up."; exit 1; }
+      continue
+    fi
+    log "Rate/session limit hit on retry. Giving up."
+    exit 1
+  fi
+
   rm -f "$out_file"
-  log "Rate limit hit."
-  exit 1
-fi
-
-rm -f "$out_file"
-log "Done (exit $exit_code)"
+  log "Done (exit $exit_code)"
+  break
+done
 
 # Kill Xvfb if we started it
 if [ -n "$XVFB_PID" ]; then
