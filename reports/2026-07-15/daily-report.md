@@ -186,7 +186,7 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 (Print only — no --send-reminder flag)
 
 - **LeNH**: ~~0h~~ **8h** — CORRECTED: has hours on WS. No reminder needed.
-- **KhanhHH**: 1.5h Jul 14 — below target but not 0h, noted not sent
+- **KhanhHH**: 1.5h Jul 14 — reminder sent (custom message: "chỉ có 1.5h (Elena), update thêm nếu thiếu")
 
 ---
 
