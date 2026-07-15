@@ -18,6 +18,10 @@
 | 6 | Matrix — Elena SamGuard | anhnvn asked DuongDN to confirm CSP fix approach — DuongDN confirmed, anhttl reported, DuongDN marked fixed |
 | 7 | Performance — MPFC | Apdex 0.51 (POOR), avg 1114ms — dominated by vulnerability scanner probes (200+ slow endpoints) |
 | 8 | Performance — OhCleo | MediaByKeyView 5.8s avg (233 calls) — persists across multiple runs, real bottleneck |
+| 9 | Maddy — client bug untracked | Madhuraka reported email filtering + grid caching bug Jul14-15 (screen recording sent), Kai only replied "ok", no JIRA ticket created yet |
+| 10 | Maddy — Kai report gate | 2h logged Workstream Jul14, no "My progress" Slack post that day (last was Jul13 23:26) |
+| 11 | Maddy — JIRA discrepancy | Kai's Slack claimed LIFM2-450 "Done" (Jul13), live JIRA status is still "Review" |
+| 12 | Maddy — Bitbucket blocked | `config/.bitbucket-config.json` token invalid/expired — cannot verify PR #513/#485 review status, needs fresh token w/ Bitbucket scope |
 
 **Today (Wed Jul 15):** Nick (Arthur) sick — asked Art if urgent, may take day off. All other staff present.
 
@@ -118,7 +122,35 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 | Jul 14 | LIFM2-450: Buy offer update change | 1:00 | 1:00 | NotRequired |
 | Jul 14 | LIFM2-409: Fix bug | 1:00 | 1:00 | NotRequired |
 
-**Unresolved:** `maddy-jira-tasklog-check.js` needs updating to read ticket refs from Workstream `task` field instead of (or in addition to) the Google Sheet, or it will keep reporting false "no entries" for every project migrated off Sheets. Not yet fixed — flagging for follow-up, out of scope for a same-day report correction.
+**Unresolved:** `maddy-jira-tasklog-check.js` needs updating to read ticket refs from Workstream `task` field instead of (or in addition to) the Google Sheet, or it will keep reporting false "no entries" for every project migrated off Sheets. Not yet fixed — flagging for follow-up, out of scope for a same-day report correction. Full 4-part analysis (Slack DM + JIRA discrepancies + PR check) moved to the dedicated **## Maddy (Xtreme/Carrick-Kai-Luis)** section below, per [[feedback_maddy_four_part_check_mandatory]] (must be ONE consolidated section, not scattered).
+
+---
+
+## Maddy (Xtreme/Carrick-Kai-Luis) — 10:20 (+07:00) *(full 4-part check, re-run after user flagged today's version as "quá ít")*
+
+**Verdict: 🟡 needs attention — 1 open client bug untracked, 1 Slack/JIRA status discrepancy, PR check BLOCKED (dead token).**
+
+**1) Hours (Workstream, W15, Jul13-19):** LongVV 6h week-to-date — Jul13: 4h, Jul14: 2h. Target 16h/wk (part-time, [[feedback_longvv_consolidated]]), Wed/Thu-heavy logger historically so under-pace by Tue is normal. `reviewers: []` on Maddy → **need_review = false**. 🔴 **Gate violation** ([[feedback_kai_daily_report_gate]]): Workstream shows 2h logged Jul14, but no "My progress" post in Slack that day (last progress post was Jul13 23:26) — hours>0 + no report = real alert, not just a data gap.
+
+**2) Slack (full DM history Kai↔Madhuraka, `conversations.history` Jul08-15, 41 msgs, not keyword search):**
+- 🔴 **Open, untracked client bug (as of this check):** Jul14 18:47 Madhuraka emailed re: "email filtering bug"; Jul15 08:34 followed up in Slack with a caching/refresh issue (grid doesn't reset when clicking a different seller's REF: 000 link after already filtering by one) + sent a screen recording. Kai's only reply: "ok" (08:35). **No JIRA ticket created yet.** Needs a ticket + estimate before it falls into the same untracked-rework pattern as LIFM2-260.
+- ⚠️ **Client process escalation, Jul12:** "After recent billing issue with the client (tasks taking way more than approved hours), client now wants us to wait for their approval for every task even if it is less than 15 hours." Direct fallout from the LIFM2-439 (+79%) / LIFM2-409 (109h) overrun history below — Kai agreed ("OK"). Worth tracking whether this new approval gate is actually being followed on subsequent tasks.
+- ℹ️ Jul13: Kai took the afternoon off (father's hospital discharge), informed Madhuraka in advance, provided estimates before leaving, said hours would be made up — legitimate, not a red flag.
+- ℹ️ Jul11: Madhuraka asked about PR #513 (no ticket existed — Kai created one same day) and PR #485 ("check if already fixed on master" by Monday) — no confirmation found in the Jul13-15 transcript that #485 was ever followed up on.
+
+**3) JIRA cross-check (3 known risk tickets + everything mentioned this week):**
+| Ticket | Status | Est | Actual | Note |
+|--------|--------|-----|--------|------|
+| LIFM2-260 | Ready to deploy | *(never set)* | 38.5h | Recurring risk ticket — progressed since last check, but still no original estimate ever logged (data-hygiene gap persists even as it nears done) |
+| LIFM2-439 | Done | 12h | 21.5h (+79%) | Historical overrun, closed — root cause of Jul12 client process escalation above |
+| LIFM2-409 | Review | 113.25h | 109.25h | Originally framed as a "hotfix" (PR #513) — actual scope is 109h, nowhere near hotfix-sized; sitting in Review |
+| LIFM2-453 | Testing - Anoma | 2h | 2h | On track |
+| LIFM2-450 | **Review** | 6h | 6h | 🔴 **Discrepancy:** Kai's Slack post Jul13 23:26 said "LIFM2-450 → Done" — live JIRA shows status **Review**, not Done. Same failure pattern as prior checks (Slack claim ≠ JIRA state). |
+| LIFM2-449 | Review | 8h | 8h | On track hours-wise (Slack said "In progress" earlier same day, consistent with later progressing to Review) |
+
+**4) PR/Bitbucket (`xtreme-web/rms`) — 🔴 BLOCKED.** `config/.bitbucket-config.json` → `instances.kai.api_token` returns `"Token is invalid, expired, or not supported for this endpoint"` on every endpoint tried (Basic and Bearer auth both fail, confirmed via direct `GET /2.0/user`). Cannot verify PR #513/#485 review-comment reply status live. Per [[feedback_maddy_four_part_check_mandatory]]'s known gotcha, Atlassian API tokens for Bitbucket need explicit Bitbucket scope and can expire — **need a freshly-minted token from id.atlassian.com with Bitbucket scope to unblock this.**
+
+**Trello:** Maddy gate — holding off auto-complete given the untracked client bug + PR check blocker above; recommend keeping open until the new bug gets a ticket and Bitbucket access is restored.
 
 ---
 
