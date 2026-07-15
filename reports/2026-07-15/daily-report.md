@@ -149,35 +149,35 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 
 ---
 
-## Trello (Check Progress) — pending
+## Trello (Check Progress) — 08:58 (+07:00)
 
-**Email items:** All 6 ✓ complete — card auto-closed. (Email scan ran successfully — no fetch failures per policy.)
-**Progress items pending evaluation after runs above:**
+**Updated from live Trello state:** 17 items ✅ completed | 5 ○ still open
 
-| Item | Mapped sources | Status |
-|------|---------------|--------|
-| Maddy - Carrick/Kai/Luis | Xtreme Slack + sheets longvv | Kai DM'd about bugs(LongVV 6h/8h) — incomplete until recheck |
-| John Yi - Amazing Meds | Amazing Meds Slack + sheets tuannt | TuanNT 16h OK → can complete |
-| Bailey | GGS Slack + sheets tuannt | TuanNT 16h OK → can complete |
-| Rebecca (William Bills) | William Bills Slack + sheets tuannt | TuanNT 16h OK → can complete |
-| James Diamond - Vinn | Discord airagri | Vinn daily report present → can complete |
-| Rory | Swift Slack | No activity (0 msgs) → complete |
-| Franc | RDC Slack | Carrick asked dmetiner "Did you look at my msg?" unanswered → ⚠️ incomplete |
-| Aysar | Baamboozle MPDM + sheets khanhhh | KhanhHH 1.5h (low) → ⚠️ incomplete |
-| Elliott | Generator Slack + sheets khanhhh | KhanhHH 1.5h → ⚠️ incomplete (if KhanhHH = Elliott dev) |
-| MPFC | MPFC Slack | MSGs present (Tien/freelancer) → complete |
-| Marcel | Equanimity Slack | 0 msgs → complete |
-| Elena - SamGuard | SamGuard Slack + Elena | Clean → complete |
-| Raymond | LegalAtoms Slack | 0 msgs → complete |
-| Neural Contract | Upwork | No alert → complete |
-| Andrew Taraba | Discord bizurk | 0 msgs → complete |
-| Colin | Aigile Slack | 2fa notification only, 0 dev msgs → complete |
-| Fountain | Matrix plan | Plan posted, no over-est spike → pending recheck |
-| Elena - WordPress | samguard.co | 0 violations → complete |
-| Philip | MS Teams | Needs dedicated check |
-| Ohcleo | OhCleo Slack | 0 msgs → complete |
-| Arthur - Meta-Stamp | Arthur (6 sources) | See Arthur section below |
-| Blair Brown - Peptide Clyde | sheets lenh | ~~LeNH 0h~~ LeNH 8h (James Diamond WS — includes Blair Brown) → ✅ can complete |
+✅ John Yi - Amazing Meds
+✅ James Diamond - Vinn
+✅ Rory
+✅ MPFC
+✅ Marcel
+✅ Elena - SamGuard
+✅ Raymond - LegalAtoms
+✅ Neural Contract
+✅ Bailey
+✅ Andrew Taraba
+✅ Rebecca
+✅ Colin
+✅ Fountain
+✅ Ohcleo
+✅ Arthur - Meta-Stamp
+✅ Blair Brown - Peptide Clyde (LeNH 8h WS)
+✅ Elena - WordPress SamGuard (0 CSP violations)
+
+○ Maddy - Carrick/Kai/Luis (Kai/Madhuraka DM bugs unresolved)
+○ Aysar (KhanhHH 1.5h only)
+○ Franc (Carrick→dmetiner unanswered)
+○ Elliott (KhanhHH 1.5h only)
+○ Philip (MS Teams not checked)
+
+**Check Mail:** All 6 ✓ complete → card auto-closed.
 
 ---
 
