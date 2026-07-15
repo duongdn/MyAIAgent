@@ -17,6 +17,7 @@ This project has TWO memory locations. **ALWAYS save to BOTH** when creating or 
 - **Project dev topics ≠ alerts:** Slack dev discussions (bugs, features) do NOT block Trello checklist completion. Only person-status issues (0h, absent, auth failure) block.
 - **Matrix rooms:** If M_FORBIDDEN, try POST /join first. Public rooms don't need invites.
 - **Upwork:** Must be included in daily report. Run `node scripts/upwork-weekly-hours.js`.
+- **Workstream project rows:** For every Workstream-logged project, report must show (1) actual dev hours logged, (2) reviewer's charged hours, (3) review status — `need_review=false` if the project has no reviewer configured, else the live `reviewStatus` (Pending/Reviewed). Not just an alert-when-Pending; state it every time. See `docs/memory/daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md`.
 - **Fountain 5-part check:** MANDATORY in every daily report. Assign ONE dedicated agent. Validate ALL 5 parts exist before finalizing: (1) Matrix plan, (2) Task log actuals, (3) Plan vs Actual table, (4) Capacity & Runway, (5) Over-estimate tracking + Trello board. This has been missed multiple days — NEVER skip.
 - **Discord:** Only monitor AirAgri + Bizurk. NOT HOMIEAPP.
 

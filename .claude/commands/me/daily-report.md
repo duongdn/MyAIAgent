@@ -352,6 +352,12 @@ Workstream lets a dev's charged hours be flagged for review; the row's `reviewSt
 - 🔴 **The `isReviewer` field itself can be wrong** — confirmed 2026-07-08 on Crystal lang: system flags DuongDN (Tech Lead auto-rule) as reviewer, but user confirmed the real reviewer is TienND. `scripts/workstream-fetch-project-week.js` has a `REVIEWER_OVERRIDES` map for these confirmed exceptions (currently just `crystal_lang: ['TienND']`) — only add to it when the user explicitly says a project's `isReviewer` flag is wrong, never guess/hardcode preemptively.
 - Alert line format: `Workstream needs review: {employeeName} — {task} ({charged}, {date}) — reviewer(s): {reviewers.join(', ')} ({project})`
 
+🔴 **Report format requirement (every Workstream project row, every report — not just the alert case above):** user flagged 2026-07-14 08:52 that reports were missing this breakdown. For each project, show THREE fields, not just actual dev hours:
+1. **Actual dev hours logged** (existing scan)
+2. **Reviewer's charged hours** — from `/review/week` rows for the reviewer's own `employeeName` (a reviewer can log dev/review hours too, separate from the dev being reviewed)
+3. **Review status** — if the project has no `reviewers` (empty array from `/pinfo/projects/{id}`), write `need_review = false`; otherwise print the live `reviewStatus` (`Pending`/`Reviewed`) for that row, always — don't only surface it as an alert when `Pending`. Fountain still excluded (see above).
+See `docs/memory/daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md`.
+
 | Developer | Arg | Daily target | Alert threshold | Notes |
 |-----------|------|-------------|-----------------|-------|
 | LongVV | longvv | 16h/**week** | Only if WEEKLY total < 16h, no leave | Part-time. 0h on any single day is NORMAL — never flag daily 0h. |

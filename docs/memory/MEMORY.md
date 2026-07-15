@@ -56,6 +56,7 @@
 
 ## daily-report:sheets (task logs / per-developer)
 - [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md) — WS reviewStatus=Pending → ALERT to reviewer, not dev
+- [feedback_workstream_report_needs_dev_reviewer_hours_and_status](daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md) — 🔴 260714: every WS project row must show actual dev hours + reviewer charged hours + need_review=false OR live reviewStatus
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — scan ALL sheets+WS by owner, never hardcode
 - [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md) — date=PREV_DATE
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md) — no date arg = defaults to empty week
