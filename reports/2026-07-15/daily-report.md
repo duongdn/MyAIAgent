@@ -44,7 +44,7 @@
 
 **mpfc@:** 4 TestFlight builds pushed (4.2.0→4.2.3), Tien Nguyen added to Firebase MPFC project.
 
-Trello: mail items pending (need accounts with valid creds).
+Trello: Check Mail 6/6 ✓ complete — card auto-closed.
 
 ---
 
@@ -328,7 +328,3 @@ Ngày quan trọng cho dự án — Chris chạy demo với investor 1:30 PT (�
 
 Clean. No issues.
 
----
-
-## Re-check — pending (after Trello evaluation)
-O items to be verified once Trello state confirmed.
