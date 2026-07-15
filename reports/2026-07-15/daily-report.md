@@ -21,7 +21,7 @@
 | 9 | Maddy — client bug untracked | Madhuraka reported email filtering + grid caching bug Jul14-15 (screen recording sent), Kai only replied "ok", no JIRA ticket created yet |
 | 10 | Maddy — Kai report gate | 2h logged Workstream Jul14, no "My progress" Slack post that day (last was Jul13 23:26) |
 | 11 | Maddy — JIRA discrepancy | Kai's Slack claimed LIFM2-450 "Done" (Jul13), live JIRA status is still "Review" |
-| 12 | Maddy — Bitbucket blocked | `config/.bitbucket-config.json` token invalid/expired — cannot verify PR #513/#485 review status, needs fresh token w/ Bitbucket scope |
+| 12 | Maddy — Bitbucket blocked | Token confirmed dead on Atlassian's side (worked 2026-07-07 w/ real PR data, identical retest today = 401) — not a local config/scope bug. Needs user to check id.atlassian.com token status. |
 
 **Today (Wed Jul 15):** Nick (Arthur) sick — asked Art if urgent, may take day off. All other staff present.
 
@@ -148,7 +148,7 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 | LIFM2-450 | **Review** | 6h | 6h | 🔴 **Discrepancy:** Kai's Slack post Jul13 23:26 said "LIFM2-450 → Done" — live JIRA shows status **Review**, not Done. Same failure pattern as prior checks (Slack claim ≠ JIRA state). |
 | LIFM2-449 | Review | 8h | 8h | On track hours-wise (Slack said "In progress" earlier same day, consistent with later progressing to Review) |
 
-**4) PR/Bitbucket (`xtreme-web/rms`) — 🔴 BLOCKED.** `config/.bitbucket-config.json` → `instances.kai.api_token` returns `"Token is invalid, expired, or not supported for this endpoint"` on every endpoint tried (Basic and Bearer auth both fail, confirmed via direct `GET /2.0/user`). Cannot verify PR #513/#485 review-comment reply status live. Per [[feedback_maddy_four_part_check_mandatory]]'s known gotcha, Atlassian API tokens for Bitbucket need explicit Bitbucket scope and can expire — **need a freshly-minted token from id.atlassian.com with Bitbucket scope to unblock this.**
+**4) PR/Bitbucket (`xtreme-web/rms`) — 🔴 BLOCKED, confirmed real (not a config bug).** `config/.bitbucket-config.json` → `instances.kai.api_token` returns `"Token is invalid, expired, or not supported for this endpoint"`. Verified via session history this is NOT scope-related and NOT a decrypt-secrets.sh clobber: traced this exact token in the 2026-07-07 session transcript where it returned real PR data (#193, 16 comments) — re-ran the identical request today with the identical token/method and got the same 401. Token has genuinely died on Atlassian's side sometime between 2026-07-07 and today, despite an expected 2027 expiry. Cannot verify PR #513/#485 review-comment reply status live. **Needs the user to check https://id.atlassian.com/manage-profile/security/api-tokens directly — token may have been revoked/rotated; consider a Bitbucket-native App Password instead of an Atlassian id.atlassian.com API token for longer-term stability, since this token has already needed replacement once before (2026-07-07, first two tokens lacked scope).**
 
 **Trello:** Maddy gate — holding off auto-complete given the untracked client bug + PR check blocker above; recommend keeping open until the new bug gets a ticket and Bitbucket access is restored.
 
