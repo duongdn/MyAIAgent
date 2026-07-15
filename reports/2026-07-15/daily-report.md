@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Sheets — KhanhHH | 1.5h Jul 14 (Elena only), well below 8h target, no leave note |
-| 2 | Sheets — LeNH | 0h Jul 14, no leave — strict <1h=alert threshold |
+| 2 | Sheets — LeNH | ~~0h~~ **8h** — CORRECTED: Workstream re-scan found 8h (Portfolio - James Diamond). Initial scan had same transient per-project fetch bug as 260706/260707. |
 | 3 | Matrix — Risk report | binhnt Maddy risk report (3/7) — DuongDN confirmed "no new info", cus not raising it |
 | 4 | Slack — Baamboozle | Site 504 Gateway Timeout at 7AM EST, Jamieson reporting emails coming in — resolved via hotfix |
 | 5 | Slack — Baamboozle | skjamie25 asked Carrick to revert game selection screen layout (full-width on mobile) — Carrick responded with padding fix approach |
@@ -96,8 +96,8 @@ Note: Scrin tracks Nick (TuanNT), not TuanNT the developer. 8h logged confirms N
 | LongVV | 6h | WS Portfolio-James Diamond (6h) | ⚠️ Under 8h, no leave note, but part-time (40h/week) — single-day under is normal unless weekly < 40h |
 | PhucVT | 8h | WS Crystal lang (8h) | ✅ OK |
 | TuanNT | 16h | Sheet Paturevision (8h) + Elena (8h) | ✅ OK (exceeds target) |
-| KhanhHH | 1.5h | Sheet Elena (1.5h) only | 🔴 1.5h well below 8h, no leave note. No Workstream hours found. Aysar gate affected. |
-| LeNH | 0h | — | 🔴 0h across all sources, no leave. Strict <1h=alert rule. |
+| KhanhHH | 1.5h | Sheet Elena (1.5h) only | 🔴 1.5h well below 8h, no leave. No Workstream hours found (verified ALL 20 projects — 0 rows for KhanhHH). Aysar gate affected. |
+| LeNH | ~~0h~~ **8h** | WS Portfolio - James Diamond (8h) | ~~🔴 0h~~ ✅ **CORRECTED:** LeNH logged 8h on James Diamond via Workstream. Initial scan missed it (same transient per-project fetch bug from 260706/260707). Report updated. |
 
 ### Workstream needsReview
 
@@ -177,7 +177,7 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 | Philip | MS Teams | Needs dedicated check |
 | Ohcleo | OhCleo Slack | 0 msgs → complete |
 | Arthur - Meta-Stamp | Arthur (6 sources) | See Arthur section below |
-| Blair Brown - Peptide Clyde | sheets lenh | LeNH 0h → ⚠️ incomplete |
+| Blair Brown - Peptide Clyde | sheets lenh | ~~LeNH 0h~~ LeNH 8h (James Diamond WS — includes Blair Brown) → ✅ can complete |
 
 ---
 
@@ -185,7 +185,7 @@ No ticket entries in week — LongVV hasn't logged any Maddy-specific JIRA entri
 
 (Print only — no --send-reminder flag)
 
-- **LeNH**: 0h Jul 14, no leave — needs reminder (not sent)
+- **LeNH**: ~~0h~~ **8h** — CORRECTED: has hours on WS. No reminder needed.
 - **KhanhHH**: 1.5h Jul 14 — below target but not 0h, noted not sent
 
 ---
