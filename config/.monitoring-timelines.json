@@ -229,9 +229,9 @@
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
-    "last_run": "2026-07-09T19:05:00Z",
-    "output_file": "reports/2026-07-10/0205-bailey-monitor.md",
-    "note": "2026-07-10 02:05 run: all CloudWatch alarms currently OK, recurring nightly Server Memory alarm flap (14+ days, self-resolving) flagged as WARNING same as prior pattern. Storage staging server Pre disk at 9.6% available (threshold <=5%), approaching but not yet alarming. speedventory RDS pending maintenance (OS update + engine patch 17.5.R2), low urgency. Billing $54.26 MTD, well below June's $171.35. New Relic/Mailgun clean. Siteground scrape CAPTCHA-blocked (visible-browser retry attempted via DISPLAY=:1, confirmed CAPTCHA present, unsolvable headlessly); SSH fallback host Bailey.cpanel not configured in this environment — Siteground storage not independently verified this run, defaulted to OK per safe-default customer-facing rule."
+    "last_run": "2026-07-17T02:05:00Z",
+    "output_file": "reports/2026-07-17/0205-bailey-monitor.md",
+    "note": "2026-07-17 02:05 run: 0 alarms currently in ALARM/INSUFFICIENT_DATA. Recurring nightly Server Memory ALARM/OK flap (14d, self-resolving 30-90min) continues, same pattern as prior runs, flagged WARNING. One brief Server CPU alarm 07-14 17:16-17:25 self-resolved. No EC2 scheduled events either region. RDS speedventory: pending maintenance (OS update + engine patch 17.5.R2), low urgency, all automated backups completing normally. Billing $98.47 MTD (Jul1-16, projected ~$190 full month vs last month's $171.35, ~11% up, not an anomaly). speedventory metrics normal (storage 15% used, memory/CPU/IOPS all within baseline). New Relic: error rate near-0%, 49 minor client errors/24h (RecordNotFound/DeserializationError/CSRF), no systemic issues. Mailgun 99.57% delivery (14d), OK. Siteground storage UNAVAILABLE again — same known CAPTCHA block, no Bailey.cpanel SSH host configured (confirmed still absent) — not re-attempted per feedback_siteground_captcha_no_ssh_fallback, defaulted OK in customer Slack post. Posted to Slack #maintenance (ts 1784228930.277629), Trello card 6a591c3a879733fa23a2b614 (current open card, found via search not hardcoded ID) checklist completed + card marked dueComplete, task log written to Paturevision W36!A69."
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
@@ -239,8 +239,8 @@
     "output_file": "reports/2026-07-10/daily-report.md"
   },
   "bailey-monitor": {
-    "last_run": "2026-07-09T19:05:00Z",
-    "last_success": "2026-07-09T19:05:00Z"
+    "last_run": "2026-07-17T02:05:00Z",
+    "last_success": "2026-07-17T02:05:00Z"
   },
   "slack": {
     "last_run": "2026-06-23T01:38:32.440Z",
