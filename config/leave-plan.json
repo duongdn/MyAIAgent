@@ -1,6 +1,6 @@
 {
   "description": "Approved leave dates for monitored PHP team only. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
-  "last_updated": "2026-07-15T08:37:06+07:00",
+  "last_updated": "2026-07-18T06:08:17+07:00",
   "monitored_devs": [
     "LongVV",
     "PhucVT",
@@ -394,6 +394,21 @@
       "approved_by": "duongdn@nustechnology.com",
       "approved_at": "2026-07-13T09:43:00+07:00",
       "email_subject": "KhanhHH - Đơn xin nghỉ phép ngày 10/07/2026"
+    },
+    {
+      "id": "longvv-2026-07-17",
+      "dev_id": "LongVV",
+      "dev_email": "longvv@nustechnology.com",
+      "dates": [
+        "2026-07-17"
+      ],
+      "type": "full",
+      "reason": "Em đi khám bệnh ạ",
+      "status": "pending",
+      "requested_at": "2026-07-16T01:49:48.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "LongVV_Đơn xin phép nghỉ_Ngày 17/07/2026"
     }
   ]
 }
