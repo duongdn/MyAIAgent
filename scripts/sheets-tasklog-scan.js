@@ -163,7 +163,7 @@ async function ensureWorkstreamToken() {
   if (res.status === 200) return config;
   process.stderr.write("  [workstream] token expired, refreshing via SSO...\n");
   const { execSync } = require("child_process");
-  execSync(`DISPLAY=:1 node ${path.join(__dirname, "workstream-login.js")}`, { stdio: "inherit" });
+  execSync(`DISPLAY=:1 node ${path.join(__dirname, "workstream-login.js")}`, { stdio: "inherit", timeout: 60000 });
   return JSON.parse(fs.readFileSync(WS_CONFIG, "utf8"));
 }
 
@@ -224,6 +224,10 @@ async function main() {
 
   process.stderr.write(`Live-querying Workstream project list for ${dateStr}...\n`);
   let wsProjects = [];
+  if (process.env.SKIP_WORKSTREAM) {
+    process.stderr.write(`  [workstream] SKIP_WORKSTREAM set — Sheets-only results follow\n`);
+    for (const dev of devs) result[dev].workstreamUnavailable = true;
+  } else
   try {
     const wsConfig = await ensureWorkstreamToken();
     wsProjects = await listWorkstreamProjects(wsConfig, dateStr);
