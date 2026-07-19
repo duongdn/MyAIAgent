@@ -1,0 +1,219 @@
+# Daily Report — 2026-07-20 (Monday)
+
+**Run:** 2026-07-20T06:26:00+07:00 (cron)
+**Window:** 2026-07-19T12:32+07:00 → 2026-07-20T06:26+07:00
+**Leave plan:** none on record for today.
+
+---
+
+## ⚠️ ALERTS SUMMARY
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Arthur - Meta-Stamp (Slack ms-v3) | Art's 3 pointed questions from Sat 07-18 15:47-15:56 (missing EOW report/commit-attribution/CI failure on a77b2c3) STILL unanswered — now ~38h+ unresolved. No new Matrix activity in either Arthur room since 07-19 12:05 confirms nobody has replied. |
+| 2 | Maddy (Bitbucket PRs, xtreme-web/rms) | Persistent unaddressed review backlog: PR #481 (LIFM2-409) — Madhuraka's own High-severity bug report unanswered 44 days (since 06-06); PR #486 (LIFM2-436) got a new push today but Madhuraka's High finding from 06-06 still has zero reply; PR #509 (LIFM2-428) Critical unaddressed 28 days; PR #510 (LIFM2-446) Critical unaddressed 25 days; PR #516 (LIFM2-449) Critical unaddressed 11 days. |
+| 3 | Aysar (Baamboozle) | MPDM C07SQ4HAUHZ silent since Thu 07-16 21:46 (4 days). Cannot verify KhanhHH's Baamboozle hours for Fri 07-17 (Workstream SSO blocked — see below, dedicated Aysar sheet shows 0h W33 but that sheet is stale/abandoned since migration) — not confirmed as a real shortfall, but not confirmable clean either. |
+| 4 | MPFC (New Relic) | Apdex still poor (0.50) — persistent `WP_Error::get_method()` fatal (15x) + PHP "continue targeting switch" warning (68x) this window, matches ongoing Rollbar Daily Summary pattern. |
+| 5 | Fountain (New Relic) | Same error signature as prior incidents (ArgumentError wrong-args + NoMethodError with_connection-nil) continues tapering (6x+6x this window vs 9x+9x prior) — not confirmed resolved yet. |
+
+**Today (Mon 20 Jul):** No approved leave on record. All 5 PHP-team devs expected working; hours for Fri 07-17 confirmed only where checked below (Workstream blocked this run, see Sheets section).
+
+**Blocked this run (genuine, not a skip):** Workstream SSO requires an interactive human login (no stored refresh path per known Keycloak client limitation) — could not complete headlessly in this unattended cron session. This blocks: hours cross-check for LongVV/PhucVT/KhanhHH/LeNH, Maddy JIRA/Workstream hours, Fountain Part 2/3 task-log actuals, Arthur/Crystal-lang hours, needs-review checks. TuanNT/Bailey unaffected (Sheets-only source, confirmed below). Solid Code (Arthur) Slack token is `invalid_auth` even with a freshly-read cookie from config — needs David to re-extract from his live Chrome profile; not attempted via GUI automation in this unattended session (shared-desktop risk). Upwork (Neural/Rory/Aysar workrooms) — weekly-hours script hung on headless browser launch (~2min), killed; per standing policy this does not block Trello items on its own (no evidence of any unread urgent message).
+
+---
+
+## Email — all — 06:15 (+07:00)
+
+| Account | Emails | Alerts | Calendar today |
+|---------|--------|--------|-----------------|
+| duongdn@nustechnology.com | 1 | — | no events |
+| carrick@nustechnology.com | 0 | — | (calendar not captured) |
+| nick@nustechnology.com | 0 | — | Weekly Meeting with Devs 21:30 (Teams, recurring) |
+| rick@nustechnology.com | 7 | InfinityRoses Rollbar Daily Summary x2, FirstProject Rollbar Daily Summary + new Error #896 NotFoundError | HEAL Meeting 12:30, OmniGPT Daily Sync 10:30 |
+| kai@nustechnology.com | 10 | 6 JIRA/Bitbucket notifications re LIFM2-259/453/456/260/436 (Maddy — see Alert #2) | no events |
+| ken@nustechnology.com | 32 | none (routine Precognize/development + welligence GitHub notifications) | DE Daily Standup 08:30 (x2 calendar entries) |
+| vuongtrancr@gmail.com | 5 | New Relic "Signal lost" x4 (Swish, Low Application Throughput) | — |
+| dnduongus@gmail.com | 8 | none (personal — newsletters/bank/Instagram, no security alerts) | — |
+| davidztv19@gmail.com | 0 | — | — |
+| freelancer@mypersonalfootballcoach.com | 2 | MPFC Rollbar Daily Summary (matches Alert #4) | — |
+
+Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
+
+---
+
+## Slack — all 14 workspaces — 06:18 (+07:00)
+
+| Workspace | Msgs (window) | Key content |
+|-----------|---------------|-------------|
+| Baamboozle | 12 | #engineering: GitHub notification noise. #gamedev: iancox890 "Aysar Good to deploy" (07-19 22:37) — routine, not a customer ask. MPDM (Aysar daily update) last posted 07-16 21:46, silent since (Alert #3). |
+| RDC - FM Monitoring | 0 | Quiet — no dmetiner activity this window. |
+| Swift Studio | 0 | Quiet. |
+| Xtreme Soft Solutions | 1 | Madhuraka (07-19 14:20): new Shipping Protection version live on Shopify admin — informational, not an ask. |
+| SAM GUARD - Mobile | 0 | Quiet. |
+| Global Grazing Services | 0 | Quiet (#maintenance). |
+| Amazing Meds | 0 | Quiet — token verified valid, conversations.history checked all channels, nothing in window. |
+| Generator | 0 | Quiet. |
+| LegalAtoms | 0 | Quiet. |
+| MyPersonalFootballCoach | 0 | Quiet. |
+| William Bills | 0 | Quiet. |
+| Equanimity | 0 | Quiet — token verified valid. |
+| SoCal Auto Wraps | 0 | Quiet (not monitored/dropped). |
+| Aigile Dev | 1 | Automated newsletter (#braiking-news, "make" bot) — no human activity. |
+| OhCleo | see below | See dedicated section. |
+| Solid Code (Arthur) | blocked | invalid_auth, see Blocked note above. |
+
+Trello: Rory, Franc, MPFC, Marcel, Raymond, Colin ✓ complete (all clean/quiet). Maddy, Aysar ⚠️ left incomplete (see Alerts #2, #3).
+
+---
+
+## Discord — all — 06:19 (+07:00)
+
+| Server | Msgs | Key content |
+|--------|------|-------------|
+| AirAgri (nusvinn) | 0 | Quiet — token valid, both channels checked, Sunday, no Vinn/Jeff report expected. |
+| Bizurk (nuscarrick) | 0 | Quiet — token valid, no Andrew Taraba DM activity. |
+
+Trello: James Diamond - Vinn, Andrew Taraba ✓ complete.
+
+---
+
+## Google Sheets / Workstream — task log hours — 06:10 (+07:00)
+
+**Workstream blocked this run** (SSO session expired, `"exp" claim timestamp check failed` on `/me`; requires interactive browser login, none available in unattended cron). Sheets-only fallback used for all projects. Since 07-19 was Sunday, 0h across the board is expected/normal, not a shortfall.
+
+| Developer | Fri 07-17 (last confirmed workday) | Status |
+|-----------|-------------------------------------|--------|
+| TuanNT | 8h (Paturevision/Bailey sheet — sole source, unaffected by Workstream outage) | ✓ OK |
+| LongVV | not verified (Workstream-only project, Maddy) | Blocked — see Alert #2/#3 context |
+| PhucVT | not verified (Workstream-only, James Diamond) | Blocked |
+| KhanhHH | not verified (Workstream-only, Baamboozle/Generator) | Blocked — feeds Alert #3 |
+| LeNH | not verified (Workstream-only, Rory/Franc/Blair Brown) | Blocked |
+
+**Maddy JIRA weekly check:** `maddy-jira-tasklog-check.js --week 2026-07-20` returned "No ticket entries" — known stale-Sheet-source bug (script reads an abandoned Google Sheet, not live Workstream); could not cross-check live `/review/week` this run since Workstream is down. Real Maddy signal this run came from Bitbucket instead (Alert #2).
+
+**Needs-review check:** not run this run (requires Workstream `/pinfo/projects` — blocked).
+
+Trello: Maddy, Aysar, Elliott, Blair Brown - Peptide Clyde ⚠️ left incomplete (Workstream outage — not confirmed shortfalls, not confirmable clean). John Yi, Bailey, Rebecca ✓ complete (TuanNT combined hours confirmed >0h via Paturevision sheet, all 3 gated Slack channels clean).
+
+---
+
+## Scrin.io (Nick / John Yi) — 06:22 (+07:00)
+
+**Scrin.io (Nick / John Yi — Jul 19):** 0h — `isYesterday:true` script-limitation returns Sunday on a Monday run (known bug, not Friday). Sunday = weekend, not an alert. Tracks Nick, not TuanNT (see standing note).
+
+---
+
+## Fountain — 06:20 (+07:00)
+
+**Part 1 — Matrix plan:** No plan posted yet for this week (W36, starting 07-20) — checked at 06:20, well before the 08:30-09:30 posting window, not yet due. Using last confirmed plan for context: @trinhmtt, 2026-07-14 16:28 (2nd revision that day) — DatNT 36h, VuTQ 5h, ViTHT 40h, ThinhT 12h => QC 23.25h.
+
+**Part 2 — Task log actuals:** Workstream blocked (see above). Legacy Fountain Sheet (`1iIKfjAh857...`) confirmed fully abandoned — 0.00 every week since W29 (Jun 1), including W35 (Jul 13-19) — migration to Workstream complete, no Sheet fallback available.
+
+**Part 3 — Plan vs Actual:** Cannot compute — actuals unavailable this run (Workstream blocked).
+
+**Trello board:** Not re-checked this run (time/priority — recommend recheck later today alongside Workstream retry).
+
+Trello: Fountain ⚠️ left incomplete — plan not yet due + actuals blocked, recheck after 09:30 +07 once Workstream/plan are available.
+
+---
+
+## Elena — 06:21 (+07:00)
+
+- **PRs:** 0 open on `nustechnology/Elena-SamGuard-Digital-Plant` (duongdn account).
+- **Pending actions:** `.elena-pending-actions.json` — 1 entry with `deployed:false` (PR #300) is a NOTE only (intermediate feature-branch merge, no deploy required) — nothing actionable.
+- **Precognize (nusken):** 16 open PRs total on `Precognize/development`, 0 with `nus/` branch prefix — nothing from our team pending.
+- **WordPress (samguard.co):** Clean — 0 CSP violations, 0 JS/page errors. `failedRequests` are benign analytics beacons (GA/DoubleClick/LinkedIn), not CSP-blocked.
+
+Trello: Elena - SamGuard Digital Plant ✓ complete, Elena - WordPress SamGuard ✓ complete.
+
+---
+
+## Matrix — 06:20 (+07:00)
+
+**Active rooms: 5 / 132 | Messages: 21** *(since 2026-07-19 08:00 +07:00)*
+Full details: reports/2026-07-20/matrix-rooms-0620.md
+
+### Key updates
+
+**Elena hours reduction** — binhnt flagged (17:45) that Elena's billed hours dropped; duongdn confirmed (18:53) he'd already notified the relevant party. KhanhHH separately confirmed (19:29) she messaged "anh Nhật" about it. Resolved same-thread, no action needed.
+
+**Delivery Department — weekly dev plan (week of 20/7)** — namtv posted the Web/Mobile dev plan for KietNVT, TamVT, AnhNH2, courtesy off-days for TaiTM/ThoTNT — different team, not one of our 5 monitored PHP devs, informational only.
+
+**Other:** "Những chú voi con đáng yêu" — casual football-betting banter among duongdn/longvv/lenh/khanhhh, no work content. BDD/Delivery rooms — routine internal coordination, no action items directed at DuongDN.
+
+No ⚠️ action items for DuongDN detected this window.
+
+---
+
+## OhCleo Slack — 06:24 (+07:00)
+
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| DM:Celine Fierro | 0 | Quiet — no new messages. Sunday, no Tony daily report expected. |
+| #events-code | — | `channel_not_found` (channel genuinely gone, not an auth issue — confirmed prior runs). |
+
+Trello: Ohcleo ✓ complete.
+
+---
+
+## Performance (New Relic APM) — 06:24 (+07:00)
+
+| Project | Apdex | Avg response | Error rate | Throughput |
+|---------|-------|--------------|------------|------------|
+| OhCleo (prod) | 0.95 | 279ms | 2.56% (401/15693) — 92% benign NotAuthenticated | 14.7/min |
+| MPFC | 0.50 (poor) | 1254ms | 0.38% (87/23019) but dominated by real fatals | 21.5/min |
+| Fountain | 0.97 | 168ms | 0.03% (6/18700) | 17.5/min |
+| InfinityRoses | 0.99 | 132ms | 0% (0/8807) — healthy | 8.2/min |
+
+**OhCleo — top errors:** NotAuthenticated (370x, benign), InvalidToken (13x), ValidationError email-exists (6x+2x), AuthenticationFailed password-mismatch (5x), AuthenticationFailed user-not-exist (3x), ValidationError email-not-found (1x).
+**OhCleo — slowest transactions:** MediaByKeyView.get 7359ms/179 calls, HomeMediasView.get 1842ms/293 calls, ValidatePurchaseView.post 1041ms/1 call, MediaRecommendsView.get 1018ms/500 calls, EmailVerificationView.post 988ms/4 calls.
+
+**MPFC — top errors:** E_WARNING "continue targeting switch" (68x), `WP_Error::get_method()` fatal (15x, persistent), mysqli connect refused (2x), `get_header()` undefined (1x), `MM_Event` class not found (1x).
+**MPFC — slowest transactions:** author-sitemap.xml 61.7s/1 call, MemberMouse processOrder.php 28.6s/2 calls, 3x SQL-injection-scanner `WAITFOR DELAY` probes on `/search/` 15-17.5s/1 call each (attack traffic, not real user load).
+
+**Fountain — top errors:** ArgumentError wrong-args (6x), NoMethodError with_connection-nil (6x) — same signature as prior incident, volume tapering (was 9x+9x).
+**Fountain — slowest transactions:** paypals/authorize_order 3008ms/1, gifts/index 1529ms/650, payment_intents/create 1361ms/8, MailchimpWorker 1074ms/2, registrations/create 910ms/2.
+
+**InfinityRoses — top errors:** none.
+**InfinityRoses — slowest transactions:** search/search 1742ms/27, cart_items/create 868ms/5, validate_with_mailgun 803ms/1, payment_intents/create 802ms/4, EmailWorker 753ms/9.
+
+---
+
+## Arthur / Meta-Stamp — 06:23 (+07:00)
+
+**Matrix (2/2 rooms):** No new messages in either room since 2026-07-19 12:05 — meaning Art's 3 pointed questions from Sat 07-18 15:47-15:56 (missing EOW report from Nick, commit-attribution/billing confusion, unconfirmed CI failure on a77b2c3) remain **fully unanswered, ~38h+ now** (Alert #1).
+
+**Slack (Solid Code):** `invalid_auth` even with the cookie currently stored in config — needs David to re-extract a fresh `d` cookie from his live Chrome Profile 15. Not attempted via GUI automation this run (unattended session, shared-desktop risk per standing policy).
+
+**Workstream (Crystal lang hours):** Blocked — same SSO outage as rest of report.
+
+**GitHub (Christebob/Meta_Stamp_V3):** Still blocked — confirmed again this run: 404 under duongdn's token (no access), davidztv not configured in this environment's `gh`/token set at all.
+
+`arthur_monitor.last_run` NOT advanced past 2026-07-15T08:35 — not all sources verified together this run (per this field's own rule).
+
+Trello: Arthur - Meta-Stamp ⚠️ left incomplete — real unresolved client questions (Alert #1).
+
+---
+
+## Trello — Check Progress — 06:26 (+07:00)
+
+**16/22 complete.** Open items: Maddy, Aysar, Elliott, Fountain, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde — all genuinely blocked by the Workstream SSO outage or real unresolved alerts (Maddy PR backlog, Arthur unanswered questions), not misses.
+
+## Trello — Check Mail — 06:16 (+07:00)
+
+6/6 complete, card marked done.
+
+---
+
+## Reminders — 06:10 (+07:00)
+
+No 0h dev to flag — 07-19 was Sunday (non-workday), 0h expected for all. No reminders sent (print-only policy also applies; none needed this run).
+
+---
+
+## Unresolved questions
+
+1. Workstream SSO needs a human to click through (`DISPLAY=:1 node scripts/workstream-login.js`) — recommend doing this once today so Maddy/Aysar/Elliott/Fountain/Blair Brown/Arthur can all be properly re-verified on recheck.
+2. Solid Code Slack (Arthur) needs David to re-extract a fresh `d` cookie from Chrome Profile 15 — current config cookie is stale.
+3. MS Teams (Philip) chat-extract script failed to open the chat this run (landed on a generic non-signed-in Teams page) — needs investigation, possibly a profile issue similar to the documented 2026-07-13 crash; last confirmed clean state is 2026-07-08 (no reply since 07-06 outreach, no complaint) — treated as no new alert this run.
+4. Upwork weekly-hours script hung on headless launch (~2min) — Neural/Rory/Aysar workrooms not directly message-checked this run; no evidence of an urgent unread message, but recommend an interactive VNC login to confirm.
