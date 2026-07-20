@@ -179,16 +179,17 @@ MPDM C07SQ4HAUHZ last posted 07-16 21:46 — **5 days silent**. KhanhHH logged 7
 
 ## Neural Contract (Upwork #38901192)
 
-**⚠️ Ko thể check tự động — Upwork session expired, redirect login, CAPTCHA block.**
+**🔴 Ko thể check — Upwork Cloudflare block trên both login + workroom.**
 
 | Source | Status | Detail |
 |--------|--------|--------|
-| Upwork workroom | 🔴 Session expired | Cả Profile 19 + Default Chrome + fresh login đều redirect login — CAPTCHA/Cloudflare (known limitation) |
-| Workstream | 0h | TuanNT 0.5h W35 (external dev, ko task log) |
+| Upwork workroom | 🔴 Cloudflare block | Login form submit → redirect login (auth fail). Direct workroom → Cloudflare challenge. CAPTCHA không bypass được headless. |
+| Workstream | 0h | TuanNT 0.5h W35 (external) |
 
-**Cần interactive VNC login:** `bash scripts/vnc-login-session.sh upwork` để login carrick account, sau đó check Neural workroom messages.
+**Cần làm:** `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick`
+Sau đó mở tay tab mới → `https://www.upwork.com/nx/wm/workroom/38901192/messages` → xem có messages mới ko → báo kết quả.
 
-**Trello:** ⚠️ incomplete — chờ user VNC login verify.
+**Trello:** ⚠️ incomplete.
 
 ---
 
