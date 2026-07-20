@@ -140,6 +140,22 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,822,580,792 gross / 7,733,577,088 net (~0.95% higher) — same unrealized-P&L gap pattern as prior snapshots, not a new data bug. Net worth down 60.7M vs 09/07 (7,721,419,496 -> 7,660,677,088) — cross-checked against July transactions: net cash flow this month is -59,766,895 (140M expense incl. 61M Hoc phi + 43M Bieu tang on VCB Visa, vs 80.2M income), matches the drop almost exactly, not a data bug. Investment up ~14M (VCBS growth). Savings down ~2.6M (tikcop 1m matured, rolled into new 'tikcop 3 month' 100M book; small net decrease from the old 102.6M balance). Gold down 3M (price fluctuation). Liquid down 41.1M (Tikop -50M, vcb spend). Debt up 28M (VCB Visa 61M->89M, new Bieu tang charge). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded, still unresolved by MISA."
+    },
+    {
+      "date": "2026-07-20",
+      "label": "20/07",
+      "net_worth": 7646237607,
+      "gross_assets": 7808137607,
+      "liabilities": 89000000,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 737500000,
+        "investment": 2208923840,
+        "savings": 1038109170,
+        "liquid": 303604597
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,808,137,607 gross / 7,719,137,607 net (~0.95% higher) — same unrealized-P&L gap pattern as prior snapshots, not a new data bug. Net worth down 14.4M vs 14/07 (7,660,677,088 -> 7,646,237,607) over 6 days. Investment wallets (VCBS/VCBF/FPTS/Finhay) fully unchanged — no new Cho vay/Thu no activity this period. Gold down 4.5M (price fluctuation). Liquid down ~10.0M (routine spend: Di lai, Xang xe, Du lich, Vui choi giai tri). Savings up ~35K (interest accrual only). VCB Visa unchanged at 89M (no new charges since 07-11). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded, still unresolved by MISA."
     }
   ]
 }
