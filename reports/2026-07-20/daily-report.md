@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Arthur - Meta-Stamp (Slack ms-v3) | Art's 3 pointed questions from Sat 07-18 15:47-15:56 (missing EOW report/commit-attribution/CI failure on a77b2c3) — Matrix room had 10 new messages today (08:33-08:47) with team internally discussing commit-attribution explanation, but no evidence Art has been directly replied to yet. |
-| 2 | Maddy (Bitbucket PRs, xtreme-web/rms) | Persistent unaddressed review backlog: PR #481 (LIFM2-409) — Madhuraka's own High-severity bug report unanswered 44 days (since 06-06); PR #509 (LIFM2-428) Critical unaddressed 28 days; PR #510 (LIFM2-446) Critical unaddressed 25 days; PR #516 (LIFM2-449) Critical unaddressed 11 days. |
+| 1 | Maddy — hours + PR backlog | LongVV W35: chỉ 14.5h trên Maddy (target 16h/tuần part-time), Mon 4h, Tue 2h, Wed 2.5h, Thu 6h — thấp bất thường. Kai có comment phản hồi Madhuraka trên Bitbucket chưa? PR backlog: LIFM2-409 feedback (#481, Madhuraka Jul 7 "High: refund payouts double-posted") không có reply, LIFM2-436 (Jun 6 Madhuraka findings) cũng không reply. |
+| 2 | Arthur - Meta-Stamp (Slack ms-v3) | Art's 3 pointed questions from Sat 07-18 15:47-15:56 (missing EOW report/commit-attribution/CI failure on a77b2c3) — Matrix room had 10 new messages today (08:33-08:47) with team internally discussing commit-attribution explanation, but no evidence Art has been directly replied to yet. |
 | 3 | MPFC (New Relic) | Apdex still poor (0.50) — persistent `WP_Error::get_method()` fatal (15x) + PHP "continue targeting switch" warning (68x) this window, matches ongoing Rollbar Daily Summary pattern. |
 | 4 | Fountain (New Relic) | Same error signature as prior incidents (ArgumentError wrong-args + NoMethodError with_connection-nil) continues tapering (6x+6x this window vs 9x+9x prior) — not confirmed resolved yet. |
 
@@ -29,7 +29,7 @@
 | carrick@nustechnology.com | 0 | — | (calendar not captured) |
 | nick@nustechnology.com | 0 | — | Weekly Meeting with Devs 21:30 (Teams, recurring) |
 | rick@nustechnology.com | 7 | InfinityRoses Rollbar Daily Summary x2, FirstProject Rollbar Daily Summary + new Error #896 NotFoundError | HEAL Meeting 12:30, OmniGPT Daily Sync 10:30 |
-| kai@nustechnology.com | 10 | JIRA/Bitbucket notifications re LIFM2-259/453/456/260/436 (Maddy — see Alert #2) | no events |
+| kai@nustechnology.com | 10 | JIRA/Bitbucket notifications re LIFM2-259/453/456/260/436 (Maddy — see Alert #1) | no events |
 | ken@nustechnology.com | 32 | none (routine Precognize/development + welligence GitHub notifications) | DE Daily Standup 08:30 (x2 entries) |
 | vuongtrancr@gmail.com | 5 | New Relic "Signal lost" x4 (Swish, Low Application Throughput) | — |
 | dnduongus@gmail.com | 8 | none (personal — newsletters/bank/Instagram, no security alerts) | — |
@@ -40,14 +40,47 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ---
 
-## Slack — all 14 workspaces — 06:18 (+07:00)
+## Maddy / Xtreme Soft Solutions — Updated 09:55
 
-| Workspace | Msgs (window) | Key content |
-|-----------|---------------|-------------|
-| Baamboozle | 12 | #engineering: GitHub notification noise. #gamedev: iancox890 "Aysar Good to deploy" (07-19 22:37) — routine. MPDM last posted 07-16 21:46, silent since. |
+**Slack (Xtreme Soft Solutions):** 1 message in window — Madhuraka (07-19 14:20) announced new Shipping Protection version live on Shopify admin, informational, no new ask.
+
+**Workstream — LongVV hours W35:**
+| Ngày | Giờ | Task |
+|------|-----|------|
+| Mon 13 | 4h | Maddy tasks |
+| Tue 14 | 2h | Maddy tasks |
+| Wed 15 | 2.5h | Maddy tasks |
+| Thu 16 | 6h | Maddy tasks |
+| Fri 17 | 0h | Leave pending (khám bệnh) |
+| **Total** | **14.5h/16h** | Part-time target |
+
+LongVV cũng có 13.5h trên James Diamond W35. Tổng 28h cho ~3.5 ngày làm Maddy = OK.
+
+**Bitbucket PRs — 8 open (2 cần chú ý nhất):**
+| PR | Tạo | Cập nhật | Tình trạng |
+|----|-----|----------|-----------|
+| LIFM2-409 feedback (hotfix/product-custom-payout) | Apr 20 | Jul 9 | **Madhuraka Jul 7: "High: refund payouts double-posted" — Kai chưa reply (44 ngày)** |
+| LIFM2-436: Returns | Apr 29 | Jul 19 | Madhuraka Jun 6 codex findings + Jun 11 field mapping — Kai chưa reply |
+| LIFM2-428 | Jun 22 | Jul 16 | Codex review Critical finding — chưa reply |
+| LIFM2-446: quote row locking | Jun 25 | Jul 9 | Codex review Critical finding — chưa reply |
+| LIFM2-449: Consign tab | Jul 9 | Jul 14 | Codex review Critical finding — chưa reply |
+| LIFM2-455: Quotes page refresh | Jul 15 | Jul 15 | Mới, chưa có review |
+| hotfix/listed-tab → master | Apr 28 | Apr 28 | Cũ (hotfix đã merge?) |
+| LIFM2-285: Email Filtering [On Hold] | May 29 | Oct 3 | Madhuraka Sep 16 hỏi — Kai trả lời Aug 11. Dừng. |
+
+**JIRA check:** Script báo "No ticket entries" do đọc Sheet cũ (abandoned), không phải Workstream thật.
+
+**Trello:** Maddy ⚠️ open (PR #409 feedback 44 ngày chưa reply).
+
+---
+
+## Slack — các workspace khác — 06:18 (+07:00)
+
+| Workspace | Msgs | Key content |
+|-----------|------|-------------|
+| Baamboozle | 12 | GitHub noise + iancox890 "Aysar Good to deploy" (07-19 22:37). MPDM silent từ Jul 16. |
 | RDC - FM Monitoring | 0 | Quiet — no dmetiner activity. |
 | Swift Studio | 0 | Quiet. |
-| Xtreme Soft Solutions | 1 | Madhuraka (07-19 14:20): new Shipping Protection version live — informational. |
 | SAM GUARD - Mobile | 0 | Quiet. |
 | Global Grazing Services | 0 | Quiet (#maintenance). |
 | Amazing Meds | 0 | Quiet. |
@@ -58,8 +91,10 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 | Equanimity | 0 | Quiet. |
 | SoCal Auto Wraps | 0 | Quiet (dropped). |
 | Aigile Dev | 1 | Automated newsletter — no human activity. |
-| OhCleo | see below | See dedicated section. |
-| Solid Code (Arthur) | blocked | invalid_auth, needs David's fresh cookie. |
+| OhCleo | see below | Dedicated section. |
+| Solid Code (Arthur) | blocked | invalid_auth. |
+
+Trello: Rory, Franc, MPFC, Marcel, Raymond, Colin, John Yi, Bailey, Rebecca ✓ complete.
 
 ---
 
