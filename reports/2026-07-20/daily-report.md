@@ -88,13 +88,31 @@ Trello: James Diamond - Vinn, Andrew Taraba ✓ complete.
 | PhucVT | James Diamond (reviewer) | — (reviewer, hours charged separately) | — | — |
 | TienND | Crystal lang | 25.77h | Mon 8.27, Tue 8, Thu 8, Fri 1.5 | ✓ OK |
 | TuanNT | Bailey/Paturevision (Sheet) | 8h Fri 07-17 | (sole source, Sheet-only project) | ✓ OK (unchanged) |
-| KhanhHH | Baamboozle | 7.83h | Mon 2.33, Tue 1.33, Wed 1, Thu 3.17 — no Fri | ⚠️ Low overall (see below) |
-| KhanhHH | Generator (Elliott) | 16h | Mon 5.67, Tue 5.17, Wed 5.17 — no Fri | ✓ Acceptable |
-| KhanhHH | **Combined total** | **23.83h** | Below 40h target but spread across 2 active projects | Not a confirmed shortfall |
+| KhanhHH | Aysar (Baamboozle) | 7h50 | Mon 2.33, Tue 1.33, Wed 1, Thu 3.17 | ✓ Confirmed |
+| KhanhHH | Francesca (Franc/RDC) | 13h50 | (Workstream Radio Data Center) | ✓ OK |
+| KhanhHH | Elliott (Generator) | 16h | Mon 5.67, Tue 5.17, Wed 5.17 | ✓ OK |
+| KhanhHH | Elena | 2h20 | (user confirmed) | ✓ OK |
+| KhanhHH | **Combined total** | **~40h** | ✅ Full time | **Confirmed by user** |
+| LongVV | **Combined (Maddy + James Diamond)** | **28h** | Maddy 14.5 + James 13.5 — pending leave Jul 17 (unapproved) | ⚠️ ~12h short of full-time 40h target |
 | LeNH | James Diamond | 40h | Mon-Thu 8h each, no Fri | ✓ Full time |
 | LeNH | Blair Brown | 0.08h | Last entry Jul 8 (0.58h that week) — project essentially dormant | ⚠️ No active hours this week |
 | NamNN/LucNT | Generator | 10h each | Various days | ✓ OK |
 | — | Blair Brown | 0h W35 | No rows/members this week at all | Dormant project — Trello item closable |
+
+### W35 Review Status — all projects
+
+| Project | Reviewer | Status |
+|---------|----------|--------|
+| Maddy | — (none) | ✅ not needed |
+| James Diamond | **PhucVT** | ✅ All Reviewed |
+| Crystal lang (Arthur) | **TienND** | ✅ All Reviewed |
+| Generator (Elliott) | **LucNT** | ✅ All Reviewed |
+| Radio Data Center (Franc) | **LeNH** | ✅ All Reviewed |
+| Baamboozle | — | ✅ not needed |
+| Colin/ETZ | **LucNT** | ✅ All Reviewed |
+| OhCleo | **DuongDN, MinhTV** | ✅ no entries |
+| Fountain | **VuTQ + DuongDN** | ⚠️ **52 pending** — full week not reviewed yet |
+| All others | — | ✅ no entries |
 
 ### Fountain W35 actuals (vs W33/W34 plan for context)
 
