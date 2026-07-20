@@ -179,13 +179,13 @@ async function main() {
     await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-dashboard.png`) });
     console.error('Dashboard screenshot saved');
 
-    // Navigate to time reports
-    console.error('Navigating to time reports...');
-    await page.goto('https://www.upwork.com/reports/time', { waitUntil: 'networkidle2', timeout: 30000 });
-    await new Promise(r => setTimeout(r, 3000));
+    // Check Neural Contract workroom messages
+    console.error('Checking Neural Contract workroom...');
+    await page.goto('https://www.upwork.com/nx/wm/workroom/38901192/messages', { waitUntil: 'networkidle2', timeout: 30000 });
+    await new Promise(r => setTimeout(r, 5000));
 
     url = page.url();
-    console.error('Reports URL:', url);
+    console.error('Workroom URL:', url);
 
     if (url.includes('login') || url.includes('account-security')) {
       console.error('Redirected to login — session invalid');
@@ -194,7 +194,20 @@ async function main() {
       process.exit(2);
     }
 
-    await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-reports.png`) });
+    // Extract workroom messages
+    const workroomText = await page.evaluate(() => document.body.innerText);
+    const workroomLines = workroomText.split('\n').filter(l => l.trim());
+    console.error(`Workroom lines: ${workroomLines.length}`);
+    const msgLines = workroomLines.filter(l => l.length > 30 && !l.includes('Upwork') && !l.includes('Cloudflare') && !l.includes('Copyright'));
+    if (msgLines.length > 0) {
+      console.error('--- Neural Workroom Messages ---');
+      msgLines.slice(0, 15).forEach(l => console.error('  ' + l));
+    } else {
+      console.error('No messages extracted. Full text:');
+      workroomLines.slice(0, 20).forEach(l => console.error('  ' + l));
+    }
+    await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-neural.png`) });
+    console.error('Neural workroom screenshot saved');
 
     // Extract and persist session cookies so future headless runs don't need re-login
     const allCookies = await page.cookies('https://www.upwork.com');
