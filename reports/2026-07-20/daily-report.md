@@ -179,17 +179,16 @@ MPDM C07SQ4HAUHZ last posted 07-16 21:46 — **5 days silent**. KhanhHH logged 7
 
 ## Neural Contract (Upwork #38901192)
 
-**⚠️ Bị Trello auto-complete sai — chưa được check trong run này.**
+**⚠️ Ko thể check tự động — Upwork session expired, redirect login, CAPTCHA block.**
 
 | Source | Status | Detail |
 |--------|--------|--------|
-| Upwork workroom | ⏳ Không check được | Script `upwork-weekly-hours.js` hung headless launch (~>35s timeout) — CAPTCHA/Cloudflare |
-| Workstream | 0h active | TuanNT: 0.5h W35 (external dev, ko có task log) |
-| Slack | — | Workspace này ko có Slack tương ứng |
+| Upwork workroom | 🔴 Session expired | Cả Profile 19 + Default Chrome + fresh login đều redirect login — CAPTCHA/Cloudflare (known limitation) |
+| Workstream | 0h | TuanNT 0.5h W35 (external dev, ko task log) |
 
-**Standing policy:** silence = never block Trello (external client, messages_only monitor). Nhưng lần này complete mà ko check — revert Trello.
+**Cần interactive VNC login:** `bash scripts/vnc-login-session.sh upwork` để login carrick account, sau đó check Neural workroom messages.
 
-**Trello:** ⚠️ đánh dấu lại incomplete — cần interactive VNC login để verify workroom messages.
+**Trello:** ⚠️ incomplete — chờ user VNC login verify.
 
 ---
 
