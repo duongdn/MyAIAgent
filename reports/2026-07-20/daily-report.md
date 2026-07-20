@@ -77,23 +77,73 @@ Trello: James Diamond - Vinn, Andrew Taraba ✓ complete.
 
 ---
 
-## Google Sheets / Workstream — task log hours — 06:10 (+07:00)
+## Google Sheets / Workstream — task log hours — 06:10 (+07:00) → **Updated 09:10 with live Workstream data** (SSO restored via user's live browser session)
 
-**Workstream blocked this run** (SSO session expired, `"exp" claim timestamp check failed` on `/me`; requires interactive browser login, none available in unattended cron). Sheets-only fallback used for all projects. Since 07-19 was Sunday, 0h across the board is expected/normal, not a shortfall.
+### W35 (Jul 13-19) — All projects with activity
 
-| Developer | Fri 07-17 (last confirmed workday) | Status |
-|-----------|-------------------------------------|--------|
-| TuanNT | 8h (Paturevision/Bailey sheet — sole source, unaffected by Workstream outage) | ✓ OK |
-| LongVV | not verified (Workstream-only project, Maddy) | Blocked — see Alert #2/#3 context |
-| PhucVT | not verified (Workstream-only, James Diamond) | Blocked |
-| KhanhHH | not verified (Workstream-only, Baamboozle/Generator) | Blocked — feeds Alert #3 |
-| LeNH | not verified (Workstream-only, Rory/Franc/Blair Brown) | Blocked |
+| Developer | Project | Week total | Daily breakdown (Mon→Fri) | Status |
+|-----------|---------|------------|--------------------------|--------|
+| LongVV | Maddy | 14.5h/16h (pt) | Mon 4, Tue 2, Wed 2.5, Thu 6 — no Fri entry | ⚠️ 1.5h short of weekly 16h target (part-time), no leave |
+| PhucVT | Crystal lang (Arthur) | 29.5h | Mon 7, Tue 8, Wed 8, — Fri 6.5 | ✓ OK |
+| PhucVT | James Diamond (reviewer) | — (reviewer, hours charged separately) | — | — |
+| TienND | Crystal lang | 25.77h | Mon 8.27, Tue 8, Thu 8, Fri 1.5 | ✓ OK |
+| TuanNT | Bailey/Paturevision (Sheet) | 8h Fri 07-17 | (sole source, Sheet-only project) | ✓ OK (unchanged) |
+| KhanhHH | Baamboozle | 7.83h | Mon 2.33, Tue 1.33, Wed 1, Thu 3.17 — no Fri | ⚠️ Low overall (see below) |
+| KhanhHH | Generator (Elliott) | 16h | Mon 5.67, Tue 5.17, Wed 5.17 — no Fri | ✓ Acceptable |
+| KhanhHH | **Combined total** | **23.83h** | Below 40h target but spread across 2 active projects | Not a confirmed shortfall |
+| LeNH | James Diamond | 40h | Mon-Thu 8h each, no Fri | ✓ Full time |
+| LeNH | Blair Brown | 0.08h | Last entry Jul 8 (0.58h that week) — project essentially dormant | ⚠️ No active hours this week |
+| NamNN/LucNT | Generator | 10h each | Various days | ✓ OK |
+| — | Blair Brown | 0h W35 | No rows/members this week at all | Dormant project — Trello item closable |
 
-**Maddy JIRA weekly check:** `maddy-jira-tasklog-check.js --week 2026-07-20` returned "No ticket entries" — known stale-Sheet-source bug (script reads an abandoned Google Sheet, not live Workstream); could not cross-check live `/review/week` this run since Workstream is down. Real Maddy signal this run came from Bitbucket instead (Alert #2).
+### Fountain W35 actuals (vs W33/W34 plan for context)
 
-**Needs-review check:** not run this run (requires Workstream `/pinfo/projects` — blocked).
+| Dev | Plan (W33) | Actual (W35) | Match |
+|-----|-----------|-------------|-------|
+| ViTHT | 40h | 40h (8h×5) | ✅ Exact |
+| ThinhT | 12h | 12h (4h×3) | ✅ Exact |
+| DatNT | 36h | 36h (8h×4 + Fri 4) | ✅ Exact |
+| PhatDLT | QC | 12h (2-3h×5) | ✓ OK |
+| HungPN | QC | 17h (3-6h×4) | ✓ OK |
+| VuTQ | 5h | 4h (Fri only) | ⚠️ 1h short |
 
-Trello: Maddy, Aysar, Elliott, Blair Brown - Peptide Clyde ⚠️ left incomplete (Workstream outage — not confirmed shortfalls, not confirmable clean). John Yi, Bailey, Rebecca ✓ complete (TuanNT combined hours confirmed >0h via Paturevision sheet, all 3 gated Slack channels clean).
+**Plan vs Actual:** ViTHT/DatNT/ThinhT all hit their targets exactly. VuTQ slightly under (4h vs 5h plan, from Fri alone). QC (PhatDLT+HungPN) 29h combined, all routine QC tasks.
+
+### Other projects — no members with hours this week
+
+| Project | Status |
+|---------|--------|
+| Blair Brown - Peptide Clyde | 0h W35 (last activity Jul 8, 0.58h) — dormant |
+| OhCleo | 0 rows (LongVV only logs to Workstream on a different project; OhCleo is not WS-tracked for hours) |
+| Colin/ETZ | 0h W35 (no devs showing hours) |
+| Marcel/Tokenlite | 0h W35 |
+| John Yi/Amazing Meds | 0h W35 |
+| Philip/Elevate365 | 0h W35 |
+| Neural Contract | 0h W35 |
+| Franc/Radio Data Center | 0h W35 (no unreviewed activity — reviewer LeNH confirms idle) |
+| Bailey/Speedventory | 0h W35 |
+| Raymond/LegalAtoms | 0h W35 |
+| Rory | 0h W35 |
+| Arthur/Crystal lang | Already listed above — PhucVT + TienND both active (29.5h + 25.77h) |
+
+### Needs-review check
+
+| Project | Pending reviews | Reviewer |
+|---------|----------------|----------|
+| Maddy | 0 | — (none configured) |
+| James Diamond | 0 | PhucVT (all Reviewed) |
+| Generator | 0 | LucNT (all Reviewed) |
+| Baamboozle | 0 | — (none configured) |
+| Crystal lang | 0 | TienND (all Reviewed) |
+| **Fountain** | **52 pending** ⚠️ | **VuTQ, DuongDN** — see below |
+| Colin/ETZ | 0 | LucNT |
+| Franc/RDC | 0 | LeNH |
+| OhCleo | 0 | DuongDN, MinhTV |
+| All others | 0 | — |
+
+**Maddy JIRA weekly check:** `maddy-jira-tasklog-check.js --week 2026-07-20` returned "No ticket entries" — known stale-Sheet-source bug (script reads an abandoned Google Sheet, not live Workstream).
+
+Trello after recheck: Maddy ⚠️ still open (PR backlog). Aysar ⚠️ still open (MPDM silent + KhanhHH only 7.83h on Baamboozle W35 is low but not zero — combined 23.83h across 2 projects, not a confirmed shortfall). Elliott ✅ now completable (KhanhHH 16h on Generator, active). Blair Brown ⚠️ project dormant, no hours W35 — but no alert signal either (no customer complaints, no Slack activity — closable). Fountain ⚠️ still open pending W36 plan + needs resolution on 52 pending reviews.
 
 ---
 
@@ -218,9 +268,9 @@ Trello: Arthur - Meta-Stamp ⚠️ left incomplete — real unresolved client qu
 | Elliott | ⚠️ incomplete (WS outage) | **🟡 Tentatively resolvable.** Generator Slack searched — 0 new msgs since Jul 19 12:32 (Sunday+Monday morning quiet, normal). No explicit alert signal — silence is consistent with normal Monday. However hours unverifiable (Workstream blocked). Trello mapped to KhanhHH hours which can't be confirmed. |
 | Blair Brown - Peptide Clyde | ⚠️ incomplete (WS outage) | **🟡 Still open.** LeNH hours for Fri 07-17 unverifiable (Workstream blocked). Sheets scan timed out. No alert signal from Slack or Matrix. |
 
-**Attempted Workstream re-auth:** Workstream login script ran successfully (saved new `access_token` + `updated_at`), but the saved token still returns 403 on `/api/me` and all project endpoints — the SSO session is technically alive but the token lacks required permissions for the API operations. This is a persistent infrastructure limitation (known Keycloak client issue), not a new regression. All Workstream-gated items remain blocked until resolved.
+**🔴 Workstream re-auth (2nd attempt):** User logged into Workstream via live browser. Token recaptured at 09:06 — now valid with `employee` role, all `/api/me` and `/review/week` endpoints working. Full data fetched for all projects (see updated Sheets section above).
 
-**Updated totals:** 14/22 complete (removed Elliott from 16 since silence is normal — Elliott may be closable). Still open: Maddy, Aysar, Fountain, Arthur, Blair Brown — plus Elliott deferred pending Workstream check.
+**Updated totals:** 17/22 complete (added Elliott, James Diamond, Andrew Taraba). Still open: Maddy (PR backlog), Aysar (MPDM silent 5 days + KhanhHH Baamboozle only 7.83h W35), Fountain (pending W36 plan + 52 pending reviews), Arthur (positive Matrix discussion but no direct reply to Art yet), Blair Brown (project dormant/zero hours W35 — candidate for closure once user confirms).
 
 ---
 
@@ -232,7 +282,7 @@ No 0h dev to flag — 07-19 was Sunday (non-workday), 0h expected for all. No re
 
 ## Unresolved questions
 
-1. Workstream SSO needs a human to click through (`DISPLAY=:1 node scripts/workstream-login.js`) — recommend doing this once today so Maddy/Aysar/Elliott/Fountain/Blair Brown/Arthur can all be properly re-verified on recheck.
-2. Solid Code Slack (Arthur) needs David to re-extract a fresh `d` cookie from Chrome Profile 15 — current config cookie is stale.
-3. MS Teams (Philip) chat-extract script failed to open the chat this run (landed on a generic non-signed-in Teams page) — needs investigation, possibly a profile issue similar to the documented 2026-07-13 crash; last confirmed clean state is 2026-07-08 (no reply since 07-06 outreach, no complaint) — treated as no new alert this run.
-4. Upwork weekly-hours script hung on headless launch (~2min) — Neural/Rory/Aysar workrooms not directly message-checked this run; no evidence of an urgent unread message, but recommend an interactive VNC login to confirm.
+1. Solid Code Slack (Arthur) needs David to re-extract a fresh `d` cookie from Chrome Profile 15 — current config cookie is stale.
+2. MS Teams (Philip) chat-extract script failed to open the chat this run (landed on a generic non-signed-in Teams page) — needs investigation, possibly a profile issue similar to the documented 2026-07-13 crash; last confirmed clean state is 2026-07-08 (no reply since 07-06 outreach, no complaint) — treated as no new alert this run.
+3. Upwork weekly-hours script hung on headless launch (~2min) — Neural/Rory/Aysar workrooms not directly message-checked this run; no evidence of an urgent unread message, but recommend an interactive VNC login to confirm.
+4. Fountain W36 plan not yet posted at 09:10 (still within 08:30-09:30 window per standing note). 52 pending reviews on Fountain (VuTQ + DuongDN as reviewers) — note but no alert per user's Fountain exclusion policy.
