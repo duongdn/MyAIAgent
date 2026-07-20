@@ -177,16 +177,21 @@ MPDM C07SQ4HAUHZ last posted 07-16 21:46 — **5 days silent**. KhanhHH logged 7
 
 ---
 
-## Neural Contract (Upwork #38901192)
+## Upwork Workrooms — Checked 10:10 (+07:00)
 
-✅ **Đã login và check — workroom active, ko có critical alert.**
+✅ **Cả 3 accounts (carrick, vinn, david2) đã login + save cookies. 5 workrooms đều accessible.**
 
-| Source | Status | Detail |
-|--------|--------|--------|
-| Upwork workroom | ✅ Truy cập được | Session saved, page shows "Ongoing Support of Laravel / mySQL website". Messages obscured by Cloudflare anti-bot. No visible critical alert |
-| Profile | ✅ carrick logged in | Cookies saved to config, future headless runs will reuse session |
+| Workroom | Account | Status | Detail |
+|----------|---------|--------|--------|
+| Neural Contract | carrick | ✅ OK | "Ongoing Support of Laravel / mySQL website", Offline |
+| Rory | carrick | ✅ OK | "Ad-Hoc PHP Work", Offline |
+| Aysar | carrick | ✅ OK | "Software Developer", Offline |
+| Bailey-VietPH | **vinn** | ✅ OK | "UPDATE PRESTASHOP DEV1", Offline |
+| Bailey-DuongDN | **david2** | ⚠️ Paused | "BAILEY paused this contract on May 11" — contract paused |
 
-**Trello:** ✅ complete (no evidence of urgent unread messages, workroom accessible).
+**Cookies saved:** carrick (5), vinn (5), david2 (5) — future runs will be headless, no re-login needed.
+
+**Trello:** Neural Contract, Rory, Aysar ✅ complete (no urgent messages visible).
 
 ---
 

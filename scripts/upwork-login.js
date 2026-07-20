@@ -179,35 +179,51 @@ async function main() {
     await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-dashboard.png`) });
     console.error('Dashboard screenshot saved');
 
-    // Check Neural Contract workroom messages
-    console.error('Checking Neural Contract workroom...');
-    await page.goto('https://www.upwork.com/nx/wm/workroom/38901192/messages', { waitUntil: 'networkidle2', timeout: 30000 });
-    await new Promise(r => setTimeout(r, 5000));
+    // Check workroom messages based on account
+    const workroomUrls = {
+      carrick: [
+        ['Neural', 'https://www.upwork.com/nx/wm/workroom/38901192/messages'],
+        ['Rory', 'https://www.upwork.com/nx/wm/workroom/41069448/messages'],
+        ['Aysar', 'https://www.upwork.com/nx/wm/workroom/35642393/messages'],
+      ],
+      vinn: [
+        ['Bailey-VietPH', 'https://www.upwork.com/nx/wm/workroom/42545630/messages'],
+      ],
+      david2: [
+        ['Bailey-DuongDN', 'https://www.upwork.com/nx/wm/workroom/43093775/messages'],
+      ],
+    };
+    const urls = workroomUrls[account.name] || [['Unknown', 'https://www.upwork.com/nx/wm/workroom/38901192/messages']];
+    for (const [wrName, wrUrl] of urls) {
+      console.error(`Checking ${wrName} workroom...`);
+      await page.goto(wrUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+      await new Promise(r => setTimeout(r, 5000));
 
-    url = page.url();
-    console.error('Workroom URL:', url);
+      url = page.url();
+      console.error('Workroom URL:', url);
 
-    if (url.includes('login') || url.includes('account-security')) {
-      console.error('Redirected to login — session invalid');
-      console.log(JSON.stringify({ status: 'session_invalid', url }));
-      await browser.close();
-      process.exit(2);
+      if (url.includes('login') || url.includes('account-security')) {
+        console.error('Redirected to login — session invalid');
+        console.log(JSON.stringify({ status: 'session_invalid', url }));
+        await browser.close();
+        process.exit(2);
+      }
+
+      // Extract workroom messages
+      const workroomText = await page.evaluate(() => document.body.innerText);
+      const workroomLines = workroomText.split('\n').filter(l => l.trim());
+      console.error(`Workroom lines: ${workroomLines.length}`);
+      const msgLines = workroomLines.filter(l => l.length > 30 && !l.includes('Upwork') && !l.includes('Cloudflare') && !l.includes('Copyright'));
+      if (msgLines.length > 0) {
+        console.error(`--- ${wrName} Workroom Messages ---`);
+        msgLines.slice(0, 15).forEach(l => console.error('  ' + l));
+      } else {
+        console.error('No messages extracted. Full text:');
+        workroomLines.slice(0, 20).forEach(l => console.error('  ' + l));
+      }
+      await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-${wrName.toLowerCase()}.png`) });
+      console.error(`${wrName} workroom screenshot saved`);
     }
-
-    // Extract workroom messages
-    const workroomText = await page.evaluate(() => document.body.innerText);
-    const workroomLines = workroomText.split('\n').filter(l => l.trim());
-    console.error(`Workroom lines: ${workroomLines.length}`);
-    const msgLines = workroomLines.filter(l => l.length > 30 && !l.includes('Upwork') && !l.includes('Cloudflare') && !l.includes('Copyright'));
-    if (msgLines.length > 0) {
-      console.error('--- Neural Workroom Messages ---');
-      msgLines.slice(0, 15).forEach(l => console.error('  ' + l));
-    } else {
-      console.error('No messages extracted. Full text:');
-      workroomLines.slice(0, 20).forEach(l => console.error('  ' + l));
-    }
-    await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-${account.name}-neural.png`) });
-    console.error('Neural workroom screenshot saved');
 
     // Extract and persist session cookies so future headless runs don't need re-login
     const allCookies = await page.cookies('https://www.upwork.com');
