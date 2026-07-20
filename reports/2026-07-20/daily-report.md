@@ -50,24 +50,21 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 **LIFM2-455** caching/refresh: 1h est/1h logged. Madhuraka "Proceed" → Kai "test on RMS" → Anoma Jul 18 "redirect to empty form" — **To Do chưa fix**
 
-**JIRA Est vs Charge (Kai's active tickets):**
+**JIRA Est vs Charge — Kai tự est, Madhuraka-approved estimate ghi riêng:**
 
-| Ticket | Status | Est | Spent | Over? | QC Feedback |
-|--------|:------:|:---:|:-----:|:-----:|-------------|
-| LIFM2-409 Import payouts | Review | **113.2h** | **109.2h** | 🟡 4h left | PR #481 Madhuraka High chưa reply 44 ngày |
-| LIFM2-428 Auth Certificate | In Progress | **53h** | **45.8h** | 🟡 7.2h left | Anoma Jul 10 hide cert; Madhuraka Jul 16 Proceed #1+#3 |
-| LIFM2-434 AI MVP | Ready deploy | **32h** | **25.5h** | 🟡 6.5h spare | Từ Jun 28 chưa deploy |
-| LIFM2-446 Row locking | Review | **12h** | **12h** | ✅ | Approved Jul 13 |
-| LIFM2-449 Consign tab | Review | **8h** | **8h** | ✅ | Approved Jul 13 |
-| LIFM2-450 Buy offer | Review | **6h** | **6h** | ✅ | Approved |
-| LIFM2-436 Returns | To Do | **15h** | **13.8h** | 🟡 1.2h left | Chưa bắt đầu (PR #486 mở Apr 29) |
-| LIFM2-447 Spam/Open | Testing | **4h** | **4h** | ✅ | Anoma Jul 17 check → Kai Jul 20 hướng dẫn lại API |
-| LIFM2-447 continued | Testing | | | | Anoma chưa confirm lại |
-| LIFM2-453 Custom % | Ready deploy | **2h** | **2h** | ✅ | Chưa deploy |
-| LIFM2-455 Quotes refresh | To Do | **1h** | **1h** | ✅ | Anoma Jul 18 "redirect to empty form" chưa fix |
-| LIFM2-451 Grid changes | Review | **1h** | **1h** | ✅ | Madhuraka Jul 15 "Proceed" |
-| LIFM2-452 4W Sent | To Do | **2h** | **—** | ⏳ | Chưa bắt đầu |
-| LIFM2-454 Quote inconsistency | To Do | **4h** | **—** | ⏳ | Chưa bắt đầu |
+| Ticket | Status | JIRA Est | Spent | Còn | Madhuraka approve? |
+|--------|:------:|:-------:|:-----:|:---:|-------------------|
+| LIFM2-409 Import payouts | Review | **113.2h** | **109.2h** | 4h | ⚠️ Jul 26 "Proceed" **16h** — 113h là Kai tự est, ko được approve |
+| LIFM2-428 Auth Certificate | In Progress | **53h** | **45.8h** | 7.2h | ⚠️ Jul 16 "Proceed #1+#3" **12h** — ko phải 53h |
+| LIFM2-434 AI MVP | Ready deploy | **32h** | **25.5h** | 6.5h | ✅ Đã Proceed |
+| LIFM2-446 Row locking | Review | **12h** | **12h** | 0h | ✅ Approved Jul 13 |
+| LIFM2-449 Consign tab | Review | **8h** | **8h** | 0h | ✅ Approved Jul 13 |
+| LIFM2-450 Buy offer | Review | **6h** | **6h** | 0h | ❓ Kai update estimate, Madhuraka ko nói rõ |
+| LIFM2-436 Returns | To Do | **15h** | **13.8h** | 1.2h | ❓ Madhuraka hỏi "20h?" — chưa Proceed |
+| LIFM2-447 Spam/Open | Testing | **4h** | **4h** | 0h | ✅ Approved Jul 13 |
+| LIFM2-453 Custom % | Ready deploy | **2h** | **2h** | 0h | ✅ Proceed Jul 16 |
+| LIFM2-455 Quotes refresh | To Do | **1h** | **1h** | 0h | ✅ Proceed Jul 16 |
+| LIFM2-451 Grid changes | Review | **1h** | **1h** | 0h | ✅ Madhuraka Jul 15 "Proceed" |
 
 **PR backlog (code review reply missing):**
 - #481 LIFM2-409: Madhuraka High "refund double-posted" → Kai **44 ngày**
