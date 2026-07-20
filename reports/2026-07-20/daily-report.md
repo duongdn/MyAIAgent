@@ -63,12 +63,12 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ---
 
-## Discord — all — 06:19 (+07:00)
+## Discord — all — 09:55 (+07:00)
 
 | Server | Msgs | Key content |
 |--------|------|-------------|
-| AirAgri (nusvinn) | 0 | Quiet — Sunday, no report expected. |
-| Bizurk (nuscarrick) | 0 | Quiet — no Andrew Taraba DM activity. |
+| AirAgri (nusvinn) | 1 | jeff_trinh: "continue working on automatic check-in/check-out feature and new Forms module for Visitor App" — Mon morning check-in |
+| Bizurk (nuscarrick) | 0 | Token valid, no Andrew Taraba DM activity. |
 
 ---
 
