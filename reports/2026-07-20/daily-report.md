@@ -40,49 +40,39 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ---
 
-## Maddy / Xtreme Soft Solutions — Updated 10:10
+## Maddy / Xtreme Soft Solutions — Updated 10:30
 
-**🔴 Customer complaints & unanswered questions (cần DuongDN xem ngay):**
+**🔴 Slack customer complaints (chưa có JIRA ticket):**
+- Jul 14 18:47 Madhuraka: email filtering bug + screen recording → Kai "ok" (ko tracking)
+- Jul 15 08:34 Madhuraka: caching/refresh issue — REF link → grid filter ko clear → Kai "ok"
+- Jul 19 14:20 Madhuraka: Shipping Protection V3 draft "check and advise?" → Kai **chưa reply**
 
-| Thời gian | Khách hàng | Nội dung | Phản hồi |
-|-----------|-----------|----------|---------|
-| Jul 14 18:47 | Madhuraka | "Sent you an email related to email filtering bug" — gửi bug email + screen recording | Kai: "ok" — không tracking, không tạo JIRA |
-| Jul 15 08:34 | Madhuraka | **Caching/refresh issue**: click REF link ở cuối quote email → seller email tự động add vào grid search filter → grid không tự clear khi click link khác. Gửi screen recording | Kai: "ok" — không nói sẽ fix, không tạo JIRA |
-| Jul 15 11:02 | Kai | Chủ động hỏi Madhuraka review estimates để biết làm gì tiếp — Madhuraka chưa trả lời tính tới cuối ngày? |
-| Jul 19 14:20 | Madhuraka | Shipping Protection V3 (Checkout Components V3) đang draft mode: "Can you check and advise whether we should use it?" — Kai: chưa có reply? |
-| Jul 20 09:11 | Kai | "Are you there? I need OTP code to access Shopify site" — Madhuraka trả lời 09:19 "I can send now" |
-| Jul 20 09:20 | Kai | "Accessed" — đã login |
+**JIRA Feedback Report — Kai's active tickets:**
 
-**Bitbucket PR backlog — 8 open, 5 critical chưa reply:**
+| Ticket | Status | Updated | QC Feedback | Rework |
+|--------|:------:|:-------:|-------------|:------:|
+| **LIFM2-428** Auth Certificate | In Progr. | Jul 16 | Anoma Jul 10: hide Auth Cert from orders tab, not return with item. Madhuraka Jul 16: "Proceed #1 and #3" (≠ #2) | 🟡 partial rework |
+| **LIFM2-447** Spam/Open rates | Testing | Jul 20 | Anoma Jul 17 "Check working" → Kai Jul 20: use Postmark API, not email. Anoma chưa confirm | 🟡 pending |
+| **LIFM2-409** Import payouts | Review | Jul 14 | Madhuraka Jun 24: need validation process. **PR #481 Jul 7 "High: refund double-posted" — Kai chưa reply** | 🔴 44d |
+| **LIFM2-451** Grid changes | Review | Jul 16 | Madhuraka Jul 15: "Proceed" | ✅ |
+| **LIFM2-450** Buy offer | Review | Jul 14 | Madhuraka Jul 13: approved | ✅ |
+| **LIFM2-449** Consign tab | Review | Jul 13 | Approved | ✅ |
+| **LIFM2-446** Row locking | Review | Jul 13 | Approved | ✅ |
+| **LIFM2-434** AI MVP | Ready deploy | Jun 28 | Từ Jun 28 chưa deploy | ⏳ |
+| **LIFM2-453** Custom % | Ready deploy | Jul 19 | Anoma "Testing ok" + Madhuraka "Proceed" — chưa deploy | ⏳ |
+| **LIFM2-455** Quotes refresh | To Do | Jul 18 | Chưa bắt đầu | ⏳ |
+| **LIFM2-436** Returns | To Do | Jul 19 | Chưa bắt đầu (PR #486 mở Apr 29) | ⏳ |
 
-| PR | Mở | Cập nhật | Tình trạng |
-|----|-----|----------|-----------|
-| 🔴 LIFM2-409 feedback (hotfix/product-custom-payout) | Apr 20 | Jul 9 | **Madhuraka Jul 7: "High: refund payouts double-posted" — Kai chưa reply 44 ngày** |
-| 🔴 LIFM2-436: Returns | Apr 29 | Jul 19 | Madhuraka Jun 6 codex findings + Jun 11 field mapping — Kai chưa reply |
-| 🔴 LIFM2-428 | Jun 22 | Jul 16 | Codex review Critical finding — Kai chưa reply |
-| 🔴 LIFM2-446: quote row locking | Jun 25 | Jul 9 | Codex review Critical finding — Kai chưa reply |
-| 🔴 LIFM2-449: Consign tab changes | Jul 9 | Jul 14 | Codex review Critical finding — Kai chưa reply |
-| LIFM2-455: Quotes refresh | Jul 15 | Jul 15 | Mới, chưa review |
-| hotfix/listed-tab → master | Apr 28 | Apr 28 | Cũ, chưa merge? |
-| LIFM2-285: Email Filtering [On Hold] | May 29 | Oct 3 | Madhuraka hỏi Sep 16, Kai trả lời Aug 11. Dừng. |
+**Bitbucket PR backlog (code review reply missing):**
+- #481 LIFM2-409-feedback: Madhuraka Jul 7 **High** "refund double-posted" → Kai **44 ngày** chưa reply
+- #486 LIFM2-436: Madhuraka Jun 6 codex findings → Kai **43 ngày** chưa reply
+- #509 LIFM2-428: Codex **Critical** → Kai **28 ngày** chưa reply
+- #510 LIFM2-446: Codex **Critical** → Kai **25 ngày** chưa reply
+- #516 LIFM2-449: Codex **Critical** → Kai **11 ngày** chưa reply
 
-**Kai's daily reports (Jul 15-16):**
-- Jul 15: LIFM2-450 Review, LIFM2-409 -> QA testing, LIFM2-456 -> Testing Anoma, LIFM2-455 -> QA testing
-- Jul 16: LIFM2-451 Con-Listing -> Done, LIFM2-428 -> In progress
+**LongVV W35:** 14.5h/16h Maddy + 13.5h James Diamond = 28h/3.5 ngày ✅
 
-**Workstream — LongVV hours W35:**
-| Ngày | Giờ | Notes |
-|------|-----|-------|
-| Mon 13 | 4h | Maddy |
-| Tue 14 | 2h | Maddy |
-| Wed 15 | 2.5h | Maddy |
-| Thu 16 | 6h | Maddy |
-| Fri 17 | 0h | Leave pending (khám bệnh) |
-| **Total** | **14.5h/16h** | ✅ OK (part-time) |
-
-LongVV also logged 13.5h on James Diamond W35 — combined 28h/3.5 working days.
-
-**Trello:** Maddy ⚠️ open — Madhuraka complaints (email bug, caching issue, Shipping Protection V3) + 5 PRs Critical/High chưa reply.
+**Trello:** ⚠️ open.
 
 ---
 
