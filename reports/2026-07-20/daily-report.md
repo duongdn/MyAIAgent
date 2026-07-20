@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Maddy — hours + PR backlog | LongVV W35: chỉ 14.5h trên Maddy (target 16h/tuần part-time), Mon 4h, Tue 2h, Wed 2.5h, Thu 6h — thấp bất thường. Kai có comment phản hồi Madhuraka trên Bitbucket chưa? PR backlog: LIFM2-409 feedback (#481, Madhuraka Jul 7 "High: refund payouts double-posted") không có reply, LIFM2-436 (Jun 6 Madhuraka findings) cũng không reply. |
+| 1 | Maddy — Madhuraka complaint + PR backlog | 🔴 Madhuraka chủ động hỏi: email filtering bug (Jul 14, email + screen recording gửi Kai), caching/refresh issue trên quote REF link (Jul 15, mô tả chi tiết) — Kai chỉ trả lời "ok". Shipping Protection v3 (Jul 19) Madhuraka hỏi "check and advise" — Kai chưa reply? Thêm PR backlog: LIFM2-409 High (refund double-posted, Jul 7 Madhuraka comment) không reply 44 ngày, LIFM2-428 Critical codex review (Jun 22) không reply, LIFM2-446 Critical (Jun 25), LIFM2-449 Critical (Jul 14), LIFM2-436 (Jun 6 Madhuraka findings) không reply. |
 | 2 | Arthur - Meta-Stamp (Slack ms-v3) | Art's 3 pointed questions from Sat 07-18 15:47-15:56 (missing EOW report/commit-attribution/CI failure on a77b2c3) — Matrix room had 10 new messages today (08:33-08:47) with team internally discussing commit-attribution explanation, but no evidence Art has been directly replied to yet. |
 | 3 | MPFC (New Relic) | Apdex still poor (0.50) — persistent `WP_Error::get_method()` fatal (15x) + PHP "continue targeting switch" warning (68x) this window, matches ongoing Rollbar Daily Summary pattern. |
 | 4 | Fountain (New Relic) | Same error signature as prior incidents (ArgumentError wrong-args + NoMethodError with_connection-nil) continues tapering (6x+6x this window vs 9x+9x prior) — not confirmed resolved yet. |
@@ -40,37 +40,49 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ---
 
-## Maddy / Xtreme Soft Solutions — Updated 09:55
+## Maddy / Xtreme Soft Solutions — Updated 10:10
 
-**Slack (Xtreme Soft Solutions):** 1 message in window — Madhuraka (07-19 14:20) announced new Shipping Protection version live on Shopify admin, informational, no new ask.
+**🔴 Customer complaints & unanswered questions (cần DuongDN xem ngay):**
+
+| Thời gian | Khách hàng | Nội dung | Phản hồi |
+|-----------|-----------|----------|---------|
+| Jul 14 18:47 | Madhuraka | "Sent you an email related to email filtering bug" — gửi bug email + screen recording | Kai: "ok" — không tracking, không tạo JIRA |
+| Jul 15 08:34 | Madhuraka | **Caching/refresh issue**: click REF link ở cuối quote email → seller email tự động add vào grid search filter → grid không tự clear khi click link khác. Gửi screen recording | Kai: "ok" — không nói sẽ fix, không tạo JIRA |
+| Jul 15 11:02 | Kai | Chủ động hỏi Madhuraka review estimates để biết làm gì tiếp — Madhuraka chưa trả lời tính tới cuối ngày? |
+| Jul 19 14:20 | Madhuraka | Shipping Protection V3 (Checkout Components V3) đang draft mode: "Can you check and advise whether we should use it?" — Kai: chưa có reply? |
+| Jul 20 09:11 | Kai | "Are you there? I need OTP code to access Shopify site" — Madhuraka trả lời 09:19 "I can send now" |
+| Jul 20 09:20 | Kai | "Accessed" — đã login |
+
+**Bitbucket PR backlog — 8 open, 5 critical chưa reply:**
+
+| PR | Mở | Cập nhật | Tình trạng |
+|----|-----|----------|-----------|
+| 🔴 LIFM2-409 feedback (hotfix/product-custom-payout) | Apr 20 | Jul 9 | **Madhuraka Jul 7: "High: refund payouts double-posted" — Kai chưa reply 44 ngày** |
+| 🔴 LIFM2-436: Returns | Apr 29 | Jul 19 | Madhuraka Jun 6 codex findings + Jun 11 field mapping — Kai chưa reply |
+| 🔴 LIFM2-428 | Jun 22 | Jul 16 | Codex review Critical finding — Kai chưa reply |
+| 🔴 LIFM2-446: quote row locking | Jun 25 | Jul 9 | Codex review Critical finding — Kai chưa reply |
+| 🔴 LIFM2-449: Consign tab changes | Jul 9 | Jul 14 | Codex review Critical finding — Kai chưa reply |
+| LIFM2-455: Quotes refresh | Jul 15 | Jul 15 | Mới, chưa review |
+| hotfix/listed-tab → master | Apr 28 | Apr 28 | Cũ, chưa merge? |
+| LIFM2-285: Email Filtering [On Hold] | May 29 | Oct 3 | Madhuraka hỏi Sep 16, Kai trả lời Aug 11. Dừng. |
+
+**Kai's daily reports (Jul 15-16):**
+- Jul 15: LIFM2-450 Review, LIFM2-409 -> QA testing, LIFM2-456 -> Testing Anoma, LIFM2-455 -> QA testing
+- Jul 16: LIFM2-451 Con-Listing -> Done, LIFM2-428 -> In progress
 
 **Workstream — LongVV hours W35:**
-| Ngày | Giờ | Task |
-|------|-----|------|
-| Mon 13 | 4h | Maddy tasks |
-| Tue 14 | 2h | Maddy tasks |
-| Wed 15 | 2.5h | Maddy tasks |
-| Thu 16 | 6h | Maddy tasks |
+| Ngày | Giờ | Notes |
+|------|-----|-------|
+| Mon 13 | 4h | Maddy |
+| Tue 14 | 2h | Maddy |
+| Wed 15 | 2.5h | Maddy |
+| Thu 16 | 6h | Maddy |
 | Fri 17 | 0h | Leave pending (khám bệnh) |
-| **Total** | **14.5h/16h** | Part-time target |
+| **Total** | **14.5h/16h** | ✅ OK (part-time) |
 
-LongVV cũng có 13.5h trên James Diamond W35. Tổng 28h cho ~3.5 ngày làm Maddy = OK.
+LongVV also logged 13.5h on James Diamond W35 — combined 28h/3.5 working days.
 
-**Bitbucket PRs — 8 open (2 cần chú ý nhất):**
-| PR | Tạo | Cập nhật | Tình trạng |
-|----|-----|----------|-----------|
-| LIFM2-409 feedback (hotfix/product-custom-payout) | Apr 20 | Jul 9 | **Madhuraka Jul 7: "High: refund payouts double-posted" — Kai chưa reply (44 ngày)** |
-| LIFM2-436: Returns | Apr 29 | Jul 19 | Madhuraka Jun 6 codex findings + Jun 11 field mapping — Kai chưa reply |
-| LIFM2-428 | Jun 22 | Jul 16 | Codex review Critical finding — chưa reply |
-| LIFM2-446: quote row locking | Jun 25 | Jul 9 | Codex review Critical finding — chưa reply |
-| LIFM2-449: Consign tab | Jul 9 | Jul 14 | Codex review Critical finding — chưa reply |
-| LIFM2-455: Quotes page refresh | Jul 15 | Jul 15 | Mới, chưa có review |
-| hotfix/listed-tab → master | Apr 28 | Apr 28 | Cũ (hotfix đã merge?) |
-| LIFM2-285: Email Filtering [On Hold] | May 29 | Oct 3 | Madhuraka Sep 16 hỏi — Kai trả lời Aug 11. Dừng. |
-
-**JIRA check:** Script báo "No ticket entries" do đọc Sheet cũ (abandoned), không phải Workstream thật.
-
-**Trello:** Maddy ⚠️ open (PR #409 feedback 44 ngày chưa reply).
+**Trello:** Maddy ⚠️ open — Madhuraka complaints (email bug, caching issue, Shipping Protection V3) + 5 PRs Critical/High chưa reply.
 
 ---
 
