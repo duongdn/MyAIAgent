@@ -42,13 +42,14 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ## Maddy / Xtreme Soft Solutions — Updated 10:30
 
-**🔴 Slack customer complaints (ko tracking — Kai chỉ "ok", ko JIRA, ko code change):**
-- Jul 14 18:47 Madhuraka: email filtering bug + screen recording → Kai "ok"
-- Jul 15 08:34 Madhuraka: caching/refresh issue — REF link → grid filter ko clear → Kai "ok"
-- Jul 19 14:20 Madhuraka: Shipping Protection V3 draft "check and advise?" → Kai **chưa reply >19h**
-- Jul 20 09:11 Kai: "I need OTP" → Madhuraka gửi → 09:20 "Accessed" ✅
+**🔴 Slack customer complaints:**
+- Jul 14 18:47 Madhuraka: email filtering bug + screen recording → Kai "ok" → **ko có JIRA ticket**
+- Jul 15 08:34 Madhuraka: **caching/refresh** REF link issue → **LIFM2-455** (To Do — Anoma Jul 18: "redirect to empty form")
+- Jul 19 14:20 Madhuraka: Shipping Protection V3 "check and advise?" → Kai **chưa reply >19h**
+- Jul 20 09:11 Kai: OTP → 09:20 "Accessed" ✅
 
-JIRA có LIFM2-456 "email filter for 4w 9w" (Done) + LIFM2-455 "Refresh Issue on Quotes page" (To Do) — nhưng đây là tickets riêng, ko tracking 2 bug trên.
+**LIFM2-455** Refresh Issue on Quotes page:
+- Created Jul 15 → Madhuraka Jul 16 "Proceed" → Kai Jul 16 "test on RMS" → **Anoma Jul 18: "Ref:000 redirect me to empty form"** → Status **"To Do"** — chưa fix feedback Anoma
 
 **JIRA Feedback Report — Kai's active tickets:**
 
