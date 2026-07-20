@@ -75,7 +75,7 @@ const WORKROOM_URL = 'https://www.upwork.com/nx/wm/workroom/38901192/messages';
 
     if (filled) {
       // Click submit
-      const submitBtns = await page.$$('button[type="submit"], button:has-text("Continue")');
+      const submitBtns = await page.$$('button[type="submit"]');
       for (const btn of submitBtns) {
         await btn.click().catch(() => {});
       }
@@ -93,7 +93,7 @@ const WORKROOM_URL = 'https://www.upwork.com/nx/wm/workroom/38901192/messages';
       }
 
       // Submit password
-      const submitBtns2 = await page.$$('button[type="submit"], button:has-text("Log")');
+      const submitBtns2 = await page.$$('button[type="submit"]');
       for (const btn of submitBtns2) {
         await btn.click().catch(() => {});
       }
