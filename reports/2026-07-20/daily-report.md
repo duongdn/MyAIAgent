@@ -177,6 +177,22 @@ MPDM C07SQ4HAUHZ last posted 07-16 21:46 — **5 days silent**. KhanhHH logged 7
 
 ---
 
+## Neural Contract (Upwork #38901192)
+
+**⚠️ Bị Trello auto-complete sai — chưa được check trong run này.**
+
+| Source | Status | Detail |
+|--------|--------|--------|
+| Upwork workroom | ⏳ Không check được | Script `upwork-weekly-hours.js` hung headless launch (~>35s timeout) — CAPTCHA/Cloudflare |
+| Workstream | 0h active | TuanNT: 0.5h W35 (external dev, ko có task log) |
+| Slack | — | Workspace này ko có Slack tương ứng |
+
+**Standing policy:** silence = never block Trello (external client, messages_only monitor). Nhưng lần này complete mà ko check — revert Trello.
+
+**Trello:** ⚠️ đánh dấu lại incomplete — cần interactive VNC login để verify workroom messages.
+
+---
+
 ## Elena — 06:21 (+07:00)
 
 - **PRs:** 0 open on `nustechnology/Elena-SamGuard-Digital-Plant`.
@@ -246,18 +262,19 @@ MPDM C07SQ4HAUHZ last posted 07-16 21:46 — **5 days silent**. KhanhHH logged 7
 
 ---
 
-## Trello — Updated 09:50
+## Trello — Updated 10:50
 
-**18/22 complete.** Open items (4):
+**17/22 complete.** Open items (5):
 
 | Item | Status | Reason |
 |------|--------|--------|
-| Maddy | ⚠️ open | PR backlog #481 (44d), #509 (28d), #510 (25d), #516 (11d) |
+| Maddy | ⚠️ open | Madhuraka complaints + PR backlog + 5 Kai PRs chưa reply |
 | Aysar | ⚠️ open | MPDM silent 5 days since Jul 16 |
 | Fountain | ⚠️ open | W36 plan not posted; 52 pending reviews |
 | Arthur - Meta-Stamp | ⚠️ open | Art's 3 questions still not directly answered in Slack |
+| Neural Contract | ⚠️ **reverted** | Bị auto-complete sai — Upwork script hang headless, chưa check thực tế |
 
-**Cleared today:** Elliott ✅ (KhanhHH 16h Generator, all reviewed), Blair Brown ✅ (dormant, 0h W35, no complaints), James Diamond ✅ (LeNH 40h), Andrew Taraba ✅, John Yi ✅, Bailey ✅, Rebecca ✅.
+**Cleared today:** Elliott ✅ (KhanhHH 16h Generator), Blair Brown ✅ (dormant), James Diamond ✅ (LeNH 40h), Andrew Taraba ✅, John Yi ✅, Bailey ✅, Rebecca ✅.
 
 **Check Mail:** 6/6 complete, card marked done.
 
