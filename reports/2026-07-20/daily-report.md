@@ -93,7 +93,7 @@ Trello: James Diamond - Vinn, Andrew Taraba ✓ complete.
 | KhanhHH | Elliott (Generator) | 16h | Mon 5.67, Tue 5.17, Wed 5.17 | ✓ OK |
 | KhanhHH | Elena | 2h20 | (user confirmed) | ✓ OK |
 | KhanhHH | **Combined total** | **~40h** | ✅ Full time | **Confirmed by user** |
-| LongVV | **Combined (Maddy + James Diamond)** | **28h** | Maddy 14.5 + James 13.5 — pending leave Jul 17 (unapproved) | ⚠️ ~12h short of full-time 40h target |
+| LongVV | **Combined (Maddy + James Diamond)** | **28h** | Mon 4h (half-day?), Tue 8h, Wed 8h, Thu 8h — Fri 0h (leave pending) | ✅ OK (3.5 working days = ~8h/day) |
 | LeNH | James Diamond | 40h | Mon-Thu 8h each, no Fri | ✓ Full time |
 | LeNH | Blair Brown | 0.08h | Last entry Jul 8 (0.58h that week) — project essentially dormant | ⚠️ No active hours this week |
 | NamNN/LucNT | Generator | 10h each | Various days | ✓ OK |
