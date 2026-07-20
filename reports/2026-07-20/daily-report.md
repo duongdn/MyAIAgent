@@ -205,6 +205,25 @@ Trello: Arthur - Meta-Stamp ⚠️ left incomplete — real unresolved client qu
 
 ---
 
+## Re-check — 08:55 (+07:00)
+
+**Re-fetched live sources for all 6 open items. Key findings:**
+
+| Item | Previous status | Recheck result |
+|------|----------------|----------------|
+| Arthur - Meta-Stamp | ⚠️ incomplete (3 unanswered questions) | **🟡 Still open but positive signal.** Matrix room had 10 new messages today (08:33-08:47): TienND/PhucVT actively discussing/explaining the commit-attribution question internally (PhucVT clarified Thu was when role-of-Nick was communicated, pre-Thu commits were still under David's name per standing arrangement). NamTV coordinating the discussion. This is the team addressing Art's concerns — but no evidence Art has been directly replied to yet. Slack Solid Code still `invalid_auth` (needs David's fresh cookie — not fixable headless). GitHub still blocked (davidztv not authenticated in this env). |
+| Fountain | ⚠️ incomplete (no plan yet + actuals blocked) | **🟡 Still open.** Matrix Fountain room checked at 08:50 — no W36 plan posted yet (still within 08:30-09:30 window). Recommend recheck after 09:30. Trello board inaccessible (Rick's account, not in DuongDN's token scope). |
+| Maddy | ⚠️ incomplete (PR backlog) | **🔴 Still open (unchanged).** Xtreme Slack verified clean (0 new msgs since Jul 19 12:32). Bitbucket token expired (kai's AT token) — cannot re-verify PR status. PR backlog #481 (44 days), #509 (28 days), #510 (25 days), #516 (11 days) all unaddressed. |
+| Aysar | ⚠️ incomplete (MPDM silent + no WS) | **🔴 Still open (unchanged).** Baamboozle Slack searched — 0 new msgs since Jul 19 12:32. MPDM C07SQ4HAUHZ last activity still Jul 16 21:46 (5 days). KhanhHH hours unverifiable (Workstream blocked). |
+| Elliott | ⚠️ incomplete (WS outage) | **🟡 Tentatively resolvable.** Generator Slack searched — 0 new msgs since Jul 19 12:32 (Sunday+Monday morning quiet, normal). No explicit alert signal — silence is consistent with normal Monday. However hours unverifiable (Workstream blocked). Trello mapped to KhanhHH hours which can't be confirmed. |
+| Blair Brown - Peptide Clyde | ⚠️ incomplete (WS outage) | **🟡 Still open.** LeNH hours for Fri 07-17 unverifiable (Workstream blocked). Sheets scan timed out. No alert signal from Slack or Matrix. |
+
+**Attempted Workstream re-auth:** Workstream login script ran successfully (saved new `access_token` + `updated_at`), but the saved token still returns 403 on `/api/me` and all project endpoints — the SSO session is technically alive but the token lacks required permissions for the API operations. This is a persistent infrastructure limitation (known Keycloak client issue), not a new regression. All Workstream-gated items remain blocked until resolved.
+
+**Updated totals:** 14/22 complete (removed Elliott from 16 since silence is normal — Elliott may be closable). Still open: Maddy, Aysar, Fountain, Arthur, Blair Brown — plus Elliott deferred pending Workstream check.
+
+---
+
 ## Reminders — 06:10 (+07:00)
 
 No 0h dev to flag — 07-19 was Sunday (non-workday), 0h expected for all. No reminders sent (print-only policy also applies; none needed this run).
