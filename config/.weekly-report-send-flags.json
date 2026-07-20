@@ -2,21 +2,21 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-07-06",
-    "message_text": "Report week 06/07\n\nJames Diamond\n\nWeb: 37h/48h\nPhucVT: 0h/0h (chuyển sang Crystal lang/Arthur tuần này, OT được duyệt)\nLeNH: 34h/40h\nLongVV: 3h/8h (5h trả nợ giờ thiếu tuần trước không charge thêm, 3h charge làm bù performance cho LeNH)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h 35m\nKhanhHH: 0h 5m",
-    "confirmed": true,
-    "confirmed_at": "2026-07-10T22:33:55.503+07:00",
-    "sent": true,
-    "sent_at": "2026-07-10T22:34:36.948+07:00",
-    "event_id": "$JCzO4Vxh_l67Y6awnl80s9HY5iMCZWPcW30Ixqct-9U",
+    "week_start": "2026-07-13",
+    "message_text": "Report week 13/07\n\nJames Diamond\n\nWeb: 40h/53h 30m\nPhucVT: 0h/0h (vẫn đang chuyển sang Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\nLongVV: 0h/13h30m (3h trả nợ, 10h30m làm trước report sau)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
+    "confirmed": false,
+    "confirmed_at": null,
+    "sent": false,
+    "sent_at": null,
+    "event_id": null,
     "previous_week": {
-      "week_start": "2026-06-29",
-      "message_text": "Report week 29/06\n\nJames Diamond\n\nWeb: 35h/42h\nPhucVT: 28h/28h\nLongVV: 0h/2h (bù charge thiếu tuần trước, không charge thêm)\nLeNH: 7h/12h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 4h 10m\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 28h 10m",
+      "week_start": "2026-07-06",
+      "message_text": "Report week 06/07\n\nJames Diamond\n\nWeb: 37h/48h\nPhucVT: 0h/0h (chuyển sang Crystal lang/Arthur tuần này, OT được duyệt)\nLeNH: 34h/40h\nLongVV: 3h/8h (5h trả nợ giờ thiếu tuần trước không charge thêm, 3h charge làm bù performance cho LeNH)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h 35m\nKhanhHH: 0h 5m",
       "confirmed": true,
-      "confirmed_at": "2026-07-04T12:41:29.596320+07:00",
+      "confirmed_at": "2026-07-10T22:33:55.503+07:00",
       "sent": true,
-      "sent_at": "2026-07-04T12:47:00+07:00",
-      "event_id": "$nidVkn-lURcvM_b1h4GqHVgBbNpQ6JLZQNzgEBa7uBk"
+      "sent_at": "2026-07-10T22:34:36.948+07:00",
+      "event_id": "$JCzO4Vxh_l67Y6awnl80s9HY5iMCZWPcW30Ixqct-9U"
     },
     "history": [
       {

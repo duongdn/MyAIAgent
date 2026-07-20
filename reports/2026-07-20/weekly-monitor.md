@@ -145,25 +145,27 @@ Raw data:
 | Dev | Project | Charge | Actual | Source |
 |-----|---------|--------|--------|--------|
 | PhucVT | JD Web | 0h | 0h | WorkStream — 0h all week, still on Crystal lang/Arthur |
-| LeNH | JD Web (extra) | 40h | 40h | WorkStream — fully charged, no pending review this week |
-| LongVV | JD Web (flex) | 13h 30m | 13h 30m | WorkStream — all charged as normal work, no makeup annotation found in the data |
+| LeNH | JD Web | 40h | 40h | WorkStream — fully charged, alone fills the 40h Web cap |
+| LongVV | JD Web (flex) | 0h | 13h 30m | WorkStream — not needed to fill the cap (LeNH alone covers it); user-directed split: 3h trả nợ + 10h30m làm trước report sau (banked for a future week) |
 | AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
 | DuongDN | Marcel (Tokenlite) | 0h | 0h | WorkStream + Sheets — no entries this week |
 | LeNH | Blair Brown | 0h | 0h | WorkStream — 0 rows this week |
 | KhanhHH | Blair Brown | 0h | 0h | WorkStream — 0 rows this week |
 
-Web total: charge = 0+40+13.5 = **53.5h** / actual = 0+40+13.5 = **53.5h** (per the corrected sum rule — not the fixed 40h contract number).
+**Web charge model corrected 2026-07-20:** charge is capped at 40h, filled in dev-priority order (LeNH alone reaches it this week); LongVV's hours beyond what's needed to fill the cap get charge=0 and are banked via annotation rather than summed uncharged into Web total. See `docs/memory/weekly-report/feedback_matrix_report_format.md` for the full rule (supersedes the 2026-07-04 uncapped-sum rule).
 
-Draft message:
+Web total: charge = 0+40+0 = **40h** / actual = 0+40+13.5 = **53.5h**.
+
+Final message (confirmed by user 2026-07-20):
 ```
 Report week 13/07
 
 James Diamond
 
-Web: 53h 30m/53h 30m
+Web: 40h/53h 30m
 PhucVT: 0h/0h (vẫn đang chuyển sang Crystal lang/Arthur tuần này)
 LeNH: 40h/40h
-LongVV: 13h 30m/13h 30m
+LongVV: 0h/13h30m (3h trả nợ, 10h30m làm trước report sau)
 
 Mobile: 19h/19h
 AnhNH2: 19h/19h
@@ -182,7 +184,7 @@ KhanhHH: 0h
 
 Note: Blair Brown shows 0h for both LeNH and KhanhHH — this is the second straight week near/at zero. Worth confirming with the user whether this is expected before sending, given last week's active billing dispute on this project.
 
-**Awaiting explicit confirmation of this exact text before sending.**
+**Awaiting final send confirmation** (numbers now settled per user's direct correction — see `config/.weekly-report-send-flags.json`, `confirmed: false` until explicitly flipped).
 
 ---
 
