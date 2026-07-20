@@ -1,6 +1,6 @@
 ## 📰 Tin tức tổng hợp — 2026-07-20
 
-**Note:** 3 nguồn Facebook AI (Thiệu Nguyễn, Duy Nguyen/mrgoonie, Nghiện AI Group) vẫn lỗi kỹ thuật — `scripts/facebook-page-scraper.js` đã bị xoá khỏi repo trong đợt dọn dẹp tự động, chưa được khôi phục. Reuters Finance lỗi DNS (không phân giải được domain).
+**Note:** Reuters Finance lỗi DNS (không phân giải được domain).
 
 ---
 
@@ -185,20 +185,35 @@
 - [Bản đồ System Design: khái niệm cần biết trước khi thiết kế hệ thống chịu tải cao](https://thieunv.substack.com/p/ban-o-system-design-nhung-khai-niem) — Tổng hợp các khái niệm quan trọng nhất trong system design, xoay quanh 5 câu hỏi cốt lõi.
 
 ### 📱 Thiệu Nguyễn — Facebook AI
-_(Lỗi kỹ thuật — scraper không tồn tại, không phải nguồn trống thật)_
+- [Rebrand ClaudeKit thành AgentKit](https://www.facebook.com/shinantori/posts/pfbid0PKwkyNQCBWmXUP58RumKjAtQqZtQjZjpQaFKTF9qmzKa3ic3zg6a5apQjRSZ8RNLl) — CK đổi tên thành AK (CLI mới `ak`), người đã mua CK không cần mua lại, chỉ cần chuyển CLI.
+- [Đăng ký subscriber nhận nội dung AI chuyên sâu](https://www.facebook.com/shinantori/posts/pfbid0LQn71SKJ97g85MdtiHQTtZRfhxTjKHf7F4p9ok7cTuqzN5ZiCSAXLX4kDurpm8Vfl) — Kêu gọi theo dõi kênh subscriber để nhận bài viết độc quyền về AI practical, workflow optimization, automation.
+- [(bài ghim trùng lặp — cùng nội dung với bài trên)](https://www.facebook.com/shinantori/posts/pfbid0jiue5S3rSmxZVf8HwR6c5g7vnEUbibE3jfBG67gNgzPE4QdDCq7Pgq51pAjmd5msl) — Facebook hiển thị lại bài ghim dạng "Bài viết khác".
+- [Cảm ơn vì lắng nghe phản hồi người dùng](https://www.facebook.com/shinantori/posts/pfbid0SfnwT74A3N9iQvAhUMvyztBS355udETihtSzZL3yFdDVqZK5JdnGgoKsFiTyUC1Ml) — Bài viết cảm ơn ngắn, chúc cuối tuần vui vẻ.
+- [MisAnthropic neo Fable 5 cho gói trả phí](https://www.facebook.com/shinantori/posts/pfbid08fR6FktJCfRYmrXquud7GAwqrg9mF7EftwJb4gsX3RLtZWsGnvnoFqpeY6iCCtdCl) — Trước sức ép từ OpenAI, Anthropic mở Fable 5 cho gói Max/Team Premium; user Pro/Team Standard được tặng thêm quota.
+- [Nạn nhân drama giữa 2 "big tech"](https://www.facebook.com/shinantori/posts/pfbid024PWTFiNqDGu5HQCBB4AMQMkKKSjkiLaV52EULZEhA77EQc6G4yvUK6UWY8Pi6nLpl) — Than thở việc bị ảnh hưởng bởi tranh chấp giữa hai hãng công nghệ lớn.
 
 ### 📱 Duy Nguyen (mrgoonie) — Facebook AI
-_(Lỗi kỹ thuật — scraper không tồn tại, không phải nguồn trống thật)_
+- [Kênh Zuey AI — cập nhật mới nhất](https://www.facebook.com/mrgoonie/posts/pfbid02J4hd8TNr7qoWuGDnjLGy99RKnnikGX9yYepueaaDyRDMQDFR88LL7KrrCor8mGQ7l) — Giới thiệu kênh Zuey AI (900 thành viên), mời theo dõi để cập nhật tin mới.
+- [Qwen 3.8 Max sắp ra mắt](https://www.facebook.com/mrgoonie/posts/pfbid0gz7jUkfYbVsyZ2gF8ScQBiMyoaLZ3EkJAgxpgYu8t2ZnxVpBczPrBLdvchueuVT9l) — Qwen 3.8 Max (2.4T tham số) được cho là kém hơn Kimi K3 (2.8T) một chút, tự nhận gần bằng Fable 5.
+- [Mời đăng ký subscriber](https://www.facebook.com/mrgoonie/posts/pfbid0US1iKZr79zx7RjJAiz78sv8E7Frmgw777bcpQqX6uWhfya91tuRx3KkqtBq6tWhHl) — "Tôi FOMO để bạn không cần làm thế" — kêu gọi đăng ký nhận nội dung độc quyền.
+- [Xu hướng self-host open weight models](https://www.facebook.com/mrgoonie/posts/pfbid02bE9jPmnaCxJkEbhwfhWEbU4hTmcYTmXW8ERbQpoC4RqVun1R8BTfzu5tR5PpZXFXl) — Bàn về việc self-host Kimi K3 (2.8T, ~48×H100 80G) để tiết kiệm chi phí, hiệu năng ngang Claude Fable 5.
+- [Newsfeed sắp tràn ngập thuật ngữ "Engineering" mới](https://www.facebook.com/mrgoonie/posts/pfbid0fegpWJCSDfGvpz1N9fMz3FqthuF5DxJSXq6QGpTRc694XWEqrFCamkvFuLxzfobJl) — Giễu nhại trend đặt tên buzzword mới liên tục (Graph Engineering, Harness Engineering...).
+- [(bài ghim trùng lặp — mời subscriber)](https://www.facebook.com/mrgoonie/posts/pfbid02xLWKT7m1zzgk1xC1ExijsDECeZcAbHBuGo5tY1uMLWnaT3dorAWWkFhbbNuPPkj2l) — Bình luận ghim lặp lại lời mời đăng ký subscriber.
 
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
-_(Lỗi kỹ thuật — scraper không tồn tại, không phải nguồn trống thật)_
+- [Full Prompt ở bài ghim](https://www.facebook.com/groups/nghienai/posts/2526927937779076/) — Vân Thanh chia sẻ prompt, đã tắt bình luận.
+- [Học AI để không bị bỏ lại phía sau](https://www.facebook.com/groups/nghienai/posts/2264173570721182/) — Nguyễn Hùng Mạnh chia sẻ series prompt thực dụng: viết tài liệu siêu tốc, gia sư AI cá nhân.
+- [Cách lấy Prompt ở bài ghim](https://www.facebook.com/groups/nghienai/posts/2525019677969902/) — Vân Thanh hướng dẫn cách lấy prompt tham khảo.
+- [Lấy Prompt tham khảo bài ghim (bản cũ hơn)](https://www.facebook.com/groups/nghienai/posts/2513952152409988/) — Cùng chủ đề, đăng cách đây 4 tuần.
+- [Concept sinh nhật tạo bởi GPT](https://www.facebook.com/groups/nghienai/posts/2446509822487555/) — Vân Thanh chia sẻ ảnh sinh nhật tạo bằng GPT, được đánh dấu nội dung đáng chú ý.
+- [Xin link tham khảo](https://www.facebook.com/groups/nghienai/posts/2385150041956867/) — Dee Truong bình luận xin link (bài cũ, 23 tuần).
 
 ### Điểm nổi bật AI
 - Cuộc đua mô hình giá rẻ tiếp tục nóng: Anthropic ra Claude Sonnet 5 giá rẻ hơn cho agent, Google Gemini 3.5 Flash đạt hiệu năng gần flagship Anthropic với giá chỉ 1/3.
 - Apple kiện OpenAI gây tranh cãi về kế hoạch phần cứng/IPO của OpenAI; giới sáng tạo (Nolan, Dave Eggers) tiếp tục hoài nghi tác động văn hoá của AI.
 - Việt Nam công bố danh mục hệ thống AI rủi ro cao — bước đi quản lý cụ thể đầu tiên, trong khi doanh nghiệp trong nước vẫn ở giai đoạn đầu triển khai AI thực chất.
 - OpenAI đẩy mạnh an toàn AI cho thanh thiếu niên và ra mắt GPT-Red (hệ thống red-team tự động); Google DeepMind mở rộng hợp tác nghiên cứu liên ngành (y sinh, giáo dục, điện ảnh với A24).
-- 3 nguồn Facebook AI tiếp tục lỗi kỹ thuật do scraper bị xoá khỏi repo, chưa được khôi phục — cần xử lý ở cấp hạ tầng, không phải do nguồn trống bài.
+- Cộng đồng Facebook AI (Thiệu Nguyễn, mrgoonie, Nghiện AI): rebrand ClaudeKit→AgentKit, đồn đoán về Qwen 3.8 Max/Kimi K3, xu hướng self-host open weight models, và chia sẻ prompt thực dụng trong nhóm Nghiện AI.
 
 ---
 
@@ -403,3 +418,5 @@ _(Lỗi kỹ thuật — scraper không tồn tại, không phải nguồn trố
 - Supply-chain attack tiếp tục là mối đe dọa lớn: 7 package npm độc hại trong hệ sinh thái Vite dùng blockchain command-and-control để phát tán RAT.
 - Việt Nam đẩy mạnh diễn tập thực chiến và ban hành kế hoạch an ninh mạng cấp địa phương (Hà Tĩnh), song song với hoàn thiện pháp lý cho tài sản mã hóa/số.
 - FBI thu giữ hạ tầng proxy NetNut/botnet Popa; nhóm hacker Scattered Spider nhận tội vụ tấn công Transport for London 2024 — cho thấy nỗ lực thực thi pháp luật quốc tế tiếp tục có kết quả.
+
+**Recheck 10:34:** 3 nguồn Facebook AI (Thiệu Nguyễn, mrgoonie, Nghiện AI) đã fix — root cause: `scripts/facebook-page-scraper.js` bị xoá trong cleanup commit `d0d3fd5` (2026-07-15), khôi phục lại từ commit `740c578` (bản có sẵn 2 fix Chrome-path + Xvfb), test trực tiếp 3 nguồn đều trả bài thật.
