@@ -40,41 +40,43 @@ Trello: Check mail — all 6 Zoho items ✓ complete, card marked done.
 
 ---
 
-## Maddy / Xtreme Soft Solutions — Updated 10:30
+## Maddy / Xtreme Soft Solutions — Updated 10:40
 
 **🔴 Slack customer complaints:**
-- Jul 14 18:47 Madhuraka: email filtering bug + screen recording → Kai "ok" → **ko có JIRA ticket**
-- Jul 15 08:34 Madhuraka: **caching/refresh** REF link issue → **LIFM2-455** (To Do — Anoma Jul 18: "redirect to empty form")
-- Jul 19 14:20 Madhuraka: Shipping Protection V3 "check and advise?" → Kai **chưa reply >19h**
+- Jul 14 18:47 Madhuraka: email filtering bug + screen recording → Kai "ok" → **ko có JIRA**
+- Jul 15 08:34 Madhuraka: caching/refresh REF link issue → **LIFM2-455** (To Do, 1h est)
+- Jul 19 14:20 Madhuraka: Shipping Protection V3 → Kai **chưa reply >19h**
 - Jul 20 09:11 Kai: OTP → 09:20 "Accessed" ✅
 
-**LIFM2-455** Refresh Issue on Quotes page:
-- Created Jul 15 → Madhuraka Jul 16 "Proceed" → Kai Jul 16 "test on RMS" → **Anoma Jul 18: "Ref:000 redirect me to empty form"** → Status **"To Do"** — chưa fix feedback Anoma
+**LIFM2-455** caching/refresh: 1h est/1h logged. Madhuraka "Proceed" → Kai "test on RMS" → Anoma Jul 18 "redirect to empty form" — **To Do chưa fix**
 
-**JIRA Feedback Report — Kai's active tickets:**
+**JIRA Est vs Charge (Kai's active tickets):**
 
-| Ticket | Status | Updated | QC Feedback | Rework |
-|--------|:------:|:-------:|-------------|:------:|
-| **LIFM2-428** Auth Certificate | In Progr. | Jul 16 | Anoma Jul 10: hide Auth Cert from orders tab, not return with item. Madhuraka Jul 16: "Proceed #1 and #3" (≠ #2) | 🟡 partial rework |
-| **LIFM2-447** Spam/Open rates | Testing | Jul 20 | Anoma Jul 17 "Check working" → Kai Jul 20: use Postmark API, not email. Anoma chưa confirm | 🟡 pending |
-| **LIFM2-409** Import payouts | Review | Jul 14 | Madhuraka Jun 24: need validation process. **PR #481 Jul 7 "High: refund double-posted" — Kai chưa reply** | 🔴 44d |
-| **LIFM2-451** Grid changes | Review | Jul 16 | Madhuraka Jul 15: "Proceed" | ✅ |
-| **LIFM2-450** Buy offer | Review | Jul 14 | Madhuraka Jul 13: approved | ✅ |
-| **LIFM2-449** Consign tab | Review | Jul 13 | Approved | ✅ |
-| **LIFM2-446** Row locking | Review | Jul 13 | Approved | ✅ |
-| **LIFM2-434** AI MVP | Ready deploy | Jun 28 | Từ Jun 28 chưa deploy | ⏳ |
-| **LIFM2-453** Custom % | Ready deploy | Jul 19 | Anoma "Testing ok" + Madhuraka "Proceed" — chưa deploy | ⏳ |
-| **LIFM2-455** Quotes refresh | To Do | Jul 18 | Chưa bắt đầu | ⏳ |
-| **LIFM2-436** Returns | To Do | Jul 19 | Chưa bắt đầu (PR #486 mở Apr 29) | ⏳ |
+| Ticket | Status | Est | Spent | Over? | QC Feedback |
+|--------|:------:|:---:|:-----:|:-----:|-------------|
+| LIFM2-409 Import payouts | Review | **113.2h** | **109.2h** | 🟡 4h left | PR #481 Madhuraka High chưa reply 44 ngày |
+| LIFM2-428 Auth Certificate | In Progress | **53h** | **45.8h** | 🟡 7.2h left | Anoma Jul 10 hide cert; Madhuraka Jul 16 Proceed #1+#3 |
+| LIFM2-434 AI MVP | Ready deploy | **32h** | **25.5h** | 🟡 6.5h spare | Từ Jun 28 chưa deploy |
+| LIFM2-446 Row locking | Review | **12h** | **12h** | ✅ | Approved Jul 13 |
+| LIFM2-449 Consign tab | Review | **8h** | **8h** | ✅ | Approved Jul 13 |
+| LIFM2-450 Buy offer | Review | **6h** | **6h** | ✅ | Approved |
+| LIFM2-436 Returns | To Do | **15h** | **13.8h** | 🟡 1.2h left | Chưa bắt đầu (PR #486 mở Apr 29) |
+| LIFM2-447 Spam/Open | Testing | **4h** | **4h** | ✅ | Anoma Jul 17 check → Kai Jul 20 hướng dẫn lại API |
+| LIFM2-447 continued | Testing | | | | Anoma chưa confirm lại |
+| LIFM2-453 Custom % | Ready deploy | **2h** | **2h** | ✅ | Chưa deploy |
+| LIFM2-455 Quotes refresh | To Do | **1h** | **1h** | ✅ | Anoma Jul 18 "redirect to empty form" chưa fix |
+| LIFM2-451 Grid changes | Review | **1h** | **1h** | ✅ | Madhuraka Jul 15 "Proceed" |
+| LIFM2-452 4W Sent | To Do | **2h** | **—** | ⏳ | Chưa bắt đầu |
+| LIFM2-454 Quote inconsistency | To Do | **4h** | **—** | ⏳ | Chưa bắt đầu |
 
-**Bitbucket PR backlog (code review reply missing):**
-- #481 LIFM2-409-feedback: Madhuraka Jul 7 **High** "refund double-posted" → Kai **44 ngày** chưa reply
-- #486 LIFM2-436: Madhuraka Jun 6 codex findings → Kai **43 ngày** chưa reply
-- #509 LIFM2-428: Codex **Critical** → Kai **28 ngày** chưa reply
-- #510 LIFM2-446: Codex **Critical** → Kai **25 ngày** chưa reply
-- #516 LIFM2-449: Codex **Critical** → Kai **11 ngày** chưa reply
+**PR backlog (code review reply missing):**
+- #481 LIFM2-409: Madhuraka High "refund double-posted" → Kai **44 ngày**
+- #486 LIFM2-436: Madhuraka codex findings → Kai **43 ngày**
+- #509 LIFM2-428: Codex Critical → Kai **28 ngày**
+- #510 LIFM2-446: Codex Critical → Kai **25 ngày**
+- #516 LIFM2-449: Codex Critical → Kai **11 ngày**
 
-**LongVV W35:** 14.5h/16h Maddy + 13.5h James Diamond = 28h/3.5 ngày ✅
+**LongVV W35:** 14.5h/16h Maddy + 13.5h James = 28h/3.5 ngày ✅
 
 **Trello:** ⚠️ open.
 
