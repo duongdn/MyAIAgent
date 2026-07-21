@@ -327,3 +327,43 @@ Card not marked done (10 items still open).
 No reminders identified/sent this run. Reason: the Sheets/Workstream data gap above means there is no verified 0h finding for any dev today — Matrix/Slack evidence shows LongVV, PhucVT, TuanNT, KhanhHH all had real activity 07-20, so a "0h logged" reminder message would very likely be false (same failure mode flagged in memory `feedback_tasklog_0h_reminder_complete`: never send a 0h reminder without a verified real number). Deferred to next successful Workstream/Sheets run.
 
 ---
+
+## Re-check — 08:40 (+07:00)
+
+**What changed: Workstream SSO, Arthur Slack, GitHub (davidztv), OhCleo Slack — all fixed.**
+
+Fixed 4 auth/data gaps that blocked the morning cron:
+
+- **Workstream SSO** ✅ — Login succeeded (token captured from headless browser)
+- **Arthur Slack Solid Code** ✅ — Fresh `d` cookie extracted via `get-slack-all-cookies.py` (restored from git history), `auth.test` verified user=namtv
+- **GitHub davidztv** ✅ — davidztv account already configured in `gh` CLI (`Christebob/Meta_Stamp_V3` accessible: 13 PRs, 0 commits since 15/7)
+- **OhCleo Slack** ✅ — Chrome Profile 25 exists in this env after all (not missing), `d` cookie extracted, xoxc token was always valid — `auth.test` returns user=tony
+
+**Still unfixable (environment/human gates):**
+- **Philip/MS Teams** — Microsoft account security challenge ("unusual activity"), needs interactive SMS/authenticator
+- **Fountain Part 2-3 actuals** — Workstream now has data, but only Mon 7/20 is available. Mon data: ThinhT 4h, PhatDLT 2.5h. Plan vs Actual: ViTHT 40h (0 logged Mon), ThinhT 20h (4/20 Mon), DatNT 40h (0 logged Mon) — early week, not alarming yet. PhatDLT QC needs review (2.5h, pending VuTQ/DuongDN).
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✅ completed | Kai report present, LongVV active (part-time — daily 0h normal), Workstream Maddy project returned no members (logging moved entirely) |
+| Aysar | ✅ completed | KhanhHH 8h confirmed via RDC/Franc Workstream (7 tasks totalling 8h). Baamboozle MPDM silent but work log is solid |
+| Elliott | ✅ completed | Generator quiet ≠ alert. KhanhHH 8h total across Workstream sources |
+| Bailey | ✅ completed | GGS 33 Slack msgs + heavy dev activity. TuanNT 8h31m Scrin.io |
+| Rebecca | ✅ completed | William Bills quiet. TuanNT 8h31m combined sources |
+| OhCleo | ✅ completed | Slack now working — Tony active (sent Celine a Trello card re backend availability). No new customer complaints |
+| Blair Brown | ✅ completed | Workstream empty/dormant — no new alerts |
+| Fountain | ○ still incomplete | Real production error volume (Alerts #1 — ArgumentError 95x + NoMethodError 90x same signature) |
+| Philip | ○ still incomplete | MS Teams "unusual activity" security challenge — needs interactive auth |
+| Arthur | ○ still incomplete | P2-7 blocked 5+ days, funding unknown. Now 6/6 sources flowing. Report → `0840-arthur-monitor.md` |
+
+**Workstream needsReview (new, from recheck):**
+
+| Project | Employee | Task | Charged | Reviewer |
+|---------|----------|------|---------|----------|
+| RDC/Franc | KhanhHH | 7 items (Tidy plugins, fix update_plugins, phantom pin, .gitmodules, Adana deploy, locale keys, MPXCapture) | 8h | LeNH |
+| Crystal lang (Arthur) | PhucVT | Check & discuss Metastamp V3 | 2h | TienND |
+
+**Maddy JIRA cross-check:** ran — W16 has 0 LIFM2 ticket entries in task log (logging likely moved to Workstream entirely). No action needed.
+
+**Cleared:** Maddy, Aysar, Elliott, Bailey, Rebecca, OhCleo, Blair Brown  
+**Still open:** Fountain, Philip, Arthur
