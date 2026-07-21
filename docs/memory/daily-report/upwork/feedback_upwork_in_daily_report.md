@@ -13,4 +13,4 @@ Upwork weekly hours must be checked as part of the daily report and refresh cycl
 2. Include Upwork section in daily report with: workroom, client, developer, this week hours, daily breakdown
 3. Compare Upwork hours with task log (sum ALL rows including Part-time for Upwork comparison)
 4. Flag discrepancies > 1h between Upwork and task log
-5. Workrooms: Rory (LeNH), Aysar (LeNH), Bailey-VietPH, Bailey-DuongDN, Neural Contract (external, messages only)
+5. Workrooms: Rory (LeNH), Aysar (LeNH), Bailey DEV1 (VietPH resigned 2026-06-30, see [[project_php_team]] — do not name him as current), Bailey DEV3 (DuongDN), Neural Contract (external, messages only — see [[feedback_neural_consolidated]] for the current auth method)
