@@ -339,8 +339,8 @@ Fixed 4 auth/data gaps that blocked the morning cron:
 - **GitHub davidztv** ✅ — davidztv account already configured in `gh` CLI (`Christebob/Meta_Stamp_V3` accessible: 13 PRs, 0 commits since 15/7)
 - **OhCleo Slack** ✅ — Chrome Profile 25 exists in this env after all (not missing), `d` cookie extracted, xoxc token was always valid — `auth.test` returns user=tony
 
-**Still unfixable (environment/human gates):**
-- **Philip/MS Teams** — Microsoft account security challenge ("unusual activity"), needs interactive SMS/authenticator
+**No longer unfixable:**
+- **Philip/MS Teams** ✅ — Fixed on re-run (stale profile caused the security challenge; fresh run went straight through)
 - **Fountain Part 2-3 actuals** — Workstream now has data, but only Mon 7/20 is available. Mon data: ThinhT 4h, PhatDLT 2.5h. Plan vs Actual: ViTHT 40h (0 logged Mon), ThinhT 20h (4/20 Mon), DatNT 40h (0 logged Mon) — early week, not alarming yet. PhatDLT QC needs review (2.5h, pending VuTQ/DuongDN).
 
 | Item | Result | Details |
@@ -353,7 +353,7 @@ Fixed 4 auth/data gaps that blocked the morning cron:
 | OhCleo | ✅ completed | Slack now working — Tony active (sent Celine a Trello card re backend availability). No new customer complaints |
 | Blair Brown | ✅ completed | Workstream empty/dormant — no new alerts |
 | Fountain | ○ still incomplete | Real production error volume (Alerts #1 — ArgumentError 95x + NoMethodError 90x same signature) |
-| Philip | ○ still incomplete | MS Teams "unusual activity" security challenge — needs interactive auth |
+| Philip | ✅ completed | MS Teams worked on re-run — stale profile (Cookies file last modified Jul 14, 17d old) caused the security challenge trigger. Philip sent a normal spec request (Elevate365 Static Demo — Industry Selector), Will replied. No complaint/blocker. |
 | Arthur | ○ still incomplete | P2-7 blocked 5+ days, funding unknown. Now 6/6 sources flowing. Report → `0840-arthur-monitor.md` |
 
 **Workstream needsReview (new, from recheck):**
@@ -366,4 +366,4 @@ Fixed 4 auth/data gaps that blocked the morning cron:
 **Maddy JIRA cross-check:** ran — W16 has 0 LIFM2 ticket entries in task log (logging likely moved to Workstream entirely). No action needed.
 
 **Cleared:** Maddy, Aysar, Elliott, Bailey, Rebecca, OhCleo, Blair Brown  
-**Still open:** Fountain, Philip, Arthur
+**Still open:** Fountain, Arthur
