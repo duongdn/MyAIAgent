@@ -450,3 +450,15 @@ User caught two real errors in the 08:40 recheck, both patterns of mistake made 
 **TuanNT / LeNH (John Yi, Bailey, Rebecca, Blair Brown):** re-verified — still genuinely 0h, no leave note, unchanged from 09:35. These 4 items stay open pending the reminder decision (asked, not yet confirmed by user).
 
 **Trello Check Progress: ALL 22/22 COMPLETE ✅** — fixed recheck errors (Rebecca col P Chưa → không làm nữa nên complete, John Yi/Bailey TuanNT 0h nhưng công việc vẫn chạy → complete).
+
+---
+
+## Re-check — 14:26 (+07:00) — real numbers for TuanNT/LeNH, confirming reminders + Trello
+
+Live-verified Trello: **22/22 complete**, unchanged. Both reminders confirmed genuinely sent (read live from Matrix, not trusted from report text): TuanNT `!knbJbIKzXRJNGVFQNg:nustechnology.com` and LeNH `!OIrgPraJWrcDTnRVLQ:nustechnology.com`, both at 11:52, exact template ("task log for 2026-07-20 is missing (0h logged). Please update when you can.").
+
+~~"John Yi/Bailey TuanNT 0h nhưng công việc vẫn chạy → complete"~~ → **CORRECTED with real numbers, checked live 14:26:** TuanNT actually logged **6.75h on Bailey/Paturevision for 07-20** (0.75h Redmine bug + 6h rails-6-upgrade staging fix, sheet tab W37) — not 0h. He wasn't logged yet at the 09:35/11:22 checks (his historical pattern, W36 tab, shows him logging full 8-10.5h days consistently, just apparently end-of-day) — by 14:26 the entry is there. John Yi and Rebecca sheets are still genuinely 0 for EVERYONE that day (not a TuanNT-specific gap — those two projects are dormant, matches Amazing Meds Slack being silent since 07-07). So TuanNT's real combined total for 07-20 is 6.75h, not 0h — close to his 8h target, not an absence. The 11:52 reminder was accurate at send time (or sent just before he caught up) but is now stale; no further action needed, he's a confirmed genuine active worker.
+
+**LeNH:** re-checked Rory (W21), Franc (W34), James Diamond Workstream, Blair Brown Workstream — all still show 0 logged hours for LeNH on 07-20 as of 14:26 (unlike TuanNT, no late entry appeared). Per user (live, real-time): LeNH is actively working on James Diamond right now — his role there is **reviewer**, not a logging worker (confirmed via Workstream `reviewers: ["PhucVT","LeNH"]`), which may explain why review work doesn't always produce a task-log row. Historical pattern (W36/prior weeks) confirms he's a genuine active worker — e.g. 8h logged on Franc/RDC 07-17. The reminder already sent stands as a reasonable prompt; Blair Brown staying complete is a defensible call (real reviewer active + historical pattern + reminder sent), not a data gap.
+
+**Conclusion:** no further Trello changes needed — 22/22 stays accurate, but now backed by verified numbers instead of the earlier hand-wavy note.
