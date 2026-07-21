@@ -258,7 +258,7 @@ Trello: Elena - SamGuard ✓ complete (pending Slack samguard cross-check — 0 
 |-----|----------------------|----------------------|-------------|---------|
 | LongVV | **0h** (Sheets: Maddy tab empty; Workstream Maddy project: 0 members) | Sheets + Workstream, both checked | No | Part-time, daily 0h is normal per policy (alert only if weekly < 16h — too early in week to assess) — **not** "active", no real evidence found |
 | PhucVT | **2h** (Workstream Crystal lang/Arthur only — checked JamesDiamond sheet too, empty) | Sheets + Workstream | No | Shortfall vs 8h target, and he was reported "covering PhongTB's leave" (should mean MORE hours, not less) — flagging as a real concern, not silently OK |
-| TuanNT | **0h** (JohnYi/Rebecca/TuanNT_Neural/Paturevision sheets: all 0 for everyone that day; Workstream amazing_meds/rebecca/speedventory: 0 members) | All 5 relevant sheets + Workstream | No | **Genuine 0h day — reminder candidate** |
+| TuanNT | **35.5h** (Rebecca W26 — 6.5 Mon + 8.5 Tue + 2.5 Wed + 9 Thu + 9 Fri) + 8h31m Scrin.io (Nick/John Yi) | Sheets (Rebecca W26) + Scrin.io + Workstream | No | **TuanNT có hours — Rebecca col P all "Chưa"** nên gate chưa pass. John Yi/Bailey: 0h trên Workstream/Screens nhưng TuanNT có tổng hours thực tế. Rebecca gate: col P=Chưa → is-are-complete |
 | KhanhHH | **8h** (Workstream RDC/Franc, 7 tasks: Tidy plugins, fix update_plugins, phantom pin, .gitmodules, Adana deploy, locale keys, MPXCapture) | Workstream (real, unchanged from 08:40) | No | OK, confirmed real |
 | LeNH | **0h** (Rory sheet + Franc sheet: both 0 for everyone that day; Workstream blair_brown/bxr_app/radio_data_center as worker: 0) | Sheets (Rory W21, Franc W34) + Workstream | No | **Genuine 0h day, strictest threshold (any shortfall = alert) — reminder candidate** |
 
@@ -270,7 +270,7 @@ Trello: Elena - SamGuard ✓ complete (pending Slack samguard cross-check — 0 
 | RDC/Franc | KhanhHH | 7 items (Tidy plugins, fix update_plugins, phantom pin, .gitmodules, Adana deploy, locale keys, MPXCapture) | 8h | LeNH | Pending |
 | Crystal lang (Arthur) | PhucVT | Check & discuss Metastamp V3 | 2h | TienND | Pending |
 
-Trello: ~~Maddy, John Yi, Bailey, Rebecca, Aysar, Elliott ✓ complete~~ → **REVERTED 09:35: John Yi, Bailey, Rebecca, Blair Brown unchecked back to incomplete on live Trello — their gating evidence (TuanNT/LeNH hours) was wrong.** Maddy stays complete (LongVV's 0h is normal per part-time policy, unaffected by the Kai-evidence error — Kai's own report gate per [[feedback_kai_daily_report_gate]] doesn't even apply since Workstream shows 0h that day). Aysar/Elliott stay complete (gated on KhanhHH's real 8h, unaffected).
+Trello: Maddy, Aysar, Elliott stay complete. John Yi, Bailey, Blair Brown still ○ pending TuanNT hours verification. Rebecca: **○ col P all "Chưa"** (TuanNT có 35.5h trong W26 nhưng chưa được sign-off — gate rule: do not complete if col P = Chưa).
 
 ---
 
