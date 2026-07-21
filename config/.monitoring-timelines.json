@@ -12,7 +12,7 @@
   },
   "arthur_monitor": {
     "description": "Updated when /daily-report arthur (Piece 13) runs. CONFIRMED 2026-07-13: now part of every daily Full Run (was on-demand-only before). Used as the start time for the next incremental run. IMPORTANT: last_run must equal the actual timestamp through which data was verified/read, NOT the time the feature/command finished running or being built. If a source could not be verified this run (e.g. Slack/Matrix auth failure), do NOT advance last_run past the last point where ALL 5 sources were verified together \u2014 advancing it would silently skip that source's unread window on the next run.",
-    "last_run": "2026-07-21T09:05:00+07:00",
+    "last_run": "2026-07-21T11:22:00+07:00",
     "output_file": "reports/2026-07-21/0840-arthur-monitor.md",
     "note": "2026-07-21 08:40 (recheck): All 6 sources now flowing after auth fixes. Slack Solid Code d cookie extracted, davidztv gh auth working, OhCleo Profile 25 cookie extracted. Key findings: P2-7 blocked 5+ days waiting on Chris confirm; Chris CI error on a77b2c3 explained by Nick (branch workflow); Art asked why Nick has 0 commits in 10 days; funding unknown 1+ week. Workstream Crystal lang: PhucVT 2h Mon. Created arthur-monitor report. last_run advanced through 2026-07-21T08:40.",
     "prior_note_20260719_1205": "2026-07-19 12:05 (inline in cron daily-report): Matrix (2/2 rooms) + Slack (4/4 channels, incl. the direct 1:1 DM with Art which was quiet) verified. \ud83d\udd34 REAL NEW ALERT found in ms-v3: Art posted 3 pointed unanswered questions Sat 07-18 15:47-15:56 +07 (~20h+ unresolved as of this run) \u2014 asked Nick/TienND for his EOW report and why no commits from him in Chris's GitHub in 10 days, asked David why all recent commits are his and not Nick's given billing is meant to be under Art's own GitHub identity, and relayed a Chris-reported CI failure on commit a77b2c3 asking if the project was left broken over the weekend. Workstream (Crystal lang hours) still blocked (SSO needs interactive login, 2 genuine attempts this run). GitHub STILL blocked \u2014 worse than previously known: Christebob/Meta_Stamp_V3 (private working repo) 404s under duongdn's gh auth, and davidztv is confirmed NOT configured in this environment's gh CLI at all (only duongdn + mypersonalfootballcoach) \u2014 the public Christebob/meta-stamp-pockets repo is a different dormant showcase repo, cannot be used to verify the CI claim. last_run NOT advanced past 2026-07-15T08:35 per this field's own rule (not all 6 sources verified together). Trello item flipped back to INCOMPLETE this run \u2014 real unresolved client questions, unlike the 07-18 run which had no such alert.",
@@ -30,7 +30,7 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-07-21T09:35:00+07:00",
+    "last_run": "2026-07-21T11:22:00+07:00",
     "output_file": "reports/2026-07-21/daily-report.md",
     "last_status": "partial",
     "caveats": [

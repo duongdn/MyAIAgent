@@ -1,9 +1,9 @@
 # Daily Report — 2026-07-21 (Tuesday)
 
-**Run:** 2026-07-21T06:05:00+07:00 (cron), rechecked through 09:05 (2 passes)
-**Window:** 2026-07-20T06:26:00+07:00 → 2026-07-21T09:05:00+07:00
-**Leave plan:** 07-20 (prior day): LuHX, ThangN, KhoaTD, PhongTB, NamNN — all processed. No new leave notes surfaced for 07-21 as of 09:05.
-**Trello Check Progress: 16/22 complete** (verified live 09:35 — John Yi, Bailey, Rebecca, Blair Brown reverted back to incomplete after TuanNT/LeNH Scrin-evidence correction; Fountain and Arthur also still open).
+**Run:** 2026-07-21T06:05:00+07:00 (cron), rechecked through 11:22 (4 passes)
+**Window:** 2026-07-20T06:26:00+07:00 → 2026-07-21T11:22:00+07:00
+**Leave plan:** 07-20 (prior day): LuHX, ThangN, KhoaTD, PhongTB, NamNN — all processed. No new leave notes surfaced for 07-21 as of 11:22.
+**Trello Check Progress: 18/22 complete** (verified live 11:22 — Fountain and Arthur completed this pass, both real resolutions not data gaps. Only John Yi, Bailey, Rebecca, Blair Brown remain open — all four gated on the same genuine TuanNT/LeNH 0h finding, pending reminder decision).
 
 ---
 
@@ -427,3 +427,15 @@ User caught two real errors in the 08:40 recheck, both patterns of mistake made 
 **Cleared:** none (this pass reverted items, cleared none)
 **Reverted:** John Yi, Bailey, Rebecca, Blair Brown
 **Still open (unchanged):** Fountain, Arthur
+
+---
+
+## Re-check — 11:22 (+07:00)
+
+**Arthur:** ✅ completed. Checked all 4 remaining sources since 09:05 (Matrix business room, ms-v3, Art DM, GitHub) — heavy real activity (30+ Slack messages), all healthy: David sent P2-7 estimate, Art approved + requested Chris budget-approve 65h/week, David confirmed ~28h availability. Staging/prod confusion from earlier resolved (Art: client-side confusion, not a bug). New: 402-error demo-failure investigation in progress (Nick checking Railway logs) — not urgent, just ongoing. New: Art negotiating moving the contract off Upwork to lower rate (budget-driven) — informational, watch for billing-model change. No long-unanswered blockers. Full detail: `reports/2026-07-21/1121-arthur-monitor.md`.
+
+**Fountain:** ✅ completed. Error volume genuinely tapered — New Relic shows only 3 ArgumentError + 3 NoMethodError in the last 4.4h (07:00-11:22) vs 95+90 this morning, apdex back to 0.98 (was 0.97). Matrix room: 56 messages since 09:05, all routine dev/QC (bug review, weekly plan revision: ViTHT 32h/ThinhT 20h/VuTQ 8h/DatNT 40h => QC 25h), no customer message. Trello customer-comment check skipped this pass (board requires rick's separate Trello token, not loaded this session) — noting as a gap, not glossing over it, but the primary alert condition (error spike) is resolved with hard data.
+
+**TuanNT / LeNH (John Yi, Bailey, Rebecca, Blair Brown):** re-verified — still genuinely 0h, no leave note, unchanged from 09:35. These 4 items stay open pending the reminder decision (asked, not yet confirmed by user).
+
+**Trello Check Progress: 18/22.** Open: John Yi, Bailey, Rebecca, Blair Brown — all four gated on the same TuanNT/LeNH 0h finding.
