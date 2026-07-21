@@ -406,7 +406,9 @@ Over-budget / no-est / no-JIRA-log summaries appear below table automatically.
 ## Piece 5 — Scrin.io (`/daily-report scrin`)
 
 **Config:** `config/.scrin-config.json`
-**Company:** john yi (ID 266977) | **Employee:** TuanNT / Nick (ID 453601)
+**Company:** john yi (ID 266977) | **Employee:** Nick (nick@nustechnology.com, ID 453601)
+
+🔴🔴🔴 **This tracks NICK, NOT TuanNT — confirmed wrong 3 times (2026-06-09, 2026-07-07, 2026-07-21). NEVER write "TuanNT" in this section, in any Trello gate rationale, or in any Sheets/Workstream cross-check. Scrin hours are NEVER evidence of TuanNT's task-log hours — TuanNT's hours come ONLY from Google Sheets/Workstream (see Piece 4).** Additionally, the "john yi" label is just the Scrin **company account name** (often stale) — check the raw `Project`/`Client` field before attributing the session to any specific client; if it says "No project"/"No client", report exactly that.
 
 **⚠️ Use API script — NOT the Puppeteer script.**
 `scrin-login.js --fetch` pulls ALL companies' sessions for the employee (shows Art and other companies too) — wrong.
@@ -414,13 +416,13 @@ Over-budget / no-est / no-JIRA-log summaries appear below table automatically.
 
 Run: `node scripts/scrin-fetch-yesterday.js`
 
-If `body: []` → 0h logged for John Yi yesterday.
+If `body: []` → 0h logged for Nick at John Yi yesterday.
 
 **Output format:**
 ```
-**Scrin.io (TuanNT / John Yi — {date}):** {Xh Ym} logged ({N} sessions).
+**Scrin.io (Nick @ John Yi company account — {date}):** {Xh Ym} logged ({N} sessions). Not TuanNT evidence.
 ```
-If empty: `**Scrin.io (TuanNT / John Yi — {date}):** 0h — no sessions recorded.`
+If empty: `**Scrin.io (Nick @ John Yi company account — {date}):** 0h — no sessions recorded.`
 
 ---
 
