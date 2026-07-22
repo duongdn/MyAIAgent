@@ -14,7 +14,7 @@
 | 2 | New Relic | MPFC apdex still poor (0.51, unchanged pattern) — `WP_Error::get_method()` bug persists (16x, hit its 100th occurrence today per Rollbar) + several large pages missing cache (author-sitemap.xml 63.5s, players-pass 41.6s, 1 call each). |
 | 3 | Email (vuongtrancr@) | Swish: New Relic "Signal lost for 10 minutes on Low Application Throughput" x2. |
 | 4 | Email (carrick@) | XiD SaaS Backend GitLab pipeline failed on `main` (ad0e2550). FYI only per policy — does not block Check Mail. |
-| 5 | Workstream | ~~SSO could not be completed non-interactively... blocks Maddy/Aysar/Elliott/Blair Brown hour verification, Fountain Parts 2-3, Arthur Crystal-lang hours.~~ → **RESOLVED on recheck 08:42** (transient SSO timing issue, retry succeeded) — unblocked all of the above. Only remaining real finding: **LeNH genuinely 0h 2 days running (Blair Brown), no leave note** — see Re-check section. |
+| 5 | Workstream | ~~SSO could not be completed non-interactively... blocks Maddy/Aysar/Elliott/Blair Brown hour verification, Fountain Parts 2-3, Arthur Crystal-lang hours.~~ → **RESOLVED on recheck 08:42** (transient SSO timing issue, retry succeeded) — unblocked all of the above. ~~LeNH genuinely 0h 2 days running (Blair Brown), no leave note.~~ → **WRONG, corrected 09:15: LeNH logged 8h/day both 07-20 and 07-21 on James Diamond (Portfolio) — 16h combined, fully on target. Not idle, just not on Blair Brown that day.** See Re-check section. |
 | 6 | Upwork | ~~`upwork-weekly-hours.js` hit session-expired + headless re-login hang (needs human CAPTCHA solve) — Rory/Aysar hour context unavailable this run.~~ → **FIXED 08:57**: script only had the live-cookie-injection fix wired into Neural, not Rory/Aysar (same `carrick` account, same fix applies) — plus a separate bug where the top-level "no saved profile dir" gate skipped carrick's account entirely before the fix could even run. Both fixed in `scripts/upwork-weekly-hours.js`; Rory 0:00 + Aysar 1:30 this week now fetched live (matches Workstream's 1.5h Baamboozle figure for KhanhHH/Aysar-adjacent work). |
 | 7 | Upwork (Neural) | ~~`upwork-neural-check.js` failed — no carrick Chrome profile in this sandbox~~ → confirmed 08:42 this was specific to the headless cron sandbox only; works fine interactively (see Re-check section). |
 | 8 | MS Teams | Philip Briggs automated check hit a genuine MS account security challenge (loop stuck on "Help us protect your account", 12 retries) — same known human-verification wall as prior runs. Completed Trello item per policy (automation limitation, not a new customer complaint — last real activity still our own 07-01 outreach). |
@@ -90,13 +90,13 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 |-----------|------|--------|
 | LongVV | 8h (OhCleo) / 0h (Maddy) | **RECHECK 08:42, Workstream unblocked:** full 8h logged on OhCleo, 0h Maddy — no report-check needed on a 0h Maddy day, not an alert. |
 | PhucVT | 5h this week (Crystal lang) | **RECHECK 08:42, Workstream unblocked:** 2h Mon + 3h Tue on Arthur/Crystal-lang, matches Matrix's 39h new-scope estimate context, 2 rows pending TienND review. Not part of the standard 5-dev PHP scan gate (Arthur has its own item), informational. |
-| TuanNT | unverifiable via Sheets/WS | **Confirmed genuinely active via direct Matrix transcript** (Bailey - BA/QC room, 08:20-16:28+07): investigating tenant/stock-sync bug, estimated ~8h to resolve, hotfix branch created, review pending. Real work confirmed — unblocks John Yi/Bailey/Rebecca gates below despite Workstream/Sheets both being unavailable. |
+| TuanNT | ~~unverifiable via Sheets/WS~~ → **9h (Paturevision/Bailey sheet)** | **RECHECK 09:10, actually ran the sheet check this time (Bailey has no Workstream project, Sheets is the sole source per [[reference_workstream]]):** `sheets-tasklog-scan.js 2026-07-21 tuannt` → **9h logged in Paturevision** — real, verified, exceeds 8h target. The original claim relied only on qualitative Matrix confirmation (tenant/stock-sync bug investigation, Bailey - BA/QC room) without pulling the actual sheet number — correct conclusion (gates unblocked) but for an incomplete reason. Both pieces of evidence now agree. |
 | KhanhHH | 1.5h (Baamboozle) + 3h (Generator) = 4.5h | **RECHECK 08:42, Workstream unblocked:** non-zero on both Aysar/Elliott-gating projects, no leave note — gates clear. |
-| LeNH | 0h (confirmed, all 20 projects) | **RECHECK 08:42, Workstream unblocked:** genuinely 0h everywhere (unfiltered dump), 2nd consecutive day, no leave note — Blair Brown gate stays open, real alert. |
+| LeNH | ~~0h (confirmed, all 20 projects)~~ → **16h (James Diamond, 8h/day 07-20+07-21)** | **RECHECK 09:15 (2nd independent unfiltered dump):** the 08:42 check's "0h everywhere" was WRONG — a fresh re-run of the identical unfiltered command minutes later found LeNH logged 8h on 07-20 AND 8h on 07-21, both on "Portfolio - James Diamond" (not Blair Brown). This exact James-Diamond-per-dev-filter-timing pattern is documented 3+ times before in [[feedback_check_workstream_before_flagging_shortfall]] — fully on target, not idle, Blair Brown gate cleared. |
 
 **Maddy JIRA cross-check:** `maddy-jira-tasklog-check.js --week 2026-07-20` → no ticket entries found this week (task-log source has migrated off the legacy sheet, matches the broader Workstream-migration pattern). Not treated as an alert.
 
-Trello: John Yi, Bailey, Rebecca ✓ complete (TuanNT Matrix evidence). ~~Maddy, Aysar, Elliott, Blair Brown ⚠️ skipped (hours unverifiable).~~ → **RECHECK 08:42: Maddy, Aysar, Elliott ✓ complete. Blair Brown still ○ open (real LeNH 0h alert, not unverifiable).**
+Trello: John Yi, Bailey, Rebecca ✓ complete (~~TuanNT Matrix evidence~~ → **TuanNT 9h Paturevision sheet, confirmed live 09:10**). ~~Maddy, Aysar, Elliott, Blair Brown ⚠️ skipped (hours unverifiable).~~ → **RECHECK 09:15: Maddy, Aysar, Elliott, Blair Brown ALL ✓ complete** (Blair Brown: LeNH confirmed 16h combined on James Diamond, not idle — see Re-check section).
 
 ---
 
@@ -125,13 +125,13 @@ Trello: Elena-SamGuard, Elena-WordPress SamGuard ✓ complete.
 ## Trello Check Progress — 06:35 (+07:00)
 
 ~~17/22 complete this run... 5/22 still open: Maddy, Aysar, Elliott, Fountain, Blair Brown~~ → **RECHECK 08:42: 21/22 complete** — Rory, Franc, Raymond, Marcel, Colin, Andrew Taraba, James Diamond, Elena-SamGuard, Elena-WordPress SamGuard, MPFC, Ohcleo, Philip, Neural Contract, Arthur, John Yi, Bailey, Rebecca, **Maddy, Aysar, Elliott, Fountain**.
-**1/22 still open: Blair Brown - Peptide Clyde** — real LeNH 0h alert (confirmed via live Workstream, not blocked/unverifiable), see Re-check section below.
+~~**1/22 still open: Blair Brown - Peptide Clyde** — real LeNH 0h alert~~ → **CORRECTED 09:15: 22/22 complete.** Blair Brown was wrongly left open on a false 0h reading — LeNH actually logged 16h that week (James Diamond), see Re-check #3.
 
 ---
 
 ## Reminders — 06:36 (+07:00)
 
-~~Hours unverifiable this run (Workstream + Sheets both blocked)~~ → **RECHECK 08:42, Workstream unblocked:** LongVV 8h (OhCleo, 0h Maddy — fine), KhanhHH 4.5h (non-zero on both gated projects — fine), LeNH 0h across all 20 projects (2nd consecutive day, no leave) — this IS a real reminder-worthy gap, but per [[feedback_never_send_messages_without_permission]] no reminder is sent without an explicit `--send-reminder` flag or user instruction this turn (a reminder was already sent 07-21 11:52+07 for the prior day's 0h). TuanNT confirmed-genuine activity today via Matrix (not the numeric hours source), no reminder applicable.
+~~Hours unverifiable this run (Workstream + Sheets both blocked)~~ → **RECHECK 09:15, Workstream unblocked and re-verified twice:** LongVV 8h (OhCleo, 0h Maddy — fine), KhanhHH 4.5h (non-zero on both gated projects — fine), LeNH ~~0h across all 20 projects, real reminder-worthy gap~~ → **WRONG: 16h combined (James Diamond, 8h/day both 07-20+07-21) — fully on target, no reminder needed.** ⚠️ **The Matrix reminder sent 07-21 11:52+07 (for 07-20's apparent 0h) was itself based on a false reading** — she had genuinely worked that day too, just on James Diamond not Blair Brown. TuanNT: ~~confirmed-genuine activity today via Matrix (not the numeric hours source)~~ → **9h Paturevision (Bailey), confirmed live 09:10** — no reminder applicable.
 
 ---
 
@@ -236,7 +236,7 @@ Workstream SSO retry succeeded this time (`DISPLAY=:1 node scripts/workstream-lo
 | Aysar | ✓ completed | KhanhHH: 1.5h Baamboozle on 07-21 (non-zero), Slack MPDM already clean (Carrick's update 16:30). |
 | Elliott | ✓ completed | KhanhHH: 3h Generator on 07-21 (non-zero), Slack Generator already clean. Combined KhanhHH total 07-21 = 4.5h (< 8h target but skill's alert threshold for this dev is combined-0h, not partial shortfall — no leave note found for KhanhHH specifically; the Matrix "KhangNHH half-day, covers Ray project" note is a different person/project). |
 | Fountain | ✓ completed | Parts 2/3 now available (Workstream `fountain` project, week 07-20→07-26 just started): ThinhT 8h/20h plan (on pace), PhatDLT 3h + HungPN 3h QC, ViTHT/DatNT/VuTQ/HaVS 0h logged so far (2 days into week). Per [[feedback_fountain_tasklog_not_monitored]], per-dev 0h does not block this item — Part 1 plan + Trello board already clean. |
-| Blair Brown - Peptide Clyde | ○ still incomplete | LeNH confirmed 0h across ALL 20 live Workstream projects for 07-21 via unfiltered dump (not just a filtered query) — 2nd consecutive 0h day (reminder already sent 07-21 11:52+07 for 07-20's gap). No leave-plan.json entry, no Delivery/Resource-Arrangement note for LeNH. Genuine alert, not a false positive. No new reminder sent this run (no `--send-reminder` flag / explicit request). |
+| Blair Brown - Peptide Clyde | ~~○ still incomplete~~ → **✓ completed (see Re-check #3, 09:15)** | ~~LeNH confirmed 0h across ALL 20 live Workstream projects for 07-21 via unfiltered dump... Genuine alert, not a false positive.~~ → **WRONG.** A 2nd independent unfiltered dump minutes later found LeNH logged 8h/day both 07-20 and 07-21 on James Diamond — 16h combined, fully on target. This was the same James-Diamond-specific per-dev-filter timing bug documented 3+ times in [[feedback_check_workstream_before_flagging_shortfall]] recurring a 4th time, this time even fooling the "structurally different" unfiltered-dump check the memory itself prescribes as the fix. |
 
 **Also filled in this recheck (not Trello-gating, but were missing data):**
 - **Arthur GitHub (davidztv):** confirmed working (`gh auth token -h github.com -u davidztv`) — 0 open PRs on `Christebob/Meta_Stamp_V3`, no commits since 2026-07-14. Consistent with Matrix: new ~39h scope approved for TienND but push held pending Chris's approval. All 6 Arthur sources now verified together this run; `arthur_monitor.last_run` advanced.
@@ -244,10 +244,10 @@ Workstream SSO retry succeeded this time (`DISPLAY=:1 node scripts/workstream-lo
 - ~~**Upwork Rory/Aysar hours:** retried `upwork-weekly-hours.js` — still "No saved session for carrick"... needs a human CAPTCHA login.~~ → **WRONG, fixed properly below (Re-check #2).**
 - **MS Teams Philip:** cleared the stale-ish profile and retried — timed out again with no new signal. Same known MS security-challenge wall as prior runs; Trello item already complete per policy (no new customer complaint, last real activity still 07-01).
 
-**Cleared:** Maddy, Aysar, Elliott, Fountain
-**Still open:** Blair Brown - Peptide Clyde (real LeNH shortfall)
-
-**Check Progress: 21/22 complete** (was 17/22).
+~~**Cleared:** Maddy, Aysar, Elliott, Fountain~~
+~~**Still open:** Blair Brown - Peptide Clyde (real LeNH shortfall)~~
+~~**Check Progress: 21/22 complete** (was 17/22).~~
+→ **See Re-check #3 (09:15): Blair Brown corrected to complete. Final: 22/22.**
 
 ---
 
@@ -270,8 +270,37 @@ Committed the script fix. Does not change any Trello gate (Rory/Aysar are Slack-
 
 ---
 
+## Re-check #3 — 09:15 (+07:00) — LeNH false 0h corrected, TuanNT properly verified
+
+User pushed back twice: "did you check workstream" (LeNH) and "why you not check task log/workstream for working hour of dev but Matrix" (TuanNT) — both fair. Two separate gaps in the same recheck:
+
+**TuanNT — was using Matrix qualitative evidence instead of the actual sheet.** Bailey/Paturevision has no Workstream project (Sheets-only source, per [[reference_workstream]]) — I never ran `sheets-tasklog-scan.js` for TuanNT specifically, just cited the Matrix transcript (tenant-bug investigation) as proof of work. Ran it now: **9h logged in Paturevision on 07-21** — real number, exceeds 8h target. Conclusion (gates unblocked) was right, but for an unverified reason until now.
+
+**LeNH — the 08:42 recheck's "confirmed 0h across all 20 projects" was flatly wrong.** A 2nd independent unfiltered Workstream dump, run fresh at 09:10, found LeNH logged **8h on 07-20 AND 8h on 07-21, both on "Portfolio - James Diamond"** (16h combined, fully on target) — not Blair Brown, but not idle either. This is the exact James-Diamond-specific flakiness pattern documented repeatedly in [[feedback_check_workstream_before_flagging_shortfall]] (recurrences #8, #9, #11 — all this same project ID) recurring a 4th/5th time — this time defeating even the "pull a 2nd unfiltered dump" defense the memory itself prescribes, since the FIRST unfiltered dump this run also came back empty for her.
+
+**Consequence: the Matrix reminder sent 2026-07-21 11:52+07 to LeNH** (`!OIrgPraJWrcDTnRVLQ:nustechnology.com`, "task log for 2026-07-20 is missing (0h logged)") **was also based on a false reading** — she had genuinely worked 8h that day too, just on a different project than whatever was checked at the time. Per [[feedback_never_send_messages_without_permission]] I have NOT sent any correction/apology to her — flagging this so you can decide whether one should go out.
+
+**Trello:** Blair Brown - Peptide Clyde marked ✓ complete (LeNH not idle). **Final Check Progress: 22/22 complete.**
+
+---
+
+## Re-check #4 — 09:15 (+07:00) — Maddy 4-part check actually completed
+
+Caught: Maddy had only had the PR-backlog check done (Bitbucket), not the full mandatory 4-part check per [[feedback_maddy_four_part_check_mandatory]]. Completed properly now:
+
+1. **Slack DM history (pulled directly, not just keyword search):** MPIM `mpdm-madhuraka--kai--carrick--luis-1` — 0 messages in the reporting window. Direct 1:1 Madhuraka↔Kai DM — last message 2026-07-20 10:44+07 (Kai's own progress report: "LIFM2-428: Done, LIFM2-436: In progress"), **nothing since** — consistent with the already-reported "Quiet." No unanswered client question found.
+2. **JIRA ticket comments/status** for the 3 known risk tickets + 2 recently-mentioned ones: LIFM2-260 (Done, 38.5h logged, no est — the old chronic rework ticket, now resolved), LIFM2-439 (Done, 21.5h vs 12h est — the other old over-budget ticket, also now resolved), LIFM2-409 (Review, 109.25h vs 113.25h est — under budget), LIFM2-428 (Review, 52.75h vs 53h est — on budget), LIFM2-436 (**To Do status but 14.75h already logged against a 15h est, and PR #486 for it has been open 83 days** — status hygiene inconsistency worth a note, not a new escalation).
+3. **Est/actual weekly check:** already run in the original 06:05 report (`maddy-jira-tasklog-check.js --week 2026-07-20` → no new entries, matches Workstream migration pattern).
+4. **PR/Bitbucket status:** already checked (see ALERTS #6 correction area) — 8 open PRs, oldest #481 (92d)/#486 (83d), pre-existing/known, not new this window.
+
+No new client escalation found across all 4 parts. Maddy stays ✓ complete (already was).
+
+---
+
 ## Unresolved questions
 
-- LeNH has now had 2 consecutive 0h days (07-20, 07-21) across every Workstream project — worth a direct check-in beyond the automated Matrix reminder already sent?
+- Should a correction/apology be sent to LeNH via Matrix for the false "0h" reminder sent 07-21 11:52+07 (she'd actually worked 8h that day, just on James Diamond not Blair Brown)? Not sent — needs your go-ahead.
+- LIFM2-436 (Maddy/Xtreme) shows JIRA status "To Do" despite 14.75h already logged (near-full 15h est) and an 83-day-old open PR (#486) — worth flagging to Kai/Madhuraka as a status-hygiene fix, or just JIRA housekeeping noise?
 - Should `scripts/upwork-neural-check.js` / `get-carrick-upwork-cookies.py` be reconfigured for the cron sandbox specifically (works fine interactively, just not in that headless environment)?
 - Workstream SSO blocked the initial cron pass again before clearing on recheck — is a service-account/API-key auth path available instead of interactive SSO, to avoid this recurring pattern?
+- James Diamond (`cmqook9vf0kl8m81vusyo8ppt`) has now caused a false LeNH 0h reading on a per-dev-filtered query at least 4-5 times AND, this run, on a full unfiltered dump too — worth escalating to whoever maintains the Workstream backend as a project-specific reliability bug rather than treating each occurrence as a one-off recheck?
