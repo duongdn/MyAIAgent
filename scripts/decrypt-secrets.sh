@@ -42,6 +42,7 @@ ENC_FILES=(
   config/.github-config.json.enc
   config/.gmail-service-account.json.enc
   config/.bitbucket-config.json.enc
+  config/.server-credentials.json.enc
 )
 
 # Add any daily-agent-*.json.enc

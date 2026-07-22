@@ -57,6 +57,7 @@ SECRET_FILES=(
   config/.newrelic-infinity-config.json
   config/.rollbar-config.json
   config/.bitbucket-config.json
+  config/.server-credentials.json
 )
 
 # Add Google service account key if exists
