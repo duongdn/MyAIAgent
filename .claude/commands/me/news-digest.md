@@ -172,6 +172,7 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 **Rules — chung:**
 - Bỏ qua nguồn không có bài — không đề cập (ngoại trừ Thiệu Nguyễn — xem rule MANDATORY ở trên)
 - Điểm nổi bật: tổng hợp pattern/xu hướng, không chỉ liệt kê headline
+- **Dedup (mỗi bài tối đa 2 lần xuất hiện):** `fetch-news.py` tự động lọc bài đã xuất hiện ≥2 lần trong các report cũ (đọc `reports/*/*news-digest*.md`, so URL đã normalize) — KHÔNG cần tự grep lịch sử thủ công nữa. Nếu 1 source trả `dedupDropped: N` trong JSON, nghĩa là N bài bị loại vì đã dùng đủ 2 lần — bình thường, không phải lỗi kỹ thuật, đừng re-fetch ở recheck mode. Vẫn cần tự theo dõi trùng lặp CHÉO NGUỒN trong CÙNG 1 report (VD cùng 1 bài Google News xuất hiện ở cả "Chứng khoán VN" và "Cổ phiếu") — giữ 1 `seen_urls` set khi tổng hợp toàn bộ report.
 - Nếu tag trả về <3 bài tổng: ghi "Ít kết quả cho tag '{tag}' — thử tag rộng hơn"
 - Bài cũ hơn 7 ngày: đánh dấu `[cũ]`
 - Nguồn lỗi: bỏ qua không đề cập

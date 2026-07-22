@@ -24,6 +24,7 @@ Options:
 Output: JSON { topic, tag, fetchedAt, results: [{ topic, sources: [{ name, url, articles, error }] }] }
 """
 
+import glob
 import html
 import json
 import os
@@ -34,6 +35,7 @@ import time
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+from collections import Counter
 from datetime import datetime, timezone
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -316,6 +318,34 @@ def _tag_matches(tag: str, haystack: str) -> bool:
     return t in haystack
 
 
+def _normalize_url(url: str) -> str:
+    """Match the redirect/tracking-param normalization applied in fetch_rss,
+    so history URLs (already normalized) compare equal to freshly fetched ones."""
+    if not url:
+        return url
+    if "news.google.com/rss/articles/" in url:
+        url = url.replace("news.google.com/rss/articles/", "news.google.com/articles/")
+    return url.split("?")[0]
+
+
+def _load_url_history() -> "Counter[str]":
+    """Count how many times each article URL already appeared in past
+    *-news-digest*.md reports, so overused articles can be filtered out here
+    instead of relying on manually grepping ~40 files every run (unreliable —
+    see feedback_news_digest_dedup_rule)."""
+    counts: "Counter[str]" = Counter()
+    pattern = os.path.join(_PROJECT_ROOT, "reports", "*", "*news-digest*.md")
+    for path in glob.glob(pattern):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                text = f.read()
+        except Exception:
+            continue
+        for url in re.findall(r"\]\((https?://[^)\s]+)\)", text):
+            counts[_normalize_url(url)] += 1
+    return counts
+
+
 def _fetch_hn_scores(item_ids, ) -> dict:
     """Fetch scores for HN items in parallel via Firebase API."""
     scores = {}
@@ -585,6 +615,8 @@ def main():
         "results": [],
     }
 
+    history = _load_url_history()
+
     for topic_name, sources in selected:
         topic_result = {"topic": topic_name, "sources": []}
         for source in sources:
@@ -592,6 +624,21 @@ def main():
                 data = fetch_facebook_page(source, limit, tag)
             else:
                 data = fetch_rss(source, limit, tag)
+
+            # Cap each article at 2 total appearances across all past reports.
+            # Enforced here (mechanically) rather than left to manual grepping
+            # at synthesis time, which was skipped in practice — some articles
+            # ended up repeated 13-23 times before this fix.
+            kept, dropped = [], 0
+            for a in data["articles"]:
+                if history.get(_normalize_url(a.get("link", "")), 0) >= 2:
+                    dropped += 1
+                    continue
+                kept.append(a)
+            data["articles"] = kept[:limit]
+            if dropped:
+                data["dedupDropped"] = dropped
+
             topic_result["sources"].append(data)
         output["results"].append(topic_result)
 
