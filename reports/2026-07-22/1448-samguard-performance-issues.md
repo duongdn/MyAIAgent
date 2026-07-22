@@ -47,11 +47,12 @@ Check `access.log.1` (log ngày 21/7) trong khung giờ crash (18:33–18:59 UTC
 
 | # | Đề xuất | Mức độ | Ghi chú |
 |---|---|---|---|
-| 1 | Giảm `MaxRequestWorkers` (150 → ~15-20) trong `mpm_prefork.conf` | Ưu tiên cao | Chặn Apache tự đẩy vượt RAM cho phép; request thừa sẽ queue thay vì spawn worker vô tội vạ |
-| 2 | Bật object cache (Redis/Memcached) cho WordPress | Ưu tiên cao | Loại bỏ hàng loạt query WPML/Elementor lặp lại mỗi request — giảm tải cả CPU lẫn DB connection |
-| 3 | Rotate/truncate `debug.log`, tắt `WP_DEBUG_LOG` hoặc giới hạn log level | Ưu tiên trung bình | Giảm I/O, giải phóng ~3GB disk |
-| 4 | Nâng RAM droplet (1.9GB → 4GB) | Tùy chọn, dài hạn | Giải pháp bền nhất nếu traffic tiếp tục tăng, nhưng không bắt buộc nếu áp dụng #1+#2 |
-| 5 | Fix bug `WP_Error::get_method()` trên REST API | Ưu tiên thấp | Không gây crash trực tiếp nhưng đang log lỗi liên tục, có thể là entry point bị bot scan |
+| 1 | Đưa site qua Cloudflare (proxy DNS cam, bật WAF/bot-fight-mode) | Ưu tiên cao | Site hiện DNS trỏ thẳng origin, không CDN/WAF nào che — Cloudflare chặn bot quét (`.git`, wp-json spam...) trước khi chạm tới origin, ẩn IP thật, có rate-limit/DDoS protection miễn phí sẵn |
+| 2 | Giảm `MaxRequestWorkers` (150 → ~15-20) trong `mpm_prefork.conf` | Ưu tiên cao | Chặn Apache tự đẩy vượt RAM cho phép; request thừa sẽ queue thay vì spawn worker vô tội vạ |
+| 3 | Bật object cache (Redis/Memcached) cho WordPress | Ưu tiên cao | Loại bỏ hàng loạt query WPML/Elementor lặp lại mỗi request — giảm tải cả CPU lẫn DB connection |
+| 4 | Rotate/truncate `debug.log`, tắt `WP_DEBUG_LOG` hoặc giới hạn log level | Ưu tiên trung bình | Giảm I/O, giải phóng ~3GB disk |
+| 5 | Nâng RAM droplet (1.9GB → 4GB) | Tùy chọn, dài hạn | Giải pháp bền nhất nếu traffic tiếp tục tăng, nhưng không bắt buộc nếu áp dụng #2+#3 |
+| 6 | Fix bug `WP_Error::get_method()` trên REST API | Ưu tiên thấp | Không gây crash trực tiếp nhưng đang log lỗi liên tục, có thể là entry point bị bot scan |
 
 ---
 
