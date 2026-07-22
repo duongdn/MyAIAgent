@@ -35,7 +35,7 @@
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md)
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md)
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — 🔴 Aysar=MPDM C07SQ4HAUHZ
-- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md)
+- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — 🔴🔴 3x violated: skipped, then buried outside dedicated section
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — 🔴 check WS Maddy hours first
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md), [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md)
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴
@@ -49,7 +49,7 @@
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — 🔴 substring-match bug fixed
 - [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md)
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md)
-- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md), [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md), [feedback_no_dated_scan_scripts](daily-report/sheets/feedback_no_dated_scan_scripts.md) — 🔴 AM 0h≠bug
+- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 James Diamond+LeNH false-0h, 12x recurred, single dump not enough, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md), [feedback_no_dated_scan_scripts](daily-report/sheets/feedback_no_dated_scan_scripts.md) — 🔴 AM 0h≠bug
 - [feedback_sheets_scan_script_positional_args](daily-report/sheets/feedback_sheets_scan_script_positional_args.md) — 🔴 positional args not flags, wrong flags fake a total data-gap
 - [feedback_workstream_report_needs_dev_reviewer_hours_and_status](daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md) — 🔴 WS row needs dev+reviewer+status
 - [feedback_dev_not_working_project_x_means_that_project_only](daily-report/sheets/feedback_dev_not_working_project_x_means_that_project_only.md), [feedback_parttime_official_filter](daily-report/sheets/feedback_parttime_official_filter.md)
@@ -95,7 +95,7 @@
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md)
-- [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX section before touching Neural auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md)
+- [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX section before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix now covers Rory/Aysar too, not just Neural
 
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES

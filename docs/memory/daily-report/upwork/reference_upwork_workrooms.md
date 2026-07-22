@@ -25,10 +25,10 @@ metadata:
 | Bailey DEV3 | BAILEY JOEY | 43093775 | DuongDN | Account: david2 |
 
 ## Scripts
-- `scripts/upwork-login.js --login` — First-time Puppeteer login (visible browser) — used for Rory/Aysar/Bailey workrooms only. Do NOT use for Neural.
-- `scripts/upwork-weekly-hours.js` — Fetch weekly hours from Rory/Aysar/Bailey workrooms (not Neural — that's messages-only, see `upwork-neural-check.js`)
+- `scripts/upwork-login.js --login` — First-time Puppeteer login (visible browser). Since 2026-07-22, needed ONLY for Bailey DEV1/DEV3 (vinn/david2 accounts) — carrick (Rory/Aysar/Neural) never needs this anymore, all live-cookie-injected.
+- `scripts/upwork-weekly-hours.js` — Fetch weekly hours from Rory/Aysar/Bailey workrooms (not Neural — that's messages-only, see `upwork-neural-check.js`). For the `carrick` account (Rory/Aysar) it now injects live cookies first (2026-07-22 fix, see Account section above); vinn/david2 (Bailey) still use the old persistent-profile Puppeteer session.
 - `scripts/upwork-neural-check.js` — Neural Contract messages, via real-session cookie injection (see [[feedback_neural_consolidated]])
-- `scripts/get-carrick-upwork-cookies.py` — extracts fresh Upwork cookies from carrick's real Chrome Profile 1 (used by `upwork-neural-check.js`)
+- `scripts/get-carrick-upwork-cookies.py` — extracts fresh Upwork cookies from carrick's real Chrome Profile 1 (used by both `upwork-neural-check.js` and, since 2026-07-22, `upwork-weekly-hours.js` for the carrick account)
 
 ## Weekly Report Comparison
 - Upwork hours = total tracked time (official + part-time from task log)

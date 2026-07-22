@@ -1,6 +1,6 @@
 ---
 name: feedback_maddy_four_part_check_mandatory
-description: Maddy checks MUST cover 4 parts every time (Slack, JIRA comments, est/actual, PR status) — user has asked repeatedly and it was never done at the first pass
+description: "Maddy checks MUST cover 4 parts every time (Slack, JIRA comments, est/actual, PR status) AND be written into ONE dedicated ## Maddy section, never scattered/buried — both requirements violated repeatedly (07-08 structure, 07-22 data, 07-22 structure again)"
 metadata:
   type: feedback
 ---
