@@ -169,6 +169,35 @@ Full details: reports/2026-07-22/matrix-rooms-0620.md
 
 ---
 
+## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis) — 09:15 (+07:00)
+
+**1. Slack — Xtreme workspace + direct Kai↔Madhuraka DM history (pulled full `conversations.history`, not just keyword search):**
+- MPIM `mpdm-madhuraka--kai--carrick--luis-1` (C09046N5B7H): 0 messages in reporting window.
+- Direct 1:1 DM (D050TGMRFRQ): last message 2026-07-20 10:44+07 — Kai's own progress report ("LIFM2-428: Done, LIFM2-436: In progress"). Nothing since (quiet ~46h as of this check). No unanswered client question found.
+- General Xtreme workspace search (earlier piece): 0 msgs in window.
+
+**2. Task tracking / hours:** LongVV logged **0h on Maddy, 8h on OhCleo** on 07-21 (Workstream, verified live). Per the Workstream-conditional gate, a 0h Maddy day means no Slack daily-report check is required — not an alert.
+
+**3. JIRA — est/actual + ticket status/comments:**
+- Weekly check (`maddy-jira-tasklog-check.js --week 2026-07-20`): no new ticket entries this week (source has migrated off the legacy sheet, matches the broader Workstream migration — not itself an alert).
+- Direct ticket pull, 3 known risk tickets + 2 recently-mentioned:
+
+| Ticket | Summary | Status | Est | Spent | Note |
+|--------|---------|--------|-----|-------|------|
+| LIFM2-260 | Shopify S3 image update | Done | — (none set) | 38.5h | Old chronic rework ticket — now resolved |
+| LIFM2-439 | Listed-Cons tab changes | Done | 12h | 21.5h (+79%) | Old over-budget ticket — now resolved |
+| LIFM2-409 | Import Shopify payouts | Review | 113.25h | 109.25h | Under budget |
+| LIFM2-428 | Product Authenticity Cert | Review | 53h | 52.75h | On budget |
+| LIFM2-436 | Returns | **To Do** | 15h | 14.75h | ⚠️ Status/hours mismatch — 98% of est already logged but ticket still shows "To Do"; matching open PR #486 (83d old) |
+
+**4. Bitbucket PR status** (`xtreme-web/rms`, 8 open PRs, all authored by Kai): oldest #481 (LIFM2-409, 92 days) and #486 (LIFM2-436, 83 days) — both pre-existing/known from prior reports, not new escalations this window. No fresh Critical/High finding sitting unanswered since the last check.
+
+**Verdict:** No new client escalation across all 4 parts. LongVV correctly not report-gated on a 0h Maddy day. LIFM2-436's status/PR-age inconsistency is a minor housekeeping flag, not urgent (see Unresolved questions).
+
+Trello: Maddy - Carrick/Kai/Luis ✓ complete.
+
+---
+
 ## OhCleo Slack — 06:15 (+07:00)
 
 | Channel | Msgs | Key content |
@@ -286,14 +315,7 @@ User pushed back twice: "did you check workstream" (LeNH) and "why you not check
 
 ## Re-check #4 — 09:15 (+07:00) — Maddy 4-part check actually completed
 
-Caught: Maddy had only had the PR-backlog check done (Bitbucket), not the full mandatory 4-part check per [[feedback_maddy_four_part_check_mandatory]]. Completed properly now:
-
-1. **Slack DM history (pulled directly, not just keyword search):** MPIM `mpdm-madhuraka--kai--carrick--luis-1` — 0 messages in the reporting window. Direct 1:1 Madhuraka↔Kai DM — last message 2026-07-20 10:44+07 (Kai's own progress report: "LIFM2-428: Done, LIFM2-436: In progress"), **nothing since** — consistent with the already-reported "Quiet." No unanswered client question found.
-2. **JIRA ticket comments/status** for the 3 known risk tickets + 2 recently-mentioned ones: LIFM2-260 (Done, 38.5h logged, no est — the old chronic rework ticket, now resolved), LIFM2-439 (Done, 21.5h vs 12h est — the other old over-budget ticket, also now resolved), LIFM2-409 (Review, 109.25h vs 113.25h est — under budget), LIFM2-428 (Review, 52.75h vs 53h est — on budget), LIFM2-436 (**To Do status but 14.75h already logged against a 15h est, and PR #486 for it has been open 83 days** — status hygiene inconsistency worth a note, not a new escalation).
-3. **Est/actual weekly check:** already run in the original 06:05 report (`maddy-jira-tasklog-check.js --week 2026-07-20` → no new entries, matches Workstream migration pattern).
-4. **PR/Bitbucket status:** already checked (see ALERTS #6 correction area) — 8 open PRs, oldest #481 (92d)/#486 (83d), pre-existing/known, not new this window.
-
-No new client escalation found across all 4 parts. Maddy stays ✓ complete (already was).
+Caught (twice — first that the 4-part check itself was incomplete, then that its findings weren't in a dedicated section): full check now done and consolidated into its own **`## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis)`** section above (per [[feedback_maddy_four_part_check_mandatory]]'s "one consolidated section" rule, not scattered across generic headers or buried in a recheck log). No new client escalation found across all 4 parts — see that section for detail.
 
 ---
 
