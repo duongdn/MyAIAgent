@@ -10,9 +10,42 @@ puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.upwork-config.json');
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'tmp');
+const LIVE_COOKIE_JSON = '/tmp/carrick-upwork-cookies.json';
+
+// Live session cookies extracted fresh from carrick's real Chrome profile (same
+// fix as upwork-neural-check.js) — carrick has an actual human-authenticated
+// Upwork session in his daily-use Chrome, so this works for ANY carrick-owned
+// workroom (Rory/Aysar), not just Neural. Never re-attempt the old Puppeteer
+// login flow first — Upwork's fraud engine soft-rejects it every time.
+function extractLiveCookies() {
+  try {
+    execSync('.claude/skills/.venv/bin/python3 scripts/get-carrick-upwork-cookies.py', {
+      cwd: path.join(__dirname, '..'),
+      stdio: ['ignore', 'ignore', 'inherit'], // stdout ignored — this script's own stdout is parsed JSON, only stderr may inherit for diagnostics
+    });
+    return JSON.parse(fs.readFileSync(LIVE_COOKIE_JSON, 'utf8'))
+      .filter(c => c.name && c.value && c.domain && /^[!#-+\--:<-\[\]-~]+$/.test(c.value))
+      .map(c => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
+  } catch (err) {
+    console.error('Live cookie extraction failed:', err.message);
+    return null;
+  }
+}
+
+async function injectLiveCookies(page) {
+  const cookies = extractLiveCookies();
+  if (!cookies || !cookies.length) return false;
+  await page.setCookie(...cookies);
+  await page.goto('https://www.upwork.com/nx/wm/', { waitUntil: 'networkidle2', timeout: 20000 }).catch(() => {});
+  const url = page.url();
+  const ok = !url.includes('login') && !url.includes('account-security');
+  console.error(`Live cookie injection result: ${ok ? 'AUTH' : 'STILL_EXPIRED'} (${url})`);
+  return ok;
+}
 
 const workroomArg = process.argv.find(a => a.startsWith('--workroom='));
 const workroomFilter = workroomArg ? workroomArg.split('=')[1] : null;
@@ -39,13 +72,19 @@ async function main() {
   const results = [];
 
   for (const [accountName, rooms] of Object.entries(byAccount)) {
+    const account = config.accounts.find(a => a.name === accountName);
     const profileDir = path.join(__dirname, '..', 'tmp', `upwork-profile-${accountName}`);
-    if (!fs.existsSync(path.join(profileDir, 'Default'))) {
+    const hasSavedProfile = fs.existsSync(path.join(profileDir, 'Default'));
+
+    // carrick never gets a persistent Puppeteer-managed profile (deleted 2026-07-21,
+    // see docs/memory/daily-report/upwork/reference_upwork_workrooms.md) — his real
+    // Upwork session lives in his own Chrome (Profile 1) and is injected fresh via
+    // live cookie extraction (injectLiveCookies below), same as upwork-neural-check.js.
+    // Only skip the account entirely if it's NOT carrick and has no saved profile.
+    if (!hasSavedProfile && accountName !== 'carrick') {
       console.error(`No saved session for ${accountName}. Run: node scripts/upwork-login.js --login --account=${accountName}`);
       continue;
     }
-
-    const account = config.accounts.find(a => a.name === accountName);
 
     const SOCKS_DIR = path.join(__dirname, '..', 'tmp', 'chrome-socks');
     fs.mkdirSync(SOCKS_DIR, { recursive: true });
@@ -56,7 +95,7 @@ async function main() {
     const useVisibleBrowser = !!process.env.DISPLAY;
     const browser = await puppeteer.launch({
       headless: useVisibleBrowser ? false : 'new',
-      userDataDir: profileDir,
+      ...(hasSavedProfile ? { userDataDir: profileDir } : {}),
       env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':1' },
       args: [
         '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
@@ -75,20 +114,31 @@ async function main() {
       try {
         let data = await fetchWorkroomHours(page, room);
         if (data.status === 'session_expired' && !loggedIn && account) {
-          // Step 1: try injecting stored session cookies from config
-          const cookieOk = await injectStoredCookies(page, account);
-          if (cookieOk) {
-            console.error(`Cookie injection succeeded for ${accountName}`);
+          // Step 1 (primary, per docs/memory/daily-report/upwork/feedback_neural_consolidated.md
+          // PERMANENT FIX — same live-cookie-extraction approach as Neural, works for any
+          // carrick-owned workroom): inject fresh cookies from carrick's real Chrome profile.
+          const liveOk = accountName === 'carrick' ? await injectLiveCookies(page) : false;
+          if (liveOk) {
+            console.error(`Live cookie injection succeeded for ${accountName}`);
             data = await fetchWorkroomHours(page, room);
           }
           if (data.status === 'session_expired') {
-            // Step 2: fall back to headless credential login
+            // Step 2: try injecting stored (possibly stale) session cookies from config
+            const cookieOk = await injectStoredCookies(page, account);
+            if (cookieOk) {
+              console.error(`Stored cookie injection succeeded for ${accountName}`);
+              data = await fetchWorkroomHours(page, room);
+            }
+          }
+          if (data.status === 'session_expired') {
+            // Step 3: last resort — headless credential login (known to soft-fail per memory,
+            // kept only as a final fallback in case live extraction is ever unavailable)
             console.error(`Session expired for ${accountName}, attempting headless re-login...`);
             const loginOk = await headlessLogin(page, account);
             if (loginOk) {
               data = await fetchWorkroomHours(page, room);
             } else {
-              data = { workroom: room.name, status: 'login_failed', error: 'Headless re-login failed (CAPTCHA/2FA needed). Run: node scripts/upwork-login.js --login --account=' + accountName };
+              data = { workroom: room.name, status: 'login_failed', error: 'Live cookie extraction + stored cookies + headless re-login all failed. Check carrick\'s real Chrome Profile 1 Upwork session is still logged in.' };
             }
           }
           loggedIn = true;

@@ -1,6 +1,6 @@
 ---
 name: upwork-workroom-tracking-setup
-description: "Upwork account, workroom URLs, and scripts for weekly hour comparison with task logs"
+description: "Upwork account, workroom URLs, and scripts for weekly hour comparison with task logs. 2026-07-22: live-cookie-injection fix (from Neural) now also applied to Rory/Aysar in upwork-weekly-hours.js — don't leave a documented 'same fix applies elsewhere' note unpropagated."
 metadata: 
   node_type: memory
   type: reference
@@ -9,7 +9,11 @@ metadata:
 
 ## Account
 - carrick@nustechnology.com (config: `.upwork-config.json`)
-- ~~Browser profile saved at `tmp/upwork-profile-carrick/`~~ — that Puppeteer-managed profile dir was deleted 2026-07-21 and is no longer used for Neural Contract (see below). Still used by `upwork-login.js`/`upwork-weekly-hours.js` for Rory/Aysar/Bailey, which remains the fragile Puppeteer-login pattern — if it starts hitting Upwork's "technical difficulties" soft-block (see [[feedback_neural_consolidated]] PERMANENT FIX section), the fix is the same: extract cookies from a real, already-logged-in Chrome profile instead of driving a login.
+- ~~Browser profile saved at `tmp/upwork-profile-carrick/`~~ — deleted 2026-07-21, no longer used for ANY carrick workroom (Neural, Rory, Aysar).
+
+🔴 **FIXED PROPERLY 2026-07-22 — the "same fix applies" note below used to be just a suggestion; it is now actually wired into the script, not dead advice.** On 2026-07-22, a daily-report recheck found Rory/Aysar STILL reported "session expired, needs human CAPTCHA login" despite the 2026-07-21 Neural fix — user reaction: "lại lock Upwork, hôm qua mới nói có fix hết rồi mà, check lại memory coi" (locked again, said it was all fixed yesterday, check memory). Root cause: the 2026-07-21 fix only touched `upwork-neural-check.js`; nobody propagated it into `upwork-weekly-hours.js` (used for Rory/Aysar/Bailey), which still had the old broken `injectStoredCookies()` (stale config snapshot) → `headlessLogin()` (Puppeteer credential login, soft-rejected by Upwork's fraud engine every time) fallback chain — PLUS a separate bug where the top-level per-account loop `continue`'d past carrick entirely if `tmp/upwork-profile-carrick` didn't exist, before any recovery step could run. **Both fixed:** `upwork-weekly-hours.js` now has its own `extractLiveCookies()`/`injectLiveCookies()` (same pattern as `upwork-neural-check.js`) as the FIRST recovery step for the `carrick` account, and the profile-dir gate only skips non-carrick accounts. Verified live: Rory 0:00, Aysar 1:30 (cross-validated against Workstream's own Baamboozle 1.5h figure for the same day).
+
+**Lesson for next time a "the fix is X, apply it if this happens elsewhere" note is written:** if a fix is documented as generalizable to sibling scripts/workrooms sharing the same underlying account/auth mechanism, go verify each sibling actually got the fix applied — don't leave it as a note to rediscover only when the user complains it "locked again."
 
 ## Workrooms
 | Project | Client | Workroom ID | Developer | Note |

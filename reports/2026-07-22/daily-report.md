@@ -15,8 +15,8 @@
 | 3 | Email (vuongtrancr@) | Swish: New Relic "Signal lost for 10 minutes on Low Application Throughput" x2. |
 | 4 | Email (carrick@) | XiD SaaS Backend GitLab pipeline failed on `main` (ad0e2550). FYI only per policy — does not block Check Mail. |
 | 5 | Workstream | ~~SSO could not be completed non-interactively... blocks Maddy/Aysar/Elliott/Blair Brown hour verification, Fountain Parts 2-3, Arthur Crystal-lang hours.~~ → **RESOLVED on recheck 08:42** (transient SSO timing issue, retry succeeded) — unblocked all of the above. Only remaining real finding: **LeNH genuinely 0h 2 days running (Blair Brown), no leave note** — see Re-check section. |
-| 6 | Upwork | `upwork-weekly-hours.js` hit session-expired + headless re-login hang (needs human CAPTCHA solve) — Rory/Aysar hour context unavailable this run, not confirmed clean or shortfall. |
-| 7 | Upwork (Neural) | `upwork-neural-check.js` failed — this sandbox has no `carrick` Chrome profile at `/home/nus/...` for live cookie extraction (environment gap, not a credential/CAPTCHA issue like prior runs). Completed Trello item per silence-never-blocks policy; needs the script's cookie source reconfigured for this environment or a manual session. |
+| 6 | Upwork | ~~`upwork-weekly-hours.js` hit session-expired + headless re-login hang (needs human CAPTCHA solve) — Rory/Aysar hour context unavailable this run.~~ → **FIXED 08:57**: script only had the live-cookie-injection fix wired into Neural, not Rory/Aysar (same `carrick` account, same fix applies) — plus a separate bug where the top-level "no saved profile dir" gate skipped carrick's account entirely before the fix could even run. Both fixed in `scripts/upwork-weekly-hours.js`; Rory 0:00 + Aysar 1:30 this week now fetched live (matches Workstream's 1.5h Baamboozle figure for KhanhHH/Aysar-adjacent work). |
+| 7 | Upwork (Neural) | ~~`upwork-neural-check.js` failed — no carrick Chrome profile in this sandbox~~ → confirmed 08:42 this was specific to the headless cron sandbox only; works fine interactively (see Re-check section). |
 | 8 | MS Teams | Philip Briggs automated check hit a genuine MS account security challenge (loop stuck on "Help us protect your account", 12 retries) — same known human-verification wall as prior runs. Completed Trello item per policy (automation limitation, not a new customer complaint — last real activity still our own 07-01 outreach). |
 
 **Today (Jul 22):** No leave scheduled today per Matrix Delivery/Resource-Arrangement room.
@@ -219,10 +219,10 @@ Trello: Arthur - Meta-Stamp ✓ complete.
 
 ## Upwork — 06:47 (+07:00)
 
-`upwork-weekly-hours.js`: session expired for carrick, headless re-login hung on Rory fetch (needs interactive CAPTCHA solve) — killed after 55s, no hours data this run.
+~~`upwork-weekly-hours.js`: session expired for carrick, headless re-login hung on Rory fetch (needs interactive CAPTCHA solve) — killed after 55s, no hours data this run.~~ → **FIXED 08:57, see Re-check #2 below.**
 ~~`upwork-neural-check.js`: failed — this sandbox environment has no `/home/nus/.config/google-chrome/Profile 1`~~ → **RECHECK 08:42: worked fine** — the Chrome profile exists in this interactive environment (the cron pass's "sandbox" was a different, more restricted machine). 20 most recent messages fetched, latest still 2026-07-13 (Carrick: "Updated. Please check!") — no new client activity since, silence confirmed clean per policy.
 
-Trello: Neural Contract ✓ complete (confirmed clean, not just silence policy). Rory/Aysar hour context still unavailable after retry (carrick session not saved, needs human CAPTCHA login) — did not block their (already-complete) Slack-gated items.
+Trello: Neural Contract ✓ complete (confirmed clean, not just silence policy). ~~Rory/Aysar hour context still unavailable after retry (carrick session not saved, needs human CAPTCHA login)~~ → **FIXED 08:57: Rory 0:00, Aysar 1:30 this week, both fetched live.** Did not block their (already-complete) Slack-gated items either way.
 
 ---
 
@@ -241,13 +241,32 @@ Workstream SSO retry succeeded this time (`DISPLAY=:1 node scripts/workstream-lo
 **Also filled in this recheck (not Trello-gating, but were missing data):**
 - **Arthur GitHub (davidztv):** confirmed working (`gh auth token -h github.com -u davidztv`) — 0 open PRs on `Christebob/Meta_Stamp_V3`, no commits since 2026-07-14. Consistent with Matrix: new ~39h scope approved for TienND but push held pending Chris's approval. All 6 Arthur sources now verified together this run; `arthur_monitor.last_run` advanced.
 - **Upwork Neural:** re-ran `upwork-neural-check.js` — carrick's Chrome Profile 1 cookie extraction worked fine in this interactive session (the earlier cron run's "no /home/nus profile" was specific to that headless sandbox). Latest message still 2026-07-13 (Carrick's "Updated, Please check!") — no new activity since, silence confirmed, not an alert.
-- **Upwork Rory/Aysar hours:** retried `upwork-weekly-hours.js` — still "No saved session for carrick" (Bailey-VietPH/Bailey-DuongDN workrooms fetched fine via cached sessions, both 0:00 this week — informational only, DEV1/DEV3 inactive). Rory/Aysar tracker hours remain unavailable, needs a human CAPTCHA login. Does not block their (Slack-gated, already-complete) Trello items.
+- ~~**Upwork Rory/Aysar hours:** retried `upwork-weekly-hours.js` — still "No saved session for carrick"... needs a human CAPTCHA login.~~ → **WRONG, fixed properly below (Re-check #2).**
 - **MS Teams Philip:** cleared the stale-ish profile and retried — timed out again with no new signal. Same known MS security-challenge wall as prior runs; Trello item already complete per policy (no new customer complaint, last real activity still 07-01).
 
 **Cleared:** Maddy, Aysar, Elliott, Fountain
 **Still open:** Blair Brown - Peptide Clyde (real LeNH shortfall)
 
 **Check Progress: 21/22 complete** (was 17/22).
+
+---
+
+## Re-check #2 — 08:57 (+07:00) — Upwork Rory/Aysar root-cause fix
+
+User caught that this report's own Re-check section (above) still said "Rory/Aysar hour context unavailable... needs a human CAPTCHA login" and pushed back: the Neural Contract cookie-injection fix was documented in memory 2026-07-21 as applying to **any carrick-owned workroom**, not just Neural — Rory/Aysar should never have shown as blocked.
+
+**Root cause (2 bugs in `scripts/upwork-weekly-hours.js`):**
+1. Carrick's persistent Puppeteer profile dir (`tmp/upwork-profile-carrick`) was deleted 2026-07-21 when Neural switched to live cookie injection (documented) — but Rory/Aysar (same `carrick` account) still relied on the old `injectStoredCookies()`/`headlessLogin()` fallback chain, which needs either a stale config-stored cookie snapshot or a Puppeteer credential login (soft-rejected by Upwork's fraud engine every time, per the existing PERMANENT FIX memory). Nobody wired the live-extraction fix into this script when it was built for Neural.
+2. Separately, the script's top-level per-account loop checked `fs.existsSync(profileDir/Default)` and `continue`'d (skipped the whole account, all its workrooms) if missing — so even after adding live-cookie injection as a recovery step, carrick's account never reached that code because the missing profile dir skipped it before the recovery logic ever ran.
+
+**Fix applied:** added `extractLiveCookies()`/`injectLiveCookies()` (same pattern as `upwork-neural-check.js`, extracts fresh from carrick's real Chrome Profile 1 via `get-carrick-upwork-cookies.py`) as the **first** recovery step for the `carrick` account specifically, ahead of the stale-config-cookie and headless-login fallbacks. Also fixed the top-level gate to only skip an account if it's NOT carrick and has no saved profile (carrick now launches a fresh ephemeral browser with no persistent `userDataDir` and goes straight to live injection). Also fixed a stdout-pollution bug where the cookie-extraction Python script's own stdout was inheriting into this script's `console.log(JSON...)` output, corrupting it — now redirected to stderr-only.
+
+**Verified (2 consecutive clean runs):**
+- Rory: 0:00 this week (Jul 20-26, week just started)
+- Aysar: 1:30 this week — matches Workstream's Baamboozle 1.5h figure for the same window (cross-validates)
+- Neural Contract: 0:00 this week, 0:30 last week (consistent with the already-confirmed quiet state)
+
+Committed the script fix. Does not change any Trello gate (Rory/Aysar are Slack-gated per [[reference_trello_gate_mapping]], already complete) — this was a data-completeness fix, and closes a real gap where this exact "still needs CAPTCHA" claim would have kept recurring on every future run.
 
 ---
 
