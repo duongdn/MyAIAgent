@@ -135,6 +135,8 @@
 - [feedback_facebook_scraper_missing_x_display](news-digest/feedback_facebook_scraper_missing_x_display.md)
 - [feedback_facebook_scraper_chrome_path_drift](news-digest/feedback_facebook_scraper_chrome_path_drift.md) — 🔴 use google-chrome path
 - [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 3rd root cause: bulk cleanup commit deleted script, restore from git history
+- [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 4th distinct bug: titles char-scrambled, DOM extraction issue, needs code fix
+- [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — skill self-contradicts (3/5 vs ALL), user confirmed 5/source settled default
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
