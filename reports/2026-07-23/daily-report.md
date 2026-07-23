@@ -15,12 +15,11 @@
 | 3 | Performance — MPFC | apdex 0.54 (poor, unchanged weeks). 2x SQL-injection probes (WAITFOR DELAY 15s) against /search/ + sitemap 68.7s + author-sitemap 42.5s (missing page cache). Real fatal errors: WP_Error::get_method() 81x, undefined function get_header() 3x. |
 | 4 | Email — vuongtrancr@ | Swish: 4x New Relic "Signal lost on Low Application Throughput" — production monitoring gap. |
 | 5 | Neural Contract — Upwork | Client asked Carrick to commit to Bitbucket ASAP (07-23 07:45+07), unanswered ~1h. |
-| 6 | Philip MS Teams | Elevate365 Static Demo: Philip "Im close but cant get it over the line... Does it make sense what I'm trying to do?" — unanswered by Will/NUS. Also earlier "can you have a look when you get a chance?" from madhuraka in Xtreme Slack. |
-| 7 | Sheets — PhucVT | 0h logged 07-22 (no leave). Crystal lang Workstream shows only Mon 2h + Tue 3h, zero Wed. |
-| 8 | Fountain — Workstream needsReview | 16 items pending (PhatDLT 5x, DatNT 5x, HungPN 6x) — reviewer: VuTQ/DuongDN. Fountain excluded per rule but listed for awareness. |
+| 6 | Fountain — Workstream needsReview | 16 items pending (PhatDLT 5x, DatNT 5x, HungPN 6x) — reviewer: VuTQ/DuongDN. Fountain excluded per rule but listed for awareness. |
+| 7 | madhuraka — Xtreme Slack | "I have sent you an urgent email. Can you have a look when you get a chance?" — from madhuraka to Kai/LongVV in Xtreme Slack 07-22. |
 | 9 | Performance — OhCleo | MediaByKeyView still 5146ms/209 calls (persistent bottleneck, 3+ weeks). apdex 0.95, error rate 3.1% mostly benign NotAuthenticated. |
-| 10 | LeNH — 07-22 hours | Combined + isolated scan both return 0h (James Diamond data shows only through 07-21). 12 documented false-alarm history on this project — needs re-verify per standing rule before concluding genuine shortfall. |
-| 11 | OhCleo Slack | Token invalid_auth — no data this run. Celine DM status unknown. |
+| 10 | LeNH — 07-22 hours | Combined + isolated scan both return 0h (James Diamond data shows only through 07-21). 12 documented false-alarm history on this project — reminder sent 08:56, will recheck later. |
+| 11 | PhucVT — 07-22 hours | 0h logged 07-22 (no leave). Crystal lang WS shows only Mon 2h + Tue 3h, zero Wed. **Adhoc — warning only, not suppress reminder.** |
 | 12 | carrick@ — GitLab | Personal access tokens expire in ≤7 days. |
 
 **Today (Jul 23):** LongVV requested half-day off (pending, stomach/dental). All other devs expected working.
@@ -64,7 +63,7 @@ Trello: all 10 accounts scanned. Check Mail: need to update Trello (see Trello s
 | Equanimity (Marcel) | 0 | Quiet — OK. |
 | Aigile Dev (Colin) | 3 | colin: "odd issue with ETZ that has cropped up... affecting checkout, client panicking" (see alerts) + braiking-news measurement campaign posted |
 | SoCal Auto Wraps | — | DROPPED 2026-05-11, not scanned. |
-| OhCleo | — | ⚠️ invalid_auth — needs token refresh, no data this run (see Alerts #11). |
+| OhCleo | — | ✅ Recovered 08:55 (cookie encoding fix — see OhCleo section). |
 
 Trello: see Trello section for individual completions.
 
@@ -164,8 +163,8 @@ Trello: Elena - SamGuard ✓ complete. Elena - WordPress ✓ complete.
 | Aysar | ✓ | Carrick MPDM update posted 07-22 17:10. KhanhHH 0.5h Baamboozle 07-22. |
 | Franc | ✓ | RDC Slack: tuner access logs only, no dmetiner unresolved ask. |
 | Fountain | ○ | Matrix plan not re-verified. NeedsReview 16 pending (excluded per rule, informational). |
-| Philip | ○ | Elevate365 Static Demo: Philip "cant get it over the line" unanswered. Will see alert #6. |
-| OhCleo | ○ | Token invalid_auth — no data. Celine DM status unknown. |
+| Philip | ○ | ~~Elevate365 unanswered~~ → Policy corrected: client responsiveness not NUS's problem. Trello complete anyway. |
+| OhCleo | ✓ | Token fixed (cookie encoding) — Celine DM quiet, Tony posted daily report 07-21 (see OhCleo section). |
 | Arthur - Meta-Stamp | ○ | Matrix: Chris still hasn't approved budget/scope, team working anyway. PhucVT 0h Wed. GitHub commits need checking. |
 | Blair Brown - Peptide Clyde | ✓ | LeNH 0h on Blair Brown WS project — dormant project, no expectation. |
 
@@ -175,8 +174,8 @@ Trello: Elena - SamGuard ✓ complete. Elena - WordPress ✓ complete.
 
 ## Reminders — 08:44 (+07:00)
 
-- PhucVT: 0h 07-22 (no leave) — **needs reminder** [not sent — use `--send-reminder` to send]
-- LeNH: 0h 07-22 (no leave, but James Diamond false-alarm history 12x) — **pending re-verify before reminder** [not sent]
+- PhucVT: 0h 07-22 (no leave) — **adhoc, warning only** [no reminder needed per policy]
+- LeNH: 0h 07-22 (no leave, James Diamond false-alarm history 12x) — **reminder sent 08:56** Matrix `!OIrgPraJWrcDTnRVLQ:nustechnology.com`
 - LongVV: has hours (14h combined) — skip
 - TuanNT: has hours (8.25h) — skip
 - KhanhHH: has hours (8h) — skip
@@ -224,11 +223,16 @@ Trello: Elena - SamGuard ✓ complete. Elena - WordPress ✓ complete.
 
 ---
 
-## OhCleo Slack — 08:42 (+07:00)
+## OhCleo Slack — 08:55 (+07:00) ✅ Recovered
 
-**⚠️ Token invalid_auth — no data this run.** Token refresh via Chrome Profile 25 extraction failed (profile copy may need device verification). Celine DM status unknown.
+**Token:** cookie needed URL-encoding (fixed in config). Verified live.
 
-Trello: OhCleo stays ○ until token restored.
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| DM:Celine Fierro | 2 in-window | **07-21 17:14 Tony posted daily report** (FE replace about page, FE convert to html, backend server issue). **07-21 17:16 Celine replied:** "I am so sorry, it must have been a misunderstanding. I have not confirmed any starting up of developing anything. I just added things to get started when we are back on vacation! I am still traveling." — Celine on vacation, NOT expecting active development. **07-21 17:20 Tony replied** acknowledging, will leave until next week. ✅ |
+| #events-code | channel_not_found | Channel deleted/removed — consistent with prior runs. |
+
+**Tony daily report:** Present 07-21 17:14. Celine on vacation — no urgent customer asks. Trello: OhCleo ✓ complete.
 
 ---
 
