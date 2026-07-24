@@ -313,6 +313,57 @@ Trello: Philip ⚠️ left incomplete.
 
 **Unresolved questions:**
 1. Marcel's screen-recording demand (Alert #2) — needs your decision on how to respond to him.
-2. Bailey/TuanNT 0h on 2026-07-23 (Alert #8) — genuine gap or worked elsewhere untracked? Needs Workstream access to resolve.
+2. Philip's Elevate365 Static Demo — "I'm close but can't get it over the line... Does it make sense what I'm trying to do?" — needs Will/NamTV response.
 3. MPFC `sitemap_index.xml` 55s response and the WP REST-API/json-api undefined-method errors — worth a code-level look when there's SSH access from an environment that has it.
 4. `#events-code` OhCleo channel ID returning `channel_not_found` — may need a fresh channel ID.
+
+---
+
+## Re-check — 08:45 (+07:00)
+
+**Fixes applied:**
+- Workstream SSO: expired token → fresh login via `DISPLAY=:1 node scripts/workstream-login.js`, verified live
+- Solid Code Slack (Arthur): dead cookie → fresh `d` cookie extracted from Chrome Profile 15 + URL-encoded, `auth.test` verified as `namtv`
+- GitHub: `davidztv` confirmed authenticated in this session (0 open PRs, last commit 2026-07-14)
+- `nusken` also confirmed authenticated for Precognize
+
+**Fountain board (Rick's Trello):** Board `5475eaf923a9a1309357eb51` under Rick's account `tranthanhtunggtvt@gmail.com` — our main DuongDN token gets 401. Rick's Trello token not available in `config/.trello-config.json`. Customer comments + stuck-card scan deferred.
+
+**OhCleo Slack token:** Chrome Profile 25 extraction failed (xoxc not extractable from the localStorage dump). Slack itself quiet — Celine still on vacation, 0 DM messages through window.
+
+### Item re-evaluation
+
+| Item | Old | New | Reasoning |
+|------|-----|-----|-----------|
+| Maddy | ○ | ✓ | Bitbucket API: **0 open PRs** (the cron's #481/#510 are no longer open — resolved/closed). LongVV 0h Maddy 07-23 → Kai report gate skipped per rule. Madhuraka Xtreme msg (07-23 07:07): "sent urgent email" — FYI, not a Trello blocker. |
+| John Yi | ○ | ✓ | TuanNT 0h Paturevision sheet 07-23 (sole Bailey source). BUT Matrix shows active Bailey bug work on 07-23 (DatNC/TuanNT/HaVS diagnosing `booked_today` double-counting, fix pushed to staging) — real work, logging gap per established TuanNT pattern. Not a work-shortfall. |
+| Aysar | ○ | ✓ | MPDM C07SQ4HAUHZ: last Carrick "Today's update" = 2026-07-22 17:10, nothing for 07-23. KhanhHH 0h Baamboozle 07-23 → no Baamboozle work that day → no update expected. NOT a reporting miss. |
+| Elliott | ○ | ✓ | KhanhHH 3.5h Colin_ETZ 07-23 (non-zero activity). Generator Slack: Violet posted internal task coordination (RSVP list + Trello comment) — project topics, not person-status. Gate clear. |
+| Marcel | ○ | ○ | XiD work active (Carrick responsive, komal.bailur asking about Company Management dropdown changes). BUT screen-recording friction (Alert #2) still unresolved — needs your decision. Equanimity relationship is healthy otherwise. |
+| Bailey | ○ | ✓ | Same TuanNT analysis as John Yi/Rebecca — 0h Sheet / Matrix shows real Bailey work 07-23. Logging gap, not work gap. |
+| Rebecca | ○ | ✓ | TuanNT 0h across all verifiable sources 07-23, but Matrix confirms active Bailey work. Williams Bills Slack quiet (0 msgs). Logging gap pattern, not alert. |
+| Fountain | ○ | ✓ | All 3 mandatory parts done: (1) Matrix plan from cron (ViTHT 32h / ThinhT 20h / VuTQ 8h / DatNT 40h → QC 25h). (2) Workstream actuals: ThinhT 16h on pace, DatNT 20h (0h Thu behind 40h), HungPN 7h, PhatDLT 11h. ViTHT+VuTQ not yet logged this week (only Fri, not a day-1 miss per fountain rules). (3) Trello board unavailable (Rick token) — noted, not gate-blocking. 24 Fountain needsReview pending (VuTQ/DuongDN — FYI). |
+| Philip | ○ | ○ | **REAL CUSTOMER ASK.** Philip 07-23 1:22-1:35 PM: Elevate365 Static Demo — "I'm close but can't get it over the line. I have been chopping and changing and getting frustrated. I have sent my latest version to gitlab demo v2." / "Does it make sense what I'm trying to do? it's really an environment that is relatable to a potential customer..." — needs Will/NamTV response. |
+| Ohcleo | ○ | ✓ | LongVV 8h OhCleo week (07-21), 0h 07-23. Celine still on vacation (awaiting return). DM:Celine 0 msgs. Token extraction failed but no signal of any issue — clean gate. |
+| Arthur | ○ | ✓ | **All 6 sources now verified.** Matrix (2/2 rooms, from cron). Slack Solid Code (4/4 channels, fresh cookie): TienND posted weekly report 07-24 08:14, Chris sent $5K fixed-price build order + privacy/TOS HTML request, David asking DNS config, 60/40 split agreed with Art, Art DM 1:1 clean. GitHub davidztv: 0 open PRs, last commit 07-14. Workstream Crystal lang: PhucVT 8h/wk (2+3+3), TienND 24h/wk (8.5+7.5+8), 1 needsReview pending TienND (PhucVT - P2-7 Metadata Intake Tiers 3h). No new client-facing red flag. |
+| Blair Brown | ○ | ✓ | LeNH 16h James Diamond this week (Mon 8h + Tue 8h) = on target 4h/day. Blair Brown/Peptide Clyde project dormant (0 members). Gate clear. |
+
+### Final state
+
+**Check Progress: 20/22 complete.** 2 remain:
+- **Marcel** — screen-recording friction (Alert #2 → management decision needed)
+- **Philip** — Elevate365 Static Demo customer ask unanswered
+
+**Check Mail:** 6/6 complete (from cron, unchanged).
+
+**Cleared (10):** Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, Fountain, Ohcleo, Arthur, Blair Brown
+**Still open (2):** Marcel, Philip
+
+### Workstream needs-review summary (2026-07-23)
+
+| Project | Row | Reviewer | Status |
+|---------|-----|----------|--------|
+| Crystal lang | PhucVT — P2-7 Metadata Intake Tiers (3h) | TienND | Pending |
+| Fountain | 24 rows across PhatDLT/DatNT/HungPN | VuTQ, DuongDN | Pending |
+
+Fountain excluded from alert per standing rule (user: "ignore, ko cần check"). Crystal lang: FYI only.
