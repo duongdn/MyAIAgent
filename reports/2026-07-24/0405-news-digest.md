@@ -1,6 +1,6 @@
 ## 📰 Tin tức tổng hợp — 2026-07-24
 
-**Note:** Reuters Finance và Laravel News lỗi kỹ thuật (Reuters: DNS không phân giải được; Laravel News: lỗi parse XML "undefined entity"). Google News – PHP Laravel trả về 0 bài (nguồn trống thật, không phải lỗi). Thiệu Nguyễn (Substack) và Nghiện AI (Facebook Group) không có bài mới — toàn bộ bài fetch được đã dùng đủ 2 lần ở các báo cáo trước (dedup bình thường). 2 nguồn Facebook AI (Thiệu Nguyễn, Duy Nguyen/mrgoonie) lần này trả về nội dung đọc được (không còn lỗi xáo trộn ký tự như báo cáo trước).
+**Note:** Reuters Finance và Laravel News đã fix (xem log recheck cuối file). Google News – PHP Laravel trả về 0 bài (nguồn trống thật, không phải lỗi). Thiệu Nguyễn (Substack) và Nghiện AI (Facebook Group) không có bài mới — toàn bộ bài fetch được đã dùng đủ 2 lần ở các báo cáo trước (dedup bình thường). 2 nguồn Facebook AI (Thiệu Nguyễn, Duy Nguyen/mrgoonie) lần này trả về nội dung đọc được (không còn lỗi xáo trộn ký tự như báo cáo trước).
 
 ---
 
@@ -260,7 +260,9 @@ _(Không có bài mới từ Facebook)_ — toàn bộ bài fetch được đã 
 ## 🐘 PHP / Laravel
 
 ### Laravel News
-_(Lỗi kỹ thuật: parse XML thất bại — "undefined entity: line 51, column 4". Cần kiểm tra parser RSS cho nguồn này.)_
+- [Laravel Announces the Founders Summit, a One-Day Event for Founders](https://laravel-news.com/laravel-founders-summit-2026) — Laravel công bố sự kiện một ngày dành riêng cho các nhà sáng lập.
+- [A Practical Guide to Laravel's First-Party Image Processing](https://laravel-news.com/a-practical-guide-to-laravels-first-party-image-processing) — Hướng dẫn dùng tính năng xử lý ảnh gốc mới của Laravel.
+- [RouteKey Model Attribute in Laravel 13.21](https://laravel-news.com/laravel-13-21-0) — Thuộc tính RouteKey mới trong Laravel 13.21.
 
 ### PHP.net News
 - [PHP 8.4.19 phát hành](https://www.php.net/index.php#2026-03-12-1) — Bản vá cho nhánh PHP 8.4. [cũ]
@@ -286,7 +288,7 @@ _(Không có bài — nguồn trống thật, không phải lỗi kỹ thuật)_
 ### Điểm nổi bật PHP/Laravel
 - Cộng đồng r/PHP đang tích cực thử nghiệm tích hợp AI agent (Claude) vào workflow PHP — từ tự động hóa nội dung blog đến câu hỏi vận hành AI agent 24/7 trên VPS.
 - Chủ đề bảo mật/hiện đại hóa nổi bật: security-first Artisan runner cho Laravel Nova, bài học hiện đại hóa ứng dụng legacy, và Laravel Pennant feature flags giúp deploy an toàn hơn.
-- Laravel News gặp lỗi parse kỹ thuật cần khắc phục ở lần chạy tới.
+- Laravel công bố sự kiện Founders Summit 2026 và cập nhật tính năng xử lý ảnh gốc, RouteKey trong bản 13.21.
 
 ---
 
@@ -310,6 +312,11 @@ _(Không có bài — nguồn trống thật, không phải lỗi kỹ thuật)_
 - [Lãi suất tiết kiệm ngân hàng nào cao nhất tháng 7/2026? (VnEconomy)](https://news.google.com/articles/CBMihAFBVV95cUxQdzZVRERfZ2NOVlYtNFN2VDRhWU9ibzlxRXFDSG5wQnItR0NjME1kelB6Uk4tclZoc05nUE9IcTFPNlcyTDZ4emFjYThXdEY1MDlwU0dsTi01dFQzTXhFeVFkelpyd05CbGsxTGFMVFVucVJDTUlNUnBEcDlpNjdSNmktaUQ) — So sánh lãi suất tiết kiệm giữa các ngân hàng.
 - [Khơi thông "cơn khát" vốn doanh nghiệp, kỳ vọng từ Trung tâm Tài chính Quốc tế (Người Đưa Tin)](https://news.google.com/articles/CBMiwwFBVV95cUxQTnNLbE54LXZHX1VEUVBWZHBZVUFGOGV6NVoyU2diNnN2RmdSR2gyNzlHNjJjaTRvdjhzalNkYlJmOUxBaTNjdC1KTlJfR1diTDNkZUxxSXZiazFiRWZJWDBMNFNBeXVOT3RwZ3BWRXFYR3lDRFpsdXRtb3drVnd3ZDNGTnRDU19qV1pFLVdLY3JjUHM3ZllqTVRjTEZZWlpUSTNDUXhkb1RIbXlBQkJmSWpiU19fQTFUSDFYVDJJeWh1Y1U) — Kỳ vọng gỡ nút thắt vốn cho doanh nghiệp.
 - [Lần đầu tiên ngân hàng VN nộp ngân sách trên 100.000 tỷ đồng (CafeF)](https://news.google.com/articles/CBMi1AFBVV95cUxOekU2NWNIdGJILVk4VjA4aW8tNHJiTGRwVk1xa3p1ZWxfeFMxcllkNE1pUjhvcDRiMlJQMWlndVVYTGl0OUJJOW9qaGRVUG5QSG5WdGVIX3h6X2s2Y2xaSTRnMXdjUmxVSVl3RmFfX0lXQmQ0WDdRbHd0MjFDQ1paeGdOZHQtMUhIcTV3X2l4RmZDbTgxQlFPUXVVaUNNTDZMTVZVMXJQWm9vTHpiTE5mRThOU253ZU5wYm1RMThLcUJfN0RSZmhDTm9JX1lubTUyWDcyVg) — Kỷ lục thu ngân sách từ khối ngân hàng.
+
+### Business Insider Markets
+_(Nguồn thay thế Reuters Finance — feeds.reuters.com đã ngừng hoạt động vĩnh viễn.)_
+- [OpenAI's new release turns a bad week ugly for software stocks](https://www.businessinsider.com/openai-release-turns-a-bad-week-ugly-for-software-stocks-2026-7) — Bản phát hành mới của OpenAI khiến tuần tệ của cổ phiếu phần mềm càng tệ hơn.
+- [Intel looked like a fallen giant. Now it's posting its fastest revenue growth in 15 years.](https://www.businessinsider.com/intels-ai-business-helps-fuel-strongest-revenue-growth-15-years-2026-7) — Mảng AI giúp Intel đạt tốc độ tăng trưởng doanh thu nhanh nhất 15 năm.
 
 ### Yahoo Finance
 - [Báo cáo phân tích: Texas Instruments](https://finance.yahoo.com/research/reports/ARGUS_3470_AnalystReport_1784829600000?yptr=yahoo&ncid=yahooproperties_plusresear_nm5q6ze1cei) — Đánh giá cổ phiếu từ Argus Research.
@@ -418,3 +425,8 @@ _(Không có bài — nguồn trống thật, không phải lỗi kỹ thuật)_
 - SpaceX-Cursor (60 tỷ USD) là thương vụ M&A/IPO đáng chú ý nhất tuần, minh họa cách định giá cổ phiếu tăng vọt hậu IPO có thể tài trợ trực tiếp cho thâu tóm quy mô lớn.
 
 **Recheck 08:57:** Reuters Finance vẫn lỗi (DNS không phân giải được — Errno -2, không đổi). Laravel News vẫn lỗi (XML parse "undefined entity: line 51, column 4", không đổi). Không có thay đổi nội dung khác.
+
+**Fix 09:15:** Đã xác định root cause và sửa vĩnh viễn trong `fetch-news.py`:
+- **Reuters Finance:** `feeds.reuters.com` NXDOMAIN vĩnh viễn (Reuters đã ngừng RSS công khai từ lâu, không phải lỗi mạng tạm thời). Thay bằng nguồn **Business Insider Markets** (`markets.businessinsider.com/rss/news`) — đã verify sống, tin tức đúng ngày 2026-07-24.
+- **Laravel News:** URL cũ `laravel-news.com/feed` nay trả về trang HTML thay vì RSS (site đổi cấu trúc) → parse XML vỡ ("undefined entity" chỉ là triệu chứng, không phải nguyên nhân gốc — HTML có `<script>` không đóng thẻ hợp lệ trong XML). Feed RSS thật nằm ở `feed.laravel-news.com/` — đã verify, XML hợp lệ, 3 bài mới.
+- Đã bổ sung nội dung thật từ 2 nguồn vào report (xem section 💰 Tài chính và 🐘 PHP/Laravel ở trên).

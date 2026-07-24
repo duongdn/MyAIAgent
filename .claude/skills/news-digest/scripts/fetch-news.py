@@ -237,8 +237,10 @@ SOURCES = {
     ],
     "php": [
         {
+            # laravel-news.com/feed now serves the HTML homepage instead of RSS
+            # (breaks XML parsing) — feed.laravel-news.com is the real feed.
             "name": "Laravel News",
-            "url": "https://laravel-news.com/feed",
+            "url": "https://feed.laravel-news.com/",
         },
         {
             "name": "PHP.net News",
@@ -271,8 +273,10 @@ SOURCES = {
             "url": _gnews("tài chính ngân hàng lãi suất kinh tế Việt Nam", hl="vi", gl="VN"),
         },
         {
-            "name": "Reuters Finance",
-            "url": "https://feeds.reuters.com/reuters/businessNews",
+            # feeds.reuters.com is a dead domain (NXDOMAIN) — Reuters retired
+            # its public RSS feeds; Business Insider Markets is a live replacement.
+            "name": "Business Insider Markets",
+            "url": "https://markets.businessinsider.com/rss/news",
         },
         {
             "name": "Yahoo Finance",
