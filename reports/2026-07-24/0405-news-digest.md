@@ -416,3 +416,5 @@ _(Không có bài — nguồn trống thật, không phải lỗi kỹ thuật)_
 - Bảo mật vẫn là điểm nóng: Check Point bị khai thác dồn dập, gián điệp Nga khai thác Zimbra zero-day, và thương hiệu Claude bị lợi dụng cho cả tấn công giả mạo lẫn lỗ hổng thoát sandbox thực sự.
 - VinFast duy trì đà tích cực (mở rộng Mỹ, ưu đãi xe máy điện trong nước) — điểm sáng ổn định giữa bối cảnh thị trường chung biến động mạnh vì giá dầu và địa chính trị.
 - SpaceX-Cursor (60 tỷ USD) là thương vụ M&A/IPO đáng chú ý nhất tuần, minh họa cách định giá cổ phiếu tăng vọt hậu IPO có thể tài trợ trực tiếp cho thâu tóm quy mô lớn.
+
+**Recheck 08:57:** Reuters Finance vẫn lỗi (DNS không phân giải được — Errno -2, không đổi). Laravel News vẫn lỗi (XML parse "undefined entity: line 51, column 4", không đổi). Không có thay đổi nội dung khác.
