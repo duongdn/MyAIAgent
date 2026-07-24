@@ -1,5 +1,5 @@
 ---
-description: Focus watchlist valuation check (FPT, VEA) + P/B < 1 screening across Top 100 tracked stocks
+description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo phong cách news-digest + quét P/B < 1 kèm nhận định
 ---
 
 # Finance Report
@@ -12,9 +12,9 @@ description: Focus watchlist valuation check (FPT, VEA) + P/B < 1 screening acro
 
 ## Config
 
-`config/finance-watchlist.json` — tracked tickers + their Google Sheet IDs/report-tab names + `top100_spreadsheet_id`/`top100_sheet`. **Add new tickers here, not in this file.** Not a secret (sheet IDs only, no credentials) — tracked in git (see `.gitignore` exception).
+`config/finance-watchlist.json` — tracked tickers (`watchlist[].ticker/name/spreadsheet_id/report_sheet`) + `top100_spreadsheet_id`/`top100_sheet`. **Thêm mã mới vào đây, không sửa file skill này.** Không phải secret — tracked trong git (xem exception trong `.gitignore`).
 
-**Google Sheets auth:** service account `config/daily-agent-490610-7eb7985b33e3.json`, scope `https://www.googleapis.com/auth/spreadsheets`. Same account used to build the FPT/VEA analysis sheets — read-only access is enough for this skill.
+**Google Sheets auth:** service account `config/daily-agent-490610-7eb7985b33e3.json`, scope `https://www.googleapis.com/auth/spreadsheets`. Chỉ cần đọc (read-only) cho skill này.
 
 ---
 
@@ -22,83 +22,87 @@ description: Focus watchlist valuation check (FPT, VEA) + P/B < 1 screening acro
 
 | Command | What it does | Output file |
 |---------|--------------|-------------|
-| `/finance-report` | Full run — Focus + PB Low | both pieces, one combined report |
-| `/finance-report focus` | Live valuation check on watchlist tickers | `{HHMM}-finance-focus.md` |
-| `/finance-report pb-low` | Scan Top 100 sheet for P/B < 1 | `{HHMM}-finance-pblow.md` |
+| `/finance-report` | Full run — Focus + PB Low | 1 file gộp hoặc 2 file riêng |
+| `/finance-report focus` | Tin tức mới nhất cho từng mã trong watchlist | `{HHMM}-finance-focus.md` |
+| `/finance-report pb-low` | List toàn bộ mã P/B < 1 trong Top 100 + nhận định | `{HHMM}-finance-pblow.md` |
 
 ---
 
 ## Piece 1 — Focus (`/finance-report focus`)
 
-For each ticker in `config/finance-watchlist.json` → `watchlist`:
+Tin tức mới nhất cho từng mã trong watchlist, **CÙNG NGUYÊN TẮC ANTI-HALLUCINATION như `/me:news-digest`** — mọi bài viết PHẢI lấy thẳng từ JSON trả về của script, không được bịa tiêu đề/link/tóm tắt.
 
-1. **Live quote**: fetch current price/valuation from vietstock.vn's public chart API — **no login required, do not use the paid `KQKD_GetListReportData` endpoint** (returns `RequestUpgradeAccount_Permission`, confirmed during the VEA report build):
-   ```
-   POST https://finance.vietstock.vn/FinanceChartPage/GetListChart_Page_Mapping_ByStockCode_Full
-   Body: stockCode={TICKER}&chartPageId=0&isCatch=true&languageId=1
-   (+ __RequestVerificationToken from the page's cookies — load {vietstock_url} first via Puppeteer to get a session, see scripts pattern used for VEA)
-   ```
-   Response `data.InfoChartDetail` is a flat array of `{ReportNormName, NormTerm, Value, Unit}`. Pull `NormTerm` starting with `N/` (annual) for the latest year, or the site's own quote header for live price/P-E/P-B if simpler. Relevant `ReportNormName` values: `Chỉ số giá thị trường trên thu nhập (P/E)`, `Chỉ số giá thị trường trên giá trị sổ sách (P/B)`.
-   - If the live fetch fails (site structure change, rate limit), fall back to reading the last-known valuation straight from the ticker's `report_sheet` (section "III. ĐỊNH GIÁ HIỆN TẠI") and flag it as stale in the output — do not fabricate a live number.
+**Fetch:**
+```bash
+.claude/skills/.venv/bin/python3 scripts/fetch-finance-news.py --limit=20
+```
+Script tự đọc `config/finance-watchlist.json`, build Google News RSS query riêng cho từng mã (mã CK + tên đầy đủ công ty), tái dùng `fetch_rss`/`_gnews` từ `.claude/skills/news-digest/scripts/fetch-news.py` (nạp qua `importlib` vì tên file có dấu gạch ngang, không import thẳng được) — cùng cơ chế parse RSS/dedup đã kiểm chứng ở news-digest.
 
-2. **Stored baseline**: read the "III. ĐỊNH GIÁ HIỆN TẠI" table from `{spreadsheet_id}` → `{report_sheet}` (both FPT's and VEA's `Báo cáo 2` sheets use this exact section heading) for the P/E, P/B, giá CP recorded when the report was last built.
+**Trước khi viết bất kỳ nội dung nào**: gọi script → nhận JSON → đọc `results[].sources[].articles` → CHỈ tổng hợp từ đó. Nguồn trả về 0 bài → ghi `_(Không có bài mới)_`, không bịa.
 
-3. **Compare & flag**:
-   - P/E or P/B moved **>10%** since baseline → note direction
-   - Current P/E ≤ 15 and P/B ≤ 1.5 → "rẻ theo ngưỡng Graham"; else note which threshold is breached
-   - Pull the "Rủi ro chính" bullet from the report's "I. TỔNG QUAN DOANH NGHIỆP" section as a one-line reminder — do not re-research it, just quote what's already there
+**Output** (`{HHMM}-finance-focus.md`), theo đúng format `/news-digest`:
+```markdown
+# 📰 Finance Focus — {YYYY-MM-DD} {HH:MM}
 
-4. **Output** (`{HHMM}-finance-focus.md`):
-   ```markdown
-   # Finance Focus — {YYYY-MM-DD} {HH:MM}
+## {TICKER} — {name}
+**{Tên nguồn (Google News – {TICKER} VN)}**
+- [{Tiêu đề}]({link}) · {pubDate} — {tóm tắt 1 câu tiếng Việt}
+...
 
-   ## {TICKER} — {name}
-   | | Lúc phân tích (sheet) | Hiện tại (live) | Chênh lệch |
-   |-|------------------------|------------------|------------|
-   | Giá CP | ... | ... | ... |
-   | P/E | ... | ... | ... |
-   | P/B | ... | ... | ... |
+**{Tên nguồn (Google News – tên đầy đủ)}**
+- [{Tiêu đề}]({link}) · {pubDate} — {tóm tắt 1 câu tiếng Việt}
+...
 
-   Đánh giá: {rẻ/đắt theo Graham, ĐẠT/KHÔNG ĐẠT}
-   Rủi ro chính (từ báo cáo): {quoted bullet}
-   ...
-   ```
-   Repeat per ticker. If a ticker's live fetch failed, say so explicitly instead of reusing old numbers silently.
+### Điểm nổi bật {TICKER}
+- {1-3 gạch đầu dòng: tin gì đáng chú ý nhất, có ảnh hưởng gì đến luận điểm đầu tư đã có trong sheet '{report_sheet}' không}
+
+---
+(lặp lại cho từng mã trong watchlist)
+```
+
+- Dedup trong cùng 1 report nếu 1 bài xuất hiện ở cả 2 query (mã CK + tên đầy đủ) của cùng 1 ticker.
+- Bài cũ hơn 7 ngày: đánh dấu `[cũ]`.
+- Phần "Điểm nổi bật": chỉ nêu tin THẬT SỰ mới/đáng chú ý (đổi lãnh đạo, cảnh báo kiểm toán, biến động giá lớn, sự kiện pháp lý...) — không diễn giải lại toàn bộ luận điểm đã có sẵn trong sheet phân tích.
 
 ---
 
 ## Piece 2 — PB Low (`/finance-report pb-low`)
 
-1. Read `top100_spreadsheet_id` / `top100_sheet` from config (currently `'Top 100'` tab, columns: Mã | Ngành | Vốn hóa | ROE | ROA | P/E | P/B | ...).
-2. Filter rows where P/B (column G) < 1. Sort ascending by P/B.
-3. Cross-reference against `watchlist` tickers — flag if any watched ticker also appears in this list.
+1. Đọc `top100_spreadsheet_id` / `top100_sheet` từ config (hiện là tab `'Top 100'`, cột: Mã | Ngành | Vốn hóa | ROE | ROA | P/E | P/B | ...).
+2. Lọc TẤT CẢ dòng có P/B < 1. Sắp xếp tăng dần theo P/B. **Không đối chiếu/lọc theo watchlist** — liệt kê hết.
+3. Với MỖI mã lọt danh sách, đưa ra **nhận định ngắn** dựa trên số liệu đã có trong cùng dòng (ROE, ROA, P/E, Vốn hóa, Ngành) — không tra cứu thêm bên ngoài trừ khi user yêu cầu:
+   - P/B thấp + ROE/ROA cao → khả năng bị định giá thấp thật sự (tiềm năng)
+   - P/B thấp + ROE/ROA thấp/âm → có thể "rẻ vì lý do chính đáng" (value trap), cần cảnh báo
+   - Ngành đang khó khăn mang tính chu kỳ (BĐS, ngân hàng đang xử lý nợ xấu...) → note rủi ro ngành chung, không đi sâu nghiên cứu riêng từng mã trừ khi được yêu cầu
 4. **Output** (`{HHMM}-finance-pblow.md`):
    ```markdown
    # P/B < 1 Screen — {YYYY-MM-DD} {HH:MM}
-   Nguồn: sheet 'Top 100', {top100_spreadsheet_id}
+   Nguồn: sheet 'Top 100', spreadsheet {top100_spreadsheet_id}
 
-   | Mã | Ngành | Vốn hóa | ROE | ROA | P/E | P/B |
-   |----|-------|---------|-----|-----|-----|-----|
-   ...
+   | Mã | Ngành | Vốn hóa | ROE | ROA | P/E | P/B | Nhận định nhanh |
+   |----|-------|---------|-----|-----|-----|-----|------------------|
+   | ... | ... | ... | ... | ... | ... | ... | {1 câu: tiềm năng / value trap / cần xem thêm} |
 
-   {N} mã trong danh sách theo dõi (Top 100) có P/B < 1.
-   Trong watchlist: {liệt kê nếu có, hoặc "không có"}
+   {N} mã trong Top 100 có P/B < 1.
+
+   ## Nhận định tổng quan
+   - {2-4 gạch đầu dòng: pattern chung — ví dụ nhóm ngành nào chiếm nhiều nhất trong danh sách, mã nào đáng chú ý nhất và vì sao, mã nào rủi ro nhất và vì sao}
    ```
-5. **Do not fabricate** a P/B figure for a ticker not present in the Top 100 sheet — that ticker simply isn't screened by this piece.
+5. **Không bịa** nhận định vượt quá những gì số liệu trong sheet cho phép suy luận — nếu ROE/ROA/ngành không đủ để kết luận rõ ràng, ghi "cần nghiên cứu thêm" thay vì đoán.
 
 ---
 
 ## Full Run (`/finance-report`)
 
-1. Run Piece 1 (Focus) for all watchlist tickers.
-2. Run Piece 2 (PB Low).
-3. Combine into one `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` (or keep as two files — either is fine, just don't skip one silently).
+1. Chạy Piece 1 (Focus).
+2. Chạy Piece 2 (PB Low).
+3. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 2 file riêng — miễn không bỏ sót piece nào.
 
 ---
 
 ## Key Rules
 
-- **Never fabricate live numbers.** If the vietstock live fetch fails, explicitly say the quote is stale (dated to when the analysis sheet was last built) rather than presenting a guessed number as current.
-- **P/B < 1 screen is only as complete as the `Top 100` sheet** — it is a tracked-list of ~101 large-cap stocks, not the whole market. Say so if asked "is this all VN stocks with P/B<1" — it isn't.
-- **Adding a new ticker**: append to `config/finance-watchlist.json` → `watchlist`. Requires the ticker to already have its own analysis spreadsheet (`Báo cáo 2`-style sheet with a "III. ĐỊNH GIÁ HIỆN TẠI" section) built via the same process used for FPT/VEA — this skill reads existing reports, it does not build new ones from scratch. Use `/ck:plan` + the FPT/VEA build process (research agents + Google Sheets API) to onboard a new ticker first.
-- **Google Sheets write access is not needed for this skill** — read-only. Do not modify the analysis sheets from here.
+- **Piece 1 tuân thủ NGUYÊN VĂN quy tắc anti-hallucination của `/me:news-digest`**: không viết tin trước khi có JSON, không tự chế URL, đếm số bài viết ra khớp số bài JSON trả về.
+- **Piece 2 chỉ quét trong phạm vi sheet `Top 100`** (~101 mã vốn hóa lớn theo dõi) — không phải toàn bộ thị trường. Nếu user hỏi "có phải tất cả mã P/B<1 trên sàn không" → trả lời KHÔNG, đây chỉ là danh sách đang theo dõi.
+- **Thêm mã mới vào watchlist**: sửa `config/finance-watchlist.json`. Piece 1 (Focus/tin tức) hoạt động ngay không cần thêm gì. Nếu muốn Piece 1 so sánh với luận điểm đầu tư đã phân tích, mã đó cần có sẵn sheet `Báo cáo 2`-style (xây theo quy trình đã dùng cho FPT/VEA — research agents + Google Sheets API, không thuộc phạm vi skill này).
+- **Không cần quyền ghi Google Sheets** cho skill này — chỉ đọc.
