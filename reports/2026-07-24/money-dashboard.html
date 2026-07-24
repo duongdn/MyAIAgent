@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Dashboard — 24/07/2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+  .header { padding: 24px 32px 16px; border-bottom: 1px solid #1e2536; }
+  .header h1 { font-size: 20px; font-weight: 600; color: #f8fafc; }
+  .header .date { font-size: 13px; color: #64748b; margin-top: 2px; }
+  .kpi-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 20px 32px; }
+  .kpi { background: #161b2e; border: 1px solid #1e2a3a; border-radius: 10px; padding: 14px 16px; }
+  .kpi .label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: .5px; }
+  .kpi .value { font-size: 20px; font-weight: 700; margin-top: 4px; color: #f1f5f9; }
+  .kpi .delta { font-size: 12px; margin-top: 4px; }
+  .kpi .delta.up { color: #22c55e; }
+  .kpi .delta.down { color: #ef4444; }
+  .kpi .delta.neutral { color: #64748b; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 32px 20px; }
+  .grid.full { grid-template-columns: 1fr; }
+  .card { background: #161b2e; border: 1px solid #1e2a3a; border-radius: 10px; padding: 18px; }
+  .card h3 { font-size: 13px; color: #94a3b8; font-weight: 500; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .4px; }
+  .chart-wrap { position: relative; }
+  .chart-wrap.h280 { height: 280px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 8px; border-bottom: 1px solid #1e2a3a; font-size: 11px; text-transform: uppercase; }
+  td { padding: 8px 8px; border-bottom: 1px solid #1a2030; color: #cbd5e1; }
+  td.right { text-align: right; font-variant-numeric: tabular-nums; }
+  td.green { color: #22c55e; }
+  td.red { color: #ef4444; }
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+  .badge.warn { background: #422006; color: #fb923c; }
+  .badge.ok { background: #052e16; color: #4ade80; }
+  .badge.info { background: #0c1a3a; color: #60a5fa; }
+  .note-row { font-size: 11px; color: #475569; padding: 10px 32px 24px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>💰 Money Dashboard</h1>
+  <div class="date">Cập nhật: 24/07/2026 09:38 · Net Worth từ <code>/wallets/totaldashboard</code> (authoritative, không suy luận)</div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="label">Net Worth</div>
+    <div class="value">7.608 tỷ</div>
+    <div class="delta down">▼ 38.4M vs 20/07 (7.646 tỷ) — vàng giảm giá (−37.5M) + chi tiêu tiền mặt</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Liabilities</div>
+    <div class="value" style="color:#ef4444">89.0M</div>
+    <div class="delta neutral">◆ Không đổi vs 20/07 — chưa phát sinh charge mới từ 11/07</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Liquid</div>
+    <div class="value">302.7M</div>
+    <div class="delta down">▼ 0.9M vs 20/07 (303.6M) — chi tiêu Ví tiền mặt</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Tiết kiệm</div>
+    <div class="value" style="color:#22c55e">1,038.1M</div>
+    <div class="delta up">▲ 35K vs 20/07 — chỉ lãi tích lũy, không sổ nào đáo hạn/mở mới</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Tháng 7 Net (đến ngày 24, thu/chi thật)</div>
+    <div class="value" style="color:#ef4444">−66.6M</div>
+    <div class="delta neutral">Thu 80.3M · Chi 146.9M (Học phí 69.5M + Biếu tặng 43M = 76.7% chi)</div>
+  </div>
+</div>
+
+<div class="grid full">
+  <div class="card" style="border-color:#1e3a5f;background:#0a1626">
+    <h3 style="color:#60a5fa">📌 Điểm nổi bật kể từ 20/07 (4 ngày)</h3>
+    <div style="font-size:13px;color:#cbd5e1;line-height:1.7">
+      <b>Net Worth giảm 38.4M</b> (7.646 tỷ → 7.608 tỷ, −0.50%) — toàn bộ mức giảm được giải trình đầy đủ: vàng giảm giá −37.5M (biến động thị trường, cùng 50 đơn vị nắm giữ) và chi tiêu tiền mặt Ví −950K, bù lại một phần bởi lãi tiết kiệm +35K. Không có bất thường chưa giải thích được kỳ này.<br><br>
+      <b>Đầu tư (VCBS/VCBF/FPTS/Finhay) hoàn toàn không đổi</b> — không có giao dịch Cho vay/Thu nợ nào trong 4 ngày, danh mục giữ nguyên 2,208.9M.<br><br>
+      <b>VCB Visa đứng yên ở 89.0M</b> — không phát sinh charge mới kể từ 11/07 (13 ngày liên tiếp), chỉ còn chờ thanh toán học phí + biếu tặng + thể thao tháng 7 (109M tổng, gấp 2.5x trung bình 6 tháng).<br><br>
+      <b>Tiết kiệm tăng nhẹ 35K</b> — chỉ lãi tích lũy trên các sổ hiện có, không sổ nào đáo hạn/mở mới. tịkcop 1 week sắp đáo hạn 30/07 (còn 6 ngày).<br><br>
+      ✅ <b>Bất thường Paypal/vcb tuần trước đã tự giải quyết</b> — không còn chênh lệch lớn không giải thích được kỳ này; cả hai ví biến động nhỏ (Paypal +30K do tỷ giá, vcb không đổi).<br><br>
+      Bất động sản vẫn chiếm <b>46.3%</b> tổng tài sản (Nhà 32.9% + long an res 13.4%) — cao hơn benchmark 20–30%, không đổi qua các mốc vì đây là nhà ở chính, không tái cân bằng được.<br><br>
+      Reconstruction cost-basis (7,769.8M gross / 7,680.8M net) lệch +0.95% so với dashboard authoritative (7,607.9M net) — cùng mức lệch như các mốc trước, không phải lỗi dữ liệu mới.
+    </div>
+  </div>
+</div>
+
+<div class="grid full">
+  <div class="card" style="border-color:#422006;background:#1a1004">
+    <h3 style="color:#fb923c">🐛 Bug vẫn còn: ghost balance + stale savings duplicate</h3>
+    <table>
+      <thead><tr><th>Sổ</th><th class="right">Số dư API</th><th class="right">Lãi suất</th><th>Kỳ hạn</th><th>Trạng thái thật</th></tr></thead>
+      <tbody>
+        <tr><td>nam á 6m</td><td class="right red">2,005,479</td><td class="right">8%</td><td>01/12/2023 → 01/06/2024</td><td class="red">Đã rút hết, ko còn trong app</td></tr>
+        <tr><td>tikcop 5 week</td><td class="right red">0</td><td class="right">7.5%</td><td>đáo hạn 13/10/2026</td><td class="red">Trùng với "tikcop 5m" (401,918,000 ₫, cùng ngày đáo hạn) — bug currentAmount=0 kinh điển, không phải tài sản riêng</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:#94a3b8;margin-top:10px;line-height:1.6">
+      Cả hai vẫn chưa được MISA fix. Đã loại khỏi mọi tổng ở trên (không double-count "tikcop 5 week"/"tikcop 5m").
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>📈 Net Worth Trend</h3>
+    <div class="chart-wrap h280">
+      <canvas id="chartNetWorth"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🥧 Allocation hiện tại (excl. Nhà 2.5B)</h3>
+    <div class="chart-wrap h280">
+      <canvas id="chartAllocation"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>📊 Biến động theo category</h3>
+    <div class="chart-wrap h280">
+      <canvas id="chartCategoryEvolution"></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🏦 Tiết kiệm & Liquid qua các kỳ</h3>
+    <div class="chart-wrap h280">
+      <canvas id="chartSavingsLiquid"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="grid full" style="padding-bottom:8px">
+  <div class="card">
+    <h3>📑 Tài khoản chi tiết — 24/07/2026</h3>
+    <div style="font-size:11px;color:#64748b;margin-bottom:10px">Nhà (2,500,000,000 ₫) đã loại khỏi bảng này — đang ở, không mua bán được, nên % dưới đây tính trên tổng tài sản đầu tư được (5,269,753,050 ₫, excl. Nhà). Nhà vẫn được tính trong Net Worth/KPI phía trên.</div>
+    <table>
+      <thead>
+        <tr><th>Tài khoản</th><th>Loại</th><th class="right">Số dư (₫)</th><th class="right">% (excl. Nhà)</th><th>Trạng thái</th><th class="right">Tổng nhóm (₫) / %</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td class="right">19.4%</td><td><span class="badge info">Real Estate</span></td><td class="right" style="font-weight:600">1,020,000,000<br>19.4%</td></tr>
+        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">600,000,000</td><td class="right">11.4%</td><td><span class="badge warn">Illiquid</span></td><td class="right" rowspan="5" style="font-weight:600;vertical-align:middle;border-left:2px solid #a855f7">2,208,923,840<br>41.9%</td></tr>
+        <tr><td>VCBS</td><td>📈 ETF (cost basis)</td><td class="right">594,155,620</td><td class="right">11.3%</td><td><span class="badge info">◆ Không đổi vs 20/07</span></td></tr>
+        <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td class="right">11.3%</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">346,301,151</td><td class="right">6.6%</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td class="right">1.4%</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>vcb 1 month</td><td>🏦 Tiết kiệm</td><td class="right">505,944,635</td><td class="right">9.6%</td><td><span class="badge info">Đáo hạn 09/08 (16 ngày)</span></td><td class="right" rowspan="4" style="font-weight:600;vertical-align:middle;border-left:2px solid #22c55e">1,038,144,554<br>19.7%</td></tr>
+        <tr><td>tikcop 5m</td><td>🏦 Tiết kiệm</td><td class="right">401,918,000</td><td class="right">7.6%</td><td><span class="badge info">Đáo hạn 13/10</span></td></tr>
+        <tr><td>tikcop 3 month</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td class="right">1.9%</td><td><span class="badge info">Đáo hạn 10/10</span></td></tr>
+        <tr><td>tịkcop 1 week</td><td>🏦 Tiết kiệm</td><td class="right">30,281,919</td><td class="right">0.6%</td><td><span class="badge warn">Đáo hạn 30/07 (6 ngày)</span></td></tr>
+        <tr style="opacity:.5"><td>~~nam á 6m~~</td><td>🏦 Tiết kiệm</td><td class="right">2,005,479</td><td class="right">0.0%</td><td><span class="badge warn">🐛 Ghost — đã loại khỏi tổng</span></td><td class="right">(không tính vào tổng nhóm)</td></tr>
+        <tr><td>vàng (50 VGO)</td><td>🥇 Vàng</td><td class="right">700,000,000</td><td class="right">13.3%</td><td><span class="badge warn">▼ 37.5M — biến động giá</span></td><td class="right" style="font-weight:600">700,000,000<br>13.3%</td></tr>
+        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">119,044,133</td><td class="right">2.3%</td><td><span class="badge info">◆ Không đổi</span></td><td class="right" rowspan="5" style="font-weight:600;vertical-align:middle;border-left:2px solid #06b6d4">302,684,656<br>5.7%</td></tr>
+        <tr><td>Tikop</td><td>💵 Liquid</td><td class="right">100,024,366</td><td class="right">1.9%</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>Paypal (~3,006 USD)</td><td>💵 Liquid</td><td class="right">79,659,000</td><td class="right">1.5%</td><td><span class="badge info">▲ +30K — tỷ giá nhích nhẹ</span></td></tr>
+        <tr><td>Ví</td><td>💵 Cash</td><td class="right">3,050,000</td><td class="right">0.1%</td><td><span class="badge warn">▼ 950K — chi tiêu tiền mặt</span></td></tr>
+        <tr><td>Momo + nam á + Payoneer</td><td>💵 Cash</td><td class="right">907,157</td><td class="right">0.0%</td><td><span class="badge ok">◆ Không đổi</span></td></tr>
+        <tr><td>VCB Visa</td><td>💳 Nợ</td><td class="right red">−89,000,000</td><td class="right red">−1.7%</td><td><span class="badge ok">◆ Không đổi — chưa charge mới</span></td><td class="right" style="font-weight:600;color:#ef4444">−89,000,000<br>−1.7%</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px;color:#64748b;margin-top:10px">Cột cuối = tổng gộp theo nhóm (merge các dòng cùng loại), % tính trên tổng tài sản đầu tư được (excl. Nhà).</div>
+  </div>
+</div>
+
+<script>
+const LABELS = ['21/05', '25/05', '26/05', '23/06', '06/07', '07/07', '09/07', '14/07', '20/07', '24/07'];
+const COLORS = {
+  re:      '#3b82f6',
+  gold:    '#eab308',
+  invest:  '#a855f7',
+  savings: '#22c55e',
+  liquid:  '#06b6d4',
+  debt:    '#ef4444',
+};
+
+new Chart(document.getElementById('chartNetWorth'), {
+  type: 'line',
+  data: {
+    labels: LABELS,
+    datasets: [{
+      label: 'Net Worth (tỷ)',
+      data: [7.971, 7.951, 7.952, 7.748, 7.739, 7.736, 7.721, 7.661, 7.646, 7.608],
+      borderColor: '#60a5fa',
+      backgroundColor: 'rgba(96,165,250,0.08)',
+      borderWidth: 2.5,
+      pointBackgroundColor: ['#94a3b8','#94a3b8','#94a3b8','#4ade80','#4ade80','#4ade80','#4ade80','#4ade80','#4ade80','#4ade80'],
+      pointRadius: [4,4,4,5,5,5,5,5,5,6],
+      segment: { borderDash: ctx => ctx.p1DataIndex >= 3 ? [] : [4, 3] },
+      fill: true,
+      tension: 0.3,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ` ${ctx.parsed.y.toFixed(3)} tỷ ₫`,
+          afterLabel: (ctx) => ['⚠️ Chưa verify', '⚠️ Chưa verify', '⚠️ Chưa verify', '✅ Verified (app thật)', '✅ Từ API totaldashboard', '✅ Từ API totaldashboard', '✅ Từ API totaldashboard', '✅ Từ API totaldashboard', '✅ Từ API totaldashboard', '✅ Từ API totaldashboard'][ctx.dataIndex]
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
+      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' }, min: 7.3, max: 8.0 }
+    }
+  }
+});
+
+const ALLOC_TOTAL = 5270; // M, excl. Nhà, ghost balance excluded
+new Chart(document.getElementById('chartAllocation'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Đầu tư', 'Tiết kiệm', 'BĐS (Long An)', 'Vàng', 'Liquid'],
+    datasets: [{
+      data: [2209, 1038, 1020, 700, 303],
+      backgroundColor: [COLORS.invest, COLORS.savings, COLORS.re, COLORS.gold, COLORS.liquid],
+      borderColor: '#0f1117',
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '62%',
+    plugins: {
+      legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 12 }, padding: 10 } },
+      tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: ${ctx.parsed}M (${(ctx.parsed/ALLOC_TOTAL*100).toFixed(1)}%)` } }
+    }
+  }
+});
+
+new Chart(document.getElementById('chartCategoryEvolution'), {
+  type: 'bar',
+  data: {
+    labels: LABELS,
+    datasets: [
+      { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
+      { label: '📈 Đầu tư',   data: [2255,2367,2367,2091,2171,2173,2195,2209,2209,2209], backgroundColor: COLORS.invest },
+      { label: '🥇 Vàng',     data: [817,807,807,743,757,757,745,742,738,700],      backgroundColor: COLORS.gold },
+      { label: '🏦 Tiết kiệm',data: [1212,1107,1109,638,1039,1039,1041,1038,1038,1038], backgroundColor: COLORS.savings },
+      { label: '💵 Liquid',   data: [192,176,174,190,386,381,355,314,304,303],      backgroundColor: COLORS.liquid },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+      tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}M` } }
+    },
+    scales: {
+      x: { stacked: true, grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
+      y: { stacked: true, grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => (v/1000).toFixed(0)+'B' } }
+    }
+  }
+});
+
+new Chart(document.getElementById('chartSavingsLiquid'), {
+  type: 'bar',
+  data: {
+    labels: LABELS,
+    datasets: [
+      { label: '🏦 Tiết kiệm', data: [1212, 1107, 1109, 638, 1039, 1039, 1041, 1038, 1038, 1038], backgroundColor: COLORS.savings, borderRadius: 3 },
+      { label: '💵 Liquid',    data: [192, 176, 174, 190, 386, 381, 355, 314, 304, 303],     backgroundColor: COLORS.liquid,  borderRadius: 3 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: '#94a3b8', font: { size: 12 } } },
+      tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}M ₫` } }
+    },
+    scales: {
+      x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
+      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v+'M' }, beginAtZero: true }
+    }
+  }
+});
+</script>
+
+<div class="note-row">
+  <b style="color:#94a3b8">Ghi chú:</b> Net Worth (7.608 tỷ) đọc trực tiếp từ API <code>/wallets/totaldashboard</code>, không tái tạo thủ công. Mốc 21/05–26/05 vẫn là số tái tạo (reconstructed), chưa verify tuyệt đối — không nên tin chính xác delta giữa các mốc đó với hôm nay. Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
+</div>
+
+</body>
+</html>
