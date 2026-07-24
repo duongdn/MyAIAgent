@@ -313,9 +313,8 @@ Trello: Philip ⚠️ left incomplete.
 
 **Unresolved questions:**
 1. Marcel's screen-recording demand (Alert #2) — needs your decision on how to respond to him.
-2. Philip's Elevate365 Static Demo — "I'm close but can't get it over the line... Does it make sense what I'm trying to do?" — needs Will/NamTV response.
-3. MPFC `sitemap_index.xml` 55s response and the WP REST-API/json-api undefined-method errors — worth a code-level look when there's SSH access from an environment that has it.
-4. `#events-code` OhCleo channel ID returning `channel_not_found` — may need a fresh channel ID.
+2. MPFC `sitemap_index.xml` 55s response and the WP REST-API/json-api undefined-method errors — worth a code-level look when there's SSH access from an environment that has it.
+3. `#events-code` OhCleo channel ID returning `channel_not_found` — may need a fresh channel ID.
 
 ---
 
