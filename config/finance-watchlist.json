@@ -1,0 +1,23 @@
+{
+  "description": "Tracked stocks for /me:finance-report. NOT a secret — Google Sheet IDs only, no credentials. Add new tickers here, not in the skill file.",
+  "watchlist": [
+    {
+      "ticker": "FPT",
+      "name": "FPT Corporation",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuibqMw",
+      "report_sheet": "Báo cáo 2",
+      "vietstock_url": "https://finance.vietstock.vn/FPT/tai-chinh.htm"
+    },
+    {
+      "ticker": "VEA",
+      "name": "VEAM Corporation (Tổng Công ty Máy động lực và Máy nông nghiệp Việt Nam - CTCP)",
+      "exchange": "UPCOM",
+      "spreadsheet_id": "17vER_Nljh9ZkoHTX5xqLs1rJZYYCZDgpP3Xs0NmQ1Bw",
+      "report_sheet": "Báo cáo 2 - VEA",
+      "vietstock_url": "https://finance.vietstock.vn/VEA/tai-chinh.htm"
+    }
+  ],
+  "top100_spreadsheet_id": "1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuibqMw",
+  "top100_sheet": "Top 100"
+}
