@@ -137,6 +137,7 @@
 - [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 3rd root cause: bulk cleanup commit deleted script, restore from git history
 - [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 4th distinct bug: titles char-scrambled, DOM extraction issue, needs code fix
 - [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — skill self-contradicts (3/5 vs ALL), user confirmed 5/source settled default
+- [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching, don't re-derive article-count policy from skill text alone
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
