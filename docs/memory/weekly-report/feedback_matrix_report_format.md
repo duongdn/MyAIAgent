@@ -44,3 +44,13 @@ Rules:
 **Why (2026-07-20 cap+bank correction):** For W35 (13/07) I drafted `Web: 53h30m/53h30m` using the uncapped-sum rule (PhucVT 0 + LeNH 40 + LongVV 13.5 = 53.5h charge = actual). User pushed back: "là sao? tuần trước ko có thiếu giờ charge à?" then gave the corrected final numbers directly: `Web: 40h/53h30m`, `LongVV: 0h/13h30m (3h trả nợ, 10h30m làm trước report sau)`, with the instruction "Nhìn đây, sau này làm theo" (look at this, follow it from now on). I had traced the debt ledger and found no outstanding debt from W34, so the "3h trả nợ" in the final numbers isn't literal ledger debt I could independently verify — it's the user's own accounting call, not something to re-derive or second-guess going forward. **Do not argue the debt math from history again — apply the cap+bank model and trust the user's per-dev split.**
 
 **How to apply:** Always use this format when generating the James Diamond + Marcel Matrix message. Compute Web charge by filling the 40h cap in dev-priority order; any dev whose hours aren't needed to fill the cap gets `0h/{actual}` with a banking annotation. When in doubt about who belongs on Web/Mobile or the exact banking split, ASK before sending.
+
+**2026-07-25 — Marcel section format, now that it has more than one dev:** Marcel/Tokenlite historically had only `DuongDN: {hours}` as a single raw-hours line (no charge/actual split, no total) because only one person logged there. The first week LongVV also logged hours (13h charged / 18h actual, per WS), the old single-line format broke down — sent it as `LongVV: 18h (13h charged qua Workstream)` (prose, inconsistent with Web/Mobile's `charge/actual` convention) and got corrected twice in the same send cycle: once for not using `charge/actual` per-dev, once for missing a section total line (mirroring how Web/Mobile each have a bold section-total line before the per-dev breakdown). **Corrected template, apply going forward whenever Marcel has 2+ devs in a week:**
+```
+Marcel
+
+Marcel: {total_charge}/{total_actual}
+DuongDN: {charge}/{actual}
+LongVV: {charge}/{actual}
+```
+If Marcel reverts to a single dev, the total line is redundant but harmless — keep it anyway for consistency rather than re-deciding the format each time. **Why this keeps recurring:** every section of this report (Web, Mobile, now Marcel) should default to the same `total-then-per-dev, charge/actual` shape from the start — don't wait for the user to ask for `charge/actual` and a total as two separate corrections on a "small" one-line addition; apply the full house format immediately even for a 1-line change.

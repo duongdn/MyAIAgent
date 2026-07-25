@@ -147,9 +147,37 @@ Source: "Est vs Charged" tab, Status col G, Est = col I (Raw) + col J (CR), Actu
 
 ## #3 — James Diamond + Marcel + Blair Brown Matrix Report
 
-**Status: NOT DRAFTED TO SEND-FLAG FILE YET — raw numbers below, needs your input on the Marcel/LongVV question before I write the exact text for confirmation** (per the mandatory send-gate, nothing goes to Thuy Le's room until you confirm exact text).
+**Status: SENT.** Confirmed by user 2026-07-25 10:24 +07, sent 10:25 +07 (`event_id: $Np8c6TdEnHEUPPd-lhWtxUyhB3gpP1SqUq-j-xtueKw`). LongVV added to Marcel section (13h/18h charge/actual) with a new section-total line — see `docs/memory/weekly-report/feedback_matrix_report_format.md` for the corrected template. W35's stale unsent draft was superseded, not sent late (see `config/.weekly-report-send-flags.json` → `superseded_unsent_week`).
 
-Raw data:
+Final message sent:
+```
+Report week 20/07
+
+James Diamond
+
+Web: 40h/40h
+PhucVT: 0h/0h (vẫn đang ở Crystal lang/Arthur tuần này)
+LeNH: 40h/40h
+
+Mobile: 19h/19h
+AnhNH2: 19h/19h
+
+---
+
+Marcel
+
+Marcel: 16h/21h
+DuongDN: 3h/3h
+LongVV: 13h/18h
+
+---
+
+Blair Brown - Peptide Clyde
+LeNH: 0h
+KhanhHH: 0h
+```
+
+Raw data behind the numbers:
 
 | Dev | Project | Charge | Actual | Source |
 |-----|---------|--------|--------|--------|
@@ -157,14 +185,12 @@ Raw data:
 | LeNH | JD Web | 40h | 40h | WorkStream — fully charged, alone fills the 40h Web cap |
 | LongVV | JD Web (flex) | 0h | 0h | WorkStream — no JD flex logged at all this week (13.5h last week) |
 | AnhNH2 | JD Mobile | 19h | 19h | WorkStream, no fixed plan |
-| DuongDN | Marcel (Tokenlite) | 0h | 3h | WorkStream |
-| LongVV | Marcel (Tokenlite) | ? | 18h (13h charged per WS) | WorkStream — **new this week, not previously part of the Marcel report line** |
+| DuongDN | Marcel (Tokenlite) | 3h | 3h | WorkStream |
+| LongVV | Marcel (Tokenlite) | 13h | 18h | WorkStream — new this week, added to Marcel section |
 | LeNH | Blair Brown | 0h | 0h | WorkStream — 0 rows, 3rd straight week |
 | KhanhHH | Blair Brown | 0h | 0h | WorkStream — 0 rows, 3rd straight week |
 
-Web total: charge = 0+40+0 = **40h** / actual = 0+40+0 = **40h** (simple this week — LeNH alone exactly fills the cap, no banking needed).
-
-**Open question before I draft the final message:** LongVV logged real hours on Marcel/Tokenlite this week (18h, WS shows 13h charged). The report template has only ever had a single `DuongDN: {hours}` line under Marcel. Do you want LongVV added to that section, and if so, charge = the WS-reported 13h, or something else?
+Web total: charge = 0+40+0 = **40h** / actual = 0+40+0 = **40h** (LeNH alone exactly fills the cap, no banking needed). Marcel total: charge = 3+13 = **16h** / actual = 3+18 = **21h**.
 
 ---
 
@@ -175,10 +201,8 @@ Web total: charge = 0+40+0 = **40h** / actual = 0+40+0 = **40h** (simple this we
 3. **LongVV's OhCleo still only 8h (3rd week: 0h, 0h, 8h) vs the declared full-time 40h/wk** — is that commitment still active?
 4. **PhucVT's Crystal lang hours: 3 straight weeks declining (41h→29.5h→16h), still 0h JD** — planned wind-down or a problem?
 5. **Blair Brown at 0h for a 3rd consecutive week (both LeNH and KhanhHH)** — needs a direct resolution this time, not another week of noting it.
-6. **How should LongVV's new Marcel/Tokenlite hours (18h/13h charged) be reflected in the James Diamond+Marcel+Blair Brown Matrix report?** — see #3 above.
-7. **Last week's (W35, week_start 07-13) Matrix report was drafted but never sent** (`confirmed: false`, `sent: false` still in `config/.weekly-report-send-flags.json`) — send it late, discard, or does this week supersede it?
-8. **Fountain narrow-scope (WIP) actual-hours column stuck for 3 straight weeks** on the same 4 tasks even as broad-scope data clearly updates — worth a specific ask to Kunal's team about WIP task actual-hours tracking (not "is the tab maintained" generally, since it clearly is for completed tasks).
-9. **#2380 duplicate-row issue** (same task, two rows, both stale) still not cleaned up after 3+ weeks.
+6. **Fountain narrow-scope (WIP) actual-hours column stuck for 3 straight weeks** on the same 4 tasks even as broad-scope data clearly updates — worth a specific ask to Kunal's team about WIP task actual-hours tracking (not "is the tab maintained" generally, since it clearly is for completed tasks).
+7. **#2380 duplicate-row issue** (same task, two rows, both stale) still not cleaned up after 3+ weeks.
 
 ---
 
