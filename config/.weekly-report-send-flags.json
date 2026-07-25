@@ -2,13 +2,18 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-07-13",
-    "message_text": "Report week 13/07\n\nJames Diamond\n\nWeb: 40h/53h 30m\nPhucVT: 0h/0h (vẫn đang chuyển sang Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\nLongVV: 0h/13h30m (3h trả nợ, 10h30m làm trước report sau)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
+    "week_start": "2026-07-20",
+    "message_text": "Report week 20/07\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 3h\nLongVV: 18h (13h charged qua Workstream)\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
     "confirmed": false,
     "confirmed_at": null,
     "sent": false,
     "sent_at": null,
     "event_id": null,
+    "superseded_unsent_week": {
+      "week_start": "2026-07-13",
+      "note": "W35 draft was never confirmed/sent (12 days stale as of 2026-07-25). Superseded by this week's report rather than sent late.",
+      "message_text": "Report week 13/07\n\nJames Diamond\n\nWeb: 40h/53h 30m\nPhucVT: 0h/0h (vẫn đang chuyển sang Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\nLongVV: 0h/13h30m (3h trả nợ, 10h30m làm trước report sau)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h"
+    },
     "previous_week": {
       "week_start": "2026-07-06",
       "message_text": "Report week 06/07\n\nJames Diamond\n\nWeb: 37h/48h\nPhucVT: 0h/0h (chuyển sang Crystal lang/Arthur tuần này, OT được duyệt)\nLeNH: 34h/40h\nLongVV: 3h/8h (5h trả nợ giờ thiếu tuần trước không charge thêm, 3h charge làm bù performance cho LeNH)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\nDuongDN: 0h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h 35m\nKhanhHH: 0h 5m",
