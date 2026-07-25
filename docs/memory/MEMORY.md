@@ -17,6 +17,7 @@
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 unanswered direct ask=warning
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md)
 - [feedback_gui_automation_risk_on_shared_desktop](global/feedback_gui_automation_risk_on_shared_desktop.md) — 🔴 xdotool=live desktop
+- [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 never external-timeout a login script shorter than its own internal wait (killed Workstream login at 45s vs its 5min wait, 2026-07-25)
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md), [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md)
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 see [[project_matrix_static_compat_token]]
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md), [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴🔴
