@@ -66,8 +66,9 @@ Không. 22 mã ngành Ngân hàng trong Top 100: chỉ **6/22** có P/B ≥ 1.5 
 SHB 0.9 · TPB/OCB/BAB 1.0 · NAB/VIB/MSB 1.1 · ABB 1.2 · SHS/VPB/ACB 1.3 · MBB/CTG/TCB/SSB/EIB 1.4.
 
 ### Mở rộng: bậc P/B và P/E (toàn bộ 100 mã có đủ dữ liệu)
+⚠️ Hai bảng dưới đây là **2 chỉ số khác nhau, thang đo khác nhau** — không so trực tiếp: P/B (giá/giá trị sổ sách, thường 0.5–10x) và P/E (giá/lợi nhuận, thường 5–30x). Cùng ngưỡng "<1.5" nhưng ý nghĩa hoàn toàn khác nhau giữa 2 bảng.
 
-**P/B theo bậc (số mã cộng dồn P/B < ngưỡng):**
+**[BẢNG 1 — P/B] theo bậc (số mã cộng dồn P/B < ngưỡng):**
 
 | Ngưỡng | Số mã | Cộng dồn |
 |---|---|---|
@@ -81,9 +82,7 @@ SHB 0.9 · TPB/OCB/BAB 1.0 · NAB/VIB/MSB 1.1 · ABB 1.2 · SHS/VPB/ACB 1.3 · M
 
 → REE nằm ở bậc <1.5 (P/B 1.4) — đúng như live-check trước đó, không phải sai sót.
 
-**P/E thấp (< 10), toàn bộ 34 mã, sắp tăng dần** — bỏ khung bậc <1.5/<2/<3/<5 vì gần như rỗng (chỉ VCG ở 3.1), không xét >10:
-
-Không có mã nào ở bậc P/E < 1.5, < 2, < 3 (rỗng — bảng dưới gộp thẳng vào bậc < 5 / 5-10 để không có hàng trống vô nghĩa).
+**[BẢNG 2 — P/E] thấp (< 10), toàn bộ 34 mã, sắp tăng dần** — đây LÀ bảng P/E, khác hẳn bảng P/B ở trên. Bậc P/E < 1.5, < 2, < 3 rỗng (0 mã) vì P/E đó gần như không tồn tại thực tế ở rổ Top 100 (khác với P/B, nơi các bậc này có rất nhiều mã) — không xét P/E > 10:
 
 | Bậc | Mã | Ngành | ROE | ROA | P/E | Nhận định nhanh |
 |-----|----|----|-----|-----|-----|------------------|
