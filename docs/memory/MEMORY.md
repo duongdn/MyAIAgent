@@ -145,5 +145,9 @@
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
 
+## finance-report
+- [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — `/me:finance-report-detail <TICKER>` builds 6-sheet FPT/VEA-style report
+- [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn URL pattern + year-arrow/Excel-export workflow, use chrome-devtools not WebFetch
+
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.

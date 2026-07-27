@@ -35,10 +35,22 @@ Input: 1 mã cổ phiếu (ticker). Output: bộ 6 sheet phân tích đầy đ�
 - Sau khi có, thêm/verify entry trong `config/finance-watchlist.json`.
 
 ### Bước 2 — Thu thập dữ liệu gốc (nguồn thật, KHÔNG BỊA)
-- Tìm báo cáo tài chính/báo cáo thường niên chính thức: web search tên công ty + "báo cáo thường niên" / "báo cáo tài chính" + năm, ưu tiên nguồn công ty/UBCKNN/HOSE-HNX-UPCOM, hoặc cafef/vietstock cho số liệu tổng hợp.
-- PDF dạng scan (ảnh, không extract text được) → `pdftoppm` render từng trang thành PNG → đọc bằng vision (Read tool trên ảnh) → chép chính xác số liệu, không làm tròn/suy đoán.
-- Số liệu không tìm được / mâu thuẫn giữa nguồn → dừng lại, hỏi user cung cấp, **không tự điền số ước lượng**.
-- Nếu user tự cung cấp số liệu (paste, upload) → verify tính hợp lý cơ bản trước khi dùng (VD: tổng tài sản = tổng nguồn vốn, các mục con cộng đúng subtotal) — báo cho user nếu phát hiện bất thường thay vì âm thầm sửa hoặc âm thầm dùng.
+
+**Nguồn chính: cafef.vn** (quy trình chuẩn của user):
+1. Vào trang tài chính của mã: `https://cafef.vn/du-lieu/{exchange}/{ticker-thường}-tai-chinh.chn` (`{exchange}` = `hose`/`hnx`/`upcom` tùy sàn niêm yết — xác định qua `finance-watchlist.json` nếu mã đã theo dõi, hoặc tra nhanh trước khi build URL). VD SAB (HOSE): `https://cafef.vn/du-lieu/hose/sab-tai-chinh.chn`.
+2. Lấy đủ cả 3 phần trên cùng trang (deep-link bằng `#`):
+   - `#can-doi-ke-toan` — Bảng cân đối kế toán
+   - `#ket-qua-kinh-doanh` — Kết quả kinh doanh
+   - `#luu-chuyen-tien-te` — Lưu chuyển tiền tệ
+3. Mỗi phần có nút mũi tên để chuyển view giữa các năm — **phải bấm mũi tên để chọn đúng khoảng năm cần lấy cho TỪNG phần** (canh chỉnh riêng, 3 phần không tự đồng bộ năm với nhau). Nếu 1 phần lại chia nhiều bảng con (VD chỉ tiêu tài sản / chỉ tiêu nguồn vốn) thì canh năm cho từng bảng con luôn.
+4. Bấm nút "Xuất Excel" ở từng phần → tải file Excel về.
+5. Trang có JS tương tác (search combobox, mũi tên năm, export) → dùng `chrome-devtools`/Puppeteer (activate skill `chrome-devtools`) để điều hướng và bấm nút thật, không dùng WebFetch tĩnh (sẽ không thấy được nội dung render bằng JS hoặc không bấm được nút xuất).
+6. Đọc file Excel tải về (`.xlsx`) bằng script Python (`pandas`/`openpyxl`, qua `.claude/skills/.venv/bin/python3`) → lấy số liệu multi-year, KHÔNG gõ tay lại bằng mắt để tránh sai số.
+
+**Fallback nếu cafef thiếu năm cũ hoặc dữ liệu bất thường**: tìm báo cáo thường niên PDF chính thức (web search tên công ty + "báo cáo thường niên" + năm, ưu tiên nguồn công ty/HOSE-HNX-UPCOM). PDF dạng scan (ảnh, không extract text được) → `pdftoppm` render từng trang thành PNG → đọc bằng vision (Read tool trên ảnh) → chép chính xác số liệu, không làm tròn/suy đoán.
+
+- Số liệu không tìm được / mâu thuẫn giữa cafef và PDF gốc → dừng lại, hỏi user, **không tự điền số ước lượng**.
+- Nếu user tự cung cấp số liệu (paste, upload file Excel) → verify tính hợp lý cơ bản trước khi dùng (VD: tổng tài sản = tổng nguồn vốn, các mục con cộng đúng subtotal) — báo cho user nếu phát hiện bất thường thay vì âm thầm sửa hoặc âm thầm dùng.
 
 ### Bước 3 — Build sheet raw `<TICKER>`
 - Copy cấu trúc hàng từ sheet FPT gốc (hoặc VEA nếu công ty phi tài chính giống VEA hơn) làm khung, điền đúng label items khớp với BCTC thật của mã (không phải công ty nào cũng có cùng structure — điều chỉnh theo thực tế, không ép khung).
