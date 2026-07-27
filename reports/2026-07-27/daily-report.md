@@ -75,7 +75,7 @@ Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ skipped — Vinn no dai
 
 ---
 
-## Scrin.io (Nick @ John Yi company account — 2026-07-26): 0h — no sessions recorded. Not TuanNT evidence.
+## Scrin.io (Nick @ John Yi company account — 2026-07-24): 0h — no sessions recorded. Not TuanNT evidence.
 
 ---
 
@@ -230,7 +230,7 @@ Trello: Neural Contract ✓ complete.
 
 ## Reminders — 07:02 (+07:00)
 
-Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders needed or sent.
+Friday 07-24: All devs have hours (PhucVT 8h, KhanhHH 8h, LeNH 8h, TuanNT 8h, LongVV 12h). No reminders needed.
 
 ---
 
