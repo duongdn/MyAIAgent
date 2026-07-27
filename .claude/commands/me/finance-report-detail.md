@@ -36,16 +36,15 @@ Input: 1 mã cổ phiếu (ticker). Output: bộ 6 sheet phân tích đầy đ�
 
 ### Bước 2 — Thu thập dữ liệu gốc (nguồn thật, KHÔNG BỊA)
 
-**Nguồn chính: cafef.vn** (quy trình chuẩn của user):
-1. Vào trang tài chính của mã: `https://cafef.vn/du-lieu/{exchange}/{ticker-thường}-tai-chinh.chn` (`{exchange}` = `hose`/`hnx`/`upcom` tùy sàn niêm yết — xác định qua `finance-watchlist.json` nếu mã đã theo dõi, hoặc tra nhanh trước khi build URL). VD SAB (HOSE): `https://cafef.vn/du-lieu/hose/sab-tai-chinh.chn`.
-2. Lấy đủ cả 3 phần trên cùng trang (deep-link bằng `#`):
-   - `#can-doi-ke-toan` — Bảng cân đối kế toán
-   - `#ket-qua-kinh-doanh` — Kết quả kinh doanh
-   - `#luu-chuyen-tien-te` — Lưu chuyển tiền tệ
-3. Mỗi phần có nút mũi tên để chuyển view giữa các năm — **phải bấm mũi tên để chọn đúng khoảng năm cần lấy cho TỪNG phần** (canh chỉnh riêng, 3 phần không tự đồng bộ năm với nhau). Nếu 1 phần lại chia nhiều bảng con (VD chỉ tiêu tài sản / chỉ tiêu nguồn vốn) thì canh năm cho từng bảng con luôn.
-4. Bấm nút "Xuất Excel" ở từng phần → tải file Excel về.
-5. Trang có JS tương tác (search combobox, mũi tên năm, export) → dùng `chrome-devtools`/Puppeteer (activate skill `chrome-devtools`) để điều hướng và bấm nút thật, không dùng WebFetch tĩnh (sẽ không thấy được nội dung render bằng JS hoặc không bấm được nút xuất).
-6. Đọc file Excel tải về (`.xlsx`) bằng script Python (`pandas`/`openpyxl`, qua `.claude/skills/.venv/bin/python3`) → lấy số liệu multi-year, KHÔNG gõ tay lại bằng mắt để tránh sai số.
+**Nguồn chính: API JSON công khai của cafef.vn** (phát hiện 27/7/2026 khi build SAB — tốt hơn hẳn click UI, không cần browser):
+```bash
+node scripts/finance-report-detail-fetch-cafef.js <TICKER>
+```
+Script gọi thẳng 3 endpoint (`GetReportCDKT`, `GetReportDetail?reportType=KQKD`, `GetReportDetail?reportType=LCTT`, đều `TypeTime=NAM`), tự lọc chỉ giữ năm `type==="HK"` (đã kiểm toán, liên tục — loại bỏ các năm cũ rời rạc kém tin cậy như SAB có 2013/2012/2008 tách rời khỏi chuỗi 2016-2025). Output: JSON có `balanceSheet`/`incomeStatement`/`cashFlow`, mỗi cái có `template` (label dòng) + `years[]` (giá trị theo năm).
+
+**Verify trước khi dùng**: đối chiếu TỔNG CỘNG TÀI SẢN (code `270`) = TỔNG CỘNG NGUỒN VỐN (code `440`) cho từng năm — phải khớp tuyệt đối (diff=0). Nếu lệch, dừng lại báo user, không tự sửa số.
+
+**Fallback nếu API không trả data cho mã** (hiếm): dùng cách cũ — vào `https://cafef.vn/du-lieu/{exchange}/{ticker-thường}-tai-chinh.chn` (3 anchor `#can-doi-ke-toan`/`#ket-qua-kinh-doanh`/`#luu-chuyen-tien-te`), điều hướng bằng `chrome-devtools` skill, bấm mũi tên canh năm + nút "Xuất Excel", parse file bằng pandas.
 
 **Fallback nếu cafef thiếu năm cũ hoặc dữ liệu bất thường**: tìm báo cáo thường niên PDF chính thức (web search tên công ty + "báo cáo thường niên" + năm, ưu tiên nguồn công ty/HOSE-HNX-UPCOM). PDF dạng scan (ảnh, không extract text được) → `pdftoppm` render từng trang thành PNG → đọc bằng vision (Read tool trên ảnh) → chép chính xác số liệu, không làm tròn/suy đoán.
 

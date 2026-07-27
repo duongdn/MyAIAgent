@@ -1,19 +1,20 @@
 ---
 name: reference_cafef_data_source
-description: cafef.vn is the primary data source for /me:finance-report-detail — exact URL pattern, year-navigation, and Excel-export workflow
+description: cafef.vn is the primary data source for /me:finance-report-detail — direct public JSON API (no browser needed), discovered 2026-07-27 while building SAB
 metadata:
   type: reference
 ---
 
-User's real workflow for sourcing multi-year BCTC data for a ticker, used by [[project_finance_report_detail_skill]]:
+**Best method (discovered 2026-07-27, use this first):** cafef.vn's financial-data page is backed by a public, unauthenticated JSON API — call it directly with `curl`/`fetch`, no Puppeteer/browser needed at all. Reusable script: `scripts/finance-report-detail-fetch-cafef.js <TICKER>`.
 
-1. Financial data page: `https://cafef.vn/du-lieu/{exchange}/{ticker-lowercase}-tai-chinh.chn` — `{exchange}` = `hose`/`hnx`/`upcom` per listing. Example SAB (HOSE): `https://cafef.vn/du-lieu/hose/sab-tai-chinh.chn`.
-2. Three sections on the same page via `#` anchor: `#can-doi-ke-toan` (balance sheet), `#ket-qua-kinh-doanh` (income statement), `#luu-chuyen-tien-te` (cash flow).
-3. Each section has arrow buttons to page through years — **must click arrows to align the exact year range per section**; sections do not auto-sync years with each other. Some sections split into sub-tables (e.g. assets vs. liabilities) that each need independent year-alignment too.
-4. Each section has an "Xuất Excel" button that downloads a `.xlsx` file with the currently-selected year range.
-5. Page is JS-rendered/interactive (search combobox, year arrows, export button) — plain `WebFetch` won't see rendered content or trigger the export. Must use the `chrome-devtools` skill (Puppeteer) to navigate and click.
-6. Parse the downloaded Excel with Python (`pandas`/`openpyxl` via `.claude/skills/.venv/bin/python3`) instead of hand-transcribing — avoids transcription error.
+Endpoints (all take `symbol=<TICKER>`, `TypeTime=NAM` for annual or `QUY` for quarterly, `pageSize=N` for how many periods back):
+- Balance sheet: `https://apiweb.cafef.vn/api/v2/BCTC/GetReportCDKT?symbol={T}&pageIndex=1&pageSize=15&reportType=ALL&TypeTime=NAM` → `value.data` = 2 sections (`TN`=Tài sản, `NV`=Nguồn vốn), each with `.data[]` = one entry per year, each year's `.data[]` = `{code, value}` rows keyed by `value.templace[section].data[].code`/`.name`.
+- Income statement: `https://apiweb.cafef.vn/api/v1/BCTC/GetReportDetail?symbol={T}&pageIndex=1&pageSize=15&reportType=KQKD&TypeTime=NAM` → flat `value.data[]` per year, `value.templace[]` for row labels.
+- Cash flow: same as above with `reportType=LCTT`.
+- Also available (not yet used): `https://apiweb.cafef.vn/api/v2/BCTC/FinancialIndicators?symbol={T}&pageIndex=1&pageSize=N` for pre-computed ratios.
 
-**Why:** User demonstrated this exact click-path (2026-07-27) as their standard method for building the FPT/VEA-style 6-sheet reports, superseding the earlier ad-hoc "search for annual report PDF" approach as the primary path. PDF+`pdftoppm`+vision transcription (see [[project_finance_report_detail_skill]]) remains the fallback only when cafef is missing older years or shows anomalous figures.
+**Data quality note:** each year entry has `type: "HK"` (đã kiểm toán, continuous annual) or `type: "H"` (older, `content` empty, gaps in the sequence — e.g. SAB jumps 2016→2013→2012→2008). **Only keep `type==="HK"` entries** — the fetch script does this automatically. For SAB this yielded a clean, gap-free 2016-2025 (10yr) series; verified balance sheet reconciles exactly (Σassets == Σliabilities+equity) for all 10 years before use.
 
-**How to apply:** Use this as Step 2 of `/me:finance-report-detail <TICKER>` — try cafef.vn first via chrome-devtools, fall back to PDF annual report only if data is missing/contradictory.
+**Superseded approach (keep only as last-resort fallback):** clicking through the rendered page (`https://cafef.vn/du-lieu/{exchange}/{ticker}-tai-chinh.chn#can-doi-ke-toan` etc., year-arrows, "Xuất Excel" button) via the `chrome-devtools` skill, or PDF annual-report + `pdftoppm` + vision transcription. Only needed if the API above is ever missing a ticker or a field the page shows.
+
+**How to apply:** Step 2 of `/me:finance-report-detail <TICKER>` — run `node scripts/finance-report-detail-fetch-cafef.js <TICKER>` first. Only fall back to browser/PDF methods if the API returns no data for that symbol.
