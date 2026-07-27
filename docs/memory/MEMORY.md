@@ -136,7 +136,8 @@
 - [feedback_facebook_scraper_missing_x_display](news-digest/feedback_facebook_scraper_missing_x_display.md)
 - [feedback_facebook_scraper_chrome_path_drift](news-digest/feedback_facebook_scraper_chrome_path_drift.md) — 🔴 use google-chrome path
 - [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 3rd root cause: bulk cleanup commit deleted script, restore from git history
-- [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 4th distinct bug: titles char-scrambled, DOM extraction issue, needs code fix
+- [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 4th distinct bug: titles char-scrambled; WORKAROUND: split `content` on "Đã chia sẻ với Công khai"
+- [feedback_facebook_not_logged_in_is_false_failure](news-digest/feedback_facebook_not_logged_in_is_false_failure.md) — 🔴 5th cause: not_logged_in often FALSE, test scraper directly before reporting
 - [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — skill self-contradicts (3/5 vs ALL), user confirmed 5/source settled default
 - [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching, don't re-derive article-count policy from skill text alone
 
