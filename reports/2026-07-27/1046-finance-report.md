@@ -60,3 +60,36 @@ Nguồn: sheet `'Top 100'`, spreadsheet `1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZu
 - SHB đáng chú ý nhất: ROE cao (18.3%) đi cùng P/B/P/E thấp là combo hiếm, đáng xem xét thêm dù ROA ngành ngân hàng vốn thấp hơn ngành khác nên không thể so trực tiếp cross-industry.
 - NVL rủi ro nhất: ROE/ROA đều thấp, đúng pattern "cheap for a reason" của ngành BĐS đang gặp khó — P/B thấp không tự động là cơ hội ở đây, cần xem thêm nợ vay/dòng tiền (ngoài phạm vi sheet này).
 - Không đủ dữ liệu (nợ vay, dòng tiền, chất lượng tài sản) trong sheet để kết luận chắc chắn cho cả 2 mã — cần nghiên cứu thêm nếu muốn hành động.
+
+### Ngân hàng có thực sự toàn P/B > 1.5 không?
+Không. 22 mã ngành Ngân hàng trong Top 100: chỉ **6/22** có P/B ≥ 1.5 (BID 1.6, HDB 1.7, NVB 2.0, VCB 2.2, STB 2.2, LPB 3.1). **16/22** dưới 1.5, cụm quanh 1.0–1.4:
+SHB 0.9 · TPB/OCB/BAB 1.0 · NAB/VIB/MSB 1.1 · ABB 1.2 · SHS/VPB/ACB 1.3 · MBB/CTG/TCB/SSB/EIB 1.4.
+
+### Mở rộng: bậc P/B và P/E (toàn bộ 100 mã có đủ dữ liệu)
+
+**P/B theo bậc (số mã cộng dồn P/B < ngưỡng):**
+
+| Ngưỡng | Số mã | Cộng dồn |
+|---|---|---|
+| < 1 | 2 | NVL, SHB |
+| < 1.5 | 39 | +37: TPB OCB PVD BAB NLG VCG DGC NAB VIB MSB KBC PDR TCH DXG VIX PVS ABB POW VCI KDH HAG VRE VHC DPM SHS VPB VND ACB CII PGV HPG REE MBB CTG TCB SSB EIB |
+| < 2 | 52 | +13: VPX HUT QNS DCM BID VEA BSR HDB SSI SBT PLX BVH PNJ |
+| < 3 | 77 | +25: PVI GEX NVB ACV GVR MBS KDC HCM SIP VGC VCB STB IDC TAL FTS VHM GMD BCM CRV GAS BAF SAB VCK TCX DHG |
+| < 5 | 91 | +14: MSN LPB FPT MWG VNM VPI BMP SJS VPL KSF VJC FOX PHP FRT |
+| < 10 | 97 | +6: KSV VSF IDP VTP GEE HVN |
+| ≥ 10 (còn lại) | 3 | MCH 10.5, VIC 11.2, THD 11.5 |
+
+→ REE nằm ở bậc <1.5 (P/B 1.4) — đúng như live-check trước đó, không phải sai sót.
+
+**P/E theo bậc (số mã cộng dồn P/E < ngưỡng):**
+
+| Ngưỡng | Số mã | Ghi chú |
+|---|---|---|
+| < 1.5 | 0 | Không có mã nào — P/E dưới 1.5 gần như không tồn tại trên sàn (lợi nhuận phải gấp ~67% giá mỗi năm). |
+| < 2 | 0 | — |
+| < 3 | 0 | — |
+| < 5 | 1 | VCG (3.1) |
+| < 10 | 34 | +33 (5-10): SHB VIX PGV TPB NAB KSF HAG CTG VEA ABB DGC VIB MBB HDB PNJ MSB ACB OCB IDC VPB HVN HPG BSR DCM VHC VRE TCB QNS SIP BID BMP PVS VHM |
+| ≥ 10 (còn lại) | 66 | phần lớn thị trường — bao gồm cả REE (11.2), FPT (12.8), VNM (12.6)... |
+
+**Nhận định:** Bậc P/E <1.5/<2/<3 rỗng vì thực tế không có định giá kiểu đó ở Top 100 hiện tại (chỉ tồn tại ở cổ phiếu penny/mất thanh khoản, không nằm trong rổ này). Ngưỡng P/E hợp lý để "săn hàng rẻ" ở rổ này là <10 (34 mã, đa số là ngân hàng — hợp lý vì ngân hàng luôn có P/E thấp hơn mặt bằng do đặc thù đòn bẩy tài chính).
