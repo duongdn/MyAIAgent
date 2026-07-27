@@ -10,11 +10,12 @@
 
 | # | Source | Alert | Status |
 |---|--------|-------|--------|
-| 2 | Slack Equanimity + Matrix (Marcel) | Marcel messaged Carrick in #xid-technologies: "we ended up at 17 hours now... are we now done? i paused the contract again." Matrix "Delivery - Resource Arrangement" room shows Marcel's hour limit cut 16 hrs/week → 5 hrs/week (effective this week). Needs reply/decision. | 🔴 Open |
-| 7 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint (own code, not third-party). Recommend query/indexing. | 🟡 Info |
-| 8 | MPFC (New Relic) | Apdex 0.56 (poor). New `E_WARNING "continue" = "break"` (80x). `sitemap_index.xml` 42.5s, `author-sitemap.xml` 50.5s. | 🟡 Info |
+| 1 | Discord AirAgri (Vinn) | Vinn 0 messages today (Monday 07/27) — no daily report in #airagri_webapp or #airagri-flutter. Jeff active. ⚠️ Early morning (09:00), may post later. | 🟡 Monitor |
+| 2 | Slack Equanimity + Matrix (Marcel) | Marcel: "we ended up at 17 hours, i paused the contract." Hour limit 16h→5h/wk. Needs reply. | 🔴 Open |
+| 7 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint. | 🟡 Info |
+| 8 | MPFC (New Relic) | Apdex 0.56. `E_WARNING "continue" = "break"` (80x). Sitemap XML 42-50s. | 🟡 Info |
 
-All items from original cron alerts #1, #3, #4, #5, #6 resolved in recheck (see Re-check section below).
+All cron auth failures (#1,3,4,5,6 original) resolved in recheck.
 
 **Today (Mon 07/27):** No known leave. Fountain plan posted 08:56 (same as last week: ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h).
 
@@ -68,7 +69,7 @@ Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebec
 
 | Server | Msgs | Key content |
 |--------|------|--------------|
-| AirAgri (nusvinn) | 14 | nusvinn token refreshed (user provided). #airagri_webapp: James Diamond (Jeff) actively discussing alarms bug, map zoom, health/safety v2 design. bellatrix02 completed QA on QR/scan features. #airagri-flutter: Jeff asking if hazard-zone alarm implemented. Vinn daily report: not posted (weekend, normal). |
+| AirAgri (nusvinn) | 18 | Token refreshed. Re-checked for Monday: Vinn **0 messages today** — no daily report posted in #airagri_webapp or #airagri-flutter. Jeff active in #airagri-flutter (3 msgs) re hazard-zone alarm feature + spray app task list. Weekend window (14 msgs): Jeff discussing alarms, map, health/safety v2. bellatrix02 QA on QR features. ⚠️ **Vinn daily report missing for Monday 07/27.** |
 | Bizurk (nuscarrick) | 0 | Clean, token valid. Andrew Taraba DM: last message Jul 13 "do you need some work?" — no recent activity. |
 
 Trello: Andrew Taraba ✓ complete. James Diamond ✓ complete (recheck).
@@ -230,7 +231,8 @@ Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders neede
 ## Trello Summary
 
 **Check Mail:** 6/6 complete. Card marked done.
-**Check Progress:** 22/22 complete. Card marked done.
+**Check Progress:** 21/22 complete.
+- ⚠️ Re-opened: James Diamond — Vinn no daily report for Monday 07/27 (0 messages today, Jeff active).
 
 ---
 
@@ -268,7 +270,8 @@ Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders neede
 
 ### Trello final state
 **Check Mail:** 6/6 complete. Card done.
-**Check Progress:** 22/22 complete. Card marked done.
+**Check Progress:** 21/22 complete.
+- ⚠️ James Diamond re-opened — Vinn no daily report for Monday 07/27.
 
 ---
 
