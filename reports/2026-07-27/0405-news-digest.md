@@ -157,21 +157,31 @@ _(Không có bài mới từ Substack — toàn bộ bài fetch được đã d�
 
 ---
 ### 📱 Thiệu Nguyễn — Facebook AI
-_(Lỗi: not_logged_in — cần chạy `node scripts/facebook-page-scraper.js --login` để đăng nhập lại)_
+- [ClaudeKit đổi tên thành AgentKit (AK)](https://www.facebook.com/shinantori/posts/pfbid02T8syqG61QAEKLoMf1UpDe8bFnUQbDfkokd7HpWBc5pGzZZEYpKU8posE5ZTxtKY3l) — Rebrand CK → AK, vẫn team cũ và bộ kits cũ; người đã mua không cần mua lại, chỉ cần chuyển sang CLI `ak` (cài `ak`, `ak login` bằng email/API key, cập nhật kits).
+- [Opus 5 có đang là model coding agent mạnh nhất?](https://www.facebook.com/shinantori/posts/pfbid02KYYWvsMcNbq6aEQpaQAVfAXeEVvhkv8jQJ8PA3y87JAdjCKQLeac1UGNk5W3mhGHl) — Dẫn bài test của dexhorthy (tác giả HumanLayer) dùng SlopCodeBench — benchmark đo khả năng coding agent liên tục mở rộng chính code của nó qua nhiều checkpoint, xem code có bị "slop" (phình to, lỗi cấu trúc) không, khác benchmark one-shot.
+- [Anthropic chính thức tung OPUS 5](https://www.facebook.com/shinantori/posts/pfbid0cTFbRHR2QKa6u3QT2Uoxg4P9Boz238M5uc8GRMaN75Tcz9ziAoSNVLy5wjyaZQ) — "Cú nổ đêm khuya" đúng như dự đoán: Opus 5 là model mạnh nhất của Anthropic hiện tại.
+- [Đội ngũ cmux hé lộ hỗ trợ cross-platform + mobile app](https://www.facebook.com/shinantori/posts/pfbid0nrRJecpHnkxVAp7qX6zVpVmqZwBv5R8UYWwu68jVUVswmyEc1SV956KbzJz2iH) — cmux sẽ mở rộng đa nền tảng và có cả ứng dụng di động.
+- [Opus 5 nổ đêm nay??](https://www.facebook.com/shinantori/posts/pfbid031ULwJSWaTCKrk86mWsHJYUMd5mAdj1LRqZzYqFnWhiE5dQekZ59zdqL6HNz7B) — Post dự đoán ngày ra mắt Opus 5 (đăng trước thông báo chính thức).
 
 ---
 ### 📱 Duy Nguyen (mrgoonie) — Facebook AI
-_(Lỗi: not_logged_in — cần chạy `node scripts/facebook-page-scraper.js --login` để đăng nhập lại)_
+- [Opus 5 với thinking effort xHigh & Max cho output kém hơn High](https://www.facebook.com/mrgoonie/posts/pfbid02jeKmSpD4aR5X6NKHzMCR1ZyCFUssro7KTrq85Y6gd6Ctr2CNRURWfNTR3n69Fk4) — Nhận xét thực nghiệm: đẩy thinking effort lên mức cao nhất không cải thiện mà còn giảm chất lượng output; kèm giới thiệu kênh Zuey AI (916 thành viên).
+- [Sự kiện NVIDIA x GEARVN x NextLevelBuilder về AI agents trong doanh nghiệp](https://www.facebook.com/mrgoonie/posts/pfbid02MAgcLoaSUCc2QxNajkfgaXeNQhguifFXNmE52bkDpG4SpUzFJZAhVCF9NNS7CQE) — Đánh giá sự kiện ứng dụng AI agents cho doanh nghiệp là rất thành công.
+- [Mẹo: drag & drop sessions trong Claude desktop app để chia panes](https://www.facebook.com/mrgoonie/posts/pfbid0r72RKPbyFAwRuTsiVv9M5XoiNg5hqjHqHFysoqhZC8iSse6fXBxJ9Yc8i7jMrXNa) — Có thể kéo thả các session trong ứng dụng Claude desktop để chia thành nhiều pane trên cùng một màn hình.
+- [Cách đưa công ty đi company trip đỡ tốn kém](https://www.facebook.com/mrgoonie/posts/pfbid02GhrZfFDUPhinkgmp8Qvaw5YZS4ToKDD6o1bGrZQBnzbNYAiDqqwzxGvgo5Hdv6m) — Post vui: rủ đồng nghiệp quê Phan Thiết cưới rồi mời cả công ty.
+
+_(Chỉ 4/5 — 2 post còn lại chỉ chứa nội dung boilerplate đăng ký kênh, không có nội dung thực)_
 
 ---
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
-_(Lỗi: not_logged_in — cần chạy `node scripts/facebook-page-scraper.js --login` để đăng nhập lại)_
+_(Không có bài mới — 3 bài fetch được đã dùng đủ 2 lần trong các report trước, không phải lỗi kỹ thuật)_
 
 **Điểm nổi bật**
 - OpenAI đối mặt khủng hoảng bảo mật sau vụ hack "chưa từng có", khiến CEO Hugging Face kêu gọi minh bạch triệt để trong ngành.
 - Làn sóng sa thải liên quan AI tiếp tục lan rộng (Monday.com, Patreon), lo ngại về hạ tầng trung tâm dữ liệu AI cũng gia tăng sau sự cố mất điện.
 - Cạnh tranh mô hình AI tiếp tục nóng: Claude có chế độ giọng nói mới cho Opus/Sonnet, ChatGPT Health mở rộng toàn bộ người dùng, nhà lập pháp Mỹ đề xuất bắt buộc AI có "kill switch".
-- 3 nguồn Facebook AI cá nhân vẫn lỗi phiên đăng nhập (not_logged_in), cần đăng nhập thủ công lại; Substack Thiệu Nguyễn không có bài mới do đã dùng đủ 2 lần lịch sử.
+- Cộng đồng AI Việt tập trung quanh Opus 5: đánh giá coding-agent qua SlopCodeBench, cảnh báo thinking effort xHigh/Max cho output kém hơn High, cùng làn sóng đổi tên công cụ (ClaudeKit → AgentKit).
+- Substack Thiệu Nguyễn + group Nghiện AI không có bài mới do đã dùng đủ 2 lần lịch sử (không phải lỗi kỹ thuật).
 
 ---
 ### 💻 Công nghệ / IT (it)
@@ -396,3 +406,5 @@ _(Không có bài mới — toàn bộ bài fetch được đã dùng đủ 2 l�
 - Kỹ thuật tấn công mới đáng chú ý: malvertising dựng mã độc ngay trong bộ nhớ trình duyệt, ClickFix trên diễn đàn Steam phát tán cryptominer.
 - GitHub và PyPI bổ sung cơ chế phòng thủ theo thời gian nhằm chống tấn công chuỗi cung ứng phần mềm; Luật An ninh mạng 2025 chính thức có hiệu lực từ 1/7/2026.
 
+
+**Recheck 0910:** Thiệu Nguyễn (Facebook) + Duy Nguyen/mrgoonie (Facebook) đã fix — `not_logged_in` ở lần chạy 0405 là lỗi giả, phiên FB vẫn sống, re-fetch dưới `.claude/skills/.venv/bin/python3` trả về bài thật. Nghiện AI Group + Thiệu Nguyễn Substack vẫn trống — không phải lỗi: toàn bộ bài fetch được đã dùng đủ 2 lần trong report cũ (dedupDropped). Các section khác giữ nguyên.
