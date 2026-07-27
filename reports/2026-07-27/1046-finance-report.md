@@ -352,3 +352,34 @@ Trọng số cũ (<1/<1.5/<2/<3/<5/<10) sai vì P/E thực tế phân bố rất
 | THD | Công nghiệp | 2.4 | 2.3 | 11.5 | 484.8 | ROE/ROA gần 0 — cực kỳ đắt so với hiệu quả hiện tại. |
 
 **Nhận định:** 12 mã — gần như toàn bộ ROE/ROA cực thấp (đa số <10%, nhiều mã <2%) đi cùng P/E cực cao. Đây chính là nhóm "đắt vì lý do chính đáng" (lợi nhuận thấp/không ổn định khiến P/E bị đẩy lên cao dù giá không cao). Ngoại lệ duy nhất là VIC — big-cap, định giá theo kỳ vọng dài hạn chứ không phải KQKD hiện tại.
+
+---
+
+## [BẢNG 3] Phân nhóm theo ngành — mã tốt nhất mỗi nhóm (đề xuất mới)
+Gom toàn bộ 100 mã theo cột "Ngành" trên sheet Top 100 (21 nhóm thực, đã loại 3 dòng ghi chú rác cuối sheet). Trong mỗi nhóm, chọn **"tốt nhất"** bằng điểm **ROE/P/B** (hiệu quả sinh lời trên mỗi đồng giá phải trả — điểm càng cao càng vừa hiệu quả vừa chưa bị định giá quá đắt). Đây chỉ là 1 tiêu chí đơn giản, **không thay thế phân tích sâu** — với case ROE bị méo (đòn bẩy cao, vốn CSH gần 0) tôi loại ra và chọn á quân, có ghi chú.
+
+| Ngành (số mã) | Xếp theo ROE giảm dần | Mã tốt nhất (ROE/P/B) | Vì sao |
+|---|---|---|---|
+| Ngân hàng (22) | HDB 24.5 · LPB 23.4 · CTG 22.4 · MBB 21.2 · NAB 20.1 · BID 18.4 · SHB 18.3 · ABB 18.2 · TPB 17.6 · ACB 17.5 · VPB/VIB/VCB 16.4 · TCB 15.9 · MSB 14.3 · OCB 12.8 · SHS 10.8 · BAB 9.3 · SSB 7.6 · STB 5.5 · EIB 2.9 · NVB 0.7 | **SHB** | ROE 18.3% (top nhóm) đi cùng P/B 0.9 (duy nhất <1 cả ngành) — hiệu quả cao, giá rẻ nhất theo sổ sách. HDB/LPB/CTG có ROE cao hơn nhưng P/B cũng cao hơn tương ứng, không "lời" hơn SHB xét trên mỗi đồng vốn bỏ ra. |
+| Bất động sản (14) | KSF 76.0 · VHM 27.4 · SIP 25.0 · TAL 16.5 · VRE 14.8 · SJS 14.0 · VIC 9.6 · NVL 7.2 · KDH 6.2 · NLG 5.5 · PDR 5.1 · TCH 1.8 · DXG 1.7 · CRV 1.0 | **VHM** (KSF bị loại) | KSF có ROE 76% nhưng bất thường cao — nghi đòn bẩy/one-off, cần verify trước khi tin. Á quân **VHM** (ROE 27.4%, ROA 8.9%) là big-cap đầu ngành, số liệu ổn định hơn, dù P/B 2.4 không còn rẻ — ngành BĐS nhà ở nói chung đang khó khăn (xem cảnh báo VEA ở Piece 1 tương tự rủi ro ngành). |
+| Hàng tiêu dùng (11) | MCH 41.9 · VNM 27.7 · SAB 20.8 · QNS 20.2 · MSN 14.7 · KDC 9.7 · SBT 7.3 · VPL 6.9 · IDP 5.2 · BAF 4.3 · VSF 1.2 | **QNS** | ROE 20.2%/ROA 14.8% (top 2 nhóm) đi cùng P/B chỉ 1.6 — thấp hơn hẳn MCH (10.5x) và VNM (3.5x) dù hiệu quả không kém nhiều. |
+| Chứng khoán (10) | VIX 27.2 · VCK 16.2 · TCX 16.0 · MBS 14.8 · VPX 14.0 · SSI 13.5 · VND 10.5 · HCM 10.1 · VCI 9.3 · FTS 9.2 | **VIX** | ROE/ROA vượt trội toàn nhóm (27.2%/20.6%) với P/B chỉ 1.2 — rõ ràng tốt nhất, nhưng lưu ý cả ngành chứng khoán biến động mạnh theo thị trường chung, KQKD không ổn định qua các năm. |
+| Công nghiệp (6) | KSV 53.1 · BMP 40.4 · DPM 11.1 · PHP 4.4 · THD 2.4 · CII 1.8 | **BMP** (KSV cảnh báo) | KSV ROE 53.1% cao nhất nhưng ngành khai khoáng biến động giá kim loại mạnh, ROE dễ biến động theo chu kỳ giá. **BMP** (ROE 40.4%, ROA 33.4% — cao nhất cả bảng 100 mã) ổn định hơn, biên lợi nhuận cao bền vững (nhựa xây dựng, thương hiệu mạnh). |
+| Dịch vụ tiện ích (4) | GEE 46.3 · PGV 26.5 · REE 13.0 · POW 8.7 | **PGV** | GEE ROE cao nhất nhưng P/B đã 6.9 (đắt); PGV ROE 26.5% với P/B chỉ 1.4 — tỷ lệ hiệu quả/giá tốt nhất nhóm. |
+| Dầu khí (4) | BSR 20.9 · GAS 17.6 · PLX 10.0 · PVD 7.1 | **BSR** | ROE/ROA cao nhất nhóm, P/B 1.7 hợp lý — nhưng cả ngành phụ thuộc giá dầu thế giới, rủi ro chu kỳ chung cho mọi mã trong nhóm. |
+| Bất động sản KCN (4) | IDC 30.5 · BCM 16.3 · GVR 11.5 · KBC 7.2 | **IDC** | ROE vượt trội nhóm (30.5% so với 16.3% á quân), P/B 2.3 — hiệu quả kinh doanh khu công nghiệp tốt nhất nhóm dù không rẻ. |
+| Sản xuất công nghiệp (3) | VEA 27.1 · ACV 12.8 · GEX 9.2 | **VEA** | ROE/ROA vượt trội (ROA 25.6% hiếm gặp) — nhưng đang trong diện cảnh báo cổ phiếu (xem Piece 1), rủi ro phi tài chính cần cân nhắc trước khi chọn. |
+| Bán lẻ (3) | FRT 28.0 · PNJ 27.7 · MWG 25.4 | **PNJ** | FRT ROE nhỉnh hơn PNJ nhưng ROA chỉ 4.3% (đòn bẩy cao) so với PNJ ROA 19.5% — PNJ hiệu quả thực chất tốt hơn, P/B cũng thấp hơn (1.9 so với 4.7). |
+| Vật liệu xây dựng (3) | HPG 16.4 · VGC 14.8 · HUT 4.5 | **HPG** | Đầu ngành thép, ROE/ROA khá đều, P/B 1.4 thấp nhất nhóm. |
+| Bảo hiểm (3) | PVI 15.6 · BVH 12.8 · VPI 5.5 | **PVI** | ROE cao nhất nhóm, P/B 2.0 thấp nhất — ROA thấp là đặc thù chung ngành bảo hiểm, không phải điểm yếu riêng của PVI. |
+| Xây dựng công nghiệp (2) | VCG 41.9 · PVS 13.0 | **VCG** | ROE/ROA vượt trội, P/B chỉ 1.1 — mã tốt nhất toàn bộ 100 mã xét theo ROE/P/B (điểm 38.1, cao nhất báo cáo). |
+| Hóa chất (2) | DCM 18.4 · DGC 16.8 | **DGC** | ROA cao hơn hẳn (14.3% so với 11.3%) dù ROE thấp hơn nhẹ, P/B thấp hơn (1.1 so với 1.6) — hiệu quả sử dụng tài sản tốt hơn. |
+| Hàng không (2) | HVN 446.5 · VJC 11.4 | **VJC** (HVN loại) | HVN ROE 446.5% là số liệu méo hoàn toàn (vốn chủ sở hữu gần 0/từng âm) — không dùng để so sánh. VJC là lựa chọn thực chất duy nhất, dù ROE/ROA khiêm tốn (11.4%/2.1%). |
+| Vận tải (2) | VTP 19.4 · GMD 12.8 | **VTP** | ROE cao hơn, nhưng P/B đã 6.0 (đắt) so với GMD 2.4 — nếu ưu tiên giá hợp lý hơn thì GMD là lựa chọn cân bằng hơn. |
+| Nông nghiệp (1) | HAG 24.3 | — | Chỉ 1 mã, không có gì để so sánh trong ngành. ROE/ROA khá tốt nhưng HAG có lịch sử nợ vay/lỗ lũy kế lớn — thận trọng riêng lẻ. |
+| Công nghiệp Chế biến (1) | VHC 15.2 | — | Chỉ 1 mã. ROA cao (thủy sản xuất khẩu) nhưng rủi ro thuế quan xuất khẩu. |
+| Dược phẩm (1) | DHG 21.0 | — | Chỉ 1 mã. ROE/ROA rất tốt, ngành phòng thủ — chất lượng cao nhưng P/B 2.8 không rẻ. |
+| Dịch vụ Công nghệ (1) | FPT 27.3 | — | Chỉ 1 mã. ROE/ROA rất tốt nhưng đang bị bán tháo mạnh (xem Piece 1) — cơ hội hay bẫy giá rẻ cần theo dõi thêm. |
+| Dịch vụ Viễn thông (1) | FOX 32.4 | — | Chỉ 1 mã (FPT Telecom). ROE/ROA rất tốt, liên quan trực tiếp câu chuyện deconsolidation của FPT (xem Piece 1). |
+
+**Nhận định tổng quan:** Xét theo tiêu chí ROE/P/B trên toàn bộ 21 nhóm, **VCG** (Xây dựng công nghiệp) là mã có điểm cao nhất báo cáo (38.1) — hiệu quả sinh lời cao nhất trên mỗi đồng giá trả, khớp với vị trí "mã tốt nhất" đã nêu ở BẢNG 2. Nhóm **ngân hàng** (22 mã, đông nhất) có SHB nổi bật nhờ vừa là ngân hàng ROE cao vừa là mã P/B<1 duy nhất cả ngành. Cần loại trừ thủ công 2 case số liệu méo: **KSF** (BĐS, ROE 76% nghi đòn bẩy) và **HVN** (Hàng không, ROE 446% do vốn CSH gần 0) — nếu không loại, thuật toán sẽ chọn nhầm 2 mã này làm "tốt nhất nhóm".
