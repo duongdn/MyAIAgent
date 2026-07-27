@@ -146,8 +146,9 @@
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
 
 ## finance-report
-- [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — `/me:finance-report-detail <TICKER>` builds 6-sheet FPT/VEA-style report
-- [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn URL pattern + year-arrow/Excel-export workflow, use chrome-devtools not WebFetch
+- [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — `/me:finance-report-detail <TICKER>` builds 6-sheet FPT/VEA-style report — 🔴 apply formatting DURING build, not after
+- [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn direct JSON API (no browser needed) + 3 known bugs (wrong LCTT endpoint, +60k tỷ cell typo, EPS unit scaling) + share-split gotcha for BVPS
+- [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 exact VEA cell-format spec (blue headers, bold rows, collapsible row/col groups) + 4 reusable apply-scripts, run every build
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
