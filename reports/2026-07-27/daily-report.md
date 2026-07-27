@@ -10,12 +10,11 @@
 
 | # | Source | Alert | Status |
 |---|--------|-------|--------|
-| 1 | Discord AirAgri (Vinn) | Vinn 0 messages today (Monday 07/27) — no daily report in #airagri_webapp or #airagri-flutter. Jeff active. ⚠️ Early morning (09:00), may post later. | 🟡 Monitor |
-| 2 | Slack Equanimity + Matrix (Marcel) | Marcel: "we ended up at 17 hours, i paused the contract." Hour limit 16h→5h/wk. Needs reply. | 🔴 Open |
-| 7 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint. | 🟡 Info |
-| 8 | MPFC (New Relic) | Apdex 0.56. `E_WARNING "continue" = "break"` (80x). Sitemap XML 42-50s. | 🟡 Info |
+| 1 | Slack Equanimity + Matrix (Marcel) | Marcel: "i paused the contract." Hour limit cut 16h→5h/wk. Needs decision. | 🔴 Open |
+| 2 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint. | 🟡 Info |
+| 3 | MPFC (New Relic) | Apdex 0.56. `E_WARNING "continue" = "break"` (80x). Sitemap XML 42-50s. | 🟡 Info |
 
-All cron auth failures (#1,3,4,5,6 original) resolved in recheck.
+All original cron auth failures resolved (Discord, OhCleo, Arthur, Philip, Workstream). Vinn daily report chưa có Mon morning — còn sớm, sẽ recheck sau. Re-check auth details in Re-check section below.
 
 **Today (Mon 07/27):** No known leave. Fountain plan posted 08:56 (same as last week: ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h).
 
@@ -49,7 +48,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete. Card auto-marked do
 | Baamboozle | 15 | 14× automated GitHub bot posts in #engineering (noise). 1× aysark.pro in #testing: routine engineering FYI about PR #658 patches + feature flag for content moderation — not a direct ask. MPDM C07SQ4HAUHZ (Aysar gate) — 0 messages, expected (posts ~17:00-17:45, too early). |
 | RDC - FM Monitoring | 25 | All 25 are automated "Tuner Access Log" bot posts in #user-access-logs — no human content, no dmetiner activity. |
 | Swift Studio | 0 | Clean. |
-| Xtreme Soft Solutions | 0 | Clean — no Slack activity. Kai daily-report gate: Workstream unavailable this run (see Alert #6), but window is weekend so no report was expected regardless. |
+| Xtreme Soft Solutions | 1 | Kai: "I've arranged to make up for the time this week. What would you like me to work on da..." — addressing Maddy. Workstream now available — Maddy project shows 0h for Kai on Fri. |
 | SAM GUARD - Mobile | 0 | Clean. |
 | Global Grazing Services | 0 | Clean — no #maintenance activity from Nick. |
 | Amazing Meds | 0 | Clean (token refreshed proactively, valid). |
@@ -61,7 +60,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete. Card auto-marked do
 | SoCal Auto Wraps | 0 | Clean (not monitored via Trello per 2026-05-11 drop). |
 | Aigile Dev | 2 | 2× automated "make" webhook posts (newsletter/TikTok content notices) in #braiking-news — no human customer activity. |
 
-Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebecca ✓ complete. Marcel ⚠️ skipped (alert #2).
+Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebecca ✓ complete. Marcel ⚠️ skipped (alert #2 — needs reply, not auth). OhCleo ⚠️ skipped (cron auth fail, rechecked).
 
 ---
 
@@ -72,7 +71,7 @@ Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebec
 | AirAgri (nusvinn) | 18 | Token refreshed. Re-checked for Monday: Vinn **0 messages today** — no daily report posted in #airagri_webapp or #airagri-flutter. Jeff active in #airagri-flutter (3 msgs) re hazard-zone alarm feature + spray app task list. Weekend window (14 msgs): Jeff discussing alarms, map, health/safety v2. bellatrix02 QA on QR features. ⚠️ **Vinn daily report missing for Monday 07/27.** |
 | Bizurk (nuscarrick) | 0 | Clean, token valid. Andrew Taraba DM: last message Jul 13 "do you need some work?" — no recent activity. |
 
-Trello: Andrew Taraba ✓ complete. James Diamond ✓ complete (recheck).
+Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ skipped — Vinn no daily report Mon 07/27.
 
 ---
 
@@ -82,15 +81,17 @@ Trello: Andrew Taraba ✓ complete. James Diamond ✓ complete (recheck).
 
 ## Sheets/Workstream — all developers — 06:30 (+07:00), rechecked 09:00
 
-Workstream SSO restored. All 13 mapped projects queried for new week (W16: 07/27-08/02). All return 0 rows — Monday 9AM, devs chưa log giờ (bình thường). Sheets cross-check also clean.
+Workstream SSO restored. **Monday → uses Friday 07-24 data (last workday).**
 
-| Developer | Monday | Status |
-|-----------|--------|--------|
-| LongVV | 0h (WS 0 rows) | Weekly threshold 16h/wk — not evaluated on Monday morning |
-| PhucVT | 0h (WS 0 rows) | Monday morning, expected |
-| TuanNT | 0h (all sources) | Monday morning, expected |
-| KhanhHH | 0h (all sources) | Monday morning, expected |
-| LeNH | 0h (all sources) | Monday morning, expected |
+| Developer | Fri 07-24 | Sources | Status |
+|-----------|-----------|---------|--------|
+| LongVV | 12h | WS: Tokenlite 12h (Maddy: Mon 8h from last week, Fri 0h). Weekly: 20h+ | ✓ OK — over 16h/wk threshold |
+| PhucVT | 8h | Crystal lang: 8h (privacy/terms, nginx fix, Metadata Intake Tiers, GoDaddy) | ✓ OK |
+| TuanNT | 8h | Paturevision (Sheets): 8h. WS all other projects: 0h. Combined: 8h. | ✓ OK — John Yi + Bailey + Rebecca gates passed |
+| KhanhHH | 8h | WS: Baamboozle 2h + Generator 4h + ETZ-Wathaga 2h = 8h | ✓ OK — Elliott + Aysar gates passed |
+| LeNH | 8h | WS: Portfolio-James Diamond 8h. Blair Brown: 0h. | ✓ OK — Blair Brown also passed |
+
+**Fountain (Fri 07-24):** ViTHT 8h, ThinhT 4h, DatNT 8h, VuTQ 4h, PhatDLT 2.5h, HungPN 3h. ✓ all logged.
 
 Trello: Maddy, John Yi, Bailey, Rebecca, Elliott, Aysar, Blair Brown ✓ complete.
 
@@ -100,7 +101,12 @@ Trello: Maddy, John Yi, Bailey, Rebecca, Elliott, Aysar, Blair Brown ✓ complet
 
 **Part 1 — Matrix Plan:** Plan posted today 08:56 by @namtv. **ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h** (same as last week of 07/20-07/26).
 
-**Part 2 — Task Log Actuals:** Workstream project `cmpqcjojh00q2tk1v2qi7gs0j` — W16 (07/27-08/02) has 0 rows (Monday morning, chưa log). W15 (07/20-07/26) actuals already covered in prior reports.
+**Part 2 — Task Log Actuals (Fri 07-24, last workday):**
+- ViTHT: 8h, ThinhT: 4h, DatNT: 8h, VuTQ: 4h, PhatDLT: 2.5h, HungPN: 3h
+- ViTHT mainly on #2978 (Build-a-Box + Gift Already flow)
+- DatNT: order flow, crash fix, admin login issue, rounded corners 
+- VuTQ: CacheComponent restructure, stale cache fix
+- W15 weekly totals: ViTHT 38.5h, ThinhT 20h, DatNT 38h (met 40h plan), VuTQ 8h (met plan), QC PhatDLT 25h + HungPN 23h.
 
 **Part 3 — Plan vs Actual:** Not computable for new week yet. Prior week closed.
 
