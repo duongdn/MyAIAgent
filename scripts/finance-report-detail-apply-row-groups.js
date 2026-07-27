@@ -45,23 +45,30 @@ async function main() {
 
   await sheets.spreadsheets.batchUpdate({ spreadsheetId, requestBody: { requests } });
 
-  // Mark the one VEA had collapsed as collapsed here too
+  // VEA's "collapsed" look actually comes from hiddenByUser on every row/column inside
+  // each group (the group's own `collapsed` flag is set on only one group and isn't
+  // what drives the visual state) — replicate that here so groups open collapsed.
+  const hideRequests = [];
+  for (const [startIndex, endIndex] of ROW_GROUPS) {
+    hideRequests.push({
+      updateDimensionProperties: { range: { sheetId, dimension: "ROWS", startIndex, endIndex }, properties: { hiddenByUser: true }, fields: "hiddenByUser" },
+    });
+  }
+  for (const [startIndex, endIndex] of COLUMN_GROUPS) {
+    hideRequests.push({
+      updateDimensionProperties: { range: { sheetId, dimension: "COLUMNS", startIndex, endIndex }, properties: { hiddenByUser: true }, fields: "hiddenByUser" },
+    });
+  }
   const [cs, ce] = COLLAPSED_ROW_GROUP;
-  await sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
-    requestBody: {
-      requests: [
-        {
-          updateDimensionGroup: {
-            dimensionGroup: { range: { sheetId, dimension: "ROWS", startIndex: cs, endIndex: ce }, depth: 1, collapsed: true },
-            fields: "collapsed",
-          },
-        },
-      ],
+  hideRequests.push({
+    updateDimensionGroup: {
+      dimensionGroup: { range: { sheetId, dimension: "ROWS", startIndex: cs, endIndex: ce }, depth: 1, collapsed: true },
+      fields: "collapsed",
     },
   });
+  await sheets.spreadsheets.batchUpdate({ spreadsheetId, requestBody: { requests: hideRequests } });
 
-  console.log(JSON.stringify({ success: true, sheetName, rowGroups: ROW_GROUPS.length, columnGroups: COLUMN_GROUPS.length }, null, 2));
+  console.log(JSON.stringify({ success: true, sheetName, rowGroups: ROW_GROUPS.length, columnGroups: COLUMN_GROUPS.length, collapsedByDefault: true }, null, 2));
 }
 
 main().catch((e) => {
