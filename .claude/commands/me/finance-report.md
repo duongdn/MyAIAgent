@@ -90,6 +90,7 @@ Script tự đọc `config/finance-watchlist.json`, build Google News RSS query 
    - {2-4 gạch đầu dòng: pattern chung — ví dụ nhóm ngành nào chiếm nhiều nhất trong danh sách, mã nào đáng chú ý nhất và vì sao, mã nào rủi ro nhất và vì sao}
    ```
 5. **Không bịa** nhận định vượt quá những gì số liệu trong sheet cho phép suy luận — nếu ROE/ROA/ngành không đủ để kết luận rõ ràng, ghi "cần nghiên cứu thêm" thay vì đoán.
+6. **Thanh khoản (thêm 27/7/2026):** sheet `Top 100` hiện KHÔNG có cột thanh khoản, nên KHÔNG tự suy đoán/gán nhãn thanh khoản cho từng mã trong bảng trên. Nếu user muốn đào sâu 1 mã cụ thể lọt danh sách trước khi coi là "actionable", chạy `node scripts/finance-report-detail-fetch-liquidity.js <TICKER>` (xem `/me:finance-report-detail` Bước 2b) để lấy KLGD/GTGD thực tế 1 ngày/7 ngày/1 tháng/6 tháng — đặc biệt quan trọng với mã cổ đông Nhà nước/gia đình sở hữu chi phối (free-float thấp).
 
 ---
 

@@ -23,7 +23,7 @@ Input: 1 mã cổ phiếu (ticker). Output: bộ 6 sheet phân tích đầy đ�
 1. **`<TICKER>`** — BCTC gốc: Bảng cân đối kế toán + Kết quả kinh doanh + Lưu chuyển tiền tệ, càng nhiều năm càng tốt (tối thiểu 5 năm, lý tưởng 10-11 năm như VEA) + quý gần nhất nếu có.
 2. **`Định tính - <TICKER>`** — phân tích định tính: mô hình kinh doanh, vị thế ngành, ban lãnh đạo, rủi ro.
 3. **`Định lượng - <TICKER>`** — copy sheet 1 + block phân tích tỷ số (ROE/ROA/biên LN/vòng quay...) phía dưới.
-4. **`Định giá - <TICKER>`** — định giá (P/E, P/B, DCF nếu đủ dữ liệu, so sánh ngành), công thức tham chiếu thẳng `'<TICKER>'!` cells, không hardcode số.
+4. **`Định giá - <TICKER>`** — định giá (P/E, P/B, DCF nếu đủ dữ liệu, so sánh ngành) + **THANH KHOẢN** (mục bắt buộc, xem chi tiết bên dưới), công thức tham chiếu thẳng `'<TICKER>'!` cells, không hardcode số.
 5. **`Benjamin Graham - <TICKER>`** — checklist 10 tiêu chí Benjamin Graham, ghi rõ ĐẠT/KHÔNG ĐẠT từng tiêu chí kèm số liệu chứng minh.
 6. **`Báo cáo 2 - <TICKER>`** — báo cáo tổng hợp cuối, format giống FPT `Báo cáo 2`: bảng CAGR nhiều năm, có phần định tính tóm tắt, kết luận đầu tư.
 
@@ -51,6 +51,19 @@ Script gọi thẳng 3 endpoint (`GetReportCDKT`, `GetReportDetail?reportType=KQ
 - Số liệu không tìm được / mâu thuẫn giữa cafef và PDF gốc → dừng lại, hỏi user, **không tự điền số ước lượng**.
 - Nếu user tự cung cấp số liệu (paste, upload file Excel) → verify tính hợp lý cơ bản trước khi dùng (VD: tổng tài sản = tổng nguồn vốn, các mục con cộng đúng subtotal) — báo cho user nếu phát hiện bất thường thay vì âm thầm sửa hoặc âm thầm dùng.
 
+### Bước 2b — Thu thập THANH KHOẢN (bắt buộc, thêm 27/7/2026)
+
+Thanh khoản (khối lượng/giá trị giao dịch thực tế) là tiêu chí bắt buộc — cổ phiếu định giá rẻ nhưng thanh khoản thấp khó vào/ra vị thế lớn, đặc biệt quan trọng với cổ phiếu cổ đông Nhà nước sở hữu chi phối (free-float thấp, VD VEA).
+
+```bash
+node scripts/finance-report-detail-fetch-liquidity.js <TICKER>
+```
+Nguồn: `https://finance.vietstock.vn/data/getpricehistory` (JSON, POST form-encoded, không cần browser) — trả về khối lượng (`TotalVol`) + giá trị khớp lệnh (`TotalVal`, VNĐ) từng phiên, mới nhất trước. Script tự lấy 200 phiên gần nhất và tính trung bình theo 4 mốc: **1 ngày** (phiên gần nhất) · **7 ngày** (~5 phiên giao dịch) · **1 tháng** (~21 phiên) · **6 tháng** (~126 phiên) — quy đổi ngày lịch sang phiên giao dịch vì sàn không giao dịch cuối tuần/lễ.
+
+**Lưu ý:** vietstock.vn có sẵn trang thống kê giao dịch (`finance.vietstock.vn/<TICKER>/thong-ke-giao-dich.htm`) nhưng chỉ cho theo Tuần/Tháng/Quý/Năm — KHÔNG có mốc "6 tháng" đúng nghĩa, nên phải tự tính từ dữ liệu phiên qua script trên thay vì đọc trực tiếp trang đó.
+
+Đưa dữ liệu này vào phần **"THANH KHOẢN"** trong sheet `Định giá - <TICKER>` (xem cấu trúc mẫu tại `Định giá - FPT` / `Định giá - VEA`, mục thêm 27/7/2026): bảng 4 cột (1 ngày/7 ngày/1 tháng/6 tháng) × 2 hàng (KLGD trung bình, GTGD trung bình VNĐ), kèm ghi chú nguồn + ngày truy cập. Nếu KLGD/GTGD quá thấp so với vốn hóa (free-float nhỏ, cổ đông Nhà nước/gia đình chi phối), nêu rõ trong `Báo cáo 2 - <TICKER>` phần kết luận/khuyến nghị — đây là rủi ro thực thi (execution risk) cần cân nhắc khi định cỡ vị thế, không chỉ là con số tham khảo.
+
 ### Bước 3 — Build sheet raw `<TICKER>`
 - Copy cấu trúc hàng từ sheet FPT gốc (hoặc VEA nếu công ty phi tài chính giống VEA hơn) làm khung, điền đúng label items khớp với BCTC thật của mã (không phải công ty nào cũng có cùng structure — điều chỉnh theo thực tế, không ép khung).
 - Set `numberFormat: {type: 'TEXT'}` trước khi ghi nếu có chuỗi dạng %/số để tránh Sheets tự parse sai.
@@ -71,6 +84,7 @@ Script gọi thẳng 3 endpoint (`GetReportCDKT`, `GetReportDetail?reportType=KQ
 - Grep toàn sheet check không còn `#REF!`/`#NAME?`/`#N/A` ngoài ý muốn.
 - Đếm số merge cell đúng như thiết kế (không thừa merge cũ từ lần build trước).
 - Đối chiếu 2-3 số liệu quan trọng (VD tổng tài sản năm gần nhất) giữa sheet raw và Báo cáo 2 — phải khớp tuyệt đối.
+- Xác nhận mục THANH KHOẢN (Bước 2b) đã có trong `Định giá - <TICKER>` với đủ 4 mốc 1 ngày/7 ngày/1 tháng/6 tháng.
 - Báo cáo cho user: đã build xong mấy/6 sheet, sheet nào còn thiếu dữ liệu, câu hỏi còn tồn đọng (nếu có nguồn mâu thuẫn/thiếu).
 
 ---
