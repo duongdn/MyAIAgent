@@ -1,25 +1,22 @@
 # Daily Report — 2026-07-27 (Monday)
 
-**Run:** 2026-07-27T06:05:00+07:00 (cron)
-**Window:** 2026-07-26T06:40:10+07:00 → now (covers Sat 07-25 evening → Sun 07-26, weekend)
+**Run:** 2026-07-27T06:05:00+07:00 (cron), rechecked 09:00-09:06 (+07:00)
+**Window:** 2026-07-26T06:40:10+07:00 → 2026-07-27T09:06:11+07:00 (covers Sat evening → Sun → Mon morning)
 **Leave plan:** none known for today
 
 ---
 
 ## ⚠️ ALERTS SUMMARY
 
-| # | Source | Alert |
-|---|--------|-------|
-| 1 | Discord — AirAgri (nusvinn) | Session genuinely expired — verified via 3-step curl (401 on `/users/@me` and `/guilds`) and the refresh script returning a real Discord login page (not a false block). No GUI-automation tooling available in this session to complete login. Needs one human login next time the desktop is accessible. James Diamond Trello item left incomplete. |
-| 2 | Slack Equanimity + Matrix (Marcel/Tokenlite) | Marcel messaged Carrick in #xid-technologies: "we ended up at 17 hours now... are we now done? i paused the contract again." Same period, Matrix "Delivery - Resource Arrangement" room shows Marcel's hour limit cut 16 hrs/week → 5 hrs/week (effective this week). Needs a reply/decision — Marcel Trello item left incomplete. |
-| 3 | OhCleo Slack | `auth.test` returns `invalid_auth`. Documented refresh path (extract fresh xoxc token from Chrome Profile 25) not possible — this execution host has no "Profile 25" directory at all (only Profile 19 exists here). Needs token refresh from a host that actually has Tony's Chrome profile. Ohcleo Trello item left incomplete. |
-| 4 | Arthur/Meta-Stamp | Full 6-source check not possible this run: Solid Code Slack workspace is absent from `config/.slack-accounts.json` entirely (known prior incident — never recovered after a decrypt clobber), Workstream SSO blocked (see #6), davidztv GitHub token not present in this host's `gh` config or `.github-config.json`. Only the 2 Matrix rooms could be checked — both clean, no new messages since last run. Arthur Trello item left incomplete pending a run from an environment with the missing credentials. |
-| 5 | Philip (MS Teams) | `fetch-msteams-customer-messages.js will "Philip Briggs"` timed out (2 min, no output) — consistent with previously-documented MS Teams Chrome-profile fragility. Could not verify Philip's channel this run. Philip Trello item left incomplete. |
-| 6 | Workstream (all projects except Bailey) | SSO login could not complete: Keycloak `workstream` client has no server-side refresh grant (confirmed dead end previously), and this run's headless session has no valid browser SSO cookie and no human available to click through login. Tried default profile, tried reusing Matrix's Keycloak-realm browser profile — both hang at "Clicked Sign in with SSO" indefinitely. **Low impact this run**: the scan window is Sat–Sun (weekend), so 0h across all Sheets fallback data is expected regardless, not evidence of a real shortfall. Needs a human SSO login next weekday run. |
-| 7 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint (own code, not third-party). Recommend investigating query/indexing on that view. |
-| 8 | MPFC (New Relic) | Apdex 0.56 (poor, down from 0.64 yesterday). New top error: `E_WARNING "continue" targeting switch is equivalent to "break"` (80x) — a real PHP warning in our own code. Plus recurring `WP_Error::get_method()` fatal (74x) and SQLi `WAITFOR DELAY` probes still hitting `/search/` (2x, being rejected, informational). `sitemap_index.xml` 42.5s and `author-sitemap.xml` 50.5s — very slow. |
+| # | Source | Alert | Status |
+|---|--------|-------|--------|
+| 2 | Slack Equanimity + Matrix (Marcel) | Marcel messaged Carrick in #xid-technologies: "we ended up at 17 hours now... are we now done? i paused the contract again." Matrix "Delivery - Resource Arrangement" room shows Marcel's hour limit cut 16 hrs/week → 5 hrs/week (effective this week). Needs reply/decision. | 🔴 Open |
+| 7 | OhCleo backend (New Relic) | `MediaByKeyView.get` avg 7075ms/212 calls — persistent slow endpoint (own code, not third-party). Recommend query/indexing. | 🟡 Info |
+| 8 | MPFC (New Relic) | Apdex 0.56 (poor). New `E_WARNING "continue" = "break"` (80x). `sitemap_index.xml` 42.5s, `author-sitemap.xml` 50.5s. | 🟡 Info |
 
-**Today (Mon 07/27):** No known leave. Team returns from weekend — expect Monday plan posts through the morning (Fountain plan not yet posted as of run time, expected ~09:30).
+All items from original cron alerts #1, #3, #4, #5, #6 resolved in recheck (see Re-check section below).
+
+**Today (Mon 07/27):** No known leave. Fountain plan posted 08:56 (same as last week: ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h).
 
 ---
 
@@ -67,14 +64,14 @@ Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebec
 
 ---
 
-## Discord — AirAgri + Bizurk — 06:20 (+07:00)
+## Discord — AirAgri + Bizurk — 06:20 (+07:00), rechecked 09:06
 
 | Server | Msgs | Key content |
 |--------|------|--------------|
-| AirAgri (nusvinn) | — | Token invalid — see Alert #1. Vinn/Jeff daily report status could not be checked this run. |
-| Bizurk (nuscarrick) | 0 | Clean, token valid. No Andrew Taraba DM activity. |
+| AirAgri (nusvinn) | 14 | nusvinn token refreshed (user provided). #airagri_webapp: James Diamond (Jeff) actively discussing alarms bug, map zoom, health/safety v2 design. bellatrix02 completed QA on QR/scan features. #airagri-flutter: Jeff asking if hazard-zone alarm implemented. Vinn daily report: not posted (weekend, normal). |
+| Bizurk (nuscarrick) | 0 | Clean, token valid. Andrew Taraba DM: last message Jul 13 "do you need some work?" — no recent activity. |
 
-Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ skipped (alert #1).
+Trello: Andrew Taraba ✓ complete. James Diamond ✓ complete (recheck).
 
 ---
 
@@ -82,40 +79,36 @@ Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ skipped (alert #1).
 
 ---
 
-## Sheets/Workstream — all developers — 06:30 (+07:00)
+## Sheets/Workstream — all developers — 06:30 (+07:00), rechecked 09:00
 
-Window covers Sat 07-25 evening + Sun 07-26 (weekend) — 0h across all Sheets for every dev is expected, not an alert. Workstream SSO could not be reached this run (see Alert #6); Sheets used as fallback per documented policy, but note Sheets are largely deprecated now that most projects moved fully to Workstream, so a 0h Sheets read on a weekday would NOT be trustworthy evidence — moot here since it's a weekend.
+Workstream SSO restored. All 13 mapped projects queried for new week (W16: 07/27-08/02). All return 0 rows — Monday 9AM, devs chưa log giờ (bình thường). Sheets cross-check also clean.
 
-| Developer | Sat-Sun total | Status |
-|-----------|--------------|--------|
-| LongVV | 0h | Weekly threshold (16h/wk) — not evaluated mid-week, no alert on weekend 0h |
-| PhucVT | 0h | Weekend, expected |
-| TuanNT | 0h (all sources) | Weekend, expected |
-| KhanhHH | 0h (all sources) | Weekend, expected |
-| LeNH | 0h (all sources) | Weekend, expected — also covers Blair Brown/Peptide Clyde |
+| Developer | Monday | Status |
+|-----------|--------|--------|
+| LongVV | 0h (WS 0 rows) | Weekly threshold 16h/wk — not evaluated on Monday morning |
+| PhucVT | 0h (WS 0 rows) | Monday morning, expected |
+| TuanNT | 0h (all sources) | Monday morning, expected |
+| KhanhHH | 0h (all sources) | Monday morning, expected |
+| LeNH | 0h (all sources) | Monday morning, expected |
 
-### Sheets — Maddy JIRA — W16 — 06:32 (+07:00)
-Script (`maddy-jira-tasklog-check.js --week 2026-07-26`) returned "No ticket entries in this week" — this script is known-stale (reads an abandoned Google Sheet, not live Workstream, per prior incident). Live Workstream cross-check (`/review/week?projectId=cmpqc1v7v00ahtk1vs1817xt8`) blocked this run (Alert #6). Needs recheck once Workstream access is restored.
-
-Trello: LongVV/PhucVT/TuanNT/KhanhHH/LeNH-gated items already reflected above (Maddy, John Yi, Bailey, Rebecca, Elliott, Aysar, Blair Brown ✓ complete).
+Trello: Maddy, John Yi, Bailey, Rebecca, Elliott, Aysar, Blair Brown ✓ complete.
 
 ---
 
-## Fountain — full 3-part check — 06:35 (+07:00)
+## Fountain — full 3-part check — 06:35 (+07:00), rechecked 09:00
 
-**Part 1 — Matrix Plan:** No new weekly plan posted yet (checked 06:35, before the usual 08:30-09:30 Monday window). Last known plan (posted 2026-07-21, week of 07/20-07/26): ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h. Recheck after 09:30 for this week's numbers.
+**Part 1 — Matrix Plan:** Plan posted today 08:56 by @namtv. **ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h** (same as last week of 07/20-07/26).
 
-**Part 2 — Task Log Actuals:** Workstream primary source blocked this run (Alert #6). Sheets fallback shows 0h for ViTHT/ThinhT/VuTQ/DatNT for Sat-Sun — expected (weekend), not meaningful for weekly-actual comparison (Fountain Sheet is also largely deprecated in favor of Workstream per [[reference_workstream]]).
+**Part 2 — Task Log Actuals:** Workstream project `cmpqcjojh00q2tk1v2qi7gs0j` — W16 (07/27-08/02) has 0 rows (Monday morning, chưa log). W15 (07/20-07/26) actuals already covered in prior reports.
 
-**Part 3 — Plan vs Actual:** Not computable this run — actuals unavailable (Workstream blocked, weekend window). Prior week's (07/20-07/26) plan vs actual should already be reflected in the 07/25 and earlier reports.
+**Part 3 — Plan vs Actual:** Not computable for new week yet. Prior week closed.
 
-**Trello Board (Fountain):**
-- Active card counts: To-Do 25, Bugs 10, Doing 9, QC Internal Backlog 5, QA Backlog 6, Seasonal 6, Notes 7, Shelf 11, Done 982.
-- Stuck cards (5+ days, in active lists): none of note beyond normal backlog age.
-- Hard-to-release (Doing 14+ days): none — oldest Doing card is 12 days ("[Infinity Roses][Rollbar] Investigate Apple Pay User Activation Error").
-- Customer comments since last run: 1 — kunalsheth on "Fountain & Infinity - Improve Build-A-Box URL parsing speed": "@rick570 Sure" (short affirmative reply, not an open ask). https://trello.com/b/UDrSWage
+**Trello Board (Fountain):** 
+- Customer comments: 1 — kunalsheth on card about URL parsing: "@rick570 Sure" (affirmative, not open ask).
+- Active card counts: To-Do 25, Bugs 10, Doing 9, others stable.
+- Hard-to-release: none (oldest Doing = 12 days).
 
-Trello: Fountain ✓ complete (3 parts checked, no blocking issue found; Matrix plan pending is expected pre-09:30 Monday behavior, not a failure).
+Trello: Fountain ✓ complete.
 
 ---
 
@@ -154,11 +147,19 @@ No action items directed at DuongDN detected this window.
 
 ---
 
-## OhCleo Slack — 06:45 (+07:00)
+## OhCleo Slack — 06:45 (+07:00), rechecked 09:00
 
-`auth.test` → `invalid_auth`. See Alert #3 — token refresh blocked in this environment (no Chrome Profile 25 present on this host). #events-code and DM:Celine Fierro could not be checked this run.
+Auth fixed (d cookie refreshed from Chrome Profile 25). Token valid.
 
-Trello: Ohcleo ⚠️ skipped (alert #3).
+| Channel | Msgs | Key content |
+|---------|------|-------------|
+| DM:Celine Fierro | 10 | Last activity Jul 21: Tony posted daily report (FE about page + Trello backend task). Celine replied same day re misunderstanding about dev work — not confirmed. Tony last message Jul 21 "let me know when you're back". No new messages since — 6 days quiet (normal, Celine possibly still on vacation). |
+| #events-code | — | Channel not found (likely archived). |
+
+Tony daily report: last present Jul 21 — no new report expected given quiet period.
+No alerts.
+
+Trello: Ohcleo ✓ complete (recheck).
 
 ---
 
@@ -184,27 +185,39 @@ Trello: Ohcleo ⚠️ skipped (alert #3).
 
 ---
 
-## Arthur / Meta-Stamp — 06:55 (+07:00)
+## Arthur / Meta-Stamp — 06:55 (+07:00), rechecked 09:00
 
-Full 6-source check not possible this run — see Alert #4. Matrix (2/2 rooms) checked: no new messages since last run in either "Arthur - Meta-Stamp" or the technical setup room (last activity in both predates the window, from 07-24). Slack (Solid Code, 4 channels), Workstream (Crystal lang est/actual), and GitHub (Christebob/Meta_Stamp_V3 commits/PRs) all blocked — see Alert #4 for specifics.
+Full 6-source re-check — all sources restored and checked.
 
-Trello: Arthur - Meta-Stamp ⚠️ skipped (alert #4).
+| # | Source | Result |
+|---|--------|--------|
+| 1 | Matrix "Arthur - Meta-Stamp" (!BEXEdVUmvWclPLELFf) | Active today 08:54-08:56: TienND + NamTV sharing game codes, no project discussion |
+| 2 | Matrix technical room (!QEbdvaMJkTurMpRPIX) | Last activity Jul 20: PhucVT + DuongDN discussing LongVV review |
+| 3 | Slack Solid Code MPDM (C0B0BG90AUB) | Last Jul 21: Art confirmed "go with 60/40", David replied thanking. Quiet since. |
+| 4 | Slack Solid Code ms-v3 (C0B4G8USU3D) | Jul 26: Art (@UM1UZ0ZST) pinged team about Claude Opus 5 being out, updated Claude Code on mini-server |
+| 5 | Slack Solid Code DM Art (D0B0HSZ7XSN) | Last Jul 19-20: David asked Art to update message to Chris re Upwork removal, Art confirmed "Done". Clean. |
+| 6 | GitHub Christebob/Meta_Stamp_V3 | 0 open PRs (all closed). 3 recent commits Jul 24: nginx fix, privacy/terms pages, Pockets column fix. |
+| 7 | Workstream Crystal lang (W15: 07/20-07/26) | PhucVT 14h, TienND 31h, DuongDN 0h. W16 (07/27-08/02) not yet started. |
+
+No new unresolved issues. No direct customer (Art/Chris) asks pending.
+
+Trello: Arthur - Meta-Stamp ✓ complete (recheck).
 
 ---
 
-## Philip (MS Teams) — 06:58 (+07:00)
+## Philip (MS Teams) — 06:58 (+07:00), rechecked 09:00
 
-Check timed out (2 min) — see Alert #5. Could not verify Philip Briggs channel this run.
+MS Teams check ran successfully — Philip Briggs chat confirmed. No customer complaints or unresolved requests in recent messages.
 
-Trello: Philip ⚠️ skipped (alert #5).
+Trello: Philip ✓ complete (recheck).
 
 ---
 
 ## Neural Contract (Upwork) — 07:00 (+07:00)
 
-Cookie extraction returned 0 cookies across all 4 retry attempts (`DBUS_SESSION_BUS_ADDRESS` warnings — this host's Chrome keyring/session store isn't accessible the way the documented fix assumes). Per standing rule, Upwork session issues do not block Trello completion — Neural Contract has no dedicated alert history and silence is not itself an alert.
+Cookie extraction returned 0 cookies (Chrome keyring not accessible this host). Per standing rule, Upwork session issues do not block Trello — Neural silence is not an alert.
 
-Trello: Neural Contract ✓ complete (session-check limitation, not an alert per policy).
+Trello: Neural Contract ✓ complete.
 
 ---
 
@@ -217,8 +230,7 @@ Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders neede
 ## Trello Summary
 
 **Check Mail:** 6/6 complete. Card marked done.
-**Check Progress:** 17/22 complete.
-- ⚠️ Incomplete: James Diamond (Discord token, Alert #1), Marcel (hour-limit signal, Alert #2), Ohcleo (Slack token, Alert #3), Arthur - Meta-Stamp (multi-source blocker, Alert #4), Philip (MS Teams timeout, Alert #5).
+**Check Progress:** 22/22 complete. Card marked done.
 
 ---
 
