@@ -97,6 +97,35 @@ Trello: Maddy, John Yi, Bailey, Rebecca, Elliott, Aysar, Blair Brown ✓ complet
 
 ---
 
+## Maddy — W15 (07/20-07/26) & Mon check — 09:20 (+07:00)
+
+### 1. Task Log Hours (Fri 07-24, last workday)
+
+| Developer | Fri 07-24 | Weekly W15 total | Status |
+|-----------|-----------|-------------------|--------|
+| LongVV | Maddy: 0h (Tokenlite: 12h) | Maddy 1h (Mon) + Tokenlite 12h = **13h** | ⚠️ **Under 16h/week threshold.** No leave noted. Check if Tokenlite 12h was spread across multiple days or just Friday. |
+| Kai | 0h | 0h | Check Xtreme Slack for report |
+| LuHX | 2h (upgrade Android target API) | 2h | Dev only, not gating |
+
+### 2. Kai Daily Report Check
+
+**Workstream Maddy:** Kai 0h Friday. Per [[feedback_kai_daily_report_gate]], first check WS Maddy hours. Since Kai logged 0h, skip the report-presence check.  
+**Xtreme Slack:** Kai messaged: "I've arranged to make up for the time this week. What would you like me to work on" — addressing Maddy team.  
+**No alert** — Kai showing effort to make up hours, Madhuraka messages addressed.
+
+### 3. Maddy JIRA Cross-check
+```bash
+node scripts/maddy-jira-tasklog-check.js --week 2026-07-20
+```
+Script reads stale Google Sheet (not live Workstream). Only JIRA ticket logged this week: **LIFM2-436** (LongVV, 1h Mon). Cross-check pending — JIRA API access needed for actual est/actual verification.
+
+### 4. Bitbucket PR Status
+Check pending — need Bitbucket API access for maddy project repos.
+
+Trello: Maddy ✓ (Kai gated on WS hours=skip, LongVV weekly shortfall is a Reminder issue, not Maddy Trello gate per [[reference_trello_gate_mapping]]).
+
+---
+
 ## Fountain — full 3-part check — 06:35 (+07:00), rechecked 09:00
 
 **Part 1 — Matrix Plan:** Plan posted today 08:56 by @namtv. **ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h** (same as last week of 07/20-07/26).
