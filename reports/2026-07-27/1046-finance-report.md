@@ -83,40 +83,42 @@ SHB 0.9 · TPB/OCB/BAB 1.0 · NAB/VIB/MSB 1.1 · ABB 1.2 · SHS/VPB/ACB 1.3 · M
 
 **P/E thấp (< 10), toàn bộ 34 mã, sắp tăng dần** — bỏ khung bậc <1.5/<2/<3/<5 vì gần như rỗng (chỉ VCG ở 3.1), không xét >10:
 
-| Mã | Ngành | ROE | ROA | P/E | P/B | Nhận định nhanh |
-|----|-------|-----|-----|-----|-----|------------------|
-| VCG | Xây dựng công nghiệp | 41.9 | 14.1 | 3.1 | 1.1 | ROE/ROA rất cao, P/E thấp nhất bảng — combo hiếm, khả năng bị định giá thấp thật sự. Đáng chú ý nhất. |
-| SHB | Ngân hàng | 18.3 | 1.4 | 5.1 | 0.9 | ROE cao + P/B<1 — tiềm năng, đã xác nhận ở phần PB Low. |
-| VIX | Chứng khoán | 27.2 | 20.6 | 5.7 | 1.2 | ROE/ROA rất cao — nhưng ngành chứng khoán biến động mạnh theo thị trường chung, KQKD không ổn định qua các năm. |
-| PGV | Dịch vụ tiện ích | 26.5 | 8.0 | 5.9 | 1.4 | ROE cao, ngành tiện ích (điện) dòng tiền ổn định — tiềm năng. |
-| TPB | Ngân hàng | 17.6 | 1.6 | 6.1 | 1.0 | ROE/ROA ở mức trung bình khá của nhóm ngân hàng — không nổi bật, không rủi ro. |
-| NAB | Ngân hàng | 20.1 | 1.4 | 6.1 | 1.1 | ROE thuộc nhóm cao trong ngành ngân hàng — tương đối hấp dẫn. |
-| KSF | Bất động sản | 76.0 | 12.1 | 6.2 | 4.0 | ROE cực cao nhưng P/B đã 4.0 (không rẻ theo P/B) — cần verify chất lượng lợi nhuận, khả năng do đòn bẩy cao hoặc yếu tố một lần. |
-| HAG | Nông nghiệp | 24.3 | 11.7 | 6.2 | 1.3 | ROE/ROA hiện tốt, nhưng HAG có lịch sử nợ vay/lỗ lũy kế lớn — cần thận trọng dù số liệu hiện tại ổn. |
-| CTG | Ngân hàng | 22.4 | 1.4 | 6.3 | 1.4 | ROE cao trong nhóm ngân hàng quốc doanh big-cap — tương đối hấp dẫn. |
-| VEA | Sản xuất công nghiệp | 27.1 | 25.6 | 6.5 | 1.7 | ROE/ROA rất cao (ROA 25.6% hiếm gặp) — hấp dẫn về hiệu quả kinh doanh, nhưng đang trong diện cảnh báo cổ phiếu (xem Piece 1) — rủi ro phi tài chính. |
-| ABB | Ngân hàng | 18.2 | 1.4 | 6.9 | 1.2 | ROE khá, ngân hàng quy mô nhỏ — định giá hợp lý, không nổi bật. |
-| DGC | Hóa chất | 16.8 | 14.3 | 7.1 | 1.1 | ROA cao bất thường cho ngành hóa chất — hiệu quả sử dụng tài sản tốt, đáng chú ý. |
-| VIB | Ngân hàng | 16.4 | 1.4 | 7.2 | 1.1 | Số liệu trung bình ngành ngân hàng — không nổi bật. |
-| MBB | Ngân hàng | 21.2 | 2.0 | 7.4 | 1.4 | ROE/ROA đều thuộc top nhóm ngân hàng ở bảng này — hấp dẫn. |
-| HDB | Ngân hàng | 24.5 | 2.0 | 7.6 | 1.7 | ROE cao — hấp dẫn về hiệu quả, nhưng P/B đã 1.7 nên không còn "rẻ" theo P/B. |
-| PNJ | Bán lẻ | 27.7 | 19.5 | 7.7 | 1.9 | ROE/ROA rất tốt nhưng P/B gần 2 — định giá hợp lý theo hiệu quả kinh doanh, không phải hàng rẻ. |
-| MSB | Ngân hàng | 14.3 | 1.6 | 7.7 | 1.1 | ROE thấp nhất nhóm ngân hàng trong bảng — kém hấp dẫn hơn peer, cần xem thêm. |
-| ACB | Ngân hàng | 17.5 | 1.7 | 7.9 | 1.3 | Số liệu ổn định, ngân hàng chất lượng tài sản khá tốt trong nhóm. |
-| OCB | Ngân hàng | 12.8 | 1.4 | 8.1 | 1.0 | ROE thấp nhất nhóm ngân hàng ở bảng này — cần xem thêm lý do (chất lượng tài sản/nợ xấu). |
-| IDC | Bất động sản KCN | 30.5 | 8.7 | 8.2 | 2.3 | ROE cao nhưng P/B đã hơn 2 — không còn rẻ theo P/B dù P/E vẫn thấp. |
-| VPB | Ngân hàng | 16.4 | 2.2 | 8.3 | 1.3 | ROA cao nhất nhóm ngân hàng trong bảng (2.2%) — chất lượng tài sản tốt. |
-| HVN | Hàng không | 446.5 | 11.9 | 8.8 | 7.7 | ROE 446.5% là số liệu méo (vốn chủ sở hữu gần 0/từng âm) — không dùng để đánh giá. P/B đã 7.7, rất cao — thực chất không hề rẻ. |
-| HPG | Vật liệu xây dựng | 16.4 | 8.6 | 8.9 | 1.4 | ROE/ROA khá, đầu ngành thép — định giá hợp lý. |
-| BSR | Dầu khí | 20.9 | 14.2 | 9.0 | 1.7 | ROE/ROA tốt nhưng lợi nhuận phụ thuộc giá dầu thế giới — rủi ro chu kỳ ngành. |
-| DCM | Hóa chất | 18.4 | 11.3 | 9.1 | 1.6 | Số liệu ổn, nhưng ngành phân bón nhạy với giá nông sản/khí đốt đầu vào. |
-| VHC | Công nghiệp Chế biến | 15.2 | 10.7 | 9.1 | 1.3 | ROA cao (thủy sản xuất khẩu) nhưng phụ thuộc thị trường xuất khẩu (rủi ro thuế quan). |
-| TCB | Ngân hàng | 15.9 | 2.4 | 9.2 | 1.4 | ROA cao nhất nhóm ngân hàng trong bảng — chất lượng tài sản tốt. |
-| QNS | Hàng tiêu dùng | 20.2 | 14.8 | 9.4 | 1.6 | ROE/ROA rất tốt, ngành tiêu dùng phòng thủ — tương đối ổn định. |
-| SIP | Bất động sản | 25.0 | 4.6 | 9.5 | 2.2 | ROE cao nhưng P/B đã 2.2 — không rẻ theo P/B. |
-| BID | Ngân hàng | 18.4 | 1.0 | 9.5 | 1.6 | ROA thấp nhất nhóm ngân hàng trong bảng (1.0%) — hiệu quả kém hơn peer dù là big-cap quốc doanh. |
-| BMP | Công nghiệp | 40.4 | 33.4 | 9.8 | 3.8 | ROE/ROA cực cao (biên lợi nhuận tốt) nhưng P/B đã 3.8 — không rẻ theo P/B dù P/E sát mốc 10. |
-| PVS | Xây dựng công nghiệp | 13.0 | 5.0 | 9.8 | 1.2 | ROE/ROA thấp nhất bảng — kém hấp dẫn nhất trong danh sách này. |
-| VHM | Bất động sản | 27.4 | 8.9 | 9.9 | 2.4 | ROE cao nhưng P/B 2.4, ngành BĐS nhà ở đang khó khăn chung — cần thận trọng. |
+Không có mã nào ở bậc P/E < 1.5, < 2, < 3 (rỗng — bảng dưới gộp thẳng vào bậc < 5 / 5-10 để không có hàng trống vô nghĩa).
 
-**Nhận định:** 34/100 mã có P/E<10, gần một nửa (12) là ngân hàng — hợp lý vì ngân hàng luôn có P/E thấp hơn mặt bằng do đặc thù đòn bẩy tài chính, không phải dấu hiệu "rẻ". Đáng chú ý nhất **VCG** (P/E 3.1, ROE 41.9%, ROA 14.1% — combo hiếm, định giá thấp bất thường so với hiệu quả sinh lời) và **KSF** (P/E 6.2, ROE 76% — nhưng ROE cao bất thường cần verify không phải do đòn bẩy/one-off). HVN có ROE 446.5% — bất thường, khả năng do vốn chủ sở hữu gần 0 (méo tỷ lệ), không dùng ROE này để so sánh.
+| Bậc | Mã | Ngành | ROE | ROA | P/E | Nhận định nhanh |
+|-----|----|----|-----|-----|-----|------------------|
+| <5 | VCG | Xây dựng công nghiệp | 41.9 | 14.1 | 3.1 | ROE/ROA rất cao, P/E thấp nhất bảng — combo hiếm, khả năng bị định giá thấp thật sự. Đáng chú ý nhất. |
+| 5-10 | SHB | Ngân hàng | 18.3 | 1.4 | 5.1 | ROE cao + P/B<1 — tiềm năng, đã xác nhận ở phần PB Low. |
+| 5-10 | VIX | Chứng khoán | 27.2 | 20.6 | 5.7 | ROE/ROA rất cao — nhưng ngành chứng khoán biến động mạnh theo thị trường chung, KQKD không ổn định qua các năm. |
+| 5-10 | PGV | Dịch vụ tiện ích | 26.5 | 8.0 | 5.9 | ROE cao, ngành tiện ích (điện) dòng tiền ổn định — tiềm năng. |
+| 5-10 | TPB | Ngân hàng | 17.6 | 1.6 | 6.1 | ROE/ROA ở mức trung bình khá của nhóm ngân hàng — không nổi bật, không rủi ro. |
+| 5-10 | NAB | Ngân hàng | 20.1 | 1.4 | 6.1 | ROE thuộc nhóm cao trong ngành ngân hàng — tương đối hấp dẫn. |
+| 5-10 | KSF | Bất động sản | 76.0 | 12.1 | 6.2 | ROE cực cao nhưng P/B đã 4.0 (không rẻ theo P/B) — cần verify chất lượng lợi nhuận, khả năng do đòn bẩy cao hoặc yếu tố một lần. |
+| 5-10 | HAG | Nông nghiệp | 24.3 | 11.7 | 6.2 | ROE/ROA hiện tốt, nhưng HAG có lịch sử nợ vay/lỗ lũy kế lớn — cần thận trọng dù số liệu hiện tại ổn. |
+| 5-10 | CTG | Ngân hàng | 22.4 | 1.4 | 6.3 | ROE cao trong nhóm ngân hàng quốc doanh big-cap — tương đối hấp dẫn. |
+| 5-10 | VEA | Sản xuất công nghiệp | 27.1 | 25.6 | 6.5 | ROE/ROA rất cao (ROA 25.6% hiếm gặp) — hấp dẫn về hiệu quả kinh doanh, nhưng đang trong diện cảnh báo cổ phiếu (xem Piece 1) — rủi ro phi tài chính. |
+| 5-10 | ABB | Ngân hàng | 18.2 | 1.4 | 6.9 | ROE khá, ngân hàng quy mô nhỏ — định giá hợp lý, không nổi bật. |
+| 5-10 | DGC | Hóa chất | 16.8 | 14.3 | 7.1 | ROA cao bất thường cho ngành hóa chất — hiệu quả sử dụng tài sản tốt, đáng chú ý. |
+| 5-10 | VIB | Ngân hàng | 16.4 | 1.4 | 7.2 | Số liệu trung bình ngành ngân hàng — không nổi bật. |
+| 5-10 | MBB | Ngân hàng | 21.2 | 2.0 | 7.4 | ROE/ROA đều thuộc top nhóm ngân hàng ở bảng này — hấp dẫn. |
+| 5-10 | HDB | Ngân hàng | 24.5 | 2.0 | 7.6 | ROE cao — hấp dẫn về hiệu quả, nhưng P/B đã 1.7 nên không còn "rẻ" theo P/B. |
+| 5-10 | PNJ | Bán lẻ | 27.7 | 19.5 | 7.7 | ROE/ROA rất tốt nhưng P/B gần 2 — định giá hợp lý theo hiệu quả kinh doanh, không phải hàng rẻ. |
+| 5-10 | MSB | Ngân hàng | 14.3 | 1.6 | 7.7 | ROE thấp nhất nhóm ngân hàng trong bảng — kém hấp dẫn hơn peer, cần xem thêm. |
+| 5-10 | ACB | Ngân hàng | 17.5 | 1.7 | 7.9 | Số liệu ổn định, ngân hàng chất lượng tài sản khá tốt trong nhóm. |
+| 5-10 | OCB | Ngân hàng | 12.8 | 1.4 | 8.1 | ROE thấp nhất nhóm ngân hàng ở bảng này — cần xem thêm lý do (chất lượng tài sản/nợ xấu). |
+| 5-10 | IDC | Bất động sản KCN | 30.5 | 8.7 | 8.2 | ROE cao nhưng P/B đã hơn 2 — không còn rẻ theo P/B dù P/E vẫn thấp. |
+| 5-10 | VPB | Ngân hàng | 16.4 | 2.2 | 8.3 | ROA cao nhất nhóm ngân hàng trong bảng (2.2%) — chất lượng tài sản tốt. |
+| 5-10 | HVN | Hàng không | 446.5 | 11.9 | 8.8 | ROE 446.5% là số liệu méo (vốn chủ sở hữu gần 0/từng âm) — không dùng để đánh giá. P/B đã 7.7, rất cao — thực chất không hề rẻ. |
+| 5-10 | HPG | Vật liệu xây dựng | 16.4 | 8.6 | 8.9 | ROE/ROA khá, đầu ngành thép — định giá hợp lý. |
+| 5-10 | BSR | Dầu khí | 20.9 | 14.2 | 9.0 | ROE/ROA tốt nhưng lợi nhuận phụ thuộc giá dầu thế giới — rủi ro chu kỳ ngành. |
+| 5-10 | DCM | Hóa chất | 18.4 | 11.3 | 9.1 | Số liệu ổn, nhưng ngành phân bón nhạy với giá nông sản/khí đốt đầu vào. |
+| 5-10 | VHC | Công nghiệp Chế biến | 15.2 | 10.7 | 9.1 | ROA cao (thủy sản xuất khẩu) nhưng phụ thuộc thị trường xuất khẩu (rủi ro thuế quan). |
+| 5-10 | TCB | Ngân hàng | 15.9 | 2.4 | 9.2 | ROA cao nhất nhóm ngân hàng trong bảng — chất lượng tài sản tốt. |
+| 5-10 | QNS | Hàng tiêu dùng | 20.2 | 14.8 | 9.4 | ROE/ROA rất tốt, ngành tiêu dùng phòng thủ — tương đối ổn định. |
+| 5-10 | SIP | Bất động sản | 25.0 | 4.6 | 9.5 | ROE cao nhưng P/B đã 2.2 — không rẻ theo P/B. |
+| 5-10 | BID | Ngân hàng | 18.4 | 1.0 | 9.5 | ROA thấp nhất nhóm ngân hàng trong bảng (1.0%) — hiệu quả kém hơn peer dù là big-cap quốc doanh. |
+| 5-10 | BMP | Công nghiệp | 40.4 | 33.4 | 9.8 | ROE/ROA cực cao (biên lợi nhuận tốt) nhưng P/B đã 3.8 — không rẻ theo P/B dù P/E sát mốc 10. |
+| 5-10 | PVS | Xây dựng công nghiệp | 13.0 | 5.0 | 9.8 | ROE/ROA thấp nhất bảng — kém hấp dẫn nhất trong danh sách này. |
+| 5-10 | VHM | Bất động sản | 27.4 | 8.9 | 9.9 | ROE cao nhưng P/B 2.4, ngành BĐS nhà ở đang khó khăn chung — cần thận trọng. |
+
+**Nhận định:** 34/100 mã có P/E<10, gần một nửa (12) là ngân hàng — hợp lý vì ngân hàng luôn có P/E thấp hơn mặt bằng do đặc thù đòn bẩy tài chính, không phải dấu hiệu "rẻ". Đáng chú ý nhất **VCG** (bậc <5, P/E 3.1, ROE 41.9%, ROA 14.1% — combo hiếm, định giá thấp bất thường so với hiệu quả sinh lời) và **KSF** (P/E 6.2, ROE 76% — nhưng ROE cao bất thường cần verify không phải do đòn bẩy/one-off). HVN có ROE 446.5% — bất thường, khả năng do vốn chủ sở hữu gần 0 (méo tỷ lệ), không dùng ROE này để so sánh.
