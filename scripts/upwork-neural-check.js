@@ -27,10 +27,21 @@ const MESSAGES_API_FRAGMENT = '/stories/simplified';
 const MAX_ATTEMPTS = 4;
 
 function extractFreshCookies() {
-  execSync('.claude/skills/.venv/bin/python3 scripts/get-carrick-upwork-cookies.py', {
-    cwd: path.join(__dirname, '..'),
-    stdio: 'inherit',
-  });
+  let result;
+  try {
+    result = execSync('.claude/skills/.venv/bin/python3 scripts/get-carrick-upwork-cookies.py', {
+      cwd: path.join(__dirname, '..'),
+      stdio: 'inherit',
+    });
+  } catch(venvErr) {
+    console.error('  [NEURAL] venv python3 failed, trying system python3...');
+    try {
+      result = execSync('python3 scripts/get-carrick-upwork-cookies.py', {
+        cwd: path.join(__dirname, '..'),
+        stdio: 'inherit',
+      });
+    } catch(sysErr) { throw new Error('Both venv and system python3 failed'); }
+  }
   return JSON.parse(fs.readFileSync(COOKIE_JSON, 'utf8'))
     .filter(c => c.name && c.value && c.domain && /^[!#-+\--:<-\[\]-~]+$/.test(c.value))
     .map(c => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
