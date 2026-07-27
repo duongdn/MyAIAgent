@@ -14,14 +14,16 @@ Reconstructed net (7,680,368,108) is ~0.96% above the authoritative totaldashboa
 | Category | Δ (₫) | Cause |
 |----------|-------|-------|
 | 🥇 Gold | +7,500,000 | Price up (same 50-unit holding, 14.0M → 14.15M/unit) |
-| 📈 Investment | +11,800,000 | 11.8M transferred in from `vcb` → VCBS +6.3M, FPTS +5.5M |
+| 📈 Investment | +11,800,000 | New capital deployed from `vcb` → VCBS +6.3M, FPTS +5.5M |
 | 💵 Liquid | −19,684,942 | `vcb` −19,645,000 (7,845,000 spend + 11,800,000 swept to investment), Ví −70,000, Paypal FX +30,060 |
 | 🏦 Savings | 0 | No interest posting since 07-23 |
 | 🏠 Real Estate | 0 | — |
 | 💳 Debt | 0 | VCB Visa flat at −89,000,000 (16 days no new charge) |
 | **Total** | **−384,942** | **= exact NW delta ✅** |
 
-The 11.8M investment increase is an internal sweep, not new wealth — money moved `vcb` → VCBS/FPTS. MISA records this as a wallet transfer (no `categoryName`), so it does not appear in the transaction category feed; confirmed by the matching −11.8M residual in `vcb` after subtracting all categorized July 24–27 spend.
+The 11.8M investment increase is not new wealth — it is capital moved out of `vcb` into the brokerage accounts. MISA records wallet transfers without a `categoryName`, so they never appear in the transaction feed; the amount is derived from the residual: `vcb` fell 19,645,000, of which only 7,845,000 is categorized spend, leaving exactly 11,800,000 — matching the aggregate investment rise to the đồng.
+
+Caveat on the split: FPTS's +5.5M is firm (cost basis +6,810,000 from two VEA buys, wallet cash −1,310,000, so 5.5M had to come in). VCBS's +6.3M is carried mark-to-market, so it blends any transfer-in with price movement — the two cannot be separated from this data. The category total is right either way.
 
 ## By Account (sorted by balance desc)
 | Account | Balance (₫) | % Gross | % Net | Category |
@@ -56,7 +58,9 @@ Investment wallets valued as cost-basis-remaining (Σ Cho vay − Σ Thu nợ) +
 | FPTS | 350,086,000 | 1,715,151 | 351,801,151 | 29,100,000 |
 | Finhay | 74,404,069 | 0 | 74,404,069 | 4,404,000 |
 
-VCBS remains almost entirely uninvested cash (600.06M sitting in the wallet since the June ETF redemption of 930M) — cost basis is only 400K. `long an res` and `Larion cổ phần` grouped consistent with historical tracking despite MISA tagging them walletType=Investment/inactive.
+**Note on VCBS:** cost basis reads only 400K because the Cho vay/Thu nợ ledger for that wallet was fully closed out in the June redemption cycle; the position is now carried directly as the wallet's `currentAmount` (600,055,620). That figure is **invested ETF market value, not idle cash** — VCBS is fully deployed. This also makes VCBS the most accurately-valued of the four fund wallets (mark-to-market rather than cost basis).
+
+`long an res` and `Larion cổ phần` grouped consistent with historical tracking despite MISA tagging them walletType=Investment/inactive.
 
 ## By Category
 | Category | Total (₫) | % Gross | % Net |
@@ -82,11 +86,11 @@ Ghost balance on closed savings book "nam á 6m" (2,005,479, endDate 2024-06-01)
 - Instantly accessible (Liquid): **282,999,714 ₫**
 - Due within 30 days (tịkcop 1 week + vcb 1 month): **+536,226,554 ₫**
 - → Total accessible within 30 days: **819,226,268 ₫**
-- Plus VCBS uninvested cash (600,055,620) is effectively liquid if needed → **1.42 tỷ**
+- Listed equity (VCBS 600.5M + FPTS 351.8M) is sellable in T+2 if genuinely needed, but at market risk — counted as investment, not liquidity.
 
 ## Alerts
 - 🔴 **Concentration**: Real Estate is 46.27% of net worth, above the 30% threshold. Nhà (32.86%) is structural/primary residence; long an res (13.41%) is the actionable illiquid piece.
-- 🟡 **Idle capital**: VCBS holds 600.06M in uninvested cash — 7.9% of net worth earning nothing since the June redemption (~5 weeks). At the 8.1% tikcop rate that is ~4.1M/month of foregone yield. See Allocation → Khuyến nghị.
+- ✅ **Capital deployment**: all four fund wallets fully invested — no idle capital.
 - ✅ **Concentration**: Investment category 29.19% of net worth, spread over 5 positions.
 - ✅ **Liquidity**: Liquid (283.0M) alone is below 3× monthly expense (~210M bar is met, but thin); with Savings (1.04B semi-liquid) coverage is 18.9 months.
 - ✅ **Leverage**: Debt 1.15% of gross assets — negligible.

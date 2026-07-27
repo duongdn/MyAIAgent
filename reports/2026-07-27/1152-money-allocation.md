@@ -19,7 +19,7 @@ Investable gross: **5,269,368,108 ₫** · Investable net (sau nợ): **5,180,36
 ## Chi tiết ETF + Fund
 | Wallet | Loại | Giá trị (₫) | % investable net | Nội dung |
 |--------|------|------------|------------------|----------|
-| VCBS | 📈 ETF | 600,455,620 | 11.59% | VN30/VN100/VN1000 — **99.9% là tiền mặt chưa tái đầu tư** (cost basis chỉ 400,000) |
+| VCBS | 📈 ETF | 600,455,620 | 11.59% | VN30/VN100/VN1000 — đã đầu tư hết, ghi nhận theo **giá thị trường** (sổ Cho vay/Thu nợ đã tất toán tháng 6 nên cost basis chỉ còn 400,000) |
 | Larion cổ phần | 📈 Cổ phần private | 600,000,000 | 11.58% | Không niêm yết, thanh khoản thấp |
 | VCBF | 🏛️ Fund | 594,063,000 | 11.47% | Quỹ VCBF quản lý |
 | FPTS | 📊 Cổ tức | 351,801,151 | 6.79% | VEA, ADP + ETF nhỏ |
@@ -41,11 +41,11 @@ Nợ                 ▌(−)                                         −1.72%  
 
 Bên trong nhóm Cổ phiếu/ETF/Fund:
 ```
-VCBS (tiền mặt!)   ███████████▌  600.5M   ← 600.06M nằm im, chưa đầu tư
-Larion (private)   ███████████▌  600.0M
-VCBF               ███████████▍  594.1M
-FPTS               ██████▊       351.8M
-Finhay             █▍             74.4M
+VCBS (ETF, mark-to-market)  ███████████▌  600.5M
+Larion (private equity)     ███████████▌  600.0M
+VCBF (quỹ)                  ███████████▍  594.1M
+FPTS (cổ tức)               ██████▊       351.8M
+Finhay (quỹ)                █▍             74.4M
 ```
 
 ## Full View (bao gồm nhà ở)
@@ -64,10 +64,10 @@ Gross: **7,769,368,108 ₫** · Net (authoritative totaldashboard): **7,607,468,
 Reconstructed net 7,680,368,108 vs authoritative 7,607,468,108 → gap 72,900,000 (0.96%), the standing cost-basis-vs-market gap on the 4 fund wallets. Không phải lỗi dữ liệu.
 
 ## Nhận xét
-- **Thanh khoản:** tiền mặt ngay 283.0M; +536.2M đáo hạn trong 30 ngày (tịkcop 1 week 30/07, vcb 1 month 09/08) → 819.2M trong 30 ngày. Cộng 600.06M tiền mặt nằm trong VCBS → **1.42 tỷ khả dụng thực tế**.
+- **Thanh khoản:** tiền mặt ngay 283.0M; +536.2M đáo hạn trong 30 ngày (tịkcop 1 week 30/07, vcb 1 month 09/08) → **819.2M trong 30 ngày**. Phần cổ phiếu niêm yết (VCBS 600.5M + FPTS 351.8M) bán được T+2 nếu thật sự cần, nhưng chịu rủi ro giá — không tính vào thanh khoản.
 - **Đáo hạn sắp tới:** tịkcop 1 week (30,281,919 @ 6.1%) đáo hạn **3 ngày nữa**; vcb 1 month (505,944,635 @ 4.75%) đáo hạn **13 ngày nữa**. Sổ vcb 1 month đang ở lãi suất thấp nhất danh mục (4.75%) trong khi tikcop 3 month cho 8.1% — chênh 3.35 điểm %.
-- **Vốn nhàn rỗi:** VCBS giữ 600.06M tiền mặt từ đợt bán ETF tháng 6 (930M), đã 5 tuần không tái đầu tư. Đây là khoản lớn nhất đang không sinh lời.
-- **Chiến lược đang chạy:** tích luỹ đều VEA trên FPTS (4 lệnh mua 100cp trong tháng 7, 13.75M), một phần từ tiền bán Trend 07/07.
+- **Vốn triển khai hết:** cả 4 ví quỹ đều đã đầu tư, không có tiền nhàn rỗi. VCBS ghi theo giá thị trường (sổ Cho vay/Thu nợ tất toán tháng 6), nên cost basis 400,000 ₫ **không** có nghĩa là chưa đầu tư.
+- **Chiến lược đang chạy:** tích luỹ đều VEA trên FPTS (4 lệnh mua 100cp trong tháng 7, 13.75M), một phần từ tiền bán Trend 07/07; đồng thời bơm thêm 11.8M từ ví vcb vào VCBS/FPTS trong 3 ngày qua.
 - **Vàng:** +7.5M trong 3 ngày (+1.07%), giữ nguyên 50 units — biến động giá, không phải giao dịch.
 
 ---
@@ -87,7 +87,6 @@ Reconstructed net 7,680,368,108 vs authoritative 7,607,468,108 → gap 72,900,00
 | Rủi ro | Mức | Chi tiết |
 |--------|-----|----------|
 | **Tập trung bất động sản** | 🔴 Cao | BĐS 46.27% net worth, vượt ngưỡng 40%. Nhà (32.86%) là chỗ ở, không tính là lựa chọn đầu tư; long an res (13.41%) mới là phần chủ động và kém thanh khoản. |
-| **Vốn nhàn rỗi VCBS** | 🔴 Cao | 600.06M (7.9% net worth) nằm tiền mặt 5 tuần trong tài khoản chứng khoán, lãi ~0%. Chi phí cơ hội ~4.1M/tháng nếu so với tikcop 8.1%, cao hơn nữa nếu so kỳ vọng thị trường. Đây là vấn đề đáng xử lý nhất hiện tại. |
 | **Tài sản đơn lẻ > 25%** | 🟡 TB | Nhà = 32.86% net worth. Cấu trúc, khó thay đổi, chấp nhận được. |
 | **Larion cổ phần kém thanh khoản** | 🟡 TB | 600M (7.89% net) cổ phần private, không niêm yết, không định giá lại được, không thoát nhanh được. Đang ghi nhận theo giá gốc — rủi ro định giá ẩn. |
 | **Tương quan thị trường** | 🟡 TB | Toàn bộ phần cổ phiếu/quỹ (VCBS, VCBF, FPTS, Finhay) đều là VN equity. Không có exposure quốc tế → cùng chịu một cú sốc thị trường. |
@@ -106,14 +105,9 @@ Reconstructed net 7,680,368,108 vs authoritative 7,607,468,108 → gap 72,900,00
 | Vàng/Commodity | 13.66% | 5–15% | ✅ Trong ngưỡng (cận trên) |
 | Tiền mặt | 5.46% | 5–10% | ✅ Trong ngưỡng |
 
-Trên giấy tờ phân bổ **rất cân đối**. Nhưng con số 42.87% "cổ phiếu/ETF/Fund" đang **thổi phồng**: trong đó 600.06M của VCBS thực chất là tiền mặt. Phân bổ *hiệu dụng*:
-
-| Nhóm | Actual hiệu dụng | Benchmark | Status |
-|------|------------------|-----------|--------|
-| Cổ phiếu/ETF/Fund (đầu tư thật) | 31.28% | 30–50% | ✅ nhưng ở cận dưới |
-| Tiền mặt (gồm VCBS cash) | 17.04% | 5–10% | 🔴 Vượt gần 2× |
-
-→ Vấn đề thật không phải phân bổ sai, mà là **17% tài sản đang ở dạng tiền mặt trong khi tưởng là đang đầu tư**.
+**Cả 5 nhóm đều nằm trong ngưỡng benchmark** — phân bổ tài sản hiện tại không có vấn đề cấu trúc nào cần sửa. Toàn bộ 42.87% nhóm cổ phiếu/ETF/Fund là vốn đã triển khai thật (không có phần tiền mặt trá hình). Hai điểm cần lưu ý đều là *chất lượng bên trong nhóm*, không phải tỷ trọng:
+- Tiết kiệm 20.04% ở cận trên ngưỡng, mà 505.9M trong đó đang hưởng lãi suất thấp nhất danh mục (4.75%).
+- Trong 42.87% nhóm đầu tư, có 11.58% là Larion cổ phần — private equity, chưa định giá lại, không thanh khoản.
 
 ### 4. Quyết định cần xử lý trong 90 ngày
 
@@ -128,22 +122,21 @@ Trên giấy tờ phân bổ **rất cân đối**. Nhưng con số 42.87% "cổ
 ### 5. Khuyến nghị
 
 **Ngắn hạn (30 ngày)**
-1. 🔴 **Xử lý 600.06M tiền mặt nằm im ở VCBS** — ưu tiên số 1. Ba lựa chọn: (a) tái đầu tư ETF theo DCA nhiều đợt nếu vẫn muốn giữ tỷ trọng equity, (b) chuyển sang sổ tiết kiệm 8.1% nếu đang chủ động chờ điểm vào, (c) chia đôi. Việc để nguyên 5 tuần nữa mà không có quyết định rõ ràng là lựa chọn tệ nhất — đang mất ~4.1M/tháng chi phí cơ hội.
+1. 🔴 **09/08 — không roll vcb 1 month ở 4.75%.** Ưu tiên số 1. Chuyển sang kỳ hạn 3–5 tháng ở 7.5–8.1%. Chênh lệch trên 505,944,635 ₫ ≈ **+17M/năm**, không đánh đổi rủi ro gì. Đây là khoản dễ cải thiện nhất trong toàn danh mục.
 2. 🟡 **Tất toán VCB Visa 89M** trước hạn. Tiền mặt dư thừa, không có lý do để nợ thẻ.
-3. 🟢 **09/08 — không roll vcb 1 month ở 4.75%.** Chuyển sang kỳ hạn 3–5 tháng ở 7.5–8.1%. Chênh lệch trên 505.9M ≈ **+17M/năm**.
-4. 🟢 **30/07 — tịkcop 1 week:** gộp vào một kỳ hạn dài hơn thay vì roll tuần ở 6.1%.
+3. 🟢 **30/07 — tịkcop 1 week:** gộp vào một kỳ hạn dài hơn thay vì roll tuần ở 6.1%.
 
 **Trung hạn (6–12 tháng)**
-5. Xây dựng exposure quốc tế — hiện 100% phần equity là VN. Mục tiêu 10–15% tài sản đầu tư sang quỹ/ETF quốc tế để giảm tương quan.
-6. Định giá lại **Larion cổ phần** (600M). Đang ghi theo giá gốc, không rõ giá trị thật. Cần xác định giá trị hiện tại và lộ trình thoát — 7.89% net worth không nên là hộp đen.
-7. Đánh giá **long an res** (1.02B). BĐS chiếm 46.27% net worth; đây là phần duy nhất bán được. Nếu không có kế hoạch sử dụng, cân nhắc thoái để đưa BĐS về dưới 40%.
+4. Xây dựng exposure quốc tế — hiện 100% phần equity là VN. Mục tiêu 10–15% tài sản đầu tư sang quỹ/ETF quốc tế để giảm tương quan. Đây là điểm yếu cấu trúc rõ nhất còn lại của danh mục.
+5. Định giá lại **Larion cổ phần** (600M). Đang ghi theo giá gốc, không rõ giá trị thật. Cần xác định giá trị hiện tại và lộ trình thoát — 7.89% net worth không nên là hộp đen.
+6. Đánh giá **long an res** (1.02B). BĐS chiếm 46.27% net worth; đây là phần duy nhất bán được. Nếu không có kế hoạch sử dụng, cân nhắc thoái để đưa BĐS về dưới 40%.
 
 **Dài hạn (>1 năm)**
-8. Mục tiêu cơ cấu: BĐS ≤ 35% net worth, equity thật ≥ 40% investable, tiền mặt ≤ 10%, vàng giữ 10–15%.
-9. Giảm dần tỷ trọng tiết kiệm (20.04%, cận trên benchmark) khi lãi suất hạ — chuyển sang tài sản sinh lời cao hơn khi quỹ dự phòng đã dư 18.9 tháng, gấp 3× mức cần thiết.
+7. Mục tiêu cơ cấu: BĐS ≤ 35% net worth, equity ≥ 45% investable, vàng giữ 10–15%.
+8. Giảm dần tỷ trọng tiết kiệm (20.04%, cận trên benchmark) khi lãi suất hạ — chuyển sang tài sản sinh lời cao hơn khi quỹ dự phòng đã dư 18.9 tháng, gấp 3× mức cần thiết.
 
 ### Câu hỏi chưa giải đáp
-1. 600.06M ở VCBS là đang **chủ động chờ điểm vào thị trường**, hay chỉ là quên chưa xử lý sau khi bán ETF tháng 6? Khuyến nghị #1 phụ thuộc hoàn toàn vào câu trả lời này.
-2. Hạn thanh toán chính xác của VCB Visa? MISA ghi thanh toán thẻ dưới dạng chuyển khoản (không có category), nên không suy ra được từ dữ liệu giao dịch.
-3. Larion cổ phần 600M — có định giá cập nhật nào không, hay vẫn là giá gốc từ lúc góp vốn?
-4. long an res 1.02B — giữ để ở/xây, hay là tài sản đầu tư chờ thanh khoản?
+1. Hạn thanh toán chính xác của VCB Visa? MISA ghi thanh toán thẻ dưới dạng chuyển khoản (không có category), nên không suy ra được từ dữ liệu giao dịch.
+2. Larion cổ phần 600M — có định giá cập nhật nào không, hay vẫn là giá gốc từ lúc góp vốn?
+3. long an res 1.02B — giữ để ở/xây, hay là tài sản đầu tư chờ thanh khoản?
+4. VCBS +6.3M trong 3 ngày là do bơm thêm vốn từ ví vcb, hay là lãi giá thị trường? Ví ghi mark-to-market nên không tách được từ dữ liệu.

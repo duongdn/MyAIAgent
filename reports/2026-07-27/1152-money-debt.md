@@ -47,6 +47,6 @@ No new charges in 16 days (since 07-11). No card payment recorded in the transac
 
 ## Alerts
 - 🟡 **Spend spike**: July charges 109,000,000 = 2.49× the Jan–Jun monthly average. Composition is two known one-offs (Học phí 61M, Biếu tặng "sn Thuỷ" 43M) plus Thể thao 5M — lumpy, not a drift in recurring spend. No action beyond settling.
-- 🟡 **Unpaid balance**: 89,000,000 outstanding, unchanged 16 days. Card charges since 07-01 total 109M while balance shows 89M, meaning a partial settlement happened outside the transaction feed (MISA records card payments as wallet transfers, uncategorized). Confirm the statement due date and settle in full — cash coverage is ample (283.0M liquid, plus 600.06M idle in VCBS).
+- 🟡 **Unpaid balance**: 89,000,000 outstanding, unchanged 16 days. Card charges since 07-01 total 109M while balance shows 89M, meaning a partial settlement happened outside the transaction feed (MISA records card payments as wallet transfers, uncategorized). Confirm the statement due date and settle in full — cash coverage is ample (283.0M liquid, 3.18× the balance, without touching savings or investments).
 - ✅ **Leverage**: 1.17% debt-to-net-worth — negligible, no structural risk.
 - ✅ **No interest exposure**: no term loans, no revolving interest recorded.
