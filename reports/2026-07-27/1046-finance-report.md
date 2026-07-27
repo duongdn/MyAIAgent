@@ -215,33 +215,12 @@ SHB 0.9 · TPB/OCB/BAB 1.0 · NAB/VIB/MSB 1.1 · ABB 1.2 · SHS/VPB/ACB 1.3 · M
 ---
 
 ## [BẢNG 2 — P/E]
+Trọng số cũ (<1/<1.5/<2/<3/<5/<10) sai vì P/E thực tế phân bố rất khác P/B — 4/6 bậc rỗng, không phản ánh đúng thị trường. **Trọng số mới** dựa trên phân phối thực tế của 100 mã (trung vị 14, p25=9.1, p75=22.1, đuôi dài tới 484): **< 10, 10-15, 15-20, 20-30, 30-50, ≥50** — chia đều hơn nhiều (34/24/14/10/6/12 mã).
 
-#### P/E < 1
-Không có mã nào.
-**Nhận định:** P/E<1 nghĩa là lợi nhuận/năm > giá cổ phiếu — gần như không tồn tại ở doanh nghiệp hoạt động bình thường, chỉ gặp ở tình huống cực đoan (một lần, sắp hủy niêm yết). Không có trong rổ này.
-
-#### P/E < 1.5 (loại các mã đã có ở < 1)
-Không có mã nào.
-**Nhận định:** vẫn quá thấp để tồn tại thực tế ở rổ Top 100.
-
-#### P/E < 2 (loại các mã đã có ở < 1.5)
-Không có mã nào.
-**Nhận định:** tương tự — chưa có mã nào chạm mức này.
-
-#### P/E < 3 (loại các mã đã có ở < 2)
-Không có mã nào.
-**Nhận định:** 4 bậc đầu (< 1 → < 3) đều rỗng — rổ Top 100 toàn doanh nghiệp lớn/thanh khoản tốt, không có kiểu "deep value" cực đoan này. Loại định giá đó (nếu có) chỉ xuất hiện ở cổ phiếu nhỏ/penny ngoài rổ.
-
-#### P/E < 5 (loại các mã đã có ở < 3)
+#### P/E < 10
 | Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
 |----|-------|-----|-----|-----|-----|------------------|
-| VCG | Xây dựng công nghiệp | 41.9 | 14.1 | 1.1 | 3.1 | ROE/ROA rất cao đi cùng P/E thấp nhất toàn Top 100 — combo hiếm, khả năng bị định giá thấp thật sự. |
-
-**Nhận định:** Chỉ đúng 1 mã lọt bậc này. Hồ sơ tài chính (ROE/ROA đều cao) ủng hộ luận điểm "rẻ thật" — đáng nghiên cứu thêm nhất trong toàn bộ phần P/E.
-
-#### P/E < 10 (loại các mã đã có ở < 5)
-| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
-|----|-------|-----|-----|-----|-----|------------------|
+| VCG | Xây dựng công nghiệp | 41.9 | 14.1 | 1.1 | 3.1 | ROE/ROA rất cao đi cùng P/E thấp nhất toàn Top 100 — combo hiếm, khả năng bị định giá thấp thật sự, đáng chú ý nhất. |
 | SHB | Ngân hàng | 18.3 | 1.4 | 0.9 | 5.1 | ROE cao + P/B<1 (đã note ở PB Low) — tiềm năng. |
 | VIX | Chứng khoán | 27.2 | 20.6 | 1.2 | 5.7 | ROE/ROA rất cao, nhưng ngành chứng khoán biến động mạnh theo thị trường chung. |
 | PGV | Dịch vụ tiện ích | 26.5 | 8.0 | 1.4 | 5.9 | ROE cao, ngành tiện ích dòng tiền ổn định — tiềm năng. |
@@ -276,4 +255,100 @@ Không có mã nào.
 | PVS | Xây dựng công nghiệp | 13.0 | 5.0 | 1.2 | 9.8 | ROE/ROA thấp nhất bảng — kém hấp dẫn nhất trong danh sách này. |
 | VHM | Bất động sản | 27.4 | 8.9 | 2.4 | 9.9 | ROE cao nhưng P/B 2.4, ngành BĐS nhà ở đang khó khăn chung — cần thận trọng. |
 
-**Nhận định:** 33 mã ở bậc này, gần 1/3 (12) là ngân hàng — hợp lý vì ngân hàng luôn có P/E thấp hơn mặt bằng do đặc thù đòn bẩy tài chính, không phải dấu hiệu "rẻ". Điểm chung đáng lưu ý: nhiều mã P/E thấp nhưng P/B đã 1.5-3.8x (KSF, HDB, IDC, BMP, SIP, VHM...) — tức không còn rẻ theo góc nhìn giá trị sổ sách, chỉ rẻ theo lợi nhuận hiện tại. HVN cần loại khỏi so sánh vì ROE bị méo bởi vốn chủ sở hữu gần 0.
+**Nhận định:** 34 mã ở bậc này, gần 1/3 (12) là ngân hàng — hợp lý vì ngân hàng luôn có P/E thấp hơn mặt bằng do đặc thù đòn bẩy tài chính, không phải dấu hiệu "rẻ". VCG là mã P/E thấp nhất toàn bộ 100 mã, đáng chú ý nhất. Điểm chung: nhiều mã P/E thấp nhưng P/B đã 1.5-3.8x (KSF, HDB, IDC, BMP, SIP, VHM...) — tức không còn rẻ theo góc nhìn giá trị sổ sách, chỉ rẻ theo lợi nhuận hiện tại. HVN cần loại khỏi so sánh vì ROE bị méo bởi vốn chủ sở hữu gần 0.
+
+#### P/E 10-15 (loại các mã đã có ở < 10)
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| NVL | Bất động sản | 7.2 | 1.3 | 0.6 | 10.5 | ROE/ROA thấp — khả năng value trap dù P/B<1 (đã note ở Piece 2). |
+| BAB | Ngân hàng | 9.3 | 0.7 | 1.0 | 11.1 | ROE/ROA thấp nhất nhóm ngân hàng — cảnh báo. |
+| REE | Dịch vụ tiện ích | 13.0 | 6.8 | 1.4 | 11.2 | Số liệu trung bình, ngành tiện ích ổn định. |
+| KSV | Công nghiệp | 53.1 | 24.0 | 5.1 | 12.0 | ROE/ROA cực cao nhưng P/B đã 5.1 — không rẻ, ngành khai khoáng biến động giá kim loại. |
+| DPM | Công nghiệp | 11.1 | 7.1 | 1.3 | 12.0 | ROE/ROA trung bình, ngành phân bón nhạy giá đầu vào. |
+| ACV | Sản xuất công nghiệp | 12.8 | 13.6 | 2.1 | 12.5 | ROA cao — độc quyền hạ tầng sân bay, chất lượng tốt. |
+| VNM | Hàng tiêu dùng | 27.7 | 16.7 | 3.5 | 12.6 | ROE/ROA rất tốt, ngành phòng thủ — chất lượng cao, không rẻ. |
+| SAB | Hàng tiêu dùng | 20.8 | 15.4 | 2.7 | 12.6 | ROE/ROA tốt, phòng thủ — ổn định nhưng không rẻ. |
+| VND | Chứng khoán | 10.5 | 4.5 | 1.3 | 12.7 | Trung bình cho ngành chứng khoán. |
+| FPT | Dịch vụ Công nghệ | 27.3 | 13.6 | 3.2 | 12.8 | ROE/ROA rất tốt — đang bị bán tháo mạnh (xem Piece 1), nhưng P/B vẫn không rẻ. |
+| SHS | Ngân hàng | 10.8 | 7.0 | 1.3 | 12.8 | ROA 7% bất thường so ngân hàng khác — nên verify lại phân loại ngành trên sheet. |
+| PVI | Bảo hiểm | 15.6 | 4.0 | 2.0 | 13.0 | ROE khá, ROA thấp là đặc thù ngành bảo hiểm. |
+| DHG | Dược phẩm | 21.0 | 16.8 | 2.8 | 13.3 | ROE/ROA rất tốt, phòng thủ — chất lượng cao không rẻ. |
+| SSI | Chứng khoán | 13.5 | 5.1 | 1.7 | 13.4 | Khá cho ngành chứng khoán. |
+| PHP | Công nghiệp | 4.4 | 3.1 | 4.6 | 13.5 | ROE/ROA thấp — không hấp dẫn dù P/E vừa phải. |
+| LPB | Ngân hàng | 23.4 | 2.1 | 3.1 | 13.7 | ROE/ROA tốt nhất nhóm ngân hàng nhưng P/B đã 3.1 — không rẻ. |
+| MWG | Bán Lẻ | 25.4 | 10.5 | 3.2 | 14.0 | ROE/ROA tốt — không rẻ theo P/B. |
+| MBS | Chứng khoán | 14.8 | 4.4 | 2.1 | 14.1 | Khá cho ngành chứng khoán. |
+| POW | Dịch vụ tiện ích | 8.7 | 3.5 | 1.2 | 14.1 | ROE/ROA thấp cho ngành tiện ích. |
+| VCB | Ngân hàng | 16.4 | 1.5 | 2.2 | 14.2 | ROE khá, big-cap quốc doanh — chất lượng cao không rẻ. |
+| VPX | Chứng khoán | 14.0 | 7.2 | 1.5 | 14.3 | Khá cho ngành chứng khoán. |
+| BVH | Bảo hiểm | 12.8 | 1.1 | 1.8 | 14.3 | ROE trung bình, ROA thấp là đặc thù ngành bảo hiểm. |
+| VGC | Vật liệu xây dựng | 14.8 | 5.1 | 2.2 | 14.7 | Khá — trung bình. |
+| PVD | Dầu khí | 7.1 | 4.5 | 1.0 | 14.8 | ROE thấp, ngành dầu khí phụ thuộc giá dầu. |
+
+**Nhận định:** 24 mã, ngành đa dạng (ngân hàng, chứng khoán, bảo hiểm, tiêu dùng phòng thủ). Đáng chú ý: **ACV** (độc quyền hạ tầng, ROA cao ổn định), **FPT** (đang bị bán tháo — xem Piece 1, có thể là điểm vào nếu tin vào phục hồi). Cảnh báo: **SHS** khả năng gắn sai ngành trên sheet nguồn.
+
+#### P/E 15-20 (loại các mã đã có ở < 15)
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| FOX | Dịch vụ Viễn thông | 32.4 | 13.3 | 4.6 | 15.2 | ROE/ROA rất tốt — đây là FPT Telecom, liên quan luận điểm deconsolidation của FPT. |
+| BCM | Bất động sản KCN | 16.3 | 5.6 | 2.4 | 15.3 | Khá — trung bình. |
+| GAS | Dầu khí | 17.6 | 13.3 | 2.6 | 15.4 | ROE/ROA tốt nhưng phụ thuộc giá dầu khí — chu kỳ. |
+| GEE | Dịch vụ tiện ích | 46.3 | 20.9 | 6.9 | 15.9 | ROE/ROA rất cao nhưng P/B đã 6.9 — không rẻ. |
+| KBC | Bất động sản KCN | 7.2 | 2.5 | 1.1 | 16.2 | ROE/ROA thấp — không phải hàng rẻ dù P/B thấp. |
+| TAL | Bất động sản | 16.5 | 6.0 | 2.3 | 16.3 | Khá — trung bình. |
+| VCI | Chứng khoán | 9.3 | 4.6 | 1.2 | 16.6 | Thấp cho ngành chứng khoán. |
+| PLX | Dầu khí | 10.0 | 2.8 | 1.8 | 17.3 | Trung bình, phụ thuộc giá dầu. |
+| SSB | Ngân hàng | 7.6 | 0.8 | 1.4 | 18.5 | ROE/ROA thấp nhất nhóm ngân hàng — thận trọng. |
+| NLG | Bất động sản | 5.5 | 2.3 | 1.0 | 18.7 | ROE/ROA thấp — BĐS khó khăn, khả năng value trap. |
+| GVR | Bất động sản KCN | 11.5 | 7.7 | 2.1 | 19.0 | Trung bình. |
+| HCM | Chứng khoán | 10.1 | 3.5 | 2.1 | 19.3 | Trung bình ngành chứng khoán. |
+| GMD | Vận tải | 12.8 | 8.8 | 2.4 | 19.4 | Khá — trung bình. |
+| VCK | Chứng khoán | 16.2 | 8.3 | 2.7 | 19.6 | Khá cho ngành chứng khoán. |
+
+**Nhận định:** 14 mã, không có case nào nổi bật rõ rệt — phần lớn "trung bình", ngoại trừ FOX (liên quan FPT/FOX deconsolidation, xem Piece 1) và GEE (ROE/ROA rất cao nhưng đã hết rẻ theo P/B).
+
+#### P/E 20-30 (loại các mã đã có ở < 20)
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| KDH | Bất động sản | 6.2 | 3.2 | 1.2 | 20.4 | ROE/ROA thấp — không phải hàng rẻ dù P/E/P/B không quá cao. |
+| TCX | Chứng khoán | 16.0 | 8.5 | 2.7 | 21.5 | Khá cho ngành chứng khoán. |
+| MSN | Hàng tiêu dùng | 14.7 | 3.6 | 3.0 | 21.6 | ROE khá, ROA thấp — tập đoàn đa ngành, cơ cấu phức tạp. |
+| KDC | Hàng tiêu dùng | 9.7 | 4.8 | 2.1 | 22.1 | ROE/ROA thấp — không hấp dẫn. |
+| FRT | Bán lẻ | 28.0 | 4.3 | 4.7 | 22.7 | ROE cao nhưng ROA thấp (đòn bẩy cao) — thận trọng. |
+| PDR | Bất động sản | 5.1 | 2.4 | 1.1 | 23.8 | ROE/ROA thấp — cảnh báo, không phải hàng rẻ. |
+| GEX | Sản xuất công nghiệp | 9.2 | 2.2 | 2.0 | 24.1 | ROE/ROA thấp — không hấp dẫn. |
+| SBT | Hàng tiêu dùng | 7.3 | 2.2 | 1.7 | 24.5 | ROE/ROA thấp — không hấp dẫn. |
+| FTS | Chứng khoán | 9.2 | 3.4 | 2.3 | 25.4 | Thấp cho ngành chứng khoán. |
+| MCH | Hàng tiêu dùng | 41.9 | 21.7 | 10.5 | 26.0 | ROE/ROA tốt nhưng định giá đã rất cao (P/B>10). |
+
+**Nhận định:** 10 mã, đa số ROE/ROA tầm trung-thấp — không có "hàng rẻ" thật sự ở bậc này, chỉ MSN/MCH có nền tảng tốt nhưng đã không còn rẻ theo cả 2 chỉ số.
+
+#### P/E 30-50 (loại các mã đã có ở < 30)
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| SJS | Bất động sản | 14.0 | 5.9 | 3.9 | 30.6 | ROE khá, P/E cao — không rẻ. |
+| VTP | Vận tải | 19.4 | 4.8 | 6.0 | 31.7 | ROE khá, P/E cao — không rẻ. |
+| HUT | Vật liệu xây dựng | 4.5 | 1.1 | 1.5 | 37.1 | ROE/ROA thấp, P/E cao — value trap. |
+| STB | Ngân hàng | 5.5 | 0.4 | 2.2 | 40.6 | ROE/ROA rất thấp — kém hấp dẫn. |
+| VJC | Hàng không | 11.4 | 2.1 | 4.2 | 42.7 | ROE/ROA thấp — không hấp dẫn theo góc nhìn này. |
+| EIB | Ngân hàng | 2.9 | 0.3 | 1.4 | 49.8 | ROE/ROA rất thấp — kém hấp dẫn nhất nhóm ngân hàng. |
+
+**Nhận định:** 6 mã, không có case đáng chú ý — toàn ROE/ROA tầm trung-thấp đi cùng P/E cao, không phải "hàng rẻ" theo bất kỳ góc nào.
+
+#### P/E ≥ 50 (còn lại, không tách bậc thêm)
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| DXG | Bất động sản | 1.7 | 0.6 | 1.1 | 56.5 | ROE/ROA rất thấp, P/E cực cao — value trap rõ. |
+| VPL | Hàng tiêu dùng | 6.9 | 3.0 | 3.9 | 58.4 | ROE/ROA thấp, P/E rất cao — không hấp dẫn. |
+| TCH | Bất động sản | 1.8 | 1.1 | 1.1 | 62.6 | ROE/ROA rất thấp — value trap rõ. |
+| BAF | Hàng tiêu dùng | 4.3 | 1.5 | 2.6 | 69.6 | ROE/ROA rất thấp — tránh. |
+| VPI | Bảo hiểm | 5.5 | 2.0 | 3.7 | 70.1 | ROE/ROA thấp, P/E cực cao — tránh. |
+| NVB | Ngân hàng | 0.7 | 0.0 | 2.0 | 71.9 | ROE/ROA gần 0 — tránh. |
+| CII | Công nghiệp | 1.8 | 0.3 | 1.3 | 79.7 | ROE/ROA cực thấp — tránh. |
+| IDP | Hàng tiêu dùng | 5.2 | 2.4 | 5.4 | 101.8 | ROE/ROA thấp, P/E rất cao — không hấp dẫn. |
+| VIC | Bất động sản | 9.6 | 1.4 | 11.2 | 120.0 | ROE/ROA thấp — định giá phản ánh kỳ vọng tương lai, không phải hiệu quả hiện tại. |
+| CRV | Bất động sản | 1.0 | 0.7 | 2.4 | 220.0 | ROE/ROA gần 0 — tránh. |
+| VSF | Hàng tiêu dùng | 1.2 | 0.4 | 5.2 | 428.0 | ROE/ROA gần 0 — tránh hoàn toàn. |
+| THD | Công nghiệp | 2.4 | 2.3 | 11.5 | 484.8 | ROE/ROA gần 0 — cực kỳ đắt so với hiệu quả hiện tại. |
+
+**Nhận định:** 12 mã — gần như toàn bộ ROE/ROA cực thấp (đa số <10%, nhiều mã <2%) đi cùng P/E cực cao. Đây chính là nhóm "đắt vì lý do chính đáng" (lợi nhuận thấp/không ổn định khiến P/E bị đẩy lên cao dù giá không cao). Ngoại lệ duy nhất là VIC — big-cap, định giá theo kỳ vọng dài hạn chứ không phải KQKD hiện tại.
