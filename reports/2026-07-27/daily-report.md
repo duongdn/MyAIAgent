@@ -231,7 +231,7 @@ Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders neede
 - Solid Code Slack (Arthur): ✓ Token + cookie refreshed from Chrome Profile 15
 - OhCleo Slack: ✓ d cookie refreshed from Chrome Profile 25 (token from config works with raw d cookie)
 - davidztv GitHub: ✓ Token found in snap gh config (`~/snap/gh/640/.config/gh/hosts.yml`) — `gh auth token -u davidztv` uses wrong config dir
-- AirAgri Discord (nusvinn): ✗ Token genuinely expired, no live Discord window open to extract from. Needs human login.
+- AirAgri Discord (nusvinn): ✓ Token provided by user, 3-step verification passed, saved to config.
 
 ### Re-check results
 
@@ -241,28 +241,27 @@ Window is Sat-Sun (weekend) — 0h for every dev is expected. No reminders neede
 | Philip | ✓ completed | MS Teams check ran successfully — Philip Briggs chat clicked, no customer complaints or unresolved requests. |
 | Ohcleo | ✓ completed | Auth fixed, Celine DM checked: Tony last reported Jul 21, Celine replied same day re misunderstanding. No new urgent messages. events-code channel not found (likely archived). No alerts — 6 days quiet is normal given weekend window. |
 | Arthur - Meta-Stamp | ✓ completed | Full 6-source re-check: Solid Code Slack fixed, Workstream fixed, GitHub fixed (davidztv in snap gh config). MPDM group quiet since Jul 21 (Art confirmed 60/40 split). ms-v3: Art pinged team Jul 26 about Claude Opus 5. DM Art clean. Matrix Room 1 active today (TienND + NamTV game codes). WS Crystal lang (W16): PhucVT 14h, TienND 31h, DuongDN 0h. GitHub: 3 commits Jul 24, 0 open PRs. No new unresolved issues. |
-| James Diamond | ○ still incomplete | AirAgri nusvinn token genuinely expired. Discord not open on any display. Needs human to log into Discord once (nusvinn account in Chrome Profile 19). |
+| James Diamond | ✓ completed (2nd re-check) | User provided new nusvinn Discord token. 3-step curl verified: /users/@me 200, /guilds 200 (AirAgri + HOMIEAPP), channels accessible. Discord monitor re-run with original window: 14 messages across #airagri_webapp + #airagri-flutter. Vinn's daily report not posted (weekend, expected). Channel active — James Diamond (Jeff) discussing alarms, maps, health/safety v2 design. No alerts. |
 
 ### Data gaps filled
 
 | Gap | Fix |
 |-----|-----|
-| Workstream "SSO blocked" (Alert #6) | Logged in — token saved to config. All future WS queries will work. |
+| Workstream "SSO blocked" (Alert #6) | Logged in — token saved to config. |
 | OhCleo Slack "invalid_auth" (Alert #3) | Token valid with fresh d cookie. Celine DM checked — clean. |
 | Solid Code Slack "absent from config" (Alert #4) | Token + cookie saved to config. Full scan done. |
-| davidztv GitHub "not configured" (Alert #4) | Token present in snap gh hosts.yml. Christebob/Meta_Stamp_V3 accessible. |
+| davidztv GitHub "not configured" (Alert #4) | Token in snap gh hosts.yml. Christebob/Meta_Stamp_V3 accessible. |
+| AirAgri Discord (Alert #1) | New token from user. Verified + saved. Monitor re-run clean. |
 | Fountain matrix plan (Part 1) | Plan posted today 08:56: **ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h** (same as last week). @namtv posted 2026-07-27 08:56. |
 
 ### Trello final state
 **Check Mail:** 6/6 complete. Card done.
-**Check Progress:** 21/22 complete.
-- ⚠️ Only James Diamond (Vinn task) remains — Discord nusvinn needs human login.
+**Check Progress:** 22/22 complete. Card marked done.
 
 ---
 
 ## Unresolved questions
 
-1. AirAgri Discord (nusvinn token) needs a human to log in once from a machine with Chrome Profile 19. No workaround available without a live desktop session.
-2. Marcel's Equanimity contract status (limit cut to 5h/wk, paused again) — captured as alert, needs team decision. Not blocking Trello.
-3. OhCleo d cookie extracted from Profile 25 works now but xoxc token in config may also need refresh soon — monitor for next run.
-4. davidztv GitHub token is in snap gh config (`~/snap/gh/640/.config/gh/hosts.yml`) — scripts that hardcode the standard `~/.config/gh` path will miss it.
+1. Marcel's Equanimity contract status (limit cut to 5h/wk, paused again) — captured as alert, needs team decision. Not blocking Trello.
+2. OhCleo d cookie extracted from Profile 25 works now but xoxc token in config may also need refresh soon — monitor for next run.
+3. davidztv GitHub token is in snap gh config (`~/snap/gh/640/.config/gh/hosts.yml`) — scripts that hardcode the standard `~/.config/gh` path will miss it.
