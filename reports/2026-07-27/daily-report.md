@@ -220,9 +220,20 @@ Trello: Philip ✓ complete (recheck).
 
 ---
 
-## Neural Contract (Upwork) — 07:00 (+07:00)
+## Neural Contract (Upwork) — rechecked 09:15 (+07:00)
 
-Cookie extraction returned 0 cookies (Chrome keyring not accessible this host). Per standing rule, Upwork session issues do not block Trello — Neural silence is not an alert.
+Cookie extraction via `get-carrick-upwork-cookies.py` succeeded (55 cookies from Profile 1). 20 recent messages (newest first):
+
+| Date | Sender | Content |
+|------|--------|---------|
+| Jul 23 | dev (676959530284130304) | "I've already pushed master. Please check." |
+| Jul 23 | client (810633623375904768) | "thanks. that works. can you pls commit to bitbucket ASAP." |
+| Jul 13 | dev | "Hi @Neural Contract, Updated. Please check!" |
+| Jul 13 | client | UX change requests — 5+ file upload format message |
+| Jul 10 | client | File reorder + multi-file upload UX spec |
+| Jul 10 | dev | "I've been checking/testing bug fixes..." |
+
+**Analysis:** Dev (TuanNT/Carrick) pushed master Jul 23, client confirmed "that works." Asked to commit to Bitbucket ASAP — already pushed to master, Bitbucket commit may still be pending. No unanswered urgent client messages. Last exchange (Jul 23) was positive.
 
 Trello: Neural Contract ✓ complete.
 
