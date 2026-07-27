@@ -35,3 +35,51 @@ node scripts/finance-report-detail-apply-row-groups.js <SPREADSHEET_ID> "Định
 **Precondition:** only valid when the target ticker's raw sheet was built with `finance-report-detail-build-raw-sheet.js` (same row-builder), which guarantees the row-index-to-line-item mapping matches VEA's (verified true for SAB — every checked line item landed on the identical row number as VEA, since VAS balance-sheet/income-statement/cash-flow templates are standardized across all Vietnamese listed companies). If a future ticker's raw sheet ever has a different row count (e.g. missing a line item cafef doesn't report for that company), the row-index lists above will misalign — spot-check a few bold/header rows after running before trusting it.
 
 **Not yet replicated from FPT/VEA** (lower priority, ask user before investing time): clickable hyperlinks via `textFormatRuns`, the dynamic row-height formula from [[project_finance_report_detail_skill]]'s Bước 5 (only matters for the narrative sheets — Định tính/Báo cáo 2 — which use long wrapped text, not the numeric raw sheet).
+
+## Important correction (2026-07-27, later same day): the true reference is FPT, not VEA
+
+User pointed out VEA's own sheets are ALSO under-formatted in places, and gave the real gold-standard reference explicitly: **FPT spreadsheet `1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuibqMw`**, e.g. `Định giá - FPT` (gid `862074532`). When the two disagree, match FPT, not VEA — VEA itself needs backfilling to match FPT in places (already done for `Định giá - VEA`, see below).
+
+### Định giá sheet spec (from `Định giá - FPT`, applied via `scripts/finance-report-detail-apply-dinh-gia-style.js` to both `Định giá - VEA` and `Định giá - SAB`)
+- Section-header rows (sheet title row 1, "Chỉ tiêu"+years row 3, and every `"0."/"I."/"II."...` category row) — background `rgb(0.847, 0.898, 0.976)` (light blue-gray), bold, spans all columns. Row 2 (unit/source note) — font size 9, no background.
+- `frozenRowCount: 3, frozenColumnCount: 1`.
+- Column widths: A ≈ 420-460px, rest ≈ 90-100px.
+- Number formats are explicit per row, NOT left on "Automatic": `#,##0` for tỷ-đồng/đồng absolute figures, `#,##0.00` for ratios (P/E, P/B, P/S, EV/EBIT, EV/EBITDA, D/E...), `0.0%` for percentage rows (dividend yield). No borders anywhere on this sheet type.
+- FPT's `Định giá` also includes more valuation metrics than the VEA/SAB builds had: **P/S, EV (Enterprise Value), EV/EBIT, EV/EBITDA** — not yet added to VEA/SAB's Định giá sheets, only the formatting was backfilled. Consider adding these metrics too if the user asks for full parity.
+
+### 🔴 Each sheet TYPE has its own distinct header color — do not reuse one color everywhere
+Spot-checked across FPT's sheets, all different:
+- `Định giá`: light blue-gray `rgb(0.847, 0.898, 0.976)` for section headers.
+- `Benjamin Graham`: section headers `rgb(0.8, 0.878, 0.969)` (a slightly different, slightly more saturated blue) — but the column-header row right below it (`STT | Tiêu chí | ...`) is light **gray** `rgb(0.929, 0.929, 0.929)`, not blue. `frozenRowCount: 5`.
+- `Định lượng`: **structurally different from the VEA-derived assumption used to build SAB's** — FPT's `Định lượng - FPT` is its own dark-blue-titled sheet (`rgb(0.0039, 0.3412, 0.6078)`, same dark blue as the raw sheet's header) with a light-cyan `rgb(0.8, 1, 1)` metadata sub-header block (Giai đoạn/Hợp nhất/Kiểm toán/Công ty kiểm toán/Ý kiến kiểm toán), NOT a plain copy-of-raw-sheet-plus-ratio-block like `Định lượng - VEA` (which is what `finance-report-detail-build-dinh-luong.js` was modeled on). This mismatch was not resolved as of 2026-07-27 — if the user asks to fix `Định lượng - SAB` further, model it on `Định lượng - FPT` instead, not `Định lượng - VEA`.
+- Raw ticker sheet (`FPT`/`VEA`/`SAB`): dark blue `rgb(0.0039, 0.3412, 0.6078)` (see the main spec above in this file) — matches `Định lượng - FPT`'s title row exactly, but not `Định giá`'s or `Benjamin Graham`'s lighter blues.
+
+**How to apply going forward:** before styling any sheet type for a new ticker, pull the ACTUAL FPT sheet of that same type via `spreadsheets.get({includeGridData:true})` first — don't assume VEA's version is correctly styled, and don't reuse another sheet-type's color.
+
+### Benjamin Graham sheet spec (from `Benjamin Graham - FPT`)
+- `frozenRowCount: 5`. Column widths: A=491 (criteria label), B=260, C=200, D=300 (data), E=110 (verdict) — deliberately UNEVEN, not uniform like the raw sheet.
+- All cells: `wrapStrategy: WRAP`, `verticalAlignment: TOP` (not OVERFLOW_CELL/BOTTOM like the raw sheet).
+- Row 1 (title): bold, no bg. Row 2 (source note): not bold, no bg.
+- Section-header rows ("I. 10 TIÊU CHÍ...", "II. XẾP HẠNG..."): bg `rgb(0.8, 0.878, 0.969)`, bold, spans all columns — same blue as `Định giá`'s section headers (close enough to reuse).
+- The column-header row right under a section header ("STT | Tiêu chí | Ngưỡng yêu cầu | Số liệu | Kết quả"): bg light gray `rgb(0.929, 0.929, 0.929)`, bold — **do not confuse with the section-header blue**, it's a second, distinct header row type.
+- Data rows: no bg, not bold. "KẾT LUẬN I" row: bold, no bg (not blue — plain bold only).
+
+### 🔴 `Báo cáo 2` and `Định tính` are NOT just differently-colored — FPT's versions use a fundamentally different CONTENT STRUCTURE than what was built for VEA/SAB, not merely different formatting. Rebuilding these to truly match FPT is a content-restructuring task, not a formatting pass. Flagged to user 2026-07-27, not yet done — check with user on priority before attempting.
+
+**`Báo cáo 2 - FPT`** actual structure (very different from the `I. TỔNG QUAN / II. KẾT QUẢ TÀI CHÍNH / ...` plain-Roman-numeral layout used for VEA/SAB):
+- `frozenRowCount: 2`. Only 5 columns, uneven widths: A=340, B=160, C=233, D=160, E=380.
+- Row 1: bold, fontSize 13 (title). Row 2: fontSize 9 (subtitle).
+- Section headers ("BƯỚC 1 — ĐỊNH TÍNH: HIỂU DOANH NGHIỆP...", presumably "BƯỚC 2 — ĐỊNH LƯỢNG...", etc. — a "BƯỚC N" step-based framing, not the "I./II./III." the VEA/SAB build uses): bg `rgb(0.8, 0.878, 0.976)`, bold, fontSize 11.
+- Sub-headers ("1. Mô hình kinh doanh"): bold, fontSize default (10), no bg.
+- **Body content uses a 3-level bullet hierarchy with font size shrinking per level**: `•` top bullet = fontSize 10, `wrapStrategy OVERFLOW_CELL`, `valign MIDDLE`; `    ◦` (4-space indent, hollow circle) = fontSize 10; `        ▪` (8-space indent, small square) = fontSize 9. This is a materially richer outline structure than the flat paragraph-per-cell approach used for VEA/SAB's Báo cáo 2.
+
+**`Định tính - FPT`** actual structure (very different from VEA/SAB's plain-white Định tính):
+- `frozenRowCount: 4, frozenColumnCount: 2`. 5 columns, widths A=27 (narrow, just holds the roman-numeral/number), B=195, C=729 (wide — main content), D=335, E=335.
+- Rows 1-3: bright green banner `rgb(0.573, 0.816, 0.314)` (likely a title/branding block, not re-derived in detail here).
+- The roman-numeral section column (col A, values "I"/"II"/etc.): dark green `rgb(0.29, 0.486, 0.349)` background, bold, fontSize 10, `wrap WRAP`, `valign MIDDLE`.
+- Data rows: **alternating row-stripe** between white `rgb(1,1,1)` and light gray `rgb(0.949,0.949,0.949)` — a zebra-stripe pattern, not the plain-white VEA/SAB used. Numbering column (col B, "1"/"2"/"3"/"→") also bold, fontSize 10.
+- Not yet fully mapped: content of columns C/D/E for the data rows (only column A/B inspected so far).
+
+**Định lượng structural mismatch** (already noted above in this file): FPT's `Định lượng - FPT` is a dark-blue-titled sheet with a light-cyan metadata sub-header block, structurally different from the "copy raw + append ratio block" approach used for `Định lượng - VEA`/`Định lượng - SAB`.
+
+**Bottom line for future builds:** the VEA spreadsheet itself was apparently never fully brought in line with FPT's template for `Định tính`, `Định lượng`, and `Báo cáo 2` — treat VEA as unreliable for those 3 sheet types specifically (raw sheet and `Định giá` ARE reliable references, confirmed matching FPT). Always diff against FPT directly for those 3.
