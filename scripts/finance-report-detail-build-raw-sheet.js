@@ -28,13 +28,27 @@ function fmt(rawVnd) {
   return v < 0 ? `(${abs})` : abs;
 }
 
+// EPS rows ("Lãi cơ bản/suy giảm trên cổ phiếu") are already đồng/CP — must NOT
+// go through the /1e9 tỷ-đồng conversion used for balance-sheet-scale rows.
+function fmtPerShare(rawVnd) {
+  if (rawVnd === 0) return " - ";
+  const abs = Math.abs(rawVnd).toLocaleString("en-US", { maximumFractionDigits: 0 });
+  return rawVnd < 0 ? `(${abs})` : abs;
+}
+const PER_SHARE_NAME_RE = /trên cổ phiếu/i;
+
 function buildSectionRows(template, yearsData, years) {
   return template.map((row) => {
     const line = [row.name];
+    const isPerShare = PER_SHARE_NAME_RE.test(row.name);
     for (const y of years) {
       const yearEntry = yearsData.find((d) => d.year === y);
       const cell = yearEntry ? yearEntry.data.find((d) => d.code === row.code) : null;
-      line.push(cell ? fmt(cell.value) : " - ");
+      if (!cell) {
+        line.push(" - ");
+      } else {
+        line.push(isPerShare ? fmtPerShare(cell.value) : fmt(cell.value));
+      }
     }
     return line;
   });
