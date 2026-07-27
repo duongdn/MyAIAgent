@@ -60,7 +60,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete. Card auto-marked do
 | SoCal Auto Wraps | 0 | Clean (not monitored via Trello per 2026-05-11 drop). |
 | Aigile Dev | 2 | 2× automated "make" webhook posts (newsletter/TikTok content notices) in #braiking-news — no human customer activity. |
 
-Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebecca ✓ complete. Marcel ⚠️ skipped (alert #2 — needs reply, not auth). OhCleo ⚠️ skipped (cron auth fail, rechecked).
+Trello: Maddy, John Yi, Rory, Aysar, Franc, Elliott, MPFC, Raymond, Colin, Rebecca ✓ complete. Marcel ⚠️ skipped (alert #1 — needs reply).
 
 ---
 
@@ -237,8 +237,7 @@ Friday 07-24: All devs have hours (PhucVT 8h, KhanhHH 8h, LeNH 8h, TuanNT 8h, Lo
 ## Trello Summary
 
 **Check Mail:** 6/6 complete. Card marked done.
-**Check Progress:** 21/22 complete.
-- ⚠️ Re-opened: James Diamond — Vinn no daily report for Monday 07/27 (0 messages today, Jeff active).
+**Check Progress:** 21/22 complete. James Diamond ⚠️ — Vinn chưa có daily report Mon sáng (còn sớm).
 
 ---
 
