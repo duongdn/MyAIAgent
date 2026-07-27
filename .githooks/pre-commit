@@ -49,4 +49,28 @@ if [ $found -eq 1 ]; then
   echo "  Email: config/.email-accounts.json"
   exit 1
 fi
+
+# === Daily Report Mandatory Section Check ===
+# Block commit if daily-report.md is staged but missing Maddy section
+REPORT_FILE=$(echo "$(git diff --cached --name-only --diff-filter=ACMR)" | grep -E '^reports/[0-9]{4}-[0-9]{2}-[0-9]{2}/daily-report\.md$')
+if [ -n "$REPORT_FILE" ]; then
+  MANDATORY=("## Email" "## Slack" "## Discord" "## Sheets/Workstream" "## Fountain" "## Elena" "## Matrix" "## Maddy" "## Arthur" "## Performance" "## Reminders")
+  miss=0
+  for sec in "${MANDATORY[@]}"; do
+    if ! grep -q "$sec" "$REPORT_FILE"; then
+      if [ $miss -eq 0 ]; then
+        echo "❌ COMMIT BLOCKED: Daily report missing mandatory sections!"
+        echo ""
+      fi
+      echo "  MISSING: $sec section"
+      miss=1
+    fi
+  done
+  if [ $miss -eq 1 ]; then
+    echo ""
+    echo "All 11 mandatory sections must be present. Add missing sections and re-commit."
+    exit 1
+  fi
+fi
+
 exit 0
