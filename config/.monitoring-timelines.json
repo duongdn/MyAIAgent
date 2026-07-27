@@ -116,41 +116,92 @@
     "last_run": "2026-06-06T08:50:00+07:00",
     "output_file": "reports/2026-06-06/0850-update.md",
     "email": {
-      "duongdn": "2026-07-28T06:42:40+07:00",
-      "carrick": "2026-07-28T06:42:40+07:00",
-      "nick": "2026-07-28T06:42:40+07:00",
-      "rick": "2026-07-28T06:42:40+07:00",
-      "kai": "2026-07-28T06:42:40+07:00",
-      "ken": "2026-07-28T06:42:40+07:00",
-      "vuongtrancr_gmail": "2026-07-28T06:42:40+07:00",
-      "dnduongus_gmail": "2026-07-28T06:42:40+07:00",
-      "freelancer_mpfc": "2026-07-28T06:42:40+07:00"
+      "duongdn": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "carrick": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "nick": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "rick": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "kai": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "ken": {
+        "last_run": "2026-07-28T06:42:40+07:00",
+        "status": "ok"
+      },
+      "vuongtrancr_gmail": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "dnduongus_gmail": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "freelancer_mpfc": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      }
     },
     "slack": {
-      "baamboozle": "2026-07-28T06:42:40+07:00",
-      "rdc": "2026-07-28T06:42:40+07:00",
-      "swift": "2026-07-28T06:42:40+07:00",
-      "xtreme": "2026-07-28T06:42:40+07:00",
-      "samguard": "2026-07-28T06:42:40+07:00",
-      "ggs": "2026-07-28T06:42:40+07:00",
-      "amazingmeds": "2026-07-28T06:42:40+07:00",
-      "generator": "2026-07-28T06:42:40+07:00",
-      "legalatoms": "2026-07-28T06:42:40+07:00",
-      "mpfc": "2026-07-28T06:42:40+07:00",
-      "williambills": "2026-07-28T06:42:40+07:00",
-      "equanimity": "2026-07-28T06:42:40+07:00",
+      "baamboozle": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "rdc": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "swift": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "xtreme": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "samguard": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "ggs": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "amazingmeds": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "generator": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "legalatoms": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "mpfc": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "williambills": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
+      "equanimity": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
       "socal": {
         "last_run": "2026-05-05T15:39:00+07:00"
       },
-      "aigile": "2026-07-28T06:42:40+07:00",
+      "aigile": {
+        "last_run": "2026-07-28T06:42:40+07:00"
+      },
       "ohcleo": {
         "last_run": "2026-07-19T12:05:00+07:00",
         "note": "2026-07-19: zero new messages DM:Celine (last msg is Tony's older 'enjoy your vacation' note, still awaiting her return); #events-code confirmed channel_not_found via conversations.info (not an auth issue \u2014 channel genuinely gone). Sunday, no Tony report expected \u2014 Trello item completed (no alert signal)."
       }
     },
     "discord": {
-      "airagri": "2026-07-28T06:42:40+07:00",
-      "bizurk": "2026-07-28T06:42:40+07:00"
+      "airagri": {
+        "last_run": "2026-07-28T06:42:40+07:00",
+        "note": "2026-07-28: Discord token check returned 401 on /users/@me and /guilds; discord-token-refresh.js's profile-copy also redirected to login. No GUI on this cron server to screenshot-verify per protocol \u2014 inconclusive, not confirmed as real session loss. Vinn/Jeff report unverified this run."
+      },
+      "bizurk": {
+        "last_run": "2026-07-28T06:42:40+07:00",
+        "note": "2026-07-28: token valid, 0 new messages, 0 Andrew Taraba DMs \u2014 normal quiet."
+      }
     },
     "sheets": {
       "longvv": {
@@ -177,11 +228,24 @@
         "last_run": "2026-05-05T15:39:00+07:00"
       }
     },
-    "scrin": "2026-07-28T06:42:40+07:00",
-    "fountain": "2026-07-28T06:42:40+07:00",
-    "elena": "2026-07-28T06:42:40+07:00",
-    "elena_wordpress": "2026-07-28T06:42:40+07:00",
-    "discord_all": "2026-07-28T06:42:40+07:00"
+    "scrin": {
+      "last_run": "2026-07-28T06:42:40+07:00",
+      "note": "2026-07-28 (Tuesday, correct isYesterday=Monday 07-27): 0h, empty body \u2014 no sessions recorded for Nick @ John Yi."
+    },
+    "fountain": {
+      "last_run": "2026-07-28T06:42:40+07:00",
+      "note": "2026-07-28: weekly Matrix plan NOT posted for week of 07-27 as of Tue morning (last known plan is for week of 07-21) \u2014 real gap, not a timing false-alarm. Workstream unreachable so Part 2/3 hours unverified."
+    },
+    "elena": {
+      "last_run": "2026-07-28T06:42:40+07:00"
+    },
+    "elena_wordpress": {
+      "last_run": "2026-07-28T06:42:40+07:00",
+      "note": "2026-07-28: still clean \u2014 0 CSP violations, 0 JS/page errors."
+    },
+    "discord_all": {
+      "last_run": "2026-07-28T06:42:40+07:00"
+    }
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
