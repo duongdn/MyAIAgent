@@ -25,6 +25,7 @@ description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo p
 | `/finance-report` | Full run — Focus + PB Low | 1 file gộp hoặc 2 file riêng |
 | `/finance-report focus` | Tin tức mới nhất cho từng mã trong watchlist | `{HHMM}-finance-focus.md` |
 | `/finance-report pb-low` | List toàn bộ mã P/B < 1 trong Top 100 + nhận định | `{HHMM}-finance-pblow.md` |
+| `/finance-report sector` | Gom mã theo ngành, chọn mã tốt nhất mỗi ngành (điểm ROE/P/B) | `{HHMM}-finance-sector.md` |
 
 ---
 
@@ -92,11 +93,37 @@ Script tự đọc `config/finance-watchlist.json`, build Google News RSS query 
 
 ---
 
+## Piece 3 — Sector Compare (`/finance-report sector`)
+
+Gom toàn bộ mã trong sheet `Top 100` theo cột **Ngành**, so sánh trong từng nhóm, chọn ra mã "tốt nhất" mỗi nhóm.
+
+1. Đọc `top100_spreadsheet_id` / `top100_sheet` từ config, lấy toàn bộ hàng (bỏ hàng header và các hàng ghi chú rác không có P/B/ROE hợp lệ ở cuối sheet — lọc bằng `!isNaN(P/B) && !isNaN(ROE) && có Mã`).
+2. Chuẩn hóa tên ngành (merge biến thể viết hoa/thường khác nhau của cùng 1 ngành, ví dụ "Bán lẻ"/"Bán Lẻ").
+3. Group theo ngành. Nhóm chỉ có 1 mã → không so sánh, note "chỉ 1 mã, không có gì để so sánh trong ngành".
+4. Với nhóm ≥2 mã: tính **điểm = ROE / P/B** cho từng mã (hiệu quả sinh lời trên mỗi đồng giá trả — điểm càng cao càng vừa hiệu quả vừa chưa bị định giá đắt). Mã điểm cao nhất là ứng viên "tốt nhất".
+5. **Trước khi chốt "tốt nhất"**: kiểm tra ROE của ứng viên có bị méo không (đòn bẩy cực cao, vốn chủ sở hữu gần 0/âm, yếu tố một lần — dấu hiệu: ROE vượt trội bất thường so với ROA và so với phần còn lại của nhóm). Nếu có, loại mã đó khỏi vị trí "tốt nhất", note rõ lý do, chọn á quân thay thế.
+6. **Không bịa** lý do chọn — chỉ dùng số liệu ROE/ROA/P/E/P/B đã có trong sheet để so sánh. Đây là 1 tiêu chí đơn giản (ROE/P/B), không phải phân tích sâu — nói rõ trong report đây không thay thế nghiên cứu kỹ hơn.
+7. **Output** (`{HHMM}-finance-sector.md`):
+   ```markdown
+   # Sector Compare — {YYYY-MM-DD} {HH:MM}
+   Nguồn: sheet 'Top 100'. Điểm xếp hạng = ROE / P/B (đơn giản, không thay thế phân tích sâu).
+
+   | Ngành (số mã) | Xếp theo ROE giảm dần | Mã tốt nhất (ROE/P/B) | Vì sao |
+   |---|---|---|---|
+   | ... | Mã1 X · Mã2 Y ... | **Mã** | {lý do, có loại trừ nếu ROE méo} |
+
+   ## Nhận định tổng quan
+   - {mã có điểm ROE/P/B cao nhất toàn báo cáo, case bị loại vì méo số liệu, pattern chung}
+   ```
+
+---
+
 ## Full Run (`/finance-report`)
 
 1. Chạy Piece 1 (Focus).
 2. Chạy Piece 2 (PB Low).
-3. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 2 file riêng — miễn không bỏ sót piece nào.
+3. Chạy Piece 3 (Sector Compare).
+4. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 3 file riêng — miễn không bỏ sót piece nào.
 
 ---
 
@@ -104,5 +131,6 @@ Script tự đọc `config/finance-watchlist.json`, build Google News RSS query 
 
 - **Piece 1 tuân thủ NGUYÊN VĂN quy tắc anti-hallucination của `/me:news-digest`**: không viết tin trước khi có JSON, không tự chế URL, đếm số bài viết ra khớp số bài JSON trả về.
 - **Piece 2 chỉ quét trong phạm vi sheet `Top 100`** (~101 mã vốn hóa lớn theo dõi) — không phải toàn bộ thị trường. Nếu user hỏi "có phải tất cả mã P/B<1 trên sàn không" → trả lời KHÔNG, đây chỉ là danh sách đang theo dõi.
+- **Piece 3 cũng chỉ trong phạm vi `Top 100`**, và điểm ROE/P/B là tiêu chí đơn giản — 1 mã không lọt "tốt nhất nhóm" (VD SAB thua QNS trong Hàng tiêu dùng) không có nghĩa là mã xấu, chỉ là định giá (P/B) hiện đắt hơn so với hiệu quả sinh lời (ROE) tương đương của mã được chọn.
 - **Thêm mã mới vào watchlist**: sửa `config/finance-watchlist.json`. Piece 1 (Focus/tin tức) hoạt động ngay không cần thêm gì. Nếu muốn Piece 1 so sánh với luận điểm đầu tư đã phân tích, mã đó cần có sẵn sheet `Báo cáo 2`-style (xây theo quy trình đã dùng cho FPT/VEA — research agents + Google Sheets API, không thuộc phạm vi skill này).
 - **Không cần quyền ghi Google Sheets** cho skill này — chỉ đọc.
