@@ -76,6 +76,56 @@ Calendar: SS live ~1 week from go-ahead + final logo; ISA +3–4 days after SS s
 
 ---
 
+## 4b. Task breakdown (for internal review / scope cutting)
+
+**E · Bảo mật AW — 4–6h** (không nên cắt)
+| # | Task | h |
+|---|---|---|
+| E1 | Tắt public `/register` (giữ login), khoá route đăng ký | 0.5 |
+| E2 | Xoá 6 account lạ, đổi mật khẩu 3 account thật | 0.5 |
+| E3 | Validate mime+extension cho upload pdf/video, đổi tên file random | 1.5 |
+| E4 | Xoá `pdf/core/.htaccess`, thêm .htaccess chặn PHP trong 3 thư mục upload | 1 |
+| E5 | `APP_ENV=production`, `APP_DEBUG=false`, clear cache | 0.5 |
+| E6 | Quét lại file lạ + smoke test toàn site | 1 *(cắt được)* |
+
+**B · Salvage Solutions — 14–18h**
+| # | Task | h |
+|---|---|---|
+| B1 | Convert artifact HTML → template thật (tách CSS, font, ảnh, tối ưu) | 4 |
+| B2 | Responsive + cross-browser | 2.5 |
+| B3 | Form "Get a recovery estimate" (mail + anti-spam) | 2.5 |
+| B4 | 4 trang con: Our Business / Services / Sectors / Contact | 4 *(cắt: ship single-page trước)* |
+| B5 | Hosting Crazy Domains: cPanel, domain, SSL, mailbox, deploy | 2.5 |
+| B6 | SEO cơ bản (title/meta/OG, sitemap, favicon) + GA | 1.5 *(cắt được)* |
+| B7 | UAT + go-live | 1 |
+
+**C · Insurance Salvage Australia — 10–14h**
+| # | Task | h |
+|---|---|---|
+| C1 | Áp design system của B vào copy ISA (hero, who-we-work-for, 9 nhóm hàng, 5 bước, brand protection, capability) | 5 |
+| C2 | Responsive | 2 |
+| C3 | Form "Send us a file" (+ upload manifest/ảnh nếu Brad muốn) | 2.5 |
+| C4 | Hosting/domain/SSL/mailbox/deploy | 2 |
+| C5 | SEO + UAT | 1.5 *(cắt được)* |
+
+**A · Weekend Specials — 12–16h**
+| # | Task | h |
+|---|---|---|
+| A1 | Migration + model `weekend_specials` | 1 |
+| A2 | Controller CRUD + routes (clone AuctionsController) | 3 |
+| A3 | Admin form create/edit: upload brochure, giá, link TikTok, publish | 3 |
+| A4 | Admin index + sort + xoá | 1.5 *(gộp vào A3 được)* |
+| A5 | Section hiển thị trên /upcoming-auctions | 2 |
+| A6 | Nhúng TikTok (oEmbed + lazy load) | 2 *(cắt: chỉ link ra TikTok)* |
+| A7 | Dồn ảnh sidebar về 1 bên / xuống dưới + responsive | 2 |
+| A8 | Test + deploy | 1.5 |
+
+**D · Cross-link AW ↔ SS ↔ ISA — 1–2h** (footer/nav 3 site, "A division of", logo)
+
+**Đề xuất chia phase:**
+- **Phase 1 (22–28h):** E + B (single-page, bỏ B4/B6) + C → bịt lỗ hổng + 2 site mới live. Đúng thứ tự ưu tiên Brad nêu.
+- **Phase 2 (17–24h):** A + B4 (4 trang con SS) + D.
+
 ## 5. What we still need from Brad
 
 1. Hosting account login for the 2 new domains (which plan/panel), or invite `carrick@` to it.
