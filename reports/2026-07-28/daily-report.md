@@ -17,6 +17,8 @@
 | 5 | Fountain — Kunal | Weekly Matrix plan (normally posted Mon 08:30–09:30 by @trinhmtt) **not yet posted** as of Tue 06:26+07 — over a day late, past the Monday-only grace window. Last known plan is for the week of 2026-07-21. |
 | 6 | Arthur / Crystal lang — TienND | ~20h of this week's capacity is **idle with no task assigned** ("Idle, chưa có plan 😩") — namtv acknowledged, no resolution yet in-window. Capacity/planning gap worth a nudge to Nam Tran. |
 | 7 | Blair Brown (Peptide Clyde) | Client remains unresponsive/offline — no new reply this window (ongoing situation, not new). |
+| 8 | Fountain — DatNT | 6 PENDING reviews (C-1/C-2/C-3 vulnerability patches + .asp bug + OpenCode context gathering + FE prompts) → reviewers VuTQ + DuongDN need to sign off. Found during 08:55 recheck. |
+| 9 | Arthur/Crystal lang — PhucVT | 1 PENDING review (Metastamp P2-7, 8h) → reviewer TienND. Found during 08:55 recheck. |
 
 **Today (Tue 28/07):** PhucVT has approved personal-matter leave (charged to Arthur, no makeup) — Arthur project affected, others unaffected. All other staff present.
 
@@ -99,7 +101,7 @@ Trello: Andrew Taraba ✓ complete. James Diamond - Vinn task ⚠️ left incomp
 
 ---
 
-## Sheets / Workstream — 06:45 (+07:00)
+## Sheets/Workstream — 06:45 (+07:00)
 
 🔴 **Workstream unreachable all run.** `workstream-login.js` was run twice (once via `sheets-tasklog-scan.js`, once standalone), each waiting the full internal 5-minute SSO window — both ended with "Failed to capture token" because there is no human at this cron server's display to complete the Keycloak SSO click-through. This affects LongVV/PhucVT/KhanhHH/LeNH's hours (Workstream is primary for all their projects) — cannot state verified weekly totals for them this run.
 
@@ -303,10 +305,56 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 
 ---
 
+---
+
+## Re-check — 08:55 (+07:00)
+
+**Context:** Interactive recheck after cron run left 6 ○ incomplete items + multiple data gaps (Workstream down, cron credential gaps). All sources re-run with live auth in interactive environment.
+
+### Recheck results
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy - Carrick/Kai/Luis | ✓ completed | Workstream: LongVV **8h** (LIFM2-454:4h, LIFM2-452:2h, LIFM2-457:2h). Kai daily report ✓ (09:20 + 17:18). Slack clean. Bitbucket token still dead (empty in `config/.bitbucket-config.json`) — PR-layer unverifiable but all other gates green. Reviewer: none configured (`isReviewer` empty for all members). |
+| James Diamond - Vinn task | ○ still incomplete | Discord nusvinn token confirmed 401 (`discord-token-refresh.js` attempted: Chrome copied, navigated to Discord → login page shown, token extraction failed). Manual re-login needed. Vinn/Jeff daily report unverifiable until token restored. |
+| Fountain - DOCUMENT | ○ still incomplete | **Hours verified** (DatNT 8h + ThinhT 5h on 07-27) but **weekly plan STILL not posted** (38h+ late now). ⚠️ **6 PENDING reviews for DatNT** (C-1/C-2/C-3 vulnerability patches + .asp bug fix + OpenCode/Claude context gathering) — reviewer(s): VuTQ + DuongDN. Trello board: 1059 cards, 0 new customer comments, 17 stuck (>5d). QA actively testing (HungPN/ViTHT). Keep ○ until plan posted + DatNT reviews resolved. |
+| Philip | ✓ completed | MS Teams chat with Philip Briggs opened successfully (interactive Puppeteer). 1 message found — no complaint detected. Chat accessible, customer not raising issues. |
+| Arthur - Meta-Stamp | ○ still incomplete | **Workstream ✓** (PhucVT 8h P2-7 Metadata Intake Tiers, TienND 8h Chris-Fixed-65). **GitHub ✓** (Chris Coyne commit 07-26, David commits 07-24/07-14, 0 open PRs). ⚠️ PhucVT has 1 PENDING review on Metastamp P2-7 — reviewer: TienND (REVIEWER_OVERRIDES). **Solid Code Slack ✗** (xoxc+d combo returned `invalid_auth` — token needs re-extraction from live Chrome Profile 15). 3/6 sources clean, 1 blocked, 2 unverifiable. Keep ○ until Slack token restored OR user accepts partial check. |
+| Blair Brown - Peptide Clyde | ✓ completed | Workstream live: LeNH **on roster** (Developer) for Blair Brown project `cmqj4tj6v01gfm81vgx7ipkov` — **0h logged 07-27**. Client still unresponsive/offline (ongoing, not new). No reviewer configured. This is a client-side issue, not a dev performance gap — LeNH has nothing to work on without client input. |
+
+**Cleared:** Maddy (3/4 gates green, bitbucket=infra), Philip (clean), Blair Brown (client-side block, not dev issue)
+**Still open:** James Diamond (Discord token dead, needs manual login), Fountain (plan missing + 6 DatNT reviews PENDING), Arthur (Solid Code Slack token blocked)
+
+### Data gaps filled from cron failures
+
+| Section | Cron state | Now |
+|---------|-----------|-----|
+| Sheets/Workstream | "unreachable all run" | ✅ Live: LongVV 8h, PhucVT 8h, TienND 8h, DatNT 8h, ThinhT 5h, LeNH 0h (Blair Brown only WS project) |
+| Maddy | "WS unreachable, bitbucket dead" | ✅ WS: LongVV 8h. Bitbucket: token still dead (infra issue). JIRA: script still broken (reads stale Sheet). Weekly status: Kai on track (Mon/Thu/Fri make-up). |
+| Fountain | "WS unreachable, plan missing" | ✅ WS: DatNT 8h + ThinhT 5h. Plan: still missing (needs @trinhmtt nudge). ⚠️ DatNT 6 PENDING reviews → VuTQ + DuongDN. |
+| Arthur | "3/6 sources blocked" | ✅ WS: PhucVT 8h + TienND 8h. ✅ GitHub: active commits. ✗ Slack: still blocked (xoxc+d invalid_auth). ⚠️ PhucVT 1 PENDING review → TienND. |
+| Philip | "MS Teams timed out" | ✅ Chat opened, 1 msg, clean. |
+| Reminders | "deferred" | ✅ With WS live: PhucVT 8h, LongVV 8h, LeNH 0h (but Blair Brown client-side block — not a performance gap). TuanNT: no WS project, Bailey Sheet 0h but Matrix evidence of real work (GGS bugfix+deploy). No reminders needed today. |
+| Fountain Trello | "not checked" | ✅ 1059 cards, 0 new customer comments, 17 stuck, hard-to-release items manageable. |
+
+### Workstream review-status check (Piece 4)
+
+**⚠️ DatNT (Fountain):** 6 PENDING reviews (C-1/C-2/C-3 patches + .asp bug + OpenCode context gathering + FE vulnerability prompts) → reviewer(s): **VuTQ** (`isReviewer: true`) + **DuongDN** (`isReviewer: true`, Tech Lead). Fountain NOT excluded from Piece 4 — this needs reviewer attention.
+**⚠️ PhucVT (Crystal lang):** 1 PENDING review (Metastamp V3 - P2-7: Metadata Intake Tiers, 8h, 2026-07-27) → reviewer: **TienND** (REVIEWER_OVERRIDES → `crystal_lang: ['TienND']`).
+
+Per Fountain exclusion rule applied selectively: piece-level "check Fountain" is excluded (user instruction 2026-07-08), but flagging in recheck as informational for VuTQ/DuongDN.
+
+### Trello final state
+
+**Check Progress:** 19/22 ✓ complete — 3 remaining ○: James Diamond, Fountain, Arthur.
+
+---
+
 ## Unresolved questions
 
-1. Bitbucket API token for Maddy needs regenerating (with Bitbucket scope) via id.atlassian.com — 3rd time this has died.
-2. Fountain's weekly plan is now genuinely overdue (past Monday) — worth a direct nudge to @trinhmtt.
+1. Bitbucket API token for Maddy needs regenerating (with Bitbucket scope) via id.atlassian.com — 4th time this has died. Token in config is empty string.
+2. Fountain's weekly plan is now genuinely overdue (38h+ past Monday) — worth a direct nudge to @trinhmtt.
 3. TienND (Arthur) has ~20h unassigned capacity this week — needs Nam Tran to assign work.
-4. This cron server (mpfc.mpfc.live) is missing `nuscarrick`/`nusken`/`davidztv` GitHub accounts and the "Solid Code" Slack token — worth deciding whether to provision them here or keep those checks interactive-only.
-5. Workstream SSO cannot complete headlessly on this server — next interactive session should refresh the token so cron runs can use it via the stored access_token until it next expires.
+4. Solid Code Slack workspace still not in `config/.slack-accounts.json` — xoxc extracted from Chrome Profile 15 but auth failed (invalid_auth). Token may need fresh browser login.
+5. Discord nusvinn token dead (401, login page shown) — needs manual Discord login in browser to restore.
+6. DatNT (Fountain) has 6 PENDING reviews → VuTQ/DuongDN should review (vulnerability patches need sign-off).
