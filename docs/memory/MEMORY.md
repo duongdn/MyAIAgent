@@ -99,6 +99,7 @@
 - [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix covers Rory/Aysar too
 - [reference_upwork_inbox_generic_room_script](daily-report/upwork/reference_upwork_inbox_generic_room_script.md) — read ANY inbox thread: `upwork-room-messages.js`, inbox=/ab/messages/, storyId not id
 - [project_brad_ballantine_new_sites](daily-report/upwork/project_brad_ballantine_new_sites.md) — 🟡 2 new sites, quote/timeline unanswered since 07-27
+- [reference_auctionwarehouse_server_and_stack](daily-report/upwork/reference_auctionwarehouse_server_and_stack.md) — 🔴 Laravel 5.8 + open /register = anyone is admin, past webshells
 
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES
