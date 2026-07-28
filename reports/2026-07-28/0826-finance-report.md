@@ -367,7 +367,7 @@ Phân bố P/E toàn bộ 100 mã: trung vị 14, p25=9.1, p75=22.1. Chia 6 bậ
 | Dịch vụ Công nghệ (1) | FPT 8.5 | — | Chỉ 1 mã, không có gì để so sánh trong ngành. |
 | Dịch vụ Viễn thông (1) | FOX 7.0 | — | Chỉ 1 mã, không có gì để so sánh trong ngành. |
 
-## Nhận định tổng quan (Phần 3)
+## Nhận định tổng quan (Phần 4)
 - **Điểm cao nhất toàn báo cáo:** VCG 38.1 — nhưng P/E 3.1 là dấu hiệu cảnh báo lợi nhuận đột biến, không phải cơ hội hiển nhiên. Sau VCG là VIX 22.7 và SHB 20.3.
 - **3 case bị loại vì ROE méo:** HVN (ROE 446.5 — vốn chủ gần 0), KSF (ROE 76.0 với đòn bẩy ~6,3x), và VCG cần kiểm chứng. Đây đúng là loại lỗi mà tiêu chí ROE/P/B đơn thuần dễ mắc phải.
 - **Chất lượng lợi nhuận tốt nhất (ROE cao + ROA cao = ít đòn bẩy):** BMP (40.4/33.4), VEA (27.1/25.6), VIX (27.2/20.6), PNJ (27.7/19.5), DGC (16.8/14.3). Nhóm này đáng ưu tiên nghiên cứu sâu hơn nhóm điểm cao nhờ đòn bẩy.
@@ -377,7 +377,7 @@ Phân bố P/E toàn bộ 100 mã: trung vị 14, p25=9.1, p75=22.1. Chia 6 bậ
 ---
 
 ## Phạm vi & giới hạn
-- Phần 2 và 3 **chỉ quét trong sheet `Top 100`** (100 mã hợp lệ, vốn hóa lớn đang theo dõi) — **không phải toàn bộ thị trường**. Có mã P/B<1 khác ngoài Top 100 không nằm trong báo cáo này.
+- Phần 2, 3 và 4 **chỉ quét trong sheet `Top 100`** (100 mã hợp lệ, vốn hóa lớn đang theo dõi) — **không phải toàn bộ thị trường**. Có mã P/B<1 khác ngoài Top 100 không nằm trong báo cáo này.
 - Số liệu sheet cập nhật `Jul-26`; điểm ROE/P/B là tiêu chí đơn giản 1 chiều.
 - Phần 1 lấy nguyên văn từ JSON của `fetch-finance-news.py`; tóm tắt mỗi bài dựa trên tiêu đề, không fetch nội dung bài.
 
@@ -626,7 +626,8 @@ _Đề xuất khi hết hạn:_ **bỏ** trừ khi muốn theo dõi thủ công 
 | **SIV** | Sơn | UPCOM | 🔴 Gần bằng 0 | Tin có nội dung mới nhất từ 12/2025 | **Bỏ** |
 | **SDN** | Sơn | UPCOM | ⛔ **11/11 nhiễu** | Không lấy được bài nào về công ty | **Bỏ ngay** — không monitor được bằng tin |
 
-## Nhận định tổng quan (Phần 4)
+## Nhận định tổng quan (Phần 5)
+
 - **Ngành nhựa xây dựng đang ở chu kỳ lợi nhuận rất mạnh:** BMP và NTP **cùng lập kỷ lục lợi nhuận trong quý 2/2026**, và đặc biệt là lập kỷ lục **trong khi giá hạt nhựa đầu vào đang tăng** — tức sức mạnh định giá (pricing power) đang thuộc về nhà sản xuất, không phải chuyện may mắn nguyên liệu rẻ.
 - **Sơn thì ngược lại:** ADP — mã sơn duy nhất có KQKD mới trong kỳ — báo LNST quý 2 **giảm 2,52%**. Nếu xu hướng này xác nhận, đây là **phân hoá thật giữa 2 ngành** dù cùng phục vụ xây dựng: nhựa (ống nước, hạ tầng) hưởng lợi từ đầu tư công, sơn (hoàn thiện) phụ thuộc BĐS dân dụng còn yếu.
 - **Vấn đề cấu trúc của nhóm sơn:** cả 4 mã sơn đều nhỏ và 3/4 nằm trên UPCOM → news flow gần như bằng 0, **không theo dõi được bằng tin tức**. Nếu muốn theo ngành sơn thì phải chuyển sang kênh khác (BCTC quý, giá/thanh khoản), chứ Part Candidate dạng tin tức sẽ luôn trống.

@@ -1,5 +1,5 @@
 ---
-description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo phong cách news-digest + quét P/B < 1 kèm nhận định
+description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo phong cách news-digest + quét P/B < 1 & P/E + so sánh ngành kèm nhận định
 ---
 
 # Finance Report
@@ -14,8 +14,8 @@ description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo p
 
 `config/finance-watchlist.json` — 3 khối:
 - `watchlist[]` — mã theo dõi **vĩnh viễn** (`ticker/name/spreadsheet_id/report_sheet`) → Piece 1 (Focus)
-- `candidates` — mã theo dõi **tạm thời** có TTL (`ttl_days` + `items[].ticker/name/group/added/status/note`) → Piece 4 (Candidate)
-- `top100_spreadsheet_id`/`top100_sheet` → Piece 2 & 3
+- `candidates` — mã theo dõi **tạm thời** có TTL (`ttl_days` + `items[].ticker/name/group/added/status/note`) → Piece 5 (Candidate)
+- `top100_spreadsheet_id`/`top100_sheet` → Piece 2, 3 & 4
 
 **Thêm mã mới vào đây, không sửa file skill này.** Không phải secret — tracked trong git (xem exception trong `.gitignore`).
 
@@ -29,9 +29,10 @@ description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo p
 
 | Command | What it does | Output file |
 |---------|--------------|-------------|
-| `/finance-report` | Full run — Focus + PB Low + Sector + Candidate | 1 file gộp hoặc 4 file riêng |
+| `/finance-report` | Full run — Focus + PB Low + P/E Screen + Sector + Candidate | 1 file gộp hoặc 5 file riêng |
 | `/finance-report focus` | Tin tức mới nhất cho từng mã trong watchlist | `{HHMM}-finance-focus.md` |
 | `/finance-report pb-low` | List toàn bộ mã P/B < 1 trong Top 100 + nhận định | `{HHMM}-finance-pblow.md` |
+| `/finance-report pe-screen` | Phân bố P/E toàn bộ Top 100 theo 6 bậc + nhận định | `{HHMM}-finance-pe.md` |
 | `/finance-report sector` | Gom mã theo ngành, chọn mã tốt nhất mỗi ngành (điểm ROE/P/B) | `{HHMM}-finance-sector.md` |
 | `/finance-report candidate` | Watchlist tạm TTL 7 ngày — tin tức + bảng quyết định giữ/bỏ | `{HHMM}-finance-candidate.md` |
 
@@ -102,7 +103,38 @@ Script tự đọc `config/finance-watchlist.json`, build Google News RSS query 
 
 ---
 
-## Piece 3 — Sector Compare (`/finance-report sector`)
+## Piece 3 — P/E Screen (`/finance-report pe-screen`)
+
+Phân bố P/E toàn bộ **100 mã** trong Top 100 theo 6 bậc, kèm nhận định từng bậc.
+
+1. Đọc `top100_spreadsheet_id` / `top100_sheet` từ config, lấy toàn bộ hàng.
+2. Phân chia 6 bậc dựa trên phân phối thực tế của 100 mã (trung vị ~14, p25~9.1, p75~22.1): **< 10, 10-15, 15-20, 20-30, 30-50, ≥ 50**.
+3. Mỗi mã chỉ xuất hiện ở bậc thấp nhất nó đạt được (loại trừ).
+4. Với MỖI mã: cung cấp `ROE | ROA | P/B | P/E` và nhận định 1 câu dựa trên số liệu có sẵn trong sheet — không tra cứu thêm.
+5. **Output** (`{HHMM}-finance-pe.md`), format:
+   ```markdown
+   # P/E Screen — {YYYY-MM-DD} {HH:MM}
+   Nguồn: sheet 'Top 100'.
+
+   #### P/E < 10
+   | Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+   |----|-------|-----|-----|-----|-----|------------------|
+   | ... | ... | ... | ... | ... | ... | {1 câu} |
+
+   **{N} mã** — {nhận định bậc}
+
+   (lặp lại cho 5 bậc tiếp theo)
+
+   ## Nhận định P/E
+   - {3-5 gạch: bậc nào đông nhất, case đáng chú ý nhất, pattern đắt/rẻ, kết hợp với P/B}
+   ```
+
+6. **Không bịa** nhận định — nếu số liệu không đủ kết luận, ghi "không đủ dữ liệu để kết luận".
+7. **Tích hợp chéo:** nếu 1 mã đồng thời nằm ở bậc P/E thấp + P/B thấp → note đó là case đáng chú ý, dẫn link cross-ref.
+
+---
+
+## Piece 4 — Sector Compare (`/finance-report sector`)
 
 Gom toàn bộ mã trong sheet `Top 100` theo cột **Ngành**, so sánh trong từng nhóm, chọn ra mã "tốt nhất" mỗi nhóm.
 
@@ -127,7 +159,7 @@ Gom toàn bộ mã trong sheet `Top 100` theo cột **Ngành**, so sánh trong t
 
 ---
 
-## Piece 4 — Candidate (`/finance-report candidate`)
+## Piece 5 — Candidate (`/finance-report candidate`)
 
 Watchlist **tạm thời** để soi 1 nhóm/ngành trong thời gian ngắn rồi bỏ ra. Format giống Piece 1 nhưng mỗi mã có **TTL 7 ngày** và kết thúc bằng bảng quyết định giữ/bỏ.
 
@@ -167,9 +199,10 @@ node scripts/finance-candidates.js note <TICKER> "<ghi chú>"
 
 1. Chạy Piece 1 (Focus).
 2. Chạy Piece 2 (PB Low).
-3. Chạy Piece 3 (Sector Compare).
-4. Chạy Piece 4 (Candidate) — bỏ qua nếu `candidates.items` rỗng.
-5. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 4 file riêng — miễn không bỏ sót piece nào.
+3. Chạy Piece 3 (P/E Screen).
+4. Chạy Piece 4 (Sector Compare).
+5. Chạy Piece 5 (Candidate) — bỏ qua nếu `candidates.items` rỗng.
+6. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 5 file riêng — miễn không bỏ sót piece nào.
 
 ---
 
@@ -177,8 +210,10 @@ node scripts/finance-candidates.js note <TICKER> "<ghi chú>"
 
 - **Piece 1 tuân thủ NGUYÊN VĂN quy tắc anti-hallucination của `/me:news-digest`**: không viết tin trước khi có JSON, không tự chế URL, đếm số bài viết ra khớp số bài JSON trả về.
 - **Piece 2 chỉ quét trong phạm vi sheet `Top 100`** (~101 mã vốn hóa lớn theo dõi) — không phải toàn bộ thị trường. Nếu user hỏi "có phải tất cả mã P/B<1 trên sàn không" → trả lời KHÔNG, đây chỉ là danh sách đang theo dõi.
-- **Piece 3 cũng chỉ trong phạm vi `Top 100`**, và điểm ROE/P/B là tiêu chí đơn giản — 1 mã không lọt "tốt nhất nhóm" (VD SAB thua QNS trong Hàng tiêu dùng) không có nghĩa là mã xấu, chỉ là định giá (P/B) hiện đắt hơn so với hiệu quả sinh lời (ROE) tương đương của mã được chọn.
+- **Piece 3 (P/E Screen) cũng chỉ trong phạm vi `Top 100`**, phân bố theo 6 bậc. Tích hợp chéo với Piece 2: mã nào vừa P/E thấp vừa P/B thấp là case đáng chú ý nhất.
+- **Piece 4 (Sector Compare) cũng chỉ trong phạm vi `Top 100`**, và điểm ROE/P/B là tiêu chí đơn giản — 1 mã không lọt "tốt nhất nhóm" (VD SAB thua QNS trong Hàng tiêu dùng) không có nghĩa là mã xấu, chỉ là định giá (P/B) hiện đắt hơn so với hiệu quả sinh lời (ROE) tương đương của mã được chọn.
 - **Thêm mã mới vào watchlist**: sửa `config/finance-watchlist.json`. Piece 1 (Focus/tin tức) hoạt động ngay không cần thêm gì. Nếu muốn Piece 1 so sánh với luận điểm đầu tư đã phân tích, mã đó cần có sẵn sheet `Báo cáo 2`-style (xây theo quy trình đã dùng cho FPT/VEA — research agents + Google Sheets API, không thuộc phạm vi skill này).
-- **Piece 4 tuân thủ cùng quy tắc anti-hallucination như Piece 1**, và thêm: KHÔNG suy diễn tín hiệu từ mã có 0 bài thật — ghi thẳng "không có news flow" và đề xuất bỏ, thay vì viết nhận định rỗng.
+- **Piece 5 (Candidate) tuân thủ cùng quy tắc anti-hallucination như Piece 1**, và thêm: KHÔNG suy diễn tín hiệu từ mã có 0 bài thật — ghi thẳng "không có news flow" và đề xuất bỏ, thay vì viết nhận định rỗng.
 - **Candidate ≠ watchlist:** candidate là để sàng lọc ngắn hạn rồi loại; mã nào chứng minh được giá trị thì mới chuyển sang `watchlist[]` (và khi đó cần sheet `Báo cáo 2`-style).
+- **Piece 3 (P/E Screen)** dùng dữ liệu sheet 'Top 100', phân bố P/E thực tế. Kết hợp với Piece 2 (P/B) để tìm case vừa rẻ P/E vừa rẻ P/B — đây là tín hiệu mạnh nhất từ phân tích định lượng cơ bản.
 - **Không cần quyền ghi Google Sheets** cho skill này — chỉ đọc.
