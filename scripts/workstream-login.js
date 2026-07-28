@@ -51,16 +51,20 @@ async function main() {
     try { fs.unlinkSync(path.join(PROFILE_DIR, f)); } catch {}
   });
 
+  // Use headless:'new' so this works on cron servers without a display.
+  // Keycloak session cookies in the saved profile handle SSO — no interaction needed.
+  const headlessMode = process.env.WORKSTREAM_HEADFUL === '1' ? false : 'new';
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: headlessMode,
     userDataDir: PROFILE_DIR,
-    env: { ...process.env, DISPLAY: process.env.DISPLAY || ':1', TMPDIR: '/var/tmp' },
+    env: { ...process.env, TMPDIR: '/var/tmp' },
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
       '--window-size=1280,900',
       '--crash-dumps-dir=/var/tmp',
+      '--ignore-certificate-errors',
     ],
   });
 
