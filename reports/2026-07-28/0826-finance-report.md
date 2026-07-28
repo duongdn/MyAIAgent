@@ -182,7 +182,163 @@ Nguồn: sheet 'Top 100', spreadsheet `1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuib
 
 ---
 
-# 🏭 Phần 3 — Sector Compare
+# 📊 Phần 3 — P/E Screen
+
+Nguồn: sheet 'Top 100', update `Jul-26`.
+
+Phân bố P/E toàn bộ 100 mã: trung vị 14, p25=9.1, p75=22.1. Chia 6 bậc.
+
+#### P/E < 10
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| VCG | Xây dựng công nghiệp | 41.9 | 14.1 | 1.1 | 3.1 | ROE/ROA rất cao + P/E thấp nhất Top 100 — combo hiếm, nhưng P/E 3.1 với ngành xây dựng thường báo hiệu lợi nhuận đột biến một lần, cần kiểm tra trước. |
+| SHB | Ngân hàng | 18.3 | 1.4 | 0.9 | 5.1 | ROE cao + P/B < 1 (duy nhất ngân hàng) — tiềm năng nhất bảng này. |
+| VIX | Chứng khoán | 27.2 | 20.6 | 1.2 | 5.7 | ROE/ROA rất cao, ngành CK biến động mạnh theo thị trường. |
+| PGV | Dịch vụ tiện ích | 26.5 | 8.0 | 1.4 | 5.9 | ROE cao, ngành tiện ích dòng tiền ổn định — tiềm năng. |
+| TPB | Ngân hàng | 17.6 | 1.6 | 1.0 | 6.1 | Trung bình khá nhóm ngân hàng. |
+| NAB | Ngân hàng | 20.1 | 1.4 | 1.1 | 6.1 | ROE top nhóm ngân hàng, tương đối hấp dẫn. |
+| KSF | Bất động sản | 76.0 | 12.1 | 4.0 | 6.2 | ROE cực cao nhưng P/B đã 4.0 — cần verify chất lượng lợi nhuận. |
+| HAG | Nông nghiệp | 24.3 | 11.7 | 1.3 | 6.2 | Số liệu tốt nhưng lịch sử nợ vay/lỗ lũy kế lớn — thận trọng. |
+| CTG | Ngân hàng | 22.4 | 1.4 | 1.4 | 6.3 | ROE cao, ngân hàng quốc doanh big-cap. |
+| VEA | Sản xuất công nghiệp | 27.1 | 25.6 | 1.7 | 6.5 | ROA hiếm gặp cao, nhưng đang diện cảnh báo cổ phiếu. |
+| ABB | Ngân hàng | 18.2 | 1.4 | 1.2 | 6.9 | Ngân hàng nhỏ, định giá hợp lý. |
+| DGC | Hóa chất | 16.8 | 14.3 | 1.1 | 7.1 | ROA cao bất thường cho ngành hóa chất — đáng chú ý. |
+| VIB | Ngân hàng | 16.4 | 1.4 | 1.1 | 7.2 | Trung bình ngành. |
+| MBB | Ngân hàng | 21.2 | 2.0 | 1.4 | 7.4 | ROE/ROA top nhóm ngân hàng — hấp dẫn. |
+| HDB | Ngân hàng | 24.5 | 2.0 | 1.7 | 7.6 | ROE cao nhưng P/B đã 1.7, không còn rẻ theo P/B. |
+| PNJ | Bán lẻ | 27.7 | 19.5 | 1.9 | 7.7 | ROE/ROA rất tốt, P/B gần 2 — định giá hợp lý. |
+| MSB | Ngân hàng | 14.3 | 1.6 | 1.1 | 7.7 | ROE thấp nhất nhóm — kém hấp dẫn. |
+| ACB | Ngân hàng | 17.5 | 1.7 | 1.3 | 7.9 | Số liệu ổn định, chất lượng khá. |
+| OCB | Ngân hàng | 12.8 | 1.4 | 1.0 | 8.1 | ROE thấp nhất nhóm — cần xem lý do. |
+| IDC | Bất động sản KCN | 30.5 | 8.7 | 2.3 | 8.2 | ROE cao nhưng P/B > 2 — không rẻ theo P/B. |
+| VPB | Ngân hàng | 16.4 | 2.2 | 1.3 | 8.3 | ROA cao nhất nhóm ngân hàng trong bảng. |
+| HVN | Hàng không | 446.5 | 11.9 | 7.7 | 8.8 | ROE méo (vốn CSH gần 0) — không dùng để đánh giá. |
+| HPG | Vật liệu xây dựng | 16.4 | 8.6 | 1.4 | 8.9 | Đầu ngành thép, định giá hợp lý. |
+| BSR | Dầu khí | 20.9 | 14.2 | 1.7 | 9.0 | ROE/ROA tốt nhưng phụ thuộc giá dầu. |
+| DCM | Hóa chất | 18.4 | 11.3 | 1.6 | 9.1 | Ổn định, nhạy giá nông sản/khí đốt. |
+| VHC | Công nghiệp Chế biến | 15.2 | 10.7 | 1.3 | 9.1 | ROA cao (thủy sản xuất khẩu) nhưng rủi ro thuế quan. |
+| VRE | Bất động sản | 14.8 | 11.8 | 1.3 | 9.2 | ROA cao bất thường cho BĐS (cho thuê TTTM). |
+| TCB | Ngân hàng | 15.9 | 2.4 | 1.4 | 9.2 | ROA cao nhất nhóm ngân hàng. |
+| QNS | Hàng tiêu dùng | 20.2 | 14.8 | 1.6 | 9.4 | ROE/ROA rất tốt, ngành phòng thủ. |
+| SIP | Bất động sản | 25.0 | 4.6 | 2.2 | 9.5 | ROE cao nhưng P/B > 2. |
+| BID | Ngân hàng | 18.4 | 1.0 | 1.6 | 9.5 | ROA thấp nhất nhóm ngân hàng. |
+| BMP | Công nghiệp | 40.4 | 33.4 | 3.8 | 9.8 | ROE/ROA cực cao nhưng P/B 3.8 — không rẻ theo P/B. |
+| PVS | Xây dựng công nghiệp | 13.0 | 5.0 | 1.2 | 9.8 | ROE/ROA thấp nhất bảng. |
+| VHM | Bất động sản | 27.4 | 8.9 | 2.4 | 9.9 | ROE cao nhưng P/B 2.4, ngành BĐS khó khăn chung. |
+
+**34 mã** — gần 1/3 là ngân hàng. Đáng chú ý nhất: **VCG** (P/E thấp nhất 100 mã), **SHB** (P/E 5.1 + P/B < 1).
+
+#### P/E 10-15
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| NVL | Bất động sản | 7.2 | 1.3 | 0.6 | 10.5 | ROE/ROA thấp — value trap dù P/B < 1. |
+| BAB | Ngân hàng | 9.3 | 0.7 | 1.0 | 11.1 | ROE/ROA thấp nhất nhóm — cảnh báo. |
+| REE | Dịch vụ tiện ích | 13.0 | 6.8 | 1.4 | 11.2 | Trung bình, ngành tiện ích ổn định. |
+| KSV | Công nghiệp | 53.1 | 24.0 | 5.1 | 12.0 | ROE/ROA cực cao nhưng P/B 5.1. |
+| DPM | Công nghiệp | 11.1 | 7.1 | 1.3 | 12.0 | Trung bình, nhạy giá đầu vào. |
+| ACV | Sản xuất công nghiệp | 12.8 | 13.6 | 2.1 | 12.5 | ROA cao — độc quyền hạ tầng sân bay. |
+| VNM | Hàng tiêu dùng | 27.7 | 16.7 | 3.5 | 12.6 | ROE/ROA rất tốt, phòng thủ — chất lượng cao, không rẻ. |
+| SAB | Hàng tiêu dùng | 20.8 | 15.4 | 2.7 | 12.6 | ROE/ROA tốt, phòng thủ — ổn định, không rẻ. |
+| VND | Chứng khoán | 10.5 | 4.5 | 1.3 | 12.7 | Trung bình ngành CK. |
+| FPT | Dịch vụ Công nghệ | 27.3 | 13.6 | 3.2 | 12.8 | ROE/ROA rất tốt — đang bị bán tháo mạnh (xem Phần 1). |
+| SHS | Ngân hàng | 10.8 | 7.0 | 1.3 | 12.8 | ROA 7% bất thường — nên verify lại phân loại ngành. |
+| PVI | Bảo hiểm | 15.6 | 4.0 | 2.0 | 13.0 | ROE khá, ROA thấp là đặc thù ngành. |
+| DHG | Dược phẩm | 21.0 | 16.8 | 2.8 | 13.3 | ROE/ROA rất tốt, phòng thủ. |
+| SSI | Chứng khoán | 13.5 | 5.1 | 1.7 | 13.4 | Khá cho ngành CK. |
+| PHP | Công nghiệp | 4.4 | 3.1 | 4.6 | 13.5 | ROE/ROA thấp — không hấp dẫn. |
+| LPB | Ngân hàng | 23.4 | 2.1 | 3.1 | 13.7 | ROE/ROA tốt nhất nhóm NH nhưng P/B 3.1. |
+| MWG | Bán Lẻ | 25.4 | 10.5 | 3.2 | 14.0 | ROE/ROA tốt — không rẻ theo P/B. |
+| MBS | Chứng khoán | 14.8 | 4.4 | 2.1 | 14.1 | Khá cho ngành CK. |
+| POW | Dịch vụ tiện ích | 8.7 | 3.5 | 1.2 | 14.1 | ROE/ROA thấp cho ngành tiện ích. |
+| VCB | Ngân hàng | 16.4 | 1.5 | 2.2 | 14.2 | ROE khá, big-cap — chất lượng cao không rẻ. |
+| VPX | Chứng khoán | 14.0 | 7.2 | 1.5 | 14.3 | Khá cho ngành CK. |
+| BVH | Bảo hiểm | 12.8 | 1.1 | 1.8 | 14.3 | ROE trung bình, ROA thấp đặc thù ngành. |
+| VGC | Vật liệu xây dựng | 14.8 | 5.1 | 2.2 | 14.7 | Khá — trung bình. |
+| PVD | Dầu khí | 7.1 | 4.5 | 1.0 | 14.8 | ROE thấp, ngành dầu khí chu kỳ. |
+
+**24 mã** — đa dạng ngành. Đáng chú ý: **ACV** (độc quyền hạ tầng), **FPT** (đang bị bán tháo — xem Phần 1).
+
+#### P/E 15-20
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| FOX | Dịch vụ Viễn thông | 32.4 | 13.3 | 4.6 | 15.2 | FPT Telecom, liên quan luận điểm deconsolidation của FPT. |
+| BCM | Bất động sản KCN | 16.3 | 5.6 | 2.4 | 15.3 | Khá — trung bình. |
+| GAS | Dầu khí | 17.6 | 13.3 | 2.6 | 15.4 | ROE/ROA tốt, phụ thuộc giá dầu khí — chu kỳ. |
+| GEE | Dịch vụ tiện ích | 46.3 | 20.9 | 6.9 | 15.9 | ROE/ROA rất cao nhưng P/B 6.9 — không rẻ. |
+| KBC | Bất động sản KCN | 7.2 | 2.5 | 1.1 | 16.2 | ROE/ROA thấp — không phải hàng rẻ. |
+| TAL | Bất động sản | 16.5 | 6.0 | 2.3 | 16.3 | Khá — trung bình. |
+| VCI | Chứng khoán | 9.3 | 4.6 | 1.2 | 16.6 | Thấp cho ngành CK. |
+| PLX | Dầu khí | 10.0 | 2.8 | 1.8 | 17.3 | Trung bình, phụ thuộc giá dầu. |
+| SSB | Ngân hàng | 7.6 | 0.8 | 1.4 | 18.5 | ROE/ROA thấp nhất nhóm NH — thận trọng. |
+| NLG | Bất động sản | 5.5 | 2.3 | 1.0 | 18.7 | ROE/ROA thấp — value trap tiềm năng. |
+| GVR | Bất động sản KCN | 11.5 | 7.7 | 2.1 | 19.0 | Trung bình. |
+| HCM | Chứng khoán | 10.1 | 3.5 | 2.1 | 19.3 | Trung bình ngành CK. |
+| GMD | Vận tải | 12.8 | 8.8 | 2.4 | 19.4 | Khá — trung bình. |
+| VCK | Chứng khoán | 16.2 | 8.3 | 2.7 | 19.6 | Khá cho ngành CK. |
+
+**14 mã** — đáng chú ý FOX (liên quan FPT deconsolidation) và GEE (ROE cao nhưng P/B đã hết rẻ).
+
+#### P/E 20-30
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| KDH | Bất động sản | 6.2 | 3.2 | 1.2 | 20.4 | ROE/ROA thấp. |
+| TCX | Chứng khoán | 16.0 | 8.5 | 2.7 | 21.5 | Khá cho ngành CK. |
+| MSN | Hàng tiêu dùng | 14.7 | 3.6 | 3.0 | 21.6 | ROE khá, ROA thấp — cơ cấu phức tạp. |
+| KDC | Hàng tiêu dùng | 9.7 | 4.8 | 2.1 | 22.1 | ROE/ROA thấp. |
+| FRT | Bán lẻ | 28.0 | 4.3 | 4.7 | 22.7 | ROE cao nhưng ROA thấp (đòn bẩy cao). |
+| PDR | Bất động sản | 5.1 | 2.4 | 1.1 | 23.8 | Cảnh báo, không phải hàng rẻ. |
+| GEX | Sản xuất công nghiệp | 9.2 | 2.2 | 2.0 | 24.1 | ROE/ROA thấp. |
+| SBT | Hàng tiêu dùng | 7.3 | 2.2 | 1.7 | 24.5 | Không hấp dẫn. |
+| FTS | Chứng khoán | 9.2 | 3.4 | 2.3 | 25.4 | Thấp cho ngành CK. |
+| MCH | Hàng tiêu dùng | 41.9 | 21.7 | 10.5 | 26.0 | ROE/ROA tốt nhưng P/B > 10 — cực đắt. |
+
+**10 mã** — đa số ROE/ROA tầm trung-thấp, không có "hàng rẻ" thật sự.
+
+#### P/E 30-50
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| SJS | Bất động sản | 14.0 | 5.9 | 3.9 | 30.6 | ROE khá, P/E cao — không rẻ. |
+| VTP | Vận tải | 19.4 | 4.8 | 6.0 | 31.7 | ROE khá, P/E cao — không rẻ. |
+| HUT | Vật liệu xây dựng | 4.5 | 1.1 | 1.5 | 37.1 | Value trap. |
+| STB | Ngân hàng | 5.5 | 0.4 | 2.2 | 40.6 | ROE/ROA rất thấp. |
+| VJC | Hàng không | 11.4 | 2.1 | 4.2 | 42.7 | ROE/ROA thấp. |
+| EIB | Ngân hàng | 2.9 | 0.3 | 1.4 | 49.8 | ROE/ROA rất thấp — kém hấp dẫn nhất nhóm NH. |
+
+**6 mã** — không có case đáng chú ý.
+
+#### P/E ≥ 50
+
+| Mã | Ngành | ROE | ROA | P/B | P/E | Nhận định nhanh |
+|----|-------|-----|-----|-----|-----|------------------|
+| DXG | Bất động sản | 1.7 | 0.6 | 1.1 | 56.5 | Value trap rõ. |
+| VPL | Hàng tiêu dùng | 6.9 | 3.0 | 3.9 | 58.4 | Không hấp dẫn. |
+| TCH | Bất động sản | 1.8 | 1.1 | 1.1 | 62.6 | Value trap rõ. |
+| BAF | Hàng tiêu dùng | 4.3 | 1.5 | 2.6 | 69.6 | Tránh. |
+| VPI | Bảo hiểm | 5.5 | 2.0 | 3.7 | 70.1 | Tránh. |
+| NVB | Ngân hàng | 0.7 | 0.0 | 2.0 | 71.9 | Tránh. |
+| CII | Công nghiệp | 1.8 | 0.3 | 1.3 | 79.7 | Tránh. |
+| IDP | Hàng tiêu dùng | 5.2 | 2.4 | 5.4 | 101.8 | Không hấp dẫn. |
+| VIC | Bất động sản | 9.6 | 1.4 | 11.2 | 120.0 | Định giá kỳ vọng dài hạn, không phải hiện tại. |
+| CRV | Bất động sản | 1.0 | 0.7 | 2.4 | 220.0 | Tránh. |
+| VSF | Hàng tiêu dùng | 1.2 | 0.4 | 5.2 | 428.0 | Tránh hoàn toàn. |
+| THD | Công nghiệp | 2.4 | 2.3 | 11.5 | 484.8 | Cực kỳ đắt so với hiệu quả. |
+
+**12 mã** — gần như toàn bộ ROE/ROA cực thấp. Ngoại lệ duy nhất: VIC (định giá theo kỳ vọng dài hạn).
+
+## Nhận định P/E
+- **34 mã có P/E < 10** — nhiều nhất (1/3 danh sách), nhưng chủ yếu là ngân hàng (P/E thấp đặc thù) và các mã có thể đang rẻ vì lý do chu kỳ/đột biến.
+- **VCG (P/E 3.1) thấp nhất toàn bộ 100 mã** — cần kiểm tra cơ cấu lợi nhuận (đột biến một lần?), đã cảnh báo ở Sector Compare.
+- **SHB** là case hiếm: vừa P/E < 6 vừa P/B < 1 với ROE 18.3% — xác nhận đây là mã đáng nghiên cứu sâu nhất từ phân tích P/E lẫn P/B.
+- **Nhóm P/E ≥ 50** toàn ROE cực thấp → "đắt vì lợi nhuận quá thấp" chứ không phải vì định giá kỳ vọng cao (trừ VIC).
+
+---
+
+# 🏭 Phần 4 — Sector Compare
 
 Điểm xếp hạng = **ROE / P/B** (tiêu chí đơn giản: hiệu quả sinh lời trên mỗi đồng giá trị sổ sách phải trả). **Không thay thế phân tích sâu.**
 Đã chuẩn hóa "Bán lẻ"/"Bán Lẻ" thành 1 nhóm.
@@ -233,7 +389,7 @@ Nguồn: sheet 'Top 100', spreadsheet `1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuib
 
 ---
 
-# 🧪 Phần 4 — Candidate (watchlist tạm, TTL 7 ngày)
+# 🧪 Phần 5 — Candidate (watchlist tạm, TTL 7 ngày)
 
 Danh sách theo dõi **tạm thời**, quản lý trong `config/finance-watchlist.json` → `candidates.items`.
 Mỗi mã sống **7 ngày** kể từ `added`; hết hạn báo cáo sẽ gắn cờ ⏰ để bạn quyết định **gia hạn tiếp 7 ngày** hay **bỏ ra** — hệ thống không bao giờ tự xoá.
@@ -477,7 +633,7 @@ _Đề xuất khi hết hạn:_ **bỏ** trừ khi muốn theo dõi thủ công 
 - **6/10 mã đề xuất bỏ sau 7 ngày** — chủ yếu vì không có news flow chứ không phải vì doanh nghiệp xấu. Nhóm còn lại đáng giữ: NTP, BMP, ADP, AAA.
 - ⚠️ **Bẫy trùng ký hiệu:** APH ↔ Amphenol (Mỹ), ADP ↔ Automatic Data Processing (Mỹ), HPP ↔ nhiễu SHB/quỹ Hanwha. Đã đánh dấu ⚠️ từng bài — **đừng đọc lướt các bài này như tin doanh nghiệp Việt**.
 
-## Câu hỏi chưa giải quyết (Phần 4)
+## Câu hỏi chưa giải quyết (Phần 5)
 5. **NTP và BMP không có trong sheet `Top 100`?** — BMP có (ROE 40.4, P/B 3.8) nhưng NTP không. Có muốn bổ sung NTP vào Top 100 để so ROE/P/B với BMP không?
 6. **ADP đi lùi trong khi BMP/NTP lập kỷ lục** — có muốn tôi đào BCTC ADP (`finance-report-detail-fetch-cafef.js ADP`) để xác nhận đây là vấn đề riêng của ADP hay của cả ngành sơn?
 7. **SDN** — bỏ luôn hay giữ để theo dõi thủ công qua BCTC?
