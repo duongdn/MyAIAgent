@@ -7,17 +7,17 @@
 - [feedback_decrypt_before_reading](global/feedback_decrypt_before_reading.md), [feedback_ssh_passphrase_in_config](global/feedback_ssh_passphrase_in_config.md)
 - [feedback_never_report_token_expired](global/feedback_never_report_token_expired.md) — 🔴 fix silently
 - [feedback_report_location](global/feedback_report_location.md), [feedback_always_include_links](global/feedback_always_include_links.md), [feedback_report_style](global/feedback_report_style.md), [feedback_customer_facing_messages](global/feedback_customer_facing_messages.md)
-- [feedback_workstream_sso_recheck_fixed](daily-report/general/feedback_workstream_sso_recheck_fixed.md) — 🔴 retry at recheck, SSO failure often transient
-- [feedback_davidztv_github_always_configured](daily-report/general/feedback_davidztv_github_always_configured.md) — 🔴 check gh auth token -u davidztv
+- [feedback_workstream_sso_recheck_fixed](daily-report/general/feedback_workstream_sso_recheck_fixed.md) — 🔴 SSO transient, retry
+- [feedback_davidztv_github_always_configured](daily-report/general/feedback_davidztv_github_always_configured.md) — 🔴 gh auth token -u davidztv
 - [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md)
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize
 - [project_alert_cron_setup](global/project_alert_cron_setup.md), [project_php_team](global/project_php_team.md), [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md), [feedback_ripgrep_execute_permission_fix](global/feedback_ripgrep_execute_permission.md)
-- [project_mpfc_cron_server](global/project_mpfc_cron_server.md) — 🔴 mpfc.mpfc.live runs own cron + 3rd memory store
+- [project_mpfc_cron_server](global/project_mpfc_cron_server.md) — 🔴 own cron + 3rd memory store
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md)
-- [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 unanswered direct ask=warning
+- [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 unanswered ask=warning
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md)
 - [feedback_gui_automation_risk_on_shared_desktop](global/feedback_gui_automation_risk_on_shared_desktop.md) — 🔴 xdotool=live desktop
-- [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 never external-timeout a login script shorter than its own internal wait (killed Workstream login at 45s vs its 5min wait, 2026-07-25)
+- [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 never external-timeout shorter than internal wait
 - [reference_google_drive_service_account_fallback](global/reference_google_drive_service_account_fallback.md), [feedback_strikethrough_corrections](global/feedback_strikethrough_corrections.md)
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 see [[project_matrix_static_compat_token]]
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md), [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴🔴
@@ -25,7 +25,7 @@
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md), [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
-- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md), [feedback_monday_must_use_friday_data](daily-report/general/feedback_monday_must_use_friday_data.md) — 🔴🔴🔴 MONDAY=TASK_LOG uses FRIDAY, not weekend/last_run. Dozens of repeats. #1 bug.
+- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md), [feedback_monday_must_use_friday_data](daily-report/general/feedback_monday_must_use_friday_data.md) — 🔴🔴🔴 #1 bug: Monday uses Friday data
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md), [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md)
 - [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴🔴 grep whole file
 
@@ -36,7 +36,7 @@
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md)
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md)
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — 🔴 Aysar=MPDM C07SQ4HAUHZ
-- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — 🔴🔴 4x violated, [feedback_maddy_4part_check_mandatory_in_every_report](daily-report/slack/feedback_maddy_4part_check_mandatory_in_every_report.md) — 🔴🔴🔴 standalone ## Maddy section, pre-commit validation
+- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — 🔴🔴 4x violated, [feedback_maddy_4part_check_mandatory_in_every_report](daily-report/slack/feedback_maddy_4part_check_mandatory_in_every_report.md) — 🔴🔴🔴 standalone ## section required
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — 🔴 check WS Maddy hours first
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md), [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md)
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴
@@ -50,8 +50,8 @@
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — 🔴 substring-match bug fixed
 - [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md)
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md)
-- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 James Diamond+LeNH false-0h, 12x recurred, single dump not enough, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md), [feedback_no_dated_scan_scripts](daily-report/sheets/feedback_no_dated_scan_scripts.md) — 🔴 AM 0h≠bug
-- [feedback_sheets_scan_script_positional_args](daily-report/sheets/feedback_sheets_scan_script_positional_args.md) — 🔴 positional args not flags, wrong flags fake a total data-gap
+- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 12x recurred false-0h, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md), [feedback_no_dated_scan_scripts](daily-report/sheets/feedback_no_dated_scan_scripts.md) — 🔴 AM 0h≠bug
+- [feedback_sheets_scan_script_positional_args](daily-report/sheets/feedback_sheets_scan_script_positional_args.md) — 🔴 positional args not flags
 - [feedback_workstream_report_needs_dev_reviewer_hours_and_status](daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md) — 🔴 WS row needs dev+reviewer+status
 - [feedback_dev_not_working_project_x_means_that_project_only](daily-report/sheets/feedback_dev_not_working_project_x_means_that_project_only.md), [feedback_parttime_official_filter](daily-report/sheets/feedback_parttime_official_filter.md)
 - [feedback_sheets_wrong_tab_numbering](daily-report/sheets/feedback_sheets_wrong_tab_numbering.md), [feedback_sheets_empty_col_a_bug](daily-report/sheets/feedback_sheets_empty_col_a_bug.md)
@@ -64,7 +64,7 @@
 - [feedback_tasklog_0h_reminder_complete](daily-report/sheets/feedback_tasklog_0h_reminder_complete.md), [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
 
 ## daily-report:scrin
-- [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT (3x violated, skill file now fixed too)
+- [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
 
 ## daily-report:fountain
 - [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — 🔴 3-part MANDATORY
@@ -83,7 +83,7 @@
 - [feedback_rebecca_chua_not_trello_block](daily-report/trello/feedback_rebecca_chua_not_trello_block.md), [feedback_tuannt_gate_show_breakdown](daily-report/trello/feedback_tuannt_gate_show_breakdown.md)
 - [feedback_arthur_blair_brown_gate_added](daily-report/trello/feedback_arthur_blair_brown_gate_added.md)
 - [feedback_philip_msteams_chrome_profile_crash](daily-report/trello/feedback_philip_msteams_chrome_profile_crash.md) — 🔴 rebuild keeping IndexedDB
-- [feedback_msteams_stale_profile](daily-report/trello/feedback_msteams_stale_profile.md) — 🔴 clear tmp profile before concluding auth broken
+- [feedback_msteams_stale_profile](daily-report/trello/feedback_msteams_stale_profile.md) — 🔴 clear tmp profile first
 
 ## daily-report:matrix
 - [feedback_matrix_daily_summary](daily-report/matrix/feedback_matrix_daily_summary.md), [feedback_matrix_join_public_room](daily-report/matrix/feedback_matrix_join_public_room.md)
@@ -96,7 +96,9 @@
 
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md)
-- [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX section before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix now covers Rory/Aysar too, not just Neural
+- [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix covers Rory/Aysar too
+- [reference_upwork_inbox_generic_room_script](daily-report/upwork/reference_upwork_inbox_generic_room_script.md) — read ANY inbox thread: `upwork-room-messages.js`, inbox=/ab/messages/, storyId not id
+- [project_brad_ballantine_new_sites](daily-report/upwork/project_brad_ballantine_new_sites.md) — 🟡 2 new sites, quote/timeline unanswered since 07-27
 
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES
@@ -127,7 +129,7 @@
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md)
 - [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — 🔴🔴🔴 fix baked into command
 - [feedback_savings_already_matured_check](money-report/feedback_savings_already_matured_check.md), [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md)
-- [feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash](money-report/feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash.md) — 🔴 basis≈0 = ledger settled, NOT idle cash; never flag as vốn nhàn rỗi
+- [feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash](money-report/feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash.md) — 🔴 basis≈0=ledger settled, NOT idle cash
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴
@@ -136,20 +138,20 @@
 - [feedback_news_digest_thieu_nguyen_rss_timeout](news-digest/feedback_news_digest_thieu_nguyen_rss_timeout.md), [feedback_news_digest_dedup_rule](news-digest/feedback_news_digest_dedup_rule.md)
 - [feedback_facebook_scraper_missing_x_display](news-digest/feedback_facebook_scraper_missing_x_display.md)
 - [feedback_facebook_scraper_chrome_path_drift](news-digest/feedback_facebook_scraper_chrome_path_drift.md) — 🔴 use google-chrome path
-- [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 3rd root cause: bulk cleanup commit deleted script, restore from git history
-- [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 4th distinct bug: titles char-scrambled; WORKAROUND: split `content` on "Đã chia sẻ với Công khai"
-- [feedback_facebook_not_logged_in_is_false_failure](news-digest/feedback_facebook_not_logged_in_is_false_failure.md) — 🔴 5th cause: not_logged_in often FALSE, test scraper directly before reporting
-- [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — skill self-contradicts (3/5 vs ALL), user confirmed 5/source settled default
-- [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching, don't re-derive article-count policy from skill text alone
+- [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 restore from git history
+- [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 titles scrambled, split on "Đã chia sẻ với Công khai"
+- [feedback_facebook_not_logged_in_is_false_failure](news-digest/feedback_facebook_not_logged_in_is_false_failure.md) — 🔴 test scraper directly before reporting
+- [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — 5/source settled default
+- [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
 
 ## finance-report
-- [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — `/me:finance-report-detail <TICKER>` builds 6-sheet FPT/VEA-style report — 🔴 apply formatting DURING build, not after
-- [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn direct JSON API (no browser needed) + 3 known bugs (wrong LCTT endpoint, +60k tỷ cell typo, EPS unit scaling) + share-split gotcha for BVPS
-- [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 exact VEA cell-format spec (blue headers, bold rows, collapsible row/col groups) + 4 reusable apply-scripts, run every build
-- [project_candidate_watchlist_ttl_system](finance-report/project_candidate_watchlist_ttl_system.md) — Piece 4 Candidate: watchlist tạm TTL 7 ngày + CLI finance-candidates.js — 🔴 bẫy trùng ký hiệu (APH/ADP) & tên trùng địa danh
+- [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — 6-sheet FPT/VEA-style report — 🔴 format DURING build
+- [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn JSON API + 3 bugs (LCTT endpoint, +60k tỷ typo, EPS scaling) + BVPS share-split gotcha
+- [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 VEA cell-format spec + 4 apply-scripts, run every build
+- [project_candidate_watchlist_ttl_system](finance-report/project_candidate_watchlist_ttl_system.md) — watchlist tạm TTL 7 ngày + CLI finance-candidates.js — 🔴 bẫy trùng ký hiệu APH/ADP
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
