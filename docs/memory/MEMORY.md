@@ -22,6 +22,7 @@
 - [feedback_matrix_never_use_device_auth](global/feedback_matrix_never_use_device_auth.md), [feedback_visible_browser_login_required](global/feedback_visible_browser_login_required.md) — 🔴 see [[project_matrix_static_compat_token]]
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md), [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴🔴
 - [feedback_missing_report_requires_effort_check](global/feedback_missing_report_requires_effort_check.md) — 🔴🔴🔴 missing report=alert only if effort=0
+- [feedback_never_invent_requirements_in_estimates](global/feedback_never_invent_requirements_in_estimates.md) — 🔴🔴 quote ONLY what client asked; open their mockup before costing
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md), [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
