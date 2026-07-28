@@ -12,6 +12,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 const path = require('path');
 const https = require('https');
 
@@ -139,7 +140,7 @@ async function main() {
   if (capturedRefreshToken) config.refresh_token = capturedRefreshToken;
   config.base_url = BASE_URL;
   config.updated_at = new Date().toISOString();
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log('[workstream-login] Token saved. Verifying...');
 
   const me = await apiGet(BASE_URL + '/api/me', capturedToken);
@@ -150,7 +151,7 @@ async function main() {
   }
   config.user = { id: user.id, email: user.email, name: user.fullName };
   config.api_base = BASE_URL + '/api';
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log('[workstream-login] Verified. Logged in as:', me.email || me.name);
 }
 

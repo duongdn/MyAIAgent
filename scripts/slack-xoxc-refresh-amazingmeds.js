@@ -6,6 +6,7 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const fs = require('fs');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 const path = require('path');
 const https = require('https');
 
@@ -226,7 +227,7 @@ function apiGet(url, headers) {
   // Save back to config
   acct.token = capturedToken;
   if (capturedCookie) acct.cookie = capturedCookie;
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log('Config saved ✓');
 
   // Test the Amazing Meds scan

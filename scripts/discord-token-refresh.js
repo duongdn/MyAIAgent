@@ -18,6 +18,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { execSync, spawn } = require('child_process');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 
 // Chrome paths
 const CHROME_PATH = '/usr/bin/google-chrome';
@@ -314,8 +315,8 @@ function updateConfig(accountName, newToken) {
   }
 
   account.token = typeof newToken === 'string' ? newToken : String(newToken);
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2) + '\n');
-  console.log(`[${accountName}] Config updated.`);
+  saveSecretConfig(CONFIG_PATH, config);
+  console.log(`[${accountName}] Config updated + encrypted.`);
   return true;
 }
 

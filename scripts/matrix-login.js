@@ -15,6 +15,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.matrix-config.json');
@@ -221,7 +222,7 @@ async function main() {
     // Keep existing refresh_token if any
   }
 
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log(`\n✓ Tokens saved to ${CONFIG_PATH}`);
 
   // Quick verify

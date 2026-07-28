@@ -12,6 +12,7 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { spawnSync } = require('child_process');
 const fs   = require('fs');
+const { saveSecretConfig } = require('./lib/save-secret-config');
 const path = require('path');
 const https = require('https');
 
@@ -179,6 +180,6 @@ function apiTest(token, dCookie) {
   if (idx >= 0) { accounts[idx] = entry; console.log('Updated existing OhCleo entry'); }
   else          { accounts.push(entry);   console.log('Added new OhCleo entry'); }
 
-  fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  saveSecretConfig(CONFIG_PATH, config);
   console.log('Saved. Re-encrypt: bash scripts/encrypt-secrets.sh');
 })();
