@@ -1,7 +1,31 @@
 #!/bin/bash
-# Auto-decrypt secrets after git pull/merge if .enc files changed
+# Auto-decrypt secrets after git pull/merge — ONLY the .enc files that actually changed
+# Mass-decrypt of all 24 configs is the single biggest cause of token corruption:
+# freshly-refreshed tokens get clobbered by stale .enc data (Jul 2026 Bitbucket x4,
+# Solid Code Slack deletion, Matrix token re-auth loops).
+set -euo pipefail
+
+ROOT=$(git rev-parse --show-toplevel)
+cd "$ROOT"
+
 CHANGED=$(git diff-tree --no-commit-id --name-only -r HEAD | grep '\.enc$' || true)
-if [ -n "$CHANGED" ]; then
-  echo "Encrypted config files changed — running decrypt..."
-  bash scripts/decrypt-secrets.sh
+if [ -z "$CHANGED" ]; then
+  exit 0
 fi
+
+if [ ! -f .env ]; then
+  echo "post-merge: .env not found, skipping decrypt (not a full checkout?)"
+  exit 0
+fi
+source .env
+
+echo "Encrypted config files changed — decrypting only changed files..."
+while IFS= read -r enc_file; do
+  if [ -f "$enc_file" ]; then
+    plaintext="${enc_file%.enc}"
+    openssl enc -aes-256-cbc -d -salt -pbkdf2 -in "$enc_file" -out "$plaintext" \
+      -pass "pass:${SECRETS_KEY:?SECRETS_KEY not set in .env}"
+    echo "  ✓ $enc_file → $plaintext"
+  fi
+done <<< "$CHANGED"
+echo "Done (decrypted $(echo "$CHANGED" | wc -l) file(s))."

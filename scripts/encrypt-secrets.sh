@@ -1,7 +1,17 @@
 #!/bin/bash
-# Encrypt all secret config files using AES-256-CBC
+# Encrypt secret config files using AES-256-CBC
 # Reads SECRETS_KEY from .env file
 # Outputs .enc files that are safe to commit to git
+#
+# USAGE: encrypt-secrets.sh <file1> [file2 ...]
+#
+# BULK MODE (no args) is INTENTIONALLY KILLED.
+# Running without args used to encrypt ALL 24 config/*.json files, locking
+# whatever stale plaintext happened to be on disk into .enc permanently.
+# This caused at least 4 token-corruption incidents (2026-07 Bitbucket,
+# 2026-07 email-accounts.json, 2026-07 Matrix, 2026-07 Solid Code Slack).
+# Only `saveSecretConfig()` (scripts/lib/save-secret-config.js) should
+# encrypt secrets — and it always calls with an explicit file arg.
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -17,61 +27,21 @@ if [ -z "${SECRETS_KEY:-}" ]; then
   exit 1
 fi
 
-# Optional: encrypt a single file only (used by saveSecretConfig to avoid
-# collaterally re-encrypting all 21 config files - and re-committing any
-# stale plaintext sitting in config/ for files unrelated to the caller -
-# every time one config is saved. See 2026-07 email-accounts.json corruption.)
-if [ -n "${1:-}" ]; then
-  if [ -f "$1" ]; then
-    openssl enc -aes-256-cbc -salt -pbkdf2 -in "$1" -out "${1}.enc" -pass "pass:${SECRETS_KEY}"
-    echo "✓ $1"
-    exit 0
-  else
-    echo "ERROR: file not found: $1"
-    exit 1
-  fi
+if [ $# -eq 0 ]; then
+  echo "ERROR: Must specify at least one file to encrypt."
+  echo "Bulk mode (no args) has been REMOVED to prevent token corruption."
+  echo "Use: $0 config/.foo.json [config/.bar.json ...]"
+  echo "Or add files back to the SECRET_FILES list below if you really need bulk."
+  exit 1
 fi
 
-# All config files are in config/
-SECRET_FILES=(
-  config/.email-accounts.json
-  config/.slack-accounts.json
-  config/.discord-accounts.json
-  config/.google-docs.json
-  config/.trello-config.json
-  config/.scrin-config.json
-  config/.redmine-config.json
-  config/.matrix-config.json
-  config/.msteams-accounts.json
-  config/.web-monitors.json
-  config/.jira-config.json
-  config/.bailey-config.json
-  config/.upwork-config.json
-  config/.cloudflare-config.json
-  config/.gmail-service-account.json
-  config/.github-config.json
-  config/.workstream-config.json
-  config/.newrelic-config.json
-  config/.newrelic-ohcleo-config.json
-  config/.newrelic-fountain-config.json
-  config/.newrelic-infinity-config.json
-  config/.rollbar-config.json
-  config/.bitbucket-config.json
-  config/.server-credentials.json
-)
-
-# Add Google service account key if exists
-SA_KEY=$(ls config/daily-agent-*.json 2>/dev/null | head -1 || true)
-if [ -n "$SA_KEY" ]; then
-  SECRET_FILES+=("$SA_KEY")
-fi
-
-for file in "${SECRET_FILES[@]}"; do
+for file in "$@"; do
   if [ -f "$file" ]; then
     openssl enc -aes-256-cbc -salt -pbkdf2 -in "$file" -out "${file}.enc" -pass "pass:${SECRETS_KEY}"
     echo "✓ $file"
   else
-    echo "⚠ skip: $file"
+    echo "ERROR: file not found: $file"
+    exit 1
   fi
 done
 
