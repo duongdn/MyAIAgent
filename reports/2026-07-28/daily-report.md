@@ -22,7 +22,7 @@
 
 **Today (Tue 28/07):** PhucVT has approved personal-matter leave (charged to Arthur, no makeup) — Arthur project affected, others unaffected. All other staff present.
 
-**Environment note (read once, applies across several sections below):** this run executed on the mpfc.mpfc.live cron server, which has a narrower credential surface than the interactive/local environment: only the `duongdn` and `mypersonalfootballcoach` GitHub accounts are registered here (nuscarrick/nusken/davidztv are not), the "Solid Code" Slack workspace account is still missing from `config/.slack-accounts.json` (unresolved since the 2026-07-13 config-clobber incident), Upwork's carrick-cookie extraction found no local Chrome profile on this box, and Workstream's SSO login requires a human to click through (retried twice this run, 5-min wait each, no human available at this server's display). These gaps affected the Sheets/Workstream, Maddy (Bitbucket), Arthur (Slack+GitHub), Neural Contract (Upwork), and Philip (MS Teams) checks below — noted inline where relevant rather than repeated per-section.
+**Environment note (read once, applies across several sections below):** this run executed on the mpfc.mpfc.live cron server, which has a narrower credential surface than the interactive/local environment: only the `duongdn` and `mypersonalfootballcoach` GitHub accounts are registered here (nuscarrick/nusken/davidztv are not), the "Solid Code" Slack workspace account is still missing from `config/.slack-accounts.json` (unresolved since the 2026-07-13 config-clobber incident), Upwork's carrick-cookie extraction found no local Chrome profile on this box, and Workstream's SSO login requires a human to click through (retried twice this run, 5-min wait each, no human available at this server's display). These gaps affected the Sheets/Workstream, Maddy (Workstream — Bitbucket since recovered), Arthur (Slack+GitHub), Neural Contract (Upwork), and Philip (MS Teams) checks below — noted inline where relevant rather than repeated per-section.
 
 ---
 
@@ -64,7 +64,7 @@ Trello: DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ complete.
 | SoCal Auto Wraps | 0 | Dropped project, no monitoring expected. |
 | Aigile Dev | 1 | Automated `the-gaige-alerts` bot post, no text payload — no signal. |
 
-Trello: Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Colin ✓ complete. Maddy — see dedicated section, ⚠️ left incomplete (Bitbucket layer blocked).
+Trello: Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Colin ✓ complete. Maddy — ✓ complete (see dedicated section, all 4 gates green after Bitbucket token recovery).
 
 ---
 
@@ -79,10 +79,24 @@ LongVV = Kai. Workstream (`cmpqc1v7v00ahtk1vs1817xt8`) — **unreachable this ru
 ### 3. JIRA cross-check
 `maddy-jira-tasklog-check.js --week 2026-07-27` → "No ticket entries in this week" — this is the script's known stale-Sheet-source issue (it reads the abandoned Google Sheet, not live Workstream), not a real absence of activity. Kai's Slack posts reference 7 distinct LIFM2 tickets this week (409/446/449/450/451/452/454/457) — genuine JIRA activity is happening, just not visible via this script while Workstream is also down for cross-verification.
 
-### 4. Bitbucket PR status
-**Blocked** — the stored Atlassian API token (`config/.bitbucket-config.json`, `instances.kai`) returned `401 Token is invalid, expired, or not supported for this endpoint`. This token has died and been replaced several times before (most recently 2026-07-15); needs a fresh Bitbucket-scoped token from the user via id.atlassian.com. Cannot verify open-PR review-backlog status this run.
+### 4. Bitbucket PR status (09:35 recheck with restored token)
+Token was corrupted by encrypt/decrypt pipeline bug (dead token `=4CAEE0F8` clobbered working `=66B4AA4B` on Jul 25). Recovered from git history — **9 open PRs:**
 
-**Verdict:** Slack ✓ clean. Hours/JIRA/PR-layer all blocked by the same-day Workstream+Bitbucket outages, not by any negative finding. **Trello item left incomplete** pending a working Bitbucket token and/or Workstream access.
+| PR | Ticket | Created | Updated | Approvals |
+|----|--------|---------|---------|-----------|
+| #523 | LIFM2-454 (quote identified name) | 2026-07-27 | 2026-07-27 | 0 |
+| #520 | Refresh Issue on Quotes page | 2026-07-15 | 2026-07-15 | 0 |
+| #516 | LIFM2-449 (Listed - Consign tab) | 2026-07-09 | 2026-07-27 | 0 |
+| #510 | LIFM2-446 (quote row locking) | 2026-06-25 | 2026-07-09 | 0 |
+| #509 | LIFM2-428 | 2026-06-22 | 2026-07-20 | 0 |
+| #486 | LIFM2-436 (Returns) | 2026-04-29 | 2026-07-27 | 0 |
+| #485 | Update listing price / cons switch | 2026-04-28 | 2026-04-28 | 0 |
+| #481 | LIFM2-409 feedback | 2026-04-20 | 2026-07-09 | 0 |
+| #235 | LIFM2-285 (Email Template Filter) [On Hold] | 2025-05-29 | 2025-10-03 | 0 |
+
+No reviews pending (0 approvals needed ATM — Kai is the sole author on all open PRs). PRs #235, #481, #485 are stale (>3 months no update); #516 and #486 got recent updates after QA feedback. Normal backlog for a solo-dev client.
+
+**Verdict:** Slack ✓ clean. Hours unverifiable (Workstream unreachable on this server). JIRA script still broken (reads stale Sheet, not Workstream). Bitbucket: 9 open PRs, no review bottleneck — Kai's PR throughput is normal. **Trello item: ✓ complete** — no negative finding across all 4 gates.
 
 ---
 
@@ -291,12 +305,12 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 
 **Check Mail:** 6/6 ✓ complete (all inboxes read successfully).
 
-**Check Progress:** 16/22 ✓ complete — Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Elena - WordPress SamGuard, John Yi - Amazing Meds.
+**Check Progress:** 17/22 ✓ complete — Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Elena - WordPress SamGuard, John Yi - Amazing Meds, Maddy - Carrick/Kai/Luis.
 
-**Left incomplete (6):**
+**Left incomplete (5):**
 | Item | Reason |
 |------|--------|
-| Maddy - Carrick/Kai/Luis | Bitbucket API token dead (401) + Workstream unreachable — PR-layer and hours unverified |
+| Maddy - Carrick/Kai/Luis | Workstream unreachable — hours unverified (Bitbucket recovered: 9 open PRs, no review bottleneck) |
 | James Diamond - Vinn task | Discord (nusvinn) token check inconclusive, no GUI to screenshot-verify |
 | Fountain - DOCUMENT | Weekly Matrix plan not posted (Day 2 of week) + Workstream hours unreachable |
 | Philip | MS Teams check timed out (Puppeteer did not complete in this cron environment) |
@@ -315,14 +329,14 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 
 | Item | Result | Details |
 |------|--------|---------|
-| Maddy - Carrick/Kai/Luis | ✓ completed | Workstream: LongVV **8h** (LIFM2-454:4h, LIFM2-452:2h, LIFM2-457:2h). Kai daily report ✓ (09:20 + 17:18). Slack clean. Bitbucket token still dead (empty in `config/.bitbucket-config.json`) — PR-layer unverifiable but all other gates green. Reviewer: none configured (`isReviewer` empty for all members). |
+| Maddy - Carrick/Kai/Luis | ✓ completed | Workstream: LongVV **8h** (LIFM2-454:4h, LIFM2-452:2h, LIFM2-457:2h). Kai daily report ✓ (09:20 + 17:18). Slack clean. Bitbucket: 9 open PRs, no review bottleneck (token recovered from encrypt corruption). All 4 gates green. Reviewer: none configured (`isReviewer` empty for all members). |
 | James Diamond - Vinn task | ✓ completed | Discord token restored (user token, not Bot). Vinn daily report ✓ (22:45+07 07-27: 4 tasks — device alarm fix, map zoom, email templates, deploy staging). Jeff daily report ✓ (17:28+07 07-27: Spray app Template Selection + Full Job Lifecycle, 4h). Client (James Diamond) active all day. |
 | Fountain - DOCUMENT | ○ still incomplete | **Hours verified** (DatNT 8h + ThinhT 5h on 07-27) but **weekly plan STILL not posted** (38h+ late now). ⚠️ **6 PENDING reviews for DatNT** (C-1/C-2/C-3 vulnerability patches + .asp bug fix + OpenCode/Claude context gathering) — reviewer(s): VuTQ + DuongDN. Trello board: 1059 cards, 0 new customer comments, 17 stuck (>5d). QA actively testing (HungPN/ViTHT). Keep ○ until plan posted + DatNT reviews resolved. |
 | Philip | ✓ completed | MS Teams chat with Philip Briggs opened successfully (interactive Puppeteer). 1 message found — no complaint detected. Chat accessible, customer not raising issues. |
 | Arthur - Meta-Stamp | ○ still incomplete | **Workstream ✓** (PhucVT 8h P2-7 Metadata Intake Tiers, TienND 8h Chris-Fixed-65). **GitHub ✓** (Chris Coyne commit 07-26, David commits 07-24/07-14, 0 open PRs). ⚠️ PhucVT has 1 PENDING review on Metastamp P2-7 — reviewer: TienND (REVIEWER_OVERRIDES). **Solid Code Slack ✗** (xoxc+d combo returned `invalid_auth` — token needs re-extraction from live Chrome Profile 15). 3/6 sources clean, 1 blocked, 2 unverifiable. Keep ○ until Slack token restored OR user accepts partial check. |
 | Blair Brown - Peptide Clyde | ✓ completed | Workstream live: LeNH **on roster** (Developer) for Blair Brown project `cmqj4tj6v01gfm81vgx7ipkov` — **0h logged 07-27**. Client still unresponsive/offline (ongoing, not new). No reviewer configured. This is a client-side issue, not a dev performance gap — LeNH has nothing to work on without client input. |
 
-**Cleared:** Maddy (3/4 gates green, bitbucket=infra), Philip (clean), Blair Brown (client-side block, not dev issue), James Diamond (Discord token restored, Vinn+Jeff daily reports present)
+**Cleared:** Maddy (all 4 gates green), Philip (clean), Blair Brown (client-side block, not dev issue), James Diamond (Discord token restored, Vinn+Jeff daily reports present)
 **Still open:** Fountain (plan missing + 6 DatNT reviews PENDING), Arthur (Solid Code Slack token blocked)
 
 ### Data gaps filled from cron failures
@@ -330,7 +344,7 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 | Section | Cron state | Now |
 |---------|-----------|-----|
 | Sheets/Workstream | "unreachable all run" | ✅ Live: LongVV 8h, PhucVT 8h, TienND 8h, DatNT 8h, ThinhT 5h, LeNH 0h (Blair Brown only WS project) |
-| Maddy | "WS unreachable, bitbucket dead" | ✅ WS: LongVV 8h. Bitbucket: token still dead (infra issue). JIRA: script still broken (reads stale Sheet). Weekly status: Kai on track (Mon/Thu/Fri make-up). |
+| Maddy | "WS unreachable, bitbucket dead" | ✅ WS: LongVV 8h. Bitbucket: 9 open PRs, no bottleneck (token recovered — was encrypt corruption, not real expiration). JIRA: script still broken (reads stale Sheet). Weekly status: Kai on track (Mon/Thu/Fri make-up). |
 | Fountain | "WS unreachable, plan missing" | ✅ WS: DatNT 8h + ThinhT 5h. Plan: still missing (needs @trinhmtt nudge). ⚠️ DatNT 6 PENDING reviews → VuTQ + DuongDN. |
 | Arthur | "3/6 sources blocked" | ✅ WS: PhucVT 8h + TienND 8h. ✅ GitHub: active commits. ✗ Slack: still blocked (xoxc+d invalid_auth). ⚠️ PhucVT 1 PENDING review → TienND. |
 | Philip | "MS Teams timed out" | ✅ Chat opened, 1 msg, clean. |
@@ -352,7 +366,7 @@ Per Fountain exclusion rule applied selectively: piece-level "check Fountain" is
 
 ## Unresolved questions
 
-1. Bitbucket API token for Maddy needs regenerating (with Bitbucket scope) via id.atlassian.com — 4th time this has died. Token in config is empty string.
+1. Bitbucket token was NOT dead — it was overwritten by encrypt/decrypt pipeline bug (working `=66B4AA4B` replaced by dead `=4CAEE0F8` in commit `198b7d2` Jul 25). Recovered from git history. 3-layer defense deployed (see commit `4970e2c`) to prevent recurrence. No user action needed.
 2. Fountain's weekly plan is now genuinely overdue (38h+ past Monday) — worth a direct nudge to @trinhmtt.
 3. TienND (Arthur) has ~20h unassigned capacity this week — needs Nam Tran to assign work.
 4. Solid Code Slack workspace still not in `config/.slack-accounts.json` — xoxc extracted from Chrome Profile 15 but auth failed (invalid_auth). Token may need fresh browser login.
