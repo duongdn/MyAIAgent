@@ -1,24 +1,28 @@
 #!/usr/bin/env node
 /**
- * Maddy JIRA × task log cross-check.
- * For each ticket logged in the task log, verifies:
+ * Maddy JIRA × Workstream task log cross-check.
+ *
+ * For each ticket Kai (LongVV) logged in Workstream this week, verifies:
  *   1. Original estimate set on JIRA
  *   2. Actual time logged on JIRA
  *   3. est >= actual (not over-budget)
  *
+ * Data source: Workstream /review/week API (NOT the stale Google Sheet).
+ * The Sheet was abandoned 2026-07-13 after full migration to Workstream;
+ * reverted to Workstream live data 2026-07-28.
+ *
  * Usage:
- *   node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]       # one day, JSON output
- *   node scripts/maddy-jira-tasklog-check.js --week [YYYY-MM-DD] # full week, markdown table
- *   Date defaults to yesterday (PREV_DATE).
+ *   node scripts/maddy-jira-tasklog-check.js [YYYY-MM-DD]       # one day, JSON
+ *   node scripts/maddy-jira-tasklog-check.js --week [YYYY-MM-DD] # full week, md table
+ *   Date defaults to yesterday.
  */
 
 const fs = require('fs');
 const path = require('path');
-const { google } = require('googleapis');
 
-const SHEET_ID  = '1PHW76CuJ7nEJ3bU150iIVFsVXrQOmP5lVKgfI4ESR7I';
-const SA_KEY    = path.join(__dirname, '..', 'config', 'daily-agent-490610-7eb7985b33e3.json');
-const JIRA_CFG  = path.join(__dirname, '..', 'config', '.jira-config.json');
+const MADDY_PROJECT_ID = 'cmpqc1v7v00ahtk1vs1817xt8';
+const WS_CONFIG = path.join(__dirname, '..', 'config', '.workstream-config.json');
+const JIRA_CFG = path.join(__dirname, '..', 'config', '.jira-config.json');
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -28,10 +32,10 @@ function prevDate() {
   return d.toISOString().slice(0, 10);
 }
 
-function parseDate(s) {
-  // "2026-06-10" → { day:"10", month:"06", year:"26" }
-  const [y, m, d] = s.split('-');
-  return { day: d, month: m, year: y.slice(2) };
+function parseHoursHM(s) {
+  if (!s) return 0;
+  const [h, m] = s.split(':').map(Number);
+  return h + (m || 0) / 60;
 }
 
 function fmtDuration(seconds) {
@@ -41,7 +45,6 @@ function fmtDuration(seconds) {
   return m ? `${h}h ${m}m` : `${h}h`;
 }
 
-// Extract all JIRA ticket keys from a string (e.g. "LIFM2-442: ..." or URL)
 function extractTickets(str) {
   if (!str) return [];
   return [...new Set((str.match(/[A-Z][A-Z0-9]+-\d+/g) || []))];
@@ -55,88 +58,130 @@ async function jiraGet(url, email, token) {
   return res.json();
 }
 
+// ── Workstream auth ──────────────────────────────────────────────────────────
+
+async function ensureWorkstreamToken() {
+  const { default: fetch } = await import('node-fetch');
+  const config = JSON.parse(fs.readFileSync(WS_CONFIG, 'utf8'));
+  const res = await fetch(config.api_base + '/me', { headers: { Authorization: 'Bearer ' + config.access_token } });
+  if (res.status === 200) return config;
+  process.stderr.write('[workstream] token expired, refreshing via SSO...\n');
+  const { execSync } = require('child_process');
+  execSync(`DISPLAY=:1 node ${path.join(__dirname, 'workstream-login.js')}`, { stdio: 'inherit', timeout: 60000 });
+  return JSON.parse(fs.readFileSync(WS_CONFIG, 'utf8'));
+}
+
 // ── main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
+  const { default: fetch } = await import('node-fetch');
   const args = process.argv.slice(2);
   const weekMode = args.includes('--week');
-  const dateArg  = args.find(a => !a.startsWith('--')) || prevDate();
+  const dateArg = args.find(a => !a.startsWith('--')) || prevDate();
   const targetDate = dateArg;
-  const { day, month, year } = parseDate(targetDate);
-  // Sheet date header format: "Mon, 10/06/26"
-  const datePattern = new RegExp(`${day}/${month}/${year}`, 'i');
 
   // Read JIRA config
   const jiraConfig = JSON.parse(fs.readFileSync(JIRA_CFG, 'utf8'));
   const inst = jiraConfig.instances.madhuraka;
 
-  // Auth Google Sheets
-  const creds = JSON.parse(fs.readFileSync(SA_KEY, 'utf8'));
-  const auth = new google.auth.GoogleAuth({ credentials: creds, scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
-  const sheets = google.sheets({ version: 'v4', auth });
-
-  // Find correct week tab via Summary
-  const summaryRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: 'Summary!A1:D60' });
-  const summaryRows = summaryRes.data.values || [];
-
-  let weekTab = null;
-  const target = new Date(targetDate);
-  for (const row of summaryRows) {
-    if (!row[0] || !row[0].match(/^W\d+$/)) continue;
-    const start = new Date(row[1]);
-    const end   = new Date(row[2]);
-    if (target >= start && target <= end) { weekTab = row[0]; break; }
-  }
-
-  if (!weekTab) {
-    console.log(JSON.stringify({ error: `No week tab found for ${targetDate}`, date: targetDate, tickets: [] }));
+  // Authenticate Workstream
+  let wsConfig;
+  try {
+    wsConfig = await ensureWorkstreamToken();
+  } catch (e) {
+    const msg = { error: `Workstream auth failed: ${e.message}`, date: targetDate, tickets: [] };
+    console.log(JSON.stringify(msg));
     return;
   }
 
-  // Fetch week tab rows
-  const weekRes = await sheets.spreadsheets.values.get({ spreadsheetId: SHEET_ID, range: `${weekTab}!A1:K250` });
-  const rows = weekRes.data.values || [];
-
-  // Extract task entries — one day (default) or whole week (--week)
-  const allEntries = []; // { date, ticket, description, hours, owner }
-  let currentDay = null;
-  let inScope    = weekMode; // week mode: collect all days; day mode: only target day
-
-  for (const row of rows) {
-    const cell = (row[0] || '').trim();
-    const isDayHeader = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),/.test(cell);
-
-    if (isDayHeader) {
-      currentDay = cell;
-      if (!weekMode) {
-        inScope = datePattern.test(cell);
-        if (inScope === false && allEntries.length > 0) break; // past target day, done
-      }
-      continue;
+  // Fetch Maddy's week from Workstream
+  const wsUrl = `${wsConfig.api_base}/review/week?projectId=${MADDY_PROJECT_ID}&date=${targetDate}`;
+  let weekData;
+  try {
+    const wsRes = await fetch(wsUrl, { headers: { Authorization: 'Bearer ' + wsConfig.access_token } });
+    if (wsRes.status !== 200) {
+      const msg = { error: `Workstream API ${wsRes.status}`, date: targetDate, tickets: [] };
+      console.log(JSON.stringify(msg));
+      return;
     }
-    if (!inScope || cell !== 'Task dự án') continue;
+    weekData = await wsRes.json();
+  } catch (e) {
+    const msg = { error: `Workstream fetch failed: ${e.message}`, date: targetDate, tickets: [] };
+    console.log(JSON.stringify(msg));
+    return;
+  }
 
-    const description = (row[2] || '').trim();
-    const reference   = (row[3] || '').trim();
-    const owner       = (row[6] || '').trim();
-    const hours       = parseFloat(row[7]) || 0;
-    if (!description && !reference) continue;
+  const allRows = weekData.rows || [];
+  if (allRows.length === 0) {
+    const msg = weekMode
+      ? { week: weekData.weekStart || targetDate, tickets: [], summary: 'No Workstream entries this week' }
+      : { date: targetDate, tickets: [], summary: 'No Workstream entries for this date' };
+    console.log(JSON.stringify(msg));
+    return;
+  }
 
-    const tickets = [...extractTickets(description), ...extractTickets(reference)];
+  // Extract ticket entries from Workstream task rows
+  // Only Kai/LongVV (employeeName may vary between "LongVV" or "Kai")
+  const allEntries = [];
+  for (const row of allRows) {
+    const name = (row.employeeName || '').trim().toLowerCase();
+    if (name !== 'longvv' && name !== 'kai') continue;
+
+    const taskDesc = (row.task || '').trim();
+    const actualHours = parseHoursHM(row.actual || '0:00');
+    const rowDate = row.date || '';
+    const reviewStatus = row.reviewStatus || 'NotRequired';
+
+    // Only include rows in scope
+    if (!weekMode && rowDate !== targetDate) continue;
+
+    const tickets = extractTickets(taskDesc);
     for (const t of tickets) {
-      allEntries.push({ date: currentDay, ticket: t, description, hours, owner });
+      allEntries.push({
+        date: rowDate,
+        ticket: t,
+        description: taskDesc,
+        hours: actualHours,
+        owner: row.employeeName || 'LongVV',
+        reviewStatus,
+      });
+    }
+  }
+
+  // Also accept rows with no ticket but that look like task entries (flag them)
+  // This catches entries Kai wrote without a ticket key in the task field
+  for (const row of allRows) {
+    const name = (row.employeeName || '').trim().toLowerCase();
+    if (name !== 'longvv' && name !== 'kai') continue;
+    const taskDesc = (row.task || '').trim();
+    const rowDate = row.date || '';
+    if (!weekMode && rowDate !== targetDate) continue;
+    if (extractTickets(taskDesc).length > 0) continue; // already captured above
+
+    const actualHours = parseHoursHM(row.actual || '0:00');
+    if (actualHours > 0 && taskDesc) {
+      // Entry has hours but no recognizable ticket key — flag as untagged
+      const tag = taskDesc.length > 50 ? taskDesc.slice(0, 47) + '...' : taskDesc;
+      allEntries.push({
+        date: rowDate,
+        ticket: `(untagged: ${tag})`,
+        description: taskDesc,
+        hours: actualHours,
+        owner: row.employeeName || 'LongVV',
+        reviewStatus: row.reviewStatus || 'NotRequired',
+      });
     }
   }
 
   if (allEntries.length === 0) {
     const msg = weekMode
-      ? { week: weekTab, tickets: [], summary: 'No ticket entries in this week' }
-      : { date: targetDate, week: weekTab, tickets: [], summary: 'No ticket entries found for this date' };
+      ? { week: weekData.weekStart || targetDate, tickets: [], summary: 'No JIRA-tagged entries this week (check Workstream for untagged tasks)' }
+      : { date: targetDate, tickets: [], summary: 'No JIRA-tagged entries for this date' };
     console.log(JSON.stringify(msg));
     return;
   }
 
-  // Deduplicate tickets but aggregate hours across all entries
+  // Deduplicate tickets but aggregate hours
   const uniqueTickets = [...new Set(allEntries.map(e => e.ticket))];
 
   // Fetch JIRA for each unique ticket
@@ -145,8 +190,26 @@ async function main() {
     const logEntries = allEntries.filter(e => e.ticket === ticketKey);
     const totalHoursLogged = logEntries.reduce((sum, e) => sum + e.hours, 0);
 
-    let jiraData = null;
-    let jiraError = null;
+    // Skip JIRA lookup for untagged entries
+    if (ticketKey.startsWith('(untagged:')) {
+      results.push({
+        ticket: ticketKey,
+        summary: '(no JIRA ticket key in Workstream task field)',
+        status: '—',
+        est: '—',
+        actual: '—',
+        estHours: 0,
+        actualHours: 0,
+        loggedHours: totalHoursLogged,
+        overBudget: false,
+        checks: { hasEst: false, hasActual: false, estGteActual: false },
+        reviewStatus: logEntries[0]?.reviewStatus || 'NotRequired',
+        taskLogEntries: logEntries.map(e => ({ date: e.date, hours: e.hours, description: e.description })),
+      });
+      continue;
+    }
+
+    let jiraData = null, jiraError = null;
     try {
       const fields = 'summary,timeoriginalestimate,timespent,timetracking,status,assignee';
       jiraData = await jiraGet(`${inst.url}/rest/api/3/issue/${ticketKey}?fields=${fields}`, inst.email, inst.api_token);
@@ -155,55 +218,64 @@ async function main() {
     }
 
     if (jiraError || !jiraData || jiraData.errorMessages) {
-      results.push({ ticket: ticketKey, error: jiraError || JSON.stringify(jiraData?.errorMessages), loggedHours: totalHoursLogged, checks: { hasEst: false, hasActual: false, estGteActual: false } });
+      results.push({
+        ticket: ticketKey, error: jiraError || JSON.stringify(jiraData?.errorMessages),
+        loggedHours: totalHoursLogged,
+        checks: { hasEst: false, hasActual: false, estGteActual: false },
+        reviewStatus: logEntries[0]?.reviewStatus || 'NotRequired',
+      });
       continue;
     }
 
-    const f              = jiraData.fields;
-    const estSeconds     = f.timeoriginalestimate || 0;
-    const actualSeconds  = f.timespent || 0;
-    const estHours       = estSeconds / 3600;
-    const actualHours    = actualSeconds / 3600;
-    const hasEst         = estSeconds > 0;
-    const hasActual      = actualSeconds > 0;
-    const estGteActual   = hasEst && estSeconds >= actualSeconds;
+    const f = jiraData.fields;
+    const estSeconds = f.timeoriginalestimate || 0;
+    const actualSeconds = f.timespent || 0;
+    const estHours = estSeconds / 3600;
+    const actualHours = actualSeconds / 3600;
+    const hasEst = estSeconds > 0;
+    const hasActual = actualSeconds > 0;
+    const estGteActual = hasEst && estSeconds >= actualSeconds;
 
     results.push({
-      ticket:       ticketKey,
-      summary:      f.summary,
-      status:       f.status?.name,
-      est:          fmtDuration(estSeconds),
-      actual:       fmtDuration(actualSeconds),
+      ticket: ticketKey,
+      summary: f.summary,
+      status: f.status?.name,
+      est: fmtDuration(estSeconds),
+      actual: fmtDuration(actualSeconds),
       estHours,
       actualHours,
-      loggedHours:  totalHoursLogged,  // hours written in task log today
-      overBudget:   hasEst && actualSeconds > estSeconds,
-      overBy:       hasEst ? fmtDuration(Math.max(0, actualSeconds - estSeconds)) : null,
-      checks: {
-        hasEst,
-        hasActual,
-        estGteActual,
-      },
-      taskLogEntries: logEntries.map(e => ({ owner: e.owner, hours: e.hours, description: e.description })),
+      loggedHours: totalHoursLogged,
+      overBudget: hasEst && actualSeconds > estSeconds,
+      overBy: hasEst ? fmtDuration(Math.max(0, actualSeconds - estSeconds)) : null,
+      checks: { hasEst, hasActual, estGteActual },
+      reviewStatus: logEntries[0]?.reviewStatus || 'NotRequired',
+      taskLogEntries: logEntries.map(e => ({ date: e.date, hours: e.hours, description: e.description })),
     });
   }
 
-  // Summary flags
-  const missing_est    = results.filter(r => !r.error && !r.checks.hasEst);
+  // Summary
+  const ok = results.filter(r => !r.error && r.checks.hasEst && r.checks.hasActual && r.checks.estGteActual);
+  const missing_est = results.filter(r => !r.error && !r.checks.hasEst);
   const missing_actual = results.filter(r => !r.error && !r.checks.hasActual);
-  const over_budget    = results.filter(r => !r.error && r.overBudget);
-  const ok             = results.filter(r => !r.error && r.checks.hasEst && r.checks.hasActual && r.checks.estGteActual);
-  const errors         = results.filter(r => r.error);
+  const over_budget = results.filter(r => !r.error && r.overBudget);
+  const errors = results.filter(r => r.error);
+  const untagged = results.filter(r => r.ticket.startsWith('(untagged:'));
 
   if (weekMode) {
-    // Markdown table output for --week
-    const label = `${weekTab} (${targetDate})`;
-    console.log(`## Maddy JIRA — ${label}\n`);
-    console.log(`| Ticket | Summary | Status | Est | Actual (JIRA) | Task Log | Check |`);
-    console.log(`|--------|---------|--------|-----|---------------|----------|-------|`);
+    const label = `${weekData.weekStart || targetDate} → ${weekData.weekEnd || targetDate}`;
+    console.log(`## Maddy JIRA × Workstream — ${label}\n`);
+    if (untagged.length) {
+      console.log(`⚠️  **${untagged.length} Workstream entries without JIRA ticket keys** — Kai needs to include ticket ID in task field:\n`);
+      for (const u of untagged) {
+        console.log(`  - ${u.loggedHours}h — "${u.taskLogEntries[0]?.description || u.ticket.slice(11, -1)}"`);
+      }
+      console.log('');
+    }
+    console.log(`| Ticket | Summary | Status | Est | Actual (JIRA) | WS Log | Review | Check |`);
+    console.log(`|--------|---------|--------|-----|---------------|--------|--------|-------|`);
     for (const r of results) {
       if (r.error) {
-        console.log(`| ${r.ticket} | — | — | — | — | ${r.loggedHours}h | ⚠️ error: ${r.error} |`);
+        console.log(`| ${r.ticket} | — | — | — | — | ${r.loggedHours}h | ${r.reviewStatus} | ⚠️ ${r.error} |`);
         continue;
       }
       let check = '✅';
@@ -212,27 +284,30 @@ async function main() {
       if (!r.checks.hasActual)   flags.push('⚠️ no JIRA log');
       if (r.overBudget)          flags.push(`🔴 over ${r.overBy}`);
       if (flags.length)          check = flags.join(' ');
-      console.log(`| ${r.ticket} | ${r.summary} | ${r.status} | ${r.est} | ${r.actual} | ${r.loggedHours}h | ${check} |`);
+      console.log(`| ${r.ticket} | ${(r.summary||'').slice(0,50)} | ${r.status} | ${r.est} | ${r.actual} | ${r.loggedHours}h | ${r.reviewStatus} | ${check} |`);
     }
     console.log('');
     if (over_budget.length)    console.log(`**Over-budget (${over_budget.length}):** ${over_budget.map(r=>`${r.ticket} est=${r.est} actual=${r.actual} over=${r.overBy}`).join(', ')}`);
-    if (missing_est.length)    console.log(`**No estimate (${missing_est.length}):** ${missing_est.map(r=>r.ticket).join(', ')} — dev must set est before logging`);
-    if (missing_actual.length) console.log(`**No JIRA log (${missing_actual.length}):** ${missing_actual.map(r=>r.ticket).join(', ')} — dev must log time on ticket`);
-    if (!over_budget.length && !missing_est.length && !missing_actual.length) console.log(`All ${ok.length} tickets OK ✅`);
+    if (missing_est.length)    console.log(`**No estimate (${missing_est.length}):** ${missing_est.map(r=>r.ticket).join(', ')}`);
+    if (missing_actual.length) console.log(`**No JIRA log (${missing_actual.length}):** ${missing_actual.map(r=>r.ticket).join(', ')}`);
+    if (errors.length)         console.log(`**JIRA errors (${errors.length}):** ${errors.map(r=>r.ticket).join(', ')}`);
+    if (!over_budget.length && !missing_est.length && !missing_actual.length && !errors.length) console.log(`All ${ok.length} tickets OK ✅`);
     return;
   }
 
   console.log(JSON.stringify({
-    date:    targetDate,
-    week:    weekTab,
+    date: targetDate,
+    source: 'Workstream',
+    projectId: MADDY_PROJECT_ID,
     tickets: results,
     summary: {
-      total:          results.length,
-      ok:             ok.length,
-      missing_est:    missing_est.map(r => r.ticket),
+      total: results.length,
+      ok: ok.length,
+      untagged: untagged.length,
+      missing_est: missing_est.map(r => r.ticket),
       missing_actual: missing_actual.map(r => r.ticket),
-      over_budget:    over_budget.map(r => ({ ticket: r.ticket, est: r.est, actual: r.actual, over: r.overBy })),
-      errors:         errors.map(r => ({ ticket: r.ticket, error: r.error })),
+      over_budget: over_budget.map(r => ({ ticket: r.ticket, est: r.est, actual: r.actual, over: r.overBy })),
+      errors: errors.map(r => ({ ticket: r.ticket, error: r.error })),
     }
   }, null, 2));
 }
