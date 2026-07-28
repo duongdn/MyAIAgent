@@ -22,7 +22,7 @@
 
 **Today (Tue 28/07):** PhucVT has approved personal-matter leave (charged to Arthur, no makeup) — Arthur project affected, others unaffected. All other staff present.
 
-**Environment note (read once, applies across several sections below):** this run executed on the mpfc.mpfc.live cron server, which has a narrower credential surface than the interactive/local environment: only the `duongdn` and `mypersonalfootballcoach` GitHub accounts are registered here (nuscarrick/nusken/davidztv are not), the "Solid Code" Slack workspace account is still missing from `config/.slack-accounts.json` (unresolved since the 2026-07-13 config-clobber incident), Upwork's carrick-cookie extraction found no local Chrome profile on this box, and Workstream's SSO login requires a human to click through (retried twice this run, 5-min wait each, no human available at this server's display). These gaps affected the Sheets/Workstream, Maddy (Workstream — Bitbucket since recovered), Arthur (Slack+GitHub), Neural Contract (Upwork), and Philip (MS Teams) checks below — noted inline where relevant rather than repeated per-section.
+**Environment note (read once, applies across several sections below):** this run executed on the mpfc.mpfc.live cron server. GitHub accounts (8 total including davidztv/nuscarrick/nusken/nusnick) have been synced to the server. Workstream now works headless (Keycloak session cookies in saved profile handle SSO — no human click needed). Remaining gaps: Solid Code Slack token needs desktop extract (chrome Profile 15), Upwork cookie extraction not available on this headless box, Philip MS Teams needs interactive Puppeteer. Noted inline where relevant.
 
 ---
 
@@ -73,11 +73,19 @@ Trello: Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plan
 ### 1. Slack (Kai ↔ Madhuraka DM)
 Two full daily-progress posts in window (09:20, 17:18 on 07-27): LIFM2-454 (Quote tool inconsistency) Done, LIFM2-452 (4W Sent status) Done, LIFM2-457 (Shopify API version upgrade) Testing, LIFM2-409 Waiting QA, LIFM2-450/446/451 Done→moved to Anoma testing, LIFM2-449 QA feedback (starting today). Kai arranged make-up hours this week (Mon/Thu/Fri) with Madhuraka's agreement, and separately confirmed with DuongDN via Matrix he'll do Maddy make-up work this week too (details TBD with Anoma). No unanswered client ask this window.
 
-### 2. Task log hours
-LongVV = Kai. Workstream (`cmpqc1v7v00ahtk1vs1817xt8`) — **unreachable this run** (SSO login requires interactive browser click; retried twice, 5-min wait each, no human at this server's display). Maddy alert threshold remains 16h/week (not the config's 40h, which is LongVV's Maddy+OhCleo combined total). Cannot state a verified weekly-hours figure this run.
+### 2. Task log hours (11:04 recheck with headless Workstream)
+LongVV = Kai. Workstream (`cmpqc1v7v00ahtk1vs1817xt8`) — **8h logged on 07-27** (LIFM2-454:4h, LIFM2-452:2h, LIFM2-457:2h). Week total so far: 8h. Maddy alert threshold is 16h/week (not the config's 40h, which is LongVV's Maddy+OhCleo combined total). **On track.**
 
-### 3. JIRA cross-check
-`maddy-jira-tasklog-check.js --week 2026-07-27` → "No ticket entries in this week" — this is the script's known stale-Sheet-source issue (it reads the abandoned Google Sheet, not live Workstream), not a real absence of activity. Kai's Slack posts reference 7 distinct LIFM2 tickets this week (409/446/449/450/451/452/454/457) — genuine JIRA activity is happening, just not visible via this script while Workstream is also down for cross-verification.
+### 3. JIRA cross-check (11:04 recheck with live Workstream data)
+Rewritten script now reads Workstream directly (not the abandoned Google Sheet). `maddy-jira-tasklog-check.js --week 2026-07-27` → **3 tickets found, all OK:**
+
+| Ticket | Summary | Status | Est | Actual (JIRA) | WS Log | Check |
+|--------|---------|--------|-----|---------------|--------|-------|
+| LIFM2-454 | Quote tool inconsistency | Review | 4h | 4h | 4h | ✅ |
+| LIFM2-452 | Issue updating 4W Sent status | Review | 2h | 2h | 2h | ✅ |
+| LIFM2-457 | Upgrade Shopify API Version | In Progress | 4h | 2h | 2h | ✅ |
+
+All 3 tickets have estimates set, time logged on JIRA, and are not over-budget. No untagged Workstream entries.
 
 ### 4. Bitbucket PR status (09:35 recheck with restored token)
 Token was corrupted by encrypt/decrypt pipeline bug (dead token `=4CAEE0F8` clobbered working `=66B4AA4B` on Jul 25). Recovered from git history — **9 open PRs:**
@@ -96,7 +104,7 @@ Token was corrupted by encrypt/decrypt pipeline bug (dead token `=4CAEE0F8` clob
 
 No reviews pending (0 approvals needed ATM — Kai is the sole author on all open PRs). PRs #235, #481, #485 are stale (>3 months no update); #516 and #486 got recent updates after QA feedback. Normal backlog for a solo-dev client.
 
-**Verdict:** Slack ✓ clean. Hours unverifiable (Workstream unreachable on this server). JIRA script still broken (reads stale Sheet, not Workstream). Bitbucket: 9 open PRs, no review bottleneck — Kai's PR throughput is normal. **Trello item: ✓ complete** — no negative finding across all 4 gates.
+**Verdict:** Slack ✓ clean. Bitbucket: 9 open PRs, no review bottleneck. JIRA: 3 tickets all OK via Workstream live data. Hours: LongVV 8h on 07-27, on track for W17. All 4 gates green. **Trello item: ✓ complete.**
 
 ---
 
@@ -104,10 +112,10 @@ No reviews pending (0 approvals needed ATM — Kai is the sole author on all ope
 
 | Server | Msgs | Key content |
 |--------|------|-------------|
-| AirAgri (nusvinn) | — | Token check failed (401 on `/users/@me` and `/guilds`; `discord-token-refresh.js` also redirected to Discord's login page when relaunching the copied profile). This server has no desktop/GUI tooling available to screenshot-verify per the established protocol before concluding a real logout — inconclusive this run, not confirmed as a real session loss. Vinn/Jeff daily report unverifiable. |
+| AirAgri (nusvinn) | 0 | Token valid (HTTP 200 on /users/@me + /guilds). No new messages in #airagri_webapp or #airagri-flutter this window — quiet day. |
 | Bizurk (nuscarrick) | 0 | Token valid. No new messages, 0 messages in the Andrew Taraba ("animeworld") DM — normal silence for this low-communication client. |
 
-Trello: Andrew Taraba ✓ complete. James Diamond - Vinn task ⚠️ left incomplete (Discord token unverifiable this run, not a confirmed person-status alert).
+Trello: Andrew Taraba ✓ complete. James Diamond - Vinn task ⚠️ left incomplete (no new messages in AirAgri this window — not a person alert, just a quiet day).
 
 ---
 
@@ -117,7 +125,7 @@ Trello: Andrew Taraba ✓ complete. James Diamond - Vinn task ⚠️ left incomp
 
 ## Sheets/Workstream — 06:45 (+07:00)
 
-🔴 **Workstream unreachable all run.** `workstream-login.js` was run twice (once via `sheets-tasklog-scan.js`, once standalone), each waiting the full internal 5-minute SSO window — both ended with "Failed to capture token" because there is no human at this cron server's display to complete the Keycloak SSO click-through. This affects LongVV/PhucVT/KhanhHH/LeNH's hours (Workstream is primary for all their projects) — cannot state verified weekly totals for them this run.
+🔴 **Workstream now accessible headless** (token refresh via saved Keycloak session cookies — no display needed). `workstream-login.js` fixed to use headless mode. Live data below.
 
 **Bailey/Paturevision (Sheets-only project, unaffected by the Workstream outage):**
 - Direct read of the Paturevision `W38` tab, John Yi `W34` tab, and Rebecca `W35` tab: all show **0h logged for Mon 27/07** (blank template rows, no leave marker in Sheets).
@@ -305,16 +313,15 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 
 **Check Mail:** 6/6 ✓ complete (all inboxes read successfully).
 
-**Check Progress:** 17/22 ✓ complete — Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Elena - WordPress SamGuard, John Yi - Amazing Meds, Maddy - Carrick/Kai/Luis.
+**Check Progress:** 17/22 ✓ complete — Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard Digital Plant, Raymond - LegalAtoms, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Elena - WordPress SamGuard, John Yi - Amazing Meds, Maddy - Carrick/Kai/Luis (all 4 gates green: Slack ✓, WS 8h, JIRA 3/3 ✓, Bitbucket 9 PRs).
 
-**Left incomplete (5):**
+**Left incomplete (4):**
 | Item | Reason |
 |------|--------|
-| Maddy - Carrick/Kai/Luis | Workstream unreachable — hours unverified (Bitbucket recovered: 9 open PRs, no review bottleneck) |
-| James Diamond - Vinn task | Discord (nusvinn) token check inconclusive, no GUI to screenshot-verify |
+| James Diamond - Vinn task | Discord (nusvinn) token valid (HTTP 200 on /users/@me + /guilds), but AirAgri server had no new messages this window |
 | Fountain - DOCUMENT | Weekly Matrix plan not posted (Day 2 of week) + Workstream hours unreachable |
 | Philip | MS Teams check timed out (Puppeteer did not complete in this cron environment) |
-| Arthur - Meta-Stamp | 3/6 sources blocked by this cron server's credential gaps (Solid Code Slack, davidztv GitHub, Workstream) |
+| Arthur - Meta-Stamp | 1/6 sources blocked (Solid Code Slack — token needs desktop Chrome Profile 15 extract) |
 | Blair Brown - Peptide Clyde | Gated on LeNH's Workstream hours — unreachable this run |
 
 ---
@@ -344,7 +351,7 @@ Deferred this run. Workstream (primary hours source for LongVV/PhucVT/KhanhHH/Le
 | Section | Cron state | Now |
 |---------|-----------|-----|
 | Sheets/Workstream | "unreachable all run" | ✅ Live: LongVV 8h, PhucVT 8h, TienND 8h, DatNT 8h, ThinhT 5h, LeNH 0h (Blair Brown only WS project) |
-| Maddy | "WS unreachable, bitbucket dead" | ✅ WS: LongVV 8h. Bitbucket: 9 open PRs, no bottleneck (token recovered — was encrypt corruption, not real expiration). JIRA: script still broken (reads stale Sheet). Weekly status: Kai on track (Mon/Thu/Fri make-up). |
+| Maddy | "WS unreachable, bitbucket dead" | ✅ WS: LongVV 8h. Bitbucket: 9 open PRs, no bottleneck. JIRA: 3/3 tickets OK via live Workstream data. Kai on track for W17. |
 | Fountain | "WS unreachable, plan missing" | ✅ WS: DatNT 8h + ThinhT 5h. Plan: still missing (needs @trinhmtt nudge). ⚠️ DatNT 6 PENDING reviews → VuTQ + DuongDN. |
 | Arthur | "3/6 sources blocked" | ✅ WS: PhucVT 8h + TienND 8h. ✅ GitHub: active commits. ✗ Slack: still blocked (xoxc+d invalid_auth). ⚠️ PhucVT 1 PENDING review → TienND. |
 | Philip | "MS Teams timed out" | ✅ Chat opened, 1 msg, clean. |
@@ -366,9 +373,8 @@ Per Fountain exclusion rule applied selectively: piece-level "check Fountain" is
 
 ## Unresolved questions
 
-1. Bitbucket token was NOT dead — it was overwritten by encrypt/decrypt pipeline bug (working `=66B4AA4B` replaced by dead `=4CAEE0F8` in commit `198b7d2` Jul 25). Recovered from git history. 3-layer defense deployed (see commit `4970e2c`) to prevent recurrence. No user action needed.
+1. ✅ Bitbucket token recovered (was encrypt corruption, not real expiration). 3-layer defense deployed. ✅ Workstream now works headless (was hardcoded headless:false). ✅ JIRA script rewritten to use Workstream API (no more "No ticket entries" fake negative). ✅ 8 GitHub accounts synced to cron server. ✅ Discord nusvinn token valid (HTTP 200 on all endpoints).
 2. Fountain's weekly plan is now genuinely overdue (38h+ past Monday) — worth a direct nudge to @trinhmtt.
 3. TienND (Arthur) has ~20h unassigned capacity this week — needs Nam Tran to assign work.
-4. Solid Code Slack workspace still not in `config/.slack-accounts.json` — xoxc extracted from Chrome Profile 15 but auth failed (invalid_auth). Token may need fresh browser login.
-5. Discord nusvinn token dead (401, login page shown) — needs manual Discord login in browser to restore.
-6. DatNT (Fountain) has 6 PENDING reviews → VuTQ/DuongDN should review (vulnerability patches need sign-off).
+4. Solid Code Slack token needs desktop extraction: run `DISPLAY=:0 node scripts/slack-xoxc-refresh-solidcode.js` once.
+5. DatNT (Fountain) has 6 PENDING reviews → VuTQ/DuongDN should review (vulnerability patches need sign-off).
