@@ -149,6 +149,7 @@
 - [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — `/me:finance-report-detail <TICKER>` builds 6-sheet FPT/VEA-style report — 🔴 apply formatting DURING build, not after
 - [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn direct JSON API (no browser needed) + 3 known bugs (wrong LCTT endpoint, +60k tỷ cell typo, EPS unit scaling) + share-split gotcha for BVPS
 - [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 exact VEA cell-format spec (blue headers, bold rows, collapsible row/col groups) + 4 reusable apply-scripts, run every build
+- [project_candidate_watchlist_ttl_system](finance-report/project_candidate_watchlist_ttl_system.md) — Piece 4 Candidate: watchlist tạm TTL 7 ngày + CLI finance-candidates.js — 🔴 bẫy trùng ký hiệu (APH/ADP) & tên trùng địa danh
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.

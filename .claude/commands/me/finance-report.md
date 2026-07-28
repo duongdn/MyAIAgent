@@ -12,7 +12,14 @@ description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo p
 
 ## Config
 
-`config/finance-watchlist.json` — tracked tickers (`watchlist[].ticker/name/spreadsheet_id/report_sheet`) + `top100_spreadsheet_id`/`top100_sheet`. **Thêm mã mới vào đây, không sửa file skill này.** Không phải secret — tracked trong git (xem exception trong `.gitignore`).
+`config/finance-watchlist.json` — 3 khối:
+- `watchlist[]` — mã theo dõi **vĩnh viễn** (`ticker/name/spreadsheet_id/report_sheet`) → Piece 1 (Focus)
+- `candidates` — mã theo dõi **tạm thời** có TTL (`ttl_days` + `items[].ticker/name/group/added/status/note`) → Piece 4 (Candidate)
+- `top100_spreadsheet_id`/`top100_sheet` → Piece 2 & 3
+
+**Thêm mã mới vào đây, không sửa file skill này.** Không phải secret — tracked trong git (xem exception trong `.gitignore`).
+
+**`search_name` (optional, cả 2 list):** override chuỗi query Google News khi `name` quá chung và bị nhiễu (VD "Sơn Đồng Nai" trùng địa danh → `"cổ phiếu SDN Sơn Đồng Nai"`). Tên hiển thị giữ nguyên, chỉ query bị thu hẹp.
 
 **Google Sheets auth:** service account `config/daily-agent-490610-7eb7985b33e3.json`, scope `https://www.googleapis.com/auth/spreadsheets`. Chỉ cần đọc (read-only) cho skill này.
 
@@ -22,10 +29,11 @@ description: Tin tức mới nhất cho watchlist cổ phiếu (FPT, VEA) theo p
 
 | Command | What it does | Output file |
 |---------|--------------|-------------|
-| `/finance-report` | Full run — Focus + PB Low | 1 file gộp hoặc 2 file riêng |
+| `/finance-report` | Full run — Focus + PB Low + Sector + Candidate | 1 file gộp hoặc 4 file riêng |
 | `/finance-report focus` | Tin tức mới nhất cho từng mã trong watchlist | `{HHMM}-finance-focus.md` |
 | `/finance-report pb-low` | List toàn bộ mã P/B < 1 trong Top 100 + nhận định | `{HHMM}-finance-pblow.md` |
 | `/finance-report sector` | Gom mã theo ngành, chọn mã tốt nhất mỗi ngành (điểm ROE/P/B) | `{HHMM}-finance-sector.md` |
+| `/finance-report candidate` | Watchlist tạm TTL 7 ngày — tin tức + bảng quyết định giữ/bỏ | `{HHMM}-finance-candidate.md` |
 
 ---
 
@@ -119,12 +127,49 @@ Gom toàn bộ mã trong sheet `Top 100` theo cột **Ngành**, so sánh trong t
 
 ---
 
+## Piece 4 — Candidate (`/finance-report candidate`)
+
+Watchlist **tạm thời** để soi 1 nhóm/ngành trong thời gian ngắn rồi bỏ ra. Format giống Piece 1 nhưng mỗi mã có **TTL 7 ngày** và kết thúc bằng bảng quyết định giữ/bỏ.
+
+**Quản lý danh sách** (không sửa tay JSON nếu tránh được):
+```bash
+node scripts/finance-candidates.js list
+node scripts/finance-candidates.js add <TICKER> "<Tên>" --group=<Nhóm> --exchange=<Sàn>
+node scripts/finance-candidates.js renew <TICKER> --note="lý do theo dõi tiếp"   # +7 ngày kể từ hôm nay
+node scripts/finance-candidates.js drop <TICKER> --note="lý do bỏ"
+node scripts/finance-candidates.js note <TICKER> "<ghi chú>"
+```
+
+**Fetch:**
+```bash
+.claude/skills/.venv/bin/python3 scripts/fetch-finance-news.py --group=candidates --limit=6
+```
+`--group` nhận `watchlist` (mặc định) | `candidates` | `all`. JSON trả về kèm `added`/`expires`/`days_left`/`expired`/`status`/`note` cho từng mã.
+
+**Quy tắc TTL:**
+- TTL mặc định 7 ngày (`candidates.ttl_days`), tính từ `added`.
+- Hết hạn **KHÔNG bao giờ tự xoá** — báo cáo gắn cờ ⏰ **HẾT HẠN — cần quyết định** để user chọn `renew` (thêm 7 ngày) hoặc `drop`.
+- `status: "dropped"` → bị loại khỏi fetch nhưng vẫn nằm trong file để giữ lịch sử.
+
+**Output** (`{HHMM}-finance-candidate.md`), theo Piece 1 + thêm:
+- Group theo `group` (nhóm ngành), mỗi mã có dòng `Thêm / Hết hạn / còn N ngày / status`.
+- Sau mỗi mã: **Ghi chú theo dõi** — tín hiệu gì trong kỳ, cần theo dõi tiếp cái gì.
+- Cuối piece: **Bảng quyết định** (Mã | Nhóm | Sàn | News flow | Tín hiệu trong kỳ | Đề xuất khi hết hạn) + Nhận định tổng quan.
+
+**Bẫy đã gặp (BẮT BUỘC kiểm tra):**
+- **Trùng ký hiệu với mã nước ngoài** — APH↔Amphenol, ADP↔Automatic Data Processing. Phải đánh dấu ⚠️ từng bài nhiễu, không đọc như tin doanh nghiệp Việt.
+- **Tên công ty trùng địa danh** → query trả về 100% nhiễu (SDN "Sơn Đồng Nai", NHH "Nhựa Hà Nội"). Fix bằng `search_name`; nếu vẫn nhiễu thì ghi rõ "không monitor được bằng tin tức", KHÔNG bịa nhận định.
+- **Verify mã có thật trước khi thêm:** `node scripts/finance-report-detail-fetch-cafef.js <TICKER> --years=1` — mã không tồn tại sẽ fail parse.
+
+---
+
 ## Full Run (`/finance-report`)
 
 1. Chạy Piece 1 (Focus).
 2. Chạy Piece 2 (PB Low).
 3. Chạy Piece 3 (Sector Compare).
-4. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 3 file riêng — miễn không bỏ sót piece nào.
+4. Chạy Piece 4 (Candidate) — bỏ qua nếu `candidates.items` rỗng.
+5. Gộp thành 1 file `reports/{YYYY-MM-DD}/{HHMM}-finance-report.md` hoặc giữ 4 file riêng — miễn không bỏ sót piece nào.
 
 ---
 
@@ -134,4 +179,6 @@ Gom toàn bộ mã trong sheet `Top 100` theo cột **Ngành**, so sánh trong t
 - **Piece 2 chỉ quét trong phạm vi sheet `Top 100`** (~101 mã vốn hóa lớn theo dõi) — không phải toàn bộ thị trường. Nếu user hỏi "có phải tất cả mã P/B<1 trên sàn không" → trả lời KHÔNG, đây chỉ là danh sách đang theo dõi.
 - **Piece 3 cũng chỉ trong phạm vi `Top 100`**, và điểm ROE/P/B là tiêu chí đơn giản — 1 mã không lọt "tốt nhất nhóm" (VD SAB thua QNS trong Hàng tiêu dùng) không có nghĩa là mã xấu, chỉ là định giá (P/B) hiện đắt hơn so với hiệu quả sinh lời (ROE) tương đương của mã được chọn.
 - **Thêm mã mới vào watchlist**: sửa `config/finance-watchlist.json`. Piece 1 (Focus/tin tức) hoạt động ngay không cần thêm gì. Nếu muốn Piece 1 so sánh với luận điểm đầu tư đã phân tích, mã đó cần có sẵn sheet `Báo cáo 2`-style (xây theo quy trình đã dùng cho FPT/VEA — research agents + Google Sheets API, không thuộc phạm vi skill này).
+- **Piece 4 tuân thủ cùng quy tắc anti-hallucination như Piece 1**, và thêm: KHÔNG suy diễn tín hiệu từ mã có 0 bài thật — ghi thẳng "không có news flow" và đề xuất bỏ, thay vì viết nhận định rỗng.
+- **Candidate ≠ watchlist:** candidate là để sàng lọc ngắn hạn rồi loại; mã nào chứng minh được giá trị thì mới chuyển sang `watchlist[]` (và khi đó cần sheet `Báo cáo 2`-style).
 - **Không cần quyền ghi Google Sheets** cho skill này — chỉ đọc.

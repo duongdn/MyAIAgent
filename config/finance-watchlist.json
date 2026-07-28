@@ -26,6 +26,108 @@
       "vietstock_url": "https://finance.vietstock.vn/SAB-tong-cong-ty-co-phan-bia-ruou-nuoc-giai-khat-sai-gon.htm"
     }
   ],
+  "candidates": {
+    "description": "Temporary watch list for /me:finance-report Piece 4 (Candidate). Each item lives ttl_days from 'added', then the report flags it for a keep/drop decision. Manage with: node scripts/finance-candidates.js <list|add|renew|drop>",
+    "ttl_days": 7,
+    "items": [
+      {
+        "ticker": "BMP",
+        "name": "Nhựa Bình Minh",
+        "group": "Nhựa",
+        "exchange": "HOSE",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": ""
+      },
+      {
+        "ticker": "NTP",
+        "name": "Nhựa Tiền Phong",
+        "group": "Nhựa",
+        "exchange": "HNX",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": ""
+      },
+      {
+        "ticker": "AAA",
+        "name": "Nhựa An Phát Xanh",
+        "group": "Nhựa",
+        "exchange": "HOSE",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": ""
+      },
+      {
+        "ticker": "APH",
+        "name": "An Phát Holdings",
+        "group": "Nhựa",
+        "exchange": "HOSE",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": ""
+      },
+      {
+        "ticker": "NHH",
+        "name": "Nhựa Hà Nội",
+        "group": "Nhựa",
+        "exchange": "HOSE",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "",
+        "search_name": "cổ phiếu NHH Nhựa Hà Nội"
+      },
+      {
+        "ticker": "DNP",
+        "name": "DNP Holding",
+        "group": "Nhựa",
+        "exchange": "HNX",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "",
+        "search_name": "DNP Holding cổ phiếu"
+      },
+      {
+        "ticker": "HPP",
+        "name": "Sơn Hải Phòng",
+        "group": "Sơn",
+        "exchange": "UPCOM",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "",
+        "search_name": "cổ phiếu HPP Sơn Hải Phòng"
+      },
+      {
+        "ticker": "SDN",
+        "name": "Sơn Đồng Nai",
+        "group": "Sơn",
+        "exchange": "UPCOM",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "Google News không có coverage — không monitor được bằng tin, chỉ theo dõi qua BCTC/giá",
+        "search_name": "cổ phiếu SDN Sơn Đồng Nai"
+      },
+      {
+        "ticker": "ADP",
+        "name": "Sơn Á Đông",
+        "group": "Sơn",
+        "exchange": "HOSE",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "",
+        "search_name": "cổ phiếu ADP Sơn Á Đông"
+      },
+      {
+        "ticker": "SIV",
+        "name": "SIVICO (sơn giao thông, sơn tàu biển)",
+        "group": "Sơn",
+        "exchange": "UPCOM",
+        "added": "2026-07-28",
+        "status": "watching",
+        "note": "",
+        "search_name": "cổ phiếu SIV SIVICO"
+      }
+    ]
+  },
   "top100_spreadsheet_id": "1E47mfclzKFvpX1JZeiwu4zQFlhq8-CoLBr-bZuibqMw",
   "top100_sheet": "Top 100"
 }
