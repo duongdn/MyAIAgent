@@ -154,7 +154,7 @@
 - [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn JSON API + 3 bugs (LCTT endpoint, +60k tỷ typo, EPS scaling) + BVPS share-split gotcha
 - [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 VEA cell-format spec + 4 apply-scripts, run every build
 - [project_candidate_watchlist_ttl_system](finance-report/project_candidate_watchlist_ttl_system.md) — watchlist tạm TTL 7 ngày + CLI finance-candidates.js — 🔴 bẫy trùng ký hiệu APH/ADP
-- [feedback_finance_report_detail_reused_scripts_stale_text](finance-report/feedback_finance_report_detail_reused_scripts_stale_text.md) — 🔴 grep số/tên ticker cũ + check độ chính xác %-format sau khi tái dùng script
+- [feedback_finance_report_detail_new_ticker_qa_checklist](finance-report/feedback_finance_report_detail_new_ticker_qa_checklist.md) — 🔴🔴 text ticker cũ sót lại + %-format bị làm tròn + thiếu row-groups ở Định lượng, so đếm group/merge với ticker tham chiếu
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
