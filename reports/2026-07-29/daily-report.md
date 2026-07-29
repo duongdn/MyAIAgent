@@ -309,7 +309,7 @@ All 3 tickets OK ✅
 | Developer | 07-28 (Tue) | Sources | Status |
 |-----------|-------------|---------|--------|
 | LongVV | **8h** | WS Tokenlite | ✅ Confirmed — 0h alarm was false (cron AM 0h was Sheets-only artifact) |
-| PhucVT | **0h** | WS 0h across all 21 projects, Sheets 0h | ⚠️ **REAL 0h** — no leave. Needs reminder. |
+| PhucVT | **0h** | WS 0h, Sheets 0h | ★ IGNORED — adhoc/external projects (per user 07-29) |
 | TuanNT | **8h** | Paturevision sheet + Bailey Matrix room | ✅ Confirmed (unchanged from cron) |
 | KhanhHH | **7h** | WS Generator | ✅ Confirmed (not 8h but within threshold — 7h vs 8h target, marginal) |
 | LeNH | **0h** | WS 0h + Sheets 0h (all 13 sheets) | ⚠️ **REAL 0h** — no leave. Needs reminder (threshold: ANY shortfall). |
@@ -341,7 +341,7 @@ No `--send-reminder` flag — print only, no messages sent.
 
 | Developer | Hours | Status |
 |-----------|-------|--------|
-| PhucVT | 0h (WS 0h + Sheets 0h) | Needs reminder — no leave note |
+| PhucVT | 0h (WS 0h + Sheets 0h) | ★ IGNORED — adhoc/external, not tracked (per user 07-29) |
 | LeNH | 0h (WS 0h + Sheets 0h) | Needs reminder — no leave note |
 | LongVV | 8h | Skipped — has hours |
 | TuanNT | 8h | Skipped — has hours |
@@ -353,8 +353,8 @@ No `--send-reminder` flag — print only, no messages sent.
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets (recheck) | PhucVT: 0h across ALL sources (WS + Sheets), no leave — real 0h day |
-| 2 | Sheets (recheck) | LeNH: 0h across ALL sources (WS + Sheets), no leave — real 0h day |
+| 1 | Sheets (recheck) | LeNH: 0h across ALL sources (WS + Sheets), no leave — real 0h day |
+| ~~1~~ | ~~Sheets (recheck)~~ | ~~PhucVT: 0h~~ — PhucVT is adhoc/external, temporarily ignored per user 07-29 |
 | 3 | Fountain (recheck) | ViTHT + VuTQ missing entirely from Workstream W07-27 — plan (07-21) allocates ViTHT 32h & VuTQ 8h |
 | 4 | Arthur (recheck) | WS Crystal lang needsReview: PhucVT 8h "Metadata Intake Tiers" 07-27 — reviewer TienND |
 | 5 | Fountain | Weekly plan posted by @trinhmtt still dated 2026-07-21 (8 days), no update found |
