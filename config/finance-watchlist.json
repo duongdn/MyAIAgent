@@ -24,6 +24,14 @@
       "spreadsheet_id": "1u86539WHuNlpmKtTH4rtl9z9r2LRjBEKV5BKQBYK9qA",
       "report_sheet": "Báo cáo 2 - SAB",
       "vietstock_url": "https://finance.vietstock.vn/SAB-tong-cong-ty-co-phan-bia-ruou-nuoc-giai-khat-sai-gon.htm"
+    },
+    {
+      "ticker": "FOX",
+      "name": "CTCP Viễn thông FPT (FPT Telecom)",
+      "exchange": "UPCOM",
+      "spreadsheet_id": "1VGjJoRwXaWVR1V0nGDlY_40GsijtJ4ohVnaHXjf3KeU",
+      "report_sheet": "Báo cáo 2 - FOX",
+      "vietstock_url": "https://finance.vietstock.vn/FOX/tai-chinh.htm"
     }
   ],
   "candidates": {

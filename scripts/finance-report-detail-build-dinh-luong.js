@@ -18,14 +18,14 @@ const rawSheet = ticker;
 const targetSheet = `Định lượng - ${ticker}`;
 const KEY_PATH = path.join(__dirname, "..", "config", "daily-agent-490610-7eb7985b33e3.json");
 
-// current market data (fetched live 27/7/2026 via Vietstock/Simplize cross-check)
+// current market data (fetched live 29/7/2026 via Vietstock/Simplize cross-check)
 const MARKET = {
-  price: 46600,
-  priceDate: "27/7/2026",
-  peTTM: 12.49,
-  pb: 3.05,
-  sharesNow: 1282562372, // current, post likely 2026 1:1 stock dividend
-  sharesFY2025: 641281186, // matches "Vốn góp của chủ sở hữu" in FY2025 audited BCTC (row 117)
+  price: 61500,
+  priceDate: "29/7/2026",
+  peTTM: 12.36,
+  pb: 3.53,
+  sharesNow: 738763456, // matches "Vốn góp của chủ sở hữu" FY2025 (7,387.63 tỷ / mệnh giá 10,000đ) — no split/adjustment pending
+  sharesFY2025: 738763456,
 };
 
 async function main() {
@@ -94,7 +94,7 @@ async function main() {
   block.push([`VI. ĐỊNH GIÁ (EPS chính thức dòng 159 của sheet '${rawSheet}'; giá CP hiện tại ${MARKET.priceDate})`]);
   block.push(["EPS chính thức (đồng/CP, từ dòng 159)", ...formulaRow((c) => `=${c}159`)]);
   block.push([
-    `BVPS — VCSH/${(MARKET.sharesFY2025 / 1e6).toFixed(2)} triệu CP (đồng/CP, số CP theo Vốn góp chủ sở hữu dòng 117 các năm BCTC 2016-2025 — TRƯỚC đợt tăng vốn/chia CP thưởng ước tính đã diễn ra trong 2026)`,
+    `BVPS — VCSH/${(MARKET.sharesFY2025 / 1e6).toFixed(2)} triệu CP (đồng/CP, số CP theo Vốn góp chủ sở hữu dòng 117 các năm BCTC 2016-2025, khớp đúng số CP lưu hành hiện tại — không có chia tách trong giai đoạn audited)`,
     ...formulaRow((c) => `=IFERROR(ROUND(${c}115*1000000000/${MARKET.sharesFY2025},0),"")`),
   ]);
   block.push([
@@ -105,7 +105,7 @@ async function main() {
   block.push([`P/B (lần) — nguồn Vietstock/Simplize, cùng ngày`, ...blank().slice(0, -1), MARKET.pb]);
   block.push([`Giá cổ phiếu hiện tại (đ/CP, ${MARKET.priceDate}, không có chuỗi lịch sử)`, ...blank().slice(0, -1), MARKET.price]);
   block.push([
-    `Số CP lưu hành hiện tại (${MARKET.priceDate}) = ${(MARKET.sharesNow / 1e6).toFixed(2)} triệu CP — GẤP ĐÔI số CP IPO 2016 (${(MARKET.sharesFY2025 / 1e6).toFixed(2)} triệu, khớp Vốn góp CSH trong BCTC FY2025) → nghi có đợt chia cổ phiếu thưởng/tăng vốn ~1:1 trong 2026, CHƯA phản ánh trong BCTC FY2025 audited gần nhất — BVPS ở trên dùng số CP CŨ (641.28tr) nên có thể bị lệch nếu áp cho hiện tại, cần verify lại khi có BCTC 2026.`,
+    `Số CP lưu hành hiện tại (${MARKET.priceDate}) = ${(MARKET.sharesNow / 1e6).toFixed(2)} triệu CP — khớp đúng Vốn góp chủ sở hữu trong BCTC FY2025 audited (row 117), không có chia tách/tăng vốn chưa phản ánh. Lưu ý: kế hoạch thưởng CP 15% cho năm 2026 (nguồn TinnhanhChungkhoan) CHƯA áp dụng, sẽ làm tăng số CP lưu hành khi thực hiện.`,
   ]);
 
   await sheets.spreadsheets.values.update({

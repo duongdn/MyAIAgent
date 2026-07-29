@@ -16,7 +16,7 @@ const rawSheet = ticker;
 const targetSheet = `Định giá - ${ticker}`;
 const KEY_PATH = path.join(__dirname, "..", "config", "daily-agent-490610-7eb7985b33e3.json");
 
-const MARKET = { price: 46600, priceDate: "27/7/2026", peTTM: 12.49, pb: 3.05, sharesNow: 1282562372 };
+const MARKET = { price: 61500, priceDate: "29/7/2026", peTTM: 12.36, pb: 3.53, sharesNow: 738763456 };
 
 async function main() {
   const auth = new google.auth.GoogleAuth({ keyFile: KEY_PATH, scopes: ["https://www.googleapis.com/auth/spreadsheets"] });
@@ -34,7 +34,7 @@ async function main() {
   const rows = [];
   rows.push([`${ticker} - Bảng chỉ tiêu tài chính`]);
   rows.push([
-    `Đơn vị: Tỷ đồng, trừ Giá CP/EPS/BVPS (đồng/CP); tỷ lệ % hoặc lần. Nguồn: BCTC hợp nhất kiểm toán ${ticker} 2016-2025 (dữ liệu gốc tại sheet '${rawSheet}', từ cafef.vn API, verified — 2 lỗi dữ liệu nguồn đã phát hiện+sửa: LCTT 2019/2020 dư 60,000 tỷ, xem ghi chú sheet '${rawSheet}'). Toàn bộ số liệu dưới đây là CÔNG THỨC tham chiếu trực tiếp sheet '${rawSheet}', không phải số nhập tay.`,
+    `Đơn vị: Tỷ đồng, trừ Giá CP/EPS/BVPS (đồng/CP); tỷ lệ % hoặc lần. Nguồn: BCTC hợp nhất kiểm toán ${ticker} 2016-2025 (dữ liệu gốc tại sheet '${rawSheet}', từ cafef.vn API, đã verify Tổng tài sản=Tổng nguồn vốn khớp tuyệt đối cả 10 năm, không phát hiện lỗi dữ liệu). Toàn bộ số liệu dưới đây là CÔNG THỨC tham chiếu trực tiếp sheet '${rawSheet}', không phải số nhập tay.`,
   ]);
   rows.push(["Chỉ tiêu", ...years]);
   rows.push([]);
@@ -48,15 +48,15 @@ async function main() {
   rows.push(["I. NHÓM CHỈ SỐ ĐỊNH GIÁ (VALUATION)"]);
   rows.push([`EPS chính thức (đồng/CP, ${ticker} công bố, dòng 159)`, ...ref(159)]);
   rows.push([
-    "BVPS - Giá trị sổ sách/CP (đồng, 641.28tr CP 2016-2022 trước chia thưởng / 1,282.56tr CP 2023-2025 sau chia thưởng 1:1 năm 2023)",
-    ...cols.map((c, i) => `=IFERROR(ROUND('${rawSheet}'!${c}115*1000000000/${i < 7 ? 641281186 : 1282562372},0),"")`),
+    `BVPS - Giá trị sổ sách/CP (đồng, ${(MARKET.sharesNow / 1e6).toFixed(2)}tr CP — khớp Vốn góp chủ sở hữu FY2025 dòng 117, không có chia tách trong giai đoạn 2016-2025 audited; đợt thưởng CP 15% dự kiến 2026 CHƯA phản ánh trong BCTC)`,
+    ...cols.map((c) => `=IFERROR(ROUND('${rawSheet}'!${c}115*1000000000/${MARKET.sharesNow},0),"")`),
   ]);
   rows.push([`P/E TTM (lần, nguồn Vietstock/Simplize ${MARKET.priceDate})`, ...blankLast(), MARKET.peTTM]);
   rows.push([`P/B (lần, nguồn Vietstock/Simplize ${MARKET.priceDate})`, ...blankLast(), MARKET.pb]);
   rows.push([`Giá cổ phiếu hiện tại (đồng/CP, ${MARKET.priceDate})`, ...blankLast(), MARKET.price]);
   rows.push([`Số CP lưu hành hiện tại (triệu CP, ${MARKET.priceDate})`, ...blankLast(), (MARKET.sharesNow / 1e6).toFixed(2)]);
   rows.push([`Vốn hóa thị trường hiện tại (tỷ đồng, ${MARKET.priceDate})`, ...blankLast(), Math.round((MARKET.price * MARKET.sharesNow) / 1e9).toLocaleString("en-US")]);
-  rows.push(["Tỉ suất cổ tức ước tính hiện tại (%, cổ tức tiền mặt 2025 tạm ứng 2,000đ/CP tỷ lệ 20% — CHƯA phải tổng cả năm, xem Báo cáo 2)", ...blankLast(), `=ROUND(2000/${MARKET.price}*100,2)`]);
+  rows.push(["Tỉ suất cổ tức ước tính (%, kế hoạch 2026: cổ tức tiền mặt 2,000đ/CP + thưởng CP 15% — nguồn TinnhanhChungkhoan, xem Báo cáo 2)", ...blankLast(), `=ROUND(2000/${MARKET.price}*100,2)`]);
   rows.push([]);
   rows.push(["II. NHÓM CHỈ SỐ SINH LỢI (PROFITABILITY)"]);
   rows.push(["ROE — LNST CĐ mẹ/VCSH cuối kỳ (%)", ...pct(157, 115)]);
@@ -79,7 +79,7 @@ async function main() {
   rows.push(["Tỷ lệ thanh toán hiện hành - TSNH/Nợ ngắn hạn (lần)", ...ratio(2, 84)]);
   rows.push([]);
   rows.push([
-    `Ghi chú chung: TẤT CẢ chỉ số mục 0/II/III/IV/V là CÔNG THỨC tham chiếu trực tiếp sheet '${rawSheet}' (10 năm 2016-2025, BCTC hợp nhất kiểm toán từ cafef.vn API, đã verify tổng tài sản=tổng nguồn vốn khớp tuyệt đối, đã sửa 1 lỗi dữ liệu nguồn) — chính xác, không ước lượng. EPS dòng 159 là số ${ticker} CHÍNH THỨC công bố (không tính tay). P/E, P/B, giá, vốn hóa lấy từ Vietstock/Simplize ${MARKET.priceDate} (nguồn khác, đối chiếu, không có chuỗi lịch sử P/E/P/B). BVPS dùng đúng số CP theo từng giai đoạn (trước/sau chia thưởng 1:1 năm 2023) — xem chi tiết 'Định lượng - ${ticker}' dòng ghi chú.`,
+    `Ghi chú chung: TẤT CẢ chỉ số mục 0/II/III/IV/V là CÔNG THỨC tham chiếu trực tiếp sheet '${rawSheet}' (10 năm 2016-2025, BCTC hợp nhất kiểm toán từ cafef.vn API, đã verify tổng tài sản=tổng nguồn vốn khớp tuyệt đối) — chính xác, không ước lượng. EPS dòng 159 là số ${ticker} CHÍNH THỨC công bố (không tính tay). P/E, P/B, giá, vốn hóa lấy từ Vietstock/Simplize ${MARKET.priceDate} (nguồn khác, đối chiếu, không có chuỗi lịch sử P/E/P/B). Lưu ý cơ cấu sở hữu: SCIC chuyển giao vốn Nhà nước tại FOX cho Bộ Công an (11/2025), FPT Corp ngừng hợp nhất báo cáo tài chính FOX từ 2026 — xem chi tiết 'Định tính - ${ticker}'.`,
   ]);
 
   const auth2 = auth;
