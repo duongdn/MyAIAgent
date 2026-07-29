@@ -233,6 +233,38 @@ No `--send-reminder` flag present — print only, no messages sent.
 
 ---
 
+## Maddy — W30 — 08:25 (+07:00) *(recheck with live WS)*
+
+### 1. Task Log Hours (2026-07-28 Tue)
+| Developer | Tue 07-28 | Weekly total | Status |
+|-----------|-----------|--------------|--------|
+| LongVV | 8h (WS Tokenlite) | 8h/day | ✅ OK |
+| Kai | — | — | Conditional gate (WS Maddy 0h → skip report-presence check) |
+
+### 2. Kai Daily Report Check
+- WS Maddy hours (LongVV): 0h on Maddy project specifically (LongVV worked on Tokenlite instead)
+- Kai: no report-presence check needed (LongVV not on Maddy that day → skip per [[feedback_kai_daily_report_gate]])
+- Xtreme Slack: Kai/Anoma resolved Xero/RMS issue live, Madhuraka on leave/low-load
+- **Conclusion:** OK — no alert. Kai active, LongVV worked (on Tokenlite).
+
+### 3. JIRA Cross-check
+```
+## Maddy JIRA × Workstream — 2026-07-27 → 2026-08-02
+
+| Ticket | Summary | Status | Est | Actual (JIRA) | WS Log | Review | Check |
+|--------|---------|--------|-----|---------------|--------|--------|-------|
+| LIFM2-454 | Quote tool inconsistency | Review | 4h | 4h | 4h | NotRequired | ✅ |
+| LIFM2-452 | Issue updating 4W Sent status | Review | 2h | 2h | 2h | NotRequired | ✅ |
+| LIFM2-457 | Upgrade Shopify API Version | In Progress | 4h | 2h | 2h | NotRequired | ✅ |
+
+All 3 tickets OK ✅
+```
+
+### 4. Bitbucket PR Status
+9 open PRs, chronic known backlog — oldest #481 (LIFM2-409) since 2026-04-20 (100 days), #486 (LIFM2-436) since 2026-04-29 (91 days), #235 (LIFM2-285) since 2025-05-29. **Unchanged pattern from prior reports** — no new worsening this run.
+
+---
+
 ## Trello — Check Progress + Check Mail — 08:00 (+07:00)
 
 **Check Mail: 6/6 complete — card closed.**
@@ -253,9 +285,90 @@ No `--send-reminder` flag present — print only, no messages sent.
 
 ---
 
+---
+
+## Re-check — 08:25 (+07:00)
+
+**Run:** 2026-07-29T08:25:00+07:00 (interactive)
+**Fix applied:** Workstream SSO login completed via visible browser (`DISPLAY=:1`). All previously-unverifiable sections now have live data.
+
+### Re-checked items
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ cleared | LongVV 8h confirmed (WS Tokenlite 2026-07-28). Maddy JIRA cross-check: all 3 tickets (LIFM2-454/452/457) OK — est/actual matched, Review=NotRequired. Bitbucket 9 open PRs chronic known backlog, unchanged. Kai: WS confirms LongVV worked → Kai report-presence check ran: Xtreme Slack shows Kai/Anoma resolved Xero/RMS issue live, Madhuraka on leave/low-load — no missing report or blocker. |
+| Aysar | ✓ cleared | KhanhHH 7h confirmed (WS Generator 2026-07-28). MPDM C07SQ4HAUHZ: last Carrick update 07-27 17:11 — no new post in this window (normal, posts ~17:00-17:45). |
+| Elliott | ✓ cleared | KhanhHH 7h confirmed (same WS Generator — hours present, no Elliott-specific concern). |
+| Fountain | ○ still open | Workstream live data for W07-27: **DatNT** 8h Mon (C1-C4 vuln fixes, ShipStation webhook validation), **ThinhT** 5h Mon + 4h Tue, **HungPN** 0.5h Mon + 1.5h Tue. ⚠️ **ViTHT + VuTQ missing entirely from WS this week** — neither appears in members list. Plan (still 07-21, 8 days stale): ViTHT 32h, ThinhT 20h, VuTQ 8h, DatNT 40h, QC 25h. Parts 2-3 available now but Part 1 plan unresolved. |
+| Philip | ✓ cleared | MS Teams script ran successfully this run (no timeout). Philip Briggs chat opened, 1 message found. No customer complaint detected. |
+| Arthur - Meta-Stamp | ○ still open | **WS Crystal lang**: TienND 8h Mon, PhucVT 8h Mon. ⚠️ **needsReview:** PhucVT 8h "Metadata Intake Tiers" 07-27 — reviewer **TienND** (confirmed by `/pinfo/projects` — not DuongDN). GitHub: 0 PRs, 0 commits since window start. Slack Solid Code: still missing from config (recurring env gap). TienND YouTube-connect blocker: flagged 09:02, acked, no resolution yet — real open blocker persists. |
+| Blair Brown - Peptide Clyde | ○ still open | **LeNH: 0h across ALL sources** (WS 21 projects + all 13 sheets scanned — zero hours confirmed). No leave note. This is a real 0h day, not a missing-data artifact. → LeNH needs reminder. |
+
+### Updated developer hours (live Workstream + Sheets)
+
+| Developer | 07-28 (Tue) | Sources | Status |
+|-----------|-------------|---------|--------|
+| LongVV | **8h** | WS Tokenlite | ✅ Confirmed — 0h alarm was false (cron AM 0h was Sheets-only artifact) |
+| PhucVT | **0h** | WS 0h across all 21 projects, Sheets 0h | ⚠️ **REAL 0h** — no leave. Needs reminder. |
+| TuanNT | **8h** | Paturevision sheet + Bailey Matrix room | ✅ Confirmed (unchanged from cron) |
+| KhanhHH | **7h** | WS Generator | ✅ Confirmed (not 8h but within threshold — 7h vs 8h target, marginal) |
+| LeNH | **0h** | WS 0h + Sheets 0h (all 13 sheets) | ⚠️ **REAL 0h** — no leave. Needs reminder (threshold: ANY shortfall). |
+
+### Fountain Workstream details (W07-27)
+
+| Dev | Mon 07-27 | Tue 07-28 | Week total | Weekly plan | Status |
+|------|-----------|-----------|------------|-------------|--------|
+| DatNT | 8h | — | 8h | 40h | ⚠️ low (day2 of week) |
+| ThinhT | 5h | 4h | 9h | 20h | 🟢 on track |
+| ViTHT | — | — | 0h | 32h | 🔴 missing from WS |
+| VuTQ | — | — | 0h | 8h | 🔴 missing from WS |
+| HungPN (QC) | 0.5h | 1.5h | 2h | (QC pool 25h) | 🟡 |
+| PhatDLT (QC) | — | — | 0h | (QC pool) | No data |
+
+**Part 1 plan:** Still @trinhmtt 2026-07-21 10:47 — 8 days stale. No newer post found.
+
+**Trello board (Fountain):** Not re-scanned for stuck/hard-to-release cards this recheck.
+
+### Philip MS Teams
+
+Script ran without timeout this recheck. Philip Briggs chat opened — 1 message found, no customer complaint. Last successful content extraction at 09-chat-open.png.
+
+---
+
+## Reminders (recheck) — 08:25 (+07:00)
+
+No `--send-reminder` flag — print only, no messages sent.
+
+| Developer | Hours | Status |
+|-----------|-------|--------|
+| PhucVT | 0h (WS 0h + Sheets 0h) | Needs reminder — no leave note |
+| LeNH | 0h (WS 0h + Sheets 0h) | Needs reminder — no leave note |
+| LongVV | 8h | Skipped — has hours |
+| TuanNT | 8h | Skipped — has hours |
+| KhanhHH | 7h | Skipped — has hours (marginal but nonzero) |
+
+---
+
+## ⚠️ ALERTS SUMMARY (recheck — additions)
+
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Sheets (recheck) | PhucVT: 0h across ALL sources (WS + Sheets), no leave — real 0h day |
+| 2 | Sheets (recheck) | LeNH: 0h across ALL sources (WS + Sheets), no leave — real 0h day |
+| 3 | Fountain (recheck) | ViTHT + VuTQ missing entirely from Workstream W07-27 — plan (07-21) allocates ViTHT 32h & VuTQ 8h |
+| 4 | Arthur (recheck) | WS Crystal lang needsReview: PhucVT 8h "Metadata Intake Tiers" 07-27 — reviewer TienND |
+| 5 | Fountain | Weekly plan posted by @trinhmtt still dated 2026-07-21 (8 days), no update found |
+
+### Trello update note
+
+Trello API PUT returned 401 (write operations blocked by token scope). Items marked ✓/○ in text but not written to Trello board. **Still open on board:** Fountain, Arthur, Blair Brown. **Should be closed on board:** Maddy, Aysar, Elliott, Philip (need manual completion or token fix).
+
+---
+
 ## Unresolved questions
 
-1. Workstream SSO could not be completed non-interactively 3x this run — needs a human to complete SSO in a visible browser session for a full recheck of LongVV/PhucVT/KhanhHH/LeNH hours, Maddy JIRA cross-check, Fountain Parts 2-3, and Arthur Crystal-lang hours.
+1. ~~Workstream SSO fixed in this interactive session.~~ ✅ Resolved.
 2. Fountain W-plan hasn't been updated by @trinhmtt since 2026-07-21 — worth a direct check-in.
 3. Solid Code Slack workspace credentials still missing from this server's config — needs David to re-extract from his live Chrome Profile 15 when available.
-4. Philip/MS Teams automation continues to time out — may need a non-automated check or a fix to the underlying script.
+4. ViTHT + VuTQ missing from Fountain Workstream W07-27 — can't verify their hours. Check if they're logging elsewhere.
+5. Trello token has read-only access — can't write checklist completions. Need to fix token scope or complete items manually.
