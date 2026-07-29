@@ -342,7 +342,7 @@ No `--send-reminder` flag — print only, no messages sent.
 | Developer | Hours | Status |
 |-----------|-------|--------|
 | PhucVT | 0h (WS 0h + Sheets 0h) | ★ IGNORED — adhoc/external, not tracked (per user 07-29) |
-| LeNH | 0h (WS 0h + Sheets 0h) | Needs reminder — no leave note |
+| LeNH | 0h (WS 0h + Sheets 0h) | Needs reminder — **sent** 08:30 Matrix (event $MwC-foDte...) |
 | LongVV | 8h | Skipped — has hours |
 | TuanNT | 8h | Skipped — has hours |
 | KhanhHH | 7h | Skipped — has hours (marginal but nonzero) |
