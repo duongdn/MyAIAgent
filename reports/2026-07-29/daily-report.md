@@ -260,8 +260,20 @@ No `--send-reminder` flag present — print only, no messages sent.
 All 3 tickets OK ✅
 ```
 
-### 4. Bitbucket PR Status
-9 open PRs, chronic known backlog — oldest #481 (LIFM2-409) since 2026-04-20 (100 days), #486 (LIFM2-436) since 2026-04-29 (91 days), #235 (LIFM2-285) since 2025-05-29. **Unchanged pattern from prior reports** — no new worsening this run.
+### 4. JIRA Ticket Activity (since Jul 28)
+
+20 active non-closed tickets. **1 ticket updated:**
+
+| Ticket | Summary | Status | Assignee | Updated |
+|--------|---------|--------|----------|---------|
+| LIFM2-450 | Buy offer update change | To Do | Kai | Jul 28 17:17 |
+
+💬 **Anoma Wasala** (Jul 28 17:13): "Can you explain the reason to not displaying the 'switch to Buy' icon here? It display only after manually refresh the page. Also, the same icon not invisible when remove the 'Buy offer' value. **Al"
+
+— Anoma flagging a bug: icon hiện sai / cần refresh page, Kai assigned.
+
+### 5. Bitbucket PR Status
+9 open PRs, no new comments since Jul 28. Chronic backlog — #481 (LIFM2-409) 100 days, #486 (LIFM2-436) 91 days, #235 (LIFM2-285) since 2025-05-29.
 
 ---
 
