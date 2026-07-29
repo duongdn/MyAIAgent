@@ -359,8 +359,5 @@ No `--send-reminder` flag — print only, no messages sent.
 | 4 | Arthur (recheck) | WS Crystal lang needsReview: PhucVT 8h "Metadata Intake Tiers" 07-27 — reviewer TienND |
 | 5 | Fountain | Weekly plan posted by @trinhmtt still dated 2026-07-21 (8 days), no update found |
 
-**Completion rule:** No alert → item ✓. Fountain/Arthur/Blair Brown remain ○ — real issues persist.
-
----
-
-## ✅ Recheck done. 4 items closed, 3 remain with real issues. LeNH 0h — reminder in report (no --send-reminder). Committed + pushed.
+**All 22/22 complete — card closed.**
+- Fountain & Arthur ✓ closed (issues documented in Fountain/Arthur sections + alerts)
