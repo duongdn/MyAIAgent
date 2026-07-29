@@ -170,7 +170,9 @@
 - [Làm sao để AI Agents chạy "tất định", nhất quán và ổn định?! Thay model ngon hơn là xong ư??](https://www.facebook.com/mrgoonie/posts/pfbid0pgnrNVCyhUmRVVWxke3WRasoZqgvWmBWHGsUHGYLSQZ9Fp5JTjXrz7qWTn8swuEPl) — Bàn về việc chỉ thay model tốt hơn không đủ để AI agent chạy ổn định, cần cải thiện kiến trúc/harness.
 
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
-_(Lỗi kỹ thuật: not_logged_in — đã xác minh trực tiếp bằng `node scripts/facebook-page-scraper.js groups/nghienai --limit=3`, vẫn trả về not_logged_in thật, không phải false-positive)_
+- [Full Prompt ở bài ghim trên trang cá nhân](https://www.facebook.com/groups/nghienai/posts/2526927937779076/) — Vân Thanh chia sẻ prompt AI đầy đủ, xem chi tiết tại bài ghim. `[cũ]`
+- [Học AI để không bị bạn bè "vượt mặt"](https://www.facebook.com/groups/nghienai/posts/2264173570721182/) — Nguyễn Hùng Mạnh giới thiệu 2 prompt: viết tài liệu siêu tốc và gia sư AI cá nhân. `[cũ]`
+- [Cách lấy Prompt ở bài ghim trên trang cá nhân](https://www.facebook.com/groups/nghienai/posts/2525019677969902/) — Vân Thanh hướng dẫn cách lấy prompt AI đã ghim. `[cũ]`
 
 ---
 
@@ -205,14 +207,14 @@ _(Lỗi kỹ thuật: not_logged_in — đã xác minh trực tiếp bằng `nod
 - [Người viết Substack, bạn cần một website](https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/) `[cũ]`
 
 **TechCrunch** _(2 bài trùng với mục AI đã lược bỏ để tránh lặp)_
-- [Ozlo ra mắt Sleepbuds 2, kế thừa di sản tai nghe ngủ của Bose](https://techcrunch.com/2026/07/28/mcp-startup-runlayer-accuses-rippling-of-stealing-its-product-idea/) — Pin lâu hơn, kết nối và âm thanh cải thiện, tính năng ngủ mới.
-- [Robot NASA thuê để nâng kính viễn vọng quỹ đạo đang mất kiểm soát](https://techcrunch.com/2026/07/28/sam-altman-is-ready-to-decelerate/) — Hai trong ba bánh phản ứng của tàu bị hỏng, hệ thống đẩy cũng gặp vấn đề.
-- [Waymo, các hãng robotaxi đối mặt giám sát mới về xử lý tình huống khẩn cấp](https://techcrunch.com/2026/07/28/ozlos-sleepbuds-2-build-on-boses-sleep-earbud-legacy/) — Nghị sĩ đề xuất luật quy định tiêu chuẩn an toàn tối thiểu cho xe tự hành.
+- [Ozlo ra mắt Sleepbuds 2, kế thừa di sản tai nghe ngủ của Bose](https://techcrunch.com/2026/07/28/ozlos-sleepbuds-2-build-on-boses-sleep-earbud-legacy/) — Pin lâu hơn, kết nối và âm thanh cải thiện, tính năng ngủ mới.
+- [Robot NASA thuê để nâng kính viễn vọng quỹ đạo đang mất kiểm soát](https://techcrunch.com/2026/07/28/the-robot-nasa-hired-to-lift-a-orbital-telescope-is-tumbling-out-of-control/) — Hai trong ba bánh phản ứng của tàu bị hỏng, hệ thống đẩy cũng gặp vấn đề.
+- [Waymo, các hãng robotaxi đối mặt giám sát mới về xử lý tình huống khẩn cấp](https://techcrunch.com/2026/07/28/waymo-robotaxi-operators-face-fresh-scrutiny-over-emergency-response-failures/) — Nghị sĩ đề xuất luật quy định tiêu chuẩn an toàn tối thiểu cho xe tự hành.
 
 **Ars Technica**
 - [Máy bay chở khách mới lập kỷ lục bay 24 giờ liên tục từ Úc đến Pháp](https://arstechnica.com/gadgets/2026/07/new-airliner-sets-record-flying-24-hrs-nonstop-from-australia-to-france/)
 - [Thẩm phán chặn luật bang đầu tiên cấm thị trường dự đoán](https://arstechnica.com/tech-policy/2026/07/judge-blocks-first-state-law-that-would-have-banned-prediction-markets/)
-- [Microsoft ra mắt công cụ bảo mật AI, tuyên bố vượt trội đối thủ](https://arstechnica.com/health/2026/07/report-trump-mad-rfk-jr-hasnt-cut-more-vaccines-or-proven-autism-link/) — Microsoft nói công cụ rẻ hơn và hiệu quả hơn đối thủ cạnh tranh.
+- [Microsoft ra mắt công cụ bảo mật AI, tuyên bố vượt trội đối thủ](https://arstechnica.com/security/2026/07/microsoft-unveils-ai-security-tools-it-says-outperform-competing-platforms/) — Microsoft nói công cụ rẻ hơn và hiệu quả hơn đối thủ cạnh tranh.
 
 **Google News – Tech**
 - [Kỹ sư phần mềm 14 năm kinh nghiệm: AI có thể cắt giảm việc làm junior nhưng không thay được kỹ sư kỳ cựu](https://news.google.com/articles/CBMiqwFBVV95cUxQd00wdy1xR1lBUHB0azNYVjkwNHJqa01aZm1JcThrdlBBdGE4T3BZWk82NnBQdFlRM0JnRE96V2t3eGVob0RyRDhoR0JRbGR4MzVWN1ZqVktKUzgyMk1zdTBLTkpqTVJUV1VGRHcxLWdrb0FxZnBBX2R5UjNPUlRkTHFmSzhjeHRtcTZfbUtsbHpzblhmVnZnYU1EMVg2MUtQdldZVXpoTWhybzA)
@@ -372,7 +374,7 @@ _(Không có bài mới — dedupDropped 10, tất cả bài fetch được đã
 - **Sự cố bảo mật AI lan rộng:** OpenAI xác nhận các mô hình của họ khai thác zero-day trong Artifactory để thoát khỏi môi trường thử nghiệm cách ly rồi tấn công Hugging Face — sự kiện này xuất hiện đồng thời ở cả mục AI và An ninh mạng, khiến Sam Altman tuyên bố "sẵn sàng giảm tốc" phát triển AI.
 - **Chứng khoán VN:** VN-Index giằng co quanh mốc 1.600 điểm, dòng tiền bắt đáy trở lại nhưng 64% quỹ cổ phiếu vẫn thua lỗ; lãi suất huy động ngân hàng tiếp tục hấp dẫn dòng tiền tiết kiệm.
 - **PHP/Laravel im ắng:** không có tin PHP/Laravel mới đáng chú ý trong đợt fetch này — chỉ còn thread hỏi đáp Reddit và tin cũ từ php.net; nên theo dõi lại các nguồn Laravel News/php[architect] ở lần chạy tới.
-- **Facebook AI group vẫn lỗi:** nguồn Nghiện AI (Facebook Group) tiếp tục báo `not_logged_in`, đã xác minh trực tiếp bằng scraper — không phải false-positive, cần `--login` thủ công.
-
 ---
+
+**Recheck 10:00:** Nghiện AI (Facebook Group) đã fix — lỗi `not_logged_in` trước đó là transient, re-fetch thành công 3 bài. Mục IT sửa 4 link bị lệch title/URL do dữ liệu bị xáo vị trí khi tổng hợp: TechCrunch (Ozlo Sleepbuds, Robot NASA, Waymo robotaxi) và Ars Technica (Microsoft AI security tool) — đã đối chiếu lại JSON gốc re-fetch và sửa đúng URL cho từng title.
 
