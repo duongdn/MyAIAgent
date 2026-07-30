@@ -20,8 +20,10 @@
 
 - Ports in LISTEN: `3333` (node), `3334` (node = dailyagent), `80`, `443`, 22, 1080, 1025, 5900, 6379.
   → **3335 is free.** Re-verify at deploy time.
-- Node `v22.20.0` at `/usr/bin/node`; `claude` **2.1.205** at `/usr/bin/claude`; `htpasswd` at
-  `/usr/bin/htpasswd`; `certbot` at `/usr/bin/certbot` (plugins available: **apache**, standalone, webroot).
+- Node `v22.20.0` at `/usr/bin/node`; `htpasswd` at `/usr/bin/htpasswd`; `certbot` at `/usr/bin/certbot`
+  (plugins available: **apache**, standalone, webroot). (`claude` 2.1.205 is also present at
+  `/usr/bin/claude`, but the web app no longer needs it — it spawns the build script directly. It is
+  still needed for interactive `/me:finance-quantification` use on the server, if ever.)
 - `sudo -n true` succeeds → **passwordless sudo**, no interactive prompts needed.
 - Apache modules enabled: `proxy`, `proxy_http`, `ssl`, `rewrite`, `headers`, `auth_basic`. Nothing to `a2enmod`.
 - `apache2ctl -S`: `*:80` and `*:443` are NameVirtualHosts; **default server = `admin.mypersonalfootballcoach.com`**
@@ -77,13 +79,14 @@ browser ──https──► Cloudflare (proxy, orange cloud)
                       │
                       ▼
               systemd mydailyagent-quantification.service
-                 node /var/www/MyDailyAgent/web-quantification/server.js  (QUANT_PORT=3335)
-                      │ spawn
+                 node /var/www/MyDailyAgent/web-quantification/server.js  (QUANT_PORT=3335,
+                                                                          bound to 127.0.0.1)
+                      │ spawn (no agent)
                       ▼
-              claude -p "/me:finance-quantification <TICKER>"  (cwd /var/www/MyDailyAgent)
+              node scripts/finance-quantification-build.js <TICKER>  (cwd /var/www/MyDailyAgent)
                       │
-                      ▼  googleapis + config/daily-agent-*.json
-              shared Google Spreadsheet tab
+                      ▼  googleapis + config/daily-agent-*.json + config/finance-quantification.json
+              shared Google Spreadsheet tab  ("Định lượng - <TICKER>")
 ```
 
 Deployment order matters: **code on disk → unit up → :80 vhost → certbot → edit generated :443 vhost →
@@ -134,7 +137,10 @@ vhost 301s the challenge to another host.
    Verify: `curl -H 'Host: quantification.youragentstore.net' http://127.0.0.1/.well-known/acme-challenge/probe`
    now returns **404 from our vhost**, not the old 301 to mypersonalfootballcoach.com.
 6. **Certificate**: `sudo certbot --apache -d quantification.youragentstore.net --non-interactive
-   --agree-tos -m <existing account email>` (account `02c1fed6...` already registered).
+   --agree-tos` — the LE account (`02c1fed6…`) is already registered on this host, so certbot reuses it
+   and `-m` is not required. **If certbot nevertheless demands an email address, STOP and ask the user**
+   — do not invent one and do not use `--register-unsafely-without-email` (it would create a second,
+   notification-less account).
    If HTTP-01 fails because Cloudflare forces HTTPS on this zone, fall back in order:
    (a) `certbot certonly --webroot -w /var/www/html -d ...`;
    (b) ask the user to grey-cloud the DNS record for 10 minutes, re-run, then re-enable proxy;
