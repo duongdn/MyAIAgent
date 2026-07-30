@@ -288,9 +288,11 @@ Same data as cron: DM:Celine 1 msg (catch-up chat proposal, tomorrow/Friday — 
 
 **Check Mail:** Rick ○ still open (Alert #2 — production Rollbar/BugSnag alerts).
 
-**Summary: 17/22 complete** (was 12/22 at cron time). 5 remain open: Marcel, Fountain, Philip, OhCleo, Arthur — all genuine blockers/alerts, not data gaps. No reminders sent (no `--send-reminder` flag).
+**Summary: 17/22 complete** (was 12/22 at cron time). 5 remain open: Marcel, Fountain, Philip, OhCleo, Arthur — all genuine blockers/alerts, not data gaps.
 
-**Reminders status (print only):** TuanNT (0h Wed, chiều leave — soft, should have ~4h morning) and LeNH (0h Wed no leave, Mon+Tue solid) are reminder candidates. Not sent.
+**Reminders sent (--send-reminder):**
+- LeNH: ✅ sent — 0h Wed 07/29 (Mon 8.17h+Tue 7.83h on James Diamond, Wed missing, no leave)
+- TuanNT: ✅ sent — 0h Wed 07/29 (chiều leave for baby clinic, morning hours also missing from Paturevision W38)
 
 ---
 
