@@ -172,7 +172,7 @@ _(Không có bài mới từ Substack — đã dùng đủ 2 lần trích dẫn 
 
 ---
 ### 📱 Nghiện AI (Facebook Group) — Facebook AI
-_(Lỗi: not_logged_in — đã xác minh lại trực tiếp bằng `node scripts/facebook-page-scraper.js groups/nghienai --limit=3`, vẫn lỗi dù session Facebook khác (shinantori, mrgoonie) hoạt động bình thường — có thể cần đăng nhập lại riêng cho group này)_
+_(Không có bài mới từ nhóm này — recheck 09:47 trả về 0 bài, không có lỗi `not_logged_in` (khác lần fetch 04:05), session Facebook vẫn sống (shinantori xác nhận có bài thật) — nguồn trống thật, không phải lỗi kỹ thuật)_
 
 ---
 ### Điểm nổi bật (AI)
@@ -386,3 +386,5 @@ _(Krebs on Security không có bài mới đợt này — 10 bài bị lọc ded
 - **VinFast phân hóa tín hiệu**: mặt tích cực (mở rộng đại lý Đức, tăng công suất, dự kiến tái khởi công NC) đối lập với rủi ro (hạt NC cân nhắc hủy gói ưu đãi 400 triệu USD, giới phân tích Mỹ lo ngại tốc độ đốt tiền mặt).
 - **Chứng khoán VN**: VN-Index lấy lại mốc 1.700 điểm nhưng thanh khoản còn yếu, dòng vốn quỹ đầu tư rút ròng hơn 20 nghìn tỷ đồng nửa đầu năm — tâm lý thận trọng vẫn chi phối dù định giá được đánh giá hấp dẫn.
 - **An ninh mạng**: tấn công OT phối hợp nhắm 30+ hệ thống nước Minnesota là sự kiện nghiêm trọng nhất, cùng với các lỗ hổng nghiêm trọng đang bị khai thác thực tế (VMware, Check Point, Arista, vBulletin) — nên vá khẩn cấp.
+
+**Recheck 09:47:** Nghiện AI (Facebook Group) — re-fetch trực tiếp trả 0 bài không kèm lỗi `not_logged_in` (khác 04:05), session còn sống (shinantori xác nhận), kết luận nguồn trống thật — không phải lỗi kỹ thuật, không cần re-login.
