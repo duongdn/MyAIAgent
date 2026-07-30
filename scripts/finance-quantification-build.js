@@ -229,7 +229,7 @@ async function writeSheet(sheets, ticker, all, groups) {
 // ── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
   const ticker = process.argv[2];
-  if (!ticker || !/^[A-Z0-9]{3,10}$/.test(ticker)) { console.error("ERROR: INVALID_TICKER"); process.exit(1); }
+  if (!ticker || !/^[A-Z0-9]{3,10}$/.test(ticker)) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
 
   const yrs = config.max_years || 15;
   process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
@@ -243,7 +243,7 @@ async function main() {
   const i440 = cf.nvT.findIndex((r) => (r.code || "").trim() === "440");
   if (i270 >= 0 && i440 >= 0) {
     const be = checkBalance(cf.tnY, cf.nvY, i270, i440);
-    if (be) { console.error(`ERROR: ${be}`); process.exit(2); }
+    if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
   }
 
   const { all, groups } = buildAll(cf, years);
@@ -255,4 +255,8 @@ async function main() {
   process.stdout.write(`DONE: ${url}\n`);
 }
 
-main().catch((e) => { const m = e.message || String(e); process.stderr.write(`ERROR: ${m}\n`); process.exit(1); });
+main().catch((e) => {
+  const m = e.message || String(e);
+  const msg = m.startsWith("ERROR:") ? m + "\n" : `ERROR: ${m}\n`;
+  process.stderr.write(msg, () => process.exit(1));
+});

@@ -173,11 +173,18 @@ form.addEventListener("submit", async (e) => {
       result.innerHTML = '<a href="' + d.url + '" target="_blank" rel="noopener">📊 Mở Google Sheet →</a><div class="time">' + ((Date.now() - startTime) / 1000).toFixed(1) + "s</div>";
     });
 
-    es.addEventListener("closed", () => {
+    es.addEventListener("closed", (ev) => {
+      const d = JSON.parse(ev.data);
       const el = ((Date.now() - startTime) / 1000).toFixed(1) + "s";
-      pct.textContent = "100%";
-      fill.style.width = "100%";
-      step.textContent = "Hoàn thành (" + el + ")";
+      if (d.code === 0) {
+        pct.textContent = "100%";
+        fill.style.width = "100%";
+        step.textContent = "Hoàn thành (" + el + ")";
+      } else {
+        fill.style.width = "100%";
+        fill.style.background = "#ef4444";
+        step.textContent = "Lỗi (" + el + ")";
+      }
       btn.disabled = false;
       currentStream = null;
       es.close();
