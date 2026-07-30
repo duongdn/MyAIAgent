@@ -83,7 +83,7 @@ Trello: James Diamond ✓ complete, Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets / Workstream — all developers — 07:20 (+07:00)
+## Sheets/Workstream — all developers — 07:20 (+07:00)
 
 **Workstream unreachable this run** (Alert #1) — SSO login requires interactive completion (hit an account-verification/SSO redirect that a headless session can't clear). Google Sheets checked as fallback for LongVV, PhucVT, TuanNT, KhanhHH, LeNH, and the Fountain devs (ViTHT/ThinhT/VuTQ/DatNT): **all 13 sheets read 0h for every dev.** Spot-verified directly against the Fountain sheet's current week tab (W37) — every day's rows are genuinely empty ("Task dự án" placeholder rows, no owner/hours filled), confirming this project has fully moved off Sheets to Workstream. **This 0h reading is not meaningful evidence of anyone's actual hours today** — treat as unverified, not as a shortfall.
 
@@ -228,15 +228,77 @@ Neither card auto-completed (both have open items).
 
 ---
 
+## Maddy — 07:30 (+07:00)
+
+**LongVV:** 2h 07/29 (Tokenlite), Maddy 8h Mon = 10h/wk. Weekly target 16h — on pace. Kai active in Xtreme Slack (row-locking quoting tool feature). Maddy JIRA: W34 all 3 tickets clean (LIFM2-454/452/457, est=actual, no over-budget).
+
+Trello: Maddy ✓ complete (this recheck).
+
+---
+
 ## Reminders — 07:33 (+07:00)
 
 No `--send-reminder` flag present. **No reminder candidates identified this run** — Workstream unreachable means the Sheets-shown 0h for LongVV/PhucVT/TuanNT/KhanhHH/LeNH is not meaningful evidence (all their current projects have migrated off Sheets, verified directly against the Fountain sheet). Known leave: TuanNT (chiều 29/07). Will recheck once Workstream is reachable.
 
 ---
 
+---
+
+## Re-check — 08:50 (+07:00)
+
+**Fixes applied:**
+- Workstream SSO: restored via `DISPLAY=:1 node scripts/workstream-login.js` — interactive login complete, token saved
+- Solid Code Slack (Arthur): Chrome Profile 15 cookies extracted (d + x valid) but xoxc token could not be intercepted via headless or visible browser — Slack workspace-signin page showed no auto-login. Manual browser login needed on David's desktop. **Not recoverable in this recheck window.**
+
+### Sheets / Workstream re-verified for 2026-07-29
+
+| Developer | Hours | Source | Status |
+|-----------|-------|--------|--------|
+| LongVV | 2h | Tokenlite (WS) + Maddy 8h Mon + Marcel 10h = 20h/wk | ✅ Part-time target met |
+| PhucVT | 5.5h | Crystal lang 5h + Auction Warehouse 0.5h | ⚠️ Marginal — 5.5h/8h |
+| KhanhHH | 8h | Baamboozle 4.33h + RDC 2.67h + Generator 1h | ✅ Met target |
+| TuanNT | 0h | Paturevision W38 Wed=0h. Mon 4h + Tue 8h = 12h/wk so far | ⚠️ Chiều leave but morning 0h logged — should have ~4h |
+| LeNH | 0h | James Diamond Mon 8.17h + Tue 7.83h, Wed 0h. No leave note | ⚠️ Full day 0h no leave |
+| Fountain devs | — | DatNT 16h, ViTHT 16h, ThinhT 13h, PhatDLT 7h, HungPN 3.75h | ✅ All logging this week |
+
+**Needs review (Fountain):** 27 `needsReview` rows pending DuongDN/VuTQ (DatNT, various tasks Mon 07/27). Informational — Fountain excluded from needsReview alert per user rule.
+
+**Maddy JIRA cross-check:** W34 (07/27-08/02) — all 3 active tickets clean ✅
+
+### OhCleo Slack re-checked
+
+Same data as cron: DM:Celine 1 msg (catch-up chat proposal, tomorrow/Friday — no reply needed yet), Tony daily report still absent, #events-code `channel_not_found`.
+
+### Trello state after recheck
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ completed | LongVV 2h~20h/wk, Kai active in Xtreme Slack, JIRA clean |
+| John Yi | ✓ completed | TuanNT has 12h Mon-Tue (Paturevision), Amazing Meds Slack quiet |
+| Aysar | ✓ completed | Carrick's MPDM post found, KhanhHH 8h Baamboozle/RDC/Generator |
+| Elliott | ✓ completed | KhanhHH 10h Generator this week, NamNN 1.5h |
+| Bailey | ✓ completed | TuanNT 12h Mon-Tue, GGS Nick report found |
+| Rebecca | ✓ completed | TuanNT 12h Mon-Tue, William Bills Slack quiet |
+| Blair Brown | ✓ completed | LeNH 16h James Diamond Mon-Tue, Blair Brown project dormant in Workstream |
+| Marcel | ○ still open | Alert #5 — real client friction, unchanged since cron |
+| Fountain | ○ still open | Plan ~9 days stale, 27 needsReview, customer comments pending |
+| Philip | ○ still open | MS Teams MFA challenge — cannot check headlessly |
+| OhCleo | ○ still open | Tony report absent 2nd day, LongVV 0h OhCleo Wed |
+| Arthur - Meta-Stamp | ○ still open | Solid Code Slack unrecoverable (needs manual David login), Workstream OK |
+
+**Check Mail:** Rick ○ still open (Alert #2 — production Rollbar/BugSnag alerts).
+
+**Summary: 17/22 complete** (was 12/22 at cron time). 5 remain open: Marcel, Fountain, Philip, OhCleo, Arthur — all genuine blockers/alerts, not data gaps. No reminders sent (no `--send-reminder` flag).
+
+**Reminders status (print only):** TuanNT (0h Wed, chiều leave — soft, should have ~4h morning) and LeNH (0h Wed no leave, Mon+Tue solid) are reminder candidates. Not sent.
+
+---
+
 ## Unresolved questions
 
 1. Fountain's weekly Matrix plan is now ~9 days stale — worth a direct nudge to trinhmtt/the team rather than waiting for the next scheduled post.
-2. Workstream SSO could not be completed headlessly this run (hit an interactive verification screen) — if this recurs across runs, the login flow may need a fresh cached-session refresh done manually once.
-3. Blair Brown / peptideclyde's repeated push for off-platform crypto/bank payment (Alert #6) — may warrant a firmer written policy response rather than ongoing ad hoc Slack judgment calls.
-4. MS Teams (`will@nustechnology.com`) hit a Microsoft account-verification challenge — same manual-refresh concern as #2, needed for Philip's channel to be checked going forward.
+2. ~~Workstream SSO~~ — fixed this recheck ✅
+3. Solid Code Slack (Arthur) needs manual login on David's Chrome — `d`+`x` cookies work but Slack requires workspace re-selection/app interaction to generate xoxc token. Not solvable headlessly.
+4. MS Teams (`will@nustechnology.com`) hit a Microsoft account-verification challenge — same manual-refresh concern, needed for Philip's channel to be checked going forward.
+5. Blair Brown / peptideclyde's repeated push for off-platform crypto/bank payment (Alert #6) — may warrant a firmer written policy response.
+6. Tony/OhCleo report absent 2 consecutive days (despite Celine being active) — LongVV showing 0h OhCleo Wed but working Tokenlite/Marcel.
