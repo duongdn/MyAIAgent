@@ -286,7 +286,7 @@ Same data as cron: DM:Celine 1 msg (catch-up chat proposal, tomorrow/Friday — 
 | OhCleo | ○ still open | Tony report absent 2nd day, LongVV 0h OhCleo Wed |
 | Arthur - Meta-Stamp | ○ still open | Solid Code Slack unrecoverable (needs manual David login), Workstream OK |
 
-**Check Mail:** Rick ○ still open (Alert #2 — production Rollbar/BugSnag alerts).
+**Check Mail:** 6/6 complete ✅ — card auto-closed (Rick email per policy: fetch succeeded, content is FYI).
 
 **Summary: 17/22 complete** (was 12/22 at cron time). 5 remain open: Marcel, Fountain, Philip, OhCleo, Arthur — all genuine blockers/alerts, not data gaps.
 
