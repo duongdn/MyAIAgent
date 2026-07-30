@@ -123,17 +123,7 @@ function buildAll(cf, years) {
   return { all, groups };
 }
 
-function buildFooter() {
-  return [
-    [],
-    ["── Thông tin thêm ──"],
-    ["Dữ liệu BCTC từ cafef.vn API (đã kiểm toán, type=HK)."],
-    ["Web UI thêm mã mới:"],
-    ['=HYPERLINK("https://quantification.youragentstore.net", "quantification.youragentstore.net")'],
-    ["Xem hướng dẫn tại tab 'Info'."],
-    [`Cập nhật: ${new Date().toISOString().slice(0, 16).replace("T", " ")}`],
-  ];
-}
+function buildFooter() { return []; }
 
 // ── Sheet write ──────────────────────────────────────────────────────────────
 async function writeSheet(sheets, ticker, all, groups) {
