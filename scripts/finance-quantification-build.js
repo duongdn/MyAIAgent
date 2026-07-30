@@ -197,12 +197,34 @@ async function writeSheet(sheets, ticker, all, groups) {
 
   await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: reqs } });
 
-  // Row groups
+  // Row groups — add groups then collapse them
   if (groups.length > 0) {
+    // Step 1: add dimension groups
     const greqs = groups.map((g) => ({
       addDimensionGroup: { range: { sheetId: sid, dimension: "ROWS", startIndex: g.start, endIndex: g.end } },
     }));
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: greqs } });
+
+    // Step 2: read back groups and collapse
+    const m2 = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID, ranges: [ticker] });
+    const rgs = m2.data.sheets[0].rowGroups || [];
+    const creqs = [];
+    for (const cg of groups) {
+      for (const rg of rgs) {
+        if (rg.range.startIndex === cg.start && rg.range.endIndex === cg.end) {
+          creqs.push({
+            updateDimensionGroup: {
+              dimensionGroup: { range: { sheetId: sid, dimension: "ROWS", startIndex: cg.start, endIndex: cg.end }, depth: rg.depth || 0, collapsed: true },
+              fields: "collapsed",
+            },
+          });
+          break;
+        }
+      }
+    }
+    if (creqs.length > 0) {
+      await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: creqs } });
+    }
   }
 
   return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit#gid=${sid}`;
