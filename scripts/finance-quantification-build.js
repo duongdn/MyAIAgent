@@ -71,26 +71,70 @@ function dataLine(template, yrsData, years, row) {
   return line;
 }
 
+const ROMAN_RE = /^[IVX]+\.\s/;
+const LEVEL = new Set(["100", "200", "270", "300", "400", "440"]);
+
+// Group header = row whose name starts with Roman numeral (I., II., ..., VII.)
+function isGroupHeader(row) {
+  const c = (row.code || "").trim();
+  if (!c || LEVEL.has(c)) return false;
+  return ROMAN_RE.test(row.name);
+}
+
 function buildAll(cf, years) {
   const all = [];
+  const groups = [];
 
   function addSec(label, template, yrsData) {
     all.push([label, ...years.map(String)]);
-    for (const row of template) all.push(dataLine(template, yrsData, years, row));
+
+    let i = 0;
+    while (i < template.length) {
+      const row = template[i];
+      const code = (row.code || "").trim();
+      const r0 = all.length;
+      all.push(dataLine(template, yrsData, years, row));
+
+      if (isGroupHeader(row)) {
+        let j = i + 1;
+        while (j < template.length) {
+          const next = template[j];
+          const sc = (next.code || "").trim();
+          if (isGroupHeader(next) || LEVEL.has(sc)) break;
+          all.push(dataLine(template, yrsData, years, next));
+          j++;
+        }
+        const subStart = r0 + 1, subEnd = all.length;
+        if (subEnd > subStart) {
+          groups.push({ start: subStart, end: subEnd, collapsed: true });
+        }
+        i = j;
+      } else {
+        i++;
+      }
+    }
+  }
+
+  // Sections that get full-content collapse (no Roman numeral sub-headers)
+  function addGroupedSec(label, template, yrsData) {
+    const start = all.length;
+    addSec(label, template, yrsData);
+    const end = all.length;
+    if (end > start + 1) groups.push({ start: start + 1, end, collapsed: true });
   }
 
   addSec("Tài sản", cf.tnT, cf.tnY);
   addSec("Nguồn vốn", cf.nvT, cf.nvY);
-  addSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
-  for (const g of cf.lcttG) addSec(g.name, g.template, g.years);
+  addGroupedSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
+  for (const g of cf.lcttG) addGroupedSec(g.name, g.template, g.years);
 
-  return all;
+  return { all, groups };
 }
 
 function buildFooter() { return []; }
 
 // ── Sheet write ──────────────────────────────────────────────────────────────
-async function writeSheet(sheets, ticker, all) {
+async function writeSheet(sheets, ticker, all, groups) {
   const meta = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
   const ex = meta.data.sheets.find((s) => s.properties.title === ticker);
   if (ex) {
@@ -153,6 +197,14 @@ async function writeSheet(sheets, ticker, all) {
 
   await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: reqs } });
 
+  // Row groups
+  if (groups.length > 0) {
+    const greqs = groups.map((g) => ({
+      addDimensionGroup: { range: { sheetId: sid, dimension: "ROWS", startIndex: g.start, endIndex: g.end } },
+    }));
+    await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: greqs } });
+  }
+
   return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit#gid=${sid}`;
 }
 
@@ -176,12 +228,12 @@ async function main() {
     if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
   }
 
-  const all = buildAll(cf, years);
-  process.stdout.write("PROGRESS: 3/3 Đang format...\n");
+  const { all, groups } = buildAll(cf, years);
+  process.stdout.write("PROGRESS: 3/3 Đang format + collapse...\n");
 
   const auth = new google.auth.GoogleAuth({ keyFile: KEY_PATH, scopes: ["https://www.googleapis.com/auth/spreadsheets"] });
   const sheets = google.sheets({ version: "v4", auth });
-  const url = await writeSheet(sheets, ticker, all);
+  const url = await writeSheet(sheets, ticker, all, groups);
   process.stdout.write(`DONE: ${url}\n`);
 }
 
