@@ -30,7 +30,7 @@ const locks = new Set();
 
 function broadcast(run, data) {
   run.buffer.push(data);
-  const payload = `data: ${JSON.stringify(data)}\n\n`;
+  const payload = `event: ${data.type || "message"}\ndata: ${JSON.stringify(data)}\n\n`;
   for (const c of run.clients) { try { c.write(payload); } catch (_) {} }
 }
 
