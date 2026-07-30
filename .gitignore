@@ -16,6 +16,7 @@ config/*.json
 !config/.weekly-report-send-flags.json
 !config/leave-plan.json
 !config/finance-watchlist.json
+!config/finance-quantification.json
 
 # Legacy root-level config (moved to config/)
 .upwork-config.json

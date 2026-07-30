@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Finance Quantification</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 16px}
+h1{font-size:20px;font-weight:600;margin-bottom:4px;color:#f1f5f9}
+.subtitle{font-size:13px;color:#94a3b8;margin-bottom:24px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:24px;width:100%;max-width:600px}
+.form-row{display:flex;gap:8px;margin-bottom:20px}
+.form-row input{flex:1;background:#0f172a;border:1px solid #475569;border-radius:8px;padding:10px 14px;font-size:15px;color:#e2e8f0;font-family:monospace;text-transform:uppercase;outline:none;transition:border-color .2s}
+.form-row input:focus{border-color:#38bdf8}
+.form-row input::placeholder{color:#475569}
+.form-row button{background:#0284c7;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:600;color:#fff;cursor:pointer;white-space:nowrap;transition:background .2s}
+.form-row button:hover:not(:disabled){background:#0369a1}
+.form-row button:disabled{opacity:.5;cursor:not-allowed}
+.status{display:none;margin-bottom:16px}
+.status.active{display:block}
+.progress-bar{height:4px;background:#334155;border-radius:2px;margin-bottom:8px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);border-radius:2px;transition:width .3s ease;width:0}
+.progress-info{display:flex;justify-content:space-between;font-size:12px;color:#94a3b8}
+.log-area{display:none;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:12px;max-height:300px;overflow-y:auto;font-family:"JetBrains Mono","Fira Code",monospace;font-size:12px;line-height:1.6;margin-bottom:16px}
+.log-area.active{display:block}
+.log-line{padding:1px 0;word-break:break-all}
+.log-line.progress-step{color:#38bdf8}
+.log-line.warn{color:#fbbf24}
+.log-line.error{color:#f87171}
+.log-line.done{color:#34d399;font-weight:600}
+.log-line.stderr{color:#f87171}
+.log-placeholder{color:#64748b}
+.result{display:none;background:#064e3b;border:1px solid#065f46;border-radius:8px;padding:14px}
+.result.active{display:block}
+.result a{color:#34d399;font-weight:600;font-size:14px;text-decoration:none}
+.result a:hover{text-decoration:underline}
+.result .time{font-size:11px;color:#6ee7b7;margin-top:4px}
+.error-box{display:none;background:#450a0a;border:1px solid #7f1d1d;border-radius:8px;padding:14px}
+.error-box.active{display:block}
+.error-box .err-title{font-size:13px;font-weight:600;color:#f87171;margin-bottom:4px}
+.error-box .err-msg{font-size:12px;color:#fca5a5;font-family:monospace}
+</style>
+</head>
+<body>
+<h1>Định lượng — Phân tích Tỷ số Tài chính</h1>
+<div class="subtitle">Nhập mã cổ phiếu để tự động fetch BCTC + giá thị trường và tạo sheet phân tích tỷ số</div>
+
+<div class="card">
+  <form id="runForm" class="form-row">
+    <input id="ticker" type="text" placeholder="Mã CK (VD: FPT, SAB, VEA)" maxlength="10" autofocus autocomplete="off">
+    <button id="runBtn" type="submit">▶ Run</button>
+  </form>
+
+  <div id="status" class="status">
+    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+    <div class="progress-info"><span id="progressStep">Đang khởi động...</span><span id="progressPct">0%</span></div>
+  </div>
+
+  <div id="logArea" class="log-area"></div>
+
+  <div id="result" class="result"></div>
+  <div id="errorBox" class="error-box"></div>
+</div>
+
+<script>
+const form = document.getElementById("runForm");
+const input = document.getElementById("ticker");
+const btn = document.getElementById("runBtn");
+const status = document.getElementById("status");
+const fill = document.getElementById("progressFill");
+const step = document.getElementById("progressStep");
+const pct = document.getElementById("progressPct");
+const log = document.getElementById("logArea");
+const result = document.getElementById("result");
+const errBox = document.getElementById("errorBox");
+
+let currentStream = null;
+
+function reset() {
+  status.classList.remove("active");
+  log.classList.remove("active");
+  result.classList.remove("active");
+  errBox.classList.remove("active");
+  log.innerHTML = "";
+  result.innerHTML = "";
+  errBox.innerHTML = "";
+  fill.style.width = "0";
+  pct.textContent = "0%";
+  step.textContent = "";
+}
+
+function addLog(msg, cls) {
+  const d = document.createElement("div");
+  d.className = "log-line " + (cls || "");
+  d.textContent = msg;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const ticker = input.value.trim().toUpperCase();
+  if (!ticker) return;
+
+  reset();
+  btn.disabled = true;
+  status.classList.add("active");
+  log.classList.add("active");
+  addLog("⏳ Đang khởi tạo...", "log-placeholder");
+
+  const startTime = Date.now();
+
+  try {
+    const r = await fetch("/api/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ticker }),
+    });
+    if (!r.ok) {
+      const err = await r.json();
+      addLog("✗ " + err.error, "error");
+      errBox.classList.add("active");
+      errBox.innerHTML = '<div class="err-title">Lỗi</div><div class="err-msg">' + err.error + "</div>";
+      status.classList.remove("active");
+      btn.disabled = false;
+      return;
+    }
+
+    const { runId } = await r.json();
+    const es = new EventSource("/api/run/" + runId + "/stream");
+    currentStream = es;
+
+    es.addEventListener("started", (ev) => {
+      const d = JSON.parse(ev.data);
+      log.innerHTML = "";
+      addLog("▶ Bắt đầu xử lý mã " + d.ticker);
+    });
+
+    es.addEventListener("progress", (ev) => {
+      const d = JSON.parse(ev.data);
+      addLog("  " + d.message, "progress-step");
+      const m = d.step.match(/(\d+)\/(\d+)/);
+      if (m) {
+        const done = parseInt(m[1]), total = parseInt(m[2]);
+        fill.style.width = (done / total * 100) + "%";
+        pct.textContent = Math.round(done / total * 100) + "%";
+        step.textContent = d.message;
+      }
+    });
+
+    es.addEventListener("warn", (ev) => {
+      const d = JSON.parse(ev.data);
+      addLog("⚠ " + d.message, "warn");
+    });
+
+    es.addEventListener("error", (ev) => {
+      if (ev.data) {
+        try {
+          const d = JSON.parse(ev.data);
+          addLog("✗ " + d.message, "error");
+          errBox.classList.add("active");
+          errBox.innerHTML = '<div class="err-title">Lỗi</div><div class="err-msg">' + d.message + "</div>";
+        } catch (_) {}
+      }
+    });
+
+    es.addEventListener("done", (ev) => {
+      const d = JSON.parse(ev.data);
+      addLog("✓ Hoàn thành!", "done");
+      result.classList.add("active");
+      result.innerHTML = '<a href="' + d.url + '" target="_blank" rel="noopener">📊 Mở Google Sheet →</a><div class="time">' + ((Date.now() - startTime) / 1000).toFixed(1) + "s</div>";
+    });
+
+    es.addEventListener("closed", () => {
+      const el = ((Date.now() - startTime) / 1000).toFixed(1) + "s";
+      pct.textContent = "100%";
+      fill.style.width = "100%";
+      step.textContent = "Hoàn thành (" + el + ")";
+      btn.disabled = false;
+      currentStream = null;
+      es.close();
+    });
+
+    es.onerror = () => {
+      btn.disabled = false;
+      currentStream = null;
+      es.close();
+    };
+
+  } catch (err) {
+    addLog("✗ Lỗi kết nối: " + err.message, "error");
+    btn.disabled = false;
+    status.classList.remove("active");
+  }
+});
+</script>
+</body>
+</html>
