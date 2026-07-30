@@ -106,7 +106,7 @@ function buildAll(cf, years) {
         }
         const subStart = r0 + 1, subEnd = all.length;
         if (subEnd > subStart) {
-          groups.push({ start: subStart, end: subEnd, collapsed: true });
+          groups.push({ start: subStart, end: subEnd, collapsed: false });
         }
         i = j;
       } else {
@@ -116,17 +116,17 @@ function buildAll(cf, years) {
   }
 
   // Sections that get full-content collapse (no Roman numeral sub-headers)
-  function addCollapsedSec(label, template, yrsData) {
+  function addGroupedSec(label, template, yrsData) {
     const start = all.length;
     addSec(label, template, yrsData);
     const end = all.length;
-    if (end > start + 1) groups.push({ start: start + 1, end, collapsed: true });
+    if (end > start + 1) groups.push({ start: start + 1, end, collapsed: false });
   }
 
   addSec("Tài sản", cf.tnT, cf.tnY);
   addSec("Nguồn vốn", cf.nvT, cf.nvY);
-  addCollapsedSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
-  for (const g of cf.lcttG) addCollapsedSec(g.name, g.template, g.years);
+  addGroupedSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
+  for (const g of cf.lcttG) addGroupedSec(g.name, g.template, g.years);
 
   return { all, groups };
 }
@@ -203,22 +203,6 @@ async function writeSheet(sheets, ticker, all, groups) {
       addDimensionGroup: { range: { sheetId: sid, dimension: "ROWS", startIndex: g.start, endIndex: g.end } },
     }));
     await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: greqs } });
-
-    const collapsed = groups.filter((g) => g.collapsed);
-    if (collapsed.length > 0) {
-      const m2 = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID, ranges: [ticker] });
-      const rgs = m2.data.sheets[0].rowGroups || [];
-      const creqs = [];
-      for (const cg of collapsed) {
-        for (const rg of rgs) {
-          if (rg.range.startIndex === cg.start && rg.range.endIndex === cg.end) {
-            creqs.push({ updateDimensionGroup: { dimensionGroup: { range: { sheetId: sid, dimension: "ROWS", startIndex: cg.start, endIndex: cg.end }, depth: rg.depth || 0, collapsed: true }, fields: "collapsed" } });
-            break;
-          }
-        }
-      }
-      if (creqs.length > 0) await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: creqs } });
-    }
   }
 
   return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit#gid=${sid}`;
