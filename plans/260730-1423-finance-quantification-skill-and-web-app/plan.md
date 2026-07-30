@@ -20,11 +20,14 @@ spreadsheet, one button on its own authenticated domain. Zero hand-typed market 
 |---|-------|--------|--------|-----------|
 | 01 | [Research & design lock](phase-01-research-and-design-lock.md) | 1.5h | pending | — |
 | 02 | [Skill + scripts](phase-02-skill-and-scripts.md) | 3h | pending | 01 |
-| 03 | [Web app (Express + SSE)](phase-03-web-app.md) | 2h | pending | 01 (spec only) |
+| 03 | [Web app (Express + SSE)](phase-03-web-app.md) | 2h | pending | 02 |
 | 04 | [Deploy to mpfc](phase-04-deploy-mpfc.md) | 1.5h | pending | 02, 03 |
 | 05 | [Docs + dual memory](phase-05-docs-and-memory.md) | 0.5h | pending | 04 |
 
-Phase 03 may run in parallel with 02 (disjoint file ownership); its smoke test needs 02 merged.
+Phase 03 can be scaffolded in parallel with 02 (disjoint file ownership: 02 owns `scripts/**`,
+`.claude/commands/me/**`, `config/**`, `.gitignore`; 03 owns `web-quantification/**` + `package.json`),
+but its stream parser can only be tested against the real `PROGRESS:`/`DONE:`/`ERROR:` output once 02
+lands — so 03 is listed as blocked by 02.
 
 ## Verified facts driving the design
 
@@ -39,13 +42,28 @@ Phase 03 may run in parallel with 02 (disjoint file ownership); its smoke test n
 - `scripts/finance-report-detail-build-raw-sheet.js:84-92` **renames + wipes sheet[0]** when the target
   tab is missing → destructive in a shared spreadsheet. Must not be reused as-is.
 - Target spreadsheet `1uiahfXv8pIjgXYtddgNXcwHQF8BHmLQfcj3knXwIQZo` is reachable by the service
-  account, locale `en_US`, one tab `Sheet1`, title `Định tính` (to be renamed).
+  account, locale `en_US`, one tab `Sheet1`, title `Định tính` — **left exactly as-is** (no rename, no
+  `Sheet1` repurposing); runs only add/overwrite `Định lượng - <TICKER>` tabs.
 - mpfc: port **3335 free** (3333/3334 taken), `certbot` apache authenticator proven (dailyagent cert
-  renewed 2026-07-29), sudo NOPASSWD, `htpasswd` present, `claude` 2.1.205 at `/usr/bin/claude`,
-  express+googleapis already resolvable in `/var/www/MyDailyAgent`.
+  renewed 2026-07-29), sudo NOPASSWD, `htpasswd` present, express+googleapis already resolvable in
+  `/var/www/MyDailyAgent`.
 - `quantification.youragentstore.net` is **Cloudflare-proxied** (104.21.23.236 / 172.67.214.40), zone
   NS = cloudflare, apex same IPs. HTTP :80 reaches the origin unmodified (current 301 is emitted by
   Apache's default vhost `admin.conf`, not Cloudflare) → ACME HTTP-01 will work.
+
+## Locked decisions (2026-07-30)
+
+- **One script is the product.** `scripts/finance-quantification-build.js` does all fetching, validating
+  and sheet-writing. `/me:finance-quantification <TICKER>` shells out to it; the web app spawns it
+  directly. Nothing calls the command programmatically, and no logic is duplicated.
+- **No agent in the web path.** The web app does **not** run `claude -p` / `stream-json`. SSE events are
+  parsed from the script's own `PROGRESS: n/5 …` / `WARN:` / `DONE: <url>` / `ERROR: <CODE> …` stdout
+  lines. Runs take seconds, cost nothing, and have zero prompt-injection surface.
+- **Free-form ticker**, gated only by `^[A-Z0-9]{3,10}$`. No watchlist allowlist; unknown tickers are
+  fetched fresh.
+- **Hands off the shared spreadsheet's shell.** Title and `Sheet1` untouched, forever.
+- **Valuation:** annual P/E + P/B always; P/E TTM only when 4 consecutive quarters exist, else a `WARN:`
+  and the row is omitted. Never interpolated.
 
 ## Key dependencies
 
@@ -62,4 +80,8 @@ Phase 03 may run in parallel with 02 (disjoint file ownership); its smoke test n
 
 ## Open questions
 
-See end of each phase file; consolidated list in phase-01.
+None. All decisions are locked (see above and the "Decisions (locked)" section at the end of each phase
+file). Ready for implementation.
+
+One conditional stop remains, by design: if `certbot` demands an email address in phase 04 step 6, stop
+and ask the user rather than inventing one.
