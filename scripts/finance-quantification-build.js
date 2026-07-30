@@ -115,10 +115,18 @@ function buildAll(cf, years) {
     }
   }
 
+  // Sections that get full-content collapse (no Roman numeral sub-headers)
+  function addCollapsedSec(label, template, yrsData) {
+    const start = all.length;
+    addSec(label, template, yrsData);
+    const end = all.length;
+    if (end > start + 1) groups.push({ start: start + 1, end, collapsed: true });
+  }
+
   addSec("Tài sản", cf.tnT, cf.tnY);
   addSec("Nguồn vốn", cf.nvT, cf.nvY);
-  addSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
-  for (const g of cf.lcttG) addSec(g.name, g.template, g.years);
+  addCollapsedSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
+  for (const g of cf.lcttG) addCollapsedSec(g.name, g.template, g.years);
 
   return { all, groups };
 }
