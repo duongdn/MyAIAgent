@@ -141,7 +141,7 @@ app.get("/api/run/:id/stream", (req, res) => {
   res.setHeader("X-Accel-Buffering", "no");
   res.flushHeaders();
 
-  for (const data of run.buffer) res.write(`data: ${JSON.stringify(data)}\n\n`);
+  for (const data of run.buffer) res.write(`event: ${data.type || "message"}\ndata: ${JSON.stringify(data)}\n\n`);
 
   if (run.status === "done" || run.status === "error") { res.end(); return; }
 
