@@ -209,6 +209,11 @@ function buildRatioBlock(map, years, market) {
   b.push(["P/B (lần)", ...cols.map((c) => `=IFERROR(ROUND(${market.price}/(${c}${r("400")}*1000000000/${market.shares}),2),"")`)]);
   b.push(["Giá CP hiện tại (đồng)", ...blank().slice(0, -1), market.price]);
   b.push([`Số CP lưu hành (${market.date}) = ${(market.shares / 1e6).toFixed(2)}tr CP (nguồn: MarketCap/Price từ vietstock.vn, sàn ${market.exchange})`]);
+  b.push([]); b.push([]);
+  b.push(["── Thông tin thêm ──"]);
+  b.push(["Web UI: https://quantification.youragentstore.net (quant / R2KL3YbsQkCvpL4)"]);
+  b.push(["Xem hướng dẫn chi tiết tại tab 'Info' trong cùng spreadsheet này."]);
+  b.push([`Dữ liệu tự động fetch từ cafef.vn (BCTC) + vietstock.vn (giá). Cập nhật cuối: ${new Date().toISOString().slice(0, 16).replace('T', ' ')}`]);
   return b;
 }
 
