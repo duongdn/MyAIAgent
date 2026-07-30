@@ -71,7 +71,6 @@ function dataLine(template, yrsData, years, row) {
   return line;
 }
 
-const isEmpty = (line) => line.slice(1).every((c) => c === " - " || c === "" || c == null);
 const ROMAN_RE = /^[IVX]+\.\s/;
 const LEVEL = new Set(["100", "200", "270", "300", "400", "440"]);
 
@@ -107,9 +106,7 @@ function buildAll(cf, years) {
         }
         const subStart = r0 + 1, subEnd = all.length;
         if (subEnd > subStart) {
-          let allEmpty = true;
-          for (let ri = subStart; ri < subEnd; ri++) { if (!isEmpty(all[ri])) { allEmpty = false; break; } }
-          groups.push({ start: subStart, end: subEnd, collapsed: allEmpty });
+          groups.push({ start: subStart, end: subEnd, collapsed: true });
         }
         i = j;
       } else {
@@ -131,7 +128,8 @@ function buildFooter() {
     [],
     ["── Thông tin thêm ──"],
     ["Dữ liệu BCTC từ cafef.vn API (đã kiểm toán, type=HK)."],
-    ["Web UI thêm mã mới: https://quantification.youragentstore.net"],
+    ["Web UI thêm mã mới:"],
+    ['=HYPERLINK("https://quantification.youragentstore.net", "quantification.youragentstore.net")'],
     ["Xem hướng dẫn tại tab 'Info'."],
     [`Cập nhật: ${new Date().toISOString().slice(0, 16).replace("T", " ")}`],
   ];
