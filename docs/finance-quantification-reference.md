@@ -17,9 +17,12 @@
 ```
 TICKER ──► cafef.vn API (CDKT+KQKD+LCTT, annual+quarterly)
         ──► vietstock.vn (live price, market cap → derived shares)
-        ──► Google Sheets: 1 tab "Định lượng - <TICKER>" with raw rows + ratio formulas
+        ──► Google Sheets: 1 tab "<TICKER>" with raw rows + ratio formulas
 ```
 
+- Tab name = ticker only (e.g., "SAB", "FPT", "FOX")
+- Row groups with collapse for empty/inactive detail rows
+- Section headers bold + gray background, frozen row 1
 - All formulas = sheet references (not hardcoded numbers)
 - Row indices resolved by cafef `code` (270=total assets, 400=equity, etc.)
 - Banks/securities → abort with UNSUPPORTED_CHART_OF_ACCOUNTS
