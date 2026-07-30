@@ -161,8 +161,10 @@ vhost 301s the challenge to another host.
 10. **Renewal**: `sudo certbot renew --dry-run` must pass for the new domain, and
     `/etc/letsencrypt/renewal/quantification.youragentstore.net.conf` must show
     `authenticator = apache`.
-11. **E2E through the domain**: log in, run `FPT`, watch the 5 steps stream live, open the resulting
-    tab link. Confirm elapsed streaming exceeds 100 s without a Cloudflare 524 (heartbeat working).
+11. **E2E through the domain**: log in, run `FPT`, watch the 5 steps arrive **one at a time** (proves
+    Cloudflare + `flushpackets=on` are not buffering the SSE stream), open the resulting tab link.
+    Runs take seconds now, so the Cloudflare 100 s idle limit is not exercised — verify incremental
+    delivery instead of long-lived-connection survival.
 12. **Regression**: `https://dailyagent.mypersonalfootballcoach.com/` still 401→200 with its own
     credentials; `systemctl is-active mydailyagent-web` still active; `apache2ctl -S` shows the five
     original vhosts unchanged plus ours.
@@ -189,7 +191,8 @@ vhost 301s the challenge to another host.
 
 - `https://quantification.youragentstore.net/` → 401 without credentials, 200 with them, valid cert
   (`openssl s_client` shows the LE chain for this exact domain).
-- SSE streams incrementally through Cloudflare for a run longer than 100 s (no 524).
+- SSE steps arrive incrementally through Cloudflare (not batched at completion).
+- A full `FPT` run through the public domain completes in < 30 s and writes the tab.
 - `systemctl is-enabled mydailyagent-quantification` → enabled; survives `systemctl restart`.
 - `certbot renew --dry-run` passes for the new domain.
 - The dailyagent UI and the four other vhosts behave exactly as in the pre-flight snapshot;
@@ -205,7 +208,7 @@ vhost 301s the challenge to another host.
 | Smoke | app alive | `curl 127.0.0.1:3335/healthz` |
 | Auth | 401/200/wrong-pass | `curl -o /dev/null -w '%{http_code}'` ×3 |
 | TLS | cert subject + chain + expiry | `openssl s_client -servername ... -connect ...:443` |
-| Streaming | no buffering, no 524 | `curl -N` on the SSE endpoint, run > 100 s |
+| Streaming | no buffering | `curl -N` on the SSE endpoint; steps must arrive one at a time |
 | Regression | other vhosts + services | pre/post `apache2ctl -S`, `systemctl is-active`, `md5sum .htpasswd` |
 | Renewal | future-proofing | `certbot renew --dry-run` |
 | Reboot | persistence | `systemctl is-enabled` (full reboot optional, coordinate with user) |
