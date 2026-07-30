@@ -23,6 +23,11 @@
   (`web/server.js:65-84`) enumerates files, so a subcommand syntax like `finance-report quantification`
   is undiscoverable. The new file auto-appears in the existing dashboard as `me:finance-quantification`
   — a side effect, not a change to `web/`.
+- **The script is the product; the command is a wrapper.** Both `/me:finance-quantification` and the
+  phase-03 web app invoke `scripts/finance-quantification-build.js`. Nothing invokes the command
+  programmatically. This keeps one code path under test and means the web app needs no agent runtime.
+- Because the web app parses `PROGRESS:`/`DONE:`/`ERROR:` lines (FR4), those prefixes are an API:
+  changing them breaks the UI's stepper. Note that in the script header comment.
 - The old builder hardcodes `A1:K202`, `A204`, and B..K columns
   (`finance-report-detail-build-dinh-luong.js:35,38,113`). All three must become computed.
 - Ratio block stays **100% formula-driven** referencing rows in the same tab — no computed numbers
@@ -44,11 +49,19 @@
   `{ticker, tradingDate, closePrice, marketCapVnd, sharesOutstanding, exchange, source}`.
 - FR3 Abort non-zero with a precise message on: unresolved required code, `270 != 440` for any year,
   `closePrice<=0`, `marketCap<=0`, zero audited years, `years.length>25`.
-- FR4 Emit progress markers `[QUANT-STEP] n/5 <label>` on **stderr** at each stage boundary.
+- FR4 Emit machine-readable progress on **stdout**, line-buffered, one line per stage boundary — this is
+  the contract the web app streams (phase 03), so it is part of the script's public interface:
+  - `PROGRESS: <n>/5 <label>` at the start of each of the 5 stages
+  - `WARN: <message>` for non-fatal issues (e.g. TTM omitted, `< 5` audited years)
+  - `DONE: <tabUrl>` as the final success line, immediately followed by the result JSON
+  - `ERROR: <CODE> <message>` on abort, then exit non-zero
+  Human-readable detail may go to stderr; the four prefixes above must never appear on stderr.
 - FR5 `--dry-run` performs every fetch + validation and prints the row/formula plan without any
   Sheets write (used by phase-03 smoke tests and CI-free verification).
-- FR6 `/me:finance-quantification <TICKER>` runs the script, interprets the output, appends a short
-  human read of the ratios, and stops-and-asks on any abort — never patches numbers by hand.
+- FR6 `/me:finance-quantification <TICKER>` **shells out to the same script** (`node scripts/finance-quantification-build.js <TICKER>`),
+  then interprets the output, adds a short human read of the ratios, and stops-and-asks on any abort —
+  never patches numbers by hand, never reimplements any of the logic. The script is the single source of
+  truth; the command and the web app are two thin callers of it.
 
 ### Non-functional
 - Each new file < 200 lines. No new npm dependency.
@@ -120,16 +133,21 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
    Then `buildRatioBlock({codeRowMap, years, market, ttm, startRow})` returning formula rows.
 5. `scripts/finance-quantification-build.js` — orchestrate the 5 steps; read
    `config/finance-quantification.json`; `spreadsheets.get` → find tab by title → `addSheet` when
-   absent (never rename); `values.clear` on `'<tab>'!A1:Z<startRow+blockRows+50>`; two
-   `values.update` calls (`USER_ENTERED`); read back for `#REF!/#NAME?/#N/A/#DIV/0!`; print result JSON
-   including `tabUrl = https://docs.google.com/spreadsheets/d/<id>/edit#gid=<gid>`.
+   absent (never rename, never touch the file title or `Sheet1`); `values.clear` on
+   `'<tab>'!A1:Z<startRow+blockRows+50>`; two `values.update` calls (`USER_ENTERED`); read back for
+   `#REF!/#NAME?/#N/A/#DIV/0!`; emit the FR4 `PROGRESS:`/`WARN:`/`DONE:`/`ERROR:` lines with
+   `process.stdout.write` (no buffering games) and print result JSON including
+   `tabUrl = https://docs.google.com/spreadsheets/d/<id>/edit#gid=<gid>`.
 6. Ticker sanitation in both scripts: `/^[A-Z0-9]{3,10}$/` after `toUpperCase()`, else abort.
    Prevents a malformed symbol from silently producing an empty tab.
 7. `.claude/commands/me/finance-quantification.md` — frontmatter `description:` (Vietnamese, matching
-   the style of `finance-report-detail.md:2`), then: purpose, the single bash command, how to read the
-   output JSON, the QA checklist, the abort/escalation rules, and the explicit **KHÔNG BỊA SỐ LIỆU**
-   rule copied in spirit from `finance-report-detail.md:93`. State that the tab lives in the shared
-   spreadsheet and that this command must not create per-ticker spreadsheets.
+   the style of `finance-report-detail.md:2`), then: purpose, **the single bash command to run
+   (`node scripts/finance-quantification-build.js <TICKER>`) and nothing else**, how to read the
+   `PROGRESS:`/`DONE:`/`ERROR:` lines + result JSON, the QA checklist, the abort/escalation rules, and
+   the explicit **KHÔNG BỊA SỐ LIỆU** rule copied in spirit from `finance-report-detail.md:93`.
+   State explicitly: the command must NOT reimplement fetching/computing, must NOT create per-ticker
+   spreadsheets, must NOT rename the shared file or touch `Sheet1`, and on `ERROR:` must report to the
+   user rather than hand-fixing numbers.
 8. `config/finance-quantification.json` + the `.gitignore` allowlist line; verify with
    `git check-ignore -v config/finance-quantification.json` returning exit 1 (not ignored).
 9. Manual verification runs: `--dry-run` for FPT, VEA, SAB, then a real write for one ticker; then VCB
@@ -157,7 +175,10 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
   `P/B` equals `price / BVPS` recomputed by hand to 2dp.
 - Re-running the same ticker produces the same tab (no duplicate tab, no extra rows, other tabs
   untouched — verify tab list before/after).
-- `VCB` and `SSI` exit 1 with `UNSUPPORTED_CHART_OF_ACCOUNTS` and create no tab.
+- `VCB` and `SSI` exit 1 with `ERROR: UNSUPPORTED_CHART_OF_ACCOUNTS …` and create no tab.
+- Exactly 5 `PROGRESS:` lines and one `DONE:` line on a successful run, in order, each flushed before
+  the next stage begins (verify with `node … FPT | cat` — no batching at the end).
+- Spreadsheet file title still `Định tính` and `Sheet1` still empty/untouched after a run.
 - `git check-ignore config/finance-quantification.json` → exit 1.
 - `grep -rn "MARKET = {" scripts/finance-quantification-*.js` → no match (no hand-typed market data).
 - Every new file < 200 lines; `node --check` clean on all.
@@ -168,7 +189,8 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
 |-------|------|-----|
 | Unit (manual, no framework in repo) | `parseVsDate`, `fmt`, `fmtPerShare`, share derivation, quarter-consecutive check | `node -e` on each lib with fixture values |
 | Integration | each fetch script standalone on FPT/VEA/SAB/VCB | run + inspect JSON |
-| E2E happy | build FPT (real write) then re-run | tab diff + tab-count check |
+| Contract | `PROGRESS:`/`WARN:`/`DONE:`/`ERROR:` line format + ordering + flush timing (consumed by phase 03) | `node … FPT \| cat` and observe lines arriving incrementally |
+| E2E happy | build FPT (real write) then re-run | tab diff + tab-count check + file title/`Sheet1` unchanged |
 | E2E abort | VCB, SSI, `FPTX9` (bad symbol), `fpt` (lowercase → normalised) | expect exit 1 / normalisation |
 | Regression | 6-sheet flow untouched | `git diff --stat` shows no `finance-report-detail-*` change |
 
@@ -177,7 +199,7 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
 | Risk | L×I | Mitigation |
 |------|-----|-----------|
 | Wrong `code` chosen for "LNST của cổ đông công ty mẹ" (`61` vs `62`) → every profitability ratio wrong | M×H | Phase-01 disambiguates by label; step 5 spot-check compares the ratio-block value against the raw row for the latest year |
-| Destructive write into the shared spreadsheet (other tickers' tabs) | L×H | `addSheet` only; `clear` range always prefixed with the target tab name; capture the tab list before/after in the E2E test; spreadsheet has full Google revision history for rollback |
+| Destructive write into the shared spreadsheet (other tickers' tabs, the file title, or `Sheet1`) | L×H | `addSheet` only; `clear` range always prefixed with the target tab name; no `updateSpreadsheetProperties` / `updateSheetProperties` call anywhere in the new code (grep as a review gate); capture the tab list + file title before/after in the E2E test; spreadsheet has full Google revision history for rollback |
 | `USER_ENTERED` misparses `"(123.45)"` / `" - "` under a non-`en_US` locale | L×H | Spreadsheet verified `en_US`; assert locale at runtime and abort if it changed |
 | cafef returns fewer audited years than expected → thin ratio table | M×M | Report `years` in the result JSON; warn (not abort) when `< 5` years, mirroring the "tối thiểu 5 năm" bar in `finance-report-detail.md:23` |
 | Sheets API quota / transient 5xx | L×M | Single-ticker runs are ~4 API calls; wrap writes in one retry with backoff, then abort with the API message |
@@ -187,8 +209,10 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
 
 - No secrets in code; the service-account path is read from the existing constant pattern
   (`finance-report-detail-build-raw-sheet.js:22`), never from an env var supplied by the web layer.
-- Ticker input sanitised (`^[A-Z0-9]{3,10}$`) before it reaches a URL or a sheet title — blocks
-  path/parameter smuggling into cafef/vietstock URLs and formula/sheet-name injection.
+- Ticker input sanitised (`^[A-Z0-9]{3,10}$`, after `toUpperCase()`) before it reaches a URL or a sheet
+  title — blocks path/parameter smuggling into cafef/vietstock URLs and formula/sheet-name injection.
+  Free-form tickers are allowed by design (no watchlist gate), so this regex is the only input gate and
+  must be enforced in the script itself, not just in the web layer.
 - Config file `config/finance-quantification.json` holds only a spreadsheet ID (non-secret) → tracked
   in git deliberately, matching `config/finance-watchlist.json`'s stance (`finance-watchlist.json:2`).
 - Scripts print no credentials; error paths print the failing URL only.
@@ -202,10 +226,16 @@ IV. Đòn bẩy · V. Thanh khoản & cơ cấu tài sản · VI. Định giá (
 
 ## Next Steps
 
-- Unblocks phase 03's smoke test and phase 04's deployment verification.
+- **Blocks phase 03** — the `PROGRESS:`/`DONE:`/`ERROR:` line contract (FR4) must be implemented before
+  the web app's stream parser can be tested against anything real.
+- Unblocks phase 04's deployment verification.
 - Backlog: migrate `finance-report-detail-build-dinh-luong.js` + `-fetch-liquidity.js` onto the new libs.
 
-## Open Questions
+## Decisions (locked)
 
-1. Should `--dry-run` also render the block to a local file for eyeballing, or is stdout enough?
-2. Warn-vs-abort threshold when audited years `< 5` — plan says warn. Confirm.
+- `--dry-run` prints the row/formula plan to stdout only — no local file artefact (YAGNI).
+- Audited years `< 5` → `WARN:` line, not an abort (mirrors the "tối thiểu 5 năm" guidance in
+  `finance-report-detail.md:23` without blocking a legitimately young listing).
+- P/E: annual + TTM, TTM row omitted with a `WARN:` when quarters are incomplete.
+
+No open questions.

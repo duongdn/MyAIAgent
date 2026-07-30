@@ -79,7 +79,9 @@
   `quater` field's value domain and how to detect a gap.
 - FR4 Lock the target-tab layout (row ranges, header rows, where the ratio block starts).
 - FR5 Decide config file shape + location for the shared spreadsheet ID.
-- FR6 Prepare the shared spreadsheet (rename title; decide whether `Sheet1` is deleted or repurposed).
+- FR6 Confirm the shared spreadsheet is writable by the service account — **and change nothing else about
+  it**: the file title (`Định tính`) and the empty `Sheet1` are left exactly as-is (user decision
+  2026-07-30). Each run only adds/overwrites its own `Định lượng - <TICKER>` tab.
 
 ### Non-functional
 - Every number in the final design traces to a named endpoint + field. No estimates.
@@ -170,9 +172,9 @@ const REQUIRED_CODES = {
    **Note the gitignore trap:** `.gitignore:12` ignores `config/*.json`; the file will be invisible to
    git and absent on mpfc after `git pull` unless `!config/finance-quantification.json` is added to the
    allowlist (`.gitignore:13-18`). Record this as a mandatory step in phase 02.
-9. Rename the shared spreadsheet title `Định tính` → `Định lượng — Phân tích tỷ số (shared)` and
-   decide `Sheet1`: keep as a README/index tab listing generated tickers (recommended, and it dodges
-   the "cannot delete the only sheet" API error).
+9. Confirm write access to the shared spreadsheet with a throwaway `addSheet` + `deleteSheet` on a
+   temp tab name. **Do not** rename the file, touch its title, or modify/repurpose `Sheet1`
+   (user decision 2026-07-30 — leave the spreadsheet as-is).
 10. Write the report; get the code map reviewed before phase 02 starts.
 
 ## Todo List
@@ -185,7 +187,7 @@ const REQUIRED_CODES = {
 - [ ] 6. Compare derived shares vs paid-in-capital/10,000; define the note row
 - [ ] 7. Freeze tab layout + year-count cap
 - [ ] 8. Decide config shape; record the `.gitignore` allowlist requirement
-- [ ] 9. Rename shared spreadsheet; decide `Sheet1` role
+- [ ] 9. Confirm write access via temp addSheet/deleteSheet (title + `Sheet1` untouched)
 - [ ] 10. Write `reports/research-data-sources.md`
 
 ## Success Criteria
@@ -206,7 +208,7 @@ const REQUIRED_CODES = {
 | `quater` semantics unclear → wrong TTM EPS | M×H | If the 4-consecutive-quarter rule cannot be proven, drop the TTM row and ship annual P/E only (labelled). Never sum non-adjacent quarters |
 | Undocumented endpoints change/disappear | M×M | Fail loudly with the URL in the error; both endpoints are already load-bearing elsewhere in the repo so breakage is detected by existing flows too |
 | Vietstock `ExchangeID:1` hardcoded (`fetch-liquidity.js:32`) may not cover HNX/UPCOM | M×M | VEA (UPCOM) returned correct data in the probe; still assert `Exchange` field is non-empty and `ClosePrice>0`, abort otherwise |
-| Renaming the spreadsheet breaks something referencing the title | L×L | Nothing references it (grep `1uiahfXv8` before renaming); IDs are used everywhere, not titles |
+| Spreadsheet title stays misleading (`Định tính` for a Định lượng file) | — | Accepted by user decision; scripts address the file by ID only, so the title is cosmetic. Recorded in phase-05 memory so nobody "fixes" it later |
 
 ## Security Considerations
 
@@ -222,19 +224,21 @@ const REQUIRED_CODES = {
 - Follow-up (backlog, not this plan): migrate `finance-report-detail-build-dinh-luong.js` onto the
   code-resolved map so the 6-sheet flow stops being bank-unsafe too.
 
-## Open Questions (consolidated for the whole plan)
+## Decisions (locked — no open questions remain)
 
-1. **P/E definition** — ship annual P/E (audited FY EPS) only, or annual + TTM (4 quarters from cafef)?
-   TTM is more useful but adds a failure mode. Recommendation: both, TTM row omitted when quarters
-   are incomplete.
-2. **Web app run mode** — user asked for `claude -p` + SSE. The core is deterministic, so spawning
-   `node scripts/finance-quantification-build.js <TICKER>` directly would be seconds instead of
-   minutes, with no LLM cost, no prompt-injection surface, and exact progress steps. Plan currently
-   specifies `claude -p` as primary (per instruction) with direct-script mode documented as a switch.
-   Confirm which should be the default.
-3. **`Sheet1` in the shared spreadsheet** — repurpose as an index tab (recommended) or leave empty?
-4. **Ticker allowlist** — restrict the web UI to tickers present in `config/finance-watchlist.json`
-   (`watchlist[]` + `candidates.items[]`), or allow any `^[A-Z0-9]{3,10}$`? Allowlist is safer/cheaper;
-   free-form is more useful. Plan assumes regex + optional allowlist toggle in config.
-5. **Cloudflare proxy stays on?** SSE works through it today for dailyagent, so plan keeps it. Confirm
-   there is no wish to grey-cloud the record.
+1. **P/E definition** — ship **annual P/E (latest audited FY EPS) + P/E TTM**, with the TTM row omitted
+   entirely (plus a warning) when the 4 most recent quarters are not consecutive/complete. Never interpolate.
+2. **Web app run mode** — the web app spawns **`node scripts/finance-quantification-build.js <TICKER>`
+   directly**, not `claude -p`. SSE progress comes from the script's own `PROGRESS:` / `DONE:` /
+   `ERROR:` lines. The `/me:finance-quantification` command exists for interactive use and also just
+   shells out to the same script. One script, two callers. (User decision 2026-07-30.)
+3. **Shared spreadsheet** — leave the file title (`Định tính`) and the empty `Sheet1` untouched. Runs
+   only add/overwrite `Định lượng - <TICKER>` tabs. (User decision 2026-07-30.)
+4. **Ticker input** — **free-form**, validated by `^[A-Z0-9]{3,10}$` only. No `finance-watchlist.json`
+   gate; an unknown ticker is fetched fresh. (User decision 2026-07-30.)
+5. **Cloudflare proxy** — stays enabled for the new hostname.
+6. **certbot email** — reuse the existing LE account (`02c1fed6…`); certbot does not prompt for `-m`
+   when an account is already registered. If it does demand an address, phase 04 stops and asks rather
+   than inventing one.
+7. **Missing docs files** — `docs/system-architecture.md` and `docs/project-changelog.md` are created,
+   scoped narrowly (phase 05). `docs/development-roadmap.md` stays out of scope.
