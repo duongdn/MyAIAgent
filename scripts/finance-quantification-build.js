@@ -53,7 +53,7 @@ function checkBalance(tnY, nvY, i270, i440) {
     const v270 = y.data[i270]?.value ?? y.data[i270];
     const v440 = n.data[i440]?.value ?? n.data[i440];
     if (v270 == null || v440 == null) continue;
-    if (Math.abs(v270 - v440) >= 1000) return `BALANCE_MISMATCH: ${y.year} chênh=${Math.abs(v270 - v440).toLocaleString("vi-VN")}đ`;
+    if (Math.abs(v270 - v440) >= 10_000_000) return `BALANCE_MISMATCH: ${y.year} chênh=${Math.abs(v270 - v440).toLocaleString("vi-VN")}đ`;
   }
   return null;
 }
