@@ -220,11 +220,11 @@ vhost 301s the challenge to another host.
 | Apache reload breaks the five live vhosts (incl. the football-coach production site) | L×**H** | `configtest` before every reload; `reload` not `restart`; only *new* files added, none edited; pre-flight `apache2ctl -S` snapshot for diffing; rollback = `a2dissite quantification && reload` |
 | certbot HTTP-01 fails because the `youragentstore.net` CF zone forces HTTPS (different zone from the proven one, and we hold no API token for it) | **M**×M | Three documented fallbacks (webroot / grey-cloud / Origin CA); do not retry blindly — LE has rate limits (5 failures/hour/account) |
 | certbot rewrites/relocates config unexpectedly (it edits vhosts in place) | M×M | Take `tar` backup of `/etc/apache2/sites-available` + `sites-enabled` before running certbot; the account is already registered so no new-account side effects |
-| Cloudflare 524 on long streams | L×M | 15s SSE heartbeat (phase 03), `flushpackets=on`, proven on dailyagent; explicit >100 s test |
+| Cloudflare buffers the SSE stream | L×M | `flushpackets=on` (proven on dailyagent) + 15s heartbeat; explicit incremental-delivery test. 524 is no longer a realistic risk since runs take seconds |
 | Basic Auth added to the wrong scope / cross-granting the shared realm | L×H | Separate `AuthUserFile`; md5 check on the shared file; test that dailyagent credentials do **not** open the new domain and vice versa |
 | Generated plaintext credentials leaked into git or a report file | L×**H** | `.gitignore:12` already covers `config/*.json` (verified: `git check-ignore -v config/.quantification-auth.json` → matched); only `.enc` committed; never echo into `plans/` or `reports/` |
 | Shared `node_modules` — an `npm install` would restart-risk the live dailyagent app | L×M | Hard rule: zero new dependencies (phase 03); no `npm install` step in this phase |
-| Server disk/memory pressure from concurrent `claude -p` runs | L×M | Concurrency cap 2 + 15-min timeout (phase 03); check `free -h`/`df -h` in pre-flight |
+| Server load from concurrent runs | L×L | Children are short-lived node processes doing ~6 HTTP calls; cap 3 + 90 s timeout (phase 03); check `free -h`/`df -h` in pre-flight anyway |
 | `youragentstore.net` may host other services the user cares about | L×M | Only a subdomain vhost is added; apex untouched; `dig` recorded in pre-flight |
 
 ## Security Considerations
@@ -233,11 +233,11 @@ vhost 301s the challenge to another host.
   plaintext locally, (b) AES-256-CBC `.enc` in git, (c) bcrypt/MD5-crypt hash in the server htpasswd.
 - Separate auth realm — no credential reuse with dailyagent/admin.
 - `X-Robots-Tag: noindex, nofollow, noarchive` + `robots.txt` `Disallow: /`.
-- App reachable only via the proxy: confirm `curl http://142.93.46.109:3335/` from outside fails
-  (and prefer binding `127.0.0.1` per phase-03 open question #1).
-- The app runs an agent with `--dangerously-skip-permissions` as `mpfc` on a production box — Basic Auth
-  is the only thing between the internet and that. Hence the strict ticker regex, no `/api/chat`, and
-  no free-form args (phase 03).
+- App binds `127.0.0.1` (phase 03) and is reachable only via the proxy: confirm
+  `curl http://142.93.46.109:3335/` from outside fails.
+- The app spawns **only** a fixed, deterministic script with a regex-validated ticker argument — no
+  agent, no shell, no `--dangerously-skip-permissions`, no client-supplied command or path. Basic Auth
+  plus that single-argument surface is the whole exposure.
 - No secret ever passed as a systemd `Environment=` value (only the port).
 
 ## Rollback
@@ -255,9 +255,11 @@ vhost 301s the challenge to another host.
 - Unblocks phase 05 (docs + memory need the final port, domain, unit name, and file paths).
 - Backlog: add the new domain/service to whatever `/me:server-monitor` checks, so an outage is noticed.
 
-## Open Questions
+## Decisions (locked)
 
-1. Email for certbot `-m` — reuse the existing LE account's address (account `02c1fed6...`)? Need the
-   address, or use `--register-unsafely-without-email`? Prefer reusing the account.
-2. Should the new service be added to `/me:server-monitor`'s watch list now or later?
-3. Confirm Cloudflare proxy stays enabled for this hostname (plan assumes yes).
+- certbot reuses the already-registered LE account; no `-m` supplied. If certbot demands an email, that
+  is a **hard stop → ask the user** (step 6), not a guess.
+- Cloudflare proxy stays enabled for this hostname.
+- Adding the service to `/me:server-monitor` is backlog, not part of this plan.
+
+No open questions.

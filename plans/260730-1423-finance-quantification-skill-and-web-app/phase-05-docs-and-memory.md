@@ -35,7 +35,9 @@
 ### Functional
 - FR1 New memory file (both stores): `finance-report/project_finance_quantification_skill.md` —
   what the skill is, the ONE shared spreadsheet ID, tab naming, that it is deliberately NOT the
-  6-sheet flow, and the web trigger.
+  6-sheet flow, that **`scripts/finance-quantification-build.js` is the single source of truth and both
+  the `/me:` command and the web app just shell out to it**, and that the shared spreadsheet's title
+  (`Định tính`) + empty `Sheet1` are **intentionally left alone** — do not "fix" them.
 - FR2 New memory file (both stores): `finance-report/reference_vietstock_market_data_derivation.md` —
   `getpricehistory` returns `ClosePrice` + `MarketCapital`; shares = mcap/price (exact on FPT/VEA/SAB/VCB);
   P/E and P/B are computed as sheet formulas, never scraped; cafef `TypeTime=QUY` EPS code `70` for TTM.
@@ -44,7 +46,8 @@
   `110` with no `270`; resolve by `code` and hard-abort on unsupported charts of accounts.
 - FR4 New memory file (both stores): `global/project_quantification_web_service.md` — domain, port 3335,
   unit name, separate htpasswd path, credentials location (`config/.quantification-auth.json[.enc]`),
-  Cloudflare-proxied, certbot apache authenticator.
+  Cloudflare-proxied, certbot apache authenticator, and that the app spawns the **build script
+  directly** (no `claude -p`), streaming its `PROGRESS:`/`DONE:`/`ERROR:` lines over SSE.
 - FR5 Both `MEMORY.md` indexes updated with one-line pointers (< 150 chars each, existing style).
 - FR6 `docs/system-architecture.md` created with a **Deployed services** table (dailyagent + the new
   app: domain, port, unit, vhost, auth realm) and a short note on the deliberate SSE code duplication.
@@ -98,10 +101,12 @@ bodies lead with the rule/fact then **Why:** and **How to apply:** lines; cross-
    Claude index — check and match whichever structure that file uses rather than assuming.
 4. Create `docs/system-architecture.md`: purpose, then a **Deployed services (mpfc, 142.93.46.109)**
    table — `dailyagent.mypersonalfootballcoach.com` / 3334 / `mydailyagent-web.service` / shared
-   `.htpasswd`, and `quantification.youragentstore.net` / 3335 /
-   `mydailyagent-quantification.service` / `.htpasswd-quantification` — plus the Apache-not-nginx note,
-   the Cloudflare-in-front note, and the "both apps share `/var/www/MyDailyAgent/node_modules` → no new
-   deps without checking the other app" constraint.
+   `.htpasswd` / spawns `claude -p` agents, and `quantification.youragentstore.net` / 3335 /
+   `mydailyagent-quantification.service` / `.htpasswd-quantification` / spawns a deterministic script —
+   plus the Apache-not-nginx note, the Cloudflare-in-front note, the deliberate ~60-line SSE-plumbing
+   duplication between `web/server.js` and `web-quantification/lib/run-manager.js` (and why: independent
+   deployability), and the "both apps share `/var/www/MyDailyAgent/node_modules` → no new deps without
+   checking the other app" constraint.
 5. Create `docs/project-changelog.md` with a dated entry: new `/me:finance-quantification` command,
    new scripts, new shared spreadsheet, new deployed service, and the row-code fix rationale.
 6. `grep -n "finance-report\|me:" README.md` → if a command list exists, add the new command there;
@@ -160,9 +165,11 @@ bodies lead with the rule/fact then **Why:** and **How to apply:** lines; cross-
 - Backlog captured in memory: migrate the 6-sheet flow's `build-dinh-luong`/`fetch-liquidity` onto the
   new code-resolved libs; add the new service to `/me:server-monitor`.
 
-## Open Questions
+## Decisions (locked)
 
-1. Should `docs/system-architecture.md` be scoped to deployed services only (recommended) or backfilled
-   to cover the whole agent repo (much larger, separate task)?
-2. `docs/development-roadmap.md` is also referenced by `.claude/rules/documentation-management.md:4` and
-   likewise does not exist — create it now or leave it out of scope? Plan assumes out of scope.
+- `docs/system-architecture.md` is scoped to **deployed services + this feature only**. A full-repo
+  architecture backfill is a separate task.
+- `docs/development-roadmap.md` (referenced by `.claude/rules/documentation-management.md:4`, also
+  missing) stays **out of scope**.
+
+No open questions.
