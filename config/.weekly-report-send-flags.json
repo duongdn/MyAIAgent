@@ -2,13 +2,18 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-07-20",
-    "message_text": "Report week 20/07\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\n\nMarcel: 16h/21h\nDuongDN: 3h/3h\nLongVV: 13h/18h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
-    "confirmed": true,
-    "confirmed_at": "2026-07-25T10:24:00+07:00",
-    "sent": true,
-    "sent_at": "2026-07-25T10:25:00+07:00",
-    "event_id": "$Np8c6TdEnHEUPPd-lhWtxUyhB3gpP1SqUq-j-xtueKw",
+    "week_start": "2026-07-27",
+    "message_text": "Report week 27/07\n\nJames Diamond\n\nWeb: 36h/32h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang/Arthur tuần này)\nLeNH: 32h/32h\nLongVV: 4h/0h (làm trước, report sau)\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\n\nMarcel: 9h/10h\nDuongDN: 0h/0h\nLongVV: 9h/10h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
+    "confirmed": false,
+    "previous_send": {
+      "week_start": "2026-07-20",
+      "message_text": "Report week 20/07\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang/Arthur tuần này)\nLeNH: 40h/40h\n\nMobile: 19h/19h\nAnhNH2: 19h/19h\n\n---\n\nMarcel\n\nMarcel: 16h/21h\nDuongDN: 3h/3h\nLongVV: 13h/18h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
+      "confirmed": true,
+      "confirmed_at": "2026-07-25T10:24:00+07:00",
+      "sent": true,
+      "sent_at": "2026-07-25T10:25:00+07:00",
+      "event_id": "$Np8c6TdEnHEUPPd-lhWtxUyhB3gpP1SqUq-j-xtueKw"
+    },
     "superseded_unsent_week": {
       "week_start": "2026-07-13",
       "note": "W35 draft was never confirmed/sent (12 days stale as of 2026-07-25). Superseded by this week's report rather than sent late.",

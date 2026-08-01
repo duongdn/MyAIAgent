@@ -36,9 +36,9 @@
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
-    "last_run": "2026-07-25T09:55:00+07:00",
-    "output_file": "reports/2026-07-25/weekly-monitor.md",
-    "note": "W36 (Jul20-24). Matrix token (mct_ static compat) was found reverted to a stale mat_/mar_ pair and restored by user; Workstream re-authenticated live via SSO. James Diamond+Marcel+Blair Brown report NOT yet drafted to send-flags (open question: how to include LongVV new Marcel/Tokenlite hours). Prior W35 (week_start 2026-07-13) report also still unsent in send-flags file."
+    "last_run": "2026-08-01T08:35:00+07:00",
+    "output_file": "reports/2026-08-01/weekly-monitor.md",
+    "note": "W37/W38 (Jul27-31). James Diamond Web charge=36h/actual=32h drafted to send-flags with confirmed:false, per user's manual billing override (4h LongVV banked surplus) plus a live correction that WS auto-logs an off day into LeNH's JD hours (40h raw -> 32h real). AWAITING EXPLICIT CONFIRMATION before send. Fountain: no weekly plan posted this week (first time in tracked period) and Est vs Charged tab byte-identical to W36 on both narrow AND broad scope (new escalation vs prior weeks' narrow-only freeze). TuanNT 32h/40h unexplained shortfall, no leave on file."
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
