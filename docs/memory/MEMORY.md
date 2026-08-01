@@ -115,9 +115,11 @@
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
 
 ## weekly-report
-- [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — Blair Brown FORBIDDEN
+- [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — Blair Brown IS included (see [[feedback_blair_brown_index_annotation_contradicts_file]], old "FORBIDDEN" tag was stale/unexplained)
 - [feedback_thuyle_report_explicit_send_flag](weekly-report/feedback_thuyle_report_explicit_send_flag.md) — 🔴 exact-text confirm
 - [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md)
+- [feedback_workstream_display_outage_pattern](weekly-report/feedback_workstream_display_outage_pattern.md) — 🔴 WS SSO failed 3x/1wk (07-26/31, 08-01), check env before blind retry
+- [feedback_blair_brown_index_annotation_contradicts_file](weekly-report/feedback_blair_brown_index_annotation_contradicts_file.md) — index/file conflict resolved, include Blair Brown
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)
