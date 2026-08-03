@@ -124,6 +124,7 @@
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)
+- [feedback_monday_report_must_write_file](monday-report/feedback_monday_report_must_write_file.md) — 🔴 always write reports/{date}/{HHMM}-monday-report.md, was previously null/ad-hoc
 - [feedback_workstream_dates_can_undercount_ws_vs_manual](monday-report/feedback_workstream_dates_can_undercount_ws_vs_manual.md) — verify live before override
 - [reference_sheets_summary_week_fetch_script](monday-report/reference_sheets_summary_week_fetch_script.md) — fixes UTC date-shift bug
 - [feedback_external_bug_counting_judgment_calls](monday-report/feedback_external_bug_counting_judgment_calls.md) — merge same-issue threads, exclude investigation-only client asks
