@@ -93,25 +93,67 @@ async function refreshViaApi(config) {
   return null;
 }
 
+// Keep token warm: try to refresh BEFORE it expires. Called before every fetch;
+// if token >10 min old, try a proactive refresh. If refresh fails, the token
+// may still work (auth server could be slow), so continue with existing token.
+async function ensureTokenWarm(config) {
+  if (!config.refresh_token) return config;
+  const age = (Date.now() - new Date(config.updated_at || 0).getTime()) / 1000;
+  if (age < 600) return config; // token is <10 min old, skip
+
+  process.stderr.write(`[workstream] Token ${Math.round(age)}s old, trying proactive refresh...\n`);
+  const fresh = await refreshViaApi(config);
+  return fresh || config; // if refresh fails, return existing (may still work)
+}
+
 async function ensureToken() {
   let config = {};
   if (fs.existsSync(CONFIG_PATH)) config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
 
   if (config.access_token) {
+    // Proactive warm-refresh if token is getting old
+    config = await ensureTokenWarm(config);
+
     const test = await fetchWithToken((config.api_base || config.base_url + '/api') + '/me', config.access_token);
     if (!test._expired && (test.user || test.id)) return config;
   }
 
   process.stderr.write('[workstream] Token expired, trying API refresh...\n');
 
-  // Try refresh_token via Keycloak API first (no browser)
-  const refreshed = await refreshViaApi(config);
-  if (refreshed) return refreshed;
+  // Try refresh_token via Keycloak API — retry up to 3x with backoff (network can be flaky)
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const refreshed = await refreshViaApi(config);
+    if (refreshed) return refreshed;
+    if (attempt < 3) {
+      const wait = attempt * 2000; // 2s, 4s backoff
+      process.stderr.write(`[workstream] API refresh attempt ${attempt} failed, retry in ${wait/1000}s...\n`);
+      await new Promise(r => setTimeout(r, wait));
+      // Re-read config in case a parallel process refreshed it
+      if (fs.existsSync(CONFIG_PATH)) config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+    }
+  }
 
-  // Fallback: browser login (requires DISPLAY)
-  process.stderr.write('[workstream] API refresh failed, opening browser...\n');
-  execSync('DISPLAY=:1 node ' + path.join(__dirname, 'workstream-login.js'), { stdio: 'inherit' });
-  return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+  // Fallback: browser login (requires DISPLAY) — try up to 2x
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    process.stderr.write(`[workstream] Browser login attempt ${attempt}...\n`);
+    try {
+      execSync('DISPLAY=:1 node ' + path.join(__dirname, 'workstream-login.js'), {
+        stdio: 'inherit',
+        timeout: 120000, // 2 min max per attempt
+      });
+      const newConfig = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+      if (newConfig.access_token) return newConfig;
+    } catch (e) {
+      process.stderr.write(`[workstream] Browser login attempt ${attempt} failed: ${e.message}\n`);
+    }
+    if (attempt < 2) {
+      process.stderr.write('[workstream] Waiting 5s before retry...\n');
+      await new Promise(r => setTimeout(r, 5000));
+    }
+  }
+
+  process.stderr.write('[workstream] All token refresh attempts failed.\n');
+  process.exit(1);
 }
 
 // Manager endpoint: /review/week — shows all team members
