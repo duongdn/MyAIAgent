@@ -9,6 +9,7 @@ allowed-tools: Bash, Read, Grep, Glob, Write, Edit, AskUserQuestion, WebFetch
 |------|------|--------|
 | `/util:read-memory` | First — before anything | `monday-report` |
 | `/util:trello` | After each project submission (live mode only) | board `O83pAyqb`; card `Report project status`; complete item per project |
+| `/util:report` | Last — always | filename `{HHMM}-monday-report.md` |
 
 ---
 
@@ -45,6 +46,39 @@ For each project in the checklist:
 3. **Confirm** — ask user to confirm or adjust before submitting
 4. **Submit form** — POST to Google Form (test or live based on flag)
 5. **Mark Trello** — mark checklist item complete (only in --live mode)
+6. **Write report file** — ALWAYS, regardless of test/live mode. See "Report File" below.
+
+### Report File
+
+Write `reports/{YYYY-MM-DD}/{HHMM}-monday-report.md` (see `/util:report` for date/time resolution — never UTC). One file per run, all projects in one table. Required even for test-mode runs.
+
+```markdown
+# Monday Report — Week {mon}–{sun}, {year}
+
+**Submitted:** {YYYY-MM-DD HH:MM} +07 | **Mode:** TEST|LIVE | **Form submissions:** {n}/{total} ✓ | **Trello:** {n}/{total} marked complete (live only, else "n/a — test mode")
+
+---
+
+## Submitted Data
+
+| Project | Dev Hours | Internal Bugs | External Bugs | Note |
+|---|---|---|---|---|
+| {form dropdown value} | {hours} | {n} | {n} | {note} |
+
+---
+
+## Data Sources
+
+- **Dev hours:** {per-project sheet notes}
+- **Internal bugs:** {sources checked}
+- **External bugs:** {sources checked}
+
+## Caveats
+
+- {any staleness flags, missing access, cross-checks done}
+```
+
+After writing, update `config/.monitoring-timelines.json` → `monday_report.output_file` with the report's relative path (was previously always `null` — this field must be kept current from now on).
 
 ### Submit via curl
 
@@ -255,3 +289,4 @@ Example: run on Mon 2026-03-23 → report week is Mon 2026-03-16 to Sun 2026-03-
 - Submit one form per project
 - Only mark Trello checklist in --live mode
 - Log each submission: project, values, mode (test/live), HTTP status
+- **Always write the report file (step 6)** — test-mode runs too. Never skip. Update `monday_report.output_file` in timelines after writing.

@@ -21,6 +21,7 @@ Never use `plans/reports/` for monitoring output.
 | Money report | `{HHMM}-money-{type}.md` |
 | Tax check | `tax-check.md` |
 | CDF monitor | `{HHMM}-cdf-monitor.md` |
+| Monday report | `{HHMM}-monday-report.md` (always write, test or live mode) |
 
 ## Append Pattern (daily-report, update files)
 
