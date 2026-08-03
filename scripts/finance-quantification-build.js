@@ -60,13 +60,17 @@ function checkBalance(tnY, nvY, i270, i440) {
 
 // ── Row builders ─────────────────────────────────────────────────────────────
 const fmtVnd = (raw) => { const v = raw / 1e9; if (v === 0) return " - "; const a = Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); return v < 0 ? `(${a})` : a; };
+// EPS-type rows ("Đồng/1 cổ phiếu") are already in đồng, not tỷ đồng — do not divide by 1e9
+const isPerShare = (name) => /Đồng\/1 cổ phiếu/i.test(name || "");
+const fmtPerShare = (raw) => { if (raw === 0) return " - "; const a = Math.abs(raw).toLocaleString("en-US", { maximumFractionDigits: 0 }); return raw < 0 ? `(${a})` : a; };
 
 function dataLine(template, yrsData, years, row) {
   const line = [row.name];
+  const perShare = isPerShare(row.name);
   for (const y of years) {
     const ye = yrsData.find((d) => d.year === y);
     const cell = ye ? ye.data.find((d) => d.code === row.code) : null;
-    line.push(cell ? fmtVnd(cell.value) : " - ");
+    line.push(cell ? (perShare ? fmtPerShare(cell.value) : fmtVnd(cell.value)) : " - ");
   }
   return line;
 }
