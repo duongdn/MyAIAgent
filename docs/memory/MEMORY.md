@@ -23,6 +23,7 @@
 - [feedback_fix_internal_issues_not_just_report](global/feedback_fix_internal_issues_not_just_report.md), [feedback_verify_config_history_before_blaming_external_credential](global/feedback_verify_config_history_before_blaming_external_credential.md) — 🔴🔴
 - [feedback_missing_report_requires_effort_check](global/feedback_missing_report_requires_effort_check.md) — 🔴🔴🔴 missing report=alert only if effort=0
 - [feedback_never_invent_requirements_in_estimates](global/feedback_never_invent_requirements_in_estimates.md) — 🔴🔴 quote ONLY what client asked; open their mockup before costing
+- [feedback_redmine_curl_needs_url_encoding](global/feedback_redmine_curl_needs_url_encoding.md) — use -G --data-urlencode, raw `><|` 400s
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md), [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
@@ -125,6 +126,7 @@
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)
 - [feedback_workstream_dates_can_undercount_ws_vs_manual](monday-report/feedback_workstream_dates_can_undercount_ws_vs_manual.md) — verify live before override
 - [reference_sheets_summary_week_fetch_script](monday-report/reference_sheets_summary_week_fetch_script.md) — fixes UTC date-shift bug
+- [feedback_external_bug_counting_judgment_calls](monday-report/feedback_external_bug_counting_judgment_calls.md) — merge same-issue threads, exclude investigation-only client asks
 
 ## monday-effort-verify
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
