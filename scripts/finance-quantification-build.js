@@ -86,7 +86,7 @@ function checkBalance(tnY, nvY, i270, i440) {
 }
 
 // ── Row builders ─────────────────────────────────────────────────────────────
-const fmtVnd = (raw) => { const v = raw / 1e9; if (v === 0) return " - "; const a = Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); return v < 0 ? `(${a})` : a; };
+const fmtVnd = (raw) => { const v = raw / 1e9; if (v === 0) return " - "; const a = Math.abs(v).toLocaleString("en-US", { maximumFractionDigits: 0 }); return v < 0 ? `(${a})` : a; };
 // EPS-type rows ("Đồng/1 cổ phiếu") are already in đồng, not tỷ đồng — do not divide by 1e9
 const isPerShare = (name) => /Đồng\/1 cổ phiếu/i.test(name || "");
 const fmtPerShare = (raw) => { if (raw === 0) return " - "; const a = Math.abs(raw).toLocaleString("en-US", { maximumFractionDigits: 0 }); return raw < 0 ? `(${a})` : a; };
@@ -114,8 +114,11 @@ function isGroupHeader(row) {
 function buildAll(cf) {
   const all = [];
   const groups = [];
+  const headers = []; // { row, annualCount } — for header cell coloring (year vs quarter columns)
 
   function addSec(label, template, yrsData) {
+    const annualCount = yrsData.filter((y) => !y.quater).length;
+    headers.push({ row: all.length, annualCount });
     all.push([label, ...yrsData.map(periodLabel)]);
 
     let i = 0;
@@ -158,13 +161,32 @@ function buildAll(cf) {
   addGroupedSec("Kết quả kinh doanh", cf.kqkdT, cf.kqkdY);
   for (const g of cf.lcttG) addGroupedSec(g.name, g.template, g.years);
 
-  return { all, groups };
+  return { all, groups, headers };
+}
+
+// Column groups: collapse everything except the last 5 years and the current
+// year's quarters (+1 prior-year quarter for continuity).
+function computeColumnGroups(annualCount, quarterPeriods) {
+  const cgroups = [];
+  if (annualCount > 5) {
+    cgroups.push({ start: 1, end: 1 + (annualCount - 5), collapsed: true });
+  }
+  if (quarterPeriods.length > 0) {
+    const currentYear = new Date().getFullYear();
+    let visibleStart = quarterPeriods.findIndex((p) => p.year === currentYear);
+    visibleStart = visibleStart === -1 ? Math.max(0, quarterPeriods.length - 1) : Math.max(0, visibleStart - 1);
+    if (visibleStart > 0) {
+      const qColStart = 1 + annualCount;
+      cgroups.push({ start: qColStart, end: qColStart + visibleStart, collapsed: true });
+    }
+  }
+  return cgroups;
 }
 
 function buildFooter() { return []; }
 
 // ── Sheet write ──────────────────────────────────────────────────────────────
-async function writeSheet(sheets, ticker, all, groups) {
+async function writeSheet(sheets, ticker, all, groups, headers, columnGroups) {
   const meta = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
   const ex = meta.data.sheets.find((s) => s.properties.title === ticker);
   if (ex) {
@@ -185,26 +207,36 @@ async function writeSheet(sheets, ticker, all, groups) {
   reqs.push({ updateDimensionProperties: { range: { sheetId: sid, dimension: "COLUMNS", startIndex: 0, endIndex: 1 }, properties: { pixelSize: 400 }, fields: "pixelSize" } });
   reqs.push({ updateDimensionProperties: { range: { sheetId: sid, dimension: "COLUMNS", startIndex: 1, endIndex: nCols }, properties: { pixelSize: 95 }, fields: "pixelSize" } });
 
-  // Format: section headers = dark blue bg + bold + white text
+  // Format: section headers = dark blue bg (year cols) + red bg (quarter cols), bold white text
   // Format: level-1 headers (100/200/300/400) = bold on white bg
   const DARK_BLUE = { rgbColor: { red: 0.0039, green: 0.3412, blue: 0.6078 } }; // #01579B
+  const RED = { rgbColor: { red: 1, green: 0, blue: 0 } };
   const WHITE = { rgbColor: { red: 1, green: 1, blue: 1 } };
+
+  const headerRows = new Map(headers.map((h) => [h.row, h.annualCount]));
 
   for (let i = 0; i < all.length; i++) {
     const label = all[i][0] || "";
-    const isSecHeader = ["Tài sản", "Nguồn vốn", "Kết quả kinh doanh"].includes(label) || label.toLowerCase().includes("lưu chuyển");
-    // Find which codes are level-1 (100,200,300,400) or totals (270,440)
-    // We detect from the template structure: codes 100/200/270/300/400/440 are section-level
 
-    if (isSecHeader) {
-      // Dark blue bg + bold white text
+    if (headerRows.has(i)) {
+      const annualCount = headerRows.get(i);
+      const yearEnd = Math.min(1 + annualCount, nCols);
       reqs.push({
         repeatCell: {
-          range: { sheetId: sid, startRowIndex: i, endRowIndex: i + 1, startColumnIndex: 0, endColumnIndex: nCols },
+          range: { sheetId: sid, startRowIndex: i, endRowIndex: i + 1, startColumnIndex: 0, endColumnIndex: yearEnd },
           cell: { userEnteredFormat: { textFormat: { bold: true, foregroundColorStyle: WHITE, fontSize: 11 }, backgroundColorStyle: DARK_BLUE } },
           fields: "userEnteredFormat(textFormat(bold,foregroundColorStyle,fontSize),backgroundColorStyle)",
         },
       });
+      if (yearEnd < nCols) {
+        reqs.push({
+          repeatCell: {
+            range: { sheetId: sid, startRowIndex: i, endRowIndex: i + 1, startColumnIndex: yearEnd, endColumnIndex: nCols },
+            cell: { userEnteredFormat: { textFormat: { bold: true, foregroundColorStyle: WHITE, fontSize: 11 }, backgroundColorStyle: RED } },
+            fields: "userEnteredFormat(textFormat(bold,foregroundColorStyle,fontSize),backgroundColorStyle)",
+          },
+        });
+      }
     } else {
       // Check if this row has code 100/200/300/400/270/440
       // We need to check against the actual codes in the templates
@@ -257,6 +289,34 @@ async function writeSheet(sheets, ticker, all, groups) {
     }
   }
 
+  // Column groups — collapse older years / older quarters, same two-phase process
+  if (columnGroups.length > 0) {
+    const cgreqs = columnGroups.map((g) => ({
+      addDimensionGroup: { range: { sheetId: sid, dimension: "COLUMNS", startIndex: g.start, endIndex: g.end } },
+    }));
+    await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: cgreqs } });
+
+    const m3 = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID, ranges: [ticker] });
+    const cgs = m3.data.sheets[0].columnGroups || [];
+    const ccreqs = [];
+    for (const cg of columnGroups) {
+      for (const g of cgs) {
+        if (g.range.startIndex === cg.start && g.range.endIndex === cg.end) {
+          ccreqs.push({
+            updateDimensionGroup: {
+              dimensionGroup: { range: { sheetId: sid, dimension: "COLUMNS", startIndex: cg.start, endIndex: cg.end }, depth: g.depth || 0, collapsed: true },
+              fields: "collapsed",
+            },
+          });
+          break;
+        }
+      }
+    }
+    if (ccreqs.length > 0) {
+      await sheets.spreadsheets.batchUpdate({ spreadsheetId: SPREADSHEET_ID, requestBody: { requests: ccreqs } });
+    }
+  }
+
   return `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit#gid=${sid}`;
 }
 
@@ -280,12 +340,14 @@ async function main() {
     if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
   }
 
-  const { all, groups } = buildAll(cf);
+  const { all, groups, headers } = buildAll(cf);
+  const quarterPeriods = cf.tnY.slice(cf.tnYAnnual.length);
+  const columnGroups = computeColumnGroups(cf.tnYAnnual.length, quarterPeriods);
   process.stdout.write("PROGRESS: 3/3 Đang format + collapse...\n");
 
   const auth = new google.auth.GoogleAuth({ keyFile: KEY_PATH, scopes: ["https://www.googleapis.com/auth/spreadsheets"] });
   const sheets = google.sheets({ version: "v4", auth });
-  const url = await writeSheet(sheets, ticker, all, groups);
+  const url = await writeSheet(sheets, ticker, all, groups, headers, columnGroups);
   process.stdout.write(`DONE: ${url}\n`);
 }
 
