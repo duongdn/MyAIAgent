@@ -28,21 +28,48 @@ function httpGet(url) {
 
 const BASE = "https://apiweb.cafef.vn/api";
 const keepAudited = (arr) => arr.filter((y) => y.type === "HK").sort((a, b) => a.year - b.year);
+// Quarterly reports are never independently audited (always type "H"); keep the most recent N.
+const keepQuarters = (arr, n) => arr.filter((y) => y.type === "H" && y.quater > 0).sort((a, b) => a.year - b.year || a.quater - b.quater).slice(-n);
+const periodLabel = (y) => (y.quater ? `Q${y.quater}/${y.year}` : String(y.year));
 
-async function fetchCafef(ticker, pageSize) {
-  const [cdkt, kqkd, lctt] = await Promise.all([
-    httpGet(`${BASE}/v2/BCTC/GetReportCDKT?symbol=${ticker}&pageIndex=1&pageSize=${pageSize}&reportType=ALL&TypeTime=NAM`),
-    httpGet(`${BASE}/v1/BCTC/GetReportDetail?symbol=${ticker}&pageIndex=1&pageSize=${pageSize}&reportType=KQKD&TypeTime=NAM`),
-    httpGet(`${BASE}/v2/BCTC/GetReportLCTT?symbol=${ticker}&pageIndex=1&pageSize=${pageSize}&reportType=ALL&TypeTime=NAM`),
+async function fetchCafef(ticker, maxYears, maxQuarters) {
+  const [cdktN, kqkdN, lcttN, cdktQ, kqkdQ, lcttQ] = await Promise.all([
+    httpGet(`${BASE}/v2/BCTC/GetReportCDKT?symbol=${ticker}&pageIndex=1&pageSize=${maxYears}&reportType=ALL&TypeTime=NAM`),
+    httpGet(`${BASE}/v1/BCTC/GetReportDetail?symbol=${ticker}&pageIndex=1&pageSize=${maxYears}&reportType=KQKD&TypeTime=NAM`),
+    httpGet(`${BASE}/v2/BCTC/GetReportLCTT?symbol=${ticker}&pageIndex=1&pageSize=${maxYears}&reportType=ALL&TypeTime=NAM`),
+    httpGet(`${BASE}/v2/BCTC/GetReportCDKT?symbol=${ticker}&pageIndex=1&pageSize=${maxQuarters}&reportType=ALL&TypeTime=QUY`),
+    httpGet(`${BASE}/v1/BCTC/GetReportDetail?symbol=${ticker}&pageIndex=1&pageSize=${maxQuarters}&reportType=KQKD&TypeTime=QUY`),
+    httpGet(`${BASE}/v2/BCTC/GetReportLCTT?symbol=${ticker}&pageIndex=1&pageSize=${maxQuarters}&reportType=ALL&TypeTime=QUY`),
   ]);
-  if (!cdkt.isSuccess || !kqkd.isSuccess || !lctt.isSuccess) throw new Error(`API_FAILURE: cafef ${ticker}`);
+  if (!cdktN.isSuccess || !kqkdN.isSuccess || !lcttN.isSuccess) throw new Error(`API_FAILURE: cafef ${ticker}`);
+  const qOk = cdktQ.isSuccess && kqkdQ.isSuccess && lcttQ.isSuccess;
+
+  const tnYAnnual = keepAudited(cdktN.value.data.find((d) => d.code === "TN").data);
+  const nvYAnnual = keepAudited(cdktN.value.data.find((d) => d.code === "NV").data);
+  const kqkdYAnnual = keepAudited(kqkdN.value.data);
+  const tnYQuarter = qOk ? keepQuarters(cdktQ.value.data.find((d) => d.code === "TN").data, maxQuarters) : [];
+  const nvYQuarter = qOk ? keepQuarters(cdktQ.value.data.find((d) => d.code === "NV").data, maxQuarters) : [];
+  const kqkdYQuarter = qOk ? keepQuarters(kqkdQ.value.data, maxQuarters) : [];
+
+  const lcttGQuarter = qOk ? lcttQ.value.data.map((g) => ({ code: g.code, years: keepQuarters(g.data, maxQuarters) })) : [];
+  const lcttG = lcttN.value.data.map((g) => {
+    const q = lcttGQuarter.find((x) => x.code === g.code);
+    return {
+      code: g.code, name: g.name,
+      template: lcttN.value.templace.find((t) => t.code === g.code).data,
+      years: [...keepAudited(g.data), ...(q ? q.years : [])],
+    };
+  });
+
   return {
-    tnT: cdkt.value.templace.find((t) => t.code === "TN").data,
-    nvT: cdkt.value.templace.find((t) => t.code === "NV").data,
-    tnY: keepAudited(cdkt.value.data.find((d) => d.code === "TN").data),
-    nvY: keepAudited(cdkt.value.data.find((d) => d.code === "NV").data),
-    kqkdT: kqkd.value.templace, kqkdY: keepAudited(kqkd.value.data),
-    lcttG: lctt.value.data.map((g) => ({ code: g.code, name: g.name, template: lctt.value.templace.find((t) => t.code === g.code).data, years: keepAudited(g.data) })),
+    tnT: cdktN.value.templace.find((t) => t.code === "TN").data,
+    nvT: cdktN.value.templace.find((t) => t.code === "NV").data,
+    tnYAnnual, nvYAnnual,
+    tnY: [...tnYAnnual, ...tnYQuarter],
+    nvY: [...nvYAnnual, ...nvYQuarter],
+    kqkdT: kqkdN.value.templace,
+    kqkdY: [...kqkdYAnnual, ...kqkdYQuarter],
+    lcttG,
   };
 }
 
@@ -64,12 +91,11 @@ const fmtVnd = (raw) => { const v = raw / 1e9; if (v === 0) return " - "; const 
 const isPerShare = (name) => /Đồng\/1 cổ phiếu/i.test(name || "");
 const fmtPerShare = (raw) => { if (raw === 0) return " - "; const a = Math.abs(raw).toLocaleString("en-US", { maximumFractionDigits: 0 }); return raw < 0 ? `(${a})` : a; };
 
-function dataLine(template, yrsData, years, row) {
+function dataLine(yrsData, row) {
   const line = [row.name];
   const perShare = isPerShare(row.name);
-  for (const y of years) {
-    const ye = yrsData.find((d) => d.year === y);
-    const cell = ye ? ye.data.find((d) => d.code === row.code) : null;
+  for (const y of yrsData) {
+    const cell = y.data.find((d) => d.code === row.code);
     line.push(cell ? (perShare ? fmtPerShare(cell.value) : fmtVnd(cell.value)) : " - ");
   }
   return line;
@@ -85,19 +111,19 @@ function isGroupHeader(row) {
   return ROMAN_RE.test(row.name);
 }
 
-function buildAll(cf, years) {
+function buildAll(cf) {
   const all = [];
   const groups = [];
 
   function addSec(label, template, yrsData) {
-    all.push([label, ...years.map(String)]);
+    all.push([label, ...yrsData.map(periodLabel)]);
 
     let i = 0;
     while (i < template.length) {
       const row = template[i];
       const code = (row.code || "").trim();
       const r0 = all.length;
-      all.push(dataLine(template, yrsData, years, row));
+      all.push(dataLine(yrsData, row));
 
       if (isGroupHeader(row)) {
         let j = i + 1;
@@ -105,7 +131,7 @@ function buildAll(cf, years) {
           const next = template[j];
           const sc = (next.code || "").trim();
           if (isGroupHeader(next) || LEVEL.has(sc)) break;
-          all.push(dataLine(template, yrsData, years, next));
+          all.push(dataLine(yrsData, next));
           j++;
         }
         const subStart = r0 + 1, subEnd = all.length;
@@ -240,21 +266,21 @@ async function main() {
   if (!ticker || !/^[A-Z0-9]{3,10}$/.test(ticker)) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
 
   const yrs = config.max_years || 15;
+  const qtrs = config.max_quarters || 8;
   process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
-  const cf = await fetchCafef(ticker, yrs);
-  const years = cf.tnY.map((y) => y.year);
-  if (years.length < 3) throw new Error(`NO_DATA: ${ticker} ${years.length} năm`);
+  const cf = await fetchCafef(ticker, yrs, qtrs);
+  if (cf.tnYAnnual.length < 3) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
-  // Balance check — only if codes 270/440 exist
+  // Balance check — annual only (audited), skip quarterly
   const i270 = cf.tnT.findIndex((r) => (r.code || "").trim() === "270");
   const i440 = cf.nvT.findIndex((r) => (r.code || "").trim() === "440");
   if (i270 >= 0 && i440 >= 0) {
-    const be = checkBalance(cf.tnY, cf.nvY, i270, i440);
+    const be = checkBalance(cf.tnYAnnual, cf.nvYAnnual, i270, i440);
     if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
   }
 
-  const { all, groups } = buildAll(cf, years);
+  const { all, groups } = buildAll(cf);
   process.stdout.write("PROGRESS: 3/3 Đang format + collapse...\n");
 
   const auth = new google.auth.GoogleAuth({ keyFile: KEY_PATH, scopes: ["https://www.googleapis.com/auth/spreadsheets"] });
