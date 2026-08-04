@@ -45,7 +45,7 @@
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
-    "last_run": "2026-08-04T07:05:00+07:00",
+    "last_run": "2026-08-04T08:59:00+07:00",
     "output_file": "reports/2026-08-04/daily-report.md",
     "last_status": "complete",
     "recheck_20260803_0907": "Interactive recheck 08:55-09:07. Workstream re-auth successful. Fixed: Sheets section (replaced 0h-unverified with real WS data — LongVV 7h, KhanhHH 8.17h, LeNH 0h/32h-wk, PhucVT 2.5h), Fountain (plan posted 08:34, all 3 parts complete), Maddy (JIRA cross-check done). Cleared: Fountain, Franc, Maddy. Still open: Rory (henry ask 42h unanswered), Aysar (Carrick MPDM gap Fri), James Diamond (Brett bug not confirmed fixed), Philip (MS Teams script hung 3x), Elena-WordPress (samguard.co HTTP 500). LeNH 0h Fri — genuine shortfall, no leave. PhucVT 2.5h Fri — partial day, no leave note. No reminders sent (no --send-reminder flag).",
@@ -281,7 +281,7 @@
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
-    "last_run": "2026-07-31T07:31:00+07:00",
+    "last_run": "2026-08-04T08:59:00+07:00",
     "output_file": "reports/2026-07-31/daily-report.md"
   },
   "bailey-monitor": {
