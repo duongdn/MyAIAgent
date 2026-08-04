@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack — Baamboozle (Aysar) | Carrick's daily "Today's update" in the Aysar MPDM (`C07SQ4HAUHZ`) has **zero messages since 2026-08-01 00:00** — 3+ days missing, not just today. |
+| 1 | Slack — Baamboozle (Aysar) | ~~Carrick's daily "Today's update" in the Aysar MPDM (`C07SQ4HAUHZ`) has zero messages since 2026-08-01 00:00~~ → **REMINDER SENT 09:05+07 to KhanhHH** (Aysar room). KhanhHH logged 2.5h Baamboozle 08-03 but no update posted — reminder is the action; Trello Aysar ✓ completed. |
 | 2 | Slack — RDC (Franc) | dmetiner (customer) reported a new bug 08-03 10:02+07 ("Failed to delete user: Database query failed") — **Carrick acknowledged 10:05+07 ("Let me check it and I'll get back to you shortly") but no substantive fix/resolution in the window (~22h later)**. Acknowledged-but-unresolved customer bug = keep open. |
 | 3 | Email — rick@ / New Relic (Fountain) | Real production errors: Rollbar `[FountainGifts] production #298` (x2, 10-occurrence), `#286 RuntimeError` (x2), `[FirstProject] production #1089`. Cross-confirmed by New Relic: Fountain top errors show `ArgumentError wrong number of arguments` 48x + **new** `ActionController::InvalidAuthenticityToken` (CSRF) 19x this window. |
 | 4 | New Relic — MPFC | Apdex still poor at 0.57 (chronic). `WP_Error::get_method()` persists 58x. **Active SQL-injection probing** — 4 of 5 slowest transactions this window are `WAITFOR DELAY` probes against `/search/`. `sitemap_index.xml` 54.8s / `author-sitemap.xml` 44.0s. |
@@ -153,7 +153,7 @@ Trello: Elena - SamGuard ✓ complete. Elena - WordPress SamGuard ✓ complete.
 - James Diamond - Vinn task: ⚠️ **still open** — client `.jdiamond` reporting broken flows + P1 issues (contractor approval, visitor sign-in) with **"fix by 12noon today"**, ~0.4-2h ago, partially acknowledged. Real customer alert.
 - Franc: ⚠️ **still open** — dmetiner delete-user bug acknowledged by Carrick 10:05 but unresolved ~22h (ALERT #2).
 - Rory: ✓ complete — Slack swift clean; Upwork session failure not an alert.
-- Aysar: ⚠️ **still open** — MPDM `C07SQ4HAUHZ` zero messages since 08-01, but KhanhHH logged **2.5h Baamboozle on 08-03** → worked but no update = real alert (ALERT #1).
+- Aysar: ✅ **completed 09:05** — reminder sent to KhanhHH (Aysar room `!gjtiuNjeqDarGWkSnf`, event `$9OBahSxAbsY0M5A5VeMEOU3H0_HwBuqoVzr5hD1Ze88`). MPDM zero since 08-01 + KhanhHH 2.5h Baamboozle 08-03 (worked but no update) — reminder IS the action per standing rule.
 - Elliott: ✅ **completed on recheck** — KhanhHH 9h combined (Baamboozle+RDC+Generator) > 0.
 - Raymond - LegalAtoms: ✓ complete — clean
 - Marcel: ✓ complete — clean, normal ops
@@ -188,7 +188,7 @@ Card not auto-completed (6 progress items still open).
 | Bailey | ✅ completed | TuanNT 8h Paturevision real |
 | Rebecca | ✅ completed | TuanNT 8h Paturevision real |
 | Fountain | ✅ completed | Parts 2/3 verified clean |
-| Aysar | ○ still open | KhanhHH 2.5h Baamboozle 08-03, no MPDM update 3+ days |
+| Aysar | ✅ completed 09:05 | Reminder sent to KhanhHH; no MPDM update 3+ days but reminder IS the action |
 | Maddy | ○ still open | Kai no report on worked day + Bitbucket LIFM2-409 Highest 106d |
 | James Diamond | ○ still open | Client P1 broken-flow reports + "fix by 12noon" deadline |
 | Franc | ○ still open | dmetiner bug acknowledged, unresolved ~22h |
@@ -196,8 +196,8 @@ Card not auto-completed (6 progress items still open).
 | Philip | ○ still open | MS Teams external identity-verification challenge |
 | Rick (email) | ○ still open | Fountain/InfinityRoses production errors (Rollbar/New Relic cross-confirmed) |
 
-**Cleared:** Workstream outage, TuanNT Paturevision 0h (false), 5 Trello gates (John Yi, Elliott, Bailey, Rebecca, Fountain).
-**Still open:** Aysar, Maddy, James Diamond, Franc, Blair Brown, Philip, Rick email — all genuine alerts (customer asks, missing reports on worked days, PR backlog, external auth blockers).
+**Cleared:** Workstream outage, TuanNT Paturevision 0h (false), 6 Trello gates (John Yi, Elliott, Bailey, Rebecca, Fountain, Aysar).
+**Still open:** Maddy, James Diamond, Franc, Blair Brown, Philip, Rick email — all genuine alerts (customer asks, missing reports on worked days, PR backlog, external auth blockers).
 
 ---
 
