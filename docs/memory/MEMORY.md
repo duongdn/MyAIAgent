@@ -24,6 +24,7 @@
 - [feedback_missing_report_requires_effort_check](global/feedback_missing_report_requires_effort_check.md) — 🔴🔴🔴 missing report=alert only if effort=0
 - [feedback_never_invent_requirements_in_estimates](global/feedback_never_invent_requirements_in_estimates.md) — 🔴🔴 quote ONLY what client asked; open their mockup before costing
 - [feedback_redmine_curl_needs_url_encoding](global/feedback_redmine_curl_needs_url_encoding.md) — use -G --data-urlencode, raw `><|` 400s
+- [feedback_claude_launcher_model_separation](global/feedback_claude_launcher_model_separation.md) — default claude=subscription sonnet; claude-nus/duongdn(-prod)=DeepSeek launchers, keep
 
 ## daily-report — general
 - [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md), [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
