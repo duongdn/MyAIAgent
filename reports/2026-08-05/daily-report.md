@@ -150,9 +150,13 @@ Trello: Elena-SamGuard, Elena-WordPress SamGuard ✓ complete.
 
 ---
 
-## Reminders — 07:13 (+07:00)
+## Reminders — 07:13 + 09:39 (+07:00)
 
-No reminders printed or sent. Both Workstream and Google Sheets returned genuinely empty/unreachable for all 5 PHP-team devs this run — per standing policy, a 0h reading under these conditions is not reliable evidence and must not trigger a reminder (repeated false-alarm history). No `--send-reminder` flag was passed regardless.
+**07:13:** No reminders printed/sent — Workstream+Sheets both unreachable at cron, 0h readings not reliable evidence (repeated false-alarm history).
+
+**09:39:** ✅ **LeNH task-log reminder SENT** (user-requested). Verified genuine 0h immediately before send (isolated Workstream scan across her projects: 0 rows; sanity-checked token valid via other devs' real data). Message: "Hi LeNH, task log cho hôm nay (05/08) và hôm qua (04/08) chưa có giờ nào trên Workstream (0h). Nhờ em cập nhật task log khi có thể nhé." Delivered to `!OIrgPraJWrcDTnRVLQ` — confirmed in room.
+
+Other 4 devs (LongVV 8h, PhucVT 8h, TuanNT 8h, KhanhHH 8h) all have hours — no reminders needed.
 
 ---
 
@@ -330,7 +334,9 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 
 **✅ Review reminder sent to LeNH 09:30** (user-requested): 6 pending RDC/Franc reviews (KhanhHH, 5h30, 08-03/04) → LeNH's Matrix room `!OIrgPraJWrcDTnRVLQ`. Message verified delivered.
 
-**⚠️ LeNH task-log confirmed still empty 09:35** (user-flagged): re-queried ALL 20 Workstream projects for the current week (08-03→08-05) — LeNH has **0 rows**, including nothing for today 08-05. Sanity-checked the query is valid (other devs show real data: AnhNH2 8h James Diamond, KhanhHH on RDC/Baamboozle). This is now 2 consecutive days (08-04, 08-05) with no task log + the open "Blair MIA?" question. Strengthens the shortfall case — a 0h reminder may be warranted but requires explicit send permission.
+**⚠️ LeNH task-log confirmed still empty 09:35** (user-flagged): re-queried ALL 20 Workstream projects for the current week (08-03→08-05) — LeNH has **0 rows**, including nothing for today 08-05. Sanity-checked the query is valid (other devs show real data: AnhNH2 8h James Diamond, KhanhHH on RDC/Baamboozle). This is now 2 consecutive days (08-04, 08-05) with no task log + the open "Blair MIA?" question.
+
+**✅ Task-log reminder sent to LeNH 09:39** (user-requested: "thì send reminder đi !!"): "Hi LeNH, task log cho hôm nay (05/08) và hôm qua (04/08) chưa có giờ nào trên Workstream (0h). Nhờ em cập nhật task log khi có thể nhé." → LeNH's Matrix room, verified delivered. Isolated LeNH re-check run immediately before send confirmed genuine 0h.
 
 **Cleared:** Maddy, Aysar, Elliott, Fountain
 **Still open:** Philip, Blair Brown
