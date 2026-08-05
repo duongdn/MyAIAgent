@@ -61,6 +61,7 @@ else
   log "Xvfb :1 already running"
 fi
 export DISPLAY=:1
+export CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0
 
 # Parse reset time from limit message and sleep until then (+5min buffer)
 # Handles: "resets 2am (UTC)", "resets 11pm (UTC)", "resets 9pm (UTC)"
