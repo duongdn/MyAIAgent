@@ -15,9 +15,10 @@
 | 3 | New Relic — MPFC | Apdex poor 0.58. WP_Error::get_method() 26x + "continue targeting switch" E_WARNING 164x. SQLi WAITFOR DELAY probes active on /search/ (3 of 5 slowest transactions). sitemap_index.xml 58.5s, author-sitemap.xml 62.5s |
 | 4 | New Relic — OhCleo | IntegrityError null user_id on app_playhistory insert, 8x this window (growing pattern, unresolved for weeks). MediaByKeyView still slow: 10.6s avg/320 calls |
 | 5 | New Relic — Fountain | NEW: ActionController::InvalidAuthenticityToken/CSRF 6x (not seen in prior windows) + ArgumentError wrong-args 7x (same signature as rick@ email alerts, matches production) |
-| 6 | Workstream | Session-wide outage entire run — 2 full genuine attempts (all-projects dump + fountain-only), both hung on SSO ("Clicked Sign in with SSO" → spawnSync ETIMEDOUT). Blocks LongVV/PhucVT/TuanNT/KhanhHH/LeNH hours cross-check, Fountain Part 2-3 task-log actuals, Arthur Crystal lang hours. Google Sheets fallback also returned genuinely empty for all 5 devs (confirms full migration off Sheets, not a scan bug) |
-| 7 | Matrix — PHP Projects | namtv asked DuongDN 22:47 Aug-4: "Blair lại lặn mất tăm hả Dương?" (Blair MIA again?) — unresolved question, needs your input. Blair Brown/LeNH hours also unverifiable this run (Workstream outage) |
-| 8 | Philip (MS Teams) | Automated extraction script hung again (timed out after 110s) — same recurring MS Teams wall, left open |
+| 6 | Workstream needsReview | ⚠️ RESOLVED (outage cleared at recheck). New review-pending items surfaced with access back: **RDC/Franc** — KhanhHH 5.5h (6 tasks) pending **LeNH**; **OhCleo** — LongVV+LuHX 8 rows pending **DuongDN/MinhTV**; **Arthur/Crystal lang** — PhucVT 12.5h pending **TienND**. Marcel/Tokenlite: LongVV 2h, no reviewer → need_review=false. Fountain excluded per rule. |
+| 7 | Matrix — PHP Projects | namtv asked DuongDN 22:47 Aug-4: "Blair lại lặn mất tăm hả Dương?" (Blair MIA again?) — unresolved question, needs your input. Blair Brown/LeNH 0h confirmed genuine at recheck |
+| 8 | LeNH | Genuine 0h logged 2026-08-04, no leave on file (verified via unfiltered Workstream dump — 2 independent reads agree). Review-pending items for RDC also addressed to her |
+| 9 | Philip (MS Teams) | Script now completes (correct "Philip Briggs (External) — Six Star Rentals" contact found) but message-content extraction still returns only the generic pane header — known recurring wall. Left open, needs a manual check |
 
 **Today (Wed Aug 5):** No leave/WFH notices found this window — all staff assumed present.
 
@@ -62,7 +63,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete. Card auto-closed (6
 | Aigile Dev | 1 | 1 automated alert-bot post (#the-gaige-alerts), no real content. |
 | OhCleo | see below | Piece 12. |
 
-Trello: John Yi, Rory, Franc, MPFC, Marcel, Elena-SamGuard, Raymond, Andrew Taraba, Rebecca, Colin, Ohcleo ✓ complete. Maddy, Aysar, Elliott ⚠️ left open (KhanhHH/LongVV hours unverifiable — Workstream outage, see ALERTS #6).
+Trello: John Yi, Rory, Franc, MPFC, Marcel, Elena-SamGuard, Raymond, Andrew Taraba, Rebecca, Colin, Ohcleo ✓ complete. Maddy, Aysar, Elliott ⚠️ left open at cron (hours unverifiable) — ✅ all 3 CLEARED at 08:35 recheck once Workstream restored (see Re-check section).
 
 ---
 
@@ -81,34 +82,50 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets/Workstream — all devs — 07:13 (+07:00)
+## Sheets/Workstream — all devs — 08:35 recheck (+07:00)
 
-🔴 **Workstream fully unreachable this entire run** — 2 genuine attempts (all-projects dump, then fountain-only), both hung on SSO consent (`Clicked Sign in with SSO` → `spawnSync /bin/sh ETIMEDOUT`), no interactive session available. Google Sheets fallback (`SKIP_WORKSTREAM=1`, all 13 sheets) returned genuinely empty for LongVV/PhucVT/TuanNT/KhanhHH/LeNH on 2026-08-04 — consistent with the documented full migration off Sheets, not a scan bug.
+🔴 **Workstream outage RESOLVED at recheck** — SSO login succeeded on first attempt (`workstream-login.js`, ~10s, per [[feedback_workstream_sso_recheck_fixed]]). All 22 accessible projects live-queried for 2026-08-04. Real data replaces the earlier "unverifiable" rows.
 
 | Developer | 2026-08-04 | Status |
 |-----------|-----------|--------|
-| LongVV | unverifiable | WS+Sheets both down. No Matrix qualitative evidence found (no Maddy/Xtreme-specific room activity this window). |
-| PhucVT | unverifiable | WS+Sheets both down. Matrix shows heavy activity on Arthur/Crystal-lang project (Auth0 signup investigation, all day) — confirms PhucVT worked today, but not specifically on James Diamond. |
-| TuanNT | unverifiable (numeric) / confirmed active (qualitative) | WS+Sheets both down. Matrix (NUS-Bailey-Paturevision room, 15:32-15:43) shows TuanNT actively discussing DB/PostgreSQL/Rails upgrade for Bailey — real work confirmed, gates John Yi/Rebecca/Bailey per standing Matrix-substitution precedent. |
-| KhanhHH | unverifiable | WS+Sheets both down. No Matrix qualitative evidence found this window (Baamboozle mention was about a prior day, Aug 3). |
-| LeNH | unverifiable | WS+Sheets both down. No Matrix qualitative evidence found. Combined with the "Blair lại lặn mất tăm" question — leaving Blair Brown/LeNH gate open this run. |
+| LongVV | 8h (Tokenlite 2h + OhCleo 6h) | ✓ Worked. Note: 0h on Maddy specifically (worked Tokenlite/OhCleo instead) — per [[feedback_kai_daily_report_gate]] the Kai daily-report check is skipped when LongVV logs 0h Maddy. OhCleo review-pending 6h → DuongDN/MinhTV. |
+| PhucVT | 8h (Crystal lang) | ✓ Worked. Crystal lang needsReview 12.5h → reviewer TienND. |
+| TuanNT | 8h (Paturevision sheet) | ✓ Worked. Gates John Yi/Bailey/Rebecca complete (confirmed numerically, not just Matrix). |
+| KhanhHH | 8h (Baamboozle 3.5h + RDC 1.5h + Generator 3h) | ✓ Worked. Gates Aysar + Elliott. RDC 5.5h needsReview → reviewer LeNH. |
+| LeNH | **0h** — genuine, no leave | 🔴 ALERT. Confirmed via isolated scan + 2 unfiltered full-project dumps (all agree 0h, no member rows on any of the 22 projects). Not a James-Diamond flake this time — absent from every project. Per escalated rule, ran 2nd-tier unfiltered verification. |
 
-**Maddy JIRA weekly check:** skipped this run — script depends on the same stale-sheet source flagged in prior memory and Workstream (also needed for cross-check) is down. Will re-run at next successful Workstream access.
+**Maddy JIRA weekly check (2026-08-03→08-09):** ✅ completed. 1 untagged entry only — Kai logged "Check feedback from Anoma" 0.5h without a JIRA ticket ID in the task field (minor process note). No over-budget tickets, no missing estimates on tagged work.
 
-Trello: Bailey, Rebecca, John Yi ✓ complete (TuanNT Matrix-confirmed). Maddy, Aysar, Elliott, Blair Brown ⚠️ left open (hours unverifiable).
+**Workstream needsReview (non-Fountain):**
+- **RDC/Franc**: KhanhHH 5.5h across 6 tasks pending **LeNH** — reviewer action needed
+- **OhCleo**: LongVV 6h + LuHX 4h (8 rows) pending **DuongDN/MinhTV**
+- **Arthur/Crystal lang**: PhucVT 12.5h pending **TienND**
+- **Marcel/Tokenlite**: LongVV 2h, reviewers=[] → need_review = false
+- Fountain excluded per standing rule
+
+Trello: Bailey, Rebecca, John Yi, **Maddy, Aysar, Elliott** ✓ complete (hours verified real). Blair Brown ⚠️ left open (LeNH genuine 0h + Blair MIA question).
 
 ---
 
-## Fountain — 07:13 (+07:00)
+## Fountain — 07:13 + 08:35 recheck (+07:00)
 
 **Part 1 — Matrix Plan** (posted 2026-08-03 11:15+07 by trinhmtt, `!EWnVDAxbTGsBxPkaaI`):
 > ThinhT: 20h, DatNT: 32h, ViTHT: 40h, VuTQ: 8h => QC: 25h
 
-**Part 2/3 — Task Log Actuals + Plan vs Actual:** ⚠️ blocked — Workstream (project `fountain`) unreachable this run (see ALERTS #6), no fallback sheet (confirmed dropped 2026-07-13). Cannot show real vs plan numbers this run.
+**Part 2/3 — Task Log Actuals + Plan vs Actual** (Workstream `fountain`, live at recheck): ✅ verified
+| Dev | Week (08-03→08-04) | Plan | Notes |
+|-----|-------------------|------|-------|
+| ThinhT | 8h (Mon 4 + Tue 4) | 20h | on pace |
+| ViTHT | 8h (Tue 8) | 40h | started |
+| PhatDLT (QC) | 4.5h | — | |
+| HungPN (QC) | 2h (Tue 2) | — | |
+| DatNT | not yet logged | 32h | week just started, per-dev 0h doesn't block per [[feedback_fountain_tasklog_not_monitored]] |
 
-**Trello Board (Fountain, Web Development):** New Relic shows a NEW active production error class this window (`InvalidAuthenticityToken`/CSRF, 6x) alongside the known `ArgumentError` (7x) — see ALERTS #5. Matrix room (Kunal - Fountain, 55 msgs) shows normal QC/dev activity (Infinity Rails 8 upgrade in progress, card feedback cycles) — no new stuck/customer-comment alert spotted in the Matrix window, but the production error signature warrants a look given it matches rick@'s BugSnag/Rollbar alerts.
+Per [[feedback_fountain_dev_specific_consolidated]], per-dev 0h (DatNT) is not an alert — gate is plan posted (✅) + no over-est spike (none). Fountain needsReview excluded per rule.
 
-Trello: Fountain ⚠️ left open — mandatory Part 2/3 not verified this run (Workstream outage).
+**Trello Board (Fountain, Web Development):** New Relic shows a NEW active production error class this window (`InvalidAuthenticityToken`/CSRF, 6x) alongside the known `ArgumentError` (7x) — see ALERTS #5 (production alert, not task-log gate). Matrix room (Kunal - Fountain, 55 msgs) shows normal QC/dev activity (Infinity Rails 8 upgrade in progress, card feedback cycles) — no new stuck/customer-comment alert spotted.
+
+Trello: Fountain ✓ complete (Part 2/3 verified with real Workstream data).
 
 ---
 
@@ -128,8 +145,8 @@ Trello: Elena-SamGuard, Elena-WordPress SamGuard ✓ complete.
 **Check mail:** DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete (6/6). Card auto-closed.
 
 **Check progress:**
-- ✓ complete: John Yi, James Diamond, Rory, Franc, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Arthur-Meta-Stamp, Elena-WordPress SamGuard (16/22)
-- ⚠️ left open: Maddy (LongVV hours unverifiable), Aysar (KhanhHH hours unverifiable), Elliott (KhanhHH hours unverifiable), Fountain (Part 2/3 unverifiable), Philip (MS Teams script hung), Blair Brown (LeNH hours unverifiable + open "Blair MIA?" question) (6/22)
+- ✓ complete: John Yi, James Diamond, Rory, Franc, MPFC, Marcel, Elena-SamGuard, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Arthur-Meta-Stamp, Elena-WordPress SamGuard, **Maddy, Aysar, Elliott, Fountain** (20/22 — recheck cleared 4)
+- ⚠️ left open: Philip (MS Teams content-extraction wall, needs manual check), Blair Brown (LeNH genuine 0h + open "Blair MIA?" question needs your input) (2/22)
 
 ---
 
@@ -237,11 +254,11 @@ Trello: Ohcleo ✓ complete.
 
 ---
 
-## Arthur / Meta-Stamp — 07:14 (+07:00)
+## Arthur / Meta-Stamp — 07:14 + 08:35 recheck (+07:00)
 
-2/6 sources verified this run: Matrix (2/2 rooms) + GitHub (davidztv, 0 open PRs, 0 commits since window start). Slack "Solid Code" still missing from this server's `.slack-accounts.json` (same recurring gap). Workstream Crystal lang blocked — same session-wide outage as ALERTS #6.
+3/6 sources verified this run: Matrix (2/2 rooms) + GitHub (davidztv, 0 open PRs, 0 commits since window start) + **Workstream Crystal lang (unblocked at recheck — PhucVT 12.5h week: Mon 4.5h + Tue 8h, needsReview 2 rows pending TienND)**. Slack "Solid Code" still missing from this server's `.slack-accounts.json` (same recurring gap).
 
-Real finding: client (Chris Coyne) hit a staging Auth0 signup block, team investigated and resolved it same day (Auth0 bot-block disabled 13:47, client confirmed signup/login working by 14:26). No unresolved client question found as of window end. Consistent with the 2/4-source partial-verification precedent (matches 07-29/07-31/08-03/08-04 runs) — completing Trello item, `last_run` advanced.
+Real finding: client (Chris Coyne) hit a staging Auth0 signup block, team investigated and resolved it same day (Auth0 bot-block disabled 13:47, client confirmed signup/login working by 14:26). No unresolved client question found as of window end. Consistent with the 3/6-source partial-verification precedent — completing Trello item, `last_run` advanced.
 
 ---
 
@@ -257,8 +274,66 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 
 ---
 
+## Maddy — 08:45 recheck (+07:00)
+
+### 1. Task Log Hours (2026-08-04, prev workday)
+| Developer | Tue | Weekly total | Status |
+|-----------|-----|--------------|--------|
+| LongVV | 0h Maddy (worked Tokenlite 2h + OhCleo 6h = 8h elsewhere) | 0.5h (Mon) | OK — worked, just not on Maddy this day |
+| Kai | — | — | Conditional gate |
+
+### 2. Kai Daily Report Check
+- WS Maddy hours (2026-08-04): **0h** → per [[feedback_kai_daily_report_gate]], the Kai daily-report-presence check is **SKIPPED** (he logged 0h on Maddy that day, so no report was expected)
+- Xtreme Slack: 0 messages, no unanswered Madhuraka/client asks
+- **Conclusion:** OK — no Kai report-miss alert applicable
+
+### 3. JIRA Cross-check (`maddy-jira-tasklog-check.js --week 2026-08-04`)
+| Ticket | Summary | Status | Est | Actual (JIRA) | WS Log | Review | Check |
+|--------|---------|--------|-----|---------------|--------|--------|-------|
+| (untagged) | Check feedback from Anoma | — | — | — | 0.5h | NotRequired | ⚠️ no est ⚠️ no JIRA log |
+
+1 untagged entry — Kai should include the JIRA ticket ID in the Workstream task field. No over-budget tickets, no missing estimates on tagged work.
+
+### 4. Bitbucket PR Status
+9 open PRs, all authored by Kai, all with **no reviewers assigned** (persistent backlog — pre-existing, not new this window):
+- PR#485 (04-28), PR#486 (04-29), PR#481 (04-20) — oldest, ~3-4 months
+- PR#509 (06-22), PR#510 (06-25), PR#516 (07-09), PR#520 (07-15), PR#523 (07-27)
+- PR#235 LIFM2-285 Email Template Filtering [On Hold] (2025-05-29)
+- No new comments since 07-14 (last: PR Review Token). No new unresolved findings this window.
+
+**Maddy conclusion:** ✅ complete — hours verified, Kai gate N/A (0h Maddy), JIRA clean, PR backlog pre-existing/no new findings.
+
+---
+
+## Re-check — 08:35 (+07:00)
+
+**Root cause fixed:** Workstream SSO outage from the cron run cleared at recheck — `workstream-login.js` succeeded in ~10s (transient SSO stall per [[feedback_workstream_sso_recheck_fixed]]). This unblocked hours verification, Fountain Part 2/3, Arthur Crystal lang, and the Maddy JIRA check.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ completed | LongVV worked 8h (Tokenlite+OhCleo); 0h on Maddy → Kai daily-report check skipped per gate. No unanswered Madhuraka asks in Xtreme Slack. |
+| Aysar | ✓ completed | KhanhHH 8h (Baamboozle 3.5h). Carrick MPDM C07SQ4HAUHZ update present 09:19 (dev-done items). |
+| Elliott | ✓ completed | KhanhHH 8h (Generator 3h). Generator Slack: violet/carrick active (Phase 1 release, MR review) — project topics, no alerts. |
+| Fountain | ✓ completed | Matrix plan posted + real Workstream actuals (ThinhT 8h, ViTHT 8h, PhatDLT 4.5h, HungPN 2h). No over-est spike. |
+| Philip | ○ still incomplete | Script now completes with correct contact ("Philip Briggs (External) — Six Star Rentals") but message-content extraction still returns only the generic "Messages" pane header — known MS Teams wall. Needs manual check. |
+| Blair Brown | ○ still incomplete | LeNH genuine 0h (no leave, 2 independent unfiltered dumps agree) + namtv's "Blair MIA?" question still needs your input. |
+
+**Data filled in (was "unverifiable"):**
+- **Sheets/Workstream**: LongVV 8h, PhucVT 8h, TuanNT 8h (Paturevision), KhanhHH 8h, LeNH 0h ⚠️
+- **Fountain Part 2/3**: real actuals now shown
+- **Maddy JIRA weekly**: completed (1 untagged entry, no over-budget)
+- **Arthur**: Crystal lang hours verified (PhucVT 12.5h week)
+- **Workstream needsReview** surfaced: RDC→LeNH, OhCleo→DuongDN/MinhTV, Arthur→TienND (see ALERTS #6)
+
+**Cleared:** Maddy, Aysar, Elliott, Fountain
+**Still open:** Philip, Blair Brown
+
+---
+
 ## Unresolved questions
 
-1. Blair Brown (Peptide Clyde): namtv asked "Blair lại lặn mất tăm hả Dương?" (22:47 Aug-4) — is the client unresponsive again? LeNH hours also couldn't be verified this run (Workstream outage).
+1. Blair Brown (Peptide Clyde): namtv asked "Blair lại lặn mất tăm hả Dương?" (22:47 Aug-4) — is the client unresponsive again? LeNH 0h on 08-04 confirmed genuine at recheck (no leave).
 2. Bailey - Management: namtv asked Trinh Mai (22:47 Aug-4) whether the monitoring invoice was sent and why the client hasn't paid yet — status unknown.
 3. Image-resize/security-issue follow-up (namtv, 16:18 Aug-4): needs the client told about the resize status, plus check whether previously-reported security issues were ever confirmed fixed.
+4. Workstream needsReview: RDC (KhanhHH 5.5h → LeNH), OhCleo (LongVV+LuHX → DuongDN/MinhTV), Arthur (PhucVT → TienND) — reviewer actions pending.
+5. Philip (MS Teams): chat content still not extractable via automation — manual check needed.
