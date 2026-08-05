@@ -328,6 +328,8 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 
 **New item found at recheck (not in cron report):** Matrix internal room 22:51 Aug-4 — namtv asks who should handle Maddy's WordPress tasks (explicitly not Kai). Needs your staffing decision.
 
+**✅ Review reminder sent to LeNH 09:30** (user-requested): 6 pending RDC/Franc reviews (KhanhHH, 5h30, 08-03/04) → LeNH's Matrix room `!OIrgPraJWrcDTnRVLQ`. Message verified delivered.
+
 **Cleared:** Maddy, Aysar, Elliott, Fountain
 **Still open:** Philip, Blair Brown
 
