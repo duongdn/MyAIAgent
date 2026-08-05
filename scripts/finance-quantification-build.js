@@ -15,6 +15,7 @@ const CONFIG_PATH = path.join(__dirname, "..", "config", "finance-quantification
 const KEY_PATH = path.join(__dirname, "..", "config", "daily-agent-490610-7eb7985b33e3.json");
 const config = JSON.parse(fs.readFileSync(CONFIG_PATH, "utf8"));
 const SPREADSHEET_ID = config.shared_spreadsheet_id;
+const fireant = require("./finance-fireant");
 
 // ── HTTP ─────────────────────────────────────────────────────────────────────
 function httpGet(url) {
@@ -112,6 +113,8 @@ function dataLine(yrsData, row) {
 
 const ROMAN_RE = /^[IVX]+\.\s/;
 const LEVEL = new Set(["100", "200", "270", "300", "400", "440"]);
+// Section-level boundary rows (cafef marks them via LEVEL codes; FireAnt via name prefixes)
+const SECTION_BOUNDARY = /^(TỔNG CỘNG|Tổng cộng|[A-D]\.? )/;
 
 // Group header = row whose name starts with Roman numeral (I., II., ..., VII.)
 function isGroupHeader(row) {
@@ -142,7 +145,7 @@ function buildAll(cf) {
         while (j < template.length) {
           const next = template[j];
           const sc = (next.code || "").trim();
-          if (isGroupHeader(next) || LEVEL.has(sc)) break;
+          if (isGroupHeader(next) || LEVEL.has(sc) || SECTION_BOUNDARY.test(next.name)) break;
           all.push(dataLine(yrsData, next));
           j++;
         }
@@ -331,13 +334,35 @@ async function writeSheet(sheets, ticker, all, groups, headers, columnGroups) {
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 async function main() {
-  const ticker = process.argv[2];
-  if (!ticker || !/^[A-Z0-9]{3,10}$/.test(ticker)) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
+  const args = process.argv.slice(2);
+  const ticker = (args.find((a) => /^[A-Z0-9]{3,10}$/.test(a)) || "").toUpperCase();
+  const forceFireant = args.includes("--fireant");
+  if (!ticker) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
 
   const yrs = config.max_years || 15;
   const qtrs = config.max_quarters || 8;
-  process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
-  const cf = await fetchCafef(ticker, yrs, qtrs);
+  let cf, src;
+  if (forceFireant) {
+    process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ FireAnt...\n");
+    cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
+    src = "fireant";
+  } else {
+    try {
+      process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
+      cf = await fetchCafef(ticker, yrs, qtrs);
+      src = "cafef";
+    } catch (e) {
+      process.stdout.write(`WARN: cafef lỗi (${e.message}), thử FireAnt...\n`);
+      cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
+      src = "fireant";
+    }
+    if (src === "cafef" && cf.tnYAnnual.length < 3) {
+      // cafef insufficient → fall back to FireAnt
+      process.stdout.write("WARN: cafef thiếu dữ liệu, thử FireAnt...\n");
+      cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
+      src = "fireant";
+    }
+  }
   if (cf.tnYAnnual.length < 3) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
