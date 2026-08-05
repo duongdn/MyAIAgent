@@ -165,6 +165,7 @@
 - [feedback_finance_report_detail_new_ticker_qa_checklist](finance-report/feedback_finance_report_detail_new_ticker_qa_checklist.md) — 🔴🔴 text ticker cũ sót lại + %-format bị làm tròn + thiếu row-groups ở Định lượng, so đếm group/merge với ticker tham chiếu
 - [feedback_finance_report_never_construct_urls_and_more_ticker_collisions](finance-report/feedback_finance_report_never_construct_urls_and_more_ticker_collisions.md) — 🔴🔴🔴 KHÔNG tự tạo URL rss?q=, luôn lấy link thật từ JSON; FOX↔FOXA, HPP↔SHB nhiễu
 - [project_finance_quantification_skill](finance-report/project_finance_quantification_skill.md) — `/me:finance-quantification <TICKER>` standalone ratio analysis + web app at quantification.youragentstore.net, built 2026-07-30
+- [feedback_cafef_incomplete_fireant_alternative](finance-report/feedback_cafef_incomplete_fireant_alternative.md) — cafef thiếu data nhiều mã (BVH…) — Quyền xác nhận; xem xét FireAnt (fireant.vn) làm nguồn fallback
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
