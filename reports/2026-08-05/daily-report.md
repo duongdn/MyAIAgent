@@ -330,6 +330,8 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 
 **✅ Review reminder sent to LeNH 09:30** (user-requested): 6 pending RDC/Franc reviews (KhanhHH, 5h30, 08-03/04) → LeNH's Matrix room `!OIrgPraJWrcDTnRVLQ`. Message verified delivered.
 
+**⚠️ LeNH task-log confirmed still empty 09:35** (user-flagged): re-queried ALL 20 Workstream projects for the current week (08-03→08-05) — LeNH has **0 rows**, including nothing for today 08-05. Sanity-checked the query is valid (other devs show real data: AnhNH2 8h James Diamond, KhanhHH on RDC/Baamboozle). This is now 2 consecutive days (08-04, 08-05) with no task log + the open "Blair MIA?" question. Strengthens the shortfall case — a 0h reminder may be warranted but requires explicit send permission.
+
 **Cleared:** Maddy, Aysar, Elliott, Fountain
 **Still open:** Philip, Blair Brown
 
@@ -337,7 +339,7 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 
 ## Unresolved questions
 
-1. Blair Brown (Peptide Clyde): namtv asked "Blair lại lặn mất tăm hả Dương?" (22:47 Aug-4) — is the client unresponsive again? LeNH 0h on 08-04 confirmed genuine at recheck (no leave).
+1. Blair Brown (Peptide Clyde): namtv asked "Blair lại lặn mất tăm hả Dương?" (22:47 Aug-4) — is the client unresponsive again? LeNH 0h on 08-04 confirmed genuine at recheck (no leave), and task-log still empty 08-05 as of 09:35 (0 rows across all 20 Workstream projects).
 2. Bailey - Management: namtv asked Trinh Mai (22:47 Aug-4) whether the monitoring invoice was sent and why the client hasn't paid yet — status unknown.
 3. Image-resize/security-issue follow-up (namtv, 16:18 Aug-4): needs the client told about the resize status, plus check whether previously-reported security issues were ever confirmed fixed.
 4. **Maddy WordPress tasks** (namtv, 22:51 Aug-4): who should handle them — explicitly not Kai. Staffing decision needed.
