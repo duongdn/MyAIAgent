@@ -27,9 +27,18 @@ function httpGet(url) {
 }
 
 const BASE = "https://apiweb.cafef.vn/api";
-const keepAudited = (arr) => arr.filter((y) => y.type === "HK").sort((a, b) => a.year - b.year);
-// Quarterly reports are never independently audited (always type "H"); keep the most recent N.
-const keepQuarters = (arr, n) => arr.filter((y) => y.type === "H" && y.quater > 0).sort((a, b) => a.year - b.year || a.quater - b.quater).slice(-n);
+// Audited annual reports: cafef marks them "HK" (consolidated+audited) or "K" (audited standalone) — accept both, prefer HK.
+const keepAudited = (arr) => {
+  const byYear = new Map();
+  for (const y of arr) {
+    if (y.type !== "HK" && y.type !== "K") continue;
+    const ex = byYear.get(y.year);
+    if (!ex || (ex.type === "K" && y.type === "HK")) byYear.set(y.year, y);
+  }
+  return [...byYear.values()].sort((a, b) => a.year - b.year);
+};
+// Quarterly reports: cafef marks them "H" (consolidated) or "N" — key off quater>0, not the type letter.
+const keepQuarters = (arr, n) => arr.filter((y) => y.quater > 0).sort((a, b) => a.year - b.year || a.quater - b.quater).slice(-n);
 const periodLabel = (y) => (y.quater ? `Q${y.quater}/${y.year}` : String(y.year));
 
 async function fetchCafef(ticker, maxYears, maxQuarters) {
