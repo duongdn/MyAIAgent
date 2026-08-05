@@ -161,11 +161,12 @@ No reminders printed or sent. Both Workstream and Google Sheets returned genuine
 **Active rooms: 22 / 138 | Messages: 604** *(since 2026-08-04 08:00 +07:00)*
 Full details: reports/2026-08-05/matrix-rooms-0713.md
 
-### ⚠️ Action items for DuongDN (4)
+### ⚠️ Action items for DuongDN (5)
 
 | Room | Time | Message |
 |------|------|---------|
 | (internal, image-resize) | 16:18 | namtv: "Mày báo họ nha. Ngoài ra, bữa ổng có nói mấy cái security issues, trước đó ổng có báo và kêu fix hay sao nhỉ?" — needs image-resize status reported to client + security-issue follow-up check |
+| (internal) | 22:51 | namtv: "Maddy có chút task Wordpress, thuê dev riêng chứ ko phải Kai. Nên lấy ai làm nhỉ?" — NEW (found at recheck): decision needed on who handles Maddy WordPress tasks (not Kai) |
 | MCP training tracker | 10:15 | vutq: shared weekly Claude-usage-rate report (Kirk 50%, Đạt 80%) — informational, no action needed beyond review |
 | Arthur - Meta-Stamp | 13:43 | namtv: "Báo lại ổng kết quả investigate của mình đi..." — resolved same day (phucvt disabled Auth0 block 13:47, client signed up/logged in successfully by 14:26) |
 | PHP Projects | 22:47 | namtv: "Blair lại lặn mất tăm hả Dương?" — Blair Brown client possibly MIA again, needs your input (see ALERTS #7) |
@@ -325,6 +326,8 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 - **Arthur**: Crystal lang hours verified (PhucVT 12.5h week)
 - **Workstream needsReview** surfaced: RDC→LeNH, OhCleo→DuongDN/MinhTV, Arthur→TienND (see ALERTS #6)
 
+**New item found at recheck (not in cron report):** Matrix internal room 22:51 Aug-4 — namtv asks who should handle Maddy's WordPress tasks (explicitly not Kai). Needs your staffing decision.
+
 **Cleared:** Maddy, Aysar, Elliott, Fountain
 **Still open:** Philip, Blair Brown
 
@@ -335,5 +338,6 @@ Automated extraction script (`fetch-msteams-customer-messages.js will "Philip Br
 1. Blair Brown (Peptide Clyde): namtv asked "Blair lại lặn mất tăm hả Dương?" (22:47 Aug-4) — is the client unresponsive again? LeNH 0h on 08-04 confirmed genuine at recheck (no leave).
 2. Bailey - Management: namtv asked Trinh Mai (22:47 Aug-4) whether the monitoring invoice was sent and why the client hasn't paid yet — status unknown.
 3. Image-resize/security-issue follow-up (namtv, 16:18 Aug-4): needs the client told about the resize status, plus check whether previously-reported security issues were ever confirmed fixed.
-4. Workstream needsReview: RDC (KhanhHH 5.5h → LeNH), OhCleo (LongVV+LuHX → DuongDN/MinhTV), Arthur (PhucVT → TienND) — reviewer actions pending.
-5. Philip (MS Teams): chat content still not extractable via automation — manual check needed.
+4. **Maddy WordPress tasks** (namtv, 22:51 Aug-4): who should handle them — explicitly not Kai. Staffing decision needed.
+5. Workstream needsReview: RDC (KhanhHH 5.5h → LeNH), OhCleo (LongVV+LuHX → DuongDN/MinhTV), Arthur (PhucVT → TienND) — reviewer actions pending.
+6. Philip (MS Teams): chat content still not extractable via automation — manual check needed.
