@@ -41,6 +41,15 @@
       "report_sheet": "Báo cáo 2 - HPA",
       "vietstock_url": "https://finance.vietstock.vn/HPA/tai-chinh.htm",
       "note": "Newly listed 2025 — cafef only has 1 audited year (2025) + Q4/2025-Q2/2026 quarters. Thin liquidity (~170tr VND/day recent). Built with --cafef --force (balance mismatch 30tr/4.7 nghìn tỷ negligible)."
+    },
+    {
+      "ticker": "ADP",
+      "name": "CTCP Sơn Á Đông",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1g5O1eZzN1nV896WZARFf-vS8YF9xF6IbcvCXdgC5NcM",
+      "report_sheet": "Báo cáo 2 - ADP",
+      "vietstock_url": "https://finance.vietstock.vn/ADP-ctcp-son-a-dong.htm",
+      "note": "9 năm BCTC kiểm toán liên tục 2017-2025 (loại \"K\" - báo cáo riêng, không có công ty con để hợp nhất — cafef-fetch script updated to fallback K when no HK). Thanh khoản rất thấp (~41-115tr VND/phiên). Cổ đông phân tán cá nhân sáng lập, không có tổ chức/Nhà nước chi phối. Ticker collides with US ADP (Automatic Data Processing) in news searches — filter carefully."
     }
   ],
   "candidates": {
@@ -122,16 +131,6 @@
         "status": "watching",
         "note": "Google News không có coverage — không monitor được bằng tin, chỉ theo dõi qua BCTC/giá",
         "search_name": "cổ phiếu SDN Sơn Đồng Nai"
-      },
-      {
-        "ticker": "ADP",
-        "name": "Sơn Á Đông",
-        "group": "Sơn",
-        "exchange": "HOSE",
-        "added": "2026-07-28",
-        "status": "watching",
-        "note": "",
-        "search_name": "cổ phiếu ADP Sơn Á Đông"
       },
       {
         "ticker": "SIV",
