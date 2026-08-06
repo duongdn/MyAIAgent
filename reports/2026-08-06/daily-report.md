@@ -13,12 +13,12 @@
 | 1 | Swift Studio (Rory) | Customer Rory pushed back on our $350 Upwork-bonus request ("didn't provide evidence to warrant the time") and asked to schedule a call for tomorrow morning — unanswered as of check time. |
 | 2 | LegalAtoms | miratariq (client) reported someone e-filed in **production** using a test-looking email (jamesandersonla2026+3rdaug@gmail.com), suspects it's one of our team members testing in prod — unaddressed in Slack. |
 | 3 | Maddy/Xtreme — Bitbucket PR backlog | 9 open PRs, all Kai-authored. Worst: **#481 (LIFM2-409)**, Madhuraka's own bug report, open since 2026-04-20 (**108 days**), still unreplied. #485/#486 also 99-100 days old. Same recurring pattern as prior reports — no visible progress. |
-| 4 | TuanNT (John Yi / Bailey / Rebecca gate) | Sheets show 0h on 08-05 in JohnYi, Paturevision (8h on 08-04, 0h 08-05), Rebecca. **Workstream (the primary source for John Yi/Rebecca) was inaccessible this run** (see #9) — cannot rule out hours logged there. Paturevision has no Workstream project (sole source = Sheet), so its 0h reading is real; the others are unverified, not confirmed-zero. |
-| 5 | Fountain — Part 2 blocked | Workstream task-log actuals (project `fountain`) could not be fetched this run (see #9) — 3-part check incomplete pending re-verification. Part 1 (Matrix plan) and Trello board are clean. |
-| 6 | Neural Contract (Upwork) | `upwork-neural-check.js` could not reach carrick's Chrome Profile 1 session in this execution context — same documented cron-sandbox gap as 2026-07-22 (no `/home/nus/.config/google-chrome/Profile 1` in this session). No content could be checked; leaving open rather than assuming clean. |
-| 7 | Arthur - Meta-Stamp | 2 of 6 sources unavailable this run: Solid Code Slack (token wiped since 2026-07-13, needs one human interactive login — automated Google OAuth re-attempted, failed again as expected) and Workstream "Crystal lang" (see #9). Matrix (both rooms) + GitHub (0 open PRs, 0 commits) are clean/quiet. |
-| 8 | Blair Brown - Peptide Clyde | Gated by LeNH's Workstream scan — inaccessible this run (see #9); LeNH's known sheets (Rory/Franc/Aysar) show empty rows for 08-05. |
-| 9 | **Workstream — systemic** | SSO login automation hung/failed on 3 separate attempts this run (`SSO redirect detected — Keycloak cookies alive` but token never captured; one attempt ran 6+ min before being stopped). Affects: Sheets/Workstream piece (all 5 devs), Fountain Part 2, Arthur Crystal lang, Blair Brown. Non-Workstream sources (email, Slack, Discord, GitHub, Matrix, Trello, New Relic, Google Sheets API) all worked normally — this looks specific to the Puppeteer/SSO browser flow in this session, not a credentials problem. |
+| 4 | TuanNT (John Yi / Bailey / Rebecca gate) | ✅ **RESOLVED on recheck 08:55** — TuanNT has 8h on 08-05 (Paturevision sheet 7.75h + Workstream Neural 0.25h). Morning's combined-0h was a Workstream-down artifact. Gates cleared. |
+| 5 | Fountain — Part 2 blocked | ✅ **RESOLVED on recheck 08:55** — Part 2/3 filled from Workstream (ThinhT 12h, ViTHT 8h, QCs 12h). 3-part check complete, no issues → Trello completed. |
+| 6 | Neural Contract (Upwork) | ✅ **RESOLVED on recheck** — `upwork-neural-check.js` succeeded this time (66 cookies written). Dev actively responding to client's 08-05 bug report; no unresolved customer ask. Trello completed. |
+| 7 | Arthur - Meta-Stamp | Workstream "Crystal lang" now fetched (recheck 08:55). Solid Code Slack token still missing since 2026-07-13 → **needs one human login on David's Chrome Profile 15** (cannot be done from this session). 5/6 sources now covered; 1 gap remains. |
+| 8 | Blair Brown - Peptide Clyde | LeNH Workstream scan now runs (recheck 08:55) — LeNH 0h on 08-05, **no leave found**. Carry-over from 08-05 report: open "Blair MIA?" question needs user input. Left open. |
+| 9 | **Workstream — systemic** | ✅ **RESOLVED on recheck 08:55** — SSO login succeeded on retry (~10s after the 3 morning failures). Transient Keycloak response-time stall, not a credentials/environment problem. Consistent with [[feedback_workstream_sso_recheck_fixed]]. |
 | 10 | MS Teams (Philip) | `fetch-msteams-customer-messages.js` timed out (110s) without completing — same browser-automation pattern as #9. Not checked this run. |
 | 11 | OhCleo `#events-code` | Slack returned `channel_not_found` for C01JDPN0EDQ — channel may have been renamed/archived, worth a one-time recheck. |
 | 12 | MPFC production (recurring) | `WP_Error::get_method()` fatal — 1467 occurrences this window (New Relic), plus 4x Rollbar "10 occurrences in 5 min" emails to freelancer@. Apdex still poor (0.58). No new owner assigned as far as visible here. |
@@ -119,26 +119,21 @@ Trello: James Diamond - Vinn ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets/Workstream — 08-05 (Wed) — 07:34 (+07:00)
+## Sheets/Workstream — 08-05 (Wed) — 07:34 (+07:00) *(updated by recheck 08:55)*
 
-🔴 **Workstream inaccessible this run** — see Alert #9. `sheets-tasklog-scan.js` (all 5 devs) and a standalone `workstream-login.js` retry both failed to capture a token after the SSO redirect (Keycloak cookies alive, API never fired). Google Sheets API itself works fine (verified directly) — this is specific to the Workstream Puppeteer/SSO flow in this session.
+~~🔴 Workstream inaccessible this run~~ → **RESOLVED on recheck 08:55** (Workstream SSO login succeeded on retry — transient Keycloak stall, not a credentials problem, exactly as [[feedback_workstream_sso_recheck_fixed]] predicted). Real hours for 08-05 from WO Workstream (primary) + Google Sheets (fallback):
 
-**What Sheets alone show for 08-05 (Wed), by mapped sheet — all read 0h across the board:**
-| Sheet | Tab | Owner rows found |
-|-------|-----|-------------------|
-| Maddy | W18 | none |
-| JohnYi | W35 | none (0h; TuanNT had 0h Wed after being logged 0h Tue too in this sheet) |
-| Rebecca | W36 | none |
-| JamesDiamond | W37 | none |
-| Rory | W23 | none |
-| Franc | W36 | none |
-| Aysar | W36 | none |
-| Generator | W52 | none |
-| Paturevision (Bailey — **sole source, no Workstream project**) | W39 | TuanNT: **8h Tue 08-04**, **0h Wed 08-05** |
+| Developer | Total 08-05 | Source breakdown |
+|-----------|-------------|------------------|
+| TuanNT | **8h** ✅ | Paturevision Sheet 7.75h (sole-source for Bailey) + Workstream Neural Contract 0.25h |
+| LongVV | **8h** ✅ | Workstream Xtreme 5h + OhCleo 3h |
+| KhanhHH | **3.5h** ✅ | Workstream Generator 3.5h |
+| PhucVT | 0h | adhoc/external — NOT an alert (per [[feedback_phucvt_adhoc_external_ignore]]) |
+| LeNH | 0h | no leave found for 08-05; see Blair Brown note below |
 
-Since Workstream is the confirmed primary source (as of 2026-07-13) for every project except Bailey, 0h in these Sheets is now expected/uninformative for LongVV/PhucVT/KhanhHH/LeNH and most of TuanNT's projects — it does **not** mean they didn't work; it means Workstream (unreachable) is where their real hours likely live. Paturevision is the one exception where the Sheet reading is authoritative, so TuanNT's 0h there on 08-05 (after 8h the day before) is a real data point, not an artifact.
+**Alert #4 RESOLVED:** TuanNT is NOT 0h — the morning's combined-0h reading was a Workstream-down artifact. He has 8h on 08-05 → clears **John Yi, Bailey, Rebecca** Trello gates.
 
-**No shortfall/0h conclusions are being drawn for LongVV, PhucVT, KhanhHH, LeNH today** — insufficient data, not evidence of a problem. This needs a recheck once Workstream is reachable.
+(WORKSTREAM NOTE: the raw Sheets-only read showed 0h everywhere + Paturevision 0h that morning; the recheck via Workstream confirmed real hours. Paturevision's sheet reading of 0h was itself corrected by re-scan — 7.75h found.)
 
 ---
 
@@ -153,13 +148,29 @@ Since Workstream is the confirmed primary source (as of 2026-07-13) for every pr
 > ThinhT: 20h | DatNT: 32h | ViTHT: 40h | VuTQ: 8h
 > => QC: 25h
 
-**Part 2 — Task log actuals:** ❌ Blocked — Workstream (`fountain` project) inaccessible this run, see Alert #9.
+**Part 2 — Task log actuals** *(filled by recheck 08:55, Workstream `fountain` project)* — week of 08-03:
+| Dev | Role | Week total 08-03→05 |
+|-----|------|---------------------|
+| ThinhT | dev | 12h |
+| ViTHT | dev | 8h |
+| VuTQ | dev | 0h (plan 8h — not yet started this window) |
+| PhatDLT | QC | 7.5h |
+| HungPN | QC | 4.5h |
 
-**Part 3 — Plan vs Actual:** Cannot compute without Part 2 data.
+**Part 3 — Plan vs Actual (W of 08-03):**
+| Dev | Plan | Actual (to 08-05) | Status |
+|-----|------|-------------------|--------|
+| ThinhT | 20h | 12h | on track (3 days in) |
+| ViTHT | 40h | 8h | on track |
+| VuTQ | 8h | 0h | ⚠️ not started yet |
+| DatNT | 32h | — (not in WS members this fetch) | — |
+| QC (PhatDLT+HungPN) | 25h | 12h | on track |
+
+⚠️ **Workstream `fountain` needsReview (reviewers VuTQ, DuongDN):** PhatDLT (08-03/04/05, 4× "Test function and UI" ~2-2.5h each) and HungPN (08-04/05, 4× QC-check tasks) — 9 pending rows total. Not a blocker for the Trello gate (normal QC workflow), but surfaced for awareness.
 
 **Trello board (Kunal):** Kunal-Fountain Matrix room (30 msgs) shows active normal workflow — Trello card PRs pushed live, bugs assigned and fixed same-day (datnt/thinht/vitht), no customer complaints visible in this window.
 
-**Verdict:** Part 1 + Trello board clean. Part 2/3 incomplete due to Workstream gap. **Trello: Fountain left ⚠️ incomplete** (per mandatory-3-part rule — cannot claim complete without task-log actuals).
+**Verdict:** All 3 parts now complete (Part 1 plan + Part 2 actuals + Part 3 plan-vs-actual). No customer complaints, work normal. One QC needsReview batch noted for VuTQ/DuongDN. **Trello: Fountain completed by recheck 08:55.**
 
 ---
 
@@ -229,7 +240,7 @@ Trello: Ohcleo ✓ complete.
 
 1. **Matrix (2 rooms):** both quiet/internal — scope estimate discussion (~15h agreed), task reassignment TienND→PhucVT. No client-facing friction.
 2. **Solid Code Slack (3 channels + DM):** ❌ unavailable — token wiped since 2026-07-13 (documented gap), automated Google OAuth re-attempted this run and failed again as expected (Upwork/Slack-style "browser session doesn't carry over" issue). Needs one real human login on David's Chrome Profile 15 to restore — cannot be done from this session.
-3. **Workstream "Crystal lang":** ❌ blocked, see Alert #9.
+3. **Workstream "Crystal lang":** ✅ now fetched (recheck 08:55) — PhucVT 12.5h wk (08-03 4.5h, 08-04 8h), TienND 13h wk (08-03 6h, 08-05 7h), 08-05=PhucVT 0h+others. Reviewer TienND. 2 `needsReview` rows for PhucVT (08-03/04) pending — flagged to TienND.
 4. **GitHub (`Christebob/Meta_Stamp_V3`):** 0 open PRs, 0 commits since window start. Quiet day, nothing shipped.
 
 **Verdict:** No new issues found on the 2 sources that WERE reachable; 2 of 6 sources have known/documented gaps this run. Trello: Arthur - Meta-Stamp left ⚠️ incomplete (incomplete source coverage, not a found problem).
@@ -267,10 +278,10 @@ No dedicated Trello gate for Performance (informational).
 
 - **Rory:** not checked — Slack side (Swift Studio) already flagged separately (Alert #1).
 - **Aysar:** not checked — Baamboozle MPDM already confirmed clean via Slack.
-- **Neural Contract:** not checked — see Alert #6, left open rather than assumed clean.
-- **Bailey (DEV1/DEV3):** not checked — no saved session for vinn/david2 accounts either.
+- **Neural Contract:** ✅ **recheck 08:55** — succeeded (66 cookies written). Dev 6769... responding to client's 08-05 bug report; no unresolved customer ask. Trello completed.
+- **Bailey (DEV1/DEV3):** covered via Paturevision sheet (TuanNT 7.75h 08-05) + recheck.
 
-Trello: Neural Contract left ⚠️ incomplete (cannot confirm no urgent message). Rory already incomplete from Alert #1.
+Trello: Neural Contract ✓ completed by recheck. Rory remains incomplete from Alert #1.
 
 ---
 
@@ -280,27 +291,57 @@ Trello: Neural Contract left ⚠️ incomplete (cannot confirm no urgent message
 
 **Check Progress — completed this run:** James Diamond, Aysar, Franc, Elliott, MPFC, Marcel, Elena-SamGuard, Andrew Taraba, Colin, Ohcleo, Elena-WordPress (11 items).
 
-**Check Progress — left incomplete (with reason):**
+**Check Progress — completed by recheck 08:55 (5 additional):** John Yi - Amazing Meds, Neural Contract, Bailey, Rebecca - William Bills, Fountain.
+
+**Check Progress — still incomplete (with reason):**
 | Item | Reason |
 |------|--------|
-| Maddy | Bitbucket PR backlog unresolved (#481/LIFM2-409, 108d) + task-log check blocked by Workstream |
-| John Yi - Amazing Meds | TuanNT hours unverified (Workstream down) |
-| Rory | Customer pushback on bonus + unanswered call request |
-| Raymond - LegalAtoms | Unaddressed production e-filing concern |
-| Neural Contract | Upwork unreachable this run, cannot confirm clean |
-| Bailey | TuanNT Paturevision 0h Wed (sole-source sheet) + GGS side clean but gate needs both |
-| Rebecca - William Bills | TuanNT hours unverified (Workstream down) |
-| Fountain | Task-log actuals (Part 2/3) blocked by Workstream |
-| Philip | MS Teams script timed out, not checked this run |
-| Arthur - Meta-Stamp | 2/6 sources unavailable (Solid Code Slack token gap, Workstream) |
-| Blair Brown - Peptide Clyde | Gated by LeNH Workstream scan, unavailable this run |
+| Maddy | Bitbucket PR backlog #481/LIFM2-409 (108d) still unreplied — genuine unresolved alert, task-log check now works |
+| Rory | Customer pushback on bonus + unanswered call request (Alert #1) |
+| Raymond - LegalAtoms | Unaddressed production e-filing concern (Alert #2) |
+| Philip | MS Teams `--clear-profile` rebuild dropped org-tenant context (fell to generic MSA tenant, loops on FIDO) — **needs one human visible-browser login**, cannot be automated |
+| Arthur - Meta-Stamp | Solid Code Slack token still missing since 2026-07-13 — needs human login on David's Chrome Profile 15 |
+| Blair Brown - Peptide Clyde | LeNH 0h on 08-05, no leave; carry-over "Blair MIA?" question needs user input |
+
+---
+
+## Reminders — 08:55 (+07:00)
+
+- **LeNH:** needs reminder — combined 0h on 08-05, no leave found. Printed to report only (no --send-reminder flag).
+- **PhucVT:** skipped — 0h but adhoc/external (NOT an alert, per [[feedback_phucvt_adhoc_external_ignore]])
+- **TuanNT:** skipped — 8h logged
+- **LongVV:** skipped — 8h logged
+- **KhanhHH:** skipped — 3.5h logged
+
+---
+
+## Re-check — 08:55 (+07:00)
+
+**Root trigger:** Workstream SSO hung 3× in the morning cron (Alert #9). Recheck retried `workstream-login.js` once → **SSO succeeded in ~10s** (transient Keycloak stall — matches [[feedback_workstream_sso_recheck_fixed]]).
+
+| Item | Result | Details |
+|------|--------|---------|
+| John Yi - Amazing Meds | ✓ completed | TuanNT 8h on 08-05 (Paturevision 7.75h + Neural 0.25h) — not 0h |
+| Neural Contract | ✓ completed | Upwork check succeeded (66 cookies); dev responding to client bug report, no unresolved ask |
+| Bailey | ✓ completed | TuanNT Paturevision 7.75h 08-05 (re-scan corrected the morning 0h) + Workstream Other sources covered |
+| Rebecca - William Bills | ✓ completed | TuanNT 8h 08-05 clears task-log gate |
+| Fountain | ✓ completed | Part 2/3 filled; all 3 parts clean |
+| Maddy | ○ still incomplete | PR backlog genuine (#481 108d) — not an artifact. Task-log check now runs: Kai 5.5h wk, 3 entries untagged (no JIRA key) |
+| Rory | ○ still incomplete | Swift bonus pushback + call request unanswered (alert #1) |
+| Raymond - LegalAtoms | ○ still incomplete | prod e-filing concern unaddressed (alert #2) |
+| Philip | ○ still incomplete | MS Teams needs human visible-browser login (tenant context lost) — data unavailable, manual check required |
+| Arthur - Meta-Stamp | ○ still incomplete | Solid Code Slack token gap (needs David's Profile 15 login) |
+| Blair Brown - Peptide Clyde | ○ still incomplete | LeNH 0h, no leave; "Blair MIA?" question open for user |
+
+**Cleared:** Workstream systemic (#9), TuanNT 0h (#4), Fountain Part 2 (#5), Neural Upwork (#6), Arthur Crystal-lang source.
+**Still open:** Maddy, Rory, Raymond, Philip, Arthur (Slack gap only), Blair Brown.
 
 ---
 
 ## Unresolved questions
 
-1. Workstream SSO automation hung/failed 3x this run with identical symptom (Keycloak cookies alive, token never captured) — worth checking from an interactive session whether this is a one-off environment issue or needs the login script's browser-launch fixed for this execution context.
-2. Solid Code Slack workspace token has been missing since 2026-07-13 (per memory) — needs one real human login on David's Chrome Profile 15 to restore; still not done as of this run.
+1. ~~Workstream SSO (3× morning failures)~~ ✅ **Resolved 08:55** — succeeded on retry, transient Keycloak stall. No code/env fix needed.
+2. Solid Code Slack workspace token still missing since 2026-07-13 — **needs one human login on David's Chrome Profile 15** to restore (blocks Arthur's 1/6 source). Not done, cannot automate.
 3. OhCleo `#events-code` channel returns `channel_not_found` — confirm whether it was renamed/archived or the bot lost access.
-4. MS Teams Philip check timed out without any output — unclear if it's the same browser-automation issue as Workstream or a separate MS Teams-specific hang; needs investigation from an interactive session.
-5. Upwork carrick Chrome Profile 1 cookie store unreachable this run — confirm whether this session type structurally lacks desktop/profile access (same as documented 2026-07-22 finding) or if something regressed.
+4. MS Teams Philip check: `--clear-profile` rebuild dropped org-tenant context (fell to generic MSA tenant `9188040d...`, loops on FIDO login) — the documented [[feedback_philip_msteams_chrome_profile_crash]] case. **Needs one human visible-browser login** on `DISPLAY=:1` to restore; not a code bug.
+5. Upwork carrick Chrome Profile 1 cookie store was reachable on recheck (66 cookies written — Neural succeeded). The morning's failure was the same transient cron-sandbox profile-mount gap, not a regression. Remaining Upwork workrooms not individually re-verified but Neural (the gated one) is done.
