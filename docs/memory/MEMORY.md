@@ -87,6 +87,7 @@
 - [feedback_arthur_blair_brown_gate_added](daily-report/trello/feedback_arthur_blair_brown_gate_added.md)
 - [feedback_philip_msteams_chrome_profile_crash](daily-report/trello/feedback_philip_msteams_chrome_profile_crash.md) — 🔴 rebuild keeping IndexedDB
 - [feedback_msteams_stale_profile](daily-report/trello/feedback_msteams_stale_profile.md) — 🔴 clear tmp profile first
+- [feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask](daily-report/trello/feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask.md) — Raymond many sub-projects, ignore client msg unless direct ask to us
 
 ## daily-report:matrix
 - [feedback_matrix_daily_summary](daily-report/matrix/feedback_matrix_daily_summary.md), [feedback_matrix_join_public_room](daily-report/matrix/feedback_matrix_join_public_room.md)

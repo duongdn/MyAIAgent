@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Swift Studio (Rory) | Customer Rory pushed back on our $350 Upwork-bonus request ("didn't provide evidence to warrant the time") and asked to schedule a call for tomorrow morning — unanswered as of check time. |
-| 2 | LegalAtoms | miratariq (client) reported someone e-filed in **production** using a test-looking email (jamesandersonla2026+3rdaug@gmail.com), suspects it's one of our team members testing in prod — unaddressed in Slack. |
+| 2 | LegalAtoms | ✅ **NOT AN ALERT — user confirmed 08-06 "ko nhắn gì mình, ignore, Raymond nhiều sub dự án"** — miratariq reported someone e-filed in prod, but not directed at DuongDN (many sub-projects). Raymond Trello item completed. |
 | 3 | Maddy/Xtreme — Bitbucket PR backlog | ✅ **NOT AN ALERT — user confirmed 08-06 09:0x "ko thấy vấn đề gì, ignore"** — 9 open PRs (worst #481 LIFM2-409 @108d) but user reviewed and decided to ignore unless customer gives feedback. Maddy Trello item completed. |
 | 4 | TuanNT (John Yi / Bailey / Rebecca gate) | ✅ **RESOLVED on recheck 08:55** — TuanNT has 8h on 08-05 (Paturevision sheet 7.75h + Workstream Neural 0.25h). Morning's combined-0h was a Workstream-down artifact. Gates cleared. |
 | 5 | Fountain — Part 2 blocked | ✅ **RESOLVED on recheck 08:55** — Part 2/3 filled from Workstream (ThinhT 12h, ViTHT 8h, QCs 12h). 3-part check complete, no issues → Trello completed. |
@@ -293,12 +293,12 @@ Trello: Neural Contract ✓ completed by recheck. Rory remains incomplete from A
 
 **Check Progress — completed by recheck 08:55 (5 additional):** John Yi - Amazing Meds, Neural Contract, Bailey, Rebecca - William Bills, Fountain.
 **Check Progress — completed 09:0x (user decision, 1 additional):** Maddy — user reviewed PR backlog #481 and said ignore unless customer feedback.
+**Check Progress — completed 09:1x (user decision, 1 additional):** Raymond - LegalAtoms — miratariq msg not directed at DuongDN (Raymond has many sub-projects), user said ignore.
 
 **Check Progress — still incomplete (with reason):**
 | Item | Reason |
 |------|--------|
 | Rory | Customer pushback on bonus + unanswered call request (Alert #1) |
-| Raymond - LegalAtoms | Unaddressed production e-filing concern (Alert #2) |
 | Philip | MS Teams `--clear-profile` rebuild dropped org-tenant context (fell to generic MSA tenant, loops on FIDO) — **needs one human visible-browser login**, cannot be automated |
 | Arthur - Meta-Stamp | Solid Code Slack token still missing since 2026-07-13 — needs human login on David's Chrome Profile 15 |
 | Blair Brown - Peptide Clyde | LeNH 0h on 08-05, no leave; carry-over "Blair MIA?" question needs user input |
@@ -328,13 +328,13 @@ Trello: Neural Contract ✓ completed by recheck. Rory remains incomplete from A
 | Fountain | ✓ completed | Part 2/3 filled; all 3 parts clean |
 | Maddy | ✓ completed 09:0x | ✅ user reviewed #481 (108d) → "ko thấy vấn đề gì, ignore" unless customer feedback. Not an alert. Task-log check runs: Kai 5.5h wk, 3 untagged (no JIRA key) |
 | Rory | ○ still incomplete | Swift bonus pushback + call request unanswered (alert #1) |
-| Raymond - LegalAtoms | ○ still incomplete | prod e-filing concern unaddressed (alert #2) |
+| Raymond - LegalAtoms | ✓ completed 09:1x | ✅ user: miratariq msg not directed at us, Raymond many sub-projects → ignore. Not our action item. |
 | Philip | ○ still incomplete | MS Teams needs human visible-browser login (tenant context lost) — data unavailable, manual check required |
 | Arthur - Meta-Stamp | ○ still incomplete | Solid Code Slack token gap (needs David's Profile 15 login) |
 | Blair Brown - Peptide Clyde | ○ still incomplete | LeNH 0h, no leave; "Blair MIA?" question open for user |
 
 **Cleared:** Workstream systemic (#9), TuanNT 0h (#4), Fountain Part 2 (#5), Neural Upwork (#6), Arthur Crystal-lang source.
-**Still open:** Rory, Raymond, Philip, Arthur (Slack gap only), Blair Brown.
+**Still open:** Rory, Philip, Arthur (Slack gap only), Blair Brown.
 
 ---
 
