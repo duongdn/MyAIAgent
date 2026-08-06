@@ -337,6 +337,8 @@ async function main() {
   const args = process.argv.slice(2);
   const ticker = (args.find((a) => /^[A-Z0-9]{3,10}$/.test(a)) || "").toUpperCase();
   const forceFireant = args.includes("--fireant");
+  const forceCafef = args.includes("--cafef");
+  const skipBalanceCheck = args.includes("--force");
   if (!ticker) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
 
   const yrs = config.max_years || 15;
@@ -347,29 +349,33 @@ async function main() {
     cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
     src = "fireant";
   } else {
+    process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
     try {
-      process.stdout.write("PROGRESS: 1/3 Đang tải BCTC từ cafef.vn...\n");
       cf = await fetchCafef(ticker, yrs, qtrs);
       src = "cafef";
     } catch (e) {
+      if (forceCafef) throw e;
       process.stdout.write(`WARN: cafef lỗi (${e.message}), thử FireAnt...\n`);
       cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
       src = "fireant";
     }
-    if (src === "cafef" && cf.tnYAnnual.length < 3) {
-      // cafef insufficient → fall back to FireAnt
+    // Newly-listed tickers can genuinely have <3 audited years on cafef — don't
+    // fall back to FireAnt in that case, since FireAnt may hold unrelated data
+    // from a previous company that used the same ticker code (verified case: HPA).
+    if (!forceCafef && src === "cafef" && cf.tnYAnnual.length < 3) {
       process.stdout.write("WARN: cafef thiếu dữ liệu, thử FireAnt...\n");
       cf = await fireant.fetchFireAntBCTC(ticker, yrs, qtrs);
       src = "fireant";
     }
   }
-  if (cf.tnYAnnual.length < 3) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
+  const minYears = forceCafef ? 1 : 3;
+  if (cf.tnYAnnual.length < minYears) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
   // Balance check — annual only (audited), skip quarterly
   const i270 = cf.tnT.findIndex((r) => (r.code || "").trim() === "270");
   const i440 = cf.nvT.findIndex((r) => (r.code || "").trim() === "440");
-  if (i270 >= 0 && i440 >= 0) {
+  if (i270 >= 0 && i440 >= 0 && !skipBalanceCheck) {
     const be = checkBalance(cf.tnYAnnual, cf.nvYAnnual, i270, i440);
     if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
   }

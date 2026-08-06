@@ -168,6 +168,7 @@
 - [feedback_finance_report_never_construct_urls_and_more_ticker_collisions](finance-report/feedback_finance_report_never_construct_urls_and_more_ticker_collisions.md) — 🔴🔴🔴 KHÔNG tự tạo URL rss?q=, luôn lấy link thật từ JSON; FOX↔FOXA, HPP↔SHB nhiễu
 - [project_finance_quantification_skill](finance-report/project_finance_quantification_skill.md) — `/me:finance-quantification <TICKER>` standalone ratio analysis + web app at quantification.youragentstore.net, built 2026-07-30
 - [feedback_cafef_incomplete_fireant_alternative](finance-report/feedback_cafef_incomplete_fireant_alternative.md) — FireAnt fallback IMPLEMENTED; nhưng BVH verifed cafef đủ (insurance 68+54+37 rows); FireAnt LCTT chỉ 5 dòng gộp → luôn ưu tiên cafef
+- [feedback_newly_listed_ticker_thin_cafef_data](finance-report/feedback_newly_listed_ticker_thin_cafef_data.md) — HPA mới niêm yết, cafef chỉ 1 năm thật (không phải thiếu); FireAnt trộn data mã cũ khác chủ → dùng `--cafef --force` thay vì auto-fallback
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
