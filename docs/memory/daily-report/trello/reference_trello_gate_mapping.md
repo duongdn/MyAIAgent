@@ -33,6 +33,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 | Fountain | Matrix plan posted + no over-est spike | Plan missing OR spike |
 | Elena - WordPress | samguard.co JS console check | JS errors |
 | Philip | MS Teams (`will@nustechnology.com`) → Philip Briggs (Six Star Rentals, pbriggs@sixstarrentals.com.au) DM | Customer complaint or unresolved request |
+| Upwork Memo | Upwork hourly workroom memos (Piece 15, `upwork-memo`) | Any invalid memo across Rory/Aysar/Bailey = ⚠️ skip; session/Cloudflare ≠ memo status → complete |
 | Blake/SoCal | **DROPPED** as of 2026-05-11 | — |
 
 ## Key Rules

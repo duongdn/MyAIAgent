@@ -132,6 +132,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report performance` | New Relic APM check — all configured projects |
 | `/daily-report performance ohcleo` | OhCleo backend API only |
 | `/daily-report performance mpfc` | MyPersonalFootballCoach only |
+| **Upwork Memo** | |
+| `/daily-report upwork-memo` | Validate Upwork hourly work memos (Piece 15) for yesterday — all hourly workrooms |
+| `/daily-report upwork-memo --date=YYYY-MM-DD` | Validate a specific date's memos |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -561,8 +564,8 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `johnyi` | Normal | John Yi - Amazing Meds | `slack amazingmeds` + `sheets tuannt` |
 | `james` | Should do | James Diamond - Vinn task | `discord airagri` + `sheets phucvt` |
 | `franc` | Closely monitor | Franc | `slack rdc` only — ad hoc, no hours expectation, sheets do NOT gate this item |
-| `rory` | Closely monitor | Rory | `slack swift` only — sheets do NOT gate this item (LeNH hours only drive the Reminders piece, never block Rory/Franc) |
-| `aysar` | Closely monitor | Aysar | `slack baamboozle` (specifically MPDM **C07SQ4HAUHZ**, Carrick's "Today's update" — posts ~17:00-17:45+07, not morning) + **`sheets khanhhh`** (NOT lenh) |
+| `rory` | Closely monitor | Rory | `slack swift` only — sheets do NOT gate this item (LeNH hours only drive the Reminders piece, never block Rory/Franc). Upwork memo validity (Piece 15) is reported for LeNH's Rory workroom but does not change this Slack gate. |
+| `aysar` | Closely monitor | Aysar | `slack baamboozle` (specifically MPDM **C07SQ4HAUHZ**, Carrick's "Today's update" — posts ~17:00-17:45+07, not morning) + **`sheets khanhhh`** (NOT lenh). Upwork memo validity (Piece 15) reported for the Aysar workroom; invalid memo ⚠️ surfaced but gate remains Slack+sheets. |
 | `elliott` | Closely monitor | Elliott | `slack generator` + `sheets khanhhh` |
 | `swift` | Closely monitor | Rory (Swift Studio) | same as `rory` above — Slack only |
 | `raymond` | Work | Raymond - LegalAtoms | `slack legalatoms` |
@@ -571,7 +574,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `andrew` | Work | Andrew Taraba | `discord bizurk` |
 | `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
 | `mpfc` | Work | MPFC | `slack mpfc` |
-| `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source) |
+| `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source). Upwork memo validity (Piece 15) reported for Bailey DEV1/DEV3 workrooms. |
 | `fountain` | Work | Fountain | `fountain` (full 3-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
@@ -792,6 +795,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 | Philip | MS Teams `will` account → "Philip Briggs" | Complaint/unresolved request |
 | Arthur - Meta-Stamp | `arthur` (Piece 13, full 6-source check) | Vietnamese summary mandatory |
 | Blair Brown - Peptide Clyde | `sheets lenh` | Covered by LeNH's all-Workstream-projects scan (`blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |
+| Upwork Memo | `upwork-memo` (Piece 15) | Any invalid memo across hourly workrooms (Rory/Aysar/Bailey) = ⚠️ skip. Session/Cloudflare ≠ memo status — complete. |
 
 **Step 4 — Decrypt + fix auth before re-running**
 
@@ -886,7 +890,7 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Condition | Mode |
 |-----------|------|
 | `--cron` flag | Cron mode (sequential inline, always full run) |
-| Report file does NOT exist for today | Full run (all 14 pieces, incl. Performance + Arthur — see Piece 14, Piece 13) |
+| Report file does NOT exist for today | Full run (all 15 pieces, incl. Performance + Arthur + Upwork Memo — see Piece 14, Piece 13, Piece 15) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
@@ -896,7 +900,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur**
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15)
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 
@@ -945,7 +949,7 @@ Rules:
 **Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io + **OhCleo Slack** (Piece 12)
-3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13)
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13) + **Upwork Memo** (Piece 15)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
@@ -1116,6 +1120,36 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 
 ---
 
+## Piece 15 — Upwork Memo Validation (`/daily-report upwork-memo`)
+
+**Why:** Upwork's Hourly Payment Protection requires work memos detailed enough for a reviewer to verify the work. If Upwork judges a memo invalid, it can refund the payment — we'd then need the client to manually approve hours (slow + risky). There is no numeric activity metric; each memo must identify (1) the specific task, (2) the feature/page/design element, (3) the action taken, (4) how it relates to the contract.
+
+**Added 2026-08-06 by user directive** — part of every Full Run + cron run. Checks all hourly Upwork workrooms.
+
+**Script:** `node scripts/upwork-memo-check.js [--date=YYYY-MM-DD] [--workroom=NAME]`
+- Default date = yesterday. In daily report, pass the previous workday (the day being reported).
+- Scrapes per-segment memos from each workroom's timesheet (GraphQL work-diary intercept + DOM fallback), classifies each via `scripts/upwork-memo-rules.js`.
+- **Rubric:** valid = action verb + specific object; too vague = feature-only label ("Booking Flow – BXR Member Classes"), single word, placeholder. See `upwork-memo-rules.js`.
+- Auth: live-cookie injection for `carrick` (Rory/Aysar); persistent profile for `vinn`/`david2` (Bailey). **NEVER** attempt Puppeteer credential login first (fraud-engine soft-reject — see Key Rules).
+
+**Workrooms checked (hourly = `/timesheet`):** Rory (LeNH), Aysar (LeNH/KhanhHH), Bailey-VietPH, Bailey-DuongDN. Neural (messages-only) is excluded — no memos.
+
+**Output (JSON per workroom):** `segments: [{memo, duration, valid, issues}]` + `summary {total_memos, valid, invalid}`.
+
+**Report — append to daily report:**
+```
+## Upwork Memo — {date} — {HH:MM} (+07:00)
+| Workroom | Memos | Invalid | Details |
+|----------|-------|---------|---------|
+| Rory | 3 | 0 | — |
+| Aysar | 2 | 1 | ⚠️ "Free/Paid Game Mode Toggle #673" — feature-only, no action |
+```
+- **Invalid memos → ALERT** (addressed to that workroom's developer). Reminder/contact to staff requires `--send-reminder` flag (strict rule — never auto-send).
+- Session failure / Cloudflare → follow existing Upwork rules: no alert, note manual re-auth if needed, do not fabricate memo status.
+- **Trello gate:** If a dedicated "Upwork Memo" checklist item exists on the Check progress card, complete it when no invalid memos across all hourly workrooms (or none logged / session unavailable per existing rules); ⚠️ skip if any invalid memo. Existing project gates (Rory/Aysar/Bailey) remain as-is — memo validity is reported but does not change their existing Slack/hour gates unless the user says otherwise.
+
+---
+
 ## Key Rules (All Pieces)
 
 - Slack (13 standard workspaces): always `search.messages`, never `conversations.history`
@@ -1127,6 +1161,7 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 - Matrix: static `mct_` token should just work (see [[project_matrix_static_compat_token]]). If it fails (rare) → run `node scripts/matrix-token-refresh.js` (fallback OIDC flow). If that also fails, retry `DISPLAY=:1 node scripts/matrix-login.js` (visible browser) — NEVER `matrix-device-auth.js`, that flow is banned (see [[feedback_matrix_never_use_device_auth]]). NEVER report expired.
 - Upwork Neural Contract (workroom 38901192): use `node scripts/upwork-neural-check.js` — injects real session cookies extracted live from carrick's actual Chrome (Profile 1) via `scripts/get-carrick-upwork-cookies.py`, no login flow at all. Fixed 2026-07-21 — see [[feedback_neural_consolidated]] "PERMANENT FIX" section. **Do NOT attempt `upwork-login.js --login` (Puppeteer-driven login) for Neural** — Upwork's fraud engine soft-rejects that flow every time regardless of stealth tricks; this is a dead end already exhausted, not something to retry. If `upwork-neural-check.js` itself fails after its built-in 4 retries, check whether carrick's real Chrome Profile 1 Upwork session is still logged in before assuming anything else is wrong.
 - Upwork (Rory/Aysar workrooms, other than Neural): if session expired → try `DISPLAY=:1 node scripts/upwork-login.js --login --account=carrick` once (headless re-login). If CAPTCHA/2FA blocks it: write `Upwork: session expired — manual re-auth needed; run upwork-login.js --login` in the report and **complete Rory/Aysar Trello items** (session failure ≠ alert). Upwork auth: requires visible browser outside cron. NEVER leave items ○ just because Upwork session expired.
+- **Upwork memos (Piece 15):** `node scripts/upwork-memo-check.js` — same live-cookie injection auth as weekly-hours/neural. venv python3's `browser_cookie3` can be broken (`ModuleNotFoundError: lz4._version`) — the script falls back to system python3 automatically. A memo is INVALID if it's feature-only/label (no action verb, e.g. "Booking Flow – BXR Member Classes"), a single word, or placeholder. Session/Cloudflare failure ≠ memo status — follow the Upwork session-failure rule (no alert, complete Trello, note manual re-auth).
 - Slack session tokens: auto-refresh via crumb+POST if invalid_auth. Never report as expired.
 - GitHub: `duongdn` for Elena, `nusken` for Precognize (never nuscarrick for these)
 - Alert = do NOT complete Trello item

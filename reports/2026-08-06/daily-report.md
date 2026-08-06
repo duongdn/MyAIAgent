@@ -23,6 +23,7 @@
 | 11 | OhCleo `#events-code` | Slack returned `channel_not_found` for C01JDPN0EDQ — channel may have been renamed/archived, worth a one-time recheck. |
 | 12 | MPFC production (recurring) | `WP_Error::get_method()` fatal — 1467 occurrences this window (New Relic), plus 4x Rollbar "10 occurrences in 5 min" emails to freelancer@. Apdex still poor (0.58). No new owner assigned as far as visible here. |
 | 13 | OhCleo backend (recurring) | `IntegrityError: null value in column "user_id"` on `app_playhistory` — still occurring (5x this window), unresolved for weeks per prior reports. |
+| 14 | Upwork memo — Aysar | Invalid work memo on 08-05: "Free/Paid Game Mode Toggle #673" (feature-only, no action verb) — Hourly Payment Protection refund risk. LeNH/KhanhHH to re-word. (Piece 15, first run) |
 
 **Today (Thu 06/08):** LuHX half-day PM (personal), rest of team present per Matrix activity.
 
@@ -336,6 +337,26 @@ Trello: Neural Contract ✓ completed by recheck. Rory remains incomplete from A
 
 **Cleared:** Workstream systemic (#9), TuanNT 0h (#4), Fountain Part 2 (#5), Neural Upwork (#6), Arthur Crystal-lang source.
 **Still open:** Rory, Philip, Blair Brown.
+
+---
+
+## Upwork Memo — 2026-08-05 (Wed) — 11:10 (+07:00)
+
+First run of the new Upwork Memo validation piece (Piece 15 — Hourly Payment Protection). Checks per-segment work memos on hourly Upwork workrooms for the reported day.
+
+| Workroom | Dev | Memos | Valid | Invalid | Details |
+|----------|-----|-------|-------|---------|---------|
+| Rory | LeNH | 0 | 0 | 0 | no segments / 0h logged 08-05 — no memos to check |
+| Aysar | LeNH/KhanhHH | 3 | 2 | 1 | ⚠️ 1 invalid (below) |
+| Bailey-VietPH | TuanNT | — | — | — | not reached — no saved profile for `vinn` account this session |
+| Bailey-DuongDN | DuongDN | — | — | — | not reached — no saved profile for `david2` account this session |
+| Neural Contract | external | — | — | — | messages-only workroom, no memos |
+
+**⚠️ INVALID memo (Aysar — LeNH/KhanhHH):** `"Free/Paid Game Mode Toggle #673"` — feature-only label, no action verb (doesn't say whether researched/designed/built/tested). Under Hourly Payment Protection this risks payment refund if a reviewer rejects it. Recommend re-wording to e.g. *"Implemented the Free/Paid game mode toggle and wired it to the #673 requirement"*.
+
+**Valid examples (Aysar):** "Fix and add unit tests to coverage for AI toolbar hidden for ambassador/staff users who belong to a team task" · "Verify and confirm the list release on #603, #566, #665, #661, #638 PRs for Jamie".
+
+New piece added to daily report + cron (Piece 15). Memory + rubric saved. Not gated to a Trello item yet (no dedicated "Upwork Memo" checklist item on the card) — reported informational pending user feedback.
 
 ---
 

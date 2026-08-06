@@ -254,5 +254,10 @@
     "output_file": null,
     "caveats": [],
     "submissions_20260727": "Maddy (0|0|10h), Baamboozle (0|3|7.5h), James Diamond (0|2|59h), Bailey (2|5|42.5h), Marcel (0|0|21.5h), Neural Contract (0|0|0.25h), LegalAtoms (0|3|0h), Andrew Taraba (0|0|0h) — all 200, Trello 8/8 complete"
+  },
+  "upwork_memo": {
+    "description": "Updated when Upwork Memo validation (Piece 15) runs. Used as the memo date for next run.",
+    "last_run": "2026-08-06T07:40:00+07:00",
+    "note": "Added 2026-08-06 with Piece 15. First live run checked 2026-08-05 memos: Aysar 1 invalid (\"Free/Paid Game Mode Toggle #673\")."
   }
 }
