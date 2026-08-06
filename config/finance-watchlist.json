@@ -32,6 +32,15 @@
       "spreadsheet_id": "1VGjJoRwXaWVR1V0nGDlY_40GsijtJ4ohVnaHXjf3KeU",
       "report_sheet": "Báo cáo 2 - FOX",
       "vietstock_url": "https://finance.vietstock.vn/FOX/tai-chinh.htm"
+    },
+    {
+      "ticker": "HPA",
+      "name": "CTCP Phát triển Nông nghiệp Hòa Phát",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1E8goOhD5WvReVK2WyWRRYM-6tKbzifxstcVuUjiEaYE",
+      "report_sheet": "Báo cáo 2 - HPA",
+      "vietstock_url": "https://finance.vietstock.vn/HPA/tai-chinh.htm",
+      "note": "Newly listed 2025 — cafef only has 1 audited year (2025) + Q4/2025-Q2/2026 quarters. Thin liquidity (~170tr VND/day recent). Built with --cafef --force (balance mismatch 30tr/4.7 nghìn tỷ negligible)."
     }
   ],
   "candidates": {
