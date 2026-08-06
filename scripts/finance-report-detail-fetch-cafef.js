@@ -36,7 +36,11 @@ function fetchJson(url) {
 }
 
 function keepAudited(yearEntries) {
-  return yearEntries.filter((y) => y.type === "HK").sort((a, b) => a.year - b.year);
+  // "HK" = hợp nhất kiểm toán (consolidated audited), the common case.
+  // Companies with no subsidiaries only publish standalone audited reports ("K") — fall back to that.
+  const hk = yearEntries.filter((y) => y.type === "HK");
+  const filtered = hk.length > 0 ? hk : yearEntries.filter((y) => y.type === "K");
+  return filtered.sort((a, b) => a.year - b.year);
 }
 
 async function main() {
