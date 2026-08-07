@@ -22,18 +22,26 @@ const LIVE_COOKIE_JSON = '/tmp/carrick-upwork-cookies.json';
 // workroom (Rory/Aysar), not just Neural. Never re-attempt the old Puppeteer
 // login flow first — Upwork's fraud engine soft-rejects it every time.
 function extractLiveCookies() {
-  try {
-    execSync('.claude/skills/.venv/bin/python3 scripts/get-carrick-upwork-cookies.py', {
-      cwd: path.join(__dirname, '..'),
-      stdio: ['ignore', 'ignore', 'inherit'], // stdout ignored — this script's own stdout is parsed JSON, only stderr may inherit for diagnostics
-    });
-    return JSON.parse(fs.readFileSync(LIVE_COOKIE_JSON, 'utf8'))
-      .filter(c => c.name && c.value && c.domain && /^[!#-+\--:<-\[\]-~]+$/.test(c.value))
-      .map(c => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
-  } catch (err) {
-    console.error('Live cookie extraction failed:', err.message);
-    return null;
+  // Try venv python3 first, fall back to system python3 — the venv's lz4/.so is
+  // fragile (mismatched CPython 3.13 .so inside a 3.12 venv breaks browser_cookie3),
+  // and system python3 has the same deps. Same fallback as upwork-neural-check.js.
+  const pythons = ['.claude/skills/.venv/bin/python3', 'python3'];
+  for (const py of pythons) {
+    try {
+      execSync(`${py} scripts/get-carrick-upwork-cookies.py`, {
+        cwd: path.join(__dirname, '..'),
+        stdio: ['ignore', 'ignore', 'inherit'], // stdout ignored — this script's own stdout is parsed JSON, only stderr may inherit for diagnostics
+      });
+      const cookies = JSON.parse(fs.readFileSync(LIVE_COOKIE_JSON, 'utf8'))
+        .filter(c => c.name && c.value && c.domain && /^[!#-+\--:<-\[\]-~]+$/.test(c.value))
+        .map(c => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
+      if (cookies.length) return cookies;
+      console.error(`Live cookie extraction (${py}) wrote 0 cookies, trying next interpreter...`);
+    } catch (err) {
+      console.error(`Live cookie extraction (${py}) failed: ${err.message}`);
+    }
   }
+  return null;
 }
 
 async function injectLiveCookies(page) {
