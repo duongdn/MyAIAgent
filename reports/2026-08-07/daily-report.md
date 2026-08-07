@@ -1,6 +1,6 @@
 # Daily Report — 2026-08-07 (Friday)
 
-**Run:** 2026-08-07T07:31:00+07:00 (cron)
+**Run:** 2026-08-07T07:31:00+07:00 (cron) + **Re-check** 08:45 (Piece 11)
 **Window:** 2026-08-06T07:40:00+07:00 → now
 **Leave plan:** none on file for today
 
@@ -14,14 +14,14 @@
 | 2 | Email (rick@) | [FirstProject] production - New Error #1095 TypeError: Failed to fetch |
 | 3 | Email (vuongtrancr@ / Swish) | 10x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic) + 1 Rollbar Daily Summary — recurring signal-loss pattern |
 | 4 | Email (freelancer@mpfc) | Rollbar #53/#54 `Class 'JSON_API_Dashboard_Controller' not found`, #55 `Call to undefined method MM_PaymentService::findByType()` |
-| 5 | Trello (Fountain) | Client (kunalsheth) asked about email deliverability (kunal@fountaingifts.com landing in spam) 2026-08-07 02:14 +07 — unanswered as of this run. Card: "Email deliverability" (trello.com/c/ECLxfKfn) |
+| 5 | Trello (Fountain) | Client (kunalsheth) asked about email deliverability (kunal@fountaingifts.com landing in spam) 2026-08-07 02:14 +07 — **still unanswered as of recheck 08:45**. Card: "Email deliverability" (trello.com/c/ECLxfKfn) |
 | 6 | Trello (Fountain) | "Fountain - Gift of Choice (Business tab)" stuck in Doing 16 days, no activity |
-| 7 | Sheets/Workstream (all devs) | Workstream session-wide outage this run (3 genuine login attempts, all failed "no token captured" after SSO/Keycloak redirect; config token unchanged since 2026-07-28) — LongVV/PhucVT/TuanNT/KhanhHH/LeNH hours could not be fully verified. Sheets fallback shows 0h for 2026-08-06 across all scanned sheets except Paturevision (TuanNT logged 23.75h Mon-Wed this week, 0h specifically on Thu 08-06). NOT treated as a confirmed shortfall given known false-0h history — see Sheets section. |
-| 8 | OhCleo Slack | Celine (customer) asked about a meeting + Trello "ready to test"/"ready for publishing" workflow question, 2026-08-06 13:53–14:03 — unanswered by Tony as of this run (~17h) |
+| 7 | ~~Sheets/Workstream (all devs)~~ | **RESOLVED at recheck 08:45.** Morning-run "session-wide outage" was an expired token. Recheck re-login unlocked Workstream; all 08-06 dev hours verified (LongVV 8h, KhanhHH 8h, PhucVT 0h, TuanNT 0h, LeNH 0h). No shortfall — see Sheets section. |
+| 8 | OhCleo Slack | ~~Celine's meeting request + Trello workflow question unanswered by Tony~~ → **RESOLVED at recheck 08:32**: Tony replied to Celine (meeting + workflow). OhCleo Trello item completed. Remaining: LongVV 2 PENDING review items on 08-06 (reviewers DuongDN/MinhTV). |
 | 9 | Performance (OhCleo) | NEW error class: `django.db.utils.ProgrammingError: column app_media.moderation_reviewed_by_name does not exist` x21 — likely missing DB migration |
 | 10 | Performance (MPFC) | apdex still poor (0.57). `author-sitemap.xml` 56.3s (1 call), MemberMouse `processOrder.php` 20.7s (1 call, payment-related) — see detail table |
 | 11 | Upwork Memo | Session/login failed for Rory + Aysar + Neural workrooms this run (carrick's live Chrome session appears logged out on this server) — memo validity not checked, not a memo-invalid alert |
-| 12 | Philip (MS Teams) | Script could not open Philip Briggs chat this run ("Philip not in list") — unable to verify, item left incomplete |
+| 12 | Philip (MS Teams) | **Recheck inconclusive.** Re-run logged in + found + clicked Philip Briggs, but captured only the "Messages" UI header — no chat content (screenshots blank). Not verifiable via automation this run; item left incomplete |
 
 **Today (Fri Aug 7):** No leave/WFH notes found. All present per available signals.
 
@@ -80,25 +80,44 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets/Workstream — all — 07:28 (+07:00)
+## Sheets/Workstream — all — 07:28 (+07:00) + Re-check 08:45
 
-🔴 **Workstream session-wide outage this run.** 3 genuine `workstream-login.js` attempts (each with 2 internal SSO sub-attempts) all failed identically: "SSO redirect detected — Keycloak cookies alive" → "no token captured (SSO redirected but API never fired)". `config/.workstream-config.json` access_token unchanged since 2026-07-28 — confirms no successful refresh this run. This matches the recurring outage pattern documented 07-26/07-31/08-01/08-03/08-04/08-05.
+✅ **Morning-run "session-wide outage" was an expired token, NOT an outage.** Recheck interactive re-login (08:45) succeeded and unlocked Workstream. All 08-06 hours below verified from the live Workstream dump (`/tmp/ws_dump_0806_2nd.json`).
 
-Since Workstream is now the primary hours source for all projects except Bailey, Google Sheets fallback was scanned across all 13 known sheets for 2026-08-06:
+| Developer | 08-06 hours (Workstream-verified) | Breakdown |
+|-----------|----------------------------------|-----------|
+| LongVV | **8.0h** | Maddy 6.58h + OhCleo 1.42h |
+| KhanhHH | **8.0h** | Baamboozle 2h + Generator 2h + Radio Data Center 4h |
+| PhucVT | **0h** | Arthur (Crystal lang) — logged 19.5h Mon–Wed this week (4.5/8/7), **0h on Thu 08-06** |
+| TuanNT | **0h** | Neural Contract — no hours on 08-06 |
+| LeNH | **0h** | no 08-06 hours in any project |
+| DatNT | **8.0h** | Fountain |
+| LamLQ | **8.0h** | Fountain |
+| HungPN | **3.5h** | Fountain |
+| ViTHT | **3.0h** | Fountain |
+| ThinhT | **4.0h** | Fountain |
+| PhatDLT | **2.5h** | Fountain |
+| AnhNH2 | **4.0h** | James Diamond |
+| NamNN | **3.75h** | Generator |
+| DuongDN | **0.5h** | Marcel |
 
-| Developer | Sheets total (08-06) | Notes |
-|-----------|----------------------|-------|
-| LongVV | 0h | Weekly-only threshold — single-day 0h is normal, not an alert regardless |
-| PhucVT | 0h | Workstream unverified this run — not treated as confirmed 0h given outage |
-| TuanNT | 0h across JohnYi/Rebecca/CharlesChang(no tab)/Neural; 0h in Paturevision(Bailey, sole source, no WS fallback) specifically for 08-06, but 23.75h logged Mon–Wed this week (W39) | Workstream unverified for other projects this run |
-| KhanhHH | 0h | Workstream unverified this run |
-| LeNH | 0h | Workstream unverified this run — stricter threshold normally applies but cannot be evaluated without WS |
+No shortfall alerts. LongVV/KhanhHH at full 8h; PhucVT 0h on 08-06 is his own logged reality (not a WS gap).
 
-Given the well-documented history of false 0h/shortfall alerts specifically tied to Workstream-outage days, none of the above is being raised as a confirmed shortfall alert. Flagged in ALERTS SUMMARY #7 as unverified pending Workstream recovery.
+**Maddy JIRA cross-check (08:45):** ⚠️ **4 Workstream entries without JIRA ticket keys** — Kai to include ticket ID in task field:
+- "Check feedback from Anoma" (0.5h), "Implement new landing page" (10.5h), "Check requirement and estimates for new landing page" (0.5h), "Update new landing page feedback" (0.58h) — all no est, no JIRA log. Not a blocker (Kai responsive — quoted RMS-66045), but flagged for consistency.
 
-**Maddy JIRA cross-check:** skipped this run — requires Workstream Maddy project hours (also down); will re-run on next successful Workstream check.
+Trello: hour-gated items (Maddy, John Yi, James Diamond, Aysar, Elliott, Bailey, Rebecca, Blair Brown) completed — hours now WS-verified for the key devs (LongVV 8h Maddy; TuanNT 0h Neural; AnhNH2 4h James Diamond).
 
-Trello: hour-gated items (Maddy, John Yi, James Diamond, Aysar, Elliott, Bailey, Rebecca, Blair Brown) completed based on absence of independent complaint/alert signals (Slack/Discord/Matrix), with Workstream-outage caveat noted above — consistent with established precedent of not blocking Trello purely on a session-wide WS outage.
+---
+
+## Maddy — 07:20 (+07:00) + Re-check 08:45
+
+- **Hours (WS-verified):** LongVV 6.58h logged on 08-06 (Maddy project).
+- **Kai gate:** ACTIVE — LongVV logged hours → Kai's daily-report gate triggered. Kai responsive (quoted RMS-66045).
+- **Review status:** reviewers empty → `need_review=false`. No PENDING review items on 08-06.
+- **⚠️ JIRA cross-check:** 4 Workstream entries **without JIRA ticket keys** — "Check feedback from Anoma" (0.5h), "Implement new landing page" (10.5h), "Check requirement and estimates for new landing page" (0.5h), "Update new landing page feedback" (0.58h). All no-est, no-JIRA-log. Process note for Kai — include ticket ID in task field going forward. Not a blocker.
+
+Trello: Maddy item ✓ complete (hours verified; no complaint/alert signal).
 
 ---
 
@@ -115,9 +134,13 @@ Trello: hour-gated items (Maddy, John Yi, James Diamond, Aysar, Elliott, Bailey,
 > ThinhT: 20h | DatNT: 32h | ViTHT: 40h | VuTQ: 8h
 > => QC: 25h
 
-**Part 2 — Task Log Actuals:** Workstream unavailable this run (see Sheets section). Fountain Google Sheet (`1iIKfjAh...`) confirmed fully stale — 0h logged in Summary tab for every week from W37 (Jul 27) through W42 (Aug 31), consistent with tracking having fully moved to Workstream with no sheet fallback. Cannot verify actual hours this run.
+**Part 2 — Task Log Actuals (Workstream-verified at recheck 08:45, week W39):**
+- ThinhT **16h** (4h/day) | PhatDLT **10h** (2.5/2/3/2.5) | HungPN **8h** (2/2.5/3.5) | ViTHT **11h** (8/3) | LamLQ **8h** (08-06) | DatNT **8h** (08-06)
+- Fountain Google Sheet (`1iIKfjAh...`) confirmed fully stale — 0h logged in Summary tab W37–W42 — tracking fully moved to Workstream, no sheet fallback.
 
-**Part 3 — Plan vs Actual:** Not computable this run (no actuals available). Deferred to next successful Workstream check.
+**Part 3 — Plan vs Actual (W39, Mon–Thu 08-06):**
+- Plan: ThinhT 20h | DatNT 32h | ViTHT 40h | VuTQ 8h → actuals so far: ThinhT 16/20 (80%), DatNT 8/32 (25%, heavy ramp-up Thu), ViTHT 11/40 (28%).
+- ⚠️ DatNT at 25% of weekly plan after 4 days, ViTHT at 28% — watch for Friday catch-up; DatNT logged 8h alone on Thu (heavy lift) so trajectory likely improving.
 
 **Matrix room activity (73 messages this window):** Team actively resolving tickets — Bottle Engraving cart-layout fix (Lam Le/DatNT/VuTQ), Order Flow Message ticket stale since 07/29 flagged by ViTHT, Redmine #80268 pricing bug flagged urgent by HungPN and picked up by ThinhT, blog category updates for Thomas. No client-facing blocker visible in Matrix this window.
 
@@ -127,7 +150,7 @@ Trello: hour-gated items (Maddy, John Yi, James Diamond, Aysar, Elliott, Bailey,
 - kunalsheth also commented "hold off on this for now" on "Fountain - uniform product image framing" 2026-08-06 11:00 +07 (already acknowledged in Matrix by VuTQ same day, ticket paused — informational only)
 - Hard-to-release: "Fountain - Gift of Choice (Business tab)" in Doing 16 days, no other Doing cards over 2 days
 
-Trello: Fountain item ⚠️ left incomplete — unanswered customer question + hours unverifiable this run.
+Trello: Fountain item ⚠️ left incomplete — unanswered customer question (spam deliverability, trello.com/c/ECLxfKfn) still open as of 08:45 recheck. Hours are WS-verified (see Part 2/3 above).
 
 ---
 
@@ -166,12 +189,14 @@ Full details: reports/2026-08-07/matrix-rooms-0720.md, reports/2026-08-07/matrix
 
 | Channel | Msgs | Key content |
 |---------|------|-------------|
-| DM:Celine Fierro | 6 | Tony fixed invoice reminder issue (09:27), sent Trello comment/evidence to Celine (08:47). 🔴 Celine asked (13:53) about Trello "ready to test"/"ready for publishing" workflow, and (14:03) requested a meeting to discuss email automation/deeplink launch — both unanswered by Tony as of this run (~17h) |
+| DM:Celine Fierro | 6 | Tony fixed invoice reminder issue (09:27), sent Trello comment/evidence to Celine (08:47). Celine asked (13:53) about Trello "ready to test"/"ready for publishing" workflow, and (14:03) requested a meeting. ✅ **Recheck 08:32: Tony replied to Celine** — meeting + workflow questions addressed. Gate resolved. |
 | #events-code | — | `channel_not_found` this run (channel dormant since 2023 per known history; not an auth failure) |
 
-Tony daily report: not explicitly posted as a standalone message, but active/responsive earlier in the window (invoice fix, Trello evidence) — non-zero effort.
+Tony daily report: not explicitly posted as a standalone message, but active/responsive (invoice fix, Trello evidence, replied to Celine 08:32) — non-zero effort.
 
-Trello: Ohcleo item ⚠️ left incomplete — Celine's questions unanswered.
+🔴 **OhCleo needsReview (08-06):** LongVV has **2 PENDING review items** — "Fix branch link data" (1:00) + "E-mail check" (0:25). Reviewers: DuongDN/MinhTV. 1.42h total pending review.
+
+Trello: Ohcleo item ✅ **completed at recheck 08:45** — Tony replied, customer questions resolved.
 
 ---
 
@@ -242,9 +267,9 @@ No dedicated Trello item for Performance.
 2. **Matrix technical room** (`!QEbdvaMJkTurMpRPIX`): 0 new messages.
 3. **Slack "Solid Code"** (4 channels): still not configured on this server (`config/.slack-accounts.json` has no Solid Code entry; David's Chrome Profile 15 confirmed absent, only Profile 19 present) — same recurring gap since 2026-07-13, not re-attempted.
 4. **GitHub** (davidztv, `Christebob/Meta_Stamp_V3`): 0 open PRs, 0 commits since window start — verified.
-5. **Workstream "Crystal lang"**: blocked — session-wide Workstream outage this run (see Sheets section).
+5. **Workstream "Crystal lang"**: ✅ verified at recheck 08:45 — PhucVT logged 0h on 08-06 (19.5h Mon–Wed this week; 4.5/8/7). No 08-06 work logged. no new client-facing issue.
 
-No new unresolved client-facing issue found in the sources that were verified (Matrix + GitHub). last_run advanced per the established 2/4-source partial-verification precedent (matches 07-29/07-31/08-03/08-04/08-05 runs).
+No new unresolved client-facing issue found in the sources that were verified (Matrix + GitHub + Workstream now confirmed).
 
 Trello: Arthur - Meta-Stamp ✓ complete.
 
@@ -267,11 +292,11 @@ Session/Cloudflare failure ≠ memo status — no memo-invalid alert raised. Per
 
 - Check Mail: DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ complete — card marked done.
 - Check Progress:
-  - ✓ complete: Maddy, John Yi, James Diamond, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Arthur - Meta-Stamp, Blair Brown, Elena - WordPress SamGuard (19/22)
-  - ⚠️ left incomplete: Fountain (unanswered customer question + unverifiable hours), Ohcleo (unanswered customer questions), Philip (script could not open chat this run — see below)
-- Card not marked done (3 items still open).
+  - ✓ complete: Maddy, John Yi, James Diamond, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Arthur - Meta-Stamp, Blair Brown, Elena - WordPress SamGuard, **Ohcleo** (20/22)
+  - ⚠️ left incomplete: **Fountain** (unanswered customer question — spam deliverability on trello.com/c/ECLxfKfn still open as of 08:45; hours now verified), **Philip** (MS Teams check inconclusive — see below)
+- Card not marked done (2 items still open).
 
-**Philip (MS Teams):** `msteams-philip-chat-extract.js` could not locate/open Philip Briggs' chat this run ("Philip not in list, opening chat via search... Could not open Philip Briggs chat"). Not a login/auth failure — chat-list lookup itself failed. Left incomplete rather than assumed clean.
+**Philip (MS Teams):** Recheck 08:43 re-ran `fetch-msteams-customer-messages.js` with `--clear-profile`. Login to `will@nustechnology.com` succeeded, search found "Philip Briggs" (92 items), contact clicked, but extraction captured only the **"Messages" UI header** — no actual chat content (`Messages found: 1: [1] Messages`). Screenshots (`tmp/msteams-08-search-results.png`, `tmp/msteams-09-chat-open.png`) both blank. **Conclusion: chat content not extractable via this automation this run — item left ○, needs manual verification (or a different capture strategy).**
 
 ---
 
@@ -279,14 +304,33 @@ Session/Cloudflare failure ≠ memo status — no memo-invalid alert raised. Per
 
 No reminders sent this run (`--send-reminder` not passed, per cron default).
 
-- LongVV: 0h sheets today — normal (weekly-only threshold), no reminder needed
-- PhucVT / TuanNT / KhanhHH / LeNH: 0h sheets today, but Workstream unavailable this entire run — not confirmed as real 0h days, so not flagged for reminder. Will re-evaluate once Workstream recovers.
+- LongVV: 8h WS-verified — full day, no reminder
+- PhucVT / TuanNT / LeNH: WS-verified **0h on 08-06** (PhucVT 19.5h Mon–Wed; TuanNT/LeNH 0h) — confirmed real, but single-day 0h is within threshold, no reminder
+- Maddy JIRA: 4 WS entries without ticket keys (see Sheets section) — process note for Kai, not a reminder
+
+---
+
+## Re-check — 08:45
+
+Piece 11 recheck run. Corrections vs 07:31 cron report:
+
+1. **ALERTS #7 RESOLVED** — "Workstream session-wide outage" was an **expired token**, not an outage. Recheck re-login (08:45) unlocked Workstream; all 08-06 hours verified. No shortfall.
+2. **Sheets section rewritten** — verified 08-06 hours: LongVV 8h (Maddy 6.58 + OhCleo 1.42), KhanhHH 8h (Baamboozle 2 + Generator 2 + RDC 4), PhucVT 0h, TuanNT 0h, LeNH 0h. Plus Fountain (see #4), AnhNH2 4h James Diamond, NamNN 3.75h Generator, DuongDN 0.5h Marcel.
+3. **ALERTS #8 RESOLVED** — Tony replied to Celine 08-32 (meeting + Trello workflow). **OhCleo Trello item completed** (`curl` PUT → complete).
+4. **Fountain actuals added** — W39 Mon–Thu: ThinhT 16h, PhatDLT 10h, HungPN 8h, ViTHT 11h, LamLQ 8h, DatNT 8h. Plan-vs-actual: DatNT 25%, ViTHT 28% — watch Friday.
+5. **OhCleo needsReview alert added** — LongVV 2 PENDING review items on 08-06 (reviewers DuongDN/MinhTV).
+6. **Maddy JIRA cross-check added** — 4 WS entries without JIRA ticket keys (Kai to add ticket IDs). New `## Maddy` section added (LongVV 6.58h, Kai gate ACTIVE, review not required).
+7. **ALERTS #12 updated (Philip)** — recheck found+clicked Philip Briggs but captured only "Messages" UI header; no chat content; screenshots blank. **Item left ○ — not verifiable via automation this run.**
+8. **Trello progress** — Ohcleo now ✓ (20/22). Fountain ○ (customer question still unanswered 08:45). Philip ○ (inconclusive).
+
+**Trello live state at 08:45:** Fountain ○, Philip ○ only.
 
 ---
 
 ## Unresolved questions
 
-1. Should the Fountain client's spam-deliverability question (trello.com/c/ECLxfKfn) be escalated/answered proactively, or left for Rick to see on next login?
-2. Celine's (OhCleo) meeting request + Trello workflow question — needs Tony's attention; should this be flagged to him directly?
+1. Should the Fountain client's spam-deliverability question (trello.com/c/ECLxfKfn) be escalated/answered proactively, or left for Rick to see on next login? Still open as of 08:45.
+2. ~~Celine's meeting request~~ — **resolved**: Tony replied 08:32. Now: LongVV has 2 PENDING OhCleo review items (08-06) — flag DuongDN/MinhTV to review?
 3. carrick's live Chrome (Profile 1) Upwork session appears logged out on this server — same root cause likely also explains the Solid Code Slack gap. Worth a one-time manual re-login to fix both Arthur and Upwork Memo/Neural checks going forward?
-4. Philip MS Teams chat lookup broke this run (chat-list search failed) — needs investigation, not just a re-run.
+4. Philip MS Teams **captured only the "Messages" UI header** this run (chat content not extractable; screenshots blank) — needs a different capture strategy or manual verification, not just a re-run.
+5. Maddy JIRA: 4 Workstream entries without ticket keys — Kai to include ticket ID in task field going forward?
