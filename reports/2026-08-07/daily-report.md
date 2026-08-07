@@ -20,7 +20,7 @@
 | 8 | OhCleo Slack | ~~Celine's meeting request + Trello workflow question unanswered by Tony~~ → **RESOLVED at recheck 08:32**: Tony replied to Celine (meeting + workflow). OhCleo Trello item completed. Remaining: LongVV 2 PENDING review items on 08-06 (reviewers DuongDN/MinhTV). |
 | 9 | Performance (OhCleo) | NEW error class: `django.db.utils.ProgrammingError: column app_media.moderation_reviewed_by_name does not exist` x21 — likely missing DB migration |
 | 10 | Performance (MPFC) | apdex still poor (0.57). `author-sitemap.xml` 56.3s (1 call), MemberMouse `processOrder.php` 20.7s (1 call, payment-related) — see detail table |
-| 11 | Upwork Memo | Session/login failed for Rory + Aysar + Neural workrooms this run (carrick's live Chrome session appears logged out on this server) — memo validity not checked, not a memo-invalid alert |
+| 11 | ~~Upwork Memo~~ | **RESOLVED at recheck ~09:40.** Root cause: `.claude/skills/.venv` Python ABI mismatch (3.12 binary + 3.13 `.so`) broke `browser_cookie3`/`lz4` → live-cookie extraction produced 0 cookies → all Upwork scripts reported session/login failure. Fixed with venv→system `python3` fallback in `upwork-weekly-hours.js`. Re-run: Rory/Aysar/Neural all `success`, Aysar 2 memos valid / 0 invalid. |
 | 12 | Philip (MS Teams) | **Recheck inconclusive.** Re-run logged in + found + clicked Philip Briggs, but captured only the "Messages" UI header — no chat content (screenshots blank). Not verifiable via automation this run; item left incomplete |
 
 **Today (Fri Aug 7):** No leave/WFH notes found. All present per available signals.
@@ -275,16 +275,25 @@ Trello: Arthur - Meta-Stamp ✓ complete.
 
 ---
 
-## Upwork Memo — 2026-08-06 — 07:30 (+07:00)
+## Upwork Memo — 2026-08-06 — 09:40 (+07:00) *(re-run after venv fix)*
 
-| Workroom | Status |
-|----------|--------|
-| Rory | login_failed — live cookies + stored session + headless re-login all failed. carrick's real Chrome (Profile 1) session appears logged out on this server. |
-| Aysar | session_expired — same cause |
-| Neural Contract | session_expired — same cause (consistent with separate `upwork-neural-check.js` also failing 4/4 attempts this run, 0 cookies extracted) |
-| Bailey (DEV1/DEV3) | no saved session for vinn/david2 — not attempted (known, requires one-time manual login) |
+| Workroom | Memos | Valid | Invalid | Details |
+|----------|-------|-------|---------|---------|
+| Rory | 0 | 0 | 0 | 0:00h this week — no memos to validate |
+| Aysar | 2 | 2 | 0 | ✅ "Verify and prepare the PR for AI toolbar hidden for ambassador/staff users..." + "Fix feedback: game cards... Free/Paid Game Mode Toggle #673" — both have action verb + specific object |
+| Neural Contract | — | — | — | Messages-only workroom, no memos (see Neural check below) |
+| Bailey (DEV1/DEV3) | — | — | — | no saved session for vinn/david2 — known, requires one-time manual login; not memo-failure |
 
-Session/Cloudflare failure ≠ memo status — no memo-invalid alert raised. Per existing Upwork rules, this does not block the Rory/Aysar/Bailey/Neural Trello gates (their Slack/hours-based gates already completed above).
+**No invalid memos — no memo-invalid alert.**
+
+**Upwork weekly hours (2026-08-07 re-run, all `status=success`):**
+| Workroom | Week (Aug 3–9) | Last week | Daily |
+|----------|----------------|-----------|-------|
+| Rory | 0:00 | 0:00 | 0 Mon–Sun |
+| Aysar | 12:50 | 12:30 | Mon 2.5, Tue 3.5, Wed 4, Thu 2, Fri 0.83 |
+| Neural Contract | 0:00 | 0:00 | messages-only workroom |
+
+**Neural Contract messages (upwork-neural-check.js, 20 recent):** active 08-05 → 08-06. Client (Michael) reported "Add to Report" bug (removing all points + adding 2 back → only 1 present in Word table, review type 'Other'); dev responded with RCA (make_table.py grouping bug) + fix, client replied "no, that is fine thanks" 08-06 09:43. Dev asked "Would you like me to send you the file I updated?" 08-29 — **client's last reply at 09:43 resolves it; no unanswered client message.**
 
 ---
 
@@ -327,10 +336,24 @@ Piece 11 recheck run. Corrections vs 07:31 cron report:
 
 ---
 
+## Upwork re-run — 09:40 (+07:00)
+
+Re-ran all Upwork parts after fixing the `.claude/skills/.venv` Python ABI mismatch (venv 3.12 binary + 3.13 site-packages → `browser_cookie3`/`lz4` broke → live-cookie extraction returned 0 cookies → every Upwork script reported "session expired/login failed" every run, while manual retries hit system python and worked). Fix: `upwork-weekly-hours.js` now falls back venv→system `python3` (same as `upwork-neural-check.js`).
+
+| Script | Result |
+|--------|--------|
+| `upwork-weekly-hours.js` | ✅ Rory 0:00, Aysar 12:50 (Mon 2.5/Tue 3.5/Wed 4/Thu 2/Fri 0.83), Neural 0:00 — all `status=success` |
+| `upwork-neural-check.js` | ✅ 20 recent messages fetched (active 08-05→08-06); client's "Add to Report" bug → dev RCA+fix → client "no, that is fine thanks" 08-06 09:43. No unanswered client message. |
+| `upwork-memo-check.js --date=2026-08-06` | ✅ Rory 0 memos, Aysar **2 valid / 0 invalid** — no memo-invalid alert |
+
+**ALERTS #11 RESOLVED** (session/login failure → false alarm, venv bug). Trello: Rory/Aysar/Neural Contract/Bailey items already `complete` — no change needed.
+
+---
+
 ## Unresolved questions
 
 1. Should the Fountain client's spam-deliverability question (trello.com/c/ECLxfKfn) be escalated/answered proactively, or left for Rick to see on next login? Still open as of 08:45.
 2. ~~Celine's meeting request~~ — **resolved**: Tony replied 08:32. Now: LongVV has 2 PENDING OhCleo review items (08-06) — flag DuongDN/MinhTV to review?
-3. carrick's live Chrome (Profile 1) Upwork session appears logged out on this server — same root cause likely also explains the Solid Code Slack gap. Worth a one-time manual re-login to fix both Arthur and Upwork Memo/Neural checks going forward?
+3. ~~carrick's live Chrome (Profile 1) Upwork session appears logged out~~ — **resolved ~09:40**: NOT a logged-out session. Root cause was the `.claude/skills/.venv` Python ABI mismatch breaking `browser_cookie3`/`lz4` (0 cookies extracted → all scripts reported login failure). Added venv→system `python3` fallback to `upwork-weekly-hours.js`; re-run confirmed all Upwork scripts `success`. carrick's session was live all along (master_refresh_token valid to 08-20). Note: Solid Code Slack gap is a separate config issue (Profile 15 absent) — not the same cause.
 4. Philip MS Teams **captured only the "Messages" UI header** this run (chat content not extractable; screenshots blank) — needs a different capture strategy or manual verification, not just a re-run.
 5. Maddy JIRA: 4 Workstream entries without ticket keys — Kai to include ticket ID in task field going forward?
