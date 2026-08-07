@@ -43,9 +43,9 @@
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
-    "last_run": "2026-08-01T08:35:00+07:00",
-    "output_file": "reports/2026-08-01/weekly-monitor.md",
-    "note": "W37/W38 (Jul27-31). James Diamond Web charge=36h/actual=32h drafted to send-flags with confirmed:false, per user's manual billing override (4h LongVV banked surplus) plus a live correction that WS auto-logs an off day into LeNH's JD hours (40h raw -> 32h real). AWAITING EXPLICIT CONFIRMATION before send. Fountain: no weekly plan posted this week (first time in tracked period) and Est vs Charged tab byte-identical to W36 on both narrow AND broad scope (new escalation vs prior weeks' narrow-only freeze). TuanNT 32h/40h unexplained shortfall, no leave on file."
+    "last_run": "2026-08-07T21:10:00+07:00",
+    "output_file": "reports/2026-08-07/weekly-monitor.md",
+    "note": "Week of Aug3-7. LeNH 0h across ALL sources (WS/Sheets/JIRA), no leave on file - first time ever, needs direct check. James Diamond Web = 0h/0h this week (both usual devs reviewer-only, no LongVV flex) - awaiting user call before drafting Matrix send. W37 (27/07) draft still unconfirmed/unsent, now 11 days stale. 9/11 Google Sheets now empty/abandoned, WS is de facto sole source. Fountain plan recovered (2-part, revised); Est vs Charged tab frozen 5th consecutive week (live-verified, not access-dropped, contradicts stale note in feedback_fountain_kunal_checklist.md). Blair Brown 0h 5th week. TuanNT back to exact 40h."
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",
