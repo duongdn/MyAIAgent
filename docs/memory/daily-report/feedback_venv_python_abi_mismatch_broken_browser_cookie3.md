@@ -16,6 +16,8 @@ Python 3.12 cannot dlopen a 3.13 extension → `import lz4` raises `ModuleNotFou
 
 **Why some scripts worked:** `upwork-neural-check.js`, `upwork-memo-check.js`, `upwork-room-messages.js` all have a **fallback to system `python3`** (miniconda 3.13, which has matching lz4/browser_cookie3) in their cookie extraction. `upwork-weekly-hours.js` did NOT — it used the venv unconditionally, so it failed every run. Fixed 2026-08-07 by adding the same venv→system fallback loop.
 
+**Verified working 2026-08-07 09:40 (interactive re-run):** after the fallback was added to `upwork-weekly-hours.js`, re-ran all Upwork parts — `upwork-weekly-hours.js` (Rory 0:00, Aysar 12:50, Neural 0:00, all `status=success`), `upwork-neural-check.js` (20 msgs fetched), `upwork-memo-check.js --date=2026-08-06` (Aysar 2 memos valid/0 invalid). carrick's session was live all along (master_refresh_token valid to 08-20) — confirming this was never an auth issue. The cron box (mpfc-live) still fails Upwork for a separate reason (no carrick Profile 1) — known architecture limitation.
+
 **How to apply:**
 1. When Upwork (or any browser_cookie3-based script) fails in a run but works manually → **suspect the venv ABI, not auth**. Run `python3 -c "import lz4, browser_cookie3"` in the venv; if it fails, it's this bug.
 2. The durable fix for scripts is a **fallback loop**: try `.claude/skills/.venv/bin/python3` then `python3` (system/miniconda). Mirror the pattern already in `upwork-neural-check.js`/`upwork-weekly-hours.js`.
