@@ -174,5 +174,8 @@
 - [feedback_cafef_incomplete_fireant_alternative](finance-report/feedback_cafef_incomplete_fireant_alternative.md) — FireAnt fallback IMPLEMENTED; nhưng BVH verifed cafef đủ (insurance 68+54+37 rows); FireAnt LCTT chỉ 5 dòng gộp → luôn ưu tiên cafef
 - [feedback_newly_listed_ticker_thin_cafef_data](finance-report/feedback_newly_listed_ticker_thin_cafef_data.md) — HPA mới niêm yết, cafef chỉ 1 năm thật (không phải thiếu); FireAnt trộn data mã cũ khác chủ → dùng `--cafef --force` thay vì auto-fallback
 
+## tech-talk
+- [feedback_mpfc_excluded_from_demo](tech-talk/feedback_mpfc_excluded_from_demo.md) — 🔴 MPFC fully off-limits for this deck/demo, higher severity than other forbidden names
+
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
