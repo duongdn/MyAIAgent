@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Fountain Trello | kunalsheth unanswered since **2026-08-06 19:14** (+3.5 days, growing) on "Email deliverability" (trello.com/c/ECLxfKfn) — his emails from kunal@fountaingifts.com landing in spam, no reply from rick570 yet |
-| 2 | Fountain Trello | kunalsheth unanswered since **2026-08-09 17:14** on "Infinity - Item Extras" (trello.com/c/B7uPm1Pq) — asking how to toggle which extra items are active on LIVE, no reply yet |
+| 2 | Fountain Trello | ~~kunalsheth unanswered since 2026-08-09 17:14 on "Infinity - Item Extras"~~ **CORRECTED in Re-check** — that card is actually Done (In Live) since 08-07 ("Pushed to LIVE"), no 08-09 comment exists. Replaced by new unanswered question: Account-scoped products gift-box upload (trello.com/c/IiBUGzVE, commented **08-10 08:14 +07**, in To-Do) |
 | 3 | rick@ email | 26 alert-worthy Rollbar/BugSnag production/staging emails Fri–Sun: FountainStaging (BugSnag RecordNotFound/PG::ConnectionBad/RuntimeError/Net::ReadTimeout), FountainStagingBE #100 ArgumentError (100+ occurrences), FirstProject production #1095/#1096/#1097 new errors, InfinityRoses daily summaries |
 | 4 | vuongtrancr@ email (Swish) | 11 alerts: repeated "Signal lost for 10 minutes on Low Application Throughput" (New Relic, 6x over the weekend) + Delayed-newform Rollbar daily summaries — matches known Swish monitoring-signal-loss pattern |
 | 5 | freelancer@mpfc email | 14 Rollbar emails, all same chronic issue: `[MPFC] production - WP_Error::get_method()` (10-occurrence bursts) + "90% of occurrence limit" warning — matches Performance section below, unresolved for weeks |
@@ -94,6 +94,17 @@ Trello: Maddy, John Yi, Elliott, Bailey, Rebecca, Blair Brown ✓ completed (no 
 
 ---
 
+## Maddy — 09:12 (+07:00)
+
+- **Hours:** Workstream unavailable during morning run; **re-verified in Re-check** (SSO restored 08:51) — LongVV 16.08h logged/charged W40 (08-03 0.5h, 08-05 5h, 08-06 6.58h, 08-07 4h).
+- **Kai gate:** Kai logged 10.5h+ on "new landing page" in Workstream — daily-report gate active.
+- **Review status:** reviewers empty → `need_review=false`. No PENDING review items.
+- **⚠️ JIRA cross-check (Re-check):** 5 Workstream entries **without JIRA ticket keys** — all Kai's "new landing page" work: "Check feedback from Anoma" (0.5h), "Implement new landing page" (10.5h), "Check requirement and estimates" (0.5h), "Update new landing page feedback" (0.583h), "Update feedback new landing wordpress" (4h). All no-est, no-JIRA-log. Process note for Kai — include ticket ID in task field going forward. Not a blocker.
+
+Trello: Maddy item ✓ complete (hours verified; no complaint/alert signal).
+
+---
+
 ## Scrin.io — 07:36 (+07:00)
 
 **Scrin.io (Nick @ John Yi company account — 2026-08-09, Sunday):** 0h — no sessions recorded. Weekend, not evidence of any issue. Not TuanNT evidence.
@@ -116,7 +127,7 @@ Matrix room activity Fri 08-07 (28 msgs): Infinity Item Extras pushed to LIVE (0
 - Hard-to-release: "Fountain - Gift of Choice (Business tab)" in Doing **19 days** (was 16 on 08-07, still growing)
 - Also stuck ≥5d: "Improve Build-A-Box URL parsing speed" (12d), "Fountain Pro error" (5d)
 
-Trello: **Fountain ⚠️ left incomplete** — 2 unanswered customer questions.
+Trello: **Fountain ⚠️ left incomplete** — 2 unanswered customer questions (Email deliverability + Account-scoped products; see Re-check #4-5).
 
 ---
 
@@ -244,8 +255,40 @@ No reminders sent (`--send-reminder` not passed, cron default). Workstream/Sheet
 
 ## Unresolved / follow-up
 
-- Workstream SSO down for the entire run (5 genuine attempts) — Fountain Part 2/3, Maddy JIRA cross-check, and fresh hour verification for Maddy/JohnYi/Elliott/Bailey/Rebecca/Blair Brown all deferred to next run.
-- Philip MS Teams: needs a human to clear the account security-verification challenge on `will@nustechnology.com` outside cron.
-- Upwork: carrick's session needs a visible-browser re-login; vinn/david2 (Bailey) have never been logged in — first-time setup needed if memo validation for those workrooms is wanted.
-- Fountain: 2 customer questions need a reply (spam deliverability, now 4 days old; Item Extras toggle, ~7h old).
+- ~~Workstream SSO down for the entire run~~ **RESOLVED in Re-check** (SSO restored 08:51, fresh W40 actuals + Maddy JIRA cross-check completed).
+- ~~Philip MS Teams challenge~~ **RESOLVED in Re-check** (body-dump confirmed no unresolved customer request; Trello completed).
+- Upwork: carrick's session needs a **manual visible-browser re-login** (CAPTCHA/2FA wall, not auto-completable); vinn/david2 (Bailey) never logged in — first-time setup needed if memo validation is wanted.
+- Fountain: **2 unanswered customer questions** — Email deliverability (kunalsheth, since 08-07 02:14 +07, 4 days old) + NEW Account-scoped products gift-box upload (08-10 08:14 +07). ~~Item Extras toggle~~ card is Done (In Live).
 - Brad Ballantine (LegalAtoms) sent a delayed-response apology to Carrick — check if his original ask (new sites quote/timeline) still needs answering.
+
+---
+
+## Re-check — 2026-08-10 09:12 (+07:00)
+
+Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed internal failures silently, corrected stale data, updated Trello. No messages sent (`--send-reminder` not passed).
+
+### ✅ Resolved this recheck
+
+1. **Workstream SSO restored** — `workstream-login.js` succeeded first attempt (08:51, config token refreshed). Fresh W40 (08-03→08-09) actuals now available for Fountain Part 2/3, replacing the morning "unreachable" state (Alert #7 cleared).
+2. **Philip (MS Teams) RESOLVED** — used documented body-dump fallback (`tmp/msteams-philip-dump.js` reusing `tmp/msteams-will-profile`). Full `document.body.innerText` dump captured **55 real messages** with the correct external contact (Philip Briggs, pbriggs@sixstarrentals.com.au). Last real message **Wed Jul 1 5:33 PM** (Will Nguyen referral ask). **No August activity, no unresolved customer request** → Alert #8 cleared, **Trello item marked complete**.
+3. **Fountain Monday plan** — no new plan posted in Fountain Matrix room (`!EWnVDAxbTGsBxPkaaI`) as of 09:12 (0 messages since 08-09). Delivery Department message (Fri 21:23, namtv) lists Web dev plan (TienND/Leo, LamLQ/Ons, NghiepNQ/Kunal) but doesn't map cleanly to the Fountain Workstream team — using last verified plan (ThinhT 20h | DatNT 32h | ViTHT 40h | VuTQ 8h → QC 25h) for Part 1, actuals refreshed from WS below.
+
+### 🔴 New/confirmed alerts
+
+4. **NEW — Fountain Trello:** kunalsheth commented **08-10 08:14 +07** on "Account-scoped products: pinned Ready-to-Ship gifts + private Build-a-Box items" (trello.com/c/IiBUGzVE, in To-Do): *"We discussed this in the past. Need to upload gift boxes and product catalog items that are online visible to users assigned to it."* — unanswered, now the 3rd open customer question alongside Email deliverability (#1) and **Fountain Trello stays incomplete**.
+5. **CORRECTED — Alert #2 was stale:** "Infinity - Item Extras" (B7uPm1Pq) is actually **Done (In Live)** since 08-07 ("@kunalsheth @tmmckay Pushed to LIVE" 14:03 +07). The claimed "08-09 17:14" comment **does not exist** on this board — no board activity on 08-09 at all. Replaced by #4 above.
+6. **NEW — Workstream needsReview: Arthur (crystal_lang)** — PhucVT **30.5h**, 6 entries pending review (08-03 4:30, 08-04 8:00, 08-05 7:00, 08-06 5:00, 08-07 3:30+2:30), reviewer **TienND**. Charged == logged (30.5/30.5). **ALERT** (reviewer hasn't actioned).
+7. **NEW — Workstream needsReview: OhCleo** — HungPN **7h logged / 5h charged**, 2 entries pending review (08-04 2:00, 08-05 3:00 "Check mobile app & web"), reviewers **DuongDN/MinhTV**. **ALERT** (logged > charged — entries need reviewer action).
+8. **Fountain W40 actuals (fresh, from WS):** ThinhT 20h, PhatDLT 12.5h, HungPN 16h, ViTHT 40h, DatNT 32h (charged 29), LamLQ 8h, VuTQ 8h. Reviewers VuTQ/DuongDN, **0 needsReview** — no over-estimate spike → Plan vs Actual Part 3 recomputable. Fountain excluded from needsReview alerts per user instruction (memory `feedback_workstream_report_needs_dev_reviewer_hours_and_status`).
+
+### ⚠️ Remaining / blocked
+
+9. **Upwork re-auth failed (not an alert):** `upwork-login.js --login --account=carrick` opened a visible browser but hit the manual CAPTCHA/2FA wall and hung (4 screenshots confirmed static login page). Process killed. Per policy session failure ≠ alert — Rory/Aysar/Bailey Trello items stay complete. **Manual re-auth still needed** (human for CAPTCHA/2FA; vinn/david2 never logged in).
+10. **Maddy JIRA weekly cross-check (completed):** 5 Workstream entries by Kai without JIRA ticket keys — all "new landing page" work: 0.5h "Check feedback from Anoma", 10.5h "Implement new landing page", 0.5h "Check requirement and estimates", 0.583h "Update new landing page feedback", 4h "Update feedback new landing wordpress". All ⚠️ no est ⚠️ no JIRA log. Kai needs to include ticket IDs. (Other Maddy entries carry JIRA keys — no over-budget.) Full detail: `/tmp/maddy-jira-0807.md`.
+
+### Trello — Re-check
+
+- **Philip → marked complete** (resolved via body-dump, no unresolved customer request).
+- **Fountain → stays ⚠️ incomplete** (2 unanswered customer questions now: Email deliverability ECLxfKfn since 08-07 02:14 +07, + NEW Account-scoped products IiBUGzVE today 08:14 +07).
+
+**Check Progress now 21/22** (only Fountain open).
