@@ -289,6 +289,6 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 ### Trello — Re-check
 
 - **Philip → marked complete** (resolved via body-dump, no unresolved customer request).
-- **Fountain → stays ⚠️ incomplete** (2 unanswered customer questions now: Email deliverability ECLxfKfn since 08-07 02:14 +07, + NEW Account-scoped products IiBUGzVE today 08:14 +07).
+- **Fountain → ⚠️ incomplete** (reverted). A concurrent session (09:17 Monday-report) had flipped the Fountain item to complete despite the 2 unanswered customer questions; per `alert_means_no_complete` rule I reverted it to **incomplete**. Still 2 open: Email deliverability ECLxfKfn since 08-07 02:14 +07, + NEW Account-scoped products IiBUGzVE today 08:14 +07.
 
-**Check Progress now 21/22** (only Fountain open).
+**Check Progress: 21/22** — only **Fountain** open. (The other 20 completed items carry only dev/review-process notes — needsReview Pending, JIRA keys missing, chronic perf issues — which per `project_topics_not_alerts` do not block person-status completion; Fountain's unanswered *customer* questions do.)
