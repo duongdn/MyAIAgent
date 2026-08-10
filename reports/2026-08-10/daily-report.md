@@ -19,6 +19,7 @@
 | 7 | Workstream | ~~Session-wide SSO outage this entire run — 5 genuine attempts...~~ **RESOLVED in Re-check** — SSO restored 08:51, fresh W40 actuals + Maddy JIRA cross-check completed |
 | 8 | Philip (MS Teams) | ~~`fetch-msteams-customer-messages.js` blocked by account security-verification challenge...~~ **RESOLVED in Re-check** — body-dump fallback confirmed correct external contact, no August activity, no unresolved customer request → Trello completed |
 | 9 | Upwork (Rory/Aysar/Bailey) | ~~session unavailable, manual re-auth needed~~ **RESOLVED in Re-check** — root-cause fixed (`get-carrick-upwork-cookies.py` venv-lz4 breakage); real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. ⚠️ Aysar 1 invalid memo (see Upwork section) |
+| 10 | AirAgri Discord (James Diamond) | **NEW 14:22** — bellatric02 (AirAgri customer) asked Vinn 11:39 +07 for **contractor system access at KP Workshop** (Select Harvests, several contractors, next few months) — tagged to Vinn, **no reply as of 14:22**. Per universal customer-ask gate → James Diamond reverted to ○ |
 
 **Today (Mon Aug 10):** LongVV off AM (checkup), Kai off AM (approved, no urgent client tasks) — all others present.
 
@@ -249,7 +250,7 @@ Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours log
 
 ## Trello — Check Progress + Check Mail — 08:10 (+07:00)
 
-> ⚠️ **Superseded by Re-check below (17/22).** Morning cron snapshot at 07:32; recheck reverted Maddy, Arthur, OhCleo, MPFC to incomplete under `alert_means_no_complete`.
+> ⚠️ **Superseded by Re-check below (16/22).** Morning cron snapshot at 07:32; recheck reverted Maddy, Arthur, OhCleo, MPFC (09:12) + James Diamond (14:22) to incomplete under `alert_means_no_complete`.
 
 **Check Progress (20/22 complete — morning snapshot, superseded):**
 - ✓ Maddy, John Yi, James Diamond, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena - SamGuard, Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca, Colin, Ohcleo, Arthur - Meta-Stamp, Blair Brown, Elena - WordPress SamGuard
@@ -277,6 +278,7 @@ No reminders sent (`--send-reminder` not passed, cron default). Workstream/Sheet
 - MPFC: **active SQLi WAITFOR DELAY probes on `/search/`** + Apdex 0.55 — production security/perf follow-up.
 - Maddy: **5 Kai entries without JIRA ticket keys** — Kai to include ticket IDs in Workstream task field.
 - Brad Ballantine (LegalAtoms) sent a delayed-response apology to Carrick — check if his original ask (new sites quote/timeline) still needs answering.
+- AirAgri (James Diamond): **bellatric02 asked Vinn for contractor system access** (KP Workshop / Select Harvests, 11:39 +07) — unanswered, blocks James Diamond until Vinn responds.
 
 ---
 
@@ -317,3 +319,40 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 - ⚠️ **MPFC** — live production alerts: active SQLi WAITFOR DELAY probes on `/search/` (4 of 5 slowest transactions), Apdex still 0.55 poor, Rollbar 90%-of-occurrence-limit warning (#5, #6). Per `alert_means_no_complete` + `feedback_mpfc_oauth2_real_unresolved_bug` (don't write off recurring prod bugs as routine) → blocks.
 
 The other 17 completed items have no person-status or production/customer alert per their gate definitions (`reference_trello_gate_mapping`). Upwork (Rory/Aysar/Bailey) items stay complete — monitoring now succeeded with real data (no alert).
+
+---
+
+## Re-check — 2026-08-10 14:22 (+07:00)
+
+Interactive recheck (Piece 11, afternoon pass). Re-verified all live gates for the items left ○ after the 09:12 recheck. **No messages sent** (`--send-reminder` not passed).
+
+### Re-verified live sources
+
+| Item | Gate source | Live status 14:22 | Verdict |
+|------|-------------|--------------------|---------|
+| Maddy | Workstream + JIRA cross-check | JIRA cross-check re-run: **5 Kai entries still without JIRA ticket keys** (all "new landing page" work) — unchanged | ⚠️ alert persists |
+| Fountain | Fountain Trello customer comments | Both unanswered customer threads confirmed: Email deliverability (kunalsheth since 08-06, still in Doing, no reply) + Account-scoped products (kunalsheth 08-10 08:14, team replied with clarifying questions 11:51 — thread open, not resolved) | ⚠️ alert persists |
+| Ohcleo | Workstream needsReview | Re-fetched: **2 HungPN entries still Pending** (08-04 2:00, 08-05 3:00), reviewers DuongDN/MinhTV | ⚠️ alert persists |
+| Arthur (crystal_lang) | Workstream needsReview | Re-fetched: **6 PhucVT entries still Pending** (30.5h, 08-03→08-07), reviewer TienND | ⚠️ alert persists |
+| MPFC | Performance (SQLi + apdex) | Re-fetched: **SQLi WAITFOR DELAY probes STILL active** (multiple /search/ waitfor-delay transactions 10-12.5s, double-encoded `waitfor delay` payloads), apdex 0.57, WP_Error::get_method() 16x | ⚠️ alert persists |
+
+### 🔴 NEW — AirAgri customer ask (James Diamond gate)
+
+- **bellatric02 (AirAgri customer/PM) messaged Vinn 11:39 +07 today** (Discord #airagri_webapp): *"I've received a request from Brett regarding several contractors who are commencing at the KP Workshop. They'll be working with Select Harvests for the next few months and require system access similar to a Select Harvests employee."* — **tagged to Vinn (`<@1106035020856037537>`), no reply visible as of 14:22.**
+- Per `feedback_customer_direct_ask_universal_gate` (live unanswered customer ask → warning, do NOT complete the checklist item) → **James Diamond reverted to ○ incomplete** on Trello.
+- Jeff Trinh also posted today (Contractor App still pending review; continuing Hazard Zone feature) — Vinn's own daily report not yet due for today (posts in evening per `feedback_vinn_daily_report_format`), so the block is the customer ask, not a missing report.
+
+### Trello — Re-check (afternoon)
+
+- **James Diamond → ⚠️ reverted to incomplete** (unanswered customer ask from bellatric02).
+- Maddy, Fountain, Ohcleo, Arthur, MPFC → ⚠️ remain incomplete (all alerts re-confirmed live).
+
+**Check Progress: 16/22** — 6 items ○, all carrying live real alerts:
+- ⚠️ Maddy — 5 Kai Workstream entries without JIRA ticket keys
+- ⚠️ James Diamond — unanswered AirAgri customer ask (contractor system access, bellatric02 11:39)
+- ⚠️ Fountain — 2 unanswered customer questions (Email deliverability + Account-scoped products)
+- ⚠️ Ohcleo — 2 Workstream needsReview Pending (HungPN)
+- ⚠️ Arthur — 6 Workstream needsReview Pending (PhucVT → TienND)
+- ⚠️ MPFC — active SQLi probes + apdex 0.57 + Rollbar 90% limit
+
+Other 16 items stay complete (no new person-status or production/customer alert).
