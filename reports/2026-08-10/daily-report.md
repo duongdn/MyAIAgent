@@ -237,6 +237,14 @@ Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours log
 
 **⚠️ Memo validation (2026-08-09):** Rory 0 memos (0:00 logged, consistent). Aysar **2 memos: 1 valid, 1 INVALID** — "Check and replied the reviews on the list PRs #603, #56..." fails the memo rule (no action verb — doesn't state what was done). Earlier run under-counted this (showed 1/1); full rerun confirms 1 invalid memo → needs a corrected memo from LeNH. Not a Trello block (Upwork gate is Slack-only per gate mapping), but flagged for LeNH.
 
+**📥 Inbox scan (all carrick conversations, 08-10):**
+- **Brad Ballantine (Auction Warehouse)** — active. Estimate sent 08-07 for Salvage Solutions (13–15h); **2 NEW asks 08-09**: (1) replace homepage text per Word doc, (2) incorporate photos. We replied "Let me check and get back to you" (08-10 02:12Z) + offered Slack. **⏳ Pending: confirm homepage-text swap + photo incorporation done and reply to Brad.** (Not a tracked workroom — no contract yet. See `project_brad_ballantine_new_sites` memory.)
+- **Neural Contract** — bug "Add to Report" (08-05, review type 'Other') → reproduced → **root-caused + fixed 08-06** (staging-tested); client confirmed "thanks, i'll review" + "no, that is fine" (08-06). ✅ No open ask.
+- **Oren Yerushalmi (Ortipcon)** — awaiting his update on next steps since our follow-up 08-03. ⏳ Client-side.
+- **Rory** — paused contract (07-31), no activity. No ask.
+- **Mostafa (Vueschool)** — last 03-07, stale. No ask.
+- **Acredia / Cityscape / Andrew Taraba / Adam Roth / Catherine / Alexander / Ralph / others** — stale/closed (2/2026 or earlier). No open asks.
+
 ---
 
 ## Trello — Check Progress + Check Mail — 08:10 (+07:00)
@@ -294,6 +302,7 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 
 9. **Upwork → RESOLVED + root cause fixed.** The Puppeteer `upwork-login.js --login` path is CAPTCHA-walled (not viable). Root cause of the "session expired" pattern was NOT auth — it was `get-carrick-upwork-cookies.py` forcing the broken skill venv's packages (3.12 binary + 3.13 packages → `lz4._version` ImportError) into the interpreter, so extraction failed once before the system-python fallback. **Fixed the script** to prefer the working system browser_cookie3 and only use the venv as last resort (verified: 69 cookies, exit 0, clean first attempt). Real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. ~~Bailey (vinn/david2) still have no saved session — first-time login needs a human, out of automated scope~~ **FALSE ALARM, removed** — user confirmed 2026-08-10 those 2 Upwork accounts no longer exist; removed from config, scripts, and memory (no more "no saved session" flag).
 10. **Maddy JIRA weekly cross-check (completed):** 5 Workstream entries by Kai without JIRA ticket keys — all "new landing page" work: 0.5h "Check feedback from Anoma", 10.5h "Implement new landing page", 0.5h "Check requirement and estimates", 0.583h "Update new landing page feedback", 4h "Update feedback new landing wordpress". All ⚠️ no est ⚠️ no JIRA log. Kai needs to include ticket IDs. (Other Maddy entries carry JIRA keys — no over-budget.) Full detail: `/tmp/maddy-jira-0807.md`.
+11. **Brad Ballantine (Upwork inbox, not a tracked workroom):** 2 customer asks 08-09 — homepage text swap (Word doc) + photo incorporation. We replied "let me check and get back to you" 08-10 02:12Z but haven't confirmed done yet. **Needs the actual work completed + a reply.** See Upwork section.
 
 ### Trello — Re-check
 

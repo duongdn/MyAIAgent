@@ -104,7 +104,7 @@
 - [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix covers Rory/Aysar too
 - [reference_upwork_inbox_generic_room_script](daily-report/upwork/reference_upwork_inbox_generic_room_script.md) — read ANY inbox thread: `upwork-room-messages.js`, inbox=/ab/messages/, storyId not id
 - [reference_upwork_memo_validation](daily-report/upwork/reference_upwork_memo_validation.md) — Piece 15: Hourly Payment Protection memo rubric + `upwork-memo-check.js`; invalid memo = ⚠️
-- [project_brad_ballantine_new_sites](daily-report/upwork/project_brad_ballantine_new_sites.md) — 🟡 2 new sites, quote/timeline unanswered since 07-27
+- [project_brad_ballantine_new_sites](daily-report/upwork/project_brad_ballantine_new_sites.md) — 🟡 estimate sent 08-07 (13–15h); 08-09 homepage-text + photos asks in progress (inbox scan 08-10)
 - [reference_auctionwarehouse_server_and_stack](daily-report/upwork/reference_auctionwarehouse_server_and_stack.md) — 🔴 Laravel 5.8 + open /register = anyone is admin, past webshells
 - [feedback_venv_python_abi_mismatch_broken_browser_cookie3](daily-report/feedback_venv_python_abi_mismatch_broken_browser_cookie3.md) — 🔴 Upwork fails in run but works manually = venv ABI mismatch, not auth; add system-python fallback
 - [feedback_bailey_vinn_david2_accounts_removed](daily-report/upwork/feedback_bailey_vinn_david2_accounts_removed.md) — 🔴 Bailey Upwork accounts vinn/david2 gone (2026-08-10); never report "no saved session"; Bailey tracked via sheet+TuanNT only
