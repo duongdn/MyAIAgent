@@ -186,12 +186,6 @@ async function main() {
         ['Rory', 'https://www.upwork.com/nx/wm/workroom/41069448/messages'],
         ['Aysar', 'https://www.upwork.com/nx/wm/workroom/35642393/messages'],
       ],
-      vinn: [
-        ['Bailey-VietPH', 'https://www.upwork.com/nx/wm/workroom/42545630/messages'],
-      ],
-      david2: [
-        ['Bailey-DuongDN', 'https://www.upwork.com/nx/wm/workroom/43093775/messages'],
-      ],
     };
     const urls = workroomUrls[account.name] || [['Unknown', 'https://www.upwork.com/nx/wm/workroom/38901192/messages']];
     for (const [wrName, wrUrl] of urls) {

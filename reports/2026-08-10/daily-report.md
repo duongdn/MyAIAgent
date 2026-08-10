@@ -233,7 +233,7 @@ Hours via `upwork-weekly-hours.js` (cookie extraction from carrick's Chrome Prof
 | Neural Contract (38901192) | — | 0:00 | 0:00 | 118:10 |
 | Aysar (35642393) | LeNH | 1:00 | 14:00 | — |
 
-Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours logged Mon, normal for week-start. Bailey workrooms (vinn/david2) have no saved session — those two rooms' memo validation not applicable this run.
+Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours logged Mon, normal for week-start. ~~Bailey workrooms (vinn/david2) have no saved session — those two rooms' memo validation not applicable this run~~ **FALSE ALARM, removed** — vinn/david2 Upwork accounts + Bailey-VietPH/Bailey-DuongDN workrooms no longer exist (user confirmed 2026-08-10); removed from config, scripts, and memory.
 
 **⚠️ Memo validation (2026-08-09):** Rory 0 memos (0:00 logged, consistent). Aysar **2 memos: 1 valid, 1 INVALID** — "Check and replied the reviews on the list PRs #603, #56..." fails the memo rule (no action verb — doesn't state what was done). Earlier run under-counted this (showed 1/1); full rerun confirms 1 invalid memo → needs a corrected memo from LeNH. Not a Trello block (Upwork gate is Slack-only per gate mapping), but flagged for LeNH.
 
@@ -262,7 +262,7 @@ No reminders sent (`--send-reminder` not passed, cron default). Workstream/Sheet
 
 - ~~Workstream SSO down for the entire run~~ **RESOLVED in Re-check** (SSO restored 08:51, fresh W40 actuals + Maddy JIRA cross-check completed).
 - ~~Philip MS Teams challenge~~ **RESOLVED in Re-check** (body-dump confirmed no unresolved customer request; Trello completed).
-- ~~Upwork: session needs manual re-login~~ **RESOLVED in Re-check** — cookie-extraction fallback recovered real data (see Upwork section). Bailey workrooms (vinn/david2) have no saved session — memo validation for those two rooms not applicable this run.
+- ~~Upwork: session needs manual re-login~~ **RESOLVED in Re-check** — cookie-extraction fallback recovered real data (see Upwork section). ~~Bailey workrooms (vinn/david2) have no saved session~~ **FALSE ALARM, removed** — those 2 accounts no longer exist (user confirmed), removed from config.
 - Fountain: **2 unanswered customer questions** — Email deliverability (kunalsheth, since 08-07 02:14 +07, 4 days old) + NEW Account-scoped products gift-box upload (08-10 08:14 +07). ~~Item Extras toggle~~ card is Done (In Live).
 - Arthur (crystal_lang): **6 Workstream entries Pending review** (PhucVT 30.5h) — reviewer TienND needs to action.
 - OhCleo: **2 Workstream entries Pending review** (HungPN 7h/5h) — reviewers DuongDN/MinhTV need to action.
@@ -292,7 +292,7 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 
 ### ⚠️ Remaining / blocked
 
-9. **Upwork → RESOLVED + root cause fixed.** The Puppeteer `upwork-login.js --login` path is CAPTCHA-walled (not viable). Root cause of the "session expired" pattern was NOT auth — it was `get-carrick-upwork-cookies.py` forcing the broken skill venv's packages (3.12 binary + 3.13 packages → `lz4._version` ImportError) into the interpreter, so extraction failed once before the system-python fallback. **Fixed the script** to prefer the working system browser_cookie3 and only use the venv as last resort (verified: 69 cookies, exit 0, clean first attempt). Real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. Bailey (vinn/david2) still have no saved session — first-time login needs a human, out of automated scope.
+9. **Upwork → RESOLVED + root cause fixed.** The Puppeteer `upwork-login.js --login` path is CAPTCHA-walled (not viable). Root cause of the "session expired" pattern was NOT auth — it was `get-carrick-upwork-cookies.py` forcing the broken skill venv's packages (3.12 binary + 3.13 packages → `lz4._version` ImportError) into the interpreter, so extraction failed once before the system-python fallback. **Fixed the script** to prefer the working system browser_cookie3 and only use the venv as last resort (verified: 69 cookies, exit 0, clean first attempt). Real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. ~~Bailey (vinn/david2) still have no saved session — first-time login needs a human, out of automated scope~~ **FALSE ALARM, removed** — user confirmed 2026-08-10 those 2 Upwork accounts no longer exist; removed from config, scripts, and memory (no more "no saved session" flag).
 10. **Maddy JIRA weekly cross-check (completed):** 5 Workstream entries by Kai without JIRA ticket keys — all "new landing page" work: 0.5h "Check feedback from Anoma", 10.5h "Implement new landing page", 0.5h "Check requirement and estimates", 0.583h "Update new landing page feedback", 4h "Update feedback new landing wordpress". All ⚠️ no est ⚠️ no JIRA log. Kai needs to include ticket IDs. (Other Maddy entries carry JIRA keys — no over-budget.) Full detail: `/tmp/maddy-jira-0807.md`.
 
 ### Trello — Re-check

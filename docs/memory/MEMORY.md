@@ -107,6 +107,7 @@
 - [project_brad_ballantine_new_sites](daily-report/upwork/project_brad_ballantine_new_sites.md) — 🟡 2 new sites, quote/timeline unanswered since 07-27
 - [reference_auctionwarehouse_server_and_stack](daily-report/upwork/reference_auctionwarehouse_server_and_stack.md) — 🔴 Laravel 5.8 + open /register = anyone is admin, past webshells
 - [feedback_venv_python_abi_mismatch_broken_browser_cookie3](daily-report/feedback_venv_python_abi_mismatch_broken_browser_cookie3.md) — 🔴 Upwork fails in run but works manually = venv ABI mismatch, not auth; add system-python fallback
+- [feedback_bailey_vinn_david2_accounts_removed](daily-report/upwork/feedback_bailey_vinn_david2_accounts_removed.md) — 🔴 Bailey Upwork accounts vinn/david2 gone (2026-08-10); never report "no saved session"; Bailey tracked via sheet+TuanNT only
 
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES

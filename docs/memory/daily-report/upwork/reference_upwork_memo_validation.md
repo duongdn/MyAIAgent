@@ -36,7 +36,7 @@ node scripts/upwork-memo-rules.js "memo text"   # classify a single memo
 ```
 
 - `upwork-memo-check.js` opens each hourly workroom timesheet for the day, intercepts GraphQL work-diary memos (DOM fallback), classifies each via `upwork-memo-rules.js`.
-- Auth: live-cookie injection for carrick (Rory/Aysar); persistent profile for vinn/david2 (Bailey). venv python3's `browser_cookie3` can be broken (`lz4._version`) — script falls back to system python3.
+- Auth: live-cookie injection for carrick (Rory/Aysar). venv python3's `browser_cookie3` can be broken (`lz4._version`) — script falls back to system python3. (Bailey vinn/david2 accounts removed 2026-08-10 — no longer checked.)
 - **NEVER** Puppeteer credential login first (Upwork fraud-engine soft-reject).
 
 ## Workrooms checked (hourly = need memos)
@@ -45,8 +45,8 @@ node scripts/upwork-memo-rules.js "memo text"   # classify a single memo
 |----------|-----|-----------|
 | Rory | LeNH | ✅ |
 | Aysar | LeNH/KhanhHH | ✅ |
-| Bailey-VietPH | (TuanNT covers) | ✅ |
-| Bailey-DuongDN | DuongDN | ✅ |
+| ~~Bailey-VietPH~~ | — | **REMOVED 2026-08-10** (vinn account gone) |
+| ~~Bailey-DuongDN~~ | — | **REMOVED 2026-08-10** (david2 account gone) |
 | Neural Contract | external | ⬜ messages-only, no memos |
 
 ## Trello gate
@@ -58,4 +58,4 @@ node scripts/upwork-memo-rules.js "memo text"   # classify a single memo
 ## First live result (2026-08-06, checking 08-05)
 
 - Aysar: 3 memos — **1 INVALID** (`"Free/Paid Game Mode Toggle #673"` — feature-only, no action), 2 valid.
-- Rory: 0 memos (no segments / 0h that day), Bailey: not reached (no saved profile for vinn/david2 in this session).
+- Rory: 0 memos (no segments / 0h that day). (Bailey no longer checked — vinn/david2 accounts removed 2026-08-10.)

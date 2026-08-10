@@ -10,9 +10,8 @@
  * via scripts/upwork-memo-rules.js.
  *
  * Auth: mirrors upwork-weekly-hours.js — live-cookie injection for carrick (Rory/Aysar/
- * Neural), persistent Puppeteer profile for vinn/david2 (Bailey DEV1/DEV3). NEVER
- * attempt the Puppeteer credential-login flow first — Upwork's fraud engine soft-rejects
- * it (see docs/memory/daily-report/upwork/feedback_neural_consolidated.md).
+ * Neural). NEVER attempt the Puppeteer credential-login flow first — Upwork's fraud
+ * engine soft-rejects it (see docs/memory/daily-report/upwork/feedback_neural_consolidated.md).
  *
  * Usage:
  *   node scripts/upwork-memo-check.js [--date=YYYY-MM-DD] [--workroom=NAME]

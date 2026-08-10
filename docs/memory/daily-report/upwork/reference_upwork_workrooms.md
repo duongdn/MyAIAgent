@@ -21,12 +21,12 @@ metadata:
 | Rory | Rory Hackett | 41069448 | LeNH | — |
 | Neural Contract | Neural Contract | 38901192 | external | Messages only, no task log. **Auth fixed 2026-07-21** — uses `scripts/upwork-neural-check.js` (real-session cookie injection), NOT `upwork-login.js`. See [[feedback_neural_consolidated]]. |
 | Aysar | Aysar K | 35642393 | LeNH (tracker) / KhanhHH (actual work) | Active. Sub-contract pattern — KhanhHH does the work, LeNH's Upwork tracker bills it. See `feedback_khanhhh_aysar_consolidated.md`. |
-| Bailey DEV1 | BAILEY JOEY | 42545630 | ~~VietPH~~ — resigned 2026-06-30, TuanNT covers Bailey generally now (see [[project_php_team]]); this specific workroom's reassignment not re-verified live | Account: vinn |
-| Bailey DEV3 | BAILEY JOEY | 43093775 | DuongDN | Account: david2 |
+| ~~Bailey DEV1~~ | ~~BAILEY JOEY~~ | ~~42545630~~ | **REMOVED 2026-08-10** — vinn Upwork account no longer exists (user confirmed); Bailey workrooms no longer monitored on Upwork. Bailey-as-project still tracked via Paturevision Google Sheet + TuanNT task log (see `feedback_bailey_paturevision_billing`). | ~~Account: vinn~~ |
+| ~~Bailey DEV3~~ | ~~BAILEY JOEY~~ | ~~43093775~~ | **REMOVED 2026-08-10** — david2 Upwork account no longer exists (user confirmed). | ~~Account: david2~~ |
 
 ## Scripts
-- `scripts/upwork-login.js --login` — First-time Puppeteer login (visible browser). Since 2026-07-22, needed ONLY for Bailey DEV1/DEV3 (vinn/david2 accounts) — carrick (Rory/Aysar/Neural) never needs this anymore, all live-cookie-injected.
-- `scripts/upwork-weekly-hours.js` — Fetch weekly hours from Rory/Aysar/Bailey workrooms (not Neural — that's messages-only, see `upwork-neural-check.js`). For the `carrick` account (Rory/Aysar) it now injects live cookies first (2026-07-22 fix, see Account section above); vinn/david2 (Bailey) still use the old persistent-profile Puppeteer session.
+- `scripts/upwork-login.js --login` — First-time Puppeteer login (visible browser). carrick (Rory/Aysar/Neural) never needs this anymore — all live-cookie-injected. (Bailey vinn/david2 accounts removed 2026-08-10.)
+- `scripts/upwork-weekly-hours.js` — Fetch weekly hours from Rory/Aysar workrooms (not Neural — that's messages-only, see `upwork-neural-check.js`). For the `carrick` account (Rory/Aysar) it now injects live cookies first (2026-07-22 fix, see Account section above).
 - `scripts/upwork-neural-check.js` — Neural Contract messages, via real-session cookie injection (see [[feedback_neural_consolidated]])
 - `scripts/get-carrick-upwork-cookies.py` — extracts fresh Upwork cookies from carrick's real Chrome Profile 1 (used by both `upwork-neural-check.js` and, since 2026-07-22, `upwork-weekly-hours.js` for the carrick account)
 

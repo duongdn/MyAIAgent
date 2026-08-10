@@ -574,7 +574,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `andrew` | Work | Andrew Taraba | `discord bizurk` |
 | `elena` | Work | Elena - SamGuard | `slack samguard` + `elena` |
 | `mpfc` | Work | MPFC | `slack mpfc` |
-| `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source). Upwork memo validity (Piece 15) reported for Bailey DEV1/DEV3 workrooms. |
+| `bailey` | Work | Bailey | `slack ggs` + `sheets tuannt` (TuanNT 0h-across-5-sheets also gates this; VietPH resigned 2026-06-30, no longer a source). Bailey Upwork workrooms (DEV1/DEV3, accounts vinn/david2) REMOVED 2026-08-10 — no longer memo-checked. |
 | `fountain` | Work | Fountain | `fountain` (full 3-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
@@ -1130,9 +1130,9 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 - Default date = yesterday. In daily report, pass the previous workday (the day being reported).
 - Scrapes per-segment memos from each workroom's timesheet (GraphQL work-diary intercept + DOM fallback), classifies each via `scripts/upwork-memo-rules.js`.
 - **Rubric:** valid = action verb + specific object; too vague = feature-only label ("Booking Flow – BXR Member Classes"), single word, placeholder. See `upwork-memo-rules.js`.
-- Auth: live-cookie injection for `carrick` (Rory/Aysar); persistent profile for `vinn`/`david2` (Bailey). **NEVER** attempt Puppeteer credential login first (fraud-engine soft-reject — see Key Rules).
+- Auth: live-cookie injection for `carrick` (Rory/Aysar). **NEVER** attempt Puppeteer credential login first (fraud-engine soft-reject — see Key Rules). (Bailey `vinn`/`david2` accounts removed 2026-08-10.)
 
-**Workrooms checked (hourly = `/timesheet`):** Rory (LeNH), Aysar (LeNH/KhanhHH), Bailey-VietPH, Bailey-DuongDN. Neural (messages-only) is excluded — no memos.
+**Workrooms checked (hourly = `/timesheet`):** Rory (LeNH), Aysar (LeNH/KhanhHH). Neural (messages-only) is excluded — no memos.
 
 **Output (JSON per workroom):** `segments: [{memo, duration, valid, issues}]` + `summary {total_memos, valid, invalid}`.
 
