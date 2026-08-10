@@ -227,6 +227,22 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,767,105,197 gross / 7,667,605,197 net (+72,900,001 / 0.96% above authoritative) — the SAME gap to the dong as the last several snapshots, confirming standing cost-basis-vs-market difference on the fund wallets, not a new data bug. Net worth DOWN 20,292,971 vs 28/07 (7,614,998,167 -> 7,594,705,196, -0.27%). Deltas reconcile to within 1 dong: gold -7,500,000 (price down 14,300,000 -> 14,150,000/unit, same 50 units), investment +15,900,000 (VCBS +12,400,000 + FPTS +3,500,000, mostly uncategorized transfers-in from vcb plus a 3,400,000 Cho vay on FPTS dated 07-28), savings 0 (3 books unchanged, ghost nam a 6m still excluded), liquid -18,192,970 (vcb -16,528,000 = Sua -628,000 + net transfer-out -15,900,000; Vi -1,680,000 Linh tinh; Paypal +15,030 FX 26,520->26,525), debt -10,500,000 (new VCB Visa charge 'Linh tinh' 10,500,000 posted 07-29 09:23). Sum = -20,292,970, matches NW delta to 1 dong. VCB Visa now 99,500,000, up from 89,000,000 flat for 18 days -- July card charges now 119,500,000 = 2.73x the Jan-Jun average (43,836,256), escalating from 2.49x yesterday; flagged as new/worsening alert, recommend payoff given liquid cash covers it 3.0x. Real estate unchanged (Nha 2.5B + long an res 1.02B = 3,520,000,000), still 46.35% of net worth, above 20-30% benchmark, structural (primary residence). Investment wallets: VCBS cost basis 400,000 + currentAmount 612,455,620 = 612,855,620 (ledger settled June, market-value carry, fully invested); VCBF 594,063,000 unchanged; FPTS cost basis 353,486,000 + currentAmount 1,815,151 = 355,301,151; Finhay 74,404,069 unchanged; Larion 600,000,000 unchanged. July month-to-date real income/expense (excl. Cho vay/Thu no/Di vay/Tra no, FX-aware): Thu 80,334,287 / Chi 167,602,000 / Net -87,267,713, driven by Hoc phi 69.5M + Bieu tang 43M + Hieu hi 16M + Linh tinh 17.56M one-offs; underlying recurring burn still well under the 70M/month assumption. Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from all totals, still unresolved by MISA."
+    },
+    {
+      "date": "2026-08-10",
+      "label": "10/08",
+      "net_worth": 7661943974,
+      "gross_assets": 7734843974,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 720000000,
+        "investment": 2262623840,
+        "savings": 1001918000,
+        "liquid": 230302134
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,734,843,974 gross / 7,734,843,974 net (+72,900,000 / 0.95% above authoritative) — the SAME gap to the dong as all snapshots since 07-24, confirming standing cost-basis-vs-market difference on the fund wallets, not a data bug. Net worth UP 67,238,778 vs 29/07 (7,594,705,196 -> 7,661,943,974, +0.89%) over 12 days. Deltas reconcile to within 1 dong: gold +12,500,000 (price up 14,150,000 -> 14,400,000/unit, +1.77%, same 50 units), investment +26,000,000 (FPTS: 6x Cho vay VEA 20,630,000 + lãi cp 1,900,000 + currentAmount +5,370,000), savings -5,944,635 (vcb 1 month 505,944,635 matured 09/08, redeployed 500M into 3 new books opened 10/08: vcb 6m CCTG 300M @7.5%, 6m rút gốc 100M @7.0%, 1m 100M @4.75%), liquid -64,816,588 (vcb -74,110,564: Lương +66.9M / chi tiêu -22M / thanh toán visa + sổ mới; Paypal +9,293,960: USD 3,006->3,371 @ FX 26,525->26,410), debt +99,500,000 (VCB Visa PAID OFF entirely, 99,500,000 -> 0). Sum = +67,238,777, matches NW delta to 1 dong. VCB Visa cleared after 18 days unpaid since 07-11 charges; July charges finalized 119.9M = 2.74x Jan-Jun avg (43.8M). No August card charges. August month-to-date (10 days): Thu 80,481,451 / Chi 18,485,000 / Net +61,996,451 — no big one-offs unlike July. All 5 benchmark groups in range (equity 43.22%, BDS dau tu 19.48%, tiet kiem 19.14%, vang 13.75%, tien mat 4.40% — cash slightly under 5% but not structural). Real estate remains 45.94% of net worth (Nha 32.63% + long an res 13.31%), above the 20-30% benchmark, unchanged and structural. Liquid 230.3M is lowest since 07-14 (302.7M) but still 3.3 months coverage + 1.23B with savings. Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from all totals, still unresolved by MISA."
     }
   ]
 }
