@@ -291,4 +291,10 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 - **Philip → marked complete** (resolved via body-dump, no unresolved customer request).
 - **Fountain → ⚠️ incomplete** (reverted). A concurrent session (09:17 Monday-report) had flipped the Fountain item to complete despite the 2 unanswered customer questions; per `alert_means_no_complete` rule I reverted it to **incomplete**. Still 2 open: Email deliverability ECLxfKfn since 08-07 02:14 +07, + NEW Account-scoped products IiBUGzVE today 08:14 +07.
 
-**Check Progress: 21/22** — only **Fountain** open. (The other 20 completed items carry only dev/review-process notes — needsReview Pending, JIRA keys missing, chronic perf issues — which per `project_topics_not_alerts` do not block person-status completion; Fountain's unanswered *customer* questions do.)
+**Check Progress: 18/22** — 4 items left incomplete because they carry REAL alerts:
+- ⚠️ **Fountain** — 2 unanswered *customer* questions (Email deliverability ECLxfKfn since 08-07 02:14 +07; Account-scoped products IiBUGzVE today 08:14 +07) — customer issue, blocks.
+- ⚠️ **Arthur (crystal_lang)** — Workstream needsReview: PhucVT 30.5h, **6 entries Pending** → reviewer TienND. Per `workstream_needs_review_check`, non-empty needsReview = alert → blocks.
+- ⚠️ **OhCleo** — Workstream needsReview: HungPN 7h logged/5h charged, **2 entries Pending** → reviewers DuongDN/MinhTV. Same rule → blocks.
+- ⚠️ **MPFC** — live production alerts: active SQLi WAITFOR DELAY probes on `/search/` (4 of 5 slowest transactions), Apdex still 0.55 poor, Rollbar 90%-of-occurrence-limit warning (#5, #6). Per `alert_means_no_complete` + `feedback_mpfc_oauth2_real_unresolved_bug` (don't write off recurring prod bugs as routine) → blocks.
+
+The other 18 completed items have no person-status or production/customer alert per their gate definitions (`reference_trello_gate_mapping`).
