@@ -10,9 +10,16 @@ Outputs JSON array to /tmp/carrick-upwork-cookies.json.
 import sys, json, urllib.parse
 from pathlib import Path
 
-venv = Path(__file__).parent.parent / '.claude' / 'skills' / '.venv' / 'lib'
-for p in venv.glob('python*/site-packages'):
-    sys.path.insert(0, str(p))
+# Prefer the interpreter's OWN site-packages (system python3 has working
+# lz4/browser_cookie3). Only inject the skill venv's packages as a LAST resort
+# — the venv is structurally broken (3.12 binary + 3.13 packages), so injecting
+# it first breaks system python too (ModuleNotFoundError: lz4._version).
+try:
+    import browser_cookie3  # noqa: F401 — confirms current interpreter is usable
+except ImportError:
+    venv = Path(__file__).parent.parent / '.claude' / 'skills' / '.venv' / 'lib'
+    for p in venv.glob('python*/site-packages'):
+        sys.path.insert(0, str(p))
 
 import browser_cookie3
 

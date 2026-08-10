@@ -18,7 +18,7 @@
 | 6 | Performance — MPFC | Apdex still poor **0.55** — WP_Error::get_method() 4561x, "continue" targeting switch E_WARNING 524x (both chronic/known); SQLi WAITFOR DELAY probes active again on `/search/` (4 of 5 slowest transactions, 30-48s each); sitemap/author-sitemap still 48s+ |
 | 7 | Workstream | ~~Session-wide SSO outage this entire run — 5 genuine attempts...~~ **RESOLVED in Re-check** — SSO restored 08:51, fresh W40 actuals + Maddy JIRA cross-check completed |
 | 8 | Philip (MS Teams) | ~~`fetch-msteams-customer-messages.js` blocked by account security-verification challenge...~~ **RESOLVED in Re-check** — body-dump fallback confirmed correct external contact, no August activity, no unresolved customer request → Trello completed |
-| 9 | Upwork (Rory/Aysar/Bailey) | ~~session unavailable, manual re-auth needed~~ **RESOLVED in Re-check** — cookie-extraction fallback recovered real data: Rory 0:00, Aysar 0:40, Neural 0:00 this week; Aysar memo 1/1 valid. See Upwork section |
+| 9 | Upwork (Rory/Aysar/Bailey) | ~~session unavailable, manual re-auth needed~~ **RESOLVED in Re-check** — root-cause fixed (`get-carrick-upwork-cookies.py` venv-lz4 breakage); real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. ⚠️ Aysar 1 invalid memo (see Upwork section) |
 
 **Today (Mon Aug 10):** LongVV off AM (checkup), Kai off AM (approved, no urgent client tasks) — all others present.
 
@@ -221,19 +221,21 @@ Trello: **Arthur - Meta-Stamp ⚠️ left incomplete** (Workstream needsReview 6
 
 ---
 
-## Upwork — 2026-08-10 09:40 (+07:00)
+## Upwork — 2026-08-10 09:45 (+07:00)
 
-Hours via `upwork-weekly-hours.js` (cookie-extraction fallback from carrick's Chrome Profile 1 — the Puppeteer login path is blocked by Upwork's fraud detection, but profile-cookie extraction works):
+Hours via `upwork-weekly-hours.js` (cookie extraction from carrick's Chrome Profile 1 — the Puppeteer login path is blocked by Upwork's fraud detection, but profile-cookie extraction works).
 
-| Workroom | Dev | This week | Since start |
-|----------|-----|-----------|-------------|
-| Rory (41069448) | LeNH | 0:00 | 696:50 |
-| Neural Contract (38901192) | — | 0:00 | 118:10 |
-| Aysar (35642393) | LeNH | 0:40 | — |
+**Root-cause fix applied this run:** `get-carrick-upwork-cookies.py` was forcing the broken skill venv's packages (3.12 binary + 3.13 packages → `ModuleNotFoundError: lz4._version`) into whatever interpreter ran it, so every run failed once before falling back to system python. Fixed to prefer the interpreter's own (working) browser_cookie3 and only inject the venv as a last resort. Verified: 69 cookies extracted, exit 0, all scripts clean on first attempt.
 
-Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours logged Mon, normal for week-start. Bailey workrooms (vinn/david2) have no saved session — memo validation for those workrooms unavailable (out of scope this run, not an alert).
+| Workroom | Dev | This week | Last week | Since start |
+|----------|-----|-----------|-----------|-------------|
+| Rory (41069448) | LeNH | 0:00 | 0:00 | 696:50 |
+| Neural Contract (38901192) | — | 0:00 | 0:00 | 118:10 |
+| Aysar (35642393) | LeNH | 1:00 | 14:00 | — |
 
-**Memo validation (2026-08-09):** Rory 0 memos (0:00 logged, consistent), Aysar 1/1 valid ("Fix the baamboozle nusdev site is showing up when search in google"). No invalid memos.
+Week starts Mon Aug 10 — Mon-only data so far. Rory/Neural 0:00 = no hours logged Mon, normal for week-start. Bailey workrooms (vinn/david2) have no saved session — those two rooms' memo validation not applicable this run.
+
+**⚠️ Memo validation (2026-08-09):** Rory 0 memos (0:00 logged, consistent). Aysar **2 memos: 1 valid, 1 INVALID** — "Check and replied the reviews on the list PRs #603, #56..." fails the memo rule (no action verb — doesn't state what was done). Earlier run under-counted this (showed 1/1); full rerun confirms 1 invalid memo → needs a corrected memo from LeNH. Not a Trello block (Upwork gate is Slack-only per gate mapping), but flagged for LeNH.
 
 ---
 
@@ -290,7 +292,7 @@ Interactive recheck (Piece 11): re-ran failing sources to fill data gaps, fixed 
 
 ### ⚠️ Remaining / blocked
 
-9. **Upwork → RESOLVED.** The initial attempt used `upwork-login.js --login` (visible browser) which Upwork's fraud-detection blocks with a CAPTCHA wall and hung — that path is not viable. Fixed via the documented alternative: `upwork-weekly-hours.js` falls back to extracting cookies from carrick's Chrome Profile 1, which recovered real data (Rory 0:00, Aysar 0:40, Neural 0:00 this week; Aysar memo 1/1 valid). No banned phrases — the internal session fix is done silently per `never_report_token_expired`. Bailey workrooms (vinn/david2) have no saved session and remain out of scope for memo validation.
+9. **Upwork → RESOLVED + root cause fixed.** The Puppeteer `upwork-login.js --login` path is CAPTCHA-walled (not viable). Root cause of the "session expired" pattern was NOT auth — it was `get-carrick-upwork-cookies.py` forcing the broken skill venv's packages (3.12 binary + 3.13 packages → `lz4._version` ImportError) into the interpreter, so extraction failed once before the system-python fallback. **Fixed the script** to prefer the working system browser_cookie3 and only use the venv as last resort (verified: 69 cookies, exit 0, clean first attempt). Real data: Rory 0:00, Aysar 1:00, Neural 0:00 this week. Bailey (vinn/david2) still have no saved session — first-time login needs a human, out of automated scope.
 10. **Maddy JIRA weekly cross-check (completed):** 5 Workstream entries by Kai without JIRA ticket keys — all "new landing page" work: 0.5h "Check feedback from Anoma", 10.5h "Implement new landing page", 0.5h "Check requirement and estimates", 0.583h "Update new landing page feedback", 4h "Update feedback new landing wordpress". All ⚠️ no est ⚠️ no JIRA log. Kai needs to include ticket IDs. (Other Maddy entries carry JIRA keys — no over-budget.) Full detail: `/tmp/maddy-jira-0807.md`.
 
 ### Trello — Re-check
