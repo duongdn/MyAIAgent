@@ -15,7 +15,7 @@
 | 2 | ~~Baamboozle / Aysar (MPDM C07SQ4HAUHZ)~~ | **✅ RESOLVED 09:04** — carrick replied to Ronan 08:41 ("Okay Ronan. I'll check it") and posted the **Monday update 09:03** (Google-index fix Dev done, PR reviews #603/#566/#665/#661/#638, #566 fixes Dev done + Testing). Aysar Trello completed. |
 | 3 | MS Teams (Philip) | Microsoft "unusual activity" security challenge blocks login even after clearing stale profile (per known fix) — genuinely needs interactive 2FA this time. Philip's customer-message status unverified this run. |
 | 4 | Slack Solid Code (Arthur) | Token refresh failed (Google OAuth flow, no token captured) — Arthur's Slack sources (3 channels incl. Art's 1:1 DM) unverified this run. Matrix + GitHub sources for Arthur are clean (see below). |
-| 5 | Upwork (Rory/Aysar/Neural) | carrick's real Chrome Profile 1 session logged out (0 cookies extracted) — live-cookie, stored-session, and headless re-login all failed. Memo validity unverified this run. |
+| 5 | Upwork (Rory/Aysar/Neural) | **CORRECTED 09:xx — session is NOT logged out; access works.** Live Chrome Profile 1 auth verified: `master_refresh_token` expires 08-24, `oauth2_global_js_token` 2027-09, `recognized` 10-26 (sqlite cookie DB). `upwork-room-messages.js --list` + `upwork-neural-check.js` both pulled real messages. Real findings: **Rory Hackett restarted the contract** (msg 08-10 21:22 UTC = 08-11 04:22 +07, 1 unread); Neural quiet since 08-06 (resolved: client said "no, that is fine thanks"); Brad Ballantine replied 08-11 09:33 +07 "thumbnails looks good". Memo-check browser is blocked by Cloudflare challenge (not session expiry) → memo validity for 08-10 not yet readable; 08-10 = Monday workday, memos may not be logged yet. |
 | 6 | MPFC New Relic | Apdex 0.57 (poor, <0.7 threshold) — chronic: `WP_Error::get_method()` 69x, `continue`-targeting-switch E_WARNING 126x, SQLi WAITFOR DELAY probe active on /search/ again (13.3s), sitemap 46s/43s. All previously-seen chronic issues, no new error classes. |
 | 7 | 🟡 Fountain (Matrix plan) | TrinhMTT has not posted the weekly plan in `!EWnVDAxbTGsBxPkaaI` since 08-05 (5 days, past the usual Mon 08:30-09:30 window) — no formal plan for week of 08-10. Room active (GOC/cart bugs), team working. |
 | 8 | 🟡 Task-log pending (Mon 08-10) | **TuanNT = confirmed leave 10-11/08 (về quê)** — per namtv's note 08:59 08-11 in Delivery - Resource Arrangement ("Chờ a Năm update plan, Bên Bailey ko bù"). NOT late logging. John Yi/Bailey/Rebecca gates → **cleared** (Trello completed). **KhanhHH + LeNH** 0h = likely late logging (both active in Matrix 08-11) — Blair Brown (LeNH gate) stays ○ pending. No reminder sent. |
@@ -246,22 +246,26 @@ Trello: Arthur - Meta-Stamp ○ held (Slack Solid Code source still unverified �
 
 ---
 
-## Upwork Memo — 2026-08-10 — 07:xx (+07:00)
+## Upwork Memo — 2026-08-10 — 07:xx (+07:00) *(CORRECTED 09:xx — access verified working)*
+
+**Session status: ✅ AUTHENTICATED, not logged out.** Verified via sqlite cookie DB (`master_refresh_token` → 08-24, `oauth2_global_js_token` → 2027-09-14, `recognized` → 10-26) + live extraction = 61 cookies. The earlier "0 cookies / logged out" was FALSE — cookie extraction succeeded this morning; the failure was the memo-check Puppeteer browser hitting a **Cloudflare challenge**, mislabeled as session expiry.
 
 | Workroom | Status |
 |----------|--------|
-| Rory | Session unavailable — carrick's live Chrome Profile 1 returned 0 Upwork cookies (logged out), stored session + headless re-login also failed. Memo validity unverified. |
-| Aysar | Same — session unavailable. |
-| Neural | Same — session unavailable (also affects `upwork-neural-check.js`, 4/4 attempts failed with 0 cookies extracted). |
+| Rory | ✅ reachable — **Rory restarted the contract** (msg 08-10 21:22 UTC = 08-11 04:22 +07, 1 unread). Memo validity for 08-10 pending (Cloudflare blocks memo-check browser's diary view). |
+| Aysar | reachable via workroom 35642393; memo check returned 0 segments for 08-10 (Monday — memos may not be logged yet; diary view Cloudflare-blocked). |
+| Neural | ✅ **resolved & quiet** — client last msg 08-06 "no, that is fine thanks" / "thanks. i'll review." No unanswered ask since. |
 
-Per session-failure rule: not an alert, but genuinely needs a real (non-Puppeteer) login in carrick's actual Chrome Profile 1 before the next run — this is a deeper failure than the usual transient Cloudflare block (0 cookies = actually logged out, not just stale). Neural Trello item still completed per "session failure ≠ alert."
+Also from inbox (carrick account): **Brad Ballantine** replied 08-11 09:33 +07 "Thanks, I saw those thumbnails looks good." (Auctionwarehouse — active); **Oren Yerushalmi (Ortipcon)** — "Hi Oren, do we have an update on the next steps?" (our message, 08-03, may be awaiting reply — informational).
+
+**Action needed:** Rory contract restart (08-11 04:22) is a real client event — worth a human glance at the Upwork workroom to confirm it's expected (new engagement) vs unexpected. Memo validity for 08-10 needs the memo-check browser past Cloudflare (or manual login pass). Neural item already complete — confirmed correct (no unanswered ask).
 
 ---
 
 ## Unresolved questions
 
 1. ~~Workstream SSO failed 6+ attempts this run~~ **RESOLVED 08:55** — interactive re-login succeeded instantly (transient stall / short-lived JWT, consistent with `feedback_workstream_sso_recheck_fixed`). **Note:** cron's repeated "SSO outage" framing was provisional — memory says re-login is the discriminator.
-2. carrick's real Chrome Profile 1 Upwork session appears genuinely logged out (0 cookies) — needs a real interactive login, not another automated retry.
+2. ~~carrick's Upwork session logged out~~ **RESOLVED 09:xx — session is authenticated** (sqlite cookie DB: master_refresh_token → 08-24, oauth2_global_js_token → 2027-09, recognized → 10-26). The recurring "0 cookies / logged out" was a FALSE label — cookie extraction works (61 cookies); the actual blocker is Cloudflare's anti-bot challenge on the memo-check Puppeteer browser, which is a known "Cloudflare ≠ session" situation, not a login expiry. **Rory contract restart 08-11 04:22 +07** is the notable new event — flagged for human review.
 3. TrinhMTT hasn't posted in the Fountain Matrix room since 08-05 (5 days) — worth checking if this is planned leave or something else, since the weekly plan post is otherwise very consistent.
 4. Solid Code Slack (Arthur) token extraction failed via Google OAuth — may need a manual one-time browser login on David's Chrome Profile 15 per the original extraction method.
 5. **KhanhHH / LeNH 0h on 08-10** (2 independent WS dumps + isolated scans agree). Both active in Matrix 08-11 — likely late entry, worth a re-check this afternoon before concluding either way. (TuanNT 0h = confirmed leave, resolved.)
