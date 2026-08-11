@@ -144,6 +144,7 @@
 - [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — 🔴🔴🔴 fix baked into command
 - [feedback_savings_already_matured_check](money-report/feedback_savings_already_matured_check.md), [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md)
 - [feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash](money-report/feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash.md) — 🔴 basis≈0=ledger settled, NOT idle cash
+- [feedback_liquid_must_include_inactive_residual_accounts](money-report/feedback_liquid_must_include_inactive_residual_accounts.md) — 🔴 Momo/nam á/Payoneer (~907K) belong in Liquid despite inActive:true; use 72.9M gap as sanity check
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴
