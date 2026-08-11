@@ -3,6 +3,7 @@
 **Run:** 2026-08-11T07:42:00+07:00 (cron)
 **Window:** 2026-08-10 14:22 +07:00 → now
 **Leave plan (2026-08-10, from Delivery - Resource Arrangement):** LongVV (sáng, tái khám → tính bên Celine), PhongTB (sáng, đau đầu → idle/internal), ThoTNT (bị sốt → TamVT bù bên Zeke), PhucNH (bị bệnh → TienND bù bên MyID). Future: TienND off 08-14 (du lịch, tính bên MyID ko bù), KhanhHH off 08-17, VinhNT off 08-14 (du lịch, Michael Koh dùng PL). All leave notes processed per halt 17:35.
+**Added 08-11 08:59 (namtv, Delivery - Resource Arrangement): TuanNT off 10/08-11/08 (về quê) — Chờ a Năm update plan, Bên Bailey ko bù.**
 
 ---
 
@@ -17,7 +18,7 @@
 | 5 | Upwork (Rory/Aysar/Neural) | carrick's real Chrome Profile 1 session logged out (0 cookies extracted) — live-cookie, stored-session, and headless re-login all failed. Memo validity unverified this run. |
 | 6 | MPFC New Relic | Apdex 0.57 (poor, <0.7 threshold) — chronic: `WP_Error::get_method()` 69x, `continue`-targeting-switch E_WARNING 126x, SQLi WAITFOR DELAY probe active on /search/ again (13.3s), sitemap 46s/43s. All previously-seen chronic issues, no new error classes. |
 | 7 | 🟡 Fountain (Matrix plan) | TrinhMTT has not posted the weekly plan in `!EWnVDAxbTGsBxPkaaI` since 08-05 (5 days, past the usual Mon 08:30-09:30 window) — no formal plan for week of 08-10. Room active (GOC/cart bugs), team working. |
-| 8 | 🟡 Task-log pending (Mon 08-10) | TuanNT, KhanhHH, LeNH all 0h logged across Workstream + Sheets as of 08:55 recheck (2 independent dumps + isolated scans agree). Likely **late logging** (all were consistently logged Mon-Fri prior week) — NOT confirmed shortfall, no reminder sent. Task-log gates held: John Yi/Bailey/Rebecca (TuanNT), Blair Brown (LeNH). (Aysar resolved 09:04 via MPDM update — not task-log-gated; Elliott's hold = its own GreenFort performance note.) |
+| 8 | 🟡 Task-log pending (Mon 08-10) | **TuanNT = confirmed leave 10-11/08 (về quê)** — per namtv's note 08:59 08-11 in Delivery - Resource Arrangement ("Chờ a Năm update plan, Bên Bailey ko bù"). NOT late logging. John Yi/Bailey/Rebecca gates → **cleared** (Trello completed). **KhanhHH + LeNH** 0h = likely late logging (both active in Matrix 08-11) — Blair Brown (LeNH gate) stays ○ pending. No reminder sent. |
 
 **Today (Tue 08-11):** no new leave notes posted yet this morning (checked at 07:42, too early for daily standups in most workspaces).
 
@@ -61,7 +62,7 @@ Trello: DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ complete. Card marked done.
 | SoCal Auto Wraps | 0 | Dropped, not monitored. |
 | Aigile Dev | 1 | Automated Sentry morning check: 0 urgent new, 0 non-urgent new, 6 standing chronic (unchanged) — no new alert. |
 
-Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. Aysar ✓ completed 09:04 (carrick replied to Ronan 08:41 + Monday update 09:03). Maddy ○ held (Workstream Maddy rows pending LongVV batch). John Yi ○ held (TuanNT task-log pending). Elliott ○ held (its own GreenFort performance note; Generator Slack active).
+Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. Aysar ✓ completed 09:04 (carrick replied to Ronan 08:41 + Monday update 09:03). John Yi, Bailey, Rebecca ✓ completed 09:16 (TuanNT confirmed on leave 10-11/08, 0h justified). Maddy ○ held (Workstream Maddy rows pending LongVV batch). Elliott ○ held (its own GreenFort performance note; Generator Slack active).
 
 ---
 
@@ -84,7 +85,7 @@ Workstream re-login succeeded at recheck 08:55 (see Alerts #1 → resolved). Rea
 |-----------|---------------|-------------------|--------|
 | LongVV | **4h** | OhCleo 4h | OK (leave AM for checkup; Maddy logs batch Wed/Thu) |
 | PhucVT | **8h** | Auction Warehouse 2h + Crystal lang 3.5h + OhCleo 2.5h | OK |
-| TuanNT | **0h** | all 5 sheets + WS absent | 🟡 not logged yet (was active prior week; no leave) — pending |
+| TuanNT | **0h** | all 5 sheets + WS absent | ✅ **on leave 10-11/08 (về quê)** per namtv note 08-11 — 0h expected, not a shortfall |
 | KhanhHH | **0h** | all sources absent | 🟡 not logged yet (logged 42.5h prior week) — pending |
 | LeNH | **0h** | all sources absent | 🟡 not logged yet (logged 40h prior week) — pending |
 
@@ -97,7 +98,7 @@ Other Workstream activity 08-10: AnhNH2 4h (James Diamond), NamNN 8h (Generator)
 
 **Maddy JIRA weekly cross-check (08-10):** Live Workstream Maddy query = **0 rows** this week (roster present, no task logs yet — LongVV batches Wed/Thu). JIRA shows 3 LIFM2 tickets **Done 08-10** (LIFM2-451, LIFM2-446, LIFM2-457) + LIFM2-436 est=spent=15h but still To Do + LIFM2-454 Ready to deploy. See dedicated Maddy section.
 
-Trello: Bailey, Rebecca, John Yi, Blair Brown ○ held — gate on TuanNT/LeNH hours not logged yet (not confirmed shortfall). Elliott held separately on its own GreenFort performance note (Generator Slack active, see Slack section).
+Trello: John Yi, Bailey, Rebecca ✓ completed 09:16 (TuanNT confirmed on leave 10-11/08 — 0h justified, gates cleared). Blair Brown ○ held — LeNH active but 0h logged yet (late entry expected). Elliott held separately on its own GreenFort performance note (Generator Slack active, see Slack section).
 
 ---
 
@@ -151,8 +152,9 @@ Trello: Elena - SamGuard, Elena - WordPress SamGuard ✓ complete.
 **Check mail:** DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ complete. Card marked done.
 
 **Check progress:**
-- ✓ complete: James Diamond, Rory, Franc, MPFC, Marcel, Elena - SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Ohcleo, Elena - WordPress SamGuard, **Aysar** (completed 09:04 — carrick replied to Ronan 08:41 + Monday update 09:03)
-- ○ held: John Yi, Bailey, Rebecca, Blair Brown — TuanNT/LeNH hours not logged yet on 08-10 (pending late entry, not confirmed shortfall)
+- ✓ complete: James Diamond, Rory, Franc, MPFC, Marcel, Elena - SamGuard, Raymond, Neural Contract, Andrew Taraba, Colin, Ohcleo, Elena - WordPress SamGuard, **Aysar** (09:04), **John Yi** (09:16), **Bailey** (09:16), **Rebecca** (09:16)
+- ✓ John Yi/Bailey/Rebecca completed after confirming **TuanNT on approved leave 10-11/08 (về quê)** per namtv's note in Delivery - Resource Arrangement (08:59) — 0h justified, not late logging. Slacks clean (Amazing Meds 0, William Bills 0, GGS only routine amy/joey messages).
+- ○ held: Blair Brown — LeNH active in Matrix 08-11 (Swift Studio OAuth, NUS room) but 0h logged yet; late entry expected
 - ○ held: Elliott — its own GreenFort "performance issue (pending)" note (Trello item text); Generator Slack active (Rudi release-tracking ask answered by violet 08-10)
 - ○ held: Maddy (Workstream 0 rows — LongVV batches Wed/Thu; JIRA shows real work)
 - ○ held: Fountain (no weekly plan posted since 08-05; dev actuals pending)
@@ -167,7 +169,8 @@ Trello: Elena - SamGuard, Elena - WordPress SamGuard ✓ complete.
 Re-evaluated after Workstream restored. Real 08-10 hours:
 - **LongVV 4h** (OhCleo) — no reminder
 - **PhucVT 8h** — no reminder
-- **TuanNT / KhanhHH / LeNH 0h** — **not logged yet** (all consistently logged prior week; likely late entry Tuesday). Per `feedback_missing_report_requires_effort_check` + late-logging history, NOT a confirmed 0h → **no reminder sent** (also no `--send-reminder` flag present). Re-verify later today before any action.
+- **TuanNT 0h** — on confirmed leave 10-11/08 (về quê) → 0h expected, no reminder
+- **KhanhHH / LeNH 0h** — **not logged yet** (both active in Matrix 08-11; likely late entry). Per `feedback_missing_report_requires_effort_check` + late-logging history, NOT a confirmed 0h → **no reminder sent** (also no `--send-reminder` flag present). Re-verify later today before any action.
 
 No reminders sent.
 
@@ -261,24 +264,25 @@ Per session-failure rule: not an alert, but genuinely needs a real (non-Puppetee
 2. carrick's real Chrome Profile 1 Upwork session appears genuinely logged out (0 cookies) — needs a real interactive login, not another automated retry.
 3. TrinhMTT hasn't posted in the Fountain Matrix room since 08-05 (5 days) — worth checking if this is planned leave or something else, since the weekly plan post is otherwise very consistent.
 4. Solid Code Slack (Arthur) token extraction failed via Google OAuth — may need a manual one-time browser login on David's Chrome Profile 15 per the original extraction method.
-5. **TuanNT / KhanhHH / LeNH all 0h on 08-10** (2 independent WS dumps + isolated scans agree). All logged consistently prior week — likely late entry, but worth a re-check this afternoon before concluding either way.
+5. **KhanhHH / LeNH 0h on 08-10** (2 independent WS dumps + isolated scans agree). Both active in Matrix 08-11 — likely late entry, worth a re-check this afternoon before concluding either way. (TuanNT 0h = confirmed leave, resolved.)
 
 ---
 
-## Re-check — 08:55→09:04 (+07:00)
+## Re-check — 08:55→09:16 (+07:00)
 
-Workstream SSO restored via interactive re-login (`DISPLAY=:1 node scripts/workstream-login.js`). All previously-"unverified/blocked" sections now have real data. Aysar resolution landed 09:04 (post 08:55 pass) and is folded in.
+Workstream SSO restored via interactive re-login (`DISPLAY=:1 node scripts/workstream-login.js`). All previously-"unverified/blocked" sections now have real data. Aysar resolution landed 09:04; TuanNT leave + John Yi/Bailey/Rebecca completion landed 09:16.
 
 | Item | Result | Details |
 |------|--------|---------|
 | Workstream (Alerts #1) | ✅ resolved | Re-login succeeded; real 08-10 hours retrieved |
-| Sheets / dev hours | ✅ data filled | LongVV 4h, PhucVT 8h, TuanNT/KhanhHH/LeNH 0h (not logged yet) |
+| Sheets / dev hours | ✅ data filled | LongVV 4h, PhucVT 8h, KhanhHH/LeNH 0h (not logged yet); **TuanNT = on leave 10-11/08** |
+| **TuanNT leave (CORRECTION)** | ✅ confirmed | namtv note 08:59 08-11: TuanNT off 10/08-11/08 (về quê), Bailey ko bù. Initial "not logged yet" framing was WRONG — it's approved leave. |
 | Fountain Parts 2-3 | ✅ partially filled | HungPN 4h + PhatDLT 2.5h logged; devs not yet |
 | Maddy JIRA weekly | ✅ run | 0 WS rows (batch pending); JIRA 3 tickets Done 08-10 |
 | Scrin.io | ✅ added | Nick @ John Yi = 0h 08-10 (was missing from report) |
 | Arthur Workstream | ✅ verified | Crystal lang: PhucVT 3.5h 08-10, needsReview → TienND |
 
-**Trello:** Aysar completed 09:04 (post-recheck development — carrick replied to Ronan 08:41 + Monday update 09:03, see Slack section). Remaining ○ items genuinely gated on task-log hours not yet logged (Maddy/John Yi/Bailey/Rebecca/Blair Brown via TuanNT/LeNH + LongVV Maddy batch), real open issues (Philip MS Teams, Arthur Slack), Elliott's own GreenFort performance note, or missing plan (Fountain). No alerts found that would newly block a currently-✓ item.
+**Trello:** Aysar completed 09:04 (carrick replied to Ronan + Monday update). **John Yi, Bailey, Rebecca completed 09:16** — TuanNT confirmed on approved leave 10-11/08 (0h justified, gates cleared); Amazing Meds/William Bills Slack clean, GGS only routine amy/joey messages (amy's CR-review ask 08:58 is 18 min old, in-workday, not an alert). Remaining ○: Blair Brown (LeNH active but 0h logged — late entry expected), Maddy (LongVV batch), Elliott (own GreenFort note), Fountain (plan absent), Philip (MS Teams), Arthur (Slack auth). No alerts newly blocking a ✓ item.
 
-**Cleared:** Workstream outage (Alert #1), Aysar Ronan ask + Monday update (Alert #2, completed 09:04)
-**Still open:** Philip (MS Teams 2FA), Arthur (Solid Code Slack auth), Fountain (plan absent), Elliott (GreenFort performance note), Maddy (LongVV batch), John Yi/Bailey/Rebecca/Blair Brown (task-log hours pending)
+**Cleared:** Workstream outage (Alert #1), Aysar Ronan ask + Monday update (Alert #2), TuanNT leave confusion (Alert #8 → John Yi/Bailey/Rebecca gates cleared)
+**Still open:** Philip (MS Teams 2FA), Arthur (Solid Code Slack auth), Fountain (plan absent), Elliott (GreenFort performance note), Maddy (LongVV batch), Blair Brown (LeNH task-log pending)
