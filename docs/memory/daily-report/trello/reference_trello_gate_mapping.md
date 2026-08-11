@@ -40,6 +40,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 
 - **TuanNT task log 0h** → skip John Yi + Bailey + Rebecca simultaneously
 - **Aysar gate = MPDM C07SQ4HAUHZ**, NOT Baamboozle workspace general activity
+- **Live Trello item text can itself be a human-set hold flag** (2026-08-11): "Elliott - GreenFort Capital - performance issue (pending)" — respect it even when Generator Slack is active. Elliott's gate is Generator Slack (Elliott/Violet) per `feedback_trello_per_client_gates_on_lead_dev` rule #2; a `(pending)` note in the item name overrides that until cleared. Read the full item text, not just the project name.
 - **Task-log 0h sends reminder** but does NOT block Trello items for Slack-only gates (Franc, Aysar, etc.)
 - **Slack quiet ≠ complete** if item also requires task-log check (John Yi, Bailey, Rebecca)
 - **"nghỉ cả ngày"** in any dev's sheet = leave day, 0h OK, no alert, no reminder
