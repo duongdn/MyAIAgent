@@ -62,7 +62,7 @@ Trello: DuongDn, Carrick, Rick, Kai, Ken, Nick ✓ complete. Card marked done.
 | SoCal Auto Wraps | 0 | Dropped, not monitored. |
 | Aigile Dev | 1 | Automated Sentry morning check: 0 urgent new, 0 non-urgent new, 6 standing chronic (unchanged) — no new alert. |
 
-Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. Aysar ✓ completed 09:04 (carrick replied to Ronan 08:41 + Monday update 09:03). John Yi, Bailey, Rebecca ✓ completed 09:16 (TuanNT confirmed on leave 10-11/08, 0h justified). Maddy ○ held (Workstream Maddy rows pending LongVV batch). Elliott ○ held (its own GreenFort performance note; Generator Slack active).
+Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. Aysar ✓ completed 09:04 (carrick replied to Ronan 08:41 + Monday update 09:03). John Yi, Bailey, Rebecca ✓ completed 09:16 (TuanNT confirmed on leave 10-11/08, 0h justified). Maddy ○ held — gate (Kai Xtreme Slack) clean, held only because Workstream Maddy rows pending LongVV's Wed/Thu batch. Elliott ○ held (its own GreenFort performance note; Generator Slack active).
 
 ---
 
@@ -96,7 +96,7 @@ Other Workstream activity 08-10: AnhNH2 4h (James Diamond), NamNN 8h (Generator)
 - Crystal lang (Arthur) → PhucVT 3.5h — reviewer(s): TienND
 - (Fountain needsReview excluded per rule.)
 
-**Maddy JIRA weekly cross-check (08-10):** Live Workstream Maddy query = **0 rows** this week (roster present, no task logs yet — LongVV batches Wed/Thu). JIRA shows 3 LIFM2 tickets **Done 08-10** (LIFM2-451, LIFM2-446, LIFM2-457) + LIFM2-436 est=spent=15h but still To Do + LIFM2-454 Ready to deploy. See dedicated Maddy section.
+**Maddy JIRA weekly cross-check (08-10):** Live Workstream Maddy query = **0 rows** this week (roster present, no task logs yet — LongVV batches Maddy hours Wed/Thu). JIRA shows 3 LIFM2 tickets **Done 08-10** (LIFM2-451, LIFM2-446, LIFM2-457) + LIFM2-436 est=spent=15h but still To Do + LIFM2-454 Ready to deploy. See dedicated Maddy section.
 
 Trello: John Yi, Bailey, Rebecca ✓ completed 09:16 (TuanNT confirmed on leave 10-11/08 — 0h justified, gates cleared). Blair Brown ○ held — LeNH active but 0h logged yet (late entry expected). Elliott held separately on its own GreenFort performance note (Generator Slack active, see Slack section).
 
@@ -132,7 +132,7 @@ Trello: Fountain ○ held (Part 1 plan absent + dev actuals not logged yet — P
 
 **4. PR status (Bitbucket `xtreme-web/rms`):** 5 open PRs — PR #485 (Aug 2), #516 (Jul 27), #509 (Jul 20), #520 (Jul 15), #481 (Jul 9). **0 comment activity since 08-08** — no new review findings, no new unaddressed issues this week. The known chronic unaddressed findings (#481/#509/#520, weeks-old) are unchanged.
 
-**Verdict:** No new alert. Real work logged to JIRA Monday; Workstream hours pending LongVV's batch. Trello **○ held** pending Workstream task-log (not a shortfall — LongVV batches Wed/Thu).
+**Verdict:** No new alert. Gate (Kai Xtreme Slack activity) clean; real work logged to JIRA Monday. Trello **○ held** only because Workstream Maddy task-log rows not yet logged — LongVV batches Maddy hours Wed/Thu (known pattern), rows appear later this week. Not a shortfall.
 
 ---
 
@@ -156,7 +156,7 @@ Trello: Elena - SamGuard, Elena - WordPress SamGuard ✓ complete.
 - ✓ John Yi/Bailey/Rebecca completed after confirming **TuanNT on approved leave 10-11/08 (về quê)** per namtv's note in Delivery - Resource Arrangement (08:59) — 0h justified, not late logging. Slacks clean (Amazing Meds 0, William Bills 0, GGS only routine amy/joey messages).
 - ○ held: Blair Brown — LeNH active in Matrix 08-11 (Swift Studio OAuth, NUS room) but 0h logged yet; late entry expected
 - ○ held: Elliott — its own GreenFort "performance issue (pending)" note (Trello item text); Generator Slack active (Rudi release-tracking ask answered by violet 08-10)
-- ○ held: Maddy (Workstream 0 rows — LongVV batches Wed/Thu; JIRA shows real work)
+- ○ held: Maddy — gate = Kai (LongVV) activity in Xtreme Slack, which is clean (0 msgs, JIRA shows real work: LIFM2-451/-446/-457 Done 08-10). Held ONLY because Workstream Maddy task-log rows are not yet logged — LongVV batches Maddy hours Wed/Thu (known pattern), so rows appear later this week. Not a shortfall.
 - ○ held: Fountain (no weekly plan posted since 08-05; dev actuals pending)
 - ○ held: Philip (MS Teams security challenge), Arthur - Meta-Stamp (Solid Code Slack auth) — see Alerts #3, #4
 
