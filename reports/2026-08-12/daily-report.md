@@ -10,12 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack — Global Grazing Services (#maintenance) | Customer (Joey) reported live-site 500 error 02:51+07 today, flagged as urgent/top-priority for sales. Support diagnosed stalled `resque` PHP-CLI processes at 03:15+07 and recommended dev review of what's spawning them — **no confirmation from our side that this is resolved**. Blocks Bailey item. |
-| 2 | GitHub — Elena-SamGuard-Digital-Plant PR #309 | Open PR "Implement header and modal components with i18n support" targets unusual base `nus/dp-20260811` (not default branch), shows 2195 commits / 28 changed files, CodeRabbit auto-review **skipped** (non-default base). Not merged — needs manual review before any action. |
-| 3 | Workstream | Session-wide SSO outage this run (3 separate login attempts, 6 sub-attempts, all failing at "SSO redirect done, API never fired"). Blocks task-log verification for Maddy, James Diamond, Aysar, Elliott, Bailey (hours portion), Fountain Parts 2-3, Arthur Crystal-lang, Blair Brown. |
-| 4 | Slack Solid Code (Arthur) | Unreachable this run — this host has no `/home/nus/.config/google-chrome/` (David's Profile 15) at all, not just an expired token. Infra gap, not auth expiry. |
-| 5 | Upwork (Rory/Aysar/Neural workrooms) | Unreachable this run — same root cause as #4: this host lacks carrick's Chrome Profile 1, so live-cookie extraction, stored session, and headless login all fail. Session/auth ≠ alert per existing rule; does not block Rory/Aysar/Neural Slack-based gates. |
-| 6 | MS Teams (Philip, `will` account) | Login stuck in Microsoft security-challenge loop (25 redirect loops, never resolved) — chronic, matches prior days. |
+| 1 | ~~Slack — Global Grazing Services~~ | ✅ RESOLVED at recheck 09:21 — Nick confirmed "site is currently operating normally" 09:09+07. Bailey unblocked. |
+| 2 | GitHub — Elena-SamGuard-Digital-Plant PR #309 | Open PR still not mergeable — base branch `nus/dp-20260811` was **deleted** since this morning (confirmed at recheck), `mergeable_state: dirty`. Needs human decision (likely close + recreate). Still blocks Elena item. |
+| 3 | ~~Workstream~~ | ✅ RESOLVED at recheck 09:21 — transient SSO stall, login succeeded on first retry. Maddy/James Diamond/Aysar/Elliott/Bailey/Fountain/Arthur/Blair Brown hours re-verified with real data (see Recheck section). |
+| 4 | ~~Slack Solid Code (Arthur)~~ | Partially resolved — was an mpfc-cron-host-only gap (Chrome profile present on this interactive host), but token capture still failed at recheck (live Chrome in use on shared desktop). Still blocks Arthur. |
+| 5 | ~~Upwork (Rory/Aysar/Neural)~~ | ✅ RESOLVED at recheck 09:21 — same mpfc-cron-host-only gap, all 3 workrooms reachable here. No alerts found (Rory 0h/early-week, Aysar 7h, Neural clean). |
+| 6 | MS Teams (Philip, `will` account) | Still blocked — recheck attempt (profile clear) made it worse, now needs one manual `DISPLAY=:1` login. See Recheck section. |
+| 7 | Maddy — Kai daily report | NEW at recheck: LongVV logged 1h on Maddy 08-11, no Kai daily report found for that day. |
+| 8 | Blair Brown — LeNH Workstream hours | NEW at recheck: LeNH 0h in Workstream all week, but real work confirmed via her own Upwork Aysar tracker (7h). Not logging Workstream, not a work-effort alert. |
 
 **Today (Wed 08-12):** No other leave/WFH reported. All present.
 
@@ -91,6 +93,20 @@ Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ held — Discord clean 
 **Maddy JIRA cross-check:** not run this pass — blocked by the same Workstream outage (script needs live token for week context); will run at recheck.
 
 **Workstream "needs review" check:** not run this pass (requires live token).
+
+---
+
+## Maddy (Xtreme Soft / Carrick-Kai-Luis) — 09:21 (+07:00) *(dedicated 4-part check)*
+
+**1. Communication (Slack Xtreme):** 1 msg in the captured window (07:42 08-11 → 07:38 08-12) — Kai's holiday notice only, no daily-report post. **Gate now applies** (was deferred in the cron run): Workstream confirms LongVV logged 1h on Maddy 08-11 ("Update wordpress feedback"), so a report was expected — none found. Real gate miss, holds Maddy (see Recheck section / Alert #7).
+
+**2. JIRA ticket activity:** No new ticket status changes surfaced this window beyond the routine LIFM2-449 mentions already noted in Kai's email scan. LongVV's 08-11 Workstream task ("Update wordpress feedback") has no JIRA ticket ID tagged — can't cross-check est/actual for it.
+
+**3. Est/actual (Workstream + JIRA):** Maddy JIRA weekly check (`maddy-jira-tasklog-check.js --week 2026-08-10`): 1 Workstream entry without a JIRA key (the untagged wordpress-feedback task above) — ⚠️ no est, ⚠️ no JIRA log. No over-budget tickets found.
+
+**4. PR status (Bitbucket `xtreme-web/rms`):** Same 5 open PRs as yesterday — #485 (Aug 2), #516 (Jul 27), #509 (Jul 20), #520 (Jul 15), #481 (Jul 9). No new activity since Aug 2 (re-verified live). Chronic unaddressed findings unchanged, not new.
+
+**Verdict:** Real (if minor) gate miss — LongVV worked 1h on Maddy 08-11, no Kai daily report found for that day. Held, not completed. No PR-backlog or JIRA over-budget concerns.
 
 ---
 
@@ -233,9 +249,53 @@ Check Mail: 6/6 complete, card marked done.
 
 ---
 
+## Recheck — 09:21 (+07:00)
+
+**Workstream SSO restored on first retry** (transient stall, per `feedback_workstream_sso_recheck_fixed` — confirms Alert #3 was NOT a real outage). Confirms Alert #3's "this host is missing Chrome profiles" note from the cron was specific to the mpfc.mpfc.live cron host — this interactive host has all 3 relevant Chrome profiles (David's 15, carrick's 1, Profile 25) present and working (see `project_mpfc_cron_server` — cron runs on a separate box).
+
+**Real 08-11 hours (Workstream, now live):**
+| Dev | Hours | Detail |
+|-----|-------|--------|
+| LongVV | 8h | Xtreme/Maddy 1h ("Update wordpress feedback" — no JIRA ticket tag, ⚠️ minor) + OhCleo 7h |
+| PhucVT | 2h | Crystal lang (Arthur) only — no James Diamond hours today, not itself an alert (James Diamond's canonical gate is Discord only per `reference_trello_gate_mapping`) |
+| TuanNT | 0h | Confirmed leave 10-11/08 (về quê), justified — no alert |
+| KhanhHH | 7h | Baamboozle 3h + Samguard 0.5h + Generator 3.5h — clears Elliott's sheets-side concern |
+| LeNH | 0h | ⚠️ **Confirmed via 2 independent methods (per-dev filter + unfiltered 22-project dump), and empty across the WHOLE week 08-10→08-16 in Blair Brown/James Diamond/Radio Data Center** (not just today) — stronger signal than LeNH's usual false-0h pattern (12 prior recurrences, see `feedback_check_workstream_before_flagging_shortfall`). BUT Upwork Aysar workroom (her own tracked contract) shows real 7h this week (Mon 4h + Tue 3h) — she IS working, just not logging Workstream. Treating as "not logged yet," not a genuine effort shortfall. Not sending a reminder (no `--send-reminder` flag; also don't want to repeat the false-alarm-reminder pattern this dev has triggered before).
+
+**Maddy JIRA weekly check:** 1 Workstream entry without a JIRA ticket tag (LongVV, "Update wordpress feedback", 1h, 08-11) — minor process note, not a production issue.
+
+**Kai daily-report gate (LongVV logged 1h on Maddy 08-11 → check applies):** No Kai report found in the captured Slack Xtreme window (only holiday notice). Real gate miss — holds Maddy.
+
+**Elena PR #309 — re-checked:** base branch `nus/dp-20260811` has been **deleted** since this morning; PR now shows `mergeable: false` / `mergeable_state: dirty`, 2195 commits ahead / 2623 behind. This PR is structurally broken (orphaned base) — needs a human decision (close and recreate against the correct base, most likely) before any further action. Still held.
+
+**GGS/Bailey Alert #1 — resolved:** Nick posted in #maintenance at 09:09+07 today: "the site is currently operating normally. I am conducting a thorough check." Combined with TuanNT's confirmed leave (no task-log block), releasing Bailey.
+
+**Fountain Parts 2-3 — filled in:** HungPN 5.5h, PhatDLT 5h, ThinhT 4h (met weekly plan already), TrinhMTT 8h, ViTHT 0.5h (week 08-10→08-16, very early). ⚠️ Note: Monday's plan (trinhmtt, 16:30 08-11) named DatNT 40h and LamLQ 16h, but neither appears in the Workstream member list yet this week — worth watching, not yet a spike/alert this early in the week. No over-est spike found. Trello released.
+
+**MS Teams (Philip) — retry made things worse:** cleared `tmp/msteams-will-profile/` per `feedback_msteams_stale_profile`'s documented fix, but this time the fresh (fully empty) profile hit a FIDO/passkey loop and redirected to the generic MSA consumer tenant (`9188040d-...`) instead of the org tenant — same symptom class as `feedback_philip_msteams_chrome_profile_crash`'s IndexedDB-loss case. **This now genuinely needs one manual visible-browser login** (`DISPLAY=:1`) to re-establish an org-tenant session — automated retry will not resolve it this time. Still held.
+
+**Arthur/Meta-Stamp — partially unblocked:** Workstream (Crystal lang) now confirmed live: PhucVT 5.5h this week (3.5h 08-10 + 2h 08-11), both charged entries pending review by TienND (correct reviewer per `REVIEWER_OVERRIDES`). Solid Code Slack still unreachable — `slack-xoxc-refresh-solidcode.js` failed to capture a token (Chrome is live/in-use on this shared desktop, script avoided force-closing it per `feedback_gui_automation_risk_on_shared_desktop`). 4/6 sources now verified (was 2/6). Still held pending Slack.
+
+**Upwork — all 3 workrooms now reachable** (confirms Alert #5 was the same mpfc-cron-host-only gap, not a real session issue): Rory 0:00 this week (early week, no alert), Aysar 7:00 this week (Mon4+Tue3, matches Workstream Baamboozle figure), Neural clean (latest message is our own National Day holiday notice, no unanswered client ask). Upwork Memo re-check: both Rory/Aysar returned `source: none, 0 memos` — consistent with the documented Cloudflare-challenge screenshot-blocked pattern (`feedback_neural_consolidated` "RECURRED 2026-08-11"), not a real 0-memo day; session/Cloudflare ≠ memo status per existing rule, no action needed.
+
+**Trello — Check progress: 15/22 complete** (was 12/22). Newly completed: James Diamond (Discord-only gate, already clean), Bailey (Alert #1 resolved + TuanNT leave), Fountain - DOCUMENT (real actuals filled, plan posted, no spike).
+
+**Still held (7):**
+| Item | Reason |
+|------|--------|
+| Elena - SamGuard Digital Plant | PR #309 base branch deleted, mergeable=false — needs human decision |
+| Philip | MS Teams needs manual visible-browser login (profile rebuild made it worse, not better, this time) |
+| Arthur - Meta-Stamp | Solid Code Slack still unreachable (live Chrome session on shared desktop) |
+| Blair Brown - Peptide Clyde | LeNH 0h in Workstream all week — real work confirmed via Upwork, but not logged in Workstream |
+| Aysar | Baamboozle MPDM "Today's update" not due yet (~17:00-17:45) |
+| Elliott | Explicit `(pending)` hold flag in the Trello item text itself — overrides clean Slack/sheets per `reference_trello_gate_mapping` |
+| Maddy | LongVV logged 1h on Maddy 08-11, no Kai daily report found for that day |
+
+---
+
 ## Unresolved questions
 
-1. GGS/Bailey — is the customer's live 500 error (Alert #1) actually resolved? Support's diagnosis (stalled resque processes) needs a developer to confirm root cause and close the loop with Joey.
-2. Elena PR #309 (Alert #2) — is `nus/dp-20260811` an intentional new base branch, or was this created by mistake? Needs a human decision before merge.
-3. This cron host is missing both David's Chrome Profile 15 (Solid Code Slack) and carrick's Chrome Profile 1 (Upwork) — entirely absent, not just stale. Worth confirming whether the daily-report cron should be running on this host at all, or whether these profiles need to be provisioned here.
-4. Workstream SSO outage — will retry at next recheck per `feedback_workstream_sso_recheck_fixed` precedent (has resolved itself on retry before).
+1. Elena PR #309 — base branch `nus/dp-20260811` was deleted after the PR was opened; recommend closing the PR and recreating against the correct base (`process-digital-plant`'s actual target) — needs your call.
+2. Philip/MS Teams — the `will` account profile is now fully empty and stuck on a FIDO/consumer-tenant loop; needs one manual `DISPLAY=:1` login to re-seed org-tenant auth (apologies — my recheck attempt cleared the profile rather than fixing it).
+3. Fountain weekly plan named DatNT (40h) and LamLQ (16h) but neither shows in this week's Workstream Fountain project members yet — worth confirming they're actually logging time somewhere, or if the plan overstated the team.
+4. LeNH — 0h in Workstream across the entire current week despite confirmed real work via Upwork (Aysar contract). Worth a direct nudge to log Workstream hours (not sent automatically per the no-unrequested-messages rule).
