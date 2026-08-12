@@ -248,7 +248,7 @@ Supports individual workspace targeting:
 
 | Workspace | Arg | Token type | Key check | Trello item |
 |-----------|------|-----------|-----------|-------------|
-| Baamboozle | baamboozle | xoxp | General activity. **Aysar gate is the MPDM channel `C07SQ4HAUHZ` specifically** (Carrick's "Today's update", posts ~17:00-17:45+07) — general workspace noise is NOT the gate. | Aysar |
+| Baamboozle | baamboozle | xoxp | General activity. **Aysar gate is the MPDM channel `C07SQ4HAUHZ` specifically** (Carrick's "Today's update" — NO fixed time, seen 08:41-09:03 AND 17:00-17:45; never assume "not due yet") — general workspace noise is NOT the gate. | Aysar |
 | RDC - FM Monitoring | rdc | xoxp | dmetiner updates | Franc |
 | Swift Studio | swift | xoxp | Carrick activity | Rory |
 | Xtreme Soft Solutions | xtreme | xoxp | 🔴 **Kai daily report — CONDITIONAL on Workstream:** first check Workstream project `maddy` (`cmpqc1v7v00ahtk1vs1817xt8`) for LongVV's hours on the reporting date. If 0h that day, skip the report-presence check entirely (not an alert — see [[feedback_kai_daily_report_gate]]). If >0h, THEN search Slack for "progress"/"daily report" — missing report on a day he worked IS an alert. Always still check for unanswered Madhuraka/client messages + blockers regardless of hours. | Maddy - Carrick/Kai/Luis |
@@ -565,7 +565,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `james` | Should do | James Diamond - Vinn task | `discord airagri` + `sheets phucvt` |
 | `franc` | Closely monitor | Franc | `slack rdc` only — ad hoc, no hours expectation, sheets do NOT gate this item |
 | `rory` | Closely monitor | Rory | `slack swift` only — sheets do NOT gate this item (LeNH hours only drive the Reminders piece, never block Rory/Franc). Upwork memo validity (Piece 15) is reported for LeNH's Rory workroom but does not change this Slack gate. |
-| `aysar` | Closely monitor | Aysar | `slack baamboozle` (specifically MPDM **C07SQ4HAUHZ**, Carrick's "Today's update" — posts ~17:00-17:45+07, not morning) + **`sheets khanhhh`** (NOT lenh). Upwork memo validity (Piece 15) reported for the Aysar workroom; invalid memo ⚠️ surfaced but gate remains Slack+sheets. |
+| `aysar` | Closely monitor | Aysar | `slack baamboozle` (specifically MPDM **C07SQ4HAUHZ**, Carrick's "Today's update" — NO fixed time, seen both morning 08:41-09:03 and evening 17:00-17:45) + **`sheets khanhhh`** (NOT lenh). Upwork memo validity (Piece 15) reported for the Aysar workroom; invalid memo ⚠️ surfaced but gate remains Slack+sheets. |
 | `elliott` | Closely monitor | Elliott | `slack generator` + `sheets khanhhh` |
 | `swift` | Closely monitor | Rory (Swift Studio) | same as `rory` above — Slack only |
 | `raymond` | Work | Raymond - LegalAtoms | `slack legalatoms` |
@@ -779,7 +779,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 | James Diamond / Vinn | `discord airagri` | Vinn daily report (check BOTH #airagri_webapp and #airagri-flutter) |
 | Rory | `slack swift` only | Slack-only gate — sheets lenh does NOT block this item |
 | Franc | `slack rdc` only | Ad hoc, no hours expectation — sheets lenh does NOT block this item |
-| Aysar | Baamboozle MPDM **C07SQ4HAUHZ** (Carrick's update, posts ~17:00-17:45+07) + `sheets khanhhh` | NOT sheets lenh — Aysar's task-log owner is KhanhHH |
+| Aysar | Baamboozle MPDM **C07SQ4HAUHZ** (Carrick's update — NO fixed time, has posted as early as 08:41-09:03) + `sheets khanhhh` | NOT sheets lenh — Aysar's task-log owner is KhanhHH |
 | Elliott | `slack generator` + `sheets khanhhh` | KhanhHH 0h-across-4-sources gates this |
 | MPFC | `slack mpfc` | No Slack activity = OK → complete |
 | Marcel | `slack equanimity` | Marcel/Carrick alert |

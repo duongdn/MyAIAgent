@@ -280,14 +280,15 @@ Check Mail: 6/6 complete, card marked done.
 
 **Trello — Check progress: 15/22 complete** (was 12/22). Newly completed: James Diamond (Discord-only gate, already clean), Bailey (Alert #1 resolved + TuanNT leave), Fountain - DOCUMENT (real actuals filled, plan posted, no spike).
 
-**Still held (7):**
+**Aysar — corrected 09:51:** the "not due until ~17:00-17:45" reasoning was WRONG — this is a documented recurring mistake (`feedback_aysar_consolidated.md` already flags 2 prior incidents of the exact same error, 2026-07-03 and 2026-07-09: Carrick's update time is NOT fixed, it has posted as early as 08:41-09:03 on other days). The correct check is just "has today's update posted yet" (no) + "is there independent evidence of real work / any actual customer complaint" (yes — KhanhHH logged 3h in Workstream Baamboozle 08-11; #testing channel has only a benign 2FA comment from skjamie25, no bug report). Per the established rule from the 2026-07-09 incident, MPDM silence alone does not block Aysar when hours + no real alert are confirmed — **completed 09:51.**
+
+**Still held (6):**
 | Item | Reason |
 |------|--------|
 | Elena - SamGuard Digital Plant | PR #309 base branch deleted, mergeable=false — needs human decision |
 | Philip | MS Teams needs manual visible-browser login (profile rebuild made it worse, not better, this time) |
 | Arthur - Meta-Stamp | Solid Code Slack still unreachable (live Chrome session on shared desktop) |
 | Blair Brown - Peptide Clyde | LeNH 0h in Workstream all week — real work confirmed via Upwork, but not logged in Workstream |
-| Aysar | Baamboozle MPDM "Today's update" not due yet (~17:00-17:45) |
 | Elliott | Explicit `(pending)` hold flag in the Trello item text itself — overrides clean Slack/sheets per `reference_trello_gate_mapping` |
 | Maddy | LongVV logged 1h on Maddy 08-11, no Kai daily report found for that day |
 
