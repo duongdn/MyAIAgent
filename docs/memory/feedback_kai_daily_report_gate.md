@@ -1,6 +1,6 @@
 ---
 name: feedback-kai-daily-report-gate
-description: "UN-RETIRED 2026-07-13 with a fix: check Workstream Maddy project for LongVV's hours THAT DAY first — only if he logged hours (worked), then check Slack Xtreme for Kai's daily report. Missing report on a day he didn't work = normal, not an alert."
+description: "UN-RETIRED 2026-07-13 with a fix: check Workstream Maddy project for LongVV's hours THAT DAY first — only if he logged hours (worked), then check Slack Xtreme for Kai's daily report. Missing report on a day he didn't work = normal, not an alert. REFINED 2026-08-12: LongVV works 2 roles on Maddy project — Kai's role (needs daily report) and Brian's role (WordPress work, no report needed). Only gate on WordPress-tagged tasks being absent from the report — Kai-role tasks logged with no report IS still an alert."
 metadata: 
   node_type: memory
   type: feedback
@@ -20,3 +20,8 @@ The old blanket rule ("never check Kai's daily report presence, ever") is REPLAC
 - If Workstream Maddy hours = 0 for the day: skip (b) entirely, note "no Maddy hours logged — report check not applicable" if relevant, do not flag.
 - If Workstream Maddy hours > 0 for the day and no daily report found in Slack: this IS a real alert line item.
 - Maddy's overall alert status is still also driven by: PR backlog (unaddressed Critical/High Bitbucket findings), JIRA est/actual overruns, and unanswered direct client asks — this Workstream-gated report check is an ADDITION, not a replacement for those.
+
+**🔴 REFINED 2026-08-12 — LongVV plays 2 separate roles on the Maddy Workstream project, only one requires a daily report:** user clarified: "hiện LongVV đang làm 2 role - Kai: lâu nay, cần daily report - Brian: làm wordpress, ko cần daily report" (LongVV currently works 2 roles — Kai's role: longstanding, needs daily report; Brian's role: does WordPress, no daily report needed). Triggered by a false gate-miss on 2026-08-12 recheck: LongVV logged 1h on Maddy 08-11 with task text "Update wordpress feedback" (no JIRA ticket tag either, which itself is a clue — WordPress/Brian-role tasks don't route through JIRA the way Kai-role tickets do), no Kai report found, wrongly held Maddy as an alert.
+- **Updated Step 2:** before flagging a missing report, inspect the Workstream task TEXT for that day's hours, not just the hour count. If ALL of that day's Maddy hours are WordPress-tagged (task mentions "wordpress", or otherwise clearly Brian-role work) → no report expected, do NOT flag, same as a 0h day.
+- If ANY of that day's hours are Kai-role (non-WordPress) tasks and no report was found → still a real alert, flag it.
+- If unsure whether a task belongs to which role, check for a JIRA ticket ID (Kai-role tasks route through LIFM2-* tickets; WordPress/Brian-role tasks generally don't) as a secondary signal, but the task-text content is the primary signal.

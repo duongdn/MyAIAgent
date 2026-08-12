@@ -16,7 +16,7 @@
 | 4 | ~~Slack Solid Code (Arthur)~~ | Partially resolved — was an mpfc-cron-host-only gap (Chrome profile present on this interactive host), but token capture still failed at recheck (live Chrome in use on shared desktop). Still blocks Arthur. |
 | 5 | ~~Upwork (Rory/Aysar/Neural)~~ | ✅ RESOLVED at recheck 09:21 — same mpfc-cron-host-only gap, all 3 workrooms reachable here. No alerts found (Rory 0h/early-week, Aysar 7h, Neural clean). |
 | 6 | MS Teams (Philip, `will` account) | Still blocked — recheck attempt (profile clear) made it worse, now needs one manual `DISPLAY=:1` login. See Recheck section. |
-| 7 | Maddy — Kai daily report | NEW at recheck: LongVV logged 1h on Maddy 08-11, no Kai daily report found for that day. |
+| 7 | ~~Maddy — Kai daily report~~ | ✅ CORRECTED 10:31 — the 1h logged 08-11 was WordPress/Brian-role work (LongVV plays 2 roles on Maddy, only Kai's role needs a report — user clarification). Not a gate miss. |
 | 8 | Blair Brown — LeNH Workstream hours | NEW at recheck: LeNH 0h in Workstream all week, but real work confirmed via her own Upwork Aysar tracker (7h). Not logging Workstream, not a work-effort alert. |
 
 **Today (Wed 08-12):** No other leave/WFH reported. All present.
@@ -106,7 +106,7 @@ Trello: Andrew Taraba ✓ complete. James Diamond ⚠️ held — Discord clean 
 
 **4. PR status (Bitbucket `xtreme-web/rms`):** Same 5 open PRs as yesterday — #485 (Aug 2), #516 (Jul 27), #509 (Jul 20), #520 (Jul 15), #481 (Jul 9). No new activity since Aug 2 (re-verified live). Chronic unaddressed findings unchanged, not new.
 
-**Verdict:** Real (if minor) gate miss — LongVV worked 1h on Maddy 08-11, no Kai daily report found for that day. Held, not completed. No PR-backlog or JIRA over-budget concerns.
+**Verdict — corrected 10:31:** LongVV's 1h on 08-11 was WordPress/Brian-role work ("Update wordpress feedback"), which does NOT require a Kai daily report (user clarification: LongVV plays 2 roles on this project — Kai's role needs a report, Brian's WordPress role doesn't). No real gate miss. **Completed.** No PR-backlog or JIRA over-budget concerns.
 
 ---
 
@@ -264,7 +264,7 @@ Check Mail: 6/6 complete, card marked done.
 
 **Maddy JIRA weekly check:** 1 Workstream entry without a JIRA ticket tag (LongVV, "Update wordpress feedback", 1h, 08-11) — minor process note, not a production issue.
 
-**Kai daily-report gate (LongVV logged 1h on Maddy 08-11 → check applies):** No Kai report found in the captured Slack Xtreme window (only holiday notice). Real gate miss — holds Maddy.
+**Kai daily-report gate — corrected 10:31:** LongVV plays 2 roles on Maddy — Kai's role (needs daily report) and Brian's role (WordPress work, no report needed, per user clarification 2026-08-12). The 1h logged 08-11 was "Update wordpress feedback" — **Brian-role, WordPress-tagged → no report expected, not a gate miss.** Original hold was wrong; corrected (see `feedback_kai_daily_report_gate.md`, refined same day).
 
 **Elena PR #309 — re-checked:** base branch `nus/dp-20260811` has been **deleted** since this morning; PR now shows `mergeable: false` / `mergeable_state: dirty`, 2195 commits ahead / 2623 behind. This PR is structurally broken (orphaned base) — needs a human decision (close and recreate against the correct base, most likely) before any further action. Still held.
 
@@ -282,7 +282,9 @@ Check Mail: 6/6 complete, card marked done.
 
 **Aysar — corrected 09:51:** the "not due until ~17:00-17:45" reasoning was WRONG — this is a documented recurring mistake (`feedback_aysar_consolidated.md` already flags 2 prior incidents of the exact same error, 2026-07-03 and 2026-07-09: Carrick's update time is NOT fixed, it has posted as early as 08:41-09:03 on other days). The correct check is just "has today's update posted yet" (no) + "is there independent evidence of real work / any actual customer complaint" (yes — KhanhHH logged 3h in Workstream Baamboozle 08-11; #testing channel has only a benign 2FA comment from skjamie25, no bug report). Per the established rule from the 2026-07-09 incident, MPDM silence alone does not block Aysar when hours + no real alert are confirmed — **completed 09:51.**
 
-**Still held (6):**
+**Maddy — corrected 10:31:** user clarified LongVV plays 2 roles on Maddy — Kai's role (needs daily report) and Brian's role (WordPress work, no report needed). The 1h logged 08-11 was WordPress-tagged (Brian's role) — no report gate applies. **Completed 10:31** (memory + skill file updated with this refinement — see `feedback_kai_daily_report_gate.md`).
+
+**Still held (5):**
 | Item | Reason |
 |------|--------|
 | Elena - SamGuard Digital Plant | PR #309 base branch deleted, mergeable=false — needs human decision |
@@ -290,7 +292,6 @@ Check Mail: 6/6 complete, card marked done.
 | Arthur - Meta-Stamp | Solid Code Slack still unreachable (live Chrome session on shared desktop) |
 | Blair Brown - Peptide Clyde | LeNH 0h in Workstream all week — real work confirmed via Upwork, but not logged in Workstream |
 | Elliott | Explicit `(pending)` hold flag in the Trello item text itself — overrides clean Slack/sheets per `reference_trello_gate_mapping` |
-| Maddy | LongVV logged 1h on Maddy 08-11, no Kai daily report found for that day |
 
 ---
 
