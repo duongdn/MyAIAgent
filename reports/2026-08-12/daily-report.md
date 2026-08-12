@@ -284,14 +284,15 @@ Check Mail: 6/6 complete, card marked done.
 
 **Maddy — corrected 10:31:** user clarified LongVV plays 2 roles on Maddy — Kai's role (needs daily report) and Brian's role (WordPress work, no report needed). The 1h logged 08-11 was WordPress-tagged (Brian's role) — no report gate applies. **Completed 10:31** (memory + skill file updated with this refinement — see `feedback_kai_daily_report_gate.md`).
 
-**Still held (5):**
+**Elliott — corrected 11:13:** user corrected the "(pending) item-text overrides clean sources" rule entirely: "tên của checklist ko quan trọng, nó là card duplicate mà" (item name doesn't matter, the card is a recurring duplicate — names are static template text, not a live per-day flag). Investigated what "GreenFort Capital - performance issue" actually referred to: a Booking Requests Calendar-view slowness ticket, last discussed 2026-05-18, already fixed via GitLab MR — 2+ months stale, unrelated to current status. Generator Slack clean + KhanhHH 3.5h logged → **completed 11:13.** `reference_trello_gate_mapping.md` fixed in both memory locations (the wrong rule is now reversed).
+
+**Still held (4):**
 | Item | Reason |
 |------|--------|
 | Elena - SamGuard Digital Plant | PR #309 base branch deleted, mergeable=false — needs human decision |
 | Philip | MS Teams needs manual visible-browser login (profile rebuild made it worse, not better, this time) |
 | Arthur - Meta-Stamp | Solid Code Slack still unreachable (live Chrome session on shared desktop) |
 | Blair Brown - Peptide Clyde | LeNH 0h in Workstream all week — real work confirmed via Upwork, but not logged in Workstream |
-| Elliott | Explicit `(pending)` hold flag in the Trello item text itself — overrides clean Slack/sheets per `reference_trello_gate_mapping` |
 
 ---
 

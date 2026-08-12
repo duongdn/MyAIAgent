@@ -40,7 +40,7 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 
 - **TuanNT task log 0h** → skip John Yi + Bailey + Rebecca simultaneously
 - **Aysar gate = MPDM C07SQ4HAUHZ**, NOT Baamboozle workspace general activity
-- **Live Trello item text can itself be a human-set hold flag** (2026-08-11): "Elliott - GreenFort Capital - performance issue (pending)" — respect it even when Generator Slack is active. Elliott's gate is Generator Slack (Elliott/Violet) per `feedback_trello_per_client_gates_on_lead_dev` rule #2; a `(pending)` note in the item name overrides that until cleared. Read the full item text, not just the project name.
+- 🔴 **REVERSED 2026-08-12 — Trello checklist item TEXT is NOT a live hold flag, it's static duplicate-card text.** The 2026-08-11 entry claiming "Elliott - GreenFort Capital - performance issue (pending)" should override clean Slack/sheets was WRONG — user corrected directly: "tên của checklist ko quan trọng, nó là card duplicate mà" (the checklist name doesn't matter, it's a duplicate/recurring card). The "Check progress" card is recreated by a Trello Power-Up on a recurring schedule, and item names get cloned verbatim from the template each time — they do NOT get edited live to reflect current status. A parenthetical note like `(pending)`, `(RISK)`, `HẾT TASK` etc. in an item's name is leftover/descriptive template text, not a signal anyone is actively setting per-day. **Gate items ONLY on the live data source check (Slack/sheets/Workstream per the table above) — never on the item's own name text.** Confirmed live investigation 2026-08-12: the GreenFort "performance issue" text referred to a Booking Requests Calendar-view slowness ticket last discussed 2026-05-18, already fixed via MR — 2+ months stale, unrelated to any current status. If item text ever seems to describe something concerning, that's useful CONTEXT to look into via the actual source (Slack/GitHub/etc.), not a reason to hold the item on its own.
 - **Task-log 0h sends reminder** but does NOT block Trello items for Slack-only gates (Franc, Aysar, etc.)
 - **Slack quiet ≠ complete** if item also requires task-log check (John Yi, Bailey, Rebecca)
 - **"nghỉ cả ngày"** in any dev's sheet = leave day, 0h OK, no alert, no reminder
@@ -51,3 +51,4 @@ Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 2. Completing task-log-gated items from Slack alone (John Yi, Bailey, Rebecca)
 3. Missing leave notes ("nghỉ cả ngày") and flagging 0h as alert
 4. Skipping MPDM C07SQ4HAUHZ and treating Baamboozle workspace quiet as Aysar check
+5. **Treating checklist item NAME TEXT as a live hold flag** — it's static duplicate-card text, not a per-day human signal. Gate only on actual source data.
