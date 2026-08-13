@@ -228,9 +228,9 @@
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",
-    "last_run": "2026-08-06T19:10:55.911628+00:00",
-    "output_file": "reports/2026-08-07/0205-bailey-monitor.md",
-    "note": "2026-08-07 02:05 run: 0 alarms currently in ALARM/INSUFFICIENT_DATA. Recurring nightly Server Memory ALARM/OK flap continues (14+ days, self-resolving within ~2.5h), same known pattern. One brief Server Swap flap 07-29 and Server CPU flap 07-28, both single-event self-resolved. No EC2 scheduled events either region. RDS speedventory: same pending maintenance (OS update + engine patch 17.5.R2) still not applied, low urgency. Billing $33.79 MTD (Aug1-5, 5 days), projected ~$210 full month vs last month's $212.60, no anomaly >50%. speedventory metrics normal (storage 85% free, CPU/memory/IOPS within baseline, one brief 24h CPU spike to 93.4% coincides with daily 13:00 UTC snapshot window, not sustained). New Relic: error rate near-0% (brief blips to ~2%), only minor client errors (RecordNotFound/DeserializationError/one ConnectionTimeoutError coinciding with backup window), no systemic issues. Mailgun 99.64% delivery (14d), 191 temporary espblock-style failures over 14d mostly same-day retried successfully (known antispam appliance pattern on customer's own @paturevision.fr addresses), bounces/complaints endpoints not authorized for this key (skipped, not an error). Siteground storage UNAVAILABLE again - same known CAPTCHA block, no Bailey.cpanel SSH host configured (confirmed still absent) - not re-attempted per feedback_siteground_captcha_no_ssh_fallback, defaulted OK in customer Slack post. SSL: console expires Oct 29 2026, prestashop expires Oct 20 2026, both OK."
+    "last_run": "2026-08-13T19:12:17.406757+00:00",
+    "output_file": "reports/2026-08-14/0205-bailey-monitor.md",
+    "note": "2026-08-14 02:05 run: 0 alarms currently in ALARM/INSUFFICIENT_DATA. Recurring nightly Server Memory ALARM/OK flap continues (20+ days, self-resolving within ~2-2.5h), same known pattern - marked WARNING in customer Slack post with explanation this run (was OK-glossed in some prior runs, corrected per feedback_warning_needs_explanation precedent). No EC2 scheduled events either region. RDS speedventory: same pending maintenance (OS update + engine patch 17.5.R2) still not applied, now ~5 weeks pending, flagged WARNING in Slack post. Billing $80.74 MTD (Aug1-13, 13 days), projected ~$208 full month vs last month's $212.60, no anomaly. speedventory metrics normal (storage ~79% free, CPU/memory/IOPS within baseline, one 24h CPU spike to 93.7% coincides with daily 13:00 UTC backup window, not sustained). New Relic: error rate near-0% (brief blips to ~0.6%), only minor client errors (RecordNotFound/DeserializationError), no new error classes, no systemic issues. Mailgun 99.77% delivery (14d), 150 temporary + 3 permanent failures over 14d, temp failures same-day retried (known antispam pattern on customer's own @paturevision.fr addresses), bounces/complaints endpoints not authorized for this key (skipped, not an error). Siteground storage UNAVAILABLE again - same known CAPTCHA block, no Bailey.cpanel SSH host configured (re-confirmed still absent) - not re-attempted per feedback_siteground_captcha_no_ssh_fallback, defaulted OK in customer Slack post. SSL: console expires Oct 29 2026, prestashop expires Oct 20 2026, both OK. Trello card 6a7e066b8bfd466b482ccb11 (current open instance) checklist completed, card marked dueComplete. Task log written to Paturevision sheet W40 row 69."
   },
   "alert": {
     "description": "Updated when daily-alert runs (cron). Independent from daily_report and refresh. Only daily-alert updates this.",
@@ -239,8 +239,8 @@
     "note": " Recheck 08:55: Workstream SSO succeeded (transient), TuanNT 8h confirmed, Fountain/Neural/JohnYi/Bailey/Rebecca Trello completed."
   },
   "bailey-monitor": {
-    "last_run": "2026-08-06T19:10:55.911628+00:00",
-    "last_success": "2026-08-06T19:10:55.911628+00:00"
+    "last_run": "2026-08-13T19:12:17.406757+00:00",
+    "last_success": "2026-08-13T19:12:17.406757+00:00"
   },
   "slack": {
     "last_run": "2026-06-23T01:38:32.440Z",
