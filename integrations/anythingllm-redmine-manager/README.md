@@ -2,6 +2,40 @@
 
 Custom agent skill cho AnythingLLM, cho phép AI đọc/ghi issue trên Redmine (tạo bug, đổi status, thêm comment, tra cứu, xoá).
 
+## Dành cho user (QC) — cách dùng
+
+Không cần biết gì về format/plugin.json/handler.js ở dưới. Chỉ cần 3 điều:
+
+1. **Skill đã bật sẵn** trong workspace (do admin cấu hình 1 lần). Nếu không thấy `/rm-...` khi gõ `/` trong ô chat, báo admin.
+2. **Quên cú pháp?** Gõ `/rm-help` bất cứ lúc nào → hiện lại toàn bộ hướng dẫn ngay trong ô chat, không cần nhớ.
+3. **Lần đầu dùng / chưa biết mã số:** Redmine dùng số ID cho tracker/status/priority (mỗi dự án khác nhau). Gõ trước:
+   ```
+   /rm-meta   rồi điền meta_type=trackers   (rồi lặp lại với statuses, priorities)
+   ```
+   để biết đúng số cần điền.
+
+**Bảng lệnh theo việc thường làm:**
+
+| Muốn làm gì | Gõ | Ghi chú |
+|---|---|---|
+| Báo bug mới | `/rm-create` | điền `project_id`, `subject` (bắt buộc), có thể thêm `description`, `tracker_id` |
+| Xem bug đang ở trạng thái nào | `/rm-read` | điền `issue_id` (số trên URL issue) |
+| Đổi trạng thái / ghi chú | `/rm-update` | sẽ hiện popup **xin xác nhận** → bấm Approve mới thực thi |
+| Xem list bug đang mở | `/rm-list` | điền `project_id`, `status_id` (bỏ trống = lấy tất cả) |
+| Tra ID hợp lệ | `/rm-meta` | dùng trước khi create/update lần đầu |
+| Xoá bug tạo nhầm | `/rm-delete` | popup xác nhận — **không hoàn tác được**, cẩn thận |
+
+**Cách gõ:** `/rm-create` (hoặc lệnh khác) → text mẫu tự chèn vào ô chat, dạng `@agent [REDMINE:CREATE] project_id= subject="" ...` → điền giá trị vào chỗ trống sau dấu `=` → Enter gửi.
+
+**Lỗi hay gặp:**
+- Gõ câu tự nhiên không có `@agent` ở đầu → AI chỉ trả lời chay, không đụng Redmine thật. Luôn giữ nguyên `@agent` đầu dòng khi gửi.
+- Điền sai `issue_id`/`project_id` → skill báo lỗi rõ trong chat (không phải bug, đọc lại thông báo là biết sai gì).
+- Báo "chưa cấu hình" → báo admin kiểm tra `REDMINE_URL`/`REDMINE_API_KEY` trong Agent Skills.
+
+---
+
+## Dành cho người triển khai / dev
+
 ## Format
 
 Đây là format **custom agent skill chính thức** của AnythingLLM (`schema: "skill-1.0.0"`), không phải tự chế:
