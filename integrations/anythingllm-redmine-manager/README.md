@@ -43,13 +43,50 @@ Mỗi skill = 1 folder gồm:
 
 Chạy `action=meta` trước khi `create`/`update` để biết đúng `tracker_id`/`priority_id`/`status_id` của instance Redmine bạn (mỗi Redmine có thể khác nhau).
 
-## Ví dụ prompt
+## Cú pháp lệnh cố định
 
-- "Tạo bug mới trong project qc-app: login lỗi trên Safari"
-- "Xem chi tiết issue #123"
-- "Đổi issue #123 sang Resolved, ghi chú đã fix"
-- "List issue đang mở trong project qc-app"
-- "Danh sách status hợp lệ trong Redmine"
+AnythingLLM gọi skill qua LLM function-calling (không có parser cứng), nhưng dùng đúng template dưới đây (sau `@agent`) giúp AI map param chính xác gần như 100%, thay vì câu tự nhiên tự do:
+
+```
+@agent [REDMINE:CREATE] project_id=<slug> subject="<tiêu đề>" description="<mô tả>" tracker_id=<id> priority_id=<id>
+@agent [REDMINE:READ] issue_id=<số>
+@agent [REDMINE:UPDATE] issue_id=<số> status_id=<id> notes="<ghi chú>"
+@agent [REDMINE:LIST] project_id=<slug> status_id=<id> limit=<số>
+@agent [REDMINE:META] meta_type=projects|trackers|statuses|priorities
+@agent [REDMINE:DELETE] issue_id=<số>
+```
+
+Bỏ field nào không cần (VD `list` không cần `project_id`). Field format khớp thẳng tên trong `entrypoint.params` của `plugin.json`.
+
+## Slash Commands (gõ tắt trong AnythingLLM)
+
+AnythingLLM có tính năng Slash Command = snippet macro, gõ `/tên` để tự chèn sẵn text vào ô chat (từ v1.7.8 hỗ trợ chèn cả `@agent`, tự trigger agent luôn).
+
+**Tạo:** mở workspace → icon **⚙ (Gear)** → tab **Chat Settings** → mục **Slash Commands** → New Command. Điền `Command` = tên (không có `/`) và `Text` = nội dung chèn, theo bảng dưới:
+
+| Command | Text chèn |
+|---|---|
+| `rm-create` | `@agent [REDMINE:CREATE] project_id= subject="" description="" tracker_id= priority_id=` |
+| `rm-read` | `@agent [REDMINE:READ] issue_id=` |
+| `rm-update` | `@agent [REDMINE:UPDATE] issue_id= status_id= notes=""` |
+| `rm-list` | `@agent [REDMINE:LIST] project_id= status_id= limit=25` |
+| `rm-meta` | `@agent [REDMINE:META] meta_type=` |
+| `rm-delete` | `@agent [REDMINE:DELETE] issue_id=` |
+| `rm-help` | (xem nội dung help ở dưới — không cần `@agent`, chỉ để đọc tham khảo) |
+
+Nội dung `rm-help` (paste nguyên vào ô Text):
+```
+Redmine Manager — cú pháp lệnh (điền giá trị vào chỗ trống rồi Enter):
+[REDMINE:CREATE] project_id= subject="" description="" tracker_id= priority_id=
+[REDMINE:READ] issue_id=
+[REDMINE:UPDATE] issue_id= status_id= notes=""
+[REDMINE:LIST] project_id= status_id= limit=25
+[REDMINE:META] meta_type=projects|trackers|statuses|priorities
+[REDMINE:DELETE] issue_id=  (cần approve trước khi xoá)
+Luôn có "@agent " ở đầu (trừ lệnh này). Chưa biết tracker_id/priority_id/status_id? Chạy [REDMINE:META] trước.
+```
+
+Dùng: gõ `/rm-create` → text chèn vào ô chat → điền giá trị vào các dấu `=` trống → Enter.
 
 ## Bảo mật
 
