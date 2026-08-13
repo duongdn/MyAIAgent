@@ -31,27 +31,27 @@
   },
   "examples": [
     {
-      "prompt": "Tạo bug mới trong project QC-APP: login button không hoạt động trên Safari",
+      "prompt": "[REDMINE:CREATE] project_id=qc-app subject=\"Login button không hoạt động trên Safari\" description=\"Click nút Login không có phản hồi trên Safari 17.\" tracker_id=1",
       "call": "{\"action\": \"create\", \"project_id\": \"qc-app\", \"subject\": \"Login button không hoạt động trên Safari\", \"description\": \"Click nút Login không có phản hồi trên Safari 17.\", \"tracker_id\": 1}"
     },
     {
-      "prompt": "Xem chi tiết issue #123",
+      "prompt": "[REDMINE:READ] issue_id=123",
       "call": "{\"action\": \"read\", \"issue_id\": 123}"
     },
     {
-      "prompt": "Đổi issue #123 sang Resolved và ghi chú đã fix",
+      "prompt": "[REDMINE:UPDATE] issue_id=123 status_id=3 notes=\"Đã fix, chờ QA verify.\"",
       "call": "{\"action\": \"update\", \"issue_id\": 123, \"status_id\": 3, \"notes\": \"Đã fix, chờ QA verify.\"}"
     },
     {
-      "prompt": "Liệt kê issue đang mở trong project QC-APP",
+      "prompt": "[REDMINE:LIST] project_id=qc-app status_id=1",
       "call": "{\"action\": \"list\", \"project_id\": \"qc-app\", \"status_id\": 1}"
     },
     {
-      "prompt": "Danh sách các status hợp lệ trong Redmine",
+      "prompt": "[REDMINE:META] meta_type=statuses",
       "call": "{\"action\": \"meta\", \"meta_type\": \"statuses\"}"
     },
     {
-      "prompt": "Xoá issue #999 do tạo nhầm",
+      "prompt": "[REDMINE:DELETE] issue_id=999",
       "call": "{\"action\": \"delete\", \"issue_id\": 999}"
     }
   ],

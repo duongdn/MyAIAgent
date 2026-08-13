@@ -19,8 +19,10 @@ Mỗi skill = 1 folder gồm:
 
 1. Copy (hoặc symlink lúc dev) folder này vào `storage/plugins/agent-skills/redmine-manager/` trên máy chạy AnythingLLM.
    - Tên folder đích **phải khớp** `hubId` trong `plugin.json` (`redmine-manager`).
-   - Máy này (AnythingLLM Desktop, Linux): đã symlink sẵn
-     `~/.config/anythingllm-desktop/storage/plugins/agent-skills/redmine-manager` → repo này. Sửa `plugin.json`/`handler.js` trong repo là có hiệu lực ngay, chỉ cần restart app để reload.
+   - Máy này (AnythingLLM Desktop, Linux): deploy dir là
+     `~/.config/anythingllm-desktop/storage/plugins/agent-skills/redmine-manager/`, cấu trúc:
+     - `handler.js` → **symlink** về file trong repo này (sửa logic là có hiệu lực ngay, chỉ cần restart app).
+     - `plugin.json` → **file thật, độc lập, KHÔNG symlink**. AnythingLLM tự ghi `REDMINE_URL`/`REDMINE_API_KEY` (giá trị thật) thẳng vào `setup_args.*.value` của file này khi user cấu hình qua UI. Nếu symlink file này về repo, secret sẽ lọt vào git (repo này có auto-commit theo lịch). Khi đổi schema `entrypoint.params`/`examples`, sửa ở repo rồi copy đè sang deploy dir thủ công.
 2. Restart AnythingLLM.
 3. Workspace → **Agent Skills** → bật **Redmine Manager**.
 4. Điền cấu hình:
