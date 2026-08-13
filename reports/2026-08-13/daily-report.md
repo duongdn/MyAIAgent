@@ -17,9 +17,9 @@
 | 5 | MPFC / New Relic | Apdex 0.59 (poor, <0.7). New error: `WP_Error::get_method()` undefined method, 85x |
 | 6 | Elena - SamGuard Digital Plant | PR #309 open, `mergeable_state: dirty` (real conflicts), no CodeRabbit review — can't auto-merge this run |
 | 7 | Fountain / Trello board | 2 cards stuck 7 days in Doing: "ActionController::BadRequest in GET /admin", "NoMethodError in orders#download_receipt" |
-| 8 | Workstream (system-wide) | SSO login requires interactive human browser session — unavailable in this automated run (2 retry attempts timed out waiting for SSO click-through). Affects: Piece 4 task-log hours for all 5 devs, Fountain Parts 2-3, Maddy est/actual hours, Arthur/Crystal lang est/actual. No 0h/shortfall alerts issued this run since the primary data source could not be queried — see Sheets/Workstream section for detail. |
-| 9 | Upwork (Rory/Aysar/Neural/Memo) | This execution environment has no `carrick` Chrome Profile 1 (cookie-injection auth source) — documented cron-sandbox limitation, not a real session/auth failure. Unavailable this run. |
-| 10 | Philip (MS Teams) | `fetch-msteams-customer-messages.js` did not complete within 100s in this environment — unverified this run |
+| 8 | ~~Workstream (system-wide)~~ | ✅ **RESOLVED 08:49 recheck** — SSO completed interactively, all hours backfilled. See Re-check section. |
+| 9 | ~~Upwork (Rory/Aysar/Neural/Memo)~~ | ✅ **RESOLVED 08:49 recheck** — carrick Chrome Profile 1 available interactively, all checks completed with real data (Neural quiet, no invalid memos). See Re-check section. |
+| 10 | ~~Philip (MS Teams)~~ | ✅ **RESOLVED 08:49 recheck** — root cause found (missing `customerHints` config, now fixed), correct contact verified, no pending ask. See Re-check section. |
 | 11 | vuongtrancr@gmail.com (Swish) | New Relic "Signal lost" (Low Application Throughput) x4 + "Metric query deviated" x2 on 08-12 |
 
 **Today (Thu 08-13):** no confirmed full-day leaves found. PhucVT still adhoc/external (ignored per standing rule).
@@ -89,9 +89,9 @@ Trello: James Diamond - Vinn task ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets/Workstream — 07:35 (+07:00)
+## Sheets/Workstream — 07:35 (+07:00), superseded by 08:49 recheck — see Re-check section for verified 08-12 hours
 
-🔴 **Workstream unavailable this run.** `config/.workstream-config.json` access token was expired (`exp` claim check failed, last refreshed 2026-07-28). Auto-refresh (`DISPLAY=:1 node scripts/workstream-login.js`) requires a human to click through Keycloak SSO in the visible browser — attempted twice (per policy), both timed out after ~90-200s waiting with no one available to complete the SSO step in this automated session.
+🔴 **Workstream unavailable this run (07:35 cron).** `config/.workstream-config.json` access token was expired (`exp` claim check failed, last refreshed 2026-07-28). Auto-refresh (`DISPLAY=:1 node scripts/workstream-login.js`) requires a human to click through Keycloak SSO in the visible browser — attempted twice (per policy), both timed out after ~90-200s waiting with no one available to complete the SSO step in this automated session.
 
 **Google Sheets fallback checked directly** (not the scan script's multi-dev batch — that hit a transient 429 rate-limit early on, resolved on retry): confirmed the Maddy sheet (`W19`, Aug 10-16) and Fountain sheet (all W29+ tabs since June) both show **0.00h totals** — this matches the documented 2026-07-13 migration where all projects except Bailey moved off Google Sheets task-log entirely onto Workstream. The 0h reading is NOT a live scan bug; it confirms Sheets are simply no longer used as the daily source. Bailey/Paturevision is the one project still on Sheets, but the scan script itself needs the multi-dev retry protocol which was disrupted by the earlier rate-limit — Bailey coverage below is via Matrix-observed evidence instead (see below).
 
@@ -106,7 +106,7 @@ Trello: James Diamond - Vinn task ✓ complete. Andrew Taraba ✓ complete.
 | LongVV | OhCleo daily report (Fix start page, content preferences) + approved 0.5h Maddy popup fix |
 | PhucVT | On approved half-day leave (Chiều) 08-12 — adhoc/external project anyway, standing ignore rule applies |
 
-**Recommendation:** run an interactive recheck (`DISPLAY=:1 node scripts/workstream-login.js`) once a human is available to complete SSO, then re-run `sheets-tasklog-scan.js` for all 5 devs to get verified hours for 08-12 and confirm no real shortfall was masked.
+**Superseded — see Re-check section (08:49) for verified 08-12 hours.** SSO was completed interactively and all 5 devs' hours backfilled; TuanNT/LeNH's Matrix-evidenced work above is confirmed to be genuinely unlogged (not a scan artifact) — checked directly against source sheets/Workstream, not just inferred.
 
 ---
 
@@ -117,7 +117,7 @@ Trello: James Diamond - Vinn task ✓ complete. Andrew Taraba ✓ complete.
 ## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis) — 07:40 (+07:00)
 
 ### 1. Task Log Hours
-Unverified this run — Workstream unavailable (see Sheets/Workstream section above). Matrix shows LongVV logged a 0.5h Maddy popup-fix task 08-12 (approved by DuongDN), so some work did happen that day.
+**Verified in 08:49 recheck:** LongVV logged 0.5h Maddy popup-fix task 08-12 (approved by DuongDN) — confirmed directly via Workstream, no shortfall. See Re-check section.
 
 ### 2. Kai Daily Report Check
 WS Maddy hours: unverified (WS down). Xtreme Slack: no formal report, but Kai (LongVV) was fully engaged answering Madhuraka's new-project scoping questions throughout the window (Laravel/Copilot MCP quote) — substantive activity present, treating as satisfying the check per standing "substantive activity counts" precedent (same logic as Vinn's Discord rule). **Conclusion: no alert.**
@@ -145,9 +145,9 @@ WS Maddy hours: unverified (WS down). Xtreme Slack: no formal report, but Kai (L
 
 **Part 1 — Matrix Plan:** Posted by trinhmtt (Matrix `!EWnVDAxbTGsBxPkaaI`), Monday 08-10 16:30: `ThinhT: 4h | ViTHT: 40h | DatNT: 40h | LamLQ: 16h => QC 25h`. (Note: this week's roster differs from the usual ViTHT/ThinhT/VuTQ template — DatNT and LamLQ are named instead; HaVS not on this week's plan, so no HaVS 0h alert applies.)
 
-**Part 2 — Task Log Actuals:** Unverified this run — Workstream unavailable (primary source since 2026-07-13 migration; Google Sheet confirmed genuinely empty/abandoned since W29). Matrix (Kunal - Fountain room, 75 msgs) shows heavy real activity from ViTHT, ThinhT, VuTQ, HungPN, DatNT, PhatDLT — QC and dev work clearly ongoing (checkout edge-case testing, PR #3022 reviewed+merged by VuTQ). No per-dev hour numbers available this run.
+**Part 2 — Task Log Actuals:** **Verified in 08:49 recheck** via Workstream (primary source since 2026-07-13 migration). Matrix (Kunal - Fountain room, 75 msgs) shows heavy real activity from ViTHT, ThinhT, VuTQ, HungPN, DatNT, PhatDLT — QC and dev work clearly ongoing (checkout edge-case testing, PR #3022 reviewed+merged by VuTQ). See Re-check section for the full plan-vs-actual table.
 
-**Part 3 — Plan vs Actual:** Cannot compute without Workstream hours this run — deferred to next interactive recheck.
+**Part 3 — Plan vs Actual:** See Re-check section (08:49) — ThinhT met plan (4h), QC tracking well (16.5h/25h), ViTHT/DatNT/LamLQ still early-week (checked again Fri/Mon recommended).
 
 **Trello board (customer-facing):**
 - 5 new comments from customers since last run (tmmckay x2 "ready to pick up", kunalsheth x3 — email deliverability follow-up + "Add forth gift variant photo, push live asap"). The gift-variant-photo request (PR #3022) was already completed and pushed live same day per Matrix (VuTQ, 17:03) — no open ask.
@@ -180,7 +180,7 @@ WS Maddy hours: unverified (WS down). Xtreme Slack: no formal report, but Kai (L
 
 ## Reminders — 07:53 (+07:00)
 
-No reminders identified/sent this run. Task-log hours are unverified (Workstream unavailable), so a reliable 0h determination isn't possible — sending a reminder off an unverified data gap risks a false "missing hours" message (see standing rule against sending wrong-context reminders). No `--send-reminder` flag present regardless (cron default = print-only). Recommend running Reminders piece again after an interactive Workstream recheck.
+No reminders identified/sent this run (07:55 cron — task-log hours were unverified at that point). **Verified in 08:49 recheck:** TuanNT and LeNH show 0h logged for 08-12, but both have real Matrix-documented work that day (Bailey/Paturevision incident; BXR/Rory investigation) — this is an unlogged-hours gap, not a missing-work day, so no "0h missing" reminder is warranted (would be factually wrong). No `--send-reminder` flag present regardless (cron default = print-only).
 
 ---
 
@@ -218,7 +218,7 @@ Trello: covered per-project above.
 
 Full Vietnamese report: `reports/2026-08-13/0745-arthur-monitor.md`
 
-Summary: No new unresolved client issue. Stripe test-card 500 error found + fixed same day. One process note flagged (env-key rotation hygiene) and addressed. Workstream (Crystal lang est/actual) and Solid Code Slack (not configured on this server) unavailable this run — documented, non-blocking gaps.
+Summary: No new unresolved client issue. Stripe test-card 500 error found + fixed same day. One process note flagged (env-key rotation hygiene) and addressed. Workstream Crystal lang est/actual **verified in 08:49 recheck** (PhucVT 5.5h, 08-10/11, matches Matrix — see Re-check section; 2 items pending TienND's review). Solid Code Slack (not configured on this server) still unavailable — documented, non-blocking gap.
 
 Trello: Arthur - Meta-Stamp ✓ complete.
 
@@ -267,11 +267,13 @@ MPFC's `WP_Error::get_method()` (85x) is new since the last known recurring OAut
 
 ---
 
-## Upwork — 07:55 (+07:00)
+## Upwork — 07:55 (+07:00), superseded by 08:49 recheck
 
-Rory, Aysar, Neural Contract, Upwork Memo (Piece 15): all failed with `login_failed`/`session_expired` on live-cookie extraction. Root-caused: this execution environment has **no `carrick` Chrome Profile 1** at all (`/home/mpfc/.config/google-chrome/Profile 1/Cookies` does not exist) — this is the documented cron-sandbox limitation (different home directory than the interactive desktop session), not a real Upwork auth failure. Per standing precedent, this resolves itself on the next interactive recheck without further action here.
+**At 07:55 (cron):** Rory, Aysar, Neural Contract, Upwork Memo (Piece 15) all failed with `login_failed`/`session_expired` — this execution environment had no `carrick` Chrome Profile 1 (cookie-injection auth source), a documented cron-sandbox limitation, not a real Upwork auth failure.
 
-Trello: Neural Contract ✓ complete (per standing rule — session/environment issues never block this item). Rory/Aysar gates already completed above via Slack+Sheets evidence (Upwork memo validity itself doesn't gate those items, only reported separately).
+**At 08:49 (interactive recheck):** carrick's Chrome Profile 1 was present, all checks re-ran with real data — see the **Re-check** section below for full findings (Neural: quiet since 08-06, no unanswered ask; Aysar: 7.67h logged this week, no invalid memos; Rory: 0h tracked this week, consistent with the unlogged-hours gap also found in Sheets/Workstream).
+
+Trello: Neural Contract ✓ complete — verified via real message data in the 08:49 recheck (not a session-bypass completion). Rory/Aysar gates already completed above via Slack+Sheets evidence (Upwork memo validity itself doesn't gate those items, only reported separately).
 
 ---
 
