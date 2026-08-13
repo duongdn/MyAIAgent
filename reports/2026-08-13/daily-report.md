@@ -106,7 +106,7 @@ Trello: James Diamond - Vinn task ✓ complete. Andrew Taraba ✓ complete.
 | LongVV | OhCleo daily report (Fix start page, content preferences) + approved 0.5h Maddy popup fix |
 | PhucVT | On approved half-day leave (Chiều) 08-12 — adhoc/external project anyway, standing ignore rule applies |
 
-**Superseded — see Re-check section (08:49) for verified 08-12 hours.** SSO was completed interactively and all 5 devs' hours backfilled; TuanNT/LeNH's Matrix-evidenced work above is confirmed to be genuinely unlogged (not a scan artifact) — checked directly against source sheets/Workstream, not just inferred.
+**Superseded — see Re-check section (09:06, re-verified after an initial false-negative) for accurate 08-12 hours.** SSO was completed interactively and all 5 devs' hours backfilled; TuanNT's Matrix-evidenced work was found fully logged (8h) on re-check — the sheet was still being filled in at the moment of the first read. LeNH's is confirmed genuinely still unlogged as of 09:06 (checked twice, stable).
 
 ---
 
@@ -180,7 +180,7 @@ WS Maddy hours: unverified (WS down). Xtreme Slack: no formal report, but Kai (L
 
 ## Reminders — 07:53 (+07:00)
 
-No reminders identified/sent this run (07:55 cron — task-log hours were unverified at that point). **Verified in 08:49 recheck:** TuanNT and LeNH show 0h logged for 08-12, but both have real Matrix-documented work that day (Bailey/Paturevision incident; BXR/Rory investigation) — this is an unlogged-hours gap, not a missing-work day, so no "0h missing" reminder is warranted (would be factually wrong). No `--send-reminder` flag present regardless (cron default = print-only).
+No reminders identified/sent this run. TuanNT logged 8h for 08-12 (confirmed 09:06, see Re-check section) — no reminder needed. LeNH shows 0h logged for 08-12 despite real Matrix-documented BXR/Rory work that day (confirmed stable on 2 checks) — an unlogged-hours gap, not a missing-work day, so a "0h missing" reminder would be factually wrong; worth a direct informal nudge instead, not the automated template. No `--send-reminder` flag present regardless (cron default = print-only).
 
 ---
 
@@ -282,14 +282,16 @@ Trello: Neural Contract ✓ complete — verified via real message data in the 0
 Interactive recheck (Piece 11) — Workstream SSO, Upwork, and Philip MS Teams were all environment-gated in the 07:08 cron run; this session has a live desktop (DISPLAY :1) and carrick's real Chrome Profile 1, so all three were cleared.
 
 ### Workstream — SSO recovered
-`DISPLAY=:1 node scripts/workstream-login.js` succeeded (human click-through completed). Re-ran `sheets-tasklog-scan.js 2026-08-12` for all 5 devs + `workstream-fetch-project-week.js` (all projects) to backfill 08-12 hours:
+`DISPLAY=:1 node scripts/workstream-login.js` succeeded (human click-through completed). Re-ran `sheets-tasklog-scan.js 2026-08-12` for all 5 devs + `workstream-fetch-project-week.js` (all projects) to backfill 08-12 hours.
+
+🔴 **Correction (09:06):** the first pass of this table (checked ~08:38) showed TuanNT at 0h — this was a false negative, not caught before publishing. TuanNT's Paturevision sheet entry was still being filled in live at that exact moment; a re-check ~20 min later (triggered by user pushback) found the real entry. **Lesson: a single 0h read on a shared, actively-edited sheet isn't final — always re-verify before asserting "genuinely empty," especially early in the workday when logging is still in progress.** Table below reflects the 09:06 fresh re-check, all rows re-verified live:
 
 | Dev | Combined (Sheets+WS) 08-12 | Note |
 |-----|----------------------------|------|
-| KhanhHH | 4.5h (Radio Data Center) | OK |
+| KhanhHH | 5.17h (Radio Data Center 4.5h + Baamboozle 0.67h) | OK |
 | LongVV | 6.17h (Xtreme 0.5h + OhCleo 5.67h) | OK |
-| TuanNT | **0h** across all 13 sheets + all live WS projects | Real work happened (Bailey/Paturevision SiteGround incident, root-caused+fixed+client report same day, per Matrix) — verified directly against Paturevision sheet W40 tab, 08-12 block is genuinely empty (not a name-match bug). Treating as an unlogged-hours gap, not a 0-effort day — same "substantive activity counts" precedent as Kai/Vinn. **Not reopening John Yi/Rebecca/Bailey Trello items.** Recommend TuanNT back-fill his task log for 08-12. |
-| LeNH | 0h Sheets/WS | Real work happened (BXR/Rory Klaviyo investigation, 65 Matrix msgs) — also unlogged in Sheets/WS. Separately, Upwork shows LeNH logged 7.67h on the Aysar contract this week (incl. 0.67h Wed) — real, tracked. Rory/BXR Upwork contract shows 0h this week too — same unlogged pattern. Not an alert (Rory gate is Slack-only; Aysar gate already OK via KhanhHH's Workstream hours + LeNH's Upwork hours). |
+| TuanNT | **8h** (Paturevision/Bailey: 2.5h "Check & fix issue 500 error production site" + 5.5h Prestashop/Grazing UI fixes) | Matches Matrix narrative exactly (SiteGround incident root-cause+fix+client report). Confirmed via fresh Paturevision W40 read at 09:06 — was genuinely 0h at ~08:38, logged sometime in between. No shortfall, no alert. |
+| LeNH | 0h Sheets/WS (re-confirmed 09:06, unchanged from first check) | Real work happened (BXR/Rory Klaviyo investigation, 65 Matrix msgs) — still unlogged in Sheets/WS as of 09:06. Upwork shows LeNH logged 7.67h on the Aysar contract this week (incl. 0.67h Wed, also re-confirmed unchanged) — real, tracked. Rory/BXR Upwork contract still shows 0h this week — same unlogged pattern, confirmed stable (not a timing artifact like TuanNT). Not an alert (Rory gate is Slack-only; Aysar gate already OK via KhanhHH's Workstream hours + LeNH's Upwork hours). |
 | PhucVT | 0h | Approved half-day leave 08-12, adhoc/external — standing ignore, no alert. |
 
 **Maddy hours confirmed:** LongVV logged 0.5h 08-12 (matches Matrix-approved popup fix). No shortfall.
@@ -336,7 +338,7 @@ Check Progress: 19/20 ✓ complete (Philip newly completed). Only **Maddy** rema
 1. Maddy PR #481 (LIFM2-409) — Madhuraka's own bug report unanswered 68 days — recommend directly flagging to Kai/LongVV as priority, independent of the next automated run.
 2. samguard.co PR #309 merge conflict needs manual resolution (not agent-fixable via simple auto-merge).
 3. OhCleo `MediaAddTrackAPIView.post` 333s avg (2 calls) — worth a manual look; could be a real backend hang or a monitoring artifact from only 2 samples.
-4. TuanNT (Bailey/Paturevision incident) and LeNH (BXR/Rory investigation) both did real documented work on 08-12 but haven't logged it in Sheets/Workstream/Upwork yet — worth a reminder to back-fill, not urgent.
+4. LeNH (BXR/Rory investigation, 08-12) did real documented work but hasn't logged it in Sheets/Workstream/Upwork yet (confirmed stable on 2 checks) — worth an informal nudge to back-fill, not urgent. (TuanNT's earlier 0h read was a false negative — confirmed 8h logged on re-check, see Re-check section.)
 5. New Workstream review-queue backlog surfaced (Radio Data Center → LeNH reviewer, Crystal lang → TienND reviewer, OhCleo → DuongDN/MinhTV reviewers) — recommend each reviewer clears their `Pending` queue.
 6. Blair Brown (LeNH's project) shows 0 logged hours Mon-Wed this week with no Matrix evidence either way — worth a direct check with LeNH if it persists into next week.
 7. Fountain: ViTHT/DatNT/LamLQ show 0-0.5h against large weekly plans (40h/40h/16h) as of Wed — likely just early-week, recommend checking again Fri/Mon before calling it a shortfall.
