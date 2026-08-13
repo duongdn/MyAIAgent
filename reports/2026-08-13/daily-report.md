@@ -275,11 +275,66 @@ Trello: Neural Contract ✓ complete (per standing rule — session/environment 
 
 ---
 
+## Re-check — 08:49 (+07:00)
+
+Interactive recheck (Piece 11) — Workstream SSO, Upwork, and Philip MS Teams were all environment-gated in the 07:08 cron run; this session has a live desktop (DISPLAY :1) and carrick's real Chrome Profile 1, so all three were cleared.
+
+### Workstream — SSO recovered
+`DISPLAY=:1 node scripts/workstream-login.js` succeeded (human click-through completed). Re-ran `sheets-tasklog-scan.js 2026-08-12` for all 5 devs + `workstream-fetch-project-week.js` (all projects) to backfill 08-12 hours:
+
+| Dev | Combined (Sheets+WS) 08-12 | Note |
+|-----|----------------------------|------|
+| KhanhHH | 4.5h (Radio Data Center) | OK |
+| LongVV | 6.17h (Xtreme 0.5h + OhCleo 5.67h) | OK |
+| TuanNT | **0h** across all 13 sheets + all live WS projects | Real work happened (Bailey/Paturevision SiteGround incident, root-caused+fixed+client report same day, per Matrix) — verified directly against Paturevision sheet W40 tab, 08-12 block is genuinely empty (not a name-match bug). Treating as an unlogged-hours gap, not a 0-effort day — same "substantive activity counts" precedent as Kai/Vinn. **Not reopening John Yi/Rebecca/Bailey Trello items.** Recommend TuanNT back-fill his task log for 08-12. |
+| LeNH | 0h Sheets/WS | Real work happened (BXR/Rory Klaviyo investigation, 65 Matrix msgs) — also unlogged in Sheets/WS. Separately, Upwork shows LeNH logged 7.67h on the Aysar contract this week (incl. 0.67h Wed) — real, tracked. Rory/BXR Upwork contract shows 0h this week too — same unlogged pattern. Not an alert (Rory gate is Slack-only; Aysar gate already OK via KhanhHH's Workstream hours + LeNH's Upwork hours). |
+| PhucVT | 0h | Approved half-day leave 08-12, adhoc/external — standing ignore, no alert. |
+
+**Maddy hours confirmed:** LongVV logged 0.5h 08-12 (matches Matrix-approved popup fix). No shortfall.
+
+**Fountain Part 2/3 (Workstream, week Aug10-16, partial week through Wed):**
+| Dev | Plan (week) | Actual so far | Note |
+|-----|-------------|----------------|------|
+| ThinhT | 4h | 4h (08-10) | Met |
+| ViTHT | 40h | 0.5h (08-11) | Early week, on pace question mark |
+| DatNT | 40h | 0h (not in WS member list) | Early week |
+| LamLQ | 16h | 0h (not in WS member list) | Early week |
+| QC (PhatDLT+HungPN) | 25h | 16.5h combined | Tracking well |
+Too early in the week (Wed of 7) to call ViTHT/DatNT/LamLQ a shortfall — recommend checking again Fri/Mon.
+
+**Arthur/Crystal lang:** PhucVT logged 5.5h (08-10: 3.5h, 08-11: 2h) — real work, matches Matrix (Stripe fix, M3 items). Reviewer TienND (per `REVIEWER_OVERRIDES`, not the auto-flagged DuongDN) has 2 items `Pending` review — see new alert below.
+
+**🆕 New Workstream `needsReview` alerts found** (unavailable during cron run, now surfaced):
+- **Radio Data Center (Franc)**: 4 items for KhanhHH (08-12, 4.5h total) still `Pending` — reviewer **LeNH**.
+- **Crystal lang (Arthur)**: 2 items for PhucVT (08-10/11, 5.5h total) still `Pending` — reviewer **TienND**.
+- **OhCleo**: 16 items across PhucVT/LongVV/HungPN/LuHX (08-10 to 08-12) still `Pending` — reviewers **DuongDN, MinhTV**.
+- Fountain also shows `needsReview` items but is excluded from this check per standing instruction.
+- These are review-workflow alerts addressed to the reviewers, distinct from each project's primary Trello gate (Slack/etc., already checked clean) — **not** reopening Franc/Arthur/OhCleo Trello items over this, but flagging as action items.
+
+**Blair Brown (LeNH's project):** 0 members logged any hours Mon-Wed this week — no Matrix evidence of Blair Brown-specific work found either. Not reopening the Trello item (ad hoc project, no client complaint), but noting as an observation — worth a direct check with LeNH if it persists into next week.
+
+### Upwork — auth recovered (carrick Chrome Profile 1 present)
+- **Neural Contract:** silence since 08-06 (client: "no, that is fine thanks"), our own 08-11 holiday notice most recent message — no unanswered ask. ✓ complete (already was).
+- **Aysar memo check (08-12):** 0 memos returned by `upwork-memo-check.js` despite `upwork-weekly-hours.js` showing 0.67h logged Wed — likely a date-window mismatch in the memo script, not a real gap (weekly total 7.67h is real and tracked). No invalid-memo alert.
+- **Rory memo/hours check (08-12):** 0h this week on the Upwork Rory contract — consistent with the Sheets/WS 0h finding above (real work, not yet logged as billable time anywhere). Rory Trello gate is Slack-only, unaffected.
+
+### Philip (MS Teams) — root cause found and fixed
+Root cause: `config/.msteams-accounts.json` was missing the `customerHints` map (`{"Philip Briggs": "Six Star Rentals"}`) that the 2026-07-14 permanent fix relies on to disambiguate 8 duplicate "Philip Briggs" contacts — likely dropped in a config rewrite. Restored the entry and re-encrypted the config. Re-ran the script: correctly landed on `pbriggs@sixstarrentals.com.au`. Last message in the thread is our own outreach (Jul 1, asking for referrals) — unanswered by Philip since, but not a pending customer ask on our side. **Trello: Philip ✓ complete.**
+
+### Trello — live re-fetch
+Check Progress: 19/20 ✓ complete (Philip newly completed). Only **Maddy** remains incomplete (real PR backlog: #481 68 days unanswered, #516 34 days, #485 abandoned — unchanged, still needs direct escalation to Kai/LongVV).
+
+**Cleared this recheck:** Philip, Workstream data gap (Sheets/Workstream/Fountain/Maddy/Arthur hours), Upwork data gap.
+**Still open:** Maddy (Bitbucket PR backlog — not fixable via recheck, needs human escalation).
+
+---
+
 ## Unresolved Questions
 
-1. Workstream SSO needs an interactive human login before task-log hours (Piece 4, Fountain Parts 2-3, Maddy est/actual, Arthur Crystal lang) can be verified for 08-12 — recommend running `DISPLAY=:1 node scripts/workstream-login.js` interactively, then a full Sheets/Workstream recheck.
-2. Upwork (Rory/Aysar/Neural/Memo) needs carrick's real Chrome Profile 1 present on whichever machine runs the interactive recheck — same as prior documented cron-only gaps.
-3. Philip (MS Teams) check did not complete in 100s this run — needs an interactive recheck, possibly a stale/crashed browser profile per documented history.
-4. Maddy PR #481 (LIFM2-409) — Madhuraka's own bug report unanswered 68 days — recommend directly flagging to Kai/LongVV as priority, independent of the next automated run.
-5. samguard.co PR #309 merge conflict needs manual resolution (not agent-fixable via simple auto-merge).
-6. OhCleo `MediaAddTrackAPIView.post` 333s avg (2 calls) — worth a manual look; could be a real backend hang or a monitoring artifact from only 2 samples.
+1. Maddy PR #481 (LIFM2-409) — Madhuraka's own bug report unanswered 68 days — recommend directly flagging to Kai/LongVV as priority, independent of the next automated run.
+2. samguard.co PR #309 merge conflict needs manual resolution (not agent-fixable via simple auto-merge).
+3. OhCleo `MediaAddTrackAPIView.post` 333s avg (2 calls) — worth a manual look; could be a real backend hang or a monitoring artifact from only 2 samples.
+4. TuanNT (Bailey/Paturevision incident) and LeNH (BXR/Rory investigation) both did real documented work on 08-12 but haven't logged it in Sheets/Workstream/Upwork yet — worth a reminder to back-fill, not urgent.
+5. New Workstream review-queue backlog surfaced (Radio Data Center → LeNH reviewer, Crystal lang → TienND reviewer, OhCleo → DuongDN/MinhTV reviewers) — recommend each reviewer clears their `Pending` queue.
+6. Blair Brown (LeNH's project) shows 0 logged hours Mon-Wed this week with no Matrix evidence either way — worth a direct check with LeNH if it persists into next week.
+7. Fountain: ViTHT/DatNT/LamLQ show 0-0.5h against large weekly plans (40h/40h/16h) as of Wed — likely just early-week, recommend checking again Fri/Mon before calling it a shortfall.
