@@ -5,6 +5,20 @@ const META_ENDPOINTS = {
   priorities: "/enumerations/issue_priorities.json",
 };
 
+const HELP_TEXT = [
+  "Redmine Manager — cú pháp lệnh (luôn bắt đầu bằng @agent):",
+  '@agent [REDMINE:CREATE] project_id= subject="" description="" tracker_id= priority_id=',
+  "@agent [REDMINE:READ] issue_id=",
+  '@agent [REDMINE:UPDATE] issue_id= status_id= notes=""',
+  "@agent [REDMINE:LIST] project_id= status_id= limit=25",
+  "@agent [REDMINE:META] meta_type=projects|trackers|statuses|priorities",
+  "@agent [REDMINE:DELETE] issue_id=",
+  "@agent [REDMINE:HELP]",
+  "",
+  "Chưa biết tracker_id/status_id/priority_id? Chạy [REDMINE:META] trước.",
+  "update/delete sẽ hiện popup xin xác nhận trước khi thực thi.",
+].join("\n");
+
 module.exports.runtime = {
   handler: async function ({
     action,
@@ -56,6 +70,9 @@ module.exports.runtime = {
       };
 
       switch (action) {
+        case "help":
+          return HELP_TEXT;
+
         case "meta": {
           const path = META_ENDPOINTS[meta_type];
           if (!path) {
@@ -149,7 +166,7 @@ module.exports.runtime = {
         }
 
         default:
-          return `action không hợp lệ: "${action}". Dùng một trong: create, read, update, delete, list, meta.`;
+          return `action không hợp lệ: "${action}".\n\n${HELP_TEXT}`;
       }
     } catch (error) {
       this.logger(`Redmine skill error: ${error.message}`);

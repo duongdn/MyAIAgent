@@ -53,13 +53,17 @@
     {
       "prompt": "[REDMINE:DELETE] issue_id=999",
       "call": "{\"action\": \"delete\", \"issue_id\": 999}"
+    },
+    {
+      "prompt": "[REDMINE:HELP]",
+      "call": "{\"action\": \"help\"}"
     }
   ],
   "entrypoint": {
     "file": "handler.js",
     "params": {
       "action": {
-        "description": "Operation to perform: create, read, update, delete, list, or meta",
+        "description": "Operation to perform: create, read, update, delete, list, meta, or help",
         "type": "string"
       },
       "issue_id": {

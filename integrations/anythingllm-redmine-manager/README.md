@@ -6,37 +6,37 @@ Custom agent skill cho AnythingLLM, cho phép AI đọc/ghi issue trên Redmine 
 
 Không cần biết gì về format/plugin.json/handler.js ở dưới. Chỉ cần 3 điều:
 
-1. **Skill đã bật sẵn** trong workspace (do admin cấu hình 1 lần). Nếu không thấy `/rm-...` khi gõ `/` trong ô chat, báo admin.
-2. **Quên cú pháp?** Gõ `/rm-help` bất cứ lúc nào → hiện lại toàn bộ hướng dẫn ngay trong ô chat, không cần nhớ.
-3. **Lần đầu dùng / chưa biết mã số:** Redmine dùng số ID cho tracker/status/priority (mỗi dự án khác nhau). Gõ trước:
+1. **Skill đã bật sẵn** trong workspace (do admin cấu hình 1 lần).
+2. **Luôn gõ `@agent` ở đầu tin nhắn** — thiếu nó AI chỉ trả lời chay, không đụng Redmine thật.
+3. **Quên cú pháp?** Gõ `@agent [REDMINE:HELP]` bất cứ lúc nào → skill trả lại toàn bộ hướng dẫn ngay trong chat (gõ sai action cũng tự trả về help).
+4. **Lần đầu dùng / chưa biết mã số:** Redmine dùng số ID cho tracker/status/priority (mỗi dự án khác nhau). Gõ trước:
    ```
-   /rm-meta   rồi điền meta_type=trackers   (rồi lặp lại với statuses, priorities)
+   @agent [REDMINE:META] meta_type=trackers
    ```
-   để biết đúng số cần điền.
+   (đổi `meta_type=` thành `statuses`, `priorities` để tra tiếp) để biết đúng số cần điền.
 
-**Bảng lệnh theo việc thường làm:**
+**Bảng lệnh theo việc thường làm** (điền giá trị vào chỗ trống sau `=` rồi gửi):
 
 | Muốn làm gì | Gõ | Ghi chú |
 |---|---|---|
-| Báo bug mới | `/rm-create` | điền `project_id`, `subject` (bắt buộc), có thể thêm `description`, `tracker_id` |
-| Xem bug đang ở trạng thái nào | `/rm-read` | điền `issue_id` (số trên URL issue) |
-| Đổi trạng thái / ghi chú | `/rm-update` | sẽ hiện popup **xin xác nhận** → bấm Approve mới thực thi |
-| Xem list bug đang mở | `/rm-list` | điền `project_id`, `status_id` (bỏ trống = lấy tất cả) |
-| Tra ID hợp lệ | `/rm-meta` | dùng trước khi create/update lần đầu |
-| Xoá bug tạo nhầm | `/rm-delete` | popup xác nhận — **không hoàn tác được**, cẩn thận |
-
-**Cách gõ:** `/rm-create` (hoặc lệnh khác) → text mẫu tự chèn vào ô chat, dạng `@agent [REDMINE:CREATE] project_id= subject="" ...` → điền giá trị vào chỗ trống sau dấu `=` → Enter gửi.
+| Xem lại cú pháp | `@agent [REDMINE:HELP]` | không cần tham số |
+| Báo bug mới | `@agent [REDMINE:CREATE] project_id= subject="" description="" tracker_id=` | `project_id`, `subject` bắt buộc |
+| Xem bug đang ở trạng thái nào | `@agent [REDMINE:READ] issue_id=` | `issue_id` = số trên URL issue |
+| Đổi trạng thái / ghi chú | `@agent [REDMINE:UPDATE] issue_id= status_id= notes=""` | hiện popup **xin xác nhận** → bấm Approve mới thực thi |
+| Xem list bug đang mở | `@agent [REDMINE:LIST] project_id= status_id=` | bỏ trống field = lấy tất cả |
+| Tra ID hợp lệ | `@agent [REDMINE:META] meta_type=` | dùng trước khi create/update lần đầu |
+| Xoá bug tạo nhầm | `@agent [REDMINE:DELETE] issue_id=` | popup xác nhận — **không hoàn tác được**, cẩn thận |
 
 **Lỗi hay gặp:**
-- Gõ câu tự nhiên không có `@agent` ở đầu → AI chỉ trả lời chay, không đụng Redmine thật. Luôn giữ nguyên `@agent` đầu dòng khi gửi.
-- Điền sai `issue_id`/`project_id` → skill báo lỗi rõ trong chat (không phải bug, đọc lại thông báo là biết sai gì).
+- Gõ câu tự nhiên không có `@agent` ở đầu → AI chỉ trả lời chay, không đụng Redmine thật.
+- Điền sai `issue_id`/`project_id`, hoặc gõ sai tên action → skill tự trả về thông báo lỗi + help lại trong chat.
 - Báo "chưa cấu hình" → báo admin kiểm tra `REDMINE_URL`/`REDMINE_API_KEY` trong Agent Skills.
 
 ---
 
 ## Dành cho người triển khai / dev
 
-## Format
+### Format
 
 Đây là format **custom agent skill chính thức** của AnythingLLM (`schema: "skill-1.0.0"`), không phải tự chế:
 - Docs: https://docs.anythingllm.com/agent/custom/introduction
@@ -49,7 +49,7 @@ Mỗi skill = 1 folder gồm:
 | `plugin.json` | Khai báo tên, mô tả, tham số cấu hình (`setup_args`), tham số gọi hàm (`entrypoint.params`), ví dụ prompt |
 | `handler.js` | Logic thực thi — export `module.exports.runtime.handler(params)`, phải return string |
 
-## Cài đặt vào AnythingLLM
+### Cài đặt vào AnythingLLM
 
 1. Copy (hoặc symlink lúc dev) folder này vào `storage/plugins/agent-skills/redmine-manager/` trên máy chạy AnythingLLM.
    - Tên folder đích **phải khớp** `hubId` trong `plugin.json` (`redmine-manager`).
@@ -64,7 +64,7 @@ Mỗi skill = 1 folder gồm:
    - `REDMINE_API_KEY`: lấy ở Redmine → My account → API access key (không paste key vào chat AI, điền trực tiếp vào ô này)
 5. Trong chat, gõ `@agent` rồi ra lệnh bằng tiếng Việt/Anh tự nhiên.
 
-## Tham số (`action`)
+### Tham số (`action`)
 
 | action | Bắt buộc | Mô tả |
 |---|---|---|
@@ -74,10 +74,11 @@ Mỗi skill = 1 folder gồm:
 | `delete` | `issue_id` | Xoá issue — cần user approve, không hoàn tác được |
 | `list` | — | Lọc theo `project_id`/`status_id`/`assigned_to_id`, giới hạn `limit` |
 | `meta` | `meta_type` | Tra ID hợp lệ: `projects`\|`trackers`\|`statuses`\|`priorities` |
+| `help` | — | Trả về cú pháp lệnh (cũng tự trả về khi `action` sai/thiếu) |
 
 Chạy `action=meta` trước khi `create`/`update` để biết đúng `tracker_id`/`priority_id`/`status_id` của instance Redmine bạn (mỗi Redmine có thể khác nhau).
 
-## Cú pháp lệnh cố định
+### Cú pháp lệnh cố định
 
 AnythingLLM gọi skill qua LLM function-calling (không có parser cứng), nhưng dùng đúng template dưới đây (sau `@agent`) giúp AI map param chính xác gần như 100%, thay vì câu tự nhiên tự do:
 
@@ -88,46 +89,17 @@ AnythingLLM gọi skill qua LLM function-calling (không có parser cứng), nh�
 @agent [REDMINE:LIST] project_id=<slug> status_id=<id> limit=<số>
 @agent [REDMINE:META] meta_type=projects|trackers|statuses|priorities
 @agent [REDMINE:DELETE] issue_id=<số>
+@agent [REDMINE:HELP]
 ```
 
-Bỏ field nào không cần (VD `list` không cần `project_id`). Field format khớp thẳng tên trong `entrypoint.params` của `plugin.json`.
+Bỏ field nào không cần (VD `list` không cần `project_id`). Field format khớp thẳng tên trong `entrypoint.params` của `plugin.json`. Không dùng AnythingLLM Slash Commands (snippet riêng từng máy/DB, không portable) — help nằm ngay trong skill (`action=help`) để dùng được ở bất kỳ nơi nào cài skill này.
 
-## Slash Commands (gõ tắt trong AnythingLLM)
-
-AnythingLLM có tính năng Slash Command = snippet macro, gõ `/tên` để tự chèn sẵn text vào ô chat (từ v1.7.8 hỗ trợ chèn cả `@agent`, tự trigger agent luôn).
-
-**Tạo:** mở workspace → icon **⚙ (Gear)** → tab **Chat Settings** → mục **Slash Commands** → New Command. Điền `Command` = tên (không có `/`) và `Text` = nội dung chèn, theo bảng dưới:
-
-| Command | Text chèn |
-|---|---|
-| `rm-create` | `@agent [REDMINE:CREATE] project_id= subject="" description="" tracker_id= priority_id=` |
-| `rm-read` | `@agent [REDMINE:READ] issue_id=` |
-| `rm-update` | `@agent [REDMINE:UPDATE] issue_id= status_id= notes=""` |
-| `rm-list` | `@agent [REDMINE:LIST] project_id= status_id= limit=25` |
-| `rm-meta` | `@agent [REDMINE:META] meta_type=` |
-| `rm-delete` | `@agent [REDMINE:DELETE] issue_id=` |
-| `rm-help` | (xem nội dung help ở dưới — không cần `@agent`, chỉ để đọc tham khảo) |
-
-Nội dung `rm-help` (paste nguyên vào ô Text):
-```
-Redmine Manager — cú pháp lệnh (điền giá trị vào chỗ trống rồi Enter):
-[REDMINE:CREATE] project_id= subject="" description="" tracker_id= priority_id=
-[REDMINE:READ] issue_id=
-[REDMINE:UPDATE] issue_id= status_id= notes=""
-[REDMINE:LIST] project_id= status_id= limit=25
-[REDMINE:META] meta_type=projects|trackers|statuses|priorities
-[REDMINE:DELETE] issue_id=  (cần approve trước khi xoá)
-Luôn có "@agent " ở đầu (trừ lệnh này). Chưa biết tracker_id/priority_id/status_id? Chạy [REDMINE:META] trước.
-```
-
-Dùng: gõ `/rm-create` → text chèn vào ô chat → điền giá trị vào các dấu `=` trống → Enter.
-
-## Bảo mật
+### Bảo mật
 
 - Không commit `REDMINE_API_KEY` vào file nào trong repo này — nhập trực tiếp qua AnythingLLM UI (`setup_args`), lưu trong storage của AnythingLLM.
 - `update`/`delete` bắt buộc qua `requestToolApproval` (người dùng phải xác nhận trong UI) vì có thể thay đổi/xoá dữ liệu thật trên Redmine.
 
-## Chưa xử lý / cần xác nhận thêm
+### Chưa xử lý / cần xác nhận thêm
 
 - Không có giá trị mặc định cho `tracker_id`/`priority_id` vì khác nhau theo instance — cần chạy `meta` 1 lần để biết ID thật.
 - Nếu muốn `update`/`delete` chạy tự động không cần approve (full-auto QC bot), cần sửa `handler.js` bỏ đoạn `requestToolApproval`.
