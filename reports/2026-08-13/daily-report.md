@@ -178,9 +178,15 @@ WS Maddy hours: unverified (WS down). Xtreme Slack: no formal report, but Kai (L
 
 ---
 
-## Reminders — 07:53 (+07:00)
+## Reminders — 07:53 (+07:00), updated 09:37 (user-directed send)
 
-No reminders identified/sent this run. TuanNT logged 8h for 08-12 (confirmed 09:06, see Re-check section) — no reminder needed. LeNH shows 0h logged for 08-12 despite real Matrix-documented BXR/Rory work that day (confirmed stable on 2 checks) — an unlogged-hours gap, not a missing-work day, so a "0h missing" reminder would be factually wrong; worth a direct informal nudge instead, not the automated template. No `--send-reminder` flag present regardless (cron default = print-only).
+TuanNT logged 8h for 08-12 (confirmed 09:06, see Re-check section) — no reminder needed.
+
+**LeNH — sent 09:37, user-directed.** Re-verified fresh immediately before sending (4th independent check overall, per [[feedback_check_workstream_before_flagging_shortfall]]'s 13th-recurrence rule): still 0h combined on Sheets+Workstream for 08-12 (Rory/BXR project specifically), stable across 4 checks now. Not a generic "0h logged" template — tailored message referencing her actual documented BXR/Rory Klaviyo investigation work, asking her to log it. Sent via Matrix `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (event `$EFf3bhFOl_kawq2FG5A7qzHbTAstZu2pwOQdXMTZMkc`).
+
+**KhanhHH — checked 09:37, no reminder needed.** 5.17h combined 08-12 (Radio Data Center 4.5h + Baamboozle 0.67h) — confirmed stable across 2 independent checks (08:38 and 09:37).
+
+**LongVV — checked 09:37, no reminder needed.** 6.17h combined 08-12 (Xtreme Soft Solutions 0.5h + OhCleo 5.67h) — confirmed stable across 2 independent checks (08:38 and 09:37).
 
 ---
 
@@ -338,7 +344,7 @@ Check Progress: 19/20 ✓ complete (Philip newly completed). Only **Maddy** rema
 1. Maddy PR #481 (LIFM2-409) — Madhuraka's own bug report unanswered 68 days — recommend directly flagging to Kai/LongVV as priority, independent of the next automated run.
 2. samguard.co PR #309 merge conflict needs manual resolution (not agent-fixable via simple auto-merge).
 3. OhCleo `MediaAddTrackAPIView.post` 333s avg (2 calls) — worth a manual look; could be a real backend hang or a monitoring artifact from only 2 samples.
-4. LeNH (BXR/Rory investigation, 08-12) did real documented work but hasn't logged it in Sheets/Workstream/Upwork yet (confirmed stable on 2 checks) — worth an informal nudge to back-fill, not urgent. (TuanNT's earlier 0h read was a false negative — confirmed 8h logged on re-check, see Re-check section.)
+4. ~~LeNH (BXR/Rory investigation, 08-12) hasn't logged it in Sheets/Workstream/Upwork yet~~ — ✅ reminder sent 09:37 (user-directed), see Reminders section. (TuanNT's earlier 0h read was a false negative — confirmed 8h logged on re-check, see Re-check section.)
 5. New Workstream review-queue backlog surfaced (Radio Data Center → LeNH reviewer, Crystal lang → TienND reviewer, OhCleo → DuongDN/MinhTV reviewers) — recommend each reviewer clears their `Pending` queue.
 6. Blair Brown (LeNH's project) shows 0 logged hours Mon-Wed this week with no Matrix evidence either way — worth a direct check with LeNH if it persists into next week.
 7. Fountain: ViTHT/DatNT/LamLQ show 0-0.5h against large weekly plans (40h/40h/16h) as of Wed — likely just early-week, recommend checking again Fri/Mon before calling it a shortfall.
