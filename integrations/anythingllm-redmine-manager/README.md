@@ -4,7 +4,9 @@ Custom agent skill cho AnythingLLM, cho phép AI đọc/ghi issue trên Redmine 
 
 ## Dành cho user (QC) — cách dùng
 
-Không cần biết gì về format/plugin.json/handler.js ở dưới. Chỉ cần 3 điều:
+Không cần biết gì về format/plugin.json/handler.js ở dưới, cũng không cần đọc file này. Mở workspace chat lên sẽ thấy sẵn 2 nút gợi ý ("Redmine - Xem hướng dẫn cách dùng", "Redmine - Tra ID tracker/status/priority") ngay trên màn hình chat trống — bấm vào là chạy luôn, không cần gõ gì cả.
+
+Nếu vẫn muốn biết chi tiết, dưới đây là tóm tắt:
 
 1. **Skill đã bật sẵn** trong workspace (do admin cấu hình 1 lần).
 2. **Luôn gõ `@agent` ở đầu tin nhắn** — thiếu nó AI chỉ trả lời chay, không đụng Redmine thật.
@@ -63,6 +65,13 @@ Mỗi skill = 1 folder gồm:
    - `REDMINE_URL`: vd `https://redmine.nustechnology.com`
    - `REDMINE_API_KEY`: lấy ở Redmine → My account → API access key (không paste key vào chat AI, điền trực tiếp vào ô này)
 5. Trong chat, gõ `@agent` rồi ra lệnh bằng tiếng Việt/Anh tự nhiên.
+6. **Onboarding cho user mới** (bấm-là-chạy, khỏi đọc README): thêm **Suggested Chat Messages** — Workspace → ⚙ → **Chat Settings** → **General Appearance** → Suggested Chat Messages → thêm:
+   | Heading | Message |
+   |---|---|
+   | Redmine - Xem hướng dẫn cách dùng | `@agent [REDMINE:HELP]` |
+   | Redmine - Tra ID tracker/status/priority | `@agent [REDMINE:META] meta_type=trackers` |
+
+   Máy này đã set sẵn qua DB (`workspace_suggested_messages`, workspace `My Workspace` id=1) — không cần làm tay. Máy khác thì thêm qua UI theo bảng trên (đây là dữ liệu runtime của AnythingLLM, không nằm trong repo nên không tự đồng bộ).
 
 ### Tham số (`action`)
 
