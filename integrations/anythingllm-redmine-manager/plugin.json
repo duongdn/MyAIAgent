@@ -1,0 +1,112 @@
+{
+  "active": true,
+  "name": "Redmine Manager",
+  "hubId": "redmine-manager",
+  "schema": "skill-1.0.0",
+  "version": "1.0.0",
+  "description": "Create, read, update, delete, and list Redmine issues, and look up project/tracker/status/priority IDs. Use for QC bug tracking: log a bug, check issue status, add a comment, change status, or find valid IDs before creating an issue.",
+  "author": "nus",
+  "license": "MIT",
+  "setup_args": {
+    "REDMINE_URL": {
+      "type": "string",
+      "required": true,
+      "input": {
+        "type": "text",
+        "default": "",
+        "placeholder": "https://redmine.example.com",
+        "hint": "Base URL of your Redmine instance, no trailing slash"
+      }
+    },
+    "REDMINE_API_KEY": {
+      "type": "string",
+      "required": true,
+      "input": {
+        "type": "text",
+        "default": "",
+        "placeholder": "40-character hex key",
+        "hint": "Redmine My account > API access key"
+      }
+    }
+  },
+  "examples": [
+    {
+      "prompt": "Tạo bug mới trong project QC-APP: login button không hoạt động trên Safari",
+      "call": "{\"action\": \"create\", \"project_id\": \"qc-app\", \"subject\": \"Login button không hoạt động trên Safari\", \"description\": \"Click nút Login không có phản hồi trên Safari 17.\", \"tracker_id\": 1}"
+    },
+    {
+      "prompt": "Xem chi tiết issue #123",
+      "call": "{\"action\": \"read\", \"issue_id\": 123}"
+    },
+    {
+      "prompt": "Đổi issue #123 sang Resolved và ghi chú đã fix",
+      "call": "{\"action\": \"update\", \"issue_id\": 123, \"status_id\": 3, \"notes\": \"Đã fix, chờ QA verify.\"}"
+    },
+    {
+      "prompt": "Liệt kê issue đang mở trong project QC-APP",
+      "call": "{\"action\": \"list\", \"project_id\": \"qc-app\", \"status_id\": 1}"
+    },
+    {
+      "prompt": "Danh sách các status hợp lệ trong Redmine",
+      "call": "{\"action\": \"meta\", \"meta_type\": \"statuses\"}"
+    },
+    {
+      "prompt": "Xoá issue #999 do tạo nhầm",
+      "call": "{\"action\": \"delete\", \"issue_id\": 999}"
+    }
+  ],
+  "entrypoint": {
+    "file": "handler.js",
+    "params": {
+      "action": {
+        "description": "Operation to perform: create, read, update, delete, list, or meta",
+        "type": "string"
+      },
+      "issue_id": {
+        "description": "Redmine issue ID. Required for read, update, delete.",
+        "type": "number"
+      },
+      "project_id": {
+        "description": "Project identifier (slug) or numeric ID. Required for create. Optional filter for list.",
+        "type": "string"
+      },
+      "subject": {
+        "description": "Issue title. Required for create.",
+        "type": "string"
+      },
+      "description": {
+        "description": "Issue description text. Used on create; ignored on update (use notes instead).",
+        "type": "string"
+      },
+      "tracker_id": {
+        "description": "Tracker ID (e.g. Bug/Feature/Task). Look up via action=meta, meta_type=trackers.",
+        "type": "number"
+      },
+      "priority_id": {
+        "description": "Priority ID. Look up via action=meta, meta_type=priorities.",
+        "type": "number"
+      },
+      "status_id": {
+        "description": "Status ID to set on update, or to filter by on list. Look up via action=meta, meta_type=statuses.",
+        "type": "number"
+      },
+      "assigned_to_id": {
+        "description": "Redmine user ID to assign the issue to.",
+        "type": "number"
+      },
+      "notes": {
+        "description": "Comment text to add. Used on update to log a note/comment (visible in issue journal).",
+        "type": "string"
+      },
+      "limit": {
+        "description": "Max number of results for list action. Default 25.",
+        "type": "number"
+      },
+      "meta_type": {
+        "description": "For action=meta: one of projects, trackers, statuses, priorities.",
+        "type": "string"
+      }
+    }
+  },
+  "imported": true
+}
