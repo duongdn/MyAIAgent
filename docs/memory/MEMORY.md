@@ -160,6 +160,7 @@
 - [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching
 - [feedback_news_digest_fb_source_misattribution](news-digest/feedback_news_digest_fb_source_misattribution.md) — mrgoonie post landed under Thiệu Nguyễn's JSON key, verify by link/content not key
 - [feedback_news_digest_nghienai_group_persistent_notloggedin](news-digest/feedback_news_digest_nghienai_group_persistent_notloggedin.md) — group-specific auth fail, distinct from session-wide failure
+- [feedback_news_digest_western_labs_only_query_gap](news-digest/feedback_news_digest_western_labs_only_query_gap.md) — 🔴 AI Model Releases source query missed DeepSeek/Qwen; fixed 2026-08-13
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)

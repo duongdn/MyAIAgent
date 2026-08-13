@@ -122,7 +122,7 @@ SOURCES = {
         },
         {
             "name": "Google News – AI Model Releases",
-            "url": _gnews("Claude Anthropic OpenAI GPT Gemini model release launch 2026"),
+            "url": _gnews("Claude Anthropic OpenAI GPT Gemini DeepSeek Qwen model release launch 2026"),
         },
         {
             "name": "Google News – AI",
