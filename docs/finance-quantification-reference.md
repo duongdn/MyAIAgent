@@ -9,7 +9,7 @@
 | **Web UI** | https://quantification.youragentstore.net |
 | **Login** | `quant` / `R2KL3YbsQkCvpL4` |
 | **Spreadsheet** | https://docs.google.com/spreadsheets/d/1uiahfXv8pIjgXYtddgNXcwHQF8BHmLQfcj3knXwIQZo/edit |
-| **CLI** | `node scripts/finance-quantification-build.js <TICKER> [--fireant\|--cafef] [--force]` (DuongDN only) |
+| **CLI** | `node scripts/finance-quantification-build.js <TICKER> [--fireant\|--cafef]` (DuongDN only) |
 
 ## How it works
 
@@ -24,7 +24,7 @@ TICKER ──► cafef.vn API (CDKT+KQKD+LCTT, TypeTime=NAM annual + TypeTime=QU
 - Section order: Tài sản → Nguồn vốn → Kết quả kinh doanh → Lưu chuyển tiền tệ
 - Row groups (collapsed by default) under each Roman-numeral sub-header; KQKD/LCTT sections get one group for their whole body
 - EPS rows ("Đồng/1 cổ phiếu") are NOT divided by 1e9 — kept as raw đồng, unlike all other rows which are tỷ đồng
-- Balance check (270 vs 440) runs on annual data only, tolerance 10M VND (cafef only; FireAnt checks TotalAsset==TotalCapital)
+- No balance-sheet reconciliation check (270 vs 440) — removed 2026-08-15 so sources with known-mismatched totals (e.g. VNM FY2025 annual NV on cafef) still write to sheet; verify totals manually if a ticker looks off.
 - No restriction on ticker type — banks/securities dumped as-is, whatever the source returns
 - No Claude agent in web path — script runs directly (seconds)
 - **View-only Google Sheets access cannot expand/collapse row groups** — documented in the "Info" tab; users must File → Make a copy for that.
@@ -35,7 +35,7 @@ Used when cafef returns <3 audited years or errors. Auth = the public anonymous 
 
 ⚠️ **FireAnt LCTT is aggregate-only** — only 5 rows (operating/investing/financing totals + beginning/end cash). FireAnt's API does not expose the ~37 granular LCTT items that cafef provides. So: **always prefer cafef** — only use FireAnt when cafef genuinely has no data. Note: BVH (long suspected of being incomplete on cafef) is actually COMPLETE on cafef (68-row insurance CDKT + 54-row insurance KQKD + 37-row LCTT) — verify per-ticker instead of assuming.
 
-⚠️ **Newly-listed tickers (e.g. HPA) can genuinely have <3 audited years on cafef** — this is real (not missing data), so default auto-fallback to FireAnt is risky: FireAnt may return stale data from a *different* company that previously held the same ticker code before delisting (verified: HPA on FireAnt has 2009-2012 data at ~1/50th the asset scale of 2025 — different entity, ticker reused). Use `--cafef` to force cafef-only (accepts as few as 1 audited year, no FireAnt fallback). Use `--force` to skip the 270/440 balance-sheet reconciliation check when cafef's own published totals have a small mismatch (seen: HPA 2025, 30M VND on a 4.7T VND balance sheet — cafef data-entry noise, not a script bug).
+⚠️ **Newly-listed tickers (e.g. HPA) can genuinely have <3 audited years on cafef** — this is real (not missing data), so default auto-fallback to FireAnt is risky: FireAnt may return stale data from a *different* company that previously held the same ticker code before delisting (verified: HPA on FireAnt has 2009-2012 data at ~1/50th the asset scale of 2025 — different entity, ticker reused). Use `--cafef` to force cafef-only (accepts as few as 1 audited year, no FireAnt fallback).
 
 ## Config
 

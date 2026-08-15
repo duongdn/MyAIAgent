@@ -174,7 +174,8 @@
 - [feedback_finance_report_never_construct_urls_and_more_ticker_collisions](finance-report/feedback_finance_report_never_construct_urls_and_more_ticker_collisions.md) — 🔴🔴🔴 KHÔNG tự tạo URL rss?q=, luôn lấy link thật từ JSON; FOX↔FOXA, HPP↔SHB nhiễu
 - [project_finance_quantification_skill](finance-report/project_finance_quantification_skill.md) — `/me:finance-quantification <TICKER>` standalone ratio analysis + web app at quantification.youragentstore.net, built 2026-07-30
 - [feedback_cafef_incomplete_fireant_alternative](finance-report/feedback_cafef_incomplete_fireant_alternative.md) — FireAnt fallback IMPLEMENTED; nhưng BVH verifed cafef đủ (insurance 68+54+37 rows); FireAnt LCTT chỉ 5 dòng gộp → luôn ưu tiên cafef
-- [feedback_newly_listed_ticker_thin_cafef_data](finance-report/feedback_newly_listed_ticker_thin_cafef_data.md) — HPA mới niêm yết, cafef chỉ 1 năm thật (không phải thiếu); FireAnt trộn data mã cũ khác chủ → dùng `--cafef --force` thay vì auto-fallback
+- [feedback_newly_listed_ticker_thin_cafef_data](finance-report/feedback_newly_listed_ticker_thin_cafef_data.md) — HPA mới niêm yết, cafef chỉ 1 năm thật (không phải thiếu); FireAnt trộn data mã cũ khác chủ → dùng `--cafef` thay vì auto-fallback
+- [feedback_balance_check_removed_may_write_mismatched_totals](finance-report/feedback_balance_check_removed_may_write_mismatched_totals.md) — 🔴 balance check (270 vs 440) đã bị XOÁ hẳn 2026-08-15 theo yêu cầu DuongDN; script giờ ghi mọi ticker kể cả khi tổng ko khớp (case VNM FY2025)
 
 ## tech-talk
 - [feedback_mpfc_excluded_from_demo](tech-talk/feedback_mpfc_excluded_from_demo.md) — 🔴 MPFC fully off-limits for this deck/demo, higher severity than other forbidden names

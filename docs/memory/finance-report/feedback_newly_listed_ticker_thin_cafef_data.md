@@ -1,9 +1,9 @@
 ---
 name: feedback_newly_listed_ticker_thin_cafef_data
-description: Newly-listed tickers (e.g. HPA) genuinely have <3 audited years on cafef — don't auto-fallback to FireAnt, use --cafef/--force flags instead
+description: Newly-listed tickers (e.g. HPA) genuinely have <3 audited years on cafef — don't auto-fallback to FireAnt, use --cafef flag instead
 metadata:
   type: feedback
-  modified: 2026-08-06T12:00:00Z
+  modified: 2026-08-15T12:00:00Z
 ---
 
 User (DuongDN) 2026-08-06: "HPA mã này ko có info gì vậy ta" — tab HPA only had 90 rows (FireAnt fallback output).
@@ -14,7 +14,8 @@ Also hit `BALANCE_MISMATCH: 2025 chênh=30.000.000đ` (mã 270 vs 440) — a gen
 
 **Fix implemented in `scripts/finance-quantification-build.js`:**
 - New `--cafef` flag: force cafef-only, skip the auto-fallback-to-FireAnt-on-<3-years logic (still falls back on genuine fetch *errors*). Accepts as few as 1 audited year.
-- New `--force` flag: skip the 270/440 balance-sheet reconciliation check for tickers with known tiny source-data noise.
 - Default behavior (no flags) unchanged: cafef first, auto-fallback to FireAnt on fetch error or <3 years — still correct for tickers where cafef is *actually* missing data (vs. genuinely-thin because newly listed).
 
-**How to apply:** When a ticker looks "empty" or thin, check row count and which source built it (cafef vs FireAnt) before assuming a bug. If FireAnt has a suspicious multi-year gap with a large scale jump (e.g. 50x), that's a strong signal of ticker-code reuse — rebuild `--cafef --force` instead of trusting the FireAnt blend. See [[reference_cafef_incomplete_fireant_alternative]] for the FireAnt LCTT-aggregate-only limitation (same "verify before trusting fallback" principle).
+**2026-08-15 update:** the 270/440 balance-sheet reconciliation check (and its `--force` bypass flag) was removed entirely from the script — see [[feedback_balance_check_removed_may_write_mismatched_totals]]. So a ticker no longer errors out on mismatch; it silently writes whatever cafef/FireAnt returns, mismatched or not.
+
+**How to apply:** When a ticker looks "empty" or thin, check row count and which source built it (cafef vs FireAnt) before assuming a bug. If FireAnt has a suspicious multi-year gap with a large scale jump (e.g. 50x), that's a strong signal of ticker-code reuse — rebuild with `--cafef` instead of trusting the FireAnt blend. See [[reference_cafef_incomplete_fireant_alternative]] for the FireAnt LCTT-aggregate-only limitation (same "verify before trusting fallback" principle).

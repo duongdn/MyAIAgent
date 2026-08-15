@@ -83,18 +83,6 @@ async function fetchCafef(ticker, maxYears, maxQuarters) {
   };
 }
 
-function checkBalance(tnY, nvY, i270, i440) {
-  for (const y of tnY) {
-    const n = nvY.find((n) => n.year === y.year);
-    if (!n) continue;
-    const v270 = y.data[i270]?.value ?? y.data[i270];
-    const v440 = n.data[i440]?.value ?? n.data[i440];
-    if (v270 == null || v440 == null) continue;
-    if (Math.abs(v270 - v440) >= 10_000_000) return `BALANCE_MISMATCH: ${y.year} chênh=${Math.abs(v270 - v440).toLocaleString("vi-VN")}đ`;
-  }
-  return null;
-}
-
 // ── Row builders ─────────────────────────────────────────────────────────────
 const fmtVnd = (raw) => { const v = raw / 1e9; if (v === 0) return " - "; const a = Math.abs(v).toLocaleString("en-US", { maximumFractionDigits: 0 }); return v < 0 ? `(${a})` : a; };
 // EPS-type rows ("Đồng/1 cổ phiếu") are already in đồng, not tỷ đồng — do not divide by 1e9
@@ -338,7 +326,6 @@ async function main() {
   const ticker = (args.find((a) => /^[A-Z0-9]{3,10}$/.test(a)) || "").toUpperCase();
   const forceFireant = args.includes("--fireant");
   const forceCafef = args.includes("--cafef");
-  const skipBalanceCheck = args.includes("--force");
   if (!ticker) { process.stderr.write("ERROR: INVALID_TICKER\n", () => process.exit(1)); return; }
 
   const yrs = config.max_years || 15;
@@ -372,14 +359,6 @@ async function main() {
   if (cf.tnYAnnual.length < minYears) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
-  // Balance check — annual only (audited), skip quarterly
-  const i270 = cf.tnT.findIndex((r) => (r.code || "").trim() === "270");
-  const i440 = cf.nvT.findIndex((r) => (r.code || "").trim() === "440");
-  if (i270 >= 0 && i440 >= 0 && !skipBalanceCheck) {
-    const be = checkBalance(cf.tnYAnnual, cf.nvYAnnual, i270, i440);
-    if (be) { process.stderr.write(`ERROR: ${be}\n`, () => process.exit(2)); return; }
-  }
-
   const { all, groups, headers } = buildAll(cf);
   const quarterPeriods = cf.tnY.slice(cf.tnYAnnual.length);
   const columnGroups = computeColumnGroups(cf.tnYAnnual.length, quarterPeriods);
