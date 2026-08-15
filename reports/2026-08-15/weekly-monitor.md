@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Weekly Monitor — Week of 2026-08-10 → 2026-08-14 (W39/data through Fri 08-14)
 
 **Run at:** 2026-08-15 ~15:55 +07 (Saturday — Friday run was skipped, catching up 1 day late)
@@ -125,11 +126,136 @@ Source: "Est vs Charged" tab (sheetId 920993260), range A13:L118, 100 named task
 | #2595 (Giftdrop Redemption) | 120h | 168.25h | +40% | unchanged |
 
 **Correction still pending:** `docs/memory/daily-report/fountain/feedback_fountain_kunal_checklist.md` still claims Parts 4/5 were "dropped, tab no longer used" — factually wrong (tab live, readable, frozen but real), flagged for 2 weeks running now.
+=======
+# Weekly Monitor — Week of 2026-08-10 → 2026-08-14 (data through Fri 08-14)
+
+**Run at:** 2026-08-15 ~08:40 +07 (Saturday)
+**Compared to:** W38 (Aug 3–7, report dated 2026-08-07)
+
+---
+
+## 🔴 BLOCKER: WorkStream Unavailable — Keycloak Session Expired
+
+WorkStream's browser profile Keycloak session has expired. Browser confirms the login form is showing (not SSO auto-login). All WorkStream-sourced hours for this week are **unavailable**.
+
+**Impact:** LongVV (Maddy/Marcel/OhCleo WS), PhucVT (Crystal lang WS), KhanhHH (Baamboozle/Generator/RDC WS), LeNH (Blair Brown/JD WS), AnhNH2 (JD Mobile WS), DuongDN (Tokenlite WS), all Fountain team actuals — all missing.
+
+**Fix needed:** Manual VNC login to `workstream.nustechnology.com` via browser. VNC port 5900, Xvfb :1 is running. Once logged in, re-run `node scripts/workstream-fetch-project-week.js 2026-08-10`.
+
+**Pattern:** This is the 4th+ WorkStream SSO failure in ~3 weeks (also failed 07-26, 07-31, 08-01). Prior diagnoses: environment/DISPLAY issue, not credential expiry. **This time it IS session expiry** — Keycloak login form is showing, not SSO auto-redirect.
+
+---
+
+## ⚠️ Critical Notes
+
+| Issue | Status |
+|-------|--------|
+| **WorkStream Keycloak session expired** — all WS-based hours unavailable | 🔴 Needs VNC re-login to refresh profile |
+| **TuanNT: 16h (Paturevision sheets only)** — low vs 37.75h last week | ⚠️ Neural Contract (WS) hours unknown — could be higher with WS data |
+| **LongVV: 1.75h JIRA only** (Thu-Fri, Maddy project) | ⚠️ WS Maddy/Marcel/OhCleo unavailable — JIRA alone very incomplete |
+| **VietPH: RESIGNED** (last day 2026-06-30) | ✓ No longer monitored — confirmed in leave-plan.json |
+| **Fountain Est vs Charged: 265.25h remaining** (28 tasks) | ↑ up from 229h frozen for 5 weeks — first change since W36 |
+| **W37 (27/07) and W38 (03/08) Matrix drafts still unsent** | Still awaiting your call (11+ days stale) |
+
+---
+
+## #1 — Team Hours (through Fri 08-14) — PARTIAL
+
+**WorkStream unavailable.** Only Google Sheets (Paturevision) and JIRA (LongVV) data available.
+
+### Summary Table
+
+| Developer | Source | Hours | Target | Status |
+|-----------|--------|-------|--------|--------|
+| TuanNT | Sheets: Paturevision 16h | **16h** (partial) | 40h | ⚠️ -24h vs target; Neural Contract WS unknown |
+| LongVV | JIRA: Maddy 1.75h (Thu+Fri only) | **1.75h** (JIRA only) | 16h (Maddy) | ⚠️ WS data unavailable — JIRA alone incomplete |
+| KhanhHH | WS unavailable | **?h** | 40h | ⚠️ Cannot verify |
+| LeNH | WS unavailable | **?h** | 40h | ⚠️ Cannot verify |
+| PhucVT | WS unavailable | **?h** | 40h | ⚠️ Cannot verify |
+| AnhNH2 | WS unavailable | **?h** | — (no fixed plan) | Cannot verify |
+| VietPH | Resigned 2026-06-30 | — | — | Not monitored |
+
+### Available Detail
+
+**TuanNT:** Paturevision (Bailey) sheet W{n}: **16h** for week starting Aug 10. John Yi and William Bills sheets are empty/abandoned (confirmed 0h). Neural Contract is WorkStream-only — not checkable until WS restored. If similar to last week (~2.25h Neural), total would be ~18.25h, still short of 40h.
+
+**LongVV (JIRA cross-check only):** 5 Maddy issues with worklogs Aug 10-14:
+- LIFM2-458 (Build read-only MCP server): 0.25h (08-13)
+- LIFM2-449 (Changes to Listed - Consign tab): 0.50h (08-13)
+- LIFM2-436 (Returns): 0.50h (08-13)
+- LIFM2-450 (Buy offer update change): 0.20h (08-14)
+- LIFM2-428 ([Shopify] Product Authenticity Certificate): 0.30h (08-14)
+- **JIRA total: 1.75h** — Note this is just logged JIRA worklogs, JIRA has been consistently stale vs actual WS hours all previous weeks.
+
+**Leave plan:** No approved leaves for any monitored dev in August. No `Nghỉ` rows found in Paturevision sheet this week.
+
+---
+
+## #2 — Fountain Weekly Check (W39, Aug 10-14)
+
+### Part 1 — Matrix Weekly Plan ✓
+
+Posted Mon 08-11 09:30 by @trinhmtt:
+
+```
+Em gửi plan tuàn này ạ
+ThinhT: 4h
+ViTHT: 40h
+DatNT: 40h
+LamLQ: 16h
+=> QC 25h
+```
+
+**Note:** VuTQ not in plan this week. ThinhT reduced to 4h (was 20h last week). LamLQ carried over (was 8h unplanned last week, now 16h planned).
+
+### Part 2 — Task Log Actuals ✗
+
+WorkStream unavailable — cannot fetch Fountain Greetings (`cmpqcjojh00q2tk1v2qi7gs0j`) hours. Fountain Greetings Google Sheet returns 0h for all devs (WS migration complete — sheets are empty).
+
+### Part 3 — Plan vs Actual ✗
+
+Cannot complete without WorkStream actuals.
+
+### Part 4 — Capacity & Runway ✓
+
+Source: "Est vs Charged" tab (Google Sheets).
+
+| Bucket | Tasks | Remaining | vs W38 |
+|--------|-------|-----------|--------|
+| Narrow (Not Started + In-progress) | 28 | **265.25h** | ↑+36h vs 229h frozen 5 weeks |
+| Deployed on Live | 21 | — | — |
+| Blank status (untriaged) | 29 | — | ↑ from 16 last week |
+
+**Breakdown:**
+- Not Started: 11 tasks, 165h est remaining
+- In-progress: 17 tasks, 100.25h remaining (est - actual, capped at 0)
+
+**First change after 5 weeks frozen:** 265.25h vs 229h frozen W36-W38. Likely due to task status reassignments or estimate revisions. Blank-status rows grew from 16 to 29 — team appears to be triaging new tasks but not assigning statuses.
+
+**Runway:** At 86h/week (previous benchmark), 265.25h remaining = ~3.1 weeks of dev capacity.
+
+### Part 5 — Over-Estimate Tracking ✓
+
+37+ items >20% over estimate. Top offenders (consistent with W38):
+
+| Task | Est | Actual | Over% | vs W38 |
+|------|-----|--------|-------|--------|
+| #2627 | 0.5h | 8.25h | +1550% | unchanged |
+| #2615 (Gift of Choice) | 12h | 106.75h | +790% | unchanged |
+| #2639 (Infinity active/inactive) | 2h | 16.5h | +725% | new in list |
+| #2545 (Build a box service modal) | 1h | 7.5h | +650% | new in list |
+| #2380 (checkout date display) | 4h | 25.25h | +531% | unchanged (6+ weeks) |
+| #2501 | 4h | 25.5h | +538% | new in list |
+| #2595 (Giftdrop Redemption) | 120h | 168.25h | +40% | unchanged |
+
+**Note:** Several new task IDs appear in the over-estimate list vs W38 (2639, 2545, 2501, etc.), though the frozen core remains the same.
+>>>>>>> auto: 2026-08-15 09:01
 
 ---
 
 ## #3 — James Diamond + Marcel + Blair Brown Matrix Report
 
+<<<<<<< HEAD
 **⚠️ Send-gate backlog: 3 weeks unconfirmed/unsent.** Per `config/.weekly-report-send-flags.json`, the W37 (27/07) draft is still sitting at `confirmed: false` (now 19 days stale). The W38 (03/08) draft from last week's report was never saved to the flag file or confirmed either — it was presented pending your call on the "Web=0h/0h" anomaly and never resolved. This week adds a W39 draft on top. **Need your instruction: send any of the backlog late, or supersede all of it with this week's draft (same as the W35 precedent, which was superseded rather than sent late)?**
 
 Raw numbers for this week (W39, 10/08):
@@ -174,11 +300,24 @@ Blair Brown - Peptide Clyde
 LeNH: 0h
 KhanhHH: 0h
 ```
+=======
+**Status: CANNOT DRAFT — WorkStream unavailable.** All JD, Marcel, Blair Brown hours are WorkStream-only.
+
+**Pending from previous weeks:**
+- **W37 (27/07) draft** in `config/.weekly-report-send-flags.json`: unconfirmed/unsent, now **19 days stale**. Last report asked: send late or supersede?
+- **W38 (03/08) draft** from 2026-08-07 report: drafted but not written to flag file. Asked: Web=0h/0h anomaly — send as-is or apply LongVV backfill?
+- **W39 (08-10) this week**: Cannot compute without WorkStream.
+
+**Your call needed:**
+1. Supersede W37 + W38 (skip them), or send late?
+2. Once WorkStream is restored, compute W39 numbers. Re-login to WS via VNC first.
+>>>>>>> auto: 2026-08-15 09:01
 
 ---
 
 ## #4 — Unresolved Questions
 
+<<<<<<< HEAD
 1. **3-week Matrix report backlog (W37 27/07, W38 03/08, W39 10/08)** — send any late, or supersede all with this week's draft?
 2. **TuanNT -24h with no leave on file** — needs a direct check on the cause; also why were the two "Overbudget" Wed/Thu blocks charged 0 despite hours logged?
 3. **LongVV short on both Maddy and OhCleo tracks** beyond what the half-day leave explains — needs follow-up?
@@ -190,3 +329,15 @@ KhanhHH: 0h
 ---
 
 *Data sources: `scripts/workstream-fetch-project-week.js 2026-08-10` (all projects, single clean fetch, no re-login needed), Bailey Paturevision Sheet W40 tab, JIRA `/rest/api/3/search/jql` (madhuraka + swiftstudio), Matrix `/messages` (Fountain room, full transcript 08-07→08-15), Fountain "Est vs Charged" tab (live Sheets API read), `config/leave-plan.json`.*
+=======
+1. **WorkStream VNC re-login** — needed before any WS-based data can be retrieved. Can you re-authenticate via VNC (port 5900)?
+2. **TuanNT 16h shortfall** — Paturevision only 16h this week (40h target). Any known reason? Neural Contract WS unknown.
+3. **W37 + W38 JD/Marcel/Blair Brown Matrix drafts** — supersede or send late?
+4. **LamLQ now officially planned (16h)** in Fountain — previously unplanned. Is this a new ongoing assignment?
+5. **Fountain blank-status rows grew from 16 to 29** — team is adding tasks but not assigning statuses. Worth asking Kunal's team to triage.
+6. **#2380 still unresolved** (6+ weeks, checkout date display).
+
+---
+
+*Data sources: `scripts/sheets-summary-employee-fetch.js` (11 sheets, Paturevision only non-empty), JIRA `/rest/api/3/search/jql` + `/issue/{key}/worklog` (madhuraka: LongVV 1.75h; swiftstudio: error), Matrix `/messages` (Fountain room, static `mct_` compat token), Fountain Est vs Charged tab (Google Sheets). WorkStream: UNAVAILABLE — Keycloak session expired.*
+>>>>>>> auto: 2026-08-15 09:01
