@@ -1,24 +1,23 @@
 #!/usr/bin/env node
 /**
- * Monitor Zalo personal messages (DuongDN).
- * Reuses the persistent browser profile created by zalo-setup.js
- * (config/.zalo-session/) so Zalo treats it as the same device.
+ * Monitor Zalo personal messages via Chrome Remote Debugging.
+ * Attaches to the existing chat.zalo.me tab in Chrome Profile 9 — no QR needed.
  *
- * First run: DISPLAY=:1 node scripts/zalo-setup.js  (scan QR once)
- * Usage:     node scripts/zalo-monitor.js [--since=ISO8601]
+ * Prerequisites:
+ *   - Chrome must be running with --remote-debugging-port=9222
+ *     (automatic after restarting Chrome once — .desktop file already updated)
+ *   - chat.zalo.me must be open in a Chrome tab
+ *
+ * Usage: node scripts/zalo-monitor.js [--since=ISO8601]
  * Output: JSON to stdout
  */
 
-const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const path = require('path');
 const fs = require('fs');
-
-puppeteer.use(StealthPlugin());
+const { findTab } = require('./chrome-remote-connect');
 
 const ROOT = path.resolve(__dirname, '..');
 const TIMELINES_PATH = path.join(ROOT, 'config', '.monitoring-timelines.json');
-const PROFILE_DIR = path.join(ROOT, 'config', '.zalo-session');
 
 function getSince() {
   const sinceArg = process.argv.find(a => a.startsWith('--since='));
@@ -28,66 +27,36 @@ function getSince() {
 }
 
 async function main() {
-  if (!fs.existsSync(PROFILE_DIR)) {
-    throw new Error('No Zalo session. Run first: DISPLAY=:1 node scripts/zalo-setup.js');
-  }
-
   const since = getSince();
   process.stderr.write(`[zalo] Window from ${new Date(since).toISOString()}\n`);
 
-  const captured = [];
-
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: '/usr/bin/google-chrome',
-    userDataDir: PROFILE_DIR, // same profile as setup — Zalo recognizes this device
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
-  });
+  const { browser, page } = await findTab('chat.zalo.me');
 
   try {
-    const page = await browser.newPage();
-    await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36');
+    // Verify logged in (not on login/QR page)
+    const isLoggedIn = await page.evaluate(() =>
+      !document.querySelector('.zLogin-layout, [class*="login"]') &&
+      !window.location.href.includes('id.zalo.me')
+    );
+    if (!isLoggedIn) throw new Error('Zalo not logged in — ensure chat.zalo.me is open and authenticated in Chrome');
 
-    // Intercept Zalo API responses
-    page.on('response', async (res) => {
-      const url = res.url();
-      const ct = res.headers()['content-type'] || '';
-      if (!ct.includes('json')) return;
-      if (!url.includes('zalo.me') && !url.includes('zadn.vn')) return;
-      try {
-        const body = await res.json();
-        if (body?.data && (body.data.msgs || body.data.convs || body.data.conversations ||
-            body.data.threads || body.data.msgList || body.data.threadList)) {
-          captured.push({ url, data: body.data });
-        }
-      } catch {}
-    });
+    process.stderr.write('[zalo] Tab ready, extracting conversations\n');
 
-    await page.goto('https://chat.zalo.me', { waitUntil: 'domcontentloaded', timeout: 30000 });
-
-    // Wait for app to load past login screen
-    try {
-      await page.waitForFunction(
-        () => !window.location.href.includes('id.zalo.me') &&
-              !(document.querySelector('#app')?.innerHTML?.includes('zLogin')),
-        { timeout: 20000, polling: 1000 }
-      );
-    } catch {
-      await browser.close();
-      throw new Error('Zalo session expired. Re-run: DISPLAY=:1 node scripts/zalo-setup.js');
-    }
-
-    process.stderr.write('[zalo] Session restored\n');
-    await new Promise(r => setTimeout(r, 5000)); // let conversation list render
-
-    // Extract from DOM (try multiple selectors Zalo may use)
+    // Intercept is not possible on an already-loaded page, so read from DOM
     const conversations = await page.evaluate(() => {
-      const selectors = ['[data-key]', '[class*="conv-item"]', '[class*="ConversationItem"]',
-                         '[class*="conversation-item"]', '.conv-item', '[class*="thread-item"]'];
+      // Try multiple selectors — Zalo updates class names periodically
+      const selectors = [
+        '[data-key]',
+        '[class*="conv-item"]',
+        '[class*="ConversationItem"]',
+        '[class*="conversation-item"]',
+        '[class*="thread-item"]',
+        '.conv-item',
+      ];
       for (const sel of selectors) {
         const items = document.querySelectorAll(sel);
         if (items.length > 0) {
-          return Array.from(items).slice(0, 30).map(el => ({
+          return Array.from(items).slice(0, 40).map(el => ({
             id: el.dataset.key || el.dataset.id || '',
             name: (el.querySelector('[class*="name"],[class*="Name"],strong')?.innerText || '').trim(),
             preview: (el.querySelector('[class*="preview"],[class*="Preview"],[class*="message"],p')?.innerText || '').trim(),
@@ -98,18 +67,21 @@ async function main() {
       return [];
     });
 
-    await browser.close();
+    // Filter to only chats with unread count
+    const withUnread = conversations.filter(c => c.unread && c.unread !== '0' && c.unread !== '');
+
+    await browser.disconnect(); // detach only — do NOT close Chrome
 
     console.log(JSON.stringify({
       since: new Date(since).toISOString(),
       scanned_at: new Date().toISOString(),
-      conversations,
-      api_captures: captured.length,
-      api_data: captured.slice(0, 3),
+      conversations_total: conversations.length,
+      conversations_with_unread: withUnread.length,
+      conversations: withUnread,
     }, null, 2));
 
   } catch (e) {
-    await browser.close().catch(() => {});
+    await browser.disconnect().catch(() => {});
     throw e;
   }
 }

@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 /**
- * Monitor WhatsApp personal messages (DuongDN).
- * Uses whatsapp-web.js with LocalAuth — session persisted in config/.whatsapp-session/.
+ * Monitor WhatsApp personal messages via Chrome Remote Debugging.
+ * Attaches to the existing WhatsApp Web tab in Chrome Profile 9 — no QR needed.
  *
- * First run (setup):  DISPLAY=:1 node scripts/whatsapp-monitor.js --setup
- *   → QR appears in terminal, scan from WhatsApp > Linked Devices on your phone.
- *   → Session saved. Subsequent runs restore it automatically (no QR needed).
+ * Prerequisites:
+ *   - Chrome must be running with --remote-debugging-port=9222
+ *     (automatic after restarting Chrome once — .desktop file already updated)
+ *   - web.whatsapp.com must be open in a Chrome tab
  *
- * Monitor run:  node scripts/whatsapp-monitor.js [--since=ISO8601]
+ * Usage: node scripts/whatsapp-monitor.js [--since=ISO8601]
  * Output: JSON to stdout
  */
 
 const path = require('path');
 const fs = require('fs');
+const { findTab } = require('./chrome-remote-connect');
 
 const ROOT = path.resolve(__dirname, '..');
 const TIMELINES_PATH = path.join(ROOT, 'config', '.monitoring-timelines.json');
-const SESSION_PATH = path.join(ROOT, 'config', '.whatsapp-session');
-const SETUP_MODE = process.argv.includes('--setup');
 
 function getSince() {
   const sinceArg = process.argv.find(a => a.startsWith('--since='));
@@ -27,97 +27,52 @@ function getSince() {
 }
 
 async function main() {
-  const { Client, LocalAuth } = require('whatsapp-web.js');
-  const qrcode = require('qrcode-terminal');
+  const since = getSince();
+  process.stderr.write(`[whatsapp] Window from ${new Date(since).toISOString()}\n`);
 
-  const since = SETUP_MODE ? 0 : getSince();
-  if (!SETUP_MODE) {
-    process.stderr.write(`[whatsapp] Window from ${new Date(since).toISOString()}\n`);
+  const { browser, page } = await findTab('web.whatsapp.com');
+
+  try {
+    // Check logged in
+    const isReady = await page.evaluate(() =>
+      !!document.querySelector('[data-testid="chat-list"], #pane-side, [data-testid="conversation-panel-wrapper"]')
+    );
+    if (!isReady) throw new Error('WhatsApp Web not logged in — open web.whatsapp.com in Chrome and scan QR');
+
+    process.stderr.write('[whatsapp] Tab ready, extracting chats\n');
+
+    // Extract chats with unread messages from the sidebar
+    const chats = await page.evaluate((sinceMs) => {
+      const items = document.querySelectorAll(
+        '#pane-side [role="listitem"], [data-testid="cell-frame-container"]'
+      );
+      return Array.from(items).slice(0, 60).map(el => {
+        const nameEl = el.querySelector('[data-testid="cell-frame-title"] span, span[title]');
+        const previewEl = el.querySelector('[data-testid="last-msg-status"] ~ span, [data-testid="conversation-snippet"] span');
+        const unreadEl = el.querySelector('[data-testid="icon-unread-count"], span[aria-label*="unread"]');
+        const timeEl = el.querySelector('[data-testid="cell-frame-primary-detail"] span');
+        return {
+          name: (nameEl?.getAttribute('title') || nameEl?.innerText || '').trim(),
+          preview: (previewEl?.innerText || '').trim(),
+          unread: (unreadEl?.innerText || '').trim(),
+          time: (timeEl?.innerText || '').trim(),
+        };
+      }).filter(c => c.name && c.unread && c.unread !== '');
+    }, since);
+
+    await browser.disconnect(); // detach only — do NOT close Chrome
+
+    console.log(JSON.stringify({
+      since: new Date(since).toISOString(),
+      scanned_at: new Date().toISOString(),
+      chats_with_unread: chats.length,
+      chats,
+    }, null, 2));
+
+  } catch (e) {
+    await browser.disconnect().catch(() => {});
+    throw e;
   }
-
-  const client = new Client({
-    authStrategy: new LocalAuth({ dataPath: SESSION_PATH }),
-    puppeteer: {
-      headless: true,
-      executablePath: '/usr/bin/google-chrome',
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
-    },
-  });
-
-  return new Promise((resolve, reject) => {
-    const TIMEOUT_MS = SETUP_MODE ? 180000 : 60000;
-    const timeout = setTimeout(() => {
-      client.destroy().catch(() => {});
-      reject(new Error(SETUP_MODE
-        ? 'Setup timed out — no QR scan detected within 3 min'
-        : 'WhatsApp client timed out. If session expired, re-run with --setup'));
-    }, TIMEOUT_MS);
-
-    client.on('qr', (qr) => {
-      process.stderr.write('[whatsapp] Scan this QR from WhatsApp > Linked Devices:\n');
-      qrcode.generate(qr, { small: true });
-    });
-
-    client.on('auth_failure', (msg) => {
-      clearTimeout(timeout);
-      client.destroy().catch(() => {});
-      reject(new Error('WhatsApp auth failed: ' + msg + ' — re-run with --setup'));
-    });
-
-    client.on('ready', async () => {
-      process.stderr.write('[whatsapp] Session ready\n');
-
-      if (SETUP_MODE) {
-        clearTimeout(timeout);
-        process.stderr.write(`[whatsapp] Setup complete — session saved to ${SESSION_PATH}/\n`);
-        await client.destroy();
-        console.log(JSON.stringify({ setup: 'complete', session_path: SESSION_PATH }));
-        resolve();
-        return;
-      }
-
-      try {
-        const chats = await client.getChats();
-        process.stderr.write(`[whatsapp] ${chats.length} chats found\n`);
-
-        const results = [];
-        for (const chat of chats) {
-          if (chat.timestamp * 1000 < since) continue;
-          const messages = await chat.fetchMessages({ limit: 50 });
-          const recent = messages.filter(m => m.timestamp * 1000 >= since && !m.fromMe);
-          if (!recent.length) continue;
-
-          results.push({
-            chat_name: chat.name || chat.id.user,
-            is_group: chat.isGroup,
-            unread_count: chat.unreadCount,
-            messages: recent.map(m => ({
-              from: m._data?.notifyName || m.author || m.from,
-              body: (m.body || '').slice(0, 500),
-              ts: new Date(m.timestamp * 1000).toISOString(),
-              has_media: m.hasMedia,
-            })),
-          });
-        }
-
-        clearTimeout(timeout);
-        await client.destroy();
-        console.log(JSON.stringify({
-          since: new Date(since).toISOString(),
-          scanned_at: new Date().toISOString(),
-          total_active_chats: results.length,
-          chats: results,
-        }, null, 2));
-        resolve();
-      } catch (e) {
-        clearTimeout(timeout);
-        await client.destroy().catch(() => {});
-        reject(e);
-      }
-    });
-
-    client.initialize().catch(reject);
-  });
 }
 
 main().catch(e => {
