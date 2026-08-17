@@ -267,18 +267,18 @@
   },
   "monday_report": {
     "description": "Updated when Monday project status report runs. Reporting week = previous Mon-Sun.",
-    "last_run": "2026-08-17T09:04:00+07:00",
+    "last_run": "2026-08-17T09:28:00+07:00",
     "last_reporting_week": "2026-08-10 to 2026-08-16",
     "last_status": "complete",
-    "mode": "test",
-    "output_file": "reports/2026-08-17/0904-monday-report.md",
+    "mode": "live",
+    "output_file": "reports/2026-08-17/0928-monday-report.md",
     "caveats": [
       "Sheets stale for 6/8 projects (0.00) - Workstream weekTotal used",
-      "Maddy corrected to LongVV-only (3.25h) after initial full-team WS total (14.25h) was wrong",
+      "Maddy = LongVV only (3.25h), not full-team WS sum",
       "James Diamond Discord limited to AirAgri only (HOMIEAPP excluded per policy)",
-      "Marcel external bugs corrected 0->3 after initial run skipped Slack (skill text wrongly says always-0; client=Equanimity workspace not Marcel/Tokenlite-named)"
+      "Marcel external bugs = 3, found via Equanimity Slack workspace (skill text always-0 default is wrong)"
     ],
-    "submissions_20260817": "Maddy (2|0|3.25h), Baamboozle (0|2|17h), James Diamond (0|0|59.5h), Bailey (1|0|17.5h), Marcel (0|3|1.5h, corrected from 0|0), Neural Contract (0|0|0h), LegalAtoms (0|0|0h), Andrew Taraba (0|0|0h) - all 200 TEST, Trello n/a (test mode)"
+    "submissions_20260817": "Maddy (2|0|3.25h), Baamboozle (0|2|17h), James Diamond (0|0|59.5h), Bailey (1|0|17.5h), Marcel (0|3|1.5h), Neural Contract (0|0|0h), LegalAtoms (0|0|0h), Andrew Taraba (0|0|0h) - all 200 LIVE, Trello 8/8 complete"
   },
   "upwork_memo": {
     "description": "Updated when Upwork Memo validation (Piece 15) runs. Used as the memo date for next run.",
