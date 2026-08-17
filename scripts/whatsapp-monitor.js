@@ -84,7 +84,7 @@ function parseDayLabel(label, nowMs) {
 /** Combine day (midnight ms) + "HH:MM" into a full epoch ms (null if either missing). */
 function resolveMsgTs(dayMs, hhmm) {
   const hm = (hhmm || '').match(/^(\d{1,2}):(\d{2})$/);
-  if (!dayMs) return hm ? null : null;
+  if (!dayMs) return null;
   if (!hm) return dayMs; // day boundary system message
   const d = new Date(dayMs);
   d.setHours(+hm[1], +hm[2], 0, 0);
@@ -108,7 +108,9 @@ async function main() {
       const items = document.querySelectorAll('[data-testid="cell-frame-container"]');
       const out = [];
       for (const el of items) {
-        const name = el.querySelector('[data-testid="cell-frame-title"]')?.innerText?.trim() || '';
+        // strip the unread-count prefix (e.g. "3 tin nhắn chưa đọc\n") from the title
+        let name = el.querySelector('[data-testid="cell-frame-title"]')?.innerText?.trim() || '';
+        name = name.replace(/^\d+\s*(tin nhắn chưa đọc|unread messages?)[\s\n]*/i, '');
         const time = el.querySelector('[data-testid="cell-frame-primary-detail"]')?.innerText?.trim() || '';
         const preview =
           el.querySelector('[data-testid="cell-frame-secondary"]')?.innerText?.trim() ||
@@ -130,22 +132,23 @@ async function main() {
 
     // 2) For each recent chat, open it and read message content since `since`
     for (const chat of recent) {
-      const opened = await page.evaluate(async (chatName) => {
-        // real click opens the conversation (JS .click() alone does not)
+      // real mouse click (CDP input events) opens the conversation — JS .click()/dispatchEvent do not
+      const box = await page.evaluate(async (chatName) => {
+        const clean = (t) => (t || '').replace(/^\d+\s*(tin nhắn chưa đọc|unread messages?)[\s\n]*/i, '').trim();
         const titleEl = Array.from(document.querySelectorAll('[data-testid="cell-frame-title"]'))
-          .find(e => (e.innerText || '').includes(chatName));
-        if (!titleEl) return false;
+          .find(e => clean(e.innerText) === chatName) ||
+          Array.from(document.querySelectorAll('[data-testid="cell-frame-title"]'))
+            .find(e => (e.innerText || '').includes(chatName));
+        if (!titleEl) return null;
+        titleEl.scrollIntoView({ block: 'center', inline: 'nearest' });
+        await new Promise(r => setTimeout(r, 350));
         const r = titleEl.getBoundingClientRect();
-        if (r.width === 0) return false;
-        // dispatch a real pointer sequence on the title element
-        const x = r.x + r.width / 2, y = r.y + r.height / 2;
-        const opts = { bubbles: true, cancelable: true, view: window, clientX: x, clientY: y };
-        titleEl.dispatchEvent(new MouseEvent('mousedown', opts));
-        titleEl.dispatchEvent(new MouseEvent('mouseup', opts));
-        titleEl.dispatchEvent(new MouseEvent('click', opts));
-        return true;
+        if (r.width === 0 || r.height === 0) return null;
+        if (r.left < 0 || r.right > window.innerWidth || r.top < 0 || r.bottom > window.innerHeight) return null;
+        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
       }, chat.name);
-      if (!opened) { chat.messages = []; continue; }
+      if (!box) { chat.messages = []; continue; }
+      await page.mouse.click(box.x, box.y);
       await new Promise(r => setTimeout(r, 2500));
 
       // 3) Scroll up to load older messages, then extract since `since`
@@ -220,8 +223,11 @@ async function main() {
           msgs = extract();
           // stop if we already loaded a message older than the window
           const oldest = msgs.reduce((min, m) => {
-            const dm = m.day ? parseDayLabel(m.day, Date.now()) : null;
-            const t = dm != null ? resolveMsgTs(dm, m.meta) : null;
+            const dm = m.day ? dayMs(m.day) : null;
+            const hm = (m.meta || '').match(/^(\d{1,2}):(\d{2})$/);
+            let t = null;
+            if (dm != null && hm) { const dd = new Date(dm); dd.setHours(+hm[1], +hm[2], 0, 0); t = dd.getTime(); }
+            else if (dm != null) t = dm;
             return t != null && t < min ? t : min;
           }, Infinity);
           if (oldest < sinceMs) break;
@@ -229,15 +235,22 @@ async function main() {
         return msgs;
       }, since);
 
-      // 4) Resolve each message's full timestamp and filter to the window
-      chat.messages = (chat.messages || [])
+      // 4) Resolve each message's full timestamp (carry time forward across collapsed timestamps)
+      const rawMsgs = chat.messages || [];
+      let lastTime = null, lastDay = null;
+      chat.messages = rawMsgs
         .map(m => {
           const dayMs = m.day ? parseDayLabel(m.day, now) : null;
-          const ts = dayMs != null ? resolveMsgTs(dayMs, m.meta) : null;
+          if (dayMs == null) return null;
+          if (m.day !== lastDay) { lastTime = null; lastDay = m.day; }
+          const hm = (m.meta || '').match(/^(\d{1,2}):(\d{2})$/);
+          if (hm) lastTime = m.meta;
+          const ts = hm ? resolveMsgTs(dayMs, m.meta) : (lastTime ? resolveMsgTs(dayMs, lastTime) : dayMs);
           const from = m.incoming ? (m.author || 'unknown') : 'Bạn';
-          return { from, text: m.text, ts: ts != null ? new Date(ts).toISOString() : null };
+          return { from, text: m.text, ts: new Date(ts).toISOString() };
         })
-        .filter(m => m.ts != null && new Date(m.ts).getTime() >= since)
+        .filter(m => m && m.text && m.text.trim())
+        .filter(m => new Date(m.ts).getTime() >= since)
         .sort((a, b) => new Date(a.ts) - new Date(b.ts));
     }
 

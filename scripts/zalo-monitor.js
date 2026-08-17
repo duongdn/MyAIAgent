@@ -10,7 +10,15 @@
  *   - chat.zalo.me open + logged in once
  *
  * Usage: node scripts/zalo-monitor.js [--since=ISO8601]
- * Output: JSON to stdout — conversations with recent activity (last message since `since`).
+ * Output: JSON to stdout — conversations with recent activity (name + last-activity time).
+ *
+ * LIMITATION (hard constraint, do not re-investigate):
+ *   - Zalo is end-to-end encrypted (Signal protocol); message bodies are base64
+ *     ciphertext in IndexedDB (`zdb` `message`/`preview_message` stores) — not readable.
+ *   - The Web UI (chat.zalo.me) stays in a perpetual "Đang đồng bộ tin nhắn…" sync state
+ *     in this dedicated Chrome: `z-conv-message` (preview) is always empty, no unread
+ *     badge renders, and clicking a conversation never opens a message pane.
+ *   - Therefore ONLY conversation name + last-activity time is available. No content.
  */
 
 const path = require('path');
@@ -82,21 +90,23 @@ async function main() {
       const items = document.querySelectorAll('.conv-item');
       const out = [];
       for (const el of items) {
-        const name = el.querySelector('.conv-item-title__name')?.innerText?.trim() || '';
-        const time = el.querySelector('.preview-time, [class*="time"]')?.innerText?.trim() || '';
-        const preview = el.querySelector('[class*="preview-msg"], [class*="msg-preview"], [class*="message"]')?.innerText?.trim() || '';
-        const unread = el.querySelector('[class*="badge"], [class*="unread"], [class*="count"]')?.innerText?.trim() || '';
+        // NBSP → space, collapse whitespace (Zalo renders names with &nbsp;)
+        const name = (el.querySelector('.conv-item-title__name')?.innerText || '')
+          .replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
+        const time = (el.querySelector('.preview-time')?.innerText || '')
+          .replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
         if (!name) continue;
-        out.push({ name, preview, time, unread });
+        out.push({ name, time });
       }
       return out;
     });
 
     const now = Date.now();
-    const recent = conversations.filter(c => {
-      const ts = parseZaloTime(c.time, now);
-      return ts != null && ts >= since;
-    });
+    const recent = conversations
+      .map(c => ({ ...c, _ts: parseZaloTime(c.time, now) }))
+      .filter(c => c._ts != null && c._ts >= since)
+      .sort((a, b) => b._ts - a._ts) // most recent first
+      .map(({ _ts, ...c }) => c);
 
     await browser.disconnect(); // detach only — do NOT close Chrome
 
@@ -105,6 +115,8 @@ async function main() {
       scanned_at: new Date().toISOString(),
       total_conversations: conversations.length,
       recent_count: recent.length,
+      content_available: false,
+      note: 'Zalo is E2E-encrypted; Web UI stuck in sync state. Name + last-activity time only.',
       conversations: recent,
     }, null, 2));
 

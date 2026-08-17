@@ -136,9 +136,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | `/daily-report upwork-memo` | Validate Upwork hourly work memos (Piece 15) for yesterday — all hourly workrooms |
 | `/daily-report upwork-memo --date=YYYY-MM-DD` | Validate a specific date's memos |
 | **WhatsApp** | |
-| `/daily-report whatsapp` | DuongDN personal WhatsApp (Piece 16) — new messages from open web.whatsapp.com tab |
+| `/daily-report whatsapp` | DuongDN personal WhatsApp (Piece 16) — full message content from dedicated monitor Chrome |
 | **Zalo** | |
-| `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — new messages from open chat.zalo.me tab |
+| `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — recent conversations (name+time) from dedicated monitor Chrome; content unavailable |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -1156,33 +1156,35 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 
 ## Piece 16 — WhatsApp (`/daily-report whatsapp`)
 
-**Account:** DuongDN personal WhatsApp (Chrome Profile 9, `dnduongus@gmail.com`).
+**Account:** DuongDN personal WhatsApp (`dnduongus@gmail.com`).
 
-**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `web.whatsapp.com` tab. No QR, no cookie extraction — WhatsApp uses end-to-end crypto (Signal protocol) bound to the browser instance, so the ONLY reliable path is the live tab.
+**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `web.whatsapp.com` tab in the **dedicated monitor Chrome**. WhatsApp uses end-to-end crypto (Signal protocol) bound to the browser instance via IndexedDB, so cookie extraction + copy-profile both fail — the live tab is the ONLY reliable path.
 
-**Prerequisites (one-time setup):**
-1. Chrome must be started with `--remote-debugging-port=9222` (already configured via `~/.local/share/applications/google-chrome.desktop` override — takes effect after ONE Chrome restart)
-2. Open `web.whatsapp.com` in Chrome Profile 9 and scan the QR once (WhatsApp → Settings → Linked Devices) — session then persists in that profile
-3. Keep the `web.whatsapp.com` tab open (can be backgrounded)
+**Prerequisites (already configured — one-time):**
+1. Monitor Chrome autostarts on login: `~/.config/autostart/whatsapp-zalo-monitor.desktop` → `google-chrome-stable --remote-debugging-port=9222 --user-data-dir=/home/nus/chrome-monitor-data "https://web.whatsapp.com" "https://chat.zalo.me"`
+2. Chrome 136+ BLOCKS `--remote-debugging-port` on the default profile — the dedicated `--user-data-dir=/home/nus/chrome-monitor-data` is mandatory (never try the default `~/.config/google-chrome`).
+3. One-time: open `web.whatsapp.com` in the monitor Chrome and scan the QR (WhatsApp → Settings → Linked Devices). Session persists in `chrome-monitor-data`.
+4. Keep the tab open (autostart handles this).
 
 **Run:**
 ```bash
 node scripts/whatsapp-monitor.js [--since=ISO8601]
 ```
-- Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically
-- Output JSON: `{ chats: [{ chat_name, is_group, unread_count, messages: [{from, body, ts}] }] }`
+- Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically (time-based window, NOT unread-based).
+- Output JSON: `{ chats: [{ name, time, preview, unread, messages: [{from, text, ts}] }] }` — opens each recent conversation via a real CDP mouse click, scrolls history, extracts full message content (sender + body + timestamp) since the window.
 
 **What to flag:**
-- New messages from clients in the window (since `last_run`) — list verbatim, chat name + sender + time
-- Unread client messages = alert (customer communication, never auto-reply)
-- Personal non-client chats: summarize briefly, don't surface as alerts
+- Read each chat's messages verbatim. Summarize per chat: sender + time + excerpt.
+- Client/customer conversations = alert (verbatim excerpts, never auto-reply).
+- Personal non-client chats: summarize briefly, don't surface as alerts.
+- A chat with only a system message (OTP code, "message history sent") shows `messages: []` but a non-empty `preview` — report the preview, don't treat it as empty/error.
 
 **Report — append to daily report:**
 ```
 ## WhatsApp — {HH:MM} (+07:00)
 | Chat | New msgs | Key content |
 |------|----------|-------------|
-| {name} | N | {sender}: "{excerpt}" |
+| {name} | N | {sender} ({HH:MM}): "{excerpt}" |
 ...
 {Alerts if any client messages.}
 ```
@@ -1191,35 +1193,36 @@ node scripts/whatsapp-monitor.js [--since=ISO8601]
 
 ## Piece 17 — Zalo (`/daily-report zalo`)
 
-**Account:** DuongDN personal Zalo (Chrome Profile 9, `dnduongus@gmail.com`).
+**Account:** DuongDN personal Zalo (`dnduongus@gmail.com`).
 
-**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `chat.zalo.me` tab. Zalo uses the same end-to-end crypto model (private key in IndexedDB, bound to the browser) so cookie-extraction + copy-profile both fail; the live tab is the only reliable path.
+**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `chat.zalo.me` tab in the dedicated monitor Chrome (same instance + autostart entry as Piece 16).
 
-**Prerequisites (one-time setup):**
-1. Chrome started with `--remote-debugging-port=9222` (shared with WhatsApp — same `.desktop` override)
-2. `chat.zalo.me` open in Chrome Profile 9 and authenticated (scan QR once if not already)
-3. Keep the `chat.zalo.me` tab open
+**Prerequisites:** same as Piece 16 (shared autostart entry). One-time: log in Zalo in the monitor Chrome.
 
 **Run:**
 ```bash
 node scripts/zalo-monitor.js [--since=ISO8601]
 ```
-- Reads `daily_report.last_run` from `config/.monitoring-timelines.json`
-- Output JSON: `{ conversations: [{ name, preview, unread }] }`
+- Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically (time-based window).
+- Output JSON: `{ conversations: [{ name, time }], content_available: false }` — most-recent first.
+
+**LIMITATION (hard constraint — do NOT re-investigate):**
+- Zalo is E2E-encrypted (Signal protocol); message bodies are base64 ciphertext in IndexedDB (`zdb` `message`/`preview_message` stores) — not readable off the wire.
+- The Web UI stays in a perpetual "Đang đồng bộ tin nhắn…" sync state in the monitor Chrome: preview (`z-conv-message`) is always empty, no unread badge renders, and clicking a conversation never opens a message pane.
+- So ONLY conversation name + last-activity time is available. **No message content.**
 
 **What to flag:**
-- Conversations with unread count > 0 since `last_run` — list name + preview text
-- Client/customer conversations = alert (verbatim excerpt)
-- Personal chats: summarize, don't surface as alerts
+- List recent conversations (name + activity time), most-recent first.
+- Low-value signal — no content, no alert threshold. Just report which conversations are active.
 
 **Report — append to daily report:**
 ```
 ## Zalo — {HH:MM} (+07:00)
-| Conversation | Unread | Preview |
-|--------------|--------|---------|
-| {name} | N | {excerpt} |
+| Conversation | Last activity |
+|--------------|---------------|
+| {name} | {time} |
 ...
-{Alerts if any client messages.}
+_Content unavailable (E2EE + Web UI stuck syncing)._
 ```
 
 ---

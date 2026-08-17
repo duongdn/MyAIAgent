@@ -114,6 +114,9 @@
 ## daily-report:performance
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES
 
+## daily-report:whatsapp-zalo
+- [project_whatsapp_zalo_cdp_monitor](daily-report/project_whatsapp_zalo_cdp_monitor.md) — 🔴 WhatsApp full content + Zalo name/time only; dedicated monitor Chrome (--user-data-dir), E2EE constraint
+
 ## bailey-invoice-verify/monitor/task-monitor
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md)
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md), [feedback_warning_needs_explanation](bailey/feedback_warning_needs_explanation.md), [reference_bailey_monitor_skill_file](bailey/reference_bailey_monitor_skill_file.md)

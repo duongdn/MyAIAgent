@@ -20,3 +20,9 @@ WhatsApp + Zalo monitoring added to daily report (Piece 16 = WhatsApp, Piece 17 
 - Config: `config/.whatsapp-config.json` + `config/.zalo-config.json` (informational only, not read by scripts; re-encrypt after edits).
 
 Why Slack works but Zalo/WA don't: Slack = single xoxc cookie → API call; Zalo/WA = cookies + JS crypto session in IndexedDB → need live browser.
+
+**Implementation status (2026-08-17):**
+- `whatsapp-monitor.js` — FULL message content extraction working. Time-based window (since `daily_report.last_run`, `--since=ISO8601` override). Opens each recent chat via a real CDP `page.mouse.click` (JS `.click()`/`dispatchEvent` do NOT work), scrolls history, parses VN+EN day separators ("Hôm nay"/"Hôm qua"/weekdays/"DD/MM/YYYY"), carries time forward across collapsed timestamps. Output: `chats[{name,time,preview,unread,messages[{from,text,ts}]}]`.
+  - Two bugs fixed: (1) chat title includes a volatile unread prefix ("N tin nhắn chưa đọc\nName") that changes between list-read and click-time → strip it before matching; (2) below-the-fold chats need `scrollIntoView` before the click, else the bounding box is off-viewport and the click misses.
+  - Chats with only a system message (OTP, "message history sent") correctly return `messages: []` + a non-empty `preview` — not a bug.
+- `zalo-monitor.js` — LIST-LEVEL ONLY (name + last-activity time). `z-conv-message` (preview) is always empty because the Web UI stays in a perpetual "Đang đồng bộ tin nhắn…" sync state; no unread badge renders; clicking a conversation never opens a message pane. Message bodies are base64 E2EE ciphertext in IndexedDB (`zdb`). Zalo content extraction is NOT achievable — do not re-investigate.
