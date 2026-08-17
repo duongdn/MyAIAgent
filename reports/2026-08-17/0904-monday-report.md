@@ -1,6 +1,6 @@
 # Monday Report — Week 2026-08-10–2026-08-16
 
-**Submitted:** 2026-08-17 09:04 +07 | **Mode:** TEST | **Form submissions:** 8/8 ✓ | **Trello:** n/a — test mode
+**Submitted:** 2026-08-17 09:04 +07 (Marcel corrected 09:21 +07) | **Mode:** TEST | **Form submissions:** 9/8 (Marcel resubmitted with correction) ✓ | **Trello:** n/a — test mode
 
 ---
 
@@ -12,7 +12,7 @@
 | Aysar Khalid - Baamboozle | 17 | 0 | 2 | KhanhHH 17h. External bugs: #678 game count wrong in multiple places (reported+fixed), TEAM subscription expiry date wrong after PR 603 release. |
 | James Diamond - Portfolio | 59.5 | 0 | 0 | AnhNH2 20h + LeNH 39.5h. |
 | Bailey Joey - Speedventory | 17.5 | 1 | 0 | Sheet-only (no Workstream). 1 internal bug: #80302 Validate Map UI issue. |
-| Marcel Fuessinger - Tokenlite | 1.5 | 0 | 0 | DuongDN 0.5h + LongVV 1h. |
+| Marcel Fuessinger - Tokenlite | 1.5 | 0 | 3 | DuongDN 0.5h + LongVV 1h. 3 external bugs (corrected — see caveats): device scan failures 13-14 Aug, SGBuildex fields empty/UAT-prod mismatch, invalid worker FIN/NRIC data. |
 | Neural Contract - Neural Contract - Test Job | 0 | 0 | 0 | No activity this week. |
 | Raymond Huang - LegalAtoms | 0 | 0 | 0 | No direct client ask to us this week (Raymond has many unrelated sub-projects). |
 | Andrew Taraba - Portfolio | 0 | 0 | 0 | No Bizurk Discord activity this week. |
@@ -27,6 +27,7 @@
 
 ## Caveats
 
+- **Marcel external bugs correction:** initial pass reported 0 external bugs because Marcel/Tokenlite has no Slack workspace literally named "Marcel"/"Tokenlite" and the skill text says "External Bugs: Always 0" for this project — skipped checking Slack entirely. User caught this. The client's actual company is "Equanimity® (Blockchain) Holdings" (found via Workstream `/pinfo/projects/{id}` customer field) which matches the **Equanimity** Slack workspace already in `config/.slack-accounts.json` (xoxc session, refreshed via `slack-xoxc-refresh-equanimity.js`). Found 3 distinct external bugs in the `xid-technologies` channel: (1) device scan failures 13-14 Aug causing missing clock-in/clock-out (reported by komal.bailur relaying Ken-Pal team, escalated by Marcel re: 21 Aug recurrence), (2) SGBuildex-related fields empty in RealTimeLogs / data that worked in UAT not populating in production, (3) invalid per-worker data (FIN/NRIC format, nationality) flagged by komal, fixed by carrick. Resubmitted Marcel row (external 0→3) after initial submission. Same class of error as the already-documented "always 0" hours mistake for Neural/LegalAtoms/Taraba — the skill's static defaults are unreliable and must be checked against live sources, not trusted at face value.
 - **Maddy hours correction:** initially computed as full-team WS total (14.25h: ThanhNX+LongVV+TuanTT) — user corrected to LongVV-only (3.25h), consistent with existing memory that Maddy tracking is LongVV-only since 2026-04-06. Sheet ID's own annotation in memory was overlooked on first pass; corrected before submission.
 - **James Diamond Discord scope:** per mandatory policy (CLAUDE.md monitoring rules + `feedback_discord_only_airagri_bizurk`), only AirAgri guild was searched — HOMIEAPP is excluded even though the monday-report skill text names it for James Diamond. No Diamond-related messages found in AirAgri (searched "jdiamond"/"diamond" content, zero hits) — external-bug figure may be incomplete if James Diamond activity happens in HOMIEAPP.
 - **External-bug judgment calls confirmed by user:**

@@ -137,6 +137,7 @@
 - [reference_sheets_summary_week_fetch_script](monday-report/reference_sheets_summary_week_fetch_script.md) — fixes UTC date-shift bug
 - [feedback_external_bug_counting_judgment_calls](monday-report/feedback_external_bug_counting_judgment_calls.md) — merge same-issue threads, exclude investigation-only client asks
 - [feedback_maddy_workstream_hours_longvv_filter](monday-report/feedback_maddy_workstream_hours_longvv_filter.md) — 🔴 Maddy WS hours = LongVV member only, don't sum all members
+- [feedback_marcel_equanimity_slack_external_bugs](monday-report/feedback_marcel_equanimity_slack_external_bugs.md) — 🔴 Marcel bugs live in "Equanimity" Slack workspace, skill's "always 0" is wrong
 
 ## monday-effort-verify
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
