@@ -1,6 +1,6 @@
 ---
 name: feedback-bailey-paturevision-billing
-description: "Bailey DEV1+DEV3(DuongDN) hours live in Paturevision spreadsheet (not Marcel); fixed-cost invoices bill WBS estimate+buffer, not task-log actuals. ⚠️ DEV1 was VietPH (resigned 2026-06-30) — project_php_team.md now lists TuanNT on Bailey, but unconfirmed whether TuanNT literally holds the 'DEV1' billing slot or this is separate — verify before naming a DEV1 in a report."
+description: "Bailey DEV1+DEV3(DuongDN) hours live in Paturevision spreadsheet (not Marcel); fixed-cost invoices bill client-approved GGS Slack quote (not WBS buffer, not task-log actuals) — see [[feedback_bailey_invoice_verify_slack_quote_supersedes_buffer]]. ⚠️ DEV1 was VietPH (resigned 2026-06-30) — project_php_team.md now lists TuanNT on Bailey, but unconfirmed whether TuanNT literally holds the 'DEV1' billing slot or this is separate — verify before naming a DEV1 in a report."
 metadata: 
   node_type: memory
   type: feedback
@@ -11,7 +11,7 @@ metadata:
 
 ⚠️ **DEV1 was VietPH, who resigned 2026-06-30** (see [[project_php_team]]). `project_php_team.md` now lists TuanNT as covering Bailey work generally — but it's NOT confirmed whether TuanNT literally took over the "DEV1" Upwork/WBS billing role specifically, or Bailey's billing structure changed differently. Don't assume; verify with the user before naming a specific person as "DEV1" in a report.
 
-**Invoice billing:** Bailey fixed-cost invoices bill **WBS estimated hours + 10% buffer** from the billing spreadsheet (`1rp0URMjhaOnEe3T_M0o6JbC2av1hno_rdkLIEdWeP4U`), NOT actual hours from the "Est vs Charged" task log. Comparing invoice against task-log actuals produces a false mismatch (e.g. 72.9h actual vs 95.7h billed is correct, not a discrepancy).
+**Invoice billing (UPDATED 2026-08-17 — supersedes the old "WBS buffer" rule below):** Bailey fixed-cost invoices bill the **hours quoted to and approved by the client on GGS Slack** (`#change-requests`/`#maintenance`, e.g. Amy: "total effort is X hours" → Joey: "Yes please"), NOT the WBS estimate+buffer formula and NOT the task-log actual. Hourly tasks still bill at task-log Actual. See [[feedback_bailey_invoice_verify_slack_quote_supersedes_buffer]] for the incident that corrected this (the `.claude/commands/me/bailey-invoice-verify.md` skill file itself was updated 2026-06-10 to this model — old runs before that date used the buffer formula, which is now wrong).
 
 **How to apply:**
 - Bailey DEV1/DEV3 Upwork hours → Paturevision spreadsheet, never Marcel

@@ -122,6 +122,7 @@
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md), [feedback_warning_needs_explanation](bailey/feedback_warning_needs_explanation.md), [reference_bailey_monitor_skill_file](bailey/reference_bailey_monitor_skill_file.md)
 - [feedback_overbudget_check_missing_from_other_active](bailey/feedback_overbudget_check_missing_from_other_active.md) — 🔴
 - [feedback_boto3_pyopenssl_broken](bailey/feedback_boto3_pyopenssl_broken.md), [feedback_siteground_captcha_no_ssh_fallback](bailey/feedback_siteground_captcha_no_ssh_fallback.md)
+- [feedback_bailey_invoice_verify_slack_quote_supersedes_buffer](bailey/feedback_bailey_invoice_verify_slack_quote_supersedes_buffer.md) — 🔴 fixed-cost bills at GGS Slack-quoted hours, not WBS buffer; also xoxp search.messages needs token in header only
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
