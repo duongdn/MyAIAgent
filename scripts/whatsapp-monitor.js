@@ -29,37 +29,16 @@ function getSince() {
   return new Date(timelines.daily_report?.last_run || Date.now() - 86400000).getTime();
 }
 
-/** Parse WhatsApp Web list-level relative time label into epoch ms (null if unknown). */
+/** Parse WhatsApp Web list-level relative time label into epoch ms (null if unknown).
+ *  Handles both Vietnamese ("Hôm qua", "thứ sáu", "chủ nhật") and English labels. */
 function parseWaTime(label, nowMs) {
   label = (label || '').trim();
   const d = new Date(nowMs);
   const hm = label.match(/^(\d{1,2}):(\d{2})$/);
   if (hm) { d.setHours(+hm[1], +hm[2], 0, 0); return d.getTime(); }
-  if (/^yesterday$/i.test(label)) { d.setDate(d.getDate() - 1); return d.getTime(); }
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const di = days.indexOf(label.toLowerCase());
-  if (di >= 0) {
-    const todayDow = new Date(nowMs).getDay();
-    let diff = (todayDow - di + 7) % 7; if (diff === 0) diff = 7;
-    d.setDate(d.getDate() - diff); return d.getTime();
-  }
-  const dm = label.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (dm) { d.setFullYear(+dm[3], +dm[2] - 1, +dm[1]); return d.getTime(); }
-  return null;
-}
-
-/**
- * Parse a message-pane day separator label (Vietnamese + English) into midnight ms.
- * Labels: "Hôm nay" | "Hôm qua" | "thứ hai".."thứ bảy" | "Chủ nhật" | "DD/MM/YYYY" |
- * "today" | "yesterday" | weekday names.
- */
-function parseDayLabel(label, nowMs) {
-  const s = (label || '').trim().toLowerCase();
-  const d = new Date(nowMs); d.setHours(0, 0, 0, 0);
-  if (s.includes('hôm nay') || s === 'today') return d.getTime();
-  if (s.includes('hôm qua') || s.includes('hom qua') || s === 'yesterday') {
-    d.setDate(d.getDate() - 1); return d.getTime();
-  }
+  const s = label.toLowerCase();
+  if (s.includes('hôm nay') || s.includes('hom nay') || s === 'today') return d.getTime();
+  if (s.includes('hôm qua') || s.includes('hom qua') || s === 'yesterday') { d.setDate(d.getDate() - 1); return d.getTime(); }
   const dowMap = [
     { re: /ch[uủ]\s*nh[aậ]t|^cn$|sunday/, dow: 0 },
     { re: /th[uứư]\s*(hai|\b2\b)|monday/, dow: 1 },
@@ -76,19 +55,9 @@ function parseDayLabel(label, nowMs) {
       d.setDate(d.getDate() - diff); return d.getTime();
     }
   }
-  const dm = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  const dm = label.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (dm) { d.setFullYear(+dm[3], +dm[2] - 1, +dm[1]); return d.getTime(); }
   return null;
-}
-
-/** Combine day (midnight ms) + "HH:MM" into a full epoch ms (null if either missing). */
-function resolveMsgTs(dayMs, hhmm) {
-  const hm = (hhmm || '').match(/^(\d{1,2}):(\d{2})$/);
-  if (!dayMs) return null;
-  if (!hm) return dayMs; // day boundary system message
-  const d = new Date(dayMs);
-  d.setHours(+hm[1], +hm[2], 0, 0);
-  return d.getTime();
 }
 
 async function main() {
@@ -151,107 +120,69 @@ async function main() {
       await page.mouse.click(box.x, box.y);
       await new Promise(r => setTimeout(r, 2500));
 
-      // 3) Scroll up to load older messages, then extract since `since`
+      // 3) Collect messages across WhatsApp's virtualized list. Use the authoritative
+      //    `data-pre-plain-text` attribute ("[HH:MM, D/M/YYYY] author: ") which carries
+      //    the FULL timestamp — no day-separator carry-forward (unreliable under
+      //    virtualization). Scroll from bottom up, accumulating + deduping by ts+author+text.
       chat.messages = await page.evaluate(async (sinceMs) => {
         const pane = () => document.querySelector('[data-testid="conversation-panel-messages"]');
-        const dayRe = /^(hôm nay|hom nay|hôm qua|hom qua|thứ [a-zà-ỹ]+|thu [a-zà-ỹ]+|chủ nhật|chu nhat|today|yesterday|monday|tuesday|wednesday|thursday|friday|saturday|sunday|\d{1,2}\/\d{1,2}\/\d{4})$/i;
+        const seen = new Map(); // key -> { ts, author, text, incoming }
 
-        // day-label → midnight ms (mirrors Node-side parseDayLabel; needed inside the page for early-stop)
-        function dayMs(label) {
-          const s = (label || '').trim().toLowerCase();
-          const d = new Date(); d.setHours(0, 0, 0, 0);
-          if (s.includes('hôm nay') || s === 'today') return d.getTime();
-          if (s.includes('hôm qua') || s.includes('hom qua') || s === 'yesterday') { d.setDate(d.getDate() - 1); return d.getTime(); }
-          const map = [
-            { re: /ch[uủ]\s*nh[aậ]t|^cn$|sunday/, dow: 0 },
-            { re: /th[uứư]\s*(hai|\b2\b)|monday/, dow: 1 },
-            { re: /th[uứư]\s*(ba|\b3\b)|tuesday/, dow: 2 },
-            { re: /th[uứư]\s*(t[uư]|\b4\b)|wednesday/, dow: 3 },
-            { re: /th[uứư]\s*(n[aă]m|\b5\b)|thursday/, dow: 4 },
-            { re: /th[uứư]\s*(s[aá]u|\b6\b)|friday/, dow: 5 },
-            { re: /th[uứư]\s*(b[aả]y|\b7\b)|saturday/, dow: 6 },
-          ];
-          for (const m of map) if (m.re.test(s)) {
-            const todayDow = new Date().getDay();
-            let diff = (todayDow - m.dow + 7) % 7; if (diff === 0) diff = 7;
-            d.setDate(d.getDate() - diff); return d.getTime();
-          }
-          const dm = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-          if (dm) { d.setFullYear(+dm[3], +dm[2] - 1, +dm[1]); return d.getTime(); }
-          return null;
-        }
-
-        function extract() {
+        function collect() {
           const p = pane();
-          if (!p) return [];
-          const msgs = [];
-          let currentDay = null;
-          let lastIncomingAuthor = '';
-          const walker = document.createTreeWalker(p, NodeFilter.SHOW_ELEMENT);
-          let node;
-          while ((node = walker.nextNode())) {
-            const el = node;
-            const tid = el.getAttribute && el.getAttribute('data-testid');
-            if (tid === 'msg-container') {
-              const incoming = !!el.querySelector('[data-testid="tail-in"]');
-              let author = el.querySelector('[data-testid="author"]')?.innerText?.trim() || '';
-              const text = Array.from(el.querySelectorAll('[data-testid*="selectable-text"]'))
-                .map(e => e.innerText.trim()).filter(Boolean).join('\n');
-              const meta = el.querySelector('[data-testid="msg-meta"]')?.innerText?.trim() || '';
-              if (incoming && !author) author = lastIncomingAuthor;
-              else if (incoming) lastIncomingAuthor = author;
-              if (text || meta) msgs.push({ author, text, meta, day: currentDay, incoming });
-            } else if (el.tagName === 'SPAN' && el.children.length === 0) {
-              const t = (el.textContent || '').trim();
-              if (t && t.length < 25 && dayRe.test(t)) currentDay = t;
-            }
+          if (!p) return;
+          for (const el of p.querySelectorAll('[data-testid="msg-container"]')) {
+            const pre = (el.querySelector('[data-pre-plain-text]')?.getAttribute('data-pre-plain-text') || '').trim();
+            const m = pre.match(/^\[(\d{1,2}):(\d{2}),\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\]/);
+            if (!m) continue; // no full timestamp (rare) — skip
+            const ts = new Date(+m[5], +m[4] - 1, +m[3], +m[1], +m[2]).getTime();
+            const incoming = !!el.querySelector('[data-testid="tail-in"]');
+            const author = el.querySelector('[data-testid="author"]')?.innerText?.trim() || '';
+            const text = Array.from(el.querySelectorAll('[data-testid*="selectable-text"]'))
+              .map(e => e.innerText.trim()).filter(Boolean).join('\n');
+            if (!text) continue;
+            const key = ts + '|' + author + '|' + text;
+            if (!seen.has(key)) seen.set(key, { ts, author, text, incoming });
           }
-          return msgs;
         }
 
-        // scroll up to load history until we pass `sinceMs` or hit the wall
-        let prevSh = 0;
-        let msgs = extract();
-        for (let i = 0; i < 25; i++) {
-          const p = pane();
-          if (!p) break;
-          const sh = p.scrollHeight;
-          if (sh === prevSh && i > 0) break; // no more messages loadable
-          prevSh = sh;
-          p.scrollTop = 0;
-          await new Promise(r => setTimeout(r, 700));
-          msgs = extract();
-          // stop if we already loaded a message older than the window
-          const oldest = msgs.reduce((min, m) => {
-            const dm = m.day ? dayMs(m.day) : null;
-            const hm = (m.meta || '').match(/^(\d{1,2}):(\d{2})$/);
-            let t = null;
-            if (dm != null && hm) { const dd = new Date(dm); dd.setHours(+hm[1], +hm[2], 0, 0); t = dd.getTime(); }
-            else if (dm != null) t = dm;
-            return t != null && t < min ? t : min;
-          }, Infinity);
-          if (oldest < sinceMs) break;
+        // scroll to the true bottom first (loop: scrollHeight grows as the latest
+        // messages lazy-load, so a single jump can land short of the newest message)
+        for (let i = 0; i < 8; i++) {
+          const el = pane();
+          if (!el) break;
+          const sh = el.scrollHeight;
+          el.scrollTop = sh;
+          await new Promise(r => setTimeout(r, 500));
+          if (el.scrollHeight === sh) break;
         }
-        return msgs;
+
+        let noGrowth = 0;
+        for (let i = 0; i < 60; i++) {
+          const el = pane();
+          if (!el) break;
+          collect();
+          let oldest = Infinity;
+          for (const v of seen.values()) if (v.ts < oldest) oldest = v.ts;
+          if (oldest < sinceMs) break; // already past the window
+          const before = seen.size;
+          const prevTop = el.scrollTop;
+          el.scrollTop = Math.max(0, el.scrollTop - el.clientHeight * 0.8);
+          await new Promise(r => setTimeout(r, 800));
+          collect();
+          if (seen.size === before && el.scrollTop === prevTop) {
+            if (++noGrowth >= 2) break; // reached the top — no more loadable
+          } else {
+            noGrowth = 0;
+          }
+        }
+        return Array.from(seen.values()).sort((a, b) => a.ts - b.ts);
       }, since);
 
-      // 4) Resolve each message's full timestamp (carry time forward across collapsed timestamps)
-      const rawMsgs = chat.messages || [];
-      let lastTime = null, lastDay = null;
-      chat.messages = rawMsgs
-        .map(m => {
-          const dayMs = m.day ? parseDayLabel(m.day, now) : null;
-          if (dayMs == null) return null;
-          if (m.day !== lastDay) { lastTime = null; lastDay = m.day; }
-          const hm = (m.meta || '').match(/^(\d{1,2}):(\d{2})$/);
-          if (hm) lastTime = m.meta;
-          const ts = hm ? resolveMsgTs(dayMs, m.meta) : (lastTime ? resolveMsgTs(dayMs, lastTime) : dayMs);
-          const from = m.incoming ? (m.author || 'unknown') : 'Bạn';
-          return { from, text: m.text, ts: new Date(ts).toISOString() };
-        })
-        .filter(m => m && m.text && m.text.trim())
-        .filter(m => new Date(m.ts).getTime() >= since)
-        .sort((a, b) => new Date(a.ts) - new Date(b.ts));
+      // 4) Filter to the window + shape output (timestamps are already exact)
+      chat.messages = (chat.messages || [])
+        .filter(m => m.ts >= since)
+        .map(m => ({ from: m.incoming ? (m.author || 'unknown') : 'Bạn', text: m.text, ts: new Date(m.ts).toISOString() }));
     }
 
     await browser.disconnect(); // detach only — do NOT close Chrome
