@@ -25,10 +25,6 @@ config/*.json
 node_modules/
 tmp/
 
-# Messaging session data (contains auth credentials)
-config/.whatsapp-session/
-config/.zalo-session/
-
 # Claude Code hook logs (runtime, may contain sensitive prompts/tool I/O)
 .claude/hooks/.logs/
 

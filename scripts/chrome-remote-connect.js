@@ -47,6 +47,14 @@ async function listTabs() {
 }
 
 /**
+ * Get the browser-level WebSocket URL (from /json/version).
+ */
+async function getBrowserWsUrl() {
+  const version = await httpGet(`http://${DEBUG_HOST}:${DEBUG_PORT}/json/version`);
+  return version.webSocketDebuggerUrl;
+}
+
+/**
  * Connect Puppeteer to the running Chrome and return the tab matching urlPattern.
  * Returns { browser, page } — call browser.disconnect() when done (never close!).
  */
@@ -67,14 +75,20 @@ async function findTab(urlPattern) {
 
   process.stderr.write(`[chrome-remote] Attaching to tab: ${tab.url}\n`);
 
+  // Connect at the browser level, then pick the matching page
+  const browserWs = await getBrowserWsUrl();
   const browser = await puppeteer.connect({
-    browserWSEndpoint: tab.webSocketDebuggerUrl,
+    browserWSEndpoint: browserWs,
     defaultViewport: null,
   });
 
   const pages = await browser.pages();
-  // puppeteer.connect with a tab WS endpoint gives us that specific page
-  const page = pages[0] || (await browser.newPage());
+  const page = pages.find(p => p.url() === tab.url) || pages.find(p => p.url().includes(urlPattern));
+
+  if (!page) {
+    await browser.disconnect();
+    throw new Error(`Tab found but page object not resolved for "${urlPattern}".`);
+  }
 
   return { browser, page, tab };
 }

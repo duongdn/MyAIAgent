@@ -135,6 +135,10 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Upwork Memo** | |
 | `/daily-report upwork-memo` | Validate Upwork hourly work memos (Piece 15) for yesterday — all hourly workrooms |
 | `/daily-report upwork-memo --date=YYYY-MM-DD` | Validate a specific date's memos |
+| **WhatsApp** | |
+| `/daily-report whatsapp` | DuongDN personal WhatsApp (Piece 16) — new messages from open web.whatsapp.com tab |
+| **Zalo** | |
+| `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — new messages from open chat.zalo.me tab |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -890,7 +894,7 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Condition | Mode |
 |-----------|------|
 | `--cron` flag | Cron mode (sequential inline, always full run) |
-| Report file does NOT exist for today | Full run (all 15 pieces, incl. Performance + Arthur + Upwork Memo — see Piece 14, Piece 13, Piece 15) |
+| Report file does NOT exist for today | Full run (all 17 pieces, incl. Performance + Arthur + Upwork Memo + WhatsApp + Zalo — see Pieces 13–17) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
@@ -900,7 +904,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15)
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15) → **WhatsApp** (Piece 16) → **Zalo** (Piece 17)
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 
@@ -949,7 +953,7 @@ Rules:
 **Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io + **OhCleo Slack** (Piece 12)
-3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13) + **Upwork Memo** (Piece 15)
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13) + **Upwork Memo** (Piece 15) + **WhatsApp** (Piece 16) + **Zalo** (Piece 17)
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
@@ -1147,6 +1151,76 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 - **Invalid memos → ALERT** (addressed to that workroom's developer). Reminder/contact to staff requires `--send-reminder` flag (strict rule — never auto-send).
 - Session failure / Cloudflare → follow existing Upwork rules: no alert, note manual re-auth if needed, do not fabricate memo status.
 - **Trello gate:** If a dedicated "Upwork Memo" checklist item exists on the Check progress card, complete it when no invalid memos across all hourly workrooms (or none logged / session unavailable per existing rules); ⚠️ skip if any invalid memo. Existing project gates (Rory/Aysar/Bailey) remain as-is — memo validity is reported but does not change their existing Slack/hour gates unless the user says otherwise.
+
+---
+
+## Piece 16 — WhatsApp (`/daily-report whatsapp`)
+
+**Account:** DuongDN personal WhatsApp (Chrome Profile 9, `dnduongus@gmail.com`).
+
+**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `web.whatsapp.com` tab. No QR, no cookie extraction — WhatsApp uses end-to-end crypto (Signal protocol) bound to the browser instance, so the ONLY reliable path is the live tab.
+
+**Prerequisites (one-time setup):**
+1. Chrome must be started with `--remote-debugging-port=9222` (already configured via `~/.local/share/applications/google-chrome.desktop` override — takes effect after ONE Chrome restart)
+2. Open `web.whatsapp.com` in Chrome Profile 9 and scan the QR once (WhatsApp → Settings → Linked Devices) — session then persists in that profile
+3. Keep the `web.whatsapp.com` tab open (can be backgrounded)
+
+**Run:**
+```bash
+node scripts/whatsapp-monitor.js [--since=ISO8601]
+```
+- Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically
+- Output JSON: `{ chats: [{ chat_name, is_group, unread_count, messages: [{from, body, ts}] }] }`
+
+**What to flag:**
+- New messages from clients in the window (since `last_run`) — list verbatim, chat name + sender + time
+- Unread client messages = alert (customer communication, never auto-reply)
+- Personal non-client chats: summarize briefly, don't surface as alerts
+
+**Report — append to daily report:**
+```
+## WhatsApp — {HH:MM} (+07:00)
+| Chat | New msgs | Key content |
+|------|----------|-------------|
+| {name} | N | {sender}: "{excerpt}" |
+...
+{Alerts if any client messages.}
+```
+
+---
+
+## Piece 17 — Zalo (`/daily-report zalo`)
+
+**Account:** DuongDN personal Zalo (Chrome Profile 9, `dnduongus@gmail.com`).
+
+**Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `chat.zalo.me` tab. Zalo uses the same end-to-end crypto model (private key in IndexedDB, bound to the browser) so cookie-extraction + copy-profile both fail; the live tab is the only reliable path.
+
+**Prerequisites (one-time setup):**
+1. Chrome started with `--remote-debugging-port=9222` (shared with WhatsApp — same `.desktop` override)
+2. `chat.zalo.me` open in Chrome Profile 9 and authenticated (scan QR once if not already)
+3. Keep the `chat.zalo.me` tab open
+
+**Run:**
+```bash
+node scripts/zalo-monitor.js [--since=ISO8601]
+```
+- Reads `daily_report.last_run` from `config/.monitoring-timelines.json`
+- Output JSON: `{ conversations: [{ name, preview, unread }] }`
+
+**What to flag:**
+- Conversations with unread count > 0 since `last_run` — list name + preview text
+- Client/customer conversations = alert (verbatim excerpt)
+- Personal chats: summarize, don't surface as alerts
+
+**Report — append to daily report:**
+```
+## Zalo — {HH:MM} (+07:00)
+| Conversation | Unread | Preview |
+|--------------|--------|---------|
+| {name} | N | {excerpt} |
+...
+{Alerts if any client messages.}
+```
 
 ---
 
