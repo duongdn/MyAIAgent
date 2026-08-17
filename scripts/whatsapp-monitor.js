@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 /**
- * Monitor WhatsApp personal messages for DuongDN.
- * Uses whatsapp-web.js with LocalAuth (session persisted in config/.whatsapp-session/).
+ * Monitor WhatsApp personal messages (DuongDN).
+ * Uses whatsapp-web.js with LocalAuth — session persisted in config/.whatsapp-session/.
  *
- * First run: QR code appears — scan from WhatsApp > Linked Devices on DuongDN's phone.
- * Subsequent runs: session auto-restored, no QR needed.
+ * First run (setup):  DISPLAY=:1 node scripts/whatsapp-monitor.js --setup
+ *   → QR appears in terminal, scan from WhatsApp > Linked Devices on your phone.
+ *   → Session saved. Subsequent runs restore it automatically (no QR needed).
  *
- * Usage:
- *   node scripts/whatsapp-monitor.js [--since=ISO8601]   # fetch messages
- *   node scripts/whatsapp-monitor.js --setup             # interactive QR scan only
- * Output: JSON to stdout (or QR to stderr for --setup)
+ * Monitor run:  node scripts/whatsapp-monitor.js [--since=ISO8601]
+ * Output: JSON to stdout
  */
 
 const path = require('path');
@@ -46,31 +45,31 @@ async function main() {
   });
 
   return new Promise((resolve, reject) => {
+    const TIMEOUT_MS = SETUP_MODE ? 180000 : 60000;
     const timeout = setTimeout(() => {
       client.destroy().catch(() => {});
-      reject(new Error('WhatsApp client timed out after 120s'));
-    }, 120000);
+      reject(new Error(SETUP_MODE
+        ? 'Setup timed out — no QR scan detected within 3 min'
+        : 'WhatsApp client timed out. If session expired, re-run with --setup'));
+    }, TIMEOUT_MS);
 
     client.on('qr', (qr) => {
-      process.stderr.write('[whatsapp] QR code generated — scan from WhatsApp > Linked Devices:\n');
+      process.stderr.write('[whatsapp] Scan this QR from WhatsApp > Linked Devices:\n');
       qrcode.generate(qr, { small: true });
-      if (!SETUP_MODE) {
-        process.stderr.write('[whatsapp] No saved session — run with --setup first to authenticate\n');
-      }
     });
 
     client.on('auth_failure', (msg) => {
       clearTimeout(timeout);
       client.destroy().catch(() => {});
-      reject(new Error('WhatsApp auth failed: ' + msg));
+      reject(new Error('WhatsApp auth failed: ' + msg + ' — re-run with --setup'));
     });
 
     client.on('ready', async () => {
-      process.stderr.write('[whatsapp] Client ready\n');
+      process.stderr.write('[whatsapp] Session ready\n');
 
       if (SETUP_MODE) {
-        process.stderr.write('[whatsapp] Setup complete — session saved to config/.whatsapp-session/\n');
         clearTimeout(timeout);
+        process.stderr.write(`[whatsapp] Setup complete — session saved to ${SESSION_PATH}/\n`);
         await client.destroy();
         console.log(JSON.stringify({ setup: 'complete', session_path: SESSION_PATH }));
         resolve();
@@ -79,21 +78,17 @@ async function main() {
 
       try {
         const chats = await client.getChats();
-        process.stderr.write(`[whatsapp] Found ${chats.length} chats\n`);
+        process.stderr.write(`[whatsapp] ${chats.length} chats found\n`);
 
         const results = [];
         for (const chat of chats) {
-          // Only include chats with activity since last_run
           if (chat.timestamp * 1000 < since) continue;
-
           const messages = await chat.fetchMessages({ limit: 50 });
           const recent = messages.filter(m => m.timestamp * 1000 >= since && !m.fromMe);
-
-          if (recent.length === 0) continue;
+          if (!recent.length) continue;
 
           results.push({
             chat_name: chat.name || chat.id.user,
-            chat_id: chat.id._serialized,
             is_group: chat.isGroup,
             unread_count: chat.unreadCount,
             messages: recent.map(m => ({
@@ -107,14 +102,12 @@ async function main() {
 
         clearTimeout(timeout);
         await client.destroy();
-
         console.log(JSON.stringify({
           since: new Date(since).toISOString(),
           scanned_at: new Date().toISOString(),
           total_active_chats: results.length,
           chats: results,
         }, null, 2));
-
         resolve();
       } catch (e) {
         clearTimeout(timeout);
