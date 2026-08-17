@@ -1,6 +1,9 @@
 /**
  * Shared utility: connect to the already-running Chrome via CDP remote debugging.
- * Chrome must be started with --remote-debugging-port=9222 (handled by .desktop override).
+ * Chrome must be started with --remote-debugging-port=9222 (handled by the autostart entry
+ * ~/.config/autostart/whatsapp-zalo-monitor.desktop, which uses --user-data-dir=/home/nus/chrome-monitor-data).
+ * NOTE: Chrome 136+ blocks --remote-debugging-port on the DEFAULT user data dir, so a dedicated
+ * --user-data-dir is REQUIRED. Do not try to debug the default ~/.config/google-chrome profile.
  *
  * Usage:
  *   const { findTab, connectToChrome } = require('./chrome-remote-connect');
@@ -40,8 +43,8 @@ async function listTabs() {
   } catch (e) {
     throw new Error(
       `Cannot connect to Chrome debug port ${DEBUG_PORT}.\n` +
-      `Chrome must be restarted once for the --remote-debugging-port flag to take effect.\n` +
-      `Close and reopen Chrome, then retry.`
+      `The monitor Chrome is not running. Start it via the autostart entry or:\n` +
+      `google-chrome-stable --remote-debugging-port=9222 --user-data-dir=/home/nus/chrome-monitor-data "https://web.whatsapp.com" "https://chat.zalo.me"`
     );
   }
 }
@@ -69,7 +72,7 @@ async function findTab(urlPattern) {
   if (!tab) {
     throw new Error(
       `No tab found matching "${urlPattern}".\n` +
-      `Open ${urlPattern} in Chrome (Profile 9) and retry.`
+      `Open ${urlPattern} in the monitor Chrome (--user-data-dir=/home/nus/chrome-monitor-data) and retry.`
     );
   }
 
