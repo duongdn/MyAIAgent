@@ -138,7 +138,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **WhatsApp** | |
 | `/daily-report whatsapp` | DuongDN personal WhatsApp (Piece 16) — full message content from dedicated monitor Chrome |
 | **Zalo** | |
-| `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — recent conversations (name+time) from dedicated monitor Chrome; content unavailable |
+| `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — full message content of recent conversations from dedicated monitor Chrome |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
 | `/daily-report recheck [item]` | Force recheck one specific item (same args as `trello progress`) |
@@ -1204,25 +1204,27 @@ node scripts/whatsapp-monitor.js [--since=ISO8601]
 node scripts/zalo-monitor.js [--since=ISO8601]
 ```
 - Reads `daily_report.last_run` from `config/.monitoring-timelines.json` automatically (time-based window).
-- Output JSON: `{ conversations: [{ name, time }], content_available: false }` — most-recent first.
+- Output JSON: `{ total_conversations, recent_count, content_available: true, chats: [{ name, time, preview, unread, messages: [{from, text, ts}] }] }`.
+- `page.bringToFront()` is REQUIRED first — background tabs are throttled and Zalo's "Đang đồng bộ tin nhắn…" sync stalls forever in the background. After bringing to front, sync completes in seconds.
+- Opens each recent conversation via a real CDP mouse click, reads message content (sender + body + timestamp) since the window.
 
-**LIMITATION (hard constraint — do NOT re-investigate):**
-- Zalo is E2E-encrypted (Signal protocol); message bodies are base64 ciphertext in IndexedDB (`zdb` `message`/`preview_message` stores) — not readable off the wire.
-- The Web UI stays in a perpetual "Đang đồng bộ tin nhắn…" sync state in the monitor Chrome: preview (`z-conv-message`) is always empty, no unread badge renders, and clicking a conversation never opens a message pane.
-- So ONLY conversation name + last-activity time is available. **No message content.**
+**LIMITATION (accepted — do NOT try to force-sync old history):**
+- Zalo auto-syncs only the ~2h-most-recent conversations. Older-but-within-window conversations (3h+) show preview `[Tin nhắn chưa đồng bộ]` and return `messages: []` until they get NEW activity (then Zalo re-syncs them automatically).
+- Per user decision (2026-08-17): do NOT click "Đồng bộ ngay" to force-sync old history — only NEW messages matter. Just capture what Zalo has auto-synced.
 
 **What to flag:**
-- List recent conversations (name + activity time), most-recent first.
-- Low-value signal — no content, no alert threshold. Just report which conversations are active.
+- Read each chat's messages verbatim. Summarize per chat: sender + time + excerpt (same as WhatsApp Piece 16).
+- Client/customer conversations = alert; personal chats = brief summary, not alert.
+- A chat with only a system message (login notice) shows `messages: []` + non-empty `preview` — report the preview, not an error.
 
 **Report — append to daily report:**
 ```
 ## Zalo — {HH:MM} (+07:00)
-| Conversation | Last activity |
-|--------------|---------------|
-| {name} | {time} |
+| Chat | New msgs | Key content |
+|------|----------|-------------|
+| {name} | N | {sender} ({HH:MM}): "{excerpt}" |
 ...
-_Content unavailable (E2EE + Web UI stuck syncing)._
+{Alerts if any client messages.}
 ```
 
 ---
