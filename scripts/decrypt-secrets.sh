@@ -53,6 +53,8 @@ ENC_FILES=(
   config/.gmail-service-account.json.enc
   config/.bitbucket-config.json.enc
   config/.gitlab-config.json.enc
+  config/.zalo-config.json.enc
+  config/.whatsapp-config.json.enc
   config/.server-credentials.json.enc
 )
 
