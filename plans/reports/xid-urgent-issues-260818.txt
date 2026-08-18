@@ -41,7 +41,3 @@ Thành viên: DuongDN, Manikandan (onsite), Marcel Füssinger (client/XID), Koma
    - 18/08: không upload ảnh được. Root cause: Cloudflare chặn file lớn (nghi là threat). Carrick tạo custom rule → fix.
 
 
-CHƯA GIẢI QUYẾT / CẦN FOLLOW-UP
-1. Face-scan-sau-mất-điện chưa fix gốc — cần: (a) xác nhận device model + firmware từ Mani, (b) nhờ ZKTeco onsite reproduce, (c) quyết định có convert face-data trên cloud không.
-2. UPS Kenpal/Simlian — chưa lắp (chờ stock), Mani lắp thứ 2.
-3. Data report Simlian West Glad — Komal đang chờ DuongDN gửi (project name lẫn "Tampines St95 = Rivelle").
