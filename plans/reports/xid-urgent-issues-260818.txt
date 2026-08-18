@@ -1,0 +1,51 @@
+TONG HOP ISSUE GROUP xid-urgent (01-18/08/2026)
+XID Tech - cham cong nhan dien mat / van tay, cong truong Singapore
+429 tin nhan tu 02/08 -> 18/08 (khong co tin 01/08)
+Thanh vien: DuongDN, Manikandan (onsite), Marcel Fussinger (client/XID), Komal Hatti (data/SGBuildEx), Nus Namtv (Carrick - server)
+
+
+1) FACE SCAN LOI SAU KHI MAT DIEN - ISSUE CHINH, recurring ca thang
+   Site: Simlian Bukit Batok + Kenpal (sau nay)
+   - 02/08: Simlian entrance loi khong scan duoc mat sau power trip. Resync biophoto -> tam fix. Chi face loi, fingerprint van chay.
+   - 03-05/08: Carrick dieu tra: so Kenpai (chay tot) vs 3 tenant loi - khac biet duy nhat la so user (Kenpai 2.178 vs 3.000-3.500). Anh <=136KB, JPG. Nghi do pixel dimension lon. 05/08: giam image dimension + deploy, test OK.
+   - 06/08: van loi hang ngay. Marcel buc xuc. Tranh cai device vs software. Nho case United Tec (doi device van loi, chi het khi het mat dien). De xuat thay device / nho ZKTeco.
+   - 07/08: doi sang sync anh bang URL thay vi base64 (toi uu cost + toc do sync).
+   - 10/08: Carrick phat hien scan event van ve server trong luc client bao "khong scan duoc" -> mau thuan, can client xac nhan.
+   - 13/08: Kenpal (tenant moi) bat dau dinh cung loi sau mat dien ~8:20 SGT.
+   - 14/08: Kenpal loi lap lai dung ngay go-live SGBuildEx -> rat te. Nhieu gia thuyet (bad sector flash, het CMOS battery, firmware). Mani noi 2 nam truoc chay tot, tuan nay moi hong.
+   - 15/08: Kenpal 322/531 worker khong scan duoc ngay 14, 296/529 ngay 15. Client gui email khieu nai chinh thuc. Carrick set resync tu dong moi gio + Mani se lap UPS.
+   - 17/08: van loi; UPS chua lap (het stock).
+   TRANG THAI: chua fix goc. Dang dung workaround (resync hang gio + UPS). Nghi do device mat face data sau khi boot; de xuat convert face data tren cloud truoc khi day (ZKTeco SDK).
+
+2) BUG TAO TENANT MOI - SimlianHL (da fix)
+   - 03/08: tao project moi khong save duoc, system down.
+   - 04/08: 10 user dang ky khong sync xuong device (hom truoc sync duoc).
+   - Fix: Carrick sua schema tenant. Device thuc te co du user (false alarm phia client).
+
+3) DEVICE SAI GIO - Kenpal (device-side)
+   - 05/08: events tu 2/4 device khong sync. Root cause: 2 device sai gio, gui data ngay cu. Chi fix duoc data tren server, gio phai chinh tren device.
+
+4) AWS COST TANG
+   - 10/08: dieu tra: do 2 thay doi - luu anh goc (05/08, +540MB, ~$0.04) + sync nhanh dang burst (07/08, CPU credits). Phan lon van la RDS noi bo.
+   - 13/08: ap image-URL + Cloudflare CDN de giam ELB cost.
+
+5) TG25 SHUTDOWN DIEN 19-20/08
+   - 12-13/08: Mani/Komal hoi anh huong server 10.0.2.x. Carrick check: khong doi, OK. (TG25 dung PHP platform, data push truc tiep qua script Komal).
+
+6) SGBUILDEX GO-LIVE + DATA QUALITY / FIN MASKING
+   - 14/08: go-live SGBuildEx (HDB). Submit data Kenpal 01-12/08 xong.
+   - 15-17/08: Nakano cung bi email khieu nai tuong tu. Data SGBuildEx thieu (khong co log = khong submit duoc mandays).
+   - 18/08: client Simlian West Glad (Saifrul) nham lan vi FIN bi mask o view user management. Komal giai thich dung luat (PDPA), full so hien o export. (DuongDN de xuat bo mask -> Komal phan doi, dung luat govt).
+
+7) CLOUDFLARE CHAN UPLOAD ANH - SimlianHL (da fix)
+   - 18/08: khong upload anh duoc. Root cause: Cloudflare chan file lon (nghi la threat). Carrick tao custom rule -> fix.
+
+8) BAO MAT RESYNC CONSOLE (can theo doi)
+   - 15/08: dang resync console co basic auth len group. Marcel lo brute-force -> de xuat dua sau Cloudflare tunnel + 2FA email. Cho Marcel confirm de implement.
+
+
+CHUA GIAI QUYET / CAN FOLLOW-UP
+1. Face-scan-sau-mat-dien chua fix goc - can: (a) xac nhan device model + firmware tu Mani, (b) nho ZKTeco onsite reproduce, (c) quyet dinh co convert face-data tren cloud khong.
+2. UPS Kenpal/Simlian - chua lap (cho stock), Mani lap thu 2.
+3. Data report Simlian West Glad - Komal dang cho DuongDN gui (project name lon "Tampines St95 = Rivelle").
+4. 2FA resync console - cho Marcel confirm.
