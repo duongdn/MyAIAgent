@@ -17,10 +17,10 @@ Thành viên: DuongDN, Manikandan (onsite), Marcel Füssinger (client/XID), Koma
    - 17/08: vẫn lỗi; UPS chưa lắp (hết stock).
    TRẠNG THÁI: chưa fix gốc. Đang dùng workaround (resync hàng giờ + UPS). Nghi do device mất face data sau khi boot; đề xuất convert face data trên cloud trước khi đẩy (ZKTeco SDK).
 
-2) BUG TẠO TENANT MỚI — SimlianHL (đã fix)
-   - 03/08: tạo project mới không save được, system down.
-   - 04/08: 10 user đăng ký không sync xuống device (hôm trước sync được).
-   - Fix: Carrick sửa schema tenant. Device thực tế có đủ user (false alarm phía client).
+2) BUG TENANT MỚI — SimlianHL (đã fix)
+   - 03/08: không tạo được project mới (bấm save không phản hồi, rồi system down). Carrick fix lỗi schema trên tenant này → hoạt động lại.
+   - 03/08: đăng ký 1 người + check in/out nhưng event management không hiện record. Carrick fix tiếp lỗi schema (root cause) → hết.
+   - 04/08: client báo 10 user đăng ký sáng nay "không sync xuống device". Carrick check log: thực tế 10 user ĐÃ được push xuống cả 2 device (~9:49–11:31 SGT), device đều ack thành công, query trực tiếp xác nhận đủ 10 user trên cả 2 device → không có lỗi sync thật (false alarm).
 
 3) DEVICE SAI GIỜ — Kenpal (lỗi phía device)
    - 05/08: events từ 2/4 device không sync. Root cause: 2 device sai giờ, gửi data ngày cũ. Chỉ fix được data trên server, giờ phải chỉnh trên device.
