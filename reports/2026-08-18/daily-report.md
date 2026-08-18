@@ -10,15 +10,15 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream (Piece 4) | 🔴 Workstream session-wide SSO outage — 4 genuine visible-browser attempts across 2 separate sessions this run, all "SSO redirect detected but API never fired" (no interactive human available in this cron session). ALL Google Sheets task logs confirmed **structurally empty** for 08-17 across every project (Paturevision, Maddy, Rory, James Diamond, Aysar all checked directly) — team has fully migrated to Workstream (confirmed via Matrix: even Bailey is migrating "từ tuần này" per DuongDN 08-17 08:59). Task-log hours UNVERIFIED this run for LongVV, PhucVT, TuanNT, KhanhHH, LeNH. Needs interactive recheck (`DISPLAY=:1 node scripts/workstream-login.js` with a human present). |
+| 1 | Sheets/Workstream (Piece 4) | ✅ **RESOLVED at 08:49 recheck** — Workstream SSO restored (existing session cookies, no manual click needed). Exhaustive scan (13 sheets + 22 accessible WS projects) for 08-17: KhanhHH 0h fully explained by confirmed leave. PhucVT 0h normal (adhoc/external, never alerted). 🔴 **TuanNT and LeNH show genuinely verified 0h, no leave on record** — real Matrix activity exists for TuanNT (Bailey work) but wasn't logged as task-log hours; this is now a confirmed alert, not an infra gap. Still blocks John Yi/Rebecca/Bailey (TuanNT) + Blair Brown (LeNH). See Re-check section. |
 | 2 | Elena - SamGuard | PR #309 ("Implement header and modal components with i18n support") open 7 days (since 08-11), `mergeable: false, mergeable_state: dirty` — real merge conflict against `nus/dp-20260811`, needs manual resolution before auto-merge flow can proceed. |
 | 3 | OhCleo Slack | Celine (customer) sent 3 messages 08-17 13:55–14:43 asking for newsletter audio content "as soon as possible" (DM D0B6846UN8K) — no reply visible in the DM as of window end. Internal Matrix room shows heavy OhCleo dev activity all day (LongVV/PhucVT/team), including a *different* newsletter deeplink task marked dev-done+tested-on-prod 17:04 — but Celine's specific Slack ask has no direct reply. |
 | 4 | Fountain Trello | Kunal (customer) posted 4 unanswered "push live"/access asks (Infinity Roses product position mismatch, rose color swatches, Infinity order flow updates, Account-scoped products) between 08-17 05:03–05:24, plus a 14:24–14:30 complaint that a card ("Fountain - Update multiple order spreadsheet") can't be found among 900+ cards on the shelf list. Only 1 of 5 comments (Order flow: Message/Recipient/Deliver) got a rick570 reply (08:37). |
 | 5 | Maddy (Xtreme) | 2 unaddressed client JIRA comments as of window end: **LIFM2-450** — Anoma flagged an icon/backspace behavior issue 08-17 17:12+07, no reply yet. **LIFM2-459** — Madhuraka reported 08-17 18:44+07 that Kai's recent commit "may have introduced a bug" (payout price update logic) on a ticket Kai had just marked "Done" 08-17 17:43 — no reply yet. Both are within normal overnight/next-business-day window but unresolved at report time. |
 | 6 | Baamboozle/Aysar | No "Today's update" MPDM post since 08-14 (Fri) 20:11+07 (3+ calendar days). Cannot confirm whether KhanhHH worked Baamboozle in that window — hours unverified this run (see #1). GitHub issues: no new activity (latest update 08-05). |
-| 7 | Arthur/Solid Code Slack | Still unreachable from this cron server — workspace absent from `config/.slack-accounts.json` on this box (David's Chrome Profile 15 only exists on the interactive desktop). Same recurring infra gap documented since 07-13; 4/6 Arthur sources (Matrix ×2, GitHub) verified clean, no new unresolved client issue found. |
-| 8 | WhatsApp / Zalo | Monitor Chrome (CDP port 9222, `/home/nus/chrome-monitor-data`) not running on this cron server — that profile only exists on the interactive desktop (QR/session login required, can't be started headless here). Both pieces unavailable this run; needs interactive recheck. |
-| 9 | Upwork (Rory/Aysar/Neural) | carrick's Chrome Profile 1 (source of live-session cookie injection) does not exist on this cron server — 0 cookies extracted, all 3 workrooms + memo-check failed identically. Confirmed infra-only (same class as #7/#8), not a real session/auth problem — carrick's actual Upwork session status unconfirmed this run. |
+| 7 | Arthur/Solid Code Slack | ⚠️ **Still blocked after 08:49 recheck** — tried 2 methods with David's Chrome Profile 15 (live-profile reuse + isolated-profile cookie injection), both failed: this workspace uses Google OAuth and the transplanted session cookie isn't accepted. Needs a real interactive Google login in a visible browser (not attempted, to avoid disrupting the shared desktop). 4/6 Arthur sources (Matrix ×2, GitHub) still verified clean, no new unresolved client issue found. |
+| 8 | WhatsApp / Zalo | ✅ **RESOLVED at 08:49 recheck** — monitor Chrome running this session. WhatsApp: 1 internal Xid ops chat (photo-upload issue, informational). Zalo: all personal/non-work. See Re-check section. |
+| 9 | Upwork (Rory/Aysar/Neural) | ✅ **RESOLVED at 08:49 recheck** — carrick's session live. Memo check: 0 memos both workrooms on 08-17 (consistent with LeNH's confirmed 0h). Neural: silent since 08-06, not an alert. |
 | 10 | Performance (chronic, unchanged) | MPFC apdex 0.54 (poor) — `WP_Error::get_method()` fatal ×89, SQLi `WAITFOR DELAY` scanner probes active on `/search/` (13.7s response). OhCleo `MediaByKeyView.get` 24.7s/324 calls, `MediaAddTrackAPIView.post` 80.8s/1 call — both chronic, unaddressed for weeks. |
 
 **Today (Tue 08-18):** No new leave notices found for today itself as of report time. All prior-day (08-17) leaves fully processed per Resource Arrangement room.
@@ -277,9 +277,57 @@ Not checkable this run — same infra gap as WhatsApp (Alert #8).
 
 ---
 
+## Re-check — 08:49 (+07:00)
+
+Interactive session on the desktop (DISPLAY=:1, dedicated Chrome profiles present) — able to clear most infra gaps the cron run hit.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Workstream SSO (Alert #1) | ✓ resolved | `workstream-login.js` succeeded via existing SSO cookies, no manual click needed. Token verified live. |
+| Philip | ✓ completed | MS Teams check ran clean this time (stale-profile issue self-resolved on retry, known pattern). Screenshot confirms last activity in the 1:1 thread is our own outgoing referral message from **Jul 1** — no unanswered Philip ask. |
+| WhatsApp (Alert #8) | ✓ data supplied | Monitor Chrome running (CDP 9222). 1 active chat: "Xid urgent" internal ops group — Manikandan reported "Cannot upload photo" 08-18 00:54+07 (~07:54 local), Bạn (DuongDN) acknowledged 00:55. Informational, internal tooling issue, not a client alert. |
+| Zalo (Alert #8) | ✓ data supplied | All recent chats are personal/non-work (gaming, class groups, investment community, login notice). Nothing to report. |
+| Upwork memo/Neural (Alert #9) | ✓ data supplied | carrick's session live (Chrome Profile 1 present this session). Memo check: 0 memos for both Rory and Aysar workrooms on 08-17 (consistent with LeNH's confirmed 0h that day — no hourly segments logged, nothing to validate). Neural: no new client message since 08-06, still silent → not an alert. |
+| Solid Code Slack (Alert #7) | ○ still blocked | Tried 2 methods with David's Chrome Profile 15 (live-profile reuse + new isolated-profile cookie-injection script `slack-extract-solidcode-token.js`, same pattern as OhCleo's). Both failed — this workspace uses Google OAuth and the transplanted session cookie alone isn't accepted; needs a real interactive Google login in a visible browser. Did not force-close other Chrome processes to retry (would risk interrupting the user's live desktop/monitor Chrome) — left as a genuine gap. |
+| Elena PR #309 (Alert #2) | ○ unchanged | Still `mergeable: false, mergeable_state: dirty` as of 08:49. Needs manual conflict resolution — not something to auto-merge. |
+| OhCleo Celine (Alert #3) | ○ unchanged | Same 3 messages, still no reply in the DM as of 08:49. |
+| Fountain Kunal comments (Alert #4) | ○ unchanged | Re-checked live — same ~5 unanswered comments (Infinity Roses position, rose swatches, Infinity order flow, Account-scoped products, "can't find card" complaint). 1 of 6 total got a rick570 reply (08:37, unchanged). |
+| Maddy JIRA (Alert #5) | ○ unchanged | LIFM2-450 (Anoma's icon-backspace flag) and LIFM2-459 (Madhuraka's bug flag) both still unanswered by Kai as of 08:49. |
+| Aysar MPDM (Alert #6) | ○ unchanged | Re-searched Baamboozle MPDM C07SQ4HAUHZ — still no post after 08-14 20:11 (now day 4 of silence). |
+
+### Workstream now live — hours picture for 08-17
+
+Ran the canonical exhaustive scan (`sheets-tasklog-scan.js`, all 13 sheets + all 22 accessible Workstream projects) for TuanNT/KhanhHH/LeNH/LongVV/PhucVT:
+
+| Dev | 08-17 total (all sources) | Verdict |
+|-----|---------------------------|---------|
+| KhanhHH | 0h | ✓ OK — confirmed full-day approved leave (see header) |
+| PhucVT | 0h | ✓ OK — adhoc/external, standing rule says never alert ([[feedback_phucvt_adhoc_external_ignore]]); does not gate James Diamond (Discord-gated only, already ✓) |
+| LongVV | 3.17h (Xtreme 2h + Auction Warehouse 1.17h) | Real, partial |
+| **TuanNT** | **0h — verified, no leave on record** | 🔴 Confirmed alert (was infra-uncertain, now genuinely verified via live WS + direct Paturevision sheet re-read). Real Matrix activity exists (Bailey console/staging fix, 14-16h backlog discussion) but wasn't logged as task-log hours. Blocks John Yi/Rebecca/Bailey — kept ○. |
+| **LeNH** | **0h — verified, no leave on record** | 🔴 Confirmed alert. No Matrix activity found referencing LeNH this window either (report noted "Khánh covering for LeNH when tasks arise"). Blocks Blair Brown — kept ○. |
+
+No reminders sent (no `--send-reminder` flag / explicit request this session) — per standing rule, only printed here.
+
+**Fountain Part 2 (now available):** PhatDLT 3h (2 tasks pending review by VuTQ/DuongDN, excluded from alerting per Fountain rule), TrinhMTT 3.5h, ThinhT 4h (tracking toward 20h/wk plan). ViTHT and DatNT show 0 rows in Workstream for 08-17 despite Matrix confirming real work (PR review, BETA push) — not flagging as a shortfall given this project's history of Workstream under-reporting; likely a logging-timing gap, not absence.
+
+**Crystal-lang (Arthur):** now live — reviewer TienND, `needsReview` empty, 0 members logged yet this week (Monday, too early to be concerning).
+
+**Maddy:** LongVV 2h + ThanhNX 3h logged 08-17 (real). Does not change the skip reason — Maddy stays ⚠️ purely for the 2 unanswered client JIRA comments.
+
+### Trello
+
+Marked **Philip** complete (only change — all other ○ items are confirmed-live alerts, not infra gaps). 9 items remain ○: Maddy, John Yi, Aysar, Elena - SamGuard Digital Plant, Bailey, Rebecca, Fountain - DOCUMENT, Ohcleo, Blair Brown - Peptide Clyde — each backed by a live-verified reason above, not an auth/session excuse.
+
+**Cleared:** Philip, Workstream/Upwork/WhatsApp/Zalo infra gaps (data now supplied above).
+**Still open:** Elena PR #309, OhCleo/Fountain/Maddy unanswered messages, Aysar MPDM silence, Solid Code Slack (genuine login-required gap), TuanNT/LeNH confirmed 0h (John Yi/Rebecca/Bailey/Blair Brown).
+
+---
+
 ## Unresolved questions
 1. Was the Enterprise Billing Block estimate (Arthur/Tien) actually sent to Arthur today (08-18) as hinted in Slack yesterday?
 2. Does Kai/Anoma resolve the LIFM2-450 icon-backspace issue and does Kai respond to Madhuraka's LIFM2-459 bug flag by next check?
 3. Elena PR #309 — who should resolve the merge conflict, and is `nus/dp-20260811` still the intended base branch?
-4. Needs a genuinely interactive session (real human present) to clear: Workstream SSO (blocks 5 devs' hours + Fountain/Maddy/Crystal-lang Workstream data), Solid Code Slack token, Upwork carrick session, WhatsApp/Zalo monitor Chrome — all confirmed infra/session gaps specific to this cron server, not real external outages.
-5. Philip (MS Teams) check did not complete within this run's time budget — needs recheck.
+4. Solid Code Slack (Arthur) still needs a real interactive Google login in a visible browser — cookie-transplant approaches (2 tried) don't work for this workspace's OAuth flow.
+5. TuanNT and LeNH logged genuinely 0h task-log hours on 08-17 despite real dev activity documented in Matrix (Bailey work, LeNH covered by Khánh) — worth a direct nudge to log hours, since this is a discipline gap, not an absence.
+6. Fountain: ViTHT/DatNT show 0h in Workstream for 08-17 despite confirmed real work (PR review, BETA push) — worth checking if this is a logging lag or a project-access gap on our query token.
