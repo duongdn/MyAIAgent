@@ -23,6 +23,7 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 **Refresh flag:** Adding `--refresh` (or `refresh`) to any command forces a fresh re-check of all mapped sources, even if already scanned in the current session. Always re-fetch live data when this flag is present — never use cached/prior results.
 **Reminder flag:** By default, reminders are **printed to the report only** — NOT sent to Matrix. Add `--send-reminder` to actually send them. Example: `/me:daily-report --send-reminder` or `/me:daily-report reminders --send-reminder`.
 **Cron flag:** `--cron` = headless mode. Run ALL 10 pieces **sequentially inline** — do NOT spawn subagents or parallel agents. Execute each piece's logic directly in this single session. Reason: each spawned subagent in headless starts a fresh session, reloads all memory files, and exhausts the daily quota.
+**WhatsApp/Zalo flag:** Pieces 16–17 (WhatsApp, Zalo) are **excluded from the default full run** (2026-08-19 — token-heavy: full CDP message extraction per chat). Add `--include-whatsapp-zalo` to a full run to include them. Standalone `/daily-report whatsapp` and `/daily-report zalo` always work regardless of the flag.
 
 ---
 
@@ -135,9 +136,9 @@ Full morning scan across all monitoring sources. Run once per morning (~8 AM).
 | **Upwork Memo** | |
 | `/daily-report upwork-memo` | Validate Upwork hourly work memos (Piece 15) for yesterday — all hourly workrooms |
 | `/daily-report upwork-memo --date=YYYY-MM-DD` | Validate a specific date's memos |
-| **WhatsApp** | |
+| **WhatsApp** (excluded from default full run — token-heavy, see flag above) | |
 | `/daily-report whatsapp` | DuongDN personal WhatsApp (Piece 16) — full message content from dedicated monitor Chrome |
-| **Zalo** | |
+| **Zalo** (excluded from default full run — token-heavy, see flag above) | |
 | `/daily-report zalo` | DuongDN personal Zalo (Piece 17) — full message content of recent conversations from dedicated monitor Chrome |
 | **Re-check** | |
 | `/daily-report` *(re-run, report exists)* | Auto-detects today's report exists → recheck all ○ incomplete items |
@@ -894,7 +895,7 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Condition | Mode |
 |-----------|------|
 | `--cron` flag | Cron mode (sequential inline, always full run) |
-| Report file does NOT exist for today | Full run (all 17 pieces, incl. Performance + Arthur + Upwork Memo + WhatsApp + Zalo — see Pieces 13–17) |
+| Report file does NOT exist for today | Full run (15 pieces by default, incl. Performance + Arthur + Upwork Memo — see Pieces 13–15. WhatsApp + Zalo, Pieces 16–17, excluded unless `--include-whatsapp-zalo` passed) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
@@ -904,7 +905,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 **If `--cron` flag present** — sequential inline (NO subagents, NO parallel):
 0. **ALWAYS run `TZ='Asia/Ho_Chi_Minh' date` first** to get the current UTC+7 date/time. The cron fires at 22:00 UTC = 05:00 UTC+7 NEXT day — so TODAY (UTC+7) is always one day ahead of the UTC date. NEVER infer the current time or date from `last_run` — that is only the monitoring window start, not now.
 1. Read configs + timelines + memory
-2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15) → **WhatsApp** (Piece 16) → **Zalo** (Piece 17)
+2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15). If `--include-whatsapp-zalo` present, also run **WhatsApp** (Piece 16) → **Zalo** (Piece 17) — excluded by default (token-heavy).
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
 
@@ -953,7 +954,7 @@ Rules:
 **Normal (interactive terminal), report does NOT exist** — parallel agents, full run:
 1. Read configs + timelines + memory
 2. Launch parallel: Email + Slack + Discord + Scrin.io + **OhCleo Slack** (Piece 12)
-3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13) + **Upwork Memo** (Piece 15) + **WhatsApp** (Piece 16) + **Zalo** (Piece 17)
+3. Launch parallel: Sheets + Fountain + Elena + **Matrix** (Piece 10) + **Performance** (Piece 14) + **Arthur** (Piece 13) + **Upwork Memo** (Piece 15). If `--include-whatsapp-zalo` present, also launch **WhatsApp** (Piece 16) + **Zalo** (Piece 17) — excluded by default (token-heavy).
 4. Update Trello (Piece 8) based on all findings
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
@@ -1156,6 +1157,8 @@ node scripts/newrelic-fetch-performance.js --project=ohcleo --env=staging --sinc
 
 ## Piece 16 — WhatsApp (`/daily-report whatsapp`)
 
+**🔴 Excluded from the default full run since 2026-08-19** (token-heavy — full CDP message extraction per chat). Only runs standalone (`/daily-report whatsapp`) or when full run passes `--include-whatsapp-zalo`.
+
 **Account:** DuongDN personal WhatsApp (`dnduongus@gmail.com`).
 
 **Method:** Chrome Remote Debugging (CDP) — attaches to the already-open `web.whatsapp.com` tab in the **dedicated monitor Chrome**. WhatsApp uses end-to-end crypto (Signal protocol) bound to the browser instance via IndexedDB, so cookie extraction + copy-profile both fail — the live tab is the ONLY reliable path.
@@ -1192,6 +1195,8 @@ node scripts/whatsapp-monitor.js [--since=ISO8601]
 ---
 
 ## Piece 17 — Zalo (`/daily-report zalo`)
+
+**🔴 Excluded from the default full run since 2026-08-19** (token-heavy — full CDP message extraction per chat). Only runs standalone (`/daily-report zalo`) or when full run passes `--include-whatsapp-zalo`.
 
 **Account:** DuongDN personal Zalo (`dnduongus@gmail.com`).
 
