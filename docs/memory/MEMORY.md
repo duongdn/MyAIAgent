@@ -13,6 +13,7 @@
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize
 - [project_alert_cron_setup](global/project_alert_cron_setup.md), [project_php_team](global/project_php_team.md), [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md), [feedback_ripgrep_execute_permission_fix](global/feedback_ripgrep_execute_permission.md)
 - [project_mpfc_cron_server](global/project_mpfc_cron_server.md) — 🔴 own cron + 3rd memory store
+- [reference_dailyagent_basic_auth](global/reference_dailyagent_basic_auth.md) — dailyagent Basic Auth creds in config/.dailyagent-auth.json(.enc), shared htpasswd w/ admin
 - [feedback_slack_new_workspace_token_extraction](global/feedback_slack_new_workspace_token_extraction.md)
 - [feedback_customer_direct_ask_universal_gate](global/feedback_customer_direct_ask_universal_gate.md) — 🔴 unanswered ask=warning
 - [feedback_decrypt_secrets_clobbers_live_tokens](global/feedback_decrypt_secrets_clobbers_live_tokens.md)
