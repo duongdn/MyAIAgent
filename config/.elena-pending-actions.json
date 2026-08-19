@@ -212,14 +212,14 @@
   "blocked": [],
   "pending_deploy": [],
   "last_run": {
-    "date": "2026-06-23",
-    "time": "01:38 +07:00",
+    "date": "2026-08-19",
+    "time": "08:52 +07:00",
     "prs_checked": "api_duongdn_token",
-    "open_prs": 0,
+    "open_prs": 1,
     "prs_merged": 0,
     "deploy_status": "no_prs_to_deploy",
     "wordpress_status": "clean_no_js_errors_csp_false_positives_only",
-    "precognize_open_prs": "1 (PR#5014 nusken, not Elena)"
+    "precognize_open_prs": "0 (nusken none open; PR#309 dirty feature-branch sync skipped)"
   },
   "deployed_no_status_update": [
     {
