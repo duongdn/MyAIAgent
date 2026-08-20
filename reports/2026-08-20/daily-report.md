@@ -13,7 +13,7 @@
 | 1 | Workstream (infra) | 🔴 Primary hours source unavailable ALL run — SSO token capture failed on 3 separate attempts (Keycloak session cookies alive, but token-capture API never fired). Blocks: Sheets/task-log hours for LongVV/PhucVT/TuanNT/KhanhHH/LeNH, Maddy weekly hours + JIRA cross-check, Fountain Parts 2-3, Arthur Crystal-lang est/actual, Blair Brown gate. Needs an interactive recheck from the local `nus` session (this run is on the mpfc cron box). |
 | 2 | Maddy (Xtreme) | Anoma Wasala reported a new unanswered bug on LIFM2-409 ("Unable to upload new products to Shopify/Xero") 2026-08-19 11:38 — no Kai reply yet as of this report. |
 | 3 | Maddy (Xtreme) — Bitbucket | PR #481 (LIFM2-409) still carries Madhuraka's own High-severity finding from 2026-06-06, now 75+ days unaddressed. PR #509 has an unaddressed Rovo Dev null-check finding (6 days). PR #516 has an unaddressed Codex review (42 days). |
-| 4 | Aysar (Baamboozle) | MPDM `C07SQ4HAUHZ` has had **no "Today's update" since 2026-08-14** (6 days silent) — longest gap seen. KhanhHH's Baamboozle hours unverifiable this run (Workstream down, see #1). |
+| 4 | ~~Aysar~~ (corrected at recheck) | MPDM `C07SQ4HAUHZ` silent since 08-14 — but this is **NOT an alert**: Baamboozle/Aysar task log is **0h since 08-14** (no task work), so no report is expected. Per user rule: task present → report required; no task → no report needed. |
 | 5 | OhCleo | Celine asked 2026-08-19 19:03 "Can you confirm how open and click tracking is currently set up in Amazon SES?" — unanswered as of this report (last message in window). |
 | 6 | InfinityRoses (production) | New Error #443 `ActionController::UnknownFormat`, 2 occurrences, 2026-08-19 15:07 UTC (via rick@ Rollbar). |
 | 7 | FirstProject (production) | 10-occurrences-in-5-min spikes: #127 (unknown) 19:10 UTC + #1083 `ChunkLoadError` 23:02 UTC (via rick@ Rollbar). |
@@ -52,7 +52,7 @@ Trello: DuongDn, Carrick, Rick, Kai, Ken, Nick items ✓ complete (all 6 inboxes
 
 | Workspace | Msgs | Key content |
 |-----------|------|-------------|
-| Baamboozle | 1 (search) / 0 (MPDM this window) | See Alert #4 — MPDM silent since 08-14 |
+| Baamboozle | 1 (search) / 0 (MPDM this window) | MPDM silent since 08-14, but **no task work** (Baamboozle Workstream 0h since 08-14) → no report expected → not an alert (corrected at recheck) |
 | RDC - FM Monitoring | 20 | Carrick actively resolving dmetiner's tuner/favorites-bar/LiveMap questions all day — every ask answered same-thread |
 | Swift Studio | 9 | Carrick handling BXR-UK dev/production account boundaries, Twilio 2FA setup with jeff — all responsive |
 | Xtreme Soft Solutions | 12 | See Maddy section below |
@@ -295,7 +295,6 @@ No reminders sent (`--send-reminder` not passed). Given Workstream is down all r
 **Check Progress — left incomplete (8):**
 - Maddy - Carrick/Kai/Luis ⚠️ (unanswered client bug + 3 stale PR findings, see Alert #2-3)
 - John Yi - Amazing Meds ⚠️ (TuanNT task log unverifiable — Workstream down)
-- Aysar ⚠️ (MPDM silent 6 days + KhanhHH hours unverifiable, see Alert #4)
 - Elliott - GreenFort Capital ⚠️ (Generator Slack clean, but KhanhHH hours unverifiable — Workstream down)
 - Bailey ⚠️ (GGS Slack clean + Nick report present, but TuanNT combined hours unverifiable — Workstream down; Matrix shows real Bailey engagement same day, likely just not logged yet)
 - Rebecca - William Bills ⚠️ (Slack clean, TuanNT hours unverifiable — Workstream down)
@@ -326,17 +325,17 @@ No reminders sent (`--send-reminder` not passed). Given Workstream is down all r
 | Ohcleo | ✓ complete | Celine's SES tracking question answered by Tony 08-20 01:39 → Alert #5 cleared |
 | Arthur - Meta-Stamp | ✓ complete | 3/4 sources verified (Matrix + GitHub + Workstream Crystal-lang clean); Solid Code Slack still blocked (infra gap, not a finding) |
 | Maddy | ○ **still incomplete** | Real JIRA alert stands: LIFM2-409 client bug unanswered + 3 stale PR findings. Cross-check: LIFM2-459 +30m over-budget (minor) |
-| Aysar | ○ **still incomplete** | MPDM `C07SQ4HAUHZ` silent since 08-14 (6 days); KhanhHH 8h task-log now confirmed OK |
+| Aysar | ✓ complete (corrected) | MPDM silent since 08-14 but **no task work** (Baamboozle 0h since 08-14) → no report expected → not an alert. Per user rule: task present → report required; no task → no report. KhanhHH 8h task-log OK. |
 | Blair Brown | ○ **still incomplete** | LeNH 0h on 08-19 confirmed genuine (2 independent methods, no leave) |
 
 **Hours filled (Workstream, 08-19):** LongVV 8h (OhCleo), PhucVT 0h (adhoc/excluded), TuanNT 8h (Speedventory), KhanhHH 8h (RDC 7 + Generator 1), LeNH 0h (genuine shortfall → Blair Brown alert).
 
 **Maddy JIRA cross-check:** 1 over-budget (LIFM2-459, +30m, minor) — not a new blocker.
 
-**Cleared (8):** John Yi, Elliott, Bailey, Rebecca, Fountain, Philip, Ohcleo, Arthur.
-**Still open (3):** Maddy, Aysar, Blair Brown.
+**Cleared (9):** John Yi, Elliott, Bailey, Rebecca, Fountain, Philip, Ohcleo, Arthur, **Aysar** (corrected — no task work since 08-14, so MPDM silence is normal).
+**Still open (2):** Maddy, Blair Brown.
 
-**Trello live re-fetch confirmed 19/22 complete.** Card NOT auto-closed (3 genuinely open items). Upwork memo (Rory/Aysar) remained session-unavailable this recheck — recurring architecture wall, not a Trello gate, no item on board.
+**Trello live re-fetch confirmed 20/22 complete** (Aysar marked complete after user correction — no task work since 08-14 → no report expected). Card NOT auto-closed (2 genuinely open items). Upwork memo (Rory/Aysar) remained session-unavailable this recheck — recurring architecture wall, not a Trello gate, no item on board.
 
 **No reminders sent** — LeNH 0h is a real finding but requires explicit `--send-reminder` permission.
 
