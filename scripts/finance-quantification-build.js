@@ -42,6 +42,27 @@ const keepAudited = (arr) => {
 const keepQuarters = (arr, n) => arr.filter((y) => y.quater > 0).sort((a, b) => a.year - b.year || a.quater - b.quater).slice(-n);
 const periodLabel = (y) => (y.quater ? `Q${y.quater}/${y.year}` : String(y.year));
 
+// cafef mislabels for specific tickers: the code holding real data doesn't match the
+// template's nominal meaning (verified case: VEA — cafef stuffed "Phần lãi/lỗ trong
+// công ty liên doanh, liên kết" (real code 27) into code 24 ("Trong đó: Chi phí lãi
+// vay") for periods before Q1/2026, leaving code 27 at 0. Swap them back per-period
+// only where the mislabel is present (code27 === 0), so the post-2026 correct periods
+// (already using code 27) are untouched.
+const KQKD_CODE_SWAPS = { VEA: [["24", "27"]] };
+function applyKqkdCodeSwaps(ticker, kqkdY) {
+  const swaps = KQKD_CODE_SWAPS[ticker];
+  if (!swaps) return;
+  for (const period of kqkdY) {
+    for (const [a, b] of swaps) {
+      const ca = period.data.find((d) => d.code === a);
+      const cb = period.data.find((d) => d.code === b);
+      if (ca && cb && cb.value === 0 && ca.value !== 0) {
+        const tmp = ca.value; ca.value = cb.value; cb.value = tmp;
+      }
+    }
+  }
+}
+
 async function fetchCafef(ticker, maxYears, maxQuarters) {
   const [cdktN, kqkdN, lcttN, cdktQ, kqkdQ, lcttQ] = await Promise.all([
     httpGet(`${BASE}/v2/BCTC/GetReportCDKT?symbol=${ticker}&pageIndex=1&pageSize=${maxYears}&reportType=ALL&TypeTime=NAM`),
@@ -357,6 +378,8 @@ async function main() {
   }
   const minYears = forceCafef ? 1 : 3;
   if (cf.tnYAnnual.length < minYears) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
+
+  if (src === "cafef") applyKqkdCodeSwaps(ticker, cf.kqkdY);
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
   const { all, groups, headers } = buildAll(cf);
