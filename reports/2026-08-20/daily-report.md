@@ -273,7 +273,7 @@ Trello: no dedicated "Upwork Memo" item currently on the board — nothing to ga
 
 **08:12 (cron):** No reminders sent — Workstream down all run (Alert #1), 0h readings from Sheets alone not reliable enough to identify genuine shortfalls; skipped to avoid a false alarm.
 
-**09:10 (recheck):** **LeNH task-log reminder SENT** per user explicit request. Live Workstream check confirmed LeNH **0h across all 5 projects (James Diamond, Rory/BXR, Franc/RDC, Aysar/Baamboozle, Blair Brown) for both 08-19 and 08-20**. User confirmed LeNH is working on James Diamond → genuine gap → sent to her Matrix room `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (`event_id=$n7DHF8bmse3zineZv1VjZPJsGk_iH3joPOSe3SOU5Cg`).
+**09:10 (recheck):** **LeNH task-log reminder SENT** per user explicit request. The genuine gap is **08-19 (yesterday)** — LeNH **0h across all 5 projects (James Diamond, Rory/BXR, Franc/RDC, Aysar/Baamboozle, Blair Brown)**. User confirmed LeNH is working on James Diamond → genuine shortfall. Sent to her Matrix room `!OIrgPraJWrcDTnRVLQ:nustechnology.com` (`event_id=$n7DHF8bmse3zineZv1VjZPJsGk_iH3joPOSe3SOU5Cg`). **09:12 corrected re-send** clarifying it's about 19/08 only (20/08 = today, day not over, not judged) — `event_id=$-5r-KdbeNMAbBtHQkh4a3htphWXu5CtWp9_h-q0W7T8`.
 
 ---
 
