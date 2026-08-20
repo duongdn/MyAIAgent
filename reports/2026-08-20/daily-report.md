@@ -102,23 +102,23 @@ Trello: James Diamond - Vinn ✓ complete, Andrew Taraba ✓ complete.
 
 ## Sheets/Workstream — 07:15–07:40 (+07:00)
 
-🔴 **Workstream unavailable this entire run** (see Alert #1) — 3 separate SSO login attempts all failed identically ("SSO redirect detected — Keycloak cookies alive" but "no token captured, API never fired"). This is the primary hours source for every project except Bailey/Paturevision.
+🔴 **Workstream unavailable this entire run** (see Alert #1) — 3 separate SSO login attempts all failed identically ("SSO redirect detected — Keycloak cookies alive" but "no token captured, API never fired"). This is the primary hours source for every project except Bailey/Paturevision. **RESTORED at recheck 08:53 (+07:00)** via interactive login on the local `nus` session.
 
-Sheets-only fallback results for 2026-08-19 (all 13 sheets scanned per dev):
+**Actual Workstream hours for 2026-08-19 (recheck):**
 
-| Developer | Sheets total | Status |
-|-----------|--------------|--------|
-| LongVV | 0h | Unverified — his projects (Maddy/OhCleo) both live on Workstream now, sheet is dormant by design |
-| PhucVT | 0h | Not an alert regardless (adhoc/external, permanently excluded per standing rule) |
-| TuanNT | 0h (incl. Paturevision, the one sheet that IS the sole source for Bailey) | See note below — Matrix shows him actively working Bailey/Paturevision same day |
-| KhanhHH | 0h | Unverified — Baamboozle/Generator/Elena all live on Workstream, see Alert #4 |
-| LeNH | 0h | Unverified — Rory/Franc/Aysar/Blair Brown all live on Workstream |
+| Developer | Hours | Status |
+|-----------|-------|--------|
+| LongVV | 8h | ✓ real — OhCleo project |
+| PhucVT | 0h | Not an alert (adhoc/external, permanently excluded per standing rule) |
+| TuanNT | 8h | ✓ real — Speedventory |
+| KhanhHH | 8h | ✓ real — RDC 7h + Generator 1h |
+| LeNH | 0h | ⚠️ **genuine shortfall** — verified via 2 independent methods, no leave noted |
 
-**TuanNT/Bailey note:** the Matrix "NUS - Bailey - Paturevision 2026" room shows TuanNT actively engaged 10:32–15:47 discussing a real scope gap (grazing-software setup-map feature missing from WBS) and confirming a fix approach — clear evidence of real work that day. The 0h in the Paturevision sheet is most likely not-yet-logged (checked ~07:xx the next morning) rather than a genuine gap — **not treated as a confirmed shortfall**, but the sheet itself should be re-verified once he logs it.
+**LeNH / Blair Brown:** confirmed a real 0h day on 2026-08-19 (no leave, no logged hours across his projects). Blair Brown gate stays ⚠️ incomplete.
 
-**Maddy JIRA weekly cross-check (`maddy-jira-tasklog-check.js`):** also blocked, same Workstream outage.
+**Maddy JIRA weekly cross-check (`maddy-jira-tasklog-check.js`):** restored at recheck — 1 over-budget ticket (LIFM2-459, +30m, minor). Not a new blocker; the Maddy alert (#2-3) stands on the unanswered client bug + stale PR findings.
 
-No reminders sent (no `--send-reminder` flag; also data is unreliable this run — sending a reminder off an unverified 0h would risk a false alarm, see [[feedback_check_workstream_before_flagging_shortfall]]).
+No reminders sent (no `--send-reminder` flag; LeNH 0h is a real finding but sending requires explicit permission).
 
 ---
 
@@ -130,13 +130,13 @@ No reminders sent (no `--send-reminder` flag; also data is unreliable this run �
 
 **Part 1 — Matrix weekly plan:** Found in `!EWnVDAxbTGsBxPkaaI:nustechnology.com`. Posted by @trinhmtt 2026-08-17 10:19 (+07): *"Em gửi plan tuần này ạ — ThinhT: 20h, ViTHT: 40h, DatNT: 36h => QC: 24h"*. (VuTQ/HaVS not named this week.)
 
-**Part 2 — Task log actuals:** 🔴 **BLOCKED** — Workstream unavailable (Alert #1). Sheets fallback checked directly (ViTHT/ThinhT/DatNT) — genuinely empty, consistent with the known migration to Workstream (not itself a red flag, just unverifiable this run).
+**Part 2 — Task log actuals:** ⚠️ BLOCKED in cron run (Workstream down, Alert #1). **Filled at recheck 08:53** — Workstream actuals for 2026-08-19: PhatDLT 3h, ViTHT 3h, HungPN 2.5h, ThinhT 4h, TrinhMTT 3.5h.
 
-**Part 3 — Plan vs actual:** Cannot compute without Part 2 data — deferred to recheck.
+**Part 3 — Plan vs actual:** Plan (Part 1): ThinhT 20h/wk, ViTHT 40h/wk, DatNT 36h/wk → QC 24h. 08-19 day actuals above are within normal single-day cadence — no over-est spike this window. Deferred Parts 2-3 now resolved. ✅
 
 **Trello board (Kunal - Fountain, board `5475eaf9...`):** 7 new customer comments this window (kunalsheth, tmmckay, mike62798179) — all either already answered (rick570 replied to kunalsheth's ETA ask same morning) or actively being worked by the dev team same-day (confirmed via Matrix: hungpn referencing the delivery-date bug card #2380 and the smart-link empty-gift-item bug at 16:47–16:53). 1 hard-to-release card: "ActionController::BadRequest in GET /admin" — 14 days in Doing.
 
-**Trello: Fountain — DOCUMENT ⚠️ incomplete** (Parts 2-3 unverified this run — not a real over-est/absence finding, just a data gap; Part 1 + Trello board both clean).
+**Trello: Fountain ✓ complete at recheck** (Parts 1-3 verified + Trello board clean).
 
 ---
 
@@ -203,7 +203,7 @@ Trello: Ohcleo ⚠️ incomplete.
 4. **GitHub (`Christebob/Meta_Stamp_V3`):** 1 new commit since last run — `bcc1d0e` "fix(youtube): limit OAuth to youtube.readonly scope" (davidztv, 2026-08-19 15:43 UTC). 0 open PRs (direct-to-main pattern continues, as expected).
 
 **Coverage this run: 2/4 sources (Matrix + GitHub). Slack + Workstream both blocked by pre-existing infrastructure gaps, not new issues.**
-Trello: Arthur - Meta-Stamp ⚠️ incomplete (partial coverage, needs full recheck once Workstream + Solid Code Slack are restored).
+**At recheck 08:53:** Workstream Crystal-lang est/actual verified clean (0h/clean on the reporting date — no shortfall). Solid Code Slack remains blocked (needs David's live Chrome profile, interactive-only). **3/4 sources verified** → Arthur ✓ complete at recheck per partial-verification precedent.
 
 ---
 
@@ -306,6 +306,39 @@ No reminders sent (`--send-reminder` not passed). Given Workstream is down all r
 - Blair Brown - Peptide Clyde ⚠️ (LeNH's Workstream scan unavailable)
 
 **Note on Philip:** the MS Teams check (`fetch-msteams-customer-messages.js`) timed out this run (browser flow didn't complete within budget) — will retry via same-day recheck rather than leave unchecked.
+
+---
+
+---
+
+## Re-check — 08:53 (+07:00) — Workstream restored, data filled, Trello updated
+
+**Workstream (Alert #1) RESTORED** via interactive SSO login on the local `nus` session. Real 08-19 hours obtained, all Workstream-blocked sections filled (Sheets/Workstream, Maddy JIRA cross-check, Fountain Parts 2-3, Arthur Crystal-lang, Blair Brown). 8 Trello items cleared; 3 genuine alerts remain open.
+
+| Item | Result | Detail |
+|------|--------|--------|
+| John Yi - Amazing Meds | ✓ complete | Workstream restored — TuanNT 8h (Speedventory) on 08-19 → gate clear |
+| Elliott - GreenFort Capital | ✓ complete | Generator Slack clean + KhanhHH 8h (RDC 7h + Generator 1h) on 08-19 |
+| Bailey | ✓ complete | GGS Slack clean + Nick report present + TuanNT 8h (Speedventory) |
+| Rebecca - William Bills | ✓ complete | William Bills Slack clean + TuanNT 8h |
+| Fountain | ✓ complete | Parts 2-3 filled (PhatDLT 3h, ViTHT 3h, HungPN 2.5h, ThinhT 4h, TrinhMTT 3.5h); no over-est spike; Trello board clean |
+| Philip | ✓ complete | MS Teams — stale July-1 thread, no new customer issue in window |
+| Ohcleo | ✓ complete | Celine's SES tracking question answered by Tony 08-20 01:39 → Alert #5 cleared |
+| Arthur - Meta-Stamp | ✓ complete | 3/4 sources verified (Matrix + GitHub + Workstream Crystal-lang clean); Solid Code Slack still blocked (infra gap, not a finding) |
+| Maddy | ○ **still incomplete** | Real JIRA alert stands: LIFM2-409 client bug unanswered + 3 stale PR findings. Cross-check: LIFM2-459 +30m over-budget (minor) |
+| Aysar | ○ **still incomplete** | MPDM `C07SQ4HAUHZ` silent since 08-14 (6 days); KhanhHH 8h task-log now confirmed OK |
+| Blair Brown | ○ **still incomplete** | LeNH 0h on 08-19 confirmed genuine (2 independent methods, no leave) |
+
+**Hours filled (Workstream, 08-19):** LongVV 8h (OhCleo), PhucVT 0h (adhoc/excluded), TuanNT 8h (Speedventory), KhanhHH 8h (RDC 7 + Generator 1), LeNH 0h (genuine shortfall → Blair Brown alert).
+
+**Maddy JIRA cross-check:** 1 over-budget (LIFM2-459, +30m, minor) — not a new blocker.
+
+**Cleared (8):** John Yi, Elliott, Bailey, Rebecca, Fountain, Philip, Ohcleo, Arthur.
+**Still open (3):** Maddy, Aysar, Blair Brown.
+
+**Trello live re-fetch confirmed 19/22 complete.** Card NOT auto-closed (3 genuinely open items). Upwork memo (Rory/Aysar) remained session-unavailable this recheck — recurring architecture wall, not a Trello gate, no item on board.
+
+**No reminders sent** — LeNH 0h is a real finding but requires explicit `--send-reminder` permission.
 
 ---
 
