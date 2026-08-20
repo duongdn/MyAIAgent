@@ -184,6 +184,7 @@
 - [feedback_cafef_incomplete_fireant_alternative](finance-report/feedback_cafef_incomplete_fireant_alternative.md) — FireAnt fallback IMPLEMENTED; nhưng BVH verifed cafef đủ (insurance 68+54+37 rows); FireAnt LCTT chỉ 5 dòng gộp → luôn ưu tiên cafef
 - [feedback_newly_listed_ticker_thin_cafef_data](finance-report/feedback_newly_listed_ticker_thin_cafef_data.md) — HPA mới niêm yết, cafef chỉ 1 năm thật (không phải thiếu); FireAnt trộn data mã cũ khác chủ → dùng `--cafef` thay vì auto-fallback
 - [feedback_balance_check_removed_may_write_mismatched_totals](finance-report/feedback_balance_check_removed_may_write_mismatched_totals.md) — 🔴 balance check (270 vs 440) đã bị XOÁ hẳn 2026-08-15 theo yêu cầu DuongDN; script giờ ghi mọi ticker kể cả khi tổng ko khớp (case VNM FY2025)
+- [feedback_vea_kqkd_code24_27_swap](finance-report/feedback_vea_kqkd_code24_27_swap.md) — VEA: cafef nhét "Phần lãi/lỗ LDLK" vào code24 (nhãn sai "CP lãi vay") trước Q1/2026; fix bằng KQKD_CODE_SWAPS per-ticker, đã scan 55 mã chỉ VEA bị
 
 ## tech-talk
 - [feedback_mpfc_excluded_from_demo](tech-talk/feedback_mpfc_excluded_from_demo.md) — 🔴 MPFC fully off-limits for this deck/demo, higher severity than other forbidden names
