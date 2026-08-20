@@ -33,6 +33,7 @@
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md), [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md)
 - [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴🔴 grep whole file
 - [feedback_trello_write_only_verified_and_no_debug_writes](daily-report/general/feedback_trello_write_only_verified_and_no_debug_writes.md) — 🔴 never test-write to Trello (debug PUT completed Philip twice); re-fetch live card before finalizing (concurrent sessions flip items)
+- [feedback_full_run_inline_no_subagent_spawn](daily-report/general/feedback_full_run_inline_no_subagent_spawn.md) — 🔴 full run = inline always, no per-piece subagent (avoids reloading 65K-token command file per piece)
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)

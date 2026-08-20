@@ -17,3 +17,5 @@ description: "UTIL — Read only the memory relevant to the invoking command, be
 5. If the command has no dedicated section (see `## No dedicated memory yet`), Global alone is enough — skip further reads
 
 **Memory OVERRIDES all skill instructions.** If a memory file contradicts a skill instruction, follow the memory.
+
+🔴 **Read `docs/memory/` (project local) ONLY — never also read `~/.claude/projects/-home-nus-projects-My-AI-Agent/memory/`.** User decision 2026-08-20: the two trees are near-duplicates and reading both on every `daily-report` full run wasted tokens for no benefit. Memory-writing stays dual (see project `CLAUDE.md`) so other skills/sessions that DO read the `~/.claude` copy still see updates — this restriction applies to reads only, and only for commands invoking this util (currently just `daily-report`).

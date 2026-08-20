@@ -7,7 +7,7 @@ This project has TWO memory locations. **ALWAYS save to BOTH** when creating or 
 1. **Claude memory:** `~/.claude/projects/-home-nus-projects-My-AI-Agent/memory/` + update its `MEMORY.md`
 2. **Project local memory:** `docs/memory/` + update its `MEMORY.md`
 
-**NON-NEGOTIABLE. NO EXCEPTIONS.**
+**NON-NEGOTIABLE. NO EXCEPTIONS.** (Writing stays dual for every command, including `daily-report` — other skills/sessions may read the `~/.claude` copy. `daily-report`'s own *read* step is scoped to `docs/memory/` only — see `.claude/commands/util/read-memory.md`.)
 
 ## Monitoring Rules (Critical)
 
