@@ -10,6 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
+| 0 | ⚠️⚠️ Email — Carrick (untracked client) | **James Le Chevalier's production platform is down** (Google dropped Maps `DrawingManager` in v3.65 auto-update, crashes page init). Nam Tran committed Carrick to help "today" (08-21) as of last night 22:41. No reply from Carrick found yet this morning. Needs action today — this client isn't in any Trello gate, so nothing else will catch it. |
 | 1 | Workstream — TuanNT (Bailey) | 0h on 2026-08-20 in the **Speedventory** Workstream project (Bailey/Paturevision moved off Google Sheets to Workstream — see corrected memory), after 8h/8h/8h Mon-Wed. No leave note. Reminder **sent** to TuanNT's Matrix room 09:55 per explicit user request. |
 | 2 | Workstream — LeNH (James Diamond) | Blair Brown correctly ignored (LeNH not assigned there this week). **But real gap found on the right project: James Diamond Workstream shows LeNH 8h/8h/8h Mon-Wed (08-17/18/19), 0h Thu 08-20.** Reminder **sent** to LeNH's Matrix room 09:xx. (My first check queried the wrong project/wrong API field — corrected after user pushback.) |
 | 3 | Fountain Trello | Card "ActionController::BadRequest in GET /admin" stuck in Doing 16.0 days — stuck/hard-to-release candidate. |
@@ -36,7 +37,9 @@
 | davidztv19@gmail.com | 2 | 0 | — |
 | freelancer@mpfc | 0 | 0 | — |
 
-**Carrick alerts:** SocalAutoWraps Rollbar prod error #53 (undefined method) + daily summary; Elliott/Generator Redmine Bug #80510 [Android] ×2; namtv "Checking in - URGENT HELP PLEASE" re: James Le Chevalier client (already being handled per Matrix — namtv has access, coordinating).
+**Carrick alerts:** SocalAutoWraps Rollbar prod error #53 (undefined method) + daily summary; Elliott/Generator Redmine Bug #80510 [Android] ×2.
+
+**⚠️ URGENT — James Le Chevalier (untracked client, not in any Trello gate — routed via CEO Chien Tran directly):** Production platform down. Google auto-updated the Maps JS API to v3.65 (`v=quarterly`) and dropped `DrawingManager` (polygon-drawing) — uncaught error inside `generateMap` crashes page init, cascading to break the `select2` filter setup too. Timeline: Chien looped in Nam Tran (Delivery Manager) 20/08 19:19 → Nam told James "**Carrick will look into this and help tomorrow**" (= today 08-21), cc'd Carrick 20/08 22:41 → James confirmed 20/08 23:20 "nothing changed, I'm about all day tomorrow to get this sorted." **No reply from Carrick found yet** as of this morning's mailbox check (09:5x) — not necessarily overdue this early, but needs action today. Full thread now in Alerts Summary.
 
 **Rick alerts (Fountain/Infinity):** Multiple BugSnag/Rollbar entries — FountainStaging PG::ConnectionBad, ActionView::MissingTemplate, InvalidAuthenticityToken, NoMethodError ×2 (#307), FirstProject #1090/#1103, InfinityRoses/FountainGifts daily summaries. Volume consistent with normal Fountain dev-team activity (Rollbar/BugSnag notification noise), not escalated beyond routine.
 
@@ -258,6 +261,7 @@ Trello: Philip left ⚠️ incomplete pending confirmation.
 
 ## Unresolved questions
 
+0. **James Le Chevalier's production platform is down** (Maps `DrawingManager` removed by Google's v3.65 auto-update) — Carrick committed to help today, no confirmation yet he's started. This client has no Trello gate/tracked project, so it needs a direct check-in, not automated monitoring.
 1. Elena PR #309 has a real merge conflict (dirty, 10+ days) — needs a dev to resolve before it can merge; not something we can auto-fix.
 2. TuanNT reminder sent 09:55 (Speedventory/Bailey Workstream). LeNH reminder sent (James Diamond Workstream, her real project — Blair Brown correctly cleared).
 3. Fountain "ActionController::BadRequest in GET /admin" (16 days in Doing) — needs owner/priority check.
