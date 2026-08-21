@@ -13,8 +13,9 @@
 | 1 | Sheets — TuanNT | 0h combined across all sources on 2026-08-20 (no leave note found). Blocks John Yi/Rebecca/Bailey Trello items. |
 | 2 | Sheets — LeNH | 0h combined across all sources on 2026-08-20 (no leave note found). Was already reminded on 08-20 morning about 08-19 gap (resolved miscommunication); today's own 08-20 total is genuinely 0h. Blocks Blair Brown item. |
 | 3 | Fountain Trello | Card "ActionController::BadRequest in GET /admin" stuck in Doing 16.0 days — stuck/hard-to-release candidate. |
-| 4 | Elena | PR #309 "Implement header and modal components with i18n support" (nusken) open since 08-11, not yet merged/reviewed this run — CodeRabbit review not checked this pass. |
-| 5 | Trello (Neural, Philip, Arthur, Elena-WordPress) | Not run this pass — see Deferred section. |
+| 4 | Elena | PR #309 real merge conflict (`mergeable: false, dirty`) against `nus/dp-20260811`, unresolved 10+ days, 0 CodeRabbit reviews. |
+| 5 | Upwork Memo | Rory + Aysar workroom sessions both failed (login_failed / session_expired) — memo status unverified, not an alert per policy, needs manual re-auth on carrick Chrome Profile 1. |
+| 6 | MS Teams — Philip | Possible unanswered client question (Elevate365 demo spec, "Does it make sense what I'm trying to do?") — needs date/reply verification. |
 
 **Today (Fri 08-21):** no leave/WFH reported.
 
@@ -138,13 +139,13 @@ Trello: Fountain left ⚠️ incomplete (stuck Doing card).
 
 ---
 
-## Elena — 09:25 (+07:00)
+## Elena — 09:40 (+07:00)
 
-- Open PR: #309 "Implement header and modal components with i18n support" (nusken, opened 08-11) — CodeRabbit review + merge/deploy flow not run this pass.
+- Open PR #309 "Implement header and modal components with i18n support" (nusken, opened 08-11) — **`mergeable: false, mergeable_state: dirty`** — real merge conflict against base `nus/dp-20260811`, unresolved for 10+ days. No CodeRabbit reviews posted. Cannot auto-merge; needs a dev to rebase/resolve conflict manually.
 - Precognize (nusken): 0 open PRs on `Precognize/development`, no `nus/` branch pending.
-- WordPress SamGuard console check: not run this pass.
+- WordPress SamGuard console check: clean — 0 JS errors, 0 page errors, 0 CSP violations. `failedRequests` only GA/ads/doubleclick network noise + video assets (non-CSP, benign).
 
-Trello: Elena - SamGuard, Elena - WordPress SamGuard left ⚠️ incomplete.
+Trello: Elena - SamGuard left ⚠️ incomplete (real PR#309 conflict, unresolved). Elena - WordPress SamGuard ✓ complete.
 
 ---
 
@@ -170,13 +171,17 @@ No new alert. Trello: Maddy ✓ complete.
 
 ---
 
-## Arthur / Meta-Stamp — 09:36 (+07:00)
+## Arthur / Meta-Stamp — 09:45 (+07:00) — 5/6 sources
 
-**Deferred this pass** — full 6-source check (2 Matrix rooms, 3 Solid-Code Slack channels + 1:1 Art DM, Workstream Crystal-lang est/actual, GitHub commits/PRs) not run due to time-boxing on this run.
+1. **Matrix "Arthur - Meta-Stamp" room:** phucvt handled a Chris issue overnight (charged, "Nam Tran Tối qua em có xử lý cho Chris rồi"); tiennd's Leo hour cap raised 20h→25h for urgent fix, prioritized ahead of MyID; TienND transferred to handle 2 approved-estimate tasks (3.5h). No unresolved client question.
+2. **Matrix technical-setup room:** quiet — last real message 08-10, nothing new this window.
+3. **Slack "Solid Code" (3 channels + Art 1:1 DM):** ⚠️ still not accessible — workspace missing from this server's `.slack-accounts.json`, same recurring config gap documented since 2026-07-13. NOT run.
+4. **Workstream "Crystal lang" est/actual (week 08-17→08-23):** PhucVT 2.5h (08-19, YouTube OAuth scope fix), TienND 4h (08-20, transferred over). 1 `needsReview` row pending: PhucVT's 08-19 task (2:30) — reviewer TienND.
+5. **GitHub `Christebob/Meta_Stamp_V3`:** 0 open PRs, 1 commit direct-to-main since window start (davidztv, "restrict upload labels to audio-only and dedupe activity feed by event ID").
 
-**Partial signal available from Matrix full-room scan (Piece 10, room "Arthur - Meta-Stamp"):** phucvt handled a Chris issue same-night ("Tối qua em có xử lý cho Chris rồi"); tiennd noted Leo's hour cap raised 20h→25h for an urgent fix, prioritized ahead of MyID work. No unresolved client question visible in this excerpt. Not a substitute for the full 6-source check.
+5/6 sources verified, no new unresolved client-facing question found. Solid Code Slack gap is a known recurring environment issue, not a new failure — completing per partial-verification precedent (matches multiple prior runs, e.g. 2026-08-20 recheck).
 
-Trello: Arthur - Meta-Stamp left ⚠️ incomplete — needs full check on next recheck.
+Trello: Arthur - Meta-Stamp ✓ complete.
 
 ---
 
@@ -193,16 +198,37 @@ MPFC apdex chronically poor (known ongoing issue, tracked separately). No new ou
 
 ---
 
+## Scrin.io — 09:41 (+07:00)
+
+**Scrin.io (Nick @ John Yi company account — 2026-08-20):** 0h — no sessions recorded.
+
+---
+
+## Upwork Memo — 2026-08-20 — 09:42 (+07:00)
+
+| Workroom | Result |
+|----------|--------|
+| Rory | `login_failed` — live cookie + stored + headless re-login all failed. Carrick's real Chrome Profile 1 Upwork session likely logged out. |
+| Aysar | `session_expired` |
+
+Session/auth failure ≠ memo status per policy — no alert, no Trello gate impact (existing Rory/Aysar Slack+hours gates already completed above). Manual re-auth needed on carrick's Chrome Profile 1 to restore memo checks.
+
+---
+
+## MS Teams — Philip Briggs — 09:43 (+07:00)
+
+Thread activity found: Philip asked Will "do you have some availability to do something for me?" → Will replied same day asking for details → Philip sent a full spec ("Elevate365 Static Demo — Industry Selector / 80-User Model") at 1:21-1:22 PM, followed by "Im close but cant get it over the line... sent my latest version to gitlab demo v2" (1:23 PM) and "Does it make sense what I'm trying to do?" (1:34 PM) — **no visible reply after Philip's last two messages** in this capture.
+
+⚠️ Possible unanswered client question — needs verification of exact timestamp/date and whether a reply exists outside the captured screenshot range before treating as a hard alert.
+
+Trello: Philip left ⚠️ incomplete pending confirmation.
+
+---
+
 ## Deferred (not run this pass — time-boxed run)
 
-- Scrin.io (Nick @ John Yi)
 - Matrix full per-room summary write-up (raw dump captured in `reports/2026-08-21/matrix-rooms-0849.md`, only key excerpts summarized above/below)
-- Arthur/Meta-Stamp full 6-source check (Trello item left incomplete)
-- Upwork Memo validation (Piece 15)
-- MS Teams — Philip Briggs check
 - WhatsApp/Zalo (excluded by default)
-
-These should be picked up on next recheck.
 
 ---
 
@@ -232,7 +258,8 @@ These should be picked up on next recheck.
 
 ## Unresolved questions
 
-1. Elena PR #309 — merge/deploy not attempted this run; needs CodeRabbit review + SSH build/deploy flow on next pass.
+1. Elena PR #309 has a real merge conflict (dirty, 10+ days) — needs a dev to resolve before it can merge; not something we can auto-fix.
 2. TuanNT and LeNH 0h on 08-20 — reminders printed but not sent (no `--send-reminder`); confirm with user whether to send.
 3. Fountain "ActionController::BadRequest in GET /admin" (16 days in Doing) — needs owner/priority check.
-4. Arthur/Meta-Stamp, Upwork Memo, Scrin, MS Teams Philip pieces deferred this run — should be covered on next recheck or explicit re-run.
+4. Philip Briggs MS Teams thread — need to confirm exact date and whether "Does it make sense what I'm trying to do?" was answered outside the captured screenshot range.
+5. Upwork memo checks (Rory/Aysar) blocked by carrick's Chrome Profile 1 Upwork session — needs manual re-login.
