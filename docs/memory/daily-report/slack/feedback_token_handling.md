@@ -85,7 +85,6 @@ The daily Slack scan scripts (`scripts/daily-slack-scan-*.js`) must:
 |-----------|-----------|------|
 | Matrix M_UNKNOWN_TOKEN | `node scripts/matrix-token-refresh.js` | Before reporting expired |
 | Discord 403 | 3-step curl verify first (`/users/@me`, `/guilds`, `/channels`) | Before reporting invalid |
-| Slack xoxp | `node scripts/slack-verify-tokens.js` | Before reporting expired |
 | Slack xoxc (Amazing Meds) | `node scripts/slack-xoxc-refresh-amazingmeds.js` | **PROACTIVELY before every scan** |
 | Slack xoxc (Equanimity) | `node scripts/slack-xoxc-refresh-equanimity.js` | **PROACTIVELY before every scan** |
 | Slack xoxc (Solid Code / Arthur) | Re-extract `d` cookie from David's live Profile 15: `.claude/skills/.venv/bin/python3 scripts/get-david-slack-cookies.py`, then update `config/.slack-accounts.json` cookie field | See incident below — try this BEFORE assuming a login is needed |

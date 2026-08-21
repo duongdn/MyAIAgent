@@ -8,7 +8,7 @@
 - [feedback_never_report_token_expired](global/feedback_never_report_token_expired.md) — 🔴 fix silently
 - [feedback_report_location](global/feedback_report_location.md), [feedback_always_include_links](global/feedback_always_include_links.md), [feedback_report_style](global/feedback_report_style.md), [feedback_customer_facing_messages](global/feedback_customer_facing_messages.md)
 - [feedback_workstream_sso_recheck_fixed](daily-report/general/feedback_workstream_sso_recheck_fixed.md) — 🔴 SSO transient, retry
-- [feedback_davidztv_github_always_configured](daily-report/general/feedback_davidztv_github_always_configured.md) — 🔴 gh auth token -u davidztv
+- [feedback_davidztv_github_always_configured](daily-report/general/feedback_davidztv_github_always_configured.md) — 🔴 gh auth token -u davidztv; also has GitHub account mapping table
 - [feedback_never_send_messages_without_permission](global/feedback_never_send_messages_without_permission.md), [feedback_no_duplicate_sends](global/feedback_no_duplicate_sends.md), [feedback_subagent_no_unauthorized_writes](global/feedback_subagent_no_unauthorized_writes.md)
 - [feedback_github_account_mapping](global/feedback_github_account_mapping.md) — duongdn=Elena, nusken=Precognize
 - [project_alert_cron_setup](global/project_alert_cron_setup.md), [project_php_team](global/project_php_team.md), [project_timezone_utc7](global/project_timezone_utc7.md), [user_role](global/user_role.md), [feedback_ripgrep_execute_permission_fix](global/feedback_ripgrep_execute_permission.md)
@@ -28,8 +28,8 @@
 - [feedback_claude_launcher_model_separation](global/feedback_claude_launcher_model_separation.md) — default claude=subscription sonnet; claude-nus/duongdn(-prod)=DeepSeek launchers, keep
 
 ## daily-report — general
-- [project_daily_report_workflow](daily-report/general/project_daily_report_workflow.md), [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
-- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_timestamp](daily-report/general/feedback_monday_friday_timestamp.md), [feedback_monday_must_use_friday_data](daily-report/general/feedback_monday_must_use_friday_data.md) — 🔴🔴🔴 #1 bug: Monday uses Friday data
+- [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
+- [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_data_rules](daily-report/general/feedback_monday_friday_data_rules.md) — 🔴🔴🔴 #1 bug: Monday task-log pieces use Friday data, activity pieces keep last_run
 - [feedback_alert_classification](daily-report/general/feedback_alert_classification.md), [feedback_alert_means_no_complete](daily-report/general/feedback_alert_means_no_complete.md), [feedback_missing_daily_report_is_alert](daily-report/general/feedback_missing_daily_report_is_alert.md)
 - [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴🔴 grep whole file
 - [feedback_trello_write_only_verified_and_no_debug_writes](daily-report/general/feedback_trello_write_only_verified_and_no_debug_writes.md) — 🔴 never test-write to Trello (debug PUT completed Philip twice); re-fetch live card before finalizing (concurrent sessions flip items)
@@ -42,7 +42,7 @@
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md)
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md)
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [feedback_aysar_consolidated](daily-report/slack/feedback_aysar_consolidated.md) — 🔴 Aysar=MPDM C07SQ4HAUHZ
-- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_four_part_check_mandatory](daily-report/slack/feedback_maddy_four_part_check_mandatory.md) — 🔴🔴 4x violated, [feedback_maddy_4part_check_mandatory_in_every_report](daily-report/slack/feedback_maddy_4part_check_mandatory_in_every_report.md) — 🔴🔴🔴 standalone ## section required, [feedback_maddy_jira_ticket_activity_daily](daily-report/slack/feedback_maddy_jira_ticket_activity_daily.md) — 🔴 daily JIRA comment scan
+- [feedback_maddy_kai_longvv_identity_and_quality_escalation](daily-report/slack/feedback_maddy_kai_longvv_identity_and_quality_escalation.md), [feedback_maddy_consolidated](daily-report/slack/feedback_maddy_consolidated.md) — 🔴🔴🔴 4-part check + dedicated ## Maddy section required every report
 - [feedback_kai_daily_report_gate](feedback_kai_daily_report_gate.md) — 🔴 check WS Maddy hours first
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md), [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md)
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴
@@ -53,22 +53,19 @@
 - [feedback_discord_token_refresh_script_broken](daily-report/discord/feedback_discord_token_refresh_script_broken.md) — 🔴 401≠login
 
 ## daily-report:sheets
+Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Bailey now on Workstream) — old sheets-scan mechanics memories deleted; entries below are Workstream-era.
 - [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md), [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md)
-- [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md), [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — 🔴 substring-match bug fixed
-- [feedback_google_sheets_per_employee](daily-report/sheets/feedback_google_sheets_per_employee.md), [feedback_sheets_scan_prev_date_for_daily_hours](daily-report/sheets/feedback_sheets_scan_prev_date_for_daily_hours.md)
+- [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md)
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md)
-- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 12x recurred false-0h, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md), [feedback_no_dated_scan_scripts](daily-report/sheets/feedback_no_dated_scan_scripts.md) — 🔴 AM 0h≠bug
-- [feedback_sheets_scan_script_positional_args](daily-report/sheets/feedback_sheets_scan_script_positional_args.md) — 🔴 positional args not flags
+- [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 13x recurred false-0h, always re-verify before alerting, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md)
 - [feedback_workstream_report_needs_dev_reviewer_hours_and_status](daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md) — 🔴 WS row needs dev+reviewer+status
-- [feedback_dev_not_working_project_x_means_that_project_only](daily-report/sheets/feedback_dev_not_working_project_x_means_that_project_only.md), [feedback_parttime_official_filter](daily-report/sheets/feedback_parttime_official_filter.md)
-- [feedback_sheets_wrong_tab_numbering](daily-report/sheets/feedback_sheets_wrong_tab_numbering.md), [feedback_sheets_empty_col_a_bug](daily-report/sheets/feedback_sheets_empty_col_a_bug.md)
-- [feedback_tasklog_summary_sheet](daily-report/sheets/feedback_tasklog_summary_sheet.md), [feedback_summary_sheet_no_double_count](daily-report/sheets/feedback_summary_sheet_no_double_count.md)
+- [feedback_dev_not_working_project_x_means_that_project_only](daily-report/sheets/feedback_dev_not_working_project_x_means_that_project_only.md)
 - [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md), [feedback_phucvt_adhoc_external_ignore](daily-report/sheets/feedback_phucvt_adhoc_external_ignore.md)
-- [feedback_khanhhh_aysar_consolidated](daily-report/sheets/feedback_khanhhh_aysar_consolidated.md) — Aysar sheet owner=KhanhHH
-- [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md)
-- [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 🔴 script reads STALE Sheet
-- [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md), [feedback_elena_sheet_permission_error](daily-report/sheets/feedback_elena_sheet_permission_error.md)
-- [feedback_tasklog_0h_reminder_complete](daily-report/sheets/feedback_tasklog_0h_reminder_complete.md), [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
+- [feedback_khanhhh_aysar_consolidated](daily-report/sheets/feedback_khanhhh_aysar_consolidated.md) — Aysar project owner=KhanhHH
+- [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — pro-rate weekly target for leave
+- [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 🔴 script reads STALE Sheet, needs Workstream update
+- [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md)
+- [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
 - [feedback_lenh_james_diamond_blair_brown_deprioritized](daily-report/sheets/feedback_lenh_james_diamond_blair_brown_deprioritized.md) — 🔴 2026-08-21: LeNH=James full-time, ignore Blair Brown 0h for now
 
 ## daily-report:scrin
@@ -77,8 +74,8 @@
 ## daily-report:fountain
 - [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — 🔴 3-part MANDATORY
 - [feedback_fountain_dev_specific_consolidated](daily-report/fountain/feedback_fountain_dev_specific_consolidated.md)
-- [feedback_fountain_0h_not_expected_day1](daily-report/fountain/feedback_fountain_0h_not_expected_day1.md), [feedback_fountain_monday_plan_timing](daily-report/fountain/feedback_fountain_monday_plan_timing.md)
-- [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md)
+- [feedback_fountain_monday_plan_timing](daily-report/fountain/feedback_fountain_monday_plan_timing.md)
+- [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md) — 5-part checklist still mandatory; only per-dev 0h ALERTING is off
 ## daily-report:elena
 - [feedback_elena_consolidated](daily-report/elena/feedback_elena_consolidated.md), [feedback_csp_violations_are_real_errors](daily-report/elena/feedback_csp_violations_are_real_errors.md), [reference_elena_wordpress_csp_config](daily-report/elena/reference_elena_wordpress_csp_config.md)
 
@@ -87,12 +84,10 @@
 - [feedback_trello_mail_must_check_email](daily-report/trello/feedback_trello_mail_must_check_email.md), [feedback_email_trello_completion](daily-report/trello/feedback_email_trello_completion.md)
 - [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md), [feedback_trello_per_client_gates_on_lead_dev](daily-report/trello/feedback_trello_per_client_gates_on_lead_dev.md)
 - [reference_nick_trello_session_read](daily-report/trello/reference_nick_trello_session_read.md) — read Nick-board cards via Chrome Default-profile cookies, not .trello-config.json
-- [feedback_philip_msteams_must_run](daily-report/trello/feedback_philip_msteams_must_run.md), [feedback_philip_msteams_duplicate_contacts](daily-report/trello/feedback_philip_msteams_duplicate_contacts.md) — 🔴 regressed 2026-08-13, customerHints dropped from config, re-check it exists
+- [feedback_philip_msteams_consolidated](daily-report/trello/feedback_philip_msteams_consolidated.md) — 🔴 always run; disambiguate via customerHints (regressed 2026-08-13, re-check it exists); watch stale/corrupt browser profile
 - [feedback_recheck_uses_morning_report_data](daily-report/trello/feedback_recheck_uses_morning_report_data.md) — 🔴 pull Trello LIVE
 - [feedback_rebecca_chua_not_trello_block](daily-report/trello/feedback_rebecca_chua_not_trello_block.md), [feedback_tuannt_gate_show_breakdown](daily-report/trello/feedback_tuannt_gate_show_breakdown.md)
 - [feedback_arthur_blair_brown_gate_added](daily-report/trello/feedback_arthur_blair_brown_gate_added.md)
-- [feedback_philip_msteams_chrome_profile_crash](daily-report/trello/feedback_philip_msteams_chrome_profile_crash.md) — 🔴 rebuild keeping IndexedDB
-- [feedback_msteams_stale_profile](daily-report/trello/feedback_msteams_stale_profile.md) — 🔴 clear tmp profile first
 - [feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask](daily-report/trello/feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask.md) — Raymond many sub-projects, ignore client msg unless direct ask to us
 
 ## daily-report:matrix

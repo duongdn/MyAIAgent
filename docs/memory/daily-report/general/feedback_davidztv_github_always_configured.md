@@ -16,3 +16,5 @@ Multiple consecutive daily reports (07-15, 07-17, 07-21 morning) claimed "davidz
 - If you need a GitHub account that isn't the current `gh` active, do `gh auth token -h github.com -u <account>` — don't conclude it doesn't exist
 - Check `~/.config/gh/hosts.yml` for all registered accounts before claiming "not configured"
 - This has been wrong 3 times in a row (07-15, 07-17, 07-21) — don't repeat
+
+See [[feedback_github_account_mapping]] for the full per-repo account mapping.
