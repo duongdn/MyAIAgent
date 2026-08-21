@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — TuanNT | 0h combined across all sources on 2026-08-20 (no leave note found), confirmed by direct Bailey/Paturevision sheet check (W41 tab, Thu 20/08 row = 0/0/0, no entries). Reminder **sent** to TuanNT's Matrix room 09:55 per explicit user request. |
+| 1 | Workstream — TuanNT (Bailey) | 0h on 2026-08-20 in the **Speedventory** Workstream project (Bailey/Paturevision moved off Google Sheets to Workstream — see corrected memory), after 8h/8h/8h Mon-Wed. No leave note. Reminder **sent** to TuanNT's Matrix room 09:55 per explicit user request. |
 | 2 | Sheets — LeNH | 0h combined across all sources on 2026-08-20 — **deprioritized per user 2026-08-21: LeNH working James Diamond full-time, ignore Blair Brown for now.** No reminder sent. |
 | 3 | Fountain Trello | Card "ActionController::BadRequest in GET /admin" stuck in Doing 16.0 days — stuck/hard-to-release candidate. |
 | 4 | Elena | PR #309 real merge conflict (`mergeable: false, dirty`) against `nus/dp-20260811`, unresolved 10+ days, 0 CodeRabbit reviews. |
@@ -90,7 +90,7 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 |-----------|-----------------|--------|
 | LongVV | 5.5h (Auction Warehouse) | OK — part-time, weekly threshold gate, not daily |
 | PhucVT | 10h (OhCleo) | OK |
-| TuanNT | **0h** — all sources checked, incl. direct Bailey/Paturevision sheet (W41, Thu 20/08 empty row) | ⚠️ ALERT — reminder sent |
+| TuanNT | **0h** — Workstream Speedventory (Bailey) project: 8h/8h/8h Mon-Wed, 0h Thu 08-20 | ⚠️ ALERT — reminder sent |
 | KhanhHH | 7.5h (Radio Data Center 5.5, Samguard 1, Generator 1) | OK |
 | LeNH | **0h** — all sources checked | Deprioritized — user confirmed LeNH is on James Diamond full-time, Blair Brown ignored for now |
 
