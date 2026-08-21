@@ -11,4 +11,4 @@ metadata:
 
 **How to apply:** ALWAYS pass PREV_DATE explicitly: `node scripts/workstream-fetch-project-week.js 2026-07-03`. Never trust a no-arg run's empty `members: []` as "no hours logged" — re-run with the explicit date first. Same applies to the `--project-filter` positional arg (also supported, can combine: `... 2026-07-03 khanhhh`).
 
-Related: [[feedback_workstream_all_projects_in_script]], [[feedback_sheets_scan_prev_date_for_daily_hours]]
+Related: [[feedback_workstream_all_projects_in_script]]

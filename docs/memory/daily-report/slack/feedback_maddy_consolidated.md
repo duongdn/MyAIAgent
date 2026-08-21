@@ -48,4 +48,4 @@ grep -q "## Maddy" reports/YYYY-MM-DD/daily-report.md || echo "🔴 MISSING Madd
 
 If any of the 4 parts is missing or structurally blocked, say so explicitly and name what's needed to unblock it — never silently omit it, never present "Kai posted daily report, clean" as sufficient.
 
-[[feedback_monday_must_use_friday_data]] [[feedback_maddy_jira_weekly_check]] [[feedback_maddy_kai_longvv_identity_and_quality_escalation]]
+[[feedback_maddy_jira_weekly_check]] [[feedback_maddy_kai_longvv_identity_and_quality_escalation]]

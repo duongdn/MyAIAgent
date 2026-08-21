@@ -13,4 +13,4 @@ Fallback: service account key `config/daily-agent-490610-7eb7985b33e3.json` (ema
 
 **Why:** Hit this 2026-07-08 trying to read a Slides tech-talk draft — MCP connector was expired, but the file was accessible via the service account (must be shared with the service account email, or be in a Drive the SA can see) using Drive export instead of the disabled Slides API.
 
-**How to apply:** Any time an MCP Google Drive call fails with "requires re-authorization" or "token expired", try the service-account Drive-export fallback before asking the user to reconnect OAuth. Works for Docs/Slides (export as text/plain) and native Sheets already had this pattern (see [[project_daily_report_workflow]]-adjacent sheets scripts in `scripts/*.py`).
+**How to apply:** Any time an MCP Google Drive call fails with "requires re-authorization" or "token expired", try the service-account Drive-export fallback before asking the user to reconnect OAuth. Works for Docs/Slides (export as text/plain) and native Sheets already had this pattern (see sheets scripts in `scripts/*.py`).

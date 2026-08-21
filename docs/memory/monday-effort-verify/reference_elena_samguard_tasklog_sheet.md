@@ -9,7 +9,7 @@ metadata:
 
 **Why this matters:** [[project_matrix_static_compat_token]]'s sibling command `/me:monday-effort-verify-with-thuyltt` flagged "Elena Klebanov" as an unverifiable blind spot for 3 consecutive weeks (2026-06-22 through 2026-07-13) — the project never appears in DuongDN's Workstream self `/time/projects` membership list at any date, and `/admin/projects` is 403. This sheet is the independent source that closes that gap.
 
-**Structure:** Per-week tabs named `W{n}`, but **the tab number is NOT the calendar week number** — it's offset from Project Start (Thursday 2026-04-02, per `Project Info` tab). Confirmed empirically: `W16` tab = calendar week 2026-07-06 to 07-12 (not week 16 of the year). Always verify the date range printed in column A (`Mon, DD/MM/YY` rows) before trusting a tab number — same gotcha as [[feedback_sheets_wrong_tab_numbering]] in the Fountain/Paturevision sheets.
+**Structure:** Per-week tabs named `W{n}`, but **the tab number is NOT the calendar week number** — it's offset from Project Start (Thursday 2026-04-02, per `Project Info` tab). Confirmed empirically: `W16` tab = calendar week 2026-07-06 to 07-12 (not week 16 of the year). Always verify the date range printed in column A (`Mon, DD/MM/YY` rows) before trusting a tab number — same gotcha seen historically in the Fountain/Paturevision sheets.
 
 **Row format:** header row 3 = `Item | Project | Description | Reference | Task ID | Status | Owner | Actual | Self-rated | Charged | Notes`. Filter rows where column G (`Owner`) = `DuongDN`, sum column H (`Actual`) in hours (not minutes — unlike Workstream's `weekStats.actual` which is minutes).
 
