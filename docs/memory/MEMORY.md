@@ -69,6 +69,7 @@
 - [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 🔴 script reads STALE Sheet
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md), [feedback_elena_sheet_permission_error](daily-report/sheets/feedback_elena_sheet_permission_error.md)
 - [feedback_tasklog_0h_reminder_complete](daily-report/sheets/feedback_tasklog_0h_reminder_complete.md), [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
+- [feedback_lenh_james_diamond_blair_brown_deprioritized](daily-report/sheets/feedback_lenh_james_diamond_blair_brown_deprioritized.md) — 🔴 2026-08-21: LeNH=James full-time, ignore Blair Brown 0h for now
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
@@ -125,6 +126,8 @@
 - [feedback_overbudget_check_missing_from_other_active](bailey/feedback_overbudget_check_missing_from_other_active.md) — 🔴
 - [feedback_boto3_pyopenssl_broken](bailey/feedback_boto3_pyopenssl_broken.md), [feedback_siteground_captcha_no_ssh_fallback](bailey/feedback_siteground_captcha_no_ssh_fallback.md)
 - [feedback_bailey_invoice_verify_slack_quote_supersedes_buffer](bailey/feedback_bailey_invoice_verify_slack_quote_supersedes_buffer.md) — 🔴 fixed-cost bills at GGS Slack-quoted hours, not WBS buffer; also xoxp search.messages needs token in header only
+- [feedback_siteground_disk_81pct_staging_copies](bailey/feedback_siteground_disk_81pct_staging_copies.md) — 🔴 81% used 2026-08-21, staging copies; SSH fallback now WORKS (see updated feedback_siteground_captcha_no_ssh_fallback)
+- [feedback_bailey_moved_to_workstream_speedventory](bailey/feedback_bailey_moved_to_workstream_speedventory.md) — 🔴🔴 2026-08-21 monitor task log moved OFF Google Sheets → Workstream `speedventory`; new write script scripts/workstream-write-tasklog.js
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)

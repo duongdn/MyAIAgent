@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets — TuanNT | 0h combined across all sources on 2026-08-20 (no leave note found). Blocks John Yi/Rebecca/Bailey Trello items. |
-| 2 | Sheets — LeNH | 0h combined across all sources on 2026-08-20 (no leave note found). Was already reminded on 08-20 morning about 08-19 gap (resolved miscommunication); today's own 08-20 total is genuinely 0h. Blocks Blair Brown item. |
+| 1 | Sheets — TuanNT | 0h combined across all sources on 2026-08-20 (no leave note found), confirmed by direct Bailey/Paturevision sheet check (W41 tab, Thu 20/08 row = 0/0/0, no entries). Reminder **sent** to TuanNT's Matrix room 09:55 per explicit user request. |
+| 2 | Sheets — LeNH | 0h combined across all sources on 2026-08-20 — **deprioritized per user 2026-08-21: LeNH working James Diamond full-time, ignore Blair Brown for now.** No reminder sent. |
 | 3 | Fountain Trello | Card "ActionController::BadRequest in GET /admin" stuck in Doing 16.0 days — stuck/hard-to-release candidate. |
 | 4 | Elena | PR #309 real merge conflict (`mergeable: false, dirty`) against `nus/dp-20260811`, unresolved 10+ days, 0 CodeRabbit reviews. |
 | 5 | Upwork Memo | Rory + Aysar workroom sessions both failed (login_failed / session_expired) — memo status unverified, not an alert per policy, needs manual re-auth on carrick Chrome Profile 1. |
@@ -90,20 +90,20 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 |-----------|-----------------|--------|
 | LongVV | 5.5h (Auction Warehouse) | OK — part-time, weekly threshold gate, not daily |
 | PhucVT | 10h (OhCleo) | OK |
-| TuanNT | **0h** — all sources checked | ⚠️ ALERT — no leave note found |
+| TuanNT | **0h** — all sources checked, incl. direct Bailey/Paturevision sheet (W41, Thu 20/08 empty row) | ⚠️ ALERT — reminder sent |
 | KhanhHH | 7.5h (Radio Data Center 5.5, Samguard 1, Generator 1) | OK |
-| LeNH | **0h** — all sources checked | ⚠️ ALERT — no leave note found (see also 08-20 morning miscommunication about 08-19, resolved; this is 08-20's own genuine 0h) |
+| LeNH | **0h** — all sources checked | Deprioritized — user confirmed LeNH is on James Diamond full-time, Blair Brown ignored for now |
 
 Workstream needs-review check: no `needsReview` rows found for LongVV/PhucVT/KhanhHH/TuanNT/LeNH's projects this pass (Fountain excluded per policy).
 
-Trello: John Yi, Bailey, Rebecca left ⚠️ incomplete (TuanNT 0h gates all three). Blair Brown left ⚠️ incomplete (LeNH 0h).
+Trello: John Yi, Bailey, Rebecca ✓ complete (TuanNT reminder sent — reminder IS the action). Blair Brown ✓ complete (deprioritized per user).
 
 ---
 
 ## Reminders — 09:06 (+07:00)
 
-- TuanNT: needs reminder (0h, no leave) — not sent (no `--send-reminder` flag)
-- LeNH: needs reminder (0h, no leave) — not sent (no `--send-reminder` flag)
+- TuanNT: needs reminder (0h, no leave) — **sent** 09:55 to `!knbJbIKzXRJNGVFQNg:nustechnology.com` per explicit user request (event_id `$5DSV_OX5vF6bLMBLmUxBwqAhDd0DZpltcqhEUBLQ_I8`)
+- LeNH: 0h, no leave — reminder NOT sent, user deprioritized Blair Brown (LeNH working James Diamond full-time)
 
 ---
 
@@ -259,7 +259,7 @@ Trello: Philip left ⚠️ incomplete pending confirmation.
 ## Unresolved questions
 
 1. Elena PR #309 has a real merge conflict (dirty, 10+ days) — needs a dev to resolve before it can merge; not something we can auto-fix.
-2. TuanNT and LeNH 0h on 08-20 — reminders printed but not sent (no `--send-reminder`); confirm with user whether to send.
+2. TuanNT reminder sent 09:55; LeNH's 0h left un-actioned per user's Blair Brown deprioritization — revisit if that changes.
 3. Fountain "ActionController::BadRequest in GET /admin" (16 days in Doing) — needs owner/priority check.
 4. Philip Briggs MS Teams thread — need to confirm exact date and whether "Does it make sense what I'm trying to do?" was answered outside the captured screenshot range.
 5. Upwork memo checks (Rory/Aysar) blocked by carrick's Chrome Profile 1 Upwork session — needs manual re-login.
