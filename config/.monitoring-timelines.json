@@ -225,8 +225,8 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-08-07T01:46:00Z",
-    "output_file": "reports/2026-08-07/0846-server-monitor.md",
+    "last_run": "2026-08-21T03:57:00Z",
+    "output_file": "reports/2026-08-21/1057-server-monitor.md",
     "last_status": "partial",
     "caveats_20260724": "Bailey/Siteground still CAPTCHA-blocked (--login hit session_expired then CAPTCHA per known unsolvable-headlessly issue) — Bailey Trello item left incomplete, same as 07-10 precedent. Fountain staging disk WORSENED to 89% CRITICAL (81%→86%→89% over 3 checks) — breakdown done, ~4.3G+ reclaimable (2 old SQL dumps ~1.4G, pm2/sidekiq/cron logs ~2.9G), not deleted, awaiting confirmation. NEW: all 4 Marcel XID dev/staging hosts (xid_app_backend.dev, xid_sync_console.dev, xid_sass_backend.dev, xid_saas_backend.dev) now unreachable (previously only 2 others were known-dead) — needs decision on known-dead list update vs investigation. Elena samguard.co swap up to 27.8% WARNING (was 22% on 07-10). Fountain production swap 13.75% WARNING. nc_staging still no swap. Rory ~4.4G deletable (unchanged pattern, not removed). All other servers (Bailey Console/Staging/Redis, 5 Marcel prod XID hosts) OK.",
     "caveats": [
@@ -238,7 +238,8 @@
       "nc_staging no swap (persistent, known)",
       "Rory ~4.4G deletable error_logs/zip backups unchanged, not removed"
     ],
-    "caveats_20260807": "Bailey/Siteground session_expired again (known CAPTCHA-blocked login, no SSH fallback) - Bailey Trello item left incomplete, same precedent. Fountain staging disk 90% CRITICAL (81-86-89-90 over 4 checks) - breakdown done, ~4.2G reclaimable (2 old SQL dumps 1.4G + pm2/sidekiq/cron logs ~2.8G), not deleted, awaiting confirmation. Fountain production swap 31% WARNING (doubled from 13.75% on 07-24). Elena samguard swap FIXED to 1.6% (was 27.8% WARNING). Marcel: same 4 dev/staging XID hosts unreachable (persistent). nc_staging no swap (known). Rory ~4.4G deletable unchanged. All other servers OK."
+    "caveats_20260807": "Bailey/Siteground session_expired again (known CAPTCHA-blocked login, no SSH fallback) - Bailey Trello item left incomplete, same precedent. Fountain staging disk 90% CRITICAL (81-86-89-90 over 4 checks) - breakdown done, ~4.2G reclaimable (2 old SQL dumps 1.4G + pm2/sidekiq/cron logs ~2.8G), not deleted, awaiting confirmation. Fountain production swap 31% WARNING (doubled from 13.75% on 07-24). Elena samguard swap FIXED to 1.6% (was 27.8% WARNING). Marcel: same 4 dev/staging XID hosts unreachable (persistent). nc_staging no swap (known). Rory ~4.4G deletable unchanged. All other servers OK.",
+    "caveats_20260821": "Bailey/Siteground: SSH fallback (Bailey.cpanel) now WORKS (unlike prior CAPTCHA-blocked runs) - disk 81% used, same staging-copy composition as earlier 08-21 bailey-monitor finding (pre9/je-pature/staging-sg ~36G), unaddressed, no cleanup run. Fountain staging disk now 91% CRITICAL (was 90% on 08-07, still climbing) - breakdown: /var/www 25G (staging_fountain_gifts_BE 7.3G, staging_infinity_roses_FE 5.0G, staging_infinity_roses_BE 3.7G, staging_fountain_gifts_FE 3.3G), /var/log 4.3G - no obvious stale-backup candidate this time (looks like active app dirs), not deleted. Fountain production mem avail 22% WARNING + swap 44% WARNING (up from 31% on 08-07, continuing to climb). Neural Contract nc_staging fully UNREACHABLE (connection timeout) - worse than prior 'no swap configured' finding, first full outage. Marcel: same 4 dev/staging XID hosts still unreachable (persistent since 07-24, now 4th+ consecutive run) - all 5 prod hosts OK. Elena samguard.co OK (swap 5.2%). Rory ~4.4G deletable (zips + .bk/.bak error logs) unchanged, not removed."
   },
   "bailey_monitor": {
     "description": "Updated when Bailey project monitor runs (weekly).",

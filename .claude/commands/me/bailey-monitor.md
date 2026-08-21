@@ -8,7 +8,7 @@ description: Bailey project monitoring — CloudWatch alarms, events, and infras
 |------|------|--------|
 | `/util:read-memory` | First — before anything | `bailey-monitor` |
 | `/util:report` | Write output | `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md` |
-| `/util:tasklog-write` | Subtask 9: log monitoring task | sheet `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`; task `Weekly Monitor {Month} {Year}`; owner `DuongDN`; hours `1` |
+| Workstream API | Subtask 9: log monitoring task | `node scripts/workstream-write-tasklog.js speedventory {YYYY-MM-DD} "Weekly Monitor {Month} {Year}" 1` |
 | Trello API | Subtask 10: complete checklist | card `6a221fe400d53ea9a87d45e5`; create checklist named DD/MM/YYYY; mark all 9 subtasks complete |
 
 ---
@@ -379,42 +379,34 @@ This Slack channel is customer-visible. **NEVER expose internal details:**
 
 The Slack message should only contain: status labels (OK/WARNING/NOT OK) + delivery %, billing amount, SSL dates.
 
-## Subtask 9: Fill Task Log (Google Sheets)
+## Subtask 9: Fill Task Log (Workstream)
 
-After posting to Slack, log the monitoring task in the Paturevision task log spreadsheet.
+After posting to Slack, log the monitoring task on Workstream — **Google Sheets task log is deprecated for Bailey monitor as of 2026-08-21**; Bailey now has a Workstream project (Speedventory) like every other client.
 
 ### Setup
 
-- Spreadsheet ID: `1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg`
-- Service account key: `daily-agent-490610-7eb7985b33e3.json`
-- Sheet: `W{N}` — find by iterating sheets, read row 4 col A (Monday date), check if today falls within that Mon–Sun range
+- Workstream project key: `speedventory` (Speedventory / Bailey Joey, id `cmqyvio51000vqo0xhocbx5c9`, `projectMemberId` `cmqyvio52000xqo0xu6v23rnz`) — entry lives in `config/.workstream-config.json` → `projects.speedventory`
+- Endpoint discovered by extracting the Workstream frontend JS bundle and grepping for `saveTaskLogs`: `POST {api_base}/time/task-logs`
+  ```json
+  {
+    "projectMemberId": "cmqyvio52000xqo0xu6v23rnz",
+    "date": "YYYY-MM-DD",
+    "projectId": "cmqyvio51000vqo0xhocbx5c9",
+    "tasks": [
+      {"taskName": "Weekly Monitor {Month} {Year}", "actual": "1:00", "charged": "1:00", "isPt": false, "note": "", "additionalInfo": "", "tagIds": []}
+    ]
+  }
+  ```
+  `actual`/`charged` are `"H:MM"` strings, not decimal hours.
 
 ### Steps
 
-1. **Find correct week sheet**: Check W-sheets, read each row 4 col A (e.g. `Mon, 16/03/26`), find the one whose week contains today.
-
-2. **Find today's date row**: Search column A for today (e.g. `Fri, 20/03/26` — use current day-of-week and DD/MM/YY format).
-
-3. **Find first empty row** after today's date row (col A = `Task dự án` and cols C–J empty).
-
-4. **Write task entry** with columns:
-   | Col | Value |
-   |-----|-------|
-   | A | Task dự án |
-   | E | Weekly Monitor {current month name} {current year} (e.g. `Weekly Monitor Mar 2026`) |
-   | G | DuongDN |
-   | H | 1 |
-   | J | 1 |
-
-5. **Use Google Sheets API**:
+1. Ensure token is fresh: `DISPLAY=:1 node scripts/workstream-login.js` (auto-skips if still valid).
+2. Write the entry:
+   ```bash
+   node scripts/workstream-write-tasklog.js speedventory {YYYY-MM-DD} "Weekly Monitor {Month} {Year}" 1
    ```
-   PUT /v4/spreadsheets/{id}/values/{sheet}!A{row}:J{row}?valueInputOption=USER_ENTERED
-   Body: {"values": [["Task dự án", "", "", "", "Weekly Monitor Mar 2026", "", "DuongDN", "1", "", "1"]]}
-   ```
-
-### Reference
-
-See W18 row 70 for example format.
+   This wraps the POST above (hours arg accepts decimals, converted to `H:MM` internally).
 
 ## Subtask 10: Complete Trello Checklist
 

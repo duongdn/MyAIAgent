@@ -208,6 +208,7 @@
     ]
   },
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "effortLevel": "low",
   "permissions": {
     "defaultMode": "bypassPermissions"
   },

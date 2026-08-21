@@ -267,3 +267,14 @@ Trello: Philip left ⚠️ incomplete pending confirmation.
 3. Fountain "ActionController::BadRequest in GET /admin" (16 days in Doing) — needs owner/priority check.
 4. Philip Briggs MS Teams thread — need to confirm exact date and whether "Does it make sense what I'm trying to do?" was answered outside the captured screenshot range.
 5. Upwork memo checks (Rory/Aysar) blocked by carrick's Chrome Profile 1 Upwork session — needs manual re-login.
+6. Trello board lookup for "Check progress"/"Check mail" cards failed this afternoon (config `board_id: O83pAyqb` resolves to board "My Task", which has no such cards; "Monitoring" board also has none) — could not re-verify live Trello checklist state this pass. Morning run (08:40-09:45) already marked items complete/incomplete per its own per-section Trello lines; those stand unverified since. Needs board_id fix in `config/.trello-config.json` or a working alternate lookup method.
+
+---
+
+## Recheck — 16:21 (+07:00)
+
+Window since last_run 15:02. Matrix-only — Discord/Slack/Sheets/Email not re-scanned (no new alert signal since 09:45 run; next full pass will cover them).
+
+**Matrix (from `matrix-rooms-1506.md` + `matrix-rooms-1508.md`):** Internal team chat only — model-routing discussion (DeepSeek→Qwen/MiMo switch), a code-review process note (minhtv: new dev Khánh set to review level 3, PRs go through duongdn via Draft PR before client), Fountain plan/PR chatter (business as usual, PRs reviewed by vutq same-day), personal banter. No new client-facing alerts, no unanswered customer asks found in this window.
+
+**No Trello re-verification this pass** (see unresolved Q6 above — board lookup broken).
