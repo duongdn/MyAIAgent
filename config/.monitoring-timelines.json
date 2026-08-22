@@ -51,9 +51,9 @@
   },
   "weekly_report": {
     "description": "Updated when weekly report runs (Friday night/Saturday morning).",
-    "last_run": "2026-08-15T15:55:00+07:00",
-    "output_file": "reports/2026-08-15/weekly-monitor.md",
-    "note": "Week of Aug10-14 (W39). TuanNT 16h/40h - 24h short, no leave on file, 2 blocks charged 0 as 'Overbudget'. LongVV short on both Maddy (3.25h/16h) and OhCleo (28.42h/~40h) tracks beyond his half-day leave. LeNH fully recovered to exact 40h (39.5h on JD Web) after last week's 0h everywhere. Matrix report backlog resolved: W39 (10/08) sent to ThuyLTT 15:57 (event $5rZzTiD0vwRoqp-cnI-EKexZ5_FmHNyMdbSE5sDPS2k) per user confirmation, W37/W38 explicitly superseded not sent late. Fountain plan posted mid-week (Tue) by trinhmtt; LamLQ's 16h reassigned to OnS project with lead sign-off; ViTHT silent Friday 08-14 (WS+Matrix both empty, looks like genuine absence). Fountain Est vs Charged tab frozen 6th consecutive week (was 5th last week)."
+    "last_run": "2026-08-22T00:50:00+07:00",
+    "output_file": "reports/2026-08-22/weekly-monitor.md",
+    "note": "Week of Aug17-21. Workstream unavailable this run (5th occurrence of identical SSO-capture failure in 4 weeks: 07-26, 07-31, 08-01, 08-15, 08-22) - reconstructed Mon/Wed/Thu from this week's own daily-report runs instead; Tue 08-18 is a genuine gap (that day's daily-report also hit the outage), Fri 08-21 unconfirmed. TuanNT and LeNH numbers corrected mid-week: Monday's daily-report checked the wrong source (stale Paturevision Sheet, Blair Brown) and showed false 0h; Thursday's recheck against the correct projects (Speedventory, James Diamond) found real 8h/8h/8h Mon-Wed then genuine 0h Thursday for both, reminders already sent via daily-report. LongVV Maddy-specific hours only 2h vs 16h/wk target (client already pushed back mid-week). AnhNH2 zero visibility all week. KhanhHH's 08-17 leave still status:pending, never approved. James Diamond+Marcel+Blair Brown Matrix report could not be drafted this week (no backlog - W39 sent 08-15). Fountain Est vs Charged tab frozen 7th consecutive week (was 6th last week), byte-identical 229.00h/328.50h. Corrected feedback_fountain_kunal_checklist.md's stale 'Parts 4/5 dropped' claim (flagged 3 weeks running)."
   },
   "daily_report": {
     "description": "Updated when daily report runs (~8AM). Used as start time for next daily report.",

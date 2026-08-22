@@ -73,7 +73,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
 
 ## daily-report:fountain
-- [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — 🔴 3-part MANDATORY
+- [feedback_fountain_kunal_checklist](daily-report/fountain/feedback_fountain_kunal_checklist.md) — 🔴 5-part MANDATORY (corrected 260822 — "Parts 4/5 dropped" claim was wrong)
 - [feedback_fountain_dev_specific_consolidated](daily-report/fountain/feedback_fountain_dev_specific_consolidated.md)
 - [feedback_fountain_monday_plan_timing](daily-report/fountain/feedback_fountain_monday_plan_timing.md)
 - [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md) — 5-part checklist still mandatory; only per-dev 0h ALERTING is off
@@ -132,8 +132,9 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — Blair Brown IS included (see [[feedback_blair_brown_index_annotation_contradicts_file]], old "FORBIDDEN" tag was stale/unexplained)
 - [feedback_thuyle_report_explicit_send_flag](weekly-report/feedback_thuyle_report_explicit_send_flag.md) — 🔴 exact-text confirm
 - [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md)
-- [feedback_workstream_display_outage_pattern](weekly-report/feedback_workstream_display_outage_pattern.md) — 🔴 WS SSO failed 3x/1wk (07-26/31, 08-01), check env before blind retry
+- [feedback_workstream_display_outage_pattern](weekly-report/feedback_workstream_display_outage_pattern.md) — 🔴 WS SSO failed 5x now (07-26/31,08-01,08-15,08-22); NOT a DISPLAY issue (script always headless), root cause still open
 - [feedback_blair_brown_index_annotation_contradicts_file](weekly-report/feedback_blair_brown_index_annotation_contradicts_file.md) — index/file conflict resolved, include Blair Brown
+- See [[feedback_fountain_kunal_checklist]] (daily-report:fountain section) — weekly Fountain check uses the same 5-part rule
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)
