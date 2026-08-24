@@ -93,7 +93,7 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets / Workstream — all devs — 08:10 (+07:00)
+## Sheets/Workstream — all devs — 08:10 (+07:00), filled in recheck 09:45
 
 🔴 **Unverifiable this run — structural host gap, see banner + Alert #4.** `workstream-login.js` was retried 3 times (DISPLAY=:1, no external timeout wrapper, up to 6 min each) — Keycloak SSO cookies are alive but the browser session never completes the token capture on this host; a direct Puppeteer smoke-test for the Fountain devs also crashed with "Fatal: Timed out ... waiting for the WS endpoint URL" (browser process itself fails to launch cleanly here). The legacy Google Sheets fallback returned genuinely empty for every dev (LongVV/PhucVT/TuanNT/KhanhHH/LeNH/ViTHT/ThinhT/VuTQ) — consistent with the Sheets task-log system being fully retired 2026-08-21, not a scan bug.
 
@@ -101,7 +101,49 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 
 **Context from Matrix (not a substitute for real hours, but relevant):** LongVV was added to 2 new project tracks this week — Lyf Support App (client Sandor Antal, eff. 20/8) and Auction Warehouse (client Brad Ballantine, eff. 17/8) — on top of his existing Maddy + OhCleo tracks, now 4 concurrent assignments. DuongDN's own Friday report message (Matrix, 08-21 10:58) recorded James Diamond week-17/08 actuals: PhucVT 0h/0h (still on Crystal lang, awaiting review — expected/ignored per standing PhucVT rule), LeNH 40h/40h. PhucVT was also on a same-day approved leave note (unwell) Friday 08-21.
 
-Trello: John Yi, Rebecca (William Bills), Bailey ⚠️ left incomplete (hours-gated, unverifiable). Blair Brown ✓ complete (deprioritized/cleared per standing rule, unaffected by this gap).
+**Filled from recheck (09:45, local session, W 08-17→08-23 = last full week incl. Friday 08-21):**
+
+| Project | Dev | Week total | Reviewer / status |
+|---------|-----|-----------|-----|
+| Maddy | LongVV | 3h (2h Mon, 1h Fri) — **under 16h/wk target, no leave note, real alert** | reviewer TuanTT; 1 needsReview row (TuanTT self, "Check issue with QC", 0:00 charged, Pending) |
+| Maddy | ThanhNX | 8.5h | — |
+| Bailey/speedventory | TuanNT | 40h (8h/day Mon-Fri) | no reviewers configured, need_review=false |
+| Bailey/speedventory | others (TrinhMTT/VyNL/HaVS/ThuongNL/DatNC/DuongDN) | 6.25/10.5/0.25/7.5/5.5/1h | no reviewers configured |
+| Fountain/Kunal | ViTHT 40h✓, ThinhT 20h✓, DatNT 33h charged (36h planned), PhatDLT 11.25h, HungPN 12h, VuTQ 4h | reviewers VuTQ + DuongDN, no needsReview | excluded from needsReview alerting per standing rule |
+| John Yi (amazing_meds) | no members logged this week | reviewers: none |
+| Rebecca | no members logged this week | reviewers: none |
+
+TuanNT's 40h is entirely on Bailey/speedventory — 0h on John Yi/Rebecca specifically is normal (dev-not-working-project-X rule), combined hours satisfy the cross-project gate for all three Trello items.
+
+Trello: John Yi, Rebecca (William Bills), Bailey ✓ completed on recheck (TuanNT combined hours verified). Maddy ⚠️ still incomplete — LongVV real shortfall. Blair Brown ✓ complete (deprioritized/cleared per standing rule, unaffected by this gap).
+
+---
+
+## Maddy — 09:45 (+07:00, recheck)
+
+**Workstream hours:** LongVV logged only 3h total for W(08-17→08-23) — 2h Monday, 1h Friday — against the 16h/week target. No leave note on file. **Real alert, no reminder sent** (no `--send-reminder` flag this run).
+
+**Slack (Xtreme Soft Solutions, 57 messages in window):** madhuraka reported an urgent international-tax Xero-posting bug (orders from overseas addresses posting with wrong local tax code); kai responded within minutes, reproduced on RMS staging, shipped PR bitbucket#533, tested same day (08-21 03:09→04:14 window). No unanswered client question left open.
+
+**JIRA weekly cross-check:** not re-run this recheck (script depends on Workstream data already captured above; no new JIRA-linked task log entries surfaced in the Slack scan this window).
+
+**Verdict:** Slack/dev-response side is clean; the alert is purely the LongVV hours shortfall.
+
+---
+
+## Matrix — 08:10 (+07:00), Fountain plan updated 09:45 recheck
+
+**Business/delivery room:** thuyltt asked DuongDN directly (11:00 08-21) "La support bên Lê hay làm gì Dương? & có charge?" — no reply visible in window (still open, see Alert #8). Leave plan for today confirmed (SangNV/ThuongNTN, covered).
+
+**Maddy/Xtreme internal room:** binhnt (21:27 08-21) flagged this week's plan is 8h30m but only 3h logged, asked LongVV to verify — **now confirmed real**, LongVV's actual Workstream total is 3h (see Sheets/Workstream + Maddy sections). halt (22:23 08-21) asked whether a 3h Workstream QC charge is a logging error — unanswered in-window.
+
+**Rory Hackett - BXR App room:** minhtv corroborated the client payment dispute (13:41-13:42 08-21) — see Alert #2. Recheck (09:45): Swift Studio Slack shows jeff/carrick actively negotiating bank-transfer/Wise terms as of 08-24, dispute progressing not stalled.
+
+**Fountain (Kunal) room:** prior-week plan (posted 08-20 16:14): ViTHT 40h/ThinhT 20h/VuTQ 4h/DatNT 36h ⇒ QC 25h. **Current week's plan posted 09:16 08-24** (caught on recheck): ViTHT 40h/ThinhT 20h/DatNT 40h ⇒ QC 25h.
+
+**Arthur/Crystal lang rooms:** client approved 2 estimates (3.5h) + 1 free out-of-scope bug; TienND's Leo hour-cap question still awaiting Leo's reply. No unresolved client-facing question. (Full detail in Arthur section below.)
+
+Trello: covered via James Diamond, Maddy, Rory, Arthur, Fountain item outcomes elsewhere in this report — no standalone Matrix Trello item exists.
 
 ---
 
@@ -213,3 +255,25 @@ Cannot determine which devs are at 0h this run — hours data unavailable for ev
 8. carrick@ "URGENT HELP PLEASE" emails: worth carrick's personal read (subject-only visibility from this scan).
 
 **Unresolved questions:** none beyond the re-check list above.
+
+---
+
+## Re-check — 09:45 (+07:00)
+
+Structural browser gap from the 08:08 cron run is resolved from this local/interactive session — Workstream, MS Teams, and xoxc-Slack all reachable now.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ○ still incomplete — real alert | Workstream: LongVV logged only **3h total** for W(08-17→08-23) (2h Mon, 1h Fri), vs 16h/week target — no leave note found. Xtreme Slack heavy activity (57 msgs) — kai actively handled madhuraka's urgent international-tax-code issue same-day (PR bitbucket #533, tested on staging), no unanswered client question. Alert is the LongVV hours shortfall, not Slack. |
+| John Yi | ✓ completed | Amazing Meds Slack: 0 messages in window (auth was xoxc/cookie-encoding issue, fixed by not URL-encoding the `d` cookie — same cause as prior incidents). TuanNT combined hours (see Bailey below) satisfy the cross-project gate. |
+| Rory | ✓ completed | Swift Studio: payment dispute (Alert #2) has progressed — jeff and carrick actively exchanging bank-transfer/Wise terms as of 08-24 09:09, carrick responsive ("let me check and confirm with you soon" 08:46). Not stalled; underlying payment issue still open but being worked, not a fresh unanswered ask. |
+| Elena - SamGuard | ○ still incomplete — real alert | PR #309 unchanged: still open, `mergeable_state: null` (GitHub can't compute — effectively unresolved), 0 reviews, base/head still reversed. No SAM GUARD Slack activity this window. |
+| Bailey | ✓ completed | GGS Slack: 4 msgs, routine (Nick's daily report present, dev coordination) — no alerts. TuanNT logged **40h this week, all on Bailey/speedventory** (8h/day Mon-Fri) — satisfies combined-hours gate for Bailey/John Yi/Rebecca. |
+| Rebecca | ✓ completed | William Bills Slack: 0 messages. TuanNT combined hours (40h, via Bailey) satisfy the gate. |
+| Fountain | ✓ completed | **3-part check:** (1) Matrix plan — this week's (posted 09:16 08-24): ViTHT 40h/ThinhT 20h/DatNT 40h ⇒ QC 25h. (2) Task log actuals for prior week (Workstream, W08-17→08-23): ViTHT 40h✓, ThinhT 20h✓, DatNT 33h charged (vs 36h planned), QC PhatDLT 11.25h + HungPN 12h = 23.25h (vs 24h planned) — all close to plan. (3) Plan vs actual matches within normal variance, no flag. Trello: 23 active-list cards stuck >5d (consistent with chronic prior finding, not new); 3 customer (kunalsheth) comments in-window are routine feature-scoping/status discussion, not new unaddressed complaints. |
+| Philip | ✓ completed | MS Teams chat with Philip Briggs last active 07-01 (our own outreach message, unanswered but 7+ weeks old, not a new in-window item) — no activity in the 08-21→08-24 window. |
+
+**Cleared:** John Yi, Rory, Bailey, Rebecca, Fountain, Philip (20/22 Check Progress items now complete).
+**Still open (real alerts, correctly incomplete):** Maddy (LongVV 3h/wk, well under 16h target — needs follow-up, no reminder sent per no `--send-reminder` flag), Elena-SamGuard (PR #309 unresolved merge conflict).
+
+**Unresolved questions:** none beyond the two still-open items above.
