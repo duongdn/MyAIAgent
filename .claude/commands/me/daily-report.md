@@ -370,7 +370,7 @@ See `docs/memory/daily-report/sheets/feedback_workstream_report_needs_dev_review
 
 | Developer | Arg | Daily target | Alert threshold | Notes |
 |-----------|------|-------------|-----------------|-------|
-| LongVV | longvv | 16h/**week** | Only if WEEKLY total < 16h, no leave | Part-time. 0h on any single day is NORMAL — never flag daily 0h. |
+| LongVV | longvv | ad-hoc, no fixed target | Never — hours are informational only (2026-08-24: 16h/week rule retired, out of date) | Part-time/ad-hoc. Do not flag any LongVV/Maddy hours shortfall. |
 | PhucVT | phucvt | 8h/day | 0h no leave = alert | Nghỉ nửa ngày = 4h OK |
 | TuanNT | tuannt | 8h/day combined | 0h across ALL sources = alert | Col P "Chưa" in Rebecca = normal. Show per-source breakdown. Blocks John Yi+Rebecca+Bailey Trello items. |
 | KhanhHH | khanhhh | 8h/day combined | 0h across ALL sources = alert | New sources surface repeatedly (3 found in 2 months) — treat any shortfall with extra suspicion, verify all sources exhaustively before flagging. |
@@ -822,7 +822,7 @@ Run the mapped source pieces sequentially (not parallel — fewer resources, no 
 - TuanNT: if combined > 0h across all sources → no alert. Blocks John Yi+Rebecca+Bailey Trello items. Show per-source breakdown.
 - KhanhHH: new sources have surfaced 3 times in 2 months — treat any shortfall with extra suspicion, exhaust all sources before flagging.
 - LeNH: filter col G="LeNH" in each sheet. Any shortfall even <1h without leave = alert. Aysar sheet owner is KhanhHH, not LeNH.
-- LongVV: alert only on weekly total < 16h. 0h any single day is normal.
+- LongVV: ad-hoc, no fixed weekly target (2026-08-24) — never alert on his Maddy hours. 0h any single day is normal.
 
 **Step 6 — Complete or keep incomplete**
 

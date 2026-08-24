@@ -7,7 +7,7 @@ metadata:
 
 **MANDATORY, every Maddy check, not just when asked — 4 parts, ONE dedicated `## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis)` section:**
 
-1. **Task-log hours** — Friday-on-Monday from WS Maddy project `cmpqc1v7v00ahtk1vs1817xt8` (LongVV, Kai). LongVV target 16h/week part-time.
+1. **Task-log hours** — Friday-on-Monday from WS Maddy project `cmpqc1v7v00ahtk1vs1817xt8` (LongVV, Kai). 🔴 2026-08-24: LongVV is now ad-hoc on Maddy — no fixed weekly hour target, report hours informationally only, never alert on them.
 2. **Slack** — DM history Madhuraka↔Kai (pull actual DM thread, not just `search.messages` keyword hits). Kai daily-report check is CONDITIONAL on WS Maddy hours.
 3. **JIRA** — project LIFM2, 20 active tickets:
    - Weekly cross-check: `node scripts/maddy-jira-tasklog-check.js --week <date>` AND pull individual tickets' real `timeoriginalestimate`/`timespent` (script alone isn't enough).
@@ -32,7 +32,7 @@ grep -q "## Maddy" reports/YYYY-MM-DD/daily-report.md || echo "🔴 MISSING Madd
 ### 1. Task Log Hours (Fri {date})
 | Developer | Fri | Weekly total | Status |
 |-----------|-----|--------------|--------|
-| LongVV | Xh | Yh | OK / ⚠️ under 16h/week |
+| LongVV | Xh | Yh | informational only, ad-hoc — no alert |
 | Kai | Xh | Yh | Conditional gate |
 
 ### 2. Slack / Kai Daily Report Check

@@ -1,6 +1,6 @@
 ---
 name: feedback_maddy_kai_longvv_identity_and_quality_escalation
-description: "Kai (Maddy Slack/JIRA persona) maps to internal_name LongVV per config/.jira-config.json — the file's expected_weekly_hours:40 is LongVV's combined total across Maddy+OhCleo, NOT the Maddy-specific alert threshold. Also documents a real client quality escalation on LIFM2-439 (19/06)."
+description: "Kai (Maddy Slack/JIRA persona) maps to internal_name LongVV per config/.jira-config.json. Maddy hours are now ad-hoc, no fixed weekly alert threshold (16h/week rule retired 2026-08-24). Also documents a real client quality escalation on LIFM2-439 (19/06)."
 metadata: 
   node_type: memory
   type: feedback
@@ -14,7 +14,7 @@ metadata:
 { "internal_name": "LongVV", "google_docs_name": "LongVV", "client": "Maddy", "expected_weekly_hours": 40 }
 ```
 
-User confirmed 2026-07-13: **Maddy alert threshold stays 16h/week** — the config's `expected_weekly_hours: 40` reflects LongVV's combined workload across both Maddy (16h) + OhCleo (40h, full-time since 2026-07-07), not a Maddy-specific figure. See [[feedback_longvv_consolidated]] for the full two-track breakdown. Do NOT use the config's 40 to alert on Maddy-specific shortfall — keep using 16h there.
+🔴 **2026-08-24 — retired:** Maddy is now ad-hoc, no fixed weekly hour target — do not alert on Maddy hours (daily or weekly) anymore. (Previously: user confirmed 2026-07-13 the threshold was 16h/week; that rule is now out of date per user.) The config's `expected_weekly_hours: 40` was always LongVV's combined workload across Maddy+OhCleo, not a Maddy-specific figure — irrelevant now that Maddy has no threshold at all. See [[feedback_longvv_consolidated]] for the full two-track breakdown (OhCleo's 40h/wk target is unaffected and still applies).
 
 ## Real quality escalation found 2026-06-23 (during a /me:daily-report deep recheck)
 
