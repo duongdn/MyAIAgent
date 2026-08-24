@@ -115,13 +115,13 @@ Trello: James Diamond, Andrew Taraba ✓ complete.
 
 TuanNT's 40h is entirely on Bailey/speedventory — 0h on John Yi/Rebecca specifically is normal (dev-not-working-project-X rule), combined hours satisfy the cross-project gate for all three Trello items.
 
-Trello: John Yi, Rebecca (William Bills), Bailey ✓ completed on recheck (TuanNT combined hours verified). Maddy ⚠️ still incomplete — LongVV real shortfall. Blair Brown ✓ complete (deprioritized/cleared per standing rule, unaffected by this gap).
+Trello: John Yi, Rebecca (William Bills), Bailey, Maddy ✓ completed on recheck (TuanNT combined hours verified; LongVV Maddy hours no longer alert-gated, see below). Blair Brown ✓ complete (deprioritized/cleared per standing rule, unaffected by this gap).
 
 ---
 
 ## Maddy — 09:45 (+07:00, recheck)
 
-**Workstream hours:** LongVV logged only 3h total for W(08-17→08-23) — 2h Monday, 1h Friday — against the 16h/week target. No leave note on file. **Real alert, no reminder sent** (no `--send-reminder` flag this run).
+**Workstream hours:** LongVV logged 3h total for W(08-17→08-23) — 2h Monday, 1h Friday. Informational only, no alert — the 16h/week Maddy target is retired as of 2026-08-24 (user confirmed out of date, LongVV's Maddy work is now ad-hoc; see [[feedback_longvv_consolidated]]).
 
 **Slack (Xtreme Soft Solutions, 57 messages in window):** madhuraka reported an urgent international-tax Xero-posting bug (orders from overseas addresses posting with wrong local tax code); kai responded within minutes, reproduced on RMS staging, shipped PR bitbucket#533, tested same day (08-21 03:09→04:14 window). No unanswered client question left open.
 
@@ -264,7 +264,7 @@ Structural browser gap from the 08:08 cron run is resolved from this local/inter
 
 | Item | Result | Details |
 |------|--------|---------|
-| Maddy | ○ still incomplete — real alert | Workstream: LongVV logged only **3h total** for W(08-17→08-23) (2h Mon, 1h Fri), vs 16h/week target — no leave note found. Xtreme Slack heavy activity (57 msgs) — kai actively handled madhuraka's urgent international-tax-code issue same-day (PR bitbucket #533, tested on staging), no unanswered client question. Alert is the LongVV hours shortfall, not Slack. |
+| Maddy | ✓ completed (updated after 16h/wk rule retired) | Workstream: LongVV logged 3h total for W(08-17→08-23) — informational only now, the 16h/week target was retired 2026-08-24 (out of date per user, Maddy now ad-hoc). Xtreme Slack heavy activity (57 msgs) — kai actively handled madhuraka's urgent international-tax-code issue same-day (PR bitbucket #533, tested on staging), no unanswered client question. No remaining blocker. |
 | John Yi | ✓ completed | Amazing Meds Slack: 0 messages in window (auth was xoxc/cookie-encoding issue, fixed by not URL-encoding the `d` cookie — same cause as prior incidents). TuanNT combined hours (see Bailey below) satisfy the cross-project gate. |
 | Rory | ✓ completed | Swift Studio: payment dispute (Alert #2) has progressed — jeff and carrick actively exchanging bank-transfer/Wise terms as of 08-24 09:09, carrick responsive ("let me check and confirm with you soon" 08:46). Not stalled; underlying payment issue still open but being worked, not a fresh unanswered ask. |
 | Elena - SamGuard | ○ still incomplete — real alert | PR #309 unchanged: still open, `mergeable_state: null` (GitHub can't compute — effectively unresolved), 0 reviews, base/head still reversed. No SAM GUARD Slack activity this window. |
@@ -273,7 +273,7 @@ Structural browser gap from the 08:08 cron run is resolved from this local/inter
 | Fountain | ✓ completed | **3-part check:** (1) Matrix plan — this week's (posted 09:16 08-24): ViTHT 40h/ThinhT 20h/DatNT 40h ⇒ QC 25h. (2) Task log actuals for prior week (Workstream, W08-17→08-23): ViTHT 40h✓, ThinhT 20h✓, DatNT 33h charged (vs 36h planned), QC PhatDLT 11.25h + HungPN 12h = 23.25h (vs 24h planned) — all close to plan. (3) Plan vs actual matches within normal variance, no flag. Trello: 23 active-list cards stuck >5d (consistent with chronic prior finding, not new); 3 customer (kunalsheth) comments in-window are routine feature-scoping/status discussion, not new unaddressed complaints. |
 | Philip | ✓ completed | MS Teams chat with Philip Briggs last active 07-01 (our own outreach message, unanswered but 7+ weeks old, not a new in-window item) — no activity in the 08-21→08-24 window. |
 
-**Cleared:** John Yi, Rory, Bailey, Rebecca, Fountain, Philip (20/22 Check Progress items now complete).
-**Still open (real alerts, correctly incomplete):** Maddy (LongVV 3h/wk, well under 16h target — needs follow-up, no reminder sent per no `--send-reminder` flag), Elena-SamGuard (PR #309 unresolved merge conflict).
+**Cleared:** John Yi, Rory, Bailey, Rebecca, Fountain, Philip, Maddy (21/22 Check Progress items now complete — Maddy cleared after the 16h/week LongVV target was retired as out-of-date, 2026-08-24).
+**Still open (real alert, correctly incomplete):** Elena-SamGuard (PR #309 unresolved merge conflict).
 
 **Unresolved questions:** none beyond the two still-open items above.
