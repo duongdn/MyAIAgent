@@ -183,14 +183,27 @@ _(Không có bài mới từ Facebook — lỗi not_logged_in, cần đăng nh�
 
 **Wired**
 - [Đánh giá Google Pixel 11 Pro Fold: Tốt hơn, nhưng chưa phải tốt nhất](https://www.wired.com/review/google-pixel-11-pro-fold/) — Bản nâng cấp có cải tiến thực sự nhưng giá cao và cạnh tranh gay gắt.
-- [Mac Mini M6 và Mac Studio M5 Ultra: Thông số, giá, ngày phát hành](https://www.wired.com/story/us-recorded-first-measles-deaths-2026/) — Cả hai dòng máy đều có chip tối ưu cho AI.
+- [Mac Mini M6 và Mac Studio M5 Ultra: Thông số, giá, ngày phát hành](https://www.wired.com/story/us-recorded-first-measles-deaths-2026/) — Cả hai dòng máy đều có chip tối ưu cho AI, Mac Mini M6 tăng giá thêm $200.
 
 **Google News – Tech**
 - [Kỹ sư phần mềm đang trở lại — nhưng nhân sự mới vào nghề lại bị bỏ lại phía sau — Business Insider](https://news.google.com/articles/CBMirAFBVV95cUxOQVRGQTNxak1FVTdNcEwtUmtpRnVuX3V1Ql9BVnJrUlV2ai1DNVBhV2dwYTh0R0xLamRXd2c4TzJrYW5tb0lFU3NvcGNWVTJzR0FuVUZkeldqNkRKNVdBSnpERGpfNGxvRkVNOUZYOUJudDgtUlBjczd3LXFOQkhzVzZNRHJqMlI5VWlUd21YS2xkbko5MlQ5OFIxczJ4b3VMSElfQTNLR2JaMHhf) — Nhu cầu kỹ sư phần mềm phục hồi nhưng nhân sự trẻ chưa hưởng lợi.
 
 ### PHP / Backend
 
-_(Không có dữ liệu PHP trong lần lấy tin này — nguồn PHP không được lưu lại thành file riêng và không lấy lại kịp trong phiên chạy tự động này.)_
+**Laravel News**
+- [Laravel Auditor: Audit ứng dụng bằng chính AI Agent của bạn](https://laravel-news.com/laravel-auditor?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews) — Laravel Auditor cấp cho Claude Code, Codex hoặc Cursor bộ 75 quy tắc audit cùng công cụ MCP chỉ đọc để kiểm tra bảo mật, hiệu năng và schema.
+- [Một form builder đơn giản, không gây vướng víu](https://laravel-news.com/deftform?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews) — Deftform là giải pháp thay thế gọn nhẹ cho Typeform/Jotform, xây trên Laravel, tạo form bằng AI và tích hợp REST API/webhook, giá từ $5/form.
+- [Laravel AI: Theo dõi Agent Runs với Lifecycle Events](https://laravel-news.com/laravel-ai-agent-run-events?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews) — Laravel AI 0.11 gán mỗi lần chạy agent một invocation ID cùng sự kiện step/tool kèm thời gian thực thi để trace và log toàn bộ luồng.
+- [Laravel AI: Lấy Raw HTTP Response và Rate Limits](https://laravel-news.com/laravel-ai-raw-http-response?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews) — Laravel AI SDK phơi bày response HTTP gốc qua `$response->raw`, cho phép đọc rate-limit header, request id và các trường payload.
+
+**Reddit r/PHP**
+- ["A" for "Average"](https://www.reddit.com/r/PHP/comments/1vx440o/a_for_average/) — Thảo luận cộng đồng r/PHP về chủ đề "average" trong code PHP.
+- [Migrate SEO cho hơn 104k trang sang package Laravel Head mới](https://www.reddit.com/r/PHP/comments/1vy0bte/i_migrated_the_seo_of_104k_pages_to_the_new/) — Chia sẻ kinh nghiệm thực chiến migrate SEO quy mô lớn dùng Laravel Head.
+- [Xây driver hàng đợi RabbitMQ cho Laravel, giữ cảm giác Laravel gốc](https://www.reddit.com/r/PHP/comments/1vx8y0y/i_built_a_rabbitmq_queue_driver_for_laravel_that/) — Package mã nguồn mở Laravel Rabbit giúp dùng RabbitMQ mà không phải đổi cách làm việc với queue Laravel.
+- [PHP 8.6 sắp ra mắt — bạn mong chờ gì nhất?](https://www.reddit.com/r/PHP/comments/1vvyz41/php_86_is_getting_closer_what_are_you_most/) — PHP 8.6.0 Beta 1 đã phát hành, cộng đồng thảo luận các tính năng mới đáng chú ý.
+- [GitHub: laravel-secrets-loader — tự động resolve secrets cho Laravel](https://www.reddit.com/r/PHP/comments/1vx5iu4/github_eznix86laravelsecretsloader_auto_resolve/) — Công cụ mã nguồn mở tự động hoá việc nạp secrets cho ứng dụng Laravel.
+
+_(PHP.net News: 23 mục lấy về đều là thông báo release PHP 8.x cũ từ 2025 (RSS chưa cập nhật) — không có tin mới, đã bỏ qua. php[architect] và Google News PHP không có bài mới hôm nay.)_
 
 ### Tài chính (finance)
 
