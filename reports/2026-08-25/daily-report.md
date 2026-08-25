@@ -284,7 +284,7 @@ The cron pass above left Maddy open (Workstream was down). Filled during the 09:
 Ran an independent interactive full pass ~2h after the cron run above. Workstream SSO worked this time (cron's Alert #8 outage cleared) — filling gaps the cron couldn't reach.
 
 **New findings not in the cron run above:**
-- **LeNH: 0h across all known Workstream projects** (james_diamond, radio_data_center, blair_brown, bxr_app) for Monday 08-24 — no leave note found. Per strict LeNH rule (any shortfall = alert), flagging — needs verification whether on leave.
+- ~~LeNH: 0h across all known Workstream projects~~ **RETRACTED (corrected 09:15, user caught it) — LeNH actually has 8h on James Diamond for Monday 08-24 (`weekCharged: 8`). My earlier read was wrong** (likely misread an earlier truncated fetch), not a real gap. No alert.
 - **PhucVT: 0h visible in any Workstream project this window**, despite being actively discussed in the James-DefinitiveGuide Matrix room 08-24 (access/setup work). Per [[feedback_phucvt_adhoc_external_ignore]] not hard-alerted, but unusual enough to flag.
 - **TuanNT: 8h confirmed at Speedventory (Bailey)** — satisfies TuanNT gate, clearing John Yi/Rebecca/Bailey Trello items.
 - **OhCleo Workstream needs-review:** PhuongPVT, 2 tasks Pending (0:00 charged, 08-24) — reviewers DuongDN/MinhTV.
@@ -300,7 +300,7 @@ Ran an independent interactive full pass ~2h after the cron run above. Workstrea
 - **Elena - SamGuard Digital Plant (PR #309):** confirmed live via GitHub API — `mergeable: false, mergeable_state: dirty` (real merge conflict, not a stale check). Correctly left open — needs a human to resolve the conflict before merge.
 - **Philip:** MS Teams chat re-pulled — real, active back-and-forth with Philip Briggs about an Elevate365 demo spec, last message from him ("Does it make sense what I'm trying to do?") with no visible reply after it in the captured scroll. Script only captures 20 of 55 messages and doesn't expose message dates (times only), so I can't confirm this is today's message vs. an older unanswered one — left open, needs a manual look at the actual Teams chat rather than force-completing on an unverified read.
 - **James Diamond / Elliott / Bailey:** left open — these carry pre-existing standing notes on the card itself (Redmine bug backlog, a known perf issue, staging/upwork infra notes) that are ongoing tracked issues, not something today's monitoring pass resolves — nothing new found to either clear or escalate them today.
-- **Blair Brown:** still open — same root cause as LeNH's 0h-everywhere finding above (Alert #4), deprioritized per standing note but the underlying gap (LeNH 0h Monday) is unresolved.
+- **Blair Brown:** ✓ completed (09:15) — was blocked only by the now-retracted LeNH 0h false alarm above; LeNH's actual hours (8h, James Diamond) confirm he's working, no real gap.
 
 Trello now 16/22 complete (was 12/22 in the cron pass, 15/22 after my first interactive pass).
 
@@ -311,6 +311,6 @@ Trello now 16/22 complete (was 12/22 in the cron pass, 15/22 after my first inte
 **Still not run this cycle:** Arthur full 6-source deep-dive (only the 2-msg Matrix room checked, no new issue there), Philip (MS Teams), Fountain Trello board sub-check, Elena WordPress SamGuard JS-console check, Upwork memo validity (Rory/Aysar sessions failed — `login_failed`/`session_expired`, needs manual re-auth via carrick Chrome Profile 1).
 
 **Unresolved questions (interactive pass):**
-1. LeNH 0h all projects Monday 08-24 — confirm leave status.
+1. ~~LeNH 0h all projects Monday 08-24~~ RETRACTED — confirmed 8h on James Diamond, false alarm.
 2. PhucVT 0h despite active Matrix involvement — targeted `sheets phucvt` recheck recommended.
 3. Elena PR #309 — review/merge decision still pending (14 days stale per cron run above).

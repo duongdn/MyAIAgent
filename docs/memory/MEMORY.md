@@ -69,6 +69,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_encrypt_secrets_missing_workstream](daily-report/sheets/feedback_encrypt_secrets_missing_workstream.md)
 - [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
 - [feedback_lenh_james_diamond_blair_brown_deprioritized](daily-report/sheets/feedback_lenh_james_diamond_blair_brown_deprioritized.md) — 🔴 2026-08-21: LeNH=James full-time, ignore Blair Brown 0h for now
+- [feedback_verify_workstream_zero_hours_before_alerting](daily-report/sheets/feedback_verify_workstream_zero_hours_before_alerting.md) — 🔴🔴🔴 2026-08-25: false LeNH 0h alert from stale/misread data, re-verify fresh before ANY 0h claim
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
