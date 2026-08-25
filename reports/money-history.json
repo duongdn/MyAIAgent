@@ -275,6 +275,54 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. Cost-basis reconstruction gives 7,730,094,305 gross/net (+72,900,000 above authoritative) — EXACTLY the same standing gap to the dong seen since 07-24, confirming the cost-basis-vs-market difference on fund wallets again. Net worth DOWN 12,047,417 vs 11/08 (7,669,241,722 -> 7,657,194,305, -0.16%) over 6 days. Only 8 transactions posted 08-11 to 08-14 (all small daily spend: Hieu hi/Linh tinh/Xang xe/Di lai totaling -4,900,000, plus 1 internal FPTS Cho vay -7,000,000 which does not affect NW) and none since 08-14. Category deltas: gold -7,500,000 (price 14,550,000 -> 14,400,000/unit, -1.03%, same 50 units), liquid -4,547,417 (daily spend), investment/savings/real estate/debt exactly flat. Sum = -12,047,417, matches NW delta to the dong. Investment wallets unchanged: VCBS 612,855,620, VCBF 594,063,000, FPTS 381,301,151, Finhay 74,404,069, Larion 600,000,000. VCB Visa remains 0, zero charges in August so far (17 days). August MTD (FX-aware, excl. Cho vay/Thu no/Di vay/Tra no): Thu 80,452,251 / Chi 22,965,000 / Net +57,487,251. All 5 benchmark groups in range (equity 43.3%, tiet kiem 19.2%, BDS dau tu 19.5%, vang 13.8%, tien mat 4.3% - cash slightly under 5% floor, immaterial given 1.0B savings backing). Real estate 45.97% of net worth (Nha 32.65% + long an res 13.32%), above 20-30% benchmark, structural, unchanged. 6 savings books active incl. tikcop 5m (401.9M, no longer stuck-at-0, confirms prior MISA stale-balance bug resolved for this book) plus 5 others unchanged. Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from all totals, still unresolved by MISA. Minor untracked internal transfer observed: vcb dropped 5,700,000 while categorized transactions only account for -2,699,304 (Hieu hi/Di lai/lai tiet kiem); Vi rose +1,220,000 with no matching categorized inflow — net effect is fully absorbed within the reconciled Liquid category total (-4,547,417 ties exactly to NW delta), so no data integrity issue, just an uncategorized internal transfer MISA doesn't log with a category name."
+    },
+    {
+      "date": "2026-08-24",
+      "label": "24/08",
+      "net_worth": 7840944889,
+      "gross_assets": 7913244889,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 738000000,
+        "investment": 2262623840,
+        "savings": 1191918000,
+        "liquid": 200703049
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. NW UP 183,750,584 vs 08-17 (7,657,194,305 -> 7,840,944,889, +2.40%) over 7 days. Main driver: one-off 190,000,000 Thuong (bonus) income posted 08-21 into vcb, same day moved into a new 6-month savings book (190M, matures 2027-02-24) -- not recurring income. Gold +18,000,000 (price up, still 50 units, unit price moved from ~14,400,000 to ~14,760,000). Liquid -124,873,782 (190M out to savings + ~10 small daily-spend transactions + 1 VCB Visa charge 12,000,000 on 08-23). Investment and real estate categories otherwise unchanged: VCBS 612,855,620 (cost basis 400,000 + currentAmount, mark-to-market carry), VCBF 594,063,000, FPTS 381,301,151 (cost basis 381,116,000, ongoing VEA DCA -- 3 more Cho vay entries in August: 3,460,000 + 3,470,000 x2), Finhay 74,404,069, Larion 600,000,000 all flat. CORRECTION (user feedback, 10:25): Tikop (100,024,366, robo-fund) is cash/liquid, NOT investment -- initial 10:11 draft wrongly moved it into the investment category; reclassified back to liquid, consistent with every prior snapshot (08-17 liquid of 225,552,465 already included Tikop). Investment category unchanged at 2,262,623,840 (same as 08-17); liquid is 200,703,049 (incl Tikop), down 24,849,416 vs 08-17 (225,552,465) -- driven by the 190M outflow to the new savings book, partly offset by low spend this period. Real estate flat: Nha 2,500,000,000 + long an res 1,020,000,000 = 3,520,000,000, still 44.90% of NW, above 20-30% benchmark, structural. Reconstructed gross (7,913,244,889) exceeds authoritative NW by 72,300,000 -- consistent with the standing cost-basis-vs-market gap on fund wallets seen every snapshot since 07-24, not a data error. VCB Visa: 1 charge in August (12,000,000, 08-23), balance still 0, no debt. August MTD (24 days, FX-aware, excl Cho vay/Thu no/Di vay/Tra no): Thu 270,444,951 (incl the 190M bonus) / Chi 47,746,999 / Net +222,697,952. 6 savings books active (1m 100M@4.75% mat 09-10, 6m rut goc linh hoat 100M@7.0% mat 2027-02-10, NEW 6m rut goc linh hoat 190M mat 2027-02-24, tikcop 3m 100M@8.1% mat 10-10, tikcop 5m 401.918M@7.5% mat 10-13, vcb 6m CCTG 300M@7.5% mat 2027-02-10). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from all totals, still unresolved by MISA. All 5 benchmark groups checked: equity 41.80% (in range), savings 22.02% (slightly above 10-20% range due to new deposit), real estate 18.84% (slightly below 20-30%), gold 13.63% (in range), cash 3.71% incl Tikop (below 5-10% floor but backed by 1.19B savings pool)."
+    },
+    {
+      "date": "2026-08-25",
+      "label": "25/08",
+      "net_worth": 7853113692,
+      "gross_assets": 7925413692,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 750000000,
+        "investment": 2262623840,
+        "savings": 1191918000,
+        "liquid": 200871852
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. NW UP 12,168,803 vs 08-24 (7,840,944,889 -> 7,853,113,692, +0.16%) over ~22.5h. Deltas reconcile exactly: gold +12,000,000 (price up, same 50 units, unit price 14,760,000 -> 15,000,000, +1.63%), liquid +168,803 (small net-positive daily cash flow, no notable spend/income event), investment/savings/real estate/debt all flat. Sum = 12,168,803, matches NW delta to the dong. CORRECTION (user, 08:48): today's savings event is NOT a pure rename. '6m rut goc linh hoat' (190M, 7.0%) was tat toan sang nay (08:31, +260 lai tiet kiem) and reopened as '6m cake vpbank' same 190,000,000 principal, same maturity 2027-02-25, but at a HIGHER rate: 7.0% -> 9.4%. Principal unchanged (confirmed via Cho vay/Thu no ledger), but going forward this book earns ~4,560,000/year more (190M x 2.4pp) than before -- a real positive change to future income, not just a label swap. Investment wallets fully unchanged since 08-24: VCBS 612,855,620 (cost basis 400,000 + currentAmount, mark-to-market carry), VCBF 594,063,000, FPTS 381,301,151 (cost basis 381,116,000, no new Cho vay this period), Finhay 74,404,069, Larion 600,000,000. Real estate flat: Nha 2,500,000,000 + long an res 1,020,000,000 = 3,520,000,000, 44.82% of NW, above 20-30% benchmark, structural, unchanged. Reconstructed gross (7,925,413,692) exceeds authoritative NW by exactly 72,300,000 -- same standing cost-basis-vs-market gap seen every snapshot since 07-24, not a data error. VCB Visa: balance 0, no new charges since 08-23 (12,000,000), no debt. August MTD (25 days, FX-aware, excl Cho vay/Thu no/Di vay/Tra no): Thu 270,463,462 / Chi 47,746,999 / Net +222,716,463. 6 savings books active (1m 100M@4.75% mat 09-10, 6m rut goc linh hoat 100M@7.0% mat 2027-02-10, 6m cake vpbank 190M@9.4% mat 2027-02-25 (renamed + rate upgraded from 6m rut goc linh hoat's 7.0%), tikcop 3m 100M@8.1% mat 10-10, tikcop 5m 401.918M@7.5% mat 10-13, vcb 6m CCTG 300M@7.5% mat 2027-02-10). Ghost balance on closed nam a 6m (2,005,479) still present in /wallets/savings, excluded from all totals, still unresolved by MISA. Benchmark check (incl home): BDS 44.82% (above 20-30%), equity/fund 28.81% (slightly below 30-50%), tiet kiem 15.18% (in range), vang 9.55% (in range), tien mat 2.56% (below 5-10% floor but backed by 1.19B savings pool)."
+    },
+    {
+      "date": "2026-08-25",
+      "label": "25/08 (2)",
+      "net_worth": 8053113692,
+      "gross_assets": 8125413692,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 750000000,
+        "investment": 2462623840,
+        "savings": 1191918000,
+        "liquid": 200871852
+      },
+      "method": "dashboard_verified",
+      "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. NW UP 200,000,000 vs the prior 25/08 08:40 snapshot (7,853,113,692 -> 8,053,113,692, +2.55%) in just 13 minutes. Diffed both raw account fetches to find the cause: ZERO new transactions posted -- the jump is entirely a manual account-balance edit on 'Larion co phan' (private equity, illiquid, no market price feed), which moved 600,000,000 -> 800,000,000 (+200,000,000, +33%) and also flipped from inActive:true to inActive:false (now shown active). No Cho vay/Thu no entry accompanies it -- this is a direct valuation override by the user in the app, not a purchase/sale. All other accounts, savings books, gold, real estate, and debt are byte-identical to the 08:40 snapshot. Reconstructed gross (8,125,413,692) exceeds authoritative NW by exactly 72,300,000 -- the same standing cost-basis-vs-market gap seen every snapshot since 07-24, confirming no new data-integrity issue was introduced. UNRESOLVED: basis for the Larion revaluation not confirmed with user (new share price round? appraisal? arbitrary mark?) -- flagged in the allocation report as a risk item since it's now 9.93% of NW with no external verification. Investment category up to 2,462,623,840 (was 2,262,623,840) purely from this one entry; VCBS/VCBF/FPTS/Finhay all unchanged. August MTD unchanged: Thu 270,463,462 / Chi 47,746,999 / Net +222,716,463 (no new transactions in the 13-minute window)."
     }
   ]
 }

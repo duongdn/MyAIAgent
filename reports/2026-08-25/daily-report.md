@@ -16,7 +16,7 @@
 | 4 | Performance (MPFC) | Apdex 0.49 — WORSE than 2026-08-24's 0.59. `MediaByKeyView` no longer applies to MPFC — actually WP_Error::get_method() fatal error still chronic (49x). `author-sitemap.xml` 86.7s avg (3 calls), `sitemap_index.xml` 48.4s avg — sitemap generation badly regressed |
 | 5 | Performance (OhCleo) | `MediaByKeyView.get` avg 44.3s/226 calls (was 12.25s prior report — real 3.6x regression), `MediaByTagsView.get` avg 19.4s/94 calls |
 | 6 | Elena (GitHub) | PR #309 "Implement header and modal components with i18n support" open since 2026-08-11 (14 days stale), author nusken, not yet reviewed/merged this run — needs CodeRabbit review before merge |
-| 7 | Baamboozle/Aysar | No Carrick "Today's update" post found in MPDM C07SQ4HAUHZ during the full window (yesterday 09:45 → now) — expected windows 08:41-09:03 and 17:00-17:45 both passed with zero messages in that channel |
+| ~~7~~ | ~~Baamboozle/Aysar~~ | **RETRACTED (corrected 09:10, see Recheck Supplement) — Baamboozle Workstream is 0h this week, no Aysar task → MPDM silence is NORMAL per standing rule, not an alert.** |
 | 8 | Workstream (system-wide) | SSO login failing for all task-log/hours checks (API refresh + 2x browser login attempts all failed — `ETIMEDOUT`/no token captured after SSO redirect). Blocks: Sheets/Workstream piece (all devs), Fountain Part 2/3 (task log actuals), Arthur Part 3 (est/actual hours), Maddy/Elliott/Aysar/Bailey/Rebecca/John Yi/Blair Brown hour-gated Trello items. Matches known recurring pattern (see `feedback_workstream_display_outage_pattern`) — root cause still open, not a one-off |
 | 9 | Upwork memo check | Puppeteer navigation timeouts on all 3 workrooms (Rory/Neural/Aysar) — browser automation contention this run, memo validity NOT verified today |
 | 10 | MSTeams (Philip) | Script timed out (`fetch-msteams-customer-messages.js`) — not checked this run |
@@ -293,7 +293,9 @@ Ran an independent interactive full pass ~2h after the cron run above. Workstrea
 - **Fountain Matrix plan confirmed:** trinhmtt posted 09:16 08-24 — "ViTHT: 40h, ThinhT: 20h, DatNT: 40h => QC 25h". Actuals so far (Monday): HungPN 2.5h, PhatDLT 2.5h, ThinhT 4h, DatNT 8h — on track vs weekly plan.
 - **Swift Studio (Rory):** client billing dispute in-thread ($300/$650 discrepancy, roryh vs jeff) — informational, dev actively responding, not blocking.
 
-**Trello — items marked ✓ complete this pass (previously ○):** Maddy, John Yi - Amazing Meds, Rebecca (William Bills) — based on findings above.
+**Correction (09:10, prompted by user pushback):** Cron's Alert #7 ("Baamboozle/Aysar MPDM silence") was wrong — retracted in the ALERTS SUMMARY table above. Standing rule (confirmed by user 2026-08-20, see `feedback_khanhhh_aysar_consolidated`/Trello gate mapping precedent): Carrick's "Today's update" is only expected when Aysar has an active task (Workstream >0h). Verified live: Baamboozle Workstream shows 0h for this week (started 08-24) → no task → silence since 08-21 is normal, not an alert. I incorrectly re-raised this same false alert again today despite it having been corrected before — see memory fix below to stop the recurrence.
+
+**Trello — items marked ✓ complete this pass (previously ○):** Maddy, John Yi - Amazing Meds, Rebecca (William Bills), Aysar (silence retracted, no active task) — based on findings above.
 
 **Still not run this cycle:** Arthur full 6-source deep-dive (only the 2-msg Matrix room checked, no new issue there), Philip (MS Teams), Fountain Trello board sub-check, Elena WordPress SamGuard JS-console check, Upwork memo validity (Rory/Aysar sessions failed — `login_failed`/`session_expired`, needs manual re-auth via carrick Chrome Profile 1).
 
