@@ -34,6 +34,7 @@
 - [feedback_report_internal_consistency_and_always_reverify](daily-report/general/feedback_report_internal_consistency_and_always_reverify.md) — 🔴🔴🔴 grep whole file
 - [feedback_trello_write_only_verified_and_no_debug_writes](daily-report/general/feedback_trello_write_only_verified_and_no_debug_writes.md) — 🔴 never test-write to Trello (debug PUT completed Philip twice); re-fetch live card before finalizing (concurrent sessions flip items)
 - [feedback_full_run_inline_no_subagent_spawn](daily-report/general/feedback_full_run_inline_no_subagent_spawn.md) — 🔴 full run = inline always, no per-piece subagent (avoids reloading 65K-token command file per piece)
+- [feedback_never_ask_before_full_run](daily-report/general/feedback_never_ask_before_full_run.md) — 🔴 never AskUserQuestion to confirm scope before full run, just execute
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
@@ -144,6 +145,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_external_bug_counting_judgment_calls](monday-report/feedback_external_bug_counting_judgment_calls.md) — merge same-issue threads, exclude investigation-only client asks
 - [feedback_maddy_workstream_hours_longvv_filter](monday-report/feedback_maddy_workstream_hours_longvv_filter.md) — 🔴 Maddy WS hours = LongVV member only, don't sum all members
 - [feedback_marcel_equanimity_slack_external_bugs](monday-report/feedback_marcel_equanimity_slack_external_bugs.md) — 🔴 Marcel bugs live in "Equanimity" Slack workspace, skill's "always 0" is wrong
+- [feedback_maddy_low_hours_high_bugs_is_real_gap](monday-report/feedback_maddy_low_hours_high_bugs_is_real_gap.md) — 🔴 low-hours/high-bug ratio = verify via raw Slack timestamps, don't assume miscounted
 
 ## monday-effort-verify
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
