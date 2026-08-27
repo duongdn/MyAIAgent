@@ -164,3 +164,33 @@ Not run — depends on Workstream task-log data (unavailable this cycle, see abo
 1. Workstream SSO needs an interactive browser session — cannot be completed by cron. Needs a follow-up interactive recheck to fill in Maddy/John Yi/Aysar/Elliott/Bailey/Rebecca/Blair Brown/Fountain hours.
 2. Fountain, Philip, Arthur, OhCleo Slack, Upwork Memo pieces were not run this cycle due to time — recheck needed.
 3. Rory (Swift Studio) payment dispute and Elena PR #309 — both pre-existing, unresolved; no new action taken this run beyond flagging.
+
+---
+
+## Re-check — 08:56 (+07:00)
+
+Interactive recheck of all 16 ○ items left by the 06:00 cron. Workstream SSO succeeded on retry (proactive browser login worked). All dev hour-scans for today (08-27) came back 0h across the board (LongVV/TuanNT/PhucVT/KhanhHH/LeNH) — too early in the day (~08:50, work not yet logged) to treat as shortfall; treated as non-issue, not an alert.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ○ still incomplete | madhuraka (Xtreme Slack, 07:49): "Can you check my comment on 449? I want to send this live asap" — unanswered customer ask as of recheck. |
+| John Yi | ✓ completed | Amazing Meds Slack: 0 new msgs. |
+| James Diamond | ✓ completed | AirAgri Discord: jdiamond gave QR-code instructions, jeff_trinh asked about priority tasks — routine coordination, no daily-report gate violated this early. |
+| Rory | ✓ completed | Swift Studio: only 1 routine msg since window ("Okay, let me update" — jeff). Pre-existing payment dispute (Alert #1) unrelated to this gate, stays flagged separately. |
+| Aysar | ✓ completed | Baamboozle MPDM (C07SQ4HAUHZ) silent since window; KhanhHH 0h today (too early) — silence normal per standing rule. |
+| Elliott | ✓ completed | Generator Slack: 0 new msgs; KhanhHH 0h today (too early), no needsReview rows. |
+| Elena - SamGuard | ○ still incomplete | PR #309 re-checked live via `gh api` — `mergeable_state: dirty`, still unmergeable, real conflict persists (16+ days). |
+| Neural Contract | ✓ completed | No new Upwork messages since window (silence = never alert per standing rule). |
+| Bailey | ✓ completed | GGS Slack 0 new msgs; TuanNT 0h today (too early, all-sources scan). |
+| Rebecca | ✓ completed | William Bills Slack 0 new msgs; TuanNT 0h today (too early). |
+| Fountain | ✓ completed | Matrix plan (trinhmtt 15:50 08-26): ViTHT 40h/ThinhT 20h/DatNT 36h/VuTQ 4h target this week. WS actuals through 08-26: ThinhT 12h, DatNT 24h, ViTHT 13h — on pace, no gap. Trello board customer-comment check failed (401, Rick's account creds not usable from this session) — no other alert found. |
+| Philip | ○ still incomplete | MS Teams thread: Philip sent full Elevate365 spec + asked "Does it make sense what I'm trying to do?" — appears unanswered as of recheck. |
+| Ohcleo | ✓ completed | Celine DM: latest message 2026-08-26 21:07 (before window start), no new activity this window. Prior Phúc/Celine performance issue already tracked separately via Matrix Alert #4 (namtv escalation, meeting scheduled) — not re-opened here. |
+| Arthur - Meta-Stamp | ✓ completed | Matrix (2/2 rooms) 0 new msgs. GitHub davidztv/Meta_Stamp_V3: 0 commits since 08-24. Workstream Crystal lang: PhucVT 24h/wk logged (healthy). Slack "Solid Code" workspace still missing from this server's `.slack-accounts.json` (same recurring structural gap, not re-extracted) — 3/4 sources verified clean, completed per partial-verification precedent. |
+| Blair Brown | ✓ completed | LeNH all-Workstream scan: 0h today (too early); LeNH deprioritized per standing rule (James Diamond full-time) regardless. |
+| Elena - WordPress SamGuard | ✓ completed | `wordpress-samguard-check.js`: 0 jsErrors, 0 pageErrors, 0 cspViolations. `failedRequests` are analytics/ads noise + video-preload aborts only — not real errors. |
+
+**Cleared this recheck:** John Yi, James Diamond, Rory, Aysar, Elliott, Neural Contract, Bailey, Rebecca, Fountain, Ohcleo, Arthur, Blair Brown, Elena-WordPress (13 items — Check Progress now 20/22, was 7/22).
+**Still open:** Maddy (unanswered customer ask), Elena-SamGuard (PR #309 conflict, pre-existing), Philip (unanswered spec question).
+
+No reminders sent (no `--send-reminder` flag; also all today's 0h readings are too-early-in-day, not genuine shortfalls).
