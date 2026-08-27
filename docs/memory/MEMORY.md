@@ -171,6 +171,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_facebook_scraper_deleted_by_cleanup_commit](news-digest/feedback_facebook_scraper_deleted_by_cleanup_commit.md) — 🔴 restore from git history
 - [feedback_facebook_scraper_char_scramble](news-digest/feedback_facebook_scraper_char_scramble.md) — 🔴 titles scrambled, split on "Đã chia sẻ với Công khai"
 - [feedback_facebook_not_logged_in_is_false_failure](news-digest/feedback_facebook_not_logged_in_is_false_failure.md) — 🔴 test scraper directly before reporting
+- [feedback_news_digest_no_recency_filter_fixed](news-digest/feedback_news_digest_no_recency_filter_fixed.md) — 🔴 fetch-news.py had no date cutoff, 2025 php.net posts leaked; fixed w/ 45d MAX_ARTICLE_AGE_DAYS
 - [feedback_article_count_5_per_source](news-digest/feedback_article_count_5_per_source.md) — 5/source settled default
 - [feedback_news_digest_check_memory_before_run](news-digest/feedback_news_digest_check_memory_before_run.md) — 🔴 read this dir BEFORE fetching
 - [feedback_news_digest_fb_source_misattribution](news-digest/feedback_news_digest_fb_source_misattribution.md) — mrgoonie post landed under Thiệu Nguyễn's JSON key, verify by link/content not key

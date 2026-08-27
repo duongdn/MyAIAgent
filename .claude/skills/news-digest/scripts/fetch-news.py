@@ -322,6 +322,32 @@ def _tag_matches(tag: str, haystack: str) -> bool:
     return t in haystack
 
 
+def _parse_pub_date(pub: str) -> Optional[datetime]:
+    """Parse RFC822 (RSS) or ISO8601 (Atom) pubDate into an aware datetime."""
+    if not pub:
+        return None
+    pub = pub.strip()
+    try:
+        from email.utils import parsedate_to_datetime
+        dt = parsedate_to_datetime(pub)
+        if dt is not None:
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt
+    except Exception:
+        pass
+    try:
+        dt = datetime.fromisoformat(pub.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    except Exception:
+        return None
+
+
+MAX_ARTICLE_AGE_DAYS = 45
+
+
 def _normalize_url(url: str) -> str:
     """Match the redirect/tracking-param normalization applied in fetch_rss,
     so history URLs (already normalized) compare equal to freshly fetched ones."""
@@ -536,6 +562,16 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
 
             if tag and not any(_tag_matches(t, (title + " " + summary).lower()) for t in tag):
                 continue
+
+            # Drop stale entries. Some feeds (e.g. php.net's combined
+            # atom feed) interleave old release/event posts with new ones
+            # in a non-chronological order, so entries from 2025 (or
+            # earlier) were slipping into "latest" digests unfiltered.
+            pub_dt = _parse_pub_date(pub)
+            if pub_dt is not None:
+                age_days = (datetime.now(timezone.utc) - pub_dt).days
+                if age_days > MAX_ARTICLE_AGE_DAYS:
+                    continue
 
             article = {
                 "title": title,
