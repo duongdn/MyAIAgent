@@ -19,8 +19,8 @@
 | 7 | New Relic — OhCleo | `MediaByKeyView.get` avg latency escalated to **49.4s/539 calls** — nearly doubled from 24.7s/324 calls noted 08-18. Chronic, worsening, unaddressed for weeks |
 | 8 | New Relic — MPFC | Apdex 0.60 (poor, chronic). `WP_Error::get_method()` fatal 170× this window (weeks-old, unresolved plugin bug). SQL-injection `WAITFOR DELAY` scanner probes active on `/search/` again (dominates slowest-transactions list) |
 | 9 | New Relic — Fountain | New slow-transaction outlier: `admin/product_catalogs/import_csv` avg **104.9s / 4 calls** — not seen in prior reports, worth watching |
-| 10 | Sheets — Bailey/Paturevision | TuanNT shows 0h on the Paturevision task-log sheet for 2026-08-18, no leave note found — unverified (see Workstream outage note below) |
-| 11 | Infra — Workstream SSO | Persistent session-wide outage (4 genuine login attempts this run — same "SSO redirected, no token captured" failure signature documented daily since 2026-08-03). Blocks hours verification for Sheets/Workstream (Piece 4), Fountain Parts 2-3, Blair Brown, and TuanNT/LongVV/PhucVT/KhanhHH/LeNH cross-checks this run |
+| 10 | ~~Sheets — Bailey/Paturevision: TuanNT shows 0h on the Paturevision task-log sheet for 2026-08-18, no leave note found — unverified~~ → **CORRECTED 09:25: FALSE ALARM.** Workstream project `speedventory` (client: Bailey) shows TuanNT logged **8h on 2026-08-18** (16h week-to-date). Sheets-only 0h was a stale-source artifact — Workstream is primary now. See Re-check section |
+| 11 | ~~Infra — Workstream SSO: Persistent session-wide outage (4 login attempts, same failure signature since 2026-08-03)~~ → **CORRECTED 09:25: NOT an outage.** Login succeeded instantly from this (local) host — the remote cron host (mpfc.mpfc.live) simply lacks the browser profile needed for the interactive SSO step (see [[project_mpfc_cron_server]]). Full Workstream data now pulled for all 18 projects. See Re-check section |
 | 12 | Infra — this host (mpfc.mpfc.live) | No persistent browser profile exists here (`/home/nus` doesn't exist on this box — confirmed via `ls /home/`) for: WhatsApp/Zalo monitor Chrome, Neural Contract's carrick Profile 1 cookie source, Solid Code Slack (Arthur), Philip MS Teams. This is the documented cross-host gap ([[project_mpfc_cron_server]]) — same failure pattern seen in every recent cron run, not new |
 
 **Today (Wed 08-19):** VinhNT full day off, PhongTH off (covered by HaVS), ThinhLD off this morning (covered by DaiDV). Otherwise all present.
@@ -65,7 +65,7 @@ Trello: DuongDn, Carrick, Kai, Ken, Nick ✓ complete. **Rick ⚠️ left incomp
 | SoCal Auto Wraps | — | dropped from monitoring (2026-05-11) |
 | Aigile Dev | 1 | Automated Sentry morning-check bot: 0 urgent new, 0 non-urgent new, 4 standing unresolved (unchanged) — no new alert |
 
-Trello: James Diamond(n/a-Discord), Rory, MPFC, Marcel, Andrew(n/a-Discord), Colin ✓ complete. **Maddy, Franc ⚠️ left incomplete** (Alerts #4, #5). Aysar/Elliott left incomplete for hours-verification reasons (see Sheets section), not Slack alarms.
+Trello: James Diamond(n/a-Discord), Rory, MPFC, Marcel, Andrew(n/a-Discord), Colin ✓ complete. **Maddy ⚠️ still incomplete** (Alert #4, re-checked 09:25 — anomawasala/madhuraka questions still unanswered, 0 new Xtreme messages since 07:15). ~~Franc ⚠️ left incomplete~~ → **✓ complete 09:25** — carrick substantively followed up with dmetiner at 08:31-08:37 today ("noticed Istanbul-Altunizade works now, could you check again?"), see Re-check section. Aysar/Elliott ✓ complete 09:25 (hours + Slack both clean, see Re-check).
 
 ---
 
@@ -80,15 +80,11 @@ Trello: James Diamond - Vinn task ✓ complete. Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets / Workstream — 07:35 (+07:00)
+## Sheets / Workstream — ~~07:35~~ **corrected 09:25 (+07:00), see Re-check**
 
-🔴 **Workstream unavailable this run** — persistent session-wide SSO outage (4 genuine login attempts, "SSO redirected but API never fired" failure signature, matching the daily pattern documented since 2026-08-03). Cannot verify hours for any Workstream-tracked project this run.
+~~🔴 Workstream unavailable this run — persistent session-wide SSO outage...~~ → **WRONG, see Alert #11 correction.** Workstream login succeeded immediately from the local host. Full data for 2026-08-18 (all 18 projects) — see `## Re-check` section below for the complete breakdown. Summary: LongVV/Maddy 0h that day (2h on 08-17 only — Kai report-check correctly skipped, not an alert). KhanhHH: 4h Generator, 0h Baamboozle (worked elsewhere — Aysar silence expected). TuanNT: 8h on Bailey/Speedventory (resolves Alert #10 — unblocks John Yi/Rebecca/Bailey). LeNH: 8h James Diamond, 0h Blair Brown that day (worked elsewhere — no alert). Fountain actuals now verified (see Fountain section).
 
-Google Sheets cross-check for 2026-08-18 (fallback source): LongVV, PhucVT, TuanNT, KhanhHH, LeNH all show 0h across every sheet queried. **This is expected, not evidence of a shortfall** — nearly all projects moved to Workstream tracking months ago (confirmed 2026-07-13), so Sheets are structurally empty for most devs now regardless of actual work done. The one exception is **Bailey/Paturevision**, which has no Workstream project and uses Sheets as its sole source — TuanNT shows 0h there for 2026-08-18 with no leave note on file (Alert #10, needs verification next run).
-
-No dev-hours Trello gates can be confidently completed or alerted this run beyond Bailey. Left incomplete: Maddy (also has a separate Slack alert), John Yi, Aysar, Elliott, Bailey, Rebecca, Blair Brown.
-
-Maddy JIRA cross-check: not run this pass (blocked behind the same Workstream dependency for the weekly task-log data source).
+Google Sheets cross-check for 2026-08-18 (original, still relevant as secondary source): LongVV, PhucVT, TuanNT, KhanhHH, LeNH all showed 0h — this undercounted because most task-log activity has moved to Workstream; Workstream is authoritative per [[reference_workstream]].
 
 ---
 
@@ -100,7 +96,7 @@ Maddy JIRA cross-check: not run this pass (blocked behind the same Workstream de
 
 **Part 1 — Matrix plan (Kunal - Fountain room):** trinhmtt posted this week's plan Monday 08-17 ~10:19: **ThinhT: 20h, ViTHT: 40h, DatNT: 36h => QC: 24h**. Roster note: DatNT now on the plan in place of VuTQ — VuTQ appears active only as senior/PR-reviewer this week (reviewed/approved multiple PRs for DatNT), not counted as a plan-hours dev this week.
 
-**Part 2/3 — Task log actuals vs plan:** 🔴 Blocked — Workstream (project `fountain`) unreachable this run (see Sheets section above). Cannot verify actual hours against the plan this run.
+**Part 2/3 — Task log actuals vs plan:** ~~🔴 Blocked — Workstream unreachable~~ → **RESOLVED 09:25.** Week-to-date (Mon 08-17 + Tue 08-18) actuals from Workstream: ThinhT 8h/20h plan, ViTHT 2h/40h, DatNT 0h/36h (no logs yet this week), QC PhatDLT 3h + HungPN 2h = 5h/24h plan. Early in the week (2 of 5 workdays) — no spike, no alert; DatNT 0h-so-far is not unusual this early in his weekly allocation. TrinhMTT (plan-poster, not counted in dev totals) logged 7h — informational only.
 
 **Trello board (Web Development, rick570 account):**
 - Customer comments this window: 3, all from our team (rick570) to kunalsheth/tmmckay — 0 new customer-initiated comments.
@@ -108,7 +104,7 @@ Maddy JIRA cross-check: not run this pass (blocked behind the same Workstream de
 - Stuck (5+ days) cards: 23, all pre-existing chronic backlog (oldest: "Fountain Pro- not uploading to shipstation" 133 days) — unchanged pattern, not new this window.
 - Hard-to-release (14+ days in Doing): 0.
 
-Trello: Fountain - DOCUMENT ⚠️ left incomplete (Part 2/3 unverified).
+Trello: ~~Fountain - DOCUMENT ⚠️ left incomplete (Part 2/3 unverified)~~ → **✓ complete 09:25** (all 3 parts now clean — see correction above).
 
 ---
 
@@ -213,29 +209,59 @@ Trello: Neural Contract ✓ complete (session/environment issue, standing rule).
 
 ## WhatsApp / Zalo — 07:36 (+07:00)
 
-Not available this run. This host (mpfc.mpfc.live) has no `/home/nus/chrome-monitor-data` — the persistent monitor-Chrome profile with the logged-in WhatsApp/Zalo sessions lives on a different machine. Attempted to start a fresh monitor Chrome here; it opened without any saved session (no WhatsApp/Zalo login), so no message content could be read. This is a genuine cross-host infrastructure gap (see [[project_mpfc_cron_server]]), not an auth failure fixable by retry from this host.
+Not available this run. This host (mpfc.mpfc.live) has no `/home/nus/chrome-monitor-data` — the persistent monitor-Chrome profile with the logged-in WhatsApp/Zalo sessions lives on a different machine. Attempted to start a fresh monitor Chrome here; it opened without any saved session (no WhatsApp/Zalo login), so no message content could be read. This is a genuine cross-host infrastructure gap (see [[project_mpfc_cron_server]]), not an auth failure fixable by retry from this host. **Note (2026-08-19): as of today WhatsApp/Zalo (Pieces 16-17) are excluded from the default full run anyway (token-heavy) — only run via standalone `/daily-report whatsapp`/`zalo` or `--include-whatsapp-zalo`.** Not gated by any Trello item, informational only.
 
 ---
 
-## Philip (MS Teams) — 07:41 (+07:00)
+## Philip (MS Teams) — ~~07:41~~ **corrected 09:25 (+07:00)**
 
-Not available this run — same missing-browser-profile constraint as WhatsApp/Zalo/Neural/Solid Code above; the check timed out without producing data.
+~~Not available this run — same missing-browser-profile constraint~~ → **RE-RUN 09:25 from local host** (which has the `tmp/msteams-will-profile` session): landed correctly on the disambiguated "Philip Briggs — Six Star Rentals (External)" contact. Message list returned matches the same known-stable content last confirmed 2026-06-16/06-25 (Elevate365 Static Demo spec discussion) — no new customer message found. Caveat: extraction is DOM-snapshot based and has a known scroll-position limitation ([[feedback_philip_msteams_must_run]]) — treated as "no new message" per the repeat-identical-content signal, not a fresh screenshot-verified read.
 
-Trello: Philip ⚠️ left incomplete (unverified).
+Trello: ~~Philip ⚠️ left incomplete (unverified)~~ → **✓ complete 09:25**.
 
 ---
 
-## Trello — Check progress / Check mail — 07:42 (+07:00)
+## Trello — Check progress / Check mail — ~~07:42~~ **corrected 09:25 (+07:00), see Re-check**
 
-**Check mail:** 5/6 complete (DuongDn, Carrick, Kai, Ken, Nick ✓). Rick ⚠️ incomplete (Alerts #1-2). https://trello.com/c/6a84cf39ca067788ab3ed795
+**Check mail:** 5/6 complete (DuongDn, Carrick, Kai, Ken, Nick ✓). Rick ⚠️ still incomplete (Alerts #1-2, real unresolved production errors — not an auth/access issue, unchanged). https://trello.com/c/6a84cf39ca067788ab3ed795
 
-**Check progress:** 11/22 complete (James Diamond, Rory, MPFC, Marcel, Raymond, Neural Contract, Andrew Taraba, Colin, Ohcleo, Arthur - Meta-Stamp, Elena - WordPress SamGuard ✓).
-⚠️ Incomplete: Maddy (Alert #4), John Yi (hours unverified), Aysar (hours unverified), Franc (Alert #5), Elliott (hours unverified), Elena - SamGuard Digital Plant (Alert #6/PR conflict), Bailey (Alert #10), Rebecca (hours unverified), Fountain - DOCUMENT (Part 2/3 unverified), Philip (unavailable this run), Blair Brown (hours unverified). https://trello.com/c/6a84c80d117d9988d9a2cc0c
+**Check progress:** ~~11/22~~ → **20/22 complete as of 09:25** (James Diamond, Rory, MPFC, Marcel, Raymond, Neural Contract, Andrew Taraba, Colin, Ohcleo, Arthur - Meta-Stamp, Elena - WordPress SamGuard, **+ John Yi, Aysar, Franc, Elliott, Bailey, Rebecca, Fountain - DOCUMENT, Philip, Blair Brown ✓ newly completed this recheck**).
+⚠️ Still incomplete (2): **Maddy** (Alert #4 — 2 unanswered client questions, re-verified still unanswered), **Elena - SamGuard Digital Plant** (Alert #6 — PR #309 merge conflict, re-verified live via GitHub API, `mergeable_state: dirty` unchanged since 08-11, needs manual dev resolution). https://trello.com/c/6a84c80d117d9988d9a2cc0c
+
+---
+
+## Re-check — 09:25 (+07:00)
+
+Ran from the **local host** (not mpfc.mpfc.live) — this host has the `/home/nus` browser profiles (Workstream, MS Teams `will`) that the remote cron host lacks, which explains most of this morning's "unavailable"/"outage" findings (see [[project_mpfc_cron_server]]).
+
+**Workstream login:** succeeded on first attempt (`node scripts/workstream-fetch-project-week.js --date=2026-08-18`, browser-login fallback triggered automatically, token refreshed). Confirms [[feedback_workstream_sso_recheck_fixed]] pattern — not a genuine outage, a cross-host session gap.
+
+| Item | Result | Details |
+|------|--------|---------|
+| John Yi | ✓ completed | TuanNT 8h/2026-08-18 via Workstream `speedventory` (Bailey) project — combined >0h rule unblocks John Yi/Rebecca/Bailey. Amazing Meds Slack already clean (0 msgs). |
+| Rebecca | ✓ completed | Same TuanNT evidence as John Yi. William Bills Slack already clean. |
+| Bailey | ✓ completed | TuanNT 8h (16h week-to-date) on Workstream `speedventory` project — resolves Alert #10 (was Sheets-only 0h, now known false). GGS Slack already clean. |
+| Aysar | ✓ completed | KhanhHH: 4h Generator, **0h Baamboozle** on 08-18 (worked a different project that day) — per [[feedback_missing_report_requires_effort_check]], no Aysar work = MPDM silence expected, not an alert. Re-scanned Baamboozle workspace-wide since 08-18 08:49: 0 messages total (no customer bug report pending either). |
+| Elliott | ✓ completed | KhanhHH 4h on Generator, fully charged (`weekCharged`=`weekTotal`, not in `needsReview`). Generator Slack already clean. (Note: `needsReview` has 2 pending entries for **HangNTT**, not KhanhHH — unrelated to this gate, flagged below as a separate finding, addressed to reviewers LucNT/HangNTT.) |
+| Franc | ✓ completed | Re-scanned RDC Slack since 07:15: carrick followed up with dmetiner (client) twice this morning — 08:31 "Let me check", 08:37 "I noticed the Istanbul-Altunizade is works now. Could you please check it again?" — substantive, not filler. Resolves Alert #5. |
+| Fountain - DOCUMENT | ✓ completed | Workstream `fountain` project now reachable — Part 2/3 actuals: ThinhT 8h/20h plan, ViTHT 2h/40h, DatNT 0h/36h, QC 5h/24h. 2 of 5 workdays into the week, no spike. All 3 parts (Matrix plan, actuals, Trello board) clean. |
+| Blair Brown | ✓ completed | LeNH logged 0h on `blair_brown` project 08-18 but 8h on `james_diamond` same day — worked a different client project, not absent. No alert source for Blair Brown found. |
+| Philip | ✓ completed | Re-ran MS Teams check locally (has the browser profile the remote host lacks) — correctly disambiguated to "Philip Briggs (External) — Six Star Rentals", message content matches the known-stable state since 2026-06-16 (no new customer message). Caveat: extraction has a known DOM/scroll limitation, treated as "no new message" on repeat-identical-content signal. |
+| Maddy | ○ still incomplete | Re-scanned Xtreme Slack since 07:15: 0 new messages — anomawasala's (10h+) and madhuraka's (14h+, now ~16h+) questions remain unanswered. Alert #4 stands. (Separately: LongVV logged 0h Maddy-project on 08-18, 2h on 08-17 only — Kai's report-presence check correctly NOT gated today, per conditional rule — this was never the actual blocker, the unanswered client questions are.) |
+| Elena - SamGuard Digital Plant | ○ still incomplete | Re-checked PR #309 live via GitHub API: `mergeable_state: dirty`, unchanged since 2026-08-11T04:09 UTC. Real merge conflict, needs a dev to resolve — not fixable by a monitoring recheck. |
+| Rick (Check mail) | ○ still incomplete | Alerts #1-2 (FountainGifts/InfinityRoses production Rollbar errors) — real unresolved app errors, not an internal-infra issue we can silently fix from this recheck. |
+
+**Additional finding (not gating any specific Trello item, reported per the standing Workstream-reviewer rule):** `generator` (Elliott) project has 2 pending-review entries for **HangNTT** — "Regression mobile app (Brookland)" 08-17 4h and "+cms (Brookland)" 08-18 4h — `reviewStatus: Pending`, addressed to reviewers LucNT/HangNTT. `maddy` project also has 1 pending entry for **TuanTT** — "Check issue with QC" 08-18, but `charged: 0:00` (no actual hours at stake).
+
+**Cleared:** John Yi, Rebecca, Bailey, Aysar, Elliott, Franc, Fountain - DOCUMENT, Blair Brown, Philip (9 items)
+**Still open:** Maddy (Alert #4), Elena - SamGuard Digital Plant (Alert #6), Rick/Check mail (Alerts #1-2)
+
+Card totals updated live via Trello API and re-verified after write: Check progress **20/22**, Check mail **5/6**.
 
 ---
 
 ## Unresolved questions
 
-1. Workstream SSO outage has now recurred on essentially every run since 2026-08-03 (2+ weeks) — this needs investigation beyond another retry (browser-profile reset? Keycloak-side change?), since it's silently blocking hours verification across most of the portfolio every single day.
-2. This execution host (mpfc.mpfc.live) has never had the `/home/nus` browser-profile data (WhatsApp/Zalo/Neural/Solid-Code/Philip) — worth confirming whether these pieces were ever expected to work from this specific cron host, or whether they need a different execution target.
-3. Bailey/Paturevision TuanNT 0h on 2026-08-18 — needs a human check for whether there's an undocumented leave that day.
+1. ~~Workstream SSO outage~~ → **not an outage** — confirmed 09:25 this is a cross-host gap (remote cron host `mpfc.mpfc.live` lacks the `/home/nus` browser profile needed for the interactive SSO step). Worth deciding whether to run the daily cron from a host with a persistent Workstream session, or accept that Workstream/MSTeams/WhatsApp-Zalo/Neural/Solid-Code pieces need a same-day local recheck every time the cron runs remotely.
+2. Elena PR #309 merge conflict has been open 8+ days (since 08-11) — needs a dev assigned to resolve the conflict, not something further monitoring will fix.
+3. Maddy's 2 unanswered client questions (anomawasala ~16h+, madhuraka ~18h+) — worth a direct nudge to Kai/whoever owns Xtreme client comms if no reply lands by end of day.

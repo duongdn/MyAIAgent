@@ -240,3 +240,40 @@ No memo content available this run — session/Cloudflare failures, not treated 
 4. **MS Teams / Philip** — Microsoft login hit an interactive security challenge; needs manual browser login outside cron to re-check Philip Briggs' thread.
 5. **Upwork sessions** (Rory/Aysar/Neural) — all three failed this run; needs interactive re-login.
 6. **MPFC performance** — apdex 0.54, driven by legitimate slow sitemap/RSS routes plus SQLi-probe traffic; worth checking whether these routes should be cached, rate-limited, or blocked at the edge.
+
+---
+
+## Recheck — 08:55 (+07:00)
+
+Workstream SSO restored on first retry (transient outage, per standing pattern) — real hours data now available for all previously-blocked projects.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ○ CORRECTED to incomplete | ⚠️ MISS: initially marked ✓ on WS-hours check alone, but the 07:10 Matrix scan already surfaced a real customer complaint (chientx, "Project Wrap Up - Preventive Actions" room, 15:47): "Maddy: ...continuing to receive complaints from the customer that we are not doing our testing/QA properly and asking us to work for free to fix when they find obvious issues" + follow-up asking DuongDN to review forwarded email + dev issues. This is a live QA-quality complaint, unrelated to LongVV's hours — reverted to ○, needs an actual review/response, not just hours verification. |
+| John Yi - Amazing Meds | ✓ completed | TuanNT 16h on speedventory this week — combined-hours gate satisfied |
+| Bailey | ✓ completed | TuanNT 16h (speedventory), VyNL 3.5h, no shortfall |
+| Rebecca | ✓ completed | TuanNT combined gate satisfied (same as above) |
+| Blair Brown | ✓ completed | 0h this week — deprioritized per standing LeNH=James-Diamond-full-time rule |
+| Fountain | ✓ completed | Parts 2/3 filled: DatNT 17h, PhatDLT 5.5h, ThinhT 4h, ViTHT 1h, HungPN 2.5h, TrinhMTT 4.5h — no over-est flags (needsReview excluded for Fountain per standing rule) |
+| Philip | ✓ completed | MS Teams login clean this retry (no security-challenge loop) — read latest thread, Philip discussing his own demo-build frustration, no direct actionable ask found |
+| Elliott (Generator) | ○ still incomplete | KhanhHH 6h (fine), but 2 Workstream `needsReview` rows pending (LucNT "Discuss with team about task" 2:00 08-25, HangNTT "Test task" 0:00 08-25) — addressed to reviewers LucNT/HangNTT, not a dev-hours issue anymore |
+| Elena - SamGuard Digital Plant | ○ still incomplete | PR #309 re-verified live via `gh api` — `mergeable_state: dirty`, real merge conflict unchanged, needs manual resolution |
+| Ohcleo | ○ still incomplete | Celine's "not being effective" complaint (Alert #1) still unanswered — needs a real management reply, not just monitoring. (Also has its own `needsReview` backlog: 10 rows pending DuongDN/MinhTV as reviewers — secondary to the main complaint.) |
+| Upwork Neural | unchanged (no alert) | Retried 4x — carrick's real Chrome Profile 1 Upwork session still logged out; needs manual login there once (not Puppeteer). Session failure ≠ content alert per standing rule. |
+
+**Cleared this recheck:** John Yi, Bailey, Rebecca, Blair Brown, Fountain, Philip (6 items — Check Progress now 18/22; Maddy corrected back to ○ after user caught the miss).
+**Still open:** Maddy (real QA complaint from customer, see correction above), Elliott (needsReview, new reason), Elena-SamGuard-DigitalPlant (PR conflict), Ohcleo (customer complaint unresolved).
+
+**Unresolved / needs follow-up (carried forward + new):**
+- Ohcleo/Celine still needs an actual reply from management — this cannot be auto-sent without explicit permission.
+- Elena PR #309 needs a human to resolve the merge conflict.
+- Elliott/Generator: LucNT and HangNTT have Workstream-charged hours still pending review — flag to them directly if action is wanted.
+- Upwork Neural: carrick needs to log back into Upwork in his real Chrome (Profile 1) — automation cannot restore this session.
+
+---
+
+## Recheck — 09:54 (+07:00) — new live alert (post-recheck, not a miss)
+
+**NEW ALERT #8:** NamTV (company tech lead), Matrix room `!oGYjbzEfphvvauBZtq:nustechnology.com`, 09:46 — arrived AFTER the 08:58 recheck completed, this is new information not something missed: _"Chà, Minh than về bên Phúc nhiều quá, mày xem xử lý phát. Bên Celine đã complain nhiều rồi. Giai đoạn hiện tại mình phải cố gắng giữ project chứ ko thể để risk như vậy được"_ — direct request to DuongDN to handle PhucVT's performance issue on OhCleo, reinforcing MinhTV's earlier internal complaints (09:25/09:43 today: asked DuongDN to review Phúc's results, said "cần meeting để tránh phát sinh tái diễn") and Celine's own complaint (Alert #1). Now a 3-way escalation on the same issue: Celine (customer) → MinhTV (PM) → NamTV (tech lead), all about PhucVT's OhCleo performance/estimate turnaround.
+
+Ohcleo Trello item stays ○ (already open for Celine's complaint) — this reinforces it, needs an actual management decision/response, not just tracking.
