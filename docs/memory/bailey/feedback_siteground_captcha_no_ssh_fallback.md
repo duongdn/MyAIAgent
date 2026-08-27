@@ -1,9 +1,11 @@
 ---
 name: feedback_siteground_captcha_no_ssh_fallback
-description: Siteground Puppeteer login hits a CAPTCHA (unsolvable headlessly) — use the SSH fallback `Bailey.cpanel` instead, which IS configured (as of 2026-08-21) and gives real disk breakdown
+description: Siteground Puppeteer login hits a CAPTCHA (unsolvable headlessly) — SSH fallback `Bailey.cpanel` worked 2026-08-21 but the host alias is intermittently MISSING again (confirmed absent 2026-08-28) — always check `~/.ssh/config` fresh each run, don't assume either state
 metadata:
   type: feedback
 ---
+
+**REGRESSED 2026-08-28:** `Bailey.cpanel` was absent from `~/.ssh/config` again this run (`ssh: Could not resolve hostname bailey.cpanel`) — same symptom as before 08-21. Puppeteer session was also expired and hit the same CAPTCHA on `--login`. Siteground fully unavailable this run; reported OK in customer Slack (safe default), disk % from 08-21 (81%, staging copies) not re-verified. The host alias appears to come and go between sessions/hosts — don't trust the 08-21 "now works" note as durable; always `cat ~/.ssh/config | grep -i bailey` fresh at the start of Subtask 7 rather than assuming from memory.
 
 `scripts/siteground-storage.js --login` with `DISPLAY=:1` (Xvfb, confirmed running) auto-fills username/password from `config/.bailey-config.json` but the site presents a CAPTCHA after clicking Login — confirmed by a one-off script that also clicks the Login button and checks page text for "captcha" (`true`). This is not a session-expiry issue fixable by retrying — a real CAPTCHA challenge needs human solving, which a headless/unattended run cannot do.
 

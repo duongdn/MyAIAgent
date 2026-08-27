@@ -1,9 +1,11 @@
 ---
 name: feedback_workstream_display_outage_pattern
-description: "Workstream SSO login has now failed 5x (07-26, 07-31, 08-01, 08-15, 08-22) with identical symptom 'SSO redirected but API never fired' — CONFIRMED 08-22 this is NOT a DISPLAY/Xvfb issue (script always runs headless:'new' by design), root cause still unknown"
+description: "Workstream SSO login has now failed 6x (07-26, 07-31, 08-01, 08-15, 08-22, 08-28) with identical symptom 'SSO redirected but API never fired' — CONFIRMED 08-22 this is NOT a DISPLAY/Xvfb issue (script always runs headless:'new' by design), root cause still unknown"
 metadata:
   type: feedback
 ---
+
+**2026-08-28 occurrence (bailey-monitor Subtask 9):** 3 clean `DISPLAY=:1 node scripts/workstream-login.js` attempts, each timed out at the 2-minute Bash timeout (not even the ~90s internal signature captured — command just hung to the wall-clock limit). Did not check for/kill stale concurrent processes holding `tmp/workstream-browser-profile` before retrying (guidance below), which may explain the harder hang vs the usual 90s failure. Task-log entry for the weekly monitor run was left unwritten this run — needs retry next session, following the concurrent-process-kill step first.
 
 **Pattern:** `workstream-login.js` (and the dependent `workstream-fetch-project-week.js`) has failed with the exact same symptom — Keycloak SSO redirect detected (cookies alive) but no Bearer token ever captured from an API request — on 2026-07-26, 2026-07-31, 2026-08-01, 2026-08-15 ("BLOCKER: Keycloak session expired"), and again 2026-08-22 (3 full clean attempts, ~20 min, all identical). Occasional successes in between (e.g. 2026-07-25, 2026-08-19/20 recheck) via the same script with no code changes — genuinely intermittent, not a permanent break.
 
