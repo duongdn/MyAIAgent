@@ -824,11 +824,17 @@ Run the mapped source pieces sequentially (not parallel — fewer resources, no 
 - LeNH: filter col G="LeNH" in each sheet. Any shortfall even <1h without leave = alert. Aysar sheet owner is KhanhHH, not LeNH.
 - LongVV: ad-hoc, no fixed weekly target (2026-08-24) — never alert on his Maddy hours. 0h any single day is normal.
 
+**Step 5.5 — MANDATORY cross-report scan before completing ANY item (added 2026-08-26 after a real miss — see [[feedback_maddy_complaint_missed_in_recheck_hours_only_gate]])**
+
+Re-running an item's mapped gate sources (Step 3's table) is NOT sufficient by itself. A different piece (Matrix, email, another Slack workspace) may have already surfaced a real, unrelated alert about that same project/person earlier in THIS SAME report — the gate-mapping table only tells you which sources normally gate that item, it does not mean those are the only places an alert about it can appear.
+
+Before marking any item complete: `grep -i` the item's project name + all known aliases/client names (e.g. Maddy → also "Xtreme", "Carrick", "Kai", "Luis", "LongVV") across the ENTIRE current `reports/{date}/daily-report.md` — including the ⚠️ ALERTS SUMMARY table and the Matrix "Key updates"/"Action items" sections, not just the item's own section. If any unresolved mention turns up outside the mapped gate sources, that item stays ○ regardless of what the gate-source re-run found — do not complete it on hours/activity data alone.
+
 **Step 6 — Complete or keep incomplete**
 
 For each item:
-- No alert from re-run → `PUT /cards/{cardId}/checkItem/{itemId}?state=complete`
-- Alert found → keep ○, note reason in report
+- No alert from re-run AND no unresolved cross-report mention found in Step 5.5 → `PUT /cards/{cardId}/checkItem/{itemId}?state=complete`
+- Alert found (from gate-source re-run OR Step 5.5 cross-report scan) → keep ○, note reason in report
 - 0h dev + reminder sent → complete (reminder IS the action)
 - Neural silence / Cloudflare block → complete (never an alert)
 
@@ -854,6 +860,7 @@ Append a timestamped section:
 
 - **Never re-run email** — email is already done and Trello mail items are handled separately
 - **Never mark an item complete without actually running its source** — use the gate mapping, not assumptions
+- 🔴 **Never mark an item complete on gate-source data alone — grep the whole current report for the project's name/aliases first (Step 5.5).** A real alert about that project can be sitting in a completely different piece's section (Matrix, email, another workspace) that the gate mapping never routes through. Missing this caused a real customer complaint (Maddy/chientx, 2026-08-26) to get marked ✓ complete — see [[feedback_maddy_complaint_missed_in_recheck_hours_only_gate]].
 - **All-sources rule (ALL devs):** Workstream is primary for every project except Bailey (Sheets-only, no Workstream project). Query Workstream first, cross-check Sheets when WS returns 0h/looks suspicious. Filter Sheets rows by col G = dev name. Never pre-assume which sources a dev uses — assignments change without notice.
 - **TuanNT gate:** Any source with hours → combined > 0h → no alert → complete John Yi+Rebecca+Bailey Trello items.
 - **KhanhHH extra caution:** 3 new sources discovered in 2 months — treat any shortfall as suspect until all sources exhaustively verified.

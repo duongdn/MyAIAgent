@@ -43,6 +43,51 @@
       "note": "Newly listed 2025 — cafef only has 1 audited year (2025) + Q4/2025-Q2/2026 quarters. Thin liquidity (~170tr VND/day recent). Built with --cafef --force (balance mismatch 30tr/4.7 nghìn tỷ negligible)."
     },
     {
+      "ticker": "VIX",
+      "name": "CTCP Chứng khoán VIX",
+      "exchange": "HOSE",
+      "spreadsheet_id": "12lzXRnCjOzUAkvn-vpb8LtB3Ohfd0dYoVxc3YWP9kDw",
+      "report_sheet": "Báo cáo 2 - VIX",
+      "vietstock_url": "https://finance.vietstock.vn/VIX/tai-chinh.htm",
+      "note": "Công ty chứng khoán (securities co.) — cafef trả về assetsTemplate/liabilitiesTemplate dạng bank-shaped nhưng nội dung dòng CTCK chuẩn (Tài sản tài chính FVTPL, phải thu GDCK...). 2011-2022 loại 'HK', nhưng 2023-2025 cafef chỉ có loại 'K' (không có 'HK') — dùng finance-quantification-build.js (keepAudited đã merge per-year, HK ưu tiên K theo Map) thay vì fetch-cafef.js cũ để giữ đủ 2023-2025, đã verify Tổng tài sản=Tổng nguồn vốn khớp tuyệt đối mọi năm kể cả 2023-2025. Xây 25/08/2026, đủ 6/6 sheet, QA 0 lỗi."
+    },
+    {
+      "ticker": "VCB",
+      "name": "Ngân hàng TMCP Ngoại thương Việt Nam (Vietcombank)",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1oDM7Fixh2bHKBcqnHhWzLPO1OukR9FSl3u4tW6WaI5Y",
+      "report_sheet": "Báo cáo 2 - VCB",
+      "vietstock_url": "https://finance.vietstock.vn/VCB/tai-chinh.htm",
+      "note": "Ngân hàng (bank) — cấu trúc BCTC khác non-bank (huy động vốn/cho vay khách hàng/NIM/nợ xấu/CAR thay vì hàng tồn kho, tài sản cố định...). Spreadsheet 'VCB' đã tồn tại sẵn (trống, chỉ có Sheet1 mặc định) trước khi build."
+    },
+    {
+      "ticker": "MBB",
+      "name": "Ngân hàng TMCP Quân đội (MB Bank)",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1UtAH3Bq5LYzJmqMQiFxOtODrMLjswiayc80-slGhvRg",
+      "report_sheet": "Báo cáo 2 - MBB",
+      "vietstock_url": "https://finance.vietstock.vn/MBB/tai-chinh.htm",
+      "note": "Ngân hàng (bank) — theo dõi thêm vì P/B thấp + ROE cao so peer (xem workbook so sánh ngành 1bAJaaP1nvv06xTNIEWJEidZljhNVJGEaIxHLKjEIvyY). Spreadsheet 'MBB' đã tồn tại sẵn (trống, chỉ Sheet1) trước khi build."
+    },
+    {
+      "ticker": "VPB",
+      "name": "Ngân hàng TMCP Việt Nam Thịnh Vượng (VPBank)",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1Yg_fgDeseqP8diMNvRIlmfzdPykd6qnDMlxMt_nysH8",
+      "report_sheet": "Báo cáo 2 - VPB",
+      "vietstock_url": "https://finance.vietstock.vn/VPB/tai-chinh.htm",
+      "note": "Ngân hàng (bank) — cổ tức tiền mặt cao nhất nhóm so sánh (~10.55%), NPL cao hơn peer (xem workbook so sánh ngành 1bAJaaP1nvv06xTNIEWJEidZljhNVJGEaIxHLKjEIvyY). Spreadsheet 'VPB' đã tồn tại sẵn (trống, chỉ Sheet1) trước khi build."
+    },
+    {
+      "ticker": "CTG",
+      "name": "Ngân hàng TMCP Công thương Việt Nam (VietinBank)",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1dfGAnR56HrCGcgMSaiNUTzB3CRihHrp0BbTg83ZxYcs",
+      "report_sheet": "Báo cáo 2 - CTG",
+      "vietstock_url": "https://finance.vietstock.vn/CTG/tai-chinh.htm",
+      "note": "Ngân hàng (bank) — theo dõi thêm vì P/B thấp + ROE cao so peer (xem workbook so sánh ngành 1bAJaaP1nvv06xTNIEWJEidZljhNVJGEaIxHLKjEIvyY). Spreadsheet 'CTG' đã tồn tại sẵn (trống, chỉ Sheet1) trước khi build."
+    },
+    {
       "ticker": "ADP",
       "name": "CTCP Sơn Á Đông",
       "exchange": "HOSE",

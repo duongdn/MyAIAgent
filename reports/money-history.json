@@ -323,6 +323,22 @@
       },
       "method": "dashboard_verified",
       "note": "Read directly from GET /wallets/totaldashboard, no reconstruction. NW UP 200,000,000 vs the prior 25/08 08:40 snapshot (7,853,113,692 -> 8,053,113,692, +2.55%) in just 13 minutes. Diffed both raw account fetches to find the cause: ZERO new transactions posted -- the jump is entirely a manual account-balance edit on 'Larion co phan' (private equity, illiquid, no market price feed), which moved 600,000,000 -> 800,000,000 (+200,000,000, +33%) and also flipped from inActive:true to inActive:false (now shown active). No Cho vay/Thu no entry accompanies it -- this is a direct valuation override by the user in the app, not a purchase/sale. All other accounts, savings books, gold, real estate, and debt are byte-identical to the 08:40 snapshot. Reconstructed gross (8,125,413,692) exceeds authoritative NW by exactly 72,300,000 -- the same standing cost-basis-vs-market gap seen every snapshot since 07-24, confirming no new data-integrity issue was introduced. UNRESOLVED: basis for the Larion revaluation not confirmed with user (new share price round? appraisal? arbitrary mark?) -- flagged in the allocation report as a risk item since it's now 9.93% of NW with no external verification. Investment category up to 2,462,623,840 (was 2,262,623,840) purely from this one entry; VCBS/VCBF/FPTS/Finhay all unchanged. August MTD unchanged: Thu 270,463,462 / Chi 47,746,999 / Net +222,716,463 (no new transactions in the 13-minute window)."
+    },
+    {
+      "date": "2026-08-26",
+      "label": "26/08",
+      "net_worth": 8055945149,
+      "gross_assets": 8130250628,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 753000000,
+        "investment": 2462623840,
+        "savings": 1193923479,
+        "liquid": 200703309
+      },
+      "method": "dashboard_verified",
+      "note": "NW +2,831,457 vs 08-25 08:53 (8,053,113,692 -> 8,055,945,149), minor interest accrual, no new large transactions. Corrected liquid classification this run: Tikop (100,024,366) reclassified from unhandled to Liquid per standing memory rule, closing the reconstructed-vs-authoritative gap to 74,305,479 (in line with the historical ~70-75M pattern). Larion cổ phần still 800,000,000 (unchanged since 08-25 revalue, basis still unconfirmed). August MTD: Thu 270,445,212 / Chi 47,746,999 / Net +222,698,213."
     }
   ]
 }

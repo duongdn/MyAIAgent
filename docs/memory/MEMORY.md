@@ -48,6 +48,7 @@
 - [feedback_puppeteer_cron_tmpdir](daily-report/slack/feedback_puppeteer_cron_tmpdir.md), [feedback_solid_code_new_workspace_unwired](daily-report/slack/feedback_solid_code_new_workspace_unwired.md)
 - [feedback_franc_rdc_customer_ask_not_flagged](daily-report/slack/feedback_franc_rdc_customer_ask_not_flagged.md) — 🔴
 - [feedback_ohcleo_events_code_channel_not_found](daily-report/slack/feedback_ohcleo_events_code_channel_not_found.md) — channel_not_found=bot removed from channel, not auth; needs admin re-invite
+- [feedback_maddy_complaint_missed_in_recheck_hours_only_gate](daily-report/slack/feedback_maddy_complaint_missed_in_recheck_hours_only_gate.md) — 🔴 recheck must scan report's own alerts/Matrix section before completing an item, not just re-run its mapped gate sources
 
 ## daily-report:discord
 - [feedback_discord_only_airagri_bizurk](daily-report/discord/feedback_discord_only_airagri_bizurk.md), [feedback_vinn_daily_report_format](daily-report/discord/feedback_vinn_daily_report_format.md) — NOT HOMIEAPP
@@ -126,6 +127,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_bailey_invoice_verify_slack_quote_supersedes_buffer](bailey/feedback_bailey_invoice_verify_slack_quote_supersedes_buffer.md) — 🔴 fixed-cost bills at GGS Slack-quoted hours, not WBS buffer; also xoxp search.messages needs token in header only
 - [feedback_siteground_disk_81pct_staging_copies](bailey/feedback_siteground_disk_81pct_staging_copies.md) — 🔴 81% used 2026-08-21, staging copies; SSH fallback now WORKS (see updated feedback_siteground_captcha_no_ssh_fallback)
 - [feedback_bailey_moved_to_workstream_speedventory](bailey/feedback_bailey_moved_to_workstream_speedventory.md) — 🔴🔴 2026-08-21 monitor task log moved OFF Google Sheets → Workstream `speedventory`; new write script scripts/workstream-write-tasklog.js
+- [feedback_bailey_dev_actuals_now_on_workstream](bailey/feedback_bailey_dev_actuals_now_on_workstream.md) — 🔴🔴🔴 2026-08-25: dev task actuals also on WS since 8/16 migration, Sheet actual-hours stale, cross-check WS before 0h/overbudget claims
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
@@ -157,6 +159,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_savings_already_matured_check](money-report/feedback_savings_already_matured_check.md), [feedback_tikop_is_liquid_not_investment](money-report/feedback_tikop_is_liquid_not_investment.md)
 - [feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash](money-report/feedback_near_zero_cost_basis_is_settled_ledger_not_idle_cash.md) — 🔴 basis≈0=ledger settled, NOT idle cash
 - [feedback_liquid_must_include_inactive_residual_accounts](money-report/feedback_liquid_must_include_inactive_residual_accounts.md) — 🔴 Momo/nam á/Payoneer (~907K) belong in Liquid despite inActive:true; use 72.9M gap as sanity check
+- [feedback_larion_valuation_confirmed_by_user](money-report/feedback_larion_valuation_confirmed_by_user.md) — 🔴 800M confirmed real sale price by user 2026-08-26, stop flagging as unverified
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴

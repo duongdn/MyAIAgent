@@ -1,15 +1,39 @@
 """Bailey Task Monitor — Check 'Est vs Charged' sheet for:
 1. Tasks released but not paid
 2. Tasks with bugs — hourly vs fixed cost, overbudget check for fixed cost
+
+Task metadata (name, payment status, dev status, dev, type, estimate, link) still
+comes from the Sheet. Actual/charged HOURS come from Workstream instead — the Sheet's
+K/L columns are stale since dev started logging hours directly in Workstream after the
+2026-08-16 migration. See docs/memory/bailey/feedback_bailey_dev_actuals_now_on_workstream.md
+
 Spreadsheet: 1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg
 Sheet: Est vs Charged (gid=920993260)
 """
 import json
 import os
+import subprocess
 import sys
 from datetime import datetime
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build as gc
+
+WORKSTREAM_ACTUALS_SCRIPT = os.path.join(
+    os.path.dirname(__file__), 'workstream-fetch-speedventory-task-actuals.js'
+)
+
+
+def fetch_workstream_actuals():
+    """Returns {task_name: {'actual': H, 'charged': H}} from Workstream, or {} on failure."""
+    try:
+        out = subprocess.run(
+            ['node', WORKSTREAM_ACTUALS_SCRIPT],
+            capture_output=True, text=True, timeout=120, check=True,
+        )
+        return json.loads(out.stdout)
+    except Exception as e:
+        print(f"WARNING: Workstream actuals fetch failed ({e}); falling back to stale Sheet hours", file=sys.stderr)
+        return {}
 
 SA_KEY = 'config/daily-agent-490610-7eb7985b33e3.json'
 SPREADSHEET_ID = '1dpFpn8-1AGAcaKczHHoVr1OaIxDQkmUNiN93sa2XBkg'
@@ -17,6 +41,7 @@ SHEET_NAME = 'Est vs Charged'
 
 # Column mapping (0-indexed from sheet data, data rows start at row 5)
 COL_NAME = 0       # A: Work Package / Activity Name
+COL_WS_TASK_ID = 2 # C: Task ID WS — join key into Workstream task-log tags (NOT the free-text name)
 COL_PAY_STATUS = 1 # B: Payment status (PAID, empty, or notes)
 COL_LINK = 5       # F: Trello/Slack link
 COL_DEV_STATUS = 6 # G: Dev status (Tested on Live, Has Bug, etc.)
@@ -68,6 +93,8 @@ def main():
     # Skip header rows (0-4), process data rows from row 5+
     data_rows = rows[5:]
 
+    ws_actuals = fetch_workstream_actuals()
+
     now = datetime.now()
     released_not_paid = []
     requesting_payment = []
@@ -85,9 +112,17 @@ def main():
         dev = get_cell(row, COL_DEV)
         task_type = get_cell(row, COL_TYPE)
         est_buffer = safe_float(get_cell(row, COL_EST_BUFFER))
-        actual = safe_float(get_cell(row, COL_ACTUAL))
-        charged = safe_float(get_cell(row, COL_CHARGED))
+        sheet_actual = safe_float(get_cell(row, COL_ACTUAL))
+        sheet_charged = safe_float(get_cell(row, COL_CHARGED))
         link = get_cell(row, COL_LINK)
+        ws_task_id = get_cell(row, COL_WS_TASK_ID).strip().upper()
+
+        # Prefer live Workstream hours, joined by Task ID WS (tag), not the free-text
+        # name — different tasks can share display text in the WS task-log dropdown.
+        ws = ws_actuals.get(ws_task_id) if ws_task_id else None
+        actual = ws['actual'] if ws else sheet_actual
+        charged = ws['charged'] if ws else sheet_charged
+        hours_source = 'workstream' if ws else 'sheet'
 
         is_paid = 'PAID' in pay_status.upper() if pay_status else False
         is_requesting = 'REQUESTING' in pay_status.upper() if pay_status else False
@@ -104,6 +139,7 @@ def main():
             'actual': actual,
             'charged': charged,
             'link': link,
+            'hours_source': hours_source,
         }
 
         # Check 1: Released but not paid
@@ -203,9 +239,13 @@ def main():
     if other_tasks:
         for t in other_tasks:
             est = f"est {t['est_buffer']}h" if t['type'] == 'fixed' and t['est_buffer'] > 0 else t['type']
-            parts = [t['name'], f"{t['actual']}h", est, t['dev_status']]
+            hours_label = f"{t['actual']}h" if t['hours_source'] == 'workstream' else f"{t['actual']}h (⚠️ stale Sheet, no WS match)"
+            parts = [t['name'], hours_label, est, t['dev_status']]
             if t['dev']:
                 parts.append(t['dev'])
+            if t['type'] == 'fixed' and t['est_buffer'] > 0 and t['actual'] > t['est_buffer']:
+                over_pct = (t['actual'] / t['est_buffer']) * 100 - 100
+                parts.append(f"⚠️ OVER +{over_pct:.1f}% (+{t['actual'] - t['est_buffer']:.1f}h)")
             if t['link']:
                 parts.append(t['link'])
             lines.append('- ' + ' – '.join(parts))

@@ -45,10 +45,11 @@ For each fixed-cost item, search GGS Slack for the original Amy quote to Joey:
 - Search API: `https://slack.com/api/search.messages?query=<task+name+hours>&count=5`
 
 ### Step 4 — Cross-reference with Est vs Charged (internal awareness)
-Read `Est vs Charged` sheet (gid=920993260):
-- Columns: Task name (A), Status (G), Dev (H), Est Raw (I), Est w/Buffer (J), Actual (K), Charged (L)
-- For hourly tasks: invoice hours must = Actual (col K)
-- For fixed tasks: Actual is internal-only; WBS/Slack quote governs billing
+**Actual hours moved to Workstream since 2026-08-16 migration — Sheet col K is stale for any task touched after that date.** Run `node scripts/workstream-fetch-speedventory-task-actuals.js [asOfDate]` and join by **Workstream tag ID = Sheet column C "Task ID WS"** (NOT free-text task name — see `docs/memory/bailey/feedback_bailey_dev_actuals_now_on_workstream.md`).
+- Read `Est vs Charged` sheet (gid=920993260) for metadata only: Task name (A), Task ID WS (C), Status (G), Dev (H), Est Raw (I), Est w/Buffer (J)
+- For hourly tasks: invoice hours must = WS actual for that tagId (fall back to Sheet col K only if no WS match found, and flag "⚠️ stale Sheet, no WS match")
+- For fixed tasks: WS/Sheet actual is internal-only; WBS/Slack quote governs billing
+- Note: current fetch script reads only `row.tags[0]` per WS row. If a task-log row carries both a big client-budget tag and a small internal-breakdown tag, confirm which is tags[0] before trusting the aggregate — otherwise actuals may silently roll up under the wrong tag.
 
 ### Step 5 — Fetch individual WBS sheets (if needed)
 For large tasks spanning Console + Mobile, check dedicated WBS sheet:
