@@ -343,18 +343,18 @@
     {
       "date": "2026-08-28",
       "label": "28/08",
-      "net_worth": 8038410329,
-      "gross_assets": 8112719485,
+      "net_worth": 6625554709,
+      "gross_assets": 6699863865,
       "liabilities": -3678,
       "categories": {
         "real_estate": 3520000000,
         "gold": 750000000,
-        "investment": 2463023840,
+        "investment": 1050168220,
         "savings": 1193923479,
         "liquid": 185768488
       },
-      "method": "reconstructed",
-      "note": "CORRECTED again (09:41, 3rd pass): Net Worth = 8,038,410,329 (not 6,625,554,709 raw, and NOT 8,238,410,329 -- that intermediate figure wrongly added a +200M bump to Larion that never happened). Root cause: VCBS and Larion co phan are both normally-inactive wallets whose currentAmount resets to 0 in the API while inactive. Carry forward unchanged: Larion co phan = 800,000,000 (confirmed 08-26 valuation, user only toggled it inactive again on 08-28, value itself did not change), VCBS = 612,855,620 (unchanged since 08-26). trueTotalBalance.amount alone is NOT authoritative when inactive investment wallets exist. Net Worth is essentially flat vs 08-26 (8,055,945,149), down only ~17.5M from minor gold/liquid movement -- no real gain or loss. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
+      "method": "dashboard_verified",
+      "note": "UNRESOLVED (09:47, 4th pass — stop guessing): Larion co phan and VCBS show currentAmount:0 while inActive:true. User confirms they only toggled inactive, did NOT withdraw. But long an res and vang (same walletType:3, also inActive:true) KEEP their full currentAmount while inactive -- so inactive alone does not explain the zeroing, and prior carry-forward guesses (800M/1B for Larion, 612.9M for VCBS) are RETRACTED as unverified. Net Worth reverted to raw totaldashboard 6,625,554,709 pending user checking the MISA mobile app directly for these 2 wallets true balance. Flag as needs-manual-check, not a confirmed loss or a confirmed carry-forward. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
     }
   ]
 }
