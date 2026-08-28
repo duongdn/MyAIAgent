@@ -339,6 +339,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW +2,831,457 vs 08-25 08:53 (8,053,113,692 -> 8,055,945,149), minor interest accrual, no new large transactions. Corrected liquid classification this run: Tikop (100,024,366) reclassified from unhandled to Liquid per standing memory rule, closing the reconstructed-vs-authoritative gap to 74,305,479 (in line with the historical ~70-75M pattern). Larion cổ phần still 800,000,000 (unchanged since 08-25 revalue, basis still unconfirmed). August MTD: Thu 270,445,212 / Chi 47,746,999 / Net +222,698,213."
+    },
+    {
+      "date": "2026-08-28",
+      "label": "28/08",
+      "net_worth": 6625554709,
+      "gross_assets": 6699863865,
+      "liabilities": -3678,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 750000000,
+        "investment": 1050168220,
+        "savings": 1193923479,
+        "liquid": 185768488
+      },
+      "method": "dashboard_verified",
+      "note": "NW -1,430,390,440 vs 08-26 (8,055,945,149 -> 6,625,554,709), -17.8%. Entirely driven by Larion co phan wallet dropping from 800,000,000 to 0 and being marked inactive -- no transaction record explains it (balance was always a manual entry, not txn-derived). Needs user confirmation: valid withdrawal vs accidental reset. All other categories (BDS, Vang, Tiet kiem) essentially unchanged. Reconstruction gap ~74.3M consistent with historical pattern. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
     }
   ]
 }
