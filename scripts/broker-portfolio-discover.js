@@ -100,12 +100,14 @@ async function main() {
   page.on('response', async (res) => {
     try {
       const url = res.url();
-      const ct = res.headers()['content-type'] || '';
-      if (!ct.includes('application/json')) return;
-      if (res.request().resourceType() !== 'xhr' && res.request().resourceType() !== 'fetch') return;
-      const body = await res.text();
+      if (url.includes('signalr') || url.includes('pusher.fpts') || url.includes('.js') || url.includes('.css')
+          || url.includes('.png') || url.includes('.svg') || url.includes('.woff')) return;
+      const body = await res.text().catch(() => '');
       if (!body || body.length > 500000) return;
-      captured.push({ url, method: res.request().method(), status: res.status(), body: body.slice(0, 20000) });
+      const looksJson = /^[\[{]/.test(body.trim());
+      const ct = res.headers()['content-type'] || '';
+      if (!looksJson && !ct.includes('json')) return;
+      captured.push({ url, method: res.request().method(), status: res.status(), resourceType: res.request().resourceType(), body: body.slice(0, 30000) });
       console.log(`[capture] ${res.status()} ${res.request().method()} ${url}`);
     } catch (e) {
       // response body may not be available (redirects etc.) — ignore
