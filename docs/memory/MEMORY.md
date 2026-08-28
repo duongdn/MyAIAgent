@@ -162,6 +162,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_liquid_must_include_inactive_residual_accounts](money-report/feedback_liquid_must_include_inactive_residual_accounts.md) — 🔴 Momo/nam á/Payoneer (~907K) belong in Liquid despite inActive:true; use 72.9M gap as sanity check
 - [feedback_larion_valuation_confirmed_by_user](money-report/feedback_larion_valuation_confirmed_by_user.md) — 🔴 carry-forward rule for inactive wallets (Larion+VCBS) — 0/inactive API value ≠ real value, MUST use last known value
 - [reference_fpts_vcbs_broker_portfolio_scripts](money-report/reference_fpts_vcbs_broker_portfolio_scripts.md) — FPTS auto-fetch live via scripts/fpts-portfolio-report.js, VCBS pending, details in money-report.md Piece 8
+- [feedback_vcbs_automation_abandoned_use_fpts_pattern_only](money-report/feedback_vcbs_automation_abandoned_use_fpts_pattern_only.md) — 🔴 VCBS login automation abandoned 2026-08-28, React SPA coordinate-click too fragile, ask user before retrying
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴
