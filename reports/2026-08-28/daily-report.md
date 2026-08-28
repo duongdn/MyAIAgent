@@ -239,3 +239,26 @@ All chronic/unresolved issues, consistent with prior weeks — no SQLi/malware-s
 3. Arthur/Meta-Stamp (Piece 13) — not run this pass, time-boxed given Workstream outage ate the run's time budget. Needs standalone recheck.
 4. Upwork Memo (Piece 15) — not run this pass, needs recheck.
 5. OhCleo `app_media.series_id does not exist` DB error (11x) — looks like a missed migration for today's Series feature ship, needs dev follow-up.
+
+---
+
+## Re-check — 08:30 (+07:00)
+
+Workstream SSO recovered on retry (`DISPLAY=:1 node scripts/workstream-login.js`, succeeded this time).
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ completed | LongVV 7.5h WS this week (4h on 08-27), TuanTT/ThanhNX also logging; Kai daily report already confirmed present in Slack section |
+| John Yi | ✓ completed | amazing_meds WS: 0 members logged yet this week (Mon-Wed), but TuanNT has 24h combined this week on speedventory (Bailey) — not a 0h-combined case, gate clears |
+| Elliott | ✓ completed | generator WS: KhanhHH 10h this week (4h on 08-26) |
+| Bailey | ✓ completed | speedventory WS: TuanNT 24h this week (8h/day Mon-Wed) |
+| Rebecca | ✓ completed | rebecca WS: 0 members yet, but TuanNT combined non-zero via speedventory (see John Yi) |
+| Blair Brown | ✓ completed | blair_brown WS: 0h this week — deprioritized per memory (LeNH=James full-time, ignore Blair Brown 0h) |
+| Philip | ○ still incomplete | MS Teams thread w/ Philip Briggs — his last message (1:35PM, no date shown) is him explaining the Elevate365 demo concept in more depth after Will asked for details; reads as awaiting Will's reply |
+| Arthur - Meta-Stamp | ○ still incomplete | Piece 13 full 6-source check not run this pass — needs standalone `/daily-report arthur` |
+| Elena - SamGuard | ○ still incomplete | PR #309 still dirty (unchanged) |
+| Fountain | ○ still incomplete | mike62798179 customer complaint still unanswered |
+| Ohcleo | ○ still incomplete | Celine's audio bug report still unanswered |
+
+**Cleared:** Maddy, John Yi, Elliott, Bailey, Rebecca, Blair Brown (6 items — all via Trello API, verified 200 responses)
+**Still open:** Philip, Arthur, Elena - SamGuard, Fountain, Ohcleo
