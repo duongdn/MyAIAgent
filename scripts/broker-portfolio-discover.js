@@ -33,7 +33,7 @@ const URLS = {
 
 const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
 const OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}.json`);
-const CAPTURE_MS = 60 * 1000;
+const CAPTURE_MS = 90 * 1000;
 
 function loadCreds(broker) {
   try {
