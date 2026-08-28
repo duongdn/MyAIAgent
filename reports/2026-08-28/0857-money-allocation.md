@@ -80,3 +80,9 @@ Liquid        ██▎             4.5%
 - **Ngắn hạn (30 ngày):** Xác minh giao dịch/lý do ví Larion về 0 — đây là mục ưu tiên cao nhất, ảnh hưởng trực tiếp đến độ chính xác net worth.
 - **Trung hạn (6–12 tháng):** Khi các sổ tiết kiệm đáo hạn, cân nhắc chuyển một phần sang ETF/Fund (VCBS/VCBF) để tăng tỷ trọng cổ phiếu về gần benchmark 30–50%.
 - **Dài hạn (>1 năm):** Duy trì kỷ luật không đòn bẩy; theo dõi tỷ trọng vàng nếu giá tiếp tục tăng mạnh có thể chốt lời một phần.
+
+---
+
+## Correction (post-report, 09:01)
+
+The "Larion cổ phần về 0" item above (🔴 Cao risk, marked unresolved) is **not a real issue**. User confirmed: the wallet is normally inactive; it was briefly reactivated to bump the manual value to ~1,000,000,000 ₫ (800M + 200M), then deactivated again — the 0/inactive read is the wallet's normal resting state, not a loss or reset. Net Worth drop in this snapshot is a reporting artifact of the wallet's inactive state, not an actual asset loss. See memory `feedback_larion_valuation_confirmed_by_user` for standing guidance — do not re-flag this pattern in future reports.

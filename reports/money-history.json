@@ -354,7 +354,7 @@
         "liquid": 185768488
       },
       "method": "dashboard_verified",
-      "note": "NW -1,430,390,440 vs 08-26 (8,055,945,149 -> 6,625,554,709), -17.8%. Entirely driven by Larion co phan wallet dropping from 800,000,000 to 0 and being marked inactive -- no transaction record explains it (balance was always a manual entry, not txn-derived). Needs user confirmation: valid withdrawal vs accidental reset. All other categories (BDS, Vang, Tiet kiem) essentially unchanged. Reconstruction gap ~74.3M consistent with historical pattern. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
+      "note": "Net Worth shows -1,430,390,440 vs 08-26 (8,055,945,149 -> 6,625,554,709), -17.8%, but this is NOT a real loss. Larion co phan wallet is normally inactive; user briefly reactivates it to bump the manual value then deactivates again (confirmed by user 2026-08-28). Went from 800,000,000 -> ~1,000,000,000 (bumped +200M) -> back to inactive/0 in the API. Last known active value: ~1,000,000,000 (not reflected in this snapshot's net_worth figure since wallet reads 0 while inactive). Do not alert on future Larion inactive/0 swings. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
     }
   ]
 }
