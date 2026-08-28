@@ -104,3 +104,13 @@ Correction #2 wrongly assumed Larion cổ phần was bumped +200,000,000 (to 1,0
 ## Correction #4 (10:02) — FINAL, supersedes Correction #3
 
 User reactivated VCBS in the MISA app; API now correctly returns `currentAmount = 641,255,619.52`. Larion cổ phần stays inactive by design, fixed at **800,000,000** (per user: "Larion cứ giữ 800" — do not recompute this). **Final Net Worth = 8,052,310,328 ₫** (trueTotalBalance 7,252,310,328, now including active VCBS, + Larion cổ phần 800,000,000). See `0857-money-summary.md` / `0857-money-portfolio.md` for final figures and memory `feedback_larion_valuation_confirmed_by_user` for the resolved rule going forward.
+
+---
+
+## Correction #5 (11:24) — Broker API cross-check (informational, does not change headline Net Worth)
+
+Fetched real holdings directly from FPTS EzTrade and VCBS platforms (new automated capability, see `.claude/commands/me/money-report.md` Piece 8):
+- **FPTS real NAV: 388,526,529 ₫** (VEA 11,000 CP @ 35,300, giá vốn TB 35,053, lãi +2,720,000/+0.71%) — vs cost-basis estimate 381,301,151 used above (−1.9%, within normal variance).
+- **VCBS real NAV: 647,803,047 ₫** (E1VFVN30 10,000 CCQ, FPT 2,500 CP, FUEVN100 3,000 CCQ, VIX 800 CP) — vs MISA raw currentAmount 641,255,620 used above (−1.0%, within normal variance).
+
+Both confirm the existing estimates were reasonably accurate. **Headline Net Worth intentionally left at 8,052,310,328 ₫** (MISA `trueTotalBalance`-anchored, per standing rule) — not recomputed from these parts, to avoid a 5th same-day correction on uncertain footing about how MISA's totaldashboard internally aggregates investment-wallet values. Future runs can use these broker APIs directly for the FPTS/VCBS rows in Portfolio/Allocation tables.
