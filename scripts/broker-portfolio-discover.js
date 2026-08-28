@@ -33,7 +33,8 @@ const URLS = {
 
 const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
 const OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}.json`);
-const CAPTURE_MS = 90 * 1000;
+const CAPTURE_MS = 5 * 60 * 1000;
+const FLUSH_MS = 10 * 1000;
 
 function loadCreds(broker) {
   try {
@@ -112,16 +113,23 @@ async function main() {
   });
 
   console.log(`Opening ${URLS[BROKER]} — will try to auto-fill account/password, then you enter OTP manually, then navigate to your portfolio/holdings page.`);
-  console.log(`Capturing all JSON XHR/fetch responses for ${CAPTURE_MS / 1000}s...`);
+  console.log(`Capturing all JSON XHR/fetch responses for up to ${CAPTURE_MS / 1000}s, flushing to disk every ${FLUSH_MS / 1000}s...`);
   await page.goto(URLS[BROKER], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(e => console.error('goto error:', e.message));
 
   const creds = loadCreds(BROKER);
   await tryAutofill(page, creds);
 
+  const WS_OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}-ws.json`);
+  const flushInterval = setInterval(() => {
+    fs.writeFileSync(OUT_FILE, JSON.stringify(captured, null, 2));
+    fs.writeFileSync(WS_OUT_FILE, JSON.stringify(wsFrames, null, 2));
+    console.log(`[flush] ${captured.length} HTTP, ${wsFrames.length} WS frames written`);
+  }, FLUSH_MS);
+
   await new Promise((resolve) => setTimeout(resolve, CAPTURE_MS));
+  clearInterval(flushInterval);
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(captured, null, 2));
-  const WS_OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}-ws.json`);
   fs.writeFileSync(WS_OUT_FILE, JSON.stringify(wsFrames, null, 2));
   console.log(`\nSaved ${captured.length} captured HTTP responses to ${OUT_FILE}`);
   console.log(`Saved ${wsFrames.length} captured WebSocket frames to ${WS_OUT_FILE}`);
