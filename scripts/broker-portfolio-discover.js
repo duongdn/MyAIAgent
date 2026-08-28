@@ -61,10 +61,20 @@ async function tryAutofill(page, creds) {
     };
     setVal(textInput, accountNumber);
     setVal(passInput, password);
-    return true;
+
+    const form = passInput.closest('form');
+    const submitBtn = (form && form.querySelector('button[type="submit"], input[type="submit"]'))
+      || Array.from(document.querySelectorAll('button')).find(b => /đăng nhập|login|sign in/i.test(b.textContent));
+    if (submitBtn) {
+      submitBtn.click();
+      return 'submitted';
+    }
+    return 'filled-only';
   }, creds.accountNumber, creds.password);
-  if (filled) {
-    console.log('[autofill] account number + password filled — submit manually if needed, then enter OTP.');
+  if (filled === 'submitted') {
+    console.log('[autofill] account number + password filled AND submitted — enter OTP when prompted.');
+  } else if (filled === 'filled-only') {
+    console.log('[autofill] filled but no submit button found — submit manually, then enter OTP.');
   } else {
     console.log('[autofill] could not find login inputs — fill manually.');
   }
