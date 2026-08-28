@@ -181,6 +181,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
+- [feedback_siteground_skip_permanently](server-monitor/feedback_siteground_skip_permanently.md) — 🔴 2026-08-28: skip Siteground/Bailey step 1 entirely, CAPTCHA unautomatable
 
 ## finance-report
 - [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — 6-sheet FPT/VEA-style report — 🔴 format DURING build
