@@ -98,3 +98,9 @@ Correction #1 (09:01) only addressed Larion cổ phần but was still incomplete
 ## Correction #3 (09:41) — supersedes Correction #2 above
 
 Correction #2 wrongly assumed Larion cổ phần was bumped +200,000,000 (to 1,000,000,000) based on a misread of user phrasing — no such transaction exists in the data, and the user confirmed the value was NOT changed, only the wallet was toggled inactive again on 28/08. **Correct carry-forward: Larion cổ phần = 800,000,000 (unchanged), VCBS = 612,855,620 (unchanged). Final Net Worth = 8,038,410,329 ₫**, essentially flat vs 26/08 (8,055,945,149, −17.5M from normal gold/liquid movement). See `0857-money-summary.md` and `0857-money-portfolio.md` for corrected figures.
+
+---
+
+## Correction #4 (10:02) — FINAL, supersedes Correction #3
+
+User reactivated VCBS in the MISA app; API now correctly returns `currentAmount = 641,255,619.52`. Larion cổ phần stays inactive by design, fixed at **800,000,000** (per user: "Larion cứ giữ 800" — do not recompute this). **Final Net Worth = 8,052,310,328 ₫** (trueTotalBalance 7,252,310,328, now including active VCBS, + Larion cổ phần 800,000,000). See `0857-money-summary.md` / `0857-money-portfolio.md` for final figures and memory `feedback_larion_valuation_confirmed_by_user` for the resolved rule going forward.

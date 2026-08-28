@@ -1,24 +1,24 @@
 ---
 name: feedback_larion_valuation_confirmed_by_user
-description: "Larion cổ phần AND VCBS are normally-inactive wallets whose API currentAmount resets to 0 while inactive — MUST carry forward last known active value unchanged, never zero it out or invent a new bump without an explicit user-stated number"
+description: "Larion cổ phần (fixed 800M, kept inactive) and VCBS are manually-tracked walletType-3 investment wallets — deactivating them can zero currentAmount in the API with NO recoverable history; only fix is reactivating in the app to read the true value"
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: fca793ff-4b7e-4e36-928e-4de9e68dd255
-  modified: 2026-08-28T02:39:23.830Z
+  modified: 2026-08-28T02:55:42.814Z
 ---
 
-Both "Larion cổ phần" and "VCBS" are wallets the user keeps `inActive` most of the time by design. While inactive, MISA's API returns `currentAmount: 0` for them (and the cost-basis-from-transactions formula also nets to ~0 for VCBS since no new Cho vay/Thu nợ transactions occur while dormant) — this 0 is NOT their real value, it's just what the API shows for an inactive wallet.
+**Confirmed final values (2026-08-28, after 4 rounds of correction — see history below):**
+- Larion cổ phần = **800,000,000** (confirmed 2026-08-26 real sale-price valuation). User keeps this wallet permanently `inActive`. User explicitly said (2026-08-28): "Larion cứ giữ 800" — do NOT change this number without an explicit new instruction, and do NOT try to "correct" it just because the API shows 0 while inactive.
+- VCBS = read live from API when active. On 2026-08-28 after user reactivated it: `currentAmount = 641,255,619.52`. This wallet's true value is NOT reliably computable from transaction cost-basis (Cho vay/Thu nợ nets to ~0 since full redemption in June 2026) — the API's `currentAmount` while ACTIVE is the only correct source.
 
-**Confirmed values (as of 2026-08-28, corrected after 2 rounds of user correction):**
-- Larion cổ phần = **800,000,000** (confirmed 2026-08-26 as real sale-price valuation; user set it inactive again on 2026-08-28 — value itself did NOT change, do not add any bump without an explicit user-given number).
-- VCBS = **612,855,620** (last known value as of 2026-08-26, wallet inactive both before and after, unchanged).
+**Root cause finally identified:** Both wallets are `walletType: 3` (investment) with balances set by manual/UI entry, not by transaction flow. MISA's API zeroes `currentAmount` for this wallet type once deactivated, and **does not log any balance-edit or deactivation history** — no "Điều chỉnh"/"Cân bằng" transaction category exists anywhere in the account's full transaction history. This differs from other `inActive` wallets like "Nhà", "long an res", "vàng" which keep their full `currentAmount` even while inactive (those aren't loan/investment-type manual entries in the same bucket, or simply haven't been freshly toggled — exact mechanism still not fully understood, but empirically confirmed: once VCBS/Larion go inactive, currentAmount reads 0 and stays 0 until reactivated).
 
-**History of the mistake (why this note is this detailed):** On 2026-08-28 a report run zeroed both wallets out (false "Net Worth dropped 1.43B" alarm). First fix wrongly assumed Larion was bumped +200,000,000 based on a misread of the user's own words ("tôi chỉ mở lại để tăng lên 200 tr rồi inactive lại") and produced a second wrong number (8,238,410,329, showing a suspicious +182M jump). User caught THIS too ("vô lí, tự nhiên 1 ngày mà tăng lên 200 tr, tôi có làm gì đâu") and finally clarified: Larion's value was already 800M from before, they only toggled it inactive on 2026-08-28 — no bump happened. **Never infer a new numeric value for a manually-tracked wallet from ambiguous user phrasing — if a change is claimed, ask for the exact resulting number before writing it into any report.**
+**How to apply — MANDATORY:**
+1. For Larion cổ phần specifically: always use 800,000,000 as its value regardless of API `inActive`/`currentAmount` state, unless the user gives an explicit new number. Never invent a "bump" from ambiguous phrasing (this happened twice — see history) — ask for the exact number if a change is claimed.
+2. For VCBS or any other walletType-3 wallet showing `currentAmount: 0` while `inActive: true`: do NOT guess a carry-forward value. There is no way to reconstruct it from API/transaction data (MISA keeps no audit trail for manual balance edits). Ask the user to briefly reactivate the wallet in the MISA app so the API returns the true `currentAmount`, then use that value directly (no formula needed once active — raw `currentAmount` is correct for VCBS specifically, since its cost-basis-from-transactions is stale/near-zero post-full-redemption).
+3. `trueTotalBalance.amount` (`/wallets/totaldashboard`) correctly includes any ACTIVE wallet's value automatically — once VCBS is active, no manual addition is needed; only add Larion cổ phần's fixed 800,000,000 separately since the user keeps it permanently inactive.
+4. Net Worth formula going forward: `trueTotalBalance.amount` (as returned live) + 800,000,000 (Larion cổ phần, fixed, always add since it stays inactive by design).
+5. Confirmed 2026-08-28 final: trueTotalBalance = 7,252,310,328 (VCBS active) + 800,000,000 (Larion) = **8,052,310,328**.
 
-**How to apply — MANDATORY going forward:**
-1. When a wallet in `apiData.accounts` shows `inActive: true` AND `currentAmount: 0`, do NOT use 0 as its value. Look up its last known non-zero value from the most recent prior `reports/{date}/{time}-money-portfolio.md` or `reports/money-history.json` snapshot and carry it forward **unchanged**.
-2. Only change a carried-forward wallet's value when the user gives an explicit final number (not a vague "tăng lên X" — confirm the resulting total before writing it anywhere).
-3. `trueTotalBalance.amount` (`/wallets/totaldashboard`) excludes inactive wallets entirely — it is NOT sufficient alone as Net Worth when such wallets exist. Corrected Net Worth = `trueTotalBalance.amount` + Σ(carried-forward inactive wallet values).
-4. Never report a Net Worth drop (or suspicious jump) as real without first checking whether it's explained by a wallet going inactive/active. If a correction itself produces a surprising delta, treat that as a signal you likely misapplied the carry-forward value — verify with the user before publishing again.
-5. Current correct figures (2026-08-28): Larion cổ phần = 800,000,000 (carry forward, unchanged), VCBS = 612,855,620 (carry forward, unchanged). True Net Worth = 6,625,554,709 (raw totaldashboard) + 800,000,000 + 612,855,620 = **8,038,410,329**.
+**History of mistakes on this (for context on why this rule is this explicit):** 4 sequential wrong reports on 2026-08-28 — (1) reported a false 1.43B "loss" alarm when both wallets first zeroed, (2) wrongly assumed Larion was bumped +200M from misread user phrasing, (3) wrongly assumed both wallets should "carry forward" silently without evidence that rule generalizes, (4) discovered other inactive wallets (Nhà, long an res, vàng) keep full value while inactive, invalidating the carry-forward generalization. Final resolution: ask user to reactivate the specific wallet in-app rather than guessing.

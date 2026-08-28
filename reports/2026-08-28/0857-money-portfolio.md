@@ -1,35 +1,34 @@
-# Portfolio Report — 2026-08-28 08:57
+# Portfolio Report — 2026-08-28 08:57 (final update 10:02)
 
 ## Summary
 | | Amount (₫) | % Gross | % Net |
 |-|-----------|---------|-------|
-| Gross Assets (corrected) | 8,112,719,485 | 100% | — |
+| Gross Assets (final) | 8,126,314,485 | 100% | — |
 | Liabilities  | −3,678 | 0.0% | — |
-| **Net Worth (corrected)** | **8,038,410,329** | — | **100%** |
-| Net Worth (raw totaldashboard, excl. inactive wallets) | 6,625,554,709 | — | — |
+| **Net Worth (final)** | **8,052,310,328** | — | **100%** |
 
-**Correction (09:41, 3rd pass):** raw totaldashboard excludes "Larion cổ phần" and "VCBS" — both normally-inactive wallets whose API value resets to 0 while inactive. Carried forward UNCHANGED: Larion cổ phần = 800,000,000 (user only toggled inactive again on 28/08, no value change), VCBS = 612,855,620 (unchanged since 26/08). See memory `feedback_larion_valuation_confirmed_by_user`. Gap ~74.3M between gross/net is the separate, pre-existing market-P&L pattern (unrelated, no data-integrity concern).
+**Final (10:02):** User reactivated VCBS in the MISA app — API now correctly reads `currentAmount = 641,255,619.52` (active, flows into `trueTotalBalance` automatically). Larion cổ phần stays inactive by design, fixed at 800,000,000 per user instruction. Net Worth = trueTotalBalance (7,252,310,328, incl. active VCBS) + Larion cổ phần (800,000,000) = **8,052,310,328**. See memory `feedback_larion_valuation_confirmed_by_user` for the full resolved rule (supersedes 3 prior wrong correction rounds today).
 
 ## By Account (sorted by balance desc, nonzero only)
 | Account | Balance (₫) | % Net | Category | Status |
 |---------|------------|-------|----------|--------|
-| Larion cổ phần | 800,000,000 | 10.0% | 📈 Investment | inactive (carry-forward, unchanged) |
-| Nhà | 2,500,000,000 | 30.3% | 🏠 Real Estate | inactive |
-| long an res | 1,020,000,000 | 15.4% | 🏠 Real Estate | inactive |
-| vàng | 750,000,000 | 11.3% | 🥇 Gold | inactive |
-| VCBF | 594,063,000 | 9.0% | 📈 Investment | active |
-| FPTS | 381,301,151 | 5.8% | 📈 Investment | active |
-| Paypal | 88,556,170 | 1.3% | 💵 Liquid | active |
-| Finhay | 74,404,069 | 1.1% | 📈 Investment | active |
-| vcb | 54,280,763 | 0.8% | 💵 Liquid | active |
-| Tikop | 40,024,366 | 0.6% | 💵 Liquid | active |
+| Nhà | 2,500,000,000 | 31.1% | 🏠 Real Estate | inactive |
+| long an res | 1,020,000,000 | 12.7% | 🏠 Real Estate | inactive |
+| Larion cổ phần | 800,000,000 | 9.9% | 📈 Investment | inactive (fixed value, per user) |
+| vàng | 750,000,000 | 9.3% | 🥇 Gold | inactive |
+| VCBS | 641,255,620 | 8.0% | 📈 Investment | **active** (reactivated 10:02) |
+| VCBF | 594,063,000 | 7.4% | 📈 Investment | active |
+| FPTS | 381,301,151 | 4.7% | 📈 Investment | active |
+| Paypal | 88,556,170 | 1.1% | 💵 Liquid | active |
+| Finhay | 74,404,069 | 0.9% | 📈 Investment | active |
+| vcb | 54,280,763 | 0.7% | 💵 Liquid | active |
+| Tikop | 40,024,366 | 0.5% | 💵 Liquid | active |
 | Ví | 2,000,000 | 0.0% | 💵 Liquid | active |
 | Momo | 900,000 | 0.0% | 💵 Liquid | inactive |
-| VCBS | 612,855,620 | 7.6% | 📈 Investment | inactive (carry-forward, unchanged) |
 | nam á | 10,867 | 0.0% | 💵 Liquid | inactive |
 | Payoneer | −3,678 | 0.0% | 💳 Debt (FX) | inactive |
 
-Investment wallets (VCBF/FPTS/Finhay/VCBS) valued as `cost_basis_remaining (Σ Cho vay − Σ Thu nợ) + currentAmount`, not raw currentAmount.
+VCBS now active — using raw `currentAmount` directly (its cost-basis-from-transactions formula nets to ~0 since fully redeemed in June 2026, so raw currentAmount while active is the correct figure). VCBF/FPTS/Finhay still valued as `cost_basis_remaining (Σ Cho vay − Σ Thu nợ) + currentAmount`.
 
 ## Savings
 | Book | Rate | Maturity | Amount (₫) |
@@ -55,7 +54,7 @@ Liquid (Ví/vcb/Paypal/Tikop/Momo/nam á, excl. Payoneer debt): ~185.8M ₫
 6-month target (70M/mo × 6): 420M ₫ → shortfall if savings excluded, but savings pool (1.19B) covers it comfortably as semi-liquid reserve.
 
 ## Alerts
-- ✅ **RESOLVED:** "Larion cổ phần" and "VCBS" both show 0 in the raw API because they're inactive — carried forward their last known values (1,000,000,000 and 612,855,620 respectively) per user confirmation. No net-worth loss occurred.
-- ✅ No concentration flag beyond the above data question — Nhà at 37.7% of NW is expected (primary residence).
+- ✅ **RESOLVED (final):** Larion cổ phần fixed at 800,000,000 (stays inactive by design). VCBS reactivated by user, now reading correct live value 641,255,620 from the API. No net-worth loss occurred at any point — the 3 prior "correction" rounds today were the agent's own reasoning errors, not real portfolio changes.
+- ✅ No concentration flag — Nhà at 31.1% of NW is expected (primary residence).
 - ✅ Debt negligible (Payoneer −3,678 ₫ FX residual only; VCB Visa balance = 0, paid off).
 - ✅ Liquidity: savings pool + liquid cash together exceed 6-month expense target.
