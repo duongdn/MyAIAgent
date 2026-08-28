@@ -382,6 +382,25 @@ If a historical entry has `categories: null`, backfill chart literals from that 
 
 ---
 
+## Piece 8 — Broker Portfolios (`/money-report brokers`) — FPTS live, VCBS pending
+
+Fetches actual stock holdings directly from the brokers' own trading platforms (FPTS EzTrade, VCBS Trade Pro), separate from MISA. This gives real-time market price + P/L per position instead of MISA's manual `currentAmount` entries for these wallets.
+
+**FPTS — working (2026-08-28):**
+- Script: `node scripts/fpts-portfolio-report.js` (headless by default; add `--headed` to force a visible browser for first-time login/OTP).
+- Auth: persistent Chrome profile `tmp/fpts-chrome-profile/` (gitignored). Credentials auto-filled from `config/.broker-accounts.json` (`.fpts.accountNumber` / `.fpts.password`, gitignored plaintext + `.enc` committed via `scripts/lib/save-secret-config.js` — **never hardcode these in a script**). OTP still requires the user manually — session persists across headless runs afterward until FPTS invalidates it (unknown TTL, re-run `--headed` if the script reports "Not authenticated").
+- Data source: `https://eztrade.fpts.com.vn/report/AssetReport2` — a server-rendered HTML report page, NOT a JSON API (confirmed after extensive discovery — EZTrade's only WebSocket/SignalR traffic is market-wide ticker data, irrelevant to holdings). The script scrapes the DOM table directly.
+- Output: `{ netAssetValue, cashInAccount, stockValueAvailable, marginDebt, holdings: [{ symbol, quantityAvailable, totalQuantity, marketPrice, marketValue, avgCost, totalCost, unrealizedPL, unrealizedPLPercent }] }`.
+- **Known column-mapping gotcha:** the holdings table uses `colspan` to collapse the "CK mua chờ về / quyền chờ về / cầm cố / hạn chế" sub-columns into a single `<td>` when they're all 0 — so a normal row has 10 `<td>`s, not 17. If FPTS ever shows a nonzero value in one of those collapsed columns, the column count changes and the fixed-index mapping in `scrapeAssetReport()` will misalign — verify against `raw` (the raw cell array, always included) if numbers look off.
+
+**VCBS — not yet built.** Repeat the same discovery pattern (`scripts/broker-portfolio-discover.js vcbs`, long-running with periodic flush, watch for HTTP OR see if it's another server-rendered report page like FPTS) before writing `scripts/vcbs-portfolio-report.js`.
+
+**Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this for VCBS or if FPTS's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise.
+
+**How this feeds into Allocation/Portfolio:** once both brokers are live, use their real `holdings` + `marketValue` as the authoritative value for the VCBS/FPTS wallets in Piece 2/3, superseding MISA's `cost_basis_remaining + currentAmount` approximation formula for those two wallets specifically (MISA's manual tracking is now redundant/secondary — keep it only as a cross-check).
+
+---
+
 ## Full Run (`/money-report`)
 
 Runs all 5 report pieces + the dashboard (Piece 7). Sequence:

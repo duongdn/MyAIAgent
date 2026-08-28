@@ -28,7 +28,7 @@ if (!['fpts', 'vcbs'].includes(BROKER)) {
 
 const URLS = {
   fpts: 'https://eztrade.fpts.com.vn/',
-  vcbs: 'https://vcbs.com.vn/vi/dich-vu-truc-tuyen',
+  vcbs: 'https://trading.vcbs.com.vn/',
 };
 
 const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
