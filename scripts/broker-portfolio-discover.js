@@ -171,10 +171,12 @@ async function main() {
   if (result !== 'submitted') await debugDump(page, BROKER);
 
   const WS_OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}-ws.json`);
-  const flushInterval = setInterval(() => {
+  const flushInterval = setInterval(async () => {
     fs.writeFileSync(OUT_FILE, JSON.stringify(captured, null, 2));
     fs.writeFileSync(WS_OUT_FILE, JSON.stringify(wsFrames, null, 2));
-    console.log(`[flush] ${captured.length} HTTP, ${wsFrames.length} WS frames written`);
+    const shotPath = path.join(__dirname, `../tmp/broker-discover-${BROKER}-screenshot.png`);
+    await page.screenshot({ path: shotPath }).catch(() => {});
+    console.log(`[flush] ${captured.length} HTTP, ${wsFrames.length} WS frames written, url=${page.url()}`);
   }, FLUSH_MS);
 
   await new Promise((resolve) => setTimeout(resolve, CAPTURE_MS));
