@@ -35,6 +35,41 @@ const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
 const OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}.json`);
 const CAPTURE_MS = 3 * 60 * 1000;
 
+function loadCreds(broker) {
+  try {
+    const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/.broker-accounts.json'), 'utf8'));
+    return cfg[broker] || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function tryAutofill(page, creds) {
+  if (!creds) return false;
+  await new Promise((r) => setTimeout(r, 2000));
+  const filled = await page.evaluate((accountNumber, password) => {
+    const inputs = Array.from(document.querySelectorAll('input'));
+    const textInput = inputs.find(i => (i.type === 'text' || i.type === 'tel' || i.type === '') && i.offsetParent !== null);
+    const passInput = inputs.find(i => i.type === 'password' && i.offsetParent !== null);
+    if (!textInput || !passInput) return false;
+    const setVal = (el, val) => {
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+      setter.call(el, val);
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+    setVal(textInput, accountNumber);
+    setVal(passInput, password);
+    return true;
+  }, creds.accountNumber, creds.password);
+  if (filled) {
+    console.log('[autofill] account number + password filled — submit manually if needed, then enter OTP.');
+  } else {
+    console.log('[autofill] could not find login inputs — fill manually.');
+  }
+  return filled;
+}
+
 async function main() {
   fs.mkdirSync(PROFILE_DIR, { recursive: true });
   const browser = await puppeteer.launch({
@@ -66,9 +101,12 @@ async function main() {
     }
   });
 
-  console.log(`Opening ${URLS[BROKER]} — log in manually (OTP etc.), then navigate to your portfolio/holdings page.`);
+  console.log(`Opening ${URLS[BROKER]} — will try to auto-fill account/password, then you enter OTP manually, then navigate to your portfolio/holdings page.`);
   console.log(`Capturing all JSON XHR/fetch responses for ${CAPTURE_MS / 1000}s...`);
   await page.goto(URLS[BROKER], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(e => console.error('goto error:', e.message));
+
+  const creds = loadCreds(BROKER);
+  await tryAutofill(page, creds);
 
   await new Promise((resolve) => setTimeout(resolve, CAPTURE_MS));
 
