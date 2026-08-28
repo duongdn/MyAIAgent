@@ -39,8 +39,9 @@ VCBS now active — using raw `currentAmount` directly (its cost-basis-from-tran
 | 6m cake vpbank | 9.2% | 2027-02-25 | 190,000,000 |
 | 6m rút gốc linh hoạt | 7% | 2027-02-10 | 100,000,000 |
 | 1m | 4.75% | 2026-09-10 | 100,000,000 |
-| nam á 6m | 8% | 2024-06-01 (past due) | 2,005,479 |
-| **Total** | | | **1,193,923,479** |
+| **Total** | | | **1,191,918,000** |
+
+**Correction (10:08):** "nam á 6m" excluded — `savingIsFinalize: true`, matured 2024-06-01, already tất toán, nothing left. Its `currentAmount: 2,005,479.45` in the API is stale leftover data (known MISA bug pattern, opposite direction of the stale-zero case: here a finalized book shows a stale nonzero instead of correctly showing 0). Confirmed by user: no money remains in this book.
 
 ## Upcoming Maturities (within 90 days)
 | Deposit | Amount (₫) | Maturity |

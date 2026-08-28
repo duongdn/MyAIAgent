@@ -164,13 +164,12 @@
         <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">381,301,151</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>VCBS</td><td>📈 ETF (active)</td><td class="right">641,255,620</td><td><span class="badge ok">✅ Active lại 10:02, đúng giá trị API</span></td><td class="right" style="font-weight:600"></td></tr>
-        <tr><td>tikcop 5m</td><td>🏦 Tiết kiệm</td><td class="right">401,918,000</td><td><span class="badge info">7.5% · đáo hạn 13/10</span></td><td class="right" rowspan="7" style="font-weight:600;vertical-align:middle;border-left:2px solid #22c55e">1,193,923,479</td></tr>
+        <tr><td>tikcop 5m</td><td>🏦 Tiết kiệm</td><td class="right">401,918,000</td><td><span class="badge info">7.5% · đáo hạn 13/10</span></td><td class="right" rowspan="6" style="font-weight:600;vertical-align:middle;border-left:2px solid #22c55e">1,191,918,000</td></tr>
         <tr><td>vcb 6m CCTG</td><td>🏦 Tiết kiệm</td><td class="right">300,000,000</td><td><span class="badge info">7.5% · đáo hạn 10/02/2027</span></td></tr>
         <tr><td>6m cake vpbank</td><td>🏦 Tiết kiệm</td><td class="right">190,000,000</td><td><span class="badge info">9.2% · đáo hạn 25/02/2027</span></td></tr>
         <tr><td>6m rút gốc linh hoạt</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge info">7.0% · đáo hạn 10/02/2027</span></td></tr>
         <tr><td>tikcop 3 month</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge ok">8.1% — cao nhất DM · đáo hạn 10/10</span></td></tr>
         <tr><td>1m</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge warn">@ 4.75% · đáo hạn 10/09 (13 ngày)</span></td></tr>
-        <tr><td>nam á 6m (finalized)</td><td>🏦 Tiết kiệm</td><td class="right">2,005,479</td><td><span class="badge info">Đã tất toán, giữ lại trong tổng</span></td></tr>
         <tr><td>vàng (50 VGO)</td><td>🥇 Vàng</td><td class="right">750,000,000</td><td><span class="badge info">▼ nhẹ vs 753M trước</span></td><td class="right" style="font-weight:600">750,000,000</td></tr>
         <tr><td>Paypal (~3,371 USD)</td><td>💵 Liquid</td><td class="right">88,556,170</td><td><span class="badge info">◆ ~Không đổi</span></td><td class="right" rowspan="6" style="font-weight:600;vertical-align:middle;border-left:2px solid #06b6d4">185,768,488</td></tr>
         <tr><td>vcb</td><td>💵 Liquid</td><td class="right">54,280,763</td><td><span class="badge warn">▲ vs 10.6M trước (chuyển từ Ví/thưởng)</span></td></tr>
@@ -274,7 +273,7 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
       { label: '📈 Đầu tư',   data: [2209,2209,2209,2221,2221,2237,2263,2263,2263,2263,2263,2463,2463,2733], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [742,738,700,708,715,708,720,728,720,738,750,750,753,750],       backgroundColor: COLORS.gold },
-      { label: '🏦 Tiết kiệm',data: [1038,1038,1038,1038,1008,1008,1002,1002,1002,1192,1192,1192,1194,1194], backgroundColor: COLORS.savings },
+      { label: '🏦 Tiết kiệm',data: [1038,1038,1038,1038,1008,1008,1002,1002,1002,1192,1192,1192,1194,1192], backgroundColor: COLORS.savings },
       { label: '💵 Liquid',   data: [314,304,303,283,313,295,230,230,226,201,201,201,201,186],       backgroundColor: COLORS.liquid },
     ]
   },
@@ -296,7 +295,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
   data: {
     labels: LABELS,
     datasets: [
-      { label: '🏦 Tiết kiệm', data: [1038, 1038, 1038, 1038, 1008, 1008, 1002, 1002, 1002, 1192, 1192, 1192, 1194, 1194], backgroundColor: COLORS.savings, borderRadius: 3 },
+      { label: '🏦 Tiết kiệm', data: [1038, 1038, 1038, 1038, 1008, 1008, 1002, 1002, 1002, 1192, 1192, 1192, 1194, 1192], backgroundColor: COLORS.savings, borderRadius: 3 },
       { label: '💵 Liquid',    data: [314, 304, 303, 283, 313, 295, 230, 230, 226, 201, 201, 201, 201, 186],       backgroundColor: COLORS.liquid,  borderRadius: 3 },
     ]
   },
