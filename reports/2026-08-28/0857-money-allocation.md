@@ -16,7 +16,7 @@ Base excl. Nhà (2.5B): 4,125,554,709 ₫ (net worth − Nhà, approx for %)
 ## Chi tiết ETF + Fund
 - 🛡️ Fund (VCBF) — managed fund: 594,063,000 ₫
 - 📊 Cổ tức (FPTS) — VEA/ADP/ETF: 381,301,151 ₫
-- 🏛️ Fund (Finhay): 74,404,069 ₫
+- 🏛️ Fund (Finhay): 68,178,830 ₫ (broker-verified, lãi/lỗ −1,764,833 / −2.52%)
 - 📈 ETF (VCBS) — VN30/VN100/VN1000: 400,000 ₫ (mostly liquidated)
 
 ## Visual ASCII bar chart (excl. nhà)
@@ -147,3 +147,15 @@ Tổng giá trị cổ phiếu/quỹ 2 tài khoản môi giới: **1,016,570,000
 - **Finhay:** chỉ có app mobile, không tìm thấy web portal (`app.finhay.vn` không tồn tại) → Puppeteer (dựa trên trình duyệt) không khả thi trừ khi reverse-engineer traffic app mobile (phức tạp hơn nhiều so với cách đang dùng).
 - **VCBF:** không có 1 cổng duy nhất — có thể mua qua VCBF Mobile app, VCB Digibank, hoặc sàn phân phối (SSI, Fmarket, VNDIRECT). Cần xác nhận kênh mua thực tế: nếu qua web (VNDIRECT/Fmarket) có thể áp dụng cách tương tự FPTS/VCBS; nếu chỉ qua app thì gặp vấn đề như Finhay.
 - **Đề xuất:** giữ nguyên công thức cost-basis (đã đối chiếu khá chính xác qua FPTS/VCBS hôm nay, sai lệch chỉ ~1-2%) cho 2 ví này, trừ khi xác nhận VCBF mua qua kênh web cụ thể.
+
+---
+
+## Cập nhật Finhay — broker-verified (14:15)
+
+Đã xây xong `scripts/finhay-portfolio-report.js`, tự động hoá hoàn toàn (headless) qua `invest.fhsc.com.vn` (Finhay Securities/VinaSecurities API). Finhay là **quỹ (fund)**, không phải cổ phiếu — tài khoản giao dịch CP tại Finhay gần như 0.
+
+**NAV thật: 68,178,830 ₫** (100% trong quỹ, lãi/lỗ **−1,764,833 ₫ / −2.52%**) — so với ước tính cost-basis cũ 74,404,069 ₫ (chênh ~8.4%, trong ngưỡng bình thường).
+
+Chưa lấy được chi tiết từng quỹ cụ thể (VCBF-TBF/AIF/BCF hay quỹ khác) — click vào chi tiết quỹ trên web bị redirect sang app store, chưa tìm được endpoint web thay thế. Chỉ có tổng NAV + P/L.
+
+**Nhận xét:** Finhay đang lỗ nhẹ -2.52% — nếu đây là quỹ trái phiếu/cân bằng thì bất thường (nên dương), cần xem lại có phải đang giữ quỹ cổ phiếu (STOCK_FUND) trong giai đoạn thị trường điều chỉnh không. Khuyến nghị kiểm tra trong app xem đang nắm quỹ nào để đánh giá đúng mức độ rủi ro.

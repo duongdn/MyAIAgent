@@ -20,7 +20,7 @@
 | VCBF | 594,063,000 | 7.4% | 📈 Investment | active |
 | FPTS | 388,526,529 | 4.8% | 📈 Investment | active (broker-verified via EzTrade, was 381,301,151 est.) |
 | Paypal | 88,556,170 | 1.1% | 💵 Liquid | active |
-| Finhay | 74,404,069 | 0.9% | 📈 Investment | active |
+| Finhay | 68,178,830 | 0.8% | 📈 Investment (Fund) | active (broker-verified via Finhay API, was 74,404,069 est.) |
 | vcb | 54,280,763 | 0.7% | 💵 Liquid | active |
 | Tikop | 40,024,366 | 0.5% | 💵 Liquid | active |
 | Ví | 2,000,000 | 0.0% | 💵 Liquid | active |

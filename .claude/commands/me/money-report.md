@@ -382,7 +382,7 @@ If a historical entry has `categories: null`, backfill chart literals from that 
 
 ---
 
-## Piece 8 — Broker Portfolios (`/money-report brokers`) — FPTS + VCBS both live
+## Piece 8 — Broker Portfolios (`/money-report brokers`) — FPTS + VCBS + Finhay live, VCBF pending
 
 Fetches actual stock holdings directly from the brokers' own trading platforms (FPTS EzTrade, VCBS invest platform), separate from MISA. This gives real-time market price + P/L per position instead of MISA's manual `currentAmount` entries for these wallets.
 
@@ -402,7 +402,16 @@ Fetches actual stock holdings directly from the brokers' own trading platforms (
   - `GET .../accounts/{accountId}/state` → NAV/cash/liabilities.
 - Output: `{ custodyAccountId, accountId, nav, cash, totalLiabilities, availableValue, holdings: [{ symbol, totalQty, availableQty, avgPrice, currentPrice, initialValue, currentValue, unrealizedPl }] }`.
 
-**Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this if either broker's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise. For a new SPA-based broker, do NOT try to automate the login button click/typing via blind coordinate-guessing — dump `getBoundingClientRect()` for every candidate input first, exclude generic header search boxes, and prefer asking the user for a one-time manual login over repeated automated attempts on a live financial login form.
+**Finhay — working (2026-08-28, total+P/L only):**
+- Script: `node scripts/finhay-portfolio-report.js` (headless by default; `--headed` for first manual login).
+- Web portal: `invest.fhsc.com.vn` (branded "Finhay Securities", backed by `api.vinasecurities.com`). Finhay's wallet is a FUND holding (VCBF/etc distributed via Finhay), not stocks — Finhay's own stock trading sub-accounts are near-zero.
+- **Gotcha:** `api.vinasecurities.com` rejects manual `page.evaluate(fetch(...))` calls even with the `access_token` Bearer header from `localStorage` — "Failed to fetch" (likely CORS preflight rejection from the custom header). Workaround: passively intercept the response via `page.on('response')` when the page loads naturally, same as the discovery tool, rather than firing a manual fetch.
+- Endpoint captured: `GET /accounts/v3/users/{userId}/assets/summary` → total NAV + fund/stock/bond breakdown + P/L. No itemized per-fund-certificate breakdown available on web (clicking fund detail redirects to an app-store deep link, dead end).
+- Output: `{ netAssetValue, fundValue, stockValue, cash, fundPnl, fundPnlRate }`.
+
+**VCBF — pending, channel-dependent.** No dedicated VCBF web portal confirmed. Ask the user which channel they hold it through: direct VCBF Mobile app (app-only, same problem as Finhay's fund-detail page), or a distributor with a real web portal (Fmarket, VNDIRECT DGO, SSI iFund) — if the latter, the same discovery approach applies to that distributor's site instead of vcbf.com directly.
+
+**Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs|finhay>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this if either broker's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise. For a new SPA-based broker, do NOT try to automate the login button click/typing via blind coordinate-guessing — dump `getBoundingClientRect()` for every candidate input first, exclude generic header search boxes, and prefer asking the user for a one-time manual login over repeated automated attempts on a live financial login form.
 
 **How this feeds into Allocation/Portfolio:** use FPTS/VCBS's real `holdings` + market values as the authoritative value for those wallets in Piece 2/3, superseding MISA's `cost_basis_remaining + currentAmount` approximation formula for these two wallets specifically (MISA's manual tracking is now redundant/secondary — keep it only as a cross-check).
 

@@ -163,6 +163,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_larion_valuation_confirmed_by_user](money-report/feedback_larion_valuation_confirmed_by_user.md) — 🔴 carry-forward rule for inactive wallets (Larion+VCBS) — 0/inactive API value ≠ real value, MUST use last known value
 - [reference_fpts_vcbs_broker_portfolio_scripts](money-report/reference_fpts_vcbs_broker_portfolio_scripts.md) — FPTS auto-fetch live via scripts/fpts-portfolio-report.js, VCBS pending, details in money-report.md Piece 8
 - [feedback_vcbs_automation_abandoned_use_fpts_pattern_only](money-report/feedback_vcbs_automation_abandoned_use_fpts_pattern_only.md) — ✅ VCBS RESOLVED — headless fetch works via scripts/vcbs-portfolio-report.js once user logs in once (login automation itself still fragile, ask user to do it manually)
+- [reference_finhay_portfolio_script](money-report/reference_finhay_portfolio_script.md) — ✅ Finhay fund NAV auto-fetch live via scripts/finhay-portfolio-report.js (total+PnL only, no itemized funds)
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴
