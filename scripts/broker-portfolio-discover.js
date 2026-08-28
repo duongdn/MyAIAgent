@@ -45,9 +45,46 @@ function loadCreds(broker) {
   }
 }
 
+async function debugDump(page, broker) {
+  const shotPath = path.join(__dirname, `../tmp/broker-discover-${broker}-screenshot.png`);
+  await page.screenshot({ path: shotPath, fullPage: true }).catch(() => {});
+  const inputsInfo = await page.evaluate(() => {
+    const all = [];
+    const walk = (root) => {
+      root.querySelectorAll('input').forEach((i) => all.push({
+        type: i.type, id: i.id, name: i.name, placeholder: i.placeholder, visible: i.offsetParent !== null,
+      }));
+      root.querySelectorAll('*').forEach((el) => { if (el.shadowRoot) walk(el.shadowRoot); });
+    };
+    walk(document);
+    const iframes = Array.from(document.querySelectorAll('iframe')).map(f => f.src);
+    return { inputs: all, iframes, url: location.href };
+  }).catch(() => ({ inputs: [], iframes: [], url: 'eval-failed' }));
+  console.log(`[debug] screenshot -> ${shotPath}`);
+  console.log(`[debug] page url: ${inputsInfo.url}`);
+  console.log(`[debug] inputs found: ${JSON.stringify(inputsInfo.inputs)}`);
+  if (inputsInfo.iframes.length) console.log(`[debug] iframes: ${JSON.stringify(inputsInfo.iframes)}`);
+}
+
+async function clickLoginButton(page) {
+  const clicked = await page.evaluate(() => {
+    const candidates = Array.from(document.querySelectorAll('button, a, div[role="button"]'));
+    const btn = candidates.find((el) => /đăng nhập/i.test(el.textContent) && el.offsetParent !== null);
+    if (btn) { btn.click(); return true; }
+    return false;
+  });
+  if (clicked) await new Promise((r) => setTimeout(r, 1500));
+  return clicked;
+}
+
 async function tryAutofill(page, creds) {
   if (!creds) return false;
   await new Promise((r) => setTimeout(r, 2000));
+  let hasInputs = await page.evaluate(() => Array.from(document.querySelectorAll('input')).some(i => i.type === 'password'));
+  if (!hasInputs) {
+    console.log('[autofill] no password field yet — clicking "Đăng nhập" button...');
+    await clickLoginButton(page);
+  }
   const filled = await page.evaluate((accountNumber, password) => {
     const inputs = Array.from(document.querySelectorAll('input'));
     const textInput = inputs.find(i => (i.type === 'text' || i.type === 'tel' || i.type === '') && i.offsetParent !== null);
@@ -128,8 +165,10 @@ async function main() {
   console.log(`Capturing all JSON XHR/fetch responses for up to ${CAPTURE_MS / 1000}s, flushing to disk every ${FLUSH_MS / 1000}s...`);
   await page.goto(URLS[BROKER], { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(e => console.error('goto error:', e.message));
 
+  await debugDump(page, BROKER);
   const creds = loadCreds(BROKER);
-  await tryAutofill(page, creds);
+  const result = await tryAutofill(page, creds);
+  if (result !== 'submitted') await debugDump(page, BROKER);
 
   const WS_OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}-ws.json`);
   const flushInterval = setInterval(() => {
