@@ -33,7 +33,7 @@ const URLS = {
 
 const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
 const OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}.json`);
-const CAPTURE_MS = 3 * 60 * 1000;
+const CAPTURE_MS = 60 * 1000;
 
 function loadCreds(broker) {
   try {
@@ -85,6 +85,16 @@ async function main() {
 
   const page = (await browser.pages())[0] || (await browser.newPage());
   const captured = [];
+  const wsFrames = [];
+
+  const cdp = await page.target().createCDPSession();
+  await cdp.send('Network.enable');
+  cdp.on('Network.webSocketFrameReceived', (params) => {
+    const payload = params.response.payloadData;
+    if (payload && payload.length < 20000) {
+      wsFrames.push({ requestId: params.requestId, payload });
+    }
+  });
 
   page.on('response', async (res) => {
     try {
@@ -111,7 +121,10 @@ async function main() {
   await new Promise((resolve) => setTimeout(resolve, CAPTURE_MS));
 
   fs.writeFileSync(OUT_FILE, JSON.stringify(captured, null, 2));
-  console.log(`\nSaved ${captured.length} captured responses to ${OUT_FILE}`);
+  const WS_OUT_FILE = path.join(__dirname, `../tmp/broker-discover-${BROKER}-ws.json`);
+  fs.writeFileSync(WS_OUT_FILE, JSON.stringify(wsFrames, null, 2));
+  console.log(`\nSaved ${captured.length} captured HTTP responses to ${OUT_FILE}`);
+  console.log(`Saved ${wsFrames.length} captured WebSocket frames to ${WS_OUT_FILE}`);
   await browser.close();
 }
 
