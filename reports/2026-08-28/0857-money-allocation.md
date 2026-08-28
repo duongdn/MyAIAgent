@@ -114,3 +114,36 @@ Fetched real holdings directly from FPTS EzTrade and VCBS platforms (new automat
 - **VCBS real NAV: 647,803,047 ₫** (E1VFVN30 10,000 CCQ, FPT 2,500 CP, FUEVN100 3,000 CCQ, VIX 800 CP) — vs MISA raw currentAmount 641,255,620 used above (−1.0%, within normal variance).
 
 Both confirm the existing estimates were reasonably accurate. **Headline Net Worth intentionally left at 8,052,310,328 ₫** (MISA `trueTotalBalance`-anchored, per standing rule) — not recomputed from these parts, to avoid a 5th same-day correction on uncertain footing about how MISA's totaldashboard internally aggregates investment-wallet values. Future runs can use these broker APIs directly for the FPTS/VCBS rows in Portfolio/Allocation tables.
+
+---
+
+## Đánh giá danh mục cổ phiếu (FPTS + VCBS, broker-verified, 11:33)
+
+Tổng giá trị cổ phiếu/quỹ 2 tài khoản môi giới: **1,016,570,000 ₫**
+
+| Mã | Sàn/Loại | Giá trị (₫) | % trong DM CP | Lãi/lỗ |
+|---|---|---|---|---|
+| VEA | FPTS, Dividend | 388,300,000 | 38.2% | +0.71% |
+| E1VFVN30 | VCBS, ETF VN30 | 355,000,000 | 34.9% | −0.56% |
+| FPT | VCBS, Growth | 184,250,000 | 18.1% | **+5.64%** |
+| FUEVN100 | VCBS, ETF VN100 | 77,700,000 | 7.6% | −1.06% |
+| VIX | VCBS, Securities | 11,320,000 | 1.1% | +0.18% |
+
+**Nhận xét:**
+- Cấu trúc khá cân bằng theo phong cách: 42.5% ETF chỉ số (an toàn, beta thị trường) + 38.2% dividend phòng thủ (VEA) + 18.1% tăng trưởng (FPT) + 1.1% vệ tinh nhỏ (VIX). Không xấu, nhưng VEA hơi nặng so với 1 vị thế đơn lẻ.
+- FPT là điểm sáng duy nhất (+5.64%, cao hơn hẳn phần còn lại) — phản ánh đúng đà tăng trưởng ngành công nghệ. Có thể cân nhắc giữ/tăng nếu vẫn tin vào câu chuyện tăng trưởng, không cần chốt lời sớm.
+- VIX chỉ 1.1% — vị thế quá nhỏ để có ý nghĩa (dù ngành chứng khoán thường hưởng lợi khi lãi suất giảm/thanh khoản tăng). Nên build thêm nếu có luận điểm, hoặc gộp về ETF nếu chỉ là thử nghiệm.
+- Không dùng margin ở cả 2 tài khoản (FPTS margin=0, VCBS nợ 5.6M chỉ là phí/thanh toán chờ, không phải vay ký quỹ) — rủi ro đòn bẩy = 0, điểm cộng lớn.
+- Tổng cổ phiếu/quỹ ~1.017 tỷ chiếm ~12.6% tổng tài sản ròng — tỷ trọng hợp lý, không quá tập trung vào 1 lớp tài sản.
+
+**Khuyến nghị:**
+- Không cần rebalance gấp — tất cả vị thế đang gần hoà vốn (không có lãi/lỗ lớn cần xử lý).
+- Theo dõi FPT nếu muốn tăng tỷ trọng tăng trưởng.
+- VEA giữ nguyên làm neo cổ tức nhưng tránh mua thêm để không tăng tập trung.
+- VIX cần quyết định rõ ràng (tăng vị thế có chủ đích hoặc rút gọn).
+
+## Finhay & VCBF — khả năng tự động hoá (11:33)
+
+- **Finhay:** chỉ có app mobile, không tìm thấy web portal (`app.finhay.vn` không tồn tại) → Puppeteer (dựa trên trình duyệt) không khả thi trừ khi reverse-engineer traffic app mobile (phức tạp hơn nhiều so với cách đang dùng).
+- **VCBF:** không có 1 cổng duy nhất — có thể mua qua VCBF Mobile app, VCB Digibank, hoặc sàn phân phối (SSI, Fmarket, VNDIRECT). Cần xác nhận kênh mua thực tế: nếu qua web (VNDIRECT/Fmarket) có thể áp dụng cách tương tự FPTS/VCBS; nếu chỉ qua app thì gặp vấn đề như Finhay.
+- **Đề xuất:** giữ nguyên công thức cost-basis (đã đối chiếu khá chính xác qua FPTS/VCBS hôm nay, sai lệch chỉ ~1-2%) cho 2 ví này, trừ khi xác nhận VCBF mua qua kênh web cụ thể.
