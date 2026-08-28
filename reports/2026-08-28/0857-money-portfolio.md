@@ -3,17 +3,17 @@
 ## Summary
 | | Amount (₫) | % Gross | % Net |
 |-|-----------|---------|-------|
-| Gross Assets (corrected) | 8,312,719,485 | 100% | — |
+| Gross Assets (corrected) | 8,112,719,485 | 100% | — |
 | Liabilities  | −3,678 | 0.0% | — |
-| **Net Worth (corrected)** | **8,238,410,329** | — | **100%** |
+| **Net Worth (corrected)** | **8,038,410,329** | — | **100%** |
 | Net Worth (raw totaldashboard, excl. inactive wallets) | 6,625,554,709 | — | — |
 
-**Correction (09:38):** raw totaldashboard excludes "Larion cổ phần" and "VCBS" — both normally-inactive wallets whose API value resets to 0 while inactive. Carried forward: Larion cổ phần = 1,000,000,000 (user bumped +200M on 28/08, then re-deactivated), VCBS = 612,855,620 (unchanged since 26/08). See memory `feedback_larion_valuation_confirmed_by_user`. Gap ~74.3M between gross/net is the separate, pre-existing market-P&L pattern (unrelated, no data-integrity concern).
+**Correction (09:41, 3rd pass):** raw totaldashboard excludes "Larion cổ phần" and "VCBS" — both normally-inactive wallets whose API value resets to 0 while inactive. Carried forward UNCHANGED: Larion cổ phần = 800,000,000 (user only toggled inactive again on 28/08, no value change), VCBS = 612,855,620 (unchanged since 26/08). See memory `feedback_larion_valuation_confirmed_by_user`. Gap ~74.3M between gross/net is the separate, pre-existing market-P&L pattern (unrelated, no data-integrity concern).
 
 ## By Account (sorted by balance desc, nonzero only)
 | Account | Balance (₫) | % Net | Category | Status |
 |---------|------------|-------|----------|--------|
-| Larion cổ phần | 1,000,000,000 | 12.1% | 📈 Investment | inactive (carry-forward) |
+| Larion cổ phần | 800,000,000 | 10.0% | 📈 Investment | inactive (carry-forward, unchanged) |
 | Nhà | 2,500,000,000 | 30.3% | 🏠 Real Estate | inactive |
 | long an res | 1,020,000,000 | 15.4% | 🏠 Real Estate | inactive |
 | vàng | 750,000,000 | 11.3% | 🥇 Gold | inactive |
@@ -25,7 +25,7 @@
 | Tikop | 40,024,366 | 0.6% | 💵 Liquid | active |
 | Ví | 2,000,000 | 0.0% | 💵 Liquid | active |
 | Momo | 900,000 | 0.0% | 💵 Liquid | inactive |
-| VCBS | 612,855,620 | 7.4% | 📈 Investment | inactive (carry-forward) |
+| VCBS | 612,855,620 | 7.6% | 📈 Investment | inactive (carry-forward, unchanged) |
 | nam á | 10,867 | 0.0% | 💵 Liquid | inactive |
 | Payoneer | −3,678 | 0.0% | 💳 Debt (FX) | inactive |
 

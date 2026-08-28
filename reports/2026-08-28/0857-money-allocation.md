@@ -92,3 +92,9 @@ The "Larion cổ phần về 0" item above (🔴 Cao risk, marked unresolved) is
 ## Correction #2 (09:38) — supersedes Correction #1 above
 
 Correction #1 (09:01) only addressed Larion cổ phần but was still incomplete — VCBS (612,855,620) was also wrongly zeroed by the same inactive-wallet bug. **Full corrected Net Worth = 8,238,410,329 ₫** (raw totaldashboard 6,625,554,709 + Larion cổ phần carry-forward 1,000,000,000 + VCBS carry-forward 612,855,620), up +182,465,180 vs 26/08. Neither wallet lost value — both are normally-inactive wallets whose API `currentAmount` resets to 0 while inactive; the fix is to always carry forward their last known value. See `reports/2026-08-28/0857-money-summary.md` and `0857-money-portfolio.md` for corrected figures, and memory `feedback_larion_valuation_confirmed_by_user` for the standing rule.
+
+---
+
+## Correction #3 (09:41) — supersedes Correction #2 above
+
+Correction #2 wrongly assumed Larion cổ phần was bumped +200,000,000 (to 1,000,000,000) based on a misread of user phrasing — no such transaction exists in the data, and the user confirmed the value was NOT changed, only the wallet was toggled inactive again on 28/08. **Correct carry-forward: Larion cổ phần = 800,000,000 (unchanged), VCBS = 612,855,620 (unchanged). Final Net Worth = 8,038,410,329 ₫**, essentially flat vs 26/08 (8,055,945,149, −17.5M from normal gold/liquid movement). See `0857-money-summary.md` and `0857-money-portfolio.md` for corrected figures.

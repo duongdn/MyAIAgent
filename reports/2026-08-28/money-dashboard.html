@@ -49,8 +49,8 @@
 <div class="kpi-row">
   <div class="kpi">
     <div class="label">Net Worth</div>
-    <div class="value" style="color:#22c55e">8.238 tỷ</div>
-    <div class="delta up">▲ +182.5M vs 26/08 (8.056 tỷ) — API tạm ẩn 2 ví inactive, đã cộng lại</div>
+    <div class="value" style="color:#f1f5f9">8.038 tỷ</div>
+    <div class="delta neutral">◆ −17.5M vs 26/08 (8.056 tỷ) — dao động nhỏ bình thường, không phải mất/tăng thực</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -78,7 +78,7 @@
   <div class="card" style="border-color:#450a0a;background:#1a0808">
     <h3 style="color:#f87171">🔴 Điểm nổi bật kể từ lần chạy 26/08 08:32 — CẦN XÁC NHẬN</h3>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.7">
-      <b>ĐÍNH CHÍNH (09:38):</b> Net Worth thật là <b>8,238,410,329 ₫</b>, KHÔNG phải 6,625,554,709 ₫. Cả 2 ví <b>"Larion cổ phần"</b> và <b>"VCBS"</b> là ví vốn thường xuyên để inactive — khi inactive, API MISA trả <code>currentAmount: 0</code> cho chúng, không phản ánh giá trị thật. Đã cộng lại giá trị ghi nhận gần nhất: Larion cổ phần = 1,000,000,000 ₫ (800M + 200M user vừa tăng ngày 28/08 rồi tắt active lại), VCBS = 612,855,620 ₫ (không đổi từ 26/08). Đây <b>không phải</b> mất tài sản — chỉ là quy tắc "carry-forward" cho ví inactive chưa được áp dụng đúng ở lần chạy trước. Xem memory <code>feedback_larion_valuation_confirmed_by_user</code>.<br><br>
+      <b>ĐÍNH CHÍNH (09:41, lần 3):</b> Net Worth thật là <b>8,038,410,329 ₫</b> — gần như không đổi so với 26/08 (8,055,945,149), chỉ lệch ~17.5M do vàng/liquid dao động nhỏ bình thường. Cả 2 ví <b>"Larion cổ phần"</b> (800,000,000, KHÔNG có bump +200M — user chỉ tắt active lại, giá trị không đổi) và <b>"VCBS"</b> (612,855,620, không đổi từ 26/08) là ví vốn thường xuyên để inactive — API MISA trả <code>currentAmount: 0</code> cho ví inactive, không phản ánh giá trị thật. Đây <b>không phải</b> mất/tăng tài sản, chỉ là quy tắc "carry-forward" cho ví inactive. Xem memory <code>feedback_larion_valuation_confirmed_by_user</code>.<br><br>
       ✅ VCB Visa: dư nợ vẫn 0, chỉ có 1 charge nhỏ 12M trong tháng 8.
     </div>
   </div>
@@ -91,14 +91,14 @@
       <thead><tr><th>Nhóm</th><th class="right">Actual</th><th class="right">26/08</th><th class="right">Benchmark (VN)</th><th>Đánh giá</th></tr></thead>
       <tbody>
         <tr><td>🏦 Tiết kiệm</td><td class="right">28.9%</td><td class="right">21.21%</td><td class="right">10–20%</td><td><span class="badge warn">Trên ngưỡng</span></td></tr>
-        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">46.4%</td><td class="right">43.74%</td><td class="right">30–50%</td><td><span class="badge ok">Trong ngưỡng (đã cộng lại Larion+VCBS)</span></td></tr>
+        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">43.9%</td><td class="right">43.74%</td><td class="right">30–50%</td><td><span class="badge ok">Trong ngưỡng (đã cộng lại Larion 800M+VCBS 612.9M)</span></td></tr>
         <tr><td>🏠 BĐS đầu tư (Long An)</td><td class="right">24.7%</td><td class="right">18.12%</td><td class="right">20–30%</td><td><span class="badge ok">Trong ngưỡng</span></td></tr>
         <tr><td>🥇 Vàng</td><td class="right">18.2%</td><td class="right">13.37%</td><td class="right">5–15%</td><td><span class="badge warn">Trên ngưỡng</span></td></tr>
         <tr><td>💵 Tiền mặt (incl Tikop)</td><td class="right">4.5%</td><td class="right">3.56%</td><td class="right">5–10%</td><td><span class="badge warn">Dưới ngưỡng — có đệm tiết kiệm</span></td></tr>
       </tbody>
     </table>
     <div style="font-size:12px;color:#94a3b8;margin-top:10px;line-height:1.6">
-      % thay đổi mạnh so với 26/08 chủ yếu do mẫu số (tổng investable) giảm từ ~5,630M xuống ~4,126M vì Larion về 0 — không phải do các khoản khác tự dịch chuyển tỷ trọng.
+      Tỷ trọng gần như không đổi so với 26/08 sau khi cộng lại carry-forward Larion (800M) + VCBS (612.9M) — 2 ví này chỉ tạm ẩn khỏi API do inactive, giá trị không thay đổi.
     </div>
   </div>
 </div>
@@ -159,7 +159,7 @@
       </thead>
       <tbody>
         <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td><span class="badge info">◆ Không đổi</span></td><td class="right" style="font-weight:600">1,020,000,000</td></tr>
-        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">1,000,000,000</td><td><span class="badge ok">✅ Inactive (carry-forward, +200M ngày 28/08)</span></td><td class="right" rowspan="4" style="font-weight:600;vertical-align:middle;border-left:2px solid #a855f7">2,663,023,840</td></tr>
+        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">800,000,000</td><td><span class="badge ok">✅ Inactive (carry-forward, không đổi)</span></td><td class="right" rowspan="4" style="font-weight:600;vertical-align:middle;border-left:2px solid #a855f7">2,463,023,840</td></tr>
         <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">381,301,151</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
@@ -216,7 +216,7 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [7.661, 7.646, 7.608, 7.607, 7.615, 7.595, 7.662, 7.669, 7.657, 7.841, 7.853, 8.053, 8.056, 8.238],
+      data: [7.661, 7.646, 7.608, 7.607, 7.615, 7.595, 7.662, 7.669, 7.657, 7.841, 7.853, 8.053, 8.056, 8.038],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
@@ -239,18 +239,18 @@ new Chart(document.getElementById('chartNetWorth'), {
     },
     scales: {
       x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
-      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' }, min: 7.4, max: 8.4 }
+      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' }, min: 7.4, max: 8.2 }
     }
   }
 });
 
-const ALLOC_TOTAL = 5813; // M, excl. Nhà — corrected: Đầu tư incl. Larion+VCBS carry-forward
+const ALLOC_TOTAL = 5613; // M, excl. Nhà — corrected: Đầu tư incl. Larion(800M)+VCBS(612.9M) carry-forward
 new Chart(document.getElementById('chartAllocation'), {
   type: 'doughnut',
   data: {
     labels: ['Tiết kiệm', 'Đầu tư', 'BĐS (Long An)', 'Vàng', 'Liquid'],
     datasets: [{
-      data: [1194, 2663, 1020, 750, 186],
+      data: [1194, 2463, 1020, 750, 186],
       backgroundColor: [COLORS.savings, COLORS.invest, COLORS.re, COLORS.gold, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
@@ -272,7 +272,7 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
     labels: LABELS,
     datasets: [
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
-      { label: '📈 Đầu tư',   data: [2209,2209,2209,2221,2221,2237,2263,2263,2263,2263,2263,2463,2463,2663], backgroundColor: COLORS.invest },
+      { label: '📈 Đầu tư',   data: [2209,2209,2209,2221,2221,2237,2263,2263,2263,2263,2263,2463,2463,2463], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [742,738,700,708,715,708,720,728,720,738,750,750,753,750],       backgroundColor: COLORS.gold },
       { label: '🏦 Tiết kiệm',data: [1038,1038,1038,1038,1008,1008,1002,1002,1002,1192,1192,1192,1194,1194], backgroundColor: COLORS.savings },
       { label: '💵 Liquid',   data: [314,304,303,283,313,295,230,230,226,201,201,201,201,186],       backgroundColor: COLORS.liquid },
@@ -315,7 +315,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
 </script>
 
 <div class="note-row">
-  <b style="color:#94a3b8">Ghi chú:</b> Net Worth (6.626 tỷ) đọc trực tiếp từ API <code>/wallets/totaldashboard</code>, không tái tạo thủ công. ✅ Net Worth đúng = 8,238,410,329 ₫ (đã cộng carry-forward Larion cổ phần 1,000,000,000 + VCBS 612,855,620, hai ví vốn thường xuyên inactive nên API MISA trả về 0). Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
+  <b style="color:#94a3b8">Ghi chú:</b> Net Worth (6.626 tỷ) đọc trực tiếp từ API <code>/wallets/totaldashboard</code>, không tái tạo thủ công. ✅ Net Worth đúng = 8,038,410,329 ₫ (đã cộng carry-forward Larion cổ phần 800,000,000 (không đổi) + VCBS 612,855,620, hai ví vốn thường xuyên inactive nên API MISA trả về 0). Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
 </div>
 
 </body>

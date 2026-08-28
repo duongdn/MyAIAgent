@@ -343,18 +343,18 @@
     {
       "date": "2026-08-28",
       "label": "28/08",
-      "net_worth": 8238410329,
-      "gross_assets": 8312719485,
+      "net_worth": 8038410329,
+      "gross_assets": 8112719485,
       "liabilities": -3678,
       "categories": {
         "real_estate": 3520000000,
         "gold": 750000000,
-        "investment": 2663023840,
+        "investment": 2463023840,
         "savings": 1193923479,
         "liquid": 185768488
       },
       "method": "reconstructed",
-      "note": "CORRECTED (09:35): Net Worth = 8,238,410,329, not 6,625,554,709. Root cause: VCBS and Larion co phan are both normally-inactive wallets whose currentAmount resets to 0 in the API while inactive -- this is NOT their real value. Rule (see feedback_larion_valuation_confirmed_by_user memory): for these wallets, carry forward the last known active valuation instead of trusting API 0. VCBS last known value 612,855,620 (unchanged, confirmed by user, carried from 26/08). Larion co phan updated by user to 1,000,000,000 (800M + 200M bump, then re-deactivated). trueTotalBalance.amount alone is NOT authoritative when inactive investment wallets exist -- must add back their carried-forward values. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
+      "note": "CORRECTED again (09:41, 3rd pass): Net Worth = 8,038,410,329 (not 6,625,554,709 raw, and NOT 8,238,410,329 -- that intermediate figure wrongly added a +200M bump to Larion that never happened). Root cause: VCBS and Larion co phan are both normally-inactive wallets whose currentAmount resets to 0 in the API while inactive. Carry forward unchanged: Larion co phan = 800,000,000 (confirmed 08-26 valuation, user only toggled it inactive again on 08-28, value itself did not change), VCBS = 612,855,620 (unchanged since 08-26). trueTotalBalance.amount alone is NOT authoritative when inactive investment wallets exist. Net Worth is essentially flat vs 08-26 (8,055,945,149), down only ~17.5M from minor gold/liquid movement -- no real gain or loss. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
     }
   ]
 }
