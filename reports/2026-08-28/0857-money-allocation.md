@@ -86,3 +86,9 @@ Liquid        ██▎             4.5%
 ## Correction (post-report, 09:01)
 
 The "Larion cổ phần về 0" item above (🔴 Cao risk, marked unresolved) is **not a real issue**. User confirmed: the wallet is normally inactive; it was briefly reactivated to bump the manual value to ~1,000,000,000 ₫ (800M + 200M), then deactivated again — the 0/inactive read is the wallet's normal resting state, not a loss or reset. Net Worth drop in this snapshot is a reporting artifact of the wallet's inactive state, not an actual asset loss. See memory `feedback_larion_valuation_confirmed_by_user` for standing guidance — do not re-flag this pattern in future reports.
+
+---
+
+## Correction #2 (09:38) — supersedes Correction #1 above
+
+Correction #1 (09:01) only addressed Larion cổ phần but was still incomplete — VCBS (612,855,620) was also wrongly zeroed by the same inactive-wallet bug. **Full corrected Net Worth = 8,238,410,329 ₫** (raw totaldashboard 6,625,554,709 + Larion cổ phần carry-forward 1,000,000,000 + VCBS carry-forward 612,855,620), up +182,465,180 vs 26/08. Neither wallet lost value — both are normally-inactive wallets whose API `currentAmount` resets to 0 while inactive; the fix is to always carry forward their last known value. See `reports/2026-08-28/0857-money-summary.md` and `0857-money-portfolio.md` for corrected figures, and memory `feedback_larion_valuation_confirmed_by_user` for the standing rule.

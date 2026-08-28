@@ -343,18 +343,18 @@
     {
       "date": "2026-08-28",
       "label": "28/08",
-      "net_worth": 6625554709,
-      "gross_assets": 6699863865,
+      "net_worth": 8238410329,
+      "gross_assets": 8312719485,
       "liabilities": -3678,
       "categories": {
         "real_estate": 3520000000,
         "gold": 750000000,
-        "investment": 1050168220,
+        "investment": 2663023840,
         "savings": 1193923479,
         "liquid": 185768488
       },
-      "method": "dashboard_verified",
-      "note": "Net Worth shows -1,430,390,440 vs 08-26 (8,055,945,149 -> 6,625,554,709), -17.8%, but this is NOT a real loss. Larion co phan wallet is normally inactive; user briefly reactivates it to bump the manual value then deactivates again (confirmed by user 2026-08-28). Went from 800,000,000 -> ~1,000,000,000 (bumped +200M) -> back to inactive/0 in the API. Last known active value: ~1,000,000,000 (not reflected in this snapshot's net_worth figure since wallet reads 0 while inactive). Do not alert on future Larion inactive/0 swings. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
+      "method": "reconstructed",
+      "note": "CORRECTED (09:35): Net Worth = 8,238,410,329, not 6,625,554,709. Root cause: VCBS and Larion co phan are both normally-inactive wallets whose currentAmount resets to 0 in the API while inactive -- this is NOT their real value. Rule (see feedback_larion_valuation_confirmed_by_user memory): for these wallets, carry forward the last known active valuation instead of trusting API 0. VCBS last known value 612,855,620 (unchanged, confirmed by user, carried from 26/08). Larion co phan updated by user to 1,000,000,000 (800M + 200M bump, then re-deactivated). trueTotalBalance.amount alone is NOT authoritative when inactive investment wallets exist -- must add back their carried-forward values. August MTD: Thu 270,430,625 / Chi 48,246,999 / Net +222,183,626."
     }
   ]
 }

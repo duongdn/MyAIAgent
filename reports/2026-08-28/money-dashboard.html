@@ -49,8 +49,8 @@
 <div class="kpi-row">
   <div class="kpi">
     <div class="label">Net Worth</div>
-    <div class="value" style="color:#f87171">6.626 tỷ</div>
-    <div class="delta down">▼ −1,430.4M (kế toán) vs 26/08 — KHÔNG phải mất mát thực, xem ghi chú Larion bên dưới</div>
+    <div class="value" style="color:#22c55e">8.238 tỷ</div>
+    <div class="delta up">▲ +182.5M vs 26/08 (8.056 tỷ) — API tạm ẩn 2 ví inactive, đã cộng lại</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -78,7 +78,7 @@
   <div class="card" style="border-color:#450a0a;background:#1a0808">
     <h3 style="color:#f87171">🔴 Điểm nổi bật kể từ lần chạy 26/08 08:32 — CẦN XÁC NHẬN</h3>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.7">
-      <b>ĐÍNH CHÍNH (09:26):</b> Ví <b>"Larion cổ phần"</b> vốn dĩ luôn ở trạng thái <b>inactive</b> — user chỉ mở tạm để tăng giá trị thủ công (800M → ~1,000,000,000 ₫, +200M) rồi deactivate lại như thường lệ. Đây <b>không phải</b> mất mát tài sản hay lỗi hệ thống, chỉ là cách MISA API trả về 0 khi ví inactive. Net Worth thực tế nên cộng thêm giá trị Larion lần cuối ghi nhận (~1,000,000,000 ₫) khi đánh giá tài sản thực. Xem memory <code>feedback_larion_valuation_confirmed_by_user</code> — không cảnh báo lại pattern này ở các lần chạy sau.<br><br>
+      <b>ĐÍNH CHÍNH (09:38):</b> Net Worth thật là <b>8,238,410,329 ₫</b>, KHÔNG phải 6,625,554,709 ₫. Cả 2 ví <b>"Larion cổ phần"</b> và <b>"VCBS"</b> là ví vốn thường xuyên để inactive — khi inactive, API MISA trả <code>currentAmount: 0</code> cho chúng, không phản ánh giá trị thật. Đã cộng lại giá trị ghi nhận gần nhất: Larion cổ phần = 1,000,000,000 ₫ (800M + 200M user vừa tăng ngày 28/08 rồi tắt active lại), VCBS = 612,855,620 ₫ (không đổi từ 26/08). Đây <b>không phải</b> mất tài sản — chỉ là quy tắc "carry-forward" cho ví inactive chưa được áp dụng đúng ở lần chạy trước. Xem memory <code>feedback_larion_valuation_confirmed_by_user</code>.<br><br>
       ✅ VCB Visa: dư nợ vẫn 0, chỉ có 1 charge nhỏ 12M trong tháng 8.
     </div>
   </div>
@@ -91,7 +91,7 @@
       <thead><tr><th>Nhóm</th><th class="right">Actual</th><th class="right">26/08</th><th class="right">Benchmark (VN)</th><th>Đánh giá</th></tr></thead>
       <tbody>
         <tr><td>🏦 Tiết kiệm</td><td class="right">28.9%</td><td class="right">21.21%</td><td class="right">10–20%</td><td><span class="badge warn">Trên ngưỡng</span></td></tr>
-        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">25.5%</td><td class="right">43.74%</td><td class="right">30–50%</td><td><span class="badge warn">Dưới ngưỡng (Larion inactive tạm thời, không phải mất mát)</span></td></tr>
+        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">46.4%</td><td class="right">43.74%</td><td class="right">30–50%</td><td><span class="badge ok">Trong ngưỡng (đã cộng lại Larion+VCBS)</span></td></tr>
         <tr><td>🏠 BĐS đầu tư (Long An)</td><td class="right">24.7%</td><td class="right">18.12%</td><td class="right">20–30%</td><td><span class="badge ok">Trong ngưỡng</span></td></tr>
         <tr><td>🥇 Vàng</td><td class="right">18.2%</td><td class="right">13.37%</td><td class="right">5–15%</td><td><span class="badge warn">Trên ngưỡng</span></td></tr>
         <tr><td>💵 Tiền mặt (incl Tikop)</td><td class="right">4.5%</td><td class="right">3.56%</td><td class="right">5–10%</td><td><span class="badge warn">Dưới ngưỡng — có đệm tiết kiệm</span></td></tr>
@@ -159,7 +159,7 @@
       </thead>
       <tbody>
         <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td><span class="badge info">◆ Không đổi</span></td><td class="right" style="font-weight:600">1,020,000,000</td></tr>
-        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">0</td><td><span class="badge ok">✅ Inactive như thường lệ (giá trị lần cuối: ~1,000,000,000)</span></td><td class="right" rowspan="4" style="font-weight:600;vertical-align:middle;border-left:2px solid #a855f7">1,050,168,220</td></tr>
+        <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">1,000,000,000</td><td><span class="badge ok">✅ Inactive (carry-forward, +200M ngày 28/08)</span></td><td class="right" rowspan="4" style="font-weight:600;vertical-align:middle;border-left:2px solid #a855f7">2,663,023,840</td></tr>
         <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">381,301,151</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
@@ -190,7 +190,7 @@
     <table>
       <thead><tr><th>Hạn</th><th>Việc</th><th class="right">Số tiền (₫)</th><th>Ưu tiên</th></tr></thead>
       <tbody>
-        <tr><td>—</td><td><s>Xác minh ví Larion cổ phần về 0</s> — đã xác nhận: inactive bình thường, không cần hành động</td><td class="right">—</td><td><span class="badge ok">✅ Đã giải quyết</span></td></tr>
+        <tr><td>—</td><td><s>Xác minh ví Larion/VCBS về 0</s> — đã xác nhận: inactive bình thường, carry-forward giá trị cũ, không cần hành động</td><td class="right">—</td><td><span class="badge ok">✅ Đã giải quyết</span></td></tr>
         <tr><td>10/09 (13 ngày)</td><td>Roll sổ 1m @ 4.75% sang kỳ hạn cao hơn nếu không cần thanh khoản</td><td class="right">100,000,000</td><td><span class="badge warn">🟡 TB</span></td></tr>
         <tr><td>10/10 (43 ngày)</td><td>tikcop 3 month đáo hạn @ 8.1%</td><td class="right">100,000,000</td><td><span class="badge ok">🟢</span></td></tr>
         <tr><td>13/10 (46 ngày)</td><td>tikcop 5m đáo hạn @ 7.5% — khoản lớn nhất</td><td class="right">401,918,000</td><td><span class="badge ok">🟢</span></td></tr>
@@ -315,7 +315,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
 </script>
 
 <div class="note-row">
-  <b style="color:#94a3b8">Ghi chú:</b> Net Worth (6.626 tỷ) đọc trực tiếp từ API <code>/wallets/totaldashboard</code>, không tái tạo thủ công. ✅ Ví "Larion cổ phần" về 0/inactive đã được user xác nhận là trạng thái bình thường (mở tạm để tăng giá trị rồi deactivate lại), không phải mất mát hay lỗi. Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
+  <b style="color:#94a3b8">Ghi chú:</b> Net Worth (6.626 tỷ) đọc trực tiếp từ API <code>/wallets/totaldashboard</code>, không tái tạo thủ công. ✅ Net Worth đúng = 8,238,410,329 ₫ (đã cộng carry-forward Larion cổ phần 1,000,000,000 + VCBS 612,855,620, hai ví vốn thường xuyên inactive nên API MISA trả về 0). Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
 </div>
 
 </body>
