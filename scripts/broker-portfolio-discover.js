@@ -21,14 +21,15 @@ const fs = require('fs');
 const path = require('path');
 
 const BROKER = process.argv[2];
-if (!['fpts', 'vcbs'].includes(BROKER)) {
-  console.error('Usage: node scripts/broker-portfolio-discover.js <fpts|vcbs>');
+if (!['fpts', 'vcbs', 'finhay'].includes(BROKER)) {
+  console.error('Usage: node scripts/broker-portfolio-discover.js <fpts|vcbs|finhay>');
   process.exit(1);
 }
 
 const URLS = {
   fpts: 'https://eztrade.fpts.com.vn/',
   vcbs: 'https://invest.vcbs.com.vn/#/asset',
+  finhay: 'https://invest.fhsc.com.vn/',
 };
 
 const PROFILE_DIR = path.join(__dirname, `../tmp/${BROKER}-chrome-profile`);
