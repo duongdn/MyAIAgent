@@ -382,9 +382,9 @@ If a historical entry has `categories: null`, backfill chart literals from that 
 
 ---
 
-## Piece 8 — Broker Portfolios (`/money-report brokers`) — FPTS live, VCBS pending
+## Piece 8 — Broker Portfolios (`/money-report brokers`) — FPTS + VCBS both live
 
-Fetches actual stock holdings directly from the brokers' own trading platforms (FPTS EzTrade, VCBS Trade Pro), separate from MISA. This gives real-time market price + P/L per position instead of MISA's manual `currentAmount` entries for these wallets.
+Fetches actual stock holdings directly from the brokers' own trading platforms (FPTS EzTrade, VCBS invest platform), separate from MISA. This gives real-time market price + P/L per position instead of MISA's manual `currentAmount` entries for these wallets.
 
 **FPTS — working (2026-08-28):**
 - Script: `node scripts/fpts-portfolio-report.js` (headless by default; add `--headed` to force a visible browser for first-time login/OTP).
@@ -393,11 +393,18 @@ Fetches actual stock holdings directly from the brokers' own trading platforms (
 - Output: `{ netAssetValue, cashInAccount, stockValueAvailable, marginDebt, holdings: [{ symbol, quantityAvailable, totalQuantity, marketPrice, marketValue, avgCost, totalCost, unrealizedPL, unrealizedPLPercent }] }`.
 - **Known column-mapping gotcha:** the holdings table uses `colspan` to collapse the "CK mua chờ về / quyền chờ về / cầm cố / hạn chế" sub-columns into a single `<td>` when they're all 0 — so a normal row has 10 `<td>`s, not 17. If FPTS ever shows a nonzero value in one of those collapsed columns, the column count changes and the fixed-index mapping in `scrapeAssetReport()` will misalign — verify against `raw` (the raw cell array, always included) if numbers look off.
 
-**VCBS — not yet built.** Repeat the same discovery pattern (`scripts/broker-portfolio-discover.js vcbs`, long-running with periodic flush, watch for HTTP OR see if it's another server-rendered report page like FPTS) before writing `scripts/vcbs-portfolio-report.js`.
+**VCBS — working (2026-08-28):**
+- Script: `node scripts/vcbs-portfolio-report.js` (headless by default; add `--headed` to force a visible browser for first-time manual login).
+- Auth: persistent Chrome profile `tmp/vcbs-chrome-profile/`. Credentials in `config/.broker-accounts.json` (`.vcbs.accountNumber`/`.vcbs.password`) exist for reference, but **login itself is NOT automated** — VCBS's React SPA login form proved too fragile to reliably automate (see memory `feedback_vcbs_automation_abandoned_use_fpts_pattern_only` for the full list of failure modes). If the script reports "Not authenticated", ask the user to run with `--headed` and log in manually ONE time (click "Đăng nhập", enter account/password/OTP) — headless works fully automated afterward until the session expires.
+- Data source: real JSON REST APIs under `connect.vcbs.com.vn` (unlike FPTS's HTML scraping). Auth uses a Bearer token read from `localStorage.token_VCBS` (double-JSON-encoded: `JSON.parse(JSON.parse(raw)).access_token`) — plain cookie-based fetch alone returns `INVALID_ACCESSTOKEN`.
+  - `GET /inquiry/custodyAccounts/{custodyId}/accounts` → resolves internal `accountId` (differs from custodyId).
+  - `GET .../accounts/{accountId}/positions` → holdings.
+  - `GET .../accounts/{accountId}/state` → NAV/cash/liabilities.
+- Output: `{ custodyAccountId, accountId, nav, cash, totalLiabilities, availableValue, holdings: [{ symbol, totalQty, availableQty, avgPrice, currentPrice, initialValue, currentValue, unrealizedPl }] }`.
 
-**Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this for VCBS or if FPTS's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise.
+**Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this if either broker's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise. For a new SPA-based broker, do NOT try to automate the login button click/typing via blind coordinate-guessing — dump `getBoundingClientRect()` for every candidate input first, exclude generic header search boxes, and prefer asking the user for a one-time manual login over repeated automated attempts on a live financial login form.
 
-**How this feeds into Allocation/Portfolio:** once both brokers are live, use their real `holdings` + `marketValue` as the authoritative value for the VCBS/FPTS wallets in Piece 2/3, superseding MISA's `cost_basis_remaining + currentAmount` approximation formula for those two wallets specifically (MISA's manual tracking is now redundant/secondary — keep it only as a cross-check).
+**How this feeds into Allocation/Portfolio:** use FPTS/VCBS's real `holdings` + market values as the authoritative value for those wallets in Piece 2/3, superseding MISA's `cost_basis_remaining + currentAmount` approximation formula for these two wallets specifically (MISA's manual tracking is now redundant/secondary — keep it only as a cross-check).
 
 ---
 
