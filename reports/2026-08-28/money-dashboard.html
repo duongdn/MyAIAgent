@@ -216,7 +216,7 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [7.661, 7.646, 7.608, 7.607, 7.615, 7.595, 7.662, 7.669, 7.657, 7.841, 7.853, 8.053, 8.056, 6.626],
+      data: [7.661, 7.646, 7.608, 7.607, 7.615, 7.595, 7.662, 7.669, 7.657, 7.841, 7.853, 8.053, 8.056, 8.238],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
@@ -239,18 +239,18 @@ new Chart(document.getElementById('chartNetWorth'), {
     },
     scales: {
       x: { grid: { color: '#1e2536' }, ticks: { color: '#64748b' } },
-      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' }, min: 6.3, max: 8.3 }
+      y: { grid: { color: '#1e2536' }, ticks: { color: '#64748b', callback: v => v.toFixed(1) + 'B' }, min: 7.4, max: 8.4 }
     }
   }
 });
 
-const ALLOC_TOTAL = 4126; // M, excl. Nhà
+const ALLOC_TOTAL = 5813; // M, excl. Nhà — corrected: Đầu tư incl. Larion+VCBS carry-forward
 new Chart(document.getElementById('chartAllocation'), {
   type: 'doughnut',
   data: {
     labels: ['Tiết kiệm', 'Đầu tư', 'BĐS (Long An)', 'Vàng', 'Liquid'],
     datasets: [{
-      data: [1194, 1050, 1020, 750, 186],
+      data: [1194, 2663, 1020, 750, 186],
       backgroundColor: [COLORS.savings, COLORS.invest, COLORS.re, COLORS.gold, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
@@ -272,7 +272,7 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
     labels: LABELS,
     datasets: [
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
-      { label: '📈 Đầu tư',   data: [2209,2209,2209,2221,2221,2237,2263,2263,2263,2263,2263,2463,2463,1050], backgroundColor: COLORS.invest },
+      { label: '📈 Đầu tư',   data: [2209,2209,2209,2221,2221,2237,2263,2263,2263,2263,2263,2463,2463,2663], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [742,738,700,708,715,708,720,728,720,738,750,750,753,750],       backgroundColor: COLORS.gold },
       { label: '🏦 Tiết kiệm',data: [1038,1038,1038,1038,1008,1008,1002,1002,1002,1192,1192,1192,1194,1194], backgroundColor: COLORS.savings },
       { label: '💵 Liquid',   data: [314,304,303,283,313,295,230,230,226,201,201,201,201,186],       backgroundColor: COLORS.liquid },
