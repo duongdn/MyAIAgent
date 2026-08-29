@@ -140,6 +140,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_workstream_display_outage_pattern](weekly-report/feedback_workstream_display_outage_pattern.md) — 🔴 WS SSO failed 5x now (07-26/31,08-01,08-15,08-22); NOT a DISPLAY issue (script always headless), root cause still open
 - [feedback_blair_brown_index_annotation_contradicts_file](weekly-report/feedback_blair_brown_index_annotation_contradicts_file.md) — index/file conflict resolved, include Blair Brown
 - See [[feedback_fountain_kunal_checklist]] (daily-report:fountain section) — weekly Fountain check uses the same 5-part rule
+- [feedback_fountain_sheet_independent_of_workstream_outage](weekly-report/feedback_fountain_sheet_independent_of_workstream_outage.md) — 🔴 Fountain Parts 1/4/5 don't need Workstream, fetch live even during WS outage
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)

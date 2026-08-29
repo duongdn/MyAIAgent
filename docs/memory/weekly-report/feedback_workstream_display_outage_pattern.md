@@ -1,6 +1,6 @@
 ---
 name: feedback_workstream_display_outage_pattern
-description: "Workstream SSO login has now failed 6x (07-26, 07-31, 08-01, 08-15, 08-22, 08-28) with identical symptom 'SSO redirected but API never fired' — CONFIRMED 08-22 this is NOT a DISPLAY/Xvfb issue (script always runs headless:'new' by design), root cause still unknown"
+description: "Workstream SSO login has now failed 8x (07-26, 07-31, 08-01, 08-15, 08-22, 08-28, 08-29) with identical symptom 'SSO redirected but API never fired' — CONFIRMED 08-22 this is NOT a DISPLAY/Xvfb issue (script always runs headless:'new' by design), root cause still unknown"
 metadata:
   type: feedback
 ---
@@ -16,3 +16,5 @@ metadata:
 **Why this matters:** Each occurrence has been treated as a fresh, isolated incident and retried blindly. 5 failures now with an identical signature is a real, recurring pattern — worth a code-level fix (e.g. try navigating directly to an authenticated API-driven page instead of polling `/api/me` via fetch, or capture the token from `document.cookie`/localStorage instead of a network request) rather than continuing to hope retries succeed.
 
 **How to apply:** Next time Workstream SSO fails: (1) do NOT waste time checking Xvfb/DISPLAY — confirmed irrelevant to this script; (2) check for and kill any concurrent/stale `workstream-login.js` or Chrome processes holding the `tmp/workstream-browser-profile` lock before retrying — concurrent runs actively cause failures, not just correlate with them; (3) after 2-3 clean attempts (~15-20 min total) with the identical failure signature, stop and either try `WORKSTREAM_HEADFUL=1 DISPLAY=:1` for a real visible-browser run, or escalate to the user for an interactive VNC re-login — don't burn a 4th+ automated attempt. If reconstructing a report despite the outage, check whether this week's own earlier daily-report runs already captured a live Workstream pull (they often have, even when the current run fails) before treating data as fully unavailable.
+
+**2026-08-29 occurrence (weekly-report):** 4 clean attempts (incl. killing 2 stale/concurrent Chrome processes holding the profile lock), all identical signature. 8th dated occurrence now. Confirmed the Fountain "Est vs Charged" Google Sheet is NOT gated by this outage at all — it's a separate service-account Sheets API read, fetched successfully this run despite Workstream being fully down (see [[feedback_fountain_sheet_independent_of_workstream_outage]]). Don't let a Workstream outage block that part of the Fountain check.
