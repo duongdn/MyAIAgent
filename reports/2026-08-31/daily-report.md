@@ -17,7 +17,7 @@
 | 5 | Trello (Fountain) | Card "ActionController::BadRequest in GET /admin" stuck in Doing 25.9 days — hard-to-release. |
 | 6 | GitHub (Elena) | PR #309 "header and modal i18n" still open/dirty, unchanged since 2026-08-11 (20 days). |
 | 7 | New Relic (MPFC) | Apdex 0.60 (poor, <0.7 threshold) — see Performance section. |
-| 8 | Discord (AirAgri/nusvinn) | Token returns 401 on this host; James Diamond/Vinn daily-report check NOT run this session (see Discord section). |
+| 8 | Discord (AirAgri) | Client requested new "AirAgri - Team" app 08-30; jeff_trinh awaiting our reply on feature priority (08-31 08:22) — unanswered as of this run. |
 | 9 | Arthur/Meta-Stamp | Only Matrix verified (0 new msgs, but window only reaches back to 08-30 — real gap since last full check 08-24). Slack "Solid Code" + GitHub (davidztv) both unconfigured on this host. Partial verification only — left incomplete. |
 
 **Today (Mon 31):** No leave/WFH reported. All staff assumed present.
@@ -83,14 +83,14 @@ Trello: Ohcleo ✓ complete.
 
 ---
 
-## Discord — AirAgri + Bizurk — 08:04 (+07:00)
+## Discord — AirAgri + Bizurk — 08:04 (+07:00), rechecked 10:58 (+07:00)
 
 | Server | Msgs | Key content |
 |--------|------|--------------|
-| AirAgri (nusvinn) | — | Token returns genuine 401 on `/users/@me` (not a false positive). Refresh script requires a Linux Chrome profile path (`/usr/bin/google-chrome`, `~/.config/google-chrome`) that doesn't exist on this host (this session ran on duongdn's Mac, not the usual monitoring server) — could not re-extract token this session. |
+| AirAgri (nusvinn) | 2 | User provided a fresh token 09:23 (`config/.discord-accounts.json` updated) — re-verified live, valid. `.jdiamond` (client) 08-30 13:08: requested a new simplified "AirAgri - Team" app (minimal UI, cut-down version of main app). jeff_trinh 08-31 08:22: asked which features to prioritize, starting with Login/Sign Up — **awaiting our reply on feature priority.** |
 | Bizurk (nuscarrick) | 0 | token valid, 0 messages, 0 Andrew DMs |
 
-Trello: James Diamond - Vinn task ⚠️ left incomplete (AirAgri check not possible this session — needs re-run on the server where the Chrome profile exists). Andrew Taraba ✓ complete.
+Trello: James Diamond - Vinn task ✓ complete (re-checked after token fix). ⚠️ Follow-up: Jeff is blocked on feature-priority answer for the new AirAgri-Team app — needs a reply. Andrew Taraba ✓ complete.
 
 ---
 
@@ -212,7 +212,8 @@ No developer shows a confirmed 0h day yet — it's 08:08 Monday, the work week h
 ## Re-check notes / left open for next pass
 
 - **Rick email item** — Fountain-adjacent `#1106 IntegrationError` production alert unresolved.
-- **James Diamond (Discord)** — AirAgri token needs re-extraction on the actual Linux monitoring server (Chrome profile path missing on this Mac session).
+- **James Diamond (Discord)** — ✅ resolved 10:58: user supplied fresh nusvinn token, re-verified live, item completed. Real open item found: client requested new "AirAgri - Team" app, Jeff awaiting feature-priority reply from us.
+- **Marcel** — ✅ fixed 10:58: Slack Equanimity was checked clean (0 msgs) in the original run but the Trello item was missed; ticked complete now.
 - **Elena - SamGuard** — PR #309 stale 20 days, needs review/merge decision.
 - **Fountain** — customer delivery-date bug (mike62798179) unanswered since 08-27; hard-to-release card (BadRequest, 25.9d in Doing).
 - **Philip (MS Teams)** — not run this pass (time-boxed).
