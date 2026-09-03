@@ -189,3 +189,24 @@ Workstream unavailable (Alert #8) — cannot compute combined 0h totals for Long
 ## Unresolved questions
 - Workstream login hangs on every attempt (API refresh, headless, and visible-browser login all timed out ~2min) — worth investigating host-level network/browser-launch issue since this is now a recurring multi-week pattern, not a one-off.
 - Rory/Aysar Upwork headless re-login failed on selector `input[name="login[username]"]` — Upwork may have changed their login page markup; script may need updating.
+
+---
+
+## Re-check — 08:35 (+07:00)
+
+Workstream login/SSO recovered this run (headless browser login succeeded after API-refresh retries failed) — no longer blocked. Re-queried all previously-blocked projects (Maddy, John Yi, James Diamond, Aysar/Baamboozle, Elliott/Generator, Bailey/Speedventory, Rebecca, Blair Brown, Fountain, OhCleo, Franc/RDC) for the current week (2026-08-31 → 2026-09-06).
+
+⚠️ **Anomaly found, not resolved:** every project's per-day `days` breakdown only contains **2026-08-31 (Monday)** entries — no hours show for 2026-09-01 or 2026-09-02 on ANY project/dev, including devs known to be active (e.g. DatNT/ViTHT on Fountain, TuanNT on Bailey). This is consistent with either (a) a genuine multi-day team-wide logging gap, or (b) an API/date-window quirk (see prior Arthur-project note about `/review/week` sometimes not returning the expected date range). Per [[feedback_check_workstream_before_flagging_shortfall]] (13x recurred false-0h history), this is NOT being treated as a confirmed 0h alert — insufficient to flag individual devs or complete/skip Trello items on this data alone.
+
+**needsReview (Pending, unrelated to the anomaly above, real as of 08-31):**
+- Maddy: none | James Diamond: LongVV "Using Claude review repop" 0:15 (08-31) — reviewers PhucVT/LeNH
+- Generator/Elliott: LucNT "Follow up on release" 0:30 (08-31) — reviewers LucNT/HangNTT
+- Franc/RDC: KhanhHH x3 items totaling 3:30 (08-31) — reviewer LeNH
+- Fountain: excluded per rule (not checked)
+- OhCleo: HungPN "Check ticket" 0:00, DuongDN "Rebuild upload flow..." 3:00 (08-31) — reviewers DuongDN/MinhTV
+
+**Trello:** No items changed — leaving Maddy/John Yi/James Diamond/Aysar/Elliott/Bailey/Rebecca/Blair Brown/Fountain/Reminders as previously reported pending a clean same-day (09-02/09-03) data pull. Recommend re-running `sheets`/`reminders` pieces standalone once Workstream confirms it returns 09-02 data (test again later today).
+
+**Not re-attempted this pass (effort-scoped):** Upwork Rory/Aysar/Neural re-login (requires visible-browser flow, deferred), full Slack/Discord/Matrix re-scans (no gate-source alerts changed since original run).
+
+Still open: Maddy, Rory, Aysar, Bailey(GGS), James Diamond, Fountain, Elena PR#309. Workstream outage itself is resolved but did not yield usable per-day 09-02 data this pass.
