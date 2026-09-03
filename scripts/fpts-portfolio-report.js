@@ -135,8 +135,9 @@ async function main() {
   if (url.includes('Login') || url.includes('login')) {
     console.error('[fpts] Not authenticated — session expired or first run. Re-launching headed for manual login.');
     await tryAutofill(page, loadCreds());
-    console.error('[fpts] Log in (incl. OTP) in the opened browser, then navigate to the asset report page. Waiting 90s...');
-    await new Promise((r) => setTimeout(r, 90000));
+    console.error('[fpts] Log in (incl. OTP) in the opened browser. Waiting up to 180s...');
+    await new Promise((r) => setTimeout(r, 180000));
+    await page.goto(REPORT_URL, { waitUntil: 'networkidle2', timeout: 60000 }).catch((e) => console.error('re-goto error:', e.message));
   }
 
   await page.waitForSelector('table', { timeout: 15000 }).catch(() => {});
