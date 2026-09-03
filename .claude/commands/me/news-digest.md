@@ -1,5 +1,5 @@
 ---
-description: News digest — fetch and synthesize news by topic (stocks, vn-stocks, vn-business, ai, it, php, finance, vinfast, security) with optional tag filter
+description: News digest — fetch and synthesize news by topic (vn-stocks, vn-business, vinfast, ai, it, php, finance, security, stocks) with optional tag filter, VN topics prioritized first
 ---
 
 # News Digest
@@ -12,7 +12,7 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest [topic] [--tag=xxx] [--limit=N] [--more] [--raw]
 ```
 
-**Topics:** `all` (default) | `stocks` | `vn-stocks` | `vn-business` | `ai` | `it` | `php` | `finance` | `vinfast` | `security`
+**Topics (ưu tiên VN trước):** `all` (default) | `vn-stocks` | `vn-business` | `vinfast` | `ai` | `it` | `php` | `finance` | `security` | `stocks`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
 - `--limit=N` — số bài fetch mỗi nguồn (default: 100)
@@ -87,17 +87,17 @@ ls reports/{YYYY-MM-DD}/*-news-digest.md 2>/dev/null
 
 Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context window) → Claude chỉ tổng hợp được ~6/9 topics, bỏ sót `it`, `php`, `vinfast`.
 
-**Khi `topic=all` — chạy 9 lệnh riêng, synthesize từng section ngay sau khi nhận kết quả:**
+**Khi `topic=all` — chạy 9 lệnh riêng (VN trước, US stocks cuối cùng), synthesize từng section ngay sau khi nhận kết quả, viết output theo ĐÚNG thứ tự này:**
 ```bash
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
 ```
 
 **Khi `topic=<cụ thể>` — fetch 1 lần:**
@@ -108,8 +108,8 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 - User truyền `--limit=N` → áp dụng N cho tất cả fetch calls.
 - `--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
 
-**MANDATORY: Khi `topic=all`, output PHẢI có đủ 9 sections:**
-`stocks` · `vn-stocks` · `vn-business` · `ai` · `it` · `php` · `finance` · `vinfast` · `security`
+**MANDATORY: Khi `topic=all`, output PHẢI có đủ 9 sections, viết theo ĐÚNG thứ tự sau (VN trước, US stocks cuối):**
+`vn-stocks` · `vn-business` · `vinfast` · `ai` · `it` · `php` · `finance` · `security` · `stocks`
 
 ## Output Format
 
