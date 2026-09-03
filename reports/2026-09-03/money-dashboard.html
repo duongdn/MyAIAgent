@@ -115,7 +115,7 @@
 <div class="grid full" style="padding-bottom:8px">
   <div class="card">
     <h3>📑 Tài khoản chi tiết — 03/09/2026 08:39</h3>
-    <div style="font-size:11px;color:#64748b;margin-bottom:10px">Nhà (2,500,000,000 ₫) đã loại khỏi bảng này. % dưới đây tính trên tổng tài sản đầu tư được (5,671,826,619 ₫, excl. Nhà).</div>
+    <div style="font-size:11px;color:#64748b;margin-bottom:10px">Nhà (2,500,000,000 ₫) đã loại khỏi bảng này. % dưới đây tính trên tổng tài sản đầu tư được (5,679,615,471 ₫, excl. Nhà). VCBS/FPTS/Finhay dùng NAV live từ broker API (xác thực 08:39), thay cho ước tính cost-basis của MISA.</div>
     <table>
       <thead>
         <tr><th>Tài khoản</th><th>Loại</th><th class="right">Số dư (₫)</th><th>Trạng thái</th></tr>
@@ -123,10 +123,10 @@
       <tbody>
         <tr><td>long an res</td><td>🏠 BĐS</td><td class="right">1,020,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">800,000,000</td><td><span class="badge warn">carry-forward, chưa xác nhận lại</span></td></tr>
-        <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
-        <tr><td>VCBS</td><td>📈 ETF (cost basis+cash)</td><td class="right">641,655,620</td><td><span class="badge info">◆ ~Không đổi</span></td></tr>
-        <tr><td>FPTS</td><td>📈 Cổ tức (cost basis)</td><td class="right">381,301,151</td><td><span class="badge info">◆ ~Không đổi</span></td></tr>
-        <tr><td>Finhay</td><td>📈 Fund (cost basis)</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>VCBF</td><td>📈 Fund (cost basis)</td><td class="right">594,063,000</td><td><span class="badge info">◆ Không đổi, không có portal live</span></td></tr>
+        <tr><td>VCBS</td><td>📈 ETF (broker API)</td><td class="right">648,963,238</td><td><span class="badge ok">✅ Live: E1VFVN30/FPT/FUEVN100/VIX</span></td></tr>
+        <tr><td>FPTS</td><td>📈 Cổ tức (broker API)</td><td class="right">387,426,529</td><td><span class="badge ok">✅ Live: VEA 11,000 CP</span></td></tr>
+        <tr><td>Finhay</td><td>📈 Fund (broker API)</td><td class="right">68,359,924</td><td><span class="badge warn">✅ Live, P/L −2.26%</span></td></tr>
         <tr><td>tikcop 5m</td><td>🏦 Tiết kiệm</td><td class="right">401,918,000</td><td><span class="badge info">7.5% · đáo hạn 13/10</span></td></tr>
         <tr><td>vcb 6m CCTG</td><td>🏦 Tiết kiệm</td><td class="right">300,000,000</td><td><span class="badge info">7.5% · đáo hạn 10/02/2027</span></td></tr>
         <tr><td>6m cake vpbank</td><td>🏦 Tiết kiệm</td><td class="right">190,000,000</td><td><span class="badge info">9.2% · đáo hạn 25/02/2027</span></td></tr>
@@ -206,13 +206,13 @@ new Chart(document.getElementById('chartNetWorth'), {
   }
 });
 
-const ALLOC_TOTAL = 5671; // M, excl. Nhà
+const ALLOC_TOTAL = 5680; // M, excl. Nhà
 new Chart(document.getElementById('chartAllocation'), {
   type: 'doughnut',
   data: {
     labels: ['Đầu tư', 'Tiết kiệm', 'BĐS (Long An)', 'Vàng', 'Liquid'],
     datasets: [{
-      data: [2491, 1202, 1020, 743, 215],
+      data: [2499, 1202, 1020, 743, 215],
       backgroundColor: [COLORS.invest, COLORS.savings, COLORS.re, COLORS.gold, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
@@ -234,7 +234,7 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
     labels: LABELS,
     datasets: [
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
-      { label: '📈 Đầu tư',   data: [2263,2263,2263,2463,2463,2491,2491], backgroundColor: COLORS.invest },
+      { label: '📈 Đầu tư',   data: [2263,2263,2263,2463,2463,2491,2499], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [720,738,750,750,753,750,743],       backgroundColor: COLORS.gold },
       { label: '🏦 Tiết kiệm',data: [1002,1192,1192,1192,1194,1192,1202], backgroundColor: COLORS.savings },
       { label: '💵 Liquid',   data: [226,201,201,201,201,186,215],       backgroundColor: COLORS.liquid },

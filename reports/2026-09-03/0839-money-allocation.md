@@ -3,18 +3,18 @@
 ## Tỉ lệ tài sản (excl. Nhà 2.5B)
 | Loại | Tổng (₫) | % Total | Ghi chú |
 |------|---------|---------|---------|
-| Investment (ETF/Fund/Cổ phần) | 2,491,023,840 | 44.5% | VCBS+VCBF+FPTS+Finhay+Larion |
+| Investment (ETF/Fund/Cổ phần) | 2,498,812,691 | 44.6% | VCBS+VCBF+FPTS+Finhay+Larion, broker-verified |
 | Real Estate (long an res) | 1,020,000,000 | 18.2% | |
 | Savings | 1,201,918,000 | 21.4% | 7 active books |
 | Gold (vàng) | 743,500,000 | 13.3% | |
 | Liquid | 215,384,780 | 3.8% | |
-| **Total (excl. Nhà)** | **5,601,826,620** | 100% | |
+| **Total (excl. Nhà)** | **5,679,615,471** | 100% | |
 
-## Chi tiết ETF + Fund
-ETF (VCBS) — VN30/VN100/VN1000: 641,655,619.52 ₫
-Fund (VCBF) — managed fund: 594,063,000 ₫
-Cổ tức (FPTS) — VEA/ADP/ETF: 381,301,150.68 ₫
-Fund (Finhay): 74,404,069.44 ₫
+## Chi tiết ETF + Fund (live broker data, fetched 08:39)
+ETF (VCBS) — E1VFVN30/FPT/FUEVN100/VIX: 648,963,238 ₫ (NAV, xác thực qua VCBS API)
+Fund (VCBF) — managed fund: 594,063,000 ₫ (cost-basis, không có portal live)
+Cổ tức (FPTS) — VEA 11,000 CP: 387,426,529 ₫ (NAV, xác thực qua EzTrade API)
+Fund (Finhay): 68,359,924 ₫ (NAV, xác thực qua Finhay API, P/L −2.26%)
 Cổ phần (Larion, carry-forward, inactive): 800,000,000 ₫
 
 ## Visual ASCII bar chart (excl. Nhà)
@@ -29,12 +29,12 @@ Liquid      ██                    3.8%
 ## Full View (incl. Nhà)
 | Loại | Tổng (₫) | % Total |
 |------|---------|---------|
-| Real Estate (Nhà + long an res) | 3,520,000,000 | 43.4% |
-| Investment | 2,491,023,840 | 30.7% |
-| Savings | 1,201,918,000 | 14.8% |
-| Gold | 743,500,000 | 9.2% |
-| Liquid | 215,384,780 | 2.7% |
-| **Total** | **8,101,826,620** | 100% |
+| Real Estate (Nhà + long an res) | 3,520,000,000 | 43.0% |
+| Investment | 2,498,812,691 | 30.5% |
+| Savings | 1,201,918,000 | 14.7% |
+| Gold | 743,500,000 | 9.1% |
+| Liquid | 215,384,780 | 2.6% |
+| **Total** | **8,179,615,471** | 100% |
 
 ## Nhận xét
 - Liquidity ratio (Liquid+Savings)/Net Worth ≈ 17.5% — healthy buffer.
