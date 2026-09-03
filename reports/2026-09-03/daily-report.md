@@ -210,3 +210,32 @@ Workstream login/SSO recovered this run (headless browser login succeeded after 
 **Not re-attempted this pass (effort-scoped):** Upwork Rory/Aysar/Neural re-login (requires visible-browser flow, deferred), full Slack/Discord/Matrix re-scans (no gate-source alerts changed since original run).
 
 Still open: Maddy, Rory, Aysar, Bailey(GGS), James Diamond, Fountain, Elena PR#309. Workstream outage itself is resolved but did not yield usable per-day 09-02 data this pass.
+
+---
+
+## Re-check #2 — 09:15 (+07:00) — root cause found
+
+Verified the "only 08-31 data" anomaly with raw API calls (Fountain project: 19/19 task-log rows dated 08-31, zero for 09-01/09-02) and leave data: HaVS shows `full_day_off` on BOTH 2026-09-01 and 2026-09-02 on the Fountain roster. **Root cause: Vietnam National Day holiday (Quốc khánh 2/9)** — company-wide days off 09-01/09-02, not a real 0h shortfall or Workstream bug. Retracts the "anomaly, unresolved" note from Re-check #1.
+
+**Trello — completed based on this (0h = holiday, no other alert on these items):**
+| Item | Result |
+|------|--------|
+| John Yi - Amazing Meds | ✓ completed |
+| Aysar | ✓ completed |
+| Elliott - GreenFort | ✓ completed |
+| Rebecca - William Bills | ✓ completed |
+| Blair Brown - Peptide Clyde | ✓ completed |
+
+**Still open — real unresolved alerts, unrelated to hours:**
+| Item | Reason |
+|------|--------|
+| Maddy | Madhuraka customer complaint re #459 (Alert #1) unresolved |
+| Rory | roryh billing-summary question (Alert #2) unanswered |
+| James Diamond | bellatric02 Discord message (Alert #4) unanswered |
+| Bailey (GGS) | Joey customer bug answers + quote request (Alert #3) unanswered |
+| Elena - SamGuard Digital Plant | PR #309 stale 23 days (Alert #6) |
+| Fountain | 3 unresolved customer threads (Alert #7) |
+
+**Philip — ran MS Teams check this pass (was missing from the original 06:00 run entirely).** Chat with Philip Briggs (pbriggs@sixstarrentals.com.au) shows an active back-and-forth re: "Elevate365 Static Demo — Industry Selector" spec, ending with Philip's message "it's really an environment that is relatable to a potential customer...". Script output has NO timestamps with dates (only times like "1:35 PM"), so recency vs. this run's window (since 2026-09-02 06:45) cannot be confirmed. Left Philip ⚠️ open — needs manual check in the Teams client to confirm whether this is today's unanswered message or already-resolved history.
+
+**Reminders piece:** now unblocked (Workstream up, holiday explains 0h) — no reminder needed, 09-01/09-02 0h is legitimate (national holiday), not a shortfall.
