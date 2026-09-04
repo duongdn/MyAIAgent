@@ -224,7 +224,7 @@ Workstream SSO recovered (was down at 06:00 cron). Re-verified gated items:
 | Item | Result | Details |
 |------|--------|---------|
 | Maddy | ✓ completed | LongVV 2h logged on Maddy 09-03; Slack Xtreme already clean (Kai's LIFM2-462 shipped, no client complaint) |
-| John Yi - Amazing Meds | ○ still incomplete | Alert #5 stands — client closed Upwork contracts |
+| John Yi - Amazing Meds | ✓ completed (user confirmed handled 08:56) | Alert #5 — contracts-closed noted, addressed |
 | James Diamond - Vinn | ✓ completed | PhucVT 8h logged (williambills, other proj) — wait, checked combined hours 09-03 nonzero; Discord AirAgri already clean |
 | Aysar | ✓ completed | KhanhHH 0h on Baamboozle 09-03 → MPDM silence is normal per gate rule (not an alert when 0h that day) |
 | Elliott | ○ still incomplete | Alert #6 stands — Carrick's Generator AWS access still broken post ISO-27001 lockdown |
