@@ -127,6 +127,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_bailey_invoice_verify_slack_quote_supersedes_buffer](bailey/feedback_bailey_invoice_verify_slack_quote_supersedes_buffer.md) — 🔴 fixed-cost bills at GGS Slack-quoted hours, not WBS buffer; also xoxp search.messages needs token in header only
 - [feedback_siteground_disk_81pct_staging_copies](bailey/feedback_siteground_disk_81pct_staging_copies.md) — 🔴 81% used 2026-08-21, staging copies; SSH fallback now WORKS (see updated feedback_siteground_captcha_no_ssh_fallback)
 - [feedback_bailey_moved_to_workstream_speedventory](bailey/feedback_bailey_moved_to_workstream_speedventory.md) — 🔴🔴 2026-08-21 monitor task log moved OFF Google Sheets → Workstream `speedventory`; new write script scripts/workstream-write-tasklog.js
+- [feedback_workstream_tasklog_date_must_be_friday](bailey/feedback_workstream_tasklog_date_must_be_friday.md) — 🔴 date arg must be that week's Friday, not actual run day
 - [feedback_bailey_dev_actuals_now_on_workstream](bailey/feedback_bailey_dev_actuals_now_on_workstream.md) — 🔴🔴🔴 2026-08-25: dev task actuals also on WS since 8/16 migration, Sheet actual-hours stale, cross-check WS before 0h/overbudget claims
 - [feedback_workstream_config_plaintext_went_stale](bailey/feedback_workstream_config_plaintext_went_stale.md) — 🔴 2026-08-28: workstream-config.json plaintext missing speedventory (stale vs .enc); fix via single-file openssl decrypt, not bulk --force
 
