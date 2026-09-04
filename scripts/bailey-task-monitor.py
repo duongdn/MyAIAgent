@@ -112,17 +112,16 @@ def main():
         dev = get_cell(row, COL_DEV)
         task_type = get_cell(row, COL_TYPE)
         est_buffer = safe_float(get_cell(row, COL_EST_BUFFER))
-        sheet_actual = safe_float(get_cell(row, COL_ACTUAL))
-        sheet_charged = safe_float(get_cell(row, COL_CHARGED))
         link = get_cell(row, COL_LINK)
         ws_task_id = get_cell(row, COL_WS_TASK_ID).strip().upper()
 
-        # Prefer live Workstream hours, joined by Task ID WS (tag), not the free-text
-        # name — different tasks can share display text in the WS task-log dropdown.
+        # Hours come from Workstream only, joined by Task ID WS (tag), not the
+        # free-text name — different tasks can share display text in the WS
+        # task-log dropdown. Sheet K/L columns are stale and no longer used.
         ws = ws_actuals.get(ws_task_id) if ws_task_id else None
-        actual = ws['actual'] if ws else sheet_actual
-        charged = ws['charged'] if ws else sheet_charged
-        hours_source = 'workstream' if ws else 'sheet'
+        actual = ws['actual'] if ws else None
+        charged = ws['charged'] if ws else None
+        hours_source = 'workstream' if ws else 'none'
 
         is_paid = 'PAID' in pay_status.upper() if pay_status else False
         is_requesting = 'REQUESTING' in pay_status.upper() if pay_status else False
@@ -146,7 +145,7 @@ def main():
         # Regular tasks: must be "Tested on Live" or "Deployed on Live"
         # Weekly Monitor tasks: payable once the month has passed and hours > 0
         is_weekly_monitor = name.startswith('Weekly Monitor')
-        if is_weekly_monitor and not is_paid and not is_requesting and actual > 0:
+        if is_weekly_monitor and not is_paid and not is_requesting and actual and actual > 0:
             # Check if the monitor month has ended (e.g. "Weekly Monitor Mar 2026")
             parts = name.replace('Weekly Monitor ', '').split()
             if len(parts) == 2:
@@ -161,14 +160,14 @@ def main():
         elif dev_status in RELEASED_STATUSES and not is_paid and not is_requesting:
             task_info['alert'] = 'RELEASED_NOT_PAID'
             released_not_paid.append(task_info)
-        elif (dev_status in RELEASED_STATUSES or (is_weekly_monitor and actual > 0)) and is_requesting:
+        elif (dev_status in RELEASED_STATUSES or (is_weekly_monitor and actual and actual > 0)) and is_requesting:
             task_info['alert'] = 'REQUESTING_PAYMENT'
             requesting_payment.append(task_info)
 
         # Check 2: Has bug
         if any(bug in dev_status for bug in BUG_STATUSES):
             task_info['alert'] = 'HAS_BUG'
-            if not hourly and est_buffer > 0:
+            if not hourly and est_buffer > 0 and actual is not None:
                 overbudget = actual > est_buffer
                 task_info['overbudget'] = overbudget
                 task_info['over_pct'] = ((actual / est_buffer) * 100 - 100) if est_buffer > 0 else 0
@@ -177,10 +176,13 @@ def main():
         if name and dev_status:
             all_tasks.append(task_info)
 
+    def fmt_hours(t):
+        return f"{t['actual']}h" if t['actual'] is not None else "no WS data"
+
     def fmt_task_bullet(t):
         """Format a task as a bullet line: name – Xh – dev – link"""
         parts = [t['name']]
-        parts.append(f"{t['actual']}h")
+        parts.append(fmt_hours(t))
         if t['dev']:
             parts.append(t['dev'])
         if t['link']:
@@ -189,12 +191,12 @@ def main():
 
     def fmt_bug_bullet(t):
         """Format a bug task bullet with budget info."""
-        parts = [t['name'], f"{t['actual']}h ({t['type']})"]
+        parts = [t['name'], f"{fmt_hours(t)} ({t['type']})"]
         if t['dev']:
             parts.append(t['dev'])
         if t['type'] == 'fixed' and t.get('overbudget'):
             parts.append(f"⚠️ OVER +{t['over_pct']:.1f}% (+{t['actual'] - t['est_buffer']:.1f}h)")
-        elif t['type'] == 'fixed' and t['est_buffer'] > 0:
+        elif t['type'] == 'fixed' and t['est_buffer'] > 0 and t['actual'] is not None:
             parts.append(f"OK ({t['est_buffer'] - t['actual']:.1f}h left)")
         if t['link']:
             parts.append(t['link'])
@@ -239,11 +241,11 @@ def main():
     if other_tasks:
         for t in other_tasks:
             est = f"est {t['est_buffer']}h" if t['type'] == 'fixed' and t['est_buffer'] > 0 else t['type']
-            hours_label = f"{t['actual']}h" if t['hours_source'] == 'workstream' else f"{t['actual']}h (⚠️ stale Sheet, no WS match)"
+            hours_label = fmt_hours(t) if t['hours_source'] == 'workstream' else "⚠️ no WS data"
             parts = [t['name'], hours_label, est, t['dev_status']]
             if t['dev']:
                 parts.append(t['dev'])
-            if t['type'] == 'fixed' and t['est_buffer'] > 0 and t['actual'] > t['est_buffer']:
+            if t['type'] == 'fixed' and t['est_buffer'] > 0 and t['actual'] is not None and t['actual'] > t['est_buffer']:
                 over_pct = (t['actual'] / t['est_buffer']) * 100 - 100
                 parts.append(f"⚠️ OVER +{over_pct:.1f}% (+{t['actual'] - t['est_buffer']:.1f}h)")
             if t['link']:

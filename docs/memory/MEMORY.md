@@ -130,6 +130,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_workstream_tasklog_date_must_be_friday](bailey/feedback_workstream_tasklog_date_must_be_friday.md) — 🔴 date arg must be that week's Friday, not actual run day
 - [feedback_bailey_dev_actuals_now_on_workstream](bailey/feedback_bailey_dev_actuals_now_on_workstream.md) — 🔴🔴🔴 2026-08-25: dev task actuals also on WS since 8/16 migration, Sheet actual-hours stale, cross-check WS before 0h/overbudget claims
 - [feedback_workstream_config_plaintext_went_stale](bailey/feedback_workstream_config_plaintext_went_stale.md) — 🔴 2026-08-28: workstream-config.json plaintext missing speedventory (stale vs .enc); fix via single-file openssl decrypt, not bulk --force
+- [feedback_task_log_fallback_removed](bailey/feedback_task_log_fallback_removed.md) — 🔴 2026-09-04: bailey-task-monitor.py no longer falls back to stale Sheet hours; unmatched tasks show "no WS data"
 
 ## mpfc-monitor
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
