@@ -311,6 +311,12 @@ Analyzes the allocation report through a financial lens. **No new data fetch nee
 
 **Analysis framework:**
 
+### 0. Đối chiếu report gần nhất (🔴 MANDATORY, do first)
+Before writing anything new, find and read the previous run's allocation report (`ls reports/*/  | grep money-allocation | sort | tail -2` to get the prior one, not today's) and/or `reports/money-history.json`'s last-but-one snapshot. Specifically:
+- Any open "Kế hoạch" / plan / khuyến nghị from last time (e.g. "chuyển X từ tiết kiệm sang cổ phiếu") — check if the relevant account balances now reflect it being done, partially done, or still pending. State this explicitly in the new report, don't just silently re-propose the same plan.
+- Note material % or ₫ shifts per category vs last run and call out anything that looks like an anomaly (see Net Worth staleness warning above) vs a real trend.
+- If a plan was executed, mark it done and remove/archive it; if still pending, carry it forward (update numbers if the underlying account balances moved).
+
 ### 1. Điểm mạnh (Strengths)
 List concrete positives: low debt ratio, DCA discipline, diversified income sources, inflation hedge assets.
 
@@ -326,15 +332,19 @@ Key checks:
 - **Credit card**: Spike > 2× 6-month average → 🟡
 
 ### 3. Benchmark comparison
+🔴 Compute % on a base that EXCLUDES "Nhà" (primary residence, ~2.5B, non-tradeable, not an investable asset) — never include it in the benchmark denominator, even though it stays in the headline Net Worth. Base = total breakdown minus Nhà (e.g. 8,163,185,886 − 2,500,000,000 = 5,663,185,886). A second real-estate holding like "long an res" (investment property) still counts toward the RE row. Confirmed by user 2026-09-04 after the first cut wrongly included Nhà and showed BĐS at 43% (misleading — was really 18% of the investable base).
+
 Compare actual allocation vs global personal finance benchmarks:
 
 | Nhóm | Actual | Benchmark | Status |
 |------|--------|-----------|--------|
-| Bất động sản | X% | 20–30% | ⚠️/✅ |
+| Bất động sản (đầu tư, excl. Nhà) | X% | 20–30% | ⚠️/✅ |
 | Cổ phiếu/ETF/Fund | X% | 30–50% | ⚠️/✅ |
 | Trái phiếu/Tiết kiệm | X% | 10–20% | ⚠️/✅ |
 | Vàng/Commodity | X% | 5–15% | ⚠️/✅ |
 | Tiền mặt | X% | 5–10% | ⚠️/✅ |
+
+Note under the table which base (₫) was used, so it's auditable.
 
 ### 4. Upcoming decisions
 Flag any time-sensitive decisions (maturities, rebalancing opportunities) within 90 days.
