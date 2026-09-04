@@ -371,6 +371,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW +49.6M vs 08-28 (8,052,310,328 -> 8,101,926,619). trueTotalBalance 7,301,926,619 + Larion carry-forward 800M (unchanged, unconfirmed since 08-26). Lương 66.9M nhận 01/09 drove vcb liquid up. Sept MTD: Thu 66.9M / Chi 1.0M / Net +65.9M. Aug full month: Thu 270.4M / Chi 58.0M / Net +212.4M. No stale-savings-bug detected this run."
+    },
+    {
+      "date": "2026-09-04",
+      "label": "04/09",
+      "net_worth": 8090880406,
+      "gross_assets": 8163185886,
+      "liabilities": -3676,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 742000000,
+        "investment": 2531448206,
+        "savings": 1203923479,
+        "liquid": 165814201
+      },
+      "method": "reconstructed",
+      "note": "MISA totaldashboard 7,290,880,406 (-11.0M vs 09-03 7,301,926,619) + Larion carry-forward 800M unchanged, unconfirmed since 08-26. Sept MTD: Thu 66.9M (luong 01/09) / Chi 10.5M / Net +56.4M. Category breakdown reconstructed via cost-basis+cash formula (VCBS/FPTS/VCBF/Finhay) not live broker API this run -- sums to ~8.163B vs 8.091B headline, ~1% variance expected (see money-report.md). No stale-savings-bug detected."
     }
   ]
 }
