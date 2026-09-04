@@ -19,7 +19,7 @@
 | 7 | Slack — Equanimity | komal.bailur: "SGBuildEx mentioned that BCA flagged Sim Lian and Engie records because the Reference ID is tagged as 'Test'" — production data-quality issue, Carrick actively investigating |
 | 8 | Elena GitHub PR #309 | "Implement header and modal components with i18n support" open since 2026-08-11 (24 days), still unmerged — stale |
 | 9 | Workstream | ✅ RESOLVED on recheck (08:55) — SSO recovered, all gated items re-verified (see Re-check section) |
-| 10 | Upwork | Rory/Aysar workroom sessions expired, headless re-login failed (login selector not found); Neural Contract session expired — memo validation + hours not verified this pass, needs manual re-auth |
+| 10 | Upwork | ✅ RESOLVED on recheck (09:10) — carrick session re-authenticated (system-python cookie fallback), Rory 0 memos today (no work logged), Aysar 1 memo valid |
 | 11 | Fountain Trello | Matrix+Workstream verified on recheck; Trello board (Rick's account) still not checked (separate credentials, time-boxed) |
 | 12 | Arthur/Meta-Stamp | ✅ Verified on recheck (08:55) — Matrix+GitHub+Workstream clean, project appears paused/dormant, no client-facing issue |
 | 13 | Philip (MS Teams) | ✅ Checked + RETRACTED on recheck (08:55) — messages had no date/were already handled (Will had replied); script fixed to prevent recurrence |
@@ -190,6 +190,8 @@ Trello: Arthur - Meta-Stamp left ⚠️ incomplete.
 
 Session/Cloudflare failure ≠ memo status per existing rule — no alert on memo validity itself, but hours/memo data genuinely unverified this run. Manual re-auth needed: `node scripts/upwork-login.js --login --account=carrick` (interactive, outside cron).
 
+**Re-checked 09:10 — see Upwork Re-check section below, both workrooms now verified.**
+
 ---
 
 ## Trello — 06:50 (+07:00)
@@ -247,3 +249,14 @@ Workstream SSO recovered (was down at 06:00 cron). Re-verified gated items:
 
 **Cleared:** Maddy, James Diamond, Aysar, Bailey, Rebecca, Arthur, Blair Brown, Elena-WordPress
 **Still open:** John Yi, Elliott, Marcel, Elena-SamGuard, Fountain, Philip
+
+---
+
+## Upwork Re-check — 09:10 (+07:00)
+
+Carrick session re-authenticated (previous headless login attempt hung on a stale Chrome SingletonLock from tmp/upwork-profile-carrick; cleared lock, live-cookie injection via system python3 fallback succeeded).
+
+| Workroom | Status | Details |
+|----------|--------|---------|
+| Rory | ✓ verified | 0 memos logged 2026-09-03 (no work that day, not a memo-validity issue) |
+| Aysar | ✓ verified | 1 memo, valid — "Check the tasks that are ready for Aysar to review and release" |
