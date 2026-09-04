@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "web": "node web/server.js"
+    "web": "node web/server.js",
+    "claude": "claude --dangerously-skip-permissions"
   },
   "dependencies": {
     "express": "^4.22.2",
