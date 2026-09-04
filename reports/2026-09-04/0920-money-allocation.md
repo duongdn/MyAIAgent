@@ -67,3 +67,21 @@ Loại "Nhà" (2.5B, ở thực, không phải tài sản đầu tư) ra khỏi 
 - **Ngắn hạn (30 ngày)**: Xác minh lại VCBF (594M) và Larion (800M) bằng cách kích hoạt lại ví trên app MISA hoặc đối chiếu broker thực, để giảm phụ thuộc vào carry-forward.
 - **Trung hạn (6-12 tháng)**: Cân nhắc tăng tỉ trọng tiền mặt sẵn sàng (hiện 2%) lên gần benchmark 5% để linh hoạt hơn, có thể rút một phần từ tiết kiệm kỳ hạn ngắn khi đáo hạn.
 - **Dài hạn (>1 năm)**: Tiết kiệm hiện hơi cao (21.3% vs benchmark 10-20%) — phần đáo hạn mới có thể chuyển bớt sang cổ phiếu/ETF thay vì tái tục toàn bộ.
+
+### 6. Kế hoạch tăng tỉ trọng cổ phiếu — 2026-09-04 (để so sánh lần chạy sau)
+**Bối cảnh**: Cổ phiếu/ETF/Fund 44.7% (gần trần benchmark 50%), Tiết kiệm 21.3% (vượt trần benchmark 20%), Tiền mặt 2.9% (dưới sàn benchmark 5%).
+
+**Room tính toán**: Chuyển tối đa ~300,000,000 ₫ từ Tiết kiệm → Cổ phiếu thì Cổ phiếu chạm trần 50%, Tiết kiệm về ~17.6% (vẫn trong 10-20%).
+
+**Nguồn tiền đề xuất (ưu tiên theo lãi suất thấp nhất trước)**:
+| Nguồn | Số tiền (₫) | Lãi suất | Đáo hạn |
+|-------|------------|----------|---------|
+| Sổ "1m" | 100,000,000 | 4.75% | 10/09/2026 |
+| tikcop 1w | 10,000,000 | 6.1% | 08/09/2026 |
+| **Tổng đợt 1** | **110,000,000** | | |
+
+**Kết quả dự kiến sau đợt 1**: Cổ phiếu ~46.7%, Tiết kiệm ~19.4% — cả hai về gần benchmark hơn, còn dư ~190M room nếu muốn giải ngân thêm.
+
+**Không đụng vào**: Tiền mặt (đã dưới benchmark, đừng rút thêm) — bù bằng thu nhập/lương tháng sau thay vì rút từ tiết kiệm/cổ phiếu.
+
+**Trạng thái**: Đề xuất, chưa thực hiện. Đối chiếu số dư thực tế các sổ trên vào lần chạy tiếp theo để xem đã chuyển chưa.
