@@ -22,7 +22,7 @@
 | 10 | Upwork | Rory/Aysar workroom sessions expired, headless re-login failed (login selector not found); Neural Contract session expired — memo validation + hours not verified this pass, needs manual re-auth |
 | 11 | Fountain Trello | Matrix+Workstream verified on recheck; Trello board (Rick's account) still not checked (separate credentials, time-boxed) |
 | 12 | Arthur/Meta-Stamp | ✅ Verified on recheck (08:55) — Matrix+GitHub+Workstream clean, project appears paused/dormant, no client-facing issue |
-| 13 | Philip (MS Teams) | ✅ Checked on recheck (08:55) — see #15, client frustration with Elevate365 demo, appears unanswered |
+| 13 | Philip (MS Teams) | ✅ Checked + RETRACTED on recheck (08:55) — messages had no date/were already handled (Will had replied); script fixed to prevent recurrence |
 | 14 | Elena WordPress SamGuard | Not checked this pass |
 
 **Today (Fri Sep 4):** no known leave.
@@ -233,7 +233,7 @@ Workstream SSO recovered (was down at 06:00 cron). Re-verified gated items:
 | Bailey | ✓ completed | TuanNT 8h on Speedventory 09-03 (nonzero); GGS Slack already clean |
 | Rebecca (William Bills) | ✓ completed | TuanNT hours nonzero (Speedventory); William Bills Slack already clean |
 | Fountain | ○ still incomplete | Matrix plan (ViTHT 24h/DatNT 24h/VuTQ 12h⇒QC15h, posted 08:27 Mon) + Workstream actuals (DatNT 15.75h, ViTHT 8h, VuTQ 6h so far this week) verified; Trello board (Rick's account) NOT re-checked this pass — separate credentials, time-boxed |
-| Philip | ○ still incomplete | New alert — Philip (client) sent 5 MS Teams messages asking "Does it make sense what I'm trying to do?" re: an Elevate365 demo he's struggling to build (GitLab demo v2 submitted, frustrated) — appears unanswered by team; Elevate365 Workstream shows 0 logged hours this week |
+| Philip | ✓ completed (correction) | ⚠️ Alert #15 RETRACTED — MS Teams script had no date extraction, only clock time; couldn't tell if messages were from today or already-handled history. Fixed script to capture date-separator labels + `[freshness]` marker. Will Nguyen had already replied in-thread ("Yes sure, could you please give me more details?") — this was already being handled, not a fresh unanswered alert. |
 | Arthur - Meta-Stamp | ✓ completed | Matrix (both rooms) verified — technical room is internal "lesson learn" meeting discussion, no client-facing issue; business room 0 msgs. GitHub: 0 commits since 08-21 (stale ~2wk). Workstream Crystal lang: 0h this week. Project appears paused/dormant, no unresolved client question found. Slack Solid Code NOT verified this pass (recurring known gap, script arg bug) — completed per longstanding partial-verification precedent (Matrix+GitHub+Workstream agree, no alert) |
 | Blair Brown - Peptide Clyde | ✓ completed | 0h logged (per memory: deprioritized, ignore 0h) |
 | Elena - WordPress SamGuard | ✓ completed | samguard.co: 0 JS errors, 0 page errors, 0 CSP violations. Clean. |
@@ -241,7 +241,7 @@ Workstream SSO recovered (was down at 06:00 cron). Re-verified gated items:
 **New alert this pass:**
 | # | Source | Alert |
 |---|--------|-------|
-| 15 | MS Teams (Philip Briggs) | Client sent 5 messages describing frustration building an Elevate365 demo, asked directly "Does it make sense what I'm trying to do?" — appears unanswered; 0h logged on the project this week |
+| ~~15~~ | ~~MS Teams (Philip Briggs)~~ | **RETRACTED** — messages had no date context (script only captured clock time, not date), Will Nguyen had already replied in-thread. Not a fresh unanswered alert. Script fixed to extract date separators + freshness marker going forward. |
 
 **Also found (informational, not blocking):** Workstream `needsReview` pending rows — Generator: LucNT 0.5h "Follow up on release" (08-31, reviewers LucNT/HangNTT); James Diamond: LongVV 0.25h "Using Claude review repop" (08-31, reviewers PhucVT/LeNH).
 

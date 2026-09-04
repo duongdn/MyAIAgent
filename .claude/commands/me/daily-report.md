@@ -585,7 +585,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `fountain` | Work | Fountain | `fountain` (full 3-part) |
 | `rebecca` | Work | Rebecca (William Bills) | `slack williambills` + `sheets tuannt` |
 | `neural` | Work | Neural Contract | `upwork` (workroom 38901192) |
-| `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` |
+| `philip` | Work | Philip | `node scripts/fetch-msteams-customer-messages.js will "Philip Briggs"` — 🔴 script now prints a `[freshness]` line per message's date separator; only flag as a NEW alert if freshness says "TODAY (new)" or the date falls within the report window — messages read without a fresh/today date label are already-seen history, do not re-alert on them (2026-09-04 false alert incident) |
 | `ohcleo` | Work | Ohcleo | `slack ohcleo` (Piece 12) |
 | `arthur` | Work | Arthur - Meta-Stamp | `arthur` (Piece 13, full 6-source check) |
 | `blair_brown` | Work | Blair Brown - Peptide Clyde | `sheets lenh` (LeNH's all-Workstream-projects scan already covers `blair_brown` project `cmqj4tj6v01gfm81vgx7ipkov`) |

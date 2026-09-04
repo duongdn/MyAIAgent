@@ -413,6 +413,29 @@ async function searchAndExtractMessages(page, customerName, disambiguateHint = '
 
   const messages = await page.evaluate(() => {
     const results = [];
+
+    // Date separators (e.g. "Today", "Yesterday", "Monday, September 1") — Teams renders these
+    // as standalone list items between message groups. Without them, per-message "time" is only
+    // a clock time (e.g. "12:32 PM") with no date, making it impossible to tell a fresh message
+    // from a days-old one on recheck. Collect separator nodes with their DOM position so each
+    // message can inherit the nearest PRECEDING separator's date label.
+    const separatorEls = Array.from(document.querySelectorAll(
+      '[class*="dateSeparator"], [class*="date-separator"], [data-tid*="date-separator"], [role="separator"]'
+    ));
+    const separators = separatorEls
+      .map(el => ({ el, label: el.innerText?.trim() }))
+      .filter(s => s.label && /^(today|yesterday|\w+day,|\w+ \d{1,2},?\s*\d{0,4}$)/i.test(s.label));
+
+    function dateLabelFor(node) {
+      let best = null;
+      for (const s of separators) {
+        // s.el precedes node in document order → DOCUMENT_POSITION_FOLLOWING (4) set on node relative to s.el
+        const pos = s.el.compareDocumentPosition(node);
+        if (pos & Node.DOCUMENT_POSITION_FOLLOWING) best = s.label;
+      }
+      return best || '';
+    }
+
     const msgSelectors = [
       '[data-tid="message-body"]', '[class*="messageContent"]', '[class*="message-body"]',
       '[role="listitem"] [class*="body"]', '[data-tid*="message"]',
@@ -426,8 +449,11 @@ async function searchAndExtractMessages(page, customerName, disambiguateHint = '
           if (text && text.length > 3) {
             const p = el.closest('[data-tid*="chat"], [class*="message"], [role="listitem"]') || el.parentElement?.parentElement;
             const sender = p?.querySelector('[class*="author"], [class*="sender"], [data-tid*="author"]')?.innerText?.trim() || '';
-            const time = p?.querySelector('[class*="timestamp"], [class*="time"], time')?.innerText?.trim() || '';
-            results.push({ sender, time, text: text.slice(0, 500) });
+            const timeEl = p?.querySelector('[class*="timestamp"], [class*="time"], time');
+            const time = timeEl?.innerText?.trim() || '';
+            const iso = timeEl?.getAttribute?.('datetime') || '';
+            const date = dateLabelFor(p || el);
+            results.push({ sender, date, time, iso, text: text.slice(0, 500) });
           }
         });
         if (results.length > 0) break;
@@ -435,7 +461,7 @@ async function searchAndExtractMessages(page, customerName, disambiguateHint = '
     }
     if (results.length === 0) {
       const main = document.querySelector('[role="main"], #app-main, [class*="chatView"]');
-      if (main) results.push({ sender: '(raw)', time: '', text: main.innerText?.slice(0, 2000) });
+      if (main) results.push({ sender: '(raw)', date: '', time: '', iso: '', text: main.innerText?.slice(0, 2000) });
     }
     return results;
   }).catch(() => []);
@@ -496,8 +522,16 @@ async function searchAndExtractMessages(page, customerName, disambiguateHint = '
     if (result.messages.length > 0) {
       console.log('\n--- Messages ---');
       result.messages.slice(0, 20).forEach((m, i) => {
-        console.log(`[${i + 1}] ${m.sender ? m.sender + ' | ' : ''}${m.time ? m.time + ' | ' : ''}${m.text}`);
+        const when = [m.date, m.time].filter(Boolean).join(' ');
+        console.log(`[${i + 1}] ${m.sender ? m.sender + ' | ' : ''}${when ? when + ' | ' : ''}${m.text}`);
       });
+      const lastDated = [...result.messages].reverse().find(m => m.date);
+      if (lastDated) {
+        const isFresh = /^today$/i.test(lastDated.date);
+        console.log(`\n[freshness] Last message date label: "${lastDated.date}" — ${isFresh ? 'TODAY (new)' : 'NOT today, treat as already-seen unless a newer message exists below it'}`);
+      } else {
+        console.log('\n[freshness] No date separator found for any message — cannot confirm this is a fresh message; do not report as a new alert without manual verification.');
+      }
     } else {
       console.log('\n--- Raw search result items ---');
       result.rawText.slice(0, 30).forEach((t, i) => console.log(`[${i + 1}] ${t}`));
