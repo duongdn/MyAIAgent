@@ -45,18 +45,20 @@ Tiền mặt           0.17B █
 - Thanh khoản (tiền mặt + tiết kiệm) đủ ~3.3x chi tiêu 6 tháng.
 
 ### 2. Rủi ro
-- 🟡 **Tập trung BĐS**: 43.1% tổng tài sản là BĐS (chủ yếu nhà ở), cao hơn benchmark 20-30%. Rủi ro thấp vì là tài sản ở thực, không phải đầu cơ.
+- 🟢 **BĐS đầu tư (long an res)**: 18.0% base đầu tư — trong benchmark 20-30%, không đáng lo. Nhà ở chính (2.5B, loại khỏi benchmark) không tính là rủi ro tập trung đầu tư.
 - 🟡 **Data quality VCBF/Larion**: 2 khoản trị giá ~1.39B (17% tổng) đang dựa vào cost-basis/carry-forward do MISA hiển thị currentAmount=0 (bug đã biết). Cần xác nhận định kỳ qua broker thực hoặc kích hoạt lại ví trên app.
 - 🟢 **Currency risk**: Paypal (USD) chỉ ~88.5M, <2% tổng — không đáng ngại.
 
 ### 3. Benchmark comparison
+Loại "Nhà" (2.5B, ở thực, không phải tài sản đầu tư) ra khỏi base tính % — chỉ tính trên tổng tài sản đầu tư được (5,663,185,886 ₫). "long an res" (BĐS thứ 2) vẫn tính vì có thể coi là đầu tư.
+
 | Nhóm | Actual | Benchmark | Status |
 |------|--------|-----------|--------|
-| Bất động sản | 43.1% | 20–30% | ⚠️ cao hơn (nhà ở chính) |
-| Cổ phiếu/ETF/Fund | 31.0% | 30–50% | ✅ |
-| Trái phiếu/Tiết kiệm | 14.7% | 10–20% | ✅ |
-| Vàng | 9.1% | 5–15% | ✅ |
-| Tiền mặt | 2.0% | 5–10% | ⚠️ hơi thấp, bù bằng tiết kiệm sẵn có |
+| Bất động sản (long an res) | 18.0% | 20–30% | ✅ (hơi thấp nhưng ok) |
+| Cổ phiếu/ETF/Fund | 44.7% | 30–50% | ✅ |
+| Trái phiếu/Tiết kiệm | 21.3% | 10–20% | ⚠️ hơi cao |
+| Vàng | 13.1% | 5–15% | ✅ |
+| Tiền mặt | 2.9% | 5–10% | ⚠️ hơi thấp, bù bằng tiết kiệm sẵn có |
 
 ### 4. Upcoming decisions
 - Không có đáo hạn gấp trong 90 ngày; các sổ tiết kiệm ngắn hạn xoay vòng bình thường.
@@ -64,4 +66,4 @@ Tiền mặt           0.17B █
 ### 5. Khuyến nghị
 - **Ngắn hạn (30 ngày)**: Xác minh lại VCBF (594M) và Larion (800M) bằng cách kích hoạt lại ví trên app MISA hoặc đối chiếu broker thực, để giảm phụ thuộc vào carry-forward.
 - **Trung hạn (6-12 tháng)**: Cân nhắc tăng tỉ trọng tiền mặt sẵn sàng (hiện 2%) lên gần benchmark 5% để linh hoạt hơn, có thể rút một phần từ tiết kiệm kỳ hạn ngắn khi đáo hạn.
-- **Dài hạn (>1 năm)**: Theo dõi tỉ trọng BĐS nếu có kế hoạch mua thêm — hiện đã vượt benchmark, nên ưu tiên các kênh đầu tư khác (ETF/Fund) cho phần tích lũy mới.
+- **Dài hạn (>1 năm)**: Tiết kiệm hiện hơi cao (21.3% vs benchmark 10-20%) — phần đáo hạn mới có thể chuyển bớt sang cổ phiếu/ETF thay vì tái tục toàn bộ.
