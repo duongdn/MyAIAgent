@@ -387,6 +387,22 @@
       },
       "method": "reconstructed",
       "note": "MISA totaldashboard 7,290,880,406 (-11.0M vs 09-03 7,301,926,619) + Larion carry-forward 800M unchanged, unconfirmed since 08-26. Sept MTD: Thu 66.9M (luong 01/09) / Chi 10.5M / Net +56.4M. Category breakdown reconstructed via cost-basis+cash formula (VCBS/FPTS/VCBF/Finhay) not live broker API this run -- sums to ~8.163B vs 8.091B headline, ~1% variance expected (see money-report.md). No stale-savings-bug detected."
+    },
+    {
+      "date": "2026-09-07",
+      "label": "07/09",
+      "net_worth": 8087736698,
+      "gross_assets": 8158036698,
+      "liabilities": -3675,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 735000000,
+        "investment": 2545448206,
+        "savings": 1201918000,
+        "liquid": 155670492
+      },
+      "method": "reconstructed",
+      "note": "MISA totaldashboard 7,287,736,698 (-3.1M vs 09-04 7,290,880,406) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now >12 days). Sept MTD: Thu 70.9M (luong+Freelancer) / Chi 10.6M / Net +60.2M. Category breakdown via cost-basis+cash formula. No stale-savings-bug detected. Kế hoạch tăng cổ phiếu từ 09-04 vẫn CHƯA THỰC HIỆN — 2 sổ nguồn (1w 10M, 1m 100M) còn nguyên, đáo hạn 08-10/09."
     }
   ]
 }
