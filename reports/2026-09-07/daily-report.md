@@ -233,9 +233,37 @@ Full details: reports/2026-09-07/matrix-rooms-0606.md
 
 `daily_report.last_run` and `arthur_monitor.last_run` NOT fully advanced past what could be verified — see notes below and config update.
 
+## Re-check — 08:35 (+07:00)
+
+Workstream SSO retry succeeded this time (`node scripts/workstream-login.js`, headless flow, token captured) — unblocked all hour-verification gates. Fri 2026-09-04 (last workday) hours across all Workstream projects: PhucVT 8h (ohcleo), TuanNT 8h (speedventory/Bailey), KhanhHH 8h combined (baamboozle 2h + generator 6h), LeNH 9.5h (james_diamond), LongVV 0.5h (maddy, informational only) — all clear, no shortfalls. `needsReview` empty across every project (no pending Workstream review-hour alerts).
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ completed | Hours clear (LongVV 0.5h informational, Kai/Xtreme Slack activity already showed him engaged) |
+| John Yi | ✓ completed | Amazing Meds 0 activity (routine), TuanNT 8h clear |
+| James Diamond | ✓ completed | Discord re-checked (0 new msgs since 06:35, nothing due yet Monday AM), PhucVT 8h clear |
+| Rory | ○ still incomplete | Alert #7 still open — client jeff's recurring payment-issue complaint (since Jul 20), Rory actively engaging but unresolved |
+| Aysar | ✓ completed | MPDM update posted 09-04 (not silent), KhanhHH hours clear. "HẾT TASK" is checklist item text, not a status signal — not treated as alert per rule |
+| Elliott | ✓ completed | Generator Slack routine, KhanhHH hours clear |
+| Marcel | ✓ completed | Equanimity Slack — Carrick/komal XiD scoping, no alert |
+| Elena - SamGuard | ○ still incomplete | PR #309 still open (now 4+ weeks stale) — checked CodeRabbit: auto-review skipped (base branch isn't default), no human review either. Left un-merged rather than force-merge without any review signal — needs a manual review/merge decision |
+| Neural Contract | ✓ completed | No workroom activity checked this pass — silence is never an alert per existing rule |
+| Bailey | ○ still incomplete | Alert #9 still open — GGS purchase-price=0 investigation with customer Joey not formally closed (customer "seemed to calm down" per datnc, but no explicit resolution message found); TuanNT 8h clear |
+| Rebecca | ✓ completed | TuanNT 8h clear (speedventory); William Bills Slack already showed 0 activity from earlier check this run |
+| Fountain | ○ still incomplete | Part 1: no new week plan posted yet as of 08:34 (before the usual 08:30-09:30 window) — using last week's plan for context, not an alert by itself. Trello board: no new customer comments since 09-04; one hard-to-release card found ("Fountain Pro error", 18 days in Doing, pre-existing not new). Part 2/3 (task-log actuals vs plan) not re-run this pass — defer once week plan posts |
+| Philip | ✓ completed | MS Teams re-checked — messages have no date-separator/freshness marker, so per rule these are already-seen history, not a new alert |
+| Ohcleo | (already complete) | — |
+| Arthur - Meta-Stamp | ✓ completed | 0h logged this week (crystal_lang), both Matrix rooms silent since 09-04 08:55 — quiet run, no findings. Full 6-source Slack scan not re-run this pass (time-boxed) |
+| Blair Brown | ✓ completed | Covered by LeNH's Workstream scan — no blair_brown hours logged 09-04 but ad-hoc/no fixed target, not an alert |
+| Elena - WordPress | ✓ completed | Re-ran `wordpress-samguard-check.js` — 0 JS errors, 0 page errors, 0 CSP violations. Only benign analytics/mp4 abort noise |
+| Upwork Memo | (informational) | Rory + Aysar workrooms: no memos found for 09-04 (source: none) — no invalid-memo alert |
+
+**Cleared:** Maddy, John Yi, James Diamond, Aysar, Elliott, Marcel, Neural Contract, Rebecca, Philip, Arthur, Blair Brown, Elena-WordPress
+**Still open:** Rory (client payment complaint), Elena-SamGuard (stale unreviewed PR #309), Bailey (GGS purchase-price=0 investigation not confirmed closed), Fountain (week plan not yet posted + Part 2/3 not re-run)
+
 ## Unresolved Questions
 
-1. Workstream SSO — 2 genuine attempts failed this run (redirect OK, token never captured). Needs a manual/interactive login session to fully unblock hour verification, Maddy/Aysar/Elliott/Bailey/Rebecca/Fountain/Arthur/Blair Brown Trello gates.
-2. Elena PR #309 (4 weeks stale) — needs CodeRabbit review + merge decision, not actioned this run.
-3. Arthur, Upwork Memo, Reminders, Elena-WordPress, Fountain Part 2/3+Trello, James Diamond (Redmine) — not run this pass, all deferred to recheck.
-4. Fountain plan-sheet access — TrinhMTT needs edit/view rights fixed to stop repeat hour-mismatch reports.
+1. Elena PR #309 (4+ weeks stale, base branch not default so CodeRabbit auto-review is skipped, no human review either) — needs a manual review/merge decision.
+2. Fountain plan-sheet access — TrinhMTT still needs edit/view rights fixed to stop repeat hour-mismatch reports (unresolved from earlier this window).
+3. GGS/Bailey purchase-price=0 issue — no explicit "resolved" message found; recommend one more customer-facing confirmation before treating as closed.
+4. Rory/BXR — client jeff's payment-issue complaint (since Jul 20) still not confirmed resolved.
