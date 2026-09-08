@@ -267,3 +267,7 @@ Workstream SSO recovered this pass (proactive refresh → API refresh → headle
 
 **Cleared:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip
 **Still open:** John Yi, Rebecca, Bailey (TuanNT 0h, no leave note), Elena - SamGuard Digital Plant (PR conflict), OhCleo (unanswered customer question), Arthur - Meta-Stamp (Solid Code Slack still unwired)
+
+## Reminders — 08:36 (+07:00)
+
+- TuanNT: 0h logged 2026-09-07, no leave note → reminder sent to Matrix room `!knbJbIKzXRJNGVFQNg:nustechnology.com` (direct room) per explicit user request. event_id=$2rdJ3DCqHLZzVhT35Q-c5VM5tu-OKtE9pegiFEBX1TE
