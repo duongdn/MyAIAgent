@@ -241,3 +241,29 @@ Not run this cycle — gated on Workstream/Sheets dev-hours data which is unavai
 5. MS Teams Philip check — needs manual interactive login on `will` account (MFA challenge).
 6. Upwork carrick session (Rory/Aysar memo, Neural) — needs a real interactive login in carrick's Chrome Profile 1.
 7. Arthur/Meta-Stamp full 6-source check — not reached this run, "Solid Code" Slack still unwired.
+
+---
+
+## Re-check — 08:29 (+07:00)
+
+Workstream SSO recovered this pass (proactive refresh → API refresh → headless browser login all chained successfully on first attempt). Re-ran all gated Workstream projects for 2026-09-07 (week just started Monday, so weekTotal = day total).
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ✓ completed | Maddy/Xtreme project: 0h logged (informational only, no shortfall rule for LongVV/ad-hoc). Kai-role report gate: 0h → skip check per rule. Slack Xtreme already clean (Kai posted PR + responded to Madhuraka). |
+| Aysar | ✓ completed | Baamboozle project: KhanhHH 0h → MPDM silence NOT an alert (gate condition). KhanhHH logged hours elsewhere (Generator 3h, Radio Data Center 5h) — not idle, just not on Baamboozle today. |
+| Elliott | ✓ completed | Generator project: KhanhHH 3h logged. Reviewers LucNT/HangNTT, needsReview empty. Slack Generator already clean. |
+| Blair Brown | ✓ completed | 0h logged, but per [[feedback_lenh_james_diamond_blair_brown_deprioritized]] Blair Brown 0h is explicitly deprioritized (LeNH full-time on James Diamond) — not an alert. |
+| John Yi | ○ still incomplete | TuanNT: 0h across ALL sources today (amazing_meds, rebecca, speedventory, family_app, neural_contract all show 0h/no TuanNT entries). No leave note found in mail/Matrix. Genuine 0h alert — blocks John Yi + Rebecca + Bailey per TuanNT gate rule. |
+| Rebecca | ○ still incomplete | Same TuanNT 0h gate as John Yi (see above). |
+| Bailey | ○ still incomplete | Same TuanNT 0h gate (speedventory itself has hours from TrinhMTT 1h + VyNL 3h, but TuanNT's own 0h blocks this item per rule). |
+| Fountain | ✓ completed | **Part 2 (actuals, Workstream `fountain` project, 2026-09-07):** DatNT 8h (weekCharged 8.42), ThinhT 4h, HungPN 0.5h. needsReview has 8 pending rows but Fountain is excluded from the needsReview alert rule — not flagged. **Part 3 (plan vs actual):** weekly plan (ViTHT 40h/ThinhT 20h/DatNT 40h) vs day-1 actuals (ThinhT 4/20=20% pace, DatNT 8/40=20% pace, ViTHT 0h so far) — normal pace, 1 day into the week. **Trello board:** checked Todo/Doing/In QA/Not Passed/Bugs/QC Internal (59 active cards) — 0 customer comments in last 30h (kunalsheth/tmmckay/mike62798179/iris63293413 all silent). 2 cards in Doing >5 days ("Fountain Pro error" 19.8d — past the 14d hard-to-release threshold; "CSV template download link" 11.7d) — noted, not a new alert (no customer pressure on them). |
+| Elena - SamGuard Digital Plant | ○ still incomplete | Re-checked live: PR #309 still `mergeable_state: dirty` — conflict unresolved, needs manual merge. |
+| OhCleo | ○ still incomplete | Re-ran `slack-fetch-ohcleo.js` since 06:00 — 0 new messages in Celine DM. Celine's 12:55 question ("AI companionship... when can I test it?") still unanswered by Tony. |
+| Philip (MS Teams) | ✓ completed | MFA challenge cleared this attempt (no redirect loop) — fetched thread successfully. Script's `[freshness]` check found no date separator confirming a new message; per rule (2026-09-04 false-alert incident) these are already-seen history, not a new alert. |
+| Arthur - Meta-Stamp | ○ still incomplete | "Solid Code" Slack workspace still absent from `config/.slack-accounts.json` (checked directly — genuinely still unwired, not a token issue). Cannot complete the mandatory 4-source-minimum check without it. |
+
+**Cross-report scan (Step 5.5):** grepped whole report for Maddy/Xtreme/Kai/Aysar/Baamboozle/Elliott/Generator/Fountain/Kunal/Philip/Blair Brown aliases — only pre-existing items found: (a) Xtreme "Madhuraka asked about ticket 455 (no update since Aug 14)" — long-standing/recurring client question, not new today, not blocking (consistent with original report treating it as informational, not an Alert Summary item); (b) Fountain production Rollbar errors (Alert #3) — separate from the Trello gate (dev-facing bug tracking, already captured as its own alert, doesn't block the Trello checklist item which is about customer comments/task tracking). No new blocking mentions found outside the mapped gate sources.
+
+**Cleared:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip
+**Still open:** John Yi, Rebecca, Bailey (TuanNT 0h, no leave note), Elena - SamGuard Digital Plant (PR conflict), OhCleo (unanswered customer question), Arthur - Meta-Stamp (Solid Code Slack still unwired)
