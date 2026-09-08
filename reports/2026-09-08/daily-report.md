@@ -15,8 +15,8 @@
 | 3 | Fountain (rick@) | 4 new production errors on FountainGifts: #312 Invalid price gift, #313 NoMethodError, #314 Gibbon::MailChimpError (reactivated + 10th occurrence), #315 ArgumentError 'express_3_days' |
 | 4 | OhCleo — Celine DM | Celine asked Tony (12:55) "AI companionship cards still in Dev Done, when can I test it?" — unanswered as of window end |
 | 5 | ~~MS Teams (Philip Briggs, `will` account)~~ | ✅ RESOLVED at 08:29 recheck — login cleared on retry, no MFA block. No new customer message found (existing thread only). |
-| 6 | Upwork (Rory / Aysar workrooms) | Memo check: `carrick` session expired, live-cookie + headless re-login both failed — memo validity not checked this run |
-| 7 | Upwork Neural Contract | `carrick` Chrome Profile 1 session appears logged out — all 4 auto-retry attempts hit login redirect |
+| 6 | ~~Upwork (Rory / Aysar workrooms)~~ | ✅ RESOLVED at 08:42 recheck — `carrick` session recovered on retry. 0 memos logged for either workroom on 2026-09-07 (nothing to validate, not a failure). |
+| 7 | ~~Upwork Neural Contract~~ | ✅ RESOLVED at 08:42 recheck — session recovered, messages fetched. Latest exchange (2026-08-11) is a routine holiday notice, no unresolved customer question. |
 | 8 | New Relic — MPFC | Apdex 0.52 (poor). 2 more SQLi `WAITFOR DELAY` probes hit `/search/.../feed/rss2/` (12.8s, 15.6s) — reconnaissance traffic, chronic `WP_Error::get_method()` fatal (27x) still unresolved |
 | 9 | New Relic — OhCleo | `MediaByTagsView.get` avg 17.9s/223 calls — worse outlier than prior runs |
 | 10 | Workstream needs review — Radio Data Center (Franc) | KhanhHH has 2 charged-hours rows pending review (2026-09-07, 5h total: "Found real cause of 104.4 jumps" + "Rebuilt power-izmir/power-istanbul") — reviewer LeNH not yet actioned. Found during 08:29 recheck. |
@@ -224,13 +224,13 @@ No Trello item exists yet for Performance (informational only).
 
 ---
 
-## Upwork — 06:00 (+07:00)
+## Upwork — 06:00 (+07:00), re-tried 08:42 recheck
 
-**Memo check (Rory/Aysar, `carrick` session):** session expired; live-cookie extraction + headless re-login both failed (`input[name="login[username]"]` selector not found). Memo validity not verified this run (Alert #6).
+~~Memo check (Rory/Aysar, `carrick` session): session expired~~ — **RESOLVED at 08:42 recheck**: `carrick` session recovered on retry. Rory: 0 memos logged 2026-09-07. Aysar: 0 memos logged 2026-09-07. Nothing to validate either workroom, not a failure.
 
-**Neural Contract:** `upwork-neural-check.js` ran all 4 built-in retries — every attempt hit a login redirect despite fresh cookie extraction from carrick's real Chrome. Real Chrome Profile 1 session likely logged out (Alert #7). Per rule, session/Cloudflare failure ≠ alert on hours — but memo validity genuinely unchecked.
+~~Neural Contract: session logged out~~ — **RESOLVED at 08:42 recheck**: `upwork-neural-check.js` succeeded, messages fetched. Latest exchange (2026-08-11) is a routine team holiday notice — no unresolved customer question.
 
-Trello: Neural Contract ✓ complete (silence/session failure is not an alert per rule). Rory/Aysar memo status: not gating those items further beyond their existing Slack/hours gates (still incomplete on Workstream grounds above).
+Trello: Neural Contract ✓ complete. Rory/Aysar memo status now verified clean too (their Trello items are gated on Slack/hours, already ✓ from earlier recheck — memo check adds no new blocker).
 
 ---
 
@@ -261,15 +261,14 @@ Trello: Philip ✓ complete.
 1. TuanNT 0h (John Yi/Rebecca/Bailey Trello gate) — reminder sent 08:36, awaiting her update.
 2. Elena PR #309 merge conflict — needs manual resolution before merge/deploy.
 3. OhCleo: Tony needs to answer Celine's AI-companionship testing question.
-4. Upwork carrick session (Rory/Aysar memo, Neural) — needs a real interactive login in carrick's Chrome Profile 1 (not re-tried this recheck).
-5. Arthur/Meta-Stamp full 6-source check — "Solid Code" Slack still unwired, confirmed again at recheck.
-6. NEW: Radio Data Center needsReview — KhanhHH 2 rows pending LeNH's review (5h, 2026-09-07).
+4. Arthur/Meta-Stamp full 6-source check — "Solid Code" Slack still unwired, confirmed again at recheck.
+5. NEW: Radio Data Center needsReview — KhanhHH 2 rows pending LeNH's review (5h, 2026-09-07).
 
 ---
 
-## Re-check log — 08:29-08:36 (+07:00)
+## Re-check log — 08:29-08:42 (+07:00)
 
-Workstream SSO recovered on first retry (proactive refresh → API refresh → headless login chained successfully). Findings folded directly into each piece's section above (Slack, Sheets/Workstream, Fountain, Elena, Philip, Reminders) rather than duplicated here — see those sections for detail. Cross-report scan (Step 5.5) run before completing any item: grepped the whole file for each item's name/aliases, found nothing blocking beyond what's already captured as its own alert (Xtreme ticket-455 staleness = pre-existing/informational, Fountain Rollbar errors = separate dev-facing alert #3, not a Trello-gate blocker).
+Workstream SSO recovered on first retry (proactive refresh → API refresh → headless login chained successfully). Upwork carrick session (Rory/Aysar memo + Neural Contract) also recovered on retry at 08:42 — no manual login needed after all. Findings folded directly into each piece's section above (Slack, Sheets/Workstream, Fountain, Elena, Philip, Upwork, Reminders) rather than duplicated here — see those sections for detail. Cross-report scan (Step 5.5) run before completing any item: grepped the whole file for each item's name/aliases, found nothing blocking beyond what's already captured as its own alert (Xtreme ticket-455 staleness = pre-existing/informational, Fountain Rollbar errors = separate dev-facing alert #3, not a Trello-gate blocker).
 
-**Cleared this recheck:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip.
+**Cleared this recheck:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip, Neural Contract, Upwork Rory/Aysar memo check.
 **Still open:** John Yi, Rebecca, Bailey (TuanNT 0h — reminder sent), Elena - SamGuard Digital Plant (PR conflict), OhCleo (unanswered customer question), Arthur - Meta-Stamp (Solid Code Slack still unwired).
