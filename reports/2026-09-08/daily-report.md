@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Workstream (all projects) | SSO/browser-login outage again — token refresh + 2x headless browser login attempts all failed (recurring pattern, root cause still open per prior reports). No dev-hours data available this run for Maddy/John Yi/Aysar/Elliott/Bailey/Rebecca/Fountain/Blair Brown. |
+| 1 | ~~Workstream (all projects)~~ | ✅ RESOLVED at 08:29 recheck — SSO recovered on first retry (proactive refresh → API refresh → headless login all chained successfully). Maddy/Aysar/Elliott/Blair Brown/Fountain data fetched and Trello items completed; only John Yi/Rebecca/Bailey stay open, on a genuine TuanNT 0h finding (not an outage) — see Re-check section below. |
 | 2 | Elena - SamGuard Digital Plant | PR #309 "Implement header and modal components with i18n support" is `mergeable_state: dirty` (conflicts) — not auto-merged. |
 | 3 | Fountain (rick@) | 4 new production errors on FountainGifts: #312 Invalid price gift, #313 NoMethodError, #314 Gibbon::MailChimpError (reactivated + 10th occurrence), #315 ArgumentError 'express_3_days' |
 | 4 | OhCleo — Celine DM | Celine asked Tony (12:55) "AI companionship cards still in Dev Done, when can I test it?" — unanswered as of window end |
@@ -234,7 +234,7 @@ Not run this cycle — gated on Workstream/Sheets dev-hours data which is unavai
 ---
 
 ## Unresolved / carry to recheck
-1. Workstream SSO outage — recheck once recovered; then complete Maddy/John Yi/Aysar/Elliott/Bailey/Rebecca/Blair Brown Trello items and run Reminders.
+1. ~~Workstream SSO outage~~ — ✅ RESOLVED at 08:29 recheck, see Re-check section below.
 2. Fountain Parts 2/3 + Trello board — needs Workstream.
 3. Elena PR #309 merge conflict — needs manual resolution before merge/deploy.
 4. OhCleo: Tony needs to answer Celine's AI-companionship testing question.
