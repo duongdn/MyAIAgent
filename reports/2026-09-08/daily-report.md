@@ -14,11 +14,12 @@
 | 2 | Elena - SamGuard Digital Plant | PR #309 "Implement header and modal components with i18n support" is `mergeable_state: dirty` (conflicts) — not auto-merged. |
 | 3 | Fountain (rick@) | 4 new production errors on FountainGifts: #312 Invalid price gift, #313 NoMethodError, #314 Gibbon::MailChimpError (reactivated + 10th occurrence), #315 ArgumentError 'express_3_days' |
 | 4 | OhCleo — Celine DM | Celine asked Tony (12:55) "AI companionship cards still in Dev Done, when can I test it?" — unanswered as of window end |
-| 5 | MS Teams (Philip Briggs, `will` account) | Login stuck on Microsoft "Help us protect your account" verification challenge for 20+ redirect loops — could not check for new customer messages this run, needs manual verification |
+| 5 | ~~MS Teams (Philip Briggs, `will` account)~~ | ✅ RESOLVED at 08:29 recheck — login cleared on retry, no MFA block. No new customer message found (existing thread only). |
 | 6 | Upwork (Rory / Aysar workrooms) | Memo check: `carrick` session expired, live-cookie + headless re-login both failed — memo validity not checked this run |
 | 7 | Upwork Neural Contract | `carrick` Chrome Profile 1 session appears logged out — all 4 auto-retry attempts hit login redirect |
 | 8 | New Relic — MPFC | Apdex 0.52 (poor). 2 more SQLi `WAITFOR DELAY` probes hit `/search/.../feed/rss2/` (12.8s, 15.6s) — reconnaissance traffic, chronic `WP_Error::get_method()` fatal (27x) still unresolved |
 | 9 | New Relic — OhCleo | `MediaByTagsView.get` avg 17.9s/223 calls — worse outlier than prior runs |
+| 10 | Workstream needs review — Radio Data Center (Franc) | KhanhHH has 2 charged-hours rows pending review (2026-09-07, 5h total: "Found real cause of 104.4 jumps" + "Rebuilt power-izmir/power-istanbul") — reviewer LeNH not yet actioned. Found during 08:29 recheck. |
 
 **Today (Tue Sep 8):** No leave/WFH notices seen in mail or Matrix for today.
 
@@ -63,7 +64,8 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete (Check mail card ful
 | Aigile Dev | 0 | — |
 
 Trello: Rory, Franc, MPFC, Andrew Taraba, Raymond, Colin, Marcel ✓ complete.
-Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca ⚠️ left incomplete — gated on Workstream dev-hours which is down this run (see Alert #1).
+Maddy, Aysar, Elliott ✓ complete (Workstream recovered at 08:29 recheck — see Re-check section).
+John Yi, Bailey, Rebecca ⚠️ still incomplete — TuanNT genuine 0h finding, not a Workstream outage (see Re-check section).
 
 ---
 
@@ -79,29 +81,50 @@ Trello: James Diamond ✓ complete.
 
 ---
 
-## Sheets/Workstream — all developers — 06:00 (+07:00)
+## Sheets/Workstream — all developers — 06:00 (+07:00), updated 08:29 recheck
 
-🔴 **Workstream unavailable this run** — token refresh + 2x proactive browser-login (headless and DISPLAY=:1) all failed with SSO/timeout errors. This matches the recurring Workstream SSO outage pattern documented in prior weekly/daily reports (root cause still open on the vendor/infra side). Since Google Sheets task-log was fully retired 2026-08-21 (all projects moved to Workstream), there is no fallback source this run — dev-hours data for LongVV/PhucVT/TuanNT/KhanhHH/LeNH/Bailey is **unavailable**, not 0h. Do not treat as a shortfall.
+~~Workstream unavailable this run~~ — **RESOLVED at 08:29 recheck**: proactive refresh → API refresh → headless browser login all chained successfully on first retry. Fetched 2026-09-07 data for every gated project:
+
+| Project | Members logged | Reviewers | needsReview |
+|---------|-----------------|-----------|-------------|
+| Maddy (Xtreme) | none (0h) | — | — |
+| Amazing Meds (John Yi) | none (0h) | — | — |
+| Baamboozle (Aysar) | none (0h) | — | — |
+| Generator (Elliott) | KhanhHH 3h | LucNT, HangNTT | none |
+| Speedventory (Bailey) | TrinhMTT 1h, VyNL 3h | — | — |
+| Rebecca | none (0h) | — | — |
+| Blair Brown | none (0h) | — | — |
+| James Diamond | none (0h) | PhucVT, LeNH | none |
+| BXR App (Rory) | none (0h) | — | — |
+| Radio Data Center (Franc) | KhanhHH 5h | LeNH | ⚠️ 2 pending rows (KhanhHH, 5h charged 09-07) — alert addressed to LeNH |
+| Fountain | HungPN 0.5h, DatNT 8h, ThinhT 4h | VuTQ, DuongDN | excluded from alerting per rule |
+| Crystal lang (Arthur) | none (0h) | TienND | none |
+| Family App (Charles Chang) | none (0h) | — | — |
+| Neural Contract | none (0h) | — | — |
+
+**TuanNT: 0h across every one of his usual projects (John Yi/Rebecca/Speedventory/Family App/Neural Contract) — genuine finding, no leave note found.** Reminder sent to his direct Matrix room per explicit user request (see Reminders section).
+
+**New (not previously flagged): Radio Data Center needsReview** — KhanhHH has 2 pending-review rows (5h total, 2026-09-07) on the Franc/RDC project. Reviewer = LeNH (per `isReviewer` flag, not the Manager). This is informational for the Franc Trello item (Slack-only gate, not blocked by hours/review) but is a genuinely new unresolved item — flagging here since it wasn't caught in the 06:00 cron pass.
 
 Scrin.io (Nick @ John Yi company account — 2026-09-07): 0h — no sessions recorded. (Not TuanNT evidence.)
 
-Trello: John Yi, Bailey, Rebecca, Maddy, Aysar, Elliott, Blair Brown ⚠️ left incomplete pending Workstream recovery.
+Trello: Maddy, Aysar, Elliott, Blair Brown ✓ complete. John Yi, Bailey, Rebecca ⚠️ still incomplete (TuanNT 0h).
 
 ---
 
-## Fountain — 06:00 (+07:00)
+## Fountain — 06:00 (+07:00), Parts 2/3 + Trello board updated 08:29 recheck
 
 **Part 1 — Matrix Plan** (room `!EWnVDAxbTGsBxPkaaI`): trinhmtt posted at 08:50: ViTHT 40h, ThinhT 20h, DatNT 40h => QC 25h.
 
-**Part 2 — Task Log Actuals:** unavailable — Workstream project `fountain` down this run (Alert #1); Sheet fallback also retired.
+**Part 2 — Task Log Actuals (Workstream `fountain`, 2026-09-07 — week just started Monday):** HungPN 0.5h, DatNT 8h (charged 8.42), ThinhT 4h. ViTHT 0h so far this week. needsReview shows 8 pending rows but Fountain is excluded from the needsReview alert rule (user instruction) — not flagged.
 
-**Part 3 — Plan vs Actual:** cannot compute without actuals — skipped this run, will recheck once Workstream recovers.
+**Part 3 — Plan vs Actual:** ThinhT 4/20h (20% pace), DatNT 8/40h (20% pace), ViTHT 0/40h — normal, 1 day into a 7-day week.
 
-**Trello board (customer comments / stuck cards):** not checked this run due to time budget — carry to recheck.
+**Trello board (customer comments / stuck cards):** checked Todo/Doing/In QA/Not Passed/Bugs/QC Internal (59 active cards) — 0 customer comments (kunalsheth/tmmckay/mike62798179/iris63293413) in the last 30h. 2 cards sitting in Doing 5+ days: "Fountain Pro error" (19.8 days, past the 14-day hard-to-release threshold) and "CSV template download link" (11.7 days) — noted, no customer pressure visible on either.
 
 Notable from Matrix room activity: production bug reported by ViTHT (search shows 3 items but total 146 — confirmed a counter bug, not a feature, per VuTQ); DatNT fixed a $74 price bug and pushed to BETA; team moved Kunal's spammy "Log credit payment" emails off duongdn@ onto rick@ (both envs).
 
-Trello: Fountain ⚠️ left incomplete (Parts 2/3 + Trello board not done).
+Trello: Fountain ✓ complete (all 3 parts + Trello board done at recheck, no blocking issues).
 
 ---
 
@@ -219,55 +242,34 @@ Trello: Arthur - Meta-Stamp ⚠️ left incomplete.
 
 ---
 
-## Philip (MS Teams) — 06:00 (+07:00)
+## Philip (MS Teams) — 06:00 (+07:00), re-tried 08:29 recheck
 
-`fetch-msteams-customer-messages.js will "Philip Briggs"` — login stuck on Microsoft's "Help us protect your account" verification challenge for 20+ redirect loops before erroring on a detached frame. This is a genuine external MFA/verification block, not an internal token issue — needs a manual interactive login on the `will` Teams account outside of cron.
+~~Login stuck on Microsoft's "Help us protect your account" verification challenge~~ — **RESOLVED at 08:29 recheck**: `fetch-msteams-customer-messages.js will "Philip Briggs"` logged in cleanly this attempt, no redirect loop. Fetched thread successfully — script's `[freshness]` check found no date separator confirming a new message, meaning these are already-seen history (per the 2026-09-04 false-alert rule), not a new customer message.
 
-Trello: Philip ⚠️ left incomplete (Alert #5).
-
----
-
-## Reminders — 06:00 (+07:00)
-
-Not run this cycle — gated on Workstream/Sheets dev-hours data which is unavailable this run (see Alert #1). No reminders printed or sent.
+Trello: Philip ✓ complete.
 
 ---
-
-## Unresolved / carry to recheck
-1. ~~Workstream SSO outage~~ — ✅ RESOLVED at 08:29 recheck, see Re-check section below.
-2. Fountain Parts 2/3 + Trello board — needs Workstream.
-3. Elena PR #309 merge conflict — needs manual resolution before merge/deploy.
-4. OhCleo: Tony needs to answer Celine's AI-companionship testing question.
-5. MS Teams Philip check — needs manual interactive login on `will` account (MFA challenge).
-6. Upwork carrick session (Rory/Aysar memo, Neural) — needs a real interactive login in carrick's Chrome Profile 1.
-7. Arthur/Meta-Stamp full 6-source check — not reached this run, "Solid Code" Slack still unwired.
-
----
-
-## Re-check — 08:29 (+07:00)
-
-Workstream SSO recovered this pass (proactive refresh → API refresh → headless browser login all chained successfully on first attempt). Re-ran all gated Workstream projects for 2026-09-07 (week just started Monday, so weekTotal = day total).
-
-| Item | Result | Details |
-|------|--------|---------|
-| Maddy | ✓ completed | Maddy/Xtreme project: 0h logged (informational only, no shortfall rule for LongVV/ad-hoc). Kai-role report gate: 0h → skip check per rule. Slack Xtreme already clean (Kai posted PR + responded to Madhuraka). |
-| Aysar | ✓ completed | Baamboozle project: KhanhHH 0h → MPDM silence NOT an alert (gate condition). KhanhHH logged hours elsewhere (Generator 3h, Radio Data Center 5h) — not idle, just not on Baamboozle today. |
-| Elliott | ✓ completed | Generator project: KhanhHH 3h logged. Reviewers LucNT/HangNTT, needsReview empty. Slack Generator already clean. |
-| Blair Brown | ✓ completed | 0h logged, but per [[feedback_lenh_james_diamond_blair_brown_deprioritized]] Blair Brown 0h is explicitly deprioritized (LeNH full-time on James Diamond) — not an alert. |
-| John Yi | ○ still incomplete | TuanNT: 0h across ALL sources today (amazing_meds, rebecca, speedventory, family_app, neural_contract all show 0h/no TuanNT entries). No leave note found in mail/Matrix. Genuine 0h alert — blocks John Yi + Rebecca + Bailey per TuanNT gate rule. |
-| Rebecca | ○ still incomplete | Same TuanNT 0h gate as John Yi (see above). |
-| Bailey | ○ still incomplete | Same TuanNT 0h gate (speedventory itself has hours from TrinhMTT 1h + VyNL 3h, but TuanNT's own 0h blocks this item per rule). |
-| Fountain | ✓ completed | **Part 2 (actuals, Workstream `fountain` project, 2026-09-07):** DatNT 8h (weekCharged 8.42), ThinhT 4h, HungPN 0.5h. needsReview has 8 pending rows but Fountain is excluded from the needsReview alert rule — not flagged. **Part 3 (plan vs actual):** weekly plan (ViTHT 40h/ThinhT 20h/DatNT 40h) vs day-1 actuals (ThinhT 4/20=20% pace, DatNT 8/40=20% pace, ViTHT 0h so far) — normal pace, 1 day into the week. **Trello board:** checked Todo/Doing/In QA/Not Passed/Bugs/QC Internal (59 active cards) — 0 customer comments in last 30h (kunalsheth/tmmckay/mike62798179/iris63293413 all silent). 2 cards in Doing >5 days ("Fountain Pro error" 19.8d — past the 14d hard-to-release threshold; "CSV template download link" 11.7d) — noted, not a new alert (no customer pressure on them). |
-| Elena - SamGuard Digital Plant | ○ still incomplete | Re-checked live: PR #309 still `mergeable_state: dirty` — conflict unresolved, needs manual merge. |
-| OhCleo | ○ still incomplete | Re-ran `slack-fetch-ohcleo.js` since 06:00 — 0 new messages in Celine DM. Celine's 12:55 question ("AI companionship... when can I test it?") still unanswered by Tony. |
-| Philip (MS Teams) | ✓ completed | MFA challenge cleared this attempt (no redirect loop) — fetched thread successfully. Script's `[freshness]` check found no date separator confirming a new message; per rule (2026-09-04 false-alert incident) these are already-seen history, not a new alert. |
-| Arthur - Meta-Stamp | ○ still incomplete | "Solid Code" Slack workspace still absent from `config/.slack-accounts.json` (checked directly — genuinely still unwired, not a token issue). Cannot complete the mandatory 4-source-minimum check without it. |
-
-**Cross-report scan (Step 5.5):** grepped whole report for Maddy/Xtreme/Kai/Aysar/Baamboozle/Elliott/Generator/Fountain/Kunal/Philip/Blair Brown aliases — only pre-existing items found: (a) Xtreme "Madhuraka asked about ticket 455 (no update since Aug 14)" — long-standing/recurring client question, not new today, not blocking (consistent with original report treating it as informational, not an Alert Summary item); (b) Fountain production Rollbar errors (Alert #3) — separate from the Trello gate (dev-facing bug tracking, already captured as its own alert, doesn't block the Trello checklist item which is about customer comments/task tracking). No new blocking mentions found outside the mapped gate sources.
-
-**Cleared:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip
-**Still open:** John Yi, Rebecca, Bailey (TuanNT 0h, no leave note), Elena - SamGuard Digital Plant (PR conflict), OhCleo (unanswered customer question), Arthur - Meta-Stamp (Solid Code Slack still unwired)
 
 ## Reminders — 08:36 (+07:00)
 
-- TuanNT: 0h logged 2026-09-07, no leave note → reminder sent to Matrix room `!knbJbIKzXRJNGVFQNg:nustechnology.com` (direct room) per explicit user request. event_id=$2rdJ3DCqHLZzVhT35Q-c5VM5tu-OKtE9pegiFEBX1TE
+- TuanNT: 0h logged 2026-09-07, no leave note found → reminder sent to Matrix room `!knbJbIKzXRJNGVFQNg:nustechnology.com` (direct room) per explicit user request. event_id=$2rdJ3DCqHLZzVhT35Q-c5VM5tu-OKtE9pegiFEBX1TE
+- LongVV/PhucVT/KhanhHH/LeNH: not 0h or ad-hoc/no-fixed-target — no reminder needed.
+
+---
+
+## Unresolved / carry to next recheck
+1. TuanNT 0h (John Yi/Rebecca/Bailey Trello gate) — reminder sent 08:36, awaiting her update.
+2. Elena PR #309 merge conflict — needs manual resolution before merge/deploy.
+3. OhCleo: Tony needs to answer Celine's AI-companionship testing question.
+4. Upwork carrick session (Rory/Aysar memo, Neural) — needs a real interactive login in carrick's Chrome Profile 1 (not re-tried this recheck).
+5. Arthur/Meta-Stamp full 6-source check — "Solid Code" Slack still unwired, confirmed again at recheck.
+6. NEW: Radio Data Center needsReview — KhanhHH 2 rows pending LeNH's review (5h, 2026-09-07).
+
+---
+
+## Re-check log — 08:29-08:36 (+07:00)
+
+Workstream SSO recovered on first retry (proactive refresh → API refresh → headless login chained successfully). Findings folded directly into each piece's section above (Slack, Sheets/Workstream, Fountain, Elena, Philip, Reminders) rather than duplicated here — see those sections for detail. Cross-report scan (Step 5.5) run before completing any item: grepped the whole file for each item's name/aliases, found nothing blocking beyond what's already captured as its own alert (Xtreme ticket-455 staleness = pre-existing/informational, Fountain Rollbar errors = separate dev-facing alert #3, not a Trello-gate blocker).
+
+**Cleared this recheck:** Maddy, Aysar, Elliott, Blair Brown, Fountain, Philip.
+**Still open:** John Yi, Rebecca, Bailey (TuanNT 0h — reminder sent), Elena - SamGuard Digital Plant (PR conflict), OhCleo (unanswered customer question), Arthur - Meta-Stamp (Solid Code Slack still unwired).
