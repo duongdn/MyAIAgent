@@ -115,7 +115,9 @@ Trello: James Diamond ✓ complete.
 
 Scrin.io (Nick @ John Yi company account — 2026-09-07): 0h — no sessions recorded. (Not TuanNT evidence.)
 
-Trello: Maddy, Aysar, Elliott, Blair Brown ✓ complete. John Yi, Bailey, Rebecca ⚠️ still incomplete (TuanNT 0h).
+**NEW gate added 2026-09-08 (user request): Bailey ALSO checked against Nick's daily report in Matrix room "NUS - Bailey - Paturevision 2026" (`!MaisjkNOhxoXkhCxqa`, same pattern as Aysar's MPDM check).** Checked last messages: report has been missing since start of September — datnc flagged it live in-room at 09:10, duongdn already reminded the team the daily-report habit is mandatory, tuannt acknowledged ("ok de e bổ sung") at 09:11. Team already self-corrected before this check ran — no bot reminder needed today. Going forward this room is part of the standing Bailey gate (skill file + memory updated); a reminder will only ever be sent with explicit confirmation, never automatically.
+
+Trello: Maddy, Aysar, Elliott, Blair Brown ✓ complete. John Yi, Bailey, Rebecca ⚠️ still incomplete (TuanNT 0h; Bailey now also carries the new Matrix daily-report gate, currently self-resolving in-room).
 
 ---
 
