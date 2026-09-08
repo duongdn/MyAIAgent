@@ -13,4 +13,6 @@ metadata:
 
 **How to apply:** For LeNH's daily-report sheets/gate check, query the **James Diamond** Workstream project (not Blair Brown) as her primary 0h/shortfall source going forward. Blair Brown stays cleared (not an alert) as long as she's reassigned. If a future check needs a project this DuongDN token can't see (e.g. "Others", 403), don't conclude "0h everywhere" — ask the dev directly, same as the LongVV/Codeorange precedent (see [[feedback_dev_project_mapping_flexible]]).
 
+🔴 **2026-09-08 recurrence:** LeNH 0h on James Diamond (and BXR/Rory, Blair Brown) again, no leave note — a daily-report recheck pass wrongly lumped her into a generic "not 0h, no reminder needed" line without actually checking her project data (only Blair Brown's deprioritization was applied, James Diamond wasn't separately verified). User re-confirmed "LeNH làm full James" and had a reminder sent. **Lesson: Blair Brown being deprioritized does NOT mean LeNH's overall 0h check can be skipped — always verify James Diamond specifically, every run, since that's her real full-time project and gate.**
+
 See also [[feedback_lenh_consolidated]].

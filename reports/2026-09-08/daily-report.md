@@ -20,7 +20,7 @@
 | 8 | New Relic — MPFC | Apdex 0.52 (poor). 2 more SQLi `WAITFOR DELAY` probes hit `/search/.../feed/rss2/` (12.8s, 15.6s) — reconnaissance traffic, chronic `WP_Error::get_method()` fatal (27x) still unresolved |
 | 9 | New Relic — OhCleo | `MediaByTagsView.get` avg 17.9s/223 calls — worse outlier than prior runs |
 | 10 | Workstream needs review — Radio Data Center (Franc) | KhanhHH has 2 charged-hours rows pending review (2026-09-07, 5h total: "Found real cause of 104.4 jumps" + "Rebuilt power-izmir/power-istanbul") — reviewer LeNH not yet actioned. Found during 08:29 recheck. |
-| 11 | LeNH — 0h across ALL her projects | James Diamond 0h, BXR App (Rory) 0h, Blair Brown 0h — 2026-09-07, no leave note found in mail/Matrix. Per stricter LeNH rule (any shortfall without leave = alert), this is a genuine miss caught only after user asked "LeNH đã log giờ chưa" — my earlier recheck wrongly lumped her under "not 0h, no reminder needed." Not yet reminded — awaiting explicit send instruction. |
+| 11 | LeNH — 0h across ALL her projects | James Diamond 0h, BXR App (Rory) 0h, Blair Brown 0h — 2026-09-07, no leave note found in mail/Matrix. User confirmed LeNH is full-time on James Diamond; reminder sent to her direct Matrix room (`!OIrgPraJWrcDTnRVLQ`). Memory updated (both copies) to stop treating "Blair Brown deprioritized" as covering James Diamond too. |
 
 **Today (Tue Sep 8):** No leave/WFH notices seen in mail or Matrix for today.
 
@@ -67,6 +67,12 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete (Check mail card ful
 Trello: Rory, Franc, MPFC, Andrew Taraba, Raymond, Colin, Marcel ✓ complete.
 Maddy, Aysar, Elliott ✓ complete (Workstream recovered at 08:29 recheck — see Re-check section).
 John Yi, Bailey, Rebecca ⚠️ still incomplete — TuanNT genuine 0h finding, not a Workstream outage (see Re-check section).
+
+### Maddy — QA/free-work complaint status check (08:49, user asked "Maddy complain sao rồi")
+
+The 08-25/08-26 QA-quality complaint ("continuing to receive complaints... asking us to work for free"; ticket 454/"Long Trap" bug) has **not recurred** — checked full "Project Wrap Up - Preventive Actions" Matrix room history (`!mVzbIeVTgFFwftTPnz`) and Xtreme Slack DM history since 08-25: no further mention of QA quality/free-work since Madhuraka's 08-26 02:04 reply. Tone since then is routine ticket flow (449, 428, 459, 462, PR reviews), with a "ok, go ahead" (09-06) suggesting relationship is back to normal. Ticket 454 itself: **Done** (closed since ~Aug).
+
+**Separate, still-open item (not the same complaint, but real):** Madhuraka asked twice for an update on ticket 455 ("Refresh Issue on Quotes page") — once "no update since 14 Aug" flagged 09-07 11:46, ticket still sitting in JIRA status **To Do**, last touched 2026-08-14 (25 days). This is a live unanswered client ask, worth a reply even though it's routine (not an escalation like the Aug complaint).
 
 ---
 
@@ -255,7 +261,7 @@ Trello: Philip ✓ complete.
 
 - TuanNT: 0h logged 2026-09-07, no leave note found → reminder sent to Matrix room `!knbJbIKzXRJNGVFQNg:nustechnology.com` (direct room) per explicit user request. event_id=$2rdJ3DCqHLZzVhT35Q-c5VM5tu-OKtE9pegiFEBX1TE
 - LongVV/PhucVT/KhanhHH: not 0h or ad-hoc/no-fixed-target — no reminder needed.
-- **LeNH: 0h across James Diamond, BXR App (Rory), AND Blair Brown today — no leave note found. This is a genuine alert under her stricter any-shortfall rule, missed in the earlier recheck pass (wrongly grouped as "not 0h"). Not sent yet — awaiting explicit send instruction (her direct Matrix room: `!OIrgPraJWrcDTnRVLQ:nustechnology.com`).**
+- LeNH: 0h across James Diamond (her real full-time project, per user confirmation), BXR App (Rory), and Blair Brown — no leave note found → reminder sent to her direct Matrix room `!OIrgPraJWrcDTnRVLQ:nustechnology.com` per explicit user request. event_id=$2PQ-atFLxGo34GHy7j09jc06U2pYCZj1vW_-NgQrlA4
 
 ---
 
