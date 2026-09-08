@@ -403,6 +403,22 @@
       },
       "method": "reconstructed",
       "note": "MISA totaldashboard 7,287,736,698 (-3.1M vs 09-04 7,290,880,406) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now >12 days). Sept MTD: Thu 70.9M (luong+Freelancer) / Chi 10.6M / Net +60.2M. Category breakdown via cost-basis+cash formula. No stale-savings-bug detected. Kế hoạch tăng cổ phiếu từ 09-04 vẫn CHƯA THỰC HIỆN — 2 sổ nguồn (1w 10M, 1m 100M) còn nguyên, đáo hạn 08-10/09."
+    },
+    {
+      "date": "2026-09-08",
+      "label": "08/09",
+      "net_worth": 8078594737,
+      "gross_assets": 8150900217,
+      "liabilities": -3669,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 732500000,
+        "investment": 2545448206,
+        "savings": 1203935178,
+        "liquid": 149016833
+      },
+      "method": "reconstructed",
+      "note": "MISA totaldashboard 7,278,594,737 (-9.1M vs 09-07 7,287,736,698) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now 13 days). Drop matched by Sức khỏe -4.71M + Học phí -1M + Linh tinh -0.9M + vàng giảm nhẹ (-2.5M). Sept MTD: Thu 70.9M / Chi 17.2M / Net +53.7M. Kế hoạch tăng cổ phiếu từ 09-04 VẪN CHƯA THỰC HIỆN — sổ '1m' 100M còn nguyên (đáo hạn ~09-10); sổ '1w' cũ đã tự rollover thành 'tikcop 1w' mới 10.01M (đáo hạn ~09-15), KHÔNG phải chuyển sang cổ phiếu. No stale-savings-bug detected this run."
     }
   ]
 }
