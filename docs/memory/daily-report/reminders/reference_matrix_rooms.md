@@ -16,5 +16,6 @@ type: reference
 | Elena team | Digital Plant | `!kyArBadvcbfPIpIxpD:nustechnology.com` (announce deploys/review fails) |
 | Arthur/Crystal lang | Arthur - Meta-Stamp (business/demo room) | `!BEXEdVUmvWclPLELFf:nustechnology.com` |
 | Arthur/Crystal lang | Technical setup room (repo/docker/creds, no display name) | `!QEbdvaMJkTurMpRPIX:nustechnology.com` |
+| Nick/Bailey | NUS - Bailey - Paturevision 2026 (customer-facing project room — Bailey daily-report gate, added 2026-09-08, see [[feedback_bailey_matrix_daily_report_gate]]) | `!MaisjkNOhxoXkhCxqa:nustechnology.com` |
 
 Room URL format: `https://chat.nustechnology.com/#/room/{room_id}` or `https://app.element.io/#/room/{room_id}`
