@@ -35,6 +35,7 @@
 - [feedback_trello_write_only_verified_and_no_debug_writes](daily-report/general/feedback_trello_write_only_verified_and_no_debug_writes.md) — 🔴 never test-write to Trello (debug PUT completed Philip twice); re-fetch live card before finalizing (concurrent sessions flip items)
 - [feedback_full_run_inline_no_subagent_spawn](daily-report/general/feedback_full_run_inline_no_subagent_spawn.md) — 🔴 full run = inline always, no per-piece subagent (avoids reloading 65K-token command file per piece)
 - [feedback_never_ask_before_full_run](daily-report/general/feedback_never_ask_before_full_run.md) — 🔴 never AskUserQuestion to confirm scope before full run, just execute
+- [feedback_leave_plan_must_refresh_every_run](daily-report/general/feedback_leave_plan_must_refresh_every_run.md) — 🔴 always re-run parse-leave-emails.js (full refresh) before any --check, snapshot goes stale silently
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
@@ -71,6 +72,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_matrix_tomorrow_is_message_date_plus_one](daily-report/sheets/feedback_matrix_tomorrow_is_message_date_plus_one.md)
 - [feedback_lenh_james_diamond_blair_brown_deprioritized](daily-report/sheets/feedback_lenh_james_diamond_blair_brown_deprioritized.md) — 🔴 2026-08-21: LeNH=James full-time, ignore Blair Brown 0h for now
 - [feedback_verify_workstream_zero_hours_before_alerting](daily-report/sheets/feedback_verify_workstream_zero_hours_before_alerting.md) — 🔴🔴🔴 2026-08-25: false LeNH 0h alert from stale/misread data, re-verify fresh before ANY 0h claim
+- [feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt](daily-report/sheets/feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt.md) — 🔴🔴🔴 3rd recurrence: James Diamond gate = LeNH not PhucVT, skill table is stale, memory wins
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
