@@ -290,3 +290,9 @@ User caught a 3rd mistake: Bailey's Matrix "missing daily report" alert (Alert #
 **Bailey is now cleared.** Genuinely still open: James Diamond (LeNH 0h), Fountain (unanswered customer comment), Elena - SamGuard (stale PR).
 
 ---
+
+## Reminder sent — 09:41 (+07:00)
+
+Sent LeNH a Matrix reminder (room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`, per user's explicit "nhắc LeNH luôn đi"): 0h on Workstream (all projects incl. James Diamond) for 2026-09-07 and 09-08, no approved leave. `event_id=$LCoY6ZsbLmLHZLBjAmE77Mva1abiUdogQbLreGy7FDo`.
+
+---
