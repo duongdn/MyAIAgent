@@ -424,17 +424,17 @@
       "date": "2026-09-09",
       "label": "09/09",
       "net_worth": 8078918594,
-      "gross_assets": 8151224074,
+      "gross_assets": 8137224074,
       "liabilities": -3662,
       "categories": {
         "real_estate": 3520000000,
         "gold": 733000000,
         "investment": 2545448206,
         "savings": 1203935178,
-        "liquid": 148844352
+        "liquid": 134844352
       },
       "method": "reconstructed",
-      "note": "MISA totaldashboard 7,278,918,594 (+0.3M vs 09-08 7,278,594,737) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now 14 days). Không có giao dịch mới hôm nay — chênh lệch do vàng +0.5M (giá) và Paypal FX -0.18M. Sept MTD: Thu 70.9M / Chi 17.2M / Net +53.7M (không đổi). Kế hoạch tăng cổ phiếu từ 09-04 VẪN CHƯA THỰC HIỆN — sổ 1m 100M đáo hạn NGÀY MAI 09-10, điểm quyết định cuối. No stale-savings-bug detected this run."
+      "note": "MISA totaldashboard 7,278,918,594 (+0.3M vs 09-08 7,278,594,737) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now 14 days). Khong co giao dich moi hom nay — chenh lech do vang +0.5M (gia) va Paypal FX -0.18M. Sept MTD: Thu 70.9M / Chi 17.2M / Net +53.7M (khong doi). Ke hoach tang co phieu tu 09-04 VAN CHUA THUC HIEN — so 1m 100M dao han NGAY MAI 09-10, diem quyet dinh cuoi. No stale-savings-bug detected this run. CORRECTION 09:57: vcb was misreported +14M (54.77M instead of 40.77M) in the 09:40 run — fixed here and in all 09-09 report files."
     }
   ]
 }

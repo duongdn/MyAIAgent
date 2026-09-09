@@ -40,7 +40,7 @@
 
 <div class="header">
   <h1>💰 Money Dashboard</h1>
-  <div class="date">Cập nhật: 09/09/2026 09:40 · Net Worth từ <code>/wallets/totaldashboard</code> + Larion carry-forward</div>
+  <div class="date">Cập nhật: 09/09/2026 09:40 (fix Liquid 09:57) · Net Worth từ <code>/wallets/totaldashboard</code> + Larion carry-forward</div>
 </div>
 
 <div class="kpi-row">
@@ -56,8 +56,8 @@
   </div>
   <div class="kpi">
     <div class="label">Liquid</div>
-    <div class="value" style="color:#ef4444">148.8M</div>
-    <div class="delta down">▼ −0.2M vs 08/09 (149.0M)</div>
+    <div class="value" style="color:#ef4444">134.8M</div>
+    <div class="delta down">▼ −14.2M vs 08/09 (149.0M) — vcb correction, see note below</div>
   </div>
   <div class="kpi">
     <div class="label">Tiết kiệm</div>
@@ -135,7 +135,7 @@
         <tr><td>tikcop 3 month</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Paypal</td><td>💵 Liquid</td><td class="right">92,161,680</td><td><span class="badge warn">▼ vs 92.3M (FX)</span></td></tr>
         <tr><td>Finhay</td><td>📈 Fund (cost-basis+cash)</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
-        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">54,771,805</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">40,771,805</td><td><span class="badge warn">Đã sửa (fix -14.0M lúc 09:57)</span></td></tr>
         <tr><td>Tikop</td><td>📈 Đầu tư</td><td class="right">40,024,366</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>tikcop 1w (rollover mới)</td><td>🏦 Tiết kiệm</td><td class="right">10,011,699</td><td><span class="badge info">Không đổi, đáo hạn ~09-15</span></td></tr>
         <tr><td>nam á 6m</td><td>🏦 Tiết kiệm</td><td class="right">2,005,479</td><td><span class="badge info">◆ Không đổi</span></td></tr>
@@ -194,7 +194,7 @@
         <tr><td>💵 Tiền mặt</td><td class="right">2.6%</td><td>5–10%</td><td><span class="badge warn">⚠️ hơi thấp</span></td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px;color:#64748b;margin-top:10px">% tính trên tổng tài sản ĐẦU TƯ được (5,651,227,736₫) — đã loại "Nhà" (2.5B) khỏi base. Net Worth tổng vẫn bao gồm Nhà. Nguồn: reports/2026-09-09/0940-money-allocation.md § Finance Review.</div>
+    <div style="font-size:11px;color:#64748b;margin-top:10px">% tính trên tổng tài sản ĐẦU TƯ được (5,637,227,736₫) — đã loại "Nhà" (2.5B) khỏi base. Net Worth tổng vẫn bao gồm Nhà. Nguồn: reports/2026-09-09/0940-money-allocation.md § Finance Review.</div>
   </div>
 </div>
 
@@ -248,7 +248,7 @@ new Chart(document.getElementById('chartAllocation'), {
   data: {
     labels: ['Đầu tư', 'Tiết kiệm', 'BĐS (Long An)', 'Vàng', 'Liquid'],
     datasets: [{
-      data: [2545, 1204, 1020, 733, 149],
+      data: [2545, 1204, 1020, 733, 135],
       backgroundColor: [COLORS.invest, COLORS.savings, COLORS.re, COLORS.gold, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
@@ -276,7 +276,7 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
       { label: '📈 Đầu tư',   data: [2463,2491,2491,2531,2545,2545,2545], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [753,750,743,742,735,733,733],       backgroundColor: COLORS.gold },
       { label: '🏦 Tiết kiệm',data: [1194,1192,1202,1204,1202,1204,1204], backgroundColor: COLORS.savings },
-      { label: '💵 Liquid',   data: [201,186,215,166,156,149,149],       backgroundColor: COLORS.liquid },
+      { label: '💵 Liquid',   data: [201,186,215,166,156,149,135],       backgroundColor: COLORS.liquid },
     ]
   },
   options: {
@@ -298,7 +298,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
     labels: LABELS,
     datasets: [
       { label: '🏦 Tiết kiệm', data: [1194, 1192, 1202, 1204, 1202, 1204, 1204], backgroundColor: COLORS.savings, borderRadius: 3 },
-      { label: '💵 Liquid',    data: [201, 186, 215, 166, 156, 149, 149],       backgroundColor: COLORS.liquid,  borderRadius: 3 },
+      { label: '💵 Liquid',    data: [201, 186, 215, 166, 156, 149, 135],       backgroundColor: COLORS.liquid,  borderRadius: 3 },
     ]
   },
   options: {

@@ -1,15 +1,15 @@
 # Asset Allocation — 2026-09-09 09:40
 
 ## Tỉ lệ tài sản (excl. Nhà — 2.5B primary residence, non-tradeable)
-Base = 5,651,227,736 ₫ (gross 8,151,227,736 − Nhà 2,500,000,000)
+Base = 5,637,227,736 ₫ (gross 8,137,227,736 − Nhà 2,500,000,000)
 
 | Loại | Tổng (₫) | % Total | Ghi chú |
 |------|---------|---------|---------|
-| 📈 Investment | 2,545,448,206 | 45.04% | ETF+Fund+Cổ tức+Larion carry-fwd |
-| 🏦 Savings | 1,203,935,178 | 21.30% | 8 sổ đang hoạt động |
-| 🏠 Real Estate (long an res) | 1,020,000,000 | 18.05% | BĐS đầu tư, khác Nhà |
-| 🥇 Gold (vàng) | 733,000,000 | 12.97% | +500K vs 09-08 (giá vàng) |
-| 💵 Liquid | 148,844,352 | 2.63% | |
+| 📈 Investment | 2,545,448,206 | 45.16% | ETF+Fund+Cổ tức+Larion carry-fwd |
+| 🏦 Savings | 1,203,935,178 | 21.36% | 8 sổ đang hoạt động |
+| 🏠 Real Estate (long an res) | 1,020,000,000 | 18.10% | BĐS đầu tư, khác Nhà |
+| 🥇 Gold (vàng) | 733,000,000 | 13.00% | +500K vs 09-08 (giá vàng) |
+| 💵 Liquid | 134,844,352 | 2.39% | |
 
 ## Chi tiết ETF + Fund
 - ETF (VCBS) — VN30/VN100/VN1000: 655,655,620 ₫
@@ -25,22 +25,24 @@ Investment  [█████████████████████    
 Savings     [██████████                    ] 21.3%
 Real Estate [████████                      ] 18.1%
 Gold        [██████                        ] 13.0%
-Liquid      [█                             ]  2.6%
+Liquid      [█                             ]  2.4%
 ```
 
 ## Full View (incl. Nhà 2.5B)
-Base = 8,151,227,736 ₫
+Base = 8,137,227,736 ₫
 
 | Loại | Tổng (₫) | % Total |
 |------|---------|---------|
-| Real Estate (incl. Nhà) | 3,520,000,000 | 43.18% |
-| Investment | 2,545,448,206 | 31.23% |
-| Savings | 1,203,935,178 | 14.77% |
-| Gold | 733,000,000 | 9.00% |
-| Liquid | 148,844,352 | 1.83% |
+| Real Estate (incl. Nhà) | 3,520,000,000 | 43.26% |
+| Investment | 2,545,448,206 | 31.28% |
+| Savings | 1,203,935,178 | 14.80% |
+| Gold | 733,000,000 | 9.01% |
+| Liquid | 134,844,352 | 1.66% |
+
+**Correction (09:57):** vcb account was misreported as 54,771,805 (stray +14M from an earlier subagent pass, likely double-counted the 07/09 "Chuyển khoản tới VCBS" transfer). Verified against raw API + MISA web UI, correct = 40,771,805. All totals above fixed.
 
 ## Nhận xét
-- Liquidity ratio (Liquid+Savings vs 6-tháng chi tiêu 420M): 1,352,779,530 ₫ → gấp ~3.2× target, thoải mái.
+- Liquidity ratio (Liquid+Savings vs 6-tháng chi tiêu 420M): 1,338,779,530 ₫ → gấp ~3.2× target, thoải mái.
 - Đáo hạn sắp tới: "1m" 100M mai (2026-09-10), "tikcop 1w" 10M (~09-15), "tikcop 3 month" 100M (~10-10).
 - Investment vẫn là nhóm lớn nhất (45%), phần lớn nằm ở Larion (800M, carry-forward, KHÔNG xác nhận được giá trị thật 14 ngày qua) — rủi ro số liệu, không phải rủi ro thị trường.
 - Không có giao dịch Cho vay/Thu nợ mới hôm nay → 4 ví đầu tư (VCBS/VCBF/FPTS/Finhay) giữ nguyên giá trị so với 09-08.
@@ -55,13 +57,13 @@ Base = 8,151,227,736 ₫
   - Sổ "1w" (rollover 09-08 thành "tikcop 1w" 10,011,699₫) — không đổi hôm nay, đáo hạn ~09-15.
   - → Carry forward kế hoạch sang lần sau, nhấn mạnh deadline 09-10 trong khuyến nghị.
 - Net Worth: 7,278,918,594 (+323,857 ₫ vs 09-08's 7,278,594,737) — biến động cực nhỏ, không phải giao dịch thực. Giải thích đầy đủ: vàng +500,000 (giá) − Paypal FX −176,150 (tỷ giá USD/VND giảm nhẹ) + Payoneer FX +6.6. Không có giao dịch thu/chi mới hôm nay (transactions list unchanged since 09-08T09:04).
-- Category shifts: Gold tăng nhẹ 732.5M → 733.0M (giá vàng). Investment, Savings, Real Estate không đổi (không có Cho vay/Thu nợ mới). Liquid giảm nhẹ 149.0M → 148.8M (Paypal FX).
+- Category shifts: Gold tăng nhẹ 732.5M → 733.0M (giá vàng). Investment, Savings, Real Estate không đổi (không có Cho vay/Thu nợ mới). Liquid giảm nhẹ 149.0M → 134.8M (Paypal FX; số liệu vcb đã fix từ báo cáo lỗi 148.8M lúc 09:40).
 - **Larion carry-forward 800,000,000 vẫn CHƯA xác nhận — nay đã 14 ngày kể từ 08-26.** Độ trễ tiếp tục kéo dài, cần user xác nhận sớm.
 
 ### 1. Điểm mạnh (Strengths)
 - Nợ gần như bằng 0 (chỉ −3,662₫ Payoneer rounding) — no leverage risk.
 - Dòng thu nhập đa dạng: lương + freelancer (USD qua Paypal, convert đúng theo FX).
-- Thanh khoản (Liquid+Savings) 1,352.8M gấp 3.2× nhu cầu 6 tháng (420M) — đệm an toàn tốt.
+- Thanh khoản (Liquid+Savings) 1,338.8M gấp 3.2× nhu cầu 6 tháng (420M) — đệm an toàn tốt.
 - Có tài sản phòng ngừa lạm phát: vàng (733M, ~13% base) + BĐS đầu tư (1,020M).
 - Kỷ luật DCA vào ETF/Fund (VCBS/VCBF/FPTS/Finhay) duy trì ổn định, không rút bất thường.
 
@@ -77,15 +79,15 @@ Base = 8,151,227,736 ₫
 Không phát hiện rủi ro 🔴 Cao trong kỳ này.
 
 ### 3. Benchmark comparison
-Base excl. Nhà = 5,651,227,736 ₫ (gross 8,151,227,736 − Nhà 2,500,000,000)
+Base excl. Nhà = 5,637,227,736 ₫ (gross 8,137,227,736 − Nhà 2,500,000,000)
 
 | Nhóm | Actual | Benchmark | Status |
 |------|--------|-----------|--------|
-| Bất động sản (đầu tư, excl. Nhà) | 18.05% | 20–30% | ⚠️ hơi thấp |
-| Cổ phiếu/ETF/Fund | 45.04% | 30–50% | ✅ trong khoảng |
-| Trái phiếu/Tiết kiệm | 21.30% | 10–20% | ⚠️ hơi cao |
-| Vàng/Commodity | 12.97% | 5–15% | ✅ trong khoảng |
-| Tiền mặt | 2.63% | 5–10% | ⚠️ thấp hơn benchmark (bù bởi Savings lớn) |
+| Bất động sản (đầu tư, excl. Nhà) | 18.10% | 20–30% | ⚠️ hơi thấp |
+| Cổ phiếu/ETF/Fund | 45.16% | 30–50% | ✅ trong khoảng |
+| Trái phiếu/Tiết kiệm | 21.36% | 10–20% | ⚠️ hơi cao |
+| Vàng/Commodity | 13.00% | 5–15% | ✅ trong khoảng |
+| Tiền mặt | 2.39% | 5–10% | ⚠️ thấp hơn benchmark (bù bởi Savings lớn) |
 
 ### 4. Upcoming decisions (90 ngày)
 - **"1m" 100M đáo hạn NGÀY MAI 09-10** — quyết định cuối: giữ tiết kiệm tiếp hay chuyển sang cổ phiếu theo kế hoạch cũ (deadline thực tế của kế hoạch 09-04).

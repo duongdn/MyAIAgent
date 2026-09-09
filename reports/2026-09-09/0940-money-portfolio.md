@@ -3,11 +3,13 @@
 ## Summary
 | | Amount (₫) | % Gross | % Net |
 |-|-----------|---------|-------|
-| Gross Assets | 8,151,227,736 | 100% | — |
+| Gross Assets | 8,137,227,736 | 100% | — |
 | Liabilities  | −3,662 | −0.00% | — |
 | **Net Worth (MISA totaldashboard, authoritative)** | **7,278,918,594** | — | 100% |
 
-Note: account-level gross sum ≠ headline Net Worth (~872M gap) — mostly the Larion 800M carry-forward (inactive wallet, API shows 0, last confirmed value 800M on 08-26, now 14 days unconfirmed) plus Tikop/FPTS/Finhay residual timing. Known/expected variance pattern, not missing money.
+Note: account-level gross sum ≠ headline Net Worth (~858M gap) — mostly the Larion 800M carry-forward (inactive wallet, API shows 0, last confirmed value 800M on 08-26, now 14 days unconfirmed) plus Tikop/FPTS/Finhay residual timing. Known/expected variance pattern, not missing money.
+
+**Correction (09:57):** vcb balance was misreported as 54,771,805 (an earlier subagent pass added a stray 14,000,000, likely double-counting the 07/09 "Chuyển khoản tới VCBS 14.000.000₫" transfer-out). Verified against raw API `currentAmount` and the MISA web UI — correct value is 40,771,805. All totals below fixed.
 
 ## By Account (sorted by balance desc)
 | Account | Balance (₫) | % Gross | Category |
@@ -27,7 +29,7 @@ Note: account-level gross sum ≠ headline Net Worth (~872M gap) — mostly the 
 | tikcop 3 month | 100,000,000 | 1.23% | 🏦 Savings |
 | Paypal | 92,161,680 | 1.13% | 💵 Liquid |
 | Finhay | 74,404,069 | 0.91% | 📈 Investment |
-| vcb | 54,771,805 | 0.67% | 💵 Liquid |
+| vcb | 40,771,805 | 0.50% | 💵 Liquid |
 | Tikop | 40,024,366 | 0.49% | 📈 Investment |
 | tikcop 1w | 10,011,699 | 0.12% | 🏦 Savings |
 | nam á 6m | 2,005,479 | 0.02% | 🏦 Savings |
@@ -45,7 +47,7 @@ VCBS/VCBF/FPTS/Finhay use `cost_basis_remaining + currentAmount` formula (not ra
 | 📈 Investment | 2,545,448,206 | 31.23% |
 | 🏦 Savings | 1,203,935,178 | 14.77% |
 | 🥇 Gold | 733,000,000 | 8.99% |
-| 💵 Liquid | 148,844,352 | 1.83% |
+| 💵 Liquid | 134,844,352 | 1.66% |
 
 ## Upcoming Maturities (within 90 days)
 | Deposit | Amount (₫) | Started | Term | Est. Maturity |
@@ -57,12 +59,12 @@ VCBS/VCBF/FPTS/Finhay use `cost_basis_remaining + currentAmount` formula (not ra
 `6m rút gốc linh hoạt` (100M, flexible-withdrawal) not counted as a maturity risk — withdrawable anytime.
 
 ## Liquidity Check
-Instantly accessible (Liquid): 148,844,352 ₫
+Instantly accessible (Liquid): 134,844,352 ₫
 Due within 30 days (1m + tikcop 1w): +110,011,699 ₫
-→ Total accessible within 30 days: ~258,856,051 ₫
+→ Total accessible within 30 days: ~244,856,051 ₫
 
 ## Alerts
-- ✅ No single account > 50% net worth (Nhà largest at 30.67% of gross, ~34% of authoritative net worth — below threshold, watch).
-- ⚠️ Liquid (148.8M) alone < 3× monthly expenses (~110M×3=330M) — but Liquid + Savings (1,353M) comfortably covers it.
+- ✅ No single account > 50% net worth (Nhà largest at ~30.7% of gross, ~34% of authoritative net worth — below threshold, watch).
+- ⚠️ Liquid (134.8M) alone < 3× monthly expenses (~110M×3=330M) — but Liquid + Savings (1,338M) comfortably covers it.
 - ✅ Debt negligible (Payoneer −3,662₫, FX rounding). No leverage risk.
 - ⏰ "1m" 100M savings matures TOMORROW (2026-09-10) — decision point for the pending "tăng cổ phiếu" plan (see Finance Review).
