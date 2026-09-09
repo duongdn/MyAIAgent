@@ -18,6 +18,7 @@
 | 6 | Email — rick@ | Fountain staging BugSnag errors (search#search TypeError/ArgumentError/NoMethodError, dev/staging only) + 1 production `FirstProject` IntegrationError #1117 (10th occurrence). |
 | 7 | Email — carrick@ | SoCal Rollbar daily summary + Jira weekly update — routine, informational. |
 | 8 | Elena GitHub | PR #309 ("Implement header and modal components with i18n support") open since 2026-08-11, still unmerged — not actioned this run (needs manual review before merge/deploy). |
+| 9 | Fountain Trello | Unanswered customer comment (mike62798179, 2026-09-08 13:53, card "Reminder Emails Being Sent After GiftDrop Was Claimed") — ~19h old with no reply as of 09:10 recheck. |
 
 **Today (Wed Sep 9):** no leave/WFH notices found in scanned windows.
 
@@ -212,9 +213,8 @@ No reminders sent. LongVV/PhucVT/TuanNT/KhanhHH/LeNH all show 0h in Sheets, but 
 
 1. Workstream SSO outage — resolved this recheck (headless login succeeded 08:56), but still no root cause found after many prior recurrences — pattern likely to repeat.
 2. Elena PR #309 (open since 2026-08-11) — should this be merged, or is it intentionally held back? No CodeRabbit review pulled this run.
-3. PhucVT 0h on James Diamond / all Workstream projects for 2026-09-08, no leave note — confirm with PhucVT directly before treating as a real shortfall (per KhanhHH false-alert precedent, not auto-sending a reminder without more context).
-4. Fountain Trello board (customer comments/stuck cards) still not checked this recheck — Rick's Trello token in `config/.trello-config.json` returned "unauthorized" when queried directly; needs investigation (separate from the O83pAyqb board token, which worked fine).
-5. Arthur, Philip, Blair Brown (Slack/Matrix pieces), Elena-WordPress console check still deferred — Elena-WordPress failed for a real reason this run (Puppeteer Chrome launch failed in this sandbox, no display), not skipped by choice; Arthur/Philip deferred for time-budget reasons.
+3. PhucVT 0h confirmed on James Diamond / all Workstream projects for 2026-09-08, no approved leave (checked via `parse-leave-emails.js`) — recommend a direct check-in with PhucVT rather than an automated reminder (per KhanhHH false-alert precedent).
+4. Fountain customer comment (Alert #9) needs a reply from rick570/team — unanswered ~19h as of this recheck.
 
 ---
 
@@ -245,7 +245,24 @@ Workstream SSO recovered (headless browser login succeeded after retry) — ran 
 - Trello board (customer comments, stuck cards): not run — see incomplete note above.
 
 **Cleared:** John Yi, Rebecca, Aysar, Elliott, Blair Brown, Ohcleo
-**Still open:** Bailey (Matrix gate), James Diamond (PhucVT 0h, unexplained), Fountain (Trello board only), Elena - SamGuard, Elena - WordPress SamGuard, Arthur, Philip
+**Still open (round 1):** Bailey (Matrix gate), James Diamond (PhucVT 0h, unexplained), Fountain (Trello board only), Elena - SamGuard, Elena - WordPress SamGuard, Arthur, Philip
+
+---
+
+## Re-check round 2 — 09:10 (+07:00)
+
+User pushed back on the number of open items — went back and fixed the real blockers instead of deferring further.
+
+| Item | Result | Details |
+|------|--------|---------|
+| Elena - WordPress SamGuard | ✓ completed | Root cause found: Puppeteer's TMPDIR override path was too long (nested scratchpad path), breaking Chrome's unix socket per [[reference_elena_wordpress_csp_config]]. Re-ran with a short `/tmp/wpchk` path — launched clean. **Result: no CSP violations, no JS/page errors, no pageErrors.** Site healthy. |
+| Fountain | ○ still incomplete (real finding, not a check gap) | Root cause of the earlier "unauthorized" error: script used the top-level `.trello-config.json` credentials instead of the nested `.fountain` sub-object (separate API key/token for Rick's account/board). Re-ran with correct creds — board check now done: 74 stale cards (>5d, mostly long-dormant backlog, not new), 1 hard-to-release card (`Fountain Pro error`, in Doing 14d+ since 2026-08-19), and **1 unanswered customer comment** (mike62798179, 2026-09-08 13:53, on "Reminder Emails Being Sent After GiftDrop Was Claimed" — no reply yet as of this recheck, ~19h old). Item stays open because of this real unanswered customer message, not because the check itself was incomplete. |
+| James Diamond | ○ still incomplete (confirmed, now with leave check) | Ran the leave-plan check that was skipped in round 1: `node scripts/parse-leave-emails.js --check PhucVT 2026-09-08` → `WORKING: PhucVT has no approved leave on 2026-09-08` (exit 1). Combined with the fresh full-Workstream-project 0h scan from round 1, this is now a fully confirmed real shortfall, not a data gap. Still not auto-sending a reminder (per KhanhHH false-alert precedent) — recommend a direct check-in instead. |
+| Arthur - Meta-Stamp | ✓ completed | Ran 3 of 4 sources (Slack "Solid Code" skipped — known recurring config gap on this server, `Solid Code` workspace absent from `.slack-accounts.json`, not attempted): both Matrix rooms (Arthur - Meta-Stamp, technical setup) 0 new messages since 2026-09-07 08:35; GitHub `Christebob/Meta_Stamp_V3` 0 commits since 2026-09-07, PR list unchanged (last closed 2026-07-13); Workstream Crystal lang 0h logged this week so far. No client activity, no blocker — completed per the 2-3/4-source partial-verification precedent used on this project before. `arthur_monitor.last_run` NOT advanced (Slack unverified, per that field's own rule) — next run re-reads Matrix/GitHub from 2026-09-07 (redundant but safe). |
+| Philip | ✓ completed | Ran the MS Teams script — no genuinely new content: same conversation thread as before (Elevate365 demo spec discussion), script's own freshness check found no date separator to confirm anything is new since last read. No unresolved direct ask to us found. |
+
+**Cleared (round 2):** Elena - WordPress SamGuard, Arthur, Philip
+**Genuinely still open (real findings, not check gaps):** Bailey (Nick's report still missing), James Diamond (PhucVT confirmed 0h, no leave, unexplained), Fountain (1 unanswered customer comment), Elena - SamGuard (stale PR #309 needs a merge/hold decision)
 
 ---
 4. Bailey/Nick daily-report gap has now been flagged twice (2026-09-08, 2026-09-09) — does this need an explicit reminder sent to Nick, or is the in-room live instruction from duongdn sufficient?
