@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Matrix — Bailey | Nick's daily report to the customer still absent in "NUS - Bailey - Paturevision 2026" since start of Sept (datnc flagged again 09:10, duongdn re-instructed team live). Ongoing since 2026-09-08. |
+| 1 | ~~Matrix — Bailey~~ | ✅ FALSE ALARM, corrected 09:12 — Matrix room "NUS - Bailey - Paturevision 2026" is an internal team room, NOT the customer channel (user corrected live). Nick's daily report to the actual customer exists in GGS Slack `#maintenance`-area channel `C01B4FX724V`, posted 2026-09-08 17:20 (confirmed via direct message fetch) — same channel already covered by the `slack ggs` gate, which was already clean. See [[feedback_bailey_matrix_daily_report_gate]] (corrected). |
 | 2 | Workstream | ✅ RESOLVED on recheck (08:56) — SSO back up, headless browser login succeeded. Full re-verification done for all 5 devs, see Re-check section. |
 | 3 | James Diamond / LeNH | **CORRECTED:** James Diamond's real gate is LeNH (full-time on this project since 2026-08-21, per [[feedback_lenh_james_diamond_blair_brown_deprioritized]] — PhucVT is NOT on this project). LeNH shows 0h across ALL Workstream projects on 2026-09-07 AND 09-08, no approved leave. Confirmed real, recurring shortfall (3rd time this exact miss has happened per memory). PhucVT's own 0h is NOT an alert — approved leave 2026-09-07→09-18 (user-confirmed 2026-09-09, leave-plan.json updated). |
 | 4 | Performance (OhCleo) | `MediaAddTrackAPIView.post` avg 297s (6 calls) — severe outlier, new/worse than prior runs. |
@@ -278,3 +278,15 @@ User caught 2 real mistakes: (1) James Diamond's gate is LeNH not PhucVT — a d
 
 ---
 4. Bailey/Nick daily-report gap has now been flagged twice (2026-09-08, 2026-09-09) — does this need an explicit reminder sent to Nick, or is the in-room live instruction from duongdn sufficient?
+
+## Re-check round 4 — 09:14 (+07:00)
+
+User caught a 3rd mistake: Bailey's Matrix "missing daily report" alert (Alert #1, carried since the 06:00 cron) was itself wrong. The Matrix room `!MaisjkNOhxoXkhCxqa:nustechnology.com` is an internal team room (DuongDN/datnc/tuannt discussing bugs) — not the customer-facing channel. User: "daily report là đang nói cho khách hàng, lien quan gì Matrix, tương tự Aysar, James Diamond" — the real customer-facing report lives in the project's actual client channel (GGS Slack for Bailey, same pattern as Aysar's Baamboozle MPDM and James Diamond's Discord).
+
+- Verified directly: Nick's daily report to the GGS customer WAS posted, 2026-09-08 17:20, in channel `C01B4FX724V` (bulleted task/bug list) — the link the user provided. This is the same channel the pre-existing `slack ggs` gate already checks and had already marked clean in the original 06:00 run.
+- Corrected [[feedback_bailey_matrix_daily_report_gate]] in place (was added 2026-09-08 based on a misread of an internal Matrix concern-message as if it were evidence of a missing report) — Bailey's gate reverts to `slack ggs` + `sheets tuannt` only, no separate Matrix check.
+- Bailey Trello item marked ✓ complete.
+
+**Bailey is now cleared.** Genuinely still open: James Diamond (LeNH 0h), Fountain (unanswered customer comment), Elena - SamGuard (stale PR).
+
+---
