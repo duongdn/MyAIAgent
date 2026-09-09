@@ -11,8 +11,8 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Matrix — Bailey | Nick's daily report to the customer still absent in "NUS - Bailey - Paturevision 2026" since start of Sept (datnc flagged again 09:10, duongdn re-instructed team live). Ongoing since 2026-09-08. |
-| 2 | Workstream | SSO login down again (recurring outage — many prior occurrences, root cause unresolved). Could not verify per-dev hours (LongVV/PhucVT/TuanNT/KhanhHH/LeNH) via Workstream this run; browser login retried twice, both `ETIMEDOUT`. |
-| 3 | Sheets | Combined with #2 — all 5 devs show 0h in Google Sheets too, but Sheets are mostly dormant post-Workstream-migration (expected, not evidence of a real shortfall). Hours are UNVERIFIED this run, not confirmed 0h — do not treat as a reminder-worthy shortfall. |
+| 2 | Workstream | ✅ RESOLVED on recheck (08:56) — SSO back up, headless browser login succeeded. Full re-verification done for all 5 devs, see Re-check section. |
+| 3 | James Diamond / PhucVT | PhucVT shows 0h across ALL Workstream projects for 2026-09-08 (fresh full-project scan at recheck, not stale data) — no leave note found. James Diamond Trello item stays open. |
 | 4 | Performance (OhCleo) | `MediaAddTrackAPIView.post` avg 297s (6 calls) — severe outlier, new/worse than prior runs. |
 | 5 | Performance (MPFC) | Chronic: `WP_Error::get_method()` 32x, sitemap generation 49-54s, SQLi `WAITFOR DELAY` probe on `/search/.../feed/rss2/` (2 occurrences this run, up from 1). Apdex 0.55 (poor). |
 | 6 | Email — rick@ | Fountain staging BugSnag errors (search#search TypeError/ArgumentError/NoMethodError, dev/staging only) + 1 production `FirstProject` IntegrationError #1117 (10th occurrence). |
@@ -210,7 +210,42 @@ No reminders sent. LongVV/PhucVT/TuanNT/KhanhHH/LeNH all show 0h in Sheets, but 
 
 ## Unresolved questions
 
-1. Workstream SSO outage — still no root cause identified after many recurrences. Worth escalating for a permanent fix (headless browser login keeps `ETIMEDOUT`).
-2. OhCleo Slack fetch's `--since` filtering needs verification — today's run may have surfaced stale cached data instead of the actual window.
-3. Elena PR #309 (open since 2026-08-11) — should this be merged, or is it intentionally held back? No CodeRabbit review pulled this run.
+1. Workstream SSO outage — resolved this recheck (headless login succeeded 08:56), but still no root cause found after many prior recurrences — pattern likely to repeat.
+2. Elena PR #309 (open since 2026-08-11) — should this be merged, or is it intentionally held back? No CodeRabbit review pulled this run.
+3. PhucVT 0h on James Diamond / all Workstream projects for 2026-09-08, no leave note — confirm with PhucVT directly before treating as a real shortfall (per KhanhHH false-alert precedent, not auto-sending a reminder without more context).
+4. Fountain Trello board (customer comments/stuck cards) still not checked this recheck — Rick's Trello token in `config/.trello-config.json` returned "unauthorized" when queried directly; needs investigation (separate from the O83pAyqb board token, which worked fine).
+5. Arthur, Philip, Blair Brown (Slack/Matrix pieces), Elena-WordPress console check still deferred — Elena-WordPress failed for a real reason this run (Puppeteer Chrome launch failed in this sandbox, no display), not skipped by choice; Arthur/Philip deferred for time-budget reasons.
+
+---
+
+## Re-check — 08:56 (+07:00)
+
+Workstream SSO recovered (headless browser login succeeded after retry) — ran full per-project scan across all 19 Workstream projects for 2026-09-08 to re-verify every open item.
+
+| Item | Result | Details |
+|------|--------|---------|
+| John Yi | ✓ completed | TuanNT 9h logged on Bailey/speedventory 2026-09-08 (TuanNT combined-sources gate satisfied) |
+| Bailey | ○ still incomplete | TuanNT hours now confirmed (9h), but Matrix gate still open — Nick's daily report to Bailey customer still absent since start of Sept (Alert #1, datnc re-flagged 09:09 today) |
+| Rebecca | ✓ completed | TuanNT combined hours confirmed >0h |
+| Aysar | ✓ completed | KhanhHH 2h logged (Radio Data Center/Franc project) 2026-09-08; MPDM Slack already confirmed clean in the earlier full run |
+| Elliott | ✓ completed | KhanhHH active this week (2h on 09-08, 3h on 09-07 across projects) |
+| Blair Brown | ✓ completed | LeNH 0h confirmed via fresh full-project Workstream scan, but per [[feedback_lenh_james_diamond_blair_brown_deprioritized]] this gate is deprioritized (LeNH full-time on James Diamond) — not treated as alert |
+| Ohcleo | ✓ completed | Re-fetched with explicit `--since=2026-09-08T06:00:00+07:00`; messages now confirmed genuinely from 2026-09-08 (prior "stale data" concern was a real pagination artifact, now fixed). Tony's daily report present 12:15 in DM:Celine Fierro — clean, detailed. `#events-code` still `channel_not_found` (known, bot needs admin re-invite, not new) |
+| James Diamond | ○ still incomplete | PhucVT confirmed 0h across ALL 19 Workstream projects for 2026-09-08 (fresh scan, not stale) — no leave note found. Discord side was already clean. Real shortfall pending explanation, not auto-flagged as reminder-worthy per KhanhHH false-alert precedent (Unresolved Q3) |
+| Fountain | ○ still incomplete | Parts 1-3 now done (see below) but Trello board check (customer comments/stuck cards) still not run — Rick's account Trello token returned "unauthorized" |
+| Elena - SamGuard | ○ still incomplete | PR #309 still open/stale, no fresh activity or CodeRabbit review pulled this recheck — needs manual decision |
+| Elena - WordPress SamGuard | ○ still incomplete | `wordpress-samguard-check.js` failed: Puppeteer Chrome process could not launch in this sandbox (no display) — genuine environment limitation, not an auth/token issue |
+| Arthur - Meta-Stamp | ○ still incomplete | Not run this recheck (time-budget — full 4-part/6-source check deferred to standalone `/daily-report arthur`) |
+| Philip | ○ still incomplete | Not run this recheck (time-budget — deferred to standalone `/daily-report trello progress philip`) |
+
+**Fountain — Parts 1-3 (recheck):**
+- **Part 1 (Matrix plan):** trinhmtt posted this week's plan Mon 08:50: `ViTHT: 40h ThinhT: 20h DatNT: 40h => QC: 25h`
+- **Part 2 (Workstream actuals, week-to-date Mon-Tue):** DatNT 16h, ThinhT 4h, PhatDLT (QC) 5.5h, HungPN (QC) 2.25h, TrinhMTT 6.25h logged (0h charged — PM role). ViTHT not appearing under that exact name in Workstream data this week — needs reconciliation (may log under a different account name).
+- **Part 3 (Plan vs actual, week-to-date):** ThinhT 4h/20h (20%, on pace for Tue of a 5-day week), DatNT 16h/40h (40%, on pace), QC (PhatDLT+HungPN) 7.75h/25h (31%, on pace). `needsReview` rows present but excluded per Fountain-specific rule (no alert).
+- Trello board (customer comments, stuck cards): not run — see incomplete note above.
+
+**Cleared:** John Yi, Rebecca, Aysar, Elliott, Blair Brown, Ohcleo
+**Still open:** Bailey (Matrix gate), James Diamond (PhucVT 0h, unexplained), Fountain (Trello board only), Elena - SamGuard, Elena - WordPress SamGuard, Arthur, Philip
+
+---
 4. Bailey/Nick daily-report gap has now been flagged twice (2026-09-08, 2026-09-09) — does this need an explicit reminder sent to Nick, or is the in-room live instruction from duongdn sufficient?
