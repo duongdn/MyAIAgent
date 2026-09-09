@@ -12,6 +12,8 @@ metadata:
 Each row = one checklist item on the "Check Progress" card (board O83pAyqb).
 **Complete item ONLY when ALL listed sources are clean (no alerts).**
 
+🔴 **Ignore List (2026-09-09, user instruction):** Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip are PAUSED — do not run their gate source, auto-complete, list under a separate "Ignore List" line in the daily report instead of the normal per-item alert lines. See `.claude/commands/me/daily-report.md` Piece 8.
+
 | Trello Item | Gate Sources | Alert = skip |
 |-------------|-------------|--------------|
 | Maddy - Carrick/Kai/Luis | Xtreme Slack (Kai activity) | Kai absent/no report |

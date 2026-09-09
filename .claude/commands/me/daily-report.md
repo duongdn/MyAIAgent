@@ -561,6 +561,24 @@ Supports card and item-level targeting:
 **CRITICAL: Reuse existing pieces, never duplicate monitoring logic.**
 When running `trello progress {item}`, FIRST run the mapped source piece(s), THEN use findings to complete/skip Trello.
 
+**Ignore List — auto-complete, no gate check (2026-09-09):** these items are paused/inactive per user — do NOT run their mapped source piece, do NOT gate on any alert. Always mark complete immediately, and report them under a dedicated "Ignore List" section (not mixed with normal ✓/⚠️ lines) so the daily report still shows why they're not actively monitored.
+
+| Arg | Item name | Reason |
+|-----|-----------|--------|
+| `colin` | Colin | Paused |
+| `elena` | Elena - SamGuard | Paused |
+| `arthur` | Arthur - Meta-Stamp | Paused |
+| `blair_brown` | Blair Brown - Peptide Clyde | Paused |
+| `philip` | Philip | Paused |
+
+Report format:
+```
+## Ignore List — {HH:MM} (+07:00)
+Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip
+```
+
+If the user un-pauses one of these later, remove its row from this table and restore its normal gate mapping row below.
+
 **Check Progress — individual items** (`/daily-report trello progress {item}`):
 
 🔴 **Verify against `docs/memory/daily-report/trello/reference_trello_gate_mapping.md` before trusting this table** — it's the curated source of truth; this table has drifted from it before (2026-06-22: this row literally said `aysar → sheets lenh`, which is wrong — Aysar's task-log gate is KhanhHH, not LeNH. Fixed below.).

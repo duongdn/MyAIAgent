@@ -96,6 +96,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_arthur_blair_brown_gate_added](daily-report/trello/feedback_arthur_blair_brown_gate_added.md)
 - [feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask](daily-report/trello/feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask.md) — Raymond many sub-projects, ignore client msg unless direct ask to us
 - [feedback_bailey_matrix_daily_report_gate](daily-report/trello/feedback_bailey_matrix_daily_report_gate.md) — 🔴🔴 CORRECTED 2026-09-09: Matrix room is internal, NOT customer-facing; Bailey gate stays slack ggs only
+- [feedback_ignore_list_paused_items](daily-report/trello/feedback_ignore_list_paused_items.md) — 🔴 2026-09-09: Colin/Elena-SamGuard/Arthur/Blair Brown/Philip paused, auto-complete no gate check, report under Ignore List
 
 ## daily-report:matrix
 - [feedback_matrix_daily_summary](daily-report/matrix/feedback_matrix_daily_summary.md), [feedback_matrix_join_public_room](daily-report/matrix/feedback_matrix_join_public_room.md)
