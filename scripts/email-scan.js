@@ -6,6 +6,12 @@
 // same mechanism as every other daily-report piece — see feedback_monday_friday_timestamp.md and
 // the Timeline note in .claude/commands/me/daily-report.md. Falls back to "yesterday 08:00 +07:00"
 // only if last_run is missing or unparseable.
+//
+// NOTE (2026-09-10): this script does NOT classify "alerts" by keyword anymore — a customer
+// forward like "Fwd: Coach Pass Access Issue" or "Fwd: Membership" carries no alert-sounding
+// word and was silently dropped that way. It returns a `snippet` of real body text per message;
+// the caller (Claude, reading the report) reads snippet+subject+from and decides what's an alert.
+// This applies to every monitoring channel, not just email — see feedback_no_keyword_alert_classification.
 const tls = require("tls");
 const { google } = require("googleapis");
 const fs = require("fs");
@@ -44,14 +50,6 @@ function imapSinceDate(windowStart) {
 }
 const IMAP_SINCE = imapSinceDate(WINDOW_START);
 
-const ALERT_KEYWORDS = [
-  "alert", "error", "fail", "down", "urgent", "warning", "critical",
-  "incident", "outage", "security", "escalat", "breach", "crash",
-  "leave request", "nghỉ phép", "xin nghỉ", "production", "rollbar", "bugsnag",
-  "expires", "expir", "deploy", "expired", "new relic", "newrelic",
-  "signal lost", "delayed", "[high]", "apm", "redmine", "jira",
-];
-
 function decodeMime(str) {
   if (!str) return str;
   return str.replace(/=\?([^?]+)\?([BbQq])\?([^?]*)\?=/g, (_, charset, enc, data) => {
@@ -62,71 +60,118 @@ function decodeMime(str) {
   }).replace(/\s+/g, " ").trim();
 }
 
-function checkIMAP(acct) {
-  return new Promise((resolve) => {
-    let buffer = "";
-    let step = 0;
+// Extracts a plain-text preview from a raw IMAP FETCH BODY[TEXT] literal response.
+// Best-effort: strips HTML tags and quoted-printable soft line breaks. Good enough for a
+// preview snippet, not a full MIME parser.
+function extractSnippet(raw) {
+  const m = raw.match(/\{(\d+)\}\r\n/);
+  if (!m) return "";
+  const len = parseInt(m[1], 10);
+  const start = m.index + m[0].length;
+  let text = raw.slice(start, start + len);
+  text = text
+    .replace(/=\r?\n/g, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.slice(0, 500);
+}
+
+function imapConnect(acct) {
+  return new Promise((resolve, reject) => {
     const host = acct.imap_server || "imap.zoho.com";
     const isGmail = host.includes("gmail");
     const tlsOpts = { host, port: 993, servername: host };
     if (isGmail) tlsOpts.rejectUnauthorized = false; // required for Gmail IMAP
     const socket = tls.connect(tlsOpts, () => {});
     socket.setTimeout(30000);
-    socket.on("timeout", () => { socket.destroy(); resolve({ email: acct.email, error: "timeout" }); });
-    socket.on("error", (e) => resolve({ email: acct.email, error: e.message }));
-    socket.on("data", (data) => {
-      buffer += data.toString();
-      if (step === 0 && buffer.includes("OK")) {
-        step = 1; buffer = "";
-        socket.write(`A1 LOGIN ${JSON.stringify(acct.email)} ${JSON.stringify(acct.app_password)}\r\n`);
-      } else if (step === 1 && buffer.includes("A1 ")) {
-        if (!buffer.includes("A1 OK")) {
-          socket.destroy(); resolve({ email: acct.email, error: "auth_fail", raw: buffer.slice(0, 200) }); return;
-        }
-        step = 2; buffer = "";
-        const folder = acct.folder || "INBOX";
-        socket.write(`A2 SELECT ${JSON.stringify(folder)}\r\n`);
-      } else if (step === 2 && buffer.includes("A2 ")) {
-        if (!buffer.includes("A2 OK")) {
-          socket.destroy(); resolve({ email: acct.email, error: "select_fail", raw: buffer.slice(0, 200) }); return;
-        }
-        step = 3; buffer = "";
-        socket.write(`A3 SEARCH SINCE ${IMAP_SINCE}\r\n`);
-      } else if (step === 3 && buffer.includes("A3 ")) {
-        const searchLine = buffer.split("\n").find(l => l.startsWith("* SEARCH"));
-        const ids = searchLine ? searchLine.replace("* SEARCH", "").trim().split(/\s+/).filter(Boolean) : [];
-        if (ids.length === 0) {
-          socket.write("A9 LOGOUT\r\n"); socket.destroy();
-          resolve({ email: acct.email, count: 0, subjects: [], alerts: [] }); return;
-        }
-        const range = ids.slice(-80).join(",");
-        step = 4; buffer = "";
-        socket.write(`A4 FETCH ${range} (BODY.PEEK[HEADER.FIELDS (Subject Date From)])\r\n`);
-      } else if (step === 4 && buffer.includes("A4 ")) {
-        socket.write("A9 LOGOUT\r\n"); socket.destroy();
-        const subjects = [];
-        const alerts = [];
-        const blocks = buffer.split(/\* \d+ FETCH/).slice(1);
-        for (const blk of blocks) {
-          const subM = blk.match(/^Subject:\s*(.+)$/im);
-          const dateM = blk.match(/^Date:\s*(.+)$/im);
-          const fromM = blk.match(/^From:\s*(.+)$/im);
-          if (!subM) continue;
-          const subj = decodeMime(subM[1].trim());
-          const dateStr = dateM ? dateM[1].trim() : "";
-          const from = decodeMime(fromM ? fromM[1].trim() : "");
-          let emailDate = null;
-          try { emailDate = new Date(dateStr); } catch (_) {}
-          // Post-filter by exact timestamp — SINCE is only day-granularity, this enforces the real cutoff.
-          if (emailDate && emailDate < WINDOW_START) continue;
-          subjects.push({ subject: subj, from, date: dateStr });
-          const sl = subj.toLowerCase() + " " + from.toLowerCase();
-          if (ALERT_KEYWORDS.some(k => sl.includes(k))) alerts.push({ subject: subj, from, date: dateStr });
-        }
-        resolve({ email: acct.email, count: subjects.length, subjects, alerts });
-      }
-    });
+    let settled = false;
+    socket.once("secureConnect", () => {});
+    socket.once("data", () => { if (!settled) { settled = true; resolve(socket); } }); // greeting
+    socket.on("timeout", () => { if (!settled) { settled = true; socket.destroy(); reject(new Error("timeout")); } });
+    socket.on("error", (e) => { if (!settled) { settled = true; reject(e); } });
   });
+}
+
+function imapCommand(socket, tag, cmd, timeoutMs = 20000) {
+  return new Promise((resolve, reject) => {
+    let buffer = "";
+    const timer = setTimeout(() => {
+      socket.removeListener("data", onData);
+      reject(new Error("imap_command_timeout"));
+    }, timeoutMs);
+    const onData = (data) => {
+      buffer += data.toString("binary");
+      if (new RegExp(`(^|\\r\\n)${tag} `).test(buffer)) {
+        clearTimeout(timer);
+        socket.removeListener("data", onData);
+        resolve(buffer);
+      }
+    };
+    socket.on("data", onData);
+    socket.write(`${tag} ${cmd}\r\n`);
+  });
+}
+
+async function checkIMAP(acct) {
+  let socket;
+  try {
+    socket = await imapConnect(acct);
+    let resp = await imapCommand(socket, "A1", `LOGIN ${JSON.stringify(acct.email)} ${JSON.stringify(acct.app_password)}`);
+    if (!resp.includes("A1 OK")) { socket.destroy(); return { email: acct.email, error: "auth_fail", raw: resp.slice(0, 200) }; }
+
+    const folder = acct.folder || "INBOX";
+    resp = await imapCommand(socket, "A2", `SELECT ${JSON.stringify(folder)}`);
+    if (!resp.includes("A2 OK")) { socket.destroy(); return { email: acct.email, error: "select_fail", raw: resp.slice(0, 200) }; }
+
+    resp = await imapCommand(socket, "A3", `SEARCH SINCE ${IMAP_SINCE}`);
+    const searchLine = resp.split("\n").find(l => l.startsWith("* SEARCH"));
+    const ids = searchLine ? searchLine.replace("* SEARCH", "").trim().split(/\s+/).filter(Boolean) : [];
+    if (ids.length === 0) {
+      socket.write("A9 LOGOUT\r\n"); socket.destroy();
+      return { email: acct.email, count: 0, subjects: [] };
+    }
+
+    const recentIds = ids.slice(-80);
+    const range = recentIds.join(",");
+    resp = await imapCommand(socket, "A4", `FETCH ${range} (BODY.PEEK[HEADER.FIELDS (Subject Date From)])`);
+    const headerMap = {};
+    const parts = resp.split(/\* (\d+) FETCH/).slice(1);
+    for (let i = 0; i < parts.length; i += 2) {
+      const id = parts[i];
+      const blk = parts[i + 1] || "";
+      const subM = blk.match(/^Subject:\s*(.+)$/im);
+      if (!subM) continue;
+      const dateM = blk.match(/^Date:\s*(.+)$/im);
+      const fromM = blk.match(/^From:\s*(.+)$/im);
+      headerMap[id] = {
+        subject: decodeMime(subM[1].trim()),
+        from: decodeMime(fromM ? fromM[1].trim() : ""),
+        date: dateM ? dateM[1].trim() : "",
+      };
+    }
+
+    const subjects = [];
+    for (const id of recentIds) {
+      const h = headerMap[id];
+      if (!h) continue;
+      let emailDate = null;
+      try { emailDate = new Date(h.date); } catch (_) {}
+      if (emailDate && emailDate < WINDOW_START) continue;
+      let snippet = "";
+      try {
+        const bodyResp = await imapCommand(socket, "A5", `FETCH ${id} (BODY.PEEK[TEXT]<0.700>)`);
+        snippet = extractSnippet(bodyResp);
+      } catch (_) { /* skip snippet on failure, keep subject */ }
+      subjects.push({ subject: h.subject, from: h.from, date: h.date, snippet });
+    }
+    socket.write("A9 LOGOUT\r\n"); socket.destroy();
+    return { email: acct.email, count: subjects.length, subjects };
+  } catch (e) {
+    if (socket) try { socket.destroy(); } catch (_) {}
+    return { email: acct.email, error: e.message };
+  }
 }
 
 async function checkGmailAPI(acct) {
@@ -144,21 +189,24 @@ async function checkGmailAPI(acct) {
     const afterTs = Math.floor(WINDOW_START.getTime() / 1000);
     const listRes = await gmail.users.messages.list({ userId: "me", q: `after:${afterTs}`, maxResults: 50 });
     const messages = listRes.data.messages || [];
-    if (messages.length === 0) return { email: acct.email, count: 0, subjects: [], alerts: [] };
+    if (messages.length === 0) return { email: acct.email, count: 0, subjects: [] };
     const batch = messages.slice(0, 30);
     const details = await Promise.all(
       batch.map(m => gmail.users.messages.get({ userId: "me", id: m.id, format: "metadata", metadataHeaders: ["Subject", "From", "Date"] }).catch(() => null))
     );
-    const subjects = [], alerts = [];
+    const subjects = [];
     for (const msg of details) {
       if (!msg) continue;
       const hdr = msg.data.payload?.headers || [];
       const get = n => hdr.find(h => h.name === n)?.value || "";
-      const subject = get("Subject"), from = get("From"), date = get("Date");
-      subjects.push({ subject, from, date });
-      if (ALERT_KEYWORDS.some(k => (subject + " " + from).toLowerCase().includes(k))) alerts.push({ subject, from, date });
+      subjects.push({
+        subject: get("Subject"),
+        from: get("From"),
+        date: get("Date"),
+        snippet: (msg.data.snippet || "").trim(), // Gmail API returns this regardless of format
+      });
     }
-    return { email: acct.email, count: messages.length, subjects, alerts };
+    return { email: acct.email, count: messages.length, subjects };
   } catch (err) {
     return { email: acct.email, error: err.message, errStack: (err.response && JSON.stringify(err.response.data)) || null };
   }
@@ -170,5 +218,6 @@ async function checkGmailAPI(acct) {
     Promise.all(gmailApiAccounts.map(checkGmailAPI)),
   ]);
   console.error(`[email-scan] window: ${WINDOW_START.toISOString()} -> now (IMAP SINCE ${IMAP_SINCE})`);
+  console.error(`[email-scan] NOTE: no keyword-based "alerts" field anymore — read each subject+snippet below and classify yourself.`);
   console.log(JSON.stringify([...imapResults, ...apiResults], null, 2));
 })();

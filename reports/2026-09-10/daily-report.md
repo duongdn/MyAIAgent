@@ -19,6 +19,7 @@
 | 7 | Upwork | Rory + Aysar sessions expired; headless re-login failed (login selector not found) — needs manual carrick re-login outside cron |
 | 8 | Performance — MPFC | Apdex still poor (0.59); chronic `WP_Error::get_method()` error (27×); 1 SQLi WAITFOR-DELAY probe on `/search/.../feed/rss2/` (11.9s, benign scan attempt) |
 | 9 | Performance — OhCleo | `MediaByKeyView.get` now 37.9s avg (516 calls) — much worse than prior runs; `MediaByTagsView.get` 13.8s avg (233 calls) |
+| 10 | Email — freelancer@mpfc | **Missed in original run** (see Re-check 09:40): customer Adrian Sulik forwarded via Saul, 09-09 17:53 — lost Coach Pass video access since 09-08, told card expired/refused, tried resubscribing and got "already have an active subscription" error (blocked either way, unresolved). 2nd customer (diarmaid orderley) also forwarded "unable to access coaches pass", 09-09 17:52, no reply seen yet |
 
 **Today (Thu Sep 10):** No leave notices surfaced in this window's email/Matrix scan (leave-email parser not re-run — treat as informational only, not authoritative).
 
@@ -235,15 +236,36 @@ Workstream SSO re-established (`DISPLAY=:1 node scripts/workstream-login.js`, in
 - Elena WordPress (samguard.co) console-error check run: clean — 0 JS errors, 0 page errors, 0 CSP violations; only benign GA/ads/video `net::ERR_ABORTED` noise (ad-blocker/tracking-prevention artifacts, not real errors).
 
 **Cleared:** John Yi, Aysar, Bailey, Rebecca, Fountain
-**Still open:** Maddy (Madhuraka unanswered), Elliott (Generator needsReview pending), Marcel (customer ask unanswered)
+**Still open:** Elliott (Generator needsReview pending), Marcel (customer ask unanswered)
+
+---
+
+## Re-check — 09:40 (+07:00)
+
+**Maddy: cleared.** Re-read the Xtreme DM thread in full — kai *did* reply "OK" at 14:33 (+07), 15 min after Madhuraka's ask, in the same channel; missed on the first pass. Madhuraka's referenced email traced to kai@: "FW: Task LIFM2-449" from madhuraka@xtremeweb.com.au, 09-09 15:17 (+07) — an existing ticket forwarded for follow-up, not a new one kai needed to create. Trello: Maddy marked ✓ complete.
+
+**KhanhHH task-log pattern (Aysar/Elliott context):** re-verified exhaustively (19 Workstream projects + all sheets) for 09-07/08/09. Her normal projects are Baamboozle, Radio Data Center, Generator only:
+| Date | Baamboozle | Radio Data Center | Generator | Total |
+|------|-----------|--------------------|-----------|-------|
+| 09-07 | 6h | 5h | 3h | 14h |
+| 09-08 | — | 2h | — | **2h** |
+| 09-09 | — | — | 2h | **2h** |
+Two straight days at 2h/8h target, no leave note, no other Workstream project found anywhere in her access. Not a 0h case so it doesn't auto-trigger the Aysar/Elliott gate rule, but flagged directly to her: sent Matrix message to `!rwLbvLBnrRAYMaOPaD:nustechnology.com` (KhanhHH's Generator/Elliott room) at 09:35 asking her to confirm/fill in any missing task log for 08-09/09-09. Awaiting reply.
+
+**🔴 MPFC email alert missed in original run — root cause found and fixed.** `email-scan.js`'s "alerts" field was pure keyword matching (alert/error/fail/urgent/etc.) — the subjects "Fwd: Coach Pass Access Issue" and "Fwd: Membership" matched no keyword so were silently excluded from the alerts list even though the emails were present in the scanned mailbox (`count: 3` was correct, only the alerts summary was wrong). Content (read in full this recheck): customer Adrian Sulik lost Coach Pass access 09-08, told by Saul his card was expired/refused, tried resubscribing and got "already have an active subscription" — stuck either way, unresolved. Second customer (diarmaid orderley) also can't access Coach Pass, forwarded same evening, no reply seen. **Fixed the script** (removed keyword-based `alerts`, now returns real body `snippet` per message for every channel's scan to read directly — see `docs/memory/daily-report/general/feedback_no_keyword_alert_classification.md`) — this was a systemic gap, not MPFC-specific, applies going forward to every source (email/Slack/Discord/Matrix).
+
+**Cleared this pass:** Maddy
+**Still open:** Elliott (Generator needsReview pending), Marcel (customer ask unanswered), KhanhHH task-log gap (message sent, awaiting reply — informational, not gating any Trello item directly)
+**New alert surfaced:** MPFC Coach Pass access bug (2 customers) — needs dev/support follow-up, not yet actioned
 
 ---
 
 ## Unresolved Questions
 
-1. Maddy: Madhuraka's bug/JIRA-ticket request to kai (Xtreme DM) remains unanswered — needs a reply or JIRA ticket created before this item can complete.
-2. Elliott/Generator: LucNT has 3 charged-hour entries (0:30 each, 09-07/08/09) pending review by HangNTT — needs HangNTT (or LucNT) to resolve in Workstream.
-3. Marcel/Equanimity: ZKTeco device configuration question is addressed to a tagged reseller/support contact, not necessarily us — confirm whether this needs our response or is being handled elsewhere.
+1. Elliott/Generator: LucNT has 3 charged-hour entries (0:30 each, 09-07/08/09) pending review by HangNTT — needs HangNTT (or LucNT) to resolve in Workstream.
+2. Marcel/Equanimity: ZKTeco device configuration question is addressed to a tagged reseller/support contact, not necessarily us — confirm whether this needs our response or is being handled elsewhere.
+3. KhanhHH: 2h/day on 09-08 and 09-09 (vs 8h target), no leave note — message sent asking her to confirm/fill in, awaiting reply.
+4. MPFC Coach Pass access bug (Adrian Sulik + diarmaid orderley, both forwarded via Saul 09-09 evening) — needs someone to investigate the subscription-state bug (shows expired card AND blocks resubscribe as "already active") and reply to both customers. Not yet assigned/actioned.
 4. Workstream SSO outage recurred a 6th+ time before this recheck — root cause still open (same pattern as 07-26/07-31/08-01/08-15/08-22/09-04); today it was resolved via one interactive `workstream-login.js` run.
 
 ## Re-check — 08:58 (+07:00)
