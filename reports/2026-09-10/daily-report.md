@@ -215,9 +215,33 @@ Card auto-complete check: neither card fully clean (open items remain) — cards
 
 ---
 
+## Re-check — 08:50 (+07:00)
+
+Workstream SSO re-established (`DISPLAY=:1 node scripts/workstream-login.js`, interactive session). Re-ran all blocked sources.
+
+| Item | Result | Details |
+|------|--------|---------|
+| John Yi | ✓ completed | TuanNT combined 09-09: 8h (Neural Contract) — nonzero, no shortfall |
+| Aysar | ✓ completed | KhanhHH combined 09-09: 2h (Generator) — nonzero; Slack MPDM already satisfied (see original report) |
+| Bailey | ✓ completed | TuanNT combined 09-09: 8h (Neural) — nonzero; speedventory members active 09-07/08 |
+| Rebecca | ✓ completed | TuanNT combined nonzero (as above); no Rebecca-specific Workstream rows this week |
+| Fountain | ✓ completed | Part 1: trinhmtt posted Monday plan 08:50 in Matrix room `!EWnVDAxbTGsBxPkaaI` — ViTHT 40h, ThinhT 20h, DatNT 40h => QC 25h. Part 2/3: Workstream actuals thru Thu (DatNT 24h/40h≈60%, ThinhT 12h/20h=60%, QC≈14.75h/25h≈59%) — on track for day 3/5, no shortfall. Fountain excluded from needsReview alerting per rule. Trello board: 1 card in Doing 14+ days stale ("Fountain Pro error", since 08-19) — noted, not blocking; 15 customer comments since 09-07, all routine "ready to pick up"/"push live" cadence, no unresolved complaint standing out. |
+| Maddy | ○ still incomplete | Re-scanned Xtreme Slack — Madhuraka's bug/JIRA-ticket ask (D050TGMRFRQ) still has no reply from kai/team as of this recheck |
+| Elliott (Generator) | ○ still incomplete | NEW: Workstream needsReview — LucNT "Check/follow on project" + "Follow up on project" (0:30 × 3, 2026-09-07/08/09) — reviewer(s): HangNTT (project: Generator). KhanhHH hours themselves are fine (2h logged 09-09, nonzero) but the pending review blocks completion per rule |
+| Marcel | ○ still incomplete | Re-scanned Equanimity — ZKTeco device question (directed at a tagged reseller/support contact, not us directly) still has no visible reply in-channel |
+
+**Also filled in this recheck:**
+- Leave plan refreshed (`parse-leave-emails.js`): PhucVT on approved full-day leave 2026-09-07 → 09-11 and 09-14 → 09-18 (personal matter) — explains James Diamond project having no PhucVT hours this week (LeNH/AnhNH2 covering).
+- Elena WordPress (samguard.co) console-error check run: clean — 0 JS errors, 0 page errors, 0 CSP violations; only benign GA/ads/video `net::ERR_ABORTED` noise (ad-blocker/tracking-prevention artifacts, not real errors).
+
+**Cleared:** John Yi, Aysar, Bailey, Rebecca, Fountain
+**Still open:** Maddy (Madhuraka unanswered), Elliott (Generator needsReview pending), Marcel (customer ask unanswered)
+
+---
+
 ## Unresolved Questions
 
-1. Workstream SSO is down again (6th+ occurrence of this exact outage pattern) — root cause still not found. Recommend an interactive session run `DISPLAY=:1 node scripts/workstream-login.js` outside cron to re-establish the token, then recheck Maddy/John Yi/Aysar/Elliott/Bailey/Rebecca/Fountain.
-2. Fountain Part 1 (Matrix weekly plan room `!EWnVDAxbTGsBxPkaaI`) and Trello board were not queried this run (time-boxed after Workstream retries ate the budget) — needs recheck.
-3. Leave-email parser (`parse-leave-emails.js`) was not re-run this pass — the "Today" leave summary above is not authoritative; recheck before trusting it.
-4. Elena WordPress console-error check (samguard.co) not run this pass.
+1. Maddy: Madhuraka's bug/JIRA-ticket request to kai (Xtreme DM) remains unanswered — needs a reply or JIRA ticket created before this item can complete.
+2. Elliott/Generator: LucNT has 3 charged-hour entries (0:30 each, 09-07/08/09) pending review by HangNTT — needs HangNTT (or LucNT) to resolve in Workstream.
+3. Marcel/Equanimity: ZKTeco device configuration question is addressed to a tagged reseller/support contact, not necessarily us — confirm whether this needs our response or is being handled elsewhere.
+4. Workstream SSO outage recurred a 6th+ time before this recheck — root cause still open (same pattern as 07-26/07-31/08-01/08-15/08-22/09-04); today it was resolved via one interactive `workstream-login.js` run.
