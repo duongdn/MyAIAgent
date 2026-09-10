@@ -245,3 +245,14 @@ Workstream SSO re-established (`DISPLAY=:1 node scripts/workstream-login.js`, in
 2. Elliott/Generator: LucNT has 3 charged-hour entries (0:30 each, 09-07/08/09) pending review by HangNTT — needs HangNTT (or LucNT) to resolve in Workstream.
 3. Marcel/Equanimity: ZKTeco device configuration question is addressed to a tagged reseller/support contact, not necessarily us — confirm whether this needs our response or is being handled elsewhere.
 4. Workstream SSO outage recurred a 6th+ time before this recheck — root cause still open (same pattern as 07-26/07-31/08-01/08-15/08-22/09-04); today it was resolved via one interactive `workstream-login.js` run.
+
+## Re-check — 08:58 (+07:00)
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy | ○ still incomplete | Re-scanned Xtreme Slack since 08:52 — no new messages, Madhuraka's bug/JIRA-ticket ask still unanswered |
+| Elliott (Generator) | ○ still incomplete | Re-queried Workstream `generator` project — LucNT's 3 needsReview entries (09-07/08/09, 0:30 each) still `Pending`, reviewer HangNTT |
+| Marcel | ○ still incomplete | Re-scanned Equanimity Slack since 08:52 — no new messages, ZKTeco device question still unanswered |
+
+**Cleared:** none
+**Still open:** Maddy, Elliott, Marcel (same as 08:52 recheck — no change in 6 minutes)
