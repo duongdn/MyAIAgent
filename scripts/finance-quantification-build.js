@@ -71,6 +71,27 @@ function applyKqkdChainShift(kqkdY) {
   }
 }
 
+// cafef CDKT template bug (universal, all 55 tickers, all periods): the static
+// `templace` for the "III. Các khoản phải thu ngắn hạn" section is missing the
+// "5. Phải thu về cho vay ngắn hạn" row entirely (numbering jumps 4→6), so codes
+// 135/136/137 all carry the wrong (one-item-early) label. Per-code VALUES are
+// correct as-is (row131+...+137 sums to the code130 total exactly, for every
+// period) — verified against cafef's own rendered CDKT page for HAG (code135 =
+// 2,820,821,916 = "Phải thu về cho vay ngắn hạn" cuối năm 2025). Pure label fix,
+// no value changes, no per-period condition needed.
+const CDKT_TN_LABEL_FIX = {
+  "135": "4. Phải thu về cho vay ngắn hạn",
+  "136": "5. Phải thu ngắn hạn khác",
+  "137": "6. Dự phòng phải thu ngắn hạn khó đòi (*)",
+};
+function fixCdktTnTemplateGap(tnT) {
+  for (const row of tnT) {
+    const fix = CDKT_TN_LABEL_FIX[(row.code || "").trim()];
+    if (fix) row.name = fix;
+  }
+  return tnT;
+}
+
 async function fetchCafef(ticker, maxYears, maxQuarters) {
   const [cdktN, kqkdN, lcttN, cdktQ, kqkdQ, lcttQ] = await Promise.all([
     httpGet(`${BASE}/v2/BCTC/GetReportCDKT?symbol=${ticker}&pageIndex=1&pageSize=${maxYears}&reportType=ALL&TypeTime=NAM`),
