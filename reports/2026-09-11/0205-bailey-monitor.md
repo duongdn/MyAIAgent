@@ -92,7 +92,7 @@ Both >30 days out, no action needed.
 
 ## Workstream Task Log (Subtask 9)
 
-Failed — Workstream SSO login did not capture a fresh token after 2 retries (`SSO redirected but API never fired`), existing token expired (`"exp" claim timestamp check failed`). This matches the recurring Workstream SSO outage pattern documented in memory (5+ prior occurrences 07-26 through 08-22). Task log entry for "Weekly Monitor September 2026" (1h, dated 2026-09-11, Friday) NOT written this run — needs manual retry or investigation into the SSO root cause.
+~~Failed — Workstream SSO login did not capture a fresh token after 2 retries...~~ **UPDATE 08:48**: retried per user request ("chưa update WS"). `workstream-login.js` re-auth succeeded, entry written: "Weekly Monitor September 2026", 1:00h, dated 2026-09-11 (Friday), speedventory project. Task ID `cmtwasspg1clym61va4ansngz`.
 
 ## Unresolved Questions
 - Siteground disk usage not re-verified since 2026-08-21 (81%, staging copies) — SSH host alias `Bailey.cpanel` missing from `~/.ssh/config` again this run, Puppeteer session also expired (CAPTCHA blocks re-login). Needs either a fresh SSH alias or a different access method.
