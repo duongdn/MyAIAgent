@@ -857,34 +857,20 @@ For each item:
 - 0h dev + reminder sent → complete (reminder IS the action)
 - Neural silence / Cloudflare block → complete (never an alert)
 
-**Step 7 — Append to daily report AND correct the top ALERTS SUMMARY (both required, every recheck, no exceptions)**
+**Step 7 — Edit the daily report IN PLACE. Never append a separate "Re-check" section.**
 
-🔴 **The top `## ⚠️ ALERTS SUMMARY` table is the first (often only) thing read. A recheck that only appends a section at the bottom and never touches the top table produces a report that looks broken/stale even when the underlying issue was fixed — this happened for real on 2026-09-11 and caused a user complaint. Appending alone is NOT sufficient completion of this step.**
+🔴🔴🔴 **User directive 2026-09-11 (hard rule, not a preference): the daily report is ONE coherent file, not a cron log with recheck entries bolted on. When recheck corrects something, edit the actual section where that finding lives — strike through the old/wrong text with `~~...~~` and write the corrected finding right there, inline. Do the same in the top `## ⚠️ ALERTS SUMMARY` table for any alert that changed. This replaced an earlier "append a timestamped Re-check section at the bottom" approach — that approach is banned: it left the top summary and every section stale-looking even after the recheck fixed the underlying issue, which the user experienced directly and called out twice in one day.**
 
-1. Append a timestamped section (as before):
-```markdown
-## Re-check — {HH:MM} (+07:00)
+For every finding a recheck changes:
+- Locate the original line/row/paragraph that stated the old (wrong or unverified) finding.
+- Wrap the outdated part in `~~strikethrough~~` (keep it visible — don't delete outright, the history of "what was wrong and got fixed" has value).
+- Immediately follow with the corrected finding, plainly stated (no need to preface every correction with "Corrected 08:52" boilerplate each time, but do timestamp corrections that materially change a conclusion — e.g. an alert going from open to resolved, or vice versa).
+- This applies to: the top ALERTS SUMMARY table, the per-source section that originally reported the issue (Sheets/Workstream, Fountain, OhCleo Slack, etc.), and the Trello checklist table's per-item row.
+- Update the `**Run:**` header line to show both the original run time and the correction time, e.g. `**Run:** {orig} (cron), corrected {HH:MM} (+07:00)`.
+- Update `**Leave plan:**` if leave data changed.
+- Update `## Unresolved Questions` — remove questions the recheck actually answered, keep/add ones still open.
 
-| Item | Result | Details |
-|------|--------|---------|
-| Rory | ✓ completed | LeNH 4h found on re-scan |
-| Fountain | ○ still incomplete | #2615 890% over-est still growing |
-| James Diamond | ○ still incomplete | Vinn no daily report confirmed |
-| Rebecca | ✓ completed | TuanNT false alarm — 8h in Paturevision |
-...
-
-**Cleared:** {list}
-**Still open:** {list}
-```
-
-2. **Then go back and edit the top `## ⚠️ ALERTS SUMMARY` table itself** (not a new table, the original one from the run header) so it reflects current state as of the recheck:
-   - Any alert row that is now resolved: strikethrough the alert text, add a ✅ RESOLVED {HH:MM} status, and a one-line pointer to the Re-check section for detail. Do NOT delete the row — keep the history visible.
-   - Any alert row still open after re-verification: mark 🔴 OPEN (re-verified {HH:MM}) so it's clear it wasn't just carried over stale.
-   - Any NEW alert found during recheck (e.g. a previously-completed item found to be wrongly gated and reopened): add a new numbered row, marked 🔴 NEW {HH:MM}.
-   - Update the `**Run:**` header line to note the recheck time, e.g. `**Run:** {orig} (cron) — updated by recheck {HH:MM}, see below`.
-   - Update the `**Leave plan:**` line if `parse-leave-emails.js` surfaced anything relevant during recheck.
-
-**Never leave a resolved alert sitting unedited in the top table** — a reader who only scans the top of the report must see the current truth, not the 06:00 cron's snapshot.
+**No standalone `## Re-check` section, no separate "Cleared / Still open" summary block bolted at the end.** The report must read as a single accurate account of the day when read top to bottom — someone reading only the top ALERTS SUMMARY must see the truth, not a stale snapshot pointing them to scroll further down.
 
 ### Rules for Re-check
 
