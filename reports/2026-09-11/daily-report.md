@@ -241,3 +241,46 @@ Not run this run — time-boxed given the Workstream SSO outage consumed signifi
 2. Trello checklist items above were evaluated but **not yet pushed** to the live board — need a follow-up write pass (re-fetch live card first per no-stale-write rule) once this report is reviewed.
 3. Ken@ (80 emails) and rick@ (14 emails) were summarized by subject line only, not individually opened — worth a closer pass if Precognize/Fountain production issues are suspected beyond what's flagged.
 4. Arthur, Upwork Memo, WhatsApp, Zalo pieces skipped this run for time — need standalone follow-up.
+
+---
+
+## Re-check — 08:52 (+07:00)
+
+Workstream SSO outage from the 06:00 cron run recovered on retry (`DISPLAY=:1 node scripts/workstream-login.js`, single attempt succeeded).
+
+| Item | Result | Details |
+|------|--------|---------|
+| Maddy - Carrick/Kai/Luis | ✓ completed | LongVV/maddy 8.5h this week (5.5h logged 09-10). Xtreme Slack already clean. |
+| John Yi - Amazing Meds | ✓ completed | TuanNT/neural_contract 8.5h logged 09-10 — combined-hours gate satisfied. Amazing Meds Slack already clean. |
+| Aysar | ✓ completed | Baamboozle MPDM (C07SQ4HAUHZ) re-verified live — Carrick's "Today's update" posted 09-10. KhanhHH/baamboozle 5h + generator 3h = 8h combined on 09-10. |
+| Elliott | ✓ completed | KhanhHH 8h combined on 09-10 (baamboozle+generator). Generator Slack already clean. Note: generator project has 3 `needsReview` rows pending for LucNT (reviewers LucNT/HangNTT) — unrelated to Elliott/KhanhHH gate, flagging separately below. |
+| Rebecca (William Bills) | ✓ completed | TuanNT combined-hours gate satisfied (same neural_contract 8.5h 09-10). William Bills Slack already clean. |
+| Neural Contract | ✓ completed | Thread silent since 2026-08-06 — per rule, silence is never an alert. |
+| Ken@ (Check mail) | ✓ completed | 13 emails individually reviewed — all Precognize GitHub PR-activity (dependabot/amocc-material), no alert content. |
+| PhucVT (all sheets/Workstream 0h) | resolved (no action) | `parse-leave-emails.js` re-run — PhucVT confirmed on approved full-day leave 09-07 through 09-18. Explains his 0h across all projects this week; not a shortfall. |
+| **James Diamond - Vinn** | 🔴 **REOPENED (was ✓, wrongly)** | 06:00 cron completed this via the stale skill-table mapping (PhucVT). Real gate per memory is **LeNH**, who shows **0h on 09-10 across every Workstream project** (last logged entry 09-09, all projects checked) with no leave note — genuine shortfall under the stricter LeNH rule (any shortfall, even <1h, is an alert). Discord (Vinn+Jeff reports) was and remains clean — this reopening is purely the Workstream/LeNH hours side of the gate. |
+| Ohcleo | ○ still incomplete | Re-verified live — Celine's 18:43 question ("I assume its a test account with test audio? Also the lorem ipsum audio") still has no reply from Tony. Her 19:15 "I deleted them now" self-resolved the visible symptom but the original question was never answered. |
+| Rick (Check mail) | ○ still incomplete | Fresh post-06:00 window is clean (no new rick@ mail), but the originally-flagged production error `#1118 Minified React error #418` (Alert #1) was not superseded or confirmed resolved — stays open. |
+
+**Cleared:** Maddy, John Yi - Amazing Meds, Aysar, Elliott, Rebecca (William Bills), Neural Contract, Ken (Check mail)
+**Newly reopened:** James Diamond - Vinn task
+**Still open:** Ohcleo, Rick (Check mail), Fountain (Parts 1/3 + Trello board not re-verified this pass)
+
+**Not run this pass (time-boxed, same as 06:00 cron):** Fountain Trello board query, Arthur (Piece 13), Upwork Memo (Piece 15), WhatsApp, Zalo — recommend standalone follow-up runs.
+
+### ⚠️ New/updated alert
+
+| # | Source | Alert |
+|---|--------|-------|
+| 6 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10 across every Workstream project (last entry 09-09), no leave note on file — real shortfall, stricter LeNH threshold (any shortfall = alert). James Diamond Trello item reopened. |
+| 7 | Workstream (Generator / Elliott) | 3 `needsReview` rows still `Pending` for LucNT ("Check and follow on project" / "Follow up on project", 0:30 each, 09-07 to 09-09) — addressed to reviewers LucNT/HangNTT. Informational, does not block Elliott's own gate (already cleared above). |
+
+Trello: Check progress 6 items flipped ✓, 1 item (James Diamond) flipped back to ○. Check mail: Ken ✓. All writes re-fetched live before applying (no stale-write).
+
+---
+
+## Unresolved Questions (updated)
+
+1. Fountain Trello board and Part 1 explicit weekly-plan message still not independently re-verified this recheck — Parts 2/3 data now available (Workstream recovered) but not cross-tabulated against plan this pass.
+2. Arthur, Upwork Memo, WhatsApp, Zalo pieces still skipped both runs today — recommend standalone follow-up.
+3. Rick@ #1118 production error and Ohcleo's unanswered Celine question remain genuinely open — no dev/customer-facing action taken by this report (per no-auto-send rule), user may want to follow up directly.
