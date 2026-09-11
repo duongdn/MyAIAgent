@@ -14,7 +14,7 @@
 | 2 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
 | 3 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony as of her last message 19:15 ("I deleted them now" — self-resolved the symptom, question itself never answered) |
 | 4 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
-| 5 | Workstream (Neural Contract / TuanNT, informational) | TuanNT's 8.5h logged on 09-10 under project "Neural Contract" has task descriptions ("[Grazing Software][CR1]...", "[Prestashop]...") that don't match Neural Contract work at all — looks like mis-logged project attribution, not fake hours. Doesn't block John Yi/Bailey/Rebecca combined-hours gate (hours are real, just possibly wrong bucket) — worth asking TuanNT to confirm/fix the project tag. |
+| 5 | Workstream (TuanNT, mis-logged project) | ✅ Confirmed real by user — TuanNT does NOT work on Neural Contract, but logged 8.5h 09-10 under the "Neural Contract - Test Job" bucket (task text: Grazing Software/Prestashop work). **User already reminded TuanNT directly** — no further action needed this report. Hours are genuine (not idle), just filed under the wrong project. |
 
 ~~4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10, real shortfall~~ — **WRONG, corrected**: a script bug (`dayStrips` API shape changed to `{items:[...]}`, script expected a bare array) silently produced incomplete data on the first fetch, making LeNH look like 0h. Re-verified via raw API: LeNH logged a full **8h every day 09-07 through 09-10** on James Diamond, zero shortfall. Script fixed (`scripts/workstream-fetch-project-week.js`). James Diamond Trello item reverted to ✓ complete.
 
@@ -254,4 +254,4 @@ Not run this run — time-boxed. Neural Contract's Upwork thread was checked as 
 2. Arthur, Upwork Memo, WhatsApp, Zalo pieces not run today. Needs standalone follow-up.
 3. Ken@/rick@ volume was reviewed message-by-message this pass (ken@ clean, rick@ confirms the one real alert) — no longer an open question.
 4. Rick@ #1118 production error and Ohcleo's unanswered Celine question remain genuinely open — no dev/customer-facing action taken by this report (per no-auto-send rule); user may want to follow up directly with rick@/Tony.
-5. TuanNT's Neural Contract hours (8.5h 09-10) look mis-tagged — task text is Grazing Software/Prestashop work, not Neural Contract. Worth confirming with TuanNT which project he meant to log against.
+5. ~~TuanNT's Neural Contract hours look mis-tagged, worth confirming~~ — resolved: user confirmed the mis-tag and already reminded TuanNT directly. No further action needed.
