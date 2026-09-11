@@ -42,34 +42,57 @@ const keepAudited = (arr) => {
 const keepQuarters = (arr, n) => arr.filter((y) => y.quater > 0).sort((a, b) => a.year - b.year || a.quater - b.quater).slice(-n);
 const periodLabel = (y) => (y.quater ? `Q${y.quater}/${y.year}` : String(y.year));
 
-// cafef KQKD bug (widespread, ~20/55 tickers incl. VEA, MWG): cafef added the
-// "- Phần lãi/lỗ trong công ty liên doanh, liên kết" row (code 27) to the template
-// starting ~Q1/2026. For periods before that, the API keeps returning data on the OLD
-// code layout, which is shifted one slot lower than the current template expects:
-// code21 actually holds code22's value ("Doanh thu HĐTC"), code22 holds code23's
-// ("Chi phí tài chính"), code23 holds code24's ("Trong đó CP lãi vay"), code24 holds
-// code27's ("Phần lãi/lỗ LDLK") — leaving code27 itself at 0. Confirmed via magnitude
-// continuity across the Q4/2025→Q1/2026 boundary for every affected ticker. Undo the
-// shift per-period, gated on: (a) this ticker's periods do use code27 at all (post-2026
-// periods present), and (b) the period itself is pre-cutover (code27 === 0 that period)
-// — so post-2026 periods, and tickers that never had this template shape, are untouched.
-const KQKD_CHAIN = ["21", "22", "23", "24", "27"];
-function applyKqkdChainShift(kqkdY) {
-  const cellsOf = (period) => KQKD_CHAIN.map((c) => period.data.find((d) => d.code === c));
-  const usesCode27 = kqkdY.some((p) => {
-    const cells = cellsOf(p);
-    return cells.every(Boolean) && cells[cells.length - 1].value !== 0;
-  });
-  if (!usesCode27) return;
-  for (const period of kqkdY) {
+// cafef systemic bug (recurring pattern, found 3x as of 2026-09: KQKD 21-27,
+// CDKT "Phải thu dài hạn" 215-216, likely more): around Q1/2026 cafef inserted new
+// line items into several report sections without re-keying older periods' data to
+// match. Pre-2026 periods keep reporting under the OLD code layout — shifted N
+// slots lower than the CURRENT template — until the last code in the chain (the
+// newly-added line) is populated. Confirmed via magnitude continuity across the
+// Q4/2025→Q1/2026 boundary for every case found. `applyChainShift` undoes this
+// per-period, gated on: (a) the ticker's data populates the chain's last code in
+// SOME period (guards tickers with a different/no such template shape), and (b)
+// the period itself is pre-cutover (last code === 0 that period) — so post-2026
+// periods, and unaffected tickers, are untouched.
+// `isPreCutoverFn(cells)`: given the chain's cells for one period, decide whether that
+// period is still on the OLD (needs-fixing) layout. KQKD: the new line starts at
+// exactly 0 and fills in after cutover, so `last === 0` means pre-cutover. CDKT
+// receivables: the old code holds the displaced (mislabeled) value — always POSITIVE,
+// since it's really "Phải thu dài hạn khác" — until cutover, after which that slot is
+// either 0 or a genuine (possibly negative) "Dự phòng"; `last > 0` is pre-cutover.
+// `direction`: which way values need to move to land on their correct code. "up" —
+// each code's true value is currently one slot LOWER (KQKD: raw21 holds true code22's
+// value, ..., so higher-index cells pull from the previous lower-index cell). "down" —
+// each code's true value is currently one slot HIGHER (CDKT receivables: raw216 holds
+// true code215's value, so lower-index cells pull from the next higher-index cell).
+function applyChainShift(periods, chain, isPreCutoverFn, direction = "up") {
+  const cellsOf = (period) => chain.map((c) => period.data.find((d) => d.code === c));
+  const isPreCutover = (cells) => isPreCutoverFn(cells[cells.length - 1].value);
+  const seenBothStates =
+    periods.some((p) => { const c = cellsOf(p); return c.every(Boolean) && isPreCutover(c); }) &&
+    periods.some((p) => { const c = cellsOf(p); return c.every(Boolean) && !isPreCutover(c); });
+  if (!seenBothStates) return;
+  for (const period of periods) {
     const cells = cellsOf(period);
-    if (cells.some((c) => !c)) continue;
-    if (cells[cells.length - 1].value !== 0) continue; // already on new template
+    if (cells.some((c) => !c) || !isPreCutover(cells)) continue;
     const original = cells.map((c) => c.value);
-    for (let i = cells.length - 1; i > 0; i--) cells[i].value = original[i - 1];
-    cells[0].value = 0;
+    if (direction === "up") {
+      for (let i = cells.length - 1; i > 0; i--) cells[i].value = original[i - 1];
+      cells[0].value = 0;
+    } else {
+      for (let i = 0; i < cells.length - 1; i++) cells[i].value = original[i + 1];
+      cells[cells.length - 1].value = 0;
+    }
   }
 }
+// KQKD: "- Phần lãi/lỗ trong công ty liên doanh, liên kết" (code27) inserted; pre-2026
+// data lands one slot low (21→22→23→24→27), code27 stays 0 until cutover.
+// ~20/55 tickers affected incl. VEA, MWG.
+const KQKD_CHAIN = ["21", "22", "23", "24", "27"];
+// CDKT "Các khoản phải thu dài hạn": pre-2026 periods put "Phải thu dài hạn khác"'s
+// value at code216 ("Dự phòng phải thu dài hạn khó đòi") instead of code215, leaving
+// 215 at 0; cutover drops code216 back to 0 once the value moves to 215. Confirmed
+// universal (VNM, FPT, MWG, VEA, HAG, REE all affected).
+const CDKT_TN_RECEIVABLE_LT_CHAIN = ["215", "216"];
 
 // cafef CDKT template bug (universal, all 55 tickers, all periods): the static
 // `templace` for the "III. Các khoản phải thu ngắn hạn" section is missing the
@@ -77,12 +100,15 @@ function applyKqkdChainShift(kqkdY) {
 // 135/136/137 all carry the wrong (one-item-early) label. Per-code VALUES are
 // correct as-is (row131+...+137 sums to the code130 total exactly, for every
 // period) — verified against cafef's own rendered CDKT page for HAG (code135 =
-// 2,820,821,916 = "Phải thu về cho vay ngắn hạn" cuối năm 2025). Pure label fix,
-// no value changes, no per-period condition needed.
+// 2,820,821,916 = "Phải thu về cho vay ngắn hạn" cuối năm 2025). Pure label fix, no
+// value changes needed. Numbering must match the STATIC Circular-200 item order
+// (5./6./7.) — NOT the dynamic on-screen numbering cafef's own UI shows (which
+// skips zero-valued items and renumbers, e.g. "4." when items 3-4 are blank for
+// that ticker); using the dynamic number here would collide with code134's "4.".
 const CDKT_TN_LABEL_FIX = {
-  "135": "4. Phải thu về cho vay ngắn hạn",
-  "136": "5. Phải thu ngắn hạn khác",
-  "137": "6. Dự phòng phải thu ngắn hạn khó đòi (*)",
+  "135": "5. Phải thu về cho vay ngắn hạn",
+  "136": "6. Phải thu ngắn hạn khác",
+  "137": "7. Dự phòng phải thu ngắn hạn khó đòi (*)",
 };
 function fixCdktTnTemplateGap(tnT) {
   for (const row of tnT) {
@@ -159,6 +185,58 @@ function isGroupHeader(row) {
   const c = (row.code || "").trim();
   if (!c || LEVEL.has(c)) return false;
   return ROMAN_RE.test(row.name);
+}
+
+// ── Template self-checks (systemic, run on every build) ───────────────────────
+// Two cafef bugs found in production (2026-08/09) both had a cheap structural
+// signature that would have surfaced BEFORE a user spotted the visible symptom:
+//   1. CDKT "Phải thu về cho vay ngắn hạn" gap: item numbering jumped 4→6,
+//      skipping "5." — a numbering-gap scan catches this class instantly.
+//   2. KQKD code21→27 chain shift: a contra/negative-only line (dự phòng) held
+//      a large POSITIVE value for many periods — a sign-sanity scan on known
+//      contra-account name patterns catches this class instantly.
+// Neither check needs a reference source; both run on every build, cost ~0,
+// and print WARN (non-blocking) so the anomaly shows up in build output the
+// moment cafef's data changes shape again, instead of waiting for a screenshot.
+const ITEM_NUM_RE = /^(\d+)\.\s?/;
+function auditTemplateNumbering(template, label) {
+  let expected = null;
+  for (const row of template) {
+    const c = (row.code || "").trim();
+    if (!c || LEVEL.has(c) || ROMAN_RE.test(row.name) || SECTION_BOUNDARY.test(row.name)) {
+      expected = null; // reset at each group boundary
+      continue;
+    }
+    const m = ITEM_NUM_RE.exec(row.name);
+    if (!m) continue;
+    const n = parseInt(m[1], 10);
+    if (expected !== null && n !== expected) {
+      process.stdout.write(`WARN: [audit] ${label} template numbering gap near code ${c} — expected item ${expected}, got "${row.name}" (cafef may have inserted/removed a line; verify code mapping)\n`);
+    }
+    expected = n + 1;
+  }
+}
+
+// Only valid on the ASSET side (TN) — "Dự phòng ..." there is always a contra-asset
+// (allowance/impairment, ≤0). On the liability side (NV), "Dự phòng phải trả" is a
+// genuine liability/provision and is SUPPOSED to be positive — never call this on nvT.
+const CONTRA_NAME_RE = /Dự phòng|hao mòn lũy kế|khấu hao lũy kế/i;
+function auditContraSign(template, yrsData, label) {
+  for (const row of template) {
+    if (!CONTRA_NAME_RE.test(row.name)) continue;
+    let positiveCount = 0, total = 0, maxPositive = 0;
+    for (const y of yrsData) {
+      const cell = y.data.find((d) => d.code === row.code);
+      if (!cell || cell.value === 0) continue;
+      total++;
+      if (cell.value > 0) { positiveCount++; maxPositive = Math.max(maxPositive, cell.value); }
+    }
+    // A few isolated positive periods can be legitimate (provision reversal); flag
+    // only when it's the majority AND the magnitude is non-trivial (>1 tỷ).
+    if (total >= 3 && positiveCount / total > 0.5 && maxPositive > 1e9) {
+      process.stdout.write(`WARN: [audit] ${label} "${row.name}" (code ${row.code}) is positive in ${positiveCount}/${total} periods (contra-account expected ≤0) — likely mislabeled/shifted code, verify against cafef's live page\n`);
+    }
+  }
 }
 
 function buildAll(cf) {
@@ -408,7 +486,16 @@ async function main() {
   const minYears = forceCafef ? 1 : 3;
   if (cf.tnYAnnual.length < minYears) throw new Error(`NO_DATA: ${ticker} ${cf.tnYAnnual.length} năm`);
 
-  if (src === "cafef") applyKqkdChainShift(cf.kqkdY);
+  if (src === "cafef") {
+    applyChainShift(cf.kqkdY, KQKD_CHAIN, (v) => v === 0, "up");
+    applyChainShift(cf.tnY, CDKT_TN_RECEIVABLE_LT_CHAIN, (v) => v > 0, "down");
+
+    auditTemplateNumbering(cf.tnT, "CDKT Tài sản");
+    auditTemplateNumbering(cf.nvT, "CDKT Nguồn vốn");
+    auditTemplateNumbering(cf.kqkdT, "KQKD");
+    auditContraSign(cf.tnT, cf.tnY, "CDKT Tài sản"); // NV skipped: "Dự phòng phải trả" is a real liability there, not a contra-asset
+    auditContraSign(cf.kqkdT, cf.kqkdY, "KQKD");
+  }
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
   const { all, groups, headers } = buildAll(cf);
