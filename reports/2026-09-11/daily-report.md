@@ -298,6 +298,8 @@ Apdex 0.57 for MPFC is below the 0.7 "poor" threshold — chronic, not new.
 
 🔴 Combined finding: Aysar workroom has a ~1.83h weekly Upwork-vs-Workstream total gap (real, not a timezone artifact — the caveat above only concerns the day-by-day split) AND memo content for 09-10 was never actually verified. Recommend a manual look at the Aysar Upwork timesheet for the week.
 
+**Confirmed by user + action taken:** Workstream/Baamboozle task log for KhanhHH has **no entry at all for Wednesday 09-09** (only Monday 6h + Thursday 5h logged), while Upwork's Aysar tracker shows hours that day — this is the likely source of the weekly total gap. **Matrix message sent to KhanhHH** (`!rwLbvLBnrRAYMaOPaD:nustechnology.com`, event `$8FxeY0pnNzWZoDbRohHrsaPGTNxWAbrdvDPvVO4K9GA`) asking her to check and backfill the 09-09 task log.
+
 ## Arthur / WhatsApp / Zalo
 
 Still not run this pass — time-boxed. Recommend standalone follow-up: `/daily-report arthur`.
