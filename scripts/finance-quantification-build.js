@@ -206,7 +206,7 @@ function isGroupHeader(row) {
 // Top-level item only: "5. Foo" — NOT a decimal sub-item like "7.1 Foo" or "2.1. Foo"
 // (banks/securities/insurance templates use these for sub-breakdowns; they don't
 // participate in the top-level 1,2,3... sequence and must not be compared against it).
-const ITEM_NUM_RE = /^(\d+)\.\s+(?!\d)/;
+const ITEM_NUM_RE = /^(\d+)\.\s*(?!\d)/;
 function auditTemplateNumbering(template, label) {
   let expected = null;
   for (const row of template) {
