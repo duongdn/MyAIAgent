@@ -94,7 +94,7 @@ const KQKD_CHAIN = ["21", "22", "23", "24", "27"];
 // universal (VNM, FPT, MWG, VEA, HAG, REE all affected).
 const CDKT_TN_RECEIVABLE_LT_CHAIN = ["215", "216"];
 
-// cafef CDKT template bug (universal, all 55 tickers, all periods): the static
+// cafef CDKT template bug: for the standard non-financial template, the static
 // `templace` for the "III. Các khoản phải thu ngắn hạn" section is missing the
 // "5. Phải thu về cho vay ngắn hạn" row entirely (numbering jumps 4→6), so codes
 // 135/136/137 all carry the wrong (one-item-early) label. Per-code VALUES are
@@ -105,15 +105,20 @@ const CDKT_TN_RECEIVABLE_LT_CHAIN = ["215", "216"];
 // (5./6./7.) — NOT the dynamic on-screen numbering cafef's own UI shows (which
 // skips zero-valued items and renumbers, e.g. "4." when items 3-4 are blank for
 // that ticker); using the dynamic number here would collide with code134's "4.".
+// NOT universal by code number — banks/securities firms/insurers use a totally
+// different CDKT template where codes 135-137 mean something else entirely (verified
+// case: VND/SSI code137 = "7. Tài sản ngắn hạn khác", not a receivables line at all).
+// Match by the EXACT broken source text, never blindly by code, or this clobbers a
+// correct label on a differently-shaped template.
 const CDKT_TN_LABEL_FIX = {
-  "135": "5. Phải thu về cho vay ngắn hạn",
-  "136": "6. Phải thu ngắn hạn khác",
-  "137": "7. Dự phòng phải thu ngắn hạn khó đòi (*)",
+  "135": { from: "6. Phải thu ngắn hạn khác", to: "5. Phải thu về cho vay ngắn hạn" },
+  "136": { from: "7. Dự phòng phải thu ngắn hạn khó đòi (*)", to: "6. Phải thu ngắn hạn khác" },
+  "137": { from: "8. Tài sản thiếu chờ xử lý", to: "7. Dự phòng phải thu ngắn hạn khó đòi (*)" },
 };
 function fixCdktTnTemplateGap(tnT) {
   for (const row of tnT) {
     const fix = CDKT_TN_LABEL_FIX[(row.code || "").trim()];
-    if (fix) row.name = fix;
+    if (fix && row.name === fix.from) row.name = fix.to;
   }
   return tnT;
 }
@@ -198,7 +203,10 @@ function isGroupHeader(row) {
 // Neither check needs a reference source; both run on every build, cost ~0,
 // and print WARN (non-blocking) so the anomaly shows up in build output the
 // moment cafef's data changes shape again, instead of waiting for a screenshot.
-const ITEM_NUM_RE = /^(\d+)\.\s?/;
+// Top-level item only: "5. Foo" — NOT a decimal sub-item like "7.1 Foo" or "2.1. Foo"
+// (banks/securities/insurance templates use these for sub-breakdowns; they don't
+// participate in the top-level 1,2,3... sequence and must not be compared against it).
+const ITEM_NUM_RE = /^(\d+)\.\s+(?!\d)/;
 function auditTemplateNumbering(template, label) {
   let expected = null;
   for (const row of template) {
@@ -217,9 +225,13 @@ function auditTemplateNumbering(template, label) {
   }
 }
 
-// Only valid on the ASSET side (TN) — "Dự phòng ..." there is always a contra-asset
-// (allowance/impairment, ≤0). On the liability side (NV), "Dự phòng phải trả" is a
-// genuine liability/provision and is SUPPOSED to be positive — never call this on nvT.
+// Only valid on the CDKT ASSET side (TN) — "Dự phòng ..." there is always a
+// contra-asset (allowance/impairment, ≤0). On the liability side (NV), "Dự phòng
+// phải trả" is a genuine liability/provision and IS supposed to be positive — never
+// call this on nvT. Same reason it must never run on KQKD (income statement): "chi
+// phí dự phòng" there is a genuine EXPENSE LINE (credit-risk provision for banks,
+// technical provisions for insurers, impairment charges for securities firms) —
+// reported positive like any other expense, not a balance-sheet deduction.
 const CONTRA_NAME_RE = /Dự phòng|hao mòn lũy kế|khấu hao lũy kế/i;
 function auditContraSign(template, yrsData, label) {
   for (const row of template) {
@@ -492,9 +504,10 @@ async function main() {
 
     auditTemplateNumbering(cf.tnT, "CDKT Tài sản");
     auditTemplateNumbering(cf.nvT, "CDKT Nguồn vốn");
-    auditTemplateNumbering(cf.kqkdT, "KQKD");
-    auditContraSign(cf.tnT, cf.tnY, "CDKT Tài sản"); // NV skipped: "Dự phòng phải trả" is a real liability there, not a contra-asset
-    auditContraSign(cf.kqkdT, cf.kqkdY, "KQKD");
+    // KQKD numbering audit skipped: banks/insurers/securities firms use heavily
+    // sub-numbered KQKD templates (decimal + custom section items) unrelated to the
+    // 1,2,3... top-level sequence this check assumes; too noisy to be useful there.
+    auditContraSign(cf.tnT, cf.tnY, "CDKT Tài sản"); // NV and KQKD skipped — see comment on auditContraSign
   }
 
   process.stdout.write("PROGRESS: 2/3 Đang ghi dữ liệu...\n");
