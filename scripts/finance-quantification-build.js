@@ -122,7 +122,7 @@ async function fetchCafef(ticker, maxYears, maxQuarters) {
   });
 
   return {
-    tnT: cdktN.value.templace.find((t) => t.code === "TN").data,
+    tnT: fixCdktTnTemplateGap(cdktN.value.templace.find((t) => t.code === "TN").data),
     nvT: cdktN.value.templace.find((t) => t.code === "NV").data,
     tnYAnnual, nvYAnnual,
     tnY: [...tnYAnnual, ...tnYQuarter],
