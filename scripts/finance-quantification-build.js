@@ -522,8 +522,17 @@ async function main() {
   process.stdout.write(`DONE: ${url}\n`);
 }
 
-main().catch((e) => {
-  const m = e.message || String(e);
-  const msg = m.startsWith("ERROR:") ? m + "\n" : `ERROR: ${m}\n`;
-  process.stderr.write(msg, () => process.exit(1));
-});
+if (require.main === module) {
+  main().catch((e) => {
+    const m = e.message || String(e);
+    const msg = m.startsWith("ERROR:") ? m + "\n" : `ERROR: ${m}\n`;
+    process.stderr.write(msg, () => process.exit(1));
+  });
+}
+
+// Exported for scripts/finance-quantification-audit-cron.js — audit-only reuse
+// without triggering a full Google Sheets rebuild.
+module.exports = {
+  fetchCafef, applyChainShift, KQKD_CHAIN, CDKT_TN_RECEIVABLE_LT_CHAIN,
+  auditTemplateNumbering, auditContraSign,
+};
