@@ -10,11 +10,13 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Email (rick@) | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error (not staging noise), still unresolved |
-| 2 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
-| 3 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony as of her last message 19:15 ("I deleted them now" — self-resolved the symptom, question itself never answered) |
-| 4 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
-| 5 | Workstream (TuanNT, mis-logged project) | ✅ Confirmed real by user — TuanNT does NOT work on Neural Contract, but logged 8.5h 09-10 under the "Neural Contract - Test Job" bucket (task text: Grazing Software/Prestashop work). **User already reminded TuanNT directly** — no further action needed this report. Hours are genuine (not idle), just filed under the wrong project. |
+| 1 | Bitbucket PR #481 (Maddy/Xtreme) | 🔴🔴 **Most serious finding today** — PR open ~4.5 months (since 04-20), last comment 2026-06-06 from Madhuraka: **High severity** — "refund payouts are still double-posted, so Shopify clearing will not behave the way you describe." **No reply from our side in over 3 months.** See ## Maddy section. |
+| 2 | Email (rick@) | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error (not staging noise), still unresolved |
+| 3 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
+| 4 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony as of her last message 19:15 ("I deleted them now" — self-resolved the symptom, question itself never answered) |
+| 5 | Slack (Maddy/Xtreme) | Madhuraka asked Kai directly 12:13 "regarding the feedback email, what about the bugs they have mentioned?" — no explicit reply found in window, only an indirectly-related ticket update. Soft alert, see ## Maddy section. |
+| 6 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
+| 7 | Workstream (TuanNT, mis-logged project) | ✅ Confirmed real by user — TuanNT does NOT work on Neural Contract, but logged 8.5h 09-10 under the "Neural Contract - Test Job" bucket (task text: Grazing Software/Prestashop work). **User already reminded TuanNT directly** — no further action needed this report. Hours are genuine (not idle), just filed under the wrong project. |
 
 ~~4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10, real shortfall~~ — **WRONG, corrected**: a script bug (`dayStrips` API shape changed to `{items:[...]}`, script expected a bare array) silently produced incomplete data on the first fetch, making LeNH look like 0h. Re-verified via raw API: LeNH logged a full **8h every day 09-07 through 09-10** on James Diamond, zero shortfall. Script fixed (`scripts/workstream-fetch-project-week.js`). James Diamond Trello item reverted to ✓ complete.
 
@@ -134,6 +136,40 @@ No customer complaints or stuck-card signals surfaced in the Matrix transcript.
 
 ---
 
+## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis) — 08:52 (+07:00)
+
+*Was missing from the 06:00 cron run — 4-part check is mandatory every report, filled in now.*
+
+### 1. Task Log Hours (09-10)
+| Developer | 09-10 | Notes |
+|-----------|-------|-------|
+| LongVV | 5.5h — all Kai-role (LIFM2-465, LIFM2-464, LIFM2-409), no WordPress tasks | Informational only (ad-hoc, no fixed target per 2026-08-24 rule) |
+
+### 2. Slack / Kai Daily Report Check
+- WS Maddy hours 09-10: 5.5h, all Kai-role → Kai daily report check applies (not skippable).
+- Kai posted progress 17:31: LIFM2-465 Done, LIFM2-464 Done, LIFM2-409 In progress. **Report present, matches Workstream hours.**
+- ⚠️ Madhuraka asked directly 12:13 "Kai, regarding the feedback email, what about the bugs they have mentioned?" + 12:14 "We recently did a task to address those so they won't be willing to pay again" — no explicit verbal reply from Kai found in this window; his 17:31 update lists LIFM2-409 "Check Anoma feedback → In progress" which may be the same thread, but doesn't directly answer the question asked. **Soft alert — worth confirming Kai actually addressed Madhuraka's concern, not just marked a ticket in-progress.**
+
+### 3. JIRA (LIFM2, weekly cross-check W37 2026-09-07→09-13)
+| Ticket | Summary | Status | Est | Actual (JIRA) | WS Log | Check |
+|--------|---------|--------|-----|---------------|--------|-------|
+| LIFM2-455 | Refresh Issue on Quotes page | To Do | 1h30m | 1h30m | 0.5h | ✅ |
+| LIFM2-452 | Issue updating 4W Sent status | To Do | 2h30m | 2h30m | 0.5h | ✅ |
+| LIFM2-464 | Invalidate Proceed buttons | Review | 4h | 0h | 4h | ⚠️ no JIRA log |
+| LIFM2-465 | Quote-email tab feedback | Review | 1h | 0h | 1h | ⚠️ no JIRA log |
+| LIFM2-409 | Import Shopify payouts | In Progress | 113h15m | 109h15m | 2h | ✅ (close to est, watch) |
+| (untagged) | "Check feedback and resolve PR conflicts" | — | — | — | 0.5h | ⚠️ no ticket ID, no est |
+
+LIFM2-409 is at 109h15m of a 113h15m estimate (96%) — not yet over, but close; worth watching next week.
+
+### 4. Bitbucket PR Status (`xtreme-web/rms`)
+9 open PRs. Two flagged:
+- 🔴 **PR #481** ("LIFM2-409 feedback", opened 2026-04-20 — **~4.5 months open**) — last comment 2026-06-06 from Madhuraka: **High severity** — "refund payouts are still double-posted, so Shopify clearing will not behave the way you describe..." **No reply from our side in over 3 months.** This is a real, serious, long-unaddressed client-flagged issue — the single most concerning finding in this report.
+- PR #543 ("LIFM2-459", opened by Madhuraka Godahewa himself 09-06, 5 days ago) — 0 comments yet, not yet reviewed by us.
+- Other 7 PRs (541, 540, 535, 534, 520, 509) — routine, not individually reviewed this pass.
+
+---
+
 ## Trello — 06:00 (+07:00), corrected 08:52
 
 ### Ignore List — auto-complete, no gate check
@@ -152,7 +188,7 @@ Not tracked (paused): Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown 
 ### Check progress (live board state)
 | Item | Result | Notes |
 |------|--------|-------|
-| Maddy - Carrick/Kai/Luis | ✓ complete (corrected 08:52) | Xtreme Slack clean + LongVV 8.5h/wk Workstream (5.5h 09-10) verified |
+| Maddy - Carrick/Kai/Luis | 🔴 **reopened 08:52 — full 4-part check found real issues** | Hours/Kai-report OK, but PR #481 (High-severity client finding, unanswered 3+ months) + Madhuraka's 12:13 direct question left unaddressed — see ## Maddy section |
 | John Yi - Amazing Meds | ✓ complete (corrected 08:52) | Amazing Meds Slack clean + TuanNT 8.5h 09-10 (neural_contract) verified |
 | James Diamond - Vinn | ✓ complete (reverted, false alert corrected) | Discord clean (Vinn+Jeff reported) + LeNH 8h every day 09-07→09-10 — earlier "0h" was a script bug, not a real shortfall |
 | Rory | ✓ complete | Swift Studio Slack: 0 msgs, Slack-only gate |
@@ -242,9 +278,20 @@ Apdex 0.57 for MPFC is below the 0.7 "poor" threshold — chronic, not new.
 
 ---
 
-## Upwork Memo / Arthur / WhatsApp / Zalo
+## Upwork Memo — 2026-09-10 — 08:52 (+07:00)
 
-Not run this run — time-boxed. Neural Contract's Upwork thread was checked as part of the Trello/Neural gate above (silent since 08-06, no alert) but the formal Upwork Memo validation (Piece 15) was not. Recommend standalone follow-up: `/daily-report upwork-memo`, `/daily-report arthur`.
+*Was missing from the 06:00 cron run — filled in now.*
+
+| Workroom | Memos | Invalid | Details |
+|----------|-------|---------|---------|
+| Rory (LeNH) | 0 | — | Session valid, genuinely 0 memos — LeNH logged full 8h on James Diamond that day instead |
+| Aysar (LeNH) | 0 | — | Same — session valid, 0 Upwork hours logged 09-10 |
+
+No alert — sessions were valid (not expired), just genuinely no hourly work logged on Rory/Aysar Upwork contracts that day.
+
+## Arthur / WhatsApp / Zalo
+
+Still not run this pass — time-boxed. Recommend standalone follow-up: `/daily-report arthur`.
 
 ---
 
