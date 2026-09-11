@@ -278,16 +278,22 @@ Apdex 0.57 for MPFC is below the 0.7 "poor" threshold — chronic, not new.
 
 ---
 
-## Upwork Memo — 2026-09-10 — 08:52 (+07:00)
+## Upwork — 2026-09-10/W37 — 08:52 (+07:00)
 
-*Was missing from the 06:00 cron run — filled in now.*
+*Was missing from the 06:00 cron run — filled in now, and corrected below after cross-checking against weekly hours.*
 
-| Workroom | Memos | Invalid | Details |
-|----------|-------|---------|---------|
-| Rory (LeNH) | 0 | — | Session valid, genuinely 0 memos — LeNH logged full 8h on James Diamond that day instead |
-| Aysar (LeNH) | 0 | — | Same — session valid, 0 Upwork hours logged 09-10 |
+### Weekly hours vs Workstream (task-log match check)
 
-No alert — sessions were valid (not expired), just genuinely no hourly work logged on Rory/Aysar Upwork contracts that day.
+| Workroom | Upwork this week | Workstream (task-log) this week | Match? |
+|----------|-------------------|----------------------------------|--------|
+| Rory | 0:00 | bxr_app: 0h (no member entries) | ✅ match |
+| Aysar | 12:50 (Tue 1.83, Wed 6, Thu 5) | baamboozle/KhanhHH: 11h (Mon 6, Thu 5) | 🔴 **mismatch — ~1.83h gap, and daily breakdown doesn't align** (Upwork has Tue/Wed hours Workstream doesn't show; Workstream has a Monday 6h Upwork doesn't show) |
+
+### Memo validation
+
+~~Rory 0 memos, Aysar 0 memos — session valid, genuinely 0 hours~~ — **WRONG.** The weekly-hours check (above) shows Aysar logged real hours on 09-10 (Thursday, 5h). The memo-check script returning 0 segments for that date is a **false negative** — likely didn't drill into the correct day of the work-diary widget (session was valid, page loaded, just came back empty). Memo validity for Aysar 09-10 is **unverified, not confirmed-clean** — needs a slower/interactive re-check, not silently reported OK.
+
+🔴 Combined finding: Aysar workroom has a real ~1.83h Upwork-vs-Workstream gap this week AND memo content for 09-10 was never actually verified. Recommend a manual look at the Aysar Upwork timesheet for the week.
 
 ## Arthur / WhatsApp / Zalo
 
