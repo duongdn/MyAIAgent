@@ -799,7 +799,7 @@ Use this table (derived from `docs/memory/daily-report/trello/reference_trello_g
 
 | Trello Item (partial match) | Sources to run | Notes |
 |-----------------------------|----------------|-------|
-| Maddy | `slack xtreme` + `sheets longvv` | Kai daily report check is CONDITIONAL: check Workstream Maddy hours for the day first, only flag missing report if he logged hours that day (see [[feedback_kai_daily_report_gate]]) |
+| Maddy | 🔴 **FULL 4-part check, not a shortcut** — Task-log hours + Slack (incl. Kai daily-report gate, conditional per [[feedback_kai_daily_report_gate]]) + JIRA weekly cross-check + Bitbucket PR reply-rate. See [[feedback_maddy_consolidated]] for the mandatory `## Maddy` section template — this is NOT satisfied by `slack xtreme` + `sheets longvv` alone. A shallow Slack+hours-only recheck of Maddy has repeatedly missed real findings (e.g. a High-severity client PR comment unanswered for 3+ months, found only when the full 4-part check finally ran on 2026-09-11). |
 | John Yi | `slack amazingmeds` + `sheets tuannt` | TuanNT combined **5** sheets (JohnYi+Rebecca+Paturevision+Neural+CharlesChang) |
 | Bailey | `slack ggs` + `sheets tuannt` | TuanNT 0h (across all 5 sheets) gates Bailey too. VietPH resigned 2026-06-30 — no longer a source. |
 | James Diamond / Vinn | `discord airagri` | Vinn daily report (check BOTH #airagri_webapp and #airagri-flutter) |
@@ -885,7 +885,7 @@ For every finding a recheck changes:
 - **Fountain:** If Matrix token was expired during cron, fix it first, then fetch W{n} plan from `!EWnVDAxbTGsBxPkaaI:nustechnology.com` going back to Monday morning (08:30-09:30 window)
 - **Log findings clearly:** state what was checked, what was found, and why each item was completed or kept open
 
-### ⚠️ ALSO fill in missing data from cron failures
+### ⚠️ ALSO fill in missing data from cron failures — including pieces with NO Trello gate
 
 **Recheck is NOT only about Trello items.** After fixing Trello, scan the existing report for any section that has placeholder/failure text, and re-run those sources to supply real data:
 
@@ -896,6 +896,9 @@ For every finding a recheck changes:
 | "script error", "Data unreliable" | Re-run the script, replace with real output |
 | "cached plan (Jun X)" | Fetch real data from the source |
 | "login failed", "CAPTCHA required" | Try alternate login, or document as genuinely unresolvable after 2 attempts |
+| "Not run this run — time-boxed", "skipped this pass" | Run the piece now, same as any other missing-data case — being time-boxed is not a reason to permanently skip it |
+
+🔴 **Trello's checklist is not a complete inventory of mandatory pieces.** Upwork Memo (Piece 15) has no dedicated Trello checklist item at all — it will NEVER appear as a ○ item, so a recheck that only chases Trello ○ items will silently skip it forever. Same risk applies to any piece whose Trello gate is shallower than its actual requirement (see Maddy above — the Trello item can show ✓ from a quick Slack+hours check while the mandatory 4-part check was never run). Before finishing a recheck, explicitly check: did every piece marked "time-boxed"/"not run"/"skipped" in the report actually get run this pass — not just "does every Trello ○ item now have a reason." This was missed for real on 2026-09-11 (Upwork Memo + Maddy's full 4-part check both silently skipped two runs in a row) — it takes deliberately re-reading the report's own "not run" notes, not just the Trello board, to catch this.
 
 **For each missing-data section:**
 1. Identify the source (Upwork, Matrix, Sheets, etc.)
