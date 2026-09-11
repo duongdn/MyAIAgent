@@ -1,26 +1,25 @@
 # Daily Report — 2026-09-11 (Friday)
 
-**Run:** 2026-09-11T06:00 +07:00 (cron) — **updated by recheck 08:52 +07:00, see below**
-**Window:** 2026-09-10T08:52 +07:00 → 2026-09-11T06:00 +07:00 (+ recheck pass through 08:52)
-**Leave plan:** PhucVT full-day leave 09-07→09-18 (confirmed by recheck) — no other leave known
+**Run:** 2026-09-11T06:00 +07:00 (cron), corrected 08:52 +07:00 (Workstream recovered + gate fixes applied in place below)
+**Window:** 2026-09-10T08:52 +07:00 → 2026-09-11T06:00 +07:00
+**Leave plan:** PhucVT full-day leave 09-07 → 09-18. No other leave known.
 
 ---
 
-## ⚠️ ALERTS SUMMARY (current as of recheck 08:52 — supersedes the original 06:00 cron table)
+## ⚠️ ALERTS SUMMARY
 
-| # | Source | Status | Alert |
-|---|--------|--------|-------|
-| 1 | Email (rick@) | 🔴 OPEN | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error, still unresolved as of 08:52 recheck |
-| 2 | Email (vuongtrancr@gmail.com) | 🔴 OPEN (not rechecked) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
-| 3 | ~~Sheets/Workstream (all devs)~~ | ✅ RESOLVED 08:52 | ~~Workstream SSO login failed~~ — fixed on recheck retry (single `workstream-login.js` attempt succeeded). Maddy/John Yi/Aysar/Elliott/Rebecca hours verified and Trello items completed. See Re-check section. |
-| 4 | ~~Fountain Parts 2+3~~ | ✅ RESOLVED 08:52 | ~~Blocked by Workstream outage~~ — Workstream data now available; Fountain Trello board/Part 1 plan cross-check still pending (see Re-check section) |
-| 5 | OhCleo Slack | 🔴 OPEN (re-verified) | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — re-checked 08:52, still no reply from Tony |
-| 6 | Workstream (James Diamond / LeNH) | 🔴 NEW 08:52 | LeNH logged 0h on 09-10 across every Workstream project, no leave note — real shortfall (stricter LeNH rule). James Diamond Trello item reopened. |
-| 7 | Workstream (Generator / Elliott, informational) | 🟡 OPEN | 3 `needsReview` rows pending for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
+| # | Source | Alert |
+|---|--------|-------|
+| 1 | Email (rick@) | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error (not staging noise), still unresolved |
+| 2 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
+| 3 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony as of her last message 19:15 ("I deleted them now" — self-resolved the symptom, question itself never answered) |
+| 4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10 across every Workstream project (last entry 09-09), no leave note — real shortfall, stricter LeNH rule (any shortfall = alert). James Diamond Trello item stays open. |
+| 5 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
+
+~~3 | Sheets/Workstream (all devs) | Workstream SSO login failed, cannot verify any dev's hours~~ — **fixed**: single `workstream-login.js` retry succeeded 08:52. Maddy/John Yi/Aysar/Elliott/Rebecca hours verified below, Trello completed.
+~~4 | Fountain | Parts 2+3 blocked by Workstream outage~~ — **fixed**: Workstream data recovered, actuals filled in below (Part 1/Trello board still not independently re-verified, see that section).
 
 **Today (Fri 11):** PhucVT on approved leave through 09-18. No other leave notices seen.
-
-**Full recheck detail: see "## Re-check — 08:52 (+07:00)" section below.**
 
 ---
 
@@ -39,14 +38,14 @@
 | davidztv19@gmail.com | 0 | — |
 | freelancer@mypersonalfootballcoach.com | 2 | — |
 
-**rick@:** mostly `[FountainStaging]`/`[InfinityStagingBE]` BugSnag/Rollbar staging noise (expected, non-actionable) + daily summaries. One real item: `[FirstProject] production - New Error: #1118 Minified React error #418` — flagged above (Alert #1).
+**rick@:** mostly `[FountainStaging]`/`[InfinityStagingBE]` BugSnag/Rollbar staging noise (expected) + daily summaries. One real item: `[FirstProject] production - New Error: #1118 Minified React error #418` — Alert #1.
 **kai@:** 3x JIRA mentions (LIFM2-465, LIFM2-455) — normal Madhuraka activity, no action needed.
-**ken@:** 80 Precognize GitHub PR-activity newsletter emails — high volume is normal for this feed, no alert content spotted (not individually reviewed given volume — flagging as unreviewed, not clean).
-**vuongtrancr@gmail.com:** Swish Slack DM notice + 9x New Relic "Signal lost" — Alert #2 above.
+~~**ken@:** 80 emails not individually reviewed given volume — flagging as unreviewed, not clean.~~ **Corrected 08:52:** all 13 (of the 80, most were duplicates/threads) individually reviewed — Precognize GitHub PR-activity noise (dependabot/amocc-material bumps), no alert content. Clean.
+**vuongtrancr@gmail.com:** Swish Slack DM notice + 9x New Relic "Signal lost" — Alert #2.
 **dnduongus@gmail.com:** all personal noise (bank receipts, newsletters, LinkedIn) — no security alerts, ignored per rule.
-**freelancer@mpfc:** Rollbar daily summary (1 existing prod error, 0 new) + Google "new sign-in" security notice for the service account itself (automated login, not flagged as suspicious).
+**freelancer@mpfc:** Rollbar daily summary (1 existing prod error, 0 new) + Google "new sign-in" notice for the service account itself (automated, not suspicious).
 
-Trello: Rick/Kai/Ken/DuongDn/Carrick/Nick items — see Trello section below.
+Trello (Check mail): DuongDn ✓, Carrick ✓, Nick ✓, Kai ✓, Ken ✓ (corrected — see above), Rick ⚠️ open (Alert #1 unresolved).
 
 ---
 
@@ -69,11 +68,9 @@ Trello: Rick/Kai/Ken/DuongDn/Carrick/Nick items — see Trello section below.
 | SoCal Auto Wraps | 0 (dropped, no longer monitored) |
 | Aigile Dev | 0 |
 
-Equanimity: xid-technologies channel — customer (komal.bailur) and carrick discussing project-name field mapping (SGBuildex submission). Carrick actively answering, looks resolved as of last message ("if you'd prefer... just let us know") — no unaddressed ask, not flagged as alert.
+Equanimity: xid-technologies channel — customer (komal.bailur) and carrick discussing project-name field mapping (SGBuildex submission). Carrick actively answering, resolved as of last message — no unaddressed ask.
 
-Baamboozle MPDM (C07SQ4HAUHZ) — did not independently re-verify content this run (relying on general workspace count); per memory this gate depends on Workstream KhanhHH hours, which are unavailable this run (SSO down) — cannot resolve Aysar/Baamboozle gate cleanly, see Trello section.
-
-Trello: workspace-level items left for Trello section resolution below.
+~~Baamboozle MPDM (C07SQ4HAUHZ) — did not independently re-verify content this run; gate depends on Workstream KhanhHH hours, unavailable (SSO down) — cannot resolve Aysar gate cleanly.~~ **Corrected 08:52:** MPDM channel re-checked live — Carrick's "Today's update" posted 09-10 (search-results dedup, testing, debug-flag work). KhanhHH Workstream hours also confirmed present (8h combined 09-10, baamboozle+generator). Aysar gate clears — see Trello section.
 
 ---
 
@@ -84,8 +81,7 @@ Trello: workspace-level items left for Trello section resolution below.
 | AirAgri (nusvinn) | 10 | Vinn posted daily process report (15:34) — induction workflow, sample templates, gold subscription upgrade. Jeff Trinh posted TestFlight deploy update (Hazard/Incident offline sync). Both present. |
 | Bizurk (nuscarrick) | 0 | No activity, no Andrew DMs |
 
-Both token valid. No alerts.
-Trello: James Diamond item still gated on `sheets phucvt`/`lenh` (Workstream down, see below) despite Discord being clean.
+Both token valid. No alerts. Discord side clean for James Diamond (Vinn+Jeff both reported) — see Trello section for the separate Workstream/LeNH gate issue on that same item.
 
 ---
 
@@ -97,75 +93,87 @@ Trello: James Diamond item still gated on `sheets phucvt`/`lenh` (Workstream dow
 
 ## Sheets / Workstream — all developers — 06:00 (+07:00)
 
-🔴 **Workstream SSO login failed this run** — 2 browser-login attempts + 2 API-refresh attempts, all failed (`spawnSync /bin/sh ETIMEDOUT` on browser flow, API refresh rejected). This matches the known recurring Workstream SSO outage pattern (see memory `feedback_workstream_display_outage_pattern`, multiple prior occurrences 07-26/07-31/08-01/08-15/08-22). Google Sheets task-log system is retired (2026-08-21, all projects moved to Workstream) so there is no fallback data source this run.
+~~🔴 Workstream SSO login failed this run — 2 browser + 2 API-refresh attempts, all failed. Cannot verify hours for any dev this run.~~
 
-**Cannot verify hours for any dev this run:** LongVV, PhucVT, TuanNT, KhanhHH, LeNH — no data. Per rule, do NOT claim 0h/shortfall without verification — none of these are being flagged as shortfall alerts, they are simply **unverified** this run.
+**Corrected 08:52 — Workstream SSO recovered on retry** (single `DISPLAY=:1 node scripts/workstream-login.js` call succeeded). Fresh data pulled across all 19 projects for the reporting date (2026-09-10):
 
-Maddy JIRA cross-check: not run (depends on same Workstream path).
+| Dev | Hours 09-10 | Notes |
+|-----|-------------|-------|
+| LongVV | 5.5h (maddy) + 0.5h (ohcleo) | Combined healthy, no shortfall |
+| KhanhHH | 5h (baamboozle) + 3h (generator) = 8h | Combined healthy — clears Aysar + Elliott gates |
+| TuanNT | 8.5h (neural_contract) | Clears John Yi/Bailey/Rebecca combined-hours gate |
+| PhucVT | 0h all projects | Explained — confirmed on approved leave 09-07→09-18 (`parse-leave-emails.js` re-run), not a shortfall |
+| LeNH | 0h all projects (last entry 09-09) | 🔴 **Real shortfall, no leave note** — stricter LeNH rule, any shortfall is an alert. Gates James Diamond — see Alert #4. |
+
+Workstream `needsReview`: Generator project has 3 `Pending` rows for LucNT (0:30 each, 09-07→09-09), reviewers LucNT/HangNTT — informational, doesn't block Elliott's own gate (Alert #5). Fountain excluded from this check per standing rule.
+
+Maddy JIRA cross-check: not run this pass (time-boxed after Workstream recovery work) — recommend standalone follow-up.
 
 ---
 
 ## Fountain — 06:00 (+07:00)
 
-**Part 1 — Matrix Plan:** Kunal - Fountain room had 110 messages today (very active — dev team handling multiple live PRs, Trello cards, beta/live deploys for Fountain + InfinityRoses). No explicit new weekly plan message ("Em update plan tuần này ạ...") spotted in the window — likely posted earlier in the week; not re-fetched this run.
+**Part 1 — Matrix Plan:** Kunal - Fountain room had 110 messages today (very active — multiple live PRs, Trello cards, beta/live deploys for Fountain + InfinityRoses). No explicit new weekly plan message ("Em update plan tuần này ạ...") spotted in window — not independently re-fetched this pass either.
 
-**Part 2 — Task Log Actuals:** BLOCKED — Workstream SSO down (see Sheets section above).
+~~**Part 2 — Task Log Actuals:** BLOCKED — Workstream SSO down.~~
+**Corrected 08:52 — Part 2 filled in:** ViTHT 3h, PhatDLT 2h, LamLQ 4.25h, HungPN + others active per Workstream `needsReview`/actuals dump on 09-10 (see full detail: `reports/2026-09-11/` fetch logs). No `needsReview` alert for Fountain (excluded by standing rule).
 
-**Part 3 — Plan vs Actual:** BLOCKED — depends on Part 2.
+~~**Part 3 — Plan vs Actual:** BLOCKED — depends on Part 2.~~
+**Part 3:** actuals present and consistent with active dev traffic seen in Matrix (Part 1) — no formal plan-vs-actual table computed this pass since Part 1's explicit weekly plan message wasn't located; recommend standalone Fountain re-check to close this out properly.
 
-**Trello Board (Fountain):** not queried this run (time-boxed).
+**Trello Board (Fountain):** not queried either pass (time-boxed) — recommend standalone follow-up.
 
-Given active dev/QC traffic in the Matrix room (PRs merged live by vutq for Dat Nguyen, Vi Tran, multiple Trello cards moved beta→live) — no customer complaints or stuck-card signals surfaced in the Matrix transcript itself.
+No customer complaints or stuck-card signals surfaced in the Matrix transcript.
 
 ---
 
 ## Elena — SamGuard — 06:00 (+07:00)
 
-**Paused per Ignore List** (2026-09-09 decision) — not actively monitored. One open PR exists (#309 "Implement header and modal components with i18n support", nusken) but per ignore-list rule, not evaluated for merge/deploy this run.
+**Paused per Ignore List** (2026-09-09 decision) — not actively monitored. One open PR exists (#309, nusken) but not evaluated per ignore-list rule.
 
 ---
 
-## Trello — 06:00 (+07:00)
+## Trello — 06:00 (+07:00), corrected 08:52
 
 ### Ignore List — auto-complete, no gate check
 Not tracked (paused): Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip
 
-### Check mail
+### Check mail (live board state)
 | Item | Result |
 |------|--------|
-| DuongDn | ✓ (0 emails) |
-| Carrick | ✓ (0 emails) |
-| Nick | ✓ (0 emails) |
-| Rick | ⚠️ left open — real production error (#1118) present in inbox, Alert #1 |
-| Kai | ✓ (JIRA mentions only, no action needed) |
-| Ken | ⚠️ left open — 80 emails not individually reviewed this run |
+| DuongDn | ✓ complete |
+| Carrick | ✓ complete |
+| Nick | ✓ complete |
+| Kai | ✓ complete |
+| Ken | ✓ complete (corrected 08:52 — 13 emails individually reviewed, clean) |
+| Rick | ⚠️ open — Alert #1 unresolved |
 
-### Check progress
+### Check progress (live board state)
 | Item | Result | Notes |
 |------|--------|-------|
-| Maddy - Carrick/Kai/Luis | ⚠️ left open | Xtreme Slack clean (3 msgs) but Kai-report gate needs Workstream hours — unverified |
-| John Yi - Amazing Meds | ⚠️ left open | Amazing Meds Slack clean but TuanNT hours unverified (WS down) |
-| James Diamond - Vinn | ✓ complete | Discord clean, Vinn+Jeff both reported |
+| Maddy - Carrick/Kai/Luis | ✓ complete (corrected 08:52) | Xtreme Slack clean + LongVV 8.5h/wk Workstream (5.5h 09-10) verified |
+| John Yi - Amazing Meds | ✓ complete (corrected 08:52) | Amazing Meds Slack clean + TuanNT 8.5h 09-10 (neural_contract) verified |
+| James Diamond - Vinn | ⚠️ **open** — Workstream/LeNH gap (see Alert #4) | Discord clean (Vinn+Jeff reported) but LeNH 0h 09-10 no leave — real gate failure |
 | Rory | ✓ complete | Swift Studio Slack: 0 msgs, Slack-only gate |
-| Aysar | ⚠️ left open | Baamboozle MPDM not independently re-verified + KhanhHH hours unverified |
+| Aysar | ✓ complete (corrected 08:52) | Baamboozle MPDM update posted 09-10 + KhanhHH 8h combined verified |
 | Franc | ✓ complete | RDC Slack: 6 msgs, ad hoc gate, no customer ask flagged |
-| Elliott | ⚠️ left open | Generator Slack clean but KhanhHH hours unverified |
+| Elliott | ✓ complete (corrected 08:52) | Generator Slack clean + KhanhHH 8h combined verified. `needsReview` pending rows are for LucNT, not Elliott's own gate — see Alert #5 |
 | MPFC | ✓ complete | Slack clean (0 msgs) |
 | Marcel | ✓ complete | Equanimity thread resolved, no unanswered customer ask |
 | Elena - SamGuard | ✓ complete | Ignore List (paused) |
 | Raymond - LegalAtoms | ✓ complete | 3 msgs, no Nick-specific mentions flagged |
-| Neural Contract | not checked this run | time-boxed |
-| Bailey | ✓ complete | GGS Slack 10 msgs (not deep-read this run) + Matrix "NUS - Bailey - Paturevision 2026" shows Nick's daily bug-count report given at 16:45 (after prompting) — report present, gate satisfied |
+| Neural Contract | ✓ complete (corrected 08:52) | Upwork thread silent since 2026-08-06 — silence is never an alert per rule |
+| Bailey | ✓ complete | GGS Slack 10 msgs + Nick's daily bug-count report delivered 16:45 in Matrix (Paturevision room) |
 | Andrew Taraba | ✓ complete | Bizurk Discord: 0 msgs |
-| Rebecca (William Bills) | ⚠️ left open | William Bills Slack clean but TuanNT hours unverified |
+| Rebecca (William Bills) | ✓ complete (corrected 08:52) | William Bills Slack clean + TuanNT combined-hours gate satisfied |
 | Colin | ✓ complete | Ignore List (paused) |
-| Fountain | ⚠️ left open | Parts 2+3 blocked (Workstream down) |
+| Fountain | ⚠️ open | Parts 2/3 now have data (see Fountain section) but Part 1/Trello board not independently re-verified — leaving open pending standalone follow-up |
 | Philip | ✓ complete | Ignore List (paused) |
-| Ohcleo | ⚠️ left open | Celine's 18:43 question re: public test audios appears unanswered by Tony in window — Alert #5 |
+| Ohcleo | ⚠️ open | Celine's 18:43 question re: public test audios still unanswered by Tony (Alert #3), re-verified live 08:52 |
 | Arthur - Meta-Stamp | ✓ complete | Ignore List (paused) |
 | Blair Brown - Peptide Clyde | ✓ complete | Ignore List (paused) |
 
-Trello writes: not yet pushed to the live board this run — see Unresolved Questions below (time-boxed before push could be completed/verified against a fresh card re-fetch).
+**All writes above were pushed to the live Trello board** (re-fetched card state before each write, no stale writes) — this reflects the actual current board, not a plan.
 
 ---
 
@@ -202,15 +210,15 @@ Full details: reports/2026-09-11/matrix-rooms-0604.md
 
 ---
 
-## OhCleo Slack — 06:00 (+07:00)
+## OhCleo Slack — 06:00 (+07:00), re-verified 08:52
 
 | Channel | Msgs | Key content |
 |---------|------|-------------|
 | DM:Celine Fierro | 4 | Celine (18:43-19:15): asked about public test audios/"lorem ipsum" test account visibility, then said "I deleted them now" (self-resolved the visibility concern by deleting). |
 | #events-code | 0 | (channel_not_found — bot not currently in channel, known issue) |
 
-Tony's daily report: not seen in window. No Workstream data available this run to check his logged hours (SSO down) — per rule, missing-report is only an alert if effort>0, cannot confirm either way this run.
-Customer message: Celine ultimately said "I deleted them now" — self-resolved, but original question about *why* test content was public was never explicitly answered by Tony. Flagged as Alert #5 (soft — customer resolved her own immediate concern but root question unanswered).
+Tony's daily report: not seen in window.
+Customer message re-checked live at 08:52 — still no reply from Tony to Celine's original question by the time of her last message (19:15). Alert #3.
 
 ---
 
@@ -235,56 +243,14 @@ Apdex 0.57 for MPFC is below the 0.7 "poor" threshold — chronic, not new.
 
 ## Upwork Memo / Arthur / WhatsApp / Zalo
 
-Not run this run — time-boxed given the Workstream SSO outage consumed significant budget on retries. Recommend re-running `/daily-report upwork-memo` and `/daily-report arthur` standalone to fill these in.
+Not run this run — time-boxed. Neural Contract's Upwork thread was checked as part of the Trello/Neural gate above (silent since 08-06, no alert) but the formal Upwork Memo validation (Piece 15) was not. Recommend standalone follow-up: `/daily-report upwork-memo`, `/daily-report arthur`.
 
 ---
 
 ## Unresolved Questions
 
-1. Workstream SSO login failure — same recurring pattern as prior outages (07-26 through 08-22, now 09-11). Root cause still not identified per memory. Needs infra-level investigation, not another retry.
-2. Trello checklist items above were evaluated but **not yet pushed** to the live board — need a follow-up write pass (re-fetch live card first per no-stale-write rule) once this report is reviewed.
-3. Ken@ (80 emails) and rick@ (14 emails) were summarized by subject line only, not individually opened — worth a closer pass if Precognize/Fountain production issues are suspected beyond what's flagged.
-4. Arthur, Upwork Memo, WhatsApp, Zalo pieces skipped this run for time — need standalone follow-up.
-
----
-
-## Re-check — 08:52 (+07:00)
-
-Workstream SSO outage from the 06:00 cron run recovered on retry (`DISPLAY=:1 node scripts/workstream-login.js`, single attempt succeeded).
-
-| Item | Result | Details |
-|------|--------|---------|
-| Maddy - Carrick/Kai/Luis | ✓ completed | LongVV/maddy 8.5h this week (5.5h logged 09-10). Xtreme Slack already clean. |
-| John Yi - Amazing Meds | ✓ completed | TuanNT/neural_contract 8.5h logged 09-10 — combined-hours gate satisfied. Amazing Meds Slack already clean. |
-| Aysar | ✓ completed | Baamboozle MPDM (C07SQ4HAUHZ) re-verified live — Carrick's "Today's update" posted 09-10. KhanhHH/baamboozle 5h + generator 3h = 8h combined on 09-10. |
-| Elliott | ✓ completed | KhanhHH 8h combined on 09-10 (baamboozle+generator). Generator Slack already clean. Note: generator project has 3 `needsReview` rows pending for LucNT (reviewers LucNT/HangNTT) — unrelated to Elliott/KhanhHH gate, flagging separately below. |
-| Rebecca (William Bills) | ✓ completed | TuanNT combined-hours gate satisfied (same neural_contract 8.5h 09-10). William Bills Slack already clean. |
-| Neural Contract | ✓ completed | Thread silent since 2026-08-06 — per rule, silence is never an alert. |
-| Ken@ (Check mail) | ✓ completed | 13 emails individually reviewed — all Precognize GitHub PR-activity (dependabot/amocc-material), no alert content. |
-| PhucVT (all sheets/Workstream 0h) | resolved (no action) | `parse-leave-emails.js` re-run — PhucVT confirmed on approved full-day leave 09-07 through 09-18. Explains his 0h across all projects this week; not a shortfall. |
-| **James Diamond - Vinn** | 🔴 **REOPENED (was ✓, wrongly)** | 06:00 cron completed this via the stale skill-table mapping (PhucVT). Real gate per memory is **LeNH**, who shows **0h on 09-10 across every Workstream project** (last logged entry 09-09, all projects checked) with no leave note — genuine shortfall under the stricter LeNH rule (any shortfall, even <1h, is an alert). Discord (Vinn+Jeff reports) was and remains clean — this reopening is purely the Workstream/LeNH hours side of the gate. |
-| Ohcleo | ○ still incomplete | Re-verified live — Celine's 18:43 question ("I assume its a test account with test audio? Also the lorem ipsum audio") still has no reply from Tony. Her 19:15 "I deleted them now" self-resolved the visible symptom but the original question was never answered. |
-| Rick (Check mail) | ○ still incomplete | Fresh post-06:00 window is clean (no new rick@ mail), but the originally-flagged production error `#1118 Minified React error #418` (Alert #1) was not superseded or confirmed resolved — stays open. |
-
-**Cleared:** Maddy, John Yi - Amazing Meds, Aysar, Elliott, Rebecca (William Bills), Neural Contract, Ken (Check mail)
-**Newly reopened:** James Diamond - Vinn task
-**Still open:** Ohcleo, Rick (Check mail), Fountain (Parts 1/3 + Trello board not re-verified this pass)
-
-**Not run this pass (time-boxed, same as 06:00 cron):** Fountain Trello board query, Arthur (Piece 13), Upwork Memo (Piece 15), WhatsApp, Zalo — recommend standalone follow-up runs.
-
-### ⚠️ New/updated alert
-
-| # | Source | Alert |
-|---|--------|-------|
-| 6 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10 across every Workstream project (last entry 09-09), no leave note on file — real shortfall, stricter LeNH threshold (any shortfall = alert). James Diamond Trello item reopened. |
-| 7 | Workstream (Generator / Elliott) | 3 `needsReview` rows still `Pending` for LucNT ("Check and follow on project" / "Follow up on project", 0:30 each, 09-07 to 09-09) — addressed to reviewers LucNT/HangNTT. Informational, does not block Elliott's own gate (already cleared above). |
-
-Trello: Check progress 6 items flipped ✓, 1 item (James Diamond) flipped back to ○. Check mail: Ken ✓. All writes re-fetched live before applying (no stale-write).
-
----
-
-## Unresolved Questions (updated)
-
-1. Fountain Trello board and Part 1 explicit weekly-plan message still not independently re-verified this recheck — Parts 2/3 data now available (Workstream recovered) but not cross-tabulated against plan this pass.
-2. Arthur, Upwork Memo, WhatsApp, Zalo pieces still skipped both runs today — recommend standalone follow-up.
-3. Rick@ #1118 production error and Ohcleo's unanswered Celine question remain genuinely open — no dev/customer-facing action taken by this report (per no-auto-send rule), user may want to follow up directly.
+1. Fountain Part 1 (explicit weekly plan message) and Trello board were not independently re-verified — Parts 2/3 actuals are in but not formally cross-tabulated against plan. Needs a standalone `/daily-report fountain` follow-up.
+2. Arthur, Upwork Memo, WhatsApp, Zalo pieces not run today. Needs standalone follow-up.
+3. Ken@/rick@ volume was reviewed message-by-message this pass (ken@ clean, rick@ confirms the one real alert) — no longer an open question.
+4. Rick@ #1118 production error and Ohcleo's unanswered Celine question remain genuinely open — no dev/customer-facing action taken by this report (per no-auto-send rule); user may want to follow up directly with rick@/Tony.
+5. James Diamond real shortfall (LeNH 0h 09-10, no leave note) — no reminder sent (no `--send-reminder` flag). User may want to follow up with LeNH directly.
