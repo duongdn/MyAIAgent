@@ -276,18 +276,29 @@ async function fetchWorkroomHours(page, room) {
   let dailyDecimal = {};
 
   // Primary: build from GraphQL providerTimeReport rows (most accurate)
+  // NOTE: `ds` (YYYYMMDD) is a calendar-date bucket from Upwork's own report — we don't
+  // know for certain which timezone Upwork used to assign a late-night session to a day
+  // (could be UTC, could be the freelancer's Upwork account timezone). We parse it with
+  // Date.UTC() explicitly (never relying on the host machine's local TZ, which was the
+  // actual bug here — new Date('...T00:00:00') without 'Z' silently used host-local time)
+  // so results are at least reproducible across machines. The day-name label itself may
+  // still be off by one vs Workstream's UTC+7 task-log dates for late-night work — treat
+  // the WEEKLY TOTAL as the reliable number, not the per-day breakdown, until Upwork's
+  // bucketing timezone is confirmed (see docs/memory daily-report/upwork notes).
   if (apiTimeReport?.data?.providerTimeReport?.rows?.length) {
     const timesheetDateMatch = currentUrl.match(/timesheetDate=(\d{4}-\d{2}-\d{2})/);
-    const weekStart = timesheetDateMatch ? new Date(timesheetDateMatch[1] + 'T00:00:00') : null;
+    const weekStart = timesheetDateMatch
+      ? new Date(Date.UTC(...timesheetDateMatch[1].split('-').map(Number).map((n, i) => (i === 1 ? n - 1 : n))))
+      : null;
     for (const row of apiTimeReport.data.providerTimeReport.rows) {
       const cols = row.columnValue;
       const ds = cols[0].value; // YYYYMMDD
       const hrs = Math.round((parseFloat(cols[1].value) + parseFloat(cols[2].value)) * 100) / 100;
-      const d = new Date(`${ds.slice(0,4)}-${ds.slice(4,6)}-${ds.slice(6,8)}T00:00:00`);
+      const d = new Date(Date.UTC(Number(ds.slice(0, 4)), Number(ds.slice(4, 6)) - 1, Number(ds.slice(6, 8))));
       if (weekStart) {
         const weekEnd = new Date(weekStart);
-        weekEnd.setDate(weekStart.getDate() + 6);
-        if (d >= weekStart && d <= weekEnd) dailyDecimal[DAY_NAMES[d.getDay()]] = hrs;
+        weekEnd.setUTCDate(weekStart.getUTCDate() + 6);
+        if (d >= weekStart && d <= weekEnd) dailyDecimal[DAY_NAMES[d.getUTCDay()]] = hrs;
       }
     }
   }
