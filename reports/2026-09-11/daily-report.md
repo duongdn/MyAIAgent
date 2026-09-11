@@ -16,8 +16,7 @@
 | 4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10 across every Workstream project (last entry 09-09), no leave note — real shortfall, stricter LeNH rule (any shortfall = alert). James Diamond Trello item stays open. |
 | 5 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
 
-~~3 | Sheets/Workstream (all devs) | Workstream SSO login failed, cannot verify any dev's hours~~ — **fixed**: single `workstream-login.js` retry succeeded 08:52. Maddy/John Yi/Aysar/Elliott/Rebecca hours verified below, Trello completed.
-~~4 | Fountain | Parts 2+3 blocked by Workstream outage~~ — **fixed**: Workstream data recovered, actuals filled in below (Part 1/Trello board still not independently re-verified, see that section).
+*(Workstream SSO login originally failed this morning, blocking all dev-hour verification — retried and fixed by 08:52, single login attempt. All hours below are the real post-fix numbers, not the failed-run placeholder.)*
 
 **Today (Fri 11):** PhucVT on approved leave through 09-18. No other leave notices seen.
 
