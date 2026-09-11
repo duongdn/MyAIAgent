@@ -37,6 +37,7 @@
 - [feedback_never_ask_before_full_run](daily-report/general/feedback_never_ask_before_full_run.md) — 🔴 never AskUserQuestion to confirm scope before full run, just execute
 - [feedback_leave_plan_must_refresh_every_run](daily-report/general/feedback_leave_plan_must_refresh_every_run.md) — 🔴 always re-run parse-leave-emails.js (full refresh) before any --check, snapshot goes stale silently
 - [feedback_no_keyword_alert_classification](daily-report/general/feedback_no_keyword_alert_classification.md) — 🔴🔴🔴 NEVER classify alerts by keyword; read real content (snippet/body), applies to ALL channels — email-scan.js dropped its ALERT_KEYWORDS filter 2026-09-10 after missing a real MPFC customer bug ("Fwd: Coach Pass Access Issue")
+- [feedback_recheck_must_always_retry_workstream_first](daily-report/general/feedback_recheck_must_always_retry_workstream_first.md) — 🔴🔴🔴 2026-09-11: recheck MUST retry Workstream login as first unconditional step, never carry forward cron's outage note unretried
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
