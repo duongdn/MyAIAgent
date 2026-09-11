@@ -13,8 +13,10 @@
 | 1 | Email (rick@) | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error (not staging noise), still unresolved |
 | 2 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
 | 3 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony as of her last message 19:15 ("I deleted them now" — self-resolved the symptom, question itself never answered) |
-| 4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10 across every Workstream project (last entry 09-09), no leave note — real shortfall, stricter LeNH rule (any shortfall = alert). James Diamond Trello item stays open. |
-| 5 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
+| 4 | Workstream (Generator / Elliott, informational) | 3 `needsReview` rows still `Pending` for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
+| 5 | Workstream (Neural Contract / TuanNT, informational) | TuanNT's 8.5h logged on 09-10 under project "Neural Contract" has task descriptions ("[Grazing Software][CR1]...", "[Prestashop]...") that don't match Neural Contract work at all — looks like mis-logged project attribution, not fake hours. Doesn't block John Yi/Bailey/Rebecca combined-hours gate (hours are real, just possibly wrong bucket) — worth asking TuanNT to confirm/fix the project tag. |
+
+~~4 | Workstream (James Diamond / LeNH) | LeNH logged 0h on 2026-09-10, real shortfall~~ — **WRONG, corrected**: a script bug (`dayStrips` API shape changed to `{items:[...]}`, script expected a bare array) silently produced incomplete data on the first fetch, making LeNH look like 0h. Re-verified via raw API: LeNH logged a full **8h every day 09-07 through 09-10** on James Diamond, zero shortfall. Script fixed (`scripts/workstream-fetch-project-week.js`). James Diamond Trello item reverted to ✓ complete.
 
 *(Workstream SSO login originally failed this morning, blocking all dev-hour verification — retried and fixed by 08:52, single login attempt. All hours below are the real post-fix numbers, not the failed-run placeholder.)*
 
@@ -80,7 +82,7 @@ Equanimity: xid-technologies channel — customer (komal.bailur) and carrick dis
 | AirAgri (nusvinn) | 10 | Vinn posted daily process report (15:34) — induction workflow, sample templates, gold subscription upgrade. Jeff Trinh posted TestFlight deploy update (Hazard/Incident offline sync). Both present. |
 | Bizurk (nuscarrick) | 0 | No activity, no Andrew DMs |
 
-Both token valid. No alerts. Discord side clean for James Diamond (Vinn+Jeff both reported) — see Trello section for the separate Workstream/LeNH gate issue on that same item.
+Both token valid. No alerts. Discord side clean for James Diamond (Vinn+Jeff both reported); Workstream side also clean (LeNH 8h every day 09-07→09-10, see Sheets/Workstream section — earlier false 0h alert was a script bug, corrected).
 
 ---
 
@@ -100,9 +102,9 @@ Both token valid. No alerts. Discord side clean for James Diamond (Vinn+Jeff bot
 |-----|-------------|-------|
 | LongVV | 5.5h (maddy) + 0.5h (ohcleo) | Combined healthy, no shortfall |
 | KhanhHH | 5h (baamboozle) + 3h (generator) = 8h | Combined healthy — clears Aysar + Elliott gates |
-| TuanNT | 8.5h (neural_contract) | Clears John Yi/Bailey/Rebecca combined-hours gate |
+| TuanNT | 8.5h (logged under "Neural Contract" project) | Clears John Yi/Bailey/Rebecca combined-hours gate. ⚠️ Task text ("[Grazing Software]", "[Prestashop]") doesn't match Neural Contract work — likely mis-tagged project, real hours though. See Alert #5. |
 | PhucVT | 0h all projects | Explained — confirmed on approved leave 09-07→09-18 (`parse-leave-emails.js` re-run), not a shortfall |
-| LeNH | 0h all projects (last entry 09-09) | 🔴 **Real shortfall, no leave note** — stricter LeNH rule, any shortfall is an alert. Gates James Diamond — see Alert #4. |
+| LeNH | ~~0h all projects, real shortfall~~ **8h every day 09-07→09-10** | First fetch hit a script bug (`dayStrips` parsing) that silently returned incomplete data — re-verified via raw API call, LeNH is fully healthy, no shortfall. Script fixed. |
 
 Workstream `needsReview`: Generator project has 3 `Pending` rows for LucNT (0:30 each, 09-07→09-09), reviewers LucNT/HangNTT — informational, doesn't block Elliott's own gate (Alert #5). Fountain excluded from this check per standing rule.
 
@@ -152,7 +154,7 @@ Not tracked (paused): Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown 
 |------|--------|-------|
 | Maddy - Carrick/Kai/Luis | ✓ complete (corrected 08:52) | Xtreme Slack clean + LongVV 8.5h/wk Workstream (5.5h 09-10) verified |
 | John Yi - Amazing Meds | ✓ complete (corrected 08:52) | Amazing Meds Slack clean + TuanNT 8.5h 09-10 (neural_contract) verified |
-| James Diamond - Vinn | ⚠️ **open** — Workstream/LeNH gap (see Alert #4) | Discord clean (Vinn+Jeff reported) but LeNH 0h 09-10 no leave — real gate failure |
+| James Diamond - Vinn | ✓ complete (reverted, false alert corrected) | Discord clean (Vinn+Jeff reported) + LeNH 8h every day 09-07→09-10 — earlier "0h" was a script bug, not a real shortfall |
 | Rory | ✓ complete | Swift Studio Slack: 0 msgs, Slack-only gate |
 | Aysar | ✓ complete (corrected 08:52) | Baamboozle MPDM update posted 09-10 + KhanhHH 8h combined verified |
 | Franc | ✓ complete | RDC Slack: 6 msgs, ad hoc gate, no customer ask flagged |
@@ -252,4 +254,4 @@ Not run this run — time-boxed. Neural Contract's Upwork thread was checked as 
 2. Arthur, Upwork Memo, WhatsApp, Zalo pieces not run today. Needs standalone follow-up.
 3. Ken@/rick@ volume was reviewed message-by-message this pass (ken@ clean, rick@ confirms the one real alert) — no longer an open question.
 4. Rick@ #1118 production error and Ohcleo's unanswered Celine question remain genuinely open — no dev/customer-facing action taken by this report (per no-auto-send rule); user may want to follow up directly with rick@/Tony.
-5. James Diamond real shortfall (LeNH 0h 09-10, no leave note) — no reminder sent (no `--send-reminder` flag). User may want to follow up with LeNH directly.
+5. TuanNT's Neural Contract hours (8.5h 09-10) look mis-tagged — task text is Grazing Software/Prestashop work, not Neural Contract. Worth confirming with TuanNT which project he meant to log against.

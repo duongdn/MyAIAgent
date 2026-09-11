@@ -211,7 +211,7 @@ function summarizeWeekManager(weekData, projectLabel, projectInfo) {
     project: projectLabel,
     weekStart: weekData.weekStart,
     weekEnd: weekData.weekEnd,
-    missingReportDays: (weekData.dayStrips || []).filter(d => d.clientReportMissing).map(d => d.date),
+    missingReportDays: (weekData.dayStrips?.items || (Array.isArray(weekData.dayStrips) ? weekData.dayStrips : [])).filter(d => d.clientReportMissing).map(d => d.date),
     reviewers,
     needsReview,
     members: Object.entries(byEmployee).map(([name, d]) => ({
