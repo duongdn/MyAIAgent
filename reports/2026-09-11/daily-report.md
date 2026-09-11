@@ -1,22 +1,26 @@
 # Daily Report — 2026-09-11 (Friday)
 
-**Run:** 2026-09-11T06:00 +07:00 (cron)
-**Window:** 2026-09-10T08:52 +07:00 → 2026-09-11T06:00 +07:00
-**Leave plan:** not re-parsed this run (time-boxed) — none known
+**Run:** 2026-09-11T06:00 +07:00 (cron) — **updated by recheck 08:52 +07:00, see below**
+**Window:** 2026-09-10T08:52 +07:00 → 2026-09-11T06:00 +07:00 (+ recheck pass through 08:52)
+**Leave plan:** PhucVT full-day leave 09-07→09-18 (confirmed by recheck) — no other leave known
 
 ---
 
-## ⚠️ ALERTS SUMMARY
+## ⚠️ ALERTS SUMMARY (current as of recheck 08:52 — supersedes the original 06:00 cron table)
 
-| # | Source | Alert |
-|---|--------|-------|
-| 1 | Email (rick@) | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error (not staging noise) |
-| 2 | Email (vuongtrancr@gmail.com) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
-| 3 | Sheets/Workstream (all devs) | Workstream SSO login failed (browser + API refresh, 2 attempts each) — cannot verify any dev's hours this run. Known recurring outage (see memory `feedback_workstream_display_outage_pattern` / `feedback_workstream_sso_recheck_fixed`), not a one-off token issue. Blocks Maddy/John Yi/Bailey/Rebecca/James Diamond/Aysar/Elliott/Blair Brown hour verification. |
-| 4 | Fountain | Parts 2+3 (task log actuals, plan vs actual) blocked by the same Workstream SSO outage above |
-| 5 | OhCleo Slack | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — no reply from Tony visible in window |
+| # | Source | Status | Alert |
+|---|--------|--------|-------|
+| 1 | Email (rick@) | 🔴 OPEN | `[FirstProject] production - New Error: #1118 Error: Minified React error #418` — real PRODUCTION error, still unresolved as of 08:52 recheck |
+| 2 | Email (vuongtrancr@gmail.com) | 🔴 OPEN (not rechecked) | 9x "Signal lost for 10 minutes on 'Low Application Throughput'" (New Relic, Swish) — recurring signal-loss pattern |
+| 3 | ~~Sheets/Workstream (all devs)~~ | ✅ RESOLVED 08:52 | ~~Workstream SSO login failed~~ — fixed on recheck retry (single `workstream-login.js` attempt succeeded). Maddy/John Yi/Aysar/Elliott/Rebecca hours verified and Trello items completed. See Re-check section. |
+| 4 | ~~Fountain Parts 2+3~~ | ✅ RESOLVED 08:52 | ~~Blocked by Workstream outage~~ — Workstream data now available; Fountain Trello board/Part 1 plan cross-check still pending (see Re-check section) |
+| 5 | OhCleo Slack | 🔴 OPEN (re-verified) | Celine (customer) asked 18:43 "I noticed these test audios are public on the page, how come?" + "I assume its a test account with test audio? Also the lorem ipsum audio" — re-checked 08:52, still no reply from Tony |
+| 6 | Workstream (James Diamond / LeNH) | 🔴 NEW 08:52 | LeNH logged 0h on 09-10 across every Workstream project, no leave note — real shortfall (stricter LeNH rule). James Diamond Trello item reopened. |
+| 7 | Workstream (Generator / Elliott, informational) | 🟡 OPEN | 3 `needsReview` rows pending for LucNT (reviewers LucNT/HangNTT) — does not block Elliott's own gate |
 
-**Today (Fri 11):** no leave notices seen in Matrix/email window.
+**Today (Fri 11):** PhucVT on approved leave through 09-18. No other leave notices seen.
+
+**Full recheck detail: see "## Re-check — 08:52 (+07:00)" section below.**
 
 ---
 

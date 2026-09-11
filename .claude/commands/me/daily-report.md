@@ -857,9 +857,11 @@ For each item:
 - 0h dev + reminder sent → complete (reminder IS the action)
 - Neural silence / Cloudflare block → complete (never an alert)
 
-**Step 7 — Append to daily report**
+**Step 7 — Append to daily report AND correct the top ALERTS SUMMARY (both required, every recheck, no exceptions)**
 
-Append a timestamped section:
+🔴 **The top `## ⚠️ ALERTS SUMMARY` table is the first (often only) thing read. A recheck that only appends a section at the bottom and never touches the top table produces a report that looks broken/stale even when the underlying issue was fixed — this happened for real on 2026-09-11 and caused a user complaint. Appending alone is NOT sufficient completion of this step.**
+
+1. Append a timestamped section (as before):
 ```markdown
 ## Re-check — {HH:MM} (+07:00)
 
@@ -874,6 +876,15 @@ Append a timestamped section:
 **Cleared:** {list}
 **Still open:** {list}
 ```
+
+2. **Then go back and edit the top `## ⚠️ ALERTS SUMMARY` table itself** (not a new table, the original one from the run header) so it reflects current state as of the recheck:
+   - Any alert row that is now resolved: strikethrough the alert text, add a ✅ RESOLVED {HH:MM} status, and a one-line pointer to the Re-check section for detail. Do NOT delete the row — keep the history visible.
+   - Any alert row still open after re-verification: mark 🔴 OPEN (re-verified {HH:MM}) so it's clear it wasn't just carried over stale.
+   - Any NEW alert found during recheck (e.g. a previously-completed item found to be wrongly gated and reopened): add a new numbered row, marked 🔴 NEW {HH:MM}.
+   - Update the `**Run:**` header line to note the recheck time, e.g. `**Run:** {orig} (cron) — updated by recheck {HH:MM}, see below`.
+   - Update the `**Leave plan:**` line if `parse-leave-emails.js` surfaced anything relevant during recheck.
+
+**Never leave a resolved alert sitting unedited in the top table** — a reader who only scans the top of the report must see the current truth, not the 06:00 cron's snapshot.
 
 ### Rules for Re-check
 
