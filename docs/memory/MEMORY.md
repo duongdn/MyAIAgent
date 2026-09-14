@@ -160,6 +160,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_maddy_workstream_hours_longvv_filter](monday-report/feedback_maddy_workstream_hours_longvv_filter.md) — 🔴 Maddy WS hours = LongVV member only, don't sum all members
 - [feedback_marcel_equanimity_slack_external_bugs](monday-report/feedback_marcel_equanimity_slack_external_bugs.md) — 🔴 Marcel bugs live in "Equanimity" Slack workspace, skill's "always 0" is wrong
 - [feedback_maddy_low_hours_high_bugs_is_real_gap](monday-report/feedback_maddy_low_hours_high_bugs_is_real_gap.md) — 🔴 low-hours/high-bug ratio = verify via raw Slack timestamps, don't assume miscounted
+- [feedback_legalatoms_tracking_discontinued](monday-report/feedback_legalatoms_tracking_discontinued.md) — 🔴 2026-09-14: LegalAtoms always 0/0/0 now, no Slack check needed
 
 ## monday-effort-verify
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
