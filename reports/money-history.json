@@ -451,6 +451,22 @@
       },
       "method": "reconstructed",
       "note": "MISA totaldashboard 7,272,655,419 (-6.26M vs 09-09) + Larion carry-forward 800M unchanged, unconfirmed since 08-26 (now 15 days). Chi tieu tuan: Suc khoe -4.71M, Hoc phi -5.75M, Sua -370K, Linh tinh -450K. So \"1m\" 100M dao han dung hom nay nhung TU DONG ROLLOVER thanh so moi 100.4M thay vi chuyen sang co phieu — that bai lan 2 lien tiep cua ke hoach 09-04. Sept MTD: Thu 71.28M / Chi 23.18M / Net +48.10M. No stale-savings-bug detected this run."
+    },
+    {
+      "date": "2026-09-14",
+      "label": "14/09",
+      "net_worth": 8068325876,
+      "gross_assets": 8138625876,
+      "liabilities": -3655,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 730000000,
+        "investment": 2519423840,
+        "savings": 1202333123,
+        "liquid": 166868913
+      },
+      "method": "reconstructed",
+      "note": "Cach lan chay gan nhat (09-10) 4 ngay, khong co ban ghi 09-11/12/13. MISA totaldashboard 7,268,325,876 + Larion carry-forward 800M (van chua xac nhan, nay 19 ngay ke tu 08-26). Net Worth -4.33M vs 09-10 (8,072,655,419). Sept MTD: Thu 71.28M (Luong 66.9M + Freelancer 3.97M + lai 415K) / Chi 24.58M (Hoc phi/Hieu hi/Suc khoe/Linh tinh) / Net +46.70M. Ke hoach tang co phieu (tu 09-04) VAN CHUA THUC HIEN, diem quyet dinh ke tiep la dao han 10-10. Ghost savings bug nam a 6m (2.0M) van ton tai, da loai khoi tong."
     }
   ]
 }
