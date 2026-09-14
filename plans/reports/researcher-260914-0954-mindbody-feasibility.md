@@ -21,6 +21,28 @@
 - Có 3 loại form dễ nhầm ở BXR: Mindbody Liability Waiver (native) vs Health Questionnaire (native, không track status) vs WaiverMaster (bên thứ 3, `waivermaster.com`) — 2 người từng nhầm lẫn giữa Mindbody waiver và WaiverMaster link, mất nhiều lượt mới rõ. Cần hỏi Wildsoul ngay từ đầu có dùng form bên thứ 3 nào song song không.
 - **⚠️ Ticket BXR-88 "Access Control - Memberships" — status "To Do", CHƯA GIẢI ĐƯỢC:** *"Program IDs shown in the URL on Mindbody Client side is different to what the API is seeing."* — ID hiển thị trên UI quản trị Mindbody có thể khác ID API trả về cho cùng 1 đối tượng. Rủi ro nền tảng thật cho mục A — nên cảnh báo Wildsoul cần thời gian khảo sát/POC trước khi cam kết timeline chắc chắn, không hứa suôn sẻ.
 - Đọc thẳng code thật (`barcode_ajax.php` trên server, xem chi tiết ở mục C) xác nhận: flow check-in hiện tại của BXR **hoàn toàn không có bước gọi `GetClientServices` để validate entitlement** trước khi quyết định — tức là ngay cả BXR cũng chưa thực sự giải xong bài toán "kiểm tra đúng quyền trước khi cho phép" mà Wildsoul đang cần ở mục A lẫn C.
+- **🔴🔴 2 bug thật đọc trực tiếp từ `sweatApi/functions.php` (SSH `rory.cpanel`, dòng ~519-561) — bằng chứng rõ nhất cho việc "hệ thống tưởng đúng nhưng thật ra không hề validate" mà Wildsoul đang than phiền, xảy ra ngay trên chính dự án NUS đang chạy:**
+  1. **Check credit/entitlement bị vô hiệu hoá cứng trong code**, không phải "không có check":
+     ```php
+     $rem = getRemainingSweatCredit($profileId);   // gọi API Mindbody thật để lấy credit còn lại
+     $rem = 1;                                      // dòng NGAY SAU đó ghi đè, luôn = 1
+     if ($rem > 0) {                                // → luôn TRUE, credit thật KHÔNG BAO GIỜ được dùng
+     ```
+     Kết quả gọi API thật bị vứt bỏ hoàn toàn, thay bằng giá trị cứng — member hết credit thật vẫn được cho qua bước kiểm tra này. Nhiều khả năng ai đó tắt tạm lúc debug rồi quên bật lại.
+  2. **Bug đọc kết quả booking — điều kiện `Error->Code == 'Unknown'` bị viết lặp 2 lần với ý nghĩa mâu thuẫn:**
+     ```php
+     if ($datas->Error->Code == 'Unknown') {
+         echo "Something went wrong, please contact our front desk to make a booking.";
+         return;                              // ← return luôn ở đây
+     }
+     if ($datas->Error->Code == 'ClassSignUpsFull') { ... }
+     if ($datas->Error->Code == 'Unknown') {   // ← nhánh này KHÔNG BAO GIỜ chạy tới được
+         ... echo 'Your class has been booked successfully.'; return;
+     }
+     ```
+     Theo quy ước thật của Mindbody, `Error.Code = "Unknown"` nghĩa là **KHÔNG có lỗi = booking THÀNH CÔNG**. Nhưng nhánh đầu tiên lại xử lý `Unknown` như thất bại và return ngay → nhánh xử lý thành công thật (gửi email nền + báo "booked successfully") **là dead code, không bao giờ chạy được**.
+     **Hậu quả thật đang chạy production:** mọi member book thành công thật trên Mindbody vẫn nhận thông báo SAI *"Something went wrong, please contact our front desk"* — dù booking đã được ghi nhận thật.
+  → **Kết luận trực tiếp cho mục A:** đây chính là minh chứng cụ thể nhất, ngay trên dự án của chính NUS, cho việc "hệ thống không thực sự validate + không báo đúng trạng thái" — chốt lại đúng vấn đề gốc Wildsoul đang mô tả, và là lý do bắt buộc phải làm cẩn thận, có test coverage đầy đủ (kể cả case thành công lẫn thất bại) khi xây rule engine cho Wildsoul, tránh lặp lại đúng loại lỗi này.
 
 ---
 
