@@ -83,6 +83,73 @@ Check lại Matrix room "Rory Hackett - BXR App" + Slack "Swift Studio" thì tea
 
 ---
 
+## Chi tiết kỹ thuật sâu hơn — đào thêm code/Slack/Jira/email thật của BXR
+
+*(Đào thêm theo yêu cầu: đọc full Slack thread, JIRA ticket thật qua API, email carrick@ có từ khóa Mindbody. Không tìm được repo code BXR trong phạm vi GitHub accounts hiện có — swiftstudio.co là domain riêng của khách, không phải repo NUS quản lý trực tiếp trong GitHub org đã cấu hình ở đây.)*
+
+### 1. Multi-region / multi-location — GIẢI PHÁP THẬT ĐÃ TRIỂN KHAI (map thẳng vào mục D của Wildsoul)
+
+Tìm được JIRA ticket **BXR-224 "UAE - BE - Implement Region-Aware Mindbody Integration"** (swiftstudio.atlassian.net), tạo bởi Jeff Nguyen 20/05/2026, assignee Carrick Tran, **fetch trực tiếp qua API xác nhận status hiện tại: "Deployed on staging"** — tức là đã code xong và deploy thật, không phải ý tưởng.
+
+**Kiến trúc thật đã dùng:** Mindbody quản lý mỗi vùng/chi nhánh lớn như **1 SiteId riêng biệt** (không phải 1 site chung có field "region"):
+- London → SiteId `427862`
+- UAE → SiteId `586783`
+
+**Acceptance criteria của ticket (4 điểm, tương ứng đúng cách giải bài toán multi-location):**
+1. Dynamic SiteId injection — tức backend tự chọn đúng SiteId theo request/context (region của user hoặc chi nhánh member) thay vì hard-code 1 SiteId
+2. Environment variables configured — mỗi region 1 bộ config Mindbody (site id, có thể cả API key riêng) đặt trong env, không hard-code trong code
+3. Region-aware booking supported — flow booking phải biết gọi đúng SiteId
+4. Region-aware purchases supported — flow mua gói cũng vậy
+
+→ **Đây là bằng chứng kỹ thuật mạnh nhất cho mục D của Wildsoul.** Thay vì nói chung chung "sẽ tự build logic đối chiếu", giờ có thể nói cụ thể: kiến trúc region-aware kiểu này team đã làm thật và deploy thành công cho BXR (London + UAE), nên với Wildsoul (nhiều chi nhánh hơn) sẽ áp dụng đúng pattern "1 SiteId/config riêng per location + lớp routing ở giữa chọn đúng SiteId theo location của member", chứ không phải làm từ số 0.
+
+**Lưu ý quan trọng cần hỏi thêm Wildsoul:** cách BXR làm ngầm định là mỗi location = 1 Mindbody site riêng (site độc lập, không chia sẻ member database mặc định) — nên vấn đề thật sự khó không phải là "gọi đúng site" (đã giải được) mà là "hợp nhất identity của cùng 1 member khi họ active ở nhiều site khác nhau" (member Passport/cross-location trong brief Wildsoul). Đây là phần LeNH từng phải mở ticket hỏi thẳng Mindbody support ("Client ID number across multi-regions") — team CHƯA có xác nhận từ Mindbody support cho phần merge-identity này, nên vẫn nên hỏi lại Mindbody support 1 lần nữa cho case Wildsoul cụ thể (số lượng site khác, có thể chính sách support đã đổi từ đó tới giờ) thay vì giả định y hệt câu trả lời cũ.
+
+### 2. Waiver / entitlement diagnostics — 2 thread Slack full chi tiết (map vào mục A)
+
+Đọc full 2 thread trong kênh Swift Studio (không chỉ snippet search):
+
+**Bug thật:** Client (roryh) test tài khoản của mình: xoá waiver khỏi profile nhưng app **không hiện prompt bắt ký lại** — đúng loại lỗi "entitlement tưởng đúng nhưng hệ thống không chặn/không báo đúng" giống hệt Wildsoul mô tả trong mục A.
+
+**Cách debug/API thật đã dùng:** dev (U08EWQ42Y7J) xác nhận Liability Waiver được fetch từ endpoint thật:
+```
+GET https://api.mindbodyonline.com/public/v6/site/liabilitywaiver
+```
+cấu hình tại `clients.mindbodyonline.com` (khu vực client-facing site settings). Logic cần làm: "nếu tìm thấy đúng waiver VÀ user chưa approve nó → chặn booking" — đây chính xác là kiểu "rule engine" mình đề xuất xây cho mục A, và ở đây có 1 rule cụ thể đã implement thật để tham khảo.
+
+**Phát hiện thêm — GOTCHA THẬT cần cảnh báo Wildsoul:** Wildsoul có 3 loại "form" khác nhau dễ gây nhầm y hệt BXR đã gặp:
+- Liability Waiver (native trong Mindbody, qua endpoint trên)
+- Health Questionnaire — **Mindbody hiển thị được nhưng KHÔNG cập nhật trạng thái hoàn thành qua API** ("upon completion, no user status gets updated, so there is no way to determine whether the user has completed it or not") — nghĩa là nếu Wildsoul cũng cần track "đã điền health form chưa" như 1 điều kiện eligibility, **API sẽ không cho biết trực tiếp**, phải tự lưu trạng thái riêng (không dựa được vào Mindbody).
+- WaiverMaster (`waivermaster.com`) — 1 dịch vụ e-signature bên thứ 3 mà BXR đang dùng song song, KHÔNG PHẢI của Mindbody — 2 bên (roryh và dev) từng nhầm lẫn 2 form giống hệt nhau giữa Mindbody waiver và WaiverMaster link, mất nhiều lượt trao đổi mới rõ. → Nếu Wildsoul cũng có form bên thứ 3 tương tự, cần hỏi rõ ngay từ đầu để không lặp lại nhầm lẫn này.
+
+### 3. OAuth / Developer Portal — thông tin thật hữu ích cho scoping (map vào tất cả các mục cần API access)
+
+Từ thread Slack thật (Carrick + dev khác, kênh Swift Studio):
+- **Giới hạn thật: tối đa 5 OAuth client/app** trong Mindbody Developer Portal cho 1 tài khoản — cần biết trước nếu Wildsoul cần nhiều client riêng (web, mobile, kiosk...).
+- **Gotcha thật:** OAuth client phải tạo với **Application Type = SPA** (không phải "Web") để flow OAuth chạy được cho ứng dụng chạy trên browser — nếu tạo sai loại phải xoá tạo lại (không sửa được), tốn 1 slot trong giới hạn 5 client.
+- **Tin tốt trả lời được 1 câu hỏi mở trước đó:** dev xác nhận **"the developer portal doesn't show any of the actual CRM data... I can spin up a developer test account to build against, so we don't need a separate sandbox"** — nghĩa là Mindbody Developer Portal cho phép tự tạo tài khoản test/sandbox ngay trong portal, KHÔNG cần đợi khách cấp sandbox riêng. → Trả lời câu hỏi mở "có sandbox không" ở báo cáo trước: CÓ, tự tạo được, không phụ thuộc khách.
+
+### 4. Webhook — sự cố thật, bài học quan trọng cho mọi mục có nhắc tới webhook/sync real-time
+
+Tìm thấy email thật forward bởi Rory (rory@swiftstudio.co) tới carrick@, chủ đề **"DEACTIVATED: Your MINDBODY Webhooks Subscription has been deactivated"** (gửi từ MINDBODYWebhooks@mindbodyonline.com, 11/03/2026):
+
+> "We have deactivated your Webhooks subscription due to a **high number of delivery failures** to your Webhook URL... we recommend using the MINDBODY Public API to perform a manual sync of cached data."
+
+Webhook URL bị lỗi lúc đó là `https://airlines-sublime-chen-ram.trycloudflare.com/...` — **1 tunnel Cloudflare tạm thời** (dạng dùng để test local, không phải endpoint production ổn định) — rất có thể đây chính là lý do bị fail liên tục dẫn tới bị Mindbody tự động tắt subscription.
+
+**Bài học thật cần áp dụng cho Wildsoul (đặc biệt mục C — kiosk cần sync real-time, và mục E — báo cáo dựa trên webhook log):** Mindbody sẽ **tự động huỷ webhook subscription** nếu endpoint nhận không ổn định/fail nhiều lần, và phải tự gọi `PATCH Subscription` để kích hoạt lại thủ công sau khi sửa. Nên khi build cho Wildsoul, endpoint nhận webhook bắt buộc phải là **domain production ổn định** (không dùng tunnel tạm/ngrok/cloudflared cho production), và nên có thêm cơ chế tự kiểm tra + cảnh báo nếu Mindbody báo huỷ subscription, để không bị mất dữ liệu âm thầm.
+
+---
+
+## Cập nhật câu trả lời cho các câu hỏi còn mở (so với báo cáo trước)
+
+1. ~~Có cần sandbox riêng từ khách không?~~ → **Đã có câu trả lời:** không cần, tự tạo test account ngay trong Mindbody Developer Portal.
+2. ~~Bulk update endpoint có tồn tại không?~~ → Vẫn CHƯA xác nhận được từ nguồn nào (BXR cũng không có ví dụ dùng) — vẫn cần hỏi thẳng Mindbody support giống cách LeNH từng làm.
+3. Multi-location: đã có pattern thật (SiteId riêng/region) nhưng phần "hợp nhất identity 1 member qua nhiều site" thì BXR cũng mới dừng ở mức tạo ticket hỏi, chưa có xác nhận rõ ràng từ Mindbody — cần hỏi lại mới cho case Wildsoul.
+4. Health Questionnaire completion status — xác nhận CHẮC CHẮN Mindbody không trả trạng thái này qua API (không phải "chưa tìm thấy docs" mà là dev đã confirm thật khi làm cho BXR) — nếu Wildsoul cần track cái tương tự, phải tự lưu, không dựa Mindbody được.
+
+---
+
 ## Full English Detail
 
 ### A. Booking Eligibility & Diagnostics
