@@ -150,6 +150,60 @@ Webhook URL bị lỗi lúc đó là `https://airlines-sublime-chen-ram.trycloud
 
 ---
 
+## Đào sâu thêm — toàn bộ lịch sử JIRA thật (25 ticket Mindbody, 2024-2026)
+
+Query trực tiếp JIRA API (`text ~ "Mindbody"`, project BXR) ra 25 ticket trải dài từ 02/2024 tới 05/2026 — gần như toàn bộ lịch sử vận hành Mindbody thật của BXR. Đọc full description + comment của các ticket liên quan nhất tới 6 mục Wildsoul:
+
+### ⚠️ CASE CHƯA GIẢI ĐƯỢC — cần nói thẳng với Wildsoul, không nên giấu
+
+**BXR-88 "Access Control - Memberships" — status vẫn "To Do", chưa từng làm xong.**
+> "Need to understand/edit how memberships work with the door scanner as the **Program IDs shown in the URL on Mindbody Client side is different to what the API is seeing**."
+
+Đây là 1 phát hiện quan trọng: **ID mà Mindbody hiển thị ở giao diện quản trị (client-facing UI) có thể KHÁC với ID mà API trả về** cho cùng 1 đối tượng (ở đây là Program ID gắn với quyền cửa/door access). Team BXR chưa từng giải quyết xong case này. Đây chính xác là loại rủi ro nền tảng cho mục A (chẩn đoán eligibility) và mục D (đối chiếu quyền) của Wildsoul — nếu Mindbody có kiểu lệch ID tương tự ở phần entitlement/pricing option, việc "đối chiếu để tìm lý do fail" có thể phức tạp hơn dự tính ban đầu. **Nên chủ động nói với Wildsoul: đây là rủi ro thực tế đã gặp, cần thời gian khảo sát/POC trước khi cam kết timeline chắc chắn cho mục A**, thay vì hứa suôn sẻ.
+
+### Region Config — chi tiết đầy đủ hơn (bổ sung cho BXR-224 đã nêu)
+
+**BXR-221 "UAE - BE - Implement Region Configuration Management"** (ticket song song với BXR-224, cũng "Deployed on staging") cho biết rõ hơn dữ liệu nằm trong 1 "Region entity" thật đã build:
+- currency (tiền tệ riêng theo vùng)
+- timezone
+- mindbody instance (chính là SiteId)
+- Klaviyo list (marketing list riêng theo vùng)
+- payment configuration
+
+→ Đây gần như là bản nháp thật của "approved template/network-level config" mà Wildsoul mô tả trong mục B (dù BXR làm cho khái niệm "region" chứ chưa phải "membership template", nhưng kiến trúc Region entity + Config API + dynamic loading là đúng pattern có thể tái dùng/mở rộng cho membership template của Wildsoul).
+
+### Spot booking thật — sát nhất với kiosk Collective (mục C)
+
+**BXR-97 "App - Spot Booking"** (Done) — chức năng chọn 1 "spot" cụ thể trong lớp (giống hệt ý tưởng "chọn resource/session cụ thể tại kiosk" của Collective). Bug thật ghi nhận bởi chính Rory Hackett:
+- "Not showing in back end of MB (booking is showing, spot is not showing)" — Mindbody backend đôi khi không hiện đúng spot đã book dù booking chính đã ghi nhận.
+- "When cancelling a class, spot is not being released" — huỷ lớp nhưng spot không được trả lại pool (ảnh hưởng trực tiếp tới bài toán "giữ đúng sức chứa real-time" mà Wildsoul yêu cầu cho kiosk).
+
+→ Cảnh báo thật cho mục C: dù kiến trúc tổng thể khả thi (đã nêu ở trên), **có rủi ro cụ thể ở khâu release/cancel entitlement khi dùng spot-level booking** — cần thiết kế kỹ + test kỹ case huỷ/đổi lịch, không chỉ happy path.
+
+### Sync issues thật — dữ liệu quý cho mục D/E/F
+
+**BXR-152 "Trainers not Syncing"** — thread debug thật hé lộ cách Mindbody API thật sự lọc theo chi nhánh: BXR gọi 2 API riêng cho 2 "thương hiệu" (BXR/SWEAT) dùng tổ hợp tham số cụ thể:
+```
+ProgramIds: 54, 59, 85, 60, 84, 55, 65, 66, 53, 47, 49, 58, 64, 69, 70
+locationIds: BXR City, BXR Marylebone
+StartDate: now → EndDate: next month
+```
+Bug thật: 1 trainer (Monika) không hiện ra dù đang active, vì tổ hợp filter (ProgramIds + locationIds + date range) không khớp đúng case của cô ấy — mất 3 vòng trao đổi (02/12 → 10/12) mới fix xong. → Bài học cho mục D: lọc dữ liệu theo chi nhánh qua Mindbody API dễ bị sai sót ở tổ hợp filter (không chỉ đơn giản là "theo SiteId"), cần test kỹ với dữ liệu thật của từng chi nhánh Wildsoul, không suy luận từ 1-2 case là đủ.
+
+**BXR-264 "Timetable not syncing correctly"** — Carrick kể lại quá trình debug thật: thử xoá cache ở Admin (không được) → debug trực tiếp source code + test qua Mindbody API như website đang gọi (lớp vẫn không hiện) → so sánh với dev site (dev site lại hiện đúng, rất lạ) → cuối cùng tìm ra nguyên nhân nằm ở phía cấu hình Mindbody riêng của BXR (comment bị cắt, chưa rõ chi tiết cuối). → Xác nhận thực tế: bug "backend đúng nhưng app/web không hiện" (mục F) từng xảy ra thật và **không có cách chẩn đoán nhanh** — phải debug nhiều lớp (cache → code → API trực tiếp → so sánh môi trường) mới ra, đúng như Wildsoul đang than phiền.
+
+**BXR-173 "Not all profiles are synced in Klaviyo"** — phát hiện: có push token nhưng không link được với profile Mindbody ở nhiều trường hợp, ticket đóng "Done" nhưng không có comment nào ghi lại nguyên nhân gốc — dấu hiệu cho thấy case này có thể chỉ được vá tạm chứ chưa chắc đã hiểu hết root cause.
+
+**BXR-112 "Location Selector not working"** — việc tưởng đơn giản: kéo danh sách chi nhánh (`locations`) từ Mindbody để hiện trong dropdown chọn chi nhánh lúc tạo tài khoản — nhưng mất hơn 1 tháng (17/06 → 15/07/2026, 2 lần cập nhật kèm build iOS/Android mới) mới xong triệt để vì thay đổi 1 chỗ kéo theo phải sửa nhiều màn hình khác cũng dùng location. → Bài học ước lượng: ngay cả tác vụ nghe đơn giản (đọc danh sách chi nhánh) cũng có thể lan ra nhiều nơi trong app nếu location là khái niệm dùng xuyên suốt hệ thống — Wildsoul cũng multi-location nên rủi ro tương tự cần tính vào ước lượng, không nên coi là "chỉ 1 API call là xong".
+
+### V5 → V6 migration — dòng thời gian thật
+
+Từ danh sách ticket: BXR-7/BXR-37 (Sign in/Up v6, 02/2024) → BXR-72 (App V6 login, 09/2024) → BXR-140 "Review and remove all MindBody v5 on website" (10/2025) — cho thấy quá trình dọn sạch hoàn toàn v5 kéo dài **gần 2 năm** từ lúc bắt đầu chuyển sang v6 tới lúc dọn sạch hết v5 trên web. → Nếu Wildsoul cũng đang dùng phần nào của Mindbody sắp bị deprecate, nên hỏi rõ version hiện tại của họ ngay từ đầu, và không đánh giá thấp thời gian dọn dẹp legacy nếu có.
+
+**Chưa tìm được code repo BXR trong phạm vi GitHub accounts đang cấu hình** (duongdn, nusken) — domain code thật (`dev.bxrlondon.com`) có vẻ do khách/bên khác host riêng, không nằm trong GitHub org NUS quản lý ở đây. Nếu cần xem code thật, phải hỏi trực tiếp Rory/team BXR hoặc kiểm tra xem có repo riêng nào của Carrick/LuHX/LeNH chưa được biết tới.
+
+---
+
 ## Full English Detail
 
 ### A. Booking Eligibility & Diagnostics
