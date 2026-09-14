@@ -6,20 +6,60 @@
 
 ---
 
-## Bảng tóm tắt tiếng Việt
+## Phần tiếng Việt — Khách nói gì & mình giải quyết thế nào
 
-| # | Hạng mục | Khách muốn gì | Mindbody API hỗ trợ tới đâu | Độ khó | Gợi ý |
-|---|----------|----------------|------------------------------|--------|-------|
-| A | Chẩn đoán lỗi booking | Biết chính xác lý do 1 member không book được (do gói nào, quyền gì) | Có data thô (gói, lớp, chi nhánh) nhưng KHÔNG có endpoint trả lý do trực tiếp — phải tự viết logic đối chiếu | Trung bình | Custom logic layer trên API |
-| B | Sửa hàng loạt hợp đồng/membership | Sửa nhiều member cùng lúc (nhiều chi nhánh), có validate + audit trail | KHÔNG có endpoint bulk-update xác nhận trong doc — chỉ sửa từng người, giới hạn 1000 call/ngày | Cao, rủi ro | Cần hỏi thẳng Mindbody support/sandbox trước khi báo giá |
-| C | Kiosk on-site cho "Wildsoul Collective" | Member đến nơi mới chọn buổi tập trên tablet, trừ gói tự động, sync về Mindbody | **Hỗ trợ đầy đủ** — GetClasses (chỗ trống), GetClientServices (check gói), AddClientToClass (đặt chỗ+trừ gói), webhook (sync realtime). Mindbody còn có sẵn app Check-In | **Thấp — Quick win** | 🟢 Đề xuất làm Phase 1, ~2-3 tuần |
-| D | Đồng bộ quyền truy cập đa chi nhánh | Phát hiện member bị cấu hình quyền sai (lẽ ra chỉ 1 chi nhánh nhưng lại full network) | Có data (cross-site relations) nhưng không có endpoint audit tự động — phải tự quét & so sánh | Trung bình | Custom logic, chạy định kỳ |
-| E | Báo cáo network-level | Báo cáo tổng toàn hệ thống (vd: member bị suspend nhưng vẫn bị charge) | **Hỗ trợ tốt** — export data qua API + webhook log mọi thay đổi, đẩy vào BI (Tableau/Power BI) | Thấp-Trung bình | 🟢 Đề xuất Phase 2 |
-| F | Kiểm tra đồng bộ backend↔app | Biết khi nào config ở backend chưa đồng bộ xuống app/booking cho khách | Mindbody KHÔNG có endpoint "trạng thái đồng bộ" — đây là bài toán tự giám sát (polling 2 phía so sánh), không phải giới hạn API | Cao | Cần xây hệ thống canary/test riêng, không thuộc phạm vi API |
+*(Dịch/diễn giải sát nội dung file PDF "Wildsoul Mindbody x NUS Technology" khách gửi kèm email, không thêm ý ngoài brief. Phần "Cách giải quyết" dựa trên nghiên cứu Mindbody Public API v6 thật, có trích API cụ thể.)*
 
-**Điều kiện tiên quyết quan trọng:** phải xác nhận gói Mindbody của Wildsoul có bật API access + đủ quyền (Enrollment/ClassService/SaleService) — không phải tier nào cũng có. Nên hỏi Chien/khách xác nhận cái này TRƯỚC khi báo giá bất kỳ hạng mục nào.
+### A. Không biết vì sao member không book được lớp
 
-**Đề xuất lộ trình:** Phase 1 = C (kiosk, nhanh, rủi ro thấp) → Phase 2 = E (báo cáo) → Phase 3+ = A, D (cần build thêm logic) → B, F (cần xác nhận thêm với Mindbody trước khi cam kết, rủi ro cao nhất).
+**Khách nói gì:** Đây là vấn đề gây khó chịu member nhiều nhất hiện tại. Việc 1 member có book được lớp/dịch vụ hay không phụ thuộc vào nhiều thứ liên kết với nhau: gói/pricing option họ đang có, dịch vụ gói đó có bao gồm hay không (entitlement), chi nhánh, cấu hình lớp/appointment, và lịch. Vấn đề là khi booking fail, Mindbody **không nói rõ lý do** — có thể lớp, lịch, pricing option nhìn "có vẻ" cấu hình đúng nhưng member vẫn không book được, mà lỗi lại hiện khác nhau giữa backend/app/web booking. Đội vận hành của Wildsoul phải mò từng màn hình, test thử từng profile, rồi phải escalate lên Mindbody support mới ra được nguyên nhân. Họ muốn có 1 "diagnostic view" nói thẳng ra kiểu: *"Member không book được vì Pricing Option X không bao gồm Service Y tại Location Z."*
+
+**Mình giải quyết thế nào:** Mindbody API có sẵn data để lấy — `GetClientServices` cho biết member đang có gói/pricing option gì đang active, `GetClasses` cho biết lớp đó cấu hình giới hạn gì (chi nhánh, sức chứa, pricing tier yêu cầu). Vấn đề là Mindbody **không có 1 endpoint duy nhất trả thẳng "lý do fail"** — nên mình phải tự xây 1 lớp logic ở giữa: kéo full thông tin gói của member + full rule của lớp, rồi so khớp từng điều kiện (chi nhánh khớp không, entitlement có bao gồm dịch vụ không, còn hạn không...) để tự sinh ra câu giải thích. Về bản chất là build 1 "rule engine" nhỏ chạy trên dữ liệu API, không phải chỉnh gì trong Mindbody. Độ khó ở mức trung bình vì phải fix cứng nhiều luật nghiệp vụ dựa theo cách Mindbody thực sự vận hành (phải test kỹ với nhiều case thật của Wildsoul để rule engine đúng, không đoán).
+
+### B. Sửa hợp đồng/membership hàng loạt đang phải làm tay từng người
+
+**Khách nói gì:** Wildsoul đang scale nhiều chi nhánh, cấu trúc membership ngày càng phức tạp (Foundation, Move, Recover, Balance, Premium, Collective, gói lẻ, trả trọn gói, membership cũ...). Ví dụ cụ thể họ đưa ra: member Foundation cần giữ giá cũ (legacy pricing) nhưng lại đổi sang cơ cấu quyền lợi khác (như thay đổi quyền vào phòng red-light hoặc giới hạn lượt dùng) — muốn đổi thì phải **hủy hợp đồng cũ bằng tay rồi tạo hợp đồng mới khớp chính xác ngày autopay**, vừa giữ giá vừa check lại quyền dịch vụ vừa check quyền đa chi nhánh vừa review lại từng profile sau khi đổi. Vấn đề là việc này đang làm **từng profile một** — khi số lượng member cần đổi cùng lúc lớn (do thay đổi chính sách chung) thì rủi ro sai sót và rủi ro billing tăng theo quy mô. Họ muốn 1 workflow ở cấp toàn network: có template đã duyệt sẵn, đổi hàng loạt, validate trước khi đổi, báo cáo case lỗi (exception), và có audit trail đầy đủ.
+
+**Mình giải quyết thế nào:** Đây là hạng mục rủi ro cao nhất trong 6 cái. Mindbody API cho phép đọc và sửa từng client/contract riêng lẻ, nhưng tài liệu API v6 công khai **không xác nhận có endpoint update hàng loạt (bulk)** — nghĩa là về mặt kỹ thuật có thể phải lặp update từng người một, mà API lại giới hạn khoảng 1.000 call/ngày cho 1 API key, nên sửa vài trăm/nghìn member cùng lúc sẽ đụng trần rate-limit, và không có cơ chế rollback nếu giữa chừng lỗi (100 người đã đổi, người 101 lỗi thì 100 người trước vẫn đã bị đổi rồi, không tự động hủy được). **Trước khi báo giá hay cam kết bất kỳ gì cho hạng mục này, cần hỏi thẳng Mindbody (support hoặc sandbox account) xem có endpoint update hàng loạt thật sự tồn tại không** — nếu không có, giải pháp sẽ phải là 1 hàng đợi (queue) tự chạy tuần tự có log + validate từng bước + cảnh báo khi có case bất thường, và phải nói rõ với khách đây không phải "bulk update tức thời" mà là "chạy nền có kiểm soát".
+
+### C. Muốn làm kiosk on-site riêng cho khu "Wildsoul Collective"
+
+**Khách nói gì:** Khu Collective có hành trình khách hàng khác hẳn lớp học thông thường, không nên ép vào flow đặt lịch trước như các lớp khác. Ý tưởng của họ: member mua gói/membership Collective qua app riêng của Wildsoul (mua trước được, bình thường), nhưng **không đặt chỗ buổi tập trước online** — mà khi tới nơi, member sẽ thao tác trên 1 màn hình tại chỗ (kiosk/tablet): hệ thống nhận diện member, xác nhận họ còn quyền lợi (entitlement) hay không, hiển thị những gì đang trống ngay lúc đó theo dạng trực quan, member chọn buổi/tài nguyên còn trống và xác nhận ngay tại chỗ, hệ thống tự trừ đúng gói/membership và **không cho vượt quá hạn mức**, đồng thời dữ liệu sử dụng phải đồng bộ ngược về Mindbody để Mindbody vẫn quản lý được member + thanh toán. Khách hỏi thẳng: cái này build được bằng Mindbody API không, và Mindbody có API/cách tích hợp nào để validate quyền lợi, tạo booking/usage, và giữ sức chứa real-time không.
+
+**Mình giải quyết thế nào:** Đây là hạng mục khả thi nhất và nên làm trước (Phase 1). Mindbody API hỗ trợ đủ cả chuỗi: `GetClasses` lấy sức chứa còn trống theo thời gian thực, `GetClientServices` xác nhận member còn active pricing option/entitlement hay không, `AddClientToClass` tạo booking và Mindbody sẽ tự trừ entitlement nếu gói đó theo kiểu pass/entitlement pricing, và Mindbody có webhook đẩy thông báo khi có booking mới/thay đổi sức chứa gần như real-time — nên phần "sync ngược về Mindbody" gần như tự động chứ không cần mình tự đẩy lại thủ công. Về kiến trúc, đây sẽ là 1 web app/tablet app riêng do NUS build (giao diện thương hiệu Wildsoul), chạy phía sau gọi các API trên của Mindbody làm nguồn dữ liệu member/thanh toán. Cần lưu ý: Mindbody có sẵn app Check-In riêng của họ — nên kiểm tra xem app đó có che được 1 phần nhu cầu (nhận diện member khi tới) trước khi build từ đầu, tránh làm trùng. Điểm chưa xác nhận: entitlement được validate/trừ *trước khi* xác nhận booking (để báo lỗi ngay nếu hết hạn mức) hay chỉ trừ *sau khi* xác nhận — cần test trên sandbox Mindbody thật để chắc chắn UX kiosk mượt.
+
+### D. Quyền truy cập đa chi nhánh dễ bị cấu hình sai khi lên thêm chi nhánh mới
+
+**Khách nói gì:** Mỗi chi nhánh mới mở ra sẽ tạo thêm rất nhiều tổ hợp hợp đồng/pricing/dịch vụ/quyền truy cập cần giữ nhất quán. Ví dụ: membership Foundation/legacy nên chỉ giới hạn 1 chi nhánh, còn Premium/Passport thì cố ý cho phép truy cập toàn network, còn quyền Class/Recovery/Collective phải tách biệt rõ ràng — và mọi thay đổi cấu hình cần được kiểm tra (validate) trước khi áp dụng cho số đông member, tránh 1 lỗi cấu hình nhỏ ảnh hưởng dây chuyền cả network.
+
+**Mình giải quyết thế nào:** Mindbody có data về quan hệ member với các chi nhánh (cross-site/location relations) qua API, nhưng không có sẵn 1 endpoint "quét ra lỗi cấu hình" — nên hướng làm là: định kỳ (ví dụ hàng đêm) chạy 1 job tự động kéo toàn bộ member + quyền chi nhánh của họ, so với "luật đúng" mà Wildsoul định nghĩa (ai được network-wide, ai chỉ 1 chi nhánh), rồi xuất ra danh sách các case lệch chuẩn để đội vận hành review, thay vì họ phải tự lọc thủ công. Với số lượng member lớn (chục nghìn), do giới hạn ~1.000 call/ngày của API, việc quét toàn network 1 lần có thể phải chia làm nhiều ngày — cần bàn với khách về tần suất quét chấp nhận được (theo tuần hay theo ngày).
+
+### E. Báo cáo hiện tại không trả lời được câu hỏi vận hành thực tế
+
+**Khách nói gì:** Report chuẩn của Mindbody không trả lời được đúng câu hỏi vận hành cần, phải tự cross-check qua nhiều report hoặc từng profile — bản thân đây vừa là vấn đề report vừa là vấn đề cấu trúc dữ liệu (vì 1 member/membership có thể bị phân loại không nhất quán do quan hệ phức tạp giữa pricing option và nhiều hợp đồng qua nhiều chi nhánh). Ví dụ cụ thể: tìm member bị cấu hình quyền truy cập chéo chi nhánh ngoài ý muốn, member bị suspend nhưng vẫn bị charge tiền, hoặc member đang dùng sản phẩm cũ (legacy) với 1 quyền lợi cụ thể. HQ cần cái nhìn ở cấp toàn network thay vì phải điều tra từng chi nhánh, và lịch sử thay đổi/audit trail cần dễ truy cập hơn.
+
+**Mình giải quyết thế nào:** Đây là hạng mục khả thi tốt (Phase 2). Toàn bộ dữ liệu nền (client, sale, hợp đồng, danh sách lớp) đều lấy được qua API dạng GET, và webhook của Mindbody bắt được mọi thay đổi (mutation) — đủ để build 1 pipeline riêng: kéo dữ liệu định kỳ + log mọi thay đổi qua webhook, đẩy vào 1 lớp BI (Tableau/Power BI hoặc dashboard tự build) để tạo báo cáo đúng câu hỏi Wildsoul cần thay vì report có sẵn của Mindbody. Ví dụ báo cáo "suspend nhưng vẫn charge" hoàn toàn làm được bằng cách đối chiếu 2 tập dữ liệu (trạng thái member + lịch sử sale) trong pipeline riêng. Đây không phải giới hạn của Mindbody API mà là việc thiếu 1 lớp BI/report engine riêng cho Wildsoul — công sức chủ yếu nằm ở xây pipeline + dashboard, không phải rủi ro kỹ thuật với Mindbody.
+
+### F. Cấu hình backend đôi khi không lên đúng trên app/booking cho khách hàng thấy
+
+**Khách nói gì:** Có tình trạng cấu hình đúng trong Mindbody backend nhưng app thương hiệu (branded app) hoặc trải nghiệm đặt lịch online lại không phản ánh đúng ngay lập tức. Họ cần nhìn thấy rõ trạng thái đồng bộ (sync) và các trường hợp đồng bộ lỗi giữa backend và các kênh khách hàng thấy, và mong muốn thay đổi (đặc biệt cho campaign, sự kiện, đổi giá, mở chi nhánh mới) có thể test trước khi thực sự lên live.
+
+**Mình giải quyết thế nào:** Đây là hạng mục khó nhất vì Mindbody **không hề có endpoint nào báo "trạng thái đồng bộ"** — nói cách khác, đây không phải là giới hạn kỹ thuật của API mà là 1 bài toán tự giám sát hoàn toàn nằm ngoài phạm vi Mindbody: mình sẽ phải tự build 1 hệ thống kiểm tra độc lập (kiểu "canary"), tự động gọi API lấy trạng thái cấu hình ở backend, đồng thời tự động kiểm tra qua giao diện app/web khách hàng thấy (có thể phải dùng automation duyệt web/app), rồi so sánh 2 bên để phát hiện lệch. Webhook chỉ xác nhận là "backend đã đổi" chứ không xác nhận "đã lan xuống app" — nên không dùng webhook thay thế được. Đây là hạng mục nên để sau cùng và cần trao đổi kỹ với khách về phạm vi thực tế trước khi cam kết, vì bản chất là xây thêm 1 hệ thống giám sát riêng chứ không phải tích hợp thêm với Mindbody.
+
+---
+
+## Bảng tóm tắt nhanh (đọc lướt)
+
+| # | Hạng mục | Mindbody hỗ trợ tới đâu | Độ khó | Gợi ý |
+|---|----------|--------------------------|--------|-------|
+| A | Chẩn đoán lỗi booking | Có data thô, không có endpoint trả lý do — tự xây rule engine | Trung bình | Phase 3 |
+| B | Sửa hợp đồng hàng loạt | Không xác nhận có bulk endpoint, giới hạn 1.000 call/ngày | Cao, rủi ro | Hỏi Mindbody trước khi báo giá |
+| C | Kiosk Wildsoul Collective | Hỗ trợ đầy đủ chuỗi API + webhook | Thấp | 🟢 Phase 1 |
+| D | Đồng bộ quyền đa chi nhánh | Có data, không có endpoint audit — tự quét định kỳ | Trung bình | Phase 3 |
+| E | Báo cáo network-level | Đủ data + webhook, cần build BI riêng | Thấp-Trung bình | 🟢 Phase 2 |
+| F | Đồng bộ backend↔app | Ngoài phạm vi API, cần hệ giám sát riêng | Cao | Phase cuối, cần bàn kỹ scope |
+
+**Điều kiện tiên quyết:** xác nhận gói Mindbody của Wildsoul có bật API access + đủ quyền (Enrollment/ClassService/SaleService) trước khi báo giá bất kỳ hạng mục nào.
 
 ---
 
