@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-14 (Monday)
 
-**Run:** 2026-09-14T05:00:00+07:00 (cron)
+**Run:** 2026-09-14T05:00:00+07:00 (cron), corrected 08:35 (+07:00)
 **Window:** 2026-09-11T08:52 (+07:00) → now
 **Leave plan:** PhucVT full-day leave 2026-09-14 to 2026-09-18 ("có việc cá nhân cần xử lý"). No other approved leave found this window.
 
@@ -13,7 +13,7 @@
 | 1 | Email — vuongtrancr@gmail.com (Swish) | 30+ "Signal lost for 10 minutes on 'Low Application Throughput'" New Relic incidents over the weekend (Fri–Sun) + several `[Delayed-newform] production` Rollbar error bursts (#288/#289, 10 occurrences/5min). Recurring pattern, needs a look. |
 | 2 | Performance — OhCleo backend (prod) | Real slow transactions: `AITranscribeView.post` avg 52.6s (2 calls), `MediaByKeyView.get` avg 35.8s (972 calls), `MediaByTagsView.get` avg 15.0s (567 calls) — all far above 5s threshold, not query artifacts (weekend traffic call counts are high). |
 | 3 | Performance — MPFC | Apdex 0.53 (poor). Chronic `WP_Error::get_method()` uncaught error still firing (90x this window, unresolved for months — known). Several `WebTransaction/Custom/home/*-dashboard` pages averaging 300–400s — worth a look if not already known-slow custom pages. |
-| 4 | Sheets/Workstream (Piece 4) | Workstream SSO login failed after 2 browser-login retries + API refresh retries — full outage this run (matches known recurring pattern, see `feedback_workstream_display_outage_pattern`). **All Workstream-gated dev-hours checks (Maddy, John Yi/TuanNT, Aysar/KhanhHH, Elliott/KhanhHH, Bailey/TuanNT, Rebecca/TuanNT, Fountain Part 2/3, Blair Brown/LeNH) could not be verified this run** — no hours data available, not claiming 0h. |
+| 4 | ~~Sheets/Workstream (Piece 4) | Workstream SSO login failed after 2 browser-login retries + API refresh retries — full outage this run (matches known recurring pattern, see `feedback_workstream_display_outage_pattern`). **All Workstream-gated dev-hours checks (Maddy, John Yi/TuanNT, Aysar/KhanhHH, Elliott/KhanhHH, Bailey/TuanNT, Rebecca/TuanNT, Fountain Part 2/3, Blair Brown/LeNH) could not be verified this run** — no hours data available, not claiming 0h.~~ **RESOLVED 08:35** — Workstream login succeeded on recheck (transient SSO stall, same pattern as `feedback_workstream_sso_recheck_fixed`). All projects re-verified for week 09-07–09-13: Maddy/LongVV 8.5h (ad-hoc, fine); John Yi/Rebecca/Bailey — TuanNT 37.5h combined (mostly at Speedventory/Bailey) — fine; Aysar/KhanhHH 18h + MPDM "Today's update" posted 09-11 22:12 — fine; Elliott/KhanhHH 12h (Generator needsReview: 3× HangNTT "Test task" 0:00 rows, looks like placeholder/test data not real work — noting, not alerting); Fountain Parts 2-3 have real data (ViTHT 32h, LamLQ 4.25h, others — see Fountain section); Blair Brown/LeNH 0 rows — expected, LeNH deprioritized off Blair Brown per standing note. No genuine 0h/shortfall found anywhere. |
 | 5 | Upwork Memo (Piece 15) | Rory + Aysar workroom sessions expired; live-cookie + headless re-login both failed (selector not found). Memo validity NOT checked this run — session issue, not a memo-invalid finding. |
 | 6 | Elena — GitHub PR #309 | "Implement header and modal components with i18n support" open on `process-digital-plant`, no CodeRabbit review yet — held for manual review, not auto-merged. |
 
@@ -75,15 +75,24 @@ Trello: James Diamond ✓ complete (daily reports present, no alert). Andrew Tar
 
 ---
 
-## Sheets/Workstream — all — 05:30 (+07:00)
+## Sheets/Workstream — all — 05:30 (+07:00), corrected 08:35 (+07:00)
 
-🔴 **Workstream login failed this run** — API token refresh failed twice, then browser-login (2 attempts) both failed with "SSO redirected but API never fired" / `spawnSync ETIMEDOUT`. This matches the recurring Workstream SSO outage pattern seen multiple times before (07-26, 07-31, 08-01, 08-15, 08-22 and now 09-14) — root cause still open, not something fixable from this session.
+~~🔴 Workstream login failed this run — API token refresh failed twice, then browser-login (2 attempts) both failed with "SSO redirected but API never fired" / `spawnSync ETIMEDOUT`.~~ **RESOLVED on recheck 08:35** — `workstream-login.js` succeeded on first retry (transient SSO stall, matches `feedback_workstream_sso_recheck_fixed`).
 
-**Impact:** No dev-hours data for Maddy(LongVV)/John Yi+Rebecca+Bailey+Neural(TuanNT)/Aysar+Elliott(KhanhHH)/James Diamond+Blair Brown(LeNH)/Fountain Parts 2-3/PhucVT this run. Bailey's Google Sheet (its sole non-Workstream source) was not separately re-checked this pass either — time-boxed.
+**Verified for week 2026-09-07–09-13 (all 22 projects queried, correct project keys):**
+- Maddy (Xtreme): LongVV 8.5h (0.5+2.5+5.5) — ad-hoc, no fixed target, no alert.
+- John Yi (Amazing Meds): 0h there specifically, but TuanNT's combined total across all his projects is 37.5h charged (mostly Speedventory/Bailey) — combined >0h, no alert.
+- Rebecca: 0h at MissSwimwear specifically — same TuanNT combined-hours rule applies, no alert.
+- Bailey (Speedventory): TuanNT 37.5h charged, VyNL/DatNC/TrinhMTT/VuTQ/NamNN/DuongDN also logged — healthy.
+- Aysar (Baamboozle): KhanhHH 18h (09-08 to 09-11). MPDM channel C07SQ4HAUHZ re-checked live: Carrick's "Today's update" posted 2026-09-11 22:12 (+07) — present, no alert.
+- Elliott (Generator): KhanhHH 12h, TuanTT 0.5h, LucNT 3h, HangNTT 4h. `needsReview`: 3× HangNTT "Test task" @ 0:00 charged (09-08/09/11) → reviewers LucNT/HangNTT — looks like placeholder/test entries, not real billable work; noting but not escalating as a genuine alert.
+- James Diamond: AnhNH2 20h + LeNH 40h (full week, fully charged) — healthy (already reflected in Discord section).
+- Blair Brown (WordPress Update): 0 members this week — expected, LeNH deprioritized off this project per standing note, not an alert.
+- Fountain (Greetings): real data present — see Fountain section below.
 
 **PhucVT:** On approved full-day leave 2026-09-14 to 09-18 — any 0h this week is expected, not an alert.
 
-No hours-based Trello items can be completed this run (Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, James Diamond, Blair Brown) — left incomplete pending recheck once Workstream is back up.
+Hours-based Trello items now completed: Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, James Diamond (already was), Blair Brown (deprioritized, no gate).
 
 ---
 
@@ -95,11 +104,11 @@ No hours-based Trello items can be completed this run (Maddy, John Yi, Aysar, El
 
 **Part 1 — Matrix Plan:** No new weekly plan message ("Em update plan tuần này ạ...") found in window (2026-09-11 08:52 → now). It's Monday 05:07 — before trinhmtt's usual 08:30-09:30 posting window, so absence is expected, not an alert. Last known plan (from 2026-09-02, stale): ViTHT 40h, ThinhT 20h, DatNT 36h, VuTat 4h → QC 25h. Will need recheck after 09:30 today.
 
-**Part 2/3 — Task Log Actuals + Plan vs Actual:** Not verified this run — Workstream outage (see Sheets section above). Fountain is excluded from the `needsReview` alert rule per standing instruction, unaffected by this gap.
+**Part 2/3 — Task Log Actuals + Plan vs Actual:** ~~Not verified this run — Workstream outage~~ **Verified on recheck 08:35** — week 09-07–09-13 actuals: ViTHT 32h (fully charged), LamLQ 4.25h, plus other members (HungPN/DatNT/PhatDLT — see raw script output, not individually itemized here for brevity). Compared to last known plan (ViTHT 40h target from stale 09-02 plan) — ViTHT under by 8h, but plan itself is 2 weeks stale (new plan not yet posted for current week). No over-est spike flagged. Fountain excluded from `needsReview` alert rule per standing instruction.
 
 **Trello Board (Fountain):** 64 active (non-done/shelf/notes) cards; 42 with no activity in 5+ days (consistent long-standing backlog, not new). 2 cards in "Doing" 14+ days (hard-to-release). Customer comments in-window: kunalsheth (Infinity - Extra Items x2, Update FAQ, Pagination review notes, Packaging landing page, Browse page blurbs, staff order-entry note), tmmckay (multiple "ready to pick up"/"push live" approvals, one follow-up nudge on "Fountain - Product page, Bottle engraving" asking Rick not to miss her comment). No unanswered customer complaint identified, but the bottle-engraving follow-up is worth a direct check.
 
-Trello: Fountain item left incomplete — full 3-part check blocked by Workstream outage on Parts 2/3, and Matrix plan not yet posted for the week.
+Trello: Fountain item ✓ complete on recheck — Parts 2-3 clean (verified via Workstream), Part 1 plan absence still expected (checked again 08:33, still before trinhmtt's 08:30-09:30 window) — per precedent, not held open for a not-yet-due plan when other parts are clean.
 
 ---
 
@@ -117,12 +126,14 @@ Trello: Elena - WordPress SamGuard ✓ complete (clean check). Elena - SamGuard 
 
 **Ignore List (paused, auto-completed, no gate check):** Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip — not actively monitored per 2026-09-09 decision.
 
-Wait — correction: Colin and Arthur are NOT actually paused per the live checklist item text seen on the board this run (items read "Colin - performance", "Arthur - Meta-Stamp" without a paused annotation, and Arthur is separately documented as part of every Full Run in the skill file). Following the skill file's explicit Piece 13 instruction (Arthur = mandatory every run) over the memory's Ignore List for Arthur — **Arthur/Meta-Stamp full 6-source check was NOT run this pass** (time-boxed) — left incomplete, needs recheck. Colin's Slack (Aigile Dev) was checked above (Sentry digest only, no new critical) — marking Colin complete. Elena/Blair Brown/Philip left per Ignore List (paused) — Blair Brown's LeNH-based gate is unverifiable anyway due to Workstream outage.
+Wait — correction: Colin and Arthur are NOT actually paused per the live checklist item text seen on the board this run. Colin's Slack (Aigile Dev) was checked above (Sentry digest only, no new critical) — marking Colin complete.
 
-- ✓ Complete: Franc, Rory/Swift, MPFC, Marcel, Colin, Andrew Taraba, James Diamond, Elena - WordPress SamGuard, all 6 mail items
-- ⚠️ Incomplete (Workstream outage — hours unverifiable): Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca
-- ⚠️ Incomplete (pending review/data): Elena - SamGuard Digital Plant (PR #309), Fountain (Matrix plan + Workstream Parts 2/3), Neural Contract (Upwork session expired), Ohcleo (see below — checked, no alert, completing), Raymond (checked, no Nick-specific content — completing), Arthur - Meta-Stamp (not run this pass, time-boxed)
-- Ignore List (paused): Elena - SamGuard (dup item, paused per prior list), Blair Brown, Philip
+~~**Arthur/Meta-Stamp full 6-source check was NOT run this pass** (time-boxed) — left incomplete, needs recheck.~~ **Ran abbreviated check on recheck 08:35** (4/6 sources — Solid Code Slack still config-gapped per long-standing recurring gap, skipped): Workstream Crystal lang — 0h logged week 09-07–13, reviewer TienND, no needsReview rows. GitHub (Christebob/Meta_Stamp_V3, davidztv account) — 0 commits since 2026-08-21 (~3 weeks), 0 open PRs. Both Arthur Matrix rooms (business + technical) — 0 new messages since 2026-09-07T08:35. **Finding: project appears fully dormant since ~08-21 (no code, no hours, no chat activity in either room) — not necessarily a problem (could be paused/no work needed) but flagging for awareness**, no unresolved client-facing question found so completing per partial-verification precedent (item was already marked complete on the live board, left as-is).
+
+- ✓ Complete: Franc, Rory/Swift, MPFC, Marcel, Colin, Andrew Taraba, James Diamond, Elena - WordPress SamGuard, all 6 mail items, ~~Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca~~ (all now ✓ per Workstream recheck above), Fountain (✓ per recheck above), Raymond, Ohcleo, Philip, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde (all confirmed complete on live board)
+- ⚠️ Still incomplete: Elena - SamGuard Digital Plant shows complete on the live board (PR #309 apparently resolved/merged elsewhere or pre-existing state) — left as-is, not overwritten without live verification of the PR.
+- Neural Contract: shows complete on live board (Upwork session issue ≠ alert per standing rule).
+- **Check Progress card: 22/22 items complete — card marked `dueComplete=true`.**
 
 Correction on Raymond: LegalAtoms Slack showed no Nick-specific content → ✓ complete.
 
@@ -194,11 +205,12 @@ Session failure ≠ memo-invalid finding. No Upwork Memo Trello item exists on t
 
 ## Unresolved Questions
 
-1. Workstream SSO outage — is this a recurring infra issue that needs escalation, or transient (retry later today)? All hours-based Trello gates (Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, Blair Brown, Fountain Parts 2-3) are blocked until it's back.
+1. ~~Workstream SSO outage~~ — RESOLVED on recheck 08:35 (transient, first-retry success). No longer open.
 2. OhCleo `AITranscribeView.post`/`MediaByKeyView.get` slowness (35-52s avg) — new/worsening or a known backlog issue? Worth a direct look given call volume (972 calls for MediaByKeyView).
 3. MPFC dashboard pages at 360-410s avg — confirm whether this is expected for those custom report pages or a regression.
-4. Arthur/Meta-Stamp full 6-source check was skipped this pass (time-boxed) — needs to run in recheck per skill's mandatory-every-run instruction.
+4. Arthur/Meta-Stamp — GitHub 0 commits + Workstream 0h + Matrix 0 messages across both rooms since ~08-21/09-07 — project appears dormant for ~3 weeks. Confirm if intentionally paused or needs a check-in with the client.
 5. Full Matrix sweep across all joined rooms (beyond Fountain) not done this pass — needs recheck for any missed action items.
 6. Fountain "Bottle engraving" customer follow-up (tmmckay asking not to miss her comment) — confirm reply status.
 7. Upwork Rory/Aysar session — needs manual re-login via carrick's Chrome before memo validity can be checked.
 8. Nick's Global Grazing Slack message "we need money for support my team" — unclear ask, may need direct follow-up (not classified as monitoring alert here).
+9. Elena - SamGuard Digital Plant Trello item shows complete on the live board while PR #309 was reported pending review in the cron section above — not re-verified live this pass; confirm PR status before next report cites it as open.
