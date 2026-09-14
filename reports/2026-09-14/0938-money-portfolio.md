@@ -18,7 +18,7 @@ Gap gross-recon vs headline: 70,299,999.76 ₫ (~0.87%) — consistent with the 
 | VCBS | 669,655,620 | 8.23% | 8.30% | 📈 Investment |
 | VCBF | 594,063,000 | 7.30% | 7.36% | 📈 Investment |
 | vàng | 730,000,000 | 8.97% | 9.05% | 🥇 Gold |
-| Larion cổ phần (carry-forward) | 800,000,000 | 9.83% | 9.92% | 📈 Investment |
+| Larion cổ phần | 800,000,000 | 9.83% | 9.92% | 📈 Investment |
 | FPTS | 381,301,151 | 4.69% | 4.73% | 📈 Investment |
 | Paypal | 91,985,530 | 1.13% | 1.14% | 💵 Liquid |
 | Finhay | 74,404,069 | 0.91% | 0.92% | 📈 Investment |
@@ -62,4 +62,3 @@ Liquid + Savings (semi-liquid): 1,369,202,036 ₫ — vs 6-month expense target 
 - ✅ No single account exceeds 50% net worth (Nhà largest at 30.99%).
 - ✅ Liquid+Savings comfortably above 3× monthly-expense target.
 - ✅ No leverage — VCB visa balance is 0, no active debt.
-- 🟡 Larion cổ phần carry-forward (800M, 9.92% net) remains unconfirmed by live API since 2026-08-26 (now 19 days) — wallet kept permanently inactive by user design; value fixed per prior confirmation, not a current-run issue.

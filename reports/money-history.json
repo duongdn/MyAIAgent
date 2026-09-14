@@ -466,7 +466,7 @@
         "liquid": 166868913
       },
       "method": "reconstructed",
-      "note": "Cach lan chay gan nhat (09-10) 4 ngay, khong co ban ghi 09-11/12/13. MISA totaldashboard 7,268,325,876 + Larion carry-forward 800M (van chua xac nhan, nay 19 ngay ke tu 08-26). Net Worth -4.33M vs 09-10 (8,072,655,419). Sept MTD: Thu 71.28M (Luong 66.9M + Freelancer 3.97M + lai 415K) / Chi 24.58M (Hoc phi/Hieu hi/Suc khoe/Linh tinh) / Net +46.70M. Ke hoach tang co phieu (tu 09-04) VAN CHUA THUC HIEN, diem quyet dinh ke tiep la dao han 10-10. Ghost savings bug nam a 6m (2.0M) van ton tai, da loai khoi tong."
+      "note": "Cach lan chay gan nhat (09-10) 4 ngay, khong co ban ghi 09-11/12/13. MISA totaldashboard 7,268,325,876 + Larion 800M (confirmed final, khong con la open item). Net Worth -4.33M vs 09-10 (8,072,655,419). Sept MTD: Thu 71.28M (Luong 66.9M + Freelancer 3.97M + lai 415K) / Chi 24.58M (Hoc phi/Hieu hi/Suc khoe/Linh tinh) / Net +46.70M. CORRECTION (user 09-14): ke hoach tang co phieu 09-04 DA THUC HIEN (chuyen tu so VCB), co phieu tang deu — bao cao truoc (09-09/09-10) sai khi ket luan 'that bai 2 lan' tu viec so nho tu rollover. Ghost savings bug nam a 6m (2.0M) van ton tai, da loai khoi tong."
     }
   ]
 }

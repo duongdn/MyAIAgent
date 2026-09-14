@@ -177,6 +177,8 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_benchmark_excludes_home_and_prior_report_diff](money-report/feedback_benchmark_excludes_home_and_prior_report_diff.md) — 🔴 benchmark % excludes Nhà from base; Piece 6 must diff vs prior report/plan first
 - [feedback_vcbs_automation_abandoned_use_fpts_pattern_only](money-report/feedback_vcbs_automation_abandoned_use_fpts_pattern_only.md) — ✅ VCBS RESOLVED — headless fetch works via scripts/vcbs-portfolio-report.js once user logs in once (login automation itself still fragile, ask user to do it manually)
 - [reference_finhay_portfolio_script](money-report/reference_finhay_portfolio_script.md) — ✅ Finhay fund NAV auto-fetch live via scripts/finhay-portfolio-report.js (total+PnL only, no itemized funds)
+- [feedback_larion_confirmed_stop_reflagging](money-report/feedback_larion_confirmed_stop_reflagging.md) — 🔴 Larion 800M is FINAL, never re-flag "unconfirmed X days" again
+- [feedback_stock_increase_plan_executed_stop_reflagging](money-report/feedback_stock_increase_plan_executed_stop_reflagging.md) — 🔴 09-04 stock-increase plan already executed (VCB savings→stocks); stop calling small-book auto-rollover a "failed plan"
 
 ## news-digest
 - [feedback_news_digest_full_hallucination_incident](news-digest/feedback_news_digest_full_hallucination_incident.md) — 🔴
