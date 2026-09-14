@@ -63,6 +63,26 @@
 
 ---
 
+## Đối chiếu với dự án Rory (BXR App, Swift Studio) — kinh nghiệm thực tế đã làm với Mindbody
+
+Check lại Matrix room "Rory Hackett - BXR App" + Slack "Swift Studio" thì team mình **đã tích hợp Mindbody thật trong production cho BXR London** — không phải lý thuyết, đây là bằng chứng năng lực thực tế nên đưa thẳng vào buổi nói chuyện với Wildsoul.
+
+**Xác nhận từ chat thật (LuHX, LeNH, KhanhHH — 2026-09-14 sáng nay, khi được hỏi trực tiếp):**
+- LuHX: App BXR dùng rất nhiều API v5. Khi Mindbody thông báo khai tử v5, docs của Mindbody cho v6 không rõ ràng, tự làm không ra — team đã **tạo ticket support với Mindbody**, trao đổi qua email với người tên Jeff bên Mindbody, được họ hướng dẫn cụ thể từng bước (login, update profile...) theo chuẩn v6. → Kinh nghiệm quý: Mindbody support thực sự phản hồi và hướng dẫn kỹ khi mình chủ động hỏi, không phải cứ đoán mù theo docs.
+- LeNH (backend): đã từng tạo ticket riêng cho vấn đề **"Client ID number (client membership number) across multi-regions"** — đúng y hệt bài toán "quyền truy cập đa chi nhánh" (mục D) trong brief Wildsoul — Mindbody đã reply qua email cho Carrick. → Đây là bằng chứng cụ thể nhất: mình **đã từng hỏi Mindbody support đúng chủ đề multi-region member identity** và có phản hồi thật, nên với Wildsoul hoàn toàn có thể lặp lại cách này thay vì đoán.
+- KhanhHH: phần việc của bạn thì không cần ticket hỗ trợ, tự làm được với docs sẵn có.
+
+**Đối chiếu với Slack Swift Studio (lịch sử thật):**
+- **OAuth2 với Mindbody:** Carrick từng hướng dẫn dev cụ thể flow OAuth (`/connect/authorize`, `/connect/token`) theo đúng doc `developers.mindbodyonline.com/.../authentication/oauth` — xác nhận flow OAuth chuẩn dùng được thật, không chỉ trên giấy.
+- **Custom registration/waiver (liên quan mục A — entitlement/eligibility):** Mindbody's registration form **không cho tùy biến** — team đã xử lý bằng cách tự build 1 modal/màn hình riêng ngay sau khi user đăng ký để hiện điều khoản/checkbox, rồi lưu dữ liệu vào **CustomClientFields trên profile Mindbody** (field mở rộng Mindbody cho phép lưu data ngoài chuẩn). → Đây chính là pattern có thể tái dùng cho mục A: khi Mindbody không cho biết trực tiếp lý do fail, có thể lưu thêm metadata chẩn đoán vào CustomClientFields để tra cứu nhanh hơn.
+- **Bug thật liên quan mục A:** log giờ làm của Jeff cho thấy các bug đã từng gặp và fix thật: "Credit Counter Issue", "Reservation History Not Working", "Membership..." — đúng dạng lỗi "member tưởng book được nhưng bị chặn do credit/entitlement" mà Wildsoul đang mô tả. Team đã có kinh nghiệm debug trực tiếp qua Mindbody backend (roryh: "in the back-end of Mindbody, this is what we see") để tìm nguyên nhân — quy trình thủ công tương tự cái Wildsoul đang than phiền, nên mình hiểu rõ nỗi đau này từ kinh nghiệm thật, không phải đoán.
+- **Custom booking flow (liên quan mục C):** đã từng build "Booking Flow – BXR Member Classes" riêng cho app — chứng minh team có kinh nghiệm build UX đặt lịch tùy biến nằm trên nền Mindbody, đúng hướng cần cho kiosk Collective.
+- **Đồng bộ dữ liệu ngoài Mindbody (liên quan mục D/E):** đã làm tích hợp Mindbody ↔ Klaviyo (đồng bộ field 2 chiều) và Mindbody ↔ Twilio (verify số điện thoại + check trùng qua database riêng của mình) — chứng minh team quen làm việc "Mindbody không đủ, phải build thêm lớp dữ liệu/đối chiếu riêng", đúng hướng giải pháp đề xuất cho mục D và E ở trên.
+
+**Kết luận đối chiếu:** Brief Wildsoul không phải bài toán hoàn toàn mới — BXR App đã đụng gần hết các dạng vấn đề tương tự (multi-region member ID, entitlement/credit không rõ lý do fail, custom field mở rộng, custom booking flow, đồng bộ dữ liệu ngoài). Nên đưa case BXR vào buổi họp với Chien/Wildsoul như 1 "case study" chứng minh năng lực thật, đồng thời tận dụng lại đúng những người đã làm (LuHX, LeNH) để ước lượng effort chính xác hơn thay vì ước lượng từ đầu.
+
+---
+
 ## Full English Detail
 
 ### A. Booking Eligibility & Diagnostics
