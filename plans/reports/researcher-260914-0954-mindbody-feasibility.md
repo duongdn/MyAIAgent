@@ -200,7 +200,35 @@ Bug thật: 1 trainer (Monika) không hiện ra dù đang active, vì tổ hợp
 
 Từ danh sách ticket: BXR-7/BXR-37 (Sign in/Up v6, 02/2024) → BXR-72 (App V6 login, 09/2024) → BXR-140 "Review and remove all MindBody v5 on website" (10/2025) — cho thấy quá trình dọn sạch hoàn toàn v5 kéo dài **gần 2 năm** từ lúc bắt đầu chuyển sang v6 tới lúc dọn sạch hết v5 trên web. → Nếu Wildsoul cũng đang dùng phần nào của Mindbody sắp bị deprecate, nên hỏi rõ version hiện tại của họ ngay từ đầu, và không đánh giá thấp thời gian dọn dẹp legacy nếu có.
 
-**Chưa tìm được code repo BXR trong phạm vi GitHub accounts đang cấu hình** (duongdn, nusken) — domain code thật (`dev.bxrlondon.com`) có vẻ do khách/bên khác host riêng, không nằm trong GitHub org NUS quản lý ở đây. Nếu cần xem code thật, phải hỏi trực tiếp Rory/team BXR hoặc kiểm tra xem có repo riêng nào của Carrick/LuHX/LeNH chưa được biết tới.
+~~Chưa tìm được code repo BXR trong phạm vi GitHub accounts đang cấu hình~~ **CẬP NHẬT: đã SSH lên server thật (`rory.cpanel`, source tại `/home/bql6w65kif0q/www/booking/`) và pull code mới nhất về `/home/nus/projects/Rory/code/booking/` (276+ file). Đọc trực tiếp source code thật, không phải suy đoán từ chat nữa.**
+
+---
+
+## 🔑 PHÁT HIỆN QUAN TRỌNG NHẤT — đọc thẳng code kiosk check-in thật của BXR (map trực tiếp vào mục C của Wildsoul)
+
+Đọc trực tiếp 2 file thật trên server: `barcode_reader.php` + `barcode_ajax.php` — đây chính xác là **1 hệ thống kiosk check-in tại chỗ** BXR đã build và đang chạy thật — cùng loại với "Wildsoul Collective" mà Wildsoul mô tả (member tới nơi, quét mã, được nhận diện, vào cửa). Đây là bằng chứng thực chiến mạnh nhất trong toàn bộ report.
+
+**Kiến trúc thật:**
+1. **`barcode_reader.php`** — trang kiosk chạy trên tablet/màn hình tại quầy: dùng thư viện JS mã nguồn mở **QuaggaJS** để bật camera thiết bị, quét mã vạch Code128 real-time (không cần đầu đọc mã vạch chuyên dụng, chỉ cần camera bình thường). Cũng có ô nhập tay (`#search_field`) làm phương án dự phòng nếu quét không được.
+2. Khi quét được mã (chứa Client ID của member), gọi AJAX tới **`barcode_ajax.php`**, file này gọi thẳng Mindbody API:
+   ```
+   POST https://api.mindbodyonline.com/public/v6/client/addarrival
+   Headers: Api-Key, SiteId=427862, Authorization: Bearer <token>
+   Body: { "ClientId": "<id>", "LocationId": "<location>" }
+   ```
+   → **Đây là endpoint Mindbody thật dùng cho check-in ("ghi nhận arrival"), khác với `AddClientToClass` mà báo cáo trước mình suy đoán cho mục C — cần sửa lại: endpoint đúng cho bước "Arrive/nhận diện member" trong flow Wildsoul mô tả chính là `client/addarrival`, không phải endpoint booking lớp.**
+3. Nếu Mindbody trả `ArrivalAdded == 1` → FE hiện màu XANH + chữ "WELCOME", đồng thời gọi tới **1 thiết bị điều khiển cửa/turnstile qua mạng LAN nội bộ**: `GET https://192.168.1.94/api/switch/caps` (địa chỉ IP nội bộ tại chi nhánh — mỗi chi nhánh sẽ có 1 IP thiết bị riêng). Nếu không → hiện màu ĐỎ + "DENIED".
+
+**🔴 Lỗ hổng thật cần cảnh báo rõ với Wildsoul (đây chính là gốc rễ ticket BXR-88 "Access Control - Memberships" mà mình nêu ở trên):**
+Đọc kỹ logic thì `addarrival` **chỉ ghi nhận "có người tới" chứ KHÔNG kiểm tra membership/entitlement của người đó có hợp lệ để vào cửa hay không** — điều kiện mở cửa (WELCOME/xanh) chỉ đơn giản là "gọi addarrival có báo ArrivalAdded=1 hay không", không có bước gọi `GetClientServices` hay kiểm tra gói/quyền truy cập trước khi quyết định mở cửa. Điều này khớp hoàn toàn với than phiền thật trong BXR-88: đội vận hành BXR "cần hiểu/sửa cách memberships hoạt động với door scanner" — tức là bản thân team BXR cũng biết pattern hiện tại chưa thực sự validate quyền truy cập theo membership, mới dừng ở mức "check-in ghi nhận", **chưa đạt tới mức "validate đúng entitlement rồi mới cho vào"** như Wildsoul yêu cầu ở mục C ("hệ thống nên validate/trừ đúng gói và không cho vượt hạn mức").
+
+→ **Với Wildsoul, đây là phần khó nhất thực sự cần làm thêm** (không có sẵn trong pattern BXR đang chạy): phải tự thêm bước gọi `GetClientServices` (lấy entitlement hiện có của member) VÀ áp logic kiểm tra entitlement đó có hợp lệ cho đúng buổi/khu vực Collective hay không, TRƯỚC khi quyết định cho vào — đây là phần NUS phải tự xây thêm, Mindbody không tự làm hộ, và BXR cũng chưa từng làm hoàn chỉnh phần này (ticket vẫn "To Do").
+
+**Gotcha kỹ thuật khác đọc được từ code thật (nên tránh lặp lại khi làm cho Wildsoul):**
+- Hardcode cứng `Api-Key`, `SiteId`, và cả 1 giá trị cookie Cloudflare (`__cflb=...`) ngay trong code PHP — rủi ro bảo mật + khó maintain khi đổi key/site, nên đưa vào config/env khi làm cho Wildsoul thay vì lặp lại pattern này.
+- Đoạn gọi thiết bị cửa (`192.168.1.94`) chạy **từ phía trình duyệt (client-side JS)**, không phải từ server — nghĩa là máy tính chạy kiosk phải cùng mạng LAN với thiết bị điều khiển cửa mới gọi được, và code có đoạn bị comment out/thử nghiệm dở dang (`$.ajax` cũ bị comment, thay bằng `XMLHttpRequest` mới) — dấu hiệu phần tích hợp phần cứng cửa còn đang thử nghiệm/chưa ổn định hoàn toàn, không nên coi đây là "đã xong, cứ copy y chang".
+
+**Kết luận cho mục C:** Wildsoul hoàn toàn có thể có 1 kiosk giống pattern này (QuaggaJS quét mã + gọi `client/addarrival` + tích hợp thiết bị cửa/tablet tại điểm Collective), nhưng phần "validate entitlement trước khi cho vào" — chính là yêu cầu cốt lõi của Wildsoul — **là phần BXR CHƯA làm xong**, nên đây là phần việc thật sự mới, không thể chỉ tái dùng nguyên code cũ, cần ước lượng effort riêng cho đúng.
 
 ---
 
