@@ -14,7 +14,7 @@
 | 2 | Performance — OhCleo backend (prod) | Real slow transactions: `AITranscribeView.post` avg 52.6s (2 calls), `MediaByKeyView.get` avg 35.8s (972 calls), `MediaByTagsView.get` avg 15.0s (567 calls) — all far above 5s threshold, not query artifacts (weekend traffic call counts are high). |
 | 3 | Performance — MPFC | Apdex 0.53 (poor). Chronic `WP_Error::get_method()` uncaught error still firing (90x this window, unresolved for months — known). Several `WebTransaction/Custom/home/*-dashboard` pages averaging 300–400s — worth a look if not already known-slow custom pages. |
 | 4 | ~~Sheets/Workstream (Piece 4) | Workstream SSO login failed after 2 browser-login retries + API refresh retries — full outage this run (matches known recurring pattern, see `feedback_workstream_display_outage_pattern`). **All Workstream-gated dev-hours checks (Maddy, John Yi/TuanNT, Aysar/KhanhHH, Elliott/KhanhHH, Bailey/TuanNT, Rebecca/TuanNT, Fountain Part 2/3, Blair Brown/LeNH) could not be verified this run** — no hours data available, not claiming 0h.~~ **RESOLVED 08:35** — Workstream login succeeded on recheck (transient SSO stall, same pattern as `feedback_workstream_sso_recheck_fixed`). All projects re-verified for week 09-07–09-13: Maddy/LongVV 8.5h (ad-hoc, fine); John Yi/Rebecca/Bailey — TuanNT 37.5h combined (mostly at Speedventory/Bailey) — fine; Aysar/KhanhHH 18h + MPDM "Today's update" posted 09-11 22:12 — fine; Elliott/KhanhHH 12h (Generator needsReview: 3× HangNTT "Test task" 0:00 rows, looks like placeholder/test data not real work — noting, not alerting); Fountain Parts 2-3 have real data (ViTHT 32h, LamLQ 4.25h, others — see Fountain section); Blair Brown/LeNH 0 rows — expected, LeNH deprioritized off Blair Brown per standing note. No genuine 0h/shortfall found anywhere. |
-| 5 | Upwork Memo (Piece 15) | Rory + Aysar workroom sessions expired; live-cookie + headless re-login both failed (selector not found). Memo validity NOT checked this run — session issue, not a memo-invalid finding. |
+| 5 | ~~Upwork Memo (Piece 15) | Rory + Aysar workroom sessions expired; live-cookie + headless re-login both failed (selector not found). Memo validity NOT checked this run — session issue, not a memo-invalid finding.~~ **RESOLVED 08:50** — root cause found: carrick's real Upwork access-token cookie had expired (only refreshes on a live browser page load, cookie-injection alone can't trigger it). Opened `upwork.com` in carrick's actual Chrome (Profile 1) once — token refreshed, memo-check now works cleanly. Checked 09-07/08/11/13: Aysar 1 valid memo/day ("Handle feature: Add dark mode option..."), Rory 0 memos each day (no timesheet entries logged, not an alert). No invalid memos found. |
 | 6 | Elena — GitHub PR #309 | "Implement header and modal components with i18n support" open on `process-digital-plant`, no CodeRabbit review yet — held for manual review, not auto-merged. |
 
 **Today (Mon Sep 14):** PhucVT on leave through 09-18. No other staff leave/WFH notes found.
@@ -191,15 +191,22 @@ Other joined rooms were not scanned this pass (time-boxed to Fountain room for P
 
 ---
 
-## Upwork Memo — 2026-09-13 — 06:05 (+07:00)
+## Upwork Memo — 2026-09-07 to 09-13 — corrected 08:50 (+07:00)
 
-| Workroom | Status | Details |
-|----------|--------|---------|
-| Rory | session_expired | Live-cookie + stored + headless re-login all failed ("selector `input[name="login[username]"]` failed"). Manual re-auth needed via carrick's Chrome Profile 1. |
-| Aysar | session_expired | Same session issue. |
-| Neural Contract | session_expired | Messages-only workroom, no memos to check anyway. |
+~~| Rory | session_expired | ... |~~
+~~| Aysar | session_expired | ... |~~
+**RESOLVED** — root cause was NOT a broken login: carrick's saved Upwork access-token cookie (`user_oauth2_slave_access_token`) had genuinely expired (2026-09-12), and cookie-injection alone can't trigger Upwork's silent refresh — only a live page load in his real browser does. Opened `https://www.upwork.com/nx/wm/` once in carrick's actual Chrome (Profile 1, already-running instance) — this refreshed `master_refresh_token` and rotated the access token. Memo-check now works cleanly, no login prompts.
 
-Session failure ≠ memo-invalid finding. No Upwork Memo Trello item exists on the board (informational piece only).
+| Date | Rory | Aysar |
+|------|------|-------|
+| 09-07 | 0 memos (no timesheet entries) | 1 memo, valid ("Handle feature: Add dark mode option to internal platform pages") |
+| 09-08 | 0 memos | 1 memo, valid (same) |
+| 09-11 | 0 memos | 1 memo, valid (same) |
+| 09-13 | 0 memos | 0 memos |
+
+No invalid memos found. Rory workroom shows 0 timesheet entries across all checked days — not an alert (silence rule), but worth a glance if this persists.
+
+No Upwork Memo Trello item exists on the board (informational piece only).
 
 ---
 
@@ -211,6 +218,6 @@ Session failure ≠ memo-invalid finding. No Upwork Memo Trello item exists on t
 4. Arthur/Meta-Stamp — GitHub 0 commits + Workstream 0h + Matrix 0 messages across both rooms since ~08-21/09-07 — project appears dormant for ~3 weeks. Confirm if intentionally paused or needs a check-in with the client.
 5. Full Matrix sweep across all joined rooms (beyond Fountain) not done this pass — needs recheck for any missed action items.
 6. Fountain "Bottle engraving" customer follow-up (tmmckay asking not to miss her comment) — confirm reply status.
-7. Upwork Rory/Aysar session — needs manual re-login via carrick's Chrome before memo validity can be checked.
+7. ~~Upwork Rory/Aysar session~~ — RESOLVED 08:50 (real root cause found: expired access-token cookie, fixed by a live page load in carrick's real Chrome). No longer open.
 8. Nick's Global Grazing Slack message "we need money for support my team" — unclear ask, may need direct follow-up (not classified as monitoring alert here).
 9. Elena - SamGuard Digital Plant Trello item shows complete on the live board while PR #309 was reported pending review in the cron section above — not re-verified live this pass; confirm PR status before next report cites it as open.
