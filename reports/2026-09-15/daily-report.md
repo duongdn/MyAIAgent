@@ -1,8 +1,8 @@
 # Daily Report — 2026-09-15 (Tuesday)
 
-**Run:** 2026-09-15T05:00:00+07:00 (cron)
+**Run:** 2026-09-15T05:00:00+07:00 (cron), corrected 08:50 (+07:00)
 **Window:** 2026-09-14T08:35:00+07:00 → 2026-09-15T05:00:00+07:00
-**Leave plan:** not checked this run (leave-email parse skipped — time-boxed)
+**Leave plan:** refreshed 08:32 — PhucVT full-day leave 2026-09-07→09-18 (covers today + yesterday, "việc cá nhân"). No one else on leave.
 
 ---
 
@@ -10,12 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Workstream | SSO login failing again — both API refresh and visible-browser (`workstream-login.js`) attempts timed out. Blocks all task-log hour verification (Maddy, John Yi, Aysar, Elliott, James Diamond, Rebecca, Bailey/TuanNT, Fountain Part 2/3). Recurring outage, root cause still open (see memory). |
+| 1 | ~~Workstream~~ | ~~SSO login failing again — both API refresh and visible-browser (`workstream-login.js`) attempts timed out. Blocks all task-log hour verification.~~ **CORRECTED 08:50: retried `DISPLAY=:1 workstream-login.js`, succeeded on first attempt (transient SSO, not a persistent outage). All hours below now verified live.** |
 | 2 | Bailey (Matrix, internal) | Grazing Software CR fixed-cost task est 14.5h, actual 26h+, dev (tuannt) didn't flag overrun proactively. DuongDN already addressed directly in "NUS - Bailey - Paturevision 2026" room 11:22-14:02 — process tightening in progress, no action needed from this report. |
 | 3 | Elena-SamGuard GitHub | PR #309 ("Implement header and modal components with i18n support") open since 2026-08-11, >1 month stale. Elena is on the paused/Ignore List so not gated, flagging for visibility only. |
 | 4 | MPFC New Relic | Apdex 0.52 (poor), chronic. New SQLi `WAITFOR DELAY` probe on `/search/` (38.4s response) — same recurring probe pattern as prior reports, not a new vector. |
+| 5 | Workstream — KhanhHH (added 08:50) | 0h logged 2026-09-14 across ALL live Workstream projects (Baamboozle/Aysar, Generator/Elliott, and every other visible project) — no leave on file. Blocks Aysar + Elliott Trello items. |
+| 6 | Workstream — LeNH (added 08:50) | 0h logged 2026-09-14 across ALL live Workstream projects (James Diamond/Portfolio, Blair Brown, and every other visible project) — no leave on file. Upwork Rory/Aysar workrooms also show 0 memos same day (consistent). Blocks James Diamond + Blair Brown items — reverses cron's earlier James Diamond ✓ (see Discord section). |
 
-**Today (Tue Sep 15):** Leave plan not refreshed this run — see Unresolved Questions.
+**Today (Tue Sep 15):** PhucVT on approved full-day leave (2026-09-07→09-18). No one else on leave.
 
 ---
 
@@ -76,17 +78,24 @@ No alerts. Trello: Ohcleo ✓ complete.
 | AirAgri (nusvinn) | ~15 in #airagri-flutter | Jeff's daily report present (01:37: "continue working on Property Map tasks"). Active offline-sync testing thread between bellatric02/jeff_trinh — Incident module sync bug found then fixed, TestFlight builds shipped. James Diamond (.jdiamond) asking about upload robustness. |
 | Bizurk (nuscarrick) | 0 | No messages, no Andrew DMs |
 
-Trello: James Diamond ✓ complete (active discord testing, no blockers). Andrew Taraba ✓ complete.
+Trello: ~~James Diamond ✓ complete (active discord testing, no blockers).~~ **CORRECTED 08:50: James Diamond gate = LeNH Workstream hours (not Discord activity, per [[feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt]]) — LeNH shows 0h 09-14, no leave → ⚠️ left incomplete.** Andrew Taraba ✓ complete.
 
 ---
 
-## Sheets / Workstream — all developers — 05:20 (+07:00)
+## Sheets / Workstream — all developers — 05:20 (+07:00), corrected 08:50 (+07:00)
 
-🔴 **Workstream SSO is down this run** — both API token refresh and visible-browser login (`DISPLAY=:1 node scripts/workstream-login.js`) timed out after 2 attempts each. Since all task-log hours moved off Google Sheets to Workstream (2026-08-21), there is no fallback source for most projects — LongVV, PhucVT, TuanNT, KhanhHH, LeNH hours for 2026-09-14 could not be verified this run.
+~~Workstream SSO down — hours unverified.~~ **CORRECTED: retried login, succeeded. Live data for 2026-09-14 (Monday) across all visible Workstream projects:**
 
-Maddy JIRA weekly cross-check: not run this pass (depends on Workstream-updated script — time-boxed).
+| Developer | Project(s) w/ hours 09-14 | Total | Status |
+|-----------|---------------------------|-------|--------|
+| TuanNT | Speedventory (Bailey): 4h+0.5h+3.5h | 8h | OK — covers John Yi/Rebecca/Bailey gates |
+| LongVV | Maddy: 0h (ad-hoc, no target) | — | informational only, no alert |
+| PhucVT | — (on leave) | — | leave, no alert |
+| **KhanhHH** | none found (Baamboozle/Aysar, Generator/Elliott, + all other live projects checked) | **0h** | ⚠️ **ALERT — no leave on file** |
+| **LeNH** | none found (James Diamond/Portfolio, Blair Brown, + all other live projects checked) | **0h** | ⚠️ **ALERT — no leave on file** |
 
-**Action needed:** retry Workstream login manually (outside cron window) or via recheck pass later today.
+Maddy JIRA weekly cross-check (`maddy-jira-tasklog-check.js --week 2026-09-14`): "No Workstream entries this week" — consistent with LongVV's 0h/ad-hoc status, not itself an alert.
+Bitbucket PR check (Maddy part 4): Atlassian app-password token → `401` (dead, needs re-creation) — could not verify Xtreme/RMS PR reply-rate this run.
 
 ---
 
@@ -100,15 +109,15 @@ Maddy JIRA weekly cross-check: not run this pass (depends on Workstream-updated 
 
 **Part 1 — Matrix Plan** (room `!EWnVDAxbTGsBxPkaaI`): trinhmtt posted this week's plan 08:57 — ViTHT: 40h, ThinhT: 20h, DatNT: 40h => QC 25h.
 
-**Part 2 — Task Log Actuals:** blocked by Workstream outage (project `fountain`, primary source since 2026-07-13).
+**Part 2 — Task Log Actuals (corrected 08:50, WS retry succeeded):** Monday 09-14 actuals — DatNT 3.75h, ThinhT 4h, HungPN(QC) 1.25h, ViTHT 0h so far. Week just started (Mon-only data), not a shortfall signal yet.
 
-**Part 3 — Plan vs Actual:** blocked, same reason.
+**Part 3 — Plan vs Actual:** Plan (Matrix): ViTHT 40h/wk, ThinhT 20h/wk, DatNT 40h/wk => QC 25h/wk. Monday actuals are well within pace for a 6-day work week — no concern.
 
-**Trello board (customer comments/stuck cards):** not run this pass — time-boxed.
+**Trello board (customer comments/stuck cards):** still not run — Rick's account/board (`5475eaf923a9a1309357eb51`) needs separate Trello token not present in `config/.trello-config.json` (that file is the "My Task" board only). Needs manual setup — see Unresolved Questions.
 
 Additional context from Matrix "Kunal - Fountain" room: active dev work — fixed broken `/FAQ` link casing, BE card pushed live, ongoing discussion re: Rollbar bug backlog prioritization and ReviewIO integration for customer review-widget request. No unanswered customer asks observed.
 
-Trello: Fountain ⚠️ left incomplete — Parts 2/3 blocked by Workstream outage.
+Trello: Fountain ⚠️ left incomplete — Parts 2/3 now clean, but Trello board (customer comments/stuck cards) still not checked.
 
 ---
 
@@ -126,11 +135,15 @@ Trello: Elena - SamGuard ✓ auto-complete (Ignore List — paused). Elena - Wor
 
 **Check mail:** all 6 items (DuongDn, Carrick, Nick, Rick, Kai, Ken) ✓ complete — card marked done.
 
-**Check progress:**
-- ✓ complete: Franc, Rory, MPFC, Marcel, Raymond, Neural Contract (silence=no alert per standing rule), Andrew Taraba, Colin, Ohcleo, James Diamond
+**Check progress — corrected 08:50 (+07:00) after Workstream retry succeeded:**
+- ✓ complete: Franc, Rory, MPFC, Marcel, Raymond, Neural Contract (silence=no alert per standing rule), Andrew Taraba, Colin, Ohcleo, ~~James Diamond~~ (reverted, see below)
+- ✓ complete (newly, 08:50 — WS hours verified): Maddy (0h ad-hoc, no alert), John Yi (TuanNT 8h combined via Speedventory), Bailey (TuanNT 8h + Nick's daily report present in Slack), Rebecca (TuanNT combined hours OK)
 - ✓ auto-complete (Ignore List — paused, no gate check): Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde
-- ⚠️ left incomplete (Workstream outage blocks hour verification): Maddy, John Yi, Aysar, Elliott, Bailey, Rebecca, Fountain
-- ⚠️ left incomplete (not run this pass, time-boxed): Philip, Elena - WordPress SamGuard
+- ⚠️ left incomplete (KhanhHH 0h 09-14, no leave): Aysar, Elliott
+- ⚠️ left incomplete (LeNH 0h 09-14, no leave — reverted from cron's incorrect ✓): James Diamond
+- ⚠️ left incomplete (Fountain Trello board not checked — Rick's separate board token missing): Fountain
+- ⚠️ left incomplete (config/.msteams-accounts.json missing entirely — not a token expiry, needs setup): Philip
+- ⚠️ left incomplete (not run this pass, time-boxed): Elena - WordPress SamGuard
 
 ## Ignore List — 05:30 (+07:00)
 Not tracked (paused), auto-completed: Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde. (Colin and Philip remain active/monitored per current ignore-list config — Colin checked above; Philip not run this pass.)
@@ -196,9 +209,9 @@ No Trello item exists for Performance (informational only).
 
 ---
 
-## Upwork Memo — not run this pass — 05:40 (+07:00)
+## Upwork Memo — 08:50 (+07:00), corrected
 
-Time-boxed out this run due to Workstream outage consuming the retry budget. Matrix "Direct Manager" room shows internal awareness already in progress (namtv/minhtv reviewing Rory memo quality live) — see Matrix section above.
+~~Not run this pass.~~ **Run 08:50:** Rory + Aysar workrooms both show 0 memos for 2026-09-14 (`source: none`) — consistent with LeNH's 0h Workstream day found above, not a separate memo-quality issue. No invalid memos to flag. Matrix "Direct Manager" room shows internal awareness already in progress (namtv/minhtv reviewing Rory memo quality live) — see Matrix section above.
 
 ---
 
@@ -210,8 +223,9 @@ On paused Ignore List — auto-completed without gate check per standing instruc
 
 ## Unresolved Questions
 
-1. Workstream SSO outage — needs manual re-login outside cron window (visible browser, `DISPLAY=:1 node scripts/workstream-login.js`) before Maddy/John Yi/Aysar/Elliott/James Diamond/Rebecca/Bailey/Fountain hours can be verified. Recommend a recheck pass once resolved.
-2. Leave plan was not refreshed this run (`parse-leave-emails.js` not run, time-boxed) — unknown if anyone is on leave today (Tue Sep 15).
-3. Philip (MS Teams) and Elena - WordPress SamGuard checks not run this pass — need recheck.
-4. Fountain Trello board (customer comments/stuck cards) not checked this pass.
-5. Upwork Memo validation (Piece 15) not run this pass.
+1. ~~Workstream SSO outage~~ — RESOLVED 08:50, single retry succeeded (transient, not persistent). Surfaced two real alerts: KhanhHH and LeNH both 0h on 2026-09-14, no leave on file — ask them directly if not resolved by next check.
+2. ~~Leave plan not refreshed~~ — RESOLVED 08:32, refreshed. PhucVT confirmed on approved leave through 09-18.
+3. Elena - WordPress SamGuard JS-error check still not run — needs a recheck pass.
+4. Fountain Trello board (customer comments/stuck cards, Rick's separate "Web Development" board) still not checked — `config/.trello-config.json` only covers the "My Task" board; need Rick's board key/token added before this can be automated.
+5. Philip (MS Teams) check is structurally blocked — `config/.msteams-accounts.json` does not exist in the repo at all (not an expired token, a missing setup step). Needs the account credentials created/decrypted before this piece can ever run.
+6. Bitbucket token for Maddy Part 4 (PR reply-rate) returns 401 — needs a fresh Atlassian app password with Bitbucket scope.

@@ -76,6 +76,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_lenh_james_diamond_blair_brown_deprioritized](daily-report/sheets/feedback_lenh_james_diamond_blair_brown_deprioritized.md) — 🔴 2026-08-21: LeNH=James full-time, ignore Blair Brown 0h for now
 - [feedback_verify_workstream_zero_hours_before_alerting](daily-report/sheets/feedback_verify_workstream_zero_hours_before_alerting.md) — 🔴🔴🔴 2026-08-25: false LeNH 0h alert from stale/misread data, re-verify fresh before ANY 0h claim
 - [feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt](daily-report/sheets/feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt.md) — 🔴🔴🔴 3rd recurrence: James Diamond gate = LeNH not PhucVT, skill table is stale, memory wins
+- [feedback_20260915_recheck_findings](daily-report/sheets/feedback_20260915_recheck_findings.md) — 🔴 real KhanhHH+LeNH 0h 09-14; 3 structural gaps: Philip config missing, Fountain customer board no token, Bitbucket Maddy token 401
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
