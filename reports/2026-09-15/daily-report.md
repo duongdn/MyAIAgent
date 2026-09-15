@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-15 (Tuesday)
 
-**Run:** 2026-09-15T05:00:00+07:00 (cron), corrected 08:50 (+07:00)
+**Run:** 2026-09-15T05:00:00+07:00 (cron), corrected 08:50 (+07:00), reminders sent 08:58 (+07:00)
 **Window:** 2026-09-14T08:35:00+07:00 → 2026-09-15T05:00:00+07:00
 **Leave plan:** refreshed 08:32 — PhucVT full-day leave 2026-09-07→09-18 (covers today + yesterday, "việc cá nhân"). No one else on leave.
 
@@ -14,8 +14,8 @@
 | 2 | Bailey (Matrix, internal) | Grazing Software CR fixed-cost task est 14.5h, actual 26h+, dev (tuannt) didn't flag overrun proactively. DuongDN already addressed directly in "NUS - Bailey - Paturevision 2026" room 11:22-14:02 — process tightening in progress, no action needed from this report. |
 | 3 | Elena-SamGuard GitHub | PR #309 ("Implement header and modal components with i18n support") open since 2026-08-11, >1 month stale. Elena is on the paused/Ignore List so not gated, flagging for visibility only. |
 | 4 | MPFC New Relic | Apdex 0.52 (poor), chronic. New SQLi `WAITFOR DELAY` probe on `/search/` (38.4s response) — same recurring probe pattern as prior reports, not a new vector. |
-| 5 | Workstream — KhanhHH (added 08:50) | 0h logged 2026-09-14 across ALL live Workstream projects (Baamboozle/Aysar, Generator/Elliott, and every other visible project) — no leave on file. Blocks Aysar + Elliott Trello items. |
-| 6 | Workstream — LeNH (added 08:50) | 0h logged 2026-09-14 across ALL live Workstream projects (James Diamond/Portfolio, Blair Brown, and every other visible project) — no leave on file. Upwork Rory/Aysar workrooms also show 0 memos same day (consistent). Blocks James Diamond + Blair Brown items — reverses cron's earlier James Diamond ✓ (see Discord section). |
+| 5 | Workstream — KhanhHH | ~~0h logged 2026-09-14 across ALL live Workstream projects — no leave on file. Blocks Aysar + Elliott Trello items.~~ **08:58: re-verified still 0h (no new log), no leave. Reminder sent to Matrix room `!rwLbvLBnrRAYMaOPaD:nustechnology.com`. Aysar + Elliott items now ✓ complete (reminder sent = action taken, per standing rule).** |
+| 6 | Workstream — LeNH | ~~0h logged 2026-09-14 across ALL live Workstream projects — no leave on file. Blocks James Diamond + Blair Brown items.~~ **08:58: re-verified still 0h (no new log), no leave. Reminder sent to Matrix room `!OIrgPraJWrcDTnRVLQ:nustechnology.com`. James Diamond item now ✓ complete (reminder sent = action taken). Blair Brown stays on Ignore List, no gate check.** |
 
 **Today (Tue Sep 15):** PhucVT on approved full-day leave (2026-09-07→09-18). No one else on leave.
 
@@ -80,7 +80,7 @@ No alerts. Trello: Ohcleo ✓ complete.
 | AirAgri (nusvinn) | ~15 in #airagri-flutter | Jeff's daily report present (01:37: "continue working on Property Map tasks"). Active offline-sync testing thread between bellatric02/jeff_trinh — Incident module sync bug found then fixed, TestFlight builds shipped. James Diamond (.jdiamond) asking about upload robustness. |
 | Bizurk (nuscarrick) | 0 | No messages, no Andrew DMs |
 
-Trello: ~~James Diamond ✓ complete (active discord testing, no blockers).~~ **CORRECTED 08:50: James Diamond gate = LeNH Workstream hours (not Discord activity, per [[feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt]]) — LeNH shows 0h 09-14, no leave → ⚠️ left incomplete.** Andrew Taraba ✓ complete.
+Trello: ~~James Diamond ✓ complete (active discord testing, no blockers).~~ **08:50: James Diamond gate = LeNH Workstream hours (not Discord activity, per [[feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt]]) — LeNH 0h 09-14, no leave.** **08:58: reminder sent to LeNH (see Reminders section) → James Diamond ✓ complete.** Andrew Taraba ✓ complete.
 
 ---
 
@@ -93,8 +93,8 @@ Trello: ~~James Diamond ✓ complete (active discord testing, no blockers).~~ **
 | TuanNT | Speedventory (Bailey): 4h+0.5h+3.5h | 8h | OK — covers John Yi/Rebecca/Bailey gates |
 | LongVV | Maddy: 0h (ad-hoc, no target) | — | informational only, no alert |
 | PhucVT | — (on leave) | — | leave, no alert |
-| **KhanhHH** | none found (Baamboozle/Aysar, Generator/Elliott, + all other live projects checked) | **0h** | ⚠️ **ALERT — no leave on file** |
-| **LeNH** | none found (James Diamond/Portfolio, Blair Brown, + all other live projects checked) | **0h** | ⚠️ **ALERT — no leave on file** |
+| **KhanhHH** | none found (Baamboozle/Aysar, Generator/Elliott, + all other live projects checked) | **0h** | ⚠️ reminder sent 08:58, gate items completed |
+| **LeNH** | none found (James Diamond/Portfolio, Blair Brown, + all other live projects checked) | **0h** | ⚠️ reminder sent 08:58, gate items completed |
 
 Maddy JIRA weekly cross-check (`maddy-jira-tasklog-check.js --week 2026-09-14`): "No Workstream entries this week" — consistent with LongVV's 0h/ad-hoc status, not itself an alert.
 Bitbucket PR check (Maddy part 4): Atlassian app-password token → `401` (dead, needs re-creation) — could not verify Xtreme/RMS PR reply-rate this run.
@@ -141,8 +141,8 @@ Trello: Elena - SamGuard ✓ auto-complete (Ignore List — paused). Elena - Wor
 - ✓ complete: Franc, Rory, MPFC, Marcel, Raymond, Neural Contract (silence=no alert per standing rule), Andrew Taraba, Colin, Ohcleo, ~~James Diamond~~ (reverted, see below)
 - ✓ complete (newly, 08:50 — WS hours verified): Maddy (0h ad-hoc, no alert), John Yi (TuanNT 8h combined via Speedventory), Bailey (TuanNT 8h + Nick's daily report present in Slack), Rebecca (TuanNT combined hours OK)
 - ✓ auto-complete (Ignore List — paused, no gate check): Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde
-- ⚠️ left incomplete (KhanhHH 0h 09-14, no leave): Aysar, Elliott
-- ⚠️ left incomplete (LeNH 0h 09-14, no leave — reverted from cron's incorrect ✓): James Diamond
+- ✓ complete (08:58 — KhanhHH re-verified still 0h, reminder sent, per standing rule reminder=action taken): Aysar, Elliott
+- ✓ complete (08:58 — LeNH re-verified still 0h, reminder sent, per standing rule reminder=action taken): James Diamond
 - ⚠️ left incomplete (Fountain Trello board not checked — Rick's separate board token missing): Fountain
 - ⚠️ left incomplete (config/.msteams-accounts.json missing entirely — not a token expiry, needs setup): Philip
 - ⚠️ left incomplete (not run this pass, time-boxed): Elena - WordPress SamGuard
@@ -152,9 +152,13 @@ Not tracked (paused), auto-completed: Elena - SamGuard, Arthur - Meta-Stamp, Bla
 
 ---
 
-## Reminders — 05:32 (+07:00)
+## Reminders — 05:32 (+07:00), sent 08:58 (+07:00)
 
-Not run — depends on Workstream/Sheets 0h data which is unavailable this run (SSO outage). No reminders printed or sent.
+~~Not run — Workstream unavailable.~~ **08:58: re-verified KhanhHH and LeNH both still 0h on 2026-09-14 (no new task-log entries since cron, no leave). Sent:**
+- KhanhHH → Matrix `!rwLbvLBnrRAYMaOPaD:nustechnology.com`: "Hi KhanhHH, task log for 2026-09-14 is missing (0h logged). Please update when you can. Thanks!" ✅ sent
+- LeNH → Matrix `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-09-14 is missing (0h logged). Please update when you can. Thanks!" ✅ sent
+
+Per explicit user instruction 2026-09-15: once a reminder is sent for a 0h/missing-task-log gate, the blocked Trello item(s) are marked complete immediately (reminder = the action, not the fix) — applied to Aysar, Elliott (KhanhHH gate) and James Diamond (LeNH gate) above, and going forward for any future item blocked purely on a task-log/0h reason.
 
 ---
 
