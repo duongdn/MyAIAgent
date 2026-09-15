@@ -33,8 +33,10 @@
 | ken@nustechnology.com | 80 (GitHub notification noise — Welligence/Precognize/mimaizumi repos, dependabot) | 2 events: 08:30 DE Daily Standup, 09:00 DE Tech Talks |
 | vuongtrancr@gmail.com | 20 (mostly "Signal lost" New Relic Incident Intelligence noise for Swish) | — |
 | dnduongus@gmail.com | 21 (personal newsletters/banking, no security alerts) | — |
-| davidztv19@gmail.com | 0 | — |
 | freelancer@mypersonalfootballcoach.com | 8 (Rollbar: 3 new prod errors #59-61 — `mm_get_setting()` undefined, `_get_option()` on null x2 — chronic-pattern errors, no new class) | — |
+
+**Pending — no monitor (Arthur/Meta-Stamp paused per Ignore List):**
+| davidztv19@gmail.com | 0 | — |
 
 No unread security alerts, no unanswered customer asks found in any Zoho/Gmail account this window.
 Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken ✓ complete (card marked done).
