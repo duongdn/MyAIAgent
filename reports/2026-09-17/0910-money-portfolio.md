@@ -21,8 +21,9 @@ Note: gross-sum (8.143B) vs authoritative net worth (8.071B) differ by ~72M — 
 | FPTS (cost-basis+current) | 381,301,151 | 📈 Investment |
 | Finhay (cost-basis+current) | 74,404,069 | 📈 Investment |
 | Sổ tiết kiệm (8 sổ active) | 1,204,350,315 | 🏦 Savings |
-| vcb | 20,751,805 | 💵 Liquid |
 | Paypal (convert) | 92,232,140 | 💵 Liquid |
+| Tikop | 40,624,366 | 💵 Liquid |
+| vcb | 20,751,805 | 💵 Liquid |
 | Ví | 4,850,000 | 💵 Liquid |
 | Momo | 900,000 | 💵 Liquid |
 | nam á | 10,867 | 💵 Liquid |
