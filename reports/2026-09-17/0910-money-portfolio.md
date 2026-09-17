@@ -14,7 +14,7 @@ Note: gross-sum (8.143B) vs authoritative net worth (8.071B) differ by ~72M — 
 |---------|------------|----------|
 | Nhà | 2,500,000,000 | 🏠 Real Estate |
 | long an res | 1,020,000,000 | 🏠 Real Estate |
-| Larion cổ phần (manual carry-fwd) | 800,000,000 | 📈 Investment |
+| Larion cổ phần (fixed) | 800,000,000 | 📈 Investment |
 | vàng (50 chỉ) | 732,500,000 | 🥇 Gold |
 | VCBS (cost-basis+current) | 677,155,620 | 📈 Investment |
 | VCBF (cost-basis+current) | 594,063,000 | 📈 Investment |

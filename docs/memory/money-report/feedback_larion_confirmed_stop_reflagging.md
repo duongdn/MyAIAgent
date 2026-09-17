@@ -17,3 +17,5 @@ User corrected 2026-09-14 ("má, đã nói nhiều lần Larion OK rồi... mà 
 - Do NOT count "days since 08-26" or mention "chưa xác nhận" / "cần re-confirm" anywhere (portfolio, allocation, review risks, dashboard highlights, recommendations, open questions).
 - Only revisit this number if the user explicitly gives a new value.
 - Retroactively: strike this line from any report/dashboard still open from today's run.
+
+**Recurrence (2026-09-17):** Violated again — re-flagged Larion as "23+ ngày chưa re-verify" across all 5 report pieces + dashboard in a fresh session despite this memory existing. Root cause: memory wasn't consulted before writing report content. Fix applied: rule now also baked directly into `.claude/commands/me/money-report.md` (injected every run, like the Piece 7 dashboard-mandatory fix) — do not rely on memory recall alone for this one.

@@ -16,7 +16,7 @@ Base tính % = 5,643,139,668 ₫ (gross 8,143,139,668 − Nhà 2,500,000,000)
 - Fund (VCBF): 594,063,000 ₫ (toàn bộ cost-basis, chưa redeem)
 - Cổ tức (FPTS) — VEA/ADP/ETF: 381,301,151 ₫ (cost-basis remaining 381.12M + current 185K)
 - Fund (Finhay): 74,404,069 ₫ (toàn bộ cost-basis)
-- Larion cổ phần (manual, ngoài MISA): 800,000,000 ₫
+- Larion cổ phần (fixed, confirmed): 800,000,000 ₫
 
 ## Visual ASCII bar chart
 ```
@@ -49,7 +49,6 @@ Tiền mặt           ███                                               2
 - Savings: 1,204,350,315 vs 1,204,350,315 → không đổi (không có sổ mới/đáo hạn trong 2 ngày).
 - Liquid: 159,365,513 vs 118,994,812 → +40,370,701 (Freelancer income 09-04 vào Paypal + ít chi tiêu hơn).
 - Gold: 732,500,000 vs 728,000,000 → +4,500,000 (giá vàng tăng).
-- Plan cũ "xác nhận lại giá trị Larion" (mở từ 09-14) — VẪN CHƯA THỰC HIỆN, carry forward tiếp (nay đã +23 ngày kể từ 08-26).
 - Plan cũ "đóng sổ ghost nam á 6m" — VẪN CHƯA THỰC HIỆN, carry forward (2,005,479 ₫, đáo hạn 2024-06-01).
 
 ### 1. Điểm mạnh
@@ -62,7 +61,6 @@ Tiền mặt           ███                                               2
 ### 2. Rủi ro
 | Rủi ro | Mức độ | Ghi chú |
 |--------|--------|---------|
-| Larion carry-fwd chưa xác nhận | 🟡 | 9.9% net worth dựa trên ước tính cũ 23+ ngày — cần re-verify |
 | Ghost saving "nam á 6m" treo | 🟢 | 2M ₫, không đáng kể, nên dọn |
 | BĐS (Nhà+long an res) = 43.2% gross | 🟡 | phần lớn Nhà non-tradeable; long an res riêng chỉ 18.1% base |
 | Tiền mặt thấp (2.8% base) | 🟢 | bù bởi tiết kiệm bán thanh khoản 21.3% |
@@ -78,11 +76,10 @@ Tiền mặt           ███                                               2
 
 ### 4. Upcoming decisions (90 ngày)
 - 3 sổ đáo hạn trong 30 ngày (~612M): sổ 22/09 (10M), 2 sổ 10/10 (~200M), sổ 13/10 (402M).
-- Larion cổ phần cần re-verify giá trị (đã 23 ngày chưa cập nhật).
 
 ### 5. Khuyến nghị
-- Ngắn hạn (30 ngày): xác nhận lại giá trị Larion; dọn sổ "nam á 6m" ghost đã đáo hạn 2024.
+- Ngắn hạn (30 ngày): dọn sổ "nam á 6m" ghost đã đáo hạn 2024.
 - Trung hạn (6-12 tháng): khi 3 sổ đáo hạn tới, cân nhắc chuyển một phần vào cổ phiếu/ETF hoặc long an res-type asset để kéo BĐS-đầu-tư về gần benchmark.
 - Dài hạn (>1 năm): duy trì DCA, theo dõi Larion vì kém thanh khoản nhất trong danh mục.
 
-**Unresolved:** Larion 800M carry-forward chưa re-verify (23 ngày); ghost saving nam á 6m chưa đóng.
+**Unresolved:** ghost saving nam á 6m chưa đóng.

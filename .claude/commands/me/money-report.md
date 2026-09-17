@@ -24,6 +24,8 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 
 🔴🔴🔴 **MANDATORY, every `/money-report` full run — NO EXCEPTIONS:** produce BOTH `reports/{YYYY-MM-DD}/money-dashboard.html` AND append a snapshot to `reports/money-history.json`, in the SAME turn as the 5 markdown pieces below. This has been missed FOUR times (2026-07-06, 07-07, 07-09, 07-14) because it lived only in memory, not in this file — memory recall is not reliable enough for this, so it is now written directly here. See Piece 7 below for the exact spec. Do not skip this even if the user doesn't mention it.
 
+🔴🔴🔴 **Larion cổ phần = 800,000,000 ₫, PERMANENTLY FINAL. NEVER re-flag as unconfirmed/pending/needs re-verify.** User confirmed this repeatedly (2026-08-26, 08-28, and again 09-14 after being asked to stop) and got visibly annoyed on 2026-09-17 that it was STILL being re-flagged after that. Use 800,000,000 silently in every report/dashboard/risk-list/recommendation, exactly like any other stable account (Nhà, long an res). The wallet is kept permanently `inActive` by design — that is NOT a data-quality issue. Do not count "days since confirmation." Only change the number if the user gives an explicit new value.
+
 | Command | What it does | Output file |
 |---------|-------------|-------------|
 | `/money-report` | Full run — all 5 reports + dashboard (Piece 7) | portfolio + allocation + debt + transactions + review + dashboard.html + history.json |
