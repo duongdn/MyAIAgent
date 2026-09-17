@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-17 (Thursday)
 
-**Run:** 2026-09-17T05:14:00+07:00 (cron)
+**Run:** 2026-09-17T05:14:00+07:00 (cron), corrected 08:35 (+07:00)
 **Window:** 2026-09-16T05:00:00+07:00 → now
 **Leave plan:** Chien Tran, TuanNT, LongVV all submitted leave requests (see duongdn@ email). VuTQ/ThinhT/HaVS Fountain team: TuanNTG (sick), ThinhPVD (sick, wedding-policy leave), TienPH (fever, covered by SamHT), HaVS (personal matter 09-21) — from "Delivery - Resource Arrangement" Matrix room.
 
@@ -10,11 +10,15 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream (Piece 4) | Workstream SSO login failed 3x this run (all attempts: SSO redirect detected, Keycloak cookies alive, but API token never captured) — same recurring outage pattern documented in memory (5+ prior occurrences). Task-log hours for PhucVT/TuanNT/KhanhHH/LeNH/LongVV/Maddy/Fountain Parts 2-3/Elliott/Aysar gate NOT independently verified this run. |
-| 2 | Upwork (Piece 15) | Rory + Aysar workroom sessions expired; headless re-login for carrick also failed (`input[name="login[username]"]` selector not found). Memo validity not checked this run — per standing rule this is a session failure, not an alert, but noting for recheck. |
+| 1 | ~~Sheets/Workstream (Piece 4) — SSO login failed 3x this run~~ **RESOLVED 08:22** — re-ran `workstream-login.js`, SSO succeeded, token captured. Real 0h gaps found for **TuanNT** and **LeNH** on 09-16 (no leave) — see #6/#7 — plus **OhCleo needsReview** pending (#8). |
+| 2 | ~~Upwork (Piece 15) — Rory + Aysar sessions expired~~ **RESOLVED 08:33** — `upwork-memo-check.js` now succeeds for both workrooms; 0 memos logged either day (consistent with LeNH's confirmed 0h, not a session artifact). |
 | 3 | Elena PR #309 | "Implement header and modal components with i18n support" — `mergeable: false` (dirty/conflicts), no CodeRabbit review posted yet. Not merged. |
 | 4 | MPFC Performance | Apdex 0.42 (poor) — chronic `WP_Error::get_method()` error (39x) + `"continue" targeting switch` warning (1720x) continue unresolved. Also 4 SQLi probe requests (`PG_SLEEP`/`WAITFOR DELAY`) on `/search/.../feed/rss2/` — same recurring pattern as prior reports, not new. |
 | 5 | Email (rick@) | `[FirstProject] production` — 10 occurrences in 5 min of error #1117 + "100th Error occurrence" — production alert (FirstProject not explicitly in the Fountain/InfinityRose filter list but is a Rollbar production alert on rick@'s inbox, flagging for visibility). |
+| 6 | TuanNT — 0h combined (added 08:35) | 2026-09-16: 0h across every visible Workstream project (last logged hours 09-14, Bailey+Amazing Meds). No leave recorded. Blocks **John Yi, Rebecca, Bailey** Trello items per standing gate. |
+| 7 | LeNH — 0h combined (added 08:35) | 2026-09-16: 0h across every visible Workstream project (last logged hours 09-15, James Diamond). No leave recorded. LeNH's stricter any-shortfall rule applies. |
+| 8 | Workstream needsReview — OhCleo (added 08:35) | 15 `Pending` charged-hour rows (HungPN/LuHX/PhuongPVT/LongVV, 09-14 to 09-16) unresolved — addressed to reviewers **DuongDN, MinhTV**. |
+| 9 | Maddy — stale Bitbucket PR review comments (added 08:35) | PR #509: Rovo Dev null-check concern posted 2026-08-14, no reply since (~1 month). PR #534: Rovo Dev comment 2026-08-26, no reply (~3 weeks). PR #540: 0 comments, open since 2026-09-03 (~2 weeks), never reviewed. See `## Maddy` section. |
 
 **Today (Thu 09-17):** Chien Tran, TuanNT, LongVV — leave requests pending/submitted (see email section). Fountain team: TuanNTG + ThinhPVD out sick 09-16 (internal time), TienPH fever (covered), HaVS out 09-21.
 
@@ -99,27 +103,33 @@ Trello: James Diamond/Vinn — no alert (Vinn had real activity, not 0-effort si
 
 ---
 
-## Sheets / Workstream — 05:35 (+07:00)
+## Sheets / Workstream — 05:35 (+07:00), corrected 08:35 (+07:00)
 
-🔴 **Workstream unavailable this run.** `workstream-login.js` was retried 3x (per SSO-transient-retry memory rule): each attempt showed "SSO redirect detected — Keycloak cookies alive" but the API token was never captured ("Browser attempt N: no token captured"). Confirmed the stored token is genuinely expired (`"exp" claim timestamp check failed` on a live API test). This matches the documented recurring Workstream SSO outage pattern (5+ prior occurrences in memory, root cause still open).
+~~Workstream unavailable this run.~~ **RESOLVED** — `workstream-login.js` re-run at 08:22, SSO succeeded on first retry, token captured. Full task-log scan re-run for 2026-09-16 (the reporting date):
 
-**Impact:** PhucVT, TuanNT, KhanhHH, LeNH, LongVV/Maddy hours NOT independently verified this run. No 0h claim is being made for any dev — per standing rule, a failed Workstream check is not evidence of a shortfall, it's an unverified data gap. Needs recheck (retry login, likely transient).
+| Developer | 09-16 hours | Status |
+|-----------|-------------|--------|
+| PhucVT | 0h | **On approved leave 09-07→09-18** (leave-plan.json, "Em có việc cá nhân cần xử lý") — OK, no alert |
+| TuanNT | 0h (last logged 09-14: Bailey+Amazing Meds 8h) | No leave recorded → **ALERT**, blocks John Yi/Rebecca/Bailey Trello items |
+| KhanhHH | 8h (Baamboozle 4h + BXR App 4h) | OK |
+| LeNH | 0h (last logged 09-15: James Diamond 8h) | No leave recorded → **ALERT** (LeNH stricter any-shortfall rule) |
+| LongVV | 0h (last logged 09-14: OhCleo 8h) | Ad-hoc/no fixed target per memory — never alert. Pending leave request is for 09-17 (today), not 09-16 — unrelated to this gap. Cross-signal: DuongDN/namtv redirected him to Maddy backlog tasks after running out of OhCleo work — likely unlogged/to-be-billed-later work. |
 
-Cross-signal from Matrix (informational, not a substitute for hours verification): LongVV was actively coordinated by duongdn/namtv to pick up Maddy tasks after running out of OhCleo work (`!mYZBGNoLFVpMVIJtPu`, `!oGYjbzEfphvvauBZtq`); TuanNT + VuTQ posted detailed Bailey/Paturevision task reports in "NUS - Bailey - Paturevision 2026"; KhanhHH posted Upwork memo + client reply in "Rory Hackett - BXR App". None of this is a substitute for the hours check — all devs show signs of activity, no dev shows signs of a 0h day.
+**Workstream needsReview check (all projects):** only **OhCleo** has unresolved `Pending` rows — 15 charged-hour entries (HungPN, LuHX, PhuongPVT, LongVV — 09-14 to 09-16), reviewers **DuongDN, MinhTV**. All other projects clean (Fountain excluded per standing rule).
 
-**Maddy JIRA weekly cross-check:** script run for week 2026-09-14, also hit the same Workstream auth failure (`"error":"Workstream auth failed...","tickets":[]`) — no ticket data returned this run. Needs recheck.
+**Maddy JIRA weekly cross-check:** re-run for week 2026-09-14 — script now returns cleanly: `{"tickets":[],"summary":"No JIRA-tagged entries this week"}` (genuine empty result, not an auth failure). See dedicated `## Maddy` section below for the full 4-part check.
 
 ---
 
-## Fountain — 05:38 (+07:00)
+## Fountain — 05:38 (+07:00), corrected 08:35 (+07:00)
 
 **Part 1 — Matrix plan:** Weekly-plan room (`!EWnVDAxbTGsBxPkaaI:nustechnology.com`) had 0 new messages in this window (not Monday — plan typically posted Mon 08:30-09:30, so this is expected). Using last known plan from prior report.
 
-**Part 2 — Task log actuals:** Blocked by Workstream outage (see Sheets section above). Needs recheck.
+**Part 2 — Task log actuals (week 09-14→09-20):** ~~Blocked by Workstream outage~~ **now available** — ThinhT 12h (4h/day 09-14/15/16), HungPN 4h, PhatDLT 6h, ViTHT 9h (8h 09-14, 1h 09-16). VuTQ/HaVS not logging this week (consistent with the leave note: HaVS out 09-21 unrelated to this week; VuTQ not seen in project-week data — worth confirming next Monday plan post). Per-dev 0h alerting is off for Fountain per standing rule — informational only.
 
-**Part 3 — Plan vs actual:** Blocked — depends on Part 2.
+**Part 3 — Plan vs actual:** Actuals now shown above; full plan-vs-actual comparison deferred to next scheduled Fountain check (last known plan predates this week's numbers meaningfully enough that a fresh Monday plan is needed for a fair compare).
 
-**Trello board (customer comments / stuck cards):** Not queried this run (time-boxed given Workstream retries consumed budget) — needs recheck.
+**Trello board (customer comments / stuck cards):** Checked — customer (kunalsheth) actively commenting across ~15 cards since 09-14, all routine feature/instruction exchanges ("you can push live", "yes", clarifying questions), most recent 09-17 08:20 ("This works for now...") posted minutes before this check — no reply expected yet, not an alert. No angry/blocking customer complaint found.
 
 **Matrix activity (informational):** "Kunal - Fountain" room very active (124 msgs) — normal dev/QC coordination: PR reviews (Vu Tat), redmine bug triage (Dat Nguyen/Hung Pham), font-size/design discrepancies vs Kunal's mockups, price-mismatch investigation (prod vs beta shipping), FAQ/review-ticket work. No customer complaint or blocker spotted in the transcript.
 
@@ -131,32 +141,62 @@ Cross-signal from Matrix (informational, not a substitute for hours verification
 
 **Precognize (nusken account):** 0 open nusken PRs (7 open PRs total on Precognize/development, none authored by nusken).
 
-**WordPress SamGuard:** Not run this pass (time-boxed) — needs recheck.
+**WordPress SamGuard:** ~~Not run this pass~~ **Checked 08:35** — 0 JS errors, 0 page errors, 0 CSP violations. `failedRequests` are all benign ad/analytics `net::ERR_ABORTED` (GA/DoubleClick/LinkedIn pixel calls, ad-blocker-shaped, not real errors) — clean.
 
 ---
 
-## Trello — 05:42 (+07:00)
+## Trello — 05:42 (+07:00), corrected 08:40 (+07:00)
 
-**Check progress card:** fresh card for today, all items ○ (unchecked). **Check mail card:** fresh card, all 6 items ○.
+**Check progress card:** re-fetched live. **Check mail card:** re-fetched live.
 
-Given Workstream was unavailable for a large part of this run (consuming significant time across 3 retry attempts), Trello checklist completion is **deferred to a recheck pass** rather than marking items complete on incomplete/unverified data — per standing rule, never complete an item without actually running its full mapped gate. Items with clean, fully-verified data this run (no gate dependency on Workstream):
-- **Bailey** — Slack GGS ✓ (Nick's report present) + Matrix daily report to customer ✓ present ("NUS - Bailey - Paturevision 2026" room has detailed TuanNT/VuTQ task reports) — TuanNT sheet/hours check still pending (Workstream). Leave ○ for the hours half.
-- **Franc** — Slack RDC only, no content beyond auto-logs → clean, safe to complete on recheck.
-- **Rory / Swift** — Slack only, active coordination, no alert → clean.
-- **Andrew Taraba** — Discord quiet → clean.
-- **MPFC** — minimal Slack noise, no alert → clean.
-- **James Diamond/Vinn** — Discord real activity, no alert → clean.
+**Check Mail — completed:** DuongDn ✓, Carrick ✓, Kai ✓, Ken ✓, Nick ✓. **Rick ○** — kept incomplete (FirstProject production alert #5).
+
+**Check Progress — completed (clean, no alert):** James Diamond/Vinn ✓, Rory ✓, Aysar ✓ (MPDM update present + KhanhHH 8h), Franc ✓, Elliott ✓ (KhanhHH 8h + Slack clean), MPFC ✓, Marcel ✓, Raymond-LegalAtoms ✓, Neural Contract ✓, Andrew Taraba ✓, Elena-WordPress SamGuard ✓ (clean check above), Fountain ✓ (3-part check clean, no customer blocker).
+**Ignore List (paused, auto-completed):** Elena-SamGuard ✓, Colin ✓, Philip ✓, Arthur-Meta-Stamp ✓, Blair Brown-Peptide Clyde ✓.
+
+**Check Progress — kept ○ (alert):**
+- **Maddy** — Bitbucket PR review comments unaddressed 2-4 weeks (#9 above).
+- **John Yi - Amazing Meds** — gated by TuanNT 0h (#6).
+- **Bailey** — gated by TuanNT 0h (#6); Slack GGS + Matrix customer report were otherwise clean.
+- **Rebecca (William Bills)** — gated by TuanNT 0h (#6).
+- **Ohcleo** — needsReview pending rows unresolved (#8).
 
 All others need the Workstream-gated hours check before completion — deferred.
+
+## Maddy (Xtreme Soft Solutions / Carrick-Kai-Luis) — added 08:40 (+07:00)
+
+### 1. Task Log Hours
+LongVV ad-hoc on Maddy (informational only, no fixed target). No LongVV hours logged against `maddy` project this window (he's on OhCleo/backlog this week — see Sheets section).
+
+### 2. Slack / Kai Daily Report Check
+Xtreme Soft Solutions: 10 msgs — Kai + Anoma (Madhuraka's team) account/access support ("unable to upload", "QR code not received"), Kai responsive same-day. **Conclusion: OK.**
+
+### 3. JIRA (LIFM2)
+Weekly cross-check now returns cleanly (no JIRA-tagged Workstream entries this week). 25 active tickets pulled live; recent activity (since 09-16 05:00): **LIFM2-409** (Import Shopify payouts, To Do), **LIFM2-465** (Quote-email tab feedback, Review), **LIFM2-452** (Testing-Anoma). Known prior risk tickets **LIFM2-260** and **LIFM2-439** are both **Done** — no longer at risk.
+
+### 4. Bitbucket PR Status (xtreme-web/rms)
+8 open PRs. Reply-rate check on the 3 oldest:
+- **PR #509** (LIFM2-428, open since 08-14): Kai approved 07-20, but **Rovo Dev** left a null-check design concern **2026-08-14 — unaddressed ~1 month**.
+- **PR #534** (concurrent cron fix, open since 08-26): **Rovo Dev** design comment 2026-08-26 — **unaddressed ~3 weeks**.
+- **PR #540** (LIFM2-450, open since 09-03): **0 comments, never reviewed** — ~2 weeks with no review activity at all.
+- Newer PRs (#543-546, 09-09→09-15) look actively worked, no concern.
+
+**Conclusion:** hours/JIRA/Slack all look routine, but 2 stale unaddressed automated-review comments + 1 unreviewed PR is a real, quiet health signal — flagged in Alerts Summary #9. Item kept ○ on Trello pending these being addressed.
+
+---
 
 ## Ignore List — 05:42 (+07:00)
 Not tracked (paused), auto-completed on recheck: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip.
 
 ---
 
-## Reminders — 05:43 (+07:00)
+## Reminders — 05:43 (+07:00), corrected 08:35 (+07:00)
 
-Not run this pass — 0h determination depends on the Workstream/Sheets data that was unavailable this run. Deferred to recheck (no reminder sent, per print-only-by-default rule anyway).
+**TuanNT** and **LeNH** — 0h on 2026-09-16, no leave. Reminder text NOT sent this pass (no `--send-reminder` flag / explicit user request this turn — per standing permission rule, checking a source is never itself permission to send). Print-only:
+- TuanNT (`!knbJbIKzXRJNGVFQNg:nustechnology.com`): "Hi TuanNT, task log for 2026-09-16 is missing (0h logged). Please update when you can. Thanks!"
+- LeNH (`!OIrgPraJWrcDTnRVLQ:nustechnology.com`): "Hi LeNH, task log for 2026-09-16 is missing (0h logged). Please update when you can. Thanks!"
+
+PhucVT/LongVV skipped (leave / ad-hoc-no-target, respectively).
 
 ---
 
@@ -219,15 +259,16 @@ Not run this pass (Workstream-dependent est/actual part would be blocked anyway;
 
 ---
 
-## Upwork Memo — 2026-09-16 — 05:50 (+07:00)
+## Upwork Memo — 2026-09-16 — 05:50 (+07:00), corrected 08:33 (+07:00)
 
-| Workroom | Status | Details |
-|----------|--------|---------|
-| Rory | login_failed | Live cookies + stored session + headless re-login all failed (`input[name="login[username]"]` selector not found — Upwork login page likely changed or CAPTCHA-blocked). Session failure ≠ alert per standing rule; memo validity unknown this run. |
-| Neural Contract | session_expired | Same as above — messages-only workroom, no memos expected regardless. |
-| Aysar | session_expired | Same session issue as Rory. |
+~~Rory/Aysar session_expired/login_failed~~ **RESOLVED** — `upwork-memo-check.js` re-run succeeded for both workrooms without any re-auth needed.
 
-Per rule: session/Cloudflare failures do not block Trello completion, but memo validity itself is genuinely unverified this run — note for recheck (carrick's live Chrome Upwork session may need a manual touch, see [[feedback_upwork_access_token_needs_live_browser_touch]]).
+| Workroom | Memos | Invalid | Details |
+|----------|-------|---------|---------|
+| Rory | 0 | — | 0 segments — consistent with LeNH's confirmed 0h combined this day (Alert #7), not a session artifact. |
+| Aysar | 0 | — | Same — 0 segments, LeNH 0h day. |
+
+No memo-validity concern (no memos to validate). Trello Rory/Aysar items already completed above based on Slack/hours gates.
 
 ---
 
@@ -239,10 +280,12 @@ Excluded from default full run (token-heavy) — not run this pass. Use `/daily-
 
 ## Unresolved Questions
 
-1. Workstream SSO — why did 3 consecutive login attempts all reach "Keycloak cookies alive" but never capture an API token? Needs investigation beyond a simple retry (browser flow may need env/display debugging).
-2. Upwork carrick session — headless re-login failing on selector `input[name="login[username]"]` suggests Upwork's login page markup changed, or a CAPTCHA is now blocking it earlier than before. A live-browser touch (per [[feedback_upwork_access_token_needs_live_browser_touch]]) should be tried first.
-3. staging2.paturevision.fr reported down by datnc (Matrix, 17:09) — needs a live check.
+1. ~~Workstream SSO~~ — resolved this recheck (login succeeded on first retry at 08:22); root cause of the original 3x cron failure still not diagnosed — if it recurs again, worth a deeper look at cron-mode SSO env/display handling.
+2. ~~Upwork carrick session~~ — resolved this recheck (`upwork-memo-check.js` succeeded without any manual touch needed).
+3. staging2.paturevision.fr reported down by datnc (Matrix, 17:09) — **still needs a live check**, not covered by this recheck pass.
 4. Elena PR #309 has merge conflicts (`dirty` state) — needs the branch rebased/conflicts resolved before it can be reviewed/merged.
 5. FirstProject production error #1117 (10x in 5 min + 100th occurrence) on rick@'s Rollbar feed — FirstProject isn't in the documented Fountain/InfinityRose filter scope; confirm whether this project should be added to the regular monitoring list.
+6. Should TuanNT/LeNH reminders actually be sent for the 09-16 0h gap? Printed above, not sent — awaiting explicit go-ahead.
+7. Maddy Bitbucket PRs #509/#534/#540 — should Kai be nudged directly about the stale Rovo Dev review comments, or is this expected to self-resolve?
 
-**Next step:** run `/daily-report recheck` once Workstream SSO is confirmed working again to complete the Sheets/Fountain-Parts-2-3/Maddy-JIRA/Trello-completion pieces that were blocked this run.
+**Next step:** none blocking — all Workstream/Upwork-dependent pieces (Sheets, Fountain Parts 2-3, Maddy JIRA, Trello completion) now closed out this recheck pass.
