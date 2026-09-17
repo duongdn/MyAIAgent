@@ -15,7 +15,7 @@
 | 3 | Elena PR #309 | "Implement header and modal components with i18n support" — `mergeable: false` (dirty/conflicts), no CodeRabbit review posted yet. Not merged. |
 | 4 | MPFC Performance | Apdex 0.42 (poor) — chronic `WP_Error::get_method()` error (39x) + `"continue" targeting switch` warning (1720x) continue unresolved. Also 4 SQLi probe requests (`PG_SLEEP`/`WAITFOR DELAY`) on `/search/.../feed/rss2/` — same recurring pattern as prior reports, not new. |
 | 5 | Email (rick@) | `[FirstProject] production` — 10 occurrences in 5 min of error #1117 + "100th Error occurrence" — production alert (FirstProject not explicitly in the Fountain/InfinityRose filter list but is a Rollbar production alert on rick@'s inbox, flagging for visibility). |
-| 6 | TuanNT — 0h combined (added 08:35) | 2026-09-16: 0h across every visible Workstream project (last logged hours 09-14, Bailey+Amazing Meds). No leave recorded. Blocks **John Yi, Rebecca, Bailey** Trello items per standing gate. |
+| 6 | TuanNT — 0h combined (added 08:35) | 2026-09-16: 0h across every visible Workstream project (last logged hours 09-14, Bailey+Amazing Meds). No leave recorded. ~~Blocks John Yi, Rebecca, Bailey Trello items~~ — **user confirmed 08:50: TuanNT's Bailey/Paturevision report for that day is real (Matrix task report seen in original cron run)** → Bailey item cleared. John Yi/Rebecca still gated pending. |
 | 7 | LeNH — 0h combined (added 08:35) | 2026-09-16: 0h across every visible Workstream project (last logged hours 09-15, James Diamond). No leave recorded. LeNH's stricter any-shortfall rule applies. |
 | 8 | Workstream needsReview — OhCleo (added 08:35) | 15 `Pending` charged-hour rows (HungPN/LuHX/PhuongPVT/LongVV, 09-14 to 09-16) unresolved — addressed to reviewers **DuongDN, MinhTV**. |
 | 9 | Maddy — stale Bitbucket PR review comments (added 08:35) | PR #509: Rovo Dev null-check concern posted 2026-08-14, no reply since (~1 month). PR #534: Rovo Dev comment 2026-08-26, no reply (~3 weeks). PR #540: 0 comments, open since 2026-09-03 (~2 weeks), never reviewed. See `## Maddy` section. |
@@ -157,7 +157,7 @@ Trello: James Diamond/Vinn — no alert (Vinn had real activity, not 0-effort si
 **Check Progress — kept ○ (alert):**
 - **Maddy** — Bitbucket PR review comments unaddressed 2-4 weeks (#9 above).
 - **John Yi - Amazing Meds** — gated by TuanNT 0h (#6).
-- **Bailey** — gated by TuanNT 0h (#6); Slack GGS + Matrix customer report were otherwise clean.
+- ~~**Bailey** — gated by TuanNT 0h~~ — **completed 08:50**, user confirmed TuanNT's Bailey report is real.
 - **Rebecca (William Bills)** — gated by TuanNT 0h (#6).
 - **Ohcleo** — needsReview pending rows unresolved (#8).
 
@@ -190,11 +190,10 @@ Not tracked (paused), auto-completed on recheck: Colin, Elena - SamGuard, Arthur
 
 ---
 
-## Reminders — 05:43 (+07:00), corrected 08:35 (+07:00)
+## Reminders — 05:43 (+07:00), corrected 08:50 (+07:00)
 
-**TuanNT** and **LeNH** — 0h on 2026-09-16, no leave. Reminder text NOT sent this pass (no `--send-reminder` flag / explicit user request this turn — per standing permission rule, checking a source is never itself permission to send). Print-only:
-- TuanNT (`!knbJbIKzXRJNGVFQNg:nustechnology.com`): "Hi TuanNT, task log for 2026-09-16 is missing (0h logged). Please update when you can. Thanks!"
-- LeNH (`!OIrgPraJWrcDTnRVLQ:nustechnology.com`): "Hi LeNH, task log for 2026-09-16 is missing (0h logged). Please update when you can. Thanks!"
+- **LeNH** — 0h on 2026-09-16, no leave, no report seen. **Reminder sent 08:50** per user explicit go-ahead: "Hi LeNH, task log for 2026-09-16 is missing (0h logged). Please update when you can. Thanks!" → `!OIrgPraJWrcDTnRVLQ:nustechnology.com`.
+- **TuanNT** — user confirmed 08:50 he already has a real report (Bailey/Paturevision task report) — no reminder sent, Bailey Trello item cleared. John Yi/Rebecca hours still not separately confirmed.
 
 PhucVT/LongVV skipped (leave / ad-hoc-no-target, respectively).
 
