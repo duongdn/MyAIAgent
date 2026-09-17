@@ -483,6 +483,22 @@
       },
       "method": "reconstructed",
       "note": "MISA totaldashboard 7,266,584,188 + Larion 800M carry-fwd (now 21 ngay chua re-verify). Net Worth -1.74M vs 09-14 (~flat). Liquid -47.9M do chuyen vcb->VCBS(7.5M)+Vi(5M) DCA + chi tieu. Savings +2.0M lai. Investment -24.2M (plug, bien dong ETF). Gold -2M (gia). Sept MTD: Thu 71.31M / Chi 24.58M / Net +46.73M (khop voi widget MISA). Khong co no the (VCB Visa 0 tu 05/2026). Ghost saving nam a 6m (2.0M, dao han 2024) van treo chua don."
+    },
+    {
+      "date": "2026-09-17",
+      "label": "17/09",
+      "net_worth": 8070834188,
+      "gross_assets": 8143139668,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 732500000,
+        "investment": 2526923840,
+        "savings": 1204350315,
+        "liquid": 159365513
+      },
+      "method": "reconstructed",
+      "note": "MISA totaldashboard 7,270,834,188 + Larion 800M carry-fwd (23+ ngay chua re-verify). Net Worth +4.25M vs 09-15 (~flat qua 2 ngay). Liquid +40.4M (Freelancer income Paypal 09-04 + it chi tieu). Investment +31.7M (ETF/Fund tang gia+lai). Gold +4.5M (gia). Savings khong doi. Sept MTD: Thu 71.31M / Chi 24.83M / Net +46.48M. Ghost saving nam a 6m (2.0M, dao han 2024) van treo chua don."
     }
   ]
 }
