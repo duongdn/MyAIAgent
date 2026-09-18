@@ -95,6 +95,15 @@
       "report_sheet": "Báo cáo 2 - ADP",
       "vietstock_url": "https://finance.vietstock.vn/ADP-ctcp-son-a-dong.htm",
       "note": "9 năm BCTC kiểm toán liên tục 2017-2025 (loại \"K\" - báo cáo riêng, không có công ty con để hợp nhất — cafef-fetch script updated to fallback K when no HK). Thanh khoản rất thấp (~41-115tr VND/phiên). Cổ đông phân tán cá nhân sáng lập, không có tổ chức/Nhà nước chi phối. Ticker collides with US ADP (Automatic Data Processing) in news searches — filter carefully."
+    },
+    {
+      "ticker": "HPG",
+      "name": "CTCP Tập đoàn Hòa Phát (Hoa Phat Group)",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1tlZRDWspk3I9TlrJAnPCev5RrLGNmy0JBJMkbvHl97k",
+      "report_sheet": "Báo cáo 2 - HPG",
+      "vietstock_url": "https://finance.vietstock.vn/HPG/tai-chinh.htm",
+      "note": "Doanh nghiệp thép lớn nhất VN/ĐNA (~36% thị phần thép xây dựng), mảng phụ Nông nghiệp (công ty con HPA niêm yết riêng 2026) + Bất động sản KCN. 10 năm BCTC hợp nhất kiểm toán liên tục 2016-2025 (loại HK), đã verify Tổng tài sản=Tổng nguồn vốn khớp tuyệt đối cả 10 năm. Xây 18/09/2026: giá 21,450đ (17/9/2026), P/E TTM 7.80x, P/B 1.29x, vốn hóa 181,101.59 tỷ đồng (Vietstock); thanh khoản cao (GTGD 6 tháng ~606 tỷ/phiên). Benjamin Graham: 7/10 tiêu chí ĐẠT — 3 KHÔNG ĐẠT là current ratio (1.10x, đặc thù ngành CN nặng) và 2 tiêu chí EPS tăng trưởng (do pha loãng cổ phiếu thưởng/cổ tức cổ phiếu liên tục, không phải suy giảm LNST tuyệt đối — LNST 2025 gấp 2.34 lần 2016). Đủ 6/6 sheet, QA 0 lỗi #REF!/#NAME?/#N/A."
     }
   ],
   "candidates": {
