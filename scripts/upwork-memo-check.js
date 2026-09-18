@@ -194,27 +194,42 @@ async function scrapeDomMemos(page) {
   return raw.map((memo) => ({ memo, duration: null, time: null }));
 }
 
+const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+// 🔴 CORRECTED 2026-09-18: the timesheet SPA ignores the `timesheetDate` URL param
+// (it always snaps back to the first day of the displayed week) and the old GraphQL
+// intercept only ever caught the FIRST `workDiaryContract` response — which contains
+// just ONE time-cell, not the full day (a full day is dozens of 10-min cells, each
+// with its own memo). Confirmed live: a day showing 8h actually has ~48 cells. The
+// only reliable way to select a specific day and load ALL its cells is to click that
+// day's row label ("{dayNum} {DayName}", e.g. "17 Thursday") in the Work Diary panel
+// on the timesheet page, then collect every `workDiaryContract` response that fires.
 async function fetchWorkroomMemos(page, room, date) {
-  // Timesheet URL supports timesheetDate param to position the week. We also try
-  // the diary query on the same page.
-  const timesheetUrl = `https://www.upwork.com/nx/wm/workroom/${room.workroom_id}/timesheet?timesheetDate=${date}`;
+  const timesheetUrl = `https://www.upwork.com/nx/wm/workroom/${room.workroom_id}/timesheet`;
   console.error(`Fetching memos for ${room.name} (${room.workroom_id}) @ ${date}...`);
 
-  let apiMemos = [];
+  const d = new Date(date + 'T00:00:00');
+  const dayNum = String(d.getDate());
+  const dayName = DAY_NAMES[d.getDay()];
+
+  let cells = [];
   const responseHandler = async (response) => {
-    const url = response.url();
-    if (MEMO_API_FRAGMENTS.some((f) => url.includes(f))) {
-      try { apiMemos = apiMemos.concat(parseApiMemos(await response.json())); } catch (_) {}
+    if (/workDiaryContract\b/i.test(response.url())) {
+      try {
+        const body = await response.json();
+        const c = body?.data?.workDiaryContract?.workDiaryTimeCells;
+        if (Array.isArray(c)) cells.push(...c);
+      } catch (_) {}
     }
   };
   page.on('response', responseHandler);
 
-  await page.goto(timesheetUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await new Promise((r) => setTimeout(r, 9000));
-  page.off('response', responseHandler);
+  await page.goto(timesheetUrl, { waitUntil: 'networkidle2', timeout: 60000 }).catch(() => {});
+  await new Promise((r) => setTimeout(r, 5000));
 
   const currentUrl = page.url();
   if (currentUrl.includes('login') || currentUrl.includes('account-security')) {
+    page.off('response', responseHandler);
     return { workroom: room.name, client: room.client, developer: room.developer, status: 'session_expired', date };
   }
 
@@ -224,28 +239,60 @@ async function fetchWorkroomMemos(page, room, date) {
     await new Promise((r) => setTimeout(r, 10000));
     const retryText = await page.evaluate(() => document.body.innerText);
     if (retryText.length < 500) {
+      page.off('response', responseHandler);
       return { workroom: room.name, client: room.client, developer: room.developer, status: 'cloudflare_blocked', error: 'Cloudflare challenge not resolved.', date };
     }
   }
 
+  // Select the target day by clicking its row label — triggers a fresh
+  // workDiaryContract fetch scoped to that day's cells.
+  cells = [];
+  // Scroll first — the Work Diary day-row list can require scrolling into view,
+  // and later rows (e.g. Friday) may not be in the initial viewport.
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await new Promise((r) => setTimeout(r, 1000));
+  const clickedLabel = await page.evaluate((num, name) => {
+    // Prefer the exact "{num} {DayName}" row (Work Diary list) over a bare "{num}"
+    // match (mini-calendar date cell, which doesn't load the same day-cells data).
+    const exact = Array.from(document.querySelectorAll('div, li, tr')).filter((el) => {
+      const t = (el.textContent || '').trim();
+      return t.startsWith(`${num} ${name}`) && t.length < 60;
+    });
+    const target = exact[0] || Array.from(document.querySelectorAll('div, li, tr')).find((el) => (el.textContent || '').trim() === num);
+    if (target) { target.click(); return target.textContent.trim(); }
+    return null;
+  }, dayNum, dayName);
+  await new Promise((r) => setTimeout(r, 4000));
+  page.off('response', responseHandler);
+
   await page.screenshot({ path: path.join(SCREENSHOT_DIR, `upwork-memo-${room.name.toLowerCase()}.png`) });
 
-  // Dedupe API memos, then fall back to DOM if none found.
-  const apiSeen = new Set();
-  const segments = apiMemos.filter((m) => { if (apiSeen.has(m.memo)) return false; apiSeen.add(m.memo); return true; });
-  let domSegments = [];
-  if (!segments.length) {
-    domSegments = await scrapeDomMemos(page);
+  if (!clickedLabel) {
+    // Day row not found (not in the currently displayed week, or page structure drifted).
+    // Fall back to DOM scrape rather than silently reporting zero segments.
+    const domSegments = await scrapeDomMemos(page);
+    const classified = domSegments.map((s) => {
+      const r = classifyMemo(s.memo);
+      return { memo: s.memo, duration: s.duration, time: s.time, valid: r.valid, issues: r.issues };
+    });
+    return {
+      workroom: room.name, client: room.client, developer: room.developer, status: 'success', date,
+      source: 'dom_fallback_day_label_not_found',
+      segments: classified,
+      summary: { total_memos: classified.length, valid: classified.filter((s) => s.valid).length, invalid: classified.filter((s) => !s.valid).length },
+    };
   }
 
-  const allSegments = segments.length ? segments : domSegments;
-  const classified = allSegments.map((s) => {
-    const r = classifyMemo(s.memo);
-    return { memo: s.memo, duration: s.duration, time: s.time, valid: r.valid, issues: r.issues };
+  // Dedupe by memo text (multiple 10-min cells commonly share the same memo).
+  const seen = new Set();
+  const uniqueMemos = cells.map((c) => c.memo).filter((m) => m && m.trim() && !seen.has(m) && seen.add(m));
+
+  const classified = uniqueMemos.map((memo) => {
+    const r = classifyMemo(memo);
+    return { memo, valid: r.valid, issues: r.issues };
   });
 
   const invalid = classified.filter((s) => !s.valid);
-  const validCount = classified.length - invalid.length;
 
   return {
     workroom: room.name,
@@ -253,11 +300,12 @@ async function fetchWorkroomMemos(page, room, date) {
     developer: room.developer,
     status: 'success',
     date,
-    source: segments.length ? 'api' : (domSegments.length ? 'dom' : 'none'),
+    dayCells: cells.length,
+    source: 'api_day_cells',
     segments: classified,
     summary: {
       total_memos: classified.length,
-      valid: validCount,
+      valid: classified.length - invalid.length,
       invalid: invalid.length,
     },
   };
