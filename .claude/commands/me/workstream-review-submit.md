@@ -1,5 +1,5 @@
 ---
-description: Review Upwork work memos against Workstream review-requests, then submit the review report
+description: Check Upwork memo logs for a Workstream project and submit the "Check memo logs in Upwork Tracker" request report
 ---
 
 # ⚠️ MANDATORY FIRST STEP — READ MEMORY
@@ -8,67 +8,93 @@ Before doing anything else, invoke `/util:read-memory workstream-review-submit`.
 
 ---
 
-# Workstream Review Submit
+# Workstream Review Submit — Upwork Tracker Memo Check
 
-Reviews Upwork hourly work memos for a Workstream project's pending review-request(s), then submits the review report at https://workstream.nustechnology.com/requests.
+Workstream's Company Requests (`https://workstream.nustechnology.com/requests`) include a recurring request **"Check memo logs in Upwork Tracker"** (id `cmu3wx8lx0xdoqg1v3pztgwh1`), assigned per-project to that project's DM. Description: *"Mỗi ngày các DM nhớ check memo của Upwork Tracker. Và vào mỗi thứ 6, trước khi ra về thì các DM submit report."* Deadline shown is `2026-12-25` (recurring placeholder, not a real one-time deadline — submit weekly, every Friday, regardless of the shown date).
 
-**Trigger:** Workstream shows review requests at `/requests` — a project's reviewer must approve/reject charged hours based on whether the dev's Upwork memos justify the time. This is a DIFFERENT flow from the daily-report's per-project `needsReview` alert (Piece 4) — that one just *flags* pending review; this skill actually *does* the review and submits it.
+🔴 **Corrected 2026-09-18 — this is NOT the per-project `needsReview`/`review-week` approve-reject flow** (that's daily-report Piece 4). `/requests` is a separate generic "Company Requests" feature — most other requests here are unrelated admin asks (e.g. "Hỏi KH nhờ feedback cho cty mình trên Clutch"). Only the "Check memo logs in Upwork Tracker" title is in scope for this skill.
+
+**Confirmed projects with this request (live 2026-09-18):** Baamboozle, Tokenlite. Both `status: NotStarted`. More projects may be added later — always re-fetch, don't hardcode this pair.
 
 **Usage:**
-- `/me:workstream-review-submit` — scan `/requests`, process ALL pending requests
-- `/me:workstream-review-submit <project>` — process one project only (e.g. `tokenize`)
-- `/me:workstream-review-submit --dry-run` — evaluate + report, do NOT submit
+- `/me:workstream-review-submit` — evaluate the Upwork Tracker request for ALL projects that have it, **dry-run by default (no submit)**
+- `/me:workstream-review-submit <project>` — evaluate one project only (e.g. `tokenlite`), dry-run
+- `/me:workstream-review-submit --submit` — actually submit the response(s) to Workstream
+- `/me:workstream-review-submit <project> --submit` — evaluate + submit one project only
+
+🔴 **Default is dry-run.** Never submit/change state on `/requests` unless `--submit` is explicitly present in the invocation, or the user explicitly says "submit"/"nộp"/"gửi luôn" in this turn.
 
 ---
 
 ## Step 1 — Auth
 
-Reuse Workstream session per [[reference_workstream]]:
 ```bash
-DISPLAY=:1 node scripts/workstream-login.js   # only if token expired
+DISPLAY=:1 node scripts/workstream-login.js   # only if token expired (401 "exp claim" on /api/me)
 ```
+Token lives in `config/.workstream-config.json`. Browser SSO session cookie is in `tmp/workstream-browser-profile/` — reuse this `userDataDir` for any Puppeteer script touching `/requests` (a fresh profile has no session → redirects to `/login`).
 
-## Step 2 — Fetch pending requests
+## Step 2 — Fetch pending Upwork Tracker requests
 
-🔴 **`/requests` page structure not yet scripted** — first live run must open it visibly (`DISPLAY=:1`) to confirm: how a pending review request is listed/identified (request id, project, dev, date range, charged hours), and the submit action's request shape (approve/reject endpoint or form). Screenshot to `tmp/workstream-requests-*.png`. Once confirmed, add a `scripts/workstream-fetch-requests.js` (mirror `workstream-fetch-project-week.js`'s auth pattern) — do NOT hand-roll a one-off dated script (see no-dated-copy rule in [[reference_workstream]]).
+```
+GET {api_base}/requests
+```
+Returns `{ items: [...] }` — filter `title === 'Check memo logs in Upwork Tracker'`. Each item: `{ id, title, description, deadline, projectId, projectName, status, allowMultiple }`. `status: 'NotStarted'` = pending this run.
 
-Until that script exists: navigate to `https://workstream.nustechnology.com/requests` with the authenticated session and read the pending list directly.
+For the full field schema (needed before building the submit payload):
+```
+GET {api_base}/requests/{id}?projectId={projectId}
+```
+Returns the same item plus `fields[]` (id/label/fieldType/isRequired/options) and `submissions[]`/`latestSubmission`. Confirmed schema for the Upwork Tracker request:
 
-## Step 3 — Cross-check against Upwork memos
+| Field id | Label | Type | Required | Options |
+|---|---|---|---|---|
+| `cmu3x3yx00xecqg1vqz0ugi1t` | Account (ví dụ QC Emma, Dev Tom, Dev Ken) | text | no | — |
+| `cmu3wx8lx0xdrqg1vhyoqw1c5` | DM đã check memo Upwork Tracker | checkbox | **yes** | `Đã check` / `Không check do tuần này không có task cần tracker` / `Vấn đề khác` |
+| `cmu3wx8lx0xdsqg1vt1ptp1zb` | Note | textarea | no | — |
 
-For each pending request, identify the dev + date range it covers, then:
-1. If the dev has an Upwork hourly workroom (see [[reference_upwork_workrooms]]), run:
-   ```bash
-   node scripts/upwork-memo-check.js --date=<date> --workroom=<name>
-   ```
-2. Classify per [[reference_upwork_memo_validation]] rubric — memo needs action verb + specific object + relation to contracted work. Single-word/feature-only memos are INVALID.
-3. If the project has no Upwork hourly workroom (e.g. fixed-price or non-Upwork client), fall back to the Workstream task-log text itself (col C/D task description) as the basis for review — same rubric, applied to the task entry instead of the memo.
+Submit POST endpoint/shape not yet captured live (no test submit performed — dry-run only so far). Before the first real `--submit`, capture the POST via the UI form (Puppeteer response listener on `/api/requests/*`) rather than guessing the shape.
 
-## Step 4 — Decide
+## Step 3 — Check the actual Upwork memo
 
-| Memo/task-log quality | Action |
+For the project's dev(s), determine if we hold Upwork workroom credentials:
+```bash
+grep -i "<project-or-dev>" config/.upwork-config.json
+```
+- **If a workroom exists** (see [[reference_upwork_workrooms]]): run
+  ```bash
+  node scripts/upwork-memo-check.js --date=<date> --workroom=<name>
+  ```
+  Classify per [[reference_upwork_memo_validation]] — action verb + specific object + relation to contracted work; single-word/feature-only = INVALID.
+- **If no workroom exists in our config** (confirmed true for Tokenlite/Marcel as of 2026-09-18 — only Rory/Aysar/Neural Contract are configured, all under carrick's Upwork account): we have **no direct access** to that project's Upwork Tracker. Do not fabricate a check. Report as unresolved and ask the user: either (a) supply login/session for that Upwork account, or (b) confirm the DM check was done manually and just wants the report submitted with that answer.
+
+## Step 4 — Decide the checkbox answer
+
+| Situation | Answer |
 |---|---|
-| All segments valid, hours match charged amount | **Approve** |
-| Any invalid memo, OR charged hours don't match logged task time | **Reject / flag** — do NOT approve. Note the specific invalid memo(s) and reason. |
-| Can't verify (Upwork session dead, memo API empty) | **Do NOT decide automatically** — report as unresolved, ask user before approving/rejecting blind. |
+| Memos verified, all valid, dev had tracked hours this week | `Đã check` |
+| No Upwork hours logged this week for the project (confirmed via Workstream task-log/hours = 0) | `Không check do tuần này không có task cần tracker` |
+| Memo invalid, or hours don't match, or anything needing escalation | `Vấn đề khác` + explain in Note |
+| Can't access the Upwork account at all (no credentials) | **Do not answer automatically** — this is Step 3's unresolved case, surface to user |
 
-**Never auto-approve on missing evidence.** Missing/inaccessible memo data is a blocker, not a pass.
+**Never auto-pick "Đã check" without having actually verified memos or confirmed 0h.**
 
-## Step 5 — Submit (skip if `--dry-run`)
+## Step 5 — Submit (ONLY if `--submit` is present)
 
-Submit the decision via the `/requests` UI action found in Step 2. Confirm the request's status changed (re-fetch) before reporting success.
+Without `--submit`: stop here, report the evaluated answer as dry-run, do not POST anything.
 
-🔴 Follow the same send-gate discipline as daily-report Piece 9: submitting a review is an outbound/state-changing action on a shared system — if the decision is a **rejection** or anything not a clean approve, surface it to the user and get explicit confirmation before submitting, don't auto-reject either.
+With `--submit`: submit via the request's form. Confirm status flips to `Submitted` (re-fetch `GET /requests/{id}?projectId=...`) before reporting success.
+
+🔴 Even with `--submit`: if the answer is `Vấn đề khác` (an issue/flag), surface it to the user and get explicit confirmation before submitting.
 
 ## Step 6 — Report
 
 Write to `reports/{YYYY-MM-DD}/{HHMM}-workstream-review-submit.md`:
 ```
-## Workstream Review Submit — {HH:MM} (+07:00)
-| Project | Dev | Period | Charged | Memo check | Decision | Submitted |
-|---------|-----|--------|---------|-----------|----------|-----------|
-| Tokenize | ... | ... | Xh | N valid / M invalid | Approve/Reject/Unresolved | ✓/✗/dry-run |
-{Details of any invalid memo or unresolved case.}
+## Workstream Review Submit — Upwork Tracker — {HH:MM} (+07:00)
+| Project | Account/Dev | Memo check | Answer | Note | Submitted |
+|---------|------------|-----------|--------|------|-----------|
+| Tokenlite | Marcel | no Upwork workroom access — unresolved | — | — | dry-run, not submitted |
+| Baamboozle | LeNH (Rory/Aysar workrooms) | N valid / M invalid | Đã check / Vấn đề khác | ... | ✓/dry-run |
 ```
 
 Update `config/.monitoring-timelines.json` (`workstream_review_submit.last_run`) at the end of every run.
@@ -76,6 +102,6 @@ Update `config/.monitoring-timelines.json` (`workstream_review_submit.last_run`)
 ---
 
 ## Unresolved questions
-- Exact `/requests` page DOM/API shape — needs first live visible-browser run to confirm (Step 2).
-- Whether Tokenize (this week's target project) has an Upwork hourly workroom or is fixed-price/task-log-only — check `config/.upwork-config.json` workrooms list; if absent, use Step 3's task-log fallback.
-- Whether submit is a single button per request or a batch action — confirm before scripting.
+- Tokenlite (Marcel Fuessinger) has no Upwork workroom in `config/.upwork-config.json` — cannot verify memos for it directly. Need either Upwork account access for that project, or user confirmation of a manual check before submitting anything beyond "Vấn đề khác".
+- Submit POST request shape not yet captured (no live submit attempted — dry-run only). Capture it on first `--submit` run via network listener, don't guess the payload.
+- Whether "Multiple responses: Yes" means this request can/should be submitted every Friday indefinitely (recurring) vs. the `Dec 25, 2026` deadline being a real one-time date — treat as recurring weekly per the description text, re-verify if the UI ever shows it as closed/expired.
