@@ -34,7 +34,12 @@ const { classifyMemo } = require('./upwork-memo-rules.js');
 
 const CONFIG_PATH = path.join(__dirname, '..', 'config', '.upwork-config.json');
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'tmp');
-const LIVE_COOKIE_JSON = '/tmp/carrick-upwork-cookies.json';
+// Accounts with a live-cookie extraction script (scripts/get-{account}-upwork-cookies.py).
+// Add new accounts here once their extraction script exists — see get-duongdn-upwork-cookies.py.
+const LIVE_COOKIE_ACCOUNTS = ['carrick', 'duongdn'];
+function liveCookieJsonPath(accountName) {
+  return `/tmp/${accountName}-upwork-cookies.json`;
+}
 
 // Work-diary GraphQL/API response fragments that may carry per-segment memo text.
 // Upwork exposes the work diary via the timesheet SPA; we intercept anything matching.
@@ -52,20 +57,20 @@ function defaultDate() {
   return d.toISOString().slice(0, 10);
 }
 
-// Live cookie extraction from carrick's real Chrome Profile 1 (same as weekly-hours/neural).
+// Live cookie extraction from a real Chrome profile (see get-{account}-upwork-cookies.py).
 // The skills-venv browser_cookie3 can have a broken lz4 module (ModuleNotFoundError:
 // lz4._version) — fall back to system python3, which is what upwork-neural-check.js does.
-function extractLiveCookies() {
-  let result;
+function extractLiveCookies(accountName) {
+  const scriptRel = `scripts/get-${accountName}-upwork-cookies.py`;
   try {
-    result = execSync('.claude/skills/.venv/bin/python3 scripts/get-carrick-upwork-cookies.py', {
+    execSync(`.claude/skills/.venv/bin/python3 ${scriptRel}`, {
       cwd: path.join(__dirname, '..'),
       stdio: ['ignore', 'ignore', 'inherit'],
     });
   } catch (venvErr) {
     console.error('Live cookie extraction: venv python3 failed, trying system python3...');
     try {
-      result = execSync('python3 scripts/get-carrick-upwork-cookies.py', {
+      execSync(`python3 ${scriptRel}`, {
         cwd: path.join(__dirname, '..'),
         stdio: ['ignore', 'ignore', 'inherit'],
       });
@@ -74,13 +79,13 @@ function extractLiveCookies() {
       return null;
     }
   }
-  return JSON.parse(fs.readFileSync(LIVE_COOKIE_JSON, 'utf8'))
+  return JSON.parse(fs.readFileSync(liveCookieJsonPath(accountName), 'utf8'))
     .filter((c) => c.name && c.value && c.domain && /^[!#-+\--:<-\[\]-~]+$/.test(c.value))
     .map((c) => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
 }
 
-async function injectLiveCookies(page) {
-  const cookies = extractLiveCookies();
+async function injectLiveCookies(page, accountName) {
+  const cookies = extractLiveCookies(accountName);
   if (!cookies || !cookies.length) return false;
   await page.setCookie(...cookies);
   await page.goto('https://www.upwork.com/nx/wm/', { waitUntil: 'networkidle2', timeout: 20000 }).catch(() => {});
@@ -290,7 +295,7 @@ async function main() {
     const profileDir = path.join(__dirname, '..', 'tmp', `upwork-profile-${accountName}`);
     const hasSavedProfile = fs.existsSync(path.join(profileDir, 'Default'));
 
-    if (!hasSavedProfile && accountName !== 'carrick') {
+    if (!hasSavedProfile && !LIVE_COOKIE_ACCOUNTS.includes(accountName)) {
       console.error(`No saved session for ${accountName}. Run: node scripts/upwork-login.js --login --account=${accountName}`);
       continue;
     }
@@ -319,7 +324,7 @@ async function main() {
       try {
         let data = await fetchWorkroomMemos(page, room, date);
         if (data.status === 'session_expired' && !loggedIn && account) {
-          const liveOk = accountName === 'carrick' ? await injectLiveCookies(page) : false;
+          const liveOk = LIVE_COOKIE_ACCOUNTS.includes(accountName) ? await injectLiveCookies(page, accountName) : false;
           if (liveOk) {
             console.error(`Live cookie injection succeeded for ${accountName}`);
             data = await fetchWorkroomMemos(page, room, date);

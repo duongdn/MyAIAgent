@@ -65,7 +65,8 @@ grep -i "<project-or-dev>" config/.upwork-config.json
   node scripts/upwork-memo-check.js --date=<date> --workroom=<name>
   ```
   Classify per [[reference_upwork_memo_validation]] — action verb + specific object + relation to contracted work; single-word/feature-only = INVALID.
-- **If no workroom exists in our config** (confirmed true for Tokenlite/Marcel as of 2026-09-18 — only Rory/Aysar/Neural Contract are configured, all under carrick's Upwork account): we have **no direct access** to that project's Upwork Tracker. Do not fabricate a check. Report as unresolved and ask the user: either (a) supply login/session for that Upwork account, or (b) confirm the DM check was done manually and just wants the report submitted with that answer.
+- **If no workroom exists in our config:** we have no direct access to that project's Upwork Tracker. Do not fabricate a check. Report as unresolved and ask the user: either (a) supply login/session for that Upwork account, or (b) confirm the DM check was done manually and just wants the report submitted with that answer.
+- **Tokenlite/Marcel** (2026-09-18): now configured. Workroom `37635751` under a SECOND Upwork account `duongdn` (dnduong.us@gmail.com, agency-facing, Chrome Profile 9 — label `nus-davidb`) — separate from `carrick`'s freelancer-facing account. `upwork-memo-check.js` supports multiple live-cookie accounts via `LIVE_COOKIE_ACCOUNTS = ['carrick', 'duongdn']`; adding a new account = add its name to that array + a `scripts/get-{account}-upwork-cookies.py` (copy `get-duongdn-upwork-cookies.py`, point `COOKIE_FILE` at the right Chrome profile — check `account_info.email` in each profile's `Preferences` to find it).
 
 ## Step 4 — Decide the checkbox answer
 
@@ -102,6 +103,5 @@ Update `config/.monitoring-timelines.json` (`workstream_review_submit.last_run`)
 ---
 
 ## Unresolved questions
-- Tokenlite (Marcel Fuessinger) has no Upwork workroom in `config/.upwork-config.json` — cannot verify memos for it directly. Need either Upwork account access for that project, or user confirmation of a manual check before submitting anything beyond "Vấn đề khác".
 - Submit POST request shape not yet captured (no live submit attempted — dry-run only). Capture it on first `--submit` run via network listener, don't guess the payload.
 - Whether "Multiple responses: Yes" means this request can/should be submitted every Friday indefinitely (recurring) vs. the `Dec 25, 2026` deadline being a real one-time date — treat as recurring weekly per the description text, re-verify if the UI ever shows it as closed/expired.
