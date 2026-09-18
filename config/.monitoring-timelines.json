@@ -257,9 +257,10 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-09-11T08:53:00+07:00",
-    "output_file": "reports/2026-09-11/0853-server-monitor.md",
+    "last_run": "2026-09-18T08:52:00+07:00",
+    "output_file": "reports/2026-09-18/0152-server-monitor.md",
     "last_status": "partial",
+    "caveats_20260918": "Neural Contract (nc_staging, 52.65.197.217) UNREACHABLE - SSH timeout, persistent since 08-21, still unresolved - Trello item left incomplete. Marcel 4 dev/staging XID hosts unreachable (persistent since 07-24), all 5 prod hosts OK. Fountain staging disk 83% WARNING (same as 09-11), staging swap 15% + production swap 18% both WARNING (mild, not critical), process health OK both envs. Bailey Console/Staging/Redis all OK. Elena samguard.co OK (load 0.09, swap 3%). Rory ~4.3G deletable error_logs/zip backups unchanged, not removed (needs approval). Siteground skipped permanently per 08-28 decision.",
     "caveats_20260724": "Bailey/Siteground still CAPTCHA-blocked (--login hit session_expired then CAPTCHA per known unsolvable-headlessly issue) — Bailey Trello item left incomplete, same as 07-10 precedent. Fountain staging disk WORSENED to 89% CRITICAL (81%→86%→89% over 3 checks) — breakdown done, ~4.3G+ reclaimable (2 old SQL dumps ~1.4G, pm2/sidekiq/cron logs ~2.9G), not deleted, awaiting confirmation. NEW: all 4 Marcel XID dev/staging hosts (xid_app_backend.dev, xid_sync_console.dev, xid_sass_backend.dev, xid_saas_backend.dev) now unreachable (previously only 2 others were known-dead) — needs decision on known-dead list update vs investigation. Elena samguard.co swap up to 27.8% WARNING (was 22% on 07-10). Fountain production swap 13.75% WARNING. nc_staging still no swap. Rory ~4.4G deletable (unchanged pattern, not removed). All other servers (Bailey Console/Staging/Redis, 5 Marcel prod XID hosts) OK.",
     "caveats": [
       "Neural Contract (nc_staging, 52.65.197.217) UNREACHABLE - SSH timeout, persistent since 08-21 - Trello item left incomplete",
