@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-21 (Monday)
 
-**Run:** 2026-09-21T05:03:00+07:00 (cron), corrected 08:52 (+07:00) (interactive recheck)
+**Run:** 2026-09-21T05:03:00+07:00 (cron), corrected 08:52 (+07:00) (interactive recheck), Matrix room re-checked 17:08 (+07:00)
 **Window:** 2026-09-18T08:52:00+07:00 → 2026-09-21T08:35:00+07:00
 **Leave plan:** refreshed 08:37 — PhucVT on approved full-week leave through 09-18 (covers Fri 18th). No other leave on file for the window.
 
@@ -16,6 +16,7 @@
 | 4 | Fountain — customer comments | 4 unanswered comments from kunalsheth on Trello board (Web Development), all posted 09-18, still no dev/rick570 reply as of this recheck (3 days): "Infinity - Order items export", "Implement Smart Hybrid Product Search", "Fountain - Browse page - Product blurbs", "Fountain Gifts + Infinity Roses — Analytics implementation". |
 | 5 | Maddy — Bitbucket PR #481 | Chronic: Madhuraka (client-side reviewer) posted 2 High + 1 Medium severity findings 2026-06-06 (updated 07-07) on `xtreme-web/rms` PR #481 ("LIFM2-409 feedback") — still OPEN, still no reply/resolution as of 09-21. Same class of issue as the 09-11 finding; Bitbucket token (previously dead/401) is now working, confirms this is real and ongoing. |
 | 6 | Upwork Memo (Rory/Aysar) | Script returned `dom_fallback_day_label_not_found` for both workrooms on 09-18 — inconclusive (scraping issue), NOT a confirmed 0-memo finding. KhanhHH's Aysar Workstream hours (7.83h that day) contradict a real 0. Needs a manual look, not an alert. |
+| 7 | **Matrix — "Mindbody Blog Posts"** (added 17:08) | **New task for DuongDN + MinhTV:** company blog needs ~10 Mindbody posts (chientx, 17/09 08:49). Draft deadline **Wed 23/09** ("trễ nhất T4 tuần sau", 17/09 21:38). DuongDN replied 18/09 09:04 he's only available **next weekend 26–27/09** — i.e. **after** the deadline (evening classes Mon/Wed/Fri through 23/09, homework Tue/Thu). chientx pushed back 18/09 09:12: treat it as a **TL task inside work hours**, feed outline to AI. DuongDN accepted ("oh ok em"). ⚠️ **Nothing posted in-room since 18/09 09:14 — deadline is 2 days out, no draft link from DuongDN** (MinhTV already has his). Also MinhTV's 17/09 13:50 de-dup ask (overlapping topics: Payments-vs-Stripe, double-booking race) is **still unanswered** by DuongDN. |
 
 **Today (Mon 21st):** No leave on file. All 5 monitored devs (LongVV, PhucVT, TuanNT, KhanhHH, LeNH) presumed present; no hours logged yet (too early, 08:35am).
 
@@ -125,11 +126,26 @@ Trello: Ohcleo ✓ complete.
 
 ---
 
-## Matrix — rechecked 08:41 (+07:00)
+## Matrix — rechecked 08:41 (+07:00), corrected 17:08 (+07:00)
 
 26/146 active rooms, 287 messages since window start. Full detail: `reports/2026-09-21/matrix-rooms-0840.md`.
 
-No auto-flagged action items for DuongDN. Key items already surfaced elsewhere (Fountain customer comments, Bailey internal upgrade coordination — internal only, not a customer gate). One informational note: James Diamond client (KH) hasn't paid August invoice, internal follow-up planned "tuần sau" (next week) — not an active alert.
+~~No auto-flagged action items for DuongDN.~~ **CORRECTED 17:08:** the morning pass missed the **"Mindbody Blog Posts"** room (`!d9VdGL_akBcD9SI21uPd8rWsxAXAhVX1AqAenBt1Nm8`) — it had 3 script-flagged action items and a firm Wed 23/09 deadline. See ALERTS SUMMARY #7.
+
+**⚠️ Action items for DuongDN:**
+| Room | Time | Message |
+|------|------|---------|
+| Mindbody Blog Posts | 17/09 08:49 | chientx: "Cty hiện tại đang muốn publish một số nội dung trên blog của cty liên quan Mindbody, nên nhờ a Dương và Minh hỗ trợ viết 1 số bài nha. Cty đang cần cỡ 10 bài viết." — new task, deadline Wed 23/09 ⚠️ |
+| Mindbody Blog Posts | 17/09 13:50 | minhtv: "Em lọc mấy cái có độ tương đồng cao nhé a Dương ơi…" — flags 2 topic overlaps vs DuongDN's list (Payments-vs-Stripe; double-booking race), **no reply from DuongDN** ⚠️ |
+| Mindbody Blog Posts | 18/09 09:12 | chientx: "ráng sắp xếp trong giờ đi a, cái này coi như 1 task TL cần làm trong giờ th. Đã có idea, mainpoint thì kêu AI nó viết th" — DuongDN must do it **in work hours**, not weekend ⚠️ |
+
+**Mindbody Blog Posts — new task, deadline 23/09, at risk:**
+- 17/09: chientx asks DuongDN + MinhTV for 10 Mindbody blog posts; both submit topic lists same day; sheet shared (`docs.google.com/spreadsheets/d/1ThIxwdvdzgcFv9BzIXWW42B-g4M8BNdy_MsQ8N-LVU8` — not readable by our service account, 403).
+- Requirements: raw **markdown .md** whole post; diagrams as **separate image files**, not embedded (21:42).
+- 18/09 09:04 DuongDN: only free **weekend 26–27/09** (classes 2-4-6 evenings to Wed 23/09, homework Tue/Thu) → **conflicts with the 23/09 deadline**. chientx rejected the weekend plan, said do it in working hours. DuongDN: "oh ok em". MinhTV: "Em okay với deadline này".
+- 19–21/09: **room silent, no draft posted.** Deadline 23/09 = 2 days away.
+
+Other key items already surfaced elsewhere (Fountain customer comments, Bailey internal upgrade coordination — internal only, not a customer gate). Informational: James Diamond client (KH) hasn't paid August invoice, internal follow-up planned "tuần sau" — not an active alert.
 
 ---
 
@@ -192,3 +208,5 @@ All 3 gaps are resolved (configs now exist and authenticate); only #3 surfaced a
 - **Process gap found 09:04:** `parse-leave-emails.js` only matches "Đơn xin nghỉ phép" subjects, misses "Đơn xin làm remote" threads that resolve into de facto approved absence (as happened here). Worth widening the subject match or at least flagging remote-work-request threads for manual review before any 0h alert fires.
 - Bitbucket PR #481 (Maddy) has been open with unanswered High-severity findings since June — recommend explicit escalation to Kai, this has now been flagged in 2 separate recheck passes (09-11 and 09-21).
 - MPFC new Elementor-related error classes (09-18) not yet triaged for root cause — recommend passing to dev for investigation given Apdex has degraded to 0.48.
+- **Mindbody blog task (new, 17:08):** does DuongDN intend to deliver the 10 drafts by Wed 23/09, or is he still planning weekend 26–27/09 (past deadline)? Needs a decision today — chientx already said do it in work hours. MinhTV's topic de-dup ask also still unanswered.
+- "Mindbody Blog Posts" room code (`!d9VdGL_akBcD9SI21uPd8rWsxAXAhVX1AqAenBt1Nm8`) not yet added to `docs/memory/daily-report/reminders/reference_matrix_rooms.md` — add so future morning scans surface it as a tracked room.
