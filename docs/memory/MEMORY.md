@@ -40,6 +40,7 @@
 - [feedback_recheck_must_always_retry_workstream_first](daily-report/general/feedback_recheck_must_always_retry_workstream_first.md) — 🔴🔴🔴 2026-09-11: recheck MUST retry Workstream login as first unconditional step, never carry forward cron's outage note unretried
 - [feedback_recheck_must_be_exhaustive_not_shallow](daily-report/general/feedback_recheck_must_be_exhaustive_not_shallow.md) — 🔴🔴🔴🔴 2026-09-11 user hard rule: recheck = full pieces (Maddy 4-part etc), spot-check scripts, day-level cross-system checks, not just Trello ○ chase
 - [feedback_reminder_sent_autocompletes_tasklog_gated_item](daily-report/general/feedback_reminder_sent_autocompletes_tasklog_gated_item.md) — 🔴 2026-09-15: 0h/task-log-gated item → send reminder → auto-complete, don't wait for dev to backfill
+- [feedback_20260921_recheck_findings](daily-report/general/feedback_20260921_recheck_findings.md) — 🔴 all 3 structural gaps (Philip msteams/Fountain trello token/Bitbucket Maddy token) now FIXED and working; Bitbucket surfaced real chronic PR #481 alert
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
