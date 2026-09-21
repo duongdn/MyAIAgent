@@ -12,7 +12,7 @@
 |---|--------|-------|
 | 1 | Email (MPFC/ken@/rick@) | Rollbar prod: chronic `WP_Error::get_method()` continues (Fri–Sun). **NEW this pass:** 2 new error classes 09-18 — `Class 'Elementor\Core\Schemes\Manager' not found`, `Class 'ElementorPro\License\API' not found` (both first-occurrence), plus a 10th-occurrence memory-exhaustion critical (`E_ERROR: Allowed memory size of 1073741824 bytes exhausted`). Consistent with Performance piece below (MPFC Apdex 0.48 = poor). |
 | 2 | Performance (MPFC prod) | Apdex 0.48 (poor, <0.7 threshold), avg response 1295ms. Error rate 789/80313 = 0.98% (below 5% threshold) but the errors above are real new classes, not just the chronic one. |
-| 3 | Sheets/Workstream — James Diamond | **LeNH 0h logged Fri 09-18** (last entry 09-17, 32h/32h that week) — no leave on file, re-verified fresh via `workstream-fetch-project-week.js`. LeNH's stricter <1h-shortfall rule applies. Gates the James Diamond item. |
+| 3 | ~~Sheets/Workstream — James Diamond: LeNH 0h logged Fri 09-18, no leave on file~~ | **CORRECTED 09:04 (+07:00):** not an alert. `parse-leave-emails.js` only matches "Đơn xin nghỉ phép" (formal leave) subjects and missed a "Đơn xin làm remote" (remote-work request) thread: LeNH emailed 09-18 07:51 that he had fever + stomach pain and couldn't come in; Office Admin forwarded to Nam Tran (his manager), who replied 08:47 "em off nghỉ ngơi, ko làm remote" (take the day off and rest, don't work remote) — i.e. an approved sick day, not unexcused absence. 0h on 09-18 is fully explained. James Diamond item should be marked complete, not skipped. |
 | 4 | Fountain — customer comments | 4 unanswered comments from kunalsheth on Trello board (Web Development), all posted 09-18, still no dev/rick570 reply as of this recheck (3 days): "Infinity - Order items export", "Implement Smart Hybrid Product Search", "Fountain - Browse page - Product blurbs", "Fountain Gifts + Infinity Roses — Analytics implementation". |
 | 5 | Maddy — Bitbucket PR #481 | Chronic: Madhuraka (client-side reviewer) posted 2 High + 1 Medium severity findings 2026-06-06 (updated 07-07) on `xtreme-web/rms` PR #481 ("LIFM2-409 feedback") — still OPEN, still no reply/resolution as of 09-21. Same class of issue as the 09-11 finding; Bitbucket token (previously dead/401) is now working, confirms this is real and ongoing. |
 | 6 | Upwork Memo (Rory/Aysar) | Script returned `dom_fallback_day_label_not_found` for both workrooms on 09-18 — inconclusive (scraping issue), NOT a confirmed 0-memo finding. KhanhHH's Aysar Workstream hours (7.83h that day) contradict a real 0. Needs a manual look, not an alert. |
@@ -69,7 +69,7 @@ Trello: Maddy — ⚠️ skipped (Bitbucket PR #481 alert, see ALERTS SUMMARY #5
 **AirAgri (nusvinn):** token valid. Ceres PR coordination 09-18, normal dev workflow, no alert.
 **Bizurk (nuscarrick):** token valid, 0 messages, 0 Andrew DMs in window — no activity, no alert.
 
-Trello: James Diamond — ⚠️ skipped (gated on LeNH 0h, see ALERTS SUMMARY #3, not a Discord finding). Andrew Taraba ✓ complete.
+Trello: James Diamond — ~~⚠️ skipped~~ ✓ complete (LeNH 0h was an approved sick day, see ALERTS SUMMARY #3 correction). Andrew Taraba ✓ complete.
 
 ---
 
@@ -89,13 +89,13 @@ Fresh `workstream-fetch-project-week.js` pull for weeks 09-14→20 and 09-21→2
 | PhucVT | 0h | On approved leave through 09-18 — OK, no alert. |
 | TuanNT | Bailey/speedventory 4h | Below 8h target but combined >0h — no full alert per rule; noted as marginal. |
 | KhanhHH | Baamboozle 3.5h + Radio Data Center(Franc) 4.33h = 7.83h combined | ~8h, no alert. |
-| LeNH | 0h across all projects (James Diamond last entry 09-17) | **ALERT — no leave on file.** See ALERTS SUMMARY #3. |
+| LeNH | 0h across all projects (James Diamond last entry 09-17) | ~~ALERT — no leave on file~~ **Corrected: approved sick day** (fever + stomach pain, emailed 07:51, manager Nam Tran approved rest over remote work). No alert. See ALERTS SUMMARY #3. |
 
 **Workstream needsReview (non-Fountain):** OhCleo — HungPN, "Checked the list of users displaying the wrong Premium plan", 0:00 charged, 09-14, still Pending → addressed to reviewers DuongDN/MinhTV. Not urgent (pre-window, 0-hour charge), noted for follow-up.
 
 **Maddy JIRA weekly cross-check (week 09-14→20):** 2 entries with no ticket estimate / no JIRA time log (LIFM2-466, and an untagged "Check Issue quoting tool & feedback" 5h entry missing a ticket key) — process gap, not a customer-facing alert.
 
-Trello: LeNH-gated items (James Diamond) ⚠️ skipped. All others ✓ complete (see per-section notes above).
+Trello: James Diamond (LeNH-gated) ✓ complete (corrected — approved sick day, not an alert). All others ✓ complete (see per-section notes above).
 
 ---
 
@@ -158,7 +158,7 @@ Trello: no dedicated Upwork Memo checklist item exists.
 
 ## Reminders — 08:59 (+07:00)
 
-LeNH: 0h Fri 09-18, no leave on file → needs reminder. **Not sent this pass** (no `--send-reminder` flag / explicit send instruction given). Flagging for manual send decision.
+~~LeNH: 0h Fri 09-18, no leave on file → needs reminder.~~ **Corrected: no reminder needed** — approved sick day (see ALERTS SUMMARY #3 correction).
 
 ---
 
@@ -188,6 +188,7 @@ All 3 gaps are resolved (configs now exist and authenticate); only #3 surfaced a
 ## Unresolved Questions
 
 - Upwork memo check inconclusive for Rory/Aysar (script scraping issue) — needs a manual re-check or script fix, not resolved this pass.
-- LeNH 0h reminder not sent — awaiting explicit send instruction.
+- ~~LeNH 0h reminder not sent — awaiting explicit send instruction.~~ Resolved — was an approved sick day, no reminder needed.
+- **Process gap found 09:04:** `parse-leave-emails.js` only matches "Đơn xin nghỉ phép" subjects, misses "Đơn xin làm remote" threads that resolve into de facto approved absence (as happened here). Worth widening the subject match or at least flagging remote-work-request threads for manual review before any 0h alert fires.
 - Bitbucket PR #481 (Maddy) has been open with unanswered High-severity findings since June — recommend explicit escalation to Kai, this has now been flagged in 2 separate recheck passes (09-11 and 09-21).
 - MPFC new Elementor-related error classes (09-18) not yet triaged for root cause — recommend passing to dev for investigation given Apdex has degraded to 0.48.

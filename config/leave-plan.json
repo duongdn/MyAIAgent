@@ -18,6 +18,22 @@
   ],
   "leaves": [
     {
+      "id": "lenh-2026-09-18",
+      "dev_id": "LeNH",
+      "dev_email": "lenh@nustechnology.com",
+      "dates": [
+        "2026-09-18"
+      ],
+      "type": "full",
+      "reason": "bị sốt và đau bụng từng cơn, xin làm remote nhưng manager (Nam Tran) yêu cầu nghỉ ngơi thay vì làm remote",
+      "status": "approved",
+      "requested_at": "2026-09-18T07:51:00+07:00",
+      "approved_by": "namtv@nustechnology.com",
+      "approved_at": "2026-09-18T08:47:00+07:00",
+      "email_subject": "LeNH_Đơn xin làm remote ngày 18/09/2026",
+      "note": "Manually added 2026-09-21 recheck — parse-leave-emails.js missed this because it only matches 'Đơn xin nghỉ phép' subjects, not 'Đơn xin làm remote' threads that resolve into approved absence."
+    },
+    {
       "id": "tuannt-2026-06-11",
       "dev_id": "TuanNT",
       "dev_email": "tuannt@nustechnology.com",

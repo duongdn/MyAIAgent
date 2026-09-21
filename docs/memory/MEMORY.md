@@ -79,6 +79,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_verify_workstream_zero_hours_before_alerting](daily-report/sheets/feedback_verify_workstream_zero_hours_before_alerting.md) — 🔴🔴🔴 2026-08-25: false LeNH 0h alert from stale/misread data, re-verify fresh before ANY 0h claim
 - [feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt](daily-report/sheets/feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt.md) — 🔴🔴🔴 3rd recurrence: James Diamond gate = LeNH not PhucVT, skill table is stale, memory wins
 - [feedback_20260915_recheck_findings](daily-report/sheets/feedback_20260915_recheck_findings.md) — 🔴 real KhanhHH+LeNH 0h 09-14; 3 structural gaps: Philip config missing, Fountain customer board no token, Bitbucket Maddy token 401
+- [feedback_parse_leave_emails_misses_remote_work_threads](daily-report/sheets/feedback_parse_leave_emails_misses_remote_work_threads.md) — 🔴🔴 2026-09-21: false LeNH 0h alert, script only matches "nghỉ phép" subjects not "làm remote" threads; always direct-email-search before flagging a strict-gate dev's 0h
 
 ## daily-report:scrin
 - [feedback_scrin_consolidated](daily-report/scrin/feedback_scrin_consolidated.md) — 🔴🔴🔴 tracks Nick NOT TuanNT
