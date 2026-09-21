@@ -96,6 +96,18 @@ The following pieces require a follow-up recheck pass with the same window (`dai
 - Arthur/Meta-Stamp (Piece 13)
 - Upwork Memo (Piece 15)
 
+## Zalo — 08:36 (+07:00)
+
+Window: 2026-09-18T08:52 → now (`--since` override, standalone run per `--include-whatsapp-zalo`-gated piece).
+
+| Chat | New msgs | Key content |
+|------|----------|-------------|
+| Various personal/group chats | multiple | Personal groups only — 6km race group chat, con's class parent group (Trung Thu event coordination), Zumba/kids workshop groups, condo (Moscow Tower) BQT fire-alarm notice (resolved, kitchen smoke false alarm), P2P Techcombank group, stock/investment group, misc. |
+
+No client/customer conversations found — all personal (family, condo, hobby groups). No alerts.
+
+---
+
 ## Unresolved Questions
 
 - Full monitoring sweep incomplete — recommend running `/daily-report recheck` (or a fresh `/daily-report`) to complete Pieces 4–15 before treating today's ALERTS SUMMARY as final.
