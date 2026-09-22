@@ -499,6 +499,22 @@
       },
       "method": "reconstructed",
       "note": "MISA totaldashboard 7,270,834,188 + Larion 800M (fixed, confirmed). Net Worth +4.25M vs 09-15 (~flat qua 2 ngay). Liquid +40.4M (Freelancer income Paypal 09-04 + it chi tieu). Investment +31.7M (ETF/Fund tang gia+lai). Gold +4.5M (gia). Savings khong doi. Sept MTD: Thu 71.31M / Chi 24.83M / Net +46.48M. Ghost saving nam a 6m (2.0M, dao han 2024) van treo chua don."
+    },
+    {
+      "date": "2026-09-22",
+      "label": "22/09",
+      "net_worth": 8057204600,
+      "gross_assets": 8143139668,
+      "liabilities": 0,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 730500000,
+        "investment": 2458023840,
+        "savings": 1244986407,
+        "liquid": 176003502
+      },
+      "method": "dashboard_verified",
+      "note": "Net Worth -13.6M vs 09-17 (5 ngay, bien dong nho, VCBS gia ETF giam). Sept MTD Thu 71.32M/Chi 36.58M/Net +34.75M. Larion 800M final khong doi. Ghost saving nam a 6m (2M) van treo."
     }
   ]
 }
