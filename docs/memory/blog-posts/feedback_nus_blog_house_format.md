@@ -13,6 +13,13 @@ DuongDN rejected the Mindbody posts' cold open ("mới mở đầu đi thẳng v
 3. Scope/constraint/payoff — what this article covers.
 Then a horizontal rule (`---`), then the hero diagram, then sections.
 
+🔴 **The opening rhythm, verbatim from the Typesense post** — do NOT write a neutral description of the domain ("side A handles X, side B handles Y"). Name a *reflex*, then indict it:
+> *"When designing search functionality for a modern Software-as-a-Service (SaaS) platform, there is a common engineering [instinct]… It is an easy default to fall back on, but in multi-tenant architectures… **we designed a pragmatic hybrid search architecture**, splitting the workload between…"*
+
+So: `When <situation>, there is a common engineering instinct: <name it>. / It is an easy default, and it holds right up until <the first time it breaks>. / Our team built <X> in production for <Y>, and <what was NOT hard> was never the hard part. This article covers…`
+
+DuongDN rejected the neutral-description version of post 01's opening twice (2026-09-22: "vẫn tệ quá, tìm cách mở bài hay hơn"). The reflex-indictment shape is what he wanted.
+
 **Body shape:** Problem → named trap of the naive approach → architecture/solution → deep dives → Impact/Results → Core Lesson → CTA.
 
 **Voice:** first-person plural ("our team", "we built") — never "I".
