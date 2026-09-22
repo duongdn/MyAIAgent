@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 5419ae3a-04a5-4ff5-bf06-645e9e3da345
-  modified: 2026-09-22T02:35:11.747Z
+  modified: 2026-09-22T02:51:31.212Z
 ---
 
 Task from chientx in Matrix room "Mindbody Blog Posts", deadline **Wed 2026-09-23**. DuongDN writes 7 posts (MinhTV yielded the payments + double-booking topics because they overlap DuongDN's own).
@@ -18,4 +18,7 @@ Two corrections the user gave while this was being written — both still bindin
 
 **Why:** the company blog's value is the concrete, verified production detail; generic platform knowledge is what everyone else already writes.
 
-**How to apply:** before writing or revising any post in this series, grep the Rory code path listed in the README's source table and quote what is actually there. If a topic has no implementation in the codebase (e.g. Apple Wallet/PassKit — none exists), say so honestly rather than inventing grounded-sounding specifics. Never let real API keys, hosts, SiteIds, client ids, custom-payment ids, client/project names or ticket ids reach a post — placeholders only. See [[project-rory-hardcoded-credentials-flagged]].
+**How to apply:** before writing or revising any post in this series, grep the Rory code path listed in the README's source table and quote what is actually there. Never let real API keys, hosts, SiteIds, client ids, custom-payment ids, client/project names or ticket ids reach a post — placeholders only. See [[project-rory-secret-hardcoding-flagged]].
+
+🔴 **Verify across git branches before claiming code is absent.** I claimed "the project has no Apple Wallet/PassKit code" and was wrong — the user had written it himself. The wallet implementation lives in `booking/wallet/` (PassFactory + WebService + index.php) plus `bxr-app-2022` `src/screens/profile/Profile.js`, and the commit `3989f36` *"Implemented: add apple/google wallet generated barcode."* is on **`develop`**, not on `master` (which is what the working tree was checked out to). Lesson: run `git log --all --grep=<term>` and `git branch -a --contains <sha>` on every repo before concluding a feature does not exist. Also: `booking/` has an empty git dir (no commits) so it must be searched as plain files.
+
