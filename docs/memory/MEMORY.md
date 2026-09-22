@@ -114,6 +114,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_read_full_room_transcript_not_grep_snippets](daily-report/matrix/feedback_read_full_room_transcript_not_grep_snippets.md) — 🔴
 - [project_matrix_static_compat_token](daily-report/matrix/project_matrix_static_compat_token.md) — 🔴 mct_ admin token
 - [feedback_maddy_bitbucket_pr_alert_needs_live_verification](daily-report/matrix/feedback_maddy_bitbucket_pr_alert_needs_live_verification.md) — 🔴 recompute live
+- [feedback_maddy_pr481_not_a_blocker_waiting_on_customer](daily-report/slack/feedback_maddy_pr481_not_a_blocker_waiting_on_customer.md) — 🔴🔴 PR #481 flagged 3x wrongly; waiting on customer feedback ≠ our blocker, stop re-flagging
 - [feedback_dont_bury_real_issues_as_context](daily-report/matrix/feedback_dont_bury_real_issues_as_context.md) — 🔴 real issue needs own alert
 
 ## daily-report:upwork

@@ -20,7 +20,7 @@
 
 | 8 | ~~Workstream task log (09-21) — TuanNT 0h and LeNH 0h~~ | **TuanNT: NOT an alert (corrected 09:20)** — 8.5h logged on **Speedventory (Bailey project)**, missed on first pass because I truncated a large combined-project JSON dump before reaching his entry. John Yi + Rebecca ✓ completed. **LeNH: still 0h, real** (James Diamond) — reminder not sent, see Reminders section. |
 | 9 | Fountain customer Trello board | **3 kunalsheth comments from 09-18 still unanswered 4 days later**: "Infinity - Order items export" (gift/card missing from export), "Implement Smart Hybrid Product Search", "Fountain - Browse page - Product blurbs" (CSV export has no blurb field). Rick answered other cards on 09-21 but not these. |
-| 10 | Maddy Bitbucket (xtreme-web/rms) | **PR #481 "LIFM2-409 feedback" — Madhuraka's Codex findings (2 High + 1 Medium) posted 2026-06-06, still the ONLY comment, zero reply after 3.5 months.** Flagged 09-11 and 09-21; this is the 3rd repeat. Needs direct escalation, not another note. |
+| 10 | ~~Maddy Bitbucket PR #481 — unanswered 3.5 months~~ | ❌ **RETRACTED (user 09:45): wrong alert.** PR #481 is waiting on customer feedback, not on us — not a blocker. Maddy ✓ completed. |
 | 11 | MPFC New Relic (prod) | **Apdex 0.47 (poor, threshold 0.7)** — 27,945 of 32,515 requests in "tolerating", avg 1442ms. Also 5 transactions >27s (sitemap_index.xml 60.3s, author-sitemap 46.1s) and **SQL-injection probe traffic** hitting `/search/` (PG_SLEEP payloads, 49.6s). Chronic: was 0.48 on 09-21. |
 | 12 | GGS #maintenance (Alert #1 follow-up) | Incident **not resolved** — joey's 01:15 instruction ("orders 40157/40152/40164/40170 already redone manually, cancel these when you run the script") is the last message and is still unanswered at 08:45. |
 
@@ -168,7 +168,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 | Item | State | Basis |
 |------|-------|-------|
 | John Yi | ✓ (corrected 09:20) | ~~TuanNT 0h~~ TuanNT 8.5h on Bailey/Speedventory 09-21 — not blocking. Amazing Meds Slack: 0 activity. |
-| Maddy | ○ | Bitbucket PR #481 — 3.5-month-unanswered High-severity client findings (Alert #10). Hours/Slack/JIRA all clean. |
+| Maddy | ✓ (corrected 09:45) | ~~Bitbucket PR #481 unanswered~~ retracted, waiting on customer not us. Hours/Slack/JIRA all clean. |
 | James Diamond | ✓ | Discord AirAgri: Vinn + Jeff daily reports both present. |
 | Rory | ✓ | ~~unanswered ask~~ jeff→Rory is client-internal, not an ask to NUS; Carrick gate clean. |
 | Aysar | ✓ | ~~MPDM silence~~ KhanhHH 0h on Baamboozle 09-21 → no update expected. Carrick acknowledged both #testing feature requests. |
@@ -182,8 +182,8 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 | Elena - WordPress SamGuard | ✓ | Site check clean — 0 CSP/JS/page errors. |
 | Colin, Elena-SamGuard, Arthur, Blair Brown, Philip | ✓ | Ignore List (paused). |
 
-**Completed this recheck:** Rory, Aysar, Elliott, Elena - WordPress SamGuard, John Yi, Rebecca (09:20 correction).
-Card not auto-completed — 4 items remain ○: Maddy, Bailey, Fountain, Andrew Taraba.
+**Completed this recheck:** Rory, Aysar, Elliott, Elena - WordPress SamGuard, John Yi, Rebecca (09:20), Maddy (09:45).
+Card not auto-completed — 3 items remain ○: Bailey, Fountain, Andrew Taraba.
 
 ---
 
@@ -220,9 +220,7 @@ No invalid memos. All workrooms fetched successfully (no session/Cloudflare fail
 1. **Task-log hours (Workstream `maddy`, 09-21):** LuHX 8h, ThanhNX 1h. **LongVV 0h** → ad-hoc, not an alert, and no Kai-role hours → Kai daily-report presence gate correctly skipped.
 2. **Slack (Xtreme Soft Solutions):** 14 msgs — Kai/Madhuraka working tickets 452/456/465, OTP exchanges for test access, 465 handed to Anoma for testing. No blockers, no unanswered client ask.
 3. **JIRA weekly cross-check:** `maddy-jira-tasklog-check.js --week 2026-09-21` → no JIRA-tagged task-log entries this week yet (week is 1 day old). Nothing over-budget / missing-estimate to report.
-4. **Bitbucket `xtreme-web/rms` PR reply-rate:** 7 open PRs. 🔴 **PR #481 "LIFM2-409 feedback"** — Madhuraka's Codex review (**2 High** incl. "refund payouts are still double-posted, so Shopify cle…", + 1 Medium) posted **2026-06-06**, still the only comment on the PR, **no reply in 3.5 months**; PR last touched 09-10. PRs #520/#543/#540/#544 have zero comments (awaiting review); #534 and #509 have only Rovo Dev bot comments.
-
-**Escalation recommended, not another note:** #481 has now been flagged on 09-11, 09-21 and today. See Unresolved Questions.
+4. **Bitbucket `xtreme-web/rms` PR reply-rate:** 7 open PRs. ~~PR #481 — unanswered 3.5 months, escalate~~ ✅ **Corrected 09:45 (user):** PR #481 is waiting on customer feedback, not a blocker on our side — wrong alert, retracted. This was flagged 3x (09-11, 09-21, today) on a misread; not re-flagging again. PRs #520/#543/#540/#544 have zero comments (awaiting review, normal); #534 and #509 have only Rovo Dev bot comments.
 
 ---
 
@@ -270,7 +268,7 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 
 **Celine - OhCleo:** LongVV/HungPN/MinhTV working AI transcript-link task; Celine requested a meeting (held — see OhCleo Slack section). Trello itself had an outage ~16:57–17:11.
 
-**Maddy - Extreme Soft Solutions:** you raised that last week had **3 external bugs despite few hours**; LongVV replied in-thread that root cause is mostly the Quote Tool and he'd already explained it to the client. Ties to Alert #10 (PR #481 unanswered).
+**Maddy - Extreme Soft Solutions:** you raised that last week had **3 external bugs despite few hours**; LongVV replied in-thread that root cause is mostly the Quote Tool and he'd already explained it to the client.
 
 **Delivery - Resource Arrangement (leave that affects our projects):**
 - HaVS off 21/09; TamLH 21/09 (family, Shai covers with PL); ThinhPVD 21/09 (wedding policy); ThoTNT 21/09 PM (military pre-screening).
@@ -297,12 +295,11 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 | Piece 9 Reminders | ✅ computed — LeNH 0h (real), not sent; TuanNT 0h retracted (see Reminders section) |
 | Elena WordPress CSP | ✅ run — clean |
 | Fountain Parts 2/3 + Trello board | ✅ run — 3 unanswered customer comments = Alert #9 |
-| Maddy full 4-part | ✅ run — PR #481 = Alert #10 |
+| Maddy full 4-part | ✅ run — PR #481 flag retracted (customer-side wait, not our blocker) |
 | Workstream login | ✅ retried, succeeded first attempt |
 
 ## Unresolved Questions
 
-2. **Bitbucket PR #481** — 2 High + 1 Medium client findings unanswered since 2026-06-06, now flagged for the 3rd time. Do you want this escalated directly to Kai/LongVV rather than re-noted next run?
 3. **James Diamond: two unexplained API keys** (`WCS-NETMAP-01`, `PowerBi`) actively hitting the customer's system — PhucVT confirmed we only created one. Who owns closing this out?
 4. **MPFC** — Apdex 0.47 chronic + SQLi probes served at ~50s on `/search/`. Worth a dedicated fix session (rate-limit + sitemap caching), or leave as-is?
 5. **GGS incident** — joey's 01:15 order-cancellation instruction still unanswered; is Nick on it this morning?
