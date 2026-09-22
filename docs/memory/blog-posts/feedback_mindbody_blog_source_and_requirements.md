@@ -10,7 +10,9 @@ metadata:
 
 Task from chientx in Matrix room "Mindbody Blog Posts", deadline **Wed 2026-09-23**. DuongDN writes 7 posts (MinhTV yielded the payments + double-booking topics because they overlap DuongDN's own).
 
-Deliverables: `docs/blog-posts/mindbody/{posts,diagrams}/` + `README.md` index. One `.md` per post; diagrams as **separate downloadable image files** (relative link to `diagrams/*.svg`), never embedded.
+Deliverables: `tmp/blog-posts/mindbody/{posts,diagrams}/` + `README.md` index. One `.md` per post; diagrams as **separate downloadable image files** (relative link to `diagrams/*.svg`), never embedded.
+
+🔴 **Path moved 2026-09-22: `docs/blog-posts/` → `tmp/blog-posts/`.** The blog work is a deliverable of the Mindbody task, not part of this repo's purpose, so it lives in `tmp/` (gitignored — the `auto-commit-push.sh` hook does `git add -A` and would otherwise sweep it in every few minutes). The path was also purged from the whole git history with `git filter-repo --path docs/blog-posts --invert-paths`. Do NOT move it back under `docs/`.
 
 Two corrections the user gave while this was being written — both still binding:
 1. **"thông tin chỉ có bao nhiêu đó trong Element thôi"** — ALL requirements are in the Matrix room transcript. Do not hunt email/Google Sheets for them. (I had been doing that; wrong.)
