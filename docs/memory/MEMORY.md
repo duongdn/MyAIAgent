@@ -236,3 +236,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 ## blog-posts (Mindbody series)
 - [feedback_mindbody_blog_source_and_requirements](blog-posts/feedback_mindbody_blog_source_and_requirements.md) — task chientx deadline 2026-09-23; requirements from Matrix room ONLY, content must come from Rory project code not the web; diagrams separate files
 - [project_rory_secret_hardcoding_flagged](blog-posts/project_rory_secret_hardcoding_flagged.md) — hardcoded prod DB creds + client-side API key in Rory booking code; flagged to user, kept out of all posts
+- [feedback_nus_blog_house_format](blog-posts/feedback_nus_blog_house_format.md) — format nhà của nustechnology.com/blog: mở bài 3 đoạn bối cảnh→dự án→phạm vi, không kể sự cố cụ thể, luôn có CTA, title có dấu hai chấm
