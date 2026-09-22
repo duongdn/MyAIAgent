@@ -232,3 +232,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 ## No dedicated memory yet
 trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
+
+## blog-posts (Mindbody series)
+- [feedback_mindbody_blog_source_and_requirements](blog-posts/feedback_mindbody_blog_source_and_requirements.md) — task chientx deadline 2026-09-23; requirements from Matrix room ONLY, content must come from Rory project code not the web; diagrams separate files
+- [project_rory_secret_hardcoding_flagged](blog-posts/project_rory_secret_hardcoding_flagged.md) — hardcoded prod DB creds + client-side API key in Rory booking code; flagged to user, kept out of all posts
