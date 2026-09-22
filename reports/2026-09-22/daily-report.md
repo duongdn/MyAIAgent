@@ -231,12 +231,12 @@ No invalid memos. All workrooms fetched successfully (no session/Cloudflare fail
 | Dev | Mon 09-21 | Leave? | Action |
 |-----|-----------|--------|--------|
 | ~~TuanNT~~ | ~~0h~~ **8.5h** (corrected 09:20 — Bailey/Speedventory, missed on first read) | — | not needed |
-| LeNH | 0h (James Diamond) | none on file for 09-21 | **needs reminder — NOT SENT** (no `--send-reminder` flag) |
+| LeNH | 0h (James Diamond) | none on file for 09-21 | **reminder SENT 09:35** (`!OIrgPraJWrcDTnRVLQ:...`, event `$0lU0sks1XmBBmQ18vkBKLQ1NAT7EgUdT_7TZKdVC6ak`), user-confirmed |
 | PhucVT | 0h | — | skipped — adhoc/external, excluded |
 | LongVV | 0h | — | skipped — ad-hoc, no fixed target |
 | KhanhHH | 8h | — | skipped — on plan |
 
-⚠️ **Read before sending:** LeNH's 0h/no-leave day would normally get the reminder + auto-complete its gated item (James Diamond). I did not send, because Matrix shows her actively working the James Diamond room 17:14–17:30 that day — task-log hygiene gap, not absence. Say the word and I'll send to LeNH (`!OIrgPraJWrcDTnRVLQ:...`) and complete James Diamond accordingly.
+✅ **Reminder sent 09:35** (user confirmed): task-log hygiene gap, not absence — LeNH was actively working the James Diamond room 17:14–17:30 that day per Matrix. **Note on the gated Trello item:** the "James Diamond — Vinn task" checklist item is actually gated on Discord AirAgri + PhucVT hours (per `reference_trello_gate_mapping.md`), not on LeNH's hours — it was already ✓ complete from the Discord check earlier this run, so there is no separate Trello item to flip for LeNH's reminder. The reminder itself is the full action here.
 
 ---
 
@@ -302,7 +302,6 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 
 ## Unresolved Questions
 
-1. **Send the LeNH reminder?** She logged 0h on James Diamond 09-21 with no leave, but Matrix shows her working that room 17:14–17:30 — task-log hygiene gap, not absence. (TuanNT's matching 0h alert was retracted — see Alert #8 correction — he logged 8.5h on Bailey/Speedventory.)
 2. **Bitbucket PR #481** — 2 High + 1 Medium client findings unanswered since 2026-06-06, now flagged for the 3rd time. Do you want this escalated directly to Kai/LongVV rather than re-noted next run?
 3. **James Diamond: two unexplained API keys** (`WCS-NETMAP-01`, `PowerBi`) actively hitting the customer's system — PhucVT confirmed we only created one. Who owns closing this out?
 4. **MPFC** — Apdex 0.47 chronic + SQLi probes served at ~50s on `/search/`. Worth a dedicated fix session (rate-limit + sitemap caching), or leave as-is?
