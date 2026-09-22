@@ -18,7 +18,7 @@
 | 6 | Elena-SamGuard GitHub | PR #309 ("Implement header and modal components with i18n support") is `CONFLICTING` (merge conflict), no reviews, CodeRabbit last ran 2026-08-11 — stale, needs rebase. (Informational — Elena item is on the paused Ignore List, not gated on this.) |
 | 7 | Rick@ inbox (Fountain/Infinity) | Several production (not just staging) error emails: `[FountainGifts] production #328 SystemStackError`, `[InfinityRoses] production #457 ActiveRecord::InvalidForeignKey`, `[FirstProject] production #1109/#1117 TypeError`. Not cross-verified against Rollbar dashboards this run. |
 
-| 8 | Workstream task log (09-21) | **TuanNT 0h and LeNH 0h on Mon 09-21, no leave on file** (direct IMAP search confirms only LeNH's 09-18 remote/sick thread exists, nothing for 09-21). Gates John Yi + Rebecca + Bailey (TuanNT) and James Diamond (LeNH). ⚠️ Reminders **not sent** — no `--send-reminder` flag; see Reminders section for the caveat before sending. |
+| 8 | ~~Workstream task log (09-21) — TuanNT 0h and LeNH 0h~~ | **TuanNT: NOT an alert (corrected 09:20)** — 8.5h logged on **Speedventory (Bailey project)**, missed on first pass because I truncated a large combined-project JSON dump before reaching his entry. John Yi + Rebecca ✓ completed. **LeNH: still 0h, real** (James Diamond) — reminder not sent, see Reminders section. |
 | 9 | Fountain customer Trello board | **3 kunalsheth comments from 09-18 still unanswered 4 days later**: "Infinity - Order items export" (gift/card missing from export), "Implement Smart Hybrid Product Search", "Fountain - Browse page - Product blurbs" (CSV export has no blurb field). Rick answered other cards on 09-21 but not these. |
 | 10 | Maddy Bitbucket (xtreme-web/rms) | **PR #481 "LIFM2-409 feedback" — Madhuraka's Codex findings (2 High + 1 Medium) posted 2026-06-06, still the ONLY comment, zero reply after 3.5 months.** Flagged 09-11 and 09-21; this is the 3rd repeat. Needs direct escalation, not another note. |
 | 11 | MPFC New Relic (prod) | **Apdex 0.47 (poor, threshold 0.7)** — 27,945 of 32,515 requests in "tolerating", avg 1442ms. Also 5 transactions >27s (sitemap_index.xml 60.3s, author-sitemap 46.1s) and **SQL-injection probe traffic** hitting `/search/` (PG_SLEEP payloads, 49.6s). Chronic: was 0.48 on 09-21. |
@@ -103,14 +103,14 @@ Trello: James Diamond ✓ complete. Andrew Taraba left ○ (unanswered DM).
 | KhanhHH | 8h | radio_data_center 8h | ✅ on target. **0h on Baamboozle** → Aysar silence expected (Alert #3 retracted). 0h Generator → Elliott not gated. |
 | LongVV | 0h | — | ✅ not an alert — ad-hoc, no fixed target (rule retired 2026-08-24). Also means **no Kai-role hours → Kai daily-report gate skipped**, correctly. |
 | PhucVT | 0h | — | ✅ not an alert — adhoc/external, excluded from WS tracking. |
-| **TuanNT** | **0h** | none on any project | 🔴 **ALERT** — 8h/day target, no leave on file. Gates John Yi + Rebecca + Bailey. |
+| **TuanNT** | ~~**0h**~~ **8.5h** (corrected 09:20) | Speedventory (Bailey) 8.5h — missed on first read, was cut off in a truncated JSON dump | ✅ not an alert. Gates John Yi + Rebecca + Bailey, all cleared. |
 | **LeNH** | **0h** | James Diamond 0h | 🔴 **ALERT** — strict gate (any shortfall). No leave on file. Last entries 09-14→09-17 (8h/day), 0h 09-18 (approved sick day) and 0h 09-21. |
 | DuongDN | 1h | marcel 1h | — |
 | Others logging Mon | — | LuHX 8h (maddy), ThanhNX 1h (maddy), PhatDLT 4h + HungPN 2.25h + TrinhMTT 2.5h + ViTHT 0.5h (fountain), DatNC 2.5h + TrinhMTT 0.75h (speedventory) | — |
 
 **Workstream review status (all projects, 09-21 week):** `needsReview` empty on every project — no pending charged-hour reviews. Reviewers on file: Fountain = VuTQ + DuongDN (excluded from alerting per rule), James Diamond = PhucVT + LeNH, Franc/RDC = LeNH, Elliott/Generator = HangNTT + LucNT, Colin = LucNT. All other projects have **no reviewer configured → `need_review = false`**.
 
-⚠️ **Caveat worth stating plainly:** Monday 09-21 is broadly under-logged across the team — DatNT, ThinhT, VuTQ, VyNL, ThangN, AnhNH2 and others who logged 8h/day all last week also show 0h for Monday, and ViTHT shows 0.5h vs 8h/day prior. The same script returns complete data for the prior week, so this is not a fetch bug, but it does look like **team-wide logging lag on the first day of the week** rather than 10 people simultaneously not working. TuanNT's and LeNH's 0h are real as of now; treat them as "not yet logged" candidates before treating them as "did not work".
+⚠️ **Caveat worth stating plainly:** Monday 09-21 is broadly under-logged across the team — DatNT, ThinhT, VuTQ, VyNL, ThangN, AnhNH2 and others who logged 8h/day all last week also show 0h for Monday, and ViTHT shows 0.5h vs 8h/day prior. The same script returns complete data for the prior week, so this is not a fetch bug, but it does look like **team-wide logging lag on the first day of the week** rather than 10 people simultaneously not working. LeNH's 0h is real as of now; treat it as a "not yet logged" candidate before treating it as "did not work".
 
 Trello: Aysar ✓, Elliott ✓ completed on this data. John Yi, Rebecca, Bailey, Maddy held — see Trello section.
 
@@ -167,7 +167,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 
 | Item | State | Basis |
 |------|-------|-------|
-| John Yi | ○ | TuanNT 0h 09-21, no leave (Alert #8). Amazing Meds Slack: 0 activity (not an alert on its own). |
+| John Yi | ✓ (corrected 09:20) | ~~TuanNT 0h~~ TuanNT 8.5h on Bailey/Speedventory 09-21 — not blocking. Amazing Meds Slack: 0 activity. |
 | Maddy | ○ | Bitbucket PR #481 — 3.5-month-unanswered High-severity client findings (Alert #10). Hours/Slack/JIRA all clean. |
 | James Diamond | ✓ | Discord AirAgri: Vinn + Jeff daily reports both present. |
 | Rory | ✓ | ~~unanswered ask~~ jeff→Rory is client-internal, not an ask to NUS; Carrick gate clean. |
@@ -175,15 +175,15 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 | Franc | ✓ | RDC Slack routine, no blockers. |
 | Elliott | ✓ | ~~WS-gated~~ KhanhHH 8h total (not 0h); Generator Slack 0 activity. |
 | MPFC / Marcel / Raymond / Neural / Ohcleo | ✓ | No blocking issue. Ohcleo re-verified on real (not stale) data. |
-| Bailey | ○ | GGS incident unresolved, joey's 01:15 instruction unanswered (Alert #12) + TuanNT 0h. |
-| Rebecca | ○ | TuanNT 0h 09-21 (Alert #8). William Bills Slack: 0 activity. |
+| Bailey | ○ | GGS incident unresolved, joey's 01:15 instruction unanswered (Alert #12). ~~+ TuanNT 0h~~ TuanNT gate cleared (8.5h logged), this is the sole remaining reason. |
+| Rebecca | ✓ (corrected 09:20) | ~~TuanNT 0h~~ TuanNT 8.5h on Bailey/Speedventory 09-21 — not blocking. William Bills Slack: 0 activity. |
 | Fountain | ○ | 3 unanswered 09-18 customer comments (Alert #9). Parts 1–3 now all run. |
 | Andrew Taraba | ○ | animeworld DM "are you there?" (09-21 02:56) still unanswered ~30h. |
 | Elena - WordPress SamGuard | ✓ | Site check clean — 0 CSP/JS/page errors. |
 | Colin, Elena-SamGuard, Arthur, Blair Brown, Philip | ✓ | Ignore List (paused). |
 
-**Completed this recheck:** Rory, Aysar, Elliott, Elena - WordPress SamGuard.
-Card not auto-completed — 6 items remain ○.
+**Completed this recheck:** Rory, Aysar, Elliott, Elena - WordPress SamGuard, John Yi, Rebecca (09:20 correction).
+Card not auto-completed — 4 items remain ○: Maddy, Bailey, Fountain, Andrew Taraba.
 
 ---
 
@@ -230,13 +230,13 @@ No invalid memos. All workrooms fetched successfully (no session/Cloudflare fail
 
 | Dev | Mon 09-21 | Leave? | Action |
 |-----|-----------|--------|--------|
-| TuanNT | 0h (all projects) | none on file (IMAP direct search) | **needs reminder — NOT SENT** (no `--send-reminder` flag) |
+| ~~TuanNT~~ | ~~0h~~ **8.5h** (corrected 09:20 — Bailey/Speedventory, missed on first read) | — | not needed |
 | LeNH | 0h (James Diamond) | none on file for 09-21 | **needs reminder — NOT SENT** (no `--send-reminder` flag) |
 | PhucVT | 0h | — | skipped — adhoc/external, excluded |
 | LongVV | 0h | — | skipped — ad-hoc, no fixed target |
-| KhanhHH | 8h | — | skipped — on target |
+| KhanhHH | 8h | — | skipped — on plan |
 
-⚠️ **Read before sending:** the standing rule is that a verified 0h/no-leave day gets the reminder and auto-completes its gated Trello items. I did not send, for one reason worth your judgment: **~8 other devs who logged 8h/day all last week also show 0h for Monday**, which reads more like team-wide first-day-of-week logging lag than 10 simultaneous no-shows. If you want them sent as-is, say so and I'll send to TuanNT (`!knbJbIKzXRJNGVFQNg:...`) and LeNH (`!OIrgPraJWrcDTnRVLQ:...`) and complete John Yi / Rebecca / Bailey / James Diamond accordingly.
+⚠️ **Read before sending:** LeNH's 0h/no-leave day would normally get the reminder + auto-complete its gated item (James Diamond). I did not send, because Matrix shows her actively working the James Diamond room 17:14–17:30 that day — task-log hygiene gap, not absence. Say the word and I'll send to LeNH (`!OIrgPraJWrcDTnRVLQ:...`) and complete James Diamond accordingly.
 
 ---
 
@@ -258,7 +258,7 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 ### Key updates
 
 **NUS - Bailey - Paturevision 2026 — busiest room (94 msgs), and it contradicts a task-log alert:**
-- TuanNT (08:42) and VuTQ (08:47) both posted Friday task summaries; **TuanNT was active in-room all day** — his Workstream 0h for Mon 09-21 is unlogged hours, not absence.
+- TuanNT (08:42) and VuTQ (08:47) both posted Friday task summaries; **TuanNT was active in-room all day** and, per the corrected Workstream data, logged 8.5h on Speedventory 09-21 — not a hours gap at all.
 - PhucVT onboarded onto the project (08:48, by you) — spent the day on Docker/DB setup; Console Dockerfile fails on Mac ARM, worked through with TuanNT.
 - Later (16:54, James - DefinitiveGuide) you pulled PhucVT **off** Bailey ("thấy loay hoay bên Bailey quá, thôi chắc dừng đi") onto James/DefinitiveGuide framework upgrade with LongVV.
 
@@ -294,7 +294,7 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 | Piece 13 Arthur full 6-source | ⏭️ skipped — Arthur is on the paused Ignore List; Matrix scope update captured above |
 | Piece 14 Performance (both) | ✅ run — MPFC Apdex 0.47 = Alert #11 |
 | Piece 15 Upwork Memo | ✅ run — 0 invalid memos |
-| Piece 9 Reminders | ✅ computed — TuanNT + LeNH 0h, not sent (see Reminders section) |
+| Piece 9 Reminders | ✅ computed — LeNH 0h (real), not sent; TuanNT 0h retracted (see Reminders section) |
 | Elena WordPress CSP | ✅ run — clean |
 | Fountain Parts 2/3 + Trello board | ✅ run — 3 unanswered customer comments = Alert #9 |
 | Maddy full 4-part | ✅ run — PR #481 = Alert #10 |
@@ -302,7 +302,7 @@ Full details: `reports/2026-09-22/matrix-rooms-0829.md`
 
 ## Unresolved Questions
 
-1. **Send the 0h reminders?** TuanNT and LeNH both logged 0h on Mon 09-21 with no leave, but Matrix shows both were demonstrably working that day — so this is a task-log hygiene gap, not absence, and ~8 other devs show the same Monday gap. Say the word and I'll send (and complete John Yi / Rebecca / Bailey).
+1. **Send the LeNH reminder?** She logged 0h on James Diamond 09-21 with no leave, but Matrix shows her working that room 17:14–17:30 — task-log hygiene gap, not absence. (TuanNT's matching 0h alert was retracted — see Alert #8 correction — he logged 8.5h on Bailey/Speedventory.)
 2. **Bitbucket PR #481** — 2 High + 1 Medium client findings unanswered since 2026-06-06, now flagged for the 3rd time. Do you want this escalated directly to Kai/LongVV rather than re-noted next run?
 3. **James Diamond: two unexplained API keys** (`WCS-NETMAP-01`, `PowerBi`) actively hitting the customer's system — PhucVT confirmed we only created one. Who owns closing this out?
 4. **MPFC** — Apdex 0.47 chronic + SQLi probes served at ~50s on `/search/`. Worth a dedicated fix session (rate-limit + sitemap caching), or leave as-is?
