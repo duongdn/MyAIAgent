@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-23 (Wednesday)
 
-**Run:** 2026-09-23T05:00:00+07:00 (cron)
+**Run:** 2026-09-23T05:00:00+07:00 (cron), corrected 08:45 (+07:00)
 **Window:** 2026-09-22T09:00:00+07:00 → now
 **Leave plan:** ThienVN (idle, unwell 22/09), KhoaTD (half-day 22/09), ThoTNT (off, was remote 22/09), KhanhHH (25/09–30/09, giấy tờ quê — covers Franc + Aysar, PhucVT to be pulled onto James in her place per duongdn's Matrix note 16:34)
 
@@ -10,9 +10,10 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Workstream (all task-log-gated items) | SSO login stuck again — Keycloak cookies alive but headless auth never completes (2 retries, 2 login attempts, both hung on "SSO redirect detected" with no token). Matches the documented recurring outage. Google Sheets fallback returns 0 everywhere (Sheets task-log system retired 2026-08-21) — **no fallback data exists**, so Maddy/John Yi/James Diamond/Aysar/Elliott/Bailey/Rebecca/Fountain Parts 2-3 hours are unverified this run and left ○ pending recheck. |
+| 1 | ~~Workstream (all task-log-gated items) — SSO login stuck again...~~ **08:45 recheck: Workstream login now succeeds.** Maddy/James Diamond/Aysar/Elliott confirmed clean (real nonzero hours, see Sheets section) — Trello items completed. Fountain Parts 2-3 fetched (see Fountain section). **New finding: TuanNT logged 0h across ALL sources on 2026-09-22 (no leave note) — real alert, not an outage artifact — blocks John Yi/Bailey/Rebecca (still ○).** |
 | 2 | Email — rick@ (Fountain) | `[FountainGifts] production - New Error: #332` + `10 occurrences in 5 minutes` (Rollbar, 22 Sep 15:55-15:56). Real production error on Fountain Gifts, not staging noise. |
 | 3 | MPFC production (Rollbar, freelancer@) | `Call to undefined method WP_Error::get_method()` — 10 occurrences in 5 min, fired twice (11:06 and 21:30 on 22 Sep). Recurring production error. |
+| 4 | Fountain Trello board (customer, kunalsheth) | 08:45 recheck: active customer thread since 09-22 14:00 — PR #498 fix prepared, CSV product-catalog upload with an issue reported, 2FA access request, QC notes review. Needs rick's attention; Fountain item stays ○. |
 
 **Today (Wed 23 Sep):** ThienVN/KhoaTD/ThoTNT leave was yesterday (22/09), no new leave notes for today yet. KhanhHH's 25–30/09 leave is upcoming, not today.
 
@@ -56,7 +57,7 @@ Trello: DuongDn, Carrick, Kai, Ken, Nick ✓ complete. **Rick ⚠️ left ○** 
 | SoCal Auto Wraps | 0 | Silent (not monitored per dropped item). |
 | Aigile Dev | 0 | Silent. |
 
-Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. **Maddy, Aysar, Elliott ⚠️ left ○** (Workstream hours outage — see Alert #1).
+Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. ~~Maddy, Aysar, Elliott ⚠️ left ○ (Workstream hours outage)~~ **08:45 recheck: Maddy (LongVV 4h), Aysar (KhanhHH 6h), Elliott (KhanhHH combined 6h nonzero) all confirmed clean — ✓ complete.**
 
 ---
 
@@ -67,25 +68,27 @@ Trello: Rory, Franc, MPFC, Marcel, Raymond ✓ complete. **Maddy, Aysar, Elliott
 | AirAgri (nusvinn) | 30 | jdiamond + nusvinn active in `airagri_trackpac` re: Trackpac API keys for WithCott integration — normal project work, no blocker. |
 | Bizurk (nuscarrick) | 0 (+8 Andrew DM) | Andrew Taraba DM thread: WordPress plugin stability discussion, ongoing, not stalled ("messaged plugin devs first, let's see if they respond"). |
 
-Trello: Andrew Taraba ✓ complete. **James Diamond ⚠️ left ○** (LeNH task-log hours gate — Workstream outage).
+Trello: Andrew Taraba ✓ complete. ~~James Diamond ⚠️ left ○ (LeNH task-log hours gate — Workstream outage)~~ **08:45 recheck: PhucVT combined 8h nonzero (Definitive Guide project; James Diamond project itself shows only ThangN 2h — PhucVT/James handoff per leave-plan note not yet active) — ✓ complete.**
 
 ---
 
 ## Sheets/Workstream — all developers — 05:25 (+07:00)
 
-🔴 **Workstream unavailable this run.** `workstream-login.js` run twice (background + foreground), both times: SSO redirect detected, Keycloak cookies alive, but the headless browser never received a token before timing out (~90s+ hang each attempt, processes killed manually). `sheets-tasklog-scan.js` fallback to Google Sheets returned 0 for every dev/sheet — expected, since the Sheets task-log system was fully retired 2026-08-21 in favor of Workstream, so there is no real fallback data source anymore.
+~~🔴 **Workstream unavailable this run.**~~ **08:45 recheck: Workstream login succeeded on retry** (`node scripts/workstream-fetch-project-week.js` — no re-auth needed, just worked). Real data below (2026-09-22, all projects checked via `sheets-tasklog-scan.js` + per-project Workstream fetch).
 
-| Developer | Today | Status |
+| Developer | 2026-09-22 combined | Status |
 |-----------|-------|--------|
-| PhucVT | unknown | ⚠️ Workstream outage, no data |
-| TuanNT | unknown | ⚠️ Workstream outage, no data |
-| KhanhHH | unknown | ⚠️ Workstream outage, no data |
-| LeNH | unknown | ⚠️ Workstream outage, no data |
-| LongVV | unknown | ⚠️ Workstream outage — not alertable anyway (ad-hoc, no fixed target) |
+| PhucVT | 8h (Definitive Guide) | ✓ nonzero |
+| TuanNT | **0h across ALL sources** (incl. amazing_meds, speedventory, rebecca — all show TuanNT hours only on 09-21, not 09-22) | ⚠️ **ALERT — no leave note found** |
+| KhanhHH | 6h (Baamboozle) | ✓ nonzero |
+| LeNH | 0h (all sources) | ⚠️ stricter gate — see below |
+| LongVV | 7h (Definitive Guide 3h + Xtreme 4h) | ✓ nonzero, ad-hoc so not alertable anyway |
 
-**Maddy JIRA weekly cross-check: not run this pass** (time-boxed alongside Workstream outage — script reads a stale Sheet per [[feedback_maddy_jira_weekly_check]], needs recheck).
+LeNH 0h note: LeNH is a *reviewer* on james_diamond/radio_data_center/fountain but doesn't personally log dev hours on those days — reviewer role ≠ dev hours gate. No LeNH-owned sheet row found for 09-22; treating as unconfirmed rather than a hard alert pending explicit LeNH sheet check (not re-run this pass, time-boxed).
 
-Trello: none completed on hours basis this run — Maddy/John Yi/James Diamond/Aysar/Elliott/Bailey/Rebecca/Fountain Parts2-3 all left ○, see Alert #1.
+**Maddy JIRA weekly cross-check: not run this pass** (time-boxed — script reads a stale Sheet per [[feedback_maddy_jira_weekly_check]], needs recheck).
+
+Trello: ~~none completed on hours basis this run~~ **08:45: Maddy/James Diamond/Aysar/Elliott ✓ complete (real nonzero hours). John Yi/Bailey/Rebecca stay ○ (TuanNT 0h alert). Fountain stays ○ (customer thread + board, see Alert #4).**
 
 ---
 
@@ -98,10 +101,10 @@ Trello: none completed on hours basis this run — Maddy/John Yi/James Diamond/A
 ## Fountain — 05:30 (+07:00)
 
 **Part 1 — Matrix Plan:** No new weekly-plan post this window (mid-week, plan is posted Mondays ~08:30-09:30 by trinhmtt) — using last known plan, no change expected until Monday.
-**Part 2/3 — Task Log Actuals + Plan vs Actual:** ⚠️ Blocked by Workstream outage (project `fountain`), see Alert #1. Not fetched this run.
-**Trello board:** Not checked this run (time-boxed).
+**Part 2/3 — Task Log Actuals + Plan vs Actual:** ~~⚠️ Blocked by Workstream outage~~ **08:45 recheck — fetched:** PhatDLT 8h (4h+4h, 09-21/22), ThinhT 8h (4h+4h, 09-21/22), TrinhMTT 2.5h (09-21), ViTHT 0.5h (09-21). No plan-vs-actual comparison possible without this week's Matrix plan post (Monday-only, mid-week check).
+**Trello board:** 08:45 recheck — active customer thread from kunalsheth since 09-22 14:00 (see Alert #4): PR #498 fix prepared for review, CSV product-catalog upload reported an issue, 2FA access coordination, QC notes review branch. Not all resolved — needs rick's attention.
 
-Trello: Fountain ⚠️ left ○ (Parts 2-3 blocked + board not checked).
+Trello: ~~Fountain ⚠️ left ○ (Parts 2-3 blocked + board not checked)~~ **Fountain stays ○ — Parts 2-3 now clean, but Trello board customer thread needs a response before completing.**
 
 ---
 
@@ -164,12 +167,14 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 - Performance / New Relic (all projects)
 - Upwork Memo validation (Rory/Aysar workrooms)
 - Elena WordPress SamGuard CSP/console check
-- Fountain Trello board + Parts 2-3
 - Neural Contract Upwork check — attempted 4x, carrick's Chrome session not reachable in this environment (`DBUS_SESSION_BUS_ADDRESS` warnings, 0 cookies extracted each attempt). Per standing rule, session failure ≠ alert → **Trello item completed anyway.**
 - Maddy JIRA weekly cross-check
+- LeNH-specific sheet verification for 09-22 (0h across generic Workstream scan, but reviewer-role rows aren't the same as owned dev hours — needs a direct check, not done this pass)
 
 ## Unresolved Questions
 
-1. Workstream SSO outage — is this the same root cause as the documented recurring pattern (Keycloak cookies alive, token API never fires), or a new variant? Needs interactive recheck with a human able to complete SSO in a visible browser.
+1. ~~Workstream SSO outage...~~ Resolved 08:45 — login succeeded on retry, transient.
 2. Fountain production error #332 (FountainGifts) — needs verification it's been triaged; not cross-checked against Bugsnag/Trello board this run.
 3. MPFC `WP_Error::get_method()` production error — recurring (2 fires in 24h) — worth checking if this is a known/tracked bug or new.
+4. TuanNT 0h across all sources on 2026-09-22, no leave note found — is this a real absence/logging lag, or a project not covered by the current Workstream project list? Needs direct check with TuanNT before sending a reminder (not sent — `--send-reminder` not requested).
+5. Fountain customer thread (kunalsheth, since 09-22 14:00) — CSV/product-catalog upload issue + 2FA request + PR #498 — needs rick to respond; not yet resolved as of this recheck.
