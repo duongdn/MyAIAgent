@@ -10,10 +10,11 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | ~~Workstream (all task-log-gated items) — SSO login stuck again...~~ **08:45 recheck: Workstream login now succeeds.** Maddy/James Diamond/Aysar/Elliott confirmed clean (real nonzero hours, see Sheets section) — Trello items completed. Fountain Parts 2-3 fetched (see Fountain section). **New finding: TuanNT logged 0h across ALL sources on 2026-09-22 (no leave note) — real alert, not an outage artifact — blocks John Yi/Bailey/Rebecca (still ○).** |
+| 1 | ~~Workstream (all task-log-gated items) — SSO login stuck again...~~ **08:45 recheck: Workstream login now succeeds.** Maddy/James Diamond/Aysar/Elliott confirmed clean — Trello items completed. Fountain Parts 2-3 fetched. ~~New finding: TuanNT logged 0h across ALL sources on 2026-09-22~~ **08:52 correction: that was wrong — first `sheets-tasklog-scan.js` pass missed a project. Direct per-project check found TuanNT logged 8h on Speedventory/Bailey on 09-22 (16.5h total for the week). No alert. John Yi/Bailey/Rebecca ✓ complete.** |
 | 2 | Email — rick@ (Fountain) | `[FountainGifts] production - New Error: #332` + `10 occurrences in 5 minutes` (Rollbar, 22 Sep 15:55-15:56). Real production error on Fountain Gifts, not staging noise. |
 | 3 | MPFC production (Rollbar, freelancer@) | `Call to undefined method WP_Error::get_method()` — 10 occurrences in 5 min, fired twice (11:06 and 21:30 on 22 Sep). Recurring production error. |
 | 4 | Fountain Trello board (customer, kunalsheth) | 08:45 recheck: active customer thread since 09-22 14:00 — PR #498 fix prepared, CSV product-catalog upload with an issue reported, 2FA access request, QC notes review. Needs rick's attention; Fountain item stays ○. |
+| 5 | LeNH (task log) | 0h on 2026-09-22 across all 18 Workstream projects, no leave note — 2nd day running (also 0h 09-21). Reminder sent to Matrix `!OIrgPraJWrcDTnRVLQ` at 08:54 per user request. |
 
 **Today (Wed 23 Sep):** ThienVN/KhoaTD/ThoTNT leave was yesterday (22/09), no new leave notes for today yet. KhanhHH's 25–30/09 leave is upcoming, not today.
 
@@ -79,16 +80,16 @@ Trello: Andrew Taraba ✓ complete. ~~James Diamond ⚠️ left ○ (LeNH task-l
 | Developer | 2026-09-22 combined | Status |
 |-----------|-------|--------|
 | PhucVT | 8h (Definitive Guide) | ✓ nonzero |
-| TuanNT | **0h across ALL sources** (incl. amazing_meds, speedventory, rebecca — all show TuanNT hours only on 09-21, not 09-22) | ⚠️ **ALERT — no leave note found** |
+| TuanNT | ~~0h across ALL sources~~ **8h (Speedventory/Bailey) — correction 08:52, first scan missed this project** | ✓ nonzero |
 | KhanhHH | 6h (Baamboozle) | ✓ nonzero |
-| LeNH | 0h (all sources) | ⚠️ stricter gate — see below |
+| LeNH | 0h (checked all 18 Workstream projects directly) | ⚠️ **ALERT — no leave note, 2nd day running (also 0h 09-21)** — reminder sent 08:54 |
 | LongVV | 7h (Definitive Guide 3h + Xtreme 4h) | ✓ nonzero, ad-hoc so not alertable anyway |
 
-LeNH 0h note: LeNH is a *reviewer* on james_diamond/radio_data_center/fountain but doesn't personally log dev hours on those days — reviewer role ≠ dev hours gate. No LeNH-owned sheet row found for 09-22; treating as unconfirmed rather than a hard alert pending explicit LeNH sheet check (not re-run this pass, time-boxed).
+LeNH: 0h confirmed on 09-22 across every Workstream project (direct per-project check, not the combined scan script that missed TuanNT). LeNH is a *reviewer* on james_diamond/radio_data_center/fountain but that's separate from logging own dev hours. Stricter gate (any shortfall, no leave = alert) triggered — reminder sent to Matrix room `!OIrgPraJWrcDTnRVLQ:nustechnology.com` at 08:54 (+07:00) per user request.
 
 **Maddy JIRA weekly cross-check: not run this pass** (time-boxed — script reads a stale Sheet per [[feedback_maddy_jira_weekly_check]], needs recheck).
 
-Trello: ~~none completed on hours basis this run~~ **08:45: Maddy/James Diamond/Aysar/Elliott ✓ complete (real nonzero hours). John Yi/Bailey/Rebecca stay ○ (TuanNT 0h alert). Fountain stays ○ (customer thread + board, see Alert #4).**
+Trello: ~~none completed on hours basis this run~~ **08:52: Maddy/James Diamond/Aysar/Elliott/John Yi/Bailey/Rebecca ✓ complete (all confirmed nonzero hours; TuanNT 0h call was a scan miss, corrected). Fountain stays ○ (customer thread + board, see Alert #4).**
 
 ---
 
@@ -176,5 +177,5 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 1. ~~Workstream SSO outage...~~ Resolved 08:45 — login succeeded on retry, transient.
 2. Fountain production error #332 (FountainGifts) — needs verification it's been triaged; not cross-checked against Bugsnag/Trello board this run.
 3. MPFC `WP_Error::get_method()` production error — recurring (2 fires in 24h) — worth checking if this is a known/tracked bug or new.
-4. TuanNT 0h across all sources on 2026-09-22, no leave note found — is this a real absence/logging lag, or a project not covered by the current Workstream project list? Needs direct check with TuanNT before sending a reminder (not sent — `--send-reminder` not requested).
+4. ~~TuanNT 0h...~~ Resolved 08:52 — false alarm, `sheets-tasklog-scan.js`'s combined-project sweep missed Speedventory for this dev/date; TuanNT actually logged 8h there. Worth checking why the canonical scan script missed a project its own live-query list should have covered.
 5. Fountain customer thread (kunalsheth, since 09-22 14:00) — CSV/product-catalog upload issue + 2FA request + PR #498 — needs rick to respond; not yet resolved as of this recheck.
