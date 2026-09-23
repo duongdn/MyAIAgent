@@ -93,6 +93,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_fountain_tasklog_not_monitored](daily-report/fountain/feedback_fountain_tasklog_not_monitored.md) — 5-part checklist still mandatory; only per-dev 0h ALERTING is off
 ## daily-report:elena
 - [feedback_elena_consolidated](daily-report/elena/feedback_elena_consolidated.md), [feedback_csp_violations_are_real_errors](daily-report/elena/feedback_csp_violations_are_real_errors.md), [reference_elena_wordpress_csp_config](daily-report/elena/reference_elena_wordpress_csp_config.md)
+- [feedback_wordpress_samguard_not_on_ignore_list](daily-report/elena/feedback_wordpress_samguard_not_on_ignore_list.md) — Elena-WordPress-SamGuard is a separate Trello item, not covered by the Elena-SamGuard-Digital-Plant pause
 
 ## daily-report:trello
 - [reference_trello_gate_mapping](daily-report/trello/reference_trello_gate_mapping.md), [feedback_trello_all_checklists](daily-report/trello/feedback_trello_all_checklists.md), [feedback_trello_find_by_name](daily-report/trello/feedback_trello_find_by_name.md)

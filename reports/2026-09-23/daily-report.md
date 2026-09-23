@@ -112,9 +112,9 @@ Trello: ~~Fountain ⚠️ left ○ (Parts 2-3 blocked + board not checked)~~ **F
 ## Elena — 05:32 (+07:00)
 
 1 open PR on `Elena-SamGuard-Digital-Plant`: **#309** "Implement header and modal components with i18n support" (branch `process-digital-plant`) — not reviewed/merged this run.
-WordPress SamGuard CSP/console check: not run this pass (time-boxed).
+~~WordPress SamGuard CSP/console check: not run this pass (time-boxed).~~ **08:58 recheck: ran it — clean.** `https://www.samguard.co/` status 200, 0 jsErrors, 0 pageErrors, 0 cspViolations. `failedRequests` are only GA/ads analytics `net::ERR_ABORTED` noise (Google tag manager, DoubleClick, LinkedIn insight, GA collect calls + a few .mp4 preload aborts) — not real errors, no CSP directive involved.
 
-**Note: Elena - SamGuard Digital Plant and Elena - WordPress SamGuard are on the paused Ignore List** (see below) — auto-completed regardless, PR #309 left as an FYI for whenever the item is unpaused.
+**Note: "Elena - SamGuard Digital Plant" (Work checklist) is on the paused Ignore List** — auto-completed regardless, PR #309 left as an FYI for whenever unpaused. **"Elena - WordPress SamGuard" (separate Pending checklist item) is NOT on the ignore list — it needs its own check every run.** ~~Left ○ in earlier passes (mislabeled as ignored)~~ — now run and ✓ complete.
 
 ---
 
