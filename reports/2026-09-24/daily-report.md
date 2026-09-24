@@ -16,7 +16,7 @@
 | 4 | Fountain | ~~Parts 2/3 unverifiable, plan not found.~~ Full 5-part done. **Unanswered customer asks on Fountain Trello**: Kunal 20:36 "Were you able to push this live?" ([CSV card](https://trello.com/c/BcAjuYb6)); tmmckay 16:48 3-line ellipsis ([blurbs](https://trello.com/c/uopF36jA)). DatNT 0 WS rows vs 32h plan; ViTHT 2.5h vs 40h (Mon–Wed). Fountain ○. |
 | 5 | Maddy | Unanswered client asks: Anoma 20:16 "reduce gaps / price boxes wider"; Anoma LIFM2-465 feedback list 23:51; Madhuraka numbering request 17:08. Kai promised LIFM2-428 deploy steps **today**. LIFM2-467/468 no est + no JIRA log. Maddy ○. |
 | 6 | Workstream review | Pending: OhCleo ×5 (LongVV 8h 09-21, LuHX 1.5h, PhuongPVT) → reviewers DuongDN/MinhTV; Crystal lang PhucVT 0.5h 09-21 → TienND. |
-| 7 | Upwork memo | Aysar (KhanhHH) 1 invalid memo 09-23: "Handle feature: Allow team seat count to be decreased in admin #717" (borderline). |
+| 7 | Upwork memo | Aysar (KhanhHH) 1 invalid memo 09-23: "Handle feature: Allow team seat count to be decreased in admin #717" (borderline). Suggested fix sent to KhanhHH 09:00 (Matrix `!rwLbvLBnrRAYMaOPaD`, event `$9Cl8Qycq…`): "Implemented the admin setting that allows decreasing a team seat count (#717) and tested it on the admin team page" (validated ✓ by memo-rules). |
 | 8 | Upwork account | ~~duongdn Upwork account (Profile 9) logged out — needs sign-in.~~ ✅ DuongDN signed in 08:43; Tokenlite memo check OK (0 memos 09-23). |
 | 9 | Matrix action items | ~~vutq: DigitalOcean account for Kunal 2FA; tiennd: Arthur pricing reply — both need DuongDN.~~ Both already answered by DuongDN same minute (09:33 DO account; 09:29/09:37 Arthur) — false action items. |
 
