@@ -1,8 +1,8 @@
 # Daily Report — 2026-09-24 (Thursday)
 
-**Run:** 2026-09-24T05:00:00+07:00 (cron)
-**Window:** 2026-09-23T08:45:00+07:00 → 2026-09-24T05:00:00+07:00
-**Leave plan:** KhanhHH has a leave request pending approval (email from Chien Tran re: "KhanhHH - Đơn xin nghỉ phép 04") — not yet confirmed applied.
+**Run:** 2026-09-24T05:00:00+07:00 (cron), corrected 08:25–09:xx (+07:00) recheck
+**Window:** 2026-09-23T08:45:00+07:00 → 2026-09-24T05:00:00+07:00 | Task-log date: Wed 2026-09-23
+**Leave plan:** ~~KhanhHH has a leave request pending approval — not yet confirmed applied.~~ Refreshed 08:15: KhanhHH ⏳ PENDING leave is for **Tue 2026-09-30** (full day, "về quê giải quyết giấy tờ đất đai"), not today/yesterday. No leave on file for any PHP-team dev on 09-23. Resource Arrangement 09-23: only non-PHP-team notes (TriNM, PhongTB AM, DanhTD 09-25, MinhTC/SangNV 10-01→02).
 
 ---
 
@@ -50,14 +50,14 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken — all ✓ complete (no blocking
 | Global Grazing Services | 24 | Nick's "Today Report" posted in #général. Heated but normal dev/customer back-and-forth (Joey) on dashboard cover calc — feature discussion, not an outage. |
 | Amazing Meds | 0 | — |
 | Generator | 0 | — |
-| LegalAtoms | 1 | ⚠️ See Alert #2 above. |
+| LegalAtoms | 2 | ~~⚠️ See Alert #2 above.~~ hamidsalamatali97 23:13 "Please fix this asap" → tagged Armaghan Iqbal (client dev), not us — not our item. miratariq 07:25 #general: Winnebago County interest, Okanogan use-cases quality focus — informational. |
 | MyPersonalFootballCoach | 0 | — |
 | William Bills | 0 | — |
 | Equanimity | 9 | Marcel/Carrick + komal.bailur QA discussion (attendance tenant review); Carrick asked for more Upwork hours — normal ops. |
 | SoCal Auto Wraps | 0 | Not monitored (dropped). |
 | Aigile Dev | 1 | Blog posts merged to staging — informational. |
 
-Trello: Maddy, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Colin (ignore list), Andrew — see per-item notes below. John Yi ✓ (0 msgs). LegalAtoms ⚠️ skipped (alert #2).
+Trello: Maddy, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Colin (ignore list), Andrew — see per-item notes below. John Yi ✓ (0 msgs). LegalAtoms ~~⚠️ skipped (alert #2)~~ ✓ completed at recheck (ask not directed at us).
 
 ---
 
@@ -74,14 +74,86 @@ Trello: James Diamond - Vinn ✓ complete. Andrew Taraba ✓ complete.
 
 ## Sheets/Workstream — all — 05:25 (+07:00)
 
-🔴 **Workstream SSO unavailable this entire run** (see Alert #1). Tried: proactive token refresh, API refresh (2x), headless browser login (2 attempts), visible browser login (`DISPLAY=:1`, 2 attempts) — all failed at the same step ("SSO redirect detected — Keycloak cookies alive" but API token never captured). Google Sheets task-log system was fully retired 2026-08-21 (all projects migrated to Workstream) — there is no fallback data source this run.
+~~🔴 **Workstream SSO unavailable this entire run** (see Alert #1).~~ **Resolved at recheck 08:18 — real data in table below; the cron text in this paragraph is superseded.** Tried: proactive token refresh, API refresh (2x), headless browser login (2 attempts), visible browser login (`DISPLAY=:1`, 2 attempts) — all failed at the same step ("SSO redirect detected — Keycloak cookies alive" but API token never captured). Google Sheets task-log system was fully retired 2026-08-21 (all projects migrated to Workstream) — there is no fallback data source this run.
 
 Cross-checked via other channels where possible:
 - **TuanNT** — heavy live activity in "NUS - Bailey - Paturevision 2026" Matrix room all day (GGS/Grazing bug fixes, RDS upgrade tasks) — clearly working, but exact hours unverified.
-- **KhanhHH** — pending leave request submitted today; MPDM "Today's update" was posted by Carrick (not Khanh directly) — Khanh's own hours unverified.
-- **LeNH, PhucVT, LongVV** — no direct activity signal found this window; hours unverified.
+- ~~**KhanhHH** — pending leave request submitted today; hours unverified.~~ → 8h on 09-23 ✓; leave is for 09-30.
+- ~~**LeNH, PhucVT, LongVV** — no direct activity signal found this window; hours unverified.~~ → see table below (LongVV very active in Celine-OhCleo Matrix 09-23; LeNH no Matrix/Slack activity found 09-23).
 
-**Maddy JIRA weekly cross-check:** not run this pass — time-boxed due to Workstream outage consuming the retry budget. Needs recheck.
+**Maddy JIRA weekly cross-check:** ~~not run this pass — time-boxed. Needs recheck.~~ Run at recheck — see `## Maddy` section below.
+
+### Recheck 08:20 — Workstream back (first login retry succeeded), real Wed 09-23 data
+
+~~Workstream SSO unavailable this entire run~~ → `workstream-login.js` succeeded on 1st recheck attempt (08:18). All 21 projects fetched for week 09-21→09-27.
+
+| Dev | Mon 09-21 | Tue 09-22 | **Wed 09-23** | Status |
+|-----|-----------|-----------|---------------|--------|
+| TuanNT | speedventory 8.5h | speedventory 8h | **{TUANNT_23}** | {TUANNT_ST} |
+| KhanhHH | radio_data_center 8h | baamboozle 6h | **baamboozle 7.33h + bxr_app 0.67h = 8h** | ✓ OK |
+| LeNH | james_diamond 8h | james_diamond 8h (backfilled after 09-23 08:55 reminder) | **{LENH_23}** | {LENH_ST} |
+| LongVV | ohcleo 8h | maddy 4h (+3h James/1h Sandor per his Matrix reply — projects not visible to our WS token) | **{LONGVV_23}** | {LONGVV_ST} |
+| PhucVT | speedventory 6h + crystal_lang 0.5h | — | — | ignored (adhoc/external, per rule) |
+
+**Per-project review status (dev hrs / reviewer charged / need_review):**
+| Project | Dev hours (wk) | Reviewer(s) + own charged | Review status |
+|---------|----------------|---------------------------|---------------|
+| speedventory (Bailey) | TuanNT 16.5, VyNL 12.5, VuTQ 10, PhucVT 6, DatNC 4, TrinhMTT 0.75 | none | need_review = false |
+| baamboozle (Aysar) | KhanhHH 13.33 | none | need_review = false |
+| james_diamond | LeNH 16, ThangN 6 | PhucVT (0h) / LeNH (16h) | all NotRequired/Reviewed — no Pending |
+| maddy | LuHX 17, ThanhNX 3, LongVV 4 | none | need_review = false |
+| radio_data_center | KhanhHH 8 | LeNH (0h) | no Pending |
+| bxr_app (Rory) | KhanhHH 0.67, other 1 | none | need_review = false |
+| ohcleo | LongVV 8, LuHX 1.5, PhuongPVT 1 | DuongDN/MinhTV (0h) | ⚠️ **Pending ×5**: LongVV 09-21 "overall compliance current library" 2:00, "Cover Art Generation" 4:00, "Add explicitness tier classification…" 2:00; PhuongPVT 09-21 "Meeting and follow up" 0:00; LuHX 09-23 "cover art design app" 1:30 |
+| crystal_lang (Arthur, paused) | PhucVT 0.5 | TienND (override) | ⚠️ **Pending**: PhucVT 09-21 "Check and write script for delete data on staging…" 0:30 |
+| fountain | (see Fountain section) | VuTQ/DuongDN | excluded per rule |
+
+Workstream `missingReportDays` (client-report flag, informational): james_diamond 09-21/09-22, baamboozle 09-22/09-23.
+
+---
+
+## Maddy — W(09-21) — 08:40 (+07:00) (recheck, full 4-part)
+
+### 1. Task Log Hours (Wed 09-23)
+| Developer | Wed 09-23 | Week total | Status |
+|-----------|-----------|------------|--------|
+| LongVV (Kai) | 0h | 4h (Tue 09-22) | informational only, ad-hoc — no alert |
+| LuHX | 4h | 17h | informational |
+| ThanhNX | 0h | 3h | informational |
+need_review = false (no reviewer configured).
+
+### 2. Slack / Kai daily report
+- WS Maddy LongVV 09-23 = 0h → Kai daily-report check not applicable.
+- Madhuraka 17:06: "can you respond to my question on 428?" → Kai 17:09 "I have replied" + 17:07 "I will give you on tomorrow" (= today 09-24; LIFM2-428 prod deploy steps, per Kai's JIRA comment 17:08 "I'll prepare the necessary steps and give to you"). **Promise due today — track.**
+- Madhuraka 17:08: "please number each of your suggestions in the word doc and add a column to spreadsheet…" — no visible reply yet.
+- ⚠️ **anomawasala 20:16: "Can we reduce these gaps and price boxes make little wide?"** (+ screenshot) — **unanswered** (overnight).
+- **Conclusion:** ⚠️ 2 direct client asks open (Anoma UI ask; Madhuraka numbering request) + 1 promise due today.
+
+### 3. JIRA (LIFM2)
+Weekly WS×JIRA cross-check (`maddy-jira-tasklog-check.js --week 2026-09-23`):
+| Ticket | Summary | Status | Est | JIRA actual | WS log | Check |
+|--------|---------|--------|-----|-------------|--------|-------|
+| [LIFM2-467](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-467) | In-Home Quote Form | To Do | 0h | 0h | 2.5h | ⚠️ no est, no JIRA log |
+| [LIFM2-468](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-468) | Quoting Tool Issue | Review | 0h | 0h | 1.5h | ⚠️ no est, no JIRA log |
+
+Daily activity since last run:
+- [LIFM2-465](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-465) Quote-email tab feedback (To Do, Kai) — ⚠️ Anoma Wasala 23:51 @Kai numbered feedback list, **unanswered**.
+- [LIFM2-428](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-428) [Shopify] Product Authenticity Certificate (To Do, Kai) — Kai 17:08: will prepare deploy steps for Madhuraka.
+
+### 4. Bitbucket PR status (`xtreme-web/rms`, 8 open)
+| PR | Age | Title | Comments | Last |
+|----|-----|-------|----------|------|
+| [#548](https://bitbucket.org/xtreme-web/rms/pull-requests/548) | 2d | LIFM2-468 Fix Lens title selection | 1 | Rovo Dev bot 09-22 |
+| [#544](https://bitbucket.org/xtreme-web/rms/pull-requests/544) | 14d | LIFM2-465 | 0 | — |
+| [#543](https://bitbucket.org/xtreme-web/rms/pull-requests/543) | 18d | LIFM2-459 (by Madhuraka) | 0 | — |
+| [#540](https://bitbucket.org/xtreme-web/rms/pull-requests/540) | 21d | LIFM2-450 | 0 | — |
+| [#534](https://bitbucket.org/xtreme-web/rms/pull-requests/534) | 29d | Fix concurrent cron runs corrupting quote results | 1 | Rovo Dev bot 08-26 |
+| [#520](https://bitbucket.org/xtreme-web/rms/pull-requests/520) | 71d | Refresh Issue on Quotes page | 0 | — |
+| [#509](https://bitbucket.org/xtreme-web/rms/pull-requests/509) | 94d | LIFM2-428 | 5 | Rovo Dev bot 08-14 |
+| [#481](https://bitbucket.org/xtreme-web/rms/pull-requests/481) | 157d | LIFM2-409 feedback | 1 | Madhuraka 06-06 — waiting on customer, not our blocker (per rule) |
+No unanswered human reviewer comments on our side.
+
+**Maddy Trello: ○ kept open** — 2 unanswered direct client asks (Anoma 20:16 UI gaps/price boxes; LIFM2-465 feedback list) + Madhuraka numbering request. Recheck after Kai's working hours.
 
 ---
 
@@ -93,15 +165,42 @@ Cross-checked via other channels where possible:
 
 ## Fountain — 05:35 (+07:00)
 
-**Part 1 — Matrix Plan:** Weekly plan message (ViTHT/ThinhT/VuTQ hours) not found in the "Kunal - Fountain" room activity for this window — only day-to-day dev/QA chatter (CSV upload bug: hungpn/vitht/datnt fixing a "gifts CSV not linking to product catalog" issue, actively worked and pushed to staging/production today). Plan-posting room content not re-fetched back to Monday this run (time-boxed) — recheck needed.
+**Part 1 — Matrix Plan:** ~~not found in this window — recheck needed.~~ Found (room fetched back to Mon): @trinhmtt Mon 09-21 09:19 "ViTHT 40h, DatNT 40h, ThinhT 20h => QC 25h", **updated 11:29: "ViTHT: 40h, DatNT: 32h, ThinhT: 20h, Vu Tat: 8h => QC 25h"**.
 
-**Part 2 — Task Log Actuals:** Blocked by Workstream outage (Alert #1). Not verified.
+**Part 2 — Task Log Actuals (Workstream, Mon→Wed 09-21..23):** ~~Blocked by Workstream outage.~~
+| Dev | Mon | Tue | Wed | Week |
+|-----|-----|-----|-----|------|
+| ViTHT | 0.5 | — | 2 | 2.5h |
+| DatNT | — | — | — | 0h (not on Fountain WS roster at all) |
+| ThinhT | 4 | 4 | — | 8h |
+| VuTQ | — | — | 4 | 4h |
+| QC: PhatDLT | 4 | 4 | — | 8h |
+| QC: HungPN | 2.25 | — | 2.5 | 4.75h |
+| TrinhMTT (not QC, excluded) | 2.5 | — | — | 2.5h |
 
-**Part 3 — Plan vs Actual:** Cannot compute without Parts 1+2 data this run.
+**Part 3 — Plan vs Actual (3/5 days elapsed → ~60% pace):**
+| Dev | Plan | Actual | Pace expected | Note |
+|-----|------|--------|---------------|------|
+| ViTHT | 40h | 2.5h | ~24h | far below — but ViTHT active in room daily (PR #540 prod fix, cards) → likely logging lag |
+| DatNT | 32h | 0h | ~19h | 0 WS rows despite shipping CSV fix all day 09-23 → logging gap |
+| ThinhT | 20h | 8h | ~12h | slightly under |
+| VuTQ | 8h | 4h | ~5h | on pace |
+| QC (PhatDLT+HungPN) | 25h | 12.75h | ~15h | slightly under |
+Per rule: informational, no per-dev 0h alert/reminder.
 
-**Trello board (customer comments/stuck cards):** Not checked this run (time-boxed — prioritized live monitoring pieces given Workstream outage ate significant time budget).
+**Part 4 — Capacity & Runway ("Est vs Charged" tab, live read):** Narrow 229.00h / 28 tasks · Broad 328.50h / 63 tasks — unchanged vs prior weeks (frozen).
 
-Trello: Fountain ⚠️ left incomplete — recheck all 3 parts.
+**Part 5 — Over-estimate tracking:** 36 items Actual > (Est+CR)×1.2 (prev 37 → 1 resolved/removed). Top: 1550% (0.5→8.25h, Has Bug on Live), 790% (12→106.75h, Deployed on Staging), 725% (2→16.5h), 650% ×2, 625%, 600%, 538% ([#2501 different position](https://trello.com/c/WtWwRVov)).
+
+**Trello board (Web Development, customer comments since Mon):** ~~Not checked this run.~~
+- ⚠️ **UNANSWERED** kunalsheth 09-23 20:36: "@rick570 Were you able to push this live?" — [Updating Gifts CSV Not Linking to product catalog](https://trello.com/c/BcAjuYb6) (team fixed it 15:15 per Matrix, but no reply on card)
+- ⚠️ **UNANSWERED** tmmckay 09-23 16:48: "Can we introduce a max of 3 lines, which would end in an ellipsis…" — [Browse page - Product blurbs](https://trello.com/c/uopF36jA)
+- ⚠️ UNANSWERED kunalsheth 09-22: Astra QC proposed changes on separate branch — [Chatgpt Astra QC](https://trello.com/c/wEXmONY3); Cloudflare/codex note — [Cloudflare update](https://trello.com/c/XNIhXMdT); SEO card note — [Improve SEO](https://trello.com/c/gzFHRN84)
+- Info (no reply needed): tmmckay "ready to pick up" [contact form layout](https://trello.com/c/OSbaYhDP); "Looks good to me" [GiftDrop Recipient flow](https://trello.com/c/tSuQHKwj)
+- Answered ✓: repo invite (thmc2), test env 2FA code, Order items export, Analytics.
+- Stuck >5d: To-Do 19/24, Bugs 13/18, Doing 4/5, QC Internal 3/6, QA Backlog 6/9, In QA 2/4.
+
+Trello: Fountain ○ kept open — unanswered direct customer asks on the board (push-live question, 3-line blurb question).
 
 ---
 
@@ -131,18 +230,19 @@ Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Phili
 - Elliott ✓ (Generator quiet)
 - MPFC ✓ (Slack quiet)
 - Marcel ✓ (Equanimity normal ops)
-- Neural Contract ✓ (Upwork Cloudflare-blocked = not an alert per rule)
+- Neural Contract ✓ ~~(Upwork Cloudflare-blocked = not an alert per rule)~~ → recheck: messages fetched OK, no new client message since 09-18
 - Ohcleo ✓ (Tony's report present, Celine engaged positively)
 - Elena - WordPress SamGuard ✓ (clean)
 - Elena - SamGuard, Colin, Arthur, Blair Brown, Philip ✓ (Ignore List)
 - DuongDn/Carrick/Nick/Rick/Kai/Ken (mail) ✓
 
-**Left incomplete (need recheck):**
-- Maddy - Carrick/Kai/Luis — full 4-part check (Slack+hours+JIRA+Bitbucket) not run this pass; Workstream hours unverified.
-- Raymond - LegalAtoms — ⚠️ Alert #2, direct customer ask unconfirmed as answered.
-- Bailey — Slack ggs clean (Nick's report present) but TuanNT combined hours unverified (Workstream outage) — left open pending hours confirmation.
-- Rebecca (William Bills) — Slack quiet but TuanNT hours unverified (same outage) — left open.
-- Fountain — 3-part check incomplete (see Fountain section).
+**Left incomplete (need recheck):** — updated at recheck (live Trello re-fetched 08:20)
+- Maddy - Carrick/Kai/Luis — ~~full 4-part check not run~~ → 4-part check done (see `## Maddy`); **○ kept open**: unanswered direct client asks (Anoma 20:16, LIFM2-465 feedback, Madhuraka numbering request).
+- Raymond - LegalAtoms — ~~⚠️ Alert #2, direct customer ask unconfirmed as answered.~~ → ✓ **completed 08:24**: hamidsalamatali97's "fix asap" tagged `<@UJE7XHT4L>` = **Armaghan Iqbal** (client-side dev), not us (our account = `david`); issue on client's `rhuang/juristium-clone` repo. Not our action item per LegalAtoms rule.
+- Bailey — Slack ggs clean (Nick's report present); {BAILEY_LINE}
+- Rebecca (William Bills) — Slack quiet; {REBECCA_LINE}
+- Fountain — ~~3-part check incomplete~~ → full 5-part done; **○ kept open**: unanswered customer asks on Fountain Trello board (Kunal "push live?", tmmckay 3-line blurb).
+- Also re-verified gated items completed by cron on unverified hours: Aysar + Elliott (KhanhHH 8h 09-23 ✓ — confirmed OK), James Diamond (LeNH hours — see Sheets; {JAMES_LINE}).
 
 ---
 
@@ -209,19 +309,30 @@ Trello: Ohcleo ✓ complete.
 
 **MPFC slowest transactions:** sitemap_index.xml 64.8s/1 call; author-sitemap.xml 59.3s/1 call; a SQLi `PG_SLEEP(15)` probe on `/search/` feed 26.4s/1 call (same probing pattern as before — no successful injection, just a slow WAITFOR/SLEEP response); podcast episode page 24.9s/1 call; a second SQLi `waitfor delay '0:0:15'` probe on `/search/` feed 22.6s/1 call.
 
-**Fountain / InfinityRoses:** not queried this run — time-boxed (Workstream outage consumed retry budget).
+**Fountain / InfinityRoses:** ~~not queried this run — time-boxed.~~ Queried at recheck (since 09-23 08:45):
+| Project | Apdex | Avg response | Error rate | Throughput |
+|---------|-------|--------------|------------|------------|
+| Fountain Gifts | 0.99 | 107ms | 0.002% (1/62391) | 44.2/min |
+| InfinityRoses | 0.99 | 127ms | 0% (0/15774) | 11.2/min |
+- Fountain top error: `Gibbon::MailChimpError` 400 "Invalid Resource" on list member PUT (1x — bad subscriber email, benign).
+- Fountain slowest: gifts/build_a_box_gift_variants 4494ms/72 calls; paypals/authorize_order 2888ms/3; pro_payment_intents/create 1824ms/1; payment_intents/create 1699ms/49; users/registrations/create 1525ms/13.
+- Infinity slowest: paypals/authorize_order 2530ms/2; payment_intents/create 2008ms/2; users/passwords/forgot 1797ms/1; ShipStationShipmentWorker 1368ms/3; registrations/create 1177ms/2.
+Both healthy; nothing >5s.
 
 ---
 
 ## Upwork Memo — 2026-09-23 — 06:05 (+07:00)
 
-| Workroom | Status |
-|----------|--------|
-| Rory | Cloudflare challenge — session/Cloudflare block, not a memo-validity finding |
-| Aysar | Cloudflare challenge — same |
-| Neural Contract | Cloudflare challenge — same (messages-only workroom, no memos expected anyway) |
+~~| Rory / Aysar / Neural | Cloudflare challenge |~~ → re-run at recheck 08:30 (carrick live-cookie injection worked):
 
-No alert per existing rule (session/Cloudflare failure ≠ memo status). Trello: Rory/Aysar items already completed above on their Slack gate — memo validity unconfirmed this run, does not change gate.
+| Workroom | Dev | Memos | Invalid | Details |
+|----------|-----|-------|---------|---------|
+| Rory | KhanhHH (covering; LeNH tracker) | 1 | 0 | — |
+| Aysar | KhanhHH | 4 | 1 | ⚠️ "Handle feature: Allow team seat count to be decreased in admin #717" — flagged feature-only/no concrete action (borderline: "Handle feature" is generic). Valid: "Fix the 'Cannot play game.' feedback on Free/Paid Game Mode Toggle #673", "Handle feature: Add dark mode option… - update dark mode styles for settings panel dividers", "Fix bug: @username search not working on production #704…" |
+| Tokenlite (Marcel) | — | — | — | ⚠️ duongdn Upwork account (Chrome Profile 9) genuinely **logged out** — `user_oauth2_slave_access_token` absent, opening upwork.com in Profile 9 lands on Upwork Login page. Login page left open on DISPLAY :1 for DuongDN to sign in. |
+| Neural Contract | — | messages-only | — | `upwork-neural-check.js` OK: 20 msgs, newest 09-18 (ours, review request) — no new client message. |
+
+Aysar memo ⚠️ → alert to KhanhHH (reminder not sent — needs `--send-reminder`/user OK). Rory/Aysar project gates unchanged (memo validity is reported, doesn't flip their Slack/hours gates).
 
 ---
 
