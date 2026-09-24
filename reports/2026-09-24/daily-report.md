@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-24 (Thursday)
 
-**Run:** 2026-09-24T05:00:00+07:00 (cron), corrected 08:35 (+07:00) recheck
+**Run:** 2026-09-24T05:00:00+07:00 (cron), corrected 08:35 + 08:45 (+07:00) recheck
 **Window:** 2026-09-23T08:45:00+07:00 → 2026-09-24T05:00:00+07:00 | Task-log date: Wed 2026-09-23
 **Leave plan:** ~~KhanhHH has a leave request pending approval — not yet confirmed applied.~~ Refreshed 08:15: KhanhHH ⏳ PENDING leave is for **Tue 2026-09-30** (full day, "về quê giải quyết giấy tờ đất đai"), not today/yesterday. No leave on file for any PHP-team dev on 09-23. Resource Arrangement 09-23: only non-PHP-team notes (TriNM, PhongTB AM, DanhTD 09-25, MinhTC/SangNV 10-01→02).
 
@@ -17,7 +17,7 @@
 | 5 | Maddy | Unanswered client asks: Anoma 20:16 "reduce gaps / price boxes wider"; Anoma LIFM2-465 feedback list 23:51; Madhuraka numbering request 17:08. Kai promised LIFM2-428 deploy steps **today**. LIFM2-467/468 no est + no JIRA log. Maddy ○. |
 | 6 | Workstream review | Pending: OhCleo ×5 (LongVV 8h 09-21, LuHX 1.5h, PhuongPVT) → reviewers DuongDN/MinhTV; Crystal lang PhucVT 0.5h 09-21 → TienND. |
 | 7 | Upwork memo | Aysar (KhanhHH) 1 invalid memo 09-23: "Handle feature: Allow team seat count to be decreased in admin #717" (borderline). |
-| 8 | Upwork account | duongdn Upwork account (Chrome Profile 9 — Tokenlite/Marcel, Speedventory, MissSwimwear contracts) **logged out**; login page left open on desktop — needs DuongDN sign-in. |
+| 8 | Upwork account | ~~duongdn Upwork account (Profile 9) logged out — needs sign-in.~~ ✅ DuongDN signed in 08:43; Tokenlite memo check OK (0 memos 09-23). |
 | 9 | Matrix action items | vutq: DigitalOcean account for Kunal 2FA; tiennd: Arthur fixed-price/M4 estimate reply — both need DuongDN. |
 
 **Today (Thu, Sep 24):** ~~No confirmed leave besides KhanhHH's pending request~~ No leave today (KhanhHH's pending leave = 09-30). All present.
@@ -158,7 +158,7 @@ Daily activity since last run:
 | [#481](https://bitbucket.org/xtreme-web/rms/pull-requests/481) | 157d | LIFM2-409 feedback | 1 | Madhuraka 06-06 — waiting on customer, not our blocker (per rule) |
 No unanswered human reviewer comments on our side.
 
-**Maddy Trello: ○ kept open** — 2 unanswered direct client asks (Anoma 20:16 UI gaps/price boxes; LIFM2-465 feedback list) + Madhuraka numbering request. Recheck after Kai's working hours.
+**Maddy Trello: ○ kept open** (re-checked 08:45 — Anoma 20:16 ask still no reply) — 2 unanswered direct client asks (Anoma 20:16 UI gaps/price boxes; LIFM2-465 feedback list) + Madhuraka numbering request. Recheck after Kai's working hours.
 
 ---
 
@@ -205,7 +205,7 @@ Per rule: informational, no per-dev 0h alert/reminder.
 - Answered ✓: repo invite (thmc2), test env 2FA code, Order items export, Analytics.
 - Stuck >5d: To-Do 19/24, Bugs 13/18, Doing 4/5, QC Internal 3/6, QA Backlog 6/9, In QA 2/4.
 
-Trello: Fountain ○ kept open — unanswered direct customer asks on the board (push-live question, 3-line blurb question).
+Trello: Fountain ○ kept open (re-checked 08:45 — still no reply) — unanswered direct customer asks on the board (push-live question, 3-line blurb question).
 
 ---
 
@@ -337,7 +337,7 @@ Both healthy; nothing >5s.
 |----------|-----|-------|---------|---------|
 | Rory | KhanhHH (covering; LeNH tracker) | 1 | 0 | — |
 | Aysar | KhanhHH | 4 | 1 | ⚠️ "Handle feature: Allow team seat count to be decreased in admin #717" — flagged feature-only/no concrete action (borderline: "Handle feature" is generic). Valid: "Fix the 'Cannot play game.' feedback on Free/Paid Game Mode Toggle #673", "Handle feature: Add dark mode option… - update dark mode styles for settings panel dividers", "Fix bug: @username search not working on production #704…" |
-| Tokenlite (Marcel) | — | — | — | ⚠️ duongdn Upwork account (Chrome Profile 9) genuinely **logged out** — `user_oauth2_slave_access_token` absent, opening upwork.com in Profile 9 lands on Upwork Login page. Login page left open on DISPLAY :1 for DuongDN to sign in. |
+| Tokenlite (Marcel) | — | 0 | 0 | ~~duongdn account logged out~~ → signed in 08:43, re-run OK: no memos 09-23 (ad-hoc). |
 | Neural Contract | — | messages-only | — | `upwork-neural-check.js` OK: 20 msgs, newest 09-18 (ours, review request) — no new client message. |
 
 Aysar memo ⚠️ → alert to KhanhHH (reminder not sent — needs `--send-reminder`/user OK). Rory/Aysar project gates unchanged (memo validity is reported, doesn't flip their Slack/hours gates).
@@ -359,4 +359,4 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 5. ~~Maddy 4-part not run~~ Done — client asks open, recheck after Kai hours.
 6. DatNT has 0 Fountain WS rows this week despite active work — logs elsewhere or gap?
 7. Approve OhCleo pending reviews (DuongDN/MinhTV)?
-8. duongdn Upwork (Profile 9) needs sign-in — login page open on desktop.
+8. ~~duongdn Upwork (Profile 9) needs sign-in~~ Done 08:43.
