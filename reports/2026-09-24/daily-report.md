@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-24 (Thursday)
 
-**Run:** 2026-09-24T05:00:00+07:00 (cron), corrected 08:25–09:xx (+07:00) recheck
+**Run:** 2026-09-24T05:00:00+07:00 (cron), corrected 08:35 (+07:00) recheck
 **Window:** 2026-09-23T08:45:00+07:00 → 2026-09-24T05:00:00+07:00 | Task-log date: Wed 2026-09-23
 **Leave plan:** ~~KhanhHH has a leave request pending approval — not yet confirmed applied.~~ Refreshed 08:15: KhanhHH ⏳ PENDING leave is for **Tue 2026-09-30** (full day, "về quê giải quyết giấy tờ đất đai"), not today/yesterday. No leave on file for any PHP-team dev on 09-23. Resource Arrangement 09-23: only non-PHP-team notes (TriNM, PhongTB AM, DanhTD 09-25, MinhTC/SangNV 10-01→02).
 
@@ -10,12 +10,17 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream (all devs) | Workstream SSO outage this run — API refresh + 2x browser login attempts (headless + visible) all failed with "SSO redirected but API never fired". PhucVT/TuanNT/KhanhHH/LeNH/LongVV hours unverified. Known recurring outage (5+ prior occurrences), not a local DISPLAY issue. |
-| 2 | LegalAtoms (Slack) | hamidsalamatali97 posted a direct urgent ask tagging `<@UJE7XHT4L>`: "Please fix this asap, urgent tasks are blocked" re: github.com/rhuang/juristium-clone/issues/21815. Could not confirm a reply in this window. |
-| 3 | MPFC (New Relic) | Apdex 0.46 (poor, chronic). `WP_Error::get_method()` fatal recurring (192x). New SQLi WAITFOR probe on `/search/` feed (26.4s) — same probe pattern seen before, unresolved. |
-| 4 | Fountain | Task-log actuals (Part 2) and plan-vs-actual (Part 3) unverifiable — blocked by Workstream outage (#1). Matrix weekly plan (Part 1) not found in this window (may be from earlier in week; not re-fetched due to time-boxing). |
+| 1 | Sheets/Workstream | ~~Workstream SSO outage — hours unverified.~~ Resolved 08:18 (1st retry). **Real finding: TuanNT 0h + LeNH 0h on Wed 09-23, no leave** (2 passes). TuanNT visibly working (Bailey room) → logging gap; LeNH no activity signal. Reminders sent 08:32 (TuanNT `$RM3cbC6w…`, LeNH `$_kIjaBeT…`). |
+| 2 | LegalAtoms (Slack) | ~~Direct urgent ask unanswered.~~ Not ours — tagged Armaghan Iqbal (client dev). Raymond ✓. |
+| 3 | MPFC (New Relic) | Apdex 0.46 (poor, chronic). `WP_Error::get_method()` fatal (192x). SQLi WAITFOR/PG_SLEEP probes on `/search/` feed — unresolved. |
+| 4 | Fountain | ~~Parts 2/3 unverifiable, plan not found.~~ Full 5-part done. **Unanswered customer asks on Fountain Trello**: Kunal 20:36 "Were you able to push this live?" ([CSV card](https://trello.com/c/BcAjuYb6)); tmmckay 16:48 3-line ellipsis ([blurbs](https://trello.com/c/uopF36jA)). DatNT 0 WS rows vs 32h plan; ViTHT 2.5h vs 40h (Mon–Wed). Fountain ○. |
+| 5 | Maddy | Unanswered client asks: Anoma 20:16 "reduce gaps / price boxes wider"; Anoma LIFM2-465 feedback list 23:51; Madhuraka numbering request 17:08. Kai promised LIFM2-428 deploy steps **today**. LIFM2-467/468 no est + no JIRA log. Maddy ○. |
+| 6 | Workstream review | Pending: OhCleo ×5 (LongVV 8h 09-21, LuHX 1.5h, PhuongPVT) → reviewers DuongDN/MinhTV; Crystal lang PhucVT 0.5h 09-21 → TienND. |
+| 7 | Upwork memo | Aysar (KhanhHH) 1 invalid memo 09-23: "Handle feature: Allow team seat count to be decreased in admin #717" (borderline). |
+| 8 | Upwork account | duongdn Upwork account (Chrome Profile 9 — Tokenlite/Marcel, Speedventory, MissSwimwear contracts) **logged out**; login page left open on desktop — needs DuongDN sign-in. |
+| 9 | Matrix action items | vutq: DigitalOcean account for Kunal 2FA; tiennd: Arthur fixed-price/M4 estimate reply — both need DuongDN. |
 
-**Today (Thu, Sep 24):** No confirmed leave besides KhanhHH's pending request (not yet effective). All others presumed present.
+**Today (Thu, Sep 24):** ~~No confirmed leave besides KhanhHH's pending request~~ No leave today (KhanhHH's pending leave = 09-30). All present.
 
 ---
 
@@ -23,7 +28,7 @@
 
 | Account | Emails | Alerts | Calendar today |
 |---------|--------|--------|-----------------|
-| duongdn@nustechnology.com | 1 | KhanhHH leave request (pending) | no events |
+| duongdn@nustechnology.com | 1 | KhanhHH leave request (pending, for 09-30) | no events |
 | carrick@nustechnology.com | 2 | Rollbar: Socalautowraps prod error #11 (10th occurrence) — SoCal not actively monitored (dropped 2026-05-11) | no events |
 | nick@nustechnology.com | 0 | — | no events |
 | rick@nustechnology.com | 36 | FountainStaging: heavy staging-error volume (CSV import NoMethodError/PG::UndefinedFile family, recurring — dev/QA noise, not new); InfinityStagingBE 2 new errors (#114/#115 NoMethodError) | HEAL Meeting 12:30, OmniGPT Daily Sync 10:30 |
@@ -77,7 +82,7 @@ Trello: James Diamond - Vinn ✓ complete. Andrew Taraba ✓ complete.
 ~~🔴 **Workstream SSO unavailable this entire run** (see Alert #1).~~ **Resolved at recheck 08:18 — real data in table below; the cron text in this paragraph is superseded.** Tried: proactive token refresh, API refresh (2x), headless browser login (2 attempts), visible browser login (`DISPLAY=:1`, 2 attempts) — all failed at the same step ("SSO redirect detected — Keycloak cookies alive" but API token never captured). Google Sheets task-log system was fully retired 2026-08-21 (all projects migrated to Workstream) — there is no fallback data source this run.
 
 Cross-checked via other channels where possible:
-- **TuanNT** — heavy live activity in "NUS - Bailey - Paturevision 2026" Matrix room all day (GGS/Grazing bug fixes, RDS upgrade tasks) — clearly working, but exact hours unverified.
+- **TuanNT** — heavy live activity in "NUS - Bailey - Paturevision 2026" Matrix room all day (GGS/Grazing bug fixes, RDS upgrade tasks) — clearly working, ~~but exact hours unverified~~ → WS 0h 09-23 (logging gap), reminder sent.
 - ~~**KhanhHH** — pending leave request submitted today; hours unverified.~~ → 8h on 09-23 ✓; leave is for 09-30.
 - ~~**LeNH, PhucVT, LongVV** — no direct activity signal found this window; hours unverified.~~ → see table below (LongVV very active in Celine-OhCleo Matrix 09-23; LeNH no Matrix/Slack activity found 09-23).
 
@@ -89,10 +94,10 @@ Cross-checked via other channels where possible:
 
 | Dev | Mon 09-21 | Tue 09-22 | **Wed 09-23** | Status |
 |-----|-----------|-----------|---------------|--------|
-| TuanNT | speedventory 8.5h | speedventory 8h | **{TUANNT_23}** | {TUANNT_ST} |
+| TuanNT | speedventory 8.5h | speedventory 8h | **0h (2 passes 08:20 + 08:31)** | ⚠️ 0h logged, no leave — but visibly working all day in Bailey Matrix room (task summary 08:44, Console/Grazing fixes to 16:02) → logging gap. Reminder sent 08:32 |
 | KhanhHH | radio_data_center 8h | baamboozle 6h | **baamboozle 7.33h + bxr_app 0.67h = 8h** | ✓ OK |
-| LeNH | james_diamond 8h | james_diamond 8h (backfilled after 09-23 08:55 reminder) | **{LENH_23}** | {LENH_ST} |
-| LongVV | ohcleo 8h | maddy 4h (+3h James/1h Sandor per his Matrix reply — projects not visible to our WS token) | **{LONGVV_23}** | {LONGVV_ST} |
+| LeNH | james_diamond 8h | james_diamond 8h (backfilled after 09-23 08:55 reminder) | **0h (2 passes)** | ⚠️ 0h, no leave, no Matrix/Slack activity found 09-23 (2nd consecutive late log — 09-22 needed reminder too). Reminder sent 08:32 |
+| LongVV | ohcleo 8h | maddy 4h (+3h James/1h Sandor per his Matrix reply — projects not visible to our WS token) | **0h visible** | info — active on OhCleo in Matrix all day 09-23; may be on Sandor (not visible to our WS token). No reminder (Maddy ad-hoc) |
 | PhucVT | speedventory 6h + crystal_lang 0.5h | — | — | ignored (adhoc/external, per rule) |
 
 **Per-project review status (dev hrs / reviewer charged / need_review):**
@@ -239,16 +244,19 @@ Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Phili
 **Left incomplete (need recheck):** — updated at recheck (live Trello re-fetched 08:20)
 - Maddy - Carrick/Kai/Luis — ~~full 4-part check not run~~ → 4-part check done (see `## Maddy`); **○ kept open**: unanswered direct client asks (Anoma 20:16, LIFM2-465 feedback, Madhuraka numbering request).
 - Raymond - LegalAtoms — ~~⚠️ Alert #2, direct customer ask unconfirmed as answered.~~ → ✓ **completed 08:24**: hamidsalamatali97's "fix asap" tagged `<@UJE7XHT4L>` = **Armaghan Iqbal** (client-side dev), not us (our account = `david`); issue on client's `rhuang/juristium-clone` repo. Not our action item per LegalAtoms rule.
-- Bailey — Slack ggs clean (Nick's report present); {BAILEY_LINE}
-- Rebecca (William Bills) — Slack quiet; {REBECCA_LINE}
+- Bailey — Slack ggs clean (Nick's report present); ~~TuanNT hours unverified~~ → TuanNT 0h 09-23 → reminder sent 08:32 → ✓ **completed** (0h-reminder rule)
+- Rebecca (William Bills) — Slack quiet; ~~TuanNT hours unverified~~ → same TuanNT reminder → ✓ **completed**
 - Fountain — ~~3-part check incomplete~~ → full 5-part done; **○ kept open**: unanswered customer asks on Fountain Trello board (Kunal "push live?", tmmckay 3-line blurb).
-- Also re-verified gated items completed by cron on unverified hours: Aysar + Elliott (KhanhHH 8h 09-23 ✓ — confirmed OK), James Diamond (LeNH hours — see Sheets; {JAMES_LINE}).
+- Also re-verified gated items completed by cron on unverified hours: Aysar + Elliott (KhanhHH 8h 09-23 ✓ — confirmed OK), James Diamond (LeNH hours — see Sheets; LeNH 0h 09-23 → reminder sent 08:32; item stays ✓ (Vinn Discord report present + reminder rule)).
 
 ---
 
 ## Reminders — 05:50 (+07:00)
 
-Not run this pass — cannot determine 0h devs without Workstream data (Alert #1). No reminders sent.
+~~Not run this pass — no Workstream data. No reminders sent.~~ Recheck 08:32:
+- TuanNT: 0h 09-23, no leave → **sent** to `!knbJbIKzXRJNGVFQNg` (event `$RM3cbC6wprsIqf55Vj1vt9n8xyKmt9RTECVoHQk2RSQ`) → Bailey/Rebecca/John Yi completed
+- LeNH: 0h 09-23, no leave → **sent** to `!OIrgPraJWrcDTnRVLQ` (event `$_kIjaBeTE_Kaq7Keibt2TKVEedG4dcHctsUgV-0INd8`)
+- KhanhHH: 8h ✓ skip · LongVV: ad-hoc Maddy, skip · PhucVT: ignored (adhoc/external)
 
 ---
 
@@ -344,8 +352,11 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 
 ## Unresolved Questions
 
-1. Was the LegalAtoms urgent `@UJE7XHT4L` ask (Alert #2) ever answered? Could not confirm in this window — needs recheck.
-2. Workstream SSO outage (Alert #1) — same recurring pattern as prior 5+ incidents; root cause still not fixed on the platform side. Blocks all task-log hour verification (TuanNT/KhanhHH/LeNH/PhucVT/LongVV) and Fountain Parts 2-3.
-3. Fountain's current-week Matrix plan message (Part 1) wasn't located in this window's activity — needs a dedicated fetch back to Monday morning.
-4. DuongDN has 2 pending direct Matrix asks (DigitalOcean 2FA access for Kunal; Arthur pricing structure reply) — need his personal response, not something this run can resolve.
-5. Maddy's mandatory 4-part check (JIRA + Bitbucket + hours) was not run this pass — needs a dedicated recheck once Workstream is back.
+1. ~~LegalAtoms ask answered?~~ Resolved — not directed at us.
+2. ~~Workstream outage~~ Resolved at recheck.
+3. ~~Fountain plan missing~~ Found (Mon 11:29).
+4. DuongDN pending Matrix asks: DigitalOcean 2FA access (vutq/Kunal); Arthur pricing reply (tiennd).
+5. ~~Maddy 4-part not run~~ Done — client asks open, recheck after Kai hours.
+6. DatNT has 0 Fountain WS rows this week despite active work — logs elsewhere or gap?
+7. Approve OhCleo pending reviews (DuongDN/MinhTV)?
+8. duongdn Upwork (Profile 9) needs sign-in — login page open on desktop.
