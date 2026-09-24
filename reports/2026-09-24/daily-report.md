@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream | ~~Workstream SSO outage — hours unverified.~~ Resolved 08:18 (1st retry). **Real finding: TuanNT 0h + LeNH 0h on Wed 09-23, no leave** (2 passes). TuanNT visibly working (Bailey room) → logging gap; LeNH no activity signal. Reminders sent 08:32 (TuanNT `$RM3cbC6w…`, LeNH `$_kIjaBeT…`). |
+| 1 | Sheets/Workstream | ~~Workstream SSO outage — hours unverified.~~ Resolved 08:18 (1st retry). **~~TuanNT 0h +~~ LeNH 0h on Wed 09-23, no leave.** TuanNT backfilled → **9h speedventory** (09:02 check). TuanNT visibly working (Bailey room) → logging gap; LeNH no activity signal. Reminders sent 08:32 (TuanNT `$RM3cbC6w…`, LeNH `$_kIjaBeT…`). |
 | 2 | LegalAtoms (Slack) | ~~Direct urgent ask unanswered.~~ Not ours — tagged Armaghan Iqbal (client dev). Raymond ✓. |
 | 3 | MPFC (New Relic) | Apdex 0.46 (poor, chronic). `WP_Error::get_method()` fatal (192x). SQLi WAITFOR/PG_SLEEP probes on `/search/` feed — unresolved. |
 | 4 | Fountain | ~~Parts 2/3 unverifiable, plan not found.~~ Full 5-part done. **Unanswered customer asks on Fountain Trello**: Kunal 20:36 "Were you able to push this live?" ([CSV card](https://trello.com/c/BcAjuYb6)); tmmckay 16:48 3-line ellipsis ([blurbs](https://trello.com/c/uopF36jA)). DatNT 0 WS rows vs 32h plan; ViTHT 2.5h vs 40h (Mon–Wed). Fountain ○. |
@@ -82,7 +82,7 @@ Trello: James Diamond - Vinn ✓ complete. Andrew Taraba ✓ complete.
 ~~🔴 **Workstream SSO unavailable this entire run** (see Alert #1).~~ **Resolved at recheck 08:18 — real data in table below; the cron text in this paragraph is superseded.** Tried: proactive token refresh, API refresh (2x), headless browser login (2 attempts), visible browser login (`DISPLAY=:1`, 2 attempts) — all failed at the same step ("SSO redirect detected — Keycloak cookies alive" but API token never captured). Google Sheets task-log system was fully retired 2026-08-21 (all projects migrated to Workstream) — there is no fallback data source this run.
 
 Cross-checked via other channels where possible:
-- **TuanNT** — heavy live activity in "NUS - Bailey - Paturevision 2026" Matrix room all day (GGS/Grazing bug fixes, RDS upgrade tasks) — clearly working, ~~but exact hours unverified~~ → WS 0h 09-23 (logging gap), reminder sent.
+- **TuanNT** — heavy live activity in "NUS - Bailey - Paturevision 2026" Matrix room all day (GGS/Grazing bug fixes, RDS upgrade tasks) — clearly working → ~~WS 0h 09-23~~ 9h logged after reminder.
 - ~~**KhanhHH** — pending leave request submitted today; hours unverified.~~ → 8h on 09-23 ✓; leave is for 09-30.
 - ~~**LeNH, PhucVT, LongVV** — no direct activity signal found this window; hours unverified.~~ → see table below (LongVV very active in Celine-OhCleo Matrix 09-23; LeNH no Matrix/Slack activity found 09-23).
 
@@ -94,7 +94,7 @@ Cross-checked via other channels where possible:
 
 | Dev | Mon 09-21 | Tue 09-22 | **Wed 09-23** | Status |
 |-----|-----------|-----------|---------------|--------|
-| TuanNT | speedventory 8.5h | speedventory 8h | **0h (2 passes 08:20 + 08:31)** | ⚠️ 0h logged, no leave — but visibly working all day in Bailey Matrix room (task summary 08:44, Console/Grazing fixes to 16:02) → logging gap. Reminder sent 08:32 |
+| TuanNT | speedventory 8.5h | speedventory 8h | **~~0h (08:20/08:31)~~ → 9h speedventory (09:02)** | ~~⚠️ 0h logged, no leave~~ ✅ 9h — but visibly working all day in Bailey Matrix room (task summary 08:44, Console/Grazing fixes to 16:02) → logging gap. Reminder sent 08:32; ✅ logged 9h by 09:02 |
 | KhanhHH | radio_data_center 8h | baamboozle 6h | **baamboozle 7.33h + bxr_app 0.67h = 8h** | ✓ OK |
 | LeNH | james_diamond 8h | james_diamond 8h (backfilled after 09-23 08:55 reminder) | **0h (2 passes)** | ⚠️ 0h, no leave, no Matrix/Slack activity found 09-23 (2nd consecutive late log — 09-22 needed reminder too). Reminder sent 08:32 |
 | LongVV | ohcleo 8h | maddy 4h (+3h James/1h Sandor per his Matrix reply — projects not visible to our WS token) | **0h visible** | info — active on OhCleo in Matrix all day 09-23; may be on Sandor (not visible to our WS token). No reminder (Maddy ad-hoc) |
@@ -244,7 +244,7 @@ Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Phili
 **Left incomplete (need recheck):** — updated at recheck (live Trello re-fetched 08:20)
 - Maddy - Carrick/Kai/Luis — ~~full 4-part check not run~~ → 4-part check done (see `## Maddy`); **○ kept open**: unanswered direct client asks (Anoma 20:16, LIFM2-465 feedback, Madhuraka numbering request).
 - Raymond - LegalAtoms — ~~⚠️ Alert #2, direct customer ask unconfirmed as answered.~~ → ✓ **completed 08:24**: hamidsalamatali97's "fix asap" tagged `<@UJE7XHT4L>` = **Armaghan Iqbal** (client-side dev), not us (our account = `david`); issue on client's `rhuang/juristium-clone` repo. Not our action item per LegalAtoms rule.
-- Bailey — Slack ggs clean (Nick's report present); ~~TuanNT hours unverified~~ → TuanNT 0h 09-23 → reminder sent 08:32 → ✓ **completed** (0h-reminder rule)
+- Bailey — Slack ggs clean (Nick's report present); ~~TuanNT hours unverified~~ → ~~TuanNT 0h 09-23 → reminder sent 08:32~~ TuanNT 9h 09-23 (backfilled 09:02) → ✓ **completed** (0h-reminder rule)
 - Rebecca (William Bills) — Slack quiet; ~~TuanNT hours unverified~~ → same TuanNT reminder → ✓ **completed**
 - Fountain — ~~3-part check incomplete~~ → full 5-part done; **○ kept open**: unanswered customer asks on Fountain Trello board (Kunal "push live?", tmmckay 3-line blurb).
 - Also re-verified gated items completed by cron on unverified hours: Aysar + Elliott (KhanhHH 8h 09-23 ✓ — confirmed OK), James Diamond (LeNH hours — see Sheets; LeNH 0h 09-23 → reminder sent 08:32; item stays ✓ (Vinn Discord report present + reminder rule)).
@@ -255,7 +255,8 @@ Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Phili
 
 ~~Not run this pass — no Workstream data. No reminders sent.~~ Recheck 08:32:
 - TuanNT: 0h 09-23, no leave → **sent** to `!knbJbIKzXRJNGVFQNg` (event `$RM3cbC6wprsIqf55Vj1vt9n8xyKmt9RTECVoHQk2RSQ`) → Bailey/Rebecca/John Yi completed
-- LeNH: 0h 09-23, no leave → **sent** to `!OIrgPraJWrcDTnRVLQ` (event `$_kIjaBeTE_Kaq7Keibt2TKVEedG4dcHctsUgV-0INd8`)
+- LeNH: 0h 09-23, no leave → **sent** to `!OIrgPraJWrcDTnRVLQ` (event `$_kIjaBeTE_Kaq7Keibt2TKVEedG4dcHctsUgV-0INd8`); still 0h at 09:02 → 2nd reminder sent (user request)
+- TuanNT: ✅ backfilled 9h speedventory by 09:02
 - KhanhHH: 8h ✓ skip · LongVV: ad-hoc Maddy, skip · PhucVT: ignored (adhoc/external)
 
 ---
