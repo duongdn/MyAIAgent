@@ -171,7 +171,7 @@
 ### !SHdFKwrYpRhWJBtiBv:nustechnology.com — 3 messages
   [08:12] vutq: nay 9h hơn em mới tới cty nha anh
   [09:33] vutq: anh Dương ơi anh có nắm account DigitalOcean không ạ - để login rồi em báo Kunal lấy 2FA ⚠️
-  [09:33] duongdn: kunal@fountaingifts.com - Ks586258625
+  [09:33] duongdn: kunal@fountaingifts.com - [REDACTED]
 
 ### Arthur - Meta-Stamp — 10 messages
   [08:43] phucvt: image.png

@@ -18,7 +18,7 @@
 | 6 | Workstream review | Pending: OhCleo ×5 (LongVV 8h 09-21, LuHX 1.5h, PhuongPVT) → reviewers DuongDN/MinhTV; Crystal lang PhucVT 0.5h 09-21 → TienND. |
 | 7 | Upwork memo | Aysar (KhanhHH) 1 invalid memo 09-23: "Handle feature: Allow team seat count to be decreased in admin #717" (borderline). |
 | 8 | Upwork account | ~~duongdn Upwork account (Profile 9) logged out — needs sign-in.~~ ✅ DuongDN signed in 08:43; Tokenlite memo check OK (0 memos 09-23). |
-| 9 | Matrix action items | vutq: DigitalOcean account for Kunal 2FA; tiennd: Arthur fixed-price/M4 estimate reply — both need DuongDN. |
+| 9 | Matrix action items | ~~vutq: DigitalOcean account for Kunal 2FA; tiennd: Arthur pricing reply — both need DuongDN.~~ Both already answered by DuongDN same minute (09:33 DO account; 09:29/09:37 Arthur) — false action items. |
 
 **Today (Thu, Sep 24):** ~~No confirmed leave besides KhanhHH's pending request~~ No leave today (KhanhHH's pending leave = 09-30). All present.
 
@@ -269,8 +269,8 @@ Full details: reports/2026-09-24/matrix-rooms-0512.md
 
 | Room | Time | Message |
 |------|------|---------|
-| !SHdFKwrYpRhWJBtiBv | 09:33 | vutq: "anh Dương ơi anh có nắm account DigitalOcean không ạ - để login rồi em báo Kunal lấy 2FA" — needs DuongDN's DO account access for Kunal's 2FA setup |
-| Arthur - Meta-Stamp | 09:28 | tiennd: "hi anh Năm, anh Dương, trong msg có 3 phần 1. Fixed Price và ngày bàn giao cho carryover + M4 (est 54h) và price for each separate (est 14h)" — awaiting DuongDN's input on Arthur pricing/estimate structure (Arthur is paused for active monitoring, but this direct ask still needs a reply from DuongDN personally) |
+| ~~!SHdFKwrYpRhWJBtiBv~~ | ~~09:33~~ | ✅ answered by duongdn 09:33 — vutq: "anh Dương ơi anh có nắm account DigitalOcean không ạ - để login rồi em báo Kunal lấy 2FA" — needs DuongDN's DO account access for Kunal's 2FA setup |
+| ~~Arthur - Meta-Stamp~~ | ~~09:28~~ | ✅ answered by duongdn 09:29/09:37 + namtv 09:30 — tiennd: "hi anh Năm, anh Dương, trong msg có 3 phần 1. Fixed Price và ngày bàn giao cho carryover + M4 (est 54h) và price for each separate (est 14h)" — awaiting DuongDN's input on Arthur pricing/estimate structure (Arthur is paused for active monitoring, but this direct ask still needs a reply from DuongDN personally) |
 
 ### Key updates
 
@@ -355,7 +355,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 1. ~~LegalAtoms ask answered?~~ Resolved — not directed at us.
 2. ~~Workstream outage~~ Resolved at recheck.
 3. ~~Fountain plan missing~~ Found (Mon 11:29).
-4. DuongDN pending Matrix asks: DigitalOcean 2FA access (vutq/Kunal); Arthur pricing reply (tiennd).
+4. ~~DuongDN pending Matrix asks (DO 2FA, Arthur pricing)~~ Already answered 09-23.
 5. ~~Maddy 4-part not run~~ Done — client asks open, recheck after Kai hours.
 6. DatNT has 0 Fountain WS rows this week despite active work — logs elsewhere or gap?
 7. Approve OhCleo pending reviews (DuongDN/MinhTV)?

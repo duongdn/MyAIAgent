@@ -118,6 +118,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_maddy_pr481_not_a_blocker_waiting_on_customer](daily-report/slack/feedback_maddy_pr481_not_a_blocker_waiting_on_customer.md) — 🔴🔴 PR #481 flagged 3x wrongly; waiting on customer feedback ≠ our blocker, stop re-flagging
 - [feedback_dont_bury_real_issues_as_context](daily-report/matrix/feedback_dont_bury_real_issues_as_context.md) — 🔴 real issue needs own alert
 
+- [feedback_matrix_action_item_check_reply_before_flagging](daily-report/matrix/feedback_matrix_action_item_check_reply_before_flagging.md) — 🔴 check duongdn replied before listing action item; redact pasted creds
 ## daily-report:upwork
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md)
 - [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix covers Rory/Aysar too
