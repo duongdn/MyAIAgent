@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Sheets/Workstream — LeNH | 0h logged 09-24 across all projects (incl. James Diamond), no leave note. Strict gate — blocks James Diamond item. **Re-verified 08:35:** still 0h, no leave/remote email (direct IMAP subject search), no Matrix activity 09-24. Also still owes 09-23 log (reminded twice 09-24). |
-| 2 | Sheets/Workstream — TuanNT | 0h logged 09-24 across all projects, no leave note. Blocks John Yi, Rebecca, Bailey items. **Re-verified 08:35:** still 0h in WS, but he WAS working 09-24 (Grazing tasks + est discussion w/ DuongDN 16:04 in Bailey Matrix room) → missing log, not absence. Reminder not sent (needs `--send-reminder`). |
+| 2 | Sheets/Workstream — TuanNT | 0h logged 09-24 across all projects, no leave note. Blocks John Yi, Rebecca, Bailey items. **Re-verified 08:35:** still 0h in WS, but he WAS working 09-24 (Grazing tasks + est discussion w/ DuongDN 16:04 in Bailey Matrix room) → ~~missing log~~ **08:55 DuongDN confirmed: task log logged under wrong date; reminded by DuongDN** → resolved, John Yi/Rebecca/Bailey completed. |
 | 3 | Sheets/Workstream — PhucVT | 0h logged 09-24, no leave note. **Re-verified 08:35:** still 0h, but active in Matrix 09-24 (10:57-16:54 task coordination) → missing log, not absence. |
 | 4 | Workstream needsReview — Crystal lang (Arthur) | PhucVT — "Check and write script for delete data on staging / Check and report data on production" (09-21) + "Staging cleanup" (09-23, 0:30) still Pending. Reviewer: TienND (override). |
 | 5 | Workstream needsReview — OhCleo | ~~PhuongPVT + LongVV 09-21~~ Now **9 Pending** rows: PhuongPVT 09-21 (0:00); LongVV 09-21 ×3 (compliance 2h, Cover Art 4h, explicitness tier 2h), 09-23 ×2 (compliance 2h, Cover Art 6h), 09-24 ×2 (cover style 1h, tagging logic 2h); LuHX 09-23 (cover art design app 1:30). Reviewers: DuongDN, MinhTV. |
@@ -111,7 +111,7 @@ Per-project actual dev hours (09-24) + reviewer/status:
 
 ~~Maddy JIRA weekly cross-check: not run this pass~~ Run 08:40 — see ## Maddy.
 
-Trello: John Yi ⚠️ skipped (TuanNT 0h), Rebecca ⚠️ skipped (TuanNT 0h), Bailey ⚠️ skipped (TuanNT 0h + GGS daily report is present so only the hours gate blocks), Maddy ⚠️ skipped (alert #11), ~~Elliott held pending~~ Elliott ✓, James Diamond ⚠️ skipped (LeNH 0h), Blair Brown → Ignore List (paused, auto-complete).
+Trello: ~~John Yi / Rebecca / Bailey ⚠️ skipped (TuanNT 0h)~~ John Yi ✓, Rebecca ✓, Bailey ✓ 08:55 (TuanNT wrong-date log, reminded by DuongDN), Maddy ⚠️ skipped (alert #11), ~~Elliott held pending~~ Elliott ✓, James Diamond ⚠️ skipped (LeNH 0h), Blair Brown → Ignore List (paused, auto-complete).
 
 ---
 
@@ -209,7 +209,7 @@ Trello: no dedicated Upwork Memo checklist item exists — informational only.
 ## Reminders — 05:52 (+07:00)
 
 - LeNH: needs reminder (0h 09-24, no leave) — not sent (no `--send-reminder` flag this run).
-- TuanNT: needs reminder (0h 09-24, no leave) — not sent.
+- TuanNT: ~~needs reminder~~ wrong-date log, reminded by DuongDN directly 09-25.
 - PhucVT: needs reminder (0h 09-24, no leave) — not sent.
 - KhanhHH: skipped (8h logged).
 - LongVV: skipped (ad-hoc, no fixed target).
@@ -226,7 +226,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 
 **Completed this run:** Rory, **Elliott, Marcel, Neural Contract, Elena-WordPress-SamGuard (recheck 08:45)**, Franc, Aysar, MPFC, LegalAtoms, Andrew Taraba, Colin (ignore), Elena-SamGuard (ignore), Arthur (ignore), Blair Brown (ignore), Philip (ignore). All 6 Check Mail items.
 
-**Left ○ (alert-gated):** Maddy (#11), John Yi / Rebecca / Bailey (TuanNT 0h #2), James Diamond (LeNH 0h #1), Ohcleo (#6), Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
+**Left ○ (alert-gated):** Maddy (#11), ~~John Yi / Rebecca / Bailey (TuanNT 0h #2)~~ completed 08:55, James Diamond (LeNH 0h #1), Ohcleo (#6), Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
 
 ~~**Not completed — deferred pieces:** Maddy 4-part, Arthur, Matrix sweep, WordPress CSP, Fountain board~~ All run in 08:30-08:45 recheck, except Arthur (on Ignore List/paused — not run by design). Fountain/InfinityRoses New Relic still not queried (informational).
 
