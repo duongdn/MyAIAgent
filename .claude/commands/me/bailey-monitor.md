@@ -17,6 +17,23 @@ description: Bailey project monitoring — CloudWatch alarms, events, and infras
 
 Monitor Bailey project infrastructure. Generates `reports/{YYYY-MM-DD}/{HHMM}-bailey-monitor.md`.
 
+## Run Mode (auto-detect — same as daily-report)
+
+| Condition | Mode |
+|-----------|------|
+| No `reports/{today}/*-bailey-monitor.md` | **Full run** (all subtasks 1–10) |
+| Today's report EXISTS | **Recheck mode** (default, no flag needed) |
+| User says "full re-run" / "refresh all" | Full run regardless |
+
+### Recheck mode
+
+1. Read today's report. List every subtask marked NOT COMPLETED / unavailable / failed / skipped, plus items in `## Unresolved / follow-up`.
+2. Re-run ONLY those subtasks. Typical: Subtask 9 Workstream (SSO outage → re-run `workstream-login.js` then write), Subtask 7 Siteground (retry scraper + SSH), any API that errored.
+3. Before re-writing Workstream, don't duplicate: if report already says ✅ written, skip.
+4. Do NOT re-post Slack or re-create the Trello checklist ([[feedback_no_duplicate_sends]]). Only if Slack post itself failed, post it now. If recheck changes a status that was posted to customer Slack as WARNING/OK wrongly, ask user before posting a correction.
+5. Update the SAME report file inline (no new file): strike old text with `~~...~~`, write `**Recheck HH:MM:** ...` result in that section, update section heading (e.g. `NOT COMPLETED` → `✅ DONE (recheck HH:MM)`), update `## Unresolved / follow-up`.
+6. Still-failing items stay listed as unresolved → next run retries them again.
+
 ## Config
 
 Read `.bailey-config.json` for AWS credentials and settings.

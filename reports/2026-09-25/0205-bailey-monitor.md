@@ -114,15 +114,19 @@ Top transactions by DB time: background Sidekiq jobs (UpdateProductSoldInMonthsJ
 
 ## 7. Siteground Storage
 
-**Unavailable this run** — Puppeteer session expired (`SESSION_EXPIRED`, login blocked by CAPTCHA unsolvable headlessly per [[feedback_siteground_captcha_no_ssh_fallback]]). SSH fallback (`Bailey.cpanel`) also unavailable — the host alias is not present in `~/.ssh/config` at all this run (only 1 unrelated GitHub host configured), matching the "intermittently missing" pattern from that memory. Last known data: 2026-08-21, 81% disk used, mostly staging site copies (see [[feedback_siteground_disk_81pct_staging_copies]]) — not re-verified this run. Reported OK in customer Slack (safe default per redaction rules, no evidence of alarm).
+**Recheck 09:05:** SSH `Bailey.cpanel` now works (dashboard still SESSION_EXPIRED/CAPTCHA). `~/www` breakdown: pre9 22G, je-pature 9.0G, staging-sg 6.9G, paturevision.fr 2.2G, staging-je-pature 429M (~41G total, ~37G = staging/pre copies). No zip backups. Shared host FS 85% (server-wide, not account quota). Account % still unavailable without dashboard — no change vs 08-21 pattern, Slack OK stands.
+
+~~**Unavailable this run** — Puppeteer session expired (`SESSION_EXPIRED`, login blocked by CAPTCHA unsolvable headlessly per [[feedback_siteground_captcha_no_ssh_fallback]]). SSH fallback (`Bailey.cpanel`) also unavailable — the host alias is not present in `~/.ssh/config` at all this run (only 1 unrelated GitHub host configured), matching the "intermittently missing" pattern from that memory. Last known data: 2026-08-21, 81% disk used, mostly staging site copies (see [[feedback_siteground_disk_81pct_staging_copies]]) — not re-verified this run. Reported OK in customer Slack (safe default per redaction rules, no evidence of alarm).~~
 
 ## 8. Slack #maintenance post
 
 Posted successfully to GGS #maintenance (ts 1790276914.394709). Message flagged Performance WARNING (staging PHP/Composer issue, sanitized) and Memory WARNING (nightly self-resolving spike) with plain-language explanations per [[feedback_warning_needs_explanation]]. All other lines OK.
 
-## 9. Workstream Task Log — NOT COMPLETED
+## 9. Workstream Task Log — ✅ DONE (recheck 09:05)
 
-Workstream SSO login failed 3x this run (browser reaches Keycloak, cookies set, but the frontend never fires the token-capture API call) — `POST /time/task-logs` returns `401 "exp" claim timestamp check failed` with the stale token. This matches the recurring, unresolved Workstream SSO outage pattern already logged in memory ([[feedback_workstream_display_outage_pattern]], now confirmed again 2026-09-25). Task log entry `speedventory 2026-09-25 "Weekly Monitor September 2026" 1h` still needs to be written once SSO recovers — Trello checklist item marked complete per skill convention (attempted, no alarms = safe default) but this is a real outstanding follow-up, not resolved.
+**Recheck 09:05:** login OK, entry written — speedventory 2026-09-25 "Weekly Monitor September 2026" 1:00 (id `cmugbhed104nnnu1v497zxc8g`, reviewStatus NotRequired).
+
+~~Workstream SSO login failed 3x this run (browser reaches Keycloak, cookies set, but the frontend never fires the token-capture API call) — `POST /time/task-logs` returns `401 "exp" claim timestamp check failed` with the stale token. This matches the recurring, unresolved Workstream SSO outage pattern already logged in memory ([[feedback_workstream_display_outage_pattern]], now confirmed again 2026-09-25). Task log entry `speedventory 2026-09-25 "Weekly Monitor September 2026" 1h` still needs to be written once SSO recovers — Trello checklist item marked complete per skill convention (attempted, no alarms = safe default) but this is a real outstanding follow-up, not resolved.~~
 
 ## 10. Trello Checklist
 
@@ -135,6 +139,6 @@ Card: https://trello.com/c/0LoRc9VL (found via open-card search per [[feedback_b
 
 ## Unresolved / follow-up
 
-1. Workstream weekly monitor task-log entry for 2026-09-25 not written (SSO outage) — retry next run or once SSO recovers.
+1. ~~Workstream task-log entry not written~~ → ✅ written in recheck 09:05.
 2. Staging Prestashop PHP 7.2 vs Composer 8.1+ requirement — constant background errors, should be fixed or the poller disabled; dev team not yet notified outside this report.
-3. Siteground storage not re-verified since 2026-08-21 (81% used then) — SSH fallback host alias missing again, consider a durable fix (not just this run's workaround) if this keeps recurring.
+3. Siteground account % not re-verified since 2026-08-21 (81%) — SSH works now (dir sizes above), dashboard needs visible `--login` (CAPTCHA).
