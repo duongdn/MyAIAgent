@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream — LeNH | 0h logged 09-24 across all projects (incl. James Diamond), no leave note. Strict gate — blocks James Diamond item. **Re-verified 08:35:** still 0h, no leave/remote email (direct IMAP subject search), no Matrix activity 09-24. Also still owes 09-23 log (reminded twice 09-24). |
+| 1 | Sheets/Workstream — LeNH | 0h logged 09-24 across all projects (incl. James Diamond), no leave note. Strict gate — blocks James Diamond item. **Re-verified 08:35:** still 0h, no leave/remote email (direct IMAP subject search), no Matrix activity 09-24. Also still owes 09-23 log (reminded twice 09-24). **09:01 reminder sent (Matrix, user-approved) → James Diamond completed.** |
 | 2 | Sheets/Workstream — TuanNT | 0h logged 09-24 across all projects, no leave note. Blocks John Yi, Rebecca, Bailey items. **Re-verified 08:35:** still 0h in WS, but he WAS working 09-24 (Grazing tasks + est discussion w/ DuongDN 16:04 in Bailey Matrix room) → ~~missing log~~ **08:55 DuongDN confirmed: task log logged under wrong date; reminded by DuongDN** → resolved, John Yi/Rebecca/Bailey completed. |
 | 3 | Sheets/Workstream — PhucVT | 0h logged 09-24, no leave note. **Re-verified 08:35:** still 0h, but active in Matrix 09-24 (10:57-16:54 task coordination) → missing log, not absence. |
 | 4 | Workstream needsReview — Crystal lang (Arthur) | PhucVT — "Check and write script for delete data on staging / Check and report data on production" (09-21) + "Staging cleanup" (09-23, 0:30) still Pending. Reviewer: TienND (override). |
@@ -85,7 +85,7 @@ Trello: Rory ✓, Franc ✓, Maddy — hold pending JIRA/Bitbucket 4-part check 
 | AirAgri (nusvinn) | ~14 | jdiamond fuel-transfer feature discussion across the day; vinn shared a mockup doc for jdiamond review. Jeff's daily report present (#airagri-flutter, 4h: map/layer menu work done). |
 | Bizurk (nuscarrick) | 0 | No activity, no Andrew DMs. |
 
-Trello: James Diamond — ⚠️ skipped (LeNH 0h gate, see alert #1), Andrew Taraba ✓ complete.
+Trello: ~~James Diamond — ⚠️ skipped (LeNH 0h gate)~~ James Diamond ✓ 09:01 (reminder sent), Andrew Taraba ✓ complete.
 
 ---
 
@@ -208,7 +208,7 @@ Trello: no dedicated Upwork Memo checklist item exists — informational only.
 
 ## Reminders — 05:52 (+07:00)
 
-- LeNH: needs reminder (0h 09-24, no leave) — not sent (no `--send-reminder` flag this run).
+- LeNH: 0h 09-24 (re-verified 09:00) — **sent 09:01** (user-approved) to `!OIrgPraJWrcDTnRVLQ`.
 - TuanNT: ~~needs reminder~~ wrong-date log, reminded by DuongDN directly 09-25.
 - PhucVT: needs reminder (0h 09-24, no leave) — not sent.
 - KhanhHH: skipped (8h logged).
@@ -226,7 +226,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 
 **Completed this run:** Rory, **Elliott, Marcel, Neural Contract, Elena-WordPress-SamGuard (recheck 08:45)**, Franc, Aysar, MPFC, LegalAtoms, Andrew Taraba, Colin (ignore), Elena-SamGuard (ignore), Arthur (ignore), Blair Brown (ignore), Philip (ignore). All 6 Check Mail items.
 
-**Left ○ (alert-gated):** Maddy (#11), ~~John Yi / Rebecca / Bailey (TuanNT 0h #2)~~ completed 08:55, James Diamond (LeNH 0h #1), Ohcleo (#6), Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
+**Left ○ (alert-gated):** Maddy (#11), ~~John Yi / Rebecca / Bailey (TuanNT 0h #2)~~ completed 08:55, ~~James Diamond (LeNH 0h #1)~~ completed 09:01, Ohcleo (#6), Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
 
 ~~**Not completed — deferred pieces:** Maddy 4-part, Arthur, Matrix sweep, WordPress CSP, Fountain board~~ All run in 08:30-08:45 recheck, except Arthur (on Ignore List/paused — not run by design). Fountain/InfinityRoses New Relic still not queried (informational).
 
