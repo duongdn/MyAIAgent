@@ -15,7 +15,7 @@
 | 3 | Sheets/Workstream — PhucVT | 0h logged 09-24, no leave note. **Re-verified 08:35:** still 0h, but active in Matrix 09-24 (10:57-16:54 task coordination) → missing log, not absence. |
 | 4 | Workstream needsReview — Crystal lang (Arthur) | PhucVT — "Check and write script for delete data on staging / Check and report data on production" (09-21) + "Staging cleanup" (09-23, 0:30) still Pending. Reviewer: TienND (override). |
 | 5 | Workstream needsReview — OhCleo | ~~PhuongPVT + LongVV 09-21~~ Now **9 Pending** rows: PhuongPVT 09-21 (0:00); LongVV 09-21 ×3 (compliance 2h, Cover Art 4h, explicitness tier 2h), 09-23 ×2 (compliance 2h, Cover Art 6h), 09-24 ×2 (cover style 1h, tagging logic 2h); LuHX 09-23 (cover art design app 1:30). Reviewers: DuongDN, MinhTV. |
-| 6 | OhCleo Slack — Celine Fierro DM | 14:29-14:30 Celine flagged admin data "not correct/updated" and asked timeline — last message unanswered by Tony as of window end. **Still unanswered at 08:40 09-25 (~18h).** |
+| 6 | OhCleo Slack — Celine Fierro DM | 14:29-14:30 Celine flagged admin data "not correct/updated" and asked timeline — last message unanswered by Tony as of window end. ~~Still unanswered at 08:40 09-25 (~18h).~~ ✅ Tony replied 08:43 09-25: "It's more than 30 min to check… We can back this after done AI batch". (Note: Celine's msgs were actually 21:29-21:30 +07, script labels UTC.) |
 | 7 | Equanimity Slack | ~~komal.bailur asked carrick "what is the status?" (x2) — appears unanswered~~ ✅ Resolved: carrick replied 15:04 (waiting on Upwork hour increase); Marcel approved 08:33 09-25 ("send as bonus… So you can start"). Carrick can proceed. |
 | 8 | Email — MPFC (Rollbar) | Chronic `WP_Error::get_method()` production error, 10 occurrences/5min fired twice (04:50, 21:16) — same unresolved bug tracked for months. |
 | 9 | Email — Fountain (rick@) | Production errors: #341/#342 ActionView::Template::Error, #343 CSV::MalformedCSVError (all "production", not staging noise). |
@@ -177,7 +177,7 @@ Full details: reports/2026-09-25/matrix-rooms-0833.md
 
 Tony's daily report: not observed in this DM window.
 
-Trello: Ohcleo ⚠️ skipped (alert #6, unanswered customer question — re-verified 08:40, still no reply).
+Trello: ~~Ohcleo ⚠️ skipped (alert #6)~~ Ohcleo ✓ 09:25 (Tony replied 08:43).
 
 ---
 
@@ -226,7 +226,7 @@ Not tracked (paused), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Sta
 
 **Completed this run:** Rory, **Elliott, Marcel, Neural Contract, Elena-WordPress-SamGuard (recheck 08:45)**, Franc, Aysar, MPFC, LegalAtoms, Andrew Taraba, Colin (ignore), Elena-SamGuard (ignore), Arthur (ignore), Blair Brown (ignore), Philip (ignore). All 6 Check Mail items.
 
-**Left ○ (alert-gated):** Maddy (#11), ~~John Yi / Rebecca / Bailey (TuanNT 0h #2)~~ completed 08:55, ~~James Diamond (LeNH 0h #1)~~ completed 09:01, Ohcleo (#6), Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
+**Left ○ (alert-gated):** Maddy (#11), ~~John Yi / Rebecca / Bailey (TuanNT 0h #2)~~ completed 08:55, ~~James Diamond (LeNH 0h #1)~~ completed 09:01, ~~Ohcleo (#6)~~ completed 09:25, Fountain (#12). ~~Elliott, Marcel, Neural, Elena-WordPress~~ completed 08:45.
 
 ~~**Not completed — deferred pieces:** Maddy 4-part, Arthur, Matrix sweep, WordPress CSP, Fountain board~~ All run in 08:30-08:45 recheck, except Arthur (on Ignore List/paused — not run by design). Fountain/InfinityRoses New Relic still not queried (informational).
 
@@ -261,6 +261,6 @@ Trello: Maddy ⚠️ skipped (alert #11).
 
 ## Unresolved Questions
 1. ~~Sync lag?~~ Re-fetched 08:35: WS has 09-24 rows for others (ViTHT, KhanhHH, DatNC…) so no sync lag — LeNH/TuanNT/PhucVT genuinely haven't logged. TuanNT/PhucVT were demonstrably working. Send reminders? (needs your OK / `--send-reminder`)
-2. ~~Equanimity~~ resolved. Celine's OhCleo ask still unanswered on Slack — was it handled on another channel?
+2. ~~Equanimity / OhCleo~~ both resolved.
 3. carrick@'s "RE: Follow-up: a few items awaiting your confirmation" email not read in detail this pass — needs follow-up.
 4. Neural/Upwork memo: open upwork.com once in carrick's Chrome Profile 1 to refresh session?
