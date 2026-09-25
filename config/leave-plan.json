@@ -1,6 +1,6 @@
 {
   "description": "Approved leave dates for monitored PHP team only. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
-  "last_updated": "2026-09-25T05:04:11+07:00",
+  "last_updated": "2026-09-25T08:45:00+07:00",
   "monitored_devs": [
     "LongVV",
     "PhucVT",
@@ -598,6 +598,24 @@
       "requested_at": "2026-09-22T08:46:16.000Z",
       "approved_by": null,
       "approved_at": null,
+      "email_subject": "KhanhHH - Đơn xin nghỉ phép 04 ngày 25/09, 28/09, 29/09, 30/09/2026"
+    },
+    {
+      "id": "khanhhh-2026-09-25",
+      "dev_id": "KhanhHH",
+      "dev_email": "khanhhh@nustechnology.com",
+      "dates": [
+        "2026-09-25",
+        "2026-09-28",
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "type": "full",
+      "reason": "Về quê giải quyết giấy tờ (idle/internal, no makeup)",
+      "status": "approved",
+      "requested_at": "2026-09-22T15:46:00+07:00",
+      "approved_by": "namtv@nustechnology.com",
+      "approved_at": "2026-09-24T22:47:00+07:00",
       "email_subject": "KhanhHH - Đơn xin nghỉ phép 04 ngày 25/09, 28/09, 29/09, 30/09/2026"
     }
   ]
