@@ -515,6 +515,22 @@
       },
       "method": "dashboard_verified",
       "note": "Net Worth -13.6M vs 09-17 (5 ngay, bien dong nho, VCBS gia ETF giam). Sept MTD Thu 71.32M/Chi 36.58M/Net +34.75M. Larion 800M final khong doi. Ghost saving nam a 6m (2M) van treo."
+    },
+    {
+      "date": "2026-09-28",
+      "label": "28/09",
+      "net_worth": 8043933686,
+      "gross_assets": 8116247404,
+      "liabilities": 3664,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 722000000,
+        "investment": 2506123946,
+        "savings": 1244986407,
+        "liquid": 123132582
+      },
+      "method": "dashboard_verified",
+      "note": "Net Worth -13.3M vs 09-22 (vang -8.5M, chi tieu). ~48M vcb->FPTS (cash cho mua CP). Sept MTD Thu 71.32M/Chi 41.21M/Net +30.11M. 612M so dao han <=15 ngay. Ghost nam a 6m (2M) van treo."
     }
   ]
 }
