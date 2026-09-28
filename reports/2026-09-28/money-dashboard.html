@@ -112,6 +112,60 @@
   </div>
 </div>
 
+<!-- SPENDING:START -->
+<div class="grid">
+  <div class="card">
+    <h3>🧾 Chi tiêu sinh hoạt theo nhóm — 09/2026 (41.2M)</h3>
+    <div class="chart-wrap h280"><canvas id="chartSpendGroups"></canvas></div>
+  </div>
+  <div class="card">
+    <h3>💸 Tiền đã dùng vào đâu — 09/2026 vs 08/2026 (triệu ₫)</h3>
+    <div class="chart-wrap h280"><canvas id="chartMoneyFlow"></canvas></div>
+    <div style="font-size:12px;color:#94a3b8;margin-top:8px;line-height:1.6">
+      09/2026: Đầu tư 84.6M (FPTS 48.1M · VCBS 36.5M) · Rút từ đầu tư 69.9M (VCBS 69.9M) → ròng 14.7M<br>
+      Thu nhập 71.3M · Chi sinh hoạt 41.2M · Để dành được 30.1M (42% thu nhập)
+    </div>
+  </div>
+</div>
+<div class="grid full">
+  <div class="card">
+    <h3>📋 Chi tiết chi tiêu từng mục — 09/2026</h3>
+    <table><thead><tr><th>Nhóm</th><th>Mục</th><th class="right">Số tiền (₫)</th><th class="right">%</th></tr></thead>
+    <tbody><tr><td>👶 Con cái</td><td>Học phí</td><td class="right">10,727,000</td><td class="right">26.0%</td></tr>
+<tr><td>👶 Con cái</td><td>Học hành</td><td class="right">5,250,000</td><td class="right">12.7%</td></tr>
+<tr><td>👶 Con cái</td><td>Sữa</td><td class="right">820,000</td><td class="right">2.0%</td></tr>
+<tr><td>❓ Linh tinh</td><td>Linh tinh</td><td class="right">8,900,000</td><td class="right">21.6%</td></tr>
+<tr><td>🎁 Hiếu hỉ / Biếu tặng</td><td>Hiếu hỉ</td><td class="right">5,000,000</td><td class="right">12.1%</td></tr>
+<tr><td>💊 Sức khỏe</td><td>Sức khỏe</td><td class="right">4,712,745</td><td class="right">11.4%</td></tr>
+<tr><td>🏠 Nhà cửa & Dịch vụ</td><td>Nhà cửa</td><td class="right">1,777,213</td><td class="right">4.3%</td></tr>
+<tr><td>🏠 Nhà cửa & Dịch vụ</td><td>Điện</td><td class="right">1,000,000</td><td class="right">2.4%</td></tr>
+<tr><td>🛵 Xe cộ / Đi lại</td><td>Xăng xe</td><td class="right">1,230,000</td><td class="right">3.0%</td></tr>
+<tr><td>🏖️ Hưởng thụ</td><td>Du lịch</td><td class="right">920,000</td><td class="right">2.2%</td></tr>
+<tr><td>🍜 Ăn uống</td><td>Ăn uống</td><td class="right">769,000</td><td class="right">1.9%</td></tr>
+<tr><td>🛍️ Mua sắm</td><td>Trang phục</td><td class="right">100,000</td><td class="right">0.2%</td></tr>
+    <tr><td><b>Tổng</b></td><td></td><td class="right"><b>41,205,958</b></td><td class="right"><b>100%</b></td></tr></tbody></table>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chartSpendGroups'), {
+  type: 'doughnut',
+  data: { labels: ["👶 Con cái 40.8%","❓ Linh tinh 21.6%","🎁 Hiếu hỉ / Biếu tặng 12.1%","💊 Sức khỏe 11.4%","🏠 Nhà cửa & Dịch vụ 6.7%","🛵 Xe cộ / Đi lại 3.0%","🏖️ Hưởng thụ 2.2%","🍜 Ăn uống 1.9%","🛍️ Mua sắm 0.2%"],
+    datasets: [{ data: [16.8,8.9,5,4.71,2.78,1.23,0.92,0.77,0.1],
+      backgroundColor: ['#f59e0b','#3b82f6','#ec4899','#22c55e','#8b5cf6','#06b6d4','#ef4444','#84cc16','#f97316','#64748b','#a855f7'], borderColor: '#0f1117', borderWidth: 2 }] },
+  options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+    tooltip: { callbacks: { label: (c) => ' ' + c.label + ': ' + c.raw.toFixed(2) + 'M' } } } }
+});
+new Chart(document.getElementById('chartMoneyFlow'), {
+  type: 'bar',
+  data: { labels: ["🧾 Sinh hoạt","📈 Đầu tư","🏦 Tiết kiệm (ròng)","🤝 Cho vay CN","💳 Trả nợ"],
+    datasets: [
+      { label: '09/2026', data: [41.2,84.6,10.6,0,0], backgroundColor: '#3b82f6', borderRadius: 3 },
+      { label: '08/2026', data: [58,42.7,122,2,0.6], backgroundColor: '#475569', borderRadius: 3 } ] },
+  options: { maintainAspectRatio: false, plugins: { legend: { labels: { color: '#94a3b8' } } },
+    scales: { x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } } } }
+});
+</script>
+<!-- SPENDING:END -->
 <div class="grid full" style="padding-bottom:8px">
   <div class="card">
     <h3>📑 Tài khoản chi tiết — 28/09/2026 09:50</h3>

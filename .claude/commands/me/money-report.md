@@ -391,6 +391,9 @@ If a historical entry has `categories: null`, backfill chart literals from that 
 **`money-dashboard.html` spec:**
 - Dark theme (`#0f1117` bg), Chart.js via CDN (`<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">`) — fine for a static file opened locally. Do NOT use the Artifact tool for this (its CSP blocks the CDN).
 - Sections: KPI row (Net Worth, Liabilities, Liquid, Savings, current-month Net — each with a delta vs the prior snapshot), a highlights callout card (what changed since last run, Vietnamese), Net Worth trend line chart (all historical snapshots), allocation donut (excl. home), category evolution stacked bar, savings+liquid grouped bar, full account detail table.
+- 🔴 **Spending section (MANDATORY, user request 2026-09-28):** after writing the HTML run
+  `node scripts/misa-expense-category-breakdown.js {this-month} {prev-month} --json > tmp/breakdown.json && node scripts/money-dashboard-inject-spending-section.js reports/{date}/money-dashboard.html tmp/breakdown.json`
+  → adds doughnut "Chi tiêu theo nhóm", bar "Tiền đã dùng vào đâu" (sinh hoạt/đầu tư/tiết kiệm/cho vay/trả nợ, this vs prev month) and per-item table. Idempotent.
 - Copy the CSS/JS skeleton from the most recent prior `reports/{date}/money-dashboard.html` and swap in new numbers/labels/dates — don't redesign from scratch.
 - Open the file in a browser after writing it (e.g. `google-chrome file://.../money-dashboard.html`) so the user can see it without asking.
 

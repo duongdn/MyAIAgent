@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Breaks down MISA spending by parent group (like MISA app's "Báo cáo" screen).
 // Input: stdout JSON of misa-money-report.js (default tmp/misa-out.json).
-// Usage: node scripts/misa-expense-category-breakdown.js [YYYY-MM ...] [--file path]
+// Usage: node scripts/misa-expense-category-breakdown.js [YYYY-MM ...] [--file path] [--json]
 // Prints a markdown section per month: living expenses by group (+ % share), sub-category detail,
 // and where money went: living vs Đầu tư (transfers into investment wallets) vs savings vs loans.
 const fs = require('fs');
@@ -105,6 +105,8 @@ function main() {
   const args = process.argv.slice(2);
   const fi = args.indexOf('--file');
   const file = fi >= 0 ? args.splice(fi, 2)[1] : 'tmp/misa-out.json';
+  const ji = args.indexOf('--json');
+  const json = ji >= 0 && args.splice(ji, 1).length > 0;
   const now = new Date();
   const months = args.length ? args : [`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`];
   let data;
@@ -117,7 +119,10 @@ function main() {
   const tx = data?.apiData?.transactions || [];
   if (!tx.length) { console.error('No transactions in input.'); process.exit(1); }
   if (!data.apiData.transfers) console.error('WARN: no apiData.transfers — re-run misa-money-report.js (transfers into investment wallets will be missing).');
-  console.log(months.map((m) => render(breakdown(data.apiData, m))).join('\n---\n\n'));
+  const results = months.map((m) => breakdown(data.apiData, m));
+  // --json: raw numbers for the HTML dashboard (Piece 7 spending charts).
+  if (json) return console.log(JSON.stringify(results, null, 2));
+  console.log(results.map(render).join('\n---\n\n'));
 }
 
 main();
