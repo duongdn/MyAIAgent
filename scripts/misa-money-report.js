@@ -299,10 +299,18 @@ async function fetchViaApi(page, authToken) {
   const d30 = new Date(now - 30 * 86400000).toISOString().slice(0, 10);
   const recentTransactions = await postOnPage('/transactions/day', { ...txnBase, startDate: d30 + 'T00:00:00', endDate: toDate + 'T23:59:59', skip: 0, take: 100 });
 
+  // Transfers (transactionType 2, "Chuyển khoản tới X") are NOT returned by /transactions/day.
+  // /transactions/pagingdashboard (the web "Ghi chép" list) includes them. Fetch from start of
+  // previous month so the spending breakdown can count transfers into investment wallets as Đầu tư.
+  const prevMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const fromPrev = `${prevMonthStart.getFullYear()}-${String(prevMonthStart.getMonth() + 1).padStart(2, '0')}-01`;
+  const records = await postOnPage('/transactions/pagingdashboard', { userId: '', searchText: '', startDate: fromPrev + 'T00:00:00', endDate: toDate + 'T23:59:59', reportType: -1, skip: 0, take: 100000 });
+  const transfers = (records || []).filter(r => !r.isParent && r.transactionType === 2);
+
   // Monthly income/expense situation (all time)
   const situation = await postOnPage('/transactions/situation', { walletIds: '', isCalculateLoan: true });
 
-  return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, situation };
+  return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, transfers, situation };
 }
 
 /**

@@ -21,7 +21,7 @@
 | 09-24 | Xăng xe | Ví | −50,000 |
 | 09-22 | Lãi tiết kiệm | tikcop 1w | +11,726 |
 
-Chi 09-22→27: 4.58M. (Chuyển vcb→FPTS ~48M không phải chi tiêu.)
+Chi 09-22→27: 4.58M. (Chuyển vcb→FPTS 48.1M tính vào Đầu tư, xem bảng dòng tiền bên dưới.)
 
 ## Top Categories (09/2026)
 | Category | Spent (₫) | % |
@@ -73,12 +73,14 @@ Chi 09-22→27: 4.58M. (Chuyển vcb→FPTS ~48M không phải chi tiêu.)
 
 | Khoản | Số tiền (₫) | % tổng tiền đã dùng | % thu nhập |
 |-------|-----------|------------|-----------|
-| 🧾 Chi tiêu sinh hoạt | 41,205,958 | 100.0% | 57.8% |
-| 📈 Đầu tư (Cho vay — mua CP/ETF/Fund) | 0 | 0.0% | 0.0% |
+| 🧾 Chi tiêu sinh hoạt | 41,205,958 | 30.2% | 57.8% |
+| 📈 Đầu tư (chuyển vào FPTS 48,100,000, VCBS 36,500,000) | 84,600,000 | 62.0% | 118.6% |
+| 🏦 Gửi tiết kiệm (ròng, sau đáo hạn) | 10,600,000 | 7.8% | 14.9% |
+| 🤝 Cho vay cá nhân | 0 | 0.0% | 0.0% |
 | 💳 Trả nợ | 0 | 0.0% | 0.0% |
-| **Tổng đã dùng** | **41,205,958** | **100%** | **57.8%** |
+| **Tổng đã dùng** | **136,405,958** | **100%** | **191.3%** |
 
-Thu nhập thực: 71,316,402 ₫ · Thu hồi đầu tư (Thu nợ): 0 ₫ · Đầu tư ròng: 0 ₫ · Tiết kiệm được (thu − chi sinh hoạt): 30,110,444 ₫ (42.2%)
+Thu nhập thực: 71,316,402 ₫ · Rút từ đầu tư: 69,900,000 ₫ (VCBS 69,900,000) · Đầu tư ròng: 14,700,000 ₫ · Tiết kiệm được (thu − chi sinh hoạt): 30,110,444 ₫ (42.2%)
 
 ---
 
@@ -114,12 +116,14 @@ Thu nhập thực: 71,316,402 ₫ · Thu hồi đầu tư (Thu nợ): 0 ₫ · �
 
 | Khoản | Số tiền (₫) | % tổng tiền đã dùng | % thu nhập |
 |-------|-----------|------------|-----------|
-| 🧾 Chi tiêu sinh hoạt | 57,996,999 | 74.4% | 21.4% |
-| 📈 Đầu tư (Cho vay — mua CP/ETF/Fund) | 19,400,000 | 24.9% | 7.2% |
-| 💳 Trả nợ | 600,000 | 0.8% | 0.2% |
-| **Tổng đã dùng** | **77,996,999** | **100%** | **28.8%** |
+| 🧾 Chi tiêu sinh hoạt | 57,996,999 | 25.7% | 21.4% |
+| 📈 Đầu tư (chuyển vào VCBS 28,800,000, FPTS 13,900,000) | 42,700,000 | 19.0% | 15.8% |
+| 🏦 Gửi tiết kiệm (ròng, sau đáo hạn) | 122,014,260 | 54.2% | 45.1% |
+| 🤝 Cho vay cá nhân | 2,000,000 | 0.9% | 0.7% |
+| 💳 Trả nợ | 600,000 | 0.3% | 0.2% |
+| **Tổng đã dùng** | **225,311,259** | **100%** | **83.3%** |
 
-Thu nhập thực: 270,394,125 ₫ · Thu hồi đầu tư (Thu nợ): 0 ₫ · Đầu tư ròng: 19,400,000 ₫ · Tiết kiệm được (thu − chi sinh hoạt): 212,397,126 ₫ (78.6%)
+Thu nhập thực: 270,394,125 ₫ · Rút từ đầu tư: 0 ₫ (—) · Đầu tư ròng: 42,700,000 ₫ · Tiết kiệm được (thu − chi sinh hoạt): 212,397,126 ₫ (78.6%)
 
 
-> Lưu ý 09/2026: ~48M chuyển vcb→FPTS là **chuyển khoản** (chưa ghi Cho vay) nên chưa tính vào Đầu tư; sẽ tính khi mua CP và ghi Cho vay.
+> Đầu tư = mọi khoản chuyển từ ví sinh hoạt (vcb, Ví…) vào ví đầu tư (FPTS, VCBS, VCBF, Finhay, Larion, vàng…). 09/2026: chuyển FPTS 48.1M + VCBS 36.5M = 84.6M; rút VCBS→vcb 69.9M ngày 22/09 → đầu tư ròng +14.7M.

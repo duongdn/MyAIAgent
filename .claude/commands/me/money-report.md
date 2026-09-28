@@ -284,7 +284,7 @@ Recent transaction history + monthly income/expense summary.
 
 **Chi tiêu theo nhóm (MANDATORY, user request 2026-09-28):** after the monthly totals, append the output of
 `node scripts/misa-expense-category-breakdown.js {current-month} {previous-month}` (reads `tmp/misa-out.json` — save Step 0 stdout there).
-It groups MISA sub-categories into parent groups like the app (Ăn uống, Con cái, Xe cộ/Đi lại, Nhà cửa, Hiếu hỉ, Sức khỏe, Mua sắm, Hưởng thụ, Linh tinh…) with ₫ + %, per-item detail, and a "dòng tiền sử dụng" table (sinh hoạt vs Đầu tư=Cho vay vs Trả nợ). New unmapped sub-category → lands in "📦 Khác": add it to `GROUPS` in the script.
+It groups MISA sub-categories into parent groups like the app (Ăn uống, Con cái, Xe cộ/Đi lại, Nhà cửa, Hiếu hỉ, Sức khỏe, Mua sắm, Hưởng thụ, Linh tinh…) with ₫ + %, per-item detail, and a "dòng tiền sử dụng" table. 🔴 **Đầu tư = every transfer from a living wallet (vcb, Ví…) INTO an investment wallet (walletType 3: FPTS, VCBS, VCBF, Finhay, Larion, vàng…; Tikop counts as savings)** — user rule 2026-09-28. Transfers come from `apiData.transfers` (`/transactions/pagingdashboard`, transactionType 2 "Chuyển khoản tới X") because `/transactions/day` does NOT return transfers. Cho vay inside an investment wallet is not counted again (double-count); Cho vay from vcb = cho vay cá nhân. Transfers out of an investment wallet = "Rút từ đầu tư". New unmapped sub-category → lands in "📦 Khác": add it to `GROUPS` in the script.
 
 **Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-transactions.md`
 
