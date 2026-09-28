@@ -1,6 +1,6 @@
 ---
 name: feedback_ignore_list_paused_items
-description: Colin, Elena-SamGuard, Arthur, Blair Brown, Philip are paused — auto-complete Trello items, don't run their gate check, report under separate Ignore List section
+description: Colin, Elena-SamGuard, Arthur, Blair Brown, Philip paused + John Yi cancelled (2026-09-28) — auto-complete Trello items, don't run their gate check, report under separate Ignore List section
 metadata:
   type: feedback
 ---
@@ -12,3 +12,4 @@ metadata:
 **How to apply:** In `/daily-report trello progress`, skip running the mapped source piece for these 5 items — auto-complete their Trello checklist item unconditionally, and list them under a dedicated "## Ignore List" section in the daily report output (not mixed into normal ✓/⚠️ item lines). Wired into `.claude/commands/me/daily-report.md` Piece 8 and `docs/memory/daily-report/trello/reference_trello_gate_mapping.md`.
 
 If user un-pauses one later, remove it from the ignore list and restore its normal gate check ([[feedback_arthur_blair_brown_gate_added]], [[feedback_philip_msteams_consolidated]], [[feedback_solid_code_new_workspace_unwired]]).
+**2026-09-28:** user: "Add John Yii vô cancel project" → John Yi - Amazing Meds added to Ignore List (reason: Cancelled). Skip Amazing Meds Slack gate; TuanNT 0h no longer blocks John Yi (still gates Bailey + Rebecca).
