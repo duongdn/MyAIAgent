@@ -282,6 +282,10 @@ Recent transaction history + monthly income/expense summary.
 4. Sum positive amounts = real income, sum negative amounts (abs) = real expense.
 5. **Validate against the app's own "Báo cáo" screen** (bottom nav → Báo cáo → pick month → "Chi tiền"/"Thu tiền" tabs) — its category breakdown already does this filtering correctly and is the ground truth to cross-check against. A correct calculation should match within rounding (<0.1%).
 
+**Chi tiêu theo nhóm (MANDATORY, user request 2026-09-28):** after the monthly totals, append the output of
+`node scripts/misa-expense-category-breakdown.js {current-month} {previous-month}` (reads `tmp/misa-out.json` — save Step 0 stdout there).
+It groups MISA sub-categories into parent groups like the app (Ăn uống, Con cái, Xe cộ/Đi lại, Nhà cửa, Hiếu hỉ, Sức khỏe, Mua sắm, Hưởng thụ, Linh tinh…) with ₫ + %, per-item detail, and a "dòng tiền sử dụng" table (sinh hoạt vs Đầu tư=Cho vay vs Trả nợ). New unmapped sub-category → lands in "📦 Khác": add it to `GROUPS` in the script.
+
 **Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-transactions.md`
 
 ```markdown
