@@ -9,3 +9,5 @@ User (2026-09-28): transactions report must break down money used like the MISA 
 **How to apply:** run `node scripts/misa-expense-category-breakdown.js {this-month} {last-month}` in Piece 5 (spec now in .claude/commands/me/money-report.md). Transfers into broker wallets aren't "Cho vay" → note them separately.
 
 **Correction 2026-09-28:** ALL money transferred into FPTS/VCBS/VCBF/Finhay/etc. = Đầu tư (not just "Cho vay" rows). Transfers only come from `/transactions/pagingdashboard` (`apiData.transfers`), not `/transactions/day`. Also: a drop in an investment wallet may be a withdrawal transfer (e.g. VCBS→vcb 69.9M 09-22), not a price move — check transfers before blaming price.
+
+**Dashboard (confirmed good by user 2026-09-28 — keep this format):** every money-dashboard.html must include the spending section injected by `scripts/money-dashboard-inject-spending-section.js` (doughnut chi tiêu theo nhóm + bar "tiền đã dùng vào đâu" this vs prev month + per-item table). Spec in `.claude/commands/me/money-report.md` Piece 7.
