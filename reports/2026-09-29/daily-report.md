@@ -16,7 +16,7 @@
 | 4 | Upwork Memo (Piece 15) | ~~`upwork-memo-check.js` timed out after 2 min — not completed this run.~~ ✅ Re-run 08:50: Rory 0 memos, Aysar 0 memos (no hours 09-28), Tokenlite 3/3 valid. No invalid memo. |
 | 5 | Fountain — customer Trello board | 🔴 Kunal comments with no team reply on card: **"Implement Smart Hybrid Product Search"** (09-24, asked review of Codex branches — 5 days), **"Infinity - Account and Auth"** ("whats the status with this?", 09-29 04:27), plus 09-26 asks on Bottle engraving images / contact-form Zoom swap / gift-variant export (team working these per Matrix, but no card reply). Fountain Trello item **reverted to ○**. |
 | 6 | Discord Bizurk — Andrew Taraba | 🔴 animeworld DM Mon 09-28 14:55: "check this task https://trello.com/c/EHO0KW5T/10-add-a-modal-for-pos-accepting-payment … let me know if you can do it?" — **no reply from nuscarrick** (~18h). Item stays ○. |
-| 7 | Sheets/Workstream Mon 09-28 | PhucVT 0h + TuanNT 0h on all Workstream projects + all Sheets, no leave. Both clearly worked (Matrix: TuanNT posted Bailey daily report 08:28 + handled Console Live incident; PhucVT reassigned to Arthur full-time 07:04 + James Diamond coordination) → logging lag, not absence. **Reminder needed, not sent** (no `--send-reminder`). |
+| 7 | Sheets/Workstream Mon 09-28 | ~~PhucVT 0h + TuanNT 0h~~ **Corrected 09:05:** TuanNT **8h** on Bailey/Speedventory (Redis 2h, Redmine fixes 5h50, menu 0h10) — aggregate script dropped these rows (raw `/review/week` shows them). PhucVT **0h** confirmed across all accessible projects → **reminder SENT 09:04** (room `!kzyLVmJxcRESoTkfnY`, event `$zShOCq_TkFIGREv1jsGKWyqnKfnTHY5QvEXEnX8VbAY`). ~~Both clearly worked (Matrix: TuanNT posted Bailey daily report 08:28 + handled Console Live incident; PhucVT reassigned to Arthur full-time 07:04 + James Diamond coordination) → logging lag, not absence. **Reminder needed, not sent** (no `--send-reminder`).~~ |
 | 8 | Maddy — Madhuraka | Live-site incident: sold items set to Draft (since early Sept per client). Kai root-caused 16:20 (single external GET to `/process/auto-disable-sold` 27/09 20:59), agreed to write one-off re-enable script 17:09. Madhuraka chasing 08:17 today ("close to finishing?"). Active, answered same day — watch, not blocking. |
 
 **Today (Tue 09-29):** KhanhHH on approved full leave (re-verified 08:30, also 09-30). ThinhPVD off morning (wedding prep, per Resource Arrangement). All others present.
@@ -62,7 +62,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai, Ken items ✓ complete. Mail card mar
 | Aigile Dev | 1 | Automated weekly newsletter only. |
 | OhCleo | see below | Piece 12 |
 
-Trello (cron): Maddy, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Colin(ignore), Elena(ignore), Philip(ignore), Arthur(ignore), Blair Brown(ignore) ✓ complete/auto-complete. ~~Raymond-LegalAtoms, Andrew Taraba, Rebecca ⚠️ skipped (not run this pass)~~ Recheck: Raymond ✓, Rebecca ✓ (TuanNT 0h = logging lag, confirmed active in Matrix), Andrew ⚠️ ○ (see Discord).
+Trello (cron): Maddy, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Colin(ignore), Elena(ignore), Philip(ignore), Arthur(ignore), Blair Brown(ignore) ✓ complete/auto-complete. ~~Raymond-LegalAtoms, Andrew Taraba, Rebecca ⚠️ skipped (not run this pass)~~ Recheck: Raymond ✓, Rebecca ✓ (TuanNT 8h Bailey), Andrew ⚠️ ○ (see Discord).
 
 ---
 
@@ -98,8 +98,8 @@ Week 2026-09-28 → 10-04 (day 2 of week, Tuesday morning — most projects show
 | Dev | Mon 09-28 | Breakdown | Status |
 |-----|-----------|-----------|--------|
 | LeNH | 8h | James Diamond 5 + Radio Data Center 3 | ✅ |
-| PhucVT | 0h | — (Fri 09-25: 8h) | ⚠️ logging lag — reassigned to Arthur/Crystal lang full-time 07:04 Mon, active in Matrix. Reminder not sent. |
-| TuanNT | 0h | — (Fri 09-25: 8h) | ⚠️ logging lag — Bailey daily report 08:28 + Console Live fix in Matrix. Reminder not sent. |
+| PhucVT | 0h | — (Fri 09-25: 8h) | ⚠️ 0h, no leave → reminder sent 09:04 |
+| TuanNT | ~~0h~~ 8h | Speedventory (Bailey) 8h — raw API | ✅ |
 | KhanhHH | 0h | — | ✅ approved leave |
 | LongVV | 0h | — | info only (said "6h OhCleo, 2h Maddy" in Matrix, not logged yet) |
 | DatNT 8 / HungPN 3 / ViTHT 1.5 / LuHX 4.5 (Maddy) / DatNC 1 / DuongDN 1 | | | info |
@@ -224,8 +224,8 @@ Full details: reports/2026-09-29/matrix-rooms-0833.md
 ## Reminders — 08:40 (+07:00)
 
 ~~0h-developer reminder scan not run this pass~~ Recheck 08:40 (Mon 09-28 data):
-- PhucVT: needs reminder (0h, no leave, active in Matrix) — not sent, use --send-reminder
-- TuanNT: needs reminder (0h, no leave, active in Matrix) — not sent, use --send-reminder
+- PhucVT: 0h, no leave → **sent 09:04** (user-approved)
+- TuanNT: ~~needs reminder~~ has 8h Bailey — no reminder
 - LeNH: skipped (8h) · KhanhHH: skipped (leave) · LongVV: ad-hoc, no reminder
 
 ---
@@ -257,6 +257,6 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 2. Elena PR #309 — Elena paused (Ignore List): merge/deploy anyway, or hold?
 3. ~~Upwork Memo script timeout~~ resolved.
 4. ~~Items not checked~~ resolved in recheck.
-5. LuHX logged 4.5h on Maddy Mon — is LuHX now in the Kai role (would re-activate the Kai daily-report gate)?
-6. Send reminders to PhucVT + TuanNT for Mon 09-28 task log?
+5. ~~LuHX Kai role?~~ User: LuHX is a different role, not managed — no gate.
+6. ~~Reminders?~~ PhucVT sent; TuanNT not needed.
 7. Nick's GGS daily report landed in #général instead of the usual #maintenance — worth confirming this is intentional/expected.

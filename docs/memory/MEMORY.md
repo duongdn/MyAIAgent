@@ -63,6 +63,7 @@
 - [feedback_discord_token_refresh_script_broken](daily-report/discord/feedback_discord_token_refresh_script_broken.md) — 🔴 401≠login
 
 ## daily-report:sheets
+- [feedback_ws_aggregate_drops_rows_and_luhx_not_managed](daily-report/sheets/feedback_ws_aggregate_drops_rows_and_luhx_not_managed.md) — 🔴 raw /review/week rows before any 0h claim (TuanNT 8h missed 09-29); LuHX on Maddy = unmanaged role
 Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Bailey now on Workstream) — old sheets-scan mechanics memories deleted; entries below are Workstream-era.
 - [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md), [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md)
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md)
