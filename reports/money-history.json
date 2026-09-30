@@ -547,6 +547,22 @@
       },
       "method": "dashboard_verified",
       "note": "Net Worth -10.0M vs 09-28 = vang -10M + Paypal FX -35K. vcb->FPTS +14M (FPTS cash 62.3M cho mua CP). Tu nay Tikop tinh vao liquid, ghost nam a 6m (2M) loai khoi savings. Sept MTD Thu 71.31M/Chi 41.21M/Net +30.11M. tikcop 1w 10M dao han hom nay."
+    },
+    {
+      "date": "2026-09-30",
+      "label": "30/09",
+      "net_worth": 8034398457,
+      "gross_assets": 8104702120,
+      "liabilities": 3662,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 712500000,
+        "investment": 2520123840,
+        "savings": 1202356562,
+        "liquid": 149721718
+      },
+      "method": "dashboard_verified",
+      "note": "Net Worth +0.5M vs 09-29 = vang +0.5M. Khong co giao dich moi. tikcop 1w 10M da dao han 29/09 chua tat toan; FPTS 62.3M cash chua mua CP. 602M so dao han 10-13/10."
     }
   ]
 }
