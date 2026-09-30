@@ -1,6 +1,6 @@
 # Daily Report — 2026-09-30 (Wed)
 
-**Run:** 2026-09-30T05:10:00+07:00 (cron)
+**Run:** 2026-09-30T05:10:00+07:00 (cron), corrected 08:45 (+07:00)
 **Window:** 2026-09-29 05:00 → 2026-09-30 05:00 (+07:00)
 **Leave plan:** TuanNT — half-day off 29/09 afternoon (đau răng/dental), arranged internally (VuTQ covering Bailey/Console); Bailey team confirmed "ko bù" (no make-up).
 
@@ -12,8 +12,9 @@
 |---|--------|-------|
 | 1 | Email (rick@) | rick@ Rollbar: `[FirstProject] production - New Error: #1121 IntegrationError` — real **production** error (FirstProject/Fountain family). All other rick@ Rollbar/BugSnag items today are staging/dev/test, not production. |
 | 2 | Performance (MPFC) | Apdex 0.49 (poor) — chronic `WP_Error::get_method()` bug (13x today), `E_WARNING "continue" targeting switch` (601x, dominant), 1 `Too many connections` DB error (9x). Same chronic issue tracked for months, unresolved. |
-| 3 | Trello — Maddy | Not completed this run — full 4-part check (Slack + JIRA weekly cross-check + Bitbucket PR reply-rate + Workstream hours) not run this pass, time-boxed. Left ○, needs recheck. |
-| 4 | Upwork Memo | Session/login failed for Rory (carrick), Aysar (carrick), Tokenlite/Marcel (duongdn) — all 3 workrooms: live-cookie + stored + headless login all failed. Not a memo-validity alert (session issue only) — manual Chrome touch needed to refresh access tokens. Trello Rory/Aysar gates unaffected (session ≠ memo status). |
+| 3 | Trello — Maddy | ~~Not completed this run — full 4-part check not run, time-boxed.~~ 08:45: full 4-part check done (see `## Maddy`). Client comms all answered. **LIFM2-467 (High) over estimate: est 2h, JIRA 2.5h (+0.5h)**, plus 2 Workstream entries without ticket keys (2h). Left ○ until you decide if the overrun counts as an alert. |
+| 4 | Upwork Memo | ~~Session/login failed for Rory (carrick), Aysar (carrick), Tokenlite/Marcel (duongdn) — all 3 workrooms: live-cookie + stored + headless login all failed. Not a memo-validity alert (session issue only) — manual Chrome touch needed to refresh access tokens.~~ 08:40: fixed by opening upwork.com in carrick Chrome Profile 1. All 3 workrooms (Rory/Aysar/Tokenlite) returned `success`, **0 memos logged 09-29**, so nothing to validate. No alert. |
+| 5 | Fountain Trello board (customer) | Kunal asked @rick570 directly and it is **not answered on the board**: (a) 09-29 10:12, card "stripe webhook crash fix": pushed fix for WD-3096, waiting for review. (b) 09-29 19:47, card "Set up separate test environment": asks whether the test site can follow `master` instead of staging (about 270 files drift), whether PRs keep going to master, and whether the test server has pgvector + Gemini key for #511. Trello Fountain changed ✓ → ○. |
 
 **Today (Wed 30/09):** No other confirmed leave for today. TuanNT's dental leave was yesterday (29/09) afternoon.
 
@@ -104,9 +105,15 @@ Fountain `needsReview` rows present (DatNT, 20 rows) — excluded from alerting 
 
 **Part 3 — Plan vs Actual:** Cannot compute numeric comparison without this week's Matrix plan message (not reposted in window) — actuals shown above are real and active; no shortfall signal from the room discussion itself.
 
-**Trello board:** Not separately queried this run (time-boxed) — no customer complaint signals seen in Matrix room content.
+**Trello board:** ~~Not separately queried this run (time-boxed).~~ Queried 08:45. Kunal comments since 09-29:
+- 09:16 master key request: answered via WhatsApp (Matrix confirms) ✅
+- 09:21 security fixes PR #507: Rick replied 09:50 with feedback, not merging ✅
+- **10:12 stripe webhook crash fix (WD-3096): no reply on the card** ⚠️
+- 11:09 "Infinity GiftDrop push live": moved to production check (Matrix) ✅
+- 19:15/19:44 performance card: focus on Fountain, Section 2 is in PR #553, review with #511. FYI, no question asked
+- **19:47 test environment: questions on following master vs staging, PR target branch, pgvector + Gemini key. Unanswered** ⚠️
 
-Trello: Fountain ✓ complete (Parts 2-3 clean, Part 1 uses last-known plan per standing rule).
+Trello: Fountain ~~✓ complete~~ **○ incomplete** (08:45), because Kunal's direct asks are still open.
 
 ---
 
@@ -120,10 +127,48 @@ Trello: Elena - SamGuard Digital Plant (ignore, auto-✓), Elena - WordPress Sam
 
 ---
 
+## Maddy — W40 — 08:45 (+07:00)
+
+### 1. Task Log Hours (Workstream `maddy`, 09-29)
+| Developer | 09-29 | Week total | Status |
+|-----------|-------|------------|--------|
+| LongVV (Kai role) | 0h | 2h (09-28) | informational, ad-hoc. No alert |
+| LuHX | 2h | 6.5h | unmanaged role, not Kai gate |
+
+reviewers = [] → need_review = false.
+
+### 2. Slack / Kai Daily Report Check
+- LongVV had 0h on Maddy for 09-29, so the daily-report check doesn't apply.
+- Client messages: Madhuraka asked about the one-off script (08:17). Kai replied with PR #551 (08:36), and Madhuraka then did the bulk update via Matrixify (10:52) ✅. Anoma couldn't find in-home-quotes (22:36); Kai pointed to admin/popups (22:41) ✅. **Nothing unanswered.**
+
+### 3. JIRA
+- Weekly cross-check: 2 Workstream entries without ticket key (1h "Investigate why items sold are draft on Shopify", 1h "Investigate approach to improve quoting tool results"), so they have no est and no JIRA log ⚠️
+- Updated since last run: **LIFM2-467 In-Home Quote Form [Testing - Anoma, High]: est 2h, spent 2.5h → 🔴 over 0.5h**
+- Risk tickets: LIFM2-260 Done, LIFM2-439 Done, LIFM2-409 Testing - Anoma (upd 09-25)
+
+### 4. Bitbucket PR Status (`xtreme-web/rms`, 9 open)
+| PR | Created | Comments (last) |
+|----|---------|-----------------|
+| #551 re-activate products by SKU | 09-29 | 2 (Rovo Dev bot). Superseded by Matrixify bulk update, could be closed |
+| #549 LIFM2-467 in-home pickup quote | 09-24 | 0 |
+| #548 LIFM2-468 Lens title | 09-22 | 1 (bot) |
+| #544 LIFM2-465 | 09-10 | 0 |
+| #540 LIFM2-450 | 09-03 | 0 |
+| #534 concurrent cron fix | 08-26 | 1 (bot) |
+| #520 Quotes page refresh | 07-15 | 0 |
+| #509 LIFM2-428 | 06-22 | 4 (bot last 08-14) |
+| #481 LIFM2-409 | 04-20 | 2. Waiting on customer, not a blocker |
+
+No human review comments waiting on our reply.
+
+Trello: Maddy ○. The only finding is the LIFM2-467 +0.5h overrun and the untagged entries; waiting on your call.
+
+---
+
 ## Trello — Check Progress / Check Mail — 05:10 (+07:00)
 
 - Check mail: all 6 items ✓ complete, card marked done.
-- Check progress: 20/21 items ✓ complete (Maddy left ○ — full 4-part check not run this pass, needs recheck).
+- Check progress: ~~20/21 items ✓ complete (Maddy left ○)~~ 19/21 ✓ (08:45). ○ Maddy (LIFM2-467 overrun, waiting on your call), ○ Fountain - DOCUMENT (Kunal board asks open).
 
 ## Ignore List — 05:10 (+07:00)
 Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital Plant, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds.
@@ -210,17 +255,18 @@ No new alert beyond the already-chronic MPFC WP_Error bug (tracked for months, s
 
 | Workroom | Status | Details |
 |----------|--------|---------|
-| Rory | login_failed | Live cookies + stored + headless all failed — session issue, not memo validity |
-| Aysar | session_expired | Same — session issue |
-| Tokenlite (Marcel) | login_failed | Same — session issue |
+| Rory | ~~login_failed~~ success (08:40) | 0 memos logged 09-29 |
+| Aysar | ~~session_expired~~ success (08:40) | 0 memos logged 09-29 |
+| Tokenlite (Marcel) | ~~login_failed~~ success (08:40) | 0 memos logged 09-29 |
 
-No memo-validity data obtainable this run. Per standing rule: session/Cloudflare failure ≠ memo status, no alert, Trello gates for Rory/Aysar unaffected (already completed via Slack+hours check above). Manual fix: open upwork.com once in carrick's and duongdn's real Chrome to refresh access tokens.
+~~No memo-validity data obtainable this run.~~ Token refreshed by opening upwork.com in carrick Chrome Profile 1. No hourly time logged 09-29, so no invalid memos. Per standing rule: session/Cloudflare failure ≠ memo status, no alert, Trello gates for Rory/Aysar unaffected (already completed via Slack+hours check above). Manual fix: open upwork.com once in carrick's and duongdn's real Chrome to refresh access tokens.
 
 ---
 
 ## Unresolved Questions
 
-1. Maddy full 4-part check (Slack deep-dive + JIRA weekly cross-check + Bitbucket PR reply-rate + Workstream) not run this pass — needs recheck.
+1. ~~Maddy full 4-part check not run~~ Done 08:45. Should the LIFM2-467 +0.5h overrun (High, in Testing) keep Maddy ○, or is it OK to complete?
+1b. Fountain: Rick needs to answer Kunal on WD-3096 review and the test-env questions (master vs staging, pgvector/Gemini key).
 2. ken@nustechnology.com's 80 emails were not individually triaged beyond sampling — worth a closer pass if Precognize PR-activity signal is expected today.
-3. Upwork memo sessions (Rory/Aysar/Tokenlite) need a live Chrome touch to refresh — not done this run.
+3. ~~Upwork memo sessions need a live Chrome touch~~ Fixed 08:40.
 4. OhCleo #events-code channel still `channel_not_found` — needs admin re-invite (known pre-existing gap).
