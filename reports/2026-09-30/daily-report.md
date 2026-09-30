@@ -180,6 +180,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital 
 ## Reminders — 05:10 (+07:00)
 
 No 0h-with-no-leave developers found today (TuanNT's 0h is leave-explained; all other tracked devs have logged hours or are ad-hoc/unmanaged). No reminders needed. Not sent (no `--send-reminder` flag, and none warranted).
+- LongVV: reminder **sent** 08:50 (user request) to `!mYZBGNoLFVpMVIJtPu` — 09-29 only 6h logged (OhCleo), asked to add any missing tasks. event `$dFsMKFnjFQ7sVSI1pGRPElcvCZgmh_nlibnRWc4LcPQ`.
 
 ---
 
