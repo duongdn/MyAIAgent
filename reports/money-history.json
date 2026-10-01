@@ -563,6 +563,22 @@
       },
       "method": "dashboard_verified",
       "note": "Net Worth +0.5M vs 09-29 = vang +0.5M. Khong co giao dich moi. tikcop 1w 10M da dao han 29/09 chua tat toan; FPTS 62.3M cash chua mua CP. 602M so dao han 10-13/10."
+    },
+    {
+      "date": "2026-10-01",
+      "label": "01/10",
+      "net_worth": 8073437531,
+      "gross_assets": 8143833194,
+      "liabilities": 95662,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 720500000,
+        "investment": 2531923840,
+        "savings": 1202321425,
+        "liquid": 169087929
+      },
+      "method": "dashboard_verified",
+      "note": "Net Worth +39.0M vs 09-30 = luong +66.9M, vang +8M, chi tieu -31.7M (the 18.73M ghi 30/09 + chi 01/10 12.68M), hut ty gia rut Paypal -4.16M. Paypal 3,523 USD rut het ve vcb (88M) -> vcb 127.1M. tikcop 1w tat toan 30/09, gui lai 10M (dao han 08/10). vcb->FPTS +11.8M (so du vi 74.1M). T9 chot Thu 71.33M/Chi 60.24M/Net +11.09M. 612M so dao han 08-13/10."
     }
   ]
 }
