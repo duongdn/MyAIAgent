@@ -65,14 +65,14 @@
 ## daily-report:sheets
 - [feedback_ws_aggregate_drops_rows_and_luhx_not_managed](daily-report/sheets/feedback_ws_aggregate_drops_rows_and_luhx_not_managed.md) — 🔴 raw /review/week rows before any 0h claim (TuanNT 8h missed 09-29); LuHX on Maddy = unmanaged role
 Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Bailey now on Workstream) — old sheets-scan mechanics memories deleted; entries below are Workstream-era.
-- [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md), [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md)
+- [feedback_workstream_needs_review_check](daily-report/sheets/feedback_workstream_needs_review_check.md), [feedback_longvv_consolidated](daily-report/sheets/feedback_longvv_consolidated.md) — 🔴 2026-10-01: multiple projects, use combined total
 - [feedback_workstream_all_projects_in_script](daily-report/sheets/feedback_workstream_all_projects_in_script.md)
 - [feedback_workstream_fetch_needs_explicit_date_arg](daily-report/sheets/feedback_workstream_fetch_needs_explicit_date_arg.md)
 - [feedback_check_workstream_before_flagging_shortfall](daily-report/sheets/feedback_check_workstream_before_flagging_shortfall.md) — 🔴🔴🔴 13x recurred false-0h, always re-verify before alerting, [feedback_marginal_daily_shortfall_check_weekly](daily-report/sheets/feedback_marginal_daily_shortfall_check_weekly.md)
 - [feedback_workstream_report_needs_dev_reviewer_hours_and_status](daily-report/sheets/feedback_workstream_report_needs_dev_reviewer_hours_and_status.md) — 🔴 WS row needs dev+reviewer+status
 - [feedback_dev_not_working_project_x_means_that_project_only](daily-report/sheets/feedback_dev_not_working_project_x_means_that_project_only.md)
 - [feedback_dev_project_mapping_flexible](daily-report/sheets/feedback_dev_project_mapping_flexible.md) — 🔴 restored 2026-08-21, wrongly deleted as "obsolete Sheets" but is the core per-dev/all-projects scanning rule, still referenced by daily-report.md
-- [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md), [feedback_phucvt_adhoc_external_ignore](daily-report/sheets/feedback_phucvt_adhoc_external_ignore.md)
+- [feedback_lenh_consolidated](daily-report/sheets/feedback_lenh_consolidated.md), [feedback_tuannt_consolidated](daily-report/sheets/feedback_tuannt_consolidated.md), [feedback_phucvt_adhoc_external_ignore](daily-report/sheets/feedback_phucvt_adhoc_external_ignore.md) — 2026-10-01: PhucVT works Arthur
 - [feedback_khanhhh_aysar_consolidated](daily-report/sheets/feedback_khanhhh_aysar_consolidated.md) — Aysar project owner=KhanhHH
 - [project_leave_plan_system](daily-report/sheets/project_leave_plan_system.md), [feedback_leave_day_handling](daily-report/sheets/feedback_leave_day_handling.md) — pro-rate weekly target for leave
 - [reference_workstream](daily-report/sheets/reference_workstream.md), [feedback_maddy_jira_weekly_check](daily-report/sheets/feedback_maddy_jira_weekly_check.md) — 🔴 script reads STALE Sheet, needs Workstream update

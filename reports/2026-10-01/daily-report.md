@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-01 (Thursday)
 
-**Run:** 2026-10-01T05:10:00+07:00 (cron), corrected 08:55 (+07:00)
+**Run:** 2026-10-01T05:10:00+07:00 (cron), corrected 08:55 and 09:12 (+07:00)
 **Window:** 2026-09-30T05:10:00+07:00 → 2026-10-01T05:10:00+07:00
 **Leave plan:** ~~No approved leave on record for 2026-09-30/10-01 (LongVV/PhucVT/TuanNT/KhanhHH/LeNH).~~ Refreshed 08:40 (`parse-leave-emails.js`): **KhanhHH on approved leave 09-25, 09-28, 09-29, 09-30** (về quê giải quyết giấy tờ, idle/internal, no makeup). Back today: she posted in the Aysar Matrix room 08:32 that she is resuming Aysar tasks. Resource Arrangement room 09-30: HaVS full day, SamHT + ThienTM morning. Nothing for TuanNT, LongVV, LeNH.
 
@@ -10,9 +10,9 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream | ~~TuanNT 0h across all Workstream projects (Speedventory only source, 8h 09-28 / 4h 09-29 / **0h 09-30**), no leave note — gates Rebecca + Bailey~~ 08:45: raw `/review/week` rows now show **TuanNT 1h on 09-30** ("Add a Modal for POS accepting Payment"). Not 0h, so Rebecca + Bailey gates pass. Still a real shortfall: **1h vs 8h, no leave** (week: 8h / 4h / 1h). Matrix shows him busy 09-30 getting access to a legacy project, so this is probably unlogged time. Reminder not sent. |
+| 1 | Sheets/Workstream | ~~TuanNT 0h across all Workstream projects (Speedventory only source, 8h 09-28 / 4h 09-29 / **0h 09-30**), no leave note — gates Rebecca + Bailey~~ ~~08:45: raw `/review/week` rows now show **TuanNT 1h on 09-30** ("Add a Modal for POS accepting Payment"). Not 0h, so Rebecca + Bailey gates pass. Still a real shortfall: **1h vs 8h, no leave** (week: 8h / 4h / 1h). Matrix shows him busy 09-30 getting access to a legacy project, so this is probably unlogged time. Reminder not sent.~~ **09:12: TuanNT has the full 8h on 09-30** (Speedventory 7h + Portfolio 1h). He logged it this morning; the 08:45 read was too early. No alert. |
 | 2 | Sheets/Workstream | ~~KhanhHH 0h across all Workstream projects on 09-30, no leave note — gates Aysar + Elliott~~ **False alert.** KhanhHH was on approved leave 09-25 → 09-30 (leave plan refreshed 08:40). Elliott completed. |
-| 3 | Sheets/Workstream | ~~PhucVT 0h across all Workstream projects on 09-30, no leave note~~ **Not an alert.** PhucVT is ad-hoc/external, 0h on Workstream is expected (standing rule since 07-29). He did log 8h on 09-28. |
+| 3 | Sheets/Workstream | ~~PhucVT 0h across all Workstream projects on 09-30, no leave note~~ **Not an alert.** PhucVT now works Arthur (your note 09:10); his Workstream rows this week are 8h on Definitive Guide 09-28, none on Crystal lang. Not reminded. |
 | 4 | Slack Xtreme (Maddy) | ~~Client (anomawasala) asked "why this error comes for some items, when upload to Shopify?" 09-30 20:16 — still unanswered as of run time (~9h)~~ Answered 10-01 08:41 by Kai: "You don't worry it" / "Just ignore". Maddy completed. The answer is terse and gives no reason; worth a glance if Anoma follows up. |
 | 5 | Email vuongtrancr@gmail.com | New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" ×12 for Swish/Delayed-newform — recurring signal-loss pattern |
 | 6 | Email rick@ | [FirstProject] production — 2 new Rollbar errors: #1121 IntegrationError, #1122 NotFoundError (production, not staging) |
@@ -20,7 +20,7 @@
 | 8 | Matrix (internal) | honght: 4 people (Joey Bailey - PatureVision/Speedventory, DuongDN, ThangN, James Diamond) working only until 2026-10-09 — need task transfer plan |
 | 9 | Upwork Memo | ~~Rory/Aysar/Marcel (Tokenlite) sessions all blocked (Cloudflare/login) — memo validity unverified this run, not a memo-invalid finding~~ 08:48: Rory and Aysar read fine, **0 memos on 09-30** (nobody tracked time), nothing to validate. Tokenlite timesheet still not readable; Workstream shows 0h on Tokenlite 09-30, so no memo is due. No alert. |
 | 10 | Fountain Trello board (customer) | Kunal asks to @rick570 with **no reply on the board**: (a) 10-01 03:29 **TEST backend returning 502, Puma not running** since ~03:17 ([card](https://trello.com/c/uPcfRWzN)); (b) 09-29 04:27 "whats the status with this?" on [Infinity - Account and Auth](https://trello.com/c/xIukJjhO); (c) 09-29 09:16 asks for the [development master key](https://trello.com/c/tY3yvAti); (d) 09-29 10:12 [stripe webhook crash fix](https://trello.com/c/FxAv6ODy) waiting for review (2 days); (e) 09-29 11:09 "we can push this live" on [GiftDrop Recipient flow](https://trello.com/c/tSuQHKwj); (f) overnight 09-30 21:59 → 10-01 03:00: PRs #512, #513, #514 (privacy fix, must be live before any holiday window), #515 + storefront #556 ready for review. Fountain stays ○. |
-| 11 | Sheets/Workstream | **LongVV 2h on 09-30** (OhCleo only) against the 8h/day OhCleo target, no leave. Week so far: 8h / 4h / 2h. You already reminded him 09-30 08:48 about 09-29. Reminder not sent. |
+| 11 | Sheets/Workstream | ~~**LongVV 2h on 09-30** (OhCleo only) against the 8h/day OhCleo target, no leave. Week so far: 8h / 4h / 2h. You already reminded him 09-30 08:48 about 09-29. Reminder not sent.~~ **Wrong, struck 09:12.** LongVV works several projects: 09-28 8h (OhCleo 6 + Maddy 2), 09-29 8h (OhCleo 4 + Definitive Guide 4), 09-30 8h (OhCleo). No alert. |
 | 12 | Workstream review | OhCleo: 8 LongVV rows `Pending` review (09-28 → 09-30, 12h). Reviewers: **DuongDN, MinhTV**. |
 
 **Today (Thu 10-01):** ~~No staff leave on record; all present.~~ KhanhHH back from leave today. MinhTC off 10-01 → 10-02 (Resource Arrangement). No leave for the 5 PHP-team devs today.
@@ -93,8 +93,8 @@ Workstream is primary for all projects except Bailey (Bailey now also on Workstr
 | Fountain | Kunal | see Fountain section | — | excluded (per instruction) |
 | Marcel (Tokenlite) | Marcel | DuongDN 1h | need_review=false | — |
 | Radio Data Center | Franc | LeNH 3h | need_review=false | — |
-| Speedventory | Bailey | TuanNT ~~12h wk (0h today — **Alert #1**)~~ 13h wk: 8h / 4h / **1h on 09-30** (raw rows, 08:45; the aggregate script still drops the 09-30 row), DatNC 2h, VyNL 2h, TrinhMTT 3.5h, VuTQ 16h, NamNN 1.5h | need_review=false | — |
-| OhCleo | OhCleo | LongVV 12h wk: 6h / 4h / **2h on 09-30** (Alert #11) | need_review=false | reviewStatus: **Pending** — 8 rows (visual direction cover arts, AI tag taxonomy, SEO audit, visual identity) — ⚠️ reviewers: DuongDN, MinhTV (Alert #12) |
+| Speedventory | Bailey | TuanNT ~~12h wk (0h today — **Alert #1**)~~ 19h on Speedventory: 8h / 4h / 7h, plus 1h Portfolio on 09-30 (raw rows 09:12), DatNC 2h, VyNL 2h, TrinhMTT 3.5h, VuTQ 16h, NamNN 1.5h | need_review=false | — |
+| OhCleo | OhCleo | LongVV ~~12h wk: 6h / 4h / **2h on 09-30** (Alert #11)~~ 18h wk: 6h / 4h / 8h (09:12) | need_review=false | reviewStatus: **Pending** — 8 rows (visual direction cover arts, AI tag taxonomy, SEO audit, visual identity) — ⚠️ reviewers: DuongDN, MinhTV (Alert #12) |
 | Baamboozle, Colin/ETZ, Generator, Amazing Meds, Elevate365, Neural Contract, LegalAtoms, BXR App, Crystal lang, Blair Brown, Rebecca | — | 0h logged, no members this week | — | — |
 
 ~~KhanhHH: **not found on any Workstream project this week** → Alert #2. PhucVT: **not found on any Workstream project this week** → Alert #3. Both cross-checked via `workstream-fetch-project-week.js all` (covers all 19 tracked projects) — recommend interactive recheck given prior false-0h history on these two devs.~~
@@ -103,11 +103,11 @@ Workstream is primary for all projects except Bailey (Bailey now also on Workstr
 
 | Dev | 09-28 | 09-29 | 09-30 | Status |
 |-----|-------|-------|-------|--------|
-| TuanNT | 8h | 4h (PM dental leave) | **1h** | ⚠️ 7h short on 09-30, no leave. Gates pass (combined > 0). |
+| TuanNT | 8h | 4h (PM dental leave) | ~~**1h**~~ **8h** | ~~⚠️ 7h short on 09-30, no leave. Gates pass (combined > 0).~~ OK (09:12). |
 | KhanhHH | leave | leave | leave | Approved leave 09-25 → 09-30. No alert. |
-| PhucVT | 8h | — | — | Ad-hoc/external, hours informational. No alert. |
+| PhucVT | 8h (Definitive Guide) | — | — | Works Arthur; hours informational. No alert. |
 | LeNH | 8h | 8h | 8h | OK (James Diamond 5+8+8, Radio Data Center 3). |
-| LongVV | 8h (OhCleo 6 + Maddy 2) | 4h | **2h** | ⚠️ OhCleo target is 8h/day. |
+| LongVV | 8h (OhCleo 6 + Maddy 2) | ~~4h~~ 8h (OhCleo 4 + Definitive Guide 4) | ~~**2h**~~ 8h (OhCleo) | ~~⚠️ OhCleo target is 8h/day.~~ OK, multiple projects (09:12). |
 
 **Maddy JIRA weekly cross-check:** ~~not run this pass (time-boxed) — recommend recheck.~~ Run 08:50, see `## Maddy` below.
 
@@ -263,7 +263,7 @@ Full details: reports/2026-10-01/matrix-rooms-0505.md
 
 Tony daily report: **present** 09-30 18:25. Technical SEO Audit of Homepage (dev done), AI tag taxonomy re-tagging (updated feedback), fix languages in some transcriptions (dev done), cover-art visual direction (in progress). No message from Celine in the window.
 
-The report lists 4 items but only 2h is logged on Workstream for 09-30 (Alert #11).
+~~The report lists 4 items but only 2h is logged on Workstream for 09-30 (Alert #11).~~ Workstream now has all 4 items for 09-30, 2h each.
 
 Trello: Ohcleo ✓ complete.
 
@@ -308,10 +308,10 @@ Paused per Ignore List (2026-09-09) — auto-completed, not actively monitored t
 
 ## Reminders — 05:10 (+07:00)
 
-- TuanNT: ~~needs reminder (0h today, no leave)~~ low hours, **1h on 09-30**, no leave. The 0h template does not apply; a reminder would need the real number. **Not sent** (no `--send-reminder` flag).
+- TuanNT: ~~needs reminder (0h today, no leave)~~ ~~low hours, **1h on 09-30**, no leave. The 0h template does not apply; a reminder would need the real number. **Not sent** (no `--send-reminder` flag).~~ skipped (8h logged, 09:12)
 - KhanhHH: ~~needs reminder (0h today, no leave) — **not sent**~~ skipped (approved leave 09-25 → 09-30)
 - PhucVT: ~~needs reminder (0h today, no leave) — **not sent**~~ skipped (ad-hoc/external, never reminded)
-- LongVV: ~~skipped (has hours, ad-hoc no target)~~ low hours, **2h on 09-30** vs 8h OhCleo target. You reminded him in Matrix 09-30 08:48 about 09-29. **Not sent** for 09-30.
+- LongVV: ~~skipped (has hours, ad-hoc no target)~~ ~~low hours, **2h on 09-30** vs 8h OhCleo target. You reminded him in Matrix 09-30 08:48 about 09-29. **Not sent** for 09-30.~~ skipped (8h each day across projects, 09:12)
 - LeNH: skipped (has 8h via James Diamond)
 
 ---
@@ -319,7 +319,6 @@ Paused per Ignore List (2026-09-09) — auto-completed, not actively monitored t
 ## Unresolved Questions
 
 1. Fountain board: has rick570 answered Kunal outside Trello (email/GitHub) on the master key, the Infinity auth status, and the stripe webhook PR? The board shows no reply. The TEST backend 502 (Puma down since ~03:17) needs someone today.
-2. TuanNT (1h) and LongVV (2h) on 09-30: send reminders? Run `/me:daily-report reminders --send-reminder` or say so.
 3. OhCleo: 8 rows pending review are addressed to you and MinhTV.
 4. Maddy: LIFM2-467 is 0.5h over estimate and LIFM2-469 (High) has no estimate. I completed the Trello item since the client question is answered; say if the overrun should hold it.
 5. honght's 2026-10-09 roll-off note: task-transfer plan still needed before that date.

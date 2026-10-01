@@ -27,3 +27,5 @@ metadata:
 - The cost of a wrong alert/reminder already sent is categorically higher than a wrong line in an unpublished draft — weight verification effort accordingly.
 
 See [[reference_workstream]] for API endpoints, [[feedback_khanhhh_aysar_consolidated]] and [[feedback_tuannt_consolidated]] for dev-specific gating rules built on top of this.
+
+🔴 **15th recurrence, 2026-10-01 08:45:** flagged TuanNT "1h on 09-30" and LongVV "2h" as shortfalls in a recheck; by 09:10 both had 8h (logged that morning). User: "TuanNT đủ 8h mà". Failure mode #4 applies to LOW-BUT-NONZERO reads too, not only 0h: a partial day read before ~09:30 is a dev mid-way through logging. Re-query after 09:30 before writing any shortfall line.

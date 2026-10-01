@@ -21,3 +21,7 @@ LongVV has **two separate, concurrent work tracks** — do not treat one as repl
 **Why (history):** 2026-05-15 — user set the original 16h Maddy target. 2026-07-07 — OhCleo full-time assignment added on top. 2026-07-13 — user re-confirmed Maddy was still 16h at that time. 2026-08-24 — user says the 16h/week Maddy target is now out of date ("LongVV become adhoc also") and asked to remove it to save memory — this file has been updated in place rather than accumulating another correction layer.
 
 🔴 **History note (superseded):** a 2026-08-13 incident about cross-referencing OhCleo's 8h/day target vs a "weekly total looks fine" verdict still applies to the OhCleo track — always check OhCleo's daily/weekly total independently, don't fold it into an overall "no shortfall" read.
+
+🔴 **2026-10-01 — LongVV now works MULTIPLE projects, not OhCleo full-time** (user: "LongVV giờ làm multiple project"). Judge his day by the COMBINED total across all live Workstream projects (seen that week: OhCleo, Maddy/Xtreme, Definitive Guide), never OhCleo alone vs 8h.
+**Why:** flagged "LongVV 2h on 09-30 vs 8h on OhCleo" at 08:45; real totals were 8h/8h/8h across OhCleo + Maddy + Definitive Guide (some rows logged that same morning).
+**How to apply:** sum raw `/review/week` rows by employeeName over every project from live `/time/projects`; the "OhCleo 40h/week" line above is superseded.
