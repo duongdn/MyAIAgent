@@ -47,7 +47,7 @@ function breakdown(api, month) {
   const rows = (api.transactions || []).filter(inMonth);
   const { invest, saving } = walletClasses(api);
   const groups = {}, subs = {}, investTo = {}, investFrom = {};
-  let living = 0, income = 0, investOut = 0, investIn = 0, repay = 0, lend = 0, toSaving = 0;
+  let living = 0, income = 0, investPnl = 0, investOut = 0, investIn = 0, repay = 0, lend = 0, toSaving = 0;
   // Transfers: money moved from living wallets into investment wallets = Đầu tư (user rule 2026-09-28);
   // money moved out of an investment wallet back to a living wallet = Rút đầu tư.
   for (const x of (api.transfers || []).filter(inMonth)) {
@@ -67,6 +67,9 @@ function breakdown(api, month) {
     if (cat === INVEST_IN) continue;
     if (cat === REPAY) { repay -= a; continue; }
     if (cat === BORROW) continue;
+    // Everything booked inside an investment wallet (fund loss, Tiền lãi, fees…) is investment P/L,
+    // never living income/expense (user rule 2026-10-02).
+    if (invest.has(w)) { investPnl += a; continue; }
     if (a > 0) { income += a; continue; }
     const g = groupOf(cat);
     groups[g] = (groups[g] || 0) - a;
@@ -74,7 +77,7 @@ function breakdown(api, month) {
     subs[g][cat] = (subs[g][cat] || 0) - a;
     living -= a;
   }
-  return { month, groups, subs, living, income, investOut, investIn, investTo, investFrom, repay, lend, toSaving };
+  return { month, groups, subs, living, income, investPnl, investOut, investIn, investTo, investFrom, repay, lend, toSaving };
 }
 
 function render(r) {
@@ -98,6 +101,7 @@ function render(r) {
   out.push(`| 💳 Trả nợ | ${fmt(r.repay)} | ${pct(r.repay, used)} | ${pct(r.repay, r.income)} |`);
   out.push(`| **Tổng đã dùng** | **${fmt(used)}** | **100%** | **${pct(used, r.income)}** |`, '');
   out.push(`Thu nhập thực: ${fmt(r.income)} ₫ · Rút từ đầu tư: ${fmt(r.investIn)} ₫ (${detail(r.investFrom)}) · Đầu tư ròng: ${fmt(investNet)} ₫ · Tiết kiệm được (thu − chi sinh hoạt): ${fmt(r.income - r.living)} ₫ (${pct(r.income - r.living, r.income)})`, '');
+  if (r.investPnl) out.push(`Lãi/lỗ ghi trong ví đầu tư (không tính vào thu/chi sinh hoạt): ${fmt(r.investPnl)} ₫`, '');
   return out.join('\n');
 }
 

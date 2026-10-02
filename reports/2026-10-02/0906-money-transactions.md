@@ -4,13 +4,11 @@
 | | Amount (₫) |
 |-|-----------|
 | Thu nhập | +81,901,140 |
-| Chi tiêu | −83,880,000 |
-| **Net** | **−1,978,860** |
-
-⚠️ Chi tiêu gồm 69,000,000 "lỗ quỹ năm nay" (category Linh tinh, ví VCBF, 10-02) — là lỗ đầu tư, không phải chi sinh hoạt, nhưng theo cách tính của MISA/app nó nằm trong Chi.
-Không tính khoản này: Chi sinh hoạt 14,880,000 → Net +67,021,140.
+| Chi tiêu | −14,880,000 |
+| **Net** | **+67,021,140** |
 
 Thu nhập: Lương 66,900,000 + Freelancer Paypal 15,001,140 (573 USD).
+Không tính vào thu/chi: VCBF "lỗ quỹ năm nay" −69,000,000 (10-02) — ghi trong ví đầu tư nên là lãi/lỗ đầu tư, không phải chi tiêu sinh hoạt (báo cáo của app MISA sẽ cao hơn đúng 69M ở mục Linh tinh).
 
 ## Tháng 9/2026 (chốt tháng)
 | | Amount (₫) |
@@ -19,11 +17,11 @@ Thu nhập: Lương 66,900,000 + Freelancer Paypal 15,001,140 (573 USD).
 | Chi tiêu | −60,235,958 |
 | **Net** | **+11,093,717** |
 
-Tính từ raw transactions, loại Cho vay/Thu nợ/Đi vay/Trả nợ, FX-aware. Thu T9 lệch +3,040 ₫ so với báo cáo 10-01 do MISA quy đổi lại tỷ giá giao dịch Paypal.
+Tính từ raw transactions, loại Cho vay/Thu nợ/Đi vay/Trả nợ và mọi giao dịch ghi trong ví đầu tư, FX-aware. Thu T9 lệch +3,040 ₫ so với báo cáo 10-01 do MISA quy đổi lại tỷ giá giao dịch Paypal.
 
 Chuyển khoản / đầu tư từ 10-01 (không phải thu/chi):
 - 10-01: vcb → FPTS 11,700,000 + 5,800,000 (đầu tư) · tikcop 1w tất toán → vcb 10,000,000 (sổ gửi cùng ngày)
-- 10-02: VCBF Thu nợ 594,063,000 ("Fund trả nợ") — tiền ở lại ví VCBF
+- 10-02: VCBF Thu nợ 594,063,000 ("Fund trả nợ") — vẫn trong ví VCBF (đầu tư)
 
 ## Recent Transactions (từ 02-09)
 | Date | Category | Wallet | Amount (₫) | Note |
@@ -85,38 +83,38 @@ Chuyển khoản / đầu tư từ 10-01 (không phải thu/chi):
 
 | Nhóm | Số tiền (₫) | % chi tiêu |
 |------|-----------|-----------|
-| ❓ Linh tinh | 69,000,000 | 82.3% |
-| 👶 Con cái | 7,589,000 | 9.0% |
-| 🎁 Hiếu hỉ / Biếu tặng | 5,000,000 | 6.0% |
-| 🏠 Nhà cửa & Dịch vụ | 1,800,000 | 2.1% |
-| 🛵 Xe cộ / Đi lại | 476,000 | 0.6% |
-| 🍜 Ăn uống | 15,000 | 0.0% |
-| **Tổng chi tiêu sinh hoạt** | **83,880,000** | **100%** |
+| 👶 Con cái | 7,589,000 | 51.0% |
+| 🎁 Hiếu hỉ / Biếu tặng | 5,000,000 | 33.6% |
+| 🏠 Nhà cửa & Dịch vụ | 1,800,000 | 12.1% |
+| 🛵 Xe cộ / Đi lại | 476,000 | 3.2% |
+| 🍜 Ăn uống | 15,000 | 0.1% |
+| **Tổng chi tiêu sinh hoạt** | **14,880,000** | **100%** |
 
 ### Chi tiết từng mục
 
 | Nhóm | Mục | Số tiền (₫) | % chi tiêu |
 |------|-----|-----------|-----------|
-| ❓ Linh tinh | Linh tinh | 69,000,000 | 82.3% |
-| 👶 Con cái | Học phí | 7,589,000 | 9.0% |
-| 🎁 Hiếu hỉ / Biếu tặng | Hiếu hỉ | 5,000,000 | 6.0% |
-| 🏠 Nhà cửa & Dịch vụ | Nhà cửa | 1,800,000 | 2.1% |
-| 🛵 Xe cộ / Đi lại | Taxi/thuê xe | 384,000 | 0.5% |
-| 🛵 Xe cộ / Đi lại | Đi lại | 92,000 | 0.1% |
-| 🍜 Ăn uống | Ăn uống | 15,000 | 0.0% |
+| 👶 Con cái | Học phí | 7,589,000 | 51.0% |
+| 🎁 Hiếu hỉ / Biếu tặng | Hiếu hỉ | 5,000,000 | 33.6% |
+| 🏠 Nhà cửa & Dịch vụ | Nhà cửa | 1,800,000 | 12.1% |
+| 🛵 Xe cộ / Đi lại | Taxi/thuê xe | 384,000 | 2.6% |
+| 🛵 Xe cộ / Đi lại | Đi lại | 92,000 | 0.6% |
+| 🍜 Ăn uống | Ăn uống | 15,000 | 0.1% |
 
 ### Dòng tiền sử dụng (sinh hoạt + đầu tư + trả nợ)
 
 | Khoản | Số tiền (₫) | % tổng tiền đã dùng | % thu nhập |
 |-------|-----------|------------|-----------|
-| 🧾 Chi tiêu sinh hoạt | 83,880,000 | 82.7% | 102.4% |
-| 📈 Đầu tư (chuyển vào FPTS 17,500,000) | 17,500,000 | 17.3% | 21.4% |
+| 🧾 Chi tiêu sinh hoạt | 14,880,000 | 46.0% | 18.2% |
+| 📈 Đầu tư (chuyển vào FPTS 17,500,000) | 17,500,000 | 54.0% | 21.4% |
 | 🏦 Gửi tiết kiệm (ròng, sau đáo hạn) | 0 | 0.0% | 0.0% |
 | 🤝 Cho vay cá nhân | 0 | 0.0% | 0.0% |
 | 💳 Trả nợ | 0 | 0.0% | 0.0% |
-| **Tổng đã dùng** | **101,380,000** | **100%** | **123.8%** |
+| **Tổng đã dùng** | **32,380,000** | **100%** | **39.5%** |
 
-Thu nhập thực: 81,901,140 ₫ · Rút từ đầu tư: 0 ₫ (—) · Đầu tư ròng: 17,500,000 ₫ · Tiết kiệm được (thu − chi sinh hoạt): -1,978,860 ₫ (-2.4%)
+Thu nhập thực: 81,901,140 ₫ · Rút từ đầu tư: 0 ₫ (—) · Đầu tư ròng: 17,500,000 ₫ · Tiết kiệm được (thu − chi sinh hoạt): 67,021,140 ₫ (81.8%)
+
+Lãi/lỗ ghi trong ví đầu tư (không tính vào thu/chi sinh hoạt): -69,000,000 ₫
 
 ---
 

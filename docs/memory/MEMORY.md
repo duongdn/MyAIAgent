@@ -180,6 +180,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
 
 ## money-report
+- [all_money_in_investment_wallets_is_investment](money-report/feedback_all_money_in_investment_wallets_is_investment.md) — 🔴 balance in VCBS/VCBF/FPTS/Finhay is always đầu tư, never cash/"chờ mua"; entries inside them = investment P/L, not chi tiêu
 - [spending_breakdown_by_category_group](money-report/feedback_spending_breakdown_by_category_group.md) — Piece 5 + dashboard: spending by MISA group + %, transfers into invest wallets = Đầu tư, spending charts (user-approved format)
 - [feedback_misa_money_report_net_worth_bugs](money-report/feedback_misa_money_report_net_worth_bugs.md), [reference_misa_money_report_skill_file](money-report/reference_misa_money_report_skill_file.md), [feedback_investment_analysis_framework](money-report/feedback_investment_analysis_framework.md)
 - [feedback_money_report_html_dashboard](money-report/feedback_money_report_html_dashboard.md) — 🔴🔴🔴 fix baked into command

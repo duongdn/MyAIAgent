@@ -20,7 +20,7 @@ VCBF ghi lỗ quỹ −69,000,000 · Freelancer Paypal +15,001,140 (573 USD) · 
 | Larion cổ phần | 800,000,000 | 9.9% | 10.0% | 📈 Investment |
 | vàng (50 VGO) | 721,500,000 | 8.9% | 9.0% | 🥇 Gold |
 | VCBS | 608,255,620 | 7.5% | 7.6% | 📈 Investment |
-| VCBF | 525,063,000 | 6.5% | 6.5% | 📈 Investment (đã tất toán quỹ 10-02, tiền nằm trong ví) |
+| VCBF | 525,063,000 | 6.5% | 6.5% | 📈 Investment (quỹ tất toán 10-02, vẫn là đầu tư) |
 | FPTS | 472,701,151 | 5.8% | 5.9% | 📈 Investment |
 | tikcop 5m | 401,918,000 | 5.0% | 5.0% | 🏦 Savings |
 | vcb 6m chứng chỉ tiền gởi | 300,000,000 | 3.7% | 3.7% | 🏦 Savings |
@@ -39,7 +39,7 @@ VCBF ghi lỗ quỹ −69,000,000 · Freelancer Paypal +15,001,140 (573 USD) · 
 | Payoneer | −3,665 | ~0% | ~0% | 💳 Debt (dư âm lẻ) |
 
 - VCBF = basis 0 + số dư ví 525,063,000. 10-02: Thu nợ 594,063,000 ("Fund trả nợ") + Linh tinh −69,000,000 ("lỗ quỹ năm nay") → lỗ 11.6% so với giá ghi sổ 594.06M. Giá ghi sổ gồm 34,063,000 "Tiền lãi" đã ghi trước đó → so với vốn gốc ước 560M: ≈ −34.9M (−6.2%).
-- FPTS = cost basis 381,116,000 + số dư ví 91,585,151 (+17.5M chuyển từ vcb 10-01: 11.7M + 5.8M).
+- FPTS = cost basis 381,116,000 + số dư ví 91,585,151 — toàn bộ là đầu tư (+17.5M chuyển từ vcb 10-01: 11.7M + 5.8M).
 - VCBS = basis 400,000 + 607,855,620 (mark-to-market). Finhay = basis 74,404,069.
 - vcb 127.1M → 117.8M: −17.5M sang FPTS, +10M tikcop 1w tất toán, −1.8M Nhà cửa.
 - tikcop 1w (10M gửi 10-01) đã tất toán lại ngay 10-01 → về vcb; không còn sổ.
@@ -70,10 +70,9 @@ Dài hạn: 6m rút gốc linh hoạt 100M + vcb 6m CCTG 300M (2027-02-10), 6m c
 Instantly accessible: 174,774,069 ₫ (< mục tiêu 420M) → ⚠️ raw
 Effective pool (Liquid + Savings): 1,367,095,494 ₫ = 3.3x mục tiêu → ✅
 Due within 30 days: +602,321,425 ₫
-Thêm: 525.06M tiền VCBF đã tất toán đang nằm trong ví VCBF (chưa tính vào Liquid).
 
 ## Alerts
 - ✅ Không single account >50% net; Nhà 31.2% (non-tradeable).
 - ✅ Nợ ~0 (VCB visa 476K).
 - 🟡 VCBF tất toán toàn bộ, ghi lỗ 69M — nguyên nhân chính Net Worth giảm 55.2M hôm nay.
-- 🟡 Tiền chờ giải ngân lớn: VCBF 525.06M + ví FPTS 91.59M = 616.6M, cộng 602.3M sổ đáo hạn 10–13/10 → ~1.22 tỷ cần quyết định trong 11 ngày.
+- 🟢 602.3M sổ đáo hạn 10–13/10.
