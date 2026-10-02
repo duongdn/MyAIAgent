@@ -310,7 +310,11 @@ async function fetchViaApi(page, authToken) {
   // Monthly income/expense situation (all time)
   const situation = await postOnPage('/transactions/situation', { walletIds: '', isCalculateLoan: true });
 
-  return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, transfers, situation };
+  // Full "Ghi chép" rows (prev month → today), incl. entries /transactions/day omits
+  // (e.g. rows inside inactive/excluded wallets) — used to reconcile wallet balances.
+  const ledgerRecords = (records || []).filter(r => !r.isParent);
+
+  return { accounts, accountSummary, savings, savingsSummary, monthlySummary, transactions, recentTransactions, transfers, ledgerRecords, situation };
 }
 
 /**

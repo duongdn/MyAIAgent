@@ -40,14 +40,14 @@
 
 <div class="header">
   <h1>💰 Money Dashboard</h1>
-  <div class="date">Cập nhật: 02/10/2026 09:06 · Net Worth từ <code>/wallets/totaldashboard</code> + Larion carry-forward</div>
+  <div class="date">Cập nhật: 02/10/2026 10:49 · Net Worth từ <code>/wallets/totaldashboard</code> + Larion, VCBF, Finhay (ví ẩn)</div>
 </div>
 
 <div class="kpi-row">
   <div class="kpi">
     <div class="label">Net Worth</div>
-    <div class="value" style="color:#22c55e">8.018 tỷ</div>
-    <div class="delta down">▼ −55.2M vs 10/01 (8.073 tỷ) — VCBF ghi lỗ −69M, Paypal +15M, vàng +1M</div>
+    <div class="value" style="color:#22c55e">7.911 tỷ</div>
+    <div class="delta down">▼ −162.2M vs 10/01 (8.073 tỷ) — chị Ky −100M, lỗ VCBF −69M, lỗ Finhay −7M, Paypal +15M</div>
   </div>
   <div class="kpi">
     <div class="label">Liabilities</div>
@@ -56,8 +56,8 @@
   </div>
   <div class="kpi">
     <div class="label">Liquid</div>
-    <div class="value" style="color:#f59e0b">174.8M</div>
-    <div class="delta up">▲ +5.7M · vcb 117.8M, Tikop 40.6M, Paypal 15.0M</div>
+    <div class="value" style="color:#ef4444">63.3M</div>
+    <div class="delta down">▼ −105.8M · vcb 6.3M, Tikop 40.6M, Paypal 15.0M</div>
   </div>
   <div class="kpi">
     <div class="label">Tiết kiệm</div>
@@ -67,7 +67,7 @@
   <div class="kpi">
     <div class="label">Oct MTD Net</div>
     <div class="value" style="color:#22c55e">+67.0M</div>
-    <div class="delta neutral">Thu 81.9M · Chi 14.9M · (lỗ quỹ VCBF 69M = đầu tư, không tính)</div>
+    <div class="delta neutral">Thu 81.9M · Chi 14.9M · (lỗ quỹ 76M = đầu tư, không tính)</div>
   </div>
 </div>
 
@@ -75,7 +75,7 @@
   <div class="card" style="border-color:#1e2a3a;background:#141a26">
     <h3 style="color:#60a5fa">◆ Điểm nổi bật kể từ lần chạy 10/01</h3>
     <div style="font-size:13px;color:#cbd5e1;line-height:1.7">
-      Net Worth −55.2M (8.018 tỷ), khớp với giao dịch: VCBF tất toán toàn bộ quỹ ngày 02/10 (Thu nợ 594.06M) và ghi lỗ 69M ("lỗ quỹ năm nay", −11.6% giá ghi sổ) → còn 525.06M trong ví VCBF (vẫn là đầu tư); Freelancer Paypal +15.0M (573 USD); vàng +1.0M; chi tiêu −2.2M. Đây là giảm thật, không phải lỗi dữ liệu MISA (gap gross/headline giữ nguyên 70.3M). Chuyển thêm 17.5M vào FPTS (số dư ví 91.6M). tikcop 1w 10M gửi 01/10 đã tất toán ngay trong ngày → về vcb (117.8M). 602M sổ đáo hạn 10–13/10. T10 MTD: Thu 81.9M / Chi sinh hoạt 14.9M / Net +67.0M (lỗ quỹ 69M là lãi/lỗ đầu tư, không tính vào chi tiêu).
+      Net Worth 7.911 tỷ, −162.2M so với 01/10 (−107.0M so với lần chạy 09:06 sáng nay). Khớp giao dịch: trả nợ chị Ky ròng −100M (sổ ghi vay 30M nhưng trả 130M — cần xác nhận số vay thật), ghi lỗ quỹ VCBF −69M và Finhay −7M, Freelancer Paypal +15.0M, vàng +1.0M, chi tiêu −2.2M. MISA tự báo tổng 6.519 tỷ vì ví VCBF (525.06M) và Finhay (67.4M) đã bị ẩn — tiền vẫn là đầu tư, đã cộng lại như Larion. Sổ Cho vay của FPTS, Finhay, VCBF đều đã chốt hôm nay. Chuyển vào FPTS 29M trong tháng 10. Tiền mặt tức thì còn 63.3M (vcb 6.3M); 602M sổ đáo hạn 10–13/10. T10 MTD: Thu 81.9M / Chi sinh hoạt 14.9M / Net +67.0M.
     </div>
   </div>
 </div>
@@ -122,7 +122,7 @@
     <h3>💸 Tiền đã dùng vào đâu — 10/2026 vs 09/2026 (triệu ₫)</h3>
     <div class="chart-wrap h280"><canvas id="chartMoneyFlow"></canvas></div>
     <div style="font-size:12px;color:#94a3b8;margin-top:8px;line-height:1.6">
-      10/2026: Đầu tư 17.5M (FPTS 17.5M) · Rút từ đầu tư 0.0M (—) → ròng 17.5M<br>
+      10/2026: Đầu tư 29.0M (FPTS 29.0M) · Rút từ đầu tư 0.0M (—) → ròng 29.0M<br>
       Thu nhập 81.9M · Chi sinh hoạt 14.9M · Để dành được 67.0M (82% thu nhập)
     </div>
   </div>
@@ -153,7 +153,7 @@ new Chart(document.getElementById('chartMoneyFlow'), {
   type: 'bar',
   data: { labels: ["🧾 Sinh hoạt","📈 Đầu tư","🏦 Tiết kiệm (ròng)","🤝 Cho vay CN","💳 Trả nợ"],
     datasets: [
-      { label: '10/2026', data: [14.9,17.5,0,0,0], backgroundColor: '#3b82f6', borderRadius: 3 },
+      { label: '10/2026', data: [14.9,29,0,0,130], backgroundColor: '#3b82f6', borderRadius: 3 },
       { label: '09/2026', data: [60.2,110.4,0.6,0,0], backgroundColor: '#475569', borderRadius: 3 } ] },
   options: { maintainAspectRatio: false, plugins: { legend: { labels: { color: '#94a3b8' } } },
     scales: { x: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } }, y: { ticks: { color: '#94a3b8' }, grid: { color: '#1e293b' } } } }
@@ -162,8 +162,8 @@ new Chart(document.getElementById('chartMoneyFlow'), {
 <!-- SPENDING:END -->
 <div class="grid full" style="padding-bottom:8px">
   <div class="card">
-    <h3>📑 Tài khoản chi tiết — 02/10/2026 09:06</h3>
-    <div style="font-size:11px;color:#64748b;margin-bottom:10px">Nhà (2,500,000,000 ₫) đã loại khỏi bảng này. VCBS/VCBF/FPTS/Finhay dùng công thức cost-basis-remaining + currentAmount (Piece 3 spec).</div>
+    <h3>📑 Tài khoản chi tiết — 02/10/2026 10:49</h3>
+    <div style="font-size:11px;color:#64748b;margin-bottom:10px">Nhà (2,500,000,000 ₫) đã loại khỏi bảng này. VCBS/FPTS = số dư ví + cost-basis còn lại. VCBF/Finhay/Larion đang ẩn trong MISA → cộng tay theo số đã xác nhận.</div>
     <table>
       <thead>
         <tr><th>Tài khoản</th><th>Loại</th><th class="right">Số dư (₫)</th><th>Trạng thái</th></tr>
@@ -173,13 +173,13 @@ new Chart(document.getElementById('chartMoneyFlow'), {
         <tr><td>Larion cổ phần</td><td>📈 Private Eq.</td><td class="right">800,000,000</td><td><span class="badge info">◆ Fixed, confirmed</span></td></tr>
         <tr><td>vàng (50 VGO)</td><td>🥇 Vàng</td><td class="right">721,500,000</td><td><span class="badge ok">▲ +1.0M (giá)</span></td></tr>
         <tr><td>VCBS (cost-basis+current)</td><td>📈 ETF</td><td class="right">608,255,620</td><td><span class="badge info">◆ Không đổi</span></td></tr>
-        <tr><td>VCBF (cost-basis+current)</td><td>📈 Fund</td><td class="right">525,063,000</td><td><span class="badge warn">▼ −69.0M ghi lỗ · quỹ tất toán, vẫn là đầu tư</span></td></tr>
-        <tr><td>FPTS (cost-basis+current)</td><td>📈 Cổ tức</td><td class="right">472,701,151</td><td><span class="badge ok">▲ +17.5M chuyển từ vcb</span></td></tr>
-        <tr><td>Finhay (cost-basis+current)</td><td>📈 Fund</td><td class="right">74,404,069</td><td><span class="badge info">◆ Không đổi</span></td></tr>
+        <tr><td>VCBF (cost-basis+current)</td><td>📈 Fund</td><td class="right">525,063,000</td><td><span class="badge warn">▼ −69.0M ghi lỗ · ví ẩn, vẫn là đầu tư</span></td></tr>
+        <tr><td>FPTS (cost-basis+current)</td><td>📈 Cổ tức</td><td class="right">484,201,151</td><td><span class="badge ok">▲ +29.0M chuyển từ vcb (T10)</span></td></tr>
+        <tr><td>Finhay (cost-basis+current)</td><td>📈 Fund</td><td class="right">67,404,069</td><td><span class="badge warn">▼ −7.0M ghi lỗ · ví ẩn, vẫn là đầu tư</span></td></tr>
         <tr><td>tikcop 5m</td><td>🏦 Tiết kiệm</td><td class="right">401,918,000</td><td><span class="badge info">Đáo hạn 13-10</span></td></tr>
         <tr><td>vcb 6m chứng chỉ tiền gởi</td><td>🏦 Tiết kiệm</td><td class="right">300,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>6m cake vpbank</td><td>🏦 Tiết kiệm</td><td class="right">190,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
-        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">117,802,696</td><td><span class="badge warn">▼ −9.3M (FPTS −17.5M, tikcop 1w +10M, nhà cửa −1.8M)</span></td></tr>
+        <tr><td>vcb</td><td>💵 Liquid</td><td class="right">6,302,696</td><td><span class="badge warn">▼ −120.8M (trả chị Ky −130M, vay +30M, FPTS −29M, tikcop 1w +10M)</span></td></tr>
         <tr><td>1m (rollover)</td><td>🏦 Tiết kiệm</td><td class="right">100,403,425</td><td><span class="badge info">Đáo hạn 10-10</span></td></tr>
         <tr><td>6m rút gốc linh hoạt</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>tikcop 3 month</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge info">Đáo hạn 10-10</span></td></tr>
@@ -213,14 +213,14 @@ new Chart(document.getElementById('chartMoneyFlow'), {
     <table>
       <thead><tr><th>Nhóm</th><th class="right">Actual</th><th>Benchmark</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td>🏠 BĐS (long an res)</td><td class="right">18.3%</td><td>20–30%</td><td><span class="badge warn">⚠️ hơi thấp</span></td></tr>
-        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">44.4%</td><td>30–50%</td><td><span class="badge ok">✅</span></td></tr>
-        <tr><td>🏦 Trái phiếu/Tiết kiệm</td><td class="right">21.3%</td><td>10–20%</td><td><span class="badge warn">⚠️ hơi cao</span></td></tr>
-        <tr><td>🥇 Vàng</td><td class="right">12.9%</td><td>5–15%</td><td><span class="badge ok">✅</span></td></tr>
-        <tr><td>💵 Tiền mặt</td><td class="right">3.1%</td><td>5–10%</td><td><span class="badge warn">⚠️ thấp</span></td></tr>
+        <tr><td>🏠 BĐS (long an res)</td><td class="right">18.6%</td><td>20–30%</td><td><span class="badge warn">⚠️ hơi thấp</span></td></tr>
+        <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">45.3%</td><td>30–50%</td><td><span class="badge ok">✅</span></td></tr>
+        <tr><td>🏦 Trái phiếu/Tiết kiệm</td><td class="right">21.7%</td><td>10–20%</td><td><span class="badge warn">⚠️ hơi cao</span></td></tr>
+        <tr><td>🥇 Vàng</td><td class="right">13.2%</td><td>5–15%</td><td><span class="badge ok">✅</span></td></tr>
+        <tr><td>💵 Tiền mặt</td><td class="right">1.2%</td><td>5–10%</td><td><span class="badge warn">⚠️ thấp</span></td></tr>
       </tbody>
     </table>
-    <div style="font-size:11px;color:#64748b;margin-top:10px">% tính trên tổng tài sản ĐẦU TƯ được (5,589,019,334₫) — đã loại "Nhà" (2.5B) khỏi base. Net Worth tổng vẫn bao gồm Nhà. Nguồn: reports/2026-10-02/0906-money-allocation.md § Finance Review.</div>
+    <div style="font-size:11px;color:#64748b;margin-top:10px">% tính trên tổng tài sản ĐẦU TƯ được (5,482,019,334₫) — đã loại "Nhà" (2.5B) khỏi base. Net Worth tổng vẫn bao gồm Nhà. Nguồn: reports/2026-10-02/1049-money-allocation.md § Finance Review.</div>
   </div>
 </div>
 
@@ -241,7 +241,7 @@ new Chart(document.getElementById('chartNetWorth'), {
     labels: LABELS,
     datasets: [{
       label: 'Net Worth (tỷ)',
-      data: [8.102, 8.091, 8.088, 8.079, 8.079, 8.073, 8.068, 8.067, 8.071, 8.057, 8.044, 8.034, 8.034, 8.073, 8.018],
+      data: [8.102, 8.091, 8.088, 8.079, 8.079, 8.073, 8.068, 8.067, 8.071, 8.057, 8.044, 8.034, 8.034, 8.073, 7.911],
       borderColor: '#60a5fa',
       backgroundColor: 'rgba(96,165,250,0.08)',
       borderWidth: 2.5,
@@ -274,7 +274,7 @@ new Chart(document.getElementById('chartAllocation'), {
   data: {
     labels: ['Đầu tư', 'Tiết kiệm', 'BĐS (Long An)', 'Vàng', 'Liquid'],
     datasets: [{
-      data: [2480, 1192, 1020, 722, 175],
+      data: [2485, 1192, 1020, 722, 63],
       backgroundColor: [COLORS.invest, COLORS.savings, COLORS.re, COLORS.gold, COLORS.liquid],
       borderColor: '#0f1117',
       borderWidth: 2,
@@ -299,10 +299,10 @@ new Chart(document.getElementById('chartCategoryEvolution'), {
     labels: LABELS,
     datasets: [
       { label: '🏠 BĐS',      data: [3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520,3520], backgroundColor: COLORS.re },
-      { label: '📈 Đầu tư',   data: [2531,2545,2545,2545,2560,2519,2495,2527,2527,2458,2506,2520,2520,2532,2480], backgroundColor: COLORS.invest },
+      { label: '📈 Đầu tư',   data: [2531,2545,2545,2545,2560,2519,2495,2527,2527,2458,2506,2520,2520,2532,2485], backgroundColor: COLORS.invest },
       { label: '🥇 Vàng',     data: [742,735,733,733,733,730,728,733,733,731,722,712,713,721,722],       backgroundColor: COLORS.gold },
       { label: '🏦 Tiết kiệm',data: [1204,1202,1204,1204,1204,1202,1204,1204,1204,1245,1245,1202,1202,1202,1192], backgroundColor: COLORS.savings },
-      { label: '💵 Liquid',   data: [166,156,149,135,128,167,119,119,159,176,123,150,150,169,175],       backgroundColor: COLORS.liquid },
+      { label: '💵 Liquid',   data: [166,156,149,135,128,167,119,119,159,176,123,150,150,169,63],       backgroundColor: COLORS.liquid },
     ]
   },
   options: {
@@ -324,7 +324,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
     labels: LABELS,
     datasets: [
       { label: '🏦 Tiết kiệm', data: [1204, 1202, 1204, 1204, 1204, 1202, 1204, 1204, 1204, 1245, 1245, 1202, 1202, 1202, 1192], backgroundColor: COLORS.savings, borderRadius: 3 },
-      { label: '💵 Liquid',    data: [166, 156, 149, 135, 128, 167, 119, 119, 159, 176, 123, 150, 150, 169, 175],       backgroundColor: COLORS.liquid,  borderRadius: 3 },
+      { label: '💵 Liquid',    data: [166, 156, 149, 135, 128, 167, 119, 119, 159, 176, 123, 150, 150, 169, 63],       backgroundColor: COLORS.liquid,  borderRadius: 3 },
     ]
   },
   options: {
@@ -342,7 +342,7 @@ new Chart(document.getElementById('chartSavingsLiquid'), {
 </script>
 
 <div class="note-row">
-  <b style="color:#94a3b8">Ghi chú:</b> Net Worth = <code>/wallets/totaldashboard</code> (7,218,239,668) + Larion cổ phần cố định 800,000,000 (confirmed final, kept inactive by design). Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
+  <b style="color:#94a3b8">Ghi chú:</b> Net Worth = <code>/wallets/totaldashboard</code> (6,518,772,598) + 3 ví đầu tư đang ẩn trong MISA: Larion 800,000,000 + VCBF 525,063,000 + Finhay 67,404,069. Đầy đủ dữ liệu tại <code>reports/money-history.json</code>.
 </div>
 
 </body>
