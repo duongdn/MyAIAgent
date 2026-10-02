@@ -10,7 +10,7 @@ const fs = require('fs');
 const GROUPS = {
   '🍜 Ăn uống': ['Ăn uống', 'Cafe', 'Ăn sáng', 'Ăn tối', 'Ăn trưa', 'Ăn tiệm', 'Đi chợ/siêu thị'],
   '👶 Con cái': ['Con cái', 'Học phí', 'Học hành', 'Sữa', 'Đồ chơi', 'Tiền tiêu vặt'],
-  '🛵 Xe cộ / Đi lại': ['Xăng xe', 'Đi lại', 'Sửa chữa, bảo dưỡng xe', 'Gửi xe', 'Rửa xe', 'Taxi', 'Bảo hiểm xe'],
+  '🛵 Xe cộ / Đi lại': ['Xăng xe', 'Đi lại', 'Sửa chữa, bảo dưỡng xe', 'Gửi xe', 'Rửa xe', 'Taxi', 'Taxi/thuê xe', 'Bảo hiểm xe'],
   '🏠 Nhà cửa & Dịch vụ': ['Nhà cửa', 'Điện', 'Nước', 'Internet', 'Truyền hình', 'Điện thoại di động', 'Sửa chữa', 'Thú Cưng', 'Gas'],
   '🎁 Hiếu hỉ / Biếu tặng': ['Hiếu hỉ', 'Biếu tặng', 'Từ thiện'],
   '💊 Sức khỏe': ['Sức khỏe', 'Thuốc men', 'Khám chữa bệnh', 'Thể thao'],
