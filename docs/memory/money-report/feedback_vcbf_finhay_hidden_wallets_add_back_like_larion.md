@@ -14,3 +14,7 @@ From 2026-10-02 ~10:40 the user closed the Cho vay ledgers (Thu nợ) of VCBF, F
 - FPTS/VCBS are active: value = wallet `currentAmount` + remaining basis (now ∓400,000, offsetting each other).
 - When totaldashboard moves by hundreds of M, read `apiData.ledgerRecords` (added to `scripts/misa-money-report.js` 2026-10-02: every "Ghi chép" row prev month → today incl. excluded rows and transfers, with `lastUpdationTime`) before asking the user or reporting a loss. The user may be editing MISA live — re-fetch if rows are minutes old.
 - Related: [[feedback_larion_valuation_confirmed_by_user]], [[feedback_all_money_in_investment_wallets_is_investment]].
+
+**User confirmed 2026-10-02 10:56:**
+- VCBF + Finhay stay hidden **long-term** (same as Larion) → always add the two fixed values silently; never ask "bật lại chưa" or list it as an open question/risk. Only change a number if the user gives a new one.
+- Chị Ky ledger (Đi vay 30,000,000 + Trả nợ 130,000,000 on 2026-10-02, net −100M) is **correct as recorded** ("đúng rồi, cứ để vậy") → do not flag it as a mismatch or suggest fixing the Đi vay row again.

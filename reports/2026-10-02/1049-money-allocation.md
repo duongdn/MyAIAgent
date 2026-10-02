@@ -83,5 +83,5 @@ Base = gross 7,982,019,334 − Nhà 2,500,000,000.
 - Dài hạn: cân nhắc tài sản quốc tế/USD (0.3%) để giảm tương quan thị trường VN.
 
 ## Unresolved
-1. Chị Ky: sổ ghi vay 30M, trả 130M → lệch −100M. Số vay thật là bao nhiêu?
-2. VCBF + Finhay đang ẩn trong MISA → mỗi lần chạy phải cộng tay 525,063,000 + 67,404,069. Anh giữ ẩn lâu dài (như Larion) hay sẽ bật lại?
+~~1. Chị Ky: sổ ghi vay 30M, trả 130M → lệch −100M. Số vay thật là bao nhiêu?~~ → xác nhận 10:56: sổ đúng, giữ nguyên.
+2. VCBF + Finhay đang ẩn trong MISA → mỗi lần chạy phải cộng tay 525,063,000 + 67,404,069. ~~Anh giữ ẩn lâu dài (như Larion) hay sẽ bật lại?~~ → xác nhận 10:56: ẩn lâu dài, cộng tay như Larion.

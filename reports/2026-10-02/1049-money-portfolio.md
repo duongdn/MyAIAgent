@@ -78,7 +78,7 @@ Due within 30 days: +602,321,425 ₫ (8–11 ngày nữa)
 - ✅ Nợ ~0 (VCB visa 476K).
 - ⚠️ Tiền mặt tức thì 63.3M sau khi trả chị Ky 130M — thấp hơn 1 tháng chi tiêu; có 602M sổ đáo hạn 10–13/10.
 - 🟡 Ghi lỗ quỹ hôm nay: VCBF −69M + Finhay −7M = −76M.
-- 🟡 Sổ chị Ky: Đi vay 30M, Trả nợ 130M → MISA đang lệch −100M (xem Unresolved).
+- ~~🟡 Sổ chị Ky: Đi vay 30M, Trả nợ 130M → MISA đang lệch −100M (xem Unresolved).~~ → anh xác nhận 10:56: ghi đúng, giữ nguyên.
 
 ## Unresolved
-1. Chị Ky: sổ ghi vay 30M nhưng trả 130M. Nếu thực vay 130M thì Net Worth thật cao hơn 100M so với report này (cần sửa dòng Đi vay).
+~~1. Chị Ky: sổ ghi vay 30M nhưng trả 130M…~~ → đã xác nhận 10:56: sổ đúng, Net Worth 7,911,239,667 là số chốt.

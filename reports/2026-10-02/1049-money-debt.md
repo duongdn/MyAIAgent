@@ -48,5 +48,5 @@ TB 6 tháng (04–09): 51.4M/tháng → tháng 10 MTD không spike.
 
 ## Alerts
 - ✅ Dư nợ thẻ 476K, không spike.
-- 🟡 Chị Ky (10-02): Đi vay 30,000,000 (10:34) → Trả nợ 130,000,000 (10:40). Sổ lệch −100M: trả nhiều hơn số vay đã ghi.
+- 🟡 Chị Ky (10-02): Đi vay 30,000,000 (10:34) → Trả nợ 130,000,000 (10:40). ~~Sổ lệch −100M: trả nhiều hơn số vay đã ghi.~~ → anh xác nhận ghi đúng.
 - 🟢 Cho a Dũng vay 2M (08-31) — khoản cho vay cá nhân, chưa thấy Thu nợ.
