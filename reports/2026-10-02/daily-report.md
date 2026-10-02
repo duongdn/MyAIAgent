@@ -1,8 +1,8 @@
 # Daily Report — 2026-10-02 (Friday)
 
-**Run:** 2026-10-02T08:34:00+07:00 (interactive, full run)
+**Run:** 2026-10-02T08:34:00+07:00 (interactive, full run), corrected 09:36 (+07:00)
 **Window:** 2026-10-01T05:10:00+07:00 → 2026-10-02T08:55:00+07:00. Task-log date: Thursday 2026-10-01.
-**Leave plan:** refreshed 08:35 (`parse-leave-emails.js`). No leave on 10-01 or 10-02 for LongVV, PhucVT, TuanNT, KhanhHH, LeNH. KhanhHH's leave ended 09-30; she was back 10-01. Resource Arrangement room: LamLQ off 10-02, NghiepNQ off 10-05 → 10-06. Email: DatNC off today 10-02 (approved by BinhNT).
+**Leave plan:** refreshed 08:35 (`parse-leave-emails.js`). No leave on 10-01 or 10-02 for LongVV, PhucVT, TuanNT, KhanhHH, LeNH. KhanhHH's leave ended 09-30; she was back 10-01. Resource Arrangement room: LamLQ off 10-02, PhongTB off 10-02 (fever), ThinhPVD off the morning of 10-02, NghiepNQ off 10-05 → 10-06. Email: DatNC off today 10-02 (approved by BinhNT).
 
 ---
 
@@ -11,12 +11,12 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Maddy (Slack Xtreme + kai@ email) | Three open customer items. (a) Madhuraka 10-01 16:07: "Have you been able to figure out what was the issue with the quote email? Will the fix you implemented … address this issue?" Kai's only reply is 10-02 08:42 "Sorry, I missed your message. I'll check it today." (b) End customer Luxe.It.Fwd (Amy Ferguson, marked High importance) says the quote tool has returned no results for 2 days and it "is starting to impact our workflow"; after Madhuraka's first fix she replied "We are still having issues". Forwarded to Kai 10-01 11:49. (c) Anoma 10-01 21:51: "Ticket 409 — Can you tell me how to fix this bank account error?" No reply. The urgent production payout-override bug from 11:20 was fixed and deployed the same day (PR [#552](https://bitbucket.org/xtreme-web/rms/pull-requests/552), [#553](https://bitbucket.org/xtreme-web/rms/pull-requests/553)). |
-| 2 | Aysar (Slack Baamboozle) | Aysar 10-02 08:33 to Carrick: the DynaPuff font link was removed from the [phaser layout](https://github.com/baamboozle/baamboozle-web-app/blame/main/resources/views/layouts/phaser.blade.php#L24), "is there a reason for that?" iancox890 reported 03:05 that Baseball game mode is broken on the platform. Carrick 08:43: "Let me check and response you soon." Fresh, acknowledged only. |
+| 2 | Aysar (Slack Baamboozle) | Aysar 10-02 08:33 to Carrick: the DynaPuff font link was removed from the [phaser layout](https://github.com/baamboozle/baamboozle-web-app/blame/main/resources/views/layouts/phaser.blade.php#L24), "is there a reason for that?" iancox890 reported 03:05 that Baseball game mode is broken on the platform. ~~Carrick 08:43: "Let me check and response you soon." Fresh, acknowledged only.~~ **Answered 09:12:** the link was removed for GDPR self-hosting during localization; Carrick restored DynaPuff as a self-hosted font in [PR #723](https://github.com/baamboozle/baamboozle-web-app/pull/723). Aysar 09:26: that folder is replaced at deploy time, the change has to go into the `bbzl-game-frontend` repo, and he asked iancox890 to work with Carrick on moving it. Baseball mode stays broken until that lands. Aysar completed. |
 | 3 | Fountain customer board | Two Kunal asks to @rick570 still have no board reply after 3 days: [development master key](https://trello.com/c/tY3yvAti) (09-29 09:16) and "we can push this live" on [GiftDrop Recipient flow](https://trello.com/c/tSuQHKwj) (09-29 11:09). New review queue from Kunal on 10-01: PRs #512–#516, #556, #557, with [Start here: review order](https://trello.com/c/TdvfIo08) (10-02 07:35). See also Alert #4. |
 | 4 | Email rick@ | Kunal "Fountain V2" (10-01 13:05): full redesign prototype built with an AI model in a week. Phase 1 (new public site) and Phase 2 (staff tools) both targeted for end of October. He asks Rick to merge, in order, #507, #508, #510, #512, #513, #514, #556, #515, then #516 with #557, and to set up product photos, the text-message check and smart search on the test site. "I have it running overnight tonight so we may see a bunch of PRs." Scope and workload change for the Fountain team. |
 | 5 | Marcel (Slack Equanimity) | komal.bailur 10-01 17:14 in #xid-technologies, to Carrick: check-ins at Ken-Pal dropped from 400+ to about 200 after the new devices were installed, "how can you explain this to client? as they want us explanation through email why device is failing to scan face of user". No reply after 17:14. Carrick answered the earlier points (null nationality root cause, devices online). |
 | 6 | MPFC (New Relic + freelancer@ email) | Apdex 0.43, same as yesterday. Chronic `WP_Error::get_method()` ×45, with a Rollbar burst of 10 in 5 minutes at 10-02 07:32. Rollbar's "new error #65" `MM_Product::findById()` (10-01 16:50) is not a site bug: the server log shows it came from a one-off `wp eval` command run on the CLI. |
-| 7 | Workstream | KhanhHH has 0h on 10-01 on every project, no leave. Upwork's Aysar tracker shows 8h for the same day with 3 valid memos, and Carrick's MPDM update lists the work, so she worked and the task log is missing. Read at 08:52, before the 09:30 logging cut-off; to be re-read. |
+| 7 | Workstream | KhanhHH has 0h on 10-01 on every project, no leave. Upwork's Aysar tracker shows 8h for the same day with 3 valid memos, and Carrick's MPDM update lists the work, so she worked and the task log is missing. ~~Read at 08:52, before the 09:30 logging cut-off; to be re-read.~~ **Re-read 09:36: still 0h.** Reminder not sent. |
 | 8 | Workstream review | Pending review: Crystal lang, PhucVT 9 rows / 16h (09-29, 09-30), reviewer **TienND**. OhCleo, LongVV 10 rows / 18h (09-28 → 09-30), reviewers **DuongDN, MinhTV**. |
 | 9 | Email vuongtrancr@ | New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" ×4 for Swish on 10-01 (issue closed after 521 minutes). Same pattern as yesterday. |
 | 10 | Email ken@ | Mailbox not read this run. Zoho rejects the stored app password; the same value is in every committed version of the config and worked on 10-01. Needs a new app password for ken@. Check mail → Ken stays open. |
@@ -63,7 +63,7 @@ Trello: DuongDn, Carrick, Nick, Rick, Kai ✓ complete. Ken ○ (inbox not read)
 | SoCal Auto Wraps | 0 | Dropped. |
 | Aigile Dev | 2 | #the-gaige-alerts bot. |
 
-Trello: Rory, Franc, Elliott, Raymond, Rebecca, Bailey ✓ complete. Maddy, Aysar, Marcel ○ (Alerts #1, #2, #5). MPFC ✓ complete (Slack quiet; #65 benign, the rest is chronic).
+Trello: Rory, Franc, Elliott, Raymond, Rebecca, Bailey ✓ complete. Maddy, Marcel ○ (Alerts #1, #5). ~~Aysar ○~~ Aysar ✓ complete 09:36. MPFC ✓ complete (Slack quiet; #65 benign, the rest is chronic).
 
 Aysar GitHub: baamboozle-web-app 62 open issues, none updated in the window. bbzl-web-client 0.
 
@@ -87,8 +87,8 @@ Raw `/review/week` rows, 20 live projects, summed per person. Thursday 10-01.
 | Developer | 10-01 | Week (Mon → Thu) | Status |
 |-----------|-------|------------------|--------|
 | LongVV | 8h (Definitive Guide) | 8 / 8 / 8 / 8 | OK |
-| TuanNT | 7.5h (Speedventory) | 8 / 4 / 8 / 7.5 | 0.5h under, read before 09:30. 09-29 was a half day (dentist, emailed 09-29). To be re-read. |
-| KhanhHH | — | leave / leave / leave / — | Alert #7. Upwork Aysar 8h on 10-01. To be re-read. |
+| TuanNT | 7.5h (Speedventory) | 8 / 4 / 8 / 7.5 | ~~0.5h under, read before 09:30. To be re-read.~~ Re-read 09:36: still 7.5h, 0.5h under with no surplus earlier in the week. 09-29 was a half day (dentist, emailed 09-29). |
+| KhanhHH | — | leave / leave / leave / — | Alert #7. Upwork Aysar 8h on 10-01. Still 0h at 09:36. |
 | LeNH | 8h (James Diamond) | 8 / 8 / 8 / 8 | OK |
 | PhucVT | — | 8 / 8 / 8 / — | On Arthur, not gated. Not alerted. |
 
@@ -203,7 +203,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 | Maddy | ○ open — Alert #1 |
 | James Diamond - Vinn | ✓ complete (Vinn active with production push summary; LeNH 8h) |
 | Rory | ✓ complete (Swift Studio 0 msgs) |
-| Aysar | ○ open — Alert #2. MPDM update present 20:12. |
+| Aysar | ~~○ open — Alert #2~~ ✓ complete 09:36 (MPDM update 20:12; font question answered 09:12 with PR #723) |
 | Franc | ✓ complete (bot logs only) |
 | Elliott | ✓ complete (Generator Slack quiet; KhanhHH worked 8h per Upwork, task log gap is Alert #7) |
 | Fountain | ○ open — Alert #3 |
@@ -217,7 +217,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 | Ohcleo | ✓ complete (no Celine message; LongVV 0h on OhCleo 10-01, no report due) |
 | Elena - WordPress SamGuard | ✓ complete (clean) |
 
-**Live card state 08:53:** [Check progress](https://trello.com/c/Mr8UaIb7) **18/22 ✓**. Open: Maddy, Aysar, Fountain, Marcel. [Check mail](https://trello.com/c/tv9kqbme) **5/6 ✓**, Ken open.
+**Live card state 08:53:** [Check progress](https://trello.com/c/Mr8UaIb7) **19/22 ✓** (09:36). Open: Maddy, Fountain, Marcel. [Check mail](https://trello.com/c/tv9kqbme) **5/6 ✓**, Ken open.
 
 ---
 
@@ -305,8 +305,8 @@ Upwork hours this week: Rory 0:00. Aysar 8:00 (Thu 8h; last week 18:00). Neural 
 
 ## Reminders — 08:53 (+07:00)
 
-- KhanhHH: Workstream task log for 10-01 missing (Upwork shows 8h). Not sent — before 10:00 and no `--send-reminder`.
-- TuanNT: 7.5h on 10-01, to be re-read after 09:30. Not sent.
+- KhanhHH: Workstream task log for 10-01 missing (Upwork shows 8h). Still 0h at 09:36. Not sent — no `--send-reminder`.
+- TuanNT: 7.5h on 10-01 (confirmed 09:36), 0.5h short. Not sent.
 - LongVV, LeNH: skipped (8h).
 - PhucVT: skipped (not gated).
 
