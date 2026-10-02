@@ -97,7 +97,7 @@ Top dirs under `~/www`: pre9.paturevision.fr **23G** (was 20G), je-pature.pature
 
 - 🔴 **86% crosses the >85% NOT OK threshold** (was WARNING at 81%). Growth is in `pre9` (+3G in 6 weeks); live site unchanged at 2.2G. ~39G of the 41G is staging/pre-prod copies.
 - Note: 164G/86% is the `df` figure for the `/home/customer` mount, same basis as the 08-21 number; the Siteground dashboard plan-quota % could not be read.
-- Customer Slack post at 02:05 said Prestashop storage **OK** (safe default while data was unavailable) — now known to be wrong. Correction NOT posted; awaiting user decision.
+- Customer Slack post at 02:05 said Prestashop storage **OK** (safe default while data was unavailable) — now known to be wrong. ~~Correction NOT posted; awaiting user decision.~~ **Recheck 09:45:** user approved editing the original post — line changed in place to `Prestashop: NOT OK (86%)` with a customer-safe explanation (`chat.update`, same ts, no new message).
 
 ## Slack Post
 
@@ -125,5 +125,5 @@ Created checklist "02/10/2026" on live open card `6abe9fe6d5c433ec8df27943` (fou
 - ~~Workstream weekly-monitor task log entry not written (SSO outage) — retry manually once Workstream login works.~~ ✅ written (recheck 09:34).
 - ~~Siteground storage unavailable again (Puppeteer session + SSH alias both down)~~ → SSH data obtained (recheck 09:34). Puppeteer session still expired (CAPTCHA) — dashboard CPU/RAM still unread.
 - 🔴 **Siteground disk 86% (NOT OK, >85%)**, up from 81% on 08-21. Cleanup of staging copies (pre9 23G, je-pature 9G, staging-sg 6.9G) never actioned since first flagged 08-21.
-- 🔴 Customer Slack `#maintenance` post (ts `1790881793.234019`) reported Prestashop storage OK — needs a correction to NOT OK (86%); pending user approval.
+- 🔴 Customer Slack `#maintenance` post (ts `1790881793.234019`) reported Prestashop storage OK — ~~needs a correction to NOT OK (86%); pending user approval.~~ ✅ original post edited in place (recheck 09:45, user-approved).
 - Chronic staging RuntimeException (PHP7.2/Composer8.1) now 2+ weeks unresolved — recommend direct dev notification instead of continued passive flagging.
