@@ -76,6 +76,16 @@ async function main() {
     let capturedRefreshToken = null;
     let keycloakRedirected = false;
 
+    // Optional: seed Keycloak session cookies exported from a real logged-in Chrome profile
+    // (WORKSTREAM_SSO_COOKIES=<json file>) — recovers SSO when the saved profile's session is dead.
+    const ssoCookieFile = process.env.WORKSTREAM_SSO_COOKIES;
+    if (ssoCookieFile && fs.existsSync(ssoCookieFile)) {
+      const ssoCookies = JSON.parse(fs.readFileSync(ssoCookieFile, 'utf8'))
+        .filter(c => c.domain === 'auth.nustechnology.com' && c.value);
+      for (const c of ssoCookies) await page.setCookie(c).catch(() => {});
+      console.log(`[workstream-login] Seeded ${ssoCookies.length} SSO cookies`);
+    }
+
     // Intercept Bearer tokens from API requests AND refresh_token from Keycloak responses.
     await page.setRequestInterception(true);
     page.on('request', (req) => {

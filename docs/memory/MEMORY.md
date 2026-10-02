@@ -42,6 +42,7 @@
 - [feedback_reminder_sent_autocompletes_tasklog_gated_item](daily-report/general/feedback_reminder_sent_autocompletes_tasklog_gated_item.md) — 🔴 2026-09-15: 0h/task-log-gated item → send reminder → auto-complete, don't wait for dev to backfill
 - [feedback_20260921_recheck_findings](daily-report/general/feedback_20260921_recheck_findings.md) — 🔴 all 3 structural gaps (Philip msteams/Fountain trello token/Bitbucket Maddy token) now FIXED and working; Bitbucket surfaced real chronic PR #481 alert
 - [feedback_20260922_recheck_findings](daily-report/general/feedback_20260922_recheck_findings.md) — 🔴 Monday 0h often = team-wide logging lag, cross-check Matrix activity before alerting; cron "stale/0 new" claims can be wrong (OhCleo)
+- [feedback_workstream_login_seed_sso_cookies_from_chrome_profile9](daily-report/general/feedback_workstream_login_seed_sso_cookies_from_chrome_profile9.md) — 🔴 "SSO redirected but API never fired" = dead Keycloak session + wiped profile; seed cookies from Chrome Profile 9 via WORKSTREAM_SSO_COOKIES
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
