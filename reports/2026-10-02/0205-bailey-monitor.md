@@ -79,11 +79,25 @@ All healthy, no action needed.
 14-day totals: 1062 accepted / 1060 delivered / 14 failed → **99.81% delivery rate**. Healthy (prior run: 99.91%).
 24h failed events: 6, all `eric.lambron@inrae.fr` temporary/generic — recurring to one recipient, not a reputation issue.
 
-## Siteground Statistics
+## Siteground Statistics — ✅ DONE via SSH (recheck 09:34) — 🔴 86% used
 
-**Unavailable this run.** Puppeteer session expired (`SESSION_EXPIRED`) and `Bailey.cpanel` SSH alias is again missing from `~/.ssh/config` (`ssh: Could not resolve hostname bailey.cpanel`) — same recurring regression as 2026-08-28 and 2026-09-25. Did not attempt `--login` (CAPTCHA unsolvable headlessly, confirmed prior runs).
-Last real data: 2026-08-21, SSD 81% used, mostly staging site copies under `~/www` — unresolved cleanup candidate, unaddressed for 6+ weeks now.
-Reported as OK (safe default) in customer Slack per redaction rules.
+~~**Unavailable this run.** Puppeteer session expired (`SESSION_EXPIRED`) and `Bailey.cpanel` SSH alias is again missing from `~/.ssh/config` (`ssh: Could not resolve hostname bailey.cpanel`) — same recurring regression as 2026-08-28 and 2026-09-25. Did not attempt `--login` (CAPTCHA unsolvable headlessly, confirmed prior runs).~~
+~~Last real data: 2026-08-21, SSD 81% used, mostly staging site copies under `~/www` — unresolved cleanup candidate, unaddressed for 6+ weeks now.~~
+~~Reported as OK (safe default) in customer Slack per redaction rules.~~
+
+**Recheck 09:34:** `Bailey.cpanel` alias is present in `~/.ssh/config` now; SSH fallback returned real data. Puppeteer scraper still `session_expired` (CAPTCHA on re-login, needs a human) → no dashboard CPU/RAM numbers.
+
+| | 2026-08-21 | 2026-10-02 | Δ |
+|---|---|---|---|
+| `/home/customer` used | 132G / 164G (**81%**) | 139G / 164G (**86%**) | +7G, +5pt |
+| Free | 31G | 25G | −6G |
+| `~/www` total | 38G | 41G | +3G |
+
+Top dirs under `~/www`: pre9.paturevision.fr **23G** (was 20G), je-pature.paturevision.fr 9.0G, staging-sg.paturevision.fr 6.9G, paturevision.fr (live) 2.2G, staging-je-pature 429M. No `.zip` backups.
+
+- 🔴 **86% crosses the >85% NOT OK threshold** (was WARNING at 81%). Growth is in `pre9` (+3G in 6 weeks); live site unchanged at 2.2G. ~39G of the 41G is staging/pre-prod copies.
+- Note: 164G/86% is the `df` figure for the `/home/customer` mount, same basis as the 08-21 number; the Siteground dashboard plan-quota % could not be read.
+- Customer Slack post at 02:05 said Prestashop storage **OK** (safe default while data was unavailable) — now known to be wrong. Correction NOT posted; awaiting user decision.
 
 ## Slack Post
 
@@ -96,9 +110,11 @@ Posted to GGS `#maintenance` (ts `1790881793.234019`). WARNING lines (Performanc
 
 Both healthy.
 
-## Workstream Task Log — NOT COMPLETED
+## Workstream Task Log — ✅ DONE (recheck 09:34)
 
-`scripts/workstream-login.js` timed out twice (120s each) on the SSO redirect. Existing token also rejected: `401 "exp" claim timestamp check failed`. This is a continuing occurrence of the known Workstream SSO outage (see `feedback_workstream_display_outage_pattern`, root cause still open). Entry **not written** — needs manual retry: `node scripts/workstream-write-tasklog.js speedventory 2026-10-02 "Weekly Monitor October 2026" 1` once login succeeds.
+~~`scripts/workstream-login.js` timed out twice (120s each) on the SSO redirect. Existing token also rejected: `401 "exp" claim timestamp check failed`. This is a continuing occurrence of the known Workstream SSO outage (see `feedback_workstream_display_outage_pattern`, root cause still open). Entry **not written** — needs manual retry: `node scripts/workstream-write-tasklog.js speedventory 2026-10-02 "Weekly Monitor October 2026" 1` once login succeeds.~~
+
+**Recheck 09:34:** `DISPLAY=:1 node scripts/workstream-login.js` captured a token on first attempt. No existing DuongDN entry for the week → wrote `Weekly Monitor October 2026`, 1:00 actual / 1:00 charged, dated Fri 2026-10-02 (task id `cmuqcnyau1bn5nu1v57yfyyn7`, reviewStatus NotRequired). Read back: DuongDN weekTotal 1h on 2026-10-02.
 
 ## Trello Checklist
 
@@ -106,7 +122,8 @@ Created checklist "02/10/2026" on live open card `6abe9fe6d5c433ec8df27943` (fou
 
 ## Unresolved / follow-up
 
-- Workstream weekly-monitor task log entry not written (SSO outage) — retry manually once Workstream login works.
-- Siteground storage unavailable again (Puppeteer session + SSH alias both down) — last real number is 6+ weeks stale (2026-08-21, 81% used). Consider a non-Puppeteer way to check disk, or ask user to re-auth the session manually.
+- ~~Workstream weekly-monitor task log entry not written (SSO outage) — retry manually once Workstream login works.~~ ✅ written (recheck 09:34).
+- ~~Siteground storage unavailable again (Puppeteer session + SSH alias both down)~~ → SSH data obtained (recheck 09:34). Puppeteer session still expired (CAPTCHA) — dashboard CPU/RAM still unread.
+- 🔴 **Siteground disk 86% (NOT OK, >85%)**, up from 81% on 08-21. Cleanup of staging copies (pre9 23G, je-pature 9G, staging-sg 6.9G) never actioned since first flagged 08-21.
+- 🔴 Customer Slack `#maintenance` post (ts `1790881793.234019`) reported Prestashop storage OK — needs a correction to NOT OK (86%); pending user approval.
 - Chronic staging RuntimeException (PHP7.2/Composer8.1) now 2+ weeks unresolved — recommend direct dev notification instead of continued passive flagging.
-- Siteground disk cleanup (staging copies) still not addressed since first flagged 2026-08-21.
