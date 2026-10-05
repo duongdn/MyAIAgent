@@ -30,36 +30,27 @@ Client: US (Honeoye Falls, NY — ~11–12h behind VN), agriculture business, 78
 - Client feedback tags: Committed to Quality, Collaborative, Clear Communicator, Reliable
 - Profile text: "more than 7 years"; employment: Senior PHP Dev @ NUS Apr 2019–now, freelancer 2017–2019
 
-### Script — spoken version (~2.5 min, read as Carrick)
-Short sentences, contractions, pause at "—". Don't read word-for-word; glance + talk.
+### Script — final, read as Carrick (~3 min)
 
-**1. Intro (~20s)**
-> Hi Maya! Thanks for reaching out — and sorry for the little delay, I was travelling over the weekend.
-> So, I'm Carrick. I'm a senior full-stack developer, based in Ho Chi Minh City, Vietnam, and I work with NUS Technology.
-> I've been doing web development for over seven years now — mostly PHP and Laravel — plus Python and JavaScript.
-> And on Upwork, I've done over sixty jobs, around twenty-five thousand hours, with a hundred percent job success. So — I've been around for a while!
+Hi Maya, thanks so much for getting back to me, and sorry it took me a couple of days. I was travelling over the weekend, but I'm back now, so here's my intro.
 
-**2. Skills (~30s)**
-> Quick rundown of what I work with.
-> Backend — that's my home. Laravel, CodeIgniter, Yii, WordPress, and Django on the Python side.
-> Frontend — Vue and React, sometimes Angular.
-> Databases — MySQL and Postgres mostly, plus Redis, MongoDB, and Elasticsearch for search.
-> And for hosting — mainly AWS. EC2, S3, Lambda, RDS… that kind of stuff. Git and CI/CD for every project.
+My name is Carrick. I'm a full-stack developer from Ho Chi Minh City in Vietnam, and I work with a software company here called NUS Technology. I've been doing web development for over seven years now. Most of that time I've spent with PHP and Laravel, but I also work quite a bit with Python and JavaScript. On Upwork I've done more than sixty jobs, around twenty-five thousand hours in total, and I've kept a hundred percent job success the whole way. A lot of those clients I've worked with for two, three years, which I'm honestly pretty proud of.
 
-**3. Development & integrations (~50s)**
-> Now, integrations — that's honestly a big part of my day.
-> One project I can share is Propmap. It's a field-service platform — companies use it to send technicians out to jobs. Web app, mobile app, works offline… And a lot of it is about connecting with other systems — customers' CRMs, ERPs, accounting tools — so nobody has to type the same data twice.
-> Another one is Bikebiz. It's a motorbike dealer and online store in Australia. There it was payments, shipping, keeping products and stock in sync — the usual e-commerce plumbing.
-> So, REST APIs, GraphQL, webhooks, queues, scheduled syncs — I'm really comfortable with all of that. Shopify, Stripe, PayPal too.
-> Now, to be honest — I haven't worked with Acumatica itself yet. But I've connected plenty of ERP and accounting systems, and it's the same idea: map the data, handle the errors, and set up monitoring so you hear about a problem from me — not from a customer.
-> Oh — and I write things down. Docs, data flows, runbooks. I don't like black boxes.
+So, about my experience with development and integrations. I think the best way to explain it is to just tell you about a couple of projects.
 
-**4. Why I'm a good fit (~30s)**
-> So why me?
-> I read your post, and you want someone to actually *own* these systems. Not just write code, but keep them running, fix things when they break, and improve them over time. That's exactly how I like to work.
-> I can do more than thirty hours a week, long term. I overlap with your mornings, and I'm good at working async — you'll always know where things are.
-> And if we ever need extra hands, I've got my team at NUS right behind me.
-> So — I'd love to hear more about your setup, and where it hurts most right now. Thanks, Maya. Talk soon!
+The first one is Propmap. It's a platform for companies that have workers out in the field, like heating engineers or maintenance crews. The office creates a job, assigns it to a technician, and the technician gets it on their phone, goes to the site, fills in the forms and takes photos, and all of that comes back to the office in real time. The mobile app even works offline, because a lot of the time these guys are in a basement with no signal. And the reason I mention it is that a big part of that system is integration. The customers already have their own CRM, their own ERP, their own accounting software, and they don't want to type everything twice. So we built public APIs and syncs so that customers, jobs and invoices move between Propmap and those systems automatically. And when you do that kind of work, you learn very quickly that the hard part isn't calling the API. The hard part is what happens when it fails, when the other system is down, or sends you bad data, or the same record comes in twice. So I always build with retries, proper logging, and alerts, so if something breaks, we know about it straight away and nothing gets lost.
+
+The second one is Bikebiz. That's a big motorcycle dealer in Australia, and their website does a lot. They sell new and used bikes, riding gear, OEM parts, and they've got service centres too. On the e-commerce side we handled the payment gateway, shipping rates and tracking, and keeping the products, prices and stock in sync, so what the customer sees online actually matches what's in the store.
+
+Other than that, I've done things like Stripe subscription systems, Laravel apps with heavy Google Maps features, and a lot of maintenance and upgrade work on older PHP systems, where you're careful because the business is running on it every day.
+
+For the tech side, I'm most at home with Laravel, but I'm also comfortable with CodeIgniter, Yii, WordPress, and Django when it's Python. On the frontend I use Vue and React. For databases, mostly MySQL and Postgres, with Redis and Elasticsearch when we need them. And hosting is usually on AWS. I'll be honest with you, I haven't worked with Acumatica specifically yet. But I've connected a lot of ERP and accounting systems, and it's the same kind of work: understand the data on both sides, map it properly, and make the sync reliable. So I'm confident I can pick it up quickly.
+
+Now, why I think I'd be a good fit. When I read your post, what stood out to me is that you're not just looking for someone to write code. You want someone to really own these systems. Build things, yes, but also keep them running, fix problems when they come up, write proper documentation, and slowly modernize things over time. And that's really how I've been working with most of my long-term clients. I like being the person who knows the system inside out. I always document what I build, so it's never a black box for your team.
+
+I'm available for more than thirty hours a week, and I'm looking for something long term, so this role really suits me. My day overlaps with your morning, and I'm used to working async, so you'll always get clear updates from me without having to chase. And if we ever need extra help, I've got my team at NUS Technology right behind me.
+
+So yeah, that's me. I'd really love to hear more about your current setup, and which systems are giving you the most headaches right now. Thanks again, Maya, and I hope to talk to you soon.
 
 ### Recording tips
 - Landscape, eye level, quiet bg, smile at start/end, speak slower than feels natural
