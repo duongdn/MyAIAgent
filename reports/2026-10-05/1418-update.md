@@ -39,9 +39,11 @@ I'm Carrick, a full-stack developer from Vietnam, working with NUS Technology. I
 
 So, development and integrations. That's really the core of what I do. Most of my projects are Laravel apps that have to talk to other systems: payment gateways like Stripe, shipping APIs, Google Maps, third-party services. I work with REST and GraphQL APIs, webhooks, and background sync jobs every day.
 
-A good example is Propmap. It's a field-service platform, so web and mobile apps for managing jobs and technicians. A key part of it is the public API, which lets customers connect Propmap to their own CRM, ERP or accounting system.
+A good example is Propmap. It's a field-service platform, web and mobile, for companies that send technicians out to jobs. There I architected a custom workflow engine, so each type of job follows its own steps, and I integrated the data flows across the different service sectors they work in. Propmap also connects to customers' CRM, ERP and accounting systems through its public API.
 
-Another one is Bikebiz, a motorcycle dealer and online store in Australia. There I worked on the e-commerce side, with payment processing and real-time shipping integrations.
+Another one is Bikebiz, a motorcycle dealer and online store in Australia. I built a headless e-commerce architecture for them, so the storefront is separate from the backend. It handles high-volume payment processing, and real-time shipping API integrations.
+
+I've also built custom supply chain operations, and synced a lot of different API ecosystems together, so I'm used to keeping data consistent across many systems.
 
 As for my skills, Laravel is my main framework, but I've also worked a lot with CodeIgniter, Yii, Zend and WordPress, and on the Python side, Django. On the frontend I use Vue and React mostly, and Angular when a project needs it. For databases, I work with MySQL and PostgreSQL day to day, and also MongoDB, Redis, and DynamoDB. For search, I've used Elasticsearch and Algolia. And for infrastructure, I usually deploy on AWS, things like EC2, S3, Lambda and RDS, and I've also worked with Google Cloud and Heroku. Lately I've also been building AI features into apps, which is a lot of fun.
 
