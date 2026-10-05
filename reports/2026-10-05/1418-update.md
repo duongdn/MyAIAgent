@@ -1,26 +1,27 @@
-# Carrick — Video intro script for Maya Dunne (Applications & Integration Engineer)
+## Matrix → Upwork [carrick / Maya Dunne video intro] — 14:18 (+07:00)
+
 
 Room: https://www.upwork.com/ab/messages/rooms/room_9a4d6aca7d80448eb542bac5885f2d32
 Job: https://www.upwork.com/jobs/~022105750647178909544 (posted 2026-10-02, $5–23/hr, 30+ hrs/wk, 6+ months, 17 interviewing)
 
-## Job summary
+### Job summary
 Senior, versatile role: full lifecycle of business apps + integrations (dev, deploy, monitoring, troubleshooting, documentation, modernization).
 Stack: Python, PHP/Laravel, SQL, REST + GraphQL, Shopify, Acumatica ERP, GitHub, cloud hosting.
 Primary technical owner of critical systems; reliable data flows across e-commerce, ERP, customer, payment, shipping.
 Strong requirement: API integrations, documentation, business/system app management.
 Client: US (Honeoye Falls, NY — ~11–12h behind VN), agriculture business, 78 jobs posted, avg $9.32/hr. Also open: "Senior Applications & Integration Engineer", "IT Manager".
 
-## Proposal already sent (must stay consistent)
+### Proposal already sent (must stay consistent)
 - 7+ yrs full-stack PHP/Laravel/Python, API integrations
 - Propmap (propmap.io): custom workflow engine, data flows across service sectors
 - Bikebiz (bikebiz.com.au): headless e-commerce, payments, real-time shipping APIs
 - 30+ hrs/wk, async-friendly
 
-## Reference projects
+### Reference projects
 - **Propmap** — UK field-service SaaS (London). Work orders, dispatch/appointments, GPS map, dashboards, paperless rule-based workflows, web + Android/iOS with offline mode, public APIs into CRM/ERP/accounting.
 - **Bikebiz** — Australian motorcycle dealer + online store: new/used bikes (search by make/model/LAMS), sell-your-bike, road/MX/adventure gear, OEM parts, service centres. Next.js frontend (per Carrick's earlier David Ashforth answer).
 
-## Script (~2 min, read as Carrick)
+### Script (~2 min, read as Carrick)
 
 **1. Intro (~20s)**
 > Hi Maya, thanks for reaching out, and sorry for the short delay. I'm Carrick, a senior full-stack engineer with NUS Technology, a software company in Vietnam.
@@ -43,11 +44,11 @@ Client: US (Honeoye Falls, NY — ~11–12h behind VN), agriculture business, 78
 > Behind me there's also a team at NUS Technology, so you get backup and continuity when you need it.
 > I'd love to hear about your current systems and the integration pain points you'd want me to tackle first. Thanks, Maya!
 
-## Recording tips
+### Recording tips
 - Landscape, eye level, quiet background, < 2.5 min, speak slowly
 - Upload Loom or YouTube unlisted, send link in room with 1-line note
 
-## Unresolved questions
+### Unresolved questions
 - Proposal says "over seven years"; script says ~10 yrs PHP / 13 yrs at company. Fine, but cross-check with Carrick's profile.
 - Who records? The voice/face must match the Carrick profile photo.
 - Confirm Carrick/NUS actually built Bikebiz's headless setup + shipping integrations (claimed in proposal), and Propmap's API work.
