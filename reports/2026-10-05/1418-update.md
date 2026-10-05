@@ -30,27 +30,24 @@ Client: US (Honeoye Falls, NY — ~11–12h behind VN), agriculture business, 78
 - Client feedback tags: Committed to Quality, Collaborative, Clear Communicator, Reliable
 - Profile text: "more than 7 years"; employment: Senior PHP Dev @ NUS Apr 2019–now, freelancer 2017–2019
 
-### Script — final, read as Carrick (~3 min)
+### Script — final v3, read as Carrick (~2 min)
+Only facts from: Upwork profile, job history titles, proposal sent, propmap.io, bikebiz.com.au.
 
-Hi Maya, thanks so much for getting back to me, and sorry it took me a couple of days. I was travelling over the weekend, but I'm back now, so here's my intro.
+Hi Maya, thanks for reaching out, and sorry for the delay. I was travelling over the weekend.
 
-My name is Carrick. I'm a full-stack developer from Ho Chi Minh City in Vietnam, and I work with a software company here called NUS Technology. I've been doing web development for over seven years now. Most of that time I've spent with PHP and Laravel, but I also work quite a bit with Python and JavaScript. On Upwork I've done more than sixty jobs, around twenty-five thousand hours in total, and I've kept a hundred percent job success the whole way. A lot of those clients I've worked with for two, three years, which I'm honestly pretty proud of.
+I'm Carrick, a full-stack developer from Vietnam, working with NUS Technology. I've been doing web development for over seven years, mostly PHP and Laravel, plus Python and JavaScript. On Upwork I've done more than sixty jobs, and I've kept a hundred percent job success.
 
-So, about my experience with development and integrations. I think the best way to explain it is to just tell you about a couple of projects.
+So, development and integrations. That's really the core of what I do. Most of my projects are Laravel apps that have to talk to other systems: payment gateways like Stripe, shipping APIs, Google Maps, third-party services. I work with REST and GraphQL APIs, webhooks, and background sync jobs every day.
 
-The first one is Propmap. It's a platform for companies that have workers out in the field, like heating engineers or maintenance crews. The office creates a job, assigns it to a technician, and the technician gets it on their phone, goes to the site, fills in the forms and takes photos, and all of that comes back to the office in real time. The mobile app even works offline, because a lot of the time these guys are in a basement with no signal. And the reason I mention it is that a big part of that system is integration. The customers already have their own CRM, their own ERP, their own accounting software, and they don't want to type everything twice. So we built public APIs and syncs so that customers, jobs and invoices move between Propmap and those systems automatically. And when you do that kind of work, you learn very quickly that the hard part isn't calling the API. The hard part is what happens when it fails, when the other system is down, or sends you bad data, or the same record comes in twice. So I always build with retries, proper logging, and alerts, so if something breaks, we know about it straight away and nothing gets lost.
+A good example is Propmap. It's a field-service platform, so web and mobile apps for managing jobs and technicians. A key part of it is the public API, which lets customers connect Propmap to their own CRM, ERP or accounting system.
 
-The second one is Bikebiz. That's a big motorcycle dealer in Australia, and their website does a lot. They sell new and used bikes, riding gear, OEM parts, and they've got service centres too. On the e-commerce side we handled the payment gateway, shipping rates and tracking, and keeping the products, prices and stock in sync, so what the customer sees online actually matches what's in the store.
+Another one is Bikebiz, a motorcycle dealer and online store in Australia. There I worked on the e-commerce side, with payment processing and real-time shipping integrations.
 
-Other than that, I've done things like Stripe subscription systems, Laravel apps with heavy Google Maps features, and a lot of maintenance and upgrade work on older PHP systems, where you're careful because the business is running on it every day.
+I haven't used Acumatica yet, to be honest. But I've connected plenty of third-party systems, and the approach is the same: understand the data, map it carefully, and make the sync reliable.
 
-For the tech side, I'm most at home with Laravel, but I'm also comfortable with CodeIgniter, Yii, WordPress, and Django when it's Python. On the frontend I use Vue and React. For databases, mostly MySQL and Postgres, with Redis and Elasticsearch when we need them. And hosting is usually on AWS. I'll be honest with you, I haven't worked with Acumatica specifically yet. But I've connected a lot of ERP and accounting systems, and it's the same kind of work: understand the data on both sides, map it properly, and make the sync reliable. So I'm confident I can pick it up quickly.
+Why I'm a good fit? You need someone to own these systems: build them, keep them running, fix issues, and document everything. That's how I work with my long-term clients. I'm available more than thirty hours a week, long term, and I'm comfortable working async.
 
-Now, why I think I'd be a good fit. When I read your post, what stood out to me is that you're not just looking for someone to write code. You want someone to really own these systems. Build things, yes, but also keep them running, fix problems when they come up, write proper documentation, and slowly modernize things over time. And that's really how I've been working with most of my long-term clients. I like being the person who knows the system inside out. I always document what I build, so it's never a black box for your team.
-
-I'm available for more than thirty hours a week, and I'm looking for something long term, so this role really suits me. My day overlaps with your morning, and I'm used to working async, so you'll always get clear updates from me without having to chase. And if we ever need extra help, I've got my team at NUS Technology right behind me.
-
-So yeah, that's me. I'd really love to hear more about your current setup, and which systems are giving you the most headaches right now. Thanks again, Maya, and I hope to talk to you soon.
+I'd love to hear more about your systems. Thanks, Maya, talk soon!
 
 ### Recording tips
 - Landscape, eye level, quiet bg, smile at start/end, speak slower than feels natural
