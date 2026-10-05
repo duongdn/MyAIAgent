@@ -120,3 +120,6 @@ Senior full-stack developer with 10+ years of PHP and Laravel experience, plus P
 
 **Medium (~90 words):**
 Senior full-stack developer with 10+ years of PHP and Laravel experience, plus Python, Vue, React and AWS. I build, maintain and modernize web applications, and I specialize in API integrations that keep data flowing between e-commerce, payment, shipping, CRM and ERP systems. I've completed 60+ jobs and 24,000+ hours on Upwork with 100% Job Success. I take ownership of the systems I work on, communicate clearly, and work well async, with my team at NUS Technology behind me when a project needs extra hands.
+
+## Upwork bio final [carrick] — 15:20 (+07:00)
+Senior PHP/Laravel developer with 10+ years of experience. I build web apps and API integrations for e-commerce, payment and ERP systems.
