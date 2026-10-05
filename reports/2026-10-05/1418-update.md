@@ -111,3 +111,12 @@ Let's talk about your project. Send me a message and I'll get back to you quickl
 - ~1,750 chars (Upwork limit 5,000)
 - 10+ yrs conflicts with Employment history (NUS since Apr 2019, freelancer 2017) → update employment dates at the same time
 - Rate $20/hr; Maya job max $23
+
+## Upwork bio short [carrick] — 15:15 (+07:00)
+Supersedes long version above.
+
+**Short (~45 words):**
+Senior full-stack developer with 10+ years of PHP and Laravel experience, plus Python, Vue, React and AWS. I build and maintain web apps and API integrations that connect e-commerce, payment, CRM and ERP systems, with 60+ Upwork jobs and 100% Job Success.
+
+**Medium (~90 words):**
+Senior full-stack developer with 10+ years of PHP and Laravel experience, plus Python, Vue, React and AWS. I build, maintain and modernize web applications, and I specialize in API integrations that keep data flowing between e-commerce, payment, shipping, CRM and ERP systems. I've completed 60+ jobs and 24,000+ hours on Upwork with 100% Job Success. I take ownership of the systems I work on, communicate clearly, and work well async, with my team at NUS Technology behind me when a project needs extra hands.
