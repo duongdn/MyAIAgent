@@ -36,7 +36,7 @@ Short sentences, contractions, pause at "—". Don't read word-for-word; glance 
 **1. Intro (~20s)**
 > Hi Maya! Thanks for reaching out — and sorry for the little delay, I was travelling over the weekend.
 > So, I'm Carrick. I'm a senior full-stack developer, based in Ho Chi Minh City, Vietnam, and I work with NUS Technology.
-> I've been doing PHP for about ten years now — mostly Laravel — plus Python and JavaScript.
+> I've been doing web development for over seven years now — mostly PHP and Laravel — plus Python and JavaScript.
 > And on Upwork, I've done over sixty jobs, around twenty-five thousand hours, with a hundred percent job success. So — I've been around for a while!
 
 **2. Skills (~30s)**
@@ -67,6 +67,5 @@ Short sentences, contractions, pause at "—". Don't read word-for-word; glance 
 - Upload Loom / YouTube unlisted, send link in room with 1-line note
 
 ### Unresolved questions
-- User said ~10 yrs PHP, at company since 2013 (13 yrs). Profile says "more than 7 years" + NUS since Apr 2019. Script uses "about ten years" PHP, no start year, to avoid contradicting profile → update profile or keep script vague?
 - Who records: face/voice must match Carrick profile photo.
 - Confirm NUS built Bikebiz headless + shipping integrations and Propmap API work (claimed in proposal).
