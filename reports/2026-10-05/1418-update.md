@@ -70,3 +70,44 @@ Short sentences, contractions, pause at "—". Don't read word-for-word; glance 
 - User said ~10 yrs PHP, at company since 2013 (13 yrs). Profile says "more than 7 years" + NUS since Apr 2019. Script uses "about ten years" PHP, no start year, to avoid contradicting profile → update profile or keep script vague?
 - Who records: face/voice must match Carrick profile photo.
 - Confirm NUS built Bikebiz headless + shipping integrations and Propmap API work (claimed in proposal).
+
+## Upwork bio [carrick] — 15:10 (+07:00)
+
+**Title:** Senior PHP/Laravel Developer | API Integrations | Full-Stack (Vue/React) | AWS
+
+**Overview:**
+Hi, I'm Carrick, a senior full-stack developer with 10+ years of PHP experience, mostly Laravel. I've completed 60+ jobs and 24,000+ hours here on Upwork with a 100% Job Success Score.
+
+I don't just write code. I take ownership of the systems I work on: I build them, keep them running, fix things fast when they break, and improve them over time. Many of my clients have stayed with me for years.
+
+WHAT I DO BEST
+✔ Laravel / PHP web apps: new builds, ongoing maintenance, legacy upgrades
+✔ API integrations: REST, GraphQL, webhooks, queues, scheduled syncs
+✔ E-commerce: Shopify, WooCommerce, OpenCart, payments (Stripe, PayPal), shipping
+✔ Connecting business systems: CRM, ERP, accounting, so data flows without manual entry
+✔ WordPress: custom themes and plugins, speed and security fixes
+✔ Monitoring, troubleshooting and clear documentation
+
+TECH STACK
+• Backend: PHP (Laravel, CodeIgniter, Yii, Zend), Python (Django), Ruby on Rails
+• Frontend: Vue.js, React, Angular, TypeScript
+• Databases: MySQL, PostgreSQL, Redis, MongoDB, DynamoDB, Elasticsearch, Algolia
+• Cloud & DevOps: AWS (EC2, S3, Lambda, RDS, ElastiCache), GCP, Heroku, Git, CI/CD
+• AI: integrating LLM APIs into apps; AI-assisted workflow for faster delivery
+
+RECENT WORK
+• Propmap: field-service SaaS (web + mobile, offline mode) with public APIs into CRM/ERP/accounting systems
+• Bikebiz: motorcycle dealer and e-commerce store with payments, shipping and product/stock sync
+• Custom Laravel + Google Maps applications, Stripe subscription systems, WordPress → Next.js rebuilds
+
+HOW I WORK
+• Proactive, clear communication and regular progress updates
+• Comfortable with async work, with overlap into US/EU/AU hours
+• Backed by my team at NUS Technology for extra capacity and continuity
+
+Let's talk about your project. Send me a message and I'll get back to you quickly.
+
+### Notes
+- ~1,750 chars (Upwork limit 5,000)
+- 10+ yrs conflicts with Employment history (NUS since Apr 2019, freelancer 2017) → update employment dates at the same time
+- Rate $20/hr; Maya job max $23
