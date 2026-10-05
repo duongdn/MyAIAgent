@@ -595,6 +595,22 @@
       },
       "method": "dashboard_verified",
       "note": "Chay lai 10:49 (thay snapshot 09:06: NW 8,018,239,668). NW -162.2M vs 10-01 = tra no chi Ky rong -100M (vay 30M, tra 130M - da xac nhan dung), lo VCBF -69M, lo Finhay -7M, Paypal +15M, vang +1M, chi tieu -2.2M. NW = totaldashboard 6,518,772,598 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069 (2 vi nay bi an sau 09:06, API tra 0, user xac nhan van la dau tu). FPTS/Finhay/VCBF chot so Cho vay. vcb->FPTS +29M trong T10. vcb con 6.3M, liquid 63.3M. T10 MTD Thu 81.9M/Chi 14.9M/Net +67.0M. 602M so dao han 10-13/10."
+    },
+    {
+      "date": "2026-10-05",
+      "label": "05/10",
+      "net_worth": 7903565939,
+      "gross_assets": 7976233604,
+      "liabilities": 2367664,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 717500000,
+        "investment": 2484923840,
+        "savings": 1192321425,
+        "liquid": 61488339
+      },
+      "method": "dashboard_verified",
+      "note": "NW -7.7M vs 10-02: chi tieu -5.67M, vang -4.0M (717.5M), Vi +2.0M dieu chinh so du khong co ghi chep, FX -5.7K. NW = totaldashboard 6,511,098,870 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 81.9M/Chi 20.5M/Net +61.3M. 602M so dao han 10-13/10."
     }
   ]
 }
