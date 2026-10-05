@@ -214,6 +214,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_news_digest_nghienai_group_persistent_notloggedin](news-digest/feedback_news_digest_nghienai_group_persistent_notloggedin.md) — group-specific auth fail, distinct from session-wide failure
 - [feedback_news_digest_western_labs_only_query_gap](news-digest/feedback_news_digest_western_labs_only_query_gap.md) — 🔴 AI Model Releases source query missed DeepSeek/Qwen; fixed 2026-08-13
 - [feedback_news_digest_vn_first_order](news-digest/feedback_news_digest_vn_first_order.md) — 🔴 topic=all order: VN topics (vn-stocks/vn-business/vinfast) first, US `stocks` last
+- [feedback_news_digest_stale_tmp_section_files](news-digest/feedback_news_digest_stale_tmp_section_files.md) — 🔴 10-05 old July articles: stale /tmp/nd-section-*.md matched glob wait; per-run RUN_DIR now required
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)

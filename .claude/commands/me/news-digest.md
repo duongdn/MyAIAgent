@@ -100,6 +100,11 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
 ```
 
+**🔴 Scratch files — BẮT BUỘC dùng thư mục riêng cho mỗi run** (sự cố 2026-10-05: chờ bằng `until [ $(ls /tmp/nd-section-*.md | wc -l) -ge 9 ]` → glob khớp file nháp cũ từ tháng 7/8 còn trong `/tmp` → ghép report trước khi subagent xong → section VN chứng khoán/kinh doanh là bài tháng 7, đã commit):
+- Đầu run: `RUN_DIR=/tmp/news-digest-run-${REPORT_DATE}-${REPORT_TIME}; rm -rf "$RUN_DIR"; mkdir -p "$RUN_DIR"` — MỌI file trung gian (JSON fetch, condensed, section .md của subagent) phải nằm trong `$RUN_DIR`. KHÔNG ghi `/tmp/nd-*` hay `/tmp/news-*` dùng chung.
+- Chờ subagent: kiểm tra ĐÚNG 9 tên file cụ thể `$RUN_DIR/section-{topic}.md` tồn tại — KHÔNG đếm glob.
+- Trước khi ghép: mỗi section phải có ngày header = `REPORT_DATE`. Nếu sai ngày → file cũ/sai → KHÔNG `sed` sửa ngày, phải tạo lại section đó.
+
 **Khi `topic=<cụ thể>` — fetch 1 lần:**
 ```bash
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py [topic] [--tag=xxx] [--limit=N]

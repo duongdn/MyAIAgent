@@ -37,6 +37,10 @@ done
 
 cd "$PROJECT_DIR"
 
+# Remove leftover scratch files from earlier runs — a stale /tmp/nd-section-*.md
+# once got concatenated into a fresh report (2026-10-05, July articles shipped).
+rm -rf /tmp/nd-* /tmp/news-digest-* /tmp/news-*.json 2>/dev/null
+
 # Pull latest code so skill updates are applied before Claude runs
 git_before=$(git rev-parse HEAD)
 git pull --rebase origin master >> "$LOG" 2>&1

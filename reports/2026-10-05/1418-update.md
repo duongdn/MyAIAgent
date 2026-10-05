@@ -21,34 +21,52 @@ Client: US (Honeoye Falls, NY — ~11–12h behind VN), agriculture business, 78
 - **Propmap** — UK field-service SaaS (London). Work orders, dispatch/appointments, GPS map, dashboards, paperless rule-based workflows, web + Android/iOS with offline mode, public APIs into CRM/ERP/accounting.
 - **Bikebiz** — Australian motorcycle dealer + online store: new/used bikes (search by make/model/LAMS), sell-your-bike, road/MX/adventure gear, OEM parts, service centres. Next.js frontend (per Carrick's earlier David Ashforth answer).
 
-### Script (~2 min, read as Carrick)
+### Carrick profile (upwork.com/freelancers/~014bd06f7f2aa25e2d)
+- Carrick N., HCMC, Top Rated Plus, 100% JSS, 63 jobs, 24,828 hrs, $20/hr, agency NUS Technology
+- Headline: Senior Web Developer – PHP | Laravel | CodeIgniter | Yii | WordPress
+- Langs: PHP, Python, Ruby, JS/TS. Backend: Laravel, CodeIgniter, Yii, Zend, WordPress, OctoberCMS, OpenCart, Django, Rails
+- Frontend: Vue, React, Angular. Cloud: AWS (EC2, S3, Lambda, RDS, ElastiCache), GCP, Heroku. Search: Elasticsearch, Algolia
+- DB: MySQL, PostgreSQL, MongoDB, DynamoDB, Redis. Skill tags incl. API Integration, API Development, CRM Dev, AI App Dev
+- Client feedback tags: Committed to Quality, Collaborative, Clear Communicator, Reliable
+- Profile text: "more than 7 years"; employment: Senior PHP Dev @ NUS Apr 2019–now, freelancer 2017–2019
+
+### Script — spoken version (~2.5 min, read as Carrick)
+Short sentences, contractions, pause at "—". Don't read word-for-word; glance + talk.
 
 **1. Intro (~20s)**
-> Hi Maya, thanks for reaching out, and sorry for the short delay. I'm Carrick, a senior full-stack engineer with NUS Technology, a software company in Vietnam.
-> I've been with the company since 2013, so about thirteen years, and I've spent around ten of those years building and running PHP applications, mostly with Laravel, alongside Python and JavaScript.
+> Hi Maya! Thanks for reaching out — and sorry for the little delay, I was travelling over the weekend.
+> So, I'm Carrick. I'm a senior full-stack developer, based in Ho Chi Minh City, Vietnam, and I work with NUS Technology.
+> I've been doing PHP for about ten years now — mostly Laravel — plus Python and JavaScript.
+> And on Upwork, I've done over sixty jobs, around twenty-five thousand hours, with a hundred percent job success. So — I've been around for a while!
 
-**2. Development & integrations (~70s)**
-> Most of my work is exactly what your post describes: owning business applications end to end and keeping data moving reliably between systems.
->
-> One example is Propmap, a field-service platform used by companies with technicians on the road. It manages work orders, dispatching, appointments and paperless workflows on web and mobile, including offline work. A big part of it is integration: public APIs that connect Propmap with customers' CRM, ERP and accounting systems, so that jobs, customers and invoices sync without double entry.
->
-> Another is Bikebiz, an Australian motorcycle dealership and online store. It covers new and used bikes, gear and OEM parts, with a headless storefront on top of the commerce backend, and integrations for payments, shipping rates and tracking, and inventory and product data.
->
-> Across projects I work with REST and GraphQL APIs, webhooks, queues and scheduled sync jobs, MySQL and PostgreSQL, Shopify, Stripe and PayPal, GitHub-based CI/CD, and cloud hosting on AWS.
-> I haven't used Acumatica itself yet, but I've integrated other ERP and accounting systems, and its REST API follows the same patterns: map the data, handle retries and conflicts, and monitor so that failures are caught before the business notices.
-> I also document everything I build, including data flows, runbooks and API notes, so the systems are never a black box.
+**2. Skills (~30s)**
+> Quick rundown of what I work with.
+> Backend — that's my home. Laravel, CodeIgniter, Yii, WordPress, and Django on the Python side.
+> Frontend — Vue and React, sometimes Angular.
+> Databases — MySQL and Postgres mostly, plus Redis, MongoDB, and Elasticsearch for search.
+> And for hosting — mainly AWS. EC2, S3, Lambda, RDS… that kind of stuff. Git and CI/CD for every project.
 
-**3. Why I'm a good fit (~30s)**
-> You're looking for one person who can be the technical owner of critical systems, not just someone who writes code. That's how I've worked for years: I build features, but I also monitor, troubleshoot production issues, clean up legacy code and modernize it step by step.
-> I'm available more than 30 hours a week for the long term. I overlap with your morning, and I'm comfortable working asynchronously with clear written updates.
-> Behind me there's also a team at NUS Technology, so you get backup and continuity when you need it.
-> I'd love to hear about your current systems and the integration pain points you'd want me to tackle first. Thanks, Maya!
+**3. Development & integrations (~50s)**
+> Now, integrations — that's honestly a big part of my day.
+> One project I can share is Propmap. It's a field-service platform — companies use it to send technicians out to jobs. Web app, mobile app, works offline… And a lot of it is about connecting with other systems — customers' CRMs, ERPs, accounting tools — so nobody has to type the same data twice.
+> Another one is Bikebiz. It's a motorbike dealer and online store in Australia. There it was payments, shipping, keeping products and stock in sync — the usual e-commerce plumbing.
+> So, REST APIs, GraphQL, webhooks, queues, scheduled syncs — I'm really comfortable with all of that. Shopify, Stripe, PayPal too.
+> Now, to be honest — I haven't worked with Acumatica itself yet. But I've connected plenty of ERP and accounting systems, and it's the same idea: map the data, handle the errors, and set up monitoring so you hear about a problem from me — not from a customer.
+> Oh — and I write things down. Docs, data flows, runbooks. I don't like black boxes.
+
+**4. Why I'm a good fit (~30s)**
+> So why me?
+> I read your post, and you want someone to actually *own* these systems. Not just write code, but keep them running, fix things when they break, and improve them over time. That's exactly how I like to work.
+> I can do more than thirty hours a week, long term. I overlap with your mornings, and I'm good at working async — you'll always know where things are.
+> And if we ever need extra hands, I've got my team at NUS right behind me.
+> So — I'd love to hear more about your setup, and where it hurts most right now. Thanks, Maya. Talk soon!
 
 ### Recording tips
-- Landscape, eye level, quiet background, < 2.5 min, speak slowly
-- Upload Loom or YouTube unlisted, send link in room with 1-line note
+- Landscape, eye level, quiet bg, smile at start/end, speak slower than feels natural
+- Bullet-note version on screen beside camera, not full text
+- Upload Loom / YouTube unlisted, send link in room with 1-line note
 
 ### Unresolved questions
-- Proposal says "over seven years"; script says ~10 yrs PHP / 13 yrs at company. Fine, but cross-check with Carrick's profile.
-- Who records? The voice/face must match the Carrick profile photo.
-- Confirm Carrick/NUS actually built Bikebiz's headless setup + shipping integrations (claimed in proposal), and Propmap's API work.
+- User said ~10 yrs PHP, at company since 2013 (13 yrs). Profile says "more than 7 years" + NUS since Apr 2019. Script uses "about ten years" PHP, no start year, to avoid contradicting profile → update profile or keep script vague?
+- Who records: face/voice must match Carrick profile photo.
+- Confirm NUS built Bikebiz headless + shipping integrations and Propmap API work (claimed in proposal).
