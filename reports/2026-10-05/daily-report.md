@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-05 (Monday)
 
-**Run:** 2026-10-05T05:00:00+07:00 (cron)
+**Run:** 2026-10-05T05:00:00+07:00 (cron), rechecked 08:45 (+07:00)
 **Window:** 2026-10-02T08:55+07:00 → 2026-10-05T05:00+07:00
 **Leave plan:** No upcoming approved leaves on record (chientx's leave request Oct 2 already past/ack'd by duongdn).
 
@@ -10,10 +10,10 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack Xtreme (Maddy) | Madhuraka (client) 2026-10-04 ~21:56: "Can you give priority to [JIRA LIFM2-]409 and finish it this week? ... unable to bill the client until the ticket is fully complete" — unanswered as of this run. |
-| 2 | Fountain Trello | kunalsheth posted detailed V2 release review notes on "Start here: review order for Claude's PRs" (2026-10-04 14:22) — rick570 has not replied yet. |
-| 3 | OhCleo Slack | Celine (2026-10-03 17:01): "Is this something we are using? It was withdrawn from my card today" — billing question, no reply found in subsequent messages. |
-| 4 | Discord Bizurk (Andrew Taraba) | animeworld DM 2026-10-04 08:43: "hi bro" / "is it OK?" — unanswered. |
+| 1 | Slack Xtreme (Maddy) | Madhuraka (client) 2026-10-04 ~21:56: "Can you give priority to [JIRA LIFM2-]409 and finish it this week? ... unable to bill the client until the ticket is fully complete" — unanswered as of this run. Recheck 08:45: still unanswered. LIFM2-409 back in To Do, 111.25h spent / 113.25h est (≈2h left). |
+| 2 | Fountain Trello | kunalsheth posted detailed V2 release review notes on "Start here: review order for Claude's PRs" (2026-10-04 14:22) — rick570 has not replied yet. Recheck 08:45: still no reply (rick570's last comment was 10-04 11:20 on the firewall card). |
+| 3 | OhCleo Slack | Celine (2026-10-03 17:01): "Is this something we are using? It was withdrawn from my card today" — billing question, no reply found in subsequent messages. Recheck 08:45: still unanswered. (Script times are UTC, so this was 10-04 00:01 +07.) |
+| 4 | Discord Bizurk (Andrew Taraba) | animeworld DM 2026-10-04 08:43: "hi bro" / "is it OK?" — unanswered. Recheck 08:45: still unanswered. |
 | 5 | MPFC New Relic | Multiple `.env`/config-probe URLs hit prod with 115-117s "response times" (attack/scan probes, not real slow transactions) — apdex still poor 0.41, chronic WP_Error pattern continues. |
 
 **Today (Mon Oct 5):** all present, no leave on record.
@@ -69,7 +69,7 @@ Trello: Rory/Franc/MPFC/LegalAtoms/William Bills/Equanimity/Aigile/Baamboozle(Ay
 ## OhCleo Slack — 05:12 (+07:00)
 | Channel | Msgs | Key content |
 |---------|------|-------------|
-| DM:Celine Fierro | 12 | Tony's reports present (2026-10-02 09:45, 2026-10-04 19:35-19:36 re: backup images). ⚠️ Celine's card-withdrawal question (10-03 17:01) unanswered — Alert #3. |
+| DM:Celine Fierro | 12 | Tony's report present 2026-10-02 09:45. ~~10-04 19:35-19:36 Tony re: backup images~~ Those messages are from **Celine** (UTC, so 10-05 02:35 +07): she added most of the backup pictures to Drive and will finish tomorrow. Informational. ⚠️ Celine's card-withdrawal question (10-03 17:01) unanswered — Alert #3. |
 | #events-code | 0 | — |
 
 Trello: Ohcleo ⚠️ left incomplete (Alert #3).
@@ -121,6 +121,27 @@ Trello: Maddy/John Yi/James Diamond/Aysar/Elliott/Rebecca/Bailey items — see t
 
 Trello: Fountain ⚠️ left incomplete (Alert #2 — unanswered customer review notes).
 
+## Maddy — W40 — 08:45 (+07:00)
+
+### 1. Task Log Hours (Fri 10-02)
+| Developer | Fri | Weekly total | Status |
+|-----------|-----|--------------|--------|
+| LongVV | 1h (Xtreme) | 3.25h tagged on Maddy WS (468 + 3 untagged) | informational only, ad-hoc (no alert) |
+
+### 2. Slack / Kai Daily Report Check
+- Madhuraka 10-04 16:23 (+07): "Can you give priority to 409 and finish it this week? ... unable to bill the client" is still **unanswered** (Alert #1).
+- No Kai-role report check was needed beyond this: Friday was 1h, and the Slack window has no other traffic.
+
+### 3. JIRA
+- Weekly cross-check: 3 WS entries are missing a JIRA key ("Investigate why items sold are draft on Shopify" 1h, "Investigate approach to improve quoting tool" 1h, "Fix urgent bug" 0.25h). LIFM2-468 has no estimate and no JIRA log.
+- Active since 10-02: 450 To Do (6.2h spent / 6h est, slightly over), 470 + 469 new To Do (no est), 455 Ready to deploy, 467 Customer Feedback (2.5h / 2h), 468 + 464 Testing.
+- Risk tickets: **409 reopened to To Do**, 111.25h / 113.25h est (matches the client ask). 260 + 439 Done.
+
+### 4. Bitbucket PR Status (xtreme-web/rms)
+7 open PRs by Kai: #481 (409, waiting on customer per memory), #549, #548, #544, #540, #534, #509 (last update 08-14). #540 (LIFM2-450) has been idle since 09-03.
+
+Trello: Maddy ○ (Alert #1).
+
 ## Elena — 05:30 (+07:00)
 Elena-SamGuard-Digital-Plant: on Ignore List (paused) — not run, auto-completed.
 Elena-WordPress-SamGuard (separate item, not paused): ran `wordpress-samguard-check.js` — 0 JS errors, 0 CSP violations, 0 page errors. Clean.
@@ -161,7 +182,7 @@ Full details: reports/2026-10-05/matrix-rooms-0513.md
 | Aysar | Login failed (live+stored+headless cookies all failed) — manual re-auth needed |
 | Tokenlite (Marcel) | Cloudflare challenge — session unavailable |
 
-Session/Cloudflare failures only — no memo-validity alert raised; existing project gates (Rory/Aysar via Slack+Sheets) unaffected and already ✓ above.
+~~Session/Cloudflare failures only~~ Recheck 08:40: sessions OK for all 3 workrooms, but the scraper returned `dom_fallback_day_label_not_found` with 0 memos each. KhanhHH logged 5.33h on Baamboozle that day, so 0 memos is a scraper miss, not real data. Memo validity is **unverified**. Manual check: open the 10-02 timesheet in Upwork. No memo-validity alert raised; existing project gates (Rory/Aysar via Slack+Sheets) unaffected and already ✓ above.
 
 Trello: no dedicated Upwork Memo item on current board — not gating.
 
@@ -181,7 +202,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 - Elena - SamGuard Digital Plant: ✓ complete (Ignore List)
 - Raymond - LegalAtoms: ✓ complete
 - Neural Contract: ✓ complete
-- Bailey: ✓ complete
+- Bailey: ✓ complete (recheck: Matrix Bailey room has daily task reports from tuannt on 10-01 and 10-02)
 - Andrew Taraba: ⚠️ skipped (Alert #4)
 - Rebecca (William Bills): ✓ complete
 - Colin: ✓ complete (Ignore List)
@@ -194,6 +215,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 - Check mail (all 6 Zoho accounts): ✓ complete
 
 ## Unresolved Questions
+- Upwork memo scraper can't find the day label (`dom_fallback_day_label_not_found`). The script likely needs a fix.
 - ken@nustechnology.com IMAP auth_fail — needs credential check this week.
 - Maya Dunne (Carrick's recruiting contact) follow-up deferred by duongdn to "tomorrow" (09:17) — confirm it was actually followed up.
 - MPFC `.env`/config-probe traffic (Alert #5) — recurring; worth a WAF/Cloudflare rule to block these scan patterns if not already in place.
