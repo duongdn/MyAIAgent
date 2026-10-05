@@ -37,7 +37,7 @@ Hi Maya, thanks for reaching out, and sorry for the delay. I was travelling over
 
 I'm Carrick, a full-stack developer from Vietnam, working with NUS Technology. I've been doing web development for over seven years, mostly PHP and Laravel, plus Python and JavaScript. On Upwork I've done more than sixty jobs, and I've kept a hundred percent job success.
 
-So, development and integrations. That's really the core of what I do. Most of my projects are Laravel apps that have to talk to other systems: payment gateways like Stripe, shipping APIs, Google Maps, third-party services. I work with REST and GraphQL APIs, webhooks, and background sync jobs every day.
+So, development and integrations. That's really the core of what I do. Most of my projects are Laravel apps that have to talk to other systems: payment gateways like Stripe, shipping APIs, Google Maps, third-party services. I work with REST APIs, webhooks, and background sync jobs every day.
 
 A good example is Propmap. It's a field-service platform, web and mobile, for companies that send technicians out to jobs. There I architected a custom workflow engine, so each type of job follows its own steps, and I integrated the data flows across the different service sectors they work in. Propmap also connects to customers' CRM, ERP and accounting systems through its public API.
 
@@ -45,7 +45,7 @@ Another one is Bikebiz, a motorcycle dealer and online store in Australia. I bui
 
 I've also built custom supply chain operations, and synced a lot of different API ecosystems together, so I'm used to keeping data consistent across many systems.
 
-As for my skills, Laravel is my main framework, but I've also worked a lot with CodeIgniter, Yii, Zend and WordPress, and on the Python side, Django. On the frontend I use Vue and React mostly, and Angular when a project needs it. For databases, I work with MySQL and PostgreSQL day to day, and also MongoDB, Redis, and DynamoDB. For search, I've used Elasticsearch and Algolia. And for infrastructure, I usually deploy on AWS, things like EC2, S3, Lambda and RDS, and I've also worked with Google Cloud and Heroku. Lately I've also been building AI features into apps, which is a lot of fun.
+As for my skills, Laravel is my main framework, but I've also worked a lot with CodeIgniter, Yii, Zend and WordPress, and on the Python side, Django. On the frontend I use Vue and React mostly, and Angular when a project needs it. For databases, I work with MySQL and PostgreSQL day to day, and also MongoDB, Redis, and DynamoDB. For search, I've used Elasticsearch and Algolia. And for infrastructure, I usually deploy on AWS, things like EC2, S3, Lambda and RDS, and I've also worked with Google Cloud and Heroku. And I've also built AI features into apps, which fits nicely with the AI side of this role.
 
 I haven't used Acumatica yet, to be honest. But I've connected plenty of third-party systems, and the approach is the same: understand the data, map it carefully, and make the sync reliable.
 
