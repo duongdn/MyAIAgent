@@ -43,6 +43,8 @@ A good example is Propmap. It's a field-service platform, so web and mobile apps
 
 Another one is Bikebiz, a motorcycle dealer and online store in Australia. There I worked on the e-commerce side, with payment processing and real-time shipping integrations.
 
+As for my skills, Laravel is my main framework, but I've also worked a lot with CodeIgniter, Yii, Zend and WordPress, and on the Python side, Django. On the frontend I use Vue and React mostly, and Angular when a project needs it. For databases, I work with MySQL and PostgreSQL day to day, and also MongoDB, Redis, and DynamoDB. For search, I've used Elasticsearch and Algolia. And for infrastructure, I usually deploy on AWS, things like EC2, S3, Lambda and RDS, and I've also worked with Google Cloud and Heroku. Lately I've also been building AI features into apps, which is a lot of fun.
+
 I haven't used Acumatica yet, to be honest. But I've connected plenty of third-party systems, and the approach is the same: understand the data, map it carefully, and make the sync reliable.
 
 Why I'm a good fit? You need someone to own these systems: build them, keep them running, fix issues, and document everything. That's how I work with my long-term clients. I'm available more than thirty hours a week, long term, and I'm comfortable working async.
@@ -56,4 +58,3 @@ I'd love to hear more about your systems. Thanks, Maya, talk soon!
 
 ### Unresolved questions
 - Who records: face/voice must match Carrick profile photo.
-- Confirm NUS built Bikebiz headless + shipping integrations and Propmap API work (claimed in proposal).
