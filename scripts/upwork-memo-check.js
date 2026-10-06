@@ -244,6 +244,24 @@ async function fetchWorkroomMemos(page, room, date) {
     }
   }
 
+  // 🔴 2026-10-06: the timesheet SPA sometimes hasn't rendered the Work Diary yet
+  // (blank page) when the second+ workroom loads — clicking immediately found no
+  // day label and silently fell back to an empty DOM scrape. Poll for the
+  // "{num} {DayName}" row (up to ~30s), reloading the page once if it never shows.
+  const dayRowVisible = (num, name) => Array.from(document.querySelectorAll('div, li, tr'))
+    .some((el) => { const t = (el.textContent || '').trim(); return t.startsWith(`${num} ${name}`) && t.length < 60; });
+  let rowFound = false;
+  for (let attempt = 0; attempt < 2 && !rowFound; attempt++) {
+    if (attempt > 0) {
+      console.error(`Day row "${dayNum} ${dayName}" not rendered for ${room.name}, reloading timesheet...`);
+      await page.reload({ waitUntil: 'networkidle2', timeout: 60000 }).catch(() => {});
+    }
+    for (let i = 0; i < 15 && !rowFound; i++) {
+      rowFound = await page.evaluate(dayRowVisible, dayNum, dayName).catch(() => false);
+      if (!rowFound) await new Promise((r) => setTimeout(r, 1000));
+    }
+  }
+
   // Select the target day by clicking its row label — triggers a fresh
   // workDiaryContract fetch scoped to that day's cells.
   cells = [];
