@@ -14,3 +14,5 @@ metadata:
 - COMBINED=0h AND no leave → alert+reminder, block all 3 items. COMBINED>0h (any one project) → complete all 3, no per-project alerts.
 - Show per-project breakdown in report, never just "combined Xh". "Not working John Yi" ≠ not working at all.
 - Before concluding 0h for TuanNT specifically: confirm the project actually shows up under his Workstream data at all — he has a documented history of not reflecting real work there for some projects (see [[feedback_check_workstream_before_flagging_shortfall]]'s reliability caveats). If in doubt, ask directly rather than assume a real gap.
+
+**2026-10-06:** user: "TuanNT có làm Andrew nữa" — TuanNT also works **Andrew Taraba** (Workstream `cmqyvioez007pqo0xn1iexfg3`). Include it in his all-projects sum and name it in reminders. Rebecca paused 10-06 → TuanNT gates **Bailey only**.

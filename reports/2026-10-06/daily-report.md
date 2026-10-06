@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream | TuanNT 0h logged anywhere on Workstream for 2026-10-05 (checked all projects incl. Andrew Taraba `cmqyvioez007pqo0xn1iexfg3` directly — `rows: []`), despite being visibly active in Matrix (Bailey/Paturevision, Andrew Taraba rooms) discussing real work all day. No leave on record. Blocks Bailey + Rebecca + James Diamond-adjacent Trello items. → **08:46 re-query: still 0h** (all 24 visible projects; "Others" returns 403 for DuongDN). Blocks **Bailey only**: Rebecca is paused (Ignore List, per user 10-06). Re-checking after 09:30. |
-| 2 | Sheets/Workstream | LeNH 0h logged on Workstream for 2026-10-05 across all her projects (bxr_app, james_diamond, blair_brown, radio_data_center all show her only as reviewer, not as a logging member) despite Matrix (Rory/BXR room) showing her active in the wallet-cert-expiry thread. No leave on record. Blocks James Diamond item. → **08:46 re-query: still 0h** on James Diamond (only AnhNH2 4h). Re-checking after 09:30. |
+| 1 | Sheets/Workstream | TuanNT 0h logged anywhere on Workstream for 2026-10-05 (checked all projects incl. Andrew Taraba `cmqyvioez007pqo0xn1iexfg3` directly — `rows: []`), despite being visibly active in Matrix (Bailey/Paturevision, Andrew Taraba rooms) discussing real work all day. No leave on record. Blocks Bailey + Rebecca + James Diamond-adjacent Trello items. → **08:46 re-query: still 0h** (all 24 visible projects; "Others" returns 403 for DuongDN). Blocks **Bailey only**: Rebecca is paused (Ignore List, per user 10-06). **08:50: re-verified still 0h (incl. Andrew Taraba), reminder sent** to `!knbJbIKzXRJNGVFQNg` (event `$nkNXYPFQfQS3S-TM2oPkz2fyhDprdYM4Ktij5UfVEGo`, names Bailey + Andrew Taraba) → Bailey ✓. |
+| 2 | Sheets/Workstream | LeNH 0h logged on Workstream for 2026-10-05 across all her projects (bxr_app, james_diamond, blair_brown, radio_data_center all show her only as reviewer, not as a logging member) despite Matrix (Rory/BXR room) showing her active in the wallet-cert-expiry thread. No leave on record. Blocks James Diamond item. → **08:46 re-query: still 0h** on James Diamond (only AnhNH2 4h). **08:50: re-verified still 0h, reminder sent** to `!OIrgPraJWrcDTnRVLQ` (event `$e6FX82--MfxPcMUW5eHUzB7SjrJ4CGEIdXp8a9uPzCc`) → James Diamond ✓. |
 | 3 | Sheets/Workstream | ~~PhucVT 0h logged on Workstream for 2026-10-05 (`crystal_lang`/Arthur has empty members) despite Matrix (Arthur room) showing him actively negotiating scope/budget with the client all day. No leave on record.~~ → **Not an alert (08:35):** PhucVT's hours aren't gated (Arthur, per user 10-01). Never alert or remind on his 0h days. |
 | 4 | Discord (Bizurk/Andrew Taraba) | ~~no reply from nuscarrick since (last reply from him was 02:05 UTC, before the questions) → **Corrected 08:30:** nuscarrick replied only "Let me check" at 07:26 UTC (14:26 VN). animeworld then added 3 follow-ups at 07:27 UTC ("you can have the order status as a separate code snippet…", "we can toggle it off but still keep our pop up modal", **"is the modal code snippet complete?"**). Nothing substantive since (~18h). The customer asks (custom order status/origin on POS orders + is the modal snippet complete) are still open.~~ → **Resolved per user 08:44:** nuscarrick did reply. Andrew Taraba ✓. |
 | 5 | Email (vuongtrancr@gmail.com) | 4× New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" for Swish — monitoring signal gaps, not confirmed resolved. |
@@ -136,7 +136,7 @@ Trello: James Diamond, Bailey ~~, Rebecca~~ left ○ (Alert #1/#2). Rebecca ✓ 
 
 **Part 5 — Over-estimate tracking:** **37 rows** with actual > (est+CR)×1.2. Top: #2627 0.5h→8.25h (+1550%, Has Bug on Live), #2615 12h→106.75h (+790%, Staging), #2639 Infinity active/inactive card category 2h→16.5h (+725%, Staging), #2630 0.5h→3.75h, #2545 build-a-box modal 1h→7.5h, #2613 2h→14.5h. Prior-week comparison not computed this pass.
 
-Trello: ~~Fountain ✓ complete.~~ → **Fountain ○ (reverted 08:50, Alert #7).**
+Trello: ~~Fountain ✓ complete.~~ → ~~Fountain ○ (reverted, Alert #7)~~ → **Fountain ✓ (completed manually by user 08:48).**
 
 ---
 
@@ -270,7 +270,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 **Check progress:**
 - ✓ complete: Maddy, John Yi (cancelled), Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena-SamGuard (paused), Raymond, Neural Contract, Colin (paused), Fountain, Philip (paused), Ohcleo, Arthur (paused), Blair Brown (paused), Elena-WordPress-SamGuard.
 - ○ left incomplete: **James Diamond** (LeNH 0h, Alert #2), **Bailey** (TuanNT 0h, Alert #1), ~~**Rebecca** (TuanNT 0h, Alert #1), **Andrew Taraba** (unanswered customer ask, Alert #4).~~
-- **Corrected 08:46:** Rebecca ✓ (paused, now on the Ignore List), Andrew Taraba ✓ (replied), Maddy ✓ (answered). Fountain ○ (Alert #7). Still ○: James Diamond, Bailey (task log, re-checking after 09:30).
+- **Corrected 08:46:** Rebecca ✓ (paused, now on the Ignore List), Andrew Taraba ✓ (replied), Maddy ✓ (answered). ~~Fountain ○ (Alert #7). Still ○: James Diamond, Bailey.~~ → **08:50:** James Diamond + Bailey ✓ (reminders sent to LeNH/TuanNT). Fountain ✓ (completed manually 08:48, user decision; Alert #7 content kept for visibility). **All items complete, card marked done.**
 
 ---
 
@@ -283,6 +283,8 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 ## Unresolved Questions
 
-1. Is TuanNT/LeNH/PhucVT's 0h-on-2026-10-05 a logging gap (they did the work, didn't log it — strongly suggested for TuanNT by the live Matrix dispute at 10:39) or a real task-log policy change following that dispute? Worth asking TuanNT/LeNH/PhucVT directly tomorrow if 0h repeats.
-2. Andrew Taraba (Discord bizurk): should nuscarrick be nudged to answer animeworld's 3 pending questions, or is this expected to wait for business hours?
-3. OhCleo `LogoutView.post` 305s avg — real backend issue or a measurement artifact (e.g. one very slow outlier call skewing a small-N average)? Worth a second check next run.
+1. ~~Is TuanNT/LeNH/PhucVT's 0h-on-2026-10-05 a logging gap (they did the work, didn't log it — strongly suggested for TuanNT by the live Matrix dispute at 10:39) or a real task-log policy change following that dispute? Worth asking TuanNT/LeNH/PhucVT directly tomorrow if 0h repeats.~~ → Reminders sent 08:50 to TuanNT and LeNH. PhucVT not gated.
+2. ~~Andrew Taraba (Discord bizurk): should nuscarrick be nudged to answer animeworld's 3 pending questions, or is this expected to wait for business hours?~~ → user confirmed replied.
+3. ~~OhCleo LogoutView: artifact?~~ → Real: 6 hung calls on 10-05, new. Relay to Tony via Slack? (needs your OK)
+4. Fountain #575/#567 (live admin sign-up open): has Rick answered Kunal elsewhere? Item completed manually 08:48.
+5. Upwork memo parser fails on Aysar (`day_label_not_found`). Fix the script?
