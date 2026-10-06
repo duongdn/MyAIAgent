@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-06 (Tuesday)
 
-**Run:** 2026-10-06T05:00:00+07:00 (cron)
+**Run:** 2026-10-06T05:00:00+07:00 (cron), corrected 08:20–09:40 (+07:00) recheck
 **Window:** 2026-10-05T08:34:02+07:00 → now
 **Leave plan:** LongVV off half-day 2026-10-06 (dạ dày tái khám, PENDING). No other approved leave on record for the window.
 
@@ -12,10 +12,12 @@
 |---|--------|-------|
 | 1 | Sheets/Workstream | TuanNT 0h logged anywhere on Workstream for 2026-10-05 (checked all projects incl. Andrew Taraba `cmqyvioez007pqo0xn1iexfg3` directly — `rows: []`), despite being visibly active in Matrix (Bailey/Paturevision, Andrew Taraba rooms) discussing real work all day. No leave on record. Blocks Bailey + Rebecca + James Diamond-adjacent Trello items. |
 | 2 | Sheets/Workstream | LeNH 0h logged on Workstream for 2026-10-05 across all her projects (bxr_app, james_diamond, blair_brown, radio_data_center all show her only as reviewer, not as a logging member) despite Matrix (Rory/BXR room) showing her active in the wallet-cert-expiry thread. No leave on record. Blocks James Diamond item. |
-| 3 | Sheets/Workstream | PhucVT 0h logged on Workstream for 2026-10-05 (`crystal_lang`/Arthur has empty members) despite Matrix (Arthur room) showing him actively negotiating scope/budget with the client all day. No leave on record. |
-| 4 | Discord (Bizurk/Andrew Taraba) | animeworld (customer) asked nuscarrick 3 questions 06:57–07:01 UTC ("if we can do custom order status and order origin?", Origin showing "Unknown", order status "Shipped" on a POS order) — no reply from nuscarrick since (last reply from him was 02:05 UTC, before the questions). Unanswered customer direct ask. |
+| 3 | Sheets/Workstream | ~~PhucVT 0h logged on Workstream for 2026-10-05 (`crystal_lang`/Arthur has empty members) despite Matrix (Arthur room) showing him actively negotiating scope/budget with the client all day. No leave on record.~~ → **Not an alert (08:35):** PhucVT's hours aren't gated (Arthur, per user 10-01). Never alert or remind on his 0h days. |
+| 4 | Discord (Bizurk/Andrew Taraba) | ~~no reply from nuscarrick since (last reply from him was 02:05 UTC, before the questions)~~ → **Corrected 08:30:** nuscarrick replied only "Let me check" at 07:26 UTC (14:26 VN). animeworld then added 3 follow-ups at 07:27 UTC ("you can have the order status as a separate code snippet…", "we can toggle it off but still keep our pop up modal", **"is the modal code snippet complete?"**). Nothing substantive since (~18h). The customer asks (custom order status/origin on POS orders + is the modal snippet complete) are still open. |
 | 5 | Email (vuongtrancr@gmail.com) | 4× New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" for Swish — monitoring signal gaps, not confirmed resolved. |
-| 6 | Performance (OhCleo prod) | `LogoutView.post` avg 305.9s over 16 calls — new extreme outlier, far above the 5s threshold. |
+| 6 | Performance (OhCleo prod) | `LogoutView.post` avg 305.9s over 16 calls — new extreme outlier, far above the 5s threshold. **Re-checked 08:32:** not a measurement artifact. Median is 0.03s, but **6 calls on 10-05 took >60s (max 932s ≈ 15.5 min)**, against 0 slow calls on each of the previous 6 days (09-29→10-04). Real regression that started 10-05. We have no access to OhCleo infra, so it can only be relayed to Tony via Slack, which needs your OK first. |
+| 7 | Fountain Trello board (customer) | **New 08:40:** [kunalsheth 10-04 14:22 UTC on "Start here: review order for Claude's PRs"](https://trello.com/c/TdvfIo08) posted V2 release review notes. Part 1 asks for **live security fixes before anything V2**: **#575 admin sign-up is open on the live site** (`/admin/sign_up`, plus a request to audit and remove unknown admin accounts afterwards) and **#567 password reset accepts a missing code** (ship together), followed by #570/#574/#576/#577/#568/#571 etc. rick570 has only updated his own "Self note" checklist (10-05 10:23 UTC); there's no reply to Kunal on the card (~35h) and #575/#567 are still marked "need similar PR for Infinity". Customer ask with a live security exposure is open → Fountain ○. |
+| 8 | Maddy (Xtreme Slack DM) | **New 08:45:** client tester anomawasala ran return/relist/refund tests overnight (22:10–23:17 VN 10-05) and asked Kai **"Why the 8827 has paid amount even it's detached.?"** (23:17). No reply yet. It came in overnight, so it's fresh rather than neglected, but it's an open client question → Maddy ○ until Kai answers. |
 
 **Today (Tue Oct 6):** LongVV half-day leave (afternoon, pending). All other staff present per Matrix/Slack activity.
 
@@ -76,7 +78,7 @@ Trello: Maddy, Rory, Aysar, Franc, Elliott, MPFC, Marcel, Raymond, John Yi (canc
 | AirAgri (nusvinn) | ~15 | **Vinn's daily report present** ("Just report my process today: Deploy and setup the environment for WhatsApp on production, Fix th[e]..."). jdiamond active on induction/biosecurity workflow discussion, nusvinn answering his technical questions — no blocker. |
 | Bizurk (nuscarrick) | ~15 | See Alert #4 — animeworld's 3 questions (custom order status/origin, POS "Shipped" mislabel) unanswered since 06:57–07:01 UTC. |
 
-Trello: James Diamond item gated separately on LeNH (see Alert #2), not Discord — Discord check itself clean. Andrew Taraba: ⚠️ skipped (Alert #4).
+Trello: James Diamond item gated separately on LeNH (see Alert #2), not Discord — Discord check itself clean. Andrew Taraba: ⚠️ skipped (Alert #4). ~~unanswered since 06:57–07:01 UTC~~ → nuscarrick replied "Let me check" at 07:26 UTC. Customer follow-ups ("is the modal code snippet complete?") are still open, so it stays ○ (re-fetched 08:30, nothing new since).
 
 ---
 
@@ -110,7 +112,7 @@ Window covers 2026-10-05 (Monday, the last full workday).
 | OhCleo | — | DuongDN, MinhTV | need_review=false |
 | Andrew Taraba | 0h (TuanNT) | DuongDN (Manager) | need_review=false |
 
-Maddy JIRA weekly cross-check: not run this pass (Workstream-era script still reads stale Sheet per [[feedback_maddy_jira_weekly_check]] — no new info this run; LongVV only logged 1h this week so far, nothing to cross-check yet).
+Maddy JIRA weekly cross-check: ~~not run this pass~~ → see `## Maddy` section below (run 08:45).
 
 Trello: James Diamond, Bailey, Rebecca left ○ (Alert #1/#2). Maddy, Elliott, Aysar, Rory, Colin (paused), Blair Brown (paused), Arthur (paused) ✓ complete.
 
@@ -124,9 +126,49 @@ Trello: James Diamond, Bailey, Rebecca left ○ (Alert #1/#2). Maddy, Elliott, A
 
 **Part 3 — Plan vs Actual:** DatNT 8h/40h weekly plan (on pace, day 1 of 5). ThinhT 4h/20h (on pace). ViTHT 0h/40h logged so far — too early in the week to flag.
 
-**Trello board:** 90 Matrix messages today — all internal PR-review/QA coordination (PR #575/#567/#570/#574/#576/#577, 199 PRs in 2 days from Kunal's AI-generated code flagged by vutq as a volume concern, not a bug). No customer complaint messages (kunalsheth/tmmckay/mike62798179/iris63293413) seen in this window. Not independently re-pulled from the Trello board API this pass — Matrix traffic shows active, on-track work.
+**Trello board:** ~~90 Matrix messages today — all internal PR-review/QA coordination (PR #575/#567/#570/#574/#576/#577, 199 PRs in 2 days from Kunal's AI-generated code flagged by vutq as a volume concern, not a bug). No customer complaint messages (kunalsheth/tmmckay/mike62798179/iris63293413) seen in this window. Not independently re-pulled from the Trello board API this pass — Matrix traffic shows active, on-track work.~~ → **Board pulled live 08:40 (comments since 10-02):**
+- [Start here: review order for Claude's PRs](https://trello.com/c/TdvfIo08): **kunalsheth 10-04 14:22 UTC** posted the V2 release review. It asks for live fixes first: #575 (admin sign-up open on live, then audit unknown admins), #567 (password reset without code), #570/#574, #576/#577, #568/#571, #569/#572/#573/#579, #548. **No reply to Kunal**, only rick570's self-note update 10-05 10:23 UTC. → **Alert #7.**
+- [Server firewall (Fountain + Infinity)](https://trello.com/c/D2easXtz): rick570 confirmed the LIVE firewall is done and checkout tested (10-04 11:20 UTC). Resolved. (Note: credentials were pasted in plaintext in these card comments 10-02; not copied here.)
+- [Product page, Bottle engraving](https://trello.com/c/BAI99Jrx): Kunal approved "push live" 10-02. Done.
+- [Chatgpt Astra QC](https://trello.com/c/wEXmONY3): Kunal said to set it aside and work only from the "Start here" card. Answered.
 
-Trello: Fountain ✓ complete.
+**Part 4 — Capacity & Runway** ("Est vs Charged" tab, 106 rows): remaining est+CR−actual = **229.0h narrow** (Not Started + In-progress) / **328.5h broad** (excl. Deployed on Live/Cancelled). This week's dev plan is 100h (ViTHT 40 + DatNT 40 + ThinhT 20), so ~2.3 weeks of narrow runway.
+
+**Part 5 — Over-estimate tracking:** **37 rows** with actual > (est+CR)×1.2. Top: #2627 0.5h→8.25h (+1550%, Has Bug on Live), #2615 12h→106.75h (+790%, Staging), #2639 Infinity active/inactive card category 2h→16.5h (+725%, Staging), #2630 0.5h→3.75h, #2545 build-a-box modal 1h→7.5h, #2613 2h→14.5h. Prior-week comparison not computed this pass.
+
+Trello: ~~Fountain ✓ complete.~~ → **Fountain ○ (reverted 08:50, Alert #7).**
+
+---
+
+## Maddy — W41 — 08:45 (+07:00)
+
+### 1. Task Log Hours (Mon 2026-10-05)
+| Developer | Mon | Status |
+|-----------|-----|--------|
+| LongVV (Kai/Brian roles) | 0h on Maddy (raw rows) | Ad-hoc, informational only. ~~1h~~: that row is **LuHX**, whose role we don't manage. |
+| LuHX | 1h | Not managed by us |
+
+### 2. Slack / Kai Daily Report Check
+- Madhuraka↔Kai DM 10-05 09:08–09:21: Kai fixed the expired Xero connection for the client, commented on LIFM2-409, and asked Madhuraka to test 409 ASAP. Madhuraka said "Okay". No open ask from Madhuraka.
+- Kai report-presence gate: not applicable (0h LongVV Maddy hours on WS for 10-05, though he was clearly active; likely logging lag).
+- **anomawasala (client tester) 22:10–23:17 VN:** ran return/relist/refund scenarios on CB00036/B00040 and asked **"Why the 8827 has paid amount even it's detached.?"** No reply yet → **Alert #8** (fresh, overnight).
+
+### 3. JIRA (LIFM2)
+- 0 tickets updated since 10-05 08:00. No new comments.
+
+### 4. Bitbucket PRs (`xtreme-web/rms`, 7 open)
+| PR | Age | Comments | Note |
+|----|-----|----------|------|
+| #540 LIFM2-450 | 33d | 0 | Kai pushed an update 10-05 03:25 UTC |
+| #481 LIFM2-409 | 169d | 2 | Waiting on customer (known, not our blocker) |
+| #549 LIFM2-467 | 12d | 0 | — |
+| #548 LIFM2-468 | 14d | 1 | — |
+| #544 LIFM2-465 | 26d | 0 | — |
+| #534 concurrent cron fix | 41d | 1 | — |
+| #509 LIFM2-428 | 106d | 4 | — |
+No new review comments in the window.
+
+Trello: ~~Maddy ✓ complete~~ → **Maddy ○ (reverted 08:50, Alert #8).**
 
 ---
 
@@ -160,7 +202,7 @@ Full details: reports/2026-10-06/matrix-rooms-0509.md
 
 | Room | Time | Message |
 |------|------|---------|
-| NUS - Bailey - Paturevision 2026 (Resource Arrangement thread) | 10:24 | trinhmtt: "Em có đưa message đang đợi anh Dương review aj, bác nói nay bác test nà ạ, bác kiu mình request thì có thể pay liền roi test sau cũng đc á" — awaiting DuongDN's review/decision on a payment-before-test request. |
+| NUS - Bailey - Paturevision 2026 (Resource Arrangement thread) | 10:24 | trinhmtt: "Em có đưa message đang đợi anh Dương review aj, bác nói nay bác test nà ạ, bác kiu mình request thì có thể pay liền roi test sau cũng đc á" — awaiting DuongDN's review/decision on a payment-before-test request. → 🟢 **Superseded (checked 08:28):** no DuongDN reply in that room, but trinhmtt went ahead and posted the payment-request item list at 15:19 ("em đòi tiền các items này ạ") and the "Deployed on Live (payment requested & awaiting payment)" list at 15:49. Nothing left waiting on you. |
 | Potential - Wildsoul Wellness | 13:35 | anhnvn: "Anh Dương có mấy điểm cần check ở C, mấy vđ mới, note vào trong doc luôn nha." — DuongDN already replied same thread (13:37 "OK", 13:51 "A có trả lời 1 số câu hỏi nha") — resolved same day. |
 
 ### Key updates
@@ -188,7 +230,7 @@ Full details: reports/2026-10-06/matrix-rooms-0509.md
 | MPFC | 0.40 (poor, chronic) | 1560ms | 0.69% (270/39025) | 31.4/min |
 
 **OhCleo top errors (new/notable):** `IntegrityError` null `user_id` on `app_playhistory` (2×, recurring chronic bug), `AuthenticationFailed "Passwords don't match!"` (1×) — rest benign.
-**OhCleo slow transactions:** `LogoutView.post` avg **305,942ms** (16 calls) — 🔴 see Alert #6, extreme new outlier, needs investigation. `ChatSendView.post` 4006ms/10 calls. Rest <1.2s.
+**OhCleo slow transactions:** `LogoutView.post` avg **305,942ms** (16 calls) — 🔴 see Alert #6. Distribution checked 08:32: median 0.03s, 6 calls >60s on 10-05 (max 932s), 0 slow calls 09-29→10-04. A few logout requests are hanging (likely blocked on an external call/lock), which started 10-05. `ChatSendView.post` 4006ms/10 calls. Rest <1.2s.
 
 **MPFC top errors (all chronic, unchanged):** `E_WARNING "continue" targeting switch` ×248, `WP_Error::get_method()` undefined-method ×9 (months-old unresolved bug), `count(): Parameter must be array` ×4, rest 1-2× each (legacy-widget include path, mysqli DNS resolution, MM_Event class missing, get_header undefined).
 **MPFC slow transactions:** `author-sitemap.xml` 46.8s, `sitemap_index.xml` 44.9s, `search/m/feed/rss2` 31.7s, `account/login` 28.2s, `membermouse processOrder.php` 27.8s/3 calls — all chronic, previously reported.
@@ -201,9 +243,9 @@ Not gated by Trello.
 
 | Workroom | Result |
 |----------|--------|
-| Rory | Cloudflare challenge blocked — session/Cloudflare failure, not a memo-validity finding. |
-| Aysar | Login failed (live cookies + stored + headless all failed) — carrick's Chrome Profile 1 Upwork session needs a manual touch. |
-| Tokenlite (Marcel) | Cloudflare challenge blocked. |
+| Rory | ~~Cloudflare challenge blocked~~ → **Re-run 08:55:** 1 memo, valid: "Investigate BXR Apple Wallet pass generation error". |
+| Aysar | ~~Login failed~~ → Re-run 08:55: page loaded, but the parser returned `dom_fallback_day_label_not_found` with 0 memos (also 0 for 10-02). This is a script parsing bug, so Aysar memos for 10-05 are **unverified**, not confirmed empty. KhanhHH did log 5.83h Baamboozle that day. |
+| Tokenlite (Marcel) | ~~Cloudflare challenge blocked~~ → Re-run: 0 day cells (no hourly time logged 10-05). |
 
 Session/Cloudflare failures ≠ memo invalidity per existing rule — no alert, no Trello item exists for this piece specifically (not gated).
 
@@ -211,7 +253,7 @@ Session/Cloudflare failures ≠ memo invalidity per existing rule — no alert, 
 
 ## Scrin.io — 05:47 (+07:00)
 
-Not run this pass — time-boxed given scope of other findings this run. (Nick @ John Yi company account tracking — unrelated to TuanNT.)
+~~Not run this pass — time-boxed given scope of other findings this run.~~ → **Run 08:38: Scrin.io (Nick @ John Yi company account — 2026-10-05):** 0h, no sessions recorded. (John Yi project cancelled 09-28; expected.)
 
 ---
 
@@ -233,10 +275,10 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 ## Not run this pass (time-boxed)
 
-- Scrin.io (Nick/John Yi hours)
-- Fountain Trello board live re-pull (relied on Matrix traffic as proxy — no customer-complaint signal seen)
-- Full Maddy 4-part check (Bitbucket PR reply-rate / JIRA weekly) — Slack+Workstream portion only
-- Arthur 6-source full depth (paused project, Ignore List covers it)
+- ~~Scrin.io (Nick/John Yi hours)~~ → run 08:38
+- ~~Fountain Trello board live re-pull~~ → run 08:40, found Alert #7. Parts 4/5 also run.
+- ~~Full Maddy 4-part check~~ → run 08:45, found Alert #8
+- Arthur 6-source full depth: paused project, covered by the Ignore List (unchanged)
 
 ## Unresolved Questions
 
