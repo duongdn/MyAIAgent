@@ -348,6 +348,24 @@ def _parse_pub_date(pub: str) -> Optional[datetime]:
 MAX_ARTICLE_AGE_DAYS = 45
 
 
+def _title_tokens(title: str) -> set:
+    """Word set of a headline, minus the trailing " - Outlet" Google News adds."""
+    t = re.sub(r"\s+[-–|]\s+[^-–|]{2,60}$", "", title or "").lower()
+    return {w for w in re.findall(r"\w+", t) if len(w) > 1}
+
+
+def is_near_duplicate(title: str, seen: list, threshold: float = 0.5) -> bool:
+    """True if `title` reports the same story as one already in `seen` (list of token sets).
+    Overlap = shared words / smaller title — catches the same event rewritten by different outlets."""
+    tok = _title_tokens(title)
+    if len(tok) < 3:
+        return False
+    for other in seen:
+        if len(tok & other) / min(len(tok), len(other) or 1) >= threshold:
+            return True
+    return False
+
+
 def _normalize_url(url: str) -> str:
     """Match the redirect/tracking-param normalization applied in fetch_rss,
     so history URLs (already normalized) compare equal to freshly fetched ones."""
@@ -656,6 +674,7 @@ def main():
     }
 
     history = _load_url_history()
+    seen_titles = []  # token sets of kept headlines — near-dup filter across all sources in this call
 
     for topic_name, sources in selected:
         topic_result = {"topic": topic_name, "sources": []}
@@ -676,6 +695,12 @@ def main():
                 if history.get(_normalize_url(a.get("link", "")), 0) >= 2:
                     dropped += 1
                     continue
+                if len(kept) >= limit:
+                    break
+                if is_near_duplicate(a.get("title", ""), seen_titles):
+                    data["nearDupDropped"] = data.get("nearDupDropped", 0) + 1
+                    continue
+                seen_titles.append(_title_tokens(a.get("title", "")))
                 kept.append(a)
             data["articles"] = kept[:limit]
             if dropped:
