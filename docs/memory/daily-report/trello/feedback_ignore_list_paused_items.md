@@ -13,3 +13,5 @@ metadata:
 
 If user un-pauses one later, remove it from the ignore list and restore its normal gate check ([[feedback_arthur_blair_brown_gate_added]], [[feedback_philip_msteams_consolidated]], [[feedback_solid_code_new_workspace_unwired]]).
 **2026-09-28:** user: "Add John Yii vô cancel project" → John Yi - Amazing Meds added to Ignore List (reason: Cancelled). Skip Amazing Meds Slack gate; TuanNT 0h no longer blocks John Yi (still gates Bailey + Rebecca).
+
+**2026-10-06:** user: "Rebecca đã pause, bữa nói rồi mà" → Rebecca (William Bills) added to Ignore List (Paused). Auto-complete; TuanNT hours now gate only Bailey.

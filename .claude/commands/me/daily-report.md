@@ -571,11 +571,12 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 | `blair_brown` | Blair Brown - Peptide Clyde | Paused |
 | `philip` | Philip | Paused |
 | `johnyi` | John Yi - Amazing Meds | Cancelled (2026-09-28) |
+| `rebecca` | Rebecca (William Bills) | Paused (2026-10-06) |
 
 Report format:
 ```
 ## Ignore List — {HH:MM} (+07:00)
-Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds
+Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills)
 ```
 
 If the user un-pauses one of these later, remove its row from this table and restore its normal gate mapping row below.

@@ -10,14 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Sheets/Workstream | TuanNT 0h logged anywhere on Workstream for 2026-10-05 (checked all projects incl. Andrew Taraba `cmqyvioez007pqo0xn1iexfg3` directly — `rows: []`), despite being visibly active in Matrix (Bailey/Paturevision, Andrew Taraba rooms) discussing real work all day. No leave on record. Blocks Bailey + Rebecca + James Diamond-adjacent Trello items. |
-| 2 | Sheets/Workstream | LeNH 0h logged on Workstream for 2026-10-05 across all her projects (bxr_app, james_diamond, blair_brown, radio_data_center all show her only as reviewer, not as a logging member) despite Matrix (Rory/BXR room) showing her active in the wallet-cert-expiry thread. No leave on record. Blocks James Diamond item. |
+| 1 | Sheets/Workstream | TuanNT 0h logged anywhere on Workstream for 2026-10-05 (checked all projects incl. Andrew Taraba `cmqyvioez007pqo0xn1iexfg3` directly — `rows: []`), despite being visibly active in Matrix (Bailey/Paturevision, Andrew Taraba rooms) discussing real work all day. No leave on record. Blocks Bailey + Rebecca + James Diamond-adjacent Trello items. → **08:46 re-query: still 0h** (all 24 visible projects; "Others" returns 403 for DuongDN). Blocks **Bailey only**: Rebecca is paused (Ignore List, per user 10-06). Re-checking after 09:30. |
+| 2 | Sheets/Workstream | LeNH 0h logged on Workstream for 2026-10-05 across all her projects (bxr_app, james_diamond, blair_brown, radio_data_center all show her only as reviewer, not as a logging member) despite Matrix (Rory/BXR room) showing her active in the wallet-cert-expiry thread. No leave on record. Blocks James Diamond item. → **08:46 re-query: still 0h** on James Diamond (only AnhNH2 4h). Re-checking after 09:30. |
 | 3 | Sheets/Workstream | ~~PhucVT 0h logged on Workstream for 2026-10-05 (`crystal_lang`/Arthur has empty members) despite Matrix (Arthur room) showing him actively negotiating scope/budget with the client all day. No leave on record.~~ → **Not an alert (08:35):** PhucVT's hours aren't gated (Arthur, per user 10-01). Never alert or remind on his 0h days. |
-| 4 | Discord (Bizurk/Andrew Taraba) | ~~no reply from nuscarrick since (last reply from him was 02:05 UTC, before the questions)~~ → **Corrected 08:30:** nuscarrick replied only "Let me check" at 07:26 UTC (14:26 VN). animeworld then added 3 follow-ups at 07:27 UTC ("you can have the order status as a separate code snippet…", "we can toggle it off but still keep our pop up modal", **"is the modal code snippet complete?"**). Nothing substantive since (~18h). The customer asks (custom order status/origin on POS orders + is the modal snippet complete) are still open. |
+| 4 | Discord (Bizurk/Andrew Taraba) | ~~no reply from nuscarrick since (last reply from him was 02:05 UTC, before the questions) → **Corrected 08:30:** nuscarrick replied only "Let me check" at 07:26 UTC (14:26 VN). animeworld then added 3 follow-ups at 07:27 UTC ("you can have the order status as a separate code snippet…", "we can toggle it off but still keep our pop up modal", **"is the modal code snippet complete?"**). Nothing substantive since (~18h). The customer asks (custom order status/origin on POS orders + is the modal snippet complete) are still open.~~ → **Resolved per user 08:44:** nuscarrick did reply. Andrew Taraba ✓. |
 | 5 | Email (vuongtrancr@gmail.com) | 4× New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" for Swish — monitoring signal gaps, not confirmed resolved. |
 | 6 | Performance (OhCleo prod) | `LogoutView.post` avg 305.9s over 16 calls — new extreme outlier, far above the 5s threshold. **Re-checked 08:32:** not a measurement artifact. Median is 0.03s, but **6 calls on 10-05 took >60s (max 932s ≈ 15.5 min)**, against 0 slow calls on each of the previous 6 days (09-29→10-04). Real regression that started 10-05. We have no access to OhCleo infra, so it can only be relayed to Tony via Slack, which needs your OK first. |
 | 7 | Fountain Trello board (customer) | **New 08:40:** [kunalsheth 10-04 14:22 UTC on "Start here: review order for Claude's PRs"](https://trello.com/c/TdvfIo08) posted V2 release review notes. Part 1 asks for **live security fixes before anything V2**: **#575 admin sign-up is open on the live site** (`/admin/sign_up`, plus a request to audit and remove unknown admin accounts afterwards) and **#567 password reset accepts a missing code** (ship together), followed by #570/#574/#576/#577/#568/#571 etc. rick570 has only updated his own "Self note" checklist (10-05 10:23 UTC); there's no reply to Kunal on the card (~35h) and #575/#567 are still marked "need similar PR for Infinity". Customer ask with a live security exposure is open → Fountain ○. |
-| 8 | Maddy (Xtreme Slack DM) | **New 08:45:** client tester anomawasala ran return/relist/refund tests overnight (22:10–23:17 VN 10-05) and asked Kai **"Why the 8827 has paid amount even it's detached.?"** (23:17). No reply yet. It came in overnight, so it's fresh rather than neglected, but it's an open client question → Maddy ○ until Kai answers. |
+| 8 | Maddy (Xtreme Slack DM) | ~~**New 08:45:** client tester anomawasala ran return/relist/refund tests overnight (22:10–23:17 VN 10-05) and asked Kai **"Why the 8827 has paid amount even it's detached.?"** (23:17). No reply yet. It came in overnight, so it's fresh rather than neglected, but it's an open client question → Maddy ○ until Kai answers.~~ → **Resolved per user 08:44:** Maddy questions all answered. Maddy ✓. |
 
 **Today (Tue Oct 6):** LongVV half-day leave (afternoon, pending). All other staff present per Matrix/Slack activity.
 
@@ -89,7 +89,7 @@ Window covers 2026-10-05 (Monday, the last full workday).
 | Developer | 2026-10-05 hours (all projects) | Status |
 |-----------|-------|--------|
 | LongVV | 1h (Maddy) | Ad-hoc, no fixed target — informational only. |
-| KhanhHH | 5.83h (Baamboozle/Aysar) | OK. |
+| KhanhHH | ~~5.83h (Baamboozle/Aysar)~~ → **8h** (Baamboozle 5.83h + BXR App 2.17h, filled by 08:46) | OK. |
 | TuanNT | 0h across every project incl. Andrew Taraba (direct-queried) | 🔴 ALERT #1 |
 | LeNH | 0h across every project (reviewer-only roles) | 🔴 ALERT #2 |
 | PhucVT | 0h (Arthur/crystal_lang empty) | 🔴 ALERT #3 |
@@ -114,7 +114,7 @@ Window covers 2026-10-05 (Monday, the last full workday).
 
 Maddy JIRA weekly cross-check: ~~not run this pass~~ → see `## Maddy` section below (run 08:45).
 
-Trello: James Diamond, Bailey, Rebecca left ○ (Alert #1/#2). Maddy, Elliott, Aysar, Rory, Colin (paused), Blair Brown (paused), Arthur (paused) ✓ complete.
+Trello: James Diamond, Bailey ~~, Rebecca~~ left ○ (Alert #1/#2). Rebecca ✓ (paused, 08:46). Maddy, Elliott, Aysar, Rory, Colin (paused), Blair Brown (paused), Arthur (paused) ✓ complete.
 
 ---
 
@@ -168,7 +168,7 @@ Trello: ~~Fountain ✓ complete.~~ → **Fountain ○ (reverted 08:50, Alert #7)
 | #509 LIFM2-428 | 106d | 4 | — |
 No new review comments in the window.
 
-Trello: ~~Maddy ✓ complete~~ → **Maddy ○ (reverted 08:50, Alert #8).**
+Trello: ~~Maddy ○ (reverted, Alert #8)~~ → **Maddy ✓ (08:46, user confirmed answered).**
 
 ---
 
@@ -259,7 +259,7 @@ Session/Cloudflare failures ≠ memo invalidity per existing rule — no alert, 
 
 ## Ignore List — 05:48 (+07:00)
 
-Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds.
+Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills) (paused, added 10-06).
 
 ---
 
@@ -269,7 +269,8 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check progress:**
 - ✓ complete: Maddy, John Yi (cancelled), Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena-SamGuard (paused), Raymond, Neural Contract, Colin (paused), Fountain, Philip (paused), Ohcleo, Arthur (paused), Blair Brown (paused), Elena-WordPress-SamGuard.
-- ○ left incomplete: **James Diamond** (LeNH 0h, Alert #2), **Bailey** (TuanNT 0h, Alert #1), **Rebecca** (TuanNT 0h, Alert #1), **Andrew Taraba** (unanswered customer ask, Alert #4).
+- ○ left incomplete: **James Diamond** (LeNH 0h, Alert #2), **Bailey** (TuanNT 0h, Alert #1), ~~**Rebecca** (TuanNT 0h, Alert #1), **Andrew Taraba** (unanswered customer ask, Alert #4).~~
+- **Corrected 08:46:** Rebecca ✓ (paused, now on the Ignore List), Andrew Taraba ✓ (replied), Maddy ✓ (answered). Fountain ○ (Alert #7). Still ○: James Diamond, Bailey (task log, re-checking after 09:30).
 
 ---
 
