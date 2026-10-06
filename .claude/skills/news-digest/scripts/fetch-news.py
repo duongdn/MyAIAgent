@@ -19,7 +19,7 @@ Topics:
 
 Options:
   --tag=xxx  Filter articles whose title or description contains xxx (case-insensitive, word-boundary for short tags)
-  --limit=N  Max articles per source (default: 100)
+  --limit=N  Max articles per source (default: 5)
 
 Output: JSON { topic, tag, fetchedAt, results: [{ topic, sources: [{ name, url, articles, error }] }] }
 """
@@ -618,7 +618,7 @@ CACHE_FILE = "/tmp/news-digest-cache.json"
 def parse_args(argv):
     topic = "all"
     tag = None
-    limit = 100
+    limit = 5
     save_cache = None
 
     for arg in argv[1:]:
@@ -660,10 +660,12 @@ def main():
     for topic_name, sources in selected:
         topic_result = {"topic": topic_name, "sources": []}
         for source in sources:
+            # Over-fetch so dedup below doesn't starve the source; final cap is `limit`.
+            fetch_n = max(limit * 4, 20)
             if source.get("fb_id"):
-                data = fetch_facebook_page(source, limit, tag)
+                data = fetch_facebook_page(source, fetch_n, tag)
             else:
-                data = fetch_rss(source, limit, tag)
+                data = fetch_rss(source, fetch_n, tag)
 
             # Cap each article at 2 total appearances across all past reports.
             # Enforced here (mechanically) rather than left to manual grepping

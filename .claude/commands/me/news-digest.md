@@ -15,8 +15,8 @@ Fetch and synthesize news digest by topic and optional tag filter.
 **Topics (ưu tiên VN trước):** `all` (default) | `vn-stocks` | `vn-business` | `vinfast` | `ai` | `it` | `php` | `finance` | `security` | `stocks`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
-- `--limit=N` — số bài fetch mỗi nguồn (default: 100)
-- `--more` — hiển thị 5 bài/nguồn thay vì 3, tóm tắt 2-3 câu, kèm ngày đăng
+- `--limit=N` — số bài fetch mỗi nguồn (default: 5 — chỉ tăng khi user yêu cầu)
+- `--more` — tóm tắt 2-3 câu, kèm ngày đăng
 - `--raw` — giữ ngôn ngữ gốc, không dịch
 
 **Examples:**
@@ -27,7 +27,7 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest it --tag=ai --more      → IT/AI, đầy đủ hơn
 /news-digest stocks --limit=10       → fetch 10 bài/nguồn
 /news-digest stocks --raw            → global stocks, ngôn ngữ gốc (EN)
-/news-digest ai --more --limit=10    → fetch 10, hiển thị 5/nguồn, tóm tắt dài
+/news-digest ai --more --limit=10    → fetch + hiển thị 10/nguồn, tóm tắt dài
 ```
 
 ## Recheck Mode (chạy lại cùng ngày)
@@ -89,15 +89,15 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 
 **Khi `topic=all` — chạy 9 lệnh riêng (VN trước, US stocks cuối cùng), synthesize từng section ngay sau khi nhận kết quả, viết output theo ĐÚNG thứ tự này:**
 ```bash
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=100
-.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=100
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vinfast   --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py ai        --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py it        --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=5
 ```
 
 **🔴 Scratch files — BẮT BUỘC dùng thư mục riêng cho mỗi run** (sự cố 2026-10-05: chờ bằng `until [ $(ls /tmp/nd-section-*.md | wc -l) -ge 9 ]` → glob khớp file nháp cũ từ tháng 7/8 còn trong `/tmp` → ghép report trước khi subagent xong → section VN chứng khoán/kinh doanh là bài tháng 7, đã commit):
@@ -160,16 +160,16 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - PHẢI có ĐỦ 4 section riêng, theo đúng thứ tự: `### 📰 Thiệu Nguyễn — Substack`, `### 📱 Thiệu Nguyễn — Facebook AI`, `### 📱 Duy Nguyen (mrgoonie) — Facebook AI`, `### 📱 Nghiện AI (Facebook Group) — Facebook AI`, đặt SAU các nguồn AI khác, TRƯỚC Điểm nổi bật
 - KHÔNG BAO GIỜ được bỏ qua 4 section này dù context có hạn — đây là nguồn ưu tiên cao (đã bị bỏ sót nhiều lần, xem `feedback_news_digest_thieu_nguyen_rss_timeout`)
 - Nếu nguồn trả về 0 bài (lỗi hoặc trống), ghi: `_(Không có bài mới từ Substack)_` / `_(Không có bài mới từ Facebook)_`
-- Hiển thị TẤT CẢ bài từ mỗi nguồn (không cắt bớt)
+- Tối đa 5 bài/nguồn như các nguồn khác
 - **Verify trước khi lưu file:** sau khi soạn xong markdown, grep cả 4 header trên trong nội dung sắp ghi — nếu thiếu bất kỳ header nào, PHẢI bổ sung trước khi Write, không được lưu file thiếu section
 
 **Rules — chế độ mặc định:**
-- Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)
+- Tối đa 5 bài/nguồn (= --limit mặc định). Chỉ nhiều hơn khi user truyền --limit=N
 - Tóm tắt mỗi bài trong 1 câu tiếng Việt
 - Không hiển thị ngày đăng
 
 **Rules — khi có `--more`:**
-- Hiển thị TẤT CẢ bài đã fetch (không giới hạn số bài/nguồn)
+- Tối đa 5 bài/nguồn (= --limit mặc định). Chỉ nhiều hơn khi user truyền --limit=N
 - Tóm tắt mỗi bài 2–3 câu tiếng Việt, chi tiết hơn
 - Hiển thị ngày đăng sau tiêu đề: `· {pubDate}`
 - Điểm nổi bật mở rộng: 4–6 gạch đầu dòng
