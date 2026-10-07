@@ -109,6 +109,23 @@ Mục tiêu: mỗi giờ trên invoice (26.25h) phải chỉ ra được ticket 
 
 **Còn chờ Kai:** K1 (PR conflicts 0.5h thuộc ticket nào), K2 (466 không est: ai yêu cầu), K6 (459 rework 3 lần: vì sao), K7 (409 scenario: mới hay cũ), K8 (467 vượt est gấp đôi), danh sách bug tự fix không charge, xác nhận doc đã gửi Maddy chưa; log JIRA cho 428, 468, 466, 459, 409, 467.
 
+### Cập nhật 13:50: Slack Kai ↔ Madhuraka (DM `D050TGMRFRQ`), doc đã gửi chưa?
+
+**Đã gửi.** Timeline:
+- 15/09 08:54: Madhuraka gửi log issue của LIF (doc + sheet đánh số). Kai: "I will check and give detailed item **can chargable estimates** for you." Madhuraka: LIF "pretty upset about issues not being fixed", muốn báo "đã check và **fix hết**".
+- 16/09: Kai charge **5h** (K3) để điều tra.
+- 17/09 10:29: [Kai gửi doc](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1789615758052749?thread_ts=1789437285.771429) + sheet các issue đã fix. 22/09 18:04 gửi lại link khi Madhuraka hỏi → **Madhuraka đã nhận doc.**
+- 21/09: Madhuraka **approve 1h** sửa (`site:`, tăng số kết quả) → PR #548. Nhưng WS charge 468 = **2.5h** (22/09 1.5h + 02/10 1h) → **vượt 1.5h** so với approve.
+- 25/09: Kai xin thêm 1–2h tìm hướng cải thiện. Madhuraka: "I don't think they will approve… **Ok. I will absorb that cost.** You can proceed" → K10 (1h, 28/09) **có approve**, nhưng là tiền **Maddy tự bỏ ra**. Đây chính là chỗ Maddy than "coming out of my pocket".
+- 28/09: Kai gửi suggestion (tab "Solutions for Not Fixed item").
+- 🔴 **03/10 14:32: Madhuraka hỏi 2 câu** (include term phân cách bằng dấu phẩy có fix issue 2 không; include term override global exclude word có fix issue 1 không). **Chưa trả lời, 4 ngày.**
+
+**Kết luận:**
+- 5h K3 có bằng chứng (doc gửi 17/09, Madhuraka đã đọc). Nhưng **không được approve trước**: Kai chỉ nói sẽ đưa estimate, rồi charge luôn 5h cho bước điều tra. Madhuraka có thể coi là chi phí đánh giá bug.
+- 468: approve 1h, charge 2.5h → 1.5h vượt cần giải thích hoặc credit.
+- K10 1h: Madhuraka đã đồng ý absorb, giữ được.
+- Phải trả lời ngay 2 câu hỏi 03/10 trước khi gửi bảng đối chiếu. Đang chậm trả lời đúng lúc khách complain.
+
 ## 5. Kết luận và đề xuất
 
 1. Giờ không phải ảo: WS có đủ, invoice còn thấp hơn WS 5.5h. **Lỗi quy trình:** Kai không log worklog JIRA cho ~21h (2/3 tổng giờ), có việc làm không tạo ticket, có task không est.
