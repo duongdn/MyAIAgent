@@ -130,13 +130,19 @@ Not wired yet. There is no Jira config in `config/`. Once the user provides it, 
 
 ## Report Format
 
-```markdown
-# Elena OP — {date} {HHMM}
-## Summary  (1–3 lines: 🔴/⚠️/✅ counts)
-## PRs   (table: # | OP key | author | code | spec | verdict | cross-reviewed? | key findings) + review drafts
-## Room  (done / in progress / blockers / for DuongDN)
-## Env
-## Jira  (or "not configured")
-## Unresolved questions
-```
+🔴 **The reader is a general reviewer, not a specialist in this code** (user feedback 2026-10-07: "a few lines like that aren't enough for me to understand"). Write the report **in Vietnamese** and explain it in detail. Put everything in the report file. Chat only gives the path plus a 2–3 line summary. Leave out side items (process questions, unrelated suggestions).
+
+For **each PR**, write:
+1. **What the PR does:** 3–5 lines of plain business explanation (what the feature is for, which module, who uses it). No jargon unless explained.
+2. **Conclusion:** ✅ / 💬 / ❌ plus one sentence on why.
+3. **Each issue** as its own block:
+   - **Problem:** what it is, at `file:line`, with a short code excerpt if needed
+   - **Why it matters:** a concrete scenario (who does what → what goes wrong → consequence for the customer or the business)
+   - **How to fix:** a specific suggestion
+   - **Severity:** 🔴 must fix before merge / ⚠️ should fix / 💬 minor
+4. **Spec (OpenSpec):** in the same format, plus a line saying whether the spec matches the code.
+5. **Good points:** brief, so the reader knows what was checked and is OK.
+
+Order PRs by severity. At the top, a summary table and "what DuongDN needs to do now" (at most 3 items).
+
 Always include links (PR URLs, room permalink). At the end, update `config/.elena-op-state.json` `last_run` and read it back to verify.
