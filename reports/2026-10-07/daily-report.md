@@ -23,6 +23,7 @@
 | 11 | Email (vuongtrancr@) | 2× New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" for Swish (23:57 + 00:08 UTC 10-05/06). Recurring monitoring gap. |
 | 12 | Email (carrick@) | GitLab: **Carrick's compute minutes are exhausted** (25% → 5% → 0 on 10-06 08:49–08:53 UTC). Since then every `definitive-guide` pipeline fails (upgrade/cp1-laravel10, cp1-staging-fixes, cp1-gate, cp2-laravel13), which blocks CI for the Laravel upgrade PhucVT is taking over. |
 | 13 | Email (ken@) | ken@ was **not scanned**: Zoho IMAP rejected the stored password (`AUTHENTICATIONFAILED`). The config plaintext (09-26) is newer than the `.enc` copy (07-28), so the app password was probably rotated or revoked on Zoho. A new app password is needed. → Ken mail ○. **08:38 recheck:** this is not a clobber. The plaintext and `.enc` hold the same password, and every historical password in git (7 commits) also fails with `AUTHENTICATIONFAILED`, so the app password really was revoked or rotated on Zoho. |
+| 14 | Matrix PHP Projects (Maddy) | **11:10 added:** Maddy complained (via chientx 09:35) that Kai's invoice hours ≠ JIRA hours. Kai has WS 31.75h, invoice 26.25h, JIRA 10.5h, so ~21h are missing from JIRA. Includes recurring quoting-tool bugs on already-billed work. NamTV asked for an explanation + recurring-bug list + mobile dev tracking. Analysis: [maddy-invoice-reconciliation.md](maddy-invoice-reconciliation.md). Reply not sent yet. → Maddy ○ |
 
 **Today (Wed Oct 7):** No approved leave on record. ThinhT is off 10-12 (planned).
 
