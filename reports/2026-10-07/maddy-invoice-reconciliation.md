@@ -126,6 +126,39 @@ Mục tiêu: mỗi giờ trên invoice (26.25h) phải chỉ ra được ticket 
 - K10 1h: Madhuraka đã đồng ý absorb, giữ được.
 - Phải trả lời ngay 2 câu hỏi 03/10 trước khi gửi bảng đối chiếu. Đang chậm trả lời đúng lúc khách complain.
 
+
+## ✅ BẢNG CHỐT 14:35: từng ngày theo invoice vs JIRA (thay thế các số ở trên)
+
+Nguồn: WS LongVV project Maddy (bỏ 2 dòng tag "Làm trước report sau" = không bill), JIRA live (worklog + comment/status của Kai).
+
+| Ngày | Bill | Task | JIRA worklog | JIRA update cùng ngày | Kết luận |
+|---|---|---|---|---|---|
+| 07/09 | 0.5h | Check feedback & resolve PR conflicts | — | — | ❌ không ticket |
+| 09/09 | 0.5h | 455 Refresh Quotes page | 0.5h | status | ✅ |
+| 09/09 | 0.5h | 452 4W Sent status | 0.5h | — | ✅ |
+| 09/09 + 10/09 | 1.5 + 2.5h | 464 Invalidate Proceed buttons | 4h | status | ✅ |
+| 10/09 | 1h | 465 Quote-email tab feedback | 1h | est, status, comment | ✅ |
+| 10/09 | 2h | 409 Check Anoma feedback | 2h | status | ✅ |
+| 16/09 | ~~3h~~ | 466 Tagging Postmark | — | — | không bill |
+| 16/09 | 5h | Check issue quoting tool & feedback | — | — | ❌ không ticket (ra doc gửi Maddy 17/09) |
+| 22/09 | ~~2.5h~~ | 467 In-Home Quote Form | — | — | không bill |
+| 22/09 | 1.5h | 468 Quoting Tool Issue | — | status, description | ⚠️ có update, **thiếu worklog** |
+| 24/09 | 1.5h | Guideline deploy 428 | — | comment + attach zip | ⚠️ có update, **thiếu worklog** |
+| 25/09 | 2h | 459 Check Anoma feedback | — | status, comment | ⚠️ có update, **thiếu worklog** |
+| 25/09 | 2h | 409 Check Anoma scenario | — | status, comment | ⚠️ có update, **thiếu worklog** |
+| 25/09 | 2.5h | 467 In-Home Quote Form | 2.5h | — | ✅ |
+| 28/09 | 1h | Investigate items sold draft on Shopify | — | — | ❌ không ticket (Slack) |
+| 28/09 | 1h | Investigate improve quoting tool | — | — | ❌ không ticket (Slack, Maddy tự chịu) |
+| 01/10 | 0.25h | Fix payout bracket issue | — | — | ❌ không ticket (Slack) |
+| 02/10 | 1h | 468 Check quoting tool | 1h (log 07/10) | status, comment | ✅ (mới log hôm nay) |
+| **Tổng** | **26.25h** | | **11.5h** | | lệch **14.75h** |
+
+**Lệch 14.75h gồm 2 nhóm:**
+- **7.75h không ticket:** 5h điều tra quoting tool, 1h + 1h + 0.25h việc qua Slack, 0.5h PR conflicts
+- **7h có ticket, JIRA có update nhưng quên điền worklog:** 409 2h, 459 2h, 428 1.5h, 468 1.5h
+
+**Vì sao Kai nói ít mà đào ra nhiều:** Kai đã tự liệt kê gần hết nhóm không ticket (5h, 1h, 1h, 0.25h) + 428. Còn 409/459/468 ngày đó Kai **có update JIRA** (đổi status, comment) nên nghĩ là đã update. Thực ra chỉ thiếu ô worklog. Phần Kai **chưa nhắc**: 409 2h, 459 2h, 468 thêm 0.5h, PR conflicts 0.5h = **5h**.
+
 ## 5. Kết luận và đề xuất
 
 1. Giờ không phải ảo: WS có đủ, invoice còn thấp hơn WS 5.5h. **Lỗi quy trình:** Kai không log worklog JIRA cho ~21h (2/3 tổng giờ), có việc làm không tạo ticket, có task không est.
