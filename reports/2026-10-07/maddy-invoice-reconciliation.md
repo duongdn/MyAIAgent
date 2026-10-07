@@ -46,7 +46,7 @@ Nguồn: Invoice PDF, `Kai Worklog.xlsx` (JIRA export Maddy gửi), Workstream r
 
 ## 4. Mobile dev (LuHX), NamTV: "cần nắm"
 
-WS 19h (21–27/09) + 8.25h (28/09–04/10) = **khớp đúng invoice**. Nội dung: Implement shift notes Integra ETC 8h, sau đó **fix shift notes / fix endshift / fix issue shiftnotes / check issue login / night supervision ~19h**, tức là phần fix bug > phần build. **Không có ticket JIRA nào trong task log** → nếu Maddy hỏi tiếp về mobile thì cũng không có worklog để đối chiếu. Rủi ro tương tự.
+~~Không có ticket JIRA nào trong task log~~ **Sửa 11:25 (anh Dương chỉ ra):** LuHX log JIRA dưới tên **Jeff Nguyen**, ticket **IHC-52 "Shift Notes"** (project IHC, không phải LIFM2). Worklog 07/09–04/10 = **27h** vs WS **27.25h** vs invoice **27.25h**, khớp từng ngày, chỉ thiếu 0.25h ngày 30/09. Mobile **không có vấn đề lệch giờ**. Lưu ý: IHC-52 **không có estimate** (est 0), đang ở Testing.
 
 ## 5. Kết luận và đề xuất
 
@@ -61,12 +61,12 @@ WS 19h (21–27/09) + 8.25h (28/09–04/10) = **khớp đúng invoice**. Nội d
 > Em rà xong T9 (07/09–04/10) rồi ạ:
 > - Kai: WS 31.75h, invoice đã giảm còn 26.25h, JIRA chỉ 10.5h → lệch 15.75h là do Kai **không log worklog JIRA** (~21h không có trên JIRA: 13.5h có ticket nhưng ko log, 7.75h không có ticket). Không phải bill khống.
 > - Bug lặp: quoting tool là điểm nóng (≥25 ticket từ 10/2025; T9 còn 468 + ~6h investigate không ticket), 455 bị trả 2 lần, 465 phát sinh từ task 449/451 đã bill, 459 trả 2 lần. Phần này ~10h, đề xuất credit lại cho Maddy.
-> - Mobile (LuHX) 27.25h khớp invoice nhưng ~19h là fix shift notes/login, không có ticket → cũng cần ticket + worklog.
+> - Mobile (LuHX = Jeff Nguyen trên JIRA): 27.25h khớp worklog IHC-52 (27h), ok. Chỉ thiếu est cho IHC-52.
 > - Từ nay: bắt buộc log JIRA cùng ngày, không ticket không charge, task mới phải est trước. Task mới có scope rõ thì chuyển fixed cost như a Nam nói.
 > Chi tiết bảng đối chiếu: reports/2026-10-07/maddy-invoice-reconciliation.md
 
 ## Unresolved questions
 1. Credit bao nhiêu giờ cho Maddy (đề xuất ~9.5–10.5h)? Hay giải thích và giữ nguyên?
 2. 3h + 2.5h đã giảm ở W2/W3: ai giảm, giảm phần nào? Nên nói rõ với Maddy để thấy đã có thiện chí.
-3. Mobile (LuHX) dùng tracking gì phía khách? Memory ghi LuHX trên Maddy là "role khác, không managed bởi mình", nhưng NamTV bảo phải nắm. Có cập nhật rule không?
+3. ~~Mobile tracking~~ resolved: LuHX = Jeff Nguyen, IHC-52. Memory "LuHX not managed" vẫn giữ cho daily gate, hay đổi theo NamTV "cần nắm"?
 4. Ai trả lời Maddy: chientx (người nhận WhatsApp) hay Kai/LongVV trực tiếp?
