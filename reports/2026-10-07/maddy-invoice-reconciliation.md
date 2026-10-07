@@ -48,6 +48,37 @@ Nguồn: Invoice PDF, `Kai Worklog.xlsx` (JIRA export Maddy gửi), Workstream r
 
 ~~Không có ticket JIRA nào trong task log~~ **Sửa 11:25 (anh Dương chỉ ra):** LuHX log JIRA dưới tên **Jeff Nguyen**, ticket **IHC-52 "Shift Notes"** (project IHC, không phải LIFM2). Worklog 07/09–04/10 = **27h** vs WS **27.25h** vs invoice **27.25h**, khớp từng ngày, chỉ thiếu 0.25h ngày 30/09. Mobile **không có vấn đề lệch giờ**. Lưu ý: IHC-52 **không có estimate** (est 0), đang ở Testing.
 
+## Checklist issue Kai (LongVV) cần kiểm tra — thêm 11:35
+
+Mục tiêu: mỗi giờ trên invoice (26.25h) phải chỉ ra được ticket + worklog JIRA, hoặc giải thích được. Kai rà từng dòng, ghi kết quả vào cột "Kai xác nhận".
+
+| # | Ngày | WS | Việc (WS) | JIRA | Issue | Kai cần làm / trả lời | Kai xác nhận |
+|---|---|---|---|---|---|---|---|
+| K1 | 07/09 | 0.5h | Check feedback & resolve PR conflicts | không ticket | Không biết thuộc ticket nào | Thuộc ticket nào? Log worklog vào ticket đó | |
+| K2 | 16/09 | 3h | LIFM2-466 Tagging Postmark emails | 0h, To Do, **không est** | Task mới làm không est, không worklog, status không update | Log 3h, set est, update status. Khách có yêu cầu task này không (link msg)? | |
+| K3 | 16/09 | **5h** | Check Issue quoting tool & feedback | không ticket | Dòng lớn nhất không ticket. Nghi là bug quoting tool (task đã bill) | Cụ thể issue gì, ai report, liên quan ticket nào (463/468?). Là bug do mình hay yêu cầu mới? | |
+| K4 | 22/09 + 02/10 | 2.5h | LIFM2-468 Quoting Tool Issue (Bug) | 0h, **không est** | Bug, không est, không worklog | Log worklog. Nguyên nhân: lỗi code mình hay do data/khách? | |
+| K5 | 24/09 | 1.5h | Write guidelines deploy LIFM2-428 cho Madhuraka | 0h | Không log | Madhuraka có yêu cầu viết guideline không? Log vào 428 | |
+| K6 | 25/09 | 2h | LIFM2-459 Check Anoma feedback | 0h (spent 2h > est 1.5h) | Rework lần 3 (trả về 24/08, 07/09) | Vì sao bị trả về 2 lần? Lỗi mình sót hay khách đổi yêu cầu? | |
+| K7 | 25/09 | 2h | LIFM2-409 Check Anoma Scenario | 0h (JIRA chỉ 2h ngày 10/09) | 409 đã gần hết est (111.25/113.25h) | Log 2h. Scenario mới (Buy-out?) hay test lại phần cũ? | |
+| K8 | 25/09 | 2.5h | LIFM2-467 In Home Quote Form | JIRA 2.5h (22/09), lần 25/09 không log | Est 2h, thực tế 5h, bị trả về 29/09 | Log 2.5h. Vì sao vượt est gấp đôi + bị trả về? | |
+| K9 | 28/09 | 1h | Investigate items sold bị draft trên Shopify | không ticket | Không ticket | Ai yêu cầu? Bug hay support? Tạo/ghi ticket | |
+| K10 | 28/09 | 1h | Investigate improve quoting tool results | không ticket | Không ticket, quoting tool | Khách có yêu cầu không? Tạo ticket + worklog | |
+| K11 | 01/10 | 0.25h | Fix urgent bug | không ticket | Không biết bug gì | Bug gì, ticket nào? | |
+
+**Bug lặp lại — Kai giải thích nguyên nhân từng cái (cho câu trả lời NamTV):**
+
+| # | Ticket | Lịch sử | Kai cần trả lời |
+|---|---|---|---|
+| B1 | LIFM2-455 Refresh Issue on Quotes page | Anoma trả về 18/07, 14/08 → xong 09/09 | Vì sao fix 3 lần mới qua? |
+| B2 | LIFM2-465 Quote-email tab feedback | Bug từ task 449/451 (T7, đã bill). Trả về 23/09, đang To Do | Có phải bug do task 449/451 mình làm sót? |
+| B3 | LIFM2-452 Issue updating 4W Sent status | Trả về 26/08 → Done 21/09 | Vì sao bị trả về? |
+| B4 | Quoting tool nói chung (463, 468 + K3, K10) | ≥25 ticket từ 10/2025; jumping text sửa 3 lần (369 → 381 → 382) | Gốc rễ là gì? Có cần đề xuất refactor/test case để dứt điểm không? |
+
+**Invoice đã giảm 5.5h (W2 −3h, W3 −2.5h):** Kai xác nhận đã cắt những dòng nào, để đối chiếu với K1–K11 (tránh vừa giảm vừa credit trùng).
+
+**Việc tồn đang chờ Kai:** Anoma hỏi 06/10 (409 Buy-out flow; lỗi RMS5 "enable+Listed"; "items enabled on Shopify nhưng msg wired") chưa trả lời.
+
 ## 5. Kết luận và đề xuất
 
 1. Giờ không phải ảo: WS có đủ, invoice còn thấp hơn WS 5.5h. **Lỗi quy trình:** Kai không log worklog JIRA cho ~21h (2/3 tổng giờ), có việc làm không tạo ticket, có task không est.
