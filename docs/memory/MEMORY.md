@@ -249,3 +249,6 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [project_rory_secret_hardcoding_flagged](blog-posts/project_rory_secret_hardcoding_flagged.md) — hardcoded prod DB creds + client-side API key in Rory booking code; flagged to user, kept out of all posts
 - [feedback_nus_blog_house_format](blog-posts/feedback_nus_blog_house_format.md) — format nhà của nustechnology.com/blog: mở bài 3 đoạn bối cảnh→dự án→phạm vi, không kể sự cố cụ thể, luôn có CTA, title có dấu hai chấm
 - [feedback_news_digest_fix_links_parallel_corrupts.md](news-digest/feedback_news_digest_fix_links_parallel_corrupts.md) — fix-links.py swapped 32 correct links for wrong ones after parallel fetch; diff and restore (261007)
+
+## elena-monitor
+- [elena_op_restart_duongdn_code_reviewer](elena/project_elena_op_restart_duongdn_code_reviewer.md) — OP project, DuongDN = code reviewer, /me:elena-monitor
