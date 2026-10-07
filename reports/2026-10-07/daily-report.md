@@ -1,8 +1,8 @@
 # Daily Report — 2026-10-07 (Wednesday)
 
-**Run:** 2026-10-07T05:00:00+07:00 (cron)
+**Run:** 2026-10-07T05:00:00+07:00 (cron), corrected 08:45 (+07:00)
 **Window:** 2026-10-06T05:00:00+07:00 → 2026-10-07 05:20 (+07:00)
-**Leave plan:** No approved leave on record (parse-leave-emails refreshed 05:07). From Matrix Resource Arrangement: TuanNTG sick 10-06, VuTQ morning off 10-06, ThinhT off 10-12. LongVV was off the afternoon of 10-06.
+**Leave plan:** No approved leave on record (parse-leave-emails refreshed 05:07, re-refreshed 08:30: still none). From Matrix Resource Arrangement: TuanNTG sick 10-06, VuTQ morning off 10-06, ThinhT off 10-12. LongVV was off the afternoon of 10-06.
 
 ---
 
@@ -13,16 +13,16 @@
 | 1 | Fountain Trello board (customer) | [mike62798179 10-06 15:47 UTC on "GiftDrop: Order was uploaded as a Gift-Of-Choice"](https://trello.com/c/GbxIFNPH): **production order bug.** Order #5113334XO was charged as a Build-A-Box (Stripe agrees), but ShipStation and the GiftDrop link treat it as a Gift-Of-Choice. No reply from rick570 yet (~13h). |
 | 2 | Fountain Trello board (customer) | [kunalsheth 10-06 01:50 UTC on "Server TEST Info"](https://trello.com/c/d5OAtXT9): asked for Mailtrap access/invite so he can see emails while testing. No reply on the card (~27h). |
 | 3 | Email (rick@) + Performance (Fountain) | New Rollbar production error **#361 NoMethodError: undefined method** (10-06 10:13 UTC). New Relic: `gifts/build_a_box_gift_variants` averaged **19.5s over 119 calls** (new outlier). Other prod errors are minor (ArgumentError 5×, NoMethodError nil `[]` 3×). The build-a-box slowness may be related to Alert #1 and the V2 PR deploys. |
-| 4 | Performance (MPFC) | **Apdex fell to 0.16** (was 0.40 on 10-06): avg response 3.16s, and 23,902 of 35,317 requests were "frustrated". `continue`-targeting-switch E_WARNING ×1,971 (was ×248), `mysqli_real_connect(): No such file or directory` ×8 (DB socket unavailable at times). signup took 42.6s, forgot-password 39.0s, reset-password 38.8s. Rollbar also reported 2 new prod errors: #66 `MM_MembershipLevel::getAll()` undefined and #67 `_get_option()` on null. This looks like a real degradation, not scanner noise. |
-| 5 | Maddy (Xtreme Slack DM + JIRA) | Client tester anomawasala has 3 open questions for Kai. 12:24: "What about Buy-out items? how is the process?" (repeated on [LIFM2-409](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-409) 18:53 with B00041 steps, mentioning Kai). 18:32: error on RMS5 when clicking "enable+Listed". 21:48: "The items are enabled on Shopify, but this msg is wired." Kai's last reply was 10:11 (LongVV was off that afternoon). → Maddy ○ |
-| 6 | OhCleo (Celine DM) | Celine asked 2 questions with no reply. 19:49: "anything you need from me now to finish the re-tagging and cover art? do you recommend us to launch cover + re-tagging at the same time as the new design?" 20:25: "remind me of fal features - is this something we still need?" No Tony daily report on 10-06. That's not an alert in itself: LongVV logged 0h on OhCleo on 10-06 (half-day off). The unanswered customer asks are. → Ohcleo ○ |
-| 7 | Equanimity (Marcel) | komal.bailur (XID) 16:49 asked Carrick: "what are the things you updated? sgbuildex data? if yes you can send that failed part from last week. Also make sure it ll not happen in future". No reply from Carrick in window. → Marcel ○ |
-| 8 | Swift Studio (Rory) | roryh 18:52: "I will book it for tomorrow morning instead. what is the latest time you can do (UK time please)". No reply yet (came in after hours VN). → Rory ○ |
-| 9 | Workstream (TuanNT) | **0h logged on 10-06** across every project, incl. Andrew Taraba (raw `/review/week` = `[]`) and Speedventory. Note: he backfilled 10-05 after yesterday's reminder (James Diamond 2h + Speedventory 6h = 8h). He was clearly working on 10-06 (Bailey daily report 08:46 + overbudget discussion), so this is probably logging lag again. Re-check after ~09:00 before any reminder (not sent: no `--send-reminder`). → Bailey ○ |
+| 4 | Performance (MPFC) | **Apdex fell to 0.16** (was 0.40 on 10-06): avg response 3.16s, and 23,902 of 35,317 requests were "frustrated". `continue`-targeting-switch E_WARNING ×1,971 (was ×248), `mysqli_real_connect(): No such file or directory` ×8 (DB socket unavailable at times). signup took 42.6s, forgot-password 39.0s, reset-password 38.8s. Rollbar also reported 2 new prod errors: #66 `MM_MembershipLevel::getAll()` undefined and #67 `_get_option()` on null. This looks like a real degradation, not scanner noise. **08:40 recheck (since 05:25): getting worse.** Apdex **0.04**, avg 3.21s, 2064 of 2219 requests frustrated. SQLi/`.env.backup` probes are also hitting (28s). |
+| 5 | Maddy (Xtreme Slack DM + JIRA) | Client tester anomawasala has 3 open questions for Kai. 12:24: "What about Buy-out items? how is the process?" (repeated on [LIFM2-409](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-409) 18:53 with B00041 steps, mentioning Kai). 18:32: error on RMS5 when clicking "enable+Listed". 21:48: "The items are enabled on Shopify, but this msg is wired." Kai's last reply was 10:11 (LongVV was off that afternoon). → Maddy ○ (08:35 recheck: still unanswered) |
+| 6 | OhCleo (Celine DM) | Celine asked 2 questions with no reply. 19:49: "anything you need from me now to finish the re-tagging and cover art? do you recommend us to launch cover + re-tagging at the same time as the new design?" 20:25: "remind me of fal features - is this something we still need?" No Tony daily report on 10-06. That's not an alert in itself: LongVV logged 0h on OhCleo on 10-06 (half-day off). The unanswered customer asks are. → Ohcleo ○ (08:35: still unanswered) |
+| 7 | Equanimity (Marcel) | komal.bailur (XID) 16:49 asked Carrick: "what are the things you updated? sgbuildex data? if yes you can send that failed part from last week. Also make sure it ll not happen in future". No reply from Carrick in window. → Marcel ○ (08:35: still unanswered) |
+| 8 | Swift Studio (Rory) | roryh 18:52: "I will book it for tomorrow morning instead. what is the latest time you can do (UK time please)". No reply yet (came in after hours VN). → Rory ○ (08:35: still unanswered, and the UK morning call needs a time now) |
+| 9 | Workstream (TuanNT) | **0h logged on 10-06** across every project, incl. Andrew Taraba (raw `/review/week` = `[]`) and Speedventory. Note: he backfilled 10-05 after yesterday's reminder (James Diamond 2h + Speedventory 6h = 8h). He was clearly working on 10-06 (Bailey daily report 08:46 + overbudget discussion), so this is probably logging lag again. ~~Re-check after ~09:00 before any reminder (not sent: no `--send-reminder`). → Bailey ○~~ **08:35 recheck:** still 0h everywhere (Andrew Taraba raw rows still `[]`), and no leave. Reminder sent to TuanNT's room (`!knbJbIKzXRJNGVFQNg`, event `$U9NeoYL9Nlhm7-Fc23ut4PGosLw62gKw2kq8Y34Lpuk`). Bailey ✓ auto-completed under the reminder-sent rule. |
 | 10 | Workstream needs review | OhCleo: LongVV 10-05, 3 rows Pending (tag taxonomy re-tagging 2:00, cover arts backup library 2:00, web/app visual identity 4:00). Reviewers: **DuongDN, MinhTV**. Crystal lang: PhucVT 10-05, "Testing and fix bugs on Carryover + M4 tasks" 8:00 Pending. Reviewer: **TienND** (Arthur is paused, listed for visibility). |
 | 11 | Email (vuongtrancr@) | 2× New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" for Swish (23:57 + 00:08 UTC 10-05/06). Recurring monitoring gap. |
 | 12 | Email (carrick@) | GitLab: **Carrick's compute minutes are exhausted** (25% → 5% → 0 on 10-06 08:49–08:53 UTC). Since then every `definitive-guide` pipeline fails (upgrade/cp1-laravel10, cp1-staging-fixes, cp1-gate, cp2-laravel13), which blocks CI for the Laravel upgrade PhucVT is taking over. |
-| 13 | Email (ken@) | ken@ was **not scanned**: Zoho IMAP rejected the stored password (`AUTHENTICATIONFAILED`). The config plaintext (09-26) is newer than the `.enc` copy (07-28), so the app password was probably rotated or revoked on Zoho. A new app password is needed. → Ken mail ○ |
+| 13 | Email (ken@) | ken@ was **not scanned**: Zoho IMAP rejected the stored password (`AUTHENTICATIONFAILED`). The config plaintext (09-26) is newer than the `.enc` copy (07-28), so the app password was probably rotated or revoked on Zoho. A new app password is needed. → Ken mail ○. **08:38 recheck:** this is not a clobber. The plaintext and `.enc` hold the same password, and every historical password in git (7 commits) also fails with `AUTHENTICATIONFAILED`, so the app password really was revoked or rotated on Zoho. |
 
 **Today (Wed Oct 7):** No approved leave on record. ThinhT is off 10-12 (planned).
 
@@ -93,7 +93,7 @@ Reporting day: **2026-10-06 (Tue)**. Data fetched at 05:15, so same-day logging 
 |-----------|-------|--------|
 | LongVV | 0h on Workstream (half-day off; did ~1h Lyf fix, not on a tracked WS project) | Ad-hoc, informational only |
 | KhanhHH | 8h (Radio Data Center) | OK |
-| TuanNT | 0h (incl. Andrew Taraba raw rows `[]`). 10-05 now backfilled to 8h | 🔴 Alert #9 (likely lag, re-check) |
+| TuanNT | 0h (incl. Andrew Taraba raw rows `[]`). 10-05 now backfilled to 8h | 🔴 Alert #9. ~~(likely lag, re-check)~~ Still 0h at 08:35, reminder sent |
 | LeNH | 8h (James Diamond) | OK |
 | PhucVT | 0h on 10-06 (10-05: 8h Crystal lang) | Not gated (Arthur, per user 10-01) |
 | AnhNH2 | 4h (James Diamond) | informational |
@@ -117,7 +117,7 @@ Reporting day: **2026-10-06 (Tue)**. Data fetched at 05:15, so same-day logging 
 | OhCleo | — | DuongDN, MinhTV | 0h | **Pending** (LongVV 10-05 ×3, 8h), Alert #10 |
 | Andrew Taraba | 0h | DuongDN | 0h | need_review=false |
 
-Trello: Bailey ○ (Alert #9). James Diamond, Aysar, Elliott ✓.
+Trello: ~~Bailey ○ (Alert #9)~~ Bailey ✓ (08:42, reminder sent). James Diamond, Aysar, Elliott ✓.
 
 ---
 
@@ -238,12 +238,12 @@ Not gated by Trello.
 
 | Workroom | Result |
 |----------|--------|
-| Rory | Not verified: the page navigated mid-scrape ("Execution context was destroyed") |
-| Aysar | Not verified: Cloudflare challenge |
-| Tokenlite | Not verified: Cloudflare challenge |
+| Rory | ~~Not verified~~ 08:36: 0 memos on 10-06 (no time logged) |
+| Aysar | ~~Not verified~~ 08:36: 1 memo, valid ("Implement approved navy dark mode across remaining pages (#705)"). Note: WS shows KhanhHH 0h on Baamboozle on 10-06, so the Upwork entry is probably a UTC day boundary or a small slot. Not an alert. |
+| Tokenlite | Not verified: duongdn account session/headless login failed (2nd attempt 08:36) |
 
 Neural Contract (`upwork-neural-check.js`): carrick's Chrome Profile 1 Upwork session gave 0 cookies after 4 attempts. It needs one real login in that Chrome profile.
-Per the session-failure rule this is not an alert. Neural ✓. Manual re-run: `node scripts/upwork-memo-check.js --date=2026-10-06`.
+08:37 recheck: still redirects to login after the Profile 1 page-touch fix plus 4 retries (2 genuine attempts). It needs a real login in carrick's Chrome Profile 1. Per the session-failure rule this is not an alert. Neural ✓. Manual re-run: `node scripts/upwork-memo-check.js --date=2026-10-06`.
 
 ---
 
@@ -265,7 +265,8 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check progress (16/22):**
 - ✓ complete: John Yi (ignore), James Diamond, Aysar, Franc, Elliott, MPFC, Elena-SamGuard (ignore), Raymond, Neural Contract, Andrew Taraba, Rebecca (ignore), Colin (ignore), Philip (ignore), Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
-- ○ incomplete: **Maddy** (#5), **Rory** (#8), **Marcel** (#7), **Bailey** (#9), **Fountain** (#1–#3), **Ohcleo** (#6).
+- ○ incomplete: **Maddy** (#5), **Rory** (#8), **Marcel** (#7), ~~**Bailey** (#9)~~, **Fountain** (#1–#3), **Ohcleo** (#6).
+- 08:42 recheck: Bailey ✓ (TuanNT reminder sent). Live card re-fetched; the other 5 are still ○ because the customer asks are still unanswered (re-verified Slack/Trello 08:35). Progress 17/22.
 
 Neither card is marked done.
 
@@ -283,4 +284,5 @@ Neither card is marked done.
 2. MPFC apdex 0.16 + mysqli socket errors: is the server under load or is the DB flapping? It may need a server check (`/me:mpfc-monitor`).
 3. ken@ Zoho app password: was it rotated on purpose? Please provide a new app password.
 4. GitLab compute minutes for Carrick's namespace are at 0. Buy minutes, or move definitive-guide CI to a self-hosted runner?
-5. TuanNT 0h on 10-06: re-check after 09:00 before sending a reminder (needs `--send-reminder` or your OK).
+~~5. TuanNT 0h on 10-06: re-check after 09:00 before sending a reminder~~ (resolved: reminder sent 08:35)
+5. Tokenlite Upwork (duongdn account) + Neural (carrick Profile 1) need one real browser login each.
