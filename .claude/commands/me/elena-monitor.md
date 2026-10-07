@@ -15,7 +15,8 @@ Before starting, run `/util:read-memory elena`. Memory lives in `docs/memory/ele
 |---------|--------------|
 | `/me:elena-monitor` | Full run: prs + matrix + env (+ jira once configured) |
 | `/me:elena-monitor prs` | Review open PRs only |
-| `/me:elena-monitor pr <N>` | Deep review of one PR |
+| `/me:elena-monitor pr <N>` | Deep review of one PR (code + spec) |
+| `/me:elena-monitor spec [N]` | OpenSpec review only (all open PRs or PR N) |
 | `/me:elena-monitor matrix` | Room activity, blockers, action items |
 | `/me:elena-monitor env` | Test env health |
 | `--post` | Post the review drafts to GitHub (default: draft in the report only) |
@@ -63,6 +64,45 @@ For each new or updated PR:
 
 Also flag: open PRs with no activity for >2 working days, and PRs closed without merging.
 
+## Piece 1b — OpenSpec Review (every PR, same verdict)
+
+The project is spec-driven (OpenSpec, `schema: spec-driven`). **Review the spec, not just the code.** A wrong spec gets implemented faithfully and still ends up wrong.
+
+**3 non-overlapping roots** (from `openspec/config.yaml`):
+| Root | Owns |
+|------|------|
+| `openspec/` | Backend only (application/, services/, libraries/, tools/…). **The ONLY place where API contracts are specified** |
+| `precognize-workspace/openspec/` | Portal, admin-ui, shared, frontend-libs |
+| `process-digital-plant/openspec/` | DP app |
+
+Rules to check against: `rules:` in each root's `config.yaml` (read the root's own config, since the frontend roots may have different rules). Context docs: `docs/ai/{PROJECT,ARCHITECTURE,CONVENTIONS,TESTING}.md`.
+
+**Steps:**
+1. List the spec files in the PR (`gh api repos/$R/pulls/N/files --paginate --jq '.[].filename' | grep openspec/`). If code changes but no spec changes → ⚠️ "code without spec" (unless trivial or bugfix).
+2. Validate: check out the PR head in a worktree (`git -C /home/nus/projects/Elena/develop worktree add /tmp/elena-pr-N nus/<head>`), then run `npx --yes @fission-ai/openspec@1.13.2 validate --all --strict --no-interactive` in every touched root. A failure → ❌. (The pre-commit hook does this, but it's opt-in and devs can `--no-verify`.)
+3. **Structure:**
+   - proposal has Scope, Non-goals, open questions; design has a "Current implementation" section with file paths; tasks are ordered (libs → services → gateway) and end with verification + manual QA
+   - every requirement uses SHALL/MUST and has ≥1 `#### Scenario:` with WHEN/THEN
+   - capability path is `specs/<capability>/spec.md`; flag nested paths like `specs/license/<sub>/spec.md`
+4. **Root boundaries:**
+   - a frontend spec must not restate a REST/RSocket contract; it should reference the backend capability id
+   - a change in one root must not edit another root's paths
+   - a cross-root feature uses the same change name in each root plus a "Related changes" section
+   - a FE change whose BE counterpart doesn't exist yet → ⚠️
+5. **Content:**
+   - specs describe behaviour, not implementation (no class or component names in spec.md)
+   - error and edge scenarios are covered: `success=false` + errorId, 405 on session, empty data, downstream unavailable
+   - invented contracts, routes, queues, or schema not marked UNKNOWN; new library or pattern without a Decisions entry
+   - backward-compat note for shared DTOs and gateway; config/env changes listed
+   - matches the Jira OP ticket and the BA answers in the Matrix room (vytth relays customer answers; e.g. "unit ignored in calculations" must appear in the spec if the change touches it)
+6. **Code ↔ spec:** is every spec scenario implemented, or every task checked? Is there code behaviour that no spec covers? A task marked `[x]` with no matching code → ❌.
+7. **Lifecycle:**
+   - archived changes (`changes/archive/<date>-…`) must have synced deltas into `specs/`, and no change may be archived before its code is merged
+   - flag duplicate or overlapping capabilities across PRs (e.g. two PRs both editing `optimization-shared-ui-playground`) as a merge-conflict risk
+8. **Delivery hygiene:** openspec, `docs/ai`, and `.claude` paths are nus-only and are stripped by `openspec/scripts/deliver-to-origin.sh`. Flag code that **imports or depends on** those paths, and any PR that targets the Precognize origin directly with openspec files in it.
+
+In the report, give each PR a `Spec:` line (✅/💬/❌ + findings), next to the code verdict. The PR's overall verdict is the worse of the two.
+
 ## Piece 2 — Matrix Room
 
 ```bash
@@ -93,7 +133,7 @@ Not wired yet. There is no Jira config in `config/`. Once the user provides it, 
 ```markdown
 # Elena OP — {date} {HHMM}
 ## Summary  (1–3 lines: 🔴/⚠️/✅ counts)
-## PRs   (table: # | OP key | author | verdict | cross-reviewed? | key findings) + review drafts
+## PRs   (table: # | OP key | author | code | spec | verdict | cross-reviewed? | key findings) + review drafts
 ## Room  (done / in progress / blockers / for DuongDN)
 ## Env
 ## Jira  (or "not configured")

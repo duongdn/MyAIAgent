@@ -10,3 +10,5 @@ metadata:
 **Why:** the user wanted a dedicated skill, separate from daily-report, to manage the project, with code review as the core of it.
 
 **How to apply:** use `/me:elena-monitor` (`.claude/commands/me/elena-monitor.md`). Review drafts stay in the report unless `--post` is given, and the skill never merges. Elena is still on the Trello Ignore List ([[feedback_ignore_list_paused_items]]); revisit that if the user wants the gate back.
+
+2026-10-07 addendum: the project follows OpenSpec (3 roots: backend `openspec/`, `precognize-workspace/openspec/`, `process-digital-plant/openspec/`). The user wants the specs reviewed too, not just the code (Piece 1b in the skill).
