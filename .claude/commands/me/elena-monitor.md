@@ -47,7 +47,7 @@ gh api "repos/$R/pulls?state=open&base=nus-base&per_page=50" \
   --jq '.[]|{n:.number,user:.user.login,head:.head.ref,sha:.head.sha,updated:.updated_at,title}'
 ```
 
-State file: `config/.elena-op-state.json` → `{"reviewed": {"<pr>": "<head_sha>"}, "last_run": "<iso>"}`. Skip a PR whose head SHA is unchanged since the last review, and list it as "no new commits".
+State file: `config/.elena-op-state.json` → `{"reviewed": {"<pr>": "<head_sha first 8 chars>"}, "last_run": "<iso>"}` (compare by prefix). Skip a PR whose head SHA is unchanged since the last review, and list it as "no new commits".
 
 For each new or updated PR:
 1. Fetch the diff (`gh pr diff N -R $R`), commits, reviews, and comments (CodeRabbit included), plus mergeable state.
