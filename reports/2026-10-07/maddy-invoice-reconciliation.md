@@ -79,6 +79,36 @@ Mục tiêu: mỗi giờ trên invoice (26.25h) phải chỉ ra được ticket 
 
 **Việc tồn đang chờ Kai:** Anoma hỏi 06/10 (409 Buy-out flow; lỗi RMS5 "enable+Listed"; "items enabled on Shopify nhưng msg wired") chưa trả lời.
 
+### Cập nhật 13:30: Kai trả lời (room "Maddy - Extreme Soft Solutions" 11:16–12:01) + doc giải thích quoting tool
+
+**Kai trả lời theo checklist:**
+| # | Kai nói | Đánh giá |
+|---|---|---|
+| K3 (5h) | "Check issue quoting tool & feedback", liên quan LIFM2-468. Mất thời gian tìm nguyên nhân, đối soát từng item | Là đợt điều tra **log 10 issue LIF ngày 14/09**; kết quả = [doc giải thích](https://docs.google.com/document/d/1QzmeIuJUxID1rS3ktFyEjX02zpWcHBNeP8gXl89e9-0). Có sản phẩm cụ thể, giải thích được. Nhưng **chưa có worklog JIRA**, cần log vào 468 |
+| K4 (468) | Đã tạo 468, Maddy approve 1h; "em sót 1h chưa log" | WS charge 2.5h cho 468 vs approve 1h → **vượt 1.5h** chưa xin |
+| K5 (428 guideline 1.5h) | Chưa log, chờ a confirm rồi log | OK, cho log |
+| K9 Shopify draft 1h | Yêu cầu qua Slack [link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1790552571912369) | Có yêu cầu khách, không ticket |
+| K10 Quoting tool approach 1h | Slack [link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1790304363097069?thread_ts=1789646620.555009&cid=D050TGMRFRQ) | Có yêu cầu khách, không ticket |
+| K11 "urgent bug" 0.25h | Thực ra "Fix payout bracket issue", Slack [link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1790828431589969) | Bug payout (409?), cần xem có phải bug của mình không |
+| Bug của mình | "cũng có bug của mình, đã fix, em bỏ thời gian riêng, ko charge ổng phút nào" | **Chưa kiểm chứng.** Cần Kai liệt kê bug nào + ngày, đối chiếu WS không có dòng charge tương ứng |
+| K1, K2, K6, K7, K8 | Chưa trả lời | Còn mở |
+
+**Doc giải thích quoting tool (Kai soạn), tóm tắt:**
+- Rà 10 issue log LIF 14/09 trên data production. **Chỉ 1 lỗi thật của mình**: issue 108/109, bulk batch chạy chồng (~30% batch bị overlap) → duplicate row, nhấp nháy, sót item. Fix đang test. Không phải nguyên nhân nhận diện sai.
+- Còn lại là **giới hạn thiết kế, không phải bug**: tìm theo từ phổ biến trong kết quả Google (Pochette → "Neverfull"); include term làm hẹp search (Shopify AND); hard limit 8 kết quả; ranking ưu tiên title ngắn; stripped words ("It" trong "Chain It Bag"); size lưu trong title; 2 case dùng nhầm ảnh (ảnh receipt). ~7–9% quote không ra kết quả kể cả khi chạy đúng. Google không deterministic.
+- Lịch sử: **119 thay đổi search logic từ đầu 2025** (82 trong 3 tháng), hầu hết do từng ví dụ thực tế.
+- Đề xuất thương mại: tách **Faults** (vẫn fix theo arrangement hiện tại) vs **Accuracy improvements** (charge riêng). **16h/tháng** × 3 tháng đầu rồi review. Feature mới quote riêng: 6 item nhỏ = **4.5h**; 6 item lớn chờ review (style-code search, structured size/leather, matching model…).
+
+**Nhận xét của em:**
+1. Doc tốt, đúng hướng NamTV (tách fault vs improvement, retainer/fixed cho việc sau). Trả lời được câu "vì sao quote tool bug mãi": phần lớn không phải bug code.
+2. **Nhưng mâu thuẫn với complaint của Maddy:** Maddy coi các report này là bug trên tính năng đã trả tiền; doc lại nói 18 tháng qua đã charge chính loại việc này ("part of the work we've been charging for"). Đây đúng là điểm Maddy phản đối, nên phải nói khéo: quá khứ giữ nguyên hay credit một phần.
+3. **Doc đã gửi Maddy chưa?** Kai nói "bữa e có soạn". Nếu Maddy chưa thấy thì 5h investigate (K3) càng bị hỏi. Nên gửi doc cùng bảng đối chiếu.
+4. **Estimate 4.5h cho 6 item có vẻ quá thấp** (search trace page 1h, replay console 1h, broader results 1h). Rủi ro vượt est lần nữa, giống 467 (est 2h → 5h). Cần Kai review lại trước khi gửi.
+5. "Broader results option" vừa nằm bảng estimate 1h, vừa nằm bảng "chờ review" → trùng, cần sửa.
+6. Câu "đã tự fix bug của mình không charge" phải chứng minh được bằng WS (ngày nào, ticket nào). Nếu chứng minh được thì đây là luận điểm mạnh nhất để trả lời Maddy.
+
+**Còn chờ Kai:** K1 (PR conflicts 0.5h thuộc ticket nào), K2 (466 không est: ai yêu cầu), K6 (459 rework 3 lần: vì sao), K7 (409 scenario: mới hay cũ), K8 (467 vượt est gấp đôi), danh sách bug tự fix không charge, xác nhận doc đã gửi Maddy chưa; log JIRA cho 428, 468, 466, 459, 409, 467.
+
 ## 5. Kết luận và đề xuất
 
 1. Giờ không phải ảo: WS có đủ, invoice còn thấp hơn WS 5.5h. **Lỗi quy trình:** Kai không log worklog JIRA cho ~21h (2/3 tổng giờ), có việc làm không tạo ticket, có task không est.
