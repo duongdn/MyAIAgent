@@ -220,3 +220,30 @@ Nguồn: WS LongVV project Maddy (bỏ 2 dòng tag "Làm trước report sau" = 
 **Ý nghĩa cho mô hình:** đây là bằng chứng rõ nhất về nguyên tắc **bug trên task đã bill → free; thay đổi/tính năng mới → charge, có est, có approve**. Maddy đã đồng ý ("proceed") trên chính nguyên tắc đó.
 **Điểm yếu:** item 2 (status dropdown ngắn lại sau đợt spacing của mình) bị charge 0.25h. Khách cuối nói rõ là do thay đổi trước gây ra → Maddy có thể coi là bug.
 **Bài học giao tiếp:** câu hỏi trên Slack phải reply trên Slack (dù chỉ dẫn link JIRA). Im lặng trên Slack làm Maddy tưởng bị bỏ qua.
+
+## 10-08: Map toàn bộ giờ Kai vào ticket JIRA (đối chiếu lại Slack DM + room Element)
+
+**Sửa số:** JIRA Kai = **10.5h** (không phải 11.5h). 07/10 Kai log 1h+1.5h vào 468 và 2h vào 459, rồi xóa hết lúc 14:00 theo yêu cầu anh Dương ("để nguyên trạng… e có log thêm thì xóa đi", 13:58). Lệch = **15.75h**.
+
+| Ngày | Giờ | WS | Ticket | Căn cứ | Loại |
+|---|---|---|---|---|---|
+| 07/09 | 0.5 | Check feedback & resolve PR conflicts | **LIFM2-463** Quoting tool batch issue | Slack 06/09 Maddy hỏi PR 532/534; Kai 07/09 13:30 gửi PR 534, tạo 463 lúc 13:34 | bug fix (463 est 0) |
+| 16/09 | 5 | Check issue quoting tool & feedback | **LIFM2-468** (gốc 463) | 468 description = đúng doc khách 1odJW8 + sheet 11Lm4H; Maddy 15/09 10:52 "say we checked all issues"; room Element 15–16/09 Kai+ThanhNX check từng item. 468 chỉ được tạo 21/09 sau khi Maddy bảo "create a task on the board" | investigate, không est/approve |
+| 22/09 | 1.5 | 468 | **LIFM2-468** | Maddy approve 1h (21/09 10:26–10:42), PR 548 | vượt approve 0.5h |
+| 24/09 | 1.5 | Guideline deploy 428 | **LIFM2-428** | JIRA comment 24/09 10:32 setup steps | 428 est 53 / spent 53.05 đã chạm trần; Maddy 21/09: khách không chấp nhận est mới |
+| 25/09 | 2 | 459 Check Anoma feedback | **LIFM2-459** | comment + status 10:34 | rework vòng 3, est 1.5 đã spent 2 → vượt |
+| 25/09 | 2 | 409 Check Anoma scenario | **LIFM2-409** | comment 12:03 + status 13:24 | ✅ còn đúng 2h est (113.25 − 111.25) |
+| 28/09 | 1 | Items sold bị draft | không ticket mới; liên quan **LIFM2-162** (cron disable sold), tiền lệ **LIFM2-328** (2025, 2.5h investigate cùng loại, đã charge) | Maddy 06:42 "prioritise"; nguyên nhân Atlassian Iframely gọi /process/auto-disable-sold, không phải code mình | support khách yêu cầu |
+| 28/09 | 1 | Approach improve quoting tool | **LIFM2-468** | Slack 25/09 09:49 "I will absorb that cost" | approved (Maddy tự chịu) |
+| 01/10 | 0.25 | Fix payout bracket | bug của **LIFM2-293** (Date range Payout Bracket Overrides, 2025); PR 552 + 553; follow-up **LIFM2-470** | Slack 01/10 11:21 "urgent production issue" | bug task cũ đã bill |
+| 02/10 | 1 | 468 Check quoting tool | **LIFM2-468** | comment 14:24 | không approve thêm |
+
+**Tổng theo ticket (phần chưa log):** 468 8.5h, 409 2h, 459 2h, 428 1.5h, 162/draft 1h, 463 0.5h, 293 0.25h = 15.75h.
+
+**Phân loại credit:**
+- Vững: 409 2h, 468 1h approve + 1h Maddy absorb, draft 1h (khách yêu cầu gấp, không phải lỗi mình) = 5h.
+- Bug trên task đã bill (nguyên tắc = free): 463 0.5h, 459 2h, 293 0.25h = **2.75h**.
+- Vượt approve/est: 468 5h investigate + 0.5h + 1h, 428 1.5h = **8h**.
+- Credit đề xuất: tối thiểu 2.75h, tối đa 10.75h.
+
+**Mâu thuẫn cần biết:** Kai nói (Matrix 21/09, 07/10) "bỏ thời gian riêng fix bug batch, không charge phút nào", nhưng 0.5h 07/09 là xử lý PR 534 (fix batch, 463), và 0.25h payout bracket là bug cũ. Slack 24/09 Kai nói "spent some of my personal time" cho 428, nhưng WS vẫn bill 1.5h guideline (khác phần UI/UX, nhưng Maddy dễ hiểu nhầm).
