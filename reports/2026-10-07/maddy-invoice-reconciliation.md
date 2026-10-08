@@ -181,3 +181,25 @@ Nguồn: WS LongVV project Maddy (bỏ 2 dòng tag "Làm trước report sau" = 
 2. 3h + 2.5h đã giảm ở W2/W3: ai giảm, giảm phần nào? Nên nói rõ với Maddy để thấy đã có thiện chí.
 3. ~~Mobile tracking~~ resolved: LuHX = Jeff Nguyen, IHC-52. Memory "LuHX not managed" vẫn giữ cho daily gate, hay đổi theo NamTV "cần nắm"?
 4. Ai trả lời Maddy: chientx (người nhận WhatsApp) hay Kai/LongVV trực tiếp?
+
+## Mô hình làm việc Maddy: bằng chứng (cập nhật 08/10 11:50)
+
+| Ngày | Nguồn | Nội dung | Ý nghĩa |
+|---|---|---|---|
+| 07/07 13:55 | Matrix nội bộ (duongdn ↔ namtv) | duongdn: "bên Maddy giờ là dạng dedicated 16h/week hay là chỉ dạng hourly nhưng cam kết giờ nhỉ" → namtv: **"Hourly"** | Nội bộ xác nhận hourly, không dedicated |
+| 12/07 17:49 | [Slack Madhuraka → Kai](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1783853356428449) | "After recent billing issue with the client (**tasks taking way more than approved hours**), client now wants us to **wait for their approval for every task even if it is less than 15 hours**… Provide me an estimation for each task… **Do not start any task until I confirm**" | Hourly nhưng **mỗi task phải est + approve trước**. Giờ approve = trần |
+| 03/09, 08/09, 22/09 | Slack | Madhuraka xin est từng ticket (462, 464, 467), Kai trả est (2h, 4h…) | Quy trình est → approve được áp dụng |
+| 04/09, 08/09 | Slack | Kai: "I want spent 0.5h for each task to check Anoma feedback… can you approve it?" / "you approved 0.5 hours" | Cả việc check feedback cũng xin approve theo giờ |
+| 21/09 | Slack | Madhuraka approve **1h** cho fix quoting tool (468) | Approve theo giờ cụ thể |
+| 25/09 | Slack | "I don't think they will approve… **Ok. I will absorb that cost**" | Giờ khách cuối (LIF) không approve thì Maddy tự chịu |
+| 30/09 16:01 | Matrix (halt) | "tuần Sep 14–20 mình có để lại 3h **report sau**, phần này KH vẫn chưa approve task đúng ko" | Nội bộ biết: task chưa approve → không bill (466, 467) |
+| 04/10 16:23 | Slack | "I am **unable to bill the client until the ticket is fully complete**" | Maddy bill LIF **theo ticket hoàn thành** |
+| 06/10 | Invoice 0180-20261006-01 | "**Kai (Hourly)** … 35 AUD/h", mobile 45 AUD/h, theo tuần | Mình bill Maddy theo giờ |
+
+**Kết luận:**
+- **Mình ↔ Maddy: hourly**, nhưng từ 12/07 có luật: est từng task, approve trước khi làm, giờ approve là trần.
+- **Maddy ↔ LIF:** Maddy bill lại theo ticket hoàn thành với giờ đã approve. Phần vượt approve, phần không ticket, hoặc phần LIF không duyệt → **Maddy tự chịu**. Đó là gốc của complaint, không phải hourly hay fixed-cost.
+- **Không tìm thấy** thỏa thuận bằng văn bản về "bug fix không charge". Maddy chỉ "assumed". Trong 90 ngày Slack không có câu nào chốt điều này.
+- Vi phạm luật 12/07 trong invoice T9: 5h điều tra quoting tool (16/09) **không xin approve**, 468 approve 1h nhưng bill 2.5h, các việc qua Slack (Shopify draft 1h, payout 0.25h) không có est/approve.
+
+**Giới hạn nguồn:** Slack Xtreme chỉ giữ 90 ngày (tin cũ nhất 11/07), nên không thấy thỏa thuận ban đầu. Chưa quét email kai@ / chientx (hợp đồng, rate ban đầu).
