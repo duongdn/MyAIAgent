@@ -1,8 +1,8 @@
 # Daily Report — 2026-10-08 (Thursday)
 
-**Run:** 2026-10-08T05:00:00+07:00 (cron)
+**Run:** 2026-10-08T05:00:00+07:00 (cron), corrected 08:55 (+07:00) (local recheck)
 **Window:** 2026-10-07T08:45:00+07:00 → 2026-10-08 05:30 (+07:00)
-**Leave plan:** No approved leave on record (parse-leave-emails refreshed 05:00). From Matrix: DaiDV off 10-09, ThamTTH off 10-14 to 10-16. TrinhMTT appeared to be off on 10-07 (per halt).
+**Leave plan:** No approved leave on record (parse-leave-emails refreshed 05:00, re-refreshed 08:42: no new requests; LongVV 10-06 half-day pending). From Matrix: DaiDV off 10-09, ThamTTH off 10-14 to 10-16. TrinhMTT appeared to be off on 10-07 (per halt).
 
 ---
 
@@ -12,12 +12,12 @@
 |---|--------|-------|
 | 1 | Performance (MPFC) | **Apdex 0.01** (worse than 0.16 on 10-07 and 0.04 at the 08:40 recheck). Avg response 4.35s; 25,744 of 26,086 requests were "frustrated". **New: `Allowed memory size of 1073741824 bytes exhausted` ×2.** Also `mysqli_real_connect` socket missing ×2, `continue` E_WARNING ×986, WP_Error::get_method ×28. Ordinary page URLs (collections, user-video) took 15–17 min each. The site looks badly degraded, not just hit by scanners. Run `/me:mpfc-monitor` or check the server. |
 | 2 | Performance + Email (Fountain prod) | New Rollbar prod error **#363 NameError `uninitialized constant OrderItemGiftVariantSerializer::GiftVariant`** (×2, 10-07 04:41 UTC). Probably related to the GiftDrop / build-a-box order bug DatNT is investigating. `gifts/build_a_box_gift_variants` is still slow: **25.8s avg over 123 calls**, up from 19.5s. `Redis::CannotConnectError 127.0.0.1:6379` ×2 in prod, and the same on Infinity. Rollbar #362 Stripe `pi_qc_probe` is a QC probe and benign. → Fountain ○ |
-| 3 | OhCleo (Celine DM) | Celine has 3 questions still open. 07:56 UTC: "Can you confirm the code clean-up is fully done across the catalogue?" (retired tags/merges) and "Could you paste the Ramblefap definition you drafted?" 11:11 UTC: "Before logging out today, can you let me know status on tagging - whats left to launch / cover - whats left to finish / New design - how far have you come?" Tony replied only about cover cost (08:05 UTC). His daily report (11:54 UTC) lists tasks but doesn't answer these. The earlier asks from 10-06 were answered at 01:50 UTC. → Ohcleo ○ |
-| 4 | Matrix PHP Projects (Maddy invoice) | Carried over from 10-07 #14. Maddy's complaint that invoice hours ≠ JIRA hours is still unanswered to the client. You told chientx 17:03 "Nay chưa review kịp invoice Maddy… để mai tiếp". chientx: "mai cung cấp e info sớm, ko ngâm lâu". You posted a partial trace at 23:45. **Due today.** The Slack client questions (Anoma buy-out / Xero payout) were answered by Kai 10-07 12:46–14:16. → Maddy ○ |
-| 5 | Workstream (TuanNT, LeNH) | **0h on 10-07 as of 05:15** across all 19 WS projects in the script. Same-day logging lag is likely: TuanNT backfilled 10-06 (Speedventory 14h for the week). **But** TuanNT moved to James–DefinitiveGuide on 10-07 (Matrix: setup + register/plans testing all day), and Definitive Guide is **not one of the projects the fetch script covers**, so his hours may exist and just not be visible. LeNH: 16h James Diamond Mon–Tue, 0h on 10-07. Re-check after ~09:00 before any reminder (not sent: no `--send-reminder`). → Bailey ○ (TuanNT), James Diamond ○ (LeNH) |
+| 3 | OhCleo (Celine DM) | Celine has 3 questions still open. 07:56 UTC: "Can you confirm the code clean-up is fully done across the catalogue?" (retired tags/merges) and "Could you paste the Ramblefap definition you drafted?" 11:11 UTC: "Before logging out today, can you let me know status on tagging - whats left to launch / cover - whats left to finish / New design - how far have you come?" Tony replied only about cover cost (08:05 UTC). His daily report (11:54 UTC) lists tasks but doesn't answer these. The earlier asks from 10-06 were answered at 01:50 UTC. Re-fetched 08:45: no Tony reply since 11:54 UTC. → Ohcleo ○ |
+| 4 | Matrix PHP Projects (Maddy invoice) | Carried over from 10-07 #14. Maddy's complaint that invoice hours ≠ JIRA hours is still unanswered to the client. You told chientx 17:03 "Nay chưa review kịp invoice Maddy… để mai tiếp". chientx: "mai cung cấp e info sớm, ko ngâm lâu". You posted a partial trace at 23:45. **Due today.** The Slack client questions (Anoma buy-out / Xero payout) were answered by Kai 10-07 12:46–14:16. 08:43: still no reply to the client. namtv 07:20 asked follow-ups in PHP Projects ("Internal task là gì?…", how the client can know hours beyond the invoice). → Maddy ○ |
+| 5 | Workstream (TuanNT, LeNH) | ~~**0h on 10-07 as of 05:15** across all 19 WS projects in the script. Same-day logging lag is likely: TuanNT backfilled 10-06 (Speedventory 14h for the week). **But** TuanNT moved to James–DefinitiveGuide on 10-07 (Matrix: setup + register/plans testing all day), and Definitive Guide is **not one of the projects the fetch script covers**, so his hours may exist and just not be visible. LeNH: 16h James Diamond Mon–Tue, 0h on 10-07. Re-check after ~09:00 before any reminder (not sent: no `--send-reminder`). → Bailey ○ (TuanNT), James Diamond ○ (LeNH)~~ **08:50 recheck:** **TuanNT is not 0h.** He logged 8h for his 10-07 work but dated it **10-08**: Definitive Guide 7h ("setup project, check register/plans/stripe") + Speedventory 1h (#101). His 08:42 Matrix "Task hôm qua" post in the Bailey room matches the same #101 task. Logging-date mistake, not absence → **Bailey ✓**. (Definitive Guide now added to the fetch script.) **LeNH:** still 0h on 10-07 at 08:50 (James Diamond 8h/8h on 10-05/06). No leave or remote-work email, no Resource Arrangement note. Re-querying after 09:30 → James Diamond ○ |
 | 6 | Wildsoul (Matrix) | chientx 17:08: "Confirm vụ mai mình cần gửi cho KH nha a Dương, nên ráng xử lý những gì đang ở chân anh". The estimate/doc for C and E (class vs appointment, visit history) **must go to the client today, 10-08**. You were still working on it at 23:24. |
 | 7 | Workstream needs review | OhCleo: LongVV 10-05 ×3 (8h), 10-06 ×2 (2h), 10-07 ×3 (5h), plus PhuongPVT 10-05 0h, all Pending. Reviewers: **DuongDN, MinhTV**. Crystal lang: PhucVT 10-05 8h + 10-06 6h Pending. Reviewer: **TienND** (Arthur paused, listed for visibility). |
-| 8 | Email (ken@) | Still not scanned: Zoho IMAP `AUTHENTICATIONFAILED`. Same as 10-07 #13: the app password was revoked/rotated and a new one is needed. → Ken mail ○ |
+| 8 | Email (ken@) | Still not scanned: Zoho IMAP `AUTHENTICATIONFAILED` (re-tested 08:50; config unchanged since 07-28 commit, so it's not a local clobber). Same as 10-07 #13: the app password was revoked/rotated and a new one is needed. → Ken mail ○ |
 | 9 | Email (carrick@) | GitLab definitive-guide pipelines still failing (cp1-laravel10, cp1-staging-fixes; 10-07 04:01–04:22 UTC). Compute minutes are still exhausted (10-07 #12), and this now blocks TuanNT/PhucVT's upgrade testing. |
 | 10 | Email (vuongtrancr@) | Swish New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" ×8 (10-07 08:05–21:08 UTC). Recurring, and more frequent than 10-06 (×2). |
 
@@ -84,11 +84,11 @@ Reporting day: **2026-10-07 (Wed)**. Fetched at 05:15, so same-day logging may b
 
 | Developer | 2026-10-07 hours (all WS projects) | Status |
 |-----------|-------|--------|
-| LongVV | 5h (OhCleo) | Ad-hoc, informational |
+| LongVV | 5h (OhCleo) + 0.5h (Definitive Guide, "Support TuanNT") | Ad-hoc, informational |
 | KhanhHH | 8h (RDC 6.5h + Baamboozle 1.5h) | OK |
-| TuanNT | 0h on all 19 scanned projects. He worked on James–DefinitiveGuide all day per Matrix, and that project is not in the script | 🔴 #5, unverified, re-check |
-| LeNH | 0h (James Diamond: 8h on 10-05 and 8h on 10-06) | 🔴 #5, likely lag, re-check |
-| PhucVT | 0h (Arthur $81 addendum + DefinitiveGuide CP1 deploy per Matrix) | Not gated |
+| TuanNT | ~~0h on all 19 scanned projects. He worked on James–DefinitiveGuide all day per Matrix, and that project is not in the script~~ **8h, misdated 10-08:** Definitive Guide 7h + Speedventory 1h (08:50 raw rows) | ~~🔴 #5, unverified, re-check~~ ✓ worked, wrong date |
+| LeNH | 0h (James Diamond: 8h on 10-05 and 8h on 10-06). Still 0h at 08:50 | 🔴 #5, re-query after 09:30 |
+| PhucVT | 0h (Arthur $81 addendum + DefinitiveGuide CP1 deploy per Matrix). Week: Crystal lang 14h, Definitive Guide 2h on 10-06 | Not gated |
 | AnhNH2 | 4h (James Diamond) | informational |
 | VyNL | 7.75h (Speedventory) | informational |
 | DuongDN | 0.17h (Tokenlite) | — |
@@ -109,8 +109,9 @@ Reporting day: **2026-10-07 (Wed)**. Fetched at 05:15, so same-day logging may b
 | Crystal lang (Arthur) | — | TienND | 0h | **Pending** (PhucVT 10-05 8h, 10-06 6h), #7 |
 | OhCleo | LongVV 5h | DuongDN, MinhTV | 0h | **Pending** (LongVV 10-05/06/07), #7 |
 | Family App | — (week: LuHX 3h) | — | — | need_review=false |
+| Definitive Guide (added 08:50) | LongVV 0.5h (TuanNT 7h dated 10-08) | — | — | need_review=false |
 
-Trello: Aysar, Elliott ✓. Bailey ○, James Diamond ○ (#5).
+Trello: Aysar, Elliott ✓. ~~Bailey ○~~ Bailey ✓ 08:52. James Diamond ○ (#5).
 
 ---
 
@@ -186,6 +187,8 @@ Full details: reports/2026-10-08/matrix-rooms-0502.md
 
 (The other flagged items, Lyf admin PR and Wildsoul offline/WBS questions, were answered by you the same day.)
 
+**08:43 delta (05:00→08:43, 14 msgs / 7 rooms, [matrix-rooms-0843.md](matrix-rooms-0843.md)):** Wildsoul: namtv challenges the visit-history mapping ("history ở đây là họ xem trên Mindbody… ko cook kiểu mapping như Latecancel = No Show được"). You replied 08:17; still being settled before today's send. PHP Projects: namtv 07:20 follow-up on the Maddy invoice (#4). Bailey: TuanNT posted his 10-07 task summary 08:42. Direct Manager: chientx asks everyone to re-check customer replies and submit a status update. Lyf: minhtv asked LongVV for today's status. Elena OP: license view history done (tuanntg).
+
 ### Key updates
 
 **Wildsoul (pre-sales):** Ongoing-cost doc sent with hosting options (namtv). Mindbody per-booking fees noted ($1.30/class, $2.50/appointment). Review meeting found WBS gaps (dynamic pricing, off-peak, push pass updates, report data source → CSV export only). Must be sent 10-08.
@@ -238,11 +241,11 @@ Not gated by Trello.
 
 | Workroom | Result |
 |----------|--------|
-| Rory | Not verified: Cloudflare challenge not resolved |
-| Aysar | Not verified: carrick live cookies/stored/headless login all failed |
-| Tokenlite | Not verified: Cloudflare challenge not resolved |
+| Rory | ~~Not verified: Cloudflare challenge not resolved~~ 0 memos on 10-07 (no Rory time that day) ✓ |
+| Aysar | ~~Not verified~~ 2 memos, both valid: "Implement approved navy dark mode across remaining pages (#705)", "Fix Bug: Verification error shown when clicking verify link on already verified account #698" ✓ |
+| Tokenlite | Not verified (08:55 local re-run also `login_failed`). Ad-hoc, DuongDN 0.17h on 10-07 |
 
-Neural Contract (`upwork-neural-check.js`): carrick Chrome Profile 1 gave 0 cookies, and all 4 attempts redirected to login. Same as 10-07: it needs one real login in carrick's Chrome Profile 1, and this headless host can't do that. Per the session-failure rule this is not an alert. Neural ✓. Manual re-run from local: `node scripts/upwork-memo-check.js --date=2026-10-07`.
+~~Neural Contract (`upwork-neural-check.js`): carrick Chrome Profile 1 gave 0 cookies, and all 4 attempts redirected to login. Same as 10-07: it needs one real login in carrick's Chrome Profile 1, and this headless host can't do that.~~ 08:55 local: carrick's Profile 1 session is alive (69 cookies, `master_refresh_token` → 10-21; slave access token refreshed by opening Upwork in his Chrome). The memo check works with it, but the messages pages (`upwork-neural-check.js` and `upwork-room-messages.js`) still redirect to login, so Neural messages were not read this run. Per the session-failure rule this is not an alert. Neural ✓. Manual re-run from local: `node scripts/upwork-memo-check.js --date=2026-10-07`.
 
 ---
 
@@ -262,9 +265,9 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check mail:** 5/6 ✓. Ken ○ (#8).
 
-**Check progress (17/22):**
-- ✓ complete: John Yi (ignore), Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Andrew Taraba, Rebecca (ignore), Colin (ignore), Philip (ignore), Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
-- ○ incomplete: **Maddy** (#4), **James Diamond** (#5 LeNH), **Bailey** (#5 TuanNT), **Fountain** (#2), **Ohcleo** (#3).
+**Check progress (~~17/22~~ 18/22 at 08:52):**
+- ✓ complete: John Yi (ignore), Rory, Aysar, Franc, Elliott, MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Andrew Taraba, Rebecca (ignore), Colin (ignore), Philip (ignore), Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard, **Bailey (08:52)**.
+- ○ incomplete: **Maddy** (#4), **James Diamond** (#5 LeNH), ~~**Bailey** (#5 TuanNT)~~, **Fountain** (#2), **Ohcleo** (#3).
 
 Live card re-fetched after writes. Neither card is marked done.
 
@@ -280,7 +283,8 @@ Live card re-fetched after writes. Neither card is marked done.
 ## Unresolved Questions
 
 1. MPFC apdex 0.01 + 1GB memory exhaustion: is the server overloaded, or is a plugin/cron leaking? It needs `/me:mpfc-monitor` or a server check today (third day degrading).
-2. Workstream script doesn't include a James–DefinitiveGuide project. Does one exist on WS (TuanNT/PhucVT/LongVV hours)? If so, add it to `workstream-fetch-project-week.js`.
+2. ~~Workstream script doesn't include a James–DefinitiveGuide project. Does one exist on WS (TuanNT/PhucVT/LongVV hours)? If so, add it to `workstream-fetch-project-week.js`.~~ Answered: "Definitive Guide" (`cmqyvioiy00adqo0x9zyt66t2`) exists. Added to the script along with Portfolio (Andrew Taraba), Auction Warehouse and Samguard.
 3. ken@ Zoho app password: please provide a new one (2nd day).
 4. GitLab compute minutes for Carrick's namespace: buy more or use a self-hosted runner? It now blocks the DefinitiveGuide upgrade testing.
-5. Upwork (Rory/Aysar/Tokenlite memos + Neural) needs one real browser login in carrick's/duongdn's Chrome from local.
+5. ~~Upwork (Rory/Aysar/Tokenlite memos + Neural) needs one real browser login in carrick's/duongdn's Chrome from local.~~ Rory/Aysar are now verified locally. Still open: Tokenlite memo + Neural messages redirect to login even though carrick's session is alive. Is Tokenlite on carrick's account or yours?
+6. TuanNT dated his 10-07 work as 10-08. Should he move it to 10-07? It also inflates 10-08.

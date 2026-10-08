@@ -45,6 +45,11 @@ const PROJECTS = {
   bxr_app:        { id: 'cmqyvio7a002dqo0x54rx6o20', name: 'BXR App',                    client: 'Rory',           manager: true  },
   crystal_lang:   { id: 'cmqezgh7z080hp81vo5yqd24z', name: 'Crystal lang',               client: 'Arthur',         manager: true  },
   ohcleo:         { id: 'cmqgdtr7s0memp81vfste5stp', name: 'OhCleo',                     client: 'OhCleo',         manager: true  },
+  // Added 2026-10-08 from live /time/projects — cron missed TuanNT/PhucVT/LongVV hours on these
+  definitive_guide:{ id: 'cmqyvioiy00adqo0x9zyt66t2', name: 'Definitive Guide',          client: 'James Diamond',  manager: true  },
+  andrew_taraba:  { id: 'cmqyvioez007pqo0xn1iexfg3', name: 'Portfolio',                  client: 'Andrew Taraba',  manager: true  },
+  auction_warehouse:{ id: 'cms5wsucz149dlm1vrf92bshf', name: 'Auction Warehouse',        client: 'Brad Ballantine',manager: true  },
+  samguard:       { id: 'cmqyvio6u0021qo0xljhu70q8', name: 'Samguard',                   client: 'Elena',          manager: true  },
 };
 
 // Manual overrides where Workstream's own `isReviewer` checkbox is wrong/unset and the user
