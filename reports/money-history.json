@@ -611,6 +611,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW -7.7M vs 10-02: chi tieu -5.67M, vang -4.0M (717.5M), Vi +2.0M dieu chinh so du khong co ghi chep, FX -5.7K. NW = totaldashboard 6,511,098,870 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 81.9M/Chi 20.5M/Net +61.3M. 602M so dao han 10-13/10."
+    },
+    {
+      "date": "2026-10-08",
+      "label": "08/10",
+      "net_worth": 7898793042,
+      "gross_assets": 7973073707,
+      "liabilities": 3980664,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 715000000,
+        "investment": 2502123840,
+        "savings": 1192321425,
+        "liquid": 43628442
+      },
+      "method": "dashboard_verified",
+      "note": "NW -4.77M vs 10-05: vang -2.5M (715M), the visa -1.61M, vcb -0.39M (175K khong co dong ghi), Vi -0.27M. Tikop->FPTS 17.2M (dau tu, T10 da nap FPTS 46.2M). NW = totaldashboard 6,506,325,973 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. Liquid con 43.6M. T10 MTD Thu 81.9M/Chi 22.6M/Net +59.2M. 602M so dao han 10-13/10."
     }
   ]
 }
