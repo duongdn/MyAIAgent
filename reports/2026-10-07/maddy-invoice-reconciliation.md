@@ -203,3 +203,20 @@ Nguồn: WS LongVV project Maddy (bỏ 2 dòng tag "Làm trước report sau" = 
 - Vi phạm luật 12/07 trong invoice T9: 5h điều tra quoting tool (16/09) **không xin approve**, 468 approve 1h nhưng bill 2.5h, các việc qua Slack (Shopify draft 1h, payout 0.25h) không có est/approve.
 
 **Giới hạn nguồn:** Slack Xtreme chỉ giữ 90 ngày (tin cũ nhất 11/07), nên không thấy thỏa thuận ban đầu. Chưa quét email kai@ / chientx (hợp đồng, rate ban đầu).
+
+### Msg Madhuraka 10/09 "they won't be willing to pay again": đã được xử lý trên JIRA 465
+
+- **10/09 12:13–12:14 (Slack):** Madhuraka: "Kai, regarding the feedback email, what about the bugs they have mentioned? We recently did a task to address those so they won't be willing to pay again". Kai **không reply trên Slack**, 17:31 chỉ gửi progress.
+- **10/09 11:38 (JIRA 465):** Kai est 4h cho 5 item feedback (ticket do Kai tạo 09/09, Madhuraka link với 449/451 ngày 21/09).
+- **10/09 13:36 ([JIRA 465 comment](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-465?focusedCommentId=49584)):** Kai tách loại: chỉ charge 3 item, **Final est 1h**:
+  - Column spacing: 0.25h (khách muốn chỉnh thêm trên bản đã approve; phần giới hạn đúng tab thì làm free)
+  - Status dropdown Products tab: 0.25h
+  - Clear ticks sau khi gửi: 0.5h (tính năng mới)
+  - Item 3 (email báo giá không tới) + item 4 (9W chỉ mark 1 item): **không charge**, coi là bug
+- **10/09 13:54:** Madhuraka: "**@Kai proceed**" → approve.
+- WS bill 465 = **1h** (10/09), JIRA log 1h → khớp approve.
+- **11/09 09:48–09:58 (Matrix room Maddy):** anh hỏi vì sao không trả lời. LongVV: "có 1 số bug thì mình ko có charge dc, nên e đã liệt kê ra lý do để charge cho 1 số item, ổng cũng ok". TuanTT: "có lố tí thì cũng bù giúp", "cái nào rõ ràng out of scope thì mới xin giờ thêm".
+
+**Ý nghĩa cho mô hình:** đây là bằng chứng rõ nhất về nguyên tắc **bug trên task đã bill → free; thay đổi/tính năng mới → charge, có est, có approve**. Maddy đã đồng ý ("proceed") trên chính nguyên tắc đó.
+**Điểm yếu:** item 2 (status dropdown ngắn lại sau đợt spacing của mình) bị charge 0.25h. Khách cuối nói rõ là do thay đổi trước gây ra → Maddy có thể coi là bug.
+**Bài học giao tiếp:** câu hỏi trên Slack phải reply trên Slack (dù chỉ dẫn link JIRA). Im lặng trên Slack làm Maddy tưởng bị bỏ qua.
