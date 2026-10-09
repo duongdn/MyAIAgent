@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-09 (Friday)
 
-**Run:** 2026-10-09T05:00:12+07:00 (cron)
+**Run:** 2026-10-09T05:00:12+07:00 (cron), corrected 08:35 (+07:00)
 **Window:** 2026-10-08T05:30:00+07:00 → 2026-10-09 05:30 (+07:00)
 **Leave plan:** parse-leave-emails refreshed 05:00: no upcoming approved leave. From Matrix: TienND sick 10-08. TuanNT left 1h early 10-08 (approved). DaiDV off 10-09 (from 10-08 report).
 
@@ -13,8 +13,9 @@
 | 1 | Performance (MPFC) | **Apdex 0.02**, 4th day critical (0.16 → 0.01 → 0.02). Avg response 3.84s over 35,790 requests. `continue` E_WARNING ×143, WP_Error::get_method ×50, mysqli socket ×2, MM_Event class not found ×2, `get_header()` undefined ×1. Slowest requests are scanner probes (`.ssh/authorized_keys`, `yarn.lock`, `local_settings.py`) at ~72–76s, but real pages are just as slow (`user-video/warm-up-day-5` 73.8s). The site is still badly degraded. Needs `/me:mpfc-monitor` or a server check. |
 | 2 | Slack Xtreme / Matrix (Maddy) | (a) Invoice explanation: you rewrote the apology message for Madhuraka at 17:04 (PHP Projects). It's **not confirmed that chientx sent it to the client**, and chientx will handle point 3 separately. (b) Anoma 17:38: "Can u send me the images for these 'Not fixed' issues". No reply from Kai yet. (c) LIFM2-468 (Testing) has no estimate and no JIRA log. → Maddy ○ |
 | 3 | Slack RDC (Franc) | dmetiner 04:07–04:11 (today): new bug. Assigning a favorite frequency to a user shifts the preset buttons plugin ("only assigned Power FM… 100.7 also got overridden and all other frequencies shifted"). He also asked: "Can you please take note of this failure and how you solved it in a Markdown file for the future?" Unanswered (fresh). → Franc ○ |
-| 4 | Discord Bizurk (Andrew Taraba) | animeworld 05:01 today: "there seems to be a bug here" (plus an attachment). This comes after "ok looks good to me" (13:08) on Carrick's POS/WooCommerce status work. Unanswered. → Andrew Taraba ○ |
+| 4 | Discord Bizurk (Andrew Taraba) | animeworld 05:01–05:54 today, all unanswered as of 08:30: (a) "Add fee or discount" → "Update Total" wrongly opens the collect-payment modal for the original amount; (b) "another major error": closing the mobile browser to open the payment app closes all modals ("this POS plugin is super shitty… can you see if there's a fix"); (c) move "Chip and Pin" to the top of the list, selected by default; (d) rename "Chip and Pin" to "Credit Card". ~~animeworld 05:01 today: "there seems to be a bug here"~~ (plus an attachment). This comes after "ok looks good to me" (13:08) on Carrick's POS/WooCommerce status work. Unanswered. → Andrew Taraba ○ |
 | 5 | Workstream needs review | OhCleo: LongVV 10-05 ×3 (8h), 10-06 ×2 (2h), 10-07 ×3 (5h), plus PhuongPVT 10-05 0h, all Pending. Reviewers: **DuongDN, MinhTV** (4th day). Crystal lang: PhucVT 10-05 8h, 10-06 6h, 10-07 3h Pending. Reviewer: **TienND** (Arthur paused, listed for visibility). |
+| 10 | Upwork Memo (Aysar) | Re-run 08:30: KhanhHH 10-08, 1 of 3 memos flagged: "Handle feature: Allow free subscriptions given through admin to be revoked #718" (the script reads it as a feature label, not a stated action; borderline because "Handle" is a verb). Rory: 0 memos on 10-08. Tokenlite still not verified. Informational, does not gate Aysar. |
 | 6 | Email (ken@) | Still not scanned: Zoho IMAP `AUTHENTICATIONFAILED` (3rd day). Calendar `no_principal`. A new app password is needed. → Ken mail ○ |
 | 7 | Email (carrick@) | GitLab definitive-guide pipelines still failing ×11 (cp1-laravel10, cp1-staging-fixes, integration). Compute minutes are still exhausted (4th day). Team is testing on the new `upgrade/cp2-laravel13` branch. Also **Mailjet "Account suspension review request" reply** (Request #4279499). Worth reading, since it's an account suspension. |
 | 8 | Email (vuongtrancr@) | Swish New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" ×15 (up from ×8 on 10-07, ×2 on 10-06). Escalating trend. |
@@ -77,7 +78,7 @@ Tokens valid on both accounts.
 | AirAgri (nusvinn) | 28 | **Vinn daily report present** (review PRs #746/#747, Factual Investigation corrective actions deployed; Mary/bellatric02 tested OK). **Jeff daily report present** (4h, Contractor App check-in form flow). dapackage merging Ceres + onboarding to staging and asking for opinions. jdiamond asked Vinn to start peer-reviewing Jeff's work ("not because i dont trust him"). |
 | Bizurk (nuscarrick) | 0 + 9 DMs | Carrick finished the POS/WooCommerce status snippet and the client said "ok looks good to me" (13:08). **animeworld 05:01: "there seems to be a bug here"** → #4 |
 
-Trello: Andrew Taraba ○ (#4). James Diamond ○ (Vinn OK, LeNH 10-08 not yet logged).
+Trello: Andrew Taraba ○ (#4, 4 more asks 05:01–05:54). James Diamond ~~○ (Vinn OK, LeNH 10-08 not yet logged)~~ ✓ (LeNH 8h found 08:23).
 
 ---
 
@@ -87,9 +88,9 @@ Reporting day: **2026-10-08 (Thu)**. Fetched at 05:15 via a Keycloak API token r
 
 | Developer | 2026-10-08 (all WS projects) | Week to date | Status |
 |-----------|------|------|--------|
-| LeNH | — (not yet logged) | James Diamond 8/8/8 (10-07 backfilled ✓) | pending → James Diamond ○ |
-| TuanNT | — (not yet logged; Matrix: DefinitiveGuide testing all day, left 1h early) | 10-05 8h, 10-06 8h, 10-07 8h (Def. Guide 7 + Speedventory 1, **date fixed** ✓) | pending → Bailey ○ |
-| KhanhHH | — (not yet logged) | 10-05 8h, 10-06 8h (RDC), 10-07 8h (RDC 6.5 + Baamboozle 1.5) | pending → Aysar ○, Elliott ○ |
+| LeNH | ~~— (not yet logged)~~ **8h** James Diamond (08:23 re-check) | James Diamond 8/8/8/8 | ✓ OK → James Diamond ✓ |
+| TuanNT | — (still not logged at 08:23 re-check; Matrix: DefinitiveGuide testing all day, left 1h early) | 10-05 8h, 10-06 8h, 10-07 8h (Def. Guide 7 + Speedventory 1, **date fixed** ✓) | pending → Bailey ○ |
+| KhanhHH | — (still not logged at 08:23; Upwork Aysar shows 3 memos on 10-08, so she did work) | 10-05 8h, 10-06 8h (RDC), 10-07 8h (RDC 6.5 + Baamboozle 1.5) | pending → Aysar ○, Elliott ○ |
 | PhucVT | — | Crystal lang 17h + Definitive Guide 7h | Not gated |
 | LongVV | 3h (Maddy 1 + Definitive Guide 2) | OhCleo 15h, Maddy 2h, Def. Guide 3h | Ad-hoc, informational |
 | LuHX | 0.67h (BXR) | Maddy 1, Family App 3 | informational |
@@ -100,7 +101,7 @@ Reporting day: **2026-10-08 (Thu)**. Fetched at 05:15 via a Keycloak API token r
 | Project | Dev hours 10-08 | Reviewer(s) | Reviewer's charged hours | Review status |
 |---------|------------------|-------------|------------|----------------|
 | Maddy (Xtreme) | LongVV 1h | — | — | need_review=false |
-| James Diamond | — | PhucVT, LeNH | LeNH — (24h wk) | none pending |
+| James Diamond | ~~—~~ LeNH 8h, AnhNH2 4h | PhucVT, LeNH | LeNH 8h (32h wk) | none pending |
 | Baamboozle (Aysar) | — | — | — | need_review=false |
 | Generator (Elliott) | — | HangNTT, LucNT | 0h | none pending |
 | Colin/ETZ | — | LucNT | 0h | none pending (paused) |
@@ -115,7 +116,7 @@ Reporting day: **2026-10-08 (Thu)**. Fetched at 05:15 via a Keycloak API token r
 
 Missing-report days flagged by WS: Baamboozle 10-05/10-07, James Diamond 10-05–07, Crystal lang 10-05–07 (informational).
 
-Trello: James Diamond, Bailey, Aysar, Elliott ○, pending a re-check of 10-08 hours after 09:00.
+Trello: ~~James Diamond,~~ Bailey, Aysar, Elliott ○, pending a re-check of 10-08 hours after 09:00. James Diamond ✓ (08:35, LeNH 8h + Vinn report OK).
 
 ---
 
@@ -238,9 +239,9 @@ Not gated by Trello.
 
 | Workroom | Result |
 |----------|--------|
-| Rory | Not verified: Cloudflare challenge not resolved on this headless host |
-| Aysar | Not verified: live cookies, stored session and headless login all failed (carrick Chrome Profile 1 not reachable from cron) |
-| Tokenlite | Not verified: Cloudflare challenge |
+| Rory | ~~Not verified~~ Re-run 08:30: 0 memos on 10-08 |
+| Aysar | ~~Not verified~~ Re-run 08:30: KhanhHH, 3 memos, 2 valid. ⚠️ "Handle feature: Allow free subscriptions given through admin to be revoked #718" is feature-label style (#10) |
+| Tokenlite | Not verified locally either (carrick Chrome Profile 1 session). Manual: `node scripts/upwork-memo-check.js --date=2026-10-08 --workroom=Tokenlite` |
 
 Per the session-failure rule this is not an alert and not a memo status. Yesterday the local re-run worked once carrick's real Chrome refreshed the token. Manual re-run from local: `node scripts/upwork-memo-check.js --date=2026-10-08`. Neural messages were not read (same cause), so Neural ✓ per rule.
 
@@ -262,9 +263,9 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check mail:** 5/6 ✓. Ken ○ (#6).
 
-**Check progress: 15/22**
+**Check progress: ~~15/22~~ 16/22** (08:35)
 - ✓ complete: John Yi (ignore), Rory, MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Rebecca (ignore), Colin (ignore), Fountain, Philip (ignore), Ohcleo, Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
-- ○ incomplete: **Maddy** (#2), **Franc** (#3), **Andrew Taraba** (#4), **James Diamond** (LeNH 10-08 pending), **Bailey** (TuanNT 10-08 pending), **Aysar** + **Elliott** (KhanhHH 10-08 pending).
+- ○ incomplete: **Maddy** (#2), **Franc** (#3), **Andrew Taraba** (#4), ~~**James Diamond** (LeNH 10-08 pending)~~ (✓ 08:35), **Bailey** (TuanNT 10-08 pending), **Aysar** + **Elliott** (KhanhHH 10-08 pending).
 
 Live card re-fetched after writes. Neither card is marked done.
 
