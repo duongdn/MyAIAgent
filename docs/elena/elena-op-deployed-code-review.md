@@ -5,7 +5,7 @@
 
 ## 1. Phạm vi: cái gì đang chạy trên test env
 
-Code đã merge vào `nus-base` gồm **FE** (Angular, `precognize-workspace`, qua các PR bên dưới) và **BE `microservices-optimization` + gateway `POST /optimization/models/create`** (Brian commit thẳng `4acdfda072` "feat: init optimization" ngày 06/10, không qua PR). BE license đa module (#315) và tag details (#321) **chưa merge**. Nếu test env đang chạy chúng thì đó là kietnht deploy thẳng từ branch. Kiến trúc: [elena-op-architecture-explained.md](elena-op-architecture-explained.md).
+Code đã merge vào `nus-base` gồm **FE** (Angular, `precognize-workspace`, qua các PR bên dưới) và **BE `microservices-optimization` + gateway `POST /optimization/models/create`** (Brian commit thẳng `4acdfda072` "feat: init optimization" ngày 06/10, không qua PR). BE license đa module (#315) và tag details (#321) **chưa merge**, nhưng **đã chạy trên test env** (kiểm chứng 09/10: `/license/status` có `modules.optimization`, `/model/tags/details` trả 200), tức là kietnht deploy thẳng từ branch. Kiến trúc: [elena-op-architecture-explained.md](elena-op-architecture-explained.md).
 
 | Mảng | PR đã merge | Trạng thái dữ liệu |
 |------|-------------|--------------------|
@@ -32,6 +32,9 @@ Có **3 vấn đề cần bàn ngay** và một vài điểm technical/perf:
 | E | Mock vẫn chạy trên test env (Runs, check tên, save draft), kể cả "tên ma" gây lỗi giả | ⚠️ |
 | F | Module OP mở cả Configuration + Digital Plant, cần khách xác nhận | 💬 bàn |
 | G | Chưa có cảnh báo hết credit / sắp đầy model cho OP (chỉ có cảnh báo tag của Monitoring) | 💬 bàn |
+| H | **Live 09/10:** validate của optimization service (`assert`) **không chạy** trên test env, dữ liệu sai lọt qua | 🔴 |
+| I | **Live 09/10:** tag search trả **0 kết quả** với mọi từ khóa, nên Step 1 không chọn được tag | 🔴 |
+| J | **Live 09/10:** lỗi trả về lộ message Java thô (`Cannot invoke "String.trim()"...`, `Cannot deserialize ... [MAXIMIZE, MINIMIZE]`) | ⚠️ |
 
 ## 3. Chi tiết từng vấn đề
 
@@ -80,6 +83,23 @@ Có **3 vấn đề cần bàn ngay** và một vài điểm technical/perf:
 ### G. Chưa có cảnh báo cho tài nguyên OP (💬)
 - `admin-ui/.../license/license.service.ts` `getWarningMessage()` mới cảnh báo hết hạn, vượt tag và trial. Chưa có "credit sắp hết", "đã dùng 9/10 model".
 - Có thể đây là ticket sau. Nên hỏi vytth có trong M1 không.
+
+### H. Validate bằng `assert` không chạy trên test env (🔴)
+- **Kiểm chứng:** đăng nhập System, gọi `POST /optimization/models/create` với `minimumDesiredImprovement: 999` (giới hạn là 20) và tag giả. Kết quả trả `optimizationTagNotFound`, tức là đã **qua** bước check improvement. Body `{}` thì trả `Cannot invoke "String.trim()" because "name" is null` (NPE) thay vì `invalidOptimizationModelName`. Cả hai cho thấy các dòng `assert` trong `DaeOptimizationModelConstraints` bị bỏ qua.
+- **Nguyên nhân khả dĩ:** `assert` chỉ chạy khi JVM có `-ea`. Dockerfile có `-ea`, nhưng bản trên test env có lẽ chạy jar không qua Dockerfile đó (kietnht deploy tay).
+- **Kịch bản:** FE nối Save/Create mà gửi dữ liệu sai (improvement 50%, cost âm, influencer trùng target) thì BE **lưu vào Mongo** không báo gì. Thuật toán sau đó nhận model rác. Lỗi này cũng có thể xảy ra ở production nếu khởi động sai cách.
+- **Đề xuất:** hỏi kietnht service optimization chạy bằng lệnh gì, thêm `-ea`. Lâu dài thì không dùng `assert` cho validate nghiệp vụ (đổi thành `if (...) throw new AssertionError(...)`, như code đã làm với `nameAlreadyExist`). Áp dụng cho cả license/domain service nếu cũng chạy thiếu `-ea`.
+
+### I. Tag search trả 0 kết quả (🔴 chặn test Step 1)
+- **Kiểm chứng:** `GET /search/entityByNameAndDescription?query=PV|TI|FI|a|1&entityType=Column` đều trả `data: []` (khoảng 0.25s), trong khi license báo `currentColumnCount = 4604` tag.
+- **Khả năng:** index full-text (Lucene `NameAndDescriptionIndex` trên Neo4j) chưa được build lại sau khi chạy lại migration DP ngày 08/10. Có thể liên quan tin kietnht 09/10 09:09 "AA mất hết asset name".
+- **Hệ quả:** QC không test được wizard Step 1/2 (không chọn được tag nào).
+- **Đề xuất:** báo kietnht/tiennd2 kiểm tra index search trên test env.
+- Ghi chú: gửi `entityType=COLUMN` (viết hoa) thì lỗi `No enum constant ... DaeEntityTypes.COLUMN`. FE gửi `Column` nên không bị, chỉ lưu ý khi test bằng curl.
+
+### J. Lộ message lỗi Java ra client (⚠️)
+- Response `reason` chứa nguyên exception (tên class Java, danh sách enum). Đây không phải errorId nên FE không dịch được, và để lộ cấu trúc nội bộ.
+- **Đề xuất:** gateway/service map lỗi parse và NPE thành errorId chung (ví dụ `invalidPayload`).
 
 ### Điểm tốt đã kiểm tra
 - `LicenseModulesService` chia sẻ 1 lần đọc `/license/status` mỗi navigation (guard + trang dùng chung), không gọi lặp.
