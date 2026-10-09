@@ -10,6 +10,12 @@
   | `system@precog.co` | System (isSystem, ADMIN, không bị chặn khi license không hợp lệ) | room Elena - Digital Plant, tiennd2 26/02. Đăng nhập OK 09/10 |
   | `qc2@nustechnology.com`, `qc3@nustechnology.com` | QC (Admin?) | kietnht tạo 07/08, QC tự đặt pass. Hỏi duyvna |
   | user thường (không ADMIN) | | chưa có. Nhờ kietnht tạo, hoặc System tạo trong Admin → Users |
+- **Máy khác:** `git pull`, rồi giải mã riêng file này (đừng chạy `decrypt-secrets.sh` cho tất cả, vì có thể đè token đang sống):
+  ```bash
+  source .env && openssl enc -d -aes-256-cbc -pbkdf2 -in config/.elena-op-test-accounts.json.enc \
+    -out config/.elena-op-test-accounts.json -pass "pass:$SECRETS_KEY"
+  ```
+  Sửa file thì mã hóa lại: `bash scripts/encrypt-secrets.sh config/.elena-op-test-accounts.json`, rồi commit file `.enc`.
 - **Đăng nhập nhanh bằng curl** (lấy cookie dùng cho mọi lệnh bên dưới):
   ```bash
   B=https://active-alerts.nusdev.net/vp_server/dae/rest
