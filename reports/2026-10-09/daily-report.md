@@ -16,7 +16,7 @@
 | 4 | Discord Bizurk (Andrew Taraba) | animeworld 05:01–05:54 today, all unanswered as of 08:30: (a) "Add fee or discount" → "Update Total" wrongly opens the collect-payment modal for the original amount; (b) "another major error": closing the mobile browser to open the payment app closes all modals ("this POS plugin is super shitty… can you see if there's a fix"); (c) move "Chip and Pin" to the top of the list, selected by default; (d) rename "Chip and Pin" to "Credit Card". ~~animeworld 05:01 today: "there seems to be a bug here"~~ (plus an attachment). This comes after "ok looks good to me" (13:08) on Carrick's POS/WooCommerce status work. Unanswered. → Andrew Taraba ○ |
 | 5 | Workstream needs review | OhCleo: LongVV 10-05 ×3 (8h), 10-06 ×2 (2h), 10-07 ×3 (5h), plus PhuongPVT 10-05 0h, all Pending. Reviewers: **DuongDN, MinhTV** (4th day). Crystal lang: PhucVT 10-05 8h, 10-06 6h, 10-07 3h Pending. Reviewer: **TienND** (Arthur paused, listed for visibility). |
 | 10 | Upwork Memo (Aysar) | Re-run 08:30: KhanhHH 10-08, 1 of 3 memos flagged: "Handle feature: Allow free subscriptions given through admin to be revoked #718" (the script reads it as a feature label, not a stated action; borderline because "Handle" is a verb). Rory: 0 memos on 10-08. Tokenlite still not verified. Informational, does not gate Aysar. |
-| 6 | Email (ken@) | Still not scanned: Zoho IMAP `AUTHENTICATIONFAILED` (3rd day). Calendar `no_principal`. A new app password is needed. → Ken mail ○ |
+| 6 | Email (ken@) | ✅ Resolved 08:58: new app password works, 3 GitHub notifications (amocc-material PR, no action). ~~Still not scanned: Zoho IMAP `AUTHENTICATIONFAILED` (3rd day). Calendar `no_principal`. A new app password is needed. → Ken mail ○ |
 | 7 | Email (carrick@) | GitLab definitive-guide pipelines still failing ×11 (cp1-laravel10, cp1-staging-fixes, integration). Compute minutes are still exhausted (4th day). Team is testing on the new `upgrade/cp2-laravel13` branch. Also **Mailjet "Account suspension review request" reply** (Request #4279499). Worth reading, since it's an account suspension. |
 | 8 | Email (vuongtrancr@) | Swish New Relic "Signal lost for 10 minutes on 'Low Application Throughput'" ×15 (up from ×8 on 10-07, ×2 on 10-06). Escalating trend. |
 | 9 | Fountain (Matrix QA) | ViTHT 13:42: **checkout page layout broken on the Gift-a-Choice flow** (HungPN saw it too); normal gift flow OK. The environment isn't stated, so it's not confirmed live. `build_a_box_gift_variants` is still slow at 15.5s avg over 98 calls (improved from 25.8s). Kunal's board comments are all handled, so Fountain ✓, but watch this. |
@@ -36,13 +36,13 @@
 | nick@... | 0 | — | no events |
 | rick@... | 13 | Rollbar daily summaries (FountainGifts, InfinityRoses, FirstProject). FountainStaging BugSnag: SitemapError, ArgumentError smartlink_giftdrop, PG::ConnectionBad ×4. All staging, no prod alert. | OmniGPT Daily Sync 10:30 (recurring) |
 | kai@... | 5 | Anoma mentioned Kai on LIFM2-468 ×3 (Quoting Tool Issue). Madhuraka marked LIFM2-466 [NOT PROCEEDING]. | no events |
-| ken@... | — | #6 IMAP auth rejected | unavailable (no_principal) |
+| ken@... | 3 (08:58) | GitHub notifications from mimaizumi/amocc-material ("feat: let every Files tab viewer", Hideki Ohkubo + khangnus). No alert. | DE - Daily Standup 08:30 |
 | vuongtrancr@gmail.com | 18 | #8 Swish signal lost ×15. Delayed-newform Rollbar daily summary. | — |
 | dnduongus@gmail.com | 23 | none (bank receipts, Shopee, LinkedIn, newsletters). "You shared some Google Account data with Claude" is your own Drive connector grant, not a breach. | — |
 | davidztv19@gmail.com | 2 | Google privacy notice, Basecamp ResidentRadius digest | — |
 | freelancer@mpfc | 1 | MPFC Rollbar daily summary | — |
 
-Trello: DuongDn, Carrick, Rick, Kai, Nick ✓ complete. Ken ○ (#6).
+Trello: DuongDn, Carrick, Rick, Kai, Nick ✓ complete. Ken ~~○ (#6)~~ ✓ (08:58).
 
 ---
 
@@ -261,7 +261,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 ## Trello — Check progress / Check mail — 05:30 (+07:00)
 
-**Check mail:** 5/6 ✓. Ken ○ (#6).
+**Check mail:** ~~5/6~~ 6/6 ✓ (Ken done 08:58).
 
 **Check progress: ~~15/22~~ 16/22** (08:35)
 - ✓ complete: John Yi (ignore), Rory, MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Rebecca (ignore), Colin (ignore), Fountain, Philip (ignore), Ohcleo, Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
@@ -282,7 +282,7 @@ Live card re-fetched after writes. Neither card is marked done.
 
 1. MPFC apdex ~0.0 for 4 days: who owns the server check today? It isn't recovering on its own.
 2. Was the revised Maddy invoice message (17:04) actually sent to Madhuraka?
-3. ken@ Zoho app password: please provide a new one (3rd day).
+3. ~~ken@ Zoho app password: please provide a new one (3rd day).~~ Resolved 08:58.
 4. GitLab compute minutes for Carrick's namespace: buy more or use a self-hosted runner? (4th day)
 5. Mailjet account suspension review (carrick@): what account or project is it for, and does anyone need to act?
 6. ViTHT shows 4h of a 40h plan on Fountain by Thursday. Is she on another project, or just not logging?
