@@ -14,29 +14,22 @@
 
 Mọi BE OP đang chạy trên test env đều **chưa qua review được merge**. Đây là vấn đề quy trình lớn nhất.
 
+> **Phạm vi review (user 09/10):** clone (theo quy ước "Cloned components") **không tính là duplicate**, vì đã thống nhất với khách. Dự án fixed-cost: chỉ review code OP của mình, không đề xuất sửa phần khác của repo (portal, admin, service khác, pattern chung).
+
 ## Tóm tắt
 
 | Mảng | Đánh giá | Ý chính |
 |------|----------|---------|
-| Duplicate | 🟡 | Khung service **copy từ microservices-license** (RSocket client 61 dòng giống 100%, RabbitMQ, Mongo convertors). Đây là pattern sẵn có của repo, nhưng có phần copy **không dùng tới**. Trong service có logic duyệt condition set bị lặp 2 nơi |
+| Duplicate | 🟡 | Khung service theo pattern repo (không tính). Lặp nội bộ: duyệt condition set ở 2 nơi, 2 định nghĩa "hợp lệ" ở op-26. Có code RabbitMQ copy sang mà **chưa dùng** |
 | Structure | 🟢/🟡 | Đúng pattern Controller → Control → Constraints → Repository → Mapper. `create()` là một lambda dài khoảng 100 dòng |
 | Follow spec | 🔴 | **Root BE `openspec/` không có spec hay change nào** cho optimization model, tag details, license đa module (đã merge/đang chạy). Trái rule "API contract chỉ được spec ở backend root" |
 | Test | 🟢 | Có test cho control, constraints, gateway control |
 
 ## 1. Duplicate code
 
-### 1.1 Khung service copy từ `microservices-license` (jscpd)
-| File optimization | Giống với (license) | Dòng | Dùng không? |
-|-------------------|---------------------|------|-------------|
-| `common/configuration/rsocket/DaeRSocketClient.java` | `DaeRSocketClient.java` | 61 (**100%**) | ✅ dùng gọi domain |
-| `common/configuration/rsocket/DaeRSocketClientConfig.java` | | 18 | ✅ |
-| `common/external_services/queue/DaeAmqpMessageSender.java` | | 39 | ❌ **không ai gọi** |
-| `common/configuration/queue/DaeRabbitMQConfig.java` | | 29 | ❌ chưa dùng (bước "publish calculation" là TODO) |
-| `common/configuration/database/mongodb/convertors/*` (4 file) | | 16–23 mỗi file | ✅ |
-
-- **Nhận xét:** repo vốn làm vậy (mỗi service một bản `DaeRSocketClient`, domain/investigation đã khác nhau 35–49 dòng). Nên đây **không phải lỗi của team OP**, mà là nợ kỹ thuật chung.
-- **Nhưng:** copy RabbitMQ khi chưa dùng thì service phải kết nối RabbitMQ lúc khởi động mà không có lý do (YAGNI), và sẽ lệch dần với bản gốc.
-- **Đề xuất:** (a) bỏ queue config đến khi làm bước gửi algorithm, hoặc (b) nếu giữ thì ghi rõ trong design. Dài hạn: đề xuất với khách đưa `DaeRSocketClient` + convertors vào `libraries/` (cần khách đồng ý vì sửa repo của họ).
+### 1.1 Code copy sang mà chưa dùng (💬 YAGNI)
+- `common/external_services/queue/DaeAmqpMessageSender.java`, `common/configuration/queue/DaeRabbitMQConfig.java`: không ai gọi, vì bước gửi algorithm còn TODO. Service vẫn phải kết nối RabbitMQ lúc khởi động. Bỏ đi, hoặc ghi chú là chuẩn bị cho bước algorithm.
+- Phần khung còn lại (RSocket client, Mongo convertors) copy theo pattern sẵn có của repo, nên không tính.
 
 ### 1.2 Lặp logic trong service
 | Chỗ | Trùng | Đề xuất |
@@ -89,7 +82,7 @@ Mọi BE OP đang chạy trên test env đều **chưa qua review được merge
 2. Spec BE cho optimization model (baseline + upsert/draft) **trước khi** FE nối Save/Create.
 3. Bỏ `assert` cho validate nghiệp vụ (đổi thành throw tường minh), hoặc bắt buộc `-ea` + health check.
 4. Tách `create()` thành các hàm nhỏ. Gom duyệt condition set một chỗ, dùng chung cho create/upsert/completion.
-5. Bỏ hoặc ghi chú phần RabbitMQ copy mà chưa dùng.
+5. Bỏ hoặc ghi chú phần RabbitMQ chưa dùng.
 
 ## Câu hỏi chưa giải quyết
 - Ai review/duyệt commit `4acdfda072` trước khi vào nus-base?
