@@ -126,6 +126,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 - [feedback_matrix_action_item_check_reply_before_flagging](daily-report/matrix/feedback_matrix_action_item_check_reply_before_flagging.md) — 🔴 check duongdn replied before listing action item; redact pasted creds
 ## daily-report:upwork
+- [feedback_upwork_memo_check_run_headless_never_open_windows](daily-report/upwork/feedback_upwork_memo_check_run_headless_never_open_windows.md) — 🔴 env -u DISPLAY; never open Chrome tabs/windows
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md)
 - [feedback_upwork_match_not_alert](daily-report/upwork/feedback_upwork_match_not_alert.md), [feedback_neural_consolidated](daily-report/upwork/feedback_neural_consolidated.md) — 🔴 read PERMANENT FIX before touching Neural/Rory/Aysar auth, [reference_upwork_workrooms](daily-report/upwork/reference_upwork_workrooms.md) — 🔴 live-cookie fix covers Rory/Aysar too
 - [reference_upwork_inbox_generic_room_script](daily-report/upwork/reference_upwork_inbox_generic_room_script.md) — read ANY inbox thread: `upwork-room-messages.js`, inbox=/ab/messages/, storyId not id
