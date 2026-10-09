@@ -141,6 +141,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_whatsapp_zalo_cdp_monitor](daily-report/project_whatsapp_zalo_cdp_monitor.md) — 🔴 WhatsApp full content + Zalo name/time only; dedicated monitor Chrome (--user-data-dir), E2EE constraint
 
 ## bailey-invoice-verify/monitor/task-monitor
+- [feedback_siteground_storage_pct_must_be_dashboard_quota_not_df](bailey/feedback_siteground_storage_pct_must_be_dashboard_quota_not_df.md) — 🔴 Slack storage % = dashboard quota (69%), never df /home/customer (86% was wrong)
 - [feedback_bailey_paturevision_billing](bailey/feedback_bailey_paturevision_billing.md), [feedback_tasklog_skip_first_row](bailey/feedback_tasklog_skip_first_row.md)
 - [feedback_bailey_trello_card_is_recurring](bailey/feedback_bailey_trello_card_is_recurring.md), [feedback_warning_needs_explanation](bailey/feedback_warning_needs_explanation.md), [reference_bailey_monitor_skill_file](bailey/reference_bailey_monitor_skill_file.md)
 - [feedback_overbudget_check_missing_from_other_active](bailey/feedback_overbudget_check_missing_from_other_active.md) — 🔴

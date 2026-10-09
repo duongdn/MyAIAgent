@@ -77,7 +77,10 @@ Healthy.
 14d: 1035 accepted / 1028 delivered / 27 failed (incl. retries) → **99.32%** (prev 99.81%). OK (≥99%).
 24h failed: `hopenbnum@free.fr` permanent bounce + suppress-bounce x2 (dead address, now suppressed); temporary/generic x2 each for arnaud.mazaudon@limousine.org, c.lavalley@west-telecom.com, laura@paturevision.fr. No reputation issue. Dip from last week is small, watch.
 
-## Siteground Statistics — ⚠️ UNAVAILABLE (last known 86% NOT OK)
+## Siteground Statistics — ✅ OK 69% (recheck 08:45, user-confirmed from dashboard)
+
+**Recheck 08:45:** user confirmed Siteground dashboard = **69%** → OK. Prior 86% was WRONG basis: it was `df` on `/home/customer` (164G shared server mount), not the account plan quota shown in dashboard. Today's run just carried that 86% forward. Slack line edited in place to `Prestashop: OK`.
+
 
 - `Bailey.cpanel` SSH alias absent from `~/.ssh/config` again (`Could not resolve hostname`) — note this run's host user is `mpfc`, the alias may only exist in another user's/host's config.
 - Puppeteer: `session_expired` (CAPTCHA on re-login, not retried).
@@ -86,7 +89,7 @@ Healthy.
 
 ## Slack Post
 
-Posted to GGS `#maintenance` (ts `1791486455.295929`). Performance OK, Memory OK (with note that the spikes stopped), Prestashop storage NOT OK (86%) with explanation referencing the pending cleanup, RDS WARNING with explanation.
+Posted to GGS `#maintenance` (ts `1791486455.295929`). Performance OK, Memory OK (with note that the spikes stopped), ~~Prestashop storage NOT OK (86%)~~ → edited to OK (recheck 08:45), RDS WARNING with explanation.
 
 ## SSL
 
@@ -95,7 +98,10 @@ Posted to GGS `#maintenance` (ts `1791486455.295929`). Performance OK, Memory OK
 
 Both >30d out.
 
-## Workstream Task Log — ❌ NOT COMPLETED
+## Workstream Task Log — ✅ DONE (recheck 08:45)
+
+**Recheck 08:45:** login OK, written speedventory 2026-10-09 "Weekly Monitor October 2026" 1:00 (id `cmv0b7m0n00das41v41ehaehq`).
+
 
 `workstream-login.js` failed: first attempt killed at 200s, retry (400s, 2 browser attempts) → "SSO redirected but API never fired", no token. Write → `401 "exp" claim timestamp check failed`. Known recurring SSO outage. Retry: `DISPLAY=:1 node scripts/workstream-login.js && node scripts/workstream-write-tasklog.js speedventory 2026-10-09 "Weekly Monitor October 2026" 1`.
 
@@ -105,8 +111,8 @@ Open card `6ac7da25e32dde588cdb2995` (found on the list, not the stale hardcoded
 
 ## Unresolved / follow-up
 
-- ❌ Workstream task log not written (SSO outage) — retry in recheck.
-- ⚠️ Siteground unavailable (SSH alias missing + CAPTCHA) — disk % carried from 10-02 (86%), retry SSH in recheck.
+- ~~❌ Workstream task log not written~~ ✅ written (recheck 08:45)
+- ~~⚠️ Siteground 86%~~ ✅ 69% OK per dashboard (user). 86% was `df` of shared mount, not quota. 02/10 Slack post still says NOT OK (86%) — leave unless user asks.
 - 🟡 Customer cleanup request for old Prestashop staging copies (~04/10) — awaiting Nick's check; nothing deleted yet.
 - 🔴 Staging RuntimeException (PHP 7.2 vs Composer 8.1) — 3 weeks, needs direct dev action.
 - RDS pending patch on speedventory — schedule a maintenance window so RDS can go back to OK.
