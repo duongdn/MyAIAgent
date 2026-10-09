@@ -1,0 +1,274 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP FE Action Items</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+</style></head><body><main><h1>Elena OP: việc cần sửa cho team FE (optimization-ui)</h1>
+<blockquote>
+<p>Gửi: samht, trinm (FE). Người review: DuongDN. Cập nhật 09/10/2026.
+Code đối chiếu: <code>nus-base</code> <code>a288733a18</code>. Viết tắt <code>FE/</code> = <code>precognize-workspace/projects/optimization-ui/src/app/</code>
+Phạm vi: chỉ code OP. Component clone (theo quy ước "Cloned components") <strong>không tính</strong> là duplicate. Không review unit test.</p>
+</blockquote>
+<p>Các mục <span class="r">🔴</span> là những lỗi <strong>khách đã từng bắt sửa</strong> trong các PR trước (dẫn nguồn ở từng mục). Khi deliver mà còn các lỗi này, khách sẽ trả về.</p>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Việc</th>
+<th>Mức</th>
+<th>Khi nào</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Mọi text trong template đi qua translate</td>
+<td><span class="r">🔴</span></td>
+<td>Trước khi deliver</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bỏ mock khỏi code delivery</td>
+<td><span class="r">🔴</span></td>
+<td>Trước khi deliver</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Khớp kiểu dữ liệu với BE (direction, cost, function, OR, units)</td>
+<td><span class="r">🔴</span></td>
+<td>Trước khi nối Save/Create</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Date format lấy từ configuration</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Loại đo (tag type) và icon lấy từ API</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Gộp 6 interface "tag" thành 1</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Không gọi function trong template</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Độ dài search tối thiểu = 3 (khớp BE)</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Wizard state có <code>modelId</code> trên URL</td>
+<td>⚠️</td>
+<td>Khi làm Edit/Draft (op-26)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Gom code lặp trong optimization-ui</td>
+<td>💬</td>
+<td>Khi tiện</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. Text không qua translate <span class="r">🔴</span></h2>
+<p><strong>Khách từng nói:</strong> <em>"We use translation pipe for all kinds of texts in templates"</em>, <em>"please use translate"</em> (PR 4454).</p>
+<p><strong>Chỗ cần sửa:</strong>
+- <code>FE/features/optimization-runs/optimization-runs-page.component.html:80,89,95</code>: "No optimization runs match the selected filters", "No Optimization Runs Available", "New Run"
+- <code>FE/shared/components/table-actions-header/table-actions-header.component.html:22,36,51,76</code>: "Suspend Selected Runs", "Manage Models", "Sort by", "Filters"
+- <code>FE/shared/components/recommendations-button/recommendations-button.component.html:10</code>: "Recommendations"
+- <code>FE/features/optimization-runs/optimization-runs.filters.ts:29-31</code>: label của filter
+- <code>aria-label</code> trong pagination, sort-menu, tag-picker, <code>app.component</code>
+- PR #325: <code>pauseLabel</code> (<code>'Pause Run' : 'Pause'</code>), tooltip <code>text="Run Now"</code></p>
+<p><strong>Cách sửa:</strong> thêm key i18n, dùng <code>| translate</code> như wizard (Goal/Influencers) đang làm đúng.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>2. Mock nằm trong code <span class="r">🔴</span></h2>
+<p><strong>Khách từng hỏi:</strong> <em>"Why is MOCK_USERS_RESPONSE needed?"</em> (PR 4539).</p>
+<p><strong>Chỗ cần sửa:</strong>
+- <code>FE/shared/mocks/optimization-mock-data.ts</code> (có tên "Mock Error", "Mock Save Error" sẽ hiện trên build thật)
+- <code>FE/features/optimization-runs/optimization-runs.sample-data.ts</code> (461 dòng)
+- <code>OptimizationModelService</code>: check tên trùng và save draft đang là mock
+- Mock run/model thêm ở PR #325, #328</p>
+<p><strong>Cách sửa:</strong> nối API thật khi BE có. Trong lúc chờ, để mock sau 1 provider (ví dụ <code>OPTIMIZATION_DATA_SOURCE</code>) hoặc cờ <code>environment</code>, sao cho build delivery không mang fixture.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>3. Kiểu dữ liệu FE lệch với BE <span class="r">🔴</span></h2>
+<p>Hiện tại FE gửi lên BE sẽ bị từ chối hoặc lưu sai. Đã kiểm trên test env.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>FE</th>
+<th>BE</th>
+<th>Cần làm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>direction</td>
+<td><code>min</code> / <code>max</code></td>
+<td><code>MINIMIZE</code> / <code>MAXIMIZE</code></td>
+<td>Map trong mapper</td>
+</tr>
+<tr>
+<td>Cost bỏ trống</td>
+<td>gửi <code>0</code></td>
+<td>yêu cầu 1.000–10.000.000</td>
+<td>Không gửi, hoặc chặn ở form. Chốt với BA</td>
+</tr>
+<tr>
+<td>Hàm expression</td>
+<td>có <code>MEAN</code>, <code>DIFF</code>, <code>PROP</code></td>
+<td>không có</td>
+<td>Chốt với BE/BA: BE thêm, hoặc FE ẩn</td>
+</tr>
+<tr>
+<td>Logical operator</td>
+<td>cho chọn <code>OR</code></td>
+<td>chỉ nhận <code>AND</code></td>
+<td>Chốt với BA, tạm ẩn <code>OR</code></td>
+</tr>
+<tr>
+<td><code>units</code> của tag</td>
+<td>bỏ field khi đọc <code>tags/details</code> (<code>optimization-tag-details.service.ts</code>)</td>
+<td>có trả</td>
+<td>Giữ <code>units</code>, expression builder cần để check "same unit"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cách sửa:</strong> một mapper FE ↔ DTO BE duy nhất (có test), dùng chung cho create/upsert. Không tự định nghĩa contract ở FE. Contract lấy theo spec BE (đang chờ BE viết).</p>
+<ul>
+<li>☐ Mapper</li>
+<li>☐ Giữ <code>units</code></li>
+<li>☐ Chốt cost/function/OR với BA (vytth)</li>
+</ul>
+<h2>4. Date format hardcode ⚠️</h2>
+<p><strong>Khách từng nói:</strong> <em>"we definitely need to use format from configuration"</em> (PR 4750). anhttl nhắc lại trong room 07/10.</p>
+<ul>
+<li>
+<p><code>FE/shared/components/optimization-model-item/optimization-model-item.component.ts:62</code>: <code>DATE_TIME_FORMAT = 'MM/dd/yyyy HH:mm'</code> → lấy từ configuration service.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>5. Loại đo hardcode ⚠️</h2>
+<p><strong>Khách/anhttl (29/07):</strong> text và icon trạng thái phải lấy từ API, không hardcode.</p>
+<ul>
+<li>
+<p><code>optimization-model-item.component.ts:17</code>: <code>OptimizationTagType = 'speed' | 'pressure' | …</code> và icon theo type. Plant có measurement type riêng (Temperature, Level, Conductivity…), icon base64 có sẵn trong <code>tags/details</code>.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>6. Sáu interface cho cùng "tag" ⚠️</h2>
+<p><strong>Khách từng nói:</strong> <em>"you are creating the same interface but with different names… use the single"</em> (PR 4539).</p>
+<ul>
+<li><code>OptimizationTagOption</code>, <code>OptimizationTargetTag</code>, <code>OptimizationTagDetail</code>, <code>ExpressionTag</code>, <code>RunTag</code>, <code>WizardInfluencer['tag']</code></li>
+<li>
+<p><strong>Cách sửa:</strong> 1 <code>OptimizationTag</code>, chỗ nào cần ít field hơn thì dùng <code>Pick</code>/<code>Partial</code>.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>7. Gọi function trong template ⚠️</h2>
+<p><strong>Khách từng nói:</strong> <em>"Try to avoid calling functions from the template… functionCallPipe"</em> (PR 4544).</p>
+<ul>
+<li><code>influencers-step.component.html</code>: <code>isMissingAsset(influencer)</code>, <code>isVisible(group)</code>, <code>hasHistory(group)</code>, <code>isTagIconLoading</code>, <code>isAssetIconLoading</code>, <code>orderError(delay)</code></li>
+<li><code>optimization-goal-step.component.html</code>: <code>costOrderError()</code>, <code>isTargetIconLoading(tag)</code></li>
+<li>Khoảng 20 chỗ. Đọc signal (<code>detailsState()</code>) thì không tính.</li>
+<li>
+<p><strong>Cách sửa:</strong> <code>functionCallPipe</code> (đã có ở admin/portal) hoặc <code>computed()</code>.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>8. Search tối thiểu 3 ký tự ⚠️</h2>
+<ul>
+<li>FE tag-picker cho search từ 2 ký tự, BE (#321) yêu cầu ≥3, nên gõ 2 ký tự không ra kết quả mà không báo gì.</li>
+<li>
+<p><strong>Cách sửa:</strong> đặt mặc định 3 (hoặc lấy từ config), hiện gợi ý "nhập ít nhất 3 ký tự".</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>9. Wizard state chỉ nằm trong RAM ⚠️</h2>
+<ul>
+<li><code>model-wizard-state.service.ts</code>: không có <code>modelId</code> trên URL, nên reload là mất, không mở lại draft được.</li>
+<li><strong>Cách làm (khi nối op-26):</strong> route <code>#/models/:id/edit/&lt;step&gt;</code>, mỗi step load/save qua upsert.</li>
+<li>
+<p><code>model-wizard.model.ts:14</code> có step <code>operating-constraints</code> nhưng <code>model-wizard.routes.ts</code> chưa có route: stepper hiện bước không mở được. Thêm placeholder hoặc ẩn.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>10. Code lặp nội bộ 💬</h2>
+<table>
+<thead>
+<tr>
+<th>Chỗ</th>
+<th>Đề xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overlay (CDK + backdrop + Escape + dispose) ở <code>side-drawer.component.ts:73</code>, <code>sort-menu.component.ts:92</code>, <code>scoped-search.component.ts:149</code></td>
+<td>Helper <code>createDismissibleOverlay()</code></td>
+</tr>
+<tr>
+<td>Footer Cancel/Previous/Next ở <code>influencers-step.component.html:229</code> và <code>step-placeholder.component.html:3</code></td>
+<td>Component <code>wizard-footer</code></td>
+</tr>
+<tr>
+<td>Pattern tag-details + retry + icon loading ở goal-step và influencers-step</td>
+<td>Service dùng chung (giữ <code>units</code>, xem mục 3)</td>
+</tr>
+<tr>
+<td><code>QueryCacheService</code> không ai dùng</td>
+<td>Bỏ</td>
+</tr>
+<tr>
+<td>4 chỗ <code>any</code> (<code>app.module.ts:24</code>, <code>initialize-optimization-header.ts:75</code>, interceptor)</td>
+<td>Thêm type</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Những gì đang làm tốt (giữ nguyên)</h2>
+<ul>
+<li>Wizard Goal/Influencers dùng translate đúng.</li>
+<li>Không gọi API trùng: license đọc 1 lần mỗi navigation, tag details gọi theo lô.</li>
+<li>Toàn bộ standalone component, wizard lazy-load, state theo page.</li>
+<li>Logic thuần (expression, runs search/filter/sort) tách khỏi component.</li>
+<li>Không <code>console.log</code>, không code comment-out.</li>
+</ul></main></body></html>

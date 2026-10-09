@@ -140,8 +140,3 @@ Hiện tại FE gửi lên BE sẽ bị từ chối hoặc lưu sai. Đã kiểm
 - Toàn bộ standalone component, wizard lazy-load, state theo page.
 - Logic thuần (expression, runs search/filter/sort) tách khỏi component.
 - Không `console.log`, không code comment-out.
-
-## Câu hỏi cần chốt (qua vytth/anhttl)
-- Cost bỏ trống thì gửi gì? BE có cho phép null không?
-- Có cần `MEAN`/`DIFF`/`PROP` và `OR` không? Nếu có thì BE phải thêm.
-- Khách có chấp nhận union string type (`OptimizationStatus`) thay cho `enum` không?
