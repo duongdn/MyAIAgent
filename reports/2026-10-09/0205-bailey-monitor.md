@@ -118,3 +118,5 @@ Open card `6ac7da25e32dde588cdb2995` (found on the list, not the stale hardcoded
 - RDS pending patch on speedventory — schedule a maintenance window so RDS can go back to OK.
 
 **Recheck 09:05 — root cause + formula:** SSH works (alias present). `df -B1`: size 175.27GB, used 131.58GB → raw 75.1%. Dashboard % = (used − 10.61GB system overhead)/size = **69.0%** ✅ matches. Wrong because (1) we used raw df % and (2) the 02:05 run did not re-measure: it said the SSH alias was missing and copied 10-02's 86%. Staging cleanup had already happened by then (~/www 41G→25G). Using that formula on 10-02 df (139GiB used) gives ~79%, which is WARNING, not NOT OK. Skill Subtask 7 updated with the formula.
+
+**Recheck 09:15 — correction:** the alias was not missing at random. The 02:05 run happened on cron server `mpfc.mpfc.live`, which had no `Bailey.cpanel` ssh config or key. Fixed: config block + key added on mpfc and verified there (69.0%).

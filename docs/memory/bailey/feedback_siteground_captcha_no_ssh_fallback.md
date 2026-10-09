@@ -12,3 +12,5 @@ metadata:
 **UPDATE 2026-08-21:** The skill's documented SSH fallback (`ssh -o ConnectTimeout=10 Bailey.cpanel 'cd ~/www && du -sh ...'`) previously failed (host alias missing) but **now works** — `Bailey.cpanel` is configured in `~/.ssh/config` and returned real disk data (81% used, mostly staging site copies). Don't assume it's still missing; try it first each run before declaring Siteground unavailable.
 
 **How to apply:** Don't burn time re-attempting the Puppeteer login expecting a different outcome — it will hit the same CAPTCHA every time under headless/unattended conditions. Instead run the SSH fallback first — it's the working path now. Only fall back to "unavailable, report OK in customer Slack" (per [[feedback_warning_needs_explanation]] and customer-facing redaction rules) if the SSH command itself fails.
+
+**ROOT CAUSE 2026-10-09:** the alias was never "intermittent". It exists on the local machine but was missing on cron server `mpfc.mpfc.live`. Runs on mpfc failed, local runs worked. Now added on mpfc too (Bailey.cpanel + ~/.ssh/nick/id_rsa). If it fails again, check the mpfc `~/.ssh/config` first.

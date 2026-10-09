@@ -9,7 +9,7 @@ User corrected 2026-10-09: dashboard = 69% (OK, <70%). We posted NOT OK 86% on 0
 
 **Root causes:**
 1. Wrong formula: used raw `df` Use% on `/home/customer`. Dashboard subtracts Siteground system overhead (10.61 GB, seen in 03-20 dashboard breakdown).
-2. 09/10 cron run claimed `Bailey.cpanel` alias missing and just **copied 10-02's 86%** without re-measuring. The alias existed and worked at 08:45 the same day. Also, the staging cleanup had already happened by then (~/www 41G → 25G: pre9 23→9.7G, staging-sg 6.9→3.9G).
+2. 09/10 run happened on cron server `mpfc.mpfc.live` (user `mpfc`), whose `~/.ssh/config` had NO `Bailey.cpanel` block or `~/.ssh/nick/id_rsa` key. It then copied 10-02's 86% instead of re-measuring. **Fixed 2026-10-09:** block + key added on mpfc (`~/.ssh/config.bak.20261009` backup), verified 69.0% from there. Also, the staging cleanup had already happened by then (~/www 41G → 25G: pre9 23→9.7G, staging-sg 6.9→3.9G).
 
 **Formula (verified = 69.0%):** `ssh Bailey.cpanel 'df -B1 ~' | awk '{print 100*($3/1e9-10.61)/($2/1e9)}'`. Now in the skill's Subtask 7, step 3.
 
