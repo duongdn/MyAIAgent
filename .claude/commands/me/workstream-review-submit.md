@@ -38,7 +38,7 @@ Token lives in `config/.workstream-config.json`. Browser SSO session cookie is i
 ```
 GET {api_base}/requests
 ```
-Returns `{ items: [...] }` — filter `title === 'Check memo logs in Upwork Tracker'`. Each item: `{ id, title, description, deadline, projectId, projectName, status, allowMultiple }`. `status: 'NotStarted'` = pending this run.
+Returns `{ items: [...] }` — filter `title.startsWith('Check memo logs in Upwork Tracker')` (🔴 since 2026-10-05 a NEW request id is created each week, title suffixed "(Week Oct 5, 2026)", field ids change too — always pick the NotStarted one and re-read its fields). Each item: `{ id, title, description, deadline, projectId, projectName, status, allowMultiple }`. `status: 'NotStarted'` = pending this run.
 
 For the full field schema (needed before building the submit payload):
 ```

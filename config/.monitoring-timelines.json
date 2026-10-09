@@ -361,5 +361,8 @@
   },
   "workstream": {
     "last_outage_20260908": "2026-09-08 cron run: Workstream SSO/browser-login outage (token refresh + 2x headless/DISPLAY browser login all failed). All project dev-hours unavailable this run. Recurring pattern, root cause still open per prior weekly/daily reports."
+  },
+  "workstream_review_submit": {
+    "last_run": "2026-10-09T16:25:00+07:00"
   }
 }
