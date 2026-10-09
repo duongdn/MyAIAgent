@@ -52,7 +52,7 @@ Returns the same item plus `fields[]` (id/label/fieldType/isRequired/options) an
 | `cmu3wx8lx0xdrqg1vhyoqw1c5` | DM đã check memo Upwork Tracker | checkbox | **yes** | `Đã check` / `Không check do tuần này không có task cần tracker` / `Vấn đề khác` |
 | `cmu3wx8lx0xdsqg1vt1ptp1zb` | Note | textarea | no | — |
 
-Submit POST endpoint/shape not yet captured live (no test submit performed — dry-run only so far). Before the first real `--submit`, capture the POST via the UI form (Puppeteer response listener on `/api/requests/*`) rather than guessing the shape.
+Submit (confirmed 2026-10-09): `POST {api_base}/requests/{id}/submissions?projectId={projectId}` body `{values:[{fieldId,value}]}`; checkbox value = JSON string e.g. `"[\"Đã check\"]"`. Returns 201 `{id}`.
 
 ## Step 3 — Check the actual Upwork memo
 
