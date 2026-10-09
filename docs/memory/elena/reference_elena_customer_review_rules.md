@@ -5,7 +5,7 @@ metadata:
   type: reference
 ---
 
-Full analysis: `docs/elena/elena-op-customer-review-rules-compliance.md`. Re-fetch: `bash scripts/elena-fetch-customer-review-comments.sh` (gh account `nusken` is the only one with access to `Precognize/development`).
+Full analysis: `docs/elena/reviews/2026-10-09/elena-op-customer-review-rules-compliance.md`. Re-fetch: `bash scripts/elena-fetch-customer-review-comments.sh` (gh account `nusken` is the only one with access to `Precognize/development`).
 
 Customer rules to check on every OP PR (they will re-review on delivery; fixed-cost, so rework is unpaid):
 - BE: no `assert` for validation (throw + log); log `e` not `e.getMessage()`; 1 info log/request; update on DB side, not load-merge-save; migration in BOTH new-customer and existing-customer changelogs; no one-field request classes; enums/constants, not magic strings; no unrelated/formatting changes in a PR; reuse existing RabbitMQ exchange and declare it in docker rabbitConfig; Joda DateTime; newline at EOF.

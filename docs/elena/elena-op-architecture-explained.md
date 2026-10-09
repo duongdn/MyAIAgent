@@ -1,7 +1,7 @@
 # Elena OP — Kiến trúc dự án & cách code chạy
 
 > Giải thích để hiểu hệ thống, không phải review. Cập nhật: **2026-10-09** (nus-base `a288733a18`).
-> Review: [elena-op-deployed-code-review.md](elena-op-deployed-code-review.md) · Test: [elena-op-daily-test-guide.md](elena-op-daily-test-guide.md)
+> Review: [elena-op-deployed-code-review.md](reviews/2026-10-09/elena-op-deployed-code-review.md) · Test: [elena-op-daily-test-guide.md](elena-op-daily-test-guide.md)
 > Nguồn gốc trong repo: `docs/ai/{PROJECT,ARCHITECTURE}.md` (BE), `precognize-workspace/ai_docs/ARCHITECTURE.md` (FE). Repo local: `/home/nus/projects/Elena/develop`
 
 ## 1. Sản phẩm là gì

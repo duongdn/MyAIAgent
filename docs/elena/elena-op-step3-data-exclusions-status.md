@@ -1,7 +1,7 @@
 # Elena OP — Step 3 Data Exclusions: đã có gì, code chạy thế nào
 
 > Cập nhật **2026-10-09**. Trả lời câu hỏi: "Step 3 báo chưa available, đã làm chưa?"
-> Liên quan: [walkthrough](elena-op-optimization-module-walkthrough.md) · [review](elena-op-deployed-code-review.md)
+> Liên quan: [walkthrough](elena-op-optimization-module-walkthrough.md) · [review](reviews/2026-10-09/elena-op-deployed-code-review.md)
 
 ## Kết luận
 **Chưa có UI Step 3.** Trên test env và `nus-base`, route `#/models/new/data-exclusions` trỏ vào `StepPlaceholderComponent` (chỉ có nút Cancel/Previous, hiện "not available"). Đúng như anh thấy.

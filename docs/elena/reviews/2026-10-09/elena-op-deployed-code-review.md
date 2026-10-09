@@ -1,11 +1,11 @@
 # Elena OP — Review code đã deploy
 
-> Cập nhật: **2026-10-09** (nus-base `a288733a18`, FE build 09/10 09:40). Hướng dẫn test: [elena-op-daily-test-guide.md](elena-op-daily-test-guide.md)
+> Cập nhật: **2026-10-09** (nus-base `a288733a18`, FE build 09/10 09:40). Hướng dẫn test: [elena-op-daily-test-guide.md](../../elena-op-daily-test-guide.md)
 > Test env: https://active-alerts.nusdev.net/optimizations · Admin: https://active-alerts.nusdev.net/admin-ui/ · Repo local: `/home/nus/projects/Elena/develop`
 
 ## 1. Phạm vi: cái gì đang chạy trên test env
 
-Code đã merge vào `nus-base` gồm **FE** (Angular, `precognize-workspace`, qua các PR bên dưới) và **BE `microservices-optimization` + gateway `POST /optimization/models/create`** (Brian commit thẳng `4acdfda072` "feat: init optimization" ngày 06/10, không qua PR). BE license đa module (#315) và tag details (#321) **chưa merge**, nhưng **đã chạy trên test env** (kiểm chứng 09/10: `/license/status` có `modules.optimization`, `/model/tags/details` trả 200), tức là kietnht deploy thẳng từ branch. Kiến trúc: [elena-op-architecture-explained.md](elena-op-architecture-explained.md).
+Code đã merge vào `nus-base` gồm **FE** (Angular, `precognize-workspace`, qua các PR bên dưới) và **BE `microservices-optimization` + gateway `POST /optimization/models/create`** (Brian commit thẳng `4acdfda072` "feat: init optimization" ngày 06/10, không qua PR). BE license đa module (#315) và tag details (#321) **chưa merge**, nhưng **đã chạy trên test env** (kiểm chứng 09/10: `/license/status` có `modules.optimization`, `/model/tags/details` trả 200), tức là kietnht deploy thẳng từ branch. Kiến trúc: [elena-op-architecture-explained.md](../../elena-op-architecture-explained.md).
 
 | Mảng | PR đã merge | Trạng thái dữ liệu |
 |------|-------------|--------------------|

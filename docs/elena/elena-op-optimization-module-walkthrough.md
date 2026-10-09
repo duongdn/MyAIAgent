@@ -1,7 +1,7 @@
 # Elena OP — Walkthrough module Optimization (code chạy thế nào)
 
 > Chỉ riêng module Optimization: user mở app → tạo model → (sau này) chạy run → xem khuyến nghị. Đọc kèm từng file trong code.
-> Cập nhật: **2026-10-09** (nus-base `a288733a18`). Kiến trúc chung: [elena-op-architecture-explained.md](elena-op-architecture-explained.md) · Review: [elena-op-deployed-code-review.md](elena-op-deployed-code-review.md)
+> Cập nhật: **2026-10-09** (nus-base `a288733a18`). Kiến trúc chung: [elena-op-architecture-explained.md](elena-op-architecture-explained.md) · Review: [elena-op-deployed-code-review.md](reviews/2026-10-09/elena-op-deployed-code-review.md)
 > Viết tắt: `FE/` = `precognize-workspace/projects/optimization-ui/src/app/` · `SVC/` = `services/microservices-optimization/src/main/java/com/vp/dae/` · `GW/` = `application/src/main/java/com/vp/dae/components/optimization/` · `DTO/` = `libraries/.../optimization_api_schema/models/model/`
 
 ## 0. Bản đồ 1 trang

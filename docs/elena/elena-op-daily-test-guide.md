@@ -1,6 +1,6 @@
 # Elena OP — Hướng dẫn test hằng ngày
 
-> Chạy mỗi ngày trên test env, ghi kết quả vào Nhật ký test cuối file. Lỗi đã biết + lý do: [elena-op-deployed-code-review.md](elena-op-deployed-code-review.md)
+> Chạy mỗi ngày trên test env, ghi kết quả vào Nhật ký test cuối file. Lỗi đã biết + lý do: [elena-op-deployed-code-review.md](reviews/2026-10-09/elena-op-deployed-code-review.md)
 > Test env: https://active-alerts.nusdev.net/optimizations · Admin: https://active-alerts.nusdev.net/admin-ui/ · Repo local: `/home/nus/projects/Elena/develop`
 
 ## 0. Chuẩn bị
