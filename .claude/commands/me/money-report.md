@@ -318,7 +318,7 @@ Analyzes the allocation report through a financial lens. **No new data fetch nee
 **Analysis framework:**
 
 ### 0. Đối chiếu report gần nhất (🔴 MANDATORY, do first)
-Before writing anything new, find and read the previous run's allocation report (`ls reports/*/  | grep money-allocation | sort | tail -2` to get the prior one, not today's) and/or `reports/money-history.json`'s last-but-one snapshot. Specifically:
+Before writing anything new, find and read the previous run's allocation report (`ls reports/*/ reports/backup/*/ | grep money-allocation | sort | tail -2` to get the prior one, not today's) and/or `reports/money-history.json`'s last-but-one snapshot. Specifically:
 - Any open "Kế hoạch" / plan / khuyến nghị from last time (e.g. "chuyển X từ tiết kiệm sang cổ phiếu") — check if the relevant account balances now reflect it being done, partially done, or still pending. State this explicitly in the new report, don't just silently re-propose the same plan.
 - Note material % or ₫ shifts per category vs last run and call out anything that looks like an anomaly (see Net Worth staleness warning above) vs a real trend.
 - If a plan was executed, mark it done and remove/archive it; if still pending, carry it forward (update numbers if the underlying account balances moved).

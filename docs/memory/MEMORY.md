@@ -3,6 +3,7 @@
 **Read scope:** `/util:read-memory <command> [piece]` reads Global + matching section ONLY. Filenames are self-descriptive — open a file for detail.
 
 ## Global — every command
+- [old_reports_archived_to_backup](global/project_old_reports_archived_to_backup.md) — reports >7 ngày ở reports/backup/YYYY-MM-DD/
 - [project_memory_index_organized_by_command](global/project_memory_index_organized_by_command.md), [feedback_timeline_system](global/feedback_timeline_system.md)
 - [feedback_decrypt_before_reading](global/feedback_decrypt_before_reading.md), [feedback_ssh_passphrase_in_config](global/feedback_ssh_passphrase_in_config.md)
 - [feedback_never_report_token_expired](global/feedback_never_report_token_expired.md) — 🔴 fix silently

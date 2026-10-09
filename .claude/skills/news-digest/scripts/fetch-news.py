@@ -382,8 +382,8 @@ def _load_url_history() -> "Counter[str]":
     instead of relying on manually grepping ~40 files every run (unreliable —
     see feedback_news_digest_dedup_rule)."""
     counts: "Counter[str]" = Counter()
-    pattern = os.path.join(_PROJECT_ROOT, "reports", "*", "*news-digest*.md")
-    for path in glob.glob(pattern):
+    pattern = os.path.join(_PROJECT_ROOT, "reports", "**", "*news-digest*.md")
+    for path in glob.glob(pattern, recursive=True):
         try:
             with open(path, "r", encoding="utf-8") as f:
                 text = f.read()

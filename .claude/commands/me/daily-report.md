@@ -929,6 +929,8 @@ ls reports/{YYYY-MM-DD}/daily-report.md 2>/dev/null && echo EXISTS || echo NEW
 | Report file does NOT exist for today | Full run (15 pieces by default, incl. Performance + Arthur + Upwork Memo — see Pieces 13–15. WhatsApp + Zalo, Pieces 16–17, excluded unless `--include-whatsapp-zalo` passed) |
 | Report file EXISTS for today | **Recheck mode** (Piece 11 — re-check ○ incomplete items only) |
 
+**Cleanup (mọi full run, cả cron + interactive, chạy cuối cùng):** `bash scripts/archive-old-reports.sh` — move `reports/YYYY-MM-DD/` cũ hơn 7 ngày vào `reports/backup/YYYY-MM-DD/`. Report cũ >1 tuần nằm ở `reports/backup/`.
+
 Recheck mode is the default when re-running — no flag needed. If the user explicitly says "full re-run" or "refresh all", do a full run regardless.
 
 ---
@@ -939,6 +941,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15). If `--include-whatsapp-zalo` present, also run **WhatsApp** (Piece 16) → **Zalo** (Piece 17) — excluded by default (token-heavy).
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
+5. **Dọn report:** `bash scripts/archive-old-reports.sh` — move mọi `reports/YYYY-MM-DD/` cũ hơn 7 ngày vào `reports/backup/YYYY-MM-DD/` (giữ nguyên theo ngày). Cần đọc report cũ → tìm cả trong `reports/backup/`.
 
 **Cron report format (MANDATORY — same as interactive runs):**
 
@@ -1059,7 +1062,7 @@ node scripts/slack-fetch-ohcleo.js --since {YYYY-MM-DDTHH:MM:SS}
 
 🔴 **Mandatory 4-part depth, every single check — same standard as Maddy (see Piece 2/"Maddy JIRA cross-check"):** (1) communication (both Matrix rooms + all 3 Slack channels — not a surface skim of just one), (2) task tracking (Workstream `additionalInfo` daily notes, since there's no formal ticket system), (3) est/actual hours (Workstream "Crystal lang" project), (4) code/PR status (GitHub `Christebob/Meta_Stamp_V3` — check commits too, not just PRs, since this repo has 0 open PRs and everything lands direct-to-main). Arthur is a real client project same as Maddy, not a lightweight check — user directive 2026-07-07: "Arthur là dự án mới, cần report chi tiết y chang Maddy."
 
-One-time full-history deep-dive: `reports/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
+One-time full-history deep-dive: `reports/backup/2026-07-07/arthur-metastamp-full-review.md` (project origin 2026-04-29 through 2026-07-07 — never re-read that far back again, only incremental from here).
 
 **6 sources, every run** (was 5 — #3 renamed, #6 added 2026-07-14 after a real miss, see [[feedback_read_full_room_transcript_not_grep_snippets]]):
 | # | Source | ID | Notes |
@@ -1083,7 +1086,7 @@ One-time full-history deep-dive: `reports/2026-07-07/arthur-metastamp-full-revie
 
 **Flow:**
 1. Read `arthur_monitor.last_run` from `config/.monitoring-timelines.json` (under `refresh` or top-level — see Key Config Files). Fetch only messages after that timestamp from all 6 sources.
-2. Load the tracker table from the most recent `reports/*/arthur-monitor.md` (or the original full report if this is the first incremental run).
+2. Load the tracker table from the most recent `reports/*/arthur-monitor.md` (fallback `reports/backup/*/arthur-monitor.md`) (or the original full report if this is the first incremental run).
 3. Update rows in place (status + last-updated) based on new messages — never rewrite the whole table. Add new rows only for genuinely new issues. Only mark ✅ on explicit user confirmation in chat; agent-observed "looks resolved" is 🟢 at most.
 4. Every row keeps a `Link Slack` column (permalink via `chat.getPermalink`) — this lives in the SAME table, never a separate links section.
 5. Write **new** file: `reports/{today}/{HHMM}-arthur-monitor.md`.
