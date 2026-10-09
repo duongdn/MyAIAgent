@@ -5,7 +5,7 @@
 
 ## 1. Phạm vi: cái gì đang chạy trên test env
 
-**Toàn bộ code đã merge vào `nus-base` là FE** (Angular, `precognize-workspace`). Code BE của OP (license đa module, tag details) **chưa merge**. Nếu test env đang chạy BE mới thì đó là kietnht deploy thẳng từ branch.
+Code đã merge vào `nus-base` gồm **FE** (Angular, `precognize-workspace`, qua các PR bên dưới) và **BE `microservices-optimization` + gateway `POST /optimization/models/create`** (Brian commit thẳng `4acdfda072` "feat: init optimization" ngày 06/10, không qua PR). BE license đa module (#315) và tag details (#321) **chưa merge**. Nếu test env đang chạy chúng thì đó là kietnht deploy thẳng từ branch. Kiến trúc: [elena-op-architecture-explained.md](elena-op-architecture-explained.md).
 
 | Mảng | PR đã merge | Trạng thái dữ liệu |
 |------|-------------|--------------------|
@@ -13,6 +13,7 @@
 | Header/app menu theo module, trang Access Denied, default page | #319, #329 | Thật |
 | Wizard tạo model: Step 1 Goal, Step 2 Influencers, Manage Influencer dialog | #312, #320, #322, #317 (OP-10/13/14/15) | Search tag + tag details **thật**. **Check tên trùng + Save draft là MOCK** |
 | Expression builder | #326 (OP-16) | FE thuần |
+| BE tạo Optimization Model (service mới + Mongo `optimizationModel`) | commit `4acdfda072`, không có PR | Thật, nhưng **FE chưa gọi** |
 | Tag search + chọn tag | #327 (OP-11) | Thật: `GET /search/entityByNameAndDescription` + `POST /model/tags/details` |
 | Trang Optimization Runs: bảng, search, filter, sort, phân trang | #313, #316, #318 (OP-20) | **MOCK 100%** (`optimization-runs.sample-data.ts`) |
 
@@ -44,7 +45,10 @@ Có **3 vấn đề cần bàn ngay** và một vài điểm technical/perf:
 - **Đề xuất:** production thì fail-closed (đọc lỗi thì hiện "không kiểm tra được license, thử lại"). Chỉ fail-open khi `!environment.production`. Ngoài ra nâng timeout lên khoảng 5–10s.
 
 ### B. Chưa có kiểm tra license phía BE (🔴 cần ticket)
-- FE chặn bằng guard + ẩn menu. Các API OP sắp làm (create/save model, run now, pause) cần BE kiểm tra lại: license có OP, chưa vượt `modelCapacity`, còn `totalCredits`.
+- FE chặn bằng guard + ẩn menu. API OP đầu tiên đã có (`DaeOptimizationModelControl.create`), nhưng còn để comment `// extension point: license / model-capacity check (not implemented in this version)`, tức là **đã xác nhận chưa kiểm tra license**. Các API sau (run now, pause) cần BE kiểm tra: license có OP, chưa vượt `modelCapacity`, còn `totalCredits`.
+- Code này vào nus-base **không qua PR/review**. Nên yêu cầu mọi code BE đi qua PR.
+- Unique index `normalizedName` (chống tạo trùng tên khi 2 người tạo cùng lúc) chỉ nằm trong `db.changelog-new-customer.yaml`. Cần kiểm tra khách **đang chạy** (đã cài trước đó) có được tạo index không. Nếu không thì chống trùng chỉ còn bước check trước, có race condition.
+- Khi nối FE: FE `goalValue()` gửi `costMin/costMax = 0` khi bỏ trống (`value.costMin || 0`), nhưng BE yêu cầu cost **≥ 1000 nếu có gửi object cost**. FE phải bỏ hẳn `improvementCost` khi trống, không thì sẽ luôn lỗi `invalidImprovementCost`.
 - **Kịch bản:** user có token gọi thẳng API (Postman/curl) là bỏ qua được FE.
 - **Đề xuất:** đưa vào spec BE (root `openspec/`) cho từng endpoint OP: `success=false` + errorId khi không có license / vượt quota. Nên chốt trước khi kietnht/tiennd2 làm save model.
 
