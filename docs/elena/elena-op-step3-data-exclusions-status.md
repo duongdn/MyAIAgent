@@ -18,6 +18,32 @@
 | BE **upsert/draft theo từng step** (`step: DATA_EXCLUSIONS`) | branch `feature/op-26-be-model-run-save-draft-discard-state` (Brian, chưa PR) | 🟡 code xong, chưa PR | Chưa rõ |
 | Đếm coverage dữ liệu / time window mặc định cho exclusions | BE (tiennd2/kietnht) | ⬜ đang chờ chốt với khách (1 năm cố định hay theo config) | — |
 
+## Flow code HIỆN TẠI khi tới Step 3 (đang chạy trên test env)
+
+```
+Step 2: InfluencersStepComponent.next()                      steps/influencers/influencers-step.component.ts:330
+   ├─ influencersValid(state.influencers)? (≥1 tag, không tag nào thiếu asset)   — sai thì return, đứng yên
+   ├─ state.markCompleted('influencers')
+   └─ router.navigate(['../data-exclusions'])
+        │
+        ▼
+model-wizard.routes.ts: path 'data-exclusions' → StepPlaceholderComponent
+ModelWizardPageComponent.onStepRoute()  (nghe NavigationEnd)
+   ├─ activeStep = 'data-exclusions'
+   ├─ state.firstOpenableStep('data-exclusions'): goal + influencers đã completed → cho mở
+   └─ steps[] cho stepper header: Goal ✓, Influencers ✓, Data Exclusions = active, Operating Constraints = upcoming
+        │
+        ▼
+StepPlaceholderComponent                                       steps/step-placeholder/*
+   template: <p>{{ 'optimization.model_wizard.step_not_available' | translate }}</p>
+   footer:  CANCEL   → router.navigate(['/']) → confirmLeaveWizardGuard → có thay đổi → dialog Save/Discard
+            PREVIOUS → về 'influencers' (state giữ nguyên, guard không chạy vì vẫn trong wizard)
+            NEXT     → [disabled]="true", không có handler
+```
+- Không gọi API nào. Không đọc/ghi gì của data exclusions. `ModelWizardStateService` **không có field** `dataExclusions` (chỉ goal + influencers). `draftValue()` cũng chỉ gửi 2 phần đó.
+- Bước 4 `operating-constraints` có trong `WIZARD_STEPS` (hiện ở stepper) nhưng **không có route**. Gõ URL `#/models/new/operating-constraints` sẽ rơi vào route không tồn tại.
+- Code tương lai sẽ dùng `shared/expression/*` (OP-16) đã nằm sẵn trong bundle, nhưng hiện **không có import nào** từ màn hình thật.
+
 ## Flow khi làm xong (ghép từ code đã có)
 
 ```
@@ -60,11 +86,7 @@ Step 2 xong (influencers) ──► #/models/new/data-exclusions
 
 ## Có thể test gì ngay bây giờ (không cần UI)
 
-**a) Logic FE (unit test có sẵn của OP-16):**
-```bash
-cd /home/nus/projects/Elena/develop/precognize-workspace
-npx jest projects/optimization-ui/src/app/shared/expression   # nếu Jest chạy được cho optimization-ui
-```
+**a) Logic FE (OP-16):** **không có unit test** (optimization-ui có 0 file `*.spec.ts`). Chỉ review đọc code `shared/expression/*.ts` được.
 
 **b) BE validate data exclusions qua API create** (dùng tag test trong `config/.elena-op-test-data.json`; **đây là request thật, đúng thì sẽ TẠO model**, nên dùng tên `zz-test-...` và báo team):
 ```bash
