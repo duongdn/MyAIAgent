@@ -112,7 +112,9 @@ Open card `6ac7da25e32dde588cdb2995` (found on the list, not the stale hardcoded
 ## Unresolved / follow-up
 
 - ~~❌ Workstream task log not written~~ ✅ written (recheck 08:45)
-- ~~⚠️ Siteground 86%~~ ✅ 69% OK per dashboard (user). 86% was `df` of shared mount, not quota. 02/10 Slack post still says NOT OK (86%) — leave unless user asks.
+- ~~⚠️ Siteground 86%~~ ✅ 69% OK per dashboard (user). 86% was `df` of shared mount, not quota. 02/10 Slack post also edited to OK (09:05, user-approved).
 - 🟡 Customer cleanup request for old Prestashop staging copies (~04/10) — awaiting Nick's check; nothing deleted yet.
 - 🔴 Staging RuntimeException (PHP 7.2 vs Composer 8.1) — 3 weeks, needs direct dev action.
 - RDS pending patch on speedventory — schedule a maintenance window so RDS can go back to OK.
+
+**Recheck 09:05 — root cause + formula:** SSH works (alias present). `df -B1`: size 175.27GB, used 131.58GB → raw 75.1%. Dashboard % = (used − 10.61GB system overhead)/size = **69.0%** ✅ matches. Wrong because (1) we used raw df % and (2) the 02:05 run did not re-measure: it said the SSH alias was missing and copied 10-02's 86%. Staging cleanup had already happened by then (~/www 41G→25G). Using that formula on 10-02 df (139GiB used) gives ~79%, which is WARNING, not NOT OK. Skill Subtask 7 updated with the formula.

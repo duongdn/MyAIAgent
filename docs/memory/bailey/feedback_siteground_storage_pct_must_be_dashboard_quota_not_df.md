@@ -1,12 +1,16 @@
 ---
 name: feedback_siteground_storage_pct_must_be_dashboard_quota_not_df
-description: "🔴 2026-10-09: Siteground storage % for Slack = dashboard plan quota (69% OK), NOT `df /home/customer` (86%, shared server mount) — 86% NOT OK was wrong"
+description: "🔴🔴 Siteground storage % = (df used − 10.61GB system)/df size → 69.0% = dashboard (2026-10-09). Raw df % (75–86%) is wrong; never carry old %"
 metadata:
   type: feedback
 ---
 
-User corrected 2026-10-09: Siteground dashboard shows **69%** (OK). The 86% posted 10-02 and 10-09 came from `df` on `/home/customer` (164G mount = shared server disk, not the account's plan quota), then carried forward when SSH/Puppeteer unavailable.
+User corrected 2026-10-09: dashboard = 69% (OK, <70%). We posted NOT OK 86% on 02/10 and 09/10.
 
-**Why:** Wrong basis → customer Slack showed NOT OK for 2 weeks when storage was fine.
+**Root causes:**
+1. Wrong formula: used raw `df` Use% on `/home/customer`. Dashboard subtracts Siteground system overhead (10.61 GB, seen in 03-20 dashboard breakdown).
+2. 09/10 cron run claimed `Bailey.cpanel` alias missing and just **copied 10-02's 86%** without re-measuring. The alias existed and worked at 08:45 the same day. Also, the staging cleanup had already happened by then (~/www 41G → 25G: pre9 23→9.7G, staging-sg 6.9→3.9G).
 
-**How to apply:** Never use `df` % for Prestashop storage status. Use dashboard quota (Puppeteer `siteground-storage.js`). SSH `du -sh ~/www/*` is only for the breakdown. If dashboard unreadable, don't carry a df-based %; ask user for the dashboard figure or mark from last dashboard value. Supersedes 86% notes in [[feedback_siteground_disk_81pct_staging_copies]].
+**Formula (verified = 69.0%):** `ssh Bailey.cpanel 'df -B1 ~' | awk '{print 100*($3/1e9-10.61)/($2/1e9)}'`. Now in the skill's Subtask 7, step 3.
+
+**How to apply:** Always re-measure every run. Never carry a previous %. If SSH fails, retry and check ssh config. Thresholds: <70 OK, 70–85 WARNING, >85 NOT OK. Supersedes [[feedback_siteground_disk_81pct_staging_copies]].

@@ -291,6 +291,12 @@ Fetch storage/CPU/RAM stats from Siteground dashboard via Puppeteer.
    ssh -o ConnectTimeout=10 Bailey.cpanel 'cd ~/www && du -sh */ 2>/dev/null | sort -rh && echo "===" && du -sh *.zip 2>/dev/null | sort -rh && echo "===" && du -sh . 2>/dev/null'
    ```
 
+3. **Compute dashboard % via SSH (no browser needed)** — matches Siteground dashboard (verified 2026-10-09: 69.0% = dashboard 69%):
+   ```bash
+   ssh -o ConnectTimeout=10 Bailey.cpanel 'df -B1 ~ 2>/dev/null | tail -1' | awk '{printf "%.1f%%\n", 100*($3/1e9-10.61)/($2/1e9)}'
+   ```
+   Formula: `(df used GB − 10.61 GB Siteground system overhead) / df size GB` (decimal GB). **NEVER** report raw `df` Use% (~6pt too high) and NEVER carry last week's % — always re-measure. If `Bailey.cpanel` fails, check `grep -i bailey ~/.ssh/config` and retry before declaring unavailable.
+
 ### Report Format
 
 - SSD usage: total, used, free, breakdown (site vs system)
