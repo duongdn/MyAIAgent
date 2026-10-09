@@ -2,13 +2,54 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-08-17",
-    "message_text": "Report week 17/08\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang tuần này, chờ review)\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 3h40m/3h40m\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
-    "confirmed": true,
-    "confirmed_at": "2026-08-22T10:59:00+07:00",
-    "sent": true,
-    "sent_at": "2026-08-22T10:59:30+07:00",
-    "event_id": "$rs1IYZJ-RuLzzYJdwHIuVD_Fd39ypBCxvRzI91O-wyk",
+    "week_start": "2026-09-28",
+    "message_text": "Report week 28/09\n\nJames Diamond\n\nWeb: 40h/40h20m\nLeNH: 37h/37h\nTuanNT: 3h/3h20m (20m làm trước report sau)\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 2h40m/2h40m",
+    "confirmed": false,
+    "draft_note": "2026-10-02 23:05 — FULL WEEK NOW LIVE (not Mon-Thu estimate — superseded that draft). Fixed the Workstream outage by seeding Keycloak cookies from the user's real Chrome 'Default' profile (live session, user had it open) via WORKSTREAM_SSO_COOKIES env var into workstream-login.js — token captured first try. Confirmed via live /review/week pull (2026-09-28 week): LeNH 37h (5/8/8/8/8), AnhNH2 20h (4h every day), TuanNT 3.33h (Friday only, 10-02 — matches Matrix note 'TuanNT moves to James Diamond, 3h make-up' after PhucVT stayed full on Arthur). Web cap+bank applied: LeNH's 37h fully charged (under cap alone), TuanNT needed only 3h of his 3.33h to fill the 40h cap, so TuanNT charge=3h/actual=3h20m with 20m banked ('làm trước report sau'). ThangN NOT in the James Diamond member list at all this week (not just 0h — absent from API response entirely), vs 14h his first week (09-17) and 0h last week — his Mobile line is dropped from this draft pending user confirmation of why (see unresolved question). Marcel/DuongDN 2h40m (1h Mon + 1.17h Thu + 0.5h Fri).",
+    "unresolved_thangn": "ThangN absent from James Diamond Workstream member list 2 weeks running (09-21 week and 09-28 week) after one active week (14h, 09-17). Ask user before finalizing: still on the project (just not logging) or rolled off? If rolled off, should his Mobile line be removed from future reports going forward, not just this draft?",
+    "superseded_week_09_21": {
+      "week_start": "2026-09-21",
+      "note": "Never drafted to this file — 2026-09-25 and 2026-09-26 weekly-monitor reports both found the data gap too large (LeNH missing 3 full days) to draft with confidence. Superseded, not sent."
+    },
+    "previous_send_09_14": {
+      "week_start": "2026-09-14",
+      "message_text": "Report week 14/09\n\nJames Diamond\n\nWeb: 32h/32h (off 1 day dùng paid leave)\nLeNH: 32h/32h (off 1 day dùng paid leave)\n\nMobile: 30h/30h\nAnhNH2: 16h/16h\nThangN: 14h/14h\n\n---\n\nMarcel\nDuongDN: 2h20m/2h20m",
+      "confirmed": true,
+      "confirmed_at": "2026-09-18T20:56:37+07:00",
+      "sent": true,
+      "sent_at": "2026-09-18T20:58:00+07:00",
+      "event_id": "$aCB9qa-0ZrJ9vUL47OJ-FiJlPHSbnNiKWrRk7cljiF4",
+      "draft_note": "PhucVT REMOVED from Web permanently per user instruction 2026-09-18 ('bỏ PhucVT từ giờ, LeNH làm full') — LeNH is now sole Web dev on James Diamond going forward. User confirmed LeNH's missing Friday (09-18) is paid leave. AnhNH2/ThangN still missing Friday hours, cause unconfirmed. ThangN is a brand-new James Diamond dev (joined 09-17), Mobile per user. Blair Brown correctly dropped (discontinued per prior week's confirmed message)."
+    },
+    "no_blair_brown_reason": "Project closed on Workstream, discontinued from client reporting per 2026-09-12 confirmed message ('từ tuần sau sẽ không còn báo cáo Blair Brown nữa') — 0 members returned in WS this week, consistent.",
+    "previous_send_09_07": {
+      "week_start": "2026-09-07",
+      "message_text": "Report week 07/09\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang tuần này, chờ review)\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 3h30m/3h30m\n\n---\n\nBlair Brown - Peptide Clyde\nProject đã đóng trên Workstream, không còn task active. Đây là report cuối cùng cho project này, từ tuần sau sẽ không còn báo cáo Blair Brown nữa nha.",
+      "confirmed": true,
+      "confirmed_at": "2026-09-12T10:58:00+07:00",
+      "sent": true,
+      "sent_at": "2026-09-12T10:59:00+07:00",
+      "event_id": "$t7n5cp2WXgRNW-WHC7kdDmh1KfNwMzHlxTIau_xdybg"
+    },
+    "previous_send": {
+      "week_start": "2026-08-17",
+      "message_text": "Report week 17/08\n\nJames Diamond\n\nWeb: 40h/40h\nPhucVT: 0h/0h (vẫn đang ở Crystal lang tuần này, chờ review)\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 3h40m/3h40m\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
+      "confirmed": true,
+      "confirmed_at": "2026-08-22T10:59:00+07:00",
+      "sent": true,
+      "sent_at": "2026-08-22T10:59:30+07:00",
+      "event_id": "$rs1IYZJ-RuLzzYJdwHIuVD_Fd39ypBCxvRzI91O-wyk"
+    },
+    "superseded_unsent_weeks_new": [
+      {
+        "week_start": "2026-08-24",
+        "note": "Never drafted/sent — skipped, superseded by 07/09 send per user instruction 2026-09-12."
+      },
+      {
+        "week_start": "2026-08-31",
+        "note": "Drafted (Web 17h30m/17h30m) but user rejected the week choice ('cái gì mà tuần 31/08 !!!') before confirming — superseded by 07/09 (current week) per user's explicit pick."
+      }
+    ],
     "previous_send_prior": {
       "week_start": "2026-08-10",
       "message_text": "Report week 10/08\n\nJames Diamond\n\nWeb: 39h30m/39h30m\nPhucVT: 0h/0h (vẫn đang ở Crystal lang tuần này, chờ review)\nLeNH: 39h30m/39h30m\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\n\nMarcel: 1h30m/1h30m\nDuongDN: 30m/30m\nLongVV: 1h/1h\n\n---\n\nBlair Brown - Peptide Clyde\nLeNH: 0h\nKhanhHH: 0h",
