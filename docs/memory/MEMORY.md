@@ -100,6 +100,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_wordpress_samguard_not_on_ignore_list](daily-report/elena/feedback_wordpress_samguard_not_on_ignore_list.md) — Elena-WordPress-SamGuard is a separate Trello item, not covered by the Elena-SamGuard-Digital-Plant pause
 
 ## daily-report:trello
+- [feedback_holding_reply_and_our_side_done_are_not_alerts](daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md) — 🔴 holding reply = answered; done on our side = no alert; Elliott paused (Ignore List)
 - [reference_trello_gate_mapping](daily-report/trello/reference_trello_gate_mapping.md), [feedback_trello_all_checklists](daily-report/trello/feedback_trello_all_checklists.md), [feedback_trello_find_by_name](daily-report/trello/feedback_trello_find_by_name.md)
 - [feedback_trello_mail_must_check_email](daily-report/trello/feedback_trello_mail_must_check_email.md), [feedback_email_trello_completion](daily-report/trello/feedback_email_trello_completion.md)
 - [feedback_checklist_person_link](daily-report/trello/feedback_checklist_person_link.md), [feedback_trello_per_client_gates_on_lead_dev](daily-report/trello/feedback_trello_per_client_gates_on_lead_dev.md)
