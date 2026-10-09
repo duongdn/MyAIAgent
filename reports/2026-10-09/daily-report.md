@@ -89,7 +89,7 @@ Reporting day: **2026-10-08 (Thu)**. Fetched at 05:15 via a Keycloak API token r
 | Developer | 2026-10-08 (all WS projects) | Week to date | Status |
 |-----------|------|------|--------|
 | LeNH | ~~— (not yet logged)~~ **8h** James Diamond (08:23 re-check) | James Diamond 8/8/8/8 | ✓ OK → James Diamond ✓ |
-| TuanNT | — (still not logged at 08:23 re-check; Matrix: DefinitiveGuide testing all day, left 1h early) | 10-05 8h, 10-06 8h, 10-07 8h (Def. Guide 7 + Speedventory 1, **date fixed** ✓) | pending → Bailey ○ |
+| TuanNT | **7.5h** at 09:10 (Speedventory 2.75 + Def. Guide 2.75 + Andrew Taraba 2; left 1h early, approved) ✓ → Bailey ✓. ~~— (still not logged at 08:23 re-check;~~ ( Matrix: DefinitiveGuide testing all day, left 1h early) | 10-05 8h, 10-06 8h, 10-07 8h (Def. Guide 7 + Speedventory 1, **date fixed** ✓) | pending → Bailey ○ |
 | KhanhHH | — (still not logged at 08:23; Upwork Aysar shows 3 memos on 10-08, so she did work) | 10-05 8h, 10-06 8h (RDC), 10-07 8h (RDC 6.5 + Baamboozle 1.5) | pending → Aysar ○, Elliott ○ |
 | PhucVT | — | Crystal lang 17h + Definitive Guide 7h | Not gated |
 | LongVV | 3h (Maddy 1 + Definitive Guide 2) | OhCleo 15h, Maddy 2h, Def. Guide 3h | Ad-hoc, informational |
@@ -263,7 +263,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check mail:** ~~5/6~~ 6/6 ✓ (Ken done 08:58).
 
-**Check progress: ~~15/22~~ ~~16/22~~ 19/22** (09:10: Maddy, Franc and Elliott ✓ per user; Elliott paused → Ignore List)
+**Check progress: ~~15/22~~ ~~16/22~~ 20/22** (09:10: Bailey ✓ after TuanNT 7.5h; Maddy, Franc and Elliott ✓ per user; Elliott paused → Ignore List)
 - ✓ complete: John Yi (ignore), Rory, MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Rebecca (ignore), Colin (ignore), Fountain, Philip (ignore), Ohcleo, Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
 - ○ incomplete: **Maddy** (#2), **Franc** (#3), **Andrew Taraba** (#4), ~~**James Diamond** (LeNH 10-08 pending)~~ (✓ 08:35), **Bailey** (TuanNT 10-08 pending), **Aysar** + **Elliott** (KhanhHH 10-08 pending).
 
