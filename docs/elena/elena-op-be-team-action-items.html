@@ -1,0 +1,362 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP BE Action Items</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: việc cần sửa cho team BE</h1>
+<blockquote>
+<p>Gửi: kietnht (BE lead), tuanntg/Brian, tiennd2. Người review: DuongDN. Cập nhật 09/10/2026.
+Code đối chiếu: <code>nus-base</code> <code>a288733a18</code> + branch <code>feature/op-26-be-model-run-save-draft-discard-state</code> (op-26, chưa có PR) + PR #315, #321 (chưa merge nhưng đã deploy test env).
+Phạm vi: chỉ code OP. Phần copy theo pattern sẵn có của repo không tính là duplicate. Không review unit test.</p>
+</blockquote>
+<h2>0. Bối cảnh nhanh: BE OP gồm những gì</h2>
+<p>Đọc phần này trước nếu chưa làm BE OP.</p>
+<p><strong>Luồng một request "tạo model":</strong></p>
+<pre><code>FE (optimization-ui)
+  → Gateway  POST /optimization/models/create   (GW/...external, ghi đè userId theo session)
+    → RSocket → microservices-optimization
+        Controller → Control (DaeOptimizationModelControl: logic chính)
+                   → Constraints (DaeOptimizationModelConstraints: validate)
+                   → gọi domain service kiểm tra tag có tồn tại (Neo4j)
+                   → Repository → MongoDB collection `optimizationModel`
+</code></pre>
+<p><strong>Các phần code BE OP:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phần</th>
+<th>Ở đâu</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service <code>microservices-optimization</code> (create model)</td>
+<td>commit <code>4acdfda072</code> (Brian, 06/10)</td>
+<td>đã vào nus-base, <strong>commit thẳng, không qua PR</strong></td>
+</tr>
+<tr>
+<td>Upsert/draft theo từng step của wizard</td>
+<td>branch op-26</td>
+<td>chưa có PR</td>
+</tr>
+<tr>
+<td>License đa module (Monitoring + OP)</td>
+<td>PR #315</td>
+<td>mở, đã deploy test env</td>
+</tr>
+<tr>
+<td>API <code>POST /model/tags/details</code> (lấy unit, icon, asset của tag)</td>
+<td>PR #321</td>
+<td>mở, đã deploy test env</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Khái niệm cần biết:</strong>
+- <strong>Model:</strong> cấu hình tối ưu do user tạo qua wizard 4 bước: Goal (tag mục tiêu + hướng tăng/giảm), Influencers (các tag ảnh hưởng), Data Exclusions (loại bỏ dữ liệu xấu), Operating Constraints.
+- <strong>Run / Calculation:</strong> lần chạy thuật toán (Algorithm, repo khác, giao tiếp qua RabbitMQ) trên model để ra <strong>Recommendation</strong> (gợi ý chỉnh influencer).
+- <strong>errorId:</strong> BE không trả message lỗi tự do mà trả mã (<code>DaeApiUserDisplayedErrorId</code>), FE dịch mã ra text.
+- <strong>Changelog migration:</strong> repo có 2 loại file migration Mongo, một cho cài mới (<code>db.changelog-new-customer.yaml</code>), một cho khách đang chạy nâng cấp (<code>db.changelog-existing-customer-&lt;version&gt;.yaml</code>).</p>
+<p>Các mục 🔴 là những lỗi <strong>khách đã từng bắt sửa</strong> trong các PR trước (có trích câu của khách).</p>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Việc</th>
+<th>Mức</th>
+<th>Khi nào</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Bỏ <code>assert</code>, ném exception tường minh</td>
+<td>🔴</td>
+<td>Ngay (đang gây lỗi trên test env)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Migration cho khách đang chạy</td>
+<td>🔴</td>
+<td>Trước khi deliver</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bỏ check "chỉ người tạo được sửa" (op-26)</td>
+<td>🔴</td>
+<td>Trước khi merge op-26</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chống sửa đồng thời + chặn sửa model đang chạy</td>
+<td>🔴</td>
+<td>Trước khi merge op-26</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Viết spec BE cho contract model</td>
+<td>🔴</td>
+<td>Trước khi FE nối Save/Create</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mọi code BE OP qua PR trước khi deploy</td>
+<td>🔴</td>
+<td>Từ nay</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Status ban đầu + một luồng tạo model</td>
+<td>⚠️</td>
+<td>Trong op-26</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Update phía DB, không load-merge-save</td>
+<td>⚠️</td>
+<td>Trong op-26</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Log giữ stack trace</td>
+<td>⚠️</td>
+<td>PR tới</td>
+</tr>
+<tr>
+<td>10</td>
+<td>#315: dùng enum thay chuỗi module</td>
+<td>⚠️</td>
+<td>Trước khi merge #315</td>
+</tr>
+<tr>
+<td>11</td>
+<td>#321: bỏ class 1 field, bỏ thay đổi không liên quan</td>
+<td>⚠️</td>
+<td>Trước khi merge #321</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Khớp contract với FE</td>
+<td>⚠️</td>
+<td>Cùng mục 5</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Dọn code lặp, code chưa dùng</td>
+<td>💬</td>
+<td>Khi tiện</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Quyết định nền tảng cần chốt với khách</td>
+<td>🔴</td>
+<td>Trước khi làm Step 4 / Run</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>1. Validate bằng <code>assert</code> 🔴</h2>
+<p><strong>Giải thích:</strong> trong Java, lệnh <code>assert điều_kiện : message</code> chỉ chạy khi JVM bật cờ <code>-ea</code>. Mặc định cờ này <strong>tắt</strong>, nên mọi <code>assert</code> bị bỏ qua hoàn toàn: dữ liệu sai vẫn được lưu mà không báo lỗi.</p>
+<p><strong>Đã kiểm chứng trên test env:</strong> gửi <code>improvement = 999</code> (luật là 0–20) vẫn tạo model thành công. Test env không bật <code>-ea</code>.</p>
+<p><strong>Khách từng nói:</strong> <em>"do not use asserts (they are turned off by default) you have to raise exception and log here"</em> (PR 4533). <em>"Assertions are commonly disabled in production"</em> (Kfir, PR 4563).</p>
+<p><strong>Chỗ cần sửa:</strong>
+- <code>DaeOptimizationModelConstraints</code>: 22 <code>assert</code>
+- op-26: thêm 19
+- #315: 2, #321: 1</p>
+<p><strong>Cách sửa:</strong> viết helper, ví dụ <code>requireThat(boolean condition, DaeApiUserDisplayedErrorId errorId)</code>, ném exception mang errorId và log. Thay toàn bộ <code>assert</code> trong code OP. Không đụng code cũ ngoài OP.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>2. Migration chỉ có cho khách mới 🔴</h2>
+<p><strong>Giải thích:</strong> khi cài mới, hệ thống chạy <code>db.changelog-new-customer.yaml</code>. Khách <strong>đang chạy</strong> khi nâng cấp chỉ chạy các file <code>db.changelog-existing-customer-&lt;version&gt;.yaml</code>. Code OP chỉ thêm changeSet <code>create-optimization-model-collection</code> (tạo collection + unique index tên model) vào file new-customer.</p>
+<p><strong>Hậu quả:</strong> khách hiện tại nâng cấp lên bản có OP sẽ <strong>không có unique index</strong>, nên 2 người tạo model cùng tên cùng lúc sẽ ra 2 model trùng tên (chống trùng đang dựa vào index này).</p>
+<p><strong>Khách từng giải thích:</strong> <em>"When we are installing on new customer, it runs only the migration for new customer and after that version it will run future existing customer"</em> (Kfir, PR 4509).</p>
+<p><strong>Cách sửa:</strong> thêm changeSet tương ứng vào file existing-customer của version hiện tại.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>3. Quyền sửa model trái với lời khách 🔴</h2>
+<p><strong>Giải thích:</strong> op-26 <code>updateDraft()</code> có đoạn: nếu <code>createdBy</code> khác user hiện tại thì trả lỗi <code>notOptimizationModelOwner</code>, tức là <strong>chỉ người tạo được sửa</strong>.</p>
+<p><strong>Khách trả lời (vytth chuyển, Matrix 08/10 15:09):</strong> chỉ System Administrator quản lý license, <em>"còn lại chúng sinh bình đẳng"</em>, nghĩa là mọi user có quyền đều sửa được model của người khác.</p>
+<p><strong>Cách sửa:</strong> bỏ check owner. Ghi quyết định này vào spec BE kèm nguồn (mục 5).</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>4. Sửa đồng thời và sửa model đang chạy 🔴</h2>
+<p><strong>Giải thích:</strong> vì ai cũng sửa được (mục 3), 2 người có thể mở cùng một model.
+- op-26 đọc document → merge request → <code>save()</code> <strong>ghi đè cả document</strong>. Có tăng <code>revision</code> nhưng request không gửi <code>revision</code> lên để so, nên người lưu sau xóa mất thay đổi của người lưu trước mà không ai biết (gọi là "lost update").
+- Timeline cũng bị ghi đè cùng document, nên 2 request song song thì mất một dòng lịch sử.
+- Không kiểm tra status: model đang <code>CALCULATING</code> hay <code>COMPLETED</code> vẫn sửa được. Kết quả Algorithm trả về sẽ không còn khớp cấu hình đang lưu, recommendation áp sai ở nhà máy.</p>
+<p><strong>Cách sửa:</strong>
+- Request mang <code>revision</code>. Update có điều kiện <code>{_id, revision}</code> (hoặc dùng <code>@Version</code>). Lệch thì trả errorId mới, ví dụ <code>optimizationModelChanged</code>, FE báo "model đã bị người khác sửa, tải lại".
+- Chỉ cho update khi model ở <code>DRAFT</code> (hoặc <code>PAUSED</code>). Cần chốt: sửa model đã chạy thì xử lý thế nào.
+- Timeline ghi bằng <code>$push</code> (xem mục 8).</p>
+<ul>
+<li>☐ Optimistic lock</li>
+<li>☐ Kiểm tra status khi update</li>
+</ul>
+<h2>5. Không có spec BE cho contract 🔴</h2>
+<p><strong>Giải thích:</strong> dự án dùng OpenSpec. Quy tắc trong <code>openspec/config.yaml</code>: API contract <strong>chỉ được mô tả ở root BE</strong> (<code>openspec/</code>). Hiện root này <strong>rỗng</strong>, dù BE đã có create, upsert, license, tag details. FE design (op-13, op-16) phải tự đọc code BE để mô tả lại, và đã lệch (mục 12).</p>
+<p><strong>Cách sửa:</strong> tạo <code>openspec/changes/op-xx-optimization-model/</code> mô tả contract <strong>đang có</strong> (capture baseline từ code):
+- request/response của create và upsert
+- errorId của từng luật validate, ngưỡng (improvement 0–20, cost 1.000–10.000.000, tên ≤100)
+- vòng đời status
+- đơn vị của <code>effectDelay</code> (phút?), operator/function hỗ trợ</p>
+<p>FE sẽ tham chiếu capability này thay vì ghi <code>UNKNOWN</code>. Kiểm tra bằng <code>npx @fission-ai/openspec@1.13.2 validate --all --strict</code>.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>6. Code BE OP chưa qua review 🔴</h2>
+<p><strong>Giải thích:</strong> <code>4acdfda072</code> vào thẳng nus-base không qua PR. op-26 chưa có PR. #315, #321 chưa merge nhưng đã chạy trên test env. Tức là QC đang test code chưa ai review.</p>
+<p><strong>Cách làm:</strong> mọi thay đổi BE OP mở PR vào <code>nus-base</code>, có người BE khác review, rồi mới deploy test env. op-26 nên lên PR sớm vì có mục 3, 4, 7, 8.</p>
+<ul>
+<li>☐ op-26 lên PR</li>
+</ul>
+<h2>7. Status ban đầu và hai đường tạo model ⚠️</h2>
+<p><strong>Giải thích:</strong>
+- <code>create()</code> đặt status <code>CALCULATING</code> ngay khi tạo, dù chưa có gì gửi sang Algorithm. Model sẽ hiện "đang tính" mãi.
+- Hiện có 2 đường tạo: <code>create</code> (đủ thông tin, CALCULATING) và <code>upsert</code> không id (op-26, tạo draft). Hai luật khác nhau, ví dụ upsert check trùng tên <strong>kể cả model đã xóa</strong>, còn create thì không.
+- <code>DaeOptimizationModelCompletion.isConditionSetValid</code> có luật "hợp lệ" riêng, lỏng hơn Constraints.</p>
+<p><strong>Cách sửa:</strong> một luồng duy nhất: upsert tạo/sửa draft → endpoint submit riêng mới chuyển sang trạng thái chạy. Thống nhất luật trùng tên. Completion gọi lại Constraints (chế độ không ném lỗi).</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>8. Load-merge-save trong Java ⚠️</h2>
+<p><strong>Khách từng nói:</strong> <em>"Try to update investigation on the db side. Handle object on the java side is not a good solution"</em> (PR 4435).</p>
+<p><strong>Chỗ:</strong> op-26 <code>updateDraft</code>: <code>findById</code> → <code>applySections</code> → <code>repository.save(document)</code>.</p>
+<p><strong>Cách sửa:</strong> <code>ReactiveMongoTemplate.updateFirst(Query(_id, revision), Update.set(&lt;section&gt;).push(timeline))</code>. Làm cùng lúc giải quyết luôn lock ở mục 4.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>9. Log mất stack trace ⚠️</h2>
+<p><strong>Khách từng nói:</strong> <em>"to keep full stack trace - remove getMessage and keep just error"</em> (PR 4533).</p>
+<p><strong>Chỗ:</strong> <code>DaeOptimizationModelControl:142</code> (và 1 chỗ ở op-26): <code>log.warn("Optimization model create failed: {}", e.getMessage())</code>.</p>
+<p><strong>Cách sửa:</strong> <code>log.warn("Optimization model create failed", e)</code>.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>10. #315: so chuỗi thay vì enum ⚠️</h2>
+<p><strong>Giải thích:</strong> #315 cho license bật nhiều module. Code so chuỗi <code>"MONITORING"</code>, <code>"OPTIMIZATION"</code>, <code>"OP"</code>, <code>"MONITOR"</code> ở 12 chỗ, viết lại ở cả <code>LicenseController</code> (tạo) và <code>DaeLicenseStatusTools</code> (đọc), dù đã có <code>DaeLicensedModuleType</code>.</p>
+<p><strong>Khách từng nói:</strong> <em>"instead of hardcoded strings use the enum constants"</em> (PR 4607).</p>
+<p><strong>Cách sửa:</strong> parse một chỗ qua <code>DaeLicensedModuleType</code> (alias OP/MONITOR xử lý trong enum).</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>11. #321: class 1 field và thay đổi không liên quan ⚠️</h2>
+<ul>
+<li><code>DaeTagDetailsRequest</code> chỉ có 1 field. Khách: <em>"No need to create one-field class"</em> (PR 4428). Dùng <code>DaeApiCollection&lt;String&gt;</code> hoặc <code>List&lt;String&gt;</code> như endpoint khác.</li>
+<li>PR sửa cả <code>DaeApiSearchController</code> (chỉ thêm import thừa) và <code>reference.conf</code> (config của phần đã rút khỏi PR). Khách: <em>"why changes from another PR presented here?"</em> (PR 4435). Bỏ ra.</li>
+<li>
+<p>Search yêu cầu ≥3 ký tự. FE đang cho 2, đã báo FE sửa theo BE.</p>
+</li>
+<li>
+<p>☐ Xong</p>
+</li>
+</ul>
+<h2>12. Contract lệch với FE ⚠️</h2>
+<p>FE gửi lên sẽ bị từ chối hoặc lưu sai. Chốt bên nào đổi, ghi vào spec (mục 5):</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>FE</th>
+<th>BE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>direction</td>
+<td><code>min</code> / <code>max</code></td>
+<td><code>MINIMIZE</code> / <code>MAXIMIZE</code></td>
+</tr>
+<tr>
+<td>Cost bỏ trống</td>
+<td>gửi <code>0</code></td>
+<td>yêu cầu 1.000–10.000.000</td>
+</tr>
+<tr>
+<td>Hàm expression</td>
+<td>có <code>MEAN</code>, <code>DIFF</code>, <code>PROP</code></td>
+<td>không có</td>
+</tr>
+<tr>
+<td>Logical operator</td>
+<td><code>AND</code>, <code>OR</code></td>
+<td>chỉ <code>AND</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ngoài ra lỗi trả về FE đang lộ message Java thô (lỗi NPE/Jackson rơi vào <code>reason</code>). Lỗi không phải nghiệp vụ nên trả errorId chung.</p>
+<ul>
+<li>☐ Xong</li>
+</ul>
+<h2>13. Code lặp và code chưa dùng 💬</h2>
+<table>
+<thead>
+<tr>
+<th>Chỗ</th>
+<th>Đề xuất</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create()</code> gom tagId từ dataExclusions + operatingConditions, <code>validateCreate()</code> duyệt lại đúng danh sách đó</td>
+<td>Một hàm <code>conditionSets(request)</code> dùng chung</td>
+</tr>
+<tr>
+<td><code>create()</code> là chuỗi Reactor ~100 dòng</td>
+<td>Tách <code>buildDocument()</code>, <code>referencedTagIds()</code></td>
+</tr>
+<tr>
+<td>Timeline action builder lặp 2 lần</td>
+<td>Factory <code>timelineAction(type, ...)</code></td>
+</tr>
+<tr>
+<td><code>normalizedName</code> tính 2 lần</td>
+<td>Tính một lần</td>
+</tr>
+<tr>
+<td><code>DaeAmqpMessageSender</code>, <code>DaeRabbitMQConfig</code> chưa ai gọi (bước gửi Algorithm còn TODO) nhưng service vẫn phải kết nối RabbitMQ khi khởi động</td>
+<td>Bỏ, hoặc ghi chú chuẩn bị cho bước Algorithm</td>
+</tr>
+<tr>
+<td><code>findTagsByIds</code> gọi domain với mọi tag, không giới hạn số lượng</td>
+<td>Giới hạn số tag trong request</td>
+</tr>
+<tr>
+<td>#321 <code>toPrimitiveBytes(Byte[])</code> tự viết</td>
+<td>Kiểm tra <code>libraries/tools</code> đã có chưa</td>
+</tr>
+</tbody>
+</table>
+<h2>14. Quyết định nền tảng cần chốt trước khi làm tiếp 🔴</h2>
+<p>Đây là data model. Sai bây giờ thì sau phải migrate dữ liệu khách, sửa cả FE + BE + Algorithm. Không cần code ngay, nhưng <strong>phải chốt (qua vytth/anhttl) trước khi làm Step 4 hoặc Run</strong>:</p>
+<ol>
+<li><strong>Run nằm ở đâu?</strong> FE coi Run là thực thể riêng (1 model có nhiều run, mỗi run có tên, lịch chạy, influencer, recommendations). BE chỉ có 1 <code>calculation</code> nhúng trong model. Đề xuất vẽ ERD Model 1–n Run 1–n Execution 1–n Recommendation rồi xác nhận với khách. Credit tính theo run nên sai chỗ này là sai luôn chỗ trừ credit.</li>
+<li><strong>Model thuộc plant nào?</strong> Document không có <code>environmentId</code>. Tên unique toàn hệ thống, nên 2 plant không đặt được cùng tên. Nếu có thể nhiều plant thì thêm field ngay, unique theo <code>(environmentId, normalizedName)</code>.</li>
+<li><strong>Tag chỉ lưu id, ngưỡng không có đơn vị.</strong> Tag bị xóa trong Digital Plant thì model trỏ vào id không còn. Tag đổi đơn vị (°C → °F) thì điều kiện <code>&gt; 80</code> đổi nghĩa. Đề xuất lưu <code>unit</code> cạnh ngưỡng và định nghĩa hành vi khi tag mất.</li>
+<li><strong>Timeline nhúng trong document.</strong> Mảng tăng mãi theo mỗi lần sửa/chạy (Mongo giới hạn 16MB/document), đọc list model kéo theo cả lịch sử. Đề xuất collection riêng <code>optimizationModelTimeline</code>, giống <code>licenseHistory</code>.</li>
+<li><strong>Contract với Algorithm</strong> (queue, payload, kết quả, timeout, retry) chưa có. Spec trước khi làm Run.</li>
+<li>Các field thiếu đơn vị: <code>effectDelay</code> (đề xuất <code>effectDelayMinutes</code>), <code>improvementCost</code> (currency).</li>
+</ol>
+<p>Chi tiết từng mục: <a href="elena-op-foundation-structure-review.md">elena-op-foundation-structure-review.md</a>.</p>
+<hr />
+<h2>Những gì đang làm tốt (giữ nguyên)</h2>
+<ul>
+<li>Layering đúng pattern repo: Controller → Control → Constraints → Repository → Mapper, giống <code>microservices-license</code>.</li>
+<li>Gateway ghi đè <code>userId</code> theo session, client không giả mạo được.</li>
+<li>Soft delete + partial unique index tên model, bắt <code>DuplicateKeyException</code> trả errorId.</li>
+<li>Kiểm tra tag tồn tại và là <code>Column</code> qua domain service trước khi lưu.</li>
+<li>Upsert theo <code>step</code> (op-26) hợp với wizard nhiều bước.</li>
+<li>Có <code>revision</code> và timeline: đúng ý tưởng audit, chỉ cần sửa cách lưu và thêm lock.</li>
+</ul></main></body></html>
