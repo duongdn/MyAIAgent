@@ -86,7 +86,7 @@ Step 2 xong (influencers) ──► #/models/new/data-exclusions
 
 ## Có thể test gì ngay bây giờ (không cần UI)
 
-**a) Logic FE (OP-16):** **không có unit test** (optimization-ui có 0 file `*.spec.ts`). Chỉ review đọc code `shared/expression/*.ts` được.
+**a) Logic FE (OP-16):** chỉ review bằng cách đọc code `shared/expression/*.ts`.
 
 **b) BE validate data exclusions qua API create** (dùng tag test trong `config/.elena-op-test-data.json`; **đây là request thật, đúng thì sẽ TẠO model**, nên dùng tên `zz-test-...` và báo team):
 ```bash

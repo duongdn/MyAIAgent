@@ -23,7 +23,6 @@ Mọi BE OP đang chạy trên test env đều **chưa qua review được merge
 | Duplicate | 🟡 | Khung service theo pattern repo (không tính). Lặp nội bộ: duyệt condition set ở 2 nơi, 2 định nghĩa "hợp lệ" ở op-26. Có code RabbitMQ copy sang mà **chưa dùng** |
 | Structure | 🟢/🟡 | Đúng pattern Controller → Control → Constraints → Repository → Mapper. `create()` là một lambda dài khoảng 100 dòng |
 | Follow spec | 🔴 | **Root BE `openspec/` không có spec hay change nào** cho optimization model, tag details, license đa module (đã merge/đang chạy). Trái rule "API contract chỉ được spec ở backend root" |
-| Test | 🟢 | Có test cho control, constraints, gateway control |
 
 ## 1. Duplicate code
 

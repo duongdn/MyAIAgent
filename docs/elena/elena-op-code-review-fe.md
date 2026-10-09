@@ -1,7 +1,7 @@
 # Elena OP — Code review FE (optimization-ui, những gì đã merge)
 
 > Phạm vi: code FE OP đã vào `nus-base` (`a288733a18`, 09/10): PR #311–#329, khoảng 7.800 dòng trong `precognize-workspace/projects/optimization-ui` + 27 file `projects/shared` + license trong admin-ui/portal.
-> Trọng tâm: **duplicate code · structure · follow spec**. Lỗi runtime/nghiệp vụ đã ghi ở [review đã deploy](elena-op-deployed-code-review.md). OpenSpec: [elena-op-openspec-review.md](elena-op-openspec-review.md). BE: [elena-op-code-review-be.md](elena-op-code-review-be.md).
+> Trọng tâm: **duplicate code · structure · follow spec** (không review unit test, user 09/10). Lỗi runtime/nghiệp vụ đã ghi ở [review đã deploy](elena-op-deployed-code-review.md). OpenSpec: [elena-op-openspec-review.md](elena-op-openspec-review.md). BE: [elena-op-code-review-be.md](elena-op-code-review-be.md).
 > Viết tắt `FE/` = `precognize-workspace/projects/optimization-ui/src/app/`
 
 > **Phạm vi review (user 09/10):** clone (theo quy ước "Cloned components") **không tính là duplicate**, vì đã thống nhất với khách. Dự án fixed-cost: chỉ review code OP của mình, không đề xuất sửa phần khác của repo (portal, admin, service khác, pattern chung).
@@ -13,7 +13,6 @@
 | Duplicate | 🟡 Nhẹ | Bỏ qua clone thì chỉ còn lặp **nội bộ optimization-ui**: logic overlay (3 component), footer wizard, pattern tag-details ở 2 step |
 | Structure | 🟢 Tốt | Tách core/features/shared rõ. Logic thuần TS tách khỏi component (expression, runs search/filter/sort). Standalone component, lazy wizard |
 | Follow spec | 🟡 | Code khớp spec ở các điểm em kiểm. Nhưng spec **ghi luôn những quyết định cần bàn** (fail-open license, mock name/draft), nên "đúng spec" chưa chắc đúng nghiệp vụ |
-| Test | 🔴 | **0 file `*.spec.ts`** trong optimization-ui trên nus-base. Rule OpenSpec FE cố ý "không yêu cầu unit test". Logic nặng (expression rules, runs search/filter/sort, license-modules, wizard state) không có test tự động |
 
 ## 1. Duplicate code
 
@@ -62,7 +61,6 @@ Em đối chiếu các điểm chính (spec ở `precognize-workspace/openspec/`
 Chỗ code có mà spec không có: retry tag details, `beforeunload` warning. Nhỏ, không sao.
 
 ## 4. Đề xuất ưu tiên (FE)
-0. Đề xuất với anhttl: **bắt buộc unit test cho logic thuần** (`shared/expression`, `license-modules.ts`, `optimization-runs.*.ts`, `model-wizard-state.service`). Không cần test component. Hiện rule OpenSpec FE dòng "Do not require unit-test files" đang cấm ngầm việc này.
 2. Tách mock ra sau 1 provider (`OPTIMIZATION_DATA_SOURCE`) hoặc cờ `environment`, để build production không mang fixture.
 3. Hook `useTagDetails` dùng chung cho Goal/Influencers, giữ `units`.
 4. Thống nhất kiểu với DTO BE (mapper một chỗ, có test) trước khi nối Save/Create.

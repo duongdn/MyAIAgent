@@ -256,5 +256,5 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 
 ## elena-monitor
 - [elena_op_restart_duongdn_code_reviewer](elena/project_elena_op_restart_duongdn_code_reviewer.md) — OP project, DuongDN = code reviewer, /me:elena-monitor
-- [elena_review_scope_no_clones_fixed_cost](elena/feedback_elena_review_scope_no_clones_fixed_cost.md) — clones ≠ duplicate (agreed w/ customer); fixed-cost → only review OP code, never suggest changes elsewhere
+- [elena_review_scope_no_clones_fixed_cost](elena/feedback_elena_review_scope_no_clones_fixed_cost.md) — clones ≠ duplicate, no unit-test review; fixed-cost → only review OP code, never suggest changes elsewhere
 - [elena_report_detailed_for_general_reviewer](elena/feedback_elena_report_detailed_for_general_reviewer.md) — explain each PR/issue in detail in Vietnamese, chat only gives the path
