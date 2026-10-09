@@ -28,7 +28,7 @@ Tiền mặt    ▍                        0.9%
 
 ## Nhận xét
 - Tiền mặt tức thì 47.5M; Liquid + Tiết kiệm = 1.240B = 2.95x mục tiêu 420M.
-- 602.3M sổ đáo hạn trong 1–4 ngày (10-10: 200.4M; 10-13: 401.9M).
+- 602.3M sổ đáo hạn trong 1–4 ngày (10-10: vcb 1m 100.4M + tikcop 3 month 100M; 10-13: 401.9M).
 - Từ 10-08: vay chị Ky 5M vào vcb, chi 1.065M (hiếu hỉ 0.5M, từ thiện 0.5M, ăn uống 65K).
 
 ## Full View (incl. Nhà, gross 7,976,968,597)
@@ -71,7 +71,7 @@ Single account lớn nhất ngoài Nhà = long an res 12.9% net (<25%).
 Base = gross 7,976,968,597 − Nhà 2,500,000,000.
 
 ### 4. Upcoming decisions (≤90 ngày)
-- 10-10 (ngày mai): 1m 100.4M + tikcop 3 month 100M.
+- 10-10 (ngày mai): vcb 1m 100.4M + tikcop 3 month 100M.
 - 10-13 (4 ngày): tikcop 5m 401.9M — khoản lớn nhất.
 
 ### 5. Khuyến nghị

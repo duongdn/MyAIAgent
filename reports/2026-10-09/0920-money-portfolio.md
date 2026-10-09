@@ -24,7 +24,7 @@
 | tikcop 5m | 401,918,000 | 5.0% | 5.1% | 🏦 Savings |
 | vcb 6m chứng chỉ tiền gởi | 300,000,000 | 3.8% | 3.8% | 🏦 Savings |
 | 6m cake vpbank | 190,000,000 | 2.4% | 2.4% | 🏦 Savings |
-| 1m | 100,403,425 | 1.3% | 1.3% | 🏦 Savings |
+| vcb 1m | 100,403,425 | 1.3% | 1.3% | 🏦 Savings |
 | 6m rút gốc linh hoạt | 100,000,000 | 1.3% | 1.3% | 🏦 Savings |
 | tikcop 3 month | 100,000,000 | 1.3% | 1.3% | 🏦 Savings |
 | Finhay | 67,404,069 | 0.8% | 0.9% | 📈 Investment |
@@ -52,7 +52,7 @@ Ghost "nam á 6m" 2,005,479 (đáo hạn 2024-06-01) loại khỏi tổng. FX US
 ## Upcoming Maturities
 | Deposit | Amount (₫) | Maturity |
 |---------|-----------|----------|
-| 1m | 100,403,425 | 2026-10-10 |
+| vcb 1m | 100,403,425 | 2026-10-10 |
 | tikcop 3 month | 100,000,000 | 2026-10-10 |
 | tikcop 5m | 401,918,000 | 2026-10-13 |
 | 6m rút gốc linh hoạt | 100,000,000 | 2027-02-10 |
