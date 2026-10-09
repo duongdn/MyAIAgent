@@ -33,7 +33,7 @@ Có **3 vấn đề cần bàn ngay** và một vài điểm technical/perf:
 | F | Module OP mở cả Configuration + Digital Plant, cần khách xác nhận | 💬 bàn |
 | G | Chưa có cảnh báo hết credit / sắp đầy model cho OP (chỉ có cảnh báo tag của Monitoring) | 💬 bàn |
 | H | **Live 09/10:** validate của optimization service (`assert`) **không chạy** trên test env, dữ liệu sai lọt qua | 🔴 |
-| I | **Live 09/10:** tag search trả **0 kết quả** với mọi từ khóa, nên Step 1 không chọn được tag | 🔴 |
+| I | **Live 09/10:** FE cho search từ 2 ký tự, BE yêu cầu ≥3 (`minimumLength: 3` của #321), nên gõ 2 ký tự FE báo lỗi/không ra kết quả | ⚠️ |
 | J | **Live 09/10:** lỗi trả về lộ message Java thô (`Cannot invoke "String.trim()"...`, `Cannot deserialize ... [MAXIMIZE, MINIMIZE]`) | ⚠️ |
 
 ## 3. Chi tiết từng vấn đề
@@ -90,12 +90,11 @@ Có **3 vấn đề cần bàn ngay** và một vài điểm technical/perf:
 - **Kịch bản:** FE nối Save/Create mà gửi dữ liệu sai (improvement 50%, cost âm, influencer trùng target) thì BE **lưu vào Mongo** không báo gì. Thuật toán sau đó nhận model rác. Lỗi này cũng có thể xảy ra ở production nếu khởi động sai cách.
 - **Đề xuất:** hỏi kietnht service optimization chạy bằng lệnh gì, thêm `-ea`. Lâu dài thì không dùng `assert` cho validate nghiệp vụ (đổi thành `if (...) throw new AssertionError(...)`, như code đã làm với `nameAlreadyExist`). Áp dụng cho cả license/domain service nếu cũng chạy thiếu `-ea`.
 
-### I. Tag search trả 0 kết quả (🔴 chặn test Step 1)
-- **Kiểm chứng:** `GET /search/entityByNameAndDescription?query=PV|TI|FI|a|1&entityType=Column` đều trả `data: []` (khoảng 0.25s), trong khi license báo `currentColumnCount = 4604` tag.
-- **Khả năng:** index full-text (Lucene `NameAndDescriptionIndex` trên Neo4j) chưa được build lại sau khi chạy lại migration DP ngày 08/10. Có thể liên quan tin kietnht 09/10 09:09 "AA mất hết asset name".
-- **Hệ quả:** QC không test được wizard Step 1/2 (không chọn được tag nào).
-- **Đề xuất:** báo kietnht/tiennd2 kiểm tra index search trên test env.
-- Ghi chú: gửi `entityType=COLUMN` (viết hoa) thì lỗi `No enum constant ... DaeEntityTypes.COLUMN`. FE gửi `Column` nên không bị, chỉ lưu ý khi test bằng curl.
+### I. Độ dài search tối thiểu FE ≠ BE (⚠️)
+- **Kiểm chứng (đính chính):** ban đầu em tưởng search hỏng (0 kết quả), thực ra là test bằng 2 ký tự. BE đang chạy trả `success:false, reason: searchQueryTooShort` khi query < 3 ký tự (config `search.query.minimumLength: 3` mà branch #321 thêm vào `reference.conf`, đã deploy). Với ≥3 ký tự thì chạy tốt (`.PV` → 197 tag, khoảng 0.5s, 22KB).
+- FE `tag-picker` dùng `minimumSearchQueryLength` mặc định **2**, nên gõ 2 ký tự sẽ ra lỗi hoặc danh sách rỗng mà không hiện "quá ngắn".
+- **Đề xuất:** thống nhất một nguồn: FE đọc từ config BE, hoặc bỏ config thừa ở #321 (review PR #321 vấn đề 1). Ghi chú: gửi `entityType=COLUMN` (viết hoa) bị lỗi enum, FE gửi `Column` nên không sao.
+- **Data test:** chỉ khoảng 38% tag có asset (1.142/2.974 tag quét được). Bộ tag test để trong `config/.elena-op-test-data.json`.
 
 ### J. Lộ message lỗi Java ra client (⚠️)
 - Response `reason` chứa nguyên exception (tên class Java, danh sách enum). Đây không phải errorId nên FE không dịch được, và để lộ cấu trúc nội bộ.

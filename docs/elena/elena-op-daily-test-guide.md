@@ -41,6 +41,24 @@
 | User thường + license hết hạn | Popup "License needs renewal, contact administrator", đóng popup thì về login |
 | **Test fail-open (A):** DevTools → Network → chặn request `license/status` (chuột phải → Block request URL), reload `/optimizations/` | Hiện tại **vẫn vào được**. Đây là lỗi A, ghi kết quả |
 
+## Dữ liệu test (tag có asset)
+Wizard bắt buộc tag phải **gắn asset**. Chọn tag không có asset sẽ báo *"This tag is not linked to an asset. Remove it or choose a different tag."* Bộ tag đã kiểm tra ngày 09/10 nằm ở `config/.elena-op-test-data.json` (đã mã hóa, giải mã giống file accounts):
+
+| Dùng làm | Gõ vào ô search | Tag | Asset |
+|----------|-----------------|-----|-------|
+| Target | `LT0103` | 2302_PTM_UT_CG_LT0103 (Drum Level) | Steam Drum |
+| Influencer cùng asset | `PT0102`, `FT0105`, `AIT0302` | Drum Press, Steam Blow Down, Drum Conductivity | Steam Drum |
+| Influencer asset khác | `TE0215`, `FT0201A` | GAH ex Gas Temp (ave), PA Flow (L) | GAH Bottom |
+| Negative (không asset) | `FXA002` | 2302_PTM_UT_CG_FXA002_EU | (không có) → phải báo lỗi trên |
+
+- **Gõ ≥3 ký tự.** BE đang đặt `minimumLength=3` (từ branch #321), FE cho gõ từ 2 ký tự. Gõ 2 ký tự sẽ không ra gì vì BE trả `searchQueryTooShort`.
+- Data đổi (DP tạo lại asset), hoặc muốn tìm tag khác:
+  ```bash
+  bash scripts/elena-op-find-asset-linked-tags.sh            # quét rộng, in tag có asset + top asset
+  bash scripts/elena-op-find-asset-linked-tags.sh TE02 Drum   # theo từ khóa
+  ```
+  Script tự đăng nhập bằng account System trong config. Tìm được bộ mới thì cập nhật `config/.elena-op-test-data.json`, rồi `bash scripts/encrypt-secrets.sh config/.elena-op-test-data.json` và commit file `.enc`.
+
 ## Test B: Wizard tạo model, Step 1 (5 phút)
 | Bước | Kỳ vọng |
 |------|---------|
@@ -73,7 +91,7 @@
 ## Smoke test API mỗi sáng (1 phút, sau khi đăng nhập curl ở mục 0)
 ```bash
 curl -s -b /tmp/elena.cj $B/license/status | jq -c '.data|{isValid,activeModules,op:.modules.optimization}'
-curl -s -b /tmp/elena.cj "$B/search/entityByNameAndDescription?query=PV&entityType=Column" | jq '.data|length'
+curl -s -b /tmp/elena.cj "$B/search/entityByNameAndDescription?query=.PV&entityType=Column" | jq '.data|length'
 curl -s -b /tmp/elena.cj -X POST $B/model/tags/details -H 'Content-Type: application/json' -d '{"tagIds":[]}' | jq -c .
 # kiểm tra validate BE (không tạo dữ liệu vì tag giả): đúng phải trả invalidMinimumDesiredImprovement
 curl -s -b /tmp/elena.cj -X POST $B/optimization/models/create -H 'Content-Type: application/json' \
@@ -82,7 +100,7 @@ curl -s -b /tmp/elena.cj -X POST $B/optimization/models/create -H 'Content-Type:
 | Kiểm tra | Kỳ vọng | Kết quả 09/10 |
 |----------|---------|---------------|
 | license/status | có `modules.optimization` | ✅ BE license đa module **đã deploy** |
-| search "PV" | > 0 tag | ❌ **0 kết quả** với mọi query (có 4.604 tag). Step 1 không chọn được tag |
+| search ".PV" (≥3 ký tự) | > 0 tag | ✅ 197 tag. Lúc đầu tưởng hỏng vì test bằng "PV" (2 ký tự) → `searchQueryTooShort` |
 | tags/details rỗng | `success:true, data:[]` | ✅ BE #321 **đã deploy** (từ branch) |
 | create với improvement 999 | `invalidMinimumDesiredImprovement` | ❌ trả `optimizationTagNotFound`, tức là **validate bằng assert không chạy** |
 
@@ -109,4 +127,4 @@ npm run start-optimization   # http://localhost:4203
 
 | Ngày | Build (`main-*.js`) | Test | Kết quả / bug |
 |------|---------------------|------|---------------|
-| 2026-10-09 | main-SOJERMXW | Bundle + smoke API (system) | FE có OP-11, chưa có #325/#328. BE license đa module + tags/details + optimization create **đã deploy**. ❌ search tag trả 0. ❌ validate assert của optimization service không chạy (improvement 999 lọt qua). License hiện chỉ MONITORING |
+| 2026-10-09 | main-SOJERMXW | Bundle + smoke API (system) | FE có OP-11, chưa có #325/#328. BE license đa module + tags/details + optimization create **đã deploy**. search OK nếu ≥3 ký tự (FE cho 2, lệch). 1.142/2.974 tag có asset. ❌ validate assert của optimization service không chạy (improvement 999 lọt qua). License hiện chỉ MONITORING |
