@@ -12,3 +12,5 @@ fix-links.py maps links by position using /tmp/news-digest-cache.json, which hol
 **Recurred 2026-10-09 (sequential fetch too):** fix-links "fixed" 48 already-correct links built from an ID→link map; backup restored. Building links by ID from per-topic JSON + diff guard works reliably.
 
 **Recurred 2026-10-10 0405:** fix-links rewrote 42 correct links (153 built by ID from per-topic JSON, 0 bare domains); backup restored again. Diff guard is required every run.
+
+**Recurred 2026-10-12 0405:** fix-links rewrote 18 correct links (165 built by ID); backup restored.
