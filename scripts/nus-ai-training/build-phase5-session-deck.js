@@ -3,6 +3,7 @@
 // Run from repo root: node scripts/nus-ai-training/build-phase5-session-deck.js
 const path = require('path');
 const { google } = require('googleapis');
+const { OWASP_ITEMS, OWASP_SLIDE_TITLE, OWASP_SLIDE_NOTES, NOTES_ADDITIONS } = require('./phase5-owasp-llm-top10-content');
 const PID = '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI';
 const auth = new google.auth.GoogleAuth({
   keyFile: path.join(__dirname, '../../config/daily-agent-490610-7eb7985b33e3.json'),
@@ -14,6 +15,7 @@ const C = {
   ORANGE: { red: 0.92, green: 0.55, blue: 0.15 }, GREEN: { red: 0.88, green: 0.95, blue: 0.82 },
   YELLOW: { red: 0.99, green: 0.92, blue: 0.7 }, BG: { red: 0.97, green: 0.98, blue: 1 },
   WHITE: { red: 1, green: 1, blue: 1 }, GREY: { red: 0.4, green: 0.4, blue: 0.45 },
+  MUTED: { red: 0.9, green: 0.9, blue: 0.92 },
 };
 const PT = (v) => ({ magnitude: v, unit: 'PT' });
 let reqs = []; let n = 0;
@@ -58,7 +60,8 @@ function arrow(slide, ax, ay, bx, by, color = C.NAVY) {
 
 const slides = [];
 function newSlide(title, notes) {
-  const sid = id('s5'); slides.push({ sid, notes });
+  // OWASP references appended to notes by title (single source: phase5-owasp-llm-top10-content.js)
+  const sid = id('s5'); slides.push({ sid, title, notes: notes + (NOTES_ADDITIONS[title] || '') });
   reqs.push({ createSlide: { objectId: sid, slideLayoutReference: { predefinedLayout: 'BLANK' } } });
   reqs.push({ updatePageProperties: { objectId: sid, fields: 'pageBackgroundFill.solidFill.color',
     pageProperties: { pageBackgroundFill: { solidFill: { color: { rgbColor: C.BG } } } } } });
@@ -66,6 +69,19 @@ function newSlide(title, notes) {
     label(sid, 30, 14, 660, 44, title, { size: 26, align: 'START' });
     box(sid, 34, 58, 80, 4, ' ', { fill: C.ORANGE, noLine: true, shape: 'RECTANGLE', size: 2 });
   }
+  return sid;
+}
+
+// OWASP LLM Top 10 map: green = discussed in session, grey = self-study
+function owaspSlide() {
+  const sid = newSlide(OWASP_SLIDE_TITLE, OWASP_SLIDE_NOTES);
+  OWASP_ITEMS.forEach(([code, name, covered], i) =>
+    box(sid, 20 + (i % 5) * 138, 90 + Math.floor(i / 5) * 105, 128, 90, `${code}\n${name}`,
+      { fill: covered ? C.GREEN : C.MUTED, size: 16, sub: 11 }));
+  box(sid, 150, 320, 18, 18, ' ', { fill: C.GREEN, size: 2 });
+  label(sid, 172, 314, 170, 30, 'nói trong buổi', { size: 12, bold: false, align: 'START' });
+  box(sid, 360, 320, 18, 18, ' ', { fill: C.MUTED, size: 2 });
+  label(sid, 382, 314, 170, 30, 'tự đọc thêm', { size: 12, bold: false, align: 'START' });
   return sid;
 }
 
@@ -148,6 +164,8 @@ arrow(s, 150, 170, 190, 170); arrow(s, 300, 170, 340, 170); arrow(s, 450, 170, 4
 box(s, 40, 260, 300, 60, 'Least privilege\ntool chỉ có quyền tối thiểu', { fill: C.YELLOW, size: 16, sub: 12 });
 box(s, 380, 260, 300, 60, 'Tool result = không đáng tin\nvalidate trước khi chạy', { fill: C.YELLOW, size: 16, sub: 12 });
 
+owaspSlide();
+
 // --- Phần 3
 s = newSlide('3. Vận hành: đo cái gì?', `Câu hỏi: làm sao biết AI feature CÓ ÍCH và VẬN HÀNH ĐƯỢC?
 - Task success: tỉ lệ user giải quyết được việc (ví dụ: % câu hỏi trả lời đúng có nguồn, % ticket tạo đúng). Đây là thước đo chính.
@@ -219,9 +237,9 @@ Bài tự thực hành: vẽ sơ đồ 1 trang cho support agent, đánh dấu d
   .forEach((t, i) => box(s, 40, 80 + i * 46, 400, 38, t, { fill: C.LIGHT, size: 13, align: 'START' }));
 box(s, 470, 80, 220, 222, 'Tự thực hành\nSơ đồ 1 trang:\ndữ liệu nhạy cảm · điểm check quyền · approval · 1 đường injection\n+ solution brief 6 phần', { fill: C.GREEN, size: 18, sub: 13 });
 
-module.exports = { reqs, slides };
+module.exports = { reqs, slides, owaspSlide, auth, PID, google };
 
-(async () => {
+if (require.main === module) (async () => {
   const api = google.slides({ version: 'v1', auth: await auth.getClient() });
   const pres = (await api.presentations.get({ presentationId: PID })).data;
   const del = pres.slides.map((x) => ({ deleteObject: { objectId: x.objectId } }));
