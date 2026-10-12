@@ -1,8 +1,8 @@
 # Daily Report — 2026-10-12 (Monday)
 
-**Run:** 2026-10-12T05:00:21+07:00 (cron)
+**Run:** 2026-10-12T05:00:21+07:00 (cron), corrected 08:25 (+07:00) (recheck)
 **Window:** 2026-10-09T08:26:25+07:00 → 2026-10-12 05:10 (+07:00). Task-log pieces use **Friday 2026-10-09 (last workday)**.
-**Leave plan:** parse-leave-emails refreshed 05:01: no upcoming approved leave. From Matrix: TienND sick Fri 10-09 afternoon (make-up time). PhucVT left 1h early Fri (dental, made up in the evening).
+**Leave plan:** parse-leave-emails refreshed 05:01, and again 08:17: no upcoming approved leave. From Matrix: TienND sick Fri 10-09 afternoon (make-up time). PhucVT left 1h early Fri (dental, made up in the evening).
 
 ---
 
@@ -10,8 +10,8 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack Xtreme / JIRA (Maddy) | (a) **Madhuraka, Sun 10-11 11:52:** "I have some questions regarding 468… confirm whether they are issues or not? I would like to push this live today". His Codex-review comment on LIFM2-468 (04:51, "High — the bulk-result attribution fix depends on a Chrome extension change that is not in this branch…") is **unanswered**. (b) LongVV logged **4.5h of Kai-role work on Fri** (LIFM2-469 3h, LIFM2-470 1.5h), but there was **no Kai daily report** in Slack. (c) LIFM2-469/470 are still To Do with **no estimate and no JIRA log**, and LIFM2-468 has no estimate or log either. Context: on Fri evening you paused all Maddy actions (Madhuraka's spec-miss complaint), so someone still needs to decide who replies to Madhuraka. → Maddy ○ |
-| 2 | Slack RDC (Franc) | dmetiner, Sat 10-10 04:37, confirmed the preset fix works ✅, then raised a **new ask**: the API returns several frequencies within a radius (Sakarya 94.0 + Kocaeli 99.8, while another station broadcasts on 94.0 in Kocaeli). He asks: "Can we make a rule that we only add the closest one to the preset buttons?" This is **unanswered** (weekend). → Franc ○ |
+| 1 | Slack Xtreme / JIRA (Maddy) | (a) **Madhuraka, Sun 10-11 11:52:** "I have some questions regarding 468… confirm whether they are issues or not? I would like to push this live today". His Codex-review comment on LIFM2-468 (04:51, "High — the bulk-result attribution fix depends on a Chrome extension change that is not in this branch…") is **unanswered**. (b) LongVV logged **4.5h of Kai-role work on Fri** (LIFM2-469 3h, LIFM2-470 1.5h), but there was **no Kai daily report** in Slack. (c) ~~LIFM2-469/470 are still To Do with **no estimate and no JIRA log**~~. Recheck 08:22: Kai did give estimates in JIRA comments (469 3h, agreed with Madhuraka 10-07; 470 1.5h). Those match the WS hours exactly, but the estimate field is still empty and no JIRA time is logged. LIFM2-468 has no estimate or log either. Context: on Fri evening you paused all Maddy actions (Madhuraka's spec-miss complaint), so someone still needs to decide who replies to Madhuraka. **Recheck 08:22: still no reply** in the Slack DM or on JIRA 468 (last comment is Madhuraka's 10-11 04:51 UTC). Bitbucket is unchanged (6 open, no new comments). → Maddy ○ |
+| 2 | Slack RDC (Franc) | dmetiner, Sat 10-10 04:37, confirmed the preset fix works ✅, then raised a **new ask**: the API returns several frequencies within a radius (Sakarya 94.0 + Kocaeli 99.8, while another station broadcasts on 94.0 in Kocaeli). He asks: "Can we make a rule that we only add the closest one to the preset buttons?" This is **unanswered** (weekend). **Recheck 08:20: still no reply**, no holding reply and no thread reply. → Franc ○ |
 | 3 | Performance (MPFC) | Apdex **0.32** (up from 0.02 on 10-09, still well below 0.7). Avg response 2.94s over 80,410 requests. `continue` E_WARNING ×760, WP_Error::get_method ×78, mysqli socket ×10 + DNS failure ×2, `get_header()` undefined ×6. New Rollbar #69 `WPO_Page_Cache::delete_cache()` undefined (10-09). DigitalOcean: **MySQL 8.0 managed DB reaches EOL Oct 30**. |
 | 4 | Workstream needs review | OhCleo: LongVV 10-08 4h, 10-09 2h + 0.5h are Pending (reviewers **DuongDN, MinhTV**). Crystal lang: PhucVT 10-05 to 10-09 (8/6/3/2/2h) are Pending (reviewer **TienND**; Arthur is paused, listed for visibility). |
 | 5 | Performance (OhCleo) | New error class `IntegrityError: null value in column "user_id" of relation "app_playhistory"` ×1. `AdminPayoutsView.get` took 5.1s (1 call, over the 5s threshold). Otherwise healthy (apdex 0.99). |
@@ -137,15 +137,15 @@ Missing-report days flagged by WS for 10-09: Maddy, Crystal lang (informational;
 ### 2. Slack / Kai Daily Report Check
 - WS Maddy hours on Fri: 4.5h, all Kai-role (JIRA-tagged, not WordPress), so the report check applies.
 - Kai's only Slack activity on 10-09 is in the Anoma DM (quote-tool images, 09:05–13:59). **No daily report found** → #1b.
-- **Madhuraka Sun 11:52, 468 questions, unanswered** → #1a.
+- **Madhuraka Sun 11:52, 468 questions, unanswered** → #1a. Recheck 08:22: still unanswered.
 - Context: Fri 21:15 you told the team to pause all Maddy actions after Madhuraka's complaint that the bugs are spec misses. namtv: stop "work first, report later". The 2h of quote-tool work this week can't be charged (chientx).
 
 ### 3. JIRA (LIFM2, updated since window)
 | Ticket | Summary | Status | Est | JIRA logged | Note |
 |--------|---------|--------|-----|-------------|------|
 | LIFM2-468 | Quoting Tool Issue | Testing - Anoma | — | — | ⚠️ no est / no log. Madhuraka Codex-review comment unanswered |
-| LIFM2-469 | International Shipping Labels | To Do | — | — | ⚠️ 3h on WS, no est / no JIRA log |
-| LIFM2-470 | Custom percentage updates | To Do | — | — | ⚠️ 1.5h on WS, no est / no JIRA log |
+| LIFM2-469 | International Shipping Labels | To Do | ~~—~~ 3h (comment only, agreed 10-07) | — | ⚠️ 3h on WS. Estimate field empty, no JIRA log |
+| LIFM2-470 | Custom percentage updates | To Do | ~~—~~ 1.5h (comment only, 10-06) | — | ⚠️ 1.5h on WS. Estimate field empty, no JIRA log |
 | LIFM2-464 | Invalidate Proceed buttons | Ready to deploy | 4h | 4h | ✅ |
 | LIFM2-467 | In-Home Quote Form | Ready to deploy | 2h | 2.5h | ✅ (PR #549 merged) |
 | LIFM2-459 | Listed - buy tab issue | Done | 1.5h | 2h | ✅ (slightly over) |
@@ -162,7 +162,7 @@ Trello: Maddy ⚠️ skipped (#1).
 
 ## Fountain — 05:08 (+07:00)
 
-**Part 1 — Matrix Plan:** Latest is still trinhmtt 2026-10-05 09:49: "ViTHT: 40h DatNT: 40h ThinhT: 20h => QC 25h". This week's plan is not posted yet; Monday's post is expected 08:30–09:30, so this is not flagged. namtv's Delivery plan for week 12/10: DatNT on part Kunal + WorkTalent.
+**Part 1 — Matrix Plan:** (Recheck 08:21: not posted yet. Due by 09:30, so this is not flagged.) Latest is still trinhmtt 2026-10-05 09:49: "ViTHT: 40h DatNT: 40h ThinhT: 20h => QC 25h". This week's plan is not posted yet; Monday's post is expected 08:30–09:30, so this is not flagged. namtv's Delivery plan for week 12/10: DatNT on part Kunal + WorkTalent.
 
 **Part 2 — Task Log Actuals (Workstream, week 10-05, full week incl. Fri 10-09):** DatNT 40h (8 Fri). ViTHT **40h** (backfilled, was 4h on Thu's report). ThinhT 20h. VuTQ 18h. QC: PhatDLT 13.5h + HungPN 25.5h = 39h. TrinhMTT 13.5h (not QC, excluded).
 
@@ -251,9 +251,9 @@ Not gated by Trello.
 
 | Workroom | Result |
 |----------|--------|
-| Rory | Not verified: Cloudflare challenge from this host |
-| Aysar | Not verified: carrick live cookies not available on this host. You already gave KhanhHH memo feedback Fri 16:26 about the #718 memo wording (10-08/10-09). |
-| Tokenlite | Not verified: Cloudflare challenge |
+| Rory | ~~Not verified: Cloudflare challenge from this host~~. Recheck 08:23, run locally headless: auth OK, but the timesheet only shows the current week (10-12), so Fri 10-09 wasn't found (`dom_fallback_day_label_not_found`) and the memo status is still unverified. Script limitation: it can't navigate to the previous week. |
+| Aysar | Same as Rory at recheck: auth OK, but the Fri row isn't in the displayed week, so this is unverified. ~~Not verified: carrick live cookies not available on this host.~~ You already gave KhanhHH memo feedback Fri 16:26 about the #718 memo wording (10-08/10-09). |
+| Tokenlite | ~~Not verified: Cloudflare challenge~~ Same as above: auth OK, Fri not in the displayed week. |
 
 Per the session-failure rule this is not an alert and not a memo status. Manual re-run from local (carrick Chrome Profile 1): `node scripts/upwork-memo-check.js --date=2026-10-09`. Neural messages couldn't be read for the same reason (`upwork-neural-check.js`, 4 attempts), so Neural ✓ per rule.
 
@@ -283,7 +283,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 
 **Check progress: 20/22** (card `6acbf92b`, today's)
 - ✓ complete: John Yi (ignore), James Diamond, Rory, Aysar, Elliott (ignore), MPFC, Marcel, Elena-SamGuard (ignore), Raymond, Neural Contract, Bailey, Andrew Taraba, Rebecca (ignore), Colin (ignore), Fountain, Philip (ignore), Ohcleo, Arthur (ignore), Blair Brown (ignore), Elena-WordPress-SamGuard.
-- ○ incomplete: **Maddy** (#1), **Franc** (#2).
+- ○ incomplete: **Maddy** (#1), **Franc** (#2). Recheck 08:25: both still have open customer asks (re-verified live), so they stay ○.
 
 Live card re-fetched after writes. Note: an older Check progress card `6ac955d6` (created Sat 10-10) is still open with all items incomplete. It was left untouched.
 
@@ -301,3 +301,4 @@ Live card re-fetched after writes. Note: an older Check progress card `6ac955d6`
 3. MPFC apdex is still 0.32 after 5 days, and MySQL 8.0 managed DB EOL is Oct 30. Who owns the server check and the DB upgrade?
 4. Fountain: is the team committing to Kunal's Oct 21 go-live? QC says capacity is short.
 5. The older open Check progress card from 10-10: archive it?
+6. Upwork memo script can't check the previous week's days when run on a Monday (Fri 10-09 isn't found). Should I fix it to navigate to the previous week?
