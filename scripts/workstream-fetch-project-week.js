@@ -288,4 +288,8 @@ async function main() {
   console.log(JSON.stringify(results, null, 2));
 }
 
-main().catch(e => { process.stderr.write('[workstream] Error: ' + e.message + '\n'); process.exit(1); });
+module.exports = { PROJECTS, ensureToken };
+
+if (require.main === module) {
+  main().catch(e => { process.stderr.write('[workstream] Error: ' + e.message + '\n'); process.exit(1); });
+}

@@ -54,6 +54,14 @@ For each employee, check Google Sheets hours (filter by Owner column G). Multi-p
 - PhucVT = Web, AnhNH2 = Mobile, plan: PhucVT 40h. AnhNH2 has no plan — use actual as both values.
 - If employee has "Nghỉ nửa ngày"/"Nghỉ cả ngày", append (off X day dùng paid leave) to section and name line
 
+## #3: Weekly Report Finalization (Workstream)
+
+Since 2026-10-02 (TrinhMTT/BinhNT, room Direct Manager `!NrQrTcivLlGInYNqre`): every Friday the DM reviews All Task Log per project, then clicks **Submit weekly report** so finance can lock official charge.
+
+- Cron `40 17 * * 5 scripts/workstream-weekly-finalization-cron.sh` auto-submits (before Workstream's 18:00 auto-finalize).
+- In the report, run `node scripts/workstream-weekly-finalization-submit.js --week=<Monday>` (dry-run) and list every project: ✅ finalized (by whom) / ⏳ not finalized / 🔴 blocked by Pending review.
+- 🔴 blocked = charged hours still Pending review → resolve the review first, then `--submit --project=<key>`. Never submit without the user's OK outside the cron.
+
 ## Key Rules
 
 - Filter by Owner column (G), NOT day total row
@@ -69,4 +77,5 @@ If `$ARGUMENTS` is provided:
 - `/weekly-report hours` — only check team hours
 - `/weekly-report fountain` — only Fountain plan vs actual
 - `/weekly-report matrix` — only send James Diamond + Marcel Matrix report
+- `/weekly-report finalization` — only Workstream Weekly Report Finalization status
 - `/weekly-report` (no args) — run everything
