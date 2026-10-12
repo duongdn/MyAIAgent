@@ -163,7 +163,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
 
 ## weekly-report
-- [workstream_weekly_finalization_friday_cron](weekly-report/project_workstream_weekly_finalization_friday_cron.md) — Fri 17:40 cron submits WS Weekly Report Finalization; 422 = pending review
+- [workstream_weekly_finalization_friday_cron](weekly-report/project_workstream_weekly_finalization_friday_cron.md) — Fri 18:00 weekly-report cron auto-submits WS finalization if task log complete (leave-aware, no hours check)
 - [feedback_matrix_report_format](weekly-report/feedback_matrix_report_format.md), [project_blair_brown_setup](weekly-report/project_blair_brown_setup.md) — Blair Brown IS included (see [[feedback_blair_brown_index_annotation_contradicts_file]], old "FORBIDDEN" tag was stale/unexplained)
 - [feedback_thuyle_report_explicit_send_flag](weekly-report/feedback_thuyle_report_explicit_send_flag.md) — 🔴 exact-text confirm
 - [feedback_workstream_all_projects](weekly-report/feedback_workstream_all_projects.md)

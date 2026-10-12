@@ -13,7 +13,7 @@ description: Weekly monitoring report — team hours, project reports, JIRA cros
 
 # Weekly Report
 
-Run Friday night or Saturday morning. Generates `reports/{YYYY-MM-DD}/weekly-monitor.md`.
+Auto-runs Friday 18:00 via cron `scripts/weekly-report-cron.sh` (can also run manually). Generates `reports/{YYYY-MM-DD}/weekly-monitor.md`.
 
 ## Instructions
 
@@ -56,11 +56,13 @@ For each employee, check Google Sheets hours (filter by Owner column G). Multi-p
 
 ## #3: Weekly Report Finalization (Workstream)
 
-Since 2026-10-02 (TrinhMTT/BinhNT, room Direct Manager `!NrQrTcivLlGInYNqre`): every Friday the DM reviews All Task Log per project, then clicks **Submit weekly report** so finance can lock official charge.
+Since 2026-10-02 (TrinhMTT/BinhNT, room Direct Manager `!NrQrTcivLlGInYNqre`): every Friday the DM reviews All Task Log per project and clicks **Submit weekly report** so finance can lock official charge.
 
-- Cron `40 17 * * 5 scripts/workstream-weekly-finalization-cron.sh` auto-submits (before Workstream's 18:00 auto-finalize).
-- In the report, run `node scripts/workstream-weekly-finalization-submit.js --week=<Monday>` (dry-run) and list every project: ✅ finalized (by whom) / ⏳ not finalized / 🔴 blocked by Pending review.
-- 🔴 blocked = charged hours still Pending review → resolve the review first, then `--submit --project=<key>`. Never submit without the user's OK outside the cron.
+- Cron Fri 18:00 runs `node scripts/workstream-weekly-finalization-submit.js --submit` BEFORE the report → auto-submits a project when:
+  1. every active dev (Developer/Tech Lead with a log on that project this week or last week) has ≥1 task-log entry each working day, full-day leave excluded (Workstream `leaveEntries`). **Hours are NOT checked**, because many devs also work on projects we don't manage.
+  2. no charged row is still `Pending` review (projects that require review).
+- Cron run: read the finalization log path given in the prompt; do not re-submit. Manual run: `--week=<Monday>` dry-run, and submit only if the user asks.
+- In the report, list EVERY project: ✅ submitted/finalized (by whom) | 🔴 not submitted + exact reason (which dev missed which days / how many rows still pending review) | ❌ API error (403 = no access to that project).
 
 ## Key Rules
 

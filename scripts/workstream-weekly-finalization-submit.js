@@ -8,6 +8,9 @@
  *   GET  /finalization/status?projectId=&weekStart=YYYY-MM-DD  → {status:{state:'finalized'|'not_finalized',...}}
  *   POST /finalization/submit {projectId, weekStart}           → 422 PENDING_REVIEW_BLOCKING if charged hours still Pending review
  *
+ * Auto-submit only when the week's task log is complete (see workstream-weekly-tasklog-completeness-check.js);
+ * otherwise print the exact block reasons so the weekly report can show them.
+ *
  * Usage:
  *   node scripts/workstream-weekly-finalization-submit.js                 # dry-run, current week
  *   node scripts/workstream-weekly-finalization-submit.js --submit        # submit every not-finalized project
@@ -16,10 +19,13 @@
  */
 
 const { PROJECTS, ensureToken } = require('./workstream-fetch-project-week');
+const { checkWeekCompleteness } = require('./workstream-weekly-tasklog-completeness-check');
 
 const args = process.argv.slice(2);
 const arg = name => (args.find(a => a.startsWith(`--${name}=`)) || '').split('=')[1];
 const SUBMIT = args.includes('--submit');
+
+const todayUtc7 = () => new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
 
 // Monday of the current week in UTC+7
 function currentWeekStart() {
@@ -62,11 +68,25 @@ async function main() {
       console.log(`❌ ${p.name} — status HTTP ${st.status} ${JSON.stringify(st.json).slice(0, 150)}`);
       notDone++; continue;
     }
-    if (!SUBMIT) { console.log(`⏳ ${p.name} — not finalized`); notDone++; continue; }
+
+    const wk = await api(config, 'GET', `/review/week?projectId=${p.id}&date=${weekStart}`);
+    if (wk.status !== 200) {
+      console.log(`❌ ${p.name} — review/week HTTP ${wk.status}`);
+      notDone++; continue;
+    }
+    const prevMon = new Date(weekStart + 'T00:00:00Z'); prevMon.setUTCDate(prevMon.getUTCDate() - 7);
+    const prev = await api(config, 'GET', `/review/week?projectId=${p.id}&date=${prevMon.toISOString().slice(0, 10)}`);
+    const chk = checkWeekCompleteness(wk.json, prev.status === 200 ? prev.json : null, weekStart, todayUtc7());
+    const infoTxt = chk.info.length ? ` [${chk.info.join(', ')}]` : '';
+    if (!chk.ready) {
+      console.log(`🔴 ${p.name} — KHÔNG submit: ${chk.issues.join(' | ')}${infoTxt}`);
+      notDone++; continue;
+    }
+    if (!SUBMIT) { console.log(`⏳ ${p.name} — đủ điều kiện, chưa submit (dry-run)${infoTxt}`); notDone++; continue; }
 
     const r = await api(config, 'POST', '/finalization/submit', { projectId: p.id, weekStart });
     if (r.status >= 200 && r.status < 300) {
-      console.log(`✅ ${p.name} — submitted now (${r.json.status?.state || 'ok'})`);
+      console.log(`✅ ${p.name} — submitted now (${r.json.status?.state || 'ok'})${infoTxt}`);
     } else if (r.status === 422) {
       console.log(`🔴 ${p.name} — BLOCKED, pending review: ${fmtBlockers(r.json)}`);
       notDone++;
