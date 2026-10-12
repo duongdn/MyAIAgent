@@ -5,7 +5,7 @@ metadata:
   type: feedback
 ---
 
-Andrew Taraba sheet (11iOnN6s…) is entirely unfilled (all weeks 0.00, W-tabs empty). Real hours are in Workstream project **"Portfolio"** (customerAlias "Andrew Taraba", projectId `cmqyvioez007pqo0xn1iexfg3`), roster DuongDN (Manager) + TuanNT (Developer). `scripts/workstream-fetch-project-week.js` does NOT include it.
+Andrew Taraba sheet (11iOnN6s…) is entirely unfilled (all weeks 0.00, W-tabs empty). Real hours are in Workstream project **"Portfolio"** (customerAlias "Andrew Taraba", projectId `cmqyvioez007pqo0xn1iexfg3`), roster DuongDN (Manager) + TuanNT (Developer). `scripts/workstream-fetch-project-week.js` now includes it as `andrew_taraba` (confirmed 2026-10-12, 9h).
 
 **Why:** 2026-10-05 run reported Taraba 0h; user: "Andrew có task mà". Raw `/review/week?projectId=cmqyvioez007pqo0xn1iexfg3&date={monday}` showed TuanNT 1h on 09-30.
 
