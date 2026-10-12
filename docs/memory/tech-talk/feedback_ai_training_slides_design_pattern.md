@@ -21,3 +21,5 @@ For the "NUS Training Part 5" Google Slides deck (presentation ID `10ZYIXeEzlElY
 - Colors used so far: NAVY `{0.12,0.22,0.40}` (primary/dark cards, title text), LIGHTNAVY `{0.85,0.9,0.97}` (neutral cards), ORANGE `{0.92,0.55,0.15}` (⚠️ pay-extra-attention item), GREEN `{0.88,0.95,0.82}` (safe/positive), YELLOW `{0.99,0.92,0.7}` (caution/note label), on a light `{0.97,0.98,1}` slide background — keep this palette consistent across Sessions 14-16 for the same deck.
 
 See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics used to build this.
+
+**🔴 2026-10-12 — No trainer-meta on slides:** User angry ("cái này sao lại đưa vào slide !!!") at an on-slide box "Kết thúc: Solution brief 1 trang = bài đánh giá cuối". Program/trainer info (assessment rules, "session cuối · 60 phút", grading criteria, how slide maps to trainer doc) goes ONLY in speaker notes. Slides show audience-facing content only.
