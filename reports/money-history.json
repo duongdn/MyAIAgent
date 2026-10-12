@@ -643,6 +643,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW +3.89M vs 10-08: vcb +4.0M (vay chi Ky 5M - hieu hi 0.5M - tu thien 0.5M), Vi -65K, Paypal FX -40K. NW = totaldashboard 6,510,220,873 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 81.9M/Chi 23.7M/Net +58.1M. 602M so dao han 10-13/10."
+    },
+    {
+      "date": "2026-10-12",
+      "label": "12/10",
+      "net_worth": 7925878018,
+      "gross_assets": 8005065312,
+      "liabilities": 4745650,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 724000000,
+        "investment": 2502123840,
+        "savings": 1092059644,
+        "liquid": 166881828
+      },
+      "method": "dashboard_verified",
+      "note": "NW +23.19M vs 10-09: thuong 25M + thu no Tien Trang 4M vao vcb, lai TK 2.43M, vang 715->724M, chi 3.67M. 10-10 vcb 1m + tikcop 3 month tat toan ve vcb, 100M gui so moi 6m cake htt. NW = totaldashboard 6,533,410,949 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 109.3M/Chi 27.3M/Net +82.0M. tikcop 5m 401.9M dao han 10-13."
     }
   ]
 }
