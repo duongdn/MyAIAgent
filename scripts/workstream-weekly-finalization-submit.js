@@ -14,11 +14,12 @@
  * Usage:
  *   node scripts/workstream-weekly-finalization-submit.js                 # dry-run, current week
  *   node scripts/workstream-weekly-finalization-submit.js --submit        # submit every not-finalized project
- *   node scripts/workstream-weekly-finalization-submit.js --week=2026-10-05 --project=maddy
+ *   node scripts/workstream-weekly-finalization-submit.js --week=2026-10-05 --project="Baamboozle"
+ * Project list = live GET /review/scope (open projects only; closed ones return 403 "Project is closed").
  * Exit: 0 = all finalized after run, 1 = something still not finalized / errors.
  */
 
-const { PROJECTS, ensureToken } = require('./workstream-fetch-project-week');
+const { ensureToken } = require('./workstream-fetch-project-week');
 const { checkWeekCompleteness } = require('./workstream-weekly-tasklog-completeness-check');
 
 const args = process.argv.slice(2);
@@ -55,8 +56,11 @@ async function main() {
   let notDone = 0;
 
   console.log(`## Weekly Report Finalization — week ${weekStart} (${SUBMIT ? 'SUBMIT' : 'dry-run'})`);
-  for (const [key, p] of Object.entries(PROJECTS)) {
-    if (only && key !== only) continue;
+  const scope = await api(config, 'GET', '/review/scope');
+  if (scope.status !== 200) throw new Error(`review/scope HTTP ${scope.status}`);
+  for (const sp of scope.json.projects || []) {
+    const p = { id: sp.projectId, name: `${sp.projectName} (${sp.customerAlias})${sp.userIsManager ? '' : ' [WS: không phải Manager]'}` };
+    if (only && sp.projectName !== only) continue;
     const q = `projectId=${p.id}&weekStart=${weekStart}`;
     const st = await api(config, 'GET', `/finalization/status?${q}`);
     const s = st.json.status || {};

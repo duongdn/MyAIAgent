@@ -62,7 +62,7 @@ Since 2026-10-02 (TrinhMTT/BinhNT, room Direct Manager `!NrQrTcivLlGInYNqre`): e
   1. every active dev (Developer/Tech Lead with a log on that project this week or last week) has ≥1 task-log entry each working day, full-day leave excluded (Workstream `leaveEntries`). **Hours are NOT checked**, because many devs also work on projects we don't manage.
   2. no charged row is still `Pending` review (projects that require review).
 - Cron run: read the finalization log path given in the prompt; do not re-submit. Manual run: `--week=<Monday>` dry-run, and submit only if the user asks.
-- In the report, list EVERY project: ✅ submitted/finalized (by whom) | 🔴 not submitted + exact reason (which dev missed which days / how many rows still pending review) | ❌ API error (403 = no access to that project).
+- In the report, list EVERY project: ✅ submitted/finalized (by whom) | 🔴 not submitted + exact reason (which dev missed which days / how many rows still pending review) | ❌ API error (read the error body; 403 "Project is closed" = closed project).
 
 ## Key Rules
 
