@@ -20,7 +20,9 @@ const C = {
 };
 const PT = (v) => ({ magnitude: v, unit: 'PT' });
 let reqs = []; let n = 0;
-const id = (p) => `${p}_${String(++n).padStart(3, '0')}`;
+// per-run suffix: live patches re-run the builder, object IDs must not collide with earlier runs
+const RUN = Date.now().toString(36).slice(-5);
+const id = (p) => `${p}${RUN}_${String(++n).padStart(3, '0')}`;
 
 function box(slide, x, y, w, h, text, o = {}) {
   const oid = id('bx');

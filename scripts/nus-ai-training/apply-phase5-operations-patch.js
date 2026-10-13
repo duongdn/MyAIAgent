@@ -1,5 +1,5 @@
-// Live patch (no rebuild): replace the 2 old "Vận hành" slides with 4 slides built from real eval data.
-// Idempotent: skips if already applied. Run from repo root after run_eval.py has produced eval_results.json:
+// Live patch (no rebuild): replace every existing "Vận hành" slide (old or previous version) with the
+// current set from phase5-operations-slides.js. Safe to re-run after editing that module. Run from repo root after run_eval.py has produced eval_results.json:
 //   node scripts/nus-ai-training/apply-phase5-operations-patch.js
 const builder = require('./build-phase5-session-deck');
 const { operationsSlides, OPS_TITLES } = require('./phase5-operations-slides');
@@ -11,10 +11,8 @@ const slideText = (sl) => sl.pageElements.flatMap((e) => e.shape?.text?.textElem
   const { google, auth, PID, reqs, slides } = builder;
   const api = google.slides({ version: 'v1', auth: await auth.getClient() });
   const pres = (await api.presentations.get({ presentationId: PID })).data;
-  if (pres.slides.some((sl) => slideText(sl).startsWith('Eval = unit test cho AI'))) return console.log('already applied');
-
   const old = pres.slides.map((sl, i) => ({ sl, i })).filter(({ sl }) => OPS_TITLES.some((t) => slideText(sl).startsWith(t)));
-  if (old.length !== 2) throw new Error(`expected 2 old ops slides, found ${old.length}`);
+  if (!old.length) throw new Error('no ops slides found');
   const at = old[0].i;
 
   const start = reqs.length, firstNew = slides.length;
@@ -33,5 +31,5 @@ const slideText = (sl) => sl.pageElements.flatMap((e) => e.shape?.text?.textElem
     return { insertText: { objectId: sl.slideProperties.notesPage.notesProperties.speakerNotesObjectId, text: c.notes } };
   });
   await api.presentations.batchUpdate({ presentationId: PID, requestBody: { requests: noteReqs } });
-  console.log(`replaced 2 ops slides with ${created.length} at index ${at}; total slides: ${p2.slides.length}`);
+  console.log(`replaced ${old.length} ops slides with ${created.length} at index ${at}; total slides: ${p2.slides.length}`);
 })().catch((e) => { console.error(e.message); process.exit(1); });
