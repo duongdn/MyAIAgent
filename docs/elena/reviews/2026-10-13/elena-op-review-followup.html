@@ -1,0 +1,342 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP Review Follow-up</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: review lại sau 09/10 (13/10/2026)</h1>
+<blockquote>
+<p>Code: <code>nus/nus-base</code> <code>c18d945d4f</code> (116 commit kể từ lần review trước <code>a288733a18</code>), <code>nus/feature/optimization</code>, và 5 PR đang mở.
+Đối chiếu với: <a href="../2026-10-09/elena-op-fe-team-action-items.html">FE action items</a> · <a href="../2026-10-09/elena-op-be-team-action-items.html">BE action items</a> · <a href="../2026-10-09/elena-op-customer-review-rules-compliance.html">quy tắc review của khách</a>.
+Repo: https://github.com/nustechnology/Elena-SamGuard-Digital-Plant</p>
+</blockquote>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>Mảng</th>
+<th>Kết quả</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FE</strong></td>
+<td>Team đã xử lý theo file action items qua PR #332. Trong 10 việc: <strong>5 đã xong</strong> (translate, date format, gộp interface tag, function trong template, search tối thiểu 3 ký tự), <strong>3 xong một phần</strong>, <strong>1 chưa làm</strong> (loại đo hardcode), và <strong>1 team chủ động hoãn</strong> (mock, vì app còn đang phát triển, có ghi lý do)</td>
+</tr>
+<tr>
+<td><strong>BE</strong></td>
+<td>Đã đổi quy trình: Brian revert BE khỏi nus-base, giờ BE đi qua PR vào branch <code>feature/optimization</code>. Có spec BE cho op-26. <strong>Nhưng code chưa sửa lỗi nào</strong> trong danh sách: vẫn dùng <code>assert</code>, vẫn chỉ người tạo được sửa, vẫn không có lock</td>
+</tr>
+<tr>
+<td><strong>Phát hiện mới</strong></td>
+<td>🔴 Unique index tên model <strong>bị comment-out từ commit đầu tiên</strong>, nên chống trùng tên không hoạt động. 🔴 Mock license đã vào <strong>portal và admin</strong> của khách. 🔴 FE vừa chốt OR cố định, trong khi BE chỉ nhận AND. 🔴 PR #336 (op-26) đang conflict với commit revert</td>
+</tr>
+</tbody>
+</table>
+<h3>DuongDN cần làm ngay</h3>
+<ol>
+<li>Báo kietnht/Brian 2 lỗi 🔴 BE mới (mục 3.1 và 3.3), chặn merge #336 cho đến khi sửa.</li>
+<li>Thống nhất với Ken (nusken) thời hạn gỡ mock license (mục 3.2), ghi vào checklist deliver.</li>
+<li>Nhắc team: không merge khi reviewer còn đang "Request changes" (mục 4).</li>
+</ol>
+<hr />
+<h2>1. FE: tình trạng 10 việc đã giao</h2>
+<p>Nguồn: PR <a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/332">#332</a> (Ken, merged 12/10) và code trên nus-base. Em đã kiểm lại trực tiếp từng mục trên code, không chỉ đọc mô tả PR.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Việc</th>
+<th>Trạng thái</th>
+<th>Kiểm chứng trên code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Text qua translate</td>
+<td>✅ Xong</td>
+<td>Không còn chuỗi "No Optimization Runs Available", "Manage Models", "Pause Run"... trong template. Thêm 83 key i18n. Riêng playground <code>#/shared-ui</code> (công cụ dev) vẫn để chữ cứng, chấp nhận được</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bỏ mock</td>
+<td>⏸ Hoãn có lý do</td>
+<td>3 file sample/mock vẫn còn. Team ghi quyết định: trang ngoài milestone 1 giữ sample data trong lúc phát triển, màn hình M1 đã dùng API thật. <strong>Phải gỡ trước khi deliver</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Kiểu dữ liệu khớp BE</td>
+<td>🟡 Một phần</td>
+<td>Direction đã map <code>max → MAXIMIZE</code>. Đã giữ <code>units</code>. Cost bỏ trống không gửi. Còn OR và MEAN/DIFF/PROP, xem mục 3.4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Date format từ configuration</td>
+<td>✅ Xong</td>
+<td>Không còn <code>MM/dd/yyyy</code> cứng. Ngày theo format và múi giờ của plant</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Loại đo lấy từ API</td>
+<td>❌ Chưa</td>
+<td><code>optimization-model-item.component.ts:19</code> vẫn còn <code>OptimizationTagType = 'speed' \| 'pressure' \| …</code>. Team ghi chờ API runs</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Một interface tag</td>
+<td>✅ Xong</td>
+<td><code>shared/models/optimization-tag.model.ts</code>: <code>OptimizationTag</code>. Các kiểu khác thành <code>Pick&lt;OptimizationTag, …&gt;</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Không gọi function trong template</td>
+<td>✅ Xong</td>
+<td>Các chỗ cũ (<code>isMissingAsset(…)</code>, <code>costOrderError()</code>...) đã chuyển sang <code>functionCallPipe</code>. Còn <code>$any(token)</code> trong expression-view</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Search tối thiểu 3 ký tự</td>
+<td>✅ Xong</td>
+<td><code>tag-picker.component.ts:28</code> <code>DEFAULT_MINIMUM_QUERY_LENGTH = 3</code>, lấy từ config nếu có</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>modelId</code> trên URL</td>
+<td>🟡 Một phần</td>
+<td>Đã có route placeholder <code>operating-constraints</code>. <code>modelId</code> chờ làm Edit/Draft</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Code lặp</td>
+<td>🟡 Một phần</td>
+<td>Gõ type cho 2 chỗ <code>any</code>. Overlay helper, wizard footer, service tag-details dùng chung chưa làm. <code>QueryCacheService</code> giữ lại có chủ đích</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Đánh giá:</strong> team FE làm tốt. Mỗi mục đều có trạng thái rõ ràng và ghi lý do nếu chưa làm. Các quy tắc cũng được viết vào <code>ai_docs/CONVENTIONS.md</code> mục "optimization-ui delivery rules" để áp dụng cho code về sau.</p>
+<h2>2. BE: tình trạng 14 việc đã giao</h2>
+<p>Code BE kiểm trên branch op-26 (PR <a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/336">#336</a>, head <code>13853643</code>), PR #315 (head <code>76141d7e</code>) và #321 (head <code>fd2bf6e0</code>).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Việc</th>
+<th>Trạng thái</th>
+<th>Kiểm chứng</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Bỏ <code>assert</code></td>
+<td>❌ Chưa</td>
+<td>op-26 vẫn còn 23 assert ở <code>DaeOptimizationModelConstraints</code> và 2 ở <code>DaeOptimizationModelControl</code>. #315 còn 2, #321 còn 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Migration cho khách đang chạy</td>
+<td>❌ Chưa, <strong>nặng hơn đã báo</strong></td>
+<td><code>db.changelog-existing-customer-9_4.yaml</code> không có changeSet nào cho optimization. Ngoài ra index bị comment-out, xem mục 3.1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bỏ check "chỉ người tạo được sửa"</td>
+<td>❌ Chưa</td>
+<td><code>DaeOptimizationModelControl.java:187</code> vẫn còn. Spec op-26 còn ghi thành requirement "Draft ownership"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Lock + chặn sửa model đang chạy</td>
+<td>🟡 Một phần</td>
+<td>✅ Đã chặn update khi model không ở <code>DRAFT</code> (<code>:189</code>, errorId <code>optimizationModelNotDraft</code>). ❌ Không có lock: proposal ghi rõ là non-goal "last-write-wins"</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Spec BE cho contract</td>
+<td>🟡 Đang có</td>
+<td>Đã có <code>openspec/changes/op-26-upsert-optimization-model</code> (có requirement và scenario, tasks đã tick hết). Nhưng nằm trong PR chưa merge, và có 2 requirement trái lời khách (mục 3 và 4 ở trên)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>BE qua PR trước khi deploy</td>
+<td>✅ Đã đổi</td>
+<td>Commit <code>97c338d58c</code> (Brian, 12/10) revert service khỏi nus-base. BE giờ mở PR vào <code>feature/optimization</code>: #315, #321, #336</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Status ban đầu, một luồng tạo</td>
+<td>🟡</td>
+<td>Upsert tạo <code>DRAFT</code>. <code>create</code> cũ vẫn đặt <code>CALCULATING</code> (spec op-26 vẫn giữ "One-shot creation")</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Update phía DB</td>
+<td>❌ Chưa</td>
+<td>Vẫn <code>repository.save(document)</code> ghi đè cả document (<code>:244</code>)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Log giữ stack trace</td>
+<td>❌ Chưa</td>
+<td><code>:249</code> vẫn <code>e.getMessage()</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>#315 enum thay chuỗi</td>
+<td>❌ Chưa</td>
+<td>Từ lần review trước không có commit Java mới (chỉ merge). Vẫn 12 chỗ so chuỗi module</td>
+</tr>
+<tr>
+<td>11</td>
+<td>#321 class 1 field, thay đổi thừa</td>
+<td>❌ Chưa</td>
+<td><code>DaeTagDetailsRequest</code>, <code>DaeApiSearchController</code>, <code>reference.conf</code> vẫn nằm trong diff</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Contract khớp FE</td>
+<td>❌ Lệch thêm</td>
+<td>Xem mục 3.4</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Code lặp</td>
+<td>—</td>
+<td>Chưa xem lại</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Quyết định nền tảng</td>
+<td>—</td>
+<td>Chưa thấy chốt (Run, plant, đơn vị tag, timeline)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Đánh giá:</strong> quy trình đã tốt hơn (BE qua PR, đã có spec), nhưng <strong>chưa sửa code</strong>. Những lỗi khách từng bắt sửa (assert, migration, getMessage, magic string, class 1 field) vẫn còn nguyên.</p>
+<h2>3. Phát hiện mới</h2>
+<h3>3.1 🔴 Unique index tên model không được tạo ở đâu cả</h3>
+<p><strong>Vấn đề:</strong> trong <code>libraries/migration/.../version_9_4/create_optimization_model_collection/DaeMigrationCreateOptimizationModelCollectionLogic.java</code>, đoạn tạo index (unique <code>normalizedName</code>, index <code>status</code>, <code>goal.targetTagId</code>) <strong>bị comment-out</strong> từ commit đầu tiên <code>4acdfda072</code>:</p>
+<pre><code class="language-java">//            IndexOptions uniqueNameOptions = new IndexOptions()
+//                    .unique(true)
+//                    .partialFilterExpression(new Document(&quot;deleted&quot;, false))
+//            collection.createIndex(new BasicDBObject(&quot;normalizedName&quot;, 1), uniqueNameOptions);
+</code></pre>
+<p>Service cũng không có <code>@Indexed</code> hay auto-index. Lần review 09/10 em ghi nhận nhầm đây là "điểm tốt", vì chỉ đọc comment và yaml.</p>
+<p><strong>Vì sao quan trọng:</strong> việc chống trùng tên giờ chỉ dựa vào bước "kiểm tra rồi mới lưu" (<code>existsByNormalizedName</code> → <code>save</code>). Hai người bấm Save cùng lúc với cùng một tên thì cả hai đều qua bước kiểm tra, và DB có 2 model trùng tên. Đoạn bắt <code>DuplicateKeyException</code> → <code>nameAlreadyExist</code> không bao giờ chạy. Ngoài ra, list và filter theo status sẽ không có index.</p>
+<p><strong>Cách sửa:</strong> bỏ comment và tạo index. Vì op-26 đã bỏ soft-delete, cần xem lại <code>partialFilterExpression(deleted=false)</code>: model mới không có field <code>deleted</code> thì không khớp filter, nên index <strong>vẫn không có tác dụng</strong>. Nên dùng unique thường trên <code>normalizedName</code>. Đồng thời thêm changeSet vào <code>db.changelog-existing-customer-9_4.yaml</code> (việc 2).</p>
+<h3>3.2 🔴 Mock license đã nằm trong portal và admin của khách</h3>
+<p><strong>Vấn đề:</strong> PR <a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/334">#334</a> (commit <code>970d684598</code>, đã merge 12/10) thêm <code>projects/shared/dev-license-mock.ts</code> và gọi nó trong interceptor của <strong>cả 3 app</strong>: precognize-portal, admin-ui, optimization-ui. Chỉ cần gõ <code>localStorage.setItem('mockLicense', 'valid')</code> trong console là response <code>/license/status</code> bị thay đổi.</p>
+<p><strong>Vì sao quan trọng:</strong> file tự ghi: <em>"It must not reach a release: with the key set, the front-end licence checks can be bypassed."</em> Portal và admin là app khách đang dùng thật. Reviewer nus-aron đã "Request changes" đúng điểm này, nhưng PR vẫn được merge 9 phút sau. Hiện việc gỡ chỉ được nhắc bằng một task chưa tick. Nếu quên, bản deliver sẽ có cửa sau bỏ qua license.</p>
+<p><strong>Cách sửa:</strong> trước khi deliver, chạy <code>grep -rn "TEMP-LICENSE-MOCK\|mockLicenseStatus" projects</code> phải không còn kết quả nào. Đề xuất thêm bước này vào script <code>deliver-to-origin.sh</code> hoặc pre-commit để chặn tự động. Tốt hơn nữa là chỉ import mock trong <code>environment</code> dev.</p>
+<h3>3.3 🔴 PR #336 (op-26) không merge được do commit revert</h3>
+<p><strong>Vấn đề:</strong> <code>feature/optimization</code> đã có commit <code>97c338d58c</code> (revert "init optimization"). Branch op-26 được tách ra <strong>trước</strong> commit revert. GitHub báo <code>mergeable=false</code>, em thử merge local cũng bị conflict.</p>
+<p><strong>Vì sao quan trọng:</strong> đây là bẫy "revert của revert" của git. Nếu giải conflict kiểu nhanh, những file của <code>4acdfda072</code> mà op-26 không sửa sẽ <strong>vẫn bị xóa</strong> sau khi merge. Service sẽ thiếu file mà không ai để ý.</p>
+<p><strong>Cách sửa:</strong> trên <code>feature/optimization</code>, revert lại commit revert trước (<code>git revert 97c338d58c</code>), sau đó mới merge op-26. Sau khi merge, kiểm tra service build được và đủ 31 file main.</p>
+<h3>3.4 🔴 FE chốt OR cố định, BE chỉ nhận AND</h3>
+<p><strong>Vấn đề:</strong> PR <a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/337">#337</a> (Ken, đang mở) làm theo ticket OP-16 đã cập nhật: các expression trong một condition set <strong>luôn nối bằng OR</strong>, bỏ lựa chọn AND/OR. BE (op-26) thì chỉ nhận <code>AND</code>, gửi <code>OR</code> sẽ lỗi <code>invalidOptimizationLogicalOperator</code>. Hàm DIFF/PROP/MEAN (dùng cho Run Evaluation) cũng chưa có contract BE.</p>
+<p><strong>Vì sao quan trọng:</strong> trước đây chỉ lệch một phần (FE cho chọn cả hai). Giờ thì hai bên loại trừ nhau hoàn toàn: mọi condition set FE gửi lên đều bị BE từ chối. Proposal #337 đã ghi rõ là đang chờ BE.</p>
+<p><strong>Cách sửa:</strong> BE đổi luật logical operator theo ticket (nhận <code>OR</code>, hoặc bỏ field), cập nhật spec op-26. Ngoài ra, op-26 đã có <code>!=</code> và <code>notIn</code>, khớp với FE.</p>
+<h3>3.5 ⚠️ Spec op-26 ghi những quyết định trái lời khách</h3>
+<ul>
+<li>Requirement "Draft ownership": chỉ người tạo được sửa. Khách (08/10): ai cũng sửa được.</li>
+<li>Non-goal: "No optimistic locking… last-write-wins".</li>
+<li>Proposal ghi "No status guard", nhưng code đã có kiểm tra <code>DRAFT</code>. Spec và code không khớp.</li>
+</ul>
+<p>Spec hợp lệ về format. Vấn đề nằm ở nội dung: khi merge, những quyết định sai này trở thành "nguồn chuẩn". Cần sửa trước khi merge.</p>
+<h2>4. Quy trình review chéo</h2>
+<table>
+<thead>
+<tr>
+<th>PR</th>
+<th>Tác giả</th>
+<th>Review</th>
+<th>Merge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#332 delivery rules</td>
+<td>nusken</td>
+<td>nus-aron <strong>Request changes</strong> (07:15) → có commit sửa (07:43)</td>
+<td>nusken tự merge 07:51, reviewer chưa xác nhận lại</td>
+</tr>
+<tr>
+<td>#333 trend graph</td>
+<td>nusteam (Aron)</td>
+<td>nusken <strong>Request changes</strong> (07:00)</td>
+<td>nus-aron merge 08:29, nusken chưa xác nhận lại</td>
+</tr>
+<tr>
+<td>#334 licence states</td>
+<td>nusken</td>
+<td>nus-aron <strong>Request changes</strong> (08:21), đúng điểm mock 3.2</td>
+<td>nusken tự merge 08:30, 9 phút sau</td>
+</tr>
+<tr>
+<td>#325, #328, #335</td>
+<td>nusteam</td>
+<td>chỉ có COMMENTED</td>
+<td>phongtb merge</td>
+</tr>
+<tr>
+<td>#329, #330, #331</td>
+<td>—</td>
+<td>chỉ có COMMENTED</td>
+<td>tác giả tự merge</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Điểm tốt:</strong> FE đã review chéo đều (Aron ↔ Ken), nội dung review kỹ, có checklist QA.
+<strong>Cần sửa:</strong> chưa PR nào có <strong>Approve</strong>. Có 3 PR merge khi reviewer vẫn đang "Request changes". Đề xuất bật branch protection trên <code>nus-base</code> và <code>feature/optimization</code> (yêu cầu 1 approve, chặn merge khi còn "changes requested"), hoặc ít nhất thống nhất quy ước này trong team.
+<strong>BE:</strong> #315, #336 chưa có review nào. #321 chỉ có CodeRabbit.</p>
+<h2>5. PR đang mở</h2>
+<table>
+<thead>
+<tr>
+<th>PR</th>
+<th>Nội dung</th>
+<th>Kết luận</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/336">#336</a> op-26 upsert (Brian → <code>feature/optimization</code>)</td>
+<td>Lưu draft theo từng step của wizard, có spec BE</td>
+<td>❌ Conflict (3.3), assert, check owner, không lock, index (3.1), log <code>getMessage</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/315">#315</a> license đa module (Brian)</td>
+<td>Không có commit Java mới từ lần review trước</td>
+<td>❌ Giữ kết luận cũ (assert, magic string)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/321">#321</a> tag details (tiennd2)</td>
+<td>Thêm "data coverage verdict" cho tag details (<code>a94ca8e50d</code>), sửa build</td>
+<td>❌ Lỗi cũ chưa sửa. Phần data coverage mới chưa review sâu</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/337">#337</a> OP-16 cập nhật luật expression (Ken)</td>
+<td>Cố định OR, thêm <code>≠</code>, chia hàm theo nơi dùng, bỏ check cùng đơn vị, mỗi tag chỉ xuất hiện 1 lần trong expression. Chỉ sửa model, chưa có UI</td>
+<td>💬 Code và spec ổn, đúng ticket. Chờ BE đổi luật OR trước khi có màn hình nào Save (3.4)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/339">#339</a> OP-18 shared components (ryannus → branch #337)</td>
+<td>Expression card/editor/rule drawer, selected tag list, tag picker. 3.132 dòng</td>
+<td>💬 Không thấy text cứng, không <code>any</code>, template chỉ gọi event handler. Còn <code>$any(token)</code> ×10. Base là branch #337, nên phải merge #337 trước</td>
+</tr>
+</tbody>
+</table>
+<h2>6. Việc tiếp theo</h2>
+<ul>
+<li>Gửi team BE danh sách mục 2 + 3.1, 3.3, 3.4, 3.5 (đã có file action items BE ngày 09/10, chỉ cần nhắc lại phần chưa sửa).</li>
+<li>Lần review sau: xem kỹ phần data coverage của #321 và code lặp BE (việc 13).</li>
+</ul></main></body></html>
