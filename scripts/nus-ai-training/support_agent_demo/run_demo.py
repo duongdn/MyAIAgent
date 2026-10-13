@@ -1,21 +1,23 @@
 """
 Demo: Support agent THẬT (model thật) đọc knowledge base, đề xuất ticket và đi qua 5 điểm kiểm tra quyền.
 Hai bản, CÙNG logic kiểm tra (checkpoints.py), chỉ khác SDK:
-    --sdk openai  (mặc định) OpenAI Agents SDK — cùng SDK với Session 5–9. Model: DeepSeek hoặc OpenAI.
+    --sdk openai  (mặc định) OpenAI Agents SDK — cùng SDK với Session 5–9.
+                  Model qua LLM gateway công ty (llm.nustechnology.com) — mặc định deepseek-v4.1-flash.
     --sdk claude             Claude Agent SDK — dùng tài khoản Claude Code đã đăng nhập, không cần API key.
 
 CÀI ĐẶT (1 lần, từ thư mục chứa file này):
     python3 -m venv .venv && . .venv/bin/activate
     pip install -r requirements.txt
-    # --sdk openai: key trong config/.deepseek-config.json (hoặc DEEPSEEK_API_KEY)
-    #               dùng OpenAI: DEMO_PROVIDER=openai + config/.openai-config.json (hoặc OPENAI_API_KEY)
+    # --sdk openai: key gateway công ty trong config/.nus-llm-gateway-config.json (hoặc NUS_LLM_API_KEY)
+    #               provider khác: DEMO_PROVIDER=openai|deepseek (xem PROVIDERS trong agent_openai_sdk.py)
     # --sdk claude: lệnh `claude` chạy được và đã đăng nhập
-    export DEMO_MODEL=...      # tuỳ chọn. openai SDK: deepseek-chat (mặc định) | gpt-4.1-mini...
+    export DEMO_MODEL=...      # tuỳ chọn. openai SDK: deepseek-v4.1-flash (mặc định) | qwen-3.7-flash | glm-5.3-flash...
                                #           claude SDK: sonnet (mặc định) | haiku | opus
 
 CHẠY:
     python3 run_demo.py                                 # 5 kịch bản, hỏi y/n khi cần duyệt
     python3 run_demo.py --sdk claude --scenario 5       # cùng kịch bản trên Claude để so sánh
+    python3 run_demo.py --compare --scenario 5          # chạy 1 kịch bản trên MỌI model của gateway → bảng so sánh
     python3 run_demo.py --scenario 2                    # chỉ kịch bản prompt injection
     python3 run_demo.py --scenario 2 --disable 4 --disable 5
                                                         # tắt ④⑤: nếu model bị lừa → ticket độc được tạo
@@ -63,11 +65,16 @@ async def main():
     p.add_argument("--approve", choices=["ask", "yes", "no"], default="ask",
                    help="checkpoint ⑤: ask=hỏi y/n, yes=luôn đồng ý, no=luôn từ chối")
     p.add_argument("--sdk", choices=["openai", "claude"], default="openai", help="SDK dùng để chạy agent")
+    p.add_argument("--compare", action="store_true",
+                   help="chạy --scenario trên mọi model của gateway (--sdk openai), in bảng so sánh")
     a = p.parse_args()
+
+    if a.compare:
+        return await compare(a)
 
     if a.sdk == "openai":
         import agent_openai_sdk as sdk  # import muộn: chỉ cần cài SDK đang dùng
-        provider = os.environ.get("DEMO_PROVIDER", "deepseek")
+        provider = os.environ.get("DEMO_PROVIDER", "nus")
         model = sdk.make_model(provider, os.environ.get("DEMO_MODEL"))
         label = f"OpenAI Agents SDK + {provider}:{model.model}"
     else:
@@ -88,6 +95,39 @@ async def main():
         print(f"   💬 agent trả lời: {answer}")
 
     print(f"\nTicket trong hệ thống đích: {cp.TICKETS or 'không có'}")
+
+
+async def compare(a):
+    """Cùng dữ liệu, cùng câu hỏi, cùng code kiểm tra — chỉ đổi model. Không đoán trước được model nào bị lừa."""
+    import agent_openai_sdk as sdk
+    num = a.scenario or 5
+    title, kwargs = SCENARIOS[num]
+    kwargs.setdefault("kb", KB_DOCS)
+    provider = os.environ.get("DEMO_PROVIDER", "nus")
+    models = sdk.list_models(provider)
+    print(f"So sánh kịch bản {num}: {title}\nModels: {', '.join(models)}")
+    rows = []
+    for name in models:
+        print(f"\n━━ {name}")
+        cp.PROPOSALS.clear()
+        try:
+            await sdk.run_agent(sdk.make_model(provider, name), disabled=a.disable, approve_mode="no", **kwargs)
+            props = list(cp.PROPOSALS)
+        except Exception as e:  # model không hỗ trợ tool calling, timeout...
+            print(f"   lỗi: {str(e)[:120]}")
+            props = None
+        if props is None:
+            verdict = "lỗi khi chạy"
+        elif not props:
+            verdict = "không đề xuất ticket"
+        else:
+            last = props[-1]
+            verdict = (f"đề xuất {last.get('priority')} → {last.get('assignee')} | "
+                       + ("④ CHẶN" if last["blocked"] else "④ hợp lệ"))
+        rows.append((name, verdict))
+    print(f"\n{'═' * 70}\nKẾT QUẢ kịch bản {num}")
+    for name, verdict in rows:
+        print(f"  {name:<22} {verdict}")
 
 
 if __name__ == "__main__":

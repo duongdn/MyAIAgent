@@ -20,31 +20,45 @@ import checkpoints as cp
 
 # ── Model: OpenAI hoặc provider tương thích OpenAI ─────────────────────────
 PROVIDERS = {
-    # name: (base_url, model mặc định, file config chứa api_key, biến môi trường)
+    # name: (base_url mặc định, model mặc định, file config, biến môi trường chứa key)
+    # nus = LLM gateway của công ty (tương thích OpenAI, có DeepSeek/Qwen/GLM/MiMo)
+    "nus": ("https://llm.nustechnology.com/v1", "deepseek-v4.1-flash", ".nus-llm-gateway-config.json", "NUS_LLM_API_KEY"),
     "deepseek": ("https://api.deepseek.com", "deepseek-chat", ".deepseek-config.json", "DEEPSEEK_API_KEY"),
     "openai": (None, "gpt-4.1-mini", ".openai-config.json", "OPENAI_API_KEY"),
 }
 
 
-def load_api_key(config_file, env_var):
-    """Key lấy từ biến môi trường, hoặc config/<file>.json (gitignored) — không bao giờ hardcode trong code."""
-    if os.environ.get(env_var):
-        return os.environ[env_var]
+def load_config(config_file, env_var):
+    """Key lấy từ biến môi trường, hoặc config/<file>.json (gitignored) — không bao giờ hardcode trong code.
+    File config có thể ghi đè base_url: {"api_key": "...", "base_url": "..."}"""
     path = Path(__file__).resolve().parents[3] / "config" / config_file
-    if path.exists():
-        return json.loads(path.read_text())["api_key"]
-    raise SystemExit(f"Thiếu API key: đặt {env_var} hoặc tạo config/{config_file} với {{\"api_key\": \"...\"}}")
+    cfg = json.loads(path.read_text()) if path.exists() else {}
+    if os.environ.get(env_var):
+        cfg["api_key"] = os.environ[env_var]
+    if not cfg.get("api_key"):
+        raise SystemExit(f"Thiếu API key: đặt {env_var} hoặc tạo config/{config_file} với {{\"api_key\": \"...\"}}")
+    return cfg
 
 
 def make_model(provider, model_name=None):
     base_url, default_model, config_file, env_var = PROVIDERS[provider]
-    client = AsyncOpenAI(api_key=load_api_key(config_file, env_var), base_url=base_url)
+    cfg = load_config(config_file, env_var)
+    client = AsyncOpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url))
     if provider != "openai":
         # Tracing của SDK mặc định gửi về dashboard OpenAI → không có OpenAI key thì tắt
         set_tracing_disabled(True)
     # Chat Completions API: chuẩn chung mọi provider tương thích OpenAI hỗ trợ
     # (Responses API — mặc định của SDK — chỉ OpenAI có)
     return OpenAIChatCompletionsModel(model=model_name or default_model, openai_client=client)
+
+
+def list_models(provider):
+    """Danh sách model provider cung cấp (endpoint /models chuẩn OpenAI). Bỏ alias gom nhóm của gateway."""
+    from openai import OpenAI
+    base_url, _, config_file, env_var = PROVIDERS[provider]
+    cfg = load_config(config_file, env_var)
+    client = OpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url))
+    return sorted(m.id for m in client.models.list().data if m.id != "all-proxy-models")
 
 
 # ── Tools: chỉ gọi sang checkpoints.py ─────────────────────────────────────

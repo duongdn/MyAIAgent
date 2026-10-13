@@ -17,6 +17,7 @@ from sample_data import ASSIGNABLE_TEAMS, AGENT_ALLOWED_PRIORITIES, KB_DOCS, ROL
 
 MAX_TURNS = 8  # chặn agent loop chạy vô hạn → giới hạn token/cost (OWASP LLM10)
 TICKETS = []   # "hệ thống đích" giả lập (Jira/Helpdesk) — phần duy nhất không phải hệ thống thật
+PROPOSALS = []  # mọi create_ticket model đề xuất + kết quả ④ (dùng cho bảng so sánh --compare)
 
 # Hướng dẫn cho model, KHÔNG phải cơ chế bảo mật — rule quan trọng nằm trong code bên dưới.
 SYSTEM_PROMPT = (
@@ -108,6 +109,7 @@ def check_ticket(me: Session, args: dict) -> list:
     """④ chạy TRƯỚC ⑤: lệnh sai rule bị code chặn luôn, người chỉ phải duyệt lệnh hợp lệ (giảm 'approval fatigue')."""
     print(f"   🤖 model muốn gọi create_ticket({args})")
     errors = validate_ticket(me, args)
+    PROPOSALS.append({**args, "blocked": bool(errors)})
     if "4" in me.disabled:
         log("④", "[TẮT] không kiểm tra — tin tham số model đưa ra")
     else:
