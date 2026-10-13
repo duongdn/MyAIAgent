@@ -1,16 +1,21 @@
 """
-Demo: Support agent THẬT (Claude Agent SDK + model Claude thật) đọc knowledge base, đề xuất ticket
-và đi qua 5 điểm kiểm tra quyền.
+Demo: Support agent THẬT (model thật) đọc knowledge base, đề xuất ticket và đi qua 5 điểm kiểm tra quyền.
+Hai bản, CÙNG logic kiểm tra (checkpoints.py), chỉ khác SDK:
+    --sdk openai  (mặc định) OpenAI Agents SDK — cùng SDK với Session 5–9. Model: DeepSeek hoặc OpenAI.
+    --sdk claude             Claude Agent SDK — dùng tài khoản Claude Code đã đăng nhập, không cần API key.
 
 CÀI ĐẶT (1 lần, từ thư mục chứa file này):
     python3 -m venv .venv && . .venv/bin/activate
     pip install -r requirements.txt
-    # Cần Claude Code đã đăng nhập trên máy (lệnh `claude` chạy được) — SDK dùng chính tài khoản đó,
-    # không cần API key riêng. Hoặc: export ANTHROPIC_API_KEY=... nếu muốn dùng API key.
-    export DEMO_MODEL=sonnet                    # tuỳ chọn: sonnet (mặc định) | haiku | opus
+    # --sdk openai: key trong config/.deepseek-config.json (hoặc DEEPSEEK_API_KEY)
+    #               dùng OpenAI: DEMO_PROVIDER=openai + config/.openai-config.json (hoặc OPENAI_API_KEY)
+    # --sdk claude: lệnh `claude` chạy được và đã đăng nhập
+    export DEMO_MODEL=...      # tuỳ chọn. openai SDK: deepseek-chat (mặc định) | gpt-4.1-mini...
+                               #           claude SDK: sonnet (mặc định) | haiku | opus
 
 CHẠY:
-    python3 run_demo.py                                 # 4 kịch bản, hỏi y/n khi cần duyệt
+    python3 run_demo.py                                 # 5 kịch bản, hỏi y/n khi cần duyệt
+    python3 run_demo.py --sdk claude --scenario 5       # cùng kịch bản trên Claude để so sánh
     python3 run_demo.py --scenario 2                    # chỉ kịch bản prompt injection
     python3 run_demo.py --scenario 2 --disable 4 --disable 5
                                                         # tắt ④⑤: nếu model bị lừa → ticket độc được tạo
@@ -21,7 +26,7 @@ CHẠY:
 
 LƯU Ý: model là LLM thật → mỗi lần chạy có thể khác nhau, kể cả việc có bị prompt injection lừa hay không.
 Đó chính là bài học: không thể dựa vào việc model "tự biết" — kiểm soát phải nằm ở application.
-Mỗi kịch bản in số turn và chi phí ước tính (💰).
+Mỗi kịch bản in số lượt gọi model + token/chi phí (💰).
 """
 import argparse
 import asyncio
@@ -29,7 +34,7 @@ import os
 import shutil
 import sys
 
-import app
+import checkpoints as cp
 from sample_data import KB_DOCS, POISONED_DOC, SUBTLY_POISONED_DOC
 
 SCENARIOS = {
@@ -57,22 +62,32 @@ async def main():
                    help="tắt checkpoint (lặp lại được) để xem hậu quả")
     p.add_argument("--approve", choices=["ask", "yes", "no"], default="ask",
                    help="checkpoint ⑤: ask=hỏi y/n, yes=luôn đồng ý, no=luôn từ chối")
+    p.add_argument("--sdk", choices=["openai", "claude"], default="openai", help="SDK dùng để chạy agent")
     a = p.parse_args()
 
-    if not shutil.which("claude"):
-        sys.exit("Không tìm thấy Claude Code (lệnh `claude`) — cài và đăng nhập trước, xem đầu file.")
-    model = os.environ.get("DEMO_MODEL", "sonnet")
-    print(f"Model: {model}" + (f" | ⚠ TẮT checkpoint: {', '.join(sorted(a.disable))}" if a.disable else ""))
+    if a.sdk == "openai":
+        import agent_openai_sdk as sdk  # import muộn: chỉ cần cài SDK đang dùng
+        provider = os.environ.get("DEMO_PROVIDER", "deepseek")
+        model = sdk.make_model(provider, os.environ.get("DEMO_MODEL"))
+        label = f"OpenAI Agents SDK + {provider}:{model.model}"
+    else:
+        if not shutil.which("claude"):
+            sys.exit("Không tìm thấy Claude Code (lệnh `claude`) — cài và đăng nhập trước, xem đầu file.")
+        import agent_claude_sdk as sdk
+        model = os.environ.get("DEMO_MODEL", "sonnet")
+        label = f"Claude Agent SDK + {model}"
+    print(f"Agent: {label}" + (f" | ⚠ TẮT checkpoint: {', '.join(sorted(a.disable))}" if a.disable else ""))
 
     for num, (title, kwargs) in SCENARIOS.items():
         if a.scenario and num != a.scenario:
             continue
         print(f"\n━━ Kịch bản {num}: {title}")
         print(f"   👤 {kwargs['session_user']}: {kwargs['question']}")
-        answer = await app.run_agent(model, disabled=a.disable, approve_mode=a.approve, **kwargs)
+        kwargs.setdefault("kb", KB_DOCS)
+        answer = await sdk.run_agent(model, disabled=a.disable, approve_mode=a.approve, **kwargs)
         print(f"   💬 agent trả lời: {answer}")
 
-    print(f"\nTicket trong hệ thống đích: {app.TICKETS or 'không có'}")
+    print(f"\nTicket trong hệ thống đích: {cp.TICKETS or 'không có'}")
 
 
 if __name__ == "__main__":
