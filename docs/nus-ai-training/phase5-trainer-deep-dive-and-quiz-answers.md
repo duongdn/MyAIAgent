@@ -128,3 +128,7 @@ Mỗi câu: **trả lời ngắn** (nói 20-30s) → **giải thích** → **câ
 ## 6. Code walkthrough — demo support agent
 
 Kịch bản trình bày chi tiết (hiểu demo, chuẩn bị, nói gì từng màn, xử lý khi kết quả khác, Q&A): **[phase5-support-agent-demo-presentation-script.md](phase5-support-agent-demo-presentation-script.md)**.
+
+## 7. Phần tư vấn & đề xuất khách hàng
+
+Kịch bản trình bày (role-play khách ABC, thẻ khách hàng, 6 câu hỏi, đề xuất P1–P3, solution brief mẫu): **[phase5-customer-consulting-presentation-script.md](phase5-customer-consulting-presentation-script.md)**.

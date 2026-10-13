@@ -60,11 +60,11 @@ Công ty mình làm phần mềm SaaS cho nhiều khách hàng (tenant). Ta buil
 
 | # | Ở đâu trong `checkpoints.py` | Làm gì | Mạnh hay yếu |
 |---|---|---|---|
-| ① | `run_agent` + đầu `search_kb` | Danh tính lấy từ session đăng nhập, **bỏ qua** tenant model/user đưa vào | Mạnh (code) |
+| ① | `new_session` + đầu `search_kb` | Danh tính lấy từ session đăng nhập, **bỏ qua** tenant model/user đưa vào | Mạnh (code) |
 | ② | `search_kb` | Chỉ trả tài liệu đúng tenant + đúng role | Mạnh (code) |
 | ③ | `search_kb` | Bọc kết quả trong `<untrusted_search_results>`, log khi thấy dấu hiệu injection | **Yếu** — chỉ cảnh báo |
-| ④ | `validate_ticket` + `can_use_tool` | Role có quyền tạo ticket? Priority chỉ P3/P4? Assignee đúng team? | Mạnh (code) |
-| ⑤ | `can_use_tool` | Hiện CHÍNH XÁC tham số, người bấm y/n | Mạnh nhưng phụ thuộc người (bấm theo phản xạ) |
+| ④ | `validate_ticket` + `check_ticket` | Role có quyền tạo ticket? Priority chỉ P3/P4? Assignee đúng team? | Mạnh (code) |
+| ⑤ | `ask_human` | Hiện CHÍNH XÁC tham số, người bấm y/n | Mạnh nhưng phụ thuộc người (bấm theo phản xạ) |
 
 Thứ tự ④ trước ⑤ là có chủ ý: lệnh sai rule bị code chặn luôn, người chỉ phải duyệt lệnh hợp lệ → đỡ "approval fatigue".
 
