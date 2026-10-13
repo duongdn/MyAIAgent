@@ -122,3 +122,33 @@ Mỗi câu: **trả lời ngắn** (nói 20-30s) → **giải thích** → **câ
 ## Câu hỏi còn mở
 - Ngôn ngữ code mẫu thống nhất cả chương trình (Python hay TS)? — ảnh hưởng demo injection nếu muốn chiếu.
 - Có demo live trong buổi hay chỉ slide? (Chương trình ghi "không workshop", nhưng walkthrough code được phép.)
+
+---
+
+## 6. Code walkthrough — support agent đi qua 5 điểm kiểm tra quyền
+
+Code: `scripts/nus-ai-training/support_agent_demo/` — Python thuần, không cài gì, không cần API key.
+
+```bash
+cd scripts/nus-ai-training/support_agent_demo
+python3 run_demo.py --approve no                                   # 4 kịch bản, chạy liền không hỏi
+python3 run_demo.py --scenario 2 --disable 4 --approve yes         # tắt ④ + người duyệt bấm OK → ticket độc được tạo
+python3 run_demo.py --scenario 4 --disable 1 --disable 2 --approve no  # tắt ① ② → rò hợp đồng bí mật tenant B
+```
+
+| File | Nội dung | Chiếu khi nào |
+|---|---|---|
+| `app.py` | 5 checkpoint + agent loop (max_turns) — **phần chính để walkthrough** | Đi từ ① → ⑤ |
+| `scripted_model.py` | "Model" giả lập, cố tình bị injection lừa (worst case) | Giải thích vì sao không dựa vào model |
+| `sample_data.py` | User/tenant/role, KB có ACL, tài liệu độc | Mở đầu |
+| `run_demo.py` | 4 kịch bản + cờ `--disable` | Chạy trên terminal |
+
+| Kịch bản | Thấy gì |
+|---|---|
+| 1. Bình thường | Đi đủ ①→⑤, ticket P3 cho billing-team-a được tạo sau khi duyệt |
+| 2. Prompt injection | ③ cảnh báo nhưng model vẫn bị lừa đề xuất P1 gán CEO → **④ chặn** |
+| 3. Viewer tạo ticket | ② ẩn tài liệu nội bộ, ④ chặn vì role không có quyền |
+| 4. Giả mạo tenant | ① bỏ qua tenant client tự khai; tắt ①② thì lộ tài liệu tenant B |
+
+Nhịp trình bày (~8-10 phút): chạy 4 kịch bản → mở `app.py` đi qua từng checkpoint → tắt từng cái, **hỏi người học đoán hậu quả trước khi Enter**.
+Vì sao model giả lập: demo cần lặp lại được; LLM thật lúc bị lừa lúc không. Thay bằng Agents SDK thật thì `app.py` giữ nguyên — đó chính là thông điệp.
