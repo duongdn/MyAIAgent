@@ -110,7 +110,10 @@ Câu trả lời chậm nhất đo được: ${ev.maxLatency.toFixed(0)} giây �
 3. Fallback: không có câu trả lời AI → trả danh sách link tài liệu từ search thường. Kém hơn nhưng không sai.
 4. Chuyển người: "Mình chưa chắc — đã chuyển cho support lead". Tốt hơn trả lời bịa. Khách hàng hay quên yêu cầu bậc này.
 5. Kill switch: tắt feature bằng config (feature flag), không cần deploy — khi eval định kỳ tụt dưới ngưỡng (ví dụ 80%) hoặc phàn nàn tăng. Model provider tự update model cũng là một "deploy" mình không kiểm soát → eval định kỳ để phát hiện.
-Thêm: max_turns (đã có trong demo: MAX_TURNS = 8) chặn agent loop chạy mãi → chặn cháy token (OWASP LLM10).`);
+Thêm: max_turns (đã có trong demo: MAX_TURNS = 8) chặn agent loop chạy mãi → chặn cháy token (OWASP LLM10).
+Cache: gateway LLM công ty (LiteLLM) cache câu trả lời — đo thật cùng một câu hỏi: lần đầu 7.7s, lần sau 0.15s (trả lại kết quả cũ). Lợi rất lớn về latency và chi phí.
+NHƯNG: cache key phải gồm tenant + quyền của user. Nếu không, user tenant A hỏi câu giống user tenant B → nhận câu trả lời đã cache có dữ liệu của B (OWASP LLM08). Semantic cache (câu gần nghĩa) còn rủi ro hơn.
+Chuyện thật lúc chuẩn bị demo: eval lần đầu cho latency 0.5s — hoá ra toàn lấy từ cache. Tắt cache mới ra số thật. → Khi đo, luôn kiểm tra mình đang đo cái gì.`);
   [
     ['Timeout', `> ${timeoutS}s thì dừng\n(đo thật: ${ev.maxLatency.toFixed(0)}s)`, C.LIGHT],
     ['Retry', '1 lần, chỉ lỗi mạng / format\nkhông retry tạo ticket', C.LIGHT],
@@ -123,7 +126,8 @@ Thêm: max_turns (đã có trong demo: MAX_TURNS = 8) chặn agent loop chạy m
     if (i) arrow(s, bx - 20, 175, bx, 175);
   });
   label(s, 18, 252, 680, 24, 'mức độ nghiêm trọng tăng dần  →', { size: 12, bold: false, color: C.GREY });
-  box(s, 110, 300, 500, 46, 'max_turns = 8: chặn agent chạy vòng lặp đốt token', { fill: C.YELLOW, size: 15 });
+  box(s, 18, 296, 330, 56, 'max_turns = 8\nchặn agent chạy vòng lặp đốt token', { fill: C.YELLOW, size: 15, sub: 11 });
+  box(s, 370, 296, 330, 56, 'Cache: 7.7s → 0.15s (đo thật)\ncache key phải gồm tenant + quyền', { fill: C.YELLOW, size: 15, sub: 11 });
 }
 
 module.exports = { operationsSlides, summarizeEval, OPS_TITLES: ['3. Vận hành: đo cái gì?', 'Khi AI feature lỗi hoặc kém đi'] };

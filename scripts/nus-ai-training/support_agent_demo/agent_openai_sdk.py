@@ -11,7 +11,7 @@ import json
 import os
 from pathlib import Path
 
-from agents import (Agent, OpenAIChatCompletionsModel, RunContextWrapper, Runner, function_tool,
+from agents import (Agent, ModelSettings, OpenAIChatCompletionsModel, RunContextWrapper, Runner, function_tool,
                     set_tracing_disabled)
 from openai import AsyncOpenAI
 
@@ -61,6 +61,12 @@ def list_models(provider):
     return sorted(m.id for m in client.models.list().data if m.id != "all-proxy-models")
 
 
+# Gateway công ty (LiteLLM) CACHE câu trả lời: request giống hệt → trả kết quả cũ trong ~0.15s thay vì ~8s.
+# Demo/eval tắt cache để mỗi lần chạy là model thật (DEMO_CACHE=1 để bật lại).
+# Bài học vận hành: cache rất lợi về latency/cost, nhưng cache key phải gồm tenant/quyền (OWASP LLM08).
+MODEL_SETTINGS = ModelSettings(extra_body=None if os.environ.get("DEMO_CACHE") == "1" else {"cache": {"no-cache": True}})
+
+
 # ── Tools: chỉ gọi sang checkpoints.py ─────────────────────────────────────
 @function_tool(description_override=cp.SEARCH_KB_DESC)
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
@@ -82,7 +88,7 @@ def create_ticket(ctx: RunContextWrapper[cp.Session], title: str, priority: str,
 async def run_agent(model, session_user, question, kb, disabled, approve_mode):
     me = cp.new_session(session_user, kb, disabled)
     agent = Agent(name="Support agent", instructions=cp.SYSTEM_PROMPT, model=model,
-                  tools=[search_kb, create_ticket])
+                  tools=[search_kb, create_ticket], model_settings=MODEL_SETTINGS)
     result = await Runner.run(agent, question, context=me, max_turns=cp.MAX_TURNS)
 
     # ⑤ Lệnh cần duyệt → SDK trả interruptions thay vì tự chạy
