@@ -263,3 +263,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [elena_customer_review_rules](elena/reference_elena_customer_review_rules.md) — 🔴 Precognize review rules (no assert, translate all text, no mocks, migration both changelogs...) — check every OP PR
 - [elena_report_detailed_for_general_reviewer](elena/feedback_elena_report_detailed_for_general_reviewer.md) — explain each PR/issue in detail in Vietnamese, chat only gives the path
 - [elena_review_results_in_dated_folder](elena/feedback_elena_review_results_in_dated_folder.md) — review results → docs/elena/reviews/YYYY-MM-DD/; reference docs stay flat
+- [fix_links_positional_corrupts_curated_links](news-digest/feedback_fix_links_positional_corrupts_curated_links.md) — 🔴 fix-links remaps by position; skipping articles → wrong URLs, diff before commit
