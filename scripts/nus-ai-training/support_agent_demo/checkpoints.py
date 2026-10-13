@@ -17,6 +17,7 @@ from sample_data import ASSIGNABLE_TEAMS, AGENT_ALLOWED_PRIORITIES, KB_DOCS, ROL
 
 MAX_TURNS = 8  # chặn agent loop chạy vô hạn → giới hạn token/cost (OWASP LLM10)
 TICKETS = []   # "hệ thống đích" giả lập (Jira/Helpdesk) — phần duy nhất không phải hệ thống thật
+LAST_USAGE = {}  # token/lượt gọi của lần chạy gần nhất (dùng cho run_eval.py)
 PROPOSALS = []  # mọi create_ticket model đề xuất + kết quả ④ (dùng cho bảng so sánh --compare)
 
 # Hướng dẫn cho model, KHÔNG phải cơ chế bảo mật — rule quan trọng nằm trong code bên dưới.

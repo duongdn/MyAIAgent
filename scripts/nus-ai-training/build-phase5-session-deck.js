@@ -3,6 +3,7 @@
 // Run from repo root: node scripts/nus-ai-training/build-phase5-session-deck.js
 const path = require('path');
 const { google } = require('googleapis');
+const { operationsSlides } = require('./phase5-operations-slides');
 const { OWASP_ITEMS, OWASP_SLIDE_TITLE, OWASP_SLIDE_NOTES, NOTES_ADDITIONS } = require('./phase5-owasp-llm-top10-content');
 const PID = '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI';
 const auth = new google.auth.GoogleAuth({
@@ -166,27 +167,8 @@ box(s, 380, 260, 300, 60, 'Tool result = không đáng tin\nvalidate trước kh
 
 owaspSlide();
 
-// --- Phần 3
-s = newSlide('3. Vận hành: đo cái gì?', `Câu hỏi: làm sao biết AI feature CÓ ÍCH và VẬN HÀNH ĐƯỢC?
-- Task success: tỉ lệ user giải quyết được việc (ví dụ: % câu hỏi trả lời đúng có nguồn, % ticket tạo đúng). Đây là thước đo chính.
-- Bộ test case đại diện: 20-50 câu hỏi thật + câu trả lời mong đợi, chạy lại mỗi lần đổi prompt/model.
-- Latency & token/cost: user chờ bao lâu, mỗi request tốn bao nhiêu tiền — tránh feature "đúng nhưng đắt".
-- Human review: điểm nào cần người xem (câu trả lời nhạy cảm, ticket ưu tiên cao).
-Ô cam: Trace (OpenAI Agents SDK có sẵn tracing) giúp TÌM NGUYÊN NHÂN lỗi — nhìn thấy model gọi tool gì, trả gì — nhưng trace đẹp không có nghĩa câu trả lời đúng. Vẫn cần tiêu chí chất lượng riêng.`);
-[['Task success', C.NAVY], ['Test case\nđại diện', C.LIGHT], ['Latency', C.LIGHT], ['Token / Cost', C.LIGHT], ['Human review', C.GREEN]]
-  .forEach(([t, f], i) => box(s, 20 + i * 140, 110, 125, 90, t, { fill: f, size: 16, sub: 16 }));
-box(s, 120, 250, 480, 60, 'Trace tìm nguyên nhân — KHÔNG thay tiêu chí chất lượng', { fill: C.ORANGE, size: 17 });
-
-s = newSlide('Khi AI feature lỗi hoặc kém đi', `Thiết kế ở mức cơ bản, theo thứ tự leo thang:
-1. Timeout: model/tool không trả lời trong X giây → dừng chờ, không để user treo.
-2. Retry có giới hạn: thử lại 1-2 lần, có backoff. Không retry vô hạn (tốn tiền, nhân lỗi).
-3. Fallback: trả kết quả search thường / câu trả lời mẫu / model rẻ hơn.
-4. Chuyển người: "Mình chưa chắc, đã chuyển cho nhân viên support" — tốt hơn trả lời bịa.
-5. Kill switch: khi chất lượng giảm (test case fail, user phàn nàn tăng) → tắt feature bằng config, không cần deploy.
-Ô cam là chuyển người: đây là điều khách hàng hay quên yêu cầu nhưng quan trọng nhất cho trải nghiệm.`);
-[['Timeout', C.LIGHT], ['Retry\ngiới hạn', C.LIGHT], ['Fallback', C.LIGHT], ['Chuyển\nngười', C.ORANGE], ['Tắt feature\n(kill switch)', C.NAVY]]
-  .forEach(([t, f], i) => { box(s, 20 + i * 140, 150, 115, 90, t, { fill: f, size: 16, sub: 16 }); if (i) arrow(s, 20 + i * 140 - 25, 195, 20 + i * 140, 195); });
-label(s, 20, 260, 680, 30, 'mức độ nghiêm trọng tăng dần  →', { size: 14, bold: false, color: C.GREY });
+// --- Phần 3: Vận hành — 4 slide dựng từ số liệu eval thật (phase5-operations-slides.js)
+operationsSlides({ newSlide, box, label, arrow, C });
 
 s = newSlide('Tư vấn: từ yêu cầu mơ hồ → bài toán rõ', `Ví dụ thật hay gặp: khách nói "Tôi muốn chatbot đọc MỌI tài liệu công ty và TỰ tạo ticket".
 Đừng gật đầu ngay. Biến nó thành 6 câu hỏi (6 ô bên dưới):
@@ -237,7 +219,7 @@ Bài tự thực hành: vẽ sơ đồ 1 trang cho support agent, đánh dấu d
   .forEach((t, i) => box(s, 40, 80 + i * 46, 400, 38, t, { fill: C.LIGHT, size: 13, align: 'START' }));
 box(s, 470, 80, 220, 222, 'Tự thực hành\nSơ đồ 1 trang:\ndữ liệu nhạy cảm · điểm check quyền · approval · 1 đường injection\n+ solution brief 6 phần', { fill: C.GREEN, size: 18, sub: 13 });
 
-module.exports = { reqs, slides, owaspSlide, auth, PID, google };
+module.exports = { reqs, slides, owaspSlide, auth, PID, google, newSlide, box, label, arrow, C };
 
 if (require.main === module) (async () => {
   const api = google.slides({ version: 'v1', auth: await auth.getClient() });

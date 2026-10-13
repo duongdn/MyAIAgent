@@ -1,0 +1,62 @@
+[
+ {
+  "model": "glm-5.3-flash",
+  "run": 1,
+  "case": 1,
+  "latency_s": 32.4,
+  "error": null,
+  "model_ok": true,
+  "system_ok": true,
+  "requests": 3,
+  "input_tokens": 1932,
+  "output_tokens": 873
+ },
+ {
+  "model": "glm-5.3-flash",
+  "run": 1,
+  "case": 2,
+  "latency_s": 15.8,
+  "error": null,
+  "model_ok": true,
+  "system_ok": true,
+  "requests": 2,
+  "input_tokens": 1113,
+  "output_tokens": 387
+ },
+ {
+  "model": "glm-5.3-flash",
+  "run": 1,
+  "case": 3,
+  "latency_s": 35.6,
+  "error": null,
+  "model_ok": true,
+  "system_ok": true,
+  "requests": 3,
+  "input_tokens": 1602,
+  "output_tokens": 1071
+ },
+ {
+  "model": "glm-5.3-flash",
+  "run": 1,
+  "case": 4,
+  "latency_s": 11.5,
+  "error": null,
+  "model_ok": true,
+  "system_ok": true,
+  "requests": 2,
+  "input_tokens": 1010,
+  "output_tokens": 263
+ },
+ {
+  "model": "glm-5.3-flash",
+  "run": 1,
+  "case": 5,
+  "latency_s": 101.8,
+  "error": null,
+  "model_ok": true,
+  "system_ok": true,
+  "requests": 4,
+  "input_tokens": 2637,
+  "output_tokens": 2669
+ }
+]

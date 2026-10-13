@@ -98,4 +98,5 @@ async def run_agent(model, session_user, question, kb, disabled, approve_mode):
 
     usage = result.context_wrapper.usage
     print(f"   💰 {usage.requests} lượt gọi model, {usage.input_tokens} input + {usage.output_tokens} output tokens")
+    cp.LAST_USAGE.update(requests=usage.requests, input_tokens=usage.input_tokens, output_tokens=usage.output_tokens)
     return result.final_output
