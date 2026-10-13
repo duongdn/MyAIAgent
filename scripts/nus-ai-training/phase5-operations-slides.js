@@ -116,13 +116,13 @@ NHƯNG: cache key phải gồm tenant + quyền của user. Nếu không, user t
 Chuyện thật lúc chuẩn bị demo: eval lần đầu cho latency 0.5s — hoá ra toàn lấy từ cache. Tắt cache mới ra số thật. → Khi đo, luôn kiểm tra mình đang đo cái gì.`);
   [
     ['Timeout', `> ${timeoutS}s thì dừng\n(đo thật: ${ev.maxLatency.toFixed(0)}s)`, C.LIGHT],
-    ['Retry', '1 lần, chỉ lỗi mạng / format\nkhông retry tạo ticket', C.LIGHT],
+    ['Retry', '1 lần, chỉ lỗi mạng\nkhông retry ticket', C.LIGHT],
     ['Fallback', 'Trả link tài liệu\ntừ search thường', C.LIGHT],
     ['Chuyển người', '"Đã chuyển\nsupport lead"', C.ORANGE],
     ['Kill switch', 'Tắt khi eval < 80%\nkhông cần deploy', C.NAVY],
   ].forEach(([t, d, f], i) => {
     const bx = 18 + i * 140;
-    box(s, bx, 110, 120, 130, `${t}\n${d}`, { fill: f, size: 15, sub: 10.5 });
+    box(s, bx, 110, 120, 130, `${t}\n${d}`, { fill: f, size: 13, sub: 10.5 });
     if (i) arrow(s, bx - 20, 175, bx, 175);
   });
   label(s, 18, 252, 680, 24, 'mức độ nghiêm trọng tăng dần  →', { size: 12, bold: false, color: C.GREY });
