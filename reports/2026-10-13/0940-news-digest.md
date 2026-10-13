@@ -28,17 +28,17 @@
 - [Công ty của ông Đặng Thành Tâm lãi đậm nhất gần 4 năm](https://vnexpress.net/cong-ty-cua-ong-dang-thanh-tam-lai-dam-nhat-gan-4-nam-5131495.html) — Kinh Bắc (KBC) lãi sau thuế hơn 937 tỷ đồng trong quý, cao nhất gần 4 năm.
 - [Thủ tướng yêu cầu rà soát dự án điện chậm tiến độ, không khả thi](https://vnexpress.net/thu-tuong-yeu-cau-ra-soat-cac-du-an-dien-cham-tien-do-khong-kha-thi-5131475.html) — Các dự án điện yếu kém sẽ bị đề xuất điều chỉnh hoặc thay thế.
 - ["Lãi suất càng tăng, nhà đầu tư càng rời bỏ chứng khoán"](https://vnexpress.net/lai-suat-cang-tang-nha-dau-tu-cang-roi-bo-chung-khoan-5131247.html) — Lãi suất huy động neo cao kéo thanh khoản chứng khoán xuống đáy hơn một năm.
-- [Hai người Mỹ giành Nobel Kinh tế 2026](https://vnexpress.net/tong-bi-thu-chu-tich-nuoc-doanh-nghiep-vung-gop-phan-boi-dap-suc-manh-quoc-gia-5131453.html) — Giải thưởng vinh danh nghiên cứu về sự ổn định kinh tế vĩ mô.
+- [Hai người Mỹ giành Nobel Kinh tế 2026](https://vnexpress.net/hai-nguoi-my-gianh-giai-nobel-kinh-te-2026-5131375.html) — Giải thưởng vinh danh nghiên cứu về sự ổn định kinh tế vĩ mô.
 
 **Tuổi Trẻ – Kinh doanh**
-- [Đọc nhanh 13/10: Phố Wall trái chiều, VietinBank chào bán 12.000 tỷ trái phiếu](https://tuoitre.vn/satra-tim-suc-bat-tu-lien-ket-chuoi-cung-ung-100261013080350574.htm) — Dow tăng 196 điểm, Nasdaq giảm do cổ phiếu chip nhớ; VietinBank huy động vốn qua trái phiếu.
-- [VN-Index giữ vùng hỗ trợ 1.720 điểm, thị trường đã tạo đáy?](https://tuoitre.vn/doc-nhanh-13-10-pho-wall-dien-bien-trai-chieu-khi-gia-dau-tang-vietinbank-chao-ban-12000-ti-dong-trai-phieu-100261013071420324.htm) — CTCK kỳ vọng nhịp hồi từ vùng 1.720 nhưng xu hướng vẫn chưa rõ.
-- [Vàng vừa vượt 4.200 USD đã đảo chiều giảm sâu](https://tuoitre.vn/chung-khoan-13-10-vn-index-giu-vung-vung-ho-tro-1720-diem-thi-truong-da-tao-day-100261013070433417.htm) — Vàng thế giới mất gần 33 USD trong 24 giờ, về quanh 4.16x USD/ounce.
-- [Bất động sản giảm giá 5-20% nhưng vắng lướt sóng](https://tuoitre.vn/gia-vang-hom-nay-13-10-vua-vuot-4200-usd-vang-the-gioi-da-dao-chieu-giam-sau-100261013075210568.htm) — Người mua vẫn ngập ngừng vì rào cản lãi suất dù chủ đầu tư giãn tiến độ thanh toán.
+- [Đọc nhanh 13/10: Phố Wall trái chiều, VietinBank chào bán 12.000 tỷ trái phiếu](https://tuoitre.vn/doc-nhanh-13-10-pho-wall-dien-bien-trai-chieu-khi-gia-dau-tang-vietinbank-chao-ban-12000-ti-dong-trai-phieu-100261013071420324.htm) — Dow tăng 196 điểm, Nasdaq giảm do cổ phiếu chip nhớ; VietinBank huy động vốn qua trái phiếu.
+- [VN-Index giữ vùng hỗ trợ 1.720 điểm, thị trường đã tạo đáy?](https://tuoitre.vn/chung-khoan-13-10-vn-index-giu-vung-vung-ho-tro-1720-diem-thi-truong-da-tao-day-100261013070433417.htm) — CTCK kỳ vọng nhịp hồi từ vùng 1.720 nhưng xu hướng vẫn chưa rõ.
+- [Vàng vừa vượt 4.200 USD đã đảo chiều giảm sâu](https://tuoitre.vn/gia-vang-hom-nay-13-10-vua-vuot-4200-usd-vang-the-gioi-da-dao-chieu-giam-sau-100261013075210568.htm) — Vàng thế giới mất gần 33 USD trong 24 giờ, về quanh 4.16x USD/ounce.
+- [Bất động sản giảm giá 5-20% nhưng vắng lướt sóng](https://tuoitre.vn/vang-bong-luot-song-du-bat-dong-san-ha-gia-5-20-nguoi-mua-ngap-ngung-vi-lai-suat-100261012220552485.htm) — Người mua vẫn ngập ngừng vì rào cản lãi suất dù chủ đầu tư giãn tiến độ thanh toán.
 
 **Thanh Niên – Kinh tế**
-- [Cảng hàng không Quảng Trị tăng tốc về đích](https://thanhnien.vn/doanh-nhan-nguyen-thi-thao-nhi-nguoi-kien-tao-tuong-lai-tu-vung-dat-sinh-lay-185261012130235791.htm) — Dự án của liên danh T&T Group - CIENCO4 cơ bản hoàn thành sau hơn 2 năm.
-- [Vai trò dẫn dắt của SATRA từ hệ sinh thái hiện có](https://thanhnien.vn/franklin-sports-80-nam-dong-hanh-cung-the-thao-mo-chuong-moi-tai-viet-nam-185261013091045333.htm) — SATRA tận dụng chuỗi từ sản xuất đến bán lẻ để tìm sức bật mới.
+- [Cảng hàng không Quảng Trị tăng tốc về đích](https://thanhnien.vn/cang-hang-khong-quang-tri-tang-toc-ve-dich-gop-phan-tao-dong-luc-tang-truong-cho-dia-phuong-185261013072616709.htm) — Dự án của liên danh T&T Group - CIENCO4 cơ bản hoàn thành sau hơn 2 năm.
+- [Vai trò dẫn dắt của SATRA từ hệ sinh thái hiện có](https://thanhnien.vn/tu-he-sinh-thai-hien-co-den-vai-tro-dan-dat-cua-satra-185261012180821839.htm) — SATRA tận dụng chuỗi từ sản xuất đến bán lẻ để tìm sức bật mới.
 
 **Google News – Kinh doanh VN**
 - [Hiện thực hóa Chiến lược Quốc gia Khởi nghiệp sáng tạo](https://news.google.com/articles/CBMinwFBVV95cUxNZWlwRktzSjk5Tzl1MGYwb092Mmd5c3RrOTV4RlphYkVSUGItWXFnX1JIbktMcDM4QVhLdE1qSnJzTzFmVVVuZjZFSFdWWmZBZTg3dlpjNTB4c3AxQ2poRFZTR2JxakgwdFZZSTdvZ3RHVGRWYldvRWlSU1BlSG1hQm53R0Y1cmxkb3dNR2lyQUc1SXhlLXBWbm5UQmxZeTA) — Các giải pháp thúc đẩy hệ sinh thái startup trong nước.
@@ -56,7 +56,7 @@
 - [Xe điện mới của VinFast lộ diện, có thể dùng máy phát sạc xăng như VF Wild](https://news.google.com/articles/CBMiwwFBVV95cUxQWUpzVkFKRUQ5RUZ6VFRUYUZtN21kMDFlR0dmMk9sYkdHSTA2YlZKY3MtekJ2TklKS3o1YzRKdmNzMW5Cc3g0Tmx4Tlk3NkVPRXVuZ3pWRmtEXzMwd3N6SXBvSTRwLVhwc2FlM1NCb0QwLXpnaUZqZWdHTXZYUV93bzRhR3BOUERxUWR2V3A2UFMxX1VWRDMxSzdQMVdqX0JwRmxXTVYwRkpxREJkQ1I2b0FzWXZWQlV0YjVnNmd2Z3htbXM) — Mẫu xe chạy thử gợi ý cấu hình EREV với động cơ xăng sạc pin.
 - [Chuỗi sự kiện "Lên đời xe điện" tại 10 tỉnh thành](https://news.google.com/articles/CBMi2AFBVV95cUxNcVJiN0R2OWJiTEF0LXY0QXNqcllnempKQURadkQ0UEhWRmhaZXpYUHp2V1Z5VkRrTFVUNzVsZ05sSEpXeHphSmVpdXU3WjNJeERJaGg5OUY1SkNzNi1fTGhWa2J0bjlpLWYwckxreUk4RFZSZEUwcjZTTDVZSjJRSEpYRzBjdzRvcnJjVm56RXVSLWZkN29TeElMNzltMzV3MU00RWtWeHpFeENEMUxsQ3NPTG5SNkdubElmWW5zSExJVmE2UmpZdkZTZ1ZlUDFMVmJYRFQzbnA) — VinFast đẩy mạnh chương trình chuyển đổi từ xe xăng sang xe điện.
 - [Độ bền xe điện VinFast sau cả trăm nghìn km](https://news.google.com/articles/CBMiygFBVV95cUxPTjU2aDVSLS1NYXJUOEJfa09vUHp5a2RiMWxPTnRPOFk3b3lUeUNoR0pUV1p1aGl4OUpuV2l1NlpMbkNCb29GeG9QN2FSNTRzd0JvakdISVlHY0xpcnE2aldWMVpaT3JNWUd4NFduNmJ6ejIzcFJINHlzNWlfNFZWeFdNd0ZRU1REc0owOFdHTE9HWGdlcWNkcDM0VEtZeW9iTXRDaUd6V1dORGVXaDlSSmdLSFpQS05ESTlJb1RtUXNqSzE1cEZhTG5B) — Đánh giá thực tế về độ bền sau quãng đường sử dụng dài.
-- [VF 5 giá dưới 400 triệu, thêm áp lực cho xe xăng hạng A](https://news.google.com/articles/CBMiogFBVV95cUxPSTV3U291bG5OajhpaGh1Z3lITzhrT1lLcEkyQ3h2WnJ6cnUyV1E1ajNqOHJpcUM1Y3dudXJFcGYycDN3VnlDZ2xIbDc3cVlwbmZobzZPcllPMUlFZEdwdHAzcWxyZ0tmYzNQVXQ0U1lWZkxpOVUzY3hSTkR4SmE5ZC1mU09ZUzhWQjR0cU92SVRrRXNEaXlxSGhPUVZsWVk2UGc) — Mức giá mới khiến VF 5 cạnh tranh trực tiếp với các mẫu xe xăng cỡ nhỏ.
+- [VF 5 giá dưới 400 triệu, thêm áp lực cho xe xăng hạng A](https://news.google.com/articles/CBMivgFBVV95cUxPV1NnV09XSVpTQUJ3TFA1WFJfSDZDVXRzZGd2RWFCUFBSY2xsWVhWUTJQbHVtTnRxVEZZd3dZTDRPLVRhVVhoSklNeFZFcUh3eDEzWUotTlBnbGIydnpvRF9MVXZMcFZMMHUwWU1WdFhRbTd4cml1V2labk5tNF9sU2xVZHRFejN6c0RjRGVVWVl0aVZZZlJ5VHRGOTVIM25tV0Jrby00NVlBWTVjY0ozaldWTnlkaHpTRnpJX0JB) — Mức giá mới khiến VF 5 cạnh tranh trực tiếp với các mẫu xe xăng cỡ nhỏ.
 ---
 ### 🤖 Trí tuệ nhân tạo (AI)
 
@@ -76,19 +76,19 @@
 - [Startup AI tạo bản vẽ đủ chuẩn xin phép xây dựng trong vài phút](https://techcrunch.com/2026/10/12/this-ai-startup-says-it-can-generate-permit-ready-blueprints-in-minutes/) — Blueprints AI sinh bản vẽ tuân thủ quy chuẩn xây dựng.
 
 **The Verge – AI**
-- [Chip AI Maia thế hệ 3 giúp Microsoft bớt phụ thuộc Nvidia](https://www.theverge.com/ai-artificial-intelligence/1009479/meta-muse-wonder-full-ai-model) — Maia mới được định vị là chip suy luận chính cho dịch vụ AI của Microsoft.
-- [Silicon Valley chiều theo nỗ lực đổi tên AI của Trump](https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout) — Các hãng công nghệ bắt đầu dùng thuật ngữ "super intelligence" theo đề xuất của Tổng thống.
-- [Học dùng AI cục bộ: hào hứng, choáng ngợp và bực bội](https://www.theverge.com/ai-artificial-intelligence/1009406/silicon-valley-is-falling-in-line-with-trumps-attempt-to-rename-ai) — Trải nghiệm thực tế khi tự chạy mô hình AI trên máy cá nhân.
-- [Satya Nadella: nên mặc định mọi mô hình AI đều đã bị "xâm nhập"](https://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress) — CEO Microsoft cảnh báo rủi ro từ các mô hình AI tiên tiến, đề xuất tư duy zero-trust.
+- [Chip AI Maia thế hệ 3 giúp Microsoft bớt phụ thuộc Nvidia](https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout) — Maia mới được định vị là chip suy luận chính cho dịch vụ AI của Microsoft.
+- [Silicon Valley chiều theo nỗ lực đổi tên AI của Trump](https://www.theverge.com/ai-artificial-intelligence/1009406/silicon-valley-is-falling-in-line-with-trumps-attempt-to-rename-ai) — Các hãng công nghệ bắt đầu dùng thuật ngữ "super intelligence" theo đề xuất của Tổng thống.
+- [Học dùng AI cục bộ: hào hứng, choáng ngợp và bực bội](https://www.theverge.com/ai-artificial-intelligence/1008484/learning-local-ai-hermes-qwen-model-mac-studio-testing-diary-progress) — Trải nghiệm thực tế khi tự chạy mô hình AI trên máy cá nhân.
+- [Satya Nadella: nên mặc định mọi mô hình AI đều đã bị "xâm nhập"](https://www.theverge.com/ai-artificial-intelligence/1009337/satya-nadella-says-we-should-assume-all-ai-models-are-compromised) — CEO Microsoft cảnh báo rủi ro từ các mô hình AI tiên tiến, đề xuất tư duy zero-trust.
 
 **MIT Technology Review**
-- [Sao Hỏa là địa ngục, nhưng Mặt Trăng cũng không kém](https://www.technologyreview.com/2026/10/12/1146376/the-download-moon-city-drone-air-traffic-controllers/) — Cuộc đua không gian thứ hai và những thách thức xây thành phố trên Mặt Trăng.
-- [Nhà sinh thái học hé lộ mạng lưới vô hình hồi sinh rừng mưa](https://www.technologyreview.com/2026/10/12/1145760/imagining-building-cities-on-the-moon/) — Nghiên cứu tại Panama về cơ chế phục hồi rừng nhiệt đới.
-- [The Download: vấn đề AI từ chối trả lời và tác dụng phụ thuốc giảm cân](https://www.technologyreview.com/2026/10/12/1145745/daisy-dent-ecologist-revealing-invisible-networks-revive-rainforests/) — Bản tin MIT về hiện tượng mô hình AI từ chối quá mức.
-- [The Download: rào cản AI cho robot hình người và đập cao su di động](https://www.technologyreview.com/2026/10/09/1146250/the-download-ai-refusal-problem-weight-loss-drug-side-effects/) — Bản tin MIT về giới hạn AI trong humanoid robot.
+- [Sao Hỏa là địa ngục, nhưng Mặt Trăng cũng không kém](https://www.technologyreview.com/2026/10/12/1145760/imagining-building-cities-on-the-moon/) — Cuộc đua không gian thứ hai và những thách thức xây thành phố trên Mặt Trăng.
+- [Nhà sinh thái học hé lộ mạng lưới vô hình hồi sinh rừng mưa](https://www.technologyreview.com/2026/10/12/1145745/daisy-dent-ecologist-revealing-invisible-networks-revive-rainforests/) — Nghiên cứu tại Panama về cơ chế phục hồi rừng nhiệt đới.
+- [The Download: vấn đề AI từ chối trả lời và tác dụng phụ thuốc giảm cân](https://www.technologyreview.com/2026/10/09/1146250/the-download-ai-refusal-problem-weight-loss-drug-side-effects/) — Bản tin MIT về hiện tượng mô hình AI từ chối quá mức.
+- [The Download: rào cản AI cho robot hình người và đập cao su di động](https://www.technologyreview.com/2026/10/08/1146045/the-download-ai-roadblocks-humanoids-portable-rubber-dams/) — Bản tin MIT về giới hạn AI trong humanoid robot.
 
 **Google News – AI Model Releases**
-- [Reflection AI Beam: mô hình mở đối đầu GLM-5.2](https://news.google.com/articles/CBMidkFVX3lxTE9jQWhkclNlSmV2TEZzY19JYW8wQ3pkZVhFNzFLaElxdHh2bFprTGwyYWxIVmtMd2tEMEw3bjVaMFJfQU9xU0lVQ2Q1S2owb185YXFpdElfZzVxTnJ6b1FMSWdZaFJSTFFWb1dTRzBqbjJjcngyb0E) — Reflection AI tung mô hình mở mới cạnh tranh dòng GLM.
+- [Reflection AI Beam: mô hình mở đối đầu GLM-5.2](https://news.google.com/articles/CBMiZ0FVX3lxTE5BLU9WaGRseHdDNmx3Q19mNEV1dFZXa1ItRVZFMGRjdWY4UHNmQ2FGSjdOSFRWSzdIdnljZ1g5WU5lb1J1UW9EVXNYaWJBbDd5Y3dRajhERlV6VnJFV0pZa245Qmo5eXM) — Reflection AI tung mô hình mở mới cạnh tranh dòng GLM.
 ---
 ### 📰 Thiệu Nguyễn — Substack
 
@@ -128,21 +128,21 @@ _(Không có bài mới từ Facebook)_
 - [Một web app hiện đại viết bằng C](https://prophitt.me/writing/a-modern-web-app-in-c) — Dự án minh họa xây web app hoàn chỉnh bằng ngôn ngữ C.
 
 **TechCrunch**
-- [Fitbit Edge: lựa chọn trung gian giữa Fitbit Air và Pixel Watch](https://techcrunch.com/2026/10/12/windborne-wins-a-hefty-us-air-force-contract-for-its-balloon-data/) — Thiết bị đeo mới giá 179,99 USD, màn OLED, pin cả tuần.
+- [Fitbit Edge: lựa chọn trung gian giữa Fitbit Air và Pixel Watch](https://techcrunch.com/2026/10/12/fitbit-edge-is-googles-middle-ground-between-fitbit-air-and-pixel-watch/) — Thiết bị đeo mới giá 179,99 USD, màn OLED, pin cả tuần.
 
 **Ars Technica**
-- [Epic Games được cho là chuyển sang mô hình phát triển game "AI-first"](https://arstechnica.com/health/2026/10/39-year-old-unvaccinated-woman-becomes-6th-measles-death-in-pennsylvania/) — Báo cáo nói không còn code viết tay cho dự án shooter Marvel/Star Wars bị hoãn.
-- [No Man's Sky lên iPhone và iPad](https://arstechnica.com/gaming/2026/10/report-epic-games-goes-all-in-on-ai-for-disney-collaboration/) — Game hỗ trợ iPhone 11 trở lên sau 10 năm "chuộc lỗi".
-- [Claude AI của Anthropic gửi tin báo án mạng sai cho cảnh sát Philadelphia](https://arstechnica.com/gaming/2026/10/after-a-10-year-redemption-arc-no-mans-sky-is-coming-to-the-iphone-and-ipad/) — Sự cố AI tự liên hệ cơ quan chức năng với thông tin không chính xác.
+- [Epic Games được cho là chuyển sang mô hình phát triển game "AI-first"](https://arstechnica.com/gaming/2026/10/report-epic-games-goes-all-in-on-ai-for-disney-collaboration/) — Báo cáo nói không còn code viết tay cho dự án shooter Marvel/Star Wars bị hoãn.
+- [No Man's Sky lên iPhone và iPad](https://arstechnica.com/gaming/2026/10/after-a-10-year-redemption-arc-no-mans-sky-is-coming-to-the-iphone-and-ipad/) — Game hỗ trợ iPhone 11 trở lên sau 10 năm "chuộc lỗi".
+- [Claude AI của Anthropic gửi tin báo án mạng sai cho cảnh sát Philadelphia](https://arstechnica.com/tech-policy/2026/10/anthropics-claude-ai-submitted-false-murder-tip-to-philadelphia-police/) — Sự cố AI tự liên hệ cơ quan chức năng với thông tin không chính xác.
 
 **Wired**
 - [Musk khoe Lego Star Wars từ Grok, người dùng X "chơi khăm" lại](https://www.wired.com/story/elon-musk-bragged-about-his-grok-lego-star-wars-haul-then-x-users-punked-him/) — Lỗ hổng bảo mật trong tính năng mua sắm của Grok bị khai thác.
 - [Diễn tập làm mờ Mặt Trời: kết quả tệ hơn bạn nghĩ](https://www.wired.com/story/they-war-gamed-dimming-the-sun-it-went-even-worse-than-you-think/) — Mô phỏng địa kỹ thuật mặt trời cho thấy nguy cơ chạy đua vũ trang mới.
-- [Apple đưa ngôn ngữ bản địa lên bàn phím iPhone](https://www.wired.com/story/new-york-comic-con-star-trek/) — Hợp tác với cộng đồng bản địa để bảo tồn ngôn ngữ có nguy cơ biến mất.
+- [Apple đưa ngôn ngữ bản địa lên bàn phím iPhone](https://www.wired.com/story/how-apple-puts-indigenous-languages-on-the-iphone-keyboard/) — Hợp tác với cộng đồng bản địa để bảo tồn ngôn ngữ có nguy cơ biến mất.
 
 **Google News – Tech**
 - [Margaret Hamilton, người viết phần mềm đưa con người lên Mặt Trăng, qua đời ở tuổi 90](https://news.google.com/articles/CBMinAFBVV95cUxPNmIzeGdhWFZvb1ZnZjY1WGhvcTh5c0lzT25UXzhvZzNJMnV1eWNxc3ZkR2J4bFlwbVNoWlMtNEtBZkZBY1k3c3dlTzJrZEJJVnduWWpHRGhsZHJ6cWE5cG5aa3dxMVRCYlA0MTAxeVczNnFhRkZqd0lFcG5GYUZZZFdvcFJad01YbHpVVVI2VHg0N3hNMFVKOGo1OFo) — Huyền thoại kỹ thuật phần mềm của chương trình Apollo.
-- [Kỹ sư phần mềm: AI khiến lập trình viên chỉ "bấm Enter" cả ngày](https://news.google.com/articles/CBMilgFBVV95cUxNajBoQ05mZ0VrWFE5c3V4aUVWcDUwTVNVU2tOOHA0bmU3Q04tazQ4ZjNmQ016cW9zRldOQ1Zqc2JsbUcxVEZacmFXSWFQNDhPUG4xRjd2UV9lSkduMmo3TktwdUs3QXpxaGFCMlhlLW14N3ZPQ2N6dDRUZnZzZFEyMS14emRDQ2FYZkdhbV9MclpSaHE5Vnc) — Cảnh báo việc lạm dụng AI làm mất khả năng tư duy và hiểu code. [cũ]
+- [Kỹ sư phần mềm: AI khiến lập trình viên chỉ "bấm Enter" cả ngày](https://news.google.com/articles/CBMilgFBVV95cUxQaU85Y2dRMGQwZE1TM2ZMa1dCeWRHVVRzTk1LZEFEWklqbVBfU1RHSFNJY0RRd1RPV1FrcC1hRlZpam9MZnE5LXgzTWc1VFNRUXZ4WlZQX01yS3ZvV2hGc1FCRVg0bGJaTDFYNG9pNHdkanc1MTd0dTlKTFd2cG5lQ0E0LTFQcllQMjJmeWg5bWMwOHdIdEE) — Cảnh báo việc lạm dụng AI làm mất khả năng tư duy và hiểu code. [cũ]
 ---
 ### 🐘 PHP / Laravel
 
@@ -152,19 +152,19 @@ _(Không có bài mới từ Facebook)_
 - [BashBox: trình thông dịch Bash sandbox cho AI agent viết bằng PHP](https://laravel-news.com/bashbox-sandboxed-bash-php?utm_medium=feed&utm_source=feedpress.me&utm_campaign=Feed%3A+laravelnews) — Chạy script bash do AI sinh ra với filesystem ảo, giới hạn thực thi và mạng tuỳ chọn.
 
 **Reddit r/PHP**
-- [CVE-2026-91768: FastCGI allowed_clients chỉ so 96/128 bit địa chỉ IPv6](https://www.reddit.com/r/PHP/comments/1x3u1fj/weekly_help_thread/) — Lỗi kiểm tra IP có thể cho phép client ngoài danh sách truy cập PHP-FPM.
-- [Dừng học PHP ngay trước Laravel — có nên học tiếp?](https://www.reddit.com/r/PHP/comments/1x3xah3/cve202691768_fastcgi_allowed_clients_compared/) — Thảo luận giá trị của PHP/Laravel với dev đã quen React/TypeScript.
-- [Opus Core — CMS viết bằng PHP thuần](https://www.reddit.com/r/PHP/comments/1x47gnt/paused_learning_php_right_before_laravel_worth/) — Giới thiệu hệ quản trị nội dung mã nguồn PHP native.
-- [Lần đầu dùng AI coding agent](https://www.reddit.com/r/PHP/comments/1x3fwtf/apresentação_opus_core_sistema_gerenciador_web/) — Dev 4 năm code tay chia sẻ cảm giác "tội lỗi" khi dùng agent.
+- [CVE-2026-91768: FastCGI allowed_clients chỉ so 96/128 bit địa chỉ IPv6](https://www.reddit.com/r/PHP/comments/1x3xah3/cve202691768_fastcgi_allowed_clients_compared/) — Lỗi kiểm tra IP có thể cho phép client ngoài danh sách truy cập PHP-FPM.
+- [Dừng học PHP ngay trước Laravel — có nên học tiếp?](https://www.reddit.com/r/PHP/comments/1x47gnt/paused_learning_php_right_before_laravel_worth/) — Thảo luận giá trị của PHP/Laravel với dev đã quen React/TypeScript.
+- [Opus Core — CMS viết bằng PHP thuần](https://www.reddit.com/r/PHP/comments/1x3fwtf/apresentação_opus_core_sistema_gerenciador_web/) — Giới thiệu hệ quản trị nội dung mã nguồn PHP native.
+- [Lần đầu dùng AI coding agent](https://www.reddit.com/r/PHP/comments/1x34qx5/using_ai_agent_for_the_first_time/) — Dev 4 năm code tay chia sẻ cảm giác "tội lỗi" khi dùng agent.
 ---
 ### 💰 Tài chính
 
 
 **CafeF – Tài chính**
 - [Giá vàng nhẫn, vàng miếng sáng 13/10 diễn biến trái chiều](https://cafef.vn/gia-vang-nhan-tron-vang-mieng-sang-13-10-tai-sjc-pnj-doji-bao-tin-minh-chau-va-bao-tin-manh-hai-dien-bien-trai-chieu-188261013070837334.chn) — Vàng nhẫn trái chiều giữa các thương hiệu, vàng miếng SJC đi ngang.
-- [MSB lấy ý kiến cổ đông chào bán 936 triệu cổ phiếu](https://cafef.vn/tu-uu-dai-gia-ve-den-vip-care-them-dac-quyen-bay-cho-khach-hang-doanh-nghiep-tai-acb-188261013085153982.chn) — Ngân hàng dự kiến nâng vốn điều lệ lên 46.800 tỷ đồng.
-- [Phong tỏa tài khoản người nhận 634,8 triệu đồng](https://cafef.vn/msb-lay-y-kien-co-dong-ve-phuong-an-chao-ban-936-trieu-co-phieu-du-kien-tang-von-dieu-le-len-46800-ty-dong-188261013070418199.chn) — Giao dịch có nhiều dấu hiệu đáng ngờ, ngân hàng tạm khóa tài khoản.
-- [Lãi suất ngày 12/10 tại các ngân hàng lớn](https://cafef.vn/phong-toa-tai-khoan-ngan-hang-cua-nguoi-phu-nu-sn-1986-sau-giao-dich-nhan-6348-trieu-dong-188261012145802485.chn) — Sacombank niêm yết kỳ hạn 12 tháng cao nhất 7,5%/năm.
+- [MSB lấy ý kiến cổ đông chào bán 936 triệu cổ phiếu](https://cafef.vn/msb-lay-y-kien-co-dong-ve-phuong-an-chao-ban-936-trieu-co-phieu-du-kien-tang-von-dieu-le-len-46800-ty-dong-188261013070418199.chn) — Ngân hàng dự kiến nâng vốn điều lệ lên 46.800 tỷ đồng.
+- [Phong tỏa tài khoản người nhận 634,8 triệu đồng](https://cafef.vn/phong-toa-tai-khoan-ngan-hang-cua-nguoi-phu-nu-sn-1986-sau-giao-dich-nhan-6348-trieu-dong-188261012145802485.chn) — Giao dịch có nhiều dấu hiệu đáng ngờ, ngân hàng tạm khóa tài khoản.
+- [Lãi suất ngày 12/10 tại các ngân hàng lớn](https://cafef.vn/lai-suat-ngay-12-10-tai-agribank-vietcombank-bidv-vietinbank-vpbank-mb-techcombank-sacombank-hdbank-188261012203235982.chn) — Sacombank niêm yết kỳ hạn 12 tháng cao nhất 7,5%/năm.
 
 **Google News – Tài chính VN**
 - [Fed tăng lãi suất: Việt Nam cần chủ động ứng phó](https://news.google.com/articles/CBMirAFBVV95cUxPQWJIM2JrS285MC03c3FZSmxIenlna0czZmZkMU5XanlkZmNnamp0ZFViNlc5VGc0ZWJzZmFNNXBaUzZqT0RERU9kZEZ2Y28wZWRJbHhEYk5VV2hpWW82UHYwVXltMUUwcDlUamZ6YnZfOWZycm9DNHZkRGdiN1BpRWlrdlp1eGZad3VZNlNzVE9WdnBKdjVlR2NHUVJMR2VSNHlXck9CVEZyMFJB) — Áp lực tỷ giá và dòng vốn khi Fed thắt chặt trở lại.
@@ -172,15 +172,15 @@ _(Không có bài mới từ Facebook)_
 - [Bài toán tỷ giá, lãi suất và dòng vốn trước làn sóng tăng lãi suất toàn cầu](https://news.google.com/articles/CBMivAFBVV95cUxNdXpWQVoyZVJvLUlnQjljTDFZV2szNTRjQldUamtiMUxhaDVrN2ZpLTVtVGVvWTVMTUd4UEs5cG1abHQ1UDM5SUZTcF9pVzlLUDB5bTJpYlEwVU1FcktWdi1Qcll5WVROSEhkQmtLbXpYeHNWVDRpWHlRWUVaMHBWWGQxM0lKODRNTHh2N2JvV24ya1JKaGIwc01UYlpnMnlIanppSnZqSHQzUTMyaDZkcjJZOE9KdW1uRXBKSg) — Phân tích dư địa điều hành của NHNN.
 
 **Business Insider Markets**
-- [Cảnh báo hạn chót kiện tập thể nhà đầu tư Celsius (CELH)](https://markets.businessinsider.com/news/stocks/ridgeline-showcases-ai-native-innovation-at-fifth-annual-base-camp-conference-1036617439) — Hãng luật nhắc nhà đầu tư đăng ký tham gia vụ kiện chứng khoán.
+- [Cảnh báo hạn chót kiện tập thể nhà đầu tư Celsius (CELH)](https://markets.businessinsider.com/news/stocks/celh-deadline-alert-faruqi-faruqi-llp-reminds-celsius-holdings-investors-of-securities-class-action-lawsuit-deadline-on-november-3-2026-1036602899) — Hãng luật nhắc nhà đầu tư đăng ký tham gia vụ kiện chứng khoán.
 - [Intermex giảm do California xem xét lại thương vụ](https://seekingalpha.com/news/4652176-intermex-falls-on-report-california-review-of-deal-may-be-driven-by-new-leadership?utm_source=businessinsider&utm_medium=referral&feed_item_type=news) — Lãnh đạo mới của cơ quan quản lý có thể ảnh hưởng tới phê duyệt.
-- [Johnson & Johnson sắp công bố kết quả: cần chờ đợi gì](https://seekingalpha.com/news/4652176-intermex-falls-on-report-california-review-of-deal-may-be-driven-by-new-leadership?utm_source=businessinsider&utm_medium=referral&feed_item_type=news) — Mở màn mùa báo cáo Q3 nhóm y tế.
+- [Johnson & Johnson sắp công bố kết quả: cần chờ đợi gì](https://seekingalpha.com/news/4652180-johnson-johnson-earnings-on-deck-what-to-expect?utm_source=businessinsider&utm_medium=referral&feed_item_type=news) — Mở màn mùa báo cáo Q3 nhóm y tế.
 
 **Google News – Crypto**
 - [Giá Ethereum ngày 12/10/2026](https://news.google.com/articles/CBMiaEFVX3lxTFBzb1I5ZmNBVUVrVmhEbnVyUWplYU9LWDh4TTNWaXl4ejFEb0FNX05IeG83bndwVTZna1hTOW9KN2FDejFKMmxBWnhhbU9zT1l5ampvTEhwWVdkdm8xRElDZzR2NDVfb3Jn) — Cập nhật giá ETH đầu tuần.
 - [Chainlink tăng 15% trong tháng, Ethereum đi ngang](https://news.google.com/articles/CBMingJBVV95cUxPT3RaVnMtT1pWcXJWc1QtSzlobFFKR3ROQ2dBYkZaSlhEU1RoNldwZV8zbXo2Sy1yTEhEaS1RbjFKOGYyQVFvbDJXeG9Sd2ZtMnF3LU5iX1dPRi1wUDRNdGRlcThfb3BsaXFMUS1ZZnB5a0cwZGh5T0kwLXF2ekl3M2dVMV93c2pPdWdZbmxIOU1lcjVJX3BHYXVVb1JGNlZ0RUJQWldjVUNWcS1naGNTU19ycS0xblVObnFsZUdQYUUtc3VOTjU4RDNuMlA1TkRoSFZTbHh0clh2V0tDV1k0bk5JdWNuOWhBM2l4MG4xY1dpMVBiSTZaV01hT0xUQzhYUlp1Z3hoVVlkUVF5RUxJVjhHZlFWbThxWVN1bjZR) — Cả hai vẫn thấp hơn đỉnh hơn một nửa — so sánh triển vọng hồi phục.
 - [ETF Bitcoin và Ethereum đảo chiều, rút ròng 1,22 tỷ USD trong tuần](https://news.google.com/articles/CBMiwgFBVV95cUxOTm50c3M1Y2toQ2xUMmU3aVhUZ1B5dFhHeGZuQ0ZmMWZPNWVjbkNMbVhLa3hLNDd6UkEwWnJLei1ibHdOclY1TXNiTG5zTmpsV1I5U2RpaTlNLXdDQ2tHOTlyNlVPWlZtWU9wdlU2TXp4dnF4VlpZSzJtbW92YWk5RkdwbjhrTnltbkprbUh4V0t5bkxWNzEyOHZSMjdFSE1xdjhSbHYzeklrYTdPV1EzLTlWNDRlVFlFMXEwU04tR0haQQ) — Dòng tiền tổ chức rời quỹ crypto.
-- [Nửa tháng 10, Bitcoin vẫn giảm — "Uptober" mới thất bại hai lần từ 2013](https://news.google.com/articles/CBMi0wFBVV95cUxOb25zekhnRVotUXJOY2M3WTR6M1hGUExaazNrdl9ST2JEYWZJVFBIRXpDSHJyRHgya2txYjBaVV9RYm9NSmpibHNTelA4MWVVcFBGN2F2bHdFZ2hBSEQzT0RVZnJLZk1SRXMwM3MtZlNiaFg3ZDROcFZCdk9rSFZDa21lN05OaEpXbFI3Z0wxQ2dwbmhLSVBiUXVBQU8zSjRLdm5XS1EzMUw5czZieDdKblFxZHpSQV9Ra1czRTRycEdBSmc3NVc3bkM5czZ5NkJEODU0) — Mùa vụ tăng giá tháng 10 đang có nguy cơ không lặp lại.
+- [Nửa tháng 10, Bitcoin vẫn giảm — "Uptober" mới thất bại hai lần từ 2013](https://news.google.com/articles/CBMilwJBVV95cUxOdnpPejUxT2ZOSkI0ZWplYWpYTHZSQzlFMjZkbVI1ZVpHRkhXNmROR2ZVOFBndjJuWTNaTTVtOWR3bEY1WTNqZXB2R1FGdmM3bXg2WFJsdkpSLTVQN2NIYjNZQjJFbnd1enp5SUZYTC1zV2R1QWt2SFdXTUU2cEJtQ19ja3Ntd0dNbWxKemZUMTV5dXZaQ3lUdFgxRjFuRTdXX1Q4R3dicGhwaF9pZFBhMmkyY0gzUWpRc3ZnQkM0dkd5SktoTmhwRDNRZ2ZiMndUUGowYVQ3eVk3WlNmTkpkeUdmdkFDc0w0aUdhLXgycGVFNlJzbk9FOFF1S3VfbF9pWkppQWI0SjRkY3pha3oyU1lZVlBhMkU) — Mùa vụ tăng giá tháng 10 đang có nguy cơ không lặp lại.
 ---
 ### 🔒 An ninh mạng
 
@@ -188,8 +188,8 @@ _(Không có bài mới từ Facebook)_
 **Google News – An ninh mạng VN**
 - [Chính phủ ban hành Chỉ số bảo đảm an ninh mạng giai đoạn 2027-2028](https://news.google.com/articles/CBMivAFBVV95cUxOQm1OTVhmdnNtVFZhM3lhdUI3SXF5c3BPQUY2QTlfc2pRcHM5U3ZKQnctSnNjS3FCVW1kQzhIMkZGWVlkZTYwZkpDQnZOUjJLc0JJZWdyQ2xIUnQxVHBMMGtlakhrd3M1ZU82VjUzRUwyV1NCdy1qSTY0cHB0d2g1WTJBQkM2bmlwM0s1X1ZKRUx3SUt1c1FUdDZtUDdNUElrcDFiNGxrYmRGdVBmOUJBT0Q5b0FMcW5fckRIYQ) — Bộ chỉ số định hướng tới năm 2030 để đánh giá mức độ an toàn của các cơ quan.
 - [CMC Cyber Security bắt tay DBV, kết nối an ninh mạng và bảo hiểm](https://news.google.com/articles/CBMipgFBVV95cUxOVzc5bHpCV1F3QUFKbnpGTGhkMzAtVHZSMk0wdW9TU0dEci1ZWGp4MU5FRGNBYUxxZFRuWjBuT2FzeXUwQnd6TS0xX3ZGZ2hIZGs4OWtsWnZPdEFiM0kwVjQ2TlpPdVJnY2NZaVhZRzZVTGRsV1VWc3hSUENCRm5wTWo4Rjhmc3BJbTRwWm1FRTg2d00yanJTTXRQRFJ3NGc5RWxRQXV3) — Hợp tác đưa sản phẩm bảo hiểm rủi ro mạng.
-- [Cảnh giác bẫy thu thập sinh trắc học từ trào lưu "xuyên không" thập niên 80 bằng AI](https://news.google.com/articles/CBMi2wFBVV95cUxOZDNjamRxN0xMejkwU09JcEkyUjNPUzJNTWJFOUcydzVwNHZnN2RIdlJoVE9vTEE5blQ4S2xtQ25nVlY5WDFkX3FQb256Q0VoR1pmcEJZdGZNVjU3QW1BeFh4TnE3eHlhLXhzcHI3S29vYWdyRDNBanFScmdfZUNQS2FDQnJjNFN4enVpaWRpNEE5LXUyaXI3dEVqaHFkMjNqZzd2bzZTNGpUZ1d4UndQWml3Z2dNMXNsOWFLNEJLUkU1ZnM5VFRHRzhVakQtNHFNak9ncU85YjhNbTQ) — App chỉnh ảnh AI có thể thu thập dữ liệu khuôn mặt người dùng.
-- [An toàn dữ liệu trong chuyển đổi số](https://news.google.com/articles/CBMiiAJBVV95cUxNVjZ3SC1ISjRfZlFnNjVLQ243RzdGY09pMlNNTGtUcm5UMGMxLXhTQUNwU2c4UkJJa3lfYlN5MWpwT2tpMWZrcDVqWjNvOHRHUDhYaERwUlRxZDVJQ0Ffd01nR0pEOU5wYWNPUVNMamNFVGs2bjVQaTVSWEdlcVdHY25OUmI5NVVjTlcxY3NsNjA4cGNtY0x6bzI0T3pxcE85SUhvbVlKMXozMjBEVFh3LXRVeVNmeTNqN0gyd1pQUXJGQXBmSFk0VlR5NXVUYnB3QThJR3lzMEFIbC1KUTh0cjFvOWFmQll2ZnFGVE1md1BpUU9tTWQ4VFV3Y2JtUGJ0ZGIyZE1BNmY) — Bàn về bảo vệ dữ liệu cá nhân và dữ liệu nhà nước.
+- [Cảnh giác bẫy thu thập sinh trắc học từ trào lưu "xuyên không" thập niên 80 bằng AI](https://news.google.com/articles/CBMiiAJBVV95cUxNVjZ3SC1ISjRfZlFnNjVLQ243RzdGY09pMlNNTGtUcm5UMGMxLXhTQUNwU2c4UkJJa3lfYlN5MWpwT2tpMWZrcDVqWjNvOHRHUDhYaERwUlRxZDVJQ0Ffd01nR0pEOU5wYWNPUVNMamNFVGs2bjVQaTVSWEdlcVdHY25OUmI5NVVjTlcxY3NsNjA4cGNtY0x6bzI0T3pxcE85SUhvbVlKMXozMjBEVFh3LXRVeVNmeTNqN0gyd1pQUXJGQXBmSFk0VlR5NXVUYnB3QThJR3lzMEFIbC1KUTh0cjFvOWFmQll2ZnFGVE1md1BpUU9tTWQ4VFV3Y2JtUGJ0ZGIyZE1BNmY) — App chỉnh ảnh AI có thể thu thập dữ liệu khuôn mặt người dùng.
+- [An toàn dữ liệu trong chuyển đổi số](https://news.google.com/articles/CBMipAFBVV95cUxOR1ZVTjZoWmUyNU1DUFplWFZGejVtdGhnUU5UWGw0T0FRMnIwMWJZRGU0OW0ySWdVSmNCVDRZNmNRMVBiWHJWQUlNdUE5ckZ2NTRwMXV5emxEajNPa01HMnpoMUtlWmNyN0ttcTNsNkp4czI3c3owalpLTGJQZlc3VlFXRlFMMHhhaTNvR2VBN0FJYTVibzhLYVJJZGN0dUk1OGx1OA) — Bàn về bảo vệ dữ liệu cá nhân và dữ liệu nhà nước.
 
 **The Hacker News**
 - [Tổng hợp tuần: 0-day helpdesk, chứng chỉ giả, bắt giữ ShinyHunters, malware lừa AI](https://thehackernews.com/2026/10/weekly-recap-helpdesk-0-days-rogue.html) — Điểm tin bảo mật nổi bật trong tuần.
@@ -218,16 +218,16 @@ _(Không có bài mới từ Facebook)_
 **MarketWatch**
 - [Kinh tế toàn cầu dần hình chữ K: ai thắng, ai thua](https://www.marketwatch.com/story/the-global-economy-is-starting-to-look-k-shaped-here-are-the-winners-and-losers-and-where-the-u-s-fits-4ad93ea7?mod=mw_rss_topstories) — IMF thấy sự phân hóa giữa nước chịu cú sốc dầu và nước hưởng lợi từ AI.
 - [Mối đe dọa SpaceX có thể đè nặng cổ phiếu AT&T lâu dài](https://www.marketwatch.com/story/the-spacex-threat-could-loom-over-at-ts-stock-for-a-prolonged-stretch-analyst-cautions-71436853?mod=mw_rss_topstories) — Bernstein ngừng khuyến nghị mua các cổ phiếu viễn thông lớn.
-- [Thị trường bò không chết vì "già"](https://www.marketwatch.com/story/my-sister-moved-in-with-our-widowed-mother-78-and-says-she-deserves-the-family-home-is-she-right-7981835d?mod=mw_rss_topstories) — Lịch sử cho thấy chu kỳ tăng có thể tiếp tục kéo dài.
+- [Thị trường bò không chết vì "già"](https://www.marketwatch.com/story/investors-worry-the-bull-market-is-getting-old-but-history-shows-it-can-continue-to-age-gracefully-0402e69c?mod=mw_rss_topstories) — Lịch sử cho thấy chu kỳ tăng có thể tiếp tục kéo dài.
 
 **Google News – Stock Market**
 - [Hợp đồng tương lai S&P 500 đi ngang trước báo cáo ngân hàng; Kospi thủng 6.000](https://news.google.com/articles/CBMid0FVX3lxTE5vWkJFUkNSVTNpSXFUNGgxZWtlWUdXSmt3eC04ZllUYm9ma3UtYUNMS1ZQbDhDX0R1am5LZlZDcmx5Q2ZkR1pUTVBaOFR1WHgtY0FTakRvVkNpY1dnSDljcEp4SGpHYkw1cVF4LUhYZndrbmY5MlRR0gF8QVVfeXFMTmZhUmNzY2Z3a2tVNVlDdHVPZXUzeUQ2a3Vjc2Y4OGZuUTdmYlRvdDhSZXhVZmN0MWpoRjNkd19QYzQxZjN6RXlLcGZGYk5jLUQ1ZUdUZVpQSHp6eDh5X05pN1lWY2JpRWlpenZDNDFGQTJSdGtaOVFrczZUdQ) — Thị trường chờ mùa báo cáo Q3 mở màn bởi các ngân hàng lớn.
-- [Dow tăng, cổ phiếu chip nhớ kéo Nasdaq giảm (12/10)](https://news.google.com/articles/CBMihwFBVV95cUxOblNTYV9JS1kzM2ZZTUtSMTJOLUlqa1AtWWlqSm1pSlZyd3R5Z0ZTN0RwWVFwMFVUVFV2VXU2eTBXY3BSN0NIRFd5Q2l2Z2tkTUdsRzZoVW5TQUFrbVZqb3dpNHY1blFWRVJaVTJtTExxaERGT3MtNkJadldvVGs0WEFqQkZlbDA) — Salesforce hỗ trợ Dow trong khi nhóm bán dẫn suy yếu.
+- [Dow tăng, cổ phiếu chip nhớ kéo Nasdaq giảm (12/10)](https://news.google.com/articles/CBMilAFBVV95cUxNelFmSHJ5MlB6V0w1eXpSSDJyeklJWEJReHlBR3ZSNGFubkpWVnpsT3NLVzFSQ25rQnY3ZWRUdDNJNkhsdnNuUE9OU1dUZFlIcEJwanQwejN1dS0td24zX25DNTN1T0pHdktjakpWSWpTLUhyTm9NelVvbVFYUERJanFSN2x2QXlocFFTZHF5bGV3SXp1) — Salesforce hỗ trợ Dow trong khi nhóm bán dẫn suy yếu.
 
 **Google News – S&P 500 / Nasdaq**
 - [S&P 500, Nasdaq giảm khi giá dầu tăng do Nga tấn công Ukraine](https://news.google.com/articles/CBMiwwFBVV95cUxPamJ2ZGp1bmNfdEs1MUlid3YzVTcxNmRtZW9DRjE5LUhjM0E5cHJ3elNrYzVXTVBWOVNYX0hVTVJ2anJUUG44QnBvWnJfNVVUbnRTTDZEcVdqSTFSeWxuemlXOVJvWUhObmhiOVk0X083ckp4WEtQTUU3dnVNMW1wd3VxUlctaG5RbGpISVI3bVNQZXpHT3hWVEZZbDJrblZTYmhPVG9pVlJxUUJ3MnFNUmozQk5iNkp6OFlzNWppUEN1VXc) — Giá dầu leo thang sau đợt tấn công hạ tầng năng lượng.
-- [Iran nói phản hồi của Mỹ "không thỏa đáng", Nasdaq 100 giảm](https://news.google.com/articles/CBMihgJBVV95cUxOMVJfLWhiVUlLeFV3cEw3bGlMY3ZsRXhQLUxzMUdkY1FuYlItMDg1VUlGemdYTERUR2ZWWjhQXzYzZXJ6NHpYcjkyb3F2Xy1RRXB0S3R1X3pKS25ob3h1NUxEQnVhcHhDM25RZzBRUjBtRXJMZFRoaEw3eEMxZFQ3VDBkLUFyeE9Nd0s3azFaUzJaclR1c1h4UlZqUkVOa0RhNG5yZ3dmLS1FQzY4THI4ZFRPRUlTdFZqQVcxUnJFTzFKU2ZablFpdVdrNEFsdFJfQXdIUm81R0JEZ3NaZU1UNjZESWlQVjdsUUIyTjdObDdzVXBFRlR6ZDFrNmg1NnR0VkNyRk1B) — Căng thẳng địa chính trị tác động tâm lý thị trường.
-- [Dow, Nasdaq, S&P 500: thị trường chuẩn bị đón CPI và mùa báo cáo Q3](https://news.google.com/articles/CBMikwJBVV95cUxOQm9nV0NwVENvWlRtY0RnV3ZsM0Myd2l4M3RRdmFzaHNReXJmajZ5MU1CQnJ5ZzItbk9WMl91bkZxcjhqc3VRcWNZcWNzSDd5dTNvNkJkdC1DOUtDWWhmZjdzc183U3FFSzJ0MmJNSDIyTEV5aVphZDdJbHZZY3ZUTnlXXzVVOWhMV1d6blJ3MFBuc2VPS3pyZWtESlFsR3pHYUp3STBqYVA2QmotTy1TMnd4Z1JETDEwZ0lqc1Zna0o0TE1JNmVHellkcVdKM21jZXZpNVBfSW1KTGF1YnJLLU9oOXJNV2FRZmtoWEl6Sk1rZ1dyNnBxbUQxamxJTnN5d0ZZaUduQVRSMXZiYXhmd2IzVQ) — Tuần dữ liệu lạm phát và lợi nhuận quan trọng.
+- [Iran nói phản hồi của Mỹ "không thỏa đáng", Nasdaq 100 giảm](https://news.google.com/articles/CBMikwJBVV95cUxOQm9nV0NwVENvWlRtY0RnV3ZsM0Myd2l4M3RRdmFzaHNReXJmajZ5MU1CQnJ5ZzItbk9WMl91bkZxcjhqc3VRcWNZcWNzSDd5dTNvNkJkdC1DOUtDWWhmZjdzc183U3FFSzJ0MmJNSDIyTEV5aVphZDdJbHZZY3ZUTnlXXzVVOWhMV1d6blJ3MFBuc2VPS3pyZWtESlFsR3pHYUp3STBqYVA2QmotTy1TMnd4Z1JETDEwZ0lqc1Zna0o0TE1JNmVHellkcVdKM21jZXZpNVBfSW1KTGF1YnJLLU9oOXJNV2FRZmtoWEl6Sk1rZ1dyNnBxbUQxamxJTnN5d0ZZaUduQVRSMXZiYXhmd2IzVQ) — Căng thẳng địa chính trị tác động tâm lý thị trường.
+- [Dow, Nasdaq, S&P 500: thị trường chuẩn bị đón CPI và mùa báo cáo Q3](https://news.google.com/articles/CBMiygFBVV95cUxOZTFUQkZXMUF2VzJCNFFpY3BmNmJDVVFyTWFEYXAxaWFVeE5xOGFwT1BTY25EVFJ5WDNGSWNxWFpxMGIteVMtX3V6UXNXRm9HZlc2YUFWZXc0eVRkeGlPcE9ucmZxOVVVN3A4Umk3c01EMHd2UDEyQkhPbTZXMmcyTGNYaFZTNTZITTVaamtHa3NaN19fRk1qX3dMM21oR291cnRkcVRQQmxJSlk2ZUtaRXJPWF9icFJMUzF6bkZKcW1Iel9uUTEzbmZB) — Tuần dữ liệu lạm phát và lợi nhuận quan trọng.
 
 ---
 ### Điểm nổi bật
