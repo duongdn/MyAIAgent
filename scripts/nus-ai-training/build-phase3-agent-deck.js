@@ -128,7 +128,17 @@ box(s, 60, 200, 120, 36, '45 phút', { fill: C.ORANGE, size: 16 });
 
 s = newSlide('Session 5 — Agenda', `5 phút mở đầu: câu hỏi trọng tâm + 3 mức điều phối.
 30 phút nội dung: so sánh 3 mức → walkthrough support agent tối thiểu → SDK hỗ trợ gì vs application tự làm.
-10 phút Q&A.`);
+10 phút Q&A.
+
+Hỏi đầu buổi để warm-up (không cần trả lời đúng — chỉ tạo engagement):
+"Công ty bạn đang dùng AI ở bước nào? Model call để tóm tắt? Workflow cố định? Hay để AI tự quyết?"
+→ Kết nối trực tiếp với 3 mức điều phối sắp học.
+
+Timing chi tiết:
+- 0-5 phút: câu hỏi warm-up + preview 5 buổi sẽ build gì
+- 5-20 phút: 3 mức điều phối (model call/workflow/agent) với ví dụ thực tế
+- 20-35 phút: walkthrough support agent sơ đồ + SDK vs application boundary
+- 35-45 phút: Q&A + bài tự thực hành (phân loại 1 task tại công ty)`);
 [['1', 'So sánh\n3 mức điều phối', C.LIGHT], ['2', 'Walkthrough\nsupport agent', C.LIGHT], ['3', 'SDK hỗ trợ gì\nvs application', C.GREEN]].forEach(([num, t, f], i) =>
   box(s, 50 + i * 215, 110, 190, 150, `${num}\n${t}`, { fill: f, size: 36, sub: 20 }));
 
