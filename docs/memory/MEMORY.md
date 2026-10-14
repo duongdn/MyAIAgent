@@ -189,6 +189,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
 
 ## money-report
+- [only_oct_2026_onward_spending_data_reliable](money-report/feedback_only_oct_2026_onward_spending_data_reliable.md) — 🔴 thu/chi trước 10/2026 ghi sơ sài; phân tích chi tiêu chỉ dùng 10/2026+
 - [tikcop_no_term_book_is_lending_dca_pool](money-report/feedback_tikcop_no_term_book_is_lending_dca_pool.md) — 🔴 sổ tikcop ko kì hạn = quỹ cho vay + DCA dần; KHÔNG khuyến nghị gửi/tái tục sổ kỳ hạn nữa
 - [vcbf_finhay_hidden_wallets_add_back_like_larion](money-report/feedback_vcbf_finhay_hidden_wallets_add_back_like_larion.md) — 🔴 2026-10-02: VCBF + Finhay ẩn → API 0; cộng tay VCBF 525,063,000 + Finhay 67,404,069 như Larion; đối chiếu bằng apiData.ledgerRecords
 - [all_money_in_investment_wallets_is_investment](money-report/feedback_all_money_in_investment_wallets_is_investment.md) — 🔴 balance in VCBS/VCBF/FPTS/Finhay is always đầu tư, never cash/"chờ mua"; entries inside them = investment P/L, not chi tiêu
