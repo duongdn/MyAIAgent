@@ -99,7 +99,13 @@ S9: "Harness + trace + full design" — lắp ghép lại, trace thật, thiết
 
 Case study xuyên suốt: support agent đọc KB, trả lời có nguồn, tạo ticket sau khi được phép.
 Code chạy được: scripts/nus-ai-training/support_agent_demo/ (OpenAI Agents SDK + NUS LLM gateway).
-Từ S5 → S9: demo ngày càng "production-like" hơn — mỗi buổi thêm 1 lớp kiểm soát.`);
+Từ S5 → S9: demo ngày càng "production-like" hơn — mỗi buổi thêm 1 lớp kiểm soát.
+
+Hỏi mở đầu Giai đoạn 3: "Điểm khác nhau lớn nhất giữa giai đoạn này và Giai đoạn 1-2 là gì?"
+Đáp mong muốn: Giai đoạn 1-2 học concept/API; Giai đoạn 3 build hệ thống end-to-end — có code chạy được, có eval, có bản thiết kế review được. Từ "hiểu" sang "làm được".
+
+Hỏi: "Tại sao chọn support agent làm case study?"
+Đáp: Support agent là use case thực tế mà hầu hết công ty đều có hoặc đang xem xét. Nó đủ phức tạp để minh họa search_kb (RAG), create_ticket (write + approval), multi-tenant security — nhưng không quá phức tạp để xây trong 5 buổi.`);
 [['S5', 'Agent vs\nWorkflow\nSDK là gì'], ['S6', 'Agent loop\nTool\ncontracts'], ['S7', '5 checkpoint\nLỗi &\nApproval'], ['S8', 'State\nStop\ncondition'], ['S9', 'Harness\nTrace\nFull design']].forEach(([num, t], i) => {
   box(s, 30 + i * 138, 120, 120, 130, `${num}\n${t}`, { fill: i === 0 ? C.ORANGE : C.LIGHT, size: 18, sub: 13 });
   if (i) arrow(s, 30 + i * 138 - 18, 185, 30 + i * 138, 185);
@@ -847,7 +853,18 @@ Hỏi người học: nếu chưa có checkpoint ④, khi qwen sai (model_ok=fal
 box(s, 20, 345, 680, 40, 'system_ok = 100% mọi model → checkpoint quan trọng hơn chọn model "giỏi"', { fill: C.NAVY, size: 14 });
 
 s = newSlide('Nhầm lẫn thường gặp — 4 quan niệm sai', `Trainer dừng ở slide này để người học tự chọn câu nào sai và giải thích tại sao.
-Không báo đáp án ngay — để 2 phút thảo luận nhóm trước.`);
+Không báo đáp án ngay — để 2 phút thảo luận nhóm trước.
+
+Cách dùng slide hiệu quả nhất:
+1. Hiển thị chỉ cột trái (4 câu khẳng định) — che cột phải.
+2. Hỏi: "Câu nào đúng? Câu nào sai? Giải thích tại sao."
+3. Sau 2 phút thảo luận → reveal từng câu đáp.
+4. Nhấn mạnh câu nào người học hay nhầm nhất.
+
+Hỏi trainer nên chuẩn bị: "Tại sao câu 1 ('SDK lo hết security') là nhầm lẫn phổ biến nhất?"
+Đáp: Vì framework/SDK hiện đại thường lo nhiều thứ — developer quen nghĩ "SDK đã handle". Nhưng SDK chỉ biết về tool calls/model loop; quyền user, tenant, business rule là domain-specific → chỉ application mới biết.
+
+Misconception đặc biệt nguy hiểm trong production: câu 2 (prompt thay checkpoint ④) — nhiều team thực tế đang làm vậy. Checkpoint ④ bằng code là điểm khác biệt lớn nhất của demo này so với "chatbot có tools" thông thường.`);
 [
   ['"SDK lo hết security — tôi chỉ cần gọi Runner.run()"',
    'SAI. SDK quản lý luồng gọi model. Quyền truy cập dữ liệu, kiểm tra tham số, human approval — trách nhiệm của application (checkpoints.py). SDK không biết tenant của user là gì.',
