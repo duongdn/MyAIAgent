@@ -9,3 +9,5 @@ User (2026-10-14): "mấy tháng trước tào lao quá rồi, tháng này tôi 
 
 **Why:** trước 10/2026 ~46% chi là "Linh tinh" cục lớn (bù sao kê VCB visa cuối tháng, không ghi chú) → so sánh/trung bình 12 tháng gây kết luận sai.
 **How to apply:** lời khuyên thu/chi, trung bình tháng, spike chi tiêu chỉ dựa 10/2026+; không so với 09/2026 trở về trước (breakdown script vẫn in tháng trước — ghi chú là không tin cậy). Khi đủ 3 tháng dữ liệu tốt mới tính trung bình. Liên quan [[spending-breakdown-by-category-group]].
+
+**Khoản cố định:** gửi má 5M/tháng (ghi MISA mục "Hiếu hỉ", vcb, đầu tháng — vd 10-01 5,000,000) → coi là chi CỐ ĐỊNH, không phải hiếu hỉ biến động; khi phân tích tách ra khỏi Hiếu hỉ.
