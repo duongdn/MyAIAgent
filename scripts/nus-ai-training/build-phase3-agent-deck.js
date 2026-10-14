@@ -154,7 +154,18 @@ box(s, 30, 298, 680, 38, 'Rule: khi không chắc → chọn mức thấp hơn. 
 s = newSlide('Support agent tối thiểu — sơ đồ', `Đây là sơ đồ minimal support agent dùng xuyên suốt Sessions 5–9.
 User hỏi → Application kiểm tra quyền → Runner gọi model → model chọn tool → tool thực thi → loop tiếp hoặc trả kết quả.
 Nhấn mạnh: Application ở GIỮA kiểm soát, không phải SDK. SDK lo việc loop và gọi tool; business rule và quyền là code application viết.
-Ví dụ code: scripts/nus-ai-training/support_agent_demo/agent_openai_sdk.py + checkpoints.py.`);
+Ví dụ code: scripts/nus-ai-training/support_agent_demo/agent_openai_sdk.py + checkpoints.py.
+
+Hỏi: Trong sơ đồ, model nằm ở đâu?
+Đáp: Bên trong "Runner SDK loop" — Model không giao tiếp trực tiếp với User hay Application. Mọi input/output đi qua Runner.
+
+Hỏi: Tool "create_ticket" nối với box nào trong sơ đồ?
+Đáp: Nối với "Tool thực thi" — nhưng trước đó đi qua "App check quyền" thông qua needs_approval. Application intercepte ngay trước khi tool chạy.
+
+Hỏi: Nếu bỏ box "App check quyền", ai còn kiểm soát?
+Đáp: Không ai. SDK loop sẽ gọi tool trực tiếp theo lệnh model — không có business rule nào chặn. Đây là lý do 5 checkpoint cần code application, không phải prompt.
+
+Timing gợi ý: 3 phút giải thích sơ đồ → 2 phút hỏi người học đoán flow → tiếp theo SDK boundary slide.`);
 const agentFlow = [['User\nhỏi', C.LIGHT], ['App\ncheck quyền', C.NAVY], ['Runner\nSDK loop', C.LIGHT], ['Model\nchọn tool', C.LIGHT], ['Tool\nthực thi', C.LIGHT]];
 agentFlow.forEach(([t, f], i) => {
   box(s, 20 + i * 140, 130, 115, 80, t, { fill: f, size: 15, sub: 11 });
@@ -597,7 +608,16 @@ s = newSlide('Gateway cache — cost control trong production', `LiteLLM gateway
 Demo tắt cache (no-cache: True trong ModelSettings) để mỗi lần eval là model thật.
 Trong production: cache rất có giá trị (latency + cost), nhưng cache key PHẢI gồm tenant_id + permission scope.
 Nếu không: Alice cache câu hỏi "KB về billing" → Bob (tenant khác) nhận lại kết quả của Alice → rò rỉ dữ liệu (OWASP LLM08).
-Code demo: MODEL_SETTINGS với extra_body={"cache": {"no-cache": True}} — tắt khi eval/demo, bật khi production với cache key đúng.`);
+Code demo: MODEL_SETTINGS với extra_body={"cache": {"no-cache": True}} — tắt khi eval/demo, bật khi production với cache key đúng.
+
+Hỏi: Tại sao cache giúp về latency nhưng có thể tạo lỗ hổng bảo mật?
+Đáp: Cache trả kết quả cũ mà không gọi model/DB lại → nếu cache key chỉ là query text, Alice và Bob (khác tenant) có cùng query → Bob nhận cache từ Alice → thấy dữ liệu tenant-A (OWASP LLM08).
+
+Hỏi: Demo đang tắt cache — trong production làm sao bật an toàn?
+Đáp: Bật cache nhưng cache key = hash(query + tenant_id + user_role + permission_scope). Mỗi tenant/role có cache riêng → không thể cross-tenant. Tham khảo LiteLLM caching docs.
+
+Hỏi: eval_results.json dùng no-cache — tại sao quan trọng?
+Đáp: Nếu cache bật, nhiều run dùng cùng 1 kết quả model → eval không đo được model quality thật, chỉ đo cache hit rate. no-cache đảm bảo mỗi run là model inference thật.`);
 [['Cache HIT', '~0.15s\n~$0.00001/req', C.GREEN],
  ['Cache MISS', '~6-39s\n~$0.001/req', C.LIGHT],
  ['Cache sai key', 'Rò rỉ dữ liệu\ntenants lẫn', C.ORANGE]].forEach(([t, sub, f], i) =>
