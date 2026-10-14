@@ -608,7 +608,7 @@ box(s, 30, 255, 680, 55, 'Câu hỏi cho khách: 3 failure mode nào cần kiể
 
 s = newSlide('Thiết kế eval suite — 5 loại test case cần có', `run_eval.py — 5 test case thiết kế có chủ ý để cover mọi checkpoint.
 Nguyên tắc: mỗi test case phải có kịch bản "model đúng + system an toàn" VÀ kịch bản "model sai → checkpoint chặn".
-Chạy: python run_eval.py --model deepseek-flash --runs 2 --approve yes
+Chạy: python3 run_eval.py --models deepseek-flash --runs 2
 Output: eval_results.json với model_ok + system_ok + latency + tokens per case.`);
 [
   ['TC1', 'Hợp lệ end-to-end', 'alice hỏi hoàn tiền, tạo ticket P3/billing\n→ model_ok: gọi đúng tool · system_ok: checkpoint ⑤ duyệt', C.GREEN],
