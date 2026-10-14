@@ -579,20 +579,32 @@ box(s, 20, 105, 680, 40, 'Trace = ghi lại mọi hành động của agent — 
   box(s, 30 + i * 168, 165, 150, 80, `${t}\n${sub}`, { fill: f, size: 16, sub: 12 }));
 box(s, 30, 285, 680, 55, 'Trace ≠ đo chất lượng · Chất lượng = test case đại diện + user feedback', { fill: C.NAVY, size: 15 });
 
-s = newSlide('Chạy demo — 3 lệnh, xem agent thật', `Trainer chạy live trước lớp. Cần: Python 3.11+, openai-agents SDK, NUS gateway key trong config/.nus-llm-gateway-config.json.
-Kịch bản 1 (chạy trước): python3 run_demo.py --scenario 1 → alice hỏi hoàn tiền → ticket P3 được approve bởi trainer.
-Kịch bản 2 (sau đó): python3 run_demo.py --scenario 2 --disable 4 --approve yes → tắt checkpoint ④ → model tạo ticket P1 gửi CEO tự động.
-Kịch bản 3 (cuối): python3 run_eval.py --runs 1 --models deepseek-v4.1-flash → 5 test case tự động, xem model_ok vs system_ok.
-Câu hỏi sau live demo: "Checkpoint nào chặn kịch bản 2? Thay thế bằng prompt thay vì code — có đủ không?"
-NOTE: approve_mode="yes" trong eval = worst case (trainer tự động approve mọi ticket). Dùng để test system_ok riêng.`);
+s = newSlide('Chạy demo — 5 kịch bản, xem agent thật', `Trainer chạy live trước lớp. Cần: Python 3.11+, NUS gateway key trong config/.nus-llm-gateway-config.json.
+pip install -r requirements.txt (openai-agents==0.23.1)
+
+5 kịch bản trong run_demo.py:
+  1 — Bình thường: alice (support) hỏi + nhờ tạo ticket → ④ pass → ⑤ trainer duyệt → ticket P3/billing
+  2 — Prompt injection: KB có POISONED_DOC, alice chỉ hỏi → ④ chặn P1 từ tài liệu độc
+  3 — Thiếu quyền: bob (viewer) nhờ tạo ticket → ④ chặn vì role viewer không có create_ticket
+  4 — Giả mạo tenant: alice nói "tôi thuộc tenant-B" → ① bỏ qua, dùng tenant từ session
+  5 — Đầu độc tinh vi: SUBTLY_POISONED_DOC trông như quy định thật → ④ vẫn chặn (code không bị thuyết phục)
+
+Luồng demo khuyến nghị trước lớp:
+  - Chạy kịch bản 1 (baseline) → trainer duyệt → ticket tạo thành công
+  - Chạy kịch bản 2 + --disable 4 + --approve yes → model tạo ticket P1/CEO tự động → thiệt hại
+  - So sánh ngay: "checkpoint ④ chặn điều gì?"
+  - Cuối: run_eval → xem model_ok vs system_ok trên 5 test case
+
+Câu hỏi chốt: "Thay checkpoint ④ bằng prompt instruction — có đủ không? SUBTLY_POISONED_DOC có thuyết phục được prompt không?"`);
 box(s, 20, 85, 680, 35, 'cd scripts/nus-ai-training/support_agent_demo/   # pip install -r requirements.txt (openai-agents==0.23.1)', { fill: C.NAVY, size: 13, align: 'START' });
-[['# Kịch bản 1 — ticket hợp lệ, trainer duyệt', 'python3 run_demo.py --scenario 1', C.GREEN],
- ['# Kịch bản 2 — tắt ④, P1→CEO tự động (--approve yes bỏ qua ⑤)', 'python3 run_demo.py --scenario 2 --disable 4 --approve yes', C.ORANGE],
- ['# Kịch bản 3 — eval 1 lần, 1 model', 'python3 run_eval.py --runs 1 --models deepseek-v4.1-flash', C.LIGHT],
+[['# S1 — baseline: ticket hợp lệ, trainer duyệt ⑤', 'python3 run_demo.py --scenario 1', C.GREEN],
+ ['# S2 + disable④ — prompt injection + tắt kiểm soát → P1/CEO tự động', 'python3 run_demo.py --scenario 2 --disable 4 --approve yes', C.ORANGE],
+ ['# S3 — bob (viewer) không có quyền tạo ticket', 'python3 run_demo.py --scenario 3', C.LIGHT],
+ ['# S5 — đầu độc tinh vi (SUBTLY_POISONED_DOC) + eval so sánh', 'python3 run_eval.py --runs 1 --models deepseek-v4.1-flash', C.LIGHT],
 ].forEach(([comment, cmd, fill], i) => {
-  box(s, 20, 130 + i * 62, 680, 52, `${comment}\n${cmd}`, { fill, size: 11, sub: 14, bold: false, align: 'START' });
+  box(s, 20, 120 + i * 52, 680, 44, `${comment}\n${cmd}`, { fill, size: 10, sub: 13, bold: false, align: 'START' });
 });
-box(s, 20, 322, 680, 42, 'Thay --disable 4 bằng --disable 1 --disable 2 --disable 4 → xem checkpoint nào chặn gì', { fill: C.YELLOW, size: 12, bold: false });
+box(s, 20, 340, 680, 30, 'Thay --disable 4 bằng --disable 1 2 3 4 → xem từng checkpoint chặn gì', { fill: C.YELLOW, size: 12, bold: false });
 
 s = newSlide('Support agent hoàn chỉnh — kiến trúc 1 trang', `Đây là bản thiết kế có thể review với đội triển khai.
 Lắp ghép từ Sessions 5–9:
