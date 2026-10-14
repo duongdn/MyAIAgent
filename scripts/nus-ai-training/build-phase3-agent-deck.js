@@ -308,8 +308,8 @@ create_ticket: title (str), priority (str), assignee (str) — AGENT_ALLOWED_PRI
 
 Hỏi: tenant parameter trong search_kb là lỗi thiết kế gì? (model có thể điền tenant-B theo lời user)
 Đáp: checkpoint ① bỏ qua claimed_tenant nếu khác session.tenant — code fix lỗi thiết kế này.`);
-const tools = [['search_kb', 'READ · no side effect', [['query', 'string · bắt buộc'], ['top_k', 'int · default 5'], ['tenant_id', 'từ context']], C.LIGHT],
-               ['create_ticket', 'WRITE · cần approval', [['title', 'string · bắt buộc'], ['priority', 'LOW/MED'], ['idempotency_key', 'string']], C.ORANGE]];
+const tools = [['search_kb', 'READ · no side effect', [['query', 'str · bắt buộc'], ['tenant', 'str | None · bỏ qua nếu sai'], ['→ output', '<untrusted_search_results>']], C.LIGHT],
+               ['create_ticket', 'WRITE · needs_approval', [['title', 'str · bắt buộc'], ['priority', 'str · chỉ P3,P4 hợp lệ'], ['assignee', 'str · whitelist team']], C.ORANGE]];
 tools.forEach(([name, sub, params, fill], col) => {
   box(s, 40 + col * 350, 100, 280, 50, `${name}\n${sub}`, { fill, size: 18, sub: 13 });
   params.forEach(([ p, t], row) => label(s, 50 + col * 350, 162 + row * 30, 280, 24, `${p}: ${t}`, { size: 13, bold: false, align: 'START' }));
@@ -317,12 +317,12 @@ tools.forEach(([name, sub, params, fill], col) => {
 
 s = newSlide('Session 6 — Câu hỏi kiểm tra', `Gợi ý đáp án:
 1. description — phải mô tả KHI NÀO dùng tool, không chỉ làm gì. Model dùng description để chọn tool phù hợp.
-2. Để tránh tạo 2 ticket khi timeout + retry. Gọi 2 lần cùng key → chỉ tạo 1 lần.
+2. Tránh tạo 2 ticket khi timeout + retry: demo check TICKETS list trong create_ticket(), production dùng idempotency key ở DB.
 3. Application (code), KHÔNG phải model. Model chỉ đề xuất tool, application quyết định có thực thi không.
 Bài tự thực hành: định nghĩa contract cho 2 tool (read + write), vẽ sequence diagram một lần agent gọi tool.
 Timing: Q1=3 phút, Q2=3 phút, Q3=3 phút, thực hành=20 phút, review=10 phút, Q&A=21 phút (session 60 phút tổng).`);
 ['1. Trường nào trong tool contract quan trọng nhất với model khi chọn tool?',
- '2. Vì sao create_ticket cần idempotency key?',
+ '2. Vì sao agent cần cơ chế chống tạo ticket trùng khi retry?',
  '3. Quyết định có gọi tool thật hay không — model hay application?'].forEach((t, i) =>
   box(s, 40, 90 + i * 65, 460, 55, t, { fill: C.LIGHT, size: 14, align: 'START' }));
 box(s, 520, 90, 170, 200, 'Tự thực hành:\nHai tool\nread + write\n\nContract đầy đủ\n6 trường\n\nSequence diagram', { fill: C.GREEN, size: 13, bold: false });
