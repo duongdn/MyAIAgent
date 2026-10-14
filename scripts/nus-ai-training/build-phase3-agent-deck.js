@@ -224,7 +224,13 @@ s = newSlide('Session 5 — Câu hỏi kiểm tra', `Gợi ý đáp án:
 2. Model call hoặc workflow — bước cố định: nhận email → trích xuất → lưu vào DB.
 3. Application — SDK không biết business rule của công ty.
 Bài tự thực hành: chọn 1 task tại công ty, phân loại model call / workflow / agent, nêu lý do, đánh dấu ranh giới SDK và application.
-Timing: Q1=2 phút, Q2=2 phút, Q3=3 phút, thực hành=15 phút, review=10 phút, Q&A=13 phút (session 45 phút tổng).`);
+Timing: Q1=2 phút, Q2=2 phút, Q3=3 phút, thực hành=15 phút, review=10 phút, Q&A=13 phút (session 45 phút tổng).
+
+Hỏi: Q1 — nếu người học trả lời "workflow" thay vì "agent", trainer nên phản bác thế nào?
+Đáp: Hỏi ngược: "Bạn biết trước cần bao nhiêu bước search_kb không?" → Không (phụ thuộc KB). "Bước tạo ticket phụ thuộc kết quả search không?" → Có. Đây là 2 dấu hiệu agent: bước không biết trước + kết quả phụ thuộc nhau.
+
+Hỏi: Q2 — nếu người học trả lời "agent" cho bài trích xuất email, trainer giải thích sao?
+Đáp: Bước cố định: nhận email → parse → extract fields → save DB. Không có bước "không biết trước", không có branching phụ thuộc kết quả model. Agent overkill và nguy hiểm hơn (khó audit) khi workflow đơn giản là đủ.`);
 ['1. Support agent: phân loại yêu cầu và tạo ticket — chọn mức nào?',
  '2. Trích xuất field từ email vào DB — chọn mức nào?',
  '3. Kiểm tra quyền user/tenant — SDK hay application làm?'].forEach((t, i) =>
