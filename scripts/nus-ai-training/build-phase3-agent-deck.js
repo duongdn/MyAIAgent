@@ -632,7 +632,16 @@ s = newSlide('Agent harness — 5 lớp kiểm soát', `Harness là framework ba
 3. Approval gate: needs_approval=ticket_needs_approval trong @function_tool — SDK gọi trước khi tool chạy.
 4. Budget: max_turns=cp.MAX_TURNS=8 trong Runner.run() — OWASP LLM10.
 5. State & escalation: Session.disabled, TICKETS list, AWAITING_APPROVAL state trong task flow.
-Tất cả 5 lớp phải có trước khi demo cho khách. Thiếu 1 → nguy cơ side effect không kiểm soát.`);
+Tất cả 5 lớp phải có trước khi demo cho khách. Thiếu 1 → nguy cơ side effect không kiểm soát.
+
+Hỏi: Lớp nào nguy hiểm nhất nếu bị bỏ qua?
+Đáp: Lớp 2 (Permission layer) — nếu không filter theo tenant, agent có thể trả tài liệu của tenant khác, tạo ticket cross-tenant. Lớp 3 thiếu → agent tự tạo ticket không cần người duyệt.
+
+Hỏi: Lớp 1 (Scope tools) bảo vệ điều gì?
+Đáp: Chỉ đăng ký tool thật cần thiết — model không biết tool nào tồn tại ngoài list tools=[]. Nếu đăng ký thêm tool (ví dụ delete_ticket), model có thể tự gọi dù không ai cho phép.
+
+Hỏi: Có thể gộp lớp 4 (max_turns) vào trong model không? Dùng system prompt "chỉ gọi tối đa 8 tool" có được không?
+Đáp: Không đáng tin — model có thể bỏ qua instruction trong system prompt khi context dài hoặc bị inject. max_turns=8 là giới hạn CỨNG ở application layer, SDK throw exception khi vượt.`);
 [['1. Scope\ntools', 'Agent(tools=\n[…])', C.NAVY],
  ['2. Permission\nlayer', 'checkpoints.py\nsearch_kb()', C.NAVY],
  ['3. Approval\ngate', 'needs_approval=\nfunc', C.ORANGE],
@@ -736,7 +745,16 @@ box(s, 30, 255, 680, 55, 'Câu hỏi cho khách: 3 failure mode nào cần kiể
 s = newSlide('Thiết kế eval suite — 5 loại test case cần có', `run_eval.py — 5 test case thiết kế có chủ ý để cover mọi checkpoint.
 Nguyên tắc: mỗi test case phải có kịch bản "model đúng + system an toàn" VÀ kịch bản "model sai → checkpoint chặn".
 Chạy: python3 run_eval.py --models deepseek-flash --runs 2
-Output: eval_results.json với model_ok + system_ok + latency + tokens per case.`);
+Output: eval_results.json với model_ok + system_ok + latency + tokens per case.
+
+Hỏi: Tại sao cần cả model_ok VÀ system_ok — không đủ khi chỉ đo model_ok?
+Đáp: model_ok=False nghĩa là model đề xuất sai — nhưng nếu checkpoint ④ chặn, system vẫn an toàn. Ngược lại model_ok=True nhưng checkpoint bị tắt → system_ok=False. Cần đo cả hai để biết system thật sự an toàn hay chỉ "may mắn".
+
+Hỏi: Tại sao TC5 (đầu độc tinh vi) khó hơn TC2 (đầu độc thô)?
+Đáp: SUBTLY_POISONED_DOC viết như quy định thật — checkpoint ③ không phát hiện vì không khớp SUSPICIOUS patterns. Chỉ checkpoint ④ (rule bằng code) chặn được hành động. TC5 test xem ④ có đứng vững khi model "bị thuyết phục" hay không.
+
+Hỏi: Chạy --runs 2 đủ chưa? Cần bao nhiêu runs?
+Đáp: 2 runs = 10 cases minimum để có signal thống kê cơ bản. Production cần 10-30 runs để phát hiện flaky behavior (model thỉnh thoảng fail). Demo dùng 2 để nhanh — kết quả eval_results.json đã có 2 runs × 5 models = 50 data points.`);
 [
   ['TC1', 'Hợp lệ end-to-end', 'alice hỏi hoàn tiền, tạo ticket P3/billing-team-a\n→ model_ok: gọi đúng tool · system_ok: checkpoint ⑤ duyệt', C.GREEN],
   ['TC2', 'Read only, không tạo ticket', 'alice chỉ hỏi, KHÔNG yêu cầu tạo ticket\n→ model_ok: biết không gọi create_ticket', C.LIGHT],
