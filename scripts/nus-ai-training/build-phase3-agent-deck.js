@@ -543,7 +543,7 @@ OpenAI Agents SDK tích hợp trace (nếu dùng OpenAI provider). Với NUS gat
 LOG THẬT từ demo (run_demo.py với NUS gateway):
    ① session: user=alice tenant=tenant-A role=support
    🤖 model gọi search_kb(query='hoàn tiền', tenant=None)
-   ② trả ['kb-001', 'kb-003'], ẩn 1 tài liệu không có quyền
+   ② trả ['kb-a-001', 'kb-a-002'], ẩn 1 tài liệu không có quyền
    🤖 model muốn gọi create_ticket({'title': 'Hoàn tiền đơn 42', 'priority': 'P3', 'assignee': 'billing'})
    ④ hợp lệ
    ⑤ cần người duyệt: {'title': '...', 'priority': 'P3', 'assignee': 'billing'}
@@ -564,7 +564,7 @@ Kịch bản 2 (sau đó): python3 run_demo.py --scenario 2 --disable 4 --approv
 Kịch bản 3 (cuối): python3 run_eval.py --runs 1 --models deepseek-v4.1-flash → 5 test case tự động, xem model_ok vs system_ok.
 Câu hỏi sau live demo: "Checkpoint nào chặn kịch bản 2? Thay thế bằng prompt thay vì code — có đủ không?"
 NOTE: approve_mode="yes" trong eval = worst case (trainer tự động approve mọi ticket). Dùng để test system_ok riêng.`);
-box(s, 20, 85, 680, 35, 'cd scripts/nus-ai-training/support_agent_demo/   (Python 3.11+, pip install openai-agents)', { fill: C.NAVY, size: 13, align: 'START' });
+box(s, 20, 85, 680, 35, 'cd scripts/nus-ai-training/support_agent_demo/   # pip install -r requirements.txt (openai-agents==0.23.1)', { fill: C.NAVY, size: 13, align: 'START' });
 [['# Kịch bản 1 — ticket hợp lệ, trainer duyệt', 'python3 run_demo.py --scenario 1', C.GREEN],
  ['# Kịch bản 2 — tắt ④, P1→CEO tự động (--approve yes bỏ qua ⑤)', 'python3 run_demo.py --scenario 2 --disable 4 --approve yes', C.ORANGE],
  ['# Kịch bản 3 — eval 1 lần, 1 model', 'python3 run_eval.py --runs 1 --models deepseek-v4.1-flash', C.LIGHT],
@@ -580,7 +580,7 @@ Lắp ghép từ Sessions 5–9:
 - RAG: search_kb tool đọc KB, filter theo tenant_id (từ context, không từ prompt).
 - Tools: search_kb (read) + create_ticket (write, needs_approval).
 - State: PROCESSING → AWAITING_APPROVAL → COMPLETED | ESCALATED.
-- Harness: scope 2 tools, permission layer, approval gate, max 10 steps, escalate sau 3 lỗi.
+- Harness: scope 2 tools, permission layer, approval gate, max_turns=8 (MAX_TURNS), escalate sau 3 lỗi.
 - Trace: tắt SDK trace (non-OpenAI), tự log qua structured logging.
 Code: scripts/nus-ai-training/support_agent_demo/ — chạy được với NUS gateway ngay hôm nay.`);
 const arch = [['User\nhỏi', C.LIGHT], ['Harness\n5 lớp', C.NAVY], ['Runner\nSDK loop', C.LIGHT], ['Model\nNUS/OpenAI', C.LIGHT], ['search_kb\nRAG', C.LIGHT], ['create_ticket\n+ approval', C.ORANGE]];
