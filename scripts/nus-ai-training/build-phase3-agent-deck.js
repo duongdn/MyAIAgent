@@ -495,7 +495,16 @@ s = newSlide('4 loại thông tin agent cần quản lý', `Phân biệt 4 loạ
 2. Lịch sử hội thoại: danh sách message user/assistant từ đầu session. Tự động tăng dần, phải trim khi quá dài.
 3. Task state: tiến độ hiện tại — bước nào xong, ticket nào đã tạo, đang chờ approval gì. Lưu bền (DB/file), tồn tại qua nhiều run.
 4. Memory để dùng lại: thông tin user thường xuyên cần, lưu với user_id. VD: timezone, ngôn ngữ ưa dùng, ticket template.
-Rule: chỉ lưu dữ liệu có lý do + có thời hạn xóa. Memory không có TTL → data breach tiềm ẩn.`);
+Rule: chỉ lưu dữ liệu có lý do + có thời hạn xóa. Memory không có TTL → data breach tiềm ẩn.
+
+Hỏi: "Server restart — agent mất dữ liệu nào? Giữ dữ liệu nào?"
+Đáp: Mất: context lần gọi (chỉ tồn tại trong RAM), lịch sử hội thoại (nếu chỉ in-memory). Giữ: task state (nếu lưu DB), memory dùng lại (nếu lưu DB với user_id).
+→ Đây là lý do task state PHẢI lưu bền, không để in-memory.
+
+Hỏi: "Memory theo user_id — nếu lưu theo session_id thì sao?"
+Đáp: Mỗi session là tạm thời — hết session mất hết. Memory theo user_id mới tồn tại giữa các lần chat. Nhưng PHẢI cô lập theo tenant: user A tenant-X không được nhớ thông tin của user B tenant-Y.
+
+Lỗi thiết kế hay gặp: Lưu memory "global" không gắn user_id → mọi user đọc được memory của nhau (OWASP LLM06).`);
 [['Context\nlần gọi', 'giới hạn window\nkhông lưu bền', C.LIGHT], ['Lịch sử\nhội thoại', 'tăng dần\ncần trim', C.LIGHT], ['Task\nstate', 'tiến độ\nlưu bền DB', C.NAVY], ['Memory\ndùng lại', 'user prefs\nphân theo user', C.LIGHT]].forEach(([t, sub, f], i) =>
   box(s, 30 + i * 168, 110, 150, 110, `${t}\n${sub}`, { fill: f, size: 17, sub: 12 }));
 box(s, 30, 275, 680, 50, 'Chỉ lưu dữ liệu có lý do + có TTL (thời hạn xóa) · Memory theo user_id, không để lẫn tenant', { fill: C.ORANGE, size: 14 });
@@ -668,7 +677,15 @@ Prototype không có giá trị khi:
 ❌ Bỏ qua quyền và business rule ("tạm thời bỏ qua đi").
 ❌ Không có test case đại diện.
 ❌ Không có trace để debug khi sai.
-Câu hỏi cần hỏi khách trước khi hứa mở rộng: 3 failure mode nào cần kiểm chứng trước?`);
+Câu hỏi cần hỏi khách trước khi hứa mở rộng: 3 failure mode nào cần kiểm chứng trước?
+
+Hỏi: "Demo này đủ để đưa cho khách xem không?"
+Đáp: Demo này đủ để THẢO LUẬN — không đủ để deploy. Thiếu: auth/SSO thật, multi-user isolation test, load test, incident response plan, monitoring. Support agent demo trong khoá học là "prototype reviewable" — đủ để team kỹ thuật đánh giá approach, không đủ để production.
+
+Hỏi: "Cần thêm gì từ prototype này để làm production MVP?"
+Đáp khung cho người học tự điền: real auth (JWT/SSO), per-tenant DB, structured logging, approval UI (thay input() terminal), load test với concurrent users, rollback plan khi agent fail.
+
+Trainer note: Slide này hay nhất khi dùng như "cuộc trò chuyện thực tế" — đừng đọc list, hỏi người học: "Trong dự án bạn đang làm, cái nào trong 3 ❌ này đang xảy ra?"`);
 box(s, 30, 105, 320, 110, '✅ Prototype có giá trị:\nChứng minh end-to-end\nPhát hiện failure mode sớm\nTeam + khách thảo luận cùng', { fill: C.GREEN, size: 14, bold: false, align: 'START', valign: 'TOP' });
 box(s, 370, 105, 320, 110, '❌ Prototype vô nghĩa:\nBỏ qua quyền "tạm thời"\nKhông có test case\nKhông trace khi sai', { fill: C.ORANGE, size: 14, bold: false, align: 'START', valign: 'TOP' });
 box(s, 30, 255, 680, 55, 'Câu hỏi cho khách: 3 failure mode nào cần kiểm chứng trước khi mở rộng?', { fill: C.NAVY, size: 16 });
