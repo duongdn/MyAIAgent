@@ -415,7 +415,15 @@ Timeout: set deadline, trả {"error": "timeout", "idempotency_key": "..."}. N�
 API error: phân biệt 4xx (lỗi tham số, không retry) và 5xx (lỗi server, retry có giới hạn ví dụ 3 lần).
 Kết quả rỗng: search_kb trả [] → agent phải biết trả lời "Chưa có tài liệu liên quan" thay vì tự bịa.
 Gọi lặp: agent gọi cùng tool cùng tham số nhiều lần → application phát hiện và ngắt loop.
-Ví dụ nguy hiểm: create_ticket gọi 2 lần sau timeout → 2 ticket trùng. Idempotency key là tên+priority+user+timestamp hash.`);
+Ví dụ nguy hiểm: create_ticket gọi 2 lần sau timeout → 2 ticket trùng. Idempotency key là tên+priority+user+timestamp hash.
+
+Hỏi: "Nếu search_kb trả [] — model nên làm gì? Có tự bịa câu trả lời không?"
+Đáp: Không. Model nên trả lời "Không tìm thấy tài liệu liên quan, vui lòng liên hệ trực tiếp." Nếu không có chỉ dẫn này trong SYSTEM_PROMPT, model có thể hallucinate — bịa thông tin thanh toán sai gây hại thật.
+
+Hỏi: "Gọi lặp (agent gọi search_kb 5 lần cùng query) — ai phát hiện? Model hay Application?"
+Đáp: Application. MAX_TURNS=8 chặn tổng số lượt, nhưng application phải detect tool call loop riêng — so sánh (tool_name, args) với lần gọi trước. SDK không tự làm điều này.
+
+Lỗi hay gặp: Throw exception câm trong tool → model không biết lỗi gì, tiếp tục gọi loop vô hạn hoặc trả kết quả sai. Luôn trả {"error": "...", "retryable": true/false} để model có thể react đúng.`);
 [['Timeout', 'deadline + idempotency', C.YELLOW], ['4xx error', 'lỗi tham số\nkhông retry', C.ORANGE], ['5xx error', 'lỗi server\nretry ≤ 3 lần', C.LIGHT], ['Kết quả rỗng', 'trả thông báo\nkhông tự bịa', C.LIGHT], ['Gọi lặp', 'phát hiện\nngắt loop', C.ORANGE]].forEach(([t, sub, fill], i) =>
   box(s, 20 + i * 138, 110, 120, 100, `${t}\n${sub}`, { fill, size: 15, sub: 12 }));
 box(s, 20, 265, 680, 65, 'Mọi lỗi phải để model biết — trả {"error": "..."} rõ ràng, không throw exception câm', { fill: C.NAVY, size: 16 });
@@ -516,7 +524,13 @@ Ví dụ state machine support agent:
 - COMPLETED: ticket có ID xác nhận từ Jira.
 - ESCALATED: không đủ dữ liệu hoặc cần người xử lý.
 SDK hỗ trợ: Runner có thể resume từ state lưu sẵn. Application tự quyết định lưu ở đâu (DB, Redis) và schema.
-Nhấn mạnh: COMPLETED chỉ được set khi ticket_id trả về từ Jira — không phải khi model nói "xong rồi".`);
+Nhấn mạnh: COMPLETED chỉ được set khi ticket_id trả về từ Jira — không phải khi model nói "xong rồi".
+
+Hỏi: "Approval nhận được → agent resume bằng cách nào trong OpenAI Agents SDK?"
+Đáp: result.to_state() lưu state → state.approve(item) / state.reject(item) → Runner.run(agent, state, ...) resume từ đó. Code thật ở agent_openai_sdk.py dòng 95-103.
+
+Hỏi: "ESCALATED khác COMPLETED thế nào — user có nhận được gì không?"
+Đáp: COMPLETED = agent xử lý xong, ticket có ID thật. ESCALATED = agent không đủ dữ liệu hoặc gặp lỗi không phục hồi → transfer sang người. User nhận thông báo "sẽ có agent hỗ trợ bạn", KHÔNG để user chờ vô thời hạn.`);
 const states = [['PROCESSING', 'tìm KB\nchọn tool', C.LIGHT], ['AWAITING\nAPPROVAL', 'chờ người\nduyệt', C.YELLOW], ['COMPLETED', 'ticket_id\ntừ Jira', C.GREEN], ['ESCALATED', 'chuyển\nngười', C.ORANGE]];
 states.forEach(([t, sub, f], i) => { box(s, 30 + i * 170, 110, 145, 90, `${t}\n${sub}`, { fill: f, size: 16, sub: 12 }); if (i) arrow(s, 30 + i * 170 - 25, 155, 30 + i * 170, 155); });
 box(s, 30, 260, 680, 50, 'COMPLETED = ticket_id trả về từ Jira · KHÔNG phải "model nói xong rồi"', { fill: C.NAVY, size: 15 });
