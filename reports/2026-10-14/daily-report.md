@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-14 (Wednesday)
 
-**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host)
+**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 (+07:00) (recheck)
 **Window:** 2026-10-13 08:33 → 2026-10-14 05:12 (+07:00). Task-log date: Tue 2026-10-13.
 **Leave plan:** PhucVT 10-12 full day (pending). ThinhT 10-12 (Resource Arrangement, charged to Kunal). ThamTTH 14–16/10. TuanNT left early 10-13 (flu, will make up the hours).
 
@@ -10,10 +10,10 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack GGS #maintenance | **Bailey live console down, no reply.** Joey 10-13 23:17: "live console has message error and is not working" ([link](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1791908252619239)). Production issue reported overnight. Bailey ○ |
-| 2 | Fountain Trello | **Kunal asked for a live-console action, no reply.** Kunal (via his AI) 10-13 21:34 asked @rick570 to run a console line on live today to turn on engraving ($30) for 69 gifts ([card](https://trello.com/c/8JfTlU40)). Fountain ○ |
-| 3 | Slack RDC | **dmetiner sent new direct asks, no reply yet.** 20:17: add him as collaborator on the server-code GitHub repo, add MPX/SOL/SAĞ/PILOT/RDS/RF metrics to the scanner-plugin CSV logs, and share the current logged fields. 21:00: deploy the newest preset-buttons to Power Group devices and use the Istanbul device for the new task. Posted after hours. Franc ○ |
-| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder |
+| 1 | Slack GGS #maintenance | **Bailey live console down, no reply.** Joey 10-13 23:17: "live console has message error and is not working" ([link](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1791908252619239)). Production issue reported overnight. 08:40 recheck: still no reply. Bailey ○ |
+| 2 | Fountain Trello | **Kunal asked for a live-console action, no reply.** Kunal (via his AI) 10-13 21:34 asked @rick570 to run a console line on live today to turn on engraving ($30) for 69 gifts ([card](https://trello.com/c/8JfTlU40)). 08:40 recheck: still no reply. **New 08:14–08:15:** Kunal on ["Start here: review order for Claude's PRs"](https://trello.com/c/TdvfIo08) proposed go-live tomorrow night 10pm–5am EST (or tonight) and is waiting on @rick570 to confirm. Fountain ○ |
+| 3 | Slack RDC | **dmetiner sent new direct asks, no reply yet.** 20:17: add him as collaborator on the server-code GitHub repo, add MPX/SOL/SAĞ/PILOT/RDS/RF metrics to the scanner-plugin CSV logs, and share the current logged fields. 21:00: deploy the newest preset-buttons to Power Group devices and use the Istanbul device for the new task. Posted after hours. Another dmetiner message 02:12 ("Tuner Access Log"). 08:40 recheck: no reply from us yet. Franc ○ |
+| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder. 08:40 recheck: TuanNT rows still not visible in WS. Still before 09:30, so still provisional |
 | 5 | Matrix | namtv 21:13 asked about an unknown contact on Brad's site (Auction Warehouse): Zhenke Xu (zhenkexu763@gmail.com). That site has an open-registration/webshell history. No reply yet |
 | 6 | Email vuongtrancr | Swish New Relic **"Signal lost for 10 minutes on 'Low Application Throughput'"** (critical): one issue closed 08:41, another active 08:51 |
 | 7 | Performance | MPFC apdex 0.44 (poor, chronic). `continue`-switch E_WARNING 845x, WP_Error::get_method() 9x, mysqli socket errors 7x, SQLi-probe search URLs about 21s |
@@ -159,7 +159,7 @@ No new unanswered reviewer comments. Trello: Maddy ✓ complete.
 
 **Trello board (Web Development):** ⚠️ Kunal comment 10-13 21:34 unanswered (Alert #2, [card](https://trello.com/c/8JfTlU40)). Lists: To-Do 16, Bugs 27, Doing 4, QC Internal 5, QA Backlog 6, In QA 1. 72 non-done cards idle >5d. Doing >14d: "Fountain - Performance of website", "Fountain Pro - CSV template download link". Team (Matrix) worries about review/test capacity for the 10-16 release given the large PR churn from Kunal.
 
-Trello: ⚠️ Fountain skipped (Alert #2).
+Trello: ⚠️ Fountain skipped (Alert #2 + Kunal go-live question 08:14, still open at 08:40).
 
 ---
 
@@ -266,12 +266,12 @@ Paused per user. Not run, Trello auto-completed.
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | Not readable from this cron host |
-| Aysar | — | — | Not readable from this cron host |
-| Tokenlite | — | — | Not readable from this cron host |
+| Rory | 0 | 0 | No time logged in the workroom on 10-13 |
+| Aysar | — | — | Session not available for this workroom. This is not a memo alert |
+| Tokenlite | 0 | 0 | No time logged on 10-13 |
 
-This mpfc host has no carrick Chrome Profile 1 (0 cookies extracted), so memo status was not checked. This is not a memo alert. Manual check from local: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-13`.
-Neural Contract (38901192): messages not readable from this host for the same reason. Per the standing rule, silence or a session issue never blocks the item → Neural ✓. Local check: `node scripts/upwork-neural-check.js`.
+~~Not readable from this cron host~~ → re-run locally 08:42: no invalid memos.
+Neural Contract (38901192): the local run also landed on a login redirect (carrick Chrome Profile 1 Upwork session is stale; it needs a real browser visit to upwork.com). Per the standing rule, silence or a session issue never blocks the item → Neural ✓.
 
 ---
 
@@ -279,4 +279,5 @@ Neural Contract (38901192): messages not readable from this host for the same re
 - TuanNT 10-12/10-13 hours: real gap or logging lag (sick 10-13)? Re-check WS after 09:30 before any reminder.
 - Who should review the OhCleo Pending charged hours (no reviewer configured in `/pinfo`)?
 - FirstProject production Rollbar #1128/#1129: which client project is this?
-- Upwork memo + Neural need a local-machine run (cron host has no carrick browser profile).
+- ~~Upwork memo + Neural need a local-machine run~~ The memo check ran locally: clean. Neural/Aysar need carrick to open upwork.com once in their real Chrome to refresh the session.
+- Who replies to Kunal's go-live timing question (tonight vs tomorrow 10pm–5am EST)?
