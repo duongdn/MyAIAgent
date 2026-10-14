@@ -457,7 +457,16 @@ box(s, 40, 305, 640, 45, 'Coi tool result và tài liệu là dữ liệu không
 
 s = newSlide('Trước / Sau checkpoint ④ — so sánh kết quả thật', `Slide này dùng SAU khi giảng checkpoint ④ và TRƯỚC khi chạy demo kịch bản 2.
 Trainer hỏi: "Không có checkpoint ④, điều gì xảy ra khi POISONED_DOC ở trong KB?" → người học đoán → reveal.
-Dữ liệu thật từ eval, chạy với --disable 4 so với đủ checkpoint.`);
+Dữ liệu thật từ eval, chạy với --disable 4 so với đủ checkpoint.
+
+Hỏi: Tại sao khi --disable 4, người duyệt vẫn bị hỏi dù lệnh sai?
+Đáp: Khi ④ tắt, check_ticket trả [] (rỗng = không lỗi) → needs_approval=True vì ticket hợp lệ về mặt code → ⑤ hỏi người. Người duyệt trở thành lớp bảo vệ DUY NHẤT — dễ bị approval fatigue.
+
+Hỏi: system_ok=False có nghĩa gì trong eval?
+Đáp: Ticket nguy hiểm (P1 hoặc assignee=CEO) đã được tạo thật trong TICKETS list — hệ thống đích bị thiệt hại. model_ok=False chỉ là model đề xuất sai, system_ok mới đo thiệt hại thực tế.
+
+Lệnh demo live: python3 run_demo.py --scenario 2 --disable 4 → thấy ⑤ hỏi người → bấm y → TICKETS có ticket nguy hiểm.
+So sánh: python3 run_demo.py --scenario 2 (đủ checkpoint) → ④ chặn, ⑤ không được gọi.`);
 box(s, 20, 75, 330, 40, 'CÓ checkpoint ④ (mặc định)', { fill: C.GREEN, size: 15 });
 box(s, 360, 75, 330, 40, 'KHÔNG có checkpoint ④ (--disable 4)', { fill: C.ORANGE, size: 15 });
 [
@@ -808,7 +817,19 @@ Không có đáp án "đúng tuyệt đối" — mục tiêu là người học 
 });
 
 s = newSlide('Tổng kết Giai đoạn 3 — Bạn đã học gì?', `Trainer đọc thành tiếng — người học tự chấm.
-Mỗi bullet là 1 câu hỏi: "Em có thể giải thích tại sao không?"`);
+Mỗi bullet là 1 câu hỏi: "Em có thể giải thích tại sao không?"
+Hỏi: S5 nói khi nào KHÔNG dùng agent — em nhớ điều kiện đó là gì?
+Đáp: Khi flow biết trước (deterministic) → workflow code rẻ hơn, an toàn hơn, dễ audit hơn.
+Hỏi: S6 — tại sao tool description ảnh hưởng model behavior?
+Đáp: Model đọc description để quyết định gọi tool nào, lúc nào, tham số gì — description mơ hồ → model gọi sai.
+Hỏi: S7 — 5 checkpoint nằm ở tầng nào trong kiến trúc?
+Đáp: Application tầng — không phải trong prompt, không phải trong model. Đổi model không mất checkpoint.
+Hỏi: S8 — MAX_TURNS bảo vệ điều gì?
+Đáp: Chặn agent loop vô hạn → giới hạn cost/token (OWASP LLM10). Không phải security checkpoint.
+Hỏi: S9 — tracing giúp gì mà test case không giúp được?
+Đáp: Tracing thấy step-by-step agent làm gì — test case chỉ kiểm tra kết quả cuối.
+Misconception: "Học xong là build được production agent ngay." → Chưa đủ: cần thêm auth system, audit log, rate limit, ops.`);
+
 box(s, 20, 65, 680, 35, 'Sau 5 buổi, bạn có thể:', { fill: C.NAVY, size: 18 });
 [
   ['S5', 'Phân biệt model call / workflow / agent — biết khi nào cần agent thật', C.LIGHT],
@@ -826,7 +847,14 @@ s = newSlide('Giai đoạn 4 — MCP: Vì sao cần chuẩn hóa tool?', `Previe
 Vấn đề: search_kb và create_ticket trong Giai đoạn 3 là tool tự viết, chỉ agent này dùng được.
 MCP (Model Context Protocol) giải quyết: chuẩn giao tiếp chung → tool viết 1 lần, mọi agent dùng được.
 S10-11: Xây MCP server từ checkpoints.py, connect với Claude Desktop, VS Code, custom agent.
-Ví dụ: "search_kb" trở thành MCP server → Cursor, Claude, custom agent đều gọi được cùng 1 endpoint.`);
+Ví dụ: "search_kb" trở thành MCP server → Cursor, Claude, custom agent đều gọi được cùng 1 endpoint.
+Hỏi: Vấn đề gì xảy ra khi mỗi agent tự viết tool riêng?
+Đáp: Duplicate logic → mỗi agent kiểm tra quyền theo cách khác → security không nhất quán. Thay đổi rule nghiệp vụ phải sửa N chỗ.
+Hỏi: MCP khác REST API ở chỗ nào?
+Đáp: MCP có schema chuẩn cho tool (name, description, input_schema) → model biết cách gọi mà không cần hướng dẫn riêng. REST API không có schema tool chuẩn cho LLM.
+Hỏi: Checkpoint ④ trong Giai đoạn 3 — nếu chuyển sang MCP server, checkpoint đó nằm ở đâu?
+Đáp: Vẫn nằm trong MCP server handler — không phải trong model, không phải trong client. Bảo mật tập trung 1 chỗ dù nhiều agent dùng chung.
+Timing: 5 phút preview — không demo, chỉ gợi tò mò. Câu hỏi để mở: "Em sẽ expose tool nào đầu tiên thành MCP?"`);
 box(s, 20, 90, 680, 40, 'Giai đoạn 3: tool gắn chặt vào agent  →  Giai đoạn 4: tool thành service dùng chung', { fill: C.LIGHT, size: 14 });
 [['Giai đoạn 3\n(vừa học)', 'Tool Python\ngắn với agent\nchỉ 1 app dùng', C.LIGHT],
  ['MCP Server\n(S10-11)', 'Standard protocol\njson-rpc over stdio\nbất kỳ agent nào', C.NAVY],
