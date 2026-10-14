@@ -572,6 +572,21 @@ Bước tiếp theo: Giai đoạn 4 — MCP server để chuẩn hóa tool inter
   box(s, 40, 90 + i * 65, 460, 55, t, { fill: C.LIGHT, size: 14, align: 'START' }));
 box(s, 520, 90, 170, 200, 'Tự thực hành:\nVẽ architecture\nagent:\n\n- Phần SDK\n- Phần app\n- 3 test case\n  quan trọng', { fill: C.GREEN, size: 12, bold: false });
 
+s = newSlide('Tổng kết Giai đoạn 3 — Bạn đã học gì?', `Trainer đọc thành tiếng — người học tự chấm.
+Mỗi bullet là 1 câu hỏi: "Em có thể giải thích tại sao không?"`);
+box(s, 20, 65, 680, 35, 'Sau 5 buổi, bạn có thể:', { fill: C.NAVY, size: 18 });
+[
+  ['S5', 'Phân biệt model call / workflow / agent — biết khi nào cần agent thật', C.LIGHT],
+  ['S6', 'Thiết kế tool contract rõ ràng — tool description ảnh hưởng model behavior', C.LIGHT],
+  ['S7', 'Xây 5 checkpoint kiểm soát quyền bằng CODE, không phụ thuộc prompt', C.LIGHT],
+  ['S8', 'Quản lý task state + 5 điều kiện dừng — agent không loop vô hạn', C.LIGHT],
+  ['S9', 'Lắp harness 5 lớp, trace debug, và đo chất lượng bằng test case thật', C.GREEN],
+].forEach(([s5, t, f], i) => {
+  box(s, 20, 110 + i * 45, 50, 38, s5, { fill: C.NAVY, size: 14 });
+  box(s, 76, 110 + i * 45, 624, 38, t, { fill: f, size: 13, bold: false, align: 'START' });
+});
+box(s, 20, 345, 680, 45, 'Tiếp theo — Giai đoạn 4: MCP server · chuẩn hóa tool interface cho mọi agent', { fill: C.ORANGE, size: 14 });
+
 // ═══════════════════════════════════════════════════════════
 // PUSH TO GOOGLE SLIDES
 // ═══════════════════════════════════════════════════════════
