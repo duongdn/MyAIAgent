@@ -111,10 +111,14 @@ box(s, 30, 305, 680, 45, 'support_agent_demo/ — chạy được ngay hôm nay 
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 5 — 45 phút.
 Câu hỏi trọng tâm: Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?
-Mở đầu: hỏi người học — bao giờ dùng if/else code, bao giờ để AI tự chọn?`);
-box(s, 60, 100, 600, 60, 'Session 5', { fill: C.NAVY, size: 28 });
-label(s, 60, 170, 600, 40, 'Agent khác workflow ở đâu\nvà OpenAI Agents SDK hỗ trợ gì', { size: 20, bold: false });
-label(s, 60, 270, 600, 30, '45 phút', { size: 14, bold: false, color: C.GREY });
+Mở đầu: hỏi người học — bao giờ dùng if/else code, bao giờ để AI tự chọn?
+Hỏi ngay đầu buổi: "Tưởng tượng bạn cần support bot đọc KB và tạo ticket. Bạn sẽ code bằng if/else hay để AI tự quyết?"
+Đáp mong muốn: không ai trả lời đúng 100% → đó là lý do cần 3 mức điều phối.`);
+box(s, 60, 70, 600, 65, 'Session 5 · Giai đoạn 3 (1/5)', { fill: C.NAVY, size: 26 });
+label(s, 60, 145, 600, 45, 'Agent khác workflow ở đâu\nvà OpenAI Agents SDK hỗ trợ gì', { size: 20, bold: false });
+box(s, 60, 200, 120, 36, '45 phút', { fill: C.ORANGE, size: 16 });
+[['S5', C.ORANGE], ['S6', C.LIGHT], ['S7', C.LIGHT], ['S8', C.LIGHT], ['S9', C.LIGHT]].forEach(([t, f], i) =>
+  box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
 
 s = newSlide('Session 5 — Agenda', `5 phút mở đầu: câu hỏi trọng tâm + 3 mức điều phối.
 30 phút nội dung: so sánh 3 mức → walkthrough support agent tối thiểu → SDK hỗ trợ gì vs application tự làm.
@@ -217,10 +221,13 @@ box(s, 20, 305, 680, 45, 'AGENT_ALLOWED_PRIORITIES = {P3, P4} — agent KHÔNG �
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 6 — 60 phút.
 Câu hỏi trọng tâm: Agent quyết định, gọi tool, nhận kết quả và tiếp tục như thế nào?
-Mở đầu 5 phút: ôn lại sơ đồ session 5 — hôm nay đi sâu vào phần loop và tool contracts.`);
-box(s, 60, 100, 600, 60, 'Session 6', { fill: C.NAVY, size: 28 });
-label(s, 60, 170, 600, 40, 'Agent loop và thiết kế tool contracts', { size: 20, bold: false });
-label(s, 60, 270, 600, 30, '60 phút', { size: 14, bold: false, color: C.GREY });
+Mở đầu 5 phút: ôn lại sơ đồ session 5 — hôm nay đi sâu vào phần loop và tool contracts.
+Hỏi: "Theo bạn, agent biết gọi tool nào? Biết khi nào dừng?" — để mọi người tự đoán trước khi xem code.`);
+box(s, 60, 70, 600, 65, 'Session 6 · Giai đoạn 3 (2/5)', { fill: C.NAVY, size: 26 });
+label(s, 60, 145, 600, 40, 'Agent loop và thiết kế tool contracts', { size: 20, bold: false });
+box(s, 60, 200, 120, 36, '60 phút', { fill: C.ORANGE, size: 16 });
+[['S5', C.MUTED], ['S6', C.ORANGE], ['S7', C.LIGHT], ['S8', C.LIGHT], ['S9', C.LIGHT]].forEach(([t, f], i) =>
+  box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
 
 s = newSlide('Agent loop — từng bước', `Đây là vòng lặp trung tâm của mọi agent.
 Bước 1: User gửi goal ("Tìm chính sách hoàn tiền và tạo ticket cho khách #A12").
@@ -313,10 +320,13 @@ box(s, 20, 315, 680, 40, 'disabled={"4"} → bỏ ④ → model tạo ticket P1,
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 7 — 60 phút.
 Câu hỏi trọng tâm: Application cần chặn hoặc xử lý gì trước và sau một tool call?
-Mở đầu: nhắc lại vị trí "Application thực thi" trong sơ đồ session 5 — hôm nay mổ xẻ chỗ đó.`);
-box(s, 60, 100, 600, 60, 'Session 7', { fill: C.NAVY, size: 28 });
-label(s, 60, 170, 600, 40, 'Tool execution an toàn, lỗi và approval', { size: 20, bold: false });
-label(s, 60, 270, 600, 30, '60 phút', { size: 14, bold: false, color: C.GREY });
+Mở đầu: nhắc lại vị trí "Application thực thi" trong sơ đồ session 5 — hôm nay mổ xẻ chỗ đó.
+Hỏi: "Nếu model gọi create_ticket({title:'URGENT', priority:'P1', assignee:'ceo@...'}) — code bạn có chạy không?" → mọi người phải trả lời trước khi xem checkpoint ④.`);
+box(s, 60, 70, 600, 65, 'Session 7 · Giai đoạn 3 (3/5)', { fill: C.NAVY, size: 26 });
+label(s, 60, 145, 600, 40, 'Tool execution an toàn, lỗi và approval', { size: 20, bold: false });
+box(s, 60, 200, 120, 36, '60 phút', { fill: C.ORANGE, size: 16 });
+[['S5', C.MUTED], ['S6', C.MUTED], ['S7', C.ORANGE], ['S8', C.LIGHT], ['S9', C.LIGHT]].forEach(([t, f], i) =>
+  box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
 
 s = newSlide('Trước khi thực thi tool — 3 lớp kiểm tra', `3 lớp phải kiểm tra TRƯỚC khi thực thi bất kỳ tool nào:
 Lớp 1 — Validate input: tham số đúng kiểu không, có đủ trường bắt buộc không, giá trị nằm trong enum không. Trả lỗi rõ ràng để model có thể thử lại với tham số đúng.
@@ -377,10 +387,13 @@ box(s, 520, 90, 170, 200, 'Tự thực hành:\nBảng xử lý\n6 trường hợ
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 8 — 60 phút.
 Câu hỏi trọng tâm: Agent giữ gì qua các bước và biết khi nào phải dừng?
-Mở đầu: hỏi người học — thông tin gì cần qua nhiều bước? state lưu ở đâu?`);
-box(s, 60, 100, 600, 60, 'Session 8', { fill: C.NAVY, size: 28 });
-label(s, 60, 170, 600, 40, 'Context, state, memory và điều kiện dừng', { size: 20, bold: false });
-label(s, 60, 270, 600, 30, '60 phút', { size: 14, bold: false, color: C.GREY });
+Mở đầu: hỏi người học — thông tin gì cần qua nhiều bước? state lưu ở đâu?
+Hỏi: "Nếu server restart giữa chừng — agent mất bao nhiêu tiến độ?" → dẫn vào bài task state.`);
+box(s, 60, 70, 600, 65, 'Session 8 · Giai đoạn 3 (4/5)', { fill: C.NAVY, size: 26 });
+label(s, 60, 145, 600, 40, 'Context, state, memory và điều kiện dừng', { size: 20, bold: false });
+box(s, 60, 200, 120, 36, '60 phút', { fill: C.ORANGE, size: 16 });
+[['S5', C.MUTED], ['S6', C.MUTED], ['S7', C.MUTED], ['S8', C.ORANGE], ['S9', C.LIGHT]].forEach(([t, f], i) =>
+  box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
 
 s = newSlide('4 loại thông tin agent cần quản lý', `Phân biệt 4 loại — dễ nhầm lẫn dẫn đến thiết kế sai:
 1. Context lần gọi model: prompt system + lịch sử + tool list truyền vào model mỗi lần. Bị giới hạn bởi context window. Không lưu bền.
@@ -435,10 +448,13 @@ box(s, 520, 90, 170, 200, 'Tự thực hành:\nState machine:\n- Processing\n- A
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 9 — 60 phút. Session cuối Giai đoạn 3.
 Câu hỏi trọng tâm: Cần những kiểm soát gì để một agent demo trở thành prototype có thể review?
-Mở đầu: nhắc lại journey — Session 5 (mức điều phối) → 6 (tool contracts) → 7 (safe execution) → 8 (state/stop) → hôm nay lắp ghép lại.`);
-box(s, 60, 100, 600, 60, 'Session 9', { fill: C.NAVY, size: 28 });
-label(s, 60, 170, 600, 40, 'Agent harness, tracing và support agent hoàn chỉnh', { size: 20, bold: false });
-label(s, 60, 270, 600, 30, '60 phút — Kết thúc Giai đoạn 3', { size: 14, bold: false, color: C.GREY });
+Mở đầu: nhắc lại journey — Session 5 (mức điều phối) → 6 (tool contracts) → 7 (safe execution) → 8 (state/stop) → hôm nay lắp ghép lại.
+Hỏi trước khi bắt đầu: "Bạn sẽ demo agent cho khách vào tuần sau — cần kiểm tra những gì trước?" → ghi answers lên bảng, so sánh với 5 lớp harness cuối buổi.`);
+box(s, 60, 70, 600, 65, 'Session 9 · Giai đoạn 3 (5/5)', { fill: C.NAVY, size: 26 });
+label(s, 60, 145, 600, 40, 'Agent harness, tracing và support agent hoàn chỉnh', { size: 20, bold: false });
+box(s, 60, 200, 120, 36, '60 phút', { fill: C.ORANGE, size: 16 });
+[['S5', C.MUTED], ['S6', C.MUTED], ['S7', C.MUTED], ['S8', C.MUTED], ['S9', C.ORANGE]].forEach(([t, f], i) =>
+  box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
 
 s = newSlide('Agent harness — 5 lớp kiểm soát', `Harness là framework bao quanh agent loop. Không có harness → agent demo, không phải prototype.
 5 lớp:
