@@ -1,6 +1,6 @@
 # Báo cáo: MPFC nâng cấp server — khảo sát & yêu cầu
 
-Ngày: 2026-10-14 | Plan: `plans/261014-1424-mpfc-server-upgrade-ubuntu24-php8-wp/plan.md`
+Ngày: 2026-10-14 | Trạng thái: NHÁP — chờ Saul duyệt
 Nguồn: SSH read-only vào `mpfc.mpfc.live` (không thay đổi gì). Chưa gửi gì cho Saul.
 
 ## Bối cảnh
@@ -28,6 +28,16 @@ Plugin cũ, khả năng lỗi trên PHP 8.3:
 - go_pricing 2.4.2, mega-addons-for-visual-composer 3.1
 - Code custom: theme pfc7, mpfc-firebase-bridge, video-library-manager, collections
 → Phần lớn giờ công nằm ở đây.
+
+## Các phase
+1. Chuẩn bị: snapshot droplet cũ; kiểm kê (crontab, systemd unit, apache conf, php.ini, NR, monit, /var/www/keys, utils, SMTP, ufw, DNS/Cloudflare)
+2. Droplet mới Ubuntu 24.04: Apache, PHP 8.3-fpm (+ extension tương đương), MySQL 8.0, Redis, certbot, NR agent, monit
+3. Copy file (rsync) + dump DB; trỏ hostname tạm / file hosts; TẮT mail gửi ra, cron, webhook MemberMouse/Stripe trên box mới
+4. Tương thích PHP 8.3: quét PHPCompatibility theme+plugin; update plugin; sửa code custom (pfc7, essential-grid custom, mpfc-firebase-bridge, video-library-manager, collections)
+5. WP core → mới nhất; upgrade DB; QA đầy đủ (trang, Elementor, video player, form, login member, truy cập khóa học, checkout Stripe test mode, admin)
+6. Chuyển app khác (MyDailyAgent, quantification, MyBussinessAiAgent) — hoặc quyết định để lại
+7. Cutover (<30 phút): maintenance mode → dump/import DB cuối + rsync uploads → đổi DNS (Cloudflare, TTL thấp) hoặc gán lại Reserved IP → cert → smoke test → bật lại cron/webhook
+8. Rollback: giữ droplet cũ chạy nguyên trạng 1–2 tuần; trỏ DNS ngược lại nếu lỗi
 
 ## Cần anh cung cấp
 1. Saul duyệt + duyệt estimate (gồm phần sửa plugin)
