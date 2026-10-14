@@ -88,6 +88,25 @@ label(s, 60, 180, 600, 40, 'Session 5–9  |  OpenAI Agents SDK  |  Support Agen
 label(s, 60, 295, 600, 30, 'NUS AI Training', { size: 14, bold: false, color: C.GREY });
 
 // ═══════════════════════════════════════════════════════════
+// JOURNEY OVERVIEW — 5 sessions build on each other
+// ═══════════════════════════════════════════════════════════
+s = newSlide('Giai đoạn 3 — 5 buổi, 1 agent mở rộng dần', `Trainer note: nhấn mạnh đây không phải 5 buổi độc lập — đây là 1 agent được xây dần từng lớp.
+S5: "Agent là gì và SDK hỗ trợ gì?" — vẽ sơ đồ minimal, biết ranh giới SDK/application.
+S6: "Loop và tool contracts" — agent loop chi tiết, 2 tool search_kb + create_ticket.
+S7: "Safe execution" — 5 checkpoint kiểm tra, lỗi, approval, prompt injection.
+S8: "State và stop" — task state machine, 5 điều kiện dừng, giới hạn bước.
+S9: "Harness + trace + full design" — lắp ghép lại, trace thật, thiết kế reviewable.
+
+Case study xuyên suốt: support agent đọc KB, trả lời có nguồn, tạo ticket sau khi được phép.
+Code chạy được: scripts/nus-ai-training/support_agent_demo/ (OpenAI Agents SDK + NUS LLM gateway).
+Từ S5 → S9: demo ngày càng "production-like" hơn — mỗi buổi thêm 1 lớp kiểm soát.`);
+[['S5', 'Agent vs\nWorkflow\nSDK là gì'], ['S6', 'Agent loop\nTool\ncontracts'], ['S7', '5 checkpoint\nLỗi &\nApproval'], ['S8', 'State\nStop\ncondition'], ['S9', 'Harness\nTrace\nFull design']].forEach(([num, t], i) => {
+  box(s, 30 + i * 138, 120, 120, 130, `${num}\n${t}`, { fill: i === 0 ? C.ORANGE : C.LIGHT, size: 18, sub: 13 });
+  if (i) arrow(s, 30 + i * 138 - 18, 185, 30 + i * 138, 185);
+});
+box(s, 30, 305, 680, 45, 'support_agent_demo/ — chạy được ngay hôm nay với NUS LLM gateway', { fill: C.GREEN, size: 14 });
+
+// ═══════════════════════════════════════════════════════════
 // SESSION 5: Agent khác workflow ở đâu và OpenAI Agents SDK hỗ trợ gì (45 phút)
 // ═══════════════════════════════════════════════════════════
 s = newSlide(null, `Session 5 — 45 phút.
@@ -133,8 +152,18 @@ box(s, 310, 270, 420, 50, 'Tool loop → kết quả → model tiếp hoặc d�
 s = newSlide('SDK hỗ trợ gì — Application tự làm gì?', `Phân biệt rõ ranh giới: người học hay nhầm "SDK lo hết".
 SDK cung cấp: agent loop (gọi model → nhận tool call → thực thi → lặp), trace, guardrails cơ bản, runner async.
 Application tự làm: xác thực user, kiểm tra quyền (user/tenant), business rule, state lưu bền, approval gate, retry policy, chuyển người khi fail.
-Ví dụ code: file checkpoints.py tách biệt hoàn toàn — hàm kiểm tra quyền được truyền vào SDK qua needs_approval, SDK không biết nội dung business rule.
-Code demo: RunContextWrapper mang session info — model không thấy, không sửa được.`);
+
+CODE THẬT từ demo (agent_openai_sdk.py dòng 72–84):
+  @function_tool(description_override=cp.SEARCH_KB_DESC)
+  def search_kb(ctx: RunContextWrapper[cp.Session], query: str, ...) -> str:
+      return cp.search_kb(ctx.context, query, ...)   # ctx.context = Session, model không thấy
+
+  @function_tool(..., needs_approval=ticket_needs_approval)
+  def create_ticket(ctx: RunContextWrapper[cp.Session], ...) -> str:
+      return cp.create_ticket(ctx.context, ...)       # business rule nằm trong checkpoints.py
+
+Nhấn mạnh: checkpoints.py hoàn toàn KHÔNG import gì từ SDK. Đổi SDK → giữ nguyên file này.
+Câu hỏi: nếu công ty đổi từ OpenAI sang Claude SDK, cần sửa file nào? (chỉ agent_openai_sdk.py, KHÔNG sửa checkpoints.py)`);
 [['SDK cung cấp', C.LIGHT, ['Agent loop', 'Trace', 'Guardrails cơ bản', 'Runner async']],
  ['Application tự làm', C.NAVY, ['Xác thực user', 'Kiểm tra quyền', 'Business rule', 'State lưu bền', 'Approval gate']]].forEach(([title, fill, items], col) => {
   box(s, 40 + col * 350, 100, 280, 50, title, { fill, size: 18 });
@@ -214,6 +243,34 @@ Bài tự thực hành: định nghĩa contract cho 2 tool (read + write), vẽ 
  '3. Quyết định có gọi tool thật hay không — model hay application?'].forEach((t, i) =>
   box(s, 40, 90 + i * 65, 460, 55, t, { fill: C.LIGHT, size: 14, align: 'START' }));
 box(s, 520, 90, 170, 200, 'Tự thực hành:\nHai tool\nread + write\n\nContract đầy đủ\n6 trường\n\nSequence diagram', { fill: C.GREEN, size: 13, bold: false });
+
+// ═══════════════════════════════════════════════════════════
+// CHECKPOINT MAP (bridge S5→S7, shows checkpoints.py pattern)
+// ═══════════════════════════════════════════════════════════
+s = newSlide('5 điểm kiểm tra — code thật từ demo', `File checkpoints.py tách biệt hoàn toàn khỏi SDK. Đây là trái tim của demo.
+5 checkpoints đi theo thứ tự cố định trong mọi request:
+
+① new_session(): danh tính từ session server (cookie/JWT đã verify) — model KHÔNG thấy, không sửa được.
+   Code: Session(name, tenant, role) từ USERS dict. RunContextWrapper mang Session này suốt vòng lặp agent.
+
+② search_kb() filter ngay khi query: docs = [d for d in me.kb if d["tenant"] == me.tenant and me.role in d["allowed_roles"]]
+   → Không lấy hết rồi nhờ model "đừng nói ra". Filter ở data access layer.
+
+③ Đánh dấu kết quả là dữ liệu không tin: bọc trong <untrusted_search_results>. Phát hiện dấu hiệu injection → log, không chặn được hoàn toàn.
+
+④ validate_ticket() chạy TRƯỚC khi hỏi người: role có quyền không? priority trong whitelist không? assignee hợp lệ không?
+   Rule trong CODE, không trong prompt.
+
+⑤ ask_human(): chỉ hỏi khi ④ đã pass. Hiện CHÍNH XÁC tham số — không tóm tắt mơ hồ.
+
+Câu hỏi: vì sao tắt 1 checkpoint (disabled={"4"}) thì model tạo được ticket P1 ngay?
+Code: Session.disabled = tập checkpoint bị tắt → demo hậu quả thiếu kiểm soát.`);
+[['①\nSession\nserver', '② Filter\nquery\ntheo quyền', '③ Đánh dấu\nuntrusted\nresults', '④ Validate\nrule\ntrước', '⑤ Human\napproval\ncuối']].flat().forEach((t, i) => {
+  box(s, 20 + i * 138, 110, 120, 90, t, { fill: i === 3 ? C.ORANGE : i === 4 ? C.NAVY : C.LIGHT, size: 14 });
+  if (i) arrow(s, 20 + i * 138 - 18, 155, 20 + i * 138, 155);
+});
+box(s, 20, 260, 680, 45, 'checkpoints.py không import SDK — đổi SDK giữ nguyên file này', { fill: C.GREEN, size: 14 });
+box(s, 20, 315, 680, 40, 'disabled={"4"} → bỏ ④ → model tạo ticket P1, assign CEO — demo hậu quả', { fill: C.ORANGE, size: 13, bold: false });
 
 // ═══════════════════════════════════════════════════════════
 // SESSION 7: Tool execution an toàn, lỗi và approval (60 phút)
@@ -353,12 +410,21 @@ Tất cả 5 lớp phải có trước khi demo cho khách. Thiếu 1 → nguy c
 box(s, 20, 255, 680, 65, 'Demo cho khách = phải có cả 5 lớp\nThiếu 1 lớp → side effect không kiểm soát', { fill: C.ORANGE, size: 16 });
 
 s = newSlide('Trace — xem agent thực sự làm gì', `Trace là X-quang của agent. Không có trace → không thể debug khi sai.
-OpenAI Agents SDK tích hợp trace (nếu dùng OpenAI provider). Với provider khác (NUS gateway) → set_tracing_disabled(True) và tự log.
-Trace ghi lại: mỗi lần gọi model (prompt + response), mỗi tool call (tham số + kết quả + thời gian), guardrail kết quả, lỗi.
-Phân biệt 2 loại quan sát:
-- Kỹ thuật: model chọn tool gì, kết quả gì, bao lâu. Dùng trace.
-- User task: câu trả lời đúng không, user hài lòng không. Dùng test case + feedback loop.
-Trace giúp tìm nguyên nhân nhưng KHÔNG thay tiêu chí chất lượng.`);
+OpenAI Agents SDK tích hợp trace (nếu dùng OpenAI provider). Với NUS gateway → set_tracing_disabled(True) và tự log.
+
+LOG THẬT từ demo (run_demo.py với NUS gateway):
+   ① session: user=alice tenant=acme role=support_agent
+   🤖 model gọi search_kb(query='hoàn tiền', tenant=None)
+   ② trả ['kb-001', 'kb-003'], ẩn 1 tài liệu không có quyền
+   🤖 model muốn gọi create_ticket({'title': 'Hoàn tiền đơn 42', 'priority': 'P3', 'assignee': 'billing'})
+   ④ hợp lệ
+   ⑤ cần người duyệt: {'title': '...', 'priority': 'P3', 'assignee': 'billing'}
+      Duyệt? (y/n): y
+   ⑤ ĐỒNG Ý
+   💰 3 lượt gọi model, 1842 input + 124 output tokens
+
+Phân biệt: trace kỹ thuật (model chọn tool gì, bao lâu) ≠ chất lượng (câu trả lời đúng không → test case).
+Trace giúp tìm nguyên nhân, KHÔNG thay tiêu chí chất lượng.`);
 box(s, 20, 105, 680, 40, 'Trace = ghi lại mọi hành động của agent — dùng để debug, KHÔNG đo chất lượng', { fill: C.LIGHT, size: 14 });
 [['Model call', 'prompt → response → latency', C.LIGHT], ['Tool call', 'tham số → kết quả → ms', C.LIGHT], ['Guardrail', 'kết quả kiểm tra', C.GREEN], ['Error', 'lỗi + stack trace', C.ORANGE]].forEach(([t, sub, f], i) =>
   box(s, 30 + i * 168, 165, 150, 80, `${t}\n${sub}`, { fill: f, size: 16, sub: 12 }));
