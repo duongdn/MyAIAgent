@@ -38,7 +38,7 @@ const EMAIL_TO_DEV_ID = {
 // Also includes duongdn himself — approvals often sent from his own Sent folder
 const APPROVAL_SENDERS = ["binhnt@", "duongdn@", "namtv@", "hr@", "admin@"];
 // Keywords that indicate approval in reply body
-const APPROVAL_KEYWORDS = ["ok em", "ok nhé", "ok nha", "được rồi", "đồng ý", "approved",
+const APPROVAL_KEYWORDS = ["ok em", "ok nhé", "ok nha", "được rồi", "đồng ý", "approved", "approve",
                             "chấp nhận", "cho phép", "ok.", "ok!", "oke", "được"];
 // Leave request keywords for subject/body matching
 const LEAVE_SUBJECTS = ["nghỉ phép", "nghi phep", "xin nghỉ", "xin nghi", "đơn nghỉ",
@@ -148,17 +148,15 @@ function saveLeavePlan(plan) {
 function checkMode(devId, dateStr) {
   const plan = loadLeavePlan();
   const match = plan.leaves.find(
-    // Pending counts too: same-day sick-leave emails often never get an explicit approval reply,
-    // but the dev still requested the day off, so it must not be reported as a 0h gap.
     l => l.dev_id === devId &&
-         ["approved", "pending"].includes(l.status) &&
+         l.status === "approved" &&
          l.dates.includes(dateStr)
   );
   if (match) {
-    console.log(`LEAVE: ${devId} is off on ${dateStr} (${match.type} day, ${match.status}). Reason: ${match.reason || "—"}`);
+    console.log(`LEAVE: ${devId} is off on ${dateStr} (${match.type} day). Reason: ${match.reason || "—"}`);
     process.exit(0);
   } else {
-    console.log(`WORKING: ${devId} has no leave request on ${dateStr}`);
+    console.log(`WORKING: ${devId} has no approved leave on ${dateStr}`);
     process.exit(1);
   }
 }
@@ -182,7 +180,7 @@ function listMode() {
   }
 }
 
-function searchBox(imap, box, sinceStr, searchTerms) {
+function searchBox(imap, box, sinceStr, searchTerms, field = "SUBJECT") {
   return new Promise((resolve, reject) => {
     imap.openBox(box, true, (err) => {
       if (err) return resolve([]); // skip missing box silently
@@ -191,27 +189,29 @@ function searchBox(imap, box, sinceStr, searchTerms) {
       let pending = searchTerms.length;
 
       searchTerms.forEach(term => {
-        imap.search([["SINCE", sinceStr], ["SUBJECT", term]], (err, uids) => {
+        imap.search([["SINCE", sinceStr], [field, term]], (err, uids) => {
           if (!err && uids) uids.forEach(uid => allUids.add(uid));
           if (--pending === 0) {
             const uidList = [...allUids];
             if (!uidList.length) return resolve([]);
 
             const emails = [];
+            const parses = [];
             const fetch = imap.fetch(uidList, { bodies: "" });
             fetch.on("message", (msg) => {
               const chunks = [];
               msg.on("body", (stream) => {
                 stream.on("data", d => chunks.push(d));
                 stream.on("end", () => {
-                  simpleParser(Buffer.concat(chunks))
+                  // Track parse promises: fetch "end" fires before async parsing finishes
+                  parses.push(simpleParser(Buffer.concat(chunks))
                     .then(parsed => emails.push({ ...parsed, _box: box }))
-                    .catch(() => {});
+                    .catch(() => {}));
                 });
               });
             });
             fetch.once("error", reject);
-            fetch.once("end", () => resolve(emails));
+            fetch.once("end", () => Promise.all(parses).then(() => resolve(emails)));
           }
         });
       });
@@ -250,19 +250,20 @@ async function fetchEmails(account) {
               imap.search([["SINCE", sinceStr], ["FROM", s]], (err, uids) => {
                 if (err || !uids || !uids.length) return res([]);
                 const emails = [];
+                const parses = [];
                 const fetch = imap.fetch(uids, { bodies: "" });
                 fetch.on("message", (msg) => {
                   const chunks = [];
                   msg.on("body", (stream) => {
                     stream.on("data", d => chunks.push(d));
                     stream.on("end", () => {
-                      simpleParser(Buffer.concat(chunks))
+                      parses.push(simpleParser(Buffer.concat(chunks))
                         .then(p => emails.push({ ...p, _box: "INBOX" }))
-                        .catch(() => {});
+                        .catch(() => {}));
                     });
                   });
                 });
-                fetch.once("end", () => res(emails));
+                fetch.once("end", () => Promise.all(parses).then(() => res(emails)));
                 fetch.once("error", () => res([]));
               });
             });
@@ -270,7 +271,12 @@ async function fetchEmails(account) {
         );
 
         // Sent folder: duongdn's own approval replies (Re: + leave keywords)
-        const sentApprovals = await searchBox(imap, "Sent Messages", sinceStr, ["nghi", "phep", "Re"]);
+        // Zoho's real sent folder is "Sent"; "Sent Messages" is a legacy box — search both
+        const sentApprovals = [
+          // Search by recipient: Zoho's SUBJECT search misses diacritic subjects like "Re: Đơn Xin Phép"
+          ...(await searchBox(imap, "Sent", sinceStr, senderTerms, "TO")),
+          ...(await searchBox(imap, "Sent Messages", sinceStr, senderTerms, "TO")),
+        ];
 
         const all = [
           ...inboxBySubject,

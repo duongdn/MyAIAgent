@@ -14,5 +14,6 @@ User: "TuanNT log rồi mà ???", "ngày 12 off mà !!!"
 **How to apply:** For any 0h day D, grep `reports/{D and D+1}/daily-report.md` (and `reports/backup/`) for that dev's leave/off/nghỉ before alerting. Re-fetch WS immediately before sending, and list only the days that are still genuinely 0h. Add missed leave entries to leave-plan.json. Related: [[verify_workstream_zero_hours_before_alerting]] [[parse_leave_emails_misses_remote_work_threads]]
 
 **Root cause (fixed 2026-10-14 in `scripts/parse-leave-emails.js`):**
-1. TuanNT's email had subject "Đơn Xin Phép" and body "xin phép off hôm nay". It contains no "nghỉ" and no dd/mm/yyyy date, so it was skipped. Added the keywords "xin phép off"/"đơn xin phép", and "hôm nay"/"ngày mai" now resolve against the email's send date (UTC+7).
-2. `--check` only accepted `approved`. Same-day sick emails rarely get an approval reply, so they stay `pending`. `--check` now accepts pending too.
+1. Request not detected: subject "Đơn Xin Phép" + body "xin phép off hôm nay" had no "nghỉ" and no dd/mm/yyyy date. Added the keywords "xin phép off"/"đơn xin phép", and "hôm nay"/"ngày mai" now resolve against the email's send date.
+2. DuongDN's approvals were never seen, even though he DOES reply to every leave email. Three bugs: (a) the Zoho SUBJECT search misses diacritic subjects, so Sent is now searched by TO = monitored devs; (b) the real folder is "Sent" (the script only checked "Sent Messages"); (c) "approve" was missing from the approval keywords; (d) fetch resolved before async parsing finished, so emails were dropped at random.
+After the fix, 14 leaves flipped from pending to approved. Do NOT assume leaves go unapproved, and do NOT treat pending as leave.

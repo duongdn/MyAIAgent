@@ -2,7 +2,7 @@
 
 **Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 + 08:52 + 08:56 (+07:00) (recheck)
 **Window:** 2026-10-13 08:33 → 2026-10-14 05:12 (+07:00). Task-log date: Tue 2026-10-13.
-**Leave plan:** PhucVT 10-12 full day (pending). **TuanNT 10-12 off sick** (recorded in the 10-13 report; missing from leave-plan.json, now added). ThinhT 10-12 (Resource Arrangement, charged to Kunal). ThamTTH 14–16/10. TuanNT left early 10-13 (flu, will make up the hours).
+**Leave plan:** PhucVT + **TuanNT 10-12 off sick, both approved by DuongDN** (the leave parser had missed this; fixed 09:10). ThinhT 10-12 (Resource Arrangement, charged to Kunal). ThamTTH 14–16/10. TuanNT left early 10-13 (flu, will make up the hours).
 
 ---
 
