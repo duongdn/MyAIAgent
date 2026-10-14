@@ -277,7 +277,16 @@ CODE THẬT từ agent_openai_sdk.py (dòng 88-108):
               state.approve(item)
           else: state.reject(item, rejection_message="Từ chối")
       result = await Runner.run(agent, state, context=me, max_turns=cp.MAX_TURNS)
-→ result.final_output = câu trả lời cuối của agent.`);
+→ result.final_output = câu trả lời cuối của agent.
+
+Hỏi: Model "biết" khi nào dừng không, hay phải code?
+Đáp: Model quyết định dừng khi nhận ra goal đã đạt — nhưng đây là inference, không phải guarantee. Application dùng max_turns=8 làm hard limit để chặn trường hợp model loop vô hạn.
+
+Hỏi: while result.interruptions — vòng lặp này chạy bao nhiêu lần?
+Đáp: Mỗi lần loop = 1 tool cần duyệt. Nếu agent muốn gọi 3 tool write → 3 interruption → 3 lần hỏi người. SDK dừng lại tại mỗi interruption, không gộp chung.
+
+Hỏi: Điều gì xảy ra nếu người từ chối ở bước ⑤?
+Đáp: state.reject(item, rejection_message=...) → SDK tiếp tục run với rejection context → model nhận được "người đã từ chối vì ..." → model có thể thử cách khác hoặc kết thúc. Rejection message quan trọng — model cần biết tại sao để xử lý đúng.`);
 ['Goal\ntừ user', 'Model\nchọn tool', 'App\nthực thi', 'Tool\nkết quả', 'Model\ntiếp / dừng'].forEach((t, i) => {
   box(s, 20 + i * 140, 130, 115, 80, t, { fill: i === 1 ? C.LIGHT : i === 2 ? C.NAVY : C.LIGHT, size: 15, sub: 11 });
   if (i) arrow(s, 20 + i * 140 - 25, 170, 20 + i * 140, 170);
@@ -412,7 +421,16 @@ s = newSlide('Trước khi thực thi tool — 3 lớp kiểm tra', `3 lớp ph�
 Lớp 1 — Validate input: tham số đúng kiểu không, có đủ trường bắt buộc không, giá trị nằm trong enum không. Trả lỗi rõ ràng để model có thể thử lại với tham số đúng.
 Lớp 2 — Kiểm tra quyền: user có quyền dùng tool này trên dữ liệu này không? Kiểm tra theo user_id + tenant_id từ context — KHÔNG từ tham số model truyền vào (dễ bị inject).
 Lớp 3 — Approval gate (nếu write): action có side effect lớn → hiển thị preview cho người duyệt trước khi thực thi.
-Code demo: file checkpoints.py — hàm check_permission nhận RunContextWrapper (không phải tham số tool), SDK gọi TRƯỚC khi chạy.`);
+Code demo: file checkpoints.py — hàm check_permission nhận RunContextWrapper (không phải tham số tool), SDK gọi TRƯỚC khi chạy.
+
+Hỏi: Read tool (search_kb) có cần Approval gate không?
+Đáp: Không — search_kb không có side effect lớn (không ghi DB, không gửi email). Lớp 3 chỉ áp dụng cho write tools. search_kb vẫn cần lớp 1+2 (validate + filter theo tenant/role).
+
+Hỏi: Tại sao lỗi từ lớp 1 phải "rõ ràng" — kiểu gì là rõ?
+Đáp: Rõ = model biết sửa gì. Ví dụ: "priority 'P1' không được phép, chỉ {P3, P4}" → model thử lại với P3. Nếu chỉ trả "lỗi" → model loop thêm turn để đoán, tốn token, có thể đoán sai.
+
+Hỏi: Lớp 2 lấy user_id từ đâu — model có thể truyền vào không?
+Đáp: Từ RunContextWrapper — object được truyền khi bắt đầu Runner.run(), không qua tool arguments. Model chỉ thấy tool arguments, không thấy context. Đây là lý do ① tồn tại: session server-side, không từ text user gõ.`);
 ['Validate\ninput', 'Kiểm tra\nquyền user', 'Approval\ngate'].forEach((t, i) => {
   box(s, 30 + i * 230, 130, 200, 100, `${i + 1}. ${t}`, { fill: i === 2 ? C.ORANGE : C.NAVY, size: 18, sub: 14 });
   if (i) arrow(s, 30 + i * 230 - 30, 180, 30 + i * 230, 180);
@@ -668,7 +686,16 @@ LOG THẬT từ demo (run_demo.py với NUS gateway):
    💰 3 lượt gọi model, 1842 input + 124 output tokens
 
 Phân biệt: trace kỹ thuật (model chọn tool gì, bao lâu) ≠ chất lượng (câu trả lời đúng không → test case).
-Trace giúp tìm nguyên nhân, KHÔNG thay tiêu chí chất lượng.`);
+Trace giúp tìm nguyên nhân, KHÔNG thay tiêu chí chất lượng.
+
+Hỏi: Từ trace này, biết được điều gì mà test case KHÔNG cho biết?
+Đáp: Biết model gọi search_kb trước (đúng thứ tự), dùng query 'hoàn tiền' (không phải query ngẫu nhiên), nhận đúng 2 docs (không phải 1 hoặc 3). Test case chỉ check "ticket có được tạo đúng không" — trace cho thấy ĐI ĐỂ ĐẾN ĐÓ như thế nào.
+
+Hỏi: set_tracing_disabled(True) — tại sao cần tắt SDK trace với NUS gateway?
+Đáp: SDK trace mặc định gửi về OpenAI dashboard — không có OpenAI key → error. Với non-OpenAI provider, tắt SDK trace, dùng structured logging tự viết (print statements trong checkpoints.py). Production dùng logging module + log aggregator (ELK, Datadog).
+
+Hỏi: 3 lượt gọi model cho 1 câu hỏi — có cách giảm không?
+Đáp: Đây là normal cho agent: lượt 1 = quyết định gọi search_kb, lượt 2 = đọc kết quả + quyết định tạo ticket, lượt 3 = sau khi người duyệt → final_output. Khó giảm hơn 2 nếu cần tool use. Cache (khi bật) giảm cost, không giảm lượt gọi.`);
 box(s, 20, 105, 680, 40, 'Trace = ghi lại mọi hành động của agent — dùng để debug, KHÔNG đo chất lượng', { fill: C.LIGHT, size: 14 });
 [['Model call', 'prompt → response → latency', C.LIGHT], ['Tool call', 'tham số → kết quả → ms', C.LIGHT], ['Guardrail', 'kết quả kiểm tra', C.GREEN], ['Error', 'lỗi + stack trace', C.ORANGE]].forEach(([t, sub, f], i) =>
   box(s, 30 + i * 168, 165, 150, 80, `${t}\n${sub}`, { fill: f, size: 16, sub: 12 }));
