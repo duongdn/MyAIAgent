@@ -478,11 +478,12 @@ Demo code: MAX_TURNS=8 (OWASP LLM10), LAST_USAGE ghi input+output token sau mỗ
 box(s, 20, 240, 680, 40, 'Demo: MAX_TURNS = 8  (checkpoints.py)  →  Runner.run(agent, …, max_turns=cp.MAX_TURNS)', { fill: C.NAVY, size: 13, align: 'START' });
 box(s, 20, 285, 680, 40, 'LAST_USAGE = {requests, input_tokens, output_tokens}  →  đo cost thực mỗi lần chạy (agent_openai_sdk.py)', { fill: C.LIGHT, size: 13, align: 'START' });
 
-s = newSlide('Session 8 — Câu hỏi kiểm tra', `Gợi ý đáp án:
+s = newSlide('Session 8 — Câu hỏi kiểm tra', `Gợi ý đáp án (để 5 phút thảo luận nhóm trước khi reveal):
 1. Task state — lưu bền vào DB, tồn tại qua nhiều run. Context chỉ sống trong 1 lần gọi model.
 2. AWAITING_APPROVAL — dừng run, lưu state, resume sau khi người duyệt.
 3. Khi ticket_id trả về từ Jira (tác động thực) — không phải khi model báo "xong".
-Bài tự thực hành: vẽ state machine gồm đang xử lý, chờ phê duyệt, hoàn thành và chuyển người; nêu dữ liệu lưu ở từng trạng thái.`);
+Bài tự thực hành: vẽ state machine gồm đang xử lý, chờ phê duyệt, hoàn thành và chuyển người; nêu dữ liệu lưu ở từng trạng thái.
+Timing: Q1=3 phút, Q2=3 phút, Q3=4 phút, thực hành=20 phút, review=10 phút, Q&A=20 phút.`);
 ['1. Phân biệt context và task state — cái nào lưu bền, tồn tại qua nhiều run?',
  '2. Agent soạn xong ticket draft, cần người duyệt — state chuyển sang gì, run xử lý thế nào?',
  '3. Khi nào được set task state = COMPLETED?'].forEach((t, i) =>
@@ -501,6 +502,18 @@ label(s, 60, 145, 600, 40, 'Agent harness, tracing và support agent hoàn chỉ
 box(s, 60, 200, 120, 36, '60 phút', { fill: C.ORANGE, size: 16 });
 [['S5', C.MUTED], ['S6', C.MUTED], ['S7', C.MUTED], ['S8', C.MUTED], ['S9', C.ORANGE]].forEach(([t, f], i) =>
   box(s, 200 + i * 92, 200, 80, 36, t, { fill: f, size: 14 }));
+
+s = newSlide('Gateway cache — cost control trong production', `LiteLLM gateway (NUS) cache response: request giống hệt → trả kết quả cũ trong ~0.15s thay vì ~8s.
+Demo tắt cache (no-cache: True trong ModelSettings) để mỗi lần eval là model thật.
+Trong production: cache rất có giá trị (latency + cost), nhưng cache key PHẢI gồm tenant_id + permission scope.
+Nếu không: Alice cache câu hỏi "KB về billing" → Bob (tenant khác) nhận lại kết quả của Alice → rò rỉ dữ liệu (OWASP LLM08).
+Code demo: MODEL_SETTINGS với extra_body={"cache": {"no-cache": True}} — tắt khi eval/demo, bật khi production với cache key đúng.`);
+[['Cache HIT', '~0.15s\n~$0.00001/req', C.GREEN],
+ ['Cache MISS', '~6-39s\n~$0.001/req', C.LIGHT],
+ ['Cache sai key', 'Rò rỉ dữ liệu\ntenants lẫn', C.ORANGE]].forEach(([t, sub, f], i) =>
+  box(s, 30 + i * 230, 120, 195, 90, `${t}\n${sub}`, { fill: f, size: 17, sub: 13 }));
+box(s, 30, 265, 680, 40, 'Cache key PHẢI gồm: user_id + tenant_id + permission scope — không chỉ query text', { fill: C.NAVY, size: 14 });
+box(s, 30, 315, 680, 38, 'Demo/Eval: "cache": {"no-cache": True} → model thật mỗi lần, không dùng cache', { fill: C.LIGHT, size: 13, bold: false });
 
 s = newSlide('Agent harness — 5 lớp kiểm soát', `Harness là framework bao quanh agent loop. Không có harness → agent demo, không phải prototype.
 5 lớp:
