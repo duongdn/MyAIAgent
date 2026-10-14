@@ -58,6 +58,8 @@ ENC_FILES=(
   config/.zalo-config.json.enc
   config/.whatsapp-config.json.enc
   config/.server-credentials.json.enc
+  config/.digitalocean-config.json.enc
+  config/.cloudflare-mpfc-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc
