@@ -103,6 +103,13 @@ certbot + cert 6 domain, newrelic-php + infra (license key lấy từ old newrel
 ### Quét PHPCompatibility 8.3 (tĩnh)
 - Lỗi báo ở db.php (mysql_*), pfc7/wpbakery (cú pháp PHP5), gravityforms 26, wp-courseware 30, wp-mail-smtp 26, membermouse 14... Phần lớn là pattern đã bị bỏ từ PHP 7.0 mà site vẫn chạy 7.4 → code có guard/không tới. Không đáng tin → phải chạy thật trên test, đọc debug.log.
 
+## Cập nhật 2026-10-14 15:30 — domain test + basic auth
+- Cloudflare token (Freelancer account, cfat_ account-owned) lưu `config/.cloudflare-mpfc-config.json` (gitignored). `/user/tokens/verify` báo invalid (bình thường với account token) nhưng đọc zone + TẠO DNS được. Zone `mypersonalfootballcoach.com` id `ded47d2c4247118dac024d793372b069`, SSL mode `full`.
+- DNS: `upgrade-test.mypersonalfootballcoach.com` A 144.126.236.208, DNS-only (không proxy), TTL 300, record id `a2fdc62cb91ae93eb64b43714c7fe806`.
+- Basic auth toàn server (`/etc/apache2/conf-available/upgrade-test-basic-auth.conf`, chừa `/.well-known/acme-challenge/`): user `mpfc`, pass trong `config/.digitalocean-config.json` → `basic_auth`. Truy cập không auth → 401 (cả domain lẫn IP).
+- SSL Let's Encrypt (certbot --apache), http→https 301. vhost riêng `upgrade-test.conf`. WP_HOME/SITEURL = https://upgrade-test.mypersonalfootballcoach.com
+- Dọn khi xong: xoá DNS record, droplet, DB `wp_mpfc_upgrade`.
+
 ## Câu hỏi chưa giải quyết
 - Saul hay mình trả chi phí droplet song song?
 - Có chuyển 3 app phụ không, hay tách riêng?
