@@ -15,8 +15,8 @@ ssh -i ~/.ssh/carrick/id_rsa root@144.126.236.208                # server TEST (
 - Lưu ý máy local: hook chặn chuỗi `.git` và `vendor` trong lệnh Bash → dùng `/.gi[t]`, `V=vendo; ${V}r`.
 
 **Việc tiếp theo (theo thứ tự)**
-1. ⛔ **DB copy ĐÃ DỪNG 15:32 +07** — làm CPU cluster 94.78% > 90% → DO alert. `wp_mpfc_upgrade` đang dở (~41 bảng, thiếu mm_notifications...). KHÔNG chạy lại `copy-db.sh` nguyên trạng. Cách mới (chờ anh duyệt): dump từ read replica, bỏ/giới hạn bảng log lớn (mm_notifications 2GB, mm_app_usage_logs, mm_app_log_events), chạy ngoài giờ, theo dõi CPU. (cũ:) Kiểm tra DB copy xong chưa: `ssh mpfc.mpfc.live 'cat ~/upgrade/copy-db.log'` — xong khi có dòng `exit 0 0 ...`. Nếu exit ≠ 0 → xem log, chạy lại `~/upgrade/copy-db.sh` (DROP các bảng trong `wp_mpfc_upgrade` trước).
-2. Mở test URL trên PHP 8.3 → đọc `wp-content/debug.log` + `/var/log/apache2/error.log` trên test → lập danh sách lỗi thật theo plugin/theme.
+1. ✅ DB test xong (bản nhẹ, 08:37–08:46 UTC): `root@test:/root/upgrade/copy-db-light.sh` — dump từ READ REPLICA, bỏ DATA 9 bảng log (mm_notifications, mm_app_usage_logs, mm_app_log_events, wp_uap_action_log_meta, mm_log_events, api_payment_logs, wp_uap_api_log, wp_posts_bkp, wp_prli_clicks — vẫn có cấu trúc), import qua `pv -L 2m`. 285 bảng. (Lần 1 copy full trên primary → CPU 94.78% alert → đã dừng, xem memory feedback_mpfc_db_cluster_heavy_ops_cpu_alert.)
+2. ✅ Site chạy được trên PHP 8.3 (kết quả §3b). Tiếp: login admin/member, test từng chức năng.
 3. Update plugin (cần license, xem §6) → sửa code custom → update WP core → QA (§5 phase 5).
 4. Sau khi Saul duyệt: dựng server chính thức theo checklist §4.
 
@@ -56,14 +56,23 @@ Quyết định của anh (2026-10-14): **build lại từ đầu, KHÔNG clone 
 - [x] SSL Let's Encrypt (vhost `upgrade-test.conf` + `-le-ssl`), http→https 301
 
 Đang chạy / chưa xong:
-- [ ] DB copy `wp_mpfc`→`wp_mpfc_upgrade` (script `mpfc:~/upgrade/copy-db.sh`, log `~/upgrade/copy-db.log`, bắt đầu 07:53 UTC). Chậm do cluster 1vCPU; lúc 15:40 +07 mới 41/285 bảng, đang ở `mm_notifications` 2GB. Live không bị ảnh hưởng (200, ~0.33s).
-- [ ] Chạy site trên PHP 8.3, lấy lỗi thật
+- [x] ~~DB copy full~~ → bản nhẹ xong (xem §0)
+- [ ] (cũ) DB copy `wp_mpfc`→`wp_mpfc_upgrade` (script `mpfc:~/upgrade/copy-db.sh`, log `~/upgrade/copy-db.log`, bắt đầu 07:53 UTC). Chậm do cluster 1vCPU; lúc 15:40 +07 mới 41/285 bảng, đang ở `mm_notifications` 2GB. Live không bị ảnh hưởng (200, ~0.33s).
+- [x] Chạy site trên PHP 8.3, lấy lỗi thật (§3b)
 - [ ] Update plugin/theme/WP core, QA
 
 Cố ý KHÔNG làm trên test (an toàn):
 - Root cron `wp cron` → tránh MemberMouse rebill/Stripe/mail thật từ DB copy
 - CustomLog pipe vào `apache_logs` (tránh ghi log test vào DB live); New Relic, monit
 - Vhost admin/staging/dailyagent/quantification, services MyDailyAgent/quantification, user `mpfc-fpt`, `/var/www/keys`, `/var/www/utils`
+
+## 3b. Kết quả chạy thật PHP 8.3 (2026-10-14 15:50)
+- Fatal duy nhất (đã sửa trên test): `mu-plugins/force-strong-passwords/slt-force-strong-passwords.php:53` `round($wp_version,1)` → `round((float)$wp_version,1)`. Bản gốc `/root/upgrade/slt-force-strong-passwords.php`. **Cần commit vào repo site khi làm chính thức.**
+- Sau fix: `/` 200, `/my-account/` 200, `/wp-admin/` 302 (login), `/wp-login.php` 404 (bình thường — wps-hide-login), ~30 trang/bài random 200/302. Không còn Fatal.
+- debug.log: 4074 Deprecated + 469 Warning (không chặn site). Nguồn: ACF Pro 1246, core 839 (null truyền vào strpos/str_replace — do plugin gọi), pfc7 553, wp-config 427, ai1wm 336, gravityforms 331, CF7 175, hotjar 168, wp-courseware 106, json-api 105...
+- Warning cần sửa: wp-config define trùng (WP_SITEURL/WP_POST_REVISIONS/WP_TURN_OFF_ADMIN_BAR) + `$_SERVER["HTTP_HOST"]` không check (wp-cli); user-role-editor `__wakeup` private → update plugin.
+- **Rollbar active trên DB copy** → test gửi lỗi lên Rollbar production MPFC. Đã `plugin deactivate rollbar` + tắt option `rollbar_wp` trên DB test. Theme pfc7 functions.php:3747+ cũng có code Rollbar (chỉ error_log).
+- Các tích hợp còn dùng key LIVE trong DB copy (cẩn thận khi bấm thử): Stripe (GF Stripe, MemberMouse), Mailchimp, mpfc-firebase-bridge (push), Uncanny Automator, FB pixel/GA/Hotjar. WP cron đã tắt + mail bị chặn. Khi test thanh toán → chuyển key sang test mode trong DB test trước.
 
 ## 4. Checklist server chính thức (từ diff 2 server)
 - [ ] Droplet Ubuntu 24.04 cùng size (s-4vcpu-8gb lon1), tag `mpfc` (để vào DB firewall), swap 8G
