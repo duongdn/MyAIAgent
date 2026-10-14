@@ -71,9 +71,9 @@ Base = gross 8,016,969,502 − Nhà 2,500,000,000.
 
 ### 4. Upcoming decisions (≤90 ngày)
 - Không sổ nào đến hạn trước 2027-02-10.
-- Sổ ko kì hạn 506M: quyết định giữ làm quỹ khẩn cấp hay chuyển một phần sang kỳ hạn 3–6 tháng nếu lãi ko kì hạn thấp hơn rõ.
+- Sổ ko kì hạn 506M: rút dần cho vay + DCA; theo dõi CP không vượt 50%.
 
 ### 5. Khuyến nghị
-- Ngắn hạn (30 ngày): kiểm tra lãi suất sổ tikcop ko kì hạn; nếu < ~4.5%, cân nhắc giữ ~200M ko kì hạn (≈3 tháng chi) và chuyển ~300M sang kỳ hạn 3–6 tháng.
+- Ngắn hạn (30 ngày): sổ tikcop ko kì hạn 506M = quỹ cho vay + DCA dần (user 10-14: không gửi kỳ hạn nữa) — lập lịch DCA cố định (vd 20–30M/tháng) để tránh dồn 1 lần vào CP đang 45.9%.
 - Trung hạn: tiếp tục nạp FPTS từ lương; CP 45.9%, giữ dưới 50%.
 - Dài hạn: cân nhắc tài sản quốc tế/USD (0.3%) giảm tương quan thị trường VN.
