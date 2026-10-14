@@ -505,6 +505,40 @@ box(s, 30, 105, 320, 110, '✅ Prototype có giá trị:\nChứng minh end-to-en
 box(s, 370, 105, 320, 110, '❌ Prototype vô nghĩa:\nBỏ qua quyền "tạm thời"\nKhông có test case\nKhông trace khi sai', { fill: C.ORANGE, size: 14, bold: false, align: 'START', valign: 'TOP' });
 box(s, 30, 255, 680, 55, 'Câu hỏi cho khách: 3 failure mode nào cần kiểm chứng trước khi mở rộng?', { fill: C.NAVY, size: 16 });
 
+s = newSlide('Eval thật — 5 model, 5 test case, 2 lần chạy', `Kết quả từ eval_results.json (chạy bằng run_eval.py với approve_mode="yes" — worst case: người duyệt bấm OK hết).
+
+5 test case: (1) hỏi + tạo ticket hợp lệ, (2) chỉ hỏi không tạo ticket, (3) viewer cố tạo ticket,
+(4) hỏi dữ liệu tenant khác, (5) KB bị đầu độc tinh vi.
+
+Kết quả (10 lần chạy mỗi model — 2 runs × 5 case):
+  deepseek-flash:    model đúng 10/10 · hệ thống an toàn 10/10 · latency TB ~5.8s · ~1300 token/case
+  deepseek-v4.1:     model đúng 10/10 · hệ thống an toàn 10/10 · latency TB ~6.1s
+  glm-5.3-flash:     model đúng 10/10 · hệ thống an toàn 10/10 · latency TB ~39s   ⚠ chậm
+  mimo-v2.5-pro:     model đúng 10/10 · hệ thống an toàn 10/10 · latency TB ~14s
+  mimo-v2.5:         model đúng  9/10 · hệ thống an toàn 10/10 · case 5 run 1 fail
+  qwen-3.7-flash:    model đúng  7/10 · hệ thống an toàn 10/10 · case 1+5 fail (tạo ticket sai, lộ dữ liệu)
+
+→ system_ok = 100% mọi model: checkpoints ①②③④⑤ bảo vệ bất kể model có sai hay không.
+→ model_ok thay đổi: chọn model không chỉ là chọn "thông minh nhất" — cần test case thực tế.
+→ qwen: model_ok thấp nhưng system vẫn an toàn → checkpoint quan trọng hơn chọn model "giỏi".
+
+Hỏi người học: nếu chưa có checkpoint ④, khi qwen sai (model_ok=false) → hệ thống có an toàn không?`);
+// Model comparison table
+[['Model', 'model_ok', 'system_ok', 'Latency TB'],
+ ['deepseek-flash', '10/10 ✅', '10/10 ✅', '~5.8s'],
+ ['deepseek-v4.1', '10/10 ✅', '10/10 ✅', '~6.1s'],
+ ['glm-5.3-flash', '10/10 ✅', '10/10 ✅', '~39s ⚠'],
+ ['mimo-v2.5-pro', '10/10 ✅', '10/10 ✅', '~14s'],
+ ['mimo-v2.5', '9/10 ⚠', '10/10 ✅', '~38s'],
+ ['qwen-3.7-flash', '7/10 ❌', '10/10 ✅', '~28s']].forEach(([m, mo, so, lat], i) => {
+  const fill = i === 0 ? C.NAVY : i === 6 ? C.YELLOW : C.LIGHT;
+  box(s, 20, 100 + i * 34, 180, 30, m, { fill, size: 12, bold: i === 0 });
+  box(s, 205, 100 + i * 34, 120, 30, mo, { fill: i === 6 ? C.ORANGE : fill, size: 12, bold: i === 0 });
+  box(s, 330, 100 + i * 34, 140, 30, so, { fill: i === 0 ? C.NAVY : C.GREEN, size: 12, bold: i === 0 });
+  box(s, 475, 100 + i * 34, 110, 30, lat, { fill, size: 12, bold: i === 0 });
+});
+box(s, 20, 345, 680, 40, 'system_ok = 100% mọi model → checkpoint quan trọng hơn chọn model "giỏi"', { fill: C.NAVY, size: 14 });
+
 s = newSlide('Session 9 — Câu hỏi kiểm tra & Tổng kết Giai đoạn 3', `Gợi ý đáp án:
 1. 5 lớp: scope tools, permission layer, approval gate, budget, state & escalation.
 2. Trace ghi lại model/tool calls để debug. Tiêu chí chất lượng = test case + user feedback.
