@@ -71,10 +71,44 @@ Plugin cũ, khả năng lỗi trên PHP 8.3:
 - Hoặc dùng luôn `wp_staging` có sẵn (không cần copy) nếu staging không còn ai dùng.
 - Server mới chính thức: dùng chung cluster này, KHÔNG cần dump/migrate DB khi cutover → downtime gần 0.
 
+## Cập nhật 2026-10-14 15:40 — dựng server test + so sánh 2 server
+### HyperDB VẪN ĐANG CHẠY trên live (không phải đã bỏ)
+- `wp-content/db.php` = HyperDB 1.8 drop-in; `wp eval get_class($wpdb)` → `hyperdb`. Sửa gần nhất commit `43e1d53d8` 2025-12-20 "FIX: HyperDB read-only slave write failures"; đọc từ replica `db-ro-mysql-lon1-25682`.
+- Thư mục `plugins/hyperdb`, `plugins/hyperdb-1-1` có nhưng không active (drop-in tự load, không cần active).
+- Server test: giữ db.php, nhưng `DB_HOST_SLAVE` = primary (replica không phục vụ DB test). Muốn bỏ HyperDB → xoá `wp-content/db.php` + `db-config.php` (quyết định riêng).
+
+### Đã làm trên server test (144.126.236.208)
+- Apache 2.4.58 + mod_php 8.3.6 (giống old: mod_php, không fpm), mpm_prefork 5/150, mods = old + remoteip; custom `apache2.conf` (LogFormat `mysql_custom_log` + RemoteIP Cloudflare) copy nguyên
+- PHP ext: đủ như old (curl gd mbstring xml mysqli exif sockets...) + thêm intl bcmath soap zip redis imagick igbinary; `json` built-in từ 8.0
+- php.ini apache khớp old: upload/post 100M, max_input_vars 1500, expose_php Off, disable_functions pcntl_* y hệt
+- imagemagick, ffmpeg, zip, nodejs 22, redis-server, mysql-client 8, wp-cli, composer, phpcs (PHPCompatibility tại /opt/phpcompat)
+- user `mpfc` (sudo, www-data) + swap 2G; TZ UTC
+- Code: rsync từ live (0.8GB), bỏ .git/*.sql/*.log/cache/uploads.bak/pdf/uploads. Uploads → 302 về live.
+- wp-config test: DB `wp_mpfc_upgrade`, WP_CACHE off, WP_HOME `http://144.126.236.208`, gốc lưu `wp-config.php.orig-live`; mu-plugin `zz-upgrade-test-safety.php` chặn mọi mail
+- DB copy `wp_mpfc`→`wp_mpfc_upgrade` đang chạy nền (script `mpfc:~/upgrade/copy-db.sh`, log `~/upgrade/copy-db.log`); chậm do cluster 1vCPU, kẹt ở `mm_notifications` 2GB; live vẫn 200/0.33s
+
+### Cố ý KHÔNG làm trên test (làm khi dựng server chính thức)
+- KHÔNG root cron `wp cron event run` mỗi phút → tránh MemberMouse rebill/Stripe/mail thật từ DB copy
+- KHÔNG CustomLog pipe vào `apache_logs` (tránh ghi log test vào DB live); không SSL/certbot (chưa có domain test); không New Relic, monit
+- Không các vhost admin/staging/dailyagent/quantification, mydailyagent-web/quantification-web services, cron MyDailyAgent, user `mpfc-fpt`, /var/www/keys (.p8 Apple), /var/www/utils
+- Swap 8G→2G, disk 10GB (giới hạn gói $4); MaxRequestWorkers 150 với 512MB dễ OOM nếu tải test
+
+### Checklist server chính thức (từ diff)
+certbot + cert 6 domain, newrelic-php + infra (license key lấy từ old newrelic.ini), monit, root cron (backup_live_volume.php, wp cron, clone_apache_logs.php — đang gọi `/usr/bin/php7.4` → đổi `php`), user mpfc-fpt, /var/www/keys, staging, MyDailyAgent+MyBussinessAiAgent+services, gắn volume 200GB (DO volume chỉ gắn 1 droplet → cutover phải detach/attach), swap 8G
+
+### Phát hiện bảo mật
+- Mật khẩu `doadmin` DB nằm plaintext trong `/etc/apache2/sites-enabled/mypersonalfootballcoach.com-le-ssl.conf` (CustomLog pipe `mysql -p...`) → server mới dùng `~/.my.cnf`/option file thay vì -p.
+- Toàn bộ site dùng user `doadmin` (admin cluster) → nên tạo user riêng quyền hạn chế.
+
+### Quét PHPCompatibility 8.3 (tĩnh)
+- Lỗi báo ở db.php (mysql_*), pfc7/wpbakery (cú pháp PHP5), gravityforms 26, wp-courseware 30, wp-mail-smtp 26, membermouse 14... Phần lớn là pattern đã bị bỏ từ PHP 7.0 mà site vẫn chạy 7.4 → code có guard/không tới. Không đáng tin → phải chạy thật trên test, đọc debug.log.
+
 ## Câu hỏi chưa giải quyết
 - Saul hay mình trả chi phí droplet song song?
 - Có chuyển 3 app phụ không, hay tách riêng?
 - Essential Grid custom sửa gì — có tài liệu/diff không?
-- PHP đang chạy mod_php hay fpm (chưa kiểm)?
-- DB test: copy `wp_mpfc_upgrade` hay dùng `wp_staging`?
+- ~~mod_php hay fpm~~ → mod_php (đã kiểm)
+- HyperDB: giữ hay bỏ hẳn ở server mới?
+- User `mpfc-fpt` là ai, có cần trên server mới?
+- ~~DB test~~ → copy `wp_mpfc_upgrade` (đã chốt)
 - Chuyển cả apache_logs (7.25GB, chiếm cluster) hay dọn bớt?
