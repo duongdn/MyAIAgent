@@ -328,6 +328,21 @@ Code: Session.disabled = tập checkpoint bị tắt → demo hậu quả thiế
 box(s, 20, 260, 680, 45, 'checkpoints.py không import SDK — đổi SDK giữ nguyên file này', { fill: C.GREEN, size: 14 });
 box(s, 20, 315, 680, 40, 'disabled={"4"} → bỏ ④ → model tạo ticket P1, assign CEO — demo hậu quả', { fill: C.ORANGE, size: 13, bold: false });
 
+s = newSlide('OWASP LLM Top 10 — Giai đoạn 3 cover gì?', `Không cần biết toàn bộ OWASP LLM Top 10. Chỉ cần biết checkpoints demo cover những risk nào.
+Mục tiêu: người học nhận ra tên OWASP khi gặp trong báo cáo security audit.`);
+box(s, 20, 75, 680, 35, 'OWASP LLM Risk → Checkpoint trong demo', { fill: C.NAVY, size: 15 });
+[
+  ['LLM01 · Prompt Injection', '③ untrusted tag + ④ rule bằng code', 'KB bị đầu độc → ③ log ⚠, ④ chặn P1', C.YELLOW],
+  ['LLM02 · Insecure Output Handling', '④ validate_ticket() trước khi thực thi', 'model đề xuất sai priority → ④ chặn', C.LIGHT],
+  ['LLM06 · Sensitive Info Disclosure', '① tenant từ session, ② filter khi query', 'alice không thấy KB của tenant-B', C.LIGHT],
+  ['LLM08 · Excessive Agency', '④ AGENT_ALLOWED_PRIORITIES={P3,P4}', 'agent không tự tạo P1/P2 dù model muốn', C.LIGHT],
+  ['LLM10 · Model DoS', 'MAX_TURNS=8 · max_tool_calls per run', 'glm 39s/case — không có giới hạn → treo', C.ORANGE],
+].forEach(([risk, cp, example, fill], i) => {
+  box(s, 20, 120 + i * 44, 205, 36, risk, { fill: C.NAVY, size: 11 });
+  box(s, 232, 120 + i * 44, 210, 36, cp, { fill, size: 11, bold: false });
+  box(s, 449, 120 + i * 44, 261, 36, example, { fill: C.LIGHT, size: 10, bold: false });
+});
+
 // ═══════════════════════════════════════════════════════════
 // SESSION 7: Tool execution an toàn, lỗi và approval (60 phút)
 // ═══════════════════════════════════════════════════════════
