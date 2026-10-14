@@ -268,3 +268,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [elena_report_detailed_for_general_reviewer](elena/feedback_elena_report_detailed_for_general_reviewer.md) — explain each PR/issue in detail in Vietnamese, chat only gives the path
 - [elena_review_results_in_dated_folder](elena/feedback_elena_review_results_in_dated_folder.md) — review results → docs/elena/reviews/YYYY-MM-DD/; reference docs stay flat
 - [fix_links_positional_corrupts_curated_links](news-digest/feedback_fix_links_positional_corrupts_curated_links.md) — 🔴 fix-links remaps by position; skipping articles → wrong URLs, diff before commit
+- [mpfc_digitalocean_token_and_infra](mpfc/reference_mpfc_digitalocean_token_and_infra.md) — DO token in backup script; DB = managed MySQL; test droplet 144.126.236.208

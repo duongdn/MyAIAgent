@@ -57,8 +57,24 @@ Plugin cũ, khả năng lỗi trên PHP 8.3:
 ## Bước tiếp theo
 - Chờ Saul duyệt → nhận quyền/license → phase 1 (snapshot + kiểm kê)
 
+## Cập nhật 2026-10-14 14:45 — quyết định & hạ tầng thật
+- **Build lại từ đầu, KHÔNG clone droplet**; cấu trúc thư mục/vhost/user/cron y hệt server cũ.
+- **DO token**: lấy từ `mpfc:/var/www/mypersonalfootballcoach.com/scripts/backup_live_volume.php` (script snapshot volume, root cron 00:00). Lưu local `config/.digitalocean-config.json` (gitignored). Account `freelancer@MyPersonalFootballCoach.com`, token có quyền ghi (đã tạo droplet được).
+- **Droplet test đã tạo**: `mpfc-upgrade-test` id 608944558, 144.126.236.208, lon1, s-1vcpu-512mb-10gb ($4), Ubuntu 24.04.5, tag `mpfc`,`upgrade-test`, SSH `root@` key `~/.ssh/carrick/id_rsa`.
+- **DB KHÔNG nằm trên droplet**: dùng DO Managed MySQL `db-mysql-lon1-14783` (8.0.45, db-s-1vcpu-1gb, 30GB). DB: wp_mpfc 4.25GB, wp_staging 5.25GB, apache_logs 7.25GB → dùng ~17GB, trống ~13GB. Có read replica `db-ro-mysql-lon1-25682`. Firewall DB cho phép tag `mpfc` → droplet test kết nối được luôn. MySQL local trên server cũ đã tắt.
+- **Dữ liệu site** nằm trên volume `volume-lon1-02` 200GB (dùng 126GB) mount `/mnt/volume_lon1_02`; `/var/www/*` symlink vào đó. Droplet test KHÔNG copy uploads → proxy ảnh về live.
+- **Server cũ thực tế**: droplet 293179468 `mpfc-live` s-4vcpu-8gb, IP 142.93.46.109 + 159.65.213.246. Root cron: snapshot volume, `wp cron` mỗi phút, clone_apache_logs (php7.4).
+
+### DB cho server test (chưa làm, chờ anh chốt)
+- KHÔNG trỏ thẳng vào `wp_mpfc` live: nâng WP core/plugin sẽ chạy migration DB → đổi schema/option của site live đang chạy WP 6.6/PHP 7.4 → hỏng live.
+- Đề xuất: copy `wp_mpfc` → `wp_mpfc_upgrade` ngay trên cùng cluster (dump|import qua pipe, không tốn disk droplet; cluster còn đủ chỗ). Lưu ý: cluster chỉ 1vCPU/1GB → chạy copy giờ thấp điểm, có thể làm chậm live vài phút.
+- Hoặc dùng luôn `wp_staging` có sẵn (không cần copy) nếu staging không còn ai dùng.
+- Server mới chính thức: dùng chung cluster này, KHÔNG cần dump/migrate DB khi cutover → downtime gần 0.
+
 ## Câu hỏi chưa giải quyết
 - Saul hay mình trả chi phí droplet song song?
 - Có chuyển 3 app phụ không, hay tách riêng?
 - Essential Grid custom sửa gì — có tài liệu/diff không?
 - PHP đang chạy mod_php hay fpm (chưa kiểm)?
+- DB test: copy `wp_mpfc_upgrade` hay dùng `wp_staging`?
+- Chuyển cả apache_logs (7.25GB, chiếm cluster) hay dọn bớt?
