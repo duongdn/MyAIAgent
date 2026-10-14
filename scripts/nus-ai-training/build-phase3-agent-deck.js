@@ -684,6 +684,20 @@ box(s, 20, 65, 680, 35, 'Sau 5 buổi, bạn có thể:', { fill: C.NAVY, size: 
 });
 box(s, 20, 345, 680, 45, 'Tiếp theo — Giai đoạn 4: MCP server · chuẩn hóa tool interface cho mọi agent', { fill: C.ORANGE, size: 14 });
 
+s = newSlide('Giai đoạn 4 — MCP: Vì sao cần chuẩn hóa tool?', `Preview cuối Giai đoạn 3 — không đi sâu, chỉ tạo curiosity.
+Vấn đề: search_kb và create_ticket trong Giai đoạn 3 là tool tự viết, chỉ agent này dùng được.
+MCP (Model Context Protocol) giải quyết: chuẩn giao tiếp chung → tool viết 1 lần, mọi agent dùng được.
+S10-11: Xây MCP server từ checkpoints.py, connect với Claude Desktop, VS Code, custom agent.
+Ví dụ: "search_kb" trở thành MCP server → Cursor, Claude, custom agent đều gọi được cùng 1 endpoint.`);
+box(s, 20, 90, 680, 40, 'Giai đoạn 3: tool gắn chặt vào agent  →  Giai đoạn 4: tool thành service dùng chung', { fill: C.LIGHT, size: 14 });
+[['Giai đoạn 3\n(vừa học)', 'Tool Python\ngắn với agent\nchỉ 1 app dùng', C.LIGHT],
+ ['MCP Server\n(S10-11)', 'Standard protocol\njson-rpc over stdio\nbất kỳ agent nào', C.NAVY],
+ ['Kết quả', 'search_kb làm\nMCP server →\nCursor + Claude\n+ custom agent', C.GREEN]].forEach(([t, sub, f], i) => {
+  box(s, 30 + i * 230, 150, 195, 130, `${t}\n${sub}`, { fill: f, size: 15, sub: 12 });
+  if (i) arrow(s, 30 + i * 230 - 35, 215, 30 + i * 230, 215);
+});
+box(s, 20, 310, 680, 45, 'Giai đoạn 5 (đã học): architecture · security · operations · consulting', { fill: C.ORANGE, size: 14 });
+
 // ═══════════════════════════════════════════════════════════
 // PUSH TO GOOGLE SLIDES
 // ═══════════════════════════════════════════════════════════
