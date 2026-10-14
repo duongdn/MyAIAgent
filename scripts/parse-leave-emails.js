@@ -42,7 +42,9 @@ const APPROVAL_KEYWORDS = ["ok em", "ok nhé", "ok nha", "được rồi", "đ�
                             "chấp nhận", "cho phép", "ok.", "ok!", "oke", "được"];
 // Leave request keywords for subject/body matching
 const LEAVE_SUBJECTS = ["nghỉ phép", "nghi phep", "xin nghỉ", "xin nghi", "đơn nghỉ",
-                         "don nghi", "leave request", "nghỉ có phép"];
+                         "don nghi", "leave request", "nghỉ có phép",
+                         // Informal requests, e.g. subject "Đơn Xin Phép" + body "xin phép off hôm nay"
+                         "xin phép off", "xin phep off", "đơn xin phép", "don xin phep"];
 
 // Parse DD/MM/YYYY or DD/MM/YY dates from text
 function parseDates(text) {
@@ -76,7 +78,7 @@ function expandDateRange(start, end) {
 }
 
 // Parse leave dates from email body — handles single day, range, half day
-function parseLeaveInfo(subject, body) {
+function parseLeaveInfo(subject, body, emailDate) {
   const combined = (subject + " " + body).toLowerCase();
 
   // Detect half day
@@ -100,6 +102,17 @@ function parseLeaveInfo(subject, body) {
   } else if (allDates.length > 1) {
     // Multiple individual dates — use all
     dates = allDates;
+  }
+
+  // No explicit date: resolve relative words ("hôm nay"/"ngày mai") against the email's send date (UTC+7)
+  if (!dates.length && emailDate) {
+    const vnDay = new Date(new Date(emailDate).getTime() + 7 * 3600 * 1000);
+    if (/ngày mai|ngay mai|tomorrow/i.test(combined)) {
+      do { vnDay.setUTCDate(vnDay.getUTCDate() + 1); } while ([0, 6].includes(vnDay.getUTCDay()));
+      dates = [vnDay.toISOString().slice(0, 10)];
+    } else if (/hôm nay|hom nay|today/i.test(combined)) {
+      dates = [vnDay.toISOString().slice(0, 10)];
+    }
   }
 
   return { dates, type: isHalf ? "half" : "full" };
@@ -135,15 +148,17 @@ function saveLeavePlan(plan) {
 function checkMode(devId, dateStr) {
   const plan = loadLeavePlan();
   const match = plan.leaves.find(
+    // Pending counts too: same-day sick-leave emails often never get an explicit approval reply,
+    // but the dev still requested the day off, so it must not be reported as a 0h gap.
     l => l.dev_id === devId &&
-         l.status === "approved" &&
+         ["approved", "pending"].includes(l.status) &&
          l.dates.includes(dateStr)
   );
   if (match) {
-    console.log(`LEAVE: ${devId} is off on ${dateStr} (${match.type} day). Reason: ${match.reason || "—"}`);
+    console.log(`LEAVE: ${devId} is off on ${dateStr} (${match.type} day, ${match.status}). Reason: ${match.reason || "—"}`);
     process.exit(0);
   } else {
-    console.log(`WORKING: ${devId} has no approved leave on ${dateStr}`);
+    console.log(`WORKING: ${devId} has no leave request on ${dateStr}`);
     process.exit(1);
   }
 }
@@ -351,7 +366,7 @@ async function main() {
       process.stderr.write(`  SKIP (not monitored): ${req.fromAddr}\n`);
       continue;
     }
-    const { dates, type } = parseLeaveInfo(req.subject, req.body);
+    const { dates, type } = parseLeaveInfo(req.subject, req.body, req.date);
     if (!dates.length) {
       process.stderr.write(`  SKIP (no dates): ${req.subject}\n`);
       continue;

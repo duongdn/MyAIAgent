@@ -12,3 +12,7 @@ User: "TuanNT log rồi mà ???", "ngày 12 off mà !!!"
 
 **Why:** leave-plan.json is not complete. The previous day's report has the verified leave line.
 **How to apply:** For any 0h day D, grep `reports/{D and D+1}/daily-report.md` (and `reports/backup/`) for that dev's leave/off/nghỉ before alerting. Re-fetch WS immediately before sending, and list only the days that are still genuinely 0h. Add missed leave entries to leave-plan.json. Related: [[verify_workstream_zero_hours_before_alerting]] [[parse_leave_emails_misses_remote_work_threads]]
+
+**Root cause (fixed 2026-10-14 in `scripts/parse-leave-emails.js`):**
+1. TuanNT's email had subject "Đơn Xin Phép" and body "xin phép off hôm nay". It contains no "nghỉ" and no dd/mm/yyyy date, so it was skipped. Added the keywords "xin phép off"/"đơn xin phép", and "hôm nay"/"ngày mai" now resolve against the email's send date (UTC+7).
+2. `--check` only accepted `approved`. Same-day sick emails rarely get an approval reply, so they stay `pending`. `--check` now accepts pending too.

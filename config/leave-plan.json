@@ -1,6 +1,6 @@
 {
   "description": "Approved leave dates for monitored PHP team only. Updated daily by parse-leave-emails.js. Consulted BEFORE task log checks.",
-  "last_updated": "2026-10-14T05:01:08+07:00",
+  "last_updated": "2026-10-14T09:04:43+07:00",
   "monitored_devs": [
     "LongVV",
     "PhucVT",
@@ -649,6 +649,21 @@
       "email_subject": "PhucVT_Đơn xin nghỉ phép_Ngày 12/10/2026"
     },
     {
+      "id": "tuannt-2026-09-15",
+      "dev_id": "TuanNT",
+      "dev_email": "tuannt@nustechnology.com",
+      "dates": [
+        "2026-09-15"
+      ],
+      "type": "full",
+      "reason": "",
+      "status": "pending",
+      "requested_at": "2026-09-15T00:40:39.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": "Đơn Xin Phép"
+    },
+    {
       "id": "tuannt-2026-10-12",
       "dev_id": "TuanNT",
       "dev_email": "tuannt@nustechnology.com",
@@ -656,12 +671,12 @@
         "2026-10-12"
       ],
       "type": "full",
-      "reason": "off sick (email 06:57 10-12 + Resource Arrangement confirmed; added manually, parser missed it)",
-      "status": "approved",
-      "requested_at": "2026-10-11T23:57:00.000Z",
+      "reason": "",
+      "status": "pending",
+      "requested_at": "2026-10-11T23:57:10.000Z",
       "approved_by": null,
       "approved_at": null,
-      "email_subject": null
+      "email_subject": "Đơn Xin Phép"
     }
   ]
 }
