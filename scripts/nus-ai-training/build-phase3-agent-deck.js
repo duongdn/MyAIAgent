@@ -367,7 +367,16 @@ s = newSlide('5 điểm kiểm tra — code thật từ demo', `File checkpoints
 ⑤ ask_human(): chỉ hỏi khi ④ đã pass. Hiện CHÍNH XÁC tham số — không tóm tắt mơ hồ.
 
 Câu hỏi: vì sao tắt 1 checkpoint (disabled={"4"}) thì model tạo được ticket P1 ngay?
-Code: Session.disabled = tập checkpoint bị tắt → demo hậu quả thiếu kiểm soát.`);
+Code: Session.disabled = tập checkpoint bị tắt → demo hậu quả thiếu kiểm soát.
+
+Hỏi: Tại sao checkpoints.py không import gì từ SDK?
+Đáp: Chủ ý — business rule không phụ thuộc SDK. Đổi từ OpenAI SDK sang Claude SDK, file này giữ nguyên 100%. Bài học: kiểm soát nằm ở application, không phải ở "tính năng SDK".
+
+Hỏi: ③ (untrusted tag) là checkpoint yếu nhất — tại sao vẫn cần?
+Đáp: Defense in depth — ③ log để audit trail khi incident. Dù model vẫn có thể bị inject dù có ③, nhưng bạn biết KỊCH BẢN NÀO đã xảy ra khi review log. ④ mới chặn hành động; ③ cung cấp visibility.
+
+Hỏi: Nếu dùng cả 5 checkpoint, tại sao còn cần test case (eval)?
+Đáp: Checkpoint chặn action sai — không đảm bảo model trả lời đúng. Ví dụ: model đúng, không tạo ticket P1 (system_ok=True), nhưng câu trả lời vẫn có thể sai hoặc thiếu nguồn. Test case đo model quality; checkpoint đo system safety.`);
 [['①\nSession\nserver', '② Filter\nquery\ntheo quyền', '③ Đánh dấu\nuntrusted\nresults', '④ Validate\nrule\ntrước', '⑤ Human\napproval\ncuối']].flat().forEach((t, i) => {
   box(s, 20 + i * 138, 110, 120, 90, t, { fill: i === 3 ? C.ORANGE : i === 4 ? C.NAVY : C.LIGHT, size: 14 });
   if (i) arrow(s, 20 + i * 138 - 18, 155, 20 + i * 138, 155);
@@ -737,7 +746,16 @@ Lắp ghép từ Sessions 5–9:
 - State: PROCESSING → AWAITING_APPROVAL → COMPLETED | ESCALATED.
 - Harness: scope 2 tools, permission layer, approval gate, max_turns=8 (MAX_TURNS), escalate sau 3 lỗi.
 - Trace: tắt SDK trace (non-OpenAI), tự log qua structured logging.
-Code: scripts/nus-ai-training/support_agent_demo/ — chạy được với NUS gateway ngay hôm nay.`);
+Code: scripts/nus-ai-training/support_agent_demo/ — chạy được với NUS gateway ngay hôm nay.
+
+Hỏi: Trainer hỏi người học: "Em nhìn vào kiến trúc này, thấy thiếu gì để đưa vào production?"
+Đáp mong muốn: real auth (không phải USERS dict hardcode), per-tenant DB thật, approval UI (không phải terminal input()), monitoring/alerting, rate limiting. Trainer không cần list hết — để người học tự tìm.
+
+Hỏi: Tại sao box "Harness 5 lớp" được tô màu khác (NAVY)?
+Đáp: Nhấn mạnh Harness là application code — không phải SDK. Runner/Model là SDK; Harness là code bạn viết. Bất kỳ lúc nào đổi SDK, Harness (checkpoints.py) vẫn giữ nguyên.
+
+Hỏi: create_ticket có RAG không?
+Đáp: Không — create_ticket là write tool, không cần search KB trước. RAG chỉ áp dụng cho search_kb (read tool). Hai tool này hoàn toàn độc lập về access pattern, nhưng đều đi qua Harness.`);
 const arch = [['User\nhỏi', C.LIGHT], ['Harness\n5 lớp', C.NAVY], ['Runner\nSDK loop', C.LIGHT], ['Model\nNUS/OpenAI', C.LIGHT], ['search_kb\nRAG', C.LIGHT], ['create_ticket\n+ approval', C.ORANGE]];
 arch.forEach(([t, f], i) => {
   if (i < 4) { box(s, 20 + i * 168, 130, 145, 70, t, { fill: f, size: 14, sub: 10 }); if (i) arrow(s, 20 + i * 168 - 23, 165, 20 + i * 168, 165); }
