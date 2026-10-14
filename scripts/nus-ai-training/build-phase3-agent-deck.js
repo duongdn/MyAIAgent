@@ -559,9 +559,9 @@ box(s, 20, 105, 680, 40, 'Trace = ghi lại mọi hành động của agent — 
 box(s, 30, 285, 680, 55, 'Trace ≠ đo chất lượng · Chất lượng = test case đại diện + user feedback', { fill: C.NAVY, size: 15 });
 
 s = newSlide('Chạy demo — 3 lệnh, xem agent thật', `Trainer chạy live trước lớp. Cần: Python 3.11+, openai-agents SDK, NUS gateway key trong config/.nus-llm-gateway-config.json.
-Kịch bản 1 (chạy trước): python run_demo.py --scenario 1 → alice hỏi hoàn tiền → ticket P3 được approve bởi trainer.
-Kịch bản 2 (sau đó): python run_demo.py --scenario 2 --disable 4 --approve yes → tắt checkpoint ④ → model tạo ticket P1 gửi CEO tự động.
-Kịch bản 3 (cuối): python run_eval.py --runs 1 --models deepseek-v4.1-flash → 5 test case tự động, xem model_ok vs system_ok.
+Kịch bản 1 (chạy trước): python3 run_demo.py --scenario 1 → alice hỏi hoàn tiền → ticket P3 được approve bởi trainer.
+Kịch bản 2 (sau đó): python3 run_demo.py --scenario 2 --disable 4 --approve yes → tắt checkpoint ④ → model tạo ticket P1 gửi CEO tự động.
+Kịch bản 3 (cuối): python3 run_eval.py --runs 1 --models deepseek-v4.1-flash → 5 test case tự động, xem model_ok vs system_ok.
 Câu hỏi sau live demo: "Checkpoint nào chặn kịch bản 2? Thay thế bằng prompt thay vì code — có đủ không?"
 NOTE: approve_mode="yes" trong eval = worst case (trainer tự động approve mọi ticket). Dùng để test system_ok riêng.`);
 box(s, 20, 85, 680, 35, 'cd scripts/nus-ai-training/support_agent_demo/   (Python 3.11+, pip install openai-agents)', { fill: C.NAVY, size: 13, align: 'START' });
