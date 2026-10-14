@@ -126,18 +126,20 @@ s = newSlide('Session 5 — Agenda', `5 phút mở đầu: câu hỏi trọng t�
 [['1', 'So sánh\n3 mức điều phối', C.LIGHT], ['2', 'Walkthrough\nsupport agent', C.LIGHT], ['3', 'SDK hỗ trợ gì\nvs application', C.GREEN]].forEach(([num, t, f], i) =>
   box(s, 50 + i * 215, 110, 190, 150, `${num}\n${t}`, { fill: f, size: 36, sub: 20 }));
 
-s = newSlide('Model call · Workflow · Agent — 3 mức điều phối', `Ba mức tăng dần độ tự chủ:
+s = newSlide('Model call · Workflow · Agent — 3 mức điều phối', `Ba mức tăng dần độ tự chủ. Không có mức nào "tốt hơn" — chọn đúng context.
 1. Model call: code gọi model 1 lần, nhận output, tiếp tục. Đơn giản nhất, kiểm soát tốt nhất. Dùng khi task rõ ràng: phân loại email, tóm tắt, trích xuất.
 2. Workflow: code điều phối nhiều bước tuần tự hoặc có nhánh. Các bước cố định — code quyết định thứ tự, model làm từng bước. Dùng khi chuỗi bước biết trước, rủi ro cao.
 3. Agent: model tự chọn bước tiếp theo dựa trên goal và kết quả tool. Dùng khi số bước không biết trước, task phụ thuộc kết quả trung gian, cần đa dạng chiến lược.
-Câu hỏi thiết kế: nếu sai, user có thể recover không? Nếu không → dùng mức thấp hơn.`);
+KHÔNG dùng agent khi: task có thể sai không phục hồi được (điền form ngân hàng), bước cố định rõ (invoice processing), rủi ro cao và cần audit trail rõ ràng.
+Câu hỏi thiết kế: nếu model sai 1 bước, user có thể recover không? Nếu không → dùng mức thấp hơn.`);
 [['Model call\n1 lần gọi', C.LIGHT], ['Workflow\ncode điều phối', C.LIGHT], ['Agent\nmodel tự chọn', C.LIGHT]].forEach(([t, f], i) => {
-  box(s, 30 + i * 230, 100, 180, 130, t, { fill: f, size: 18, sub: 13 });
-  if (i) arrow(s, 30 + i * 230 - 20, 165, 30 + i * 230, 165);
+  box(s, 30 + i * 230, 100, 180, 115, t, { fill: f, size: 18, sub: 13 });
+  if (i) arrow(s, 30 + i * 230 - 20, 157, 30 + i * 230, 157);
 });
-box(s, 30, 270, 180, 75, 'Dùng khi:\ntask rõ, 1 bước', { fill: C.GREEN, size: 14, bold: false, sub: 12 });
-box(s, 260, 270, 180, 75, 'Dùng khi:\nbước cố định', { fill: C.GREEN, size: 14, bold: false, sub: 12 });
-box(s, 490, 270, 180, 75, 'Dùng khi:\nbước chưa biết trước', { fill: C.YELLOW, size: 14, bold: false, sub: 11 });
+box(s, 30, 230, 180, 55, '✅ task rõ, 1 bước\n❌ cần audit trail', { fill: C.LIGHT, size: 12, bold: false, sub: 11 });
+box(s, 260, 230, 180, 55, '✅ bước cố định\n❌ kết quả phụ thuộc nhau', { fill: C.LIGHT, size: 12, bold: false, sub: 11 });
+box(s, 490, 230, 180, 55, '✅ bước chưa biết trước\n❌ sai không phục hồi', { fill: C.YELLOW, size: 12, bold: false, sub: 11 });
+box(s, 30, 298, 680, 38, 'Rule: khi không chắc → chọn mức thấp hơn. Nâng mức sau khi đã test kỹ.', { fill: C.NAVY, size: 13 });
 
 s = newSlide('Support agent tối thiểu — sơ đồ', `Đây là sơ đồ minimal support agent dùng xuyên suốt Sessions 5–9.
 User hỏi → Application kiểm tra quyền → Runner gọi model → model chọn tool → tool thực thi → loop tiếp hoặc trả kết quả.
@@ -646,6 +648,26 @@ Bước tiếp theo: Giai đoạn 4 — MCP server để chuẩn hóa tool inter
  '3. Điều kiện nào để set task = COMPLETED?'].forEach((t, i) =>
   box(s, 40, 90 + i * 65, 460, 55, t, { fill: C.LIGHT, size: 14, align: 'START' }));
 box(s, 520, 90, 170, 200, 'Tự thực hành:\nVẽ architecture\nagent:\n\n- Phần SDK\n- Phần app\n- 3 test case\n  quan trọng', { fill: C.GREEN, size: 12, bold: false });
+
+s = newSlide('Câu hỏi khách thường hỏi — cách trả lời', `Trainer dùng slide này khi tư vấn hoặc khi người học chuẩn bị demo cho khách.
+Không có đáp án "đúng tuyệt đối" — mục tiêu là người học biết cách đặt câu hỏi ngược lại cho khách.`);
+[
+  ['"Agent AI có thể tự làm mọi thứ không?"',
+   'Không. Agent tốt khi bước KHÔNG biết trước. Nếu flow biết trước → workflow code rẻ hơn, an toàn hơn, dễ audit hơn.',
+   C.LIGHT],
+  ['"Dùng model giỏi hơn thì không cần checkpoint?"',
+   'Không. Eval của chúng tôi: qwen model_ok=7/10 nhưng system_ok=10/10 nhờ checkpoint. Model giỏi hơn KHÔNG loại bỏ lỗi thiết kế tool hoặc rò rỉ dữ liệu tenant.',
+   C.ORANGE],
+  ['"Bao lâu thì deploy được?"',
+   'Demo nhỏ: 1-2 tuần. Nhưng câu hỏi quan trọng hơn: "Failure mode nào cần kiểm chứng trước?" Không có test case → không biết khi nào sẵn sàng.',
+   C.LIGHT],
+  ['"Chi phí thế nào?"',
+   'deepseek-flash: ~1300 token/case ≈ $0.001/query. Nhân throughput để tính. Cache (LiteLLM): giảm 80-95% với query lặp. Cần đo thực tế với data thật.',
+   C.YELLOW],
+].forEach(([q, a, fill], i) => {
+  box(s, 20, 75 + i * 72, 310, 60, q, { fill: C.NAVY, size: 12, align: 'START' });
+  box(s, 338, 75 + i * 72, 372, 60, a, { fill, size: 11, bold: false, align: 'START' });
+});
 
 s = newSlide('Tổng kết Giai đoạn 3 — Bạn đã học gì?', `Trainer đọc thành tiếng — người học tự chấm.
 Mỗi bullet là 1 câu hỏi: "Em có thể giải thích tại sao không?"`);
