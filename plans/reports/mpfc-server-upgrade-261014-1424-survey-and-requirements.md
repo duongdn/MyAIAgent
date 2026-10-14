@@ -15,7 +15,7 @@ ssh -i ~/.ssh/carrick/id_rsa root@144.126.236.208                # server TEST (
 - Lưu ý máy local: hook chặn chuỗi `.git` và `vendor` trong lệnh Bash → dùng `/.gi[t]`, `V=vendo; ${V}r`.
 
 **Việc tiếp theo (theo thứ tự)**
-1. Kiểm tra DB copy xong chưa: `ssh mpfc.mpfc.live 'cat ~/upgrade/copy-db.log'` — xong khi có dòng `exit 0 0 ...`. Nếu exit ≠ 0 → xem log, chạy lại `~/upgrade/copy-db.sh` (DROP các bảng trong `wp_mpfc_upgrade` trước).
+1. ⛔ **DB copy ĐÃ DỪNG 15:32 +07** — làm CPU cluster 94.78% > 90% → DO alert. `wp_mpfc_upgrade` đang dở (~41 bảng, thiếu mm_notifications...). KHÔNG chạy lại `copy-db.sh` nguyên trạng. Cách mới (chờ anh duyệt): dump từ read replica, bỏ/giới hạn bảng log lớn (mm_notifications 2GB, mm_app_usage_logs, mm_app_log_events), chạy ngoài giờ, theo dõi CPU. (cũ:) Kiểm tra DB copy xong chưa: `ssh mpfc.mpfc.live 'cat ~/upgrade/copy-db.log'` — xong khi có dòng `exit 0 0 ...`. Nếu exit ≠ 0 → xem log, chạy lại `~/upgrade/copy-db.sh` (DROP các bảng trong `wp_mpfc_upgrade` trước).
 2. Mở test URL trên PHP 8.3 → đọc `wp-content/debug.log` + `/var/log/apache2/error.log` trên test → lập danh sách lỗi thật theo plugin/theme.
 3. Update plugin (cần license, xem §6) → sửa code custom → update WP core → QA (§5 phase 5).
 4. Sau khi Saul duyệt: dựng server chính thức theo checklist §4.
