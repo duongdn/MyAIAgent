@@ -647,6 +647,21 @@
       "approved_by": null,
       "approved_at": null,
       "email_subject": "PhucVT_Đơn xin nghỉ phép_Ngày 12/10/2026"
+    },
+    {
+      "id": "tuannt-2026-10-12",
+      "dev_id": "TuanNT",
+      "dev_email": "tuannt@nustechnology.com",
+      "dates": [
+        "2026-10-12"
+      ],
+      "type": "full",
+      "reason": "off sick (email 06:57 10-12 + Resource Arrangement confirmed; added manually, parser missed it)",
+      "status": "approved",
+      "requested_at": "2026-10-11T23:57:00.000Z",
+      "approved_by": null,
+      "approved_at": null,
+      "email_subject": null
     }
   ]
 }
