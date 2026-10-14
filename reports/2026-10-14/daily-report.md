@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-14 (Wednesday)
 
-**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 + 08:52 (+07:00) (recheck)
+**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 + 08:52 + 08:56 (+07:00) (recheck)
 **Window:** 2026-10-13 08:33 → 2026-10-14 05:12 (+07:00). Task-log date: Tue 2026-10-13.
 **Leave plan:** PhucVT 10-12 full day (pending). ThinhT 10-12 (Resource Arrangement, charged to Kunal). ThamTTH 14–16/10. TuanNT left early 10-13 (flu, will make up the hours).
 
@@ -10,13 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack GGS #maintenance | **Bailey live console down, no reply.** Joey 10-13 23:17: "live console has message error and is not working" ([link](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1791908252619239)). Production issue reported overnight. 08:40 recheck: still no reply. Bailey ○ |
+| 1 | Slack GGS #maintenance | **Bailey live console down, no reply.** Joey 10-13 23:17: "live console has message error and is not working" ([link](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1791908252619239)). Production issue reported overnight. ~~08:40 recheck: still no reply. Bailey ○~~ ✅ 08:55: user confirmed a reply was sent → Bailey ✓ |
 | 2 | Fountain Trello | **Kunal asked for a live-console action, no reply.** Kunal (via his AI) 10-13 21:34 asked @rick570 to run a console line on live today to turn on engraving ($30) for 69 gifts ([card](https://trello.com/c/8JfTlU40)). 08:40 recheck: still no reply. **New 08:14–08:15:** Kunal on ["Start here: review order for Claude's PRs"](https://trello.com/c/TdvfIo08) proposed go-live tomorrow night 10pm–5am EST (or tonight) and is waiting on @rick570 to confirm. Fountain ○ |
 | 3 | Slack RDC | **dmetiner sent new direct asks, no reply yet.** 20:17: add him as collaborator on the server-code GitHub repo, add MPX/SOL/SAĞ/PILOT/RDS/RF metrics to the scanner-plugin CSV logs, and share the current logged fields. 21:00: deploy the newest preset-buttons to Power Group devices and use the Istanbul device for the new task. Posted after hours. Another dmetiner message 02:12 ("Tuner Access Log"). 08:40 recheck: no reply from us yet. Franc ○ |
-| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder. 08:52 recheck (all 23 WS projects, fresh token): **TuanNT still 0h on 10-12 and 10-13, with 0 rows anywhere**. Bailey/Speedventory shows only TrinhMTT 5.5h, VyNL 11.5h, DatNC 2h. Reminder not sent (no `--send-reminder`) |
+| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder. 08:52 recheck (all 23 WS projects, fresh token): **TuanNT still 0h on 10-12 and 10-13, with 0 rows anywhere**. Bailey/Speedventory shows only TrinhMTT 5.5h, VyNL 11.5h, DatNC 2h. ✅ Reminder sent 08:55 (user approved) → the gate is cleared |
 | 5 | Matrix | namtv 21:13 asked about an unknown contact on Brad's site (Auction Warehouse): Zhenke Xu (zhenkexu763@gmail.com). That site has an open-registration/webshell history. No reply yet |
 | 6 | Email vuongtrancr | Swish New Relic **"Signal lost for 10 minutes on 'Low Application Throughput'"** (critical): one issue closed 08:41, another active 08:51 |
 | 7 | Performance | MPFC apdex 0.44 (poor, chronic). `continue`-switch E_WARNING 845x, WP_Error::get_method() 9x, mysqli socket errors 7x, SQLi-probe search URLs about 21s |
+| 9 | WhatsApp (added 08:58) | **Mirko Leon (Traslochi), 10-13 23:00:** "Vuong are you receiving the mfa code of aws? Alberto is trying to login but can't". Earlier (17:59): he asked for SSH access to the prod server to deploy a new homepage for traslochi-online.it and shared his ssh-ed25519 key (mirko@traslochi). The script's sender labels are unreliable. No reply seen after 23:00 |
 | 8 | GGS Slack | Joey challenged the 69h grazing estimate ("what is the time and price if you guys do it with codex?"). Nick gave a holding reply ("I will send you a detailed breakdown"). The breakdown is still owed. Internal guidance in Matrix: duongdn asked TuanNT for a detailed justification |
 
 **Today (Oct 14):** ThamTTH off (14–16/10). VuTQ joins Bailey bug-fixing. Elena-Optimization release planned today. Everyone else present.
@@ -176,8 +177,8 @@ Trello: ⚠️ Fountain skipped (Alert #2 + Kunal go-live question 08:14, still 
 
 - Maddy ✓ · James Diamond ✓ · Rory ✓ · Aysar ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ · Andrew Taraba ✓ · Ohcleo ✓ · Elena - WordPress SamGuard ✓
 - ⚠️ Franc: skipped (Alert #3)
-- ⚠️ Bailey: skipped (Alerts #1, #4)
-- ⚠️ Fountain - DOCUMENT: skipped (Alert #2)
+- ~~⚠️ Bailey: skipped (Alerts #1, #4)~~ ✓ complete 08:56 (reply sent + TuanNT reminder sent)
+- ~~⚠️ Fountain - DOCUMENT: skipped (Alert #2)~~ ✓ already complete on the live board at 08:56 (completed manually)
 
 ## Ignore List — 05:11 (+07:00)
 Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
@@ -185,7 +186,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 ---
 
 ## Reminders — 05:11 (+07:00)
-- TuanNT: 0h on 10-12/10-13 in WS, but evidence of work + 05:00 read. **Not sent** (cron, no `--send-reminder`). Re-verify after 09:30 first.
+- TuanNT: 0h on 10-12/10-13 in WS. ~~Not sent (cron, no `--send-reminder`)~~ **Sent 08:55** (Matrix, user approved).
 - KhanhHH, LeNH: have hours, skipped. LongVV: no target. PhucVT: ignored.
 
 ---
@@ -275,10 +276,18 @@ Neural Contract (38901192): re-run 08:50 after the user logged in to Upwork. Lat
 
 ---
 
+## WhatsApp — 08:58 (+07:00)
+Not in the default cron run (Piece 16 excluded). Run on demand after the user flagged it.
+
+| Chat | New msgs | Key content |
+|------|----------|-------------|
+| Mirko Leon | 6 | 17:59: SSH access request for the Traslochi prod server (new homepage deploy) + pubkey. 19:19 "let me check". 23:00: AWS MFA code question, Alberto can't log in ⚠️ (Alert #9) |
+
+---
+
 ## Unresolved Questions
 - TuanNT 10-12/10-13 hours: real gap or logging lag (sick 10-13)? Re-check WS after 09:30 before any reminder.
 - ~~Who should review the OhCleo Pending charged hours?~~ DuongDN/MinhTV, 3 rows Pending.
-- TuanNT 0h on 10-12/10-13: send a reminder? (He was sick 10-13 and said he would make up the hours.)
 - FirstProject production Rollbar #1128/#1129: which client project is this?
 - ~~Upwork memo + Neural need a local-machine run~~ Memo check + Neural ran after the Upwork login: clean.
 - Who replies to Kunal's go-live timing question (tonight vs tomorrow 10pm–5am EST)?
