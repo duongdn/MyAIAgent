@@ -262,11 +262,20 @@ box(s, 40, 285, 640, 45, 'Tool result trả về ≠ task hoàn thành — appli
 s = newSlide('Tool contract — bắt buộc phải có', `Tool contract là "hợp đồng" giữa model và code.
 Thiếu bất kỳ trường nào → model gọi sai, side effect không kiểm soát được.
 6 thành phần bắt buộc: (1) name — ngắn gọn, model dùng để chọn; (2) description — mô tả KHI NÀO dùng tool này, không chỉ làm gì; (3) input schema — tên tham số, kiểu, bắt buộc/tuỳ chọn; (4) output — format trả về, ví dụ JSON schema; (5) error cases — lỗi gì, trả về gì; (6) side effects — có ghi DB không? gửi email không?
-Tách read tool (search_kb) khỏi write tool (create_ticket): cách kiểm soát khác nhau hoàn toàn.`);
+Tách read tool (search_kb) khỏi write tool (create_ticket): cách kiểm soát khác nhau hoàn toàn.
+
+Hỏi: "Trường nào quan trọng nhất với model khi chọn tool?"
+Đáp: description — model đọc description để quyết định có gọi tool này không và khi nào. Name dùng để gọi, nhưng decision dựa vào description. Ví dụ: search_kb description thiếu "khi nào dùng" → model gọi random hoặc không gọi khi cần.
+
+Hỏi: "Tại sao side effects phải khai báo?"
+Đáp: Model không biết tool có ghi DB hay gửi email không — nếu không khai báo, agent có thể gọi create_ticket 2 lần (sau timeout + retry) và tạo ticket trùng. Side effects bắt buộc khai báo để cài idempotency + approval gate.
+
+Lỗi hay gặp: "Viết description ngắn gọn là tốt." → Sai khi description quá ngắn — model không đủ context để chọn đúng tool. SEARCH_KB_DESC thêm "Có thể truyền tenant" là có chủ ý: model biết tham số này tồn tại nhưng ① sẽ bỏ qua nếu sai.`);
 [['name', 'search_kb\ncreate_ticket'], ['description', 'Khi nào dùng\nkhông chỉ làm gì'], ['input schema', 'tham số\nkiểu · bắt buộc'], ['output', 'format JSON\nví dụ kết quả'], ['error cases', 'lỗi gì\ntrả về gì'], ['side effects', 'ghi DB?\ngửi email?']].forEach(([name, detail], i) => {
   const x = 30 + (i % 3) * 228, y = 100 + Math.floor(i / 3) * 120;
   box(s, x, y, 200, 100, `${name}\n${detail}`, { fill: i === 5 ? C.ORANGE : C.LIGHT, size: 17, sub: 12 });
 });
+box(s, 30, 330, 680, 30, '❌ description ngắn quá → model chọn sai tool · ❌ thiếu side effects → ticket tạo 2 lần khi retry', { fill: C.ORANGE, size: 12, bold: false });
 
 s = newSlide('search_kb vs create_ticket — demo contracts', `Hai tool này dùng xuyên suốt Sessions 5–9. Text description THẬT từ checkpoints.py:
 
