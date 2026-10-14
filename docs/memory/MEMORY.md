@@ -65,6 +65,7 @@
 - [feedback_discord_token_refresh_script_broken](daily-report/discord/feedback_discord_token_refresh_script_broken.md) — 🔴 401≠login
 
 ## daily-report:sheets
+- [zero_hours_check_prior_report_leave](daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md) — 🔴 0h/reminder: check prior day report leave line first (leave-plan.json missed TuanNT sick 10-12); re-fetch WS right before send
 - [feedback_ws_aggregate_drops_rows_and_luhx_not_managed](daily-report/sheets/feedback_ws_aggregate_drops_rows_and_luhx_not_managed.md) — 🔴 raw /review/week rows before any 0h claim (TuanNT 8h missed 09-29); LuHX on Maddy = unmanaged role
 - [feedback_maddy_jira_identity_luhx_jeff_ihc_project](daily-report/sheets/feedback_maddy_jira_identity_luhx_jeff_ihc_project.md) — 🔴 LuHX=Jeff Nguyen on JIRA IHC; JQL worklogDate across all projects before 'no JIRA log'
 Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Bailey now on Workstream) — old sheets-scan mechanics memories deleted; entries below are Workstream-era.
