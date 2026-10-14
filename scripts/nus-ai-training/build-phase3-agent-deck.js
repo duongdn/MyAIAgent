@@ -651,7 +651,13 @@ s = newSlide('Session 8 — Câu hỏi kiểm tra', `Gợi ý đáp án (để 5
 2. AWAITING_APPROVAL — dừng run, lưu state, resume sau khi người duyệt.
 3. Khi ticket_id trả về từ Jira (tác động thực) — không phải khi model báo "xong".
 Bài tự thực hành: vẽ state machine gồm đang xử lý, chờ phê duyệt, hoàn thành và chuyển người; nêu dữ liệu lưu ở từng trạng thái.
-Timing: Q1=3 phút, Q2=3 phút, Q3=4 phút, thực hành=20 phút, review=10 phút, Q&A=20 phút.`);
+Timing: Q1=3 phút, Q2=3 phút, Q3=4 phút, thực hành=20 phút, review=10 phút, Q&A=20 phút.
+
+Pushback Q1 — người học trả lời sai ("Context lưu bền hơn vì nó có trong mọi lần gọi"):
+Trainer: "Context window xuất hiện mỗi lần gọi, nhưng đó là CỬA SỔ TẠM — hết run là mất. Task state lưu bền vào DB vì cần tồn tại khi server restart hoặc user quay lại sau nhiều giờ. Hỏi ngược: nếu server crash giữa chừng, cái gì còn lại để tiếp tục?"
+
+Pushback Q3 — người học trả lời sai ("Khi model trả lời 'ticket đã tạo xong'"):
+Trainer: "Model có thể hallucinate kết quả thành công. COMPLETED chỉ hợp lệ khi ticket_id thực sự trả về từ Jira — tác động thật trong hệ thống. Nếu Jira down 30 giây, model vẫn trả lời 'xong' nhưng ticket không tồn tại. Ai kiểm chứng?"`);
 ['1. Phân biệt context và task state — cái nào lưu bền, tồn tại qua nhiều run?',
  '2. Agent soạn xong ticket draft, cần người duyệt — state chuyển sang gì, run xử lý thế nào?',
  '3. Khi nào được set task state = COMPLETED?'].forEach((t, i) =>
@@ -923,7 +929,13 @@ s = newSlide('Session 9 — Câu hỏi kiểm tra & Tổng kết Giai đoạn 3'
 3. Khi ticket_id từ Jira xác nhận (tác động thực) + state COMPLETED trong DB.
 Tổng kết Giai đoạn 3: người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.
 Bước tiếp theo: Giai đoạn 4 — MCP server để chuẩn hóa tool interface; Giai đoạn 5 (đã học) — architecture, security, operations, consulting.
-Timing: Q1=5 phút, Q2=5 phút, Q3=5 phút, thực hành=20 phút, review+recap=15 phút, Q&A=10 phút (session 60 phút tổng).`);
+Timing: Q1=5 phút, Q2=5 phút, Q3=5 phút, thực hành=20 phút, review+recap=15 phút, Q&A=10 phút (session 60 phút tổng).
+
+Pushback Q1 — người học trả lời sai ("Thiếu budget layer nguy hiểm nhất vì agent có thể tốn tiền vô hạn"):
+Trainer: "Budget quan trọng, nhưng token vô hạn thì tốn tiền — approval gate thiếu thì agent TỰ TẠO hành động side effect không ai kiểm soát. Ticket P1 sai assign, email gửi nhầm khách — không phục hồi được. Tiền có thể đặt alert; hành động sai thì sao?"
+
+Pushback Q2 — người học trả lời sai ("Trace là cách đo chất lượng vì nó ghi lại mọi bước agent làm"):
+Trainer: "Trace ghi lại agent LÀM GÌ — từng tool call, argument, response. Nhưng trace không nói agent làm ĐÚNG không. Chất lượng cần test case (so expected vs actual) và user feedback. Ví dụ: trace thấy agent gọi search_kb rồi create_ticket — điều đó không chứng minh ticket đúng priority."`);
 ['1. Harness cần 5 lớp gì? Thiếu lớp nào nguy hiểm nhất?',
  '2. Phân biệt trace và đo chất lượng agent.',
  '3. Điều kiện nào để set task = COMPLETED?'].forEach((t, i) =>
