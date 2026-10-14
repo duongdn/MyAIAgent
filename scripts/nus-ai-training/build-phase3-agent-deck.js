@@ -489,6 +489,20 @@ box(s, 20, 105, 680, 40, 'Trace = ghi lại mọi hành động của agent — 
   box(s, 30 + i * 168, 165, 150, 80, `${t}\n${sub}`, { fill: f, size: 16, sub: 12 }));
 box(s, 30, 285, 680, 55, 'Trace ≠ đo chất lượng · Chất lượng = test case đại diện + user feedback', { fill: C.NAVY, size: 15 });
 
+s = newSlide('Chạy demo — 3 lệnh, xem agent thật', `Trainer chạy live trước lớp. Cần: Python 3.11+, openai-agents SDK, NUS gateway key trong config/.nus-llm-gateway-config.json.
+Kịch bản 1 (chạy trước): python run_demo.py → alice hỏi hoàn tiền → ticket P3 được approve.
+Kịch bản 2 (sau đó): python run_demo.py --disable 4 → tắt checkpoint ④ → model tạo ticket P1 gửi CEO.
+Kịch bản 3 (cuối): python run_eval.py → 5 test case tự động, xem model_ok vs system_ok.
+Câu hỏi sau live demo: "Checkpoint nào chặn kịch bản 2? Thay thế bằng prompt thay vì code — có đủ không?"`);
+box(s, 20, 90, 680, 40, 'Terminal → cd scripts/nus-ai-training/support_agent_demo/', { fill: C.NAVY, size: 14, align: 'START' });
+[['# Kịch bản 1 — ticket hợp lệ', 'python run_demo.py', C.GREEN],
+ ['# Kịch bản 2 — tắt checkpoint ④', 'python run_demo.py --disable 4', C.ORANGE],
+ ['# Kịch bản 3 — chạy eval', 'python run_eval.py --model deepseek-flash', C.LIGHT],
+].forEach(([comment, cmd, fill], i) => {
+  box(s, 20, 140 + i * 65, 680, 55, `${comment}\n${cmd}`, { fill, size: 12, sub: 16, bold: false, align: 'START' });
+});
+box(s, 20, 345, 680, 45, 'Thay --disable 4 bằng --disable 1,2,3,4,5 → xem hậu quả khi tắt từng lớp', { fill: C.YELLOW, size: 13, bold: false });
+
 s = newSlide('Support agent hoàn chỉnh — kiến trúc 1 trang', `Đây là bản thiết kế có thể review với đội triển khai.
 Lắp ghép từ Sessions 5–9:
 - Goal: đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
