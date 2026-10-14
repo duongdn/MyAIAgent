@@ -331,7 +331,20 @@ box(s, 20, 260, 680, 45, 'checkpoints.py không import SDK — đổi SDK giữ 
 box(s, 20, 315, 680, 40, 'disabled={"4"} → bỏ ④ → model tạo ticket P1, assign CEO — demo hậu quả', { fill: C.ORANGE, size: 13, bold: false });
 
 s = newSlide('OWASP LLM Top 10 — Giai đoạn 3 cover gì?', `Không cần biết toàn bộ OWASP LLM Top 10. Chỉ cần biết checkpoints demo cover những risk nào.
-Mục tiêu: người học nhận ra tên OWASP khi gặp trong báo cáo security audit.`);
+Mục tiêu: người học nhận ra tên OWASP khi gặp trong báo cáo security audit.
+
+Hỏi mở đầu: "Khi đội security audit agent AI của bạn, họ sẽ hỏi gì đầu tiên?" → ghi answers → map vào bảng OWASP.
+
+Điểm nhấn quan trọng:
+- LLM01 (Prompt Injection): không chặn hoàn toàn bằng text pattern — ③ chỉ log, ④ mới chặn được hành động.
+- LLM06 (Sensitive Info Disclosure): filter PHẢI ở data access layer (②), không phải trong system prompt.
+- LLM08 (Excessive Agency): whitelist priority là CODE, không phải prompt instruction — ai dùng prompt thay code đây chính là lỗ hổng LLM08.
+- LLM10 (Model DoS): demo có glm ~39s/case — 10 user đồng thời = 390s chờ. MAX_TURNS cắt vòng lặp vô hạn.
+
+Câu hỏi trainer hay gặp: "Còn LLM03 (Training Data Poisoning), LLM04 (Model DoS từ training) thì sao?"
+Đáp: nằm ngoài scope Giai đoạn 3 — đó là risk ở lớp model/infrastructure, không phải application layer.
+
+Trainer note: Slide này dùng tốt nhất ở đầu S7 để đóng khung 5 checkpoint vào ngữ cảnh security chuẩn công nghiệp.`);
 box(s, 20, 75, 680, 35, 'OWASP LLM Risk → Checkpoint trong demo', { fill: C.NAVY, size: 15 });
 [
   ['LLM01 · Prompt Injection', '③ untrusted tag + ④ rule bằng code', 'KB bị đầu độc → ③ log ⚠, ④ chặn P1', C.YELLOW],
@@ -344,6 +357,7 @@ box(s, 20, 75, 680, 35, 'OWASP LLM Risk → Checkpoint trong demo', { fill: C.NA
   box(s, 232, 120 + i * 44, 210, 36, cp, { fill, size: 11, bold: false });
   box(s, 449, 120 + i * 44, 261, 36, example, { fill: C.LIGHT, size: 10, bold: false });
 });
+box(s, 20, 345, 680, 30, '❌ Lỗi hay gặp: dùng prompt thay code cho LLM08 — prompt bị ghi đè, code thì không', { fill: C.ORANGE, size: 12, bold: false });
 
 // ═══════════════════════════════════════════════════════════
 // SESSION 7: Tool execution an toàn, lỗi và approval (60 phút)
@@ -395,7 +409,14 @@ SUBTLY_POISONED_DOC (tinh vi hơn — trông như "quy định nội bộ"):
 
 SUSPICIOUS patterns checkpoint ③ tìm (chỉ log, không chặn hoàn toàn):
   ["ignore all previous", "ignore previous", "bỏ qua mọi hướng dẫn", "dành cho ai assistant"]
-→ Đổi cách viết là qua. Đây là lý do checkpoint ④ (rule bằng code) quan trọng hơn ③.`);
+→ Đổi cách viết là qua. Đây là lý do checkpoint ④ (rule bằng code) quan trọng hơn ③.
+
+Hỏi: "Tại sao SUBTLY_POISONED_DOC nguy hiểm hơn POISONED_DOC?"
+Đáp: POISONED_DOC có "Ghi chú dành cho AI assistant" → ③ phát hiện + log. SUBTLY_POISONED_DOC viết như quy định bình thường → ③ không phát hiện, chỉ ④ chặn hành động.
+
+Lỗi hay gặp của người học: "Thêm vào system prompt là cấm tạo P1 là đủ." → Không. Model đọc SUBTLY_POISONED_DOC có thể bị thuyết phục rằng đây là "quy trình mới" ghi đè system prompt. Code ④ không bị thuyết phục.
+
+Để trainer chạy live: python3 run_demo.py --scenario 2 → xem ③ log POISONED_DOC + ④ chặn P1. So sánh với --disable 3 --disable 4 để thấy sự khác biệt.`);
 box(s, 20, 110, 680, 55, 'Tài liệu từ search_kb chứa lệnh độc → model đọc → có thể làm theo', { fill: C.ORANGE, size: 14 });
 [['Least\nprivilege', 'tool chỉ có quyền tối thiểu', C.LIGHT], ['Approval\ngate', 'write → người duyệt', C.NAVY], ['Validate\ntham số', 'trước khi chạy', C.LIGHT]].forEach(([t, sub, fill], i) =>
   box(s, 40 + i * 220, 190, 200, 90, `${t}\n${sub}`, { fill, size: 17, sub: 13 }));
