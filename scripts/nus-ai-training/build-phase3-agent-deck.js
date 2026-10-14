@@ -180,7 +180,8 @@ s = newSlide('Session 5 — Câu hỏi kiểm tra', `Gợi ý đáp án:
 1. Agent — vì không biết trước bao nhiêu bước tìm kiếm, và task tùy thuộc kết quả trung gian.
 2. Model call hoặc workflow — bước cố định: nhận email → trích xuất → lưu vào DB.
 3. Application — SDK không biết business rule của công ty.
-Bài tự thực hành: chọn 1 task tại công ty, phân loại model call / workflow / agent, nêu lý do, đánh dấu ranh giới SDK và application.`);
+Bài tự thực hành: chọn 1 task tại công ty, phân loại model call / workflow / agent, nêu lý do, đánh dấu ranh giới SDK và application.
+Timing: Q1=2 phút, Q2=2 phút, Q3=3 phút, thực hành=15 phút, review=10 phút, Q&A=13 phút (session 45 phút tổng).`);
 ['1. Support agent: phân loại yêu cầu và tạo ticket — chọn mức nào?',
  '2. Trích xuất field từ email vào DB — chọn mức nào?',
  '3. Kiểm tra quyền user/tenant — SDK hay application làm?'].forEach((t, i) =>
@@ -293,7 +294,8 @@ s = newSlide('Session 6 — Câu hỏi kiểm tra', `Gợi ý đáp án:
 1. description — phải mô tả KHI NÀO dùng tool, không chỉ làm gì. Model dùng description để chọn tool phù hợp.
 2. Để tránh tạo 2 ticket khi timeout + retry. Gọi 2 lần cùng key → chỉ tạo 1 lần.
 3. Application (code), KHÔNG phải model. Model chỉ đề xuất tool, application quyết định có thực thi không.
-Bài tự thực hành: định nghĩa contract cho 2 tool (read + write), vẽ sequence diagram một lần agent gọi tool.`);
+Bài tự thực hành: định nghĩa contract cho 2 tool (read + write), vẽ sequence diagram một lần agent gọi tool.
+Timing: Q1=3 phút, Q2=3 phút, Q3=3 phút, thực hành=20 phút, review=10 phút, Q&A=21 phút (session 60 phút tổng).`);
 ['1. Trường nào trong tool contract quan trọng nhất với model khi chọn tool?',
  '2. Vì sao create_ticket cần idempotency key?',
  '3. Quyết định có gọi tool thật hay không — model hay application?'].forEach((t, i) =>
@@ -421,7 +423,8 @@ s = newSlide('Session 7 — Câu hỏi kiểm tra', `Gợi ý đáp án:
 1. user_id + tenant_id từ RunContextWrapper (context), KHÔNG từ tham số model truyền vào — vì model có thể bị inject.
 2. Trả {"error": "timeout", "idempotency_key": "..."} → retry dùng key để check trùng trước.
 3. Approval gate (preview + người bấm xác nhận) + least privilege (agent không có tool forward email).
-Bài tự thực hành: viết bảng xử lý cho 6 trường hợp: thiếu quyền, input sai, timeout, kết quả rỗng, gọi lặp, yêu cầu phê duyệt.`);
+Bài tự thực hành: viết bảng xử lý cho 6 trường hợp: thiếu quyền, input sai, timeout, kết quả rỗng, gọi lặp, yêu cầu phê duyệt.
+Timing: Q1=4 phút, Q2=3 phút, Q3=3 phút, thực hành=20 phút, review=10 phút, Q&A=20 phút (session 60 phút tổng).`);
 ['1. Kiểm tra quyền user/tenant — lấy user_id từ đâu? Vì sao không từ tham số tool?',
  '2. create_ticket timeout — trả gì, retry thế nào?',
  '3. Tool result chứa lệnh độc — phòng thủ ở đâu?'].forEach((t, i) =>
@@ -516,16 +519,23 @@ box(s, 30, 265, 680, 40, 'Cache key PHẢI gồm: user_id + tenant_id + permissi
 box(s, 30, 315, 680, 38, 'Demo/Eval: "cache": {"no-cache": True} → model thật mỗi lần, không dùng cache', { fill: C.LIGHT, size: 13, bold: false });
 
 s = newSlide('Agent harness — 5 lớp kiểm soát', `Harness là framework bao quanh agent loop. Không có harness → agent demo, không phải prototype.
-5 lớp:
-1. Scope tools: chỉ những tool agent này được phép dùng. support agent không có "delete_all", "send_bulk_email".
-2. Permission layer: kiểm tra quyền user/tenant trước MỌI write tool.
-3. Approval gate: write action có impact → preview + người xác nhận.
-4. Budget: max_steps, max_seconds, max_tool_calls per run.
-5. State & escalation: lưu task state, xác định khi nào chuyển sang ESCALATED (chuyển người).
+5 lớp và nơi implement trong demo:
+1. Scope tools: tools=[search_kb, create_ticket] trong Agent() — không đăng ký tool khác.
+2. Permission layer: checkpoints.py hàm search_kb() lọc theo tenant+role, check_ticket() kiểm tra quyền.
+3. Approval gate: needs_approval=ticket_needs_approval trong @function_tool — SDK gọi trước khi tool chạy.
+4. Budget: max_turns=cp.MAX_TURNS=8 trong Runner.run() — OWASP LLM10.
+5. State & escalation: Session.disabled, TICKETS list, AWAITING_APPROVAL state trong task flow.
 Tất cả 5 lớp phải có trước khi demo cho khách. Thiếu 1 → nguy cơ side effect không kiểm soát.`);
-['1. Scope\ntools', '2. Permission\nlayer', '3. Approval\ngate', '4. Budget\nlimits', '5. State &\nescalation'].forEach((t, i) =>
-  box(s, 20 + i * 138, 110, 120, 90, t, { fill: i === 2 ? C.ORANGE : C.NAVY, size: 15, sub: 12 }));
-box(s, 20, 255, 680, 65, 'Demo cho khách = phải có cả 5 lớp\nThiếu 1 lớp → side effect không kiểm soát', { fill: C.ORANGE, size: 16 });
+[['1. Scope\ntools', 'Agent(tools=\n[…])', C.NAVY],
+ ['2. Permission\nlayer', 'checkpoints.py\nsearch_kb()', C.NAVY],
+ ['3. Approval\ngate', 'needs_approval=\nfunc', C.ORANGE],
+ ['4. Budget\nlimits', 'max_turns=8\nRunner.run()', C.NAVY],
+ ['5. State &\nescalation', 'Session\nAWAITING', C.NAVY]].forEach(([t, code, fill], i) => {
+  box(s, 20 + i * 138, 105, 120, 65, t, { fill, size: 14, sub: 12 });
+  box(s, 20 + i * 138, 175, 120, 45, code, { fill: C.LIGHT, size: 11, bold: false });
+});
+box(s, 20, 232, 680, 40, 'Demo cho khách = phải có cả 5 lớp · Thiếu 1 lớp → side effect không kiểm soát', { fill: C.ORANGE, size: 14 });
+box(s, 20, 278, 680, 38, 'Xem: agent_openai_sdk.py (lớp 1,3,4) + checkpoints.py (lớp 2,5)', { fill: C.GREEN, size: 13, bold: false });
 
 s = newSlide('Trace — xem agent thực sự làm gì', `Trace là X-quang của agent. Không có trace → không thể debug khi sai.
 OpenAI Agents SDK tích hợp trace (nếu dùng OpenAI provider). Với NUS gateway → set_tracing_disabled(True) và tự log.
@@ -666,11 +676,12 @@ Không báo đáp án ngay — để 2 phút thảo luận nhóm trước.`);
 });
 
 s = newSlide('Session 9 — Câu hỏi kiểm tra & Tổng kết Giai đoạn 3', `Gợi ý đáp án:
-1. 5 lớp: scope tools, permission layer, approval gate, budget, state & escalation.
-2. Trace ghi lại model/tool calls để debug. Tiêu chí chất lượng = test case + user feedback.
+1. 5 lớp: scope tools, permission layer, approval gate, budget, state & escalation. Thiếu approval gate → side effect không được kiểm soát.
+2. Trace ghi lại model/tool calls để debug. Tiêu chí chất lượng = test case + user feedback. Trace giúp tìm nguyên nhân, KHÔNG thay chỉ số chất lượng.
 3. Khi ticket_id từ Jira xác nhận (tác động thực) + state COMPLETED trong DB.
 Tổng kết Giai đoạn 3: người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.
-Bước tiếp theo: Giai đoạn 4 — MCP server để chuẩn hóa tool interface; Giai đoạn 5 (đã học) — architecture, security, operations, consulting.`);
+Bước tiếp theo: Giai đoạn 4 — MCP server để chuẩn hóa tool interface; Giai đoạn 5 (đã học) — architecture, security, operations, consulting.
+Timing: Q1=5 phút, Q2=5 phút, Q3=5 phút, thực hành=20 phút, review+recap=15 phút, Q&A=10 phút (session 60 phút tổng).`);
 ['1. Harness cần 5 lớp gì? Thiếu lớp nào nguy hiểm nhất?',
  '2. Phân biệt trace và đo chất lượng agent.',
  '3. Điều kiện nào để set task = COMPLETED?'].forEach((t, i) =>
