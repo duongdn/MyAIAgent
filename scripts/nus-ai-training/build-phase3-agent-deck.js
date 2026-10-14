@@ -131,7 +131,17 @@ s = newSlide('Model call · Workflow · Agent — 3 mức điều phối', `Ba m
 2. Workflow: code điều phối nhiều bước tuần tự hoặc có nhánh. Các bước cố định — code quyết định thứ tự, model làm từng bước. Dùng khi chuỗi bước biết trước, rủi ro cao.
 3. Agent: model tự chọn bước tiếp theo dựa trên goal và kết quả tool. Dùng khi số bước không biết trước, task phụ thuộc kết quả trung gian, cần đa dạng chiến lược.
 KHÔNG dùng agent khi: task có thể sai không phục hồi được (điền form ngân hàng), bước cố định rõ (invoice processing), rủi ro cao và cần audit trail rõ ràng.
-Câu hỏi thiết kế: nếu model sai 1 bước, user có thể recover không? Nếu không → dùng mức thấp hơn.`);
+Câu hỏi thiết kế: nếu model sai 1 bước, user có thể recover không? Nếu không → dùng mức thấp hơn.
+
+Hỏi mở đầu (để người học tự phân loại trước khi xem slide):
+  "Viết email dựa trên template có sẵn → mức nào?"
+  Đáp: Model call hoặc Workflow. Bước cố định, output dự đoán được.
+  "Chatbot hỗ trợ khách hàng tìm câu trả lời và tạo ticket → mức nào?"
+  Đáp: Agent — số bước tìm kiếm không biết trước, phụ thuộc câu hỏi của khách.
+
+Lỗi hay gặp: "Agent tốt hơn nên dùng agent cho mọi thứ." → Ngược lại: agent phức tạp hơn, khó audit hơn, tốn token hơn. Support agent trong demo là agent vì câu hỏi không biết trước bao nhiêu bước search — không phải vì "AI xịn hơn".
+
+Timing gợi ý: 10 phút cho slide này — để người học tự phân loại 2-3 ví dụ trước khi trainer reveal.`);
 [['Model call\n1 lần gọi', C.LIGHT], ['Workflow\ncode điều phối', C.LIGHT], ['Agent\nmodel tự chọn', C.LIGHT]].forEach(([t, f], i) => {
   box(s, 30 + i * 230, 100, 180, 115, t, { fill: f, size: 18, sub: 13 });
   if (i) arrow(s, 30 + i * 230 - 20, 157, 30 + i * 230, 157);
@@ -169,7 +179,13 @@ CODE THẬT từ demo (agent_openai_sdk.py dòng 72–84):
       return cp.create_ticket(ctx.context, ...)       # business rule nằm trong checkpoints.py
 
 Nhấn mạnh: checkpoints.py hoàn toàn KHÔNG import gì từ SDK. Đổi SDK → giữ nguyên file này.
-Câu hỏi: nếu công ty đổi từ OpenAI sang Claude SDK, cần sửa file nào? (chỉ agent_openai_sdk.py, KHÔNG sửa checkpoints.py)`);
+Câu hỏi: nếu công ty đổi từ OpenAI sang Claude SDK, cần sửa file nào? (chỉ agent_openai_sdk.py, KHÔNG sửa checkpoints.py)
+
+Hỏi: "SDK có kiểm tra quyền user không?"
+Đáp: Không. OpenAI Agents SDK không biết user_id, tenant_id hay business rule của bạn. SDK chỉ lo agent loop — model gọi tool nào, kết quả gì. Mọi kiểm tra quyền phải ở application layer (checkpoints.py trong demo).
+
+Hỏi: "needs_approval trong SDK là cơ chế bảo mật chính không?"
+Đáp: Không — needs_approval là approval gate (checkpoint ⑤), nhưng checkpoint ④ (validate_ticket) chạy TRƯỚC. SDK gọi needs_approval function do application viết — SDK không tự biết rule gì cả. Bảo mật là code application, không phải feature SDK.`);
 [['SDK cung cấp', C.LIGHT, ['Agent loop', 'Trace', 'Guardrails cơ bản', 'Runner async']],
  ['Application tự làm', C.NAVY, ['Xác thực user', 'Kiểm tra quyền', 'Business rule', 'State lưu bền', 'Approval gate']]].forEach(([title, fill, items], col) => {
   box(s, 40 + col * 350, 100, 280, 50, title, { fill, size: 18 });
