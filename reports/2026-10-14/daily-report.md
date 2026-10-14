@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-14 (Wednesday)
 
-**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 (+07:00) (recheck)
+**Run:** 2026-10-14T05:00+07:00 (cron, mpfc host), corrected 08:45 + 08:52 (+07:00) (recheck)
 **Window:** 2026-10-13 08:33 → 2026-10-14 05:12 (+07:00). Task-log date: Tue 2026-10-13.
 **Leave plan:** PhucVT 10-12 full day (pending). ThinhT 10-12 (Resource Arrangement, charged to Kunal). ThamTTH 14–16/10. TuanNT left early 10-13 (flu, will make up the hours).
 
@@ -13,7 +13,7 @@
 | 1 | Slack GGS #maintenance | **Bailey live console down, no reply.** Joey 10-13 23:17: "live console has message error and is not working" ([link](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1791908252619239)). Production issue reported overnight. 08:40 recheck: still no reply. Bailey ○ |
 | 2 | Fountain Trello | **Kunal asked for a live-console action, no reply.** Kunal (via his AI) 10-13 21:34 asked @rick570 to run a console line on live today to turn on engraving ($30) for 69 gifts ([card](https://trello.com/c/8JfTlU40)). 08:40 recheck: still no reply. **New 08:14–08:15:** Kunal on ["Start here: review order for Claude's PRs"](https://trello.com/c/TdvfIo08) proposed go-live tomorrow night 10pm–5am EST (or tonight) and is waiting on @rick570 to confirm. Fountain ○ |
 | 3 | Slack RDC | **dmetiner sent new direct asks, no reply yet.** 20:17: add him as collaborator on the server-code GitHub repo, add MPX/SOL/SAĞ/PILOT/RDS/RF metrics to the scanner-plugin CSV logs, and share the current logged fields. 21:00: deploy the newest preset-buttons to Power Group devices and use the Istanbul device for the new task. Posted after hours. Another dmetiner message 02:12 ("Tuner Access Log"). 08:40 recheck: no reply from us yet. Franc ○ |
-| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder. 08:40 recheck: TuanNT rows still not visible in WS. Still before 09:30, so still provisional |
+| 4 | Workstream | **TuanNT 0h on Mon 10-12 and Tue 10-13 across all 21 visible projects (Bailey gate).** This is provisional. He was clearly working on 10-13 (posted a task plan 08:48 and was active in the Bailey room until 15:18, then left early sick), so it is probably logging lag. Re-verify after 09:30 before sending a reminder. 08:52 recheck (all 23 WS projects, fresh token): **TuanNT still 0h on 10-12 and 10-13, with 0 rows anywhere**. Bailey/Speedventory shows only TrinhMTT 5.5h, VyNL 11.5h, DatNC 2h. Reminder not sent (no `--send-reminder`) |
 | 5 | Matrix | namtv 21:13 asked about an unknown contact on Brad's site (Auction Warehouse): Zhenke Xu (zhenkexu763@gmail.com). That site has an open-registration/webshell history. No reply yet |
 | 6 | Email vuongtrancr | Swish New Relic **"Signal lost for 10 minutes on 'Low Application Throughput'"** (critical): one issue closed 08:41, another active 08:51 |
 | 7 | Performance | MPFC apdex 0.44 (poor, chronic). `continue`-switch E_WARNING 845x, WP_Error::get_method() 9x, mysqli socket errors 7x, SQLi-probe search URLs about 21s |
@@ -106,7 +106,7 @@ Source: raw `/review/week` rows across 21 visible projects (Lyf Support App, Oth
 | Tokenlite | DuongDN 0.5h | — | NotRequired |
 | Fountain Greetings | excluded from review check | | |
 
-Workstream needs review: LongVV — visual direction cover arts (2:00, 10-12) + streamline visual identity (4:00, 10-12); LuHX — Update design home page and track detail (4:30, 10-13). Reviewer(s): not configured in `/pinfo` for OhCleo, so the Pending flag has no owner. Check who approves OhCleo (OhCleo)
+Workstream needs review: LongVV — visual direction cover arts (2:00, 10-12) + streamline visual identity (4:00, 10-12); LuHX — Update design home page and track detail (4:30, 10-13). Reviewer(s): ~~not configured in `/pinfo`~~ **DuongDN, MinhTV** (08:52 recheck: `/pinfo` now lists them) (OhCleo)
 
 ## Maddy — W(10-12) — 05:08 (+07:00)
 
@@ -267,17 +267,18 @@ Paused per user. Not run, Trello auto-completed.
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
 | Rory | 0 | 0 | No time logged in the workroom on 10-13 |
-| Aysar | — | — | Session not available for this workroom. This is not a memo alert |
+| Aysar | 4 | 0 (2 rubric-flagged) | Script flagged "Refined dark mode colors and navigation across platform pages (#705)" and "Refine dark mode button colors, headers, and game selection styling" as having no action verb. Both start with "Refine(d)", so they are valid. Rubric false positive, not an alert |
 | Tokenlite | 0 | 0 | No time logged on 10-13 |
 
 ~~Not readable from this cron host~~ → re-run locally 08:42: no invalid memos.
-Neural Contract (38901192): the local run also landed on a login redirect (carrick Chrome Profile 1 Upwork session is stale; it needs a real browser visit to upwork.com). Per the standing rule, silence or a session issue never blocks the item → Neural ✓.
+Neural Contract (38901192): re-run 08:50 after the user logged in to Upwork. Latest message 2026-08-05, nothing new → Neural ✓.
 
 ---
 
 ## Unresolved Questions
 - TuanNT 10-12/10-13 hours: real gap or logging lag (sick 10-13)? Re-check WS after 09:30 before any reminder.
-- Who should review the OhCleo Pending charged hours (no reviewer configured in `/pinfo`)?
+- ~~Who should review the OhCleo Pending charged hours?~~ DuongDN/MinhTV, 3 rows Pending.
+- TuanNT 0h on 10-12/10-13: send a reminder? (He was sick 10-13 and said he would make up the hours.)
 - FirstProject production Rollbar #1128/#1129: which client project is this?
-- ~~Upwork memo + Neural need a local-machine run~~ The memo check ran locally: clean. Neural/Aysar need carrick to open upwork.com once in their real Chrome to refresh the session.
+- ~~Upwork memo + Neural need a local-machine run~~ Memo check + Neural ran after the Upwork login: clean.
 - Who replies to Kunal's go-live timing question (tonight vs tomorrow 10pm–5am EST)?
