@@ -333,7 +333,13 @@ create_ticket: title (str), priority (str), assignee (str) — AGENT_ALLOWED_PRI
   needs_approval=ticket_needs_approval → SDK gọi TRƯỚC khi tool chạy.
 
 Hỏi: tenant parameter trong search_kb là lỗi thiết kế gì? (model có thể điền tenant-B theo lời user)
-Đáp: checkpoint ① bỏ qua claimed_tenant nếu khác session.tenant — code fix lỗi thiết kế này.`);
+Đáp: checkpoint ① bỏ qua claimed_tenant nếu khác session.tenant — code fix lỗi thiết kế này.
+
+Hỏi: Tại sao create_ticket không có parameter "tenant"?
+Đáp: Ticket luôn thuộc tenant của user đang đăng nhập — không cần model biết. create_ticket trong checkpoints.py dùng me.tenant từ Session object (server-side). Nếu có parameter tenant → model có thể đặt tenant sai → cross-tenant ticket creation.
+
+Hỏi: SYSTEM_PROMPT nói "Chỉ tạo ticket khi user yêu cầu" — nếu model bỏ qua hướng dẫn này, checkpoint nào chặn?
+Đáp: Không checkpoint nào chặn "model tự tạo ticket không được yêu cầu" vì đây là behavior issue, không phải security issue. Checkpoint ④ chỉ chặn THAM SỐ sai (priority/role/assignee). Đây là ví dụ về giới hạn của approach: SYSTEM_PROMPT cần có để guide model, CODE cần có để enforce rule.`);
 const tools = [['search_kb', 'READ · no side effect', [['query', 'str · bắt buộc'], ['tenant', 'str | None · bỏ qua nếu sai'], ['→ output', '<untrusted_search_results>']], C.LIGHT],
                ['create_ticket', 'WRITE · needs_approval', [['title', 'str · bắt buộc'], ['priority', 'str · chỉ P3,P4 hợp lệ'], ['assignee', 'str · whitelist team']], C.ORANGE]];
 tools.forEach(([name, sub, params, fill], col) => {
