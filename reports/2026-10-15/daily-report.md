@@ -13,7 +13,7 @@
 | 1 | Slack GGS #presta-9-update | **Joey's Ruby/Rails-update UAT: 9 issues, no reply yet.** Posted 19:06–21:28. Issues 4, 7 and 8 are marked "major" (can't move a pallet at all) ([issue 4](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791984519866769), [issue 7](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791986018997209)). He asks when the fixes will be done and when to plan go-live ([link](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791988136400269)). Also open in #grazing-software: 2 translation-string asks (18:15, 18:27) and a feature-removal decision in #maintenance (19:24: "should never modify sell price"). Joey added at 04:42 that some issues may be because he used a phone camera rather than a barcode gun. **08:40 recheck: still no reply on any GGS channel.** Bailey ○ |
 | 2 | Slack Xtreme (Maddy) | **Madhuraka DM 14:35, unanswered: "Are you checking 468 today?"** ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1791963337657789)). This is LIFM2-468 / [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548). **08:40 recheck: still unanswered.** LIFM2-468 is still To Do with no estimate and 0h logged. Maddy ○ |
 | 3 | Slack RDC | **dmetiner pushed `feat/istasyon-kontrol-paneli` (20:31) and admin-v2 (00:11) and expects us to deploy them** (to the powergroup domain plus backend). No ack from Carrick after 19:24 ([20:31](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791984714858379), [00:11](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791997913978619)). Everything earlier in the day was answered (repo invite, CSV fields, RDS fix deployed). **08:40 recheck: still no ack.** Franc ○ |
-| 4 | Workstream | **TuanNT 0h on Wed 10-14 (provisional).** He left early to see a doctor (approved), and logging lag is likely: yesterday's 0h alert turned out false. Re-check after 09:30 before any reminder |
+| 4 | Workstream | ~~**TuanNT 0h on Wed 10-14 (provisional).** He left early to see a doctor (approved), and logging lag is likely: yesterday's 0h alert turned out false. Re-check after 09:30 before any reminder~~ ✅ 09:32 recheck: **TuanNT logged 6.5h on 10-14** (Speedventory 5.83h + Portfolio 0.67h). Rows were added after 08:46. He left early (approved, make-up moved to next week). No gap, no reminder |
 | 5 | Matrix Fountain | ThinhT found a price bug when adding many gifts in pro/send. It reproduces on test.fountaingifts.com, and V2 goes live **today (10-15)**. "How do we tell the customer?" is unanswered (internal) |
 | 6 | Email carrick@ | Definitive Guide client (James Lechevalier, Whyte Homes) forwarded "Stripe webhook delivery issues [test mode]" for staging.definitiveguide.co.uk at 16:54. Needs a look (staging) |
 | 7 | Email rick@ | InfinityRoses **production** Rollbar #443 reached its 100th occurrence (20:07). FirstProject production #127: 10 occurrences in 5 minutes (03:47 10-15). Project still unidentified |
@@ -90,7 +90,7 @@ Source: `workstream-fetch-project-week.js 2026-10-14` (token refreshed via the K
 | KhanhHH | 8.17h | 8.0h | 8.0h | Radio Data Center 6.83 + Baamboozle 1.17 | ✓ |
 | LeNH | 8.0h | 8.0h | 8.0h | Portfolio - James Diamond 8 | ✓ |
 | LongVV | 8.0h | 6.0h | 0h | — | informational (ad-hoc). Told Celine he's working 10-15 |
-| TuanNT | 0h (sick) | 8.0h | 0h | — | ⚠️ provisional (Alert #4): left early for the doctor; re-check after 09:30 |
+| TuanNT | 0h (sick) | 8.0h | ~~0h~~ **6.5h** | Speedventory 5.83 (console error 1:40, Grazing Desktop unit 1:10, Auto Stock Refill 3:00) + Portfolio 0.67 | ✓ left early approved (09:32 recheck) |
 | PhucVT | — | 8.0h | — | (Crystal lang 5 + DG 3 on 10-13) | ignore (ad-hoc/Arthur) |
 
 **Workstream review status (week, reviewer charged / status):**
@@ -181,7 +181,7 @@ Trello: Fountain - DOCUMENT ✓ complete (customer comments answered).
 - James Diamond ✓ · Rory ✓ · Aysar ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (checked 08:40, quiet) · Andrew Taraba ✓ · Fountain - DOCUMENT ✓ · Ohcleo ✓ · Elena - WordPress SamGuard ✓
 - ⚠️ Maddy: skipped (Alert #2, still unanswered at 08:40)
 - ⚠️ Franc: skipped (Alert #3, still no ack at 08:40)
-- ⚠️ Bailey: skipped (Alert #1, plus provisional Alert #4)
+- ⚠️ Bailey: skipped (Alert #1, Joey still unanswered at 08:40). ~~plus provisional Alert #4~~ TuanNT 6.5h, cleared
 
 ## Ignore List — 05:12 (+07:00)
 Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
@@ -189,7 +189,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur 
 ---
 
 ## Reminders — 05:12 (+07:00)
-- TuanNT: 0h on 10-14 (provisional, left early for the doctor). Not sent (cron, no `--send-reminder`). Re-verify after 09:30 first, since yesterday's reminder was a false positive.
+- ~~TuanNT: 0h on 10-14 (provisional, left early for the doctor). Not sent.~~ 09:32: TuanNT has 6.5h on 10-14 (left early, approved). No reminder needed.
 - KhanhHH, LeNH: have hours, skipped. LongVV: no target. PhucVT: ignored.
 
 ---
@@ -275,7 +275,7 @@ Paused per user. Not run, Trello auto-completed.
 ---
 
 ## Unresolved Questions
-- TuanNT 10-14 0h: real gap, or logging lag after leaving early sick? Re-check Workstream after 09:30 before any reminder.
+- ~~TuanNT 10-14 0h: real gap, or logging lag after leaving early sick? Re-check Workstream after 09:30 before any reminder.~~ Resolved: 6.5h logged, left early approved.
 - Who answers Joey's 9 Ruby/Rails UAT issues and his go-live timing question (Bailey)?
 - Fountain price bug found on test.fountaingifts.com: report it to Kunal before or after today's V2 go-live?
 - FirstProject production Rollbar #127: which client project is this? (Still unknown.)
