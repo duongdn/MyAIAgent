@@ -1,0 +1,24 @@
+diff -ruN a/wp-content/plugins/wd-instagram-feed/booster/TWBLibrary.php b/wp-content/plugins/wd-instagram-feed/booster/TWBLibrary.php
+--- a/wp-content/plugins/wd-instagram-feed/booster/TWBLibrary.php	2026-10-15 07:56:33.148158281 +0000
++++ b/wp-content/plugins/wd-instagram-feed/booster/TWBLibrary.php	2026-10-15 07:56:33.149158274 +0000
+@@ -261,7 +261,7 @@
+ 
+     $post_id = $post->ID;
+     $page_score = get_post_meta( $post_id, 'two_page_speed' );
+-    $page_score = end($page_score);
++    $page_score = is_array($page_score) ? end($page_score) : false; // get_post_meta() returns false for invalid post IDs
+ 
+     if ( isset($page_score['previous_score']) ) {
+       if ( isset( $page_score['previous_score']['error'] ) && $page_score['previous_score']['error'] == "1" ) {
+diff -ruN a/wp-content/plugins/wd-instagram-feed/wd-instagram-feed.php b/wp-content/plugins/wd-instagram-feed/wd-instagram-feed.php
+--- a/wp-content/plugins/wd-instagram-feed/wd-instagram-feed.php	2026-10-15 07:56:33.154158240 +0000
++++ b/wp-content/plugins/wd-instagram-feed/wd-instagram-feed.php	2026-10-15 07:56:33.151158261 +0000
+@@ -882,7 +882,7 @@
+ add_action('plugins_loaded', 'wdi_elementor');
+ function wdi_elementor(){
+   if ( defined('ELEMENTOR_VERSION') ) {
+-    include_once 'elementor/elementor.php';
++    include_once __DIR__ . '/elementor/elementor.php';
+     WDIElementor::get_instance();
+   }
+ }

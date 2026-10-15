@@ -1,0 +1,273 @@
+diff -ruN p311/membermouse/bootstrap/barebones.php work/bootstrap/barebones.php
+--- a/bootstrap/barebones.php	2026-09-23 23:18:54.000000000 +0000
++++ b/bootstrap/barebones.php	2026-10-15 06:40:53.110396633 +0000
+@@ -7,7 +7,7 @@
+ 
+ // phpcs:disable Squiz.Commenting.BlockComment -- install/release rewrite these path markers.
+ /* BEGIN WP-LOAD PATH */
+-$wpload_path = '';
++$wpload_path = '/var/www/mypersonalfootballcoach.com/wp-load.php';
+ /* END WP-LOAD PATH */
+ // phpcs:enable Squiz.Commenting.BlockComment
+ 
+diff -ruN p311/membermouse/com/membermouse/engine/class.accesscontrolengine.php work/com/membermouse/engine/class.accesscontrolengine.php
+--- a/com/membermouse/engine/class.accesscontrolengine.php	2026-07-28 01:35:56.000000000 +0000
++++ b/com/membermouse/engine/class.accesscontrolengine.php	2026-10-15 06:40:10.149769399 +0000
+@@ -48,7 +48,7 @@
+         foreach ($orderItemsArray as $orderItem) {
+             $response = new MM_Response();
+ 
+-            // if this is a gift, create a gift coupon and bypass assigning access 
++            // if this is a gift, create a gift coupon and bypass assigning access
+             if ($orderItem->isGift()) {
+                 // create gift coupon
+                 $couponCode = MM_Coupon::generateCouponCode();
+@@ -73,7 +73,7 @@
+                     return new MM_Response("Unable to create gift coupon", MM_Response::$ERROR);
+                 }
+ 
+-                // bypass assigning access to this customer since access will be redeemed by 
++                // bypass assigning access to this customer since access will be redeemed by
+                 // the customer who uses the coupon
+                 continue;
+             }
+@@ -126,6 +126,19 @@
+                         $orderItemAccess->delete();
+                     }
+                 }
++
++                // Trigger product purchase event for order confirmation email
++                // This ensures "Thank you for your order" emails are sent for both new and existing users
++                if ($orderItem->getItemType() == MM_OrderItem::$ORDER_ITEM_TYPE_PRODUCT) {
++                    MM_Event::safeDoAction(MM_Event::$PRODUCT_PURCHASE,
++                        MM_Event::packageProductData(
++                            $orderItem->getItemId(),
++                            $user->getId(),
++                            $orderItem->getOrderId(),
++                            $orderItem->getId()
++                        )
++                    );
++                }
+             }
+ 
+             // check for errors
+diff -ruN p311/membermouse/com/membermouse/engine/class.corepageengine.php work/com/membermouse/engine/class.corepageengine.php
+--- a/com/membermouse/engine/class.corepageengine.php	2026-07-28 01:35:56.000000000 +0000
++++ b/com/membermouse/engine/class.corepageengine.php	2026-10-15 06:40:10.149769399 +0000
+@@ -636,14 +636,6 @@
+ 
+     public function saveSpecificPage($pageId, $corePageTypeId, $refId, $refType)
+     {
+-        //// get default page info to determine callback method
+-        $row = MM_CorePage::getDefaultCorePageByType($corePageTypeId);
+-        if (!$row) {
+-            $message = "Unable to save Membermouse Core Page Options: Could not find default core page by Core Page Type ({$corePageTypeId}).";
+-            MM_AdminNotice::add("error-saving-corepage-options", false, $message, "error", ["behavior" => false]);
+-            return false;
+-        }
+-
+         /// ensure ref id is an array and delete existing saved data
+         $referenceIds = (is_array($refId)) ? $refId : array($refId);
+ 
+diff -ruN p311/membermouse/com/membermouse/engine/class.protectedcontentengine.php work/com/membermouse/engine/class.protectedcontentengine.php
+--- a/com/membermouse/engine/class.protectedcontentengine.php	2026-07-28 01:35:56.000000000 +0000
++++ b/com/membermouse/engine/class.protectedcontentengine.php	2026-10-15 06:40:10.149769399 +0000
+@@ -286,7 +286,7 @@
+                                 }
+                             }
+                         }
+-                        MM_CorePageEngine::redirectToSiteHomePage();
++                        //MM_CorePageEngine::redirectToSiteHomePage();
+                     }
+                 }
+             }
+diff -ruN p311/membermouse/com/membermouse/entity/class.appliedbundle.php work/com/membermouse/entity/class.appliedbundle.php
+--- a/com/membermouse/entity/class.appliedbundle.php	2026-07-28 01:35:56.000000000 +0000
++++ b/com/membermouse/entity/class.appliedbundle.php	2026-10-15 06:40:10.150769392 +0000
+@@ -255,7 +255,12 @@
+                 return new MM_Response("Unable to apply bundle {$bundle->getName()} ({$bundle->getId()}) with access type '{$this->accessType}' ({$this->accessTypeId})", MM_Response::$ERROR);
+             }
+ 
+-            do_action(MM_Event::$BUNDLE_ADD, MM_Event::packageBundleData($this->accessTypeId, $this->bundleId));
++            $bundleData = MM_Event::packageBundleData($this->accessTypeId, $this->bundleId);
++            // Ensure bundle_id is always present even if packageBundleData fails to populate it
++            if (!isset($bundleData['bundle_id'])) {
++                $bundleData['bundle_id'] = $this->bundleId;
++            }
++            do_action(MM_Event::$BUNDLE_ADD, $bundleData);
+         }
+ 
+         return new MM_Response();
+diff -ruN p311/membermouse/com/membermouse/entity/class.corepage.php work/com/membermouse/entity/class.corepage.php
+--- a/com/membermouse/entity/class.corepage.php	2026-07-28 01:35:56.000000000 +0000
++++ b/com/membermouse/entity/class.corepage.php	2026-10-15 06:40:10.150769392 +0000
+@@ -76,7 +76,7 @@
+ 
+             if ($result === false) {
+                 MM_Transaction::rollback();
+-                return new MM_Response("ERROR: unable to create core page (" . $preparedSql . ")", MM_Response::$ERROR);
++                return new MM_Response("ERROR: unable to create core page (" . $preparedSql . ") - " . $wpdb->last_error, MM_Response::$ERROR);
+             }
+ 
+             //rebuild the core page cache to reflect the change
+@@ -87,7 +87,7 @@
+             }
+         } catch (Exception $ex) {
+             MM_Transaction::rollback();
+-            return new MM_Response("ERROR: unable to create core page", MM_Response::$ERROR);
++            return new MM_Response("ERROR: unable to create core page - " . $ex->getMessage(), MM_Response::$ERROR);
+         }
+ 
+         MM_Transaction::commit();
+@@ -154,7 +154,11 @@
+             $corePage->setRefId($id);
+             $corePage->setRefType($refType);
+             $corePage->setCorePageTypeId($this->corePageType->getId());
+-            if (!$corePage->commitData()) {
++
++            $result = $corePage->commitData();
++
++            // Check properly if the response is an error
++            if (MM_Response::isError($result)) {
+                 return false;
+             }
+         }
+@@ -169,10 +173,24 @@
+ 
+         $wpdb->query($wpdb->prepare("update " . MM_TABLE_CORE_PAGES . " set page_id=null, ref_id=null, ref_type=null where page_id=%s AND core_page_type_id = " . MM_CorePageType::$FREE_CONFIRMATION, $this->pageId));
+ 
++        // Try to update existing default core page record
+         $sql = "update " . MM_TABLE_CORE_PAGES . " set page_id='{$this->pageId}' where core_page_type_id='" . $this->corePageType->getId() . "' and ref_type IS NULL and ref_id IS NULL limit 1";
+         $ret = $wpdb->query($sql);
+-        if ($ret === false)
++
++        // If update failed (no existing record), insert a new one
++        if ($ret === false) {
+             return false;
++        } else if ($ret === 0) {
++            // No rows were updated, so we need to insert a new record
++            $sql = "insert into " . MM_TABLE_CORE_PAGES . " (page_id, core_page_type_id, ref_type, ref_id) VALUES ('{$this->pageId}', '" . $this->corePageType->getId() . "', NULL, NULL)";
++            $ret = $wpdb->query($sql);
++            if ($ret === false) {
++                return false;
++            }
++        }
++
++        //rebuild the core page cache to reflect the change
++        MM_CorePageEngine::createCorePageCache();
+ 
+         return true;
+     }
+diff -ruN p311/membermouse/com/membermouse/entity/class.order.php work/com/membermouse/entity/class.order.php
+--- a/com/membermouse/entity/class.order.php	2026-09-22 22:45:04.000000000 +0000
++++ b/com/membermouse/entity/class.order.php	2026-10-15 06:40:53.109396643 +0000
+@@ -422,11 +422,12 @@
+                 }
+             }
+ 
+-            foreach ($combinedLineItems as $lineItem) {
+-                if ($announcePurchase && !$isUpdate && ($lineItem->getItemType() == MM_OrderItem::$ORDER_ITEM_TYPE_PRODUCT)) {
+-                    MM_Event::safeDoAction(MM_Event::$PRODUCT_PURCHASE, MM_Event::packageProductData($lineItem->getItemId(), $this->customer->getId(), $this->id, $lineItem->getId()));
+-                }
+-            }
++            // MPFC custom: PRODUCT_PURCHASE is fired from MM_AccessControlEngine after the member is added (order data ready).
++            // foreach ($combinedLineItems as $lineItem) {
++            // if ($announcePurchase && !$isUpdate && ($lineItem->getItemType() == MM_OrderItem::$ORDER_ITEM_TYPE_PRODUCT)) {
++            // MM_Event::safeDoAction(MM_Event::$PRODUCT_PURCHASE, MM_Event::packageProductData($lineItem->getItemId(), $this->customer->getId(), $this->id, $lineItem->getId()));
++            // }
++            // }
+         } catch (\Throwable $ex) {
+             $this->beforeCommitCallback = null;
+             MM_Transaction::rollback();
+@@ -493,6 +494,7 @@
+                 $newItem->setRecurringAmount($product->getPrice(false));
+                 $newItem->setRebillPeriod($product->getRebillPeriod());
+                 $newItem->setRebillFrequency($product->getRebillFrequency());
++                $newItem->setStatus(MM_OrderItem::$STATUS_RECURRING);
+                 if ($product->doLimitPayments()) {
+                     $newItem->setMaxRebills($product->getNumberOfPayments());
+                 }
+diff -ruN p311/membermouse/com/membermouse/entity/class.user.php work/com/membermouse/entity/class.user.php
+--- a/com/membermouse/entity/class.user.php	2026-09-14 22:43:10.000000000 +0000
++++ b/com/membermouse/entity/class.user.php	2026-10-15 06:40:10.151769384 +0000
+@@ -820,6 +820,7 @@
+         // dispatch MemberMouse events
+         if ($becameActive) {
+             do_action(MM_Event::$MEMBER_ADD, MM_Event::packageMemberData($this->getId()));
++
+         } else if ($this->status != MM_Status::$PENDING_ACTIVATION && $this->status != MM_Status::$ERROR) {
+             $acctInfoChanges = $this->getAcctInfoChanges();
+             if (!empty($this->lastMembershipId) && ($this->membershipId != $this->lastMembershipId)) {
+@@ -3527,4 +3528,5 @@
+             return new MM_Response($errorMsg, MM_Response::$ERROR);
+         }
+     }
++
+ }
+diff -ruN p311/membermouse/com/membermouse/reporting/class.salesbyproductreport.php work/com/membermouse/reporting/class.salesbyproductreport.php
+--- a/com/membermouse/reporting/class.salesbyproductreport.php	2026-07-28 01:35:58.000000000 +0000
++++ b/com/membermouse/reporting/class.salesbyproductreport.php	2026-10-15 06:40:10.151769384 +0000
+@@ -111,7 +111,9 @@
+         //refund items do not count against the total. If there is a data error (for instance transactions exist where the linked orders/items were deleted) then the product is
+         //listed as 'Unknown Product'
+ 
+-        $sql = "SELECT IFNULL(p.name,'<Unknown Product>') AS product, SUM(IFNULL(oi.quantity,1)) AS units, ABS(SUM(t.amount)) AS sales FROM {$transactionsTable} t LEFT JOIN {$orderItemsTable} oi " .
++        // Convert foreign-currency amounts to GBP at approximate fixed rates before summing
++        $toGbp = "CASE t.currency WHEN 'GBP' THEN t.amount WHEN 'USD' THEN t.amount*0.79 WHEN 'EUR' THEN t.amount*0.85 WHEN 'SEK' THEN t.amount*0.074 ELSE t.amount END";
++        $sql = "SELECT IFNULL(p.name,'<Unknown Product>') AS product, SUM(IFNULL(oi.quantity,1)) AS units, ABS(SUM({$toGbp})) AS sales FROM {$transactionsTable} t LEFT JOIN {$orderItemsTable} oi " .
+             "ON (t.order_item_id = oi.id) LEFT JOIN {$productsTable} p ON (oi.item_id = p.id) " .
+             "WHERE t.transaction_type IN ({$transactionTypeString}) AND (t.transaction_date BETWEEN %s AND %s) " .
+             "AND t.refund_id IS NULL GROUP BY p.id ORDER BY sales DESC;";
+diff -ruN p311/membermouse/com/membermouse/util/class.transaction.php work/com/membermouse/util/class.transaction.php
+--- a/com/membermouse/util/class.transaction.php	2026-07-28 01:36:00.000000000 +0000
++++ b/com/membermouse/util/class.transaction.php	2026-10-15 06:40:10.151769384 +0000
+@@ -9,16 +9,19 @@
+ {
+     public static function begin()
+     {
+-        _mmmq("BEGIN");
++        global $wpdb;
++        $wpdb->query("START TRANSACTION");
+     }
+ 
+     public static function rollback()
+     {
+-        _mmmq("ROLLBACK");
++        global $wpdb;
++        $wpdb->query("ROLLBACK");
+     }
+ 
+     public static function commit()
+     {
+-        _mmmq("COMMIT");
++        global $wpdb;
++        $wpdb->query("COMMIT");
+     }
+ }
+diff -ruN p311/membermouse/hooks/class.userhooks.php work/hooks/class.userhooks.php
+--- a/hooks/class.userhooks.php	2026-09-14 22:43:10.000000000 +0000
++++ b/hooks/class.userhooks.php	2026-10-15 06:40:53.109396643 +0000
+@@ -445,6 +445,11 @@
+             }
+         }
+ 
++        // MPFC custom: bypass for JSON API requests to prevent 302 redirect on front page
++        if (isset($_REQUEST['json']) && !empty($_REQUEST['json'])) {
++            return;
++        }
++
+         if (class_exists('MM_CorePageEngine')) {
+             if (isset($wp_query->post) && isset($wp_query->post->ID)) {
+                 if (!isset($_POST['log'])) {
+diff -ruN p311/membermouse/resources/js/admin/mm-manage_transactions.js work/resources/js/admin/mm-manage_transactions.js
+--- a/resources/js/admin/mm-manage_transactions.js	2026-07-28 01:36:20.000000000 +0000
++++ b/resources/js/admin/mm-manage_transactions.js	2026-10-15 06:40:10.152769376 +0000
+@@ -248,7 +248,7 @@
+ 
+ 
+         renderAffiliate: function (value, dataCell, dataObj, grid) {
+-            if (value.trim() == "") {
++            if (!value || value.trim() == "") {
+                 return "&mdash;"
+             }
+             return { "title": value, "value": value.substring(0, 15) };
