@@ -150,8 +150,10 @@ Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10
 - ⛔ Không chạy (phá dữ liệu): canselMembership, changeAccountInfo, DeleteMemberVideo, user/delete, registration/create, virtualacademy deleteVideo/deleteVideoComment, destroy_auth_cookie → 🙋 anh test trên app.
 - 🙋 `mpfc/v1/firebase-session` (cần chữ ký HMAC từ app), upload video (S3), push notification → test bằng app thật.
 
-### 7.3c Config đổi khác live (anh duyệt 10-15) — phải áp lúc cutover
-- MemberMouse → General Settings → Other Settings → Member Homepage: `mm-option-homepage-setting=1` + `mm-option-use-member-homepage=1` (live = 0/0). Hiệu ứng: member đã login vào `/` thấy trang chủ thật (không 302 về `/home/<level>-dashboard/`); login xong về `/` thay vì dashboard. Dashboard vẫn vào trực tiếp được. Cần báo Saul. Script `03-migrate-db.sh` set 2 option này.
+### 7.3c Config MM Member Homepage (đã sửa trên LIVE 2026-10-15 15:27 +07)
+- Bug: member đã login vào `/` bị 302 về `/home/<level>-dashboard/` (live log: 54 lần). Nguyên nhân config: MemberMouse → General Settings → Other Settings → Member Homepage, `mm-option-homepage-setting`=0.
+- Đã đổi trên **live**: `mm-option-homepage-setting` 0 → **1** (rollback: `wp option update mm-option-homepage-setting 0`). Giữ `mm-option-use-member-homepage`=0 (sau login vẫn vào dashboard). Verify live bằng user MPFC Demo: `/` 200 trang chủ, dashboard 200, guest 200.
+- Test server đặt giống live (1/0). Vì DB dùng chung cluster, lúc cutover option này đi theo DB — không cần script.
 
 ### 7.4 Thay đổi DB khi upgrade (cho ngày cutover)
 File: `plans/mpfc-upgrade/schema-diff-live-vs-upgraded.txt`. Chỉ THÊM: bảng Yoast (`wp_yoast_indexable`… — live sẽ phải chạy index Yoast, nặng với cluster 1vCPU → chạy giờ thấp điểm/ WP-CLI có nghỉ), Uncanny Automator (`wp_uap_error_log`, `wp_uap_run_snapshots`), FV Player (`wp_fv_player_encoding_jobs`), `wp_upb_*`, index `wp_posts.type_status_author`, `mm_applied_bundles.access_type_id`. `wp_uap_recipe_count.recipe_id` thành UNIQUE — live không có trùng (19/19) → OK.
