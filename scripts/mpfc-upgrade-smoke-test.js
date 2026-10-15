@@ -89,7 +89,9 @@ async function collectLinks(page, selector, filter) {
     results.push({ label: 'member-login', url: '/login/', finalUrl: afterMember.replace(BASE, '') });
     const seen = new Set();
     let found = [];
-    for (const u of [afterMember, BASE + '/', BASE + '/my-account/']) {
+    // EXTRA: comma-separated paths (e.g. course units, videos) to check as member.
+    const extra = (process.env.EXTRA || '').split(',').filter(Boolean).map((p) => BASE + p);
+    for (const u of [afterMember, BASE + '/', BASE + '/my-account/', ...extra]) {
       if (seen.has(u)) continue; seen.add(u);
       await visit(page, u, results, 'member');
       found = found.concat(await collectLinks(page, 'a', sameSite));
