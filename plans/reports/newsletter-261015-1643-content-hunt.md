@@ -171,6 +171,7 @@ GitHub PR merged (nick dùng chung của cty, ko chỉ team PHP):
 - R72 AI Training room: lịch 11am T4 hàng tuần + phân công section → thêm vào tin nhắn Trúc (NUS Brief).
 - R73 Slack hôm nay: Bailey/Joey "goal would be for us to go live Wednesday" (≈21/10/2026, bản Staging2 = Rails 6 upgrade + Grazing Desktop + DB Schenker) → nếu go-live kịp trước khi Logbook Vol.5 ra thì thành tin "go-live" mới; RDC "Perfect!"; Rory test account.
 - R74 Watch 18:02–18:22: 0 tin mới (ngoài giờ).
+- R75 Watch 18:22–18:52: 1 tin vận hành, ko dùng được.
 
 ## Unresolved
 - ~~RDC carrick~~ → KhanhHH (tiếp quản từ 03/07/2026), LeNH trước đó ✔
