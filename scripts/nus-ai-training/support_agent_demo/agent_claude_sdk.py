@@ -13,6 +13,7 @@ from claude_agent_sdk import (AssistantMessage, ClaudeAgentOptions, ClaudeSDKCli
                               PermissionResultDeny, ResultMessage, TextBlock, create_sdk_mcp_server, tool)
 
 import checkpoints as cp
+from task_state import TaskState
 
 # search_kb cố ý được tự cho phép (read-only) nên không đi qua can_use_tool — SDK cảnh báo, ở đây là chủ ý.
 warnings.filterwarnings("ignore", message="can_use_tool will not be invoked")
@@ -48,9 +49,11 @@ def make_permission_gate(approve_mode):
     return can_use_tool
 
 
-async def run_agent(model, session_user, question, kb, disabled, approve_mode):
+async def run_agent(model, session_user, question, kb, disabled, approve_mode, scenario=None, resume=None):
     global SESSION
-    SESSION = cp.new_session(session_user, kb, disabled)
+    if resume or approve_mode == "later":
+        raise SystemExit("--resume / --approve later chỉ có ở bản OpenAI Agents SDK (RunState)")
+    SESSION = cp.new_session(session_user, kb, disabled, TaskState(session_user, question, scenario))
     options = ClaudeAgentOptions(
         model=model,
         system_prompt=cp.SYSTEM_PROMPT,
@@ -69,4 +72,5 @@ async def run_agent(model, session_user, question, kb, disabled, approve_mode):
                 answer += "".join(b.text for b in msg.content if isinstance(b, TextBlock))
             elif isinstance(msg, ResultMessage) and msg.total_cost_usd:
                 print(f"   💰 {msg.num_turns} turns, ~${msg.total_cost_usd:.4f}")
+    SESSION.task.finish(answer)
     return answer.strip()

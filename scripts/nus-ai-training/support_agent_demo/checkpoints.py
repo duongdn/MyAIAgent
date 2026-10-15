@@ -8,15 +8,22 @@
     ④ Kiểm tra quyền + tham số create_ticket bằng CODE, trước khi tool chạy
     ⑤ Người duyệt hành động có side effect
 
-`Session.disabled` = tập checkpoint bị tắt để demo hậu quả. Tắt checkpoint chỉ đổi code application,
-model vẫn là model thật.
+Ngoài 5 checkpoint, lớp thực thi còn: budget tool call, retry có giới hạn + idempotency khi gọi hệ thống đích
+(Session 7), và task state lưu bền (Session 8, task_state.py).
+
+`Session.disabled` = tập checkpoint bị tắt để demo hậu quả ("idem" = tắt idempotency). Tắt checkpoint chỉ đổi
+code application, model vẫn là model thật.
 """
 from dataclasses import dataclass, field
 
+from task_state import TaskState
+
+import ticket_system as ts
 from sample_data import ASSIGNABLE_TEAMS, AGENT_ALLOWED_PRIORITIES, KB_DOCS, ROLE_PERMISSIONS, USERS
 
 MAX_TURNS = 8  # chặn agent loop chạy vô hạn → giới hạn token/cost (OWASP LLM10)
-TICKETS = []   # "hệ thống đích" giả lập (Jira/Helpdesk) — phần duy nhất không phải hệ thống thật
+TICKETS = ts.TICKETS  # ticket trong hệ thống đích giả lập (xem ticket_system.py)
+MAX_RETRIES = 2       # retry có giới hạn khi hệ thống đích timeout
 LAST_USAGE = {}  # token/lượt gọi của lần chạy gần nhất (dùng cho run_eval.py)
 PROPOSALS = []  # mọi create_ticket model đề xuất + kết quả ④ (dùng cho bảng so sánh --compare)
 
@@ -43,13 +50,22 @@ class Session:
     role: str
     kb: list = field(default_factory=lambda: list(KB_DOCS))
     disabled: set = field(default_factory=set)
+    task: TaskState | None = None
 
 
-def new_session(session_user, kb=KB_DOCS, disabled=()):
+def new_session(session_user, kb=KB_DOCS, disabled=(), task=None):
     """① session_user đến từ đăng nhập (cookie/JWT đã verify) — không phải từ câu hỏi."""
     u = USERS[session_user]
     log("①", f"session: user={session_user} tenant={u['tenant']} role={u['role']}")
-    return Session(session_user, u["tenant"], u["role"], list(kb), set(disabled))
+    return Session(session_user, u["tenant"], u["role"], list(kb), set(disabled), task)
+
+
+def budget_exceeded(me: Session) -> str | None:
+    """Budget tool call (Session 8): vượt → dừng + chuyển người, không để model gọi tiếp."""
+    if me.task and not me.task.use_tool():
+        me.task.set("ESCALATED", "tool_call_budget")
+        return '{"error": "vượt giới hạn số tool call của task — dừng lại, báo user đã chuyển người xử lý"}'
+    return None
 
 
 # ── ① + ② + ③ search_kb ───────────────────────────────────────────────────
@@ -60,6 +76,8 @@ def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str
     # ⚠ Tham số tenant cố tình để lộ trong schema tool — lỗi thiết kế hay gặp: model có thể điền tenant
     #   theo lời user ("tôi thuộc tenant-B"). Checkpoint ① phải bỏ qua nó và dùng session.
     print(f"   🤖 model gọi search_kb(query={query!r}, tenant={claimed_tenant!r})")
+    if over := budget_exceeded(me):
+        return over
     if "1" in me.disabled and claimed_tenant:
         log("①", f"[TẮT] tin tenant model đưa vào: {claimed_tenant}")
         tenant = claimed_tenant
@@ -87,6 +105,9 @@ def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str
                 log("③", f"⚠ {d['id']} có dấu hiệu prompt injection (ghi log; KHÔNG chặn được model)")
 
     # ③ Đánh dấu rõ đây là DỮ LIỆU, không phải lệnh. Giảm rủi ro chứ không loại bỏ được.
+    if me.task:
+        me.task.searches += 1
+        me.task.empty_searches += not docs
     body = "\n".join(f"<document id='{d['id']}'>{d['title']}: {d['content']}</document>" for d in docs)
     return f"<untrusted_search_results>\n{body or 'Không tìm thấy tài liệu.'}\n</untrusted_search_results>"
 
@@ -136,7 +157,30 @@ def create_ticket(me: Session, args: dict) -> str:
     errors = validate_ticket(me, args)
     if errors:
         return "BỊ CHẶN bởi application: " + "; ".join(errors)
-    TICKETS.append({**args, "tenant": me.tenant, "created_by": me.name})
-    if args.get("priority") == "P1" or "ceo" in str(args.get("assignee")).lower():
-        print("   💥 THIỆT HẠI: ticket bất thường đã được tạo thật trong hệ thống")
-    return f"Đã tạo ticket #{len(TICKETS)}"
+    if over := budget_exceeded(me):
+        return over
+    task_id = me.task.task_id if me.task else "no-task"
+    key = None if "idem" in me.disabled else ts.idempotency_key(task_id, args)
+    ticket = {**args, "tenant": me.tenant, "created_by": me.name, "task": task_id}
+    for attempt in range(1, MAX_RETRIES + 2):
+        try:
+            ticket_id, replay = ts.create(ticket, key)
+        except ts.TicketTimeout as e:
+            print(f"   ⏱ lần {attempt}: {e} → retry" + ("" if key else " (KHÔNG có idempotency key!)"))
+            continue
+        except ts.TicketUnavailable as e:
+            print(f"   ❌ {e} → lỗi không phục hồi, không retry")
+            break
+        if replay:
+            print(f"   🔁 idempotency key {key}: hệ thống đích trả lại {ticket_id} đã tạo, không tạo trùng")
+        dup = [t["id"] for t in TICKETS if t["task"] == task_id]
+        if len(dup) > 1:
+            print(f"   💥 TRÙNG: task {task_id} có {len(dup)} ticket {dup} cho cùng một yêu cầu")
+        if args.get("priority") == "P1" or "ceo" in str(args.get("assignee")).lower():
+            print("   💥 THIỆT HẠI: ticket bất thường đã được tạo thật trong hệ thống")
+        if me.task:
+            me.task.ticket_id = ticket_id
+        return f'{{"ticket_id": "{ticket_id}", "status": "created"}}'
+    if me.task:
+        me.task.set("ESCALATED", "ticket_system_unavailable")
+    return '{"error": "không tạo được ticket sau khi retry — KHÔNG báo user là đã tạo; báo đã chuyển người xử lý"}'

@@ -6,16 +6,25 @@ Logic kiểm tra quyền nằm ở checkpoints.py (dùng chung). File này chỉ
     ① Session đi qua RunContextWrapper — model không thấy, không sửa được
     ④ needs_approval=<hàm>: SDK gọi TRƯỚC khi chạy tool → code kiểm tra trước
     ⑤ Lệnh hợp lệ → SDK dừng run, trả result.interruptions → hỏi người → state.approve/reject → chạy tiếp
+       Chờ duyệt lâu: RunState.to_json() lưu vào task state (application) → --resume chạy tiếp sau
+    Budget: max_turns (SDK) + MAX_TOOL_CALLS (checkpoints.py) + RUN_TIMEOUT_S (asyncio)
+    Guardrail SDK: lọc nội dung đầu vào — KHÔNG phải authorization (quyền vẫn ở ①②④)
+    Trace: trace_local.py ghi mọi span (model call, tool call, guardrail, lỗi) ra .traces/
 """
+import asyncio
 import json
 import os
+import re
 from pathlib import Path
 
-from agents import (Agent, ModelSettings, OpenAIChatCompletionsModel, RunContextWrapper, Runner, function_tool,
-                    set_tracing_disabled)
+from agents import (Agent, GuardrailFunctionOutput, InputGuardrailTripwireTriggered, MaxTurnsExceeded,
+                    ModelSettings, OpenAIChatCompletionsModel, RunContextWrapper, Runner, RunState, function_tool,
+                    input_guardrail, set_trace_processors)
 from openai import AsyncOpenAI
 
 import checkpoints as cp
+from task_state import RUN_TIMEOUT_S, TaskState
+from trace_local import LocalTraceProcessor
 
 
 # ── Model: OpenAI hoặc provider tương thích OpenAI ─────────────────────────
@@ -44,9 +53,8 @@ def make_model(provider, model_name=None):
     base_url, default_model, config_file, env_var = PROVIDERS[provider]
     cfg = load_config(config_file, env_var)
     client = AsyncOpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url))
-    if provider != "openai":
-        # Tracing của SDK mặc định gửi về dashboard OpenAI → không có OpenAI key thì tắt
-        set_tracing_disabled(True)
+    # Trace mặc định gửi về dashboard OpenAI → thay bằng processor ghi file local (không lộ dữ liệu ra ngoài)
+    set_trace_processors([LocalTraceProcessor(verbose=os.environ.get("DEMO_TRACE") == "1")])
     # Chat Completions API: chuẩn chung mọi provider tương thích OpenAI hỗ trợ
     # (Responses API — mặc định của SDK — chỉ OpenAI có)
     return OpenAIChatCompletionsModel(model=model_name or default_model, openai_client=client)
@@ -84,25 +92,70 @@ def create_ticket(ctx: RunContextWrapper[cp.Session], title: str, priority: str,
     return cp.create_ticket(ctx.context, {"title": title, "priority": priority, "assignee": assignee})
 
 
-# ── Chạy agent ─────────────────────────────────────────────────────────────
-async def run_agent(model, session_user, question, kb, disabled, approve_mode):
-    me = cp.new_session(session_user, kb, disabled)
-    agent = Agent(name="Support agent", instructions=cp.SYSTEM_PROMPT, model=model,
-                  tools=[search_kb, create_ticket], model_settings=MODEL_SETTINGS)
-    result = await Runner.run(agent, question, context=me, max_turns=cp.MAX_TURNS)
+# ── Guardrail SDK: lọc nội dung, không phân quyền ───────────────────────────
+CARD_NUMBER = re.compile(r"\b(?:\d[ -]?){13,16}\b")
 
-    # ⑤ Lệnh cần duyệt → SDK trả interruptions thay vì tự chạy
-    while result.interruptions:
-        state = result.to_state()
-        for item in result.interruptions:
-            args = json.loads(item.arguments or "{}")
-            if cp.ask_human(me, args, approve_mode):
-                state.approve(item)
-            else:
-                state.reject(item, rejection_message="Người duyệt đã từ chối.")
-        result = await Runner.run(agent, state, context=me, max_turns=cp.MAX_TURNS)
+
+@input_guardrail(name="no_card_number")
+async def no_card_number(_ctx, _agent, user_input) -> GuardrailFunctionOutput:
+    """Chặn câu hỏi chứa số thẻ (PII) TRƯỚC khi gửi cho model. Chạy bằng code, không tốn model call."""
+    return GuardrailFunctionOutput(output_info=None, tripwire_triggered=bool(CARD_NUMBER.search(str(user_input))))
+
+
+def build_agent(model):
+    return Agent(name="Support agent", instructions=cp.SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket],
+                 model_settings=MODEL_SETTINGS, input_guardrails=[no_card_number])
+
+
+# ── Chạy agent ─────────────────────────────────────────────────────────────
+async def run_agent(model, session_user, question, kb, disabled, approve_mode, scenario=None, resume=None):
+    """resume = TaskState đang AWAITING_APPROVAL (đọc từ .state/) → tiếp tục run đã lưu thay vì chạy lại từ đầu."""
+    task = resume or TaskState(user=session_user, question=question, scenario=scenario)
+    me = cp.new_session(session_user, kb, disabled, task)
+    agent = build_agent(model)
+    print(f"   📌 task {task.task_id}: {task.status}")
+    task.save()
+    try:
+        if resume:
+            run_input = await RunState.from_json(agent, task.sdk_run_state, context_override=me)
+            result = await approve_and_continue(agent, me, run_input, approve_mode)
+        else:
+            result = await run_limited(agent, question, me)
+        while result and result.interruptions:
+            result = await approve_and_continue(agent, me, result.to_state(), approve_mode)
+    except InputGuardrailTripwireTriggered:
+        task.set("ESCALATED", "guardrail_blocked")
+        return "Câu hỏi chứa số thẻ — không gửi cho AI. Vui lòng xoá số thẻ và hỏi lại."
+    except (MaxTurnsExceeded, asyncio.TimeoutError) as e:
+        task.set("ESCALATED", f"budget: {type(e).__name__}")
+        return "Agent vượt giới hạn bước/thời gian — đã chuyển người xử lý."
+    if result is None:  # đang chờ duyệt, đã lưu state
+        return f"Đang chờ người duyệt. Tiếp tục: python3 run_demo.py --resume {task.task_id} --approve yes"
 
     usage = result.context_wrapper.usage
     print(f"   💰 {usage.requests} lượt gọi model, {usage.input_tokens} input + {usage.output_tokens} output tokens")
     cp.LAST_USAGE.update(requests=usage.requests, input_tokens=usage.input_tokens, output_tokens=usage.output_tokens)
-    return result.final_output
+    answer = str(result.final_output or "")
+    task.finish(answer)
+    return answer
+
+
+async def run_limited(agent, run_input, me):
+    """Mọi lần chạy đều có giới hạn bước (max_turns) và thời gian (RUN_TIMEOUT_S)."""
+    return await asyncio.wait_for(Runner.run(agent, run_input, context=me, max_turns=cp.MAX_TURNS), RUN_TIMEOUT_S)
+
+
+async def approve_and_continue(agent, me, state, approve_mode):
+    """⑤ SDK dừng ở interruption → application lưu state, hỏi người, rồi chạy tiếp từ đúng chỗ dừng."""
+    task = me.task
+    for item in state.get_interruptions():
+        args = json.loads(item.arguments or "{}")
+        task.set("AWAITING_APPROVAL", "chờ người duyệt", pending_approval=args, sdk_run_state=state.to_json())
+        if approve_mode == "later":
+            return None  # dừng hẳn; task nằm trong .state/, server restart vẫn tiếp tục được
+        if cp.ask_human(me, args, approve_mode):
+            state.approve(item)
+        else:
+            state.reject(item, rejection_message="Người duyệt đã từ chối.")
+    task.set("PROCESSING", None, pending_approval=None, sdk_run_state=None)
+    return await run_limited(agent, state, me)
