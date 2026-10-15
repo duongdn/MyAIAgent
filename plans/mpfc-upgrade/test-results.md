@@ -14,6 +14,7 @@ Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường t
 | Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json` |
 | Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
 | Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MM level 1154 "Master Football Academy Taiwan U7/U8", team_key 143) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
+| Team manager | form `/login/` — user `nus_upgrade_manager` (role `team-manager`, MM level 1154, cùng team với `nus_upgrade_team`) — pass: `jq -r .test_users.team_manager.password config/.mpfc-upgrade-test-config.json` |
 | Thẻ Stripe test | `4242 4242 4242 4242`, hạn bất kỳ tương lai, CVC bất kỳ |
 | Smoke script | `env -u DISPLAY ONLY=admin,member,guest OUT=out.json EXTRA=/?p=123 node scripts/mpfc-upgrade-smoke-test.js` |
 
@@ -60,7 +61,8 @@ Môi trường test khác live (cố ý): mail bị chặn, PHP không gọi ra 
 | 3.9 | Logout | 🙋 | |
 | 3.10 | Team member login → dashboard team | ✅ | → `/home/master-football-academy-taiwan-u7-u8-dashboard/`, 48 trang: 47×200, 1×404 (`?page_id=1155`, live cũng 404), 0 lỗi PHP |
 | 3.11 | Team library `/team-library/` | ✅ | 200 |
-| 3.12 | Team Manager quản lý member (thêm/xoá, team key) | 🙋 | |
+| 3.12 | Team manager login + `/team-manager/`, `/team-stats/`, xem 23 member (`?user_id=`) gồm `nus_upgrade_team` | ✅ | 54 trang: 53×200, 1×404 (page_id=1155), 0 lỗi PHP |
+| 3.13 | Team manager thêm/xoá member, tạo team key | 🙋 | thao tác ghi DB |
 
 ## 4. Admin (crawl ~316 trang menu admin)
 | # | Case | KQ | Ghi chú |
