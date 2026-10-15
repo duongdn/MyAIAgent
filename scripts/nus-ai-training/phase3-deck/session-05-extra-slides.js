@@ -33,11 +33,11 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
 function measuredCost() {
   question('Cùng một yêu cầu — agent tốn hơn bao nhiêu?', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."',
     `Cho lớp đoán: agent tốn gấp mấy lần model call? chậm hơn bao nhiêu? Ghi lên bảng rồi lật đáp án.`);
-  const s = newSlide('Đáp án · đo thật', 'Agent tốn ~2,7× token — nhưng chỉ nó và workflow tạo được ticket', `Số đo thật: compare_orchestration_levels.py, model ${data.model}, ${data.runs} lần mỗi mức, lấy trung bình, đã tắt cache gateway.
+  const s = newSlide('Đáp án · đo thật', 'Agent tốn ~2,6× token so với workflow cho cùng việc', `Số đo thật: compare_orchestration_levels.py, model ${data.model}, ${data.runs} lần mỗi mức, lấy trung bình, đã tắt cache gateway.
 Đọc bảng:
 - Model call rẻ nhất nhưng KHÔNG làm được nửa sau yêu cầu (tạo ticket) — nó chỉ trả lời.
 - Workflow làm đủ việc với 2 lượt gọi: vì yêu cầu này có bước biết trước, workflow là lựa chọn tốt hơn agent.
-- Agent làm đủ việc nhưng tốn ~2,7× token: mỗi lượt gọi gửi lại toàn bộ hội thoại (slide sau).
+- Agent làm đủ việc nhưng tốn ~2,6× token so với workflow (~2,7× so với model call): mỗi lượt gọi gửi lại toàn bộ hội thoại (slide sau).
 - Thời gian gần như nhau (~7 giây) — chi phí agent nằm ở token, không phải độ trễ, với yêu cầu ngắn thế này.
 Kết luận: agent đáng tiền khi số bước KHÔNG biết trước. Ở đây biết trước → workflow thắng.
 Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25 giây).`);

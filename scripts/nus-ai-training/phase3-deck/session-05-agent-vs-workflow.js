@@ -47,16 +47,20 @@ Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào s
 Model không tự gọi API. Nó viết ra một đoạn text có cấu trúc kiểu "tôi cần gọi search_kb với query=...". Code của application đọc đoạn đó, chạy hàm thật, đưa kết quả lại cho model.
 Toàn bộ Giai đoạn 3 là học cách viết phần code bao quanh đó cho đúng.
 Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model chỉ viết text?" → vì application THỰC THI text đó. Session 7 sẽ trả lời kỹ.`);
-  box(s, 40, 95, 420, 250, '', { fill: C.CARD, valign: 'TOP' });
+  box(s, 40, 92, 420, 228, '', { fill: C.CARD, valign: 'TOP' });
   label(s, 50, 100, 300, 20, 'AGENT (application của mình)', { size: 10, align: 'START', color: C.ORANGE });
   box(s, 60, 130, 380, 50, 'LLM\nđọc text → viết text (kể cả "tôi cần gọi tool X")', { fill: C.NAVY, size: 15, sub: 11 });
   ['search_kb', 'create_ticket', 'DB / API'].forEach((t, i) => box(s, 60 + i * 130, 200, 120, 36, t, { fill: C.LIGHT, size: 12 }));
-  box(s, 60, 250, 380, 80, 'Code của mình\nchạy tool thật · kiểm quyền · lưu state · quyết định dừng', { fill: C.GREEN, size: 13, sub: 11 });
+  box(s, 60, 246, 380, 62, 'Code của mình\nchạy tool thật · kiểm quyền · lưu state · quyết định dừng', { fill: C.GREEN, size: 13, sub: 11 });
   [['1', 'Model viết: "gọi search_kb(query=…)"'], ['2', 'Code chạy hàm thật'], ['3', 'Kết quả quay lại model dưới dạng text'], ['4', 'Lặp tới khi model trả lời']]
     .forEach(([k, t], i) => {
       box(s, 480, 110 + i * 60, 30, 30, k, { fill: C.ORANGE, shape: 'ELLIPSE', size: 12, noLine: true });
       label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
     });
+
+  // nối với slide kết luận Session 1 (ChienTX): Agent = LLM + Tools + Context + Your code
+  [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code của mình', C.LIGHT, 100]]
+    .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
 
   extra.threeFlows();
 
@@ -84,7 +88,7 @@ Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → applicat
   s = newSlide('Đáp án', 'Chọn mức thấp nhất làm được việc', `Giải thích từng dòng:
 1. Tra cứu 1 lần là đủ → RAG, không cần agent.
 2. Các bước luôn giống nhau → workflow; agent chỉ thêm chi phí và rủi ro.
-3. Có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra cứu → agent có giá trị.
+3. "CẦN THÌ tạo": có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra → agent có giá trị. Nếu user nói "LUÔN tạo ticket" thì bước biết trước → workflow (đúng như slide đo: workflow làm đủ với ~1.480 token).
 4. Hoàn tiền là hành động tiền bạc, không đảo ngược được → workflow cố định + người duyệt, KHÔNG để model tự quyết.
 Rule: khi không chắc → chọn mức thấp hơn; nâng mức sau khi đã có test case.`);
   table(s, 25, 85, [250, 120, 300], [
@@ -129,7 +133,7 @@ agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT,
               model=model, tools=[search_kb, create_ticket])
 
 result = await Runner.run(agent, "Khách báo lỗi E205...", context=session, max_turns=8)
-print(result.final_output)            # agent_openai_sdk.py`, 11);
+print(result.final_output)      # rút gọn từ agent_openai_sdk.py`, 11);
 
   extra.traceLocate();
 
@@ -157,7 +161,12 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['Chi phí', 'Cùng yêu cầu: agent ~3.840 token vs workflow ~1.480 — vì mỗi lượt gửi lại cả hội thoại'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
-  ], `Tóm tắt 2 phút trước Q&A.`);
+  ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
+- Agent: model chọn bước tiếp; code chạy tool và giữ kiểm soát.
+- Chọn mức: thấp nhất làm được việc; agent khi số bước phụ thuộc kết quả.
+- Chi phí: số đo thật hôm nay — agent ~2,6× token so với workflow cho cùng yêu cầu.
+- SDK: 4 khái niệm, biết chỗ trong code là đủ.
+- Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
 
   challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
     'Agent tốn hơn workflow ở chỗ nào?',
@@ -166,7 +175,8 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Model call + RAG muốn tạo ticket thì phải thêm gì?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lần gọi model không biết trước (demo kịch bản 1: 3 lượt gọi, ~3.000 token).
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token).
 2. "Workflow có LLM" vẫn là workflow? → đúng, nếu code quyết định thứ tự bước.
-3. Ai kiểm tra tenant? → application (Session 7).`);
+3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
+4. Model call + RAG muốn tạo ticket? → thêm bước code gọi API ticket (thành workflow), hoặc đưa create_ticket thành tool cho model chọn (thành agent).`);
 };
