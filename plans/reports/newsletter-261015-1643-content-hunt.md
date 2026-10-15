@@ -173,6 +173,9 @@ GitHub PR merged (nick dùng chung của cty, ko chỉ team PHP):
 - R74 Watch 18:02–18:22: 0 tin mới (ngoài giờ).
 - R75 Watch 18:22–18:52: 1 tin vận hành, ko dùng được.
 
+### R76 (18:53–19:53)
+- Matrix: 0 tin mới (buổi tối). Ranking giữ nguyên.
+
 ## Unresolved
 - ~~RDC carrick~~ → KhanhHH (tiếp quản từ 03/07/2026), LeNH trước đó ✔
 - ~~Vinn~~ → nick dùng chung team PHP (PhucVT 2025, TuanNT/ThiHV phụ; LeNH làm James Diamond web 2026) ✔
