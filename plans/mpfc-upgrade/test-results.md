@@ -13,7 +13,7 @@ Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường t
 | Basic auth | user `mpfc` — pass: `jq -r .basic_auth.password config/.mpfc-upgrade-test-config.json` |
 | Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json` |
 | Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
-| Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MM level 1154 "Master Football Academy Taiwan U7/U8", team_key 143) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
+| Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MPFC Membership, team key `NUS-UPGRADE-TEST` id 144) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
 | Team manager | form `/login/` — user `nus_upgrade_manager` (role `team-manager`, MPFC Membership; ở `/team-manager/` lọc team key `NUS-UPGRADE-TEST` → thấy `nus_upgrade_member` + `nus_upgrade_team`; không lọc = toàn bộ ~33k user MPFC Membership) — pass: `jq -r .test_users.team_manager.password config/.mpfc-upgrade-test-config.json` |
 | Thẻ Stripe test | `4242 4242 4242 4242`, hạn bất kỳ tương lai, CVC bất kỳ |
 | Smoke script | `env -u DISPLAY ONLY=admin,member,guest OUT=out.json EXTRA=/?p=123 node scripts/mpfc-upgrade-smoke-test.js` |
