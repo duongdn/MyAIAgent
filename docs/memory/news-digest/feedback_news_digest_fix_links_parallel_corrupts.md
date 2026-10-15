@@ -16,3 +16,5 @@ fix-links.py maps links by position using /tmp/news-digest-cache.json, which hol
 **Recurred 2026-10-12 0405:** fix-links rewrote 18 correct links (165 built by ID); backup restored.
 
 **Recurred 2026-10-15 0405:** fix-links rewrote 55 correct links (137 built by ID); backup restored.
+
+**Recurred 2026-10-16 0405:** fix-links rewrote 48 correct links (139 built by ID); backup restored.
