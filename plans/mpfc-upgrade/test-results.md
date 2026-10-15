@@ -136,7 +136,7 @@ Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10
 | Member | 57 trang, 0 lỗi sau khi sửa team-library ✅ |
 | Team member | 58 trang, 0 lỗi sau khi sửa team-library ✅ |
 | Team manager | 57 trang: 56×200, 1×404, 0 lỗi ✅ |
-| Admin | ~314 trang: các trang load được đều 200, không fatal; ~260 trang timeout 60s trong crawl vì droplet 512MB (mỗi trang admin 10–16s, swap 1.5G) — đang kiểm lại bằng curl ⏳ |
+| Admin | 314 trang menu admin: **tất cả 200, 0 fatal** ✅ (59 trang timeout trong puppeteer do droplet 512MB chậm 5–16s/trang → kiểm lại bằng curl: 200; 16 trang `000` do unattended-upgrades restart apache 06:31 UTC → chạy lại: 200). 2 link 404 `order-post-types-elementor_library` / `to-interface-elementor_library` = link menu giả của plugin sort, live cũng vậy |
 | API app mobile | login (`/api/auth/generate_auth_cookie/`) ✅, validate/currentuserinfo ✅, dashboard (player_of_the_week, favorites, weekly_plan) ✅, coach_corner ✅ (sau sửa), otherpages (app_usage, leaderboard, notifications, membership_lists, timer) ✅, user (plans, trophies) ✅; idp/leaguetables trả "not enabled for your club" (đúng logic) |
 | Elementor System Info | hiện exception Elementor Data API ⚠️ (có thể do chặn mạng) |
 
@@ -147,6 +147,7 @@ File: `plans/mpfc-upgrade/schema-diff-live-vs-upgraded.txt`. Chỉ THÊM: bảng
 - Elementor 4.3.5 + Elementor Pro 3.27.7 (cũ) lệch major → cần license Pro để update; anh test giúp trang dựng bằng Elementor.
 - ACF Pro 5.2.1 rất cũ (2015) — chạy được nhưng nên update khi có license.
 - Port 27 commit custom MemberMouse lên 3.1.x (hoặc giữ 3.0.22-custom).
+- unattended-upgrades tự update + restart apache giữa giờ (06:28 UTC) → server chính thức: đặt giờ chạy ban đêm UK hoặc chỉ security, có `Automatic-Reboot false`.
 - Droplet test 512MB quá yếu cho admin → đề xuất tạm resize lên 2GB ($12/th) trong thời gian test.
 
 ## Câu hỏi chưa giải quyết
