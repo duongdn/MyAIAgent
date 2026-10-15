@@ -13,6 +13,7 @@ Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường t
 | Basic auth | user `mpfc` — pass: `jq -r .basic_auth.password config/.mpfc-upgrade-test-config.json` |
 | Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json` |
 | Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
+| Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MM level 1154 "Master Football Academy Taiwan U7/U8", team_key 143) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
 | Thẻ Stripe test | `4242 4242 4242 4242`, hạn bất kỳ tương lai, CVC bất kỳ |
 | Smoke script | `env -u DISPLAY ONLY=admin,member,guest OUT=out.json EXTRA=/?p=123 node scripts/mpfc-upgrade-smoke-test.js` |
 
@@ -32,6 +33,7 @@ Môi trường test khác live (cố ý): mail bị chặn, PHP không gọi ra 
 | 1.7 | Uploads (ảnh/video cũ) hiển thị | ✅ | 302 về live |
 | 1.8 | Upload file mới | 🙋 | disk test còn ~2.6GB |
 | 1.9 | Redis / object cache | ⛔ | WP_CACHE tắt trên test |
+| 1.9b | Cấu trúc DB `wp_mpfc_upgrade` = `wp_mpfc` (bảng, engine, collation, cột, index) | ✅ | 3550 dòng schema, diff 0 (10-15). Sẽ khác sau khi update WP/plugin (migration) — đó là mục đích test |
 | 1.10 | Cron root (`wp cron`, backup volume, clone apache logs) chạy PHP 8.3 | ⛔ | cố ý tắt; kiểm khi dựng server chính thức (script gọi `/usr/bin/php7.4` → phải sửa) |
 
 ## 2. Guest (chưa login)
@@ -56,12 +58,15 @@ Môi trường test khác live (cố ý): mail bị chặn, PHP không gọi ra 
 | 3.7 | Đổi pass / profile / quên mật khẩu | 🙋 | mail bị chặn → reset pass không nhận mail |
 | 3.8 | Huỷ / nâng cấp membership | 🙋 | Stripe test |
 | 3.9 | Logout | 🙋 | |
+| 3.10 | Team member login → dashboard team | ✅ | → `/home/master-football-academy-taiwan-u7-u8-dashboard/`, 48 trang: 47×200, 1×404 (`?page_id=1155`, live cũng 404), 0 lỗi PHP |
+| 3.11 | Team library `/team-library/` | ✅ | 200 |
+| 3.12 | Team Manager quản lý member (thêm/xoá, team key) | 🙋 | |
 
 ## 4. Admin (crawl ~316 trang menu admin)
 | # | Case | KQ | Ghi chú |
 |---|---|---|---|
 | 4.1 | Login `/old-login` | ✅ | |
-| 4.2 | Crawl toàn bộ menu admin | ⏳ | đang chạy: 59 trang, 53×200 |
+| 4.2 | Crawl toàn bộ menu admin (314 trang) | ⏳ | lần 1 hỏng do tab puppeteer chết (lỗi script, không phải PHP); đang chạy lại, mỗi trang 1 tab |
 | 4.3 | `post-new.php` (Add New post / video) | ❌ | **Fatal PHP 8**: `count()` string — `themes/pfc7/wpbakery/js_composer/include/classes/shortcodes/shortcodes.php:808` (WPBakery cũ bundle trong theme) → cần update WPBakery |
 | 4.4 | Yoast SEO `wpseo_titles` | ❌ | **Fatal PHP 8**: Yoast 12.6 `array_merge()` named param (`admin/class-admin-editor-specific-replace-vars.php:223`) → update Yoast |
 | 4.5 | mu-plugin force-strong-passwords | ❌→✅ | Fatal `round($wp_version)`; đã sửa trên test, **phải commit vào repo site** |

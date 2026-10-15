@@ -62,7 +62,7 @@ async function collectLinks(page, selector, filter) {
 }
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'], protocolTimeout: 120000 });
   const results = [];
   const sameSite = (h) => h.startsWith(BASE) && !/logout|action=delete|trash|deactivate|activate=|action=|_wpnonce|customize\.php/.test(h);
 
@@ -76,7 +76,13 @@ async function collectLinks(page, selector, filter) {
   results.push({ label: 'admin-login', url: LOGIN.replace(BASE, ''), finalUrl: afterAdmin.replace(BASE, '') });
   await page.goto(BASE + '/wp-admin/', { waitUntil: 'domcontentloaded', timeout: 60000 });
   const adminLinks = await collectLinks(page, '#adminmenu a', sameSite);
-  for (const u of adminLinks) await visit(page, u, results, 'admin');
+  // Fresh tab per admin page (shared cookies): one hung/detached tab must not poison the rest.
+  for (const u of adminLinks) {
+    const p = await ctx.newPage();
+    await p.authenticate({ username: cfg.basic_auth.user, password: cfg.basic_auth.password });
+    await visit(p, u, results, 'admin');
+    await p.close().catch(() => {});
+  }
   await ctx.close();
   }
 
@@ -85,7 +91,7 @@ async function collectLinks(page, selector, filter) {
     const ctx = await browser.createBrowserContext();
     const page = await ctx.newPage();
     await page.authenticate({ username: cfg.basic_auth.user, password: cfg.basic_auth.password });
-    const afterMember = await login(page, cfg.test_users.member.user, cfg.test_users.member.password, true);
+    const afterMember = await login(page, cfg.test_users[process.env.MEMBER_KEY || 'member'].user, cfg.test_users[process.env.MEMBER_KEY || 'member'].password, true);
     results.push({ label: 'member-login', url: '/login/', finalUrl: afterMember.replace(BASE, '') });
     const seen = new Set();
     let found = [];
