@@ -24,16 +24,16 @@ Chi sinh hoạt từ 10-14 10:50: −285K. Không có giao dịch đầu tư m�
 
 | Loại | Số tiền (₫) | Ghi chú |
 |------|-----------|---------|
-| Cố định/định kỳ | 18,630,000 | học phí 8.59M · gửi má 5M · nhà cửa 1.93M · điện 1.1M · internet+nước+DV 0.52M · công việc 0.6M · … |
+| Cố định/định kỳ | 17,732,000 | học phí 8.59M · gửi má 5M · nhà cửa 1.93M · điện 1.1M · internet+nước+DV 0.52M · công việc 0.6M |
 | Một lần | 2,299,000 | giày chạy giải (Thể thao) |
 | Không phải chi thật | 653,641 | "lãi suất điều chỉnh" tikcop 5m = giảm lãi |
-| Biến động hằng ngày | ~8,150,000 | ăn uống 2.05M, hưởng thụ 1.82M, linh tinh 1.63M, đi lại 1.42M, hiếu hỉ khác 1.2M |
+| Biến động | 9,043,500 | ăn uống 2.05M, hưởng thụ 1.82M, linh tinh 1.63M, đi lại 1.42M, hiếu hỉ+từ thiện 1.7M, mua sắm 0.3M, lặt vặt 0.13M |
 | **Tổng** | **29,728,141** | |
 
-- **Ổn.** Nửa tháng 29.7M, phần lớn khoản cố định đã chi đầu tháng. Biến động ~0.54M/ngày → cuối tháng ước **~38–40M** (≈ đúng kế hoạch 40M).
+- **Ổn.** Nửa tháng 29.7M, phần lớn khoản cố định đã chi đầu tháng. Biến động ~0.6M/ngày → cuối tháng ước **~38–40M** (≈ đúng kế hoạch 40M).
 - Dư dự kiến theo kế hoạch: 77M − ~40M = **~37M** (> mục tiêu 22M). Thực tế T10 còn thêm thưởng 25M + lãi 15M.
 - Lưu ý:
-  1. Hiếu hỉ ngoài khoản má đã 1.2M (đám cưới 0.7M + 0.5M) — mùa cưới cuối năm, dự trù thêm.
+  1. Hiếu hỉ ngoài khoản má + từ thiện đã 1.7M (đám cưới 0.7M, 0.5M, từ thiện 0.5M) — mùa cưới cuối năm, dự trù thêm.
   2. Linh tinh 1.3M trên VCB visa 10-08 không ghi chú — nên ghi rõ để giữ chất lượng data (tránh lặp lại kiểu "Linh tinh" cục lớn trước 10/2026).
   3. Vay chị Ky 5M (10-08) chưa thấy trả — nhớ trả/đối chiếu.
   4. Phần dư tháng (thưởng + lương còn lại) đã vào FPTS 77.9M → CP 46%; tháng sau nên chia dư vào sổ ko kì hạn/DCA đều, không dồn thêm CP.
