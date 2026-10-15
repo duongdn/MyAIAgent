@@ -110,7 +110,7 @@ Môi trường test khác live (cố ý): mail bị chặn, PHP không gọi ra 
 Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10-15.tgz`. Bản gốc mọi file vá: `/root/upgrade/*.orig`.
 
 ### 7.1 Đã làm
-- WP core 6.6.2 → 7.1.3, `core update-db` (db 57155 → 61833). `verify-checksums` OK; có file lạ `wp-logon.php` ở root (không thuộc core) → **cần kiểm tra, có thể là backdoor**.
+- WP core 6.6.2 → 7.1.3, `core update-db` (db 57155 → 61833). `verify-checksums` OK; có file lạ `wp-logon.php` ở root — đã kiểm: rỗng 0 byte (cả live), vô hại, có thể xoá.
 - 63 plugin wp.org update (Yoast 12.6 → 28.7, Elementor 3.27 → 4.3.5, CF7 5.1 → 6.2, MemberMouse…). Plugin premium/custom KHÔNG update (chưa license) → giữ bản cũ đang chạy được trên PHP 8.3: ACF Pro 5.2.1, Elementor Pro 3.27.7, Gravity Forms 2.4.15 + Stripe 3.2 + Mailchimp 4.6, WP Courseware 4.6.4, FV Player Pro, Essential Grid (custom), go_pricing, Uncanny Automator Pro, Thrive, LayerSlider (inactive), json-api (custom).
 - **Plugin có code custom bị update ghi đè → đã khôi phục bản custom cũ** (phát hiện qua git log trên live + diff với bản gốc wp.org):
   - `membermouse` 3.0.22-custom (27 commit: báo cáo GBP, transactions, login…). MM 3.1.1 đã chạy migration (thêm 1 index `mm_applied_bundles`); option `mm-major-version` trả về 3.0.29 như live.
