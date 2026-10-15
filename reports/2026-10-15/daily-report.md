@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-15 (Thursday)
 
-**Run:** 2026-10-15T05:00+07:00 (cron, mpfc host)
+**Run:** 2026-10-15T05:00+07:00 (cron, mpfc host), corrected 08:45 (+07:00) (local recheck)
 **Window:** 2026-10-14 08:45 → 2026-10-15 05:15 (+07:00). Task-log date: Wed 2026-10-14.
 **Leave plan:** Leave parser refreshed: no approved leave on record for 10-14/10-15. From other sources: ThamTTH off 14–16/10. VyNL request for 16/10 (BinhNT replied). HiepNT + HauTT off 16/10. ThienVN sick morning 10-14. **TuanNT left early 10-14 to see a doctor** (approved by duongdn, make-up hours moved to next week).
 
@@ -10,9 +10,9 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack GGS #presta-9-update | **Joey's Ruby/Rails-update UAT: 9 issues, no reply yet.** Posted 19:06–21:28. Issues 4, 7 and 8 are marked "major" (can't move a pallet at all) ([issue 4](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791984519866769), [issue 7](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791986018997209)). He asks when the fixes will be done and when to plan go-live ([link](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791988136400269)). Also open in #grazing-software: 2 translation-string asks (18:15, 18:27) and a feature-removal decision in #maintenance (19:24: "should never modify sell price"). Bailey ○ |
-| 2 | Slack Xtreme (Maddy) | **Madhuraka DM 14:35, unanswered: "Are you checking 468 today?"** ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1791963337657789)). This is LIFM2-468 / [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548). Maddy ○ |
-| 3 | Slack RDC | **dmetiner pushed `feat/istasyon-kontrol-paneli` (20:31) and admin-v2 (00:11) and expects us to deploy them** (to the powergroup domain plus backend). No ack from Carrick after 19:24 ([20:31](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791984714858379), [00:11](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791997913978619)). Everything earlier in the day was answered (repo invite, CSV fields, RDS fix deployed). Franc ○ |
+| 1 | Slack GGS #presta-9-update | **Joey's Ruby/Rails-update UAT: 9 issues, no reply yet.** Posted 19:06–21:28. Issues 4, 7 and 8 are marked "major" (can't move a pallet at all) ([issue 4](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791984519866769), [issue 7](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791986018997209)). He asks when the fixes will be done and when to plan go-live ([link](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1791988136400269)). Also open in #grazing-software: 2 translation-string asks (18:15, 18:27) and a feature-removal decision in #maintenance (19:24: "should never modify sell price"). Joey added at 04:42 that some issues may be because he used a phone camera rather than a barcode gun. **08:40 recheck: still no reply on any GGS channel.** Bailey ○ |
+| 2 | Slack Xtreme (Maddy) | **Madhuraka DM 14:35, unanswered: "Are you checking 468 today?"** ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1791963337657789)). This is LIFM2-468 / [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548). **08:40 recheck: still unanswered.** LIFM2-468 is still To Do with no estimate and 0h logged. Maddy ○ |
+| 3 | Slack RDC | **dmetiner pushed `feat/istasyon-kontrol-paneli` (20:31) and admin-v2 (00:11) and expects us to deploy them** (to the powergroup domain plus backend). No ack from Carrick after 19:24 ([20:31](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791984714858379), [00:11](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1791997913978619)). Everything earlier in the day was answered (repo invite, CSV fields, RDS fix deployed). **08:40 recheck: still no ack.** Franc ○ |
 | 4 | Workstream | **TuanNT 0h on Wed 10-14 (provisional).** He left early to see a doctor (approved), and logging lag is likely: yesterday's 0h alert turned out false. Re-check after 09:30 before any reminder |
 | 5 | Matrix Fountain | ThinhT found a price bug when adding many gifts in pro/send. It reproduces on test.fountaingifts.com, and V2 goes live **today (10-15)**. "How do we tell the customer?" is unanswered (internal) |
 | 6 | Email carrick@ | Definitive Guide client (James Lechevalier, Whyte Homes) forwarded "Stripe webhook delivery issues [test mode]" for staging.definitiveguide.co.uk at 16:54. Needs a look (staging) |
@@ -126,6 +126,8 @@ Workstream needs review: PhucVT, Clarify new requirements/estimate & fix (2:00, 
 
 ### 3. JIRA
 - `maddy-jira-tasklog-check.js --week 2026-10-14`: "No Workstream entries this week".
+- 08:42 live JQL (all projects, `updated >= 2026-10-14 08:00`): **0 tickets touched**, no new comments.
+- [LIFM2-468](https://madhuraka-godahewa.atlassian.net/browse/LIFM2-468) "Quoting Tool Issue" (Kai): **To Do, no estimate, 0h logged**, last updated 10-12. [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548) is already open for it. This is the ticket Madhuraka is asking about (Alert #2).
 
 ### 4. Bitbucket PR Status (`xtreme-web/rms`, 6 open, unchanged since 10-14)
 | PR | Last update | Comments | Title |
@@ -156,8 +158,8 @@ Trello: ⚠️ Maddy skipped (Alert #2).
 | ThinhT | 12h | 8h | on track |
 | QC | 20h | 4h | behind. QC is testing V2 on staging now |
 
-**Part 4 — Capacity & Runway:** not re-fetched this run. The Est vs Charged sheet has been frozen since August; last values (10-14): Narrow 229.00h / 28 tasks · Broad 328.50h / 63 tasks.
-**Part 5 — Over-estimate:** 37 items >120% (unchanged, same frozen sheet).
+**Part 4 — Capacity & Runway:** ~~not re-fetched this run~~ re-fetched live 08:44 (Est vs Charged, A13:L118, 106 rows): Narrow **229.00h / 28 tasks** · Broad **328.50h / 63 tasks**. Unchanged from 10-14; the sheet has been frozen since August.
+**Part 5 — Over-estimate:** re-fetched live 08:44: **37 items >120%**, unchanged.
 
 **Trello board (Web Development):** Kunal 09:48 asked whether the CSV engraving change could go live tonight. Rick answered 09:58: wait for tomorrow's V2 deploy ✅ ([card](https://trello.com/c/8JfTlU40)). No other customer comments. Lists: To-Do 16 · Bugs 28 · Doing 3 · QC Internal 5 · QA Backlog 6 · In QA 1 · Done v2 37. V2 go-live is today. The internal price bug ThinhT found is still open (Alert #5).
 
@@ -176,9 +178,9 @@ Trello: Fountain - DOCUMENT ✓ complete (customer comments answered).
 
 [Check progress](https://trello.com/c/WQYUmpw8) · [Check mail](https://trello.com/c/0YEgbP0l) (all done)
 
-- James Diamond ✓ · Rory ✓ · Aysar ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (silence, never an alert) · Andrew Taraba ✓ · Fountain - DOCUMENT ✓ · Ohcleo ✓ · Elena - WordPress SamGuard ✓
-- ⚠️ Maddy: skipped (Alert #2)
-- ⚠️ Franc: skipped (Alert #3)
+- James Diamond ✓ · Rory ✓ · Aysar ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (checked 08:40, quiet) · Andrew Taraba ✓ · Fountain - DOCUMENT ✓ · Ohcleo ✓ · Elena - WordPress SamGuard ✓
+- ⚠️ Maddy: skipped (Alert #2, still unanswered at 08:40)
+- ⚠️ Franc: skipped (Alert #3, still no ack at 08:40)
 - ⚠️ Bailey: skipped (Alert #1, plus provisional Alert #4)
 
 ## Ignore List — 05:12 (+07:00)
@@ -262,11 +264,13 @@ Paused per user. Not run, Trello auto-completed.
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | data unavailable on this host |
-| Aysar | — | — | data unavailable on this host |
-| Tokenlite | — | — | data unavailable on this host |
+| Rory | ~~—~~ 0 | 0 | No time tracked 10-14 (LeNH was on James Diamond 8h) |
+| Aysar | ~~—~~ 1 | 0 | "Refine dark mode button colors, headers, and game selection styling" is valid (action + object). It matches KhanhHH's WS Baamboozle row (1:10) |
+| Tokenlite | ~~—~~ 0 | 0 | No time tracked |
 
-Upwork memo: data unavailable — this cron host has no carrick Chrome profile and can't launch Puppeteer (known host gap). Manual check: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-14` on the local machine. Neural Contract: same host limitation. Silence is never an alert, so Neural ✓.
+~~Upwork memo: data unavailable — this cron host has no carrick Chrome profile and can't launch Puppeteer (known host gap).~~ 08:40 local recheck: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-14` ran OK. **0 invalid memos.**
+- Script fix: the rule flagged the Aysar memo invalid ("no action verb") because `refine` was missing from `scripts/upwork-memo-rules.js` ACTION_VERBS. Added refine/improve/enhance/polish/tweak/modify/change/upgrade/rework/style. Re-tested: valid. "Booking Flow – BXR Member Classes" is still invalid.
+- Neural Contract: ~~same host limitation~~ checked 08:40 via `upwork-neural-check.js`. Newest message 09-28 (client), nothing new in window. Quiet, Neural ✓.
 
 ---
 
@@ -275,4 +279,4 @@ Upwork memo: data unavailable — this cron host has no carrick Chrome profile a
 - Who answers Joey's 9 Ruby/Rails UAT issues and his go-live timing question (Bailey)?
 - Fountain price bug found on test.fountaingifts.com: report it to Kunal before or after today's V2 go-live?
 - FirstProject production Rollbar #127: which client project is this? (Still unknown.)
-- Upwork memo + Neural need a run on the local machine.
+~~- Upwork memo + Neural need a run on the local machine.~~ Done 08:40, clean.

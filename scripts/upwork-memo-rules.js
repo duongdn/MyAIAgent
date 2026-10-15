@@ -56,6 +56,16 @@ const ACTION_VERBS = [
   'supported', 'supporting', 'support',
   'prepared', 'preparing', 'prepare',
   'completed', 'completing', 'complete',
+  'refined', 'refining', 'refine',
+  'improved', 'improving', 'improve',
+  'enhanced', 'enhancing', 'enhance',
+  'polished', 'polishing', 'polish',
+  'tweaked', 'tweaking', 'tweak',
+  'modified', 'modifying', 'modify',
+  'changed', 'changing', 'change',
+  'upgraded', 'upgrading', 'upgrade',
+  'reworked', 'reworking', 'rework',
+  'styled', 'styling', 'style',
 ];
 
 // Words/phrases that often make a memo too vague to verify — a reviewer can't tell
