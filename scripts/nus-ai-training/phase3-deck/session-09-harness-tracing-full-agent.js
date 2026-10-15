@@ -1,5 +1,5 @@
 // Session 9: Agent harness, tracing và support agent hoàn chỉnh (60 phút)
-const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways } = require('./slide-kit');
+const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 
 module.exports = function session09() {
   sessionHeader(9, 'Harness, tracing và agent hoàn chỉnh', 'Cần những kiểm soát gì để một agent demo trở thành prototype có thể review?',
@@ -84,7 +84,7 @@ Câu nói để nhớ: "Trace xanh không có nghĩa là agent đúng."`);
 Mũi tên navy → là request, cam ← là kết quả quay về.
 Đây cũng là khung cho bài tự thực hành: người học vẽ lại cho use case của mình, tô màu phần SDK và phần application.`);
   box(s, 25, 95, 110, 70, 'User\ncâu hỏi', { fill: C.GREEN, size: 15, sub: 11 });
-  box(s, 175, 85, 330, 230, ' ', { fill: C.WHITE, valign: 'TOP' });
+  box(s, 175, 85, 330, 230, ' ', { fill: C.CARD, valign: 'TOP' });
   label(s, 180, 88, 320, 18, 'HARNESS — application', { size: 9, color: C.ORANGE, align: 'START' });
   box(s, 195, 115, 290, 60, 'Runner.run — agent loop (SDK)\nmodel deepseek-v4.1-flash qua gateway', { fill: C.LIGHT, size: 13, sub: 10 });
   [['search_kb', 'RAG + ② lọc quyền'], ['create_ticket', '④ ⑤ + idempotency']].forEach(([t, d], i) =>
@@ -141,16 +141,15 @@ deepseek-v4.1-flash            5/5               5/5       6.5s      3315`, 10.5
     ['Mở rộng', 'Prototype nhỏ nhất + test case đại diện trước; system_ok luôn phải đạt'],
   ], `Tóm tắt 2 phút trước Q&A. Quay lại 3 câu hỏi review ghi trên bảng lúc warm-up — đã trả lời được chưa?`);
 
-  s = newSlide('Thử thách', 'Tự thực hành sau buổi', `Bài tự thực hành theo đề cương — đây là bản thiết kế mang tới thảo luận với đội triển khai.
+  challenge('Vẽ architecture agent của bạn trên 1 trang: tô màu phần SDK hỗ trợ và phần application chịu trách nhiệm, rồi liệt kê 3 trường hợp cần kiểm thử trước khi mở rộng.', [
+    'Thiếu lớp harness nào thì nguy hiểm nhất cho use case của bạn?',
+    'Trace có thay được bộ test case không?',
+    'Điều kiện nào để mở rộng từ P1 sang P2?',
+    'Trace xanh mà agent vẫn sai — ví dụ nào?',
+  ], `Bài tự thực hành theo đề cương — đây là bản thiết kế mang tới thảo luận với đội triển khai.
 Câu hỏi nhanh cho Q&A:
 1. Lớp harness nào nguy hiểm nhất khi thiếu? → lớp đứng trước side effect lớn nhất.
 2. Trace có thay được eval không? → không.
 3. Khi nào mở rộng prototype? → khi test case đại diện đạt, system_ok luôn đạt.
 Giai đoạn 4 (Session 10-11): đưa search_kb / create_ticket thành MCP server — tool dùng chung cho nhiều agent; kiểm tra quyền vẫn nằm ở phía server.`);
-  box(s, 40, 90, 640, 80, 'Vẽ architecture agent của bạn trên 1 trang: tô màu phần SDK hỗ trợ và phần application chịu trách nhiệm, rồi liệt kê 3 trường hợp cần kiểm thử trước khi mở rộng.', { fill: C.GREEN, size: 14, bold: false });
-  [['01', 'Thiếu lớp harness nào thì nguy hiểm nhất cho use case của bạn?'], ['02', 'Trace có thay được bộ test case không?'], ['03', 'Điều kiện nào để mở rộng từ P1 sang P2?']]
-    .forEach(([k, q], i) => {
-      box(s, 40, 195 + i * 55, 40, 40, k, { fill: C.ORANGE, size: 13, noLine: true });
-      label(s, 90, 195 + i * 55, 580, 40, q, { size: 14, bold: false, align: 'START' });
-    });
 };

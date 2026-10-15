@@ -1,5 +1,5 @@
 // Session 6: Agent loop và thiết kế tool contracts (60 phút)
-const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways } = require('./slide-kit');
+const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 
 module.exports = function session06() {
   sessionHeader(6, 'Agent loop và tool contracts', 'Agent quyết định, gọi tool, nhận kết quả và tiếp tục như thế nào?',
@@ -164,14 +164,13 @@ Session 8 sẽ đi tiếp: state machine và điều kiện dừng.`);
     ['Hoàn thành', 'Run kết thúc ≠ task xong — kiểm tra tác động thật (ticket ID)'],
   ], `Tóm tắt 2 phút trước Q&A.`);
 
-  s = newSlide('Thử thách', 'Tự thực hành sau buổi', `Bài tự thực hành theo đề cương. Câu hỏi nhanh cho Q&A:
+  challenge('Định nghĩa đủ 6 phần contract cho hai tool search_kb và create_ticket, rồi vẽ sequence diagram của một lần agent gọi tool (user → app → model → tool → model).', [
+    'Phần nào của contract model không thấy nhưng quyết định an toàn?',
+    'Vì sao không gộp read và write vào một tool?',
+    'Một lượt model có gọi được 2 tool cùng lúc không?',
+    'Description tốt khác description chưa đủ ở điểm nào?',
+  ], `Bài tự thực hành theo đề cương. Câu hỏi nhanh cho Q&A:
 1. Trường nào model không thấy nhưng quan trọng nhất cho an toàn? → side effect.
 2. Vì sao không gộp read/write vào một tool? → không áp được rule riêng.
 3. Model gọi 2 tool trong cùng 1 lượt có được không? → được (trace kịch bản 7: 2 search_kb trong 1 lượt) — Session 8 sẽ dùng chi tiết này.`);
-  box(s, 40, 90, 640, 80, 'Định nghĩa đủ 6 phần contract cho hai tool search_kb và create_ticket, rồi vẽ sequence diagram của một lần agent gọi tool (user → app → model → tool → model).', { fill: C.GREEN, size: 14, bold: false });
-  [['01', 'Phần nào của contract model không thấy nhưng quyết định an toàn?'], ['02', 'Vì sao không gộp read và write vào một tool?'], ['03', 'Một lượt model có gọi được 2 tool cùng lúc không?']]
-    .forEach(([k, q], i) => {
-      box(s, 40, 195 + i * 55, 40, 40, k, { fill: C.ORANGE, size: 13, noLine: true });
-      label(s, 90, 195 + i * 55, 580, 40, q, { size: 14, bold: false, align: 'START' });
-    });
 };

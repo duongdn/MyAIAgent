@@ -1,13 +1,18 @@
 // Mở đầu Giai đoạn 3 + Session 5: Agent khác workflow ở đâu và OpenAI Agents SDK hỗ trợ gì (45 phút)
-const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways } = require('./slide-kit');
+const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 
 module.exports = function session05() {
-  let s = newSlide(null, null, `Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
+  let s = blank(`Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
 SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/support_agent_demo/.
 Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash) — mọi log/số liệu trên slide là kết quả chạy thật.
-Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`);
-  box(s, 60, 110, 600, 70, 'Giai đoạn 3 — Build AI Agent', { fill: C.NAVY, size: 30 });
-  label(s, 60, 190, 600, 40, 'Session 5–9 · OpenAI Agents SDK · một support agent mở rộng dần', { size: 16, bold: false });
+Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
+  mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
+  label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
+  label(s, 40, 205, 600, 30, 'Session 5–9 · một support agent mở rộng dần · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
+  label(s, 40, 320, 250, 20, 'Dương Nguyễn', { size: 12, color: C.WHITE, align: 'START' });
+  ['search_kb', '→', 'create_ticket', '→', 'T-1001'].forEach((t, i) => box(s, 400 + [0, 70, 88, 182, 200][i], 318, t === '→' ? 18 : [68, 0, 92, 0, 60][i], 24, t,
+    { fill: t === '→' ? C.INK : i === 4 ? C.ORANGE : C.GHOST, font: 'IBM Plex Mono', size: 9, color: i === 4 ? C.INK : C.DIM, noLine: true }));
+  footer(s, true);
 
   s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi cột: câu hỏi của buổi và phần agent có thêm sau buổi đó.
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
@@ -41,7 +46,7 @@ Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào s
 Model không tự gọi API. Nó viết ra một đoạn text có cấu trúc kiểu "tôi cần gọi search_kb với query=...". Code của application đọc đoạn đó, chạy hàm thật, đưa kết quả lại cho model.
 Toàn bộ Giai đoạn 3 là học cách viết phần code bao quanh đó cho đúng.
 Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model chỉ viết text?" → vì application THỰC THI text đó. Session 7 sẽ trả lời kỹ.`);
-  box(s, 40, 95, 420, 250, '', { fill: C.WHITE, valign: 'TOP' });
+  box(s, 40, 95, 420, 250, '', { fill: C.CARD, valign: 'TOP' });
   label(s, 50, 100, 300, 20, 'AGENT (application của mình)', { size: 10, align: 'START', color: C.ORANGE });
   box(s, 60, 130, 380, 50, 'LLM\nđọc text → viết text (kể cả "tôi cần gọi tool X")', { fill: C.NAVY, size: 15, sub: 11 });
   ['search_kb', 'create_ticket', 'DB / API'].forEach((t, i) => box(s, 60 + i * 130, 200, 120, 36, t, { fill: C.LIGHT, size: 12 }));
@@ -141,15 +146,14 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A.`);
 
-  s = newSlide('Thử thách', 'Tự thực hành sau buổi', `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
+  challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
+    'Agent tốn hơn workflow ở chỗ nào?',
+    'Workflow có gọi LLM thì có phải agent?',
+    'Kiểm tra user thuộc tenant nào — SDK hay application?',
+    'Agent dùng nhiều token hơn RAG ở chỗ nào — đo bằng gì?',
+  ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
 1. Agent tốn hơn workflow ở đâu? → số lần gọi model không biết trước (demo kịch bản 1: 3 lượt gọi, ~3.000 token).
 2. "Workflow có LLM" vẫn là workflow? → đúng, nếu code quyết định thứ tự bước.
 3. Ai kiểm tra tenant? → application (Session 7).`);
-  box(s, 40, 90, 640, 90, 'Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', { fill: C.GREEN, size: 14, bold: false });
-  [['01', 'Agent tốn hơn workflow ở chỗ nào?'], ['02', 'Workflow có gọi LLM thì có phải agent?'], ['03', 'Kiểm tra user thuộc tenant nào — SDK hay application?']]
-    .forEach(([k, q], i) => {
-      box(s, 40, 200 + i * 55, 40, 40, k, { fill: C.ORANGE, size: 13, noLine: true });
-      label(s, 90, 200 + i * 55, 580, 40, q, { size: 14, bold: false, align: 'START' });
-    });
 };

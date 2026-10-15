@@ -1,5 +1,5 @@
 // Session 8: Context, state, memory và điều kiện dừng (60 phút)
-const { C, box, label, code, arrow, table, newSlide, question, sessionHeader, recap, agenda, takeaways } = require('./slide-kit');
+const { C, box, label, code, arrow, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 
 module.exports = function session08() {
   sessionHeader(8, 'Context, state và điều kiện dừng', 'Agent giữ gì qua các bước và biết khi nào phải dừng?',
@@ -155,15 +155,14 @@ Khi cần (ví dụ nhớ khách hàng ưa trả lời tiếng Anh), 3 rule:
     ['Dừng', '5 lý do dừng, 3 giới hạn — vượt giới hạn thì chuyển người, không treo'],
   ], `Tóm tắt 2 phút trước Q&A.`);
 
-  s = newSlide('Thử thách', 'Tự thực hành sau buổi', `Bài tự thực hành theo đề cương.
+  challenge('Vẽ state machine cho agent của bạn: đang xử lý · chờ phê duyệt · hoàn thành · chuyển người. Ghi dữ liệu lưu ở từng trạng thái và điều kiện chuyển trạng thái.', [
+    'Vì sao không lưu nội dung tài liệu KB vào task state?',
+    'Có max_turns rồi, vì sao vẫn cần đếm tool call?',
+    'Khi nào "không tìm thấy tài liệu" là kết quả đúng?',
+    'Server restart lúc chờ duyệt — cần lưu gì để chạy tiếp?',
+  ], `Bài tự thực hành theo đề cương.
 Câu hỏi nhanh cho Q&A:
 1. Vì sao không lưu nội dung tài liệu KB vào task state? → quyền có thể đổi; lấy lại khi cần.
 2. Vì sao max_turns không đủ? → 1 lượt nhiều tool call.
 3. Khi nào "thiếu dữ liệu" là kết quả đúng? → khi KB không có; bịa mới là sai.`);
-  box(s, 40, 90, 640, 80, 'Vẽ state machine cho agent của bạn: đang xử lý · chờ phê duyệt · hoàn thành · chuyển người. Ghi dữ liệu lưu ở từng trạng thái và điều kiện chuyển trạng thái.', { fill: C.GREEN, size: 14, bold: false });
-  [['01', 'Vì sao không lưu nội dung tài liệu KB vào task state?'], ['02', 'Có max_turns rồi, vì sao vẫn cần đếm tool call?'], ['03', 'Khi nào "không tìm thấy tài liệu" là kết quả đúng?']]
-    .forEach(([k, q], i) => {
-      box(s, 40, 195 + i * 55, 40, 40, k, { fill: C.ORANGE, size: 13, noLine: true });
-      label(s, 90, 195 + i * 55, 580, 40, q, { size: 14, bold: false, align: 'START' });
-    });
 };

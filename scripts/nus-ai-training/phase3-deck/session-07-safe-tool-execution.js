@@ -1,5 +1,5 @@
 // Session 7: Tool execution an toàn, lỗi và approval (60 phút)
-const { C, box, label, code, arrow, table, newSlide, question, sessionHeader, recap, agenda, takeaways } = require('./slide-kit');
+const { C, box, label, code, arrow, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 
 module.exports = function session07() {
   sessionHeader(7, 'Tool execution an toàn', 'Application cần chặn hoặc xử lý gì trước và sau một tool call?',
@@ -23,7 +23,7 @@ Số ①-⑤ là 5 checkpoint trong checkpoints.py — dùng xuyên suốt S7-S9
   [['TRƯỚC', '④ input + quyền bằng code\n⑤ người duyệt', C.NAVY], ['TRONG', 'timeout · retry có giới hạn\nidempotency key', C.YELLOW], ['SAU', 'ghi ticket_id vào state\nlỗi → trả rõ cho model', C.GREEN]]
     .forEach(([t, d, f], i) => {
       box(s, 30 + i * 230, 100, 200, 60, t, { fill: f, size: 18 });
-      box(s, 30 + i * 230, 170, 200, 90, d, { fill: C.WHITE, size: 12, bold: false });
+      box(s, 30 + i * 230, 170, 200, 90, d, { fill: C.CARD, size: 12, bold: false });
       if (i) arrow(s, 30 + i * 230 - 28, 130, 30 + i * 230, 130);
     });
   box(s, 30, 285, 660, 50, 'Model đề xuất tham số — code quyết định có chạy không, chạy thế nào, kết quả có thật không', { fill: C.LIGHT, size: 13 });
@@ -169,15 +169,14 @@ Nếu mạng/gateway chậm: dùng log đã chạy sẵn trong các slide trư�
     ['Dữ liệu ngoài', 'Tool output có thể chứa lệnh độc — chặn ở chỗ text thành hành động'],
   ], `Tóm tắt 2 phút trước Q&A.`);
 
-  s = newSlide('Thử thách', 'Tự thực hành sau buổi', `Bài tự thực hành theo đề cương: bảng xử lý 6 trường hợp — so với bảng trong buổi, nhưng cho use case của chính họ.
+  challenge('Viết bảng xử lý cho use case của bạn: thiếu quyền · input sai · timeout · kết quả rỗng · gọi lặp · yêu cầu phê duyệt. Mỗi dòng: application làm gì, có retry không, báo user thế nào.', [
+    'Vì sao user_id / tenant không được là tham số của tool?',
+    'Guardrail của SDK có thay được kiểm tra quyền không?',
+    'Idempotency key do ai sinh — model hay application?',
+    'Vì sao người duyệt nên đứng SAU kiểm tra bằng code?',
+  ], `Bài tự thực hành theo đề cương: bảng xử lý 6 trường hợp — so với bảng trong buổi, nhưng cho use case của chính họ.
 Câu hỏi nhanh:
 1. Vì sao user_id không được là tham số tool? → model điền được theo lời user.
 2. Guardrail của SDK thay được kiểm tra quyền không? → không.
 3. Idempotency key do ai sinh? → application, từ task + nội dung nghiệp vụ.`);
-  box(s, 40, 90, 640, 80, 'Viết bảng xử lý cho use case của bạn: thiếu quyền · input sai · timeout · kết quả rỗng · gọi lặp · yêu cầu phê duyệt. Mỗi dòng: application làm gì, có retry không, báo user thế nào.', { fill: C.GREEN, size: 14, bold: false });
-  [['01', 'Vì sao user_id / tenant không được là tham số của tool?'], ['02', 'Guardrail của SDK có thay được kiểm tra quyền không?'], ['03', 'Idempotency key do ai sinh — model hay application?']]
-    .forEach(([k, q], i) => {
-      box(s, 40, 195 + i * 55, 40, 40, k, { fill: C.ORANGE, size: 13, noLine: true });
-      label(s, 90, 195 + i * 55, 580, 40, q, { size: 14, bold: false, align: 'START' });
-    });
 };

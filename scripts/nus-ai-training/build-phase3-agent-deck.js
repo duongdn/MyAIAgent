@@ -21,7 +21,7 @@ const auth = new google.auth.GoogleAuth({
 
 if (require.main === module) (async () => {
   const only = process.env.PHASE3_ONLY;
-  for (const [num, mod] of Object.entries(SESSIONS)) if (!only || only === num) require(mod)();
+  for (const [num, mod] of Object.entries(SESSIONS)) if (!only || only === num) { require(mod)(); kit.closing(); } // mỗi session = 1 ngày: kết bằng Q&A
   const api = google.slides({ version: 'v1', auth: await auth.getClient() });
   const pres = (await api.presentations.get({ presentationId: PID })).data;
   // Chống ghi đè nhầm deck khác (đã từng xoá mất deck Giai đoạn 5)
