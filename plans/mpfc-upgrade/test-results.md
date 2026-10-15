@@ -144,9 +144,9 @@ Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10
 File: `plans/mpfc-upgrade/schema-diff-live-vs-upgraded.txt`. Chỉ THÊM: bảng Yoast (`wp_yoast_indexable`… — live sẽ phải chạy index Yoast, nặng với cluster 1vCPU → chạy giờ thấp điểm/ WP-CLI có nghỉ), Uncanny Automator (`wp_uap_error_log`, `wp_uap_run_snapshots`), FV Player (`wp_fv_player_encoding_jobs`), `wp_upb_*`, index `wp_posts.type_status_author`, `mm_applied_bundles.access_type_id`. `wp_uap_recipe_count.recipe_id` thành UNIQUE — live không có trùng (19/19) → OK.
 
 ### 7.5 Rủi ro / việc còn lại
-- Elementor 4.3.5 + Elementor Pro 3.27.7 (cũ) lệch major → cần license Pro để update; anh test giúp trang dựng bằng Elementor.
+- ✅ Elementor Pro 3.27.7 → **4.3.2** (zip anh tải, `mpfc:~/elementor-pro-4.3.2.zip`; live git không có custom commit cho elementor-pro). 15 trang Elementor mới sửa gần nhất: test = live (200, số `elementor-element` khớp từng trang); admin Elementor/Pro (license, form submissions, theme builder, custom code, editor) 200, 0 fatal. Bản cũ: `/root/upgrade/elementor-pro-3.27.7-old`.
 - ACF Pro 5.2.1 rất cũ (2015) — chạy được nhưng nên update khi có license.
-- Port 27 commit custom MemberMouse lên 3.1.x (hoặc giữ 3.0.22-custom).
+- ✅ MemberMouse **3.1.1 + port custom** (anh duyệt 10-15). Custom thật = 12 commit sau `6c2aefac5 Upgrade mm to 3.0.22` (patch git `mpfc:~/upgrade/mm-custom.patch`, 13 file): 10 file áp tự động; tay: `hooks/class.userhooks.php` (bypass JSON API tránh 302 — phần expired/canceled 3.1.1 đã có upstream), `entity/class.order.php` (tắt vòng PRODUCT_PURCHASE vì custom bắn trong `MM_AccessControlEngine` sau khi tạo member — tránh gửi email 2 lần), `bootstrap/barebones.php` (wp-load path), bỏ 2 static property trùng ở `class.optionutils.php`. Các commit custom trước 3.0.22 (cache permission, change password, abandoned cart log) đã mất từ lần upgrade 3.0.22 trên live → không port. Gói: `/root/upgrade/mm-3.1.1.zip`, bản đã port: `/root/upgrade/mmv/work`. `mm-major-version`=3.1.1.
 - unattended-upgrades tự update + restart apache giữa giờ (06:28 UTC) → server chính thức: đặt giờ chạy ban đêm UK hoặc chỉ security, có `Automatic-Reboot false`.
 - Droplet test 512MB quá yếu cho admin → đề xuất tạm resize lên 2GB ($12/th) trong thời gian test.
 
