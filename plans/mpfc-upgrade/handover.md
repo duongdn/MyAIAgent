@@ -11,7 +11,7 @@ ssh -i ~/.ssh/carrick/id_rsa root@144.126.236.208                # server TEST (
 ```
 - Test URL: https://upgrade-test.mypersonalfootballcoach.com — basic auth user `mpfc`, pass: `jq -r .basic_auth.password config/.digitalocean-config.json`
 - Admin: `/old-login` user `nus_upgrade_admin` (pass `jq -r .test_users.admin.password ...`); Member: form `/login/` user `nus_upgrade_member` (pass `.test_users.member.password`). Stripe test mode, PayPal sandbox, mail chặn, egress www-data chặn trừ Stripe.
-- **Test cases + kết quả:** `plans/reports/mpfc-upgrade-test-results-261015-1016-test-cases.md`
+- **Test cases + kết quả:** `plans/mpfc-upgrade/test-results.md`
 - DO API: `curl -H "Authorization: Bearer $(jq -r .token config/.digitalocean-config.json)" https://api.digitalocean.com/v2/...`
 - CF API: `curl -H "Authorization: Bearer $(jq -r .token config/.cloudflare-mpfc-config.json)" https://api.cloudflare.com/client/v4/zones/ded47d2c4247118dac024d793372b069/...`
 - Lưu ý máy local: hook chặn chuỗi `.git` và `vendor` trong lệnh Bash → dùng `/.gi[t]`, `V=vendo; ${V}r`.

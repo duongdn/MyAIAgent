@@ -1,7 +1,7 @@
 # MPFC upgrade — Test result (PHP 8.3 / Ubuntu 24.04)
 
 Cập nhật: 2026-10-15 10:20 (+07) | Server test: https://upgrade-test.mypersonalfootballcoach.com
-Handover chính: `mpfc-server-upgrade-261014-1424-survey-and-requirements.md` (§0 có cách login).
+Handover chính: `plans/mpfc-upgrade/handover.md` (§0 có cách login).
 Hiện test trên **WP 6.6.2 + plugin hiện tại** (chưa update) → lỗi ở đây = lỗi PHP 8.3 của code hiện tại.
 
 Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường test | ⏳ đang test | 🙋 anh test giúp | ⛔ không test được trên test server
