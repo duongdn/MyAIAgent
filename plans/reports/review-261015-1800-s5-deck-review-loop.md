@@ -17,3 +17,8 @@ Deck: https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPM
 ## Vòng 5
 - Code slide SDK ghi như nguyên văn → "rút gọn từ agent_openai_sdk.py"
 - Tiêu đề "~2,7×" mơ hồ → "~2,6× so với workflow"
+## Vòng 6
+- Thiếu bằng chứng "agent đáng tiền khi bước không biết trước" → đo yêu cầu có điều kiện (--request conditional)
+- Kết quả thật: model call 1.313 tok · workflow 5.246 tok/25,6s · agent 1.893 tok/8,1s; cả 3 đúng không tạo ticket
+- Nguyên nhân đo riêng: bước "phân loại" của workflow quyết định trước khi tra KB → 2.759–9.900 token suy luận ẩn cho 1 dòng JSON
+- Thêm cặp CÂU HỎI→ĐÁP ÁN "Có khi nào agent rẻ hơn workflow?"; Ghi nhớ cập nhật cả 2 trường hợp. S5 = 23 slide

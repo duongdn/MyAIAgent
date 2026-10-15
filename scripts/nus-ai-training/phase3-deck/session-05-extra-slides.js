@@ -2,6 +2,7 @@
 // Số liệu từ support_agent_demo/compare_orchestration_levels.py (orchestration_levels.json) + trace kịch bản 1.
 const { C, box, label, mono, code, arrow, newSlide, question } = require('./slide-kit');
 const data = require('../support_agent_demo/orchestration_levels.json');
+const cond = require('../support_agent_demo/orchestration_levels_conditional.json');
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
@@ -88,4 +89,25 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
   label(s, 40, 300, 640, 40, 'Đọc trace trả lời được: agent gọi tool nào, với tham số gì, mất bao lâu, tốn bao nhiêu token', { size: 12, align: 'START' });
 }
 
-module.exports = { threeFlows, measuredCost, tokenGrowth, traceLocate };
+// Khi bước tiếp theo phụ thuộc kết quả tra: workflow phải đoán trước khi có dữ liệu → tốn hơn agent
+function conditionalCase() {
+  question('Có khi nào agent lại rẻ hơn workflow?', '"…Nếu lỗi phía hệ thống mình thì tạo ticket; nếu do ngân hàng thì chỉ hướng dẫn khách."',
+    `Đọc to yêu cầu. Hỏi lớp: workflow cố định "phân loại → tra KB → trả lời → tạo ticket" sẽ xử lý câu này thế nào? Bước phân loại có đủ thông tin để quyết định không?`);
+  const s = newSlide('Đáp án · đo thật', 'Bước phụ thuộc kết quả tra: agent rẻ hơn, nhanh hơn', `Số đo thật: compare_orchestration_levels.py --request conditional, ${cond.model}, ${cond.runs} lần mỗi mức. Cả 3 mức đều ĐÚNG là không tạo ticket (E205 = ngân hàng từ chối, kb-a-002).
+Vì sao workflow tốn nhất (~${Math.round(cond.rows[1].tokens)} token, ${cond.rows[1].secs}s): thứ tự bước cố định bắt bước "phân loại" quyết định có cần ticket TRƯỚC khi tra KB. Model không có dữ liệu nên suy luận rất lâu — đo riêng bước này: 2.759 và 9.900 token suy luận ẩn chỉ để trả về 1 dòng {"need_ticket": false}.
+Agent tra KB trước, thấy E205 do ngân hàng, rồi trả lời luôn: 2 lượt gọi.
+Công bằng mà nói: workflow sửa được bằng cách đổi thứ tự (tra trước, phân loại sau) — nhưng người viết code phải lường trước. Agent tự chọn thứ tự theo dữ liệu. Đây đúng là "bước tiếp theo phụ thuộc kết quả bước trước".`);
+  const max = Math.max(...cond.rows.map((r) => r.tokens));
+  cond.rows.forEach((r, i) => {
+    const y = 96 + i * 58;
+    label(s, 40, y, 150, 40, `${r.level}\n${r.calls} lượt gọi · ${r.secs}s`, { size: 13, sub: 10, align: 'START' });
+    box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 360), 24, ' ', { fill: i === 1 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
+    mono(s, 210 + (r.tokens / max) * 360, y + 9, 90, 22, `${Math.round(r.tokens)} tok`, { color: C.INK, size: 11 });
+  });
+  code(s, 40, 272, 330, 74, `Bước "phân loại" của workflow (chưa tra KB):
+→ {"need_ticket": false}
+  2.759 – 9.900 token suy luận ẩn`, 10);
+  box(s, 385, 272, 295, 74, 'Workflow phải quyết định trước khi có dữ liệu. Agent tra trước rồi mới quyết định.', { fill: C.INK, size: 12, align: 'START' });
+}
+
+module.exports = { threeFlows, measuredCost, tokenGrowth, conditionalCase, traceLocate };

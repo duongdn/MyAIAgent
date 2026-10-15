@@ -17,7 +17,14 @@ import checkpoints as cp
 import ticket_system as ts
 from sample_data import KB_DOCS
 
-QUESTION = "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
+REQUESTS = {
+    # bước biết trước: luôn tạo ticket
+    "always": "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.",
+    # bước phụ thuộc kết quả tra: E205 = ngân hàng từ chối (kb-a-002) → ĐÚNG là KHÔNG tạo ticket
+    "conditional": ("Khách X báo lỗi thanh toán mã E205. Nếu là lỗi phía hệ thống mình thì tạo ticket cho billing team; "
+                    "nếu là do ngân hàng thì chỉ hướng dẫn khách, không tạo ticket."),
+}
+QUESTION = REQUESTS["always"]
 EXTRA = sdk.MODEL_SETTINGS.extra_body or {}
 
 
@@ -61,7 +68,10 @@ async def agent(_client, _model, usage):
 async def main():
     p = argparse.ArgumentParser()
     p.add_argument("--runs", type=int, default=3)
+    p.add_argument("--request", choices=REQUESTS, default="always")
     a = p.parse_args()
+    global QUESTION
+    QUESTION = REQUESTS[a.request]
     client, model = client_and_model()
     rows = []
     for name, fn in [("Model call + RAG", model_call), ("Workflow", workflow), ("Agent", agent)]:
@@ -74,10 +84,11 @@ async def main():
             tot["secs"] += time.time() - t0
             tot["calls"] += usage["calls"]; tot["tokens"] += usage["tokens"]; tot["tickets"] += len(ts.TICKETS)
         rows.append({"level": name, **{k: round(v / a.runs, 1) for k, v in tot.items()}})
-    print(f"\nModel: {model} · {a.runs} lần/mức · trung bình")
+    print(f"\nYêu cầu ({a.request}): {QUESTION}\nModel: {model} · {a.runs} lần/mức · trung bình")
     for r in rows:
         print(f"  {r['level']:<18} {r['calls']:>4} lượt gọi  {r['tokens']:>7} token  {r['secs']:>5}s  ticket={r['tickets']}")
-    json.dump({"model": model, "runs": a.runs, "rows": rows}, open("orchestration_levels.json", "w"), ensure_ascii=False, indent=1)
+    out = "orchestration_levels.json" if a.request == "always" else f"orchestration_levels_{a.request}.json"
+    json.dump({"model": model, "runs": a.runs, "request": QUESTION, "rows": rows}, open(out, "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

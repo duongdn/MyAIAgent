@@ -81,6 +81,7 @@ Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → applicat
 
   extra.measuredCost();
   extra.tokenGrowth();
+  extra.conditionalCase();
 
   question('Yêu cầu support nào cần agent?', 'Chỉ trả lời câu hỏi · nhiều bước · tạo ticket… — chọn mức thấp nhất đủ dùng.',
     `Hỏi lớp 2-3 phút trước khi lật đáp án. Cho từng người chọn mức cho 4 yêu cầu ở slide sau (đọc to trước).`);
@@ -158,7 +159,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   takeaways([
     ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
     ['Chọn mức', 'Mức thấp nhất làm được việc — agent khi số bước phụ thuộc kết quả'],
-    ['Chi phí', 'Cùng yêu cầu: agent ~3.840 token vs workflow ~1.480 — vì mỗi lượt gửi lại cả hội thoại'],
+    ['Chi phí', 'Bước biết trước: workflow rẻ hơn ~2,6×. Bước phụ thuộc kết quả tra: agent rẻ hơn (1.893 vs 5.246 token)'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
