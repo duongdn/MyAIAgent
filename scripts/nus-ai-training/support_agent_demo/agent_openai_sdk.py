@@ -150,7 +150,8 @@ async def approve_and_continue(agent, me, state, approve_mode):
     task = me.task
     for item in state.get_interruptions():
         args = json.loads(item.arguments or "{}")
-        task.set("AWAITING_APPROVAL", "chờ người duyệt", pending_approval=args, sdk_run_state=state.to_json())
+        task.set("AWAITING_APPROVAL", "chờ người duyệt", pending_approval=args, sdk_run_state=state.to_json(context_serializer=lambda me: {"user": me.name}))
+        # Session KHÔNG lưu trong state: khi resume, application dựng lại Session từ đăng nhập (①)
         if approve_mode == "later":
             return None  # dừng hẳn; task nằm trong .state/, server restart vẫn tiếp tục được
         if cp.ask_human(me, args, approve_mode):
