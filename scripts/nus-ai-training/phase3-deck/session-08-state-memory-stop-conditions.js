@@ -32,7 +32,7 @@ Model KHÔNG nhớ gì giữa các request (Session 1, câu hỏi thử thách 0
   question('Server restart khi đang chờ người duyệt. Agent có quên không?', 'Người duyệt bấm OK sau 2 tiếng — lúc đó process cũ đã chết.',
     `Để lớp trả lời. Phần lớn sẽ nói "quên, vì state nằm trong RAM". Đúng — nếu không lưu. Slide sau: SDK có cơ chế lưu, nhưng lưu ở đâu là việc của application.`);
 
-  s = newSlide('Đáp án · chạy thật', 'SDK đóng gói được run — application quyết định lưu ở đâu và tiếp tục khi nào', `Demo thật, 2 lệnh, 2 process khác nhau:
+  s = newSlide('Đáp án · chạy thật', 'SDK đóng gói run — application quyết định lưu', `Demo thật, 2 lệnh, 2 process khác nhau:
 1. --approve later: SDK dừng ở interruption; application gọi RunState.to_json() và ghi vào .state/<task_id>.json rồi thoát. Process chết.
 2. --resume <task_id>: process MỚI đọc file, RunState.from_json(), dựng lại Session từ đăng nhập (①, không lưu session trong state), hỏi duyệt, chạy tiếp đúng chỗ dừng.
 SDK cung cấp to_json/from_json. Application quyết định: lưu DB nào, giữ bao lâu, ai được resume.`);
@@ -45,7 +45,7 @@ $ python3 run_demo.py --resume 844e2973 --approve yes        ← process mới
   [['SDK', 'RunState.to_json() / from_json()\nđóng gói hội thoại + tool call đang chờ', C.LIGHT], ['Application', 'lưu vào DB · dựng lại Session từ đăng nhập\nai được resume · giữ bao lâu', C.NAVY]]
     .forEach(([t, d, f], i) => box(s, 30 + i * 340, 225, 320, 110, `${t}\n${d}`, { fill: f, size: 18, sub: 11 }));
 
-  s = newSlide('Task state', 'Task state ghi tiến độ, kết quả đã xác nhận và hành động đang chờ duyệt', `File state thật của task 844e2973 khi đang chờ duyệt (rút gọn phần RunState ~27KB).
+  s = newSlide('Task state', 'Task state: tiến độ, kết quả thật, việc chờ duyệt', `File state thật của task 844e2973 khi đang chờ duyệt (rút gọn phần RunState ~27KB).
 Mỗi trường có lý do để lưu:
 - status / stop_reason: task đang ở đâu, vì sao dừng.
 - ticket_id: CHỈ ghi khi hệ thống đích trả về — là bằng chứng hoàn thành.
@@ -139,7 +139,7 @@ Vì vậy demo đếm tool call ở application (MAX_TOOL_CALLS), độc lập v
   [['max_turns', 'giới hạn số lượt model'], ['MAX_TOOL_CALLS', 'giới hạn số hành động thật']].forEach(([t, d], i) =>
     box(s, 30 + i * 340, 270, 320, 70, `${t}\n${d}`, { fill: i ? C.NAVY : C.LIGHT, size: 16, sub: 12 }));
 
-  s = newSlide('Memory', 'Memory dài hạn: chỉ lưu khi có lý do, có thời hạn, không lẫn tenant', `Demo cố ý KHÔNG có memory dài hạn — support agent chưa cần. Đây là quyết định thiết kế: YAGNI.
+  s = newSlide('Memory', 'Memory: có lý do, có thời hạn, không lẫn tenant', `Demo cố ý KHÔNG có memory dài hạn — support agent chưa cần. Đây là quyết định thiết kế: YAGNI.
 Khi cần (ví dụ nhớ khách hàng ưa trả lời tiếng Anh), 3 rule:
 1. Có lý do: ghi rõ dùng để làm gì. Không "lưu hết cho chắc".
 2. Có thời hạn: TTL (demo: STATE_TTL_DAYS = 30 cho task state).

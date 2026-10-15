@@ -28,7 +28,7 @@ Số ①-⑤ là 5 checkpoint trong checkpoints.py — dùng xuyên suốt S7-S9
     });
   box(s, 30, 285, 660, 50, 'Model đề xuất tham số — code quyết định có chạy không, chạy thế nào, kết quả có thật không', { fill: C.LIGHT, size: 13 });
 
-  s = newSlide('Quyền', 'Kiểm tra quyền ở lớp thực thi — lấy user/tenant từ session, không từ tham số', `Hai lỗi kinh điển:
+  s = newSlide('Quyền', 'Quyền lấy từ session, không từ tham số tool', `Hai lỗi kinh điển:
 1. Lấy user_id/tenant từ tham số tool → model điền theo lời user ("tôi là nhân viên tenant-B"). Demo kịch bản 4: model gọi search_kb(tenant='tenant-B'); ① bỏ qua, dùng tenant từ session.
 2. Viết rule trong prompt ("chỉ tạo P3/P4") → model có thể bị thuyết phục bỏ qua. Demo đặt rule trong validate_ticket() — code chạy trước khi tool chạy.
 Kịch bản 3: bob (viewer) nhờ tạo ticket → ④ chặn, kết quả thật bên dưới.`);
@@ -47,7 +47,7 @@ Kịch bản 3: bob (viewer) nhờ tạo ticket → ④ chặn, kết quả th�
 ④ CHẶN: role 'viewer' không có quyền tạo ticket
 💬 "Tôi chưa tạo được ticket. Hệ thống chặn vì tài khoản của bạn có role viewer."`, 10);
 
-  s = newSlide('Guardrail ≠ authorization', 'Guardrail của SDK lọc nội dung — không trả lời câu hỏi "ai được làm gì"', `SDK có input/output guardrail: hàm chạy trước/sau model để chặn nội dung. Demo có guardrail no_card_number: câu hỏi chứa số thẻ → chặn trước khi gửi cho model (kịch bản 8, kết quả thật bên dưới).
+  s = newSlide('Guardrail ≠ authorization', 'Guardrail lọc nội dung — không phải phân quyền', `SDK có input/output guardrail: hàm chạy trước/sau model để chặn nội dung. Demo có guardrail no_card_number: câu hỏi chứa số thẻ → chặn trước khi gửi cho model (kịch bản 8, kết quả thật bên dưới).
 Nhưng guardrail nhìn NỘI DUNG, không biết user là ai, có quyền gì. "Bob có được tạo ticket không?" — guardrail không trả lời được. Đó là authorization, nằm ở ①②④.
 Sai lầm hay gặp: "đã bật guardrail của SDK nên an toàn".`);
   table(s, 30, 88, [160, 250, 250], [
@@ -107,7 +107,7 @@ Kết quả rỗng: không phải lỗi kỹ thuật nhưng nguy hiểm nhất �
     ['Gọi lặp', 'Idempotency + giới hạn số tool call', '--disable idem · DEMO_MAX_TOOL_CALLS'],
   ], { rowH: 37, size: 10 });
 
-  s = newSlide('Lỗi là dữ liệu', 'Lỗi phải trả cho model rõ ràng — exception câm làm model đoán bừa', `Nếu tool ném exception và SDK chỉ trả "error" chung chung, model sẽ đoán — thường là nói "đã tạo xong".
+  s = newSlide('Lỗi là dữ liệu', 'Lỗi phải trả cho model rõ ràng, không im lặng', `Nếu tool ném exception và SDK chỉ trả "error" chung chung, model sẽ đoán — thường là nói "đã tạo xong".
 Demo trả JSON lỗi có hướng dẫn: không báo user là đã tạo; báo đã chuyển người xử lý. Đồng thời task state chuyển ESCALATED (Session 8).
 Chạy thật: python3 run_demo.py --scenario 1 --fault down --approve yes (helpdesk 503).`);
   code(s, 30, 88, 660, 95, `❌ helpdesk trả 503 Service Unavailable → lỗi không phục hồi, không retry
@@ -118,7 +118,7 @@ Chạy thật: python3 run_demo.py --scenario 1 --fault down --approve yes (help
     .forEach(([t, d, f], i) => box(s, 30 + i * 340, 205, 320, 90, `${t}\n${d}`, { fill: f, size: 16, sub: 12 }));
   label(s, 30, 305, 660, 40, 'Lỗi vừa trả cho model (để nói đúng với user) vừa ghi vào state (để người xử lý tiếp)', { size: 12, bold: false, color: C.GREY, align: 'START' });
 
-  s = newSlide('Human approval', 'Người duyệt trước tác động nhạy cảm — code lọc trước để người chỉ duyệt lệnh hợp lệ', `Thứ tự quan trọng: ④ code kiểm tra trước, ⑤ người duyệt sau.
+  s = newSlide('Human approval', 'Code lọc trước, người duyệt sau — người chỉ thấy lệnh hợp lệ', `Thứ tự quan trọng: ④ code kiểm tra trước, ⑤ người duyệt sau.
 Nếu đảo ngược, người duyệt phải xem cả lệnh rác → "approval fatigue" → bấm OK theo phản xạ.
 Trong SDK: needs_approval=<hàm> trên create_ticket. Hàm trả False nếu ④ đã chặn (tool tự trả lỗi), True nếu hợp lệ → SDK dừng run, trả result.interruptions.
 Người duyệt phải thấy CHÍNH XÁC tham số (priority, assignee), không phải tóm tắt mơ hồ "agent muốn tạo ticket".
@@ -151,7 +151,7 @@ Phân tích sâu (vì sao model bị lừa, OWASP LLM01) ở Giai đoạn 5.`);
     });
   label(s, 30, 290, 660, 40, 'Không thể làm model 100% không bị lừa → đặt kiểm soát ở chỗ text biến thành hành động', { size: 13, color: C.NAVY, align: 'START' });
 
-  s = newSlide('4 đường đi', 'Cùng một agent, bốn đường đi — mỗi đường một kết quả kiểm chứng được', `Chạy 4 lệnh này trong buổi (mỗi lệnh ~5-10 giây với deepseek-v4.1-flash).
+  s = newSlide('4 đường đi', 'Một agent, bốn đường đi, bốn kết quả', `Chạy 4 lệnh này trong buổi (mỗi lệnh ~5-10 giây với deepseek-v4.1-flash).
 Điểm cần chỉ cho lớp: cùng agent, cùng model — đường đi khác nhau do dữ liệu và quyền, và application biết chính xác mỗi task kết thúc ở trạng thái nào.
 Nếu mạng/gateway chậm: dùng log đã chạy sẵn trong các slide trước.`);
   table(s, 25, 90, [130, 330, 210], [

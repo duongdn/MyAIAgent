@@ -14,7 +14,7 @@ Mục tiêu: người học giải thích được agent loop và thiết kế �
   agenda([['Agent loop', 'model đề xuất · app thực thi · đọc trace thật'], ['Tool contract', '6 phần · description · read vs write'],
     ['Xong thật chưa?', 'run kết thúc ≠ task hoàn thành']], `Ba phần ~13 phút + Q&A.`);
 
-  let s = newSlide('Agent loop', 'Model đề xuất hành động — application thực thi — kết quả quay lại model', `Sơ đồ độc lập SDK — đúng cho mọi framework.
+  let s = newSlide('Agent loop', 'Model đề xuất — application thực thi — lặp lại', `Sơ đồ độc lập SDK — đúng cho mọi framework.
 1. Goal: câu hỏi/yêu cầu của user.
 2. Model chọn hành động: trả lời luôn, hoặc viết một tool call.
 3. Application thực thi tool call (đây là chỗ kiểm quyền, Session 7).
@@ -34,7 +34,7 @@ Mũi tên navy = yêu cầu đi; mũi tên cam = kết quả quay về. Vòng l�
     `Để lớp đoán 1 phút. Đáp án slide sau: tool call là một đoạn JSON model viết ra; SDK đọc nó và gọi hàm Python.
 Đây là câu hỏi giúp người học hiểu vì sao prompt injection gây hại được (Session 7).`);
 
-  s = newSlide('Đáp án', 'Tool call là JSON do model viết — SDK đọc rồi gọi hàm Python thật', `Bên trái là thứ model thật sự trả về (rút gọn từ response của deepseek-v4.1-flash qua gateway). Không có "hành động" nào — chỉ là text có cấu trúc.
+  s = newSlide('Đáp án', 'Tool call là JSON do model viết — SDK gọi hàm thật', `Bên trái là thứ model thật sự trả về (rút gọn từ response của deepseek-v4.1-flash qua gateway). Không có "hành động" nào — chỉ là text có cấu trúc.
 Bên phải: SDK parse JSON, tìm hàm cùng tên, gọi với tham số đó. Kết quả hàm trả về (string) được gửi lại cho model ở lượt sau.
 Hệ quả: ai điều khiển được text model viết ra (ví dụ tài liệu bị cài lệnh) thì điều khiển được tool call → phải kiểm tra ở application.`);
   label(s, 30, 85, 320, 20, 'MODEL TRẢ VỀ (text)', { size: 10, color: C.ORANGE, align: 'START' });
@@ -104,7 +104,7 @@ Hay quên nhất: error và side effect. Thiếu side effect → không biết t
   label(s, 30, 88, 400, 20, 'MODEL THẤY — quyết định chọn tool và điền tham số', { size: 10, color: C.ORANGE, align: 'START' });
   label(s, 30, 213, 400, 20, 'APPLICATION PHẢI ĐỊNH NGHĨA — model không thấy', { size: 10, color: C.ORANGE, align: 'START' });
 
-  s = newSlide('Description', 'Model chọn tool dựa vào description — viết như hướng dẫn cho người mới', `Description là prompt nhỏ cho từng tool. Model đọc nó để quyết định khi nào gọi tool.
+  s = newSlide('Description', 'Model chọn tool dựa vào description', `Description là prompt nhỏ cho từng tool. Model đọc nó để quyết định khi nào gọi tool.
 Description ngắn kiểu "Tạo ticket" → model không biết P1-P4 nghĩa là gì, assignee điền gì → tự bịa (eval thật: qwen-3.7-flash tự bịa "P2"/"billing team").
 Description tốt nói: khi nào dùng, KHI NÀO KHÔNG dùng, ý nghĩa từng tham số, giá trị hợp lệ.
 Nhưng nhớ: description chỉ là hướng dẫn. Rule thật (chỉ P3/P4, assignee whitelist) vẫn phải nằm trong code — Session 7.`);
@@ -146,7 +146,7 @@ Output của create_ticket là JSON có ticket_id do hệ thống đích trả �
   question('Model nói "Đã tạo ticket". Task đã xong chưa?', 'Run kết thúc có nghĩa là user task hoàn thành?',
     `Hỏi lớp. Nhiều người sẽ nói "xong". Slide sau: chưa chắc — phải kiểm tra tác động thật.`);
 
-  s = newSlide('Đáp án', 'Run kết thúc ≠ task hoàn thành — application kiểm tra tác động thật', `Model có thể nói "đã tạo" khi: tool bị chặn, tool timeout, hay đơn giản là bịa. Câu trả lời của model không phải bằng chứng.
+  s = newSlide('Đáp án', 'Run kết thúc ≠ task hoàn thành', `Model có thể nói "đã tạo" khi: tool bị chặn, tool timeout, hay đơn giản là bịa. Câu trả lời của model không phải bằng chứng.
 Bằng chứng = ticket_id do hệ thống đích trả về. Demo: task_state.finish() chỉ đánh dấu COMPLETED khi có ticket_id; nếu model nói "đã tạo" mà không có ID → ESCALATED (claimed_without_confirmation).
 Session 8 sẽ đi tiếp: state machine và điều kiện dừng.`);
   [['Model nói', '"Đã tạo ticket cho bạn"', C.YELLOW], ['Application kiểm tra', 'có ticket_id từ hệ thống đích?', C.NAVY]].forEach(([t, d, f], i) =>

@@ -38,7 +38,7 @@ function box(slide, x, y, w, h, text, o = {}) {
   const nl = text.indexOf('\n'); // dòng 2+: nhỏ hơn, không đậm, màu dịu (như "Artificial Intelligence  Machines doing…")
   if (o.sub && nl > 0) reqs.push({ updateTextStyle: { objectId: oid, fields: 'fontSize,bold,foregroundColor',
     textRange: { type: 'FIXED_RANGE', startIndex: nl + 1, endIndex: text.length },
-    style: { fontSize: PT(o.sub), bold: false, foregroundColor: { opaqueColor: { rgbColor: o.subColor || (dark ? C.DIM : C.GREY) } } } } });
+    style: { fontSize: PT(o.sub), bold: false, foregroundColor: { opaqueColor: { rgbColor: o.subColor || (dark ? C.DIM : fill === C.ORANGE ? C.INK : C.GREY) } } } } });
   reqs.push({ updateParagraphStyle: { objectId: oid, fields: 'alignment,lineSpacing', textRange: { type: 'ALL' },
     style: { alignment: o.align || 'CENTER', lineSpacing: o.lineSpacing || 105 } } });
   return oid;
@@ -185,5 +185,8 @@ function closing() {
   return s;
 }
 
-module.exports = { C, reqs, slides, box, label, mono, code, arrow, twoWay, table, newSlide, question, sessionHeader,
+// Mỗi session dựng vào deck riêng → xoá trạng thái giữa các lần dựng
+function reset() { reqs.length = 0; slides.length = 0; page = 0; }
+
+module.exports = { reset, C, reqs, slides, box, label, mono, code, arrow, twoWay, table, newSlide, question, sessionHeader,
   recap, agenda, takeaways, challenge, closing, blank, footer };

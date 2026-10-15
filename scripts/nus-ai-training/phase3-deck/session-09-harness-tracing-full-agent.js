@@ -15,7 +15,7 @@ Nối sang hôm nay: ta đã có đủ mảnh rời (tools, quyền, retry, stat
   agenda([['Harness', '6 lớp bao quanh agent loop'], ['Trace', 'xem agent đã làm gì — và giới hạn của nó'],
     ['Agent hoàn chỉnh', 'kiến trúc 1 trang · failure case · test']], `Ba phần, ~13 phút mỗi phần. Phần 3 kết thúc Giai đoạn 3.`);
 
-  let s = newSlide('Harness', 'Harness = mọi thứ bao quanh agent loop — 6 lớp, mỗi lớp một chỗ trong code', `Harness là phần application dựng xung quanh Runner.run. Sáu lớp theo đề cương, cột cuối chỉ chỗ trong demo để người học tự mở code xem.
+  let s = newSlide('Harness', 'Harness: 6 lớp bao quanh agent loop', `Harness là phần application dựng xung quanh Runner.run. Sáu lớp theo đề cương, cột cuối chỉ chỗ trong demo để người học tự mở code xem.
 Agent loop của SDK nằm giữa; harness quyết định agent được làm gì, tốn bao nhiêu, dừng khi nào, đi đâu khi không xử lý được.`);
   table(s, 25, 85, [150, 270, 250], [
     ['Lớp', 'Trả lời câu hỏi', 'Trong demo'],
@@ -30,7 +30,7 @@ Agent loop của SDK nằm giữa; harness quyết định agent được làm g
   question('Bỏ một lớp harness thì chuyện gì xảy ra?', 'Demo cho phép tắt từng lớp — model vẫn là model thật.',
     `Chia lớp thành nhóm, mỗi nhóm đoán hậu quả khi bỏ 1 lớp. Slide sau là kết quả thật / cách tái hiện.`);
 
-  s = newSlide('Đáp án', 'Mỗi lớp chặn một kiểu sự cố — bỏ lớp nào thì sự cố đó quay lại', `Cột giữa là hậu quả; cột phải là lệnh tái hiện.
+  s = newSlide('Đáp án', 'Bỏ lớp nào, sự cố của lớp đó quay lại', `Cột giữa là hậu quả; cột phải là lệnh tái hiện.
 Ghi chú kịch bản 5 --disable 4: hậu quả chỉ xảy ra khi model bị lừa. Eval thật: qwen-3.7-flash bị lừa 2/2 lần; deepseek ít bị hơn. Không đoán trước được model nào bị lừa → không dựa vào model.
 Câu hỏi "lớp nào nguy hiểm nhất khi thiếu?" → lớp đứng trước side effect lớn nhất: permission (④) và approval (⑤).`);
   table(s, 25, 85, [140, 290, 240], [
@@ -42,7 +42,7 @@ Câu hỏi "lớp nào nguy hiểm nhất khi thiếu?" → lớp đứng trư�
     ['Chuyển người', 'Lỗi xảy ra nhưng user tưởng đã xong', '--fault down (xem stop_reason)'],
   ], { rowH: 42, size: 10 });
 
-  s = newSlide('Trace', 'Trace ghi lại từng bước: model call, tool call, guardrail và lỗi', `OpenAI Agents SDK tự sinh "span" cho mỗi bước. Mặc định gửi về dashboard OpenAI; demo thay bằng trace_local.py: ghi file .traces/<trace_id>.jsonl trên máy mình (không gửi dữ liệu khách ra ngoài) và in ra với --trace.
+  s = newSlide('Trace', 'Trace: model call, tool call, guardrail và lỗi', `OpenAI Agents SDK tự sinh "span" cho mỗi bước. Mặc định gửi về dashboard OpenAI; demo thay bằng trace_local.py: ghi file .traces/<trace_id>.jsonl trên máy mình (không gửi dữ liệu khách ra ngoài) và in ra với --trace.
 Bốn loại span hay đọc: 🛡 guardrail, 🧠 model call (model, token, thời gian), 🔧 tool call (tham số, kết quả), ❌ lỗi.
 Dùng khi: "vì sao agent trả lời sai?", "vì sao chậm?", "tool nào bị gọi với tham số gì?".`);
   [['🛡 Guardrail', 'có chặn không'], ['🧠 Model call', 'model · token · giây'], ['🔧 Tool call', 'tham số · kết quả'], ['❌ Lỗi', 'bước nào, thông báo gì']]
@@ -57,7 +57,7 @@ Dùng khi: "vì sao agent trả lời sai?", "vì sao chậm?", "tool nào bị 
 $ python3 run_demo.py --scenario 8 --trace
 🔎 🛡   0.0s  guardrail no_card_number triggered=True   ❌ Guardrail tripwire triggered`, 10);
 
-  s = newSlide('Giới hạn của trace', 'Trace cho biết agent chạy thế nào — không cho biết agent làm đúng việc chưa', `Phân biệt quan sát kỹ thuật với đánh giá user task.
+  s = newSlide('Giới hạn của trace', 'Trace xanh không có nghĩa là agent đúng', `Phân biệt quan sát kỹ thuật với đánh giá user task.
 Trace kịch bản 5 khi model bị lừa: mọi span xanh, không lỗi, HTTP 200, thời gian bình thường — nhưng model đề xuất ticket P1 gán CEO. Trace không biết "P1 gán CEO" là sai.
 Đánh giá đúng/sai cần tiêu chí nghiệp vụ: test case có đáp án (run_eval.py), task state (có ticket ID không), phản hồi user.
 Câu nói để nhớ: "Trace xanh không có nghĩa là agent đúng."`);
@@ -69,7 +69,7 @@ Câu nói để nhớ: "Trace xanh không có nghĩa là agent đúng."`);
   ], { rowH: 48 });
   box(s, 30, 300, 660, 45, 'Trace xanh không có nghĩa là agent đúng', { fill: C.NAVY, size: 15 });
 
-  s = newSlide('Theo một yêu cầu', 'Từ câu hỏi đến ticket có ID — một yêu cầu đi qua toàn bộ hệ thống', `Ví dụ trong đề cương: theo cùng một yêu cầu từ câu hỏi ban đầu đến câu trả lời có nguồn hoặc ticket có ID. Đây là lần chạy thật kịch bản 1.
+  s = newSlide('Theo một yêu cầu', 'Một yêu cầu: từ câu hỏi đến ticket có ID', `Ví dụ trong đề cương: theo cùng một yêu cầu từ câu hỏi ban đầu đến câu trả lời có nguồn hoặc ticket có ID. Đây là lần chạy thật kịch bản 1.
 Đọc từng bước, chỉ ra lớp harness nào làm việc ở bước đó. Ý chính: model chỉ xuất hiện ở bước 3, 5, 9 — mọi bước còn lại là application.`);
   [['1', 'alice hỏi + nhờ tạo ticket', 'user'], ['2', 'guardrail: không có số thẻ', 'harness'], ['3', 'model: gọi search_kb', 'model'],
     ['4', '② lọc quyền → kb-a-001, kb-a-002', 'harness'], ['5', 'model: đề xuất P3 → billing-team-a', 'model'], ['6', '④ hợp lệ → AWAITING_APPROVAL', 'harness'],
@@ -80,7 +80,7 @@ Câu nói để nhớ: "Trace xanh không có nghĩa là agent đúng."`);
       box(s, x, y, 210, 75, `${k} · ${who}\n${t}`, { fill: f, size: 12, sub: 11 });
     });
 
-  s = newSlide('Kiến trúc', 'Support agent hoàn chỉnh trên một trang — SDK ở giữa, application bao quanh', `Ghép goal, model, RAG, tools, state, harness. Màu: navy = application (mình chịu trách nhiệm), xanh nhạt = SDK/model, xanh lá = hệ thống ngoài.
+  s = newSlide('Kiến trúc', 'Support agent hoàn chỉnh trên một trang', `Ghép goal, model, RAG, tools, state, harness. Màu: navy = application (mình chịu trách nhiệm), xanh nhạt = SDK/model, xanh lá = hệ thống ngoài.
 Mũi tên navy → là request, cam ← là kết quả quay về.
 Đây cũng là khung cho bài tự thực hành: người học vẽ lại cho use case của mình, tô màu phần SDK và phần application.`);
   box(s, 25, 95, 110, 70, 'User\ncâu hỏi', { fill: C.GREEN, size: 15, sub: 11 });
@@ -109,7 +109,7 @@ Mũi tên navy → là request, cam ← là kết quả quay về.
     ['Không có nguồn', 'Câu trả lời không trích id tài liệu', 'kịch bản 7 · kiểm tra "kb-"'],
   ], { rowH: 46 });
 
-  s = newSlide('Prototype nhỏ nhất', 'Prototype nhỏ nhất + vài test case đại diện — trước khi mở rộng', `Đừng mở rộng (thêm tool, thêm tenant) khi chưa có test case.
+  s = newSlide('Prototype nhỏ nhất', 'Prototype nhỏ nhất + test case — rồi mới mở rộng', `Đừng mở rộng (thêm tool, thêm tenant) khi chưa có test case.
 Demo có 5 test case đại diện (run_eval.py), mỗi case chấm 2 cột:
 - model_ok: model tự làm đúng không (dao động theo model).
 - system_ok: hệ thống có an toàn không (không ticket sai, không rò dữ liệu) — phải luôn đạt nhờ code.

@@ -8,7 +8,7 @@ Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deep
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
   label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
-  label(s, 40, 205, 600, 30, 'Session 5–9 · một support agent mở rộng dần · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
+  label(s, 40, 232, 600, 30, 'Session 5–9 · một support agent mở rộng dần · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
   label(s, 40, 320, 250, 20, 'Dương Nguyễn', { size: 12, color: C.WHITE, align: 'START' });
   ['search_kb', '→', 'create_ticket', '→', 'T-1001'].forEach((t, i) => box(s, 400 + [0, 70, 88, 182, 200][i], 318, t === '→' ? 18 : [68, 0, 92, 0, 60][i], 24, t,
     { fill: t === '→' ? C.INK : i === 4 ? C.ORANGE : C.GHOST, font: 'IBM Plex Mono', size: 9, color: i === 4 ? C.INK : C.DIM, noLine: true }));
@@ -74,7 +74,7 @@ Câu hỏi: "Workflow có dùng LLM không?" → có, nhưng LLM không quyết 
   question('Yêu cầu support nào cần agent?', 'Chỉ trả lời câu hỏi · nhiều bước · tạo ticket… — chọn mức thấp nhất đủ dùng.',
     `Hỏi lớp 2-3 phút trước khi lật đáp án. Cho từng người chọn mức cho 4 yêu cầu ở slide sau (đọc to trước).`);
 
-  s = newSlide('Đáp án', 'Chọn mức thấp nhất làm được việc — chỉ dùng agent khi số bước phụ thuộc kết quả', `Giải thích từng dòng:
+  s = newSlide('Đáp án', 'Chọn mức thấp nhất làm được việc', `Giải thích từng dòng:
 1. Tra cứu 1 lần là đủ → RAG, không cần agent.
 2. Các bước luôn giống nhau → workflow; agent chỉ thêm chi phí và rủi ro.
 3. Có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra cứu → agent có giá trị.
@@ -124,7 +124,7 @@ agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT,
 result = await Runner.run(agent, "Khách báo lỗi E205...", context=session, max_turns=8)
 print(result.final_output)            # agent_openai_sdk.py`, 11);
 
-  s = newSlide('Ranh giới', 'SDK chạy loop — application giữ dữ liệu, quyền, approval, state và business rule', `Câu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
+  s = newSlide('Ranh giới', 'SDK chạy loop — application giữ quyền quyết định', `Câu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
 Đọc từng cặp: SDK có cơ chế, nhưng QUYẾT ĐỊNH là của application.
 Ví dụ: SDK có needs_approval để dừng chờ duyệt, nhưng hành động nào cần duyệt, ai được duyệt — application quyết.
 SDK có guardrail, nhưng guardrail lọc nội dung, KHÔNG phải phân quyền (Session 7).
