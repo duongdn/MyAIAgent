@@ -12,9 +12,9 @@ Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường t
 | URL | https://upgrade-test.mypersonalfootballcoach.com |
 | Basic auth | user `mpfc` — pass: `jq -r .basic_auth.password config/.mpfc-upgrade-test-config.json` |
 | Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json` |
-| Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
-| Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MPFC Membership, team key `NUS-UPGRADE-TEST` id 144) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
-| Team manager | form `/login/` — user `nus_upgrade_manager` (role `team-manager`, MPFC Membership; ở `/team-manager/` lọc team key `NUS-UPGRADE-TEST` → thấy `nus_upgrade_member` + `nus_upgrade_team`; không lọc = toàn bộ ~33k user MPFC Membership) — pass: `jq -r .test_users.team_manager.password config/.mpfc-upgrade-test-config.json` |
+| Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Demo, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
+| Team member | form `/login/` — user `nus_upgrade_team` (subscriber, MPFC Demo, team key `NUS-UPGRADE-TEST` id 144) — pass: `jq -r .test_users.team_member.password config/.mpfc-upgrade-test-config.json` |
+| Team manager | form `/login/` — user `nus_upgrade_manager` (role `team-manager`, MPFC Demo — `/team-manager/` thấy ~20 user: 18 demo sẵn có + `nus_upgrade_member` + `nus_upgrade_team`) — pass: `jq -r .test_users.team_manager.password config/.mpfc-upgrade-test-config.json` |
 | Thẻ Stripe test | `4242 4242 4242 4242`, hạn bất kỳ tương lai, CVC bất kỳ |
 | Smoke script | `env -u DISPLAY ONLY=admin,member,guest OUT=out.json EXTRA=/?p=123 node scripts/mpfc-upgrade-smoke-test.js` |
 
@@ -124,6 +124,8 @@ Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10
 | `mu-plugins/force-strong-passwords/slt-force-strong-passwords.php:53` | `round()` string | `round((float)$wp_version,1)` |
 | `plugins/json-api/singletons/query.php:90` | `get_magic_quotes_gpc()` bị xoá → **app mobile login chết** | `function_exists()` guard |
 | `plugins/gravityforms/forms_model.php:5378` | như trên → form upload file chết | guard |
+| `plugins/json-api/controllers/dynamicballmastery.php:282,285,385,396,500` + `dashboard.php:656` | `$_REQUEST[id]` key không nháy → Error | thêm nháy |
+| `plugins/json-api/controllers/dashboard.php:1297` | `array_search()` trên false → likeVideo chết | `is_array` guard |
 | `plugins/json-api/controllers/coachpass.php:20` | `array_push()` vào null → API coach_corner chết | `$vDesc = array();` |
 | `themes/pfc7/wpbakery/.../shortcodes.php:808`, `vc-column.php:80`, `vc-accordion-tab.php:41,86` | `count()` string → Add New post/video chết | `count((array)$width)` (giữ hành vi PHP 7) |
 | `plugins/wd-instagram-feed/booster/TWBLibrary.php:264` (bản mới) | `end(false)` → **/team-library 500** | check `is_array` |
@@ -139,6 +141,14 @@ Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10
 | Admin | 314 trang menu admin: **tất cả 200, 0 fatal** ✅ (59 trang timeout trong puppeteer do droplet 512MB chậm 5–16s/trang → kiểm lại bằng curl: 200; 16 trang `000` do unattended-upgrades restart apache 06:31 UTC → chạy lại: 200). 2 link 404 `order-post-types-elementor_library` / `to-interface-elementor_library` = link menu giả của plugin sort, live cũng vậy |
 | API app mobile | login (`/api/auth/generate_auth_cookie/`) ✅, validate/currentuserinfo ✅, dashboard (player_of_the_week, favorites, weekly_plan) ✅, coach_corner ✅ (sau sửa), otherpages (app_usage, leaderboard, notifications, membership_lists, timer) ✅, user (plans, trophies) ✅; idp/leaguetables trả "not enabled for your club" (đúng logic) |
 | Elementor System Info | hiện exception Elementor Data API ⚠️ (có thể do chặn mạng) |
+
+### 7.3b API app mobile — test toàn bộ (2026-10-15, sau MM 3.1.1 + Elementor Pro 4.3.2)
+~80 endpoint json-api (`/api/<controller>/<method>/`) gọi bằng cookie member test:
+- ✅ auth (generate/validate/currentuserinfo), dashboard (POTW, favorites add/get/remove, likeVideo like/unlike, courses, course video, team library, weekly plan, account info/settings, membership info, setPassword — đặt lại pass cũ, login lại OK), coachpass, dynamicballmastery (sessions, points, training programme, insert completed), otherpages (app usage + leaderboard + statistic v1, notifications, timer, membership lists, drills, store web usage), user (plans, trophies).
+- ✅ Trả lỗi đúng logic: idp/leaguetables "not enabled for your club"; virtualacademy "no permission" (member không có bundle VA); CoachPass "need active Coach Pass".
+- ❌→✅ Fatal PHP 8 mới phát hiện + đã sửa: `json-api/controllers/dynamicballmastery.php` 282/285/385/396/500 (`$_REQUEST[id]` không nháy → Error), `dashboard.php:656` (setPassword, `$_REQUEST[password]`), `dashboard.php:1297` likeVideo (`array_search` trên false). Bản gốc `/root/upgrade/json-api_controllers_*.orig`.
+- ⛔ Không chạy (phá dữ liệu): canselMembership, changeAccountInfo, DeleteMemberVideo, user/delete, registration/create, virtualacademy deleteVideo/deleteVideoComment, destroy_auth_cookie → 🙋 anh test trên app.
+- 🙋 `mpfc/v1/firebase-session` (cần chữ ký HMAC từ app), upload video (S3), push notification → test bằng app thật.
 
 ### 7.4 Thay đổi DB khi upgrade (cho ngày cutover)
 File: `plans/mpfc-upgrade/schema-diff-live-vs-upgraded.txt`. Chỉ THÊM: bảng Yoast (`wp_yoast_indexable`… — live sẽ phải chạy index Yoast, nặng với cluster 1vCPU → chạy giờ thấp điểm/ WP-CLI có nghỉ), Uncanny Automator (`wp_uap_error_log`, `wp_uap_run_snapshots`), FV Player (`wp_fv_player_encoding_jobs`), `wp_upb_*`, index `wp_posts.type_status_author`, `mm_applied_bundles.access_type_id`. `wp_uap_recipe_count.recipe_id` thành UNIQUE — live không có trùng (19/19) → OK.
