@@ -1023,6 +1023,11 @@ if (require.main === module) (async () => {
     // Rebuild existing presentation
     console.log(`Rebuilding existing presentation: ${PID}`);
     const pres = (await api.presentations.get({ presentationId: PID })).data;
+    // Chống ghi đè nhầm deck khác (đã từng xoá mất deck Giai đoạn 5): chỉ rebuild deck trống hoặc deck Giai đoạn 3
+    const firstText = JSON.stringify(pres.slides?.[0]?.pageElements || []);
+    if (pres.slides.length > 1 && !firstText.includes('Giai đoạn 3')) {
+      throw new Error(`Deck ${PID} ("${pres.title}") không phải deck Giai đoạn 3 — dừng, không xoá.`);
+    }
     const del = pres.slides.map((x) => ({ deleteObject: { objectId: x.objectId } }));
     if (del.length) await api.presentations.batchUpdate({ presentationId: PID, requestBody: { requests: del } });
   } else {
