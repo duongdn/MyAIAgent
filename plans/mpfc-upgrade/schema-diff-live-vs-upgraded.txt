@@ -1,0 +1,279 @@
+764a765,781
+> C wp_fv_player_encoding_jobs.args text YES NULL 
+> C wp_fv_player_encoding_jobs.author bigint unsigned NO 0 
+> C wp_fv_player_encoding_jobs.date_checked datetime NO NULL 
+> C wp_fv_player_encoding_jobs.date_created datetime NO NULL 
+> C wp_fv_player_encoding_jobs.error varchar(1024) YES NULL 
+> C wp_fv_player_encoding_jobs.id bigint unsigned NO NULL auto_increment
+> C wp_fv_player_encoding_jobs.id_video bigint unsigned NO NULL 
+> C wp_fv_player_encoding_jobs.job_id varchar(45) NO NULL 
+> C wp_fv_player_encoding_jobs.mime varchar(64) YES NULL 
+> C wp_fv_player_encoding_jobs.output text YES NULL 
+> C wp_fv_player_encoding_jobs.progress varchar(64) YES NULL 
+> C wp_fv_player_encoding_jobs.result text YES NULL 
+> C wp_fv_player_encoding_jobs.source varchar(1024) NO NULL 
+> C wp_fv_player_encoding_jobs.status varchar(64) NO NULL 
+> C wp_fv_player_encoding_jobs.target varchar(1024) NO NULL 
+> C wp_fv_player_encoding_jobs.type varchar(64) NO NULL 
+> C wp_fv_player_encoding_jobs.video_data text YES NULL 
+1040c1057
+< C wp_options.option_name varchar(191) YES NULL 
+---
+> C wp_options.option_name varchar(191) YES  
+1527a1545,1553
+> C wp_uap_error_log.ID bigint unsigned NO NULL auto_increment
+> C wp_uap_error_log.action_log_id bigint unsigned YES NULL 
+> C wp_uap_error_log.date_time timestamp YES CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_uap_error_log.error_code varchar(50) NO  
+> C wp_uap_error_log.error_context longtext YES NULL 
+> C wp_uap_error_log.error_message longtext YES NULL 
+> C wp_uap_error_log.is_actionable tinyint unsigned NO 1 
+> C wp_uap_error_log.item_type varchar(20) NO action 
+> C wp_uap_error_log.recipe_log_id bigint unsigned NO NULL 
+1612a1639,1646
+> C wp_uap_run_snapshots.ID bigint unsigned NO NULL auto_increment
+> C wp_uap_run_snapshots.checksum char(32) NO NULL 
+> C wp_uap_run_snapshots.created_at timestamp YES CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_uap_run_snapshots.expires_at timestamp NO NULL 
+> C wp_uap_run_snapshots.recipe_id bigint unsigned NO NULL 
+> C wp_uap_run_snapshots.recipe_log_id bigint unsigned NO NULL 
+> C wp_uap_run_snapshots.snapshot_data longblob NO NULL 
+> C wp_uap_run_snapshots.user_id bigint unsigned NO NULL 
+1655a1690,1756
+> C wp_upb_global_sections.created_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_global_sections.css longtext NO NULL 
+> C wp_upb_global_sections.element_styles longtext YES NULL 
+> C wp_upb_global_sections.global_part_id bigint unsigned NO NULL 
+> C wp_upb_global_sections.html longtext NO NULL 
+> C wp_upb_global_sections.id bigint unsigned NO NULL auto_increment
+> C wp_upb_global_sections.name varchar(255) NO  
+> C wp_upb_global_sections.position int unsigned NO 0 
+> C wp_upb_global_sections.updated_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+> C wp_upb_operations.actor_user_id bigint unsigned NO NULL 
+> C wp_upb_operations.after_payload longtext NO NULL 
+> C wp_upb_operations.before_payload longtext NO NULL 
+> C wp_upb_operations.created_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_operations.id bigint unsigned NO NULL auto_increment
+> C wp_upb_operations.label varchar(255) NO  
+> C wp_upb_operations.operation varchar(128) NO NULL 
+> C wp_upb_operations.scope_id bigint unsigned NO NULL 
+> C wp_upb_operations.scope_type varchar(32) NO NULL 
+> C wp_upb_operations.undone_at datetime YES NULL 
+> C wp_upb_page_artifacts.artifact_version int unsigned NO 1 
+> C wp_upb_page_artifacts.assets_manifest_json longtext NO NULL 
+> C wp_upb_page_artifacts.content_hash char(64) NO NULL 
+> C wp_upb_page_artifacts.created_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_page_artifacts.created_by bigint unsigned NO NULL 
+> C wp_upb_page_artifacts.css longtext NO NULL 
+> C wp_upb_page_artifacts.custom_javascript longtext NO NULL 
+> C wp_upb_page_artifacts.dependencies_json longtext NO NULL 
+> C wp_upb_page_artifacts.dependency_hash char(64) NO NULL 
+> C wp_upb_page_artifacts.html longtext NO NULL 
+> C wp_upb_page_artifacts.id bigint unsigned NO NULL auto_increment
+> C wp_upb_page_artifacts.page_id bigint unsigned NO NULL 
+> C wp_upb_page_artifacts.page_section_count int unsigned NO NULL 
+> C wp_upb_page_artifacts.shell_mode varchar(32) NO NULL 
+> C wp_upb_page_artifacts.slug varchar(200) NO NULL 
+> C wp_upb_page_artifacts.source_revision_hash varchar(128) NO NULL 
+> C wp_upb_page_artifacts.source_snapshot_id bigint unsigned YES NULL 
+> C wp_upb_page_artifacts.static_safety_report_json longtext YES NULL 
+> C wp_upb_page_artifacts.static_safety_status varchar(32) NO NULL 
+> C wp_upb_page_artifacts.title text NO NULL 
+> C wp_upb_page_source_snapshots.created_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_page_source_snapshots.created_by bigint unsigned NO NULL 
+> C wp_upb_page_source_snapshots.id bigint unsigned NO NULL auto_increment
+> C wp_upb_page_source_snapshots.page_generation bigint unsigned NO 0 
+> C wp_upb_page_source_snapshots.page_id bigint unsigned NO NULL 
+> C wp_upb_page_source_snapshots.snapshot_version int unsigned NO 1 
+> C wp_upb_page_source_snapshots.source_content_hash char(64) YES NULL 
+> C wp_upb_page_source_snapshots.source_json longtext NO NULL 
+> C wp_upb_page_source_snapshots.source_revision_hash varchar(128) NO NULL 
+> C wp_upb_page_state.draft_resume_policy varchar(16) NO active 
+> C wp_upb_page_state.draft_slug varchar(200) NO  
+> C wp_upb_page_state.draft_title text NO NULL 
+> C wp_upb_page_state.page_id bigint unsigned NO NULL 
+> C wp_upb_page_state.published_artifact_id bigint unsigned YES NULL 
+> C wp_upb_page_state.published_at datetime YES NULL 
+> C wp_upb_page_state.published_by bigint unsigned YES NULL 
+> C wp_upb_page_state.published_source_snapshot_id bigint unsigned YES NULL 
+> C wp_upb_page_state.updated_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_page_state.updated_by bigint unsigned NO 0 
+> C wp_upb_sections.created_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED
+> C wp_upb_sections.css longtext NO NULL 
+> C wp_upb_sections.element_styles longtext YES NULL 
+> C wp_upb_sections.html longtext NO NULL 
+> C wp_upb_sections.id bigint unsigned NO NULL auto_increment
+> C wp_upb_sections.name varchar(255) NO  
+> C wp_upb_sections.page_id bigint unsigned NO NULL 
+> C wp_upb_sections.position int unsigned NO 0 
+> C wp_upb_sections.updated_at datetime NO CURRENT_TIMESTAMP DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+2487a2589,2660
+> C wp_yoast_expiring_store.exp datetime NO NULL 
+> C wp_yoast_expiring_store.key_name varchar(255) NO NULL 
+> C wp_yoast_expiring_store.value text NO NULL 
+> C wp_yoast_indexable.author_id bigint YES NULL 
+> C wp_yoast_indexable.blog_id bigint NO 1 
+> C wp_yoast_indexable.breadcrumb_title text YES NULL 
+> C wp_yoast_indexable.canonical mediumtext YES NULL 
+> C wp_yoast_indexable.created_at datetime YES NULL 
+> C wp_yoast_indexable.description text YES NULL 
+> C wp_yoast_indexable.estimated_reading_time_minutes int YES NULL 
+> C wp_yoast_indexable.has_ancestors tinyint(1) YES 0 
+> C wp_yoast_indexable.has_public_posts tinyint(1) YES NULL 
+> C wp_yoast_indexable.id int unsigned NO NULL auto_increment
+> C wp_yoast_indexable.inclusive_language_score int YES NULL 
+> C wp_yoast_indexable.incoming_link_count int YES NULL 
+> C wp_yoast_indexable.is_cornerstone tinyint(1) YES 0 
+> C wp_yoast_indexable.is_protected tinyint(1) YES 0 
+> C wp_yoast_indexable.is_public tinyint(1) YES NULL 
+> C wp_yoast_indexable.is_robots_noarchive tinyint(1) YES 0 
+> C wp_yoast_indexable.is_robots_nofollow tinyint(1) YES 0 
+> C wp_yoast_indexable.is_robots_noimageindex tinyint(1) YES 0 
+> C wp_yoast_indexable.is_robots_noindex tinyint(1) YES 0 
+> C wp_yoast_indexable.is_robots_nosnippet tinyint(1) YES 0 
+> C wp_yoast_indexable.language varchar(32) YES NULL 
+> C wp_yoast_indexable.link_count int YES NULL 
+> C wp_yoast_indexable.meta_description_score int YES NULL 
+> C wp_yoast_indexable.number_of_pages int unsigned YES NULL 
+> C wp_yoast_indexable.object_id bigint YES NULL 
+> C wp_yoast_indexable.object_last_modified datetime YES NULL 
+> C wp_yoast_indexable.object_published_at datetime YES NULL 
+> C wp_yoast_indexable.object_sub_type varchar(32) YES NULL 
+> C wp_yoast_indexable.object_type varchar(32) NO NULL 
+> C wp_yoast_indexable.open_graph_description mediumtext YES NULL 
+> C wp_yoast_indexable.open_graph_image mediumtext YES NULL 
+> C wp_yoast_indexable.open_graph_image_id varchar(191) YES NULL 
+> C wp_yoast_indexable.open_graph_image_meta text YES NULL 
+> C wp_yoast_indexable.open_graph_image_source text YES NULL 
+> C wp_yoast_indexable.open_graph_title text YES NULL 
+> C wp_yoast_indexable.permalink mediumtext YES NULL 
+> C wp_yoast_indexable.permalink_hash varchar(40) YES NULL 
+> C wp_yoast_indexable.post_parent bigint YES NULL 
+> C wp_yoast_indexable.post_status varchar(20) YES NULL 
+> C wp_yoast_indexable.primary_focus_keyword varchar(191) YES NULL 
+> C wp_yoast_indexable.primary_focus_keyword_score int YES NULL 
+> C wp_yoast_indexable.prominent_words_version int unsigned YES NULL 
+> C wp_yoast_indexable.readability_score int YES NULL 
+> C wp_yoast_indexable.region varchar(32) YES NULL 
+> C wp_yoast_indexable.schema_article_type varchar(64) YES NULL 
+> C wp_yoast_indexable.schema_page_type varchar(64) YES NULL 
+> C wp_yoast_indexable.seo_title_score int YES NULL 
+> C wp_yoast_indexable.title text YES NULL 
+> C wp_yoast_indexable.twitter_description mediumtext YES NULL 
+> C wp_yoast_indexable.twitter_image mediumtext YES NULL 
+> C wp_yoast_indexable.twitter_image_id varchar(191) YES NULL 
+> C wp_yoast_indexable.twitter_image_source text YES NULL 
+> C wp_yoast_indexable.twitter_title text YES NULL 
+> C wp_yoast_indexable.updated_at timestamp NO CURRENT_TIMESTAMP DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+> C wp_yoast_indexable.version int YES 1 
+> C wp_yoast_indexable_hierarchy.ancestor_id int unsigned NO NULL 
+> C wp_yoast_indexable_hierarchy.blog_id bigint NO 1 
+> C wp_yoast_indexable_hierarchy.depth int unsigned YES NULL 
+> C wp_yoast_indexable_hierarchy.indexable_id int unsigned NO NULL 
+> C wp_yoast_migrations.id int unsigned NO NULL auto_increment
+> C wp_yoast_migrations.version varchar(191) YES NULL 
+> C wp_yoast_primary_term.blog_id bigint NO 1 
+> C wp_yoast_primary_term.created_at datetime YES NULL 
+> C wp_yoast_primary_term.id int unsigned NO NULL auto_increment
+> C wp_yoast_primary_term.post_id bigint YES NULL 
+> C wp_yoast_primary_term.taxonomy varchar(32) NO NULL 
+> C wp_yoast_primary_term.term_id bigint YES NULL 
+> C wp_yoast_primary_term.updated_at timestamp NO CURRENT_TIMESTAMP DEFAULT_GENERATED on update CURRENT_TIMESTAMP
+> C wp_yoast_seo_links.height int unsigned YES NULL 
+2488a2662,2663
+> C wp_yoast_seo_links.indexable_id int unsigned YES NULL 
+> C wp_yoast_seo_links.language varchar(32) YES NULL 
+2489a2665,2667
+> C wp_yoast_seo_links.region varchar(32) YES NULL 
+> C wp_yoast_seo_links.size int unsigned YES NULL 
+> C wp_yoast_seo_links.target_indexable_id int unsigned YES NULL 
+2492a2671
+> C wp_yoast_seo_links.width int unsigned YES NULL 
+2512a2692
+> I mm_applied_bundles.access_type_id 1 access_type_id,access_type
+2765a2946,2950
+> I wp_fv_player_encoding_jobs.PRIMARY 0 id
+> I wp_fv_player_encoding_jobs.job_id 1 job_id
+> I wp_fv_player_encoding_jobs.source 1 source
+> I wp_fv_player_encoding_jobs.status 1 status
+> I wp_fv_player_encoding_jobs.type 1 type
+2890a3076
+> I wp_posts.type_status_author 1 post_type,post_status,post_author
+3053a3240,3244
+> I wp_uap_error_log.PRIMARY 0 ID
+> I wp_uap_error_log.action_log_id 1 action_log_id
+> I wp_uap_error_log.actionable_by_recipe 1 recipe_log_id,is_actionable
+> I wp_uap_error_log.error_code 1 error_code
+> I wp_uap_error_log.recipe_log_id 1 recipe_log_id
+3082c3273
+< I wp_uap_recipe_count.recipe_id 1 recipe_id
+---
+> I wp_uap_recipe_count.recipe_id 0 recipe_id
+3097a3289,3292
+> I wp_uap_run_snapshots.PRIMARY 0 ID
+> I wp_uap_run_snapshots.expires_at 1 expires_at
+> I wp_uap_run_snapshots.recipe_log_id 0 recipe_log_id
+> I wp_uap_run_snapshots.recipe_user 1 recipe_id,user_id
+3114a3310,3328
+> I wp_upb_global_sections.PRIMARY 0 id
+> I wp_upb_global_sections.global_part_id_position 1 global_part_id,position
+> I wp_upb_operations.PRIMARY 0 id
+> I wp_upb_operations.scope_active 1 scope_type,scope_id,undone_at,id
+> I wp_upb_operations.scope_created 1 scope_type,scope_id,created_at
+> I wp_upb_operations.scope_undone 1 scope_type,scope_id,undone_at
+> I wp_upb_page_artifacts.PRIMARY 0 id
+> I wp_upb_page_artifacts.content_hash 1 content_hash
+> I wp_upb_page_artifacts.dependency_hash 1 dependency_hash
+> I wp_upb_page_artifacts.page_created 1 page_id,created_at,id
+> I wp_upb_page_artifacts.source_snapshot 1 source_snapshot_id
+> I wp_upb_page_source_snapshots.PRIMARY 0 id
+> I wp_upb_page_source_snapshots.page_created 1 page_id,created_at,id
+> I wp_upb_page_source_snapshots.source_revision 1 page_id,source_revision_hash
+> I wp_upb_page_state.PRIMARY 0 page_id
+> I wp_upb_page_state.published_artifact 1 published_artifact_id
+> I wp_upb_page_state.published_source_snapshot 1 published_source_snapshot_id
+> I wp_upb_sections.PRIMARY 0 id
+> I wp_upb_sections.page_id_position 1 page_id,position
+3262a3477,3494
+> I wp_yoast_expiring_store.PRIMARY 0 key_name
+> I wp_yoast_expiring_store.exp_index 1 exp
+> I wp_yoast_indexable.PRIMARY 0 id
+> I wp_yoast_indexable.object_id_and_type 1 object_id,object_type
+> I wp_yoast_indexable.object_type_and_sub_type 1 object_type,object_sub_type
+> I wp_yoast_indexable.permalink_hash_and_object_type 1 permalink_hash,object_type
+> I wp_yoast_indexable.prominent_words 1 prominent_words_version,object_type,object_sub_type,post_status
+> I wp_yoast_indexable.published_sitemap_index 1 object_published_at,is_robots_noindex,object_type,object_sub_type
+> I wp_yoast_indexable.subpages 1 post_parent,object_type,post_status,object_id
+> I wp_yoast_indexable_hierarchy.PRIMARY 0 indexable_id,ancestor_id
+> I wp_yoast_indexable_hierarchy.ancestor_id 1 ancestor_id
+> I wp_yoast_indexable_hierarchy.depth 1 depth
+> I wp_yoast_indexable_hierarchy.indexable_id 1 indexable_id
+> I wp_yoast_migrations.PRIMARY 0 id
+> I wp_yoast_migrations.wp_yoast_migrations_version 0 version
+> I wp_yoast_primary_term.PRIMARY 0 id
+> I wp_yoast_primary_term.post_taxonomy 1 post_id,taxonomy
+> I wp_yoast_primary_term.post_term 1 post_id,term_id
+3263a3496
+> I wp_yoast_seo_links.indexable_link_direction 1 indexable_id,type
+3264a3498,3499
+> I wp_yoast_seo_links.target_indexable_id_index 1 target_indexable_id
+> I wp_yoast_seo_links.url_index 1 url
+3373a3609
+> T wp_fv_player_encoding_jobs InnoDB utf8mb3_unicode_ci
+3465a3702
+> T wp_uap_error_log InnoDB utf8mb3_unicode_ci
+3475a3713
+> T wp_uap_run_snapshots InnoDB utf8mb3_unicode_ci
+3479a3718,3723
+> T wp_upb_global_sections InnoDB utf8mb3_unicode_ci
+> T wp_upb_operations InnoDB utf8mb3_unicode_ci
+> T wp_upb_page_artifacts InnoDB utf8mb3_unicode_ci
+> T wp_upb_page_source_snapshots InnoDB utf8mb3_unicode_ci
+> T wp_upb_page_state InnoDB utf8mb3_unicode_ci
+> T wp_upb_sections InnoDB utf8mb3_unicode_ci
+3548a3793,3797
+> T wp_yoast_expiring_store InnoDB utf8mb3_general_ci
+> T wp_yoast_indexable InnoDB utf8mb3_unicode_ci
+> T wp_yoast_indexable_hierarchy InnoDB utf8mb3_unicode_ci
+> T wp_yoast_migrations InnoDB utf8mb3_unicode_ci
+> T wp_yoast_primary_term InnoDB utf8mb3_unicode_ci
