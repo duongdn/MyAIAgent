@@ -2,7 +2,7 @@
 
 Cập nhật: 2026-10-15 10:20 (+07) | Server test: https://upgrade-test.mypersonalfootballcoach.com
 Handover chính: `plans/mpfc-upgrade/handover.md` (§0 có cách login).
-Hiện test trên **WP 6.6.2 + plugin hiện tại** (chưa update) → lỗi ở đây = lỗi PHP 8.3 của code hiện tại.
+**Từ 2026-10-15 11:10: đã UPGRADE** WP 6.6.2 → **7.1.3** + 63 plugin wp.org (xem §7). Mục 1–6 bên dưới là vòng test trước upgrade; §7 là kết quả sau upgrade.
 
 Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường test | ⏳ đang test | 🙋 anh test giúp | ⛔ không test được trên test server
 
@@ -105,6 +105,49 @@ Môi trường test khác live (cố ý): mail bị chặn, PHP không gọi ra 
 5. user-role-editor `__wakeup` private → update.
 6. ~4000 Deprecated (ACF Pro, pfc7, GF, CF7...) — không chặn, giảm dần khi update plugin.
 7. Rủi ro live: GF Stripe 3.2 chết admin nếu Stripe API lỗi.
+
+## 7. Sau upgrade (2026-10-15)
+Backup code trước update: `root@test:/root/upgrade/code-before-update-2026-10-15.tgz`. Bản gốc mọi file vá: `/root/upgrade/*.orig`.
+
+### 7.1 Đã làm
+- WP core 6.6.2 → 7.1.3, `core update-db` (db 57155 → 61833). `verify-checksums` OK; có file lạ `wp-logon.php` ở root (không thuộc core) → **cần kiểm tra, có thể là backdoor**.
+- 63 plugin wp.org update (Yoast 12.6 → 28.7, Elementor 3.27 → 4.3.5, CF7 5.1 → 6.2, MemberMouse…). Plugin premium/custom KHÔNG update (chưa license) → giữ bản cũ đang chạy được trên PHP 8.3: ACF Pro 5.2.1, Elementor Pro 3.27.7, Gravity Forms 2.4.15 + Stripe 3.2 + Mailchimp 4.6, WP Courseware 4.6.4, FV Player Pro, Essential Grid (custom), go_pricing, Uncanny Automator Pro, Thrive, LayerSlider (inactive), json-api (custom).
+- **Plugin có code custom bị update ghi đè → đã khôi phục bản custom cũ** (phát hiện qua git log trên live + diff với bản gốc wp.org):
+  - `membermouse` 3.0.22-custom (27 commit: báo cáo GBP, transactions, login…). MM 3.1.1 đã chạy migration (thêm 1 index `mm_applied_bundles`); option `mm-major-version` trả về 3.0.29 như live.
+  - `json-api-auth` (login app mobile: device token, bundle flags, chặn member hết hạn, logout).
+  - `duplicate-page` (logic notification flag, Arsenal club).
+- Plugin chỉ có commit "Fix warning" (vá PHP/WP cũ) → giữ bản mới (bản mới đã sửa).
+
+### 7.2 Code đã sửa trên test — PHẢI đưa vào repo site
+| File | Lỗi PHP 8 | Sửa |
+|---|---|---|
+| `mu-plugins/force-strong-passwords/slt-force-strong-passwords.php:53` | `round()` string | `round((float)$wp_version,1)` |
+| `plugins/json-api/singletons/query.php:90` | `get_magic_quotes_gpc()` bị xoá → **app mobile login chết** | `function_exists()` guard |
+| `plugins/gravityforms/forms_model.php:5378` | như trên → form upload file chết | guard |
+| `plugins/json-api/controllers/coachpass.php:20` | `array_push()` vào null → API coach_corner chết | `$vDesc = array();` |
+| `themes/pfc7/wpbakery/.../shortcodes.php:808`, `vc-column.php:80`, `vc-accordion-tab.php:41,86` | `count()` string → Add New post/video chết | `count((array)$width)` (giữ hành vi PHP 7) |
+| `plugins/wd-instagram-feed/booster/TWBLibrary.php:264` (bản mới) | `end(false)` → **/team-library 500** | check `is_array` |
+| `plugins/wd-instagram-feed/wd-instagram-feed.php:885` (bản mới) | include đường dẫn tương đối → class not found (wp-cli) | `__DIR__` |
+
+### 7.3 Kết quả test sau upgrade
+| Vai | Kết quả |
+|---|---|
+| Guest | 25 trang: 24×200, 1×404 (page_id=1155, live cũng 404), 0 lỗi ✅ |
+| Member | 57 trang, 0 lỗi sau khi sửa team-library ✅ |
+| Team member | 58 trang, 0 lỗi sau khi sửa team-library ✅ |
+| Team manager | 57 trang: 56×200, 1×404, 0 lỗi ✅ |
+| Admin | ~314 trang: các trang load được đều 200, không fatal; ~260 trang timeout 60s trong crawl vì droplet 512MB (mỗi trang admin 10–16s, swap 1.5G) — đang kiểm lại bằng curl ⏳ |
+| API app mobile | login (`/api/auth/generate_auth_cookie/`) ✅, validate/currentuserinfo ✅, dashboard (player_of_the_week, favorites, weekly_plan) ✅, coach_corner ✅ (sau sửa), otherpages (app_usage, leaderboard, notifications, membership_lists, timer) ✅, user (plans, trophies) ✅; idp/leaguetables trả "not enabled for your club" (đúng logic) |
+| Elementor System Info | hiện exception Elementor Data API ⚠️ (có thể do chặn mạng) |
+
+### 7.4 Thay đổi DB khi upgrade (cho ngày cutover)
+File: `plans/mpfc-upgrade/schema-diff-live-vs-upgraded.txt`. Chỉ THÊM: bảng Yoast (`wp_yoast_indexable`… — live sẽ phải chạy index Yoast, nặng với cluster 1vCPU → chạy giờ thấp điểm/ WP-CLI có nghỉ), Uncanny Automator (`wp_uap_error_log`, `wp_uap_run_snapshots`), FV Player (`wp_fv_player_encoding_jobs`), `wp_upb_*`, index `wp_posts.type_status_author`, `mm_applied_bundles.access_type_id`. `wp_uap_recipe_count.recipe_id` thành UNIQUE — live không có trùng (19/19) → OK.
+
+### 7.5 Rủi ro / việc còn lại
+- Elementor 4.3.5 + Elementor Pro 3.27.7 (cũ) lệch major → cần license Pro để update; anh test giúp trang dựng bằng Elementor.
+- ACF Pro 5.2.1 rất cũ (2015) — chạy được nhưng nên update khi có license.
+- Port 27 commit custom MemberMouse lên 3.1.x (hoặc giữ 3.0.22-custom).
+- Droplet test 512MB quá yếu cho admin → đề xuất tạm resize lên 2GB ($12/th) trong thời gian test.
 
 ## Câu hỏi chưa giải quyết
 - License key plugin premium để update (§5.9)?
