@@ -18,6 +18,27 @@ Loại trừ Cho vay/Thu nợ/Đi vay/Trả nợ + lãi/lỗ trong ví đầu t�
 
 Chi sinh hoạt từ 10-14 10:50: −285K. Không có giao dịch đầu tư mới (T10 FPTS 77.9M).
 
+## Nhận xét chi tiêu T10 & lời khuyên (MTD 1–15, chỉ dùng data 10/2026+)
+
+**Kế hoạch (user 10-14):** chi ~40M/tháng + khoản năm ~15M/tháng; thu đều ~77M (lương 66.9M + freelancer 10M) → dư ~22M/tháng.
+
+| Loại | Số tiền (₫) | Ghi chú |
+|------|-----------|---------|
+| Cố định/định kỳ | 18,630,000 | học phí 8.59M · gửi má 5M · nhà cửa 1.93M · điện 1.1M · internet+nước+DV 0.52M · công việc 0.6M · … |
+| Một lần | 2,299,000 | giày chạy giải (Thể thao) |
+| Không phải chi thật | 653,641 | "lãi suất điều chỉnh" tikcop 5m = giảm lãi |
+| Biến động hằng ngày | ~8,150,000 | ăn uống 2.05M, hưởng thụ 1.82M, linh tinh 1.63M, đi lại 1.42M, hiếu hỉ khác 1.2M |
+| **Tổng** | **29,728,141** | |
+
+- **Ổn.** Nửa tháng 29.7M, phần lớn khoản cố định đã chi đầu tháng. Biến động ~0.54M/ngày → cuối tháng ước **~38–40M** (≈ đúng kế hoạch 40M).
+- Dư dự kiến theo kế hoạch: 77M − ~40M = **~37M** (> mục tiêu 22M). Thực tế T10 còn thêm thưởng 25M + lãi 15M.
+- Lưu ý:
+  1. Hiếu hỉ ngoài khoản má đã 1.2M (đám cưới 0.7M + 0.5M) — mùa cưới cuối năm, dự trù thêm.
+  2. Linh tinh 1.3M trên VCB visa 10-08 không ghi chú — nên ghi rõ để giữ chất lượng data (tránh lặp lại kiểu "Linh tinh" cục lớn trước 10/2026).
+  3. Vay chị Ky 5M (10-08) chưa thấy trả — nhớ trả/đối chiếu.
+  4. Phần dư tháng (thưởng + lương còn lại) đã vào FPTS 77.9M → CP 46%; tháng sau nên chia dư vào sổ ko kì hạn/DCA đều, không dồn thêm CP.
+- Chưa đủ 3 tháng data tốt → chưa tính trung bình/spike; so với T9 trở về trước không tin cậy.
+
 ## Chi tiêu theo nhóm — 10/2026
 
 | Nhóm | Số tiền (₫) | % chi tiêu |
