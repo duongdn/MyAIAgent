@@ -10,9 +10,9 @@ Ký hiệu: ✅ pass | ❌ fail (lỗi thật) | ⚠️ fail do môi trường t
 | | |
 |---|---|
 | URL | https://upgrade-test.mypersonalfootballcoach.com |
-| Basic auth | user `mpfc` — pass: `jq -r .basic_auth.password config/.digitalocean-config.json` |
-| Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.digitalocean-config.json` |
-| Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.digitalocean-config.json` |
+| Basic auth | user `mpfc` — pass: `jq -r .basic_auth.password config/.mpfc-upgrade-test-config.json` |
+| Admin | `/old-login` — user `nus_upgrade_admin` — pass: `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json` |
+| Member | form MemberMouse `/login/` — user `nus_upgrade_member` (MPFC Membership, Active) — pass: `jq -r .test_users.member.password config/.mpfc-upgrade-test-config.json` |
 | Thẻ Stripe test | `4242 4242 4242 4242`, hạn bất kỳ tương lai, CVC bất kỳ |
 | Smoke script | `env -u DISPLAY ONLY=admin,member,guest OUT=out.json EXTRA=/?p=123 node scripts/mpfc-upgrade-smoke-test.js` |
 

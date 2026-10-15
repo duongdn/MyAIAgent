@@ -60,6 +60,7 @@ ENC_FILES=(
   config/.server-credentials.json.enc
   config/.digitalocean-config.json.enc
   config/.cloudflare-mpfc-config.json.enc
+  config/.mpfc-upgrade-test-config.json.enc
 )
 
 # Add any daily-agent-*.json.enc

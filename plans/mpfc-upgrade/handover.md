@@ -5,12 +5,12 @@ File duy nhất cho task này — đọc từ đầu để làm tiếp ở máy 
 
 ## 0. Làm tiếp ở máy khác (bắt đầu từ đây)
 ```bash
-cd My-AI-Agent && git pull && bash scripts/decrypt-secrets.sh   # ra config/.digitalocean-config.json + .cloudflare-mpfc-config.json
+cd My-AI-Agent && git pull && bash scripts/decrypt-secrets.sh   # ra config/.digitalocean-config.json, .cloudflare-mpfc-config.json, .mpfc-upgrade-test-config.json
 ssh mpfc.mpfc.live                                               # server LIVE (cẩn thận, chỉ đọc)
 ssh -i ~/.ssh/carrick/id_rsa root@144.126.236.208                # server TEST (mpfc@ cũng được, sudo NOPASSWD)
 ```
-- Test URL: https://upgrade-test.mypersonalfootballcoach.com — basic auth user `mpfc`, pass: `jq -r .basic_auth.password config/.digitalocean-config.json`
-- Admin: `/old-login` user `nus_upgrade_admin` (pass `jq -r .test_users.admin.password ...`); Member: form `/login/` user `nus_upgrade_member` (pass `.test_users.member.password`). Stripe test mode, PayPal sandbox, mail chặn, egress www-data chặn trừ Stripe.
+- Test URL: https://upgrade-test.mypersonalfootballcoach.com — basic auth user `mpfc`, pass: `jq -r .basic_auth.password config/.mpfc-upgrade-test-config.json`
+- Admin: `/old-login` user `nus_upgrade_admin` (pass `jq -r .test_users.admin.password config/.mpfc-upgrade-test-config.json`); Member: form `/login/` user `nus_upgrade_member` (pass `.test_users.member.password`). Stripe test mode, PayPal sandbox, mail chặn, egress www-data chặn trừ Stripe.
 - **Test cases + kết quả:** `plans/mpfc-upgrade/test-results.md`
 - DO API: `curl -H "Authorization: Bearer $(jq -r .token config/.digitalocean-config.json)" https://api.digitalocean.com/v2/...`
 - CF API: `curl -H "Authorization: Bearer $(jq -r .token config/.cloudflare-mpfc-config.json)" https://api.cloudflare.com/client/v4/zones/ded47d2c4247118dac024d793372b069/...`
@@ -112,7 +112,8 @@ Plugin cũ cần update (premium cần license): ACF Pro 5.2.1, Gravity Forms 2.
 ## 8. Secrets (đã mã hoá, commit `.enc`)
 | File | Nội dung |
 |---|---|
-| `config/.digitalocean-config.json(.enc)` | DO token (lấy từ `backup_live_volume.php`, account freelancer@MyPersonalFootballCoach.com, có quyền ghi) + `basic_auth` test |
+| `config/.digitalocean-config.json(.enc)` | DO token (lấy từ `backup_live_volume.php`, account freelancer@MyPersonalFootballCoach.com, có quyền ghi) |
+| `config/.mpfc-upgrade-test-config.json(.enc)` | Pass test server: `basic_auth` + `test_users` (admin, member) |
 | `config/.cloudflare-mpfc-config.json(.enc)` | CF token `cfat_` (account-owned; `/user/tokens/verify` báo invalid nhưng đọc zone + sửa DNS OK) + chuỗi hex 64 ký tự anh đưa (chưa rõ dùng gì) |
 | `config/.cloudflare-config.json(.enc)` | CF token cũ của mpfc-monitor (không đụng) |
 Cả 2 file mới đã thêm vào `scripts/decrypt-secrets.sh`.
