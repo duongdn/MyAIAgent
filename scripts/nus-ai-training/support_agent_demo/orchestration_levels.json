@@ -1,0 +1,27 @@
+{
+ "model": "deepseek-v4.1-flash",
+ "runs": 3,
+ "rows": [
+  {
+   "level": "Model call + RAG",
+   "calls": 1.0,
+   "tokens": 1397.3,
+   "secs": 6.6,
+   "tickets": 0.0
+  },
+  {
+   "level": "Workflow",
+   "calls": 2.0,
+   "tokens": 1482.0,
+   "secs": 7.7,
+   "tickets": 1.0
+  },
+  {
+   "level": "Agent",
+   "calls": 3.3,
+   "tokens": 3841.3,
+   "secs": 7.1,
+   "tickets": 1.0
+  }
+ ]
+}

@@ -1,5 +1,6 @@
 // Mở đầu Giai đoạn 3 + Session 5: Agent khác workflow ở đâu và OpenAI Agents SDK hỗ trợ gì (45 phút)
 const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
+const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
   let s = blank(`Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
@@ -57,19 +58,25 @@ Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model ch
       label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
     });
 
-  s = newSlide('3 mức điều phối', 'Câu hỏi là: ai quyết định bước tiếp theo — code hay model?', `Ba mức, khác nhau ở MỘT điểm: ai chọn bước tiếp theo.
-- Model call: code gọi model 1 lần (có thể kèm RAG). Ví dụ "E205 là lỗi gì?" → tra KB, trả lời. Rẻ, dễ test.
-- Workflow: code viết sẵn thứ tự các bước, model chỉ làm từng bước (phân loại → tóm tắt → điền form). Dễ audit vì flow cố định.
-- Agent: model có mục tiêu + tools, tự chọn gọi tool nào, mấy lần, khi nào dừng. Linh hoạt nhưng khó dự đoán, tốn token hơn, cần nhiều kiểm soát hơn.
-Câu hỏi: "Workflow có dùng LLM không?" → có, nhưng LLM không quyết định flow.`);
-  table(s, 25, 85, [140, 180, 180, 170], [
+  extra.threeFlows();
+
+  s = newSlide('So sánh', 'Cùng yêu cầu "E205 + tạo ticket" ở 3 mức', `Cùng một yêu cầu: "Khách X báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
+- Model call: trả lời được nửa đầu (E205 = ngân hàng từ chối) nhưng không làm được nửa sau.
+- Workflow: làm đủ — nhưng ticket luôn tạo theo tham số code viết sẵn (P3, billing-team-a). Yêu cầu khác dạng (ví dụ "không cần ticket") phải sửa code.
+- Agent: làm đủ và linh hoạt (tự quyết có tạo ticket không, tạo với tham số gì) — đổi lại khó test hơn và cần kiểm soát (Session 7).
+Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → application, Session 7.`);
+  table(s, 30, 88, [140, 175, 175, 170], [
     ['', 'Model call', 'Workflow', 'Agent'],
-    ['Ai chọn bước tiếp?', 'Không có bước tiếp', 'Code — viết sẵn', 'Model — lúc chạy'],
-    ['Ví dụ support', '"E205 là lỗi gì?" → RAG trả lời', 'Phân loại email → điền form ticket', 'Xử lý lỗi khách báo, tự tra + tạo ticket'],
-    ['Số lần gọi model', '1', 'Cố định (N bước)', 'Không biết trước'],
-    ['Test & audit', 'Dễ nhất', 'Dễ — flow cố định', 'Khó — phải test nhiều đường'],
-    ['Rủi ro chính', 'Trả lời sai', 'Bước sai làm hỏng bước sau', 'Chọn sai tool, lặp, side effect sai'],
-  ], { rowH: 40 });
+    ['Làm được gì', 'Chỉ trả lời', 'Trả lời + tạo ticket', 'Trả lời + tạo ticket'],
+    ['Ai chọn bước', 'Không có bước', 'Code — viết sẵn', 'Model — lúc chạy'],
+    ['Tham số ticket', '—', 'Code cố định P3', 'Model đề xuất'],
+    ['Đổi yêu cầu', 'Sửa prompt', 'Sửa code', 'Không cần sửa'],
+    ['Test & audit', 'Dễ nhất', 'Dễ — flow cố định', 'Khó — nhiều đường đi'],
+    ['Rủi ro chính', 'Trả lời sai', 'Không xử lý ca lạ', 'Gọi sai tool, tham số sai'],
+  ], { rowH: 36 });
+
+  extra.measuredCost();
+  extra.tokenGrowth();
 
   question('Yêu cầu support nào cần agent?', 'Chỉ trả lời câu hỏi · nhiều bước · tạo ticket… — chọn mức thấp nhất đủ dùng.',
     `Hỏi lớp 2-3 phút trước khi lật đáp án. Cho từng người chọn mức cho 4 yêu cầu ở slide sau (đọc to trước).`);
@@ -124,6 +131,11 @@ agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT,
 result = await Runner.run(agent, "Khách báo lỗi E205...", context=session, max_turns=8)
 print(result.final_output)            # agent_openai_sdk.py`, 11);
 
+  extra.traceLocate();
+
+  question('Có SDK rồi — còn phải tự viết gì?', 'SDK lo agent loop, tool schema, trace, cả cơ chế dừng chờ duyệt…',
+    `Hỏi lớp 1 phút. Nhiều người nghĩ SDK lo luôn phân quyền. Slide sau: SDK cung cấp cơ chế, application ra quyết định.`);
+
   s = newSlide('Ranh giới', 'SDK chạy loop — application giữ quyền quyết định', `Câu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
 Đọc từng cặp: SDK có cơ chế, nhưng QUYẾT ĐỊNH là của application.
 Ví dụ: SDK có needs_approval để dừng chờ duyệt, nhưng hành động nào cần duyệt, ai được duyệt — application quyết.
@@ -142,6 +154,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   takeaways([
     ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
     ['Chọn mức', 'Mức thấp nhất làm được việc — agent khi số bước phụ thuộc kết quả'],
+    ['Chi phí', 'Cùng yêu cầu: agent ~3.840 token vs workflow ~1.480 — vì mỗi lượt gửi lại cả hội thoại'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A.`);
@@ -150,7 +163,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Agent tốn hơn workflow ở chỗ nào?',
     'Workflow có gọi LLM thì có phải agent?',
     'Kiểm tra user thuộc tenant nào — SDK hay application?',
-    'Agent dùng nhiều token hơn RAG ở chỗ nào — đo bằng gì?',
+    'Model call + RAG muốn tạo ticket thì phải thêm gì?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
 1. Agent tốn hơn workflow ở đâu? → số lần gọi model không biết trước (demo kịch bản 1: 3 lượt gọi, ~3.000 token).

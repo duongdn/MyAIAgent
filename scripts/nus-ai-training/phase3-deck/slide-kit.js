@@ -155,9 +155,9 @@ function takeaways(points, notes) {
   const s = newSlide('Ghi nhớ', 'Mang về sau buổi hôm nay', notes);
   points.forEach(([k, t], i) => {
     const dark = i === 0;
-    box(s, 40, 88 + i * 70, 640, 60, ' ', { fill: dark ? C.INK : C.CARD, line: dark ? undefined : C.BLUE });
-    mono(s, 54, 93 + i * 70, 400, 14, k.toUpperCase(), { color: dark ? C.ORANGE : C.BLUE, size: 8 });
-    label(s, 54, 106 + i * 70, 615, 36, t, { size: 13.5, color: dark ? C.WHITE : C.INK, align: 'START' });
+    box(s, 40, 86 + i * 58, 640, 50, ' ', { fill: dark ? C.INK : C.CARD, line: dark ? undefined : C.BLUE });
+    mono(s, 54, 89 + i * 58, 400, 14, k.toUpperCase(), { color: dark ? C.ORANGE : C.BLUE, size: 8 });
+    label(s, 54, 100 + i * 58, 615, 34, t, { size: 13.5, color: dark ? C.WHITE : C.INK, align: 'START' });
   });
   return s;
 }

@@ -25,3 +25,8 @@ See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics use
 **🔴 2026-10-12 — No trainer-meta on slides:** User angry ("cái này sao lại đưa vào slide !!!") at an on-slide box "Kết thúc: Solution brief 1 trang = bài đánh giá cuối". Program/trainer info (assessment rules, "session cuối · 60 phút", grading criteria, how slide maps to trainer doc) goes ONLY in speaker notes. Slides show audience-facing content only.
 
 **2026-10-12 — Consistent detail level across sibling boxes:** In a diagram, if one box gets a detail/subtitle line, ALL sibling boxes get one. No extra callouts repeating what a box already says. Only single out a box when something is genuinely special — and then state explicitly why.
+
+**2026-10-15 (Giai đoạn 3):** User: "ko thể làm ra 1 bảng chất lượng kém, hàm lượng info thấp" + "nhiều việc quá lâu có kết quả, tập trung làm S5".
+- Chuẩn = deck Session 1 của ChienTX (Matrix room "AI Training", Session_01_AI-LLM-Fundamentals.pdf): ~20 slide/buổi, nhịp CÂU HỎI→ĐÁP ÁN, mỗi khái niệm có hình + số cụ thể, Key takeaways + Challenge 0X.
+- Tránh slide chỉ là bảng chữ; ưu tiên số đo THẬT (vd compare_orchestration_levels.py: agent ~3.840 token vs workflow ~1.480).
+- Làm từng session một, cho user xem kết quả sớm; không làm cả 5 session một lượt.
