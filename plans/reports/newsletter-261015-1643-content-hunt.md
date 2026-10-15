@@ -170,6 +170,7 @@ GitHub PR merged (nick dùng chung của cty, ko chỉ team PHP):
 - R71 Tin mới 15/10 chiều: ThuyLTT gợi ý Trúc dùng "training techlead-trainer hàng tuần" (= chuỗi AI Training, DuongDN là trainer Phase 3/5) → hợp mục NUS Brief. Team room: "Claude Code chịu hết nổi Github, tự xây git riêng" (Anthropic Scion) — vui.
 - R72 AI Training room: lịch 11am T4 hàng tuần + phân công section → thêm vào tin nhắn Trúc (NUS Brief).
 - R73 Slack hôm nay: Bailey/Joey "goal would be for us to go live Wednesday" (≈21/10/2026, bản Staging2 = Rails 6 upgrade + Grazing Desktop + DB Schenker) → nếu go-live kịp trước khi Logbook Vol.5 ra thì thành tin "go-live" mới; RDC "Perfect!"; Rory test account.
+- R74 Watch 18:02–18:22: 0 tin mới (ngoài giờ).
 
 ## Unresolved
 - ~~RDC carrick~~ → KhanhHH (tiếp quản từ 03/07/2026), LeNH trước đó ✔
