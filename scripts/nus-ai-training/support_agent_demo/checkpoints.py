@@ -63,13 +63,21 @@ def new_session(session_user, kb=KB_DOCS, disabled=(), task=None):
 def budget_exceeded(me: Session) -> str | None:
     """Budget tool call (Session 8): vượt → dừng + chuyển người, không để model gọi tiếp."""
     if me.task and not me.task.use_tool():
-        me.task.set("ESCALATED", "tool_call_budget")
+        if me.task.status != "ESCALATED":
+            me.task.set("ESCALATED", "tool_call_budget")
         return '{"error": "vượt giới hạn số tool call của task — dừng lại, báo user đã chuyển người xử lý"}'
     return None
 
 
 # ── ① + ② + ③ search_kb ───────────────────────────────────────────────────
 SUSPICIOUS = ["ignore all previous", "ignore previous", "bỏ qua mọi hướng dẫn", "dành cho ai assistant"]
+
+
+def relevant(query: str, doc: dict) -> bool:
+    """Retrieval tối giản: tài liệu chứa ≥2 từ của query (hệ thống thật: vector search, Giai đoạn 2)."""
+    words = {w for w in query.lower().replace(",", " ").split() if len(w) >= 3}
+    text = (doc["title"] + " " + doc["content"]).lower()
+    return sum(w in text for w in words) >= 2
 
 
 def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str:
@@ -92,7 +100,9 @@ def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str
         docs = [d for d in me.kb if d["tenant"] == tenant] if "1" not in me.disabled else list(me.kb)
     else:
         docs = [d for d in me.kb if d["tenant"] == tenant and me.role in d["allowed_roles"]]
-        log("②", f"trả {[d['id'] for d in docs]}, ẩn {len(me.kb) - len(docs)} tài liệu không có quyền")
+        log("②", f"được phép đọc {[d['id'] for d in docs]}, ẩn {len(me.kb) - len(docs)} tài liệu không có quyền")
+    docs = [d for d in docs if relevant(query, d)]
+    print(f"   🔍 liên quan tới query: {[d['id'] for d in docs] or 'KHÔNG có tài liệu nào'}")
 
     leaked = [d["id"] for d in docs if d["tenant"] != me.tenant]
     if leaked:

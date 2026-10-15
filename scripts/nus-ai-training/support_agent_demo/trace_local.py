@@ -54,7 +54,7 @@ class LocalTraceProcessor(TracingProcessor):
                 "what": _describe(d), "error": span.error}
         with (TRACE_DIR / f"{span.trace_id}.jsonl").open("a") as f:
             f.write(json.dumps(line, ensure_ascii=False) + "\n")
-        if self.verbose:
+        if self.verbose and d.type != "custom":
             err = f"  ❌ {span.error.get('message')}" if span.error else ""
             print(f"   🔎 {ICON.get(d.type, '•')} {line['secs']:>5.1f}s  {line['what']}{err}")
 

@@ -11,6 +11,7 @@ State machine (Session 8):
 Chỉ lưu dữ liệu có lý do: tiến độ, ID đã xác nhận, hành động chờ duyệt. Không lưu nội dung tài liệu KB.
 """
 import json
+import os
 import time
 import uuid
 from dataclasses import asdict, dataclass, field
@@ -18,7 +19,7 @@ from pathlib import Path
 
 STATE_DIR = Path(__file__).parent / ".state"
 STATE_TTL_DAYS = 30        # có thời hạn: task cũ hơn bị xoá (cleanup job, không làm trong demo)
-MAX_TOOL_CALLS = 6         # budget số tool call / task (ngoài MAX_TURNS của SDK)
+MAX_TOOL_CALLS = int(os.environ.get("DEMO_MAX_TOOL_CALLS", 6))  # budget tool call / task (ngoài MAX_TURNS của SDK)
 RUN_TIMEOUT_S = 120        # budget thời gian / lần chạy
 
 
@@ -52,7 +53,8 @@ class TaskState:
 
     def save(self):
         STATE_DIR.mkdir(exist_ok=True)
-        (STATE_DIR / f"{self.task_id}.json").write_text(json.dumps(asdict(self), ensure_ascii=False, indent=1))
+        (STATE_DIR / f"{self.task_id}.json").write_text(json.dumps(asdict(self), ensure_ascii=False, indent=1,
+                                                                       default=lambda o: sorted(o) if isinstance(o, set) else str(o)))
 
     @classmethod
     def load(cls, task_id):
