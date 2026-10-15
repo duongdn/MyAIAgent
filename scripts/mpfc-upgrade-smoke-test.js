@@ -16,7 +16,15 @@ const BASE = (process.argv[2] || `https://${cfg.basic_auth.host}`).replace(/\/$/
 const LOGIN = BASE + (cfg.test_users.login_path || '/wp-login.php');
 const PHP_ERR = /(Fatal error|Parse error|critical error on this website|There has been a critical error|Warning<\/b>:|Uncaught )/i;
 
+// Hard per-page cap: a hung page.goto/content() must not stall the whole crawl.
 async function visit(page, url, results, label) {
+  const n = results.length;
+  await Promise.race([visitInner(page, url, results, label), new Promise((r) => setTimeout(r, 90000))]);
+  if (results.length === n) results.push({ label, url: url.replace(BASE, ''), status: 0, phpError: 'TIMEOUT_90S' });
+  if (process.env.OUT) fs.writeFileSync(process.env.OUT, JSON.stringify(results, null, 1));
+}
+
+async function visitInner(page, url, results, label) {
   const consoleErrors = [];
   const onConsole = (m) => { if (m.type() === 'error') consoleErrors.push(m.text().slice(0, 200)); };
   page.on('console', onConsole);
