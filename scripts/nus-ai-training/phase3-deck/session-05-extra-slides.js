@@ -82,7 +82,7 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
 🔧 0.0s create_ticket(P3, billing-team-a)
          → {"ticket_id": "T-1001"}
 🧠 1.9s model call  tokens=1109+156
-🧭 5.6s agent Support agent`, 10.5);
+🧭 agent Support agent · 3 lượt model · 2 tool`, 10.5);
   [['Agent', 'cả khối · 🧭'], ['Runner.run', 'chuỗi lượt gọi · 🧠'], ['function_tool', 'mỗi dòng 🔧'], ['Guardrail', 'kiểm tra đầu vào · 🛡']].forEach(([t, d], i) =>
     box(s, 490, 88 + i * 50, 190, 42, `${t}\n${d}`, { size: 12.5, sub: 10, align: 'START' }));
   label(s, 40, 300, 640, 40, 'Đọc trace trả lời được: agent gọi tool nào, với tham số gì, mất bao lâu, tốn bao nhiêu token', { size: 12, align: 'START' });

@@ -38,7 +38,7 @@ Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào s
   recap('Giai đoạn 2: model trả lời từ dữ liệu riêng của công ty', [
     'Embedding + vector search tìm tài liệu theo nghĩa, không chỉ theo từ khoá',
     'RAG: lấy tài liệu liên quan rồi đưa vào prompt — câu trả lời có nguồn',
-    'Câu trả lời sai thường do retrieval sai, không phải do model',
+    'RAG trả lời được câu hỏi — nhưng không hành động được (không tạo ticket)',
   ], `2-3 phút nhắc Giai đoạn 2 (Session 3-4). Nối sang hôm nay: RAG trả lời được câu hỏi, nhưng không TẠO ticket được. Khi cần hành động và nhiều bước → agent.`);
   agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'ví dụ support + 3 câu hỏi quyết định'],
     ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
@@ -91,23 +91,23 @@ Rule: khi không chắc → chọn mức thấp hơn; nâng mức sau khi đã c
     ['Yêu cầu', 'Mức', 'Vì sao'],
     ['"Mã lỗi E205 nghĩa là gì?"', 'Model call + RAG', 'Một lần tra cứu là đủ'],
     ['"Phân loại email khách rồi điền form ticket"', 'Workflow', 'Bước luôn giống nhau, biết trước'],
-    ['"Khách báo lỗi E205, xử lý giúp, cần thì tạo ticket"', 'Agent', 'Tra gì, có tạo ticket không — tuỳ kết quả tra'],
+    ['"Khách báo lỗi E205, xử lý giúp, CẦN THÌ tạo ticket"', 'Agent', 'Có tạo ticket không tuỳ kết quả tra (nếu LUÔN tạo → workflow, xem slide đo)'],
     ['"Hoàn 2.000 USD cho khách"', 'Workflow + người duyệt', 'Tiền bạc, không đảo ngược — model không tự quyết'],
   ], { rowH: 46, fills: [C.WHITE, C.WHITE, C.GREEN, C.YELLOW] });
 
   s = newSlide('Quyết định', 'Ba câu hỏi trước khi chọn agent', `Đi theo cây từ trên xuống.
-1. Các bước có biết trước không? Biết → workflow.
-2. Có cần gọi tool/dữ liệu ngoài không? Không → model call.
+1. Có cần hành động / gọi tool không? Không → model call (+ RAG nếu cần dữ liệu riêng).
+2. Các bước có biết trước không? Biết → workflow (như slide đo: luôn tạo ticket P3 cho billing).
 3. Nếu agent làm sai, có sửa lại được không? Không (gửi tiền, xoá dữ liệu) → phải có người duyệt hoặc quay về workflow.
 Chỉ khi đi hết tới cuối mới chọn agent. Đây cũng là cách trả lời khách hàng khi họ nói "làm cho tôi một AI agent".`);
-  [['Các bước biết trước?', 'Có → Workflow'], ['Cần tool / dữ liệu ngoài?', 'Không → Model call'], ['Làm sai có sửa lại được?', 'Không → thêm người duyệt']]
+  [['Cần hành động / gọi tool?', 'Không → Model call (+ RAG)'], ['Các bước biết trước?', 'Có → Workflow'], ['Làm sai có sửa lại được?', 'Không → thêm người duyệt']]
     .forEach(([q, a], i) => {
       box(s, 60, 90 + i * 85, 260, 60, q, { fill: C.LIGHT, size: 15 });
       box(s, 400, 90 + i * 85, 240, 60, a, { fill: C.YELLOW, size: 14 });
       arrow(s, 320, 120 + i * 85, 400, 120 + i * 85);
       if (i < 2) arrow(s, 190, 150 + i * 85, 190, 175 + i * 85);
     });
-  box(s, 60, 335, 580, 36, 'Qua cả 3 câu → Agent (kèm kiểm soát ở S7–S9)', { fill: C.NAVY, size: 14 });
+  box(s, 60, 335, 580, 36, 'Cần tool · bước không biết trước → Agent (kèm kiểm soát ở S7–S9)', { fill: C.NAVY, size: 14 });
   arrow(s, 190, 320, 190, 335);
 
   s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `Định vị, không học thuộc API.
