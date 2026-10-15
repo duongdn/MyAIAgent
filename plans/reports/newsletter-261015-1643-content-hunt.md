@@ -52,6 +52,7 @@ Hi Trúc, team PHP gửi em ít "tư liệu" cho Vol.5 nha 😄
 • 4 dự án team PHP đã lên case study trên web mới của cty (Baamboozle, XID, Paturevision, BXR)
 **Chuyện bên lề:** Khách Meta-Stamp cảm ơn team vì "the overnight push" — trong khi team toàn làm giờ hành chính 🤣 (lệch múi giờ cũng là lợi thế!)
 **Confession/vui:** "Rồi em lấy con AI nào để review con AI mà review cái skill này?" — 1 năm hành trình AI của team PHP, từ "dạo này AI ngu hơn trước" (06/2025) tới đứng lớp AI Agent cho cả cty (10/2026)
+**NUS Brief / Upcoming:** Chương trình đào tạo AI nội bộ — 11h sáng thứ 4 hàng tuần, trainer cũng là trainee: Section 1 nền tảng LLM (ChienTX + NamTV, đã mở màn), Section 2 RAG (KietNVT), Section 3 AI Agent (DuongDN + VinhNT, có demo agent thật chạy trên LLM gateway cty)…
 Cần ảnh/chi tiết thêm cứ hú anh nha!
 
 ## DRAFTS (sẵn để gửi Trúc — CHƯA GỬI)
@@ -166,6 +167,9 @@ GitHub PR merged (nick dùng chung của cty, ko chỉ team PHP):
 - R68 Soạn tin nhắn gửi Trúc theo format Logbook.
 - R69 Discord Bizurk: search trả 0 kết quả mọi từ khóa (có thể ko có quyền đọc lịch sử) → bỏ.
 - R70 Neural: Laravel 10→12, 24/11→04/12/2025 → #7.
+- R71 Tin mới 15/10 chiều: ThuyLTT gợi ý Trúc dùng "training techlead-trainer hàng tuần" (= chuỗi AI Training, DuongDN là trainer Phase 3/5) → hợp mục NUS Brief. Team room: "Claude Code chịu hết nổi Github, tự xây git riêng" (Anthropic Scion) — vui.
+- R72 AI Training room: lịch 11am T4 hàng tuần + phân công section → thêm vào tin nhắn Trúc (NUS Brief).
+- R73 Slack hôm nay: Bailey/Joey "goal would be for us to go live Wednesday" (≈21/10/2026, bản Staging2 = Rails 6 upgrade + Grazing Desktop + DB Schenker) → nếu go-live kịp trước khi Logbook Vol.5 ra thì thành tin "go-live" mới; RDC "Perfect!"; Rory test account.
 
 ## Unresolved
 - ~~RDC carrick~~ → KhanhHH (tiếp quản từ 03/07/2026), LeNH trước đó ✔
