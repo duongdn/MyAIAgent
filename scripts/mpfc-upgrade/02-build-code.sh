@@ -11,11 +11,13 @@ PATCHES="$HERE/patches"
 
 log "02: rsync code from live ($LIVE_SSH)"
 EXC=(--exclude=wp-content/uploads --exclude=wp-content/cache --exclude='*.sql' --exclude='*.sql.gz' --exclude='*.log'
-     --exclude='*.zip' --exclude=uploads.bak --exclude=wp-content/upgrade --exclude=wp-content/ai1wm-backups)
+     --exclude='*.zip' --exclude=uploads.bak --exclude=wp-content/upgrade --exclude=wp-content/ai1wm-backups
+     --exclude='debug.log*' --exclude='*.backup')
 [ $TEST = 1 ] && EXC+=(--exclude=.git --exclude=wp-config.php --exclude=wp-config.php.orig-live
                       --exclude=wp-content/mu-plugins/zz-upgrade-test-safety.php --exclude=.htaccess)
 mkdir -p "$SITE"
-rsync -a --delete "${EXC[@]}" -e "ssh -i $LIVE_KEY" "$LIVE_SSH:$SITE/" "$SITE/"
+rc=0; rsync -a --delete --rsync-path="sudo rsync" "${EXC[@]}" -e "ssh -i $LIVE_KEY" "$LIVE_SSH:$SITE/" "$SITE/" || rc=$?
+[ $rc = 0 ] || [ $rc = 24 ] || die "rsync failed ($rc)"   # 24 = files vanished during copy (fine on a live site)
 if [ $TEST = 0 ] && [ ! -e "$SITE/wp-content/uploads" ]; then
   ln -s /mnt/volume_lon1_02/uploads "$SITE/wp-content/uploads"   # same symlink as live (volume moved at cutover)
 fi
