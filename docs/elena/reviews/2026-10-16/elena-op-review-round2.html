@@ -1,0 +1,167 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP review lần 2</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><h1>Elena OP: review lần 2 (16/10/2026)</h1>
+<p>So sánh với lần review 13/10 (<code>docs/elena/reviews/2026-10-13/elena-op-review-followup.md</code>). Code đã pull lúc 15:40 ngày 16/10.</p>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>Hạng mục</th>
+<th>13/10</th>
+<th>16/10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mock license trong portal/admin (🔴)</td>
+<td>Có trong nus-base</td>
+<td>✅ <strong>Đã gỡ</strong> (<code>098b8b44f0</code>), chỉ còn mô tả trong tasks.md</td>
+</tr>
+<tr>
+<td>#336 không merge được do commit revert (🔴)</td>
+<td>Conflict</td>
+<td>✅ <strong>Hết vấn đề</strong>: BE đóng #315/#321/#336, gom vào branch mới <code>feature/optimization-be-m1</code> (PR #353), tách từ develop sạch của khách</td>
+</tr>
+<tr>
+<td>FE gửi OR, BE chỉ nhận AND (🔴)</td>
+<td>Loại trừ nhau</td>
+<td>🟡 PR #362 đổi BE sang chỉ nhận OR, khớp FE. <strong>Nhưng chưa merge</strong></td>
+</tr>
+<tr>
+<td>Tên hàm FE ≠ BE (mới)</td>
+<td>–</td>
+<td>🔴 <strong>Lỗi mới do #362</strong>: BE đổi <code>AVERAGE/MINIMUM/MAXIMUM</code> → <code>AVG/MIN/MAX</code>, FE vẫn gửi tên cũ</td>
+</tr>
+<tr>
+<td>Unique index tên model (🔴)</td>
+<td>Bị comment-out</td>
+<td>❌ <strong>Vẫn comment-out</strong></td>
+</tr>
+<tr>
+<td>Chỉ người tạo được sửa model (trái lời khách)</td>
+<td>Còn</td>
+<td>✅ <strong>Đã bỏ</strong> (<code>bb87e3af14</code>)</td>
+</tr>
+<tr>
+<td><code>assert</code> làm validate</td>
+<td>23+2</td>
+<td>❌ Vẫn 25 trong service optimization, #362 thêm khoảng 15 cái</td>
+</tr>
+<tr>
+<td>Lưu đè cả document, không lock / log <code>getMessage()</code></td>
+<td>Còn</td>
+<td>❌ Vẫn còn (<code>DaeOptimizationModelControl.java:240,245</code>)</td>
+</tr>
+<tr>
+<td>Merge khi reviewer còn "Request changes"</td>
+<td>3 PR</td>
+<td>🟡 Không còn PR nào merge khi đang Request changes, nhưng vẫn <strong>chưa PR nào được Approve</strong></td>
+</tr>
+<tr>
+<td><code>OptimizationTagType</code> hardcode loại đo (FE)</td>
+<td>Chưa</td>
+<td>❌ Vẫn chưa (<code>optimization-model-item.component.ts:19</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DuongDN cần làm ngay:</strong>
+1. Báo tiennd2 (#362) và Ken/Aron: thống nhất tên hàm trước khi merge #362 (mục 1.1). Không thì mọi condition có hàm sẽ bị BE từ chối.
+2. Nhắc Brian/kietnht: unique index vẫn chưa bật (mục 2.1). Đây là việc tồn lần thứ 3.
+3. Nhắc team: PR BE lớn #353 (154 file, +5.497 dòng) chưa có ai review mà sắp vào branch giao khách. Cần kietnht hoặc Brian review chéo.</p>
+<h2>Cấu trúc branch đã thay đổi (để đọc phần dưới)</h2>
+<ul>
+<li><strong>BE</strong>: <code>feature/OP-xx</code> → <code>feature/optimization-be-m1</code> → (PR #353) → <code>feature/nus-optimization</code>. <code>feature/nus-optimization</code> là bản develop của khách (commit cuối là merge PR #5498 của Precognize). Branch be-m1 <strong>không có thư mục <code>openspec/</code></strong>, vì là branch để giao khách.</li>
+<li><strong>FE</strong>: <code>nus-base</code> (đã giao M1) và các branch milestone <code>nus-op-m2</code> → <code>nus-op-m3</code>. PR mới vào <code>nus-op-m3</code>.</li>
+</ul>
+<h2>1. PR #362: OP-34 hàm điều kiện + tô vùng thời gian (BE, tiennd2) — ❌</h2>
+<p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/362</p>
+<p><strong>PR làm gì:</strong> Ở bước 3 (loại trừ dữ liệu) và bước 4 (điều kiện vận hành), người dùng nhập điều kiện kiểu "áp suất &gt; 10 OR SUM(tag A, tag B) &gt; 50". PR này thêm API <code>POST /optimization/models/highlight-periods</code>. API nhận một nhóm điều kiện và trả về các khoảng thời gian trong 1 năm gần nhất thỏa điều kiện, để FE tô màu trên biểu đồ. PR cũng đổi luật: nhóm điều kiện <strong>bắt buộc OR</strong> (trước đây bắt buộc AND), đúng như khách đã chốt và FE đã làm.</p>
+<p><strong>Kết luận:</strong> ❌ Hướng đi đúng và có spec rõ, nhưng làm vỡ contract với FE ở tên hàm. Ngoài ra API mới không kiểm tra tag.</p>
+<h3>1.1 🔴 Tên hàm BE và FE không còn khớp</h3>
+<ul>
+<li><strong>Vấn đề:</strong> <code>DaeApiOptimizationFunction.java</code> đổi <code>AVERAGE→AVG</code>, <code>MINIMUM→MIN</code>, <code>MAXIMUM→MAX</code>, và thêm <code>DIFF</code>, <code>PROP</code>. FE (<code>expression.model.ts:14</code> trên nus-base và nus-op-m3) vẫn gửi <code>'AVERAGE' | 'MINIMUM' | 'MAXIMUM' | 'DIFFERENCE' | 'PROPORTION'</code>.</li>
+<li><strong>Tại sao quan trọng:</strong> Người dùng chọn hàm AVG trong điều kiện → FE gửi <code>"function":"AVERAGE"</code> → BE không đọc được JSON (enum không có giá trị này), trả lỗi. Cả nút lưu bước 3/4 lẫn tô vùng đều hỏng với mọi hàm trừ SUM và RANGE. Lỗi này chỉ lộ ra khi test tích hợp, vì mỗi bên test riêng đều xanh.</li>
+<li><strong>Cách sửa:</strong> Hai team chốt một bộ tên (ghi trong spec BE vì spec BE là nơi duy nhất định nghĩa API). Hoặc BE giữ tên cũ, hoặc FE đổi theo, và cả hai sửa trong cùng đợt.</li>
+<li><strong>Mức:</strong> 🔴 phải sửa trước khi merge.</li>
+</ul>
+<h3>1.2 ⚠️ API tô vùng không kiểm tra tag</h3>
+<ul>
+<li><strong>Vấn đề:</strong> Khi lưu model (<code>upsert</code>), BE gọi <code>verifyTags</code> để chắc tag tồn tại. API <code>highlight-periods</code> (<code>DaeControlOptimizationModel.highlight</code>) gửi thẳng sang data-manager, không có bước này.</li>
+<li><strong>Tại sao quan trọng:</strong> FE gửi tagId sai (tag đã xóa, hoặc gõ tay) → câu truy vấn Influx chạy 1 năm trên tag không có → trả rỗng. Người dùng tưởng "điều kiện không khớp lúc nào", thực ra là sai tag.</li>
+<li><strong>Cách sửa:</strong> Kiểm tra tag giống upsert, trả lỗi rõ ràng.</li>
+<li><strong>Mức:</strong> ⚠️ nên sửa.</li>
+</ul>
+<h3>1.3 ⚠️ Số được ghi vào câu truy vấn theo locale của máy</h3>
+<ul>
+<li><strong>Vấn đề:</strong> <code>DaeInfluxTopLevelFilterByConversionRulesTemplates.formatValueList</code> dùng <code>String.format("%f", value)</code>.</li>
+<li><strong>Tại sao quan trọng:</strong> <code>%f</code> dùng locale mặc định của JVM. Nếu server khách chạy locale như de_DE, <code>1.5</code> thành <code>1,500000</code> → câu Flux <code>set: [1,500000, 2,000000]</code> sai cú pháp hoặc ra số khác. <code>%f</code> cũng làm tròn còn 6 chữ số thập phân.</li>
+<li><strong>Cách sửa:</strong> <code>String.format(Locale.ROOT, ...)</code> hoặc <code>Double.toString(value)</code>.</li>
+<li><strong>Mức:</strong> ⚠️ nên sửa (lỗi chỉ xảy ra trên một số môi trường, rất khó tìm).</li>
+</ul>
+<h3>1.4 ⚠️ Mỗi điều kiện chạy một truy vấn 1 năm, song song không giới hạn</h3>
+<ul>
+<li><strong>Vấn đề:</strong> <code>DaeConditionControl.calculateOptimizationHighlight</code> dùng <code>flatMap</code> trên toàn bộ điều kiện, mỗi điều kiện truy vấn Influx 1 năm. Hàm cuộn (rolling) cũng dùng cửa sổ 1 năm.</li>
+<li><strong>Tại sao quan trọng:</strong> FE gọi một lần cho <strong>mỗi thẻ</strong> loại trừ. Model có 5 thẻ × 4 điều kiện = 20 truy vấn 1 năm cùng lúc, mỗi lần người dùng sửa. Influx của khách đang phục vụ cả portal.</li>
+<li><strong>Cách sửa:</strong> Giới hạn song song (<code>flatMap(..., concurrency)</code>), và xác nhận với BA về khoảng thời gian 1 năm.</li>
+<li><strong>Mức:</strong> ⚠️ nên sửa hoặc ghi rõ là đã chấp nhận.</li>
+</ul>
+<h3>1.5 Spec (OpenSpec) — 💬</h3>
+<ul>
+<li>Spec đầy đủ: lý do, bảng ánh xạ hàm, ghi rõ <strong>BREAKING</strong> (draft cũ lưu AND sẽ bị từ chối ở lần lưu sau). Code khớp spec.</li>
+<li>⚠️ PR <strong>thêm thư mục <code>openspec/</code> vào branch be-m1</strong>, trong khi be-m1 là branch giao khách nên trước đó không có openspec. PR còn thêm <code>openspec/config.yaml</code> dạng <strong>template rỗng</strong>. Bản thật trên nus-base có 76 dòng với các <code>rules:</code>. Hậu quả: validate spec trên branch này không áp luật của team, và openspec có thể đi theo #353 sang branch của khách. Nên để spec ở nus-base/branch nus như các change khác.</li>
+<li>💬 Đường dẫn capability lồng 2 cấp <code>specs/optimization/conditions-highlight/spec.md</code>, khác quy ước <code>specs/&lt;capability&gt;/spec.md</code>.</li>
+<li>💬 Spec nói MEAN là bí danh của AVG. Nhưng phía FE, MEAN là hàm dùng ở bước <strong>đánh giá</strong> (evaluation), không phải điều kiện. Cần BA xác nhận hai cái có thật sự giống nhau.</li>
+</ul>
+<p><strong>Điểm tốt:</strong> chuyển sang OR đúng lời khách. Sửa lỗi toán tử IN và thêm NOT IN trong engine. Gộp các khoảng chồng/chạm nhau. Không có secret hay hardcode env.</p>
+<h2>2. Các việc BE tồn từ lần trước (branch <code>feature/optimization-be-m1</code>, PR #353)</h2>
+<p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/353 — Brian, 42 commit, 154 file. <strong>Chưa có review nào.</strong></p>
+<h3>2.1 🔴 Unique index tên model vẫn bị comment-out (tồn lần 3)</h3>
+<ul>
+<li><strong>Vấn đề:</strong> <code>DaeMigrationCreateOptimizationModelCollectionLogic.java:53-64</code>, cả 3 index (tên, status, goal.targetTagId) vẫn là comment. Code bắt <code>DuplicateKeyException</code> (<code>DaeOptimizationModelControl.java:241</code>) nhưng sẽ không bao giờ xảy ra vì không có index.</li>
+<li><strong>Tại sao quan trọng:</strong> Hai người cùng bấm lưu model tên "Line 1" gần như cùng lúc. Cả hai đều qua bước kiểm tra tên (<code>assertNameAvailable</code>) vì chưa ai lưu xong → DB có 2 model trùng tên. Comment trong file vẫn nói "soft-deleted… partial filter", trong khi soft-delete đã bị bỏ (<code>8bcff28d92</code>).</li>
+<li><strong>Cách sửa:</strong> Bỏ comment, bỏ <code>partialFilterExpression(deleted=false)</code> vì không còn field <code>deleted</code>, sửa lại comment cho đúng.</li>
+<li><strong>Mức:</strong> 🔴</li>
+</ul>
+<h3>2.2 ✅ Đã sửa</h3>
+<ul>
+<li>Bỏ check "chỉ người tạo được sửa" (<code>bb87e3af14</code>), đúng lời khách.</li>
+<li>Chặn sửa model không ở trạng thái DRAFT (<code>:185</code>).</li>
+<li>Bỏ soft-delete, gộp loại timeline action, bỏ currency ở improvement cost.</li>
+</ul>
+<h3>2.3 ❌ Chưa sửa (đã nêu 09/10 và 13/10, nhắc lại ngắn)</h3>
+<ul>
+<li><code>assert</code> làm validate input: 23 trong <code>DaeOptimizationModelConstraints</code>, 2 trong <code>DaeOptimizationModelControl</code>, cộng thêm các cái mới ở #362. Nếu JVM chạy không có <code>-ea</code>, toàn bộ validate bị bỏ qua.</li>
+<li><code>repository.save(document)</code> ghi đè cả document, không có version/lock. Hai người sửa cùng lúc thì người lưu sau xóa thay đổi của người trước, và không ai được báo.</li>
+<li><code>log.warn(..., e.getMessage())</code> (<code>:245</code>): không có stack trace, lỗi NPE chỉ log ra <code>null</code>.</li>
+<li><code>DaeTagDetailsRequest</code> / <code>DaeApiSearchController</code> vẫn còn trong be-m1 (code tag-details của OP-22 sửa vào API search chung).</li>
+</ul>
+<h2>3. FE</h2>
+<h3>3.1 PR #354: OP-38 drawer chọn model khi tạo Run mới (Ken) — 💬</h3>
+<p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/354</p>
+<p><strong>PR làm gì:</strong> Trên trang Optimization Runs, nút "New Run" giờ mở một ngăn kéo bên phải để chọn model có sẵn (có tìm kiếm) hoặc tạo model mới. Nếu đã đạt giới hạn số model theo license, app hiện popup mời nâng cấp. Vì BE chưa có API danh sách model, PR dùng dữ liệu mẫu của Manage Models.</p>
+<p><strong>Kết luận:</strong> 💬 Code sạch. Các subscription đều có <code>takeUntilDestroyed</code>/<code>switchMap</code>, chữ hiển thị đều qua translate, có spec (16/18 task, 2 task còn lại là QA tay). Chưa ai review.
+- 💬 Vẫn dùng sample data, không gửi request. Đây là bước demo có chủ đích (ghi trong PR), nhưng phải thay bằng API thật trước khi giao M3. Nên thêm vào checklist giao hàng giống lần gỡ mock license.
+- 💬 <code>open()</code> gọi <code>getUsage().subscribe</code> mỗi lần mở mà không hủy. Với dữ liệu mẫu thì vô hại. Khi nối API thật nên đổi sang <code>switchMap</code> như phần search.</p>
+<h3>3.2 PR FE đã merge từ 13/10</h3>
+<h1>337, #339, #341, #349, #350, #352, #356, #357, #359, #360, #361: tất cả có người khác comment (Ken ↔ Aron, Ryan), không PR nào merge khi đang "Request changes". #357/#359 là merge giữa các branch milestone nên không review. <strong>Chưa PR nào có Approve chính thức.</strong> Team đang dùng "Comment" thay cho approve, nên không phân biệt được "đã review xong, OK" với "góp ý, chưa xong".</h1>
+<h3>3.3 Còn tồn</h3>
+<ul>
+<li>❌ <code>OptimizationTagType</code> hardcode 6 loại đo (<code>optimization-model-item.component.ts:19</code>).</li>
+<li>✅ Mock license đã gỡ khỏi cả 3 app.</li>
+</ul>
+<h2>Câu hỏi còn mở</h2>
+<ul>
+<li>BA: khoảng thời gian tô vùng 1 năm và MEAN = AVG đã được khách xác nhận chưa?</li>
+</ul></body></html>
