@@ -45,3 +45,11 @@ Nguồn: Slack #msv3-official (đến 10-16 11:31), Matrix room Arthur-Meta-Stam
 - KEEP 4: §6.5 answers (JSONL, volume, X-Real-IP).
 - KEEP 5: wording "we have seen" R1-b.
 - LOW 6: verify_url for search/list rows — new lookup type in receipts.py; confirm in a5.
+
+## Round 3 — deep pass (user: ignore prior items)
+- MISSING (major): refusal collapse is the ONLY throttle on refused/keyless pulls (mcp/rate_limit.py docstring "D10"; refused pulls never 429; keyless no rate limit; config mcp_refusal_max_ua_groups_per_ip=20 overflow row). R1 removes collapse -> unbounded rows from spam. Spec §4 says blocking/throttling = Phase 2. Needs Chris decision + est (rate limit or cap). Not in est.
+- MISSING (minor): DNS/ASN enrichment runs on first refusal of a group only (config ~450) -> per-row needs IP cache, else lookup per access.
+- CHECK: Feed is live SSE (mcp_admin.py:476, railService.ts); a4 paging/filters must coexist with live stream.
+- CHECK: R1-c must cover both views (T8); est wording doesn't say.
+- CHECK: existing CSV columns count/first_seen/last_seen (catalog_ledger_service.py CSV_COLUMNS) must change to new fields; est R1-d mentions only JSON + account scope.
+- OK: pocket delete never touches receipts/refusals/pull logs (pocket_service.py ~2017) -> §3.8 data side done.
