@@ -24,13 +24,13 @@ if [ "${1:-}" = "--if-stale" ]; then
   log "mpfc STALE flag: $(echo "$STALE" | tail -3 | tr '\n' ' ')"
 fi
 
-# Upwork's short-lived access token (user_oauth2_slave_access_token) only refreshes when carrick's
+# Upwork login marker (oauth2_global_js_token; the old user_oauth2_slave_access_token is gone) refreshes when carrick's
 # real Chrome loads an upwork.com page. If it's missing/expired, open one page in Profile 1 to
 # refresh it (opens a tab in the running Chrome), then export.
 upwork_token_valid() {
   local db; db=$(mktemp)
   cp "$HOME/.config/google-chrome/Profile 1/Cookies" "$db" 2>/dev/null || { rm -f "$db"; return 1; }
-  local n; n=$(sqlite3 "$db" "select count(*) from cookies where host_key like '%upwork%' and name='user_oauth2_slave_access_token' and expires_utc/1000000-11644473600 > strftime('%s','now')+3600" 2>/dev/null)
+  local n; n=$(sqlite3 "$db" "select count(*) from cookies where host_key like '%upwork%' and name='oauth2_global_js_token' and expires_utc/1000000-11644473600 > strftime('%s','now')+3600" 2>/dev/null)
   rm -f "$db"
   [ "${n:-0}" -gt 0 ]
 }
