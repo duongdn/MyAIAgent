@@ -32,9 +32,14 @@ if [ $CHECK = 0 ]; then
   log "03: MemberMouse version marker"
   wpc option update mm-major-version 3.1.1 | tail -1
 
-  log "03: flush caches"
-  wpc cache flush | tail -1
-  wpc transient delete --expired | tail -1
+  log "03: flush caches + rebuild rewrite rules WITH the theme loaded"
+  # pfc7 theme registers CPTs (mpfc_user_video => /user-video/...). Rules regenerated while the theme
+  # is skipped lose them => 404s (caught in rehearsal 2026-10-16). Never use --skip-themes here.
+  wpt() { sudo -u www-data wp --path="$SITE" "$@" 2>&1 | grep -v "HTTP_HOST\|^Deprecated\|^PHP Deprecated\|^Notice\|^Warning: " || true; }
+  wpt cache flush | tail -1
+  wpt transient delete --expired | tail -1
+  wpt rewrite flush | tail -1
+  log "03: rewrite rules for /user-video/: $(wpt rewrite list --format=csv | grep -c 'user-video')"
 fi
 
 schema_dump "$DB" > "$ART/schema-after-$DB.txt"
