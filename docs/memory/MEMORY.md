@@ -28,7 +28,7 @@
 - [feedback_redmine_curl_needs_url_encoding](global/feedback_redmine_curl_needs_url_encoding.md) — use -G --data-urlencode, raw `><|` 400s
 - [feedback_claude_launcher_model_separation](global/feedback_claude_launcher_model_separation.md) — default claude=subscription sonnet; claude-nus/duongdn(-prod)=DeepSeek launchers, keep
 
-- [project_cookie_vault_mpfc](global/project_cookie_vault_mpfc.md) — 🔴 local pushes Workstream/Upwork cookies to mpfc (04:40 + STALE poll); Upwork still Cloudflare-blocked on mpfc
+- [project_cookie_vault_mpfc](global/project_cookie_vault_mpfc.md) — 🔴 mpfc: vault cookies (Workstream ✅) + Xvfb Chrome Turnstile click (Upwork Rory/Aysar/Neural ✅, Tokenlite ❌); company PC on only 08:00+
 
 ## daily-report — general
 - [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)

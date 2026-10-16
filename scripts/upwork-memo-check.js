@@ -394,6 +394,13 @@ async function main() {
     // Server: keep Chrome's real UA — a spoofed older version mismatches the client hints Cloudflare checks.
     if (!IS_SERVER) await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36');
 
+    // Server: seed the account's vault cookies before the first navigation — an anonymous visitor
+    // gets a harder Cloudflare challenge than a logged-in session (carrick passed this way).
+    if (IS_SERVER && LIVE_COOKIE_ACCOUNTS.includes(accountName)) {
+      const seed = extractLiveCookies(accountName);
+      if (seed && seed.length) await page.setCookie(...seed).catch(() => {});
+    }
+
     let loggedIn = false;
     for (const room of rooms) {
       try {
