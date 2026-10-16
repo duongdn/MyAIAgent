@@ -50,13 +50,13 @@ const mono = (s, x, y, w, h, t, o = {}) => label(s, x, y, w, h, t, { font: MONO,
 const code = (s, x, y, w, h, t, size = 10) =>
   box(s, x, y, w, h, t, { fill: C.INK, font: MONO, size, bold: false, align: 'START', valign: 'TOP', lineSpacing: 115 });
 
-function arrow(slide, ax, ay, bx, by, color = C.INK) {
+function arrow(slide, ax, ay, bx, by, color = C.INK, head = true) {
   const oid = id('ar'); const dx = bx - ax; const dy = by - ay;
   reqs.push({ createLine: { objectId: oid, lineCategory: 'STRAIGHT', elementProperties: { pageObjectId: slide,
     size: { width: PT(Math.max(Math.abs(dx), 0.01)), height: PT(Math.max(Math.abs(dy), 0.01)) },
     transform: { scaleX: dx >= 0 ? 1 : -1, scaleY: dy >= 0 ? 1 : -1, translateX: ax, translateY: ay, unit: 'PT' } } } });
   reqs.push({ updateLineProperties: { objectId: oid, fields: 'endArrow,weight,lineFill', lineProperties: {
-    endArrow: 'FILL_ARROW', weight: PT(2), lineFill: { solidFill: { color: { rgbColor: color } } } } } });
+    endArrow: head ? 'FILL_ARROW' : 'NONE', weight: PT(2), lineFill: { solidFill: { color: { rgbColor: color } } } } } });
 }
 // Cặp mũi tên 2 chiều: request (đậm, đi) phía trên, response (cam, về) phía dưới
 function twoWay(s, ax, bx, y) {

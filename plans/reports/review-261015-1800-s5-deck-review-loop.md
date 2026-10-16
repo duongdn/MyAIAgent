@@ -49,3 +49,6 @@ Dump notes từ deck live (scratchpad/notes.js), đối chiếu 23 slide.
 ## Vòng 11 — 2026-10-16 · bỏ recap (user yêu cầu)
 - Xoá slide "Nhắc lại GĐ2" ở S5 và slide recap đầu S6–S9 (S5 22, S6 16, S7 16, S8 16, S9 15 slide).
 - Slide "Nhắc lại Session 1" của S5 giữ nội dung (khái niệm agent = code bao quanh LLM), đổi kicker thành "Agent là gì", notes bỏ tham chiếu Session 1.
+
+## 2026-10-16 · slide 6 (user báo mũi tên không rõ)
+- Khe giữa ô 12→24pt; hàng Agent vẽ lại thành vòng lặp thật: Model ⇄ Code chạy tool (gọi tool navy →, kết quả cam ←), nhánh "đủ thông tin → dừng" sang Model trả lời. arrow() thêm tham số head để vẽ đoạn nối không mũi tên.

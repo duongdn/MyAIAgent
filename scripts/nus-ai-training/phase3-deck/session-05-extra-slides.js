@@ -1,6 +1,6 @@
 // Session 5 — các slide "hàm lượng thông tin cao": sơ đồ 3 mức, số đo thật, token tăng theo lượt, trace định vị.
 // Số liệu từ support_agent_demo/compare_orchestration_levels.py (orchestration_levels.json) + trace kịch bản 1.
-const { C, box, label, mono, code, arrow, newSlide, question } = require('./slide-kit');
+const { C, box, label, mono, code, arrow, twoWay, newSlide, question } = require('./slide-kit');
 const data = require('../support_agent_demo/orchestration_levels.json');
 const cond = require('../support_agent_demo/orchestration_levels_conditional.json');
 
@@ -16,18 +16,28 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
     mono(s, 40, y, 140, 14, name.toUpperCase(), { size: 9 });
     label(s, 40, y + 14, 130, 30, sub, { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
     steps.forEach(([t, who], i) => {
-      const x = 180 + i * 104;
-      box(s, x, y, 92, 40, t, { fill: who === 'model' ? C.ORANGE : who === 'code' ? C.INK : C.CARD, size: 10.5 });
-      if (i) arrow(s, x - 12, y + 20, x, y + 20);
+      const x = 180 + i * 120;
+      box(s, x, y, 96, 40, t, { fill: who === 'model' ? C.ORANGE : who === 'code' ? C.INK : C.CARD, size: 10.5 });
+      if (i) arrow(s, x - 24, y + 20, x - 2, y + 20);
     });
   };
   row(92, 'Model call', '1 lượt gọi', [['Code: tra KB', 'code'], ['Model trả lời', 'model']]);
   row(160, 'Workflow', 'code giữ thứ tự', [['Model: phân loại', 'model'], ['Code: tra KB', 'code'], ['Model trả lời', 'model'], ['Code: tạo ticket', 'code']]);
-  row(228, 'Agent', 'model chọn bước', [['Model: chọn tool', 'model'], ['search_kb', ''], ['Model: chọn tiếp', 'model'], ['create_ticket', ''], ['Model: trả lời', 'model']]);
-  arrow(s, 600, 268, 600, 280, C.ORANGE); arrow(s, 600, 280, 236, 280, C.ORANGE); arrow(s, 236, 280, 236, 268, C.ORANGE);
-  label(s, 300, 282, 240, 16, 'lặp tới khi model tự dừng', { size: 9, bold: false, color: C.ORANGE });
-  box(s, 40, 320, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 58, 316, 200, 22, 'model quyết định', { size: 10, bold: false, align: 'START' });
-  box(s, 190, 320, 14, 14, ' ', { fill: C.INK }); label(s, 208, 316, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
+  // Agent: vòng lặp thật — model ⇄ code chạy tool; khi đủ thông tin mới thoát sang trả lời
+  const y = 236;
+  mono(s, 40, y, 140, 14, 'AGENT', { size: 9 });
+  label(s, 40, y + 14, 130, 30, 'model chọn bước', { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
+  box(s, 180, y, 110, 44, 'Model: chọn tool tiếp theo', { fill: C.ORANGE, size: 10.5 });
+  box(s, 380, y, 140, 44, 'Code chạy tool\nsearch_kb · create_ticket', { fill: C.INK, size: 10.5, sub: 9 });
+  twoWay(s, 292, 378, y + 22);
+  label(s, 292, y + 2, 86, 14, 'gọi tool', { size: 8.5, bold: false, color: C.INK });
+  label(s, 292, y + 30, 86, 14, 'kết quả', { size: 8.5, bold: false, color: C.ORANGE });
+  box(s, 580, y, 96, 44, 'Model: trả lời', { fill: C.ORANGE, size: 10.5 });
+  arrow(s, 235, y, 235, y - 14, C.INK, false); arrow(s, 235, y - 14, 628, y - 14, C.INK, false); arrow(s, 628, y - 14, 628, y - 2, C.INK);
+  label(s, 400, y - 30, 200, 14, 'đủ thông tin → dừng', { size: 9, bold: false, color: C.INK });
+  label(s, 180, y + 48, 340, 16, '↻ lặp bao nhiêu lượt do model quyết định', { size: 9, bold: false, color: C.ORANGE });
+  box(s, 40, 330, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 58, 326, 200, 22, 'model quyết định', { size: 10, bold: false, align: 'START' });
+  box(s, 190, 330, 14, 14, ' ', { fill: C.INK }); label(s, 208, 326, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
 }
 
 // Đo thật: cùng 1 yêu cầu, 3 mức
