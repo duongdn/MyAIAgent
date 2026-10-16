@@ -57,6 +57,7 @@ Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model ch
     .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
 
   extra.threeFlows();
+  extra.threeFlowsCode();
 
   s = newSlide('So sánh', 'Cùng yêu cầu "E205 + tạo ticket" ở 3 mức', `Cùng một yêu cầu: "Khách X báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
 - Model call: trả lời được nửa đầu (E205 = ngân hàng từ chối) nhưng không làm được nửa sau.

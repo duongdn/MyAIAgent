@@ -5,9 +5,12 @@ Session 5: cùng MỘT yêu cầu support, chạy ở 3 mức điều phối, đ
     3. Agent            : model tự chọn gọi search_kb / create_ticket (agent_openai_sdk.py, người duyệt = yes).
 
 Chạy: python3 compare_orchestration_levels.py [--runs 3]
+     python3 compare_orchestration_levels.py --runs 1 --show   # in từng bước: [CODE] = code quyết định, [MODEL] = model quyết định (slide 6)
 """
 import argparse
 import asyncio
+import contextlib
+import io
 import json
 import os
 import time
@@ -26,6 +29,12 @@ REQUESTS = {
 }
 QUESTION = REQUESTS["always"]
 EXTRA = sdk.MODEL_SETTINGS.extra_body or {}
+SHOW = False
+
+
+def step(who, what):
+    if SHOW:
+        print(f"   [{who:<5}] {what}")
 
 
 def client_and_model():
@@ -33,16 +42,20 @@ def client_and_model():
     return m._client, m.model
 
 
-async def chat(client, model, prompt, usage):
+async def chat(client, model, prompt, usage, label="trả lời"):
     r = await client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}], extra_body=EXTRA)
     usage["calls"] += 1
     usage["tokens"] += r.usage.prompt_tokens + r.usage.completion_tokens
-    return r.choices[0].message.content
+    out = r.choices[0].message.content
+    step("MODEL", f"{label} → {' '.join(out.split())[:70]}")
+    return out
 
 
 def kb_text():
-    me = cp.new_session("alice", KB_DOCS)
-    return cp.search_kb(me, "lỗi thanh toán mã E205")
+    step("CODE", "tra KB: search_kb('lỗi thanh toán mã E205')")
+    with contextlib.redirect_stdout(io.StringIO()):  # log checkpoint ghi "model gọi" — ở đây là CODE gọi
+        me = cp.new_session("alice", KB_DOCS)
+        return cp.search_kb(me, "lỗi thanh toán mã E205")
 
 
 async def model_call(client, model, usage):
@@ -50,9 +63,10 @@ async def model_call(client, model, usage):
 
 
 async def workflow(client, model, usage):
-    intent = await chat(client, model, 'Trả JSON {"need_ticket": true|false}. Yêu cầu: ' + QUESTION, usage)
+    intent = await chat(client, model, 'Trả JSON {"need_ticket": true|false}. Yêu cầu: ' + QUESTION, usage, "phân loại")
     answer = await chat(client, model, f"Tài liệu:\n{kb_text()}\n\nTrả lời ngắn, có nguồn: {QUESTION}", usage)
     if "true" in intent.lower():  # bước cố định, tham số do CODE quyết định
+        step("CODE", "tạo ticket theo tham số viết sẵn: P3, billing-team-a")
         ts.create({"title": "Lỗi thanh toán E205", "priority": "P3", "assignee": "billing-team-a"}, None)
     return answer
 
@@ -69,14 +83,20 @@ async def main():
     p = argparse.ArgumentParser()
     p.add_argument("--runs", type=int, default=3)
     p.add_argument("--request", choices=REQUESTS, default="always")
+    p.add_argument("--show", action="store_true", help="in từng bước của mỗi mức (agent: in trace SDK)")
     a = p.parse_args()
-    global QUESTION
+    global QUESTION, SHOW
+    SHOW = a.show
+    if SHOW:
+        os.environ["DEMO_TRACE"] = "1"  # agent: LocalTraceProcessor in từng model call / tool call
     QUESTION = REQUESTS[a.request]
     client, model = client_and_model()
     rows = []
     for name, fn in [("Model call + RAG", model_call), ("Workflow", workflow), ("Agent", agent)]:
         tot = {"calls": 0, "tokens": 0, "secs": 0.0, "tickets": 0}
         for _ in range(a.runs):
+            if SHOW:
+                print(f"\n== {name} ==")
             ts.reset()
             usage = {"calls": 0, "tokens": 0}
             t0 = time.time()
@@ -88,6 +108,8 @@ async def main():
     for r in rows:
         print(f"  {r['level']:<18} {r['calls']:>4} lượt gọi  {r['tokens']:>7} token  {r['secs']:>5}s  ticket={r['tickets']}")
     out = "orchestration_levels.json" if a.request == "always" else f"orchestration_levels_{a.request}.json"
+    if SHOW:  # chạy minh hoạ, không ghi đè số đo trên slide
+        return
     json.dump({"model": model, "runs": a.runs, "request": QUESTION, "rows": rows}, open(out, "w"), ensure_ascii=False, indent=1)
 
 

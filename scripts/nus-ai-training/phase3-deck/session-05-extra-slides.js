@@ -40,6 +40,52 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
   box(s, 190, 330, 14, 14, ' ', { fill: C.INK }); label(s, 208, 326, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
 }
 
+// Code của 3 mức (rút gọn từ compare_orchestration_levels.py) + output chạy thật với --show
+function threeFlowsCode() {
+  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `Đây là code thật của slide trước, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
+Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây, model thật, không ghi đè số đo trên slide).
+Đọc cột trái theo từng mức:
+- Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
+- Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team-a) code viết sẵn.
+- Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
+Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide trước. Ở mức Agent, các dòng 🧠/🔧 là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
+Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.`);
+  code(s, 40, 86, 352, 262, `# 1 · Model call — gọi model đúng 1 lần
+docs = search_kb("lỗi E205")           # code
+answer = await llm(docs + question)    # model
+
+# 2 · Workflow — code giữ thứ tự
+intent = await llm("need_ticket? " + q) # model
+docs = search_kb("lỗi E205")           # code
+answer = await llm(docs + q)           # model
+if "true" in intent:                   # code
+    create_ticket("P3", "billing-team-a")
+
+# 3 · Agent — model chọn tool, SDK lặp
+agent = Agent(instructions=SYSTEM_PROMPT,
+              tools=[search_kb, create_ticket])
+await Runner.run(agent, q, max_turns=8)`, 8.5);
+  code(s, 404, 86, 276, 262, `== Model call + RAG ==
+[CODE ] tra KB: search_kb(...)
+[MODEL] trả lời → E205 = ngân hàng
+        từ chối [kb-a-002]...
+
+== Workflow ==
+[MODEL] phân loại → {"need_ticket": true}
+[CODE ] tra KB: search_kb(...)
+[MODEL] trả lời → E205 = ngân hàng...
+[CODE ] tạo ticket: P3, billing-team-a
+
+== Agent ==
+🧠 model call   574+70 tok
+🔧 search_kb("lỗi thanh toán E205")
+🧠 model call   817+348 tok
+🔧 create_ticket(P3, billing-team-a)
+   → T-1001
+🧠 model call   1194+171 tok · trả lời`, 8.5);
+  label(s, 40, 352, 640, 16, 'rút gọn từ compare_orchestration_levels.py · output thật: --runs 1 --show', { size: 9, bold: false, color: C.GREY, align: 'START' });
+}
+
 // Đo thật: cùng 1 yêu cầu, 3 mức
 function measuredCost() {
   question('Cùng một yêu cầu — agent tốn hơn bao nhiêu?', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."',
@@ -120,4 +166,4 @@ Công bằng mà nói: workflow sửa được bằng cách đổi thứ tự (t
   box(s, 385, 272, 295, 74, 'Workflow phải quyết định trước khi có dữ liệu. Agent tra trước rồi mới quyết định.', { fill: C.INK, size: 12, align: 'START' });
 }
 
-module.exports = { threeFlows, measuredCost, tokenGrowth, conditionalCase, traceLocate };
+module.exports = { threeFlows, threeFlowsCode, measuredCost, tokenGrowth, conditionalCase, traceLocate };
