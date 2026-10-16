@@ -184,7 +184,7 @@ Trello: ~~⚠️ Fountain - DOCUMENT skipped (Alert #1: production NameError aft
 
 [Check progress](https://trello.com/c/ULk881xz) · [Check mail](https://trello.com/c/rnhe9i1C) (all done)
 
-- Rory ✓ · Franc ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (session unavailable on this host, so no alert) · Andrew Taraba ✓ · Elena - WordPress SamGuard ✓
+- Rory ✓ · Franc ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (~~session unavailable on this host~~ re-checked locally 09:00: clean, last client msg 09-28) · Andrew Taraba ✓ · Elena - WordPress SamGuard ✓
 - ⚠️ Maddy: skipped (Alert #4)
 - ⚠️ James Diamond: skipped (provisional LeNH 0h, Alert #6). Vinn + Jeff reports OK
 - ~~⚠️ Aysar: skipped (Alert #5)~~ Aysar ✓ (08:40, Carrick 👀 ack)
@@ -281,7 +281,7 @@ Paused per user. Not run, Trello auto-completed.
 | Tokenlite | ~~—~~ 0 | ~~—~~ 0 | no segments |
 
 ~~Upwork memo: data unavailable. This cron host has no carrick Chrome profile…~~ Re-run locally at 08:35 (headless): all memos valid. Rory's segment shows LeNH did track Upwork time on 10-15.
-Neural Contract: the local run also hit a login redirect on all 4 attempts. The carrick Profile 1 cookie DB has `master_refresh_token` (valid until 10-28) but no current `user_oauth2_slave_access_token`, so the access token needs a live upwork.com page load in carrick's Chrome. Not opened (per your rule against opening tabs). Messages weren't read this run. Session failure ≠ alert, so Neural stays ✓.
+~~Neural Contract: the local run also hit a login redirect on all 4 attempts. The carrick Profile 1 cookie DB has `master_refresh_token` (valid until 10-28) but no current `user_oauth2_slave_access_token`, so the access token needs a live upwork.com page load in carrick's Chrome. Not opened (per your rule against opening tabs). Messages weren't read this run.~~ **09:00:** DuongDN re-logged carrick into Upwork. Neural re-run OK: newest client msg is 09-28. Nothing new or unanswered, so Neural ✓.
 
 ---
 
@@ -299,4 +299,4 @@ Neural Contract: the local run also hit a login redirect on all 4 attempts. The 
 - Who answers Celine's mobile-app ETA, given LuHX is unavailable tomorrow?
 - Traslochi-Online prod errors (#2–#7): who owns monitoring for this new client?
 - FirstProject production Rollbar (#904/#905): which client project is this? (Still unknown.)
-- ~~Upwork memo + Neural need a run on the local machine.~~ Memo done (all valid). Neural needs one upwork.com page load in carrick's Chrome to refresh the access token. Can you open it?
+- ~~Upwork memo + Neural need a run on the local machine.~~ Done locally: memo all valid, Neural clean (09:00).
