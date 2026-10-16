@@ -57,7 +57,7 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 <tr>
 <td><code>assert</code> làm validate</td>
 <td>23+2</td>
-<td>❌ Vẫn 25 trong service optimization, #362 thêm khoảng 15 cái</td>
+<td>⚪ <strong>Rút lại, không tính là lỗi</strong>: đây là pattern chung của code khách (732 <code>assert</code> trong code develop của Precognize), mọi Dockerfile (cả <code>microservices-optimization</code>) chạy <code>java -ea</code>. Team đã nêu trong release note là giữ lại, sẽ xử lý sau</td>
 </tr>
 <tr>
 <td>Lưu đè cả document, không lock / log <code>getMessage()</code></td>
@@ -125,6 +125,9 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 <li>💬 Spec nói MEAN là bí danh của AVG. Nhưng phía FE, MEAN là hàm dùng ở bước <strong>đánh giá</strong> (evaluation), không phải điều kiện. Cần BA xác nhận hai cái có thật sự giống nhau.</li>
 </ul>
 <p><strong>Điểm tốt:</strong> chuyển sang OR đúng lời khách. Sửa lỗi toán tử IN và thêm NOT IN trong engine. Gộp các khoảng chồng/chạm nhau. Không có secret hay hardcode env.</p>
+<blockquote>
+<p><strong>Đính chính về <code>assert</code></strong> (so với review 09/10 và 13/10): rủi ro "JVM không bật <code>-ea</code> thì bỏ qua validate" <strong>không xảy ra</strong>, vì Dockerfile của mọi service, kể cả optimization, đều chạy <code>java -ea</code>. Validate bằng <code>assert</code> là cách code gốc của khách đang làm (732 chỗ), và team đã ghi trong release note gửi khách là giữ lại để tiện develop. Từ lần này em không tính là lỗi nữa.</p>
+</blockquote>
 <h2>2. Các việc BE tồn từ lần trước (branch <code>feature/optimization-be-m1</code>, PR #353)</h2>
 <p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/353 — Brian, 42 commit, 154 file. <strong>Chưa có review nào.</strong></p>
 <h3>2.1 🔴 Unique index tên model vẫn bị comment-out (tồn lần 3)</h3>
@@ -142,7 +145,6 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 </ul>
 <h3>2.3 ❌ Chưa sửa (đã nêu 09/10 và 13/10, nhắc lại ngắn)</h3>
 <ul>
-<li><code>assert</code> làm validate input: 23 trong <code>DaeOptimizationModelConstraints</code>, 2 trong <code>DaeOptimizationModelControl</code>, cộng thêm các cái mới ở #362. Nếu JVM chạy không có <code>-ea</code>, toàn bộ validate bị bỏ qua.</li>
 <li><code>repository.save(document)</code> ghi đè cả document, không có version/lock. Hai người sửa cùng lúc thì người lưu sau xóa thay đổi của người trước, và không ai được báo.</li>
 <li><code>log.warn(..., e.getMessage())</code> (<code>:245</code>): không có stack trace, lỗi NPE chỉ log ra <code>null</code>.</li>
 <li><code>DaeTagDetailsRequest</code> / <code>DaeApiSearchController</code> vẫn còn trong be-m1 (code tag-details của OP-22 sửa vào API search chung).</li>

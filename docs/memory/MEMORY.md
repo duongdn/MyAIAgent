@@ -274,3 +274,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [mpfc_digitalocean_token_and_infra](mpfc/reference_mpfc_digitalocean_token_and_infra.md) — DO token in backup script; DB = managed MySQL; test droplet 144.126.236.208
 - [mpfc_db_cluster_heavy_ops_cpu_alert](mpfc/feedback_mpfc_db_cluster_heavy_ops_cpu_alert.md) — 🔴 bulk dump/import on MPFC 1vCPU DB cluster → 95% CPU alert; use replica/skip log tables/ask first
 - [loop_until_user_says_stop](global/feedback_loop_until_user_says_stop.md) — 🔴 "loop đến khi tôi báo dừng" = never self-stop/ask; append rounds to report file
+- [elena_assert_validation_not_an_issue](elena/feedback_elena_assert_validation_not_an_issue.md) — assert validation = customer pattern + -ea, known issue in release note; don't flag
