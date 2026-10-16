@@ -32,3 +32,4 @@ See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics use
 - Làm từng session một, cho user xem kết quả sớm; không làm cả 5 session một lượt.
 
 - 🔴 2026-10-16: KHÔNG có slide "nhắc lại buổi trước" (recap) — user: "ko phải mình train, và tốn time". Khái niệm cần dùng thì trình bày như nội dung của buổi, không gắn nhãn "Nhắc lại Session X".
+- 🔴 2026-10-16: không thêm câu dẫn kiểu văn xuôi lên slide (vd "…rồi Q&A · bài tự thực hành sau buổi") — "đây là slide, có phải text đâu". Lời dẫn để trong notes.

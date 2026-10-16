@@ -143,11 +143,10 @@ function agenda(items, notes) {
   const w = 640 / items.length - 10;
   items.forEach(([t, d], i) => {
     const x = 40 + i * (w + 10);
-    box(s, x, 92, w, 150, ' ', {});
-    mono(s, x + 14, 102, w - 28, 30, String(i + 1).padStart(2, '0'), { size: 20 });
-    label(s, x + 14, 138, w - 28, 95, `${t}\n${d}`, { size: 16, sub: 12, align: 'START', valign: 'TOP' });
+    box(s, x, 120, w, 170, ' ', {});
+    mono(s, x + 14, 134, w - 28, 30, String(i + 1).padStart(2, '0'), { size: 20 });
+    label(s, x + 14, 174, w - 28, 95, `${t}\n${d}`, { size: 16, sub: 12, align: 'START', valign: 'TOP' });
   });
-  label(s, 40, 255, 640, 24, '…rồi Q&A · bài tự thực hành sau buổi', { size: 12, bold: false, align: 'START' });
   return s;
 }
 // "Key takeaways": card đầu tối, các card sau viền xanh; mỗi card có nhãn mono nhỏ + 1 câu đậm
