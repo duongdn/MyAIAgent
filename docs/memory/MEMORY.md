@@ -28,6 +28,8 @@
 - [feedback_redmine_curl_needs_url_encoding](global/feedback_redmine_curl_needs_url_encoding.md) — use -G --data-urlencode, raw `><|` 400s
 - [feedback_claude_launcher_model_separation](global/feedback_claude_launcher_model_separation.md) — default claude=subscription sonnet; claude-nus/duongdn(-prod)=DeepSeek launchers, keep
 
+- [project_cookie_vault_mpfc](global/project_cookie_vault_mpfc.md) — 🔴 local pushes Workstream/Upwork cookies to mpfc (04:40 + STALE poll); Upwork still Cloudflare-blocked on mpfc
+
 ## daily-report — general
 - [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
 - [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_data_rules](daily-report/general/feedback_monday_friday_data_rules.md) — 🔴🔴🔴 #1 bug: Monday task-log pieces use Friday data, activity pieces keep last_run
