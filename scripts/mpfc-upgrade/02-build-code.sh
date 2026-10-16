@@ -23,21 +23,31 @@ if [ $TEST = 0 ] && [ ! -e "$SITE/wp-content/uploads" ]; then
 fi
 fixperm
 
+# Idempotent patch apply: skip when already applied (reverse applies cleanly).
+apply_patch() {
+  if patch -d "$SITE" -p1 -R --dry-run -s -f < "$PATCHES/$1" >/dev/null 2>&1; then log "   $1 already applied"
+  else patch -d "$SITE" -p1 --no-backup-if-mismatch -s < "$PATCHES/$1" || die "$1 failed"; log "   $1 applied"; fi
+}
+log "02: PHP 8.3 fixes for site code (before any wp-cli call: unpatched mu-plugin fatals on PHP 8)"
+apply_patch site-php83-fixes.patch
+
 log "02: WP core -> $TARGET_WP (files only, no DB)"
 wpr core download --version="$TARGET_WP" --locale=en_GB --force --skip-content --path="$SITE" >/dev/null
-wpr core verify-checksums 2>&1 | grep -v "should not exist" | tail -1
+wpr --skip-plugins core verify-checksums 2>&1 | grep -v "should not exist" | tail -1
 
 log "02: plugins -> versions in target-plugin-versions.csv (wp.org packages)"
 declare -A CUR
-while IFS=, read -r n v; do CUR[$n]=$v; done < <(wpr plugin list --fields=name,version --format=csv 2>/dev/null | tail -n +2)
+while IFS=, read -r n v; do CUR[$n]=$v; done < <(wpr --skip-plugins plugin list --fields=name,version --format=csv 2>/dev/null | tail -n +2)
 FAILED=()
 while IFS=, read -r name status ver; do
   [ "$name" = name ] || [ -z "$ver" ] && continue
   case "$name" in membermouse|elementor-pro) continue ;; esac          # premium: handled below
   [ "${CUR[$name]:-}" = "$ver" ] && continue                            # already at target (incl. custom forks)
   url="https://downloads.wordpress.org/plugin/$name.$ver.zip"
+  # some plugins have no per-version zip: fall back to the latest zip when wp.org's latest == target
+  curl -sfI "$url" >/dev/null || { [ "$(curl -s "https://api.wordpress.org/plugins/info/1.0/$name.json" | jq -r '.version // empty')" = "$ver" ] && url="https://downloads.wordpress.org/plugin/$name.zip"; }
   if curl -sfI "$url" >/dev/null; then
-    wpr plugin install "$url" --force >/dev/null 2>&1 && log "   $name ${CUR[$name]:-none} -> $ver" || FAILED+=("$name")
+    wpr --skip-plugins plugin install "$url" --force >/dev/null 2>&1 && log "   $name ${CUR[$name]:-none} -> $ver" || FAILED+=("$name")
   else
     FAILED+=("$name(not on wp.org)")
   fi
@@ -55,17 +65,10 @@ rm -rf "$SITE/wp-content/plugins/membermouse" && cp -a "$ART/mm/membermouse" "$S
 log "02: Elementor Pro 4.3.2 (licensed zip kept on live: ~/elementor-pro-4.3.2.zip)"
 EPZ="$ART/elementor-pro-4.3.2.zip"
 [ -s "$EPZ" ] || scp -q -i "$LIVE_KEY" "$LIVE_SSH:elementor-pro-4.3.2.zip" "$EPZ" || die "elementor-pro zip missing"
-wpr plugin install "$EPZ" --force >/dev/null
+wpr --skip-plugins plugin install "$EPZ" --force >/dev/null
 
-log "02: PHP 8.3 code fixes"
-for p in site-php83-fixes.patch wd-instagram-feed-1.4.35-fixes.patch; do
-  if patch -d "$SITE" -p1 -R --dry-run -s -f < "$PATCHES/$p" >/dev/null 2>&1; then
-    log "   $p already applied"
-  else
-    patch -d "$SITE" -p1 --no-backup-if-mismatch -s < "$PATCHES/$p" || die "$p failed"
-    log "   $p applied"
-  fi
-done
+log "02: PHP 8.3 fix for wd-instagram-feed (new version)"
+apply_patch wd-instagram-feed-1.4.35-fixes.patch
 
 log "02: lint touched PHP files"
 for f in $(grep -h '^+++ b/' "$PATCHES"/site-php83-fixes.patch "$PATCHES"/wd-instagram-feed-1.4.35-fixes.patch | sed 's#^+++ b/##;s#\t.*##'); do
@@ -76,8 +79,8 @@ for f in $(grep -h '^+++ b/' "$PATCHES/membermouse-3.1.1-mpfc-custom.patch" | se
 done
 
 fixperm
-log "02: result — WP $(wpr core version), plugins differing from target:"
-wpr plugin list --fields=name,version --format=csv 2>/dev/null | tail -n +2 | sort > "$ART/plugins-now.csv"
+log "02: result — WP $(wpr --skip-plugins core version), plugins differing from target:"
+wpr --skip-plugins plugin list --fields=name,version --format=csv 2>/dev/null | tail -n +2 | sort > "$ART/plugins-now.csv"
 awk -F, '{print $1","$3}' "$HERE/target-plugin-versions.csv" | tail -n +2 | grep -v ',$' | sort | comm -13 "$ART/plugins-now.csv" - | tee -a "$ART/upgrade.log" || true
 [ $TEST = 1 ] || { log "02: live root crontab with php7.4 -> php8.3 (install manually after review):"; live "sudo crontab -l" | sed 's#/usr/bin/php7.4#/usr/bin/php8.3#g'; }
 log "02: done"

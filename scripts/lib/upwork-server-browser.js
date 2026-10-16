@@ -35,14 +35,22 @@ async function passCloudflareTurnstile(page, tries = 3) {
   for (let i = 0; i < tries; i++) {
     await sleep(6000); // let Turnstile render (it may also auto-pass)
     if (!(await isChallenge(page))) return true;
-    let x = 511, y = 273; // checkbox position on the 1280px layout, if the iframe can't be located
-    const frame = await page.$('iframe[src*="challenges.cloudflare.com"]');
-    const box = frame && (await frame.boundingBox());
-    if (box) { x = box.x + 28; y = box.y + box.height / 2; }
+    // The widget's iframe sits in a closed shadow root, so locate its host by Turnstile's fixed
+    // 300x65 size; the checkbox is ~21px from its left edge, vertically centred. Position varies
+    // with viewport height (seen y=273 and y=295), so never hardcode it.
+    const box = await page.evaluate(() => {
+      for (const el of document.querySelectorAll('body *')) {
+        const r = el.getBoundingClientRect();
+        if (r.width >= 290 && r.width <= 310 && r.height >= 60 && r.height <= 70) return { x: r.x, y: r.y, h: r.height };
+      }
+      return null;
+    }).catch(() => null);
+    const x = box ? box.x + 21 : 511;
+    const y = box ? box.y + box.h / 2 : 295;
     await page.mouse.move(x - 120, y - 80);
     await page.mouse.move(x, y, { steps: 15 });
     await page.mouse.click(x, y, { delay: 80 });
-    console.error(`[upwork-server-browser] clicked Turnstile (try ${i + 1})`);
+    console.error(`[upwork-server-browser] clicked Turnstile at ${Math.round(x)},${Math.round(y)} (try ${i + 1}${box ? "" : ", fallback coords"})`);
     await sleep(10000);
     if (!(await isChallenge(page))) return true;
   }

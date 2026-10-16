@@ -11,7 +11,7 @@ timedatectl set-timezone UTC
 apt-get update -q
 apt-get install -yq apache2 libapache2-mod-php8.3 php8.3-cli php8.3-bcmath php8.3-curl php8.3-gd php8.3-imagick \
   php8.3-intl php8.3-mbstring php8.3-mysql php8.3-redis php8.3-soap php8.3-xml php8.3-zip \
-  imagemagick ffmpeg zip unzip pv redis-server mysql-client certbot python3-certbot-apache composer iptables-persistent
+  imagemagick ffmpeg zip unzip pv jq redis-server mysql-client certbot python3-certbot-apache composer iptables-persistent
 command -v node >/dev/null || { curl -fsSL https://deb.nodesource.com/setup_22.x | bash -; apt-get install -yq nodejs; }
 command -v wp >/dev/null || { curl -fsSLo /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; chmod +x /usr/local/bin/wp; }
 
