@@ -37,5 +37,9 @@ Deck S5 hiện tại có 22 slide: https://docs.google.com/presentation/d/10ZYIX
 2. **"Điều kiện dừng"** (dòng 4a): chỉ được nhắc ngầm bằng nhánh "đủ thông tin → dừng". Slide 16 có `max_turns` trong code nhưng không nói đó là điều kiện dừng. Hướng sửa: thêm 1 dòng chú thích "dừng khi: model trả lời cuối · chạm max_turns" ở slide 6 hoặc 16. Chi tiết 5 điều kiện dừng để Session 8.
 3. Tiêu đề slide 3 chỉ có vế "Agent khác workflow ở đâu", thiếu vế "…và OpenAI Agents SDK hỗ trợ gì" so với tên buổi trong PDF.
 
+## Đã xử lý (2026-10-16)
+- Chỗ 1–2: slide 6 sửa (nhãn "nhận mục tiêu, tự chọn bước" + "dừng khi model trả lời cuối hoặc chạm max_turns"; notes cập nhật).
+- Chỗ 3: user giữ tiêu đề slide 3 như hiện tại.
+
 ## Câu hỏi chưa giải quyết
-- Có sửa 3 chỗ hở trên không? Nếu sửa: chỗ 1–2 thêm chữ vào slide 6 (không thêm slide); chỗ 3 đổi tiêu đề slide 3 thành tên đầy đủ của buổi.
+- (không còn)

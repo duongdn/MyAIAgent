@@ -9,7 +9,7 @@ function threeFlows() {
   const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `Vẽ từng hàng lên bảng nếu có thể.
 - Model call: code chuẩn bị prompt (kèm tài liệu RAG), gọi model ĐÚNG 1 lần. Không có "bước tiếp theo".
 - Workflow: CODE giữ thứ tự: phân loại → tra KB → trả lời → tạo ticket. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.
-- Agent: model nhận mục tiêu + danh sách tool, TỰ chọn gọi tool nào, mấy lần, khi nào dừng. Vòng lặp chạy tới khi model trả lời cuối.
+- Agent: model nhận MỤC TIÊU (không phải danh sách bước) + danh sách tool, TỰ chọn gọi tool nào, mấy lần. Điều kiện dừng: model trả lời cuối, hoặc chạm max_turns do application đặt (Session 8 đi sâu 5 lý do dừng).
 Ô màu cam = chỗ model ra quyết định. Ô tối = code ra quyết định.
 Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả lời), nhưng LLM không quyết định thứ tự.`);
   const row = (y, name, sub, steps) => {
@@ -26,7 +26,7 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
   // Agent: vòng lặp thật — model ⇄ code chạy tool; khi đủ thông tin mới thoát sang trả lời
   const y = 236;
   mono(s, 40, y, 140, 14, 'AGENT', { size: 9 });
-  label(s, 40, y + 14, 130, 30, 'model chọn bước', { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
+  label(s, 40, y + 14, 130, 30, 'nhận mục tiêu, tự chọn bước', { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
   box(s, 180, y, 110, 44, 'Model: chọn tool tiếp theo', { fill: C.ORANGE, size: 10.5 });
   box(s, 380, y, 140, 44, 'Code chạy tool\nsearch_kb · create_ticket', { fill: C.INK, size: 10.5, sub: 9 });
   twoWay(s, 292, 378, y + 22);
@@ -35,7 +35,7 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
   box(s, 580, y, 96, 44, 'Model: trả lời', { fill: C.ORANGE, size: 10.5 });
   arrow(s, 235, y, 235, y - 14, C.INK, false); arrow(s, 235, y - 14, 628, y - 14, C.INK, false); arrow(s, 628, y - 14, 628, y - 2, C.INK);
   label(s, 400, y - 30, 200, 14, 'đủ thông tin → dừng', { size: 9, bold: false, color: C.INK });
-  label(s, 180, y + 48, 340, 16, '↻ lặp bao nhiêu lượt do model quyết định', { size: 9, bold: false, color: C.ORANGE });
+  label(s, 180, y + 48, 500, 16, '↻ lặp bao nhiêu lượt do model quyết định · dừng khi model trả lời cuối hoặc chạm max_turns', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
   box(s, 40, 330, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 58, 326, 200, 22, 'model quyết định', { size: 10, bold: false, align: 'START' });
   box(s, 190, 330, 14, 14, ' ', { fill: C.INK }); label(s, 208, 326, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
 }
