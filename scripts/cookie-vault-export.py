@@ -5,6 +5,7 @@ tmp/cookie-vault/, for the headless cron server (mpfc) to reuse. Run by cookie-v
 
   workstream-sso-cookies.json  Keycloak SSO (Profile 9)  -> workstream-login.js seeds these
   carrick-upwork-cookies.json  Upwork (Profile 1)        -> get-carrick-upwork-cookies.py fallback
+  duongdn-upwork-cookies.json  Upwork (Profile 9)        -> get-duongdn-upwork-cookies.py fallback (Tokenlite)
 
 Use system python3 (working browser_cookie3); the skill venv is ABI-broken.
 """
@@ -21,6 +22,7 @@ CHROME = Path.home() / '.config' / 'google-chrome'
 SOURCES = {
     'workstream-sso-cookies.json': ('Profile 9', ['auth.nustechnology.com']),
     'carrick-upwork-cookies.json': ('Profile 1', ['.upwork.com', 'upwork.com', 'www.upwork.com', 'auth.upwork.com']),
+    'duongdn-upwork-cookies.json': ('Profile 9', ['.upwork.com', 'upwork.com', 'www.upwork.com', 'auth.upwork.com']),  # Tokenlite
 }
 
 

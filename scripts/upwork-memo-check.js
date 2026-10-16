@@ -363,7 +363,9 @@ async function main() {
   for (const [accountName, rooms] of Object.entries(byAccount)) {
     const account = config.accounts.find((a) => a.name === accountName);
     const profileDir = path.join(__dirname, '..', 'tmp', `upwork-profile-${accountName}`);
-    const hasSavedProfile = fs.existsSync(path.join(profileDir, 'Default'));
+    // Server: always keep a persistent profile so the session + Cloudflare clearance survive between runs.
+    if (IS_SERVER) fs.mkdirSync(profileDir, { recursive: true });
+    const hasSavedProfile = IS_SERVER || fs.existsSync(path.join(profileDir, 'Default'));
 
     if (!hasSavedProfile && !LIVE_COOKIE_ACCOUNTS.includes(accountName)) {
       console.error(`No saved session for ${accountName}. Run: node scripts/upwork-login.js --login --account=${accountName}`);

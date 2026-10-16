@@ -5,7 +5,18 @@ dnduong.us@gmail.com — confirmed live master_access_token session, Upwork
 label "nus-davidb"). Same pattern as get-carrick-upwork-cookies.py.
 Outputs JSON array to /tmp/duongdn-upwork-cookies.json.
 """
-import sys, json, urllib.parse
+import sys, json, shutil, urllib.parse
+from pathlib import Path
+
+# Headless cron server (mpfc) has no Profile 9: use the cookies pushed by scripts/cookie-vault-sync.sh.
+_VAULT = Path(__file__).resolve().parent.parent / 'tmp' / 'cookie-vault' / 'duongdn-upwork-cookies.json'
+if not Path('/home/nus/.config/google-chrome/Profile 9/Cookies').exists():
+    if _VAULT.exists():
+        shutil.copy(_VAULT, '/tmp/duongdn-upwork-cookies.json')
+        print(f"Wrote {len(json.load(open(_VAULT)))} cookies to /tmp/duongdn-upwork-cookies.json (from cookie vault)")
+        sys.exit(0)
+    print(f"No Chrome profile and no cookie vault at {_VAULT}", file=sys.stderr)
+    sys.exit(1)
 from pathlib import Path
 
 try:
