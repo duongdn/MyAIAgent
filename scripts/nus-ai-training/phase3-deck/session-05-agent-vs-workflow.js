@@ -165,7 +165,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
 - Agent: model chọn bước tiếp; code chạy tool và giữ kiểm soát.
 - Chọn mức: thấp nhất làm được việc; agent khi số bước phụ thuộc kết quả.
-- Chi phí: số đo thật hôm nay — agent ~2,6× token so với workflow cho cùng yêu cầu.
+- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn.
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
 
@@ -176,7 +176,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Model call + RAG muốn tạo ticket thì phải thêm gì?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token).
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 13).
 2. "Workflow có LLM" vẫn là workflow? → đúng, nếu code quyết định thứ tự bước.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
 4. Model call + RAG muốn tạo ticket? → thêm bước code gọi API ticket (thành workflow), hoặc đưa create_ticket thành tool cho model chọn (thành agent).`);

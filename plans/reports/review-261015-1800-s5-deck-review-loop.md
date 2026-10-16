@@ -35,3 +35,10 @@ Render lại toàn bộ 23 slide (scratchpad bị xoá → viết lại thumbs.j
 - Slide 11: "1109 vào", "Tổng: 2511" → "1.109", "2.511" (cùng chuẩn vòng 7). Notes slide 11/13 cũng đổi theo.
 - Giữ nguyên "0.0s/1.6s" trong khối trace: đó là log thật in ra từ code, không định dạng lại.
 - Render slide 11 OK.
+
+## Vòng 9 — 2026-10-16 · notes ↔ slide
+Dump notes từ deck live (scratchpad/notes.js), đối chiếu 23 slide.
+- Notes slide 9 hỏi "tốn gấp mấy lần model call" nhưng đáp án slide 10 so với workflow → đổi thành "workflow".
+- Notes slide 21 (Ghi nhớ) chỉ nêu 2,6× trong khi thẻ có cả 2 trường hợp → bổ sung trường hợp ~2,8× (5.246 vs 1.893), "không mức nào luôn rẻ hơn".
+- Notes slide 22, đáp án câu 01 chỉ có trường hợp agent tốn hơn → thêm trường hợp ngược lại, trỏ slide 13.
+- Các notes còn lại khớp số trên slide (1.397/1.482/3.841, 574/828/1.109, 2.759–9.900, ~7s).

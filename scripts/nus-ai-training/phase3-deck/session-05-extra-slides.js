@@ -33,7 +33,7 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
 // Đo thật: cùng 1 yêu cầu, 3 mức
 function measuredCost() {
   question('Cùng một yêu cầu — agent tốn hơn bao nhiêu?', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."',
-    `Cho lớp đoán: agent tốn gấp mấy lần model call? chậm hơn bao nhiêu? Ghi lên bảng rồi lật đáp án.`);
+    `Cho lớp đoán: agent tốn gấp mấy lần workflow? chậm hơn bao nhiêu? Ghi lên bảng rồi lật đáp án.`);
   const s = newSlide('Đáp án · đo thật', 'Agent tốn ~2,6× token so với workflow cho cùng việc', `Số đo thật: compare_orchestration_levels.py, model ${data.model}, ${data.runs} lần mỗi mức, lấy trung bình, đã tắt cache gateway.
 Đọc bảng:
 - Model call rẻ nhất nhưng KHÔNG làm được nửa sau yêu cầu (tạo ticket) — nó chỉ trả lời.
