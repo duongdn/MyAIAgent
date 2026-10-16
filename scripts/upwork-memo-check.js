@@ -29,6 +29,7 @@ puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
 const { markVaultStale } = require('./lib/cookie-vault');
+const { IS_SERVER, ensureVirtualDisplay, passCloudflareTurnstile } = require('./lib/upwork-server-browser');
 const path = require('path');
 const { execSync } = require('child_process');
 const { classifyMemo } = require('./upwork-memo-rules.js');
@@ -236,8 +237,9 @@ async function fetchWorkroomMemos(page, room, date) {
 
   const pageText = await page.evaluate(() => document.body.innerText);
   if (pageText.length < 500 && (pageText.includes('Cloudflare') || pageText.includes('Ray ID') || currentUrl.includes('__cf_chl'))) {
-    console.error(`Cloudflare challenge detected for ${room.name}, waiting 10s and retrying...`);
-    await new Promise((r) => setTimeout(r, 10000));
+    console.error(`Cloudflare challenge detected for ${room.name}, trying Turnstile click...`);
+    await passCloudflareTurnstile(page);
+    await new Promise((r) => setTimeout(r, 5000));
     const retryText = await page.evaluate(() => document.body.innerText);
     if (retryText.length < 500) {
       page.off('response', responseHandler);
@@ -331,6 +333,7 @@ async function fetchWorkroomMemos(page, room, date) {
 }
 
 async function main() {
+  await ensureVirtualDisplay(); // server: real Chrome on Xvfb passes Cloudflare, headless doesn't
   const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
   const date = argValue('date') || defaultDate();
   const workroomFilter = argValue('workroom');
@@ -373,6 +376,8 @@ async function main() {
     const useVisibleBrowser = !!process.env.DISPLAY;
     const browser = await puppeteer.launch({
       headless: useVisibleBrowser ? false : 'new',
+      // Server: the stable Google Chrome build (verified to pass Turnstile), not bundled Chrome-for-Testing.
+      ...(IS_SERVER && fs.existsSync('/usr/bin/google-chrome') ? { executablePath: '/usr/bin/google-chrome' } : {}),
       ...(hasSavedProfile ? { userDataDir: profileDir } : {}),
       env: { ...process.env, TMPDIR: SOCKS_DIR, DISPLAY: process.env.DISPLAY || ':1' },
       args: [
@@ -384,7 +389,8 @@ async function main() {
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 900 });
-    await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36');
+    // Server: keep Chrome's real UA — a spoofed older version mismatches the client hints Cloudflare checks.
+    if (!IS_SERVER) await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36');
 
     let loggedIn = false;
     for (const room of rooms) {

@@ -10,6 +10,7 @@
 // Puppeteer uses it — retries with a fresh extraction each time.
 const fs = require('fs');
 const { markVaultStale } = require('./lib/cookie-vault');
+const { IS_SERVER, SERVER_PROFILE_DIR, ensureVirtualDisplay, passCloudflareTurnstile } = require('./lib/upwork-server-browser');
 const path = require('path');
 const { execSync } = require('child_process');
 
@@ -48,9 +49,10 @@ function extractFreshCookies() {
     .map(c => ({ name: c.name, value: c.value, domain: c.domain, path: c.path, secure: c.secure }));
 }
 
-async function attempt(browser) {
+async function attempt(browser, n) {
   const page = await browser.newPage();
-  await page.setCookie(...extractFreshCookies());
+  // Server: the persistent profile already holds the session — only seed vault cookies if it fell out.
+  if (!IS_SERVER || n > 1) await page.setCookie(...extractFreshCookies());
 
   let apiMessages = null;
   page.on('response', async (res) => {
@@ -62,6 +64,7 @@ async function attempt(browser) {
   });
 
   await page.goto(WORKROOM_URL, { waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
+  if (IS_SERVER) await passCloudflareTurnstile(page);
   await new Promise(r => setTimeout(r, 4000));
 
   const url = page.url();
@@ -71,8 +74,11 @@ async function attempt(browser) {
 }
 
 (async () => {
+  await ensureVirtualDisplay();
   const browser = await puppeteer.launch({
-    headless: 'new',
+    // Server: real Chrome on Xvfb + persistent profile (headless is stuck on Cloudflare there).
+    headless: IS_SERVER ? false : 'new',
+    ...(IS_SERVER ? { userDataDir: SERVER_PROFILE_DIR } : {}),
     executablePath: '/usr/bin/google-chrome',
     defaultViewport: { width: 1280, height: 900 },
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
@@ -81,7 +87,7 @@ async function attempt(browser) {
   let result = null;
   for (let i = 1; i <= MAX_ATTEMPTS; i++) {
     console.log(`[NEURAL] Attempt ${i}/${MAX_ATTEMPTS}: fresh cookie extraction + navigate...`);
-    result = await attempt(browser);
+    result = await attempt(browser, i);
     if (!result.loggedOut && result.apiMessages) break;
     console.log(`[NEURAL] Attempt ${i} ${result.loggedOut ? 'hit login redirect (session snapshot stale)' : 'no messages captured'} — retrying...`);
     await new Promise(r => setTimeout(r, 2000));
