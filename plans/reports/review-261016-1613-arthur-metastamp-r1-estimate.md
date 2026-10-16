@@ -35,3 +35,13 @@ Nguồn: Slack #msv3-official (đến 10-16 11:31), Matrix room Arthur-Meta-Stam
 ## Unresolved
 - R2–R5 no-charge đã thống nhất nội bộ chưa (NamTV lo nếu Chris không làm R1 thì R2–R5 bị treo → $1,701 treo theo)? Cần plan B: nếu Chris drop R1, vẫn làm R2–R5 trên schema hiện tại.
 - Discount 10% có áp cho R1 không.
+
+---
+## Re-verify against code (origin/main 2026-10-15) — supersedes list above
+- DROP: a3 (fed back). Fields asn/reverse_dns/identity_tier/delivery/terms already exist; rDNS/ASN enrichment already background (mcp_events.py). Receipt breaking change: history_total/repeat_count are owner-feed only (mcp_admin.py, rail_ledger.py), not public receipt -> no agent break. Counts R1-b: $inc counter pattern exists -> 2.5h OK. Search/list volume bounded (search max 50, list max 200, tools.py:974/1088) -> R1-f OK, just answer §6.5.
+- KEEP 1: a4 overlaps R4(a) free item (11:29 msg "shows only 8 rows"; RAIL_LEDGER_LIMIT=8 mcp_admin.py:77). Catalog ledger already has date range/page/cursor (catalogs.py:346-366) -> Feed can reuse; a4 2.5h fine but state cap removal is free.
+- NEW 2: a1 (2h) under-scoped. Refusal path = HMAC shared receipt_id per group + outbox replay + hit_id/recent_hits idempotency + receipt_refusal_hits + receipt_aliases (receipt_service.py header, _upsert_refusal ~1092). 21 backend test files assert collapse behaviour (test_mcp_receipts, test_catalog_ledger, test_refusal_collapse, test_refusal_receipt_id...) + FE CatalogLedger/useMcpRail tests. Est only counts T1-T10 acceptance. Suggest +2-3h (a1 3h, regression test rewrite ~1.5h).
+- KEEP 3: price + date missing.
+- KEEP 4: §6.5 answers (JSONL, volume, X-Real-IP).
+- KEEP 5: wording "we have seen" R1-b.
+- LOW 6: verify_url for search/list rows — new lookup type in receipts.py; confirm in a5.
