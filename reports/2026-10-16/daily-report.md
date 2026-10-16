@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-16 (Friday)
 
-**Run:** 2026-10-16T05:00+07:00 (cron, mpfc host)
+**Run:** 2026-10-16T05:00+07:00 (cron, mpfc host), corrected 08:25–09:35 (+07:00) local recheck
 **Window:** 2026-10-15 05:09 → 2026-10-16 05:20 (+07:00). Task-log date: Thu 2026-10-15.
 **Leave plan:** Leave parser refreshed: no approved leave on record. From Matrix Delivery-Resource: TamVT off 15/10. Off 16/10: PhongTB (doctor), ThinhLD, TaiTM (morning), HiepNT + HauTT (LuHX covers), ThamTTH (through 16/10). DanhTD off 19/10 and 23/10.
 
@@ -10,11 +10,11 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Email rick@ / Performance | **Fountain production errors after the V2 go-live (10:19).** Rollbar [FountainGifts] #372 `NameError: uninitialized constant OrderItemGiftVariantSerializer::GiftVariant` hit its 10th occurrence at 15:41 (New Relic: 12x in window). This looks like a V2 regression. Also new: #373 Twilio 21610 "unsubscribed recipient" (12x, mostly benign) and ArgumentError wrong-args (12x). Kunal is testing V2 and is happy so far on Trello. Separately, the team found live UI bugs (#81460, #81464, #81475). Fountain ○ |
-| 2 | Slack OhCleo (DM Celine) | **Celine asked at 17:31 "How much until app is done?" and followed up at 17:45: "Can you please let me know regarding the app so I can plan?" No reply.** Internally, LuHX can't take the mobile work tomorrow (Matrix 18:29). New at 02:47: Celine asks whether the new design broke free listens ("I had 3 free listenings and now I got this e-mail"). Also unanswered. Ohcleo ○ |
-| 3 | Slack GGS #presta-9-update | Joey 14:15 set a go-live goal of **next Wednesday**. Joey 15:27 asked Amy: "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" No reply ([link](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Yesterday's 9 UAT issues got a holding reply from Amy at 09:14 ✅. DB Schenker staging still needs an IP whitelist. Bailey ○ |
+| 1 | Email rick@ / Performance | **Fountain production errors after the V2 go-live (10:19).** Rollbar [FountainGifts] #372 `NameError: uninitialized constant OrderItemGiftVariantSerializer::GiftVariant` hit its 10th occurrence at 15:41 (New Relic: 12x in window). This looks like a V2 regression. Also new: #373 Twilio 21610 "unsubscribed recipient" (12x, mostly benign) and ArgumentError wrong-args (12x). Kunal is testing V2 and is happy so far on Trello. Separately, the team found live UI bugs (#81460, #81464, #81475). ~~Fountain ○~~ **08:50 recheck 🟢:** New Relic shows NameError last fired once between 16:00–19:00 yesterday and **0 times in the 13h since (67k requests)**. No new Kunal comments on the board since the cron. Fountain ✓ completed. Whether a hotfix was actually deployed isn't confirmed |
+| 2 | Slack OhCleo (DM Celine) | **Celine asked at 17:31 "How much until app is done?" and followed up at 17:45: "Can you please let me know regarding the app so I can plan?" No reply.** Internally, LuHX can't take the mobile work tomorrow (Matrix 18:29). New at 02:47: Celine asks whether the new design broke free listens ("I had 3 free listenings and now I got this e-mail"). Also unanswered. Re-verified 08:30: still no Tony reply to either ask. Ohcleo ○ |
+| 3 | Slack GGS #presta-9-update | Joey 14:15 set a go-live goal of **next Wednesday**. Joey 15:27 asked Amy: "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" No reply. Re-verified 08:40: the thread still has no reply and there's no new GGS message since 05:00 ([link](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Yesterday's 9 UAT issues got a holding reply from Amy at 09:14 ✅. DB Schenker staging still needs an IP whitelist. Bailey ○ |
 | 4 | Slack Xtreme (Maddy) | **Madhuraka offered Kai (LongVV) a new Magento/Adobe Commerce project, 16h/week from next week, on top of Luxe It Fwd.** His conditions: commit using Madhuraka's GitHub account, work only via an Australian VPN, use his Teams/Slack identity, and "I do not want them to know we are using an offshore development team as that affects our contract" ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1792051900594099)). **Kai already agreed** ("Sure, that all good with me"). This is a contract and impersonation risk that DuongDN needs to decide on. Also "Proceed with 470 asap" (17:01): [PR #558](https://bitbucket.org/xtreme-web/rms/pull-requests/558) is open, but LIFM2-470 has no estimate and 0h logged. Yesterday's 468 alert is resolved (Anoma: "Testing ok"). Maddy ○ |
-| 5 | Slack Baamboozle #testing | Jamie 15:51: "please revert study mode back to dark mode", with more colour changes to come. No ack from Carrick yet ([link](https://baamboozle.slack.com/archives/C06CMTX025R/p1792054297842209)). Aysar ○ |
+| 5 | Slack Baamboozle #testing | Jamie 15:51: "please revert study mode back to dark mode", with more colour changes to come. ~~No ack from Carrick yet~~ **08:40 recheck ✅:** Carrick reacted 👀 (it's a thread reply, which the cron missed), and that is the #testing ack convention ([link](https://baamboozle.slack.com/archives/C06CMTX025R/p1792054297842209)). ~~Aysar ○~~ Aysar ✓ completed. Still track until the revert is done |
 | 6 | Workstream (provisional) | **0h on Thu 10-15 for LeNH, TuanNT, LongVV and PhucVT at 05:00.** This is probably logging lag (same pattern as yesterday's false TuanNT 0h). The Matrix room shows TuanNT working 10-15 (Andrew Taraba fix done 11:11, Bailey tasks), and LeNH is a strict-gate dev. **Re-check after 09:30 before any reminder.** KhanhHH 6.33h so far. James Diamond ○ (LeNH gate), Bailey ○ |
 | 7 | Email vuongtrancr@ | New client Traslochi-Online **production** Rollbar errors started 09:18: #2–#7 new, #3 reached 100 occurrences at 14:24, plus #4 NoMethodError. The Swish New Relic "Signal lost / Low Application Throughput" alert is flapping (chronic) |
 | 8 | Matrix Bailey | duongdn asked TuanNT 3 times for the final estimate of [99][Console][Automatic Stock Refill]. That task is already out of hours and has new bugs. Still no number (last ask 10:25) |
@@ -47,7 +47,7 @@ Trello: Check mail — all 6 items ✓ complete, card done.
 
 | Workspace | Msgs | Key content |
 |-----------|------|-------------|
-| Baamboozle | 6 | **MPDM Carrick "Some reports for today" 17:14** (#728 proofread punctuation, PR #61). Carrick deployed a fix on nusdev and Noah acked. ⚠️ Jamie's revert-dark-mode ask is unacked (Alert #5). Carrick sent the quarterly-feedback nudge |
+| Baamboozle | 6 | **MPDM Carrick "Some reports for today" 17:14** (#728 proofread punctuation, PR #61). Carrick deployed a fix on nusdev and Noah acked. ~~⚠️ Jamie's revert-dark-mode ask is unacked (Alert #5).~~ Carrick reacted 👀 to Jamie's revert-dark-mode ask (acked, Alert #5). Carrick sent the quarterly-feedback nudge |
 | RDC - FM Monitoring | 55 | ✅ Yesterday's alert is resolved. Carrick acked dmetiner (branch found on francesca-fmscan staging) and agreed the 36-column CSV mapping. dmetiner: "all seem fine", backend integration in progress. Quarterly-feedback email question: namtv resent it to Doruk. RPi bot: MPX Recovery Failed 10:08 → recovered 10:39. Failed again 14:45 with no recovery msg in window (FYI). 40+ tuner access logs |
 | Swift Studio | 16 | Rory: only an estimate is needed for Superchat/HubSpot, Carrick to give an indicative estimate ✅. Rory asked Jeff for Henry's time/cost; Henry needs Rory to mark Figma features first ✅ |
 | Xtreme Soft Solutions | 32 | ⚠️ Madhuraka's new offshore-concealed project + 470 "proceed asap" (Alert #4) |
@@ -59,9 +59,9 @@ Trello: Check mail — all 6 items ✓ complete, card done.
 | Equanimity | 1 | Carrick's quarterly-feedback nudge |
 | Aigile Dev | 1 | gaige alerts bot (Colin = Ignore List) |
 
-Aysar pre-check: KhanhHH has 1.5h on Workstream Baamboozle for 10-15, and the MPDM report is present → OK on the gate. Held only for Jamie's ask (Alert #5).
+Aysar pre-check: KhanhHH has 1.5h on Workstream Baamboozle for 10-15, and the MPDM report is present → OK on the gate. ~~Held only for Jamie's ask (Alert #5).~~ Jamie's ask was 👀-acked, so Aysar is completed.
 
-Trello: Rory ✓, Franc ✓, Raymond ✓, Marcel ✓, MPFC ✓ / ⚠️ Aysar (Alert #5) / ⚠️ Bailey (Alerts #3, #6) / ⚠️ Maddy (Alert #4).
+Trello: Rory ✓, Franc ✓, Raymond ✓, Marcel ✓, MPFC ✓, ~~⚠️ Aysar (Alert #5)~~ Aysar ✓ (08:40) / ⚠️ Bailey (Alerts #3, #6) / ⚠️ Maddy (Alert #4).
 
 ---
 
@@ -169,7 +169,7 @@ Trello: ⚠️ Maddy skipped (Alert #4).
 
 **Trello board (Web Development):** Rick pushed V2 to LIVE (03:21 UTC). Kunal 04:41: "so far everything looks good", "You guys dont need to do any QC for now", next steps tomorrow, planning a v2.1. Rick acked ✅ ([card](https://trello.com/c/TdvfIo08)). Rick posted the mobile UI bug list on [Post V2-Release](https://trello.com/c/MlCuwNVJ). Lists: To-Do 15 · Bugs 31 · Doing 4 · QC Internal 4 · QA Backlog 6 · In QA 1. Stuck >5d: Doing "Performance of website" (16d), "Pro CSV template download link" (21d). QC Internal "Digital Proof Generator" (14d), "Template::Error admin/gifts#show" (17d), "Infinity mail chimp" (22d), "Recipient privacy" (14d). In QA "separate test environment" (14d).
 
-Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #1: production NameError after V2).
+Trello: ~~⚠️ Fountain - DOCUMENT skipped (Alert #1: production NameError after V2).~~ Fountain - DOCUMENT ✓ (08:50). The NameError stopped (0 in the 13h since ~16:00–19:00, 67k req) and there are no new customer comments.
 
 ---
 
@@ -187,9 +187,9 @@ Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #1: production NameError after
 - Rory ✓ · Franc ✓ · MPFC ✓ · Marcel ✓ · Raymond ✓ · Neural Contract ✓ (session unavailable on this host, so no alert) · Andrew Taraba ✓ · Elena - WordPress SamGuard ✓
 - ⚠️ Maddy: skipped (Alert #4)
 - ⚠️ James Diamond: skipped (provisional LeNH 0h, Alert #6). Vinn + Jeff reports OK
-- ⚠️ Aysar: skipped (Alert #5)
+- ~~⚠️ Aysar: skipped (Alert #5)~~ Aysar ✓ (08:40, Carrick 👀 ack)
 - ⚠️ Bailey: skipped (Alerts #3, #6)
-- ⚠️ Fountain - DOCUMENT: skipped (Alert #1)
+- ~~⚠️ Fountain - DOCUMENT: skipped (Alert #1)~~ Fountain - DOCUMENT ✓ (08:50, error stopped)
 - ⚠️ Ohcleo: skipped (Alert #2)
 
 ## Ignore List — 05:18 (+07:00)
@@ -228,6 +228,8 @@ No pending action items for DuongDN. His own asks were answered: TrinhMTT sent K
 - Arthur: Chris payment msg answered (namtv). Training addendum = fixed-cost CR.
 - Elena-OP: license-service docs on Confluence.
 - Resource: 16/10 off list (see Leave plan).
+
+**Recheck 08:29 (since 05:00):** 1 msg. Arthur: phucvt relays that Chris messaged about payment (Ignore List). No new Resource-Arrangement leave notes. Details: reports/2026-10-16/matrix-rooms-0829.md
 
 ---
 
@@ -274,20 +276,20 @@ Paused per user. Not run, Trello auto-completed.
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | not fetched |
-| Aysar | — | — | not fetched |
-| Tokenlite | — | — | not fetched |
+| Rory | ~~—~~ 1 | ~~—~~ 0 | "Superchat–HubSpot lead integration: requirements review, planning and local validation" ✅ |
+| Aysar | ~~—~~ 1 | ~~—~~ 0 | "Fixed missing apostrophe and question-mark suggestions in the AI toolbar (#728)" ✅ |
+| Tokenlite | ~~—~~ 0 | ~~—~~ 0 | no segments |
 
-Upwork memo: data unavailable. This cron host has no carrick Chrome profile, so the cookie export is empty and Puppeteer gets a detached-frame timeout (known host gap). Manual check on the local machine: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-15`.
-Neural Contract: same host limitation (`upwork-neural-check.js` hits a login redirect with 0 cookies). Session failure ≠ alert, so Neural ✓. Re-check locally.
+~~Upwork memo: data unavailable. This cron host has no carrick Chrome profile…~~ Re-run locally at 08:35 (headless): all memos valid. Rory's segment shows LeNH did track Upwork time on 10-15.
+Neural Contract: the local run also hit a login redirect on all 4 attempts. The carrick Profile 1 cookie DB has `master_refresh_token` (valid until 10-28) but no current `user_oauth2_slave_access_token`, so the access token needs a live upwork.com page load in carrick's Chrome. Not opened (per your rule against opening tabs). Messages weren't read this run. Session failure ≠ alert, so Neural stays ✓.
 
 ---
 
 ## Unresolved Questions
 - LeNH / TuanNT 10-15 0h: real gap or logging lag? Re-check Workstream after 09:30 before any reminder.
 - Madhuraka's concealed-offshore new project (commit as him, AU VPN): accept, refuse, or set terms? Kai already said yes.
-- Fountain prod #372 NameError (GiftVariant serializer): is a V2 hotfix in progress?
+- ~~Fountain prod #372 NameError (GiftVariant serializer): is a V2 hotfix in progress?~~ It stopped firing after ~16:00–19:00 yesterday. Was a hotfix deployed, or does it just need traffic on that path?
 - Who answers Celine's mobile-app ETA, given LuHX is unavailable tomorrow?
 - Traslochi-Online prod errors (#2–#7): who owns monitoring for this new client?
 - FirstProject production Rollbar (#904/#905): which client project is this? (Still unknown.)
-- Upwork memo + Neural need a run on the local machine.
+- ~~Upwork memo + Neural need a run on the local machine.~~ Memo done (all valid). Neural needs one upwork.com page load in carrick's Chrome to refresh the access token. Can you open it?
