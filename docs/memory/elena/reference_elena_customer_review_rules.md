@@ -12,3 +12,5 @@ Customer rules to check on every OP PR (they will re-review on delivery; fixed-c
 - FE: every text through translate (incl. aria-label); no mocks in delivered code; date format from configuration; status/type text and icons from API, not hardcoded; one interface per concept (no renamed duplicates); no function calls in templates (functionCallPipe); Enums over raw status strings; no `any`; no duplicate API calls; standalone components; no console.log or commented-out code.
 
 Related: [[feedback_elena_review_scope_no_clones_fixed_cost]], [[project_elena_op_restart_duongdn_code_reviewer]].
+
+> 2026-10-16: the "no assert" rule is deferred. The team listed it as a known issue in the release note (kept for dev, fix later), so do not flag it in OP review. See [[elena_assert_validation_not_an_issue]].
