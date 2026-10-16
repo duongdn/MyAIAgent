@@ -271,3 +271,15 @@ diff -ruN p311/membermouse/resources/js/admin/mm-manage_transactions.js work/res
                  return "&mdash;"
              }
              return { "title": value, "value": value.substring(0, 15) };
+diff -ruN p311/membermouse/com/membermouse/service/class.stripeservice.php work/com/membermouse/service/class.stripeservice.php
+--- a/com/membermouse/service/class.stripeservice.php
++++ b/com/membermouse/service/class.stripeservice.php
+@@ -1828,6 +1828,8 @@
+                             $response->message = $intentResponse->message;
+                             $response->type = MM_Response::$ERROR;
+                         }
++                    } else {
++                        $response->message = $intent; // MPFC fix: reuse unchanged intent (was returned empty)
+                     }
+                 } else {
+                     //create an intent for this request

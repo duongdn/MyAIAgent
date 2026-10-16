@@ -41,7 +41,7 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | B2 | `/?page_id=1155` | ✅ | 404 — live cũng 404 |
 | B3 | 15 trang dựng bằng Elementor: hiển thị giống live | ✅ | số element khớp từng trang |
 | B4 | REST `/wp-json/` (`mpfc/v1`, `wpcw/v1`) | ✅ | |
-| B5 | Đăng ký / mua membership mới (checkout MM + Stripe test) | 🙋 | thẻ 4242… |
+| B5 | Đăng ký / mua membership mới (checkout MM + Stripe test) | 🙋 | thẻ 4242… · 16/10 lỗi ajax message rỗng → đã sửa, test lại |
 | B6 | Submit form CF7 / Gravity Forms (có upload file) | 🙋 | mail chặn → kiểm submit OK + entry lưu trong admin |
 
 ## C. Member
@@ -135,6 +135,7 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | `plugins/wd-instagram-feed` 1.4.35 (2 chỗ) | `/team-library` 500, include sai đường dẫn | guard, `__DIR__` |
 | MemberMouse 3.1.1 | 12 commit custom bị ghi đè | port lại (patch) |
 | Rewrite rules | `/user-video/...` 404 sau migrate | 03 flush rewrite có load theme |
+| MemberMouse `class.stripeservice.php` (validate checkout) | Submit lại form đã có intent cùng số tiền → ajax trả `message` rỗng, kẹt "Please wait…" (lỗi gốc MM, live 3.0.x cũng có) | trả lại intent cũ (patch MM) |
 
 ## Câu hỏi chưa giải quyết
 - License key plugin premium (G7)? PayPal sandbox creds (G2)?
