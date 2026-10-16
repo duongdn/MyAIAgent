@@ -29,3 +29,5 @@ Sessions: 13 = Production architecture cho AI feature, 14 = Observability latenc
 
 **Giai đoạn 3 rebuild (2026-10-15):** deck 10ZYIX… dựng lại 77 slide bằng `build-phase3-agent-deck.js` + `phase3-deck/` (slide-kit + 1 file/session). Style theo deck Session 1 của ChienTX (Matrix room "AI Training"): kicker + tiêu đề là câu khẳng định + log chạy thật + nhịp CÂU HỎI → ĐÁP ÁN. User: **mỗi session = 1 ngày training riêng**, user tự tách → mỗi session có header, nhắc lại buổi trước, agenda, ghi nhớ, thử thách; số trang reset theo session. Demo thêm thật: retry+idempotency (ticket_system.py), task state + resume (task_state.py), budget, guardrail, trace local (trace_local.py), kịch bản 6–8.
 Lịch: training 11h thứ 4 hàng tuần, S1 = 14/10/2026 → S5–S9 = 11/11, 18/11, 25/11, 2/12, 9/12. Section 3 giao cho DuongDN + VinhNT (không phải Nghiệp).
+
+- 🔴 2026-10-16: presenter GĐ3 (S5–S9) ghi "DuongDN · VinhNT" (user sửa: không dùng "Dương Nguyễn"). Dùng tên viết tắt NUS kiểu DuongDN/VinhNT trên slide.

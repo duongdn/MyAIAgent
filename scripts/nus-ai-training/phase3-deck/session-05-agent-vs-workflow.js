@@ -10,7 +10,7 @@ Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; applic
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
   label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
   label(s, 40, 232, 600, 30, 'Session 5–9 · một support agent mở rộng dần · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
-  label(s, 40, 320, 250, 20, 'Dương Nguyễn', { size: 12, color: C.WHITE, align: 'START' });
+  label(s, 40, 320, 250, 20, 'DuongDN · VinhNT', { size: 12, color: C.WHITE, align: 'START' });
   ['search_kb', '→', 'create_ticket', '→', 'T-1001'].forEach((t, i) => box(s, 400 + [0, 70, 88, 182, 200][i], 318, t === '→' ? 18 : [68, 0, 92, 0, 60][i], 24, t,
     { fill: t === '→' ? C.INK : i === 4 ? C.ORANGE : C.GHOST, font: 'IBM Plex Mono', size: 9, color: i === 4 ? C.INK : C.DIM, noLine: true }));
   footer(s, true);

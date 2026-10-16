@@ -80,7 +80,7 @@ function table(s, x, y, widths, rows, o = {}) {
 }
 
 let page = 0; let footerText = 'NUS Technology · Giai đoạn 3 · Build AI Agent';
-const PRESENTER = 'Dương Nguyễn';
+const PRESENTER = 'DuongDN · VinhNT';
 
 function blank(notes, bg = C.PAPER) {
   const sid = id('p3'); page += 1; slides.push({ sid, notes });
