@@ -11,9 +11,11 @@ if [ "$DB" = "wp_mpfc" ] && [ $CHECK = 0 ] && [ "${CONFIRM_LIVE_DB:-}" != "yes" 
   die "DB_NAME is the LIVE database. Re-run with CONFIRM_LIVE_DB=yes during the cutover window only."
 fi
 
-ver() { echo "WP db_version=$(wpc option get db_version | tail -1) mm-major-version=$(wpc option get mm-major-version | tail -1) elementor=$(wpc option get elementor_version | tail -1) yoast_db=$(wpc eval 'echo (get_option("wpseo")["version"] ?? "-");' | tail -1)"; }
+wps() { sudo -u www-data wp --path="$SITE" --skip-themes --skip-plugins "$@" 2>&1 | grep -v "HTTP_HOST\|Deprecated" || true; }
+# Read versions WITHOUT loading plugins (loading them triggers their migrations).
+ver() { echo "WP db_version=$(wps option get db_version | tail -1) mm-major-version=$(wps option get mm-major-version | tail -1) elementor=$(wps option get elementor_version | tail -1) yoast_db=$(wps eval 'echo (get_option("wpseo")["version"] ?? "-");' | tail -1)"; }
+schema_dump "$DB" > "$ART/schema-before-$DB.txt"   # first: before anything loads WP
 log "03: target DB=$DB — before: $(ver)"
-schema_dump "$DB" > "$ART/schema-before-$DB.txt"
 
 if [ $CHECK = 0 ]; then
   log "03: WP core DB upgrade"
