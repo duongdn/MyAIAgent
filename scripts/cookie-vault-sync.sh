@@ -34,7 +34,10 @@ upwork_token_valid() {
   rm -f "$db"
   [ "${n:-0}" -gt 0 ]
 }
-if ! upwork_token_valid; then
+# Open at most one tab per 3h — if carrick is genuinely logged out, don't spam tabs every 30 min.
+OPENED=tmp/cookie-vault-last-browser-open
+if ! upwork_token_valid && [ -z "$(find "$OPENED" -mmin -180 2>/dev/null)" ]; then
+  touch "$OPENED"
   log "Upwork access token expired — opening upwork.com in carrick Chrome (Profile 1) to refresh"
   DISPLAY=${DISPLAY:-:1} nohup google-chrome-stable --profile-directory="Profile 1" "https://www.upwork.com/ab/messages/" >/dev/null 2>&1 &
   for _ in $(seq 1 12); do sleep 5; upwork_token_valid && break; done
