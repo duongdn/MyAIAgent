@@ -2,10 +2,10 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-10-05",
-    "message_text": "Report week 05/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 1h/1h",
+    "week_start": "2026-10-12",
+    "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 32h/32h\nLeNH: 32h/32h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
     "confirmed": false,
-    "draft_note": "2026-10-10 07:30 +07 — live Workstream /review/week (week 2026-10-05): JD members LeNH 40h (8x5, charged 40), AnhNH2 20h (4x5). TuanNT not on JD this week (his 'Portfolio' hours are Andrew Taraba project). ThangN absent 3rd week. Marcel DuongDN 1h (0.67+0.17+0.17).",
+    "draft_note": "2026-10-16 18:0x +07 cron — PROVISIONAL: live WS /review/week week 2026-10-12: LeNH 32h Mon-Thu (Fri 10-16 not logged yet at 18:00, no leave on record -> likely 40h/40h once logged), AnhNH2 20h (4x5). Marcel DuongDN 0.5h (Mon). Blair Brown project closed, 0 members. Re-fetch before confirming.",
     "unresolved_thangn": "ThangN absent from James Diamond Workstream member list 2 weeks running (09-21 week and 09-28 week) after one active week (14h, 09-17). Ask user before finalizing: still on the project (just not logging) or rolled off? If rolled off, should his Mobile line be removed from future reports going forward, not just this draft?",
     "superseded_week_09_21": {
       "week_start": "2026-09-21",
@@ -100,6 +100,13 @@
       "confirmed": false,
       "draft_note": "2026-10-02 23:05 — FULL WEEK NOW LIVE (not Mon-Thu estimate — superseded that draft). Fixed the Workstream outage by seeding Keycloak cookies from the user's real Chrome 'Default' profile (live session, user had it open) via WORKSTREAM_SSO_COOKIES env var into workstream-login.js — token captured first try. Confirmed via live /review/week pull (2026-09-28 week): LeNH 37h (5/8/8/8/8), AnhNH2 20h (4h every day), TuanNT 3.33h (Friday only, 10-02 — matches Matrix note 'TuanNT moves to James Diamond, 3h make-up' after PhucVT stayed full on Arthur). Web cap+bank applied: LeNH's 37h fully charged (under cap alone), TuanNT needed only 3h of his 3.33h to fill the 40h cap, so TuanNT charge=3h/actual=3h20m with 20m banked ('làm trước report sau'). ThangN NOT in the James Diamond member list at all this week (not just 0h — absent from API response entirely), vs 14h his first week (09-17) and 0h last week — his Mobile line is dropped from this draft pending user confirmation of why (see unresolved question). Marcel/DuongDN 2h40m (1h Mon + 1.17h Thu + 0.5h Fri).",
       "note": "Superseded in active slot 2026-10-10; never confirmed/sent — awaiting user decision."
-    }
+    },
+    "unsent_draft_10_05": {
+      "week_start": "2026-10-05",
+      "message_text": "Report week 05/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 1h/1h",
+      "confirmed": false,
+      "note": "Drafted 2026-10-10, never confirmed/sent; superseded by week 10-12 draft"
+    },
+    "sent": false
   }
 }
