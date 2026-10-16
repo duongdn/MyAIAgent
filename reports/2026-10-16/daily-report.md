@@ -289,7 +289,10 @@ Paused per user. Not run, Trello auto-completed.
 
 - **Ohcleo ○**: Tony replied to the 02:47 free-listen question at 08:43 with just "No, I don't" (short, no investigation). Celine's app ETA asks (17:31, 17:45) are still unanswered.
 - **Bailey ○**: Joey 15:27 in the issue-3 thread (#presta-9-update) is still unanswered (checked via conversations.replies). TuanNT 10-15 = 8h (Speedventory 4.5 + Andrew Taraba 3.5), so the #6 part is resolved.
-- **James Diamond ○**: LeNH 10-15 is still 0h on Workstream at 08:58 (Mon–Wed 8h each). Recheck again after 09:30 before any reminder.
+- ~~**James Diamond ○**: LeNH 10-15 is still 0h on Workstream at 08:58 (Mon–Wed 8h each). Recheck again after 09:30 before any reminder.~~ **James Diamond ✓ (09:06)**: re-fetched WS 09:05, LeNH 10-15 still 0h, no leave found. User asked to send the reminder.
+
+## Reminders lenh — 09:05 (+07:00)
+- LeNH: 0h 10-15, no leave → **sent** to `!OIrgPraJWrcDTnRVLQ:nustechnology.com`: "Hi LeNH, task log for 2026-10-15 is missing (0h logged). Please update when you can. Thanks!" (event `$MMGgd7jWetDglP0Fi0dDuBMRvFRMi_PtOFRcHQTlZbs`). The James Diamond Trello item was auto-completed.
 - **Maddy ○**: no new messages since 17:01. The concealed-offshore offer is still waiting on DuongDN's decision. Maddy Workstream has 0 rows this week (LongVV logs LIFM under OhCleo/DG?), and LIFM2-470 has no estimate.
 
 ## Unresolved Questions
