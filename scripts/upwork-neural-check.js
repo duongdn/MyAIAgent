@@ -9,6 +9,7 @@
 // using that Chrome profile, so a single snapshot can be stale by the time
 // Puppeteer uses it — retries with a fresh extraction each time.
 const fs = require('fs');
+const { markVaultStale } = require('./lib/cookie-vault');
 const path = require('path');
 const { execSync } = require('child_process');
 
@@ -90,6 +91,7 @@ async function attempt(browser) {
   if (!result || result.loggedOut || !result.apiMessages) {
     console.log(`[NEURAL] All ${MAX_ATTEMPTS} attempts failed to get a stable authenticated session.`);
     console.log('[NEURAL] carrick\'s real Chrome (Profile 1) session may be logged out — needs a real login there once, not a Puppeteer login.');
+    markVaultStale('upwork-neural', 'all 4 cookie-injection attempts hit login redirect');
     process.exit(2);
   }
 

@@ -12,6 +12,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
+const { vaultFile, markVaultStale } = require('./lib/cookie-vault');
 const { saveSecretConfig } = require('./lib/save-secret-config');
 const path = require('path');
 const https = require('https');
@@ -78,7 +79,8 @@ async function main() {
 
     // Optional: seed Keycloak session cookies exported from a real logged-in Chrome profile
     // (WORKSTREAM_SSO_COOKIES=<json file>) — recovers SSO when the saved profile's session is dead.
-    const ssoCookieFile = process.env.WORKSTREAM_SSO_COOKIES;
+    // Default: the cookie vault pushed from the local machine (headless cron server has no real profile).
+    const ssoCookieFile = process.env.WORKSTREAM_SSO_COOKIES || vaultFile('workstream-sso-cookies.json');
     if (ssoCookieFile && fs.existsSync(ssoCookieFile)) {
       const ssoCookies = JSON.parse(fs.readFileSync(ssoCookieFile, 'utf8'))
         .filter(c => c.domain === 'auth.nustechnology.com' && c.value);
@@ -183,6 +185,8 @@ async function main() {
     // Before next attempt, clear profile to force fresh session
     try { fs.rmSync(PROFILE_DIR, { recursive: true }); } catch {}
   }
+  markVaultStale('workstream', 'no token captured after 2 browser attempts');
+  process.exit(1);
 }
 
 main().catch(e => { console.error('[workstream-login] Fatal:', e.message); process.exit(1); });

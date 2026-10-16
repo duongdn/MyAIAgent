@@ -28,6 +28,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
+const { markVaultStale } = require('./lib/cookie-vault');
 const path = require('path');
 const { execSync } = require('child_process');
 const { classifyMemo } = require('./upwork-memo-rules.js');
@@ -409,6 +410,7 @@ async function main() {
               data = await fetchWorkroomMemos(page, room, date);
             } else {
               data = { workroom: room.name, client: room.client, developer: room.developer, status: 'login_failed', error: 'Live cookies + stored + headless all failed. Check carrick Chrome Profile 1 session.', date };
+              markVaultStale('upwork-memo', `${room.name}: live cookies + stored + headless all failed`);
             }
           }
           loggedIn = true;

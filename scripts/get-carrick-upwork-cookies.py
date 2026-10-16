@@ -7,8 +7,21 @@ Avoids Puppeteer-driven login entirely, which Upwork's fraud-detection engine
 blocks with a "technical difficulties" soft-reject before password submit.
 Outputs JSON array to /tmp/carrick-upwork-cookies.json.
 """
-import sys, json, urllib.parse
+import sys, json, shutil, urllib.parse
 from pathlib import Path
+
+COOKIE_FILE = '/home/nus/.config/google-chrome/Profile 1/Cookies'
+OUT_FILE    = '/tmp/carrick-upwork-cookies.json'
+# Headless cron server (mpfc) has no carrick Chrome profile: use the cookies exported on the
+# local machine and pushed by scripts/cookie-vault-sync.sh.
+VAULT_FILE  = Path(__file__).resolve().parent.parent / 'tmp' / 'cookie-vault' / 'carrick-upwork-cookies.json'
+if not Path(COOKIE_FILE).exists():
+    if VAULT_FILE.exists():
+        shutil.copy(VAULT_FILE, OUT_FILE)
+        print(f"Wrote {len(json.load(open(OUT_FILE)))} cookies to {OUT_FILE} (from cookie vault)")
+        sys.exit(0)
+    print(f"No Chrome profile and no cookie vault at {VAULT_FILE}", file=sys.stderr)
+    sys.exit(1)
 
 # Prefer the interpreter's OWN site-packages (system python3 has working
 # lz4/browser_cookie3). Only inject the skill venv's packages as a LAST resort
@@ -22,9 +35,6 @@ except ImportError:
         sys.path.insert(0, str(p))
 
 import browser_cookie3
-
-COOKIE_FILE = '/home/nus/.config/google-chrome/Profile 1/Cookies'
-OUT_FILE    = '/tmp/carrick-upwork-cookies.json'
 
 cookies = []
 seen = set()

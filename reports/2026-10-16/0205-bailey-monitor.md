@@ -101,9 +101,12 @@ Posted to GGS `#maintenance`, ts `1792091429.753779`. Performance OK, **Prestash
 
 Both are more than 30 days away. Console expires in about 74 days, so watch for renewal at the start of December.
 
-## Workstream Task Log — ❌ NOT COMPLETED
+## Workstream Task Log — ✅ DONE (recheck 08:50)
 
-`workstream-login.js` was tried twice (normal, then `--force`). Both failed with "SSO redirected but API never fired" (Keycloak cookies alive). The write returned `401 "exp" claim timestamp check failed`. This is the same recurring SSO outage. Retry: `DISPLAY=:1 node scripts/workstream-login.js && node scripts/workstream-write-tasklog.js speedventory 2026-10-16 "Weekly Monitor October 2026" 1` (2026-10-16 is that week's Friday).
+**Recheck 08:50:** Seeded 7 auth.nustechnology.com SSO cookies from Chrome Profile 9 (`WORKSTREAM_SSO_COOKIES`). Token captured on attempt 1. Wrote speedventory 2026-10-16 "Weekly Monitor October 2026" 1:00 (task id `cmvab7s370xq6o11uxsknocfh`).
+
+~~
+`workstream-login.js` was tried twice (normal, then `--force`). Both failed with "SSO redirected but API never fired" (Keycloak cookies alive). The write returned `401 "exp" claim timestamp check failed`. This is the same recurring SSO outage. Retry: `DISPLAY=:1 node scripts/workstream-login.js && node scripts/workstream-write-tasklog.js speedventory 2026-10-16 "Weekly Monitor October 2026" 1` (2026-10-16 is that week's Friday).~~
 
 ## Trello Checklist
 
@@ -111,7 +114,7 @@ Open card `6ad114a450fbefa53e864b88`, found on list 686b1f67… rather than via 
 
 ## Unresolved / follow-up
 
-- ❌ Workstream task log not written (SSO outage). Retry on recheck.
+- ~~❌ Workstream task log not written (SSO outage).~~ ✅ Written on recheck 08:50.
 - ⚠️ Siteground 71.8%, above 70%. Growth of +4.9GB/week is in the staging copies. The customer's cleanup request (~04/10) is still pending, and Nick needs to decide which staging copies to delete.
 - 🔴 Staging RuntimeException (PHP 7.2 vs Composer 8.1): 4 weeks old, still flat ~351/h, needs direct dev action.
 - RDS pending patch on speedventory. Schedule a window so RDS can go back to OK.
