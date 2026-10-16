@@ -7,11 +7,6 @@ module.exports = function session07() {
 Mở đầu: hỏi lại "ai thực sự gọi tool?" (Session 6) → application. Vậy application phải kiểm soát gì?
 Mục tiêu: người học chỉ ra được điểm thực thi quyền và cách kiểm soát side effect.
 Lưu ý: OWASP LLM Top 10 và security tổng thể học ở Giai đoạn 5 — buổi này chỉ tập trung lớp thực thi tool.`);
-  recap('Session 6: agent loop và tool contract', [
-    'Model viết tool call dưới dạng JSON; application mới là bên chạy hàm thật',
-    'Tool contract 6 phần; write tool có side effect phải khai báo rõ',
-    'Run kết thúc chưa chắc task đã xong — phải có bằng chứng (ticket ID)',
-  ], `2-3 phút + chia sẻ bài tự thực hành Session 6 (contract + sequence diagram).`);
   agenda([['Quyền', 'session · validate bằng code · guardrail ≠ authorization'], ['Lỗi', 'timeout · idempotency · bảng xử lý lỗi'],
     ['Approval & dữ liệu ngoài', 'người duyệt · tool output không đáng tin']], `Ba phần ~13 phút + Q&A. Demo chạy thật kịch bản 3, 6, 8.`);
 

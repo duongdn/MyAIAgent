@@ -45,3 +45,7 @@ Dump notes từ deck live (scratchpad/notes.js), đối chiếu 23 slide.
 
 ## Vòng 10 — 2026-10-16 · nối slide 15 với số đo
 - Notes slide 15 dòng "CẦN THÌ tạo ticket" trỏ về số đo slide 13 (1.893 vs 5.246); dòng "LUÔN tạo" trỏ slide 10. Deck live đã có.
+
+## Vòng 11 — 2026-10-16 · bỏ recap (user yêu cầu)
+- Xoá slide "Nhắc lại GĐ2" ở S5 và slide recap đầu S6–S9 (S5 22, S6 16, S7 16, S8 16, S9 15 slide).
+- Slide "Nhắc lại Session 1" của S5 giữ nội dung (khái niệm agent = code bao quanh LLM), đổi kicker thành "Agent là gì", notes bỏ tham chiếu Session 1.

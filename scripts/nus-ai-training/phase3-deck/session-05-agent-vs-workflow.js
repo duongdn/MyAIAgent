@@ -35,15 +35,10 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
     `Session 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
 Mục tiêu: người học chọn đúng mức điều phối và đọc được sơ đồ agent tối thiểu.
 Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào search — bạn hay ChatGPT?" → đó là agent.`);
-  recap('Giai đoạn 2: model trả lời từ dữ liệu riêng của công ty', [
-    'Embedding + vector search tìm tài liệu theo nghĩa, không chỉ theo từ khoá',
-    'RAG: lấy tài liệu liên quan rồi đưa vào prompt — câu trả lời có nguồn',
-    'RAG trả lời được câu hỏi — nhưng không hành động được (không tạo ticket)',
-  ], `2-3 phút nhắc Giai đoạn 2 (Session 3-4). Nối sang hôm nay: RAG trả lời được câu hỏi, nhưng không TẠO ticket được. Khi cần hành động và nhiều bước → agent.`);
   agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'ví dụ support + 3 câu hỏi quyết định'],
     ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
-  s = newSlide('Nhắc lại Session 1', 'LLM chỉ đọc và viết text — agent là phần code bao quanh nó', `Nối với Session 1 (AI, LLM Fundamentals): "Text in → text out. Agent = LLM + Tools + Context + Your code".
+  s = newSlide('Agent là gì', 'LLM chỉ đọc và viết text — agent là phần code bao quanh nó', `Agent = LLM + Tools + Context + Code của mình.
 Model không tự gọi API. Nó viết ra một đoạn text có cấu trúc kiểu "tôi cần gọi search_kb với query=...". Code của application đọc đoạn đó, chạy hàm thật, đưa kết quả lại cho model.
 Toàn bộ Giai đoạn 3 là học cách viết phần code bao quanh đó cho đúng.
 Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model chỉ viết text?" → vì application THỰC THI text đó. Session 7 sẽ trả lời kỹ.`);
@@ -58,7 +53,6 @@ Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model ch
       label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
     });
 
-  // nối với slide kết luận Session 1 (ChienTX): Agent = LLM + Tools + Context + Your code
   [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code của mình', C.LIGHT, 100]]
     .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
 

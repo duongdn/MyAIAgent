@@ -6,12 +6,6 @@ module.exports = function session09() {
     `Session 9 — 60 phút: mở đầu 5' · nội dung 40-45' · Q&A 10-15'. Buổi cuối Giai đoạn 3.
 Mục tiêu: người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.
 Warm-up: "Bạn review PR của đồng nghiệp làm agent. Bạn sẽ hỏi 3 câu gì?" — ghi lên bảng, cuối buổi so lại.`);
-  recap('Session 8: agent nhớ gì và khi nào dừng', [
-    'Task state lưu bền: PROCESSING · AWAITING_APPROVAL · COMPLETED · ESCALATED',
-    'Hoàn thành chỉ khi hệ thống đích trả ID — không tin câu "đã xong" của model',
-    '5 lý do dừng, 3 giới hạn: max_turns · thời gian · số tool call',
-  ], `2-3 phút. Hỏi nhanh: "Server restart khi đang chờ duyệt thì sao?" → state trong DB, --resume.
-Nối sang hôm nay: ta đã có đủ mảnh rời (tools, quyền, retry, state, giới hạn). Hôm nay ghép lại thành harness và học cách nhìn bên trong bằng trace.`);
   agenda([['Harness', '6 lớp bao quanh agent loop'], ['Trace', 'xem agent đã làm gì — và giới hạn của nó'],
     ['Agent hoàn chỉnh', 'kiến trúc 1 trang · failure case · test']], `Ba phần, ~13 phút mỗi phần. Phần 3 kết thúc Giai đoạn 3.`);
 

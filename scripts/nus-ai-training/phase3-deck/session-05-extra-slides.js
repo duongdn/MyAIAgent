@@ -55,7 +55,7 @@ Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25
 
 // Vì sao agent tốn token: mỗi lượt gửi lại toàn bộ hội thoại
 function tokenGrowth() {
-  const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Nhắc Session 1: model không nhớ gì giữa các lần gọi. Muốn model "biết" kết quả search_kb, application phải gửi lại câu hỏi + tool call + kết quả ở lượt sau.
+  const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Model không nhớ gì giữa các lần gọi. Muốn model "biết" kết quả search_kb, application phải gửi lại câu hỏi + tool call + kết quả ở lượt sau.
 Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 828 (thêm kết quả search_kb), lượt 3 = 1.109 (thêm kết quả create_ticket). Tổng input 2.511 dù câu hỏi chỉ ~60 token.
 Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
   [[574, 81, 'Lượt 1', 'câu hỏi + mô tả tool'], [828, 252, 'Lượt 2', '+ kết quả search_kb'], [1109, 156, 'Lượt 3', '+ kết quả create_ticket']].forEach(([inp, out, t, d], i) => {

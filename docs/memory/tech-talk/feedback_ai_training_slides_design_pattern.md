@@ -30,3 +30,5 @@ See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics use
 - Chuẩn = deck Session 1 của ChienTX (Matrix room "AI Training", Session_01_AI-LLM-Fundamentals.pdf): ~20 slide/buổi, nhịp CÂU HỎI→ĐÁP ÁN, mỗi khái niệm có hình + số cụ thể, Key takeaways + Challenge 0X.
 - Tránh slide chỉ là bảng chữ; ưu tiên số đo THẬT (vd compare_orchestration_levels.py: agent ~3.840 token vs workflow ~1.480).
 - Làm từng session một, cho user xem kết quả sớm; không làm cả 5 session một lượt.
+
+- 🔴 2026-10-16: KHÔNG có slide "nhắc lại buổi trước" (recap) — user: "ko phải mình train, và tốn time". Khái niệm cần dùng thì trình bày như nội dung của buổi, không gắn nhãn "Nhắc lại Session X".

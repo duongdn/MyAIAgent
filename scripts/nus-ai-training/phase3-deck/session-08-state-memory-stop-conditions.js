@@ -6,12 +6,6 @@ module.exports = function session08() {
     `Session 8 — 60 phút: mở đầu 5' · nội dung 40-45' · Q&A 10-15'.
 Mục tiêu: người học phác thảo được state và tiêu chí dừng của một agent.
 Warm-up: "Bạn duyệt một yêu cầu trên Jira sau 2 tiếng — hệ thống có quên yêu cầu đó không? Vì sao không?" → vì nó lưu trạng thái trong DB, không phải trong RAM.`);
-  recap('Session 7: application kiểm soát trước, trong và sau tool call', [
-    'Quyền kiểm tra bằng code, lấy user/tenant từ session — guardrail SDK không phải authorization',
-    'Timeout = "không biết" → retry có giới hạn + idempotency key, nếu không sẽ tạo ticket trùng',
-    'Người duyệt sau khi code đã lọc; lỗi trả cho model dưới dạng dữ liệu rõ ràng',
-  ], `2-3 phút. Hỏi nhanh: "Idempotency key do ai sinh?" → application.
-Nối sang hôm nay: ở Session 7, khi chờ duyệt ta hỏi y/n ngay trong terminal. Ngoài đời người duyệt có thể trả lời sau 2 tiếng — agent phải nhớ đang ở đâu.`);
   agenda([['4 loại thông tin', 'context · lịch sử · task state · memory'], ['Task state', 'lưu bền, chờ duyệt, tiếp tục sau restart'],
     ['Điều kiện dừng', '5 trường hợp + 3 giới hạn']], `Ba phần, ~13 phút mỗi phần. Demo chạy thật ở phần 2 (--approve later → --resume) và phần 3 (kịch bản 7, budget).`);
 

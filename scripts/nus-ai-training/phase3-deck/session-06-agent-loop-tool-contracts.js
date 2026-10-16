@@ -6,11 +6,6 @@ module.exports = function session06() {
     `Session 6 — 60 phút: mở đầu 5' · nội dung 40-45' · Q&A 10-15'.
 Mở đầu: 2-3 người chia sẻ bài tự thực hành Session 5 (chọn mức điều phối cho use case của họ).
 Mục tiêu: người học giải thích được agent loop và thiết kế được tool contract tối thiểu.`);
-  recap('Session 5: agent = model chọn bước tiếp theo', [
-    'Chọn mức thấp nhất làm được việc: model call → workflow → agent',
-    'Agent tối thiểu trong SDK: Agent · function_tool · Runner.run · trace',
-    'SDK chạy loop; dữ liệu, quyền, approval, state là của application',
-  ], `2-3 phút + 2-3 người chia sẻ bài tự thực hành Session 5.`);
   agenda([['Agent loop', 'model đề xuất · app thực thi · đọc trace thật'], ['Tool contract', '6 phần · description · read vs write'],
     ['Xong thật chưa?', 'run kết thúc ≠ task hoàn thành']], `Ba phần ~13 phút + Q&A.`);
 
