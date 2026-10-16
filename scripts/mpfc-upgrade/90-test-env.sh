@@ -1,7 +1,9 @@
 #!/bin/bash
 # 90 — TEST SERVER ONLY. Refresh the test DB (wp_mpfc_upgrade) from the live READ REPLICA and make it safe:
 # payments in test/sandbox mode, Rollbar off, mail blocked (mu-plugin), test users recreated.
-# Usage: TEST_PW_MEMBER=.. TEST_PW_TEAM=.. TEST_PW_MANAGER=.. TEST_PW_ADMIN=.. bash 90-test-env.sh [--skip-copy]
+# Usage: bash 90-test-env.sh --copy-only        # 1) fresh pre-upgrade DB copy (no WP load => no plugin migrations)
+#        (run 03-migrate-db.sh here)
+#        TEST_PW_MEMBER=.. TEST_PW_TEAM=.. TEST_PW_MANAGER=.. TEST_PW_ADMIN=.. bash 90-test-env.sh --skip-copy   # 2) safety + users
 #   (passwords: jq .test_users config/.mpfc-upgrade-test-config.json on the operator machine)
 source "$(dirname "$0")/lib.sh"
 DB=$(wpconf DB_NAME); [ "$DB" = "wp_mpfc_upgrade" ] || die "refusing: DB_NAME=$DB (must be wp_mpfc_upgrade)"
@@ -20,12 +22,14 @@ if [ "${1:-}" != "--skip-copy" ]; then
     mysql -h"${h%:*}" -P"${h##*:}" -u"$U" --init-command="SET SESSION sql_require_primary_key=0" wp_mpfc_upgrade
   log "90: copy done: $(dbq -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='wp_mpfc_upgrade'") tables"
 fi
-
-log "90: URLs -> test domain, Rollbar off, payments neutralised"
-wpc plugin deactivate rollbar | tail -1
-wpc eval '$o=get_option("rollbar_wp"); if(is_array($o)){$o["enabled"]=false; update_option("rollbar_wp",$o);} echo "rollbar off\n";' | tail -1
+# Safety first, with --skip-plugins: writes options only, loads no plugin => no plugin migrations run here.
+log "90: Rollbar off, payments neutralised (no plugin load)"
+wps() { sudo -u www-data wp --path="$SITE" --skip-themes --skip-plugins "$@" 2>&1 | grep -v "HTTP_HOST\|Deprecated" || true; }
+wps plugin deactivate rollbar | tail -1
+wps option patch update rollbar_wp enabled 0 | tail -1
 cp "$HERE/test-neutralize-payments.php" /tmp/neutralize-payments.php && chmod 644 /tmp/neutralize-payments.php
-wpc eval-file /tmp/neutralize-payments.php
+wps eval-file /tmp/neutralize-payments.php
+[ "${1:-}" = "--copy-only" ] && { log "90: copy-only done (now run 03-migrate-db.sh, then 90 --skip-copy)"; exit 0; }
 
 log "90: test users (MPFC Demo level 9, team key NUS-UPGRADE-TEST)"
 mkuser() { # login email role password
