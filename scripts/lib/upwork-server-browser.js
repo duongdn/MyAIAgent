@@ -46,6 +46,7 @@ async function passCloudflareTurnstile(page, tries = 3) {
     await sleep(10000);
     if (!(await isChallenge(page))) return true;
   }
+  await page.screenshot({ path: path.join(__dirname, '..', '..', 'tmp', 'turnstile-fail.png') }).catch(() => {});
   return false;
 }
 
