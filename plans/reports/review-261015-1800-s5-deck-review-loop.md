@@ -42,3 +42,6 @@ Dump notes từ deck live (scratchpad/notes.js), đối chiếu 23 slide.
 - Notes slide 21 (Ghi nhớ) chỉ nêu 2,6× trong khi thẻ có cả 2 trường hợp → bổ sung trường hợp ~2,8× (5.246 vs 1.893), "không mức nào luôn rẻ hơn".
 - Notes slide 22, đáp án câu 01 chỉ có trường hợp agent tốn hơn → thêm trường hợp ngược lại, trỏ slide 13.
 - Các notes còn lại khớp số trên slide (1.397/1.482/3.841, 574/828/1.109, 2.759–9.900, ~7s).
+
+## Vòng 10 — 2026-10-16 · nối slide 15 với số đo
+- Notes slide 15 dòng "CẦN THÌ tạo ticket" trỏ về số đo slide 13 (1.893 vs 5.246); dòng "LUÔN tạo" trỏ slide 10. Deck live đã có.

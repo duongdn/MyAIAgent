@@ -89,7 +89,7 @@ Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → applicat
   s = newSlide('Đáp án', 'Chọn mức thấp nhất làm được việc', `Giải thích từng dòng:
 1. Tra cứu 1 lần là đủ → RAG, không cần agent.
 2. Các bước luôn giống nhau → workflow; agent chỉ thêm chi phí và rủi ro.
-3. "CẦN THÌ tạo": có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra → agent có giá trị. Nếu user nói "LUÔN tạo ticket" thì bước biết trước → workflow (đúng như slide đo: workflow làm đủ với ~1.480 token).
+3. "CẦN THÌ tạo": có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra → agent có giá trị (chính là yêu cầu đã đo ở slide 13: agent 1.893 token, workflow 5.246). Nếu user nói "LUÔN tạo ticket" thì bước biết trước → workflow (slide 10: workflow làm đủ với ~1.480 token).
 4. Hoàn tiền là hành động tiền bạc, không đảo ngược được → workflow cố định + người duyệt, KHÔNG để model tự quyết.
 Rule: khi không chắc → chọn mức thấp hơn; nâng mức sau khi đã có test case.`);
   table(s, 25, 85, [250, 120, 300], [
