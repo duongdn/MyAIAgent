@@ -285,6 +285,13 @@ Neural Contract: the local run also hit a login redirect on all 4 attempts. The 
 
 ---
 
+## Recheck 08:58 — 4 Trello items still open
+
+- **Ohcleo ○**: Tony replied to the 02:47 free-listen question at 08:43 with just "No, I don't" (short, no investigation). Celine's app ETA asks (17:31, 17:45) are still unanswered.
+- **Bailey ○**: Joey 15:27 in the issue-3 thread (#presta-9-update) is still unanswered (checked via conversations.replies). TuanNT 10-15 = 8h (Speedventory 4.5 + Andrew Taraba 3.5), so the #6 part is resolved.
+- **James Diamond ○**: LeNH 10-15 is still 0h on Workstream at 08:58 (Mon–Wed 8h each). Recheck again after 09:30 before any reminder.
+- **Maddy ○**: no new messages since 17:01. The concealed-offshore offer is still waiting on DuongDN's decision. Maddy Workstream has 0 rows this week (LongVV logs LIFM under OhCleo/DG?), and LIFM2-470 has no estimate.
+
 ## Unresolved Questions
 - LeNH / TuanNT 10-15 0h: real gap or logging lag? Re-check Workstream after 09:30 before any reminder.
 - Madhuraka's concealed-offshore new project (commit as him, AU VPN): accept, refuse, or set terms? Kai already said yes.
