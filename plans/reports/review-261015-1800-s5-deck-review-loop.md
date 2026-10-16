@@ -30,3 +30,8 @@ Render lại toàn bộ 23 slide (scratchpad bị xoá → viết lại thumbs.j
 - Fix: thẻ "Chi phí" ở Ghi nhớ tràn 2 dòng → rút gọn 1 dòng ("workflow rẻ ~2,6× · agent rẻ ~2,8×"), đồng nhất với 4 thẻ còn lại.
 - Fix: định dạng số không thống nhất trên slide 10/13 ("1313 tok", "6.1s" vs "2.759", "2,6×") → "1.313 token", "6,1s".
 - Fix: sau đổi nhãn, "3.841 token" đè chip "tạo ticket" → thu thang thanh 330→280. Render kiểm tra OK.
+
+## Vòng 8 — 2026-10-16 · số trong slide 11 + notes
+- Slide 11: "1109 vào", "Tổng: 2511" → "1.109", "2.511" (cùng chuẩn vòng 7). Notes slide 11/13 cũng đổi theo.
+- Giữ nguyên "0.0s/1.6s" trong khối trace: đó là log thật in ra từ code, không định dạng lại.
+- Render slide 11 OK.
