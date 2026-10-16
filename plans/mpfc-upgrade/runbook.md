@@ -37,3 +37,10 @@ Truy cập live từ server mới: key `/root/.ssh/mpfc_live_ed25519`, thêm và
 - CustomLog pipe mysql (password plaintext trong vhost) — giữ hay bỏ ở server mới?
 - 3 app phụ (MyDailyAgent, quantification, MyBussinessAiAgent) chuyển theo không?
 - Giờ cutover + ai báo khách.
+
+## Diễn tập 2026-10-16 (kết quả)
+- 02 --test: rsync live → WP 7.1.3 → 57 plugin wp.org + MM 3.1.1 custom + Elementor Pro 4.3.2 + patch: **khớp 100% target-plugin-versions.csv** (~8 phút).
+- 90 --copy-only: DB mới từ replica 22 phút (285 bảng), live không ảnh hưởng (live / 200 ~0.9s).
+- 03: schema cuối = lần nâng cấp tay 15/10, chỉ thiếu `wp_fv_player_encoding_jobs` (FV Player tạo lười khi mở trang admin encoding — không cần).
+- Smoke: guest 25 / member 27 / team 34 / manager 57 trang, 0 lỗi PHP; API app 20 endpoint chính OK (login, likeVideo, favorites, coach_corner, DBM, setPassword…).
+- Lỗi script phát hiện + đã sửa: (1) rsync live cần `sudo rsync` + bỏ debug.log; (2) mu-plugin chưa vá làm wp-cli fatal → áp patch site trước mọi lệnh wp; (3) 02 phải `--skip-plugins` (load plugin = migration sớm); (4) 03 đọc version phải `--skip-plugins`; (5) **rewrite rules mất CPT của theme (/user-video/ 404) khi chạy `--skip-themes` → 03 flush rewrite có load theme**; (6) 90 tắt payment/Rollbar bằng wp `--skip-plugins` (không REPLACE SQL trên dữ liệu serialize).
