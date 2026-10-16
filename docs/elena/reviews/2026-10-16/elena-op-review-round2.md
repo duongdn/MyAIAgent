@@ -12,7 +12,7 @@ So sánh với lần review 13/10 (`docs/elena/reviews/2026-10-13/elena-op-revie
 | Tên hàm FE ≠ BE (mới) | – | 🔴 **Lỗi mới do #362**: BE đổi `AVERAGE/MINIMUM/MAXIMUM` → `AVG/MIN/MAX`, FE vẫn gửi tên cũ |
 | Unique index tên model (🔴) | Bị comment-out | ❌ **Vẫn comment-out** |
 | Chỉ người tạo được sửa model (trái lời khách) | Còn | ✅ **Đã bỏ** (`bb87e3af14`) |
-| `assert` làm validate | 23+2 | ⚪ **Rút lại, không tính là lỗi**: đây là pattern chung của code khách (732 `assert` trong code develop của Precognize), mọi Dockerfile (cả `microservices-optimization`) chạy `java -ea`. Team đã nêu trong release note là giữ lại, sẽ xử lý sau |
+| `assert` làm validate | 23+2 | ⚪ **Rút lại, không tính là lỗi**: đây là pattern chung của code khách (732 `assert` trong code develop của Precognize), mọi Dockerfile (cả `microservices-optimization`) chạy `java -ea`. Release note M1 (14/10) không nhắc tới assert |
 | Lưu đè cả document, không lock / log `getMessage()` | Còn | ❌ Vẫn còn (`DaeOptimizationModelControl.java:240,245`) |
 | Merge khi reviewer còn "Request changes" | 3 PR | 🟡 Không còn PR nào merge khi đang Request changes, nhưng vẫn **chưa PR nào được Approve** |
 | `OptimizationTagType` hardcode loại đo (FE) | Chưa | ❌ Vẫn chưa (`optimization-model-item.component.ts:19`) |
@@ -67,7 +67,7 @@ https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/362
 
 **Điểm tốt:** chuyển sang OR đúng lời khách. Sửa lỗi toán tử IN và thêm NOT IN trong engine. Gộp các khoảng chồng/chạm nhau. Không có secret hay hardcode env.
 
-> **Đính chính về `assert`** (so với review 09/10 và 13/10): rủi ro "JVM không bật `-ea` thì bỏ qua validate" **không xảy ra**, vì Dockerfile của mọi service, kể cả optimization, đều chạy `java -ea`. Validate bằng `assert` là cách code gốc của khách đang làm (732 chỗ), và team đã ghi trong release note gửi khách là giữ lại để tiện develop. Từ lần này em không tính là lỗi nữa.
+> **Đính chính về `assert`** (so với review 09/10 và 13/10): rủi ro "JVM không bật `-ea` thì bỏ qua validate" **không xảy ra**, vì Dockerfile của mọi service, kể cả optimization, đều chạy `java -ea`. Validate bằng `assert` là cách code gốc của khách đang làm (732 chỗ). Release note M1 gửi khách (Slack #optimization, 14/10) **không** liệt kê assert trong Known Issues (4 mục: tham số trend/data check cố định, usage meter hardcode, upload license chưa cập nhật credit, tooltip chưa hiện unit). Theo chỉ đạo DuongDN, không tính là lỗi nữa.
 
 ## 2. Các việc BE tồn từ lần trước (branch `feature/optimization-be-m1`, PR #353)
 

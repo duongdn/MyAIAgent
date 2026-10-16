@@ -57,7 +57,7 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 <tr>
 <td><code>assert</code> làm validate</td>
 <td>23+2</td>
-<td>⚪ <strong>Rút lại, không tính là lỗi</strong>: đây là pattern chung của code khách (732 <code>assert</code> trong code develop của Precognize), mọi Dockerfile (cả <code>microservices-optimization</code>) chạy <code>java -ea</code>. Team đã nêu trong release note là giữ lại, sẽ xử lý sau</td>
+<td>⚪ <strong>Rút lại, không tính là lỗi</strong>: đây là pattern chung của code khách (732 <code>assert</code> trong code develop của Precognize), mọi Dockerfile (cả <code>microservices-optimization</code>) chạy <code>java -ea</code>. Release note M1 (14/10) không nhắc tới assert</td>
 </tr>
 <tr>
 <td>Lưu đè cả document, không lock / log <code>getMessage()</code></td>
@@ -126,7 +126,7 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 </ul>
 <p><strong>Điểm tốt:</strong> chuyển sang OR đúng lời khách. Sửa lỗi toán tử IN và thêm NOT IN trong engine. Gộp các khoảng chồng/chạm nhau. Không có secret hay hardcode env.</p>
 <blockquote>
-<p><strong>Đính chính về <code>assert</code></strong> (so với review 09/10 và 13/10): rủi ro "JVM không bật <code>-ea</code> thì bỏ qua validate" <strong>không xảy ra</strong>, vì Dockerfile của mọi service, kể cả optimization, đều chạy <code>java -ea</code>. Validate bằng <code>assert</code> là cách code gốc của khách đang làm (732 chỗ), và team đã ghi trong release note gửi khách là giữ lại để tiện develop. Từ lần này em không tính là lỗi nữa.</p>
+<p><strong>Đính chính về <code>assert</code></strong> (so với review 09/10 và 13/10): rủi ro "JVM không bật <code>-ea</code> thì bỏ qua validate" <strong>không xảy ra</strong>, vì Dockerfile của mọi service, kể cả optimization, đều chạy <code>java -ea</code>. Validate bằng <code>assert</code> là cách code gốc của khách đang làm (732 chỗ). Release note M1 gửi khách (Slack #optimization, 14/10) <strong>không</strong> liệt kê assert trong Known Issues (4 mục: tham số trend/data check cố định, usage meter hardcode, upload license chưa cập nhật credit, tooltip chưa hiện unit). Theo chỉ đạo DuongDN, không tính là lỗi nữa.</p>
 </blockquote>
 <h2>2. Các việc BE tồn từ lần trước (branch <code>feature/optimization-be-m1</code>, PR #353)</h2>
 <p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/353 — Brian, 42 commit, 154 file. <strong>Chưa có review nào.</strong></p>
