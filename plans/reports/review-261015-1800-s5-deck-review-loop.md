@@ -22,3 +22,11 @@ Deck: https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPM
 - Kết quả thật: model call 1.313 tok · workflow 5.246 tok/25,6s · agent 1.893 tok/8,1s; cả 3 đúng không tạo ticket
 - Nguyên nhân đo riêng: bước "phân loại" của workflow quyết định trước khi tra KB → 2.759–9.900 token suy luận ẩn cho 1 dòng JSON
 - Thêm cặp CÂU HỎI→ĐÁP ÁN "Có khi nào agent rẻ hơn workflow?"; Ghi nhớ cập nhật cả 2 trường hợp. S5 = 23 slide
+
+## Vòng 7 — 2026-10-16 · mạch trình bày + đồng nhất
+Render lại toàn bộ 23 slide (scratchpad bị xoá → viết lại thumbs.js).
+- Mạch: title → lộ trình → nhắc GĐ2/S1 → 3 mức → đo (Q/A ×2) → chọn mức (Q/A + cây) → SDK → trace → ranh giới → ghi nhớ → thử thách. Không có slide trùng ý cần gộp; slide 15 (ví dụ) + 16 (quy tắc) bổ trợ nhau.
+- Timing: 6 slide tối (title/header/4 câu hỏi/closing) ~10s–1' mỗi cái → ~15 slide nội dung cho 25–30' ≈ 2'/slide, ngang deck ChienTX (21 slide/45'). Giữ 23.
+- Fix: thẻ "Chi phí" ở Ghi nhớ tràn 2 dòng → rút gọn 1 dòng ("workflow rẻ ~2,6× · agent rẻ ~2,8×"), đồng nhất với 4 thẻ còn lại.
+- Fix: định dạng số không thống nhất trên slide 10/13 ("1313 tok", "6.1s" vs "2.759", "2,6×") → "1.313 token", "6,1s".
+- Fix: sau đổi nhãn, "3.841 token" đè chip "tạo ticket" → thu thang thanh 330→280. Render kiểm tra OK.

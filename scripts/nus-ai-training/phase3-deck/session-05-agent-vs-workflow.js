@@ -159,7 +159,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   takeaways([
     ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
     ['Chọn mức', 'Mức thấp nhất làm được việc — agent khi số bước phụ thuộc kết quả'],
-    ['Chi phí', 'Bước biết trước: workflow rẻ hơn ~2,6×. Bước phụ thuộc kết quả tra: agent rẻ hơn (1.893 vs 5.246 token)'],
+    ['Chi phí', 'Bước biết trước: workflow rẻ ~2,6× · Bước phụ thuộc kết quả: agent rẻ ~2,8×'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:

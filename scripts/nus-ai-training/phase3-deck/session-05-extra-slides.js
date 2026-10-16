@@ -45,9 +45,9 @@ Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25
   const max = Math.max(...data.rows.map((r) => r.tokens));
   data.rows.forEach((r, i) => {
     const y = 100 + i * 62;
-    label(s, 40, y, 150, 40, `${r.level}\n${r.calls} lượt gọi · ${r.secs}s`, { size: 13, sub: 10, align: 'START' });
-    box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 330), 26, ' ', { fill: i === 2 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
-    mono(s, 210 + (r.tokens / max) * 330, y + 10, 90, 22, `${Math.round(r.tokens)} tok`, { color: C.INK, size: 11 });
+    label(s, 40, y, 150, 40, `${r.level}\n${String(r.calls).replace(".", ",")} lượt gọi · ${String(r.secs).replace(".", ",")}s`, { size: 13, sub: 10, align: 'START' });
+    box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 280), 26, ' ', { fill: i === 2 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
+    mono(s, 210 + (r.tokens / max) * 280, y + 10, 90, 22, `${Math.round(r.tokens).toLocaleString("de-DE")} token`, { color: C.INK, size: 11 });
     box(s, 610, y + 6, 70, 30, r.tickets ? 'tạo ticket ✓' : 'không tạo', { fill: r.tickets ? C.GREEN : C.MUTED, size: 9.5 });
   });
   box(s, 40, 300, 640, 50, 'Yêu cầu này có các bước biết trước → workflow đủ việc với ít token hơn. Agent đáng tiền khi số bước không biết trước.', { fill: C.INK, size: 12.5, align: 'START' });
@@ -100,9 +100,9 @@ Công bằng mà nói: workflow sửa được bằng cách đổi thứ tự (t
   const max = Math.max(...cond.rows.map((r) => r.tokens));
   cond.rows.forEach((r, i) => {
     const y = 96 + i * 58;
-    label(s, 40, y, 150, 40, `${r.level}\n${r.calls} lượt gọi · ${r.secs}s`, { size: 13, sub: 10, align: 'START' });
+    label(s, 40, y, 150, 40, `${r.level}\n${String(r.calls).replace(".", ",")} lượt gọi · ${String(r.secs).replace(".", ",")}s`, { size: 13, sub: 10, align: 'START' });
     box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 360), 24, ' ', { fill: i === 1 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
-    mono(s, 210 + (r.tokens / max) * 360, y + 9, 90, 22, `${Math.round(r.tokens)} tok`, { color: C.INK, size: 11 });
+    mono(s, 210 + (r.tokens / max) * 360, y + 9, 90, 22, `${Math.round(r.tokens).toLocaleString("de-DE")} token`, { color: C.INK, size: 11 });
   });
   code(s, 40, 272, 330, 74, `Bước "phân loại" của workflow (chưa tra KB):
 → {"need_ticket": false}
