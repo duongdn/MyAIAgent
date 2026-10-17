@@ -3,9 +3,9 @@
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
     "week_start": "2026-10-12",
-    "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 32h/32h\nLeNH: 32h/32h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
+    "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
     "confirmed": false,
-    "draft_note": "2026-10-16 18:0x +07 cron — PROVISIONAL: live WS /review/week week 2026-10-12: LeNH 32h Mon-Thu (Fri 10-16 not logged yet at 18:00, no leave on record -> likely 40h/40h once logged), AnhNH2 20h (4x5). Marcel DuongDN 0.5h (Mon). Blair Brown project closed, 0 members. Re-fetch before confirming.",
+    "draft_note": "2026-10-17 07:15 +07 manual refresh: live WS week 2026-10-12 LeNH 40h (8x5, Fri now logged), AnhNH2 20h (4x5), charged=actual. Marcel DuongDN 0.5h unchanged. Awaiting user confirmation.",
     "unresolved_thangn": "ThangN absent from James Diamond Workstream member list 2 weeks running (09-21 week and 09-28 week) after one active week (14h, 09-17). Ask user before finalizing: still on the project (just not logging) or rolled off? If rolled off, should his Mobile line be removed from future reports going forward, not just this draft?",
     "superseded_week_09_21": {
       "week_start": "2026-09-21",

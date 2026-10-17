@@ -118,3 +118,10 @@ LeNH has no leave on record. If he logs 8h on Fri, the draft becomes `Web: 40h/4
 4. Finalization rule is per project, and multi-project devs make most projects fail it. Rerun `--submit` on Sat/Mon after Fri logs land?
 5. TuanNT's 10-12 approved leave is missing from WS leaveEntries, which blocks Speedventory and Andrew Taraba.
 6. Fountain Est vs Charged is still mostly frozen and 16 rows are untriaged. Ask the PM to update it.
+
+---
+
+## Refresh — 2026-10-17 07:15 (+07) manual run
+
+- **JD Matrix draft updated:** LeNH Fri logged, so the totals are now LeNH 40h/40h and AnhNH2 20h/20h (Web 40h/40h). Still `confirmed: false`, **NOT SENT**.
+- **Finalization dry-run** (`--week=2026-10-12`, no submit): 9 finalized (+James Diamond, by DuongDN 10-16 14:35Z). Fri logs closed these gaps since 18:00: ViTHT and PhucVT (Definitive Guide). Still 🔴: BXR, Crystal lang (PhucVT missing 10-14, 4 rows Pending), Definitive Guide (LongVV 15–16, TuanNT 0/5), Fountain (DatNT 15–16, ThinhT 16), OhCleo (6 Pending), Andrew Taraba (TuanNT 12 leave, 13, 16), Samguard, Speedventory, Maddy. ETZ - Wathaga is now eligible (0 logs), but DuongDN isn't Manager.
