@@ -15,14 +15,15 @@ Mục tiêu: người học giải thích được agent loop và thiết kế �
 3. Application thực thi tool call (đây là chỗ kiểm quyền, Session 7).
 4. Tool result quay lại model dưới dạng text.
 5. Model tiếp tục (gọi tool khác) hoặc dừng (trả lời cuối).
-Mũi tên navy = yêu cầu đi; mũi tên cam = kết quả quay về. Vòng lặp chạy tới khi model trả lời cuối hoặc chạm giới hạn (Session 8).`);
+Mũi tên navy = yêu cầu đi; mũi tên cam = kết quả quay về. Vòng lặp chạy tới khi model trả lời cuối hoặc chạm giới hạn (Session 8).
+Đơn giản hoá: sơ đồ vẽ 1 tool call mỗi lượt cho dễ nhìn. Thực tế model có thể viết NHIỀU tool call trong CÙNG một lượt (ví dụ 2 lần search_kb với 2 câu query khác nhau) — ứng dụng chạy lần lượt, không phải 1-đổi-1 với số lượt. Chi tiết + trace thật ở Session 8.`);
   const steps = [['Goal', 'yêu cầu user', C.LIGHT], ['Model', 'chọn hành động', C.LIGHT], ['Application', 'thực thi tool', C.NAVY], ['Tool', 'search_kb · create_ticket', C.GREEN]];
   steps.forEach(([t, d, f], i) => {
     box(s, 30 + i * 172, 110, 140, 70, `${t}\n${d}`, { fill: f, size: 16, sub: 11 });
     if (i) twoWay(s, 30 + i * 172 - 32, 30 + i * 172, 145);
   });
   label(s, 30, 190, 660, 24, 'navy → yêu cầu / tool call      cam ← kết quả quay về', { size: 10, bold: false, color: C.GREY });
-  box(s, 30, 230, 320, 110, 'Tiếp tục\nmodel đọc kết quả, gọi tool tiếp', { fill: C.YELLOW, size: 16, sub: 12 });
+  box(s, 30, 230, 320, 110, 'Tiếp tục\nmodel đọc kết quả, gọi tool tiếp (có thể gọi NHIỀU tool/lượt)', { fill: C.YELLOW, size: 15, sub: 11 });
   box(s, 370, 230, 320, 110, 'Dừng\nmodel viết câu trả lời cuối — hoặc chạm giới hạn', { fill: C.GREEN, size: 16, sub: 12 });
 
   question('Model chỉ viết text. Vậy ai thật sự gọi tool?', 'Nhớ lại Session 1: text vào → text ra.',
@@ -62,7 +63,7 @@ Không cần nhớ API; cần biết mỗi khái niệm của sơ đồ nằm �
     ['Sơ đồ agent loop', 'OpenAI Agents SDK'],
     ['Goal', 'Runner.run(agent, input, context=session)'],
     ['Model chọn hành động', '1 turn = 1 lượt gọi model'],
-    ['Application thực thi', 'SDK gọi hàm @function_tool (sau needs_approval)'],
+    ['Application thực thi', 'SDK gọi hàm @function_tool (qua needs_approval trước — CHỈ tool có khai báo, vd create_ticket)'],
     ['Kết quả quay lại', 'SDK thêm tool output vào hội thoại, gọi model tiếp'],
     ['Dừng', 'result.final_output — hoặc MaxTurnsExceeded khi vượt max_turns'],
   ], { rowH: 40 });

@@ -89,18 +89,19 @@ Ticket trong hệ thống đích: [('T-1001', 'P3', 'billing-team-a')]`, 11);
     return sha256(raw)[:12]   # ticket_system.py`, 10);
   box(s, 450, 215, 240, 125, 'Key do application sinh\nmodel không biết, không điền được. Cùng task + cùng nội dung → cùng key → cùng ticket.', { fill: C.GREEN, size: 14, sub: 11 });
 
-  s = newSlide('Bảng xử lý lỗi', 'Mỗi loại lỗi một cách xử lý — không retry tất cả', `Đi từng dòng; cột cuối là cách xem trong demo.
+  s = newSlide('Bảng xử lý lỗi', '6 tình huống của bài tự thực hành — không retry tất cả', `Đi từng dòng; cột cuối là cách xem trong demo. 6 dòng đầu đúng 6 mục bài tự thực hành cuối buổi; dòng 503 thêm để đủ bộ lỗi hệ thống.
 Nguyên tắc: retry chỉ khi lỗi có thể tự hết (timeout) VÀ an toàn để gọi lại (read tool, hoặc write có idempotency). Lỗi quyền / input sai retry bao nhiêu cũng vậy.
-Kết quả rỗng: không phải lỗi kỹ thuật nhưng nguy hiểm nhất — model dễ bịa. Phải nói rõ "không có tài liệu".`);
-  table(s, 25, 85, [140, 290, 240], [
+Kết quả rỗng: không phải lỗi kỹ thuật nhưng nguy hiểm nhất — model dễ bịa. Phải nói rõ "không có tài liệu". Trace đầy đủ của kịch bản 7 (2 lần search_kb, missing_data) nằm ở Session 8 — slide này chỉ nêu nguyên tắc xử lý.`);
+  table(s, 25, 85, [140, 280, 250], [
     ['Tình huống', 'Application xử lý', 'Xem trong demo'],
     ['Thiếu quyền', 'Chặn, không retry, trả lý do cho model', '--scenario 3'],
     ['Input sai', 'Trả lỗi cụ thể để model sửa tham số', 'kịch bản 1: model đề xuất P2 → ④ chặn'],
     ['Timeout', 'Retry ≤ 2 lần, cùng idempotency key', '--scenario 6'],
-    ['Lỗi hệ thống (503)', 'Không retry, dừng, chuyển người', '--fault down'],
-    ['Kết quả rỗng', 'Nói "không có tài liệu", không bịa', '--scenario 7'],
+    ['Kết quả rỗng', 'Nói "không có tài liệu", không bịa', '--scenario 7 (trace đủ: Session 8)'],
     ['Gọi lặp', 'Idempotency + giới hạn số tool call', '--disable idem · DEMO_MAX_TOOL_CALLS'],
-  ], { rowH: 37, size: 10 });
+    ['Yêu cầu phê duyệt', 'Dừng run, chờ người — không tự chạy tiếp', '⑤ needs_approval, xem slide Human approval'],
+    ['Lỗi hệ thống (503)', 'Không retry, dừng, chuyển người', '--fault down'],
+  ], { rowH: 32, size: 9.5 });
 
   s = newSlide('Lỗi là dữ liệu', 'Lỗi phải trả cho model rõ ràng, không im lặng', `Nếu tool ném exception và SDK chỉ trả "error" chung chung, model sẽ đoán — thường là nói "đã tạo xong".
 Demo trả JSON lỗi có hướng dẫn: không báo user là đã tạo; báo đã chuyển người xử lý. Đồng thời task state chuyển ESCALATED (Session 8).

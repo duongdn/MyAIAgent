@@ -14,13 +14,14 @@ Warm-up: "Bạn duyệt một yêu cầu trên Jira sau 2 tiếng — hệ thố
 - Lịch sử hội thoại: các lượt trước của cuộc chat. Tăng dần → phải cắt bớt/tóm tắt.
 - Task state: tiến độ của MỘT việc (đang chờ duyệt, ticket nào đã tạo). Phải lưu bền trong DB — đây là trọng tâm buổi.
 - Memory: thông tin dùng lại giữa các task (user thích trả lời ngắn). Chỉ lưu khi có lý do, có thời hạn, theo user_id.
-Model KHÔNG nhớ gì giữa các request (Session 1, câu hỏi thử thách 06).`);
+Model KHÔNG nhớ gì giữa các request (Session 1, câu hỏi thử thách 06).
+Lưu ý dòng Memory: demo KHÔNG triển khai memory dài hạn (xem slide Memory cuối buổi) — cột ví dụ là minh hoạ GIẢ ĐỊNH, không có trong code, để khỏi hiểu nhầm khi đọc task_state.py.`);
   table(s, 25, 85, [140, 165, 165, 200], [
     ['', 'Sống bao lâu', 'Lưu ở đâu', 'Ví dụ support agent'],
     ['Context lần gọi', '1 request', 'Trong request gửi model', 'Câu hỏi + 2 tài liệu KB'],
     ['Lịch sử hội thoại', '1 cuộc chat', 'App / DB, cắt bớt khi dài', '"Ý tôi là khách X hôm qua"'],
     ['Task state', 'Tới khi task xong', 'DB — lưu bền', 'Đang chờ duyệt ticket P3'],
-    ['Memory', 'Nhiều task, có hạn', 'DB theo user_id + TTL', 'alice thích trả lời ngắn'],
+    ['Memory', 'Nhiều task, có hạn', 'DB theo user_id + TTL', '(giả định) alice thích trả lời ngắn'],
   ], { rowH: 46, fills: [C.WHITE, C.WHITE, C.YELLOW, C.WHITE] });
 
   question('Server restart khi đang chờ người duyệt. Agent có quên không?', 'Người duyệt bấm OK sau 2 tiếng — lúc đó process cũ đã chết.',
