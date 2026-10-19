@@ -38,6 +38,8 @@ Fetches and analyzes personal finance data from MISA MoneyKeeper.
 | `/money-report transactions` | Recent transactions + monthly income/expense summary | `{HHMM}-money-transactions.md` |
 | `/money-report review` | Finance review — strengths, risks, benchmark comparison, recommendations | appended to allocation report |
 | `/money-report dashboard` | (Re)build HTML dashboard + history.json from latest reports | `reports/{YYYY-MM-DD}/money-dashboard.html` + `reports/money-history.json` |
+| `/money-report --runway` | Full run + unemployment runway scenario (Piece 9) | all of the above + `{HHMM}-money-unemployment-runway.md` + runway card in dashboard |
+| `/money-report runway` | Runway scenario only, from fresh MISA data | `{HHMM}-money-unemployment-runway.md` |
 
 ---
 
@@ -391,7 +393,7 @@ If a historical entry has `categories: null`, backfill chart literals from that 
 **`money-dashboard.html` spec:**
 - Dark theme (`#0f1117` bg), Chart.js via CDN (`<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">`) — fine for a static file opened locally. Do NOT use the Artifact tool for this (its CSP blocks the CDN).
 - Sections: KPI row (Net Worth, Liabilities, Liquid, Savings, current-month Net — each with a delta vs the prior snapshot), a highlights callout card (what changed since last run, Vietnamese), Net Worth trend line chart (all historical snapshots), allocation donut (excl. home), category evolution stacked bar, savings+liquid grouped bar, full account detail table.
-- 🔴 **Runway card (MANDATORY, user request 2026-10-19):** before the charts, a card "Runway nếu mất việc" — layers excl. BĐS + Larion: (0) liquid + sổ ko kì hạn, (1) + sổ kỳ hạn, (2) + vàng (−3% spread), (3) + VCBS/FPTS/VCBF/Finhay (−20% stress), minus debt; months at 15M (hằng tháng tối thiểu) / 21M (ngân sách thất nghiệp: học phí 3M, bỏ gửi má, bỏ xăng ô tô ≥500K, giữ xe máy) / 35M per month, year 1 net of trợ cấp thất nghiệp 6M/th × 12 (user 10-19: BHXH ~10M lương đóng, 15 năm). Copy the card from the prior dashboard and recompute. Reference: `reports/2026-10-19/1000-money-unemployment-runway.md`.
+- **Runway card (only with `--runway` / `runway`, see Piece 9):** before the charts, add the "Runway nếu mất việc" card — copy it from the latest dashboard that has it (e.g. `reports/2026-10-19/money-dashboard.html`) and recompute.
 - 🔴 **Spending section (MANDATORY, user request 2026-09-28):** after writing the HTML run
   `node scripts/misa-expense-category-breakdown.js {this-month} {prev-month} --json > tmp/breakdown.json && node scripts/money-dashboard-inject-spending-section.js reports/{date}/money-dashboard.html tmp/breakdown.json`
   → adds doughnut "Chi tiêu theo nhóm", bar "Tiền đã dùng vào đâu" (sinh hoạt/đầu tư/tiết kiệm/cho vay/trả nợ, this vs prev month) and per-item table. Idempotent.
@@ -434,6 +436,31 @@ Fetches actual stock holdings directly from the brokers' own trading platforms (
 **Discovery tool (`scripts/broker-portfolio-discover.js <fpts|vcbs|finhay>`):** general-purpose helper used to find these endpoints — opens a long-lived headed Chrome, auto-fills credentials, captures both HTTP JSON responses AND WebSocket frames (flushed to `tmp/broker-discover-{broker}.json` / `-ws.json` every 10s) while the user manually logs in and navigates. Reuse this if either broker's page structure changes later. **Lesson learned:** don't use a short fixed capture window — OTP entry takes unpredictable time. Run it long (20-30 min) with periodic flush so it can be checked at any point without cutting the user off mid-login. Also always fully kill prior instances (`pkill -9 -f "user-data-dir=.../tmp/{broker}-chrome-profile"`) before relaunching — Puppeteer silently fails or produces a stale duplicate profile lock otherwise. For a new SPA-based broker, do NOT try to automate the login button click/typing via blind coordinate-guessing — dump `getBoundingClientRect()` for every candidate input first, exclude generic header search boxes, and prefer asking the user for a one-time manual login over repeated automated attempts on a live financial login form.
 
 **How this feeds into Allocation/Portfolio:** use FPTS/VCBS's real `holdings` + market values as the authoritative value for those wallets in Piece 2/3, superseding MISA's `cost_basis_remaining + currentAmount` approximation formula for these two wallets specifically (MISA's manual tracking is now redundant/secondary — keep it only as a cross-check).
+
+---
+
+## Piece 9 — Unemployment Runway (`/money-report runway`, or `--runway` on a full run)
+
+Scenario: "if I lost my job today, how long can I live without selling real estate?" Template + reasoning: `reports/2026-10-19/1000-money-unemployment-runway.md` (copy its structure, swap in fresh numbers).
+
+**Liquidation layers** (exclude Nhà, long an res, Larion — illiquid):
+| Layer | Assets | Haircut |
+|---|---|---|
+| 0 | liquid (vcb, Ví, Paypal…) + sổ tikcop ko kì hạn | 0 |
+| 1 | + all term savings books (early withdrawal = lose interest only) | 0 |
+| 2 | + vàng | −3% spread |
+| 3 | + VCBS, FPTS, VCBF, Finhay | −20% crisis stress |
+Subtract current liabilities (credit card) from the total.
+
+**Budget (user-approved 2026-10-19):** ~15M/tháng recurring + ~6M khoản năm = **21M/tháng**. Built from: học phí 3M, điện/nước/internet/DV 1.6M, nhà cửa 1.5M, ăn uống 4.5M, đi lại 0.8M (xe máy only — drop xăng ≥500K = ô tô), hiếu hỉ 1M, linh tinh/mua sắm 1.5M, hưởng thụ+sức khỏe 1M; NO gửi má. Columns: 15M / 21M / 35M per month. Re-check category amounts against current-month actuals (data 10/2026+ only) and flag if lean items drift up.
+
+**Trợ cấp thất nghiệp:** 6M/tháng × 12 tháng (60% of ~10M BHXH salary; contributed since 2011, ≥15 yrs → max 12 months). Subtract from burn in year 1 only.
+
+**Runway formula:** months = 12 + (layer_total − 12 × (budget − 6M)) / budget (if layer_total covers year 1; else layer_total / (budget − 6M)). Ignore savings interest (≈ offsets inflation). Also report: interest on all-in-savings (layer 3 total × current 12m rate ≈ 5.8%) as % of 21M budget — the "sống bằng lãi" check.
+
+**Drawdown rule (always restate):** day 1 stop DCA → keep cash+savings ≥ 24 months budget, top up from vàng/CP when < 18 months → only after >6 months unemployed shift CP to savings gradually, never one-shot.
+
+**Output:** `reports/{YYYY-MM-DD}/{HHMM}-money-unemployment-runway.md` + (on full run) runway card in dashboard (Piece 7).
 
 ---
 
