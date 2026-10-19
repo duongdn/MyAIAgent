@@ -14,3 +14,5 @@ Customer rules to check on every OP PR (they will re-review on delivery; fixed-c
 Related: [[feedback_elena_review_scope_no_clones_fixed_cost]], [[project_elena_op_restart_duongdn_code_reviewer]].
 
 > 2026-10-16: the "no assert" rule is deferred. The team listed it as a known issue in the release note (kept for dev, fix later), so do not flag it in OP review. See [[elena_assert_validation_not_an_issue]].
+
+> 2026-10-19: extra rules from DP review (Vladimir, 113 comments) plus live review of M1 FE PR #5511 are in `docs/elena/reviews/2026-10-19/elena-op-standards-review.md` §4. Main ones: no empty or out-of-scope stub handlers, no mocks, translate the playground too, no inline SVG, remove unused code, a single async style (RxJS), short methods, no duplicate gateway+service validation, no mutation inside reactive chains, no Optional in reactive code.

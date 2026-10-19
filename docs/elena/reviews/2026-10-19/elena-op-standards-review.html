@@ -1,0 +1,268 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP standards review</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><h1>Elena OP: rà soát vi phạm standard (19/10/2026)</h1>
+<h2>Nguồn rule</h2>
+<ul>
+<li><strong>819 comment review của khách</strong> trên các PR của NUS ở <code>Precognize/development</code> (kéo lại hôm nay bằng account <code>nusken</code>). Trong đó có <strong>113 comment trên 10 PR của process-digital-plant (DP)</strong>, chủ yếu của Vladimir-precog (97). Đây là FE Angular giống optimization-ui, và cũng là người đang review OP.</li>
+<li><strong>PR giao M1 FE #5511: Vladimir đã review hôm nay (19/10, 14:42–15:09)</strong>, 9 comment. Mục 1.</li>
+<li>Quy ước nội bộ: <code>precognize-workspace/ai_docs/CONVENTIONS.md</code> (mục "optimization-ui delivery rules") và <code>docs/ai/CONVENTIONS.md</code> (BE).</li>
+<li>Code đối chiếu: FE <code>nus-op-m3</code> (<code>97e8906b90</code>), BE head #364 (<code>16e2a5bd</code>, gồm cả be-m1 và commit upsert mới), #362 (<code>6dbf55da</code>).</li>
+<li>Bỏ qua theo thỏa thuận: clone, unit test, <code>assert</code>, pattern chung của code khách.</li>
+</ul>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Rule (nguồn)</th>
+<th>Hiện trạng OP</th>
+<th>Mức</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Không để hàm rỗng / stub "out of scope" (#5511 "implementation?", DP "empty function")</td>
+<td><strong>10 handler rỗng</strong> chỉ có comment</td>
+<td>🔴 khách đã bắt</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Không mock / sample data (#5511 "Do you need mocks?", DP "Why is MOCK_USERS_RESPONSE needed?")</td>
+<td>5 file sample + <code>shared/mocks/</code></td>
+<td>🔴 khách đã bắt, <strong>trái với quy ước nội bộ</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mọi text qua translate, <strong>kể cả playground <code>#/shared-ui</code></strong> (#5511)</td>
+<td>Playground đang được miễn trong CONVENTIONS</td>
+<td>🔴 khách đã bắt, <strong>trái với quy ước nội bộ</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>SVG để trong file, không inline (#5511 "move svg to file")</td>
+<td><code>eye-toggle.component.html</code></td>
+<td>🔴 khách đã bắt</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Xoá code không dùng (DP "remove unused methods", "is this component used?")</td>
+<td>4 hàm export không ai gọi, 1 component không dùng, 2 component chỉ dùng ở playground</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Một kiểu async, ưu tiên RxJS thay Promise (DP 4539)</td>
+<td><code>async/await</code> + <code>Promise.race</code> ở 4 service core</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Hàm ngắn, tách nhỏ (DP: "too much logic for one method")</td>
+<td>FE ổn (dài nhất 52 dòng). <strong>BE</strong>: <code>validateUpsert</code> 138 dòng, <code>upsert</code> 75 dòng</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Không validate trùng giữa gateway và service (BE 5293)</td>
+<td>#364 kiểm page/size ở cả 2 tầng, <code>MAX_PAGE_SIZE = 100</code> khai báo 2 lần</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Không sửa dữ liệu (mutate) bên trong chuỗi reactive (BE 4823)</td>
+<td>#364 <code>enrichTargetTags</code> sửa list <code>items</code> trong <code>doOnNext</code></td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Không dùng <code>Optional</code> trong code reactive (BE 4885)</td>
+<td><code>Mono&lt;Optional&lt;Integer&gt;&gt;</code> (#364), <code>singleOptional()</code> ở upsert</td>
+<td>💬</td>
+</tr>
+<tr>
+<td>11</td>
+<td>URL qua <code>ApiCallsPathsEnum</code> + <code>HttpService</code> (CONVENTIONS, DP)</td>
+<td>1 URL viết tay, 3 chỗ gọi <code>HttpClient</code> trực tiếp</td>
+<td>💬</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Không đưa thay đổi không liên quan vào PR (BE 4435, 4553)</td>
+<td>BE xoá 3 dòng trống ở <code>DaeObjectMapperConfiguration</code> (service investigation)</td>
+<td>💬</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Tránh ternary lồng nhau (DP 4544)</td>
+<td>3 chỗ ngoài playground</td>
+<td>💬</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Comment đúng sự thật / không thừa (DP "remove comments")</td>
+<td>Comment mô tả unique index không tồn tại (<code>DaeOptimizationModelDocument.java:23</code>)</td>
+<td>💬</td>
+</tr>
+</tbody>
+</table>
+<p><strong>DuongDN cần làm ngay:</strong>
+1. <strong>Quyết định 2 chỗ quy ước nội bộ trái với khách</strong> (mục 1.2): khách hỏi lại mock và text chưa translate trong playground. CONVENTIONS đang ghi là được phép. Hoặc trả lời khách lý do (app đang phát triển, playground là công cụ dev), hoặc gỡ khỏi bản giao. Đây là PR đang mở, nên trả lời sớm.
+2. Giao Ken (người tạo #5511) sửa 4 điểm khách đã comment (mục 1.1) và gỡ các stub tương tự còn lại.
+3. Đưa các rule mới (mục 4) vào checklist review cho cả team, vì Vladimir sẽ review từng milestone.</p>
+<h2>1. Review của khách trên #5511 (giao M1 FE)</h2>
+<p>https://github.com/Precognize/development/pull/5511 (chưa merge, 8 review dạng COMMENTED)</p>
+<h3>1.1 Các comment và việc cần làm</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Khách nói</th>
+<th>Việc cần làm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>manage-models-drawer.component.ts:197-207</code></td>
+<td>"check whether these onPause onNewRun onRunClick are needed"</td>
+<td>Bỏ handler và binding trên template. Nút chưa có chức năng thì ẩn hoặc disable</td>
+</tr>
+<tr>
+<td><code>manage-models-drawer.component.ts:193</code></td>
+<td>"implementation?" (dialog "PAUSE ALL RUN &amp; EDIT" chỉ đóng lại)</td>
+<td>Như trên</td>
+</tr>
+<tr>
+<td><code>optimization-runs-page.component.ts:156, 252-266</code></td>
+<td>"implementation?", "same"</td>
+<td>5 handler rỗng: <code>onNewRun</code>, <code>onRunMore</code>, <code>onRunOpen</code>, <code>onRunInfluencers</code>, <code>onRunRecommendations</code></td>
+</tr>
+<tr>
+<td><code>manage-models.sample-data.ts</code>, <code>optimization-runs.sample-data.ts</code></td>
+<td>"Do you need mocks?", "need?"</td>
+<td>Xem mục 1.2</td>
+</tr>
+<tr>
+<td><code>shared-ui/form-field-preview.component.ts</code>, <code>shared-ui-page.component.html</code></td>
+<td>"pls add translate", "translate"</td>
+<td>Xem mục 1.2</td>
+</tr>
+<tr>
+<td><code>eye-toggle.component.html:20</code></td>
+<td>"move svg to file"</td>
+<td>Đưa SVG ra file <code>.svg</code> trong assets, dùng <code>&lt;img&gt;</code> / mat-icon như các icon khác</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tại sao quan trọng:</strong> Đây là cùng kiểu comment Vladimir đã viết trên PR DP #4539: nhiều vòng "not fixed", "I don't see any changes", cuối cùng PR bị kéo dài. Với fixed-cost, mỗi vòng sửa là effort không tính tiền.</p>
+<h3>1.2 Hai chỗ quy ước nội bộ trái với khách</h3>
+<ul>
+<li><strong>Mock:</strong> CONVENTIONS rule 2 ghi "Mock data: not restricted while the app is in development… Every other page keeps bundled sample data, in every build". Khách hỏi thẳng "Do you need mocks?". Trước đây ở DP khách đã bắt gỡ <code>MOCK_USERS_RESPONSE</code>.</li>
+<li><strong>Playground <code>#/shared-ui</code>:</strong> CONVENTIONS ghi "Rule 1 does not apply to its own demo text". Khách yêu cầu translate.</li>
+<li><strong>Cách xử lý đề xuất:</strong> trả lời trên PR: (a) sample data chỉ phục vụ màn hình chưa có API, sẽ thay ở milestone sau, hoặc (b) gỡ hẳn khỏi bản giao: ẩn route Runs/Manage Models và playground khỏi build giao khách. Cập nhật CONVENTIONS theo quyết định, để team không tiếp tục làm theo quy ước cũ.</li>
+</ul>
+<h3>1.3 Các stub còn lại (khách chưa comment nhưng sẽ gặp)</h3>
+<ul>
+<li><code>model-detail.component.ts:70</code> <code>// TODO(OP-27): replace with the rule from the full ticket.</code></li>
+<li><code>manage-models-drawer.component.ts:183</code> (Edit model chưa làm).</li>
+<li>Tổng cộng 11 TODO/"out of scope" trong code FE.</li>
+</ul>
+<h2>2. FE (optimization-ui, <code>nus-op-m3</code>)</h2>
+<h3>2.1 ⚠️ Code không dùng</h3>
+<ul>
+<li><strong>Hàm export không ai gọi</strong> (chỉ có định nghĩa): <code>addFunctionTag</code>, <code>fromConditionSet</code>, <code>toConditionSet</code> (<code>shared/expression/expression.rules.ts</code>), <code>indexTags</code> (<code>shared/expression/expression.model.ts</code>). <code>toConditionSet/fromConditionSet</code> là mapper sẽ dùng khi nối API lưu condition set. Hoặc nối luôn (BE đã có), hoặc tạm bỏ khỏi bản giao.</li>
+<li><strong>Component không dùng:</strong> <code>StepPlaceholderComponent</code> (<code>features/model-wizard/steps/step-placeholder/</code>). Các bước đã có component thật.</li>
+<li><strong>Component chỉ dùng trong playground:</strong> <code>app-active</code> (<code>shared/components/active/</code>), <code>ManageInfluencerDialogComponent</code>. Khách DP: "is this component used?", "remove unused methods".</li>
+</ul>
+<h3>2.2 ⚠️ Trộn Promise/async với RxJS</h3>
+<ul>
+<li><code>core/services/optimization-legacy-config.service.ts:28</code>, <code>optimization-header-auth.service.ts:54</code>, <code>initialize-optimization-header.ts:65-77</code> (<code>await Promise.race</code> + <code>setTimeout</code>), <code>r-socket/r-socket.service.ts:185-196</code>.</li>
+<li>Khách DP #4539: <em>"use a single async style (async/await or RxJS)"</em>, <em>"usually we prefer to use rxjs instead of promise"</em>.</li>
+<li><code>APP_INITIALIZER</code> cần Promise, nên <code>initialize-optimization-header.ts</code> có lý do. Nên đổi 2 service còn lại sang Observable, hoặc ghi chú vì sao.</li>
+</ul>
+<h3>2.3 💬 URL và HTTP</h3>
+<ul>
+<li><code>optimization-legacy-config.service.ts:31</code> <code>this.http.get(`${ApiCallsPathsEnum.BASE_URL}/configuration/interface`)</code>: đường dẫn viết tay. Thêm vào <code>ApiCallsPathsEnum</code>.</li>
+<li><code>HttpClient</code> gọi trực tiếp ở <code>optimization-license.guard.ts:122</code>, <code>optimization-legacy-config.service.ts</code>, <code>initialize-optimization-header.ts:78</code>. CONVENTIONS: "Always go through <code>HttpService</code>". Lúc app khởi động có thể chưa dùng được <code>HttpService</code> (interceptor), nên cần ghi lý do trong code. Guard thì nên dùng <code>HttpService</code>.</li>
+</ul>
+<h3>2.4 💬 Khác</h3>
+<ul>
+<li>Ternary lồng nhau: <code>model-run-row.component.ts:46</code>, <code>optimization-model-item.component.ts:206</code> (cùng một logic <code>'none' | 'new' | 'default'</code> viết 2 lần), <code>model-wizard-page.component.ts:104</code>.</li>
+<li><code>$any(token)</code> ×10 trong <code>expression-view.component.html</code>: đã có trong CONVENTIONS rule 10. Khách DP/portal từng hỏi "can we add typing here?".</li>
+</ul>
+<h3>2.5 Đã đạt</h3>
+<p>Không <code>console.log</code>, không code comment-out, không text cứng ngoài playground, ngày tháng qua <code>optimizationDate</code>, không <code>DatePipe</code>/<code>formatDate</code>, không ghép chuỗi để tạo text, không file environment chứa dữ liệu cá nhân, method ngắn (dài nhất 52 dòng).</p>
+<h2>3. BE (optimization service + gateway)</h2>
+<h3>3.1 ⚠️ Validate trùng ở gateway và service (#364)</h3>
+<ul>
+<li><code>DaeApiOptimizationModelController.list</code> kiểm <code>page &gt;= 0</code>, <code>size &gt;= 1</code>, cắt <code>Math.min(size, MAX_PAGE_SIZE)</code>. <code>DaeOptimizationModelControl.resolvePage/resolveSize</code> làm lại y hệt, với <code>MAX_PAGE_SIZE = 100</code> khai báo lần nữa.</li>
+<li>Khách (PR 5293): <em>"you already checked if the values are null in controller. no need to validate them again."</em></li>
+<li><strong>Cách sửa:</strong> giữ một nơi (service), gateway chỉ chuyển tiếp.</li>
+</ul>
+<h3>3.2 ⚠️ Sửa dữ liệu bên trong chuỗi reactive (#364)</h3>
+<ul>
+<li><code>enrichTargetTags</code>: <code>.doOnNext(details -&gt; items.forEach(item -&gt; item.setTargetTag(...)))</code>, tức là sửa list <code>items</code> được truyền từ ngoài vào trong <code>doOnNext</code>.</li>
+<li>Khách (PR 4823): <em>"The list is mutated inside the reactive chain. This introduces side effects and makes the flow harder to reason about."</em></li>
+<li><strong>Cách sửa:</strong> <code>map</code> ra list mới (<code>items.stream().map(item -&gt; item.toBuilder().targetTag(...).build())</code>) rồi trả về.</li>
+</ul>
+<h3>3.3 ⚠️ Hàm quá dài</h3>
+<ul>
+<li><code>DaeOptimizationModelConstraints.validateUpsert</code>: <strong>138 dòng</strong>, một <code>switch</code> với 4 nhánh lớn. <code>DaeOptimizationModelControl.upsert</code>: 75 dòng lồng nhiều lớp lambda.</li>
+<li>Khách (PR 4799): <em>"consider move validation to separated class"</em>. DP: <em>"too many code for one method, separate the logic to a couple of methods with clear names"</em>.</li>
+<li><strong>Cách sửa:</strong> tách mỗi bước thành 1 hàm <code>validateGoal/validateInfluencers/validateConditionSets</code>.</li>
+</ul>
+<h3>3.4 💬 Optional trong code reactive</h3>
+<p><code>Mono&lt;Optional&lt;Integer&gt;&gt; licenseCapacity()</code> (#364), <code>storedDraft.singleOptional()</code> trong upsert. Khách (PR 4885): <em>"Optional breaks the style of reactive"</em>. Có thể dùng <code>Mono.empty()</code> + <code>defaultIfEmpty</code>.</p>
+<h3>3.5 💬 Khác</h3>
+<ul>
+<li><strong>Thay đổi không liên quan:</strong> <code>services/microservices-investigation/.../DaeObjectMapperConfiguration.java</code> chỉ xoá 3 dòng trống. Khách: <em>"please move formatting changes to develop"</em>.</li>
+<li><strong>Route gateway viết literal:</strong> <code>String.join(".", "optimization", "model", "upsert")</code> lặp ở 2 hàm. Service đã có <code>BASE_URL = "optimization.model"</code>. CONVENTIONS BE: <em>"BASE_URL constant in both gateway control and service controller — keep them in sync"</em>.</li>
+<li><strong>Comment sai sự thật:</strong> <code>DaeOptimizationModelDocument.java:23</code> nói về unique index không tồn tại. Field <code>Boolean deleted</code> vẫn còn dù OP-26 đã bỏ soft-delete (#364 lại dùng nó).</li>
+<li><code>DaeAmqpMessageSender</code> có mà không ai dùng. Nếu để chờ tích hợp thuật toán thì ghi chú, vì khách sẽ hỏi.</li>
+<li><code>logback.xml</code> của optimization thiếu dòng trống cuối file.</li>
+<li>Còn 1 chỗ <code>e.getMessage()</code> (<code>DaeOptimizationModelControl</code> upsert).</li>
+</ul>
+<h3>3.6 Đã đạt</h3>
+<p>Migration có ở cả new-customer và existing-customer (9.5). Joda DateTime. Không class request 1 field mới. Không magic string loại license. Gateway mỏng, logic ở service. Mapper MapStruct đúng quy ước tên.</p>
+<h2>4. Rule mới rút ra từ DP và review gần đây (thêm vào checklist)</h2>
+<p>Các rule chưa có trong checklist 09/10:</p>
+<p><strong>FE</strong>
+1. Không để hàm rỗng hay stub "out of scope". Nút chưa có chức năng thì không gắn handler.
+2. Playground và mọi màn hình trong bản giao đều phải translate.
+3. SVG để trong file, không inline trong template. Không dùng emoji thay icon (DP: "maybe there is svg for ➕?").
+4. Xoá method, component, import không dùng.
+5. Một kiểu async (ưu tiên RxJS). <code>ngOnInit</code> chỉ gọi các hàm con. Không viết subscribe dài inline.
+6. Hàm dài thì tách. Hai hàm gần giống nhau thì gộp. Template lặp thì dùng <code>ng-template</code>. Class Tailwind/CSS lặp thì dùng <code>@apply</code>.
+7. Một kiểu viết trong cùng một file (ví dụ <code>if (x) { return; }</code> và <code>if (x) return;</code> không trộn).
+8. Không <code>if</code>/<code>else</code> rỗng, không ternary lồng nhau, không kiểm null thừa (<code>!== null &amp;&amp; !== undefined</code>, <code>trim()</code> trên id không thể null).
+9. So sánh trạng thái bằng Enum (<code>ConnectionType</code>, <code>INTERNAL_TAG_TAB.AVAILABLE</code>), không bằng chuỗi.
+10. FE không lặp logic của BE (ví dụ BE đã xử lý <code>***</code>).
+11. Không giá trị mặc định "rơi rớt" (<code>id = '1'</code>), không dữ liệu test trong template, không file environment có dữ liệu cá nhân, không <code>yarn.lock</code>/file không liên quan.
+12. Giới hạn (kích thước file, độ dài) phải báo cho người dùng khi vượt.
+13. Biến trong text dịch dùng tham số (<code>{year}</code>), không nối chuỗi.
+14. Comment viết bằng tiếng Anh, không comment thừa, không sai chính tả.</p>
+<p><strong>BE</strong>
+15. Không validate lặp ở gateway và service.
+16. Không mutate dữ liệu trong chuỗi reactive. Không <code>block()</code>. Không <code>collectList()</code> không giới hạn trên tập dữ liệu lớn.
+17. Không <code>Optional</code> trong code reactive. Dùng <code>boolean</code> thay <code>Boolean</code> khi không cần null.
+18. Dùng <code>CollectionUtils.isEmpty</code>/<code>StringUtils.isNotBlank</code> thay kiểm tay.
+19. Validate lớn thì tách class/hàm riêng. Tên class không quá dài.
+20. Route dùng hằng <code>BASE_URL</code>, <code>serviceName</code> đã khai báo.
+21. Không log lỗi 2 lần cho cùng một exception.
+22. Timezone theo cấu hình datasource/plant, không theo mặc định của JVM.</p>
+<h2>Câu hỏi còn mở</h2>
+<ul>
+<li>DuongDN/anhttl: với #5511, trả lời khách giữ sample data và playground (lý do đang phát triển) hay gỡ khỏi bản giao?</li>
+</ul></body></html>
