@@ -69,3 +69,63 @@
 
 - Hướng đi tiếp: kỹ thuật (AI engineer/architect) hay quản lý/kinh doanh?
 - Có muốn quét trực tiếp Slack/Element 1–3 tháng gần đây không? Mục đích là xem bạn đang tốn thời gian vào việc gì, việc nào lặp lại, việc nào chỉ con người làm được.
+
+---
+
+# PHỤ LỤC — Quét trực tiếp Slack + Element (90 ngày, 2026-07-21 → 2026-10-19)
+
+**Phạm vi:** chỉ tin nhắn **do bạn gửi**. Slack `search from:me` trên 14/16 workspace (Amazing Meds, OhCleo lỗi `invalid_auth`, chưa quét). Matrix: 151 phòng.
+**Tổng:** 5.649 tin (Slack 1.614 · Element 4.102) ≈ **~90 tin/ngày làm việc**, trung bình 78 ký tự/tin.
+
+## A. Thời gian đi đâu
+
+| Kênh | Tin | Bản chất |
+|---|---|---|
+| Equanimity (Slack) | 530 | Trao đổi trực tiếp khách, bonus/billing, scope |
+| Bailey – Paturevision + BA/QC + Mgmt (Element) | 730 | Điều phối team, hỏi tiến độ, chất vấn vượt est |
+| Xtreme Soft / Maddy (Slack + Element) | 470 | Trả lời khách, estimate, giải thích kỹ thuật |
+| Baamboozle (Slack) | 288 | Post "Today's update", báo PR fixed/deployed |
+| Meta-Stamp / Arthur | 144+ | Viết văn bản dài cho khách: warranty vs billable, giải thích fix |
+| OhCleo, James, Brad, Marcel, Elena, Wildsoul, Sandor… | 100–250/phòng | Dev hỏi, bạn trả lời/chốt |
+| GLOBAL GRAZING (Slack) | 90 | "Report today: • …" thay dev |
+
+**Giờ:** 08–17h, hai đỉnh 9h và 15–16h; ~250 tin sau 18h; 76 tin cuối tuần. Đều 5 ngày, không ngày nào nhẹ.
+
+## B. Phân loại công việc
+
+| Loại | Ước tính | Ví dụ thật | AI làm được? |
+|---|---|---|---|
+| **Hỏi tiến độ / đòi log giờ** | ~300 tin | "sao rồi mn, hết 8h rồi phải ko????", "task log đủ hết chưa mn?", "update task id nha mn" | ✅ **Gần như toàn bộ** — đã có data Workstream; bot nhắc tự động |
+| **Viết daily update / report today cho khách** | ~150 tin | "Report today: • [Prestashop]…", "Today's update: • Fix CSRF…" | ✅ Sinh từ commit/PR/Jira, bạn chỉ duyệt |
+| **Báo PR/deploy cho khách** | ~400 | "I've fixed this task on 2 PRs…", "deployed to Nusdev site" | ✅ Template + link PR tự động |
+| **Câu trả lời ngắn (OK, ok e, uhm, chính xác)** | ~25% tin | | ⚪ Không tốn nhiều, nhưng là dấu hiệu bị kéo vào mọi luồng |
+| **Chất vấn vượt estimate / charge giờ** | ~100 | "Này có vấn đề gì mà vượt est nhiều vậy?", "sao em để charge task e hôm qua vậy" | 🟡 AI phát hiện & soạn câu hỏi; **bạn quyết định** |
+| **Estimate, báo giá, thương lượng** | ~200 | "range with clear assumptions, not a committed number", warranty vs billable, xin bonus $150 | 🔴 **Chỉ người làm được** — phán đoán, rủi ro, quan hệ |
+| **Root cause / định hướng kỹ thuật cho dev** | ~150 | "abandoned process queue… root cause", "check kĩ log Console", "kiểm tra key bằng flag -v" | 🟡 AI hỗ trợ phân tích; **bạn là người kiểm chứng** |
+| **Chọn người, phân task, nhân sự** | ~80 | "đủ task làm tuần này ko? Celine và Maddy?", "start James ngay được ko?" | 🔴 Chỉ người |
+| **Suy nghĩ về AI cho team** | rải rác | "lí do gì mà bỏ AI vào nó vẫn ko nhanh hơn nhiều so với trước vậy", MCP training | 🔴 **Đây là chỗ bạn tạo giá trị lớn nhất** |
+
+## C. Phát hiện chính
+
+1. **Bạn đang làm 3 vai cùng lúc:** PM (điều phối), dev-relay (viết update/PR thay dev cho khách), tech lead (root cause). Vai dev-relay chiếm khoảng 1/3 tin Slack và **dễ tự động nhất**.
+2. **Khoảng 40–50% tin nhắn là việc AI làm được**: hỏi tiến độ, nhắc log, viết report today, báo PR. Bạn đã tự động *đọc*, nhưng chưa tự động *viết/gửi* (đúng theo rule không gửi khi chưa xin phép). Bước tiếp theo hợp lý: **AI soạn nháp, bạn bấm duyệt**.
+3. **Việc chỉ người làm được** (estimate, thương lượng billing, chọn người, chốt hướng kỹ thuật, câu hỏi "tại sao AI chưa làm team nhanh hơn") chiếm khoảng 25–30% nhưng là phần có giá trị nhất. Nên dồn thời gian vào đây.
+4. **Câu hỏi của chính bạn là đề bài đúng:** *"bỏ AI vào vẫn không nhanh hơn nhiều"*. Kỹ năng của thời AI không phải "dùng AI" mà là **thiết kế lại quy trình** để AI tạo ra tốc độ thật (spec rõ → AI code → review → test).
+5. **Tín hiệu quá tải:** ~250 tin ngoài giờ, chuỗi "sao rồi mn????", nhiều "OK/ok e". Bạn đang là nút thắt (bottleneck) của mọi phòng.
+
+## D. Đề xuất hành động (cập nhật mục 5)
+
+| Ưu tiên | Việc | Tiết kiệm ước tính |
+|---|---|---|
+| 1 | **Bot nhắc log/tiến độ tự động** trong phòng Element mỗi project (dùng data Workstream sẵn có) — thay ~300 tin "sao rồi mn" | 30–45 phút/ngày |
+| 2 | **Draft "Report today / PR fixed" cho khách** từ Git/Jira → bạn duyệt 1 click | 30 phút/ngày |
+| 3 | **Dev tự post update cho khách** (đào tạo + template), bạn chỉ giám sát | Giảm vai dev-relay |
+| 4 | **Alert vượt estimate** tự soạn câu hỏi cho dev (bạn đã chất vấn tay nhiều lần) | 15 phút/ngày |
+| 5 | Dùng thời gian lấy lại: estimate/sales, thiết kế quy trình AI coding cho team, giải câu hỏi "vì sao AI chưa làm team nhanh hơn" | → kỹ năng mục 3.2–3.4 |
+
+**Kết luận:** dữ liệu xác nhận đánh giá trước. Bạn không thiếu kỹ năng AI. Bạn thiếu **thời gian cho phần chỉ con người làm được**, vì đang tự tay làm phần mà AI làm được.
+
+## Câu hỏi còn mở (phụ lục)
+
+- Amazing Meds + OhCleo Slack token `invalid_auth` → chưa quét; có cần refresh để bổ sung không?
+- Muốn bắt đầu từ đề xuất D.1 (bot nhắc) hay D.2 (draft report cho khách)?
