@@ -21,7 +21,14 @@ Base: report 0830 hôm nay. Loại BĐS (Nhà, long an res) + Larion 800M (cổ 
 | +vàng | ~1,924M | 48 | 35 | 27 |
 | +CP/quỹ (−20%) | ~3,321M | 83 | 60 | 47 |
 
-Chưa tính lãi tiết kiệm (~5M/th) + trợ cấp thất nghiệp (60% lương BHXH, trần ~25M/th, 3–12 tháng — chưa verify).
+Chưa tính lãi tiết kiệm (~5M/th) + trợ cấp thất nghiệp.
+
+## Trợ cấp thất nghiệp (user xác nhận 10-19: đóng từ 2011, ~15 năm, lương đóng ~10M/th)
+- Mức: 60% × TB lương đóng 6 tháng cuối ≈ **6M/th** (xa dưới trần).
+- Thời gian: 12–36 tháng đóng = 3 tháng, +1 tháng mỗi 12 tháng thêm → 15 năm vượt trần → **12 tháng** (tối đa).
+- Tổng ≈ **72M** = ~1.3 tháng chi 55M. Runway lớp 0 tăng 10 → ~11 tháng; chi ròng năm 1 còn ~49M/th.
+- Điều kiện: nộp hồ sơ trung tâm dịch vụ việc làm trong 3 tháng sau nghỉ; nghỉ đúng luật (báo trước); chưa từng hưởng trước đây (đã hưởng → chỉ tính phần tháng đóng chưa dùng). Quy định theo Luật Việc làm cũ — luật mới hiệu lực 2026, cần verify.
+- Hệ quả: lương đóng BHXH thấp → lương hưu sau này cũng thấp → tài sản cá nhân phải gánh hưu trí.
 
 ## Phương án B: bán hết → giữ 1 năm tiền sống + gửi tiết kiệm phần còn lại, sống bằng lãi
 - Giữ 660M (55M×12); gửi ~3.03 tỷ @ ~5.8%/năm → lãi ~14.6M/th = **27% nhu cầu 55M** → vẫn phải ăn vào gốc.
@@ -37,5 +44,5 @@ Chưa tính lãi tiết kiệm (~5M/th) + trợ cấp thất nghiệp (60% lươ
   3. Thất nghiệp > 6 tháng hoặc không định đi làm lại → chuyển dần CP sang tiết kiệm (phương án B), bán theo đợt, không bán một lần lúc thị trường đáy.
 
 ## Câu hỏi mở
-- Số năm đóng BHXH / mức lương đóng BHXH thực tế (quyết định trợ cấp).
+- Đã từng hưởng trợ cấp thất nghiệp lần nào chưa?
 - Freelancer ~10M/th có giữ được khi mất việc chính?
