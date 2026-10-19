@@ -24,6 +24,7 @@
 - ✅ Xoá `~/.minikube/cache` (826M, k8s chưa dùng) → 145G used / 51G avail.
 - ✅ Xoá `~/projects/james-definitive` (clone cũ trùng remote với `JamesDefinitiveGuide`, ko có commit chưa push; chỉ mất `deployer.phar` untracked), `Emeka/`, `JasonMeilleur/` → 144G used / 53G avail (74%).
 - ✅ Dọn sạch `~/Downloads` (4.7G) → 139G used / 57G avail (71%). Trước khi xoá, move 127 file nhỏ ko tải lại được (`.env`, `SubscriptionKey_*.p8`, pdf/xlsx/docx/csv/md, tổng 132M) sang **`/disk2/misc/downloads-keep-20261019/`** (env + p8 chmod 600).
+- ✅ DROP MySQL `mwmxcoma_wp_nmqrw` (Rebecca) + `bailey_pre9` → 134G used / 63G avail (69%). Config local còn trỏ 2 DB này: `/disk2/projects/Rebecca/dump/files/wp-config.php`, `/disk2/projects/Bailey/pre9/prestashop9/prestashop9/app/config/parameters.php`.
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`

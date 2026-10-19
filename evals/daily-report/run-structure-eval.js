@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Run structure checks over daily reports.
 // Usage: node evals/daily-report/run-structure-eval.js [YYYY-MM-DD ...] [--days N]
-//   default: last 14 report days. Exit 1 if latest report fails any check.
+//   default: last 14 report days (incl. reports/backup). Exit 1 if latest report fails any check.
 const fs = require('fs');
 const path = require('path');
 const { checks } = require('./structure-checks');
@@ -11,11 +11,15 @@ const args = process.argv.slice(2);
 const daysIdx = args.indexOf('--days');
 const days = daysIdx >= 0 ? +args[daysIdx + 1] : 14;
 
-let dates = args.filter(a => /^\d{4}-\d{2}-\d{2}$/.test(a));
+// Reports live in reports/{date}/ or, once archived, reports/backup/{date}/
+const reportPath = d => [path.join(ROOT, 'reports', d), path.join(ROOT, 'reports', 'backup', d)]
+  .map(dir => path.join(dir, 'daily-report.md')).find(f => fs.existsSync(f));
+const isDate = d => /^\d{4}-\d{2}-\d{2}$/.test(d);
+
+let dates = args.filter(isDate);
 if (!dates.length) {
-  dates = fs.readdirSync(path.join(ROOT, 'reports'))
-    .filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d) && fs.existsSync(path.join(ROOT, 'reports', d, 'daily-report.md')))
-    .sort().slice(-days);
+  const all = [...fs.readdirSync(path.join(ROOT, 'reports')), ...fs.readdirSync(path.join(ROOT, 'reports', 'backup'))];
+  dates = [...new Set(all.filter(d => isDate(d) && reportPath(d)))].sort().slice(-days);
 }
 if (!dates.length) { console.error('No daily reports found'); process.exit(2); }
 
@@ -28,7 +32,7 @@ const perCheck = {};
 let latestFailed = 0;
 
 for (const date of dates) {
-  const md = fs.readFileSync(path.join(ROOT, 'reports', date, 'daily-report.md'), 'utf8');
+  const md = fs.readFileSync(reportPath(date), 'utf8');
   const fails = [];
   for (const c of checks) {
     if (c.onlyLatest && date !== latest) continue;

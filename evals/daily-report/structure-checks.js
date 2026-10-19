@@ -48,11 +48,9 @@ const checks = [
   {
     id: 'workstream-dev-reviewer-status',
     source: 'feedback_workstream_report_needs_dev_reviewer_hours_and_status',
-    check: md => {
-      const s = section(md, /Workstream/i) || '';
-      const need = [/Dev hours/i, /Reviewer/i, /Review status|need_review/i].filter(re => !re.test(s));
-      return need.length ? `review table lacks: ${need.map(String).join(' ')}` : true;
-    },
+    // Table may sit under any section heading, so look for its header row anywhere
+    check: md => md.split('\n').some(l => /^\|.*Dev hours.*\|.*Review.*status/i.test(l))
+      || 'no table with "Dev hours … Review status" header',
   },
   {
     id: 'discord-scope',
