@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-19 (Monday)
 
-**Run:** 2026-10-19T05:00+07:00 (cron, mpfc host)
+**Run:** 2026-10-19T05:00+07:00 (cron, mpfc host), corrected 08:35 (+07:00) (recheck, local)
 **Window:** 2026-10-16 05:09 → 2026-10-19 05:13 (+07:00). Task-log date: **Friday 2026-10-16 (last workday)**.
 **Leave plan:** Leave parser refreshed 05:05: no approved leave on record. From Matrix (10-16): DanhTD off 19/10 and 23/10. Week 19/10 dev plan: ThamTTH idle/small jobs.
 
@@ -10,17 +10,17 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack Xtreme (Maddy) | **Madhuraka asked Kai a direct question Sat 21:56, still unanswered:** "If I send [468] live and a user tries it before updating their extension… would it completely fail or… handle absence of the additional information gracefully?" ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1792249003369239)). Madhuraka also commented on [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548) and updated LIFM2-468 on 10-18. Still open from Friday: his offer of a new project with conditions to hide the offshore team (Kai agreed) needs DuongDN's decision. LIFM2-470 is in Testing with **no estimate and no JIRA log** (WS 0.02h). Maddy ○ |
-| 2 | Discord Bizurk (Andrew Taraba) | **animeworld DMs unanswered:** "update??? / what this?" Fri 08:53. Then on Sat 07:41–15:28 he sent **3 new POS feature requests**: admin menu shortcut to the POS; search input auto-focused so it accepts barcode UPCs; handle fast scans, which type digit by digit. He also shared a Drive "POS" folder for plugin uploads. No nuscarrick reply in the window. Andrew Taraba ○ |
-| 3 | Fountain Trello board | **Kunal (via his AI) asked @rick570 Fri 21:04 UTC to deploy backend #731 (6 additive migrations) first, then website #901** ([card](https://trello.com/c/bF2JzKzp)). This replaces the 10-16 04:46 "4 PRs for tonight" list. No Rick reply yet. Kunal also restructured the board: archived most cards and created new lists (Next rollout / In progress / Bugs / Ideas and later) and an "Accessibility check on V2" card. Fountain - DOCUMENT ○ |
-| 4 | Slack OhCleo (DM Celine) | Celine Fri 17:16: "can you please let me know status - how much is left approximately?" after Tony's daily report + progress video. Tony's only follow-up is an empty-text post (attachment). **No ETA has been given yet.** Celine has been asking since 10-15. Internal plan (Matrix 17:19): tell her QC found bugs (9 on the new mobile build), fix Monday, then send. Tony's 08:43 reply on the free-listens question was "No, I don't, but let me check", with no follow-up. Ohcleo ○ |
-| 5 | Slack GGS #presta-9-update | Joey's 10-15 15:27 question to Amy is **still unanswered after 3+ days**: "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" Go-live target is this Wednesday ([thread](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Nick's daily report 10-16 17:16 is present ✅. Amy's onboarding/translation update was acked by Joey ✅. Bailey ○ |
-| 6 | Slack Baamboozle #testing | Jamie Sat 08:01 sent new colour changes (button active #2D4766 / hover #3B678B, folder inactive…). Carrick has no ack yet (weekend). Friday's revert-dark-mode ask was done 14:53 ✅. Aysar ○ until acked |
+| 1 | Slack Xtreme (Maddy) | **Madhuraka asked Kai a direct question Sat 21:56, still unanswered (re-checked 08:30):** "If I send [468] live and a user tries it before updating their extension… would it completely fail or… handle absence of the additional information gracefully?" ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1792249003369239)). Madhuraka also commented on [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548) and updated LIFM2-468 on 10-18. Still open from Friday: his offer of a new project with conditions to hide the offshore team (Kai agreed) needs DuongDN's decision. LIFM2-470 is in Testing with **no estimate and no JIRA log** (WS 0.02h). Maddy ○ |
+| 2 | Discord Bizurk (Andrew Taraba) | **animeworld DMs unanswered:** "update??? / what this?" Fri 08:53. Then on Sat 07:41–15:28 he sent **3 new POS feature requests**: admin menu shortcut to the POS; search input auto-focused so it accepts barcode UPCs; handle fast scans, which type digit by digit. He also shared a Drive "POS" folder for plugin uploads. No nuscarrick reply in the window (re-checked 08:30: no new DMs either way). Andrew Taraba ○ |
+| 3 | Fountain Trello board | **New 06:56 today:** Kunal asked @rick570 "can you push this live tonight?" for the **Oct 19 release (backend #747, then website #912)**, to go right after the Oct 16 release. So Rick now has 2 releases queued for tonight. Earlier: **Kunal (via his AI) asked @rick570 Fri 21:04 UTC to deploy backend #731 (6 additive migrations) first, then website #901** ([card](https://trello.com/c/bF2JzKzp)). This replaces the 10-16 04:46 "4 PRs for tonight" list. No Rick reply yet (re-checked 08:30). Kunal also restructured the board: archived most cards and created new lists (Next rollout / In progress / Bugs / Ideas and later) and an "Accessibility check on V2" card. Fountain - DOCUMENT ○ |
+| 4 | Slack OhCleo (DM Celine) | ~~Celine Fri 17:16: "can you please let me know status - how much is left approximately?" after Tony's daily report + progress video. Tony's only follow-up is an empty-text post (attachment). **No ETA has been given yet.** Celine has been asking since 10-15. Internal plan (Matrix 17:19): tell her QC found bugs (9 on the new mobile build), fix Monday, then send. Tony's 08:43 reply on the free-listens question was "No, I don't, but let me check", with no follow-up. Ohcleo ○~~ → **Resolved (recheck 08:35):** the cron missed a thread reply. Tony answered in-thread Fri 17:20: "I find a few bugs, I'll fix them on Monday and send it to you then". Celine 17:23: "Ok awesome! … I have a few observations on the new creator page I will share". The 'let me check' on free listens is a holding reply (counts as answered). Ohcleo ✓ |
+| 5 | Slack GGS #presta-9-update | Joey's 10-15 15:27 question to Amy is **still unanswered after 3+ days** (re-checked 08:30: still no thread reply): "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" Go-live target is this Wednesday ([thread](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Nick's daily report 10-16 17:16 is present ✅. Amy's onboarding/translation update was acked by Joey ✅. Bailey ○ |
+| 6 | Slack Baamboozle #testing | Jamie Sat 08:01 sent new colour changes (button active #2D4766 / hover #3B678B, folder inactive…). Carrick has no ack yet (weekend; re-checked 08:30, still no reply or reaction). Friday's revert-dark-mode ask was done 14:53 ✅. Aysar ○ until acked |
 | 7 | Workstream review | **Crystal lang (Arthur): 4 rows Pending**, reviewer TienND: PhucVT 10-13 2:00 + 3:00, 10-15 2:00, 10-16 5:00. Arthur itself is on the Ignore List, but the review check covers all projects. OhCleo pending rows from last week are now resolved ✅ |
 | 8 | Email rick@ / vuongtrancr@ | New **production** Rollbar errors: InfinityRoses #458 (10-16 15:39). FirstProject #1130 RangeError max call stack + #906 TypeError (project still unidentified). Traslochi-Online #26, #27 (10-18). The Swish New Relic "Signal lost / Low Throughput" alert is still flapping (chronic). Staging noise (FountainStaging/BE) is INFO |
 | 9 | Performance | MPFC apdex **0.40** (poor, chronic): `continue` E_WARNING 2605x, WP_Error::get_method() 124x (also Rollbar #50, 10 occurrences in 5 min), new `Class 'MM_Event' not found` 3x, DNS mysqli failures 4x. Infinity ArgumentError 37x + UnknownFormat 34x. Fountain import_csv 96s/1. The Fountain V2 NameError (#372) has **not recurred** ✅ |
 
-**Today (Oct 19):** DanhTD off. Everyone else present as far as known. The Fountain Monday plan from @trinhmtt is not posted yet (expected 08:30–09:30).
+**Today (Oct 19):** DanhTD off. Everyone else present as far as known. The Fountain Monday plan from @trinhmtt is not posted yet (still absent at 08:29, expected by 09:30).
 
 ---
 
@@ -168,7 +168,7 @@ Trello: ⚠️ Maddy skipped (Alert #1).
 **Part 4 — Capacity & Runway:** re-fetched live (Est vs Charged, A13:L118, 106 rows). Unchanged/frozen: Narrow 229.00h / 28 tasks · Broad 328.50h / 63 tasks.
 **Part 5 — Over-estimate:** **37 items >120%**, unchanged.
 
-**Trello board (Web Development):** ⚠️ Kunal deploy request #731 → #901 (Alert #3). Kunal reorganized the board on 10-16 20:44–21:58 UTC (mass archive/moves). Open lists now: Next rollout 6 · In progress 3 · Bugs 4 · Ideas and later 9 · Notes 5 · Yearly reminders 1. Rick created the "RestClient ReadTimeout" bug card (15:39). Matrix: live sign-up shows a generic error when Mailgun rejects an email (TrinhMTT logging it as a bug).
+**Trello board (Web Development):** ⚠️ Kunal deploy request #731 → #901, plus **new 06:56: Oct 19 release #747 → #912, "push this live tonight?"** (Alert #3). Kunal reorganized the board on 10-16 20:44–21:58 UTC (mass archive/moves). Open lists now: Next rollout 6 · In progress 3 · Bugs 4 · Ideas and later 9 · Notes 5 · Yearly reminders 1. Rick created the "RestClient ReadTimeout" bug card (15:39). Matrix: live sign-up shows a generic error when Mailgun rejects an email (TrinhMTT logging it as a bug).
 
 Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #3).
 
@@ -186,13 +186,13 @@ Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #3).
 [Check progress](https://trello.com/c/eReZd0ub) · [Check mail](https://trello.com/c/qr858jZP) (all done)
 
 - Rory ✓ · Franc ✓ · James Diamond ✓ · Raymond ✓ · Marcel ✓ · MPFC ✓ · Elena - WordPress SamGuard ✓
-- Neural Contract ✓: Upwork is Cloudflare-blocked on this host, and session failure ≠ alert. Last verified clean 10-16 09:00 (newest client msg 09-28)
+- Neural Contract ✓: ~~Upwork is Cloudflare-blocked on this host… Last verified clean 10-16 09:00~~ → re-verified live 08:27 (local): newest msg is ours 10-16 (quarterly feedback form). Newest client msg 09-28. Nothing unanswered.
 - ⚠️ Maddy: skipped (Alert #1)
 - ⚠️ Aysar: skipped (Alert #6)
 - ⚠️ Bailey: skipped (Alert #5)
 - ⚠️ Andrew Taraba: skipped (Alert #2)
 - ⚠️ Fountain - DOCUMENT: skipped (Alert #3)
-- ⚠️ Ohcleo: skipped (Alert #4)
+- ~~⚠️ Ohcleo: skipped (Alert #4)~~ → Ohcleo ✓ (recheck 08:35, answered in-thread)
 
 ## Ignore List — 05:30 (+07:00)
 Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
@@ -213,7 +213,7 @@ No pending action items for DuongDN. Both script-flagged items were already answ
 
 ### Key updates
 
-**OhCleo: mobile new design, 9 QC bugs, ETA pending** (Alert #4):
+**OhCleo: mobile new design, 9 QC bugs** (~~ETA pending~~ Tony told Celine fix Monday then send ✅):
 - Thien replaced Khoa on mobile. HungPN found 9 bugs on the 16:56 build. Plan: fix Monday, video sent to Celine first.
 
 **Arthur: R1 estimate sent** 21:41:
@@ -235,10 +235,10 @@ No pending action items for DuongDN. Both script-flagged items were already answ
 
 | Channel | Msgs | Key content |
 |---------|------|-------------|
-| DM:Celine Fierro | 6 | 08:43 Tony: "No, I don't, but let me check" (free listens, no follow-up). **17:15 Tony daily report** (mobile streamline visual identity, transcript reading page) + progress video note. 17:16 Celine: "ok, where can I see the video?" / ⚠️ "can you please let me know status - how much is left approximately?" Tony 17:16 posted an empty-text item (attachment), with no ETA in text |
+| DM:Celine Fierro | 6 | 08:43 Tony: "No, I don't, but let me check" (free listens, no follow-up). **17:15 Tony daily report** (mobile streamline visual identity, transcript reading page) + progress video note. 17:16 Celine: "ok, where can I see the video?" / ⚠️ "can you please let me know status - how much is left approximately?" Tony 17:16 posted the progress video (mp4). ~~with no ETA in text~~ → thread: Tony 17:20 "I find a few bugs, I'll fix them on Monday and send it to you then", Celine 17:23 "Ok awesome!" ✅ |
 | #events-code | — | channel_not_found (known; needs admin re-invite) |
 
-Times converted UTC→+07. Tony daily report present at 17:15. Trello: ⚠️ Ohcleo skipped (Alert #4).
+Times converted UTC→+07. Tony daily report present at 17:15. Trello: ~~⚠️ Ohcleo skipped (Alert #4)~~ → Ohcleo ✓ (08:35, Celine's ask answered in-thread).
 
 ---
 
@@ -272,24 +272,25 @@ Paused per user. Not run, Trello auto-completed. (WS review Pending noted in Ale
 
 ---
 
-## Upwork Memo — 2026-10-16 — 05:08 (+07:00)
+## Upwork Memo — 2026-10-16 — 05:08 (+07:00), re-run 08:27 locally
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | Cloudflare Turnstile not passed (3 clicks) |
-| Aysar | — | — | carrick session not accepted (live + stored + headless) |
-| Tokenlite | — | — | Cloudflare Turnstile not passed |
+| Rory | ~~—~~ 0 | 0 | ~~Cloudflare Turnstile not passed~~ → fetched OK locally: no segments on 10-16 |
+| Aysar | ~~—~~ 0 | 0 | ~~carrick session not accepted~~ → fetched OK locally: no segments on 10-16 (WS shows KhanhHH 2.5h on Baamboozle that day, so that time was not tracked on Upwork) |
+| Tokenlite | — | — | duongdn's Upwork not logged in on the local machine either (live cookies + stored + headless all failed). Needs the user to log in once (Profile 9), then re-run headless |
 
-Upwork memo: data unavailable on the mpfc host. The Turnstile click failed, and the cookie vault was marked STALE so the company PC re-pushes after 08:00. Manual check: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-16` on the local machine. No memo alert (session failure ≠ memo status).
+No invalid memos. ~~Upwork memo: data unavailable on the mpfc host…~~ Rory/Aysar verified at 08:27.
 
 ---
 
 ## Unresolved Questions
 - Madhuraka's concealed-offshore new-project offer (commit as him, AU VPN): accept, refuse, or set terms? Kai already agreed (open since 10-15).
 - Who answers Madhuraka's 468 backward-compat question? LongVV/Kai should reply today.
-- Rick: deploy Kunal's #731 + #901 today?
-- Who gives Celine the mobile-app ETA, given the 9 QC bugs?
+- Rick: deploy Kunal's #731 + #901, and now also #747 + #912, tonight?
+- ~~Who gives Celine the mobile-app ETA, given the 9 QC bugs?~~ Tony told her: fix Monday, then send.
 - Joey's server question (GGS): does Amy/Nick owe the answer before Wednesday's go-live?
 - Andrew Taraba's 3 new POS features: quote first, or start as-is?
 - FirstProject production Rollbar (#1130/#906): which client project is this? Traslochi-Online: who owns monitoring?
-- Upwork memos for 10-16 need a run on the local machine after 08:00.
+- ~~Upwork memos for 10-16 need a run on the local machine after 08:00.~~ Done 08:27: Rory/Aysar 0 memos. Tokenlite needs duongdn to log in to Upwork (Profile 9).
+- Aysar: KhanhHH logged 2.5h Baamboozle on 10-16, but Upwork has 0 tracked segments. Intended, or missed tracking?
