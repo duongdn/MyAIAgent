@@ -96,11 +96,56 @@ Xoá ở project không active (Colin, Andrew-Taraba, marcel, Maddy/LIFM2…). C
 
 **Tổng tiềm năng:** ~50–60G → `/` còn ~80–90G trống (~58%).
 
+## Review 2 — Project / DB lâu không đụng (16:05)
+
+Lưu ý: trong `~/projects`, các folder Bailey, Catherine-Woron, Rebecca, Tina-Ziaf, CameronBatty, Mirko, Rory, Saul, Aysar, Blake, JohnYii, HoodMatthew, PhilipBriggs, Arthur-Meta-Stamp = **symlink sang `/disk2`** → xoá ko giúp ổ chính. Chỉ xét folder thật trên `/` + DB (MySQL/PG nằm trên `/`).
+
+"Sửa cuối" = file mới nhất (bỏ qua deps, git, log).
+
+### Nhóm 1 — Rất cũ (>6 tháng), đề xuất xoá (~7.5G)
+| Mục | Size | Sửa cuối | Ghi chú |
+|---|---|---|---|
+| `Maddy/LIFM2` (code + zip + sql) | 2.7G | 2025-03 | Magento LIFM local, 19 tháng ko đụng |
+| DB `luxeit2fwdm-v2` | 2.2G | 2025-03 | DB của LIFM2 trên |
+| DB `rms-live` | 0.6G | 2025-03 | RMS của LIFM2 |
+| DB `catnapping` | 0.3G | 2025-03 | ko tìm thấy project dùng |
+| DB `montreall` | 0.4G | 2025-06 | Catherine-Woron (code /disk2, sửa cuối 2025-08) |
+| `Jason-Allen/` | 255M | 2025-02 | |
+| `Emeka/` | 246M | 2025-04 | |
+| `JasonMeilleur/` | 330M | 2025-06 | |
+| `phpmyadmin/`, `FM-DX-Webserver/`, `leah-husay/` | ~50M | 2025 | |
+| `Kunal/` | 538M | 2026-03 | |
+| `JamesDiamond/` | 137M | 2026-03 | |
+| `~/go` | 586M | 2026-03 | Go module cache |
+
+### Nhóm 2 — 4-6 tháng, cần xác nhận pause (~13G)
+| Mục | Size | Sửa cuối | Ghi chú |
+|---|---|---|---|
+| `Andrew-Taraba/wordpress` + DB `wp_tactical` | 3.5G + 1.4G | 2026-05 | Andrew hours còn trên Workstream? |
+| `Colin/` (excel-test-zone api+app) | 3.2G | 2026-05 | |
+| DB `mwmxcoma_wp_nmqrw` | 3.0G | 2026-03 | Rebecca (code /disk2, sửa cuối 2026-05) |
+| DB `bailey_pre9` | 2.5G | 2026-03 | Bailey PrestaShop9 local |
+| `BlairBrown/` | 1.2G | 2026-06 | |
+| `test/`, `Raymond/`, `Franc/` | ~750M | 2026-05 | |
+| `Elliot/` | 118M | 2026-04 | Elliott đã pause (Ignore List) |
+| DB `delayedflight` | 0.4G | 2026-06 | ko tìm thấy project dùng |
+
+### Nhóm 3 — Backup/dup/app ít dùng (~6G)
+| Mục | Size | Ghi chú |
+|---|---|---|
+| `Cline-OhCleo/bak` | 2.1G | backup server 06/2026 (zip + tar.gz trùng nhau) → move `/disk2` |
+| `james-definitive/` | 960M | trùng `JamesDefinitiveGuide/` |
+| AnythingLLM (`.config` + AppImage) | 2.1G | dùng cuối 2026-08-20 |
+| `.nuget` | 2.1G | cuối 2026-08-20 (.dotnet vẫn dùng 10-12 → giữ) |
+| `.bun` | 1.4G | cuối 2026-09-03 |
+
+### Giữ (đang active)
+Elena, My-AI-Agent, marcel, Maddy (CN/GM/tuff-poly), Cline-OhCleo/code + DB `ohcleo`, McRoy, SandorAntal, trainings, AI, Neural-Contract, OrenYerushalmi, Discord/Slack/Element/Postman/Windsurf/Upwork, chrome-monitor-data.
+
 ## Câu hỏi chưa giải quyết
 
-1. Drop `luxeit2fwdm-v2` nữa không? (`luxeitfwdm2` đã drop)
-2. Docker volume Postgres ẩn danh `0991a08f4b34…` (2.2G, 2026-09-03) — xoá?
-3. DB mục A khác: `bailey_pre9`, `mwmxcoma_wp_nmqrw`, `wp_tactical`, `delayedflight`, `montreall`, `catnapping`, `swit_ocpp_dev` — giữ/drop?
-4. Project nào không còn active (để xoá deps)?
-5. Còn dùng .NET / minikube / AnythingLLM?
-6. Dump/zip trong `~/projects` + Downloads: xoá hay move `/disk2`?
+1. Nhóm 1 (~7.5G) — xoá hết?
+2. Nhóm 2 — project nào đã pause: Andrew-Taraba, Colin, Rebecca DB, Bailey pre9 DB, BlairBrown, test/Raymond/Franc, Elliot, delayedflight?
+3. Nhóm 3 — `Cline-OhCleo/bak` move `/disk2` hay xoá? Bỏ AnythingLLM / .nuget / .bun?
+4. Docker volume Postgres ẩn danh `0991a08f4b34…` (2.2G) — xoá?
+5. Để sau: Node cũ (~3-4G), Ruby cũ, Downloads 4.7G.
