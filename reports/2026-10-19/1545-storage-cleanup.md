@@ -10,12 +10,14 @@
 | Ban đầu | 169G | 28G | 87% |
 | Sau drop `paturevision_staging_20250214` | 166G | 30G | 85% |
 | Sau drop `luxeitfwdm2` | 164G | 32G | 84% |
+| Sau drop 4 DB swit (Postgres) | 159G | 37G | 82% |
 
 ## Đã làm
 
 - ✅ DROP DATABASE `paturevision_staging_20250214` (MySQL, ~2.5G, tạo 2025-08-28) — user duyệt.
   - Lưu ý: `/disk2/projects/Bailey/php/app/config/parameters.php` còn trỏ DB này (bản local cũ của Bailey php) → nếu chạy lại bản đó sẽ lỗi DB.
 - ✅ DROP DATABASE `luxeitfwdm2` (bản import cũ, app dùng `luxeit2fwdm-v2`) — user duyệt. Còn lại `luxeit2fwdm-v2`.
+- ✅ DROP Postgres `swit_ocpp_dev`, `swit_staging`, `swit_dev`, `swit-api-test` (Mirko/swit, ko còn làm) — user duyệt. Code `/disk2/projects/Mirko` giữ nguyên (ổ backup).
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`
