@@ -1,6 +1,6 @@
 ---
 name: feedback_ignore_list_paused_items
-description: Colin, Elena-SamGuard, Arthur, Blair Brown, Philip paused + John Yi cancelled (2026-09-28) — auto-complete Trello items, don't run their gate check, report under separate Ignore List section
+description: Colin, Elena-SamGuard, Blair Brown, Philip paused + John Yi cancelled (2026-09-28) — auto-complete Trello items, don't run their gate check, report under separate Ignore List section (Arthur un-paused 2026-10-19)
 metadata:
   type: feedback
 ---
