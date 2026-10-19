@@ -98,13 +98,18 @@ const CASES = {
     await page.goto(`${BASE}/wp-admin/post.php?post=${postId}&action=elementor`, { waitUntil: 'domcontentloaded', timeout: 180000 });
     await page.waitForFunction(() => window.$e && window.elementor && elementor.documents && elementor.documents.getCurrent(), { timeout: 240000 });
     log('editor loaded, elementor ' + (await page.evaluate(() => elementor.config.version)));
+    const prev = await page.waitForFunction(() => elementor.getPreviewContainer && elementor.getPreviewContainer(), { timeout: 240000 }).then(() => 'ready').catch(() => 'NOT READY');
+    log('preview: ' + prev + ' | ' + (await page.evaluate(() => { const f = document.querySelector('#elementor-preview-iframe'); return f ? f.src.replace(location.origin, '') + ' loaded=' + !!(f.contentDocument && f.contentDocument.body && f.contentDocument.body.className) : 'no iframe'; })));
+    await page.screenshot({ path: `${SHOTS}/elementor.png` });
     const res = await page.evaluate(async (txt) => {
-      const doc = elementor.documents.getCurrent();
-      const container = await $e.run('document/elements/create', {
-        container: doc.container, columns: 1,
-        model: { elType: 'container' },
-      });
-      $e.run('document/elements/create', { container, model: { elType: 'widget', widgetType: 'heading', settings: { title: txt } } });
+      const root = elementor.getPreviewContainer ? elementor.getPreviewContainer() : elementor.documents.getCurrent().container;
+      if (!root) return 'no root container';
+      const cont = elementor.config.experimentalFeatures && elementor.config.experimentalFeatures.container;
+      let box = $e.run('document/elements/create', { container: root, model: { elType: cont ? 'container' : 'section' }, columns: 1 });
+      if (Array.isArray(box)) box = box[0];
+      if (box && !cont && box.children && box.children.length) box = box.children[0]; // section -> column
+      if (!box) return 'create returned ' + typeof box + ' (container exp=' + cont + ')';
+      $e.run('document/elements/create', { container: box, model: { elType: 'widget', widgetType: 'heading', settings: { title: txt } } });
       const r = await $e.run('document/save/publish').then(() => 'saved').catch((e) => 'err ' + (e.message || JSON.stringify(e)).slice(0, 200));
       return r;
     }, `NUS upgrade test ${Date.now()}`);

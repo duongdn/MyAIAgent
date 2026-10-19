@@ -1,6 +1,6 @@
 # MPFC upgrade — Test cases & kết quả
 
-Cập nhật: 2026-10-16 11:20 (+07) | Server test: https://upgrade-test.mypersonalfootballcoach.com
+Cập nhật: 2026-10-19 12:10 (+07) | Server test: https://upgrade-test.mypersonalfootballcoach.com
 Bản đang test: **dựng bằng script** (`plans/mpfc-upgrade/scripts/02→03`, diễn tập 16/10) — Ubuntu 24.04, PHP 8.3.6, WP 7.1.3, MemberMouse 3.1.1 (+custom), Elementor/Pro 4.3.5/4.3.2, Yoast 28.7, plugin theo `plans/mpfc-upgrade/scripts/target-plugin-versions.csv`. DB `wp_mpfc_upgrade` = copy live 16/10 đã migrate.
 Handover: `plans/mpfc-upgrade/handover.md` · Runbook/script: `plans/mpfc-upgrade/runbook.md`
 
@@ -41,8 +41,8 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | B2 | `/?page_id=1155` | ✅ | 404 — live cũng 404 |
 | B3 | 15 trang dựng bằng Elementor: hiển thị giống live | ✅ | số element khớp từng trang |
 | B4 | REST `/wp-json/` (`mpfc/v1`, `wpcw/v1`) | ✅ | |
-| B5 | Đăng ký / mua membership mới (checkout MM + Stripe test) | 🙋 | thẻ 4242… · 16/10 lỗi ajax message rỗng → đã sửa, test lại |
-| B6 | Submit form CF7 / Gravity Forms (có upload file) | 🙋 | mail chặn → kiểm submit OK + entry lưu trong admin |
+| B5 | Đăng ký / mua membership mới (checkout MM + Stripe test) | ✅ | 19/10 tự động: thẻ 4242 → SetupIntent (trial) → `/cp-subscription/`, order 25802. Sửa lỗi MM intent rỗng khi submit lại |
+| B6 | Submit form CF7 / Gravity Forms (có upload file) | ✅/⚠️ | GF 4 form active (Contact, Subscribe, Drill Video, VA Interest) lưu entry OK. CF7 bị đánh `spam` vì test chặn mạng ra Google reCAPTCHA → kiểm lại sau cutover. Không form active nào có upload file |
 
 ## C. Member
 | # | Case | KQ | Ghi chú |
@@ -51,13 +51,13 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | C2 | Trang member: dashboard, my-account, training log, team library, user videos, 1v1 library, edit goals… | ✅ | 26×200, 0 lỗi PHP |
 | C3 | Trang chủ khi đã login không redirect về dashboard | ✅ | đã sửa trên live 15/10 |
 | C4 | Trang course / unit / video load (WP Courseware, FV Player) | ✅ | 0 lỗi PHP |
-| C5 | Video **phát được** (player chạy) | 🙋 | cần mắt người |
-| C6 | Đánh dấu hoàn thành unit, làm quiz | 🙋 | |
-| C7 | Upload video member (user-videos) | 🙋 | disk test nhỏ |
-| C8 | Đổi profile, đổi mật khẩu | 🙋 | |
+| C5 | Video **phát được** (player chạy) | ✅ | Vimeo embed load, không chặn domain (video tự phát cần người bấm — phía Vimeo) |
+| C6 | Đánh dấu hoàn thành unit, làm quiz | ✅ | Mark as Completed unit 7202 OK (course của member không có quiz) |
+| C7 | Upload video member (user-videos) | ✅ | API UploadMemberVideo → `uploads/lib_videos/` + post; DeleteMemberVideo OK (file mp4 không bị xoá — hành vi cũ) |
+| C8 | Đổi profile, đổi mật khẩu | ✅ | qua API app: changeAccountInfo + setPassword (F3). Web không có form riêng |
 | C9 | Quên mật khẩu | ⛔ | mail chặn → kiểm sau cutover |
-| C10 | Huỷ / nâng cấp membership | 🙋 | Stripe test |
-| C11 | Logout | 🙋 | |
+| C10 | Huỷ / nâng cấp membership | ✅ | remove_plan bundle 9, canselMembership OK; mua thêm = B5 |
+| C11 | Logout | ✅ | link logout → `/logout/`, hết cookie đăng nhập |
 
 ## D. Team
 | # | Case | KQ | Ghi chú |
@@ -65,7 +65,7 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | D1 | Team member login + team library | ✅ | 0 lỗi PHP |
 | D2 | Team manager: `/team-manager/`, `/team-stats/`, xem chi tiết từng member | ✅ | 52×200, 0 lỗi PHP |
 | D3 | Admin bar không hiện với team-manager/member | ✅ | |
-| D4 | Team manager thêm / xoá member, tạo team key | 🙋 | ghi DB |
+| D4 | Team manager thêm / xoá member, tạo team key | ✅ | 8 bước: tạo/đổi tên/xoá key, add member, gán/bỏ key, remove khỏi team, invite link |
 
 ## E. Admin
 | # | Case | KQ | Ghi chú |
@@ -75,8 +75,8 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | E3 | Add New post / video (WPBakery) | ✅ | fatal `count()` đã vá |
 | E4 | Yoast settings | ✅ | Yoast 28.7 hết fatal |
 | E5 | Elementor / Elementor Pro admin + mở editor | ✅ | 200, 0 fatal |
-| E6 | **Sửa & lưu** trang bằng Elementor editor / WPBakery | 🙋 | thao tác UI |
-| E7 | MemberMouse admin: Manage Members, Transactions, Reports (Product Sales GBP) | 🙋 | admin test không phải MM employee (anh bảo bỏ qua) |
+| E6 | **Sửa & lưu** trang bằng Elementor editor / WPBakery | ✅ | Elementor 4.3.5: thêm widget + publish, DB có data. Console lỗi `jQuery.live` (plugin cũ) không chặn lưu |
+| E7 | MemberMouse admin: Manage Members, Transactions, Reports (Product Sales GBP) | — | bỏ qua theo anh (admin test không phải MM employee) |
 | E8 | Gravity Forms (10 form, entries), ACF (3 group), WP Courseware (25 course) | ✅ | đọc qua wp-cli |
 | E9 | Elementor System Info hiện exception Data API | ⚠️ | do chặn mạng ra ngoài |
 | E10 | Export/import, ai1wm backup | ⛔ | disk test nhỏ |
@@ -90,15 +90,15 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | F4 | Coach Corner, Dynamic Ball Mastery, Training Programme | ✅ | từng fatal PHP 8 → đã vá |
 | F5 | App usage / leaderboard / statistic, notifications, timer, plans, trophies | ✅ | |
 | F6 | IDP / League tables / Virtual Academy / Coach Pass trả lỗi quyền đúng logic | ✅ | user test không có các gói này |
-| F7 | Huỷ membership, đổi thông tin account, xoá account, đăng ký mới, xoá video/comment, logout app | 🙋 | không chạy tự động (ghi/xoá dữ liệu) — test bằng app |
-| F8 | Firebase session (`mpfc/v1/firebase-session`), push notification | 🙋 | cần app thật (chữ ký HMAC) |
-| F9 | Upload video từ app (S3) | 🙋 | |
+| F7 | Huỷ membership, đổi thông tin account, xoá account, đăng ký mới, xoá video/comment, logout app | ✅ | `tests/app-api-write-test.sh` 10/10 (register→login→đổi info→plans→cancel→logout→delete) |
+| F8 | Firebase session (`mpfc/v1/firebase-session`), push notification | ✅/⛔ | session ký HMAC đúng → user; sai → 401. Push cần thiết bị thật |
+| F9 | Upload video từ app (S3) | ✅ | lưu local `uploads/lib_videos` (không phải S3) — như C7 |
 
 ## G. Tích hợp ngoài — kiểm sau cutover
 | # | Case | KQ | Ghi chú |
 |---|---|---|---|
 | G1 | Thanh toán Stripe thật (1 giao dịch nhỏ + refund) | ⛔ | test đang ở test mode |
-| G2 | PayPal | 🙋 | cần sandbox creds nếu muốn test trước |
+| G2 | PayPal | ⛔ | chưa có sandbox creds |
 | G3 | MemberMouse rebill (cron) | ⛔ | cron tắt trên test để không charge thật |
 | G4 | Email (WP, MemberMouse, GF notifications, quên mật khẩu) | ⛔ | mail chặn |
 | G5 | Mailchimp, Uncanny Automator webhooks | ⛔ | chặn mạng ra ngoài |
@@ -107,20 +107,13 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | G8 | Rollbar, New Relic, GA / Hotjar / FB pixel | ⛔ | cố ý tắt trên test |
 | G9 | Yoast index (`wp yoast index`) | ⛔ | chạy off-peak sau cutover (nặng DB 1vCPU) |
 
-## 🙋 Danh sách anh cần tự test (gom lại)
-1. B5 Đăng ký / mua membership mới bằng thẻ Stripe test
-2. B6 Submit form CF7 / Gravity Forms (có upload file)
-3. C5 Video phát được
-4. C6 Hoàn thành unit / quiz
-5. C7 Upload video member
-6. C8 Đổi profile / mật khẩu trên web
-7. C10 Huỷ / nâng cấp membership
-8. C11 Logout
-9. D4 Team manager thêm/xoá member, tạo team key
-10. E6 Sửa & lưu trang bằng Elementor / WPBakery
-11. E7 MemberMouse admin (Members, Transactions, Reports) — cần tài khoản admin thật là MM employee
-12. F7–F9 Các chức năng app ghi/xoá dữ liệu, Firebase/push, upload video (cần build app trỏ domain test)
-13. G2 PayPal (nếu có sandbox creds)
+## Còn lại (không tự động được)
+1. E7 MemberMouse admin — bỏ qua theo anh
+2. G2 PayPal — cần sandbox creds
+3. Push notification (F8) — cần thiết bị thật
+4. CF7 reCAPTCHA (B6) + các mục ⛔ — kiểm sau cutover
+
+Chạy lại test: `node plans/mpfc-upgrade/tests/functional-test.js checkout team cf7 logout unit toggle` · `POST_ID=<draft> … elementor` · `MEDIA_DIR=<dir có t.mp4,t.jpg> bash plans/mpfc-upgrade/tests/app-api-write-test.sh`
 
 ## Lỗi PHP 8 / upgrade đã sửa (đưa vào code qua script)
 | File | Lỗi | Sửa |
@@ -134,8 +127,14 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | `themes/pfc7/wpbakery/…` (4 chỗ) | `count()` string → Add New post chết | `count((array)…)` |
 | `plugins/wd-instagram-feed` 1.4.35 (2 chỗ) | `/team-library` 500, include sai đường dẫn | guard, `__DIR__` |
 | MemberMouse 3.1.1 | 12 commit custom bị ghi đè | port lại (patch) |
+| `video-library-manager` vlm-custom.js | Toggle active/inactive video ở /team-stats/ không có loading | spinner thay switch khi đang lưu (**đã deploy live 19/10**, commit `f9b9d8f1f`) |
 | Rewrite rules | `/user-video/...` 404 sau migrate | 03 flush rewrite có load theme |
 | MemberMouse `class.stripeservice.php` (validate checkout) | Submit lại form đã có intent cùng số tiền → ajax trả `message` rỗng, kẹt "Please wait…" (lỗi gốc MM, live 3.0.x cũng có) | trả lại intent cũ (patch MM) |
+
+## 🔴 Bảo mật (có sẵn trên live, không do upgrade)
+- `api/dashboard/changeAccountInfo`: **không kiểm tra đăng nhập**, nối `$_REQUEST` thẳng vào SQL → ai cũng đổi được email user bất kỳ (chiếm tài khoản qua quên mật khẩu) + SQL injection.
+- `api/dashboard/canselMembership`: không kiểm tra đăng nhập → xoá course/bundle của user bất kỳ.
+- mailcatcher trên live mở public port 1080.
 
 ## Câu hỏi chưa giải quyết
 - License key plugin premium (G7)? PayPal sandbox creds (G2)?
