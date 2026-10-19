@@ -131,7 +131,7 @@ Chạy lại test: `node plans/mpfc-upgrade/tests/functional-test.js checkout te
 | Rewrite rules | `/user-video/...` 404 sau migrate | 03 flush rewrite có load theme |
 | MemberMouse `class.stripeservice.php` (validate checkout) | Submit lại form đã có intent cùng số tiền → ajax trả `message` rỗng, kẹt "Please wait…" (lỗi gốc MM, live 3.0.x cũng có) | trả lại intent cũ (patch MM) |
 
-## 🔴 Bảo mật (có sẵn trên live, không do upgrade)
+## 🔴 Bảo mật (có sẵn trên live, không do upgrade) — chỉ ghi nhận, KHÔNG vá (quyết định 19/10)
 - `api/dashboard/changeAccountInfo`: **không kiểm tra đăng nhập**, nối `$_REQUEST` thẳng vào SQL → ai cũng đổi được email user bất kỳ (chiếm tài khoản qua quên mật khẩu) + SQL injection.
 - `api/dashboard/canselMembership`: không kiểm tra đăng nhập → xoá course/bundle của user bất kỳ.
 - mailcatcher trên live mở public port 1080.
