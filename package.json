@@ -1,7 +1,9 @@
 {
   "scripts": {
     "web": "node web/server.js",
-    "claude": "claude --dangerously-skip-permissions"
+    "claude": "claude --dangerously-skip-permissions",
+    "eval:daily-structure": "node evals/daily-report/run-structure-eval.js",
+    "eval:daily-judgment": "node evals/daily-report/run-judgment-eval.js"
   },
   "dependencies": {
     "express": "^4.22.2",
