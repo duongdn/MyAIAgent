@@ -36,7 +36,7 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -342,10 +342,20 @@ def _parse_pub_date(pub: str) -> Optional[datetime]:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt
     except Exception:
+        pass
+    try:
+        # Tuoi Tre: "10/18/2026 2:07:00\u202fPM" (local VN time, UTC+7)
+        dt = datetime.strptime(pub.replace("\u202f", " "), "%m/%d/%Y %I:%M:%S %p")
+        return dt.replace(tzinfo=timezone(timedelta(hours=7)))
+    except Exception:
         return None
 
 
-MAX_ARTICLE_AGE_DAYS = 45
+# Daily digest: anything older than a week is stale. Google News search
+# feeds routinely surface 2-3 week old items, so the old 45-day window let
+# them through. PHP feeds are sparse, so that topic keeps a longer window.
+MAX_ARTICLE_AGE_DAYS = 7
+MAX_ARTICLE_AGE_DAYS_BY_TOPIC = {"php": 45}
 
 
 def _title_tokens(title: str) -> set:
@@ -501,7 +511,7 @@ def fetch_facebook_page(source: dict, limit: int, tag: Optional[list]) -> dict:
     return result
 
 
-def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
+def fetch_rss(source: dict, limit: int, tag: Optional[list], max_age_days: int = MAX_ARTICLE_AGE_DAYS) -> dict:
     url = source["url"]
     result = {"name": source["name"], "url": url, "articles": [], "error": None}
 
@@ -588,7 +598,7 @@ def fetch_rss(source: dict, limit: int, tag: Optional[list]) -> dict:
             pub_dt = _parse_pub_date(pub)
             if pub_dt is not None:
                 age_days = (datetime.now(timezone.utc) - pub_dt).days
-                if age_days > MAX_ARTICLE_AGE_DAYS:
+                if age_days > max_age_days:
                     continue
 
             article = {
@@ -684,7 +694,8 @@ def main():
             if source.get("fb_id"):
                 data = fetch_facebook_page(source, fetch_n, tag)
             else:
-                data = fetch_rss(source, fetch_n, tag)
+                data = fetch_rss(source, fetch_n, tag,
+                                 MAX_ARTICLE_AGE_DAYS_BY_TOPIC.get(topic_name, MAX_ARTICLE_AGE_DAYS))
 
             # Cap each article at 2 total appearances across all past reports.
             # Enforced here (mechanically) rather than left to manual grepping
