@@ -23,6 +23,7 @@
   - **Giữ lại Docker:** volume ẩn danh `0991a08f4b34…` 2.2G = Postgres data dir (sửa lần cuối 2026-09-03) — chờ user xác nhận; named volume `metastamp-*`, `ohcleo-backend-api_*` giữ (có data dự án).
 - ✅ Xoá `~/.minikube/cache` (826M, k8s chưa dùng) → 145G used / 51G avail.
 - ✅ Xoá `~/projects/james-definitive` (clone cũ trùng remote với `JamesDefinitiveGuide`, ko có commit chưa push; chỉ mất `deployer.phar` untracked), `Emeka/`, `JasonMeilleur/` → 144G used / 53G avail (74%).
+- ✅ Dọn sạch `~/Downloads` (4.7G) → 139G used / 57G avail (71%). Trước khi xoá, move 127 file nhỏ ko tải lại được (`.env`, `SubscriptionKey_*.p8`, pdf/xlsx/docx/csv/md, tổng 132M) sang **`/disk2/misc/downloads-keep-20261019/`** (env + p8 chmod 600).
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`
