@@ -46,3 +46,28 @@ Chưa tính lãi tiết kiệm (~5M/th) + trợ cấp thất nghiệp.
 ## Câu hỏi mở
 - Đã từng hưởng trợ cấp thất nghiệp lần nào chưa?
 - Freelancer ~10M/th có giữ được khi mất việc chính?
+
+## Ngân sách thất nghiệp (review 10-19, data T10 1–19 quy ra 30 ngày; chỉ dùng data 10/2026+)
+| Khoản | T10 thực (quy 30 ngày) | Khi thất nghiệp |
+|---|---|---|
+| Học phí con | 8.6M | 8.6M (giữ) |
+| Gửi má | 5.0M | 5.0M (giữ) |
+| Điện/nước/internet/DV | 1.6M | 1.6M |
+| Nhà cửa | 1.9M | 1.5M |
+| Ăn uống (chợ, ăn sáng, cafe) | 5.6M | 4.5M (bớt cafe/ăn ngoài) |
+| Xăng/đi lại | 3.9M | 2.0M (không đi làm) |
+| Sức khỏe/thể thao | 0.2M (bỏ giày 2.3M một lần) | 0.5M |
+| Hiếu hỉ/từ thiện (ngoài gửi má) | 2.7M | 1.0M |
+| Linh tinh/mua sắm/sách | 3.4M | 1.5M |
+| Hưởng thụ | 2.9M | 0.5M |
+| **Hằng tháng** | **~36M** | **~27M** |
+| Khoản năm (Tết, bảo hiểm…) | ~15M (kế hoạch) | ~8M |
+| **Tổng** | ~51M | **~35M** |
+
+## Runway mới (năm 1 trừ trợ cấp 6M/th; bỏ qua lãi ≈ bù lạm phát)
+| Đến lớp | ₫ | 27M/th (tối thiểu) | 35M/th (thực tế) | 55M/th (cũ) |
+|---|---|---|---|---|
+| Tiền mặt + sổ ko kì hạn | 538M | ~23 th | ~17 th | ~11 th |
+| + sổ kỳ hạn | 1,228M | ~48 th | ~37 th | ~24 th |
+| + vàng | ~1,924M | ~74 th | ~57 th | ~37 th |
+| + CP/quỹ (−20%) | ~3,321M | ~126 th (~10 năm) | ~97 th (~8 năm) | ~62 th |
