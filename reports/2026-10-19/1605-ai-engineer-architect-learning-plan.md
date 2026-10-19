@@ -31,7 +31,7 @@
 
 **Học:**
 - Python cơ bản cho AI: venv, `pydantic`, `httpx`, `pytest`, pandas cơ bản.
-- Claude API trực tiếp: Messages, tool use, structured output (JSON schema), prompt caching, batch.
+- **DeepSeek API** (user chọn 2026-10-19, tương thích OpenAI SDK): chat, tool/function calling, JSON output, context caching. ⚠️ Không gửi dữ liệu khách hàng (Slack/Matrix/email) lên DeepSeek — chỉ dùng data đã ẩn danh hoặc tự tạo. Claude Code headless (`claude -p`) vẫn dùng cho dữ liệu thật.
 - Evals: test set, golden answers, LLM-as-judge, đo precision/recall cho alert.
 
 **Tài liệu:**
