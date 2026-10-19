@@ -74,14 +74,15 @@
 
 # PHỤ LỤC — Quét trực tiếp Slack + Element (90 ngày, 2026-07-21 → 2026-10-19)
 
-**Phạm vi:** chỉ tin nhắn **do bạn gửi**. Slack `search from:me` trên 14/16 workspace (Amazing Meds, OhCleo lỗi `invalid_auth`, chưa quét). Matrix: 151 phòng.
-**Tổng:** 5.649 tin (Slack 1.614 · Element 4.102) ≈ **~90 tin/ngày làm việc**, trung bình 78 ký tự/tin.
+**Phạm vi:** chỉ tin nhắn **do bạn gửi**. Slack `search from:me` trên 15 workspace đang hoạt động (Amazing Meds bỏ qua vì dự án đã cancel; OhCleo quét bổ sung). Matrix: 151 phòng.
+**Tổng:** 6.060 tin (Slack 2.025 · Element 4.102) ≈ **~95 tin/ngày làm việc**, trung bình 78 ký tự/tin.
 
 ## A. Thời gian đi đâu
 
 | Kênh | Tin | Bản chất |
 |---|---|---|
 | Equanimity (Slack) | 530 | Trao đổi trực tiếp khách, bonus/billing, scope |
+| OhCleo (Slack, 364 DM với Celine + 43 #cover-art) | 411 | **Làm trực tiếp như dev + support cho khách**: "My report today", sửa server, hướng dẫn API key/credit, chuẩn bị submit Apple/Google |
 | Bailey – Paturevision + BA/QC + Mgmt (Element) | 730 | Điều phối team, hỏi tiến độ, chất vấn vượt est |
 | Xtreme Soft / Maddy (Slack + Element) | 470 | Trả lời khách, estimate, giải thích kỹ thuật |
 | Baamboozle (Slack) | 288 | Post "Today's update", báo PR fixed/deployed |
@@ -107,7 +108,7 @@
 
 ## C. Phát hiện chính
 
-1. **Bạn đang làm 3 vai cùng lúc:** PM (điều phối), dev-relay (viết update/PR thay dev cho khách), tech lead (root cause). Vai dev-relay chiếm khoảng 1/3 tin Slack và **dễ tự động nhất**.
+1. **Bạn đang làm 3–4 vai cùng lúc** (OhCleo cho thấy thêm vai *dev chính + support khách*, 411 tin/90 ngày): PM (điều phối), dev-relay (viết update/PR thay dev cho khách), tech lead (root cause). Vai dev-relay chiếm khoảng 1/3 tin Slack và **dễ tự động nhất**.
 2. **Khoảng 40–50% tin nhắn là việc AI làm được**: hỏi tiến độ, nhắc log, viết report today, báo PR. Bạn đã tự động *đọc*, nhưng chưa tự động *viết/gửi* (đúng theo rule không gửi khi chưa xin phép). Bước tiếp theo hợp lý: **AI soạn nháp, bạn bấm duyệt**.
 3. **Việc chỉ người làm được** (estimate, thương lượng billing, chọn người, chốt hướng kỹ thuật, câu hỏi "tại sao AI chưa làm team nhanh hơn") chiếm khoảng 25–30% nhưng là phần có giá trị nhất. Nên dồn thời gian vào đây.
 4. **Câu hỏi của chính bạn là đề bài đúng:** *"bỏ AI vào vẫn không nhanh hơn nhiều"*. Kỹ năng của thời AI không phải "dùng AI" mà là **thiết kế lại quy trình** để AI tạo ra tốc độ thật (spec rõ → AI code → review → test).
@@ -127,5 +128,4 @@
 
 ## Câu hỏi còn mở (phụ lục)
 
-- Amazing Meds + OhCleo Slack token `invalid_auth` → chưa quét; có cần refresh để bổ sung không?
 - Muốn bắt đầu từ đề xuất D.1 (bot nhắc) hay D.2 (draft report cho khách)?
