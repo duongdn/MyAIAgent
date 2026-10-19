@@ -143,8 +143,54 @@ Lưu ý: trong `~/projects`, các folder Bailey, Catherine-Woron, Rebecca, Tina-
 ### Giữ (đang active)
 Elena, My-AI-Agent, marcel, Maddy (CN/GM/tuff-poly), Cline-OhCleo/code + DB `ohcleo`, McRoy, SandorAntal, trainings, AI, Neural-Contract, OrenYerushalmi, Discord/Slack/Element/Postman/Windsurf/Upwork, chrome-monitor-data.
 
+## Review 3 — Danh sách mục LỚN trên ổ `/` (16:15, 144G used)
+
+Xếp từ lớn → nhỏ, chỉ mục ≥1G. Cột "Đề xuất": 🟢 xoá được · 🟡 tuỳ user · 🔴 giữ.
+
+| # | Mục | Size | Là gì | Đề xuất |
+|---|---|---|---|---|
+| 1 | `/usr` + `/opt` (hệ thống, app cài) | 17.4G | OS + app | 🔴 giữ |
+| 2 | `~/.config/google-chrome` (16 profile) | 11G | Profile 9 = 2.9G (Workstream SSO, bắt buộc), Default 1.1G, 14 profile khác ~0.5–0.7G | 🟡 xoá profile ko dùng trong Chrome |
+| 3 | `Elena/external` | 4.0G | clone tham khảo | 🟡 xoá nếu chỉ tham khảo |
+| 4 | `Elena/develop` | 3.9G | đang review OP | 🔴 giữ |
+| 5 | DB MySQL `ohcleo` | 3.7G | dev OhCleo local | 🟡 |
+| 6 | `My-AI-Agent/tmp` | 5.8G | profile browser cho monitoring (msteams, slack, upwork, fb…) | 🔴 giữ (trừ `msteams-will-profile-bak-…` 568M) |
+| 7 | `Cline-OhCleo` (code 3.4G + bak 2.1G) | 5.4G | code + backup server 06/2026 | 🟡 bak → move `/disk2` |
+| 8 | `miniconda3` | 5.1G | base Python skills | 🔴 giữ (user đã bỏ qua) |
+| 9 | `~/Downloads` | 4.7G | 1 folder 1.6G + **zip của chính nó** 1.4G (06-18), hunterxtop zip 0.5G, backup peptidesciences 0.3G, video .mov 0.3G | 🟢 ~4G |
+| 10 | `Andrew-Taraba/wordpress` + DB `wp_tactical` | 3.5G + 1.6G | WP local, sửa cuối 2026-05 | 🟡 |
+| 11 | `Colin/` | 3.2G | sửa cuối 2026-05 | 🟡 |
+| 12 | Node `v22.22.1` | 3.2G | Node chính đang dùng | 🔴 giữ |
+| 13 | Node `v22.7.0` | 2.9G | bản cũ, chứa openclaw + lib CUDA | 🟢 |
+| 14 | DB `mwmxcoma_wp_nmqrw` (Rebecca) | 2.8G | sửa cuối 2026-03 | 🟡 |
+| 15 | DB `bailey_pre9` | 2.7G | PrestaShop9 local, 2026-03 | 🟡 |
+| 16 | `marcel/` | 2.7G | active (10-12) | 🔴 |
+| 17 | `Maddy/LIFM2` | 2.7G | Magento local, 2025-03 | 🟢 |
+| 18 | `~/.rvm/src` | 2.5G | source code Ruby lúc build, ko cần sau khi cài | 🟢 |
+| 19 | Docker volumes | 2.8G | 2.2G = PG volume ẩn danh; còn lại ohcleo/metastamp | 🟡 |
+| 20 | DB `luxeit2fwdm-v2` | 2.2G | DB của LIFM2 | 🟢 (đi cùng #17) |
+| 21 | `~/.nuget` | 2.1G | cache package .NET, dùng cuối 08-20 | 🟢 tự tải lại |
+| 22 | Postgres (còn lại) | 2.0G | `xid_async_dev` 1.3G + nhỏ | 🔴 |
+| 23 | `~/.rvm/gems` | 1.9G | gems Ruby | 🟡 |
+| 24 | `~/.npm/_npx` | 1.8G | cache npx | 🟢 |
+| 25 | `chrome-monitor-data` | 1.8G | profile Chrome monitoring | 🔴 |
+| 26 | Docker overlay2 | 1.8G | image đang dùng (wp_quizmaster) | 🔴 |
+| 27 | `.config/discord` | 1.7G | phần lớn cache | 🟢 xoá `Cache/` |
+| 28 | flatpak | 1.6G | runtime flatpak | 🟡 (`flatpak uninstall --unused`) |
+| 29 | `.dotnet` | 1.6G | SDK .NET (dùng 10-12) | 🔴 |
+| 30 | `.config/Postman` | 1.5G | phần lớn cache | 🟢 xoá cache |
+| 31 | `.config/anythingllm-desktop` + AppImage | 2.1G | dùng cuối 08-20 | 🟡 |
+| 32 | `~/.bun/install` | 1.4G | cache bun | 🟢 |
+| 33 | `BlairBrown/` | 1.2G | 2026-06 | 🟡 |
+| 34 | Node v16 + v18 + v17/v14/v12/v20.18 | 1.6G | bản cũ | 🟢 (giữ v18 nếu cần) |
+
+### Tổng hợp
+- 🟢 xoá ngay ko rủi ro: Downloads ~4G, Node v22.7.0 2.9G, rvm/src 2.5G, LIFM2 + DB ~5.5G, nuget 2.1G, npx 1.8G, cache discord/postman ~2G, bun 1.4G, Node cũ khác ~1.2G → **~23G**
+- 🟡 tuỳ user (project pause / profile Chrome / Elena external / ohcleo…): **~30G**
+
 ## Câu hỏi chưa giải quyết
 
+0. Review 3: duyệt toàn bộ 🟢 (~23G)? Mục 🟡 nào xoá?
 1. Nhóm 1 (~7.5G) — xoá hết?
 2. Nhóm 2 — project nào đã pause: Andrew-Taraba, Colin, Rebecca DB, Bailey pre9 DB, BlairBrown, test/Raymond/Franc, Elliot, delayedflight?
 3. Nhóm 3 — `Cline-OhCleo/bak` move `/disk2` hay xoá? Bỏ AnythingLLM / .nuget / .bun?
