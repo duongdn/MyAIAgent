@@ -11,6 +11,7 @@
 | Sau drop `paturevision_staging_20250214` | 166G | 30G | 85% |
 | Sau drop `luxeitfwdm2` | 164G | 32G | 84% |
 | Sau drop 4 DB swit (Postgres) | 159G | 37G | 82% |
+| Sau dọn cache (mục B) | 146G | 50G | 75% |
 
 ## Đã làm
 
@@ -18,6 +19,9 @@
   - Lưu ý: `/disk2/projects/Bailey/php/app/config/parameters.php` còn trỏ DB này (bản local cũ của Bailey php) → nếu chạy lại bản đó sẽ lỗi DB.
 - ✅ DROP DATABASE `luxeitfwdm2` (bản import cũ, app dùng `luxeit2fwdm-v2`) — user duyệt. Còn lại `luxeit2fwdm-v2`.
 - ✅ DROP Postgres `swit_ocpp_dev`, `swit_staging`, `swit_dev`, `swit-api-test` (Mirko/swit, ko còn làm) — user duyệt. Code `/disk2/projects/Mirko` giữ nguyên (ổ backup).
+- ✅ Dọn cache (~13G): Chrome cache, pip/node-gyp/typescript cache, npm cache, Docker image không dùng (405M) + 6 volume ẩn danh nhỏ (~50M mỗi cái), 15 snap revision disabled, snapd cache, apt cache, journal vacuum.
+  - **Giữ lại Docker:** volume ẩn danh `0991a08f4b34…` 2.2G = Postgres data dir (sửa lần cuối 2026-09-03) — chờ user xác nhận; named volume `metastamp-*`, `ohcleo-backend-api_*` giữ (có data dự án).
+  - minikube cache chưa xoá (chờ xác nhận có dùng k8s).
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`
@@ -95,7 +99,7 @@ Xoá ở project không active (Colin, Andrew-Taraba, marcel, Maddy/LIFM2…). C
 ## Câu hỏi chưa giải quyết
 
 1. Drop `luxeit2fwdm-v2` nữa không? (`luxeitfwdm2` đã drop)
-2. Duyệt mục B (cache, ~17G) — chạy luôn?
+2. Docker volume Postgres ẩn danh `0991a08f4b34…` (2.2G, 2026-09-03) — xoá?
 3. DB mục A khác: `bailey_pre9`, `mwmxcoma_wp_nmqrw`, `wp_tactical`, `delayedflight`, `montreall`, `catnapping`, `swit_ocpp_dev` — giữ/drop?
 4. Project nào không còn active (để xoá deps)?
 5. Còn dùng .NET / minikube / AnythingLLM?
