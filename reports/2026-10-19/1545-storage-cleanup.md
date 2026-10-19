@@ -188,6 +188,20 @@ Xếp từ lớn → nhỏ, chỉ mục ≥1G. Cột "Đề xuất": 🟢 xoá �
 - 🟢 xoá ngay ko rủi ro: Downloads ~4G, Node v22.7.0 2.9G, rvm/src 2.5G, LIFM2 + DB ~5.5G, nuget 2.1G, npx 1.8G, cache discord/postman ~2G, bun 1.4G, Node cũ khác ~1.2G → **~23G**
 - 🟡 tuỳ user (project pause / profile Chrome / Elena external / ohcleo…): **~30G**
 
+### Đối chiếu đủ 144G
+Bảng trên chỉ liệt kê mục ≥1G, nên cộng lại ko đủ. Tổng thật **đã khớp**: `/home` 97G + `/var` 30G + `/usr` 14G + `/opt` 3.4G = **144.4G**. Ko có dung lượng "ẩn":
+- File đã xoá nhưng process còn giữ: chỉ là shared memory của Slack/Gnome (RAM), ko chiếm ổ.
+- Swap là partition riêng (`/dev/sda2` 15.6G), ko nằm trong `/`.
+
+| Khối | Tổng | Mục ≥1G đã liệt kê | Phần lẻ (<1G mỗi mục) |
+|---|---|---|---|
+| `~/projects` | 40G | Elena, My-AI-Agent, OhCleo, Maddy, Andrew, Colin, marcel, Blair = 35.6G | ~25 project nhỏ = 4.4G |
+| `~/.config` | 18G | chrome 11 + discord 1.7 + postman 1.5 + anythingllm 1.5 | Element 1.0, Slack 0.9, Windsurf 0.4… |
+| runtime/cache home | ~28G | nvm 8.1, conda 5.1, rvm 4.7, nuget 2.1, npm 1.8, dotnet 1.6, bun 1.4, .local 1.5, .cache 1.1 | |
+| home khác | ~11G | Downloads 4.7, chrome-monitor-data 1.8 | .codeium 0.9, snap 0.9, Desktop 0.6, go 0.6, .Upwork 0.5, `~/Antigravity` 0.5, .claude 0.5, .agent-browser 0.4, `~/timedoctor2` 0.3 |
+| `/var` | 30G | mysql 16, docker 4.8, snapd 3.9, postgres 2.0, flatpak 1.6 | log ~1.5 |
+| `/usr` + `/opt` | 17.4G | hệ thống | |
+
 ## Câu hỏi chưa giải quyết
 
 0. Review 3: duyệt toàn bộ 🟢 (~23G)? Mục 🟡 nào xoá?
