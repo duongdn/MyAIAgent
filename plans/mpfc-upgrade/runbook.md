@@ -33,6 +33,20 @@ Truy cập live từ server mới: key `/root/.ssh/mpfc_live_ed25519`, thêm và
 9. Smoke test + API app + 1 giao dịch thật nhỏ + refund.
 10. Rollback: trỏ DNS lại live cũ (code cũ chạy được trên DB đã migrate vì chỉ thêm bảng/cột); attach volume lại. Giữ live cũ 1–2 tuần.
 
+## Checklist release: chuyển app phụ sang server mới (hoãn tới lúc release)
+Quyết định 19/10: chuyển #3 MyDailyAgent, #4 quantification, #5 MyBussinessAiAgent sang server production mới (KHÔNG lên droplet test). Lúc release **tăng size droplet mới** (≥ live 4vCPU/8G) vì thêm Chrome/Claude CLI/cron.
+- [ ] Viết + chạy `04-move-side-apps.sh` (chưa viết)
+- [ ] Gói: google-chrome-stable, xvfb, x11vnc, gh, fonts; npm -g: `@anthropic-ai/claude-code`, `@google/gemini-cli`, `@openai/codex`, `claudekit-cli`, `repomix`, `wrangler`, `pnpm`, `rmbg-cli`
+- [ ] rsync `/var/www/MyDailyAgent` (3.4G, có `tmp/` chứa browser profile login), `/var/www/MyBussinessAiAgent` (chỉ code, không vhost/cron)
+- [ ] rsync `/home/mpfc` dotfiles: `.claude` `.claude.json` `.claudekit` `.config` `.ssh` (key github `duongdn`) `.gitconfig` `.local` — bỏ zip Elementor, `upgrade/`, `mm-data-export*`
+- [ ] systemd `mydailyagent-web` (3334), `quantification-web` (3335); bỏ node chạy tay cũ port 3333
+- [ ] vhost `dailyagent`/`quantification` (01 đã copy) + copy `/etc/apache2/.htpasswd`, `.htpasswd-quantification`; LE certs (01 đã copy)
+- [ ] crontab user `mpfc` (6 dòng autorun-*.sh)
+- [ ] Xvfb :1 + x11vnc **listen localhost** (live đang `-nopw` 0.0.0.0)
+- [ ] DNS Cloudflare: `dailyagent.mypersonalfootballcoach.com`, `quantification.youragentstore.net` → IP mới
+- [ ] Không chuyển: mailcatcher (port 1080 đang mở public trên live — chặn), staging (hỏi Saul), file rác (`DONT.REMOVED...zip`, PDF 320M trong wp-content, `elementor-backup-3.3.1` — hỏi Saul)
+- [ ] Sau chuyển: chạy thử 1 lần daily-report + news-digest, login lại VNC nếu session mất
+
 ## Câu hỏi chưa giải quyết
 - CustomLog pipe mysql (password plaintext trong vhost) — giữ hay bỏ ở server mới?
 - 3 app phụ (MyDailyAgent, quantification, MyBussinessAiAgent) chuyển theo không?
