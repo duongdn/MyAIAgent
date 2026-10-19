@@ -16,7 +16,7 @@
 | 3 | Fountain Trello board | **New 06:56 today:** Kunal asked @rick570 "can you push this live tonight?" for the **Oct 19 release (backend #747, then website #912)**, to go right after the Oct 16 release. So Rick now has 2 releases queued for tonight. Earlier: **Kunal (via his AI) asked @rick570 Fri 21:04 UTC to deploy backend #731 (6 additive migrations) first, then website #901** ([card](https://trello.com/c/bF2JzKzp)). This replaces the 10-16 04:46 "4 PRs for tonight" list. No Rick reply yet (re-checked 08:30). Kunal also restructured the board: archived most cards and created new lists (Next rollout / In progress / Bugs / Ideas and later) and an "Accessibility check on V2" card. Fountain - DOCUMENT ○ |
 | 4 | Slack OhCleo (DM Celine) | ~~Celine Fri 17:16: "can you please let me know status - how much is left approximately?" after Tony's daily report + progress video. Tony's only follow-up is an empty-text post (attachment). **No ETA has been given yet.** Celine has been asking since 10-15. Internal plan (Matrix 17:19): tell her QC found bugs (9 on the new mobile build), fix Monday, then send. Tony's 08:43 reply on the free-listens question was "No, I don't, but let me check", with no follow-up. Ohcleo ○~~ → **Resolved (recheck 08:35):** the cron missed a thread reply. Tony answered in-thread Fri 17:20: "I find a few bugs, I'll fix them on Monday and send it to you then". Celine 17:23: "Ok awesome! … I have a few observations on the new creator page I will share". The 'let me check' on free listens is a holding reply (counts as answered). Ohcleo ✓ |
 | 5 | Slack GGS #presta-9-update | Joey's 10-15 15:27 question to Amy is **still unanswered after 3+ days** (re-checked 08:30: still no thread reply): "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" Go-live target is this Wednesday ([thread](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Nick's daily report 10-16 17:16 is present ✅. Amy's onboarding/translation update was acked by Joey ✅. Bailey ○ |
-| 6 | Slack Baamboozle #testing | Jamie Sat 08:01 sent new colour changes (button active #2D4766 / hover #3B678B, folder inactive…). Carrick has no ack yet (weekend; re-checked 08:30, still no reply or reaction). Friday's revert-dark-mode ask was done 14:53 ✅. Aysar ○ until acked |
+| 6 | Slack Baamboozle #testing | ~~Jamie Sat 08:01 sent new colour changes (button active #2D4766 / hover #3B678B, folder inactive…). Carrick has no ack yet (weekend; re-checked 08:30, still no reply or reaction). Friday's revert-dark-mode ask was done 14:53 ✅. Aysar ○ until acked~~ → **Resolved 08:52:** Jamie's message now has a 👀 react (acked per the #testing convention). Aysar ✓ |
 | 7 | Workstream review | **Crystal lang (Arthur): 4 rows Pending**, reviewer TienND: PhucVT 10-13 2:00 + 3:00, 10-15 2:00, 10-16 5:00. ~~Arthur itself is on the Ignore List~~ (Arthur active again, see Alert #10). OhCleo pending rows from last week are now resolved ✅ |
 | 8 | Email rick@ / vuongtrancr@ | New **production** Rollbar errors: InfinityRoses #458 (10-16 15:39). FirstProject #1130 RangeError max call stack + #906 TypeError (project still unidentified). Traslochi-Online #26, #27 (10-18). The Swish New Relic "Signal lost / Low Throughput" alert is still flapping (chronic). Staging noise (FountainStaging/BE) is INFO |
 | 9 | Performance | MPFC apdex **0.40** (poor, chronic): `continue` E_WARNING 2605x, WP_Error::get_method() 124x (also Rollbar #50, 10 occurrences in 5 min), new `Class 'MM_Event' not found` 3x, DNS mysqli failures 4x. Infinity ArgumentError 37x + UnknownFormat 34x. Fountain import_csv 96s/1. The Fountain V2 NameError (#372) has **not recurred** ✅ |
@@ -48,7 +48,7 @@ Trello: Check mail — all 6 items ✓ complete, card done.
 
 | Workspace | Msgs | Key content |
 |-----------|------|-------------|
-| Baamboozle | 50 | **MPDM Carrick "Some reports for today" 10-16 16:48** ✅ (#744 verification email branding). Revert dark mode done ✅. Carrick resolved Aysar's comments on #698/#718, which go out for release this weekend; Aysar merged several PRs 10-19 02:09–03:52. ⚠️ Jamie's Sat colour changes are unacked (Alert #6). Aysar posted dev API keys in DM to Carrick (redacted, dev use only) |
+| Baamboozle | 50 | **MPDM Carrick "Some reports for today" 10-16 16:48** ✅ (#744 verification email branding). Revert dark mode done ✅. Carrick resolved Aysar's comments on #698/#718, which go out for release this weekend; Aysar merged several PRs 10-19 02:09–03:52. ~~⚠️ Jamie's Sat colour changes are unacked (Alert #6).~~ Acked 👀 ✅ Aysar posted dev API keys in DM to Carrick (redacted, dev use only) |
 | RDC - FM Monitoring | 41 | dmetiner pushed admin-panel preset logic + logout button + a security-check webhook to staging "for next week". Carrick: back Monday ✅. Quarterly feedback form received ✅. Carrick weekly progress report Oct 12–16 posted. Tuner logs |
 | Swift Studio | 6 | Henry/Rory agreed the design estimate split ✅. Jeff 13:23: "Upwork contracts paused again", asked Rory to resume (our ask to the client) |
 | Xtreme Soft Solutions | 1 | ⚠️ Madhuraka's 468 question unanswered (Alert #1) |
@@ -59,9 +59,9 @@ Trello: Check mail — all 6 items ✓ complete, card done.
 | Generator / MPFC / William Bills / Equanimity / SoCal | 0 | quiet |
 | Aigile Dev | 2 | bot alerts + newsletter (Colin = Ignore List) |
 
-Aysar pre-check: KhanhHH has 2.5h on WS Baamboozle for 10-16, and the MPDM report is present → the gate is OK. Held only for Jamie's ask (Alert #6).
+Aysar pre-check: KhanhHH has 2.5h on WS Baamboozle for 10-16, and the MPDM report is present → the gate is OK. ~~Held only for Jamie's ask (Alert #6).~~ Acked 👀 → complete.
 
-Trello: Rory ✓, Franc ✓, Raymond ✓, Marcel ✓, MPFC ✓ / ⚠️ Aysar (#6) / ⚠️ Bailey (#5) / ⚠️ Maddy (#1).
+Trello: Rory ✓, Franc ✓, Raymond ✓, Marcel ✓, MPFC ✓ / ~~⚠️ Aysar (#6)~~ Aysar ✓ 08:52 / ⚠️ Bailey (#5) / ⚠️ Maddy (#1).
 
 ---
 
@@ -189,7 +189,7 @@ Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #3).
 - Rory ✓ · Franc ✓ · James Diamond ✓ · Raymond ✓ · Marcel ✓ · MPFC ✓ · Elena - WordPress SamGuard ✓
 - Neural Contract ✓: ~~Upwork is Cloudflare-blocked on this host… Last verified clean 10-16 09:00~~ → re-verified live 08:27 (local): newest msg is ours 10-16 (quarterly feedback form). Newest client msg 09-28. Nothing unanswered.
 - ⚠️ Maddy: skipped (Alert #1)
-- ⚠️ Aysar: skipped (Alert #6)
+- ~~⚠️ Aysar: skipped (Alert #6)~~ → Aysar ✓ (08:52, 👀 ack on Jamie's ask)
 - ⚠️ Bailey: skipped (Alert #5)
 - ~~⚠️ Andrew Taraba: skipped (Alert #2)~~ → Andrew Taraba ✓ (08:55, nuscarrick replied 08:39)
 - ⚠️ Arthur - Meta-Stamp: ~~Ignore List, auto-completed~~ → reopened ○ 08:55 (Alert #10, Chris's payment-terms ask unanswered)
