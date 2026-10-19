@@ -1,6 +1,6 @@
 # MPFC upgrade — Runbook (scripts)
 
-Scripts: `scripts/mpfc-upgrade/` (repo này). Chạy **root trên server MỚI**. Không chứa secret (DB creds đọc từ wp-config copy từ live).
+Scripts: `plans/mpfc-upgrade/scripts/` (repo này). Chạy **root trên server MỚI**. Không chứa secret (DB creds đọc từ wp-config copy từ live).
 
 | Script | Làm gì | Khi nào |
 |---|---|---|
@@ -19,7 +19,7 @@ Truy cập live từ server mới: key `/root/.ssh/mpfc_live_ed25519`, thêm và
 2. `90-test-env.sh --copy-only` (DB mới = live, chưa migrate)
 3. `03-migrate-db.sh` → so schema diff với `schema-diff-live-vs-upgraded.txt`
 4. `TEST_PW_*=… 90-test-env.sh --skip-copy` → user test
-5. smoke: `node scripts/mpfc-upgrade-smoke-test.js` (máy local) + API app
+5. smoke: `node plans/mpfc-upgrade/tests/smoke-test.js` (máy local) + API app
 
 ## Cutover (production) — nháp, chốt sau khi Saul duyệt
 1. T-1 ngày: tạo droplet mới (tag `mpfc`, lon1, size như live), `01-provision-server.sh`, `02-build-code.sh`, smoke qua hosts file.

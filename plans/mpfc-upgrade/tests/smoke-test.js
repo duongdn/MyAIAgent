@@ -4,14 +4,14 @@
  * (basic auth protected) and visits every admin-menu page, member pages and
  * front-end pages, recording HTTP status + visible PHP errors + JS console errors.
  *
- * Usage: node scripts/mpfc-upgrade-smoke-test.js [baseUrl] > out.json
+ * Usage: node plans/mpfc-upgrade/tests/smoke-test.js [baseUrl] > out.json
  * Creds: config/.mpfc-upgrade-test-config.json — run decrypt-secrets.sh first.
  */
 const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
-const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/.mpfc-upgrade-test-config.json'), 'utf8'));
+const cfg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../../config/.mpfc-upgrade-test-config.json'), 'utf8'));
 const BASE = (process.argv[2] || `https://${cfg.basic_auth.host}`).replace(/\/$/, '');
 const LOGIN = BASE + (cfg.test_users.login_path || '/wp-login.php');
 const PHP_ERR = /(Fatal error|Parse error|critical error on this website|There has been a critical error|Warning<\/b>:|Uncaught )/i;

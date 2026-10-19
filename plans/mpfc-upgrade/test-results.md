@@ -1,7 +1,7 @@
 # MPFC upgrade — Test cases & kết quả
 
 Cập nhật: 2026-10-16 11:20 (+07) | Server test: https://upgrade-test.mypersonalfootballcoach.com
-Bản đang test: **dựng bằng script** (`scripts/mpfc-upgrade/02→03`, diễn tập 16/10) — Ubuntu 24.04, PHP 8.3.6, WP 7.1.3, MemberMouse 3.1.1 (+custom), Elementor/Pro 4.3.5/4.3.2, Yoast 28.7, plugin theo `scripts/mpfc-upgrade/target-plugin-versions.csv`. DB `wp_mpfc_upgrade` = copy live 16/10 đã migrate.
+Bản đang test: **dựng bằng script** (`plans/mpfc-upgrade/scripts/02→03`, diễn tập 16/10) — Ubuntu 24.04, PHP 8.3.6, WP 7.1.3, MemberMouse 3.1.1 (+custom), Elementor/Pro 4.3.5/4.3.2, Yoast 28.7, plugin theo `plans/mpfc-upgrade/scripts/target-plugin-versions.csv`. DB `wp_mpfc_upgrade` = copy live 16/10 đã migrate.
 Handover: `plans/mpfc-upgrade/handover.md` · Runbook/script: `plans/mpfc-upgrade/runbook.md`
 
 Ký hiệu: ✅ pass · ⚠️ khác live do môi trường test (không phải lỗi) · 🙋 **anh tự test** · ⛔ không test được trên test → kiểm sau cutover
@@ -30,7 +30,7 @@ Khác live (cố ý): mail bị chặn · PHP không gọi ra ngoài (trừ Stri
 | A6 | Script 02 build code: WP 7.1.3 + plugin khớp 100% danh sách version | ✅ | diễn tập 16/10 |
 | A7 | Script 03 migrate DB: schema = lần làm tay, chỉ thêm (không xoá/đổi) | ✅ | diff: `schema-diff-live-vs-upgraded.txt` |
 | A8 | Rewrite rules CPT theme (`/user-video/...`) sau migrate | ✅ | lỗi 404 bắt được khi diễn tập → đã sửa script |
-| A9 | Code custom plugin giữ đúng (MemberMouse, json-api-auth, duplicate-page, json-api…) | ✅ | patch trong `scripts/mpfc-upgrade/patches/` |
+| A9 | Code custom plugin giữ đúng (MemberMouse, json-api-auth, duplicate-page, json-api…) | ✅ | patch trong `plans/mpfc-upgrade/scripts/patches/` |
 | A10 | Redis object cache | ⛔ | tắt trên test |
 | A11 | Root cron (wp cron, backup volume, clone apache logs) trên PHP 8.3 | ⛔ | kiểm lúc cutover (script gọi `php7.4` → đổi `php8.3`) |
 
