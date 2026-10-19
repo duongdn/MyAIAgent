@@ -22,6 +22,7 @@
 - ✅ Dọn cache (~13G): Chrome cache, pip/node-gyp/typescript cache, npm cache, Docker image không dùng (405M) + 6 volume ẩn danh nhỏ (~50M mỗi cái), 15 snap revision disabled, snapd cache, apt cache, journal vacuum.
   - **Giữ lại Docker:** volume ẩn danh `0991a08f4b34…` 2.2G = Postgres data dir (sửa lần cuối 2026-09-03) — chờ user xác nhận; named volume `metastamp-*`, `ohcleo-backend-api_*` giữ (có data dự án).
 - ✅ Xoá `~/.minikube/cache` (826M, k8s chưa dùng) → 145G used / 51G avail.
+- ✅ Xoá `~/projects/james-definitive` (clone cũ trùng remote với `JamesDefinitiveGuide`, ko có commit chưa push; chỉ mất `deployer.phar` untracked), `Emeka/`, `JasonMeilleur/` → 144G used / 53G avail (74%).
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`
