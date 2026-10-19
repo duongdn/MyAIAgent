@@ -9,7 +9,7 @@ const fs = require('fs');
 // MISA sub-category → parent group. Unknown sub-categories fall into "Khác".
 const GROUPS = {
   '🍜 Ăn uống': ['Ăn uống', 'Cafe', 'Ăn sáng', 'Ăn tối', 'Ăn trưa', 'Ăn tiệm', 'Đi chợ/siêu thị'],
-  '👶 Con cái': ['Con cái', 'Học phí', 'Học hành', 'Sữa', 'Đồ chơi', 'Tiền tiêu vặt'],
+  '👶 Con cái': ['Con cái', 'Học phí', 'Học hành', 'Sữa', 'Đồ chơi', 'Tiền tiêu vặt', 'Sách vở'],
   '🛵 Xe cộ / Đi lại': ['Xăng xe', 'Đi lại', 'Sửa chữa, bảo dưỡng xe', 'Gửi xe', 'Rửa xe', 'Taxi', 'Taxi/thuê xe', 'Bảo hiểm xe'],
   '🏠 Nhà cửa & Dịch vụ': ['Nhà cửa', 'Điện', 'Nước', 'Internet', 'Truyền hình', 'Điện thoại di động', 'Sửa chữa', 'Thú Cưng', 'Gas', 'Dịch vụ sinh hoạt'],
   '🎁 Hiếu hỉ / Biếu tặng': ['Hiếu hỉ', 'Biếu tặng', 'Từ thiện'],

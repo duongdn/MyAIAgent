@@ -723,6 +723,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW -0.11M vs 10-15: chi 0.16M, lai so ko ki han +70K, FX Paypal -17K. Rut 10M so tikcop ko ki han -> FPTS (DCA, T10 FPTS 87.9M). NW = totaldashboard 6,539,091,642 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.0M/Chi 29.9M/Net +92.1M."
+    },
+    {
+      "date": "2026-10-19",
+      "label": "19/10",
+      "net_worth": 7930475808,
+      "gross_assets": 8011953604,
+      "liabilities": 7036151,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 718000000,
+        "investment": 2546023840,
+        "savings": 1177141206,
+        "liquid": 50788558
+      },
+      "method": "dashboard_verified",
+      "note": "NW -1.08M vs 10-16: chi 2.75M (di cho 1.13M, xang 1M, sach 0.26M), vang +1.5M (718M), lai so ko ki han +0.2M. Rut 10M so tikcop ko ki han -> vcb; vcb -> FPTS 2.2M (T10 FPTS 90.1M). NW = totaldashboard 6,538,008,739 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.4M/Chi 32.6M/Net +89.8M."
     }
   ]
 }
