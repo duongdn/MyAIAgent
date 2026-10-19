@@ -15,3 +15,5 @@ If user un-pauses one later, remove it from the ignore list and restore its norm
 **2026-09-28:** user: "Add John Yii vô cancel project" → John Yi - Amazing Meds added to Ignore List (reason: Cancelled). Skip Amazing Meds Slack gate; TuanNT 0h no longer blocks John Yi (still gates Bailey + Rebecca).
 
 **2026-10-06:** user: "Rebecca đã pause, bữa nói rồi mà" → Rebecca (William Bills) added to Ignore List (Paused). Auto-complete; TuanNT hours now gate only Bailey.
+
+**2026-10-19:** Arthur is ACTIVE again. It was removed from the Ignore List after a miss: Chris (customer) sent payment-terms + quote asks on the new **Meta-Stamp** Slack workspace while Arthur was auto-completed. User: "Arthur có msg sao ko báo mà complete vậy". Before auto-completing any Ignore List item, glance at that project's Matrix room for current activity; if it is live, ask whether it is still paused.

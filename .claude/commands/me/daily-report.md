@@ -567,7 +567,6 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 |-----|-----------|--------|
 | `colin` | Colin | Paused |
 | `elena` | Elena - SamGuard | Paused |
-| `arthur` | Arthur - Meta-Stamp | Paused |
 | `blair_brown` | Blair Brown - Peptide Clyde | Paused |
 | `philip` | Philip | Paused |
 | `johnyi` | John Yi - Amazing Meds | Cancelled (2026-09-28) |
@@ -577,7 +576,7 @@ When running `trello progress {item}`, FIRST run the mapped source piece(s), THE
 Report format:
 ```
 ## Ignore List — {HH:MM} (+07:00)
-Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
+Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
 ```
 
 If the user un-pauses one of these later, remove its row from this table and restore its normal gate mapping row below.
@@ -1073,6 +1072,7 @@ One-time full-history deep-dive: `reports/backup/2026-07-07/arthur-metastamp-ful
 | 4 | Slack "Solid Code" — `ms-v3` | `C0B4G8USU3D` | Main technical channel, highest volume |
 | 5 | Slack "Solid Code" — `msv3-official` | `C0BEPFBLGJV` | Chris's channel |
 | 6 | Slack "Solid Code" — **direct 1:1 DM with Art** | `D0B0HSZ7XSN` | 🔴 REAL 1:1 with Art (UM1UZ0ZST) — separate from #3, was never monitored before 2026-07-14 and missed a real unanswered message (David paused project, needed Art's approval to request more hours) sitting unanswered 16+ hours. ALWAYS check this. |
+| 7 | 🔴 Slack **"Meta-Stamp"** (`meta-stamp.slack.com`) — Chris Coyne's CUSTOMER workspace, all channels + DMs (`#msv3-official` `C0BM37DJDD2` is the main one) | config `.slack-accounts.json` workspace `Meta-Stamp` (xoxc + d cookie, `conversations.history`, read thread replies) | Added 2026-10-19 after a miss: Chris sent payment-terms + rate-limit asks at 05:33/05:59 while Arthur sat on the Ignore List. Project is ACTIVE again (Ignore List entry removed 2026-10-19). Token: Chrome Profile 15 Local Storage (the Meta-Stamp xoxc entry); d cookie via `get-david-slack-cookies.py`. The Solid Code token in Profile 15 is now dead (invalid_auth). |
 
 **Slack auth:** `config/.slack-accounts.json`, workspace `Solid Code`, `auth_type: session` (xoxc+cookie) — use `conversations.history`, NOT `search.messages`. IDs: Art K=`UM1UZ0ZST`, Jack=`UM28B3P9C`, Chris Coyne=`U0BEFAQ9D0T`, David Tran (shared identity — namtv/PhucVT/DuongDN all post as this)=`U0B1C5QAZA4`, Nick=`U0B474QBKP1` (= TienND, confirmed), Casey G=`U0BGDTPCKJT`.
 

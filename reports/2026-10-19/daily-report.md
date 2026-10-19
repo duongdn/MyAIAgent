@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-19 (Monday)
 
-**Run:** 2026-10-19T05:00+07:00 (cron, mpfc host), corrected 08:35 (+07:00) (recheck, local)
+**Run:** 2026-10-19T05:00+07:00 (cron, mpfc host), corrected 08:35 + 08:55 (+07:00) (recheck, local)
 **Window:** 2026-10-16 05:09 → 2026-10-19 05:13 (+07:00). Task-log date: **Friday 2026-10-16 (last workday)**.
 **Leave plan:** Leave parser refreshed 05:05: no approved leave on record. From Matrix (10-16): DanhTD off 19/10 and 23/10. Week 19/10 dev plan: ThamTTH idle/small jobs.
 
@@ -11,12 +11,13 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Slack Xtreme (Maddy) | **Madhuraka asked Kai a direct question Sat 21:56, still unanswered (re-checked 08:30):** "If I send [468] live and a user tries it before updating their extension… would it completely fail or… handle absence of the additional information gracefully?" ([link](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1792249003369239)). Madhuraka also commented on [PR #548](https://bitbucket.org/xtreme-web/rms/pull-requests/548) and updated LIFM2-468 on 10-18. Still open from Friday: his offer of a new project with conditions to hide the offshore team (Kai agreed) needs DuongDN's decision. LIFM2-470 is in Testing with **no estimate and no JIRA log** (WS 0.02h). Maddy ○ |
-| 2 | Discord Bizurk (Andrew Taraba) | **animeworld DMs unanswered:** "update??? / what this?" Fri 08:53. Then on Sat 07:41–15:28 he sent **3 new POS feature requests**: admin menu shortcut to the POS; search input auto-focused so it accepts barcode UPCs; handle fast scans, which type digit by digit. He also shared a Drive "POS" folder for plugin uploads. No nuscarrick reply in the window (re-checked 08:30: no new DMs either way). Andrew Taraba ○ |
+| 2 | Discord Bizurk (Andrew Taraba) | ~~**animeworld DMs unanswered:** "update??? / what this?" Fri 08:53. Then on Sat 07:41–15:28 he sent **3 new POS feature requests**: admin menu shortcut to the POS; search input auto-focused so it accepts barcode UPCs; handle fast scans, which type digit by digit. He also shared a Drive "POS" folder for plugin uploads. No nuscarrick reply in the window (re-checked 08:30: no new DMs either way). Andrew Taraba ○~~ → **Resolved 08:39:** nuscarrick replied "Let me check" (a holding reply, counts as answered). Andrew Taraba ✓ |
+| 10 | **Slack Meta-Stamp (Arthur), customer** | **Chris Coyne sent 2 direct asks today, both unanswered** ([#msv3-official](https://meta-stamp.slack.com/archives/C0BM37DJDD2)):<br>**05:33** "I need your **honest answer on the money before anything starts**". He wants all of R1 ($1,701) + B1 ($81), no backfill. Payment: the $1,701 held on M4 releases when Tommy confirms (a)/(b) + R6 this week. **Today** $931.50 (½ R1 + B1). **The other ½ R1 ($850.50) is paid only "the day the AllVerified deal closes"**, i.e. contingent on his deal, which is a payment risk. If OK: start **Mon 10-19**, staging **Fri 10-23**. Plus: quote the cost of making the 85/15 split a per-partner setting (R1-e reads STRIPE_PLATFORM_FEE_PERCENT), and a question: "how will rows written before R1 show in the new views?" (spec v5 attached).<br>**05:59** wants the per-caller **rate limit** quoted *now* and built in the same pass if small.<br>Needs a decision from DuongDN/namtv on the payment terms before PhucVT starts. ~~Arthur on Ignore List, auto-completed~~ → Arthur ○ |
 | 3 | Fountain Trello board | **New 06:56 today:** Kunal asked @rick570 "can you push this live tonight?" for the **Oct 19 release (backend #747, then website #912)**, to go right after the Oct 16 release. So Rick now has 2 releases queued for tonight. Earlier: **Kunal (via his AI) asked @rick570 Fri 21:04 UTC to deploy backend #731 (6 additive migrations) first, then website #901** ([card](https://trello.com/c/bF2JzKzp)). This replaces the 10-16 04:46 "4 PRs for tonight" list. No Rick reply yet (re-checked 08:30). Kunal also restructured the board: archived most cards and created new lists (Next rollout / In progress / Bugs / Ideas and later) and an "Accessibility check on V2" card. Fountain - DOCUMENT ○ |
 | 4 | Slack OhCleo (DM Celine) | ~~Celine Fri 17:16: "can you please let me know status - how much is left approximately?" after Tony's daily report + progress video. Tony's only follow-up is an empty-text post (attachment). **No ETA has been given yet.** Celine has been asking since 10-15. Internal plan (Matrix 17:19): tell her QC found bugs (9 on the new mobile build), fix Monday, then send. Tony's 08:43 reply on the free-listens question was "No, I don't, but let me check", with no follow-up. Ohcleo ○~~ → **Resolved (recheck 08:35):** the cron missed a thread reply. Tony answered in-thread Fri 17:20: "I find a few bugs, I'll fix them on Monday and send it to you then". Celine 17:23: "Ok awesome! … I have a few observations on the new creator page I will share". The 'let me check' on free listens is a holding reply (counts as answered). Ohcleo ✓ |
 | 5 | Slack GGS #presta-9-update | Joey's 10-15 15:27 question to Amy is **still unanswered after 3+ days** (re-checked 08:30: still no thread reply): "As long as we use same server and make it work exactly the same as current live we shouldn't have any issues though?" Go-live target is this Wednesday ([thread](https://globalgrazingservices.slack.com/archives/C0A9HSU29DL/p1792052876181139)). Nick's daily report 10-16 17:16 is present ✅. Amy's onboarding/translation update was acked by Joey ✅. Bailey ○ |
 | 6 | Slack Baamboozle #testing | Jamie Sat 08:01 sent new colour changes (button active #2D4766 / hover #3B678B, folder inactive…). Carrick has no ack yet (weekend; re-checked 08:30, still no reply or reaction). Friday's revert-dark-mode ask was done 14:53 ✅. Aysar ○ until acked |
-| 7 | Workstream review | **Crystal lang (Arthur): 4 rows Pending**, reviewer TienND: PhucVT 10-13 2:00 + 3:00, 10-15 2:00, 10-16 5:00. Arthur itself is on the Ignore List, but the review check covers all projects. OhCleo pending rows from last week are now resolved ✅ |
+| 7 | Workstream review | **Crystal lang (Arthur): 4 rows Pending**, reviewer TienND: PhucVT 10-13 2:00 + 3:00, 10-15 2:00, 10-16 5:00. ~~Arthur itself is on the Ignore List~~ (Arthur active again, see Alert #10). OhCleo pending rows from last week are now resolved ✅ |
 | 8 | Email rick@ / vuongtrancr@ | New **production** Rollbar errors: InfinityRoses #458 (10-16 15:39). FirstProject #1130 RangeError max call stack + #906 TypeError (project still unidentified). Traslochi-Online #26, #27 (10-18). The Swish New Relic "Signal lost / Low Throughput" alert is still flapping (chronic). Staging noise (FountainStaging/BE) is INFO |
 | 9 | Performance | MPFC apdex **0.40** (poor, chronic): `continue` E_WARNING 2605x, WP_Error::get_method() 124x (also Rollbar #50, 10 occurrences in 5 min), new `Class 'MM_Event' not found` 3x, DNS mysqli failures 4x. Infinity ArgumentError 37x + UnknownFormat 34x. Fountain import_csv 96s/1. The Fountain V2 NameError (#372) has **not recurred** ✅ |
 
@@ -71,7 +72,7 @@ Trello: Rory ✓, Franc ✓, Raymond ✓, Marcel ✓, MPFC ✓ / ⚠️ Aysar (#
 | AirAgri (nusvinn) | 39 | **Vinn "Just report my process today"** ✅: PR reviews #777–780, SOS device investigation (Huntly/Carrs) with a report. Conclusion: SMS/email are sent, but alert config and no-signal delays cause the lag. James: no device→server issue. dapackage: onboarding plans/Silver tier copy, live-map + kinetic-limit PRs for re-review. James asks for a 4-digit email code at signup. **Jeff daily report (4h)** ✅ + TestFlight build. Jeff asked James questions on SOS/hazard alerts |
 | Bizurk (nuscarrick) | 0 + DM 15 | ⚠️ animeworld "update???" plus 3 new POS features, all unanswered (Alert #2) |
 
-Trello: James Diamond ✓ (Vinn + Jeff reports present, LeNH 8h Fri). ⚠️ Andrew Taraba (Alert #2).
+Trello: James Diamond ✓ (Vinn + Jeff reports present, LeNH 8h Fri). ~~⚠️ Andrew Taraba (Alert #2)~~ → ✓ (nuscarrick 08:39 "Let me check").
 
 ---
 
@@ -190,12 +191,13 @@ Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #3).
 - ⚠️ Maddy: skipped (Alert #1)
 - ⚠️ Aysar: skipped (Alert #6)
 - ⚠️ Bailey: skipped (Alert #5)
-- ⚠️ Andrew Taraba: skipped (Alert #2)
+- ~~⚠️ Andrew Taraba: skipped (Alert #2)~~ → Andrew Taraba ✓ (08:55, nuscarrick replied 08:39)
+- ⚠️ Arthur - Meta-Stamp: ~~Ignore List, auto-completed~~ → reopened ○ 08:55 (Alert #10, Chris's payment-terms ask unanswered)
 - ⚠️ Fountain - DOCUMENT: skipped (Alert #3)
 - ~~⚠️ Ohcleo: skipped (Alert #4)~~ → Ohcleo ✓ (recheck 08:35, answered in-thread)
 
 ## Ignore List — 05:30 (+07:00)
-Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, Arthur - Meta-Stamp, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
+Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard, ~~Arthur - Meta-Stamp~~ (removed 08:55, active again), Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
 
 ---
 
@@ -267,8 +269,13 @@ Window 10-16 05:09 → now (~72h, includes the weekend).
 
 ---
 
-## Arthur — Ignore List
-Paused per user. Not run, Trello auto-completed. (WS review Pending noted in Alert #7.)
+## Arthur / Meta-Stamp — 08:55 (+07:00)
+~~Paused per user. Not run, Trello auto-completed.~~ → Active again. Full detail (Vietnamese): `reports/2026-10-19/0855-arthur-monitor.md`
+
+- **Customer Slack Meta-Stamp (new source, wasn't monitored before):** Chris Fri 08:05 gave go-ahead for R6 + bulk add/move/delete on production. David deployed 11:29 ✅. Gate payment part 2: $1,388 sent (total $3,330), $1,701 held until R2–R6 pass on production. The R1 estimate was sent Fri 21:36 (21h, $90/h −10% → $1,701; backfill 5.5h separate). **Today 05:33 + 05:59, Chris's answer: Alert #10, unanswered.**
+- **Matrix Arthur (internal, Fri):** PhucVT split the issues into 3 groups. namtv: "Ưu tiên wrap up trước". DuongDN reviewed the R1 wording (no "ours", answer 6.5.1 explicitly). Price $90/h, 10% discount confirmed with namtv. Nothing after Fri 21:41.
+- **Workstream:** Crystal lang still has 4 rows Pending → TienND (Alert #7).
+- **Not checked this pass:** Solid Code Slack (the token in Profile 15 is dead, invalid_auth; the project has moved to Meta-Stamp) and GitHub `Christebob/Meta_Stamp_V3`. `arthur_monitor.last_run` was left as is.
 
 ---
 
@@ -285,12 +292,13 @@ No invalid memos. ~~Upwork memo: data unavailable on the mpfc host…~~ Rory/Ays
 ---
 
 ## Unresolved Questions
+- **Arthur: do we accept Chris's payment terms?** The second ½ of R1 ($850.50) depends on the AllVerified deal closing. Start today or not? Who replies to Chris (PhucVT/namtv), and do we send the rate-limit + per-partner split quote?
 - Madhuraka's concealed-offshore new-project offer (commit as him, AU VPN): accept, refuse, or set terms? Kai already agreed (open since 10-15).
 - Who answers Madhuraka's 468 backward-compat question? LongVV/Kai should reply today.
 - Rick: deploy Kunal's #731 + #901, and now also #747 + #912, tonight?
 - ~~Who gives Celine the mobile-app ETA, given the 9 QC bugs?~~ Tony told her: fix Monday, then send.
 - Joey's server question (GGS): does Amy/Nick owe the answer before Wednesday's go-live?
-- Andrew Taraba's 3 new POS features: quote first, or start as-is?
+- Andrew Taraba's 3 new POS features: quote first, or start as-is? (Carrick has acked with "Let me check")
 - FirstProject production Rollbar (#1130/#906): which client project is this? Traslochi-Online: who owns monitoring?
 - ~~Upwork memos for 10-16 need a run on the local machine after 08:00.~~ Done 08:27: Rory/Aysar 0 memos. Tokenlite needs duongdn to log in to Upwork (Profile 9).
 - Aysar: KhanhHH logged 2.5h Baamboozle on 10-16, but Upwork has 0 tracked segments. Intended, or missed tracking?
