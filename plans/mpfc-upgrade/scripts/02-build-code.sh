@@ -30,6 +30,7 @@ apply_patch() {
 }
 log "02: PHP 8.3 fixes for site code (before any wp-cli call: unpatched mu-plugin fatals on PHP 8)"
 apply_patch site-php83-fixes.patch
+apply_patch site-ui-fixes.patch   # UI fixes requested during testing (e.g. team-stats toggle spinner)
 
 log "02: WP core -> $TARGET_WP (files only, no DB)"
 wpr core download --version="$TARGET_WP" --locale=en_GB --force --skip-content --path="$SITE" >/dev/null
@@ -71,7 +72,7 @@ log "02: PHP 8.3 fix for wd-instagram-feed (new version)"
 apply_patch wd-instagram-feed-1.4.35-fixes.patch
 
 log "02: lint touched PHP files"
-for f in $(grep -h '^+++ b/' "$PATCHES"/site-php83-fixes.patch "$PATCHES"/wd-instagram-feed-1.4.35-fixes.patch | sed 's#^+++ b/##;s#\t.*##'); do
+for f in $(grep -h '^+++ b/' "$PATCHES"/site-php83-fixes.patch "$PATCHES"/site-ui-fixes.patch "$PATCHES"/wd-instagram-feed-1.4.35-fixes.patch | sed 's#^+++ b/##;s#\t.*##' | grep '\.php$'); do
   php -l "$SITE/$f" >/dev/null || die "syntax error in $f"
 done
 for f in $(grep -h '^+++ b/' "$PATCHES/membermouse-3.1.1-mpfc-custom.patch" | sed 's#^+++ b/##;s#\t.*##' | grep '\.php$'); do

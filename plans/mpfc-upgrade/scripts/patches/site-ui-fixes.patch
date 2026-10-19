@@ -1,0 +1,33 @@
+--- a/wp-content/plugins/video-library-manager/assets/js/vlm-custom.js
++++ b/wp-content/plugins/video-library-manager/assets/js/vlm-custom.js
+@@ -88,6 +88,9 @@
+     }
+ 
+     $btn.addClass('vlm-processing');
++    // Hide the switch and show a spinner while the request runs
++    var $loader = $('<i class="fa fa-spinner fa-spin vlm-toggle-loading" style="font-size: 1.2em; color: #6c757d;" title="Updating..."></i>');
++    $btn.hide().after($loader);
+ 
+     $.ajax({
+       url: vlm_ajax_object.ajax_url,
+@@ -128,7 +131,8 @@
+         alert('Error updating status. Please try again.');
+       },
+       complete: function() {
+-        $btn.removeClass('vlm-processing');
++        $loader.remove();
++        $btn.show().removeClass('vlm-processing');
+       }
+     });
+   });
+--- a/wp-content/plugins/video-library-manager/inc/vlm-manager.php
++++ b/wp-content/plugins/video-library-manager/inc/vlm-manager.php
+@@ -11,7 +11,7 @@
+   wp_enqueue_style( 'vlm-bootstrap.min.css',VLM_PLUGIN_ASSETS_URL.'css/bootstrap.min.css', false );
+   wp_enqueue_style( 'vlm-font-awesome.min.css',VLM_PLUGIN_ASSETS_URL.'css/font-awesome.min.css', false );
+ 
+-  wp_enqueue_script( 'vlm-custom.js',VLM_PLUGIN_ASSETS_URL.'js/vlm-custom.js', array('jquery'), '1.6', true );
++  wp_enqueue_script( 'vlm-custom.js',VLM_PLUGIN_ASSETS_URL.'js/vlm-custom.js', array('jquery'), '1.7', true );
+   wp_enqueue_script( 'vlm-bootstrap.min.js',VLM_PLUGIN_ASSETS_URL.'js/bootstrap.min.js', false );
+ 
+   // Localize script for AJAX
