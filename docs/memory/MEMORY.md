@@ -51,6 +51,7 @@
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
 
 ## daily-report:slack
+- [ohcleo_script_misses_thread_replies](daily-report/slack/feedback_ohcleo_script_misses_thread_replies.md) — OhCleo script skips thread replies; check reply_count before "unanswered"
 - [feedback_ohcleo_slack_times_are_utc](daily-report/slack/feedback_ohcleo_slack_times_are_utc.md) — OhCleo script times are UTC; +7h before judging reply gaps
 - [feedback_slack_threads](daily-report/slack/feedback_slack_threads.md), [feedback_token_handling](daily-report/slack/feedback_token_handling.md)
 - [feedback_project_topics_not_alerts](daily-report/slack/feedback_project_topics_not_alerts.md), [feedback_low_activity_devs_not_alert](daily-report/slack/feedback_low_activity_devs_not_alert.md)
