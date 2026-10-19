@@ -71,3 +71,30 @@ Chưa tính lãi tiết kiệm (~5M/th) + trợ cấp thất nghiệp.
 | + sổ kỳ hạn | 1,228M | ~48 th | ~37 th | ~24 th |
 | + vàng | ~1,924M | ~74 th | ~57 th | ~37 th |
 | + CP/quỹ (−20%) | ~3,321M | ~126 th (~10 năm) | ~97 th (~8 năm) | ~62 th |
+
+## Ngân sách thất nghiệp v2 (user 10-19: học phí 3M, bỏ gửi má, bỏ xăng ô tô ≥500K, giữ xe máy)
+| Khoản | ₫/tháng |
+|---|---|
+| Học phí | 3.0M |
+| Điện/nước/internet/DV | 1.6M |
+| Nhà cửa | 1.5M |
+| Ăn uống | 4.5M |
+| Đi lại (xăng xe máy ~0.25M + gửi xe/taxi) | 0.8M |
+| Hiếu hỉ/từ thiện | 1.0M |
+| Linh tinh/mua sắm/sách | 1.5M |
+| Hưởng thụ | 0.5M |
+| Sức khỏe | 0.5M |
+| **Hằng tháng** | **~15M** |
+| Khoản năm (Tết, bảo hiểm/đăng kiểm ô tô…) | ~6M |
+| **Tổng** | **~21M** |
+
+Xăng T10: ô tô 3×500K = 1.5M (bỏ), xe máy 2×80K = 160K/19 ngày.
+
+| Đến lớp | ₫ | 15M/th | 21M/th | 35M/th |
+|---|---|---|---|---|
+| Tiền mặt + sổ ko kì hạn | 538M | ~41 th | ~29 th | ~17 th |
+| + sổ kỳ hạn | 1,228M | ~7 năm | ~5 năm | ~3 năm |
+| + vàng | ~1,924M | ~11 năm | ~8 năm | ~4.7 năm |
+| + CP/quỹ (−20%) | ~3,321M | ~19 năm | ~13.5 năm | ~8 năm |
+
+Lãi 3.3–3.7 tỷ @5.8% ≈ 16–18M/th ≈ 80–85% ngân sách 21M → phương án "sống bằng lãi" gần khả thi ở mức chi này (vẫn bị lạm phát bào mòn).
