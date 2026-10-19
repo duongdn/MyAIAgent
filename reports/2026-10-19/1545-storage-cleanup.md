@@ -9,11 +9,13 @@
 |---|---|---|---|
 | Ban đầu | 169G | 28G | 87% |
 | Sau drop `paturevision_staging_20250214` | 166G | 30G | 85% |
+| Sau drop `luxeitfwdm2` | 164G | 32G | 84% |
 
 ## Đã làm
 
 - ✅ DROP DATABASE `paturevision_staging_20250214` (MySQL, ~2.5G, tạo 2025-08-28) — user duyệt.
   - Lưu ý: `/disk2/projects/Bailey/php/app/config/parameters.php` còn trỏ DB này (bản local cũ của Bailey php) → nếu chạy lại bản đó sẽ lỗi DB.
+- ✅ DROP DATABASE `luxeitfwdm2` (bản import cũ, app dùng `luxeit2fwdm-v2`) — user duyệt. Còn lại `luxeit2fwdm-v2`.
 - ❌ miniconda3 — **giữ**, user bỏ qua (đang là base của `~/.claude/skills/.venv`, Poetry, `scripts/cookie-vault-sync.sh`, env `ohcleo-api`).
 
 ## Phân bổ ổ `/`
@@ -90,7 +92,7 @@ Xoá ở project không active (Colin, Andrew-Taraba, marcel, Maddy/LIFM2…). C
 
 ## Câu hỏi chưa giải quyết
 
-1. Drop `luxeitfwdm2` (cũ)? Và `luxeit2fwdm-v2` nữa không?
+1. Drop `luxeit2fwdm-v2` nữa không? (`luxeitfwdm2` đã drop)
 2. Duyệt mục B (cache, ~17G) — chạy luôn?
 3. DB mục A khác: `bailey_pre9`, `mwmxcoma_wp_nmqrw`, `wp_tactical`, `delayedflight`, `montreall`, `catnapping`, `swit_ocpp_dev` — giữ/drop?
 4. Project nào không còn active (để xoá deps)?
