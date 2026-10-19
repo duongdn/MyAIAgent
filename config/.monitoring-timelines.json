@@ -338,11 +338,11 @@
   },
   "monday_report": {
     "description": "Updated when Monday project status report runs. Reporting week = previous Mon-Sun.",
-    "last_run": "2026-10-12T01:25:02.632Z",
-    "last_reporting_week": "2026-10-05 to 2026-10-11",
+    "last_run": "2026-10-19T01:29:57.259Z",
+    "last_reporting_week": "2026-10-12 to 2026-10-18",
     "last_status": "complete",
     "mode": "live",
-    "output_file": "reports/2026-10-12/0825-monday-report.md",
+    "output_file": "reports/2026-10-19/0829-monday-report.md",
     "caveats": [
       "All Summary sheets stale 0.00 - Workstream weekTotal basis",
       "Maddy = LongVV only (6.5h)",
