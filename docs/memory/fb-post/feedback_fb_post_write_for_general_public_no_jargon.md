@@ -17,3 +17,4 @@ metadata:
 **How to apply:** 2–4 dòng ngắn (~20–40 chữ), KHÔNG hashtag, 1 ý/1 câu chuyện vui hoặc tự trào từ trải nghiệm thật của người mới (thua lỗ, FOMO, hết tiền, gồng lỗ...), chơi chữ/ca dao/tục ngữ, 2–4 emoji hài, kết bằng câu rủ tương tác ("ai cùng cảnh điểm danh"). KHÔNG list bài học, KHÔNG số liệu chỉ số, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ. Tin tức chỉ dùng làm cái cớ, không tóm tắt tin. Chủ đề chính: chứng khoán. Related: [[project_fb_daily_post_draft_is_only_me]]
 
 Mỗi bài: kèm cảm xúc FB (--feeling), bài chứng khoán kèm ảnh VN-Index, ngày lễ thêm câu chúc.
+- v6 (✅ published): user gạch câu tự thêm "tài khoản luôn xanh" — "ai mượn???". KHÔNG tự chế thêm ý/lời chúc ngoài yêu cầu; câu chúc lễ giữ đơn giản đúng ngữ cảnh lễ.
