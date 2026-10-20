@@ -2,7 +2,7 @@
 
 **Phạm vi:** chỉ code team thêm/sửa trên `nus-base` so với `develop` của khách (merge `17f4f13174`). Bỏ openspec, docs, `*.spec.ts`, i18n, ảnh. Còn **342 file, +26.471 / −322 dòng, toàn bộ là FE** (`precognize-workspace`). Không xét PR.
 
-**Cách làm:** quét tự động toàn bộ `optimization-ui` (191 file .ts/.html), đọc từng dòng phần **sửa vào code của khách** (portal, admin-ui, shared), đọc kỹ các file logic chính (`r-socket.service.ts`, `model-wizard-state.service.ts`, model/validator bước Goal, `optimization-legacy-config.service.ts`). Chưa chạy được build/lint (máy này không có `node_modules`).
+**Cách làm:** quét tự động toàn bộ `optimization-ui` (191 file .ts/.html), đọc từng dòng phần **sửa vào code của khách** (portal, admin-ui, shared), đọc kỹ các file logic chính (`r-socket.service.ts`, `model-wizard-state.service.ts`, model/validator bước Goal, `optimization-legacy-config.service.ts`).
 
 ## Tóm tắt
 
@@ -12,8 +12,6 @@
 | ⚠️ | 3 | Hàm rỗng/TODO trong bản giao; code chết; API license lỗi thì mở hết module (fail-open) |
 | 💬 | 5 | Trộn async/RxJS, trộn signal/BehaviorSubject, URL viết tay + `HttpClient` trực tiếp, input `id` thừa ở tooltip dùng chung, file quá dài |
 | ✅ | | Không `console.*`, không `any`, không `innerHTML`, mọi subscribe đều có hủy, text đều qua translate, README/openspec/ai_docs không lọt vào bản giao |
-
-**Sửa so với báo cáo standards 19/10:** `StepPlaceholderComponent` **có dùng** (route bước 3/4 ở M1), không phải code chết. `ManageInfluencerDialog` không còn trên nus-base.
 
 ## 1. Code của khách bị sửa (rủi ro cao nhất, đọc toàn bộ)
 

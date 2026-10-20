@@ -14,7 +14,7 @@ hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
 li{margin:3px 0}
 pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: review code nhánh <code>nus-base</code> (20/10/2026)</h1>
 <p><strong>Phạm vi:</strong> chỉ code team thêm/sửa trên <code>nus-base</code> so với <code>develop</code> của khách (merge <code>17f4f13174</code>). Bỏ openspec, docs, <code>*.spec.ts</code>, i18n, ảnh. Còn <strong>342 file, +26.471 / −322 dòng, toàn bộ là FE</strong> (<code>precognize-workspace</code>). Không xét PR.</p>
-<p><strong>Cách làm:</strong> quét tự động toàn bộ <code>optimization-ui</code> (191 file .ts/.html), đọc từng dòng phần <strong>sửa vào code của khách</strong> (portal, admin-ui, shared), đọc kỹ các file logic chính (<code>r-socket.service.ts</code>, <code>model-wizard-state.service.ts</code>, model/validator bước Goal, <code>optimization-legacy-config.service.ts</code>). Chưa chạy được build/lint (máy này không có <code>node_modules</code>).</p>
+<p><strong>Cách làm:</strong> quét tự động toàn bộ <code>optimization-ui</code> (191 file .ts/.html), đọc từng dòng phần <strong>sửa vào code của khách</strong> (portal, admin-ui, shared), đọc kỹ các file logic chính (<code>r-socket.service.ts</code>, <code>model-wizard-state.service.ts</code>, model/validator bước Goal, <code>optimization-legacy-config.service.ts</code>).</p>
 <h2>Tóm tắt</h2>
 <table>
 <thead>
@@ -47,7 +47,6 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 </tr>
 </tbody>
 </table>
-<p><strong>Sửa so với báo cáo standards 19/10:</strong> <code>StepPlaceholderComponent</code> <strong>có dùng</strong> (route bước 3/4 ở M1), không phải code chết. <code>ManageInfluencerDialog</code> không còn trên nus-base.</p>
 <h2>1. Code của khách bị sửa (rủi ro cao nhất, đọc toàn bộ)</h2>
 <p>Team sửa 9 vùng code dùng chung của khách: auth guard + routing portal, interceptor admin-ui, license service (portal + admin), header + app-menu, custom-tooltip (dời từ portal sang <code>shared/</code>), custom-button, file-upload, <code>package.json</code>/<code>angular.json</code>.</p>
 <h3>⚠️ 1.1 Đọc license lỗi thì mọi module đều mở (fail-open)</h3>

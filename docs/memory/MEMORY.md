@@ -285,3 +285,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [mpfc_account_delete_and_paypal_cancel](mpfc/feedback_mpfc_account_delete_and_paypal_cancel.md) — 🔴 user/delete orphaned subs (fixed f867e03b2); PayPal NVP cancels I- subs despite read error — test, don't infer
 - [fb_post_write_for_general_public_no_jargon](fb-post/feedback_fb_post_write_for_general_public_no_jargon.md) — 🔴 ngắn, hài, tự trào góc người mới chơi CK; ko phân tích/lời khuyên/thuật ngữ
 - [fb_post_trello_card_complete_on_submit](fb-post/project_fb_post_trello_card_complete_on_submit.md) — Trello CARD (Card Repeater daily) → dueComplete sau submit, ko phải checklist
+- [elena_team_review_report_no_meta](elena/feedback_elena_team_review_report_no_meta.md) — team review reports: no compare/correction/tooling notes
