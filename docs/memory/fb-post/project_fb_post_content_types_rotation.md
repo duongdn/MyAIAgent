@@ -13,4 +13,5 @@ On 2026-10-20 the user listed these FB post ideas. The rotation lives in `.claud
 - `running`: remind the user to share running posts and milestones.
 
 **Why:** the user wants daily posting to vary, with a personal brand mixing work (NUS), investing and running.
-**How to apply:** for running there is no data source, so never invent km or times. Post an Only-me draft template with a blank to fill and flag it as a reminder in the report. For trends, keep to harmless content and share the original link instead of reposting other people's images. Related: [[feedback_fb_post_write_for_general_public_no_jargon]]
+**Running data:** Strava's API is subscriber-only (2026-10-20), so `scripts/strava-running-stats.py` reads the web JSON endpoint `/athlete/training_activities` with cookies exported from Chrome Profile 9 (`scripts/get-duongdn-strava-cookies.py`). It returns totals and milestones. A milestone on the latest run makes `running` the type for that day. Runs on Strava start 2026-05-19.
+**How to apply:** only use numbers from the script, never invent them. For trends, keep to harmless content and share the original link instead of reposting other people's images. Related: [[feedback_fb_post_write_for_general_public_no_jargon]]

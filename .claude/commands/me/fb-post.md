@@ -54,11 +54,12 @@ Ghi `type` vào history; không lặp cùng `type` 2 ngày liền, không trùng
 | `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | news-digest 3 ngày gần nhất, link gốc (không link news.google) |
 | `running` | **Nhắc user**, không tự bịa thành tích | xem dưới |
 
-`running` (tối đa 1 lần/tuần, ưu tiên Chủ nhật): KHÔNG có dữ liệu chạy bộ → KHÔNG được chế số km/thời gian. Đăng nháp khung "Chỉ mình tôi":
-```
-Hôm nay chạy được ___ km 🏃‍♂️ (điền số + ảnh)
-```
-+ ghi rõ trong report: "🔔 Nhắc: share bài chạy bộ/milestone — sửa nháp trên FB rồi `/me:fb-post --submit`".
+`running`: số liệu THẬT từ Strava — `python3 scripts/strava-running-stats.py` (đọc JSON web Strava bằng cookie Chrome Profile 9; không cần API trả phí).
+- Mỗi lần chạy lệnh đều gọi script này trước. `milestones` khác rỗng VÀ `latest.date` = hôm nay/hôm qua → **ưu tiên type `running` hôm đó** (bỏ qua luật xoay vòng), đánh dấu 🔔 trong report.
+- Không có milestone → `running` tối đa 1 lần/tuần (ưu tiên Chủ nhật), viết về tổng km tuần/tháng.
+- Chỉ dùng số trong JSON (km, pace, phút, tổng tuần/tháng/năm); KHÔNG tự chế số. Giọng ngây ngô vui như các bài khác, không khoe kiểu vận động viên.
+- Kèm link `latest.url` (FB tự tạo preview bản đồ Strava). Cảm xúc FB gợi ý: "đầy năng lượng", "khỏe mạnh", "hào hứng".
+- `ok:false` + `not_logged_in` → bỏ type running hôm đó, ghi report: "Strava hết phiên — đăng nhập lại strava.com trong Chrome Profile 9".
 
 Chung: 1 bài = 1 ý chính. Link (blog/bài báo/trend) để ở dòng cuối.
 
