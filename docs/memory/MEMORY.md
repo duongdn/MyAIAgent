@@ -282,3 +282,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [user_career_direction_ai_engineer](global/user_career_direction_ai_engineer.md) — 2026-10-19 chọn hướng AI Engineer/Architect, có plan 6 tháng
 ## fb-post
 - [fb_daily_post_draft_is_only_me](fb-post/project_fb_daily_post_draft_is_only_me.md) — draft = "Chỉ mình tôi" post; untick default-audience box; submit = change audience
+- [mpfc_account_delete_and_paypal_cancel](mpfc/feedback_mpfc_account_delete_and_paypal_cancel.md) — 🔴 user/delete orphaned subs (fixed f867e03b2); PayPal NVP cancels I- subs despite read error — test, don't infer
