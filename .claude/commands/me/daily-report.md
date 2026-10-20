@@ -1082,7 +1082,7 @@ One-time full-history deep-dive: `reports/backup/2026-07-07/arthur-metastamp-ful
 
 **GitHub (PR/commit status):** `gh auth token -h github.com -u davidztv` — already has access to `Christebob/Meta_Stamp_V3` (private). Check `pulls?state=all` AND `commits?since=...` — repo currently has 0 open PRs, all work direct-to-`main`, so PR list alone misses everything.
 
-**Workstream (est/actual):** project "Crystal lang", `projectId=cmqezgh7z080hp81vo5yqd24z`, roster DuongDN/PhucVT/TienND. ⚠️ **API bug:** `GET /review/week?projectId=...&date=...` returns `403 Forbidden` for the week's start date (or +2 days) — always query with a date from the back half of the target week or you'll wrongly conclude 0h logged.
+**Workstream (est/actual):** 🔴 since 2026-10-19 Chris/R1 work lives in a NEW project **"Meta-Stamp"** (customer Chris Coyne / Meta-Stamp LLC, `projectId=cmvexs7ei0h8gpp1v0lpdw57x`, start 2026-10-19, roster TienND (Manager) / PhucVT / DuongDN, no `isReviewer` set) — namtv split it off from Arthur 10-19 14:10. Check BOTH it and the old "Crystal lang" project (`projectId=cmqezgh7z080hp81vo5yqd24z`, Arthur, still holds pre-R1 M4 rows), roster DuongDN/PhucVT/TienND. ⚠️ **API bug:** `GET /review/week?projectId=...&date=...` returns `403 Forbidden` for the week's start date (or +2 days) — always query with a date from the back half of the target week or you'll wrongly conclude 0h logged.
 
 **Flow:**
 1. Read `arthur_monitor.last_run` from `config/.monitoring-timelines.json` (under `refresh` or top-level — see Key Config Files). Fetch only messages after that timestamp from all 6 sources.

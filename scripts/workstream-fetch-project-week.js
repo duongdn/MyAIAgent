@@ -44,6 +44,7 @@ const PROJECTS = {
   legalatoms:     { id: 'cmqyvio870031qo0xxelwodau', name: 'LegalAtoms',                 client: 'Raymond',        manager: true  },
   bxr_app:        { id: 'cmqyvio7a002dqo0x54rx6o20', name: 'BXR App',                    client: 'Rory',           manager: true  },
   crystal_lang:   { id: 'cmqezgh7z080hp81vo5yqd24z', name: 'Crystal lang',               client: 'Arthur',         manager: true  },
+  meta_stamp:     { id: 'cmvexs7ei0h8gpp1v0lpdw57x', name: 'Meta-Stamp',                 client: 'Chris Coyne',    manager: true  },
   ohcleo:         { id: 'cmqgdtr7s0memp81vfste5stp', name: 'OhCleo',                     client: 'OhCleo',         manager: true  },
   // Added 2026-10-08 from live /time/projects — cron missed TuanNT/PhucVT/LongVV hours on these
   definitive_guide:{ id: 'cmqyvioiy00adqo0x9zyt66t2', name: 'Definitive Guide',          client: 'James Diamond',  manager: true  },
