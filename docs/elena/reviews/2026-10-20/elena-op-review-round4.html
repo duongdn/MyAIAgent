@@ -1,0 +1,170 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP review lần 4</title><style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
+body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
+main{max-width:960px;margin:auto}
+h1{font-size:26px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+h2{font-size:20px;margin-top:32px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+blockquote{margin:0;padding:8px 14px;border-left:4px solid var(--acc);background:var(--th);color:var(--mut)}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;margin:12px 0}
+th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--th)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
+hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
+li{margin:3px 0}
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: review lần 4 (20/10/2026)</h1>
+<p>Tiếp theo lần 3 (<code>docs/elena/reviews/2026-10-19/elena-op-review-round3.md</code>) và báo cáo standards (<code>2026-10-19/elena-op-standards-review.md</code>). Code pull lúc 14:00 ngày 20/10.</p>
+<h2>Tóm tắt</h2>
+<table>
+<thead>
+<tr>
+<th>Hạng mục</th>
+<th>19/10</th>
+<th>20/10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PR giao BE <code>Precognize/development#5512</code></td>
+<td>Chưa review</td>
+<td>🔴 <strong>Bị CHANGES_REQUESTED</strong> (nusdavid, 20/10): thiếu config optimization trong <code>reference.conf</code> (đã kiểm: không có), code comment-out ở migration (đúng vụ unique index tồn 4 lần), dependency không dùng ở <code>DaeApiSearchController</code></td>
+</tr>
+<tr>
+<td>PR giao FE <code>#5511</code> (khách comment 9 chỗ)</td>
+<td>Chưa trả lời</td>
+<td>✅ Ken đã trả lời 11 comment, chuyển SVG ra file (<code>59186d8f37</code>), dời sample tag về playground (<code>ff36446477</code>). Chờ khách phản hồi</td>
+</tr>
+<tr>
+<td>Branch BE</td>
+<td><code>feature/optimization-algorithm-integration</code></td>
+<td>Đổi sang <strong><code>feature/optimization-be-m2</code></strong>; #362, #364, #372 đều nhắm vào đây</td>
+</tr>
+<tr>
+<td>PR BE mới #372 (upsert theo bước + operating conditions dạng list)</td>
+<td>–</td>
+<td>💬 mục 1.1</td>
+</tr>
+<tr>
+<td>#364 model list</td>
+<td>16e2a5bd</td>
+<td>1 commit mới (<code>afda7fcb70</code>). 🔴 <strong>Lệch contract với FE OP-27</strong>: BE trả <code>limit = null</code>, FE coi là lỗi (mục 1.2)</td>
+</tr>
+<tr>
+<td>FE nus-op-m2 (42 commit, +4.720 dòng)</td>
+<td>–</td>
+<td>OP-27 nối API list, OP-19 nối API tô vùng (bỏ sample). ⚠️ Chi tiết model vẫn là dữ liệu mẫu ghép với model thật (mục 2.1)</td>
+</tr>
+<tr>
+<td>Unique index tên model</td>
+<td>Comment-out lần 4</td>
+<td>❌ Vẫn vậy, <strong>và giờ khách đã tự bắt</strong> ở #5512</td>
+</tr>
+<tr>
+<td>Review chéo nội bộ</td>
+<td>4 PR không ai review</td>
+<td>❌ #353, #354, #362, #364, #372: <strong>vẫn 0 review</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>DuongDN cần làm ngay:</strong>
+1. Báo kietnht/Brian xử lý 3 comment của khách ở #5512 (mục 3). Riêng vụ unique index: quyết định dứt điểm (bật index hoặc xoá hẳn đoạn comment, sửa comment trong document) rồi trả lời khách.
+2. Báo tiennd2 + ryannus thống nhất <code>usage.limit</code> (null hay số) trước khi merge #364, nếu không drawer Manage Models báo lỗi trên mọi nhà máy không có giới hạn license (mục 1.2).
+3. Chỉ định review chéo BE cho #362/#364/#372 (Brian ↔ tiennd2 ↔ kietnht).</p>
+<h2>1. PR BE</h2>
+<h3>1.1 PR #372 <code>fix/upsert-op-model</code> (tiennd2) — 💬</h3>
+<p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/372 (+215/−115, base <code>feature/optimization-be-m2</code>, body trống, chưa ai review)</p>
+<p><strong>PR làm gì:</strong> Đưa logic "lưu theo từng bước" (commit <code>043c4d52f1</code> đã review lần 3) sang branch m2, và đổi cấu trúc dữ liệu bước 3/4: mỗi data exclusion có thêm <code>name</code>; <code>operatingConditions</code> từ <strong>một</strong> condition set thành <strong>danh sách</strong> các condition có <code>id</code> (tự sinh UUID), <code>name</code>, <code>conditionSet</code>. Đồng thời đổi luật nối điều kiện: chỉ chấp nhận <strong>OR</strong> (trước là chỉ AND).</p>
+<p><strong>Kết luận:</strong> 💬 Logic đúng hướng, khớp FE (FE luôn gửi <code>OR</code>, <code>expression.model.ts:8</code>). Nhưng là thay đổi contract mà không có spec, không có test, và có mã lỗi sai.</p>
+<ul>
+<li><strong>⚠️ Thay đổi contract không có spec.</strong></li>
+<li><strong>Vấn đề:</strong> <code>operatingConditions</code> đổi kiểu (object → array), <code>logicalOperator</code> đổi từ AND sang OR, thêm <code>name</code>. Không có file <code>openspec/</code> nào được sửa; spec op-26 hiện vẫn mô tả kiểu cũ.</li>
+<li><strong>Tại sao quan trọng:</strong> API contract chỉ được mô tả trong <code>openspec/</code> gốc (quy tắc dự án). FE OP-18/OP-19 sẽ đọc spec để nối API lưu bước 3/4. Spec cũ → FE gửi object → BE trả lỗi deserialize.</li>
+<li><strong>Cách sửa:</strong> Thêm delta spec cho op-26 (kiểu mới, luật OR, scenario lỗi).</li>
+<li><strong>⚠️ Không có test, test cũ có thể vỡ.</strong> <code>validateUpsert</code> đổi chữ ký (thêm <code>stored</code>), <code>upsert</code> đổi luồng, nhưng PR không sửa file test nào. Cần chạy <code>mvn test</code> module optimization và cập nhật test.</li>
+<li><strong>💬 Tên trống báo sai mã lỗi.</strong> <code>validateName()</code> (<code>DaeOptimizationModelConstraints.java</code>, cuối file) báo <code>invalidOptimizationConditionSet</code> khi exclusion/condition không có tên. FE sẽ hiện "điều kiện không hợp lệ" thay vì "thiếu tên". Nên có errorId riêng (ví dụ <code>missingOptimizationConditionName</code>) và giới hạn độ dài tên như tên model.</li>
+<li><strong>💬 Dữ liệu cũ không dọn khi bỏ influencer</strong> (đã nêu lần 3): vẫn còn. Đổi bước 2 không làm lại kiểm tra <code>affectedTagIds</code> của exclusion đã lưu.</li>
+<li><strong>💬 Commit trùng:</strong> <code>2c9fd4755c</code> là cùng nội dung với <code>043c4d52f1</code> ở #364. Merge cả hai sẽ trùng/xung đột. Nên rebase #372 lên #364 hoặc tách rõ.</li>
+<li>✅ Bỏ <code>copyLifecycleFields</code> (giờ sửa trực tiếp document đã lưu) gọn hơn; chặn kiểm tra trùng tên khi không phải bước GOAL là đúng.</li>
+</ul>
+<h3>1.2 PR #364 OP-43 model list (tiennd2) — ❌ (trước: 💬)</h3>
+<p>https://github.com/nustechnology/Elena-SamGuard-Digital-Plant/pull/364 (commit mới <code>afda7fcb70</code>: thêm <code>sendRSocketRequestResponse</code> không có body cho license service)</p>
+<ul>
+<li><strong>🔴 Lệch contract <code>usage.limit</code> với FE OP-27.</strong></li>
+<li><strong>Vấn đề:</strong> BE: <code>limit(capacity.orElse(null))</code> (<code>DaeOptimizationModelControl.java:295</code>), tức khi license không có giới hạn số model thì <code>limit</code> là <code>null</code>. FE: <code>toModelsPage()</code> (<code>manage-models.service.ts</code>) yêu cầu <code>typeof data.usage?.limit === 'number'</code>, nếu không thì <code>throw new Error('Unexpected models response')</code>.</li>
+<li><strong>Tại sao quan trọng:</strong> Nhà máy có license không giới hạn (hoặc chưa có license OP) → mở drawer Manage Models → <strong>toàn bộ danh sách báo lỗi</strong>, dù có model. Guard trang chủ <code>hasOptimizationModelsGuard</code> cũng dùng hàm này → bắt lỗi → người dùng đã có model vẫn bị đưa về trang "chưa có model".</li>
+<li><strong>Cách sửa:</strong> Chốt một bên: BE luôn trả số (0 = không giới hạn?) hoặc FE chấp nhận <code>null</code> và hiển thị "x Models Used" không có "/ y". Ghi vào spec op-34.</li>
+<li>Các điểm lần 3 (soft-delete trong spec, tìm tag không giới hạn, tên ticket OP-43/OP-34, openspec lọt vào branch BE) <strong>chưa sửa</strong>.</li>
+<li>⚠️ Rule mới từ #5512: khách bắt "dependency không dùng". <code>afda7fcb70</code> thêm hàm mới mà không có test.</li>
+</ul>
+<h3>1.3 PR #362 OP-34 (tiennd2), #353 be-m1 (Brian)</h3>
+<p>Không commit mới. #362 đổi base sang be-m2. Vẫn 0 review.</p>
+<h2>2. FE (nus-op-m2, 42 commit từ 19/10)</h2>
+<h3>2.1 OP-27 nối API danh sách model (ryannus) — 💬</h3>
+<p><strong>Làm gì:</strong> Drawer Manage Models giờ lấy danh sách, tìm kiếm, phân trang, bộ đếm "x / y" từ <code>GET /optimization/models</code> (#364). Trang chủ <code>#/</code> mở thẳng Optimization Runs nếu đã có model (guard mới). Sửa nhiều lỗi giao diện (cắt tên, tooltip, cột 360px, trang cuối rỗng).</p>
+<ul>
+<li><strong>🔴 <code>usage.limit</code> null làm hỏng cả danh sách</strong>: xem 1.2 (lỗi nằm ở cả hai phía, chỉ cần sửa một phía).</li>
+<li><strong>⚠️ Chi tiết model là dữ liệu mẫu ghép vào model thật.</strong></li>
+<li><strong>Vấn đề:</strong> <code>getModel()</code> lấy <code>MODELS_SAMPLE[hashOf(item.id) % length]</code> rồi chỉ thay tên/mô tả/hướng/tag mục tiêu bằng dữ liệu thật. Health, status, ngày tạo, influencer, exclusion, constraint, lịch sử run <strong>đều là giả</strong>.</li>
+<li><strong>Tại sao quan trọng:</strong> Khi danh sách đã là thật (model người dùng vừa tạo), bấm vào xem chi tiết lại thấy influencer và lịch sử run không hề tồn tại. QC/khách sẽ coi là bug dữ liệu. Khách đã hỏi đúng chỗ này ở #5511 ("Do you need mocks?"), Ken trả lời "M1 chưa có endpoint", nhưng ở M2 list đã thật mà detail vẫn giả thì khó giải thích hơn.</li>
+<li><strong>Cách sửa:</strong> Khi chưa có API detail, chỉ hiện các field có thật và để trạng thái "chưa có dữ liệu" cho phần còn lại; hoặc có ticket API detail trước khi giao M2.</li>
+<li><strong>💬 Nút DELETE MODEL chỉ đóng dialog</strong> (<code>TODO(OP-27)</code> trong <code>manage-models-drawer.component.ts</code>): người dùng bấm xoá, dialog đóng, model vẫn còn, không báo gì. Đây đúng kiểu "hàm rỗng" khách đã comment. Nên ẩn/disable nút cho đến khi có API.</li>
+<li><strong>💬 Guard timeout 1.500 ms</strong>: API chậm (lần đầu, cold start) → người có model vẫn bị đưa về trang "chưa có model". Chấp nhận được nếu BA đồng ý; nên ghi vào spec.</li>
+<li>✅ Dùng <code>HttpService</code> + <code>ApiCallsPathsEnum.OPTIMIZATION_MODELS</code> (đúng standard, không viết URL tay), validate envelope trước khi map, lọc dòng thiếu id/name.</li>
+</ul>
+<h3>2.2 OP-19 nối API tô vùng (Aron) — ✅</h3>
+<p><strong>Làm gì:</strong> Bỏ sample <code>operating-constraint-periods</code>, gọi API <code>highlight-periods</code> (#362) cho từng rule ở bước 3/4, có loading, timeout 30s, tooltip theo chuột, debounce khi cuộn bằng <code>requestAnimationFrame</code>.
+- ✅ Đã gỡ mock như góp ý lần 3. Subscription mỗi rule được hủy khi rule bỏ chọn và khi component destroy (<code>rule-periods.ts</code>), có <code>takeUntilDestroyed</code>, có cache.
+- 💬 Phụ thuộc #362 chưa merge và chưa ai review. FE sẵn sàng trước BE; nếu #362 đổi contract thì FE phải sửa theo.
+- Spec OP-18/19 được cập nhật, archive đúng quy trình.</p>
+<h3>2.3 Khác</h3>
+<ul>
+<li>redmine-81535 (ô số bắt đầu rỗng với placeholder 0), OP-55 (cột lịch sử licence), OP-14: thay đổi nhỏ, ổn.</li>
+<li>PR #354 OP-38 (Ken): không commit mới, 0 review.</li>
+</ul>
+<h2>3. Khách review PR giao M1</h2>
+<h3>3.1 <code>#5512</code> BE — 🔴 CHANGES_REQUESTED (nusdavid, 20/10 10:23)</h3>
+<p>https://github.com/Precognize/development/pull/5512</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>File</th>
+<th>Khách nói</th>
+<th>Đánh giá</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>DaeControlOptimizationModel.java:31</code></td>
+<td>Application gọi OptimizationService nhưng <code>reference.conf</code> <strong>không có config optimization</strong>, có thể quên đẩy</td>
+<td>🔴 Đúng. Không config → application không biết địa chỉ service khi chạy ở môi trường khách. Thêm block config + kiểm tra deploy</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>DaeMigrationCreateOptimizationModelCollectionLogic.java:50</code></td>
+<td>"Sao push code comment-out? Nếu collection chưa có thì sao? Chỉ tạo collection mà không làm gì"</td>
+<td>🔴 Đúng vụ <strong>unique index em đã nhắc 4 lần</strong>. Phải bật index (tốt nhất) hoặc xoá đoạn comment và giải thích</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>DaeApiSearchController.java:26</code></td>
+<td>"Các dependency mới đều không dùng"</td>
+<td>⚠️ Head hiện tại của #5512 đã không còn inject thừa, nhưng để lại 5 dòng trống giữa field và method (đúng loại "thay đổi không liên quan" khách hay bắt). Dọn và trả lời khách là đã sửa</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 <code>#5511</code> FE — Ken đã trả lời</h3>
+<p>Ken trả lời 11 comment hôm nay: giữ handler rỗng (template đã bind, chờ API), giữ sample data (M1 chưa có endpoint), playground không translate (trang dev), <code>&lt;title&gt;</code> không dùng key được; đã chuyển SVG ra file. Hợp lý, khớp CONVENTIONS nội bộ. Việc mở còn lại: chờ khách chấp nhận.</p>
+<h2>Rule bổ sung vào checklist (từ #5512)</h2>
+<ul>
+<li>Service mới gọi từ application → phải có config trong <code>reference.conf</code> (và các file config môi trường).</li>
+<li>Không đẩy code comment-out vào PR giao khách (khách bắt thật, không chỉ nội bộ).</li>
+<li>Không inject dependency không dùng, kể cả "để sau dùng".</li>
+</ul>
+<h2>Câu hỏi còn mở</h2>
+<ul>
+<li>tiennd2/ryannus: <code>usage.limit</code> khi license không giới hạn là <code>null</code> hay số?</li>
+<li>Brian/kietnht: bật unique index tên model hay bỏ hẳn? (cần trả lời khách ở #5512)</li>
+<li>BA: detail model ở M2 có API không, hay vẫn sample khi giao?</li>
+</ul></main></body></html>
