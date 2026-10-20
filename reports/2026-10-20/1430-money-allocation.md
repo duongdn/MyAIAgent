@@ -62,7 +62,7 @@ Single account lớn nhất ngoài Nhà = long an res 12.9% net (<25%).
 ### 3. Benchmark (base excl. Nhà = 5,505,480,724 ₫)
 | Nhóm | Actual | Benchmark | Status |
 |------|--------|-----------|--------|
-| BĐS đầu tư (excl. Nhà) | 18.5% | 20–30% | ⚠️ hơi thấp |
+| BĐS đầu tư (excl. Nhà) | 18.5% | — | ✅ OK (user chọn, có thể bán) |
 | Cổ phiếu/ETF/Fund | 46.8% | 30–50% | ✅ (gần trần) |
 | Tiết kiệm | 21.2% | 10–20% | ⚠️ hơi cao (8.7% là sổ ko kì hạn = vai trò tiền mặt) |
 | Vàng | 13.0% | 5–15% | ✅ |
@@ -78,3 +78,26 @@ Base = gross 8,005,480,724 − Nhà 2,500,000,000.
 - Ngắn hạn (30 ngày): T10 đã vào FPTS 118.3M — đủ cho tháng; quay về ~10M/tuần, giữ vcb ≥20M cho chi tiêu (hiện 15.2M).
 - Trung hạn: nạp FPTS từ lương; theo dõi trần 50% (còn ~178M).
 - Dài hạn: cân nhắc tài sản USD/quốc tế (0.3%) giảm tương quan VN.
+
+### 6. Phân tích các nhóm ngoài BĐS (bổ sung 17:20, BĐS 18.5% = OK theo user)
+Base excl. Nhà 5,505.5M. Phần ngoài BĐS = 4,485.5M (81.5%).
+
+| Nhóm | ₫ | % base | Benchmark | Đánh giá |
+|------|---|--------|-----------|----------|
+| CP niêm yết + quỹ (VCBS 607.9 · FPTS 573.9 · VCBF 525.1 · Finhay 67.4) | 1,774.2M | 32.2% | — | phần thanh khoản của CP |
+| Larion cổ phần | 800.0M | 14.5% | — | cổ phần tư nhân |
+| **Tổng CP/ETF/Fund** | 2,574.2M | **46.8%** | 30–50% | ✅ gần trần, còn ~178M |
+| Sổ tikcop ko kì hạn | 477.1M | 8.7% | (vai trò tiền mặt) | quỹ cho vay + DCA |
+| Sổ kỳ hạn (4 sổ, đáo hạn 02–04/2027) | 690.1M | 12.5% | 10–20% | ✅ |
+| Vàng | 713.0M | 13.0% | 5–15% | ✅ phía trên — giữ, không mua thêm |
+| Tiền mặt thuần | 31.0M | 0.6% | 5–10% gộp sổ ko kì hạn = 9.2% | ✅ |
+| USD | 14.9M | 0.3% | — | 🟡 gần 0 |
+
+Nhận xét:
+- **CP**: 46.8% trên giấy, nhưng phần mua bán được hằng ngày chỉ 32.2% — rủi ro thị trường thực tế vừa phải. Toàn bộ là thị trường VN (ETF VN30/VN100 + cổ tức VEA/ADP + quỹ VN) → tương quan cao, đây là rủi ro chính, không phải tỉ trọng.
+- **Nhịp DCA**: T10 đã vào 118.3M. Với ~10M/tuần (~43M/tháng), 178M còn lại tới trần 50% ≈ 4 tháng. Nếu đã chốt không mua thêm BĐS, có thể nâng trần CP lên **55%** (thêm ~275M dư địa, tổng ~453M ≈ 10 tháng DCA).
+- **Tiết kiệm + tiền mặt**: 1,198M = 2.85x quỹ khẩn cấp 420M; phần dùng ngay (31M + 477M) = 1.2x. Dư thừa ~780M → đủ làm nguồn DCA mà không phải động tới quỹ khẩn cấp.
+- **Vàng 13%**: hợp lý vai trò phòng thủ; không cần thêm (đã sát 15%).
+- **Khoảng trống**: tài sản ngoài VN/USD ~0.3% — bổ sung dần (vd ETF quốc tế/quỹ ngoại) nếu muốn giảm tương quan VN.
+
+Kịch bản **bán long an res (~1,020M)**: base giữ nguyên. Đề xuất: CP lên 55% (+~453M, DCA 12–18 tháng, ~25–35M/tháng), phần còn ~567M để trong sổ tikcop ko kì hạn làm quỹ DCA/cho vay; vàng giữ. Sau khi xong: CP 55% · tiết kiệm+tiền mặt ~31% · vàng 13%.

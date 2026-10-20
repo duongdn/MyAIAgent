@@ -346,7 +346,7 @@ Compare actual allocation vs global personal finance benchmarks:
 
 | Nhóm | Actual | Benchmark | Status |
 |------|--------|-----------|--------|
-| Bất động sản (đầu tư, excl. Nhà) | X% | 20–30% | ⚠️/✅ |
+| Bất động sản (đầu tư, excl. Nhà) | X% | user chọn — OK, KHÔNG flag thấp (user 2026-10-20: không mua thêm, có thể bán long an res) | ✅ |
 | Cổ phiếu/ETF/Fund | X% | 30–50% | ⚠️/✅ |
 | Trái phiếu/Tiết kiệm | X% | 10–20% | ⚠️/✅ |
 | Vàng/Commodity | X% | 5–15% | ⚠️/✅ |
