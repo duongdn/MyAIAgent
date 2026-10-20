@@ -12,6 +12,7 @@ Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). **Default = draft**: bài 
 /me:fb-post                                  → soạn + đăng nháp (Only me) cho hôm nay
 /me:fb-post --dry-run                        → soạn + điền composer, KHÔNG bấm Đăng
 /me:fb-post --submit [post-url] [--audience=public|friends]  → công khai bài nháp (default: nháp mới nhất, public)
+/me:fb-post --delete [post-url]                 → xoá nháp bị loại (script chỉ xoá nếu vẫn "Chỉ mình tôi")
 /me:fb-post --report-date=YYYY-MM-DD --report-time=HHMM     → (cron) dùng giờ được truyền vào
 ```
 
@@ -43,10 +44,12 @@ Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay
 - Tự tìm thêm (WebSearch) nếu nguyên liệu mỏng: chủ đề hợp profile user (PM/tech lead công ty outsource VN, dùng AI agent tự động hoá công việc, đầu tư chứng khoán VN dài hạn)
 
 ### 3. Chọn chủ đề
+- Ưu tiên chứng khoán/tài chính cá nhân (user chọn); bài học nghề chỉ khi kể được bằng ngôn ngữ phổ thông
 - Không trùng chủ đề 7 ngày gần nhất trong history; xoay vòng: AI/công nghệ → bài học nghề → đầu tư/tài chính → ...
 - 1 bài = 1 ý chính
 
 ### 4. Viết bài
+- 🔴 Viết cho ĐẠI CHÚNG (bạn bè FB bình thường, không phải dân IT): từ ngữ đời thường, thuật ngữ nào cũng phải giải thích bằng lời thường hoặc ví dụ đời sống; KHÔNG chủ đề/từ chỉ dân trong nghề mới hiểu
 - Tiếng Việt, ngôi "mình", giọng chia sẻ thật, không sến, không giọng quảng cáo/AI ("Trong thời đại số...", "Hãy cùng khám phá" = cấm)
 - 150–300 chữ, câu mở là 1 nhận xét/tình huống cụ thể, kết bằng 1 câu hỏi hoặc 1 takeaway ngắn
 - Plain text (FB không render markdown): không `**`, không `#`; emoji tối đa 2–3; hashtag 0–3 ở cuối

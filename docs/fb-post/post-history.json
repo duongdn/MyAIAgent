@@ -1,10 +1,11 @@
 [
   {
     "date": "2026-10-20",
-    "topic": "AI agent: mỗi lỗi AI nên thành test tự động, không chỉ là ghi chú",
-    "sources": ["reports/2026-10-19/1540-ai-era-self-improvement.md"],
-    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid024k6GsGfeLEyap8KX4bHvn7hoib1Lk71EvPw985hLpiMVZ5hVUyVwanEWDvrLGpSfl",
+    "topic": "Chứng khoán: rẻ mà dòng tiền vẫn đứng ngoài — đừng bắt đáy, mua dần, không vay",
+    "sources": ["reports/2026-10-20/0405-news-digest.md"],
+    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid02aJafWxFWodPbnJAdzBfRz2QAXx6RgR85K7j1BmuwfJ83DwZhUA3xtSDZe5cc5L4kl",
     "status": "draft",
-    "audience": "Chỉ mình tôi"
+    "audience": "Chỉ mình tôi",
+    "replaced": "AI-agent draft deleted — user: không dành cho đại chúng"
   }
 ]

@@ -6,6 +6,7 @@
  * Usage:
  *   node scripts/facebook-profile-post.js --draft <text-file> [--dry-run]
  *   node scripts/facebook-profile-post.js --submit <post-url> [--audience=public|friends]
+ *   node scripts/facebook-profile-post.js --delete <post-url>   (only if still Only-me)
  *
  * Outputs a JSON line {ok, mode, postUrl?, audience?} on stdout; screenshots on error
  * go to tmp/fb-post-error-*.png. Never changes the profile's default audience.
@@ -117,23 +118,51 @@ async function submitPost(page, postUrl, audienceKey) {
   await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
   assertLoggedIn(page);
   await sleep(3000);
-  // A permalink opens the post as a dialog over the feed — use that dialog's own "..." menu
+  await openPostMenuItem(page, 'Chỉnh sửa đối tượng');
+  await chooseAudience(page, label);
+  return { ok: true, mode: 'submit', postUrl, audience: label };
+}
+
+// A permalink opens the post as a dialog over the feed — use that dialog's own "..." menu
+async function openPostMenuItem(page, itemText) {
   const [menu] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][starts-with(@aria-label,"Hành động đối với bài viết này")]');
   if (!menu) throw new Error('post actions menu not found');
   await menu.click();
   await sleep(1500);
-  const [item] = await page.$$('xpath/.//div[@role="menuitem"][.//span[text()="Chỉnh sửa đối tượng"]]');
-  if (!item) throw new Error('"Chỉnh sửa đối tượng" menu item not found');
+  const [item] = await page.$$(`xpath/.//div[@role="menuitem"][.//span[text()="${itemText}"]]`);
+  if (!item) throw new Error(`"${itemText}" menu item not found`);
   await item.click();
   await sleep(2000);
-  await chooseAudience(page, label);
-  return { ok: true, mode: 'submit', postUrl, audience: label };
+}
+
+// Only deletes posts still on "Chỉ mình tôi" — a rejected draft, never a published post
+async function deleteDraft(page, postUrl) {
+  await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
+  assertLoggedIn(page);
+  await sleep(3000);
+  await openPostMenuItem(page, 'Chỉnh sửa đối tượng');
+  const onlyMe = await page.$$eval('[role="dialog"] input[type="radio"]', inputs => {
+    const rowOf = e => e.closest('label') || e.parentElement.parentElement.parentElement;
+    const checked = inputs.find(e => e.checked);
+    return !!checked && rowOf(checked).innerText.split('\n')[0].trim() === 'Chỉ mình tôi';
+  });
+  if (!onlyMe) throw new Error('refusing to delete: post audience is not "Chỉ mình tôi"');
+  await page.keyboard.press('Escape');
+  await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
+  await sleep(3000);
+  await openPostMenuItem(page, 'Xóa bài viết');
+  const [confirm] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][@aria-label="Xóa"]');
+  if (!confirm) throw new Error('delete confirm button not found');
+  await confirm.click();
+  await sleep(3000);
+  return { ok: true, mode: 'delete', postUrl };
 }
 
 (async () => {
   const draftFile = argAfter('--draft');
   const submitUrl = argAfter('--submit');
-  if (!draftFile && !submitUrl) {
+  const deleteUrl = argAfter('--delete');
+  if (!draftFile && !submitUrl && !deleteUrl) {
     console.error('Usage: --draft <text-file> [--dry-run] | --submit <post-url> [--audience=public|friends]');
     process.exit(2);
   }
@@ -142,6 +171,7 @@ async function submitPost(page, postUrl, audienceKey) {
   try {
     const result = draftFile
       ? await createDraft(page, fs.readFileSync(draftFile, 'utf-8').trim(), flag('--dry-run'))
+      : deleteUrl ? await deleteDraft(page, deleteUrl)
       : await submitPost(page, submitUrl, audienceArg);
     console.log(JSON.stringify(result));
   } catch (err) {

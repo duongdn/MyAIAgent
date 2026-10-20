@@ -1,23 +1,30 @@
-# FB post draft — 2026-10-20
+# FB post draft — 2026-10-20 (v2)
 
-- Chủ đề: AI agent — biến lỗi AI thành test tự động
-- Nguồn: reports/2026-10-19/1540-ai-era-self-improvement.md
+- Chủ đề: chứng khoán — rẻ mà tiền vẫn đứng ngoài
+- Nguồn: reports/2026-10-20/0405-news-digest.md
 - Audience: Chỉ mình tôi (nháp)
-- URL: https://www.facebook.com/dnduong.us/posts/pfbid024k6GsGfeLEyap8KX4bHvn7hoib1Lk71EvPw985hLpiMVZ5hVUyVwanEWDvrLGpSfl
+- URL: https://www.facebook.com/dnduong.us/posts/pfbid02aJafWxFWodPbnJAdzBfRz2QAXx6RgR85K7j1BmuwfJ83DwZhUA3xtSDZe5cc5L4kl
+- v1 (AI agent) đã xoá theo góp ý user
 - Submit: `/me:fb-post --submit`
 
 ```
-Hơn nửa năm nay mình dùng AI agent để tự động hoá phần lớn việc hằng ngày: tổng hợp báo cáo, theo dõi dự án, đọc tin, theo dõi tài chính cá nhân.
+Chứng khoán dạo này: rẻ mà vẫn không ai mua?
 
-Điều bất ngờ nhất không phải là AI làm được bao nhiêu việc, mà là mình đã phải sửa nó bao nhiêu lần. Đếm lại thì có hơn 150 lần góp ý kiểu: "chỗ này báo nhầm", "phải kiểm tra lại trước khi kết luận", "lỗi 403 này là giả, token vẫn sống".
+Phiên hôm qua VN-Index lại rơi xuống dưới 1.700 điểm, chủ yếu do nhóm ngân hàng giảm. Báo chí có một tiêu đề mình thấy rất đúng: "giá cổ phiếu càng rẻ, dòng tiền vẫn đứng ngoài".
 
-Lúc đầu mình nghĩ cứ ghi lại góp ý cho AI nhớ là xong. Nhưng ghi càng nhiều thì "trí nhớ" càng phình, có hôm AI đọc không hết và lặp lại đúng cái lỗi đã sửa tuần trước.
+Nói dễ hiểu thì giống đi chợ thấy đồ đang giảm giá, ai cũng biết là rẻ, nhưng chưa ai dám mua vì sợ mai còn rẻ nữa. Thế là cứ đứng nhìn.
 
-Bài học mình rút ra: mỗi lỗi AI từng mắc nên trở thành một bài test tự động, chứ không chỉ là một dòng ghi chú. Giống như viết code: bug fix xong thì phải có test để nó không quay lại.
+Mình không đoán được thị trường đã chạm đáy hay chưa, chuyên gia cũng nói là chưa đủ tín hiệu. Nhưng mình rút ra được vài điều cho bản thân:
 
-Nhiều người hỏi làm sao để dùng AI hiệu quả. Theo mình, kỹ năng quan trọng nhất bây giờ không phải là viết prompt hay, mà là biết cách kiểm chứng đầu ra của AI một cách có hệ thống.
+1. Đừng cố mua đúng đáy. Gần như không ai làm được việc đó.
+2. Nếu tin vào doanh nghiệp tốt thì chia nhỏ tiền ra, mua dần mỗi tháng một ít. Giá xuống thì mua được nhiều cổ phiếu hơn, giá lên thì mừng.
+3. Chỉ dùng tiền nhàn rỗi, đừng vay mượn để mua. Lúc thị trường giảm, người vay là người mất ngủ nhất.
 
-Anh em đang dùng AI trong công việc thì đang kiểm tra kết quả của nó bằng cách nào?
+Có một tin tốt ít người để ý: tỷ giá đô la đã giảm mấy tháng liền. Đây thường là điểm cộng cho kinh tế và thị trường về lâu dài.
 
-#AI #AIAgent #tudonghoa
+Mọi người đang làm gì lúc thị trường như này: mua thêm, đứng ngoài, hay không quan tâm luôn?
+
+Quan điểm cá nhân, không phải khuyến nghị đầu tư.
+
+#chungkhoan #dautu
 ```
