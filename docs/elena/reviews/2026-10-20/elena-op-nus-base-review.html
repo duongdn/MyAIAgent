@@ -13,69 +13,87 @@ code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;wor
 hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
 li{margin:3px 0}
 pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: review code nhánh <code>nus-base</code> (20/10/2026)</h1>
-<p><strong>Phạm vi:</strong> chỉ code team thêm/sửa trên <code>nus-base</code> so với <code>develop</code> của khách (merge <code>17f4f13174</code>). Bỏ openspec, docs, <code>*.spec.ts</code>, i18n, ảnh. Còn <strong>342 file, +26.471 / −322 dòng, toàn bộ là FE</strong> (<code>precognize-workspace</code>). Không xét PR.</p>
-<p><strong>Cách làm:</strong> quét tự động toàn bộ <code>optimization-ui</code> (191 file .ts/.html), đọc từng dòng phần <strong>sửa vào code của khách</strong> (portal, admin-ui, shared), đọc kỹ các file logic chính (<code>r-socket.service.ts</code>, <code>model-wizard-state.service.ts</code>, model/validator bước Goal, <code>optimization-legacy-config.service.ts</code>).</p>
+<p>Nhờ mọi người xem và sửa các điểm dưới đây trên <code>nus-base</code>. Mức: ⚠️ nên sửa trước lần giao tới, 💬 sửa khi tiện.</p>
 <h2>Tóm tắt</h2>
 <table>
 <thead>
 <tr>
+<th>#</th>
 <th>Mức</th>
-<th>Số</th>
-<th>Nội dung</th>
+<th>Vấn đề</th>
+<th>File</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>🔴</td>
-<td>0</td>
-<td>Không có lỗi chặn</td>
-</tr>
-<tr>
+<td>1</td>
 <td>⚠️</td>
+<td>Đọc license lỗi thì mọi module đều mở</td>
+<td><code>shared/services/license-modules/license-modules.service.ts</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>⚠️</td>
+<td>Nút bấm không làm gì (handler rỗng / TODO)</td>
+<td><code>manage-models-drawer.component.ts</code>, <code>model-detail.component.ts</code></td>
+</tr>
+<tr>
 <td>3</td>
-<td>Hàm rỗng/TODO trong bản giao; code chết; API license lỗi thì mở hết module (fail-open)</td>
+<td>⚠️</td>
+<td>4 hàm export nhưng không ai gọi</td>
+<td><code>shared/expression/expression.rules.ts</code>, <code>expression.model.ts</code></td>
 </tr>
 <tr>
-<td>💬</td>
+<td>4</td>
+<td>⚠️</td>
+<td>Script nội bộ đi theo bản giao khách</td>
+<td><code>precognize-workspace/scripts/check-asset-boundaries.mjs</code>, <code>package.json</code></td>
+</tr>
+<tr>
 <td>5</td>
-<td>Trộn async/RxJS, trộn signal/BehaviorSubject, URL viết tay + <code>HttpClient</code> trực tiếp, input <code>id</code> thừa ở tooltip dùng chung, file quá dài</td>
+<td>💬</td>
+<td>Input <code>id</code> thừa ở tooltip dùng chung</td>
+<td><code>shared/components/custom-tooltip/custom-tooltip.component.ts</code></td>
 </tr>
 <tr>
-<td>✅</td>
-<td></td>
-<td>Không <code>console.*</code>, không <code>any</code>, không <code>innerHTML</code>, mọi subscribe đều có hủy, text đều qua translate, README/openspec/ai_docs không lọt vào bản giao</td>
+<td>6</td>
+<td>💬</td>
+<td>Trộn <code>async/await</code> với RxJS</td>
+<td><code>core/services/*</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>💬</td>
+<td>Trộn signal với BehaviorSubject, comment mâu thuẫn</td>
+<td><code>model-wizard-state.service.ts</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>💬</td>
+<td>URL viết tay + <code>HttpClient</code> trực tiếp</td>
+<td><code>optimization-legacy-config.service.ts:31</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>💬</td>
+<td>File quá dài</td>
+<td><code>influencers-step.component.ts</code></td>
 </tr>
 </tbody>
 </table>
-<h2>1. Code của khách bị sửa (rủi ro cao nhất, đọc toàn bộ)</h2>
-<p>Team sửa 9 vùng code dùng chung của khách: auth guard + routing portal, interceptor admin-ui, license service (portal + admin), header + app-menu, custom-tooltip (dời từ portal sang <code>shared/</code>), custom-button, file-upload, <code>package.json</code>/<code>angular.json</code>.</p>
-<h3>⚠️ 1.1 Đọc license lỗi thì mọi module đều mở (fail-open)</h3>
+<h2>1. ⚠️ Đọc license lỗi thì mọi module đều mở</h2>
 <ul>
-<li><strong>Vấn đề:</strong> <code>LicenseModulesService.isAvailable()</code> (<code>shared/services/license-modules/license-modules.service.ts</code>) trả <code>true</code> khi <code>modules</code> là <code>null</code>. <code>null</code> xảy ra khi <code>/license/status</code> lỗi (<code>update(null)</code> trong <code>tap.error</code> của portal <code>license.service.ts</code>) hoặc chưa cài license.</li>
-<li><strong>Tại sao quan trọng:</strong> <code>AuthGuard</code> mới dùng hàm này để chặn route theo module (<code>appModule</code> trong <code>core-routing.module.ts</code>). API license chập chờn → người dùng không mua Dashboard/Advanced Tools vẫn vào được. Đây là logic license của khách, khách sẽ hỏi.</li>
-<li><strong>Cách sửa:</strong> Xác nhận với BA đây có phải ý đồ ("không đọc được license thì không chặn", giống hành vi cũ). Nếu đúng thì ghi rõ trong spec và comment; nếu không thì chặn khi lỗi.</li>
+<li><strong>Vấn đề:</strong> <code>LicenseModulesService.isAvailable()</code> trả <code>true</code> khi <code>modules</code> là <code>null</code>. <code>modules</code> thành <code>null</code> khi <code>/license/status</code> lỗi (<code>update(null)</code> trong <code>tap.error</code> ở portal <code>license.service.ts</code>) hoặc chưa cài license.</li>
+<li><strong>Hậu quả:</strong> <code>AuthGuard</code> dùng hàm này để chặn route theo module (<code>appModule</code> trong <code>core-routing.module.ts</code>). API license lỗi → người dùng không mua Dashboard/Advanced Tools vẫn vào được.</li>
+<li><strong>Cách sửa:</strong> Nếu đây là ý đồ (không đọc được license thì không chặn, giống hành vi cũ), ghi rõ trong comment và spec. Nếu không, chặn khi đọc lỗi.</li>
 </ul>
-<h3>💬 1.2 Input <code>id</code> thừa ở <code>CustomTooltipComponent</code> (component dùng chung của khách)</h3>
+<h2>2. ⚠️ Nút bấm không làm gì</h2>
 <ul>
-<li><code>shared/components/custom-tooltip/custom-tooltip.component.ts</code> thêm cả <code>@Input() tooltipId</code> <strong>và</strong> setter/getter <code>@Input() id</code>. Toàn bộ repo chỉ dùng <code>[tooltipId]</code> (<code>info.component.html:1</code>), không chỗ nào dùng <code>id</code>.</li>
-<li>Nếu sau này ai đặt <code>id="x"</code> lên <code>&lt;vp-custom-tooltip&gt;</code> thì host và hộp tooltip bên trong cùng mang id <code>x</code> → trùng id trong DOM, aria hỏng.</li>
-<li><strong>Cách sửa:</strong> Bỏ setter <code>id</code>, chỉ giữ <code>tooltipId</code>.</li>
+<li><strong>Vấn đề:</strong> <code>manage-models-drawer.component.ts</code> có 5 TODO: <code>onPause</code>, <code>onNewRun</code>, <code>onRunClick</code> rỗng; nút "PAUSE ALL RUN &amp; EDIT" chỉ đóng dialog; <code>onEdit</code> không làm gì khi model không có run. <code>model-detail.component.ts</code> có 1 TODO.</li>
+<li><strong>Hậu quả:</strong> Người dùng bấm mà không có phản hồi. Khách đã hỏi đúng chỗ này ở #5511 ("implementation?").</li>
+<li><strong>Cách sửa:</strong> Ẩn hoặc disable các nút chưa có chức năng (có thể kèm tooltip "Coming soon").</li>
 </ul>
-<h3>✅ Còn lại ổn</h3>
-<ul>
-<li>Dời <code>custom-tooltip</code> sang <code>shared/</code>: 4 file portal đổi import sang <code>@workspace-shared/...</code>, SCSS giữ nguyên 100%. Hành vi cũ giữ nguyên, chỉ thêm focus (bàn phím) và <code>role="tooltip"</code>.</li>
-<li>Interceptor admin-ui: tách <code>isSessionExpiredError()</code>, đồng thời bỏ <code>console.log</code> trùng của khách. Logic 405 giữ nguyên.</li>
-<li><code>DefaultPageGuard</code>: trang gốc mở trang mặc định theo license, có <code>ACCESS_DENIED</code> dự phòng. Đọc license một lần mỗi lần điều hướng (<code>readOncePerNavigation</code>) để guard và trang dùng chung một request.</li>
-<li><code>custom-button</code>: chỉ thêm <code>| undefined</code> vào kiểu, không đổi hành vi.</li>
-</ul>
-<h2>2. <code>optimization-ui</code> (app OP, 191 file)</h2>
-<h3>⚠️ 2.1 Hàm rỗng / TODO trong bản đã giao</h3>
-<ul>
-<li><code>manage-models-drawer.component.ts</code>: 5 TODO. <code>onPause</code>, <code>onNewRun</code>, <code>onRunClick</code> rỗng; nút "PAUSE ALL RUN &amp; EDIT" chỉ đóng dialog; <code>onEdit</code> không làm gì khi model không có run. <code>model-detail.component.ts</code>: 1 TODO.</li>
-<li><strong>Tại sao quan trọng:</strong> Khách đã comment đúng chỗ này ở #5511 ("implementation?"). Ken trả lời giữ vì template đã bind. Nhưng người dùng bấm nút mà không có gì xảy ra, không báo gì.</li>
-<li><strong>Cách sửa:</strong> Ẩn hoặc disable các nút chưa có chức năng (kèm tooltip "Coming soon") thay vì để handler rỗng.</li>
-</ul>
-<h3>⚠️ 2.2 Code chết (export nhưng không ai gọi)</h3>
+<h2>3. ⚠️ Hàm không ai gọi</h2>
 <table>
 <thead>
 <tr>
@@ -94,27 +112,42 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 </tr>
 </tbody>
 </table>
-<p>Mỗi hàm chỉ có đúng 1 tham chiếu là chỗ khai báo. Khách hay bắt "unused" (vừa bắt ở #5512). Nếu để dành cho bước 3/4 (M2) thì nên đưa vào nhánh M2, không để ở nhánh giao M1.</p>
-<h3>💬 2.3 Trộn <code>async/await</code> với RxJS ở core</h3>
-<p><code>initialize-optimization-header.ts</code>, <code>optimization-header-auth.service.ts</code>, <code>optimization-header-dialog.service.ts</code>, <code>optimization-legacy-config.service.ts</code>, <code>r-socket.service.ts</code> (<code>connectWithRetry</code>). Phần còn lại của app dùng Observable. Ở DP, khách đã yêu cầu dùng một kiểu. Một phần là bắt buộc (<code>APP_INITIALIZER</code> cần Promise), nhưng <code>openChangePasswordDialog</code>/<code>openUserManagementPopup</code> thì không.</p>
-<h3>💬 2.4 Trộn signal với BehaviorSubject trong cùng service</h3>
-<p><code>model-wizard-state.service.ts</code>: <code>influencersSubject</code>/<code>savingSubject</code> (BehaviorSubject) cạnh <code>visibleAssetKeysState</code> (signal) rồi lại <code>toObservable()</code>. Comment ở <code>forgetRemovedAssets</code> ("a re-added asset starts hidden") ngược với <code>setInfluencers</code> ("Newly committed asset groups start visible").</p>
-<h3>💬 2.5 URL viết tay + <code>HttpClient</code> trực tiếp</h3>
-<p><code>optimization-legacy-config.service.ts:31</code>: <code>`${ApiCallsPathsEnum.BASE_URL}/configuration/interface`</code> gọi qua <code>HttpClient</code>, không qua <code>HttpService</code> + enum như mọi chỗ khác. Nên thêm key vào <code>ApiCallsPathsEnum</code> (hoặc dùng key sẵn có của khách nếu có).</p>
-<h3>💬 2.6 File dài</h3>
-<p><code>shared-ui-page.component.ts</code> 1.029 dòng (playground), <code>influencers-step.component.ts</code> 551, <code>optimization-runs.sample-data.ts</code> 461. Khách không có quy định độ dài, nhưng <code>influencers-step</code> nên tách (component tag picker / effect delay).</p>
-<h3>✅ Đã kiểm, ổn</h3>
 <ul>
-<li><strong>Quét tự động:</strong> 0 <code>console.*</code>, 0 kiểu <code>any</code>, 0 <code>innerHTML</code>/<code>bypassSecurity</code>, không text cứng trong HTML (trừ playground, đã trả lời khách).</li>
-<li><strong>Subscription:</strong> 17 file không dùng <code>takeUntilDestroyed</code>, nhưng đã đọc từng file: đều tự <code>unsubscribe</code> ở <code>ngOnDestroy</code>/<code>disposeOverlay</code> hoặc là one-shot. Không có leak.</li>
-<li><strong><code>r-socket.service.ts</code>:</strong> retry 3 lần, timeout, hủy kết nối khi không còn ai dùng, xử lý mất kết nối. Mỗi app của khách cũng có RSocket service riêng (portal, admin-ui) nên không tính là trùng lặp.</li>
-<li><strong>Validator bước Goal khớp BE:</strong> cost min/max 1.000–10.000.000, cặp min/max, improvement &gt; 0. Default <code>0</code> + <code>||</code> nên không báo "chưa lưu" sai.</li>
-<li><strong><code>localStorage.clear()</code> khi logout:</strong> giống pattern của khách (portal, admin-ui).</li>
-<li><strong>Bản giao <code>#5511</code>:</strong> không chứa README, openspec, ai_docs, <code>.claude</code>. Riêng <code>scripts/check-asset-boundaries.mjs</code> (script nội bộ) có đi theo bản giao, ⚠️ nên hỏi Ken có cố ý không.</li>
+<li><strong>Cách sửa:</strong> Xoá khỏi <code>nus-base</code>. Nếu cần cho bước 3/4 thì để ở nhánh M2. Khách có bắt lỗi "unused" khi review.</li>
 </ul>
-<h2>Câu hỏi còn mở</h2>
+<h2>4. ⚠️ Script nội bộ đi theo bản giao</h2>
 <ul>
-<li>BA: license đọc lỗi thì mở hết module (1.1) có phải ý đồ không?</li>
-<li>Ken: <code>scripts/check-asset-boundaries.mjs</code> + npm script <code>check:asset-boundaries</code> có định giao cho khách không?</li>
-<li>Ken: 4 hàm expression chưa dùng (2.2) để dành cho M2 hay xoá?</li>
+<li><strong>Vấn đề:</strong> <code>scripts/check-asset-boundaries.mjs</code> và npm script <code>check:asset-boundaries</code> có trong bản giao #5511.</li>
+<li><strong>Cách sửa:</strong> Nếu chỉ dùng nội bộ thì đưa vào danh sách loại trừ khi giao; nếu muốn giao thì cần mô tả cho khách biết script làm gì.</li>
+</ul>
+<h2>5. 💬 Input <code>id</code> thừa ở tooltip dùng chung</h2>
+<ul>
+<li><strong>Vấn đề:</strong> <code>CustomTooltipComponent</code> (component dùng chung của khách) có cả <code>@Input() tooltipId</code> và setter <code>@Input() id</code>. Cả repo chỉ dùng <code>[tooltipId]</code> (<code>info.component.html:1</code>).</li>
+<li><strong>Hậu quả:</strong> Ai đặt <code>id="x"</code> lên <code>&lt;vp-custom-tooltip&gt;</code> thì host và hộp tooltip bên trong cùng mang id <code>x</code>, gây trùng id trong DOM.</li>
+<li><strong>Cách sửa:</strong> Bỏ setter <code>id</code>, chỉ giữ <code>tooltipId</code>.</li>
+</ul>
+<h2>6. 💬 Trộn <code>async/await</code> với RxJS</h2>
+<ul>
+<li><strong>File:</strong> <code>initialize-optimization-header.ts</code>, <code>optimization-header-auth.service.ts</code>, <code>optimization-header-dialog.service.ts</code>, <code>optimization-legacy-config.service.ts</code>, <code>r-socket.service.ts</code> (<code>connectWithRetry</code>).</li>
+<li><strong>Vấn đề:</strong> Phần còn lại của app dùng Observable. Ở các dự án trước, khách đã yêu cầu dùng một kiểu.</li>
+<li><strong>Cách sửa:</strong> Chuyển sang Observable những chỗ không bắt buộc Promise, ví dụ <code>openChangePasswordDialog</code>, <code>openUserManagementPopup</code>. <code>APP_INITIALIZER</code> thì giữ Promise.</li>
+</ul>
+<h2>7. 💬 Trộn signal với BehaviorSubject</h2>
+<ul>
+<li><strong>Vấn đề:</strong> Trong <code>model-wizard-state.service.ts</code>, <code>influencersSubject</code> và <code>savingSubject</code> là BehaviorSubject, còn <code>visibleAssetKeysState</code> là signal rồi lại chuyển bằng <code>toObservable()</code>.</li>
+<li><strong>Comment mâu thuẫn:</strong> <code>forgetRemovedAssets</code> ghi "a re-added asset starts hidden", còn <code>setInfluencers</code> ghi "Newly committed asset groups start visible".</li>
+<li><strong>Cách sửa:</strong> Chọn một kiểu cho state của service. Sửa lại comment cho đúng với code.</li>
+</ul>
+<h2>8. 💬 URL viết tay + <code>HttpClient</code> trực tiếp</h2>
+<ul>
+<li><strong>Vấn đề:</strong> <code>optimization-legacy-config.service.ts:31</code> gọi <code>`${ApiCallsPathsEnum.BASE_URL}/configuration/interface`</code> bằng <code>HttpClient</code>. Các chỗ khác đều dùng <code>HttpService</code> + key trong <code>ApiCallsPathsEnum</code>.</li>
+<li><strong>Cách sửa:</strong> Thêm key vào <code>ApiCallsPathsEnum</code> (hoặc dùng key sẵn có của khách nếu có) và gọi qua <code>HttpService</code>.</li>
+</ul>
+<h2>9. 💬 File quá dài</h2>
+<p><code>influencers-step.component.ts</code> dài 551 dòng. Nên tách phần tag picker và phần effect delay thành component riêng.</p>
+<h2>Cần xác nhận</h2>
+<ul>
+<li>BA: license đọc lỗi thì mở hết module (mục 1) có phải ý đồ không?</li>
+<li>Ken: script <code>check-asset-boundaries</code> (mục 4) có định giao cho khách không?</li>
+<li>Ken: 4 hàm ở mục 3 xoá hay chuyển sang M2?</li>
 </ul></main></body></html>
