@@ -59,3 +59,14 @@ Report 10-19 đang làm theo rule thứ hai, nên kết quả phụ thuộc vào
 1. Gộp 2 rule holding-reply theo đề xuất **24h** ở trên được không?
 2. Có gắn structure eval tự chạy cuối mỗi daily-report (chỉ in cảnh báo, không chặn) không?
 3. DeepSeek: khi có API key, lưu ở `config/.deepseek-config.json` rồi encrypt như các config khác. Case hiện tại là synthetic nhưng có tên dev nội bộ. Có cần ẩn danh tên dev trước khi gửi DeepSeek không?
+
+---
+
+## Cập nhật 2026-10-20 (user trả lời: 1 Yes · 2 Yes · 3 không cần ẩn danh)
+
+- **Gộp rule:** holding reply = đã trả lời trong **24h**; quá 24h không có follow-up thực chất → alert. Sửa cả 2 file memory ở cả 2 nơi lưu (`~/.claude/...memory` + `docs/memory`) và dòng index MEMORY.md.
+- **Case mới:** `holding-reply-expired-after-24h` (khách hỏi 30h trước, chỉ có "Let me check" → alert).
+- **Judgment eval:** 15 case × 3 lần = **45/45 (100%)**, trước khi gộp rule là 93%.
+- **Gắn vào daily-report:** `.claude/commands/me/daily-report.md`, bước 4b (cron), 8 (interactive), 1b (recheck). Structure eval chạy sau khi cập nhật timeline và chỉ cảnh báo: sửa report nếu có sẵn dữ liệu, không thì ghi `Eval: …` vào Unresolved Questions.
+- **Fix runner:** sort danh sách ngày truyền tay. Trước đây ngày cuối danh sách bị coi là "latest".
+- **Report 10-20:** ❌ `alerts-have-links`, 3/4 alert hội thoại thiếu link (GGS, Matrix halt, Xtreme Maddy). Từ lần chạy sau, bước eval sẽ bắt lỗi này.

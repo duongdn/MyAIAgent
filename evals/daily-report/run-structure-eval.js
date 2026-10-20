@@ -16,7 +16,7 @@ const reportPath = d => [path.join(ROOT, 'reports', d), path.join(ROOT, 'reports
   .map(dir => path.join(dir, 'daily-report.md')).find(f => fs.existsSync(f));
 const isDate = d => /^\d{4}-\d{2}-\d{2}$/.test(d);
 
-let dates = args.filter(isDate);
+let dates = args.filter(isDate).sort();
 if (!dates.length) {
   const all = [...fs.readdirSync(path.join(ROOT, 'reports')), ...fs.readdirSync(path.join(ROOT, 'reports', 'backup'))];
   dates = [...new Set(all.filter(d => isDate(d) && reportPath(d)))].sort().slice(-days);
