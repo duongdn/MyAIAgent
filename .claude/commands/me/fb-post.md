@@ -49,12 +49,19 @@ Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay
 - 1 bài = 1 ý chính
 
 ### 4. Viết bài
-- 🔴 Viết cho ĐẠI CHÚNG (bạn bè FB bình thường, không phải dân IT): từ ngữ đời thường, thuật ngữ nào cũng phải giải thích bằng lời thường hoặc ví dụ đời sống; KHÔNG chủ đề/từ chỉ dân trong nghề mới hiểu
-- Tiếng Việt, ngôi "mình", giọng chia sẻ thật, không sến, không giọng quảng cáo/AI ("Trong thời đại số...", "Hãy cùng khám phá" = cấm)
-- 150–300 chữ, câu mở là 1 nhận xét/tình huống cụ thể, kết bằng 1 câu hỏi hoặc 1 takeaway ngắn
-- Plain text (FB không render markdown): không `**`, không `#`; emoji tối đa 2–3; hashtag 0–3 ở cuối
-- Có số liệu/tin → nêu nguồn ngắn ("theo CafeF", "theo The Verge"); có thể để 1 link gốc cuối bài
-- Bài tài chính → thêm dòng "Quan điểm cá nhân, không phải khuyến nghị đầu tư."
+🔴 Đọc `docs/memory/fb-post/feedback_fb_post_write_for_general_public_no_jargon.md` — văn phong user đã chốt.
+- Ngắn 40–100 chữ, đơn giản, hài hước, tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
+- 3–6 emoji hài; kết bằng câu rủ tương tác ("ai cùng cảnh điểm danh")
+- KHÔNG phân tích, KHÔNG list bài học, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ, KHÔNG tóm tắt tin (tin chỉ là cái cớ)
+- Plain text, hashtag 0–2 ở cuối
+
+Mẫu user duyệt (2026-10-20):
+```
+Hồi xưa cứ tưởng chỉ bà con nông dân mới thấm câu "được mùa mất giá, được giá mất mùa" 🌾
+Ai ngờ làm chứng sĩ rồi mới biết mình cũng y chang 😅
+...Giờ thị trường đỏ lòm, mã nào cũng giảm sâu, rẻ như cho... thì trong tài khoản còn đúng mấy chục nghìn 🫠
+Được giá mà mất tiền. Ai cùng cảnh điểm danh cái nào 🙋‍♂️
+```
 
 🔴 **Lọc bảo mật (bắt buộc trước khi đăng):** không tên khách hàng/dự án khách (Maddy, Bailey, Rebecca, Elena, MPFC, Arthur...), không tên dev/đồng nghiệp, không giờ công/billing, không token/server/URL nội bộ, không số tiền tài sản cá nhân. Viết chung chung: "một dự án bên mình", "một bạn dev trong team".
 
