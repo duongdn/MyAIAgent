@@ -17,7 +17,12 @@ function nus_teardown($ids, $extra) {
     require_once ABSPATH . 'wp-admin/includes/user.php';
     foreach (array_keys($extra) as $login) {
         $u = get_user_by('login', $login);
-        if ($u) { $wpdb->delete('mm_user_data', ['wp_user_id' => $u->ID]); wp_delete_user($u->ID); }
+        if (!$u) continue;
+        foreach (['wp_wpcw_user_progress' => 'user_id', 'wp_wpcw_user_courses' => 'user_id', 'wp_wpcw_units_time' => 'user_id',
+                  'mm_app_usage' => 'wp_user_id', 'mm_app_usage_logs' => 'wp_user_id', 'mm_app_log_events' => 'wp_user_id', 'mm_user_data' => 'wp_user_id'] as $t => $col) {
+            $wpdb->delete($t, [$col => $u->ID]);
+        }
+        wp_delete_user($u->ID);
     }
     $wpdb->query("DELETE FROM {$wpdb->prefix}mpfc_leagues WHERE name LIKE 'NUSTEST%'");
     $in = implode(',', array_map('intval', $ids));
@@ -30,8 +35,30 @@ function nus_teardown($ids, $extra) {
     $wpdb->query("UPDATE {$wpdb->users} SET achievements = NULL WHERE ID IN ($in)");
     $wpdb->query("DELETE FROM mm_applied_bundles WHERE access_type='user' AND access_type_id = " . (int) $ids['manager'] . " AND bundle_id = 23");
     delete_user_meta($ids['team'], 'mpfc_hidden_from_tables');
+    $wpdb->query("DELETE FROM wp_idp_targets WHERE player_id IN ($in) AND assigned_by IS NULL");
+    foreach (['mpfc_age_band', 'mpfc_position'] as $k) delete_user_meta($ids['member'], $k);
     delete_option('mpfc_idp_flags'); delete_option('mpfc_lt_flags');
+    $wpdb->query("UPDATE mm_bundles SET short_name = 'V.A' WHERE id = 23");
+    foreach (get_posts(['post_type' => 'collections', 'author' => $ids['member'], 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids']) as $c) wp_delete_post($c, true);
 }
+
+// endpoint result caches: cleared so the first call takes the "build" path (the next call hits the cache)
+function nus_clear_caches() {
+    foreach (['1v1-skill-library_v2', 'featured_practice', 'Ask_the_coach', 'arsenal-skill-library', 'arsenal-featured-practice',
+              'arsenal-ask-the-coach', 'player_of_the_week_cache', 'player_of_the_week_cache_v2_9', 'coach-pass-videos-cache'] as $opt) {
+        delete_option($opt);
+    }
+}
+if ($mode === 'clear-caches') { nus_clear_caches(); echo "caches cleared\n"; return; }
+
+// toggles used mid-run by the cases (bundle-missing / bundle-lost branches)
+$toggles = [
+    'va-bundle-off'  => "UPDATE mm_bundles SET short_name = 'V.A-NUSOFF' WHERE id = 23",
+    'va-bundle-on'   => "UPDATE mm_bundles SET short_name = 'V.A' WHERE id = 23",
+    'va-manager-off' => "UPDATE mm_applied_bundles SET status = 0 WHERE access_type = 'user' AND access_type_id = $manager AND bundle_id = 23",
+    'va-manager-on'  => "UPDATE mm_applied_bundles SET status = 1 WHERE access_type = 'user' AND access_type_id = $manager AND bundle_id = 23",
+];
+if (isset($toggles[$mode])) { $wpdb->query($toggles[$mode]); echo "$mode done\n"; return; }
 
 if ($mode === 'teardown') { nus_teardown(compact('member', 'team', 'manager', 'admin'), $extra); echo "teardown done\n"; return; }
 
@@ -102,10 +129,22 @@ $unit0 = $units[0] ?? 0;
 $wpdb->insert('wp_wpcw_units_time', ['user_id' => $member, 'unit_id' => $unit0, 'timer' => 99999, 'created' => time() - 60]);
 $wpdb->insert('wp_wpcw_units_time', ['user_id' => $member, 'unit_id' => $unit0, 'timer' => 30, 'created' => strtotime('-2 days')]);
 
-// clear endpoint caches so the first call takes the "build" path (second call hits the cache)
-foreach (['1v1-skill-library_v2', 'featured_practice', 'Ask_the_coach', 'arsenal-skill-library', 'arsenal-featured-practice',
-          'arsenal-ask-the-coach', 'player_of_the_week_cache', 'player_of_the_week_cache_v2_9', 'coach-pass-videos-cache'] as $opt) {
-    delete_option($opt);
+// store_web_usage streak: lvl1 user trained yesterday on its dashboard page and has a 2-day streak
+$lvl1 = $out['users']['nus_jsonapi_lvl1']['id'];
+$page1 = (int) $wpdb->get_var("SELECT page_id FROM mm_core_pages WHERE ref_id = 1 LIMIT 1");
+$wpdb->insert('wp_wpcw_units_time', ['user_id' => $lvl1, 'unit_id' => $page1, 'timer' => 10, 'created' => strtotime('yesterday') + 3600]);
+$wpdb->update($wpdb->users, ['achievements' => json_encode(['x_day_in_row' => 2])], ['ID' => $lvl1]);
+
+nus_clear_caches();
+
+// coach pass collections owned by member: one with videos, one empty
+$cv = get_posts(['post_type' => 'video', 'post_status' => 'publish', 'numberposts' => 2, 'fields' => 'ids']);
+$out['collection_videos'] = array_map('intval', $cv);
+$out['collections'] = [];
+foreach (['NUSTEST collection' => implode(',', $cv), 'NUSTEST empty collection' => ''] as $title => $ids) {
+    $c = wp_insert_post(['post_type' => 'collections', 'post_title' => $title, 'post_status' => 'publish', 'post_author' => $member]);
+    update_post_meta($c, 'ph_collected_posts', $ids);
+    $out['collections'][] = $c;
 }
 
 $out['post'] = $post;

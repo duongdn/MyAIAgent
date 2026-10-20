@@ -50,7 +50,14 @@ function fixtures(mode) {
   for (const [k, v] of Object.entries(fx.users)) {
     if (k !== 'member') sessions[k] = { cookie: v.cookie, cookie_name: cookieName, id: v.id };
   }
-  const t = { call, check, err, ok, bad, httpErr, any, sessions, cfg, login, fx, dir: __dirname };
+  // tiny upload media (generated, not committed)
+  const media = path.join(__dirname, 'media');
+  if (!fs.existsSync(path.join(media, 't.mp4'))) {
+    fs.mkdirSync(media, { recursive: true });
+    execFileSync('ffmpeg', ['-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=blue:s=64x64:d=1', '-pix_fmt', 'yuv420p', path.join(media, 't.mp4')]);
+    execFileSync('ffmpeg', ['-loglevel', 'error', '-f', 'lavfi', '-i', 'color=c=red:s=64x64', '-frames:v', '1', path.join(media, 't.jpg')]);
+  }
+  const t = { call, check, err, ok, bad, httpErr, any, sessions, cfg, login, fx, dir: __dirname, fixturesMode: fixtures };
 
   const only = process.argv.slice(2);
   const files = fs.readdirSync(__dirname).filter((f) => /^cases-.*\.js$/.test(f))

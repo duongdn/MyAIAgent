@@ -28,7 +28,7 @@ Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). **Default = draft**: bài 
 
 1. Lấy `post-url` từ arg, nếu không có → entry `status=draft` mới nhất trong history.
 2. `node scripts/facebook-profile-post.js --submit <url> --audience=<public|friends>`
-3. `ok:true` → update history `status=published`, `audience`. Lỗi → báo user kèm screenshot path. KHÔNG tự retry.
+3. `ok:true` → update history `status=published`, `audience`; rồi `python3 scripts/trello-complete-daily-fb-post-card.py <url>` (complete card Trello "Đăng 1 bài trên zalo/facebook" hôm nay — card do Card Repeater tạo, chỉ complete SAU khi submit thành công, không complete lúc mới draft). Lỗi → báo user kèm screenshot path. KHÔNG tự retry.
 4. Commit history.
 
 ## Mode: draft (default)
@@ -50,10 +50,12 @@ Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay
 
 ### 4. Viết bài
 🔴 Đọc `docs/memory/fb-post/feedback_fb_post_write_for_general_public_no_jargon.md` — văn phong user đã chốt.
-- Ngắn 40–100 chữ, đơn giản, hài hước, tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
+- Rất ngắn, đơn giản, hài hước, tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
 - 3–6 emoji hài; kết bằng câu rủ tương tác ("ai cùng cảnh điểm danh")
 - KHÔNG phân tích, KHÔNG list bài học, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ, KHÔNG tóm tắt tin (tin chỉ là cái cớ)
-- Plain text, hashtag 0–2 ở cuối
+- Plain text, KHÔNG hashtag
+- Tối đa 2–4 dòng ngắn (~20–40 chữ)
+- Giai đoạn đầu: giọng ngây ngô, người mới; tăng dần độ chuyên nghiệp theo thời gian (xem số bài trong history)
 
 Mẫu user duyệt (2026-10-20):
 ```
