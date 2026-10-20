@@ -150,12 +150,142 @@ pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre co
 <td>3</td>
 <td><code>DaeApiSearchController.java:26</code></td>
 <td>"Các dependency mới đều không dùng"</td>
-<td>⚠️ Head hiện tại của #5512 đã không còn inject thừa, nhưng để lại 5 dòng trống giữa field và method (đúng loại "thay đổi không liên quan" khách hay bắt). Dọn và trả lời khách là đã sửa</td>
+<td>⚠️ Đúng: PR thêm 3 import không dùng (<code>DaeDomainNamedEntityApi</code>, <code>StandardCharsets</code>, <code>java.util.Set</code>), là dấu vết của OP-22 đã gỡ. Xoá 3 dòng</td>
 </tr>
 </tbody>
 </table>
 <h3>3.2 <code>#5511</code> FE — Ken đã trả lời</h3>
 <p>Ken trả lời 11 comment hôm nay: giữ handler rỗng (template đã bind, chờ API), giữ sample data (M1 chưa có endpoint), playground không translate (trang dev), <code>&lt;title&gt;</code> không dùng key được; đã chuyển SVG ra file. Hợp lý, khớp CONVENTIONS nội bộ. Việc mở còn lại: chờ khách chấp nhận.</p>
+<h2>4. Đối chiếu code với comment review (kiểm lúc 14:10, 20/10)</h2>
+<h3>4.1 Comment khách ở <code>#5511</code> (FE, head <code>9358d073bb</code>): 11/11 đã xử lý</h3>
+<table>
+<thead>
+<tr>
+<th>Comment Vladimir</th>
+<th>Trả lời Ken</th>
+<th>Kiểm code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eye-toggle "move svg to file"</td>
+<td>Đã sửa</td>
+<td>✅ Head đã có commit <code>ecb6a7e0a5</code> (cherry-pick của <code>59186d8f37</code>): template dùng <code>&lt;mat-icon [svgIcon]&gt;</code>, không còn <code>&lt;svg&gt;</code> inline</td>
+</tr>
+<tr>
+<td><code>shared-ui.sample-data</code> "need?"</td>
+<td>Chỉ playground dùng, đã dời</td>
+<td>✅ Chỉ <code>shared-ui-page.component.ts:100</code> import; file nằm trong <code>features/shared-ui/</code></td>
+</tr>
+<tr>
+<td><code>onPause/onNewRun/onRunClick</code> (drawer:207), "implementation?" (drawer:193, runs-page:158, 267)</td>
+<td>Giữ, template đã bind</td>
+<td>✅ Đúng là template có bind (<code>onPause</code>, <code>onNewRun</code>, <code>onRunClick</code>, <code>onRunNow</code>, <code>onDelete</code>). Nhưng thân hàm vẫn chỉ có TODO, nên khách có thể hỏi lại</td>
+</tr>
+<tr>
+<td><code>manage-models.sample-data</code>, <code>optimization-runs.sample-data</code> "need?"</td>
+<td>Giữ đến khi có API</td>
+<td>✅ Đúng: chỉ <code>ManageModelsService</code>/<code>OptimizationRunsService</code> import. ⚠️ Lời hứa "khi có endpoint thì xoá file": ở M2 list đã có API mà detail vẫn đọc sample (mục 2.1)</td>
+</tr>
+<tr>
+<td>Playground "translate" (2 chỗ)</td>
+<td>Trang dev, không translate</td>
+<td>✅ Khớp CONVENTIONS nội bộ; chờ khách chấp nhận</td>
+</tr>
+<tr>
+<td><code>index.html</code> title "translate"</td>
+<td>Không dùng key được trước khi Angular chạy</td>
+<td>✅ <code>OptimizationTitleStrategy</code> có thật (<code>core/services/optimization-title.strategy.ts</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Khách chưa phản hồi lại. PR vẫn OPEN.</p>
+<h3>4.2 Comment khách ở <code>#5512</code> (BE, head <code>ca8bc4b10d</code>, ngày 14/10): 0/3 đã sửa, chưa ai trả lời</h3>
+<table>
+<thead>
+<tr>
+<th>Comment nusdavid</th>
+<th>Kiểm code</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thiếu config optimization trong <code>reference.conf</code></td>
+<td><code>reference.conf</code> có <code>InvestigationService</code>, <code>LicenseService</code> nhưng <strong>không có <code>OptimizationService</code></strong> và route <code>optimization.model.upsert</code>. Cũng không có trên be-m2/integration</td>
+<td>❌ Chưa sửa</td>
+</tr>
+<tr>
+<td>Code comment-out ở migration</td>
+<td>12 dòng index vẫn comment (head + be-m2 + integration)</td>
+<td>❌ Chưa sửa</td>
+</tr>
+<tr>
+<td>Dependency không dùng ở <code>DaeApiSearchController</code></td>
+<td>3 import không dùng vẫn còn trên cả 3 branch</td>
+<td>❌ Chưa sửa</td>
+</tr>
+</tbody>
+</table>
+<p>Không có commit nào sau comment (head vẫn từ 14/10), không có reply. Cần kietnht/Brian xử lý và trả lời.</p>
+<h3>4.3 Góp ý nội bộ của DuongDN các lần trước</h3>
+<table>
+<thead>
+<tr>
+<th>Góp ý</th>
+<th>Lần</th>
+<th>Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tên hàm FE ≠ BE (#362)</td>
+<td>2</td>
+<td>✅ Đã sửa (<code>6dbf55da3a</code>)</td>
+</tr>
+<tr>
+<td>Lưu đè toàn bộ model</td>
+<td>2</td>
+<td>✅ Lưu theo bước (<code>043c4d52f1</code>, #372)</td>
+</tr>
+<tr>
+<td>Mock vùng tô OP-17/18</td>
+<td>3</td>
+<td>✅ OP-19 nối API thật</td>
+</tr>
+<tr>
+<td>Unique index tên model</td>
+<td>1→4</td>
+<td>❌ Chưa (khách đã bắt)</td>
+</tr>
+<tr>
+<td>Regex tên FE <code>\p{M}</code> ≠ BE</td>
+<td>3</td>
+<td>❌ Chưa (BE vẫn <code>^[\p{L}\p{Nd} _-]{1,100}$</code>)</td>
+</tr>
+<tr>
+<td>Soft-delete trong spec #364, tìm tag không giới hạn, openspec lọt branch BE</td>
+<td>3</td>
+<td>❌ Chưa</td>
+</tr>
+<tr>
+<td>Dữ liệu exclusion cũ khi bỏ influencer</td>
+<td>3</td>
+<td>❌ Chưa</td>
+</tr>
+<tr>
+<td>Log <code>e.getMessage()</code> không stack trace</td>
+<td>2</td>
+<td>❌ Chưa</td>
+</tr>
+<tr>
+<td>Review chéo BE</td>
+<td>2</td>
+<td>❌ 0 review</td>
+</tr>
+</tbody>
+</table>
+<p>Lưu ý: các góp ý nội bộ chưa được post lên GitHub (chỉ nằm trong báo cáo), nên dev có thể chưa biết. Nếu muốn, chạy <code>--post</code> để đăng lên các PR.</p>
 <h2>Rule bổ sung vào checklist (từ #5512)</h2>
 <ul>
 <li>Service mới gọi từ application → phải có config trong <code>reference.conf</code> (và các file config môi trường).</li>

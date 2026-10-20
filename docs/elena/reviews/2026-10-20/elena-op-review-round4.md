@@ -85,10 +85,48 @@ https://github.com/Precognize/development/pull/5512
 |---|---|---|---|
 | 1 | `DaeControlOptimizationModel.java:31` | Application gọi OptimizationService nhưng `reference.conf` **không có config optimization**, có thể quên đẩy | 🔴 Đúng. Không config → application không biết địa chỉ service khi chạy ở môi trường khách. Thêm block config + kiểm tra deploy |
 | 2 | `DaeMigrationCreateOptimizationModelCollectionLogic.java:50` | "Sao push code comment-out? Nếu collection chưa có thì sao? Chỉ tạo collection mà không làm gì" | 🔴 Đúng vụ **unique index em đã nhắc 4 lần**. Phải bật index (tốt nhất) hoặc xoá đoạn comment và giải thích |
-| 3 | `DaeApiSearchController.java:26` | "Các dependency mới đều không dùng" | ⚠️ Head hiện tại của #5512 đã không còn inject thừa, nhưng để lại 5 dòng trống giữa field và method (đúng loại "thay đổi không liên quan" khách hay bắt). Dọn và trả lời khách là đã sửa |
+| 3 | `DaeApiSearchController.java:26` | "Các dependency mới đều không dùng" | ⚠️ Đúng: PR thêm 3 import không dùng (`DaeDomainNamedEntityApi`, `StandardCharsets`, `java.util.Set`), là dấu vết của OP-22 đã gỡ. Xoá 3 dòng |
 
 ### 3.2 `#5511` FE — Ken đã trả lời
 Ken trả lời 11 comment hôm nay: giữ handler rỗng (template đã bind, chờ API), giữ sample data (M1 chưa có endpoint), playground không translate (trang dev), `<title>` không dùng key được; đã chuyển SVG ra file. Hợp lý, khớp CONVENTIONS nội bộ. Việc mở còn lại: chờ khách chấp nhận.
+
+## 4. Đối chiếu code với comment review (kiểm lúc 14:10, 20/10)
+
+### 4.1 Comment khách ở `#5511` (FE, head `9358d073bb`): 11/11 đã xử lý
+| Comment Vladimir | Trả lời Ken | Kiểm code |
+|---|---|---|
+| eye-toggle "move svg to file" | Đã sửa | ✅ Head đã có commit `ecb6a7e0a5` (cherry-pick của `59186d8f37`): template dùng `<mat-icon [svgIcon]>`, không còn `<svg>` inline |
+| `shared-ui.sample-data` "need?" | Chỉ playground dùng, đã dời | ✅ Chỉ `shared-ui-page.component.ts:100` import; file nằm trong `features/shared-ui/` |
+| `onPause/onNewRun/onRunClick` (drawer:207), "implementation?" (drawer:193, runs-page:158, 267) | Giữ, template đã bind | ✅ Đúng là template có bind (`onPause`, `onNewRun`, `onRunClick`, `onRunNow`, `onDelete`). Nhưng thân hàm vẫn chỉ có TODO, nên khách có thể hỏi lại |
+| `manage-models.sample-data`, `optimization-runs.sample-data` "need?" | Giữ đến khi có API | ✅ Đúng: chỉ `ManageModelsService`/`OptimizationRunsService` import. ⚠️ Lời hứa "khi có endpoint thì xoá file": ở M2 list đã có API mà detail vẫn đọc sample (mục 2.1) |
+| Playground "translate" (2 chỗ) | Trang dev, không translate | ✅ Khớp CONVENTIONS nội bộ; chờ khách chấp nhận |
+| `index.html` title "translate" | Không dùng key được trước khi Angular chạy | ✅ `OptimizationTitleStrategy` có thật (`core/services/optimization-title.strategy.ts`) |
+
+Khách chưa phản hồi lại. PR vẫn OPEN.
+
+### 4.2 Comment khách ở `#5512` (BE, head `ca8bc4b10d`, ngày 14/10): 0/3 đã sửa, chưa ai trả lời
+| Comment nusdavid | Kiểm code | Trạng thái |
+|---|---|---|
+| Thiếu config optimization trong `reference.conf` | `reference.conf` có `InvestigationService`, `LicenseService` nhưng **không có `OptimizationService`** và route `optimization.model.upsert`. Cũng không có trên be-m2/integration | ❌ Chưa sửa |
+| Code comment-out ở migration | 12 dòng index vẫn comment (head + be-m2 + integration) | ❌ Chưa sửa |
+| Dependency không dùng ở `DaeApiSearchController` | 3 import không dùng vẫn còn trên cả 3 branch | ❌ Chưa sửa |
+
+Không có commit nào sau comment (head vẫn từ 14/10), không có reply. Cần kietnht/Brian xử lý và trả lời.
+
+### 4.3 Góp ý nội bộ của DuongDN các lần trước
+| Góp ý | Lần | Trạng thái |
+|---|---|---|
+| Tên hàm FE ≠ BE (#362) | 2 | ✅ Đã sửa (`6dbf55da3a`) |
+| Lưu đè toàn bộ model | 2 | ✅ Lưu theo bước (`043c4d52f1`, #372) |
+| Mock vùng tô OP-17/18 | 3 | ✅ OP-19 nối API thật |
+| Unique index tên model | 1→4 | ❌ Chưa (khách đã bắt) |
+| Regex tên FE `\p{M}` ≠ BE | 3 | ❌ Chưa (BE vẫn `^[\p{L}\p{Nd} _-]{1,100}$`) |
+| Soft-delete trong spec #364, tìm tag không giới hạn, openspec lọt branch BE | 3 | ❌ Chưa |
+| Dữ liệu exclusion cũ khi bỏ influencer | 3 | ❌ Chưa |
+| Log `e.getMessage()` không stack trace | 2 | ❌ Chưa |
+| Review chéo BE | 2 | ❌ 0 review |
+
+Lưu ý: các góp ý nội bộ chưa được post lên GitHub (chỉ nằm trong báo cáo), nên dev có thể chưa biết. Nếu muốn, chạy `--post` để đăng lên các PR.
 
 ## Rule bổ sung vào checklist (từ #5512)
 - Service mới gọi từ application → phải có config trong `reference.conf` (và các file config môi trường).
