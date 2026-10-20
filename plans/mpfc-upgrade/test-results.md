@@ -140,3 +140,29 @@ Chạy lại test: `node plans/mpfc-upgrade/tests/functional-test.js checkout te
 - License key plugin premium (G7)? PayPal sandbox creds (G2)?
 - Build app mobile trỏ domain test được không (F7–F9)?
 - Sau khi bật config homepage, member login xong về `/` thay vì dashboard — giữ hay sửa code MM?
+
+## json-api (app API) — test tự động + coverage (20/10)
+Chạy: `node tests/json-api/run.js` (fixtures tự tạo/dọn qua `tests/json-api/fixtures.php`), coverage: `bash tests/json-api/coverage.sh [lines]` (pcov trên server test, mu-plugin `zz-upgrade-test-pcov.php` — gỡ khi xong project).
+Kết quả: **469/472 case pass** (3 fail = assertion test đã sửa), **line coverage controllers 96.2%** (3155/3281):
+
+| File | Cov |
+|---|---|
+| registration, user, idp, leaguetables, dynamicballmastery | 100% |
+| otherpages | 99.7% |
+| Auth | 98.2% |
+| coachpass | 95.0% |
+| virtualacademy | 93.0% |
+| dashboard | 91.4% |
+
+Dòng chưa cover (lý do):
+- Không thể/dead code: Auth HTTP-only branch (server luôn redirect https), `Auth.php:63` sau `error()`, `otherpages.php:1036` (empty() chặn trước), lỗi ghi file upload / "User in not valid" (cần hỏng disk), `player_of_the_week* Invalid membership` (theme chặn user không active trước controller), `coachpass.php:60-61` (`$json_api` không global → includeLocalVideo không bao giờ chạy — bug).
+- Phụ thuộc dữ liệu: grid Arsenal (skill/featured/ask) rỗng trên DB → vòng lặp + cache path không chạy; nhánh "không có quyền xem video" (CANNOT_ACCESS_VIDEO_ID); format cũ của trang myaccount/course name có ":".
+- Lưu ý: coverage theo DÒNG, `if (...) return` 1 dòng tính là cover dù nhánh return chưa chạy.
+
+Lỗi tìm được:
+- 🔴 PHP 8 fatal (500): `virtualacademy/getVideo`, `dashboard/player_of_the_week_old` — `$vDesc` chưa khởi tạo → **đã sửa** trong `site-php83-fixes.patch` + test server.
+- 🔴 Server mới thiếu `/var/www/keys/*.p8` (Apple StoreKit2) và Resque workers → **đã thêm** vào 02/01 + runbook.
+- `virtualacademy/uploadVideo|deleteVideo` trả HTTP 404 kèm body SUCCESS (die() trước json-api) — có sẵn trên live.
+- `idp/set_target_hidden` báo success cả khi target không phải của user (update 0 dòng vẫn ok) — không đổi dữ liệu người khác, chỉ sai thông báo.
+- `otherpages/Success_stories` trả gần như rỗng trên live (trang 247 đã chuyển Elementor).
+- 🔴 Bảo mật (có sẵn, chỉ ghi nhận): `dashboard/setPassword` (đổi mật khẩu user bất kỳ chỉ cần id!), `changeAccountInfo`, `canselMembership`, `getAccountInfo/getAccountSettings/get_MembershipInfo` (lộ thông tin theo id), `dynamicballmastery/Insert_Completed_Sessions|Get_Completed_Sessions` (user_id tuỳ ý), `otherpages/store_app_log_events` — đều không kiểm tra cookie; nhiều chỗ nối thẳng `$_REQUEST` vào SQL.

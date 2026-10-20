@@ -27,8 +27,8 @@ module.exports = async ({ call, check, err, ok, bad, any, fx, dir, fixturesMode 
   await check('va/uploadVideo wrong video type', up({ name: 'x', add_to_lib: '0' }, { file: path.join(media, 't.jpg') }), bad(/Wrong or empty video/));
   await check('va/uploadVideo no image', up({ name: 'x', add_to_lib: '0' }, { file: path.join(media, 't.mp4') }), bad(/Wrong or empty image/));
   await check('va/getUserVideo none yet', call('virtualacademy/getUserVideo', { as: 'manager' }), ok((j) => /No videos/.test(j.msg || '')));
-  await check('va/uploadVideo private ok', up({ name: 'NUSTEST va private', add_to_lib: '0' }, { file: path.join(media, 't.mp4'), image: path.join(media, 't.jpg') }), ok((j) => j.response === 'SUCCESS'));
-  await check('va/uploadVideo public ok', up({ name: 'NUSTEST va public', add_to_lib: '1' }, { file: path.join(media, 't.mp4'), image: path.join(media, 't.jpg') }), ok((j) => j.response === 'SUCCESS'));
+  await check('va/uploadVideo private ok', up({ name: 'NUSTEST va private', add_to_lib: '0' }, { file: path.join(media, 't.mp4'), image: path.join(media, 't.jpg') }), (r) => [r.json && r.json.response === 'SUCCESS', 'SUCCESS body (HTTP status is 404: die() before json-api responds)']);
+  await check('va/uploadVideo public ok', up({ name: 'NUSTEST va public', add_to_lib: '1' }, { file: path.join(media, 't.mp4'), image: path.join(media, 't.jpg') }), (r) => [r.json && r.json.response === 'SUCCESS', 'SUCCESS body (HTTP status is 404: die() before json-api responds)']);
   const mine = await check('va/getUserVideo list', call('virtualacademy/getUserVideo', { as: 'manager' }), ok((j) => j.video && j.video.length >= 2));
   await check('va/getUserVideo limit', call('virtualacademy/getUserVideo', { as: 'manager', form: { limit: '1' } }), ok((j) => j.video.length === 1));
   const vids = ((mine.json && mine.json.video) || []).map((v) => v.post);
