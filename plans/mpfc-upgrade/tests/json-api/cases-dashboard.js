@@ -89,8 +89,8 @@ module.exports = async ({ call, check, err, ok, bad, any, cfg, sessions, fixture
   await check('dashboard/GetAllTeamLibVideos_old', call('dashboard/GetAllTeamLibVideos_old', { as: 'nus_jsonapi_lvl1' }), ok());
   await check('dashboard/GetAllTeamLibVideos_old empty', call('dashboard/GetAllTeamLibVideos_old', { as: 'nus_jsonapi_lvl2' }), ok());
   if (vids[0]) {
-    await check('dashboard/likeVideo like', call('dashboard/likeVideo', { as: 'member', form: { postId: String(vids[0]) } }), ok());
-    await check('dashboard/likeVideo unlike', call('dashboard/likeVideo', { as: 'member', form: { postId: String(vids[0]) } }), ok());
+    await check('dashboard/likeVideo like', call('dashboard/likeVideo', { as: 'member', form: { postId: String(vids[0]) } }), (r) => [r.text.trim() === 'true', 'expected true']);
+    await check('dashboard/likeVideo unlike', call('dashboard/likeVideo', { as: 'member', form: { postId: String(vids[0]) } }), (r) => [r.text.trim() === 'false', 'expected false']);
   }
   await check('dashboard/DeleteMemberVideo invalid id', call('dashboard/DeleteMemberVideo', { as: 'nus_jsonapi_lvl1', form: { videoId: '0' } }), err(/Invalid video ID/));
   await check('dashboard/DeleteMemberVideo not mine', call('dashboard/DeleteMemberVideo', { as: 'member', form: { videoId: String(vids[0] || 1) } }), err(/Video not found/));
