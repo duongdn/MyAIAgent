@@ -66,6 +66,10 @@ const ACTION_VERBS = [
   'upgraded', 'upgrading', 'upgrade',
   'reworked', 'reworking', 'rework',
   'styled', 'styling', 'style',
+  'applied', 'applying', 'apply',
+  'extended', 'extending', 'extend',
+  'replaced', 'replacing', 'replace',
+  'merged', 'merging', 'merge',
 ];
 
 // Words/phrases that often make a memo too vague to verify — a reviewer can't tell
