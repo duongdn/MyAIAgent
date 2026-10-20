@@ -1,4 +1,4 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elena OP nus-base review</title><style>
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Code review nus-base</title><style>
 :root{--bg:#fff;--fg:#1f2328;--mut:#59636e;--bd:#d1d9e0;--th:#f6f8fa;--code:#eff1f3;--acc:#0969da}
 @media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#9198a1;--bd:#3d444d;--th:#151b23;--code:#262c36;--acc:#4493f8}}
 body{background:var(--bg);color:var(--fg);font:15px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px 16px}
@@ -12,142 +12,254 @@ th{background:var(--th)}
 code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:13px;word-break:break-word}
 hr{border:0;border-top:1px solid var(--bd);margin:28px 0}
 li{margin:3px 0}
-pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Elena OP: review code nhánh <code>nus-base</code> (20/10/2026)</h1>
-<p>Nhờ mọi người xem và sửa các điểm dưới đây trên <code>nus-base</code>. Mức: ⚠️ nên sửa trước lần giao tới, 💬 sửa khi tiện.</p>
+pre{background:var(--code);padding:12px;border-radius:6px;overflow-x:auto}pre code{padding:0;background:none}</style></head><body><main><h1>Code review: <code>nus-base</code> (20/10/2026)</h1>
+<p><strong>Branch:</strong> <code>nus-base</code> @ <code>ff36446477</code>
+<strong>Reviewer:</strong> DuongDN</p>
+<p>Đường dẫn trong báo cáo được viết tắt như sau:
+- <code>OPT/</code> = <code>precognize-workspace/projects/optimization-ui/src/app/</code>
+- <code>WS/</code> = <code>precognize-workspace/projects/</code></p>
+<p><strong>Mức độ:</strong>
+- 🔴 <strong>Blocker:</strong> phải sửa.
+- ⚠️ <strong>Major:</strong> sửa trước lần giao tới.
+- 💬 <strong>Minor:</strong> sửa khi tiện.</p>
 <h2>Tóm tắt</h2>
 <table>
 <thead>
 <tr>
 <th>#</th>
 <th>Mức</th>
+<th>Vị trí</th>
 <th>Vấn đề</th>
-<th>File</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
 <td>⚠️</td>
-<td>Đọc license lỗi thì mọi module đều mở</td>
-<td><code>shared/services/license-modules/license-modules.service.ts</code></td>
+<td><code>WS/shared/services/license-modules/license-modules.service.ts:63</code></td>
+<td>Đọc license lỗi thì mọi module đều được phép</td>
 </tr>
 <tr>
 <td>2</td>
 <td>⚠️</td>
-<td>Nút bấm không làm gì (handler rỗng / TODO)</td>
-<td><code>manage-models-drawer.component.ts</code>, <code>model-detail.component.ts</code></td>
+<td><code>OPT/features/optimization-runs/manage-models/manage-models-drawer/manage-models-drawer.component.ts:181-207</code></td>
+<td>Handler rỗng, nút bấm không có phản hồi</td>
 </tr>
 <tr>
 <td>3</td>
 <td>⚠️</td>
-<td>4 hàm export nhưng không ai gọi</td>
-<td><code>shared/expression/expression.rules.ts</code>, <code>expression.model.ts</code></td>
+<td><code>OPT/shared/expression/expression.rules.ts:86,152,174</code>, <code>expression.model.ts:118</code></td>
+<td>Hàm export không được dùng</td>
 </tr>
 <tr>
 <td>4</td>
 <td>⚠️</td>
-<td>Script nội bộ đi theo bản giao khách</td>
-<td><code>precognize-workspace/scripts/check-asset-boundaries.mjs</code>, <code>package.json</code></td>
+<td><code>precognize-workspace/package.json:8</code></td>
+<td>Script nội bộ nằm trong bản giao</td>
 </tr>
 <tr>
 <td>5</td>
 <td>💬</td>
-<td>Input <code>id</code> thừa ở tooltip dùng chung</td>
-<td><code>shared/components/custom-tooltip/custom-tooltip.component.ts</code></td>
+<td><code>WS/shared/components/custom-tooltip/custom-tooltip.component.ts:49-57</code></td>
+<td>Input <code>id</code> thừa</td>
 </tr>
 <tr>
 <td>6</td>
 <td>💬</td>
-<td>Trộn <code>async/await</code> với RxJS</td>
-<td><code>core/services/*</code></td>
+<td><code>OPT/core/services/optimization-header-dialog.service.ts:32,40</code></td>
+<td>Dùng <code>async/await</code> thay vì Observable</td>
 </tr>
 <tr>
 <td>7</td>
 <td>💬</td>
-<td>Trộn signal với BehaviorSubject, comment mâu thuẫn</td>
-<td><code>model-wizard-state.service.ts</code></td>
+<td><code>OPT/features/model-wizard/services/model-wizard-state.service.ts:132,283</code></td>
+<td>Comment mâu thuẫn; trộn signal với BehaviorSubject</td>
 </tr>
 <tr>
 <td>8</td>
 <td>💬</td>
-<td>URL viết tay + <code>HttpClient</code> trực tiếp</td>
-<td><code>optimization-legacy-config.service.ts:31</code></td>
+<td><code>OPT/core/services/optimization-legacy-config.service.ts:31</code></td>
+<td>URL viết tay, gọi <code>HttpClient</code> trực tiếp</td>
 </tr>
 <tr>
 <td>9</td>
 <td>💬</td>
-<td>File quá dài</td>
-<td><code>influencers-step.component.ts</code></td>
+<td><code>OPT/features/model-wizard/steps/influencers/influencers-step.component.ts</code></td>
+<td>File 551 dòng</td>
 </tr>
 </tbody>
 </table>
-<h2>1. ⚠️ Đọc license lỗi thì mọi module đều mở</h2>
-<ul>
-<li><strong>Vấn đề:</strong> <code>LicenseModulesService.isAvailable()</code> trả <code>true</code> khi <code>modules</code> là <code>null</code>. <code>modules</code> thành <code>null</code> khi <code>/license/status</code> lỗi (<code>update(null)</code> trong <code>tap.error</code> ở portal <code>license.service.ts</code>) hoặc chưa cài license.</li>
-<li><strong>Hậu quả:</strong> <code>AuthGuard</code> dùng hàm này để chặn route theo module (<code>appModule</code> trong <code>core-routing.module.ts</code>). API license lỗi → người dùng không mua Dashboard/Advanced Tools vẫn vào được.</li>
-<li><strong>Cách sửa:</strong> Nếu đây là ý đồ (không đọc được license thì không chặn, giống hành vi cũ), ghi rõ trong comment và spec. Nếu không, chặn khi đọc lỗi.</li>
-</ul>
-<h2>2. ⚠️ Nút bấm không làm gì</h2>
-<ul>
-<li><strong>Vấn đề:</strong> <code>manage-models-drawer.component.ts</code> có 5 TODO: <code>onPause</code>, <code>onNewRun</code>, <code>onRunClick</code> rỗng; nút "PAUSE ALL RUN &amp; EDIT" chỉ đóng dialog; <code>onEdit</code> không làm gì khi model không có run. <code>model-detail.component.ts</code> có 1 TODO.</li>
-<li><strong>Hậu quả:</strong> Người dùng bấm mà không có phản hồi. Khách đã hỏi đúng chỗ này ở #5511 ("implementation?").</li>
-<li><strong>Cách sửa:</strong> Ẩn hoặc disable các nút chưa có chức năng (có thể kèm tooltip "Coming soon").</li>
-</ul>
-<h2>3. ⚠️ Hàm không ai gọi</h2>
+<hr />
+<h2>1. ⚠️ Đọc license lỗi thì mọi module đều được phép</h2>
+<p><strong>Vị trí:</strong>
+- <code>WS/shared/services/license-modules/license-modules.service.ts:61-63</code>
+- <code>WS/precognize-portal/src/app/shared/services/license/license.service.ts:46</code>
+- <code>WS/precognize-portal/src/app/core/services/Auth/auth-guard.guard.ts:35</code></p>
+<pre><code class="language-ts">// license-modules.service.ts
+isAvailable(module: AppModuleEnum): boolean {
+  const modules = this.modulesSubject.value;
+  return !modules || modules.includes(module);   // modules = null → true
+}
+
+// license.service.ts:46
+error: () =&gt; this.licenseModulesService.update(null)
+</code></pre>
+<p><strong>Vấn đề:</strong>
+- <code>/license/status</code> lỗi → <code>modules = null</code> → <code>isAvailable()</code> trả <code>true</code> cho mọi module.
+- <code>AuthGuard</code> dùng hàm này để chặn route theo <code>appModule</code>, nên guard cho qua tất cả.</p>
+<p><strong>Hậu quả:</strong> Khi API license lỗi, người dùng không có license Dashboard/Advanced Tools vẫn mở được các trang này.</p>
+<p><strong>Đề xuất:</strong> Tách trường hợp "chưa cài license" và trường hợp "đọc lỗi". Khi đọc lỗi thì chặn, hoặc giữ danh sách module đọc được lần trước:</p>
+<pre><code class="language-ts">error: () =&gt; this.licenseModulesService.markReadFailed()   // isAvailable() → false
+</code></pre>
+<p>Nếu cho qua khi lỗi là ý đồ của sản phẩm, ghi rõ trong comment của <code>isAvailable()</code> và trong spec.</p>
+<hr />
+<h2>2. ⚠️ Handler rỗng, nút bấm không có phản hồi</h2>
+<p><strong>Vị trí:</strong> <code>OPT/features/optimization-runs/manage-models/manage-models-drawer/manage-models-drawer.component.ts</code>. Template bind ở <code>manage-models-drawer.component.html:56-59</code>.</p>
 <table>
 <thead>
 <tr>
-<th>Hàm</th>
-<th>File</th>
+<th>Dòng</th>
+<th>Handler</th>
+<th>Hiện trạng</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>addFunctionTag</code>, <code>fromConditionSet</code>, <code>toConditionSet</code></td>
-<td><code>shared/expression/expression.rules.ts</code></td>
+<td>181-184</td>
+<td><code>onEdit()</code></td>
+<td>Model không có run active thì <code>return</code>, không làm gì</td>
 </tr>
 <tr>
-<td><code>indexTags</code></td>
-<td><code>shared/expression/expression.model.ts</code></td>
+<td>192-194</td>
+<td><code>onEdit()</code> → <code>.subscribe(() =&gt; {})</code></td>
+<td>Nút "PAUSE ALL RUN &amp; EDIT" chỉ đóng dialog</td>
+</tr>
+<tr>
+<td>197-199</td>
+<td><code>onPause()</code></td>
+<td>Rỗng</td>
+</tr>
+<tr>
+<td>201-203</td>
+<td><code>onNewRun()</code></td>
+<td>Rỗng</td>
+</tr>
+<tr>
+<td>205-207</td>
+<td><code>onRunClick()</code></td>
+<td>Rỗng</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li><strong>Cách sửa:</strong> Xoá khỏi <code>nus-base</code>. Nếu cần cho bước 3/4 thì để ở nhánh M2. Khách có bắt lỗi "unused" khi review.</li>
-</ul>
-<h2>4. ⚠️ Script nội bộ đi theo bản giao</h2>
-<ul>
-<li><strong>Vấn đề:</strong> <code>scripts/check-asset-boundaries.mjs</code> và npm script <code>check:asset-boundaries</code> có trong bản giao #5511.</li>
-<li><strong>Cách sửa:</strong> Nếu chỉ dùng nội bộ thì đưa vào danh sách loại trừ khi giao; nếu muốn giao thì cần mô tả cho khách biết script làm gì.</li>
-</ul>
-<h2>5. 💬 Input <code>id</code> thừa ở tooltip dùng chung</h2>
-<ul>
-<li><strong>Vấn đề:</strong> <code>CustomTooltipComponent</code> (component dùng chung của khách) có cả <code>@Input() tooltipId</code> và setter <code>@Input() id</code>. Cả repo chỉ dùng <code>[tooltipId]</code> (<code>info.component.html:1</code>).</li>
-<li><strong>Hậu quả:</strong> Ai đặt <code>id="x"</code> lên <code>&lt;vp-custom-tooltip&gt;</code> thì host và hộp tooltip bên trong cùng mang id <code>x</code>, gây trùng id trong DOM.</li>
-<li><strong>Cách sửa:</strong> Bỏ setter <code>id</code>, chỉ giữ <code>tooltipId</code>.</li>
-</ul>
-<h2>6. 💬 Trộn <code>async/await</code> với RxJS</h2>
-<ul>
-<li><strong>File:</strong> <code>initialize-optimization-header.ts</code>, <code>optimization-header-auth.service.ts</code>, <code>optimization-header-dialog.service.ts</code>, <code>optimization-legacy-config.service.ts</code>, <code>r-socket.service.ts</code> (<code>connectWithRetry</code>).</li>
-<li><strong>Vấn đề:</strong> Phần còn lại của app dùng Observable. Ở các dự án trước, khách đã yêu cầu dùng một kiểu.</li>
-<li><strong>Cách sửa:</strong> Chuyển sang Observable những chỗ không bắt buộc Promise, ví dụ <code>openChangePasswordDialog</code>, <code>openUserManagementPopup</code>. <code>APP_INITIALIZER</code> thì giữ Promise.</li>
-</ul>
-<h2>7. 💬 Trộn signal với BehaviorSubject</h2>
-<ul>
-<li><strong>Vấn đề:</strong> Trong <code>model-wizard-state.service.ts</code>, <code>influencersSubject</code> và <code>savingSubject</code> là BehaviorSubject, còn <code>visibleAssetKeysState</code> là signal rồi lại chuyển bằng <code>toObservable()</code>.</li>
-<li><strong>Comment mâu thuẫn:</strong> <code>forgetRemovedAssets</code> ghi "a re-added asset starts hidden", còn <code>setInfluencers</code> ghi "Newly committed asset groups start visible".</li>
-<li><strong>Cách sửa:</strong> Chọn một kiểu cho state của service. Sửa lại comment cho đúng với code.</li>
-</ul>
-<h2>8. 💬 URL viết tay + <code>HttpClient</code> trực tiếp</h2>
-<ul>
-<li><strong>Vấn đề:</strong> <code>optimization-legacy-config.service.ts:31</code> gọi <code>`${ApiCallsPathsEnum.BASE_URL}/configuration/interface`</code> bằng <code>HttpClient</code>. Các chỗ khác đều dùng <code>HttpService</code> + key trong <code>ApiCallsPathsEnum</code>.</li>
-<li><strong>Cách sửa:</strong> Thêm key vào <code>ApiCallsPathsEnum</code> (hoặc dùng key sẵn có của khách nếu có) và gọi qua <code>HttpService</code>.</li>
-</ul>
+<pre><code class="language-ts">onPause(): void {
+  // TODO(OP-27): pausing a model's runs is not defined yet.
+}
+</code></pre>
+<p><strong>Vấn đề:</strong> Nút vẫn hiện và vẫn bấm được nhưng không có gì xảy ra, không có thông báo. Khách đã comment đúng các dòng này ở #5511 ("implementation?").</p>
+<p><strong>Đề xuất:</strong> Khi chưa có chức năng, đưa trạng thái disable vào <code>app-model-detail</code> (ví dụ input <code>[actionsEnabled]</code>), disable nút và hiện tooltip "Coming soon". Bỏ <code>subscribe</code> rỗng ở dòng 192.</p>
+<hr />
+<h2>3. ⚠️ Hàm export không được dùng</h2>
+<table>
+<thead>
+<tr>
+<th>Hàm</th>
+<th>Vị trí</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addFunctionTag</code></td>
+<td><code>OPT/shared/expression/expression.rules.ts:86</code></td>
+</tr>
+<tr>
+<td><code>toConditionSet</code></td>
+<td><code>OPT/shared/expression/expression.rules.ts:152</code></td>
+</tr>
+<tr>
+<td><code>fromConditionSet</code></td>
+<td><code>OPT/shared/expression/expression.rules.ts:174</code></td>
+</tr>
+<tr>
+<td><code>indexTags</code></td>
+<td><code>OPT/shared/expression/expression.model.ts:118</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Vấn đề:</strong> Ngoài chỗ khai báo, không file nào (trừ test) gọi các hàm này.</p>
+<p><strong>Đề xuất:</strong> Xoá khỏi <code>nus-base</code> cùng test của chúng. Nếu bước 3/4 cần, đưa vào nhánh M2.</p>
+<hr />
+<h2>4. ⚠️ Script nội bộ nằm trong bản giao</h2>
+<p><strong>Vị trí:</strong> <code>precognize-workspace/package.json:8</code>, <code>precognize-workspace/scripts/check-asset-boundaries.mjs</code></p>
+<pre><code class="language-json">&quot;check:asset-boundaries&quot;: &quot;node scripts/check-asset-boundaries.mjs&quot;,
+</code></pre>
+<p><strong>Vấn đề:</strong> Script và npm script này có trong bản giao #5511.</p>
+<p><strong>Đề xuất:</strong> Nếu chỉ dùng nội bộ, thêm vào danh sách loại trừ khi giao. Nếu giao cho khách, ghi mô tả trong PR giao.</p>
+<hr />
+<h2>5. 💬 Input <code>id</code> thừa ở <code>CustomTooltipComponent</code></h2>
+<p><strong>Vị trí:</strong> <code>WS/shared/components/custom-tooltip/custom-tooltip.component.ts:47-57</code></p>
+<pre><code class="language-ts">@Input() tooltipId: string = '';
+
+@Input()
+set id(value: string) {
+  if (!this.tooltipId) {
+    this.tooltipId = value;
+  }
+}
+get id(): string {
+  return this.tooltipId;
+}
+</code></pre>
+<p><strong>Vấn đề:</strong>
+- Cả repo chỉ dùng <code>[tooltipId]</code> (<code>WS/shared/components/info/info.component.html:1</code>), không chỗ nào dùng <code>id</code>.
+- Nếu đặt <code>id="x"</code> lên <code>&lt;vp-custom-tooltip&gt;</code>, cả host lẫn hộp tooltip bên trong (<code>[attr.id]="tooltipId"</code>) đều mang id <code>x</code>, gây trùng id trong DOM.</p>
+<p><strong>Đề xuất:</strong> Xoá setter/getter <code>id</code> (dòng 49-57). Component này là của khách, càng ít thay đổi API càng tốt.</p>
+<hr />
+<h2>6. 💬 Dùng <code>async/await</code> thay vì Observable</h2>
+<p><strong>Vị trí:</strong> <code>OPT/core/services/optimization-header-dialog.service.ts:32,40,47</code></p>
+<pre><code class="language-ts">async openChangePasswordDialog(): Promise&lt;void&gt; {
+  if (await this.redirectGuest() || this.authService.user.isAdUser) {
+</code></pre>
+<p><strong>Vấn đề:</strong> Phần còn lại của app dùng Observable. Khách đã yêu cầu thống nhất một kiểu ở các review trước.</p>
+<p><strong>Đề xuất:</strong> Chuyển <code>redirectGuest()</code>, <code>openChangePasswordDialog()</code>, <code>openUserManagementPopup()</code> sang Observable. Riêng hàm cho <code>APP_INITIALIZER</code> (<code>initialize-optimization-header.ts:44</code>) được giữ Promise.</p>
+<hr />
+<h2>7. 💬 Comment mâu thuẫn; trộn signal với BehaviorSubject</h2>
+<p><strong>Vị trí:</strong> <code>OPT/features/model-wizard/services/model-wizard-state.service.ts</code></p>
+<pre><code class="language-ts">// :132
+// Newly committed asset groups start visible; an existing group keeps its choice.
+
+// :283
+// Drops eye states of assets that are no longer in the list, so a re-added asset starts hidden.
+</code></pre>
+<p><strong>Vấn đề:</strong>
+- Dòng 283 ngược với dòng 132 và ngược với code: asset thêm lại sẽ được <code>setInfluencers()</code> đặt là visible.
+- Trong cùng một service, state dùng hai cơ chế:
+  - <code>savingSubject</code> (:51) và <code>influencersSubject</code> (:71) là BehaviorSubject.
+  - <code>visibleAssetKeysState</code> (:79) là signal, rồi lại chuyển sang Observable bằng <code>toObservable</code> (:81).</p>
+<p><strong>Đề xuất:</strong>
+- Sửa comment dòng 283 thành: "…so a re-added asset is treated as new and starts visible."
+- Thống nhất một cơ chế state cho service này.</p>
+<hr />
+<h2>8. 💬 URL viết tay, gọi <code>HttpClient</code> trực tiếp</h2>
+<p><strong>Vị trí:</strong> <code>OPT/core/services/optimization-legacy-config.service.ts:1,13,31</code></p>
+<pre><code class="language-ts">this.http.get(`${ApiCallsPathsEnum.BASE_URL}/configuration/interface`)
+</code></pre>
+<p><strong>Vấn đề:</strong> Các service khác đều gọi qua <code>HttpService</code> với key trong <code>ApiCallsPathsEnum</code>.</p>
+<p><strong>Đề xuất:</strong></p>
+<pre><code class="language-ts">// apiCallsPathsEnum.ts
+CONFIGURATION_INTERFACE = '/configuration/interface',
+
+// optimization-legacy-config.service.ts
+this.httpService.get(ApiCallsPathsEnum.CONFIGURATION_INTERFACE)
+</code></pre>
+<p>Nếu enum của khách đã có key cho path này thì dùng key đó.</p>
+<hr />
 <h2>9. 💬 File quá dài</h2>
-<p><code>influencers-step.component.ts</code> dài 551 dòng. Nên tách phần tag picker và phần effect delay thành component riêng.</p>
+<p><strong>Vị trí:</strong> <code>OPT/features/model-wizard/steps/influencers/influencers-step.component.ts</code> (551 dòng)</p>
+<p><strong>Đề xuất:</strong> Tách phần tìm và chọn tag, và phần chỉnh effect delay, thành component con.</p>
+<hr />
 <h2>Cần xác nhận</h2>
 <ul>
-<li>BA: license đọc lỗi thì mở hết module (mục 1) có phải ý đồ không?</li>
-<li>Ken: script <code>check-asset-boundaries</code> (mục 4) có định giao cho khách không?</li>
-<li>Ken: 4 hàm ở mục 3 xoá hay chuyển sang M2?</li>
+<li><strong>BA:</strong> khi đọc license lỗi thì cho vào mọi module (mục 1) có phải ý đồ của sản phẩm không?</li>
+<li><strong>Ken:</strong> script <code>check-asset-boundaries</code> (mục 4) có giao cho khách không?</li>
+<li><strong>Ken:</strong> 4 hàm ở mục 3 xoá đi, hay chuyển sang M2?</li>
 </ul></main></body></html>
