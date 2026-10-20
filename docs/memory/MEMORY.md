@@ -50,6 +50,7 @@
 
 ## daily-report:email
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
+- [feedback_swish_paused_no_monitoring](daily-report/email/feedback_swish_paused_no_monitoring.md) — 🔴 2026-10-20 Swish paused: vuongtrancr@ Swish alerts (Delayed-newform/Signal lost) never alerts
 
 ## daily-report:slack
 - [ohcleo_script_misses_thread_replies](daily-report/slack/feedback_ohcleo_script_misses_thread_replies.md) — OhCleo script skips thread replies; check reply_count before "unanswered"

@@ -182,7 +182,7 @@ Supports individual account targeting:
 
 | Account | What to look for |
 |---------|-----------------|
-| vuongtrancr@gmail.com | Production monitoring alerts for Swish project (Delayed-newform, APM signal lost, BugSnag). Carrick's personal Gmail receives Swish Zendesk + monitoring. Flag any `[HIGH]` or `Signal lost` subjects. |
+| vuongtrancr@gmail.com | Carrick's personal Gmail. 🔴 **Swish project PAUSED (2026-10-20, user: "pending ko làm nữa, ko cần monitor")** — do NOT flag Swish Delayed-newform / New Relic Signal lost / BugSnag / Zendesk mail as alerts; count only. Still flag any non-Swish client/project mail. |
 | dnduongus@gmail.com | Personal Gmail (DuongDN). Only flag security alerts (account breach, unauthorized login). Ignore: LinkedIn, newsletters, Finhay, Careerviet, bank notifications. |
 | davidztv19@gmail.com | Arthur - Meta-Stamp project (Workstream "Crystal lang", roster DuongDN/PhucVT/TienND). No filter — flag all client/project mail. Uses an App Password (2FA enabled on account); login verified live 2026-07-06. |
 
