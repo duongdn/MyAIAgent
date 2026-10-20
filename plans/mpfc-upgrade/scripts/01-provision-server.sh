@@ -62,6 +62,27 @@ mkdir -p /etc/systemd/system/apt-daily-upgrade.timer.d
 printf '[Timer]\nOnCalendar=\nOnCalendar=*-*-* 02:00\nRandomizedDelaySec=0\n' > /etc/systemd/system/apt-daily-upgrade.timer.d/override.conf
 systemctl daemon-reload
 
+log "01: Resque queue workers (live: 3x vendor/bin/resque started by hand from /var/www/utils/start_resque_live.sh)"
+cat > /etc/systemd/system/mpfc-resque@.service <<EOF
+[Unit]
+Description=MPFC Resque worker %i (queue default)
+After=redis-server.service
+Requires=redis-server.service
+
+[Service]
+WorkingDirectory=$SITE
+Environment=QUEUE=default APP_INCLUDE=resque-init.php REDIS_BACKEND=redis://localhost:6379
+ExecStart=/usr/bin/php vendor/bin/resque
+Restart=always
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+# test server: never run workers (copied DB has real device tokens -> real push notifications)
+[ $TEST = 1 ] || systemctl enable mpfc-resque@1 mpfc-resque@2 mpfc-resque@3
+
 apachectl configtest
 systemctl enable --now apache2 redis-server
 systemctl reload apache2

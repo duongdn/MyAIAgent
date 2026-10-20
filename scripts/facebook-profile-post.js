@@ -4,7 +4,7 @@
  * Draft mode = post with audience "Chỉ mình tôi"; submit = change audience later.
  *
  * Usage:
- *   node scripts/facebook-profile-post.js --draft <text-file> [--dry-run]
+ *   node scripts/facebook-profile-post.js --draft <text-file> [--image <png>] [--feeling "hết tiền"] [--dry-run]
  *   node scripts/facebook-profile-post.js --submit <post-url> [--audience=public|friends]
  *   node scripts/facebook-profile-post.js --delete <post-url>   (only if still Only-me)
  *
@@ -71,7 +71,31 @@ async function findOwnPostUrl(page, snippet) {
   return null;
 }
 
-async function createDraft(page, text, dryRun) {
+async function attachImage(page, imagePath) {
+  const input = await page.$('[role="dialog"] input[type="file"]');
+  if (!input) throw new Error('image file input not found in composer');
+  await input.uploadFile(path.resolve(imagePath));
+  await page.waitForSelector('[role="dialog"] img[src^="blob:"]', { timeout: 20000 });
+  await sleep(1500);
+}
+
+// "Cảm xúc/hoạt động" → search the feeling (e.g. "hết tiền") → click the exact match
+async function pickFeeling(page, feeling) {
+  await page.click('[role="dialog"] [aria-label="Cảm xúc/hoạt động"]');
+  await page.waitForSelector('[role="dialog"] input[aria-label="Tìm kiếm cảm xúc"], [role="dialog"] input[placeholder="Tìm kiếm cảm xúc"]', { timeout: 10000 });
+  await page.type('[role="dialog"] input[aria-label="Tìm kiếm cảm xúc"], [role="dialog"] input[placeholder="Tìm kiếm cảm xúc"]', feeling, { delay: 30 });
+  await sleep(2000);
+  const clicked = await page.$$eval('[role="dialog"] [role="button"]', (els, feeling) => {
+    const el = els.find(e => e.innerText.trim() === feeling);
+    if (el) el.click();
+    return !!el;
+  }, feeling);
+  if (!clicked) throw new Error(`feeling not found: ${feeling}`);
+  await page.waitForSelector('[role="dialog"] [role="textbox"]', { timeout: 10000 });
+  await sleep(1500);
+}
+
+async function createDraft(page, text, dryRun, options = {}) {
   await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
   assertLoggedIn(page);
   await sleep(2000);
@@ -91,10 +115,14 @@ async function createDraft(page, text, dryRun) {
   const privacyLabel = await page.$eval('[role="dialog"] [role="button"][aria-label^="Chỉnh sửa quyền riêng tư"]', e => e.getAttribute('aria-label'));
   if (!privacyLabel.includes(AUDIENCE_LABELS.onlyme)) throw new Error(`audience not Only-me after select: ${privacyLabel}`);
 
+  if (options.image) await attachImage(page, options.image);
+  if (options.feeling) await pickFeeling(page, options.feeling);
+
   await page.click('[role="dialog"] [role="textbox"]');
   for (const [i, line] of text.split('\n').entries()) {
-    if (i > 0) { await page.keyboard.down('Shift'); await page.keyboard.press('Enter'); await page.keyboard.up('Shift'); }
-    if (line) await page.keyboard.type(line, { delay: 5 });
+    // insertText (sendCharacter) avoids emoji typeahead swallowing the following newline
+    if (i > 0) { await page.keyboard.down('Shift'); await page.keyboard.press('Enter'); await page.keyboard.up('Shift'); await sleep(200); }
+    if (line) { await page.keyboard.sendCharacter(line); await sleep(200); }
   }
   await sleep(1500);
 
@@ -170,7 +198,7 @@ async function deleteDraft(page, postUrl) {
   const { browser, page } = await openFacebookSession();
   try {
     const result = draftFile
-      ? await createDraft(page, fs.readFileSync(draftFile, 'utf-8').trim(), flag('--dry-run'))
+      ? await createDraft(page, fs.readFileSync(draftFile, 'utf-8').trim(), flag('--dry-run'), { image: argAfter('--image'), feeling: argAfter('--feeling') })
       : deleteUrl ? await deleteDraft(page, deleteUrl)
       : await submitPost(page, submitUrl, audienceArg);
     console.log(JSON.stringify(result));

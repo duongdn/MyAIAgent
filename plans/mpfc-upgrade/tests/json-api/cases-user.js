@@ -1,6 +1,6 @@
 // registration/create + user controller (add_plan, remove_plan, get_plans, delete, trophies).
 // Throwaway users are registered here and deleted through user/delete (which also cancels their plans).
-module.exports = async ({ call, check, err, ok, any, cfg }) => {
+module.exports = async ({ call, check, err, ok, any, cfg, sessions, fixturesMode }) => {
   const ts = Date.now();
   const reg = (extra) => ({ q: { firstname: 'Nus', lastname: 'Api', user_email: `nus.jsonapi.${ts}.${Math.floor(Math.random() * 1e6)}@example.com`, password: `Tmp-${ts}-Aa9!x`, phone: '0123', ...extra } });
 
@@ -34,11 +34,23 @@ module.exports = async ({ call, check, err, ok, any, cfg }) => {
   await check('user/add_plan no product', ap({ type: 'ios', receipt: 'fake' }), err(/product/));
   await check('user/add_plan ios fake receipt', ap({ type: 'ios', receipt: 'fake-receipt', product_id: 'com.onbit.footballcoach.coach_pass' }), any());
   await check('user/add_plan signed_transaction', ap({ type: 'ios', signed_transaction: 'x.y.z', transaction_id: '1', receipt_format: 'jws', product_id: 'com.onbit.footballcoach.coach_pass' }), any());
+  // StoreKit2 JWS with a transactionId: Apple server JWT needs the .p8 key -> exception path (caught + logged)
+  const jws = 'eyJhbGciOiJFUzI1NiJ9.eyJ0cmFuc2FjdGlvbklkIjoiMjAwMDAwMDAwMDAwMDAwMSIsImVudmlyb25tZW50IjoiU2FuZGJveCJ9.sig';
+  await check('user/add_plan StoreKit2 JWS (exception path)', ap({ type: 'ios', signed_transaction: jws, product_id: 'com.onbit.footballcoach.coach_pass' }), any());
   await check('user/add_plan android fake token', ap({ type: 'android', receipt: '{"purchaseToken":"fake"}', product_id: 'com.onbit.footballcoach.coach_pass' }), any());
 
   // --- trophies: member has achievements + leaderboard time (fixtures), new user has none
   await check('user/trophies member (achievements, leaderboard)', call('user/trophies', { as: 'member' }), ok((j) => j.trophies && j.training_count === 4));
   await check('user/trophies new user (empty)', call('user/trophies', { q: { cookie: ck(c) } }), ok((j) => j.status === 'success'));
+
+  await check('user/trophies completed course (lvl1, from dbm cases)', call('user/trophies', { as: 'nus_jsonapi_lvl1' }), ok((j) => j.status === 'success'));
+
+  // --- user/delete refuses when a subscription cannot be cancelled
+  const d = await check('registration ok (for cancel-failure)', call('registration/create', reg()), ok((j) => !!j.cookie));
+  if (d.json && d.json.user) {
+    fixturesMode(`bogus-bundle ${d.json.user.ID}`);
+    await check('user/delete cancel failure -> account kept', call('user/delete', { q: { cookie: ck(d) } }), err(/couldn't cancel/));
+  }
 
   // --- user/delete (cancels plans first) for all throwaway users; afterwards login must fail
   for (const [n, r] of [['a', a], ['b', b], ['c', c]]) {

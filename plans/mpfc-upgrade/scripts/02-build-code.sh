@@ -23,6 +23,11 @@ if [ $TEST = 0 ] && [ ! -e "$SITE/wp-content/uploads" ]; then
 fi
 fixperm
 
+log "02: /var/www/keys (Apple App Store .p8 key for StoreKit2 IAP verification, APPLE_PRIVATE_KEY_PATH)"
+mkdir -p /var/www/keys
+rsync -a --rsync-path="sudo rsync" -e "ssh -i $LIVE_KEY" "$LIVE_SSH:/var/www/keys/" /var/www/keys/ || die "keys rsync failed"
+chown -R root:www-data /var/www/keys && chmod 750 /var/www/keys && chmod 640 /var/www/keys/*
+
 # Idempotent patch apply: skip when already applied (reverse applies cleanly).
 apply_patch() {
   if patch -d "$SITE" -p1 -R --dry-run -s -f < "$PATCHES/$1" >/dev/null 2>&1; then log "   $1 already applied"

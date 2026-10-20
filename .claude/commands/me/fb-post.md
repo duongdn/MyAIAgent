@@ -69,7 +69,10 @@ Ai ngờ làm chứng sĩ rồi mới biết mình cũng y chang 😅
 
 ### 5. Đăng nháp
 1. Ghi bài ra `tmp/fb-post-{date}.txt`
-2. `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}.txt` (thêm `--dry-run` nếu mode dry-run)
+2. Ảnh: bài chứng khoán → `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` (VN-Index 90 ngày)
+   Cảm xúc FB: chọn 1 cảm xúc khớp bài, phải có trong danh sách FB VN (vd. "hết tiền", "buồn bã", "hoang mang", "bế tắc", "giàu có", "lo âu", "nôn nóng", "thư thái", "ngốc nghếch")
+   Ngày lễ/đặc biệt (20/10, 8/3, Tết, Trung thu...) → thêm 1 câu chúc vui ở cuối bài
+   `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}.txt --image tmp/vnindex-{date}.png --feeling "<cảm xúc>"` (thêm `--dry-run` nếu mode dry-run)
 3. Kết quả JSON:
    - `ok:true` → append history `{status:"draft", audience:"Chỉ mình tôi", postUrl}`
    - `ok:false` + `not_logged_in` → báo user cần login lại: `node scripts/facebook-profile-post.js` dùng chung profile với `node scripts/facebook-page-scraper.js --login`

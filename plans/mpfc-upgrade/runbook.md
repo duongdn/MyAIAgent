@@ -29,7 +29,7 @@ Truy cập live từ server mới: key `/root/.ssh/mpfc_live_ed25519`, thêm và
 5. Detach volume `volume-lon1-02` khỏi live → attach server mới, mount `/mnt/volume_lon1_02`.
 6. `CONFIRM_LIVE_DB=yes 03-migrate-db.sh` (DB dùng chung cluster — không copy DB).
 7. Cloudflare: A record `mypersonalfootballcoach.com` (+ admin., staging…) → IP mới (proxied, đổi tức thì).
-8. Root crontab (02 in ra, php7.4→8.3), New Relic, monit, `wp yoast index` off-peak.
+8. Root crontab (02 in ra, php7.4→8.3), New Relic, monit, `wp yoast index` off-peak. Resque: dừng 3 worker trên live (`pkill -f vendor/bin/resque`), bật trên server mới `systemctl start mpfc-resque@{1,2,3}` (01 tạo unit, chỉ enable khi không --test). Kiểm `/var/www/keys/*.p8` đã có (02 copy) — thiếu là iOS StoreKit2 lỗi.
 9. Smoke test + API app + 1 giao dịch thật nhỏ + refund.
 10. Rollback: trỏ DNS lại live cũ (code cũ chạy được trên DB đã migrate vì chỉ thêm bảng/cột); attach volume lại. Giữ live cũ 1–2 tuần.
 

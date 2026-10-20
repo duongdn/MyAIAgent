@@ -25,6 +25,10 @@ function nus_teardown($ids, $extra) {
         wp_delete_user($u->ID);
     }
     $wpdb->query("DELETE FROM {$wpdb->prefix}mpfc_leagues WHERE name LIKE 'NUSTEST%'");
+    $wpdb->query("DELETE FROM mm_applied_bundles WHERE bundle_id = 999999");
+    foreach ($wpdb->get_col("SELECT ID FROM {$wpdb->users} WHERE user_login LIKE 'nus.jsonapi.%@example.com'") as $uid) {
+        $wpdb->delete('mm_user_data', ['wp_user_id' => $uid]); wp_delete_user($uid);
+    }
     $in = implode(',', array_map('intval', $ids));
     $wpdb->query("DELETE FROM mm_notifications WHERE wp_user_id IN ($in)");
     $wpdb->query("DELETE FROM wp_wpcw_units_plan WHERE user_id IN ($in)");
@@ -58,6 +62,11 @@ $toggles = [
     'va-manager-off' => "UPDATE mm_applied_bundles SET status = 0 WHERE access_type = 'user' AND access_type_id = $manager AND bundle_id = 23",
     'va-manager-on'  => "UPDATE mm_applied_bundles SET status = 1 WHERE access_type = 'user' AND access_type_id = $manager AND bundle_id = 23",
 ];
+// a registered throwaway user gets a bundle MM cannot cancel -> user/delete must refuse (keeps the account)
+if ($mode === 'bogus-bundle') {
+    $wpdb->insert('mm_applied_bundles', ['bundle_id' => 999999, 'access_type' => 'user', 'access_type_id' => (int) $args[1], 'status' => 1, 'apply_date' => current_time('mysql')]);
+    echo "bogus bundle added\n"; return;
+}
 if (isset($toggles[$mode])) { $wpdb->query($toggles[$mode]); echo "$mode done\n"; return; }
 
 if ($mode === 'teardown') { nus_teardown(compact('member', 'team', 'manager', 'admin'), $extra); echo "teardown done\n"; return; }
