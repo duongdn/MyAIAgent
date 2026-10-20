@@ -43,14 +43,28 @@ Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay
 - Trải nghiệm làm việc: report trong ngày (vd. `*ai-*`, `*learning-plan*`), memory `docs/memory/` → rút bài học về AI agent, tự động hoá, quản lý team dev, làm outsource
 - Tự tìm thêm (WebSearch) nếu nguyên liệu mỏng: chủ đề hợp profile user (PM/tech lead công ty outsource VN, dùng AI agent tự động hoá công việc, đầu tư chứng khoán VN dài hạn)
 
-### 3. Chọn chủ đề
-- Ưu tiên chứng khoán/tài chính cá nhân (user chọn); bài học nghề chỉ khi kể được bằng ngôn ngữ phổ thông
-- Không trùng chủ đề 7 ngày gần nhất trong history; xoay vòng: AI/công nghệ → bài học nghề → đầu tư/tài chính → ...
-- 1 bài = 1 ý chính
+### 3. Chọn chủ đề — xoay vòng 5 loại (user chốt 2026-10-20)
+Ghi `type` vào history; không lặp cùng `type` 2 ngày liền, không trùng chủ đề 7 ngày. Ý tưởng trong `docs/fb-post-ideas/` luôn ưu tiên.
+
+| type | Nội dung | Nguồn |
+|---|---|---|
+| `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán (mẫu bên dưới) | news-digest vn-stocks làm cái cớ; ảnh VN-Index |
+| `nus-blog` | Share 1 bài blog NUS: 1–2 câu tiếng Việt đời thường "team mình vừa viết về…" + link bài (FB tự tạo preview) | `curl -sL https://www.nustechnology.com/blog` → lấy `/blog/<slug>`, chọn bài chưa share trong history; đọc bài để tóm 1 câu dễ hiểu |
+| `trend` | 1 trend/meme đang hot trên mạng VN, kèm 1–2 câu cảm nhận/review vui | WebSearch trend tuần này (TikTok/FB/báo VN); chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama cá nhân/tin đồn; share link gốc, KHÔNG tải ảnh người khác về đăng lại |
+| `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | news-digest 3 ngày gần nhất, link gốc (không link news.google) |
+| `running` | **Nhắc user**, không tự bịa thành tích | xem dưới |
+
+`running` (tối đa 1 lần/tuần, ưu tiên Chủ nhật): KHÔNG có dữ liệu chạy bộ → KHÔNG được chế số km/thời gian. Đăng nháp khung "Chỉ mình tôi":
+```
+Hôm nay chạy được ___ km 🏃‍♂️ (điền số + ảnh)
+```
++ ghi rõ trong report: "🔔 Nhắc: share bài chạy bộ/milestone — sửa nháp trên FB rồi `/me:fb-post --submit`".
+
+Chung: 1 bài = 1 ý chính. Link (blog/bài báo/trend) để ở dòng cuối.
 
 ### 4. Viết bài
 🔴 Đọc `docs/memory/fb-post/feedback_fb_post_write_for_general_public_no_jargon.md` — văn phong user đã chốt.
-- Rất ngắn, đơn giản, hài hước, tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
+- Rất ngắn, đơn giản, hài hước (mọi type); `stock-humor` tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
 - 3–6 emoji hài; kết bằng câu rủ tương tác ("ai cùng cảnh điểm danh")
 - KHÔNG phân tích, KHÔNG list bài học, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ, KHÔNG tóm tắt tin (tin chỉ là cái cớ)
 - Plain text, KHÔNG hashtag
@@ -69,7 +83,7 @@ Ai ngờ làm chứng sĩ rồi mới biết mình cũng y chang 😅
 
 ### 5. Đăng nháp
 1. Ghi bài ra `tmp/fb-post-{date}.txt`
-2. Ảnh: bài chứng khoán → `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` (VN-Index 90 ngày)
+2. Ảnh: chỉ `stock-humor` → `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` (VN-Index 90 ngày)
    Cảm xúc FB: chọn 1 cảm xúc khớp bài, phải có trong danh sách FB VN (vd. "hết tiền", "buồn bã", "hoang mang", "bế tắc", "giàu có", "lo âu", "nôn nóng", "thư thái", "ngốc nghếch")
    Ngày lễ/đặc biệt (20/10, 8/3, Tết, Trung thu...) → thêm 1 câu chúc vui ở cuối bài
    `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}.txt --image tmp/vnindex-{date}.png --feeling "<cảm xúc>"` (thêm `--dry-run` nếu mode dry-run)
