@@ -11,7 +11,7 @@ Applies to EVERY project, EVERY source (Slack, Matrix, Discord, Email, MS Teams)
 
 **How to apply — for every source, every project, every run:**
 1. Never summarize a client/customer channel by activity count or "X posted, so it's an update, clean." Read the actual message content every time.
-2. For every customer/client message found, ask: is this a direct ask, question, complaint, or deadline-tied request? Is it still unanswered, or only acknowledged ("let me check", "noted", a reaction emoji) without a substantive resolution?
+2. For every customer/client message found, ask: is this a direct ask, question, complaint, or deadline-tied request? Is it still unanswered? A holding/ack reply ("let me check", "noted", a reaction emoji) counts as **answered for 24h**; if there is still no substantive follow-up **>24h after the ack**, it is unanswered again (Franc case: "let me check" + nothing for 25h+). **Merged rule 2026-10-20** with [[feedback_holding_reply_and_our_side_done_are_not_alerts]] (eval found the two contradicted).
 3. If yes → WARNING, regardless of which project/source. Do not complete the Trello/checklist item for it. State it explicitly in the report — don't bury it in a summary table cell as "✓ clean" or "N msgs."
 4. Applies uniformly to: Slack (Franc/dmetiner, Maddy/Xtreme, Aysar/Baamboozle, Elena/SamGuard, etc.), Matrix (Fountain/Kunal, Arthur/Meta-Stamp, Elena rooms), Discord (AirAgri/Vinn, Bizurk), Email (all 10 accounts), MS Teams (Philip/Six Star Rentals).
 5. Distinguish from internal dev-topic chatter ([[feedback_project_topics_not_alerts]]) — that rule is about OUR team discussing bugs/features among ourselves, which is NOT an alert. This rule is the opposite case: the CUSTOMER directly asking us for something, unresolved.

@@ -1,86 +1,157 @@
 [
   {
     "id": "zero-hours-prior-report-leave",
-    "memory": ["daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md"],
+    "memory": [
+      "daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md"
+    ],
     "scenario": "Workstream shows TuanNT 0h on Mon 10-12. config/leave-plan.json has no entry. The 10-13 daily report says: 'Leave: TuanNT off sick 10-12 (email 06:57)'.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "zero-hours-genuine",
-    "memory": ["daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md", "daily-report/general/feedback_20260922_recheck_findings.md"],
+    "memory": [
+      "daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md",
+      "daily-report/general/feedback_20260922_recheck_findings.md"
+    ],
     "scenario": "Wed 10-14: KhanhHH shows 0h on Workstream for Tue 10-13 after a re-fetch at 09:40. No leave in leave-plan.json, no leave line in the 10-13 or 10-14 reports, no leave email. Matrix shows no messages from KhanhHH on 10-13. Other devs logged normally.",
-    "expected": { "alert": true }
+    "expected": {
+      "alert": true
+    }
   },
   {
     "id": "monday-team-wide-lag",
-    "memory": ["daily-report/general/feedback_20260922_recheck_findings.md"],
+    "memory": [
+      "daily-report/general/feedback_20260922_recheck_findings.md"
+    ],
     "scenario": "Tue 08:00 report for Mon: TuanNT, LeNH and 8 other devs all show 0h on Workstream for Monday. No leave on file. Matrix shows TuanNT and LeNH posting work updates all Monday.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "holding-reply-counts-as-answered",
-    "memory": ["daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md", "global/feedback_customer_direct_ask_universal_gate.md"],
+    "memory": [
+      "daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md",
+      "global/feedback_customer_direct_ask_universal_gate.md"
+    ],
     "scenario": "Franc customer dmetiner asked in Slack 2 hours ago: 'Can you check why preset 3 fails?'. Carrick replied 10 minutes later: 'Let me check and get back to you today.' Nothing else since; it is still the same working day.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
+  },
+  {
+    "id": "holding-reply-expired-after-24h",
+    "memory": [
+      "daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md",
+      "global/feedback_customer_direct_ask_universal_gate.md"
+    ],
+    "scenario": "Franc customer dmetiner asked in Slack 30 hours ago to investigate a device failure before a shipment. Carrick replied 'Let me check' 20 minutes later. No further reply or update since (30 hours).",
+    "expected": {
+      "alert": true
+    }
   },
   {
     "id": "customer-ask-unanswered-25h",
-    "memory": ["global/feedback_customer_direct_ask_universal_gate.md"],
+    "memory": [
+      "global/feedback_customer_direct_ask_universal_gate.md"
+    ],
     "scenario": "GGS customer Joey asked Amy in #presta-9-update 3 days ago: 'As long as we use the same server it should work the same as live?'. Go-live is Wednesday. No reply in the thread, no reaction.",
-    "expected": { "alert": true }
+    "expected": {
+      "alert": true
+    }
   },
   {
     "id": "our-side-already-done",
-    "memory": ["daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md"],
+    "memory": [
+      "daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md"
+    ],
     "scenario": "Maddy: yesterday Anoma asked for updated product images. This morning LongVV uploaded them and posted 'Done, images updated on staging'. Anoma has not replied yet.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "internal-dev-topic-not-alert",
-    "memory": ["daily-report/slack/feedback_project_topics_not_alerts.md", "global/feedback_customer_direct_ask_universal_gate.md"],
+    "memory": [
+      "daily-report/slack/feedback_project_topics_not_alerts.md",
+      "global/feedback_customer_direct_ask_universal_gate.md"
+    ],
     "scenario": "In the internal Matrix room for Bailey, TuanNT and VyNL discuss a bug: 'stock sync fails on staging, investigating queue'. No customer involved. All devs logged 8h.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "low-activity-franc-adhoc",
-    "memory": ["daily-report/slack/feedback_low_activity_devs_not_alert.md"],
+    "memory": [
+      "daily-report/slack/feedback_low_activity_devs_not_alert.md"
+    ],
     "scenario": "Franc (RDC) project: LeNH logged 0h on Franc yesterday. She logged 8h on Rory. Franc Slack had no customer messages.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "quiet-mpfc-slack",
-    "memory": ["daily-report/slack/feedback_low_activity_devs_not_alert.md"],
+    "memory": [
+      "daily-report/slack/feedback_low_activity_devs_not_alert.md"
+    ],
     "scenario": "MPFC Slack workspace: zero human messages in the last 24h. Only bot messages from monitoring.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "missing-formal-daily-report",
-    "memory": ["daily-report/general/feedback_missing_daily_report_is_alert.md"],
+    "memory": [
+      "daily-report/general/feedback_missing_daily_report_is_alert.md"
+    ],
     "scenario": "Xtreme Slack: Kai chatted with Madhuraka about a bug several times yesterday, but no 'daily report' / 'progress' post was made. Kai's role in this workspace expects a formal daily report.",
-    "expected": { "alert": true }
+    "expected": {
+      "alert": true
+    }
   },
   {
     "id": "longvv-maddy-hours-informational",
-    "memory": ["daily-report/sheets/feedback_longvv_consolidated.md"],
+    "memory": [
+      "daily-report/sheets/feedback_longvv_consolidated.md"
+    ],
     "scenario": "LongVV logged only 0.5h on Maddy this week, and 8h/day on OhCleo every day. No unanswered Maddy customer questions; Kai's report is present.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "longvv-ohcleo-zero",
-    "memory": ["daily-report/sheets/feedback_longvv_consolidated.md", "daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md"],
+    "memory": [
+      "daily-report/sheets/feedback_longvv_consolidated.md",
+      "daily-report/sheets/feedback_zero_hours_check_prior_report_leave_before_alert_or_reminder.md"
+    ],
     "scenario": "Thursday: LongVV logged 0h on OhCleo and 0h on Maddy for Wednesday (re-fetched 09:45). No leave anywhere, no 'Tony' daily report in OhCleo Slack on Wednesday.",
-    "expected": { "alert": true }
+    "expected": {
+      "alert": true
+    }
   },
   {
     "id": "discord-homieapp-ignored",
-    "memory": ["daily-report/discord/feedback_discord_only_airagri_bizurk.md"],
+    "memory": [
+      "daily-report/discord/feedback_discord_only_airagri_bizurk.md"
+    ],
     "scenario": "Discord HOMIEAPP server: a user posted 'App crashes on login, anyone?' 6 hours ago with no reply.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   },
   {
     "id": "pr481-waiting-on-customer",
-    "memory": ["daily-report/slack/feedback_maddy_pr481_not_a_blocker_waiting_on_customer.md"],
+    "memory": [
+      "daily-report/slack/feedback_maddy_pr481_not_a_blocker_waiting_on_customer.md"
+    ],
     "scenario": "Bitbucket xtreme-web/rms PR #481 still has 2 High + 1 Medium review comments open since June. Nothing new on it this week.",
-    "expected": { "alert": false }
+    "expected": {
+      "alert": false
+    }
   }
 ]

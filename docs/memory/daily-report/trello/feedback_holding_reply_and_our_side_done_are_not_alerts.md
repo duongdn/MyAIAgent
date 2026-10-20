@@ -6,7 +6,7 @@ metadata:
 ---
 
 User corrected 2026-10-09 after the recheck left Franc, Maddy and Elliott unticked:
-- **Franc:** a holding reply had already gone to dmetiner. Any holding or acknowledgement reply counts as "answered". Before flagging a reply as missing, look for one (thread replies included), and look again after the cron window.
+- **Franc:** a holding reply had already gone to dmetiner. Any holding or acknowledgement reply counts as "answered" **for 24h** — after 24h with no substantive follow-up it is an alert again (user-confirmed merge 2026-10-20, consistent with [[feedback_customer_direct_ask_universal_gate]]). Before flagging a reply as missing, look for one (thread replies included), and look again after the cron window.
 - **Maddy:** the flagged points (invoice message, Anoma's image request, JIRA est/log) were already done on our side. Don't keep a Maddy alert open for things our team has already handled. Only alert on things that are still genuinely pending from our team.
 - **Elliott:** paused for a long time. It's now on the Ignore List in `.claude/commands/me/daily-report.md` and is auto-completed with no gate.
 

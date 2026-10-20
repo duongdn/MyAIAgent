@@ -940,6 +940,7 @@ Recheck mode is the default when re-running — no flag needed. If the user expl
 2. Run inline: Email → Slack → Discord → Scrin.io → Sheets → Fountain → Elena → Trello → Reminders → **Matrix** → **OhCleo Slack** → **Performance** → **Arthur** → **Upwork Memo** (Piece 15). If `--include-whatsapp-zalo` present, also run **WhatsApp** (Piece 16) → **Zalo** (Piece 17) — excluded by default (token-heavy).
 3. Write report to `reports/{UTC+7 today}/daily-report.md` — **FORMAT MUST MATCH manual runs** (see below)
 4. Update `daily_report.last_run` + `alert.last_run` to current UTC+7 time in timelines
+4b. **Structure eval (warn-only, never blocks):** after the timeline update run `node evals/daily-report/run-structure-eval.js {today}`. For each ❌ line: fix the report if the data is at hand (e.g. missing Fountain Part, missing link, missing Workstream review table); otherwise add it under `## Unresolved Questions` as `Eval: <check id> — <detail>`. Never skip the report or the commit because of eval failures.
 5. **Dọn report:** `bash scripts/archive-old-reports.sh` — move mọi `reports/YYYY-MM-DD/` cũ hơn 7 ngày vào `reports/backup/YYYY-MM-DD/` (giữ nguyên theo ngày). Cần đọc report cũ → tìm cả trong `reports/backup/`.
 
 **Cron report format (MANDATORY — same as interactive runs):**
@@ -992,9 +993,11 @@ Rules:
 5. Piece 9: identify 0h devs, print to report (only send if `--send-reminder` flag passed)
 6. Write report to `reports/{YYYY-MM-DD}/daily-report.md`
 7. Update `daily_report.last_run` + `alert.last_run` in timelines
+8. **Structure eval (warn-only, never blocks):** after the timeline update run `node evals/daily-report/run-structure-eval.js {today}`. For each ❌ line: fix the report if the data is at hand (e.g. missing Fountain Part, missing link, missing Workstream review table); otherwise add it under `## Unresolved Questions` as `Eval: <check id> — <detail>`. Never skip the report or the commit because of eval failures.
 
 **Normal (interactive terminal), report already EXISTS** — recheck mode (Piece 11):
 1. Run Piece 11 directly — no full re-run of all sources
+1b. **Structure eval (warn-only, never blocks):** after the timeline update run `node evals/daily-report/run-structure-eval.js {today}`. For each ❌ line: fix the report if the data is at hand (e.g. missing Fountain Part, missing link, missing Workstream review table); otherwise add it under `## Unresolved Questions` as `Eval: <check id> — <detail>`. Never skip the report or the commit because of eval failures.
 2. Git commit + push after completing
 
 ---
