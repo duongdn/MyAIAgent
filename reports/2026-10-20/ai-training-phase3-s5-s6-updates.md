@@ -1,0 +1,58 @@
+# AI Training GĐ3 — cập nhật S5 + S6 (2026-10-20)
+
+File theo dõi: mỗi lần sửa thêm 1 mục mới ở **cuối file** (giờ · sửa gì · vì sao · commit).
+Phạm vi: DuongDN làm S5 + S6. S7–S9 do VinhNT làm, không sửa.
+
+| Deck | Link | Số slide |
+|---|---|---|
+| S5 | https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI | 23 |
+| S6 | https://docs.google.com/presentation/d/1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ | 18 (trước 16) |
+
+Kịch bản trình bày:
+- S5: `plans/reports/script-261016-1531-s5-presentation-script.md`
+- S6: `plans/reports/script-261020-1333-s6-presentation-script-and-syllabus-mapping.md`
+
+---
+
+## 13:33 — Review S5 + S6 (commit `e86e59b4`)
+
+### S5
+Không sửa. Đã đối chiếu xong với PDF từ 16/10 (mọi dòng của PDF đều có slide). Kịch bản và 2 lệnh demo live (slide 7, 18) đã chạy thử với model thật, chạy được.
+
+### S6: các vấn đề tìm ra
+
+| # | Vấn đề | Bằng chứng |
+|---|---|---|
+| 1 | Slide "Description" ghi "Eval thật: model yếu tự điền P2 khi description mơ hồ" nhưng không có số đo nào | Chạy lại: deepseek vẫn điền P2 **ngay cả với** description đang dùng → câu "description tốt thì chọn đúng" không có căn cứ |
+| 2 | Câu mẫu "ĐỦ" trên slide khác description thật trong code (slide có thêm "Chỉ dùng khi user yêu cầu") | `checkpoints.py` dòng 38 |
+| 3 | Phần tool contract không có demo: không có gì cho thấy model thật sự nhận được gì | — |
+| 4 | Phần "Run kết thúc ≠ task xong" chỉ có sơ đồ + code, không có lệnh chạy thật | — |
+| 5 | Notes slide trace ghi "~3.000 token"; slide ghi "2511" | Số thật: 2.511 vào + 489 ra |
+| 6 | Câu thử thách 04 chưa có đáp án trong notes | — |
+
+Đã kiểm tra và **đúng**, không sửa: notes "kịch bản 7 có 2 lần search_kb trong 1 lượt" (chạy lại, đúng là 2 lần).
+
+### S6: đã sửa
+
+| Slide (mới) | Trước | Sau |
+|---|---|---|
+| 7 · Trace | "2511", notes "~3.000 token" | "2.511", notes "2.511 vào + 489 ra" |
+| 9 · **mới** "SDK gửi cho model đúng 3 thứ" | — | JSON thật SDK gửi cho model (lệnh `--schema`). Thấy rõ: không có output / error / side effect; `priority` chỉ là `"string"` |
+| 10 · **mới** câu hỏi | — | "Chỉ đổi description — model điền sai tham số bao nhiêu lần?" |
+| 11 · đáp án (thay slide "Description" cũ) | 2 khung chữ "chưa đủ / đủ" + câu "eval thật" không có số | Thanh đo thật, 5 lần mỗi bản: mơ hồ **5/5** sai → bản đang dùng **2/5** → liệt kê giá trị hợp lệ **0/5**. Cả 15 lần vẫn tạo được ticket (model tự sửa sau khi bị chặn) |
+| 15 · Run ≠ task xong | Chỉ sơ đồ + code | Notes thêm demo live `--fault down` (đã chạy: 503 → retry → ESCALATED, "Ticket trong hệ thống đích: không có") |
+| 17 · Thử thách | Notes thiếu đáp án câu 04 | Thêm đáp án, kèm số 5/5 → 2/5 → 0/5 |
+
+### Code mới
+- `support_agent_demo/compare_tool_descriptions.py`
+  - `--schema`: in phần contract model thấy, không gọi model.
+  - `--runs 5`: đo 3 mức description, khoảng 2 phút.
+- `support_agent_demo/tool_descriptions.json`: kết quả đo (deepseek-v4.1-flash, 15 lần chạy).
+- `deck-tools/render-slide-thumbnails.js`, `deck-tools/dump-slide-text-and-notes.js`: tool render ảnh slide và đọc notes. Trước đây nằm ở scratchpad, bị xoá 2 lần nên chuyển vào repo.
+
+### Kiểm tra
+- Render lại 18 slide S6. Slide 11 bị thanh 5/5 đè lên chữ → đã sửa và render lại, OK.
+- Cả 3 lệnh demo live trong kịch bản S6 (`--scenario 1 --trace`, `--schema`, `--fault down`) đều đã chạy thật.
+
+### Còn mở
+- (không có)
