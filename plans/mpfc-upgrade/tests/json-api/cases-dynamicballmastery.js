@@ -1,6 +1,6 @@
 // dynamicballmastery controller: course content parsers (switch on course id) + completed sessions.
 // Every switch case is hit (incl. COURSE_TO_PAGE_MAP default and an unknown id); unit pages come from Training_Programe.
-module.exports = async ({ call, check, ok, any, sessions }) => {
+module.exports = async ({ call, check, ok, any, sessions, fx }) => {
   const ids = [1, 2, 3, 9, 10, 11, 12, 13, 14, 29, 32, 35, 39, 15, 999];
   for (const id of ids) {
     await check(`dbm/The_Aim course ${id}`, call('dynamicballmastery/The_Aim', { q: { course_id: id } }), any());
@@ -20,6 +20,10 @@ module.exports = async ({ call, check, ok, any, sessions }) => {
     await check(`dbm/Get_Sessionse_Points unit ${u}`, call('dynamicballmastery/Get_Sessionse_Points', { q: { id: u } }), any());
     await check(`dbm/Get_Sessionse_videos unit ${u}`, call('dynamicballmastery/Get_Sessionse_videos', { q: { id: u, type: 'dbm' } }), any());
   }
+
+  // synthetic legacy WPBakery layouts (fixtures) for the branches current pages no longer use
+  await check('dbm/Get_Sessionse_Points legacy <ul>\\n\\t layout', call('dynamicballmastery/Get_Sessionse_Points', { q: { id: fx.session_points_post } }), ok((j) => j.timeDesc.length === 1));
+  await check('dbm/Get_Sessionse_videos legacy fvplayer sections', call('dynamicballmastery/Get_Sessionse_videos', { q: { id: fx.session_videos_post } }), ok((j) => j.video.length === 2));
 
   // completed sessions — written for the throwaway lvl1 user only (fixtures teardown removes the rows)
   const uid = sessions.nus_jsonapi_lvl1.id;

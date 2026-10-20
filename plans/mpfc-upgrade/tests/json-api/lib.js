@@ -28,7 +28,10 @@ async function call(ep, opts = {}) {
   if (opts.files) {
     body = new FormData();
     for (const [k, v] of Object.entries(opts.form || {})) body.append(k, v);
-    for (const [k, p] of Object.entries(opts.files)) body.append(k, new Blob([fs.readFileSync(p)]), path.basename(p));
+    for (const [k, p] of Object.entries(opts.files)) {
+      const type = { '.mp4': 'video/mp4', '.jpg': 'image/jpeg' }[path.extname(p)] || 'application/octet-stream';
+      body.append(k, new Blob([fs.readFileSync(p)], { type }), path.basename(p));
+    }
   } else if (opts.form) {
     body = new URLSearchParams(opts.form);
   } else if (opts.body !== undefined) {

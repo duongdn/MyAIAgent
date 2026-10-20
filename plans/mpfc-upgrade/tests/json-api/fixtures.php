@@ -26,6 +26,9 @@ function nus_teardown($ids, $extra) {
     }
     $wpdb->query("DELETE FROM {$wpdb->prefix}mpfc_leagues WHERE name LIKE 'NUSTEST%'");
     $wpdb->query("DELETE FROM mm_applied_bundles WHERE bundle_id = 999999");
+    foreach ($wpdb->get_col("SELECT ID FROM {$wpdb->posts} WHERE post_title LIKE 'NUSTEST%' AND post_type = 'post'") as $p) wp_delete_post($p, true);
+    $orig = get_option('nus_test_page247_backup');
+    if ($orig !== false) { $wpdb->update($wpdb->posts, ['post_content' => $orig], ['ID' => 247]); delete_option('nus_test_page247_backup'); clean_post_cache(247); }
     foreach ($wpdb->get_col("SELECT ID FROM {$wpdb->users} WHERE user_login LIKE 'nus.jsonapi.%@example.com'") as $uid) {
         $wpdb->delete('mm_user_data', ['wp_user_id' => $uid]); wp_delete_user($uid);
     }
@@ -66,6 +69,17 @@ $toggles = [
 if ($mode === 'bogus-bundle') {
     $wpdb->insert('mm_applied_bundles', ['bundle_id' => 999999, 'access_type' => 'user', 'access_type_id' => (int) $args[1], 'status' => 1, 'apply_date' => current_time('mysql')]);
     echo "bogus bundle added\n"; return;
+}
+// member achievements back to the fixture state (otherpages/store_web_usage overwrites them)
+if ($mode === 'member-achievements') {
+    $wpdb->update($wpdb->users, ['achievements' => json_encode(['first_training' => 1, '20_m_training' => true, 'x_day_in_row' => 3,
+        'x_day_training' => 5, 'uploaded_video' => true, 'player_of_week' => true, 'training_count' => 4])], ['ID' => $member]);
+    echo "achievements reset\n"; return;
+}
+// fresh auth cookie for a user (after setPassword invalidates the old one)
+if ($mode === 'cookie') {
+    $u = get_user_by('login', $args[1]);
+    echo json_encode(['cookie' => wp_generate_auth_cookie($u->ID, time() + 7200, 'logged_in')]), "\n"; return;
 }
 if (isset($toggles[$mode])) { $wpdb->query($toggles[$mode]); echo "$mode done\n"; return; }
 
@@ -155,6 +169,27 @@ foreach (['NUSTEST collection' => implode(',', $cv), 'NUSTEST empty collection' 
     update_post_meta($c, 'ph_collected_posts', $ids);
     $out['collections'][] = $c;
 }
+
+// legacy WPBakery layouts the old parsers expect (current pages are Elementor): synthetic posts + temporary page 247
+$out['session_points_post'] = wp_insert_post(['post_type' => 'post', 'post_status' => 'draft', 'post_title' => 'NUSTEST session points',
+    'post_content' => "title=\"Session\" title=\"Points\" <li>Point one</li><li>Point two</li> [x value=\"10\"] <ul>\n\t[y title=\"Warm up\"]\n<h2 style=\"text-align: center;\">Part 2</h2>"]);
+$out['session_videos_post'] = wp_insert_post(['post_type' => 'post', 'post_status' => 'draft', 'post_title' => 'NUSTEST session videos',
+    'post_content' => "intro\n<h2 style=\"text-align: center;\">Drill A</h2>[fvplayer src=\"https://vimeo.com/111\"]<h3>Suggested</h3><h3>Tips</h3><ul><li style=\"text-align: left;\">5 min<br>x</li></ul><ul><li>tip<br>y</li></ul>[vc_column_text]raw\ntext[/vc_column_text]"
+        . "\n<h2 style=\"text-align: center;\">Drill B</h2>[other]<h3>S</h3><ul><li>a</li></ul><ul><li>b</li></ul>"]);
+if (get_option('nus_test_page247_backup') === false) add_option('nus_test_page247_backup', $wpdb->get_var("SELECT post_content FROM {$wpdb->posts} WHERE ID = 247"), '', 'no');
+$wpdb->update($wpdb->posts, ['post_content' =>
+    "[vc_single_image image=\"11\"]\r\n<h3>Sub head</h3>\r\nDesc one\r\n\r\nDesc two\r\n\r\nDesc three[/vc_column_text][dt_gap height=\"10\"]"
+    . "[vc_single_image image=\"12\"]"
+    . "[vc_single_image image=\"13\"]<h3>Player One</h3><em>U12</em><blockquote>Great <a href=\"https://example.com\" target=\"_blank\">story</a>\r\n\r\n\r\nPlayer One Sr</blockquote>"
+    . "[vc_single_image image=\"12\"]<h3>Player Two</h3><em>U14</em><blockquote>Plain story\r\n\r\n\r\nPlayer Two Sr</blockquote>"], ['ID' => 247]);
+clean_post_cache(247);
+
+// leaderboards: lvl2 user has only a last name (name fallback) and big totals; lvl1 has <60s app usage (skipped row)
+$lvl2 = $out['users']['nus_jsonapi_lvl2']['id'];
+$wpdb->update('mm_user_data', ['first_name' => '', 'last_name' => 'Lastonly'], ['wp_user_id' => $lvl2]);
+$wpdb->insert('mm_app_usage', ['wp_user_id' => $lvl2, 'usage_date' => date('Y-m-d'), 'duration' => 99999, 'membership_id' => 2, 'user_name' => 'nus', 'date_added' => $now]);
+$wpdb->insert('wp_wpcw_units_time', ['user_id' => $lvl2, 'unit_id' => 1, 'timer' => 99999, 'created' => time() - 60]);
+$wpdb->insert('mm_app_usage', ['wp_user_id' => $lvl1, 'usage_date' => date('Y-m-d', strtotime('-3 days')), 'duration' => 30, 'membership_id' => 1, 'user_name' => 'nus', 'date_added' => $now]);
 
 $out['post'] = $post;
 $out['units'] = array_map('intval', $units);

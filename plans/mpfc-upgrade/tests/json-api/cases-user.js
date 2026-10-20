@@ -40,7 +40,8 @@ module.exports = async ({ call, check, err, ok, any, cfg, sessions, fixturesMode
   await check('user/add_plan android fake token', ap({ type: 'android', receipt: '{"purchaseToken":"fake"}', product_id: 'com.onbit.footballcoach.coach_pass' }), any());
 
   // --- trophies: member has achievements + leaderboard time (fixtures), new user has none
-  await check('user/trophies member (achievements, leaderboard)', call('user/trophies', { as: 'member' }), ok((j) => j.trophies && j.training_count === 4));
+  fixturesMode('member-achievements');
+  await check('user/trophies member (achievements, leaderboard)', call('user/trophies', { as: 'member' }), ok((j) => j.trophies && j.training_count >= 4 && j.trophies['Player of the week'] === 1));
   await check('user/trophies new user (empty)', call('user/trophies', { q: { cookie: ck(c) } }), ok((j) => j.status === 'success'));
 
   await check('user/trophies completed course (lvl1, from dbm cases)', call('user/trophies', { as: 'nus_jsonapi_lvl1' }), ok((j) => j.status === 'success'));

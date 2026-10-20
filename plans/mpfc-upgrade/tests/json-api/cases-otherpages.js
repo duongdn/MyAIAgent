@@ -24,6 +24,7 @@ module.exports = async ({ call, check, err, ok, any, fx, sessions }) => {
   for (const ep of ['app_usage_leaderboard', 'v1_app_usage_leaderboard', 'get_timer_training_leaderboard']) {
     await check(`otherpages/${ep} own level`, call(`otherpages/${ep}`, { as: 'member' }), ok((j) => j.status === 'success'));
     await check(`otherpages/${ep} lvis`, call(`otherpages/${ep}`, { as: 'member', q: { lvis: '[1,9]' } }), ok((j) => j.status === 'success'));
+    await check(`otherpages/${ep} lvis last-name-only + <60s rows`, call(`otherpages/${ep}`, { as: 'member', q: { lvis: '[1,2]' } }), ok((j) => /Lastonly/.test(JSON.stringify(j))));
   }
   for (const ep of ['app_usage_statistic', 'v1_app_usage_statistic', 'get_timer_training_clock']) {
     await check(`otherpages/${ep} member (rows)`, call(`otherpages/${ep}`, { as: 'member' }), ok((j) => j.status === 'success'));

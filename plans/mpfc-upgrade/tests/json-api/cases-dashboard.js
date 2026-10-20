@@ -29,6 +29,7 @@ module.exports = async ({ call, check, err, ok, bad, any, cfg, sessions, fixture
   // ---- write endpoints with id= (only on the throwaway lvl1 user)
   await check('dashboard/changeAccountInfo lvl1', call('dashboard/changeAccountInfo', { q: { id: lvl1, first_name: 'Nus', last_name: 'Changed', phone: '1', email: 'nus_jsonapi_lvl1@example.com' } }), ok());
   await check('dashboard/setPassword lvl1', call('dashboard/setPassword', { q: { id: lvl1, password: `Pw-${Date.now()}-x` } }), ok());
+  sessions.nus_jsonapi_lvl1.cookie = fixturesMode('cookie nus_jsonapi_lvl1').cookie;   // new password invalidates old cookies
   await check('dashboard/canselMembership lvl1', call('dashboard/canselMembership', { q: { id: lvl1, course_id: 999 } }), ok());
 
   // ---- cached ESGrid lists: build without access, build with app_version, build with access, then cached

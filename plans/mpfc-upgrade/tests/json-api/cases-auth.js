@@ -12,6 +12,7 @@ module.exports = async ({ call, check, err, ok, cfg, sessions, login }) => {
   const again = await check('auth/generate same device (update path)', call('auth/generate_auth_cookie',
     { form: { username: m.user, password: m.password }, q: { device_token: dev, device_os: 'ios' } }), ok((j) => !!j.cookie));
 
+  await check('auth/generate inactive membership (admin) -> 403', call('auth/generate_auth_cookie', { form: { username: cfg.test_users.admin.user, password: cfg.test_users.admin.password } }), err(/membership/));
   await check('auth/validate no cookie', call('auth/validate_auth_cookie'), err(/cookie/));
   await check('auth/validate bad cookie', call('auth/validate_auth_cookie', { q: { cookie: 'bad|1|x|y' } }), ok((j) => j.valid === false));
   await check('auth/validate good cookie', call('auth/validate_auth_cookie', { as: 'member' }), ok((j) => j.valid === true));

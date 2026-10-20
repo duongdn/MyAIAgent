@@ -153,3 +153,25 @@ diff -ruN a/wp-content/themes/pfc7/wpbakery/js_composer/include/classes/shortcod
  			$output .= '<div ' . $this->mainHtmlBlockParams( $width, $i ) . '>';
  			$output .= str_replace( "%column_size%", wpb_translateColumnWidthToFractional( $width[$i] ), $column_controls );
  			$output .= '<div class="wpb_element_wrapper">';
+diff -ru a/wp-content/plugins/json-api/controllers/dashboard.php b/wp-content/plugins/json-api/controllers/dashboard.php
+--- a/wp-content/plugins/json-api/controllers/dashboard.php
++++ b/wp-content/plugins/json-api/controllers/dashboard.php
+@@ -1793,6 +1793,7 @@
+         preg_match_all('|_self\">(.+?)</a>|',$string , $skillsLibrary3);
+ 
+         $replace_desc = str_replace('eg-mpfc-custom-2-mckinley-element-6">', '<div> ', $string);
++        $vDesc = array(); // PHP 8: array_push() on null is a TypeError
+         $explodeDesc = explode("<div>", $replace_desc);
+ 
+         for($j = 1; $j < sizeof($explodeDesc); $j++){
+diff -ru a/wp-content/plugins/json-api/controllers/virtualacademy.php b/wp-content/plugins/json-api/controllers/virtualacademy.php
+--- a/wp-content/plugins/json-api/controllers/virtualacademy.php
++++ b/wp-content/plugins/json-api/controllers/virtualacademy.php
+@@ -367,6 +367,7 @@
+         preg_match_all('|_self\">(.+?)</a>|',$string , $skillsLibrary3);
+ 
+         $replace_desc = str_replace('eg-mpfc-custom-2-mckinley-element-6">', '<div> ', $string);
++        $vDesc = array(); // PHP 8: array_push() on null is a TypeError
+         $explodeDesc = explode("<div>", $replace_desc);
+ 
+         for($j = 1; $j < sizeof($explodeDesc); $j++){
