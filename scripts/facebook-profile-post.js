@@ -44,13 +44,30 @@ async function chooseAudience(page, label) {
   await sleep(1500);
 }
 
-async function latestOwnPostUrl(page) {
+// FB only fills the timestamp permalink href on hover, so locate the post card by
+// its opening text, hover each of its links, then read back the /posts/ href.
+async function findOwnPostUrl(page, snippet) {
   await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
   await sleep(3000);
-  return page.$$eval('[role="main"] a[href*="/posts/"]', as => {
-    const href = as.map(a => a.href.split('?')[0]).find(h => /\/posts\//.test(h));
-    return href || null;
-  });
+  for (let i = 0; i < 6; i++) {
+    const marked = await page.evaluate(snippet => {
+      const cards = [...document.querySelectorAll('[role="main"] div[aria-posinset], [role="main"] [role="article"]')];
+      const card = cards.find(c => c.innerText.includes(snippet));
+      if (!card) return false;
+      card.querySelectorAll('a').forEach((a, idx) => a.setAttribute('data-fbpost-link', idx));
+      return true;
+    }, snippet);
+    if (marked) break;
+    await page.evaluate(() => window.scrollBy(0, 700));
+    await sleep(1500);
+  }
+  for (const link of await page.$$('a[data-fbpost-link]')) {
+    try { await link.hover(); } catch { continue; }
+    await sleep(300);
+    const href = await link.evaluate(a => a.href);
+    if (/\/posts\/|story_fbid=|\/permalink\//.test(href)) return href.split(/[?&]__cft__/)[0].split('?comment_id')[0];
+  }
+  return null;
 }
 
 async function createDraft(page, text, dryRun) {
@@ -91,7 +108,7 @@ async function createDraft(page, text, dryRun) {
   await postBtn.click();
   await page.waitForFunction(() => !document.querySelector('[role="dialog"] [role="textbox"]'), { timeout: 30000 });
   await sleep(4000);
-  return { ok: true, mode: 'draft', audience: AUDIENCE_LABELS.onlyme, postUrl: await latestOwnPostUrl(page) };
+  return { ok: true, mode: 'draft', audience: AUDIENCE_LABELS.onlyme, postUrl: await findOwnPostUrl(page, text.slice(0, 40)) };
 }
 
 async function submitPost(page, postUrl, audienceKey) {
