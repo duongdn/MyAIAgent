@@ -75,7 +75,7 @@ Không cần nhớ API; cần biết mỗi khái niệm của sơ đồ nằm �
 - 🧠 lượt 2: model đọc kết quả, đề xuất create_ticket P3/billing-team-a.
 - ④ code kiểm tra tham số hợp lệ → SDK DỪNG chờ người duyệt (Session 7).
 - Sau khi duyệt: ticket T-1001, lượt 3 model viết câu trả lời có nguồn.
-Tổng: 3 lượt gọi model, ~3.000 token. Số bước do model quyết định — đó là "agent".`);
+Tổng: 3 lượt gọi model, 2.511 token vào + 489 ra. Số bước do model quyết định — đó là "agent".`);
   code(s, 30, 85, 660, 250, `🛡  0.0s  guardrail no_card_number triggered=False
 🧠  1.6s  model call deepseek-v4.1-flash tokens=574+81
 🤖        model gọi search_kb(query='lỗi thanh toán mã E205')
@@ -86,7 +86,7 @@ Tổng: 3 lượt gọi model, ~3.000 token. Số bước do model quyết đị
 ④        hợp lệ  →  📌 AWAITING_APPROVAL  →  ⑤ ĐỒNG Ý
 🔧  0.0s  tool create_ticket → '{"ticket_id": "T-1001", "status": "created"}'
 🧠  1.9s  model call tokens=1109+156  → câu trả lời có nguồn kb-a-001, kb-a-002
-💰 3 lượt gọi model, 2511 input + 489 output tokens`, 11);
+💰 3 lượt gọi model, 2.511 input + 489 output tokens`, 11);
   label(s, 30, 340, 660, 30, 'Bước 1: tìm tài liệu · Bước 2: đề xuất ticket · Application dừng để người duyệt trước khi tạo', { size: 12, bold: false, color: C.GREY, align: 'START' });
 
   s = newSlide('Tool contract', 'Tool contract có 6 phần — model chỉ nhìn thấy 3', `Contract = thoả thuận giữa model, application và hệ thống đích.
@@ -100,20 +100,49 @@ Hay quên nhất: error và side effect. Thiếu side effect → không biết t
   label(s, 30, 88, 400, 20, 'MODEL THẤY — quyết định chọn tool và điền tham số', { size: 10, color: C.ORANGE, align: 'START' });
   label(s, 30, 213, 400, 20, 'APPLICATION PHẢI ĐỊNH NGHĨA — model không thấy', { size: 10, color: C.ORANGE, align: 'START' });
 
-  s = newSlide('Description', 'Model chọn tool dựa vào description', `Description là prompt nhỏ cho từng tool. Model đọc nó để quyết định khi nào gọi tool.
-Description ngắn kiểu "Tạo ticket" → model không biết P1-P4 nghĩa là gì, assignee điền gì → tự bịa (eval thật: qwen-3.7-flash tự bịa "P2"/"billing team").
-Description tốt nói: khi nào dùng, KHI NÀO KHÔNG dùng, ý nghĩa từng tham số, giá trị hợp lệ.
-Nhưng nhớ: description chỉ là hướng dẫn. Rule thật (chỉ P3/P4, assignee whitelist) vẫn phải nằm trong code — Session 7.`);
-  label(s, 30, 88, 320, 20, 'CHƯA ĐỦ', { size: 10, color: C.ORANGE, align: 'START' });
-  code(s, 30, 110, 320, 120, `create_ticket:
-"Tạo ticket hỗ trợ."`, 12);
-  label(s, 370, 88, 320, 20, 'ĐỦ ĐỂ MODEL CHỌN ĐÚNG', { size: 10, color: C.ORANGE, align: 'START' });
-  code(s, 370, 110, 320, 120, `create_ticket:
-"Tạo ticket hỗ trợ. Chỉ dùng khi user
- yêu cầu. priority: P1 (khẩn cấp) đến
- P4 (thấp). assignee: team nhận ticket."`, 11);
-  box(s, 30, 250, 660, 50, 'Description = hướng dẫn cho model. Rule bắt buộc (P3/P4, team hợp lệ) vẫn kiểm tra bằng code.', { fill: C.YELLOW, size: 13 });
-  label(s, 30, 310, 660, 40, 'Eval thật: model yếu tự điền "P2" / "billing team" khi description mơ hồ → bị checkpoint ④ chặn', { size: 12, bold: false, color: C.GREY, align: 'START' });
+  // Bằng chứng: đúng phần contract SDK gửi cho model (compare_tool_descriptions.py --schema)
+  s = newSlide('Contract · model thấy gì', 'SDK gửi cho model đúng 3 thứ: name, description, schema', `Đây là output thật của: python3 compare_tool_descriptions.py --schema (không gọi model, chạy tức thì — nên chạy live).
+SDK tự sinh JSON schema từ type hint của hàm Python (title: str, priority: str, assignee: str). Description lấy từ description_override (hoặc docstring).
+Chỉ vào chỗ KHÔNG có: không có output, không có lỗi, không có side effect. Model không biết create_ticket ghi vào hệ thống thật, không biết gọi 2 lần là 2 ticket.
+Cũng thấy luôn điểm yếu: priority chỉ là "string" — schema không nói P3/P4. Model chỉ còn description để đoán → slide sau đo xem đoán sai bao nhiêu.`);
+  code(s, 30, 86, 400, 262, `{
+ "name": "create_ticket",
+ "description": "Tạo ticket hỗ trợ. priority:
+    P1 (khẩn cấp) đến P4 (thấp). assignee:
+    team nhận ticket.",
+ "parameters": {
+  "properties": {
+   "title":    {"type": "string"},
+   "priority": {"type": "string"},
+   "assignee": {"type": "string"}
+  },
+  "required": ["title", "priority", "assignee"]
+ }
+}`, 9.5);
+  box(s, 445, 86, 245, 120, 'Không có trong thứ model nhận\noutput · error · side effect', { fill: C.ORANGE, size: 15, sub: 12 });
+  box(s, 445, 218, 245, 130, 'priority chỉ là "string"\nschema không nói P3/P4 — model chỉ còn description để đoán', { fill: C.INK, size: 14, sub: 11 });
+
+  question('Chỉ đổi description — model điền sai tham số bao nhiêu lần?', 'Cùng yêu cầu "tạo ticket cho billing team", cùng model, 5 lần mỗi bản.',
+    `Cho lớp đoán trước: bản mơ hồ sai mấy lần trên 5? Bản tốt nhất có về 0 không?`);
+
+  s = newSlide('Đáp án · đo thật', 'Description càng rõ giá trị hợp lệ, model càng ít điền sai', `Số đo thật: compare_tool_descriptions.py --runs 5, deepseek-v4.1-flash. Chỉ đổi description của create_ticket, mọi thứ khác giữ nguyên. Đếm đề xuất create_ticket ĐẦU TIÊN bị checkpoint ④ chặn (sai luật P3/P4 hoặc assignee không hợp lệ).
+- Mơ hồ ("Tạo ticket hỗ trợ."): 5/5 sai — model tự đặt "high", "medium", "billing team".
+- Có ý nghĩa tham số (bản đang dùng trong demo): 2/5 sai — model chọn P2 vì lỗi thanh toán "có vẻ" quan trọng.
+- Có liệt kê giá trị hợp lệ: 0/5.
+Điểm quan trọng: cả 15 lần đều tạo được ticket — khi bị chặn, lỗi trả về cho model (dữ liệu, không phải exception) và model tự sửa ở lượt sau. Description kém = tốn thêm lượt gọi, không phải hỏng hẳn.
+Và: description chỉ là hướng dẫn. Đổi description không thay được kiểm tra bằng code — model vẫn có thể bỏ qua (Session 7).
+Chạy lại: python3 compare_tool_descriptions.py --runs 5 (~2 phút) — chạy trước buổi, trong buổi chỉ cần --schema.`);
+  const rows = [['"Tạo ticket hỗ trợ."', 'mơ hồ', 5, 'high · medium · "billing team"'],
+    ['+ ý nghĩa P1–P4, assignee', 'đang dùng', 2, 'P2'],
+    ['+ "chỉ P3 hoặc P4", danh sách team', 'giá trị hợp lệ', 0, '—']];
+  rows.forEach(([d, tag, n, ex], i) => {
+    const y = 92 + i * 66;
+    label(s, 30, y, 230, 44, `${d}\n${tag}`, { size: 12, sub: 10, align: 'START' });
+    box(s, 270, y + 8, Math.max(n, 0.15) * 44, 28, ' ', { fill: n ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
+    mono(s, 280 + Math.max(n, 0.15) * 44, y + 12, 60, 20, `${n}/5`, { color: C.INK, size: 13 });
+    label(s, 575, y + 8, 115, 28, ex, { size: 10, bold: false, color: C.GREY, align: 'START' });
+  });
+  box(s, 30, 296, 660, 52, 'Cả 15 lần đều tạo được ticket: bị ④ chặn → lỗi quay về model → model tự sửa. Description kém = thêm lượt gọi; rule vẫn phải chặn bằng code.', { fill: C.INK, size: 12, align: 'START' });
 
   s = newSlide('Read vs write', 'Tách read tool khỏi write tool — vì rủi ro khác hẳn nhau', `Read tool (search_kb) đọc dữ liệu: gọi nhiều lần không sao, retry thoải mái, không cần duyệt — nhưng vẫn phải lọc quyền.
 Write tool (create_ticket) có side effect: gọi 2 lần = 2 ticket; cần kiểm tra tham số, có thể cần người duyệt, retry phải có idempotency (Session 7).
@@ -144,6 +173,7 @@ Output của create_ticket là JSON có ticket_id do hệ thống đích trả �
 
   s = newSlide('Đáp án', 'Run kết thúc ≠ task hoàn thành', `Model có thể nói "đã tạo" khi: tool bị chặn, tool timeout, hay đơn giản là bịa. Câu trả lời của model không phải bằng chứng.
 Bằng chứng = ticket_id do hệ thống đích trả về. Demo: task_state.finish() chỉ đánh dấu COMPLETED khi có ticket_id; nếu model nói "đã tạo" mà không có ID → ESCALATED (claimed_without_confirmation).
+Demo live (~10 giây): python3 run_demo.py --scenario 1 --approve yes --fault down → helpdesk trả 503, application retry rồi ghi 📌 ESCALATED (ticket_system_unavailable), dòng cuối "Ticket trong hệ thống đích: không có". Trạng thái do application quyết theo kết quả thật, không theo câu trả lời của model.
 Session 8 sẽ đi tiếp: state machine và điều kiện dừng.`);
   [['Model nói', '"Đã tạo ticket cho bạn"', C.YELLOW], ['Application kiểm tra', 'có ticket_id từ hệ thống đích?', C.NAVY]].forEach(([t, d, f], i) =>
     box(s, 30 + i * 340, 100, 320, 70, `${t}\n${d}`, { fill: f, size: 16, sub: 12 }));
@@ -168,5 +198,6 @@ Session 8 sẽ đi tiếp: state machine và điều kiện dừng.`);
   ], `Bài tự thực hành theo đề cương. Câu hỏi nhanh cho Q&A:
 1. Trường nào model không thấy nhưng quan trọng nhất cho an toàn? → side effect.
 2. Vì sao không gộp read/write vào một tool? → không áp được rule riêng.
-3. Model gọi 2 tool trong cùng 1 lượt có được không? → được (trace kịch bản 7: 2 search_kb trong 1 lượt) — Session 8 sẽ dùng chi tiết này.`);
+3. Model gọi 2 tool trong cùng 1 lượt có được không? → được (trace kịch bản 7: 2 search_kb trong 1 lượt) — Session 8 sẽ dùng chi tiết này.
+4. Description tốt khác chưa đủ ở đâu? → nói ý nghĩa và GIÁ TRỊ HỢP LỆ của tham số (đo thật: điền sai 5/5 → 2/5 → 0/5). Nhưng rule vẫn kiểm tra bằng code.`);
 };

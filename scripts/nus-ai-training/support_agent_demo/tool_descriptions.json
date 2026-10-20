@@ -1,0 +1,39 @@
+{
+ "model": "deepseek-v4.1-flash",
+ "question": "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.",
+ "rows": [
+  {
+   "description": "mơ hồ",
+   "text": "Tạo ticket hỗ trợ.",
+   "runs": 5,
+   "first_proposal_wrong": 5,
+   "blocked_total": 5,
+   "tickets_created": 5,
+   "wrong_examples": [
+    "high/billing team",
+    "high/billing-team-a",
+    "medium/billing-team-a"
+   ]
+  },
+  {
+   "description": "có ý nghĩa tham số",
+   "text": "Tạo ticket hỗ trợ. priority: P1 (khẩn cấp) đến P4 (thấp). assignee: team nhận ticket.",
+   "runs": 5,
+   "first_proposal_wrong": 2,
+   "blocked_total": 2,
+   "tickets_created": 5,
+   "wrong_examples": [
+    "P2/billing-team-a"
+   ]
+  },
+  {
+   "description": "có giá trị hợp lệ",
+   "text": "Tạo ticket hỗ trợ. priority: P1 (khẩn cấp) đến P4 (thấp). assignee: team nhận ticket. Agent chỉ được tạo priority P3 hoặc P4. assignee phải là một trong: billing-team-a, support-team-a.",
+   "runs": 5,
+   "first_proposal_wrong": 0,
+   "blocked_total": 0,
+   "tickets_created": 5,
+   "wrong_examples": []
+  }
+ ]
+}
