@@ -11,12 +11,12 @@ Trello task: đăng 1 bài FB (sau này Zalo) mỗi ngày. Default = draft, user
 ## Phases
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Style profile: scrape ~30 bài cũ của user → `docs/memory/fb-post/reference_user_writing_style.md` | todo |
-| 2 | Content picker: gom nguồn 3 ngày gần nhất, chống trùng với `data/fb-post-history.json` | todo |
-| 3 | `scripts/facebook-profile-post.js` — `--draft` (Only me) / `--submit <postUrl> [--audience public\|friends]` / `--dry-run` | todo |
-| 4 | Command `.claude/commands/me/fb-post.md` (`/me:fb-post`, `--submit`) | todo |
-| 5 | `scripts/autorun-fb-post.sh` + crontab `0 7 * * *` (skip nếu đã có draft hôm nay) | todo |
-| 6 | Test dry-run → 1 draft thật → user submit thử | todo |
+| 1 | Style profile — bỏ (user chưa có bài cũ) | skipped |
+| 2 | Content picker: gom nguồn 3 ngày gần nhất, chống trùng với `data/fb-post-history.json` | done |
+| 3 | `scripts/facebook-profile-post.js` — `--draft` (Only me) / `--submit <postUrl> [--audience public\|friends]` / `--dry-run` | done |
+| 4 | Command `.claude/commands/me/fb-post.md` (`/me:fb-post`, `--submit`) | done |
+| 5 | `scripts/autorun-fb-post.sh` + crontab `0 7 * * *` (skip nếu đã có draft hôm nay) | done |
+| 6 | Test dry-run → 1 draft thật → user submit thử | draft thật done, submit chờ user |
 
 ## Guardrails
 - Không bao giờ auto đổi sang Public; chỉ khi user chạy `--submit`

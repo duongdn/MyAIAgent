@@ -117,19 +117,14 @@ async function submitPost(page, postUrl, audienceKey) {
   await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
   assertLoggedIn(page);
   await sleep(3000);
-  // The post header shows a privacy icon button ("Đã chia sẻ với Chỉ mình tôi" etc.)
-  const [privacyIcon] = await page.$$('xpath/.//*[@role="button" or @role="img"][contains(@aria-label,"Chỉ mình tôi")]');
-  if (privacyIcon) {
-    await privacyIcon.click();
-  } else {
-    const [menu] = await page.$$('xpath/.//div[@role="button"][@aria-label="Hành động với bài viết này"]');
-    if (!menu) throw new Error('post actions menu not found');
-    await menu.click();
-    await sleep(1500);
-    const [item] = await page.$$('xpath/.//div[@role="menuitem"][.//span[contains(text(),"Chỉnh sửa đối tượng")]]');
-    if (!item) throw new Error('"Chỉnh sửa đối tượng" menu item not found');
-    await item.click();
-  }
+  // A permalink opens the post as a dialog over the feed — use that dialog's own "..." menu
+  const [menu] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][starts-with(@aria-label,"Hành động đối với bài viết này")]');
+  if (!menu) throw new Error('post actions menu not found');
+  await menu.click();
+  await sleep(1500);
+  const [item] = await page.$$('xpath/.//div[@role="menuitem"][.//span[text()="Chỉnh sửa đối tượng"]]');
+  if (!item) throw new Error('"Chỉnh sửa đối tượng" menu item not found');
+  await item.click();
   await sleep(2000);
   await chooseAudience(page, label);
   return { ok: true, mode: 'submit', postUrl, audience: label };
