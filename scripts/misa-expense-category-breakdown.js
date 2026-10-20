@@ -17,7 +17,7 @@ const GROUPS = {
   '🛍️ Mua sắm': ['Trang phục', 'Giầy dép', 'Máy tính', 'Phụ kiện khác', 'Đồ gia dụng', 'Làm đẹp', 'Mua sắm đồ đạc'],
   '🏖️ Hưởng thụ': ['Du lịch', 'Vui chơi giải trí', 'Phim ảnh ca nhạc', 'Hưởng thụ'],
   '💼 Công việc / Phí': ['Công việc', 'Phí chuyển khoản', 'Phí ngân hàng'],
-  '❓ Linh tinh': ['Linh tinh'],
+  '❓ Linh tinh': ['Linh tinh', 'Tiền ra'],
 };
 const norm = (s) => String(s || '(không có)').replace(/\s+/g, ' ').trim();
 const LOOKUP = {};
