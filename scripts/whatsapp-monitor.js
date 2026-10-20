@@ -136,13 +136,19 @@ async function main() {
             const m = pre.match(/^\[(\d{1,2}):(\d{2}),\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\]/);
             if (!m) continue; // no full timestamp (rare) — skip
             const ts = new Date(+m[5], +m[4] - 1, +m[3], +m[1], +m[2]).getTime();
-            const incoming = !!el.querySelector('[data-testid="tail-in"]');
-            const author = el.querySelector('[data-testid="author"]')?.innerText?.trim() || '';
-            const text = Array.from(el.querySelectorAll('[data-testid*="selectable-text"]'))
-              .map(e => e.innerText.trim()).filter(Boolean).join('\n');
+            // tail-in/tail-out only render on the FIRST bubble of a consecutive group,
+            // so direction is resolved after collection via the pre-plain-text author
+            const tailIn = !!el.querySelector('[data-testid="tail-in"]');
+            const tailOut = !!el.querySelector('[data-testid="tail-out"]');
+            const author = pre.replace(/^\[[^\]]*\]\s*/, '').replace(/:\s*$/, '').trim();
+            // skip nested nodes (@mentions, links) and quoted-reply previews to avoid duplicated text
+            const text = [...new Set(Array.from(el.querySelectorAll('[data-testid*="selectable-text"]'))
+              .filter(e => !e.parentElement.closest('[data-testid*="selectable-text"]') &&
+                !e.closest('[data-testid="quoted-message"]'))
+              .map(e => e.innerText.trim()).filter(Boolean))].join('\n');
             if (!text) continue;
             const key = ts + '|' + author + '|' + text;
-            if (!seen.has(key)) seen.set(key, { ts, author, text, incoming });
+            if (!seen.has(key)) seen.set(key, { ts, author, text, tailIn, tailOut });
           }
         }
 
@@ -176,7 +182,11 @@ async function main() {
             noGrowth = 0;
           }
         }
-        return Array.from(seen.values()).sort((a, b) => a.ts - b.ts);
+        const msgs = Array.from(seen.values()).sort((a, b) => a.ts - b.ts);
+        // self = any author seen on a tail-out bubble; everyone else is incoming
+        const selfAuthors = new Set(msgs.filter(m => m.tailOut).map(m => m.author));
+        for (const m of msgs) m.incoming = m.tailIn || (!m.tailOut && !selfAuthors.has(m.author));
+        return msgs;
       }, since);
 
       // 4) Filter to the window + shape output (timestamps are already exact)
