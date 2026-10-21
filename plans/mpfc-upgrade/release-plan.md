@@ -14,14 +14,15 @@ Chi tiết lệnh: `runbook.md`. Kết quả test: `test-results.md`.
 | 2 | Giờ cutover: thấp điểm UK, đề xuất **thứ Ba/Tư 06:00 UK (12:00 VN)** | Saul |
 | 3 | Backup DB cluster (DO snapshot/managed backup) ngay trước giờ G | em |
 | 4 | Có chuyển staging + 3 app phụ (MyDailyAgent, quantification, MyBussinessAiAgent) cùng lúc không? Đề xuất: **không**, làm đợt sau | anh |
-| 5 | Size droplet mới: **= live (4 vCPU/8 GB, 160G)**, region lon1 | anh |
+| 5 | Dùng luôn droplet test `608944558` làm production, resize lên **= live (4 vCPU/8 GB, disk 160G — resize disk là vĩnh viễn)** | anh |
 
-## 2. T-2 ngày: dựng server mới (không ảnh hưởng live)
-1. Tạo droplet mới (lon1, 4 vCPU/8 GB, tag `mpfc`, cùng VPC với DB cluster) → thêm IP vào trusted sources của DB cluster.
-2. `01-provision-server.sh` (KHÔNG `--test`): Apache + PHP 8.3, vhost, cert LE copy từ live, Redis, unit Resque (chưa start).
-3. `02-build-code.sh`: rsync code live → WP 7.1.3 + plugin đúng version + patch PHP 8.3 + MM 3.1.1 custom + Elementor Pro 4.3.2 + `/var/www/keys` (Apple .p8).
-4. Kiểm offline qua hosts file (trỏ domain → IP mới, chỉ máy em): trang chủ, login, wp-admin — **chưa chạy 03** (DB vẫn là của live, code mới đọc được DB cũ).
-   ⚠️ Không thao tác ghi trên server mới ở bước này (dùng chung DB live).
+## 2. T-2 ngày: chuyển droplet test thành production (không ảnh hưởng live)
+1. Snapshot droplet test (để quay lại được) → power off → **resize** `s-4vcpu-8gb` (CPU/RAM + disk) → power on (~5 phút downtime của test, không liên quan live).
+2. Dọn đồ chỉ dành cho test: mu-plugin `zz-upgrade-test-safety.php`, `zz-upgrade-test-pcov.php` + `php8.3-pcov`, `/var/www/jsonapi-cov`, user test `nus_upgrade_*`/`nus_jsonapi_*` (nằm ở DB test, không theo sang).
+3. `01-provision-server.sh` (KHÔNG `--test`): vhost production + cert LE từ live, unit Resque (chưa start), swap theo RAM mới.
+4. `02-build-code.sh` (KHÔNG `--test`): rsync `--delete` lấy code + `wp-config.php` của live (trỏ DB live) → WP 7.1.3 + plugin + patch + `/var/www/keys`. Từ lúc này server dùng chung DB live → **không thao tác ghi**, không chạy 03.
+5. Bỏ basic auth + DNS `upgrade-test`; kiểm offline qua hosts file (domain thật → IP droplet, chỉ máy em): trang chủ, login, wp-admin.
+6. Thêm IP droplet vào trusted sources DB cluster (đã có, kiểm lại).
 
 ## 3. Giờ G — cutover (≈ 30–45 phút)
 | Phút | Bước |
@@ -55,7 +56,7 @@ Thời gian ≈ 10 phút. Giữ live cũ **1–2 tuần** không xoá.
 
 ## 6. Sau release
 - Theo dõi 48h: Rollbar, New Relic, đơn hàng/rebilling MM, push notification.
-- T+1 tuần: dọn droplet test `608944558`, DB `wp_mpfc_upgrade`, DNS `upgrade-test`, key/ssh test trên live, mu-plugin pcov.
+- T+1 tuần: xoá DB test `wp_mpfc_upgrade`, snapshot droplet test, key/ssh test trên live.
 - T+2 tuần: xoá droplet live cũ (sau snapshot).
 - Đợt sau: chuyển app phụ (checklist trong runbook, tăng size droplet), vá lỗ hổng json-api (`setPassword`, `changeAccountInfo`…), đóng mailcatcher 1080, update plugin premium nếu có license.
 
