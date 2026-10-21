@@ -22,7 +22,9 @@ Chi tiết lệnh: `runbook.md`. Kết quả test: `test-results.md`.
 2. ✅ `04-move-side-apps.sh --prepare`: Chrome, Xvfb, x11vnc, gh, npm global (claude-code, gemini, codex, claudekit, repomix, wrangler, pnpm, rmbg) đúng version live; rsync `/var/www/MyDailyAgent` (3.6G, gồm `tmp/` profile browser đã login), `/var/www/MyBussinessAiAgent`, dotfiles `/home/mpfc` (.claude, .config, .ssh…); htpasswd, unit `mydailyagent-web`/`quantification-web`, vhost + cert LE copy sẵn. **Chưa bật** cron/service (tránh daily-report gửi tin 2 lần).
 
 3b. ✅ **App phụ đã chuyển 21/10 17:10** (anh đồng ý chấp nhận downtime): `04 --activate` — crontab mpfc trên live đã xoá (backup `~/mpfc-crontab.backup-20261021`), 2 web service + x11vnc live đã tắt; server mới: crontab 6 dòng, `mydailyagent-web` (3334), `quantification-web` (3335), Xvfb :1, x11vnc **chỉ localhost** đều active. DNS `dailyagent` → `144.126.236.208`. Claude Code 2.1.296 + session/credentials chuyển qua, `claude -p` OK, `autorun-hello.sh` OK. **Còn**: DNS `quantification.youragentstore.net` (zone Cloudflare khác).
-3c. ✅ DNS `staging`, `staging-admin` → IP riêng droplet cũ `142.93.46.109` (staging ở lại server cũ).
+3c. ✅ **Staging đã xoá 21/10** (anh yêu cầu): vhost staging/staging-admin tắt (file cất ở `/root/staging-removed-20261021`), DB `wp_staging` drop, `/var/www/staging` (11G) xoá, cert staging-admin xoá, DNS 2 record xoá.
+3d. ✅ `quantification.youragentstore.net` (zone Cloudflare khác, em không có quyền): vhost trên live proxy sang `10.106.0.2:3335` (VPC) → app chạy ở server mới, không cần đổi DNS; sau cutover Reserved IP sang server mới, vhost ở đó proxy local. Backup vhost: `quantification-le-ssl.conf.bak-20261021`.
+3e. ✅ Firewall server mới: port 3334/3335 chỉ cho localhost + VPC (trước đây trên live mở public → bỏ qua được basic auth).
 
 **Sáng 22/10, trước giờ G (vẫn không ảnh hưởng live):**
 3. Dọn đồ test: mu-plugin `zz-upgrade-test-safety.php`, `zz-upgrade-test-pcov.php`, gỡ `php8.3-pcov`, xoá `/var/www/jsonapi-cov`.
@@ -73,6 +75,7 @@ Chi tiết lệnh: `runbook.md`. Kết quả test: `test-results.md`.
 - [ ] Resque worker chạy, queue không ứ (`redis-cli llen resque:queue:default`)
 - [ ] `debug.log`/Rollbar không có Fatal mới trong 1 giờ; New Relic bình thường
 - [ ] Cron chạy (wp cron, MM rebilling cron)
+- [ ] Cert: cấp lại `mypersonalfootballcoach.com-0001` **bỏ domain staging** (`certbot certonly --apache --cert-name mypersonalfootballcoach.com-0001 -d mypersonalfootballcoach.com`) — nếu không, gia hạn ~02/11 sẽ lỗi vì staging đã xoá DNS; xoá cert cũ `mypersonalfootballcoach.com` (hết hạn 2022)
 - [ ] App phụ: `https://dailyagent.mypersonalfootballcoach.com` + `https://quantification.youragentstore.net` mở được (basic auth); `crontab -l -u mpfc` = 6 dòng; chạy tay `autorun-hello.sh` OK; trên live `crontab -l` rỗng
 - [ ] Phiên browser đã login (Slack/Upwork/Workstream… trong `tmp/`) còn dùng được — nếu mất: login lại qua VNC (`ssh -L 5900:localhost:5900`)
 
@@ -102,6 +105,4 @@ Thời gian ≈ 10 phút. Giữ live cũ **1–2 tuần** không xoá.
 
 ## Câu hỏi chưa chốt
 - Giờ G + ai báo khách? Có cần email thành viên trước không?
-- Staging (11G): giữ trên server cũ (DNS trỏ `142.93.46.109`) — khi xoá server cũ 1–2 tuần sau thì staging mất; có cần chuyển (chưa có patch PHP 8.3 cho staging)?
-- `quantification.youragentstore.net` nằm ở tài khoản Cloudflare nào? Cần trỏ A record → `144.126.236.208` (app đã chạy ở server mới, server cũ đã tắt → **đang down** đến khi đổi DNS).
 - PayPal: chưa test sandbox — chấp nhận kiểm bằng giao dịch thật sau cutover?
