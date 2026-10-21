@@ -36,23 +36,22 @@ Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). **Default = draft**: bài 
 ### 1. Skip check
 Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay: <url>" và dừng (trừ khi user gọi tay và muốn thêm bài).
 
-### 2. Gom nguyên liệu (chỉ đọc, 3 ngày gần nhất)
-- `reports/{date}/*news-digest.md` — tin AI/IT/chứng khoán VN/kinh doanh
-- `reports/{date}/*finance-report*.md`, `*money-*` **CHỈ lấy nhận định thị trường chung**; KHÔNG BAO GIỜ đưa số liệu tài sản/danh mục/nợ cá nhân của user
+### 2. Gom nguyên liệu (chỉ đọc)
+Nguồn của từng type ở bảng bước 3. Nguồn chung:
 - `docs/fb-post-ideas/*.md` chưa dùng → **ưu tiên cao nhất** (user tự thả vào)
-- Trải nghiệm làm việc: report trong ngày (vd. `*ai-*`, `*learning-plan*`), memory `docs/memory/` → rút bài học về AI agent, tự động hoá, quản lý team dev, làm outsource
-- Tự tìm thêm (WebSearch) nếu nguyên liệu mỏng: chủ đề hợp profile user (PM/tech lead công ty outsource VN, dùng AI agent tự động hoá công việc, đầu tư chứng khoán VN dài hạn)
+- `docs/fb-post/post-history.json` → tránh lặp type/chủ đề/link
+- 🔴 KHÔNG BAO GIỜ lấy số liệu tài sản/danh mục/nợ cá nhân (`*money-*`), tên khách hàng/dev, giờ công
 
-### 3. Chọn chủ đề — xoay vòng 5 loại (user chốt 2026-10-20)
+### 3. Chọn chủ đề — xoay vòng 6 loại (user chốt 2026-10-20/21)
 Ghi `type` vào history; không lặp cùng `type` 2 ngày liền, không trùng chủ đề 7 ngày. Ý tưởng trong `docs/fb-post-ideas/` luôn ưu tiên.
 
 | type | Nội dung | Nguồn |
 |---|---|---|
-| `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán (mẫu bên dưới) | news-digest vn-stocks làm cái cớ; ảnh VN-Index |
+| `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán (mẫu bên dưới) | `reports/{3 ngày gần nhất}/*news-digest.md` mục Chứng khoán VN làm cái cớ; ảnh `node scripts/render-vnindex-chart-image.js` (VNDirect) |
 | `nus-blog` | Share 1 bài blog NUS: 1–2 câu tiếng Việt đời thường "team mình vừa viết về…" + link bài (FB tự tạo preview) | `curl -sL https://www.nustechnology.com/blog` → lấy `/blog/<slug>`, chọn bài chưa share trong history; đọc bài để tóm 1 câu dễ hiểu |
 | `trend` | 1 trend/meme đang hot trên mạng VN, kèm 1–2 câu cảm nhận/review vui | WebSearch trend tuần này (TikTok/FB/báo VN); chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama cá nhân/tin đồn; share link gốc, KHÔNG tải ảnh người khác về đăng lại |
-| `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | news-digest 3 ngày gần nhất, link gốc (không link news.google) |
-| `running` | **Nhắc user**, không tự bịa thành tích | xem dưới |
+| `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | `reports/{3 ngày gần nhất}/*news-digest.md` (CafeF, VnExpress, The Verge…); link gốc, không link news.google |
+| `running` | Buổi chạy/milestone chạy bộ, số liệu thật | Strava: `python3 scripts/strava-running-stats.py` (chi tiết dưới) |
 | `fb-memory` | Chia sẻ lại 1 kỷ niệm "Ngày này năm xưa" của FB + caption 1–2 dòng (vd. "3 năm trước…", cảm nhận vui/hoài niệm) | `node scripts/facebook-profile-post.js --list-memories` → JSON `{index, ago, text}`; chọn kỷ niệm vui/ý nghĩa (bỏ qua kỷ niệm buồn/tang/ốm đau/người cũ); đăng: `--draft <caption> --share-memory <index>`. Không có kỷ niệm hôm nay → chọn type khác |
 
 `running`: số liệu THẬT từ Strava — `python3 scripts/strava-running-stats.py` (đọc JSON web Strava bằng cookie Chrome Profile 9; không cần API trả phí).
