@@ -17,7 +17,7 @@
 | 5 | Slack Baamboozle (Aysar) | ~~skjamie25 17:57 in #testing thread to Carrick: two dark-mode changes (move the toggle out of the hamburger menu into the top nav bar, change toggle behaviour) ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792493877342689?thread_ts=1789081986.639859)). No reply yet (after hours, fresh). Aysar ○~~ ✅ Not an alert (corrected 08:35): Carrick reacted 👀 to the message, so it is acknowledged (holding reply, ≤24h). Aysar ✓ |
 | 6 | Slack RDC (Franc) | ~~dmetiner 21:15: the logos made the buttons too wide, "I prefer having it without the logos" ([msg](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1792505724121359?thread_ts=1792145197.266459)). No reply yet (after hours, fresh). Earlier asks (security webhook, 24h Istanbul test) were answered by Carrick. Franc ○~~ ✅ Carrick replied 08:32 "Let me check it" (holding reply, ≤24h). Franc ✓ |
 | 7 | Workstream review | OhCleo: 3 LongVV rows from 10-20 still **Pending** → reviewers DuongDN, MinhTV: "Add protected password for staging" (0.25h), "Change default filter to All for creators page" (0.5h), "Fix price on subscribe page" (0.25h). Yesterday's 2 Pending rows are now Reviewed ✅ |
-| 8 | Arthur / Meta-Stamp | **$931.50 start-of-R1 payment not received.** We flagged it to Chris 13:57. Chris (23:15): reviewing "everything" at 3:15 PM PST (05:15 Thu VN), will report after. R1 started (PhucVT 8h on 10-19), but still 0 commits since 10-15, staging due Fri 10-23. See `0515-arthur-monitor.md` |
+| 8 | Arthur / Meta-Stamp | ~~**$931.50 start-of-R1 payment not received.** We flagged it to Chris 13:57. Chris (23:15): reviewing "everything" at 3:15 PM PST (05:15 Thu VN), will report after. R1 started (PhucVT 8h on 10-19), but still 0 commits since 10-15, staging due Fri 10-23. See `0515-arthur-monitor.md`~~ 08:45: Chris sent $931.50 via Wise 08:07 (arrives today). Tommy's M4 checks passed, so the $1,701 is released and goes out tomorrow. ⚠️ Still open: Chris asked "Staging Friday the 23rd still stands??" (08:07), no reply yet, and 0 R1 commits (last push 10-16). See `0845-arthur-monitor.md` |
 | 9 | Matrix (halt → duongdn, carried from 10-20) | AirAgri / James Diamond unpaid invoice reminder request (10-19 16:21, [room](https://chat.nustechnology.com/#/room/!tGBJevbuSmjqVePBPN:nustechnology.com)). No reply from duongdn seen in this window. |
 | 10 | Performance | MPFC apdex **0.42** (poor, chronic): `continue` E_WARNING 248x, WP_Error::get_method() 17x, plus #70 above. Others healthy. |
 
@@ -270,7 +270,7 @@ Window: since 10-20 05:15 (~24h).
 
 ## Arthur / Meta-Stamp — 05:15 (+07:00)
 
-Full Vietnamese tracker: `reports/2026-10-21/0515-arthur-monitor.md`.
+Full Vietnamese tracker: ~~`reports/2026-10-21/0515-arthur-monitor.md`~~ `reports/2026-10-21/0845-arthur-monitor.md` (updated 08:45: payment sent, M4 passed, Chris asks whether the 10-23 staging date holds).
 - Meta-Stamp Slack: we told Chris R1 has started and flagged the missing $931.50 (13:57), and asked for Tommy's M4 production checks (16:12). Chris 23:15: reviewing everything at 3:15 PM PST, will update after.
 - Matrix Arthur room: namtv approved the payment reminder. R1 effort goes to WS "Meta-Stamp".
 - GitHub Meta_Stamp_V3: no commits since 10-15, 0 open PRs.
@@ -299,5 +299,5 @@ Neural Contract (38901192): same login redirect 4/4 from the stale vault. Per th
 - MPFC: who fixes MemberMouse PayPal #70 (null order item on subscription signup)? Check whether recent PayPal subscribers were linked to their orders.
 - Maddy: Kai to answer Madhuraka's LIFM2-470 correction. Also LIFM2-463/468 closed with no estimate or JIRA log.
 - AirAgri invoice: will DuongDN chase James Diamond (halt's 10-19 request)?
-- Arthur: $931.50 still not received. Who reviews the "Meta-Stamp" WS project?
+- Arthur: ~~$931.50 still not received.~~ Reply to Chris: does staging on Fri 10-23 hold? Who reviews the "Meta-Stamp" WS project?
 - After 09:30 (local): KhanhHH/PhucVT 10-20 hours on WS. KhanhHH did ~3.5h of Aysar work on 10-20 (Upwork), so once logged, is a Carrick MPDM update for 10-20 due?
