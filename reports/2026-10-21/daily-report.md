@@ -14,7 +14,7 @@
 | 2 | Fountain Trello board | Kunal 19:58 + 20:43 on [Release Oct 20 card](https://trello.com/c/QoDohCJH): "it's all ready… Backend first, then the website", please merge the release before RuboCop PR #760. No Rick reply yet (after hours, fresh). Rick's own 10:53 ask to Kunal ([password-reset card](https://trello.com/c/W7uCALNg)) is waiting on Kunal. Fountain - DOCUMENT ○ |
 | 3 | Rollbar / New Relic (MPFC) | **New production error #70: `Call to a member function hasTrialPeriod() on null`** in MemberMouse `class.paypalservice.php:678` (PayPal subscription-signup IPN handler: `$orderItem` is null). 10+ occurrences since 10-19 21:12, 12x in New Relic this window. PayPal sign-up callbacks are failing, so new PayPal subscriptions may not get linked to their order. Vendor payment-plugin code, not patched. MPFC ○ |
 | 4 | Slack Xtreme (Maddy) | Madhuraka → Kai 17:19 "Are you there?" + 17:22 on **LIFM2-470**: "you evaluate payout bracket for each product… That is not correct. I want you to highlight rows if custom percentage is not null…" ([msg](https://xtremesoftsolutions.slack.com/archives/D050TGMRFRQ/p1792491777534539)). No reply from Kai. Earlier the same day Madhuraka fixed the extension tab-focus issue herself with Codex after Kai called it a "new requirement" (1h est). Maddy ○ |
-| 5 | Slack Baamboozle (Aysar) | skjamie25 17:57 in #testing thread to Carrick: two dark-mode changes (move the toggle out of the hamburger menu into the top nav bar, change toggle behaviour) ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792493877342689?thread_ts=1789081986.639859)). No reply yet (after hours, fresh). Aysar ○ |
+| 5 | Slack Baamboozle (Aysar) | ~~skjamie25 17:57 in #testing thread to Carrick: two dark-mode changes (move the toggle out of the hamburger menu into the top nav bar, change toggle behaviour) ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792493877342689?thread_ts=1789081986.639859)). No reply yet (after hours, fresh). Aysar ○~~ ✅ Not an alert (corrected 08:35): Carrick reacted 👀 to the message, so it is acknowledged (holding reply, ≤24h). Aysar ✓ |
 | 6 | Slack RDC (Franc) | dmetiner 21:15: the logos made the buttons too wide, "I prefer having it without the logos" ([msg](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1792505724121359?thread_ts=1792145197.266459)). No reply yet (after hours, fresh). Earlier asks (security webhook, 24h Istanbul test) were answered by Carrick. Franc ○ |
 | 7 | Workstream review | OhCleo: 3 LongVV rows from 10-20 still **Pending** → reviewers DuongDN, MinhTV: "Add protected password for staging" (0.25h), "Change default filter to All for creators page" (0.5h), "Fix price on subscribe page" (0.25h). Yesterday's 2 Pending rows are now Reviewed ✅ |
 | 8 | Arthur / Meta-Stamp | **$931.50 start-of-R1 payment not received.** We flagged it to Chris 13:57. Chris (23:15): reviewing "everything" at 3:15 PM PST (05:15 Thu VN), will report after. R1 started (PhucVT 8h on 10-19), but still 0 commits since 10-15, staging due Fri 10-23. See `0515-arthur-monitor.md` |
@@ -48,7 +48,7 @@ Trello: Check mail 6/6 ✓, card done.
 
 | Workspace | Msgs | Key content |
 |-----------|------|-------------|
-| Baamboozle | 9 | #testing: skjamie25 + notmedesign approved the navy update, "good to be released" 16:11, Carrick thanked them. ⚠️ skjamie25 17:57 dark-mode changes (Alert #5). #customer-success: noah shared a customer video. **MPDM C07SQ4HAUHZ: no update in window.** KhanhHH has 0h Baamboozle logged for 10-20 so far (only 10-19 3.33h, reported 10-19 17:40), so no update is due. Not an alert |
+| Baamboozle | 9 | #testing: skjamie25 + notmedesign approved the navy update, "good to be released" 16:11, Carrick thanked them. ~~⚠️ skjamie25 17:57 dark-mode changes (Alert #5).~~ skjamie25 17:57 dark-mode changes, Carrick acked 👀. #customer-success: noah shared a customer video. **MPDM C07SQ4HAUHZ: no update in window.** KhanhHH has 0h Baamboozle logged for 10-20 so far (only 10-19 3.33h, reported 10-19 17:40), so no update is due. Not an alert |
 | RDC - FM Monitoring | 21 | dmetiner asked for instant Slack alerts when someone tries to drop/demote his account (15:20), Carrick agreed and will use #security-check-logs (15:56/16:02). Carrick started a controlled 24h Istanbul test on 99.8/100.0 MHz (16:35), dmetiner "perfect" 21:12. ⚠️ 21:15 logo feedback (Alert #6). #user-access-logs = bot |
 | Swift Studio | 0 | — |
 | Xtreme Soft Solutions | 28 | Anoma: asked Kai to restore her Admin role in RMS, done 11:12. Madhuraka: authenticity-certificate feedback email (Kai found it 11:35), checkout upsell feasibility (Kai: 30 min to check + 30 min to match mockup; Madhuraka: it should already match the original mockup). Extension tab-focus bug: Kai called it a new requirement, Madhuraka said it used to work and fixed it herself with Codex 13:49. ⚠️ 17:19/17:22 unanswered (Alert #4) |
@@ -64,7 +64,7 @@ Trello: Check mail 6/6 ✓, card done.
 | Aigile Dev | 0 | Colin paused (Ignore List) |
 | Meta-Stamp | 3 | See Arthur section |
 
-Trello: Rory ✓ · Marcel ✓ · Raymond ✓ · Bailey ✓ · ⚠️ Maddy skipped (Alert #4) · ⚠️ Aysar skipped (Alert #5) · ⚠️ Franc skipped (Alert #6) · ⚠️ MPFC skipped (Alert #3).
+Trello: Rory ✓ · Marcel ✓ · Raymond ✓ · Bailey ✓ · ⚠️ Maddy skipped (Alert #4) · ~~⚠️ Aysar skipped (Alert #5)~~ Aysar ✓ (08:35) · ⚠️ Franc skipped (Alert #6) · ⚠️ MPFC skipped (Alert #3).
 
 ---
 
@@ -188,7 +188,7 @@ Trello: Elena - WordPress SamGuard ✓.
 **19/24 complete** (live 05:16). [Card](https://trello.com/c/x3fTlmaA)
 - ✓ James Diamond · Rory · Marcel · Raymond · Neural Contract · Bailey · Andrew Taraba · Ohcleo · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ⚠️ Maddy: skipped (Alert #4)
-- ⚠️ Aysar: skipped (Alert #5)
+- ~~⚠️ Aysar: skipped (Alert #5)~~ ✓ Aysar (08:35, Carrick 👀 ack)
 - ⚠️ Franc: skipped (Alert #6)
 - ⚠️ MPFC: skipped (Alert #3)
 - ⚠️ Fountain - DOCUMENT: skipped (Alerts #1, #2)

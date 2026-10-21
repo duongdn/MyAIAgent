@@ -12,3 +12,5 @@ User corrected 2026-10-09 after the recheck left Franc, Maddy and Elliott untick
 
 **Why:** These false alerts left Trello items unticked and the user had to correct them by hand.
 **How to apply:** Before leaving an item unticked, confirm the customer ask truly has no reply (a holding reply is enough) and the work isn't already done on our side. Never gate Elliott. Related: [[feedback_customer_direct_ask_universal_gate]].
+
+**2026-10-21 addition — emoji reaction = holding reply.** Flagged skjamie25's 17:57 Baamboozle #testing dark-mode ask as "no reply" (Aysar ○), but Carrick (U069WJ0HPQ8) had reacted 👀 — user corrected: "this msg had reaction". `slack-scan.js` output doesn't show reactions; before calling any customer ask "unanswered", read `conversations.replies` (it includes `reactions`) and treat a reaction from our side as an ack (answered for 24h).
