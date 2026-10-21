@@ -87,7 +87,7 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 # test server: never run workers (copied DB has real device tokens -> real push notifications)
-[ $TEST = 1 ] || systemctl enable mpfc-resque@1 mpfc-resque@2 mpfc-resque@3
+# NOT enabled/started here: workers start only after the cutover (release-plan G+27: systemctl enable --now mpfc-resque@{1,2,3})
 
 apachectl configtest
 systemctl enable --now apache2 redis-server

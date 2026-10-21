@@ -8,7 +8,7 @@ source "$(dirname "$0")/lib.sh"
 MODE=${1:-}
 [ "$MODE" = --prepare ] || [ "$MODE" = --activate ] || die "usage: $0 --prepare|--activate"
 APPS=(/var/www/MyDailyAgent /var/www/MyBussinessAiAgent)
-DOT=(.claude .claude.json .claudekit .config .ssh .gitconfig .local)
+DOT=(.claude .claude.json .claudekit .config .ssh .gitconfig .local .cache)   # .cache: puppeteer Chrome, chrome profiles, gh, elena-repo
 UNITS=(mydailyagent-web quantification-web)
 SITES=(dailyagent quantification)
 ART2=/root/upgrade/side-apps; mkdir -p "$ART2"

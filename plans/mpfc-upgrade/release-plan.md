@@ -38,7 +38,7 @@ Chi tiết lệnh: `runbook.md`. Kết quả test: `test-results.md`.
 | PHP limits (apache) | 128M, upload/post 100M, input_vars 1500, exec 30s | giống | OK |
 | Apache log → DB | `CustomLog "|mysql … apache_logs"` trong vhost + format `mysql_custom_log` ở apache2.conf | 01 (non-test) copy nguyên apache2.conf + vhost; `mysql-client` đã cài | ✅ khi chạy 01 |
 | Root cron | `wp cron` mỗi phút; `backup_live_volume.php` (snapshot volume); `clone_apache_logs.php` (xoay bảng apache_logs) | chưa có | Cài lúc G+27 (02 in ra, php7.4→**8.3**; 2 script đã `php -l` OK trên 8.3) |
-| Resque ×3 + monit (trông redis/resque) | chạy tay + monit | unit systemd `mpfc-resque@` Restart=always | monit không cần nữa |
+| Resque ×3 + monit (trông redis/resque) | chạy tay + monit | unit systemd `mpfc-resque@` Restart=always — **không enable/start** cho tới G+27 (01 cũng không enable) | monit không cài |
 | Apple key `/var/www/keys` | có | 02 copy | ✅ |
 | Mail | WP Mail SMTP → Gmail API (cấu hình DB) | dùng chung DB | OK; mailcatcher (1080) không chuyển |
 | Rollbar / Stripe live mode | bật trong DB live | test tắt **chỉ ở DB test** `wp_mpfc_upgrade`; production dùng DB live → giữ nguyên bật | Kiểm Rollbar nhận event sau cutover |
