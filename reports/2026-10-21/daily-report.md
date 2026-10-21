@@ -185,13 +185,13 @@ Trello: Elena - WordPress SamGuard ✓.
 
 ## Trello — Check progress — 05:16 (+07:00)
 
-~~**19/24 complete** (live 05:16).~~ **20/22 live 08:40** (Aysar, Maddy, Franc completed). [Card](https://trello.com/c/x3fTlmaA)
+~~**19/24 complete** (live 05:16).~~ **20/22 live 08:40** (Aysar, Maddy, Franc completed; Fountain completed manually by DuongDN 08:31). Only MPFC ○ (Alert #3). [Card](https://trello.com/c/x3fTlmaA)
 - ✓ James Diamond · Rory · Marcel · Raymond · Neural Contract · Bailey · Andrew Taraba · Ohcleo · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ~~⚠️ Maddy: skipped (Alert #4)~~ ✓ Maddy (Kai 08:32 holding reply)
 - ~~⚠️ Aysar: skipped (Alert #5)~~ ✓ Aysar (08:35, Carrick 👀 ack)
 - ~~⚠️ Franc: skipped (Alert #6)~~ ✓ Franc (Carrick 08:32 holding reply)
 - ⚠️ MPFC: skipped (Alert #3)
-- ⚠️ Fountain - DOCUMENT: skipped (Alerts #1, #2)
+- ~~⚠️ Fountain - DOCUMENT: skipped (Alerts #1, #2)~~ ✓ completed manually by DuongDN 08:31 (Kunal release ask still has no Rick reply on the board)
 
 ## Ignore List — 05:16 (+07:00)
 Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital Plant, Blair Brown - Peptide Clyde, Philip, John Yi - Amazing Meds, Rebecca (William Bills), Elliott
