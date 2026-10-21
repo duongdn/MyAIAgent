@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-21 (Wednesday)
 
-**Run:** 2026-10-21T05:00+07:00 → 05:20 (cron, mpfc server)
+**Run:** 2026-10-21T05:00+07:00 → 05:20 (cron, mpfc server), rechecked 08:30 (+07:00)
 **Window:** 2026-10-20 09:40 → 2026-10-21 05:15 (+07:00). Task-log date: **Tue 2026-10-20**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:01. TuanNT off sick Tue 10-20 (`tuannt-2026-10-20`, full day). No other approved leave on record. Resource Arrangement (Matrix): halt confirmed all dev leaves processed 17:25. No new PHP-team entries.
 
@@ -93,7 +93,7 @@ Raw `/review/week` rows across 22 live projects (Lyf Support App and Others retu
 |-----------|---------------------------|--------|
 | LeNH | **8h** (James Diamond 0:45 + 6:30 + 0:45) | ✓ |
 | TuanNT | — | approved sick leave 10-20 ✓ |
-| KhanhHH | 0h so far (10-19 was 8h: Baamboozle 3:20 + RDC 4:40) | not logged yet, re-check after 09:30 |
+| KhanhHH | 0h so far (10-19 was 8h: Baamboozle 3:20 + RDC 4:40) | not logged yet at 08:30 re-fetch either. Upwork shows ~3.5h Aysar work on 10-20, so she did work; re-check WS after 09:30 |
 | LongVV | **8h** (Definitive Guide 7h + OhCleo 1h) | ✓ (multi-project) |
 | PhucVT | 0h so far (10-19: Meta-Stamp 8h) | on Arthur, not gated |
 
@@ -284,11 +284,11 @@ Trello: Arthur - Meta-Stamp ✓ (our asks answered; payment is on the customer, 
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | not retrieved on this host (Cloudflare Turnstile not passed) |
-| Aysar | — | — | not retrieved (cookie vault snapshot stale, login redirect) |
-| Tokenlite | — | — | not retrieved (Turnstile) |
+| Rory | ~~—~~ 0 | 0 | no time tracked 10-20 (0 day cells) |
+| Aysar | ~~—~~ 3 | 0 | ✅ all valid: navy palette #705/PR #708 · punctuation bug #728 · spelling bug #730 (21 cells ≈ 3.5h, KhanhHH) |
+| Tokenlite | — | — | still login_failed at 08:30 (carrick Profile 1 session), not a memo finding |
 
-Not a memo-validity finding. The cookie vault is now marked STALE, so the company PC re-pushes it after 08:00. Then re-run `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-20`.
+~~Not a memo-validity finding. The cookie vault is now marked STALE…~~ Re-run 08:30: Rory + Aysar retrieved, 0 invalid memos.
 Neural Contract (38901192): same login redirect 4/4 from the stale vault. Per the standing rule that is not an alert → Neural Contract ✓.
 
 ---
@@ -300,4 +300,4 @@ Neural Contract (38901192): same login redirect 4/4 from the stale vault. Per th
 - Maddy: Kai to answer Madhuraka's LIFM2-470 correction. Also LIFM2-463/468 closed with no estimate or JIRA log.
 - AirAgri invoice: will DuongDN chase James Diamond (halt's 10-19 request)?
 - Arthur: $931.50 still not received. Who reviews the "Meta-Stamp" WS project?
-- After 09:30 (local): KhanhHH/PhucVT 10-20 hours, Upwork memos for 10-20.
+- After 09:30 (local): KhanhHH/PhucVT 10-20 hours on WS. KhanhHH did ~3.5h of Aysar work on 10-20 (Upwork), so once logged, is a Carrick MPDM update for 10-20 due?
