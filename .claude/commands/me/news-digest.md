@@ -1,5 +1,5 @@
 ---
-description: News digest — fetch and synthesize news by topic (vn-stocks, vn-business, vinfast, ai, it, php, finance, security, stocks) with optional tag filter, VN topics prioritized first
+description: News digest — fetch and synthesize news by topic (vn-stocks, vn-business, vinfast, ai, it, php, finance, security, voices, stocks) with optional tag filter, VN topics prioritized first
 ---
 
 # News Digest
@@ -12,7 +12,7 @@ Fetch and synthesize news digest by topic and optional tag filter.
 /news-digest [topic] [--tag=xxx] [--limit=N] [--more] [--raw]
 ```
 
-**Topics (ưu tiên VN trước):** `all` (default) | `vn-stocks` | `vn-business` | `vinfast` | `ai` | `it` | `php` | `finance` | `security` | `stocks`
+**Topics (ưu tiên VN trước):** `all` (default) | `vn-stocks` | `vn-business` | `vinfast` | `ai` | `it` | `php` | `finance` | `security` | `voices` | `stocks`
 **Options:**
 - `--tag=xxx` — lọc bài theo từ khóa (OR logic nếu nhiều tag: `--tag=security,ftp`)
 - `--limit=N` — số bài fetch mỗi nguồn (default: 5 — chỉ tăng khi user yêu cầu)
@@ -87,7 +87,7 @@ ls reports/{YYYY-MM-DD}/*-news-digest.md 2>/dev/null
 
 Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context window) → Claude chỉ tổng hợp được ~6/9 topics, bỏ sót `it`, `php`, `vinfast`.
 
-**Khi `topic=all` — chạy 9 lệnh riêng (VN trước, US stocks cuối cùng), synthesize từng section ngay sau khi nhận kết quả, viết output theo ĐÚNG thứ tự này:**
+**Khi `topic=all` — chạy 10 lệnh riêng (VN trước, US stocks cuối cùng), synthesize từng section ngay sau khi nhận kết quả, viết output theo ĐÚNG thứ tự này:**
 ```bash
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-stocks --limit=5
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py vn-business --limit=5
@@ -97,12 +97,13 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py php       --limit=5
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py finance   --limit=5
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py security  --limit=5
+.claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py voices    --limit=5
 .claude/skills/.venv/bin/python3 .claude/skills/news-digest/scripts/fetch-news.py stocks   --limit=5
 ```
 
 **🔴 Scratch files — BẮT BUỘC dùng thư mục riêng cho mỗi run** (sự cố 2026-10-05: chờ bằng `until [ $(ls /tmp/nd-section-*.md | wc -l) -ge 9 ]` → glob khớp file nháp cũ từ tháng 7/8 còn trong `/tmp` → ghép report trước khi subagent xong → section VN chứng khoán/kinh doanh là bài tháng 7, đã commit):
 - Đầu run: `RUN_DIR=/tmp/news-digest-run-${REPORT_DATE}-${REPORT_TIME}; rm -rf "$RUN_DIR"; mkdir -p "$RUN_DIR"` — MỌI file trung gian (JSON fetch, condensed, section .md của subagent) phải nằm trong `$RUN_DIR`. KHÔNG ghi `/tmp/nd-*` hay `/tmp/news-*` dùng chung.
-- Chờ subagent: kiểm tra ĐÚNG 9 tên file cụ thể `$RUN_DIR/section-{topic}.md` tồn tại — KHÔNG đếm glob.
+- Chờ subagent: kiểm tra ĐÚNG 10 tên file cụ thể `$RUN_DIR/section-{topic}.md` tồn tại — KHÔNG đếm glob.
 - Trước khi ghép: mỗi section phải có ngày header = `REPORT_DATE`. Nếu sai ngày → file cũ/sai → KHÔNG `sed` sửa ngày, phải tạo lại section đó.
 
 **Khi `topic=<cụ thể>` — fetch 1 lần:**
@@ -113,8 +114,10 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 - User truyền `--limit=N` → áp dụng N cho tất cả fetch calls.
 - `--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
 
-**MANDATORY: Khi `topic=all`, output PHẢI có đủ 9 sections, viết theo ĐÚNG thứ tự sau (VN trước, US stocks cuối):**
-`vn-stocks` · `vn-business` · `vinfast` · `ai` · `it` · `php` · `finance` · `security` · `stocks`
+**MANDATORY: Khi `topic=all`, output PHẢI có đủ 10 sections, viết theo ĐÚNG thứ tự sau (VN trước, US stocks cuối):**
+`vn-stocks` · `vn-business` · `vinfast` · `ai` · `it` · `php` · `finance` · `security` · `voices` · `stocks`
+
+**`voices` — 🎙️ Phát biểu danh nhân:** phát biểu/phỏng vấn/cảnh báo của nhân vật chủ chốt (AI leaders, Anthropic, Elon Musk, CEO Big Tech, Buffett/Dalio/Marks/Wood, Chủ tịch Fed, tỷ phú VN). Mỗi dòng ghi rõ **ai nói gì** dạng `- **{Tên}**: [{ý chính phát biểu}]({link}) — {bối cảnh 1 câu}`. Bỏ bài chỉ nhắc tên mà không có phát biểu/quan điểm (VD tin đời tư, ảnh). Nếu sự kiện đã có ở section khác thì bỏ ở đây. Thêm/bớt nhân vật: sửa `SOURCES["voices"]` trong `fetch-news.py`.
 
 ## Output Format
 
@@ -178,7 +181,7 @@ Khi có `--raw`: giữ ngôn ngữ gốc của bài, không dịch.
 - Bỏ qua nguồn không có bài — không đề cập (ngoại trừ Thiệu Nguyễn — xem rule MANDATORY ở trên)
 - Điểm nổi bật: tổng hợp pattern/xu hướng, không chỉ liệt kê headline
 - **Dedup (mỗi bài tối đa 2 lần xuất hiện):** `fetch-news.py` tự động lọc bài đã xuất hiện ≥2 lần trong các report cũ (đọc `reports/*/*news-digest*.md`, so URL đã normalize) — KHÔNG cần tự grep lịch sử thủ công nữa. Nếu 1 source trả `dedupDropped: N` trong JSON, nghĩa là N bài bị loại vì đã dùng đủ 2 lần — bình thường, không phải lỗi kỹ thuật, đừng re-fetch ở recheck mode. Vẫn cần tự theo dõi trùng lặp CHÉO NGUỒN trong CÙNG 1 report (VD cùng 1 bài Google News xuất hiện ở cả "Chứng khoán VN" và "Cổ phiếu") — giữ 1 `seen_urls` set khi tổng hợp toàn bộ report.
-- **Tin gần trùng (cùng sự kiện, khác báo):** `fetch-news.py` tự lọc tiêu đề trùng ≥50% từ khóa trong cùng 1 lần gọi (`nearDupDropped`). Khi ghép 9 section, vẫn phải bỏ tin cùng sự kiện đã xuất hiện ở section trước — mỗi sự kiện chỉ 1 dòng trong cả report.
+- **Tin gần trùng (cùng sự kiện, khác báo):** `fetch-news.py` tự lọc tiêu đề trùng ≥50% từ khóa trong cùng 1 lần gọi (`nearDupDropped`). Khi ghép 10 section, vẫn phải bỏ tin cùng sự kiện đã xuất hiện ở section trước — mỗi sự kiện chỉ 1 dòng trong cả report.
 - Nếu tag trả về <3 bài tổng: ghi "Ít kết quả cho tag '{tag}' — thử tag rộng hơn"
 - Bài cũ hơn 7 ngày: đánh dấu `[cũ]`
 - Nguồn lỗi: bỏ qua không đề cập

@@ -259,6 +259,39 @@ SOURCES = {
             "url": _gnews("PHP Laravel Symfony backend web development 2026"),
         },
     ],
+    "voices": [
+        # Statements/interviews from key figures in the user's interest areas.
+        # Google News OR-queries — personal blogs/X have no usable RSS and post
+        # too rarely for the 7-day window.
+        {
+            "name": "Google News – AI Leaders",
+            "url": _gnews('"Sam Altman" OR "Dario Amodei" OR "Demis Hassabis" OR "Jensen Huang" says interview'),
+        },
+        {
+            "name": "Google News – Anthropic",
+            "url": _gnews("Anthropic Claude announces OR says"),
+        },
+        {
+            "name": "Google News – Elon Musk",
+            "url": _gnews('"Elon Musk" says OR interview OR warns'),
+        },
+        {
+            "name": "Google News – Big Tech CEOs",
+            "url": _gnews('"Satya Nadella" OR "Sundar Pichai" OR "Mark Zuckerberg" OR "Tim Cook" says'),
+        },
+        {
+            "name": "Google News – Huyền thoại đầu tư",
+            "url": _gnews('"Warren Buffett" OR "Ray Dalio" OR "Howard Marks" OR "Cathie Wood" OR "Bill Ackman" says'),
+        },
+        {
+            "name": "Google News – Fed / Ngân hàng TW",
+            "url": _gnews('"Kevin Warsh" OR "Fed chair" OR "Christine Lagarde" says rates'),
+        },
+        {
+            "name": "Google News – Doanh nhân VN",
+            "url": _gnews('Phạm Nhật Vượng OR Trương Gia Bình OR Nguyễn Duy Hưng OR Nguyễn Thị Phương Thảo', hl="vi", gl="VN"),
+        },
+    ],
     "finance": [
         {
             "name": "CafeF – Tài chính",
