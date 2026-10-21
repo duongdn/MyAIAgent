@@ -117,7 +117,7 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 **MANDATORY: Khi `topic=all`, output PHẢI có đủ 10 sections, viết theo ĐÚNG thứ tự sau (VN trước, US stocks cuối):**
 `vn-stocks` · `vn-business` · `vinfast` · `ai` · `it` · `php` · `finance` · `security` · `voices` · `stocks`
 
-**`voices` — 🎙️ Phát biểu danh nhân:** phát biểu/phỏng vấn/cảnh báo của nhân vật chủ chốt (AI leaders, Anthropic, Elon Musk, CEO Big Tech, Buffett/Dalio/Marks/Wood, Chủ tịch Fed, tỷ phú VN). Mỗi dòng ghi rõ **ai nói gì** dạng `- **{Tên}**: [{ý chính phát biểu}]({link}) — {bối cảnh 1 câu}`. Bỏ bài chỉ nhắc tên mà không có phát biểu/quan điểm (VD tin đời tư, ảnh). Nếu sự kiện đã có ở section khác thì bỏ ở đây. Thêm/bớt nhân vật: sửa `SOURCES["voices"]` trong `fetch-news.py`.
+**`voices` — 🎙️ Phát biểu danh nhân:** phát biểu/phỏng vấn/cảnh báo của nhân vật chủ chốt (AI leaders, AI labs: Anthropic/OpenAI/Gemini/Grok/Meta/DeepSeek/Qwen/Mistral…, AI researchers: Karpathy/LeCun/Hinton…, Elon Musk, CEO Big Tech, Buffett/Dalio/Marks/Wood, Chủ tịch Fed, tỷ phú VN). Mỗi dòng ghi rõ **ai nói gì** dạng `- **{Tên}**: [{ý chính phát biểu}]({link}) — {bối cảnh 1 câu}`. Bỏ bài chỉ nhắc tên mà không có phát biểu/quan điểm (VD tin đời tư, ảnh). Nếu sự kiện đã có ở section khác thì bỏ ở đây. Thêm/bớt nhân vật: sửa `SOURCES["voices"]` trong `fetch-news.py`.
 
 ## Output Format
 

@@ -272,6 +272,18 @@ SOURCES = {
             "url": _gnews("Anthropic Claude announces OR says"),
         },
         {
+            "name": "Google News – OpenAI / Gemini / Grok / Meta AI",
+            "url": _gnews('OpenAI OR "Google Gemini" OR "xAI Grok" OR "Meta Llama" OR "Microsoft Copilot" announces OR says'),
+        },
+        {
+            "name": "Google News – AI Labs Trung Quốc / châu Âu",
+            "url": _gnews("DeepSeek OR Qwen OR Kimi OR Mistral OR Zhipu OR MiniMax model"),
+        },
+        {
+            "name": "Google News – AI Researchers",
+            "url": _gnews('"Andrej Karpathy" OR "Yann LeCun" OR "Geoffrey Hinton" OR "Ilya Sutskever" OR "Mustafa Suleyman" OR "Fei-Fei Li" says'),
+        },
+        {
             "name": "Google News – Elon Musk",
             "url": _gnews('"Elon Musk" says OR interview OR warns'),
         },
