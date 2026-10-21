@@ -1,6 +1,6 @@
 #!/bin/bash
 # Daily FB post draft (Only-me audience) via claude -p
-# Cron: 0 7 * * * (local time UTC+7)
+# Cron: 45 8 * * * (local UTC+7; PC is off overnight, boots ~08:15)
 
 PROJECT_DIR="/home/nus/projects/My-AI-Agent"
 CLAUDE_BIN="$(command -v claude || echo /usr/bin/claude)"

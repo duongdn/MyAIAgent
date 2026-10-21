@@ -6,6 +6,8 @@
  * Usage:
  *   node scripts/facebook-profile-post.js --draft <text-file> [--image <png>] [--feeling "hết tiền"] [--dry-run]
  *   node scripts/facebook-profile-post.js --submit <post-url> [--audience=public|friends]
+ *   node scripts/facebook-profile-post.js --list-memories   (today's "Ngày này năm xưa")
+ *   node scripts/facebook-profile-post.js --draft <caption-file> --share-memory <index> [--dry-run]
  *   node scripts/facebook-profile-post.js --delete <post-url>   (only if still Only-me)
  *
  * Outputs a JSON line {ok, mode, postUrl?, audience?} on stdout; screenshots on error
@@ -95,15 +97,51 @@ async function pickFeeling(page, feeling) {
   await sleep(1500);
 }
 
-async function createDraft(page, text, dryRun, options = {}) {
-  await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
-  assertLoggedIn(page);
-  await sleep(2000);
-  const [opener] = await page.$$('xpath/.//div[@role="button"][.//span[text()="Bạn đang nghĩ gì?"]]');
-  if (!opener) throw new Error('composer opener "Bạn đang nghĩ gì?" not found');
-  await opener.click();
+const MEMORY_SHARE_XPATH = 'xpath/.//div[@role="main"]//div[@role="button"][@aria-label="Gửi nội dung này cho bạn bè hoặc đăng lên trang cá nhân của bạn." or .//span[text()="Chia sẻ"]]';
+
+// Open the composer: a blank new post on the profile, or the share composer of
+// "Ngày này năm xưa" memory #memoryIndex on facebook.com/memories
+async function openComposer(page, memoryIndex) {
+  if (memoryIndex == null) {
+    await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
+    assertLoggedIn(page);
+    await sleep(2000);
+    const [opener] = await page.$$('xpath/.//div[@role="button"][.//span[text()="Bạn đang nghĩ gì?"]]');
+    if (!opener) throw new Error('composer opener "Bạn đang nghĩ gì?" not found');
+    await opener.click();
+  } else {
+    await page.goto('https://www.facebook.com/memories', { waitUntil: 'networkidle2', timeout: 45000 });
+    assertLoggedIn(page);
+    await sleep(4000);
+    const shareBtns = await page.$$(MEMORY_SHARE_XPATH);
+    if (!shareBtns[memoryIndex]) throw new Error(`memory #${memoryIndex} not found (${shareBtns.length} today)`);
+    await shareBtns[memoryIndex].click();
+  }
   await page.waitForSelector('[role="dialog"] [role="textbox"]', { timeout: 15000 });
   await sleep(1500);
+}
+
+// Today's "Ngày này năm xưa" memories: index (for --share-memory), "N năm trước" label, text
+async function listMemories(page) {
+  await page.goto('https://www.facebook.com/memories', { waitUntil: 'networkidle2', timeout: 45000 });
+  assertLoggedIn(page);
+  await sleep(4000);
+  const memories = [];
+  for (const [index, btn] of (await page.$$(MEMORY_SHARE_XPATH)).entries()) {
+    memories.push(await btn.evaluate((b, index) => {
+      let card = b;
+      while (card.parentElement && !/năm trước/.test(card.innerText)) card = card.parentElement;
+      const lines = card.innerText.split('\n').map(l => l.trim()).filter(l => l.length > 1 && l !== 'Facebook');
+      const ago = lines.find(l => /^\d+ năm trước$/.test(l)) || '';
+      const text = lines.filter(l => l.length > 25 && !/^(Đoàn Nguyên Dương|Tất cả cảm xúc)/.test(l)).slice(0, 2).join(' / ');
+      return { index, ago, text };
+    }, index));
+  }
+  return { ok: true, mode: 'list-memories', memories };
+}
+
+async function createDraft(page, text, dryRun, options = {}) {
+  await openComposer(page, options.memoryIndex);
 
   const [privacyBtn] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][starts-with(@aria-label,"Chỉnh sửa quyền riêng tư")]');
   if (!privacyBtn) throw new Error('privacy button not found in composer');
@@ -132,8 +170,10 @@ async function createDraft(page, text, dryRun, options = {}) {
     return { ok: true, mode: 'dry-run', audience: privacyLabel, screenshot: shot };
   }
 
-  const [postBtn] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][@aria-label="Đăng"]');
-  if (!postBtn) throw new Error('"Đăng" button not found');
+  // New post → "Đăng"; sharing a memory → "Chia sẻ"
+  const submitLabel = options.memoryIndex == null ? 'Đăng' : 'Chia sẻ';
+  const [postBtn] = await page.$$(`xpath/.//div[@role="dialog"]//div[@role="button"][@aria-label="${submitLabel}"]`);
+  if (!postBtn) throw new Error(`"${submitLabel}" button not found`);
   await postBtn.click();
   await page.waitForFunction(() => !document.querySelector('[role="dialog"] [role="textbox"]'), { timeout: 30000 });
   await sleep(4000);
@@ -190,6 +230,11 @@ async function deleteDraft(page, postUrl) {
   const draftFile = argAfter('--draft');
   const submitUrl = argAfter('--submit');
   const deleteUrl = argAfter('--delete');
+  if (flag('--list-memories')) {
+    const { browser, page } = await openFacebookSession();
+    try { console.log(JSON.stringify(await listMemories(page))); } finally { await browser.close(); }
+    return;
+  }
   if (!draftFile && !submitUrl && !deleteUrl) {
     console.error('Usage: --draft <text-file> [--dry-run] | --submit <post-url> [--audience=public|friends]');
     process.exit(2);
@@ -198,7 +243,7 @@ async function deleteDraft(page, postUrl) {
   const { browser, page } = await openFacebookSession();
   try {
     const result = draftFile
-      ? await createDraft(page, fs.readFileSync(draftFile, 'utf-8').trim(), flag('--dry-run'), { image: argAfter('--image'), feeling: argAfter('--feeling') })
+      ? await createDraft(page, fs.readFileSync(draftFile, 'utf-8').trim(), flag('--dry-run'), { image: argAfter('--image'), feeling: argAfter('--feeling'), memoryIndex: argAfter('--share-memory') == null ? null : Number(argAfter('--share-memory')) })
       : deleteUrl ? await deleteDraft(page, deleteUrl)
       : await submitPost(page, submitUrl, audienceArg);
     console.log(JSON.stringify(result));

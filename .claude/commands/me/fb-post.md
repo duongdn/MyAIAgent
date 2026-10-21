@@ -53,6 +53,7 @@ Ghi `type` vào history; không lặp cùng `type` 2 ngày liền, không trùng
 | `trend` | 1 trend/meme đang hot trên mạng VN, kèm 1–2 câu cảm nhận/review vui | WebSearch trend tuần này (TikTok/FB/báo VN); chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama cá nhân/tin đồn; share link gốc, KHÔNG tải ảnh người khác về đăng lại |
 | `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | news-digest 3 ngày gần nhất, link gốc (không link news.google) |
 | `running` | **Nhắc user**, không tự bịa thành tích | xem dưới |
+| `fb-memory` | Chia sẻ lại 1 kỷ niệm "Ngày này năm xưa" của FB + caption 1–2 dòng (vd. "3 năm trước…", cảm nhận vui/hoài niệm) | `node scripts/facebook-profile-post.js --list-memories` → JSON `{index, ago, text}`; chọn kỷ niệm vui/ý nghĩa (bỏ qua kỷ niệm buồn/tang/ốm đau/người cũ); đăng: `--draft <caption> --share-memory <index>`. Không có kỷ niệm hôm nay → chọn type khác |
 
 `running`: số liệu THẬT từ Strava — `python3 scripts/strava-running-stats.py` (đọc JSON web Strava bằng cookie Chrome Profile 9; không cần API trả phí).
 - Mỗi lần chạy lệnh đều gọi script này trước. `milestones` khác rỗng VÀ `latest.date` = hôm nay/hôm qua → **ưu tiên type `running` hôm đó** (bỏ qua luật xoay vòng), đánh dấu 🔔 trong report.
