@@ -755,6 +755,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW -9.33M vs 10-19: vang -5M (713M), chi ~4.6M (hieu hi 20/10 2.71M, huong thu 0.62M, the 0.85M), lai so ko ki han +0.14M. Rut 10M so tikcop ko ki han -> vcb; vcb -> FPTS 17M + 11.2M (T10 FPTS 118.3M); a Dung tra no 2M. NW = totaldashboard 6,528,681,862 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.4M/Chi 37.2M/Net +85.2M."
+    },
+    {
+      "date": "2026-10-21",
+      "label": "21/10",
+      "net_worth": 7921148931,
+      "gross_assets": 8005480724,
+      "liabilities": 7890148,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 713000000,
+        "investment": 2574223840,
+        "savings": 1167259786,
+        "liquid": 30997098
+      },
+      "method": "dashboard_verified",
+      "note": "NW 0 vs 10-20 14:30: totaldashboard 6,528,681,862 khong doi, chua co giao dich 21/10. DCA gian nhip (T10 FPTS van 118.3M). NW = totaldashboard + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.4M/Chi 37.2M/Net +85.2M."
     }
   ]
 }
