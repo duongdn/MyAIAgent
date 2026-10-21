@@ -10,9 +10,10 @@ TEST=0; [ "${1:-}" = "--test" ] && TEST=1
 PATCHES="$HERE/patches"
 
 log "02: rsync code from live ($LIVE_SSH)"
-EXC=(--exclude=wp-content/uploads --exclude=wp-content/cache --exclude='*.sql' --exclude='*.sql.gz' --exclude='*.log'
-     --exclude='*.zip' --exclude=uploads.bak --exclude=wp-content/upgrade --exclude=wp-content/ai1wm-backups
-     --exclude='debug.log*' --exclude='*.backup')
+# junk excluded only at the site root / wp-content root (plugins ship their own .sql/.zip/.log files — keep those)
+EXC=(--exclude=/wp-content/uploads --exclude=/wp-content/cache --exclude='/*.sql' --exclude='/*.sql.gz' --exclude='/*.log'
+     --exclude='/*.zip' --exclude=/uploads.bak --exclude=/wp-content/upgrade --exclude=/wp-content/ai1wm-backups
+     --exclude='/wp-content/debug.log*' --exclude='/wp-content/plugins/*.zip')
 [ $TEST = 1 ] && EXC+=(--exclude=.git --exclude=wp-config.php --exclude=wp-config.php.orig-live
                       --exclude=wp-content/mu-plugins/zz-upgrade-test-safety.php --exclude=.htaccess)
 mkdir -p "$SITE"

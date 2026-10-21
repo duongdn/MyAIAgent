@@ -16,8 +16,13 @@ command -v node >/dev/null || { curl -fsSL https://deb.nodesource.com/setup_22.x
 command -v wp >/dev/null || { curl -fsSLo /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; chmod +x /usr/local/bin/wp; }
 
 log "01: swap (same 8G as live; 2G on --test)"
+SWAP=$([ $TEST = 1 ] && echo 2G || echo 8G)
+# re-create when the size changed (test droplet promoted to production: 2G -> 8G)
+if swapon --show=NAME,SIZE --noheadings | grep -q "/swapfile" && [ "$(swapon --show=SIZE --noheadings | head -1 | tr -d ' ')" != "$SWAP" ]; then
+  swapoff /swapfile && rm -f /swapfile
+fi
 if ! swapon --show | grep -q /swapfile; then
-  fallocate -l $([ $TEST = 1 ] && echo 2G || echo 8G) /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+  fallocate -l $SWAP /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
   grep -q /swapfile /etc/fstab || echo "/swapfile none swap sw 0 0" >> /etc/fstab
 fi
 
@@ -48,7 +53,8 @@ cp "$ART/live-apache2.conf" /etc/apache2/apache2.conf   # whole file: combined+%
 if [ $TEST = 0 ]; then
   live "sudo tar -C / -czf - etc/apache2/sites-available etc/letsencrypt" > "$ART/live-apache-sites-le.tgz"
   tar -C / -xzf "$ART/live-apache-sites-le.tgz"
-  for s in $(live "ls /etc/apache2/sites-enabled/"); do a2ensite -q "$s"; done
+  # staging stays on the old droplet (DNS -> its own IP); side-app vhosts are enabled by 04 --activate
+  for s in $(live "ls /etc/apache2/sites-enabled/" | grep -v staging); do a2ensite -q "$s"; done
   a2dissite -q 000-default 2>/dev/null || true
   # Live CustomLog pipes to mysql with a plaintext password: keep the behaviour, review before go-live (see runbook).
 fi
