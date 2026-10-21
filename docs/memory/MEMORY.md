@@ -178,6 +178,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_blair_brown_index_annotation_contradicts_file](weekly-report/feedback_blair_brown_index_annotation_contradicts_file.md) — index/file conflict resolved, include Blair Brown
 - See [[feedback_fountain_kunal_checklist]] (daily-report:fountain section) — weekly Fountain check uses the same 5-part rule
 - [feedback_fountain_sheet_independent_of_workstream_outage](weekly-report/feedback_fountain_sheet_independent_of_workstream_outage.md) — 🔴 Fountain Parts 1/4/5 don't need Workstream, fetch live even during WS outage
+- [feedback_workstream_charged_field_is_authoritative_no_manual_cap_bank](weekly-report/feedback_workstream_charged_field_is_authoritative_no_manual_cap_bank.md) — 🔴 old cap-40h/bank rule is OBSOLETE post-WS-migration; use WS `charged` field as-is
 
 ## monday-report
 - [project_monday_report_sheets](monday-report/project_monday_report_sheets.md), [feedback_monday_report_hours_and_scope](monday-report/feedback_monday_report_hours_and_scope.md)
