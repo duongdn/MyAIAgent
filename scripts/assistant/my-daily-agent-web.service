@@ -1,0 +1,15 @@
+[Unit]
+Description=MyDailyAgent web UI (http://assistant.local via Apache proxy)
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/nus/projects/My-AI-Agent
+Environment=PATH=/home/nus/.nvm/versions/node/v22.22.1/bin:/home/nus/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/nus/.nvm/versions/node/v22.22.1/bin/node web/server.js
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/nus/projects/My-AI-Agent/tmp/web-ui.log
+StandardError=append:/home/nus/projects/My-AI-Agent/tmp/web-ui.log
+
+[Install]
+WantedBy=default.target
