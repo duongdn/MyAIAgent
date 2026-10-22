@@ -34,3 +34,6 @@ plans/reports/general-purpose-*
 # Autorun logs may leak tokens from subagent curl commands
 reports/**/autorun.log
 
+
+# MyDailyAssistant inbox db
+data/
