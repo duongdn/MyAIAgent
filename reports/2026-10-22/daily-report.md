@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-22 (Thursday)
 
-**Run:** 2026-10-22T05:00+07:00 → 05:35 (cron, mpfc server)
+**Run:** 2026-10-22T05:00+07:00 → 05:35 (cron, mpfc server), corrected 08:30 (+07:00)
 **Window:** 2026-10-21 05:16 → 2026-10-22 05:30 (+07:00). Task-log date: **Wed 2026-10-21**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:00: no upcoming approved leave on record. Resource Arrangement (Matrix): ThienVN off AM 10-21, DatNT off PM 10-23 (both idle/internal, no project impact).
 
@@ -10,11 +10,11 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack DM OhCleo (Celine) | **Urgent customer ask, unanswered.** Celine 03:48 + 03:51 VN: remove the female and male cover images "asap" and replace them with the generic one she attached: "I got another angry Creator writing" ([msg](https://ohcleo.slack.com/archives/D0B6846UN8K/p1792615726161689)). Fresh (overnight), Tony not online yet. Ohcleo ○ |
-| 2 | PHP CVE (Oct 21), customer questions | Customers are asking whether they need to act on the new PHP CVEs (CVE-2026-109618/109619): **Baamboozle** heyitsronanc 01:41 "do we need to take any action for php cve?" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792608086617239?thread_ts=1792557364.142249)), **RDC** dmetiner 02:45 "before all of these do we have to do something regarding the PHP vulnerability?" ([msg](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1792611926059619)). Both unanswered (overnight). duongdn's plan 04:26: notify every customer first, then fix. Kai already sent Madhuraka a notice 23:03. Aysar ○ · Franc ○ |
+| 1 | Slack DM OhCleo (Celine) | **Urgent customer ask, unanswered.** Celine 03:48 + 03:51 VN (still unanswered at 08:30): remove the female and male cover images "asap" and replace them with the generic one she attached: "I got another angry Creator writing" ([msg](https://ohcleo.slack.com/archives/D0B6846UN8K/p1792615726161689)). Fresh (overnight), Tony not online yet. Ohcleo ○ |
+| 2 | PHP CVE (Oct 21), customer questions | Customers are asking whether they need to act on the new PHP CVEs (CVE-2026-109618/109619): **Baamboozle** heyitsronanc 01:41 "do we need to take any action for php cve?" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792608086617239?thread_ts=1792557364.142249)), **RDC** dmetiner 02:45 "before all of these do we have to do something regarding the PHP vulnerability?" ([msg](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1792611926059619)). Both unanswered (overnight). duongdn's plan 04:26: notify every customer first, then fix. Kai already sent Madhuraka a notice 23:03. ~~Aysar ○~~ · Franc ○. **08:30:** Baamboozle resolved: Ronan's question was to Aysar, who answered himself 06:31/06:59 (thanked Carrick, will merge + deploy tonight, AMI rebuild for the newer CVE) → Aysar ✓. RDC dmetiner still unanswered → Franc ○ |
 | 3 | Email freelancer@mpfc (Saul) | Saul (MPFC founder) 20:44 forwarded "Issue 97106923: Potentially vulnerable server at admin.mypersonalfootballcoach.com:80": "not sure if this is legitimate, but can you have a look, please". No reply seen. Rollbar #70 (MemberMouse PayPal `hasTrialPeriod()` on null) still occurring (1x this window). MPFC ○ |
 | 4 | Email carrick@/duongdn@ (Marcel) + Matrix | Marcel 21:19 to Jack + Carrick: security issues reported on the **XiD** system, asks us to have AI create a GitLab issue/plan, then review, merge and deploy the urgent fixes ("its your call"). He also pinged on WhatsApp. duongdn sent a holding reply 04:19 ([Matrix PHP Projects](https://chat.nustechnology.com/#/room/!unGjZonXnglXiqZCSC:nustechnology.com)). Fixes still to be planned. Marcel ✓ (holding reply) |
-| 5 | Discord Bizurk (Andrew Taraba) | animeworld 22:54 DM: "Do I need to update any code snippets?" / "Or just install the new plugin?" ([DM](https://discord.com/channels/@me/1298477844212482059)). Unanswered (overnight). Andrew Taraba ○ |
+| 5 | Discord Bizurk (Andrew Taraba) | animeworld 22:54 DM: "Do I need to update any code snippets?" / "Or just install the new plugin?" ([DM](https://discord.com/channels/@me/1298477844212482059)). Unanswered (still at 08:30). Andrew Taraba ○ |
 | 6 | Workstream review | OhCleo: **6 rows Pending** → reviewers DuongDN, MinhTV. LongVV 10-20 ×3 (Add protected password for staging 0.25h, Change default filter to All for creators page 0.5h, Fix price on subscribe page 0.25h, carried from yesterday) + LuHX 10-21 ×3 (Hide claire and trent 0.25h, Update app information 0.5h, Implement smart search on mobile 1h) |
 | 7 | Maddy (JIRA) | LIFM2-470 is "Ready to deploy" with **no estimate and 0h logged on JIRA**. Madhuraka said 10:05: "I want to make sure all JIRA logged hours are what we get charged at the end of the month". PR #558 approved and merged 11:09. Madhuraka also called the first LIFM2-470 build "not correct" (internal view: spec gap, Kai explained politely 09:08). Maddy ✓ (no open ask) |
 | 8 | Arthur / Meta-Stamp | R1 staging is due **Fri 10-23**, still **0 commits** on GitHub since 10-15, even though PhucVT said 08:52 he would push right away. Chris's staging question was answered 08:49 ✅. See `0530-arthur-monitor.md` |
@@ -63,7 +63,7 @@ Trello: Check mail 6/6 ✓, card done.
 | Aigile Dev | 1 | make bot: blog posts on staging. Colin on Ignore List |
 | Meta-Stamp | 6 | See Arthur section |
 
-Trello: Rory ✓ · Maddy ✓ · Raymond ✓ · Bailey ✓ · Marcel ✓ (holding reply) · ⚠️ Aysar skipped (Alert #2) · ⚠️ Franc skipped (Alert #2) · ⚠️ MPFC skipped (Alert #3).
+Trello: Rory ✓ · Maddy ✓ · Raymond ✓ · Bailey ✓ · Marcel ✓ (holding reply) · ~~⚠️ Aysar skipped (Alert #2)~~ Aysar ✓ 08:30 (Aysar answered Ronan himself) · ⚠️ Franc skipped (Alert #2) · ⚠️ MPFC skipped (Alert #3).
 
 ---
 
@@ -183,9 +183,9 @@ Trello: Elena - WordPress SamGuard ✓.
 
 ## Trello — Check progress — 05:28 (+07:00)
 
-**17/22 complete** (live 05:28). [Card](https://trello.com/c/YPcmGUVp)
+~~**17/22 complete** (live 05:28).~~ **18/22 complete** (live 08:30). [Card](https://trello.com/c/YPcmGUVp)
 - ✓ Maddy · James Diamond · Rory · Marcel · Raymond · Neural Contract · Bailey · Fountain - DOCUMENT · Arthur - Meta-Stamp · Elena - WordPress SamGuard
-- ⚠️ Aysar: skipped (Alert #2, Ronan PHP CVE question)
+- ~~⚠️ Aysar: skipped (Alert #2, Ronan PHP CVE question)~~ ✓ Aysar 08:30: client-side thread, Aysar replied 06:31 + 06:59. Upwork memos 10-21: 3/3 valid
 - ⚠️ Franc: skipped (Alert #2, dmetiner PHP CVE question)
 - ⚠️ MPFC: skipped (Alert #3)
 - ⚠️ Andrew Taraba: skipped (Alert #5)
@@ -294,22 +294,22 @@ Trello: Arthur - Meta-Stamp ✓ (no unanswered customer ask; code-push risk trac
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | Cloudflare Turnstile not passed on mpfc (2 tries), not a memo finding |
-| Aysar | — | — | login redirect, then Cloudflare on retry. Cookie vault marked STALE (local re-push after 08:00) |
-| Tokenlite | — | — | Cloudflare (known open issue) |
+| Rory | ~~—~~ 0 | 0 | 08:30 re-run: success, no memos logged 10-21 (LeNH on James Diamond) |
+| Aysar | ~~—~~ 3 | 0 | 08:30 re-run: all valid (#730 spelling fix ×2, multi-word image search fix) |
+| Tokenlite | — | — | 08:30 re-run: login still failing (known open issue, not a memo finding) |
 
-Memo validity for 10-21 is not retrieved yet. Not an alert. Re-run after the vault refresh: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-21`.
+~~Memo validity for 10-21 is not retrieved yet.~~ 08:30: Rory + Aysar retrieved, 0 invalid. Not an alert. Re-run after the vault refresh: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-21`.
 Neural Contract (38901192): login redirect 4/4 from the stale vault. Per the standing rule that is not an alert → Neural Contract ✓.
 
 ---
 
 ## Unresolved Questions
 - OhCleo: who replies to Celine about removing the male/female covers today, and how fast can the generic cover go out?
-- PHP CVEs: confirm the customer notice goes to Baamboozle (Ronan), RDC (dmetiner), Andrew Taraba and others per duongdn's 04:26 plan.
+- PHP CVEs: confirm the customer notice goes to ~~Baamboozle (Ronan)~~ (Aysar answered himself 06:31), RDC (dmetiner), Andrew Taraba and others per duongdn's 04:26 plan.
 - MPFC: is Saul's "vulnerable server at admin.mypersonalfootballcoach.com:80" notice real? Who checks it and replies? #70 PayPal error still unpatched.
 - Marcel/XiD: who creates the GitLab issue/plan and fixes the urgent security items?
 - Andrew Taraba: answer the plugin/code-snippet question.
 - Arthur: has PhucVT pushed R1 code? Staging is due Fri 10-23. Who reviews the "Meta-Stamp" WS project?
 - Fountain: with Kunal cutting to a few hours/week (<5h by December), how should ViTHT/VuTQ/ThinhT/QC be reassigned? (carried from 10-21)
 - Maddy: should Kai log LIFM2-470 hours on JIRA (customer requires JIRA hours = billed hours)?
-- After 09:30: 10-21 hours for TuanNT, KhanhHH, LongVV, PhucVT, ViTHT, VuTQ. Upwork memo re-run once the cookie vault is refreshed.
+- After 09:30: 10-21 hours for TuanNT, KhanhHH, LongVV, PhucVT, ViTHT, VuTQ. ~~Upwork memo re-run once the cookie vault is refreshed.~~ (done 08:30, Tokenlite still failing)
