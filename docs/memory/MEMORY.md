@@ -166,6 +166,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_prestashop2_php72_composer_chronic_error](bailey/feedback_prestashop2_php72_composer_chronic_error.md) — 🔴 New Relic RuntimeException (staging PHP7.2 vs Composer 8.1+) chronic since 2026-09-18, still flat/constant 2026-09-25 — needs direct dev notification, not just report-flagging
 
 ## mpfc-monitor
+- [reference_mpfc_idp_league_api_dev_gotchas](mpfc/reference_mpfc_idp_league_api_dev_gotchas.md) — 🔴 IDP/League API: api-docs path (not git), specs in Slack, lt-player test acct, HyperDB replica + CF GET cache
 - [mpfc_plugins_have_custom_code](mpfc/feedback_mpfc_plugins_have_custom_code_check_before_update.md) — 🔴 MPFC plugins forked w/ custom code; git log on live + diff wp.org before update
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
 
