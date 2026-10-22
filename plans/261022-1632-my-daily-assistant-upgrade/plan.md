@@ -40,3 +40,9 @@ Collectors hiện tại phải xuất JSON được (phase 1 chỉ bọc adapter
 2. Holding reply (T1) cho kênh nào được phép tự gửi? Câu mẫu do anh duyệt trước?
 3. Chạy ở PC công ty (chỉ bật 08:00+) hay server mpfc 24/7? Collector cần cookie/Chrome thì phải ở PC.
 4. Ngân sách token/ngày cho triage (poll 10 phút × nhiều nguồn)?
+
+## Realtime (bổ sung 2026-10-22)
+- **Nhận tin realtime (listener chạy liên tục):** Matrix /sync long-poll, Email IMAP IDLE, Discord gateway WS, Slack RTM/WS (token xoxc), WhatsApp/Zalo CDP event. Nguồn không có push (MSTeams, Upwork) → poll 1–2 phút.
+- **Báo anh realtime:** Telegram bot (push + nút Approve/Reject, ưu tiên) | Matrix/Element push | `scripts/desktop-notify.js`.
+- **Lọc 2 tầng:** lọc rẻ (bot/noise/team chat) → Haiku phân loại nhanh (~giây) → Sonnet/Opus chỉ cho tin cần đề xuất.
+- Runner phase 6: đổi cron 10' → service `assistant-daemon` (systemd user, tự restart); cron chỉ làm fallback/health.
