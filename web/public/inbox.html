@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assistant Inbox</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  html, body { overflow: auto; height: auto; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  .top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .top h1 { font-size: 18px; color: var(--text-bright); margin-right: auto; }
+  .tabs button { background: var(--bg3); color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: var(--radius); cursor: pointer; }
+  .tabs button.on { border-color: var(--accent); color: var(--accent); }
+  .pill { font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--bg3); border: 1px solid var(--border); }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 10px; }
+  .card.seen { opacity: .55; }
+  .meta { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .text { white-space: pre-wrap; word-break: break-word; }
+  .actions { margin-top: 8px; display: flex; gap: 8px; }
+  .actions button, .actions a { font-size: 12px; background: var(--bg3); color: var(--text); border: 1px solid var(--border); padding: 4px 10px; border-radius: var(--radius); cursor: pointer; text-decoration: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { border-bottom: 1px solid var(--border); padding: 6px; vertical-align: top; word-break: break-word; }
+  .NOTIFY { color: var(--green); font-weight: 600; } .drop { color: var(--text-dim); }
+  .reason { color: var(--text-dim); font-size: 12px; }
+  .empty { color: var(--text-dim); padding: 24px 0; }
+  @media (max-width: 640px) { td.hide-m { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>📥 Assistant Inbox</h1>
+    <span class="pill" id="mode"></span>
+    <a class="pill" href="/">← Skills</a>
+  </div>
+  <div class="tabs top">
+    <button id="tInbox" class="on">Tin quan trọng</button>
+    <button id="tLog">Nhật ký lọc (gồm tin bị bỏ)</button>
+  </div>
+  <div id="view"></div>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = iso => new Date(iso).toLocaleString('vi-VN', { hour12: false });
+let tab = 'inbox';
+
+async function loadInbox() {
+  const { policy, events } = await (await fetch('/api/inbox')).json();
+  $('#mode').textContent = !policy.enabled ? '⏸ Tắt' : policy.dryRun ? '🧪 Dry-run (chưa gửi Telegram)' : '🟢 Live';
+  if (!events.length) return $('#view').innerHTML = '<div class="empty">Chưa có tin nào được đánh giá là quan trọng.</div>';
+  $('#view').innerHTML = events.map(e => `
+    <div class="card ${e.status === 'seen' ? 'seen' : ''}">
+      <div class="meta"><b>${esc(e.source)}</b><span>${esc(e.channel || e.account)}</span><span>👤 ${esc(e.sender)}</span><span>${fmt(e.ts_utc)}</span><span>${esc(e.status)}</span></div>
+      <div class="text">${esc(e.text)}</div>
+      <div class="actions">
+        ${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">🔗 Mở</a>` : ''}
+        <button onclick="act(${e.id},'seen')">👀 Đã xem</button>
+        <button onclick="act(${e.id},'mute')">🔇 Mute kênh</button>
+      </div>
+    </div>`).join('');
+}
+
+async function loadLog() {
+  const rows = await (await fetch('/api/inbox/gate-log')).json();
+  if (!rows.length) return $('#view').innerHTML = '<div class="empty">Chưa có quyết định nào.</div>';
+  $('#view').innerHTML = `<table>${rows.map(r => r.raw ? `<tr><td colspan="4">${esc(r.raw)}</td></tr>` : `
+    <tr><td class="${r.decision}">${r.decision === 'NOTIFY' ? 'GỬI' : 'bỏ'}</td>
+      <td class="hide-m">${fmt(r.ts)}<br><span class="reason">${esc(r.key)}</span></td>
+      <td><b>${esc(r.sender)}</b>: ${esc(r.text)}<div class="reason">${esc(r.reason)}</div></td></tr>`).join('')}</table>`;
+}
+
+async function act(id, a) { await fetch(`/api/inbox/${id}/${a}`, { method: 'POST' }); loadInbox(); }
+function show(t) { tab = t; $('#tInbox').classList.toggle('on', t === 'inbox'); $('#tLog').classList.toggle('on', t === 'log'); (t === 'inbox' ? loadInbox : loadLog)(); }
+$('#tInbox').onclick = () => show('inbox');
+$('#tLog').onclick = () => show('log');
+show('inbox');
+setInterval(() => show(tab), 15000);
+</script>
+</body>
+</html>

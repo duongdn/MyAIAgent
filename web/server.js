@@ -14,6 +14,7 @@ const COMMANDS_ME_DIR = path.join(PROJECT_DIR, '.claude', 'commands', 'me');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+require('./assistant-inbox-routes').mount(app);
 
 /** @type {Map<string, {status: string, skillName: string, prompt: string, clients: any[], buffer: any[], process: any}>} */
 const activeRuns = new Map();

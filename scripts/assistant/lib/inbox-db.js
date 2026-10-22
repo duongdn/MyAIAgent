@@ -41,3 +41,9 @@ function setCursor(key, value) {
 }
 
 module.exports = { addEvent, setStatus, getEvent, getCursor, setCursor };
+
+/** Latest relevant events for the web Inbox. */
+function listEvents(limit = 200) {
+  return db.prepare('SELECT * FROM events ORDER BY ts_utc DESC LIMIT ?').all(limit);
+}
+module.exports.listEvents = listEvents;
