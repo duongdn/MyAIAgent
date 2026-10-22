@@ -20,7 +20,7 @@ Không cần framework mới (n8n/LangGraph/OpenClaw): Claude Code headless (`cl
 ## Phases
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | [Event inbox + collector adapters](phase-01-event-inbox-and-collector-adapters.md) | todo |
+| 1 | [Event inbox + collector adapters](phase-01-event-inbox-and-collector-adapters.md) | in-progress: Matrix+Email+Slack realtime + relevance gate, dry-run since 2026-10-22 17:10 |
 | 2 | [Triage engine (classify + analyze)](phase-02-triage-engine.md) | todo |
 | 3 | [Approval queue (web + Matrix)](phase-03-approval-queue-web-and-matrix.md) | todo |
 | 4 | [Executor + action registry + audit](phase-04-executor-action-registry-audit.md) | todo |

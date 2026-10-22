@@ -42,7 +42,9 @@ function fetchNew(imap, acct, key) {
 function listen(acct) {
   const key = `email:${acct.email}:uid`;
   const imap = new Imap({ user: acct.email, password: acct.app_password, host: acct.imap_server || 'imap.zoho.com',
-    port: 993, tls: true, keepalive: { interval: 10000, idleInterval: 300000, forceNoop: true } });
+    port: 993, tls: true,
+    // Gmail IMAP fails cert check on this network — same workaround as scripts/email-scan.js
+    tlsOptions: { servername: acct.imap_server, rejectUnauthorized: !/gmail/.test(acct.imap_server) }, keepalive: { interval: 10000, idleInterval: 300000, forceNoop: true } });
   imap.once('ready', () => imap.openBox(acct.folder || 'INBOX', true, (err, box) => {
     if (err) return console.error(`[email] openBox ${acct.email}: ${err.message}`);
     if (!db.getCursor(key)) db.setCursor(key, box.uidnext - 1);   // first run: skip history
