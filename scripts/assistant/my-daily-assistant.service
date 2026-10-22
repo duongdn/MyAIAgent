@@ -1,0 +1,16 @@
+[Unit]
+Description=MyDailyAssistant realtime listeners
+After=network-online.target
+
+[Service]
+WorkingDirectory=/home/nus/projects/My-AI-Agent
+Environment=DISPLAY=:0
+Environment=PATH=/home/nus/.nvm/versions/node/v22.22.1/bin:/home/nus/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/nus/.nvm/versions/node/v22.22.1/bin/node scripts/assistant/assistant-daemon.js
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/nus/projects/My-AI-Agent/tmp/assistant-daemon.log
+StandardError=append:/home/nus/projects/My-AI-Agent/tmp/assistant-daemon.log
+
+[Install]
+WantedBy=default.target
