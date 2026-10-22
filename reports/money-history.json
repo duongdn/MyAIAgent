@@ -771,6 +771,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW 0 vs 10-20 14:30: totaldashboard 6,528,681,862 khong doi, chua co giao dich 21/10. DCA gian nhip (T10 FPTS van 118.3M). NW = totaldashboard + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.4M/Chi 37.2M/Net +85.2M."
+    },
+    {
+      "date": "2026-10-22",
+      "label": "22/10",
+      "net_worth": 7919461203,
+      "gross_assets": 8003924994,
+      "liabilities": 8022147,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 711500000,
+        "investment": 2575223840,
+        "savings": 1167259786,
+        "liquid": 29941368
+      },
+      "method": "dashboard_verified",
+      "note": "NW -1.69M vs 10-21: vang -1.5M (711.5M), chi 182K (may massage 132K the, cafe/an sang 50K), Paypal FX -6K. vcb -> FPTS 1M (T10 FPTS 119.3M). NW = totaldashboard 6,526,994,134 + Larion 800M + VCBF 525,063,000 + Finhay 67,404,069. T10 MTD Thu 122.4M/Chi 37.4M/Net +85.0M."
     }
   ]
 }
