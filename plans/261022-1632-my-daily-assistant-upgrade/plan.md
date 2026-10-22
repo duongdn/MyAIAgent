@@ -46,3 +46,4 @@ Collectors hiện tại phải xuất JSON được (phase 1 chỉ bọc adapter
 - **Báo anh realtime:** Telegram bot (push + nút Approve/Reject, ưu tiên) | Matrix/Element push | `scripts/desktop-notify.js`.
 - **Lọc 2 tầng:** lọc rẻ (bot/noise/team chat) → Haiku phân loại nhanh (~giây) → Sonnet/Opus chỉ cho tin cần đề xuất.
 - Runner phase 6: đổi cron 10' → service `assistant-daemon` (systemd user, tự restart); cron chỉ làm fallback/health.
+- **Chốt 2026-10-22:** Telegram bot = kênh notify + approve chính (điện thoại + Telegram Desktop). Desktop thêm popup `notify-send` qua `desktop-notify.js` cho tin urgency=high. Config: `config/.telegram-config.json` (token, chat_id; gitignored + encrypt).
