@@ -17,11 +17,13 @@ const SCHEMA = JSON.stringify({
   },
 });
 const BULK_SENDER = /no-?reply|noreply|notifications?@|newsletter|mailer-daemon|digest|marketing/i;
+// Monitoring/alert senders are no-reply too, but may be real incidents → let the LLM judge them.
+const ALERT_SENDER = /newrelic|rollbar|cloudwatch|aws-notifications|uptimerobot|sentry|cloudflare|github|bitbucket|siteground/i;
 
 function hardDrop(e) {
   if (!e.text || e.text.trim().length < 2) return 'empty';
   if (e.meta?.isBot) return 'bot';
-  if (e.source === 'email' && (e.meta?.bulk || BULK_SENDER.test(e.sender || ''))) return 'bulk-mail';
+  if (e.source === 'email' && !ALERT_SENDER.test(e.sender || '') && (e.meta?.bulk || BULK_SENDER.test(e.sender || ''))) return 'bulk-mail';
   return null;
 }
 
