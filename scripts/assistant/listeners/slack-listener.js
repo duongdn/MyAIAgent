@@ -11,11 +11,14 @@ const { accounts } = require('../../../config/.slack-accounts.json');
 
 const POLL_MS = 60000;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const headersOf = a => ({ Authorization: `Bearer ${a.token}`, ...(a.cookie ? { Cookie: `d=${a.cookie}` } : {}) });
+// xoxc session tokens need token in the form body + URL-encoded d cookie (same as slack-fetch-ohcleo.js); works for xoxp too.
+const cookieOf = a => (a.cookie ? { Cookie: `d=${encodeURIComponent(decodeURIComponent(a.cookie))}` } : {});
+const headersOf = a => ({ Authorization: `Bearer ${a.token}`, ...cookieOf(a) });
 
 async function slack(a, method, params = {}) {
-  const res = await fetch(`https://slack.com/api/${method}?${new URLSearchParams(params)}`,
-    { method: 'POST', headers: headersOf(a), signal: AbortSignal.timeout(20000) });
+  const res = await fetch(`https://slack.com/api/${method}`, {
+    method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded', ...cookieOf(a) },
+    body: new URLSearchParams({ token: a.token, ...params }), signal: AbortSignal.timeout(20000) });
   return res.json();
 }
 
