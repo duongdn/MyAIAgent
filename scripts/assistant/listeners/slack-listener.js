@@ -7,6 +7,7 @@
 const WebSocket = require('ws');
 const db = require('../lib/inbox-db');
 const { intake } = require('../lib/event-intake');
+const policy = require('../lib/policy');
 const { accounts } = require('../../../config/.slack-accounts.json');
 
 const POLL_MS = 60000;
@@ -79,6 +80,7 @@ async function rtmLoop(a, me) {
 }
 
 async function listen(a) {
+  if (policy.isMuted({ source: 'slack', account: a.workspace })) return console.log(`[slack] ${a.workspace}: muted in policy — skipped`);
   const auth = await slack(a, 'auth.test').catch(e => ({ error: e.message }));
   if (!auth.ok) return console.error(`[slack] ${a.workspace}: auth ${auth.error} — skipped`);
   const rtm = await slack(a, 'rtm.connect').catch(() => ({}));
