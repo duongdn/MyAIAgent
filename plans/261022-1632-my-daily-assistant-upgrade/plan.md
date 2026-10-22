@@ -1,0 +1,42 @@
+# MyDailyAgent → MyDailyAssistant
+
+**Status:** Draft · **Created:** 2026-10-22 · **Branch:** master
+
+## Mục tiêu
+Từ "chạy skill theo lệnh/cron" → trợ lí chạy liên tục: **nhận → phân tích → (tự xử lí việc đơn giản | đề xuất + xin approve → thực thi)**.
+
+## Kiến trúc (local, tái dùng code sẵn có)
+```
+ Collectors (đã có)            Inbox            Brain              Actions
+ slack-scan, email-scan,  →  SQLite events  →  claude -p triage → T0 log/digest
+ discord, matrix, whatsapp,   (dedup, cursor)   (JSON schema,     T1 auto (holding reply, allowlist)
+ zalo, msteams, upwork-room                     policy + memory)  T2 proposal → approve (Web/Matrix)
+                                                                        ↓ approved
+                                                                  Executor (claude -p, allowedTools hẹp)
+                                                                  → send scripts / skills → audit log
+```
+Không cần framework mới (n8n/LangGraph/OpenClaw): Claude Code headless (`claude -p`) + cron + SQLite + web/server.js đã có là đủ. YAGNI.
+
+## Phases
+| # | Phase | Status |
+|---|-------|--------|
+| 1 | [Event inbox + collector adapters](phase-01-event-inbox-and-collector-adapters.md) | todo |
+| 2 | [Triage engine (classify + analyze)](phase-02-triage-engine.md) | todo |
+| 3 | [Approval queue (web + Matrix)](phase-03-approval-queue-web-and-matrix.md) | todo |
+| 4 | [Executor + action registry + audit](phase-04-executor-action-registry-audit.md) | todo |
+| 5 | [Auto-reply tier: shadow → live](phase-05-auto-reply-shadow-then-live.md) | todo |
+| 6 | [Runner daemon, observability, rollout](phase-06-runner-observability-rollout.md) | todo |
+
+## Nguyên tắc an toàn (bắt buộc)
+- Mặc định **không gửi gì** ra ngoài nếu chưa approve (memory: never_send_messages_without_permission, no_duplicate_sends, customer_facing_messages). T1 chỉ bật theo allowlist kênh, sau ≥1 tuần shadow mode.
+- Mọi action có idempotency key + audit log; kill-switch `config/assistant-policy.json: "enabled": false`.
+- Không hardcode secret — đọc config/ như hiện tại.
+
+## Dependencies
+Collectors hiện tại phải xuất JSON được (phase 1 chỉ bọc adapter, không viết lại). Claude CLI headless có trên máy công ty.
+
+## Unresolved questions
+1. Kênh approve chính: Web UI (dailyagent.*), Matrix DM, hay thêm Telegram bot (nút bấm trên điện thoại tiện nhất)?
+2. Holding reply (T1) cho kênh nào được phép tự gửi? Câu mẫu do anh duyệt trước?
+3. Chạy ở PC công ty (chỉ bật 08:00+) hay server mpfc 24/7? Collector cần cookie/Chrome thì phải ở PC.
+4. Ngân sách token/ngày cho triage (poll 10 phút × nhiều nguồn)?
