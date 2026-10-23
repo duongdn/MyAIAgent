@@ -50,7 +50,7 @@ async function chooseAudience(page, label) {
 // FB only fills the timestamp permalink href on hover, so locate the post card by
 // its opening text, hover each of its links, then read back the /posts/ href.
 async function findOwnPostUrl(page, snippet) {
-  await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
+  await page.goto('https://www.facebook.com/me', { waitUntil: 'domcontentloaded', timeout: 60000 });
   await sleep(3000);
   for (let i = 0; i < 6; i++) {
     const marked = await page.evaluate(snippet => {
@@ -103,15 +103,19 @@ const MEMORY_SHARE_XPATH = 'xpath/.//div[@role="main"]//div[@role="button"][@ari
 // "Ngày này năm xưa" memory #memoryIndex on facebook.com/memories
 async function openComposer(page, memoryIndex) {
   if (memoryIndex == null) {
-    await page.goto('https://www.facebook.com/me', { waitUntil: 'networkidle2', timeout: 45000 });
-    assertLoggedIn(page);
-    await sleep(2000);
-    const [opener] = await page.$$('xpath/.//div[@role="button"][.//span[text()="Bạn đang nghĩ gì?"]]');
+    await page.goto('https://www.facebook.com/me', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await assertLoggedIn(page);
+    // FB never goes network-idle; wait for the composer opener itself
+    const OPENER = 'xpath/.//div[@role="button"][.//span[text()="Bạn đang nghĩ gì?"]]';
+    await page.waitForSelector(OPENER, { timeout: 30000 }).catch(() => {});
+    await sleep(1500);
+    await assertLoggedIn(page);
+    const [opener] = await page.$$(OPENER);
     if (!opener) throw new Error('composer opener "Bạn đang nghĩ gì?" not found');
     await opener.click();
   } else {
-    await page.goto('https://www.facebook.com/memories', { waitUntil: 'networkidle2', timeout: 45000 });
-    assertLoggedIn(page);
+    await page.goto('https://www.facebook.com/memories', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await assertLoggedIn(page);
     await sleep(4000);
     const shareBtns = await page.$$(MEMORY_SHARE_XPATH);
     if (!shareBtns[memoryIndex]) throw new Error(`memory #${memoryIndex} not found (${shareBtns.length} today)`);
@@ -123,8 +127,8 @@ async function openComposer(page, memoryIndex) {
 
 // Today's "Ngày này năm xưa" memories: index (for --share-memory), "N năm trước" label, text
 async function listMemories(page) {
-  await page.goto('https://www.facebook.com/memories', { waitUntil: 'networkidle2', timeout: 45000 });
-  assertLoggedIn(page);
+  await page.goto('https://www.facebook.com/memories', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await assertLoggedIn(page);
   await sleep(4000);
   const memories = [];
   for (const [index, btn] of (await page.$$(MEMORY_SHARE_XPATH)).entries()) {
@@ -183,8 +187,8 @@ async function createDraft(page, text, dryRun, options = {}) {
 async function submitPost(page, postUrl, audienceKey) {
   const label = AUDIENCE_LABELS[audienceKey];
   if (!label || audienceKey === 'onlyme') throw new Error(`invalid --audience=${audienceKey}`);
-  await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
-  assertLoggedIn(page);
+  await page.goto(postUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await assertLoggedIn(page);
   await sleep(3000);
   await openPostMenuItem(page, 'Chỉnh sửa đối tượng');
   await chooseAudience(page, label);
@@ -205,8 +209,8 @@ async function openPostMenuItem(page, itemText) {
 
 // Only deletes posts still on "Chỉ mình tôi" — a rejected draft, never a published post
 async function deleteDraft(page, postUrl) {
-  await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
-  assertLoggedIn(page);
+  await page.goto(postUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await assertLoggedIn(page);
   await sleep(3000);
   await openPostMenuItem(page, 'Chỉnh sửa đối tượng');
   const onlyMe = await page.$$eval('[role="dialog"] input[type="radio"]', inputs => {
@@ -216,7 +220,7 @@ async function deleteDraft(page, postUrl) {
   });
   if (!onlyMe) throw new Error('refusing to delete: post audience is not "Chỉ mình tôi"');
   await page.keyboard.press('Escape');
-  await page.goto(postUrl, { waitUntil: 'networkidle2', timeout: 45000 });
+  await page.goto(postUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await sleep(3000);
   await openPostMenuItem(page, 'Xóa bài viết');
   const [confirm] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][@aria-label="Xóa"]');

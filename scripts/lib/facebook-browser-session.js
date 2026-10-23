@@ -56,9 +56,11 @@ async function openFacebookSession() {
   return { browser, page };
 }
 
-function assertLoggedIn(page) {
+// Also catches the "Continue / Use another profile" saved-account screen, which keeps the /me URL
+async function assertLoggedIn(page) {
   const url = page.url();
-  if (url.includes('/login') || url.includes('/checkpoint')) {
+  const savedAccountScreen = await page.evaluate(() => /Use another profile|Dùng trang cá nhân khác/.test(document.body.innerText)).catch(() => false);
+  if (url.includes('/login') || url.includes('/checkpoint') || savedAccountScreen) {
     throw new Error(`not_logged_in (${url}) — run: node scripts/facebook-page-scraper.js --login`);
   }
 }
