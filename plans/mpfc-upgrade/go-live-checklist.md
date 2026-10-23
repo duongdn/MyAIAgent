@@ -11,13 +11,17 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - [x] Test: smoke + functional + json-api (469/472, cov 96%)
 
 ## A. Trước giờ G (không ảnh hưởng live) — ~20 phút
-- [ ] A1. Dọn đồ test trên server mới: xoá mu-plugin `zz-upgrade-test-safety.php`, `zz-upgrade-test-pcov.php`; `apt purge php8.3-pcov`; xoá `/var/www/jsonapi-cov`; xoá thư mục `wp-content/uploads` local của test (để 02 tạo symlink sang volume)
-- [ ] A2. `01-provision-server.sh` (không `--test`): apache2.conf + vhost main/admin/dailyagent/quantification + cert từ live (có CustomLog → mysql apache_logs), swap 8G, unit Resque (không enable)
-- [ ] A3. Bỏ vhost + basic auth `upgrade-test`; xoá DNS `upgrade-test`
-- [ ] A4. Kiểm DB cluster trusted sources (tag `mpfc`) cho IP mới
-- [ ] A5. Backup DB cluster (DO managed backup / dump `wp_mpfc` từ replica, không chạy trên primary)
+- [x] A1. Dọn đồ test trên server mới: xoá mu-plugin `zz-upgrade-test-safety.php`, `zz-upgrade-test-pcov.php`; `apt purge php8.3-pcov`; xoá `/var/www/jsonapi-cov`; xoá thư mục `wp-content/uploads` local của test (để 02 tạo symlink sang volume)
+- [x] A2. `01-provision-server.sh` (không `--test`): apache2.conf + vhost main/admin/dailyagent/quantification + cert từ live (có CustomLog → mysql apache_logs), swap 8G, unit Resque (không enable)
+- [x] A3. Bỏ vhost + basic auth `upgrade-test`; xoá DNS `upgrade-test`
+- [x] A4. Kiểm DB cluster trusted sources (tag `mpfc`) cho IP mới
+- [x] A5. Backup DB cluster (DO managed backup / dump `wp_mpfc` từ replica, không chạy trên primary)
+
+**Kết quả A (23/10 09:50–10:00):** test mu-plugin + pcov + uploads test xoá; `01` prod OK (swap 8G, vhost main/admin/dailyagent/quantification + CustomLog→apache_logs, Resque disabled); quantification vhost server mới proxy `127.0.0.1:3335`; vhost/DNS/cert `upgrade-test` xoá; DB firewall có tag `mpfc` (droplet mới có tag); DO auto backup 23/10 01:32 UTC (21.9G) + dump `wp_mpfc` từ replica `/root/db-backup/wp_mpfc-20261023-0251.sql.gz` (312M, ~1.5 phút) → **dump lại ngay trước B1**.
+⚠️ Từ giờ server mới chưa có `wp-config` live (vẫn DB test) cho tới B2 — không trỏ traffic vào.
 
 ## B. Giờ G — cutover (~30–45 phút, site trong chế độ bảo trì)
+- [ ] B0. Dump lại `wp_mpfc` từ replica (lệnh như A5, ~2 phút)
 - [ ] B1. Live: `wp maintenance-mode activate`; xoá root crontab (backup trước: `wp cron`, `backup_live_volume.php`, `clone_apache_logs.php`); dừng 3 Resque (`pkill -f '[b]in/resque'`); tắt monit (để nó không bật lại Resque)
 - [ ] B2. Server mới: `02-build-code.sh` (không `--test`) — rsync code + `wp-config.php` + `.htaccess` live → WP 7.1.3, plugin, patch PHP 8.3, MM 3.1.1, Elementor Pro 4.3.2, `/var/www/keys`
 - [ ] B3. Detach volume `volume-lon1-02` khỏi live → attach server mới → mount `/mnt/volume_lon1_02` + fstab; kiểm `wp-content/uploads` → symlink đúng
