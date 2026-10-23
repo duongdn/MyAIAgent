@@ -47,3 +47,4 @@ Collectors hiện tại phải xuất JSON được (phase 1 chỉ bọc adapter
 - **Lọc 2 tầng:** lọc rẻ (bot/noise/team chat) → Haiku phân loại nhanh (~giây) → Sonnet/Opus chỉ cho tin cần đề xuất.
 - Runner phase 6: đổi cron 10' → service `assistant-daemon` (systemd user, tự restart); cron chỉ làm fallback/health.
 - **Chốt 2026-10-22:** Telegram bot = kênh notify + approve chính (điện thoại + Telegram Desktop). Desktop thêm popup `notify-send` qua `desktop-notify.js` cho tin urgency=high. Config: `config/.telegram-config.json` (token, chat_id; gitignored + encrypt).
+- **2026-10-23:** bỏ cron 2h (user: mọi thứ trong daemon). Discord poll 30 phút qua discord-monitor.js (ko gateway). Upwork tạm ignore. Gate: history 48h + memory rules + urgent/await_reply(30p)/none.

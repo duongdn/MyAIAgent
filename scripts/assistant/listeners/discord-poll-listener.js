@@ -40,6 +40,10 @@ async function tick() {
 }
 
 async function run() {
+  // Respect the 30-min spacing across daemon restarts too.
+  const last = Date.parse(db.getCursor('discord:since') || 0);
+  const wait = last + POLL_MS - Date.now();
+  if (wait > 0) await new Promise(r => setTimeout(r, wait));
   for (;;) {
     await tick().catch(e => console.error(`[discord] ${e.message}`));
     await new Promise(r => setTimeout(r, POLL_MS));
