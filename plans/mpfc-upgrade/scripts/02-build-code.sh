@@ -20,7 +20,7 @@ mkdir -p "$SITE"
 rc=0; rsync -a --delete --rsync-path="sudo rsync" "${EXC[@]}" -e "ssh -i $LIVE_KEY" "$LIVE_SSH:$SITE/" "$SITE/" || rc=$?
 [ $rc = 0 ] || [ $rc = 24 ] || die "rsync failed ($rc)"   # 24 = files vanished during copy (fine on a live site)
 if [ $TEST = 0 ] && [ ! -e "$SITE/wp-content/uploads" ]; then
-  ln -s /mnt/volume_lon1_02/uploads "$SITE/wp-content/uploads"   # same symlink as live (volume moved at cutover)
+  ln -s /mnt/volume_lon1_02/mypersonalfootballcoach.com/wp-content/uploads "$SITE/wp-content/uploads"   # same symlink as live (volume moved at cutover)
 fi
 fixperm
 
