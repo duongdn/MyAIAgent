@@ -3,7 +3,9 @@
 # Cron: 45 8 * * * (local UTC+7; PC is off overnight, boots ~08:15)
 
 PROJECT_DIR="/home/nus/projects/My-AI-Agent"
-CLAUDE_BIN="$(command -v claude || echo /usr/bin/claude)"
+# cron has a minimal PATH without ~/.local/bin (where claude lives) — set it before resolving claude
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+CLAUDE_BIN="$(command -v claude)"
 LOG_DIR="$PROJECT_DIR/tmp/alert-logs"
 LOG="$LOG_DIR/fb-post-cron.log"
 mkdir -p "$LOG_DIR"
@@ -26,9 +28,9 @@ if pgrep -f "claude.*me:fb-post" >/dev/null; then
 fi
 
 git pull --rebase origin master >> "$LOG" 2>&1
+[ -x "$CLAUDE_BIN" ] || { log "claude CLI not found in PATH=$PATH"; exit 1; }
 log "Starting fb-post draft"
 
-export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 "$CLAUDE_BIN" -p "/me:fb-post --report-date=$TODAY --report-time=$(TZ='Asia/Ho_Chi_Minh' date +%H%M)" \
   --dangerously-skip-permissions >> "$LOG" 2>&1
 log "Done (exit $?)"
