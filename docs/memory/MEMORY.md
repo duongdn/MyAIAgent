@@ -298,3 +298,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 ## assistant (MyDailyAssistant daemon)
 - [assistant_notify_only_relevant_no_store_noise](assistant/feedback_assistant_notify_only_relevant_no_store_noise.md) — 🔴 gate before store/notify; team chatter dropped; dryRun first
 - [assistant_never_claude_p_per_message](assistant/feedback_assistant_never_claude_p_per_message_use_llm_gateway.md) — 🔴 background LLM calls → llm.nustechnology.com gateway (deepseek-v4.1-flash), never `claude -p`; cap + count tokens
+- [mpfc_missed_rebills_caught_up_after_server_move](mpfc/project_mpfc_missed_rebills_caught_up_after_server_move.md) — 🔴 10-23 new server billed 87 stuck rebills (May-Oct) £1.2k; check overdue mm_scheduled_events before migrations
