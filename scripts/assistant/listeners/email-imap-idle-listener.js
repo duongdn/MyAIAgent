@@ -30,7 +30,7 @@ function fetchNew(imap, acct, key) {
         return intake({
           source: 'email', account: acct.email, channel: acct.folder || 'INBOX',
           source_msg_id: m.messageId || `${acct.email}:${uid || seq}`, sender: from,
-          text: `${subject}\n\n${(m.text || '').replace(/\n{3,}/g, '\n\n').slice(0, 1200)}`,
+          text: `${subject}\n\n${(m.text || '').replace(/\n{3,}/g, '\n\n').slice(0, 1200)}${m.attachments?.length ? `\n\n📎 Attachments: ${m.attachments.map(x => x.filename).filter(Boolean).join(', ')}` : ''}`,
           ts_utc: (m.date || new Date()).toISOString(),
           meta: { bulk: m.headers.has('list-unsubscribe') || /bulk|list/i.test(m.headers.get('precedence') || '') },
         });

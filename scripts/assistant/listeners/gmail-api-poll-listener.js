@@ -26,11 +26,14 @@ async function tick(acct, gmail) {
   const started = Math.floor(Date.now() / 1000);
   const list = await gmail.users.messages.list({ userId: 'me', q: `after:${since}`, maxResults: 30 });
   for (const { id } of (list.data.messages || []).reverse()) {
-    const m = await gmail.users.messages.get({ userId: 'me', id, format: 'metadata', metadataHeaders: ['Subject', 'From', 'Date', 'List-Unsubscribe'] });
+    const m = await gmail.users.messages.get({ userId: 'me', id, format: 'full' });
     const h = n => m.data.payload?.headers?.find(x => x.name === n)?.value || '';
+    // Body-less mails with a PDF brief look like noise without this (e.g. MPFC "Team Managers update" 2026-10-22).
+    const files = [];
+    (function walk(part) { if (part?.filename) files.push(part.filename); (part?.parts || []).forEach(walk); })(m.data.payload);
     await intake({
       source: 'email', account: acct.email, channel: 'INBOX', source_msg_id: id, sender: h('From'),
-      text: `${h('Subject')}\n\n${m.data.snippet || ''}`, ts_utc: new Date(Number(m.data.internalDate)).toISOString(),
+      text: `${h('Subject')}\n\n${m.data.snippet || ''}${files.length ? `\n\n📎 Attachments: ${files.join(', ')}` : ''}`, ts_utc: new Date(Number(m.data.internalDate)).toISOString(),
       meta: { bulk: !!h('List-Unsubscribe') },
     });
   }
