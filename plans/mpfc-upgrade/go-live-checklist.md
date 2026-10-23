@@ -60,3 +60,9 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - Giờ G (bây giờ 09:40 VN = 03:40 UK — đang thấp điểm, làm luôn được?)
 - Báo Saul trước hay sau?
 - C3 giao dịch Stripe thật: dùng thẻ/tài khoản nào?
+
+## Sự cố sau go-live (23/10) & xử lý
+- 10:11–10:55: firewall test chặn egress của `www-data` (tạo tay lúc test, không có trong script) còn trên prod → Gmail (4 email đơn 25841), Apple IAP (`add_plan`), Cloudflare purge lỗi. **Đã gỡ + lưu** (`netfilter-persistent save`). → Runbook: kiểm `iptables -S OUTPUT` sạch trước khi chuyển IP.
+- `add_plan` 500: Carbon 2.35 `setLastErrors(array)` nhận `false` trên PHP 8.2+ → vá `vendor/nesbot/carbon/.../Creator.php` (thêm vào `site-php83-fixes.patch`).
+- Rollbar plugin bị inactive trên prod → đã activate.
+- New Relic: live cũ daemon đã tắt từ trước; server mới cài `newrelic-php5` 12.12, app `MPFC-live2` **connected** 11:02.
