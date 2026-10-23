@@ -21,7 +21,7 @@ MAX_PAGES = 30  # 20 activities/page
 
 def load_cookie_header():
     if '--refresh-cookies' in sys.argv or not COOKIES.exists():
-        subprocess.run([sys.executable, str(ROOT / 'scripts' / 'get-duongdn-strava-cookies.py')], check=True)
+        subprocess.run([sys.executable, str(ROOT / 'scripts' / 'get-chrome-profile9-site-cookies.py'), 'strava'], check=True)
     return '; '.join(f"{c['name']}={c['value']}" for c in json.loads(COOKIES.read_text()))
 
 

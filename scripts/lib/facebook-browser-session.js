@@ -9,7 +9,7 @@ puppeteer.use(StealthPlugin());
 
 const fs = require('fs');
 const path = require('path');
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 
 const FB_PROFILE_DIR = path.join(__dirname, '..', '..', 'tmp', 'facebook-profile');
 const PRIVATE_DISPLAY = ':90';
@@ -29,6 +29,20 @@ async function ensurePrivateDisplay() {
   for (let i = 0; i < 20 && !fs.existsSync('/tmp/.X11-unix/X90'); i++) {
     await new Promise(r => setTimeout(r, 150));
   }
+}
+
+// FB periodically logs the automation profile out ("Continue / Use another profile").
+// The user stays logged in in their real Chrome (Profile 9), so copy those cookies in on
+// every launch. If that fails we fall back to whatever session the profile still has.
+async function seedCookiesFromRealChrome(page) {
+  const root = path.join(__dirname, '..', '..');
+  const exported = spawnSync('python3', [path.join(root, 'scripts', 'get-chrome-profile9-site-cookies.py'), 'facebook'], { encoding: 'utf-8' });
+  const file = path.join(root, 'tmp', 'facebook-cookies.json');
+  if (exported.status !== 0 || !fs.existsSync(file)) {
+    console.error(`[facebook] Profile 9 cookie export failed: ${(exported.stderr || '').trim()}`);
+    return;
+  }
+  await page.setCookie(...JSON.parse(fs.readFileSync(file, 'utf-8')));
 }
 
 async function openFacebookSession() {
@@ -53,6 +67,7 @@ async function openFacebookSession() {
   await page.evaluateOnNewDocument(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
   });
+  await seedCookiesFromRealChrome(page);
   return { browser, page };
 }
 

@@ -12,5 +12,17 @@
     "feeling": "hết tiền",
     "image": "VN-Index 90 ngày (scripts/render-vnindex-chart-image.js)",
     "type": "stock-humor"
+  },
+  {
+    "date": "2026-10-23",
+    "type": "nus-blog",
+    "topic": "Share blog NUS: ClearHear phụ đề trực tiếp chạy offline",
+    "sources": [
+      "https://www.nustechnology.com/blog/live-captions-with-the-internet-switched-off-inside-clearhear"
+    ],
+    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid02TZW3S96yg367JbhEdc4DYfqg4sTFykG6bZvsSEmMJLPYC3HZdsQTuW55ufL5oHWil",
+    "status": "draft",
+    "audience": "Chỉ mình tôi",
+    "feeling": "hào hứng"
   }
 ]

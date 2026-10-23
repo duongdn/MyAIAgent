@@ -90,7 +90,7 @@ Ai ngờ làm chứng sĩ rồi mới biết mình cũng y chang 😅
    `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}.txt --image tmp/vnindex-{date}.png --feeling "<cảm xúc>"` (thêm `--dry-run` nếu mode dry-run)
 3. Kết quả JSON:
    - `ok:true` → append history `{status:"draft", audience:"Chỉ mình tôi", postUrl}`
-   - `ok:false` + `not_logged_in` → báo user cần login lại: `node scripts/facebook-profile-post.js` dùng chung profile với `node scripts/facebook-page-scraper.js --login`
+   - `ok:false` + `not_logged_in` → script đã tự nạp cookie FB từ Chrome Profile 9 mà vẫn lỗi → báo user: "đăng nhập lại facebook.com trong Chrome thật (Profile 9)"
    - `ok:false` khác → báo lỗi + screenshot, KHÔNG retry mù, KHÔNG thử đăng Public
 4. Ghi report `reports/{date}/{HHMM}-fb-post.md`: bài viết, chủ đề, nguồn, postUrl, lệnh submit
 5. Commit `docs/fb-post/post-history.json` + report (`chore: fb post draft {date}`)

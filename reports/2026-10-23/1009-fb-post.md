@@ -19,3 +19,6 @@ Hơi bị nể đồng nghiệp luôn 😆 Ai tò mò ghé đọc thử nha 👇
 
 ## Retry
 `node scripts/facebook-profile-post.js --draft tmp/fb-post-2026-10-23.txt --feeling "hào hứng"`
+
+## Cập nhật 10:50
+- Đăng nháp OK (sau khi seed cookie FB từ Chrome Profile 9): https://www.facebook.com/dnduong.us/posts/pfbid02TZW3S96yg367JbhEdc4DYfqg4sTFykG6bZvsSEmMJLPYC3HZdsQTuW55ufL5oHWil

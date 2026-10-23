@@ -295,3 +295,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [fb_post_content_types_rotation](fb-post/project_fb_post_content_types_rotation.md) — 6 loại: stock-humor/nus-blog/trend/share-article/running(Strava)/fb-memory; cron 08:45 (PC off đêm)
 ## assistant (MyDailyAssistant daemon)
 - [assistant_notify_only_relevant_no_store_noise](assistant/feedback_assistant_notify_only_relevant_no_store_noise.md) — 🔴 gate before store/notify; team chatter dropped; dryRun first
+- [fb_post_cron_failures_path_and_logout](fb-post/feedback_fb_post_cron_failures_path_and_logout.md) — cron PATH/claude+node, FB no networkidle, logout → seed cookie từ Chrome Profile 9
