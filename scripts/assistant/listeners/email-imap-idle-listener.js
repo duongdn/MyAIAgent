@@ -52,8 +52,17 @@ function listen(acct) {
     fetchNew(imap, acct, key);
     imap.on('mail', () => fetchNew(imap, acct, key));
   }));
-  imap.once('error', e => console.error(`[email] ${acct.email}: ${e.message}`));
-  imap.once('end', () => { console.error(`[email] ${acct.email} disconnected, reconnecting in 30s`); setTimeout(() => listen(acct), 30000); });
+  // 'error' (e.g. DNS EAI_AGAIN after sleep) may fire without 'end' → reconnect from either, once.
+  let retried = false;
+  const retry = why => {
+    if (retried) return; retried = true;
+    console.error(`[email] ${acct.email}: ${why} — reconnecting in 30s`);
+    try { imap.destroy(); } catch {}
+    setTimeout(() => listen(acct), 30000);
+  };
+  imap.on('error', e => retry(e.message));
+  imap.once('end', () => retry('disconnected'));
+  imap.once('close', () => retry('closed'));
   imap.connect();
 }
 

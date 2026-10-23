@@ -81,8 +81,14 @@ async function rtmLoop(a, me) {
 
 async function listen(a) {
   if (policy.isMuted({ source: 'slack', account: a.workspace })) return console.log(`[slack] ${a.workspace}: muted in policy — skipped`);
-  const auth = await slack(a, 'auth.test').catch(e => ({ error: e.message }));
-  if (!auth.ok) return console.error(`[slack] ${a.workspace}: auth ${auth.error} — skipped`);
+  // Retry auth forever (network may be down at boot); a truly dead token just logs every 10 min.
+  let auth;
+  for (;;) {
+    auth = await slack(a, 'auth.test').catch(e => ({ error: e.message }));
+    if (auth.ok) break;
+    console.error(`[slack] ${a.workspace}: auth ${auth.error} — retry in 10 min`);
+    await sleep(600000);
+  }
   const rtm = await slack(a, 'rtm.connect').catch(() => ({}));
   if (rtm.ok) return rtmLoop(a, auth.user_id);
   console.log(`[slack] polling ${a.workspace} every ${POLL_MS / 1000}s`);
