@@ -2,7 +2,6 @@
 /**
  * Inbox API for MyDailyAssistant (page: /inbox.html).
  *  GET  /api/inbox            relevant events stored by the daemon
- *  GET  /api/alerts           alerts from the periodic read-only scan (layer A)
  *  GET  /api/inbox/gate-log   last relevance-gate decisions (NOTIFY + drop) from tmp/assistant-gate.log
  *  POST /api/inbox/:id/seen   mark event seen
  *  POST /api/inbox/:id/mute   mute the event's channel in config/assistant-policy.json
@@ -21,8 +20,6 @@ function mount(app) {
   app.get('/api/inbox', (_req, res) => {
     res.json({ policy: policy.load(), events: db.listEvents() });
   });
-
-  app.get('/api/alerts', (_req, res) => res.json(db.listAlerts()));
 
   app.get('/api/inbox/gate-log', (_req, res) => {
     let lines = [];
