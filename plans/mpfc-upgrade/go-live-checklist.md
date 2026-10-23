@@ -50,7 +50,7 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 4. DB hỏng → restore backup A5
 
 ## E. Sau go-live
-- [ ] Cấp lại cert `mypersonalfootballcoach.com-0001` bỏ domain staging (gia hạn ~02/11 sẽ lỗi nếu không); xoá cert `mypersonalfootballcoach.com` hết hạn 2022
+- [x] Cấp lại cert `mypersonalfootballcoach.com-0001` chỉ domain chính (hết hạn 21/01/2027, account live `02c1…`); xoá cert hết hạn 2022; dry-run gia hạn OK main/admin/dailyagent (quantification gia hạn trên server cũ)
 - [ ] Theo dõi 48h: Rollbar, đơn hàng/rebilling, push
 - [ ] T+1 tuần: xoá DB `wp_mpfc_upgrade`, key ssh test trên live
 - [ ] T+2 tuần: snapshot + xoá droplet live cũ
@@ -66,3 +66,19 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - `add_plan` 500: Carbon 2.35 `setLastErrors(array)` nhận `false` trên PHP 8.2+ → vá `vendor/nesbot/carbon/.../Creator.php` (thêm vào `site-php83-fixes.patch`).
 - Rollbar plugin bị inactive trên prod → đã activate.
 - New Relic: live cũ daemon đã tắt từ trước; server mới cài `newrelic-php5` 12.12, app `MPFC-live2` **connected** 11:02.
+
+## Cập nhật 23/10 11:30
+- [x] Cert main cấp lại (xem E)
+- [x] `TESTFREE2610` (free 100%, không giới hạn, đã dùng 3 lần) → archived
+- [x] Runbook + `01` (prod tự xoá firewall egress test, cài New Relic) — commit `69d4b40c`
+- [x] **quantification down 10:06–11:28** (DNS trỏ IP riêng server cũ, Apache cũ đã tắt) → bật lại Apache cũ **chỉ vhost quantification** (proxy VPC → server mới); vhost main/admin/dailyagent trên server cũ đã tắt/cất `/root/vhosts-disabled-20261023`
+- [~] `wp yoast index` đang chạy nền (nice 15), log `/root/upgrade/yoast-index.log`
+- [ ] Commit code server mới lên nhánh `live` (WP 7.1.3, plugin, patch PHP 8.3, 5 file theme anh đang sửa) — chờ anh duyệt danh sách
+
+## Việc tiếp theo
+1. Commit + push code server mới (anh duyệt trước)
+2. Đổi DNS `quantification.youragentstore.net` → `159.65.213.246` (zone Cloudflare khác — anh làm) → sau đó tắt hẳn server cũ
+3. Theo dõi 48h: Rollbar, New Relic, debug.log, đơn hàng + MM rebilling, push, cron đêm (backup volume, clone apache_logs)
+4. T+1 tuần: xoá DB `wp_mpfc_upgrade`, account certbot test `433b…`, key ssh test trên live cũ; đổi tên droplet + bỏ tag `upgrade-test`
+5. T+2 tuần: snapshot + xoá droplet cũ `293179468` (sau khi quantification đã đổi DNS)
+6. Đợt sau: vá json-api (`setPassword`, `changeAccountInfo`, `canselMembership`), update plugin premium, email tóm tắt cho Saul (em soạn, anh duyệt)
