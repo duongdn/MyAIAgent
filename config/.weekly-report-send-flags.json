@@ -2,10 +2,10 @@
   "description": "Explicit send-gate for the weekly James Diamond + Marcel + Blair Brown Matrix report to ThuyLTT. Mirrors the daily-report Trello-checklist gating pattern: nothing gets sent until `confirmed` is explicitly true for the exact `message_text` on file. Not a secret — tracked in git.",
   "james_diamond_marcel_blair_brown": {
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
-    "week_start": "2026-10-12",
-    "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
+    "week_start": "2026-10-19",
+    "message_text": "Report week 19/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 10m/10m",
     "confirmed": false,
-    "draft_note": "2026-10-17 07:15 +07 manual refresh: live WS week 2026-10-12 LeNH 40h (8x5, Fri now logged), AnhNH2 20h (4x5), charged=actual. Marcel DuongDN 0.5h unchanged. Awaiting user confirmation.",
+    "draft_note": "2026-10-23 18:00 cron: live WS week 2026-10-19 LeNH 40h (8x5), AnhNH2 20h (8/0/4/4/4, no log 10-20), charged=actual. Marcel DuongDN 0.17h. Awaiting user confirmation.",
     "unresolved_thangn": "ThangN absent from James Diamond Workstream member list 2 weeks running (09-21 week and 09-28 week) after one active week (14h, 09-17). Ask user before finalizing: still on the project (just not logging) or rolled off? If rolled off, should his Mobile line be removed from future reports going forward, not just this draft?",
     "superseded_week_09_21": {
       "week_start": "2026-09-21",
@@ -107,6 +107,13 @@
       "confirmed": false,
       "note": "Drafted 2026-10-10, never confirmed/sent; superseded by week 10-12 draft"
     },
-    "sent": false
+    "sent": false,
+    "unsent_draft_10_12": {
+      "week_start": "2026-10-12",
+      "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
+      "confirmed": false,
+      "sent": false,
+      "note": "Never confirmed; superseded by week 19/10 draft at 2026-10-23 18:00 cron."
+    }
   }
 }
