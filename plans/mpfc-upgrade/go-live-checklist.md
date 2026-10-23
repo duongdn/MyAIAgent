@@ -119,3 +119,6 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - Phần cứng/đĩa/latency DB tương đương (php bench 2.2s vs 2.2s, dd 471 vs 520 MB/s, ping DB ~1ms)
 - 404 chậm (avg 19.5s, tới 66s) = bot quét `/@fs/.env`, `/graphql`…
 - **Gap: cloud firewall `MPFC-common` (22/80/443/1080) chỉ gắn droplet cũ** — server mới chưa có cloud firewall
+- 15:35 mu-plugin `00-mpfc-silence-deprecations.php` (error_reporting bỏ E_DEPRECATED): debug.log 1.9 MB/min → 77 KB/min; commit `6f05694eb` live-php83 (chưa push)
+- 15:42 cloud firewall `MPFC-common` gắn thêm droplet mới (trước đó 3334/3335 node app lộ public, bypass basic auth) — verify site/ssh/DB/cron OK, 3334 blocked
+- 15:45 Cloudflare custom WAF rule (id 128c8f6a…): block path chứa `%2525`, `/.env`, `/@fs/`, thư mục VCS — test 403 cho scanner, 200 cho trang thật
