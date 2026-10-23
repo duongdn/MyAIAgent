@@ -9,6 +9,7 @@ const telegram = require('./telegram-callback-loop');
 const matrix = require('./listeners/matrix-sync-listener');
 const email = require('./listeners/email-imap-idle-listener');
 const slack = require('./listeners/slack-listener');
+const discord = require('./listeners/discord-poll-listener');
 
 process.on('unhandledRejection', e => console.error('[daemon] unhandled', e?.message || e));
 console.log(`[daemon] start ${new Date().toISOString()}`);
@@ -16,3 +17,4 @@ telegram.run();
 matrix.run();
 email.run();
 slack.run();
+discord.run();
