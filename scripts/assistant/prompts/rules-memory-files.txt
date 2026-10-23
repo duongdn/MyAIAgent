@@ -1,0 +1,9 @@
+# Memory files whose rules the realtime judge must apply (one path per line, relative to repo root)
+docs/memory/daily-report/trello/feedback_ignore_list_paused_items.md
+docs/memory/daily-report/trello/feedback_holding_reply_and_our_side_done_are_not_alerts.md
+docs/memory/daily-report/slack/feedback_project_topics_not_alerts.md
+docs/memory/global/feedback_customer_direct_ask_universal_gate.md
+docs/memory/daily-report/trello/feedback_legalatoms_ray_many_subprojects_ignore_unless_direct_ask.md
+docs/memory/daily-report/email/feedback_swish_paused_no_monitoring.md
+docs/memory/daily-report/slack/feedback_maddy_pr481_not_a_blocker_waiting_on_customer.md
+docs/memory/daily-report/slack/feedback_low_activity_devs_not_alert.md
