@@ -3,8 +3,8 @@
 # Cron: 45 8 * * * (local UTC+7; PC is off overnight, boots ~08:15)
 
 PROJECT_DIR="/home/nus/projects/My-AI-Agent"
-# cron has a minimal PATH without ~/.local/bin (where claude lives) — set it before resolving claude
-export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+# cron has a minimal PATH without ~/.local/bin (claude) and nvm (node) — set it before resolving claude
+export PATH="$HOME/.local/bin:$HOME/.nvm/versions/node/$(ls -v $HOME/.nvm/versions/node/ | tail -1)/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 CLAUDE_BIN="$(command -v claude)"
 LOG_DIR="$PROJECT_DIR/tmp/alert-logs"
 LOG="$LOG_DIR/fb-post-cron.log"
