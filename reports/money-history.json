@@ -803,6 +803,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW -447K vs 10:00: Finhay -> vcb 6,876,000 (Finhay an 67.4M -> 60.5M), tikcop ko ki han -> vcb 10M, vcb -> FPTS 6M (T10 FPTS 125.3M), chi 336K, Paypal FX -11K. NW = totaldashboard 6,533,422,677 + Larion 800M + VCBF 525,063,000 + Finhay 60,528,069. T10 MTD Thu 122.4M/Chi 37.7M/Net +84.7M."
+    },
+    {
+      "date": "2026-10-23",
+      "label": "23/10",
+      "net_worth": 7919015746,
+      "gross_assets": 8004434536,
+      "liabilities": 8977146,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 711500000,
+        "investment": 2579447840,
+        "savings": 1145502058,
+        "liquid": 47984638
+      },
+      "method": "dashboard_verified",
+      "note": "NW +2K vs 10-22 16:45: tikcop ko ki han -> vcb 12M (+lai 192K), vcb -> FPTS 5.1M (T10 FPTS 130.4M), thu 500K, chi 746K (mua Claude 600K). NW = totaldashboard 6,533,424,677 + Larion 800M + VCBF 525,063,000 + Finhay 60,528,069. T10 MTD Thu 123.2M/Chi 38.5M/Net +84.7M."
     }
   ]
 }
