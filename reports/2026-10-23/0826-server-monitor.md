@@ -53,3 +53,10 @@ Deletable (needs approval): booking.20251003.zip 1.5G, booking.zip 1.4G, booking
 1. Bailey local redis retired on purpose? If yes drop Redis step from skill.
 2. Approve Fountain staging log cleanup / Rory zip+log deletion?
 3. XID .dev hosts — decommissioned? add to skip list?
+
+## Follow-up: xid_sync_console 73% — root cause
+- /var/log 18G of 35G used: `syslog` 7.3G (since 10-18) + `syslog.1` 8.5G (uncompressed, delaycompress)
+- ~100% of syslog lines = `dotnet-xid-webapp` (xid-webapp.service, XID.Sync.API) logging every EF Core SQL (`Executed DbCommand ... UPDATE tenantX.Devices SET SyncTime...`) at Information level → ~1.2G/day
+- Cause: /home/ubuntu/deploy/appsettings.json `Default: Information`, no `Microsoft.EntityFrameworkCore` override, no appsettings.Production.json
+- Other: journal 985M, snapd 1.8G (9 disabled snap revisions), swapfile 6G
+- Fix (needs approval): add `"Microsoft.EntityFrameworkCore": "Warning"` to LogLevel + restart xid-webapp; `truncate -s 0 /var/log/syslog.1` (frees 8.5G); optional: logrotate syslog daily + maxsize 1G
