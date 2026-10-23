@@ -2,10 +2,10 @@
 
 ## Tóm tắt nhanh
 Saul gửi PDF 10 trang: **nâng cấp Team Manager trên web** (không làm lại từ đầu). Sau nâng cấp, Director giao course/session/tài liệu club cho **cả coach lẫn player**, theo dõi bài nào đã được dạy, và đọc reflection của coach.
-- **Fix now:** 3/3 xong phía web (server mới, nhánh `live-php83`). Việc 3 chờ Tien gọi endpoint App Feed.
+- **Fix now:** việc 1 và 2 xong trên server mới (nhánh `live-php83`, commit `93d5b1bc5`). Việc 3 phía web không cần sửa: login và app usage đã có endpoint ghi sẵn, app mới chỉ cần gọi `otherpages/app_usage`. Đã nhắn Tien 14:54 ([msg](https://mypersonalfoo-lbq2917.slack.com/archives/C057Y0CUKFC/p1792742070221219)).
 - **Phần còn lại:** 5 phase, khoảng **20–23 ngày dev**.
 - **Concern lớn nhất:** brief nói league dưới 6 người **gộp vào league cha**, mâu thuẫn với câu trả lời ý 5 đã gửi Tien.
-- **Message Slack báo đã nhận PDF:** chưa gửi được vì token thiếu `chat:write`.
+- **Đã báo trong room** lúc 13:50 ([msg](https://mypersonalfoo-lbq2917.slack.com/archives/C057Y0CUKFC/p1792738213153739)): đã nhận PDF và đã fix 2 việc.
 
 ## Nội dung brief (dịch gọn)
 | # | Mục | Yêu cầu chính |
@@ -25,13 +25,13 @@ Saul gửi PDF 10 trang: **nâng cấp Team Manager trên web** (không làm l�
 |---|------|-----------|---------------------|
 | 1 | Fix now: Requires Approval mặc định cho mọi club | ✅ xong, server mới `live-php83` `93d5b1bc5` | Đã set lại 5 club (2 club 1157, 150 trước để Active) |
 | 2 | Fix now: ngày UK `22 Oct 2026` | ✅ xong `93d5b1bc5`, ô chọn ngày đã test trên Chrome | Chưa đổi theo quốc gia, mọi club đều UK |
-| 3 | Fix now: feed app → web (app_login) | ✅ phía web xong `79e2b7b37`, 12/12 test pass, doc `api-docs/app-feed/` | Chờ Tien tích hợp + nhận secret. "—" thay vì 0 làm cùng cột mới ở Phase 1 |
+| 3 | Fix now: dữ liệu app (Last App Login, app usage) | ⏳ chờ Tien. Phía web không cần sửa | `auth/generate_auth_cookie` đã ghi login (60–80 user mỗi ngày). Team Stats đọc `mm_app_usage`, dữ liệu do `otherpages/app_usage` ghi. Đã hỏi Tien app mới có gọi endpoint này không ([msg](https://mypersonalfoo-lbq2917.slack.com/archives/C057Y0CUKFC/p1792742070221219)). Endpoint `appfeed` (HMAC) đã gỡ (`600721777`). Phần "—" thay cho 0 làm cùng các cột mới ở Phase 1 |
 | 4 | Phase 1: role + Players/Coaches + team key cho coach + menu 5 mục | ⏳ todo, 4–5 ngày | Phải làm trước Leagues |
 | 5 | Phase 2: Set plan mới + ô tìm kiếm + upload tài liệu club | ⏳ todo, 5–6 ngày | Catalogue chung với app; giới hạn file chờ Saul |
 | 6 | Phase 3: Plans + Remind + Coaching log | ⏳ todo, 4 ngày | Push cần Tien; email làm được ngay |
 | 7 | Phase 4: Leagues (gộp vào cha, bỏ coach, tên + chữ đầu, ẩn) | ⏳ todo, 3 ngày | Cần role (Phase 1) |
 | 8 | Phase 5: feed server-to-server có ký | ⏳ todo, 3 ngày | Thống nhất với Tien |
-| 9 | Message Slack báo đã nhận PDF + đã fix 2 việc | ⏳ chưa gửi | Token MPFC thiếu `chat:write` |
+| 9 | Message Slack báo đã nhận PDF + đã fix 2 việc | ✅ đã gửi 13:50 | [msg](https://mypersonalfoo-lbq2917.slack.com/archives/C057Y0CUKFC/p1792738213153739) |
 
 ## Concern
 | # | Concern | Mức |
@@ -53,10 +53,10 @@ Saul gửi PDF 10 trang: **nâng cấp Team Manager trên web** (không làm l�
   4. Có đồng ý thứ tự làm việc không?
   5. Có club nào không ở UK không?
 - **Tien:**
+  0. App mới có gọi `otherpages/app_usage` không? (đã hỏi 14:54)
   1. Đính chính chuyện league cha.
   2. Thống nhất cách ký và danh sách event của feed.
   3. Catalogue nội dung lấy từ đâu?
   4. App nhận push cho nút Remind thế nào?
-- **Anh:** thêm scope `chat:write` cho token MPFC, hay anh tự gửi message?
 
 Plan chi tiết: `plans/261023-1327-mpfc-team-manager-upgrade/plan.md`
