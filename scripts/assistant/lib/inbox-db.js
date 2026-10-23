@@ -48,3 +48,33 @@ function listEvents(limit = 200) {
 }
 module.exports.listEvents = listEvents;
 
+
+// ── Short-term context (48h, auto-purged): lets the judge see thread history + detect "already answered" ──
+db.exec(`CREATE TABLE IF NOT EXISTS recent (
+  source TEXT, account TEXT, channel TEXT, thread_id TEXT, sender TEXT, is_ours INTEGER, text TEXT, ts_utc TEXT);
+CREATE INDEX IF NOT EXISTS recent_ch ON recent(source, account, channel, ts_utc);
+CREATE TABLE IF NOT EXISTS pending_asks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, source TEXT, account TEXT, channel TEXT, thread_id TEXT,
+  ts_utc TEXT, due_at TEXT, event_json TEXT, verdict_json TEXT, status TEXT NOT NULL DEFAULT 'waiting');`);
+
+function addRecent(e, isOurs) {
+  db.prepare('INSERT INTO recent VALUES (?,?,?,?,?,?,?,?)').run(e.source, e.account || '', e.channel || '',
+    e.thread_id || '', e.sender || '', isOurs ? 1 : 0, (e.text || '').slice(0, 600), e.ts_utc);
+  db.prepare("DELETE FROM recent WHERE ts_utc < ?").run(new Date(Date.now() - 48 * 3600000).toISOString());
+}
+function recentInChannel(e, limit = 12) {
+  return db.prepare(`SELECT sender, is_ours, text, ts_utc FROM recent WHERE source=? AND account=? AND channel=? AND ts_utc < ?
+    ORDER BY ts_utc DESC LIMIT ?`).all(e.source, e.account || '', e.channel || '', e.ts_utc, limit).reverse();
+}
+/** True if someone on our side posted in the same channel (and thread, if any) after `ts`. */
+function oursRepliedSince(a) {
+  return !!db.prepare(`SELECT 1 FROM recent WHERE source=? AND account=? AND channel=? AND is_ours=1 AND ts_utc > ?
+    AND (?='' OR thread_id=? OR thread_id='') LIMIT 1`).get(a.source, a.account || '', a.channel || '', a.ts_utc, a.thread_id || '', a.thread_id || '');
+}
+function addPendingAsk(e, verdict, dueAt) {
+  db.prepare('INSERT INTO pending_asks (source, account, channel, thread_id, ts_utc, due_at, event_json, verdict_json) VALUES (?,?,?,?,?,?,?,?)')
+    .run(e.source, e.account || '', e.channel || '', e.thread_id || '', e.ts_utc, dueAt, JSON.stringify(e), JSON.stringify(verdict));
+}
+function dueAsks(now) { return db.prepare("SELECT * FROM pending_asks WHERE status='waiting' AND due_at <= ?").all(now); }
+function setAskStatus(id, status) { db.prepare('UPDATE pending_asks SET status=? WHERE id=?').run(status, id); }
+Object.assign(module.exports, { addRecent, recentInChannel, oursRepliedSince, addPendingAsk, dueAsks, setAskStatus });
