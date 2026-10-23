@@ -47,3 +47,22 @@ function listEvents(limit = 200) {
   return db.prepare('SELECT * FROM events ORDER BY ts_utc DESC LIMIT ?').all(limit);
 }
 module.exports.listEvents = listEvents;
+
+// ── Alerts (layer A: periodic read-only daily-report scan) ──
+db.exec(`CREATE TABLE IF NOT EXISTS alerts (
+  key TEXT PRIMARY KEY, project TEXT, source TEXT, severity TEXT, title TEXT, detail TEXT,
+  link TEXT, suggested_action TEXT, status TEXT NOT NULL, first_seen TEXT NOT NULL,
+  updated_at TEXT NOT NULL, notified_hash TEXT)`);
+
+function getAlert(key) { return db.prepare('SELECT * FROM alerts WHERE key=?').get(key); }
+function openAlerts() { return db.prepare("SELECT * FROM alerts WHERE status='open' ORDER BY updated_at DESC").all(); }
+function listAlerts(limit = 200) { return db.prepare('SELECT * FROM alerts ORDER BY status=\'open\' DESC, updated_at DESC LIMIT ?').all(limit); }
+function upsertAlert(a, now) {
+  db.prepare(`INSERT INTO alerts (key, project, source, severity, title, detail, link, suggested_action, status, first_seen, updated_at)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(key) DO UPDATE SET project=excluded.project, source=excluded.source,
+    severity=excluded.severity, title=excluded.title, detail=excluded.detail, link=excluded.link,
+    suggested_action=excluded.suggested_action, status=excluded.status, updated_at=excluded.updated_at`).run(
+    a.key, a.project, a.source, a.severity, a.title, a.detail, a.link || '', a.suggested_action || '', a.status, now, now);
+}
+function setAlertNotified(key, hash) { db.prepare('UPDATE alerts SET notified_hash=? WHERE key=?').run(hash, key); }
+Object.assign(module.exports, { getAlert, openAlerts, listAlerts, upsertAlert, setAlertNotified });
