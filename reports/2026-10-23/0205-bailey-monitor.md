@@ -74,6 +74,7 @@
 - `df` /home/customer: 175.3GB total, 138.7GB used. Dashboard % = (138.66−10.61)/175.27 = **73.1% → WARNING** (was 71.8% last week).
 - ~/www: pre9 15G (was 14G), je-pature 9.0G, staging-sg 3.9G, live paturevision.fr 2.2G, staging-je-pature 429M. There are no zip files.
 - The scraper was skipped because of the known CAPTCHA.
+- **Recheck 08:22:** SSH re-measure 73.1% (unchanged). Stays WARNING.
 
 ## SSL
 - Console: Dec 29 06:20:55 2026 GMT (about 67 days left)
@@ -90,6 +91,7 @@
 - Open card `6ada4f3d932249ea87716469` on list 686b1f67…: checklist "23/10/2026" with 9/9 complete, card `dueComplete: true`.
 
 ## Unresolved / follow-up
+- **Recheck 08:22:** subtasks 1–10 all done; nothing to re-run. Items below are infra/dev actions, not retriable checks.
 - ⚠️ Siteground storage is at 73.1% and still growing (pre9 +1G/week). The staging cleanup is still pending.
 - 🔴 Staging RuntimeException (PHP 7.2/Composer) has been flat at ~351/h for 5 weeks. It needs direct dev action.
 - 🟡 New this week: production ECONNREFUSED on port 25 (78/24h, possibly lost app mail), Redis DNS errors (5), currency rate NotNullViolation (25), La Poste spam rejections.
