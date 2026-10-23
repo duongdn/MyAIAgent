@@ -1,7 +1,11 @@
 /**
- * Single entry point for every listener: relevance gate → (only if relevant) store + notify owner
- * on Telegram + desktop popup. Irrelevant messages are dropped, not stored.
- * policy.dryRun=true → log the decision to tmp/assistant-gate.log instead of sending.
+ * Single entry point for every listener.
+ *  - Every non-muted message goes into the 48h context buffer (history for the judge, "answered?" detection).
+ *  - Our own messages stop there. Others go through the relevance gate:
+ *      urgent      → store + notify now
+ *      await_reply → pending ask; notified only if our side hasn't replied after policy.replyWaitMin (checked every 60s)
+ *      none        → dropped (not stored in the inbox)
+ * policy.dryRun=true → decisions only logged to tmp/assistant-gate.log, nothing sent.
  */
 const { execFile } = require('child_process');
 const fs = require('fs');
@@ -17,18 +21,14 @@ const DESKTOP_NOTIFY = path.join(__dirname, '..', '..', 'desktop-notify.js');
 const GATE_LOG = path.join(__dirname, '..', '..', '..', 'tmp', 'assistant-gate.log');
 
 function muteKey(e) { return `${e.source}:${e.account || ''}:${e.channel || ''}`; }
-function log(line) { fs.appendFile(GATE_LOG, `${new Date().toISOString()} ${line}\n`, () => {}); }
+function log(tag, e, why) {
+  fs.appendFile(GATE_LOG, `${new Date().toISOString()} ${tag.padEnd(6)} [${muteKey(e)}] ${e.sender}: ${(e.text || '').slice(0, 100).replace(/\n/g, ' ')} | ${why}\n`, () => {});
+}
 
-async function intake(e) {
-  const p = policy.load();
-  if (!p.enabled || policy.isMuted(e)) return;
-  const v = await judge(e);
-  log(`${v.notify ? 'NOTIFY' : 'drop  '} [${muteKey(e)}] ${e.sender}: ${(e.text || '').slice(0, 100).replace(/\n/g, ' ')} | ${v.reason}`);
-  if (!v.notify) return;
-
+async function notify(e, v, prefix = '') {
   const id = db.addEvent(e);
-  if (!id || p.dryRun) return;
-  const head = `${URG[v.urgency] || ''} ${ICON[e.source] || e.source} · ${e.channel || e.account || ''}`;
+  if (!id) return;
+  const head = `${URG[v.urgency] || ''} ${prefix}${ICON[e.source] || e.source} · ${e.channel || e.account || ''}`;
   const body = `${head}\n${v.summary ? '📝 ' + v.summary + '\n' : ''}👤 ${e.sender || '?'}\n\n${(e.text || '').slice(0, 1200)}${e.url ? '\n\n🔗 ' + e.url : ''}`;
   try {
     await sendToOwner(body, [[
@@ -37,12 +37,41 @@ async function intake(e) {
     ]]);
     db.setStatus(id, 'notified');
   } catch (err) { console.error(`[intake] telegram send failed #${id}: ${err.message}`); }
-
-  if (p.desktopPopup) {
+  if (policy.load().desktopPopup) {
     execFile('node', [DESKTOP_NOTIFY, '--title', head, '--body', v.summary || (e.text || '').slice(0, 200),
       '--urgency', v.urgency === 'high' ? 'critical' : 'normal'],
       { env: { ...process.env, DISPLAY: process.env.DISPLAY || ':0' } }, () => {});
   }
 }
+
+async function intake(e) {
+  const p = policy.load();
+  if (!p.enabled || policy.isMuted(e)) return;
+  if (!e.meta?.isEdit) db.addRecent(e, e.meta?.isOurs);
+  if (e.meta?.isOurs) return;
+
+  const v = await judge(e);
+  if (v.action === 'none') return log('drop', e, v.reason);
+  if (v.action === 'await_reply') {
+    const due = new Date(Math.max(Date.now(), Date.parse(e.ts_utc)) + (p.replyWaitMin ?? 30) * 60000).toISOString();
+    db.addPendingAsk(e, v, due);
+    return log('WAIT', e, v.reason);
+  }
+  log('URGENT', e, v.reason);
+  if (!p.dryRun) await notify(e, v);
+}
+
+/** Every 60s: pending asks past their wait time → answered by us? drop : notify. */
+async function checkPendingAsks() {
+  const p = policy.load();
+  for (const a of db.dueAsks(new Date().toISOString())) {
+    const e = JSON.parse(a.event_json);
+    if (db.oursRepliedSince(a)) { db.setAskStatus(a.id, 'answered'); log('ANSWRD', e, 'our side replied in time'); continue; }
+    db.setAskStatus(a.id, 'notified');
+    log('NOTIFY', e, `no reply after ${p.replyWaitMin ?? 30} min`);
+    if (!p.dryRun) await notify(e, JSON.parse(a.verdict_json), `⏳ chưa ai trả lời ${p.replyWaitMin ?? 30}' · `);
+  }
+}
+setInterval(() => checkPendingAsks().catch(err => console.error('[intake] pending', err.message)), 60000);
 
 module.exports = { intake, muteKey };

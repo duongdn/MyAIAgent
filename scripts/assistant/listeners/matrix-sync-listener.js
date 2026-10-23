@@ -47,13 +47,13 @@ async function run() {
         if (room.summary?.['m.joined_member_count']) roomMembers.set(roomId, room.summary['m.joined_member_count']);
         const isDirect = roomMembers.get(roomId) === 2;
         for (const ev of room.timeline?.events || []) {
-          if (ev.type !== 'm.room.message' || ev.sender === me || !ev.content?.body) continue;
+          if (ev.type !== 'm.room.message' || !ev.content?.body) continue;
           await intake({
             source: 'matrix', account: me, channel: await roomName(c, roomId), source_msg_id: ev.event_id,
             thread_id: ev.content['m.relates_to']?.event_id, sender: ev.sender, text: ev.content.body,
             url: `${c.chat_url || 'https://chat.nustechnology.com'}/#/room/${roomId}/${ev.event_id}`,
             ts_utc: new Date(ev.origin_server_ts).toISOString(),
-            meta: { isDirect, mentionsMe: /duongdn/i.test(ev.content.body + (ev.content.formatted_body || '')) },
+            meta: { isDirect, isOurs: ev.sender === me, isEdit: ev.content['m.relates_to']?.rel_type === 'm.replace', mentionsMe: /duongdn/i.test(ev.content.body + (ev.content.formatted_body || '')) },
           });
         }
       }

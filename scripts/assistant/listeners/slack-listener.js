@@ -28,7 +28,7 @@ function toEvent(a, m, channelName, permalink, me) {
     source: 'slack', account: a.workspace, channel: channelName, source_msg_id: `${a.workspace}:${m.channel?.id || m.channel}:${m.ts}`,
     thread_id: m.thread_ts, sender: m.username || m.user_profile?.real_name || m.user, text: m.text,
     url: permalink, ts_utc: new Date(parseFloat(m.ts) * 1000).toISOString(),
-    meta: { isBot: !!(m.bot_id || m.subtype === 'bot_message'), isDirect: !!(m.channel?.is_im || String(m.channel).startsWith('D')), mentionsMe: me && (m.text || '').includes(`<@${me}>`) },
+    meta: { isOurs: m.user === me || policy.load().ourSlackNames?.some(n => (m.username || m.user_profile?.real_name || '').toLowerCase().includes(n.toLowerCase())), isBot: !!(m.bot_id || m.subtype === 'bot_message'), isDirect: !!(m.channel?.is_im || String(m.channel).startsWith('D')), mentionsMe: me && (m.text || '').includes(`<@${me}>`) },
   };
 }
 
@@ -43,7 +43,7 @@ async function pollLoop(a, me) {
       const last = parseFloat(db.getCursor(key));
       const fresh = (r.messages?.matches || []).filter(m => parseFloat(m.ts) > last).reverse();
       for (const m of fresh) {
-        if (m.user !== me) await intake(toEvent(a, m, m.channel?.is_im ? `DM ${m.username}` : `#${m.channel?.name}`, m.permalink, me));
+        await intake(toEvent(a, m, m.channel?.is_im ? `DM ${m.username}` : `#${m.channel?.name}`, m.permalink, me));
         db.setCursor(key, m.ts);
       }
     } catch (err) { console.error(`[slack] poll ${a.workspace}: ${err.message}`); }
@@ -69,7 +69,7 @@ async function rtmLoop(a, me) {
       const ping = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ id: Date.now(), type: 'ping' })), 30000);
       ws.on('message', async raw => {
         const m = JSON.parse(raw);
-        if (m.type !== 'message' || m.subtype || m.user === me || !m.text) return;
+        if (m.type !== 'message' || (m.subtype && m.subtype !== 'thread_broadcast') || !m.text) return;
         await intake(toEvent(a, m, await chName(m.channel), `${a.url.replace(/\/$/, '')}/archives/${m.channel}/p${m.ts.replace('.', '')}`, me));
       });
       ws.on('close', () => { clearInterval(ping); resolve(); });
