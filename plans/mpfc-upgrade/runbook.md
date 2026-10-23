@@ -58,3 +58,13 @@ Quyết định 19/10: chuyển #3 MyDailyAgent, #4 quantification, #5 MyBussine
 - 03: schema cuối = lần nâng cấp tay 15/10, chỉ thiếu `wp_fv_player_encoding_jobs` (FV Player tạo lười khi mở trang admin encoding — không cần).
 - Smoke: guest 25 / member 27 / team 34 / manager 57 trang, 0 lỗi PHP; API app 20 endpoint chính OK (login, likeVideo, favorites, coach_corner, DBM, setPassword…).
 - Lỗi script phát hiện + đã sửa: (1) rsync live cần `sudo rsync` + bỏ debug.log; (2) mu-plugin chưa vá làm wp-cli fatal → áp patch site trước mọi lệnh wp; (3) 02 phải `--skip-plugins` (load plugin = migration sớm); (4) 03 đọc version phải `--skip-plugins`; (5) **rewrite rules mất CPT của theme (/user-video/ 404) khi chạy `--skip-themes` → 03 flush rewrite có load theme**; (6) 90 tắt payment/Rollbar bằng wp `--skip-plugins` (không REPLACE SQL trên dữ liệu serialize).
+
+## Bài học go-live 23/10 (đã đưa vào script/checklist)
+- **Firewall egress test**: tạo tay khi test (chặn `www-data` ra ngoài trừ allowlist) → prod mất Gmail/Apple IAP/CF purge 44 phút. 01 (prod) giờ tự xoá rule `--uid-owner 33`; trước khi chuyển IP: `iptables -S OUTPUT` phải sạch.
+- **uploads symlink** đúng: `/mnt/volume_lon1_02/mypersonalfootballcoach.com/wp-content/uploads` (02 đã sửa).
+- **Resque** nạp WordPress → phải start **sau** `wp maintenance-mode deactivate` (đang maintenance worker thoát ngay → start-limit-hit; `systemctl reset-failed` rồi restart).
+- **Rollbar plugin** bị inactive sau migrate → `wp plugin activate rollbar`, kiểm sau cutover.
+- **New Relic**: 01 (prod) cài `newrelic-php5`, copy license/appname từ live (`NR_INSTALL_KEY` không ghi được license → ghi trực tiếp vào ini). Kiểm `newrelic-daemon.log` có "app 'MPFC-live2' connected".
+- **PHP 8.3 + vendor cũ**: Carbon 2.35 `setLastErrors(array)` nhận `false` → 500 ở `user/add_plan`; vá trong `site-php83-fixes.patch`. Còn thư viện cũ khác trong `vendor/` → theo dõi Rollbar.
+- **quantification.youragentstore.net** trỏ IP riêng droplet cũ `142.93.46.109` (không phải Reserved IP) → server cũ phải giữ Apache chỉ với vhost quantification (proxy VPC → server mới) cho tới khi đổi DNS sang `159.65.213.246`. Cert quantification gia hạn trên server cũ (dry-run trên server mới fail).
+- **certbot** có 2 account (live `02c1…`, test `433b…`) → luôn `--account 02c1fed6e7214d29d91521a94238f01b`; xoá account test khi dọn.

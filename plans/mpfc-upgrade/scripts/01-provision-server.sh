@@ -89,6 +89,29 @@ systemctl daemon-reload
 # test server: never run workers (copied DB has real device tokens -> real push notifications)
 # NOT enabled/started here: workers start only after the cutover (release-plan G+27: systemctl enable --now mpfc-resque@{1,2,3})
 
+if [ $TEST = 0 ]; then
+  log "01: production — remove any test egress firewall for www-data (it blocked Gmail/Apple/Stripe on go-live day)"
+  for t in iptables ip6tables; do $t -S OUTPUT | grep -- "--uid-owner 33" | sed "s/^-A /-D /" | while read -r r; do $t $r; done; done
+  netfilter-persistent save >/dev/null 2>&1 || true
+  log "01: New Relic PHP agent (same license + appname as live)"
+  curl -fsSL https://download.newrelic.com/NEWRELIC_APT_2DAD550E.public | gpg --dearmor --yes -o /usr/share/keyrings/newrelic.gpg
+  echo "deb [signed-by=/usr/share/keyrings/newrelic.gpg] http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
+  apt-get update -q >/dev/null && DEBIAN_FRONTEND=noninteractive apt-get install -y -q newrelic-php5 >/dev/null
+  NR_INSTALL_SILENT=1 newrelic-install install >/dev/null 2>&1 || true
+  NRLINE=$(live "grep -h '^newrelic.license' /etc/php/*/apache2/conf.d/*newrelic*.ini | head -1")
+  NRAPP=$(live "grep -h '^newrelic.appname' /etc/php/*/apache2/conf.d/*newrelic*.ini | head -1")
+  for f in /etc/php/8.3/*/conf.d/*newrelic.ini; do
+    python3 - "$f" "$NRLINE" "$NRAPP" <<'PY'
+import re, sys
+p, lic, app = sys.argv[1:4]
+s = open(p).read()
+s = re.sub(r"(?m)^;?\s*newrelic.license\s*=.*$", lambda m: lic, s)
+s = re.sub(r"(?m)^;?\s*newrelic.appname\s*=.*$", lambda m: app, s)
+open(p, "w").write(s)
+PY
+  done
+fi
+
 apachectl configtest
 systemctl enable --now apache2 redis-server
 systemctl reload apache2
