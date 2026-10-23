@@ -85,6 +85,20 @@ wp --path=/var/www/mypersonalfootballcoach.com eval "
 "
 ```
 
+### Billing Integrity (stuck rebills) — MANDATORY
+
+Rebills claimed into a batch but never queued get stuck silently, then charge members months late when something releases them (2026-10-23: 87 members, £1,218). The fixer (`adonly/manually_process_stuck_events_cron.php`, every 15 min) auto-queues only rebills stuck for 3 days or less. Older ones get an email alert instead.
+
+```bash
+cd /var/www/mypersonalfootballcoach.com
+# Stuck = batch_id set, still pending, overdue > 1h
+wp db query "SELECT COUNT(*) stuck, MIN(scheduled_date) oldest FROM mm_scheduled_events WHERE event_type=1 AND status=0 AND processed_date IS NULL AND batch_id IS NOT NULL AND batch_id<>'' AND scheduled_date < NOW() - INTERVAL 1 HOUR AND scheduled_date >= '2024-01-01'" --skip-plugins --skip-themes
+# Fixer heartbeat (unix ts) — must be < 30 min old
+echo "fixer_last_run_age_min=$(( ($(date +%s) - $(wp option get mpfc_stuck_fixer_last_run --skip-plugins --skip-themes)) / 60 ))"
+```
+
+**Flag CRITICAL:** stuck > 0 (oldest > 3 days means it will NOT auto-charge, so a human decision is needed), or fixer heartbeat > 30 min / missing (fixer died silently, as it did on the old server 2026-05-20 → 10-23).
+
 ## Check 3 — MemberMouse Activity (`/me:mpfc-monitor members`)
 
 Query DigitalOcean MySQL directly via WP CLI (credentials in `wp-config.php`):
