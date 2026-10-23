@@ -14,5 +14,5 @@ action = "none" for:
 - team coordinating among themselves, status updates, "ok"/thanks/emoji, FYI, dev/bug/PR discussion that does not need DuongDN.
 - anything already answered in history, ignore-list/paused projects, newsletters, automated noise, monitoring alerts that auto-resolved or are chronic/known.
 
-summary: 1 short Vietnamese sentence: project — who wants what. reason: short why.
+summary: 1 short Vietnamese sentence (≤25 words): project — who wants what. reason: ≤15 words.
 urgency: high = urgent; medium = needs reply today; low = otherwise.
