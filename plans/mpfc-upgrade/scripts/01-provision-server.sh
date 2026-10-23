@@ -36,6 +36,14 @@ for ini in /etc/php/8.3/apache2/php.ini /etc/php/8.3/cli/php.ini; do
   sed -i -E 's/^;?\s*upload_max_filesize\s*=.*/upload_max_filesize = 100M/; s/^;?\s*post_max_size\s*=.*/post_max_size = 100M/;
              s/^;?\s*max_input_vars\s*=.*/max_input_vars = 1500/; s/^;?\s*expose_php\s*=.*/expose_php = Off/' "$ini"
 done
+cat > /etc/php/8.3/apache2/conf.d/99-mpfc-opcache.ini <<'EOF'
+; MPFC: WP + ~60 plugins overflow the 128M/8M defaults (cache_full, 58% hit rate on go-live day)
+opcache.memory_consumption=512
+opcache.interned_strings_buffer=64
+opcache.max_accelerated_files=60000
+opcache.validate_timestamps=1
+opcache.revalidate_freq=60
+EOF
 DF=$(live "grep -E '^disable_functions' /etc/php/7.4/apache2/php.ini" | sed 's/^disable_functions\s*=\s*//')
 sed -i -E "s/^disable_functions\s*=.*/disable_functions = $DF/" /etc/php/8.3/apache2/php.ini
 
