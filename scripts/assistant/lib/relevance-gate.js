@@ -38,8 +38,9 @@ function rulesText() {
 }
 
 function failSafe(e, reason) {
-  // Surface direct/mention messages, drop the rest.
-  return { action: e.meta?.isDirect || e.meta?.mentionsMe ? 'await_reply' : 'none', urgency: 'medium', summary: '', reason };
+  // Surface direct/mention messages and real (non-bulk) emails; drop the rest.
+  const keep = e.meta?.isDirect || e.meta?.mentionsMe || (e.source === 'email' && !e.meta?.bulk);
+  return { action: keep ? 'await_reply' : 'none', urgency: 'medium', summary: '', reason };
 }
 
 async function askLLM(e) {
@@ -53,6 +54,8 @@ async function askLLM(e) {
   const system = `${fs.readFileSync(PROMPT_PATH, 'utf8')}\n\n## Project rules\n${rulesText()}\n\nReply ONLY JSON: {"action":"urgent|await_reply|none","urgency":"low|medium|high","summary":"...","reason":"..."}`;
   const user = `## History (oldest first)\n${history || '(none)'}\n\n## NEW message\n${JSON.stringify({ source: e.source, account: e.account, channel: e.channel, sender: e.sender,
     is_direct_message: !!e.meta?.isDirect, mentions_owner: !!e.meta?.mentionsMe, text: e.text.slice(0, 1500) })}`;
+  // Gateway/network blips ("fetch failed") must not silently drop a message → retry 3x with backoff.
+  for (let attempt = 1; ; attempt++) {
   try {
     const res = await fetch(`${GATEWAY.baseUrl}/chat/completions`, {
       method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${GATEWAY.apiKey}` },
@@ -67,8 +70,10 @@ async function askLLM(e) {
     if (!['urgent', 'await_reply', 'none'].includes(v.action)) throw new Error('bad action');
     return v;
   } catch (err) {
-    console.error(`[gate] judge failed: ${err.message}`);
-    return failSafe(e, 'judge-error');
+    console.error(`[gate] judge failed (try ${attempt}/3): ${err.message}`);
+    if (attempt >= 3) return failSafe(e, 'judge-error');
+    await new Promise(r => setTimeout(r, attempt * 20000));
+  }
   }
 }
 
