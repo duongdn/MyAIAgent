@@ -296,3 +296,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [fb_post_cron_failures_path_and_logout](fb-post/feedback_fb_post_cron_failures_path_and_logout.md) — cron PATH/claude+node, FB no networkidle, logout → seed cookie từ Chrome Profile 9
 ## assistant (MyDailyAssistant daemon)
 - [assistant_notify_only_relevant_no_store_noise](assistant/feedback_assistant_notify_only_relevant_no_store_noise.md) — 🔴 gate before store/notify; team chatter dropped; dryRun first
+- [assistant_never_claude_p_per_message](assistant/feedback_assistant_never_claude_p_per_message_use_llm_gateway.md) — 🔴 background LLM calls → llm.nustechnology.com gateway (deepseek-v4.1-flash), never `claude -p`; cap + count tokens
