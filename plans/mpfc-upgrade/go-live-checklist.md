@@ -122,3 +122,6 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - 15:35 mu-plugin `00-mpfc-silence-deprecations.php` (error_reporting bỏ E_DEPRECATED): debug.log 1.9 MB/min → 77 KB/min; commit `6f05694eb` live-php83 (chưa push)
 - 15:42 cloud firewall `MPFC-common` gắn thêm droplet mới (trước đó 3334/3335 node app lộ public, bypass basic auth) — verify site/ssh/DB/cron OK, 3334 blocked
 - 15:45 Cloudflare custom WAF rule (id 128c8f6a…): block path chứa `%2525`, `/.env`, `/@fs/`, thư mục VCS — test 403 cho scanner, 200 cho trang thật
+- 16:00 NR 08:35–08:59 UTC: new avg 2.71 / p50 1.84 / p95 10.25 vs old 1.55 / 1.34 / 3.44; DB như nhau (0.56 vs 0.53). Tail = burst API test từ dev (lt-player, 171.251.232.148). API endpoints (apache_logs) chậm 1.3–2x vs cũ
+- NR agent overhead đo trực tiếp: uncached page OFF ~1.4s vs ON ~1.85–2.6s. Đã thử tắt composer_api, app logging, tracer detail, span/DT, wordpress.hooks, error_collector → không giảm đáng kể. Giữ `99-mpfc-newrelic.ini` (composer_api off, log forwarding off)
+- .htaccess: RSS ghi lại lúc 08:56 UTC nhưng chỉ bỏ 2 dòng trống, redirect còn. `6f05694eb` đã có trên origin/live-php83
