@@ -110,3 +110,12 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
   - volume_lon1_01/03: mount rỗng; zip 1GB `DONT.REMOVED...zip` (12/2024) để lại trong snapshot droplet cũ
   - build tools/python3.8/snap/lxd: hệ điều hành cũ, ko cần
 - Đã khớp: cron root (backup_live_volume, wp cron, clone_apache_logs) + 6 dòng cron mpfc; apache log → mysql pipe đang chạy; Claude sessions /home/mpfc 248 (cũ 233), /root 2 (cũ 1); PHP ext giống nhau
+
+## Review lần 3 — config tuning + performance (23/10 15:00–15:20, mở lại server cũ)
+- An toàn khi bật server cũ: gỡ droplet 293179468 khỏi DB trusted sources + bỏ tag `mpfc` → bật → stop cron/apache/monit/redis/resque → so → shutdown lại (DB rule KHÔNG thêm lại)
+- So: effective php.ini (apache SAPI), php/apache modules, apache conf, .htaccess, wp-config defines, drop-ins, redis, sysctl, limits, cron, mysql client
+- **OPcache full** (128M/8M interned mặc định, hit 58%) → 512M/64M/60000 files (`99-mpfc-opcache.ini`); p50 2.81s → 1.71s (cũ 1.77s)
+- **.htaccess bị Really Simple Security ghi đè 06:28 UTC** (lúc admin vào wp-admin) → mất Expires, 3 redirect 301; khôi phục bản server cũ (bản lỗi: `/root/upgrade/htaccess.overwritten-20261023`). FilesMatch chặn .log/.sql vẫn còn trong bản lỗi
+- Phần cứng/đĩa/latency DB tương đương (php bench 2.2s vs 2.2s, dd 471 vs 520 MB/s, ping DB ~1ms)
+- 404 chậm (avg 19.5s, tới 66s) = bot quét `/@fs/.env`, `/graphql`…
+- **Gap: cloud firewall `MPFC-common` (22/80/443/1080) chỉ gắn droplet cũ** — server mới chưa có cloud firewall
