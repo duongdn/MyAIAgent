@@ -21,14 +21,16 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 ⚠️ Từ giờ server mới chưa có `wp-config` live (vẫn DB test) cho tới B2 — không trỏ traffic vào.
 
 ## B. Giờ G — cutover (~30–45 phút, site trong chế độ bảo trì)
-- [ ] B0. Dump lại `wp_mpfc` từ replica (lệnh như A5, ~2 phút)
-- [ ] B1. Live: `wp maintenance-mode activate`; xoá root crontab (backup trước: `wp cron`, `backup_live_volume.php`, `clone_apache_logs.php`); dừng 3 Resque (`pkill -f '[b]in/resque'`); tắt monit (để nó không bật lại Resque)
-- [ ] B2. Server mới: `02-build-code.sh` (không `--test`) — rsync code + `wp-config.php` + `.htaccess` live → WP 7.1.3, plugin, patch PHP 8.3, MM 3.1.1, Elementor Pro 4.3.2, `/var/www/keys`
-- [ ] B3. Detach volume `volume-lon1-02` khỏi live → attach server mới → mount `/mnt/volume_lon1_02` + fstab; kiểm `wp-content/uploads` → symlink đúng
-- [ ] B4. `CONFIRM_LIVE_DB=yes 03-migrate-db.sh` (core update-db, plugin migrate, Elementor DB, `mm-major-version=3.1.1`, flush rewrite)
-- [ ] B5. Chuyển Reserved IP `159.65.213.246` → droplet `608944558`
-- [ ] B6. Server mới: root crontab (php8.3) 3 dòng như live; `systemctl enable --now mpfc-resque@{1,2,3}`; quantification vhost proxy về `127.0.0.1:3335` (đã đúng ở server mới)
-- [ ] B7. `wp maintenance-mode deactivate`
+- [x] B0. Dump lại `wp_mpfc` từ replica (lệnh như A5, ~2 phút)
+- [x] B1. Live: `wp maintenance-mode activate`; xoá root crontab (backup trước: `wp cron`, `backup_live_volume.php`, `clone_apache_logs.php`); dừng 3 Resque (`pkill -f '[b]in/resque'`); tắt monit (để nó không bật lại Resque)
+- [x] B2. Server mới: `02-build-code.sh` (không `--test`) — rsync code + `wp-config.php` + `.htaccess` live → WP 7.1.3, plugin, patch PHP 8.3, MM 3.1.1, Elementor Pro 4.3.2, `/var/www/keys`
+- [x] B3. Detach volume `volume-lon1-02` khỏi live → attach server mới → mount `/mnt/volume_lon1_02` + fstab; kiểm `wp-content/uploads` → symlink đúng
+- [x] B4. `CONFIRM_LIVE_DB=yes 03-migrate-db.sh` (core update-db, plugin migrate, Elementor DB, `mm-major-version=3.1.1`, flush rewrite)
+- [x] B5. Chuyển Reserved IP `159.65.213.246` → droplet `608944558`
+- [x] B6. Server mới: root crontab (php8.3) 3 dòng như live; `systemctl enable --now mpfc-resque@{1,2,3}`; quantification vhost proxy về `127.0.0.1:3335` (đã đúng ở server mới)
+- [x] B7. `wp maintenance-mode deactivate`
+
+**Kết quả B (23/10 10:00–10:11 VN, bảo trì ~11 phút):** dump `wp_mpfc-20261023-0258.sql.gz`; live: root crontab backup `~/root-crontab.backup-20261023` rồi xoá, monit + Resque dừng, apache live **đang tắt**; 02 OK (exit 1 cuối chỉ do in crontab live đã xoá); volume chuyển — **sửa symlink**: đúng là `/mnt/volume_lon1_02/mypersonalfootballcoach.com/wp-content/uploads` (02 đã sửa); 03: db 57155→61833, MM 3.1.1, Elementor 4.3.5, schema giống diễn tập; Reserved IP → `608944558`; root cron php8.3 cài; Resque phải start **sau** khi tắt maintenance (WP maintenance làm worker thoát) → 3 worker active.
 
 ## C. Kiểm tra go/no-go (~30 phút)
 - [ ] C1. Trang chủ, login member, dashboard, xem video, hoàn thành unit; team manager trang team-stats (switcher)
