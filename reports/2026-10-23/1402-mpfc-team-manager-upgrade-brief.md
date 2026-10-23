@@ -2,7 +2,7 @@
 
 ## Tóm tắt nhanh
 Saul gửi PDF 10 trang: **nâng cấp Team Manager trên web** (không làm lại từ đầu). Sau nâng cấp, Director giao course/session/tài liệu club cho **cả coach lẫn player**, theo dõi bài nào đã được dạy, và đọc reflection của coach.
-- **Fix now:** 2/3 việc đã xong (commit `f151a5fcf`).
+- **Fix now:** 3/3 xong phía web (server mới, nhánh `live-php83`). Việc 3 chờ Tien gọi endpoint App Feed.
 - **Phần còn lại:** 5 phase, khoảng **20–23 ngày dev**.
 - **Concern lớn nhất:** brief nói league dưới 6 người **gộp vào league cha**, mâu thuẫn với câu trả lời ý 5 đã gửi Tien.
 - **Message Slack báo đã nhận PDF:** chưa gửi được vì token thiếu `chat:write`.
@@ -23,9 +23,9 @@ Saul gửi PDF 10 trang: **nâng cấp Team Manager trên web** (không làm l�
 ## BẢNG THEO DÕI
 | # | Việc | Trạng thái | Phụ thuộc / ghi chú |
 |---|------|-----------|---------------------|
-| 1 | Fix now: Requires Approval mặc định cho mọi club | ✅ xong, commit `f151a5fcf` | Đã set lại 5 club (2 club 1157, 150 trước để Active) |
-| 2 | Fix now: ngày UK `22 Oct 2026` | ✅ xong, ô chọn ngày đã test trên Chrome | Chưa đổi theo quốc gia, mọi club đều UK |
-| 3 | Fix now: cột từ app hiện "—" thay vì 0 | ⏳ todo, 1 ngày | Feed của Tien |
+| 1 | Fix now: Requires Approval mặc định cho mọi club | ✅ xong, server mới `live-php83` `93d5b1bc5` | Đã set lại 5 club (2 club 1157, 150 trước để Active) |
+| 2 | Fix now: ngày UK `22 Oct 2026` | ✅ xong `93d5b1bc5`, ô chọn ngày đã test trên Chrome | Chưa đổi theo quốc gia, mọi club đều UK |
+| 3 | Fix now: feed app → web (app_login) | ✅ phía web xong `79e2b7b37`, 12/12 test pass, doc `api-docs/app-feed/` | Chờ Tien tích hợp + nhận secret. "—" thay vì 0 làm cùng cột mới ở Phase 1 |
 | 4 | Phase 1: role + Players/Coaches + team key cho coach + menu 5 mục | ⏳ todo, 4–5 ngày | Phải làm trước Leagues |
 | 5 | Phase 2: Set plan mới + ô tìm kiếm + upload tài liệu club | ⏳ todo, 5–6 ngày | Catalogue chung với app; giới hạn file chờ Saul |
 | 6 | Phase 3: Plans + Remind + Coaching log | ⏳ todo, 4 ngày | Push cần Tien; email làm được ngay |
