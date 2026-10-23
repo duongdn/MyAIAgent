@@ -133,6 +133,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 - [feedback_matrix_action_item_check_reply_before_flagging](daily-report/matrix/feedback_matrix_action_item_check_reply_before_flagging.md) — 🔴 check duongdn replied before listing action item; redact pasted creds
 ## daily-report:upwork
+- [feedback_neural_login_failure_is_not_silence](daily-report/upwork/feedback_neural_login_failure_is_not_silence.md) — 🔴 login fail ≠ silence; never auto-complete Neural unread, recheck must re-run
 - [project_workstream_review_submit_friday_cron](daily-report/upwork/project_workstream_review_submit_friday_cron.md) — Fri 17:30 cron, skips if already submitted
 - [feedback_upwork_memo_check_run_headless_never_open_windows](daily-report/upwork/feedback_upwork_memo_check_run_headless_never_open_windows.md) — 🔴 env -u DISPLAY; never open Chrome tabs/windows
 - [feedback_upwork_in_daily_report](daily-report/upwork/feedback_upwork_in_daily_report.md), [feedback_upwork_task_id_filter_consolidated](daily-report/upwork/feedback_upwork_task_id_filter_consolidated.md)

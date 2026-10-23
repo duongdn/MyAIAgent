@@ -19,6 +19,7 @@
 | 7 | Maddy (Kai report gate) | LongVV logged **0.5h on Maddy 10-22** ("Check & resolve PHP security", Kai role, non-WordPress). **No Kai daily report** found in Xtreme Slack. That 0.5h entry has **no JIRA ticket key**: Madhuraka requires JIRA-logged hours to match billed hours. Madhuraka 15:03 asked for "an update on 465 asap": Kai deployed and moved it to testing 15:13 ✅, and Anoma "Testing ok" 18:22. ~~Maddy ○~~ → 08:47: reminder sent to the Matrix room "Maddy - Extreme Soft Solutions" (@longvv: Kai report + JIRA log for the 0.5h), event `$7LOCCBpEiXpHTT5NPEEfnlyJKCYHQ3qLSMKfdaFDLxQ`. Maddy ✓ |
 | 8 | PHP2Shell CVE + Node.js CVE (company-wide) | All-hands response 10-22. Status per project: Baamboozle ✅ (Aysar's own patch). RDC PHP ✅ all 3 envs + compromise scan clean, Node PRs pending. BXR/Rory: GoDaddy booking+dev on PHP 7.4.33, backport unconfirmed, only partial mitigation (session.upload_progress off), PHP 8.3 upgrade window needed. AirAgri ✅ PHP 8.4.27 (system was down ~02:41–05:30 VN). Fountain/Infinity blog → redirect, Node 24.22.1 ✅. Maddy ✅ 7.4 backport. GGS ✅ (SiteGround). Generator ✅ (customer AMI). William Bills: customer handling. **Sandor Antal/Lyf PHP admin: location unknown, no access** (duongdn: ask the customer). **Andrew Taraba** ✅ told to install the plugin 09:46. Tracking sheet: "NUS - PHP CVE 20261022 Response" |
 | 9 | Email carrick@ (James Le Chevalier) | James 12:21: "@Carrick Nguyen – is this below sorted yet?" (Upgrade Framework [URGENT], patch + backups OK'd 09:22/12:10). Carrick's reply isn't visible (Sent folder not scanned). AirAgri (LeNH) upgraded PHP 12:38. Please confirm the reply went out |
+| 11 | 🔴 Upwork Neural Contract (added 09:25) | Michael (customer) 07:47 VN, after his own `apt upgrade` to PHP 8.2.35 on dev: **the site gives a 500 error**. Asks, **urgently** ("Given the security risk"): (1) BEFORE fixing the 500, build detection that shows a ContractProbe-branded error page with code `internalserver` (he has asked this "several times"); (2) screenshot of that page while the 500 is still present; (3) then fix the 500 and record every change; (4) push to Bitbucket; (5) send exact upgrade steps, since **he will patch production himself this weekend**. Carrick only replied "Let me check" at 09:20. Neural ○ |
 | 10 | Performance | MPFC apdex **0.45** (chronic `continue` E_WARNING 1619x). **New:** E_COMPILE_ERROR `ABSPATHwp-includes/version.php` 2x + `mysqli_real_connect` No such file 2x (likely during patching). OhCleo `ChatSendView.post` 3.7s avg / 28 calls. Fountain new Rollbar #386 "'parker' is not a valid courier" (prod, 1x) |
 
 **Today (Oct 23):** HauTT away 23–26/10. ✅ Resolved since last report: Celine covers (OhCleo #1). Andrew Taraba plugin question answered 09:46. Arthur R1 code pushed to staging (16:25/16:57). Baamboozle PHP CVE question handled. RDC customer told about PHP (dmetiner "thank you" 14:25). OhCleo 6 Pending reviews cleared.
@@ -181,10 +182,11 @@ Trello: Elena - WordPress SamGuard ✓.
 
 ## Trello — Check progress — 05:30 (+07:00)
 
-~~**16/22 complete**~~ **19/22** (Maddy ✓ 08:47, Franc ✓ 08:55, Bailey ✓ 08:52) (live 05:30, re-fetched live 08:25: same 6 ○ and all re-verified at 08:40. Franc/MPFC/Bailey/OhCleo got no new reply, Maddy still has no Kai report, Aysar has a new 06:46 bug report). [Card](https://trello.com/c/HZFqiS0e)
+~~**16/22 complete**~~ **20/22** live 09:25 (Maddy ✓ 08:47, Bailey ✓ 08:52, Franc ✓ 08:55, Aysar ✓ 09:20 after the team was told, MPFC ✓ (done outside this session); ~~Neural ✓~~ reopened ○ 09:25 for Alert #11) (live 05:30, re-fetched live 08:25: same 6 ○ and all re-verified at 08:40. Franc/MPFC/Bailey/OhCleo got no new reply, Maddy still has no Kai report, Aysar has a new 06:46 bug report). [Card](https://trello.com/c/HZFqiS0e)
 - ✓ James Diamond · Rory · Marcel · Raymond · Neural Contract · Andrew Taraba · Fountain - DOCUMENT · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ~~⚠️ Maddy: skipped (Alert #7)~~ → ✓ 08:47, Matrix room reminder sent
-- ⚠️ Aysar: skipped (Alert #2)
+- ~~⚠️ Aysar: skipped (Alert #2)~~ → ✓ 09:20, team told by duongdn
+- ⚠️ Neural Contract: ~~✓~~ reopened (Alert #11)
 - ~~⚠️ Franc: skipped (Alert #1)~~ → ✓ 08:55, raised in the Franc room by duongdn
 - ⚠️ MPFC: skipped (Alert #4)
 - ~~⚠️ Bailey: skipped (Alert #3)~~ → ✓ 08:52, team reminder sent
@@ -297,7 +299,7 @@ Trello: Arthur - Meta-Stamp ✓ (no unanswered customer ask, all open items wait
 | Tokenlite | — | — | login_failed (known open Tokenlite login issue, not a memo status) |
 
 ~~Cloudflare challenge not resolved ×3. Memo validity for 10-22 not retrieved yet.~~ → resolved by the 08:30 re-run (company PC up). No invalid memos.
-Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the standing rule this is not an alert → Neural Contract ✓.
+~~Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the standing rule this is not an alert → Neural Contract ✓.~~ → **WRONG**: the login failure meant the messages were never read, and the 08:40 recheck didn't re-run it either. Re-run at 09:22 found Michael's urgent 07:47 ask (Alert #11). Neural ○.
 
 ---
 
