@@ -5,7 +5,7 @@
  *      urgent      → store + notify now
  *      await_reply → pending ask; notified only if our side hasn't replied after policy.replyWaitMin (checked every 60s)
  *      none        → dropped (not stored in the inbox)
- * policy.dryRun=true → decisions only logged to tmp/assistant-gate.log, nothing sent.
+ * policy.dryRun=true → relevant events still go to the web Inbox; nothing sent to Telegram/desktop.
  */
 const { execFile } = require('child_process');
 const fs = require('fs');
@@ -28,6 +28,7 @@ function log(tag, e, why) {
 async function notify(e, v, prefix = '') {
   const id = db.addEvent(e);
   if (!id) return;
+  if (policy.load().dryRun) return db.setStatus(id, 'dryrun'); // inbox only, no Telegram/popup
   const head = `${URG[v.urgency] || ''} ${prefix}${ICON[e.source] || e.source} · ${e.channel || e.account || ''}`;
   const body = `${head}\n${v.summary ? '📝 ' + v.summary + '\n' : ''}👤 ${e.sender || '?'}\n\n${(e.text || '').slice(0, 1200)}${e.url ? '\n\n🔗 ' + e.url : ''}`;
   try {
@@ -58,7 +59,7 @@ async function intake(e) {
     return log('WAIT', e, v.reason);
   }
   log('URGENT', e, v.reason);
-  if (!p.dryRun) await notify(e, v);
+  await notify(e, v);
 }
 
 /** Every 60s: pending asks past their wait time → answered by us? drop : notify. */
@@ -69,7 +70,7 @@ async function checkPendingAsks() {
     if (db.oursRepliedSince(a)) { db.setAskStatus(a.id, 'answered'); log('ANSWRD', e, 'our side replied in time'); continue; }
     db.setAskStatus(a.id, 'notified');
     log('NOTIFY', e, `no reply after ${p.replyWaitMin ?? 30} min`);
-    if (!p.dryRun) await notify(e, JSON.parse(a.verdict_json), `⏳ chưa ai trả lời ${p.replyWaitMin ?? 30}' · `);
+    await notify(e, JSON.parse(a.verdict_json), `⏳ chưa ai trả lời ${p.replyWaitMin ?? 30}' · `);
   }
 }
 setInterval(() => checkPendingAsks().catch(err => console.error('[intake] pending', err.message)), 60000);
