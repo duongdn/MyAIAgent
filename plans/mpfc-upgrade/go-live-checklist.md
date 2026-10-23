@@ -1,7 +1,8 @@
 # MPFC go-live checklist — 23/10/2026
 
 Server mới: droplet `608944558` (4 vCPU/8 GB/160G, private `10.106.0.2`, public `144.126.236.208`).
-Live cũ: droplet `293179468` (`142.93.46.109`, private `10.106.0.6`). Reserved IP `159.65.213.246` (mọi domain trỏ vào đây) đang gắn live cũ.
+Live cũ: droplet `293179468` (`142.93.46.109`, private `10.106.0.6`) — chỉ còn Apache với vhost quantification (proxy VPC → server mới). Reserved IP `159.65.213.246` **đã gắn server mới** từ 10:09 23/10.
+Git: code server mới sẽ commit lên nhánh mới `live-php83` (từ `live` @ `523e85cb5`, tag `pre-php83-20261023`); nhánh `live` giữ nguyên = code server cũ (rollback = checkout `live`).
 Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md`.
 
 ## Đã xong
@@ -73,7 +74,13 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - [x] Runbook + `01` (prod tự xoá firewall egress test, cài New Relic) — commit `69d4b40c`
 - [x] **quantification down 10:06–11:28** (DNS trỏ IP riêng server cũ, Apache cũ đã tắt) → bật lại Apache cũ **chỉ vhost quantification** (proxy VPC → server mới); vhost main/admin/dailyagent trên server cũ đã tắt/cất `/root/vhosts-disabled-20261023`
 - [~] `wp yoast index` đang chạy nền (nice 15), log `/root/upgrade/yoast-index.log`
-- [ ] Commit code server mới lên nhánh `live` (WP 7.1.3, plugin, patch PHP 8.3, 5 file theme anh đang sửa) — chờ anh duyệt danh sách
+- [x] Commit code server mới lên **nhánh mới `live-php83`** (đã push; `live` giữ nguyên @ `523e85cb5`, tag `pre-php83-20261023`). 4 commit revert riêng được:
+  - `811ce0161` wip(theme): 5 file theme sửa dở từ server cũ
+  - `809274c3f` chore(core): WP 7.1.3 (2550 file)
+  - `1bb8d1de1` chore(plugins): 83 plugin đã track (24070 file, gồm MM 3.1.1 + patch json-api/gravityforms/wd-instagram)
+  - `9679af8ab` fix(theme): WPBakery PHP 8.3 (4 file)
+  - Không commit: `wp-config.php`, `db-config.php`, `.htaccess` gốc, `advanced-cache.php`, `wp-content/cache`, `vendor/` (patch Carbon chỉ nằm trong `site-php83-fixes.patch`), `pfc7/backups/`, 11 plugin chưa track, `wp-logon.php` (file rỗng 0 byte, có trên live từ 20/05 — nên xoá)
+  - Server mới đang checkout `live-php83`; từ giờ commit/pull trên nhánh này. `.git` đã `chown mpfc:www-data` (trước đó lẫn owner → lỗi ghi object)
 
 ## Việc tiếp theo
 1. Commit + push code server mới (anh duyệt trước)
