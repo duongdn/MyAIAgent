@@ -109,6 +109,8 @@ s = re.sub(r"(?m)^;?\s*newrelic.license\s*=.*$", lambda m: lic, s)
 s = re.sub(r"(?m)^;?\s*newrelic.appname\s*=.*$", lambda m: app, s)
 open(p, "w").write(s)
 PY
+    # PHP 8.3: legacy plugins emit thousands of E_DEPRECATED/E_USER_DEPRECATED (8192|16384) — keep them out of NR errors
+    sed -i -E "s/^;?\s*newrelic.error_collector.ignore_errors\s*=.*/newrelic.error_collector.ignore_errors = 24576/" "$f"
   done
 fi
 
