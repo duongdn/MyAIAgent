@@ -49,6 +49,7 @@
 - [feedback_decrypt_safety_block_leaves_other_configs_stale](daily-report/general/feedback_decrypt_safety_block_leaves_other_configs_stale.md) — 🔴 decrypt safety block is all-or-nothing; stale config (slack Meta-Stamp) → single-file decrypt if .enc commit newer
 
 ## daily-report:email
+- [body_less_email_with_attachment_is_work_request](daily-report/email/feedback_body_less_email_with_attachment_is_work_request_not_newsletter.md) — 🔴 empty-body client mail + PDF brief = work request, not newsletter; always read attachment names
 - [feedback_mpfc_saul_replies_via_whatsapp](daily-report/email/feedback_mpfc_saul_replies_via_whatsapp.md) — Saul's emails are often answered on WhatsApp, so no email reply ≠ unanswered
 - [feedback_freelancer_email_must_be_scanned](daily-report/email/feedback_freelancer_email_must_be_scanned.md), [reference_email_accounts_all10](daily-report/email/reference_email_accounts_all10.md), [feedback_imap_slack_timestamp_gotchas](daily-report/email/feedback_imap_slack_timestamp_gotchas.md)
 - [feedback_swish_paused_no_monitoring](daily-report/email/feedback_swish_paused_no_monitoring.md) — 🔴 2026-10-20 Swish paused: vuongtrancr@ Swish alerts (Delayed-newform/Signal lost) never alerts
