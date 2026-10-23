@@ -100,3 +100,13 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 4. T+1 tuần: xoá DB `wp_mpfc_upgrade`, account certbot test `433b…`, key ssh test trên live cũ; đổi tên droplet + bỏ tag `upgrade-test`
 5. T+2 tuần: snapshot + xoá droplet cũ `293179468` (sau khi quantification đã đổi DNS)
 6. Đợt sau: vá json-api (`setPassword`, `changeAccountInfo`, `canselMembership`), update plugin premium, email tóm tắt cho Saul (em soạn, anh duyệt)
+
+## Review lần 2 server cũ (23/10 13:30) — diff inventory tự động (pkg, php ext, units, cron mọi user, /var/www, /home, /usr/local, apache mods/sites, listen ports, npm/pip, Claude sessions)
+- Không sót gì cần thiết. Chỉ khác trên server cũ (đều không cần mang qua):
+  - monit (redis + resque_live) → thay bằng systemd `mpfc-resque@1..3` Restart=always (đang active)
+  - `/var/www/utils/start_resque_live.sh` → đã thay bằng systemd; bản sao lưu `/root/old-server/var-www-utils/`
+  - newrelic-infra + fluent-bit: không chạy từ trước 07/2026 (journal rỗng) → không phải gap
+  - mysql-server local: inactive, ko dùng (DB = DO managed); mailcatcher (ruby :1080/:1025): ko được WP dùng
+  - volume_lon1_01/03: mount rỗng; zip 1GB `DONT.REMOVED...zip` (12/2024) để lại trong snapshot droplet cũ
+  - build tools/python3.8/snap/lxd: hệ điều hành cũ, ko cần
+- Đã khớp: cron root (backup_live_volume, wp cron, clone_apache_logs) + 6 dòng cron mpfc; apache log → mysql pipe đang chạy; Claude sessions /home/mpfc 248 (cũ 233), /root 2 (cũ 1); PHP ext giống nhau
