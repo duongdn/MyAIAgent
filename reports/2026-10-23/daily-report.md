@@ -16,7 +16,7 @@
 | 4 | MPFC | Yesterday's open items still unanswered: Saul's "Potentially vulnerable server at admin.mypersonalfootballcoach.com:80" (10-21). New Rollbar **#71 ArgumentCountError `MM_Response::isSuccess()`** (prod, 07:30). 🔴 **A secret token (Telegram-bot format) was pasted in plain text into a Slack DM by `freelancer` at 16:53** (redacted here). It should be revoked/rotated. NR apdex 0.45 (chronic). MPFC ○ |
 | 5 | OhCleo Slack (Celine) | ✅ Yesterday's urgent cover ask was resolved: Tony replied 13:41 VN, all person covers were swapped, Celine "Amazing!". New, unanswered (evening/overnight): 19:07 "can you let me know if you will be working tomorrow and if you have anything left this week", 00:09 "can a subscriber that logs in to the web listen unlimited?", 01:46 new cards (>2h items must be flagged first). Matrix: LongVV is not sure he can work full time on OhCleo today (busy with James's upgrade). Ohcleo ○ |
 | 6 | Workstream review | OhCleo: **1 row Pending**: LongVV 10-21 "Update cover art to remove duplicates, faces (in progress)" 2:30 → reviewers DuongDN, MinhTV. (Yesterday's 6 Pending rows are cleared ✅.) |
-| 7 | Maddy (Kai report gate) | LongVV logged **0.5h on Maddy 10-22** ("Check & resolve PHP security", Kai role, non-WordPress). **No Kai daily report** found in Xtreme Slack. That 0.5h entry has **no JIRA ticket key**: Madhuraka requires JIRA-logged hours to match billed hours. Madhuraka 15:03 asked for "an update on 465 asap": Kai deployed and moved it to testing 15:13 ✅, and Anoma "Testing ok" 18:22. Maddy ○ |
+| 7 | Maddy (Kai report gate) | LongVV logged **0.5h on Maddy 10-22** ("Check & resolve PHP security", Kai role, non-WordPress). **No Kai daily report** found in Xtreme Slack. That 0.5h entry has **no JIRA ticket key**: Madhuraka requires JIRA-logged hours to match billed hours. Madhuraka 15:03 asked for "an update on 465 asap": Kai deployed and moved it to testing 15:13 ✅, and Anoma "Testing ok" 18:22. ~~Maddy ○~~ → 08:47: reminder sent to the Matrix room "Maddy - Extreme Soft Solutions" (@longvv: Kai report + JIRA log for the 0.5h), event `$7LOCCBpEiXpHTT5NPEEfnlyJKCYHQ3qLSMKfdaFDLxQ`. Maddy ✓ |
 | 8 | PHP2Shell CVE + Node.js CVE (company-wide) | All-hands response 10-22. Status per project: Baamboozle ✅ (Aysar's own patch). RDC PHP ✅ all 3 envs + compromise scan clean, Node PRs pending. BXR/Rory: GoDaddy booking+dev on PHP 7.4.33, backport unconfirmed, only partial mitigation (session.upload_progress off), PHP 8.3 upgrade window needed. AirAgri ✅ PHP 8.4.27 (system was down ~02:41–05:30 VN). Fountain/Infinity blog → redirect, Node 24.22.1 ✅. Maddy ✅ 7.4 backport. GGS ✅ (SiteGround). Generator ✅ (customer AMI). William Bills: customer handling. **Sandor Antal/Lyf PHP admin: location unknown, no access** (duongdn: ask the customer). **Andrew Taraba** ✅ told to install the plugin 09:46. Tracking sheet: "NUS - PHP CVE 20261022 Response" |
 | 9 | Email carrick@ (James Le Chevalier) | James 12:21: "@Carrick Nguyen – is this below sorted yet?" (Upgrade Framework [URGENT], patch + backups OK'd 09:22/12:10). Carrick's reply isn't visible (Sent folder not scanned). AirAgri (LeNH) upgraded PHP 12:38. Please confirm the reply went out |
 | 10 | Performance | MPFC apdex **0.45** (chronic `continue` E_WARNING 1619x). **New:** E_COMPILE_ERROR `ABSPATHwp-includes/version.php` 2x + `mysqli_real_connect` No such file 2x (likely during patching). OhCleo `ChatSendView.post` 3.7s avg / 28 calls. Fountain new Rollbar #386 "'parker' is not a valid courier" (prod, 1x) |
@@ -143,7 +143,7 @@ Trello: Aysar ⚠️ (KhanhHH 10-21 shortfall, plus Slack). No other task-log ga
 ### 4. Bitbucket PR Status
 Live 08:38: 6 open Kai PRs (`xtreme-web/rms`): #560 LIFM2-471 (Rovo 1 minor, 10-21) · #544 LIFM2-465 (4 comments, Kai replied last 10-21 ✅) · #540 LIFM2-450 (0 comments) · #534 cron concurrency (Rovo only, 08-26) · #509 LIFM2-428 (Rovo only, 08-14) · #481 (waiting on the customer, not our blocker). No new client/human comments, no unanswered human review.
 
-Trello: ⚠️ Maddy skipped (Alert #7).
+Trello: ~~⚠️ Maddy skipped (Alert #7)~~ → ✓ 08:47 (user: notify the room + complete, reminder sent).
 
 ---
 
@@ -181,9 +181,9 @@ Trello: Elena - WordPress SamGuard ✓.
 
 ## Trello — Check progress — 05:30 (+07:00)
 
-**16/22 complete** (live 05:30, re-fetched live 08:25: same 6 ○ and all re-verified at 08:40. Franc/MPFC/Bailey/OhCleo got no new reply, Maddy still has no Kai report, Aysar has a new 06:46 bug report). [Card](https://trello.com/c/HZFqiS0e)
+~~**16/22 complete**~~ **17/22** (Maddy ✓ 08:47) (live 05:30, re-fetched live 08:25: same 6 ○ and all re-verified at 08:40. Franc/MPFC/Bailey/OhCleo got no new reply, Maddy still has no Kai report, Aysar has a new 06:46 bug report). [Card](https://trello.com/c/HZFqiS0e)
 - ✓ James Diamond · Rory · Marcel · Raymond · Neural Contract · Andrew Taraba · Fountain - DOCUMENT · Arthur - Meta-Stamp · Elena - WordPress SamGuard
-- ⚠️ Maddy: skipped (Alert #7, no Kai report for 0.5h Kai-role work, untagged JIRA hours)
+- ~~⚠️ Maddy: skipped (Alert #7)~~ → ✓ 08:47, Matrix room reminder sent
 - ⚠️ Aysar: skipped (Alert #2)
 - ⚠️ Franc: skipped (Alert #1)
 - ⚠️ MPFC: skipped (Alert #4)
@@ -309,7 +309,7 @@ Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the sta
 - Bailey: no Nick "Today report" 10-22. Who fixes Joey's two major stock bugs before today's hoped-for go-live? Find the sync root cause.
 - MPFC: rotate the token pasted in Slack DM 16:53. Saul's "vulnerable server" notice is still unanswered. Rollbar #71 is new.
 - OhCleo: answer Celine (Tony's availability today and this week, subscriber web listening). Review LongVV's 10-21 Pending 2.5h row.
-- Maddy: Kai daily report for 10-22 + JIRA ticket key/log for the 0.5h PHP work.
+- ~~Maddy: Kai daily report + JIRA ticket~~ → reminder sent in the Maddy room 08:47, waiting on LongVV.
 - carrick@: confirm James Le Chevalier's 12:21 "is this sorted yet?" got a reply.
 - BXR: GoDaddy backport unconfirmed. Plan the PHP 8.3 window. `.p12` key rotation needs the contract resumed.
 - Lyf (Sandor Antal): where does the PHP admin API live? Ask the customer.
