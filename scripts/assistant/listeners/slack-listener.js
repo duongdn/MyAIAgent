@@ -43,7 +43,7 @@ async function pollLoop(a, me) {
       const last = parseFloat(db.getCursor(key));
       const fresh = (r.messages?.matches || []).filter(m => parseFloat(m.ts) > last).reverse();
       for (const m of fresh) {
-        await intake(toEvent(a, m, m.channel?.is_im ? `DM ${m.username}` : `#${m.channel?.name}`, m.permalink, me));
+        await intake(toEvent(a, m, m.channel?.is_im ? `DM:${m.channel.id}` : `#${m.channel?.name}`, m.permalink, me));
         db.setCursor(key, m.ts);
       }
     } catch (err) { console.error(`[slack] poll ${a.workspace}: ${err.message}`); }
@@ -56,7 +56,7 @@ async function rtmLoop(a, me) {
   const chName = async id => {
     if (!names.has(id)) {
       const r = await slack(a, 'conversations.info', { channel: id }).catch(() => ({}));
-      names.set(id, r.channel?.is_im ? 'DM' : `#${r.channel?.name || id}`);
+      names.set(id, r.channel?.is_im ? `DM:${id}` : `#${r.channel?.name || id}`);
     }
     return names.get(id);
   };
