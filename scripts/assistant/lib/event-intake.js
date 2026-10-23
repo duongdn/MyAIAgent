@@ -15,7 +15,7 @@ const policy = require('./policy');
 const { judge } = require('./relevance-gate');
 const { sendToOwner } = require('./telegram-client');
 
-const ICON = { matrix: '💬 Matrix', email: '📧 Email', slack: '🟣 Slack', discord: '🎮 Discord' };
+const ICON = { matrix: '💬 Matrix', email: '📧 Email', slack: '🟣 Slack', discord: '🎮 Discord', whatsapp: '🟢 WhatsApp', zalo: '🔵 Zalo' };
 const URG = { high: '🔴', medium: '🟠', low: '⚪' };
 const DESKTOP_NOTIFY = path.join(__dirname, '..', '..', 'desktop-notify.js');
 const GATE_LOG = path.join(__dirname, '..', '..', '..', 'tmp', 'assistant-gate.log');

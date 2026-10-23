@@ -1,7 +1,7 @@
 /**
  * Slack listener per workspace in config/.slack-accounts.json:
  *  - RTM websocket (realtime) when rtm.connect is allowed (xoxc session tokens)
- *  - otherwise poll search.messages every POLL_MS (xoxp tokens lack RTM scope)
+ *  - otherwise poll search.messages every policy.pollMinutes.slack min (xoxp tokens lack RTM scope)
  * Own messages skipped (auth.test user_id). First run starts from "now".
  */
 const WebSocket = require('ws');
@@ -10,7 +10,7 @@ const { intake } = require('../lib/event-intake');
 const policy = require('../lib/policy');
 const { accounts } = require('../../../config/.slack-accounts.json');
 
-const POLL_MS = 60000;
+const pollMs = () => (policy.load().pollMinutes?.slack ?? 1) * 60000;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 // xoxc session tokens need token in the form body + URL-encoded d cookie (same as slack-fetch-ohcleo.js); works for xoxp too.
 const cookieOf = a => (a.cookie ? { Cookie: `d=${encodeURIComponent(decodeURIComponent(a.cookie))}` } : {});
@@ -47,7 +47,7 @@ async function pollLoop(a, me) {
         db.setCursor(key, m.ts);
       }
     } catch (err) { console.error(`[slack] poll ${a.workspace}: ${err.message}`); }
-    await sleep(POLL_MS);
+    await sleep(pollMs());
   }
 }
 
@@ -91,7 +91,7 @@ async function listen(a) {
   }
   const rtm = await slack(a, 'rtm.connect').catch(() => ({}));
   if (rtm.ok) return rtmLoop(a, auth.user_id);
-  console.log(`[slack] polling ${a.workspace} every ${POLL_MS / 1000}s`);
+  console.log(`[slack] polling ${a.workspace} every ${pollMs() / 1000}s`);
   return pollLoop(a, auth.user_id);
 }
 

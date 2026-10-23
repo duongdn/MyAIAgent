@@ -26,7 +26,10 @@ async function handleMessage(m) {
   const t = (m.text || '').trim();
   if (t === '/status' || t === '/start') {
     const p = policy.load();
-    await tg.sendToOwner(`🤖 Assistant đang chạy.\nenabled=${p.enabled} · muted=${p.muted.length}\n${p.muted.join('\n')}`);
+    const d = new Date().toISOString().slice(0, 10);
+    await tg.sendToOwner(`🤖 Assistant đang chạy.\nenabled=${p.enabled} · dryRun=${p.dryRun} · model=${p.judgeModel}\n` +
+      `LLM hôm nay: ${db.getCursor('llm:calls:' + d) || 0} lần / ${db.getCursor('llm:tokens:' + d) || 0} tokens (cap ${p.maxJudgeCallsPerDay})\n` +
+      `poll (phút): ${JSON.stringify(p.pollMinutes)}\nmuted: ${p.muted.join(', ') || '-'}`);
   }
 }
 

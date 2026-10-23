@@ -1,5 +1,5 @@
 /**
- * Discord listener — polls every 30 min by running the existing scripts/discord-monitor.js
+ * Discord listener — polls every policy.pollMinutes.discord min (default 30) by running the existing scripts/discord-monitor.js
  * (REST, AirAgri + Bizurk only). No gateway websocket: user tokens on a persistent gateway = selfbot ban risk.
  * Messages come oldest-first per run; own account messages are marked isOurs (context only).
  */
@@ -8,7 +8,8 @@ const path = require('path');
 const db = require('../lib/inbox-db');
 const { intake } = require('../lib/event-intake');
 
-const POLL_MS = 30 * 60000;
+const policy = require('../lib/policy');
+const pollMs = () => (policy.load().pollMinutes?.discord ?? 30) * 60000;
 const SCRIPT = path.join(__dirname, '..', '..', 'discord-monitor.js');
 const OWN_RE = /^nus/i; // our Discord accounts are nusvinn / nuscarrick
 
@@ -18,7 +19,7 @@ function runMonitor(since) {
 }
 
 async function tick() {
-  const since = db.getCursor('discord:since') || new Date(Date.now() - POLL_MS).toISOString();
+  const since = db.getCursor('discord:since') || new Date(Date.now() - pollMs()).toISOString();
   const started = new Date().toISOString();
   const out = await runMonitor(since);
   const msgs = [];
@@ -42,11 +43,11 @@ async function tick() {
 async function run() {
   // Respect the 30-min spacing across daemon restarts too.
   const last = Date.parse(db.getCursor('discord:since') || 0);
-  const wait = last + POLL_MS - Date.now();
+  const wait = last + pollMs() - Date.now();
   if (wait > 0) await new Promise(r => setTimeout(r, wait));
   for (;;) {
     await tick().catch(e => console.error(`[discord] ${e.message}`));
-    await new Promise(r => setTimeout(r, POLL_MS));
+    await new Promise(r => setTimeout(r, pollMs()));
   }
 }
 
