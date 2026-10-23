@@ -377,9 +377,9 @@
     "last_outage_20260908": "2026-09-08 cron run: Workstream SSO/browser-login outage (token refresh + 2x headless/DISPLAY browser login all failed). All project dev-hours unavailable this run. Recurring pattern, root cause still open per prior weekly/daily reports."
   },
   "workstream_review_submit": {
-    "last_run": "2026-10-16T21:30:00+07:00",
-    "output_file": "reports/2026-10-16/2130-workstream-review-submit.md",
-    "note": "Week Oct 12: Baamboozle + Tokenlite both submitted (Da check). Baamboozle verified via Upwork memos aggregated from this week daily-report runs (Rory 1 + Aysar 8, 0 invalid). Tokenlite verified via WS task log directly (Upwork login unavailable on this host) per user instruction."
+    "last_run": "2026-10-23T17:30:00+07:00",
+    "output_file": "reports/2026-10-23/1730-workstream-review-submit.md",
+    "note": "Week Oct 19: Baamboozle submitted Da check (Aysar 10 memos 10-19..10-22 valid, Rory 0). Tokenlite held: Upwork login failed all week, awaiting user decision."
   },
   "weekly_report_finalization": {
     "last_run": "2026-10-16T21:35:00+07:00",
