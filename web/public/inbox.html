@@ -35,7 +35,8 @@
     <a class="pill" href="/">← Skills</a>
   </div>
   <div class="tabs top">
-    <button id="tInbox" class="on">Tin quan trọng</button>
+    <button id="tAlerts" class="on">⚠️ Alerts</button>
+    <button id="tInbox">Tin realtime</button>
     <button id="tLog">Nhật ký lọc (gồm tin bị bỏ)</button>
   </div>
   <div id="view"></div>
@@ -44,11 +45,12 @@
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmt = iso => new Date(iso).toLocaleString('vi-VN', { hour12: false });
-let tab = 'inbox';
+let tab = 'alerts';
 
 async function loadInbox() {
   const { policy, events } = await (await fetch('/api/inbox')).json();
-  $('#mode').textContent = !policy.enabled ? '⏸ Tắt' : policy.dryRun ? '🧪 Dry-run (chưa gửi Telegram)' : '🟢 Live';
+  setMode(policy);
+  if(0) $('#mode').textContent = !policy.enabled ? '⏸ Tắt' : policy.dryRun ? '🧪 Dry-run (chưa gửi Telegram)' : '🟢 Live';
   if (!events.length) return $('#view').innerHTML = '<div class="empty">Chưa có tin nào được đánh giá là quan trọng.</div>';
   $('#view').innerHTML = events.map(e => `
     <div class="card ${e.status === 'seen' ? 'seen' : ''}">
@@ -62,6 +64,21 @@ async function loadInbox() {
     </div>`).join('');
 }
 
+const SEV = { high: '🔴', medium: '🟠', low: '⚪' };
+async function loadAlerts() {
+  const rows = await (await fetch('/api/alerts')).json();
+  if (!rows.length) return $('#view').innerHTML = '<div class="empty">Chưa có alert nào từ lần quét định kỳ.</div>';
+  $('#view').innerHTML = rows.map(a => `
+    <div class="card ${a.status === 'resolved' ? 'seen' : ''}">
+      <div class="meta"><b>${SEV[a.severity] || ''} ${esc(a.project)}</b><span>${esc(a.source)}</span>
+        <span>${a.status === 'resolved' ? '✅ đã xử lí' : '○ đang mở'}</span><span>cập nhật ${fmt(a.updated_at)}</span></div>
+      <div><b>${esc(a.title)}</b></div>
+      <div class="text">${esc(a.detail)}</div>
+      ${a.suggested_action ? `<div class="reason">💡 ${esc(a.suggested_action)}</div>` : ''}
+      <div class="actions">${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener">🔗 Mở</a>` : ''}</div>
+    </div>`).join('');
+}
+
 async function loadLog() {
   const rows = await (await fetch('/api/inbox/gate-log')).json();
   if (!rows.length) return $('#view').innerHTML = '<div class="empty">Chưa có quyết định nào.</div>';
@@ -72,10 +89,16 @@ async function loadLog() {
 }
 
 async function act(id, a) { await fetch(`/api/inbox/${id}/${a}`, { method: 'POST' }); loadInbox(); }
-function show(t) { tab = t; $('#tInbox').classList.toggle('on', t === 'inbox'); $('#tLog').classList.toggle('on', t === 'log'); (t === 'inbox' ? loadInbox : loadLog)(); }
+const LOADERS = { alerts: loadAlerts, inbox: loadInbox, log: loadLog };
+function show(t) {
+  tab = t;
+  for (const k of Object.keys(LOADERS)) $('#t' + k[0].toUpperCase() + k.slice(1)).classList.toggle('on', k === t);
+  LOADERS[t]();
+}
+$('#tAlerts').onclick = () => show('alerts');
 $('#tInbox').onclick = () => show('inbox');
 $('#tLog').onclick = () => show('log');
-show('inbox');
+show('alerts');
 setInterval(() => show(tab), 15000);
 </script>
 </body>
