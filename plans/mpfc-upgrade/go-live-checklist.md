@@ -82,6 +82,17 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
   - Không commit: `wp-config.php`, `db-config.php`, `.htaccess` gốc, `advanced-cache.php`, `wp-content/cache`, `vendor/` (patch Carbon chỉ nằm trong `site-php83-fixes.patch`), `pfc7/backups/`, 11 plugin chưa track, `wp-logon.php` (file rỗng 0 byte, có trên live từ 20/05 — nên xoá)
   - Server mới đang checkout `live-php83`; từ giờ commit/pull trên nhánh này. `.git` đã `chown mpfc:www-data` (trước đó lẫn owner → lỗi ghi object)
 
+## Rà soát cuối server cũ → mới (23/10 12:00)
+- [x] DNS `*.youragentstore.net` + `youragentstore.net` → `159.65.213.246` (anh đổi 11:52); quantification vào server mới; cert dry-run OK; **Apache server cũ stop + disable**
+- [x] Apache log → MySQL `apache_logs`: chạy, 5026 dòng từ 10:10, nối liền dòng cuối của server cũ (10:09:56). Pipe thỉnh thoảng crash với URL độc (Apache tự bật lại) — giống live cũ
+- [x] `/home/mpfc`: chép phần thiếu (`--update`): 64 file session Claude (`projects/-home-mpfc`, backup `.claude.json`), PDF/TSV/script làm việc, zip Elementor Pro, `.bash_history`, `.mysql_history`
+- [x] `/root` cũ: archive đủ ở `/root/old-server` (5.1G, gồm `.ssh`, script `cancel-orphan-subscriptions.php`, `patch-user-delete.py`, backup 20/10, `mpfc_dump.sql` 2.7G); Claude/Codex/Gemini/claudekit của root đặt vào `/root` — `claude -p` OK
+- [x] `/home/mpfc-fpt` chép; hash mật khẩu `mpfc`, `mpfc-fpt` giống cũ (SSH vẫn chỉ key)
+- [x] root `authorized_keys`: thêm key `duongdn@duongdn-mackbook.local` (thiếu); bỏ key `mpfc-upgrade-test-pull` khỏi mpfc server mới
+- [x] logrotate `debug.log` (`/etc/logrotate.d/wp`) — thiếu, đã thêm (debug.log 138MB)
+- [x] So sánh (rsync dry-run) MyDailyAgent / MyBussinessAiAgent / keys: không thiếu (khác biệt = bản mới hơn ở server mới hoặc chỉ khác group)
+- Không chuyển (cố ý): `/var/www/utils/start_resque_live.sh` (thay bằng systemd), `/var/www/html` (trang mặc định), `DONT.REMOVED.ZIP…` (1G rác), monit, fluent-bit/td-agent-bit/newrelic-infra (đều inactive), mailcatcher
+
 ## Việc tiếp theo
 1. Commit + push code server mới (anh duyệt trước)
 2. Đổi DNS `quantification.youragentstore.net` → `159.65.213.246` (zone Cloudflare khác — anh làm) → sau đó tắt hẳn server cũ
