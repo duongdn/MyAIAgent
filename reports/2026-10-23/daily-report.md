@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-23 (Friday)
 
-**Run:** 2026-10-23T05:00+07:00 → 05:40 (cron, mpfc server)
+**Run:** 2026-10-23T05:00+07:00 → 05:40 (cron, mpfc server), corrected 08:40 (+07:00) recheck
 **Window:** 2026-10-22 08:30 → 2026-10-23 05:30 (+07:00). Task-log date: **Thu 2026-10-22**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:00: no upcoming approved leave on record. Resource Arrangement (Matrix): HauTT on trip 23/10–26/10 (SamHT covers Scott). DatNT off PM 10-23 (from yesterday's report).
 
@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | Slack RDC (Franc) | dmetiner 17:35: "this seems to be not working! Scanner must've added the frequencies to the logs, but there's nothing on my panel. Can you please test exactly like I did?" ([msg](https://rdc-fmmonitoring.slack.com/archives/C09L6PH5NUU/p1792665332552659?thread_ts=1792140646.155719)). Not addressed in Carrick's 19:37 EOD update (PHP/Node only). Also open: florenz mobile-app brief with questions + PR #34 to review (Carrick "will review soon"). Franc ○ |
-| 2 | Slack Baamboozle (Aysar) + task log | Aysar 10:18 to Carrick on the PHP PR #750: "spend more time and effort on code quality rather than PR count" (Carrick apologised, closed #750). Jamie 15:16 asked for a dark-mode/free-user popup change, then 03:46: "we could potentially release this on Sunday if we can get everything finished today" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792701991700109?thread_ts=1789081986.639859)). No reply to the 15:16 request yet. **KhanhHH 10-21 = 0.5h logged** (Baamboozle only, no leave on record, see Sheets). Aysar ○ |
+| 2 | Slack Baamboozle (Aysar) + task log | Aysar 10:18 to Carrick on the PHP PR #750: "spend more time and effort on code quality rather than PR count" (Carrick apologised, closed #750). Jamie 15:16 asked for a dark-mode/free-user popup change, then 03:46: "we could potentially release this on Sunday if we can get everything finished today" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792701991700109?thread_ts=1789081986.639859)). No reply to the 15:16 request yet. **New 06:46:** Jamie retested multi-word image search: "it's not working any longer. Searching hotel + guest doesn't reveal any images" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792712787406749?thread_ts=1792548821.830359)), plus 06:48 "We should be good to release this to Aysar for him to check, correct?" ([msg](https://baamboozle.slack.com/archives/C06CMTX025R/p1792712891431829?thread_ts=1789981725.264639)). Both unanswered. ~~**KhanhHH 10-21 = 0.5h logged** (Baamboozle only, no leave on record, see Sheets)~~ → 08:35: raw WS rows confirm 0.5h, but Upwork Aysar shows **30 cells (≈5h) on 10-21** and ≈1h40m on 10-22 (WS has 0h Baamboozle 10-22). She did the work but under-logged it in Workstream. This is a task-log gap, not an absence. Aysar ○ |
 | 3 | Slack GGS (Bailey) | Pre-live test day: Joey hit repeated Console sync outages (14:40–17:19, also hit prod per datnc 16:42) and listed major bugs 18:57 (adding a product to an existing order breaks stock; deleting picking doesn't update stock) ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1792670240582619)). Amy acknowledged 21:41 ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB/p1792680082360119)), fixes come in the morning. Joey hopes to go live today. **No Nick "Today report" for 10-22 in #maintenance** (only the 02:07 resource status). The team had hours on Speedventory 10-22 (VyNL 7.5h, NamNN 1h, VuTQ 0.5h). Bailey ○ |
 | 4 | MPFC | Yesterday's open items still unanswered: Saul's "Potentially vulnerable server at admin.mypersonalfootballcoach.com:80" (10-21). New Rollbar **#71 ArgumentCountError `MM_Response::isSuccess()`** (prod, 07:30). 🔴 **A secret token (Telegram-bot format) was pasted in plain text into a Slack DM by `freelancer` at 16:53** (redacted here). It should be revoked/rotated. NR apdex 0.45 (chronic). MPFC ○ |
 | 5 | OhCleo Slack (Celine) | ✅ Yesterday's urgent cover ask was resolved: Tony replied 13:41 VN, all person covers were swapped, Celine "Amazing!". New, unanswered (evening/overnight): 19:07 "can you let me know if you will be working tomorrow and if you have anything left this week", 00:09 "can a subscriber that logs in to the web listen unlimited?", 01:46 new cards (>2h items must be flagged first). Matrix: LongVV is not sure he can work full time on OhCleo today (busy with James's upgrade). Ohcleo ○ |
@@ -93,7 +93,7 @@ Raw `/review/week` rows (week 10-19), read 05:15. Devs usually log the same day 
 |-----------|-----------|--------------------|--------|
 | LeNH | 8h | **8h** (James Diamond) | ✓ |
 | TuanNT | 9.5h (Speedventory) ✅ | 0h so far | Very active in the Bailey room 10-22 (pre-live, sync). Expect hours after 09:30 |
-| KhanhHH | ⚠️ **0.5h** (Baamboozle) | 2h (BXR App) | 10-21 shortfall 7.5h, no leave on record. Re-verify after 09:30 before any reminder (13x false-0h history). 10-19/10-20 8h each |
+| KhanhHH | ⚠️ **0.5h** (Baamboozle) | 2h (BXR App) | ~~10-21 shortfall 7.5h, no leave on record. Re-verify after 09:30 before any reminder~~ → 08:35: raw `/review/week` across all accessible projects re-checked: 10-21 = 0.5h, 10-22 = 2h. Lyf/Others are 403 (not visible). Leave refreshed 08:23: none. Upwork Aysar: 10-21 ≈5h (30 cells, memos #730 spelling + multi-word image search), 10-22 ≈1h40m (PHP patch + #705). **Real under-logging in WS** (≥4.5h on 10-21, ≥1.7h on 10-22 missing). 10-19/10-20 8h each |
 | LongVV | 8h (DG 1.25 + OhCleo 5.25 + Maddy 1 + AW 0.5) | 7.75h (DG 6.75 + Maddy 0.5 + AW 0.5) | ad-hoc, informational |
 | PhucVT | 8h Meta-Stamp | 0h so far | on Arthur (pushed staging 17:04) |
 
@@ -141,7 +141,7 @@ Trello: Aysar ⚠️ (KhanhHH 10-21 shortfall, plus Slack). No other task-log ga
 | (untagged) | Check & resolve PHP security | — | — | — | 0.5h | ⚠️ no ticket key, no est, no JIRA log |
 
 ### 4. Bitbucket PR Status
-Not re-fetched this run (6 open Kai PRs as of 10-22: #560, #544, #540, #534, #509, #481). #481 is waiting on the customer, which is known and not our blocker. LIFM2-465 (#544) moved to testing 10-22.
+Live 08:38: 6 open Kai PRs (`xtreme-web/rms`): #560 LIFM2-471 (Rovo 1 minor, 10-21) · #544 LIFM2-465 (4 comments, Kai replied last 10-21 ✅) · #540 LIFM2-450 (0 comments) · #534 cron concurrency (Rovo only, 08-26) · #509 LIFM2-428 (Rovo only, 08-14) · #481 (waiting on the customer, not our blocker). No new client/human comments, no unanswered human review.
 
 Trello: ⚠️ Maddy skipped (Alert #7).
 
@@ -181,7 +181,7 @@ Trello: Elena - WordPress SamGuard ✓.
 
 ## Trello — Check progress — 05:30 (+07:00)
 
-**16/22 complete** (live 05:30). [Card](https://trello.com/c/HZFqiS0e)
+**16/22 complete** (live 05:30, re-fetched live 08:25: same 6 ○ and all re-verified at 08:40. Franc/MPFC/Bailey/OhCleo got no new reply, Maddy still has no Kai report, Aysar has a new 06:46 bug report). [Card](https://trello.com/c/HZFqiS0e)
 - ✓ James Diamond · Rory · Marcel · Raymond · Neural Contract · Andrew Taraba · Fountain - DOCUMENT · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ⚠️ Maddy: skipped (Alert #7, no Kai report for 0.5h Kai-role work, untagged JIRA hours)
 - ⚠️ Aysar: skipped (Alert #2)
@@ -199,7 +199,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital 
 
 ## Reminders — 05:30 (+07:00)
 - None sent (before 10:00, and no `--send-reminder`).
-- KhanhHH: 10-21 only 0.5h logged. Candidate for a reminder after a 09:30 re-check (she was very active 10-21/10-22, so this is likely a logging gap). If sent, it must state the real number (0.5h), not "0h".
+- KhanhHH: ~~candidate after 09:30 re-check~~ → 08:35 verified: WS 10-21 = 0.5h, 10-22 = 2h vs Upwork Aysar ≈5h / ≈1h40m. Reminder **not sent** (before 10:00, no `--send-reminder`). Suggested text: "Hi KhanhHH, Workstream shows only 0.5h on 10-21 and 2h on 10-22, but Upwork Aysar has ~5h (10-21) and ~1h40m (10-22). Please add the missing Baamboozle rows. Thanks!"
 - LeNH 8h (10-22): skipped (has hours). TuanNT, PhucVT: 10-21 complete, 10-22 not logged yet. LongVV 7.75h.
 
 ---
@@ -288,15 +288,15 @@ Trello: Arthur - Meta-Stamp ✓ (no unanswered customer ask, all open items wait
 
 ---
 
-## Upwork Memo — 2026-10-22 — 05:28 (+07:00)
+## Upwork Memo — 2026-10-22 — ~~05:28~~ re-run 08:30 (+07:00)
 
 | Workroom | Memos | Invalid | Details |
 |----------|-------|---------|---------|
-| Rory | — | — | Cloudflare challenge not resolved (Turnstile ×3) |
-| Aysar | — | — | Cloudflare challenge not resolved |
-| Tokenlite | — | — | Cloudflare challenge not resolved (known open login issue) |
+| Rory | 0 | 0 | No time logged 10-22 (contract paused by the customer) |
+| Aysar | 2 | 0 | ✅ "Fix the Critical PHP Security Patch Required" · "Verify and fix requirements for the navbar dark mode toggle, free-user preview, and upgrade popup (#705)" |
+| Tokenlite | — | — | login_failed (known open Tokenlite login issue, not a memo status) |
 
-Memo validity for 10-22 is not retrieved yet. This is not an alert. Re-run after 08:00 (company PC up, cookie vault refresh): `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-22`.
+~~Cloudflare challenge not resolved ×3. Memo validity for 10-22 not retrieved yet.~~ → resolved by the 08:30 re-run (company PC up). No invalid memos.
 Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the standing rule this is not an alert → Neural Contract ✓.
 
 ---
@@ -304,7 +304,8 @@ Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the sta
 ## Unresolved Questions
 - RDC: who answers dmetiner's 17:35 "logging not working, test exactly like I did", plus florenz's mobile brief + PR #34?
 - Baamboozle: Jamie wants the dark-mode popup change today for a Sunday release. Aysar is criticising PR quality. Does Carrick need a review step before opening PRs?
-- KhanhHH 10-21 0.5h: real gap or a project missing from the WS script? Re-verify after 09:30, then remind with the real number.
+- ~~KhanhHH 10-21 0.5h: real gap or missing project?~~ → real WS under-logging (Upwork proves ~5h Aysar work). Send the reminder? (needs `--send-reminder` / your OK)
+- Baamboozle: Jamie 06:46 says multi-word image search (hotel + guest) is broken again. Who replies?
 - Bailey: no Nick "Today report" 10-22. Who fixes Joey's two major stock bugs before today's hoped-for go-live? Find the sync root cause.
 - MPFC: rotate the token pasted in Slack DM 16:53. Saul's "vulnerable server" notice is still unanswered. Rollbar #71 is new.
 - OhCleo: answer Celine (Tony's availability today and this week, subscriber web listening). Review LongVV's 10-21 Pending 2.5h row.
@@ -313,4 +314,4 @@ Neural Contract (38901192): 4/4 login redirects, vault marked stale. Per the sta
 - BXR: GoDaddy backport unconfirmed. Plan the PHP 8.3 window. `.p12` key rotation needs the contract resumed.
 - Lyf (Sandor Antal): where does the PHP admin API live? Ask the customer.
 - davidztv19@ Google security alert 08:24: confirm it was our own activity.
-- After 08:00: Upwork memo re-run (Rory/Aysar 10-22). After 09:30: 10-22 hours for TuanNT, PhucVT, KhanhHH, ViTHT, PhatDLT.
+- ~~After 08:00: Upwork memo re-run~~ ✅ done 08:30, clean. After 09:30: 10-22 hours for TuanNT, PhucVT, ViTHT, PhatDLT (still 0 rows at 08:35).
