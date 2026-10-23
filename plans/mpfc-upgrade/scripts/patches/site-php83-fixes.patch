@@ -175,3 +175,20 @@ diff -ru a/wp-content/plugins/json-api/controllers/virtualacademy.php b/wp-conte
          $explodeDesc = explode("<div>", $replace_desc);
  
          for($j = 1; $j < sizeof($explodeDesc); $j++){
+--- a/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php
++++ b/vendor/nesbot/carbon/src/Carbon/Traits/Creator.php
+@@ -890,9 +890,12 @@
+      *
+      * @return void
+      */
+-    private static function setLastErrors(array $lastErrors)
++    private static function setLastErrors($lastErrors)
+     {
+-        static::$lastErrors = $lastErrors;
++        // PHP 8.2+: DateTime::getLastErrors() returns false when there is no error (upstream fix in Carbon 2.6x)
++        static::$lastErrors = is_array($lastErrors) ? $lastErrors : [
++            'warning_count' => 0, 'warnings' => [], 'error_count' => 0, 'errors' => [],
++        ];
+     }
+ 
+     /**
