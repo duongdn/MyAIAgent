@@ -60,3 +60,4 @@ Deletable (needs approval): booking.20251003.zip 1.5G, booking.zip 1.4G, booking
 - Cause: /home/ubuntu/deploy/appsettings.json `Default: Information`, no `Microsoft.EntityFrameworkCore` override, no appsettings.Production.json
 - Other: journal 985M, snapd 1.8G (9 disabled snap revisions), swapfile 6G
 - Fix (needs approval): add `"Microsoft.EntityFrameworkCore": "Warning"` to LogLevel + restart xid-webapp; `truncate -s 0 /var/log/syslog.1` (frees 8.5G); optional: logrotate syslog daily + maxsize 1G
+- **08:34 action (user approved option 2):** truncated /var/log/syslog.1 → disk 73% → **55%** (27G/49G). Log level kept (user: logs need detail).

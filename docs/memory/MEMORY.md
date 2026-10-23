@@ -237,6 +237,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 ## server-monitor
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
+- [xid_sync_console_keep_verbose_logs_truncate_syslog](server-monitor/feedback_xid_sync_console_keep_verbose_logs_truncate_syslog.md) — XID disk high = verbose SQL syslog; keep log level, truncate syslog.1
 - [feedback_siteground_skip_permanently](server-monitor/feedback_siteground_skip_permanently.md) — 🔴 2026-08-28: skip Siteground/Bailey step 1 entirely, CAPTCHA unautomatable
 - [feedback_report_path_is_root_reports_not_plans_reports](server-monitor/feedback_report_path_is_root_reports_not_plans_reports.md) — 🔴🔴 recurring: reports go to root `reports/`, NOT `plans/reports/`
 
