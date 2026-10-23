@@ -46,11 +46,13 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmt = iso => new Date(iso).toLocaleString('vi-VN', { hour12: false });
 let tab = 'alerts';
+async function loadMode() {
+  const { policy } = await (await fetch('/api/inbox')).json();
+  $('#mode').textContent = !policy.enabled ? '⏸ Tắt' : policy.dryRun ? '🧪 Dry-run (chưa gửi Telegram)' : '🟢 Live';
+}
 
 async function loadInbox() {
   const { policy, events } = await (await fetch('/api/inbox')).json();
-  setMode(policy);
-  if(0) $('#mode').textContent = !policy.enabled ? '⏸ Tắt' : policy.dryRun ? '🧪 Dry-run (chưa gửi Telegram)' : '🟢 Live';
   if (!events.length) return $('#view').innerHTML = '<div class="empty">Chưa có tin nào được đánh giá là quan trọng.</div>';
   $('#view').innerHTML = events.map(e => `
     <div class="card ${e.status === 'seen' ? 'seen' : ''}">
@@ -98,6 +100,7 @@ function show(t) {
 $('#tAlerts').onclick = () => show('alerts');
 $('#tInbox').onclick = () => show('inbox');
 $('#tLog').onclick = () => show('log');
+loadMode();
 show('alerts');
 setInterval(() => show(tab), 15000);
 </script>
