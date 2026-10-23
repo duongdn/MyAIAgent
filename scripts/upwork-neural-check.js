@@ -110,7 +110,7 @@ async function attempt(browser, n) {
   messages.forEach(m => {
     const ts = new Date(m.created).toISOString();
     const text = (m.message || '').replace(/<@\d+:\d+\|([^>]+)>/g, '@$1');
-    console.log(`  [${ts}] user ${m.userId}: ${text.slice(0, 300)}`);
+    console.log(`  [${ts}] user ${m.userId}: ${text.slice(0, 3000)}`);
   });
 
   process.exit(0);
