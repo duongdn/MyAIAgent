@@ -117,3 +117,16 @@ DuongDN: 10m/10m
 4. Per-project finalization rule blocks 9 projects mostly due to multi-project devs. Rerun `--submit` Sat/Mon, or relax rule?
 5. TuanNT sick leave 10-20 missing from WS leaveEntries (blocks Speedventory/Andrew Taraba/Neural).
 6. Fountain Est vs Charged frozen ≥3 weeks, 17 untriaged rows — ask PM to update.
+
+---
+
+## Recheck 2026-10-24 07:15 (+07): finalization + JD/Marcel refresh
+
+Live WS dry-run `--week=2026-10-19` (nothing submitted):
+- ✅ **Finalized since 18:00 by DuongDN (~20:33):** Auction Warehouse, Definitive Guide, Neural Contract, Portfolio (Andrew Taraba), Portfolio - James Diamond, Speedventory, Xtreme Soft Solutions (Maddy). 16/20 projects are now finalized.
+- ⏳ **Generator:** eligible now (0 logs, no active dev). It was a 403 "not Manager" at 18:00 and has not been submitted.
+- ⏳ **Meta-Stamp:** eligible now (PhucVT 5/5). It was a 403 at 18:00 and has not been submitted.
+- 🔴 **Crystal lang:** PhucVT 0/5 (moved to Meta-Stamp). The per-project rule blocks it.
+- 🔴 **Samguard:** DuongDN 1/5 (DM/reviewer role) and SamHT missing 19 and 23. DongNV is now 5/5.
+
+JD/Marcel are unchanged after the lock: LeNH 40/40, AnhNH2 20/20, DuongDN 0.17h. The 19/10 draft is still valid, still `confirmed: false`, and **NOT SENT**.
