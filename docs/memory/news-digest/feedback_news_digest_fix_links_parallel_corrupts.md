@@ -22,3 +22,4 @@ fix-links.py maps links by position using /tmp/news-digest-cache.json, which hol
 **Update 2026-10-20:** recurred on a SEQUENTIAL run too: the report was built by a script taking links directly from per-topic JSON (no reordering/skipping matched by position). fix-links still "fixed" 58 correct links (e.g. NSI article got the VnEconomy URL). It matches by position, so any curation (skipping/reordering articles) breaks it. Always back up the file before fix-links, diff the result, and restore if the links came from JSON.
 
 **Recurred 2026-10-24 0405:** fix-links rewrote 71 correct links (142 built by ID); backup restored.
+- **Recurred 2026-10-26 0405:** fix-links rewrote 47 correct links (all built by ID); backup restored.
