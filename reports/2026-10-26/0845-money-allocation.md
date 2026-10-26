@@ -40,7 +40,7 @@ BĐS 44.0% · Investment 32.6% · Savings 14.3% · Gold 8.9% · Liquid 0.3%
 
 ### 0. Đối chiếu report gần nhất (10-23 11:30)
 - NW 7,919,015,746 → 7,926,295,688 = **Δ +7.28M**: vay chị Ky +15M (không phải thu nhập), vàng −3M, chi −4.75M, lãi sổ +0.19M. Trừ khoản vay, NW thực ≈ −7.7M (chủ yếu giá vàng + chi tiêu cuối tuần). Không bất thường.
-- Plan "sổ ko kì hạn = quỹ cho vay + DCA dần" → DCA tuần 10-20..10-24 vào FPTS 54M (11.2+1+6+5.1+5.7+25). Lưu ý: 25M ngày 10-24 được cấp vốn bởi khoản vay chị Ky 15M (10-25), không phải từ sổ.
+- Plan "sổ ko kì hạn = quỹ cho vay + DCA dần" → DCA tuần 10-20..10-24 vào FPTS 54M (11.2+1+6+5.1+5.7+25).
 - Khuyến nghị lần trước "tuần tới có thể dừng DCA" → chưa làm (thêm 30.7M) — T10 FPTS 161.1M = 130% thu nhập tháng.
 - Plan "giữ CP ≤50%" → 47.3%, dư địa ~146M (giảm 27M).
 - Ghost nam á 6m (2M) — vẫn còn, loại khỏi tổng.
@@ -55,7 +55,6 @@ BĐS 44.0% · Investment 32.6% · Savings 14.3% · Gold 8.9% · Liquid 0.3%
 | Rủi ro | Mức độ | Ghi chú |
 |--------|--------|---------|
 | Cổ phiếu 47.3% toàn thị trường VN | 🟡 | còn ~146M tới trần 50% |
-| Đi vay để DCA (chị Ky 15M) | 🟡 | đòn bẩy nhỏ (0.2% NW) nhưng trong khi sổ ko kì hạn còn 455M — vay là không cần thiết |
 | USD/ngoại tệ 0.3% | 🟡 | 573 USD Paypal |
 | Vàng biến động | 🟢 | 12.9% base, −3M tuần này |
 | Tiền mặt vcb 8.8M | 🟢 | sổ ko kì hạn bù |
@@ -79,6 +78,6 @@ Base = gross 8,005,393,475 − Nhà 2,500,000,000.
 - Trần CP 50% còn ~146M: ~3.5 tháng ở ~10M/tuần (tốc độ tháng 10 thực tế ~40M/tuần → ~1 tháng).
 
 ### 5. Khuyến nghị
-- Ngắn hạn (30 ngày): trả chị Ky 15M từ sổ ko kì hạn (lãi sổ < chi phí quan hệ/nợ); dừng DCA tới hết T10 — đã vào FPTS 161.1M; rút ~10M từ sổ về vcb cho chi tiêu (vcb 8.8M).
+- Ngắn hạn (30 ngày): dừng DCA tới hết T10 — đã vào FPTS 161.1M; rút ~10M từ sổ về vcb cho chi tiêu (vcb 8.8M).
 - Trung hạn: hạ nhịp DCA về ~10M/tuần để không chạm trần 50% trong 1 tháng; cân nhắc nâng trần 55% nếu chốt không mua thêm BĐS.
 - Dài hạn: cân nhắc tài sản USD/quốc tế (0.3%) giảm tương quan VN.
