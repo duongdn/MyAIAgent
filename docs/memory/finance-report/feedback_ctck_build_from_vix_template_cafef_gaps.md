@@ -16,6 +16,7 @@ Learned building SSI (26/10/2026); TCX (Techcom Securities) showed the same patt
 
 - **TCX build (26/10/2026):** raw sheet `TCX` row layout identical to VIX → copyTo VIX + delete cols from index 7 (6 years). Gotchas: row 130 NCI is text " - " → wrap `N()` in formulas; cell text starting with "=" becomes #ERROR!. Only 6 cafef years (2020-2025, K).
 - 🔴 **Share count for P/E, P/B = CURRENT shares from vietstock (MarketCapital ÷ ClosePrice), NOT vốn góp/10,000 from last BCTC.** TCX had 2 bonus issues in 2026 (2,311→3,329tr) — first build understated P/E 11.8x vs real 17.0x, P/B 1.52 vs 2.19, flipped 2 Graham criteria. Check getpricehistory MarketCapital/ClosePrice history for share-count jumps on every build.
+- 🔴 **Always add the latest 4 quarters** (cafef `TypeTime=QUY`, type N, has quarters up to latest even when annual years are few) as extra raw columns + TTM P/E/P/B block in Định giá. User asked "sao ko có quí" on TCX when only annual was built. FireAnt `fetchFireAntBCTC(t,1,8)` gives quarterly LCTT.
 **Why:** these gaps cost several rounds of discovery on SSI.
 **How to apply:** for any CTCK ticker, check cafef year types + LCTT emptiness first, ask user about PDF/FireAnt in one question, and ask for the spreadsheet up front. Related: [[project_finance_report_detail_skill]], [[feedback_cafef_incomplete_fireant_alternative]].
 
