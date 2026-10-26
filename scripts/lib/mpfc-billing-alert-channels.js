@@ -32,11 +32,8 @@ function postJson(hostname, urlPath, body, headers = {}) {
 }
 
 async function sendEmail(alert) {
-  const php = `$m = json_decode(file_get_contents('php://stdin'), true);
-    $ok = wp_mail('${ALERT_EMAIL}', $m['title'], $m['body'], ['From: MPFC Billing Monitor <${ALERT_EMAIL}>']);
-    echo $ok ? 'MAIL_OK' : 'MAIL_FAIL';`;
-  const cmd = `wp --path=${WP_PATH} eval ${JSON.stringify(php).replace(/\$/g, '\\$')}`;
-  const opts = { input: JSON.stringify({ title: alert.title, body: alert.body }), encoding: 'utf8', timeout: 120000, stdio: ['pipe', 'pipe', 'ignore'] };
+  const cmd = `wp --path=${WP_PATH} eval-file /var/www/MyDailyAgent/scripts/lib/mpfc-billing-alert-wp-mail.php`;
+  const opts = { input: JSON.stringify({ to: ALERT_EMAIL, title: alert.title, body: alert.body }), encoding: 'utf8', timeout: 120000, stdio: ['pipe', 'pipe', 'ignore'] };
   const out = IS_SERVER ? execFileSync('bash', ['-c', cmd], opts) : execFileSync('ssh', [SSH_HOST, cmd], opts);
   if (!out.includes('MAIL_OK')) throw new Error(`wp_mail failed: ${out.slice(-200)}`);
 }
