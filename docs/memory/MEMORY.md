@@ -309,3 +309,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [assistant_notify_only_relevant_no_store_noise](assistant/feedback_assistant_notify_only_relevant_no_store_noise.md) — 🔴 gate before store/notify; team chatter dropped; dryRun first
 - [assistant_never_claude_p_per_message](assistant/feedback_assistant_never_claude_p_per_message_use_llm_gateway.md) — 🔴 background LLM calls → llm.nustechnology.com gateway (deepseek-v4.1-flash), never `claude -p`; cap + count tokens
 - [phase3_go_deeper_than_earlier_sessions](feedback_phase3_go_deeper_than_earlier_sessions.md) — GĐ3: chủ đề trùng S2 → đi sâu bằng số đo thật, không lặp/bỏ
+- [news-digest/feedback_news_digest_duplicate_source_name_collision.md](news-digest/feedback_news_digest_duplicate_source_name_collision.md) — "Tài chính VN" source name collision; skip fix-links when links JSON-exact (261027)
