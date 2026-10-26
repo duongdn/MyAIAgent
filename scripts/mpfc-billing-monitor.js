@@ -5,8 +5,8 @@
  *
  * Runs on BOTH the mpfc server (24/7: email + Slack) and the office PC (when on: also Telegram,
  * WhatsApp, assistant inbox, desktop). No duplicates: before sending, each run "claims" (alert, channel)
- * pairs in ONE state file on the mpfc server under flock. A pair is re-sent at most every 24h while the
- * problem persists; resolved alerts are dropped from the state.
+ * pairs in ONE state file on the mpfc server under flock. While the problem persists a pair is re-sent hourly,
+ * only during work hours (Mon-Fri 08:00-17:00 UTC+7); resolved alerts are dropped from the state.
  *
  *   node scripts/mpfc-billing-monitor.js            run checks + send alerts
  *   node scripts/mpfc-billing-monitor.js --dry-run  print alerts only
@@ -26,7 +26,14 @@ const SSH_HOST = 'mpfc.mpfc.live';
 const SERVER_AGENT_DIR = '/var/www/MyDailyAgent';
 const WP_PATH = '/var/www/mypersonalfootballcoach.com';
 const STATE_FILE = path.join(SERVER_AGENT_DIR, 'data', 'mpfc-billing-monitor-state.json');
-const RESEND_MS = 24 * 3600 * 1000;
+const REMIND_MS = 3600 * 1000;
+// Reminders only while DuongDN is at work (Mon-Fri 08:00-17:00 UTC+7); the first alert always goes out immediately,
+// so a problem found at night is sent at once and reminded again from 08:00.
+function isWorkHours(now) {
+  const vn = new Date(now + 7 * 3600 * 1000); // shift to UTC+7, then read UTC fields
+  const day = vn.getUTCDay(), h = vn.getUTCHours();
+  return day >= 1 && day <= 5 && h >= 8 && h < 17;
+}
 
 function onServer(cmd, input) {
   const opts = { input, encoding: 'utf8', timeout: 120000, stdio: ['pipe', 'pipe', 'ignore'] };
@@ -47,7 +54,7 @@ function claim(req) {
   for (const id of Object.keys(st.alerts)) if (!req.alertIds.includes(id)) delete st.alerts[id]; // resolved
   for (const id of req.alertIds) {
     const sent = st.alerts[id] ||= {};
-    grants[id] = req.channels.filter(ch => !sent[ch] || now - sent[ch] >= RESEND_MS);
+    grants[id] = req.channels.filter(ch => !sent[ch] || (isWorkHours(now) && now - sent[ch] >= REMIND_MS));
     for (const ch of grants[id]) sent[ch] = now;
   }
   const otherRun = Object.entries(st.lastRun).filter(([h]) => h !== req.host);
