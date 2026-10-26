@@ -15,11 +15,21 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 | F1 | ✅ False alarm | Failed rebills (billing_status 2/3/4) sit with `batch_id` set and never progress through dunning retries 2/3. | 35 events, oldest 2025-07-16. Checked each user's **paid bundle**: 28 overdue (no paid access); 1 test account; 1 (teamamorette) manually re-activated by an admin on 2026-02-19 07:40 (no purchase) and given a comp Next Gen Club at 08:47, so this was intentional. There is no card-update feature, so retries 2/3 could not succeed anyway. | No impact: access is correctly blocked after the 1st failure, and nobody has unpaid access. Cosmetic only: these stay "overdue" instead of "cancelled". |
 | F2 | ✅ False alarm | Oct 2025 extra charges on items 1482/7017 came from a manual catch-up run. Payment numbers are consecutive, 1 charge each; no double charge. | DB tx log | None. Ignore. |
 | F3 | ✅ False alarm | 14 events marked rebilled OK with no transaction near `processed_date`. | 13/14: the charge exists on the **due date**; `processed_date` was only stamped later by the Oct 2025 manual catch-up (the query matched the wrong date). 1/14 (event 15536, item 12084, Jan 2026): subscription was refunded and cancelled in Dec 2025, so the pending event was closed without charging. Correct. | None. |
-| F4 | 🟠 Med | **Root cause of `user_id=0` still exists at checkout.** Free-trial orders are created before the user. It is patched only at charge time. | Order 06:23:48 < user 06:23:51. | Covered by the patch, but any other code that reads `sp.user_id` (reports, reminder emails) still sees 0 until the first charge. |
+| F4 | 🟢 Handled | Free-trial checkout still saves the schedule with `user_id=0` (~17% of trials, timing race). | Patched at charge time (commit 952a0156d). Reminders use the order's user. Stripe reads `user_id` only at the patched spot. 0 rows now. | None while the patch exists. Monitor `user_id=0` rows in case a MemberMouse update overwrites the patch. |
 | F5 | ✅ Not a bug | MemberMouse disables billing if a restore from backup is suspected (no sweep for 24h + gateway confirms). This is a safety feature. | Billing enabled, sweep current. | None. |
 | F6 | 🟡 Low | Live fixes live outside git: the fixer (`adonly/`, untracked), the mu-plugin (gitignored), and `db-config.php` (srtm_ttl, uncommitted with other people's changes). | `git status` | A deploy or rsync can silently revert the 10-23 fixes and re-create the incident. |
 | F7 | 🟡 Low | Junk rows: 3 pending `event_type=0` events for cancelled item 10244, 2 orphan 2018/2019 events with no payment row, 2 legacy active Stripe items (2017/2019) with no schedule. | Audit #1–#3. | Harmless to billing. The legacy items need a Stripe check (free access?). |
 | OK | ✅ | No double charges since May 2026. 10-23 catch-up had no same-period duplicates. No pending jobs >1h. No owner mismatch. Dunning code logic itself is correct (3 retries → cancel). | Audit #5/#7/#8 | |
+
+## 1b. Additional checks (2026-10-26 15:15, read-only)
+| Check | Result | Verdict |
+|---|---|---|
+| PayPal IPN alive | last IPN 2026-10-25 11:36, 9,704 total | ✅ OK |
+| PayPal active monthly items, no payment 45d | 3 (items 25860, 26937, 27250): order status 0 = **abandoned PayPal checkout**, never paid, no paid access (bundle none or cancelled) | ✅ False alarm (orphan pending orders) |
+| Resque jobs last 30d | 196 complete, 0 failed; WP cron runs every minute, `mm_resque_jobs_worker` OK | ✅ OK |
+| MM diagnostic log errors 14d | none | ✅ OK |
+| Cancelled/overdue items whose paid bundle is still active (no other active item) | 25 rows / ~17 users: test account (vuongtrancr+mpfc), comp grants (comp log events), manual admin re-activations (teamamorette), legacy "Coach's Pass" rows | 🟡 Info: admin-managed access, not a billing bug. Optional: Saul reviews the list |
+| Annual/other-frequency Stripe subs without upcoming rebill | covered by check #1: only 2 legacy (2017/2019) + 1 test | ✅ OK |
 
 ## 2. Proposed solutions (need approval per item)
 1. **F1.** No action needed (false alarm). Optional: exclude dunning-state events from future stuck alerts so they don't create noise.
