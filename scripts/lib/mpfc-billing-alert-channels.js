@@ -12,7 +12,7 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..', '..');
 const readJson = (f) => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'config', f), 'utf8')); } catch { return null; } };
-const ALERT_EMAIL_FROM = 'duongdn@nustechnology.com';
+const ALERT_EMAIL_FROM = 'dnduongus@gmail.com'; // nustechnology app passwords are IMAP-only (SMTP 535)
 const ALERT_EMAIL_TO = 'duongdn@nustechnology.com';
 
 function postJson(hostname, urlPath, body, headers = {}) {
@@ -38,7 +38,7 @@ async function sendEmail(alert) {
 
 // DM to ourselves in the MPFC Slack workspace (never a client-visible channel)
 async function sendSlack(alert) {
-  const ws = (readJson('.slack-accounts.json')?.accounts || []).find(w => w.name === 'MyPersonalFootballCoach');
+  const ws = (readJson('.slack-accounts.json')?.accounts || []).find(w => w.workspace === 'MyPersonalFootballCoach' || w.name === 'MyPersonalFootballCoach');
   if (!ws?.token) throw new Error('no MPFC Slack token');
   const auth = { Authorization: `Bearer ${ws.token}` };
   const me = await postJson('slack.com', '/api/auth.test', {}, auth);
