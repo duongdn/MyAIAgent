@@ -6,6 +6,7 @@
  * Usage:
  *   node scripts/facebook-profile-post.js --draft <text-file> [--image <png>] [--feeling "hết tiền"] [--dry-run]
  *   node scripts/facebook-profile-post.js --submit <post-url> [--audience=public|friends]
+ *   node scripts/facebook-profile-post.js --find-url "<first words of post>"   (permalink lookup retry)
  *   node scripts/facebook-profile-post.js --list-own-posts [--limit=15]   (recent timeline posts, topic rotation)
  *   node scripts/facebook-profile-post.js --list-memories   (today's "Ngày này năm xưa")
  *   node scripts/facebook-profile-post.js --draft <caption-file> --share-memory <index> [--dry-run]
@@ -261,6 +262,15 @@ async function deleteDraft(page, postUrl) {
   const draftFile = argAfter('--draft');
   const submitUrl = argAfter('--submit');
   const deleteUrl = argAfter('--delete');
+  if (argAfter('--find-url')) {
+    // Retry permalink lookup for a post whose URL wasn't captured right after posting
+    const { browser, page } = await openFacebookSession();
+    try {
+      const postUrl = await findOwnPostUrl(page, argAfter('--find-url'));
+      console.log(JSON.stringify({ ok: !!postUrl, mode: 'find-url', postUrl }));
+    } finally { await browser.close(); }
+    return;
+  }
   if (flag('--list-memories') || flag('--list-own-posts')) {
     const limit = parseInt((args.find(a => a.startsWith('--limit=')) || '--limit=15').split('=')[1], 10);
     const { browser, page } = await openFacebookSession();

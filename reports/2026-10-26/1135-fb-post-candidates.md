@@ -200,3 +200,6 @@ https://www.strava.com/activities/20731911751
 - `running`: hôm nay đã có bản nháp 'Chỉ mình tôi' (5km sáng nay) — nếu chọn bài chạy, cân nhắc xoá bản nháp đó (`--delete`).
 
 Chọn bài: `/me:fb-post --pick <số>`
+
+## Đã đăng
+- #9 (đổi sang giá vàng nhẫn VN, caption theo user) → https://www.facebook.com/dnduong.us/posts/pfbid0d2ioLHV3PsXSit4o8LUqhHqXm5Bdcb1SDcsM76Qi8UgJmQeHvKxnroEFA75G2nhKl (Công khai, Trello complete)
