@@ -28,7 +28,7 @@ function postJson(hostname, urlPath, body, headers = {}) {
 }
 
 async function sendEmail(alert) {
-  const acc = (readJson('.email-accounts.json') || []).find(a => a.email === ALERT_EMAIL_FROM);
+  const acc = (readJson('.email-accounts.json')?.accounts || []).find(a => a.email === ALERT_EMAIL_FROM);
   if (!acc?.app_password) throw new Error(`no app password for ${ALERT_EMAIL_FROM}`);
   const nodemailer = require('nodemailer');
   const t = nodemailer.createTransport({ host: 'smtp.gmail.com', port: 465, secure: true,
@@ -38,7 +38,7 @@ async function sendEmail(alert) {
 
 // DM to ourselves in the MPFC Slack workspace (never a client-visible channel)
 async function sendSlack(alert) {
-  const ws = (readJson('.slack-accounts.json') || []).find(w => w.name === 'MyPersonalFootballCoach');
+  const ws = (readJson('.slack-accounts.json')?.accounts || []).find(w => w.name === 'MyPersonalFootballCoach');
   if (!ws?.token) throw new Error('no MPFC Slack token');
   const auth = { Authorization: `Bearer ${ws.token}` };
   const me = await postJson('slack.com', '/api/auth.test', {}, auth);
