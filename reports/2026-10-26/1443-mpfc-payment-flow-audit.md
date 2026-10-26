@@ -13,7 +13,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 | # | Severity | Finding | Evidence | Impact |
 |---|---|---|---|---|
 | F1 | ✅ False alarm | Failed rebills (billing_status 2/3/4) sit with `batch_id` set and never progress through dunning retries 2/3. | 35 events, oldest 2025-07-16. Checked each user's **paid bundle**: 28 overdue (no paid access); 1 test account; 1 (teamamorette) manually re-activated by an admin on 2026-02-19 07:40 (no purchase) and given a comp Next Gen Club at 08:47, so this was intentional. There is no card-update feature, so retries 2/3 could not succeed anyway. | No impact: access is correctly blocked after the 1st failure, and nobody has unpaid access. Cosmetic only: these stay "overdue" instead of "cancelled". |
-| F2 | 🟢 Low (not a double charge) | Oct 2025 manual catch-up (run by DuongDN) of stuck events for items 1482 and 7017. | Payment numbers are consecutive with exactly 1 charge each (1482: #99 13/08, #100 13/09, #101 11/10, #102 13/10…). The stuck events that had already been charged (15066, 15070) were re-run but produced **no new transaction** (the Stripe idempotency key per event returned the original charge). The 2 October charges are #101 and #102, so the schedule was pulled forward by one cycle. No refund in DB (type 5 = 0). | 1482 is still active: prepaid 1 month ahead, no loss. 7017 cancelled after the 12/11/2025 charge: may have paid 1 cycle earlier than needed (£9.99), minor. No refund needed. |
+| F2 | ✅ False alarm | Oct 2025 extra charges on items 1482/7017 came from a manual catch-up run. Payment numbers are consecutive, 1 charge each; no double charge. | DB tx log | None. Ignore. |
 | F3 | 🟠 Med | **14 events marked "rebilled OK" (billing_status 1) with no transaction**, Jun–Oct 2025, mostly from the duplicate chains (e.g. item 8100/10133). | Audit query #6. | Either a ghost success (member not charged) or a missing log. Needs Stripe reconciliation. |
 | F4 | 🟠 Med | **Root cause of `user_id=0` still exists at checkout.** Free-trial orders are created before the user. It is patched only at charge time. | Order 06:23:48 < user 06:23:51. | Covered by the patch, but any other code that reads `sp.user_id` (reports, reminder emails) still sees 0 until the first charge. |
 | F5 | 🟠 Med | **MemberMouse silently disables billing on "backup restore detected"** (last sweep too old, e.g. after a server move or restore). It only emails the WP admin. | `LocalBillingEngine::backupRestoreDetected()` → `disableBilling()`. Currently enabled=1, sweep is current. | One migration or restore can stop all rebills with nobody on our side noticing. |
@@ -23,7 +23,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 
 ## 2. Proposed solutions (need approval per item)
 1. **F1.** No action needed (false alarm). Optional: exclude dunning-state events from future stuck alerts so they don't create noise.
-2. **F2.** No refund. Optional: when catching up a stuck event manually, re-run only the stuck event (Stripe idempotency makes it safe) and do not also run the next-period event on the same day.
+2. **F2.** No action (false alarm).
 3. **Root fix for stuck batches (all stages).** In `assignScheduledPaymentsToBatchAndRetrieve`, force the SELECT to master (`$wpdb->send_reads_to_masters()`, HyperDB). One line, removes the bug class instead of relying on srtm_ttl + fixer.
 4. **F3.** Reconcile those 14 events against Stripe charges (read-only API) before any action.
 5. **F5.** Covered by monitoring (below). Add a step to the migration runbook: check `mm-option-scheduled-billing-enabled` after any move.
@@ -49,7 +49,7 @@ Also add these as a section in `/me:mpfc-monitor` (daily report) so they're revi
 
 ## Unresolved questions
 1. ~~F1~~ resolved: false alarm, no action.
-2. ~~F2~~ resolved: not a double charge (manual catch-up, schedule shifted one cycle), no refund.
+2. ~~F2~~ false alarm, ignore.
 3. Monitor: OK to build it on our side (My-AI-Agent cron, read-only), with alert channel = email + WhatsApp to you?
 4. Is a Stripe API key available to us read-only (restricted key) for reconciliation, or should we read it from the MM settings?
 5. Send Saul the result of the 8-member charge (3 OK / 5 declined)?
