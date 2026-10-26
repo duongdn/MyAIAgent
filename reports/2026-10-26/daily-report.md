@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-26 (Monday)
 
-**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server), corrected 08:40 (+07:00) recheck
+**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server), corrected 08:40 + 08:55 (+07:00) recheck
 **Window:** 2026-10-23 08:40 → 2026-10-26 05:00 (+07:00). Task-log date: **Fri 2026-10-23**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:01: no upcoming approved leave. Resource Arrangement (Matrix): MinhTC sick 10-23. **TienPH off 26/10** (hometown). HauTT away until 26/10 (SamHT covers Scott). DuongDN left 4h early Fri 10-23 (will make it up this week).
 
@@ -10,7 +10,7 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack GGS (Bailey) | **Go-live today.** Joey, Sun 17:09: "since all major issues have been fixed, can you please go live tomorrow morning first thing your time? I will log in tomorrow (Monday) at 6 am to see if you guys went live or not" ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB)). No reply yet (still none in GGS Slack as of 08:35 recheck). The team must confirm and execute the go-live this morning. Fri: Nick sent the sync root-cause analysis 17:13 and the "Today report" 17:16 ✅. Bailey ○ |
+| 1 | Slack GGS (Bailey) | **Go-live today.** Joey, Sun 17:09: "since all major issues have been fixed, can you please go live tomorrow morning first thing your time? I will log in tomorrow (Monday) at 6 am to see if you guys went live or not" ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB)). ~~No reply yet (still none in GGS Slack as of 08:35 recheck). The team must confirm and execute the go-live this morning.~~ ✅ 08:55: DuongDN đã báo QC to handle the go-live (handled on our side). Fri: Nick sent the sync root-cause analysis 17:13 and the "Today report" 17:16 ✅. Bailey ○ |
 | 2 | Trello Fountain (Kunal) | Rick 17:10 Fri asked to hold the Oct 23 release (#782/#941) until Monday for QC. **Kunal 18:47: "anything I give you I have already reviewed and can mostly be pushed live please try and still push this live"** ([board](https://trello.com/b/UDrSWage)). No reply since. **New 08:35 recheck:** Kunal Mon 06:49 on the "Monday Oct 26 release" card: "have an update since friday — I folded the next rollout into these two PRs so it's one deploy. Everything on test except Gift Match". No reply from Rick yet. Also unanswered from Kunal: Fountain Blog "whats the email?" (10:57), Infinity gift-variant export "are you able to push this live" (11:03), new card "Set up test.infinityroses.com". Email: the new site goes live **Tue 10-27**, and Kunal travels to India 10-29 → 11-11. Fountain ○ |
 | 3 | Neural Contract | Customer (via chientx relay, Sun 11:44): "that fix got the code past the login. but when i went to upload a document I got a **501 error**…" ([Upwork room](https://www.upwork.com/ab/messages/)). New Upwork message Sun 11:45. Fri thread: TuanNT working on the branded `internalserver` error page. ~~Upwork fetch was Cloudflare-blocked (pre-08:00)~~ Read live at 08:35: last message is still the customer's Sun 11:44 "…upload a document I got a 501 error. i guess you did not test the upload functionality." **No reply from us.** Neural Upwork hours last week 0h. Neural ○ |
 | 4 | OhCleo (New Relic + Slack) | 🔴 **New prod error: `ProgrammingError column app_media.cover_by_creator does not exist` ×17** ([NR](https://one.newrelic.com)), so the cover-art release (deployed to prod Fri) is missing its DB migration on prod. Tony's Fri report is present (cover art / tags / creators deployed on prod). Earlier Celine asks (availability, unlimited web listening) have no visible answer in the DM (the script skips thread replies, so verify). Ohcleo ○ |
@@ -179,7 +179,7 @@ Trello: Elena - WordPress SamGuard ✓
 - ⚠️ Aysar: skipped (Alert #6)
 - ⚠️ MPFC: skipped (Alert #5)
 - ⚠️ Neural Contract: skipped (Alert #3)
-- ⚠️ Bailey: skipped (Alert #1)
+- ~~⚠️ Bailey: skipped (Alert #1)~~ ✓ Bailey: completed 08:55 (go-live handed to QC)
 - ⚠️ Fountain - DOCUMENT: skipped (Alert #2)
 - ⚠️ Ohcleo: skipped (Alert #4)
 
@@ -285,7 +285,7 @@ Trello: Arthur - Meta-Stamp ✓
 ---
 
 ## Unresolved Questions
-- Bailey: who confirms to Joey and runs the go-live this morning (he checks at 6 am his time)?
+- ~~Bailey: who confirms to Joey and runs the go-live?~~ QC informed (08:55).
 - Fountain: does Rick push Kunal's Oct 23 release (#782/#941/#948) today, or reply holding for QC? Who answers the blog email / Infinity export / test.infinityroses.com asks?
 - OhCleo: run the missing `cover_by_creator` migration on prod (LongVV). Check whether Celine's 10-22/23 questions were answered in threads.
 - Neural: who looks at the customer's new 501 on document upload? Upwork msg Sun 11:45 still unread (fetch blocked).
