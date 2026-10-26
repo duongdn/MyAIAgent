@@ -46,9 +46,10 @@ T10 vào FPTS: 161.1M (130.5% thu nhập tháng).
 | 🏖️ Hưởng thụ | 4,965,000 | 11.5% |
 | 🍜 Ăn uống | 4,555,000 | 10.5% |
 | 🏠 Nhà cửa & Dịch vụ | 3,780,000 | 8.7% |
-| ❓ Linh tinh | 3,664,000 | 8.5% |
 | 💊 Sức khỏe | 2,652,500 | 6.1% |
 | 🛵 Xe cộ / Đi lại | 2,556,000 | 5.9% |
+| ❓ Linh tinh | 2,051,000 | 4.7% |
+| 👩 Vợ chi tiêu | 1,613,000 | 3.7% |
 | 💼 Công việc / Phí | 1,202,000 | 2.8% |
 | 🛍️ Mua sắm | 775,000 | 1.8% |
 | 📦 Khác | 653,641 | 1.5% |
@@ -79,8 +80,6 @@ T10 vào FPTS: 161.1M (130.5% thu nhập tháng).
 | 🏠 Nhà cửa & Dịch vụ | Internet | 170,000 | 0.4% |
 | 🏠 Nhà cửa & Dịch vụ | Nước | 160,000 | 0.4% |
 | 🏠 Nhà cửa & Dịch vụ | Thú Cưng | 138,000 | 0.3% |
-| ❓ Linh tinh | Linh tinh | 2,051,000 | 4.7% |
-| ❓ Linh tinh | Tiền ra | 1,613,000 | 3.7% |
 | 💊 Sức khỏe | Thể thao | 2,477,000 | 5.7% |
 | 💊 Sức khỏe | Sức khỏe | 132,000 | 0.3% |
 | 💊 Sức khỏe | Thuốc men | 43,500 | 0.1% |
@@ -88,6 +87,8 @@ T10 vào FPTS: 161.1M (130.5% thu nhập tháng).
 | 🛵 Xe cộ / Đi lại | Taxi/thuê xe | 664,000 | 1.5% |
 | 🛵 Xe cộ / Đi lại | Đi lại | 92,000 | 0.2% |
 | 🛵 Xe cộ / Đi lại | Gửi xe | 60,000 | 0.1% |
+| ❓ Linh tinh | Linh tinh | 2,051,000 | 4.7% |
+| 👩 Vợ chi tiêu | Tiền ra | 1,613,000 | 3.7% |
 | 💼 Công việc / Phí | Công việc | 1,200,000 | 2.8% |
 | 💼 Công việc / Phí | Phí chuyển khoản | 2,000 | 0.0% |
 | 🛍️ Mua sắm | Tóc | 472,000 | 1.1% |
