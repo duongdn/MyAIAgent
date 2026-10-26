@@ -10,3 +10,5 @@ Customer → team/dev questions (Slack/Discord `<@ID>` mentions = our devs/perso
 **How to apply:** rules live in `scripts/assistant/prompts/relevance-gate-prompt.md` + `oursRepliedSince`/`hasWaitingAsk` in `scripts/assistant/lib/inbox-db.js`. Elena Optimization (#optimization, OP-*) is ACTIVE, not the paused Elena-SamGuard item. Related: [[assistant-notify-only-relevant-no-store-noise]]
 
 **Update 2026-10-26 (user: "cái này chỉ đích danh tôi, cũng lại bỏ — bộ lọc rất tệ"):** anything addressing DuongDN by name ("Duong Doan", "duongdn", "a/anh Dương") or DM = URGENT immediately, never the 15-min queue — forced in code (`event-intake.js`, `meta.mentionsMe`), and only DuongDN's own reply closes such an ask (teammate replies don't).
+
+**Update 2026-10-26 #2 (user: "quái gì đây !!!" on "Duy Vo: a verify thử nha", "Dat Nguyen: a co move domain qua r", leave notice "NEW TienND ... Nhức đầu"):** Matrix message not naming DuongDN and not a DM → never await_reply (forced to none in `event-intake.js`); only real urgents pass. "Name: ..." prefix = addressed to that person. Resource Arrangement leave lines = drop.

@@ -57,6 +57,8 @@ async function intake(e) {
   const v = await judge(e);
   // Named ask to DuongDN never waits in the queue, whatever the judge said (2026-10-26 Kunal-Fountain miss).
   if (e.meta?.mentionsMe && v.action === 'await_reply') Object.assign(v, { action: 'urgent', urgency: 'high' });
+  // Matrix is internal: if DuongDN isn't named, the team handles it ("Duy Vo: ...", leave notices) — only real urgents pass.
+  else if (e.source === 'matrix' && !e.meta?.mentionsMe && !e.meta?.isDirect && v.action === 'await_reply') Object.assign(v, { action: 'none', reason: `matrix, not addressed to DuongDN (${v.reason})` });
   if (v.action === 'none') return log('drop', e, v.reason);
   if (v.action === 'await_reply') {
     const due = new Date(Math.max(Date.now(), Date.parse(e.ts_utc)) + (p.replyWaitMin ?? 30) * 60000).toISOString();
