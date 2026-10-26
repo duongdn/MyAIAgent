@@ -10,6 +10,7 @@
  *
  *   node scripts/mpfc-billing-monitor.js            run checks + send alerts
  *   node scripts/mpfc-billing-monitor.js --dry-run  print alerts only
+ *   node scripts/mpfc-billing-monitor.js --test-alert  add a fake alert to test channels + dedupe
  *   node scripts/mpfc-billing-monitor.js --claim    (internal, on mpfc) stdin {host, alertIds, channels} -> grants
  */
 const fs = require('fs');
@@ -80,9 +81,11 @@ async function main() {
     const bad = c.evaluate ? c.evaluate(rows) : rows;
     if (!bad.length) continue;
     const detail = bad.slice(0, 30).map(r => '  ' + r.join(' | ')).join('\n');
-    const id = c.key + '-' + crypto.createHash('md5').update(detail).digest('hex').slice(0, 10);
+    // stable id: column 1 identifies the problem; changing values (ages, counts) must not re-alert
+    const id = c.key + '-' + crypto.createHash('md5').update(bad.map(r => r[0]).join(',')).digest('hex').slice(0, 10);
     alerts.push({ id, title: `[MPFC billing] ${c.title}`, body: `${c.why}\n\n${detail}${bad.length > 30 ? `\n  …+${bad.length - 30} more` : ''}` });
   }
+  if (args.includes('--test-alert')) alerts.push({ id: 'test-alert', title: '[MPFC billing] TEST alert (ignore)', body: 'Channel/dedupe test of scripts/mpfc-billing-monitor.js. No billing problem.' });
   if (args.includes('--dry-run')) { console.log(alerts.length ? alerts.map(a => `${a.title}\n${a.body}`).join('\n\n') : 'OK — no billing issues'); return; }
 
   const senders = channelsFor(IS_SERVER);
