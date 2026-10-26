@@ -18,3 +18,9 @@ metadata:
 
 **Why:** a silent billing failure plus a silent safety-net failure meant months of missed charges, then a mass surprise charge.
 **How to apply:** treat stuck count > 0 or a heartbeat older than 30 min as CRITICAL in every MPFC monitor run. Before any migration or plugin upgrade, check for stuck rebills first. The old droplet 293179468 is powered OFF with no DB access (tag removed). It is rollback only.
+
+## 2026-10-26 follow-up: free-trial schedules saved with user_id=0
+- Free-trial checkout creates the order before the WP user exists, so `scheduleSubscriptionPayment` stored `mm_scheduled_payments.user_id=0`. At rebill time `processScheduledPaymentEvent` reads that as "user does not exist" and records a failure (billing_status 2). The member is never charged and never cancelled, so they get free access. The fixer's INNER JOIN on sp.user_id also hid these rows.
+- Fixed live (not committed): MemberMouse `class.scheduledpaymentservice.php` resolves the user from the order when user_id is empty and saves it. The fixer joins the user via `mm_orders` and dedupes the stale alert (sent when the set changes, max once/24h, option `mpfc_stale_rebills_alert`). Backup: `mpfc:~/backup-202610260712/`. The 11 rows with user_id=0 were repaired.
+- Charged per DuongDN: event 15626 (hinelucy) £9.99 OK, next payment 26/11. Event 15543 (dale.felsch) declined, now overdue/dunning.
+- 9 older cases (events 14909–14928, Aug–Nov 2025; 1 is the test account vuongtrancr+testpay) failed only because of user_id=0, and those members are still active and unbilled. Charge decision pending.
