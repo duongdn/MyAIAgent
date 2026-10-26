@@ -125,3 +125,7 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - 16:00 NR 08:35–08:59 UTC: new avg 2.71 / p50 1.84 / p95 10.25 vs old 1.55 / 1.34 / 3.44; DB như nhau (0.56 vs 0.53). Tail = burst API test từ dev (lt-player, 171.251.232.148). API endpoints (apache_logs) chậm 1.3–2x vs cũ
 - NR agent overhead đo trực tiếp: uncached page OFF ~1.4s vs ON ~1.85–2.6s. Đã thử tắt composer_api, app logging, tracer detail, span/DT, wordpress.hooks, error_collector → không giảm đáng kể. Giữ `99-mpfc-newrelic.ini` (composer_api off, log forwarding off)
 - .htaccess: RSS ghi lại lúc 08:56 UTC nhưng chỉ bỏ 2 dòng trống, redirect còn. `6f05694eb` đã có trên origin/live-php83
+
+### 2026-10-26 — WAF rule extended
+- 10-24 09:36 UTC: 87.121.84.174 sent 257 `/%252f%252eenv.*` probes (single double-encoding bypassed `%2525`/`/.env` match); each 404 took ~107s in WP.
+- Rule 128c8f6a… now also blocks path containing `%252e`, `%252f` (case-insensitive), `service-account.json`, `firebase-key.json`, `gcp-key.json`. Verified: probes 403; `/`, `/search/football/`, `/our-courses/` 200.
