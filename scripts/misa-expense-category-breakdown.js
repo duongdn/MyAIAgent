@@ -14,8 +14,8 @@ const GROUPS = {
   '🏠 Nhà cửa & Dịch vụ': ['Nhà cửa', 'Điện', 'Nước', 'Internet', 'Truyền hình', 'Điện thoại di động', 'Sửa chữa', 'Thú Cưng', 'Gas', 'Dịch vụ sinh hoạt'],
   '🎁 Hiếu hỉ / Biếu tặng': ['Hiếu hỉ', 'Biếu tặng', 'Từ thiện'],
   '💊 Sức khỏe': ['Sức khỏe', 'Thuốc men', 'Khám chữa bệnh', 'Thể thao'],
-  '🛍️ Mua sắm': ['Trang phục', 'Giầy dép', 'Máy tính', 'Phụ kiện khác', 'Đồ gia dụng', 'Làm đẹp', 'Mua sắm đồ đạc'],
-  '🏖️ Hưởng thụ': ['Du lịch', 'Vui chơi giải trí', 'Phim ảnh ca nhạc', 'Hưởng thụ'],
+  '🛍️ Mua sắm': ['Trang phục', 'Giầy dép', 'Máy tính', 'Phụ kiện khác', 'Đồ gia dụng', 'Làm đẹp', 'Mua sắm đồ đạc', 'Tóc'],
+  '🏖️ Hưởng thụ': ['Du lịch', 'Vui chơi giải trí', 'Phim ảnh ca nhạc', 'Hưởng thụ', 'Giao lưu, quan hệ'],
   '💼 Công việc / Phí': ['Công việc', 'Phí chuyển khoản', 'Phí ngân hàng'],
   '❓ Linh tinh': ['Linh tinh', 'Tiền ra'],
 };
