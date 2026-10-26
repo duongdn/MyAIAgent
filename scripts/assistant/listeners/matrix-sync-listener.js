@@ -53,7 +53,7 @@ async function run() {
             thread_id: ev.content['m.relates_to']?.event_id, sender: ev.sender, text: ev.content.body,
             url: `${c.chat_url || 'https://chat.nustechnology.com'}/#/room/${roomId}/${ev.event_id}`,
             ts_utc: new Date(ev.origin_server_ts).toISOString(),
-            meta: { isDirect, isOurs: ev.sender === me, isEdit: ev.content['m.relates_to']?.rel_type === 'm.replace', mentionsMe: /duongdn/i.test(ev.content.body + (ev.content.formatted_body || '')) },
+            meta: { isDirect, isOurs: ev.sender === me, isEdit: ev.content['m.relates_to']?.rel_type === 'm.replace', mentionsMe: /duongdn|duong doan|(a|anh) dương/i.test(ev.content.body + (ev.content.formatted_body || '')) },
           });
         }
       }

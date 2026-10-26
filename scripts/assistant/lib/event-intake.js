@@ -20,6 +20,9 @@ const URG = { high: '🔴', medium: '🟠', low: '⚪' };
 const DESKTOP_NOTIFY = path.join(__dirname, '..', '..', 'desktop-notify.js');
 const GATE_LOG = path.join(__dirname, '..', '..', '..', 'tmp', 'assistant-gate.log');
 
+const URGENT_REPEAT_MS = 6 * 3600e3;
+const lastUrgent = new Map();
+
 function muteKey(e) { return `${e.source}:${e.account || ''}:${e.channel || ''}`; }
 function log(tag, e, why) {
   fs.appendFile(GATE_LOG, `${new Date().toISOString()} ${tag.padEnd(6)} [${muteKey(e)}] ${e.sender}: ${(e.text || '').slice(0, 100).replace(/\n/g, ' ')} | ${why}\n`, () => {});
@@ -52,6 +55,8 @@ async function intake(e) {
   if (e.meta?.isOurs) return;
 
   const v = await judge(e);
+  // Named ask to DuongDN never waits in the queue, whatever the judge said (2026-10-26 Kunal-Fountain miss).
+  if (e.meta?.mentionsMe && v.action === 'await_reply') Object.assign(v, { action: 'urgent', urgency: 'high' });
   if (v.action === 'none') return log('drop', e, v.reason);
   if (v.action === 'await_reply') {
     const due = new Date(Math.max(Date.now(), Date.parse(e.ts_utc)) + (p.replyWaitMin ?? 30) * 60000).toISOString();
@@ -59,6 +64,10 @@ async function intake(e) {
     db.addPendingAsk(e, v, due);
     return log('WAIT', e, v.reason);
   }
+  // Repeating alerts (same sender + first line) notify at most once per URGENT_REPEAT_MS.
+  const rk = `${muteKey(e)}|${e.sender}|${(e.text || '').split('\n')[0].slice(0, 120)}`;
+  if (Date.now() - (lastUrgent.get(rk) || 0) < URGENT_REPEAT_MS) return log('URG=', e, 'repeat suppressed');
+  lastUrgent.set(rk, Date.now());
   log('URGENT', e, v.reason);
   await notify(e, v);
 }

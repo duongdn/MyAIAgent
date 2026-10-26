@@ -69,10 +69,12 @@ function recentInChannel(e, limit = 12) {
 /** True if someone on our side posted in the same channel (and thread, if any) after `ts`. */
 /** Answered = a later message from our side; in (internal) Matrix rooms any other teammate replying also counts. */
 function oursRepliedSince(a) {
-  const asker = JSON.parse(a.event_json).sender || '';
+  const ev = JSON.parse(a.event_json);
+  // Matrix: a teammate's reply counts — unless the ask named DuongDN, then only his reply does.
+  const asker = ev.meta?.mentionsMe ? '\u0000any' : (ev.sender || '');
   return !!db.prepare(`SELECT 1 FROM recent WHERE source=? AND account=? AND channel=? AND ts_utc > ?
-    AND (is_ours=1 OR (source='matrix' AND sender<>?))
-    AND (?='' OR thread_id=? OR thread_id='') LIMIT 1`).get(a.source, a.account || '', a.channel || '', a.ts_utc, asker, a.thread_id || '', a.thread_id || '');
+    AND (is_ours=1 OR (source='matrix' AND ?<>'\u0000any' AND sender<>?))
+    AND (?='' OR thread_id=? OR thread_id='') LIMIT 1`).get(a.source, a.account || '', a.channel || '', a.ts_utc, asker, asker, a.thread_id || '', a.thread_id || '');
 }
 /** Same sender already waiting in this channel → one notification covers the burst. */
 function hasWaitingAsk(e) {
