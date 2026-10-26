@@ -12,7 +12,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 
 | # | Severity | Finding | Evidence | Impact |
 |---|---|---|---|---|
-| F1 | 🔴 High | **Dunning retries stuck.** Failed rebills (billing_status 2/3/4) got `batch_id` set but were never processed. This is the same replica-read bug as the 10-23 incident, but at the retry stage. Neither the fixer nor the stale alert looks at them, because both only check `processed_date IS NULL`. | 35 events stuck >7 days, oldest 2025-07-16. 30 users have account status 1, but that is only the free "MPFC Membership" level. Their **paid bundle**: 28 overdue (no paid access), 2 active (1 test account, 1 teamamorette re-activated 2026-02-19, likely a re-purchase). | Correct part: access was blocked on the 1st failure. Lost: retries 2/3 never ran, so members who later fixed their card were never re-charged or restored. The 3rd-failure cancel never ran either, so they sit in "overdue" forever instead of "cancelled" (wrong reports, stuck state). Not a free-access leak. |
+| F1 | ✅ False alarm | Failed rebills (billing_status 2/3/4) sit with `batch_id` set and never progress through dunning retries 2/3. | 35 events, oldest 2025-07-16. Checked each user's **paid bundle**: 28 overdue (no paid access); 1 test account; 1 (teamamorette) manually re-activated by an admin on 2026-02-19 07:40 (no purchase) and given a comp Next Gen Club at 08:47, so this was intentional. There is no card-update feature, so retries 2/3 could not succeed anyway. | No impact: access is correctly blocked after the 1st failure, and nobody has unpaid access. Cosmetic only: these stay "overdue" instead of "cancelled". |
 | F2 | 🔴 High | **Fixer can double-charge.** It re-queues a stuck event without checking whether that period was already charged. | Oct 2025 catch-up: order item 1482 charged twice for Sep 2025 (09-13 and 10-11, £6.50); item 7017 charged twice for Sep (09-12 and 10-11, £9.99). Duplicate event chains: 1482, 7017, 8100. | 2 members overcharged (refund candidates, £16.49 total; confirm in Stripe). Could happen again on any future catch-up. |
 | F3 | 🟠 Med | **14 events marked "rebilled OK" (billing_status 1) with no transaction**, Jun–Oct 2025, mostly from the duplicate chains (e.g. item 8100/10133). | Audit query #6. | Either a ghost success (member not charged) or a missing log. Needs Stripe reconciliation. |
 | F4 | 🟠 Med | **Root cause of `user_id=0` still exists at checkout.** Free-trial orders are created before the user. It is patched only at charge time. | Order 06:23:48 < user 06:23:51. | Covered by the patch, but any other code that reads `sp.user_id` (reports, reminder emails) still sees 0 until the first charge. |
@@ -22,7 +22,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 | OK | ✅ | No double charges since May 2026. 10-23 catch-up had no same-period duplicates. No pending jobs >1h. No owner mismatch. Dunning code logic itself is correct (3 retries → cancel). | Audit #5/#7/#8 | |
 
 ## 2. Proposed solutions (need approval per item)
-1. **F1 (stuck dunning).** Extend the fixer's stuck query to dunning states: `processed_date IS NOT NULL AND billing_status IN (2,3,4)`. For the 35 existing ones, clear `batch_id` so MemberMouse's own sweep retries them. **This charges up to 35 cards (or cancels after the 3rd fail), so decide per batch.** Alternative: cancel all >90 days old and only retry recent ones.
+1. **F1.** No action needed (false alarm). Optional: exclude dunning-state events from future stuck alerts so they don't create noise.
 2. **F2 (double-charge guard).** Before re-queueing, the fixer skips (and alerts) if `mm_transaction_log` already has a rebill for that order item since `scheduled_date - 1 day`. Refund 1482 and 7017 after verifying in Stripe.
 3. **Root fix for stuck batches (all stages).** In `assignScheduledPaymentsToBatchAndRetrieve`, force the SELECT to master (`$wpdb->send_reads_to_masters()`, HyperDB). One line, removes the bug class instead of relying on srtm_ttl + fixer.
 4. **F3.** Reconcile those 14 events against Stripe charges (read-only API) before any action.
@@ -35,7 +35,7 @@ Must be **independent of the fixer** (the fixer died silently once). Run it from
 | Check | Rule | Would have caught |
 |---|---|---|
 | Billing alive | `scheduled-billing-enabled=1` AND last sweep < 30 min AND fixer heartbeat < 30 min | F5, fixer death (May 2026) |
-| Stuck any stage | `status=0 AND batch_id NOT NULL` older than 1h, **including dunning states** | 10-23 incident (in May), F1 |
+| Stuck any stage | `status=0 AND batch_id NOT NULL` older than 1h | 10-23 incident (in May) |
 | Due vs charged (daily) | rebills due yesterday = succeeded + failed + still pending; gap > 0 → alert | Any silent skip, `user_id=0` case |
 | Volume anomaly | daily rebill count > 3× 30-day median or = 0 while due > 0 | 10-23 spike (90 vs ~3/day) **before** Saul saw it |
 | Double charge | 2 rebills for the same monthly item within 20 days | F2 |
@@ -48,7 +48,7 @@ Must be **independent of the fixer** (the fixer died silently once). Run it from
 Also add these as a section in `/me:mpfc-monitor` (daily report) so they're reviewed every morning.
 
 ## Unresolved questions
-1. F1: the 35 stuck dunning events: retry all, retry only recent (<90 days), or cancel the old ones? (Retrying charges real cards.)
+1. ~~F1~~ resolved: false alarm, no action.
 2. F2: refund 1482 (£6.50) and 7017 (£9.99) after Stripe confirmation? Tell Saul?
 3. Monitor: OK to build it on our side (My-AI-Agent cron, read-only), with alert channel = email + WhatsApp to you?
 4. Is a Stripe API key available to us read-only (restricted key) for reconciliation, or should we read it from the MM settings?
