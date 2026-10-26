@@ -172,6 +172,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 
 ## mpfc-monitor
 - [mpfc_missed_rebills_caught_up_after_server_move](mpfc/project_mpfc_missed_rebills_caught_up_after_server_move.md) — 🔴 HyperDB srtm_ttl=1 stuck rebills + fixer died (Redirection die in CLI); fixed 10-23; +10-26 trial user_id=0 bug
+- [mpfc_payment_changes_report_only_no_fix](mpfc/feedback_mpfc_payment_changes_report_only_no_fix.md) — 🔴 payment audit = report + solution only; no live change without explicit OK per change
 - [reference_mpfc_idp_league_api_dev_gotchas](mpfc/reference_mpfc_idp_league_api_dev_gotchas.md) — 🔴 IDP/League API: api-docs path (not git), specs in Slack, lt-player test acct, HyperDB replica + CF GET cache
 - [mpfc_plugins_have_custom_code](mpfc/feedback_mpfc_plugins_have_custom_code_check_before_update.md) — 🔴 MPFC plugins forked w/ custom code; git log on live + diff wp.org before update
 - [feedback_mpfc_oauth2_real_unresolved_bug](daily-report/slack/feedback_mpfc_oauth2_real_unresolved_bug.md), [reference_mpfc_github](mpfc-monitor/reference_mpfc_github.md)
