@@ -14,7 +14,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 |---|---|---|---|---|
 | F1 | ✅ False alarm | Failed rebills (billing_status 2/3/4) sit with `batch_id` set and never progress through dunning retries 2/3. | 35 events, oldest 2025-07-16. Checked each user's **paid bundle**: 28 overdue (no paid access); 1 test account; 1 (teamamorette) manually re-activated by an admin on 2026-02-19 07:40 (no purchase) and given a comp Next Gen Club at 08:47, so this was intentional. There is no card-update feature, so retries 2/3 could not succeed anyway. | No impact: access is correctly blocked after the 1st failure, and nobody has unpaid access. Cosmetic only: these stay "overdue" instead of "cancelled". |
 | F2 | ✅ False alarm | Oct 2025 extra charges on items 1482/7017 came from a manual catch-up run. Payment numbers are consecutive, 1 charge each; no double charge. | DB tx log | None. Ignore. |
-| F3 | 🟠 Med | **14 events marked "rebilled OK" (billing_status 1) with no transaction**, Jun–Oct 2025, mostly from the duplicate chains (e.g. item 8100/10133). | Audit query #6. | Either a ghost success (member not charged) or a missing log. Needs Stripe reconciliation. |
+| F3 | ✅ False alarm | 14 events marked rebilled OK with no transaction near `processed_date`. | 13/14: the charge exists on the **due date**; `processed_date` was only stamped later by the Oct 2025 manual catch-up (the query matched the wrong date). 1/14 (event 15536, item 12084, Jan 2026): subscription was refunded and cancelled in Dec 2025, so the pending event was closed without charging. Correct. | None. |
 | F4 | 🟠 Med | **Root cause of `user_id=0` still exists at checkout.** Free-trial orders are created before the user. It is patched only at charge time. | Order 06:23:48 < user 06:23:51. | Covered by the patch, but any other code that reads `sp.user_id` (reports, reminder emails) still sees 0 until the first charge. |
 | F5 | 🟠 Med | **MemberMouse silently disables billing on "backup restore detected"** (last sweep too old, e.g. after a server move or restore). It only emails the WP admin. | `LocalBillingEngine::backupRestoreDetected()` → `disableBilling()`. Currently enabled=1, sweep is current. | One migration or restore can stop all rebills with nobody on our side noticing. |
 | F6 | 🟡 Low | Live fixes live outside git: the fixer (`adonly/`, untracked), the mu-plugin (gitignored), and `db-config.php` (srtm_ttl, uncommitted with other people's changes). | `git status` | A deploy or rsync can silently revert the 10-23 fixes and re-create the incident. |
@@ -25,7 +25,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 1. **F1.** No action needed (false alarm). Optional: exclude dunning-state events from future stuck alerts so they don't create noise.
 2. **F2.** No action (false alarm).
 3. **Root fix for stuck batches (all stages).** In `assignScheduledPaymentsToBatchAndRetrieve`, force the SELECT to master (`$wpdb->send_reads_to_masters()`, HyperDB). One line, removes the bug class instead of relying on srtm_ttl + fixer.
-4. **F3.** Reconcile those 14 events against Stripe charges (read-only API) before any action.
+4. **F3.** No action (false alarm).
 5. **F5.** Covered by monitoring (below). Add a step to the migration runbook: check `mm-option-scheduled-billing-enabled` after any move.
 6. **F6.** Commit `db-config.php` (only the srtm_ttl hunk) and move fixer + mu-plugin into git.
 
