@@ -129,3 +129,9 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 ### 2026-10-26 — WAF rule extended
 - 10-24 09:36 UTC: 87.121.84.174 sent 257 `/%252f%252eenv.*` probes (single double-encoding bypassed `%2525`/`/.env` match); each 404 took ~107s in WP.
 - Rule 128c8f6a… now also blocks path containing `%252e`, `%252f` (case-insensitive), `service-account.json`, `firebase-key.json`, `gcp-key.json`. Verified: probes 403; `/`, `/search/football/`, `/our-courses/` 200.
+
+### 2026-10-26 07:46 UTC — New Relic agent disabled (temporary, user-approved)
+- `/etc/php/8.3/{apache2,cli}/conf.d/99-mpfc-newrelic-off.ini` → `newrelic.enabled = false`; apache reloaded, newrelic-daemon stopped. Browser (NREUM) snippet gone too.
+- Reason: ~0.4s/request agent overhead on PHP 8.3 (uncached page 1.4s off vs 1.85–2.6s on).
+- Re-enable: delete both files, `systemctl reload apache2`.
+- Measure from now with `apache_logs` (%D µs) — compare 10-27 vs 10-24/25 same hours (exclude 171.251.232.148 dev tests + 404).
