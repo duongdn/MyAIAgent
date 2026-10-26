@@ -63,7 +63,7 @@ function release(req) { // a granted send failed: let the next run (either machi
   return {};
 }
 function remote(action, payload) {
-  const cmd = `cd ${SERVER_AGENT_DIR} && flock ${STATE_FILE}.lock node scripts/mpfc-billing-monitor.js --${action}`;
+  const cmd = `cd ${SERVER_AGENT_DIR} && mkdir -p data && flock ${STATE_FILE}.lock node scripts/mpfc-billing-monitor.js --${action}`;
   return JSON.parse(onServer(cmd, JSON.stringify(payload)));
 }
 
