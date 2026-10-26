@@ -16,7 +16,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 | F2 | ✅ False alarm | Oct 2025 extra charges on items 1482/7017 came from a manual catch-up run. Payment numbers are consecutive, 1 charge each; no double charge. | DB tx log | None. Ignore. |
 | F3 | ✅ False alarm | 14 events marked rebilled OK with no transaction near `processed_date`. | 13/14: the charge exists on the **due date**; `processed_date` was only stamped later by the Oct 2025 manual catch-up (the query matched the wrong date). 1/14 (event 15536, item 12084, Jan 2026): subscription was refunded and cancelled in Dec 2025, so the pending event was closed without charging. Correct. | None. |
 | F4 | 🟠 Med | **Root cause of `user_id=0` still exists at checkout.** Free-trial orders are created before the user. It is patched only at charge time. | Order 06:23:48 < user 06:23:51. | Covered by the patch, but any other code that reads `sp.user_id` (reports, reminder emails) still sees 0 until the first charge. |
-| F5 | 🟠 Med | **MemberMouse silently disables billing on "backup restore detected"** (last sweep too old, e.g. after a server move or restore). It only emails the WP admin. | `LocalBillingEngine::backupRestoreDetected()` → `disableBilling()`. Currently enabled=1, sweep is current. | One migration or restore can stop all rebills with nobody on our side noticing. |
+| F5 | ✅ Not a bug | MemberMouse disables billing if a restore from backup is suspected (no sweep for 24h + gateway confirms). This is a safety feature. | Billing enabled, sweep current. | None. |
 | F6 | 🟡 Low | Live fixes live outside git: the fixer (`adonly/`, untracked), the mu-plugin (gitignored), and `db-config.php` (srtm_ttl, uncommitted with other people's changes). | `git status` | A deploy or rsync can silently revert the 10-23 fixes and re-create the incident. |
 | F7 | 🟡 Low | Junk rows: 3 pending `event_type=0` events for cancelled item 10244, 2 orphan 2018/2019 events with no payment row, 2 legacy active Stripe items (2017/2019) with no schedule. | Audit #1–#3. | Harmless to billing. The legacy items need a Stripe check (free access?). |
 | OK | ✅ | No double charges since May 2026. 10-23 catch-up had no same-period duplicates. No pending jobs >1h. No owner mismatch. Dunning code logic itself is correct (3 retries → cancel). | Audit #5/#7/#8 | |
@@ -26,7 +26,7 @@ Date: 2026-10-26 | Server: live 159.65.213.246 (live-php83) | Scope: MemberMouse
 2. **F2.** No action (false alarm).
 3. **Root fix for stuck batches (all stages).** In `assignScheduledPaymentsToBatchAndRetrieve`, force the SELECT to master (`$wpdb->send_reads_to_masters()`, HyperDB). One line, removes the bug class instead of relying on srtm_ttl + fixer.
 4. **F3.** No action (false alarm).
-5. **F5.** Covered by monitoring (below). Add a step to the migration runbook: check `mm-option-scheduled-billing-enabled` after any move.
+5. **F5.** No action.
 6. **F6.** Commit `db-config.php` (only the srtm_ttl hunk) and move fixer + mu-plugin into git.
 
 ## 3. Monitoring: catch issues before members do
