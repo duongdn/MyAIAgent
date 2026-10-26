@@ -12,8 +12,12 @@ const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..', '..');
 const readJson = (f) => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'config', f), 'utf8')); } catch { return null; } };
-const ALERT_EMAIL_FROM = 'dnduongus@gmail.com'; // nustechnology app passwords are IMAP-only (SMTP 535)
-const ALERT_EMAIL_TO = 'duongdn@nustechnology.com';
+// The MPFC working mailbox. Sent through the live site's wp_mail (same as the server-side fixer alerts):
+// the Gmail service account for this mailbox is read-only.
+const ALERT_EMAIL = 'freelancer@mypersonalfootballcoach.com';
+const SSH_HOST = 'mpfc.mpfc.live';
+const WP_PATH = '/var/www/mypersonalfootballcoach.com';
+const IS_SERVER = os.hostname() === 'mpfc-upgrade-test';
 
 function postJson(hostname, urlPath, body, headers = {}) {
   const data = Buffer.from(JSON.stringify(body));
@@ -28,12 +32,13 @@ function postJson(hostname, urlPath, body, headers = {}) {
 }
 
 async function sendEmail(alert) {
-  const acc = (readJson('.email-accounts.json')?.accounts || []).find(a => a.email === ALERT_EMAIL_FROM);
-  if (!acc?.app_password) throw new Error(`no app password for ${ALERT_EMAIL_FROM}`);
-  const nodemailer = require('nodemailer');
-  const t = nodemailer.createTransport({ host: 'smtp.gmail.com', port: 465, secure: true,
-    auth: { user: acc.email, pass: acc.app_password } });
-  await t.sendMail({ from: acc.email, to: ALERT_EMAIL_TO, subject: alert.title, text: alert.body });
+  const php = `$m = json_decode(file_get_contents('php://stdin'), true);
+    $ok = wp_mail('${ALERT_EMAIL}', $m['title'], $m['body'], ['From: MPFC Billing Monitor <${ALERT_EMAIL}>']);
+    echo $ok ? 'MAIL_OK' : 'MAIL_FAIL';`;
+  const cmd = `wp --path=${WP_PATH} eval ${JSON.stringify(php).replace(/\$/g, '\\$')}`;
+  const opts = { input: JSON.stringify({ title: alert.title, body: alert.body }), encoding: 'utf8', timeout: 120000, stdio: ['pipe', 'pipe', 'ignore'] };
+  const out = IS_SERVER ? execFileSync('bash', ['-c', cmd], opts) : execFileSync('ssh', [SSH_HOST, cmd], opts);
+  if (!out.includes('MAIL_OK')) throw new Error(`wp_mail failed: ${out.slice(-200)}`);
 }
 
 // DM to ourselves in the MPFC Slack workspace (never a client-visible channel)
