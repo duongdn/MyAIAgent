@@ -49,7 +49,7 @@ Mục tiêu **10–15 bài**, mỗi type có ít nhất 1–2 bài khi nguồn c
 | `trend` | Trend/meme đang hot trên mạng VN + 1–2 câu cảm nhận vui | WebSearch tuần này; chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama/tin đồn; link gốc, KHÔNG tải ảnh người khác |
 | `share-article` | Bài báo công nghệ/tài chính/chứng khoán + nhận xét giản dị | `reports/{3 ngày}/*news-digest.md`; link gốc, không link news.google |
 | `running` | Buổi chạy/milestone, số THẬT | `python3 scripts/strava-running-stats.py` → chỉ dùng số trong JSON; kèm `latest.url`; có `milestones` → xếp lên đầu + 🔔 |
-| `fb-memory` | Chia sẻ lại kỷ niệm "Ngày này năm xưa" + caption 1–2 dòng | `node scripts/facebook-profile-post.js --list-memories`; bỏ kỷ niệm buồn/tang/ốm/người cũ; lưu `memoryIndex` |
+| `fb-memory` | Chia sẻ lại kỷ niệm "Ngày này năm xưa" + caption 1–2 dòng | `node scripts/facebook-profile-post.js --list-memories`; bỏ kỷ niệm buồn/tang/ốm/người cũ; lưu `memoryIndex`. 🔴 Trước khi viết caption PHẢI xem ảnh: `--draft <file> --share-memory <i> --dry-run` rồi Read `tmp/fb-post-dry-run.png` — text gốc hay là câu đùa, không viết theo nghĩa đen. Report ghi 1 dòng mô tả kỷ niệm gốc (ai đăng, ảnh gì) |
 
 Lỗi nguồn (Strava/FB `not_logged_in`…) → bỏ type đó, ghi rõ ở cuối report ("đăng nhập lại … trong Chrome Profile 9").
 

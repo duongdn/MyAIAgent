@@ -15,3 +15,5 @@ User (2026-10-26): "fb post tuần này chưa ok, mỗi ngày chỉ có 1 tin ko
 - Read NUS blog posts before writing about them, not just the titles.
 
 Related: [[project_fb_post_content_types_rotation]] [[feedback_fb_post_write_for_general_public_no_jargon]]
+
+- 2026-10-26: caption kỷ niệm "đánh nhau xong rủ nhau đi ăn" bị user hỏi "là cái gì vậy" vì nó viết theo nghĩa đen câu đùa của bài gốc, trong khi ảnh là hội bạn đi ăn gà rán. Trước khi viết caption fb-memory phải xem ảnh (dry-run screenshot), và report phải mô tả kỷ niệm gốc.

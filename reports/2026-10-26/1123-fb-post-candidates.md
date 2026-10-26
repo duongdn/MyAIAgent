@@ -47,9 +47,10 @@ Nhà cũ thì sửa dần hay đập đi xây lại? 🏠🔨
 Phần mềm cũng vậy, và team mình thường chọn sửa dần cho chắc ăn 😄
 https://www.nustechnology.com/blog/rewrite-vs-refactor-why-we-almost-always-choose-incremental-modernization
 
-### 10. [fb-memory] Kỷ niệm 11 năm: đánh nhau xong đi ăn — cảm xúc: hạnh phúc
-11 năm trước: đánh nhau xong rủ nhau đi ăn 😂🍜
-Giờ gặp lại chắc chỉ còn sức... đi ăn thôi 🤣
+### 10. [fb-memory] Kỷ niệm 11 năm: hội bạn đi ăn gà rán — cảm xúc: hạnh phúc
+(chia sẻ lại bài 11 năm trước của Hoàng Huyền: ảnh cả nhóm ăn gà rán)
+11 năm trước, cả đám rủ nhau đi ăn gà rán 🍗😆
+Giờ gặp lại chắc phải hẹn trước cả tháng 😅
 
 ### 11. [running] Tháng 10 hơn 214km — cảm xúc: khỏe mạnh
 Tháng 10 đôi chân đã chạy hơn 214km 🏃‍♂️
