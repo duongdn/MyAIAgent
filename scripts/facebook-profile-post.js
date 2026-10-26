@@ -6,6 +6,7 @@
  * Usage:
  *   node scripts/facebook-profile-post.js --draft <text-file> [--image <png>] [--feeling "hết tiền"] [--dry-run]
  *   node scripts/facebook-profile-post.js --submit <post-url> [--audience=public|friends]
+ *   node scripts/facebook-profile-post.js --list-own-posts [--limit=15]   (recent timeline posts, topic rotation)
  *   node scripts/facebook-profile-post.js --list-memories   (today's "Ngày này năm xưa")
  *   node scripts/facebook-profile-post.js --draft <caption-file> --share-memory <index> [--dry-run]
  *   node scripts/facebook-profile-post.js --delete <post-url>   (only if still Only-me)
@@ -144,6 +145,32 @@ async function listMemories(page) {
   return { ok: true, mode: 'list-memories', memories };
 }
 
+// Recent posts on the user's own timeline (theirs and ours), so candidates can rotate topics.
+// FB virtualizes the feed, so collect at every scroll step and dedupe by text.
+async function listOwnPosts(page, limit) {
+  await page.goto('https://www.facebook.com/me', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForSelector('[role="main"]', { timeout: 30000 }).catch(() => {});
+  await sleep(3000);
+  await assertLoggedIn(page);
+  const posts = new Map();
+  for (let i = 0; i < 15 && posts.size < limit; i++) {
+    const found = await page.$$eval('[role="main"] div[aria-posinset]', cards => cards.map(card => {
+      const lines = card.innerText.split('\n').map(l => l.trim()).filter(l => l && l !== 'Facebook' && l !== '·');
+      const audience = card.querySelector('[aria-label^="Đã chia sẻ với"], [aria-label*="Chỉ mình tôi"], [aria-label*="Công khai"]');
+      return {
+        author: lines[0] || '',
+        when: lines.find(l => /^(\d+ (phút|giờ|ngày|tuần)|Hôm qua|\d+ tháng \d+)/.test(l)) || '',
+        audience: audience ? audience.getAttribute('aria-label') : '',
+        text: lines.filter(l => l.length > 15 && !/^(Tất cả cảm xúc|Bình luận dưới tên|Đoàn Nguyên Dương$)/.test(l)).slice(0, 3).join(' / '),
+      };
+    }));
+    for (const p of found) if (p.text && !posts.has(p.text)) posts.set(p.text, p);
+    await page.evaluate(() => window.scrollBy(0, 900));
+    await sleep(1500);
+  }
+  return { ok: true, mode: 'list-own-posts', posts: [...posts.values()].slice(0, limit) };
+}
+
 async function createDraft(page, text, dryRun, options = {}) {
   await openComposer(page, options.memoryIndex);
 
@@ -234,9 +261,12 @@ async function deleteDraft(page, postUrl) {
   const draftFile = argAfter('--draft');
   const submitUrl = argAfter('--submit');
   const deleteUrl = argAfter('--delete');
-  if (flag('--list-memories')) {
+  if (flag('--list-memories') || flag('--list-own-posts')) {
+    const limit = parseInt((args.find(a => a.startsWith('--limit=')) || '--limit=15').split('=')[1], 10);
     const { browser, page } = await openFacebookSession();
-    try { console.log(JSON.stringify(await listMemories(page))); } finally { await browser.close(); }
+    try {
+      console.log(JSON.stringify(flag('--list-memories') ? await listMemories(page) : await listOwnPosts(page, limit)));
+    } finally { await browser.close(); }
     return;
   }
   if (!draftFile && !submitUrl && !deleteUrl) {

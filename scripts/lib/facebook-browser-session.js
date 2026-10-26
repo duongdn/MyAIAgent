@@ -36,7 +36,9 @@ async function ensurePrivateDisplay() {
 // every launch. If that fails we fall back to whatever session the profile still has.
 async function seedCookiesFromRealChrome(page) {
   const root = path.join(__dirname, '..', '..');
-  const exported = spawnSync('python3', [path.join(root, 'scripts', 'get-chrome-profile9-site-cookies.py'), 'facebook'], { encoding: 'utf-8' });
+  // miniconda python has browser_cookie3; system/venv pythons break on lz4 (3.12 vs 3.13 build)
+  const py = ['/home/nus/miniconda3/bin/python3'].find(p => fs.existsSync(p)) || 'python3';
+  const exported = spawnSync(py, [path.join(root, 'scripts', 'get-chrome-profile9-site-cookies.py'), 'facebook'], { encoding: 'utf-8' });
   const file = path.join(root, 'tmp', 'facebook-cookies.json');
   if (exported.status !== 0 || !fs.existsSync(file)) {
     console.error(`[facebook] Profile 9 cookie export failed: ${(exported.stderr || '').trim()}`);

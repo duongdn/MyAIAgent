@@ -21,7 +21,9 @@ MAX_PAGES = 30  # 20 activities/page
 
 def load_cookie_header():
     if '--refresh-cookies' in sys.argv or not COOKIES.exists():
-        subprocess.run([sys.executable, str(ROOT / 'scripts' / 'get-chrome-profile9-site-cookies.py'), 'strava'], check=True)
+        # miniconda python has browser_cookie3; system/venv pythons break on lz4 (3.12 vs 3.13 build)
+        py = next((p for p in ['/home/nus/miniconda3/bin/python3'] if Path(p).exists()), 'python3')
+        subprocess.run([py, str(ROOT / 'scripts' / 'get-chrome-profile9-site-cookies.py'), 'strava'], check=True)
     return '; '.join(f"{c['name']}={c['value']}" for c in json.loads(COOKIES.read_text()))
 
 

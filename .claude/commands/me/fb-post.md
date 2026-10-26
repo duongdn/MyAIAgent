@@ -1,101 +1,103 @@
 ---
-description: Daily Facebook post (trang cá nhân) — soạn 1 bài tiếng Việt từ info đã collect, đăng dạng nháp "Chỉ mình tôi"; --submit để công khai
+description: Daily Facebook post (trang cá nhân) — mỗi sáng soạn NHIỀU bài ứng viên đánh số cho user chọn; --pick N để đăng bài user chọn
 ---
 
 # FB Daily Post
 
-Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). **Default = draft**: bài được đăng với audience **"Chỉ mình tôi"** trên profile `facebook.com/dnduong.us`. User review trên FB rồi quyết định submit.
+Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). Profile `facebook.com/dnduong.us`.
+**Default (cron 08:45) = chỉ soạn danh sách ứng viên đánh số, KHÔNG đăng gì.** User đọc, chọn số → `--pick N`.
 
 ## Usage
 
 ```
-/me:fb-post                                  → soạn + đăng nháp (Only me) cho hôm nay
-/me:fb-post --dry-run                        → soạn + điền composer, KHÔNG bấm Đăng
-/me:fb-post --submit [post-url] [--audience=public|friends]  → công khai bài nháp (default: nháp mới nhất, public)
-/me:fb-post --delete [post-url]                 → xoá nháp bị loại (script chỉ xoá nếu vẫn "Chỉ mình tôi")
-/me:fb-post --report-date=YYYY-MM-DD --report-time=HHMM     → (cron) dùng giờ được truyền vào
+/me:fb-post                                    → soạn danh sách ứng viên hôm nay (không đăng)
+/me:fb-post --pick N [--audience=public|friends|onlyme]  → đăng ứng viên số N hôm nay (default public)
+/me:fb-post --pick YYYY-MM-DD#N ...            → đăng ứng viên của ngày khác
+/me:fb-post --submit [post-url] [--audience=public|friends]  → công khai 1 bài đang "Chỉ mình tôi"
+/me:fb-post --delete [post-url]                → xoá bài còn "Chỉ mình tôi"
+/me:fb-post --report-date=YYYY-MM-DD --report-time=HHMM   → (cron) dùng giờ truyền vào
 ```
 
 ## Files
 
-- Script: `scripts/facebook-profile-post.js` (puppeteer, profile `tmp/facebook-profile`, Xvfb :90 riêng — không đụng desktop thật)
-- History: `docs/fb-post/post-history.json` — array `{date, topic, sources[], postUrl, status: draft|published, audience}`
-- Ý tưởng user thả vào: `docs/fb-post-ideas/*.md` (đã dùng → ghi tên file vào `sources` của history, không dùng lại)
-- Memory: đọc `docs/memory/fb-post/` trước khi viết (feedback văn phong user đã góp ý)
-- Output: `reports/{date}/{HHMM}-fb-post.md` (nội dung bài + nguồn + postUrl)
+- Script: `scripts/facebook-profile-post.js` (puppeteer, profile `tmp/facebook-profile` + cookie tự nạp từ Chrome Profile 9, Xvfb :90 riêng)
+- Ứng viên: `docs/fb-post/candidates/{date}.json` — `[{n, type, topic, text, feeling, image?, memoryIndex?, sources[]}]`
+- Report cho user đọc: `reports/{date}/{HHMM}-fb-post-candidates.md`
+- History bài đã đăng: `docs/fb-post/post-history.json` — `{date, n, type, topic, sources[], postUrl, status, audience}`
+- Ý tưởng user thả vào: `docs/fb-post-ideas/*.md` (đã dùng → ghi vào `sources`)
+- Memory: đọc `docs/memory/fb-post/` trước khi viết
 
-## Mode: --submit
-
-1. Lấy `post-url` từ arg, nếu không có → entry `status=draft` mới nhất trong history.
-2. `node scripts/facebook-profile-post.js --submit <url> --audience=<public|friends>`
-3. `ok:true` → update history `status=published`, `audience`; rồi `python3 scripts/trello-complete-daily-fb-post-card.py <url>` (complete card Trello "Đăng 1 bài trên zalo/facebook" hôm nay — card do Card Repeater tạo, chỉ complete SAU khi submit thành công, không complete lúc mới draft). Lỗi → báo user kèm screenshot path. KHÔNG tự retry.
-4. Commit history.
-
-## Mode: draft (default)
+## Mode: soạn ứng viên (default)
 
 ### 1. Skip check
-Nếu history đã có entry `date` = hôm nay → báo "đã có nháp hôm nay: <url>" và dừng (trừ khi user gọi tay và muốn thêm bài).
+Đã có `docs/fb-post/candidates/{date}.json` → báo đường dẫn report và dừng (trừ khi user gọi tay muốn soạn lại).
 
-### 2. Gom nguyên liệu (chỉ đọc)
-Nguồn của từng type ở bảng bước 3. Nguồn chung:
-- `docs/fb-post-ideas/*.md` chưa dùng → **ưu tiên cao nhất** (user tự thả vào)
-- `docs/fb-post/post-history.json` → tránh lặp type/chủ đề/link
-- 🔴 KHÔNG BAO GIỜ lấy số liệu tài sản/danh mục/nợ cá nhân (`*money-*`), tên khách hàng/dev, giờ công
+### 2. Đọc bối cảnh (chỉ đọc)
+1. 🔴 **FB của user**: `node scripts/facebook-profile-post.js --list-own-posts --limit=20` → bài 2–3 tuần gần nhất (cả bài user tự đăng lẫn bài bot). Dùng để **luân chuyển chủ đề**: chủ đề/loại user vừa đăng trong ~3 ngày → hạ ưu tiên; không viết lại ý đã có; nối tiếp được thì càng tốt (vd. user vừa đăng chạy bộ → hôm nay bớt bài chạy bộ).
+2. `docs/fb-post/post-history.json` + `docs/fb-post/candidates/*.json` 7 ngày gần nhất → không lặp lại text/link đã đề xuất.
+3. `docs/fb-post-ideas/*.md` chưa dùng → luôn đưa vào danh sách.
+4. 🔴 KHÔNG BAO GIỜ lấy số liệu tài sản/danh mục/nợ cá nhân (`*money-*`), tên khách hàng/dev, giờ công.
 
-### 3. Chọn chủ đề — xoay vòng 6 loại (user chốt 2026-10-20/21)
-Ghi `type` vào history; không lặp cùng `type` 2 ngày liền, không trùng chủ đề 7 ngày. Ý tưởng trong `docs/fb-post-ideas/` luôn ưu tiên.
+### 3. Soạn ứng viên — càng nhiều càng tốt
+Mục tiêu **10–15 bài**, mỗi type có ít nhất 1–2 bài khi nguồn cho phép, đánh số 1..N. Thứ tự: bài hợp nhất với bối cảnh hôm nay lên đầu.
 
 | type | Nội dung | Nguồn |
 |---|---|---|
-| `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán (mẫu bên dưới) | `reports/{3 ngày gần nhất}/*news-digest.md` mục Chứng khoán VN làm cái cớ; ảnh `node scripts/render-vnindex-chart-image.js` (VNDirect) |
-| `nus-blog` | Share 1 bài blog NUS: 1–2 câu tiếng Việt đời thường "team mình vừa viết về…" + link bài (FB tự tạo preview) | `curl -sL https://www.nustechnology.com/blog` → lấy `/blog/<slug>`, chọn bài chưa share trong history; đọc bài để tóm 1 câu dễ hiểu |
-| `trend` | 1 trend/meme đang hot trên mạng VN, kèm 1–2 câu cảm nhận/review vui | WebSearch trend tuần này (TikTok/FB/báo VN); chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama cá nhân/tin đồn; share link gốc, KHÔNG tải ảnh người khác về đăng lại |
-| `share-article` | Share 1 bài báo công nghệ/tài chính/chứng khoán + 1–2 câu nhận xét giản dị | `reports/{3 ngày gần nhất}/*news-digest.md` (CafeF, VnExpress, The Verge…); link gốc, không link news.google |
-| `running` | Buổi chạy/milestone chạy bộ, số liệu thật | Strava: `python3 scripts/strava-running-stats.py` (chi tiết dưới) |
-| `fb-memory` | Chia sẻ lại 1 kỷ niệm "Ngày này năm xưa" của FB + caption 1–2 dòng (vd. "3 năm trước…", cảm nhận vui/hoài niệm) | `node scripts/facebook-profile-post.js --list-memories` → JSON `{index, ago, text}`; chọn kỷ niệm vui/ý nghĩa (bỏ qua kỷ niệm buồn/tang/ốm đau/người cũ); đăng: `--draft <caption> --share-memory <index>`. Không có kỷ niệm hôm nay → chọn type khác |
+| `idea` | Từ ý tưởng user thả vào | `docs/fb-post-ideas/*.md` |
+| `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán | `reports/{3 ngày}/*news-digest.md` mục Chứng khoán VN làm cái cớ; ảnh `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` |
+| `nus-blog` | Share 1 bài blog NUS + 1–2 câu đời thường | `curl -sL https://www.nustechnology.com/blog` → `/blog/<slug>` chưa share; đọc bài để tóm 1 câu dễ hiểu |
+| `trend` | Trend/meme đang hot trên mạng VN + 1–2 câu cảm nhận vui | WebSearch tuần này; chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama/tin đồn; link gốc, KHÔNG tải ảnh người khác |
+| `share-article` | Bài báo công nghệ/tài chính/chứng khoán + nhận xét giản dị | `reports/{3 ngày}/*news-digest.md`; link gốc, không link news.google |
+| `running` | Buổi chạy/milestone, số THẬT | `python3 scripts/strava-running-stats.py` → chỉ dùng số trong JSON; kèm `latest.url`; có `milestones` → xếp lên đầu + 🔔 |
+| `fb-memory` | Chia sẻ lại kỷ niệm "Ngày này năm xưa" + caption 1–2 dòng | `node scripts/facebook-profile-post.js --list-memories`; bỏ kỷ niệm buồn/tang/ốm/người cũ; lưu `memoryIndex` |
 
-`running`: số liệu THẬT từ Strava — `python3 scripts/strava-running-stats.py` (đọc JSON web Strava bằng cookie Chrome Profile 9; không cần API trả phí).
-- Mỗi lần chạy lệnh đều gọi script này trước. `milestones` khác rỗng VÀ `latest.date` = hôm nay/hôm qua → **ưu tiên type `running` hôm đó** (bỏ qua luật xoay vòng), đánh dấu 🔔 trong report.
-- Không có milestone → `running` tối đa 1 lần/tuần (ưu tiên Chủ nhật), viết về tổng km tuần/tháng.
-- Chỉ dùng số trong JSON (km, pace, phút, tổng tuần/tháng/năm); KHÔNG tự chế số. Giọng ngây ngô vui như các bài khác, không khoe kiểu vận động viên.
-- Kèm link `latest.url` (FB tự tạo preview bản đồ Strava). Cảm xúc FB gợi ý: "đầy năng lượng", "khỏe mạnh", "hào hứng".
-- `ok:false` + `not_logged_in` → bỏ type running hôm đó, ghi report: "Strava hết phiên — đăng nhập lại strava.com trong Chrome Profile 9".
+Lỗi nguồn (Strava/FB `not_logged_in`…) → bỏ type đó, ghi rõ ở cuối report ("đăng nhập lại … trong Chrome Profile 9").
 
-Chung: 1 bài = 1 ý chính. Link (blog/bài báo/trend) để ở dòng cuối.
-
-### 4. Viết bài
-🔴 Đọc `docs/memory/fb-post/feedback_fb_post_write_for_general_public_no_jargon.md` — văn phong user đã chốt.
-- Rất ngắn, đơn giản, hài hước (mọi type); `stock-humor` tự trào góc **người mới chơi chứng khoán**; chơi chữ/ca dao/tục ngữ được
-- 3–6 emoji hài; kết bằng câu rủ tương tác ("ai cùng cảnh điểm danh")
-- KHÔNG phân tích, KHÔNG list bài học, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ, KHÔNG tóm tắt tin (tin chỉ là cái cớ)
-- Plain text, KHÔNG hashtag
-- Tối đa 2–4 dòng ngắn (~20–40 chữ)
-- Giai đoạn đầu: giọng ngây ngô, người mới; tăng dần độ chuyên nghiệp theo thời gian (xem số bài trong history)
+### 4. Văn phong (mọi ứng viên)
+🔴 Đọc `docs/memory/fb-post/feedback_fb_post_write_for_general_public_no_jargon.md`.
+- Rất ngắn 2–4 dòng (~20–40 chữ), đơn giản, hài hước, tự trào; chơi chữ/ca dao/tục ngữ được
+- 2–4 emoji; KHÔNG hashtag; plain text; link (nếu có) ở dòng cuối
+- KHÔNG phân tích, KHÔNG list bài học, KHÔNG lời khuyên đầu tư, KHÔNG thuật ngữ, KHÔNG tự thêm ý ngoài chủ đề
+- Giọng ngây ngô người mới; tăng dần độ chuyên nghiệp theo thời gian
+- Ngày lễ (20/10, 8/3, Tết, Trung thu…) → có thể thêm 1 câu chúc đơn giản
+- Mỗi bài 1 cảm xúc FB có trong danh sách FB VN (vd. "hết tiền", "hào hứng", "khỏe mạnh", "hạnh phúc", "tích cực", "hoang mang", "thư thái", "ngốc nghếch")
 
 Mẫu user duyệt (2026-10-20):
 ```
-Hồi xưa cứ tưởng chỉ bà con nông dân mới thấm câu "được mùa mất giá, được giá mất mùa" 🌾
-Ai ngờ làm chứng sĩ rồi mới biết mình cũng y chang 😅
-...Giờ thị trường đỏ lòm, mã nào cũng giảm sâu, rẻ như cho... thì trong tài khoản còn đúng mấy chục nghìn 🫠
-Được giá mà mất tiền. Ai cùng cảnh điểm danh cái nào 🙋‍♂️
+Tưởng chỉ nông dân mới "được mùa mất giá" 🌾
+Ai ngờ chứng sĩ cũng y chang 😅
+Mã nào cũng giảm, rẻ như cho... mà mình hết tiền mua 🫠
 ```
 
-🔴 **Lọc bảo mật (bắt buộc trước khi đăng):** không tên khách hàng/dự án khách (Maddy, Bailey, Rebecca, Elena, MPFC, Arthur...), không tên dev/đồng nghiệp, không giờ công/billing, không token/server/URL nội bộ, không số tiền tài sản cá nhân. Viết chung chung: "một dự án bên mình", "một bạn dev trong team".
+🔴 **Lọc bảo mật:** không tên khách hàng/dự án khách, không tên dev/đồng nghiệp, không giờ công/billing, không token/server/URL nội bộ, không số tiền tài sản.
 
-### 5. Đăng nháp
-1. Ghi bài ra `tmp/fb-post-{date}.txt`
-2. Ảnh: chỉ `stock-humor` → `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` (VN-Index 90 ngày)
-   Cảm xúc FB: chọn 1 cảm xúc khớp bài, phải có trong danh sách FB VN (vd. "hết tiền", "buồn bã", "hoang mang", "bế tắc", "giàu có", "lo âu", "nôn nóng", "thư thái", "ngốc nghếch")
-   Ngày lễ/đặc biệt (20/10, 8/3, Tết, Trung thu...) → thêm 1 câu chúc vui ở cuối bài
-   `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}.txt --image tmp/vnindex-{date}.png --feeling "<cảm xúc>"` (thêm `--dry-run` nếu mode dry-run)
-3. Kết quả JSON:
-   - `ok:true` → append history `{status:"draft", audience:"Chỉ mình tôi", postUrl}`
-   - `ok:false` + `not_logged_in` → script đã tự nạp cookie FB từ Chrome Profile 9 mà vẫn lỗi → báo user: "đăng nhập lại facebook.com trong Chrome thật (Profile 9)"
-   - `ok:false` khác → báo lỗi + screenshot, KHÔNG retry mù, KHÔNG thử đăng Public
-4. Ghi report `reports/{date}/{HHMM}-fb-post.md`: bài viết, chủ đề, nguồn, postUrl, lệnh submit
-5. Commit `docs/fb-post/post-history.json` + report (`chore: fb post draft {date}`)
+### 5. Ghi kết quả (KHÔNG đăng)
+1. `docs/fb-post/candidates/{date}.json` (đủ field để `--pick` đăng không cần soạn lại)
+2. `reports/{date}/{HHMM}-fb-post-candidates.md`: đầu file 1 dòng tóm bối cảnh (user vừa đăng gì, Strava, kỷ niệm), rồi mỗi ứng viên:
+   ```
+   ### 3. [running] 🔔 Cán mốc 200 km tháng 10 — cảm xúc: khỏe mạnh
+   <nội dung bài y hệt sẽ đăng>
+   ```
+   Cuối file: `Chọn bài: /me:fb-post --pick <số>`
+3. Commit candidates + report (`chore: fb post candidates {date}`).
+
+## Mode: --pick N
+
+1. Đọc `docs/fb-post/candidates/{date}.json` (date = hôm nay hoặc phần trước `#`), lấy ứng viên `n=N`. Không có → báo user.
+2. Ghi `text` ra `tmp/fb-post-{date}-{N}.txt`; `stock-humor` có `image` → render lại ảnh nếu file không còn.
+3. Đăng (luôn qua cổng "Chỉ mình tôi" của script):
+   `node scripts/facebook-profile-post.js --draft tmp/fb-post-{date}-{N}.txt [--image …] [--feeling "…"] [--share-memory <memoryIndex>]`
+4. `--audience` ≠ `onlyme` → `node scripts/facebook-profile-post.js --submit <postUrl> --audience=<public|friends>`.
+5. `ok:true` → append history `{date, n, type, topic, sources, postUrl, status: published|draft, audience}`; đã công khai → `python3 scripts/trello-complete-daily-fb-post-card.py <postUrl>`.
+6. `ok:false` + `not_logged_in` → báo user đăng nhập lại facebook.com trong Chrome Profile 9. Lỗi khác → báo + screenshot, KHÔNG retry mù.
+7. Commit history.
+
+## Mode: --submit / --delete
+
+- `--submit`: url từ arg hoặc entry `status=draft` mới nhất → `--submit <url> --audience=…` → history `published` → Trello như bước 5 của `--pick`.
+- `--delete`: `node scripts/facebook-profile-post.js --delete <url>` (script chỉ xoá bài còn "Chỉ mình tôi").
 
 ## Guardrails
-- KHÔNG BAO GIỜ đăng audience khác "Chỉ mình tôi" trong mode draft; script tự chặn nếu audience sai
-- Chỉ `--submit` (user gọi) mới đổi audience
-- Script luôn bỏ tick "Đặt làm đối tượng mặc định" — không đổi default của profile
+- Cron KHÔNG BAO GIỜ tự đăng; chỉ `--pick` / `--submit` do user gọi mới đăng/công khai
+- Script luôn đăng qua "Chỉ mình tôi" trước và bỏ tick "Đặt làm đối tượng mặc định"
+- Trello card chỉ complete sau khi bài đã công khai thành công
