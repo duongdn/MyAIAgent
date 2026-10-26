@@ -6,7 +6,7 @@ Decide the action for the NEW message, using the channel history and the project
 
 action = "urgent" (push immediately) ONLY for:
 - production down / data loss / security exposure (leaked secret, breach) / payment or billing dispute / customer clearly angry or escalating / customer says urgent with a real deadline today.
-action = "await_reply" (push only if nobody on our side answers within ~30 min) for:
+action = "await_reply" (push only if nobody on our side answers within ~15 min) for:
 - a customer asks a question or requests something that needs an answer from our side, and history shows it is NOT already answered (holding reply or emoji from us counts as answered).
 - someone explicitly asks DuongDN (name, @mention, DM) for a decision/approval/answer.
 - a dev reports a blocker they cannot resolve, or absence affecting delivery.
