@@ -39,7 +39,11 @@ Trello task: đăng 1 bài FB mỗi ngày (Zalo sau). Profile `facebook.com/dndu
 4. 🔴 KHÔNG BAO GIỜ lấy số liệu tài sản/danh mục/nợ cá nhân (`*money-*`), tên khách hàng/dev, giờ công.
 
 ### 3. Soạn ứng viên — càng nhiều càng tốt
-Mục tiêu **10–15 bài**, mỗi type có ít nhất 1–2 bài khi nguồn cho phép, đánh số 1..N. Thứ tự: bài hợp nhất với bối cảnh hôm nay lên đầu.
+Mục tiêu **12–15 bài**, đánh số 1..N, nhóm theo type. Thứ tự type: hợp bối cảnh hôm nay lên đầu.
+🔴 **Bắt buộc đủ type** (user phàn nàn 2026-10-26 thiếu category): mỗi type ≥ 2 bài (`fb-memory`: mọi kỷ niệm vui có trong ngày; `idea`: mọi file chưa dùng). Chỉ được thiếu type khi đã thử hết nguồn dự phòng dưới đây, và phải ghi lý do cụ thể ở cuối report:
+- `trend`: WebSearch **extended**, nhiều truy vấn (TikTok/Threads/FB trend tuần này, "trend mới" + tháng/năm, Google Trends VN, kenh14/vietcetera/zingnews giới trẻ, meme dân văn phòng). Không có trend Việt → dùng trend quốc tế vô hại đang hot.
+- `share-article`: link news.google → mở để lấy URL gốc (`curl -sIL` theo redirect, hoặc WebSearch tiêu đề) — không được bỏ cả mục chứng khoán chỉ vì link news.google.
+- `running`: ≥2 góc khác nhau (buổi gần nhất / tổng tuần / tổng tháng / milestone / so với tháng trước) từ cùng JSON Strava.
 
 | type | Nội dung | Nguồn |
 |---|---|---|
@@ -72,12 +76,20 @@ Mã nào cũng giảm, rẻ như cho... mà mình hết tiền mua 🫠
 🔴 **Lọc bảo mật:** không tên khách hàng/dự án khách, không tên dev/đồng nghiệp, không giờ công/billing, không token/server/URL nội bộ, không số tiền tài sản.
 
 ### 5. Ghi kết quả (KHÔNG đăng)
-1. `docs/fb-post/candidates/{date}.json` (đủ field để `--pick` đăng không cần soạn lại)
+1. `docs/fb-post/candidates/{date}.json` (đủ field để `--pick` đăng không cần soạn lại, thêm `source: {title, publisher, url, summary}`, `preview` = đường dẫn ảnh)
 2. `reports/{date}/{HHMM}-fb-post-candidates.md`: đầu file 1 dòng tóm bối cảnh (user vừa đăng gì, Strava, kỷ niệm), rồi mỗi ứng viên:
    ```
    ### 3. [running] 🔔 Cán mốc 200 km tháng 10 — cảm xúc: khỏe mạnh
+   **Nguồn:** <tiêu đề bài báo/blog/buổi chạy/kỷ niệm> — <tên báo/người đăng, ngày> — <link>
+   > <tóm tắt nguồn 1–2 câu: bài đó nói gì / kỷ niệm có ảnh gì>
+   ![](fb-candidates/03.png)          ← nếu có ảnh (xem dưới)
+
    <nội dung bài y hệt sẽ đăng>
    ```
+   🔴 **Không có phần Nguồn thì user không chọn được** (feedback 2026-10-26). Ảnh xem trước lưu `reports/{date}/fb-candidates/NN.png`:
+   - `stock-humor`: ảnh VN-Index render sẵn (`render-vnindex-chart-image.js`) — chính ảnh sẽ đăng
+   - `fb-memory`: dry-run screenshot hộp thoại chia sẻ (thấy ảnh gốc)
+   - `share-article`/`nus-blog`/`trend`: ảnh og:image của trang nếu lấy được (`curl` meta `og:image` → tải về), không có thì bỏ ảnh, vẫn phải có tiêu đề + tóm tắt
    Cuối file: `Chọn bài: /me:fb-post --pick <số>`
 3. Commit candidates + report (`chore: fb post candidates {date}`).
 
