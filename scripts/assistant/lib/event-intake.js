@@ -55,6 +55,7 @@ async function intake(e) {
   if (v.action === 'none') return log('drop', e, v.reason);
   if (v.action === 'await_reply') {
     const due = new Date(Math.max(Date.now(), Date.parse(e.ts_utc)) + (p.replyWaitMin ?? 30) * 60000).toISOString();
+    if (db.hasWaitingAsk(e)) return log('WAIT=', e, 'same sender already waiting in channel');
     db.addPendingAsk(e, v, due);
     return log('WAIT', e, v.reason);
   }

@@ -30,6 +30,7 @@
 
 - [project_cookie_vault_mpfc](global/project_cookie_vault_mpfc.md) — 🔴 mpfc: vault cookies (Workstream ✅) + Xvfb Chrome Turnstile click (Upwork Rory/Aysar/Neural ✅, Tokenlite ❌); company PC on only 08:00+
 
+- [assistant_customer_ask_to_team_is_wait](assistant/feedback_assistant_customer_ask_to_team_is_wait_not_important.md) — customer→dev asks only after 15m unanswered; Matrix dev↔dev = drop
 ## daily-report — general
 - [reference_ohcleo_no_server_access](daily-report/general/reference_ohcleo_no_server_access.md)
 - [feedback_ondemand_updates](daily-report/general/feedback_ondemand_updates.md), [feedback_recheck_must_fill_missing_data](daily-report/general/feedback_recheck_must_fill_missing_data.md), [feedback_monday_friday_data_rules](daily-report/general/feedback_monday_friday_data_rules.md) — 🔴🔴🔴 #1 bug: Monday task-log pieces use Friday data, activity pieces keep last_run

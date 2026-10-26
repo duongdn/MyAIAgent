@@ -67,9 +67,17 @@ function recentInChannel(e, limit = 12) {
     ORDER BY ts_utc DESC LIMIT ?`).all(e.source, e.account || '', e.channel || '', e.ts_utc, limit).reverse();
 }
 /** True if someone on our side posted in the same channel (and thread, if any) after `ts`. */
+/** Answered = a later message from our side; in (internal) Matrix rooms any other teammate replying also counts. */
 function oursRepliedSince(a) {
-  return !!db.prepare(`SELECT 1 FROM recent WHERE source=? AND account=? AND channel=? AND is_ours=1 AND ts_utc > ?
-    AND (?='' OR thread_id=? OR thread_id='') LIMIT 1`).get(a.source, a.account || '', a.channel || '', a.ts_utc, a.thread_id || '', a.thread_id || '');
+  const asker = JSON.parse(a.event_json).sender || '';
+  return !!db.prepare(`SELECT 1 FROM recent WHERE source=? AND account=? AND channel=? AND ts_utc > ?
+    AND (is_ours=1 OR (source='matrix' AND sender<>?))
+    AND (?='' OR thread_id=? OR thread_id='') LIMIT 1`).get(a.source, a.account || '', a.channel || '', a.ts_utc, asker, a.thread_id || '', a.thread_id || '');
+}
+/** Same sender already waiting in this channel → one notification covers the burst. */
+function hasWaitingAsk(e) {
+  return !!db.prepare(`SELECT 1 FROM pending_asks WHERE status='waiting' AND source=? AND account=? AND channel=?
+    AND json_extract(event_json,'$.sender')=? LIMIT 1`).get(e.source, e.account || '', e.channel || '', e.sender || '');
 }
 function addPendingAsk(e, verdict, dueAt) {
   db.prepare('INSERT INTO pending_asks (source, account, channel, thread_id, ts_utc, due_at, event_json, verdict_json) VALUES (?,?,?,?,?,?,?,?)')
@@ -77,4 +85,4 @@ function addPendingAsk(e, verdict, dueAt) {
 }
 function dueAsks(now) { return db.prepare("SELECT * FROM pending_asks WHERE status='waiting' AND due_at <= ?").all(now); }
 function setAskStatus(id, status) { db.prepare('UPDATE pending_asks SET status=? WHERE id=?').run(status, id); }
-Object.assign(module.exports, { addRecent, recentInChannel, oursRepliedSince, addPendingAsk, dueAsks, setAskStatus });
+Object.assign(module.exports, { addRecent, recentInChannel, oursRepliedSince, hasWaitingAsk, addPendingAsk, dueAsks, setAskStatus });
