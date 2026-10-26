@@ -13,7 +13,7 @@ const { execSync } = require("child_process");
 
 const ticker = process.argv[2];
 const spreadsheetId = process.argv[3];
-const sheetName = process.argv[4] || ticker;
+const sheetName = process.argv[4] && !process.argv[4].startsWith("--") ? process.argv[4] : ticker;
 if (!ticker || !spreadsheetId) {
   console.error("Usage: node finance-report-detail-build-raw-sheet.js <TICKER> <SPREADSHEET_ID> [<SHEET_NAME>]");
   process.exit(1);
@@ -35,7 +35,8 @@ function fmtPerShare(rawVnd) {
   const abs = Math.abs(rawVnd).toLocaleString("en-US", { maximumFractionDigits: 0 });
   return rawVnd < 0 ? `(${abs})` : abs;
 }
-const PER_SHARE_NAME_RE = /trên cổ phiếu/i;
+// Only EPS lines (lãi cơ bản / suy giảm / pha loãng) — NOT "THU NHẬP THUẦN TRÊN CỔ PHIẾU PHỔ THÔNG" (CTCK code 500, a VND total)
+const PER_SHARE_NAME_RE = /(lãi cơ bản|suy giảm|pha loãng).*trên cổ phiếu/i;
 
 function buildSectionRows(template, yearsData, years) {
   return template.map((row) => {
@@ -55,7 +56,11 @@ function buildSectionRows(template, yearsData, years) {
 }
 
 async function main() {
-  const cafefJson = JSON.parse(execSync(`node "${path.join(__dirname, "finance-report-detail-fetch-cafef.js")}" ${ticker}`, { maxBuffer: 20 * 1024 * 1024 }).toString());
+  // --data-file=<path>: use a pre-merged JSON (same shape as fetch-cafef output), e.g. cafef + PDF-transcribed years
+  const dataFileArg = process.argv.find((a) => a.startsWith("--data-file="));
+  const cafefJson = dataFileArg
+    ? JSON.parse(require("fs").readFileSync(dataFileArg.slice("--data-file=".length), "utf8"))
+    : JSON.parse(execSync(`node "${path.join(__dirname, "finance-report-detail-fetch-cafef.js")}" ${ticker}`, { maxBuffer: 20 * 1024 * 1024 }).toString());
 
   const years = cafefJson.balanceSheet.assetsYears.map((y) => y.year);
   const yearHeader = years.map(String);

@@ -252,6 +252,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_report_path_is_root_reports_not_plans_reports](server-monitor/feedback_report_path_is_root_reports_not_plans_reports.md) — 🔴🔴 recurring: reports go to root `reports/`, NOT `plans/reports/`
 
 ## finance-report
+- [ctck_build_from_vix_template_cafef_gaps](finance-report/feedback_ctck_build_from_vix_template_cafef_gaps.md) — 🔴 CTCK: cafef LCTT empty all years, missing years → PDF/FireAnt; copy VIX sheets; SA can't create sheets
 - [project_finance_report_detail_skill](finance-report/project_finance_report_detail_skill.md) — 6-sheet FPT/VEA-style report — 🔴 format DURING build
 - [reference_cafef_data_source](finance-report/reference_cafef_data_source.md) — cafef.vn JSON API + 3 bugs (LCTT endpoint, +60k tỷ typo, EPS scaling) + BVPS share-split gotcha
 - [reference_raw_sheet_formatting_spec](finance-report/reference_raw_sheet_formatting_spec.md) — 🔴 VEA cell-format spec + 4 apply-scripts, run every build

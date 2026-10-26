@@ -52,6 +52,15 @@
       "note": "Công ty chứng khoán (securities co.) — cafef trả về assetsTemplate/liabilitiesTemplate dạng bank-shaped nhưng nội dung dòng CTCK chuẩn (Tài sản tài chính FVTPL, phải thu GDCK...). 2011-2022 loại 'HK', nhưng 2023-2025 cafef chỉ có loại 'K' (không có 'HK') — dùng keepAudited (HK ưu tiên K theo Map) để giữ đủ 2023-2025, đã verify Tổng tài sản=Tổng nguồn vốn khớp tuyệt đối mọi năm 2011-2025 (1 lệch nhỏ 2024: 54.8 triệu/19.6 nghìn tỷ ~0.0003%, làm tròn, không trọng yếu). Rebuild 03/09/2026 (data refresh, cấu trúc không đổi): raw sheet VIX đã sẵn 2025 annual + Q3/2025-Q2/2026 quý (không cần fetch lại BCTC); refresh giá thị trường/P-E/P-B (vietstock.vn phiên 02/09/2026: giá 14,050đ, P/E 8.72x, P/B 1.05x, vốn hóa 36,148 tỷ) + thanh khoản (fetch-liquidity.js: 1 ngày 58.96 tỷ, 7 ngày 579.03 tỷ, 1 tháng 584.42 tỷ, 6 tháng 636.44 tỷ/phiên) trong Định giá/Benjamin Graham/Báo cáo 2. Sửa 2 lỗi formula tồn tại từ bản 25/08 phát hiện khi rebuild: Báo cáo 2 C29/C30 (P/E, P/B trung bình ngành) trỏ nhầm sang hàng MBS/HCM thay vì hàng Trung bình ngành; Báo cáo 2 B33 (thanh khoản 6 tháng) trỏ nhầm sang hàng tiêu đề thay vì hàng GTGD. Xây 25/08/2026, rebuild 03/09/2026, đủ 6/6 sheet, QA 0 lỗi #REF!/#NAME?/#N/A, đối chiếu tổng tài sản 2025 raw vs Báo cáo 2 khớp tuyệt đối (34,167 tỷ)."
     },
     {
+      "ticker": "SSI",
+      "name": "CTCP Chứng khoán SSI",
+      "exchange": "HOSE",
+      "spreadsheet_id": "1W1kvQfn-3_nz3Af77JNI5f14hQnDXB4NpVo-b_iy4MU",
+      "report_sheet": "Báo cáo 2 - SSI",
+      "vietstock_url": "https://finance.vietstock.vn/SSI/tai-chinh.htm",
+      "note": "CTCK — build 26/10/2026 từ template VIX (copyTo, cùng row layout cafef CTCK). 2014-2025 (12 năm). cafef THIẾU 2023 (chỉ bản 'K' toàn 0) → chép từ BCTC hợp nhất kiểm toán 2023 PDF scan (ssi.com.vn/upload/files/IR/InformationDisclosure/20240326_SSI_BCTC_hop_nhat_kiem_toan_nam_2023.pdf), TS=NV=69,241 tỷ khớp, cột đầu năm khớp cafef 2022. cafef LCTT TRỐNG mọi năm → 2023 chi tiết PDF, năm khác 5 dòng FireAnt (FireAnt 2023 khớp tuyệt đối PDF). 2024 lệch TS/NV 55.9 triệu (làm tròn). Raw built bằng build-raw-sheet.js --data-file=<merged json>. P/E, P/B tự tính (giá vietstock / BCTC 2025, số CP = vốn góp/10k)."
+    },
+    {
       "ticker": "VCB",
       "name": "Ngân hàng TMCP Ngoại thương Việt Nam (Vietcombank)",
       "exchange": "HOSE",
