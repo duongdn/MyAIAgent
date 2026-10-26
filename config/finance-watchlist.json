@@ -58,7 +58,8 @@
       "spreadsheet_id": "1W1kvQfn-3_nz3Af77JNI5f14hQnDXB4NpVo-b_iy4MU",
       "report_sheet": "Báo cáo 2 - SSI",
       "vietstock_url": "https://finance.vietstock.vn/SSI/tai-chinh.htm",
-      "note": "CTCK — build 26/10/2026 từ template VIX (copyTo, cùng row layout cafef CTCK). 2014-2025 (12 năm). cafef THIẾU 2023 (chỉ bản 'K' toàn 0) → chép từ BCTC hợp nhất kiểm toán 2023 PDF scan (ssi.com.vn/upload/files/IR/InformationDisclosure/20240326_SSI_BCTC_hop_nhat_kiem_toan_nam_2023.pdf), TS=NV=69,241 tỷ khớp, cột đầu năm khớp cafef 2022. cafef LCTT TRỐNG mọi năm → 2023 chi tiết PDF, năm khác 5 dòng FireAnt (FireAnt 2023 khớp tuyệt đối PDF). 2024 lệch TS/NV 55.9 triệu (làm tròn). Raw built bằng build-raw-sheet.js --data-file=<merged json>. P/E, P/B tự tính (giá vietstock / BCTC 2025, số CP = vốn góp/10k)."
+      "note": "CTCK — build 26/10/2026 từ template VIX (copyTo, cùng row layout cafef CTCK). 2014-2025 (12 năm). cafef THIẾU 2023 (chỉ bản 'K' toàn 0) → chép từ BCTC hợp nhất kiểm toán 2023 PDF scan (ssi.com.vn/upload/files/IR/InformationDisclosure/20240326_SSI_BCTC_hop_nhat_kiem_toan_nam_2023.pdf), TS=NV=69,241 tỷ khớp, cột đầu năm khớp cafef 2022. cafef LCTT TRỐNG mọi năm → 2023 chi tiết PDF, năm khác 5 dòng FireAnt (FireAnt 2023 khớp tuyệt đối PDF). 2024 lệch TS/NV 55.9 triệu (làm tròn). Raw built bằng build-raw-sheet.js --data-file=<merged json>. P/E, P/B theo TTM (4 quý cột N-Q sheet SSI, build-raw-sheet.js --quarters=4) và số CP hiện hành = vốn hóa vietstock ÷ giá (3,001tr CP sau chào bán Q1/2026 + thưởng 5:1). Luận điểm đầu tư + báo cáo CTCK: https://docs.google.com/spreadsheets/d/1YAOj3dL4ugQmAPTyPQi-B4AHQFujGoxcUEQEKE7bHJQ (Định tính mục 8-10, Định giá mục VI).",
+      "thesis_spreadsheet_id": "1YAOj3dL4ugQmAPTyPQi-B4AHQFujGoxcUEQEKE7bHJQ"
     },
     {
       "ticker": "VCB",
