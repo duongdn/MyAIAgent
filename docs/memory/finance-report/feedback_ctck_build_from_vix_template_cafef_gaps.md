@@ -14,5 +14,6 @@ Learned building SSI (26/10/2026); TCX (Techcom Securities) showed the same patt
 - `fetch-cafef.js` keepAudited drops a year filed only as "K" when other years are "HK" (VIX/VND 2025) — for peer comparisons hit the cafef API directly and pick year 2025 any type.
 - **Service account cannot create spreadsheets** ("caller does not have permission"), Drive connector lacks write scope → ask user to create an empty sheet and share Editor to daily-agent@daily-agent-490610.iam.gserviceaccount.com.
 
+- **TCX build (26/10/2026):** raw sheet `TCX` row layout identical to VIX → copyTo VIX + delete cols from index 7 (6 years). Gotchas: row 130 NCI is text " - " → wrap `N()` in formulas; cell text starting with "=" becomes #ERROR!. Only 6 cafef years (2020-2025, K).
 **Why:** these gaps cost several rounds of discovery on SSI.
 **How to apply:** for any CTCK ticker, check cafef year types + LCTT emptiness first, ask user about PDF/FireAnt in one question, and ask for the spreadsheet up front. Related: [[project_finance_report_detail_skill]], [[feedback_cafef_incomplete_fireant_alternative]].
