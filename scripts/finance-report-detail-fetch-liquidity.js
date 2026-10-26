@@ -62,7 +62,8 @@ function fetchHistory(code, pageSize) {
 
 function parseDate(s) {
   const m = s.match(/\/Date\((\d+)\)\//);
-  return new Date(parseInt(m[1], 10));
+  // vietstock stamps sessions at 00:00 Asia/Saigon — shift +7h so toISOString() yields the VN session date
+  return new Date(parseInt(m[1], 10) + 7 * 3600 * 1000);
 }
 
 function avg(arr, field) {
