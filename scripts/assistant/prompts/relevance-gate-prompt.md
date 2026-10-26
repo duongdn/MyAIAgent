@@ -13,11 +13,12 @@ action = "urgent" (push immediately) ONLY for:
 - our own monitoring alert emails with "ALERT" in the subject (e.g. "[MPFC] ALERT stale stuck rebills", payment/rebill/charge failures, site down) — ALWAYS urgent, even if it repeats every few minutes; repetition means it is still broken, NOT chronic/known. (Repeat suppression is handled by code.)
 - a normal customer question/request to the team is NEVER urgent — it is await_reply.
 action = "await_reply" (push only if nobody on our side answers within ~15 min) for:
-- a customer asks a question or requests something that needs an answer from our side, and history shows it is NOT already answered (holding reply or emoji from us counts as answered).
+- a customer asks an explicit QUESTION (or asks for a confirmation/decision: go-live?, status?, quote?) that needs an answer from our side, and history shows it is NOT already answered (holding reply or emoji from us counts as answered).
 - a dev reports a blocker they cannot resolve, or absence affecting delivery.
 - an email from a client/customer domain carrying a work document (📎 brief/spec/requirements/quote/invoice/contract), even if the body is empty or the subject looks like a generic "update" — that is a new work request, NOT a newsletter.
 action = "none" for:
 - Matrix dev↔dev talk (questions, coordination, "e đã remind", plan notes) NOT addressed to DuongDN by name and not a blocker — the team answers each other.
+- customer instructions/specs/feedback to devs with NO question ("Safety Documents should be gold", "use these hex codes", "please take a look at X", bug details) — devs just implement; not a reply-needed ask.
 - customer acknowledgements with no question: thanks, "no worries", "have a nice weekend", "I will test later", "looks great so far".
 - team coordinating among themselves, status updates, "ok"/thanks/emoji, FYI, dev/bug/PR discussion that does not need DuongDN.
 - anything already answered in history, ignore-list/paused projects, newsletters, automated noise, monitoring alerts that auto-resolved or are chronic/known.

@@ -12,3 +12,5 @@ Customer → team/dev questions (Slack/Discord `<@ID>` mentions = our devs/perso
 **Update 2026-10-26 (user: "cái này chỉ đích danh tôi, cũng lại bỏ — bộ lọc rất tệ"):** anything addressing DuongDN by name ("Duong Doan", "duongdn", "a/anh Dương") or DM = URGENT immediately, never the 15-min queue — forced in code (`event-intake.js`, `meta.mentionsMe`), and only DuongDN's own reply closes such an ask (teammate replies don't).
 
 **Update 2026-10-26 #2 (user: "quái gì đây !!!" on "Duy Vo: a verify thử nha", "Dat Nguyen: a co move domain qua r", leave notice "NEW TienND ... Nhức đầu"):** Matrix message not naming DuongDN and not a DM → never await_reply (forced to none in `event-intake.js`); only real urgents pass. "Name: ..." prefix = addressed to that person. Resource Arrangement leave lines = drop.
+
+**Update 2026-10-26 #3 (user: "lại ko liên quan" on Discord ".jdiamond: Safety Documents should be gold"):** customer instructions/specs/feedback with no explicit question → drop; await_reply only for explicit questions or confirmation/decision asks (go-live?, status?, quote?).
