@@ -78,7 +78,8 @@ async function sendDesktop(alert) {
 /** Senders usable on this machine. */
 function channelsFor(isServer) {
   const all = { email: sendEmail, slack: sendSlack };
-  if (!isServer) Object.assign(all, { telegram: sendTelegram, whatsapp: sendWhatsApp, inbox: sendInbox, desktop: sendDesktop });
+  if (!isServer) Object.assign(all, { telegram: sendTelegram, inbox: sendInbox, desktop: sendDesktop });
+  if (!isServer && readJson('.mpfc-billing-monitor.json')?.whatsappChat) all.whatsapp = sendWhatsApp;
   return all;
 }
 
