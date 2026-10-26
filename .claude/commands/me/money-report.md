@@ -262,6 +262,8 @@ Credit card + outstanding liabilities analysis.
 - ⚠️/✅ spend spike, debt ratio
 ```
 
+**Khoản vay cá nhân (MANDATORY, user request 2026-10-26):** append output of `node scripts/misa-personal-loans-report.js` (reads `tmp/misa-out.json`) → per-person open balances cho vay (họ nợ mình) / đi vay (mình nợ họ) from living-wallet Cho vay/Thu nợ/Đi vay/Trả nợ. MISA does not net these in Net Worth → state the gap. Vay chị Ky = 0% lãi, trả khi chị cần → list only, never flag/recommend repaying.
+
 **Alerts to flag:**
 - Month spend > 2× 6-month average → ⚠️ spike
 - Balance still unpaid → ⚠️ payment due

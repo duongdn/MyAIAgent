@@ -8,7 +8,6 @@
 | VCB visa | −2,652,500 | Thẻ tín dụng (đã trả 7.5M ngày 10-26) |
 | Payoneer | −3,643 | Dư âm lẻ (0.14 USD) |
 | **Tổng** | **−2,656,143** | |
-| (ngoài sổ) vay chị Ky | 15,000,000 | Đi vay 10-25 — MISA không trừ vào NW |
 
 ## VCB Visa — Monthly Usage (12 months)
 | Month | Charged (₫) | Notes |
@@ -47,3 +46,14 @@ TB 6 tháng (04–09): 51.4M.
 ## Alerts
 - ✅ T10 MTD 10.2M ≪ TB 6 tháng 51.4M — không spike.
 - ✅ Dư nợ thẻ còn 2.65M.
+
+## Khoản vay cá nhân (cho vay / đi vay)
+
+| Người | Họ nợ mình (₫) | Mình nợ họ (₫) | Giao dịch gần nhất | Lịch sử mở |
+|-------|---------------|---------------|-------------------|-----------|
+| chị ky | 0 | 20,000,000 | 2026-10-25 | 2026-10-02 Trả nợ 128,000,000 · 2026-10-08 Đi vay 5,000,000 · 2026-10-25 Đi vay 15,000,000 |
+| **Tổng** | **0** | **20,000,000** | | |
+
+Đã tất toán: chơi hụi (2024-05-02), tiến nus (2024-01-12), clara (2026-08-21), mira (2024-06-07), mẹ mira (2026-05-04), chị tin (2026-06-02), nus php team (2024-06-26), hyundai (2024-12-16), má thanh (2026-05-04), phát metal (2026-06-22), a dũng (2026-10-19), tiến trang (2026-10-09).
+
+MISA không trừ "Đi vay" vào Net Worth / không cộng "Cho vay" cá nhân → NW lệch đúng bằng (mình nợ − họ nợ). Lịch sử từ 2024-01; khoản trước đó chỉ thấy khi tất toán.
