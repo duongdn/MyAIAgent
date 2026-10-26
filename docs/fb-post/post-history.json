@@ -24,5 +24,16 @@
     "status": "draft",
     "audience": "Chỉ mình tôi",
     "feeling": "hào hứng"
+  },
+  {
+    "date": "2026-10-26",
+    "type": "running",
+    "topic": "Chạy 5km sáng thứ Hai, tháng 214km — chân chạy, tài khoản cũng chạy mất hút (hài)",
+    "sources": [
+      "strava:https://www.strava.com/activities/20731911751"
+    ],
+    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid0cFcofpRDpJknhNgLRkaJCheKrGD9ecXvp8Zc1NNWBFuoNXdqnxjrH28CfigsVeNjl",
+    "status": "draft",
+    "audience": "Chỉ mình tôi"
   }
 ]
