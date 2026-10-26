@@ -16,7 +16,7 @@
 | 4 | OhCleo (New Relic + Slack) | 🔴 **New prod error: `ProgrammingError column app_media.cover_by_creator does not exist` ×17** ([NR](https://one.newrelic.com)), so the cover-art release (deployed to prod Fri) is missing its DB migration on prod. Tony's Fri report is present (cover art / tags / creators deployed on prod). Earlier Celine asks (availability, unlimited web listening) have no visible answer in the DM (the script skips thread replies, so verify). ✅ 09:30 recheck: NR shows 0 `cover_by_creator` errors since Sun 10-25 00:00, so the errors only happened during Fri's deploy window and are fixed. Ohcleo ✓ (09:30) |
 | 5 | MPFC (email + NR) | Saul Sun 16:07 (UK) forwarded **Cloudflare "Unexpected increase in bot traffic for mypersonalfootballcoach.com"** ([NR](https://one.newrelic.com)). No reply seen (he may be answered via WhatsApp). NR apdex **0.34** (worse than 0.45), 404 handler 11.0s avg / 3205 calls (bot traffic). New dominant warnings: `Undefined array key "HTTP_HOST"` 4369x and PHP 8.x deprecations (after the CVE patching). `clone_apache_logs.php` ran 1143s. "Stale stuck rebills (not auto-charged): 2" alert email repeats every 15 min (Event 15543/15626, decide manually). MPFC ○ |
 | 6 | Slack Baamboozle (Aysar) | Aysar Sat 23:50: "Yes lets target going to 22.23.4…" then **Sun 00:01: "Please take a look at platform repo"** ([#testing](https://baamboozle.slack.com/archives/C06CMTX025R)). ~~No reply (weekend).~~ ✅ Carrick replied Mon 09:03: "Ok @Aysar Let me check it." (holding reply). Carrick's MPDM reports for 10-22 + 10-23 are present ✅. KhanhHH Fri 8.5h ✅. Aysar ✓ (09:18) |
-| 7 | Slack Xtreme (Maddy) | Madhuraka Sat 16:45: "**Please confirm this one is no longer needed**: PR #534 … If so, please remove it" ([PR #534](https://bitbucket.org/xtreme-web/rms/pull-requests/534)). No reply (still none 08:35). **New Mon 08:18:** Madhuraka DM to Kai: "Can you provide me an estimate for 473 asap?". Kai 08:33: "Okay" (estimate still owed). PR #544 (LIFM2-465) approved + merged by Madhuraka Sat ✅. LongVV 0h Maddy Fri, so no Kai report was expected. Maddy ○ |
+| 7 | Slack Xtreme (Maddy) | Madhuraka Sat 16:45: "**Please confirm this one is no longer needed**: PR #534 … If so, please remove it" ([PR #534](https://bitbucket.org/xtreme-web/rms/pull-requests/534)). No reply (still none 08:35). **New Mon 08:18:** Madhuraka DM to Kai: "Can you provide me an estimate for 473 asap?". Kai 08:33: "Okay" (estimate still owed). PR #544 (LIFM2-465) approved + merged by Madhuraka Sat ✅. LongVV 0h Maddy Fri, so no Kai report was expected. ✅ 09:25: DuongDN told LongVV in Matrix \"Maddy - Extreme Soft Solutions\" to check PR #534, decline it if not needed and reply Madhuraka. Kai acked the 473 estimate ask. Maddy ✓ (09:25) |
 | 8 | Upwork (Rory/Aysar/Neural/Tokenlite + memos) | ~~All Cloudflare-blocked at 05:00~~ ✅ Re-run 08:35 ([Upwork](https://www.upwork.com/ab/messages/)): last-week hours Aysar 15:00 (= WS KhanhHH 15h) · Rory 5:30 (= WS 5.5h) · Neural 0:00. Memos for Fri 10-23: Rory 0 · Aysar 0 segments (0 invalid, but WS shows Fri Rory 3.5h/Baamboozle 1.5h, so the hours may have been logged on Upwork on another day). Tokenlite (duongdn account): login failed, no saved session, manual login needed |
 
 **Today (Oct 26):** TienPH off. Fountain plan for W 10-26 not posted yet (expected ~08:30–09:30). ✅ Resolved since last report: Franc dmetiner logging issue (Carrick will schedule it next week, dmetiner "no worries"). Chris Coyne released the $1,701 M4 hold (Meta-Stamp). Jamie confirmed the multi-word image search fix (Baamboozle). Bailey prelive bugs fixed (Amy), Nick daily reports back. BXR Apple Wallet key rotated + verified.
@@ -137,7 +137,7 @@ No `needsReview` Pending rows on any project. No 0h devs.
 ### 4. Bitbucket PR Status
 Live 05:10: 5 open Kai PRs (`xtreme-web/rms`): #560 LIFM2-471 (Rovo only, 10-21) · #540 LIFM2-450 (0 comments) · #534 cron concurrency (Rovo only; **Madhuraka asks via Slack to remove it**) · #509 LIFM2-428 (Rovo only) · #481 (waiting on the customer). #544 merged ✅.
 
-Trello: ⚠️ Maddy skipped (Alert #7)
+Trello: ~~⚠️ Maddy skipped (Alert #7)~~ ✓ Maddy completed 09:25 (PR #534 handed to LongVV)
 
 ---
 
@@ -175,7 +175,7 @@ Trello: Elena - WordPress SamGuard ✓
 
 **15/22 complete** (live 05:20). [Card](https://trello.com/c/OV9b2SiX)
 - ✓ James Diamond · Rory · Franc · Marcel · Raymond · Andrew Taraba · Arthur - Meta-Stamp · Elena - WordPress SamGuard
-- ⚠️ Maddy: skipped (Alert #7)
+- ~~⚠️ Maddy: skipped (Alert #7)~~ ✓ Maddy: completed 09:25 (PR #534 handed to LongVV)
 - ~~⚠️ Aysar: skipped (Alert #6)~~ ✓ Aysar: completed 09:18 (Carrick replied 09:03)
 - ⚠️ MPFC: skipped (Alert #5)
 - ~~⚠️ Neural Contract: skipped (Alert #3)~~ ✓ Neural: completed 09:30 (carrick replied 09:14, fix for 501 pending)
@@ -291,7 +291,7 @@ Trello: Arthur - Meta-Stamp ✓
 - Neural: who looks at the customer's new 501 on document upload? Upwork msg Sun 11:45 still unread (fetch blocked).
 - MPFC: action on Saul's Cloudflare bot-traffic forward (WAF/bot-fight rule?). 2 stale stuck rebills need a manual decision. Was the HTTP_HOST warning flood introduced by the PHP upgrade?
 - ~~Aysar: who answers "Please take a look at platform repo"?~~ Carrick on it (09:03).
-- Maddy: confirm PR #534 can be closed per Madhuraka.
+- ~~Maddy: confirm PR #534 can be closed~~ LongVV asked in Matrix 09:25.
 - carrick@ GitLab: SSH key "LongVV MacOS" added Sun 22:01. Confirm it was LongVV.
 - ~~After 08:00: re-run Upwork~~ done 08:35. Tokenlite (duongdn) Upwork login needs a manual login.
 - After 09:30: Fountain W 10-26 plan (not posted as of 08:35).
