@@ -300,6 +300,7 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [elena_team_review_report_no_meta](elena/feedback_elena_team_review_report_no_meta.md) — team review reports: no compare/correction/tooling notes
 - [fb_post_content_types_rotation](fb-post/project_fb_post_content_types_rotation.md) — 6 loại: stock-humor/nus-blog/trend/share-article/running(Strava)/fb-memory; cron 08:45 (PC off đêm)
 - [fb_post_cron_failures_path_and_logout](fb-post/feedback_fb_post_cron_failures_path_and_logout.md) — cron PATH/claude+node, FB no networkidle, logout → seed cookie từ Chrome Profile 9
+- [fb_post_numbered_candidates_user_picks](fb-post/feedback_fb_post_numbered_candidates_user_picks.md) — 🔴 cron ko đăng; 10–15 ứng viên đánh số, user --pick N; đọc FB user để luân chuyển
 ## assistant (MyDailyAssistant daemon)
 - [assistant_notify_only_relevant_no_store_noise](assistant/feedback_assistant_notify_only_relevant_no_store_noise.md) — 🔴 gate before store/notify; team chatter dropped; dryRun first
 - [assistant_never_claude_p_per_message](assistant/feedback_assistant_never_claude_p_per_message_use_llm_gateway.md) — 🔴 background LLM calls → llm.nustechnology.com gateway (deepseek-v4.1-flash), never `claude -p`; cap + count tokens

@@ -45,7 +45,7 @@ Mục tiêu **10–15 bài**, mỗi type có ít nhất 1–2 bài khi nguồn c
 |---|---|---|
 | `idea` | Từ ý tưởng user thả vào | `docs/fb-post-ideas/*.md` |
 | `stock-humor` | Chuyện vui/tự trào người mới chơi chứng khoán | `reports/{3 ngày}/*news-digest.md` mục Chứng khoán VN làm cái cớ; ảnh `node scripts/render-vnindex-chart-image.js tmp/vnindex-{date}.png` |
-| `nus-blog` | Share 1 bài blog NUS + 1–2 câu đời thường | `curl -sL https://www.nustechnology.com/blog` → `/blog/<slug>` chưa share; đọc bài để tóm 1 câu dễ hiểu |
+| `nus-blog` | Share 1 bài blog NUS + 1–2 câu đời thường | `curl -sL https://www.nustechnology.com/blog` → `/blog/<slug>` chưa share; 🔴 PHẢI `curl` đọc nội dung bài (không viết theo tiêu đề) để tóm 1 câu đúng |
 | `trend` | Trend/meme đang hot trên mạng VN + 1–2 câu cảm nhận vui | WebSearch tuần này; chỉ chuyện vô hại, KHÔNG chính trị/tôn giáo/drama/tin đồn; link gốc, KHÔNG tải ảnh người khác |
 | `share-article` | Bài báo công nghệ/tài chính/chứng khoán + nhận xét giản dị | `reports/{3 ngày}/*news-digest.md`; link gốc, không link news.google |
 | `running` | Buổi chạy/milestone, số THẬT | `python3 scripts/strava-running-stats.py` → chỉ dùng số trong JSON; kèm `latest.url`; có `milestones` → xếp lên đầu + 🔔 |
