@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-26 (Monday)
 
-**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server), corrected 08:40 + 08:55 (+07:00) recheck
+**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server), corrected 08:40 + 08:55 + 09:18 (+07:00) recheck
 **Window:** 2026-10-23 08:40 → 2026-10-26 05:00 (+07:00). Task-log date: **Fri 2026-10-23**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:01: no upcoming approved leave. Resource Arrangement (Matrix): MinhTC sick 10-23. **TienPH off 26/10** (hometown). HauTT away until 26/10 (SamHT covers Scott). DuongDN left 4h early Fri 10-23 (will make it up this week).
 
@@ -15,7 +15,7 @@
 | 3 | Neural Contract | Customer (via chientx relay, Sun 11:44): "that fix got the code past the login. but when i went to upload a document I got a **501 error**…" ([Upwork room](https://www.upwork.com/ab/messages/)). New Upwork message Sun 11:45. Fri thread: TuanNT working on the branded `internalserver` error page. ~~Upwork fetch was Cloudflare-blocked (pre-08:00)~~ Read live at 08:35: last message is still the customer's Sun 11:44 "…upload a document I got a 501 error. i guess you did not test the upload functionality." **No reply from us.** Neural Upwork hours last week 0h. Neural ○ |
 | 4 | OhCleo (New Relic + Slack) | 🔴 **New prod error: `ProgrammingError column app_media.cover_by_creator does not exist` ×17** ([NR](https://one.newrelic.com)), so the cover-art release (deployed to prod Fri) is missing its DB migration on prod. Tony's Fri report is present (cover art / tags / creators deployed on prod). Earlier Celine asks (availability, unlimited web listening) have no visible answer in the DM (the script skips thread replies, so verify). Ohcleo ○ |
 | 5 | MPFC (email + NR) | Saul Sun 16:07 (UK) forwarded **Cloudflare "Unexpected increase in bot traffic for mypersonalfootballcoach.com"** ([NR](https://one.newrelic.com)). No reply seen (he may be answered via WhatsApp). NR apdex **0.34** (worse than 0.45), 404 handler 11.0s avg / 3205 calls (bot traffic). New dominant warnings: `Undefined array key "HTTP_HOST"` 4369x and PHP 8.x deprecations (after the CVE patching). `clone_apache_logs.php` ran 1143s. "Stale stuck rebills (not auto-charged): 2" alert email repeats every 15 min (Event 15543/15626, decide manually). MPFC ○ |
-| 6 | Slack Baamboozle (Aysar) | Aysar Sat 23:50: "Yes lets target going to 22.23.4…" then **Sun 00:01: "Please take a look at platform repo"** ([#testing](https://baamboozle.slack.com/archives/C06CMTX025R)). No reply (weekend). Carrick's MPDM reports for 10-22 + 10-23 are present ✅. KhanhHH Fri 8.5h ✅. Aysar ○ |
+| 6 | Slack Baamboozle (Aysar) | Aysar Sat 23:50: "Yes lets target going to 22.23.4…" then **Sun 00:01: "Please take a look at platform repo"** ([#testing](https://baamboozle.slack.com/archives/C06CMTX025R)). ~~No reply (weekend).~~ ✅ Carrick replied Mon 09:03: "Ok @Aysar Let me check it." (holding reply). Carrick's MPDM reports for 10-22 + 10-23 are present ✅. KhanhHH Fri 8.5h ✅. Aysar ✓ (09:18) |
 | 7 | Slack Xtreme (Maddy) | Madhuraka Sat 16:45: "**Please confirm this one is no longer needed**: PR #534 … If so, please remove it" ([PR #534](https://bitbucket.org/xtreme-web/rms/pull-requests/534)). No reply (still none 08:35). **New Mon 08:18:** Madhuraka DM to Kai: "Can you provide me an estimate for 473 asap?". Kai 08:33: "Okay" (estimate still owed). PR #544 (LIFM2-465) approved + merged by Madhuraka Sat ✅. LongVV 0h Maddy Fri, so no Kai report was expected. Maddy ○ |
 | 8 | Upwork (Rory/Aysar/Neural/Tokenlite + memos) | ~~All Cloudflare-blocked at 05:00~~ ✅ Re-run 08:35 ([Upwork](https://www.upwork.com/ab/messages/)): last-week hours Aysar 15:00 (= WS KhanhHH 15h) · Rory 5:30 (= WS 5.5h) · Neural 0:00. Memos for Fri 10-23: Rory 0 · Aysar 0 segments (0 invalid, but WS shows Fri Rory 3.5h/Baamboozle 1.5h, so the hours may have been logged on Upwork on another day). Tokenlite (duongdn account): login failed, no saved session, manual login needed |
 
@@ -176,7 +176,7 @@ Trello: Elena - WordPress SamGuard ✓
 **15/22 complete** (live 05:20). [Card](https://trello.com/c/OV9b2SiX)
 - ✓ James Diamond · Rory · Franc · Marcel · Raymond · Andrew Taraba · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ⚠️ Maddy: skipped (Alert #7)
-- ⚠️ Aysar: skipped (Alert #6)
+- ~~⚠️ Aysar: skipped (Alert #6)~~ ✓ Aysar: completed 09:18 (Carrick replied 09:03)
 - ⚠️ MPFC: skipped (Alert #5)
 - ⚠️ Neural Contract: skipped (Alert #3)
 - ~~⚠️ Bailey: skipped (Alert #1)~~ ✓ Bailey: completed 08:55 (go-live handed to QC)
@@ -290,7 +290,7 @@ Trello: Arthur - Meta-Stamp ✓
 - OhCleo: run the missing `cover_by_creator` migration on prod (LongVV). Check whether Celine's 10-22/23 questions were answered in threads.
 - Neural: who looks at the customer's new 501 on document upload? Upwork msg Sun 11:45 still unread (fetch blocked).
 - MPFC: action on Saul's Cloudflare bot-traffic forward (WAF/bot-fight rule?). 2 stale stuck rebills need a manual decision. Was the HTTP_HOST warning flood introduced by the PHP upgrade?
-- Aysar: who answers "Please take a look at platform repo" (Node 22.23.4 target)?
+- ~~Aysar: who answers "Please take a look at platform repo"?~~ Carrick on it (09:03).
 - Maddy: confirm PR #534 can be closed per Madhuraka.
 - carrick@ GitLab: SSH key "LongVV MacOS" added Sun 22:01. Confirm it was LongVV.
 - ~~After 08:00: re-run Upwork~~ done 08:35. Tokenlite (duongdn) Upwork login needs a manual login.
