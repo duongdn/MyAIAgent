@@ -26,7 +26,7 @@ Ai cũng đang tua giống mình không 🙋‍♂️
 ```
 
 ### 3. [trend] Chụp trần nhà nhận thông điệp vũ trụ — cảm xúc: thư thái
-**Nguồn:** Một chiếc trend đang viral: Chụp ảnh trần nhà để nhận thông điệp từ vũ trụ — Kenh14 (mục Hot trend) — https://kenh14.vn/hot-trend.html
+**Nguồn:** Một chiếc trend đang viral: Chụp ảnh trần nhà để nhận thông điệp từ vũ trụ — Kenh14 (mục Hot trend) — https://kenh14.vn/hot-trend.html — ⚠️ chưa xác minh được bài gốc (chỉ thấy tiêu đề trong mục, search không ra)
 > Dân mạng chụp trần nhà rồi 'giải mã' xem vũ trụ nhắn gì cho mình — trend vui kiểu bị cuộc đời dí.
 
 ```
@@ -49,7 +49,7 @@ Giờ muốn gom đủ người chắc phải hẹn trước cả tháng 😅
 ## stock-humor
 
 ### 5. [stock-humor] Thị trường hồi phục, mình hồi hộp — cảm xúc: hoang mang
-**Nguồn:** VN-Index hồi phục mạnh, mục tiêu 1.800 điểm trước áp lực rung lắc — VnEconomy (qua news digest 26/10) — https://vneconomy.vn/
+**Nguồn:** VN-Index hồi phục mạnh, mục tiêu 1.800 điểm trước áp lực rung lắc — VnEconomy (qua news digest 26/10) — https://news.google.com/articles/CBMikgFBVV95cUxPZzF1TTYzQWxoQXRENklkT2UxYklycVR6U3BEcnR1MGNtZ21VOWZYNG9wVk5hY2k4YWdWZ3hjUmJNMHFCcHlWVUNQY1ExUEtHVDhzNkpjR0FLMmhtWWNCeklvRWZLbjM1TVZ5dHcxaFRjQXQtQUtVVVl4YWpmZjR4WEI4bmx6YWU0TlJHYm5hYVFRZw
 > Chỉ số hồi mạnh cuối tuần, giới phân tích kỳ vọng tiếp tục lên nhưng còn rung lắc. Ảnh đăng kèm: biểu đồ VN-Index 90 ngày.
 ![](fb-candidates/05.png)
 
