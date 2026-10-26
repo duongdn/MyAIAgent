@@ -130,3 +130,13 @@ Live WS dry-run `--week=2026-10-19` (nothing submitted):
 - 🔴 **Samguard:** DuongDN 1/5 (DM/reviewer role) and SamHT missing 19 and 23. DongNV is now 5/5.
 
 JD/Marcel are unchanged after the lock: LeNH 40/40, AnhNH2 20/20, DuongDN 0.17h. The 19/10 draft is still valid, still `confirmed: false`, and **NOT SENT**.
+
+---
+
+## Recheck 2026-10-26 08:58 (+07): finalization status week 2026-10-19 (dry-run, nothing submitted)
+- ✅ **Samguard** now finalized by AnhTTL 10-24 10:12Z.
+- ⚠️ **Fountain Greetings + Speedventory: no longer finalized.** Both were ✅ at the 10-24 recheck. They look reopened. Speedventory DatNC went 2/5 → 3/5, so a log landed after the lock. Fountain now fails only on DatNT 0/5 (not in plan, ½ leave 10-23).
+- ⏳ Generator + Meta-Stamp are eligible but still unsubmitted. Earlier: 403 "not Manager".
+- 🔴 Crystal lang: PhucVT 0/5 (moved to Meta-Stamp).
+- JD/Marcel 19/10 draft is still `confirmed: false`, NOT SENT.
+- Week 2026-10-26 just started, so there is no data yet.
