@@ -38,12 +38,13 @@ function fmtPerShare(rawVnd) {
 // Only EPS lines (lãi cơ bản / suy giảm / pha loãng) — NOT "THU NHẬP THUẦN TRÊN CỔ PHIẾU PHỔ THÔNG" (CTCK code 500, a VND total)
 const PER_SHARE_NAME_RE = /(lãi cơ bản|suy giảm|pha loãng).*trên cổ phiếu/i;
 
-function buildSectionRows(template, yearsData, years) {
+// periods: [{ year, quater }] — quater 0 = annual column, 1-4 = quarterly column
+function buildSectionRows(template, yearsData, periods) {
   return template.map((row) => {
     const line = [row.name];
     const isPerShare = PER_SHARE_NAME_RE.test(row.name);
-    for (const y of years) {
-      const yearEntry = yearsData.find((d) => d.year === y);
+    for (const p of periods) {
+      const yearEntry = yearsData.find((d) => d.year === p.year && (d.quater || 0) === p.quater);
       const cell = yearEntry ? yearEntry.data.find((d) => d.code === row.code) : null;
       if (!cell) {
         line.push(" - ");
@@ -55,6 +56,41 @@ function buildSectionRows(template, yearsData, years) {
   });
 }
 
+function fetchJson(url) {
+  return new Promise((resolve, reject) => {
+    require("https")
+      .get(url, { headers: { "User-Agent": "Mozilla/5.0" } }, (res) => {
+        let body = "";
+        res.on("data", (c) => (body += c));
+        res.on("end", () => {
+          try {
+            resolve(JSON.parse(body));
+          } catch (e) {
+            reject(new Error(`Parse fail for ${url}: ${e.message}`));
+          }
+        });
+      })
+      .on("error", reject);
+  });
+}
+
+// Latest n quarters from cafef, oldest first. Same endpoints as fetch-cafef.js, TypeTime=QUY.
+async function fetchQuarters(tk, n) {
+  const base = "https://apiweb.cafef.vn/api";
+  const [cdkt, kqkd, lctt] = await Promise.all([
+    fetchJson(`${base}/v2/BCTC/GetReportCDKT?symbol=${tk}&pageIndex=1&pageSize=${n}&reportType=ALL&TypeTime=QUY`),
+    fetchJson(`${base}/v1/BCTC/GetReportDetail?symbol=${tk}&pageIndex=1&pageSize=${n}&reportType=KQKD&TypeTime=QUY`),
+    fetchJson(`${base}/v2/BCTC/GetReportLCTT?symbol=${tk}&pageIndex=1&pageSize=${n}&reportType=ALL&TypeTime=QUY`),
+  ]);
+  const order = (arr) => [...arr].sort((a, b) => a.year - b.year || a.quater - b.quater);
+  return {
+    tn: order(cdkt.value.data.find((d) => d.code === "TN").data),
+    nv: order(cdkt.value.data.find((d) => d.code === "NV").data),
+    kqkd: order(kqkd.value.data),
+    lctt: lctt.value.data.map((g) => ({ code: g.code, data: order(g.data) })),
+  };
+}
+
 async function main() {
   // --data-file=<path>: use a pre-merged JSON (same shape as fetch-cafef output), e.g. cafef + PDF-transcribed years
   const dataFileArg = process.argv.find((a) => a.startsWith("--data-file="));
@@ -63,21 +99,34 @@ async function main() {
     : JSON.parse(execSync(`node "${path.join(__dirname, "finance-report-detail-fetch-cafef.js")}" ${ticker}`, { maxBuffer: 20 * 1024 * 1024 }).toString());
 
   const years = cafefJson.balanceSheet.assetsYears.map((y) => y.year);
-  const yearHeader = years.map(String);
+  const periods = years.map((year) => ({ year, quater: 0 }));
+
+  // --quarters=N: append the latest N quarterly columns from cafef (TypeTime=QUY), e.g. "Q2/2026"
+  const qArg = process.argv.find((a) => a.startsWith("--quarters="));
+  if (qArg) {
+    const q = await fetchQuarters(ticker, parseInt(qArg.slice("--quarters=".length), 10));
+    const bs = cafefJson.balanceSheet;
+    bs.assetsYears = [...bs.assetsYears, ...q.tn];
+    bs.liabilitiesYears = [...bs.liabilitiesYears, ...q.nv];
+    cafefJson.incomeStatement.years = [...cafefJson.incomeStatement.years, ...q.kqkd];
+    for (const g of cafefJson.cashFlow.groups) g.years = [...g.years, ...((q.lctt.find((x) => x.code === g.code) || {}).data || [])];
+    periods.push(...q.tn.map((e) => ({ year: e.year, quater: e.quater })));
+  }
+  const yearHeader = periods.map((p) => (p.quater ? `Q${p.quater}/${p.year}` : String(p.year)));
 
   const rows = [];
   rows.push(["Tài sản", ...yearHeader]);
-  rows.push(...buildSectionRows(cafefJson.balanceSheet.assetsTemplate, cafefJson.balanceSheet.assetsYears, years));
+  rows.push(...buildSectionRows(cafefJson.balanceSheet.assetsTemplate, cafefJson.balanceSheet.assetsYears, periods));
   rows.push(["Nguồn vốn", ...yearHeader]);
-  rows.push(...buildSectionRows(cafefJson.balanceSheet.liabilitiesTemplate, cafefJson.balanceSheet.liabilitiesYears, years));
+  rows.push(...buildSectionRows(cafefJson.balanceSheet.liabilitiesTemplate, cafefJson.balanceSheet.liabilitiesYears, periods));
   rows.push(["Kết quả kinh doanh", ...yearHeader]);
-  rows.push(...buildSectionRows(cafefJson.incomeStatement.template, cafefJson.incomeStatement.years, years));
+  rows.push(...buildSectionRows(cafefJson.incomeStatement.template, cafefJson.incomeStatement.years, periods));
   for (const group of cafefJson.cashFlow.groups) {
     rows.push([group.name, ...yearHeader]);
-    rows.push(...buildSectionRows(group.template, group.years, years));
+    rows.push(...buildSectionRows(group.template, group.years, periods));
   }
 
-  console.error(`Total rows: ${rows.length}, years: ${years.join(",")}`);
+  console.error(`Total rows: ${rows.length}, periods: ${yearHeader.join(",")}`);
 
   const auth = new google.auth.GoogleAuth({
     keyFile: KEY_PATH,
