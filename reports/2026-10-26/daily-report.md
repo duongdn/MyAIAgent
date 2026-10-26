@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-26 (Monday)
 
-**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server)
+**Run:** 2026-10-26T05:00+07:00 → 05:25 (cron, mpfc server), corrected 08:40 (+07:00) recheck
 **Window:** 2026-10-23 08:40 → 2026-10-26 05:00 (+07:00). Task-log date: **Fri 2026-10-23**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:01: no upcoming approved leave. Resource Arrangement (Matrix): MinhTC sick 10-23. **TienPH off 26/10** (hometown). HauTT away until 26/10 (SamHT covers Scott). DuongDN left 4h early Fri 10-23 (will make it up this week).
 
@@ -10,14 +10,14 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Slack GGS (Bailey) | **Go-live today.** Joey, Sun 17:09: "since all major issues have been fixed, can you please go live tomorrow morning first thing your time? I will log in tomorrow (Monday) at 6 am to see if you guys went live or not" ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB)). No reply yet. The team must confirm and execute the go-live this morning. Fri: Nick sent the sync root-cause analysis 17:13 and the "Today report" 17:16 ✅. Bailey ○ |
-| 2 | Trello Fountain (Kunal) | Rick 17:10 Fri asked to hold the Oct 23 release (#782/#941) until Monday for QC. **Kunal 18:47: "anything I give you I have already reviewed and can mostly be pushed live please try and still push this live"** ([board](https://trello.com/b/UDrSWage)). No reply since. Also unanswered from Kunal: Fountain Blog "whats the email?" (10:57), Infinity gift-variant export "are you able to push this live" (11:03), new card "Set up test.infinityroses.com". Email: the new site goes live **Tue 10-27**, and Kunal travels to India 10-29 → 11-11. Fountain ○ |
-| 3 | Neural Contract | Customer (via chientx relay, Sun 11:44): "that fix got the code past the login. but when i went to upload a document I got a **501 error**…" ([Upwork room](https://www.upwork.com/ab/messages/)). New Upwork message Sun 11:45. Fri thread: TuanNT working on the branded `internalserver` error page. Upwork fetch was Cloudflare-blocked (pre-08:00), so the messages weren't read in full. Neural ○ |
+| 1 | Slack GGS (Bailey) | **Go-live today.** Joey, Sun 17:09: "since all major issues have been fixed, can you please go live tomorrow morning first thing your time? I will log in tomorrow (Monday) at 6 am to see if you guys went live or not" ([msg](https://globalgrazingservices.slack.com/archives/C0338NXK3SB)). No reply yet (still none in GGS Slack as of 08:35 recheck). The team must confirm and execute the go-live this morning. Fri: Nick sent the sync root-cause analysis 17:13 and the "Today report" 17:16 ✅. Bailey ○ |
+| 2 | Trello Fountain (Kunal) | Rick 17:10 Fri asked to hold the Oct 23 release (#782/#941) until Monday for QC. **Kunal 18:47: "anything I give you I have already reviewed and can mostly be pushed live please try and still push this live"** ([board](https://trello.com/b/UDrSWage)). No reply since. **New 08:35 recheck:** Kunal Mon 06:49 on the "Monday Oct 26 release" card: "have an update since friday — I folded the next rollout into these two PRs so it's one deploy. Everything on test except Gift Match". No reply from Rick yet. Also unanswered from Kunal: Fountain Blog "whats the email?" (10:57), Infinity gift-variant export "are you able to push this live" (11:03), new card "Set up test.infinityroses.com". Email: the new site goes live **Tue 10-27**, and Kunal travels to India 10-29 → 11-11. Fountain ○ |
+| 3 | Neural Contract | Customer (via chientx relay, Sun 11:44): "that fix got the code past the login. but when i went to upload a document I got a **501 error**…" ([Upwork room](https://www.upwork.com/ab/messages/)). New Upwork message Sun 11:45. Fri thread: TuanNT working on the branded `internalserver` error page. ~~Upwork fetch was Cloudflare-blocked (pre-08:00)~~ Read live at 08:35: last message is still the customer's Sun 11:44 "…upload a document I got a 501 error. i guess you did not test the upload functionality." **No reply from us.** Neural Upwork hours last week 0h. Neural ○ |
 | 4 | OhCleo (New Relic + Slack) | 🔴 **New prod error: `ProgrammingError column app_media.cover_by_creator does not exist` ×17** ([NR](https://one.newrelic.com)), so the cover-art release (deployed to prod Fri) is missing its DB migration on prod. Tony's Fri report is present (cover art / tags / creators deployed on prod). Earlier Celine asks (availability, unlimited web listening) have no visible answer in the DM (the script skips thread replies, so verify). Ohcleo ○ |
 | 5 | MPFC (email + NR) | Saul Sun 16:07 (UK) forwarded **Cloudflare "Unexpected increase in bot traffic for mypersonalfootballcoach.com"** ([NR](https://one.newrelic.com)). No reply seen (he may be answered via WhatsApp). NR apdex **0.34** (worse than 0.45), 404 handler 11.0s avg / 3205 calls (bot traffic). New dominant warnings: `Undefined array key "HTTP_HOST"` 4369x and PHP 8.x deprecations (after the CVE patching). `clone_apache_logs.php` ran 1143s. "Stale stuck rebills (not auto-charged): 2" alert email repeats every 15 min (Event 15543/15626, decide manually). MPFC ○ |
 | 6 | Slack Baamboozle (Aysar) | Aysar Sat 23:50: "Yes lets target going to 22.23.4…" then **Sun 00:01: "Please take a look at platform repo"** ([#testing](https://baamboozle.slack.com/archives/C06CMTX025R)). No reply (weekend). Carrick's MPDM reports for 10-22 + 10-23 are present ✅. KhanhHH Fri 8.5h ✅. Aysar ○ |
-| 7 | Slack Xtreme (Maddy) | Madhuraka Sat 16:45: "**Please confirm this one is no longer needed**: PR #534 … If so, please remove it" ([PR #534](https://bitbucket.org/xtreme-web/rms/pull-requests/534)). No reply. PR #544 (LIFM2-465) approved + merged by Madhuraka Sat ✅. LongVV 0h Maddy Fri, so no Kai report was expected. Maddy ○ |
-| 8 | Upwork (Rory/Aysar/Neural/Tokenlite + memos) | All Cloudflare-blocked at 05:00 (company PC is only on from 08:00, [Upwork](https://www.upwork.com/ab/messages/)). Memo status and Neural messages are unknown. Re-run after 08:00 |
+| 7 | Slack Xtreme (Maddy) | Madhuraka Sat 16:45: "**Please confirm this one is no longer needed**: PR #534 … If so, please remove it" ([PR #534](https://bitbucket.org/xtreme-web/rms/pull-requests/534)). No reply (still none 08:35). **New Mon 08:18:** Madhuraka DM to Kai: "Can you provide me an estimate for 473 asap?". Kai 08:33: "Okay" (estimate still owed). PR #544 (LIFM2-465) approved + merged by Madhuraka Sat ✅. LongVV 0h Maddy Fri, so no Kai report was expected. Maddy ○ |
+| 8 | Upwork (Rory/Aysar/Neural/Tokenlite + memos) | ~~All Cloudflare-blocked at 05:00~~ ✅ Re-run 08:35 ([Upwork](https://www.upwork.com/ab/messages/)): last-week hours Aysar 15:00 (= WS KhanhHH 15h) · Rory 5:30 (= WS 5.5h) · Neural 0:00. Memos for Fri 10-23: Rory 0 · Aysar 0 segments (0 invalid, but WS shows Fri Rory 3.5h/Baamboozle 1.5h, so the hours may have been logged on Upwork on another day). Tokenlite (duongdn account): login failed, no saved session, manual login needed |
 
 **Today (Oct 26):** TienPH off. Fountain plan for W 10-26 not posted yet (expected ~08:30–09:30). ✅ Resolved since last report: Franc dmetiner logging issue (Carrick will schedule it next week, dmetiner "no worries"). Chris Coyne released the $1,701 M4 hold (Meta-Stamp). Jamie confirmed the multi-word image search fix (Baamboozle). Bailey prelive bugs fixed (Amy), Nick daily reports back. BXR Apple Wallet key rotated + verified.
 
@@ -272,15 +272,15 @@ Trello: Arthur - Meta-Stamp ✓
 
 ---
 
-## Upwork / Upwork Memo — 2026-10-23 — 05:18 (+07:00)
-| Workroom | Memos | Invalid | Details |
-|----------|-------|---------|---------|
-| Rory | — | — | Cloudflare challenge not resolved |
-| Aysar | — | — | Cloudflare challenge not resolved |
-| Tokenlite | — | — | Cloudflare challenge not resolved |
-| Neural (messages) | — | — | 4 cookie-injection attempts redirected to login. Vault marked STALE |
+## Upwork / Upwork Memo — 2026-10-23 — 05:18, re-run 08:35 (+07:00)
+| Workroom | Memos (Fri 10-23) | Invalid | Last week hours | Details |
+|----------|-------------------|---------|-----------------|---------|
+| Rory | 0 | 0 | 5:30 | WS shows KhanhHH 3.5h Rory Fri, 0 Upwork segments that day |
+| Aysar | 0 | 0 | 15:00 | matches WS Baamboozle 15h |
+| Tokenlite | — | — | — | duongdn account: live cookies + stored session + headless login all failed. Manual `node scripts/upwork-login.js --login --account=duongdn` needed |
+| Neural (messages) | n/a | n/a | 0:00 | Read OK. Customer 501 complaint (Sun 11:44) unanswered (Alert #3) |
 
-Upwork data unavailable: the company PC (cookie source) is only on from 08:00. Re-run after 08:00: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-23`, `node scripts/upwork-neural-check.js`, `node scripts/upwork-weekly-hours.js`.
+~~Upwork data unavailable: the company PC is only on from 08:00.~~ Re-run done 08:35. No invalid memos.
 
 ---
 
@@ -293,4 +293,6 @@ Upwork data unavailable: the company PC (cookie source) is only on from 08:00. R
 - Aysar: who answers "Please take a look at platform repo" (Node 22.23.4 target)?
 - Maddy: confirm PR #534 can be closed per Madhuraka.
 - carrick@ GitLab: SSH key "LongVV MacOS" added Sun 22:01. Confirm it was LongVV.
-- After 08:00: re-run Upwork memo / Neural / weekly hours. After 09:30: Fountain W 10-26 plan.
+- ~~After 08:00: re-run Upwork~~ done 08:35. Tokenlite (duongdn) Upwork login needs a manual login.
+- After 09:30: Fountain W 10-26 plan (not posted as of 08:35).
+- Maddy: who sends Madhuraka the LIFM2-473 estimate (asked "asap" 08:18)?
