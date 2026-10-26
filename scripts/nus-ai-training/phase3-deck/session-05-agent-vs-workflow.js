@@ -1,5 +1,6 @@
 // Mở đầu Giai đoạn 3 + Session 5: Agent khác workflow ở đâu và OpenAI Agents SDK hỗ trợ gì (45 phút)
 const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
+const decide = require('./session-05-decision-slides');
 const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
@@ -78,37 +79,8 @@ Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → applicat
   extra.tokenGrowth();
   extra.conditionalCase();
 
-  question('Yêu cầu support nào cần agent?', 'Chỉ trả lời câu hỏi · nhiều bước · tạo ticket… — chọn mức thấp nhất đủ dùng.',
-    `Hỏi lớp 2-3 phút trước khi lật đáp án. Cho từng người chọn mức cho 4 yêu cầu ở slide sau (đọc to trước).`);
-
-  s = newSlide('Đáp án', 'Chọn mức thấp nhất làm được việc', `Giải thích từng dòng:
-1. Tra cứu 1 lần là đủ → RAG, không cần agent.
-2. Các bước luôn giống nhau → workflow; agent chỉ thêm chi phí và rủi ro.
-3. "CẦN THÌ tạo": có tạo ticket hay không, tra mấy lần, phụ thuộc kết quả tra → agent có giá trị (chính là yêu cầu đã đo ở slide 13: agent 1.893 token, workflow 5.246). Nếu user nói "LUÔN tạo ticket" thì bước biết trước → workflow (slide 10: workflow làm đủ với ~1.480 token).
-4. Hoàn tiền là hành động tiền bạc, không đảo ngược được → workflow cố định + người duyệt, KHÔNG để model tự quyết.
-Rule: khi không chắc → chọn mức thấp hơn; nâng mức sau khi đã có test case.`);
-  table(s, 25, 85, [250, 120, 300], [
-    ['Yêu cầu', 'Mức', 'Vì sao'],
-    ['"Mã lỗi E205 nghĩa là gì?"', 'Model call + RAG', 'Một lần tra cứu là đủ'],
-    ['"Phân loại email khách rồi điền form ticket"', 'Workflow', 'Bước luôn giống nhau, biết trước'],
-    ['"Khách báo lỗi E205, xử lý giúp, CẦN THÌ tạo ticket"', 'Agent', 'Có tạo ticket không tuỳ kết quả tra (nếu LUÔN tạo → workflow, xem slide đo)'],
-    ['"Hoàn 2.000 USD cho khách"', 'Workflow + người duyệt', 'Tiền bạc, không đảo ngược — model không tự quyết'],
-  ], { rowH: 46, fills: [C.WHITE, C.WHITE, C.GREEN, C.YELLOW] });
-
-  s = newSlide('Quyết định', 'Ba câu hỏi trước khi chọn agent', `Đi theo cây từ trên xuống.
-1. Có cần hành động / gọi tool không? Không → model call (+ RAG nếu cần dữ liệu riêng).
-2. Các bước có biết trước không? Biết → workflow (như slide đo: luôn tạo ticket P3 cho billing).
-3. Nếu agent làm sai, có sửa lại được không? Không (gửi tiền, xoá dữ liệu) → phải có người duyệt hoặc quay về workflow.
-Chỉ khi đi hết tới cuối mới chọn agent. Đây cũng là cách trả lời khách hàng khi họ nói "làm cho tôi một AI agent".`);
-  [['Cần hành động / gọi tool?', 'Không → Model call (+ RAG)'], ['Các bước biết trước?', 'Có → Workflow'], ['Làm sai có sửa lại được?', 'Không → thêm người duyệt']]
-    .forEach(([q, a], i) => {
-      box(s, 60, 90 + i * 85, 260, 60, q, { fill: C.LIGHT, size: 15 });
-      box(s, 400, 90 + i * 85, 240, 60, a, { fill: C.YELLOW, size: 14 });
-      arrow(s, 320, 120 + i * 85, 400, 120 + i * 85);
-      if (i < 2) arrow(s, 190, 150 + i * 85, 190, 175 + i * 85);
-    });
-  box(s, 60, 335, 580, 36, 'Cần tool · bước không biết trước → Agent (kèm kiểm soát ở S7–S9)', { fill: C.NAVY, size: 14 });
-  arrow(s, 190, 320, 190, 335);
+  decide.consistency();
+  decide.decision();
 
   s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `Định vị, không học thuộc API.
 - Agent: định nghĩa (instructions = system prompt, model, tools).
@@ -154,13 +126,13 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   takeaways([
     ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
     ['Chọn mức', 'Mức thấp nhất làm được việc — agent khi số bước phụ thuộc kết quả'],
-    ['Chi phí', 'Bước biết trước: workflow rẻ ~2,6× · Bước phụ thuộc kết quả: agent rẻ ~2,8×'],
+    ['Chi phí', 'Nhánh liệt kê được → workflow rẻ 2,6–13× · Không liệt kê được → agent'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
 - Agent: model chọn bước tiếp; code chạy tool và giữ kiểm soát.
 - Chọn mức: thấp nhất làm được việc; agent khi số bước phụ thuộc kết quả.
-- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn.
+- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 15).
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
 

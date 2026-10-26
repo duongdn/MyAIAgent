@@ -1,0 +1,343 @@
+{
+ "model": "deepseek-v4.1-flash",
+ "template": "Khách X báo lỗi thanh toán mã {code}. Nếu là lỗi phía hệ thống mình (cổng thanh toán) thì tạo ticket cho billing team; nếu là do ngân hàng hoặc thẻ của khách thì chỉ hướng dẫn khách, không tạo ticket.",
+ "rows": [
+  {
+   "code": "E205",
+   "level": "Workflow tra trước",
+   "runs": 10,
+   "correct": 10,
+   "calls": [
+    1
+   ],
+   "tokens_min": 344,
+   "tokens_max": 395,
+   "errors": [],
+   "detail": [
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 344,
+     "secs": 1.9,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 350,
+     "secs": 1.8,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 359,
+     "secs": 1.5,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 356,
+     "secs": 1.3,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 349,
+     "secs": 1.9,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 377,
+     "secs": 1.6,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 347,
+     "secs": 1.6,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 376,
+     "secs": 2.0,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 395,
+     "secs": 2.1,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 1,
+     "tokens": 345,
+     "secs": 1.6,
+     "error": null
+    }
+   ]
+  },
+  {
+   "code": "E205",
+   "level": "Agent",
+   "runs": 10,
+   "correct": 10,
+   "calls": [
+    2
+   ],
+   "tokens_min": 1970,
+   "tokens_max": 2548,
+   "errors": [],
+   "detail": [
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 1970,
+     "secs": 6.6,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2173,
+     "secs": 6.0,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2225,
+     "secs": 6.9,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2163,
+     "secs": 6.9,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2548,
+     "secs": 8.5,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2100,
+     "secs": 4.0,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2247,
+     "secs": 8.8,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2174,
+     "secs": 8.0,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2120,
+     "secs": 8.0,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2299,
+     "secs": 8.1,
+     "error": null
+    }
+   ]
+  },
+  {
+   "code": "E999",
+   "level": "Workflow tra trước",
+   "runs": 10,
+   "correct": 10,
+   "calls": [
+    1
+   ],
+   "tokens_min": 361,
+   "tokens_max": 485,
+   "errors": [],
+   "detail": [
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 406,
+     "secs": 2.6,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 362,
+     "secs": 2.3,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 485,
+     "secs": 2.7,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 377,
+     "secs": 2.0,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 387,
+     "secs": 1.8,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 407,
+     "secs": 1.8,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 382,
+     "secs": 2.1,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 361,
+     "secs": 2.0,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 394,
+     "secs": 2.0,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 1,
+     "tokens": 378,
+     "secs": 2.4,
+     "error": null
+    }
+   ]
+  },
+  {
+   "code": "E999",
+   "level": "Agent",
+   "runs": 10,
+   "correct": 9,
+   "calls": [
+    2,
+    4
+   ],
+   "tokens_min": 2480,
+   "tokens_max": 6203,
+   "errors": [],
+   "detail": [
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5472,
+     "secs": 11.4,
+     "error": null
+    },
+    {
+     "ticket": false,
+     "calls": 2,
+     "tokens": 2480,
+     "secs": 9.1,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5765,
+     "secs": 12.6,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 4867,
+     "secs": 15.5,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5926,
+     "secs": 15.2,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 4873,
+     "secs": 11.6,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 6203,
+     "secs": 17.0,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5549,
+     "secs": 9.5,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5124,
+     "secs": 10.1,
+     "error": null
+    },
+    {
+     "ticket": true,
+     "calls": 4,
+     "tokens": 5367,
+     "secs": 15.4,
+     "error": null
+    }
+   ]
+  }
+ ]
+}
