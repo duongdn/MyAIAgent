@@ -7,6 +7,8 @@
 require __DIR__ . '/perf-data.php';
 $cfg = require '/etc/mpfc-perf/config.php';
 header( 'Cache-Control: no-store' );
+ini_set( 'memory_limit', '512M' ); // 7d keeps ~400k float timings in memory for percentiles
+set_time_limit( 120 );
 
 $ranges = [ '1h' => [ 3600, 60 ], '6h' => [ 21600, 300 ], '24h' => [ 86400, 900 ], '3d' => [ 259200, 3600 ], '7d' => [ 604800, 10800 ] ];
 $range  = isset( $ranges[ $_GET['r'] ?? '' ] ) ? $_GET['r'] : '24h';
@@ -94,7 +96,7 @@ th{color:var(--mute);font-weight:600} td.n{text-align:right;font-variant-numeric
 		<td class="route"><?= $h( $r['u'] ) ?></td><td><?= $h( $r['ip'] ) ?></td><td><small><?= $h( mb_substr( (string) $r['ua'], 0, 60 ) ) ?></small></td></tr>
 	<?php endforeach; ?>
 </table></div>
-<p><small><?= number_format( count( $rows ) ) ?> rows scanned in <?= round( microtime( true ) - $t0, 2 ) ?>s</small></p>
+<p><small><?= number_format( $a['scanned'] ) ?> rows scanned in <?= round( microtime( true ) - $t0, 2 ) ?>s</small></p>
 </main>
 <script>
 const d = <?= json_encode( $chart ) ?>;
