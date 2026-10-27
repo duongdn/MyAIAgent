@@ -21,7 +21,8 @@ function perf_fetch_rows(PDO $db, int $since): PDOStatement {
 	}
 	$from = gmdate( 'Y-m-d H:i:s', $since );
 	$sql  = implode( ' UNION ALL ', array_map( fn( $t ) =>
-		"SELECT UNIX_TIMESTAMP(datetime) ts, ip, url_requested u, status s, time_in_milisecond us, user_agent ua
+		"SELECT UNIX_TIMESTAMP(datetime) ts, ip, url_requested u, status s, time_in_milisecond us, user_agent ua,
+		        bytes_sent b, content_type ct, referer ref, redirect_location rl
 		 FROM `$t` WHERE datetime >= '$from'", $tables ) );
 	$db->exec( "SET time_zone = '+00:00'" ); // datetime column is UTC
 	// stream rows: 3d/7d ranges are 100k-500k rows, too big to buffer under the 128M web memory_limit
@@ -60,6 +61,45 @@ function perf_summary(array $secs): array {
 	$n = count( $secs );
 	return [ 'n' => $n, 'avg' => $n ? array_sum( $secs ) / $n : 0, 'p50' => perf_pct( $secs, .5 ),
 		'p95' => perf_pct( $secs, .95 ), 'max' => $n ? end( $secs ) : 0, 'total' => array_sum( $secs ) ];
+}
+
+/** Response-time histogram bucket label. */
+function perf_hist_bucket(float $sec): string {
+	foreach ( [ 0.5, 1, 2, 3, 5, 10, 30 ] as $edge ) if ( $sec < $edge ) return "<{$edge}s";
+	return '≥30s';
+}
+
+/** Everything about one route ("METHOD /route"): timings, histogram, who/where from, sample requests. */
+function perf_route_detail(iterable $rows, array $opt, string $want): array {
+	$all = $series = $hist = $status = $ips = $uas = $refs = $samples = [];
+	foreach ( $rows as $r ) {
+		if ( in_array( $r['ip'], $opt['exclude_ips'], true ) ) continue;
+		[ $m, $route ] = perf_route( (string) $r['u'], (int) $r['s'] );
+		if ( "$m $route" !== $want ) continue;
+		$sec   = $r['us'] / 1e6;
+		$all[] = $sec;
+		$series[ intdiv( (int) $r['ts'], $opt['bucket'] ) * $opt['bucket'] ][] = $sec;
+		$hist[ perf_hist_bucket( $sec ) ] = ( $hist[ perf_hist_bucket( $sec ) ] ?? 0 ) + 1;
+		$status[ (int) $r['s'] ] = ( $status[ (int) $r['s'] ] ?? 0 ) + 1;
+		foreach ( [ 'ips' => $r['ip'], 'uas' => mb_substr( (string) $r['ua'], 0, 90 ), 'refs' => $r['ref'] ?: '-' ] as $k => $v ) {
+			${$k}[ $v ]['n'] = ( ${$k}[ $v ]['n'] ?? 0 ) + 1;
+			${$k}[ $v ]['t'] = ( ${$k}[ $v ]['t'] ?? 0 ) + $sec;
+		}
+		$samples[] = $r + [ 'sec' => $sec ];
+		if ( count( $samples ) > 3000 ) { // bounded memory: keep slowest
+			usort( $samples, fn( $a, $b ) => $b['sec'] <=> $a['sec'] );
+			$samples = array_slice( $samples, 0, 200 );
+		}
+	}
+	ksort( $series );
+	$order = array_flip( [ '<0.5s', '<1s', '<2s', '<3s', '<5s', '<10s', '<30s', '≥30s' ] );
+	uksort( $hist, fn( $a, $b ) => $order[ $a ] <=> $order[ $b ] );
+	ksort( $status );
+	$by_time = fn( $a, $b ) => $b['t'] <=> $a['t'];
+	foreach ( [ 'ips', 'uas', 'refs' ] as $k ) { uasort( ${$k}, $by_time ); ${$k} = array_slice( ${$k}, 0, 15, true ); }
+	usort( $samples, fn( $a, $b ) => $b['sec'] <=> $a['sec'] );
+	return [ 'sum' => perf_summary( $all ), 'series' => array_map( 'perf_summary', $series ), 'hist' => $hist,
+		'status' => $status, 'ips' => $ips, 'uas' => $uas, 'refs' => $refs, 'samples' => array_slice( $samples, 0, 100 ) ];
 }
 
 /** Filter + aggregate everything the page shows. */

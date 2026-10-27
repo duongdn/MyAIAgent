@@ -147,6 +147,7 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - Dashboard: https://admin.mypersonalfootballcoach.com/perf/ (admin vhost basic auth, user `mpfc`).
   - Code: `plans/mpfc-upgrade/perf-dashboard/` → server `/var/www/mpfc-perf/`; DB creds `/etc/mpfc-perf/config.php` (read-only DB user `perf_ro`, SELECT on apache_logs.*).
   - admin vhost: `ProxyPass /perf !` + `Alias /perf` (backup `/root/upgrade/admin-le-ssl.conf.bak-20261027`).
+  - Route detail page (?route=): KPIs, time chart, histogram, status codes, IPs/UAs/referers by time, slowest 100 requests with all fields.
   - Shows KPIs, avg/p95/throughput chart, transactions by total time (routes normalized, `?json=` endpoints kept), slow requests list, top IPs. Ranges 1h–7d; default excludes dev IP 171.251.232.148.
 - apache_logs: added `idx_datetime` on live table (clones inherit via CREATE TABLE LIKE) + clones 1024–1027. `apache_logs_clone_20261024` holds 8.4M rows (2026-05-20 → 10-24, old server clone cron stalled).
 - Load time: 24h 0.8s, 3d 2.1s, 7d 12s (PHP aggregation of ~430k rows).
