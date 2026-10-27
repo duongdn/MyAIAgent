@@ -851,6 +851,22 @@
       },
       "method": "dashboard_verified",
       "note": "09:00 rerun: NW -1M vs 08:45 (Hiếu hỉ vcb -1M 08:51). NW = totaldashboard 6,543,171,619 + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069. T10 MTD Thu 123.4M/Chi 44.2M/Net +79.2M."
+    },
+    {
+      "date": "2026-10-27",
+      "label": "27/10",
+      "net_worth": 7924251267,
+      "gross_assets": 8004257059,
+      "liabilities": 3564147,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 708500000,
+        "investment": 2606680840,
+        "savings": 1145852295,
+        "liquid": 23223924
+      },
+      "method": "dashboard_verified",
+      "note": "NW -1.04M vs 10-26 09:00: chi 1.15M (visa nhap muon 908K + Vi 240K), lai +36K. Rut 400M tikcop ko ki han -> so moi C vay 9m 400M 11.2% dao han 2027-07-27; ko ki han con 55.7M, thanh khoan tuc thi ~78.9M. NW = totaldashboard 6,542,127,198 + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069. T10 MTD Thu 123.5M/Chi 45.4M/Net +78.1M."
     }
   ]
 }
