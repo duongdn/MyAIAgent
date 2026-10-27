@@ -97,6 +97,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_head_truncation_missed_tuannt_bailey_hours](daily-report/sheets/feedback_head_truncation_missed_tuannt_bailey_hours.md) — 🔴 large combined-project JSON dumps: never eyeball via head, always filter/sum by employeeName across all projects before alerting 0h
 - [feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt](daily-report/sheets/feedback_james_diamond_skill_table_stale_use_lenh_not_phucvt.md) — 🔴🔴🔴 3rd recurrence: James Diamond gate = LeNH not PhucVT, skill table is stale, memory wins
 - [feedback_20260915_recheck_findings](daily-report/sheets/feedback_20260915_recheck_findings.md) — 🔴 real KhanhHH+LeNH 0h 09-14; 3 structural gaps: Philip config missing, Fountain customer board no token, Bitbucket Maddy token 401
+- [feedback_phucvt_reminder_room_is_james_diamond_room](daily-report/sheets/feedback_phucvt_reminder_room_is_james_diamond_room.md) — 🔴 PhucVT reminder room in skill = James Diamond shared room, misrouted 10-27
 - [feedback_parse_leave_emails_misses_remote_work_threads](daily-report/sheets/feedback_parse_leave_emails_misses_remote_work_threads.md) — 🔴🔴 2026-09-21: false LeNH 0h alert, script only matches "nghỉ phép" subjects not "làm remote" threads; always direct-email-search before flagging a strict-gate dev's 0h
 
 ## daily-report:scrin
