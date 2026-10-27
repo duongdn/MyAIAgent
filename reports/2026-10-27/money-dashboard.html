@@ -56,7 +56,7 @@
   </div>
   <div class="kpi">
     <div class="label">Liquid</div>
-    <div class="value" style="color:#f59e0b">23.2M</div>
+    <div class="value" style="color:#22c55e">23.2M</div>
     <div class="delta down">▼ −0.2M · vcb 7.8M, Paypal 14.9M · + sổ ko kì hạn chỉ còn 55.7M</div>
   </div>
   <div class="kpi">
@@ -74,7 +74,7 @@
 <div class="grid full">
   <div class="card" style="border-color:#1e2a3a;background:#141a26">
     <h3 style="color:#60a5fa">◆ Điểm nổi bật kể từ lần chạy 26/10 09:00</h3>
-    <div style="font-size:13px;color:#cbd5e1;line-height:1.7">Net Worth 7.924 tỷ, <b>−1.04M</b>: chi 1.15M (visa nhập muộn 10-26: con cái 578K + tiền ra 330K; Ví thú cưng 140K, con cái 70K…), lãi +36K. <b>Cho vay cá nhân 400M từ sổ tikcop ko kì hạn ("C vay 9m", 11.2%, 9 tháng, đến hạn 27/07/2027)</b> — lãi dự kiến ~33.6M. Hệ quả: thanh khoản tức thì còn ~78.9M (tiền mặt 23.2M + ko kì hạn 55.7M) &lt; 110M → giữ dừng DCA, nạp lại ko kì hạn từ lương T11.</div>
+    <div style="font-size:13px;color:#cbd5e1;line-height:1.7">Net Worth 7.924 tỷ, <b>−1.04M</b>: chi 1.15M (visa nhập muộn 10-26: con cái 578K + tiền ra 330K; Ví thú cưng 140K, con cái 70K…), lãi +36K. <b>Cho vay cá nhân 400M từ sổ tikcop ko kì hạn ("C vay 9m", 11.2%, 9 tháng, đến hạn 27/07/2027)</b> — lãi dự kiến ~33.6M. Thanh khoản tức thì ~78.9M (tiền mặt 23.2M + ko kì hạn 55.7M) — đủ, lương cuối tháng về.</div>
   </div>
 </div>
 
@@ -94,7 +94,7 @@
     <h3 style="color:#facc15;margin-top:14px">⚠️ Cần lưu ý</h3>
     <ol style="font-size:13px;line-height:1.7;color:#cbd5e1;margin:0;padding-left:20px">
       <li><b>Hiếu hỉ:</b> ngoài 5M gửi má đã thêm 4.4M (20/10 2.71M) — nhóm lớn nhất T10 (25%); cuối năm mùa cưới, dự trù thêm.</li>
-      <li><b>T10 đã vào FPTS 161.1M</b> → CP 47.4% (còn ~146M tới trần 50%). Sau khi khóa 400M vào sổ 9 tháng, quỹ DCA (ko kì hạn) chỉ còn 55.7M — dừng DCA tới khi tiền mặt + ko kì hạn ≥110M.</li>
+      <li><b>T10 đã vào FPTS 161.1M</b> → CP 47.4% (còn ~146M tới trần 50%). Sau khi khóa 400M vào sổ 9 tháng, quỹ DCA (ko kì hạn) chỉ còn 55.7M — DCA tiếp từ lương cuối tháng.</li>
     </ol>
     <div style="font-size:11px;color:#64748b;margin-top:8px">Kế hoạch (10-14): chi ~40M/tháng + khoản năm ~15M/tháng; thu đều ~77M (lương 66.9M + freelancer 10M). Chưa đủ 3 tháng data tốt → chưa tính trung bình/spike.</div>
   </div>
@@ -266,7 +266,6 @@ new Chart(document.getElementById('chartMoneyFlow'), {
     <table>
       <thead><tr><th>Hạn</th><th>Việc</th><th class="right">Số tiền (₫)</th><th>Ưu tiên</th></tr></thead>
       <tbody>
-        <tr><td>30 ngày</td><td>Thanh khoản tức thì 78.9M &lt; 110M — dừng DCA, nạp lại sổ ko kì hạn từ lương T11 trước khi DCA tiếp</td><td class="right">55,710,650</td><td><span class="badge warn">🟡</span></td></tr>
         <tr><td>27/07/2027</td><td>Khoản cho vay "C vay 9m" đến hạn (11.2%)</td><td class="right">400,000,000</td><td><span class="badge info">🟢</span></td></tr>
       </tbody>
     </table>
@@ -283,7 +282,7 @@ new Chart(document.getElementById('chartMoneyFlow'), {
         <tr><td>📈 Cổ phiếu/ETF/Fund</td><td class="right">47.4%</td><td>30–50%</td><td><span class="badge ok">✅</span></td></tr>
         <tr><td>🏦 Trái phiếu/Tiết kiệm</td><td class="right">20.8%</td><td>10–20%</td><td><span class="badge warn">⚠️ hơi cao (ko kì hạn chỉ 1.0%)</span></td></tr>
         <tr><td>🥇 Vàng</td><td class="right">12.9%</td><td>5–15%</td><td><span class="badge ok">✅</span></td></tr>
-        <tr><td>💵 Tiền mặt</td><td class="right">0.4% (1.4% gộp sổ ko kì hạn)</td><td>5–10%</td><td><span class="badge warn">⚠️ thấp</span></td></tr>
+        <tr><td>💵 Tiền mặt</td><td class="right">0.4% (1.4% gộp sổ ko kì hạn)</td><td>5–10%</td><td><span class="badge ok">✅ lương bù</span></td></tr>
       </tbody>
     </table>
     <div style="font-size:11px;color:#64748b;margin-top:10px">% tính trên tổng tài sản ĐẦU TƯ được (5,504,257,059₫) — đã loại "Nhà" (2.5B) khỏi base. Net Worth tổng vẫn bao gồm Nhà. Nguồn: reports/2026-10-27/0910-money-allocation.md § Finance Review.</div>

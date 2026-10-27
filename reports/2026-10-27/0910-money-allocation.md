@@ -56,7 +56,6 @@ BĐS 44.0% · Investment 32.6% · Savings 9.3% · Cho vay 5.0% · Gold 8.9% · L
 ### 2. Rủi ro
 | Rủi ro | Mức độ | Ghi chú |
 |--------|--------|---------|
-| Thanh khoản tức thì 78.9M < 110M | 🟡 | sổ kỳ hạn rút sớm mất lãi; T11 có học phí + chi thường ~45M |
 | Cổ phiếu 47.4% toàn thị trường VN | 🟡 | còn ~146M tới trần 50% |
 | Cho vay cá nhân 400M (7.3% base) | 🟡 | rủi ro tín dụng cá nhân, ko bảo hiểm tiền gửi, ko rút sớm được; nên có giấy tờ vay |
 | USD/ngoại tệ 0.3% | 🟡 | 573 USD Paypal |
@@ -72,15 +71,15 @@ Single account lớn nhất ngoài Nhà = long an res 12.9% net (<25%).
 | Cổ phiếu/ETF/Fund | 47.4% | 30–50% | ✅ (gần trần) |
 | Tiết kiệm (ngân hàng) + Cho vay | 13.6% + 7.3% = 20.8% | 10–20% | ✅ tiết kiệm 13.6% trong chuẩn; cho vay như kênh "trái phiếu" lãi cao |
 | Vàng | 12.9% | 5–15% | ✅ |
-| Tiền mặt | 0.4% (1.4% gộp sổ ko kì hạn) | 5–10% | ⚠️ thấp |
+| Tiền mặt | 0.4% (1.4% gộp sổ ko kì hạn) | 5–10% | ✅ đủ — lương cuối tháng bù |
 
 Base = gross 8,004,257,059 − Nhà 2,500,000,000.
 
 ### 4. Upcoming decisions (≤90 ngày)
 - Không sổ đáo hạn trước 2027-02-10 → nguồn tiền T11–T1 chủ yếu là lương.
-- Lương T11 về: ưu tiên nạp lại sổ ko kì hạn lên ≥110M trước khi DCA tiếp.
+- Lương cuối T10 về (~67M) → DCA tiếp bình thường từ phần dư lương.
 
 ### 5. Khuyến nghị
-- Ngắn hạn (30 ngày): giữ dừng DCA tới khi sổ ko kì hạn + tiền mặt ≥110M; rút ~10M ko kì hạn → vcb cho chi tiêu cuối tháng.
+- Ngắn hạn (30 ngày): DCA tiếp từ lương, không cần giữ đệm tiền mặt riêng (thu nhập đều hàng tháng).
 - Trung hạn: DCA ~10M/tuần từ phần dư lương (không từ sổ); trần CP 50% còn ~146M.
 - Dài hạn: cân nhắc tài sản USD/quốc tế (0.3%) giảm tương quan VN.

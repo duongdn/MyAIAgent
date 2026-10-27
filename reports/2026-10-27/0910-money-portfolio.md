@@ -60,5 +60,5 @@ Instantly accessible: 23.2M + sổ tikcop ko kì hạn 55.7M = **~78.9M** (giả
 
 ## Alerts
 - ✅ Không account nào >50% NW (Nhà 31.5%).
-- ⚠️ Liquidity tức thì 78.9M < 110M (3× chi tháng) sau khi khóa 400M vào sổ 9 tháng. Quỹ khẩn cấp (cash + sổ ngân hàng, ko tính khoản cho vay) 769M = 1.8x 420M (đủ), nhưng rút sổ kỳ hạn sớm = mất lãi.
+- ✅ Liquidity tức thì 78.9M — đủ, lương ~67M về cuối tháng (chi còn lại T10 ~3M). Quỹ khẩn cấp (cash + sổ ngân hàng, ko tính khoản cho vay) 769M = 1.8x 420M (đủ), nhưng rút sổ kỳ hạn sớm = mất lãi.
 - ✅ Debt 0.04% gross.
