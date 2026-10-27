@@ -69,7 +69,8 @@ async function reconcile() {
     const email = String(c.billing_details?.email || c.receipt_email || '').toLowerCase();
     const near = t => Math.abs(t.ts - c.created) <= MATCH_S;
     const spId = c.metadata.scheduledPaymentId;
-    const ok = spId ? tx.some(t => t.item === spItem[spId] && near(t)) : tx.some(t => t.email === email && near(t));
+    // a successful dunning retry deletes its scheduled payment row, so fall back to the member's email
+    const ok = (spItem[spId] && tx.some(t => t.item === spItem[spId] && near(t))) || tx.some(t => t.email === email && near(t));
     if (!ok) problems.push([c.id, new Date(c.created * 1000).toISOString(), `${(c.amount / 100).toFixed(2)} ${c.currency.toUpperCase()}`,
       email, c.metadata.membermouse_product || '', spId ? `rebill (scheduled payment ${spId}) not logged in MemberMouse` : 'payment not logged in MemberMouse']);
   }
