@@ -85,3 +85,15 @@ Also add these as a section in `/me:mpfc-monitor` (daily report) so they're revi
 | R3 | PayPal IPN silence | Low / high | ✅ Added to monitor (`paypal-ipn`) 2026-10-27 |
 | R4 | Fixer may double-queue a just-batched event | Very low | ✅ Detected by monitor (`double-job`); fixer unchanged |
 | R5 | MemberMouse update overwrites the custom `user_id` patch (commit 952a0156d) | Medium / medium | Monitor `owner` check already alerts. Note it in the MPFC plugin-update checklist |
+
+## 5. Stripe ↔ MemberMouse reconciliation (2026-10-27)
+Implemented `scripts/mpfc-stripe-reconcile.js`. It runs on the mpfc server only, uses the MM Stripe key in-process, makes GET calls only, runs daily in the billing monitor (check `stripe-unlogged`), and has a `--days N` backfill.
+Backfill of 90 days: 352 succeeded MemberMouse charges, **2 paid but not recorded, so the customer has no access**:
+
+| Stripe charge | Date (UTC) | Amount | Email | Product | Finding |
+|---|---|---|---|---|---|
+| ch_3UKJziIf7uao2WA20h9efdcu | 2026-09-27 15:29 | £39.99 | merdy45@gmail.com | In-App Purchase - DMB 12-16 | No WP user with this email, no order/transaction. Similar accounts (Merdy.finessesport@, merdyk@eastsideperformance) have only the membership bundle, not DMB 12-16 |
+| ch_3UK1OSIf7uao2WA22yZcVmuE | 2026-09-26 19:36 | £39.00 | stukelly80@hotmail.com | Developing the Game Changer Masterclass | User 43481 exists, but no Masterclass order, transaction or bundle (only a 2022 Level 1 bundle). Masterclass has sold normally since 2026-05-25 (193 orders), so this is a single failed order creation |
+
+Recovery options (need decision; no action taken): grant access/create order manually, or refund in Stripe. Either way, contact the customer (via Saul).
+First-run false positives fixed: a successful dunning retry deletes its scheduled-payment row, so matching falls back to the member's email.
