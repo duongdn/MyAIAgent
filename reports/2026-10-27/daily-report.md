@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-27 (Tuesday)
 
-**Run:** 2026-10-27T05:00+07:00 → 05:40 (cron, mpfc server)
+**Run:** 2026-10-27T05:00+07:00 → 05:40 (cron, mpfc server), corrected 08:45 (+07:00) (recheck)
 **Window:** 2026-10-26 08:40 → 2026-10-27 05:00 (+07:00). Task-log date: **Mon 2026-10-26**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:00: no upcoming approved leave. Resource Arrangement (Matrix) for 10-26: MinhTC sick, TienND sick, TrungDT sick, KietNHT off AM, VuTQ off AM. Coming up: ThanhVM off 10-27, LamLQ off 10-29/30, KhangNHH off PM 10-30. Company holiday Tue 24/11 (Vietnamese Culture Day).
 
@@ -10,12 +10,12 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | Fountain prod (Rollbar + NR) | 🔴 **`LoadError: Could not open library 'vips.so.42'` ×190** on FountainGifts **production** (Rollbar #393, first seen Mon 20:55 VN, hit 100+ occurrences within minutes). `ActiveStorage::AnalyzeJob` ran 450× in the window, so image processing on prod is likely broken. This came right after Mon's release went live (#782/#941, Rick "Pushed to LIVE" 15:21; ViTHT also moved 382 BE + 390 FE file changes to BETA). libvips is probably missing on the prod host. Also new: #390 NoMethodError (16:45), #391 Template::Error no route `admin/product_catalogs#edit` id nil (20:38), and `import_csv` at 190.7s. ([Rollbar](https://rollbar.com) · [NR](https://one.newrelic.com)). Fountain ○ |
+| 1 | Fountain prod (Rollbar + NR) | 🔴 **`LoadError: Could not open library 'vips.so.42'` ×190** on FountainGifts **production** (Rollbar #393, first seen Mon 20:55 VN, hit 100+ occurrences within minutes). `ActiveStorage::AnalyzeJob` ran 450× in the window, so image processing on prod is likely broken. This came right after Mon's release went live (#782/#941, Rick "Pushed to LIVE" 15:21; ViTHT also moved 382 BE + 390 FE file changes to BETA). libvips is probably missing on the prod host. Also new: #390 NoMethodError (16:45), #391 Template::Error no route `admin/product_catalogs#edit` id nil (20:38), and `import_csv` at 190.7s. ([Rollbar](https://rollbar.com) · [NR](https://one.newrelic.com)). Fountain ○. (08:40 NR: **0 errors since 05:00**, vips error not recurring so far; AnalyzeJob ran 1× at 23.2s. Kunal ask still open.) |
 | 2 | Fountain (Trello + email) | Kunal 20:24 on [Gift emails card](https://trello.com/c/EOllFmAz): "#773 went live with today's release, so all of this can happen now, steps 1 to 8. **Ideally this week** so the gift emails warm up before November". No reply yet (overnight, <24h). Kunal's email cuts QC hours; TrinhMTT replied 17:18 ("the reduction in QC hours is a little sudden for us…"). New site goes live **today 10-27**. Kunal travels to India 10-29 → 11-11. |
-| 3 | Slack GGS (Bailey) | Go-live done Mon (domain switch done in the morning, new mobile build sent 13:40, Nick daily report 17:21 ✅). Joey then reported **live issues 1–4**: PO price wrong after split, order cancelled→shipped by itself, quantity edits not updating movement stock, and intermittent server errors when moving products/pallets. 17:52: "**quite major issues with suppliers page calculation**… wrong price". Amy/Nick replied "Checking" and Nick scaled Resque to 8 workers. **Unanswered:** Joey 16:04 + 18:25 in [#strainrite-duplication](https://globalgrazingservices.slack.com/archives/C0338NXK3SB) (resend the estimate; how long to copy his brother's PrestaShop onto the StrainRite console). Bailey ○ |
+| 3 | Slack GGS (Bailey) | Go-live done Mon (domain switch done in the morning, new mobile build sent 13:40, Nick daily report 17:21 ✅). Joey then reported **live issues 1–4**: PO price wrong after split, order cancelled→shipped by itself, quantity edits not updating movement stock, and intermittent server errors when moving products/pallets. (08:40 recheck: no new GGS messages since 05:00, Joey's 16:04/18:25 asks still unanswered.) 17:52: "**quite major issues with suppliers page calculation**… wrong price". Amy/Nick replied "Checking" and Nick scaled Resque to 8 workers. **Unanswered:** Joey 16:04 + 18:25 in [#strainrite-duplication](https://globalgrazingservices.slack.com/archives/C0338NXK3SB) (resend the estimate; how long to copy his brother's PrestaShop onto the StrainRite console). Bailey ○ |
 | 4 | MPFC (billing monitor + NR + Rollbar) | 🔴 Our own `[MPFC] ALERT billing integrity: 1 issue(s)` (Mon 14:42 VN): **35 failed rebills not retried by dunning for 30+ days, so those members keep access unbilled** (e.g. 14735/11348 since 2025-07-17). New Rollbar **#75 ParseError: syntax error, unexpected variable "$ok"** (Mon 15:38 VN, env unknown) and NR `E_COMPILE_ERROR` curly-brace offset ×1. NR apdex **0.38** (chronic poor). `Undefined array key "HTTP_HOST"` still dominant (664). The billing-monitor TEST alerts (×3 Slack, ×2 email) are setup noise ([Rollbar](https://rollbar.com) · [NR](https://one.newrelic.com)). MPFC ○ |
-| 5 | OhCleo (Slack + Workstream) | Celine Mon 19:33 VN: "**I noticed, all audios looks like this when you click on them**" (screenshot, [DM](https://ohcleo.slack.com/archives/D0B6846UN8K)). No reply visible in the DM (the script skips threads). LongVV in Matrix 19:57 asked LuHX to check tomorrow, so the team knows. Workstream **needs review: LuHX — Paywall screen redesign (1:30, 10-26) — reviewer(s): DuongDN, MinhTV (OhCleo)**. Ohcleo ○ |
-| 6 | Neural Contract | [Upwork room](https://www.upwork.com/ab/messages/) not readable at 05:00 (company PC/cookie vault only available from 08:00). Matrix shows TuanNT updated the 500/501/404 error pages and replied to the customer 13:44, and DuongDN added the explanation on the document-upload workaround (no sudo, so app.php is hardcoded for now). Customer reply not verified yet. Neural ○ (re-run after 08:00) |
+| 5 | OhCleo (Slack + Workstream) | (08:40 recheck incl. thread replies: **still no reply**.) Celine Mon 19:33 VN: "**I noticed, all audios looks like this when you click on them**" (screenshot, [DM](https://ohcleo.slack.com/archives/D0B6846UN8K)). No reply visible in the DM (the script skips threads). LongVV in Matrix 19:57 asked LuHX to check tomorrow, so the team knows. Workstream **needs review: LuHX — Paywall screen redesign (1:30, 10-26) — reviewer(s): DuongDN, MinhTV (OhCleo)**. Ohcleo ○ |
+| 6 | Neural Contract | ~~[Upwork room](https://www.upwork.com/ab/messages/) not readable at 05:00 (company PC/cookie vault only available from 08:00). Matrix shows TuanNT updated the 500/501/404 error pages and replied to the customer 13:44, and DuongDN added the explanation on the document-upload workaround (no sudo, so app.php is hardcoded for now). Customer reply not verified yet. Neural ○ (re-run after 08:00)~~ ✅ **08:40 resolved:** Upwork room read live. Last customer msg 06:33 VN today: "i have lodged a support ticket with Help to restart the contract" (statement, no question for us). Our 14:31 VN reply on the error pages stands. Neural ✓ |
 
 **Today (Oct 27):** ThanhVM off. Fountain new site goes live. ✅ Resolved since last report: Maddy PR #534 removed by Kai + LIFM2-473 estimate sent. Aysar "platform repo" ask handled (Carrick shipped the Node 22.23.4 upgrade, PR #751). Neural customer answered (13:44). Rick answered Kunal's release ("Pushed to LIVE" 15:21) and test.infinityroses.com ("All set", 14:56). Chris Coyne confirmed the Railway rotation and Tommy is testing R1 on staging.
 
@@ -25,18 +25,18 @@
 
 | Account | Emails | Alerts | Calendar today |
 |---------|--------|--------|----------------|
-| duongdn@ | 6 | HR: performance evaluations due for ThuongNL / ThanhNX / **LongVV** (deadline 17:30 Fri 10-30). OA: holiday Tue 24/11. Football club sponsorship | not run |
-| carrick@ | 2 | ClickUp Swift "T&Cs + Forms". Cloudflare: **upgrade Cloudflare Tunnel to ≥2026.10.2** (action required) | not run |
-| nick@ | 0 | — | not run |
-| rick@ | 31 | 🔴 FountainGifts prod Rollbar #390/#391/**#393 vips LoadError 100+** (Alert #1). TrinhMTT reply to Kunal on QC hours (Alert #2). FountainStaging BugSnag + InfinityStagingBE #126/#127 (staging only). Rollbar FirstProject (not ours) | not run |
-| kai@ | 5 | Atlassian "Verifying it's you" + **4× "Your new API token"** Mon 09:02–09:24 VN. Probably our own token rotation (Bitbucket/JIRA check works), but verify | not run |
-| ken@ | 80 | GitHub welligence/mimaizumi only. Nothing for nusken | not run |
+| duongdn@ | 6 | HR: performance evaluations due for ThuongNL / ThanhNX / **LongVV** (deadline 17:30 Fri 10-30). OA: holiday Tue 24/11. Football club sponsorship | no events |
+| carrick@ | 2 | ClickUp Swift "T&Cs + Forms". Cloudflare: **upgrade Cloudflare Tunnel to ≥2026.10.2** (action required) | no events |
+| nick@ | 0 | — | no events |
+| rick@ | 31 | 🔴 FountainGifts prod Rollbar #390/#391/**#393 vips LoadError 100+** (Alert #1). TrinhMTT reply to Kunal on QC hours (Alert #2). FountainStaging BugSnag + InfinityStagingBE #126/#127 (staging only). Rollbar FirstProject (not ours) | 10:30 OmniGPT Daily Sync · 11:00 + 12:30 HEAL Meeting |
+| kai@ | 5 | Atlassian "Verifying it's you" + **4× "Your new API token"** Mon 09:02–09:24 VN. Probably our own token rotation (Bitbucket/JIRA check works), but verify | no events |
+| ken@ | 80 | GitHub welligence/mimaizumi only. Nothing for nusken | 08:30 DE - Daily Standup (Teams) |
 | vuongtrancr@gmail.com | 80 | Swish paused (New Relic Signal lost, Delayed-newform #349–352 counted only). Mirko Bitbucket pushes (info) | — |
 | dnduongus@gmail.com | 18 | No breach alerts. AWS Free Tier >85% usage (acct 357066053630). Bank/shop/newsletters | — |
 | davidztv19@gmail.com | 0 | — | — |
 | freelancer@mpfc | 31 | 🔴 Billing integrity alert (Alert #4). Rollbar #75 ParseError. DigitalOcean **MySQL 8.0 End of Life** notice. iOS 4.3.24 TestFlight. "Stale stuck rebills" repeats | — |
 
-Calendar: `fetch-zoho-calendar.js` not run this pass.
+Calendar: ~~not run this pass~~ fetched 08:35 recheck.
 Trello: Check mail 6/6 ✓, [card](https://trello.com/c/C2UIwIX7) done.
 
 ---
@@ -159,10 +159,10 @@ Trello: Elena - WordPress SamGuard ✓
 
 ## Trello — Check progress — 05:35 (+07:00)
 
-**17/22 complete** (live 05:35). [Card](https://trello.com/c/0yqnYznV)
+~~17/22~~ **18/22 complete** (live 08:43). [Card](https://trello.com/c/0yqnYznV)
 - ✓ Maddy · James Diamond · Rory · Aysar · Franc · Marcel · Raymond · Andrew Taraba · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ⚠️ MPFC: skipped (Alert #4)
-- ⚠️ Neural Contract: skipped (Alert #6, Upwork re-run after 08:00)
+- ~~⚠️ Neural Contract: skipped~~ ✓ completed 08:43 (Upwork read, no open ask)
 - ⚠️ Bailey: skipped (Alert #3)
 - ⚠️ Fountain - DOCUMENT: skipped (Alerts #1, #2)
 - ⚠️ Ohcleo: skipped (Alert #5)
@@ -259,10 +259,12 @@ Trello: Arthur - Meta-Stamp ✓
 ## Upwork / Upwork Memo — 2026-10-26 — 05:30 (+07:00)
 | Workroom | Memos (Mon 10-26) | Invalid | Details |
 |----------|-------------------|---------|---------|
-| Neural (messages) | n/a | n/a | Cookie-vault session redirected to login 4/4 (the company PC is only on from 08:00, same as yesterday). Re-run after 08:00 |
-| Rory / Aysar | — | — | not run (same session dependency). Re-run after 08:00 |
+| Neural (messages) | n/a | n/a | ~~not readable 05:00~~ read 08:40 ✅ (see Alert #6) |
+| Rory (LeNH) | 3 | 0 | ✅ all valid (08:42) |
+| Aysar (KhanhHH) | 1 | 0 | ✅ "Upgrade platform Node.js to 22.23.4 to address security vulnerabilities" |
+| Tokenlite (Marcel) | — | — | live-cookie login failed (known, carrick Profile 1 Tokenlite session). No memo status claimed |
 
-No memo status claimed.
+No invalid memos.
 
 ---
 
@@ -271,6 +273,6 @@ No memo status claimed.
 - Bailey: who sends Joey the StrainRite duplication estimate and answers the "copy brother's PrestaShop" question? Status of live issues 1–4 + supplier price calculation?
 - MPFC: 35 failed rebills not retried for 30+ days. Who decides (retry / revoke access)? Where does Rollbar #75 ParseError `$ok` come from (new billing-monitor script?)? DigitalOcean MySQL 8.0 EOL plan?
 - OhCleo: reply to Celine's audio-click issue. DuongDN/MinhTV review LuHX's Pending 1.5h.
-- After 08:00: re-run Neural Upwork + Upwork memos (Rory/Aysar). After 10:00: re-check Mon task logs (PhucVT/TuanNT/KhanhHH/ViTHT).
+- After 10:00: re-check Mon task logs (PhucVT/TuanNT/KhanhHH/ViTHT).
 - kai@: confirm the 4 new Atlassian API tokens (Mon 09:02–09:24) were created by us.
 - carrick@: Cloudflare Tunnel upgrade to ≥2026.10.2 (which tunnel/server?).
