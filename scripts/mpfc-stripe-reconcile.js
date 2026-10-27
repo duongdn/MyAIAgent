@@ -12,6 +12,7 @@
  * Output (stdout): JSON array of problem rows [chargeId, createdUtc, amount, email, product, reason]
  *   node scripts/mpfc-stripe-reconcile.js           (cached daily)
  *   node scripts/mpfc-stripe-reconcile.js --fresh   (ignore cache)
+ *   node scripts/mpfc-stripe-reconcile.js --days 60 (one-off backfill, not cached)
  */
 const fs = require('fs');
 const path = require('path');
@@ -20,7 +21,8 @@ const { execFileSync } = require('child_process');
 
 const WP = ['--path=/var/www/mypersonalfootballcoach.com', '--skip-plugins', '--skip-themes'];
 const CACHE = path.join(__dirname, '..', 'data', 'mpfc-stripe-reconcile.json');
-const WINDOW_S = 3 * 86400, SETTLE_S = 1800, MATCH_S = 2 * 3600;
+const DAYS_ARG = process.argv.indexOf('--days');
+const WINDOW_S = (DAYS_ARG > 0 ? Number(process.argv[DAYS_ARG + 1]) : 3) * 86400, SETTLE_S = 1800, MATCH_S = 2 * 3600;
 
 const sql = (q) => execFileSync('wp', [...WP, 'db', 'query', '--skip-column-names'], { input: q, encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] })
   .split('\n').filter(Boolean).map(l => l.split('\t'));
@@ -80,6 +82,7 @@ async function reconcile() {
 (async () => {
   let cache = null;
   try { cache = JSON.parse(fs.readFileSync(CACHE, 'utf8')); } catch {}
+  if (DAYS_ARG > 0) { const r = await reconcile(); process.stdout.write(JSON.stringify({ charges: r.charges, problems: r.problems })); return; }
   if (process.argv.includes('--fresh') || !cache || Date.now() / 1000 - cache.checkedAt > 86400) {
     cache = await reconcile();
     fs.mkdirSync(path.dirname(CACHE), { recursive: true });
