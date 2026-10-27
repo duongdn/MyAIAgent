@@ -135,3 +135,9 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - Reason: ~0.4s/request agent overhead on PHP 8.3 (uncached page 1.4s off vs 1.85–2.6s on).
 - Re-enable: delete both files, `systemctl reload apache2`.
 - Measure from now with `apache_logs` (%D µs) — compare 10-27 vs 10-24/25 same hours (exclude 171.251.232.148 dev tests + 404).
+
+### 2026-10-27 — New Relic overhead A/B (agent 12.12 / PHP 8.3)
+- State now: apache2 NR enabled at startup (off-ini parked in `/root/upgrade/99-mpfc-newrelic-off.apache2.ini.parked`), but `conf-enabled/mpfc-nr-bench.conf` sets `newrelic.enabled 0` per request unless header `X-NR-Bench` (full/nohooks/seg/lite/detail0/nofw/min). CLI still off.
+- NOTE: `newrelic.enabled=0` at PHP startup = agent never initialises → per-request enable impossible. Sampling only works as "enabled at startup, php_value 0 per request".
+- Web A/B /our-courses/ (12 runs, interleaved): off 1.12–1.20s | full 1.61–1.69 | nohooks 1.45–1.51 | lite 1.48–1.55 | detail0 1.62 | no_framework 1.53 | min (all optional features off) 1.50.
+- CLI render bench (/opt/nrbench): none 1.94–2.02 | 12.12 2.45–2.51 | 11.10 2.47–2.65 | 10.22 2.57–2.78 → older agents no better; overhead intrinsic (per-function-call instrumentation × WP+~60 plugins).
