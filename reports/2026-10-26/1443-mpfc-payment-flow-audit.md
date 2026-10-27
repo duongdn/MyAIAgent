@@ -63,3 +63,25 @@ Also add these as a section in `/me:mpfc-monitor` (daily report) so they're revi
 3. Monitor: OK to build it on our side (My-AI-Agent cron, read-only), with alert channel = email + WhatsApp to you?
 4. Is a Stripe API key available to us read-only (restricted key) for reconciliation, or should we read it from the MM settings?
 5. Send Saul the result of the 8-member charge (3 OK / 5 declined)?
+
+## 4. Re-review 2026-10-27 11:00 (read-only)
+| Area | Result | Verdict |
+|---|---|---|
+| Billing monitor | server 78 runs, PC 18 runs, 0 alerts, state empty, dedupe OK | ✅ |
+| Rebills | 10-24: 4, 10-25: 5, 10-26: 6 (normal ~4-6/day); fixer heartbeat current | ✅ |
+| Jobs per event since 10-23 | 18 events have 2 jobs: 10-23 decline + 10-25 dunning retry (2nd fail = 16). The job skips events already processing/processed, and the Stripe idempotency key is per event | ✅ Normal dunning |
+| Dunning-stage stuck since fix | 0 | ✅ |
+| `user_id=0` on new schedules since 10-23 | 0, but there have been 0 new trials, so the fix is **not yet proven on a real trial** | 🟡 Watch (monitor `owner` check covers it) |
+| Charged 10-26 members | next payment scheduled 26/11 with the correct user | ✅ |
+| DB timezone | UTC = UTC_TIMESTAMP, so the NOW() comparisons are correct | ✅ |
+| PayPal IPN | arrives daily, 15/15 `subscr_payment` IPNs (14d) have a matching transaction | ✅ |
+| Correction (1b) | PayPal orders always have order status 0, so "status 0 = abandoned" was the wrong reason. Corrected reason: items 25860/26937/27250 only have the "Order created" row, never an IPN, and no Coach access | ✅ Still a false alarm |
+
+### Potential risks (not bugs today), proposals only
+| # | Risk | Likelihood / impact | Proposal |
+|---|---|---|---|
+| R1 | Stripe charges OK, but MM records a failure (gateway timeout). The dunning retry runs 2+ days later, after the 24h Stripe idempotency key has expired, so it makes a **real 2nd charge** | Low / high | Only visible on the Stripe side: daily Stripe↔`mm_transaction_log` reconciliation in the monitor (needs a read-only restricted Stripe key) |
+| R2 | Monitor gap: retries stuck at the dunning stage (`batch_id` set, billing_status 2-4) are not checked | Low (0 since fix) / medium | Add monitor check, only for events processed after 2026-10-23 (legacy 35 excluded) |
+| R3 | Monitor gap: PayPal IPN stops (firewall/Cloudflare/server move), so payments and cancellations are not recorded | Low / high | Monitor check: no IPN for 4+ days (normal max gap 2 days) |
+| R4 | Fixer has no age condition on the batch: it can grab an event MM just batched (seconds old) and add a 2nd job | Very low / none (job status guard + idempotency key) | Optional: `scheduled_date < NOW() - INTERVAL 30 MINUTE` in the fixer (live payment code, needs approval) |
+| R5 | MemberMouse update overwrites the custom `user_id` patch (commit 952a0156d) | Medium / medium | Monitor `owner` check already alerts. Note it in the MPFC plugin-update checklist |
