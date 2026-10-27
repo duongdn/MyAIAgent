@@ -11,8 +11,8 @@ function perf_db(array $cfg): PDO {
 		$cfg['user'], $cfg['pass'], [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false ] );
 }
 
-/** Rows (UTC) newer than $since from the live table + any daily clone that may overlap. */
-function perf_fetch_rows(PDO $db, int $since): array {
+/** Unbuffered row stream (UTC) newer than $since from the live table + any daily clone that may overlap. */
+function perf_fetch_rows(PDO $db, int $since): PDOStatement {
 	$tables = [ 'apache_logs' ];
 	foreach ( $db->query( "SHOW TABLES LIKE 'apache_logs_clone_%'" )->fetchAll( PDO::FETCH_COLUMN ) as $t ) {
 		// clone_YYYYMMDD is created at 00:00 UTC that day and holds the previous day's rows
@@ -24,7 +24,9 @@ function perf_fetch_rows(PDO $db, int $since): array {
 		"SELECT UNIX_TIMESTAMP(datetime) ts, ip, url_requested u, status s, time_in_milisecond us, user_agent ua
 		 FROM `$t` WHERE datetime >= '$from'", $tables ) );
 	$db->exec( "SET time_zone = '+00:00'" ); // datetime column is UTC
-	return $db->query( $sql )->fetchAll( PDO::FETCH_ASSOC );
+	// stream rows: 3d/7d ranges are 100k-500k rows, too big to buffer under the 128M web memory_limit
+	$db->setAttribute( PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false );
+	return $db->query( $sql, PDO::FETCH_ASSOC );
 }
 
 /** "GET /a/123/?x=1 HTTP/1.1" -> [method, normalized route, kind] */
@@ -61,10 +63,12 @@ function perf_summary(array $secs): array {
 }
 
 /** Filter + aggregate everything the page shows. */
-function perf_aggregate(array $rows, array $opt): array {
+function perf_aggregate(iterable $rows, array $opt): array {
 	$bucket = $opt['bucket'];
 	$all = $series = $groups = $ips = $slow = $status = [];
+	$scanned = 0;
 	foreach ( $rows as $r ) {
+		$scanned++;
 		if ( in_array( $r['ip'], $opt['exclude_ips'], true ) ) continue;
 		[ $m, $route, $kind ] = perf_route( (string) $r['u'], (int) $r['s'] );
 		if ( $opt['kinds'] && ! in_array( $kind, $opt['kinds'], true ) ) continue;
@@ -76,7 +80,13 @@ function perf_aggregate(array $rows, array $opt): array {
 		$groups["$m $route"]['kind'] = $kind;
 		$ips[ $r['ip'] ] = ( $ips[ $r['ip'] ] ?? 0 ) + $sec;
 		$status[ intdiv( (int) $r['s'], 100 ) . 'xx' ] = ( $status[ intdiv( (int) $r['s'], 100 ) . 'xx' ] ?? 0 ) + 1;
-		if ( $sec >= $opt['slow'] ) $slow[] = $r + [ 'sec' => $sec, 'kind' => $kind ];
+		if ( $sec >= $opt['slow'] ) {
+			$slow[] = $r + [ 'sec' => $sec, 'kind' => $kind ];
+			if ( count( $slow ) > 2000 ) { // keep memory bounded: retain only the slowest
+				usort( $slow, fn( $a, $b ) => $b['sec'] <=> $a['sec'] );
+				$slow = array_slice( $slow, 0, 100 );
+			}
+		}
 	}
 	ksort( $series );
 	$series = array_map( 'perf_summary', $series );
@@ -87,5 +97,5 @@ function perf_aggregate(array $rows, array $opt): array {
 	ksort( $status );
 	$sum = perf_summary( $all );
 	$sum['slow_n'] = count( array_filter( $all, fn( $s ) => $s >= $opt['slow'] ) );
-	return compact( 'sum', 'series', 'groups', 'status' ) + [ 'slow' => array_slice( $slow, 0, 100 ), 'ips' => array_slice( $ips, 0, 15, true ) ];
+	return compact( 'sum', 'series', 'groups', 'status', 'scanned' ) + [ 'slow' => array_slice( $slow, 0, 100 ), 'ips' => array_slice( $ips, 0, 15, true ) ];
 }
