@@ -23,6 +23,11 @@ const GATE_LOG = path.join(__dirname, '..', '..', '..', 'tmp', 'assistant-gate.l
 const URGENT_REPEAT_MS = 6 * 3600e3;
 const lastUrgent = new Map();
 
+function where(e) {
+  if (e.source === 'email') return `→ ${e.account || '?'}`;
+  if (e.source === 'slack' || e.source === 'discord') return [e.account, e.channel].filter(Boolean).join(' · ');
+  return e.channel || e.account || '';
+}
 function muteKey(e) { return `${e.source}:${e.account || ''}:${e.channel || ''}`; }
 function log(tag, e, why) {
   fs.appendFile(GATE_LOG, `${new Date().toISOString()} ${tag.padEnd(6)} [${muteKey(e)}] ${e.sender}: ${(e.text || '').slice(0, 100).replace(/\n/g, ' ')} | ${why}\n`, () => {});
@@ -32,7 +37,7 @@ async function notify(e, v, prefix = '') {
   const id = db.addEvent(e);
   if (!id) return;
   if (policy.load().dryRun) return db.setStatus(id, 'dryrun'); // inbox only, no Telegram/popup
-  const head = `${URG[v.urgency] || ''} ${prefix}${ICON[e.source] || e.source} · ${e.channel || e.account || ''}`;
+  const head = `${URG[v.urgency] || ''} ${prefix}${ICON[e.source] || e.source} · ${where(e)}`;
   const body = `${head}\n${v.summary ? '📝 ' + v.summary + '\n' : ''}👤 ${e.sender || '?'}\n\n${(e.text || '').slice(0, 1200)}${e.url ? '\n\n🔗 ' + e.url : ''}`;
   try {
     await sendToOwner(body, [[

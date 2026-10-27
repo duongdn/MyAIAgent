@@ -41,6 +41,12 @@
   <div id="view"></div>
 </div>
 <script>
+// Where it arrived: email → receiving mailbox; slack/discord → workspace · channel; others → room/chat.
+function where(e) {
+  if (e.source === 'email') return '→ ' + (e.account || '?');
+  if (e.source === 'slack' || e.source === 'discord') return [e.account, e.channel].filter(Boolean).join(' · ');
+  return e.channel || e.account || '';
+}
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmt = iso => new Date(iso).toLocaleString('vi-VN', { hour12: false });
@@ -55,7 +61,7 @@ async function loadInbox() {
   if (!events.length) return $('#view').innerHTML = '<div class="empty">Chưa có tin nào được đánh giá là quan trọng.</div>';
   $('#view').innerHTML = events.map(e => `
     <div class="card ${e.status === 'seen' ? 'seen' : ''}">
-      <div class="meta"><b>${esc(e.source)}</b><span>${esc(e.channel || e.account)}</span><span>👤 ${esc(e.sender)}</span><span>${fmt(e.ts_utc)}</span><span>${esc(e.status)}</span></div>
+      <div class="meta"><b>${esc(e.source)}</b><span>📍 ${esc(where(e))}</span><span>👤 ${esc(e.sender)}</span><span>${fmt(e.ts_utc)}</span><span>${esc(e.status)}</span></div>
       <div class="text">${esc(e.text)}</div>
       <div class="actions">
         ${e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener">🔗 Mở</a>` : ''}
