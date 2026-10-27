@@ -141,3 +141,12 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 - NOTE: `newrelic.enabled=0` at PHP startup = agent never initialises → per-request enable impossible. Sampling only works as "enabled at startup, php_value 0 per request".
 - Web A/B /our-courses/ (12 runs, interleaved): off 1.12–1.20s | full 1.61–1.69 | nohooks 1.45–1.51 | lite 1.48–1.55 | detail0 1.62 | no_framework 1.53 | min (all optional features off) 1.50.
 - CLI render bench (/opt/nrbench): none 1.94–2.02 | 12.12 2.45–2.51 | 11.10 2.47–2.65 | 10.22 2.57–2.78 → older agents no better; overhead intrinsic (per-function-call instrumentation × WP+~60 plugins).
+
+### 2026-10-27 — New Relic OFF for good; perf dashboard replaces it
+- NR: `99-mpfc-newrelic-off.ini` back in apache2 + cli; bench conf removed (`/root/upgrade/mpfc-nr-bench.conf.disabled`); daemon stopped.
+- Dashboard: https://admin.mypersonalfootballcoach.com/perf/ (same basic auth as admin vhost, user `mpfc`).
+  - Code: `plans/mpfc-upgrade/perf-dashboard/` → server `/var/www/mpfc-perf/`; DB creds `/etc/mpfc-perf/config.php` (read-only DB user `perf_ro`, SELECT on apache_logs.*).
+  - admin vhost: `ProxyPass /perf !` + `Alias /perf` (backup `/root/upgrade/admin-le-ssl.conf.bak-20261027`).
+  - Shows KPIs, avg/p95/throughput chart, transactions by total time (routes normalized, `?json=` endpoints kept), slow requests list, top IPs. Ranges 1h–7d; default excludes dev IP 171.251.232.148.
+- apache_logs: added `idx_datetime` on live table (clones inherit via CREATE TABLE LIKE) + clones 1024–1027. `apache_logs_clone_20261024` holds 8.4M rows (2026-05-20 → 10-24, old server clone cron stalled).
+- Load time: 24h 0.8s, 3d 2.1s, 7d 12s (PHP aggregation of ~430k rows).
