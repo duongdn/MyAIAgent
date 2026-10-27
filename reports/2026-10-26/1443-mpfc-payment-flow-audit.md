@@ -81,7 +81,7 @@ Also add these as a section in `/me:mpfc-monitor` (daily report) so they're revi
 | # | Risk | Likelihood / impact | Proposal |
 |---|---|---|---|
 | R1 | Stripe charges OK, but MM records a failure (gateway timeout). The dunning retry runs 2+ days later, after the 24h Stripe idempotency key has expired, so it makes a **real 2nd charge** | Low / high | Only visible on the Stripe side: daily Stripe↔`mm_transaction_log` reconciliation in the monitor (needs a read-only restricted Stripe key) |
-| R2 | Monitor gap: retries stuck at the dunning stage (`batch_id` set, billing_status 2-4) are not checked | Low (0 since fix) / medium | Add monitor check, only for events processed after 2026-10-23 (legacy 35 excluded) |
-| R3 | Monitor gap: PayPal IPN stops (firewall/Cloudflare/server move), so payments and cancellations are not recorded | Low / high | Monitor check: no IPN for 4+ days (normal max gap 2 days) |
-| R4 | Fixer has no age condition on the batch: it can grab an event MM just batched (seconds old) and add a 2nd job | Very low / none (job status guard + idempotency key) | Optional: `scheduled_date < NOW() - INTERVAL 30 MINUTE` in the fixer (live payment code, needs approval) |
+| R2 | Retry stuck at dunning stage | Low | ✅ Added to monitor (`dunning-stuck`) 2026-10-27 |
+| R3 | PayPal IPN silence | Low / high | ✅ Added to monitor (`paypal-ipn`) 2026-10-27 |
+| R4 | Fixer may double-queue a just-batched event | Very low | ✅ Detected by monitor (`double-job`); fixer unchanged |
 | R5 | MemberMouse update overwrites the custom `user_id` patch (commit 952a0156d) | Medium / medium | Monitor `owner` check already alerts. Note it in the MPFC plugin-update checklist |

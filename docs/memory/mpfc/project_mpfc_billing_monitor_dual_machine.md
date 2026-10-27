@@ -15,3 +15,4 @@ Script `scripts/mpfc-billing-monitor.js` was built 2026-10-26. Checks live in `s
 **Why:** the client must never find a billing problem before we do (2026-10-23 £1.2k catch-up incident).
 **How to apply:** checks are tuned to skip the audit's false alarms (dunning-state events, manual catch-ups, admin comps). Do not add checks that flag those. See [[mpfc-missed-rebills-caught-up-after-server-move]], [[mpfc-payment-changes-report-only-no-fix]].
 - WhatsApp channel is PENDING (2026-10-26): user will discuss it with Saul first. Do not configure `whatsappChat` until the user says so.
+- 2026-10-27: added checks `dunning-stuck` (only events processed after 2026-10-23), `double-job` (2 jobs for one event within 60 min), `paypal-ipn` (no IPN for 4+ days). Stripe reconciliation (R1) is pending a read-only restricted Stripe key.
