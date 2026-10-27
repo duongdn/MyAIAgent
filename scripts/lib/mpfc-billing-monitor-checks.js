@@ -78,6 +78,28 @@ const CHECKS = [
       WHERE a.transaction_type=3 AND a.is_test=0 AND b.transaction_date >= NOW() - INTERVAL 2 DAY;`,
   },
   {
+    key: 'dunning-stuck', title: 'Declined-payment retry stuck',
+    why: 'A dunning retry (after a decline) was batched but never processed, so retries 2/3 and the final auto-cancel never run. Only events processed after the 2026-10-23 fix are checked (35 legacy ones are known and harmless).',
+    sql: `SELECT se.id, sp.order_item_id, sp.billing_status, se.processed_date FROM mm_scheduled_events se JOIN mm_scheduled_payments sp ON sp.id=se.id
+      WHERE se.event_type=1 AND se.status=0 AND sp.billing_status IN (2,3,4) AND se.batch_id IS NOT NULL AND se.batch_id<>''
+        AND se.processed_date > '2026-10-23 04:00' AND se.processed_date < NOW() - INTERVAL 1 DAY
+        AND NOT EXISTS (SELECT 1 FROM mm_scheduled_payment_job_links l JOIN wp_mm_jobs j ON j.id=l.job_id WHERE l.scheduled_payment_id=se.id);`,
+  },
+  {
+    key: 'double-job', title: 'Same rebill queued twice within 1 hour',
+    why: 'Two charge jobs for one event within an hour (fixer racing the normal billing sweep). The job status guard + Stripe idempotency should prevent a double charge, but check the member was charged once.',
+    sql: `SELECT l.scheduled_payment_id, COUNT(*), MIN(j.created_at), MAX(j.created_at) FROM mm_scheduled_payment_job_links l
+      JOIN (SELECT id, created_at FROM wp_mm_jobs UNION ALL SELECT id, created_at FROM wp_mm_completed_jobs) j ON j.id=l.job_id
+      WHERE j.created_at > UTC_TIMESTAMP() - INTERVAL 2 DAY
+      GROUP BY l.scheduled_payment_id HAVING COUNT(*) > 1 AND TIMESTAMPDIFF(MINUTE, MIN(j.created_at), MAX(j.created_at)) < 60;`,
+  },
+  {
+    key: 'paypal-ipn', title: 'No PayPal IPN for 4+ days',
+    why: 'PayPal subscriptions are recorded only through IPN. Silence (firewall/Cloudflare/server move) means PayPal payments and cancellations are not reaching MemberMouse. Normal max gap is about 2 days.',
+    sql: `SELECT MAX(received) FROM mm_paypal_ipn_log;`,
+    evaluate: ([[last]]) => (Date.now() - Date.parse(last.replace(' ', 'T') + 'Z') > 4 * 86400000 ? [['paypal-ipn', `last IPN ${last} UTC`]] : []),
+  },
+  {
     key: 'unbilled', title: 'Active Stripe subscription with no upcoming rebill',
     why: 'Paid subscription active but nothing scheduled and not in dunning: member keeps access without being billed.',
     // 12042 = test account (vuongtrancr+testpay)
