@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-27 (Tuesday)
 
-**Run:** 2026-10-27T05:00+07:00 → 05:40 (cron, mpfc server), corrected 08:45 (+07:00) (recheck)
+**Run:** 2026-10-27T05:00+07:00 → 05:40 (cron, mpfc server), corrected 08:45 + 09:27 (+07:00) (recheck)
 **Window:** 2026-10-26 08:40 → 2026-10-27 05:00 (+07:00). Task-log date: **Mon 2026-10-26**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:00: no upcoming approved leave. Resource Arrangement (Matrix) for 10-26: MinhTC sick, TienND sick, TrungDT sick, KietNHT off AM, VuTQ off AM. Coming up: ThanhVM off 10-27, LamLQ off 10-29/30, KhangNHH off PM 10-30. Company holiday Tue 24/11 (Vietnamese Culture Day).
 
@@ -83,9 +83,9 @@ Raw `/review/week` rows checked (not just the aggregate).
 
 | Developer | Mon 10-26 | Breakdown | Status |
 |-----------|-----------|-----------|--------|
-| PhucVT | 0h | — | ⏳ not logged yet. Active Mon in Matrix (Bailey sync investigation, James DefinitiveGuide handover) |
-| TuanNT | 0h | — | ⏳ not logged yet. Active all day in Matrix (Bailey go-live, Neural error pages) |
-| KhanhHH | 3.67h | Baamboozle 2.5 · BXR 1.17 | ⏳ partial |
+| PhucVT | 0h | — | ~~⏳ not logged yet~~ 🔴 **09:25 still 0h** across all 13 sheets + 22 WS projects, no leave → reminder sent 09:27 |
+| TuanNT | ~~0h~~ 7.33h | Speedventory 7.33 | ✅ (09:25, >0h) |
+| KhanhHH | ~~3.67h~~ 8h | Baamboozle 2.5 · RDC 4.33 · BXR 1.17 | ✅ (09:25) |
 | LeNH | 8h | James Diamond 8 | ✅ |
 | LongVV | 0h | — | informational (active in OhCleo/James rooms) |
 
@@ -175,8 +175,8 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital 
 ---
 
 ## Reminders — 05:35 (+07:00)
-- PhucVT, TuanNT: 0h for Mon 10-26 so far, but both were visibly working all day in Matrix and the whole team shows Monday lag. Before 10:00, so skipped. Re-check after 10:00 (not sent; `--send-reminder` not passed).
-- KhanhHH: 3.67h so far, partial. Re-check after 10:00.
+- ~~PhucVT, TuanNT: 0h so far… re-check after 10:00~~ **09:27 recheck (full scan, user asked to send):** PhucVT 0h, no leave → reminder **sent** to [his room](https://matrix.to/#/!kzyLVmJxcRESoTkfnY:nustechnology.com) ("task log for 2026-10-26 (Mon) is missing (0h logged)"). TuanNT 7.33h ✅, no reminder.
+- KhanhHH: ~~3.67h~~ 8h ✅.
 - LeNH: 8h ✅. LongVV: ad-hoc, no reminder.
 
 ---
@@ -273,6 +273,6 @@ No invalid memos.
 - Bailey: who sends Joey the StrainRite duplication estimate and answers the "copy brother's PrestaShop" question? Status of live issues 1–4 + supplier price calculation?
 - MPFC: 35 failed rebills not retried for 30+ days. Who decides (retry / revoke access)? Where does Rollbar #75 ParseError `$ok` come from (new billing-monitor script?)? DigitalOcean MySQL 8.0 EOL plan?
 - OhCleo: reply to Celine's audio-click issue. DuongDN/MinhTV review LuHX's Pending 1.5h.
-- After 10:00: re-check Mon task logs (PhucVT/TuanNT/KhanhHH/ViTHT).
+- Task logs: rechecked 09:25, PhucVT reminded; wait for him to log.
 - kai@: confirm the 4 new Atlassian API tokens (Mon 09:02–09:24) were created by us.
 - carrick@: Cloudflare Tunnel upgrade to ≥2026.10.2 (which tunnel/server?).
