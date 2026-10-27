@@ -49,5 +49,17 @@
     "audience": "Công khai",
     "feeling": "hào hứng",
     "note": "user chọn #9, đổi sang giá vàng VN + caption của user"
+  },
+  {
+    "date": "2026-10-27",
+    "type": "academic-it",
+    "topic": "OpenAI Habitat scaling storage 1B users",
+    "sources": [
+      "https://openai.com/index/scaling-storage-one-billion-users-part-one/",
+      "https://openai.com/index/scaling-storage-one-billion-users-part-two/"
+    ],
+    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid0jr4aXBGHvsET9wzBFaF68YUKLVqvyFypdgu2LDVKVjyseTXz37jEBoZNbXvvWJcml",
+    "status": "draft",
+    "audience": "Chỉ mình tôi"
   }
 ]
