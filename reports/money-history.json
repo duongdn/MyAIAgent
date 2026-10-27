@@ -866,7 +866,7 @@
         "liquid": 23223924
       },
       "method": "dashboard_verified",
-      "note": "NW -1.04M vs 10-26 09:00: chi 1.15M (visa nhap muon 908K + Vi 240K), lai +36K. Rut 400M tikcop ko ki han -> so moi C vay 9m 400M 11.2% dao han 2027-07-27; ko ki han con 55.7M, thanh khoan tuc thi ~78.9M. NW = totaldashboard 6,542,127,198 + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069. T10 MTD Thu 123.5M/Chi 45.4M/Net +78.1M."
+      "note": "NW -1.04M vs 10-26 09:00: chi 1.15M (visa nhap muon 908K + Vi 240K), lai +36K. Rut 400M tikcop ko ki han -> cho vay ca nhan C vay 9m 400M (MISA ghi dang so, van trong savings) 11.2% dao han 2027-07-27; ko ki han con 55.7M, thanh khoan tuc thi ~78.9M. NW = totaldashboard 6,542,127,198 + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069. T10 MTD Thu 123.5M/Chi 45.4M/Net +78.1M."
     }
   ]
 }

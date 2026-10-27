@@ -1,6 +1,6 @@
 # Transactions — 2026-10-27 09:10
 
-> 🔄 **Δ vs 10-26 09:00: −1,044,421** — chi 1.15M (VCB visa nhập muộn ngày 10-26: Con cái 578K + Tiền ra 330K; Ví: thú cưng 140K, con cái 70K, ăn sáng/tiêu vặt 30K), lãi sổ +36K, Paypal FX +17K. **Dòng tiền lớn (NW không đổi):** rút 400M từ sổ tikcop ko kì hạn (200M 10-26 + 200M 10-27) → vcb → mở sổ mới **"C vay 9m" 400M, 11.2%, 9 tháng, đáo hạn 2027-07-27**. Sổ ko kì hạn còn 55.7M.
+> 🔄 **Δ vs 10-26 09:00: −1,044,421** — chi 1.15M (VCB visa nhập muộn ngày 10-26: Con cái 578K + Tiền ra 330K; Ví: thú cưng 140K, con cái 70K, ăn sáng/tiêu vặt 30K), lãi sổ +36K, Paypal FX +17K. **Dòng tiền lớn (NW không đổi):** rút 400M từ sổ tikcop ko kì hạn (200M 10-26 + 200M 10-27) → vcb → **cho vay cá nhân 400M ("C vay 9m", MISA ghi dạng sổ 9 tháng, lãi 11.2%, đến hạn 2027-07-27)**. Sổ ko kì hạn còn 55.7M.
 
 ## This Month (10/2026, MTD 1–27)
 | | Amount (₫) |
@@ -14,7 +14,7 @@ Loại trừ Cho vay/Thu nợ/Đi vay/Trả nợ (vay chị Ky không tính thu)
 ## Recent Transactions (10-26 PM..10-27)
 | Date | Category | Wallet | Amount (₫) | Note |
 |------|----------|--------|-----------|------|
-| 10-27 | Gửi tiết kiệm | vcb → C vay 9m | 400,000,000 | sổ mới 9 tháng 11.2% |
+| 10-27 | Cho vay (ghi dạng sổ) | vcb → C vay 9m | 400,000,000 | cho vay cá nhân 9 tháng 11.2% |
 | 10-27 | Rút một phần | tikcop ko kì hạn → vcb | 200,000,000 | |
 | 10-27 | Gửi thêm | vcb → tikcop ko kì hạn | 50,000 | |
 | 10-27 | Lãi tiết kiệm | vcb / tikcop ko kì hạn | +28,556 / +7,837 | |

@@ -62,7 +62,7 @@
   <div class="kpi">
     <div class="label">Tiết kiệm</div>
     <div class="value" style="color:#22c55e">1,145.9M</div>
-    <div class="delta neutral">◆ 400M ko kì hạn → sổ 9 tháng 11.2%</div>
+    <div class="delta neutral">◆ gồm cho vay 400M (C vay 9m) · ngân hàng 745.9M</div>
   </div>
   <div class="kpi">
     <div class="label">Oct MTD Net</div>
@@ -74,7 +74,7 @@
 <div class="grid full">
   <div class="card" style="border-color:#1e2a3a;background:#141a26">
     <h3 style="color:#60a5fa">◆ Điểm nổi bật kể từ lần chạy 26/10 09:00</h3>
-    <div style="font-size:13px;color:#cbd5e1;line-height:1.7">Net Worth 7.924 tỷ, <b>−1.04M</b>: chi 1.15M (visa nhập muộn 10-26: con cái 578K + tiền ra 330K; Ví thú cưng 140K, con cái 70K…), lãi +36K. <b>Dời 400M từ sổ tikcop ko kì hạn → sổ mới "C vay 9m" 400M, 11.2%, 9 tháng (đáo hạn 27/07/2027)</b> — lãi dự kiến ~33.6M. Hệ quả: thanh khoản tức thì còn ~78.9M (tiền mặt 23.2M + ko kì hạn 55.7M) &lt; 110M → giữ dừng DCA, nạp lại ko kì hạn từ lương T11.</div>
+    <div style="font-size:13px;color:#cbd5e1;line-height:1.7">Net Worth 7.924 tỷ, <b>−1.04M</b>: chi 1.15M (visa nhập muộn 10-26: con cái 578K + tiền ra 330K; Ví thú cưng 140K, con cái 70K…), lãi +36K. <b>Cho vay cá nhân 400M từ sổ tikcop ko kì hạn ("C vay 9m", 11.2%, 9 tháng, đến hạn 27/07/2027)</b> — lãi dự kiến ~33.6M. Hệ quả: thanh khoản tức thì còn ~78.9M (tiền mặt 23.2M + ko kì hạn 55.7M) &lt; 110M → giữ dừng DCA, nạp lại ko kì hạn từ lương T11.</div>
   </div>
 </div>
 
@@ -226,7 +226,7 @@ new Chart(document.getElementById('chartMoneyFlow'), {
         <tr><td>VCBF</td><td>📈 Fund</td><td class="right">525,063,000</td><td><span class="badge info">◆ Không đổi · ví ẩn</span></td></tr>
         <tr><td>FPTS (cost-basis+current)</td><td>📈 Cổ tức</td><td class="right">616,701,151</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>Finhay</td><td>📈 Fund</td><td class="right">57,061,069</td><td><span class="badge info">◆ Không đổi · ví ẩn</span></td></tr>
-        <tr><td>C vay 9m (mới)</td><td>🏦 Tiết kiệm</td><td class="right">400,000,000</td><td><span class="badge ok">▲ mở 27/10 · 11.2% · đáo hạn 27/07/2027</span></td></tr>
+        <tr><td>C vay 9m</td><td>🤝 Cho vay CN</td><td class="right">400,000,000</td><td><span class="badge ok">▲ mở 27/10 · 11.2% · đáo hạn 27/07/2027</span></td></tr>
         <tr><td>vcb 6m chứng chỉ tiền gởi</td><td>🏦 Tiết kiệm</td><td class="right">300,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>6m cake vpbank</td><td>🏦 Tiết kiệm</td><td class="right">190,000,000</td><td><span class="badge info">◆ Không đổi</span></td></tr>
         <tr><td>6m cake htt</td><td>🏦 Tiết kiệm</td><td class="right">100,000,000</td><td><span class="badge info">◆ Không đổi (đáo hạn 10-04-2027)</span></td></tr>
@@ -252,7 +252,8 @@ new Chart(document.getElementById('chartMoneyFlow'), {
       <thead><tr><th>Người</th><th class="right">Họ nợ mình (₫)</th><th class="right">Mình nợ họ (₫)</th><th>Gần nhất</th><th>Ghi chú</th></tr></thead>
       <tbody>
         <tr><td>chị Ky</td><td class="right">0</td><td class="right">20,000,000</td><td>25/10/2026</td><td>5M (08/10) + 15M (25/10) · 0% lãi, trả khi chị cần</td></tr>
-        <tr><td><b>Tổng</b></td><td class="right"><b>0</b></td><td class="right"><b>20,000,000</b></td><td></td><td></td></tr>
+        <tr><td>C vay 9m</td><td class="right">400,000,000</td><td class="right">0</td><td>27/10/2026</td><td>9 tháng, 11.2%, đến hạn 27/07/2027 · MISA ghi dạng sổ (đã nằm trong NW)</td></tr>
+        <tr><td><b>Tổng</b></td><td class="right"><b>400,000,000</b></td><td class="right"><b>20,000,000</b></td><td></td><td></td></tr>
       </tbody>
     </table>
     <div style="font-size:11px;color:#64748b;margin-top:10px">Đã tất toán: a Dũng, Tiến Trang, Clara, chị Tin, Má Thanh, Mẹ Mira, phát metal, hyundai, chơi hụi, Mira, nus php team, Tiến nUs. MISA không trừ "Đi vay" vào Net Worth → NW thực thấp hơn 20M. Nguồn: <code>scripts/misa-personal-loans-report.js</code>.</div>
@@ -266,7 +267,7 @@ new Chart(document.getElementById('chartMoneyFlow'), {
       <thead><tr><th>Hạn</th><th>Việc</th><th class="right">Số tiền (₫)</th><th>Ưu tiên</th></tr></thead>
       <tbody>
         <tr><td>30 ngày</td><td>Thanh khoản tức thì 78.9M &lt; 110M — dừng DCA, nạp lại sổ ko kì hạn từ lương T11 trước khi DCA tiếp</td><td class="right">55,710,650</td><td><span class="badge warn">🟡</span></td></tr>
-        <tr><td>27/07/2027</td><td>Sổ "C vay 9m" đáo hạn (11.2%)</td><td class="right">400,000,000</td><td><span class="badge info">🟢</span></td></tr>
+        <tr><td>27/07/2027</td><td>Khoản cho vay "C vay 9m" đến hạn (11.2%)</td><td class="right">400,000,000</td><td><span class="badge info">🟢</span></td></tr>
       </tbody>
     </table>
   </div>

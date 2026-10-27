@@ -206,6 +206,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
 
 ## money-report
+- [c_vay_9m_is_personal_loan](money-report/feedback_c_vay_9m_is_personal_loan_not_savings.md) — 🔴 sổ "C vay 9m" 400M 11.2% = CHO VAY CÁ NHÂN, tách khỏi tiết kiệm/quỹ khẩn cấp
 - [chi_ky_loan_interest_free_no_rush](money-report/feedback_chi_ky_loan_interest_free_no_rush.md) — 🔴 vay chị Ky 0% lãi, trả khi chị cần; ko flag, ko khuyến nghị trả sớm
 - [tien_ra_is_wife_spending_not_linh_tinh](money-report/feedback_tien_ra_is_wife_spending_not_linh_tinh.md) — 🔴 "Tiền ra" = vợ chi tiêu, nhóm riêng, ko phải Linh tinh, ko flag
 - [real_estate_weight_ok_user_may_sell](money-report/feedback_real_estate_weight_ok_user_may_sell.md) — 🔴 BĐS ~18.5% = OK, ko flag thấp, user có thể bán long an res
