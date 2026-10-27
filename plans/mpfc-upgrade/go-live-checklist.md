@@ -144,7 +144,7 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
 
 ### 2026-10-27 — New Relic OFF for good; perf dashboard replaces it
 - NR: `99-mpfc-newrelic-off.ini` back in apache2 + cli; bench conf removed (`/root/upgrade/mpfc-nr-bench.conf.disabled`); daemon stopped.
-- Dashboard: https://admin.mypersonalfootballcoach.com/perf/ (same basic auth as admin vhost, user `mpfc`).
+- Dashboard: https://admin.mypersonalfootballcoach.com/perf/ (own basic auth `/etc/apache2/.htpasswd-perf`, user `duong`, password in local `config/.mpfc-perf-dashboard.json`; does not open the admin site).
   - Code: `plans/mpfc-upgrade/perf-dashboard/` → server `/var/www/mpfc-perf/`; DB creds `/etc/mpfc-perf/config.php` (read-only DB user `perf_ro`, SELECT on apache_logs.*).
   - admin vhost: `ProxyPass /perf !` + `Alias /perf` (backup `/root/upgrade/admin-le-ssl.conf.bak-20261027`).
   - Shows KPIs, avg/p95/throughput chart, transactions by total time (routes normalized, `?json=` endpoints kept), slow requests list, top IPs. Ranges 1h–7d; default excludes dev IP 171.251.232.148.
