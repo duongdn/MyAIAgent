@@ -100,6 +100,12 @@ const CHECKS = [
     evaluate: ([[last]]) => (Date.now() - Date.parse(last.replace(' ', 'T') + 'Z') > 4 * 86400000 ? [['paypal-ipn', `last IPN ${last} UTC`]] : []),
   },
   {
+    key: 'stripe-unlogged', title: 'Stripe payment not recorded in MemberMouse',
+    why: 'Member was charged on Stripe but MemberMouse has no matching payment: recover for the customer (restore access, stop a dunning re-charge). Daily Stripe reconciliation, last 3 days.',
+    // runs on the mpfc server (Stripe key stays there); cached 24h
+    cmd: 'cd /var/www/MyDailyAgent && node scripts/mpfc-stripe-reconcile.js',
+  },
+  {
     key: 'unbilled', title: 'Active Stripe subscription with no upcoming rebill',
     why: 'Paid subscription active but nothing scheduled and not in dunning: member keeps access without being billed.',
     // 12042 = test account (vuongtrancr+testpay)

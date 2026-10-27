@@ -76,7 +76,7 @@ async function main() {
   const alerts = [];
   for (const c of CHECKS) {
     let rows;
-    try { rows = query(c.sql); } catch (e) { rows = [[`check failed: ${e.message.split('\n')[0]}`]]; }
+    try { rows = c.cmd ? JSON.parse(onServer(c.cmd)) : query(c.sql); } catch (e) { rows = [[`check failed: ${e.message.split('\n')[0]}`]]; }
     const bad = c.evaluate ? c.evaluate(rows) : rows;
     if (!bad.length) continue;
     const detail = bad.slice(0, 30).map(r => '  ' + r.join(' | ')).join('\n');
