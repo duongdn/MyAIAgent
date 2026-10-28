@@ -76,9 +76,9 @@ Base = gross 8,005,081,868 − Nhà 2,500,000,000.
 
 ### 4. Upcoming decisions (≤90 ngày)
 - Không sổ đáo hạn trước 2027-02-10 → nguồn tiền T11–T1 là lương.
-- Lương cuối T10 (~67M) → trả thẻ 6.95M, phần dư DCA.
+- Lương cuối T10 (~67M) → DCA phần dư (thẻ 6.95M thuộc kỳ sao kê 21/11, trả tháng sau).
 
 ### 5. Khuyến nghị
-- Ngắn hạn (30 ngày): lương về → trả thẻ, DCA phần dư (trần CP còn ~146M).
+- Ngắn hạn (30 ngày): lương về → DCA phần dư (trần CP còn ~146M).
 - Trung hạn: DCA ~10M/tuần từ dư lương; T10 chi đã 49.4M (Hiếu hỉ 10.4M + học phí 8.6M là khoản không đều).
 - Dài hạn: cân nhắc tài sản USD/quốc tế (0.3%) giảm tương quan VN.

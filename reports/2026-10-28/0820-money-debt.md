@@ -45,7 +45,7 @@ TB 6 tháng (04–09): 51.4M.
 
 ## Alerts
 - ✅ T10 MTD 14.5M < 2× TB 6 tháng — không spike.
-- ✅ Dư nợ 6.95M nhỏ, trả trong kỳ.
+- ✅ Dư nợ 6.95M = chi sau sao kê 21/10 (kỳ 21/10 đã trả) → vào sao kê 21/11, trả tháng sau.
 
 ## Khoản vay cá nhân (cho vay / đi vay)
 
