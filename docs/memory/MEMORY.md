@@ -319,3 +319,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [phase3_go_deeper_than_earlier_sessions](feedback_phase3_go_deeper_than_earlier_sessions.md) — GĐ3: chủ đề trùng S2 → đi sâu bằng số đo thật, không lặp/bỏ
 - [news-digest/feedback_news_digest_duplicate_source_name_collision.md](news-digest/feedback_news_digest_duplicate_source_name_collision.md) — "Tài chính VN" source name collision; skip fix-links when links JSON-exact (261027)
 - [vcb_visa_statement_day_21](money-report/feedback_vcb_visa_statement_day_21_balance_is_next_cycle.md) — 🔴 Visa sao kê ngày 21, kỳ đã trả; dư nợ sau 21 = kỳ sau, ko khuyên trả thẻ khi lương về
+- [deck_rebuild_overwrites_manual_slide_edits](feedback_deck_rebuild_overwrites_manual_slide_edits.md) — 🔴 GĐ3 deck: user sửa tay; chỉ patch slide/element, không full rebuild

@@ -37,3 +37,10 @@ Giải thích state/harness chuyển vào notes.
 
 **Vấn đề:** câu hỏi tự đặt ("Làm dở thì sao?"…) nghe lạ, không khái quát nội dung buổi.
 **Sau:** cột trái = tên session đúng đề cương (giống trang tiêu đề mỗi deck). Ô = phần agent có thêm, thuật ngữ chuẩn: Agent tối thiểu · Tool contract · Kiểm quyền, phê duyệt · Task state, điều kiện dừng · Eval, tracing.
+
+## 16:00 — S5 slide 1: bỏ subtitle (user đã xoá tay, bị rebuild dựng lại)
+
+- Xoá đúng element "Session 5–9 · OpenAI Agents SDK" trên deck (deleteObject), không rebuild.
+- Code builder bỏ dòng này luôn.
+- ⚠ Các lần rebuild S5 hôm nay (khoảng 15:40–15:55) đã ghi đè mọi chỗ user sửa tay trên deck S5. Nếu còn chỗ khác bị mất: Google Slides → File → Version history.
+- Từ giờ chỉ patch từng slide, không rebuild cả deck.

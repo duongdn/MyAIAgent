@@ -10,7 +10,6 @@ Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deep
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
   label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
-  label(s, 40, 232, 600, 30, 'Session 5–9 · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
   label(s, 40, 320, 250, 20, 'DuongDN · VinhNT', { size: 12, color: C.WHITE, align: 'START' });
   footer(s, true);
 
