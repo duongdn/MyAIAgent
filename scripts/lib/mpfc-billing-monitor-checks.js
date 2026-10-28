@@ -110,7 +110,8 @@ const CHECKS = [
     why: 'Apple/Google subscription receipt expired 8+ days ago, bundle still active, no newer receipt. The hourly IAP renewal cron (theme plan_service.php) only re-checks receipts expired 1-7 days ago, so a missed window means the member is never re-verified: either they stopped paying and keep free access, or they renewed and the DB is stale.',
     sql: `SELECT r.id, r.wp_user_id, u.user_email, REPLACE(r.product_id,'com.onbit.footballcoach.',''), r.receipt_type, r.expires_at
       FROM mm_applied_bundles ab JOIN mm_iap_receipts r ON r.id=ab.iap_receipt_id JOIN wp_users u ON u.ID=r.wp_user_id
-      WHERE ab.access_type='user' AND ab.status=1 AND r.expires_at > '2025-01-01' AND r.expires_at < NOW() - INTERVAL 8 DAY
+      -- 2852/2868 = Saul's friend (matt.taiwanlife, mswcoach), confirmed by Saul 2026-10-28
+      WHERE ab.access_type='user' AND ab.status=1 AND r.id NOT IN (2852, 2868) AND r.expires_at > '2025-01-01' AND r.expires_at < NOW() - INTERVAL 8 DAY
         AND NOT EXISTS (SELECT 1 FROM mm_iap_receipts r2 WHERE r2.wp_user_id=r.wp_user_id AND r2.product_id=r.product_id AND r2.expires_at > NOW())
         -- access legitimately kept: an active web subscription for the same bundle, or an admin comp grant after expiry
         AND NOT EXISTS (SELECT 1 FROM mm_order_items oi JOIN mm_orders o ON o.id=oi.order_id JOIN mm_bundle_products bp ON bp.product_id=oi.item_id
