@@ -97,3 +97,25 @@ Backfill of 90 days: 352 succeeded MemberMouse charges, **2 paid but not recorde
 
 Recovery options (need decision; no action taken): grant access/create order manually, or refund in Stripe. Either way, contact the customer (via Saul).
 First-run false positives fixed: a successful dunning retry deletes its scheduled-payment row, so matching falls back to the member's email.
+
+## 6. Deep review 2026-10-28 (read-only)
+| Check | Result | Verdict |
+|---|---|---|
+| Monitor log since 10-27 | 0 alerts, state empty | ✅ |
+| MM Stripe payments (non-IAP, 90d) without a Stripe charge | 0 / 359 | ✅ |
+| Stripe failed charges that MM recorded as paid | 0 / 85 | ✅ |
+| Stripe refunds not reflected | Chad Moran £49.99 (10-23 catch-up): refund row logged in MM, user cancelled, next annual event 2027-06-25 will fail harmlessly. Gerard Kilmartin £39.99: admin refunded and removed bundle 2 within 3 min, then he bought another product | ✅ handled |
+| **IAP renewal cron** (theme `plan_service.php` → `updateIAPPurchases`, hourly) | **Real design gap**: it only re-verifies receipts that expired **1-7 days ago**. If the cron is not running in that window (CLI die 05-20 → 10-23) or Apple/Google returns no data (`continue`), the receipt is never re-checked. Live store check (read-only) of 12 receipts since 2025: | 🔴 |
+
+IAP store verification results (no DB writes):
+| Store status | Users | Effect |
+|---|---|---|
+| Stopped paying, still has access | romaz007 (since 2025-10-19), ferrianileonardo (07-26), hillcn98 coach_pass (08-21), kmistrypb (09-20), rupindersharma420 coach_pass (05-20) + Next Gen (10-20) | Free access, 5 users / 6 bundles |
+| Still paying, DB stale | livia.puxley_gibbs (store exp 11-19), simonm (11-22) | Access correct; their renewals since May are not recorded as MM orders (reporting gap) |
+| Legit other source | lirim (comp after expiry), rohannitin (active Stripe web sub) | ✅ |
+| Unverifiable (Apple 21003) | mswcoach, matt.taiwanlife (identical expiry time, likely test receipts) | ? |
+
+Proposals (not applied, live payment code):
+1. `updateIAPPurchases`: re-verify every receipt that has an active bundle and expired more than 1 day ago (no 7-day floor), cap per run, and log verify failures instead of a silent `continue`.
+2. Run the existing renewal logic once for the 10 receipts above. It extends the 2 still paying, cancels the 6 lapsed bundles, and leaves the 2 unverifiable ones for a manual look.
+Monitor: added check `iap-stale` (receipt expired 8+ days, bundle active, excludes web-sub/comp). Currently lists these 10.
