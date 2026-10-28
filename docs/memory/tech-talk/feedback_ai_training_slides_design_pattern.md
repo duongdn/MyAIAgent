@@ -33,4 +33,5 @@ See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics use
 
 - 🔴 2026-10-16: KHÔNG có slide "nhắc lại buổi trước" (recap) — user: "ko phải mình train, và tốn time". Khái niệm cần dùng thì trình bày như nội dung của buổi, không gắn nhãn "Nhắc lại Session X".
 - 🔴 2026-10-16: không thêm câu dẫn kiểu văn xuôi lên slide (vd "…rồi Q&A · bài tự thực hành sau buổi") — "đây là slide, có phải text đâu". Lời dẫn để trong notes.
-- 🔴 2026-10-20: mọi lần sửa deck/demo GĐ3 → ghi changelog vào reports/<YYYY-MM-DD>/ai-training-phase3-s5-s6-updates.md (append mục mới: giờ · vấn đề · trước/sau · commit) để user monitor. Không chỉ báo trong terminal.
+- 🔴 2026-10-20: mọi lần sửa deck/demo GĐ3 → ghi changelog vào docs/nus-ai-training/phase3/changelog/<YYYY-MM-DD>.md (append mục mới: giờ · vấn đề · trước/sau · commit) để user monitor. Không chỉ báo trong terminal.
+- 🔴 2026-10-28: MỌI tài liệu GĐ3 (kịch bản, mapping, review, changelog) để chung 1 chỗ `docs/nus-ai-training/phase3/` (mục lục README.md). Không tạo tài liệu GĐ3 trong plans/reports hay reports/. "Phase 5" user nói = Session 5, không phải Giai đoạn 5.
