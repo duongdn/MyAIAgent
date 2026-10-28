@@ -36,14 +36,15 @@ Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thà
   agenda([['3 mức điều phối', 'model call · workflow do code điều phối · agent'], ['Agent hay workflow', 'khi nào agent tạo giá trị, khi nào workflow đơn giản an toàn hơn'],
     ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
-  s = newSlide('Nhắc lại · Session 1–2', 'ChatGPT, Claude là agent: LLM + code app bao quanh', `Nhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
+  s = newSlide('Nhắc lại · Session 1–2', 'App ChatGPT, Claude là agent: LLM tự chọn bước, code app chạy tool', `Nhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
 Đi theo mũi tên:
 - User hỏi → code app nhận.
 - ① Code app gửi cho LLM: câu hỏi + context (lịch sử, mô tả các tool có thể dùng).
 - ② LLM chỉ viết text. Khi thiếu thông tin, nó viết "tôi cần tool X với tham số Y" — nó KHÔNG tự gọi được gì.
 - ③ Code app đọc đoạn text đó và chạy tool thật (web search, query DB, gọi API…).
 - ④ Kết quả tool quay lại code app, code app gửi tiếp cho LLM (lại là ①). Lặp tới khi LLM viết câu trả lời cuối → code app trả cho user.
-Công thức: Agent = LLM + Tools + Context + Code app. "Code app" là phần code bao quanh LLM, ai làm agent thì người đó viết:
+Công thức: Agent = LLM + Tools + Context + Code app. Workflow cũng có đủ 4 thứ này → điểm phân biệt (dòng cam): ở agent, LLM quyết định bước tiếp theo (gọi tool nào, mấy lần, khi nào dừng); ở workflow, code viết sẵn các bước. Định nghĩa này khớp Anthropic "Building effective agents" và OpenAI "A practical guide to building agents". Slide sau đi sâu đúng điểm này.
+"ChatGPT"/"Claude" ở đây là APP (có web search, chạy code…), không phải model: chat thường không gọi tool chỉ là một lần gọi model. "Code app" là phần code bao quanh LLM, ai làm agent thì người đó viết:
 - ChatGPT, Claude: OpenAI / Anthropic viết phần code app → user chỉ dùng.
 - Agent của mình (từ Session 5): mình viết phần code app. OpenAI Agents SDK KHÔNG phải agent — nó là thư viện viết sẵn phần vòng lặp ①–④, phần còn lại (tool nào, quyền, khi nào dừng) mình tự viết.
 Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, khi nào code tự viết sẵn các bước".`);
@@ -67,8 +68,9 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code app', C.INK, 80]]
     .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 286, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
-  box(s, 40, 326, 315, 34, 'ChatGPT, Claude → code app do OpenAI / Anthropic viết', { fill: C.CARD, size: 11, bold: false });
-  box(s, 365, 326, 315, 34, 'Agent của mình → mình viết, Agents SDK lo vòng lặp', { fill: C.CARD, size: 11, bold: false });
+  label(s, 448, 286, 232, 26, 'khác workflow: LLM chọn bước tiếp theo', { size: 11.5, color: C.ORANGE, align: 'START' });
+  box(s, 40, 326, 315, 34, 'App ChatGPT, Claude → code app do OpenAI / Anthropic viết', { fill: C.CARD, size: 11, bold: false });
+  box(s, 365, 326, 315, 34, 'Agent của mình → mình viết, SDK lo vòng lặp + gọi tool', { fill: C.CARD, size: 11, bold: false });
 
   extra.threeFlows();
 
