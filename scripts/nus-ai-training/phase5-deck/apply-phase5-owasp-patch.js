@@ -1,6 +1,6 @@
 // Live patch (no rebuild): insert OWASP LLM Top 10 slide after "Prompt injection & approval"
 // and append OWASP references to existing slides' speaker notes. Idempotent: skips if already applied.
-// Run from repo root: node scripts/nus-ai-training/apply-phase5-owasp-patch.js
+// Run from repo root: node scripts/nus-ai-training/phase5-deck/apply-phase5-owasp-patch.js
 const builder = require('./build-phase5-session-deck');
 const { OWASP_SLIDE_TITLE, NOTES_ADDITIONS } = require('./phase5-owasp-llm-top10-content');
 

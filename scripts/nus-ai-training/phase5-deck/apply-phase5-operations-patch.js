@@ -1,6 +1,6 @@
 // Live patch (no rebuild): replace every existing "Vận hành" slide (old or previous version) with the
 // current set from phase5-operations-slides.js. Safe to re-run after editing that module. Run from repo root after run_eval.py has produced eval_results.json:
-//   node scripts/nus-ai-training/apply-phase5-operations-patch.js
+//   node scripts/nus-ai-training/phase5-deck/apply-phase5-operations-patch.js
 const builder = require('./build-phase5-session-deck');
 const { operationsSlides, OPS_TITLES } = require('./phase5-operations-slides');
 

@@ -1,13 +1,13 @@
 // Rebuild NUS AI training Phase 5 deck: merged single session (old S12 + S13 per new plan 2026-10-12)
 // WARNING: deletes ALL existing slides then rebuilds — manual edits made in Google Slides will be lost.
-// Run from repo root: node scripts/nus-ai-training/build-phase5-session-deck.js
+// Run from repo root: node scripts/nus-ai-training/phase5-deck/build-phase5-session-deck.js
 const path = require('path');
 const { google } = require('googleapis');
 const { operationsSlides } = require('./phase5-operations-slides');
 const { OWASP_ITEMS, OWASP_SLIDE_TITLE, OWASP_SLIDE_NOTES, NOTES_ADDITIONS } = require('./phase5-owasp-llm-top10-content');
 const PID = '1Stt_wQjaHJtLND_dFI0S3iWA4l_OTxjKB2_cOwRzw_Y'; // deck Giai đoạn 5 (10ZYIX… giờ là deck Giai đoạn 3)
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, '../../config/daily-agent-490610-7eb7985b33e3.json'),
+  keyFile: path.join(__dirname, '../../../config/daily-agent-490610-7eb7985b33e3.json'),
   scopes: ['https://www.googleapis.com/auth/presentations'],
 });
 

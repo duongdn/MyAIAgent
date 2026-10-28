@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const EVAL_FILE = path.join(__dirname, 'support_agent_demo', 'eval_results.json');
+const EVAL_FILE = path.join(__dirname, '..', 'support_agent_demo', 'eval_results.json');
 
 function summarizeEval() {
   const rows = JSON.parse(fs.readFileSync(EVAL_FILE, 'utf8'));

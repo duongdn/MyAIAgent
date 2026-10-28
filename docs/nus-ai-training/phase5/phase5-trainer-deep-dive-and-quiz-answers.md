@@ -1,7 +1,7 @@
 # Giai đoạn 5 — Tài liệu chuẩn bị cho trainer (deep dive + đáp án)
 
-Deck: https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
-Script dựng lại deck: `scripts/nus-ai-training/build-phase5-session-deck.js` (⚠ xoá toàn bộ slide rồi dựng lại)
+Deck: https://docs.google.com/presentation/d/1Stt_wQjaHJtLND_dFI0S3iWA4l_OTxjKB2_cOwRzw_Y
+Script dựng lại deck: `scripts/nus-ai-training/phase5-deck/build-phase5-session-deck.js` (⚠ xoá toàn bộ slide rồi dựng lại)
 Người nghe: dev nhiều kinh nghiệm → không cần giải thích retry/timeout là gì; cần nói được **cái gì khác đi khi thành phần non-deterministic (LLM) nằm trong hệ thống**.
 
 ---
