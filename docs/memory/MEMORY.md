@@ -174,6 +174,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_prestashop2_php72_composer_chronic_error](bailey/feedback_prestashop2_php72_composer_chronic_error.md) — 🔴 New Relic RuntimeException (staging PHP7.2 vs Composer 8.1+) chronic since 2026-09-18, still flat/constant 2026-09-25 — needs direct dev notification, not just report-flagging
 
 ## mpfc-monitor
+- [mpfc_billing_alert_check_audit_before_carrying](mpfc/feedback_mpfc_billing_alert_check_audit_before_carrying.md) — 🔴 35-rebill alert = false alarm (audit F1 10-26); check audits + monitor log before carrying billing alerts; NR off on purpose
 - [mpfc_missed_rebills_caught_up_after_server_move](mpfc/project_mpfc_missed_rebills_caught_up_after_server_move.md) — 🔴 HyperDB srtm_ttl=1 stuck rebills + fixer died (Redirection die in CLI); fixed 10-23; +10-26 trial user_id=0 bug
 - [mpfc_payment_changes_report_only_no_fix](mpfc/feedback_mpfc_payment_changes_report_only_no_fix.md) — 🔴 payment audit = report + solution only; no live change without explicit OK per change
 - [mpfc_billing_monitor_dual_machine](mpfc/project_mpfc_billing_monitor_dual_machine.md) — billing monitor on mpfc server + PC every 15m, deduped via server state; email freelancer@ via wp_mail
