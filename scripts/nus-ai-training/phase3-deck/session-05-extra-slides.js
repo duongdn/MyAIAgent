@@ -8,7 +8,8 @@ const cond = require('../support_agent_demo/orchestration_levels_conditional.jso
 function threeFlows() {
   const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `Session 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
 - Model call: code chuẩn bị prompt (kèm tài liệu RAG), gọi model ĐÚNG 1 lần. Không có "bước tiếp theo".
-- Workflow: CODE giữ thứ tự: phân loại → tra KB → trả lời → tạo ticket. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.
+- Slide dùng từ chung (lấy dữ liệu, thực hiện, tool), ví dụ cụ thể để demo cuối buổi. Nếu cần ví dụ miệng: lấy dữ liệu = tra tài liệu nội bộ, thực hiện = tạo ticket.
+- Workflow: CODE giữ thứ tự: phân loại → lấy dữ liệu → trả lời → thực hiện. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.
 - Agent: model nhận MỤC TIÊU (không phải danh sách bước) + danh sách tool, TỰ chọn gọi tool nào, mấy lần. Điều kiện dừng: model trả lời cuối, hoặc chạm max_turns do application đặt (Session 8 đi sâu 5 lý do dừng).
 Ô màu cam = chỗ model ra quyết định. Ô tối = code ra quyết định.`);
   const row = (y, name, sub, steps) => {
@@ -20,14 +21,14 @@ function threeFlows() {
       if (i) arrow(s, x - 24, y + 20, x - 2, y + 20);
     });
   };
-  row(92, 'Model call', '1 lượt gọi', [['Code: tra KB', 'code'], ['Model trả lời', 'model']]);
-  row(160, 'Workflow', 'code giữ thứ tự', [['Model: phân loại', 'model'], ['Code: tra KB', 'code'], ['Model trả lời', 'model'], ['Code: tạo ticket', 'code']]);
+  row(92, 'Model call', '1 lượt gọi', [['Code: lấy dữ liệu', 'code'], ['Model trả lời', 'model']]);
+  row(160, 'Workflow', 'code giữ thứ tự', [['Model: phân loại', 'model'], ['Code: lấy dữ liệu', 'code'], ['Model trả lời', 'model'], ['Code: thực hiện', 'code']]);
   // Agent: vòng lặp thật — model ⇄ code chạy tool; khi đủ thông tin mới thoát sang trả lời
   const y = 236;
   mono(s, 40, y, 140, 14, 'AGENT', { size: 9 });
   label(s, 40, y + 14, 130, 30, 'nhận mục tiêu, tự chọn bước', { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
   box(s, 180, y, 110, 44, 'Model: chọn tool tiếp theo', { fill: C.ORANGE, size: 10.5 });
-  box(s, 380, y, 140, 44, 'Code chạy tool\ntra KB · tạo ticket', { fill: C.INK, size: 10.5, sub: 9 });
+  box(s, 380, y, 140, 44, 'Code chạy tool\nmodel vừa chọn', { fill: C.INK, size: 10.5, sub: 9 });
   twoWay(s, 292, 378, y + 22);
   label(s, 292, y + 2, 86, 14, 'gọi tool', { size: 8.5, bold: false, color: C.INK });
   label(s, 292, y + 30, 86, 14, 'kết quả', { size: 8.5, bold: false, color: C.ORANGE });
@@ -112,7 +113,7 @@ function tokenGrowth() {
   const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Session 1: model không giữ state giữa các lần gọi. Đây là hệ quả về tiền: mỗi lượt agent phải gửi lại câu hỏi + mọi tool call + kết quả trước đó.
 Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 932 (thêm kết quả search_kb), lượt 3 = 1.201 (thêm kết quả create_ticket). Tổng input 2.707 dù câu hỏi chỉ ~60 token.
 Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
-  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả tra KB'], [1201, 227, 'Lượt 3', '+ kết quả tạo ticket']].forEach(([inp, out, t, d], i) => {
+  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả tool lần 1'], [1201, 227, 'Lượt 3', '+ kết quả tool lần 2']].forEach(([inp, out, t, d], i) => {
     const y = 96 + i * 66;
     label(s, 40, y, 150, 40, `${t}\n${d}`, { size: 13, sub: 10, align: 'START' });
     box(s, 200, y + 8, (inp / 1201) * 330, 26, ' ', { fill: C.BLUE, shape: 'RECTANGLE', noLine: true });
