@@ -34,7 +34,7 @@ function threeFlows() {
   box(s, 580, y, 96, 44, 'Model: trả lời', { fill: C.ORANGE, size: 10.5 });
   arrow(s, 235, y, 235, y - 14, C.INK, false); arrow(s, 235, y - 14, 628, y - 14, C.INK, false); arrow(s, 628, y - 14, 628, y - 2, C.INK);
   label(s, 400, y - 30, 200, 14, 'đủ thông tin → dừng', { size: 9, bold: false, color: C.INK });
-  label(s, 180, y + 48, 500, 16, '↻ số lượt do model quyết · dừng: trả lời cuối hoặc max_turns', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
+  label(s, 180, y + 48, 500, 16, '↻ số lượt do model quyết · dừng: trả lời cuối hoặc chạm giới hạn số lượt', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
   box(s, 40, 330, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 58, 326, 200, 22, 'model quyết định', { size: 10, bold: false, align: 'START' });
   box(s, 190, 330, 14, 14, ' ', { fill: C.INK }); label(s, 208, 326, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
 }
@@ -112,7 +112,7 @@ function tokenGrowth() {
   const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Session 1: model không giữ state giữa các lần gọi. Đây là hệ quả về tiền: mỗi lượt agent phải gửi lại câu hỏi + mọi tool call + kết quả trước đó.
 Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 932 (thêm kết quả search_kb), lượt 3 = 1.201 (thêm kết quả create_ticket). Tổng input 2.707 dù câu hỏi chỉ ~60 token.
 Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
-  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả search_kb'], [1201, 227, 'Lượt 3', '+ kết quả create_ticket']].forEach(([inp, out, t, d], i) => {
+  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả tra KB'], [1201, 227, 'Lượt 3', '+ kết quả tạo ticket']].forEach(([inp, out, t, d], i) => {
     const y = 96 + i * 66;
     label(s, 40, y, 150, 40, `${t}\n${d}`, { size: 13, sub: 10, align: 'START' });
     box(s, 200, y + 8, (inp / 1201) * 330, 26, ' ', { fill: C.BLUE, shape: 'RECTANGLE', noLine: true });
