@@ -155,6 +155,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_performance_piece_added](daily-report/performance/project_performance_piece_added.md) — check NRQL TIMESERIES
 
 ## daily-report:whatsapp-zalo
+- [whatsapp_client_groups_missed_when_excluded](daily-report/whatsapp-zalo/feedback_whatsapp_client_groups_missed_when_excluded.md) — 🔴 recheck must run WhatsApp; Marcel Xid group + Saul MPFC are client asks
 - [project_whatsapp_zalo_cdp_monitor](daily-report/project_whatsapp_zalo_cdp_monitor.md) — 🔴 WhatsApp full content + Zalo name/time only; dedicated monitor Chrome (--user-data-dir), E2EE constraint
 
 ## bailey-invoice-verify/monitor/task-monitor

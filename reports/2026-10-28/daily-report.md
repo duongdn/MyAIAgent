@@ -17,6 +17,7 @@
 | 5 | MPFC | ~~freelancer@ returned **0 emails**… so the scan needs verifying.~~ **08:30 verified via Gmail API (incl. spam/trash): freelancer@ inbox has received NOTHING since Mon 26 Oct 20:42 UTC (= 27 Oct 03:42 VN) — ~29h. Not only billing-monitor mail: external senders also missing (New Relic daily perf report for Oct 27, normally 14:00 UTC, never arrived). MX = `smtp.google.com` (Cloudflare NS) still OK, so likely a Google Workspace inbound/account issue (billing/suspension?) or Gmail routing rule → check admin.google.com. Domain has **no SPF TXT** (only google-site-verification + DMARC p=none), so `info@` wp_mail alerts may also be rejected. Last billing-monitor mail = TEST alert 26 Oct 08:39 UTC.** Yesterday's billing alert (35 failed rebills not retried 30+ days) has no visible resolution. NR is now sampling-only (agent disabled per-request after the PHP 8.3 upgrade, see `plans/mpfc-upgrade/go-live-checklist.md`), so NR apdex/throughput is not meaningful any more. Use the apache_logs perf dashboard instead. `www.mypersonalfootballcoach.com` has **no DNS record** (1.1.1.1 + 8.8.8.8); the apex serves 200. Probably intended (canonical = apex), but confirm ([NR](https://one.newrelic.com)). MPFC ○ |
 | 6 | Neural Contract | ~~Cloudflare at 05:00, re-run after 08:00. Neural ○~~ **08:20 read live (20 msgs):** customer 10-27 06:33 VN lodged support ticket to restart contract → we ack 08:41. Customer 11:30 VN empty msg (attachment). Our dev 15:50 VN asked for $112.50 bonus (4.5h last week while paused) or add to this week — waiting on customer, no unanswered customer ask. Neural ✓ |
 | 7 | dnduongus@gmail.com (security) | AWS acct 357066053630: "Verify your **root user** email address. You requested access… using alternate factor of authentication" (09:49 VN) + AWS MFA Support case reply (10:10 VN). Looks like your own MFA-recovery request, but **confirm it was you** ([AWS console](https://console.aws.amazon.com)). |
+| 8 | WhatsApp (added 09:10) | **Xid urgent** group: Marcel forwarded DEX Team notice 10-27 13:52 VN: from **1 Nov 2026** UAT API calls need authentication (JWT asymmetric / JWT-JWE recommended), else 401. Action before 11-01: pick + save auth mechanism in DEX UI, implement in UAT calls. **4 days left**, no reply from our side in group. Also **MPFC Saul**: 16:00 VN "Yes let's set up manual please" (re 2 paid-no-access customers), 19:43-22:15 VN IDP/coach-pass requirements (coach upload via spreadsheet, searchable 600+ coach-pass sessions, preset focus list + custom targets, team-manager save-to-area icon). |
 
 **Today (Oct 28):** ThuongNTN + LamLQ off PM. 09:00 Wildsoul Wellness intro meeting (DuongDN/NamTV/AnhNVN). 11:00 AI Training (3L). ✅ Resolved since last report: PhucVT logged 10-26 (8h total: Definitive Guide 7 + Speedventory 1). Neural answered (Upwork support ticket). OhCleo audio-click issue handled (root cause = rotated S3 key, release submitted). Fountain vips LoadError not recurring. Bailey split-PO fixed.
 
@@ -274,7 +275,15 @@ Trello: Arthur - Meta-Stamp ✓
 
 ---
 
+## WhatsApp — 09:10 (+07:00)
+(Not in cron run — Piece 16 excluded by default; run on user request.)
+| Chat | New msgs | Key content |
+|------|----------|-------------|
+| Xid urgent | 1 | Marcel fwd DEX: UAT API auth mandatory from 2026-11-01 (Alert #8) |
+| Saul (MPFC, +44 7903 871230) | 10 | Us 11:29 Stripe-vs-site check found 2 paid-no-access customers → Saul 16:00 "set up manual". 19:43+ IDP coach-pass/targets requirements (Alert #8) |
+
 ## Unresolved Questions
+- Xid: who implements DEX UAT API auth before 11-01? Saul: manual access for 2 customers done? IDP requirements → estimate?
 - Recheck 08:35: OhCleo Celine `/post/…` ask still unanswered (0 new DM msgs since 05:00); GGS 0 new msgs — Joey asks still open. TuanNT/KhanhHH/LeNH WS 10-27 still 0h at 08:18 (before 10:00, lag, not alert).
 - OhCleo: rotate the S3 key again (secret pasted in Matrix 10-27 10:37)? Was any data accessed via the RCE? Who answers Celine's `/post/…` redirect ask? DuongDN/MinhTV clear 4 Pending reviews.
 - Fountain: Rick 👍 ack'd gift-email steps 1–8; confirm done before Kunal leaves 10-29. Rollbar #396/#397 StatementInvalid source?
