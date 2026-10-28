@@ -109,7 +109,7 @@ Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 
 **Slide 18 · Trace — DEMO LIVE tuỳ chọn (2')**
 - Chạy: `python3 run_demo.py --scenario 1 --approve yes --trace`
-- Chỉ 3 loại dòng: 🛡 guardrail, 🧠 model call (thời gian, token), 🔧 tool call (tham số, kết quả).
+- Trace in theo vòng lặp ①–④ (giống sơ đồ slide 5): ① app gửi cho LLM (số message, token) · ② LLM quyết định (JSON tool call hoặc trả lời cuối, kèm lý do) · ③ app chạy hàm thật / chờ duyệt · ④ kết quả gửi lại.
 - Có 2 dòng `create_ticket`: dòng đầu là lúc dừng chờ người duyệt (kết quả rỗng), dòng sau mới chạy thật và ra T-1001. Chỉ cần nói "dừng chờ duyệt — Session 7".
 - Chạy mất khoảng 7–8 giây.
 - Nếu thiếu thời gian: không chạy, đọc trace in sẵn trên slide.

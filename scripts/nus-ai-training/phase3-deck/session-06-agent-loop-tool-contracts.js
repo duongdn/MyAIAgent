@@ -68,25 +68,24 @@ Không cần nhớ API; cần biết mỗi khái niệm của sơ đồ nằm �
     ['Dừng', 'result.final_output — hoặc MaxTurnsExceeded khi vượt max_turns'],
   ], { rowH: 40 });
 
-  s = newSlide('Trace thật · kịch bản 1', 'Đọc trace: tìm tài liệu rồi đề xuất tạo ticket — 2 bước', `Đây là trace thật (run_demo.py --scenario 1 --trace, model deepseek-v4.1-flash). Đọc từng dòng với lớp:
-- 🛡 guardrail chạy trước, bằng code, 0.0s.
-- 🧠 lượt 1: model đọc câu hỏi, quyết định gọi search_kb (574 token vào, 81 ra).
-- 🔧 search_kb chạy — ② lọc quyền: 1 tài liệu bị ẩn.
-- 🧠 lượt 2: model đọc kết quả, đề xuất create_ticket P3/billing-team-a.
-- ④ code kiểm tra tham số hợp lệ → SDK DỪNG chờ người duyệt (Session 7).
-- Sau khi duyệt: ticket T-1001, lượt 3 model viết câu trả lời có nguồn.
-Tổng: 3 lượt gọi model, 2.511 token vào + 489 ra. Số bước do model quyết định — đó là "agent".`);
-  code(s, 30, 85, 660, 250, `🛡  0.0s  guardrail no_card_number triggered=False
-🧠  1.6s  model call deepseek-v4.1-flash tokens=574+81
-🤖        model gọi search_kb(query='lỗi thanh toán mã E205')
-②        được phép đọc ['kb-a-001','kb-a-002'], ẩn 1 tài liệu không có quyền
-🔧  0.0s  tool search_kb → "<untrusted_search_results>…"
-🧠  2.1s  model call tokens=828+252
-🤖        model muốn gọi create_ticket(priority='P3', assignee='billing-team-a')
-④        hợp lệ  →  📌 AWAITING_APPROVAL  →  ⑤ ĐỒNG Ý
-🔧  0.0s  tool create_ticket → '{"ticket_id": "T-1001", "status": "created"}'
-🧠  1.9s  model call tokens=1109+156  → câu trả lời có nguồn kb-a-001, kb-a-002
-💰 3 lượt gọi model, 2.511 input + 489 output tokens`, 11);
+  s = newSlide('Trace thật · kịch bản 1', 'Đọc trace: tìm tài liệu rồi đề xuất tạo ticket — 2 bước', `Đây là trace thật (run_demo.py --scenario 1 --approve yes --trace, deepseek-v4.1-flash, 28/10). Định dạng ①–④ giống sơ đồ agent loop (slide 3). Đọc từng dòng với lớp:
+- 🛡 guardrail chạy trước, bằng code.
+- Lượt 1: ① app gửi 2 message → ② model quyết định gọi search_kb 2 lần (2 cách hỏi) → ③ app chạy, checkpoint ② lọc quyền ẩn 1 tài liệu.
+- Lượt 2: ① 5 message → ② model đề xuất create_ticket P3/billing-team-a → checkpoint ④ hợp lệ → app DỪNG chờ người duyệt (Session 7) → ĐỒNG Ý → T-1001.
+- Lượt 3: ① 7 message → ② model quyết định dừng, viết câu trả lời có nguồn.
+Tổng: 3 lượt gọi model, 2.707 token vào + 621 ra. Số bước do model quyết định — đó là "agent".
+Chạy live có thể khác: có lần model đề xuất P2 → bị ④ chặn → model tự sửa P3 (nối sang slide 10–11).`);
+  code(s, 30, 85, 660, 250, `🛡 guardrail no_card_number: qua
+① APP → LLM   2 message · 574+154 token
+② LLM → APP   gọi search_kb {"query": "lỗi thanh toán mã E205"} (+1 query khác)
+③ APP         chạy search_kb · checkpoint ② ẩn 1 tài liệu không có quyền
+④ APP → LLM   kb-a-001, kb-a-002 gửi lại ở lượt sau
+① APP → LLM   5 message · 932+240 token
+② LLM → APP   gọi create_ticket {"priority": "P3", "assignee": "billing-team-a"}
+③ APP         checkpoint ④ hợp lệ → CHƯA chạy, chờ duyệt → ĐỒNG Ý → T-1001
+① APP → LLM   7 message · 1.201+227 token
+② LLM → APP   dừng, trả lời cuối có nguồn kb-a-001, kb-a-002
+💰 3 lượt gọi model, 2.707 input + 621 output tokens`, 11);
   label(s, 30, 340, 660, 30, 'Bước 1: tìm tài liệu · Bước 2: đề xuất ticket · Application dừng để người duyệt trước khi tạo', { size: 12, bold: false, color: C.GREY, align: 'START' });
 
   s = newSlide('Tool contract', 'Tool contract có 6 phần — model chỉ nhìn thấy 3', `Contract = thoả thuận giữa model, application và hệ thống đích.

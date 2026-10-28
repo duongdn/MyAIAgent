@@ -110,35 +110,40 @@ Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25
 // Vì sao agent tốn token: mỗi lượt gửi lại toàn bộ hội thoại
 function tokenGrowth() {
   const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Session 1: model không giữ state giữa các lần gọi. Đây là hệ quả về tiền: mỗi lượt agent phải gửi lại câu hỏi + mọi tool call + kết quả trước đó.
-Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 828 (thêm kết quả search_kb), lượt 3 = 1.109 (thêm kết quả create_ticket). Tổng input 2.511 dù câu hỏi chỉ ~60 token.
+Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 932 (thêm kết quả search_kb), lượt 3 = 1.201 (thêm kết quả create_ticket). Tổng input 2.707 dù câu hỏi chỉ ~60 token.
 Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
-  [[574, 81, 'Lượt 1', 'câu hỏi + mô tả tool'], [828, 252, 'Lượt 2', '+ kết quả search_kb'], [1109, 156, 'Lượt 3', '+ kết quả create_ticket']].forEach(([inp, out, t, d], i) => {
+  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả search_kb'], [1201, 227, 'Lượt 3', '+ kết quả create_ticket']].forEach(([inp, out, t, d], i) => {
     const y = 96 + i * 66;
     label(s, 40, y, 150, 40, `${t}\n${d}`, { size: 13, sub: 10, align: 'START' });
-    box(s, 200, y + 8, (inp / 1109) * 380, 26, ' ', { fill: C.BLUE, shape: 'RECTANGLE', noLine: true });
-    box(s, 200 + (inp / 1109) * 380, y + 8, (out / 1109) * 380, 26, ' ', { fill: C.ORANGE, shape: 'RECTANGLE', noLine: true });
+    box(s, 200, y + 8, (inp / 1201) * 330, 26, ' ', { fill: C.BLUE, shape: 'RECTANGLE', noLine: true });
+    box(s, 200 + (inp / 1201) * 330, y + 8, (out / 1201) * 330, 26, ' ', { fill: C.ORANGE, shape: 'RECTANGLE', noLine: true });
     mono(s, 205, y + 12, 200, 18, `${inp.toLocaleString("de-DE")} vào + ${out} ra`, { color: C.WHITE, size: 10 });
   });
   box(s, 200, 300, 14, 14, ' ', { fill: C.BLUE, noLine: true }); label(s, 218, 296, 160, 22, 'token gửi vào', { size: 10, bold: false, align: 'START' });
   box(s, 330, 300, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 348, 296, 160, 22, 'token model viết ra', { size: 10, bold: false, align: 'START' });
-  label(s, 40, 325, 640, 40, 'Tổng 2.511 vào + 489 ra · input cộng dồn theo số lượt', { size: 12, align: 'START' });
+  label(s, 40, 325, 640, 40, 'Tổng 2.707 vào + 621 ra · input cộng dồn theo số lượt', { size: 12, align: 'START' });
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
 function traceLocate() {
   const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `Đề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
 SDK tự sinh trace cho mỗi Runner.run; demo ghi ra file .traces/ trên máy (không gửi về OpenAI) và in ra với --trace.
-Chỉ từng dòng: 🛡 guardrail, 🧠 mỗi lượt gọi model (thời gian, token), 🔧 mỗi tool call (tham số, kết quả).
+Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, deepseek-v4.1-flash):
+- ① mỗi lượt APP gửi cho LLM: số message tăng dần 2 → 5 → 7 (gửi lại cả kết quả tool), token vào tăng 574 → 932 → 1.201.
+- ② LLM quyết định: lượt 1 gọi search_kb 2 lần (2 cách hỏi), lượt 2 gọi create_ticket, lượt 3 dừng và trả lời.
+- ③ APP chạy hàm thật; create_ticket dừng chờ người duyệt trước khi chạy.
+Tổng: 3 lượt gọi model, 2.707 token vào + 621 ra.
 Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
-  code(s, 40, 88, 430, 200, `🛡 0.0s guardrail no_card_number
-🧠 1.6s model call  tokens=574+81
-🔧 0.0s search_kb("lỗi thanh toán mã E205")
-🧠 2.1s model call  tokens=828+252
-🔧 0.0s create_ticket(P3, billing-team-a)
-         → {"ticket_id": "T-1001"}
-🧠 1.9s model call  tokens=1109+156
-🧭 agent Support agent · 3 lượt model · 2 tool`, 10.5);
-  [['Agent', 'cả khối · 🧭'], ['Runner.run', 'chuỗi lượt gọi · 🧠'], ['function_tool', 'mỗi dòng 🔧'], ['Guardrail', 'kiểm tra đầu vào · 🛡']].forEach(([t, d], i) =>
+  code(s, 40, 88, 430, 200, `🛡 guardrail no_card_number: qua
+① APP → LLM  2 message · 574+154 token
+② LLM: gọi search_kb ×2 {"query": "lỗi … E205"}
+③ APP chạy search_kb → ④ kết quả gửi lại
+① APP → LLM  5 message · 932+240 token
+② LLM: gọi create_ticket {"priority": "P3", …}
+③ APP chưa chạy: chờ duyệt → ĐỒNG Ý → T-1001
+① APP → LLM  7 message · 1.201+227 token
+② LLM: dừng, trả lời cuối "Xử lý lỗi E205…"`, 10.5);
+  [['Agent', 'cả vòng lặp ①–④'], ['Runner.run', 'lặp các lượt ① ②'], ['function_tool', 'mỗi bước ③'], ['Guardrail', 'kiểm tra đầu vào · 🛡']].forEach(([t, d], i) =>
     box(s, 490, 88 + i * 50, 190, 42, `${t}\n${d}`, { size: 12.5, sub: 10, align: 'START' }));
   label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
 }

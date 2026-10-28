@@ -68,10 +68,10 @@ Không còn dòng nào của PDF thiếu slide.
 
 **Slide 7 · Trace thật — DEMO LIVE (5')**
 - Chạy: `python3 run_demo.py --scenario 1 --approve yes --trace` (khoảng 7–8 giây).
-- Đọc từng dòng: 🛡 guardrail → 🧠 lượt 1 chọn search_kb → 🔧 search_kb → 🧠 lượt 2 đề xuất create_ticket → dừng chờ duyệt → 🔧 tạo T-1001 → 🧠 trả lời.
-- Khi chạy live sẽ thấy `create_ticket` 2 dòng: dòng đầu là lúc dừng chờ duyệt (kết quả rỗng), dòng sau mới tạo thật.
+- Đọc theo vòng lặp ①–④: 🛡 guardrail → ① app gửi 2 message → ② LLM quyết định gọi search_kb (JSON + lý do LLM tự viết) → ③ app chạy → ① 5 message → ② LLM đề xuất create_ticket → ③ chưa chạy, chờ duyệt → T-1001 → ② LLM quyết định dừng, trả lời.
+- Live sẽ thấy create_ticket 2 dòng ③: "CHƯA chạy create_ticket: dừng chờ người duyệt" rồi "chạy hàm thật create_ticket" sau khi duyệt.
 - Số liệu live sẽ lệch chút so với slide (model thật). Thỉnh thoảng model đề xuất P2 rồi bị ④ chặn → đúng dịp nối sang slide 10–11.
-- Kết: 3 lượt gọi model, 2.511 token vào. Số bước do model quyết định.
+- Kết: 3 lượt gọi model, 2.707 token vào + 621 ra (số trên slide). Số bước do model quyết định.
 
 ### 02 · Tool contract (20–38')
 

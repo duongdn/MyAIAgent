@@ -44,7 +44,8 @@ def _loop_lines(d):
     if d.type in ("generation", "response"):
         sent = len(getattr(d, "input", None) or [])
         out = (getattr(d, "output", None) or [{}])[0]
-        lines = [f"① APP → LLM   gửi {sent} message (câu hỏi + mọi kết quả tool trước đó)"]
+        usage = getattr(d, "usage", None) or {}
+        lines = [f"① APP → LLM   gửi {sent} message (câu hỏi + kết quả tool trước) · {usage.get('input_tokens', '?')}+{usage.get('output_tokens', '?')} token"]
         why = " ".join((out.get("reasoning_content") or "").split())
         if out.get("tool_calls"):
             for tc in out["tool_calls"]:
