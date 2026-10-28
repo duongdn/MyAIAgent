@@ -61,5 +61,18 @@
     "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid0iR4d2PJgD8b753BM5uTAqLzLqd2nuP7huLrhih2uU3CshtmySuFR6jF9QzPLg4qZl",
     "status": "draft",
     "audience": "Chỉ mình tôi"
+  },
+  {
+    "date": "2026-10-28",
+    "type": "academic-it",
+    "topic": "AWS MFA re-sync / TOTP RFC 6238",
+    "sources": [
+      "https://datatracker.ietf.org/doc/html/rfc6238",
+      "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html",
+      "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html"
+    ],
+    "postUrl": "https://www.facebook.com/dnduong.us/posts/pfbid029cd4XvZcRCHsXRk6KurgdNhhkhiV38ngcscVBUQM2Y9dQ6idcbFYDBSdquQuq5yWl",
+    "status": "draft",
+    "audience": "Chỉ mình tôi"
   }
 ]
