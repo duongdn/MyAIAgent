@@ -151,3 +151,9 @@ Plan đầy đủ + rà soát: `release-plan.md`. Lệnh chi tiết: `runbook.md
   - Shows KPIs, avg/p95/throughput chart, transactions by total time (routes normalized, `?json=` endpoints kept), slow requests list, top IPs. Ranges 1h–7d; default excludes dev IP 171.251.232.148.
 - apache_logs: added `idx_datetime` on live table (clones inherit via CREATE TABLE LIKE) + clones 1024–1027. `apache_logs_clone_20261024` holds 8.4M rows (2026-05-20 → 10-24, old server clone cron stalled).
 - Load time: 24h 0.8s, 3d 2.1s, 7d 12s (PHP aggregation of ~430k rows).
+
+### 2026-10-28 — Cloudflare rate limiting rule (page floods)
+- Why: 10-27 17:09 UTC scanner 34.19.223.206 (fake Googlebot UA, GCP) sent 148 req/min of WP-booting 404s → all workers busy, real requests 8–44s for ~2 min.
+- Rule (http_ratelimit entrypoint): block 10 min when >30 req/10s per IP on pages; excludes verified bots, /wp-content, /wp-includes, /wp-admin, /wp-json, /api/, `?json=`, `?ob=`, OPTIONS.
+- Validated on apache_logs 10-24..10-28: real users peak 22 page req/10s; every IP >30 was a scanner. App user bursts (41/10s) are API → excluded.
+- Tested: 40 parallel GET / → next page 429, API + static still 200, unblocked after timeout. Watch CF Security Events 1–2 days for false positives.
