@@ -35,7 +35,7 @@ Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả
   box(s, 580, y, 96, 44, 'Model: trả lời', { fill: C.ORANGE, size: 10.5 });
   arrow(s, 235, y, 235, y - 14, C.INK, false); arrow(s, 235, y - 14, 628, y - 14, C.INK, false); arrow(s, 628, y - 14, 628, y - 2, C.INK);
   label(s, 400, y - 30, 200, 14, 'đủ thông tin → dừng', { size: 9, bold: false, color: C.INK });
-  label(s, 180, y + 48, 500, 16, '↻ lặp bao nhiêu lượt do model quyết định · dừng khi model trả lời cuối hoặc chạm max_turns', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
+  label(s, 180, y + 48, 500, 16, '↻ số lượt do model quyết · dừng: trả lời cuối hoặc max_turns', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
   box(s, 40, 330, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 58, 326, 200, 22, 'model quyết định', { size: 10, bold: false, align: 'START' });
   box(s, 190, 330, 14, 14, ' ', { fill: C.INK }); label(s, 208, 326, 200, 22, 'code quyết định', { size: 10, bold: false, align: 'START' });
 }
@@ -83,7 +83,6 @@ await Runner.run(agent, q, max_turns=8)`, 8.5);
 🔧 create_ticket(P3, billing-team-a)
    → T-1001
 🧠 model call   1194+171 tok · trả lời`, 8.5);
-  label(s, 40, 352, 640, 16, 'rút gọn từ compare_orchestration_levels.py · output thật: --runs 1 --show', { size: 9, bold: false, color: C.GREY, align: 'START' });
 }
 
 // Đo thật: cùng 1 yêu cầu, 3 mức
@@ -106,7 +105,7 @@ Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25
     mono(s, 210 + (r.tokens / max) * 280, y + 10, 90, 22, `${Math.round(r.tokens).toLocaleString("de-DE")} token`, { color: C.INK, size: 11 });
     box(s, 610, y + 6, 70, 30, r.tickets ? 'tạo ticket ✓' : 'không tạo', { fill: r.tickets ? C.GREEN : C.MUTED, size: 9.5 });
   });
-  box(s, 40, 300, 640, 50, 'Yêu cầu này có các bước biết trước → workflow đủ việc với ít token hơn. Agent đáng tiền khi số bước không biết trước.', { fill: C.INK, size: 12.5, align: 'START' });
+  box(s, 40, 300, 640, 50, 'Bước biết trước → workflow đủ việc, ít token hơn', { fill: C.INK, size: 12.5, align: 'START' });
 }
 
 // Vì sao agent tốn token: mỗi lượt gửi lại toàn bộ hội thoại
@@ -123,7 +122,7 @@ Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính
   });
   box(s, 200, 300, 14, 14, ' ', { fill: C.BLUE, noLine: true }); label(s, 218, 296, 160, 22, 'token gửi vào', { size: 10, bold: false, align: 'START' });
   box(s, 330, 300, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 348, 296, 160, 22, 'token model viết ra', { size: 10, bold: false, align: 'START' });
-  label(s, 40, 325, 640, 40, 'Tổng: 2.511 token vào + 489 ra cho một câu hỏi ~60 token — model không nhớ, nên mỗi lượt phải gửi lại từ đầu', { size: 12, align: 'START' });
+  label(s, 40, 325, 640, 40, 'Tổng 2.511 vào + 489 ra · model không nhớ → mỗi lượt gửi lại từ đầu', { size: 12, align: 'START' });
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
@@ -142,14 +141,14 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
 🧭 agent Support agent · 3 lượt model · 2 tool`, 10.5);
   [['Agent', 'cả khối · 🧭'], ['Runner.run', 'chuỗi lượt gọi · 🧠'], ['function_tool', 'mỗi dòng 🔧'], ['Guardrail', 'kiểm tra đầu vào · 🛡']].forEach(([t, d], i) =>
     box(s, 490, 88 + i * 50, 190, 42, `${t}\n${d}`, { size: 12.5, sub: 10, align: 'START' }));
-  label(s, 40, 300, 640, 40, 'Đọc trace trả lời được: agent gọi tool nào, với tham số gì, mất bao lâu, tốn bao nhiêu token', { size: 12, align: 'START' });
+  label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
 }
 
 // Khi bước tiếp theo phụ thuộc kết quả tra: workflow phải đoán trước khi có dữ liệu → tốn hơn agent
 function conditionalCase() {
   question('Có khi nào agent lại rẻ hơn workflow?', '"…Nếu lỗi phía hệ thống mình thì tạo ticket; nếu do ngân hàng thì chỉ hướng dẫn khách."',
     `Đọc to yêu cầu. Hỏi lớp: workflow cố định "phân loại → tra KB → trả lời → tạo ticket" sẽ xử lý câu này thế nào? Bước phân loại có đủ thông tin để quyết định không?`);
-  const s = newSlide('Đáp án · đo thật', 'Bước phụ thuộc kết quả tra: agent rẻ hơn, nhanh hơn', `Số đo thật: compare_orchestration_levels.py --request conditional, ${cond.model}, ${cond.runs} lần mỗi mức. Cả 3 mức đều ĐÚNG là không tạo ticket (E205 = ngân hàng từ chối, kb-a-002).
+  const s = newSlide('Đáp án · đo thật', 'Workflow quyết trước khi tra: tốn ~2,8× agent', `Số đo thật: compare_orchestration_levels.py --request conditional, ${cond.model}, ${cond.runs} lần mỗi mức. Cả 3 mức đều ĐÚNG là không tạo ticket (E205 = ngân hàng từ chối, kb-a-002).
 Vì sao workflow tốn nhất (~${Math.round(cond.rows[1].tokens).toLocaleString('de-DE')} token, ${String(cond.rows[1].secs).replace('.', ',')}s): thứ tự bước cố định bắt bước "phân loại" quyết định có cần ticket TRƯỚC khi tra KB. Model không có dữ liệu nên suy luận rất lâu — đo riêng bước này: 2.759 và 9.900 token suy luận ẩn chỉ để trả về 1 dòng {"need_ticket": false}.
 Agent tra KB trước, thấy E205 do ngân hàng, rồi trả lời luôn: 2 lượt gọi.
 Công bằng mà nói: workflow sửa được bằng cách đổi thứ tự (tra trước, phân loại sau) — nhưng người viết code phải lường trước. Agent tự chọn thứ tự theo dữ liệu. Đây đúng là "bước tiếp theo phụ thuộc kết quả bước trước".`);

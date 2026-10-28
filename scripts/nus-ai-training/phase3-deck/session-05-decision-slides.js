@@ -17,7 +17,7 @@ Hỏi lớp: agent hay workflow đúng nhiều hơn? Tốn bao nhiêu?`);
 - Token agent dao động ${n(row('E999', 'Agent').tokens_min)}–${n(row('E999', 'Agent').tokens_max)} cho cùng một câu: mỗi lượt gửi lại cả hội thoại (slide 11), số lượt do model chọn.
 Bài học sâu hơn Session 2: "agent khi bước không biết trước" — nhưng ở đây các nhánh LIỆT KÊ ĐƯỢC (có/không tạo ticket). Liệt kê được thì code giữ thứ tự, model chỉ quyết 1 giá trị → đúng hơn, rẻ hơn, dễ test.
 Slide 13 agent thắng vì workflow viết sai thứ tự — không phải vì agent giỏi hơn.`);
-  const rows = [['Mã lỗi · đúng là', 'Mức', 'Đúng', 'Lượt gọi', 'Token / lần']];
+  const rows = [['Mã lỗi → đúng là', 'Mức', 'Đúng', 'Lượt gọi', 'Token / lần']];
   [['E205', 'không tạo'], ['E999', 'tạo ticket']].forEach(([code, want]) =>
     ['Workflow tra trước', 'Agent'].forEach((level) => {
       const r = row(code, level);
@@ -43,7 +43,6 @@ Câu trả lời khách hàng khi họ đòi "làm AI agent": liệt kê thử c
     ['Nhánh không liệt kê được', 'Agent', 'Token dao động ~2,5× · phải có eval lặp (S9)'],
     ['Không đảo ngược được', '+ người duyệt', 'Mọi mức — S7'],
   ], { rowH: 46, size: 11.5, fills: [C.WHITE, C.WHITE, C.GREEN, C.YELLOW] });
-  mono(s, 30, 330, 650, 16, 'Thử liệt kê nhánh trước · liệt kê được → workflow', { color: C.ORANGE, size: 11 });
 }
 
 module.exports = { consistency, decision };

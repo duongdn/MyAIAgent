@@ -10,10 +10,8 @@ Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deep
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
   label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
-  label(s, 40, 232, 600, 30, 'Session 5–9 · một support agent mở rộng dần · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
+  label(s, 40, 232, 600, 30, 'Session 5–9 · OpenAI Agents SDK', { size: 15, bold: false, color: C.DIM, align: 'START' });
   label(s, 40, 320, 250, 20, 'DuongDN · VinhNT', { size: 12, color: C.WHITE, align: 'START' });
-  ['search_kb', '→', 'create_ticket', '→', 'T-1001'].forEach((t, i) => box(s, 400 + [0, 70, 88, 182, 200][i], 318, t === '→' ? 18 : [68, 0, 92, 0, 60][i], 24, t,
-    { fill: t === '→' ? C.INK : i === 4 ? C.ORANGE : C.GHOST, font: 'IBM Plex Mono', size: 9, color: i === 4 ? C.INK : C.DIM, noLine: true }));
   footer(s, true);
 
   s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi cột: câu hỏi của buổi và phần agent có thêm sau buổi đó.
@@ -30,13 +28,12 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
     box(s, x, 216, 126, 80, add, { fill: C.GREEN, size: 11, bold: false });
     if (i) arrow(s, x - 10, 112, x, 112);
   });
-  label(s, 25, 305, 680, 22, 'câu hỏi của buổi  ↑            phần agent có thêm sau buổi  ↑', { size: 10, bold: false, color: C.GREY });
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',
     `Session 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
 Mục tiêu: người học chọn đúng mức điều phối và đọc được sơ đồ agent tối thiểu.
 Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào search — bạn hay ChatGPT?" → đó là agent.`);
-  agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'ví dụ support + 3 câu hỏi quyết định'],
+  agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'đo token · khi nào workflow thắng'],
     ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
   s = newSlide('Agent là gì', 'LLM chỉ đọc và viết text — agent là phần code bao quanh nó', `Agent = LLM + Tools + Context + Code của mình.
@@ -125,8 +122,8 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
 
   takeaways([
     ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
-    ['Chọn mức', 'Mức thấp nhất làm được việc — agent khi số bước phụ thuộc kết quả'],
-    ['Chi phí', 'Nhánh liệt kê được → workflow rẻ 2,6–13× · Không liệt kê được → agent'],
+    ['Chọn mức', 'Liệt kê được nhánh → workflow · không liệt kê được → agent'],
+    ['Chi phí', 'Agent tốn 2,6–13× token, dao động giữa các lần chạy'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
