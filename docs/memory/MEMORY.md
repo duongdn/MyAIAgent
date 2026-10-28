@@ -3,6 +3,7 @@
 **Read scope:** `/util:read-memory <command> [piece]` reads Global + matching section ONLY. Filenames are self-descriptive — open a file for detail.
 
 ## Global — every command
+- [no_self_invented_issues_without_proven_impact](global/feedback_no_self_invented_issues_without_proven_impact.md) — 🔴 only report issues customer/team raised or with observed failure (MPFC SPF/www noise 10-28)
 - [reply_in_vietnamese](global/feedback_reply_in_vietnamese.md) — 🔴 trả lời user bằng tiếng Việt
 - [old_reports_archived_to_backup](global/project_old_reports_archived_to_backup.md) — reports >7 ngày ở reports/backup/YYYY-MM-DD/
 - [project_memory_index_organized_by_command](global/project_memory_index_organized_by_command.md), [feedback_timeline_system](global/feedback_timeline_system.md)
