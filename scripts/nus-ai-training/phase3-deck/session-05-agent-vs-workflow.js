@@ -15,12 +15,13 @@ Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; applic
   footer(s, true);
 
   s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
+S8: lưu trạng thái task (đang xử lý / chờ duyệt / xong) để chạy tiếp sau khi dừng giữa chừng + các điều kiện dừng. S9: harness = bộ test chạy lặp (eval) + trace để kiểm tra agent trước khi đưa cho đội review.
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
 Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.`);
   // Bậc thang: mỗi hàng là agent sau buổi đó — ô cam = lớp mới thêm, ô nhạt = lớp đã có
-  const layers = ['Model + tool\n+ Runner', 'Tool contract', 'Quyền, retry,\napproval', 'State,\nkhi dừng', 'Harness,\ntrace'];
+  const layers = ['Model + tool\n+ Runner', 'Tool contract', 'Quyền, retry,\napproval', 'Nhớ việc dở,\nbiết lúc dừng', 'Bộ test,\ntrace'];
   [['S5', 'Có cần agent không?'], ['S6', 'Agent gọi tool thế nào?'], ['S7', 'Chặn gì quanh tool call?'],
-   ['S8', 'Giữ gì, khi nào dừng?'], ['S9', 'Đủ để review chưa?']].forEach(([k, q], i) => {
+   ['S8', 'Làm dở thì sao?'], ['S9', 'Sao biết agent chạy đúng?']].forEach(([k, q], i) => {
     const y = 86 + i * 56;
     box(s, 40, y, 44, 46, k, { fill: C.NAVY, size: 14 });
     label(s, 92, y, 130, 46, q, { size: 11.5, align: 'START' });

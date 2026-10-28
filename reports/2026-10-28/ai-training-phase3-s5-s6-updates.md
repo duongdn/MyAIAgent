@@ -23,3 +23,12 @@
 
 **Vấn đề:** 2 hàng ô (câu hỏi / phần thêm) + chú thích "↑" → người xem không hiểu slide muốn nói gì.
 **Sau:** dạng bậc thang. Mỗi hàng = agent sau buổi đó; ô cam = lớp mới thêm, ô nhạt = lớp đã có. Hàng S9 = agent đầy đủ. Đã render, ok.
+
+## 15:45 — S5 slide 2: S8, S9 viết lại bằng lời thường
+
+| Hàng | Trước | Sau |
+|---|---|---|
+| S8 | "Giữ gì, khi nào dừng?" · "State, khi dừng" | "Làm dở thì sao?" · "Nhớ việc dở, biết lúc dừng" |
+| S9 | "Đủ để review chưa?" · "Harness, trace" | "Sao biết agent chạy đúng?" · "Bộ test, trace" |
+
+Giải thích state/harness chuyển vào notes.
