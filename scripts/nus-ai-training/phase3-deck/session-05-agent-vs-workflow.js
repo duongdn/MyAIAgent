@@ -14,19 +14,18 @@ Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; applic
   label(s, 40, 320, 250, 20, 'DuongDN · VinhNT', { size: 12, color: C.WHITE, align: 'START' });
   footer(s, true);
 
-  s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi cột: câu hỏi của buổi và phần agent có thêm sau buổi đó.
+  s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
 Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.`);
-  [['S5', 'Có cần agent không?', 'Agent tối thiểu:\nmodel + 1 tool + Runner'],
-   ['S6', 'Agent gọi tool thế nào?', 'Tool contract\nsearch_kb · create_ticket'],
-   ['S7', 'Chặn gì quanh tool call?', 'Quyền · retry ·\nidempotency · approval'],
-   ['S8', 'Giữ gì, khi nào dừng?', 'Task state lưu bền ·\n5 điều kiện dừng'],
-   ['S9', 'Đủ để review chưa?', 'Harness · trace ·\nkiến trúc 1 trang']].forEach(([k, q, add], i) => {
-    const x = 25 + i * 136;
-    box(s, x, 90, 126, 44, k, { fill: C.NAVY, size: 18 });
-    box(s, x, 140, 126, 70, q, { fill: C.LIGHT, size: 12 });
-    box(s, x, 216, 126, 80, add, { fill: C.GREEN, size: 11, bold: false });
-    if (i) arrow(s, x - 10, 112, x, 112);
+  // Bậc thang: mỗi hàng là agent sau buổi đó — ô cam = lớp mới thêm, ô nhạt = lớp đã có
+  const layers = ['Model + tool\n+ Runner', 'Tool contract', 'Quyền, retry,\napproval', 'State,\nkhi dừng', 'Harness,\ntrace'];
+  [['S5', 'Có cần agent không?'], ['S6', 'Agent gọi tool thế nào?'], ['S7', 'Chặn gì quanh tool call?'],
+   ['S8', 'Giữ gì, khi nào dừng?'], ['S9', 'Đủ để review chưa?']].forEach(([k, q], i) => {
+    const y = 86 + i * 56;
+    box(s, 40, y, 44, 46, k, { fill: C.NAVY, size: 14 });
+    label(s, 92, y, 130, 46, q, { size: 11.5, align: 'START' });
+    for (let j = 0; j <= i; j++)
+      box(s, 228 + j * 92, y, 86, 46, layers[j], { fill: j === i ? C.ORANGE : C.LIGHT, size: 10, bold: j === i });
   });
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',

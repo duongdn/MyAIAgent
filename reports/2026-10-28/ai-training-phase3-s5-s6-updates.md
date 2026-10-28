@@ -18,3 +18,8 @@
 | 21 | Thẻ "Chọn mức"/"Chi phí" lỗi thời, trùng nhau | Chọn mức: liệt kê được nhánh → workflow · Chi phí: agent tốn 2,6–13×, dao động |
 
 Đã render lại cả 23 slide và kiểm tra. Deck vẫn 23 slide.
+
+## 16:05 — S5 slide 2 (lộ trình) vẽ lại
+
+**Vấn đề:** 2 hàng ô (câu hỏi / phần thêm) + chú thích "↑" → người xem không hiểu slide muốn nói gì.
+**Sau:** dạng bậc thang. Mỗi hàng = agent sau buổi đó; ô cam = lớp mới thêm, ô nhạt = lớp đã có. Hàng S9 = agent đầy đủ. Đã render, ok.
