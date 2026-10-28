@@ -303,6 +303,7 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [elena_assert_validation_not_an_issue](elena/feedback_elena_assert_validation_not_an_issue.md) — assert validation = customer pattern + -ea, known issue in release note; don't flag
 - [user_career_direction_ai_engineer](global/user_career_direction_ai_engineer.md) — 2026-10-19 chọn hướng AI Engineer/Architect, có plan 6 tháng
 ## fb-post
+- [fb_post_typeahead_corrupts_text_verify_after_post](fb-post/feedback_fb_post_typeahead_corrupts_text_verify_after_post.md) — 🔴 FB chèn "Phong Cách Sexy"/😎; paste+verify, tránh emoticon "8)", đọc lại bài sau khi đăng
 - [fb_post_explain_articles_like_talking_not_translating](fb-post/feedback_fb_post_explain_articles_like_talking_not_translating.md) — 🔴 diễn giải bài báo = kể chuyện tiếng người, ko dịch sát/số liệu/thuật ngữ
 - [fb_daily_post_draft_is_only_me](fb-post/project_fb_daily_post_draft_is_only_me.md) — draft = "Chỉ mình tôi" post; untick default-audience box; submit = change audience
 - [mpfc_account_delete_and_paypal_cancel](mpfc/feedback_mpfc_account_delete_and_paypal_cancel.md) — 🔴 user/delete orphaned subs (fixed f867e03b2); PayPal NVP cancels I- subs despite read error — test, don't infer

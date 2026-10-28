@@ -189,12 +189,20 @@ async function createDraft(page, text, dryRun, options = {}) {
   if (options.feeling) await pickFeeling(page, options.feeling);
 
   await page.click('[role="dialog"] [role="textbox"]');
-  for (const [i, line] of text.split('\n').entries()) {
-    // insertText (sendCharacter) avoids emoji typeahead swallowing the following newline
-    if (i > 0) { await page.keyboard.down('Shift'); await page.keyboard.press('Enter'); await page.keyboard.up('Shift'); await sleep(200); }
-    if (line) { await page.keyboard.sendCharacter(line); await sleep(200); }
-  }
+  // Paste instead of typing: typed text triggers FB typeahead (":)"/"8)" → emoji, words → page
+  // mention suggestions that Enter accepts — once inserted "Phong Cách Sexy" into a post)
+  await page.evaluate(t => {
+    const box = document.querySelector('[role="dialog"] [role="textbox"]');
+    const dt = new DataTransfer();
+    dt.setData('text/plain', t);
+    box.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }));
+  }, text);
   await sleep(1500);
+  const norm = s => s.replace(/\s+/g, '');
+  const typed = await page.$eval('[role="dialog"] [role="textbox"]', el => el.innerText);
+  if (norm(typed) !== norm(text)) {
+    throw new Error(`composer_text_mismatch — FB altered the text, not posting. Got: ${typed.slice(0, 300)}`);
+  }
 
   if (dryRun) {
     const shot = path.join(__dirname, '..', 'tmp', 'fb-post-dry-run.png');
