@@ -65,3 +65,12 @@ Cách cập nhật deck: dùng tool mới `deck-tools/patch-slides-from-code.js`
 ## 16:05 — S5 slide 5 "Agent là gì" thêm lại, chuyển thành slide nhắc lại
 
 User muốn giữ slide này nhưng chỉ để nhắc lại. Kicker đổi thành "Nhắc lại · Session 1–2", nội dung hình giữ nguyên. Notes: tối đa 1 phút, không giảng lại, nối sang "hôm nay đo xem để model chọn bước thì được gì, mất gì". Deck 22 → 23 slide; tham chiếu số slide trong notes đã cộng 1 lại. Patch slide 5–23 (không ai sửa tay sau lần patch trước, đã kiểm tra trên Drive).
+
+## 16:12 — S5 slide 5: theo slide "LLM vs Agent" của Session 1 (ChienTX)
+
+**Vấn đề:** slide nhắc lại dùng `search_kb`, `create_ticket` của demo mình. Người xem chưa biết demo này nên không hiểu.
+**Sau:** theo đúng slide 16 của ChienTX S1:
+- Tiêu đề "ChatGPT, Claude không chỉ là LLM — agent là app bao quanh nó".
+- Tool chung: Web search · Chạy code · Database · API · File · Memory.
+- 4 bước: "LLM nói: tôi cần một tool" → app chạy tool → kết quả về LLM → lặp.
+Slide 6: ô "Code chạy tool" đổi `search_kb · create_ticket` → "tra KB · tạo ticket". Chỉ patch slide 5, 6.

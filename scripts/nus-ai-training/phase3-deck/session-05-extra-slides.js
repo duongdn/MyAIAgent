@@ -27,7 +27,7 @@ function threeFlows() {
   mono(s, 40, y, 140, 14, 'AGENT', { size: 9 });
   label(s, 40, y + 14, 130, 30, 'nhận mục tiêu, tự chọn bước', { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
   box(s, 180, y, 110, 44, 'Model: chọn tool tiếp theo', { fill: C.ORANGE, size: 10.5 });
-  box(s, 380, y, 140, 44, 'Code chạy tool\nsearch_kb · create_ticket', { fill: C.INK, size: 10.5, sub: 9 });
+  box(s, 380, y, 140, 44, 'Code chạy tool\ntra KB · tạo ticket', { fill: C.INK, size: 10.5, sub: 9 });
   twoWay(s, 292, 378, y + 22);
   label(s, 292, y + 2, 86, 14, 'gọi tool', { size: 8.5, bold: false, color: C.INK });
   label(s, 292, y + 30, 86, 14, 'kết quả', { size: 8.5, bold: false, color: C.ORANGE });

@@ -36,15 +36,16 @@ Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thà
   agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'đo token · khi nào workflow thắng'],
     ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
-  s = newSlide('Nhắc lại · Session 1–2', 'LLM chỉ viết text — agent là phần code bao quanh nó', `Nhắc lại, KHÔNG giảng lại: tối đa 1 phút, lớp đã học ở Session 1 (LLM đọc/viết text, không giữ state) và Session 2 (agent = model chọn bước + gọi tool; output là data phải validate).
+  s = newSlide('Nhắc lại · Session 1–2', 'ChatGPT, Claude không chỉ là LLM — agent là app bao quanh nó', `Nhắc lại, KHÔNG giảng lại: tối đa 1 phút, lớp đã học ở Session 1 (LLM đọc/viết text, không giữ state) và Session 2 (agent = model chọn bước + gọi tool; output là data phải validate).
+Hình giống slide "LLM vs Agent" của Session 1 (ChienTX), cùng ví dụ ChatGPT/Claude và các tool chung (web search, chạy code, database…). Use case support (tra KB, tạo ticket) chỉ xuất hiện từ slide sau.
 Chỉ đọc 4 bước bên phải rồi nối: "hôm nay đo xem để model chọn bước thì được gì, mất gì".
 Giữ lại công thức Agent = LLM + Tools + Context + Code của mình vì cả Giai đoạn 3 là viết phần "Code của mình".`);
   box(s, 40, 92, 420, 228, '', { fill: C.CARD, valign: 'TOP' });
-  label(s, 50, 100, 300, 20, 'AGENT (application của mình)', { size: 10, align: 'START', color: C.ORANGE });
-  box(s, 60, 130, 380, 50, 'LLM\nđọc text → viết text (kể cả "tôi cần gọi tool X")', { fill: C.NAVY, size: 15, sub: 11 });
-  ['search_kb', 'create_ticket', 'DB / API'].forEach((t, i) => box(s, 60 + i * 130, 200, 120, 36, t, { fill: C.LIGHT, size: 12 }));
+  label(s, 50, 100, 300, 20, 'AGENT (app)', { size: 10, align: 'START', color: C.ORANGE });
+  box(s, 60, 130, 380, 50, 'LLM\nbộ não: đọc & viết text', { fill: C.NAVY, size: 15, sub: 11 });
+  ['Web search', 'Chạy code', 'Database', 'API', 'File', 'Memory'].forEach((t, i) => box(s, 60 + (i % 3) * 130, 192 + Math.floor(i / 3) * 26, 120, 22, t, { fill: C.LIGHT, size: 11 }));
   box(s, 60, 246, 380, 62, 'Code của mình\nchạy tool thật · kiểm quyền · lưu state · quyết định dừng', { fill: C.GREEN, size: 13, sub: 11 });
-  [['1', 'Model viết: "gọi search_kb(query=…)"'], ['2', 'Code chạy hàm thật'], ['3', 'Kết quả quay lại model dưới dạng text'], ['4', 'Lặp tới khi model trả lời']]
+  [['1', 'LLM nói: "tôi cần một tool"'], ['2', 'App chạy tool'], ['3', 'Kết quả quay lại LLM dưới dạng text'], ['4', 'Lặp tới khi trả lời được']]
     .forEach(([k, t], i) => {
       box(s, 480, 110 + i * 60, 30, 30, k, { fill: C.ORANGE, shape: 'ELLIPSE', size: 12, noLine: true });
       label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
