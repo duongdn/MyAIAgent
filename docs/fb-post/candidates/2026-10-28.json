@@ -1,0 +1,270 @@
+[
+  {
+    "n": 1,
+    "type": "fb-memory",
+    "topic": "Kỷ niệm 2 năm: bé hóa phù thủy Halloween",
+    "text": "Hai năm trước có cô phù thủy nhỏ đi xin kẹo 🧙‍♀️🍬\nNăm nay sắp Halloween, chắc lại phải chuẩn bị kẹo... và ví 😅",
+    "feeling": "hạnh phúc",
+    "source": {
+      "title": "Kỷ niệm 2 năm trước — bài của Hoang Thuy Thuy gắn thẻ bé",
+      "publisher": "Facebook Kỷ niệm",
+      "url": "",
+      "summary": "Album bé mặc áo choàng + mũ phù thủy, cầm giỏ bí ngô ở khu ăn uống, caption gốc 'Các cô chú tính cho con kẹo hay muốn bị con ghẹo nè'."
+    },
+    "sources": [
+      "fb-memory:1"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/01.png",
+    "memoryIndex": 1
+  },
+  {
+    "n": 2,
+    "type": "fb-memory",
+    "topic": "Kỷ niệm 10 năm kết bạn với Lam",
+    "text": "10 năm kết bạn trên Facebook 🥰\nTừ hồi còn trẻ trâu tới giờ đã thành... trâu già 🐃😂",
+    "feeling": "hạnh phúc",
+    "source": {
+      "title": "Kỷ niệm 'Đoàn và Lam — Kết bạn được 10 năm'",
+      "publisher": "Facebook Kỷ niệm",
+      "url": "",
+      "summary": "Thẻ kỷ niệm tình bạn 10 năm, collage ảnh gia đình: tặng hoa, đám hỏi áo dài, bế em bé."
+    },
+    "sources": [
+      "fb-memory:0"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/02.png",
+    "memoryIndex": 0
+  },
+  {
+    "n": 3,
+    "type": "stock-humor",
+    "topic": "FPT lãi kỷ lục mà giá thủng đáy",
+    "text": "Công ty báo lãi kỷ lục 🎉\nCổ phiếu thì báo... thủng đáy 🕳️\nHóa ra làm ăn giỏi chưa chắc đã được thương, giống mình đi làm vậy 🥲",
+    "feeling": "ngốc nghếch",
+    "source": {
+      "title": "Cổ phiếu FPT thủng đáy dù báo lãi kỷ lục",
+      "publisher": "Google News (news-digest 28/10)",
+      "url": "",
+      "summary": "Giá FPT tiếp tục giảm dù kết quả kinh doanh cao nhất lịch sử."
+    },
+    "sources": [
+      "news-digest:2026-10-28"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/03.png",
+    "image": "tmp/vnindex-2026-10-28.png"
+  },
+  {
+    "n": 4,
+    "type": "stock-humor",
+    "topic": "VN-Index loay hoay dưới 1.770",
+    "text": "Chỉ số cứ tới cửa 1.770 là quay đầu 🚪\nY chang mình tới cửa phòng gym 😅\nAi cũng đang đứng ngoài cửa điểm danh nào 🙋",
+    "feeling": "hoang mang",
+    "source": {
+      "title": "VN-Index giảm nhẹ, kháng cự 1.770 điểm thách thức nhà đầu tư",
+      "publisher": "Google News (news-digest 28/10)",
+      "url": "",
+      "summary": "Vùng 1.770 điểm tiếp tục là ngưỡng cản khó vượt; thị trường giằng co, thanh khoản thấp."
+    },
+    "sources": [
+      "news-digest:2026-10-28"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/04.png",
+    "image": "tmp/vnindex-2026-10-28.png"
+  },
+  {
+    "n": 5,
+    "type": "share-article",
+    "topic": "SCB lãi tiết kiệm gần 0%",
+    "text": "Gửi tiết kiệm SCB giờ lãi 0,1%/năm 🐷\nGửi 100 triệu một năm được... ly trà sữa 🧋😂\nhttps://vnexpress.net/scb-giam-lai-suat-tiet-kiem-xuong-gan-0-5137507.html",
+    "feeling": "hoang mang",
+    "source": {
+      "title": "SCB giảm lãi suất tiết kiệm xuống gần 0%",
+      "publisher": "VnExpress, 28/10",
+      "url": "https://vnexpress.net/scb-giam-lai-suat-tiet-kiem-xuong-gan-0-5137507.html",
+      "summary": "Từ ngân hàng từng dẫn đầu lãi suất, SCB nay chỉ trả 0,1–0,7%/năm."
+    },
+    "sources": [
+      "https://vnexpress.net/scb-giam-lai-suat-tiet-kiem-xuong-gan-0-5137507.html"
+    ]
+  },
+  {
+    "n": 6,
+    "type": "share-article",
+    "topic": "Xem xét giảm giá điện + thuế xăng từ 1/11",
+    "text": "Nghe nói sắp giảm giá điện với xăng ⚡⛽\nTháng này bật máy lạnh đỡ run tay hơn rồi 😆\nhttps://vnexpress.net/pho-thu-tuong-xem-xet-giam-gia-dien-tu-1-11-5137612.html",
+    "feeling": "hào hứng",
+    "source": {
+      "title": "Phó thủ tướng: xem xét giảm giá điện từ 1/11",
+      "publisher": "VnExpress, 28/10",
+      "url": "https://vnexpress.net/pho-thu-tuong-xem-xet-giam-gia-dien-tu-1-11-5137612.html",
+      "summary": "Đề xuất giảm thuế TTĐB xăng về 0% và giảm giá điện bình quân trong 5 tháng."
+    },
+    "sources": [
+      "https://vnexpress.net/pho-thu-tuong-xem-xet-giam-gia-dien-tu-1-11-5137612.html"
+    ]
+  },
+  {
+    "n": 7,
+    "type": "share-article",
+    "topic": "Vàng bạc giảm liên tục",
+    "text": "Tuần trước khoe vàng nhẫn giảm, tuần này vàng vẫn giảm tiếp 📉\nNgười mua rồi thì im lặng, người chưa mua thì... cũng im lặng vì hết tiền 🤐\nhttps://tuoitre.vn/gia-vang-bac-giam-mai-nha-dau-tu-lo-nang-100261028000022196.htm",
+    "feeling": "hết tiền",
+    "source": {
+      "title": "Giá vàng bạc giảm liên tục, nhà đầu tư lỗ nặng",
+      "publisher": "Tuổi Trẻ, 28/10",
+      "url": "https://tuoitre.vn/gia-vang-bac-giam-mai-nha-dau-tu-lo-nang-100261028000022196.htm",
+      "summary": "Vàng thế giới có lúc rơi xuống 3.990 USD/ounce rồi bật lên 4.060 USD; người mua đỉnh lỗ nặng."
+    },
+    "sources": [
+      "https://tuoitre.vn/gia-vang-bac-giam-mai-nha-dau-tu-lo-nang-100261028000022196.htm"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/tuoitre-vang.jpg"
+  },
+  {
+    "n": 8,
+    "type": "nus-blog",
+    "topic": "ClearHear: phụ đề trực tiếp khi tắt mạng",
+    "text": "Bật chế độ máy bay, nói chuyện, phụ đề vẫn chạy ra từng chữ ✈️💬\nCông ty mình làm app này, khỏi cần mạng luôn. Ai lãng tai thử xem 😄\nhttps://www.nustechnology.com/blog/live-captions-with-the-internet-switched-off-inside-clearhear",
+    "feeling": "hào hứng",
+    "source": {
+      "title": "Live Captions With the Internet Switched Off: Inside ClearHear",
+      "publisher": "NUS Technology blog",
+      "url": "https://www.nustechnology.com/blog/live-captions-with-the-internet-switched-off-inside-clearhear",
+      "summary": "Dự án đầu tiên của NUS Labs: app điện thoại nghe mic và hiện phụ đề ngay trên máy, không cần mạng/server, lưu và tóm tắt trên máy; khó vì phải vừa trực tiếp vừa offline vừa mượt."
+    },
+    "sources": [
+      "https://www.nustechnology.com/blog/live-captions-with-the-internet-switched-off-inside-clearhear"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/nus-clearhear.jpg"
+  },
+  {
+    "n": 9,
+    "type": "nus-blog",
+    "topic": "Zuzu: app livestream không đứng hình khi vào thang máy",
+    "text": "Livestream thì dễ, khó là lúc người phát bước vô thang máy 🛗📵\nTeam mình làm thử app Zuzu để xử mấy pha \"rớt mạng giữa chừng\" đó 😅\nhttps://www.nustechnology.com/blog/building-a-real-time-mobile-livestreaming-app-with-flutter-livekit-and-webrtc",
+    "feeling": "tích cực",
+    "source": {
+      "title": "Building a Real-Time Mobile Livestreaming App with Flutter, LiveKit and WebRTC",
+      "publisher": "NUS Technology blog",
+      "url": "https://www.nustechnology.com/blog/building-a-real-time-mobile-livestreaming-app-with-flutter-livekit-and-webrtc",
+      "summary": "Dự án thứ 2 NUS Labs: app livestream iOS/Android; phần khó là xử lý khi mất sóng, đổi Wi-Fi sang 4G, app bị ẩn — người xem không bị treo hình."
+    },
+    "sources": [
+      "https://www.nustechnology.com/blog/building-a-real-time-mobile-livestreaming-app-with-flutter-livekit-and-webrtc"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/nus-zuzu.jpg"
+  },
+  {
+    "n": 10,
+    "type": "nus-blog",
+    "topic": "AI tự thêm mô tả ảnh cho tài liệu",
+    "text": "Có những người đọc tài liệu bằng tai chứ không bằng mắt 👂📄\nTeam mình dùng AI tự ghi chú thích cho ảnh, tiêu đề trong file Word, PDF giúp họ đọc dễ hơn 🙌\nhttps://www.nustechnology.com/blog/automating-document-accessibility-patching-raw-ooxml-and-parsing-pdf-structure-trees-with-ai",
+    "feeling": "tích cực",
+    "source": {
+      "title": "Automating Document Accessibility: Patching Raw OOXML and Parsing PDF Structure Trees with AI",
+      "publisher": "NUS Technology blog",
+      "url": "https://www.nustechnology.com/blog/automating-document-accessibility-patching-raw-ooxml-and-parsing-pdf-structure-trees-with-ai",
+      "summary": "Hệ thống AI tự thêm tiêu đề và mô tả ảnh (alt-text) vào PDF/Word/PowerPoint để đạt chuẩn tiếp cận cho người khiếm thị, không làm vỡ bố cục file."
+    },
+    "sources": [
+      "https://www.nustechnology.com/blog/automating-document-accessibility-patching-raw-ooxml-and-parsing-pdf-structure-trees-with-ai"
+    ],
+    "preview": "reports/2026-10-28/fb-candidates/nus-docs.jpg"
+  },
+  {
+    "n": 11,
+    "type": "trend",
+    "topic": "Halloween hóa trang theo màu kẹo",
+    "text": "Giới trẻ đua nhau hóa trang màu kẹo mút cho Halloween 🍭🎃\nMình thì khỏi hóa trang, sáng thứ Hai mở app chứng khoán là mặt đã đủ đáng sợ 👻\nhttps://kenh14.vn/kieu-trang-diem.html",
+    "feeling": "ngốc nghếch",
+    "source": {
+      "title": "Trend hóa trang theo màu kẹo mùa Halloween",
+      "publisher": "Kenh14",
+      "url": "https://kenh14.vn/kieu-trang-diem.html",
+      "summary": "Chupa Chups khởi xướng trend biến hình theo màu kẹo, TikToker hưởng ứng, giới trẻ đua nhau thử."
+    },
+    "sources": [
+      "https://kenh14.vn/kieu-trang-diem.html"
+    ]
+  },
+  {
+    "n": 12,
+    "type": "trend",
+    "topic": "Trả lời bằng 1 từ (Answer in One Word)",
+    "text": "Trend mới: trả lời mọi câu hỏi bằng đúng 1 từ ☝️\nTiền đâu? \"Hết\". Chứng khoán? \"Xanh... rêu\" 😂\nAi chơi thử dưới comment nào 👇\nhttps://newengen.com/insights/tiktok-trends/",
+    "feeling": "ngốc nghếch",
+    "source": {
+      "title": "TikTok Trends: October 2026 — Answer in One Word",
+      "publisher": "NewEngen",
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "summary": "Người dùng TikTok hỏi bạn bè/gia đình/ChatGPT câu hỏi cá nhân và bắt trả lời chỉ bằng 1 từ."
+    },
+    "sources": [
+      "https://newengen.com/insights/tiktok-trends/"
+    ]
+  },
+  {
+    "n": 13,
+    "type": "trend",
+    "topic": "Clip xếp hạng áo UNIQLO thu đông",
+    "text": "Mạng đang rần rần clip xếp hạng áo khoác thu đông 🧥\nSài Gòn thì có 2 mùa: nóng và... nóng có gió 🌬️😅\nhttps://kenh14.vn/luot-clip-san-do-thu-dong-dang-viral-xep-hang-6-chiec-ao-uniqlo-hot-hit-nhat-2026-215261027165019537.chn",
+    "feeling": "thư thái",
+    "source": {
+      "title": "Lướt clip săn đồ Thu/Đông đang viral: xếp hạng 6 chiếc áo UNIQLO hot hit nhất 2026",
+      "publisher": "Kenh14, 27/10",
+      "url": "https://kenh14.vn/luot-clip-san-do-thu-dong-dang-viral-xep-hang-6-chiec-ao-uniqlo-hot-hit-nhat-2026-215261027165019537.chn",
+      "summary": "Clip review/xếp hạng áo thu đông UNIQLO đang viral trên mạng."
+    },
+    "sources": [
+      "https://kenh14.vn/luot-clip-san-do-thu-dong-dang-viral-xep-hang-6-chiec-ao-uniqlo-hot-hit-nhat-2026-215261027165019537.chn"
+    ]
+  },
+  {
+    "n": 14,
+    "type": "running",
+    "topic": "Buổi chạy 6 km sáng nay",
+    "text": "Sáng nay 6 km, 33 phút 🏃‍♂️\nChân mỏi nhưng đầu nhẹ, chuẩn bị vô làm việc thôi 💪\nhttps://www.strava.com/activities/20758061566",
+    "feeling": "khỏe mạnh",
+    "source": {
+      "title": "Chạy bộ buổi sáng 28/10 — 6,01 km, 33 phút, pace 5:32/km",
+      "publisher": "Strava",
+      "url": "https://www.strava.com/activities/20758061566",
+      "summary": "Buổi chạy sáng nay."
+    },
+    "sources": [
+      "https://www.strava.com/activities/20758061566"
+    ]
+  },
+  {
+    "n": 15,
+    "type": "running",
+    "topic": "Còn 28 km là cán 1.000 km năm nay",
+    "text": "Năm nay chạy được 972 km rồi 🏃‍♂️\nCòn 28 km nữa là chạm mốc 1.000 🎯\nAi chạy cùng đoạn cuối không nè 😆\nhttps://www.strava.com/activities/20758061566",
+    "feeling": "hào hứng",
+    "source": {
+      "title": "Strava: năm 2026 972,1 km, tháng 10 225,9 km",
+      "publisher": "Strava",
+      "url": "https://www.strava.com/activities/20758061566",
+      "summary": "Tổng năm 972,1 km (từ 19/5), còn 27,9 km tới 1.000 km."
+    },
+    "sources": [
+      "https://www.strava.com/activities/20758061566"
+    ]
+  },
+  {
+    "n": 16,
+    "type": "running",
+    "topic": "Tháng 10 gần 226 km",
+    "text": "Tháng 10 chạy được 226 km 🏃‍♂️\nTính ra mỗi ngày hơn 7 km, chân chạy chăm hơn... tài khoản chứng khoán 😂\nhttps://www.strava.com/activities/20758061566",
+    "feeling": "khỏe mạnh",
+    "source": {
+      "title": "Strava: tháng 10 225,9 km, tuần này 16 km",
+      "publisher": "Strava",
+      "url": "https://www.strava.com/activities/20758061566",
+      "summary": "Tổng tháng 10 tới 28/10 = 225,9 km."
+    },
+    "sources": [
+      "https://www.strava.com/activities/20758061566"
+    ]
+  }
+]
