@@ -2,7 +2,7 @@
 
 Deck (16 slide): https://docs.google.com/presentation/d/1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ
 Code demo: `scripts/nus-ai-training/support_agent_demo/`
-Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia phần, hai người tự chốt lại.
+Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 
 ## Chuẩn bị trước buổi (10 phút)
 
@@ -20,8 +20,8 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 | 0–5 | 1 | Mở đầu + chia sẻ bài S5 | DuongDN |
 | 5–18 | 2–4 | 01 · Agent loop | DuongDN |
 | 18–28 | 5–6 | Trong SDK + trace live | DuongDN |
-| 28–45 | 7–10 | 02 · Tool contract | VinhNT |
-| 45–53 | 11–12 | 03 · Xong thật chưa? | VinhNT |
+| 28–45 | 7–10 | 02 · Tool contract | DuongDN |
+| 45–53 | 11–12 | 03 · Xong thật chưa? | DuongDN |
 | 53–57 | 13–14 | Ghi nhớ + thử thách | DuongDN |
 | 57–60 | — | Q&A | cả hai |
 
@@ -119,4 +119,3 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 - Slide 8 (Description) có thể rút gọn, chỉ đọc kết luận không đi chi tiết 2 bản mô tả (tiết kiệm 1').
 
 ## Câu hỏi chưa giải quyết
-- Chia phần giữa DuongDN và VinhNT ở trên chỉ là gợi ý, hai người cần chốt.

@@ -2,7 +2,7 @@
 
 Deck (16 slide): https://docs.google.com/presentation/d/1x5lvgyO4nNgGYq_hton3_5OPBRNFQD2Tk1Om9bzPpS0
 Code demo: `scripts/nus-ai-training/support_agent_demo/`
-Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia phần, hai người tự chốt lại.
+Người trình bày: VinhNT (S7–S9). Bản nháp do DuongDN soạn trước khi chia lại, VinhNT tự quyết dùng hay không.
 
 ## Chuẩn bị trước buổi (10 phút)
 
@@ -18,11 +18,11 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 
 | Phút | Slide | Phần | Gợi ý người nói |
 |---|---|---|---|
-| 0–5 | 1–2 | Mở đầu | DuongDN |
-| 5–18 | 3–5 | 01 · Quyền | DuongDN |
+| 0–5 | 1–2 | Mở đầu | VinhNT |
+| 5–18 | 3–5 | 01 · Quyền | VinhNT |
 | 18–38 | 6–9 | 02 · Lỗi | VinhNT |
 | 38–53 | 10–12 | 03 · Approval & dữ liệu ngoài | VinhNT |
-| 53–57 | 13–14 | Ghi nhớ + thử thách | DuongDN |
+| 53–57 | 13–14 | Ghi nhớ + thử thách | VinhNT |
 | 57–60 | 15–16 | Q&A | cả hai |
 
 ---
@@ -114,4 +114,3 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 - Slide 12 (dữ liệu không đáng tin) có thể gộp nhanh vào Ghi nhớ nếu cần thêm thời gian Q&A.
 
 ## Câu hỏi chưa giải quyết
-- Chia phần giữa DuongDN và VinhNT ở trên chỉ là gợi ý, hai người cần chốt.

@@ -2,7 +2,7 @@
 
 Deck (23 slide): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
 Code demo: `scripts/nus-ai-training/support_agent_demo/`
-Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia phần, hai người tự chốt lại.
+Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 
 ## Chuẩn bị trước buổi (10 phút)
 
@@ -18,8 +18,8 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 |---|---|---|---|
 | 0–5 | 1–5 | Mở đầu | DuongDN |
 | 5–15 | 6–11 | 01 · 3 mức điều phối + chi phí | DuongDN |
-| 15–24 | 12–16 | 02 · Khi nào cần agent | VinhNT |
-| 24–32 | 17–20 | 03 · OpenAI Agents SDK + ranh giới | VinhNT |
+| 15–24 | 12–16 | 02 · Khi nào cần agent | DuongDN |
+| 24–32 | 17–20 | 03 · OpenAI Agents SDK + ranh giới | DuongDN |
 | 32–35 | 21–22 | Ghi nhớ + bài tự thực hành | DuongDN |
 | 35–45 | 23 | Q&A | cả hai |
 
@@ -143,4 +143,3 @@ Người trình bày: DuongDN · VinhNT. Bên dưới có **gợi ý** chia ph�
 - Slide 14–15 gộp: lật đáp án luôn, không chờ lớp chọn (tiết kiệm 1'30").
 
 ## Câu hỏi chưa giải quyết
-- Chia phần giữa DuongDN và VinhNT ở trên chỉ là gợi ý, hai người cần chốt.
