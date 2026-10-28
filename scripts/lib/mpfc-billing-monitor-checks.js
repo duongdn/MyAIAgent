@@ -106,6 +106,19 @@ const CHECKS = [
     cmd: 'cd /var/www/MyDailyAgent && node scripts/mpfc-stripe-reconcile.js',
   },
   {
+    key: 'iap-stale', title: 'App subscription expired but access still active',
+    why: 'Apple/Google subscription receipt expired 8+ days ago, bundle still active, no newer receipt. The hourly IAP renewal cron (theme plan_service.php) only re-checks receipts expired 1-7 days ago, so a missed window means the member is never re-verified: either they stopped paying and keep free access, or they renewed and the DB is stale.',
+    sql: `SELECT r.id, r.wp_user_id, u.user_email, REPLACE(r.product_id,'com.onbit.footballcoach.',''), r.receipt_type, r.expires_at
+      FROM mm_applied_bundles ab JOIN mm_iap_receipts r ON r.id=ab.iap_receipt_id JOIN wp_users u ON u.ID=r.wp_user_id
+      WHERE ab.access_type='user' AND ab.status=1 AND r.expires_at > '2025-01-01' AND r.expires_at < NOW() - INTERVAL 8 DAY
+        AND NOT EXISTS (SELECT 1 FROM mm_iap_receipts r2 WHERE r2.wp_user_id=r.wp_user_id AND r2.product_id=r.product_id AND r2.expires_at > NOW())
+        -- access legitimately kept: an active web subscription for the same bundle, or an admin comp grant after expiry
+        AND NOT EXISTS (SELECT 1 FROM mm_order_items oi JOIN mm_orders o ON o.id=oi.order_id JOIN mm_bundle_products bp ON bp.product_id=oi.item_id
+                        WHERE o.user_id=r.wp_user_id AND bp.bundle_id=ab.bundle_id AND oi.status=1 AND o.payment_id IN (1,7))
+        AND NOT EXISTS (SELECT 1 FROM mm_log_events l WHERE l.user_id=r.wp_user_id AND l.event_type='access-rights' AND l.date_added > r.expires_at
+                        AND l.additional_params LIKE CONCAT('%access-id";s:%:"', ab.bundle_id, '";%complimentary";s:4:"true%'));`,
+  },
+  {
     key: 'unbilled', title: 'Active Stripe subscription with no upcoming rebill',
     why: 'Paid subscription active but nothing scheduled and not in dunning: member keeps access without being billed.',
     // 12042 = test account (vuongtrancr+testpay)
