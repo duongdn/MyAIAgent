@@ -11,6 +11,7 @@
  *   node scripts/facebook-profile-post.js --list-memories   (today's "Ngày này năm xưa")
  *   node scripts/facebook-profile-post.js --draft <caption-file> --share-memory <index> [--dry-run]
  *   node scripts/facebook-profile-post.js --delete <post-url>   (only if still Only-me)
+ *   node scripts/facebook-profile-post.js --append <post-url> <text-file>   (edit post, add text at end)
  *
  * Outputs a JSON line {ok, mode, postUrl?, audience?} on stdout; screenshots on error
  * go to tmp/fb-post-error-*.png. Never changes the profile's default audience.
@@ -243,6 +244,43 @@ async function openPostMenuItem(page, itemText) {
   await sleep(2000);
 }
 
+// Append text (e.g. hashtags) to the end of an existing post via "Chỉnh sửa bài viết"
+async function appendToPost(page, postUrl, extra) {
+  await page.goto(postUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await assertLoggedIn(page);
+  await sleep(3000);
+  await openPostMenuItem(page, 'Chỉnh sửa bài viết');
+  // The permalink dialog also has a comment textbox — tag the editor box (the one holding post text)
+  const box = '[data-fb-edit-box]';
+  await page.waitForFunction(() => {
+    const el = [...document.querySelectorAll('[role="dialog"] [role="textbox"]')].find(e => e.innerText.trim().length > 20);
+    if (el) el.setAttribute('data-fb-edit-box', '1');
+    return !!el;
+  }, { timeout: 15000 });
+  const before = await page.$eval(box, el => el.innerText);
+  await page.evaluate((sel, t) => {
+    // Caret to the very end (clicking lands mid-text; Ctrl+End is ignored by the FB editor)
+    const el = document.querySelector(sel);
+    el.focus();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(range);
+    const dt = new DataTransfer();
+    dt.setData('text/plain', t);
+    document.querySelector(sel).dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }));
+  }, box, '\n\n' + extra);
+  await sleep(1500);
+  const norm = s => s.replace(/\s+/g, '');
+  const after = await page.$eval(box, el => el.innerText);
+  if (norm(after) !== norm(before + extra)) throw new Error(`composer_text_mismatch — not saving. Tail: ${after.slice(-200)}`);
+  const [save] = await page.$$('xpath/.//div[@role="dialog"]//div[@role="button"][@aria-label="Lưu"]');
+  if (!save) throw new Error('"Lưu" button not found');
+  await save.click();
+  await sleep(4000);
+  return { ok: true, mode: 'append', postUrl };
+}
+
 // Only deletes posts still on "Chỉ mình tôi" — a rejected draft, never a published post
 async function deleteDraft(page, postUrl) {
   await page.goto(postUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
@@ -270,6 +308,18 @@ async function deleteDraft(page, postUrl) {
   const draftFile = argAfter('--draft');
   const submitUrl = argAfter('--submit');
   const deleteUrl = argAfter('--delete');
+  if (argAfter('--append')) {
+    const { browser, page } = await openFacebookSession();
+    try {
+      console.log(JSON.stringify(await appendToPost(page, argAfter('--append'), fs.readFileSync(args[args.indexOf('--append') + 2], 'utf-8').trim())));
+    } catch (err) {
+      const shot = path.join(__dirname, '..', 'tmp', `fb-post-error-${Date.now()}.png`);
+      try { await page.screenshot({ path: shot }); } catch {}
+      console.log(JSON.stringify({ ok: false, error: err.message, screenshot: shot }));
+      process.exitCode = 1;
+    } finally { await browser.close(); }
+    return;
+  }
   if (argAfter('--find-url')) {
     // Retry permalink lookup for a post whose URL wasn't captured right after posting
     const { browser, page } = await openFacebookSession();
