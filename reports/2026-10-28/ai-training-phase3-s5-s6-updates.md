@@ -74,3 +74,7 @@ User muốn giữ slide này nhưng chỉ để nhắc lại. Kicker đổi thà
 - Tool chung: Web search · Chạy code · Database · API · File · Memory.
 - 4 bước: "LLM nói: tôi cần một tool" → app chạy tool → kết quả về LLM → lặp.
 Slide 6: ô "Code chạy tool" đổi `search_kb · create_ticket` → "tra KB · tạo ticket". Chỉ patch slide 5, 6.
+
+## 16:15 — S5: slide code 3 mức dời xuống cuối
+
+Các session trước chỉ đưa code ra khi demo, slide chỉ nói nguyên lý → slide "Cùng một yêu cầu, 3 cách viết code" dời từ 7 → 21 (trước Ghi nhớ). Notes: tham chiếu đổi thành "sơ đồ 3 mức (slide 6)"; mọi số slide đã cập nhật lại. Patch slide 7–23, đã render, ok.

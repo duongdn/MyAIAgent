@@ -55,7 +55,6 @@ Giữ lại công thức Agent = LLM + Tools + Context + Code của mình vì c�
     .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
 
   extra.threeFlows();
-  extra.threeFlowsCode();
 
   s = newSlide('So sánh', 'Cùng yêu cầu "E205 + tạo ticket" ở 3 mức', `Cùng một yêu cầu: "Khách X báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
 - Model call: trả lời được nửa đầu (E205 = ngân hàng từ chối) nhưng không làm được nửa sau.
@@ -120,6 +119,8 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['Business rule', '—', 'Priority, assignee, hạn mức…'],
   ], { rowH: 36 });
 
+  extra.threeFlowsCode(); // demo code đặt cuối: slide nói nguyên lý trước, code xem lúc demo
+
   takeaways([
     ['Đo trước khi chọn', 'Chạy lặp cùng yêu cầu: đúng mấy lần, token dao động bao nhiêu'],
     ['Chọn mức', 'Liệt kê được nhánh → workflow · không liệt kê được → agent'],
@@ -127,9 +128,9 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
-- Đo trước khi chọn: 1 lần chạy không nói lên gì — chạy lặp (10 lần ở slide 15), đếm đúng/sai và khoảng token. Đối chiếu với lựa chọn của lớp lúc warm-up.
+- Đo trước khi chọn: 1 lần chạy không nói lên gì — chạy lặp (10 lần ở slide 14), đếm đúng/sai và khoảng token. Đối chiếu với lựa chọn của lớp lúc warm-up.
 - Chọn mức: liệt kê được nhánh → workflow; không liệt kê được → agent.
-- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 15).
+- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 14).
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
 
@@ -140,7 +141,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Agent đúng 19/20 — production phát hiện lần sai bằng cách nào?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 13).
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 12).
 2. Workflow "tra trước" thua khi nhánh không liệt kê được: số lần tra không biết trước (tra lần 1 chưa đủ, phải tra tiếp theo kết quả), hoặc nhiều tool kết hợp tuỳ dữ liệu. Lúc đó code phải viết mọi tổ hợp → agent rẻ hơn về công viết code.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
 4. Lần sai (không tạo ticket dù phải tạo) không ném lỗi → không có alert. Phát hiện bằng: eval chạy lặp trước khi release (Session 9), và application kiểm tra kết quả thật — có ticket_id hay không, so với nhánh mong đợi (Session 6: run kết thúc ≠ task xong).`);
