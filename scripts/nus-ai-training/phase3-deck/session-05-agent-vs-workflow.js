@@ -44,6 +44,7 @@ Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thà
 - ③ Code app đọc đoạn text đó và chạy tool thật (web search, query DB, gọi API…).
 - ④ Kết quả tool quay lại code app, code app gửi tiếp cho LLM (lại là ①). Lặp tới khi LLM viết câu trả lời cuối → code app trả cho user.
 Vì sao sơ đồ này là AGENT: ở bước ②, chính LLM quyết định gọi tool nào, mấy lần, khi nào dừng. Ở workflow, LLM không bao giờ nói "cần tool X" — code tự gọi tool theo các bước viết sẵn (slide sau so sánh trực tiếp). Định nghĩa theo Anthropic "Building effective agents" / OpenAI "A practical guide to building agents".
+Minh hoạ live (30 giây, LLM thật): python3 run_demo.py --scenario 1 --approve yes --trace → in từng bước ①–④. Chỉ vào dòng "② LLM QUYẾT ĐỊNH gọi tool — chỉ là JSON: search_kb {...}" và dòng "lý do LLM tự viết": đó là LLM chọn bước. Dòng "③ APP chạy hàm thật" là code chạy. Có lần LLM đề xuất P2 → APP chặn → LLM tự sửa sang P3: thấy rõ LLM đề xuất, app quyết.
 Không dùng công thức "Agent = LLM + Tools + Context + Code" của S1 ở đây: workflow cũng có đủ 4 thứ đó nên dễ gây cấn. Nếu lớp nhắc tới công thức, nói: "đủ thành phần thôi chưa đủ, còn phải để LLM chọn bước".
 App ChatGPT/Claude khi bật web search, chạy code… là agent; chat thường không gọi tool chỉ là 1 lần gọi model.
 - ChatGPT, Claude: OpenAI / Anthropic viết phần code app → user chỉ dùng.

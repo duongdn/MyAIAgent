@@ -39,6 +39,32 @@ def _describe(d):
     return t
 
 
+def _loop_lines(d):
+    """--trace in theo sơ đồ vòng lặp ①–④ (slide 5): ai gửi gì cho ai, LLM quyết định gì."""
+    if d.type in ("generation", "response"):
+        sent = len(getattr(d, "input", None) or [])
+        out = (getattr(d, "output", None) or [{}])[0]
+        lines = [f"① APP → LLM   gửi {sent} message (câu hỏi + mọi kết quả tool trước đó)"]
+        why = " ".join((out.get("reasoning_content") or "").split())
+        if out.get("tool_calls"):
+            for tc in out["tool_calls"]:
+                f = tc["function"]
+                lines.append(f"② LLM → APP   LLM QUYẾT ĐỊNH gọi tool — chỉ là JSON: {f['name']} {f['arguments'][:90]}")
+        else:
+            lines.append(f"② LLM → APP   LLM QUYẾT ĐỊNH dừng, trả lời cuối: {' '.join((out.get('content') or '').split())[:90]!r}")
+        if why:
+            lines.append(f"   lý do LLM tự viết: {why[:140]!r}")
+        return lines
+    if d.type == "function":
+        if not d.output:
+            return [f"③ APP         CHƯA chạy {d.name}: dừng chờ người duyệt (Session 7)"]
+        return [f"③ APP         chạy hàm thật {d.name}({(d.input or '')[:60]})",
+                f"④ APP → LLM   kết quả {str(d.output)[:70]!r} gửi lại ở lượt sau"]
+    if d.type == "guardrail":
+        return [f"🛡 APP         guardrail {d.name}: {'CHẶN' if d.triggered else 'qua'}"]
+    return []
+
+
 class LocalTraceProcessor(TracingProcessor):
     def __init__(self, verbose=False):
         self.verbose = verbose
@@ -54,9 +80,11 @@ class LocalTraceProcessor(TracingProcessor):
                 "what": _describe(d), "error": span.error}
         with (TRACE_DIR / f"{span.trace_id}.jsonl").open("a") as f:
             f.write(json.dumps(line, ensure_ascii=False) + "\n")
-        if self.verbose and d.type != "custom":
-            err = f"  ❌ {span.error.get('message')}" if span.error else ""
-            print(f"   🔎 {ICON.get(d.type, '•')} {line['secs']:>5.1f}s  {line['what']}{err}")
+        if self.verbose:
+            for text in _loop_lines(d):
+                print(f"   🔎 {line['secs']:>4.1f}s  {text}")
+            if span.error:
+                print(f"   🔎 ❌ {span.error.get('message')}")
 
     def on_trace_end(self, trace):
         pass
