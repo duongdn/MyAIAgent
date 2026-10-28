@@ -6,12 +6,11 @@ const cond = require('../support_agent_demo/orchestration_levels_conditional.jso
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
-  const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `Vẽ từng hàng lên bảng nếu có thể.
+  const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `Session 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
 - Model call: code chuẩn bị prompt (kèm tài liệu RAG), gọi model ĐÚNG 1 lần. Không có "bước tiếp theo".
 - Workflow: CODE giữ thứ tự: phân loại → tra KB → trả lời → tạo ticket. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.
 - Agent: model nhận MỤC TIÊU (không phải danh sách bước) + danh sách tool, TỰ chọn gọi tool nào, mấy lần. Điều kiện dừng: model trả lời cuối, hoặc chạm max_turns do application đặt (Session 8 đi sâu 5 lý do dừng).
-Ô màu cam = chỗ model ra quyết định. Ô tối = code ra quyết định.
-Hỏi lớp: "Workflow có dùng LLM không?" → có (ô phân loại, ô trả lời), nhưng LLM không quyết định thứ tự.`);
+Ô màu cam = chỗ model ra quyết định. Ô tối = code ra quyết định.`);
   const row = (y, name, sub, steps) => {
     mono(s, 40, y, 140, 14, name.toUpperCase(), { size: 9 });
     label(s, 40, y + 14, 130, 30, sub, { size: 10, bold: false, align: 'START', valign: 'TOP', color: C.GREY });
@@ -110,7 +109,7 @@ Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25
 
 // Vì sao agent tốn token: mỗi lượt gửi lại toàn bộ hội thoại
 function tokenGrowth() {
-  const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Model không nhớ gì giữa các lần gọi. Muốn model "biết" kết quả search_kb, application phải gửi lại câu hỏi + tool call + kết quả ở lượt sau.
+  const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Session 1: model không giữ state giữa các lần gọi. Đây là hệ quả về tiền: mỗi lượt agent phải gửi lại câu hỏi + mọi tool call + kết quả trước đó.
 Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 828 (thêm kết quả search_kb), lượt 3 = 1.109 (thêm kết quả create_ticket). Tổng input 2.511 dù câu hỏi chỉ ~60 token.
 Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
   [[574, 81, 'Lượt 1', 'câu hỏi + mô tả tool'], [828, 252, 'Lượt 2', '+ kết quả search_kb'], [1109, 156, 'Lượt 3', '+ kết quả create_ticket']].forEach(([inp, out, t, d], i) => {
@@ -122,7 +121,7 @@ Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính
   });
   box(s, 200, 300, 14, 14, ' ', { fill: C.BLUE, noLine: true }); label(s, 218, 296, 160, 22, 'token gửi vào', { size: 10, bold: false, align: 'START' });
   box(s, 330, 300, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 348, 296, 160, 22, 'token model viết ra', { size: 10, bold: false, align: 'START' });
-  label(s, 40, 325, 640, 40, 'Tổng 2.511 vào + 489 ra · model không nhớ → mỗi lượt gửi lại từ đầu', { size: 12, align: 'START' });
+  label(s, 40, 325, 640, 40, 'Tổng 2.511 vào + 489 ra · input cộng dồn theo số lượt', { size: 12, align: 'START' });
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK

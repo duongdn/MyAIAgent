@@ -44,3 +44,20 @@ Giải thích state/harness chuyển vào notes.
 - Code builder bỏ dòng này luôn.
 - ⚠ Các lần rebuild S5 hôm nay (khoảng 15:40–15:55) đã ghi đè mọi chỗ user sửa tay trên deck S5. Nếu còn chỗ khác bị mất: Google Slides → File → Version history.
 - Từ giờ chỉ patch từng slide, không rebuild cả deck.
+
+## 16:15 — S5: viết lại cho người đã học Session 1–2
+
+**Vấn đề:** deck và notes vẫn giả định học viên chưa biết gì về AI, ví dụ warm-up ChatGPT web search, slide "Agent là gì".
+Cách cập nhật deck: dùng tool mới `deck-tools/patch-slides-from-code.js`, chỉ xoá/thay đúng slide, không rebuild cả deck. Deck không ai sửa tay sau 15:47 (đã kiểm tra modifiedTime trên Drive).
+
+| Slide | Trước | Sau |
+|---|---|---|
+| 3 (notes) | Warm-up "Ai bật web search trong ChatGPT…" | Warm-up nối S2: email đã extract thành JSON → muốn tự xử lý tiếp thì viết thêm bước code hay để model chọn? Ghi lựa chọn của lớp, cuối buổi đối chiếu với số đo |
+| 5 cũ "Agent là gì" | Agent = LLM + Tools + Context + Code (S1/S2 đã dạy) | **Xoá**. Deck 23 → 22 slide |
+| 5 (notes, 3 mức) | Giải thích cơ bản + hỏi "workflow có dùng LLM không" | "S2 đã có 4 pattern; ở đây chỉ so 3 mức trên cùng 1 yêu cầu" |
+| 10 (token cộng dồn) | "model không nhớ → gửi lại từ đầu" | "input cộng dồn theo số lượt"; notes: hệ quả về tiền của điều S1 đã dạy |
+| 20 Ghi nhớ | Thẻ "Agent là gì" | Thẻ "Đo trước khi chọn: chạy lặp, đúng mấy lần, token dao động bao nhiêu" |
+| 21 Thử thách | Q2 "Workflow có LLM có phải agent?", Q4 "RAG muốn tạo ticket thêm gì?" | Q2 "Khi nào workflow tra trước thua agent?", Q4 "Agent đúng 19/20 — production phát hiện lần sai bằng cách nào?" (đáp án trong notes) |
+| Mọi notes | Tham chiếu số slide cũ | Đã trừ đi 1 cho khớp sau khi xoá slide |
+
+Đã render cả 22 slide, ok.

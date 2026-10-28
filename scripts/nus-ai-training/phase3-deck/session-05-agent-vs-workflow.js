@@ -30,28 +30,11 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',
     `Session 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
-Mục tiêu: người học chọn đúng mức điều phối và đọc được sơ đồ agent tối thiểu.
-Warm-up: "Ai đã dùng ChatGPT bật web search? Ai quyết định lúc nào search — bạn hay ChatGPT?" → đó là agent.`);
+Người học đã qua Session 1 (LLM: token, context, không ổn định) và Session 2 (4 pattern, structured output, validate output). Không giảng lại "agent là gì".
+Mục tiêu: chọn đúng mức điều phối bằng số đo, và định vị được agent tối thiểu trong OpenAI Agents SDK.
+Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, cuối buổi đối chiếu với số đo.`);
   agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'đo token · khi nào workflow thắng'],
     ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
-
-  s = newSlide('Agent là gì', 'LLM chỉ đọc và viết text — agent là phần code bao quanh nó', `Agent = LLM + Tools + Context + Code của mình.
-Model không tự gọi API. Nó viết ra một đoạn text có cấu trúc kiểu "tôi cần gọi search_kb với query=...". Code của application đọc đoạn đó, chạy hàm thật, đưa kết quả lại cho model.
-Toàn bộ Giai đoạn 3 là học cách viết phần code bao quanh đó cho đúng.
-Câu hỏi hay gặp: "Vậy prompt injection làm sao gây hại nếu model chỉ viết text?" → vì application THỰC THI text đó. Session 7 sẽ trả lời kỹ.`);
-  box(s, 40, 92, 420, 228, '', { fill: C.CARD, valign: 'TOP' });
-  label(s, 50, 100, 300, 20, 'AGENT (application của mình)', { size: 10, align: 'START', color: C.ORANGE });
-  box(s, 60, 130, 380, 50, 'LLM\nđọc text → viết text (kể cả "tôi cần gọi tool X")', { fill: C.NAVY, size: 15, sub: 11 });
-  ['search_kb', 'create_ticket', 'DB / API'].forEach((t, i) => box(s, 60 + i * 130, 200, 120, 36, t, { fill: C.LIGHT, size: 12 }));
-  box(s, 60, 246, 380, 62, 'Code của mình\nchạy tool thật · kiểm quyền · lưu state · quyết định dừng', { fill: C.GREEN, size: 13, sub: 11 });
-  [['1', 'Model viết: "gọi search_kb(query=…)"'], ['2', 'Code chạy hàm thật'], ['3', 'Kết quả quay lại model dưới dạng text'], ['4', 'Lặp tới khi model trả lời']]
-    .forEach(([k, t], i) => {
-      box(s, 480, 110 + i * 60, 30, 30, k, { fill: C.ORANGE, shape: 'ELLIPSE', size: 12, noLine: true });
-      label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
-    });
-
-  [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code của mình', C.LIGHT, 100]]
-    .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
 
   extra.threeFlows();
   extra.threeFlowsCode();
@@ -120,27 +103,27 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   ], { rowH: 36 });
 
   takeaways([
-    ['Agent là gì', 'Model chọn bước tiếp theo; code chạy tool và giữ quyền kiểm soát'],
+    ['Đo trước khi chọn', 'Chạy lặp cùng yêu cầu: đúng mấy lần, token dao động bao nhiêu'],
     ['Chọn mức', 'Liệt kê được nhánh → workflow · không liệt kê được → agent'],
     ['Chi phí', 'Agent tốn 2,6–13× token, dao động giữa các lần chạy'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
-- Agent: model chọn bước tiếp; code chạy tool và giữ kiểm soát.
-- Chọn mức: thấp nhất làm được việc; agent khi số bước phụ thuộc kết quả.
-- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 15).
+- Đo trước khi chọn: 1 lần chạy không nói lên gì — chạy lặp (10 lần ở slide 14), đếm đúng/sai và khoảng token. Đối chiếu với lựa chọn của lớp lúc warm-up.
+- Chọn mức: liệt kê được nhánh → workflow; không liệt kê được → agent.
+- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 14).
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
 
   challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
     'Agent tốn hơn workflow ở chỗ nào?',
-    'Workflow có gọi LLM thì có phải agent?',
+    'Khi nào workflow "tra trước" thua agent?',
     'Kiểm tra user thuộc tenant nào — SDK hay application?',
-    'Model call + RAG muốn tạo ticket thì phải thêm gì?',
+    'Agent đúng 19/20 — production phát hiện lần sai bằng cách nào?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 13).
-2. "Workflow có LLM" vẫn là workflow? → đúng, nếu code quyết định thứ tự bước.
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 12).
+2. Workflow "tra trước" thua khi nhánh không liệt kê được: số lần tra không biết trước (tra lần 1 chưa đủ, phải tra tiếp theo kết quả), hoặc nhiều tool kết hợp tuỳ dữ liệu. Lúc đó code phải viết mọi tổ hợp → agent rẻ hơn về công viết code.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
-4. Model call + RAG muốn tạo ticket? → thêm bước code gọi API ticket (thành workflow), hoặc đưa create_ticket thành tool cho model chọn (thành agent).`);
+4. Lần sai (không tạo ticket dù phải tạo) không ném lỗi → không có alert. Phát hiện bằng: eval chạy lặp trước khi release (Session 9), và application kiểm tra kết quả thật — có ticket_id hay không, so với nhánh mong đợi (Session 6: run kết thúc ≠ task xong).`);
 };
