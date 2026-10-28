@@ -19,14 +19,14 @@ S8: lưu trạng thái task (đang xử lý / chờ duyệt / xong) để chạy
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
 Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.`);
   // Bậc thang: mỗi hàng là agent sau buổi đó — ô cam = lớp mới thêm, ô nhạt = lớp đã có
-  const layers = ['Model + tool\n+ Runner', 'Tool contract', 'Quyền, retry,\napproval', 'Nhớ việc dở,\nbiết lúc dừng', 'Bộ test,\ntrace'];
-  [['S5', 'Có cần agent không?'], ['S6', 'Agent gọi tool thế nào?'], ['S7', 'Chặn gì quanh tool call?'],
-   ['S8', 'Làm dở thì sao?'], ['S9', 'Sao biết agent chạy đúng?']].forEach(([k, q], i) => {
+  const layers = ['Agent tối thiểu', 'Tool contract', 'Kiểm quyền,\nphê duyệt', 'Task state,\nđiều kiện dừng', 'Eval, tracing'];
+  [['S5', 'Agent khác workflow ở đâu'], ['S6', 'Agent loop và tool contracts'], ['S7', 'Tool execution an toàn'],
+   ['S8', 'Context, state và điều kiện dừng'], ['S9', 'Harness, tracing và agent hoàn chỉnh']].forEach(([k, q], i) => {
     const y = 86 + i * 56;
     box(s, 40, y, 44, 46, k, { fill: C.NAVY, size: 14 });
     label(s, 92, y, 130, 46, q, { size: 11.5, align: 'START' });
     for (let j = 0; j <= i; j++)
-      box(s, 228 + j * 92, y, 86, 46, layers[j], { fill: j === i ? C.ORANGE : C.LIGHT, size: 10, bold: j === i });
+      box(s, 228 + j * 92, y, 86, 46, layers[j], { fill: j === i ? C.ORANGE : C.LIGHT, size: 9.5, bold: j === i });
   });
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',

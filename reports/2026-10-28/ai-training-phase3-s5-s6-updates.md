@@ -32,3 +32,8 @@
 | S9 | "Đủ để review chưa?" · "Harness, trace" | "Sao biết agent chạy đúng?" · "Bộ test, trace" |
 
 Giải thích state/harness chuyển vào notes.
+
+## 15:55 — S5 slide 2: dùng tên session chính thức
+
+**Vấn đề:** câu hỏi tự đặt ("Làm dở thì sao?"…) nghe lạ, không khái quát nội dung buổi.
+**Sau:** cột trái = tên session đúng đề cương (giống trang tiêu đề mỗi deck). Ô = phần agent có thêm, thuật ngữ chuẩn: Agent tối thiểu · Tool contract · Kiểm quyền, phê duyệt · Task state, điều kiện dừng · Eval, tracing.
