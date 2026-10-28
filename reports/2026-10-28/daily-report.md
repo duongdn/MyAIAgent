@@ -11,7 +11,7 @@
 | # | Source | Alert |
 |---|--------|-------|
 | 1 | OhCleo (Matrix + Slack) | 🔴 **Security incident:** Tony told Celine ([DM](https://ohcleo.slack.com/archives/D0B6846UN8K), 13:26 VN) the **Next.js app was hit by an RCE vulnerability** and the storage (S3/Spaces) key may be compromised. The vuln is fixed and the key was rotated. Because the mobile app **hardcodes the old S3 key**, audio playback on the store app broke for all users ("app ở store hẹo vụ nghe", HungPN repro 10:25). Fix: new build 4.2.2 (6) with the key moved to `.env`. Android submitted 16:59, iOS 21:29 (after Celine set the age rating). BE will force-update after approval. ⚠️ LongVV **pasted the new S3 access key + secret in plain text** in the Celine Matrix room 10:37 (redacted here), so it needs another rotation. Also **Workstream needs review ×4 (reviewers DuongDN, MinhTV):** LuHX Paywall redesign 1:30 (10-26), LuHX Fix feedback newdesign/paywall 5:00 (10-27), LuHX Onboarding new design 1:00 (10-27), HungPN golive checklist 0:00 (10-27). Celine 23:17 VN asked to check `/post/clmdokwoz…` (230 sessions/28d from Reddit, add a redirect if broken). Not answered yet (overnight). Ohcleo ○ |
-| 2 | Fountain (Trello) | Kunal's [Gift emails card](https://trello.com/c/EOllFmAz) ask (Mon 20:24 VN, "steps 1 to 8, ideally this week") is **still unanswered after ~32h**. Kunal travels to India 10-29. New: Kunal 21:47 VN asked to push [Oct 27 night rollout](https://trello.com/c/p29NF0cL) (backend first, then website, incl. FE PR #979 restoring the Build-a-Box product modal that Rick flagged). Overnight, <24h. Prod Rollbar **#396/#397 ActiveRecord::StatementInvalid** (PG::UndefinedTable "invalid reference to FROM-clause", 09:01 + 03:59 VN). NR shows only 2 occurrences. vips LoadError #393 not recurring (VuTQ: PR fix exists). Fountain ○ |
+| 2 | Fountain (Trello) | ~~Kunal's [Gift emails card](https://trello.com/c/EOllFmAz) ask (Mon 20:24 VN, "steps 1 to 8, ideally this week") is **still unanswered after ~32h**.~~ **Corrected 08:58:** Rick reacted 👍 on Kunal's comment = holding reply (acknowledged), not an alert. Kunal travels to India 10-29. New: Kunal 21:47 VN asked to push [Oct 27 night rollout](https://trello.com/c/p29NF0cL) (backend first, then website, incl. FE PR #979 restoring the Build-a-Box product modal that Rick flagged). Overnight, <24h. Prod Rollbar **#396/#397 ActiveRecord::StatementInvalid** (PG::UndefinedTable "invalid reference to FROM-clause", 09:01 + 03:59 VN). NR shows only 2 occurrences. vips LoadError #393 not recurring (VuTQ: PR fix exists). Fountain ○ |
 | 3 | Slack GGS (Bailey) | Split-PO issue (Joey 15:05) fixed by Nick 17:05 ✅. Nick daily report 19:28 ✅. **Open:** Joey 21:41 "issue 5 live: weight not precise enough, it rounds up in grams" (overnight). Joey's 10-26 16:04/18:25 [#strainrite-duplication](https://globalgrazingservices.slack.com/archives/C0338NXK3SB) asks (resend estimate + copy brother's PrestaShop) still have **no reply after 36h+**. Bailey ○ |
 | 4 | Workstream needs review | **Speedventory (Bailey): PhucVT — Check queue issue (1:00, 10-26)** is Pending, but the project has no `isReviewer` member configured, so nobody can clear it ([Workstream](https://workstream.nustechnology.com)). |
 | 5 | MPFC | ~~freelancer@ returned **0 emails**… so the scan needs verifying.~~ **08:30 verified via Gmail API (incl. spam/trash): freelancer@ inbox has received NOTHING since Mon 26 Oct 20:42 UTC (= 27 Oct 03:42 VN) — ~29h. Not only billing-monitor mail: external senders also missing (New Relic daily perf report for Oct 27, normally 14:00 UTC, never arrived). MX = `smtp.google.com` (Cloudflare NS) still OK, so likely a Google Workspace inbound/account issue (billing/suspension?) or Gmail routing rule → check admin.google.com. Domain has **no SPF TXT** (only google-site-verification + DMARC p=none), so `info@` wp_mail alerts may also be rejected. Last billing-monitor mail = TEST alert 26 Oct 08:39 UTC.** Yesterday's billing alert (35 failed rebills not retried 30+ days) has no visible resolution. NR is now sampling-only (agent disabled per-request after the PHP 8.3 upgrade, see `plans/mpfc-upgrade/go-live-checklist.md`), so NR apdex/throughput is not meaningful any more. Use the apache_logs perf dashboard instead. `www.mypersonalfootballcoach.com` has **no DNS record** (1.1.1.1 + 8.8.8.8); the apex serves 200. Probably intended (canonical = apex), but confirm ([NR](https://one.newrelic.com)). MPFC ○ |
@@ -146,9 +146,9 @@ Trello: Maddy ✓ (LIFM2-473 ask is <24h overnight; watch today)
 **Part 4 — Capacity & Runway:** not re-fetched (sheet frozen). Last value (10-22): Narrow 229.00h / 28 tasks · Broad 328.50h / 63 tasks.
 **Part 5 — Over-estimate:** last value (10-22): 36 items actual > (Est+CR)×1.2. Frozen.
 
-**Trello board ([Web Development](https://trello.com/b/UDrSWage)):** Kunal 11:57 VN asked Rick to push the [Oct 27 rollout](https://trello.com/c/wTb3Rpf9). Rick 16:58 "Deployed to LIVE" ✅. Rick 17:14 flagged the lost Build-a-Box product modal. Kunal 21:47: "missing for every Build a Box item since V2", fixed in FE #979 on the [Oct 27 night card](https://trello.com/c/p29NF0cL), push tonight. ⚠️ Gift-email card unanswered 32h (Alert #2). Matrix: ViTHT investigating "Staycation Spa Day" stock mismatch. ThinhT found a Smart Link multi-claim bug (one link claimed several times, so it can ship twice). VuTQ reported the `?slug=` regression to Kunal.
+**Trello board ([Web Development](https://trello.com/b/UDrSWage)):** Kunal 11:57 VN asked Rick to push the [Oct 27 rollout](https://trello.com/c/wTb3Rpf9). Rick 16:58 "Deployed to LIVE" ✅. Rick 17:14 flagged the lost Build-a-Box product modal. Kunal 21:47: "missing for every Build a Box item since V2", fixed in FE #979 on the [Oct 27 night card](https://trello.com/c/p29NF0cL), push tonight. ~~⚠️ Gift-email card unanswered 32h~~ Rick 👍 reacted (acknowledged). Matrix: ViTHT investigating "Staycation Spa Day" stock mismatch. ThinhT found a Smart Link multi-claim bug (one link claimed several times, so it can ship twice). VuTQ reported the `?slug=` regression to Kunal.
 
-Trello: ⚠️ Fountain - DOCUMENT skipped (Alert #2)
+Trello: ~~⚠️ Fountain - DOCUMENT skipped~~ ✓ Fountain - DOCUMENT (08:58, gift-email ack'd via 👍)
 
 ---
 
@@ -161,10 +161,10 @@ Trello: Elena - WordPress SamGuard ✓
 
 ## Trello — Check progress — 05:35 (+07:00)
 
-~~17/22~~ **18/22 complete (08:25).** [Card](https://trello.com/c/kTzapwDT)
+~~17/22~~ ~~18/22~~ **19/22 complete (08:58).** [Card](https://trello.com/c/kTzapwDT)
 - ✓ Maddy · James Diamond · Rory · Aysar · Franc · Marcel · Raymond · Andrew Taraba · Arthur - Meta-Stamp · Elena - WordPress SamGuard
 - ⚠️ Ohcleo: skipped (Alert #1)
-- ⚠️ Fountain - DOCUMENT: skipped (Alert #2)
+- ~~⚠️ Fountain - DOCUMENT: skipped~~ ✓ Fountain - DOCUMENT (08:58)
 - ⚠️ Bailey: skipped (Alert #3)
 - ⚠️ MPFC: skipped (Alert #5)
 - ~~⚠️ Neural Contract: skipped~~ ✓ Neural Contract (08:25, read live, see Alert #6)
@@ -275,9 +275,9 @@ Trello: Arthur - Meta-Stamp ✓
 ---
 
 ## Unresolved Questions
-- Recheck 08:35: OhCleo Celine `/post/…` ask still unanswered (0 new DM msgs since 05:00); Kunal gift-email card still unanswered (~36h); GGS 0 new msgs — Joey asks still open. TuanNT/KhanhHH/LeNH WS 10-27 still 0h at 08:18 (before 10:00, lag, not alert).
+- Recheck 08:35: OhCleo Celine `/post/…` ask still unanswered (0 new DM msgs since 05:00); GGS 0 new msgs — Joey asks still open. TuanNT/KhanhHH/LeNH WS 10-27 still 0h at 08:18 (before 10:00, lag, not alert).
 - OhCleo: rotate the S3 key again (secret pasted in Matrix 10-27 10:37)? Was any data accessed via the RCE? Who answers Celine's `/post/…` redirect ask? DuongDN/MinhTV clear 4 Pending reviews.
-- Fountain: who answers Kunal's gift-email setup (steps 1–8) before he leaves 10-29? Rollbar #396/#397 StatementInvalid source?
+- Fountain: Rick 👍 ack'd gift-email steps 1–8; confirm done before Kunal leaves 10-29. Rollbar #396/#397 StatementInvalid source?
 - Bailey: StrainRite duplication estimate for Joey (36h+). Issue 5 (weight rounding). Who reviews Speedventory Pending rows (no reviewer configured)?
 - MPFC: ~~why 0 freelancer@ emails?~~ freelancer@ receives nothing since 27 Oct 03:42 VN — check Google Workspace admin (account/billing/routing); add SPF for mypersonalfootballcoach.com? Billing: 35 unretried failed rebills decision. `www` DNS record missing, intended?
 - Reminders: fix PhucVT reminder room mapping (`!kzyLVmJxcRESoTkfnY` = James Diamond - Portfolio, not his DM).
