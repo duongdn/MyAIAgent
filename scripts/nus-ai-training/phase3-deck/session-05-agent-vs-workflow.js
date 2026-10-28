@@ -33,8 +33,8 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
 Người học đã qua Session 1 (LLM: token, context, không ổn định) và Session 2 (4 pattern, structured output, validate output). Không giảng lại "agent là gì".
 Mục tiêu: chọn đúng mức điều phối bằng số đo, và định vị được agent tối thiểu trong OpenAI Agents SDK.
 Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, cuối buổi đối chiếu với số đo.`);
-  agenda([['3 mức điều phối', 'model call · workflow · agent'], ['Khi nào cần agent', 'đo token · khi nào workflow thắng'],
-    ['OpenAI Agents SDK', 'agent tối thiểu · ranh giới SDK / application']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
+  agenda([['3 mức điều phối', 'model call · workflow · agent — ai chọn bước tiếp theo'], ['Khi nào cần agent', 'so chi phí và độ chính xác của agent với workflow'],
+    ['OpenAI Agents SDK', 'agent tối thiểu · SDK lo gì, app tự làm gì']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
   s = newSlide('Nhắc lại · Session 1–2', 'ChatGPT, Claude không chỉ là LLM — agent là app bao quanh nó', `Nhắc lại, KHÔNG giảng lại: tối đa 1 phút, lớp đã học ở Session 1 (LLM đọc/viết text, không giữ state) và Session 2 (agent = model chọn bước + gọi tool; output là data phải validate).
 Hình giống slide "LLM vs Agent" của Session 1 (ChienTX), cùng ví dụ ChatGPT/Claude và các tool chung (web search, chạy code, database…). Use case support (tra KB, tạo ticket) chỉ xuất hiện từ slide sau.

@@ -10,3 +10,4 @@ User sửa tay trực tiếp trên deck GĐ3, ví dụ xoá subtitle slide 1 c�
 - Sửa deck = patch đúng slide/element bằng batchUpdate (deleteObject, sửa text…), không rebuild cả deck.
 - Vẫn sửa code builder để code khớp với deck.
 - Chỉ rebuild toàn bộ khi user đồng ý. Trước khi rebuild, dump text deck hiện tại và so với code để không mất phần user sửa tay.
+- Trước khi patch: kiểm tra Drive `lastModifyingUser`. Nếu là user (dnduong.us), deck đã có sửa tay → chỉ dùng replaceAllText/deleteObject đúng chỗ, không thay cả slide (`patch-slides-from-code.js`).
