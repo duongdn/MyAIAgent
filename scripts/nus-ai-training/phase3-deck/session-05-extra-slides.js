@@ -1,8 +1,5 @@
-// Session 5 — các slide "hàm lượng thông tin cao": sơ đồ 3 mức, số đo thật, token tăng theo lượt, trace định vị.
-// Số liệu từ support_agent_demo/compare_orchestration_levels.py (orchestration_levels.json) + trace kịch bản 1.
+// Session 5 — sơ đồ 3 mức, code 3 mức chạy thật (demo cuối buổi), trace định vị.
 const { C, box, label, mono, code, arrow, twoWay, newSlide, question } = require('./slide-kit');
-const data = require('../support_agent_demo/orchestration_levels.json');
-const cond = require('../support_agent_demo/orchestration_levels_conditional.json');
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
@@ -48,7 +45,7 @@ Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
 - Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team-a) code viết sẵn.
 - Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
-Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng 🧠/🔧 là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
+Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
 Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.`);
   code(s, 40, 86, 352, 262, `# 1 · Model call — gọi model đúng 1 lần
 docs = search_kb("lỗi E205")           # code
@@ -85,46 +82,6 @@ await Runner.run(agent, q, max_turns=8)`, 8.5);
 🧠 model call   1194+171 tok · trả lời`, 8.5);
 }
 
-// Đo thật: cùng 1 yêu cầu, 3 mức
-function measuredCost() {
-  question('Cùng một yêu cầu — agent tốn hơn bao nhiêu?', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."',
-    `Cho lớp đoán: agent tốn gấp mấy lần workflow? chậm hơn bao nhiêu? Ghi lên bảng rồi lật đáp án.`);
-  const s = newSlide('Đáp án · đo thật', 'Agent tốn ~2,6× token so với workflow cho cùng việc', `Số đo thật: compare_orchestration_levels.py, model ${data.model}, ${data.runs} lần mỗi mức, lấy trung bình, đã tắt cache gateway.
-Đọc bảng:
-- Model call rẻ nhất nhưng KHÔNG làm được nửa sau yêu cầu (tạo ticket) — nó chỉ trả lời.
-- Workflow làm đủ việc với 2 lượt gọi: vì yêu cầu này có bước biết trước, workflow là lựa chọn tốt hơn agent.
-- Agent làm đủ việc nhưng tốn ~2,6× token so với workflow (~2,7× so với model call): mỗi lượt gọi gửi lại toàn bộ hội thoại (slide sau).
-- Thời gian gần như nhau (~7 giây) — chi phí agent nằm ở token, không phải độ trễ, với yêu cầu ngắn thế này.
-Kết luận: agent đáng tiền khi số bước KHÔNG biết trước. Ở đây biết trước → workflow thắng.
-Chạy lại trong buổi: python3 compare_orchestration_levels.py --runs 1 (~25 giây).`);
-  const max = Math.max(...data.rows.map((r) => r.tokens));
-  data.rows.forEach((r, i) => {
-    const y = 100 + i * 62;
-    label(s, 40, y, 150, 40, `${r.level}\n${String(r.calls).replace(".", ",")} lượt gọi · ${String(r.secs).replace(".", ",")}s`, { size: 13, sub: 10, align: 'START' });
-    box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 280), 26, ' ', { fill: i === 2 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
-    mono(s, 210 + (r.tokens / max) * 280, y + 10, 90, 22, `${Math.round(r.tokens).toLocaleString("de-DE")} token`, { color: C.INK, size: 11 });
-    box(s, 610, y + 6, 70, 30, r.tickets ? 'tạo ticket ✓' : 'không tạo', { fill: r.tickets ? C.GREEN : C.MUTED, size: 9.5 });
-  });
-  box(s, 40, 300, 640, 50, 'Bước biết trước → workflow đủ việc, ít token hơn', { fill: C.INK, size: 12.5, align: 'START' });
-}
-
-// Vì sao agent tốn token: mỗi lượt gửi lại toàn bộ hội thoại
-function tokenGrowth() {
-  const s = newSlide('Vì sao tốn hơn', 'Mỗi lượt, agent gửi lại toàn bộ hội thoại cho model', `Session 1: model không giữ state giữa các lần gọi. Đây là hệ quả về tiền: mỗi lượt agent phải gửi lại câu hỏi + mọi tool call + kết quả trước đó.
-Số thật từ trace kịch bản 1: input token lượt 1 = 574, lượt 2 = 932 (thêm kết quả search_kb), lượt 3 = 1.201 (thêm kết quả create_ticket). Tổng input 2.707 dù câu hỏi chỉ ~60 token.
-Hệ quả: agent càng nhiều bước, chi phí tăng nhanh hơn tuyến tính. Đây là lý do Session 8 đặt giới hạn số bước.`);
-  [[574, 154, 'Lượt 1', 'câu hỏi + mô tả tool'], [932, 240, 'Lượt 2', '+ kết quả tool lần 1'], [1201, 227, 'Lượt 3', '+ kết quả tool lần 2']].forEach(([inp, out, t, d], i) => {
-    const y = 96 + i * 66;
-    label(s, 40, y, 150, 40, `${t}\n${d}`, { size: 13, sub: 10, align: 'START' });
-    box(s, 200, y + 8, (inp / 1201) * 330, 26, ' ', { fill: C.BLUE, shape: 'RECTANGLE', noLine: true });
-    box(s, 200 + (inp / 1201) * 330, y + 8, (out / 1201) * 330, 26, ' ', { fill: C.ORANGE, shape: 'RECTANGLE', noLine: true });
-    mono(s, 205, y + 12, 200, 18, `${inp.toLocaleString("de-DE")} vào + ${out} ra`, { color: C.WHITE, size: 10 });
-  });
-  box(s, 200, 300, 14, 14, ' ', { fill: C.BLUE, noLine: true }); label(s, 218, 296, 160, 22, 'token gửi vào', { size: 10, bold: false, align: 'START' });
-  box(s, 330, 300, 14, 14, ' ', { fill: C.ORANGE, noLine: true }); label(s, 348, 296, 160, 22, 'token model viết ra', { size: 10, bold: false, align: 'START' });
-  label(s, 40, 325, 640, 40, 'Tổng 2.707 vào + 621 ra · input cộng dồn theo số lượt', { size: 12, align: 'START' });
-}
-
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
 function traceLocate() {
   const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `Đề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
@@ -149,25 +106,4 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
   label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
 }
 
-// Khi bước tiếp theo phụ thuộc kết quả tra: workflow phải đoán trước khi có dữ liệu → tốn hơn agent
-function conditionalCase() {
-  question('Có khi nào agent lại rẻ hơn workflow?', '"…Nếu lỗi phía hệ thống mình thì tạo ticket; nếu do ngân hàng thì chỉ hướng dẫn khách."',
-    `Đọc to yêu cầu. Hỏi lớp: workflow cố định "phân loại → tra KB → trả lời → tạo ticket" sẽ xử lý câu này thế nào? Bước phân loại có đủ thông tin để quyết định không?`);
-  const s = newSlide('Đáp án · đo thật', 'Workflow quyết trước khi tra: tốn ~2,8× agent', `Số đo thật: compare_orchestration_levels.py --request conditional, ${cond.model}, ${cond.runs} lần mỗi mức. Cả 3 mức đều ĐÚNG là không tạo ticket (E205 = ngân hàng từ chối, kb-a-002).
-Vì sao workflow tốn nhất (~${Math.round(cond.rows[1].tokens).toLocaleString('de-DE')} token, ${String(cond.rows[1].secs).replace('.', ',')}s): thứ tự bước cố định bắt bước "phân loại" quyết định có cần ticket TRƯỚC khi tra KB. Model không có dữ liệu nên suy luận rất lâu — đo riêng bước này: 2.759 và 9.900 token suy luận ẩn chỉ để trả về 1 dòng {"need_ticket": false}.
-Agent tra KB trước, thấy E205 do ngân hàng, rồi trả lời luôn: 2 lượt gọi.
-Công bằng mà nói: workflow sửa được bằng cách đổi thứ tự (tra trước, phân loại sau) — nhưng người viết code phải lường trước. Agent tự chọn thứ tự theo dữ liệu. Đây đúng là "bước tiếp theo phụ thuộc kết quả bước trước".`);
-  const max = Math.max(...cond.rows.map((r) => r.tokens));
-  cond.rows.forEach((r, i) => {
-    const y = 96 + i * 58;
-    label(s, 40, y, 150, 40, `${r.level}\n${String(r.calls).replace(".", ",")} lượt gọi · ${String(r.secs).replace(".", ",")}s`, { size: 13, sub: 10, align: 'START' });
-    box(s, 200, y + 8, Math.max(8, (r.tokens / max) * 360), 24, ' ', { fill: i === 1 ? C.ORANGE : C.BLUE, shape: 'RECTANGLE', noLine: true });
-    mono(s, 210 + (r.tokens / max) * 360, y + 9, 90, 22, `${Math.round(r.tokens).toLocaleString("de-DE")} token`, { color: C.INK, size: 11 });
-  });
-  code(s, 40, 272, 330, 74, `Bước "phân loại" của workflow (chưa tra KB):
-→ {"need_ticket": false}
-  2.759 – 9.900 token suy luận ẩn`, 10);
-  box(s, 385, 272, 295, 74, 'Workflow phải quyết định trước khi có dữ liệu. Agent tra trước rồi mới quyết định.', { fill: C.INK, size: 12, align: 'START' });
-}
-
-module.exports = { threeFlows, threeFlowsCode, measuredCost, tokenGrowth, conditionalCase, traceLocate };
+module.exports = { threeFlows, threeFlowsCode, traceLocate };

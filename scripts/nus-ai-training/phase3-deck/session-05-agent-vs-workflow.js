@@ -32,7 +32,7 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
     `Session 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
 Người học đã qua Session 1 (LLM: token, context, không ổn định) và Session 2 (4 pattern, structured output, validate output). Không giảng lại "agent là gì".
 Mục tiêu: chọn đúng mức điều phối bằng số đo, và định vị được agent tối thiểu trong OpenAI Agents SDK.
-Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, cuối buổi đối chiếu với số đo.`);
+Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, phần 02 đối chiếu bằng các tiêu chí chọn.`);
   agenda([['3 mức điều phối', 'model call · workflow do code điều phối · agent'], ['Agent hay workflow', 'khi nào agent tạo giá trị, khi nào workflow đơn giản an toàn hơn'],
     ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
@@ -88,12 +88,7 @@ Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → applicat
     ['Rủi ro chính', 'Trả lời sai', 'Không xử lý ca lạ', 'Gọi sai tool, tham số sai'],
   ], { rowH: 36 });
 
-  extra.measuredCost();
-  extra.tokenGrowth();
-  extra.conditionalCase();
-
-  decide.consistency();
-  decide.decision();
+  decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
   s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `Định vị, không học thuộc API.
 - Agent: định nghĩa (instructions = system prompt, model, tools).
@@ -139,27 +134,28 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   extra.threeFlowsCode(); // demo code đặt cuối: slide nói nguyên lý trước, code xem lúc demo
 
   takeaways([
-    ['Đo trước khi chọn', 'Chạy lặp cùng yêu cầu: đúng mấy lần, token dao động bao nhiêu'],
-    ['Chọn mức', 'Liệt kê được nhánh → workflow · không liệt kê được → agent'],
-    ['Chi phí', 'Agent tốn 2,6–13× token, dao động giữa các lần chạy'],
+    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ test'],
+    ['Agent', 'Quyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc'],
+    ['Bắt đầu đơn giản', 'Chỉ lên bậc khi bậc dưới không đủ · không đảo ngược → người duyệt'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
-- Đo trước khi chọn: 1 lần chạy không nói lên gì — chạy lặp (10 lần ở slide 14), đếm đúng/sai và khoảng token. Đối chiếu với lựa chọn của lớp lúc warm-up.
-- Chọn mức: liệt kê được nhánh → workflow; không liệt kê được → agent.
-- Chi phí: 2 số đo thật hôm nay — bước biết trước: agent tốn ~2,6× token so với workflow; bước phụ thuộc kết quả tra: workflow tốn ~2,8× so với agent (5.246 vs 1.893). Không mức nào luôn rẻ hơn. Workflow viết đúng thứ tự (tra trước, quyết sau) thì đúng 20/20 và rẻ 6–13× so với agent (slide 14).
+- Workflow: viết ra giấy được hết các bước và nhánh → workflow (Anthropic: predictability, consistency).
+- Agent: 3 dấu hiệu của OpenAI — quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc. Không đạt rõ → workflow là đủ.
+- Bắt đầu đơn giản: model call → workflow → workflow + 1 bước model chọn → agent. Hành động không đảo ngược luôn cần người duyệt.
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
-- Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).`);
+- Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).
+Đối chiếu lại các use case lớp chọn lúc đầu phần 02.`);
 
   challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
     'Agent tốn hơn workflow ở chỗ nào?',
-    'Khi nào workflow "tra trước" thua agent?',
+    'Use case nào trong dự án của bạn đáng làm agent? Vì sao?',
     'Kiểm tra user thuộc tenant nào — SDK hay application?',
-    'Agent đúng 19/20 — production phát hiện lần sai bằng cách nào?',
+    'Agent làm sai mà không báo lỗi — phát hiện bằng cách nào?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi không biết trước + mỗi lượt gửi lại cả hội thoại (đo thật: ~3.840 vs ~1.480 token). Nhưng nếu bước phụ thuộc kết quả tra thì ngược lại: workflow 5.246 vs agent 1.893 (slide 12).
-2. Workflow "tra trước" thua khi nhánh không liệt kê được: số lần tra không biết trước (tra lần 1 chưa đủ, phải tra tiếp theo kết quả), hoặc nhiều tool kết hợp tuỳ dữ liệu. Lúc đó code phải viết mọi tổ hợp → agent rẻ hơn về công viết code.
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (slide Đánh đổi).
+2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
-4. Lần sai (không tạo ticket dù phải tạo) không ném lỗi → không có alert. Phát hiện bằng: eval chạy lặp trước khi release (Session 9), và application kiểm tra kết quả thật — có ticket_id hay không, so với nhánh mong đợi (Session 6: run kết thúc ≠ task xong).`);
+4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);
 };
