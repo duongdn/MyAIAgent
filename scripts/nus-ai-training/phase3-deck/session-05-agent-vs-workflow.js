@@ -36,23 +36,39 @@ Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thà
   agenda([['3 mức điều phối', 'model call · workflow do code điều phối · agent'], ['Agent hay workflow', 'khi nào agent tạo giá trị, khi nào workflow đơn giản an toàn hơn'],
     ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
-  s = newSlide('Nhắc lại · Session 1–2', 'ChatGPT, Claude không chỉ là LLM — agent là app bao quanh nó', `Nhắc lại, KHÔNG giảng lại: tối đa 1 phút, lớp đã học ở Session 1 (LLM đọc/viết text, không giữ state) và Session 2 (agent = model chọn bước + gọi tool; output là data phải validate).
-Hình giống slide "LLM vs Agent" của Session 1 (ChienTX), cùng ví dụ ChatGPT/Claude và các tool chung (web search, chạy code, database…). Use case support (tra KB, tạo ticket) chỉ xuất hiện từ slide sau.
-Chỉ đọc 4 bước bên phải rồi nối: "hôm nay đo xem để model chọn bước thì được gì, mất gì".
-Giữ lại công thức Agent = LLM + Tools + Context + Code của mình vì cả Giai đoạn 3 là viết phần "Code của mình".`);
-  box(s, 40, 92, 420, 228, '', { fill: C.CARD, valign: 'TOP' });
-  label(s, 50, 100, 300, 20, 'AGENT (app)', { size: 10, align: 'START', color: C.ORANGE });
-  box(s, 60, 130, 380, 50, 'LLM\nbộ não: đọc & viết text', { fill: C.NAVY, size: 15, sub: 11 });
-  ['Web search', 'Chạy code', 'Database', 'API', 'File', 'Memory'].forEach((t, i) => box(s, 60 + (i % 3) * 130, 192 + Math.floor(i / 3) * 26, 120, 22, t, { fill: C.LIGHT, size: 11 }));
-  box(s, 60, 246, 380, 62, 'Code của mình\nchạy tool thật · kiểm quyền · lưu state · quyết định dừng', { fill: C.GREEN, size: 13, sub: 11 });
-  [['1', 'LLM nói: "tôi cần một tool"'], ['2', 'App chạy tool'], ['3', 'Kết quả quay lại LLM dưới dạng text'], ['4', 'Lặp tới khi trả lời được']]
-    .forEach(([k, t], i) => {
-      box(s, 480, 110 + i * 60, 30, 30, k, { fill: C.ORANGE, shape: 'ELLIPSE', size: 12, noLine: true });
-      label(s, 518, 105 + i * 60, 190, 40, t, { size: 12, bold: false, align: 'START' });
-    });
+  s = newSlide('Nhắc lại · Session 1–2', 'ChatGPT, Claude là agent: LLM + code app bao quanh', `Nhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
+Đi theo mũi tên:
+- User hỏi → code app nhận.
+- ① Code app gửi cho LLM: câu hỏi + context (lịch sử, mô tả các tool có thể dùng).
+- ② LLM chỉ viết text. Khi thiếu thông tin, nó viết "tôi cần tool X với tham số Y" — nó KHÔNG tự gọi được gì.
+- ③ Code app đọc đoạn text đó và chạy tool thật (web search, query DB, gọi API…).
+- ④ Kết quả tool quay lại code app, code app gửi tiếp cho LLM (lại là ①). Lặp tới khi LLM viết câu trả lời cuối → code app trả cho user.
+Công thức: Agent = LLM + Tools + Context + Code app. "Code app" là phần code bao quanh LLM, ai làm agent thì người đó viết:
+- ChatGPT, Claude: OpenAI / Anthropic viết phần code app → user chỉ dùng.
+- Agent của mình (từ Session 5): mình viết phần code app. OpenAI Agents SDK KHÔNG phải agent — nó là thư viện viết sẵn phần vòng lặp ①–④, phần còn lại (tool nào, quyền, khi nào dừng) mình tự viết.
+Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, khi nào code tự viết sẵn các bước".`);
+  box(s, 40, 178, 80, 70, 'User', { fill: C.CARD, size: 14 });
+  twoWay(s, 120, 178, 213);
+  label(s, 120, 190, 58, 14, 'hỏi', { size: 9, bold: false, color: C.INK });
+  label(s, 120, 222, 58, 14, 'trả lời', { size: 9, bold: false, color: C.ORANGE });
+  box(s, 180, 88, 180, 40, 'LLM\nchỉ đọc & viết text', { fill: C.ORANGE, size: 14, sub: 10 });
+  box(s, 180, 178, 180, 70, 'Code app\nchạy vòng lặp · gọi tool · kiểm quyền · quyết định dừng', { fill: C.INK, size: 14, sub: 10 });
+  arrow(s, 255, 178, 255, 128, C.INK);
+  arrow(s, 285, 128, 285, 178, C.ORANGE);
+  label(s, 130, 138, 120, 30, '① câu hỏi\n+ context', { size: 9, bold: false, color: C.INK, align: 'END' });
+  label(s, 290, 138, 140, 30, '② "cần tool X"', { size: 9, bold: false, color: C.ORANGE, align: 'START' });
+  box(s, 430, 160, 250, 106, '', { fill: C.CARD, valign: 'TOP' });
+  label(s, 440, 164, 100, 16, 'TOOLS', { size: 9, align: 'START', color: C.GREY });
+  ['Web search', 'Chạy code', 'Database', 'API', 'File', 'Memory'].forEach((x, i) => box(s, 440 + (i % 2) * 118, 184 + Math.floor(i / 2) * 26, 112, 22, x, { fill: C.LIGHT, size: 10.5 }));
+  twoWay(s, 360, 430, 213);
+  label(s, 360, 190, 70, 14, '③ chạy tool', { size: 9, bold: false, color: C.INK });
+  label(s, 360, 222, 70, 14, '④ kết quả', { size: 9, bold: false, color: C.ORANGE });
+  label(s, 180, 252, 250, 14, '↻ lặp ①–④ tới khi LLM trả lời được', { size: 9.5, bold: false, color: C.ORANGE, align: 'START' });
 
-  [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code của mình', C.LIGHT, 100]]
-    .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 334, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
+  [['Agent', C.BLUE, 52], ['=', null, 14], ['LLM', C.ORANGE, 40], ['+', null, 14], ['Tools', C.LIGHT, 48], ['+', null, 14], ['Context', C.LIGHT, 74], ['+', null, 14], ['Code app', C.INK, 80]]
+    .reduce((x, [t, f, w]) => { (f ? box : label)(s, x, 286, w, 26, t, f ? { fill: f, size: 12, noLine: true } : { size: 14 }); return x + w + 6; }, 40);
+  box(s, 40, 326, 315, 34, 'ChatGPT, Claude → code app do OpenAI / Anthropic viết', { fill: C.CARD, size: 11, bold: false });
+  box(s, 365, 326, 315, 34, 'Agent của mình → mình viết, Agents SDK lo vòng lặp', { fill: C.CARD, size: 11, bold: false });
 
   extra.threeFlows();
 
