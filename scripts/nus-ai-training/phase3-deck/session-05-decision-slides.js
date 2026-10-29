@@ -68,6 +68,7 @@ function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nAnthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 3 bậc từ trái sang phải — đúng 3 khái niệm Anthropic trình bày theo thứ tự: augmented LLM → workflows → agents. Cũng là 3 mức của slide 6–7.
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
+5 slide sau: bậc 2 "Workflow" có nhiều dạng — 5 mẫu Anthropic hay gặp, đi từ code giữ hết (chaining) tới LLM quyết định một phần (orchestrator-workers, evaluator-optimizer) — sát dần agent.
 Nguồn từng ý:
 - Bắt đầu đơn giản: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 - Bậc 1: Anthropic "augmented LLM" — "an LLM enhanced with augmentations such as retrieval, tools, and memory"; "optimizing single LLM calls with retrieval and in-context examples is usually enough".

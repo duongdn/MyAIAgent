@@ -1,6 +1,7 @@
 // Mở đầu Giai đoạn 3 + Session 5: Agent khác workflow ở đâu và OpenAI Agents SDK hỗ trợ gì (45 phút)
 const { C, box, label, code, arrow, twoWay, table, newSlide, question, sessionHeader, recap, agenda, takeaways, challenge, blank, mono, footer } = require('./slide-kit');
 const decide = require('./session-05-decision-slides');
+const patterns = require('./session-05-workflow-patterns-slides');
 const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
@@ -98,6 +99,7 @@ Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nê
   ], { rowH: 24, size: 10.5, fills: [C.LIGHT, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.LIGHT, C.WHITE, C.WHITE, C.WHITE] });
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
+  patterns.workflowPatternSlides(); // 5 mẫu workflow của Anthropic, mỗi mẫu 1 slide
 
   s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐịnh vị, không học thuộc API.
 - Agent: định nghĩa (instructions = system prompt, model, tools).
