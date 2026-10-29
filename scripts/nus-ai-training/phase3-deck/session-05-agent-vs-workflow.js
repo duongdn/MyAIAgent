@@ -101,7 +101,27 @@ Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nê
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
   patterns.workflowPatternSlides(); // 5 mẫu workflow của Anthropic, mỗi mẫu 1 slide
 
-  s = newSlide('03 · OpenAI Agents SDK', 'SDK đặt tên cho đúng các phần của agent loop', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
+  s = newSlide('03 · OpenAI Agents SDK', 'OpenAI Agents SDK: thư viện viết sẵn phần code app của agent', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — tên buổi "…và OpenAI Agents SDK hỗ trợ gì" + Nội dung giảng giải, gạch đầu dòng 3 (walkthrough agent tối thiểu trong OpenAI Agents SDK).]
+Nối từ slide 5: agent = LLM + phần "code app" bao quanh (gọi LLM, chạy tool, lặp tới khi xong). Phần code app đó ai cũng phải viết lại giống nhau → OpenAI đóng gói thành thư viện.
+- Cột trái: nếu tự viết, code app phải lo đủ 6 việc này (chính là vòng lặp ①–④ ở slide 5 + ghi log).
+- Cột phải: dùng SDK thì chỉ khai báo agent (LLM + hướng dẫn + tool), SDK chạy vòng lặp có sẵn và tự ghi trace.
+- Ô dưới: SDK không quyết thay mình — tool nào được mở, quyền, dữ liệu, duyệt vẫn là việc của application (slide 21–22).
+Nguyên văn docs: "The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions"; có "a built-in loop that continues until the task is complete"; là "a production-ready upgrade of our previous experimentation for agents, Swarm"; dùng được cả "non-OpenAI providers" (demo của mình chạy model qua gateway công ty).
+Cùng loại (chỉ để định vị, không đi sâu): LangGraph, Google ADK, Claude Agent SDK — đều đóng gói phần vòng lặp agent.
+Link: openai.github.io/openai-agents-python`);
+  box(s, 40, 90, 310, 180, '', { fill: C.CARD, valign: 'TOP' });
+  mono(s, 54, 98, 280, 14, 'TỰ VIẾT CODE APP', { size: 9, color: C.GREY });
+  ['gọi API của LLM', 'đọc tool call LLM trả về', 'chạy hàm tương ứng', 'gửi kết quả lại cho LLM', 'lặp, quyết khi nào dừng', 'ghi log từng bước']
+    .forEach((x, i) => label(s, 54, 118 + i * 24, 290, 20, `${i + 1}. ${x}`, { size: 12, bold: false, align: 'START' }));
+  arrow(s, 352, 180, 388, 180);
+  box(s, 390, 90, 290, 180, '', { fill: C.LIGHT, valign: 'TOP' });
+  mono(s, 404, 98, 260, 14, 'DÙNG SDK', { size: 9, color: C.GREY });
+  label(s, 404, 118, 266, 40, 'Khai báo agent:\nLLM + hướng dẫn + tool', { size: 12.5, align: 'START', valign: 'TOP' });
+  label(s, 404, 168, 266, 40, 'SDK chạy sẵn vòng lặp 1–5\nvà tự ghi trace (6)', { size: 12.5, align: 'START', valign: 'TOP' });
+  label(s, 404, 218, 266, 40, 'Python · mã nguồn mở\ndùng được model không phải OpenAI', { size: 11, bold: false, color: C.GREY, align: 'START', valign: 'TOP' });
+  box(s, 40, 290, 640, 44, 'Vẫn là việc của mình: tool nào được dùng, quyền, dữ liệu, duyệt', { fill: C.INK, size: 13.5 });
+
+  s = newSlide('OpenAI Agents SDK', 'SDK đặt tên cho đúng các phần của agent loop', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
 Chuyển sang phần 03. Không học API mới: mỗi khái niệm SDK là một phần của sơ đồ agent loop đã thấy ở slide 5. Đọc theo hàng, chỉ lại vào sơ đồ slide 5 nếu cần.
 - Agent: khai báo instructions (system prompt), model, danh sách tool — "LLM + hướng dẫn + tool nó được dùng".
 - function_tool: biến một hàm Python thành tool; SDK tự sinh mô tả (tên, mô tả, JSON schema tham số) từ type hint + docstring để gửi cho LLM.
