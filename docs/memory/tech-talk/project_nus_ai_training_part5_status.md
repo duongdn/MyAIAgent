@@ -31,5 +31,5 @@ Sessions: 13 = Production architecture cho AI feature, 14 = Observability latenc
 Lịch: training 11h thứ 4 hàng tuần, S1 = 14/10/2026 → S5–S9 = 11/11, 18/11, 25/11, 2/12, 9/12. Section 3 giao cho DuongDN + VinhNT (không phải Nghiệp).
 
 - 🔴 2026-10-16: presenter GĐ3 (S5–S9) ghi "DuongDN · VinhNT" (user sửa: không dùng "Dương Nguyễn"). Dùng tên viết tắt NUS kiểu DuongDN/VinhNT trên slide.
-- 🔴 2026-10-29: deck S5, S6 chỉ ghi "DuongDN" (bỏ VinhNT); S7–S9 ghi "VinhNT". slide-kit.js đặt người trình bày theo số session.
+- 🔴 2026-10-29: slide 1 "Giai đoạn 3" (trang của cả giai đoạn) = "DuongDN · VinhNT"; trang Session 5/6 + Q&A = "DuongDN"; S7–S9 = "VinhNT". slide-kit.js đặt người trình bày theo số session.
 - 🔴 2026-10-20: GĐ3 chia lại — DuongDN làm S5 + S6; VinhNT làm S7, S8, S9 (không đụng deck S7–S9 nữa trừ khi user yêu cầu).
