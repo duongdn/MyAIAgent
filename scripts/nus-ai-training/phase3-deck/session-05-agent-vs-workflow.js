@@ -73,21 +73,25 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh model call · workflow · agent', 'Càng lên mức cao, model càng tự quyết nhiều hơn', `Đọc theo hàng, nối với sơ đồ slide trước.
-- Số lần gọi model: model call 1 lần; workflow cố định, đếm được trước; agent không biết trước — model gọi tool tới khi thấy đủ.
-- Ai chọn bước tiếp: điểm khác nhau cốt lõi (tiêu đề slide 6).
-- Hành động: ở workflow, code gọi tool/API theo thứ tự viết sẵn; ở agent, model chọn tool, code chạy.
-- Khi yêu cầu đổi dạng: model call sửa prompt; workflow sửa code (thêm nhánh); agent thường xử lý được nếu đã có tool phù hợp.
-- Ví dụ quen thuộc để lớp tự xếp: tóm tắt/dịch = model call; pipeline xử lý email, hoá đơn = workflow; ChatGPT bật web search, coding agent = agent.
-Đánh đổi (ổn định, chi phí, debug) để phần 02 — không nói ở đây.`);
-  table(s, 30, 88, [150, 165, 165, 180], [
+  s = newSlide('So sánh', '', `Đọc theo hàng, từ trái sang phải: càng sang phải, model tự quyết càng nhiều — linh hoạt hơn, đổi lại khó đoán và tốn hơn.
+- 3 hàng đầu: cấu trúc (nối với sơ đồ slide 6). Điểm khác cốt lõi: ai chọn bước tiếp theo.
+- Ổn định / chi phí / test / khi sai: cái giá của việc để model quyết. Anthropic: workflow "offer predictability and consistency for well-defined tasks"; agent "trade latency and cost for better task performance", "higher costs, and the potential for compounding errors" (lỗi lượt trước đưa vào lượt sau, dồn lên).
+- Kiểm soát cần thêm: mức càng cao, application càng phải tự viết nhiều chốt chặn (Session 7–9).
+- Ví dụ quen thuộc: để lớp tự xếp các công cụ họ dùng hằng ngày.
+Nguồn: Anthropic, "Building effective agents".`);
+  table(s, 30, 52, [150, 160, 170, 180], [
     ['', 'Model call', 'Workflow', 'Agent'],
     ['Gọi model', '1 lần', 'số lần cố định', 'không biết trước'],
     ['Ai chọn bước tiếp', 'không có bước', 'code — viết sẵn', 'model — lúc chạy'],
     ['Hành động (tool, API)', 'không', 'code gọi theo thứ tự', 'model chọn, code chạy'],
-    ['Yêu cầu đổi dạng', 'sửa prompt', 'sửa code', 'thường không cần sửa'],
+    ['Cùng input', 'gần như cùng kết quả', 'cùng các bước', 'có thể khác đường đi'],
+    ['Chi phí, độ trễ', 'thấp nhất', 'cố định, đoán trước', 'dao động, cao hơn'],
+    ['Test, debug', 'dễ nhất', 'kiểm từng bước', 'đọc trace nhiều lượt'],
+    ['Khi sai', 'trả lời sai', 'dừng ở một bước', 'lỗi dồn qua các lượt'],
+    ['Yêu cầu đổi dạng', 'sửa prompt', 'sửa code, thêm nhánh', 'thường tự xoay xở'],
+    ['Kiểm soát cần thêm', 'validate output', '+ kiểm từng bước', '+ quyền, duyệt, giới hạn lượt'],
     ['Ví dụ quen thuộc', 'tóm tắt, dịch', 'xử lý email, hoá đơn', 'ChatGPT web search'],
-  ], { rowH: 40, size: 12 });
+  ], { rowH: 25, size: 10.5 });
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
@@ -155,7 +159,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Agent làm sai mà không báo lỗi — phát hiện bằng cách nào?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (slide Đánh đổi).
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (bảng So sánh, slide 7).
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
 4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);

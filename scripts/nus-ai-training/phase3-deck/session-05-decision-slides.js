@@ -1,12 +1,12 @@
 // Session 5 · phần 02 "Agent hay workflow": chọn theo đặc điểm bài toán (Anthropic + OpenAI), không theo số đo
-const { C, box, mono, arrow, table, newSlide, question } = require('./slide-kit');
+const { C, box, mono, arrow, newSlide, question } = require('./slide-kit');
 
 const SRC_ANTHROPIC = 'Anthropic, "Building effective agents" (anthropic.com/engineering/building-effective-agents)';
 const SRC_OPENAI = 'OpenAI, "A practical guide to building agents", mục "When should you build an agent?"';
 
 function askWorkflowOrAgent() {
   question('Use case của bạn: workflow hay agent?', 'Trả lời trước khi viết dòng code nào.',
-    `Hỏi lớp 1–2 phút: mỗi người nghĩ 1 use case trong dự án của mình, giơ tay chọn workflow hay agent. Ghi lại vài use case lên bảng, 3 slide sau dùng chúng làm ví dụ.`);
+    `Hỏi lớp 1–2 phút: mỗi người nghĩ 1 use case trong dự án của mình, giơ tay chọn workflow hay agent. Ghi lại vài use case lên bảng, các slide sau dùng chúng làm ví dụ.`);
 }
 
 function whenWorkflow() {
@@ -41,22 +41,6 @@ Nguồn: ${SRC_OPENAI}.`);
   box(s, 40, 284, 640, 46, 'Không đạt rõ dấu hiệu nào → workflow là đủ', { fill: C.INK, size: 15 });
 }
 
-function tradeoffs() {
-  const s = newSlide('Đánh đổi', 'Agent linh hoạt hơn — đổi lại khó đoán, tốn hơn', `Đọc theo hàng. Cột trái = cái được của workflow, cột phải = cái giá của agent.
-Anthropic: agent "trade latency and cost for better task performance"; tự chủ nghĩa là "higher costs, and the potential for compounding errors" — lỗi ở lượt trước được đưa vào lượt sau và dồn lên.
-Hàng cuối là lý do để trả các cái giá trên: tình huống chưa lường trước.
-Nguồn: ${SRC_ANTHROPIC}.`);
-  table(s, 30, 85, [160, 240, 250], [
-    ['', 'Workflow', 'Agent'],
-    ['Đường đi', 'code viết sẵn', 'model chọn lúc chạy'],
-    ['Cùng input', 'cùng các bước', 'có thể khác mỗi lần'],
-    ['Chi phí, độ trễ', 'cố định, thấp', 'dao động, cao hơn'],
-    ['Test, debug', 'kiểm từng bước', 'đọc trace nhiều lượt'],
-    ['Khi sai', 'dừng ở một bước', 'lỗi dồn qua các lượt'],
-    ['Tình huống lạ', 'phải sửa code', 'tự xoay xở được'],
-  ], { rowH: 34, size: 12, fills: [C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.GREEN] });
-}
-
 function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `Anthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 4 bậc từ trái sang phải. Bậc 3 là lựa chọn ở giữa hay bị bỏ qua: workflow giữ thứ tự, chỉ một bước cho model chọn giữa vài tool có sẵn.
@@ -77,7 +61,6 @@ function decisionSlides() {
   askWorkflowOrAgent();
   whenWorkflow();
   whenAgent();
-  tradeoffs();
   startSimple();
 }
 
