@@ -178,7 +178,7 @@ function challenge(homework, questions, notes) {
 }
 // Bài tự thực hành: các bước đánh số (tách khỏi câu hỏi ôn tập — S5)
 function homework(title, steps, notes) {
-  const s = newSlide('Bài tự thực hành', title, notes);
+  const s = newSlide('Bài tự thực hành', title, notes); // title: S5 = 'Bài tập về nhà'
   steps.forEach((x, i) => {
     const y = 92 + i * 78;
     box(s, 40, y, 640, 66, ' ', {});
@@ -189,7 +189,7 @@ function homework(title, steps, notes) {
 }
 // Câu hỏi ôn tập: lưới 2 cột, đáp án để trong notes
 function reviewQuestions(questions, notes) {
-  const s = newSlide('Câu hỏi ôn tập', 'Bạn trả lời được những câu này không?', notes);
+  const s = newSlide('Ôn tập', 'Câu hỏi ôn tập', notes);
   questions.forEach((q, i) => {
     const x = 40 + (i % 2) * 325; const y = 92 + Math.floor(i / 2) * 120;
     box(s, x, y, 315, 106, ' ', {});

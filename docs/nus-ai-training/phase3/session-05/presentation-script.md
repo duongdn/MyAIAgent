@@ -25,7 +25,7 @@ python3 demo_ui.py                                    # mở http://localhost:80
 | 11–25 | 8–17 | 02 · Agent hay workflow (8–12 ~8', 5 mẫu workflow 13–17 ~1'/slide) |
 | 25–33 | 18–22 | 03 · OpenAI Agents SDK |
 | 33–40 | 23 | Demo live |
-| 40–45 | 24–26 | Ghi nhớ + bài tự thực hành + câu hỏi ôn tập, hỏi đáp nếu còn giờ |
+| 40–45 | 24–26 | Ghi nhớ + câu hỏi ôn tập + bài tập về nhà, hỏi đáp nếu còn giờ |
 
 Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 2.
 
@@ -96,8 +96,8 @@ Gateway lỗi hẳn: kể lại theo kết quả 29/10 ở trên.
 
 ### Kết (40–45')
 - **24 · Ý chính của buổi**: 5 thẻ ứng với 5 phần. Đối chiếu lại use case của lớp.
-- **25 · Bài tự thực hành**: 3 bước — chọn use case · giải thích model call / workflow / agent · đánh dấu ranh giới SDK / application. Mang tới đầu S6.
-- **26 · Câu hỏi ôn tập**: 4 câu, hỏi nhanh cả lớp. Đáp án: (1) agent tốn hơn vì số lượt không biết trước + mỗi lượt gửi lại cả hội thoại; (2) use case đáng làm agent phải có ít nhất 1 dấu hiệu slide 11 và không viết trước được các nhánh; (3) application quyết hành động nào cần duyệt, SDK chỉ có cơ chế dừng chờ duyệt; (4) agent sai thường không báo lỗi → app kiểm tra kết quả thật trong hệ thống đích + eval chạy lặp (S6, S9).
+- **25 · Câu hỏi ôn tập**: 4 câu, hỏi nhanh cả lớp. Đáp án: (1) agent tốn hơn vì số lượt không biết trước + mỗi lượt gửi lại cả hội thoại; (2) use case đáng làm agent phải có ít nhất 1 dấu hiệu slide 11 và không viết trước được các nhánh; (3) application quyết hành động nào cần duyệt, SDK chỉ có cơ chế dừng chờ duyệt; (4) agent sai thường không báo lỗi → app kiểm tra kết quả thật trong hệ thống đích + eval chạy lặp (S6, S9).
+- **26 · Bài tập về nhà** (slide cuối): 3 bước — chọn use case · giải thích model call / workflow / agent · đánh dấu ranh giới SDK / application. Mang tới đầu S6.
 
 ## Câu hỏi chưa giải quyết
 - (không còn)

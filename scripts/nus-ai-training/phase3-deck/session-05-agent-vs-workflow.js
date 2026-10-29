@@ -190,13 +190,6 @@ Tóm tắt 2 phút, mỗi thẻ ứng với một phần của buổi:
 - OpenAI Agents SDK → slide 19–22: SDK viết sẵn phần code app (Agent · function_tool · Runner.run · Trace · Guardrail); tool nào được mở, quyền, dữ liệu, duyệt, state, business rule vẫn do application quyết (Session 7 đi sâu).
 Đối chiếu lại các use case lớp nêu ở slide 8.`, 'Ý chính của buổi');
 
-  homework('Làm sau buổi, mang tới đầu Session 6', [
-    'Chọn một use case trong dự án của bạn',
-    'Giải thích vì sao dùng model call, workflow hay agent',
-    'Đánh dấu phần nào SDK lo, phần nào application phải tự làm',
-  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Bài tự thực hành sau buổi học": "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application."]\nBài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
-Gợi ý chấm: lý do chọn mức phải dựa vào tiêu chí trong buổi (viết trước được các bước? có dấu hiệu cần agent?), không phải "cho xịn"; ranh giới SDK/application dùng bảng slide 22.`);
-
   reviewQuestions([
     'Agent tốn hơn workflow ở chỗ nào?',
     'Use case nào trong dự án của bạn đáng làm agent? Vì sao?',
@@ -208,5 +201,13 @@ Câu hỏi ôn tập, hỏi nhanh cả lớp (che đáp án). Đáp án:
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
 3. Ai quyết hành động nào cần duyệt? → application (slide 22). SDK chỉ cung cấp cơ chế dừng chờ duyệt (needs_approval); tool nào phải duyệt, ai được duyệt là business rule của mình (Session 7).
 4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);
+
+  homework('Bài tập về nhà', [
+    'Chọn một use case trong dự án của bạn',
+    'Giải thích vì sao dùng model call, workflow hay agent',
+    'Đánh dấu phần nào SDK lo, phần nào application phải tự làm',
+  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Bài tự thực hành sau buổi học": "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application."]\nBài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
+Gợi ý chấm: lý do chọn mức phải dựa vào tiêu chí trong buổi (viết trước được các bước? có dấu hiệu cần agent?), không phải "cho xịn"; ranh giới SDK/application dùng bảng slide 22.`);
+
   return { noClosing: true }; // S5 không có slide Q&A riêng (user 29/10)
 };

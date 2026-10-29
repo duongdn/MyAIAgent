@@ -31,7 +31,7 @@ Deck 26 slide (29/10): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws
 | "không học thuộc API" | notes 19 | ✅ |
 | "Chỉ rõ phần SDK cung cấp và phần product vẫn phải tự quyết định" | 21, 22 | ✅ |
 | Ví dụ: "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" | demo 23: trang demo có 2 nút "① Chỉ cần RAG" / "② Nhiều bước + tạo ticket" và ghi nguyên câu ví dụ; dự phòng kịch bản 9 / 1 của run_demo.py | ✅ |
-| Bài tự thực hành: "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application." | 25 (bài tập); 26 (câu hỏi ôn tập) | ✅ |
+| Bài tự thực hành: "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application." | 26 (bài tập về nhà); 25 (câu hỏi ôn tập) | ✅ |
 | Kết quả: "chọn đúng mức điều phối" | 8–12 | ✅ |
 | Kết quả: "đọc được sơ đồ agent tối thiểu" | 5 (sơ đồ agent loop), 19, 20 | ✅ |
 
