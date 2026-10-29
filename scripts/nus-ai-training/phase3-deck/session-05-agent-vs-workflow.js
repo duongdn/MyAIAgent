@@ -125,7 +125,7 @@ Link: openai.github.io/openai-agents-python`);
   label(s, 404, 168, 266, 40, 'SDK chạy sẵn vòng lặp 1–5\nvà tự ghi trace (6)', { size: 12.5, align: 'START', valign: 'TOP' });
   box(s, 40, 290, 640, 44, 'Vẫn là việc của mình: tool nào được dùng, quyền, dữ liệu, duyệt', { fill: C.INK, size: 13.5 });
 
-  s = newSlide('OpenAI Agents SDK', 'SDK đặt tên cho đúng các phần của agent loop', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
+  s = newSlide('OpenAI Agents SDK', 'Các thành phần chính của OpenAI Agents SDK', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
 Chuyển sang phần 03. Không học API mới: mỗi khái niệm SDK là một phần của sơ đồ agent loop đã thấy ở slide 5. Đọc theo hàng, chỉ lại vào sơ đồ slide 5 nếu cần.
 - Agent: khai báo instructions (system prompt), model, danh sách tool — "LLM + hướng dẫn + tool nó được dùng".
 - function_tool: biến một hàm Python thành tool; SDK tự sinh mô tả (tên, mô tả, JSON schema tham số) từ type hint + docstring để gửi cho LLM.
