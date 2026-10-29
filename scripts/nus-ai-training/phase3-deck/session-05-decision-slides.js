@@ -47,7 +47,7 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
     box(s, x, 92, 206, 120, `${t}\n${d}`, { fill: C.ORANGE, size: 15, sub: 11 });
     box(s, x, 220, 206, 40, `vd: ${ex}`, { fill: C.CARD, size: 11.5, bold: false });
   });
-  box(s, 40, 284, 640, 46, 'Không đạt rõ → giải pháp cố định (code / workflow) là đủ', { fill: C.INK, size: 15 });
+  box(s, 40, 284, 640, 46, 'Không có dấu hiệu nào ở trên → dùng workflow', { fill: C.INK, size: 15 });
 }
 
 function startSimple() {
