@@ -42,9 +42,10 @@ function demoSupportRequests() {
   // Slide mở phần demo: chỉ có chữ "Demo", nội dung chạy live trên terminal (xem notes)
   const s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
 Slide chỉ để mở phần demo — mọi nội dung nằm ở màn hình terminal. Demo live, model thật qua gateway công ty (support_agent_demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
-1) python3 run_demo.py --scenario 9 --trace   → "Mã lỗi thanh toán E205 nghĩa là gì?"
+0) Walkthrough code (~2'): mở agent_openai_sdk.py, chỉ 3 chỗ — @function_tool (dòng 79–92, tools), build_agent (105–107, Agent), Runner.run (145, run/runner). Phần còn lại: "application tự quyết, học ở S6–S9". Chi tiết: session-05/presentation-script.md mục Demo.
+1) python3 run_demo.py --scenario 9 --trace-only   → "Mã lỗi thanh toán E205 nghĩa là gì?"
    Chạy 29/10: 2 lượt gọi LLM (LLM gọi search_kb rồi trả lời), 1.442 token vào, không tạo ticket. → Chỉ cần tra tài liệu rồi trả lời: model call + RAG là đủ, dùng agent là thừa.
-2) python3 run_demo.py --scenario 1 --approve yes --trace   → "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
+2) python3 run_demo.py --scenario 1 --approve yes --trace-only   → "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
    Chạy 29/10: 3 lượt (search_kb → create_ticket, dừng chờ duyệt → T-1001 → trả lời), 2.600 token vào. → Cần nhiều bước + hành động. Nếu lúc nào cũng tạo ticket → workflow (slide 9); nếu tạo hay không tuỳ kết quả tra → agent.
 Chỉ vào trace: dòng ② là LLM quyết định, dòng ③ là code app chạy (giống sơ đồ slide 5).
 

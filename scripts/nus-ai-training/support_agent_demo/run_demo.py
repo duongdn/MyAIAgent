@@ -31,7 +31,8 @@ CHẠY:
     python3 run_demo.py --scenario 1 --approve later    # dừng chờ duyệt, lưu state vào .state/<task>.json
     python3 run_demo.py --resume <task_id> --approve yes            # tiếp tục đúng chỗ dừng (kể cả sau restart)
     python3 run_demo.py --scenario 1 --approve yes --trace          # in trace: model call, tool call, guardrail
-    python3 run_demo.py --scenario 9 --trace                        # chỉ hỏi: 1 lần tra tài liệu là đủ (so với kịch bản 1)
+    python3 run_demo.py --scenario 9 --trace-only                   # S5: chỉ hỏi — 1 lần tra tài liệu là đủ
+    python3 run_demo.py --scenario 1 --approve yes --trace-only     # S5: nhiều bước + tạo ticket, chỉ in vòng lặp agent
 
 LƯU Ý: model là LLM thật → mỗi lần chạy có thể khác nhau, kể cả việc có bị prompt injection lừa hay không.
 Đó chính là bài học: không thể dựa vào việc model "tự biết" — kiểm soát phải nằm ở application.
@@ -39,6 +40,7 @@ Mỗi kịch bản in số lượt gọi model + token/chi phí (💰).
 """
 import argparse
 import asyncio
+import io
 import os
 import shutil
 import sys
@@ -75,6 +77,26 @@ SCENARIOS = {
 SCENARIO_FAULTS = {6: {"timeout_once"}}  # lỗi giả lập ở hệ thống đích (ticket_system.py)
 
 
+class TraceOnly(io.TextIOBase):
+    """--trace-only (Session 5): chỉ in dòng trace ①–④ + câu hỏi/trả lời; ẩn log checkpoint của Session 7
+    (① session, ② quyền, 📌 task state…) vì trùng ký hiệu với ①–④ của agent loop."""
+    KEEP = ("🔎", "━━", "👤", "💬", "💰", "Agent:", "Ticket trong")
+
+    def __init__(self, out):
+        self.out, self.buf, self.in_answer = out, "", False
+
+    def write(self, s):
+        self.buf += s
+        while "\n" in self.buf:
+            line, self.buf = self.buf.split("\n", 1)
+            if any(k in line for k in self.KEEP):
+                self.in_answer = "💬" in line
+                self.out.write(line + "\n")
+            elif self.in_answer and not line.strip().startswith(("📌", "🤖", "①", "②", "③", "④", "⑤", "🔍")):
+                self.out.write(line + "\n")  # các dòng tiếp theo của câu trả lời nhiều dòng
+        return len(s)
+
+
 async def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--scenario", type=int, choices=SCENARIOS, help="chỉ chạy 1 kịch bản")
@@ -85,13 +107,17 @@ async def main():
     p.add_argument("--fault", choices=["timeout_once", "down"], help="giả lập lỗi hệ thống ticket đích")
     p.add_argument("--resume", metavar="TASK_ID", help="tiếp tục task đang AWAITING_APPROVAL (--sdk openai)")
     p.add_argument("--trace", action="store_true", help="in trace của SDK (luôn ghi vào .traces/)")
+    p.add_argument("--trace-only", action="store_true",
+                   help="Session 5: như --trace nhưng ẩn log checkpoint (①–⑤ kiểm quyền, task state) — chỉ còn vòng lặp agent")
     p.add_argument("--sdk", choices=["openai", "claude"], default="openai", help="SDK dùng để chạy agent")
     p.add_argument("--compare", action="store_true",
                    help="chạy --scenario trên mọi model của gateway (--sdk openai), in bảng so sánh")
     a = p.parse_args()
 
-    if a.trace:
+    if a.trace or a.trace_only:
         os.environ["DEMO_TRACE"] = "1"
+    if a.trace_only:
+        sys.stdout = TraceOnly(sys.__stdout__)
     if a.compare:
         return await compare(a)
 
