@@ -80,7 +80,8 @@ function table(s, x, y, widths, rows, o = {}) {
 }
 
 let page = 0; let footerText = 'NUS Technology · Giai đoạn 3 · Build AI Agent';
-const PRESENTER = 'DuongDN · VinhNT';
+// Người trình bày theo phân công: S5–S6 DuongDN, S7–S9 VinhNT (sessionHeader đặt lại cho từng deck)
+let PRESENTER = 'DuongDN';
 
 function blank(notes, bg = C.PAPER) {
   const sid = id('p3'); page += 1; slides.push({ sid, notes });
@@ -116,6 +117,7 @@ function question(q, sub, notes) {
 
 // Trang mở đầu mỗi session (mỗi session = 1 ngày training): tối, tên buổi, câu hỏi trọng tâm, người trình bày, chip S5–S9
 function sessionHeader(num, topic, focusQ, notes) {
+  PRESENTER = num <= 6 ? 'DuongDN' : 'VinhNT';
   if (num > 5) page = 0; // đánh số trang lại cho từng ngày (S5 tính cả 2 slide mở đầu Giai đoạn 3)
   footerText = `NUS Technology · Giai đoạn 3 · Session ${num} — ${topic}`;
   const s = blank(notes, C.INK);
