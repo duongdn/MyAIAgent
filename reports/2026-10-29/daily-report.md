@@ -1,6 +1,6 @@
 # Daily Report — 2026-10-29 (Thursday)
 
-**Run:** 2026-10-29T05:00+07:00 → 05:40 (cron, mpfc server)
+**Run:** 2026-10-29T05:00+07:00 → 05:40 (cron, mpfc server), corrected 08:45 (+07:00) recheck
 **Window:** 2026-10-28 05:40 → 2026-10-29 05:00 (+07:00). Task-log date: **Wed 2026-10-28**
 **Leave plan:** `parse-leave-emails.js` refreshed 05:00: no upcoming approved leave on record. Matrix: TuanNT left early 10-28 (family). TienT 10-29 (family, plan TBD). HungTK 09/11 + 20/11, DatNT AM 02/11.
 
@@ -10,12 +10,12 @@
 
 | # | Source | Alert |
 |---|--------|-------|
-| 1 | OhCleo (Slack DM) | Celine has 3 unanswered asks overnight: 20:25 VN "write **400+ creators** rather than 200" on the new payment screen; 22:27 VN "do we support **free trials**?"; 03:01 VN "**urgent**: add this picture to the newsletter (template `Newsletter_Oct_Nov_2026`)". [DM](https://ohcleo.slack.com/archives/D0B6846UN8K). iOS 4.2.2 live ✅; Android resubmitted, approval pending. **Workstream needs review ×13 (reviewers DuongDN, MinhTV):** LuHX ×6 (10-26 → 10-28), LongVV ×6 (10-26/27, incl. Story Companion 8:00), HungPN 0:00 (10-27). Ohcleo ○ |
-| 2 | Slack GGS (Bailey) | [#maintenance](https://globalgrazingservices.slack.com/archives/C0338NXK3SB) Joey 14:30: split PO "% of reception still wrong, only order amount fixed". Amy "Checking" 14:34, then Joey 20:58 "**any update?**" ×2, no reply. StrainRite: Amy will send the estimate, and Nick will review the brother's PrestaShop (Joey meets his brother Thursday = today). Nick daily report 21:36 ✅. Speedventory Pending review: PhucVT Check queue issue 1:00 (10-26), still no reviewer configured. Bailey ○ |
+| 1 | OhCleo (Slack DM) | (08:40 recheck: still 0 replies in DM) Celine has 3 unanswered asks overnight: 20:25 VN "write **400+ creators** rather than 200" on the new payment screen; 22:27 VN "do we support **free trials**?"; 03:01 VN "**urgent**: add this picture to the newsletter (template `Newsletter_Oct_Nov_2026`)". [DM](https://ohcleo.slack.com/archives/D0B6846UN8K). iOS 4.2.2 live ✅; Android resubmitted, approval pending. **Workstream needs review ×13 (reviewers DuongDN, MinhTV):** LuHX ×6 (10-26 → 10-28), LongVV ×6 (10-26/27, incl. Story Companion 8:00), HungPN 0:00 (10-27). Ohcleo ○ |
+| 2 | Slack GGS (Bailey) | [#maintenance](https://globalgrazingservices.slack.com/archives/C0338NXK3SB) Joey 14:30: split PO "% of reception still wrong, only order amount fixed". Amy "Checking" 14:34, then Joey 20:58 "**any update?**" ×2, no reply (08:40 recheck: still unanswered, ~12h). StrainRite: Amy will send the estimate, and Nick will review the brother's PrestaShop (Joey meets his brother Thursday = today). Nick daily report 21:36 ✅. Speedventory Pending review: PhucVT Check queue issue 1:00 (10-26), still no reviewer configured. Bailey ○ |
 | 3 | MPFC | New prod [Rollbar](https://app.rollbar.com) **#76: `Call to undefined function mpfc_saved_videos()`** (freelancer@, 14:37 VN). The billing monitor still fires "**App subscription expired but access still active**" at 19:08 VN, **after** the 13:37 fix commit `18ae3fab` that excluded Saul's friend receipts. Check whether it's another member or the fix isn't deployed. Tien (IDP): Raya's account isn't a club → 403 is expected, explained 14:13, waiting on Adam. MPFC ○ |
 | 4 | Task log — KhanhHH | ([Workstream](https://workstream.nustechnology.com)) **Tue 10-27 = 0.17h total** (Baamboozle only), no leave on record. Yesterday's cron said "re-check after 10:00" and it is still 0.17h a day later. Wed 10-28 = 3.67h so far (05:00 lag). Verify raw `/review/week` rows before any reminder. Aysar ○ |
-| 5 | Maddy | ([PR #560](https://bitbucket.org/xtreme-web/rms/pull-requests/560)) LongVV said (Matrix 08:41) "6h Maddy today" and Kai was active all day (staging SSH, LIFM2-473, asked Madhuraka 14:33 to merge PR #560). WS Maddy still 0h and **no Kai daily report** found in Slack 10-28. Re-check after logging. ⚠️ LongVV pasted an access key in plain text in the Maddy Matrix room (14:05, redacted), so rotate it. Maddy ○ |
-| 6 | Neural Contract | [Upwork](https://www.upwork.com/ab/messages/) Upwork Cloudflare/cookie-vault stale at 05:00 (company PC only on 08:00+), so the room wasn't read. Matrix relay: customer 10:29 "add the hours to this week and they'll get paid when invoice is issued" → the bonus question is answered. Re-run after 08:00. Neural ○ |
+| 5 | Maddy | ([PR #560](https://bitbucket.org/xtreme-web/rms/pull-requests/560)) LongVV said (Matrix 08:41) "6h Maddy today" and Kai was active all day (staging SSH, LIFM2-473, asked Madhuraka 14:33 to merge PR #560). WS Maddy still 0h and **no Kai daily report** found in Slack 10-28. 08:40 recheck: WS Maddy LongVV 10-28 still 0h, Kai report check n/a until logged. ⚠️ LongVV pasted an access key in plain text in the Maddy Matrix room (14:05, redacted), so rotate it. Maddy ○ |
+| 6 | Neural Contract | ~~Upwork Cloudflare/cookie-vault stale at 05:00, room not read. Neural ○~~ ✅ 08:40 recheck: room read live — last msg is ours 10-28 10:34 "I noted" after customer's "add the hours to this week". No new customer msg. Neural ✓ |
 | 7 | AirAgri / Jeff GitHub (security, info) | ([example commit](https://github.com/airagri/AirAgri_Team_MobileApp/commit/33fb6e2c2811c78c4afc660d694794e6d3e08b46)) **PolinRider supply-chain malware** force-pushed malicious code to AirAgri Team App, SprayApp and Flutter_Contractor (Jeff Trinh found it). Cleaned, rulesets set on all repos, AirAgri main repo scanned clean. James asked "who committed that" and wants an AI scan on every PR. Internally, dozens of repos on the "Jeff" GitHub account were hit. namtv removed members, changed the password and disabled Copilot. MinhTV asked DuongDN to scan his machine (done, screenshot sent). |
 
 **Today (Oct 29):** TienT off (family). Kunal travels to India. Rick: HEAL 11:00/12:30, OmniGPT 10:30. Ken: DE standup 08:30. ✅ Resolved since last report: OhCleo iOS 4.2.2 live, `/post/…` ask picked up by PhuongPVT. Fountain: Oct 27 night + Oct 28 rollouts LIVE, Rollbar #403 tracked on a [bug card](https://trello.com/b/UDrSWage). Neural bonus answered. RDC PHP security patch deployed. Elena OP M2 released.
@@ -83,9 +83,9 @@ Raw per-project rows summed per dev across all WS projects.
 
 | Developer | Wed 10-28 | Tue 10-27 (final) | Status |
 |-----------|-----------|-------------------|--------|
-| PhucVT | 0h | 0h (leave) | ⏳ not logged yet (active in Arthur/DG rooms 10-28). Re-check after 10:00 |
-| TuanNT | 0h | 8h (Speedventory) | ⏳ not logged yet (left early 10-28) |
-| KhanhHH | 3.67h (Baamboozle) | **0.17h** | ⚠️ 10-27 shortfall (Alert #4) |
+| PhucVT | 0h (08:40 still 0h) | 0h (leave) | ⏳ not logged yet (active in Arthur/DG rooms 10-28). Re-check after 10:00 |
+| TuanNT | ~~0h~~ **8h** (Speedventory, 08:40) | 8h (Speedventory) | ✅ |
+| KhanhHH | 3.67h (Baamboozle) | **0.17h** (08:40 raw re-scan all 22 projects: still 0.17h, no leave) | ⚠️ 10-27 shortfall (Alert #4) |
 | LeNH | 8h (James Diamond) | 8h | ✅ |
 | LongVV | 0h | 8h (OhCleo) | informational (said 6h Maddy + 2h OhCleo 10-28) |
 
@@ -158,14 +158,14 @@ Trello: Elena - WordPress SamGuard ✓
 
 ## Trello — Check progress — 05:35 (+07:00)
 
-**16/22 complete.** [Card](https://trello.com/c/005d5phw)
+~~16/22~~ **17/22 complete** (08:40: Neural ✓). [Card](https://trello.com/c/005d5phw)
 - ✓ James Diamond · Rory · Franc · Marcel · Raymond · Andrew Taraba · Arthur - Meta-Stamp · Fountain - DOCUMENT · Elena - WordPress SamGuard
 - ⚠️ Ohcleo: skipped (Alert #1)
 - ⚠️ Bailey: skipped (Alert #2)
 - ⚠️ MPFC: skipped (Alert #3)
 - ⚠️ Aysar: skipped (Alert #4)
 - ⚠️ Maddy: skipped (Alert #5)
-- ⚠️ Neural Contract: skipped (Alert #6, not read)
+- ~~⚠️ Neural Contract: skipped (Alert #6, not read)~~ ✓ Neural Contract (08:40, read live, no new customer msg)
 
 Check mail: 6/6 ✓, [card](https://trello.com/c/dZZZGBTK) done.
 
@@ -176,7 +176,7 @@ Not tracked (paused/cancelled), auto-completed: Colin, Elena - SamGuard Digital 
 
 ## Reminders — 05:35 (+07:00)
 - KhanhHH: 10-27 only 0.17h (not 0h). Verify raw rows first. If confirmed, the message must state the real number, not "0h". Not sent (no `--send-reminder`).
-- PhucVT, TuanNT: 0h for 10-28 so far (05:00 logging lag). Re-check after 10:00. Not sent.
+- PhucVT: 0h for 10-28 at 08:40 (lag). Re-check after 10:00. Not sent. ~~TuanNT 0h~~ TuanNT 8h ✅ (08:40).
 - LeNH: 8h ✅. LongVV: ad-hoc, no reminder.
 
 ---
@@ -258,12 +258,12 @@ Trello: Arthur - Meta-Stamp ✓
 ## Upwork / Upwork Memo — 2026-10-28 — 05:30 (+07:00)
 | Workroom | Memos (Wed 10-28) | Invalid | Details |
 |----------|-------------------|---------|---------|
-| Neural (messages) | n/a | n/a | Cloudflare / cookie vault stale at 05:00 (Alert #6) |
-| Rory (LeNH) | — | — | Cloudflare challenge at 05:00 |
-| Aysar (KhanhHH) | — | — | Cloudflare challenge at 05:00 |
-| Tokenlite (Marcel) | — | — | Cloudflare challenge at 05:00 |
+| Neural (messages) | n/a | n/a | ✅ 08:40 read live, no new customer msg |
+| Rory (LeNH) | 0 | 0 | 08:40: 0 day cells (no tracked time 10-28) |
+| Aysar (KhanhHH) | 0 | 0 | 08:40: 0 day cells |
+| Tokenlite (Marcel) | 0 | 0 | 08:40: 0 day cells |
 
-No memo status this run. The company PC (cookie vault + Turnstile) is only on after 08:00. Re-run: `env -u DISPLAY node scripts/upwork-memo-check.js --date=2026-10-28` + `node scripts/upwork-neural-check.js`.
+~~No memo status this run (Cloudflare at 05:00).~~ 08:40 recheck: all workrooms fetched OK, no invalid memos.
 
 ---
 
@@ -274,4 +274,4 @@ No memo status this run. The company PC (cookie vault + Turnstile) is only on af
 - KhanhHH: confirm 10-27 0.17h with raw rows / leave email before any reminder.
 - Maddy: Kai daily report for 10-28? LongVV to log 6h Maddy. Rotate the access key pasted in the Maddy room.
 - Security: re-scan with MinhTV's new script. Any NUS machine source of the Jeff-account infection?
-- Re-run Upwork memo + Neural after 08:00. Re-check PhucVT/TuanNT 10-28 hours after 10:00.
+- Re-check PhucVT 10-28 + LongVV Maddy hours after 10:00.
