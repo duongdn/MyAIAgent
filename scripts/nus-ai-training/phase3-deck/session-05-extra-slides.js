@@ -39,13 +39,13 @@ function threeFlows() {
 
 // Code của 3 mức (rút gọn từ compare_orchestration_levels.py) + output chạy thật với --show
 function threeFlowsCode() {
-  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `Đây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
+  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `Đây là code thật của sơ đồ 3 mức (slide 5) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
 Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây, model thật, không ghi đè số đo trên slide).
 Đọc cột trái theo từng mức:
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
 - Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team-a) code viết sẵn.
 - Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
-Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
+Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 5 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
 Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.`);
   code(s, 40, 86, 352, 262, `# 1 · Model call — gọi model đúng 1 lần
 docs = search_kb("lỗi E205")           # code
@@ -86,7 +86,7 @@ await Runner.run(agent, q, max_turns=8)`, 8.5);
 function traceLocate() {
   const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `Đề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
 SDK tự sinh trace cho mỗi Runner.run; demo ghi ra file .traces/ trên máy (không gửi về OpenAI) và in ra với --trace.
-Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, deepseek-v4.1-flash):
+Trace in theo đúng vòng lặp ①–④ của slide 4 (chạy thật 28/10, deepseek-v4.1-flash):
 - ① mỗi lượt APP gửi cho LLM: số message tăng dần 2 → 5 → 7 (gửi lại cả kết quả tool), token vào tăng 574 → 932 → 1.201.
 - ② LLM quyết định: lượt 1 gọi search_kb 2 lần (2 cách hỏi), lượt 2 gọi create_ticket, lượt 3 dừng và trả lời.
 - ③ APP chạy hàm thật; create_ticket dừng chờ người duyệt trước khi chạy.
