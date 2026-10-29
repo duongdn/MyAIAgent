@@ -101,11 +101,15 @@ Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nê
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
   patterns.workflowPatternSlides(); // 5 mẫu workflow của Anthropic, mỗi mẫu 1 slide
 
+  question('Agent nào cũng phải tự viết vòng lặp này?', 'Gọi LLM → chạy tool → gửi kết quả lại → lặp tới khi xong…',
+    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — tên buổi "…và OpenAI Agents SDK hỗ trợ gì".]
+Mở phần 03. Chỉ lại sơ đồ slide 5: phần "Code app" (vòng lặp ①–④) là thứ ai làm agent cũng phải viết, và viết giống nhau. Hỏi lớp 30 giây: có cần mỗi dự án tự viết lại không? → slide sau: đã có thư viện viết sẵn.`);
+
   s = newSlide('03 · OpenAI Agents SDK', 'OpenAI Agents SDK: thư viện viết sẵn phần code app của agent', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — tên buổi "…và OpenAI Agents SDK hỗ trợ gì" + Nội dung giảng giải, gạch đầu dòng 3 (walkthrough agent tối thiểu trong OpenAI Agents SDK).]
 Nối từ slide 5: agent = LLM + phần "code app" bao quanh (gọi LLM, chạy tool, lặp tới khi xong). Phần code app đó ai cũng phải viết lại giống nhau → OpenAI đóng gói thành thư viện.
 - Cột trái: nếu tự viết, code app phải lo đủ 6 việc này (chính là vòng lặp ①–④ ở slide 5 + ghi log).
 - Cột phải: dùng SDK thì chỉ khai báo agent (LLM + hướng dẫn + tool), SDK chạy vòng lặp có sẵn và tự ghi trace.
-- Ô dưới: SDK không quyết thay mình — tool nào được mở, quyền, dữ liệu, duyệt vẫn là việc của application (slide 21–22).
+- Ô dưới: SDK không quyết thay mình — tool nào được mở, quyền, dữ liệu, duyệt vẫn là việc của application (slide 22–23).
 Nguyên văn docs: "The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions"; có "a built-in loop that continues until the task is complete"; là "a production-ready upgrade of our previous experimentation for agents, Swarm"; dùng được cả "non-OpenAI providers" (demo của mình chạy model qua gateway công ty).
 Cùng loại (chỉ để định vị, không đi sâu): LangGraph, Google ADK, Claude Agent SDK — đều đóng gói phần vòng lặp agent.
 Link: openai.github.io/openai-agents-python`);
