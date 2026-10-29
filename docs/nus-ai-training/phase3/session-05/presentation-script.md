@@ -1,6 +1,6 @@
 # Session 5 — Kịch bản trình bày (45 phút)
 
-Deck (25 slide): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
+Deck (26 slide): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
 Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 Đề cương: `02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf`, trang 4, mục Session 5. Đối chiếu từng dòng: `syllabus-to-slides-mapping.md`.
 Speaker notes của từng slide có đủ nguồn trích dẫn; file này là bản đọc nhanh.
@@ -25,7 +25,7 @@ python3 demo_ui.py                                    # mở http://localhost:80
 | 11–25 | 8–17 | 02 · Agent hay workflow (8–12 ~8', 5 mẫu workflow 13–17 ~1'/slide) |
 | 25–33 | 18–22 | 03 · OpenAI Agents SDK |
 | 33–40 | 23 | Demo live |
-| 40–45 | 24–25 | Ghi nhớ + thử thách, hỏi đáp nếu còn giờ |
+| 40–45 | 24–26 | Ghi nhớ + bài tự thực hành + câu hỏi ôn tập, hỏi đáp nếu còn giờ |
 
 Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 2.
 
@@ -73,14 +73,14 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 - Nếu số dòng lệch do code đổi: tìm `@function_tool`, `def build_agent`, `Runner.run`.
 
 **Trang demo** (`python3 demo_ui.py` → http://localhost:8000):
-- Trái: ô hỏi + 2 nút câu mẫu (① Chỉ hỏi, ② Xử lý + tạo ticket) + câu trả lời + hộp **Duyệt / Từ chối** khi agent muốn tạo ticket.
+- Trái: ô hỏi + 2 nút câu mẫu (① Chỉ cần RAG: hỏi mã lỗi · ② Nhiều bước + tạo ticket) — đúng 2 vế của "Ví dụ trong buổi" trong đề cương, ghi ngay trên trang + câu trả lời + hộp **Duyệt / Từ chối** khi agent muốn tạo ticket.
 - Phải: **trace** hiện từng bước ngay khi agent chạy — ô **cam = LLM quyết định** (kèm "lý do LLM tự viết" + nút xem JSON gốc), ô **tối = app chạy**, ô xanh = người duyệt. Cùng màu với slide 6 và slide 20.
 
-**Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ hỏi** ("Mã lỗi thanh toán E205 nghĩa là gì?").
+**Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ cần RAG** ("Mã lỗi thanh toán E205 nghĩa là gì?").
 - Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
 
-**Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Xử lý + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
+**Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Nhiều bước + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
 - Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
 - Chỉ vào cột trace (đây là "trace ở mức định vị", slide 20):
   - ô cam = LLM quyết định — mở "JSON gốc": LLM chỉ viết ra JSON, không tự chạy gì;
@@ -96,8 +96,8 @@ Gateway lỗi hẳn: kể lại theo kết quả 29/10 ở trên.
 
 ### Kết (40–45')
 - **24 · Ý chính của buổi**: 5 thẻ ứng với 5 phần. Đối chiếu lại use case của lớp.
-- **25 · Thử thách + bài tự thực hành**: giao bài (chọn use case, giải thích model call / workflow / agent, đánh dấu ranh giới SDK / application), mang tới đầu S6.
-  - Đáp án nhanh: (1) agent tốn hơn vì số lượt không biết trước + mỗi lượt gửi lại cả hội thoại; (2) use case đáng làm agent phải có ít nhất 1 dấu hiệu slide 11 và không viết trước được các nhánh; (3) application quyết hành động nào cần duyệt, SDK chỉ có cơ chế dừng chờ duyệt; (4) agent sai thường không báo lỗi → app kiểm tra kết quả thật trong hệ thống đích + eval chạy lặp (S6, S9).
+- **25 · Bài tự thực hành**: 3 bước — chọn use case · giải thích model call / workflow / agent · đánh dấu ranh giới SDK / application. Mang tới đầu S6.
+- **26 · Câu hỏi ôn tập**: 4 câu, hỏi nhanh cả lớp. Đáp án: (1) agent tốn hơn vì số lượt không biết trước + mỗi lượt gửi lại cả hội thoại; (2) use case đáng làm agent phải có ít nhất 1 dấu hiệu slide 11 và không viết trước được các nhánh; (3) application quyết hành động nào cần duyệt, SDK chỉ có cơ chế dừng chờ duyệt; (4) agent sai thường không báo lỗi → app kiểm tra kết quả thật trong hệ thống đích + eval chạy lặp (S6, S9).
 
 ## Câu hỏi chưa giải quyết
 - (không còn)

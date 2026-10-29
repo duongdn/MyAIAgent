@@ -43,9 +43,10 @@
   <section>
     <h2>Hỏi agent</h2>
     <div class="ask"><input id="q" placeholder="Nhập yêu cầu…"><button id="send">Gửi</button></div>
+    <div class="meta" style="margin-top:12px">Ví dụ trong buổi: yêu cầu nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?</div>
     <div class="samples">
-      <button class="alt" data-k="rag">① Chỉ hỏi</button>
-      <button class="alt" data-k="ticket">② Xử lý + tạo ticket</button>
+      <button class="alt" data-k="rag" title="Mã lỗi thanh toán E205 nghĩa là gì?">① Chỉ cần RAG: hỏi mã lỗi</button>
+      <button class="alt" data-k="ticket" title="Khách báo lỗi E205, xử lý + tạo ticket">② Nhiều bước + tạo ticket</button>
     </div>
     <div id="chat"></div>
   </section>

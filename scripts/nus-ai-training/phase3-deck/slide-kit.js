@@ -176,6 +176,28 @@ function challenge(homework, questions, notes) {
   });
   return s;
 }
+// Bài tự thực hành: các bước đánh số (tách khỏi câu hỏi ôn tập — S5)
+function homework(title, steps, notes) {
+  const s = newSlide('Bài tự thực hành', title, notes);
+  steps.forEach((x, i) => {
+    const y = 92 + i * 78;
+    box(s, 40, y, 640, 66, ' ', {});
+    mono(s, 56, y + 18, 48, 30, String(i + 1).padStart(2, '0'), { size: 20 });
+    label(s, 104, y + 8, 560, 50, x, { size: 15, bold: false, align: 'START' });
+  });
+  return s;
+}
+// Câu hỏi ôn tập: lưới 2 cột, đáp án để trong notes
+function reviewQuestions(questions, notes) {
+  const s = newSlide('Câu hỏi ôn tập', 'Bạn trả lời được những câu này không?', notes);
+  questions.forEach((q, i) => {
+    const x = 40 + (i % 2) * 325; const y = 92 + Math.floor(i / 2) * 120;
+    box(s, x, y, 315, 106, ' ', {});
+    mono(s, x + 14, y + 12, 40, 30, String(i + 1).padStart(2, '0'), { size: 18 });
+    label(s, x + 14, y + 44, 287, 56, q, { size: 13, bold: false, align: 'START', valign: 'TOP' });
+  });
+  return s;
+}
 // Kết thúc mỗi ngày: Q&A tối
 function closing() {
   const s = blank('Q&A 10-15 phút. Nhắc bài tự thực hành và lịch buổi sau (11h thứ 4 tuần sau).', C.INK);
@@ -189,5 +211,5 @@ function closing() {
 // Mỗi session dựng vào deck riêng → xoá trạng thái giữa các lần dựng
 function reset() { reqs.length = 0; slides.length = 0; page = 0; }
 
-module.exports = { reset, C, reqs, slides, box, label, mono, code, arrow, twoWay, table, newSlide, question, sessionHeader,
+module.exports = { homework, reviewQuestions, reset, C, reqs, slides, box, label, mono, code, arrow, twoWay, table, newSlide, question, sessionHeader,
   recap, agenda, takeaways, challenge, closing, blank, footer };

@@ -4,7 +4,7 @@ Nguồn:
 - `02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf` trang 4: đoạn mở đầu "Giai đoạn 3 Build AI Agent" và mục "Session 5".
 - `01_De_cuong_chuong_trinh_dao_tao_AI.pdf` trang 2: bảng Giai đoạn 3, dòng 5; trang 1: "Danh sách session", "Kết quả năng lực đầu ra".
 
-Deck 25 slide (29/10): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
+Deck 26 slide (29/10): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI
 
 ## Mục Session 5 (02, trang 4)
 
@@ -30,8 +30,8 @@ Deck 25 slide (29/10): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws
 | "và trace ở mức định vị" | 20, demo 23 (`--trace`) | ✅ |
 | "không học thuộc API" | notes 19 | ✅ |
 | "Chỉ rõ phần SDK cung cấp và phần product vẫn phải tự quyết định" | 21, 22 | ✅ |
-| Ví dụ: "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" | demo 23: kịch bản 9 (chỉ tra tài liệu) vs kịch bản 1 (nhiều bước + ticket) | ✅ (chạy live; slide chỉ có chữ "Demo") |
-| Bài tự thực hành: "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application." | 25 | ✅ |
+| Ví dụ: "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" | demo 23: trang demo có 2 nút "① Chỉ cần RAG" / "② Nhiều bước + tạo ticket" và ghi nguyên câu ví dụ; dự phòng kịch bản 9 / 1 của run_demo.py | ✅ |
+| Bài tự thực hành: "Chọn một use case và giải thích vì sao dùng model call, workflow hoặc agent; đánh dấu ranh giới SDK và application." | 25 (bài tập); 26 (câu hỏi ôn tập) | ✅ |
 | Kết quả: "chọn đúng mức điều phối" | 8–12 | ✅ |
 | Kết quả: "đọc được sơ đồ agent tối thiểu" | 5 (sơ đồ agent loop), 19, 20 | ✅ |
 
