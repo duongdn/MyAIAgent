@@ -3,7 +3,7 @@ const { C, box, label, mono, code, arrow, twoWay, newSlide, question, blank, foo
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
-  const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nSession 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
+  const s = newSlide('01 · 3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nSession 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
 - Model call: code chuẩn bị prompt (kèm tài liệu RAG), gọi model ĐÚNG 1 lần. Không có "bước tiếp theo".
 - Slide dùng từ chung (lấy dữ liệu, thực hiện, tool), ví dụ cụ thể để demo cuối buổi. Nếu cần ví dụ miệng: lấy dữ liệu = tra tài liệu nội bộ, thực hiện = tạo ticket.
 - Workflow: CODE giữ thứ tự: phân loại → lấy dữ liệu → trả lời → thực hiện. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.

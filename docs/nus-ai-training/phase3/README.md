@@ -9,7 +9,7 @@ DuongDN làm S5 + S6. S7–S9 do VinhNT làm.
 
 ## Cấu trúc
 ```
-session-05/   presentation-script.md (⚠ chưa cập nhật theo deck 28/10) · syllabus-to-slides-mapping.md · deck-review-loop-log.md
+session-05/   presentation-script.md (cập nhật 29/10) · syllabus-to-slides-mapping.md · deck-review-loop-log.md
 session-06/   presentation-script-and-syllabus-mapping.md · archive-presentation-script-old-261018.md
 session-07/   presentation-script-draft.md (S7 do VinhNT làm)
 shared/       session2-overlap-with-s5-s6.md · s5-s9-techlead-depth-review.md

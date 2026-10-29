@@ -10,7 +10,7 @@ function askWorkflowOrAgent() {
 }
 
 function whenWorkflow() {
-  const s = newSlide('Khi nào workflow', 'Viết trước được các bước → workflow', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nCâu hỏi đầu tiên: viết ra giấy được hết các bước và các nhánh không? Được → workflow.
+  const s = newSlide('02 · Khi nào workflow', 'Viết trước được các bước → workflow', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nCâu hỏi đầu tiên: viết ra giấy được hết các bước và các nhánh không? Được → workflow.
 Workflow là "đường đi do code viết sẵn" — LLM vẫn có thể làm từng bước (phân loại, trích thông tin, viết câu trả lời), nhưng thứ tự do code giữ.
 Anthropic: "workflows offer predictability and consistency for well-defined tasks". Nhiều bài toán chỉ cần 1 lần gọi model kèm dữ liệu là đủ.
 3 lợi ích — đọc từng thẻ. Vế "an toàn hơn" của đề cương nói riêng ở slide sau, hỏi lớp use case nào trên bảng thuộc loại này.

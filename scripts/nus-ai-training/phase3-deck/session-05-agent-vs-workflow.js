@@ -7,7 +7,7 @@ const extra = require('./session-05-extra-slides');
 module.exports = function session05() {
   let s = blank(`Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
 SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/support_agent_demo/.
-Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash) — mọi log/số liệu trên slide là kết quả chạy thật.
+Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash); số liệu trong notes và demo đều chạy thật.
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
   label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
@@ -30,12 +30,19 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
   });
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',
-    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — phần đầu mục (tên buổi · 45 phút · câu hỏi trọng tâm)]\nSession 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
+    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — phần đầu mục (tên buổi · 45 phút · câu hỏi trọng tâm)]\nSession 5 — 45 phút, phân bổ chi tiết ở notes slide 4.
 Người học đã qua Session 1 (LLM: token, context, không ổn định) và Session 2 (4 pattern, structured output, validate output). Không giảng lại "agent là gì".
-Mục tiêu: chọn đúng mức điều phối bằng số đo, và định vị được agent tối thiểu trong OpenAI Agents SDK.
+Mục tiêu (đề cương, Kết quả cần đạt): chọn đúng mức điều phối, và đọc được sơ đồ agent tối thiểu.
 Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, phần 02 đối chiếu bằng các tiêu chí chọn.`);
   agenda([['3 mức điều phối', 'model call · workflow do code điều phối · agent'], ['Agent hay workflow', 'khi nào agent tạo giá trị, khi nào workflow đơn giản an toàn hơn'],
-    ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
+    ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `Phân bổ 45 phút (25 slide + demo):
+- Mở đầu 3' — slide 1–4 (giai đoạn 3, lộ trình, câu hỏi trọng tâm, agenda).
+- 01 · 3 mức điều phối 8' — slide 5–7 (nhắc lại agent loop, sơ đồ 3 mức, bảng so sánh).
+- 02 · Agent hay workflow 14' — slide 8–12 (~8') + 5 mẫu workflow slide 13–17 (~1' mỗi mẫu, lướt nhanh).
+- 03 · OpenAI Agents SDK 8' — slide 18–22.
+- Demo 7' — slide 23 (2 lệnh chạy live, xem notes slide 23).
+- Ghi nhớ + thử thách 5' — slide 24–25; còn thời gian thì hỏi đáp.
+Thiếu giờ: lướt slide 13–17 (chỉ đọc tiêu đề), demo chỉ chạy kịch bản 1.`);
 
   s = newSlide('Nhắc lại · Session 1–2', 'Agent: LLM chọn tool, code app chạy — lặp tới khi xong', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nNhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
 Đi theo mũi tên:
@@ -149,7 +156,13 @@ Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing
 Đọc từng cặp: SDK có cơ chế, nhưng QUYẾT ĐỊNH là của application.
 Ví dụ: SDK có needs_approval để dừng chờ duyệt, nhưng hành động nào cần duyệt, ai được duyệt — application quyết.
 SDK có guardrail, nhưng guardrail lọc nội dung, KHÔNG phải phân quyền (Session 7).
-Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay application?" → application, lấy từ session đăng nhập.`);
+Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay application?" → application, lấy từ session đăng nhập.
+Tên SDK trong cột giữa chưa giới thiệu ở slide 19 — giải thích 1 câu khi đọc tới:
+- max_turns: tham số của Runner.run, giới hạn số lượt gọi LLM; quá giới hạn thì SDK dừng và báo lỗi (MaxTurnsExceeded) — đây là "điều kiện dừng" do code đặt.
+- needs_approval: đánh dấu một tool cần người duyệt; khi LLM gọi tool này, SDK dừng run và trả lại cho app hỏi người duyệt.
+- RunState: trạng thái của một run đang dừng (vd chờ duyệt); app lưu lại, khi có kết quả duyệt thì tiếp tục run từ đúng chỗ đó.
+- context (dòng Dữ liệu & quyền): object app truyền vào Runner.run, tool đọc được nhưng LLM không thấy — dùng để mang user/tenant.
+Chi tiết làm ở Session 7 (duyệt, quyền) và Session 8 (state, điều kiện dừng).`);
   table(s, 25, 85, [170, 250, 250], [
     ['', 'SDK cung cấp', 'Application tự quyết'],
     ['Loop', 'Runner.run, max_turns', 'Khi nào là "xong thật"'],
