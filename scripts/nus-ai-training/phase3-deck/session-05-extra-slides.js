@@ -79,7 +79,8 @@ await Runner.run(agent, q, max_turns=8)`, C.INK);
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
 function traceLocate() {
-  const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
+  const s = newSlide('Trace', 'Trace: nhật ký từng bước của một lần agent chạy', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nSlide không có code/log: vẽ các bước của 1 lần agent chạy bằng từ chung (tool A, tool B). Trace thật xem lúc demo.
+Đề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
 SDK tự sinh trace cho mỗi Runner.run; demo ghi ra file .traces/ trên máy (không gửi về OpenAI) và in ra với --trace.
 Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, deepseek-v4.1-flash):
 - ① mỗi lượt APP gửi cho LLM: số message tăng dần 2 → 5 → 7 (gửi lại cả kết quả tool), token vào tăng 574 → 932 → 1.201.
@@ -87,8 +88,9 @@ Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, d
 - ③ APP chạy hàm thật; create_ticket dừng chờ người duyệt trước khi chạy.
 Tổng: 3 lượt gọi model, 2.707 token vào + 621 ra.
 Đọc trace theo concept của slide trước: cả khối = 1 lần Agent chạy; các lượt ① ② = Runner.run lặp; mỗi dòng ③ = một function_tool chạy; dòng 🛡 = Guardrail kiểm tra input.
-Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
-  code(s, 40, 88, 640, 200, `🛡 guardrail no_card_number: qua
+Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace
+Trace thật dùng để vẽ slide (kịch bản 1, tool A = search_kb, tool B = create_ticket):
+🛡 guardrail no_card_number: qua
 ① APP → LLM  2 message · 574+154 token
 ② LLM: gọi search_kb ×2 {"query": "lỗi … E205"}
 ③ APP chạy search_kb → ④ kết quả gửi lại
@@ -96,8 +98,18 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
 ② LLM: gọi create_ticket {"priority": "P3", …}
 ③ APP chưa chạy: chờ duyệt → ĐỒNG Ý → T-1001
 ① APP → LLM  7 message · 1.201+227 token
-② LLM: dừng, trả lời cuối "Xử lý lỗi E205…"`, 10.5);
-  label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
+② LLM: dừng, trả lời cuối "Xử lý lỗi E205…"`);
+  // Dòng thời gian các bước (từ chung) — cam = LLM, tối = app
+  [['Kiểm tra input', 'app'], ['LLM chọn tool A', 'llm'], ['App chạy tool A', 'app'], ['LLM chọn tool B', 'llm'], ['App chạy tool B', 'app'], ['LLM trả lời cuối', 'llm']]
+    .forEach(([t, who], i) => {
+      const y = 86 + i * 46;
+      mono(s, 40, y + 7, 30, 14, String(i + 1), { size: 10, color: C.GREY });
+      box(s, 70, y, 260, 28, t, { fill: who === 'llm' ? C.ORANGE : C.INK, size: 12 });
+      if (i) arrow(s, 200, y - 17, 200, y - 1);
+    });
+  mono(s, 380, 86, 300, 14, 'ĐỌC TRACE ĐỂ BIẾT', { size: 9, color: C.GREY });
+  ['Agent đã đi những bước nào, theo thứ tự nào', 'LLM chọn tool gì, với tham số gì', 'Sai hoặc dừng ở bước nào']
+    .forEach((q, i) => box(s, 380, 106 + i * 72, 300, 60, q, { fill: C.CARD, size: 13, bold: false, align: 'START' }));
 }
 
 module.exports = { threeFlows, demoSupportRequests, traceLocate };
