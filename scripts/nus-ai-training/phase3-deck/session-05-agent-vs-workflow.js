@@ -73,24 +73,29 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh', '', `Tiêu chí lấy theo 2 nguồn, không tự đặt:
-1) LangChain, "What is an agent?" — agent = "a system that uses a large language model to decide the control flow of an application". Các mức tự chủ được so bằng 3 câu hỏi: ai quyết định output của mỗi bước, ai quyết định bước nào chạy tiếp, ai quyết định có những bước nào để chọn. Model call ≈ "LLM call", workflow ≈ "chain", agent ≈ "state machine" (có vòng lặp).
-2) Prompting Guide (DAIR.AI), "AI Workflows vs. AI Agents": control flow · decision making · tool usage · adaptability · use cases. Định nghĩa theo Anthropic: workflow = "LLMs and tools are orchestrated through predefined code paths"; agent = LLM "dynamically direct their own processes and tool usage".
-Đọc theo hàng:
-- Hàng 2: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nên agent.
-- Hàng 3–4: khác biệt thật nằm ở đây — ai chọn bước tiếp và có vòng lặp không.
-- Hàng 6: cả agent cũng chỉ chọn trong danh sách tool do code đưa → application vẫn giữ quyền (Session 7).
-Hệ quả (ổn định, chi phí, test) để phần 02.`);
-  table(s, 30, 52, [170, 150, 170, 170], [
+  s = newSlide('So sánh', '', `Tiêu chí lấy theo nguồn, chia 2 nhóm: CẤU TRÚC (khác nhau ở đâu) và HỆ QUẢ (vì cấu trúc khác nên được/mất gì).
+Cấu trúc:
+- Đầu vào: agent nhận MỤC TIÊU, không nhận danh sách bước (Anthropic: agent bắt đầu từ "a command from, or interactive discussion with, the human user"; OpenAI: agent "independently accomplish tasks on your behalf").
+- Ai chọn bước tiếp + vòng lặp: LangChain, "What is an agent?" — agent = LLM "decide the control flow of an application"; các mức tự chủ phân biệt bằng ai quyết bước nào chạy tiếp, có vòng lặp hay không.
+- Ai quyết khi nào dừng: OpenAI guide — agent chạy vòng lặp tới khi gặp exit condition (trả lời cuối, gọi tool kết thúc, lỗi, hoặc giới hạn số lượt do code đặt).
+- Context qua các bước: agent mang theo toàn bộ hội thoại + kết quả tool qua mỗi lượt; workflow do code chọn truyền gì sang bước sau.
+- Dùng tool: Prompting Guide — workflow "orchestrated by code", agent "self-selected".
+Hệ quả (Anthropic + Prompting Guide): workflow "predictability and consistency"; agent "trade latency and cost for better task performance", "compounding errors"; debug agent phải đọc trace nhiều lượt.
+Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nên agent; agent cũng chỉ chọn trong danh sách tool code đưa.`);
+  table(s, 30, 50, [150, 160, 170, 180], [
     ['', 'Model call', 'Workflow', 'Agent'],
-    ['Luồng điều khiển', 'một bước', 'viết sẵn trong code', 'model quyết lúc chạy'],
-    ['Ai viết nội dung mỗi bước', 'LLM', 'LLM', 'LLM'],
-    ['Ai chọn bước tiếp theo', 'không có bước tiếp', 'code', 'LLM'],
-    ['Vòng lặp', 'không', 'không — chạy hết các bước', 'có — lặp tới khi xong'],
+    ['CẤU TRÚC', '', '', ''],
+    ['Đầu vào', 'prompt + dữ liệu', 'dữ liệu cho từng bước', 'mục tiêu'],
+    ['Ai chọn bước tiếp', 'không có bước tiếp', 'code — viết sẵn', 'LLM — lúc chạy'],
+    ['Vòng lặp', 'không', 'không — chạy hết các bước', 'có — tới khi xong'],
+    ['Ai quyết khi dừng', '—', 'code: hết bước', 'LLM, trong giới hạn code đặt'],
+    ['Context qua các bước', 'một lần', 'code chọn truyền gì', 'tích luỹ hội thoại + kết quả tool'],
     ['Dùng tool', 'không', 'code gọi theo thứ tự', 'LLM chọn, code chạy'],
-    ['Danh sách tool / bước', '—', 'code định nghĩa', 'code định nghĩa, LLM chọn trong đó'],
-    ['Hợp với', 'task một bước', 'task rõ, các bước biết trước', 'task mở, bước phụ thuộc kết quả'],
-  ], { rowH: 34, size: 11 });
+    ['HỆ QUẢ', '', '', ''],
+    ['Dự đoán được', 'cao', 'cao — cùng đường đi', 'thấp — đường đi đổi'],
+    ['Chi phí, độ trễ', 'thấp nhất', 'cố định', 'dao động, cao hơn'],
+    ['Debug', 'dễ', 'từng bước', 'đọc trace nhiều lượt'],
+  ], { rowH: 24, size: 10.5, fills: [C.LIGHT, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.WHITE, C.LIGHT, C.WHITE, C.WHITE, C.WHITE] });
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
