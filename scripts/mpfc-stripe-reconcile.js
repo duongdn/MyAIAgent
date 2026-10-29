@@ -47,7 +47,7 @@ async function succeededCharges(key, from, to) {
   const out = [];
   let after = '';
   for (;;) {
-    const page = await stripeGet(key, `/v1/charges?limit=100&created[gte]=${from}&created[lte]=${to}${after}`);
+    const page = await stripeGet(key, `/v1/charges?limit=100&expand[]=data.customer&created[gte]=${from}&created[lte]=${to}${after}`);
     out.push(...page.data.filter(c => c.status === 'succeeded' && c.amount_refunded < c.amount
       && String(c.metadata?.platform || '').includes('MemberMouse')));
     if (!page.has_more) return out;
@@ -68,7 +68,7 @@ async function reconcile() {
 
   const problems = [];
   for (const c of charges) {
-    const email = String(c.billing_details?.email || c.receipt_email || '').toLowerCase();
+    const email = String(c.billing_details?.email || c.receipt_email || c.customer?.email || ''  /* rebills carry the email only on the customer */).toLowerCase();
     const near = t => Math.abs(t.ts - c.created) <= MATCH_S;
     const spId = c.metadata.scheduledPaymentId;
     // a successful dunning retry deletes its scheduled payment row, so fall back to the member's email
