@@ -73,20 +73,21 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh', 'Cùng yêu cầu "E205 + tạo ticket" ở 3 mức', `Cùng một yêu cầu: "Khách X báo lỗi E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
-- Model call: trả lời được nửa đầu (E205 = ngân hàng từ chối) nhưng không làm được nửa sau.
-- Workflow: làm đủ — nhưng ticket luôn tạo theo tham số code viết sẵn (P3, billing-team-a). Yêu cầu khác dạng (ví dụ "không cần ticket") phải sửa code.
-- Agent: làm đủ và linh hoạt (tự quyết có tạo ticket không, tạo với tham số gì) — đổi lại khó test hơn và cần kiểm soát (Session 7).
-Hỏi lớp: "Rủi ro của agent ở dòng cuối — ai chặn?" → application, Session 7.`);
-  table(s, 30, 88, [140, 175, 175, 170], [
+  s = newSlide('So sánh', '3 mức nhìn cạnh nhau', `Đọc theo hàng, nối với sơ đồ slide trước.
+- Số lần gọi model: model call 1 lần; workflow cố định, đếm được trước; agent không biết trước — model gọi tool tới khi thấy đủ.
+- Ai chọn bước tiếp: điểm khác nhau cốt lõi (tiêu đề slide 6).
+- Hành động: ở workflow, code gọi tool/API theo thứ tự viết sẵn; ở agent, model chọn tool, code chạy.
+- Khi yêu cầu đổi dạng: model call sửa prompt; workflow sửa code (thêm nhánh); agent thường xử lý được nếu đã có tool phù hợp.
+- Ví dụ quen thuộc để lớp tự xếp: tóm tắt/dịch = model call; pipeline xử lý email, hoá đơn = workflow; ChatGPT bật web search, coding agent = agent.
+Đánh đổi (ổn định, chi phí, debug) để phần 02 — không nói ở đây.`);
+  table(s, 30, 88, [150, 165, 165, 180], [
     ['', 'Model call', 'Workflow', 'Agent'],
-    ['Làm được gì', 'Chỉ trả lời', 'Trả lời + tạo ticket', 'Trả lời + tạo ticket'],
-    ['Ai chọn bước', 'Không có bước', 'Code — viết sẵn', 'Model — lúc chạy'],
-    ['Tham số ticket', '—', 'Code cố định P3', 'Model đề xuất'],
-    ['Đổi yêu cầu', 'Sửa prompt', 'Sửa code', 'Không cần sửa'],
-    ['Test & audit', 'Dễ nhất', 'Dễ — flow cố định', 'Khó — nhiều đường đi'],
-    ['Rủi ro chính', 'Trả lời sai', 'Không xử lý ca lạ', 'Gọi sai tool, tham số sai'],
-  ], { rowH: 36 });
+    ['Gọi model', '1 lần', 'số lần cố định', 'không biết trước'],
+    ['Ai chọn bước tiếp', 'không có bước', 'code — viết sẵn', 'model — lúc chạy'],
+    ['Hành động (tool, API)', 'không', 'code gọi theo thứ tự', 'model chọn, code chạy'],
+    ['Yêu cầu đổi dạng', 'sửa prompt', 'sửa code', 'thường không cần sửa'],
+    ['Ví dụ quen thuộc', 'tóm tắt, dịch', 'xử lý email, hoá đơn', 'ChatGPT web search'],
+  ], { rowH: 40, size: 12 });
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
