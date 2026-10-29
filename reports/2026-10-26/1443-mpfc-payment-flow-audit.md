@@ -120,3 +120,12 @@ Proposals (not applied, live payment code):
 2. Run the existing renewal logic once for the 10 receipts above. It extends the 2 still paying, cancels the 6 lapsed bundles, and leaves the 2 unverifiable ones for a manual look.
 Monitor: added check `iap-stale` (receipt expired 8+ days, bundle active, excludes web-sub/comp). Currently lists these 10.
 **Applied 2026-10-28 03:12 UTC (option 2, approved):** re-ran the renewal logic once for the 10 receipts. Cancelled 6 lapsed bundles (kmistrypb, romaz007, hillcn98, rupindersharma420 ×2, ferrianileonardo). Renewed livia.puxley_gibbs and simonm to Nov 2026 (orders 25870, 25871). 2 unverifiable left unchanged (matt.taiwanlife, mswcoach). Saul informed on WhatsApp. Cron window fix (option 1) not applied.
+
+## 7. Data sweep 2026-10-29 (read-only)
+| Check | Result |
+|---|---|
+| 10-23 catch-up charged members who had cancelled before | 0. 8 flagged rows were "cancel" words inside welcome/Zapier emails, or cancels of other products (jimmyayoola's Coach's Pass). jacamocole was charged 1 period 5 months late and cancelled 2 days later (lost-subscriber pattern, not a wrong charge) |
+| Members paying twice (2 web subs same product / web + app same bundle) | 0 |
+| Stripe ↔ MM, 12 months (1,750 charges) | 7 unmatched → 5 real "paid, no order created" (merdy45, stukelly80, jackheron39, 12thmancoaching2024, michaelpabjan), **all now have access** (3 were fixed manually earlier, 1-27 days after paying); 2 email variants (traoreib, romstads) matched same minute |
+| Pattern | One-time course purchases (Masterclass/courses/IAP product on web) occasionally charge on Stripe without creating the MM order: about 5 per 12 months, customers had to complain. Now caught daily by `stripe-unlogged` |
+Reconcile fix: uses the Stripe customer email when the charge has none (removed 8 false positives).
