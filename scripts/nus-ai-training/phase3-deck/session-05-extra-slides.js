@@ -45,7 +45,7 @@ Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
 - Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team-a) code viết sẵn.
 - Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
-Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK: model call → search_kb → model call → create_ticket → model call trả lời.
+Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK (chạy lại 29/10, cùng kiểu slide trace): lượt 1 LLM gọi search_kb 2 lần → lượt 2 gọi create_ticket, dừng chờ duyệt → lượt 3 trả lời.
 Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.`);
   code(s, 40, 86, 352, 262, `# 1 · Model call — gọi model đúng 1 lần
 docs = search_kb("lỗi E205")           # code
@@ -74,12 +74,14 @@ await Runner.run(agent, q, max_turns=8)`, 8.5);
 [CODE ] tạo ticket: P3, billing-team-a
 
 == Agent ==
-🧠 model call   574+70 tok
-🔧 search_kb("lỗi thanh toán E205")
-🧠 model call   817+348 tok
-🔧 create_ticket(P3, billing-team-a)
-   → T-1001
-🧠 model call   1194+171 tok · trả lời`, 8.5);
+① APP → LLM  574+134 token
+② LLM: gọi search_kb ×2
+③ APP chạy search_kb → ④ gửi lại
+① APP → LLM  912+173 token
+② LLM: gọi create_ticket(P3, …)
+③ chờ duyệt → T-1001
+① APP → LLM  1.114+114 token
+② LLM: dừng, trả lời cuối`, 8.5);
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
@@ -91,8 +93,9 @@ Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, d
 - ② LLM quyết định: lượt 1 gọi search_kb 2 lần (2 cách hỏi), lượt 2 gọi create_ticket, lượt 3 dừng và trả lời.
 - ③ APP chạy hàm thật; create_ticket dừng chờ người duyệt trước khi chạy.
 Tổng: 3 lượt gọi model, 2.707 token vào + 621 ra.
+Đọc trace theo concept của slide trước: cả khối = 1 lần Agent chạy; các lượt ① ② = Runner.run lặp; mỗi dòng ③ = một function_tool chạy; dòng 🛡 = Guardrail kiểm tra input.
 Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
-  code(s, 40, 88, 430, 200, `🛡 guardrail no_card_number: qua
+  code(s, 40, 88, 640, 200, `🛡 guardrail no_card_number: qua
 ① APP → LLM  2 message · 574+154 token
 ② LLM: gọi search_kb ×2 {"query": "lỗi … E205"}
 ③ APP chạy search_kb → ④ kết quả gửi lại
@@ -101,8 +104,6 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
 ③ APP chưa chạy: chờ duyệt → ĐỒNG Ý → T-1001
 ① APP → LLM  7 message · 1.201+227 token
 ② LLM: dừng, trả lời cuối "Xử lý lỗi E205…"`, 10.5);
-  [['Agent', 'cả vòng lặp ①–④'], ['Runner.run', 'lặp các lượt ① ②'], ['function_tool', 'mỗi bước ③'], ['Guardrail', 'kiểm tra đầu vào · 🛡']].forEach(([t, d], i) =>
-    box(s, 490, 88 + i * 50, 190, 42, `${t}\n${d}`, { size: 12.5, sub: 10, align: 'START' }));
   label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
 }
 
