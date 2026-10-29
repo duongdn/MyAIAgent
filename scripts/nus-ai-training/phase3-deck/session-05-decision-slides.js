@@ -53,7 +53,7 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
 function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `Anthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 4 bậc từ trái sang phải. Bậc 3 là lựa chọn ở giữa hay bị bỏ qua: workflow giữ thứ tự, chỉ một bước cho model chọn giữa vài tool có sẵn.
-Ô cam dưới: an toàn không phụ thuộc bậc nào — hành động không đảo ngược được cần người duyệt, ít nhất tới khi đủ tin agent (Session 7).
+Ô cam dưới: an toàn không phụ thuộc bậc nào — hành động không hoàn tác được (chuyển tiền, xoá dữ liệu, gửi ra ngoài) phải có người duyệt trước khi chạy. OpenAI nói thêm: có thể nới dần khi agent đã chạy ổn đủ lâu (Session 7).
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
 Nguồn từng ý:
 - Bắt đầu đơn giản: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
@@ -68,7 +68,7 @@ Link: anthropic.com/engineering/building-effective-agents · OpenAI guide (PDF, 
       mono(s, x, y - 18, 140, 14, `BẬC ${n}`, { size: 9, color: C.GREY });
       if (i) arrow(s, x - 22, y + 50, x - 2, y + 30);
     });
-  box(s, 40, 300, 640, 44, 'Không đảo ngược được (tiền, xoá dữ liệu) → người duyệt, ít nhất tới khi đủ tin', { fill: C.ORANGE, size: 13.5 });
+  box(s, 40, 300, 640, 44, 'Hành động không hoàn tác được (chuyển tiền, xoá dữ liệu) → người duyệt trước khi chạy', { fill: C.ORANGE, size: 13.5 });
 }
 
 function decisionSlides() {
