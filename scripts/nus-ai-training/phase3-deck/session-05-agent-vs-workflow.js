@@ -101,26 +101,24 @@ Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nê
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
   patterns.workflowPatternSlides(); // 5 mẫu workflow của Anthropic, mỗi mẫu 1 slide
 
-  s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐịnh vị, không học thuộc API.
-- Agent: định nghĩa (instructions = system prompt, model, tools).
-- function_tool: biến hàm Python thành tool; SDK tự sinh JSON schema từ type hint + docstring.
-- Runner.run: chạy agent loop — gọi model, chạy tool, đưa kết quả lại, lặp tới khi có câu trả lời cuối hoặc chạm max_turns.
-- Trace: SDK tự ghi lại từng bước (model call, tool call, guardrail). Demo ghi ra file local .traces/ thay vì gửi về OpenAI.
-Lưu ý: dùng gateway công ty qua OpenAIChatCompletionsModel (chuẩn Chat Completions, provider nào tương thích OpenAI cũng chạy).`);
-  [['Agent', 'instructions · model · tools'], ['function_tool', 'hàm Python → tool có schema'], ['Runner.run', 'chạy loop tới khi xong'], ['Trace', 'ghi lại từng bước']]
-    .forEach(([t, d], i) => {
-      box(s, 30 + i * 172, 95, 160, 70, `${t}\n${d}`, { fill: i === 2 ? C.NAVY : C.LIGHT, size: 15, sub: 11 });
-      if (i) arrow(s, 30 + i * 172 - 12, 130, 30 + i * 172, 130);
-    });
-  code(s, 30, 185, 660, 180, `@function_tool
-def search_kb(ctx: RunContextWrapper[Session], query: str) -> str:
-    return checkpoints.search_kb(ctx.context, query)  # Session: model không thấy
-
-agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT,
-              model=model, tools=[search_kb, create_ticket])
-
-result = await Runner.run(agent, "Khách báo lỗi E205...", context=session, max_turns=8)
-print(result.final_output)      # rút gọn từ agent_openai_sdk.py`, 11);
+  s = newSlide('03 · OpenAI Agents SDK', 'SDK đặt tên cho đúng các phần của agent loop', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
+Chuyển sang phần 03. Không học API mới: mỗi khái niệm SDK là một phần của sơ đồ agent loop đã thấy ở slide 5. Đọc theo hàng, chỉ lại vào sơ đồ slide 5 nếu cần.
+- Agent: khai báo instructions (system prompt), model, danh sách tool — "LLM + hướng dẫn + tool nó được dùng".
+- function_tool: biến một hàm Python thành tool; SDK tự sinh mô tả (tên, mô tả, JSON schema tham số) từ type hint + docstring để gửi cho LLM.
+- Runner.run: chính là vòng lặp ①–④ — gọi model, chạy tool model chọn, đưa kết quả lại, lặp tới khi có câu trả lời cuối hoặc chạm giới hạn số lượt (max_turns).
+- Trace: SDK tự ghi lại từng bước (model call, tool call, guardrail) — slide sau.
+Code thật (rút gọn từ support_agent_demo/agent_openai_sdk.py) xem ở phần demo cuối buổi:
+  agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket])
+  result = await Runner.run(agent, "<câu hỏi>", context=session, max_turns=8)
+Lưu ý kỹ thuật: demo dùng gateway công ty qua OpenAIChatCompletionsModel (chuẩn Chat Completions — provider nào tương thích OpenAI cũng chạy).
+Nguồn: OpenAI Agents SDK docs (openai.github.io/openai-agents-python): Agents · Tools · Running agents · Tracing.`);
+  table(s, 30, 88, [230, 150, 280], [
+    ['Trong agent loop (slide 5)', 'Trong SDK', 'Làm gì'],
+    ['LLM + hướng dẫn + danh sách tool', 'Agent', 'khai báo instructions, model, tools'],
+    ['Tool do code app chạy', 'function_tool', 'biến một hàm thành tool, tự sinh mô tả cho LLM'],
+    ['Vòng lặp ①–④ tới khi trả lời', 'Runner.run', 'chạy vòng lặp, dừng khi có câu trả lời cuối hoặc chạm giới hạn lượt'],
+    ['Ghi lại từng bước', 'Trace', 'ghi model call, tool call để đọc lại'],
+  ], { rowH: 52, size: 12.5 });
 
   extra.traceLocate();
 
