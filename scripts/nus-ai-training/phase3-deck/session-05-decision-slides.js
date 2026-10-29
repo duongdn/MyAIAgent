@@ -66,19 +66,24 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
 
 function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nAnthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
-4 bậc từ trái sang phải. Bậc 3 là lựa chọn ở giữa hay bị bỏ qua: workflow giữ thứ tự, chỉ một bước cho model chọn giữa vài tool có sẵn.
+3 bậc từ trái sang phải — đúng 3 khái niệm Anthropic trình bày theo thứ tự: augmented LLM → workflows → agents. Cũng là 3 mức của slide 6–7.
+Workflow không phải 1 kiểu duy nhất: Anthropic liệt kê 5 mẫu — prompt chaining (nối các bước), routing (phân loại rồi chuyển nhánh), parallelization (chạy song song), orchestrator-workers (1 LLM chia việc cho các LLM khác), evaluator-optimizer (1 LLM viết, 1 LLM chấm và góp ý). Chỉ cần kể tên, không đi sâu.
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
 Nguồn từng ý:
 - Bắt đầu đơn giản: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
-- Bậc 1: Anthropic "augmented LLM" (LLM + retrieval, tools, memory); "optimizing single LLM calls with retrieval and in-context examples is usually enough".
-- Bậc 3 = mẫu "Routing" của Anthropic: LLM phân loại input rồi chuyển sang nhánh xử lý phù hợp ("distinct categories that are better handled separately").
+- Bậc 1: Anthropic "augmented LLM" — "an LLM enhanced with augmentations such as retrieval, tools, and memory"; "optimizing single LLM calls with retrieval and in-context examples is usually enough".
+- Bậc 2: 5 mẫu workflow là các mục con của phần "Workflow" trong bài Anthropic.
+- Bậc 3: Anthropic "Agents".
+- Cách vẽ thành bậc thang là của trainer; Anthropic chỉ trình bày theo thứ tự từ đơn giản đến phức tạp.
 Link: anthropic.com/engineering/building-effective-agents`);
-  [['1', 'Model call', '1 lần gọi + dữ liệu'], ['2', 'Workflow', 'code giữ thứ tự'], ['3', 'Workflow có routing', 'model chọn nhánh'], ['4', 'Agent', 'model chọn mọi bước']]
+  [['1', 'Model call', 'LLM + dữ liệu, tool\n1 lần gọi'],
+   ['2', 'Workflow', 'code giữ thứ tự\nchaining · routing · parallelization\norchestrator-workers · evaluator-optimizer'],
+   ['3', 'Agent', 'model chọn mọi bước']]
     .forEach(([n, t, d], i) => {
-      const x = 40 + i * 162; const y = 196 - i * 32;
-      box(s, x, y, 140, 76, `${t}\n${d}`, { fill: i === 3 ? C.ORANGE : i === 0 ? C.CARD : C.LIGHT, size: 14, sub: 10.5 });
-      mono(s, x, y - 18, 140, 14, `BẬC ${n}`, { size: 9, color: C.GREY });
-      if (i) arrow(s, x - 22, y + 50, x - 2, y + 30);
+      const x = 40 + i * 225; const y = 200 - i * 44;
+      box(s, x, y, 200, 96, `${t}\n${d}`, { fill: i === 2 ? C.ORANGE : i === 0 ? C.CARD : C.LIGHT, size: 15, sub: 10 });
+      mono(s, x, y - 18, 200, 14, `BẬC ${n}`, { size: 9, color: C.GREY });
+      if (i) arrow(s, x - 22, y + 60, x - 2, y + 40);
     });
 }
 

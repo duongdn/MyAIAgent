@@ -145,13 +145,13 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   takeaways([
     ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
     ['Agent', 'Quyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc'],
-    ['Bắt đầu đơn giản', 'Model call → workflow → routing → agent: chỉ lên bậc khi bậc dưới không đủ'],
+    ['Bắt đầu đơn giản', 'Model call → workflow → agent: chỉ lên bậc khi bậc dưới không đủ'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Kết quả cần đạt".]\nTóm tắt 2 phút trước Q&A, đọc từng thẻ:
 - Workflow: viết ra giấy được hết các bước và nhánh → workflow (Anthropic: predictability, consistency).
 - Agent: 3 dấu hiệu của OpenAI — quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc. Không đạt rõ → workflow là đủ.
-- Bắt đầu đơn giản: model call → workflow → workflow có routing → agent; chỉ lên bậc khi bậc dưới không đủ.
+- Bắt đầu đơn giản: model call → workflow → agent (Anthropic); chỉ lên bậc khi bậc dưới không đủ.
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).
 Đối chiếu lại các use case lớp chọn lúc đầu phần 02.`);
