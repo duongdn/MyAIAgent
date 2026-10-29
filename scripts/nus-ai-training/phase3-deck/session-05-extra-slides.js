@@ -1,5 +1,5 @@
 // Session 5 — sơ đồ 3 mức, code 3 mức chạy thật (demo cuối buổi), trace định vị.
-const { C, box, label, mono, code, arrow, twoWay, newSlide, question } = require('./slide-kit');
+const { C, box, label, mono, code, arrow, twoWay, newSlide, question, blank, footer } = require('./slide-kit');
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
@@ -39,8 +39,9 @@ function threeFlows() {
 
 // Code của 3 mức (rút gọn từ compare_orchestration_levels.py) + output chạy thật với --show
 function demoSupportRequests() {
-  const s = newSlide('Demo · support agent', 'Yêu cầu nào chỉ cần tra tài liệu, yêu cầu nào cần nhiều bước', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
-Demo live, model thật qua gateway công ty (support_agent_demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
+  // Slide mở phần demo: chỉ có chữ "Demo", nội dung chạy live trên terminal (xem notes)
+  const s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
+Slide chỉ để mở phần demo — mọi nội dung nằm ở màn hình terminal. Demo live, model thật qua gateway công ty (support_agent_demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
 1) python3 run_demo.py --scenario 9 --trace   → "Mã lỗi thanh toán E205 nghĩa là gì?"
    Chạy 29/10: 2 lượt gọi LLM (LLM gọi search_kb rồi trả lời), 1.442 token vào, không tạo ticket. → Chỉ cần tra tài liệu rồi trả lời: model call + RAG là đủ, dùng agent là thừa.
 2) python3 run_demo.py --scenario 1 --approve yes --trace   → "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
@@ -71,17 +72,9 @@ if "true" in intent:                   # code
 # 3 · Agent — model chọn tool, SDK lặp
 agent = Agent(instructions=SYSTEM_PROMPT,
               tools=[search_kb, create_ticket])
-await Runner.run(agent, q, max_turns=8)`);
-  [['Yêu cầu 1', '"Mã lỗi thanh toán E205 nghĩa là gì?"', 'tra tài liệu → trả lời', '2 lượt gọi LLM · không tạo ticket', 'Chỉ cần tra tài liệu (RAG)', C.LIGHT],
-   ['Yêu cầu 2', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team."', 'tra tài liệu → đề xuất ticket → chờ duyệt → T-1001 → trả lời', '3 lượt gọi LLM · 1 ticket', 'Nhiều bước + hành động', C.ORANGE]]
-    .forEach(([k, q, steps, stat, verdict, fill], i) => {
-      const x = 40 + i * 330;
-      mono(s, x, 90, 310, 14, k.toUpperCase(), { size: 9, color: C.GREY });
-      box(s, x, 108, 310, 56, q, { fill: C.CARD, size: 12.5, bold: false });
-      box(s, x, 174, 310, 66, steps, { fill: C.INK, size: 11.5, bold: false });
-      label(s, x, 248, 310, 18, stat, { size: 10.5, bold: false, color: C.GREY });
-      box(s, x, 274, 310, 44, verdict, { fill, size: 14 });
-    });
+await Runner.run(agent, q, max_turns=8)`, C.INK);
+  label(s, 40, 150, 600, 80, 'Demo', { size: 54, color: C.WHITE, align: 'START' });
+  footer(s, true);
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
