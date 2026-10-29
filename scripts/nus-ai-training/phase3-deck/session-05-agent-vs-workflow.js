@@ -163,18 +163,19 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   extra.demoSupportRequests(); // demo cuối buổi: 2 yêu cầu support chạy thật (ví dụ trong đề cương)
 
   takeaways([
-    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
-    ['Agent', 'Quyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc'],
-    ['Bắt đầu đơn giản', 'Model call → workflow → agent: chỉ lên bậc khi bậc dưới không đủ'],
-    ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
-    ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
-  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Kết quả cần đạt".]\nTóm tắt 2 phút trước Q&A, đọc từng thẻ:
-- Workflow: viết ra giấy được hết các bước và nhánh → workflow (Anthropic: predictability, consistency).
-- Agent: 3 dấu hiệu của OpenAI — quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc. Không đạt rõ → workflow là đủ.
-- Bắt đầu đơn giản: model call → workflow → agent (Anthropic); chỉ lên bậc khi bậc dưới không đủ.
-- SDK: 4 khái niệm, biết chỗ trong code là đủ.
-- Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).
-Đối chiếu lại các use case lớp chọn lúc đầu phần 02.`);
+    ['Khác nhau ở đâu', 'Ai chọn bước tiếp theo: code viết sẵn (workflow) hay LLM tự chọn (agent)'],
+    ['Khi nào dùng workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
+    ['Khi nào dùng agent', 'Quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc'],
+    ['Nguyên tắc', 'Bắt đầu đơn giản: model call → workflow → agent, chỉ lên khi cần'],
+    ['OpenAI Agents SDK', 'Lo vòng lặp, tool, trace, guardrail; quyền, dữ liệu, duyệt do app quyết'],
+  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Kết quả cần đạt": "Người học chọn đúng mức điều phối và đọc được sơ đồ agent tối thiểu."]
+Tóm tắt 2 phút, mỗi thẻ ứng với một phần của buổi:
+- Khác nhau ở đâu → phần 01 (slide 6–7): câu hỏi phân biệt duy nhất là "ai chọn bước tiếp theo". Dùng LLM hay có tool không làm nên agent.
+- Khi nào dùng workflow → slide 9–10: viết ra giấy được hết các bước và nhánh (Anthropic: "predictability and consistency for well-defined tasks"); an toàn hơn vì model không tự chọn hành động (OWASP LLM06 Excessive Agency).
+- Khi nào dùng agent → slide 11: 3 dấu hiệu của OpenAI. Không có dấu hiệu nào → workflow.
+- Nguyên tắc → slide 12: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; workflow có nhiều mẫu (slide 13–17).
+- OpenAI Agents SDK → slide 19–22: SDK viết sẵn phần code app (Agent · function_tool · Runner.run · Trace · Guardrail); tool nào được mở, quyền, dữ liệu, duyệt, state, business rule vẫn do application quyết (Session 7 đi sâu).
+Đối chiếu lại các use case lớp nêu ở slide 8.`, 'Ý chính của buổi');
 
   challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
     'Agent tốn hơn workflow ở chỗ nào?',

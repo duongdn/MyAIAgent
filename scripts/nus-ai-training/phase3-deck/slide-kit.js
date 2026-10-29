@@ -152,8 +152,8 @@ function agenda(items, notes) {
   return s;
 }
 // "Key takeaways": card đầu tối, các card sau viền xanh; mỗi card có nhãn mono nhỏ + 1 câu đậm
-function takeaways(points, notes) {
-  const s = newSlide('Ghi nhớ', 'Mang về sau buổi hôm nay', notes);
+function takeaways(points, notes, title = 'Mang về sau buổi hôm nay') {
+  const s = newSlide('Ghi nhớ', title, notes);
   points.forEach(([k, t], i) => {
     const dark = i === 0;
     box(s, 40, 86 + i * 58, 640, 50, ' ', { fill: dark ? C.INK : C.CARD, line: dark ? undefined : C.BLUE });
