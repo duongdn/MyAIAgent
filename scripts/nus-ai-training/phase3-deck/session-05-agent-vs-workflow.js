@@ -29,14 +29,14 @@ Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để
   });
 
   sessionHeader(5, 'Agent khác workflow ở đâu', 'Khi nào nên để model chọn bước tiếp theo thay vì viết sẵn toàn bộ flow?',
-    `Session 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
+    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — phần đầu mục (tên buổi · 45 phút · câu hỏi trọng tâm)]\nSession 5 — 45 phút: mở đầu 5' · nội dung 25-30' · Q&A 10-15'.
 Người học đã qua Session 1 (LLM: token, context, không ổn định) và Session 2 (4 pattern, structured output, validate output). Không giảng lại "agent là gì".
 Mục tiêu: chọn đúng mức điều phối bằng số đo, và định vị được agent tối thiểu trong OpenAI Agents SDK.
 Warm-up (nối Session 2): "Session 2 các bạn đã extract email support thành JSON và validate. Giờ khách muốn hệ thống tự xử lý luôn: tra tài liệu, cần thì tạo ticket. Viết thêm bước bằng code, hay để model tự quyết bước tiếp theo?" → câu hỏi của cả buổi. Ghi lại lựa chọn của lớp, phần 02 đối chiếu bằng các tiêu chí chọn.`);
   agenda([['3 mức điều phối', 'model call · workflow do code điều phối · agent'], ['Agent hay workflow', 'khi nào agent tạo giá trị, khi nào workflow đơn giản an toàn hơn'],
     ['OpenAI Agents SDK', 'agent tối thiểu · phần SDK cung cấp, phần product tự quyết']], `45 phút: 3 phần ~9 phút + Q&A 10-15 phút.`);
 
-  s = newSlide('Nhắc lại · Session 1–2', 'Agent: LLM chọn tool, code app chạy — lặp tới khi xong', `Nhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
+  s = newSlide('Nhắc lại · Session 1–2', 'Agent: LLM chọn tool, code app chạy — lặp tới khi xong', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nNhắc lại, KHÔNG giảng lại (tối đa 2 phút). Cùng ý slide "LLM vs Agent" của Session 1 (ChienTX).
 Đi theo mũi tên:
 - User hỏi → code app nhận.
 - ① Code app gửi cho LLM: câu hỏi + context (lịch sử, mô tả các tool có thể dùng).
@@ -73,7 +73,7 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh', '', `Tiêu chí lấy theo nguồn, chia 2 nhóm: CẤU TRÚC (khác nhau ở đâu) và HỆ QUẢ (vì cấu trúc khác nên được/mất gì).
+  s = newSlide('So sánh', '', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nTiêu chí lấy theo nguồn, chia 2 nhóm: CẤU TRÚC (khác nhau ở đâu) và HỆ QUẢ (vì cấu trúc khác nên được/mất gì).
 Cấu trúc:
 - Đầu vào: agent nhận MỤC TIÊU, không nhận danh sách bước (Anthropic: agent bắt đầu từ "a command from, or interactive discussion with, the human user"; OpenAI: agent "independently accomplish tasks on your behalf").
 - Ai chọn bước tiếp + vòng lặp: LangChain, "What is an agent?" — agent = LLM "decide the control flow of an application"; các mức tự chủ phân biệt bằng ai quyết bước nào chạy tiếp, có vòng lặp hay không.
@@ -99,7 +99,7 @@ Lưu ý: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nê
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
-  s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `Định vị, không học thuộc API.
+  s = newSlide('OpenAI Agents SDK', 'Agent tối thiểu chỉ cần 4 khái niệm của SDK', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐịnh vị, không học thuộc API.
 - Agent: định nghĩa (instructions = system prompt, model, tools).
 - function_tool: biến hàm Python thành tool; SDK tự sinh JSON schema từ type hint + docstring.
 - Runner.run: chạy agent loop — gọi model, chạy tool, đưa kết quả lại, lặp tới khi có câu trả lời cuối hoặc chạm max_turns.
@@ -123,9 +123,9 @@ print(result.final_output)      # rút gọn từ agent_openai_sdk.py`, 11);
   extra.traceLocate();
 
   question('Có SDK rồi — còn phải tự viết gì?', 'SDK lo agent loop, tool schema, trace, cả cơ chế dừng chờ duyệt…',
-    `Hỏi lớp 1 phút. Nhiều người nghĩ SDK lo luôn phân quyền. Slide sau: SDK cung cấp cơ chế, application ra quyết định.`);
+    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 4: "Chỉ rõ phần SDK cung cấp và phần product vẫn phải tự quyết định."]\nHỏi lớp 1 phút. Nhiều người nghĩ SDK lo luôn phân quyền. Slide sau: SDK cung cấp cơ chế, application ra quyết định.`);
 
-  s = newSlide('Ranh giới', 'SDK chạy loop — application giữ quyền quyết định', `Câu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
+  s = newSlide('Ranh giới', 'SDK chạy loop — application giữ quyền quyết định', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 4: "Chỉ rõ phần SDK cung cấp và phần product vẫn phải tự quyết định."]\nCâu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
 Đọc từng cặp: SDK có cơ chế, nhưng QUYẾT ĐỊNH là của application.
 Ví dụ: SDK có needs_approval để dừng chờ duyệt, nhưng hành động nào cần duyệt, ai được duyệt — application quyết.
 SDK có guardrail, nhưng guardrail lọc nội dung, KHÔNG phải phân quyền (Session 7).
@@ -148,7 +148,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['Bắt đầu đơn giản', 'Model call → workflow → routing → agent: chỉ lên bậc khi bậc dưới không đủ'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
-  ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
+  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Kết quả cần đạt".]\nTóm tắt 2 phút trước Q&A, đọc từng thẻ:
 - Workflow: viết ra giấy được hết các bước và nhánh → workflow (Anthropic: predictability, consistency).
 - Agent: 3 dấu hiệu của OpenAI — quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc. Không đạt rõ → workflow là đủ.
 - Bắt đầu đơn giản: model call → workflow → workflow có routing → agent; chỉ lên bậc khi bậc dưới không đủ.
@@ -161,7 +161,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Use case nào trong dự án của bạn đáng làm agent? Vì sao?',
     'Kiểm tra user thuộc tenant nào — SDK hay application?',
     'Agent làm sai mà không báo lỗi — phát hiện bằng cách nào?',
-  ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
+  ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Bài tự thực hành sau buổi học".]\nBài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
 1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (bảng So sánh, slide 7).
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.

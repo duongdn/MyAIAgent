@@ -6,11 +6,11 @@ const SRC_OPENAI = 'OpenAI, "A practical guide to building agents", mục "When 
 
 function askWorkflowOrAgent() {
   question('Use case của bạn: workflow hay agent?', 'Trả lời trước khi viết dòng code nào.',
-    `Hỏi lớp 1–2 phút: mỗi người nghĩ 1 use case trong dự án của mình, giơ tay chọn workflow hay agent. Ghi lại vài use case lên bảng, các slide sau dùng chúng làm ví dụ.`);
+    `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nHỏi lớp 1–2 phút: mỗi người nghĩ 1 use case trong dự án của mình, giơ tay chọn workflow hay agent. Ghi lại vài use case lên bảng, các slide sau dùng chúng làm ví dụ.`);
 }
 
 function whenWorkflow() {
-  const s = newSlide('Khi nào workflow', 'Viết trước được các bước → workflow', `Câu hỏi đầu tiên: viết ra giấy được hết các bước và các nhánh không? Được → workflow.
+  const s = newSlide('Khi nào workflow', 'Viết trước được các bước → workflow', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nCâu hỏi đầu tiên: viết ra giấy được hết các bước và các nhánh không? Được → workflow.
 Workflow là "đường đi do code viết sẵn" — LLM vẫn có thể làm từng bước (phân loại, trích thông tin, viết câu trả lời), nhưng thứ tự do code giữ.
 Anthropic: "workflows offer predictability and consistency for well-defined tasks". Nhiều bài toán chỉ cần 1 lần gọi model kèm dữ liệu là đủ.
 3 lợi ích — đọc từng thẻ. Vế "an toàn hơn" của đề cương nói riêng ở slide sau, hỏi lớp use case nào trên bảng thuộc loại này.
@@ -26,7 +26,7 @@ Link: anthropic.com/engineering/building-effective-agents · notes.kodekloud.com
 }
 
 function whySafer() {
-  const s = newSlide('An toàn', 'Workflow an toàn hơn vì model không tự chọn hành động', `Vế "an toàn hơn" của đề cương. Ý chính: rủi ro của agent đến từ việc model được tự chọn hành động — workflow không cho model quyền đó.
+  const s = newSlide('An toàn', 'Workflow an toàn hơn vì model không tự chọn hành động', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nVế "an toàn hơn" của đề cương. Ý chính: rủi ro của agent đến từ việc model được tự chọn hành động — workflow không cho model quyền đó.
 Đọc theo hàng:
 - Hành động ngoài dự kiến: workflow chỉ chạy các bước đã viết, đã review; agent tự chọn tool, tham số, thứ tự → có thể làm việc không ai viết sẵn. OWASP gọi đây là "Excessive Agency" (LLM06:2025) — "the vulnerability that enables damaging actions to be performed", gốc ở "excessive functionality / excessive permissions / excessive autonomy".
 - Nội dung đọc vào điều khiển (prompt injection — S2 đã nói): ở workflow chỉ làm sai nội dung 1 bước; ở agent có thể đổi cả chuỗi hành động vì model quyết bước tiếp. OWASP LLM06: agency quá mức gây hại bất kể nguyên nhân là hallucination hay prompt injection trực tiếp/gián tiếp.
@@ -44,7 +44,7 @@ Link: genai.owasp.org/llmrisk/llm062025-excessive-agency · anthropic.com/engine
 }
 
 function whenAgent() {
-  const s = newSlide('Khi nào agent tạo giá trị', 'Agent đáng dùng khi rule viết sẵn không theo kịp', `OpenAI đưa 3 dấu hiệu — chỗ mà cách làm bằng rule cố định không xử lý nổi:
+  const s = newSlide('Khi nào agent tạo giá trị', 'Agent đáng dùng khi rule viết sẵn không theo kịp', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nOpenAI đưa 3 dấu hiệu — chỗ mà cách làm bằng rule cố định không xử lý nổi:
 1. Quyết định phức tạp: cần phán đoán theo ngữ cảnh, nhiều ngoại lệ. Ví dụ của OpenAI: duyệt hoàn tiền trong customer service.
 2. Rule quá nhiều, khó bảo trì: mỗi lần đổi là sửa cả đống if/else, dễ sai. Ví dụ: review bảo mật nhà cung cấp.
 3. Dựa nhiều vào dữ liệu phi cấu trúc: đọc hiểu văn bản, hội thoại. Ví dụ: xử lý hồ sơ bồi thường bảo hiểm.
@@ -65,7 +65,7 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
 }
 
 function startSimple() {
-  const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `Anthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
+  const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nAnthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 4 bậc từ trái sang phải. Bậc 3 là lựa chọn ở giữa hay bị bỏ qua: workflow giữ thứ tự, chỉ một bước cho model chọn giữa vài tool có sẵn.
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
 Nguồn từng ý:

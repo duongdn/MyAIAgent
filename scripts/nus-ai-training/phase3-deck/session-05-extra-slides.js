@@ -3,7 +3,7 @@ const { C, box, label, mono, code, arrow, twoWay, newSlide, question } = require
 
 // 3 mức vẽ thành 3 luồng: ai giữ thứ tự bước
 function threeFlows() {
-  const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `Session 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
+  const s = newSlide('3 mức điều phối', 'Khác nhau ở một điểm: ai chọn bước tiếp theo', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 1: "So sánh single model call, workflow do code điều phối và agent có mục tiêu, tools, loop, điều kiện dừng."]\nSession 2 đã có 4 pattern; RAG để Session 3–4. Ở đây chỉ so 3 mức trên CÙNG một yêu cầu, nhìn đúng một trục: ai chọn bước tiếp theo.
 - Model call: code chuẩn bị prompt (kèm tài liệu RAG), gọi model ĐÚNG 1 lần. Không có "bước tiếp theo".
 - Slide dùng từ chung (lấy dữ liệu, thực hiện, tool), ví dụ cụ thể để demo cuối buổi. Nếu cần ví dụ miệng: lấy dữ liệu = tra tài liệu nội bộ, thực hiện = tạo ticket.
 - Workflow: CODE giữ thứ tự: phân loại → lấy dữ liệu → trả lời → thực hiện. Model chỉ làm từng ô được giao. Đổi thứ tự = sửa code.
@@ -39,7 +39,7 @@ function threeFlows() {
 
 // Code của 3 mức (rút gọn từ compare_orchestration_levels.py) + output chạy thật với --show
 function threeFlowsCode() {
-  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `Đây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
+  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
 Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây, model thật, không ghi đè số đo trên slide).
 Đọc cột trái theo từng mức:
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
@@ -84,7 +84,7 @@ await Runner.run(agent, q, max_turns=8)`, 8.5);
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
 function traceLocate() {
-  const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `Đề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
+  const s = newSlide('Trace', 'Trace cho thấy agent đã đi những bước nào', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐề cương: trace "ở mức định vị" — chỉ cần biết đọc trace để thấy agent làm gì, chi tiết ở Session 9.
 SDK tự sinh trace cho mỗi Runner.run; demo ghi ra file .traces/ trên máy (không gửi về OpenAI) và in ra với --trace.
 Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, deepseek-v4.1-flash):
 - ① mỗi lượt APP gửi cho LLM: số message tăng dần 2 → 5 → 7 (gửi lại cả kết quả tool), token vào tăng 574 → 932 → 1.201.

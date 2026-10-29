@@ -35,3 +35,4 @@ See [[feedback_google_slides_api_enabled_and_gotchas]] for the API mechanics use
 - 🔴 2026-10-16: không thêm câu dẫn kiểu văn xuôi lên slide (vd "…rồi Q&A · bài tự thực hành sau buổi") — "đây là slide, có phải text đâu". Lời dẫn để trong notes.
 - 🔴 2026-10-20: mọi lần sửa deck/demo GĐ3 → ghi changelog vào docs/nus-ai-training/phase3/changelog/<YYYY-MM-DD>.md (append mục mới: giờ · vấn đề · trước/sau · commit) để user monitor. Không chỉ báo trong terminal.
 - 🔴 2026-10-28: MỌI tài liệu GĐ3 (kịch bản, mapping, review, changelog) để chung 1 chỗ `docs/nus-ai-training/phase3/` (mục lục README.md). Không tạo tài liệu GĐ3 trong plans/reports hay reports/. "Phase 5" user nói = Session 5, không phải Giai đoạn 5.
+- 🔴 2026-10-29: notes mỗi slide nội dung mở đầu bằng trích dẫn đề cương: "[Đề cương: 02_Noi_dung_chi_tiet…pdf, trang N, mục Session X — gạch đầu dòng K: «nguyên văn»]" để đọc lại được. Ý lấy từ nguồn ngoài cũng ghi nguồn + link; ý tự suy ra phải ghi rõ là suy ra.
