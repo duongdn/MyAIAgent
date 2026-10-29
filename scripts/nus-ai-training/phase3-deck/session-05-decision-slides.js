@@ -76,7 +76,7 @@ Nguồn từng ý:
 - Bậc 3: Anthropic "Agents".
 - Cách vẽ thành bậc thang là của trainer; Anthropic chỉ trình bày theo thứ tự từ đơn giản đến phức tạp.
 Link: anthropic.com/engineering/building-effective-agents`);
-  [['1', 'Model call', 'LLM + dữ liệu, tool\n1 lần gọi'],
+  [['1', 'Model call', 'LLM + dữ liệu\n1 lần gọi'],
    ['2', 'Workflow', 'code giữ thứ tự'],
    ['3', 'Agent', 'model chọn mọi bước']]
     .forEach(([n, t, d], i) => {
