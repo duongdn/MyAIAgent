@@ -35,7 +35,7 @@ function requestsForSlide(sid) {
   const del = di >= 0 ? nums(args.splice(di, 2)[1].split(',')) : [];
   const targets = nums(args);
 
-  kit.reset(); require(mod)(); kit.closing();
+  kit.reset(); const opt = require(mod)() || {}; if (!opt.noClosing) kit.closing();
   const auth = new google.auth.GoogleAuth({
     keyFile: path.join(__dirname, '../../../config/daily-agent-490610-7eb7985b33e3.json'),
     scopes: ['https://www.googleapis.com/auth/presentations'],

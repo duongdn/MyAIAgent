@@ -160,7 +160,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     ['Business rule', '—', 'Priority, assignee, hạn mức…'],
   ], { rowH: 36 });
 
-  extra.threeFlowsCode(); // demo code đặt cuối: slide nói nguyên lý trước, code xem lúc demo
+  extra.demoSupportRequests(); // demo cuối buổi: 2 yêu cầu support chạy thật (ví dụ trong đề cương)
 
   takeaways([
     ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
@@ -187,4 +187,5 @@ Câu hỏi thử thách trả lời nhanh trong Q&A:
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
 4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);
+  return { noClosing: true }; // S5 không có slide Q&A riêng (user 29/10)
 };

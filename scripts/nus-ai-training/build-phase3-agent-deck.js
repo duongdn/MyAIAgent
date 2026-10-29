@@ -42,7 +42,7 @@ if (require.main === module) (async () => {
   for (const [num, [mod, pid]] of Object.entries(SESSIONS)) {
     if (process.env.PHASE3_ONLY && process.env.PHASE3_ONLY !== num) continue;
     kit.reset();
-    require(mod)(); kit.closing(); // mỗi ngày kết bằng Q&A
+    const opt = require(mod)() || {}; if (!opt.noClosing) kit.closing(); // mỗi ngày kết bằng Q&A, trừ khi session bỏ (S5)
     console.log(`S${num}: ${await push(api, pid)} slides → https://docs.google.com/presentation/d/${pid}`);
   }
 })().catch((e) => { console.error(e.message); process.exit(1); });

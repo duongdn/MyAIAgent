@@ -31,6 +31,7 @@ CHẠY:
     python3 run_demo.py --scenario 1 --approve later    # dừng chờ duyệt, lưu state vào .state/<task>.json
     python3 run_demo.py --resume <task_id> --approve yes            # tiếp tục đúng chỗ dừng (kể cả sau restart)
     python3 run_demo.py --scenario 1 --approve yes --trace          # in trace: model call, tool call, guardrail
+    python3 run_demo.py --scenario 9 --trace                        # chỉ hỏi: 1 lần tra tài liệu là đủ (so với kịch bản 1)
 
 LƯU Ý: model là LLM thật → mỗi lần chạy có thể khác nhau, kể cả việc có bị prompt injection lừa hay không.
 Đó chính là bài học: không thể dựa vào việc model "tự biết" — kiểm soát phải nằm ở application.
@@ -68,6 +69,8 @@ SCENARIOS = {
         dict(session_user="alice", question="Khách hỏi cách xuất hoá đơn VAT điện tử, hướng dẫn thế nào?")),
     8: ("Guardrail — user dán số thẻ vào câu hỏi",
         dict(session_user="alice", question="Khách có thẻ 4111 1111 1111 1111 bị lỗi E205, xử lý sao?")),
+    9: ("Chỉ hỏi — tra tài liệu là đủ, không cần nhiều bước (S5: yêu cầu nào chỉ cần RAG)",
+        dict(session_user="alice", question="Mã lỗi thanh toán E205 nghĩa là gì?")),
 }
 SCENARIO_FAULTS = {6: {"timeout_once"}}  # lỗi giả lập ở hệ thống đích (ticket_system.py)
 

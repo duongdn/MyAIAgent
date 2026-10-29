@@ -38,16 +38,26 @@ function threeFlows() {
 }
 
 // Code của 3 mức (rút gọn từ compare_orchestration_levels.py) + output chạy thật với --show
-function threeFlowsCode() {
-  const s = newSlide('3 mức · code chạy thật', 'Cùng một yêu cầu, 3 cách viết code', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
+function demoSupportRequests() {
+  const s = newSlide('Demo · support agent', 'Yêu cầu nào chỉ cần tra tài liệu, yêu cầu nào cần nhiều bước', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
+Demo live, model thật qua gateway công ty (support_agent_demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
+1) python3 run_demo.py --scenario 9 --trace   → "Mã lỗi thanh toán E205 nghĩa là gì?"
+   Chạy 29/10: 2 lượt gọi LLM (LLM gọi search_kb rồi trả lời), 1.442 token vào, không tạo ticket. → Chỉ cần tra tài liệu rồi trả lời: model call + RAG là đủ, dùng agent là thừa.
+2) python3 run_demo.py --scenario 1 --approve yes --trace   → "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
+   Chạy 29/10: 3 lượt (search_kb → create_ticket, dừng chờ duyệt → T-1001 → trả lời), 2.600 token vào. → Cần nhiều bước + hành động. Nếu lúc nào cũng tạo ticket → workflow (slide 9); nếu tạo hay không tuỳ kết quả tra → agent.
+Chỉ vào trace: dòng ② là LLM quyết định, dòng ③ là code app chạy (giống sơ đồ slide 5).
+
+--- Giữ từ slide cũ "Cùng một yêu cầu, 3 cách viết code" (đã bỏ khỏi deck 29/10) ---
+[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ support_agent_demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
 Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây, model thật, không ghi đè số đo trên slide).
 Đọc cột trái theo từng mức:
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
 - Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team-a) code viết sẵn.
 - Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
 Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK (chạy lại 29/10, cùng kiểu slide trace): lượt 1 LLM gọi search_kb 2 lần → lượt 2 gọi create_ticket, dừng chờ duyệt → lượt 3 trả lời.
-Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.`);
-  code(s, 40, 86, 352, 262, `# 1 · Model call — gọi model đúng 1 lần
+Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.
+Code rút gọn của 3 mức (compare_orchestration_levels.py):
+# 1 · Model call — gọi model đúng 1 lần
 docs = search_kb("lỗi E205")           # code
 answer = await llm(docs + question)    # model
 
@@ -61,27 +71,17 @@ if "true" in intent:                   # code
 # 3 · Agent — model chọn tool, SDK lặp
 agent = Agent(instructions=SYSTEM_PROMPT,
               tools=[search_kb, create_ticket])
-await Runner.run(agent, q, max_turns=8)`, 8.5);
-  code(s, 404, 86, 276, 262, `== Model call + RAG ==
-[CODE ] tra KB: search_kb(...)
-[MODEL] trả lời → E205 = ngân hàng
-        từ chối [kb-a-002]...
-
-== Workflow ==
-[MODEL] phân loại → {"need_ticket": true}
-[CODE ] tra KB: search_kb(...)
-[MODEL] trả lời → E205 = ngân hàng...
-[CODE ] tạo ticket: P3, billing-team-a
-
-== Agent ==
-① APP → LLM  574+134 token
-② LLM: gọi search_kb ×2
-③ APP chạy search_kb → ④ gửi lại
-① APP → LLM  912+173 token
-② LLM: gọi create_ticket(P3, …)
-③ chờ duyệt → T-1001
-① APP → LLM  1.114+114 token
-② LLM: dừng, trả lời cuối`, 8.5);
+await Runner.run(agent, q, max_turns=8)`);
+  [['Yêu cầu 1', '"Mã lỗi thanh toán E205 nghĩa là gì?"', 'tra tài liệu → trả lời', '2 lượt gọi LLM · không tạo ticket', 'Chỉ cần tra tài liệu (RAG)', C.LIGHT],
+   ['Yêu cầu 2', '"Khách báo lỗi E205, xử lý sao? Tạo ticket cho billing team."', 'tra tài liệu → đề xuất ticket → chờ duyệt → T-1001 → trả lời', '3 lượt gọi LLM · 1 ticket', 'Nhiều bước + hành động', C.ORANGE]]
+    .forEach(([k, q, steps, stat, verdict, fill], i) => {
+      const x = 40 + i * 330;
+      mono(s, x, 90, 310, 14, k.toUpperCase(), { size: 9, color: C.GREY });
+      box(s, x, 108, 310, 56, q, { fill: C.CARD, size: 12.5, bold: false });
+      box(s, x, 174, 310, 66, steps, { fill: C.INK, size: 11.5, bold: false });
+      label(s, x, 248, 310, 18, stat, { size: 10.5, bold: false, color: C.GREY });
+      box(s, x, 274, 310, 44, verdict, { fill, size: 14 });
+    });
 }
 
 // Trace ở mức định vị: biết dòng nào ứng với khái niệm nào của SDK
@@ -107,4 +107,4 @@ Lệnh: python3 run_demo.py --scenario 1 --approve yes --trace`);
   label(s, 40, 300, 640, 40, 'Trace = tool nào · tham số gì · bao lâu · bao nhiêu token', { size: 12, align: 'START' });
 }
 
-module.exports = { threeFlows, threeFlowsCode, traceLocate };
+module.exports = { threeFlows, demoSupportRequests, traceLocate };
