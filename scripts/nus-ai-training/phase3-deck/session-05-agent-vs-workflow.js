@@ -73,25 +73,24 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh', '', `Đọc theo hàng, từ trái sang phải: càng sang phải, model tự quyết càng nhiều — linh hoạt hơn, đổi lại khó đoán và tốn hơn.
-- 3 hàng đầu: cấu trúc (nối với sơ đồ slide 6). Điểm khác cốt lõi: ai chọn bước tiếp theo.
-- Ổn định / chi phí / test / khi sai: cái giá của việc để model quyết. Anthropic: workflow "offer predictability and consistency for well-defined tasks"; agent "trade latency and cost for better task performance", "higher costs, and the potential for compounding errors" (lỗi lượt trước đưa vào lượt sau, dồn lên).
-- Kiểm soát cần thêm: mức càng cao, application càng phải tự viết nhiều chốt chặn (Session 7–9).
-- Ví dụ quen thuộc: để lớp tự xếp các công cụ họ dùng hằng ngày.
-Nguồn: Anthropic, "Building effective agents".`);
-  table(s, 30, 52, [150, 160, 170, 180], [
+  s = newSlide('So sánh', '', `Tiêu chí lấy theo 2 nguồn, không tự đặt:
+1) LangChain, "What is an agent?" — agent = "a system that uses a large language model to decide the control flow of an application". Các mức tự chủ được so bằng 3 câu hỏi: ai quyết định output của mỗi bước, ai quyết định bước nào chạy tiếp, ai quyết định có những bước nào để chọn. Model call ≈ "LLM call", workflow ≈ "chain", agent ≈ "state machine" (có vòng lặp).
+2) Prompting Guide (DAIR.AI), "AI Workflows vs. AI Agents": control flow · decision making · tool usage · adaptability · use cases. Định nghĩa theo Anthropic: workflow = "LLMs and tools are orchestrated through predefined code paths"; agent = LLM "dynamically direct their own processes and tool usage".
+Đọc theo hàng:
+- Hàng 2: cả 3 mức LLM đều viết nội dung → dùng LLM không làm nên agent.
+- Hàng 3–4: khác biệt thật nằm ở đây — ai chọn bước tiếp và có vòng lặp không.
+- Hàng 6: cả agent cũng chỉ chọn trong danh sách tool do code đưa → application vẫn giữ quyền (Session 7).
+Hệ quả (ổn định, chi phí, test) để phần 02.`);
+  table(s, 30, 52, [170, 150, 170, 170], [
     ['', 'Model call', 'Workflow', 'Agent'],
-    ['Gọi model', '1 lần', 'số lần cố định', 'không biết trước'],
-    ['Ai chọn bước tiếp', 'không có bước', 'code — viết sẵn', 'model — lúc chạy'],
-    ['Hành động (tool, API)', 'không', 'code gọi theo thứ tự', 'model chọn, code chạy'],
-    ['Cùng input', 'gần như cùng kết quả', 'cùng các bước', 'có thể khác đường đi'],
-    ['Chi phí, độ trễ', 'thấp nhất', 'cố định, đoán trước', 'dao động, cao hơn'],
-    ['Test, debug', 'dễ nhất', 'kiểm từng bước', 'đọc trace nhiều lượt'],
-    ['Khi sai', 'trả lời sai', 'dừng ở một bước', 'lỗi dồn qua các lượt'],
-    ['Yêu cầu đổi dạng', 'sửa prompt', 'sửa code, thêm nhánh', 'thường tự xoay xở'],
-    ['Kiểm soát cần thêm', 'validate output', '+ kiểm từng bước', '+ quyền, duyệt, giới hạn lượt'],
-    ['Ví dụ quen thuộc', 'tóm tắt, dịch', 'xử lý email, hoá đơn', 'ChatGPT web search'],
-  ], { rowH: 25, size: 10.5 });
+    ['Luồng điều khiển', 'một bước', 'viết sẵn trong code', 'model quyết lúc chạy'],
+    ['Ai viết nội dung mỗi bước', 'LLM', 'LLM', 'LLM'],
+    ['Ai chọn bước tiếp theo', 'không có bước tiếp', 'code', 'LLM'],
+    ['Vòng lặp', 'không', 'không — chạy hết các bước', 'có — lặp tới khi xong'],
+    ['Dùng tool', 'không', 'code gọi theo thứ tự', 'LLM chọn, code chạy'],
+    ['Danh sách tool / bước', '—', 'code định nghĩa', 'code định nghĩa, LLM chọn trong đó'],
+    ['Hợp với', 'task một bước', 'task rõ, các bước biết trước', 'task mở, bước phụ thuộc kết quả'],
+  ], { rowH: 34, size: 11 });
 
   decide.decisionSlides(); // phần 02: chọn theo đặc điểm bài toán (Anthropic + OpenAI)
 
