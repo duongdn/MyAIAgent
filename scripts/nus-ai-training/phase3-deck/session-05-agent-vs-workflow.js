@@ -142,10 +142,10 @@ Nguồn từng ý:
 - Cột trái (nối với sơ đồ slide 5) là cách trainer đối chiếu; khớp với mô tả "The agent loop" ở trên.
 Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing`);
   table(s, 30, 88, [230, 150, 280], [
-    ['Trong agent loop (slide 5)', 'Trong SDK', 'Làm gì'],
+    ['Phần của agent', 'Tên trong SDK', 'Làm gì'],
     ['LLM + hướng dẫn + danh sách tool', 'Agent', 'khai báo instructions, model, tools'],
     ['Tool do code app chạy', 'function_tool', 'biến một hàm thành tool, tự sinh mô tả cho LLM'],
-    ['Vòng lặp ①–④ tới khi trả lời', 'Runner.run', 'chạy vòng lặp, dừng khi có câu trả lời cuối hoặc chạm giới hạn lượt'],
+    ['Vòng lặp gọi LLM ⇄ chạy tool', 'Runner.run', 'chạy vòng lặp, dừng khi có câu trả lời cuối hoặc chạm giới hạn lượt'],
     ['Ghi lại từng bước', 'Trace', 'ghi model call, tool call để đọc lại'],
   ], { rowH: 52, size: 12.5 });
 
