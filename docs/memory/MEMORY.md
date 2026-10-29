@@ -321,3 +321,4 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [vcb_visa_statement_day_21](money-report/feedback_vcb_visa_statement_day_21_balance_is_next_cycle.md) — 🔴 Visa sao kê ngày 21, kỳ đã trả; dư nợ sau 21 = kỳ sau, ko khuyên trả thẻ khi lương về
 - [deck_rebuild_overwrites_manual_slide_edits](feedback_deck_rebuild_overwrites_manual_slide_edits.md) — 🔴 GĐ3 deck: user sửa tay; chỉ patch slide/element, không full rebuild
 - [slides_generic_terms_demo_names_only_in_demo](feedback_slides_generic_terms_demo_names_only_in_demo.md) — 🔴 GĐ3 slide: từ chung; search_kb/tra KB/tạo ticket chỉ ở demo cuối
+- [ambiguous_deck_request_ask_never_delete_slides](feedback_ambiguous_deck_request_ask_never_delete_slides.md) — 🔴 GĐ3 deck: yêu cầu mơ hồ → hỏi lại; ko xoá slide nếu user chưa nói rõ

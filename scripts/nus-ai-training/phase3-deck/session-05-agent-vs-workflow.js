@@ -4,8 +4,16 @@ const decide = require('./session-05-decision-slides');
 const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
-  let s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Mở đầu Giai đoạn 3 (Session 5–9): một support agent, mỗi buổi thêm một lớp. SDK: OpenAI Agents SDK; model qua LLM gateway công ty.
-Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
+  let s = blank(`Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
+SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/support_agent_demo/.
+Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash) — mọi log/số liệu trên slide là kết quả chạy thật.
+Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
+  mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
+  label(s, 40, 90, 640, 110, 'Giai đoạn 3 —\nBuild AI Agent', { size: 46, color: C.WHITE, align: 'START', valign: 'TOP', lineSpacing: 100 });
+  label(s, 40, 320, 250, 20, 'DuongDN', { size: 12, color: C.WHITE, align: 'START' });
+  footer(s, true);
+
+  s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
 S8: lưu trạng thái task (đang xử lý / chờ duyệt / xong) để chạy tiếp sau khi dừng giữa chừng + các điều kiện dừng. S9: harness = bộ test chạy lặp (eval) + trace để kiểm tra agent trước khi đưa cho đội review.
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
 Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.`);
@@ -150,7 +158,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
     'Agent làm sai mà không báo lỗi — phát hiện bằng cách nào?',
   ], `Bài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
-1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (bảng So sánh, slide 6).
+1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (bảng So sánh, slide 7).
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
 3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
 4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);
