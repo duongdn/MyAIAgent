@@ -67,17 +67,16 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
 function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 2: "Quyết định khi nào agent tạo giá trị và khi nào workflow đơn giản an toàn hơn."]\nAnthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 3 bậc từ trái sang phải — đúng 3 khái niệm Anthropic trình bày theo thứ tự: augmented LLM → workflows → agents. Cũng là 3 mức của slide 6–7.
-Workflow không phải 1 kiểu duy nhất: Anthropic liệt kê 5 mẫu — prompt chaining (nối các bước), routing (phân loại rồi chuyển nhánh), parallelization (chạy song song), orchestrator-workers (1 LLM chia việc cho các LLM khác), evaluator-optimizer (1 LLM viết, 1 LLM chấm và góp ý). Chỉ cần kể tên, không đi sâu.
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
 Nguồn từng ý:
 - Bắt đầu đơn giản: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 - Bậc 1: Anthropic "augmented LLM" — "an LLM enhanced with augmentations such as retrieval, tools, and memory"; "optimizing single LLM calls with retrieval and in-context examples is usually enough".
-- Bậc 2: 5 mẫu workflow là các mục con của phần "Workflow" trong bài Anthropic.
+- Bậc 2: Anthropic "Workflows" — "systems where LLMs and tools are orchestrated through predefined code paths".
 - Bậc 3: Anthropic "Agents".
 - Cách vẽ thành bậc thang là của trainer; Anthropic chỉ trình bày theo thứ tự từ đơn giản đến phức tạp.
 Link: anthropic.com/engineering/building-effective-agents`);
   [['1', 'Model call', 'LLM + dữ liệu, tool\n1 lần gọi'],
-   ['2', 'Workflow', 'code giữ thứ tự\nchaining · routing · parallelization\norchestrator-workers · evaluator-optimizer'],
+   ['2', 'Workflow', 'code giữ thứ tự'],
    ['3', 'Agent', 'model chọn mọi bước']]
     .forEach(([n, t, d], i) => {
       const x = 40 + i * 225; const y = 200 - i * 44;
