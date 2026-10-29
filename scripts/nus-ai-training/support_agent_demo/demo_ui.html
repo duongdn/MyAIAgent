@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support agent demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  /* Cùng bảng màu với deck: cam = LLM, tối = app */
+  :root { --ink:#141A2E; --paper:#F5F4F0; --card:#FBFAF7; --line:#DEDBD3; --grey:#6B6F7A; --blue:#2456C8; --orange:#F0A050; --light:#E3E9F6; --green:#E6F0E1; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.45 "IBM Plex Sans", sans-serif; }
+  header { padding:14px 28px; background:var(--ink); color:#fff; display:flex; gap:16px; align-items:baseline; }
+  header b { font-size:20px; } header span { color:#A9B0C2; font-size:14px; }
+  main { display:grid; grid-template-columns: 1fr 1.15fr; gap:24px; padding:24px 28px; height:calc(100vh - 56px); }
+  section { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; overflow:auto; }
+  h2 { margin:0 0 12px; font:600 13px "IBM Plex Mono", monospace; color:var(--blue); letter-spacing:.06em; text-transform:uppercase; }
+  .ask { display:flex; gap:8px; } .ask input { flex:1; padding:12px; font:inherit; border:1px solid var(--line); border-radius:10px; }
+  button { font:600 15px "IBM Plex Sans"; padding:10px 16px; border-radius:10px; border:0; cursor:pointer; background:var(--ink); color:#fff; }
+  button.alt { background:var(--light); color:var(--ink); } button:disabled { opacity:.4; cursor:default; }
+  .samples { display:flex; gap:8px; margin:10px 0 18px; flex-wrap:wrap; }
+  .msg { padding:12px 14px; border-radius:12px; margin:10px 0; white-space:pre-wrap; }
+  .user { background:var(--light); } .bot { background:#fff; border:1px solid var(--line); }
+  .meta { color:var(--grey); font-size:13px; margin-top:6px; }
+  .approval { background:#FBEAD3; border:2px solid var(--orange); border-radius:12px; padding:14px; margin:12px 0; }
+  .approval pre { font:13px "IBM Plex Mono"; margin:8px 0; white-space:pre-wrap; }
+  .steps { list-style:none; margin:0; padding:0; }
+  .step { display:grid; grid-template-columns: 28px 1fr; gap:10px; margin-bottom:10px; }
+  .num { font:13px "IBM Plex Mono"; color:var(--grey); padding-top:10px; }
+  .box { border-radius:10px; padding:10px 14px; }
+  .llm .box { background:var(--orange); } .app .box { background:var(--ink); color:#fff; } .human .box { background:var(--green); }
+  .title { font-weight:600; } .who { float:right; font:12px "IBM Plex Mono"; opacity:.7; }
+  .detail { font-size:13px; margin-top:4px; opacity:.85; word-break:break-word; }
+  details { margin-top:6px; font-size:13px; } summary { cursor:pointer; opacity:.8; }
+  details pre { background:rgba(0,0,0,.08); padding:8px; border-radius:6px; white-space:pre-wrap; font:12px "IBM Plex Mono"; }
+  .legend { display:flex; gap:16px; font-size:13px; color:var(--grey); margin-bottom:12px; }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+</style>
+</head>
+<body>
+<header><b>Support agent</b><span>OpenAI Agents SDK · model thật qua LLM gateway công ty</span></header>
+<main>
+  <section>
+    <h2>Hỏi agent</h2>
+    <div class="ask"><input id="q" placeholder="Nhập yêu cầu…"><button id="send">Gửi</button></div>
+    <div class="samples">
+      <button class="alt" data-k="rag">① Chỉ hỏi</button>
+      <button class="alt" data-k="ticket">② Xử lý + tạo ticket</button>
+    </div>
+    <div id="chat"></div>
+  </section>
+  <section>
+    <h2>Agent đang làm gì (trace)</h2>
+    <div class="legend"><span><i style="background:var(--orange)"></i>LLM quyết định</span><span><i style="background:var(--ink)"></i>App chạy</span><span><i style="background:var(--green)"></i>Người duyệt</span></div>
+    <ol class="steps" id="steps"></ol>
+  </section>
+</main>
+<script>
+const SAMPLES = __SAMPLES__;
+const $ = (id) => document.getElementById(id);
+let runId = null, n = 0;
+
+function add(parent, cls, html) { const el = document.createElement('div'); el.className = cls; el.innerHTML = html; parent.appendChild(el); el.scrollIntoView({block: 'end'}); return el; }
+const esc = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c]));
+// markdown tối thiểu cho câu trả lời: **đậm**, `code`
+const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+
+function step(ev) {
+  const li = document.createElement('li'); li.className = 'step ' + ev.who;
+  let inner = `<span class="who">${ev.who === 'llm' ? 'LLM' : ev.who === 'app' ? 'APP' : 'NGƯỜI'}</span><div class="title">${esc(ev.title)}</div>`;
+  if (ev.detail) inner += `<div class="detail">${esc(ev.detail)}</div>`;
+  if (ev.why) inner += `<div class="detail">lý do LLM tự viết: “${esc(ev.why)}”</div>`;
+  if (ev.raw) inner += `<details><summary>JSON gốc LLM trả về · ${esc(ev.tokens)} · gửi ${ev.sent} message</summary><pre>${esc(JSON.stringify(ev.raw, null, 2))}</pre></details>`;
+  li.innerHTML = `<span class="num">${++n}</span><div class="box">${inner}</div>`;
+  $('steps').appendChild(li); li.scrollIntoView({block: 'end'});
+}
+
+async function ask(question) {
+  if (!question || runId) return;
+  $('steps').innerHTML = ''; n = 0; $('send').disabled = true;
+  add($('chat'), 'msg user', esc(question));
+  const res = await fetch('/run', {method: 'POST', body: JSON.stringify({question})});
+  runId = (await res.json()).run;
+  const es = new EventSource('/events?run=' + runId);
+  es.onmessage = (m) => {
+    const ev = JSON.parse(m.data);
+    if (ev.type === 'step') step(ev);
+    if (ev.type === 'approval') {
+      const box = add($('chat'), 'approval', `<b>Agent muốn tạo ticket — duyệt không?</b><pre>${esc(JSON.stringify(ev.args, null, 2))}</pre><button data-ok="1">Duyệt</button> <button class="alt" data-ok="0">Từ chối</button>`);
+      box.querySelectorAll('button').forEach((b) => b.onclick = async () => {
+        box.querySelectorAll('button').forEach((x) => x.disabled = true);
+        await fetch('/approve', {method: 'POST', body: JSON.stringify({run: runId, ok: b.dataset.ok === '1'})});
+      });
+    }
+    if (ev.type === 'done') {
+      const u = ev.usage || {};
+      add($('chat'), 'msg bot', md(ev.answer) + `<div class="meta">${u.requests ?? '?'} lượt gọi LLM · ticket: ${ev.tickets.length ? esc(ev.tickets.join(', ')) : 'không có'}</div>`);
+    }
+    if (ev.type === 'error') add($('chat'), 'msg bot', '⚠ ' + esc(ev.message));
+    if (ev.type === 'end') { es.close(); runId = null; $('send').disabled = false; }
+  };
+}
+
+$('send').onclick = () => { ask($('q').value.trim()); $('q').value = ''; };
+$('q').onkeydown = (e) => { if (e.key === 'Enter') $('send').click(); };
+document.querySelectorAll('[data-k]').forEach((b) => b.onclick = () => ask(SAMPLES[b.dataset.k]));
+</script>
+</body>
+</html>

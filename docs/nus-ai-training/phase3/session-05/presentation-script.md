@@ -10,11 +10,11 @@ Speaker notes của từng slide có đủ nguồn trích dẫn; file này là b
 cd scripts/nus-ai-training/support_agent_demo
 python3 -m venv ~/ai-training-venv && source ~/ai-training-venv/bin/activate
 pip install -r requirements.txt                       # openai-agents 0.23.1
-python3 run_demo.py --scenario 9 --trace-only         # chạy thử 1 lần cho gateway "ấm"
+python3 demo_ui.py                                    # mở http://localhost:8000, bấm thử câu ① 1 lần cho gateway "ấm"
 ```
 - [ ] Key gateway nằm ở `config/.nus-llm-gateway-config.json` (code tự đọc) — **không mở file này trên màn hình**.
 - [ ] Mở sẵn trong editor: `agent_openai_sdk.py` (dùng cho bước walkthrough), cỡ chữ to.
-- [ ] Terminal cỡ chữ to, đã `cd` sẵn vào thư mục demo.
+- [ ] Trình duyệt mở sẵn `http://localhost:8000`, zoom ~125% cho dễ nhìn; terminal dự phòng đã `cd` sẵn vào thư mục demo.
 - [ ] Gateway lỗi → không chạy được live: kể lại theo số liệu ở mục Demo (chạy thật 29/10).
 
 ## Dòng thời gian
@@ -57,11 +57,11 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 - **21 · Câu hỏi**: "Có SDK rồi — còn phải tự viết gì?"
 - **22 · Ranh giới**: SDK cung cấp cơ chế, application quyết. Giải thích 1 câu cho max_turns, needs_approval, RunState, context (notes).
 
-### Demo (33–40') — slide 23 chỉ có chữ "Demo", mọi thứ làm trên editor + terminal
+### Demo (33–40') — slide 23 chỉ có chữ "Demo", demo trên editor + trang web demo
 
 Đáp ứng 2 dòng đề cương (trang 4, mục Session 5): gạch 3 "**Walkthrough** support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API" và "Ví dụ trong buổi: yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?".
 
-**Bước 0 — Walkthrough code (~2')**: mở `support_agent_demo/agent_openai_sdk.py`, chỉ đúng 3 chỗ, nối với bảng slide 19:
+**Bước 0 — Walkthrough code (~2', editor)**: mở `support_agent_demo/agent_openai_sdk.py`, chỉ đúng 3 chỗ, nối với bảng slide 19:
 
 | Concept (slide 19) | Dòng | Nói gì |
 |---|---|---|
@@ -72,30 +72,27 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 - Các phần khác trong file (`needs_approval`, guardrail, checkpoint ①–⑤, task state) → nói "đây là phần application tự quyết, học ở Session 6–9", **không giải thích**. Không học thuộc API.
 - Nếu số dòng lệch do code đổi: tìm `@function_tool`, `def build_agent`, `Runner.run`.
 
-**Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**
-```bash
-python3 run_demo.py --scenario 9 --trace-only
-```
-- Câu hỏi: "Mã lỗi thanh toán E205 nghĩa là gì?"
-- Kết quả 29/10: 2 lượt gọi LLM — ② LLM chọn `search_kb` (thường gọi 2 lần với 2 cách hỏi) → ③ app chạy → ② LLM trả lời cuối, **không tạo ticket**.
+**Trang demo** (`python3 demo_ui.py` → http://localhost:8000):
+- Trái: ô hỏi + 2 nút câu mẫu (① Chỉ hỏi, ② Xử lý + tạo ticket) + câu trả lời + hộp **Duyệt / Từ chối** khi agent muốn tạo ticket.
+- Phải: **trace** hiện từng bước ngay khi agent chạy — ô **cam = LLM quyết định** (kèm "lý do LLM tự viết" + nút xem JSON gốc), ô **tối = app chạy**, ô xanh = người duyệt. Cùng màu với slide 6 và slide 20.
+
+**Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ hỏi** ("Mã lỗi thanh toán E205 nghĩa là gì?").
+- Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
 
-**Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**
-```bash
-python3 run_demo.py --scenario 1 --approve yes --trace-only
-```
-- Câu hỏi: "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
-- Kết quả 29/10: 3 lượt — tra tài liệu → ② LLM đề xuất `create_ticket` → ③ "CHƯA chạy: dừng chờ người duyệt" → duyệt → T-1001 → ② LLM trả lời cuối.
-- Chỉ vào trace (đây là "trace ở mức định vị", slide 20):
-  - dòng **②** = LLM quyết định, chỉ là JSON + "lý do LLM tự viết";
-  - dòng **③** = code app chạy hàm thật;
-  - số message tăng 2 → 5 → 7 = mỗi lượt gửi lại cả hội thoại.
+**Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Xử lý + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
+- Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
+- Chỉ vào cột trace (đây là "trace ở mức định vị", slide 20):
+  - ô cam = LLM quyết định — mở "JSON gốc": LLM chỉ viết ra JSON, không tự chạy gì;
+  - ô tối = app chạy hàm thật;
+  - "gửi N message" tăng 2 → 4 → 6 = mỗi lượt gửi lại cả hội thoại.
 - Nói: "**Nhiều bước + hành động**. Nếu lúc nào cũng tạo ticket thì workflow là đủ (slide 9); nếu tạo hay không tuỳ kết quả tra thì mới cần agent (slide 11)."
-- Nếu model đề xuất P2 rồi bị chặn → tự sửa P3: tận dụng — "LLM đề xuất, app quyết" (slide 22).
+- Hay gặp: LLM đề xuất P2 hoặc assignee "billing team" → ô tối "BỊ CHẶN bởi application" → LLM tự sửa P3/billing-team-a. Tận dụng: "LLM đề xuất, app quyết" (slide 22). Có thể bấm **Từ chối** để cho thấy app không tạo ticket.
+
+**Dự phòng** (trang web lỗi): chạy lệnh trên terminal — `python3 run_demo.py --scenario 9 --trace-only` và `python3 run_demo.py --scenario 1 --approve yes --trace-only` (cùng nội dung, in dạng chữ; `--trace-only` ẩn log kiểm quyền của Session 7).
+Gateway lỗi hẳn: kể lại theo kết quả 29/10 ở trên.
 
 **Tuỳ chọn (nếu dư giờ)**: `python3 compare_orchestration_levels.py --runs 1 --show` (~25s) — cùng một yêu cầu chạy ở 3 mức model call / workflow / agent; dòng `[CODE]`/`[MODEL]` khớp màu ô tối/cam slide 6.
-
-`--trace-only` ẩn log kiểm quyền của Session 7 (① session, ② quyền…) vì trùng ký hiệu với ①–④ của vòng lặp. Muốn xem đủ log: dùng `--trace`.
 
 ### Kết (40–45')
 - **24 · Ý chính của buổi**: 5 thẻ ứng với 5 phần. Đối chiếu lại use case của lớp.

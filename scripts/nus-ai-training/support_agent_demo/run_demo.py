@@ -31,6 +31,7 @@ CHẠY:
     python3 run_demo.py --scenario 1 --approve later    # dừng chờ duyệt, lưu state vào .state/<task>.json
     python3 run_demo.py --resume <task_id> --approve yes            # tiếp tục đúng chỗ dừng (kể cả sau restart)
     python3 run_demo.py --scenario 1 --approve yes --trace          # in trace: model call, tool call, guardrail
+    python3 demo_ui.py                                              # S5: trang web demo (http://localhost:8000)
     python3 run_demo.py --scenario 9 --trace-only                   # S5: chỉ hỏi — 1 lần tra tài liệu là đủ
     python3 run_demo.py --scenario 1 --approve yes --trace-only     # S5: nhiều bước + tạo ticket, chỉ in vòng lặp agent
 
