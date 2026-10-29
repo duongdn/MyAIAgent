@@ -135,7 +135,12 @@ Code thật (rút gọn từ support_agent_demo/agent_openai_sdk.py) xem ở ph�
   agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket])
   result = await Runner.run(agent, "<câu hỏi>", context=session, max_turns=8)
 Lưu ý kỹ thuật: demo dùng gateway công ty qua OpenAIChatCompletionsModel (chuẩn Chat Completions — provider nào tương thích OpenAI cũng chạy).
-Nguồn: OpenAI Agents SDK docs (openai.github.io/openai-agents-python): Agents · Tools · Running agents · Tracing.`);
+Nguồn từng ý:
+- 4 tên Agent · function_tool · Runner.run · Trace: khái niệm chính thức của SDK (docs: mục Agents, Tools, Running agents, Tracing). Docs mô tả agent là "LLMs equipped with instructions and tools".
+- Runner.run = vòng lặp: docs mục "The agent loop" — "We call the LLM for the current agent, with the current input"; nếu là câu trả lời cuối thì "the loop ends"; nếu LLM trả tool call thì "we run those tool calls, append the results, and re-run the loop"; quá max_turns thì báo lỗi MaxTurnsExceeded.
+- function_tool: docs mục Tools — "You can use any Python function as a tool"; tên tool lấy từ tên hàm, mô tả lấy từ docstring, "The schema for the function inputs is automatically created from the function's arguments".
+- Cột trái (nối với sơ đồ slide 5) là cách trainer đối chiếu; khớp với mô tả "The agent loop" ở trên.
+Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing`);
   table(s, 30, 88, [230, 150, 280], [
     ['Trong agent loop (slide 5)', 'Trong SDK', 'Làm gì'],
     ['LLM + hướng dẫn + danh sách tool', 'Agent', 'khai báo instructions, model, tools'],
