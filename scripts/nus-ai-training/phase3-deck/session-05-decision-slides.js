@@ -1,5 +1,5 @@
 // Session 5 · phần 02 "Agent hay workflow": chọn theo đặc điểm bài toán (Anthropic + OpenAI), không theo số đo
-const { C, box, mono, arrow, table, newSlide, question } = require('./slide-kit');
+const { C, box, mono, arrow, newSlide, question } = require('./slide-kit');
 
 const SRC_ANTHROPIC = 'Anthropic, "Building effective agents" (anthropic.com/engineering/building-effective-agents)';
 const SRC_OPENAI = 'OpenAI, "A practical guide to building agents", mục "When should you build an agent?"';
@@ -65,30 +65,11 @@ Link: anthropic.com/engineering/building-effective-agents`);
     });
 }
 
-function applyDecision() {
-  const s = newSlide('Áp dụng', 'Xếp từng use case vào đúng mức', `Không nhắc lại tiêu chí — dùng tiêu chí slide 9–11 để xếp 5 use case. Che cột cuối, cho lớp đoán trước rồi mới lật.
-- Hỏi đáp tài liệu nội bộ: tra 1 lần rồi trả lời → model call (Anthropic: "optimizing single LLM calls with retrieval and in-context examples is usually enough").
-- Trích thông tin hoá đơn → lưu DB: các bước cố định → workflow.
-- Phân loại email → chuyển đúng bộ phận: bước biết trước, chỉ có 1 chỗ chọn nhánh → workflow có routing (mẫu Routing của Anthropic).
-- Duyệt hoàn tiền theo ngữ cảnh: nhiều ngoại lệ, phán đoán theo ngữ cảnh → agent (ví dụ "refund approval" của OpenAI).
-- Xử lý hồ sơ bồi thường bảo hiểm: dữ liệu phi cấu trúc, bước phụ thuộc nội dung hồ sơ → agent (ví dụ của OpenAI).
-Sau đó áp vào các use case lớp nêu ở slide 8.`);
-  table(s, 30, 86, [230, 160, 140, 130], [
-    ['Use case', 'Viết trước được các bước?', 'Dấu hiệu cần agent', 'Chọn'],
-    ['Hỏi đáp tài liệu nội bộ', 'có — 1 bước', '—', 'Model call'],
-    ['Trích thông tin hoá đơn → lưu DB', 'có', '—', 'Workflow'],
-    ['Phân loại email → chuyển bộ phận', 'có, 1 chỗ chọn nhánh', '—', 'Routing'],
-    ['Duyệt hoàn tiền theo ngữ cảnh', 'không', 'quyết định phức tạp', 'Agent'],
-    ['Xử lý hồ sơ bồi thường', 'không', 'dữ liệu phi cấu trúc', 'Agent'],
-  ], { rowH: 40, size: 12, fills: [C.WHITE, C.WHITE, C.LIGHT, C.ORANGE, C.ORANGE] });
-}
-
 function decisionSlides() {
   askWorkflowOrAgent();
   whenWorkflow();
   whenAgent();
   startSimple();
-  applyDecision();
 }
 
 module.exports = { decisionSlides };
