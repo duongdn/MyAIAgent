@@ -5,7 +5,7 @@ const patterns = require('./session-05-workflow-patterns-slides');
 const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
-  let s = blank(`Mở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
+  let s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, đoạn mở đầu "Giai đoạn 3 Build AI Agent": "Năm session dùng cùng support agent để đi từ quyết định có cần agent hay không đến một bản thiết kế có thể review. OpenAI Agents SDK là ví dụ triển khai xuyên suốt; mỗi buổi vẫn giải thích nguyên lý trước khi xem code. SDK giúp chạy loop và tích hợp tools, trong khi application giữ quyền đối với dữ liệu, permission, approval, state lưu bền và business rule."]\nMở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
 SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/support_agent_demo/.
 Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash); số liệu trong notes và demo đều chạy thật.
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
@@ -14,7 +14,7 @@ Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; applic
   label(s, 40, 320, 250, 20, 'DuongDN · VinhNT', { size: 12, color: C.WHITE, align: 'START' }); // Giai đoạn 3 = 2 người; S5–S6 DuongDN, S7–S9 VinhNT
   footer(s, true);
 
-  s = newSlide('Lộ trình', 'Một agent, 5 buổi — mỗi buổi thêm một lớp', `Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
+  s = newSlide('Lộ trình · một support agent · OpenAI Agents SDK', '', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, đoạn mở đầu "Giai đoạn 3 Build AI Agent": "Năm session dùng cùng support agent để đi từ quyết định có cần agent hay không đến một bản thiết kế có thể review. OpenAI Agents SDK là ví dụ triển khai xuyên suốt; mỗi buổi vẫn giải thích nguyên lý trước khi xem code. SDK giúp chạy loop và tích hợp tools, trong khi application giữ quyền đối với dữ liệu, permission, approval, state lưu bền và business rule."]\nHàng S5 = điểm đầu (có cần agent không), hàng S9 = điểm cuối (bản thiết kế có thể review). Đi qua lộ trình 1 phút. Mỗi hàng = agent sau buổi đó: ô cam là lớp buổi đó thêm vào, ô nhạt là lớp đã có từ trước. Hàng cuối = agent đầy đủ sau S9.
 S8: lưu trạng thái task (đang xử lý / chờ duyệt / xong) để chạy tiếp sau khi dừng giữa chừng + các điều kiện dừng. S9: harness = bộ test chạy lặp (eval) + trace để kiểm tra agent trước khi đưa cho đội review.
 Case study: support agent đọc knowledge base, trả lời có nguồn, tạo ticket sau khi được phép.
 Cuối giai đoạn, người học có bản thiết kế agent đủ rõ để thảo luận với đội triển khai.`);
@@ -180,7 +180,7 @@ Chi tiết làm ở Session 7 (duyệt, quyền) và Session 8 (state, điều k
     ['Khi nào dùng workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
     ['Khi nào dùng agent', 'Quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc'],
     ['Nguyên tắc', 'Bắt đầu đơn giản: model call → workflow → agent, chỉ lên khi cần'],
-    ['OpenAI Agents SDK', 'Lo vòng lặp, tool, trace, guardrail; quyền, dữ liệu, duyệt do app quyết'],
+    ['OpenAI Agents SDK', 'SDK lo vòng lặp và tool; dữ liệu, quyền, duyệt, state, business rule do app giữ'],
   ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Kết quả cần đạt": "Người học chọn đúng mức điều phối và đọc được sơ đồ agent tối thiểu."]
 Tóm tắt 2 phút, mỗi thẻ ứng với một phần của buổi:
 - Khác nhau ở đâu → phần 01 (slide 6–7): câu hỏi phân biệt duy nhất là "ai chọn bước tiếp theo". Dùng LLM hay có tool không làm nên agent.
