@@ -193,13 +193,13 @@ Tóm tắt 2 phút, mỗi thẻ ứng với một phần của buổi:
   challenge('Chọn một use case trong dự án của bạn. Giải thích vì sao dùng model call, workflow hay agent — và đánh dấu phần nào SDK lo, phần nào application phải tự làm.', [
     'Agent tốn hơn workflow ở chỗ nào?',
     'Use case nào trong dự án của bạn đáng làm agent? Vì sao?',
-    'Kiểm tra user thuộc tenant nào — SDK hay application?',
+    'SDK có cơ chế dừng chờ duyệt — vậy ai quyết hành động nào cần duyệt?',
     'Agent làm sai mà không báo lỗi — phát hiện bằng cách nào?',
   ], `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Bài tự thực hành sau buổi học".]\nBài tự thực hành theo đề cương. Người học làm sau buổi, mang tới đầu Session 6 để thảo luận 3-5 phút.
 Câu hỏi thử thách trả lời nhanh trong Q&A:
 1. Agent tốn hơn workflow ở đâu? → số lượt gọi model không biết trước, mỗi lượt gửi lại cả hội thoại; chi phí và độ trễ dao động (bảng So sánh, slide 7).
 2. Use case đáng làm agent → phải chỉ ra được ít nhất 1 trong 3 dấu hiệu (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc) VÀ không viết trước được các nhánh. Nếu chỉ "cho xịn" → workflow.
-3. Ai kiểm tra tenant? → application, lấy từ session đăng nhập (Session 7).
+3. Ai quyết hành động nào cần duyệt? → application (slide 22). SDK chỉ cung cấp cơ chế dừng chờ duyệt (needs_approval); tool nào phải duyệt, ai được duyệt là business rule của mình (Session 7).
 4. Agent sai thường không ném lỗi (vd quên làm 1 bước, trả lời nghe hợp lý) → không có alert. Phát hiện bằng: application kiểm tra kết quả thật trong hệ thống đích (Session 6: run kết thúc ≠ task xong) và eval chạy lặp trước khi release (Session 9).`);
   return { noClosing: true }; // S5 không có slide Q&A riêng (user 29/10)
 };
