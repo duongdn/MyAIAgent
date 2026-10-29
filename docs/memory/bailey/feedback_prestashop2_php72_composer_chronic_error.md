@@ -18,3 +18,5 @@ New Relic Console LIVE `TransactionError` shows `RuntimeException`: "Composer de
 - Not production-impacting (live Console `Controller/*` transactions show no errors, normal DB times) — this is isolated to a staging/secondary path.
 
 [[reference_bailey_monitor_skill_file]]
+
+**RESOLVED 2026-10-30:** 0 occurrences in 24h after the Console migration (old LIVE stopped 10-28). Stop tracking unless it reappears.
