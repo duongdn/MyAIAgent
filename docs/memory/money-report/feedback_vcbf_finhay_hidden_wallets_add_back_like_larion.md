@@ -18,3 +18,5 @@ From 2026-10-02 ~10:40 the user closed the Cho vay ledgers (Thu nợ) of VCBF, F
 **User confirmed 2026-10-02 10:56:**
 - VCBF + Finhay stay hidden **long-term** (same as Larion) → always add the two fixed values silently; never ask "bật lại chưa" or list it as an open question/risk. Only change a number if the user gives a new one.
 - Chị Ky ledger (Đi vay 30,000,000 + Trả nợ 130,000,000 on 2026-10-02, net −100M) is **correct as recorded** ("đúng rồi, cứ để vậy") → do not flag it as a mismatch or suggest fixing the Đi vay row again.
+
+**Update 2026-10-29 — VCBS + FPTS cũng ẩn (user tự ẩn cho đỡ rối):** từ 10-29 VCBS + FPTS inActive → API 0, totaldashboard thiếu ~1.22B. User: "tự suy luận" → KHÔNG hỏi lại. Quy tắc chung: mọi ví đầu tư bị ẩn (VCBS/FPTS/VCBF/Finhay/Larion) = ẩn chủ ý, cộng tay âm thầm. Giá trị VCBS/FPTS = cost_basis_remaining + currentAmount trước khi ẩn, + mọi chuyển khoản vào/ra ví sau đó (từ `apiData.transfers`/ledgerRecords); nếu broker script (FPTS/VCBS) chạy được thì dùng giá live. Mốc 10-28: VCBS 607,855,620 · FPTS 616,701,151. Không liệt kê là rủi ro/câu hỏi mở.
