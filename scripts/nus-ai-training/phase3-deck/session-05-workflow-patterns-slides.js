@@ -85,6 +85,7 @@ Anthropic: "a central LLM dynamically breaks down tasks, delegates them to worke
 Khác parallelization: "the key difference from parallelization is its flexibility—subtasks aren't pre-defined, but determined by the orchestrator based on the specific input." → Ở mẫu này LLM đã bắt đầu quyết định việc gì cần làm: gần agent hơn các mẫu trước.
 Dùng khi: "complex tasks where you can't predict the subtasks needed (in coding, for example, the number of files that need to be changed and the nature of the change in each file likely depend on the task)".
 Ví dụ của Anthropic: sản phẩm coding sửa nhiều file mỗi lần; tìm kiếm cần thu thập và phân tích thông tin từ nhiều nguồn.
+Vì sao vẫn là workflow: khung 3 bước điều phối → làm → tổng hợp do code cố định; LLM chỉ quyết chia việc thế nào, không tự chọn tool / hành động ra bên ngoài.
 ${SRC}`);
   io(s, 40, 140, 'Input');
   llm(s, 116, 140, 120, 'LLM điều phối');
@@ -107,6 +108,8 @@ function evaluatorOptimizer() {
 Anthropic: "one LLM call generates a response while another provides evaluation and feedback in a loop."
 Dùng khi: "we have clear evaluation criteria, and when iterative refinement provides measurable value". 2 dấu hiệu phù hợp: câu trả lời tốt lên rõ khi có người góp ý, và LLM tự đưa ra được góp ý kiểu đó.
 Ví dụ của Anthropic: dịch văn học có nhiều sắc thái mà lần dịch đầu chưa bắt được; tìm kiếm phức tạp cần nhiều vòng tìm và phân tích, LLM chấm quyết định có cần tìm tiếp không.
+Vì sao vẫn là workflow dù có vòng lặp (lớp hay hỏi): câu hỏi phân biệt vẫn là "ai chọn bước tiếp theo?" (slide 7). Ở đây code cố định 2 bước viết → chấm, thứ tự luôn như vậy; LLM chỉ quyết 1 giá trị đạt / chưa đạt — giống routing chọn 1 nhánh. Agent thì LLM tự chọn gọi tool nào, tham số gì, khi nào dừng — Anthropic: agents are "LLMs using tools based on environmental feedback in a loop".
+Câu chốt sau 5 mẫu: workflow → agent là một dải, không phải 2 ô tách rời (LangChain "What is an agent?": các mức tự chủ). Đi từ mẫu 1 tới mẫu 5, LLM quyết càng nhiều; thành agent khi LLM tự chọn hành động / tool tiếp theo.
 Có vòng lặp như agent, nhưng vòng lặp chỉ là viết ⇄ chấm, không chọn tool/hành động.
 ${SRC}`);
   io(s, 40, 140, 'Input');
