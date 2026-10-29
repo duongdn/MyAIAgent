@@ -143,7 +143,7 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   extra.threeFlowsCode(); // demo code đặt cuối: slide nói nguyên lý trước, code xem lúc demo
 
   takeaways([
-    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug'],
+    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug, an toàn hơn'],
     ['Agent', 'Quyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc'],
     ['Bắt đầu đơn giản', 'Model call → workflow → routing → agent: chỉ lên bậc khi bậc dưới không đủ'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
