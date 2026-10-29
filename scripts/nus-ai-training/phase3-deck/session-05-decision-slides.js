@@ -1,5 +1,5 @@
 // Session 5 · phần 02 "Agent hay workflow": chọn theo đặc điểm bài toán (Anthropic + OpenAI), không theo số đo
-const { C, box, mono, arrow, newSlide, question } = require('./slide-kit');
+const { C, box, mono, arrow, table, newSlide, question } = require('./slide-kit');
 
 const SRC_ANTHROPIC = 'Anthropic, "Building effective agents" (anthropic.com/engineering/building-effective-agents)';
 const SRC_OPENAI = 'OpenAI, "A practical guide to building agents", mục "When should you build an agent?"';
@@ -20,14 +20,10 @@ Nguồn từng ý:
 - Rẻ, nhanh: suy ra từ Anthropic — agent "trade latency and cost for better task performance".
 - An toàn hơn: workflow chỉ làm được những gì code đã viết — không có hành động ngoài kịch bản. Ngược lại, Anthropic cảnh báo agent: "potential for compounding errors. We recommend extensive testing in sandboxed environments, along with the appropriate guardrails."
 - Dễ debug: bài thứ cấp (Beyond the Demo): "When a workflow breaks, you can pinpoint the step".
-- 3 ví dụ dưới: ví dụ minh hoạ do trainer chọn, không lấy từ nguồn.
 Link: anthropic.com/engineering/building-effective-agents · notes.kodekloud.com (Workflows vs Agents: When to Use Each) · beyondthedemoai.substack.com/p/agentic-vs-deterministic`);
   box(s, 40, 92, 640, 46, 'Viết ra giấy được hết các bước và các nhánh?', { fill: C.INK, size: 16 });
   [['Ổn định', 'cùng input → cùng các bước'], ['Rẻ, nhanh', 'số lần gọi model cố định'], ['Dễ debug', 'lỗi nằm ở một bước cụ thể'], ['An toàn hơn', 'chỉ chạy các bước đã viết sẵn']]
     .forEach(([t, d], i) => box(s, 40 + i * 162, 156, 152, 78, `${t}\n${d}`, { fill: C.GREEN, size: 15, sub: 10.5 }));
-  mono(s, 40, 256, 640, 14, 'VÍ DỤ', { size: 9, color: C.GREY });
-  ['Phân loại email → điền form', 'Trích thông tin hoá đơn → lưu DB', 'Hỏi đáp tài liệu nội bộ']
-    .forEach((t, i) => box(s, 40 + i * 216, 274, 206, 40, t, { fill: C.CARD, size: 12, bold: false }));
 }
 
 function whenAgent() {
@@ -70,25 +66,21 @@ Link: anthropic.com/engineering/building-effective-agents`);
 }
 
 function applyDecision() {
-  const s = newSlide('Áp dụng', 'Hai câu hỏi để chọn workflow hay agent', `Gom slide 9–11 thành một quy trình để người học tự áp dụng — đi từ trên xuống, dừng ở ô đầu tiên trả lời được.
-1. Viết trước được hết các bước và nhánh? Có → workflow (slide 9).
-2. Có ít nhất 1 dấu hiệu của slide 10 (quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc)? Không → workflow (OpenAI: "a deterministic solution may suffice").
-3. Có → thử bậc thấp nhất đủ dùng trước (workflow có routing), chỉ lên agent khi vẫn không đủ (slide 11, Anthropic "only increasing complexity when needed").
-2 ví dụ dưới để làm mẫu: trích thông tin hoá đơn → câu 1 "có" → workflow. Xử lý hồ sơ bồi thường bảo hiểm (ví dụ của OpenAI) → câu 1 "không", câu 2 "có" (dữ liệu phi cấu trúc, nhiều ngoại lệ) → agent.
+  const s = newSlide('Áp dụng', 'Xếp từng use case vào đúng mức', `Không nhắc lại tiêu chí — dùng tiêu chí slide 9–11 để xếp 5 use case. Che cột cuối, cho lớp đoán trước rồi mới lật.
+- Hỏi đáp tài liệu nội bộ: tra 1 lần rồi trả lời → model call (Anthropic: "optimizing single LLM calls with retrieval and in-context examples is usually enough").
+- Trích thông tin hoá đơn → lưu DB: các bước cố định → workflow.
+- Phân loại email → chuyển đúng bộ phận: bước biết trước, chỉ có 1 chỗ chọn nhánh → workflow có routing (mẫu Routing của Anthropic).
+- Duyệt hoàn tiền theo ngữ cảnh: nhiều ngoại lệ, phán đoán theo ngữ cảnh → agent (ví dụ "refund approval" của OpenAI).
+- Xử lý hồ sơ bồi thường bảo hiểm: dữ liệu phi cấu trúc, bước phụ thuộc nội dung hồ sơ → agent (ví dụ của OpenAI).
 Sau đó áp vào các use case lớp nêu ở slide 8.`);
-  [['1', 'Viết trước được hết các bước và nhánh?', 'Có → Workflow'],
-   ['2', 'Có dấu hiệu cần agent?\nquyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc', 'Không → Workflow']].forEach(([n, q, a], i) => {
-    const y = 90 + i * 84;
-    box(s, 40, y, 36, 36, n, { fill: C.INK, shape: 'ELLIPSE', size: 14, noLine: true });
-    box(s, 88, y - 8, 360, 56, q, { fill: C.LIGHT, size: 13.5, sub: 10, align: 'START' });
-    arrow(s, 448, y + 20, 488, y + 20);
-    box(s, 490, y, 190, 40, a, { fill: C.GREEN, size: 13 });
-    arrow(s, 268, y + 48, 268, y + 70);
-  });
-  box(s, 88, 258, 360, 44, 'Có → thử routing trước, chưa đủ mới lên agent', { fill: C.ORANGE, size: 13.5 });
-  mono(s, 40, 318, 640, 14, 'VÍ DỤ', { size: 9, color: C.GREY });
-  box(s, 40, 336, 315, 34, 'Trích thông tin hoá đơn → câu 1 có → workflow', { fill: C.CARD, size: 11, bold: false });
-  box(s, 365, 336, 315, 34, 'Xử lý hồ sơ bồi thường → câu 2 có → agent', { fill: C.CARD, size: 11, bold: false });
+  table(s, 30, 86, [230, 160, 140, 130], [
+    ['Use case', 'Viết trước được các bước?', 'Dấu hiệu cần agent', 'Chọn'],
+    ['Hỏi đáp tài liệu nội bộ', 'có — 1 bước', '—', 'Model call'],
+    ['Trích thông tin hoá đơn → lưu DB', 'có', '—', 'Workflow'],
+    ['Phân loại email → chuyển bộ phận', 'có, 1 chỗ chọn nhánh', '—', 'Routing'],
+    ['Duyệt hoàn tiền theo ngữ cảnh', 'không', 'quyết định phức tạp', 'Agent'],
+    ['Xử lý hồ sơ bồi thường', 'không', 'dữ liệu phi cấu trúc', 'Agent'],
+  ], { rowH: 40, size: 12, fills: [C.WHITE, C.WHITE, C.LIGHT, C.ORANGE, C.ORANGE] });
 }
 
 function decisionSlides() {
