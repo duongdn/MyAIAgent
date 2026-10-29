@@ -73,7 +73,7 @@ Nối: "hôm nay: khi nào nên để LLM chọn bước như vòng lặp này, 
 
   extra.threeFlows();
 
-  s = newSlide('So sánh', '3 mức nhìn cạnh nhau', `Đọc theo hàng, nối với sơ đồ slide trước.
+  s = newSlide('So sánh model call · workflow · agent', 'Càng lên mức cao, model càng tự quyết nhiều hơn', `Đọc theo hàng, nối với sơ đồ slide trước.
 - Số lần gọi model: model call 1 lần; workflow cố định, đếm được trước; agent không biết trước — model gọi tool tới khi thấy đủ.
 - Ai chọn bước tiếp: điểm khác nhau cốt lõi (tiêu đề slide 6).
 - Hành động: ở workflow, code gọi tool/API theo thứ tự viết sẵn; ở agent, model chọn tool, code chạy.
