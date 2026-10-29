@@ -53,14 +53,12 @@ Link: cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building
 function startSimple() {
   const s = newSlide('Nguyên tắc', 'Bắt đầu đơn giản — chỉ lên bậc khi bậc dưới không đủ', `Anthropic: "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 4 bậc từ trái sang phải. Bậc 3 là lựa chọn ở giữa hay bị bỏ qua: workflow giữ thứ tự, chỉ một bước cho model chọn giữa vài tool có sẵn.
-Ô cam dưới: an toàn không phụ thuộc bậc nào — hành động không hoàn tác được (chuyển tiền, xoá dữ liệu, gửi ra ngoài) phải có người duyệt trước khi chạy. OpenAI nói thêm: có thể nới dần khi agent đã chạy ổn đủ lâu (Session 7).
 Quay lại các use case trên bảng lúc đầu: mỗi cái đang ở bậc mấy, có cần lên bậc không?
 Nguồn từng ý:
 - Bắt đầu đơn giản: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; "add multi-step agentic systems only when simpler solutions fall short".
 - Bậc 1: Anthropic "augmented LLM" (LLM + retrieval, tools, memory); "optimizing single LLM calls with retrieval and in-context examples is usually enough".
 - Bậc 3 = mẫu "Routing" của Anthropic: LLM phân loại input rồi chuyển sang nhánh xử lý phù hợp ("distinct categories that are better handled separately").
-- Ô cam: OpenAI "Plan for human intervention" — "Actions that are sensitive, irreversible, or have high stakes should trigger human oversight until confidence in the agent's reliability grows" (vd huỷ đơn, hoàn tiền lớn, thanh toán).
-Link: anthropic.com/engineering/building-effective-agents · OpenAI guide (PDF, mục Guardrails).`);
+Link: anthropic.com/engineering/building-effective-agents`);
   [['1', 'Model call', '1 lần gọi + dữ liệu'], ['2', 'Workflow', 'code giữ thứ tự'], ['3', 'Workflow có routing', 'model chọn nhánh'], ['4', 'Agent', 'model chọn mọi bước']]
     .forEach(([n, t, d], i) => {
       const x = 40 + i * 162; const y = 196 - i * 32;
@@ -68,7 +66,6 @@ Link: anthropic.com/engineering/building-effective-agents · OpenAI guide (PDF, 
       mono(s, x, y - 18, 140, 14, `BẬC ${n}`, { size: 9, color: C.GREY });
       if (i) arrow(s, x - 22, y + 50, x - 2, y + 30);
     });
-  box(s, 40, 300, 640, 44, 'Hành động không hoàn tác được (chuyển tiền, xoá dữ liệu) → người duyệt trước khi chạy', { fill: C.ORANGE, size: 13.5 });
 }
 
 function decisionSlides() {

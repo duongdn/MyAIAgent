@@ -143,15 +143,15 @@ Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay applicat
   extra.threeFlowsCode(); // demo code đặt cuối: slide nói nguyên lý trước, code xem lúc demo
 
   takeaways([
-    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ test'],
+    ['Workflow', 'Viết trước được các bước → ổn định, rẻ, dễ debug'],
     ['Agent', 'Quyết định phức tạp · rule khó bảo trì · dữ liệu phi cấu trúc'],
-    ['Bắt đầu đơn giản', 'Chỉ lên bậc khi bậc dưới không đủ · không đảo ngược → người duyệt'],
+    ['Bắt đầu đơn giản', 'Model call → workflow → routing → agent: chỉ lên bậc khi bậc dưới không đủ'],
     ['SDK', 'Agent · function_tool · Runner.run · trace — không cần học thuộc API'],
     ['Ranh giới', 'SDK chạy loop; dữ liệu, quyền, approval, state, business rule là của application'],
   ], `Tóm tắt 2 phút trước Q&A, đọc từng thẻ:
 - Workflow: viết ra giấy được hết các bước và nhánh → workflow (Anthropic: predictability, consistency).
 - Agent: 3 dấu hiệu của OpenAI — quyết định phức tạp, rule khó bảo trì, dữ liệu phi cấu trúc. Không đạt rõ → workflow là đủ.
-- Bắt đầu đơn giản: model call → workflow → workflow + 1 bước model chọn → agent. Hành động không đảo ngược luôn cần người duyệt.
+- Bắt đầu đơn giản: model call → workflow → workflow có routing → agent; chỉ lên bậc khi bậc dưới không đủ.
 - SDK: 4 khái niệm, biết chỗ trong code là đủ.
 - Ranh giới: SDK cung cấp cơ chế, application ra quyết định (Session 7 đi sâu).
 Đối chiếu lại các use case lớp chọn lúc đầu phần 02.`);
