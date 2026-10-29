@@ -111,6 +111,7 @@ Nối từ slide 5: agent = LLM + phần "code app" bao quanh (gọi LLM, chạy
 - Cột phải: dùng SDK thì chỉ khai báo agent (LLM + hướng dẫn + tool), SDK chạy vòng lặp có sẵn và tự ghi trace.
 - Ô dưới: SDK không quyết thay mình — tool nào được mở, quyền, dữ liệu, duyệt vẫn là việc của application (slide 22–23).
 Nguyên văn docs: "The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions"; có "a built-in loop that continues until the task is complete"; là "a production-ready upgrade of our previous experimentation for agents, Swarm"; dùng được cả "non-OpenAI providers" (demo của mình chạy model qua gateway công ty).
+Nếu lớp hỏi: SDK mã nguồn mở, có bản Python (demo dùng) và TypeScript; không bắt buộc dùng model của OpenAI — demo chạy model qua LLM gateway công ty.
 Cùng loại (chỉ để định vị, không đi sâu): LangGraph, Google ADK, Claude Agent SDK — đều đóng gói phần vòng lặp agent.
 Link: openai.github.io/openai-agents-python`);
   box(s, 40, 90, 310, 180, '', { fill: C.CARD, valign: 'TOP' });
@@ -122,7 +123,6 @@ Link: openai.github.io/openai-agents-python`);
   mono(s, 404, 98, 260, 14, 'DÙNG SDK', { size: 9, color: C.GREY });
   label(s, 404, 118, 266, 40, 'Khai báo agent:\nLLM + hướng dẫn + tool', { size: 12.5, align: 'START', valign: 'TOP' });
   label(s, 404, 168, 266, 40, 'SDK chạy sẵn vòng lặp 1–5\nvà tự ghi trace (6)', { size: 12.5, align: 'START', valign: 'TOP' });
-  label(s, 404, 218, 266, 40, 'Python · mã nguồn mở\ndùng được model không phải OpenAI', { size: 11, bold: false, color: C.GREY, align: 'START', valign: 'TOP' });
   box(s, 40, 290, 640, 44, 'Vẫn là việc của mình: tool nào được dùng, quyền, dữ liệu, duyệt', { fill: C.INK, size: 13.5 });
 
   s = newSlide('OpenAI Agents SDK', 'SDK đặt tên cho đúng các phần của agent loop', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]
