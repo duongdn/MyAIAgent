@@ -1,0 +1,271 @@
+[
+ {
+  "n": 1,
+  "type": "fb-memory",
+  "topic": "Kỷ niệm 10 năm: hội bạn quây quần bàn tiệc",
+  "text": "10 năm trước cả đám còn ngồi chung 1 bàn tiệc 🍻\nGiờ hẹn được đủ người chắc phải đặt lịch trước... 10 năm nữa 😂",
+  "feeling": "hạnh phúc",
+  "source": {
+   "title": "Kỷ niệm 10 năm trước — bài của Đoàn Nguyên Dương cùng Nam Đặng và 39 người khác",
+   "publisher": "Facebook Kỷ niệm",
+   "url": "",
+   "summary": "Ảnh hơn chục bạn bè ngồi quanh bàn tròn nhà hàng (lẩu, bia), cười, giơ tay chữ V."
+  },
+  "sources": [
+   "fb-memory:Kỷ niệm 10 năm: hội bạn quây quần bàn tiệc"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/01.png",
+  "memoryIndex": 0
+ },
+ {
+  "n": 2,
+  "type": "fb-memory",
+  "topic": "Kỷ niệm 10 năm: trai Cam Ranh lên sân khấu hát",
+  "text": "10 năm trước còn dám cầm mic lên sân khấu 🎤\nGiờ chỉ dám hát... trong nhà tắm 🚿😅",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "Kỷ niệm 29/10/2016 — Đoàn Nguyên Dương cùng Vương Trần",
+   "publisher": "Facebook Kỷ niệm",
+   "url": "",
+   "summary": "Video user đứng hát trên sân khấu tiệc (đèn LED tím xanh), caption gốc 'Trai Cam Ranh mấy bác ạ. Đẹp trai còn hát hay nữa'."
+  },
+  "sources": [
+   "fb-memory:Kỷ niệm 10 năm: trai Cam Ranh lên sân khấu hát"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/02.png",
+  "memoryIndex": 1
+ },
+ {
+  "n": 3,
+  "type": "stock-humor",
+  "topic": "VN-Index đảo chiều phút chót",
+  "text": "Cả phiên đỏ lè, mình tắt app cho đỡ đau 📉\nTới cuối phiên nó quay xe xanh lét 📈\nThị trường đúng kiểu người yêu cũ: mình đi rồi mới tốt lên 🙃",
+  "feeling": "hoang mang",
+  "source": {
+   "title": "Chứng khoán 28/10: Lực cầu cuối phiên giúp VN-Index đảo chiều tăng",
+   "publisher": "Google News (news-digest 29/10)",
+   "url": "",
+   "summary": "Dòng tiền vào cuối phiên kéo chỉ số từ đỏ sang xanh, VN-Index đóng cửa ~1.766."
+  },
+  "sources": [
+   "stock-humor:VN-Index đảo chiều phút chót"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/03.png",
+  "image": "tmp/vnindex-2026-10-29.png"
+ },
+ {
+  "n": 4,
+  "type": "stock-humor",
+  "topic": "Cán bộ UBCK cũng xin nghỉ khi thị trường nóng",
+  "text": "Đọc tin thị trường nóng là có người xin nghỉ việc đi đầu tư 🔥\nMình thì ngược lại: chơi chứng khoán xong càng phải đi làm chăm hơn 💼😅",
+  "feeling": "hết tiền",
+  "source": {
+   "title": "180 cán bộ UBCK từng xin nghỉ việc khi thị trường 'nóng'",
+   "publisher": "Google News (news-digest 29/10)",
+   "url": "",
+   "summary": "Thời thị trường sôi động, cơ quan quản lý mất nhiều nhân sự xin nghỉ."
+  },
+  "sources": [
+   "stock-humor:Cán bộ UBCK cũng xin nghỉ khi thị trường nóng"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/04.png",
+  "image": "tmp/vnindex-2026-10-29.png"
+ },
+ {
+  "n": 5,
+  "type": "running",
+  "topic": "Còn 23 km là cán 1.000 km năm nay",
+  "text": "Năm nay chạy được 977 km rồi 🏃‍♂️\nCòn đúng 23 km, tầm 4–5 buổi nữa là chạm 1.000 🎯\nAi đặt cược giùm mình kịp trước tháng 11 không 😆\nhttps://www.strava.com/activities/20771703119",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "Strava: năm 2026 977,1 km",
+   "publisher": "Strava",
+   "url": "https://www.strava.com/activities/20771703119",
+   "summary": "Tổng năm 977,1 km (từ 19/5), còn 22,9 km tới 1.000 km."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20771703119"
+  ]
+ },
+ {
+  "n": 6,
+  "type": "running",
+  "topic": "Sáng nay 5 km dưới 5 phút/km",
+  "text": "Sáng nay 5 km trong 25 phút ☀️\nChạy nhanh vì... sợ trễ giờ làm 😂\nhttps://www.strava.com/activities/20771703119",
+  "feeling": "khỏe mạnh",
+  "source": {
+   "title": "Chạy bộ buổi sáng 29/10 — 5,01 km, 25 phút, pace 4:58/km",
+   "publisher": "Strava",
+   "url": "https://www.strava.com/activities/20771703119",
+   "summary": "Buổi chạy sáng nay; tuần này 21 km."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20771703119"
+  ]
+ },
+ {
+  "n": 7,
+  "type": "running",
+  "topic": "Tháng 10 gần 231 km",
+  "text": "Tháng 10 chạy gần 231 km rồi 👟\nĐôi giày mòn, ví cũng mòn theo vì ăn sau khi chạy 🍜😅\nhttps://www.strava.com/activities/20771703119",
+  "feeling": "tích cực",
+  "source": {
+   "title": "Strava: tháng 10/2026 230,9 km",
+   "publisher": "Strava",
+   "url": "https://www.strava.com/activities/20771703119",
+   "summary": "Tổng tháng 10: 230,9 km; tuần này 21 km."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20771703119"
+  ]
+ },
+ {
+  "n": 8,
+  "type": "nus-blog",
+  "topic": "App chạy nhanh mà điểm vẫn chậm (Shopify)",
+  "text": "App mình thấy chạy nhanh, khách không chê, mà bảng điểm vẫn báo \"chậm\" 🐢\nBí quyết: tìm đúng cái thứ nặng nhất trên màn hình rồi sửa nó thôi 🔍\nhttps://www.nustechnology.com/blog/how-to-measure-and-improve-lcp-in-a-shopify-embedded-app",
+  "feeling": "tích cực",
+  "source": {
+   "title": "How to Measure and Improve LCP in a Shopify Embedded App",
+   "publisher": "NUS Technology blog, 07/10/2026",
+   "url": "https://www.nustechnology.com/blog/how-to-measure-and-improve-lcp-in-a-shopify-embedded-app",
+   "summary": "App Shopify cảm giác nhanh nhưng Shopify chấm tải chậm; cách làm: đo xem phần tử to nhất trên trang là gì rồi tăng tốc đúng phần tử đó (ảnh, chặn hiển thị, truy vấn chậm)."
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/how-to-measure-and-improve-lcp-in-a-shopify-embedded-app"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/08.jpg"
+ },
+ {
+  "n": 9,
+  "type": "nus-blog",
+  "topic": "Chọn công nghệ: nghĩ tới năm thứ 3",
+  "text": "Chọn đồ nghề làm phần mềm, ai cũng so ngày đầu ai nhanh hơn ⚡\nMà cái đáng lo là 3 năm sau còn sửa nổi không 😅\nhttps://www.nustechnology.com/blog/rails-vs-node-js-for-a-saas-backend-in-2026-an-honest-engineering-decision",
+  "feeling": "thư thái",
+  "source": {
+   "title": "Rails vs Node.js for a SaaS Backend in 2026: An Honest Engineering Decision",
+   "publisher": "NUS Technology blog, 28/07/2026",
+   "url": "https://www.nustechnology.com/blog/rails-vs-node-js-for-a-saas-backend-in-2026-an-honest-engineering-decision",
+   "summary": "So Rails và Node.js không chỉ ở tốc độ làm bản đầu, mà ở năm thứ 3 khi team đông, việc nhiều, hóa đơn server tăng."
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/rails-vs-node-js-for-a-saas-backend-in-2026-an-honest-engineering-decision"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/09.jpg"
+ },
+ {
+  "n": 10,
+  "type": "nus-blog",
+  "topic": "1 cửa hàng thì dễ, 10 cửa hàng mới khó",
+  "text": "Tự động hóa đơn hàng cho 1 cửa hàng: 1 buổi chiều ☕\nCho 10 cửa hàng cùng dùng: chuyện dài tập 📦😂\nhttps://www.nustechnology.com/blog/n8n-ecommerce-automation-as-a-multi-tenant-saas-inside-our-ecom-automation-demo",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "n8n eCommerce Automation as a Multi-Tenant SaaS: Inside Our Ecom Automation Demo",
+   "publisher": "NUS Technology blog, 17/09/2026",
+   "url": "https://www.nustechnology.com/blog/n8n-ecommerce-automation-as-a-multi-tenant-saas-inside-our-ecom-automation-demo",
+   "summary": "Demo của NUS Labs tự động khâu kho–giao hàng–báo tin cho đơn Shopify, làm thành app nhiều cửa hàng cùng đăng ký dùng; có demo + mã nguồn."
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/n8n-ecommerce-automation-as-a-multi-tenant-saas-inside-our-ecom-automation-demo"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/10.jpg"
+ },
+ {
+  "n": 11,
+  "type": "nus-blog",
+  "topic": "Chép dữ liệu thì dễ, giữ cho đúng mới khó",
+  "text": "Chép danh sách khách về máy: xong trong 1 buổi chiều 😎\nGiữ cho nó đúng suốt 2 năm: đó mới là cả dự án 😅\nhttps://www.nustechnology.com/blog/how-to-keep-mindbody-data-in-sync-with-your-own-database",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "How to Keep Mindbody Data in Sync With Your Own Database",
+   "publisher": "NUS Technology blog, 25/09/2026",
+   "url": "https://www.nustechnology.com/blog/how-to-keep-mindbody-data-in-sync-with-your-own-database",
+   "summary": "Lấy dữ liệu từ phần mềm quản lý phòng tập về rất dễ; khó là giữ đúng khi lịch bị hủy, khách bị gộp, đổi giờ — lỗi không báo, cứ âm thầm lệch."
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/how-to-keep-mindbody-data-in-sync-with-your-own-database"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/11.jpg"
+ },
+ {
+  "n": 12,
+  "type": "share-article",
+  "topic": "Tesla tuyển người ở Việt Nam",
+  "text": "Tesla mới lập công ty ở Việt Nam đã đăng tuyển rồi 🚗⚡\nCV mình chắc chưa đủ, thôi để dành tiền... mua xe trước 😅\nhttps://vnexpress.net/tesla-tuyen-nhan-su-o-viet-nam-5138056.html",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "Tesla tuyển nhân sự ở Việt Nam",
+   "publisher": "VnExpress, 28/10/2026",
+   "url": "https://vnexpress.net/tesla-tuyen-nhan-su-o-viet-nam-5138056.html",
+   "summary": "Sau một tháng lập công ty, Tesla tuyển 5 vị trí quản lý/chuyên gia tại VN."
+  },
+  "sources": [
+   "https://vnexpress.net/tesla-tuyen-nhan-su-o-viet-nam-5138056.html"
+  ]
+ },
+ {
+  "n": 13,
+  "type": "share-article",
+  "topic": "Ống hút giấy có thể hại môi trường hơn nhựa",
+  "text": "Bao năm uống trà sữa bằng ống hút giấy mềm nhũn cho \"xanh\" 🧋\nGiờ đọc tin nó có khi hại hơn nhựa... cú lừa thế kỷ 🫠\nhttps://vnexpress.net/ong-hut-giay-co-the-gay-anh-huong-moi-truong-gap-nhieu-lan-nhua-5137770.html",
+  "feeling": "hoang mang",
+  "source": {
+   "title": "Ống hút giấy có thể gây ảnh hưởng môi trường gấp nhiều lần nhựa",
+   "publisher": "VnExpress, 28/10/2026",
+   "url": "https://vnexpress.net/ong-hut-giay-co-the-gay-anh-huong-moi-truong-gap-nhieu-lan-nhua-5137770.html",
+   "summary": "Nghiên cứu cho thấy sản xuất ống hút giấy có thể gây hại môi trường nhiều hơn nhựa, gồm nguy cơ ảnh hưởng tầng ozone."
+  },
+  "sources": [
+   "https://vnexpress.net/ong-hut-giay-co-the-gay-anh-huong-moi-truong-gap-nhieu-lan-nhua-5137770.html"
+  ]
+ },
+ {
+  "n": 14,
+  "type": "share-article",
+  "topic": "Chrome tự điền form bằng thông tin trong Gmail",
+  "text": "Chrome giờ tự lục Gmail để điền form giùm 📧\nTiện thì tiện, mà nó biết mình đặt bao nhiêu đơn online chắc cũng ngại 🙈\nhttps://techcrunch.com/2026/10/28/chromes-ai-powered-autofill-can-now-dig-through-your-gmail-to-fill-out-forms/",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "Chrome's AI-powered autofill can now dig through your Gmail to fill out forms",
+   "publisher": "TechCrunch, 28/10/2026",
+   "url": "https://techcrunch.com/2026/10/28/chromes-ai-powered-autofill-can-now-dig-through-your-gmail-to-fill-out-forms/",
+   "summary": "Tính năng tự điền của Chrome có thể lấy thông tin vé máy bay, đơn hàng… từ email Gmail để điền form."
+  },
+  "sources": [
+   "https://techcrunch.com/2026/10/28/chromes-ai-powered-autofill-can-now-dig-through-your-gmail-to-fill-out-forms/"
+  ],
+  "preview": "reports/2026-10-29/fb-candidates/14.jpg"
+ },
+ {
+  "n": 15,
+  "type": "trend",
+  "topic": "Đừng bao giờ khinh thường một bông hoa chưa nở",
+  "text": "Thấy mọi người khoe ảnh xưa theo trend \"đừng khinh thường bông hoa chưa nở\" 🌸\nMình lục ảnh cũ thì thấy... hoa nở rồi lại héo 🥀😂",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "Trend 'Đừng bao giờ khinh thường một bông hoa chưa nở'",
+   "publisher": "Mạng xã hội VN (bài 28/10/2026)",
+   "url": "https://thanhnien.vn/gioi-tre/the-gioi-mang.htm",
+   "summary": "Dân mạng khoe ảnh ngày xưa đặt cạnh ảnh hiện tại để chứng minh sức mạnh thời gian; nhiều người nổi tiếng tham gia."
+  },
+  "sources": [
+   "https://thanhnien.vn/gioi-tre/the-gioi-mang.htm"
+  ]
+ },
+ {
+  "n": 16,
+  "type": "trend",
+  "topic": "Trend nhảy \"Ai đưa em về\"",
+  "text": "Lướt TikTok toàn thấy nhảy \"Ai đưa em về\" 💃\nMình tập thử 5 phút, kết quả: không ai đưa về, chỉ có đau lưng 😵‍💫\nhttps://www.tiktok.com/discover/trending-now-on-tiktok-vietnam",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "Trend nhảy 'Ai đưa em về' trên TikTok VN",
+   "publisher": "TikTok Discover (đầu 10/2026)",
+   "url": "https://www.tiktok.com/discover/trending-now-on-tiktok-vietnam",
+   "summary": "Trend nhảy theo bài \"Ai đưa em về\" đang có nhiều clip hướng dẫn; độ hot chưa có báo xác nhận."
+  },
+  "sources": [
+   "https://www.tiktok.com/discover/trending-now-on-tiktok-vietnam"
+  ]
+ }
+]
