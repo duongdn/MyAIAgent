@@ -188,14 +188,14 @@ Asset allocation % by type, with ETF vs Fund split (by "người cho vay").
 
 **Data sources:**
 - Accounts + savings from API → BĐS, Vàng, Cổ phiếu, Tiết kiệm, Tiền mặt, Nợ
-- ETF/Fund/Cổ tức: use `apiData.transactions` (already fetched with full history, no need for a separate call) → filter `categoryName === "Cho vay"` and `categoryName === "Thu nợ"` → sum by wallet
+- ETF/Fund/Chứng khoán: use `apiData.transactions` (already fetched with full history, no need for a separate call) → filter `categoryName === "Cho vay"` and `categoryName === "Thu nợ"` → sum by wallet
 
 **Investment wallets and their types:**
 | Wallet | Type | Holds |
 |--------|------|-------|
 | VCBS | 📈 ETF | VN30, VN100, VN1000 index ETFs |
 | VCBF | 🏛️ Fund | VCBF managed fund |
-| FPTS | 📊 Cổ tức stocks | VEA, ADP dividend stocks + small ETF |
+| FPTS | 📊 Chứng khoán | cổ phiếu (cổ tức VEA, ADP… + cổ phiếu khác) + ETF — label "Chứng khoán", NOT "Cổ tức" (user 2026-10-30) |
 | Finhay | 🏛️ Fund | Finhay platform fund |
 
 **Net position per wallet** = `cost_basis_remaining + currentAmount` — see the verified formula in the warning section above. Do NOT use cost-basis alone (misses residual cash + accrued interest); do NOT use `currentAmount` alone (stale/near-zero most of the time).

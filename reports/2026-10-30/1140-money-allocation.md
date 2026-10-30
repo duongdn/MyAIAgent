@@ -16,7 +16,7 @@
 ## Chi tiết ETF + Fund
 - ETF (VCBS) — VN30/VN100/VN1000: 607,855,620 ₫ (ví ẩn, giá trị 10-28)
 - Fund (VCBF): 525,063,000 ₫
-- Cổ tức (FPTS) — VEA/ADP/ETF: 626,701,151 ₫ (ví ẩn, 10-28 + 10M chuyển vào 10-29)
+- Chứng khoán (FPTS) — cổ phiếu cổ tức + cổ phiếu khác: 626,701,151 ₫ (ví ẩn, 10-28 + 10M chuyển vào 10-29)
 - Fund (Finhay): 57,061,069 ₫
 - Larion cổ phần: 800,000,000 ₫
 
