@@ -23,6 +23,7 @@ Web: http://assistant.local/inbox.html (tabs: important messages, gate log).
 | `judgeModel` | gateway model (`deepseek-v4.1-flash`; others: `glm-5.3-flash`, `deepseek-flash`, `mimo-v2.5`) |
 | `maxJudgeCallsPerDay` | LLM call cap per day; over cap → only DM/@mention messages kept, no LLM |
 | `replyWaitMin` | customer ask: notify only if our side hasn't replied after N minutes |
+| `telegramDays` | ngày gửi Telegram theo giờ VN (0=CN … 6=T7); hiện `[6,0]` = chỉ T7, CN. Ngày khác chỉ inbox web + popup desktop |
 | `pollMinutes.slack/gmailApi/zalo/whatsapp/discord` | poll interval per source (Matrix, IMAP email, Slack RTM workspaces = realtime, no interval) |
 | `ourSlackNames` | Slack display names counted as "our side" (for "already answered") |
 | `muted` | prefix keys to ignore: `"<source>:<account>:<channel>"`, e.g. `"slack:Amazing Meds:"`, `"email:ken@nustechnology.com"`, `"zalo:zalo:QĐ MENU"` |

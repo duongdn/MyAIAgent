@@ -36,17 +36,21 @@ function log(tag, e, why) {
 async function notify(e, v, prefix = '') {
   const id = db.addEvent(e);
   if (!id) return;
-  if (policy.load().dryRun) return db.setStatus(id, 'dryrun'); // inbox only, no Telegram/popup
+  const p = policy.load();
+  if (p.dryRun) return db.setStatus(id, 'dryrun'); // inbox only, no Telegram/popup
   const head = `${URG[v.urgency] || ''} ${prefix}${ICON[e.source] || e.source} · ${where(e)}`;
   const body = `${head}\n${v.summary ? '📝 ' + v.summary + '\n' : ''}👤 ${e.sender || '?'}\n\n${(e.text || '').slice(0, 1200)}${e.url ? '\n\n🔗 ' + e.url : ''}`;
-  try {
+  // Telegram only on policy.telegramDays (VN weekday, 0=Sun..6=Sat) — the PC is off then; weekdays use inbox + popup.
+  const vnDay = new Date(Date.now() + 7 * 3600e3).getUTCDay();
+  if (!(p.telegramDays || [0, 1, 2, 3, 4, 5, 6]).includes(vnDay)) db.setStatus(id, 'inbox');
+  else try {
     await sendToOwner(body, [[
       { text: '👀 Đã xem', callback_data: `seen:${id}` },
       { text: '🔇 Mute kênh này', callback_data: `mute:${id}` },
     ]]);
     db.setStatus(id, 'notified');
   } catch (err) { console.error(`[intake] telegram send failed #${id}: ${err.message}`); }
-  if (policy.load().desktopPopup) {
+  if (p.desktopPopup) {
     execFile('node', [DESKTOP_NOTIFY, '--title', head, '--body', v.summary || (e.text || '').slice(0, 200),
       '--urgency', v.urgency === 'high' ? 'critical' : 'normal'],
       { env: { ...process.env, DISPLAY: process.env.DISPLAY || ':0' } }, () => {});
