@@ -72,9 +72,11 @@ class UITraceProcessor(TracingProcessor):
             if calls:  # 1 lượt LLM có thể chọn nhiều tool cùng lúc → gộp 1 bước
                 names = ", ".join(tc["function"]["name"] for tc in calls)
                 emit({**base, "title": f"LLM chọn tool: {names}", "chosen": [tc["function"]["name"] for tc in calls],
-                      "raw": [{"name": tc["function"]["name"], "arguments": tc["function"]["arguments"]} for tc in calls]})
+                      # raw = nguyên các trường API trả về ở lượt này (không thêm bớt) → ai cũng kiểm được
+                      "raw": {"content": out.get("content"), "reasoning_content": out.get("reasoning_content"),
+                              "tool_calls": [{"name": tc["function"]["name"], "arguments": tc["function"]["arguments"]} for tc in calls]}})
             else:
-                emit({**base, "title": "LLM trả lời cuối", "chosen": ["trả lời luôn"], "raw": {"content": out.get("content")}})
+                emit({**base, "title": "LLM trả lời cuối", "chosen": ["trả lời luôn"], "raw": {"content": out.get("content"), "reasoning_content": out.get("reasoning_content")}})
         elif d.type == "function":
             if not d.output:
                 emit({"type": "step", "who": "app", "title": f"App CHƯA chạy {d.name}: chờ người duyệt"})

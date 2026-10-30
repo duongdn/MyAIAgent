@@ -74,7 +74,8 @@ function step(ev) {
   let inner = `<span class="who">${ev.who === 'llm' ? 'LLM' : ev.who === 'app' ? 'APP' : 'NGƯỜI'}</span><div class="title">${esc(ev.title)}</div>`;
   if (ev.detail) inner += `<div class="detail">${esc(ev.detail)}</div>`;
   if (ev.options) inner += `<div class="opts">Các lựa chọn LLM có (✓ = LLM đã chọn): ${ev.options.map((o) => `<span class="opt ${(ev.chosen || []).includes(o) ? 'on' : ''}">${(ev.chosen || []).includes(o) ? '✓ ' : ''}${esc(o)}</span>`).join('')}</div>`;
-  if (ev.who === 'llm') inner += `<div class="why"><b>Lý do LLM tự viết</b> (LLM tự kể, không chắc là nguyên nhân thật): ${ev.why ? '“' + esc(ev.why) + '”' : '<i>lần này LLM không ghi lý do</i>'}</div>`;
+  if (ev.why) inner += `<div class="why"><b>reasoning_content</b> — đoạn LLM tự viết trước khi chọn (LLM tự kể, không chắc là nguyên nhân thật): “${esc(ev.why)}”</div>`;
+  else if (ev.who === 'llm') inner += `<div class="detail">reasoning_content: <code>null</code> — API không trả đoạn suy luận ở lượt này (xem JSON gốc)</div>`;
   if (ev.raw) inner += `<details><summary>JSON gốc LLM trả về · ${esc(ev.tokens)} · gửi ${ev.sent} message</summary><pre>${esc(JSON.stringify(ev.raw, null, 2))}</pre></details>`;
   li.innerHTML = `<span class="num">${++n}</span><div class="box">${inner}</div>`;
   $('steps').appendChild(li); li.scrollIntoView({block: 'end'});

@@ -252,7 +252,8 @@ LLM trả lời cuối (không tool call → dừng): `"**E205 = ngân hàng t�
 
 **Xem "lý do" được không?** Có 1 phần: DeepSeek trả kèm `reasoning_content` = đoạn LLM tự viết trước khi chọn (ô cam: "lý do LLM tự viết"). Lưu ý khi giảng:
 - Đây là LLM **tự kể**, không chắc là nguyên nhân thật bên trong model.
-- Có lúc rỗng (model không viết), có lúc rất ngắn ("Search KB first.").
+- Hay **không có**: gọi thẳng API (HTTP thô, không qua SDK) câu E205 lượt 1 × 4 lần (30/10) → cả 4 lần chỉ có `tool_calls`, `content` và `reasoning_content` đều `null`. Lần khác có, nhưng rất ngắn ("Search KB first."). Model tự quyết có viết hay không.
+- Trang demo hiện **đúng trường API trả về**: có thì hiện `reasoning_content`, không có thì ghi `reasoning_content: null`; mở "JSON gốc" xem nguyên `content` / `reasoning_content` / `tool_calls`.
 - Không phải model nào cũng trả: tuỳ model/nhà cung cấp; nhiều model không trả nguyên văn phần suy luận.
 
 **Cách chắc chắn hơn: đổi input, chạy lại, xem lựa chọn có đổi không.** Đo thật 30/10 (lượt 1, `deepseek-v4.1-flash`):
