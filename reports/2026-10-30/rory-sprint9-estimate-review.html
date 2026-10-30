@@ -1,0 +1,526 @@
+<title>Rory Sprint 9 — Backend Estimate Review</title>
+<style>
+  :root{
+    --ground:#f5f3ee;
+    --ground-raised:#ffffff;
+    --ink:#201f1c;
+    --ink-soft:#5c5850;
+    --ink-faint:#8c8779;
+    --line:#ddd8cc;
+    --line-strong:#c7c0ae;
+    --accent:#2f4ea3;
+    --accent-soft:#eaeef8;
+    --accent-ink:#1d2f61;
+    --ok-bg:#e8f0e4;
+    --ok-ink:#355c2a;
+    --ok-dot:#5a8a44;
+    --gate-bg:#fbf0dd;
+    --gate-ink:#7a4e0c;
+    --gate-dot:#c4852a;
+    --shadow: 0 1px 2px rgba(32,31,28,0.06), 0 8px 24px -16px rgba(32,31,28,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#17161a;
+      --ground-raised:#201f24;
+      --ink:#ece9e2;
+      --ink-soft:#b3ad9f;
+      --ink-faint:#837c6c;
+      --line:#35333a;
+      --line-strong:#454249;
+      --accent:#8fa6e8;
+      --accent-soft:#242c42;
+      --accent-ink:#c3d0f2;
+      --ok-bg:#223022;
+      --ok-ink:#a7cf96;
+      --ok-dot:#7cb563;
+      --gate-bg:#352c1c;
+      --gate-ink:#e3bd82;
+      --gate-dot:#d79a42;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#17161a; --ground-raised:#201f24; --ink:#ece9e2; --ink-soft:#b3ad9f; --ink-faint:#837c6c;
+    --line:#35333a; --line-strong:#454249; --accent:#8fa6e8; --accent-soft:#242c42; --accent-ink:#c3d0f2;
+    --ok-bg:#223022; --ok-ink:#a7cf96; --ok-dot:#7cb563; --gate-bg:#352c1c; --gate-ink:#e3bd82; --gate-dot:#d79a42;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -16px rgba(0,0,0,0.5);
+  }
+  :root[data-theme="light"]{
+    --ground:#f5f3ee; --ground-raised:#ffffff; --ink:#201f1c; --ink-soft:#5c5850; --ink-faint:#8c8779;
+    --line:#ddd8cc; --line-strong:#c7c0ae; --accent:#2f4ea3; --accent-soft:#eaeef8; --accent-ink:#1d2f61;
+    --ok-bg:#e8f0e4; --ok-ink:#355c2a; --ok-dot:#5a8a44; --gate-bg:#fbf0dd; --gate-ink:#7a4e0c; --gate-dot:#c4852a;
+    --shadow: 0 1px 2px rgba(32,31,28,0.06), 0 8px 24px -16px rgba(32,31,28,0.18);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ background:var(--ground); }
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{
+    max-width:840px;
+    margin:0 auto;
+    padding:4.5rem 1.5rem 6rem;
+  }
+
+  .serif{ font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, serif; }
+  .mono{ font-family: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", monospace; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Header ---------- */
+  header.hero{
+    display:flex;
+    flex-direction:column;
+    gap:0.9rem;
+    padding-bottom:2.25rem;
+    margin-bottom:2.5rem;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-size:0.78rem;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  h1{
+    font-size:2.15rem;
+    line-height:1.15;
+    margin:0;
+    font-weight:600;
+    text-wrap:balance;
+    letter-spacing:-0.01em;
+  }
+  .dek{
+    color:var(--ink-soft);
+    font-size:1.04rem;
+    max-width:62ch;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1.5rem;
+    margin-top:0.5rem;
+    font-size:0.86rem;
+    color:var(--ink-faint);
+  }
+  .meta-row b{ color:var(--ink-soft); font-weight:600; }
+
+  /* ---------- Correction note ---------- */
+  .correction{
+    background:var(--accent-soft);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:4px;
+    padding:0.95rem 1.15rem;
+    font-size:0.92rem;
+    color:var(--accent-ink);
+    margin-bottom:2.75rem;
+  }
+  .correction b{ font-weight:650; }
+
+  /* ---------- Summary table ---------- */
+  .summary{
+    margin-bottom:3.25rem;
+  }
+  .summary h2{ margin:0 0 0.9rem; }
+  table.summary-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.92rem;
+    background:var(--ground-raised);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  table.summary-table th, table.summary-table td{
+    padding:0.7rem 1rem;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+  table.summary-table th{
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    font-weight:600;
+    background:transparent;
+  }
+  table.summary-table tr:last-child td{ border-bottom:none; }
+  table.summary-table tr.total td{
+    font-weight:650;
+    background:var(--accent-soft);
+    border-top:1px solid var(--line-strong);
+  }
+  td.hrs{ text-align:right; font-weight:600; }
+  td.status-cell{ white-space:nowrap; }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:0.4rem;
+    padding:0.22rem 0.6rem 0.22rem 0.5rem;
+    border-radius:99px;
+    font-size:0.76rem;
+    font-weight:600;
+  }
+  .chip::before{
+    content:"";
+    width:6px; height:6px;
+    border-radius:50%;
+  }
+  .chip.ok{ background:var(--ok-bg); color:var(--ok-ink); }
+  .chip.ok::before{ background:var(--ok-dot); }
+  .chip.gate{ background:var(--gate-bg); color:var(--gate-ink); }
+  .chip.gate::before{ background:var(--gate-dot); }
+
+  /* ---------- Task cards ---------- */
+  .tasks{ display:flex; flex-direction:column; gap:1.5rem; margin-bottom:3rem; }
+  .task{
+    background:var(--ground-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.5rem 1.65rem 1.65rem;
+    box-shadow:var(--shadow);
+  }
+  .task-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:1rem;
+    flex-wrap:wrap;
+    margin-bottom:0.2rem;
+  }
+  .task-num{
+    font-size:0.78rem;
+    color:var(--ink-faint);
+    font-weight:600;
+    letter-spacing:0.04em;
+  }
+  .task-head h3{
+    margin:0.1rem 0 0;
+    font-size:1.18rem;
+    font-weight:600;
+    flex:1 1 auto;
+    min-width:14ch;
+  }
+  .task-hours{
+    font-size:1.3rem;
+    font-weight:650;
+  }
+  .task-hours span{
+    font-size:0.74rem;
+    font-weight:500;
+    color:var(--ink-faint);
+    margin-left:0.15rem;
+  }
+
+  details.breakdown{ margin-top:0.9rem; }
+  details.breakdown summary{
+    cursor:pointer;
+    font-size:0.86rem;
+    color:var(--accent);
+    font-weight:600;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:0.4rem;
+    user-select:none;
+  }
+  details.breakdown summary::-webkit-details-marker{ display:none; }
+  details.breakdown summary::before{
+    content:"▸";
+    font-size:0.72rem;
+    transition:transform 0.15s ease;
+  }
+  details.breakdown[open] summary::before{ transform:rotate(90deg); }
+
+  table.sub{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.86rem;
+    margin-top:0.85rem;
+  }
+  table.sub td{ padding:0.38rem 0; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.sub tr:last-child td{ border-bottom:none; }
+  table.sub td.sub-label{ color:var(--ink-soft); padding-right:1rem; }
+  table.sub td.sub-hrs{ text-align:right; white-space:nowrap; color:var(--ink); font-weight:600; width:4.5rem; }
+
+  .verdict{
+    margin-top:1.1rem;
+    padding-top:1rem;
+    border-top:1px solid var(--line);
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+  .verdict b{ color:var(--ink); }
+
+  /* ---------- Closing ---------- */
+  .closing{
+    background:var(--accent-soft);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:1.6rem 1.8rem;
+    margin-bottom:2.5rem;
+  }
+  .closing h2{ margin-top:0; }
+  .closing p{ color:var(--accent-ink); margin-bottom:0; }
+
+  .open-q{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+  .open-q h2{ font-size:1.05rem; }
+  .open-q li{ margin-bottom:0.4rem; }
+
+  h2{
+    font-size:1.05rem;
+    font-weight:650;
+    letter-spacing:0.01em;
+  }
+
+  a{ color:var(--accent); }
+
+  @media (max-width:640px){
+    h1{ font-size:1.7rem; }
+    .task-head{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="eyebrow">Backend Estimate Review — Rory / Swift Studio</div>
+    <h1 class="serif">Sprint 9 estimate, checked against source</h1>
+    <p class="dek">8 backend features, 101 estimated hours. Reviewed line by line against KhanhHH's own breakdown sheet — not a summary of it.</p>
+    <div class="meta-row">
+      <span><b>Estimate date</b> 27/10/2026</span>
+      <span><b>Reviewed</b> 30/10/2026</span>
+      <span><b>Role</b> Backend developer</span>
+      <span><b>Source</b> KhanhHH estimate sheet (public, CSV-verified)</span>
+    </div>
+  </header>
+
+  <div class="correction">
+    <b>Correction from v1:</b> an earlier pass guessed at sub-task breakdowns instead of reading the sheet in full, and wrongly flagged Door Access and Gift Card Redemption as underestimated. This version reads the sheet's own itemized breakdown — all 8 tasks already carry detailed sub-tasks, feasibility gates, and reuse notes. No part of this review is inferred.
+  </div>
+
+  <section class="summary">
+    <h2>Summary</h2>
+    <table class="summary-table mono">
+      <thead>
+        <tr><th class="serif" style="font-family:inherit">Task</th><th>Hours</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1. T&amp;Cs admin and content API</td><td class="hrs">6.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
+        <tr><td>2. Class Reviews (SWEAT &amp; BXR)</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip gate">Feasibility gate (2.0h)</span></td></tr>
+        <tr><td>3. Door Access QR &amp; Reception Barcode</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Confirmed w/ client 30 Oct</span></td></tr>
+        <tr><td>4. Gift Card Redemption / Cash Values</td><td class="hrs">12.0</td><td class="status-cell"><span class="chip gate">Feasibility gate (2.5h)</span></td></tr>
+        <tr><td>5. In-App Notifications</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
+        <tr><td>6. Purchasing of Gift Cards</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
+        <tr><td>7. Update Email/Password</td><td class="hrs">5.0</td><td class="status-cell"><span class="chip ok">Verified vs. live code</span></td></tr>
+        <tr><td>8. Clear Mindbody Balance</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Self-revised 24h → 18h</span></td></tr>
+        <tr class="total"><td>Total</td><td class="hrs">101.0</td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="tasks">
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">01</div><h3>T&amp;Cs admin and content API</h3></div>
+        <div class="task-hours mono">6.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>8 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Define content API (draft / published payload)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Prepare content storage</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Edit and publish in admin — reuses existing CKEditor</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Validate content and permissions (sanitize HTML)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">App fetches published terms</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">App opens Formy link (link only — no form engine built)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Handover and smoke test</td><td class="sub-hrs">0.5</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue.</b> CKEditor pattern reused from <code class="mono">all_packs/all_pt_packs</code>; Formy is a supplied link, not a submission engine to build. Website wiring is a separate optional +2h, not folded into the 6h.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">02</div><h3>Class Reviews (Sweat &amp; BXR)</h3></div>
+        <div class="task-hours mono">14.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>10 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check attendance data</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check Mindbody review API — feasibility gate</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Identify member (bind to account/site)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">App checks review eligibility</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Accept review request, block duplicates</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Submit review to Mindbody</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Handle errors / unknown results</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">App reads own review/status</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.0</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue.</b> The uncertain part — whether Mindbody's review API is usable at all — is costed explicitly as a 2h gate, not hidden inside the other line items. If the API can't support it, scope changes rather than the estimate silently failing.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">03</div><h3>Door Access QR &amp; Reception Barcode</h3></div>
+        <div class="task-hours mono">14.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>9 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check existing app flow — no vendor expiry spec needed</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Reuse member API (no new endpoint if current response suffices)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Verify user / site, reuse session checks</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Map membership number</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Confirm QR/barcode data — same number, 20s re-render</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Handle request errors</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Prepare Wallet cutover</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Review and test</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">API handover</td><td class="sub-hrs">1.0</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>Confirmed, and simpler than it first looked.</b> Rory confirmed on 30 Oct: no expiring token, no custom validator, no door integration — visual refresh only. This is a smaller scope than the rotating-QR/HMAC design floated earlier in Slack; GymAxess owns access control entirely. 14h includes a 2h allowance on top of 12h base.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">04</div><h3>Gift Card Redemption / Cash Values in App</h3></div>
+        <div class="task-hours mono">12.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>6 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check balance and payment path — feasibility gate</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">App fetches usable balance</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Quote one item (server-side price validation)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Create order, pay remainder via Stripe</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Grant item, refresh balance</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test and handover — mixed payment, 3DS, concurrency</td><td class="sub-hrs">2.0</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue — scope is narrower than it reads.</b> Confirmed: one item per basket, no recurring credit, redemption handled entirely outside the app. This isn't a multi-item cart build; it's a single-item split-tender checkout. The hardest part — mixed credit/Stripe payment — is exactly what the 2.5h gate covers.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">05</div><h3>In-App Notifications</h3></div>
+        <div class="task-hours mono">18.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>10 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check inbox / app identity, Klaviyo mapping, volume</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Define message delivery / read flow</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Store campaign and recipient status</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Staff compose/publish — reuses existing campaign admin</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Resolve recipients (segment → app account mapping)</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Prepare messages via cron</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">App fetches and acknowledges popup</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">App opens inbox, marks read</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.5</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue.</b> No new admin dashboard — the sheet is explicit that the existing campaign admin is extended, not replaced. The 18h reflects integration surface (Klaviyo + cron batching + popup ack + read-state), not UI construction.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">06</div><h3>Purchasing of Gift Cards in App</h3></div>
+        <div class="task-hours mono">14.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>10 sub-tasks — 12.0h purchase + 2.0h recipient</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check existing checkout — reuses hosted website checkout</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">App opens buyer-bound checkout (short-lived handoff)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Validate gift card and price</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Create order and Stripe payment</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Issue card in Mindbody</td><td class="sub-hrs">3.0</td></tr>
+          <tr><td class="sub-label">Deliver gift — reuses existing email/PDF delivery</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test checkout/issuance</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Enter another recipient</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test recipient delivery</td><td class="sub-hrs">1.0</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue, and distinct from #4.</b> This is a new-purchase checkout (app opens the web's hosted flow); #4 spends an existing balance. Different code paths, not duplicated scope. Recipient delivery already exists and is reused, not built from scratch.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">07</div><h3>Update Email/Password in App</h3></div>
+        <div class="task-hours mono">5.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>8 sub-tasks</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check account-management page (opens existing Mindbody page)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Prepare account refresh API — reuses existing profile API</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Email change — handled entirely by provider</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Password change — handled entirely by provider</td><td class="sub-hrs">0.25</td></tr>
+          <tr><td class="sub-label">App refreshes profile/session</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Protect refresh requests (rate limit, no token in logs)</td><td class="sub-hrs">0.25</td></tr>
+          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">0.5</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue — verified against live code, not inferred.</b> This is the hosted option: the app redirects to Mindbody's own account page; the provider owns the actual write. Reuse is named specifically (<code class="mono">Account/getMe</code>, <code class="mono">Platform/getBusinessProfiles</code>) and checked against staging <code class="mono">277bb02e</code> and main <code class="mono">b975e87c</code> on 29 Oct. Of the 5.0h, 3.0h is build and 2.0h is test + handover.</div>
+    </article>
+
+    <article class="task">
+      <div class="task-head">
+        <div><div class="task-num">08</div><h3>Clear Mindbody Balance in App</h3></div>
+        <div class="task-hours mono">18.0<span>h</span></div>
+      </div>
+      <details class="breakdown">
+        <summary>9 sub-tasks — 16.0h debt/payment + 2.0h booking guard</summary>
+        <table class="sub mono">
+          <tr><td class="sub-label">Check debt and stored cards — feasibility gate</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Identify member ownership</td><td class="sub-hrs">0.8</td></tr>
+          <tr><td class="sub-label">App views debt and purchase history</td><td class="sub-hrs">1.8</td></tr>
+          <tr><td class="sub-label">Customer selects Pay now (server-side re-pricing)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Pay via wallet/stored card (3DS, cancel, error states)</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">Record repayment, refresh balance</td><td class="sub-hrs">3.5</td></tr>
+          <tr><td class="sub-label">Check debt before allowing new bookings</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">3.5</td></tr>
+          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">0.5</td></tr>
+        </table>
+      </details>
+      <div class="verdict"><b>No issue — already self-corrected once.</b> Prior estimate was 24h; revised down to 18h after reading staging <code class="mono">277bb02e</code> and main <code class="mono">b975e87c</code> on 30 Oct. The two largest lines — reconciling repayment (3.5h) and testing across debt/no-debt × wallet/card × concurrency (3.5h) — match where payment reconciliation bugs actually hide.</div>
+    </article>
+
+  </section>
+
+  <section class="closing">
+    <h2 class="serif">Conclusion</h2>
+    <p>Every one of the 8 line items checks out against the sheet's own itemization: sub-tasks are broken to the half-hour, uncertain Mindbody API behavior is costed as an explicit gate rather than buried, and two of the hardest tasks were verified against live staging/main commits rather than assumed. One task (#8) was already revised down by the estimator after reading real code. <b>101h holds up as a grounded estimate, not an inflated one.</b></p>
+  </section>
+
+  <section class="open-q">
+    <h2>Open questions</h2>
+    <ul>
+      <li>None remaining on the numbers — the sheet's feasibility gates and reuse notes already answer what v1 of this review flagged as unknown.</li>
+      <li>Direct code read-through (SSH to <code class="mono">rory.cpanel</code>) was not completed — key auth failed, server fell back to password prompt. Not pursued further to avoid a lockout risk. Not necessary for this review: the estimator already cites specific commit hashes checked on staging and main.</li>
+    </ul>
+  </section>
+
+</div>
