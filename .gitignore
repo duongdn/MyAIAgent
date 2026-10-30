@@ -15,6 +15,7 @@ config/*.json
 !config/.monitoring-timelines.json
 !config/.weekly-report-send-flags.json
 !config/leave-plan.json
+!config/misa-manual-assets.json
 !config/finance-watchlist.json
 !config/finance-quantification.json
 

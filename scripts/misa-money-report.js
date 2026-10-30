@@ -28,6 +28,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+const { resolveManualAssets } = require('./lib/misa-manual-assets');
 
 const PROFILE_DIR = path.join(__dirname, '../tmp/misa-chrome-profile');
 const DASHBOARD_URL = 'https://moneykeeperapp.misa.vn/management/dashboard';
@@ -371,7 +372,11 @@ async function extractData(page) {
   // 4. Read the authoritative total balance directly from MISA's own API
   const trueTotalBalance = await readTrueTotalBalance(page, capturedToken);
 
-  return { dashboard, apiData, trueTotalBalance };
+  // Assets moved to MISA's mobile-only "Tài sản" section (not in totaldashboard)
+  const manualAssets = resolveManualAssets(apiData && apiData.accounts);
+  if (trueTotalBalance) trueTotalBalance.withManualAssets = trueTotalBalance.amount + manualAssets.total;
+
+  return { dashboard, apiData, trueTotalBalance, manualAssets };
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────

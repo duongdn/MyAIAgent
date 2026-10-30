@@ -1,0 +1,7 @@
+{
+  "_note": "Tài sản user đã chuyển sang mục 'Tài sản' của app MISA (mobile-only, web/API không đọc được). Cập nhật value khi định giá đổi. misaWalletName: nếu ví cùng tên còn trong /wallets/accounts thì KHÔNG cộng (tránh tính trùng, totaldashboard đã tính).",
+  "assets": [
+    { "name": "Nhà", "misaWalletName": "Nhà", "value": 2500000000, "category": "real_estate", "investable": false, "since": "2026-10-30" },
+    { "name": "long an res", "misaWalletName": "long an res", "value": 1020000000, "category": "real_estate", "investable": true, "since": "2026-10-30" }
+  ]
+}

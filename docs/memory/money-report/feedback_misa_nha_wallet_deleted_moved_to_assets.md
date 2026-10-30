@@ -1,6 +1,6 @@
 ---
 name: misa-nha-wallet-deleted-moved-to-assets
-description: Nhà 2.5B deleted from MISA wallets 2026-10-30 (now in MISA "Tài sản" section) → always add 2.5B manually to NW, never flag
+description: Nhà 2.5B deleted from MISA wallets 2026-10-30 (now in MISA "Tài sản" section) → declared in config/misa-manual-assets.json; script adds via manualAssets
 metadata:
   type: feedback
 ---
