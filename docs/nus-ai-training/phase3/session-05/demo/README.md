@@ -66,7 +66,7 @@ TRÌNH DUYỆT                 WEB SERVER (demo_ui.py)          THREAD AGENT    
 | 6 | `agent_openai_sdk.py:249` `Runner.run(...)` | **Từ đây SDK lo.** Chạy guardrail, rồi bắt đầu vòng lặp | input: agent, câu hỏi, `context=me`, `max_turns=8` |
 | 7 | trong SDK — lượt 1 | SDK gửi cho LLM: system prompt + câu hỏi + schema `search_kb`, `create_ticket` | 2 message, 557 token vào |
 | 8 | LLM trả về | Không trả lời, chỉ trả JSON "muốn gọi tool" | `search_kb {"query": "mã lỗi thanh toán E205", "tenant": null}` |
-| 9 | SDK → `agent_openai_sdk.py:117` `search_kb` → `checkpoints.py:113` | SDK parse JSON, gọi hàm Python thật. Hàm lọc quyền, tra tài liệu (**R** của RAG, `checkpoints.py:146`), gói kết quả (`:164`) | trả `"<untrusted_search_results><document id='kb-a-002'>…E205 = ngân hàng từ chối…"` |
+| 9 | SDK → `agent_openai_sdk.py:117` `search_kb` → `checkpoints.py:122` | SDK parse JSON, gọi hàm Python thật. Hàm lọc quyền, tra tài liệu (**R** của RAG, `checkpoints.py:160`), gói kết quả (`:180`) | trả `"<untrusted_search_results><document id='kb-a-002'>…E205 = ngân hàng từ chối…"` |
 | 10 | trong SDK — lượt 2 | SDK gắn tool call + kết quả vào hội thoại (**A**), gửi lại LLM | 4 message, 794 token vào |
 | 11 | LLM trả về | Lần này trả **text** (**G**), không có tool call → SDK dừng vòng lặp | `"E205 = ngân hàng từ chối (nguồn: kb-a-002)…"` |
 | 12 | `agent_openai_sdk.py:227–230` | Lấy `result.final_output`, ghi token, đánh dấu task xong, trả câu trả lời | `answer` (str) |
@@ -380,7 +380,7 @@ SDK tự sinh trace cho mỗi `Runner.run`: mỗi lượt gọi LLM, mỗi tool 
 | Vì sao lượt sau tốn token hơn? | LLM không nhớ; app gửi lại toàn bộ hội thoại + kết quả tool mỗi lượt (2 → 4 message). |
 | Ai quyết khi nào dừng? | LLM (trả lời không kèm tool call), nhưng code đặt giới hạn: `max_turns=8`, 120 giây. |
 | Không dùng SDK có được không? | Được — tự viết vòng lặp gọi LLM / đọc tool call / chạy hàm / gửi lại (slide 19 cột trái). SDK viết sẵn phần đó. |
-| Sao `search_kb` có tham số `tenant`? | Cố ý để lộ — lỗi thiết kế hay gặp; app bỏ qua giá trị LLM điền và dùng thông tin đăng nhập. Học ở Session 7. |
+| Sao `search_kb` có tham số `tenant`? | Tenant = 1 công ty khách. Cố ý thiết kế sai: LLM được điền mã công ty → user nói dối "tôi thuộc tenant-B" là LLM có thể điền theo. App bỏ qua giá trị LLM điền, dùng tenant từ đăng nhập. Học ở Session 7 (`run_demo.py --scenario 4`). |
 | Ai chặn khi LLM điền sai priority? | Code trong `checkpoints.py` (rule nghiệp vụ), không phải prompt. Học ở Session 6–7. |
 
 ## 8. File nào dùng cho Session 5

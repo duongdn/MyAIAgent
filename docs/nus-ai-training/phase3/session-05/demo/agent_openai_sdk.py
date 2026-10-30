@@ -104,7 +104,8 @@ def list_models(provider):
 
 # Gateway công ty (LiteLLM) CACHE câu trả lời: request giống hệt → trả kết quả cũ trong ~0.15s thay vì ~8s.
 # Demo/eval tắt cache để mỗi lần chạy là model thật (DEMO_CACHE=1 để bật lại).
-# Bài học vận hành: cache rất lợi về latency/cost, nhưng cache key phải gồm tenant/quyền (OWASP LLM08).
+# Bài học vận hành: cache rất lợi về latency/cost, nhưng cache key phải gồm tenant/quyền — nếu không,
+# công ty B có thể nhận câu trả lời đã cache của công ty A (OWASP LLM08).
 MODEL_SETTINGS = ModelSettings(extra_body=None if os.environ.get("DEMO_CACHE") == "1" else {"cache": {"no-cache": True}})
 
 
