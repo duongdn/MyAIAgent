@@ -101,9 +101,9 @@ async function main() {
   const host = IS_SERVER ? 'mpfc' : os.hostname();
   const { grants, otherRun } = remote('claim', { host, alertIds: alerts.map(a => a.id), channels: Object.keys(senders) });
   // The server monitor itself silently dying is also a problem: the PC flags it
-  if (!IS_SERVER && (!otherRun.mpfc || Date.now() - otherRun.mpfc > 3600000)) {
-    console.log('WARN: mpfc-side monitor has not run for 1h+');
-    await senders.desktop?.({ id: 'server-monitor-down', title: '[MPFC billing] server monitor not running', body: 'mpfc cron has not run the billing monitor for 1h+' }).catch(() => {});
+  if (!IS_SERVER && (!otherRun.mpfc || Date.now() - otherRun.mpfc > 4 * 3600000)) {
+    console.log('WARN: mpfc-side monitor has not run for 4h+');
+    await senders.desktop?.({ id: 'server-monitor-down', title: '[MPFC billing] server monitor not running', body: 'mpfc cron has not run the billing monitor for 4h+' }).catch(() => {});
   }
   const failed = {};
   for (const a of alerts) for (const ch of grants[a.id] || []) {

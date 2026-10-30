@@ -12,6 +12,7 @@ const slack = require('./listeners/slack-listener');
 const discord = require('./listeners/discord-poll-listener');
 const gmailApi = require('./listeners/gmail-api-poll-listener');
 const chatApp = require('./listeners/chat-app-poll-listener');
+const mpfcBilling = require('./jobs/mpfc-billing-monitor-job');
 
 process.on('unhandledRejection', e => console.error('[daemon] unhandled', e?.message || e));
 console.log(`[daemon] start ${new Date().toISOString()}`);
@@ -23,3 +24,4 @@ discord.run();
 gmailApi.run();
 chatApp.run('whatsapp');
 chatApp.run('zalo');
+mpfcBilling.run();
