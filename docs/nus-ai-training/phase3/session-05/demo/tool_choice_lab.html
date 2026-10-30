@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model chọn tool</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  /* Cùng bảng màu với trang demo: cam = LLM, tối = app */
+  :root { --ink:#141A2E; --paper:#F5F4F0; --card:#FBFAF7; --line:#DEDBD3; --grey:#6B6F7A; --blue:#2456C8; --orange:#F0A050; --light:#E3E9F6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.45 "IBM Plex Sans", sans-serif; }
+  header { padding:14px 28px; background:var(--ink); color:#fff; display:flex; gap:16px; align-items:baseline; }
+  header b { font-size:20px; } header span { color:#A9B0C2; font-size:14px; } header a { color:#A9B0C2; margin-left:auto; font-size:14px; }
+  main { display:grid; grid-template-columns: 1fr 1.15fr; gap:24px; padding:24px 28px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+  h2 { margin:0 0 12px; font:600 13px "IBM Plex Mono", monospace; color:var(--blue); letter-spacing:.06em; text-transform:uppercase; }
+  label { display:block; font-weight:600; margin:14px 0 6px; } .hint { font-weight:400; color:var(--grey); font-size:13px; }
+  input, textarea, select { width:100%; padding:10px; font:14px "IBM Plex Mono"; border:1px solid var(--line); border-radius:10px; background:#fff; }
+  textarea { min-height:90px; } #tools { min-height:260px; }
+  button { font:600 15px "IBM Plex Sans"; padding:12px 18px; border-radius:10px; border:0; cursor:pointer; background:var(--ink); color:#fff; margin-top:14px; }
+  button:disabled { opacity:.4; cursor:default; }
+  pre { background:var(--ink); color:#E8EAF0; padding:12px; border-radius:10px; font:12px "IBM Plex Mono"; white-space:pre-wrap; word-break:break-word; margin:0; }
+  .flow { font-size:14px; color:var(--grey); margin-bottom:12px; }
+  .run { background:var(--orange); border-radius:10px; padding:10px 14px; margin-top:10px; }
+  .run b { font-size:16px; } .run .f { font:12px "IBM Plex Mono"; margin-top:4px; word-break:break-word; }
+  .summary { font-size:18px; font-weight:600; margin:6px 0 12px; }
+  .err { color:#B42318; }
+</style>
+</head>
+<body>
+<header><b>Thí nghiệm: model chọn tool thế nào</b><span>gọi thẳng Chat Completions API · model thật · không chạy tool nào</span><a href="/">← trang demo agent</a></header>
+<main>
+  <section>
+    <h2>1 · Request app gửi cho model</h2>
+    <div class="flow">Model chỉ nhận đúng 3 thứ dưới đây. Sửa thử rồi bấm chạy.</div>
+    <label>Thí nghiệm có sẵn <span class="hint">(chọn để điền danh sách tool)</span></label>
+    <select id="preset"></select>
+    <label>System prompt <span class="hint">(mặc định không nhắc tên tool nào)</span></label>
+    <textarea id="system"></textarea>
+    <label>Câu hỏi của user</label>
+    <input id="question">
+    <label>Danh sách tool <span class="hint">(JSON — tên, mô tả, tham số; sửa trực tiếp được)</span></label>
+    <textarea id="tools"></textarea>
+    <button id="go">Gửi cho model 3 lần</button>
+  </section>
+  <section>
+    <h2>2 · Model trả về</h2>
+    <div id="out" class="flow">Chưa chạy.</div>
+    <h2 style="margin-top:20px">Nguyên body JSON đã gửi</h2>
+    <pre id="req">—</pre>
+  </section>
+</main>
+<script>
+const PRESETS = __PRESETS__, DEF = __DEFAULTS__;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c]));
+$('system').value = DEF.system; $('question').value = DEF.question;
+for (const k of Object.keys(PRESETS)) $('preset').add(new Option(k, k));
+const fill = () => { $('tools').value = JSON.stringify(PRESETS[$('preset').value], null, 2); };
+$('preset').onchange = fill; $('preset').value = Object.keys(PRESETS)[1]; fill();
+
+$('go').onclick = async () => {
+  let tools;
+  try { tools = JSON.parse($('tools').value || '[]'); } catch (e) { $('out').innerHTML = `<span class="err">JSON tool sai: ${esc(e.message)}</span>`; return; }
+  $('go').disabled = true; $('out').textContent = 'Đang gửi 3 request song song…';
+  try {
+    const res = await fetch('/lab', {method: 'POST', body: JSON.stringify({question: $('question').value, system: $('system').value, tools})});
+    const d = await res.json();
+    if (d.error) throw new Error(d.error);
+    $('req').textContent = JSON.stringify(d.request, null, 2);
+    const count = {}; d.results.forEach((r) => count[r.choice] = (count[r.choice] || 0) + 1);
+    let html = `<div class="summary">${Object.entries(count).map(([k, v]) => `${v}/${d.results.length} ${esc(k)}`).join(' · ')}</div>`;
+    d.results.forEach((r, i) => {
+      html += `<div class="run"><b>Lần ${i + 1}: ${esc(r.choice)}</b>`;
+      html += `<div class="f">tool_calls: ${r.tool_calls.length ? esc(JSON.stringify(r.tool_calls)) : 'null'}</div>`;
+      html += `<div class="f">content: ${r.content ? esc(JSON.stringify(r.content)) : 'null'}</div>`;
+      html += `<div class="f">reasoning_content: ${r.reasoning_content ? esc(JSON.stringify(r.reasoning_content)) : 'null'}</div></div>`;
+    });
+    $('out').innerHTML = html;
+  } catch (e) { $('out').innerHTML = `<span class="err">Lỗi: ${esc(e.message)}</span>`; }
+  $('go').disabled = false;
+};
+</script>
+</body>
+</html>

@@ -21,8 +21,10 @@ from agents import add_trace_processor
 from agents.tracing import TracingProcessor
 
 import agent_openai_sdk as sdk
+import tool_choice_lab as lab
 
 PAGE = Path(__file__).with_name("demo_ui.html")
+LAB_PAGE = Path(__file__).with_name("tool_choice_lab.html")  # trang /lab: thí nghiệm model chọn tool
 SAMPLES = {  # 2 yêu cầu của "Ví dụ trong buổi" (đề cương Session 5)
     "rag": "Mã lỗi thanh toán E205 nghĩa là gì?",
     "ticket": "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.",
@@ -149,6 +151,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """GET /           → trả trang demo_ui.html
+        GET /lab         → trang thí nghiệm "model chọn tool thế nào" (tool_choice_lab.html)
         GET /events?run= → giữ kết nối (Server-Sent Events), lấy event trong hàng đợi nào gửi nấy tới khi "end"
         Output mỗi event: dòng `data: {"type": "step", …}`"""
         if self.path == "/":
@@ -157,6 +160,13 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(body)
+        elif self.path == "/lab":
+            body = (LAB_PAGE.read_text().replace("__PRESETS__", json.dumps(lab.PRESETS, ensure_ascii=False))
+                    .replace("__DEFAULTS__", json.dumps({"system": lab.SYSTEM, "question": lab.QUESTION}, ensure_ascii=False)))
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(body.encode())
         elif self.path.startswith("/events?run="):
             run = RUNS.get(self.path.split("=", 1)[1])
             if not run:
@@ -176,6 +186,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         """POST /run     body {"question": "…"}       → mở thread run_in_thread, trả ngay {"run": "a1b2c3d4"}
+        POST /lab     body {"question", "system", "tools"} → {"request": body gửi model, "results": [3 response]}
         POST /approve body {"run": "…", "ok": true} → bỏ True/False vào hàng đợi approval (ask_human_ui đang chờ)"""
         data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or "{}")
         if self.path == "/run":
@@ -186,6 +197,13 @@ class Handler(BaseHTTPRequestHandler):
             RUNS[run_id] = {"events": queue.Queue(), "approval": queue.Queue()}
             threading.Thread(target=run_in_thread, args=(RUNS[run_id], question), daemon=True).start()
             self._json(200, {"run": run_id})
+        elif self.path == "/lab":  # gửi thẳng 1 request cho model 3 lần, trả request + 3 response
+            try:
+                out = asyncio.run(lab.run(data.get("question") or lab.QUESTION, data.get("system") or "",
+                                          data.get("tools") or [], runs=3))
+                self._json(200, out)
+            except Exception as e:  # tool JSON sai định dạng API, lỗi gateway… → hiện trên trang
+                self._json(200, {"error": f"{type(e).__name__}: {e}"[:400]})
         elif self.path == "/approve":
             run = RUNS.get(data.get("run"))
             if not run:

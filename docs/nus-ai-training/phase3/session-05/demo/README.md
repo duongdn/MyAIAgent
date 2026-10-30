@@ -28,6 +28,7 @@ python3 demo_ui.py                       # mở http://localhost:8000
 | `trace_local.py` | Trace processor: ghi `.traces/`, in từng bước ra terminal |
 | `demo_ui.py` + `demo_ui.html` | Trang demo: ô hỏi, cột trace, nút Duyệt/Từ chối |
 | `run_demo.py` | Bản dòng lệnh |
+| `tool_choice_lab.py` + `tool_choice_lab.html` | **Thí nghiệm "model chọn tool thế nào"** — trang `http://localhost:8000/lab`: sửa tool/prompt/câu hỏi, gửi thẳng Chat Completions API 3 lần, xem nguyên request + response (mục 7) |
 | `compare_orchestration_levels.py` | Tuỳ chọn: cùng 1 yêu cầu chạy ở 3 mức model call / workflow / agent (slide 6) |
 
 ## 2. Luồng chạy: từ lúc gõ câu hỏi đến lúc có câu trả lời
@@ -255,6 +256,11 @@ Thí nghiệm thật 30/10 (`deepseek-v4.1-flash`, câu "Mã lỗi thanh toán E
 | `xyz(query)` — không mô tả | 3/3 vẫn gọi → chỉ tham số `query` cũng đủ gợi ý |
 | `dat_pizza(so_luong, dia_chi)` — "Đặt pizza" | 3/3 **trả lời luôn** — không tool nào hợp |
 | `dat_pizza` + `search_kb` | 3/3 gọi đúng `search_kb` |
+
+**Demo live:** trang **`http://localhost:8000/lab`** (link góc phải trang demo) hoặc `python3 tool_choice_lab.py` (chạy cả 7 dòng trên).
+- Trái: đúng request app gửi model — system prompt, câu hỏi, danh sách tool (JSON, sửa trực tiếp). Ô chọn "Thí nghiệm có sẵn" điền sẵn 7 cấu hình.
+- Bấm "Gửi cho model 3 lần" → phải: kết quả 3 lần (`tool_calls` / `content` / `reasoning_content` đúng như API trả) + **nguyên body JSON đã gửi**.
+- Gọi thẳng API như Session 2 (client `openai`, không qua Agents SDK, không chạy tool) → thấy rõ: LLM chỉ nhận 1 đoạn JSON và trả về 1 đoạn JSON; "gọi tool" chỉ là LLM **viết ra** tên tool + tham số.
 
 → Câu nói khi dạy: *"Model không biết code của tool. Nó chỉ đọc tên + mô tả + tham số app gửi kèm, rồi chọn tool khớp nhất với câu hỏi — do được huấn luyện như vậy. Vì thế đặt tên, viết mô tả tool cẩn thận là việc của mình."* (Viết mô tả tool tốt: Session 6.)
 

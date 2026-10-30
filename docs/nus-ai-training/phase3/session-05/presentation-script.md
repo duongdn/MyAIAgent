@@ -87,6 +87,11 @@ Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
 - Chỉ RAG trên trace: ô "App chạy search_kb" = **R** (tra tài liệu) · kết quả tool gửi lại LLM = **A** (đưa vào ngữ cảnh) · "LLM trả lời cuối" có nguồn kb-002 = **G**. Code: `find_docs()` trong `agent_openai_sdk.py`. RAG thật dùng vector search (Session 3–4); demo tra bằng từ khoá cho gọn.
 
+**Bước 1b — Model chọn tool thế nào (~2', trang `/lab`)**: bấm link "Thí nghiệm: model chọn tool thế nào →" góc phải.
+- Chọn lần lượt: "1. Không có tool nào" (model tự trả lời bằng trí nhớ, không nguồn) → "2. search_kb + mô tả đúng" (gọi search_kb) → "6. Chỉ có dat_pizza" (trả lời luôn) → "4. Tên search_kb nhưng mô tả 'Đặt pizza'" (vẫn gọi — chỉ nhìn tên + tham số).
+- Chỉ vào "Nguyên body JSON đã gửi": "Model chỉ nhận đúng đoạn này. Nó không biết code của tool; nó chọn bằng cách so câu hỏi với tên + mô tả + tham số." Rồi chỉ `tool_calls`: "gọi tool = LLM viết ra tên + tham số; app mới là bên chạy."
+- Hết giờ thì bỏ bước này. Bảng kết quả đo: `demo/README.md` mục 7.
+
 **Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Nhiều bước + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
 - Kết quả 30/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
 - Chỉ vào cột trace (đây là "trace ở mức định vị", slide 20):
