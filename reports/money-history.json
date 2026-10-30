@@ -915,6 +915,22 @@
       },
       "method": "dashboard_verified",
       "note": "NW +66.07M vs 10-29: vcb +~67M khong co giao dich nguon (~luong 66.9M chua ghi); 15M 25/10 doi loai Di vay chi Ky -> Thuong (no chi Ky con 5.05M); DCA 10M vao FPTS (an, cong tay 626.7M); rut 20M tikcop ko ki han, mo so tikcop 12m 10M; chi ~1.5M. NW = totaldashboard 5,373,694,293 + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069 + FPTS 626,701,151 + VCBS 607,855,620. T10 MTD Thu 138.5M/Chi 51.2M/Net +87.3M."
+    },
+    {
+      "date": "2026-10-30",
+      "label": "30/10 14h",
+      "net_worth": 7983852219,
+      "gross_assets": 8067416440,
+      "liabilities": 8022577,
+      "categories": {
+        "real_estate": 3520000000,
+        "gold": 707000000,
+        "investment": 2616680840,
+        "savings": 1126020358,
+        "liquid": 97715242
+      },
+      "method": "dashboard_verified",
+      "note": "Lan chay 2 ngay 30/10. NW -6.52M vs 11:40: vang 713.5M->707M, Paypal FX -23K. Vi Nha 2.5B bien mat khoi MISA (totaldashboard 5,373.7M->2,867.2M) -> cong tay Nha 2.5B. long an res + vang inActive nhung van duoc totaldashboard tinh. NW = totaldashboard 2,867,171,379 + Nha 2.5B + Larion 800M + VCBF 525,063,000 + Finhay 57,061,069 + FPTS 626,701,151 + VCBS 607,855,620."
     }
   ]
 }
