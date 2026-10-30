@@ -23,7 +23,7 @@ python3 demo_ui.py                       # mở http://localhost:8000
 
 | File | Vai trò |
 |---|---|
-| `agent_openai_sdk.py` | **Agent** — file walkthrough: model, 2 tool, agent, run (166 dòng) |
+| `agent_openai_sdk.py` | **Agent** — file walkthrough: model, 2 tool, agent, run (152 dòng) |
 | `sample_data.py` | Knowledge base: 3 tài liệu |
 | `trace_local.py` | Trace processor: ghi `.traces/`, in từng bước ra terminal |
 | `demo_ui.py` + `demo_ui.html` | Trang demo: ô hỏi, cột trace, nút Duyệt/Từ chối |
@@ -43,7 +43,6 @@ TRÌNH DUYỆT                 WEB SERVER (demo_ui.py)          THREAD AGENT    
 ② EventSource(/events) ───► do_GET /events: đứng chờ           run_agent(model, question, ask_human_ui)
                              hàng đợi, có event là đẩy lên       ├ build_agent(model) → agent
                                                                 └ Runner.run(agent, question, max_turns=8)   ← SDK
-                                                                   ├ guardrail no_card_number: qua
                                                                    ├ LƯỢT 1: system + câu hỏi + schema 2 tool ──►
                                                                    │         ◄── tool call: search_kb {"query": "mã lỗi thanh toán E205"}
                                                                    ├ SDK chạy search_kb("mã lỗi thanh toán E205") → "[kb-001]…[kb-002]…"
@@ -58,28 +57,27 @@ TRÌNH DUYỆT                 WEB SERVER (demo_ui.py)          THREAD AGENT    
 | # | Ở đâu | Chuyện gì xảy ra | Dữ liệu |
 |---|---|---|---|
 | 1 | `demo_ui.html` hàm `ask()` | User bấm nút / gõ → JS gửi `POST /run` | `{"question": "Mã lỗi thanh toán E205 nghĩa là gì?"}` |
-| 2 | `demo_ui.py:177` `do_POST` | Tạo `run_id`, hàng đợi `events` (gửi bước lên web) + `approval` (nhận nút Duyệt), mở **thread mới** chạy agent, trả ngay `run_id` | trả `{"run": "a1b2c3d4"}` |
-| 3 | JS `new EventSource(...)` → `demo_ui.py:160` | Trình duyệt mở kết nối Server-Sent Events; server có event nào đẩy lên ngay | mỗi event 1 dòng `data: {...}` |
-| 4 | `demo_ui.py:112` `run_in_thread` | Tạo model, **thêm** `UITraceProcessor` (`:125`), gọi `run_agent` (`:126`) | |
-| 5 | `agent_openai_sdk.py:135` `run_agent` | Dựng agent, gọi `Runner.run` (`:150`). **Từ đây SDK lo** | input: agent, câu hỏi, `max_turns=8` |
-| 6 | trong SDK — guardrail | `no_card_number` kiểm tra câu hỏi có số thẻ không | qua |
+| 2 | `demo_ui.py:173` `do_POST` | Tạo `run_id`, hàng đợi `events` (gửi bước lên web) + `approval` (nhận nút Duyệt), mở **thread mới** chạy agent, trả ngay `run_id` | trả `{"run": "a1b2c3d4"}` |
+| 3 | JS `new EventSource(...)` → `demo_ui.py:156` | Trình duyệt mở kết nối Server-Sent Events; server có event nào đẩy lên ngay | mỗi event 1 dòng `data: {...}` |
+| 4 | `demo_ui.py:108` `run_in_thread` | Tạo model, **thêm** `UITraceProcessor` (`:121`), gọi `run_agent` (`:122`) | |
+| 5 | `agent_openai_sdk.py:123` `run_agent` | Dựng agent, gọi `Runner.run` (`:138`). **Từ đây SDK lo** | input: agent, câu hỏi, `max_turns=8` |
 | 7 | trong SDK — lượt 1 | Gửi LLM: system prompt + câu hỏi + schema `search_kb`, `create_ticket` | 2 message, 542 token vào |
 | 8 | LLM trả về | Không trả lời — chỉ JSON "muốn gọi tool" | `search_kb {"query": "mã lỗi thanh toán E205"}` |
-| 9 | SDK → `agent_openai_sdk.py:80` `search_kb` | SDK parse JSON, gọi hàm Python thật → `find_docs` (`:68`) tra tài liệu | trả `"[kb-001] Xử lý lỗi thanh toán thẻ: …\n[kb-002] Danh sách mã lỗi…: … E205 = ngân hàng từ chối…"` |
+| 9 | SDK → `agent_openai_sdk.py:78` `search_kb` | SDK parse JSON, gọi hàm Python thật → `find_docs` (`:66`) tra tài liệu | trả `"[kb-001] Xử lý lỗi thanh toán thẻ: …\n[kb-002] Danh sách mã lỗi…: … E205 = ngân hàng từ chối…"` |
 | 10 | trong SDK — lượt 2 | Gắn tool call + kết quả vào hội thoại, gửi lại LLM | 4 message, 731 token vào |
 | 11 | LLM trả về | Trả **text**, không tool call → SDK dừng vòng lặp | `"**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-002)…"` |
-| 12 | `agent_openai_sdk.py:166` | Trả câu trả lời + token | `("…", {"requests": 2, "input_tokens": 1273, …})` |
-| 13 | `demo_ui.py:128` | `emit` done, rồi end | |
+| 12 | `agent_openai_sdk.py:152` | Trả câu trả lời + token | `("…", {"requests": 2, "input_tokens": 1273, …})` |
+| 13 | `demo_ui.py:124` | `emit` done, rồi end | |
 | 14 | JS `es.onmessage` | `done` → hiện câu trả lời + "2 lượt gọi LLM · ticket: không có"; `end` → đóng kết nối | |
 
-**Cột trace bên phải**: song song với bước 6–11, mỗi khi SDK xong 1 việc, SDK gọi `UITraceProcessor.on_span_end` (`demo_ui.py:60`) → đổi thành event dễ đọc → `emit()` → bước 3 đẩy lên → JS vẽ 1 ô. Vì vậy ô hiện **ngay khi** từng bước xong. Cơ chế: mục 3.
+**Cột trace bên phải**: song song với bước 7–11, mỗi khi SDK xong 1 việc, SDK gọi `UITraceProcessor.on_span_end` (`demo_ui.py:59`) → đổi thành event dễ đọc → `emit()` → bước 3 đẩy lên → JS vẽ 1 ô. Vì vậy ô hiện **ngay khi** từng bước xong. Cơ chế: mục 3.
 
 ### Nút ② (tạo ticket) khác ở đâu
 Bước 1–10 giống. Từ lượt 2:
 - LLM trả tool call `create_ticket {"title": "…E205…", "priority": "P3", "assignee": "billing-team"}`.
-- `create_ticket` khai báo `@function_tool(needs_approval=True)` (`agent_openai_sdk.py:94`) → SDK **dừng run trước khi chạy tool**, trả `RunResult` có `interruptions = [create_ticket…]`. Ô trace: "App CHƯA chạy create_ticket: chờ người duyệt".
-- `run_agent` thấy `result.interruptions` (`:151`) → gọi `ask_human_ui` (`demo_ui.py:94`) → `emit` approval → trang hiện **Duyệt / Từ chối** → thread agent **đứng chờ** hàng đợi `approval` (`:105`, tối đa 5 phút).
-- Bấm Duyệt → JS `POST /approve {"ok": true}` → `do_POST` bỏ `True` vào hàng đợi → thread chạy tiếp: `state.approve(item)` (`:155`) → `Runner.run(agent, state)` (`:159`) — SDK chạy tiếp **đúng chỗ dừng**: chạy `create_ticket` → `T-1001` → lượt 3 gọi LLM → trả lời → bước 12–14.
+- `create_ticket` khai báo `@function_tool(needs_approval=True)` (`agent_openai_sdk.py:92`) → SDK **dừng run trước khi chạy tool**, trả `RunResult` có `interruptions = [create_ticket…]`. Ô trace: "App CHƯA chạy create_ticket: chờ người duyệt".
+- `run_agent` thấy `result.interruptions` (`:139`) → gọi `ask_human_ui` (`demo_ui.py:90`) → `emit` approval → trang hiện **Duyệt / Từ chối** → thread agent **đứng chờ** hàng đợi `approval` (`:101`, tối đa 5 phút).
+- Bấm Duyệt → JS `POST /approve {"ok": true}` → `do_POST` bỏ `True` vào hàng đợi → thread chạy tiếp: `state.approve(item)` (`:143`) → `Runner.run(agent, state)` (`:147`) — SDK chạy tiếp **đúng chỗ dừng**: chạy `create_ticket` → `T-1001` → lượt 3 gọi LLM → trả lời → bước 12–14.
 - Bấm Từ chối → `state.reject(...)` → SDK báo LLM "Người duyệt đã từ chối" → LLM trả lời, không có ticket.
 
 ## 3. Trace chạy thế nào (cơ chế trong OpenAI Agents SDK)
@@ -89,7 +87,7 @@ Mình **không gọi** hàm "ghi trace" nào. Mình **đăng ký object lắng n
 | Khái niệm | Là gì | Trong demo |
 |---|---|---|
 | **Trace** | 1 lần `Runner.run` từ đầu đến cuối | "Agent workflow" |
-| **Span** | 1 bước trong trace, có giờ bắt đầu/kết thúc + dữ liệu `span.span_data` | `guardrail`, `generation` (1 lượt gọi LLM), `function` (1 lần chạy tool), `turn` (1 vòng), `agent` |
+| **Span** | 1 bước trong trace, có giờ bắt đầu/kết thúc + dữ liệu `span.span_data` | `generation` (1 lượt gọi LLM), `function` (1 lần chạy tool), `turn` (1 vòng), `agent` |
 | **TracingProcessor** | Object mình viết, 6 hàm: `on_trace_start/end`, `on_span_start/end`, `shutdown`, `force_flush` | `LocalTraceProcessor` (`trace_local.py`), `UITraceProcessor` (`demo_ui.py`) |
 
 **Ai tạo span?** Code bên trong SDK (`agents` 0.23.1): gọi LLM được bọc trong `with generation_span(...)` (`models/openai_chatcompletions.py`), chạy tool trong `with function_span(tool_name)` (`run_internal/tool_execution.py`). Hết khối `with` → span kết thúc → SDK gọi `on_span_end(span)` của **mọi processor trong danh sách** (`tracing/provider.py`).
@@ -97,8 +95,8 @@ Mình **không gọi** hàm "ghi trace" nào. Mình **đăng ký object lắng n
 **Đăng ký — 2 hàm:**
 | Hàm | Làm gì | Dùng ở |
 |---|---|---|
-| `set_trace_processors([p])` | **Thay** cả danh sách. Mặc định danh sách có processor gửi trace về dashboard OpenAI → thay để dữ liệu không ra ngoài | `make_model()` — `agent_openai_sdk.py:55` |
-| `add_trace_processor(p)` | **Thêm** vào danh sách (cái cũ vẫn chạy) | `run_in_thread()` — `demo_ui.py:125`. Phải gọi **sau** `make_model`, vì `set_…` xoá hết |
+| `set_trace_processors([p])` | **Thay** cả danh sách. Mặc định danh sách có processor gửi trace về dashboard OpenAI → thay để dữ liệu không ra ngoài | `make_model()` — `agent_openai_sdk.py:53` |
+| `add_trace_processor(p)` | **Thêm** vào danh sách (cái cũ vẫn chạy) | `run_in_thread()` — `demo_ui.py:121`. Phải gọi **sau** `make_model`, vì `set_…` xoá hết |
 
 → Mỗi span kết thúc, SDK gọi **cả 2**: `LocalTraceProcessor` ghi `.traces/<trace_id>.jsonl` (+ in terminal), `UITraceProcessor` → `emit()` → trình duyệt.
 
@@ -107,7 +105,6 @@ Mình **không gọi** hàm "ghi trace" nào. Mình **đăng ký object lắng n
 on_trace_start   trace Agent workflow
   on_span_start  agent Support agent
   on_span_start  turn                       ← vòng 1
-  on_span_end    guardrail no_card_number   → ô "Kiểm tra input"
   on_span_end    generation (tool_calls)    → ô "LLM chọn tool: search_kb"
   on_span_end    function search_kb         → ô "App chạy search_kb"
   on_span_end    turn
@@ -117,12 +114,11 @@ on_trace_start   trace Agent workflow
   on_span_end    agent Support agent
 on_trace_end     trace Agent workflow
 ```
-(lược bớt các dòng `on_span_start` của guardrail/generation/function)
+(lược bớt các dòng `on_span_start` của generation/function)
 
 **Span có dữ liệu gì:**
 - `generation`: `.input` (message đã gửi — "gửi 2/4 message"), `.output` (tool_calls hoặc text, kèm `reasoning_content` = "lý do LLM tự viết"), `.usage` (token).
 - `function`: `.name`, `.input` (JSON tham số LLM điền), `.output` (kết quả). `output` rỗng = chưa chạy vì chờ duyệt.
-- `guardrail`: `.name`, `.triggered`.
 
 Gửi trace đi nơi khác (Langfuse, Logfire…): chỉ `add_trace_processor` processor của bên đó — không sửa agent.
 
@@ -149,7 +145,7 @@ const resp = await client.responses.parse({ model, instructions: INSTRUCTIONS,
 
 Câu nói khi dạy: *"Session 2: tự gọi model 1 lần rồi tự kiểm tra. Session 5: vẫn client đó, nhưng giao vòng lặp gọi – chạy tool – gọi lại cho SDK."*
 
-**Load lên** (thứ tự trong `agent_openai_sdk.py`): import `agents` + `openai` → `make_model()` (`:42`) đọc key, tạo `AsyncOpenAI` trỏ gateway, đặt trace processor, trả `OpenAIChatCompletionsModel` (gateway chỉ hỗ trợ Chat Completions; với OpenAI thật chỉ cần `Agent(model="gpt-…")`) → Python chạy tới `@function_tool` tạo 2 object tool → `build_agent()` tạo `Agent`. Đến đây **chưa gọi model lần nào**.
+**Load lên** (thứ tự trong `agent_openai_sdk.py`): import `agents` + `openai` → `make_model()` (`:40`) đọc key, tạo `AsyncOpenAI` trỏ gateway, đặt trace processor, trả `OpenAIChatCompletionsModel` (gateway chỉ hỗ trợ Chat Completions; với OpenAI thật chỉ cần `Agent(model="gpt-…")`) → Python chạy tới `@function_tool` tạo 2 object tool → `build_agent()` tạo `Agent`. Đến đây **chưa gọi model lần nào**.
 
 **Run**: `await Runner.run(agent, question, max_turns=8)` → `RunResult`. Bản đồng bộ `Runner.run_sync`, bản stream `Runner.run_streamed`.
 
@@ -165,7 +161,7 @@ def search_kb(query: str) -> str:
         query: nội dung cần tra, vd "mã lỗi E205".
     """
 ```
-(`agent_openai_sdk.py:79–91`; `create_ticket` ở `:94–106`.) SDK đọc **tên hàm + docstring + kiểu tham số** → mô tả tool gửi LLM. Đây đúng là thứ LLM nhận:
+(`agent_openai_sdk.py:77–89`; `create_ticket` ở `:92–105`.) SDK đọc **tên hàm + docstring + kiểu tham số** → mô tả tool gửi LLM. Đây đúng là thứ LLM nhận:
 ```json
 {"name": "search_kb",
  "description": "Tìm tài liệu trong knowledge base của team support.",
@@ -177,15 +173,15 @@ LLM chỉ thấy tên, mô tả, tham số — **không thấy code** bên trong
 ### B. Agent definition
 ```python
 Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket],
-      model_settings=MODEL_SETTINGS, input_guardrails=[no_card_number])
+      model_settings=MODEL_SETTINGS)
 ```
-(`agent_openai_sdk.py:127`) `instructions` = system prompt: *"Bạn là trợ lý cho nhân viên support… Luôn dùng search_kb trước và trích id tài liệu làm nguồn. Chỉ tạo ticket khi user yêu cầu."* · `input_guardrails` = code kiểm tra câu hỏi trước khi gửi LLM (concept Guardrail, slide 19).
+(`agent_openai_sdk.py:115`) `instructions` = system prompt: *"Bạn là trợ lý cho nhân viên support… Luôn dùng search_kb trước và trích id tài liệu làm nguồn. Chỉ tạo ticket khi user yêu cầu."*
 
 ### C. Run
 ```python
 result = await asyncio.wait_for(Runner.run(agent, question, max_turns=MAX_TURNS), RUN_TIMEOUT_S)
 ```
-(`agent_openai_sdk.py:150`) `max_turns=8` = tối đa 8 lượt gọi LLM (điều kiện dừng do code đặt) · `wait_for(…, 120)` = giới hạn thời gian.
+(`agent_openai_sdk.py:138`) `max_turns=8` = tối đa 8 lượt gọi LLM (điều kiện dừng do code đặt) · `wait_for(…, 120)` = giới hạn thời gian.
 
 ### D. Bảng input / output
 
@@ -195,9 +191,8 @@ result = await asyncio.wait_for(Runner.run(agent, question, max_turns=MAX_TURNS)
 | `find_docs(query)` | `"mã lỗi thanh toán E205"` | list tài liệu `[kb-001, kb-002]` |
 | `search_kb(query)` — **LLM điền, SDK gọi** | `query="mã lỗi thanh toán E205"` | `"[kb-001] Xử lý lỗi thanh toán thẻ: …\n[kb-002] Danh sách mã lỗi…"` → gửi lại LLM |
 | `create_ticket(title, priority, assignee)` — **LLM điền, SDK gọi sau khi duyệt** | `"…E205…"`, `"P3"`, `"billing-team"` | `'{"ticket_id": "T-1001", "status": "created"}'` |
-| `no_card_number(…, user_input)` | câu hỏi | `tripwire_triggered=True` nếu có số thẻ → SDK dừng |
 | `build_agent(model)` | output `make_model` | object `Agent` — **chưa gọi model** |
-| `run_agent(model, question, ask_human)` | model, câu hỏi, hàm hỏi duyệt `ask_human(tool_name, args) → True/False` | `(answer, usage)`: `("**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-002)…", {"requests": 2, "input_tokens": 1273, "output_tokens": 150})` |
+| `run_agent(model, question, ask_human)` | model, câu hỏi, hàm hỏi duyệt `ask_human(tool_name, args) → True/False` | `(answer, usage)`: `("**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-002)…", {"requests": 2, "input_tokens": 1273, "output_tokens": 148})` |
 | `Runner.run(agent, input, max_turns)` | agent; câu hỏi (str) hoặc `RunState` khi chạy tiếp sau duyệt | `RunResult` (bảng dưới) |
 
 **`RunResult`:**
@@ -206,7 +201,7 @@ result = await asyncio.wait_for(Runner.run(agent, question, max_turns=MAX_TURNS)
 | `final_output` | `"**E205 = ngân hàng từ chối giao dịch**…"` | Câu trả lời cuối |
 | `new_items` | `ToolCallItem, ToolCallOutputItem, MessageOutputItem…` | Từng bước của run |
 | `raw_responses` | 2 phần tử | 1 phần tử = 1 lượt gọi LLM |
-| `context_wrapper.usage` | `requests=2, input_tokens=1273, output_tokens=150` | Lượt gọi + token |
+| `context_wrapper.usage` | `requests=2, input_tokens=1273, output_tokens=148` | Lượt gọi + token |
 | `interruptions` | `[]` (câu ②: `[create_ticket]`) | Tool đang chờ duyệt |
 
 Token, số lần gọi tool thay đổi giữa các lần chạy — model không ổn định (Session 1–2).
@@ -238,7 +233,7 @@ LLM trả lời cuối (không tool call → dừng): `"**E205 = ngân hàng t�
 
 | Chữ | Ở đâu | Câu E205 |
 |---|---|---|
-| **R – Retrieval** (tra tài liệu) | `find_docs()` (`agent_openai_sdk.py:68`), dữ liệu `sample_data.KB_DOCS` | Giữ tài liệu chứa ≥2 từ của câu tra → `kb-001`, `kb-002` |
+| **R – Retrieval** (tra tài liệu) | `find_docs()` (`agent_openai_sdk.py:66`), dữ liệu `sample_data.KB_DOCS` | Giữ tài liệu chứa ≥2 từ của câu tra → `kb-001`, `kb-002` |
 | **A – Augmented** (đưa vào ngữ cảnh) | Output của tool `search_kb` → SDK gắn vào hội thoại (message `tool`) | Lượt 2 gửi 4 message, có tài liệu |
 | **G – Generation** | Lượt gọi LLM cuối | "E205 = ngân hàng từ chối (nguồn: kb-002)" |
 

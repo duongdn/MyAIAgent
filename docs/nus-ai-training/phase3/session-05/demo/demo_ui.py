@@ -51,18 +51,14 @@ def emit(event):
 
 class UITraceProcessor(TracingProcessor):
     """Đổi span của SDK thành bước dễ đọc cho UI: ai làm (llm/app), làm gì, JSON gốc khi cần.
-    SDK gọi on_span_end(span) mỗi khi 1 bước xong; chỉ xử lý 3 loại span:
-        guardrail  → ô "Kiểm tra input"
+    SDK gọi on_span_end(span) mỗi khi 1 bước xong; chỉ xử lý 2 loại span:
         generation → ô "LLM chọn tool: …" (có tool_calls) hoặc "LLM trả lời cuối" (text)
         function   → ô "App chạy <tool>" (có output) hoặc "App CHƯA chạy: chờ người duyệt" (output rỗng)
     Output: không trả gì; emit(event) bỏ vào hàng đợi → /events đẩy lên trình duyệt."""
 
     def on_span_end(self, span):
         d = span.span_data
-        if d.type == "guardrail":
-            emit({"type": "step", "who": "app", "title": f"Kiểm tra input ({d.name})",
-                  "detail": "CHẶN" if d.triggered else "qua"})
-        elif d.type in ("generation", "response"):
+        if d.type in ("generation", "response"):
             out = (getattr(d, "output", None) or [{}])[0]
             usage = getattr(d, "usage", None) or {}
             why = " ".join((out.get("reasoning_content") or "").split())

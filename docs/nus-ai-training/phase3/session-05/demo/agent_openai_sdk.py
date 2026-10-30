@@ -13,11 +13,9 @@ TỪ SESSION 2 ĐẾN SESSION 5 (đọc theo thứ tự trong file):
 import asyncio
 import json
 import os
-import re
 from pathlib import Path
 
-from agents import (Agent, GuardrailFunctionOutput, InputGuardrailTripwireTriggered, MaxTurnsExceeded,
-                    ModelSettings, OpenAIChatCompletionsModel, Runner, function_tool, input_guardrail,
+from agents import (Agent, MaxTurnsExceeded, ModelSettings, OpenAIChatCompletionsModel, Runner, function_tool,
                     set_trace_processors)
 from openai import AsyncOpenAI
 
@@ -107,16 +105,6 @@ def create_ticket(title: str, priority: str, assignee: str) -> str:
     return json.dumps({"ticket_id": ticket_id, "status": "created"})
 
 
-# Guardrail: code kiểm tra câu hỏi TRƯỚC khi gửi LLM (concept Guardrail, slide 19)
-CARD_NUMBER = re.compile(r"\b(?:\d[ -]?){13,16}\b")
-
-
-@input_guardrail(name="no_card_number")
-async def no_card_number(_ctx, _agent, user_input) -> GuardrailFunctionOutput:
-    """Input : câu hỏi của user. Output: tripwire_triggered=True nếu có số thẻ → SDK dừng, không gửi LLM."""
-    return GuardrailFunctionOutput(output_info=None, tripwire_triggered=bool(CARD_NUMBER.search(str(user_input))))
-
-
 # ── 3. Agent definition ────────────────────────────────────────────────────
 def build_agent(model):
     """Khai báo agent. Chỉ là cấu hình, CHƯA gọi model.
@@ -125,7 +113,7 @@ def build_agent(model):
     Output: Agent(name="Support agent", instructions=SYSTEM_PROMPT, tools=[search_kb, create_ticket], …)
     """
     return Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket],
-                 model_settings=MODEL_SETTINGS, input_guardrails=[no_card_number])
+                 model_settings=MODEL_SETTINGS)
 
 
 # ── 4. Run ─────────────────────────────────────────────────────────────────
@@ -157,8 +145,6 @@ async def run_agent(model, question, ask_human):
                     state.reject(item, rejection_message="Người duyệt đã từ chối.")
             # chạy TIẾP từ đúng chỗ dừng (không gọi lại từ đầu)
             result = await asyncio.wait_for(Runner.run(agent, state, max_turns=MAX_TURNS), RUN_TIMEOUT_S)
-    except InputGuardrailTripwireTriggered:
-        return "Câu hỏi chứa số thẻ — không gửi cho AI. Vui lòng xoá số thẻ và hỏi lại.", {}
     except (MaxTurnsExceeded, asyncio.TimeoutError):
         return "Agent vượt giới hạn bước/thời gian — dừng lại.", {}
     u = result.context_wrapper.usage

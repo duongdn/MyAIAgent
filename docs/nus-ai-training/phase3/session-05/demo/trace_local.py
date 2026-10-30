@@ -1,11 +1,11 @@
 """
 Trace của OpenAI Agents SDK, ghi RA MÁY MÌNH thay vì gửi về dashboard OpenAI.
-SDK tự sinh span cho mọi bước (agent, model call, tool call, guardrail, lỗi); processor này chỉ in + ghi file.
+SDK tự sinh span cho mọi bước (agent, model call, tool call, lỗi); processor này chỉ in + ghi file.
 
     .traces/<trace_id>.jsonl   1 dòng / span — mở ra xem lại sau khi chạy
     run_demo.py (DEMO_TRACE=1) in từng bước theo sơ đồ vòng lặp ①–④ (slide 5)
 
-Cơ chế: SDK tự tạo span cho mỗi bước (gọi LLM, chạy tool, guardrail); khi 1 span kết thúc, SDK gọi
+Cơ chế: SDK tự tạo span cho mỗi bước (gọi LLM, chạy tool); khi 1 span kết thúc, SDK gọi
 on_span_end(span) của mọi processor đã đăng ký (set_trace_processors / add_trace_processor).
 """
 import json
@@ -15,7 +15,7 @@ from pathlib import Path
 from agents.tracing import TracingProcessor
 
 TRACE_DIR = Path(__file__).parent / ".traces"
-ICON = {"agent": "🧭", "generation": "🧠", "response": "🧠", "function": "🔧", "guardrail": "🛡", "custom": "•"}
+ICON = {"agent": "🧭", "generation": "🧠", "response": "🧠", "function": "🔧", "custom": "•"}
 
 
 def _secs(span):
@@ -34,8 +34,6 @@ def _describe(d):
         return f"model call {getattr(d, 'model', '') or ''} tokens={usage.get('input_tokens', '?')}+{usage.get('output_tokens', '?')}"
     if t == "function":
         return f"tool {d.name}({(d.input or '')[:60]}) → {(str(d.output or ''))[:50]!r}"
-    if t == "guardrail":
-        return f"guardrail {d.name} triggered={d.triggered}"
     return t
 
 
@@ -61,8 +59,6 @@ def _loop_lines(d):
             return [f"③ APP         CHƯA chạy {d.name}: dừng chờ người duyệt"]
         return [f"③ APP         chạy hàm thật {d.name}({(d.input or '')[:60]})",
                 f"④ APP → LLM   kết quả {str(d.output)[:70]!r} gửi lại ở lượt sau"]
-    if d.type == "guardrail":
-        return [f"🛡 APP         guardrail {d.name}: {'CHẶN' if d.triggered else 'qua'}"]
     return []
 
 
