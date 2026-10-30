@@ -299,6 +299,7 @@ trello-monitor, cdf-monitor, tax-check, vn-bank-rates — self-contained.
 - [fix_links_positional_corrupts_curated_links](news-digest/feedback_fix_links_positional_corrupts_curated_links.md) — 🔴 fix-links remaps by position; skipping articles → wrong URLs, diff before commit
 - [feedback_news_digest_45day_window_let_old_gnews_through](news-digest/feedback_news_digest_45day_window_let_old_gnews_through.md) — 🔴 old articles: 45d window let 2-3wk GNews items in; now 7d (php 45d)
 - [feedback_news_digest_linux_security_needs_own_source](news-digest/feedback_news_digest_linux_security_needs_own_source.md) — 🔴 Linux security must be covered; dedicated GNews Linux source added 10-30
+- [feedback_news_digest_pick_by_importance_not_feed_order](news-digest/feedback_news_digest_pick_by_importance_not_feed_order.md) — 🔴 rank by cross-source coverage, 3x candidates, pick best per topic rubric; never first-N feed order
 - [mpfc_digitalocean_token_and_infra](mpfc/reference_mpfc_digitalocean_token_and_infra.md) — DO token in backup script; DB = managed MySQL; test droplet 144.126.236.208
 - [mpfc_db_cluster_heavy_ops_cpu_alert](mpfc/feedback_mpfc_db_cluster_heavy_ops_cpu_alert.md) — 🔴 bulk dump/import on MPFC 1vCPU DB cluster → 95% CPU alert; use replica/skip log tables/ask first
 - [loop_until_user_says_stop](global/feedback_loop_until_user_says_stop.md) — 🔴 "loop đến khi tôi báo dừng" = never self-stop/ask; append rounds to report file

@@ -9,7 +9,7 @@ Algorithm:
   For each source section (**Source Name**) in the markdown:
   - Collect all article markdown links in order
   - Replace bare-domain URLs (no path) with the correct URL from the JSON
-    cache at the same position (N-th article link → N-th article URL from JSON)
+    cache by unique URL-prefix match (not position — sections hold a picked subset)
 
 This fixes the recurring pattern where Claude drops the full article URL and
 writes just the homepage domain (e.g. https://vnexpress.net instead of the
@@ -55,37 +55,29 @@ def build_source_map(cache_data: dict) -> dict:
 
 def fix_section(section_text: str, article_urls: list) -> tuple:
     """
-    Replace bare-domain or truncated URLs in a source section using
-    position-based matching against the fetched cache. Any URL that doesn't
-    match the cache URL at its position gets overwritten, as long as they
-    share the same domain (guards against position drift breaking the match).
+    Repair bare-domain or truncated URLs in a source section against the
+    fetched cache. fetch-news.py returns more candidates than the digest
+    keeps (synthesis picks the best ones), so the N-th link in the section
+    is NOT the N-th cache article — position matching would overwrite
+    correct links. Instead: a URL already in the cache is kept; a broken one
+    is replaced only when exactly one cache URL starts with it.
     Returns (fixed_text, num_fixes).
     """
-    parts = []
-    last_end = 0
-    article_idx = 0
+    known = set(article_urls)
     fixes = 0
 
-    for match in LINK_RE.finditer(section_text):
-        parts.append(section_text[last_end : match.start()])
+    def repl(match):
+        nonlocal fixes
         url = match.group(3)
-
-        correct_url = article_urls[article_idx] if article_idx < len(article_urls) else ""
-        needs_fix = correct_url and url != correct_url and (
-            is_bare_domain(url) or same_domain(url, correct_url)
-        )
-
-        if needs_fix:
-            parts.append(f"{match.group(1)}{correct_url}{match.group(4)}")
+        if url in known:
+            return match.group(0)
+        hits = [u for u in article_urls if u.startswith(url.rstrip("/"))]
+        if len(hits) == 1 and (is_bare_domain(url) or same_domain(url, hits[0])):
             fixes += 1
-        else:
-            parts.append(match.group(0))
+            return f"{match.group(1)}{hits[0]}{match.group(4)}"
+        return match.group(0)
 
-        article_idx += 1
-        last_end = match.end()
-
-    parts.append(section_text[last_end:])
-    return "".join(parts), fixes
+    return LINK_RE.sub(repl, section_text), fixes
 
 
 RSS_GNEWS_RE = re.compile(r"news\.google\.com/rss/articles/([A-Za-z0-9_-]+)(?:\?[^)]*)?")

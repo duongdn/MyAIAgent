@@ -427,6 +427,34 @@ def is_near_duplicate(title: str, seen: list, threshold: float = 0.5) -> bool:
     return False
 
 
+# Candidates returned per source = limit x this; synthesis picks the final `limit`.
+CANDIDATE_MULT = 3
+
+
+def _score_topic_articles(fetched: list) -> None:
+    """Annotate each article with `coverage` (how many OTHER sources in the
+    topic carry the same story) and a private `_rank` sort key.
+
+    Coverage is the main importance signal: a story many outlets pick up
+    (e.g. a CISA-KEV Linux kernel flaw) outranks a single-outlet item that
+    merely sat at the top of its feed. Ties break on HN points, then recency.
+    """
+    toks = [[(_title_tokens(a.get("title", ""))) for a in d["articles"]] for _, d in fetched]
+    now = datetime.now(timezone.utc)
+    for i, (_, data) in enumerate(fetched):
+        for j, a in enumerate(data["articles"]):
+            t = toks[i][j]
+            cov = 0
+            if len(t) >= 3:
+                for k, other in enumerate(toks):
+                    if k != i and any(len(t & o) / min(len(t), len(o) or 1) >= 0.5 for o in other):
+                        cov += 1
+            a["coverage"] = cov
+            dt = _parse_pub_date(a.get("pubDate", ""))
+            age_h = (now - dt).total_seconds() / 3600 if dt else 9999
+            a["_rank"] = (cov, a.get("score") or 0, -age_h)
+
+
 def _normalize_url(url: str) -> str:
     """Match the redirect/tracking-param normalization applied in fetch_rss,
     so history URLs (already normalized) compare equal to freshly fetched ones."""
@@ -739,8 +767,12 @@ def main():
 
     for topic_name, sources in selected:
         topic_result = {"topic": topic_name, "sources": []}
+
+        # Pass 1: fetch every source of the topic. Feed order is NOT importance
+        # order, so we keep a wide pool and rank it below instead of taking the
+        # first `limit` items each feed happens to list.
+        fetched = []
         for source in sources:
-            # Over-fetch so dedup below doesn't starve the source; final cap is `limit`.
             fetch_n = max(limit * 4, 20)
             if source.get("fb_id"):
                 data = fetch_facebook_page(source, fetch_n, tag)
@@ -752,22 +784,37 @@ def main():
             # Enforced here (mechanically) rather than left to manual grepping
             # at synthesis time, which was skipped in practice — some articles
             # ended up repeated 13-23 times before this fix.
-            kept, dropped = [], 0
+            pool, dropped = [], 0
             for a in data["articles"]:
                 if history.get(_normalize_url(a.get("link", "")), 0) >= 2:
                     dropped += 1
                     continue
-                if len(kept) >= limit:
+                pool.append(a)
+            data["articles"] = pool
+            if dropped:
+                data["dedupDropped"] = dropped
+            fetched.append((source, data))
+
+        _score_topic_articles(fetched)
+
+        # Pass 2: per source, best-scored first, near-dups removed; return
+        # CANDIDATE_MULT x limit candidates so synthesis can make the final
+        # editorial pick (see "Chọn bài" in news-digest.md).
+        for source, data in fetched:
+            ranked = data["articles"]
+            if not source.get("fb_id"):  # FB posts carry no dates/coverage — keep page order
+                ranked = sorted(ranked, key=lambda a: a["_rank"], reverse=True)
+            kept = []
+            for a in ranked:
+                if len(kept) >= limit * CANDIDATE_MULT:
                     break
                 if is_near_duplicate(a.get("title", ""), seen_titles):
                     data["nearDupDropped"] = data.get("nearDupDropped", 0) + 1
                     continue
                 seen_titles.append(_title_tokens(a.get("title", "")))
+                a.pop("_rank", None)
                 kept.append(a)
-            data["articles"] = kept[:limit]
-            if dropped:
-                data["dedupDropped"] = dropped
-
+            data["articles"] = kept
             topic_result["sources"].append(data)
         output["results"].append(topic_result)
 

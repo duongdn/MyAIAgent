@@ -9,6 +9,6 @@ User (2026-10-30): "sao news-digest ko fetch được issue security của Linux
 
 **Fix:** security topic now has `Google News – Linux Security` (`linux kernel vulnerability OR exploit OR CVE when:7d`).
 
-**How to apply:** Linux security is a must-cover in security section; when user says a category is missing, add a dedicated source rather than raising caps.
+**How to apply:** Linux source kept, but user said the real issue is priority — see [[feedback_news_digest_pick_by_importance_not_feed_order]].
 
 [[feedback_article_count_5_per_source]] [[feedback_news_digest_45day_window_let_old_gnews_through]]

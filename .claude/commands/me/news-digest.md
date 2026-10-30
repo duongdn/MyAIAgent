@@ -114,6 +114,21 @@ Lý do: `fetch-news.py all --limit=100` trả về ~1.8MB JSON (vượt context 
 - User truyền `--limit=N` → áp dụng N cho tất cả fetch calls.
 - `--raw` là cờ output — script không cần xử lý, Claude tự điều chỉnh khi tổng hợp.
 
+## Chọn bài (MANDATORY — KHÔNG lấy theo thứ tự feed)
+
+`fetch-news.py` trả về **~3× limit ứng viên mỗi nguồn**, đã sort theo `coverage` (số nguồn KHÁC trong topic cùng đưa tin đó) → điểm HN → độ mới. Thứ tự feed ≠ độ quan trọng. Mỗi nguồn chọn **đúng `limit` bài (mặc định 5) tốt nhất** từ ứng viên:
+
+1. Đọc HẾT ứng viên của nguồn trước khi chọn, không lấy 5 bài đầu.
+2. `coverage` cao = nhiều báo cùng đưa = ưu tiên; nhưng tác động thực tế quan trọng hơn điểm số.
+3. Tiêu chí theo topic:
+   - **security:** đang bị khai thác / CISA KEV / zero-day / CVSS ≥ 9 / exploit công khai chưa vá > nền tảng phổ biến (Linux kernel, Windows, Chrome, PHP, WordPress, VMware, Cisco…) > rò rỉ dữ liệu lớn > tin doanh nghiệp/sản phẩm bảo mật, bài PR.
+   - **ai / it:** model/sản phẩm lớn ra mắt, thay đổi chính sách/giá của nhà cung cấp lớn > nghiên cứu > tin vặt, PR.
+   - **vn-stocks / stocks / finance / vn-business:** biến động thị trường, chính sách (NHNN, Fed, thuế, lãi suất) > KQKD doanh nghiệp lớn > tin lẻ.
+   - **php:** release/security PHP, Laravel, WordPress > tutorial > podcast.
+4. Bỏ: PR/quảng cáo, listicle, tin trùng sự kiện đã chọn ở nguồn khác.
+5. Nguồn có < limit bài đáng đưa → đưa ít hơn, KHÔNG độn bài yếu.
+6. FB/Substack sections: giữ nguyên quy tắc riêng bên dưới.
+
 **MANDATORY: Khi `topic=all`, output PHẢI có đủ 10 sections, viết theo ĐÚNG thứ tự sau (VN trước, US stocks cuối):**
 `vn-stocks` · `vn-business` · `vinfast` · `ai` · `it` · `php` · `finance` · `security` · `voices` · `stocks`
 
