@@ -242,6 +242,22 @@ LLM trả lời cuối (không tool call → dừng): `"**E205 = ngân hàng t�
 
 ## 7. LLM chọn tool thế nào — vì sao chọn `search_kb`, đã cân nhắc những gì
 
+**Model biết gọi `search_kb` nhờ đâu?** Model không "biết" `search_kb` là gì, cũng không chạy được nó. Mỗi lượt, app gửi cho model 1 đoạn input gồm: system prompt + câu hỏi + **danh sách tool** (tên, mô tả, tham số — JSON ở mục 5A). Nhà cung cấp model đã huấn luyện model trên rất nhiều ví dụ: *khi trong danh sách có tool hợp với câu hỏi → viết ra JSON `tool_calls` thay vì tự trả lời*. Model so câu hỏi với **mọi thứ trong định nghĩa tool** (tên, mô tả, tên tham số) rồi chọn.
+
+Thí nghiệm thật 30/10 (`deepseek-v4.1-flash`, câu "Mã lỗi thanh toán E205 nghĩa là gì?", system prompt **không nhắc tên tool nào**, mỗi dòng chạy 3 lần):
+
+| Danh sách tool gửi kèm | Model làm gì |
+|---|---|
+| Không có tool | 3/3 **trả lời luôn bằng trí nhớ** — "E205 thường là lỗi giao dịch bị từ chối…" (đoán, không có nguồn) |
+| `search_kb(query)` — "Tìm tài liệu trong knowledge base…" | 3/3 gọi `search_kb` |
+| `xyz(query)` — cùng mô tả | 3/3 gọi `xyz` → **tên không quan trọng bằng mô tả** |
+| `search_kb(query)` — mô tả sai "Đặt pizza giao tận nơi" | 3/3 vẫn gọi → tên `search_kb` + tham số `query` đủ gợi ý "tra cứu" |
+| `xyz(query)` — không mô tả | 3/3 vẫn gọi → chỉ tham số `query` cũng đủ gợi ý |
+| `dat_pizza(so_luong, dia_chi)` — "Đặt pizza" | 3/3 **trả lời luôn** — không tool nào hợp |
+| `dat_pizza` + `search_kb` | 3/3 gọi đúng `search_kb` |
+
+→ Câu nói khi dạy: *"Model không biết code của tool. Nó chỉ đọc tên + mô tả + tham số app gửi kèm, rồi chọn tool khớp nhất với câu hỏi — do được huấn luyện như vậy. Vì thế đặt tên, viết mô tả tool cẩn thận là việc của mình."* (Viết mô tả tool tốt: Session 6.)
+
 **Các lựa chọn LLM có ở mỗi lượt** = mọi tool app gửi kèm + trả lời luôn (không gọi tool):
 `search_kb` · `create_ticket` · trả lời luôn. Trang demo ghi dòng "lựa chọn LLM có" trong ô cam.
 
