@@ -10,6 +10,7 @@
  *
  *   node scripts/mpfc-billing-monitor.js            run checks + send alerts
  *   node scripts/mpfc-billing-monitor.js --dry-run  print alerts only
+ *   node scripts/mpfc-billing-monitor.js --dry-run --digest  preview today's daily summary
  *   node scripts/mpfc-billing-monitor.js --test-alert  add a fake alert to test channels + dedupe
  *   node scripts/mpfc-billing-monitor.js --claim    (internal, on mpfc) stdin {host, alertIds, channels} -> grants
  */
@@ -20,6 +21,7 @@ const crypto = require('crypto');
 const { execFileSync } = require('child_process');
 const { channelsFor } = require('./lib/mpfc-billing-alert-channels');
 const { CHECKS } = require('./lib/mpfc-billing-monitor-checks');
+const { digestDay, buildDigest } = require('./lib/mpfc-billing-daily-digest');
 
 const IS_SERVER = os.hostname() === 'mpfc-upgrade-test';
 const SSH_HOST = 'mpfc.mpfc.live';
@@ -83,6 +85,14 @@ async function main() {
     // stable id: column 1 identifies the problem; changing values (ages, counts) must not re-alert
     const id = c.key + '-' + crypto.createHash('md5').update(bad.map(r => r[0]).join(',')).digest('hex').slice(0, 10);
     alerts.push({ id, title: `[MPFC billing] ${c.title}`, body: `${c.why}\n\n${detail}${bad.length > 30 ? `\n  …+${bad.length - 30} more` : ''}` });
+  }
+  // Once-a-day summary (even when nothing is wrong); deduped per channel like alerts
+  const day = args.includes('--digest') ? new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10) : digestDay();
+  if (day) {
+    let stripe = null;
+    try { stripe = JSON.parse(onServer('cat /var/www/MyDailyAgent/data/mpfc-stripe-reconcile.json')); } catch {}
+    try { alerts.push(buildDigest(day, query, stripe, alerts.map(a => a.title.replace('[MPFC billing] ', '')))); }
+    catch (e) { console.log(`digest failed: ${e.message}`); }
   }
   if (args.includes('--test-alert')) alerts.push({ id: 'test-alert', title: '[MPFC billing] TEST alert (ignore)', body: 'Channel/dedupe test of scripts/mpfc-billing-monitor.js. No billing problem.' });
   if (args.includes('--dry-run')) { console.log(alerts.length ? alerts.map(a => `${a.title}\n${a.body}`).join('\n\n') : 'OK — no billing issues'); return; }
