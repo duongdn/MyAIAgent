@@ -1,15 +1,15 @@
 # Server Monitor — 2026-10-30 08:38 (UTC+7)
 
-Trello: https://trello.com/c/QBT50zb6/1569-check-server-status — 4/6 marked (Bailey, Neural NOT marked)
+Trello: https://trello.com/c/QBT50zb6/1569-check-server-status — 5/6 marked (Bailey pending)
 
 ## Summary
 | Group | Status | Note |
 |---|---|---|
 | Bailey | 🔴 BLOCKED | Console `speedventory` (15.236.220.178): **SSH host key CHANGED** → connection refused by strict check. Console + Redis not checked. Staging OK. Siteground skipped (per user) |
 | Elena SamGuard | OK | |
-| Neural Contract | 🔴 UNREACHABLE | nc_staging 52.65.197.217:22 timeout x2 (was up 10-23) |
+| Neural Contract | IGNORED | nc_staging stopped intentionally (user confirmed) |
 | Fountain | WARNING | Staging disk 78% (↑75%), swap 1.1G/4G |
-| Marcel XID | WARNING | xid_sync_console disk 75% (↑73%); 4 dev hosts timeout |
+| Marcel XID | OK | sync_console 75%→54% after syslog.1 truncate; dev hosts dead (removed from skill) |
 | Rory | OK | 13G/50G, 110,531 files |
 
 ## Bailey
@@ -59,6 +59,6 @@ Deletable candidates: booking.20251003.zip 1.5G, booking.zip 1.4G, booking/error
 
 ## Unresolved questions
 1. speedventory host key changed — asked in Matrix Bailey/Paturevision room 08:43 (likely dev server task), awaiting confirm before updating known_hosts
-2. nc_staging down — instance stopped intentionally?
-3. Truncate xid_sync_console syslog.1 (11G)?
-4. XID dev hosts still all timing out — mark as dead in skill?
+2. ~~nc_staging down~~ — intentional, ignore
+3. ~~Truncate syslog.1~~ — DONE 08:45 (user OK): 75% → 54% (27G/49G)
+4. ~~XID dev hosts~~ — marked dead in skill (user OK)
