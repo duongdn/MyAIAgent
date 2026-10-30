@@ -107,7 +107,7 @@
       "confirmed": false,
       "note": "Drafted 2026-10-10, never confirmed/sent; superseded by week 10-12 draft"
     },
-    "sent": false,
+    "sent": true,
     "unsent_draft_10_12": {
       "week_start": "2026-10-12",
       "message_text": "Report week 12/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 30m/30m",
@@ -118,8 +118,12 @@
     "unsent_draft_10_19": {
       "week_start": "2026-10-19",
       "message_text": "Report week 19/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 10m/10m",
-      "confirmed": false,
-      "note": "never confirmed/sent; superseded by 26/10 draft at 2026-10-30 18:00 cron"
+      "confirmed": true,
+      "confirmed_at": "2026-10-23T20:14:16+07:00",
+      "sent": true,
+      "sent_at": "2026-10-23T20:14:30+07:00",
+      "event_id": "$hEMWAsQE5OfyTDqNrYSoh55ZCkXOkGbOH9ZVfuRGwto",
+      "note": "Actually confirmed and sent 2026-10-23T20:14; key name is legacy ('unsent_draft_') but data is a completed send. Superseded as active slot by 26/10 draft at 2026-10-30 18:00 cron."
     }
   }
 }

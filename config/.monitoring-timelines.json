@@ -389,7 +389,7 @@
     "note": "Week Oct 26: both held, nothing submitted. Baamboozle memos valid (Mon only) but WS 11.33h vs Aysar tracker Mon-only = mismatch. Tokenlite Mon-Thu 0h, Fri login failed (venv lz4 broken)."
   },
   "weekly_report_finalization": {
-    "last_run": "2026-10-16T21:35:00+07:00",
-    "note": "Week 2026-10-12 interactive submit (manual, after 18:00 cron). 9 finalized (incl. new: Portfolio - James Diamond, AnhNH2 5/5 + LeNH 5/5). 1 API error (ETZ-Wathaga, not Manager). 9 still blocked on missing task log days/pending review."
+    "last_run": "2026-10-23T18:00:00+07:00",
+    "note": "Cron auto-submit (--submit) week 2026-10-19: 9 finalized (Baamboozle, MissSwimwear, Radio Data Center, Tokenlite via cron rule; BXR, ETZ-Wathaga, Family App, Fountain Greetings, OhCleo manually by other PMs). 9 blocked on missing task-log days (multi-project devs). 2 API error (Generator, Meta-Stamp - DuongDN not Manager)."
   }
 }
