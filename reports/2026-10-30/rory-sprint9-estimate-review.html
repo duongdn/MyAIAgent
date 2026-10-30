@@ -308,7 +308,7 @@
   <header class="hero">
     <div class="eyebrow">Review Est Backend — Rory / Swift Studio</div>
     <h1 class="serif">Est Sprint 9 — đối chiếu với nguồn gốc</h1>
-    <p class="dek">8 feature backend, tổng 101 giờ. Review từng dòng dựa trên breakdown gốc của Khánh — không phải bản tóm tắt.</p>
+    <p class="dek">8 feature backend, sheet gốc 101 giờ → sau review còn <b>94.5 giờ</b>. Review từng dòng dựa trên breakdown gốc của Khánh, đối chiếu với tài liệu API Mindbody thật — không phải bản tóm tắt hay đoán.</p>
     <div class="meta-row">
       <span><b>Ngày est</b> 27/10/2026</span>
       <span><b>Ngày review</b> 30/10/2026</span>
@@ -329,14 +329,14 @@
       </thead>
       <tbody>
         <tr><td>1. T&amp;Cs — admin + content API</td><td class="hrs">6.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
-        <tr><td>2. Class Reviews (Sweat &amp; BXR)</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip gate">Cần check khả thi (2.0h)</span></td></tr>
+        <tr><td>2. Class Reviews (Sweat &amp; BXR)</td><td class="hrs">7.5</td><td class="status-cell"><span class="chip gate">Sửa từ 14h — đã xác nhận API không tồn tại</span></td></tr>
         <tr><td>3. Door Access QR &amp; Barcode lễ tân</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Khách đã chốt 30/10</span></td></tr>
         <tr><td>4. Đổi Gift Card / Cash Value trong app</td><td class="hrs">12.0</td><td class="status-cell"><span class="chip gate">Cần check khả thi (2.5h)</span></td></tr>
         <tr><td>5. Thông báo trong app (In-App Notifications)</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
         <tr><td>6. Mua Gift Card trong app</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
         <tr><td>7. Đổi Email/Password trong app</td><td class="hrs">5.0</td><td class="status-cell"><span class="chip ok">Đã verify bằng code thật</span></td></tr>
         <tr><td>8. Thanh toán dư nợ Mindbody trong app</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Tự hạ từ 24h → 18h</span></td></tr>
-        <tr class="total"><td>Tổng</td><td class="hrs">101.0</td><td></td></tr>
+        <tr class="total"><td>Tổng (sheet gốc: 101.0h)</td><td class="hrs">94.5</td><td></td></tr>
       </tbody>
     </table>
   </section>
@@ -368,25 +368,24 @@
     <article class="task">
       <div class="task-head">
         <div><div class="task-num">02</div><h3>Đánh giá lớp học (Sweat &amp; BXR)</h3></div>
-        <div class="task-hours mono">14.0<span>h</span></div>
+        <div class="task-hours mono">7.5<span>h</span></div>
       </div>
-      <p class="desc">Sau khi học xong 1 lớp, member được review (rating + comment). Phải xác nhận member THẬT SỰ đã tham gia (qua API check-in) mới cho review, và review lưu thẳng vào Mindbody (không phải DB riêng).</p>
+      <p class="desc">Sau khi học xong 1 lớp, member được review (rating + comment). Phải xác nhận member THẬT SỰ đã tham gia (qua API check-in) mới cho review. <b>Đã verify: Mindbody Public API (V6) không có resource Review/Rating</b> — review tự lưu DB riêng của app, không ghi vào Mindbody.</p>
       <details class="breakdown">
-        <summary>10 việc cần làm</summary>
+        <summary>9 việc cần làm — est lại theo hướng tự build storage</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check dữ liệu điểm danh</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Check API review của Mindbody — bước xác nhận khả thi</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Xác định đúng member (gắn với account/site)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check dữ liệu điểm danh (phân biệt đã đặt vs đã tham gia thật)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Thiết kế schema lưu review (rating, comment, member, class, site, time)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Xác định đúng member — tận dụng session có sẵn</td><td class="sub-hrs">0.5</td></tr>
           <tr><td class="sub-label">API check điều kiện được review hay chưa, trả về cho app</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Nhận request review, chặn review trùng</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Gửi review lên Mindbody</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Xử lý lỗi / kết quả không rõ ràng</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">API trả lại review/trạng thái của chính member đó</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Lưu review vào DB riêng, chặn duplicate (unique constraint)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">API trả lại review/trạng thái của chính member đó</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Xử lý lỗi validate cơ bản</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Bàn giao</td><td class="sub-hrs">0.5</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>Không vấn đề gì.</b> Phần rủi ro nhất — chưa chắc Mindbody có cho ghi review qua API hay không — đã được tính thẳng thành 1 bước riêng 2h, không giấu vào các dòng khác. Nếu API không hỗ trợ, scope sẽ đổi hướng chứ không phải est bị vỡ âm thầm.</div>
+      <div class="verdict"><b>Sheet gốc (14h) est cao hơn thực tế — đã kiểm chứng.</b> Tra 2 nguồn độc lập (trang endpoint chính thức <code class="mono">developers.mindbodyonline.com</code> và thư viện community <code class="mono">SplitPass/mindbody-api</code>): Public API V6 chỉ có Appointment/Class/Client/Sale/Site/Staff — <b>không có Review/Rating</b>. Rating trong app Mindbody là tính năng nội bộ, không expose ra ngoài. Vì vậy bỏ hẳn nhánh "ghi vào Mindbody", est lại theo hướng build storage riêng ngay từ đầu (fixed-cost, không chừa buffer "có thể Mindbody hỗ trợ") — còn <b>7.5h</b>, giảm 6.5h so với sheet gốc.</div>
     </article>
 
     <article class="task">
@@ -529,14 +528,14 @@
 
   <section class="closing">
     <h2 class="serif">Kết luận</h2>
-    <p>Cả 8 task đều khớp với breakdown gốc trong sheet: chia nhỏ tới từng 0.5h, phần chưa chắc chắn (API Mindbody có hỗ trợ không) được tính thành bước riêng rõ ràng chứ không giấu vào chỗ khác, và 2 task khó nhất đã được verify bằng commit code thật trên staging/main chứ không phải đoán. Task #8 còn được chính người est tự hạ xuống sau khi đọc code thật. <b>101h là con số có cơ sở vững, không phải est thổi phồng.</b></p>
+    <p>7/8 task khớp với breakdown gốc trong sheet: chia nhỏ tới từng 0.5h, 2 task khó nhất đã verify bằng commit code thật trên staging/main chứ không phải đoán, task #8 từng được chính người est tự hạ xuống sau khi đọc code thật. <b>Riêng task #2 (Class Reviews) đã sửa từ 14h → 7.5h</b> sau khi verify trực tiếp tài liệu Mindbody API: Public API V6 không có resource Review/Rating, nên bỏ nhánh "ghi vào Mindbody" và est lại theo hướng tự build storage riêng, fixed-cost, không chừa buffer cho khả năng chưa xác nhận được. <b>Tổng sau review: 94.5h</b> (giảm 6.5h so với sheet gốc 101h) — phần còn lại vẫn có cơ sở vững, không phải est thổi phồng.</p>
   </section>
 
   <section class="open-q">
     <h2>Câu hỏi còn mở</h2>
     <ul>
-      <li>Không còn câu hỏi nào về số liệu — các bước feasibility-check và note reuse trong sheet đã trả lời hết những gì bản review v1 từng thắc mắc.</li>
-      <li>Chưa đọc trực tiếp code (SSH vào <code class="mono">rory.cpanel</code>) — key auth không vào được, server yêu cầu password. Không cố thêm để tránh rủi ro khoá account. Không cần thiết cho review này vì Khánh đã tự trích dẫn commit hash cụ thể đã check trên staging và main.</li>
+      <li><b>Cần Khánh xác nhận lại task #2 (7.5h):</b> việc đổi từ 14h xuống 7.5h dựa trên tra cứu tài liệu public (<a href="https://developers.mindbodyonline.com/Resources/Endpoints" target="_blank" rel="noopener">developers.mindbodyonline.com/Resources/Endpoints</a> và <a href="https://github.com/SplitPass/mindbody-api" target="_blank" rel="noopener">github.com/SplitPass/mindbody-api</a>), không phải đọc account Mindbody thật của Rory — nếu Rory có gói/API riêng (private API, hoặc addon) có endpoint review không công khai, số này cần xem lại.</li>
+      <li>Chưa đọc trực tiếp code (SSH vào <code class="mono">rory.cpanel</code>) — key auth không vào được, server yêu cầu password. Không cố thêm để tránh rủi ro khoá account. Không cần thiết cho 7 task còn lại vì Khánh đã tự trích dẫn commit hash cụ thể đã check trên staging và main.</li>
     </ul>
   </section>
 
