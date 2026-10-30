@@ -288,7 +288,7 @@
   },
   "server_monitor": {
     "description": "Updated when server monitor runs.",
-    "last_run": "2026-10-23T08:26:00+07:00",
+    "last_run": "2026-10-30T08:38:00+07:00",
     "output_file": "reports/2026-10-23/0826-server-monitor.md",
     "last_status": "partial",
     "caveats_20260918": "Neural Contract (nc_staging, 52.65.197.217) UNREACHABLE - SSH timeout, persistent since 08-21, still unresolved - Trello item left incomplete. Marcel 4 dev/staging XID hosts unreachable (persistent since 07-24), all 5 prod hosts OK. Fountain staging disk 83% WARNING (same as 09-11), staging swap 15% + production swap 18% both WARNING (mild, not critical), process health OK both envs. Bailey Console/Staging/Redis all OK. Elena samguard.co OK (load 0.09, swap 3%). Rory ~4.3G deletable error_logs/zip backups unchanged, not removed (needs approval). Siteground skipped permanently per 08-28 decision.",
