@@ -1,0 +1,234 @@
+[
+ {
+  "n": 1,
+  "type": "stock-humor",
+  "topic": "VN-Index quay đầu, dầu khí lao dốc",
+  "text": "Hôm qua vừa hí hửng thấy xanh 🌱\nHôm nay dầu khí rủ nhau đi chơi cầu tuột 🛝\nTài khoản mình thì như ly trà đá: càng uống càng vơi 🫠",
+  "feeling": "hoang mang",
+  "source": {
+   "title": "Chứng khoán 29/10: Áp lực bán lan rộng, VN-Index quay đầu giảm / Cổ phiếu dầu khí lao dốc, VN-Index mất hơn 11 điểm",
+   "publisher": "news-digest 30/10 (VnEconomy, báo VN)",
+   "url": "",
+   "summary": "VN-Index đảo chiều giảm >11 điểm, nhóm dầu khí bị bán mạnh, thử vùng 1.740."
+  },
+  "sources": [],
+  "preview": "reports/2026-10-30/fb-candidates/01.png",
+  "image": "tmp/vnindex-2026-10-30.png"
+ },
+ {
+  "n": 2,
+  "type": "stock-humor",
+  "topic": "Cổ phiếu quen thuộc về đáy 3 năm",
+  "text": "Người ta bảo mua ở đáy là thắng 🏆\nĐáy 3 năm đây rồi... mà ví mình cũng chạm đáy luôn 🥲\nĐúng là ý trời 😅",
+  "feeling": "hết tiền",
+  "source": {
+   "title": "Cổ phiếu \"thủng\" đáy 3 năm, FPT phát thông báo quan trọng",
+   "publisher": "news-digest 30/10",
+   "url": "",
+   "summary": "Một cổ phiếu công nghệ lớn rơi về vùng thấp nhất 3 năm, doanh nghiệp lên tiếng."
+  },
+  "sources": [],
+  "preview": "reports/2026-10-30/fb-candidates/02.png",
+  "image": "tmp/vnindex-2026-10-30.png"
+ },
+ {
+  "n": 3,
+  "type": "fb-memory",
+  "topic": "8 năm trước: hai ông bố tập cho em bé bú bình",
+  "text": "8 năm trước: 2 ông tướng xúm lại cho 1 em bé bú bình 🍼\nGiờ em lớn rồi, còn 2 ông thì... vẫn vụng y vậy 😆\nGia đình nhỏ, hạnh phúc to ❤️",
+  "feeling": "hạnh phúc",
+  "source": {
+   "title": "Gia đình “nhỏ”, hạnh phúc to",
+   "publisher": "Đoàn Nguyên Dương, 30/10/2018",
+   "url": "",
+   "summary": "Ảnh 2 người đàn ông ngồi trên thảm chơi, cho em bé uống bình sữa; tag 40+ người."
+  },
+  "sources": [],
+  "preview": "reports/2026-10-30/fb-candidates/03.png",
+  "memoryIndex": 0
+ },
+ {
+  "n": 4,
+  "type": "fb-memory",
+  "topic": "1 năm trước: bé tạo dáng ở studio #Notmyfault",
+  "text": "Mới 1 năm mà nhìn lại thấy con ra dáng idol ghê 📸\nBa thì vẫn chỉ biết đứng ngoài cầm túi 😂💕",
+  "feeling": "hạnh phúc",
+  "source": {
+   "title": "#Notmyfault",
+   "publisher": "Hoang Thuy Thuy cùng Đoàn Tâm Tuệ Nghi, 30/10/2025",
+   "url": "",
+   "summary": "Clip bé gái áo đỏ tạo dáng trước tường chữ 'Angel Studio' (lớp nhảy/studio)."
+  },
+  "sources": [],
+  "preview": "reports/2026-10-30/fb-candidates/04.png",
+  "memoryIndex": 1
+ },
+ {
+  "n": 5,
+  "type": "running",
+  "topic": "Còn 12,9 km là cán 1.000 km năm nay",
+  "text": "Sáng nay chạy thêm 10 km, giờ còn đúng 12,9 km là chạm mốc 1.000 km năm nay 🏃‍♂️\nCuối tuần này chắc phải tự thưởng 1 buổi \"về đích\" 🎯🔥\nhttps://www.strava.com/activities/20785066677",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "Chạy bộ buổi sáng",
+   "publisher": "Strava, 30/10/2026",
+   "url": "https://www.strava.com/activities/20785066677",
+   "summary": "10 km, 60 phút, pace 5:58/km. Năm nay 987,1 km."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20785066677"
+  ],
+  "preview": null
+ },
+ {
+  "n": 6,
+  "type": "running",
+  "topic": "Sáng nay 10 km, tuần đã 31 km",
+  "text": "Thứ Năm dậy sớm làm 10 km cho tỉnh ngủ ☀️\nTuần này mới đó đã 31 km, chân thì kêu mà lòng thì vui 😆🏃‍♂️\nhttps://www.strava.com/activities/20785066677",
+  "feeling": "khỏe mạnh",
+  "source": {
+   "title": "Chạy bộ buổi sáng",
+   "publisher": "Strava, 30/10/2026",
+   "url": "https://www.strava.com/activities/20785066677",
+   "summary": "10 km / 60 phút / 5:58 mỗi km; tuần 31 km."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20785066677"
+  ],
+  "preview": null
+ },
+ {
+  "n": 7,
+  "type": "running",
+  "topic": "Tháng 10 đã 240,9 km",
+  "text": "Tháng 10 chưa hết mà đôi giày đã đi được 240,9 km 👟\nTiền xăng thì tiết kiệm, tiền ăn sáng thì tăng 😂🍜",
+  "feeling": "tích cực",
+  "source": {
+   "title": "Tổng tháng 10",
+   "publisher": "Strava",
+   "url": "https://www.strava.com/activities/20785066677",
+   "summary": "Tổng tháng 10/2026: 240,9 km, 166 buổi từ 05/2026."
+  },
+  "sources": [
+   "https://www.strava.com/activities/20785066677"
+  ],
+  "preview": null
+ },
+ {
+  "n": 8,
+  "type": "nus-blog",
+  "topic": "Đừng giấu chìa khoá dưới thảm chùi chân",
+  "text": "Giấu chìa khoá nhà dưới thảm chùi chân thì ai cũng tìm ra 🔑😅\nLàm app điện thoại cũng vậy, đồ quan trọng phải để ở chỗ khác. Team mình có viết bài kể chuyện này nè\nhttps://www.nustechnology.com/blog/react-native-mindbody-api-build-it-the-secure-way",
+  "feeling": "tích cực",
+  "source": {
+   "title": "React Native + Mindbody API: Build It the Secure Way",
+   "publisher": "NUS Technology blog, 14/10/2026",
+   "url": "https://www.nustechnology.com/blog/react-native-mindbody-api-build-it-the-secure-way",
+   "summary": "Khoá truy cập nhét trong app điện thoại thì ai cũng moi ra được trong vài phút; nên để 1 máy chủ ở giữa giữ khoá và lo việc đặt lịch."
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/react-native-mindbody-api-build-it-the-secure-way"
+  ],
+  "preview": "reports/2026-10-30/fb-candidates/08.png"
+ },
+ {
+  "n": 9,
+  "type": "nus-blog",
+  "topic": "Viết lại hay sửa dần phần mềm cũ",
+  "text": "Nhà cũ thì sửa dần hay đập đi xây lại? 🏠🔨\nPhần mềm cũng vậy, và team mình thường chọn sửa dần cho chắc ăn 😄\nhttps://www.nustechnology.com/blog/rewrite-vs-refactor-why-we-almost-always-choose-incremental-modernization",
+  "feeling": "tích cực",
+  "source": {
+   "title": "Rewrite vs. Refactor: Why We Almost Always Choose Incremental Modernization",
+   "publisher": "NUS Technology blog",
+   "url": "https://www.nustechnology.com/blog/rewrite-vs-refactor-why-we-almost-always-choose-incremental-modernization",
+   "summary": "Vì sao đập đi viết lại thường thất bại, và cách sửa dần từng phần để hệ thống vẫn chạy. (đã đề xuất 26/10, chưa đăng)"
+  },
+  "sources": [
+   "https://www.nustechnology.com/blog/rewrite-vs-refactor-why-we-almost-always-choose-incremental-modernization"
+  ],
+  "preview": "reports/2026-10-30/fb-candidates/09.png"
+ },
+ {
+  "n": 10,
+  "type": "share-article",
+  "topic": "Xuất nhập khẩu lần đầu vượt 1.000 tỷ USD",
+  "text": "Cả nước buôn bán với thế giới vượt 1.000 tỷ USD, lần đầu tiên luôn 🇻🇳📦\nCòn mình buôn bán với sàn chứng khoán thì... thôi khỏi kể 😅\nhttps://vnexpress.net/lan-dau-kim-ngach-xuat-nhap-khau-vuot-1-000-ty-usd-5138495.html",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "Lần đầu kim ngạch xuất nhập khẩu vượt 1.000 tỷ USD",
+   "publisher": "VnExpress, 29/10/2026",
+   "url": "https://vnexpress.net/lan-dau-kim-ngach-xuat-nhap-khau-vuot-1-000-ty-usd-5138495.html",
+   "summary": "Đến 29/10 tổng xuất nhập khẩu hàng hoá đạt hơn 1.000 tỷ USD, lần đầu vượt mốc, theo Cục Hải quan."
+  },
+  "sources": [
+   "https://vnexpress.net/lan-dau-kim-ngach-xuat-nhap-khau-vuot-1-000-ty-usd-5138495.html"
+  ],
+  "preview": null
+ },
+ {
+  "n": 11,
+  "type": "share-article",
+  "topic": "Reddit sắp bắt đăng nhập mới đọc",
+  "text": "Hồi giờ hỏi gì cũng search kèm chữ \"reddit\" 🔍\nGiờ Reddit tính bắt đăng nhập mới cho đọc, vì người ta hỏi AI hết rồi 🤖😂\nhttps://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "As search traffic dries up, Reddit announces it's shifting to a logged-in experience",
+   "publisher": "TechCrunch, 29/10/2026",
+   "url": "https://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/",
+   "summary": "Người dùng tìm thông tin qua AI nhiều hơn, lượt vào từ Google giảm, nên Reddit chuyển dần sang bắt đăng nhập."
+  },
+  "sources": [
+   "https://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/"
+  ],
+  "preview": "reports/2026-10-30/fb-candidates/11.png"
+ },
+ {
+  "n": 12,
+  "type": "share-article",
+  "topic": "Meta ra app tủ đồ ảo từ ảnh Instagram",
+  "text": "Meta ra app gom hết đồ mình từng mặc trên Instagram thành tủ đồ ảo 👕👗\nMở ra chắc thấy 10 tấm thì 9 tấm cùng 1 cái áo 😂\nhttps://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/",
+  "feeling": "hào hứng",
+  "source": {
+   "title": "Meta quietly launches an AI fashion app called Style Sketch",
+   "publisher": "TechCrunch, 29/10/2026",
+   "url": "https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/",
+   "summary": "App nối với Instagram, dựng tủ đồ ảo từ ảnh đã đăng hoặc chụp thêm đồ, rồi gợi ý phối đồ."
+  },
+  "sources": [
+   "https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/"
+  ],
+  "preview": "reports/2026-10-30/fb-candidates/12.png"
+ },
+ {
+  "n": 13,
+  "type": "trend",
+  "topic": "Mai Halloween, cả mạng đua hoá trang",
+  "text": "Mai Halloween, cả mạng đang đua nhau hoá trang ma quỷ 🎃👻\nMình khỏi cần, mở app chứng khoán ra là mặt tự tái mét rồi 😱",
+  "feeling": "ngốc nghếch",
+  "source": {
+   "title": "Halloween 31/10",
+   "publisher": "Trend mạng xã hội quốc tế / VN cuối tháng 10",
+   "url": "",
+   "summary": "Cuối tháng 10 mạng xã hội tràn ảnh/clip hoá trang Halloween (31/10). Không link cụ thể."
+  },
+  "sources": [],
+  "preview": null
+ },
+ {
+  "n": 14,
+  "type": "trend",
+  "topic": "\"Về nghe sen kể chuyện\" — poster trend trên FB",
+  "text": "Thấy mọi người làm poster \"Về nghe sen kể chuyện\" đẹp quá 🪷\nMình mà làm chắc thành \"Về nghe sếp kể chuyện\" 😂📋\nhttps://thanhnien.vn/gioi-tre/the-gioi-mang.htm",
+  "feeling": "thư thái",
+  "source": {
+   "title": "Trend poster \"Về nghe sen kể chuyện\"",
+   "publisher": "Thanh Niên — Thế giới mạng",
+   "url": "https://thanhnien.vn/gioi-tre/the-gioi-mang.htm",
+   "summary": "Thanh Niên ghi nhận trend làm poster \"Về nghe sen kể chuyện\" trên Facebook (trang tổng hợp, không ghi rõ ngày)."
+  },
+  "sources": [
+   "https://thanhnien.vn/gioi-tre/the-gioi-mang.htm"
+  ],
+  "preview": null
+ }
+]
