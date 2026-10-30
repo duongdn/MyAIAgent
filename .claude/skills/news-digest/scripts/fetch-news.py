@@ -202,6 +202,12 @@ SOURCES = {
             "name": "Google News – Cybersecurity",
             "url": _gnews("cybersecurity vulnerability CVE exploit 2026"),
         },
+        {
+            # Generic feeds cap at 5 items, so Linux kernel/distro CVEs
+            # (KEV additions, public root exploits) were crowded out.
+            "name": "Google News – Linux Security",
+            "url": _gnews("linux kernel vulnerability OR exploit OR CVE when:7d"),
+        },
     ],
     "vinfast": [
         {
