@@ -73,16 +73,58 @@ print(result.final_output)
 - Lỗi SDK báo: `MaxTurnsExceeded` (quá 8 lượt), `InputGuardrailTripwireTriggered` (guardrail chặn) → `run_agent()` bắt và trả thông báo.
 - Ai gọi: `demo_ui.py` (trang web) và `run_demo.py` (terminal) đều gọi `run_agent()` → `run_limited()` → `Runner.run`.
 
+### Input / output từng hàm (giá trị in ra từ lần chạy thật 30/10)
+
+Thứ tự gọi khi bấm nút ① trên trang demo:
+```
+demo_ui.py ──► run_agent(model, "alice", "Mã lỗi…E205…", KB_DOCS, (), "ui")
+                 ├─ new_session("alice")                 → me (Session)
+                 ├─ build_agent(model)                   → agent
+                 └─ run_limited(agent, question, me)
+                      └─ Runner.run(agent, question, context=me, max_turns=8)    ← SDK
+                           ├─ gọi model (lượt 1)        → tool call search_kb
+                           ├─ search_kb(ctx, query, tenant) → cp.search_kb(me, …) → chuỗi <untrusted_search_results>
+                           └─ gọi model (lượt 2)        → câu trả lời cuối
+                      → RunResult
+                 → result.final_output (str) → hiện lên trang
+```
+
+| Hàm | Input (param truyền vào) | Output (trả ra) |
+|---|---|---|
+| `load_config(config_file, env_var)` | `".nus-llm-gateway-config.json"`, `"NUS_LLM_API_KEY"` | `dict` `{"api_key": "sk-…", "base_url": "https://llm.nustechnology.com/v1"}` |
+| `make_model(provider, model_name=None)` | `"nus"` (khoá trong `PROVIDERS`); `model_name` bỏ trống → model mặc định | Object `OpenAIChatCompletionsModel`, `model="deepseek-v4.1-flash"`, client `timeout=60`. **Chưa gọi model.** |
+| `@function_tool` trên `search_kb` | Hàm Python `search_kb(ctx, query: str, tenant: str \| None)` | Object `FunctionTool`: `name="search_kb"`, `description=SEARCH_KB_DESC`, `params_json_schema={"properties": {"query": {"type": "string"}, "tenant": {"anyOf": [{"type": "string"}, {"type": "null"}]}}, "required": ["query","tenant"], "additionalProperties": false}` — `ctx` không có trong schema |
+| `build_agent(model)` | Output của `make_model` | Object `Agent`: `name="Support agent"`, `tools=["search_kb","create_ticket"]`, `instructions="Bạn là trợ lý cho nhân viên support…"`. **Chưa gọi model.** |
+| `cp.new_session(session_user)` | `"alice"` (từ đăng nhập; danh sách ở `sample_data.USERS`) | `Session(name="alice", tenant="tenant-A", role="support", kb=<3 tài liệu>, disabled=set(), task=None)` |
+| `Runner.run(agent, input, context, max_turns)` | `agent`; `input` = câu hỏi `"Mã lỗi thanh toán E205 nghĩa là gì?"`; `context=me` (Session); `max_turns=8` | `RunResult` (xem bảng dưới) |
+| `search_kb(ctx, query, tenant)` — **model điền, SDK gọi** | `query="mã lỗi thanh toán E205"`, `tenant=None` (parse từ JSON tool call); `ctx.context` = `me` do SDK truyền | `str`: `<untrusted_search_results>\n<document id='kb-a-001'>Xử lý lỗi thanh toán thẻ: …</document>\n<document id='kb-a-002'>Danh sách mã lỗi…E205 = ngân hàng từ chối…</document>\n</untrusted_search_results>` → SDK gửi lại model |
+| `create_ticket(ctx, title, priority, assignee)` — **model điền, SDK gọi sau khi duyệt** | `title="…E205…"`, `priority="P3"`, `assignee="billing-team-a"` | `'{"ticket_id": "T-1001", "status": "created"}'`. Điền sai (`"P2"`, `"billing team"`) → `"BỊ CHẶN bởi application: priority P2 không được tự tạo (chỉ ['P3', 'P4']); assignee 'billing team' không thuộc team hợp lệ […]"` → model đọc, tự sửa |
+| `run_agent(model, session_user, question, kb, disabled, approve_mode)` | `model`, `"alice"`, câu hỏi, `KB_DOCS`, `()` (không tắt checkpoint), `"ui"` (hỏi duyệt trên web) | `str` câu trả lời cuối: `"**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-a-002). Quy trình xử lý theo kb-a-001: …"` |
+
+**`RunResult` — output của `Runner.run`** (lần chạy thật câu ①):
+
+| Thuộc tính | Giá trị | Ý nghĩa |
+|---|---|---|
+| `final_output` | `"**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-a-002)…"` | Câu trả lời cuối của model |
+| `new_items` | `MessageOutputItem, ToolCallItem ×2, ToolCallOutputItem ×2, ReasoningItem, MessageOutputItem` | Từng bước của run: model gọi tool (lần này gọi `search_kb` 2 lần trong 1 lượt), kết quả tool, câu trả lời |
+| `raw_responses` | 2 phần tử | 1 phần tử = 1 lượt gọi model |
+| `context_wrapper.usage` | `requests=2, input_tokens=1442, output_tokens=246` | Số lượt gọi model + token (cộng mọi lượt) |
+| `interruptions` | `[]` | Tool đang chờ người duyệt; câu ② sẽ có 1 phần tử `create_ticket` |
+| `last_agent` | `Support agent` | Agent trả lời cuối |
+
+Số token, số lần gọi tool thay đổi giữa các lần chạy — model không ổn định (Session 1–2).
+Tự in lại bảng này: chạy `run_demo.py --scenario 9 --trace` hoặc thêm `print(result.new_items)` sau `Runner.run`.
+
 ## 3. Bức tranh: sơ đồ slide 5 nằm ở đâu trong code
 
 Slide 5 vẽ agent = **LLM** + **code app** chạy vòng lặp ①–④ với **tools**. Trong demo:
 
 | Trên sơ đồ slide 5 | Trong code | Ai viết |
 |---|---|---|
-| LLM | Model `deepseek-v4.1-flash` qua gateway — `make_model()` (`agent_openai_sdk.py:64`) | Có sẵn |
-| Tools | `search_kb`, `create_ticket` — hàm Python gắn `@function_tool` (`agent_openai_sdk.py:96–109`) | Mình viết |
-| Code app — khai báo agent | `build_agent()` (`agent_openai_sdk.py:124`) | Mình viết (vài dòng) |
-| Code app — **vòng lặp ①–④** | `Runner.run(...)` (`agent_openai_sdk.py:168`) | **SDK viết sẵn** |
+| LLM | Model `deepseek-v4.1-flash` qua gateway — `make_model()` (`agent_openai_sdk.py:66`) | Có sẵn |
+| Tools | `search_kb`, `create_ticket` — hàm Python gắn `@function_tool` (`agent_openai_sdk.py:101–123`) | Mình viết |
+| Code app — khai báo agent | `build_agent()` (`agent_openai_sdk.py:138`) | Mình viết (vài dòng) |
+| Code app — **vòng lặp ①–④** | `Runner.run(...)` (`agent_openai_sdk.py:195`) | **SDK viết sẵn** |
 | Code app — quyết định của application (quyền, duyệt…) | `checkpoints.py` | Mình viết — học ở các buổi sau |
 | Ghi lại từng bước | Trace (`trace_local.py`, cột phải trang demo) | SDK sinh, mình chọn nơi ghi |
 
@@ -97,7 +139,7 @@ Slide 5 vẽ agent = **LLM** + **code app** chạy vòng lặp ①–④ với *
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
     return cp.search_kb(ctx.context, query, tenant)
 ```
-(`agent_openai_sdk.py:96–98`; `create_ticket` ở dòng 107–109 viết y hệt.)
+(`agent_openai_sdk.py:101–108`; `create_ticket` ở dòng 117–123 viết y hệt.)
 
 SDK tự đọc tên hàm, mô tả, kiểu tham số và biến thành **mô tả tool gửi cho LLM**. Đây là đúng thứ LLM nhìn thấy (in bằng `python3 ../../session-06/demo/compare_tool_descriptions.py --schema` — script của Session 6, chạy tức thì, không gọi model):
 
@@ -125,7 +167,7 @@ def build_agent(model):
                  tools=[search_kb, create_ticket], model_settings=MODEL_SETTINGS,
                  input_guardrails=[no_card_number])
 ```
-(`agent_openai_sdk.py:124–126`)
+(`agent_openai_sdk.py:138–143`)
 
 - `instructions` = system prompt (`checkpoints.py:31`): *"Bạn là trợ lý cho nhân viên support… Luôn dùng search_kb trước và trích id tài liệu làm nguồn. Chỉ tạo ticket khi user yêu cầu…"*
 - `model` = LLM nào; `tools` = danh sách tool LLM được chọn.
@@ -136,7 +178,7 @@ def build_agent(model):
 ```python
 await asyncio.wait_for(Runner.run(agent, run_input, context=me, max_turns=cp.MAX_TURNS), RUN_TIMEOUT_S)
 ```
-(`agent_openai_sdk.py:168`)
+(`agent_openai_sdk.py:195`)
 
 - `agent` = khai báo ở bước B · `run_input` = câu hỏi của user · `context=me` = thông tin user đăng nhập (đi vào `ctx` của tool) · `max_turns=8` = tối đa 8 lượt gọi LLM (điều kiện dừng do code đặt) · `wait_for(..., 120s)` = giới hạn thời gian.
 - Bên trong `Runner.run`, SDK lặp đúng sơ đồ slide 5 (docs SDK, mục "The agent loop"): gọi LLM → nếu LLM trả tool call thì chạy tool, gắn kết quả vào hội thoại, gọi LLM lại → nếu LLM trả câu trả lời cuối thì dừng.
