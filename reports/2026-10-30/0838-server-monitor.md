@@ -58,7 +58,7 @@ xid_sync_console breakdown: /var 21G — syslog.1 **11G**, syslog 7.4G, journal 
 Deletable candidates: booking.20251003.zip 1.5G, booking.zip 1.4G, booking/error_log.bk 879M, dev/error_log.bak.20251811 589M, bxr-retired-selfridges-20261029 372M (new, 10-29 archive).
 
 ## Unresolved questions
-1. speedventory host key changed — was Console instance rebuilt? OK to replace known_hosts entry?
+1. speedventory host key changed — asked in Matrix Bailey/Paturevision room 08:43 (likely dev server task), awaiting confirm before updating known_hosts
 2. nc_staging down — instance stopped intentionally?
 3. Truncate xid_sync_console syslog.1 (11G)?
 4. XID dev hosts still all timing out — mark as dead in skill?
