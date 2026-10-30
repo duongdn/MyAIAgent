@@ -81,6 +81,7 @@
 - Card `6ae38a0977e9abd4428a7371`: checklist "30/10/2026" 9/9 complete, dueComplete true.
 
 ## Unresolved / follow-up
+**Recheck 09:02:** all 10 subtasks already ✅ (Slack, Workstream, Trello done at 02:05) — nothing to re-run. Items below are human follow-ups, not failed subtasks.
 - 🟡 CloudWatch alarms still target stopped old Console LIVE; new Console Production unmonitored → repoint alarms. Decide whether to terminate old LIVE instance (EBS still billed under EC2-Other).
 - ⚠️ Siteground storage 74.6%, pre9 +2G/week; staging cleanup still pending.
 - 🟡 New ArgumentError (14/24h) + RuntimeError `movements` on Order after migration — dev check.
