@@ -4,6 +4,7 @@ Deck (26 slide): https://docs.google.com/presentation/d/10ZYIXeEzlElYai6ws9xd77Z
 Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 Đề cương: `02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf`, trang 4, mục Session 5. Đối chiếu từng dòng: `syllabus-to-slides-mapping.md`.
 Speaker notes của từng slide có đủ nguồn trích dẫn; file này là bản đọc nhanh.
+Giải thích code demo: `demo/README.md`.
 
 ## Chuẩn bị (làm trước buổi, ~10')
 ```bash
