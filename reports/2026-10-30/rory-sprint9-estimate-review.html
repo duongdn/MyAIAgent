@@ -354,8 +354,8 @@
           <tr><td class="sub-label">Chuẩn bị chỗ lưu nội dung</td><td class="sub-hrs">0.5</td></tr>
           <tr><td class="sub-label">Sửa + publish trong admin — tận dụng CKEditor có sẵn</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Validate nội dung + quyền (sanitize HTML)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">App lấy điều khoản đã publish</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">App mở link Formy (chỉ mở link, không tự build form)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">API trả điều khoản đã publish cho app gọi</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">API trả link Formy cho app mở (chỉ trả link, không tự build form)</td><td class="sub-hrs">0.5</td></tr>
           <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Bàn giao + smoke test</td><td class="sub-hrs">0.5</td></tr>
         </table>
@@ -375,11 +375,11 @@
           <tr><td class="sub-label">Check dữ liệu điểm danh</td><td class="sub-hrs">1.0</td></tr>
           <tr><td class="sub-label">Check API review của Mindbody — bước xác nhận khả thi</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Xác định đúng member (gắn với account/site)</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">App check điều kiện được review hay chưa</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">API check điều kiện được review hay chưa, trả về cho app</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Nhận request review, chặn review trùng</td><td class="sub-hrs">1.0</td></tr>
           <tr><td class="sub-label">Gửi review lên Mindbody</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Xử lý lỗi / kết quả không rõ ràng</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">App đọc lại review/trạng thái của chính mình</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">API trả lại review/trạng thái của chính member đó</td><td class="sub-hrs">1.0</td></tr>
           <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.0</td></tr>
         </table>
@@ -420,7 +420,7 @@
         <summary>6 việc cần làm</summary>
         <table class="sub mono">
           <tr><td class="sub-label">Check nguồn balance + cách thanh toán — bước xác nhận khả thi</td><td class="sub-hrs">2.5</td></tr>
-          <tr><td class="sub-label">App lấy số dư khả dụng</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">API trả số dư khả dụng cho app</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Báo giá 1 món đồ (validate giá ở server, không tin giá từ app gửi lên)</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Tạo order, trả phần còn lại qua Stripe</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Cấp món đồ, refresh lại số dư</td><td class="sub-hrs">2.0</td></tr>
@@ -445,8 +445,8 @@
           <tr><td class="sub-label">Nhân viên soạn/publish — tận dụng admin campaign có sẵn</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Resolve người nhận (map segment Klaviyo → account trong app)</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Chuẩn bị message qua cron job</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">App lấy message + xác nhận đã hiện popup</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">App mở inbox, đánh dấu đã đọc</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">API trả message chờ + nhận xác nhận app đã hiện popup</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">API phục vụ inbox, đánh dấu đã đọc</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">2.5</td></tr>
           <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.5</td></tr>
         </table>
@@ -464,7 +464,7 @@
         <summary>10 việc cần làm — 12.0h mua + 2.0h người nhận khác</summary>
         <table class="sub mono">
           <tr><td class="sub-label">Check checkout hiện có — tận dụng checkout hosted của website</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">App mở checkout gắn với người mua (handoff ngắn hạn, bảo mật)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">API tạo handoff checkout gắn với người mua (ngắn hạn, bảo mật) cho app mở</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Validate gift card + giá</td><td class="sub-hrs">1.0</td></tr>
           <tr><td class="sub-label">Tạo order + thanh toán Stripe</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Phát hành thẻ trong Mindbody</td><td class="sub-hrs">3.0</td></tr>
@@ -491,7 +491,7 @@
           <tr><td class="sub-label">Chuẩn bị API refresh account — tận dụng API profile có sẵn</td><td class="sub-hrs">0.5</td></tr>
           <tr><td class="sub-label">Đổi email — do Mindbody xử lý hoàn toàn</td><td class="sub-hrs">0.5</td></tr>
           <tr><td class="sub-label">Đổi password — do Mindbody xử lý hoàn toàn</td><td class="sub-hrs">0.25</td></tr>
-          <tr><td class="sub-label">App refresh lại profile/session</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">API refresh lại profile/session cho app</td><td class="sub-hrs">1.0</td></tr>
           <tr><td class="sub-label">Bảo vệ request refresh (rate limit, không log token)</td><td class="sub-hrs">0.25</td></tr>
           <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">0.5</td></tr>
@@ -511,7 +511,7 @@
         <table class="sub mono">
           <tr><td class="sub-label">Check công nợ + thẻ đã lưu — bước xác nhận khả thi</td><td class="sub-hrs">2.0</td></tr>
           <tr><td class="sub-label">Xác định đúng chủ sở hữu member</td><td class="sub-hrs">0.8</td></tr>
-          <tr><td class="sub-label">App xem nợ + lịch sử mua hàng</td><td class="sub-hrs">1.8</td></tr>
+          <tr><td class="sub-label">API trả nợ + lịch sử mua hàng cho app hiển thị</td><td class="sub-hrs">1.8</td></tr>
           <tr><td class="sub-label">User bấm "Pay now" (tính lại giá ở server, không tin số từ app)</td><td class="sub-hrs">1.5</td></tr>
           <tr><td class="sub-label">Trả bằng ví/thẻ đã lưu (xử lý 3DS, huỷ, lỗi)</td><td class="sub-hrs">2.5</td></tr>
           <tr><td class="sub-label">Ghi nhận đã trả, refresh lại số dư</td><td class="sub-hrs">3.5</td></tr>
