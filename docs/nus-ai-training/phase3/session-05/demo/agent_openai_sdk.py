@@ -79,7 +79,10 @@ def make_model(provider, model_name=None):
     # = `new OpenAI({ timeout: 20_000, maxRetries: 2 })` ở S2 slide 12. Async vì SDK chạy bất đồng bộ.
     # timeout/retry ở đây là cho TỪNG lượt gọi model; giới hạn cả lần chạy agent nằm ở run_limited().
     client = AsyncOpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url), timeout=60, max_retries=2)
-    # Trace mặc định gửi về dashboard OpenAI → thay bằng processor ghi file local (không lộ dữ liệu ra ngoài)
+    # TRACE: SDK tự tạo span cho mỗi bước (gọi LLM, chạy tool, guardrail) và gọi on_span_end() của MỌI
+    # processor trong danh sách. Mặc định danh sách = processor gửi về dashboard OpenAI.
+    # set_trace_processors THAY cả danh sách → chỉ còn LocalTraceProcessor ghi .traces/ (không lộ dữ liệu).
+    # (demo_ui.py thêm UITraceProcessor bằng add_trace_processor SAU dòng này.)
     set_trace_processors([LocalTraceProcessor(verbose=os.environ.get("DEMO_TRACE") == "1")])
     # Chat Completions API: chuẩn chung mọi provider tương thích OpenAI hỗ trợ
     # (Responses API — mặc định của SDK — chỉ OpenAI có)

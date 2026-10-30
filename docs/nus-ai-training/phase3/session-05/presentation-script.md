@@ -66,11 +66,11 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 
 | Khối | Dòng | Nói gì |
 |---|---|---|
-| 1. Model | 66 `make_model` | "Session 2 các bạn đã `new OpenAI({ timeout, maxRetries })` rồi tự gọi `responses.parse` 1 lần. Ở đây vẫn client `openai` đó, trỏ sang gateway công ty, nhưng **không tự gọi** — đưa cho SDK gọi." |
-| 2. Tools (`function_tool`) | 101–108 `search_kb`, 117–123 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. Session 2 tự viết schema bằng zod cho output; ở đây SDK tự sinh schema tham số tool từ kiểu Python." |
-| 3. Agent definition | 138–143 `build_agent` | "Agent = instructions (như `INSTRUCTIONS` ở Session 2) + model + danh sách tool. Chỉ khai báo, chưa gọi model." |
-| 4. Run (`Runner.run`) | 195 `run_limited` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
-| 5. Trace | 76 `set_trace_processors` | "SDK tự ghi trace; demo cho ghi ra máy và hiện ở cột phải trang web." |
+| 1. Model | 69 `make_model` | "Session 2 các bạn đã `new OpenAI({ timeout, maxRetries })` rồi tự gọi `responses.parse` 1 lần. Ở đây vẫn client `openai` đó, trỏ sang gateway công ty, nhưng **không tự gọi** — đưa cho SDK gọi." |
+| 2. Tools (`function_tool`) | 116–127 `search_kb`, 142–153 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. Session 2 tự viết schema bằng zod cho output; ở đây SDK tự sinh schema tham số tool từ kiểu Python." |
+| 3. Agent definition | 174–182 `build_agent` | "Agent = instructions (như `INSTRUCTIONS` ở Session 2) + model + danh sách tool. Chỉ khai báo, chưa gọi model." |
+| 4. Run (`Runner.run`) | 249 `run_limited` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
+| 5. Trace | 86 `set_trace_processors` | "SDK tự tạo span cho mỗi bước và gọi processor mình đăng ký; demo đăng ký 2 cái: ghi ra máy + hiện ở cột phải trang web." (cơ chế: `demo/README.md` mục 2, "Trace chạy thế nào") |
 
 Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết (load / run thế nào, bảng so sánh S2 ↔ S5): `demo/README.md` mục 3; luồng chạy đầu-cuối: mục 2.
 

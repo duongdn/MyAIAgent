@@ -46,7 +46,12 @@ def emit(event):
 
 
 class UITraceProcessor(TracingProcessor):
-    """Đổi span của SDK thành bước dễ đọc cho UI: ai làm (llm/app), làm gì, JSON gốc khi cần."""
+    """Đổi span của SDK thành bước dễ đọc cho UI: ai làm (llm/app), làm gì, JSON gốc khi cần.
+    SDK gọi on_span_end(span) mỗi khi 1 bước xong; chỉ xử lý 3 loại span:
+        guardrail  → ô "Kiểm tra input"
+        generation → ô "LLM chọn tool: …" (có tool_calls) hoặc "LLM trả lời cuối" (text)
+        function   → ô "App chạy <tool>" (có output) hoặc "App CHƯA chạy: chờ người duyệt" (output rỗng)
+    Output: không trả gì; emit(event) bỏ vào hàng đợi → /events đẩy lên trình duyệt."""
 
     def on_span_end(self, span):
         d = span.span_data
@@ -101,7 +106,9 @@ def run_in_thread(run, question):
     try:
         ts.reset()
         model = sdk.make_model(os.environ.get("DEMO_PROVIDER", "nus"), os.environ.get("DEMO_MODEL"))
-        add_trace_processor(UITraceProcessor())  # make_model() đặt lại processor → thêm UI processor sau đó
+        # add_trace_processor = THÊM vào danh sách (LocalTraceProcessor vẫn chạy). Phải gọi SAU make_model(),
+        # vì make_model() dùng set_trace_processors (thay cả danh sách) sẽ xoá processor đã thêm trước đó.
+        add_trace_processor(UITraceProcessor())
         answer = asyncio.run(sdk.run_agent(model, "alice", question, KB_DOCS, (), "ui"))
         tickets = [f"{t['id']} ({t['priority']}, {t['assignee']})" for t in ts.TICKETS]
         emit({"type": "done", "answer": answer, "usage": dict(cp.LAST_USAGE), "tickets": tickets})
