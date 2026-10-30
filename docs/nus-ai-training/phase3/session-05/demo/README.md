@@ -22,22 +22,73 @@ python3 demo_ui.py          # mở http://localhost:8000
   - `python3 run_demo.py --scenario 9 --trace-only` (yêu cầu ① chỉ hỏi)
   - `python3 run_demo.py --scenario 1 --approve yes --trace-only` (yêu cầu ② tạo ticket)
 
-## 2. Bức tranh: sơ đồ slide 5 nằm ở đâu trong code
+## 2. OpenAI Agents SDK — nối từ Session 2
+
+### Session 2 đã có gì
+Session 2 (`Session_02 – From use case to model API…pdf`, slide 11–14) dùng thư viện **`openai`** (TypeScript) gọi model **1 lần**:
+```ts
+const client = new OpenAI({ timeout: 20_000, maxRetries: 2 });
+const resp = await client.responses.parse({ model, instructions: INSTRUCTIONS,
+  input: `<email>\n${emailText}\n</email>`, text: { format: zodTextFormat(SupportRequest, "support_request") } });
+// rồi decide(req) bằng code: route_to_queue / ask_customer / needs_review
+```
+1 request → 1 response → app kiểm tra. Bài tự học S2: "làm quen OpenAI SDK, từ basic call tới structured output".
+
+### Agents SDK thêm gì
+**OpenAI Agents SDK** (`pip install openai-agents`, import tên `agents`) là thư viện của OpenAI xây **trên** thư viện `openai`: vẫn dùng client đó để gọi model, nhưng tự lo phần **lặp nhiều lượt + chạy tool** mà S2 không có. Docs: https://openai.github.io/openai-agents-python/ (Python; có bản JS `@openai/agents`). Demo dùng Python bản `openai-agents==0.23.1`.
+
+| Ý ở Session 2 | Ở demo Session 5 | Trong code |
+|---|---|---|
+| `new OpenAI({ timeout, maxRetries })` | Vẫn client `openai` — `AsyncOpenAI(api_key, base_url, timeout=60, max_retries=2)`, rồi bọc thành Model đưa cho SDK | `make_model()` |
+| `instructions: INSTRUCTIONS` | `Agent(instructions=SYSTEM_PROMPT)` | `build_agent()` |
+| `input: <email>…</email>` (đánh dấu là data) | Câu hỏi truyền vào `Runner.run(agent, question)`; kết quả tool gói trong `<untrusted_search_results>` | `run_limited()`, `checkpoints.search_kb` |
+| Schema zod cho **output** | Schema cho **tham số tool** — SDK tự sinh từ kiểu Python (`query: str`) | `@function_tool` |
+| `client.responses.parse(...)` — **1 lượt** | `Runner.run(...)` — **nhiều lượt**, SDK tự gọi model, chạy tool, gửi lại | `run_limited()` |
+| `decide()`: rule nghiệp vụ trong code | Vẫn trong code: `checkpoints.py` kiểm tra trước khi tool chạy (Session 6–7) | `checkpoints.py` |
+| Timeout, retry có giới hạn | Thêm giới hạn **cả vòng lặp**: `max_turns=8`, 120 giây | `run_limited()` |
+| TypeScript | Python — chọn chung cho Session 5–9; SDK cũng có bản JS `@openai/agents` | — |
+
+Câu nói khi dạy: *"Session 2: mình tự gọi model 1 lần rồi tự kiểm tra. Session 5: vẫn client đó, nhưng giao vòng lặp gọi–chạy tool–gọi lại cho SDK."*
+
+### Load lên thế nào (theo thứ tự trong `agent_openai_sdk.py`)
+1. **Cài**: `pip install -r requirements.txt` → `openai-agents` (kéo theo `openai`).
+2. **Import**: `from agents import Agent, Runner, function_tool, …` và `from openai import AsyncOpenAI`.
+3. **Key**: `load_config()` đọc `config/.nus-llm-gateway-config.json` (hoặc biến `NUS_LLM_API_KEY`). Không hardcode.
+4. **Model** — `make_model("nus")`:
+   - `AsyncOpenAI(base_url="https://llm.nustechnology.com/v1", …)`: gateway công ty tương thích API OpenAI, nên chỉ đổi `base_url`.
+   - `OpenAIChatCompletionsModel(model="deepseek-v4.1-flash", openai_client=client)`: mặc định SDK dùng Responses API (chỉ OpenAI có); gateway chỉ hỗ trợ Chat Completions nên chọn class này. Với OpenAI thật chỉ cần `Agent(model="gpt-…")`.
+   - `set_trace_processors([LocalTraceProcessor()])`: mặc định SDK gửi trace về dashboard OpenAI; demo ghi ra máy.
+   - `MODEL_SETTINGS`: tắt cache của gateway để mỗi lần là model thật.
+5. **Tools**: Python chạy tới `@function_tool` → SDK tạo object tool có tên, mô tả, schema.
+6. **Agent**: `build_agent(model)` → object `Agent`. Đến đây **chưa gọi model lần nào**.
+
+### Run thế nào
+```python
+result = await Runner.run(agent, "Mã lỗi thanh toán E205 nghĩa là gì?", context=me, max_turns=8)
+print(result.final_output)
+```
+- `Runner.run` là hàm async (`await`); bản đồng bộ là `Runner.run_sync(...)`, bản stream là `Runner.run_streamed(...)`.
+- Bên trong, mỗi lượt: SDK gửi instructions + hội thoại + schema tool cho model → model trả tool call thì SDK chạy hàm và lặp; trả text thì dừng (chi tiết dữ liệu thật ở mục 4, bước D).
+- `result.final_output`: câu trả lời cuối · `result.context_wrapper.usage`: số lượt gọi + token · `result.interruptions`: tool đang chờ người duyệt (`needs_approval`).
+- Lỗi SDK báo: `MaxTurnsExceeded` (quá 8 lượt), `InputGuardrailTripwireTriggered` (guardrail chặn) → `run_agent()` bắt và trả thông báo.
+- Ai gọi: `demo_ui.py` (trang web) và `run_demo.py` (terminal) đều gọi `run_agent()` → `run_limited()` → `Runner.run`.
+
+## 3. Bức tranh: sơ đồ slide 5 nằm ở đâu trong code
 
 Slide 5 vẽ agent = **LLM** + **code app** chạy vòng lặp ①–④ với **tools**. Trong demo:
 
 | Trên sơ đồ slide 5 | Trong code | Ai viết |
 |---|---|---|
-| LLM | Model `deepseek-v4.1-flash` qua gateway — `make_model()` (`agent_openai_sdk.py:52`) | Có sẵn |
-| Tools | `search_kb`, `create_ticket` — hàm Python gắn `@function_tool` (`agent_openai_sdk.py:79–92`) | Mình viết |
-| Code app — khai báo agent | `build_agent()` (`agent_openai_sdk.py:105`) | Mình viết (vài dòng) |
-| Code app — **vòng lặp ①–④** | `Runner.run(...)` (`agent_openai_sdk.py:145`) | **SDK viết sẵn** |
+| LLM | Model `deepseek-v4.1-flash` qua gateway — `make_model()` (`agent_openai_sdk.py:64`) | Có sẵn |
+| Tools | `search_kb`, `create_ticket` — hàm Python gắn `@function_tool` (`agent_openai_sdk.py:96–109`) | Mình viết |
+| Code app — khai báo agent | `build_agent()` (`agent_openai_sdk.py:124`) | Mình viết (vài dòng) |
+| Code app — **vòng lặp ①–④** | `Runner.run(...)` (`agent_openai_sdk.py:168`) | **SDK viết sẵn** |
 | Code app — quyết định của application (quyền, duyệt…) | `checkpoints.py` | Mình viết — học ở các buổi sau |
 | Ghi lại từng bước | Trace (`trace_local.py`, cột phải trang demo) | SDK sinh, mình chọn nơi ghi |
 
 Ý chính khi giảng: **phần vòng lặp là SDK lo** (slide 19); mình chỉ khai báo tool + agent rồi gọi `Runner.run`.
 
-## 3. Walkthrough từng bước
+## 4. Walkthrough từng bước
 
 ### Bước A — Tool: hàm Python bình thường + `@function_tool`
 
@@ -46,7 +97,7 @@ Slide 5 vẽ agent = **LLM** + **code app** chạy vòng lặp ①–④ với *
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
     return cp.search_kb(ctx.context, query, tenant)
 ```
-(`agent_openai_sdk.py:79–81`; `create_ticket` ở dòng 90–92 viết y hệt.)
+(`agent_openai_sdk.py:96–98`; `create_ticket` ở dòng 107–109 viết y hệt.)
 
 SDK tự đọc tên hàm, mô tả, kiểu tham số và biến thành **mô tả tool gửi cho LLM**. Đây là đúng thứ LLM nhìn thấy (in bằng `python3 ../../session-06/demo/compare_tool_descriptions.py --schema` — script của Session 6, chạy tức thì, không gọi model):
 
@@ -74,7 +125,7 @@ def build_agent(model):
                  tools=[search_kb, create_ticket], model_settings=MODEL_SETTINGS,
                  input_guardrails=[no_card_number])
 ```
-(`agent_openai_sdk.py:105–107`)
+(`agent_openai_sdk.py:124–126`)
 
 - `instructions` = system prompt (`checkpoints.py:31`): *"Bạn là trợ lý cho nhân viên support… Luôn dùng search_kb trước và trích id tài liệu làm nguồn. Chỉ tạo ticket khi user yêu cầu…"*
 - `model` = LLM nào; `tools` = danh sách tool LLM được chọn.
@@ -85,7 +136,7 @@ def build_agent(model):
 ```python
 await asyncio.wait_for(Runner.run(agent, run_input, context=me, max_turns=cp.MAX_TURNS), RUN_TIMEOUT_S)
 ```
-(`agent_openai_sdk.py:145`)
+(`agent_openai_sdk.py:168`)
 
 - `agent` = khai báo ở bước B · `run_input` = câu hỏi của user · `context=me` = thông tin user đăng nhập (đi vào `ctx` của tool) · `max_turns=8` = tối đa 8 lượt gọi LLM (điều kiện dừng do code đặt) · `wait_for(..., 120s)` = giới hạn thời gian.
 - Bên trong `Runner.run`, SDK lặp đúng sơ đồ slide 5 (docs SDK, mục "The agent loop"): gọi LLM → nếu LLM trả tool call thì chạy tool, gắn kết quả vào hội thoại, gọi LLM lại → nếu LLM trả câu trả lời cuối thì dừng.
@@ -143,7 +194,7 @@ SDK tự sinh trace cho mỗi `Runner.run`: mỗi lượt gọi LLM, mỗi tool 
 
 "Ở mức định vị" = chỉ cần đọc trace để biết: agent đã đi bước nào, LLM chọn tool gì với tham số gì, sai/dừng ở đâu. Chi tiết trace/eval ở Session 9.
 
-## 4. Hai yêu cầu mẫu — vì sao một cái chỉ cần RAG, một cái cần agent
+## 5. Hai yêu cầu mẫu — vì sao một cái chỉ cần RAG, một cái cần agent
 
 | Nút | Câu hỏi | Agent làm gì (chạy thật) | Kết luận |
 |---|---|---|---|
@@ -152,7 +203,7 @@ SDK tự sinh trace cho mỗi `Runner.run`: mỗi lượt gọi LLM, mỗi tool 
 
 Ở ②, hay gặp: LLM đề xuất priority `P2` hoặc assignee `"billing team"` → ô tối "BỊ CHẶN bởi application" → LLM đọc lỗi, tự sửa `P3` / `billing-team-a`. Dùng để minh hoạ "LLM đề xuất, app quyết" (slide 22). Bấm **Từ chối** → không có ticket nào được tạo.
 
-## 5. Câu hỏi hay gặp
+## 6. Câu hỏi hay gặp
 
 | Câu hỏi | Trả lời ngắn |
 |---|---|
@@ -164,7 +215,7 @@ SDK tự sinh trace cho mỗi `Runner.run`: mỗi lượt gọi LLM, mỗi tool 
 | Sao `search_kb` có tham số `tenant`? | Cố ý để lộ — lỗi thiết kế hay gặp; app bỏ qua giá trị LLM điền và dùng thông tin đăng nhập. Học ở Session 7. |
 | Ai chặn khi LLM điền sai priority? | Code trong `checkpoints.py` (rule nghiệp vụ), không phải prompt. Học ở Session 6–7. |
 
-## 6. File nào dùng cho Session 5
+## 7. File nào dùng cho Session 5
 
 | File | Vai trò |
 |---|---|

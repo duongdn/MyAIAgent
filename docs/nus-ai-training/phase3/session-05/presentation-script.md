@@ -62,13 +62,17 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 
 Đáp ứng 2 dòng đề cương (trang 4, mục Session 5): gạch 3 "**Walkthrough** support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API" và "Ví dụ trong buổi: yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?".
 
-**Bước 0 — Walkthrough code (~2', editor)**: mở `docs/nus-ai-training/phase3/session-05/demo/agent_openai_sdk.py`, chỉ đúng 3 chỗ, nối với bảng slide 19:
+**Bước 0 — Walkthrough code (~3', editor)**: mở `docs/nus-ai-training/phase3/session-05/demo/agent_openai_sdk.py`. Code chia 4 khối đánh số trong comment (`# ── 1. Model`, `2. Tools`, `3. Agent definition`, `4. Chạy agent`), đi đúng thứ tự, nối với Session 2 và bảng slide 19:
 
-| Concept (slide 19) | Dòng | Nói gì |
+| Khối | Dòng | Nói gì |
 |---|---|---|
-| `function_tool` (tools) | 79–81 `search_kb`, 90–92 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. SDK lấy tên hàm + mô tả + tham số để gửi cho LLM." |
-| `Agent` (agent definition) | 105–107 `build_agent` | "Agent = instructions (system prompt) + model + danh sách tool. Chỉ khai báo, chưa chạy gì." |
-| `Runner.run` (run/runner) | 145 `run_limited` | "Một dòng này chạy cả vòng lặp ①–④ ở slide 5, tới khi LLM trả lời cuối hoặc chạm `max_turns`." |
+| 1. Model | 64 `make_model` | "Session 2 các bạn đã `new OpenAI({ timeout, maxRetries })` rồi tự gọi `responses.parse` 1 lần. Ở đây vẫn client `openai` đó, trỏ sang gateway công ty, nhưng **không tự gọi** — đưa cho SDK gọi." |
+| 2. Tools (`function_tool`) | 96–98 `search_kb`, 107–109 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. Session 2 tự viết schema bằng zod cho output; ở đây SDK tự sinh schema tham số tool từ kiểu Python." |
+| 3. Agent definition | 124–126 `build_agent` | "Agent = instructions (như `INSTRUCTIONS` ở Session 2) + model + danh sách tool. Chỉ khai báo, chưa gọi model." |
+| 4. Run (`Runner.run`) | 168 `run_limited` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
+| 5. Trace | 71 `set_trace_processors` | "SDK tự ghi trace; demo cho ghi ra máy và hiện ở cột phải trang web." |
+
+Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết (load / run thế nào, bảng so sánh S2 ↔ S5): `demo/README.md` mục 2.
 
 - Các phần khác trong file (`needs_approval`, guardrail, checkpoint ①–⑤, task state) → nói "đây là phần application tự quyết, học ở Session 6–9", **không giải thích**. Không học thuộc API.
 - Nếu số dòng lệch do code đổi: tìm `@function_tool`, `def build_agent`, `Runner.run`.

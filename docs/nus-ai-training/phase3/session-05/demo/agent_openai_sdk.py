@@ -2,6 +2,16 @@
 Support agent bằng OpenAI Agents SDK — cùng SDK với Session 5–9 của chương trình.
 Chạy được với OpenAI hoặc bất kỳ provider tương thích OpenAI (DeepSeek...) — xem make_model().
 
+TỪ SESSION 2 ĐẾN SESSION 5 (đọc theo thứ tự trong file):
+    Session 2 dùng thư viện `openai`: 1 lần gọi model = client.responses.parse(instructions, input, schema).
+    Agents SDK (`pip install openai-agents`, import `agents`) xây TRÊN thư viện đó, thêm vòng lặp agent:
+      1. Model   make_model()    — vẫn là client `openai` như S2 (key, base_url, timeout, retry), bọc thành Model
+      2. Tool    @function_tool  — hàm Python → SDK tự sinh JSON schema (S2 tự viết schema bằng zod)
+      3. Agent   build_agent()   — gom instructions + model + tools. Chỉ là khai báo, chưa gọi model
+      4. Run     Runner.run()    — SDK gọi model, chạy tool, gửi kết quả lại… lặp tới câu trả lời cuối
+      5. Trace   trace_local.py  — SDK ghi lại từng lượt gọi model / tool
+    Phần ①–⑤ dưới đây là kiểm tra của application — học ở Session 6–8, Session 5 chỉ cần biết nó ở đâu.
+
 Logic kiểm tra quyền nằm ở checkpoints.py (dùng chung). File này chỉ "nối dây" vào SDK:
     ① Session đi qua RunContextWrapper — model không thấy, không sửa được
     ④ needs_approval=<hàm>: SDK gọi TRƯỚC khi chạy tool → code kiểm tra trước
@@ -27,7 +37,9 @@ from task_state import RUN_TIMEOUT_S, TaskState
 from trace_local import LocalTraceProcessor
 
 
-# ── Model: OpenAI hoặc provider tương thích OpenAI ─────────────────────────
+# ── 1. Model: OpenAI hoặc provider tương thích OpenAI ──────────────────────
+# Giống S2: tạo client `openai` (key + base_url + timeout + retry). Khác S2: không tự gọi client,
+# mà đưa cho SDK — SDK sẽ gọi model mỗi lượt của vòng lặp.
 PROVIDERS = {
     # name: (base_url mặc định, model mặc định, file config, biến môi trường chứa key)
     # nus = LLM gateway của công ty (tương thích OpenAI, có DeepSeek/Qwen/GLM/MiMo)
@@ -52,7 +64,9 @@ def load_config(config_file, env_var):
 def make_model(provider, model_name=None):
     base_url, default_model, config_file, env_var = PROVIDERS[provider]
     cfg = load_config(config_file, env_var)
-    client = AsyncOpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url))
+    # = `new OpenAI({ timeout: 20_000, maxRetries: 2 })` ở S2 slide 12. Async vì SDK chạy bất đồng bộ.
+    # timeout/retry ở đây là cho TỪNG lượt gọi model; giới hạn cả lần chạy agent nằm ở run_limited().
+    client = AsyncOpenAI(api_key=cfg["api_key"], base_url=cfg.get("base_url", base_url), timeout=60, max_retries=2)
     # Trace mặc định gửi về dashboard OpenAI → thay bằng processor ghi file local (không lộ dữ liệu ra ngoài)
     set_trace_processors([LocalTraceProcessor(verbose=os.environ.get("DEMO_TRACE") == "1")])
     # Chat Completions API: chuẩn chung mọi provider tương thích OpenAI hỗ trợ
@@ -75,7 +89,10 @@ def list_models(provider):
 MODEL_SETTINGS = ModelSettings(extra_body=None if os.environ.get("DEMO_CACHE") == "1" else {"cache": {"no-cache": True}})
 
 
-# ── Tools: chỉ gọi sang checkpoints.py ─────────────────────────────────────
+# ── 2. Tools: chỉ gọi sang checkpoints.py ──────────────────────────────────
+# @function_tool đọc tên hàm + kiểu tham số (query: str, tenant: str | None) → JSON schema gửi cho model.
+# S2 viết schema cho OUTPUT (zod); ở đây schema cho THAM SỐ TOOL — model điền, app chạy.
+# description_override = mô tả tool model đọc để quyết định có gọi hay không.
 @function_tool(description_override=cp.SEARCH_KB_DESC)
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
     return cp.search_kb(ctx.context, query, tenant)  # ctx.context = Session (①), model không thấy
@@ -102,12 +119,17 @@ async def no_card_number(_ctx, _agent, user_input) -> GuardrailFunctionOutput:
     return GuardrailFunctionOutput(output_info=None, tripwire_triggered=bool(CARD_NUMBER.search(str(user_input))))
 
 
+# ── 3. Agent definition ────────────────────────────────────────────────────
+# instructions = system prompt (S2: INSTRUCTIONS). Câu hỏi user KHÔNG nằm ở đây — truyền lúc Runner.run.
 def build_agent(model):
     return Agent(name="Support agent", instructions=cp.SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket],
                  model_settings=MODEL_SETTINGS, input_guardrails=[no_card_number])
 
 
-# ── Chạy agent ─────────────────────────────────────────────────────────────
+# ── 4. Chạy agent ──────────────────────────────────────────────────────────
+# S2: `await client.responses.parse(...)` = 1 lượt.  S5: `await Runner.run(agent, question)` = nhiều lượt:
+#   gọi model → model trả tool call (JSON) → SDK chạy hàm tool → gắn kết quả vào hội thoại → gọi model lại
+#   → … → model trả lời không kèm tool call → result.final_output.
 async def run_agent(model, session_user, question, kb, disabled, approve_mode, scenario=None, resume=None):
     """resume = TaskState đang AWAITING_APPROVAL (đọc từ .state/) → tiếp tục run đã lưu thay vì chạy lại từ đầu."""
     task = resume or TaskState(user=session_user, question=question, scenario=scenario)
@@ -141,7 +163,8 @@ async def run_agent(model, session_user, question, kb, disabled, approve_mode, s
 
 
 async def run_limited(agent, run_input, me):
-    """Mọi lần chạy đều có giới hạn bước (max_turns) và thời gian (RUN_TIMEOUT_S)."""
+    """Mọi lần chạy đều có giới hạn bước (max_turns) và thời gian (RUN_TIMEOUT_S).
+    context=me: dữ liệu của app (user đăng nhập) — tool đọc qua ctx.context, model không thấy."""
     return await asyncio.wait_for(Runner.run(agent, run_input, context=me, max_turns=cp.MAX_TURNS), RUN_TIMEOUT_S)
 
 
