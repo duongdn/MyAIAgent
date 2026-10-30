@@ -253,6 +253,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [feedback_news_digest_stale_tmp_section_files](news-digest/feedback_news_digest_stale_tmp_section_files.md) — 🔴 10-05 old July articles: stale /tmp/nd-section-*.md matched glob wait; per-run RUN_DIR now required
 
 ## server-monitor
+- [nc_staging_unreachable_is_intentional_ignore](server-monitor/feedback_nc_staging_unreachable_is_intentional_ignore.md) — nc_staging timeout = stopped on purpose; ignore + tick Trello
 - [feedback_server_safety_consolidated](server-monitor/feedback_server_safety_consolidated.md)
 - [xid_sync_console_keep_verbose_logs_truncate_syslog](server-monitor/feedback_xid_sync_console_keep_verbose_logs_truncate_syslog.md) — XID disk high = verbose SQL syslog; keep log level, truncate syslog.1
 - [feedback_siteground_skip_permanently](server-monitor/feedback_siteground_skip_permanently.md) — 🔴 2026-08-28: skip Siteground/Bailey step 1 entirely, CAPTCHA unautomatable

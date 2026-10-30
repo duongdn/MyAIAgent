@@ -187,13 +187,14 @@ Mark "Fountain" complete after both servers checked.
 ### SSH Hosts (from ~/.ssh/config, prefix `xid`)
 
 **Production**: xid_sync_console, xid_app_backend, xid_saas_backend, xid_app_frontend, xid_saas_frontend
-**Dev/Staging**: xid_app_backend.dev, xid_sync_console.dev, xid_sass_backend.dev, xid_saas_backend.dev
+**Dev/Staging**: none reachable (all dead, see below)
 
 > **Known dead (skip)**: `xidsg.com`, `xid.stlodge` — persistent DNS failures, likely decommissioned.
+> **Known dead (skip)**: `xid_app_backend.dev`, `xid_sync_console.dev`, `xid_sass_backend.dev`, `xid_saas_backend.dev` — persistent timeouts, user confirmed dead 2026-10-30.
 > **Known dead (skip)**: `xid_sass_frontend.dev` (18.142.105.78), `xid_app_frontend.dev` (54.169.217.146) — persistent timeouts, likely terminated.
 
 ```bash
-for host in xid_sync_console xid_app_backend xid_saas_backend xid_app_frontend xid_saas_frontend xid_app_backend.dev xid_sync_console.dev xid_sass_backend.dev xid_saas_backend.dev; do
+for host in xid_sync_console xid_app_backend xid_saas_backend xid_app_frontend xid_saas_frontend; do
   echo "========== $host =========="
   ssh -o ConnectTimeout=5 -o BatchMode=yes "$host" "hostname; uptime; free -h | grep -E 'Mem|Swap'; df -h / | tail -1; nproc" 2>&1 || echo "CONNECTION FAILED"
 done
