@@ -210,6 +210,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 - [project_monday_effort_verify_thuyltt_context](monday-effort-verify/project_command_context.md), [reference_elena_samguard_tasklog_sheet](monday-effort-verify/reference_elena_samguard_tasklog_sheet.md) — 🔴 tab `W{n}` ≠ calendar week
 
 ## money-report
+- [misa_nha_wallet_deleted_moved_to_assets](money-report/feedback_misa_nha_wallet_deleted_moved_to_assets.md) — 🔴 Nhà xoá khỏi ví MISA 10-30 (sang mục Tài sản) → luôn cộng tay 2.5B vào NW, ko hỏi
 - [c_vay_9m_is_personal_loan](money-report/feedback_c_vay_9m_is_personal_loan_not_savings.md) — 🔴 sổ "C vay 9m" 400M 11.2% = CHO VAY CÁ NHÂN, tách khỏi tiết kiệm/quỹ khẩn cấp
 - [low_cash_before_payday_not_a_risk](money-report/feedback_low_cash_before_payday_not_a_risk.md) — 🔴 tiền mặt thấp cuối tháng ≠ rủi ro (lương về); ko khuyên dừng DCA vì thanh khoản
 - [chi_ky_loan_interest_free_no_rush](money-report/feedback_chi_ky_loan_interest_free_no_rush.md) — 🔴 vay chị Ky 0% lãi, trả khi chị cần; ko flag, ko khuyến nghị trả sớm

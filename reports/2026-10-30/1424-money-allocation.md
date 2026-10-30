@@ -1,6 +1,6 @@
 # Asset Allocation — 2026-10-30 14:24
 
-> 🔄 **Δ vs 11:40 hôm nay: −6,522,914** — vàng 713.5M → **707.0M** (−6.5M giá) · Paypal −22.9K (tỷ giá). ⚠️ **Ví "Nhà" (2.5B) đã biến mất khỏi MISA** (không còn trong danh sách ví, kể cả inactive) → totaldashboard 5,373.7M → 2,867.2M; **cộng tay Nhà 2,500,000,000** như Larion/VCBF/VCBS để NW nhất quán. long an res + vàng đã chuyển inActive nhưng vẫn được totaldashboard tính. Không có giao dịch mới sau 11:40.
+> 🔄 **Δ vs 11:40 hôm nay: −6,522,914** — vàng 713.5M → **707.0M** (−6.5M giá) · Paypal −22.9K (tỷ giá). Ví "Nhà" (2.5B) đã được user xoá khỏi danh sách ví (chuyển sang mục "Tài sản" của MISA) → totaldashboard 5,373.7M → 2,867.2M; **cộng tay Nhà 2,500,000,000** như Larion/VCBF/VCBS để NW nhất quán. long an res + vàng đã chuyển inActive nhưng vẫn được totaldashboard tính. Không có giao dịch mới sau 11:40.
 
 ## Tỉ lệ tài sản (excl. Nhà, base 5,567,416,440 ₫)
 | Loại | Tổng (₫) | % Total | Ghi chú |
@@ -41,7 +41,7 @@ BĐS 43.6% · Investment 32.4% · Savings 9.0% · Cho vay 5.0% · Gold 8.8% · L
 ## Finance Review
 
 ### 0. Đối chiếu report gần nhất (11:40 hôm nay; trước đó 10-29 08:35)
-- 11:40 → 14:24: NW −6.52M = vàng −6.5M + Paypal FX −22.9K. Ví Nhà bị xoá/ẩn khỏi MISA → cộng tay 2.5B (không phải mất tiền).
+- 11:40 → 14:24: NW −6.52M = vàng −6.5M + Paypal FX −22.9K. Ví Nhà user xoá, chuyển sang mục Tài sản → cộng tay 2.5B.
 - NW 7,924,307,951 → 7,983,852,219 = **Δ +66.07M**: vcb ~67M chưa có giao dịch nguồn (≈ lương) − chi ~1.5M + 0.5M khác (15M Thưởng là đổi loại từ Đi vay, ko phải tiền mới).
 - totaldashboard 5,317.6M → 5,373.7M (+56.1M) = +65.3M vcb +0.5M khác − 10M sang FPTS (ẩn) − chi. Không phải bất thường kiểu sổ stale; chỉ thiếu bút toán nguồn cho ~67M.
 - Plan "DCA tiếp từ lương" — ✅ một phần: 10M vào FPTS (10-29). Trần CP 50% còn ~170M.
