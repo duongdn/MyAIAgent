@@ -72,7 +72,7 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 | 4. Run (`Runner.run`) | 195 `run_limited` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
 | 5. Trace | 76 `set_trace_processors` | "SDK tự ghi trace; demo cho ghi ra máy và hiện ở cột phải trang web." |
 
-Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết (load / run thế nào, bảng so sánh S2 ↔ S5): `demo/README.md` mục 2.
+Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết (load / run thế nào, bảng so sánh S2 ↔ S5): `demo/README.md` mục 3; luồng chạy đầu-cuối: mục 2.
 
 - Các phần khác trong file (`needs_approval`, guardrail, checkpoint ①–⑤, task state) → nói "đây là phần application tự quyết, học ở Session 6–9", **không giải thích**. Không học thuộc API.
 - Nếu số dòng lệch do code đổi: tìm `@function_tool`, `def build_agent`, `Runner.run`.
