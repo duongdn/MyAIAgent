@@ -222,6 +222,13 @@
     margin-left:0.15rem;
   }
 
+  .desc{
+    margin:0.6rem 0 0;
+    color:var(--ink-soft);
+    font-size:0.93rem;
+    line-height:1.6;
+  }
+
   details.breakdown{ margin-top:0.9rem; }
   details.breakdown summary{
     cursor:pointer;
@@ -297,37 +304,37 @@
 <div class="page">
 
   <header class="hero">
-    <div class="eyebrow">Backend Estimate Review — Rory / Swift Studio</div>
-    <h1 class="serif">Sprint 9 estimate, checked against source</h1>
-    <p class="dek">8 backend features, 101 estimated hours. Reviewed line by line against KhanhHH's own breakdown sheet — not a summary of it.</p>
+    <div class="eyebrow">Review Est Backend — Rory / Swift Studio</div>
+    <h1 class="serif">Est Sprint 9 — đối chiếu với nguồn gốc</h1>
+    <p class="dek">8 feature backend, tổng 101 giờ. Review từng dòng dựa trên breakdown gốc của Khánh — không phải bản tóm tắt.</p>
     <div class="meta-row">
-      <span><b>Estimate date</b> 27/10/2026</span>
-      <span><b>Reviewed</b> 30/10/2026</span>
-      <span><b>Role</b> Backend developer</span>
-      <span><b>Source</b> KhanhHH estimate sheet (public, CSV-verified)</span>
+      <span><b>Ngày est</b> 27/10/2026</span>
+      <span><b>Ngày review</b> 30/10/2026</span>
+      <span><b>Vai trò</b> Backend developer</span>
+      <span><b>Nguồn</b> Sheet est của Khánh (public, đã verify qua CSV)</span>
     </div>
   </header>
 
   <div class="correction">
-    <b>Correction from v1:</b> an earlier pass guessed at sub-task breakdowns instead of reading the sheet in full, and wrongly flagged Door Access and Gift Card Redemption as underestimated. This version reads the sheet's own itemized breakdown — all 8 tasks already carry detailed sub-tasks, feasibility gates, and reuse notes. No part of this review is inferred.
+    <b>Sửa so với bản v1:</b> lần review đầu tự đoán breakdown thay vì đọc hết sheet, nên kết luận sai — flag nhầm Door Access và Gift Card Redemption là bị est thấp. Bản này đọc đúng breakdown chi tiết Khánh đã viết sẵn trong sheet — cả 8 task đều có sub-task cụ thể, điểm cần feasibility-check, và note reuse rõ ràng. Không có phần nào trong review này là tự suy đoán.
   </div>
 
   <section class="summary">
-    <h2>Summary</h2>
+    <h2>Tổng quan</h2>
     <table class="summary-table mono">
       <thead>
-        <tr><th class="serif" style="font-family:inherit">Task</th><th>Hours</th><th>Status</th></tr>
+        <tr><th class="serif" style="font-family:inherit">Task</th><th>Giờ</th><th>Tình trạng</th></tr>
       </thead>
       <tbody>
-        <tr><td>1. T&amp;Cs admin and content API</td><td class="hrs">6.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
-        <tr><td>2. Class Reviews (SWEAT &amp; BXR)</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip gate">Feasibility gate (2.0h)</span></td></tr>
-        <tr><td>3. Door Access QR &amp; Reception Barcode</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Confirmed w/ client 30 Oct</span></td></tr>
-        <tr><td>4. Gift Card Redemption / Cash Values</td><td class="hrs">12.0</td><td class="status-cell"><span class="chip gate">Feasibility gate (2.5h)</span></td></tr>
-        <tr><td>5. In-App Notifications</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
-        <tr><td>6. Purchasing of Gift Cards</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Reuse verified</span></td></tr>
-        <tr><td>7. Update Email/Password</td><td class="hrs">5.0</td><td class="status-cell"><span class="chip ok">Verified vs. live code</span></td></tr>
-        <tr><td>8. Clear Mindbody Balance</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Self-revised 24h → 18h</span></td></tr>
-        <tr class="total"><td>Total</td><td class="hrs">101.0</td><td></td></tr>
+        <tr><td>1. T&amp;Cs — admin + content API</td><td class="hrs">6.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
+        <tr><td>2. Class Reviews (Sweat &amp; BXR)</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip gate">Cần check khả thi (2.0h)</span></td></tr>
+        <tr><td>3. Door Access QR &amp; Barcode lễ tân</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Khách đã chốt 30/10</span></td></tr>
+        <tr><td>4. Đổi Gift Card / Cash Value trong app</td><td class="hrs">12.0</td><td class="status-cell"><span class="chip gate">Cần check khả thi (2.5h)</span></td></tr>
+        <tr><td>5. Thông báo trong app (In-App Notifications)</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
+        <tr><td>6. Mua Gift Card trong app</td><td class="hrs">14.0</td><td class="status-cell"><span class="chip ok">Reuse đã xác nhận</span></td></tr>
+        <tr><td>7. Đổi Email/Password trong app</td><td class="hrs">5.0</td><td class="status-cell"><span class="chip ok">Đã verify bằng code thật</span></td></tr>
+        <tr><td>8. Thanh toán dư nợ Mindbody trong app</td><td class="hrs">18.0</td><td class="status-cell"><span class="chip ok">Tự hạ từ 24h → 18h</span></td></tr>
+        <tr class="total"><td>Tổng</td><td class="hrs">101.0</td><td></td></tr>
       </tbody>
     </table>
   </section>
@@ -336,190 +343,198 @@
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">01</div><h3>T&amp;Cs admin and content API</h3></div>
+        <div><div class="task-num">01</div><h3>T&amp;Cs — admin + content API</h3></div>
         <div class="task-hours mono">6.0<span>h</span></div>
       </div>
+      <p class="desc">Nhân viên cần soạn/sửa điều khoản (T&amp;Cs) ở 1 trang admin, bấm publish là app và web lấy được nội dung mới nhất qua API. Phần "Forms" chỉ là mở link Formy có sẵn (form khách đã làm sẵn bên ngoài), không phải tự xây form.</p>
       <details class="breakdown">
-        <summary>8 sub-tasks</summary>
+        <summary>8 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Define content API (draft / published payload)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Prepare content storage</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Edit and publish in admin — reuses existing CKEditor</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Validate content and permissions (sanitize HTML)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">App fetches published terms</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">App opens Formy link (link only — no form engine built)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Handover and smoke test</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Định nghĩa API nội dung (trạng thái nháp/đã publish)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Chuẩn bị chỗ lưu nội dung</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Sửa + publish trong admin — tận dụng CKEditor có sẵn</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Validate nội dung + quyền (sanitize HTML)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">App lấy điều khoản đã publish</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">App mở link Formy (chỉ mở link, không tự build form)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Bàn giao + smoke test</td><td class="sub-hrs">0.5</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue.</b> CKEditor pattern reused from <code class="mono">all_packs/all_pt_packs</code>; Formy is a supplied link, not a submission engine to build. Website wiring is a separate optional +2h, not folded into the 6h.</div>
+      <div class="verdict"><b>Không vấn đề gì.</b> Tận dụng lại pattern CKEditor từ <code class="mono">all_packs/all_pt_packs</code>; Formy là link khách cung cấp sẵn, không phải tự xây engine nhận submit. Phần nối vào website là +2h tách riêng (optional), không nằm trong 6h này.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">02</div><h3>Class Reviews (Sweat &amp; BXR)</h3></div>
+        <div><div class="task-num">02</div><h3>Đánh giá lớp học (Sweat &amp; BXR)</h3></div>
         <div class="task-hours mono">14.0<span>h</span></div>
       </div>
+      <p class="desc">Sau khi học xong 1 lớp, member được review (rating + comment). Phải xác nhận member THẬT SỰ đã tham gia (qua API check-in) mới cho review, và review lưu thẳng vào Mindbody (không phải DB riêng).</p>
       <details class="breakdown">
-        <summary>10 sub-tasks</summary>
+        <summary>10 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check attendance data</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Check Mindbody review API — feasibility gate</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Identify member (bind to account/site)</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">App checks review eligibility</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Accept review request, block duplicates</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Submit review to Mindbody</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Handle errors / unknown results</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">App reads own review/status</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check dữ liệu điểm danh</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check API review của Mindbody — bước xác nhận khả thi</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Xác định đúng member (gắn với account/site)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">App check điều kiện được review hay chưa</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Nhận request review, chặn review trùng</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Gửi review lên Mindbody</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Xử lý lỗi / kết quả không rõ ràng</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">App đọc lại review/trạng thái của chính mình</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.0</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue.</b> The uncertain part — whether Mindbody's review API is usable at all — is costed explicitly as a 2h gate, not hidden inside the other line items. If the API can't support it, scope changes rather than the estimate silently failing.</div>
+      <div class="verdict"><b>Không vấn đề gì.</b> Phần rủi ro nhất — chưa chắc Mindbody có cho ghi review qua API hay không — đã được tính thẳng thành 1 bước riêng 2h, không giấu vào các dòng khác. Nếu API không hỗ trợ, scope sẽ đổi hướng chứ không phải est bị vỡ âm thầm.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">03</div><h3>Door Access QR &amp; Reception Barcode</h3></div>
+        <div><div class="task-num">03</div><h3>QR mở cửa &amp; Barcode lễ tân</h3></div>
         <div class="task-hours mono">14.0<span>h</span></div>
       </div>
+      <p class="desc">App hiện QR chứa mã member, tự render lại mỗi 20 giây (số member KHÔNG đổi, chỉ hình ảnh đổi). Lễ tân vẫn dùng barcode thường như cũ. GymAxess (bên thứ 3) tự đọc mã và quyết định mở cửa — mình không xây gì phía validate/door.</p>
       <details class="breakdown">
-        <summary>9 sub-tasks</summary>
+        <summary>9 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check existing app flow — no vendor expiry spec needed</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Reuse member API (no new endpoint if current response suffices)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Verify user / site, reuse session checks</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Map membership number</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Confirm QR/barcode data — same number, 20s re-render</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Handle request errors</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Prepare Wallet cutover</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Review and test</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">API handover</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check luồng app hiện tại — không cần spec hết hạn của vendor</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Tận dụng API member (không cần API mới nếu response hiện tại đủ dùng)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Verify user/site, tận dụng check session có sẵn</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Map đúng mã member</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Chốt data QR/barcode — cùng 1 số, chỉ render lại mỗi 20s</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Xử lý lỗi request</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Chuẩn bị chuyển đổi Wallet</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Review + test</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Bàn giao API</td><td class="sub-hrs">1.0</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>Confirmed, and simpler than it first looked.</b> Rory confirmed on 30 Oct: no expiring token, no custom validator, no door integration — visual refresh only. This is a smaller scope than the rotating-QR/HMAC design floated earlier in Slack; GymAxess owns access control entirely. 14h includes a 2h allowance on top of 12h base.</div>
+      <div class="verdict"><b>Đã chốt với khách, và nhẹ hơn tưởng tượng ban đầu.</b> Rory xác nhận ngày 30/10: không cần token hết hạn, không cần validator riêng, không cần tích hợp door — chỉ là "visual refresh". Nhẹ hơn nhiều so với thiết kế rotating-QR/HMAC bàn ban đầu trong Slack; GymAxess lo toàn bộ phần access control. 14h gồm 12h base + 2h dự phòng.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">04</div><h3>Gift Card Redemption / Cash Values in App</h3></div>
+        <div><div class="task-num">04</div><h3>Đổi Gift Card / Cash Value trong app</h3></div>
         <div class="task-hours mono">12.0<span>h</span></div>
       </div>
+      <p class="desc">Hiện số dư tiền mặt (cash value, thường từ gift card) trong account. User chọn MUA 1 món đồ, dùng cash value trả 1 phần, phần còn thiếu trả qua Stripe — trong CÙNG 1 giao dịch. Việc nhập mã gift card để redeem KHÔNG làm trong app (làm ở nơi khác).</p>
       <details class="breakdown">
-        <summary>6 sub-tasks</summary>
+        <summary>6 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check balance and payment path — feasibility gate</td><td class="sub-hrs">2.5</td></tr>
-          <tr><td class="sub-label">App fetches usable balance</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Quote one item (server-side price validation)</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Create order, pay remainder via Stripe</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Grant item, refresh balance</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Test and handover — mixed payment, 3DS, concurrency</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Check nguồn balance + cách thanh toán — bước xác nhận khả thi</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">App lấy số dư khả dụng</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Báo giá 1 món đồ (validate giá ở server, không tin giá từ app gửi lên)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Tạo order, trả phần còn lại qua Stripe</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Cấp món đồ, refresh lại số dư</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test + bàn giao — thanh toán hỗn hợp, 3DS, trường hợp đồng thời</td><td class="sub-hrs">2.0</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue — scope is narrower than it reads.</b> Confirmed: one item per basket, no recurring credit, redemption handled entirely outside the app. This isn't a multi-item cart build; it's a single-item split-tender checkout. The hardest part — mixed credit/Stripe payment — is exactly what the 2.5h gate covers.</div>
+      <div class="verdict"><b>Không vấn đề — scope hẹp hơn mình nghĩ ban đầu.</b> Đã chốt: mỗi lần mua chỉ 1 món, không có credit định kỳ, việc redeem mã gift card nằm ngoài app hoàn toàn. Đây KHÔNG phải xây giỏ hàng nhiều món, mà chỉ là checkout 1 món với 2 nguồn tiền. Phần khó nhất — thanh toán hỗn hợp credit + Stripe — chính là 2.5h bước xác nhận khả thi ở trên.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">05</div><h3>In-App Notifications</h3></div>
+        <div><div class="task-num">05</div><h3>Thông báo trong app</h3></div>
         <div class="task-hours mono">18.0<span>h</span></div>
       </div>
+      <p class="desc">Nhân viên soạn thông báo, chọn đối tượng nhận qua segment của Klaviyo. Thông báo KHÔNG phải push — nó hiện popup khi user mở app lần tiếp theo, rồi lưu lại trong message centre (inbox) có sẵn trong app.</p>
       <details class="breakdown">
-        <summary>10 sub-tasks</summary>
+        <summary>10 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check inbox / app identity, Klaviyo mapping, volume</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Define message delivery / read flow</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Store campaign and recipient status</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Staff compose/publish — reuses existing campaign admin</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Resolve recipients (segment → app account mapping)</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Prepare messages via cron</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">App fetches and acknowledges popup</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">App opens inbox, marks read</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">2.5</td></tr>
-          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Check inbox/định danh app, mapping Klaviyo, khối lượng dữ liệu</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Định nghĩa luồng gửi/đọc message</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Lưu campaign + trạng thái từng người nhận</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Nhân viên soạn/publish — tận dụng admin campaign có sẵn</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Resolve người nhận (map segment Klaviyo → account trong app)</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Chuẩn bị message qua cron job</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">App lấy message + xác nhận đã hiện popup</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">App mở inbox, đánh dấu đã đọc</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.5</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue.</b> No new admin dashboard — the sheet is explicit that the existing campaign admin is extended, not replaced. The 18h reflects integration surface (Klaviyo + cron batching + popup ack + read-state), not UI construction.</div>
+      <div class="verdict"><b>Không vấn đề gì.</b> KHÔNG phải xây dashboard admin mới — sheet ghi rõ là mở rộng admin campaign có sẵn, không thay thế. 18h phản ánh phần tích hợp (Klaviyo + xử lý batch qua cron + xác nhận popup + trạng thái đã đọc), không phải công xây UI từ đầu.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">06</div><h3>Purchasing of Gift Cards in App</h3></div>
+        <div><div class="task-num">06</div><h3>Mua Gift Card trong app</h3></div>
         <div class="task-hours mono">14.0<span>h</span></div>
       </div>
+      <p class="desc">App mở luồng checkout website có sẵn để MUA gift card mới (khác hẳn task #4 — đó là TIÊU số dư đã có). Thanh toán qua Stripe → Mindbody phát hành thẻ → gửi email/PDF cho người nhận (có thể tặng người khác, không nhất thiết người mua).</p>
       <details class="breakdown">
-        <summary>10 sub-tasks — 12.0h purchase + 2.0h recipient</summary>
+        <summary>10 việc cần làm — 12.0h mua + 2.0h người nhận khác</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check existing checkout — reuses hosted website checkout</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">App opens buyer-bound checkout (short-lived handoff)</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Validate gift card and price</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Create order and Stripe payment</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Issue card in Mindbody</td><td class="sub-hrs">3.0</td></tr>
-          <tr><td class="sub-label">Deliver gift — reuses existing email/PDF delivery</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Test checkout/issuance</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Enter another recipient</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Test recipient delivery</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Check checkout hiện có — tận dụng checkout hosted của website</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">App mở checkout gắn với người mua (handoff ngắn hạn, bảo mật)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Validate gift card + giá</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Tạo order + thanh toán Stripe</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Phát hành thẻ trong Mindbody</td><td class="sub-hrs">3.0</td></tr>
+          <tr><td class="sub-label">Gửi quà — tận dụng email/PDF có sẵn</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test checkout/phát hành thẻ</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Nhập thông tin người nhận khác (tặng người khác)</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Test gửi cho người nhận khác</td><td class="sub-hrs">1.0</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue, and distinct from #4.</b> This is a new-purchase checkout (app opens the web's hosted flow); #4 spends an existing balance. Different code paths, not duplicated scope. Recipient delivery already exists and is reused, not built from scratch.</div>
+      <div class="verdict"><b>Không vấn đề, và KHÁC task #4.</b> Đây là checkout MUA MỚI (app mở luồng hosted của web); #4 là TIÊU số dư đã có sẵn. Hai luồng code khác nhau, không trùng scope. Phần gửi cho người nhận đã có sẵn, chỉ tận dụng lại chứ không xây mới.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">07</div><h3>Update Email/Password in App</h3></div>
+        <div><div class="task-num">07</div><h3>Đổi Email/Password trong app</h3></div>
         <div class="task-hours mono">5.0<span>h</span></div>
       </div>
+      <p class="desc">Phương án "hosted": app mở trang quản lý account CÓ SẴN của Mindbody, Mindbody (provider) tự xử lý việc đổi email/password — app chỉ cần đồng bộ lại profile/session sau khi user quay về. Không tự xây form đổi email/password trong app.</p>
       <details class="breakdown">
-        <summary>8 sub-tasks</summary>
+        <summary>8 việc cần làm</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check account-management page (opens existing Mindbody page)</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Prepare account refresh API — reuses existing profile API</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Email change — handled entirely by provider</td><td class="sub-hrs">0.5</td></tr>
-          <tr><td class="sub-label">Password change — handled entirely by provider</td><td class="sub-hrs">0.25</td></tr>
-          <tr><td class="sub-label">App refreshes profile/session</td><td class="sub-hrs">1.0</td></tr>
-          <tr><td class="sub-label">Protect refresh requests (rate limit, no token in logs)</td><td class="sub-hrs">0.25</td></tr>
-          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Check trang quản lý account (mở trang Mindbody có sẵn)</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Chuẩn bị API refresh account — tận dụng API profile có sẵn</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Đổi email — do Mindbody xử lý hoàn toàn</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Đổi password — do Mindbody xử lý hoàn toàn</td><td class="sub-hrs">0.25</td></tr>
+          <tr><td class="sub-label">App refresh lại profile/session</td><td class="sub-hrs">1.0</td></tr>
+          <tr><td class="sub-label">Bảo vệ request refresh (rate limit, không log token)</td><td class="sub-hrs">0.25</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">0.5</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue — verified against live code, not inferred.</b> This is the hosted option: the app redirects to Mindbody's own account page; the provider owns the actual write. Reuse is named specifically (<code class="mono">Account/getMe</code>, <code class="mono">Platform/getBusinessProfiles</code>) and checked against staging <code class="mono">277bb02e</code> and main <code class="mono">b975e87c</code> on 29 Oct. Of the 5.0h, 3.0h is build and 2.0h is test + handover.</div>
+      <div class="verdict"><b>Không vấn đề — đã verify bằng code thật, không phải đoán.</b> Reuse được nêu đích danh (<code class="mono">Account/getMe</code>, <code class="mono">Platform/getBusinessProfiles</code>) và đã check với staging <code class="mono">277bb02e</code> + main <code class="mono">b975e87c</code> ngày 29/10. Trong 5.0h, 3.0h là build, 2.0h là test + bàn giao.</div>
     </article>
 
     <article class="task">
       <div class="task-head">
-        <div><div class="task-num">08</div><h3>Clear Mindbody Balance in App</h3></div>
+        <div><div class="task-num">08</div><h3>Thanh toán dư nợ Mindbody trong app</h3></div>
         <div class="task-hours mono">18.0<span>h</span></div>
       </div>
+      <p class="desc">Member có thể phát sinh công nợ (mua đồ lẻ gắn vào account). App cho xem nợ + trả qua ví/thẻ đã lưu, Mindbody xác nhận đã thanh toán mới coi là xong. Có thêm phần chặn booking lớp/PT mới nếu còn nợ chưa trả.</p>
       <details class="breakdown">
-        <summary>9 sub-tasks — 16.0h debt/payment + 2.0h booking guard</summary>
+        <summary>9 việc cần làm — 16.0h xem/trả nợ + 2.0h chặn booking</summary>
         <table class="sub mono">
-          <tr><td class="sub-label">Check debt and stored cards — feasibility gate</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Identify member ownership</td><td class="sub-hrs">0.8</td></tr>
-          <tr><td class="sub-label">App views debt and purchase history</td><td class="sub-hrs">1.8</td></tr>
-          <tr><td class="sub-label">Customer selects Pay now (server-side re-pricing)</td><td class="sub-hrs">1.5</td></tr>
-          <tr><td class="sub-label">Pay via wallet/stored card (3DS, cancel, error states)</td><td class="sub-hrs">2.5</td></tr>
-          <tr><td class="sub-label">Record repayment, refresh balance</td><td class="sub-hrs">3.5</td></tr>
-          <tr><td class="sub-label">Check debt before allowing new bookings</td><td class="sub-hrs">2.0</td></tr>
-          <tr><td class="sub-label">Test the flow</td><td class="sub-hrs">3.5</td></tr>
-          <tr><td class="sub-label">Handover and UAT</td><td class="sub-hrs">0.5</td></tr>
+          <tr><td class="sub-label">Check công nợ + thẻ đã lưu — bước xác nhận khả thi</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Xác định đúng chủ sở hữu member</td><td class="sub-hrs">0.8</td></tr>
+          <tr><td class="sub-label">App xem nợ + lịch sử mua hàng</td><td class="sub-hrs">1.8</td></tr>
+          <tr><td class="sub-label">User bấm "Pay now" (tính lại giá ở server, không tin số từ app)</td><td class="sub-hrs">1.5</td></tr>
+          <tr><td class="sub-label">Trả bằng ví/thẻ đã lưu (xử lý 3DS, huỷ, lỗi)</td><td class="sub-hrs">2.5</td></tr>
+          <tr><td class="sub-label">Ghi nhận đã trả, refresh lại số dư</td><td class="sub-hrs">3.5</td></tr>
+          <tr><td class="sub-label">Check nợ trước khi cho đặt lớp mới</td><td class="sub-hrs">2.0</td></tr>
+          <tr><td class="sub-label">Test luồng</td><td class="sub-hrs">3.5</td></tr>
+          <tr><td class="sub-label">Bàn giao + UAT</td><td class="sub-hrs">0.5</td></tr>
         </table>
       </details>
-      <div class="verdict"><b>No issue — already self-corrected once.</b> Prior estimate was 24h; revised down to 18h after reading staging <code class="mono">277bb02e</code> and main <code class="mono">b975e87c</code> on 30 Oct. The two largest lines — reconciling repayment (3.5h) and testing across debt/no-debt × wallet/card × concurrency (3.5h) — match where payment reconciliation bugs actually hide.</div>
+      <div class="verdict"><b>Không vấn đề — Khánh đã tự sửa 1 lần rồi.</b> Est cũ là 24h; đã hạ xuống 18h sau khi đọc staging <code class="mono">277bb02e</code> và main <code class="mono">b975e87c</code> ngày 30/10. 2 dòng nặng nhất — đối soát khi trả nợ (3.5h) và test đủ case nợ/không nợ × ví/thẻ × đồng thời (3.5h) — đúng là chỗ hay phát sinh bug reconciliation thanh toán nhất.</div>
     </article>
 
   </section>
 
   <section class="closing">
-    <h2 class="serif">Conclusion</h2>
-    <p>Every one of the 8 line items checks out against the sheet's own itemization: sub-tasks are broken to the half-hour, uncertain Mindbody API behavior is costed as an explicit gate rather than buried, and two of the hardest tasks were verified against live staging/main commits rather than assumed. One task (#8) was already revised down by the estimator after reading real code. <b>101h holds up as a grounded estimate, not an inflated one.</b></p>
+    <h2 class="serif">Kết luận</h2>
+    <p>Cả 8 task đều khớp với breakdown gốc trong sheet: chia nhỏ tới từng 0.5h, phần chưa chắc chắn (API Mindbody có hỗ trợ không) được tính thành bước riêng rõ ràng chứ không giấu vào chỗ khác, và 2 task khó nhất đã được verify bằng commit code thật trên staging/main chứ không phải đoán. Task #8 còn được chính người est tự hạ xuống sau khi đọc code thật. <b>101h là con số có cơ sở vững, không phải est thổi phồng.</b></p>
   </section>
 
   <section class="open-q">
-    <h2>Open questions</h2>
+    <h2>Câu hỏi còn mở</h2>
     <ul>
-      <li>None remaining on the numbers — the sheet's feasibility gates and reuse notes already answer what v1 of this review flagged as unknown.</li>
-      <li>Direct code read-through (SSH to <code class="mono">rory.cpanel</code>) was not completed — key auth failed, server fell back to password prompt. Not pursued further to avoid a lockout risk. Not necessary for this review: the estimator already cites specific commit hashes checked on staging and main.</li>
+      <li>Không còn câu hỏi nào về số liệu — các bước feasibility-check và note reuse trong sheet đã trả lời hết những gì bản review v1 từng thắc mắc.</li>
+      <li>Chưa đọc trực tiếp code (SSH vào <code class="mono">rory.cpanel</code>) — key auth không vào được, server yêu cầu password. Không cố thêm để tránh rủi ro khoá account. Không cần thiết cho review này vì Khánh đã tự trích dẫn commit hash cụ thể đã check trên staging và main.</li>
     </ul>
   </section>
 
