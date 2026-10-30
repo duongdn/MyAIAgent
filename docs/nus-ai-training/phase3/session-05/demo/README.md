@@ -113,7 +113,7 @@ demo_ui.py ──► run_agent(model, "alice", "Mã lỗi…E205…", KB_DOCS, (
 | `last_agent` | `Support agent` | Agent trả lời cuối |
 
 Số token, số lần gọi tool thay đổi giữa các lần chạy — model không ổn định (Session 1–2).
-Tự in lại bảng này: chạy `run_demo.py --scenario 9 --trace` hoặc thêm `print(result.new_items)` sau `Runner.run`.
+Muốn tự xem lại: thêm `print(result.new_items)` ngay sau `Runner.run` trong `run_limited()`.
 
 ## 3. Bức tranh: sơ đồ slide 5 nằm ở đâu trong code
 
