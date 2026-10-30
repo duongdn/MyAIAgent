@@ -40,6 +40,13 @@ class TaskState:
     created_at: float = field(default_factory=time.time)
 
     def set(self, status, reason=None, **fields):
+        """Đổi trạng thái task + ghi file .state/<task_id>.json.
+        Input:
+            status   — "PROCESSING" | "AWAITING_APPROVAL" | "COMPLETED" | "ESCALATED"
+            reason   — lý do, vd "chờ người duyệt", "tool_call_budget"
+            **fields — trường khác cần cập nhật, vd pending_approval={…}, sdk_run_state={…}
+        Output: None
+        """
         self.status, self.stop_reason = status, reason
         for k, v in fields.items():
             setattr(self, k, v)
@@ -47,21 +54,38 @@ class TaskState:
         self.save()
 
     def use_tool(self) -> bool:
-        """False = vượt budget tool call → application dừng, không để model gọi tiếp."""
+        """Đếm thêm 1 tool call.
+        Input: không
+        Output: True = còn budget; False = vượt MAX_TOOL_CALLS (mặc định 6) → application dừng
+        """
         self.tool_calls += 1
         return self.tool_calls <= MAX_TOOL_CALLS
 
     def save(self):
+        """Ghi task ra .state/<task_id>.json (server restart vẫn đọc lại được).
+        Input: không
+        Output: None
+        """
         STATE_DIR.mkdir(exist_ok=True)
         (STATE_DIR / f"{self.task_id}.json").write_text(json.dumps(asdict(self), ensure_ascii=False, indent=1,
                                                                        default=lambda o: sorted(o) if isinstance(o, set) else str(o)))
 
     @classmethod
     def load(cls, task_id):
+        """Đọc lại task đã lưu (dùng cho run_demo.py --resume).
+        Input:
+            task_id — vd "3f9a1c2b"
+        Output: TaskState
+        """
         return cls(**json.loads((STATE_DIR / f"{task_id}.json").read_text()))
 
     def finish(self, answer: str):
-        """Application tự quyết định task đã xong chưa — không tin câu "đã tạo ticket" của model."""
+        """Application tự quyết task đã xong chưa — không tin câu "đã tạo ticket" của model.
+        Input:
+            answer — câu trả lời cuối của model
+        Output: None; đổi status thành COMPLETED ("answered" / "ticket T-1001 confirmed") hoặc ESCALATED
+                ("claimed_without_confirmation", "missing_data")
+        """
         if self.status in ("ESCALATED", "AWAITING_APPROVAL"):
             return
         if "đã tạo" in answer.lower() and "ticket" in answer.lower() and not self.ticket_id:

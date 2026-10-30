@@ -39,6 +39,12 @@ CREATE_TICKET_DESC = "Tạo ticket hỗ trợ. priority: P1 (khẩn cấp) đế
 
 
 def log(step, msg):
+    """In 1 dòng log của checkpoint.
+    Input:
+        step — ký hiệu checkpoint, vd "①"
+        msg  — nội dung, vd "session: user=alice tenant=tenant-A role=support"
+    Output: None (in ra màn hình)
+    """
     print(f"   {step} {msg}")
 
 
@@ -54,14 +60,26 @@ class Session:
 
 
 def new_session(session_user, kb=KB_DOCS, disabled=(), task=None):
-    """① session_user đến từ đăng nhập (cookie/JWT đã verify) — không phải từ câu hỏi."""
+    """① Dựng Session từ user đăng nhập (cookie/JWT đã verify) — không lấy từ câu hỏi.
+    Input:
+        session_user — tên user, vd "alice" (khoá trong sample_data.USERS)
+        kb           — tài liệu user có thể tra, mặc định KB_DOCS
+        disabled     — checkpoint tắt để demo, vd () hoặc ("4",)
+        task         — TaskState của lần chạy (None nếu không lưu)
+    Output: Session(name="alice", tenant="tenant-A", role="support", kb=[3 tài liệu], disabled=set(), task=…)
+    """
     u = USERS[session_user]
     log("①", f"session: user={session_user} tenant={u['tenant']} role={u['role']}")
     return Session(session_user, u["tenant"], u["role"], list(kb), set(disabled), task)
 
 
 def budget_exceeded(me: Session) -> str | None:
-    """Budget tool call (Session 8): vượt → dừng + chuyển người, không để model gọi tiếp."""
+    """Budget tool call (Session 8): đếm thêm 1 tool call, vượt MAX_TOOL_CALLS thì dừng.
+    Input:
+        me — Session (đọc me.task.tool_calls)
+    Output: None = còn budget
+            hoặc str lỗi gửi lại model: '{"error": "vượt giới hạn số tool call…"}' (task chuyển ESCALATED)
+    """
     if me.task and not me.task.use_tool():
         if me.task.status != "ESCALATED":
             me.task.set("ESCALATED", "tool_call_budget")
@@ -74,13 +92,30 @@ SUSPICIOUS = ["ignore all previous", "ignore previous", "bỏ qua mọi hướng
 
 
 def relevant(query: str, doc: dict) -> bool:
-    """Retrieval tối giản: tài liệu chứa ≥2 từ của query (hệ thống thật: vector search, Giai đoạn 2)."""
+    """Retrieval tối giản: tài liệu chứa ≥2 từ (≥3 ký tự) của query (hệ thống thật: vector search).
+    Input:
+        query — vd "mã lỗi thanh toán E205"
+        doc   — 1 tài liệu trong KB_DOCS: {"id", "tenant", "allowed_roles", "title", "content"}
+    Output: True nếu liên quan, vd kb-a-002 ("Danh sách mã lỗi…") → True
+    """
     words = {w for w in query.lower().replace(",", " ").split() if len(w) >= 3}
     text = (doc["title"] + " " + doc["content"]).lower()
     return sum(w in text for w in words) >= 2
 
 
 def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str:
+    """Logic thật của tool search_kb: lọc quyền (①②), tìm tài liệu liên quan, gói kết quả là DỮ LIỆU (③).
+    Input:
+        me             — Session của user (tenant, role lấy từ đây)
+        query          — model điền, vd "mã lỗi thanh toán E205"
+        claimed_tenant — tenant model điền (thường None); bị bỏ qua, dùng me.tenant
+    Output: str, vd
+        <untrusted_search_results>
+        <document id='kb-a-001'>Xử lý lỗi thanh toán thẻ: …</document>
+        <document id='kb-a-002'>Danh sách mã lỗi…E205 = ngân hàng từ chối…</document>
+        </untrusted_search_results>
+        (không có gì: "…Không tìm thấy tài liệu.…")
+    """
     # ⚠ Tham số tenant cố tình để lộ trong schema tool — lỗi thiết kế hay gặp: model có thể điền tenant
     #   theo lời user ("tôi thuộc tenant-B"). Checkpoint ① phải bỏ qua nó và dùng session.
     print(f"   🤖 model gọi search_kb(query={query!r}, tenant={claimed_tenant!r})")
@@ -124,7 +159,13 @@ def search_kb(me: Session, query: str, claimed_tenant: str | None = None) -> str
 
 # ── ④ Rule nghiệp vụ bằng code ─────────────────────────────────────────────
 def validate_ticket(me: Session, args: dict) -> list:
-    """Trả danh sách lỗi, rỗng = hợp lệ. Rule nằm trong CODE, không trong prompt."""
+    """④ Kiểm tra rule nghiệp vụ của ticket bằng CODE (không nằm trong prompt).
+    Input:
+        me   — Session (role, tenant)
+        args — tham số model đề xuất, vd {"title": "…", "priority": "P2", "assignee": "billing team"}
+    Output: list lỗi, [] = hợp lệ; vd ["priority P2 không được tự tạo (chỉ ['P3', 'P4'])",
+                                      "assignee 'billing team' không thuộc team hợp lệ […]"]
+    """
     if "4" in me.disabled:
         return []
     errors = []
@@ -138,7 +179,12 @@ def validate_ticket(me: Session, args: dict) -> list:
 
 
 def check_ticket(me: Session, args: dict) -> list:
-    """④ chạy TRƯỚC ⑤: lệnh sai rule bị code chặn luôn, người chỉ phải duyệt lệnh hợp lệ (giảm 'approval fatigue')."""
+    """④ chạy TRƯỚC ⑤: in + ghi lại đề xuất, trả lỗi. Lệnh sai bị chặn luôn, người chỉ duyệt lệnh hợp lệ.
+    Input:
+        me   — Session
+        args — tham số create_ticket model đề xuất, vd {"title": "…", "priority": "P3", "assignee": "billing-team-a"}
+    Output: list lỗi như validate_ticket ([] = hợp lệ → cần người duyệt)
+    """
     print(f"   🤖 model muốn gọi create_ticket({args})")
     errors = validate_ticket(me, args)
     PROPOSALS.append({**args, "blocked": bool(errors)})
@@ -151,7 +197,13 @@ def check_ticket(me: Session, args: dict) -> list:
 
 # ── ⑤ Người duyệt ──────────────────────────────────────────────────────────
 def ask_human(me: Session, args: dict, approve_mode: str) -> bool:
-    """Hiện CHÍNH XÁC tham số (không tóm tắt mơ hồ) để người duyệt không bấm OK theo phản xạ."""
+    """⑤ Hỏi người duyệt, hiện CHÍNH XÁC tham số. Trang web thay hàm này bằng demo_ui.ask_human_ui.
+    Input:
+        me           — Session
+        args         — vd {"title": "…E205…", "priority": "P3", "assignee": "billing-team-a"}
+        approve_mode — "ask" (gõ y/n ở terminal) | "yes" | "no"
+    Output: True = đồng ý, False = từ chối
+    """
     if "5" in me.disabled:
         log("⑤", "[TẮT] tự duyệt, không hỏi người")
         return True
@@ -163,6 +215,15 @@ def ask_human(me: Session, args: dict, approve_mode: str) -> bool:
 
 # ── Thực thi create_ticket (chỉ sau ④ + ⑤) ─────────────────────────────────
 def create_ticket(me: Session, args: dict) -> str:
+    """Logic thật của tool create_ticket: kiểm tra lại ④, gọi hệ thống ticket, retry có idempotency key.
+    Input:
+        me   — Session
+        args — {"title": "…", "priority": "P3", "assignee": "billing-team-a"}
+    Output: str gửi lại model:
+        '{"ticket_id": "T-1001", "status": "created"}'
+        | "BỊ CHẶN bởi application: …" (sai rule)
+        | '{"error": "không tạo được ticket sau khi retry…"}' (hệ thống đích lỗi, task ESCALATED)
+    """
     # Kiểm tra lại ④ ngay trong tool: không giả định bước trước đã chặn đủ (defense in depth)
     errors = validate_ticket(me, args)
     if errors:

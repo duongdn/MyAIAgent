@@ -50,10 +50,13 @@ PROVIDERS = {
 
 
 def load_config(config_file, env_var):
-    """Key lấy từ biến môi trường, hoặc config/<file>.json (gitignored) — không bao giờ hardcode trong code.
-    File config có thể ghi đè base_url: {"api_key": "...", "base_url": "..."}
-    Input : config_file=".nus-llm-gateway-config.json", env_var="NUS_LLM_API_KEY"
-    Output: dict {"api_key": "sk-…", "base_url": "https://llm.nustechnology.com/v1"}"""
+    """Đọc API key. Key lấy từ biến môi trường, hoặc config/<file>.json (gitignored) — không bao giờ hardcode.
+    Input:
+        config_file — tên file trong config/, vd ".nus-llm-gateway-config.json"
+        env_var     — tên biến môi trường ưu tiên hơn file, vd "NUS_LLM_API_KEY"
+    Output: dict, vd {"api_key": "sk-…", "base_url": "https://llm.nustechnology.com/v1"}
+            (thiếu key → dừng chương trình, báo cần đặt key)
+    """
     path = Path(__file__).resolve().parents[5] / "config" / config_file
     cfg = json.loads(path.read_text()) if path.exists() else {}
     if os.environ.get(env_var):
@@ -64,9 +67,13 @@ def load_config(config_file, env_var):
 
 
 def make_model(provider, model_name=None):
-    """Input : provider="nus" (khoá trong PROVIDERS), model_name=None → dùng model mặc định của provider
-    Output: OpenAIChatCompletionsModel(model="deepseek-v4.1-flash") — object Model, chưa gọi model lần nào.
-            Đưa vào Agent(model=...); SDK dùng nó gọi model mỗi lượt của vòng lặp."""
+    """Tạo Model cho SDK (client openai + tên model). CHƯA gọi model lần nào.
+    Input:
+        provider   — khoá trong PROVIDERS: "nus" (gateway công ty) | "deepseek" | "openai"
+        model_name — tên model; None → model mặc định của provider, vd "deepseek-v4.1-flash"
+    Output: OpenAIChatCompletionsModel(model="deepseek-v4.1-flash", client timeout=60s, retry 2)
+            → đưa vào Agent(model=...); SDK dùng nó gọi model mỗi lượt của vòng lặp.
+    """
     base_url, default_model, config_file, env_var = PROVIDERS[provider]
     cfg = load_config(config_file, env_var)
     # = `new OpenAI({ timeout: 20_000, maxRetries: 2 })` ở S2 slide 12. Async vì SDK chạy bất đồng bộ.
@@ -80,7 +87,11 @@ def make_model(provider, model_name=None):
 
 
 def list_models(provider):
-    """Danh sách model provider cung cấp (endpoint /models chuẩn OpenAI). Bỏ alias gom nhóm của gateway."""
+    """Hỏi provider có những model nào (dùng cho run_demo.py --compare).
+    Input:
+        provider — "nus" | "deepseek" | "openai"
+    Output: list tên model, vd ["deepseek-v4.1-flash", "glm-5.3-flash", "qwen-3.7-flash", …]
+    """
     from openai import OpenAI
     base_url, _, config_file, env_var = PROVIDERS[provider]
     cfg = load_config(config_file, env_var)
@@ -100,26 +111,41 @@ MODEL_SETTINGS = ModelSettings(extra_body=None if os.environ.get("DEMO_CACHE") =
 # description_override = mô tả tool model đọc để quyết định có gọi hay không.
 @function_tool(description_override=cp.SEARCH_KB_DESC)
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
-    """Input (model điền, SDK parse từ JSON tool call): query="mã lỗi thanh toán E205", tenant=None
-       ctx: SDK tự truyền = context=... lúc Runner.run (Session của user) — KHÔNG có trong schema gửi model
-    Output: str gửi lại model làm message role "tool":
-       "<untrusted_search_results>\n<document id='kb-a-002'>Danh sách mã lỗi…E205 = ngân hàng từ chối…</document>…"
-    Sau @function_tool, tên search_kb là object FunctionTool (name, description, params_json_schema), không còn là hàm."""
+    """TOOL tra tài liệu. Model quyết định gọi; SDK parse JSON tool call rồi gọi hàm này.
+    Input:
+        ctx    — SDK tự truyền; ctx.context = Session của user (context=... lúc Runner.run). KHÔNG có trong schema gửi model
+        query  — model điền, vd "mã lỗi thanh toán E205"
+        tenant — model điền, thường None (cố ý để lộ — app bỏ qua, dùng tenant trong Session)
+    Output: str, SDK gửi lại model làm message role "tool", vd
+            "<untrusted_search_results>\n<document id='kb-a-002'>Danh sách mã lỗi…E205 = ngân hàng từ chối…</document>…"
+    Sau @function_tool, tên search_kb là object FunctionTool (name, description, params_json_schema), không còn là hàm.
+    """
     return cp.search_kb(ctx.context, query, tenant)  # ctx.context = Session (①), model không thấy
 
 
 async def ticket_needs_approval(ctx: RunContextWrapper[cp.Session], args: dict, _call_id: str) -> bool:
-    """SDK gọi TRƯỚC khi chạy create_ticket. True = dừng để người duyệt (⑤).
-    Lệnh sai rule (④) → False: không làm phiền người, tool tự trả lỗi bị chặn."""
+    """SDK gọi TRƯỚC khi chạy create_ticket để hỏi: có cần người duyệt không (⑤).
+    Input:
+        ctx      — SDK truyền; ctx.context = Session
+        args     — tham số model muốn gọi, vd {"title": "…E205…", "priority": "P3", "assignee": "billing-team-a"}
+        _call_id — id của tool call (không dùng)
+    Output: True  = tham số hợp lệ → SDK dừng run, trả result.interruptions để người duyệt
+            False = sai rule (④) → không làm phiền người; tool chạy và tự trả "BỊ CHẶN…" cho model
+    """
     return not cp.check_ticket(ctx.context, args)
 
 
 @function_tool(description_override=cp.CREATE_TICKET_DESC, needs_approval=ticket_needs_approval)
 def create_ticket(ctx: RunContextWrapper[cp.Session], title: str, priority: str, assignee: str) -> str:
-    """Input (model điền): title="Khách X lỗi E205", priority="P3", assignee="billing-team-a"
-    Output: '{"ticket_id": "T-1001", "status": "created"}'
+    """TOOL tạo ticket. Chạy SAU khi người duyệt (needs_approval).
+    Input:
+        ctx      — SDK truyền; ctx.context = Session
+        title    — model điền, vd "Khách X lỗi thanh toán E205"
+        priority — model điền, vd "P3" (app chỉ cho P3/P4)
+        assignee — model điền, vd "billing-team-a"
+    Output: str gửi lại model: '{"ticket_id": "T-1001", "status": "created"}'
             hoặc "BỊ CHẶN bởi application: priority P2 không được tự tạo…" → model đọc lỗi, tự sửa tham số.
-    Chạy SAU khi người duyệt (needs_approval)."""
+    """
     return cp.create_ticket(ctx.context, {"title": title, "priority": priority, "assignee": assignee})
 
 
@@ -129,16 +155,25 @@ CARD_NUMBER = re.compile(r"\b(?:\d[ -]?){13,16}\b")
 
 @input_guardrail(name="no_card_number")
 async def no_card_number(_ctx, _agent, user_input) -> GuardrailFunctionOutput:
-    """Chặn câu hỏi chứa số thẻ (PII) TRƯỚC khi gửi cho model. Chạy bằng code, không tốn model call."""
+    """GUARDRAIL: chặn câu hỏi chứa số thẻ (PII) TRƯỚC khi gửi cho model. Chạy bằng code, không tốn model call.
+    Input:
+        _ctx, _agent — SDK truyền (không dùng)
+        user_input   — câu hỏi của user, vd "Khách có thẻ 4111 1111 1111 1111 bị lỗi E205…"
+    Output: GuardrailFunctionOutput(tripwire_triggered=True nếu có số thẻ)
+            → True: SDK dừng ngay, ném InputGuardrailTripwireTriggered (run_agent bắt).
+    """
     return GuardrailFunctionOutput(output_info=None, tripwire_triggered=bool(CARD_NUMBER.search(str(user_input))))
 
 
 # ── 3. Agent definition ────────────────────────────────────────────────────
 # instructions = system prompt (S2: INSTRUCTIONS). Câu hỏi user KHÔNG nằm ở đây — truyền lúc Runner.run.
 def build_agent(model):
-    """Input : model = output của make_model()
-    Output: Agent(name="Support agent", tools=[search_kb, create_ticket], instructions=SYSTEM_PROMPT…)
-            — chỉ là cấu hình, chưa gọi model. Truyền vào Runner.run."""
+    """Khai báo agent. Chỉ là cấu hình, CHƯA gọi model.
+    Input:
+        model — output của make_model()
+    Output: Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model,
+                  tools=[search_kb, create_ticket], input_guardrails=[no_card_number]) → truyền vào Runner.run
+    """
     return Agent(name="Support agent", instructions=cp.SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket],
                  model_settings=MODEL_SETTINGS, input_guardrails=[no_card_number])
 
@@ -148,13 +183,19 @@ def build_agent(model):
 #   gọi model → model trả tool call (JSON) → SDK chạy hàm tool → gắn kết quả vào hội thoại → gọi model lại
 #   → … → model trả lời không kèm tool call → result.final_output.
 async def run_agent(model, session_user, question, kb, disabled, approve_mode, scenario=None, resume=None):
-    """Hàm demo_ui.py / run_demo.py gọi. Bọc Runner.run + xử lý duyệt/lỗi.
-    Input : model (make_model), session_user="alice" (user đăng nhập, xem sample_data.USERS),
-            question="Mã lỗi thanh toán E205 nghĩa là gì?", kb=KB_DOCS (tài liệu), disabled=() (checkpoint tắt — S7),
-            approve_mode="ui"|"yes"|"no"|"ask"|"later" (cách hỏi người duyệt), scenario=số kịch bản (ghi log)
-            resume = TaskState đang AWAITING_APPROVAL (đọc từ .state/) → tiếp tục run đã lưu thay vì chạy lại từ đầu.
-    Output: str câu trả lời cuối, vd "**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-a-002)…"
-            hoặc thông báo lỗi (guardrail chặn / vượt max_turns / chờ duyệt)."""
+    """Hàm demo_ui.py / run_demo.py gọi: dựng Session + Agent, chạy, xử lý duyệt và lỗi.
+    Input:
+        model        — output của make_model()
+        session_user — user đăng nhập, vd "alice" (danh sách ở sample_data.USERS)
+        question     — câu hỏi, vd "Mã lỗi thanh toán E205 nghĩa là gì?"
+        kb           — danh sách tài liệu, thường sample_data.KB_DOCS
+        disabled     — checkpoint bị tắt để demo hậu quả, vd () = không tắt gì (Session 7)
+        approve_mode — cách hỏi người duyệt: "ui" (nút trên web) | "ask" (gõ y/n) | "yes" | "no" | "later" (lưu, dừng)
+        scenario     — số kịch bản của run_demo.py, chỉ để ghi log; None nếu từ web
+        resume       — TaskState đang AWAITING_APPROVAL (đọc từ .state/) → chạy tiếp thay vì chạy từ đầu
+    Output: str — câu trả lời cuối, vd "**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-a-002)…"
+            hoặc thông báo: guardrail chặn / vượt giới hạn bước-thời gian / đang chờ duyệt.
+    """
     task = resume or TaskState(user=session_user, question=question, scenario=scenario)
     me = cp.new_session(session_user, kb, disabled, task)
     agent = build_agent(model)
@@ -186,17 +227,34 @@ async def run_agent(model, session_user, question, kb, disabled, approve_mode, s
 
 
 async def run_limited(agent, run_input, me):
-    """Mọi lần chạy đều có giới hạn bước (max_turns) và thời gian (RUN_TIMEOUT_S).
-    context=me: dữ liệu của app (user đăng nhập) — tool đọc qua ctx.context, model không thấy.
-    Input : agent (build_agent), run_input = câu hỏi (str) hoặc RunState khi chạy tiếp sau duyệt, me = Session
-    Output: RunResult — .final_output (câu trả lời), .new_items (các bước: ToolCallItem, ToolCallOutputItem,
-            MessageOutputItem…), .raw_responses (1 phần tử / lượt gọi model), .context_wrapper.usage (token),
-            .interruptions (tool đang chờ duyệt; rỗng nếu không có)."""
+    """Gọi Runner.run — CHẠY VÒNG LẶP AGENT — kèm giới hạn bước (max_turns=8) và thời gian (120s).
+    Input:
+        agent     — output của build_agent()
+        run_input — câu hỏi (str), vd "Mã lỗi thanh toán E205 nghĩa là gì?"
+                    hoặc RunState (khi chạy tiếp sau khi người duyệt)
+        me        — Session của user (vd Session(name="alice", tenant="tenant-A", role="support")).
+                    Truyền vào context=me: tool đọc qua ctx.context, model KHÔNG thấy
+    Output: RunResult, vd với câu E205:
+        .final_output          "**E205 = ngân hàng từ chối giao dịch** (nguồn: kb-a-002)…"
+        .new_items             [ToolCallItem, ToolCallOutputItem, MessageOutputItem…] — từng bước của run
+        .raw_responses         2 phần tử — 1 phần tử / lượt gọi model
+        .context_wrapper.usage requests=2, input_tokens≈1400, output_tokens≈250
+        .interruptions         [] — có phần tử khi create_ticket đang chờ duyệt
+    Lỗi: MaxTurnsExceeded (quá 8 lượt), asyncio.TimeoutError (quá 120s) → run_agent bắt.
+    """
     return await asyncio.wait_for(Runner.run(agent, run_input, context=me, max_turns=cp.MAX_TURNS), RUN_TIMEOUT_S)
 
 
 async def approve_and_continue(agent, me, state, approve_mode):
-    """⑤ SDK dừng ở interruption → application lưu state, hỏi người, rồi chạy tiếp từ đúng chỗ dừng."""
+    """⑤ SDK dừng ở interruption → lưu state, hỏi người, rồi chạy tiếp từ đúng chỗ dừng.
+    Input:
+        agent        — output của build_agent()
+        me           — Session của user
+        state        — RunState: result.to_state() của lần chạy vừa dừng (có tool chờ duyệt)
+        approve_mode — "ui" | "ask" | "yes" | "no" | "later" (như run_agent)
+    Output: RunResult của phần chạy tiếp (như run_limited)
+            hoặc None nếu approve_mode="later" (đã lưu .state/, chờ --resume)
+    """
     task = me.task
     for item in state.get_interruptions():
         args = json.loads(item.arguments or "{}")
