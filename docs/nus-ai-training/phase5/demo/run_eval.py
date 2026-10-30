@@ -20,9 +20,9 @@ import time
 import sys
 from pathlib import Path
 
-# Dùng lại agent của demo Session 5 (docs/nus-ai-training/phase3/session-05/demo)
+# Agent bản đầy đủ nằm cùng thư mục này
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parents[1] / "phase3" / "session-05" / "demo"))
+sys.path.insert(0, str(HERE))
 
 import agent_openai_sdk as sdk
 import checkpoints as cp

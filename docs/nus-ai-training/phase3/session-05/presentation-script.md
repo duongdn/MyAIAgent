@@ -62,19 +62,19 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 
 Đáp ứng 2 dòng đề cương (trang 4, mục Session 5): gạch 3 "**Walkthrough** support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API" và "Ví dụ trong buổi: yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?".
 
-**Bước 0 — Walkthrough code (~3', editor)**: mở `docs/nus-ai-training/phase3/session-05/demo/agent_openai_sdk.py`. Code chia 4 khối đánh số trong comment (`# ── 1. Model`, `2. Tools`, `3. Agent definition`, `4. Chạy agent`), đi đúng thứ tự, nối với Session 2 và bảng slide 19:
+**Bước 0 — Walkthrough code (~3', editor)**: mở `docs/nus-ai-training/phase3/session-05/demo/agent_openai_sdk.py`. File 166 dòng, chia 4 khối đánh số trong comment (`# ── 1. Model`, `2. Tools`, `3. Agent definition`, `4. Run`), đi đúng thứ tự, nối với Session 2 và bảng slide 19:
 
 | Khối | Dòng | Nói gì |
 |---|---|---|
-| 1. Model | 69 `make_model` | "Session 2 các bạn đã `new OpenAI({ timeout, maxRetries })` rồi tự gọi `responses.parse` 1 lần. Ở đây vẫn client `openai` đó, trỏ sang gateway công ty, nhưng **không tự gọi** — đưa cho SDK gọi." |
-| 2. Tools (`function_tool`) | 116–127 `search_kb`, 142–153 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. Session 2 tự viết schema bằng zod cho output; ở đây SDK tự sinh schema tham số tool từ kiểu Python." |
-| 3. Agent definition | 174–182 `build_agent` | "Agent = instructions (như `INSTRUCTIONS` ở Session 2) + model + danh sách tool. Chỉ khai báo, chưa gọi model." |
-| 4. Run (`Runner.run`) | 249 `run_limited` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
-| 5. Trace | 86 `set_trace_processors` | "SDK tự tạo span cho mỗi bước và gọi processor mình đăng ký; demo đăng ký 2 cái: ghi ra máy + hiện ở cột phải trang web." (cơ chế: `demo/README.md` mục 2, "Trace chạy thế nào") |
+| 1. Model | 42 `make_model` | "Session 2 các bạn đã `new OpenAI({ timeout, maxRetries })` rồi tự gọi `responses.parse` 1 lần. Ở đây vẫn client `openai` đó, trỏ sang gateway công ty, nhưng **không tự gọi** — đưa cho SDK gọi." |
+| 2. Tools (`function_tool`) | 79–91 `search_kb`, 94–106 `create_ticket` | "Một hàm Python bình thường, gắn `@function_tool` là thành tool. Session 2 tự viết schema bằng zod cho output; ở đây SDK tự sinh schema tham số tool từ kiểu Python + docstring. `needs_approval=True` = SDK dừng chờ người duyệt trước khi chạy." |
+| 3. Agent definition | 121–128 `build_agent` | "Agent = instructions (như `INSTRUCTIONS` ở Session 2) + model + danh sách tool. Chỉ khai báo, chưa gọi model." |
+| 4. Run (`Runner.run`) | 150 `run_agent` | "Session 2: `responses.parse` = 1 lượt. Dòng này chạy **nhiều lượt** — vòng lặp ①–④ ở slide 5 — tới khi LLM trả lời cuối hoặc chạm `max_turns=8`." |
+| 5. Trace | 55 `set_trace_processors` | "SDK tự tạo span cho mỗi bước và gọi processor mình đăng ký; demo đăng ký 2 cái: ghi ra máy + hiện ở cột phải trang web." (cơ chế: `demo/README.md` mục 3) |
 
-Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết (load / run thế nào, bảng so sánh S2 ↔ S5): `demo/README.md` mục 3; luồng chạy đầu-cuối: mục 2.
+Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session 5 giữ client đó, giao vòng lặp gọi – chạy tool – gọi lại cho SDK."* Chi tiết: `demo/README.md` — luồng chạy đầu-cuối mục 2, trace mục 3, bảng so sánh S2 ↔ S5 mục 4, input/output mục 5.
 
-- Các phần khác trong file (`needs_approval`, guardrail, checkpoint ①–⑤, task state) → nói "đây là phần application tự quyết, học ở Session 6–9", **không giải thích**. Không học thuộc API.
+- Guardrail `no_card_number`: 1 câu — "code kiểm tra câu hỏi trước khi gửi LLM" (slide 19). Không học thuộc API.
 - Nếu số dòng lệch do code đổi: tìm `@function_tool`, `def build_agent`, `Runner.run`.
 
 **Trang demo** (`python3 demo_ui.py` → http://localhost:8000):
@@ -82,21 +82,21 @@ Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session
 - Phải: **trace** hiện từng bước ngay khi agent chạy — ô **cam = LLM quyết định** (kèm "lý do LLM tự viết" + nút xem JSON gốc), ô **tối = app chạy**, ô xanh = người duyệt. Cùng màu với slide 6 và slide 20.
 
 **Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ cần RAG** ("Mã lỗi thanh toán E205 nghĩa là gì?").
-- Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
+- Kết quả 30/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
-- Chỉ RAG trên trace: ô "App chạy search_kb" = **R** (tra tài liệu) · kết quả tool gửi lại LLM = **A** (đưa vào ngữ cảnh) · "LLM trả lời cuối" có nguồn kb-a-002 = **G**. Code: `checkpoints.py`, comment "RAG nằm ở đây". RAG thật dùng vector search (Session 3–4); demo tra bằng từ khoá cho gọn.
+- Chỉ RAG trên trace: ô "App chạy search_kb" = **R** (tra tài liệu) · kết quả tool gửi lại LLM = **A** (đưa vào ngữ cảnh) · "LLM trả lời cuối" có nguồn kb-002 = **G**. Code: `find_docs()` trong `agent_openai_sdk.py`. RAG thật dùng vector search (Session 3–4); demo tra bằng từ khoá cho gọn.
 
 **Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Nhiều bước + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
-- Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
+- Kết quả 30/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
 - Chỉ vào cột trace (đây là "trace ở mức định vị", slide 20):
   - ô cam = LLM quyết định — mở "JSON gốc": LLM chỉ viết ra JSON, không tự chạy gì;
   - ô tối = app chạy hàm thật;
   - "gửi N message" tăng 2 → 4 → 6 = mỗi lượt gửi lại cả hội thoại.
 - Nói: "**Nhiều bước + hành động**. Nếu lúc nào cũng tạo ticket thì workflow là đủ (slide 9); nếu tạo hay không tuỳ kết quả tra thì mới cần agent (slide 11)."
-- Hay gặp: LLM đề xuất P2 hoặc assignee "billing team" → ô tối "BỊ CHẶN bởi application" → LLM tự sửa P3/billing-team-a. Tận dụng: "LLM đề xuất, app quyết" (slide 22). Có thể bấm **Từ chối** để cho thấy app không tạo ticket.
+- Hộp duyệt hiện đúng tham số LLM điền (vd P3, billing-team): "LLM đề xuất, app/người quyết" (slide 22). Có thể bấm **Từ chối** để cho thấy không có ticket nào được tạo.
 
-**Dự phòng** (trang web lỗi): chạy lệnh trên terminal — `python3 run_demo.py --scenario 9 --trace-only` và `python3 run_demo.py --scenario 1 --approve yes --trace-only` (cùng nội dung, in dạng chữ; `--trace-only` ẩn log kiểm quyền của Session 7).
-Gateway lỗi hẳn: kể lại theo kết quả 29/10 ở trên.
+**Dự phòng** (trang web lỗi): chạy lệnh trên terminal — `python3 run_demo.py rag` và `python3 run_demo.py ticket --approve yes` (cùng nội dung, in dạng chữ).
+Gateway lỗi hẳn: kể lại theo kết quả 30/10 ở trên.
 
 **Tuỳ chọn (nếu dư giờ)**: `python3 compare_orchestration_levels.py --runs 1 --show` (~25s) — cùng một yêu cầu chạy ở 3 mức model call / workflow / agent; dòng `[CODE]`/`[MODEL]` khớp màu ô tối/cam slide 6.
 

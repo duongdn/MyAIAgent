@@ -1,5 +1,5 @@
 """
-Demo UI (Session 5+): chat với support agent thật + cột trace hiện từng bước của vòng lặp agent ngay khi chạy.
+Demo UI (Session 5): chat với support agent thật + cột trace hiện từng bước của vòng lặp agent ngay khi chạy.
 Không cài thêm gì — chỉ thư viện chuẩn + agent có sẵn (agent_openai_sdk.py). Model thật qua LLM gateway công ty.
 
 Chạy:  python3 demo_ui.py            → mở http://localhost:8000
@@ -21,9 +21,6 @@ from agents import add_trace_processor
 from agents.tracing import TracingProcessor
 
 import agent_openai_sdk as sdk
-import checkpoints as cp
-import ticket_system as ts
-from sample_data import KB_DOCS
 
 PAGE = Path(__file__).with_name("demo_ui.html")
 SAMPLES = {  # 2 yêu cầu của "Ví dụ trong buổi" (đề cương Session 5)
@@ -35,11 +32,18 @@ CURRENT = threading.local()  # run đang chạy trong thread này (trace process
 
 
 def short(s, n=160):
+    """Rút gọn chuỗi để hiện trên ô trace. Input: s="<chuỗi dài>", n=160. Output: ≤160 ký tự + "…"."""
     s = " ".join(s.split())
     return s if len(s) <= n else s[:n] + "…"
 
 
 def emit(event):
+    """Bỏ 1 event vào hàng đợi của run đang chạy → do_GET /events đẩy lên trình duyệt.
+    Input:
+        event — dict, vd {"type": "step", "who": "llm", "title": "LLM chọn tool: search_kb", …}
+                type: "step" (1 ô trace) | "approval" (hiện nút duyệt) | "done" (câu trả lời) | "error" | "end"
+    Output: None
+    """
     run = getattr(CURRENT, "run", None)
     if run:
         run["events"].put(event)
@@ -79,6 +83,7 @@ class UITraceProcessor(TracingProcessor):
             else:
                 emit({"type": "step", "who": "app", "title": f"App chạy {d.name}", "detail": short(str(d.output))})
 
+    # 5 hàm còn lại SDK cũng gọi (bắt đầu/kết thúc trace, bắt đầu span, tắt) — demo không cần, để trống
     def on_trace_start(self, trace): pass
     def on_trace_end(self, trace): pass
     def on_span_start(self, span): pass
@@ -86,32 +91,41 @@ class UITraceProcessor(TracingProcessor):
     def force_flush(self): pass
 
 
-def ask_human_ui(me, args, _approve_mode):
-    """Thay cp.ask_human: hiện nút Duyệt/Từ chối trên trang, chờ người bấm (tối đa 5 phút)."""
+def ask_human_ui(tool_name, args):
+    """Hỏi người duyệt trên trang web: hiện nút Duyệt/Từ chối, chờ người bấm (tối đa 5 phút).
+    run_agent gọi hàm này khi SDK dừng trước create_ticket (needs_approval=True).
+    Input:
+        tool_name — "create_ticket"
+        args      — tham số LLM điền, vd {"title": "Khách X lỗi E205", "priority": "P3", "assignee": "billing-team"}
+    Output: True = Duyệt, False = Từ chối / hết 5 phút
+    """
     run = CURRENT.run
     emit({"type": "approval", "args": args})
     try:
-        ok = run["approval"].get(timeout=300)
+        ok = run["approval"].get(timeout=300)  # thread agent ĐỨNG CHỜ ở đây tới khi POST /approve bỏ kết quả vào
     except queue.Empty:
         ok = False
     emit({"type": "step", "who": "human", "title": "Người duyệt: " + ("ĐỒNG Ý" if ok else "TỪ CHỐI")})
     return ok
 
 
-cp.ask_human = ask_human_ui  # agent_openai_sdk gọi cp.ask_human khi SDK dừng chờ duyệt
-
-
 def run_in_thread(run, question):
+    """Chạy agent cho 1 câu hỏi, trong thread riêng (web server không bị chặn).
+    Input:
+        run      — {"events": Queue, "approval": Queue} của run này (tạo ở do_POST /run)
+        question — câu hỏi user gõ, vd "Mã lỗi thanh toán E205 nghĩa là gì?"
+    Output: None; kết quả gửi qua emit(): các "step", rồi "done" (câu trả lời) và "end"
+    """
     CURRENT.run = run
     try:
-        ts.reset()
-        model = sdk.make_model(os.environ.get("DEMO_PROVIDER", "nus"), os.environ.get("DEMO_MODEL"))
+        sdk.TICKETS.clear()
+        model = sdk.make_model()
         # add_trace_processor = THÊM vào danh sách (LocalTraceProcessor vẫn chạy). Phải gọi SAU make_model(),
         # vì make_model() dùng set_trace_processors (thay cả danh sách) sẽ xoá processor đã thêm trước đó.
         add_trace_processor(UITraceProcessor())
-        answer = asyncio.run(sdk.run_agent(model, "alice", question, KB_DOCS, (), "ui"))
-        tickets = [f"{t['id']} ({t['priority']}, {t['assignee']})" for t in ts.TICKETS]
-        emit({"type": "done", "answer": answer, "usage": dict(cp.LAST_USAGE), "tickets": tickets})
+        answer, usage = asyncio.run(sdk.run_agent(model, question, ask_human_ui))
+        tickets = [f"{t['id']} ({t['priority']}, {t['assignee']})" for t in sdk.TICKETS]
+        emit({"type": "done", "answer": answer, "usage": usage, "tickets": tickets})
     except Exception as e:  # lỗi gateway/model → hiện trên trang thay vì treo
         emit({"type": "error", "message": f"{type(e).__name__}: {e}"[:400]})
     finally:
@@ -119,10 +133,13 @@ def run_in_thread(run, question):
 
 
 class Handler(BaseHTTPRequestHandler):
+    """Web server: GET / (trang), GET /events (đẩy event), POST /run (bắt đầu), POST /approve (nút duyệt)."""
+
     def log_message(self, *_):
         pass
 
     def _json(self, code, obj):
+        """Trả JSON. Input: code=200, obj={"run": "a1b2c3d4"}. Output: HTTP response."""
         body = json.dumps(obj, ensure_ascii=False).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -131,6 +148,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        """GET /           → trả trang demo_ui.html
+        GET /events?run= → giữ kết nối (Server-Sent Events), lấy event trong hàng đợi nào gửi nấy tới khi "end"
+        Output mỗi event: dòng `data: {"type": "step", …}`"""
         if self.path == "/":
             body = PAGE.read_text().replace("__SAMPLES__", json.dumps(SAMPLES, ensure_ascii=False)).encode()
             self.send_response(200)
@@ -155,6 +175,8 @@ class Handler(BaseHTTPRequestHandler):
             self._json(404, {"error": "not found"})
 
     def do_POST(self):
+        """POST /run     body {"question": "…"}       → mở thread run_in_thread, trả ngay {"run": "a1b2c3d4"}
+        POST /approve body {"run": "…", "ok": true} → bỏ True/False vào hàng đợi approval (ask_human_ui đang chờ)"""
         data = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))) or "{}")
         if self.path == "/run":
             question = (data.get("question") or "").strip()

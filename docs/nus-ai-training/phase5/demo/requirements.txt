@@ -1,0 +1,1 @@
+openai-agents==0.23.1      # OpenAI Agents SDK (cài kèm thư viện openai của Session 2)

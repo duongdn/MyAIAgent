@@ -3,10 +3,10 @@ Trace của OpenAI Agents SDK, ghi RA MÁY MÌNH thay vì gửi về dashboard O
 SDK tự sinh span cho mọi bước (agent, model call, tool call, guardrail, lỗi); processor này chỉ in + ghi file.
 
     .traces/<trace_id>.jsonl   1 dòng / span — mở ra xem lại sau khi chạy
-    run_demo.py --trace        in cây span ra màn hình
+    run_demo.py (DEMO_TRACE=1) in từng bước theo sơ đồ vòng lặp ①–④ (slide 5)
 
-Trace = quan sát KỸ THUẬT (bước nào chạy, bao lâu, lỗi gì). Nó không trả lời "user task có xong đúng không"
-— việc đó thuộc eval (run_eval.py) và task state (task_state.py).
+Cơ chế: SDK tự tạo span cho mỗi bước (gọi LLM, chạy tool, guardrail); khi 1 span kết thúc, SDK gọi
+on_span_end(span) của mọi processor đã đăng ký (set_trace_processors / add_trace_processor).
 """
 import json
 from datetime import datetime
@@ -58,7 +58,7 @@ def _loop_lines(d):
         return lines
     if d.type == "function":
         if not d.output:
-            return [f"③ APP         CHƯA chạy {d.name}: dừng chờ người duyệt (Session 7)"]
+            return [f"③ APP         CHƯA chạy {d.name}: dừng chờ người duyệt"]
         return [f"③ APP         chạy hàm thật {d.name}({(d.input or '')[:60]})",
                 f"④ APP → LLM   kết quả {str(d.output)[:70]!r} gửi lại ở lượt sau"]
     if d.type == "guardrail":

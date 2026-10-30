@@ -278,6 +278,7 @@ Note: Google Sheets task-log system retired 2026-08-21 (all projects incl. Baile
 ## tech-talk
 - [feedback_mpfc_excluded_from_demo](tech-talk/feedback_mpfc_excluded_from_demo.md) — 🔴 MPFC fully off-limits for this deck/demo, higher severity than other forbidden names
 - [feedback_google_slides_api_enabled_and_gotchas](tech-talk/feedback_google_slides_api_enabled_and_gotchas.md) — 🔴 Slides API IS enabled+editable via service account (corrects stale disabled-API memory); documents batchUpdate transform/size gotchas
+- [feedback_session_demo_only_that_session_content](tech-talk/feedback_session_demo_only_that_session_content.md) — 🔴 demo 1 session chỉ chứa nội dung session đó; xoá code session sau (S5 demo tách bản đầy đủ sang phase5/demo)
 - [feedback_ai_training_slides_design_pattern](tech-talk/feedback_ai_training_slides_design_pattern.md) — short cards on-slide, full explanation goes to Speaker Notes; color palette + layout rules for NUS AI training deck
 - [project_nus_ai_training_part5_status](tech-talk/project_nus_ai_training_part5_status.md) — DuongDN trainer for Phase 5 (Sessions 13-16) of company AI training program; Session 13 slides done as of 2026-09-11
 - [feedback_training_demo_must_use_real_llm](tech-talk/feedback_training_demo_must_use_real_llm.md) — 🔴 training demos use a real LLM (Claude Agent SDK, no API key needed), never a scripted model forcing the outcome
