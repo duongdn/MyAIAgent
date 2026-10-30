@@ -6,7 +6,7 @@ const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
   let s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, đoạn mở đầu "Giai đoạn 3 Build AI Agent": "Năm session dùng cùng support agent để đi từ quyết định có cần agent hay không đến một bản thiết kế có thể review. OpenAI Agents SDK là ví dụ triển khai xuyên suốt; mỗi buổi vẫn giải thích nguyên lý trước khi xem code. SDK giúp chạy loop và tích hợp tools, trong khi application giữ quyền đối với dữ liệu, permission, approval, state lưu bền và business rule."]\nMở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
-SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/phase3/demo/.
+SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: docs/nus-ai-training/phase3/session-05/demo/.
 Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash); số liệu trong notes và demo đều chạy thật.
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });

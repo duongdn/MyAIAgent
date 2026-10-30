@@ -1,12 +1,12 @@
 # Session 7 — Kịch bản trình bày (60 phút)
 
 Deck (16 slide): https://docs.google.com/presentation/d/1x5lvgyO4nNgGYq_hton3_5OPBRNFQD2Tk1Om9bzPpS0
-Code demo: `scripts/nus-ai-training/phase3/demo/`
+Code demo: `docs/nus-ai-training/phase3/session-05/demo/`
 Người trình bày: VinhNT (S7–S9). Bản nháp do DuongDN soạn trước khi chia lại, VinhNT tự quyết dùng hay không.
 
 ## Chuẩn bị trước buổi (10 phút)
 
-- [ ] `cd scripts/nus-ai-training/phase3/demo` và kích hoạt venv
+- [ ] `cd docs/nus-ai-training/phase3/session-05/demo` và kích hoạt venv
 - [ ] Có key gateway trong `config/.nus-llm-gateway-config.json`
 - [ ] Chạy thử: `python3 run_demo.py --scenario 6 --approve yes --disable idem` rồi
       `python3 run_demo.py --scenario 6 --approve yes` (xem đúng 2 kết quả khác nhau: trùng ticket vs

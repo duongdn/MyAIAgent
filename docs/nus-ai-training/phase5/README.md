@@ -25,9 +25,9 @@ https://docs.google.com/presentation/d/1Stt_wQjaHJtLND_dFI0S3iWA4l_OTxjKB2_cOwRz
   - `build-phase5-session-deck.js`: ⚠ xoá toàn bộ slide rồi dựng lại
   - `apply-phase5-owasp-patch.js`, `apply-phase5-operations-patch.js`: sửa trực tiếp 1 phần, không dựng lại cả deck
   - `phase5-owasp-llm-top10-content.js`, `phase5-operations-slides.js`: nội dung dùng chung
-- Demo: `scripts/nus-ai-training/phase3/demo/` (dùng chung với GĐ3). Số eval trên slide 12 lấy từ `eval_results.json` (`run_eval.py`)
+- Demo: `docs/nus-ai-training/phase3/session-05/demo/` (dùng chung với GĐ3). Số eval trên slide 12 lấy từ `eval_results.json` (`run_eval.py`)
 - Đọc deck/render ảnh: `scripts/nus-ai-training/phase3/deck-tools/`
 
 ## Lưu ý
-- Demo GĐ3 (S5/S6) dùng chung `phase3/demo/`. Trước buổi GĐ5 phải chạy lại cả demo security để chắc phần sửa cho GĐ3 không làm hỏng kịch bản.
+- Demo GĐ3 (S5/S6) dùng chung `docs/nus-ai-training/phase3/session-05/demo/`. Trước buổi GĐ5 phải chạy lại cả demo security để chắc phần sửa cho GĐ3 không làm hỏng kịch bản.
 - Service account không tạo được file mới trên Drive. Mỗi deck phải có ID riêng, không dùng chung.

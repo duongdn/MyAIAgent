@@ -41,7 +41,7 @@ function threeFlows() {
 function demoSupportRequests() {
   // Slide mở phần demo: chỉ có chữ "Demo", nội dung chạy live trên terminal (xem notes)
   const s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
-Slide chỉ để mở phần demo — mọi nội dung nằm ở màn hình terminal. Demo live, model thật qua gateway công ty (scripts/nus-ai-training/phase3/demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
+Slide chỉ để mở phần demo — mọi nội dung nằm ở màn hình terminal. Demo live, model thật qua gateway công ty (docs/nus-ai-training/phase3/session-05/demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
 0) Walkthrough code (~2'): mở agent_openai_sdk.py, chỉ 3 chỗ — @function_tool (dòng 79–92, tools), build_agent (105–107, Agent), Runner.run (145, run/runner). Phần còn lại: "application tự quyết, học ở S6–S9". Chi tiết: session-05/presentation-script.md mục Demo.
 Trang demo: python3 demo_ui.py → http://localhost:8000 (2 nút câu mẫu, cột trace từng bước, nút Duyệt/Từ chối). Lệnh dưới là dự phòng.
 1) Nút ① hoặc python3 run_demo.py --scenario 9 --trace-only   → "Mã lỗi thanh toán E205 nghĩa là gì?"
@@ -51,7 +51,7 @@ Trang demo: python3 demo_ui.py → http://localhost:8000 (2 nút câu mẫu, c�
 Chỉ vào trace: dòng ② là LLM quyết định, dòng ③ là code app chạy (giống sơ đồ slide 5).
 
 --- Giữ từ slide cũ "Cùng một yêu cầu, 3 cách viết code" (đã bỏ khỏi deck 29/10) ---
-[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ phase3/demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
+[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 3: "Walkthrough support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API."]\nĐây là code thật của sơ đồ 3 mức (slide 6) — xem lúc demo, cuối buổi, rút gọn từ docs/nus-ai-training/phase3/session-05/demo/compare_orchestration_levels.py (llm() = 1 lần gọi chat completions qua gateway công ty).
 Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây, model thật, không ghi đè số đo trên slide).
 Đọc cột trái theo từng mức:
 - Model call: code tra KB rồi gọi model đúng 1 lần. Muốn tạo ticket → không có chỗ nào để làm.
