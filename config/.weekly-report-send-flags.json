@@ -4,7 +4,7 @@
     "room_id": "!oofREYAXHsvPWEOJev:nustechnology.com",
     "week_start": "2026-10-26",
     "message_text": "Report week 26/10\n\nJames Diamond\n\nWeb: 40h/40h\nLeNH: 40h/40h\n\nMobile: 20h/20h\nAnhNH2: 20h/20h\n\n---\n\nMarcel\nDuongDN: 40m/40m",
-    "confirmed": false,
+    "confirmed": true,
     "draft_note": "2026-10-30 18:00 cron: live WS week 2026-10-26 LeNH 40h (8x5), AnhNH2 20h (4x5), charged=actual, JD finalized. Marcel DuongDN 0.67h (10-29). Awaiting user confirmation.",
     "unresolved_thangn": "ThangN absent from James Diamond Workstream member list 2 weeks running (09-21 week and 09-28 week) after one active week (14h, 09-17). Ask user before finalizing: still on the project (just not logging) or rolled off? If rolled off, should his Mobile line be removed from future reports going forward, not just this draft?",
     "superseded_week_09_21": {
@@ -124,6 +124,9 @@
       "sent_at": "2026-10-23T20:14:30+07:00",
       "event_id": "$hEMWAsQE5OfyTDqNrYSoh55ZCkXOkGbOH9ZVfuRGwto",
       "note": "Actually confirmed and sent 2026-10-23T20:14; key name is legacy ('unsent_draft_') but data is a completed send. Superseded as active slot by 26/10 draft at 2026-10-30 18:00 cron."
-    }
+    },
+    "confirmed_at": "2026-10-30T20:53:08.430524+07:00",
+    "sent_at": "2026-10-30T20:53:33.793076+07:00",
+    "event_id": "$xp29um9U_-0sJRm4emMlUFNRFgsU0480laW-8m6WmFo"
   }
 }
