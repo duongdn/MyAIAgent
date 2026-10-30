@@ -2,7 +2,7 @@
 const path = require('path'), fs = require('fs'), https = require('https');
 const { google } = require('googleapis');
 const [out, from = 1, to = 99, pid = '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI'] = process.argv.slice(2);
-const auth = new google.auth.GoogleAuth({ keyFile: path.join(__dirname, '../../../config/daily-agent-490610-7eb7985b33e3.json'), scopes: ['https://www.googleapis.com/auth/presentations'] });
+const auth = new google.auth.GoogleAuth({ keyFile: path.join(__dirname, '../../../../config/daily-agent-490610-7eb7985b33e3.json'), scopes: ['https://www.googleapis.com/auth/presentations'] });
 const get = (u, f) => new Promise((ok, no) => https.get(u, r => { const w = fs.createWriteStream(f); r.pipe(w); w.on('finish', ok); }).on('error', no));
 (async () => {
   const s = google.slides({ version: 'v1', auth });

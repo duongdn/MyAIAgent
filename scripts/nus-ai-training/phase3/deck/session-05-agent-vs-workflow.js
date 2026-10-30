@@ -6,7 +6,7 @@ const extra = require('./session-05-extra-slides');
 
 module.exports = function session05() {
   let s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, đoạn mở đầu "Giai đoạn 3 Build AI Agent": "Năm session dùng cùng support agent để đi từ quyết định có cần agent hay không đến một bản thiết kế có thể review. OpenAI Agents SDK là ví dụ triển khai xuyên suốt; mỗi buổi vẫn giải thích nguyên lý trước khi xem code. SDK giúp chạy loop và tích hợp tools, trong khi application giữ quyền đối với dữ liệu, permission, approval, state lưu bền và business rule."]\nMở đầu Giai đoạn 3 (Session 5–9). Một support agent duy nhất, mỗi buổi thêm một lớp.
-SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/support_agent_demo/.
+SDK dùng xuyên suốt: OpenAI Agents SDK (openai-agents 0.23.1). Code: scripts/nus-ai-training/phase3/demo/.
 Model chạy qua LLM gateway công ty (llm.nustechnology.com, mặc định deepseek-v4.1-flash); số liệu trong notes và demo đều chạy thật.
 Thông điệp xuyên suốt: SDK giúp chạy loop và tích hợp tool; application giữ quyền với dữ liệu, permission, approval, state lưu bền và business rule.`, C.INK);
   mono(s, 40, 40, 300, 16, 'NUS TECHNOLOGY', { color: C.ORANGE, size: 10 });
@@ -127,7 +127,7 @@ Chuyển sang phần 03. Không học API mới: mỗi khái niệm SDK là mộ
 - function_tool: biến một hàm Python thành tool; SDK tự sinh mô tả (tên, mô tả, JSON schema tham số) từ type hint + docstring để gửi cho LLM.
 - Runner.run: chính là vòng lặp ①–④ — gọi model, chạy tool model chọn, đưa kết quả lại, lặp tới khi có câu trả lời cuối hoặc chạm giới hạn số lượt (max_turns).
 - Trace: SDK tự ghi lại từng bước (model call, tool call, guardrail) — slide sau.
-Code thật (rút gọn từ support_agent_demo/agent_openai_sdk.py) xem ở phần demo cuối buổi:
+Code thật (rút gọn từ demo/agent_openai_sdk.py) xem ở phần demo cuối buổi:
   agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket])
   result = await Runner.run(agent, "<câu hỏi>", context=session, max_turns=8)
 Lưu ý kỹ thuật: demo dùng gateway công ty qua OpenAIChatCompletionsModel (chuẩn Chat Completions — provider nào tương thích OpenAI cũng chạy).

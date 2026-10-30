@@ -7,7 +7,7 @@ Speaker notes của từng slide có đủ nguồn trích dẫn; file này là b
 
 ## Chuẩn bị (làm trước buổi, ~10')
 ```bash
-cd scripts/nus-ai-training/support_agent_demo
+cd scripts/nus-ai-training/phase3/demo
 python3 -m venv ~/ai-training-venv && source ~/ai-training-venv/bin/activate
 pip install -r requirements.txt                       # openai-agents 0.23.1
 python3 demo_ui.py                                    # mở http://localhost:8000, bấm thử câu ① 1 lần cho gateway "ấm"
@@ -61,7 +61,7 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 
 Đáp ứng 2 dòng đề cương (trang 4, mục Session 5): gạch 3 "**Walkthrough** support agent tối thiểu trong OpenAI Agents SDK: agent definition, run/runner, tools và trace ở mức định vị; không học thuộc API" và "Ví dụ trong buổi: yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?".
 
-**Bước 0 — Walkthrough code (~2', editor)**: mở `support_agent_demo/agent_openai_sdk.py`, chỉ đúng 3 chỗ, nối với bảng slide 19:
+**Bước 0 — Walkthrough code (~2', editor)**: mở `phase3/demo/agent_openai_sdk.py`, chỉ đúng 3 chỗ, nối với bảng slide 19:
 
 | Concept (slide 19) | Dòng | Nói gì |
 |---|---|---|

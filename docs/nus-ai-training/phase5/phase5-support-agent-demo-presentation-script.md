@@ -1,6 +1,6 @@
 # Demo Support Agent — Kịch bản trình bày (Giai đoạn 5)
 
-Code demo: `scripts/nus-ai-training/support_agent_demo/`
+Code demo: `scripts/nus-ai-training/phase3/demo/`
 Thời lượng: ~11 phút, đặt cuối Phần 2 (sau slide Prompt injection + OWASP), trước Phần 3 Vận hành.
 
 ---
@@ -250,7 +250,7 @@ Prompt tốt vẫn nên viết (giảm số lần model đề xuất sai → use
 ### 3.1 Cài đặt (1 lần)
 
 ```bash
-cd scripts/nus-ai-training/support_agent_demo
+cd scripts/nus-ai-training/phase3/demo
 python3 -m venv .venv && . .venv/bin/activate
 pip install -r requirements.txt
 # Bản chính (OpenAI Agents SDK + gateway công ty): tạo config/.nus-llm-gateway-config.json

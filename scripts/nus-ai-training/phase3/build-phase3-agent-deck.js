@@ -1,21 +1,21 @@
 // Build deck NUS AI Training Giai đoạn 3 "Build AI Agent" (Session 5–9).
-// Nội dung: phase3-deck/session-0X-*.js · helpers: phase3-deck/slide-kit.js · số liệu/log lấy từ support_agent_demo chạy thật.
+// Nội dung: deck/session-0X-*.js · helpers: deck/slide-kit.js · số liệu/log lấy từ demo/ chạy thật.
 // XOÁ toàn bộ slide của deck đích rồi dựng lại — chỉ chạy được khi deck trống hoặc slide đầu là "Giai đoạn 3".
-// Run: node scripts/nus-ai-training/build-phase3-agent-deck.js   (PHASE3_ONLY=5 → chỉ session 5)
+// Run: node scripts/nus-ai-training/phase3/build-phase3-agent-deck.js   (PHASE3_ONLY=5 → chỉ session 5)
 const path = require('path');
 const { google } = require('googleapis');
-const kit = require('./phase3-deck/slide-kit');
+const kit = require('./deck/slide-kit');
 
 // Mỗi session = 1 ngày training = 1 deck riêng
 const SESSIONS = {
-  5: ['./phase3-deck/session-05-agent-vs-workflow', '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI'],
-  6: ['./phase3-deck/session-06-agent-loop-tool-contracts', '1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ'],
-  7: ['./phase3-deck/session-07-safe-tool-execution', '1x5lvgyO4nNgGYq_hton3_5OPBRNFQD2Tk1Om9bzPpS0'],
-  8: ['./phase3-deck/session-08-state-memory-stop-conditions', '1LeHoPz4orAL7Bb656Z85xjyPV9iTloznTE5kqayNYhs'],
-  9: ['./phase3-deck/session-09-harness-tracing-full-agent', '1ziJEouNTRQJRRYWODN9ZAjywMgNVRHshCOFNje45BM4'],
+  5: ['./deck/session-05-agent-vs-workflow', '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI'],
+  6: ['./deck/session-06-agent-loop-tool-contracts', '1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ'],
+  7: ['./deck/session-07-safe-tool-execution', '1x5lvgyO4nNgGYq_hton3_5OPBRNFQD2Tk1Om9bzPpS0'],
+  8: ['./deck/session-08-state-memory-stop-conditions', '1LeHoPz4orAL7Bb656Z85xjyPV9iTloznTE5kqayNYhs'],
+  9: ['./deck/session-09-harness-tracing-full-agent', '1ziJEouNTRQJRRYWODN9ZAjywMgNVRHshCOFNje45BM4'],
 };
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, '../../config/daily-agent-490610-7eb7985b33e3.json'),
+  keyFile: path.join(__dirname, '../../../config/daily-agent-490610-7eb7985b33e3.json'),
   scopes: ['https://www.googleapis.com/auth/presentations'],
 });
 

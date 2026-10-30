@@ -40,7 +40,7 @@ PROVIDERS = {
 def load_config(config_file, env_var):
     """Key lấy từ biến môi trường, hoặc config/<file>.json (gitignored) — không bao giờ hardcode trong code.
     File config có thể ghi đè base_url: {"api_key": "...", "base_url": "..."}"""
-    path = Path(__file__).resolve().parents[3] / "config" / config_file
+    path = Path(__file__).resolve().parents[4] / "config" / config_file
     cfg = json.loads(path.read_text()) if path.exists() else {}
     if os.environ.get(env_var):
         cfg["api_key"] = os.environ[env_var]

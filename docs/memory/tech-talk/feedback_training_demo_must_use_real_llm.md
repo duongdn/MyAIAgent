@@ -9,4 +9,4 @@ User rejected a demo where the "model" was scripted to always fall for prompt in
 
 **Why:** Audience = very experienced devs; a rigged model proves nothing. Real results also taught more: Claude resisted obvious injection but fell for subtle "policy-looking" poisoned data.
 
-**How to apply:** Build training demos on a real agent. No API keys on this machine (no OpenAI/Gemini key; Vertex AI disabled on daily-agent-490610) → use Claude Agent SDK (`claude-agent-sdk`), which runs on the logged-in Claude Code account. Report actual model behavior; if model resists, say so rather than tuning data to force a failure. Demo: `scripts/nus-ai-training/support_agent_demo/`. Related: [[project_nus_ai_training_part5_status]].
+**How to apply:** Build training demos on a real agent. No API keys on this machine (no OpenAI/Gemini key; Vertex AI disabled on daily-agent-490610) → use Claude Agent SDK (`claude-agent-sdk`), which runs on the logged-in Claude Code account. Report actual model behavior; if model resists, say so rather than tuning data to force a failure. Demo: `scripts/nus-ai-training/phase3/demo/`. Related: [[project_nus_ai_training_part5_status]].

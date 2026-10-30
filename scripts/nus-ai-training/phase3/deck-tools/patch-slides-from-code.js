@@ -1,14 +1,14 @@
 // Cập nhật ĐÚNG các slide chỉ định từ code (không xoá/dựng lại cả deck → giữ phần user sửa tay ở slide khác).
-// Run: node scripts/nus-ai-training/deck-tools/patch-slides-from-code.js <session> [--delete 5,7] <slide numbers…|3-9>
+// Run: node scripts/nus-ai-training/phase3/deck-tools/patch-slides-from-code.js <session> [--delete 5,7] <slide numbers…|3-9>
 //   --delete: số slide trên deck HIỆN TẠI cần xoá (chạy trước)
 //   slide numbers: số slide theo CODE; slide live ở vị trí đó bị thay bằng bản dựng từ code (kể cả notes)
 const path = require('path');
 const { google } = require('googleapis');
-const kit = require('../phase3-deck/slide-kit');
+const kit = require('../deck/slide-kit');
 
 const SESSIONS = {
-  5: ['../phase3-deck/session-05-agent-vs-workflow', '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI'],
-  6: ['../phase3-deck/session-06-agent-loop-tool-contracts', '1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ'],
+  5: ['../deck/session-05-agent-vs-workflow', '10ZYIXeEzlElYai6ws9xd77ZN8QbNfAAdPMJekhkHMWI'],
+  6: ['../deck/session-06-agent-loop-tool-contracts', '1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ'],
 };
 
 const nums = (list) => list.flatMap((x) => {
@@ -37,7 +37,7 @@ function requestsForSlide(sid) {
 
   kit.reset(); const opt = require(mod)() || {}; if (!opt.noClosing) kit.closing();
   const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(__dirname, '../../../config/daily-agent-490610-7eb7985b33e3.json'),
+    keyFile: path.join(__dirname, '../../../../config/daily-agent-490610-7eb7985b33e3.json'),
     scopes: ['https://www.googleapis.com/auth/presentations'],
   });
   const api = google.slides({ version: 'v1', auth: await auth.getClient() });

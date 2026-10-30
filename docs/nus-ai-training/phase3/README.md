@@ -16,7 +16,13 @@ shared/       session2-overlap-with-s5-s6.md · s5-s9-techlead-depth-review.md
 changelog/    <ngày>.md (mọi lần sửa deck/demo: giờ · vấn đề · trước/sau · commit)
 ```
 
-## Code
-- Deck: `scripts/nus-ai-training/phase3-deck/` (1 file/session + `slide-kit.js`)
-- Sửa deck: `scripts/nus-ai-training/deck-tools/patch-slides-from-code.js <session> <slide…>` chỉ thay đúng slide cần sửa. Không chạy build-phase3-agent-deck.js vì nó xoá cả deck, mất phần sửa tay
-- Demo: `scripts/nus-ai-training/support_agent_demo/`
+## Code — tất cả ở `scripts/nus-ai-training/phase3/`
+```
+phase3/
+├── build-phase3-agent-deck.js   ⚠ xoá cả deck rồi dựng lại — không dùng khi deck đã sửa tay
+├── deck/                        nội dung slide: slide-kit.js + 1 file/session (session-05-*.js …)
+├── deck-tools/                  patch-slides-from-code.js (sửa đúng slide) · render-slide-thumbnails.js · dump-slide-text-and-notes.js
+└── demo/                        support agent (OpenAI Agents SDK) + demo_ui.py (trang web demo) + run_demo.py (dòng lệnh)
+```
+- Demo dùng chung với Giai đoạn 5 (security demo, số eval) — sửa demo thì chạy lại cả demo GĐ5.
+- Sửa deck: `node scripts/nus-ai-training/phase3/deck-tools/patch-slides-from-code.js <session> <slide…>`; kiểm tra người sửa cuối trước khi patch.

@@ -1,7 +1,7 @@
 # Session 6 — Kịch bản trình bày (60 phút) + đối chiếu PDF
 
 Deck (18 slide): https://docs.google.com/presentation/d/1pIVAHFwBg3Bgb28oBeJVJ19rEOyx8KFDlFn0PlcHPyQ
-Code demo: `scripts/nus-ai-training/support_agent_demo/` — mọi số liệu trên slide đều chạy thật (deepseek-v4.1-flash qua gateway công ty).
+Code demo: `scripts/nus-ai-training/phase3/demo/` — mọi số liệu trên slide đều chạy thật (deepseek-v4.1-flash qua gateway công ty).
 Người trình bày: DuongDN (S5 + S6). S7–S9 do VinhNT phụ trách.
 
 ## A. Đối chiếu PDF (02_Noi_dung_chi_tiet, mục Session 6) → slide
@@ -25,7 +25,7 @@ Không còn dòng nào của PDF thiếu slide.
 
 ## B. Chuẩn bị trước buổi
 
-- [ ] `cd scripts/nus-ai-training/support_agent_demo`, kích hoạt venv đã cài `requirements.txt`
+- [ ] `cd scripts/nus-ai-training/phase3/demo`, kích hoạt venv đã cài `requirements.txt`
 - [ ] Key gateway có trong `config/.nus-llm-gateway-config.json` (không chiếu file này lên màn hình)
 - [ ] Chạy thử 1 lần cả 3 lệnh live ở dưới (gateway "ấm", khỏi chờ lâu)
 - [ ] Nếu muốn đo lại description: `python3 compare_tool_descriptions.py --runs 5` (khoảng 2 phút, chạy TRƯỚC buổi; ghi `tool_descriptions.json`)
