@@ -31,6 +31,9 @@
   .llm .box { background:var(--orange); } .app .box { background:var(--ink); color:#fff; } .human .box { background:var(--green); }
   .title { font-weight:600; } .who { float:right; font:12px "IBM Plex Mono"; opacity:.7; }
   .detail { font-size:13px; margin-top:4px; opacity:.85; word-break:break-word; }
+  .opts { margin-top:6px; font-size:13px; } .opt { display:inline-block; padding:2px 8px; margin:2px 4px 2px 0; border-radius:6px; border:1px dashed var(--ink); opacity:.6; }
+  .opt.on { border:2px solid var(--ink); background:#fff; opacity:1; font-weight:600; }
+  .why { margin-top:6px; font-size:13px; background:rgba(255,255,255,.55); border-radius:6px; padding:6px 8px; }
   details { margin-top:6px; font-size:13px; } summary { cursor:pointer; opacity:.8; }
   details pre { background:rgba(0,0,0,.08); padding:8px; border-radius:6px; white-space:pre-wrap; font:12px "IBM Plex Mono"; }
   .legend { display:flex; gap:16px; font-size:13px; color:var(--grey); margin-bottom:12px; }
@@ -70,8 +73,8 @@ function step(ev) {
   const li = document.createElement('li'); li.className = 'step ' + ev.who;
   let inner = `<span class="who">${ev.who === 'llm' ? 'LLM' : ev.who === 'app' ? 'APP' : 'NGƯỜI'}</span><div class="title">${esc(ev.title)}</div>`;
   if (ev.detail) inner += `<div class="detail">${esc(ev.detail)}</div>`;
-  if (ev.options) inner += `<div class="detail">lựa chọn LLM có: ${ev.options.map(esc).join(' · ')}</div>`;
-  if (ev.why) inner += `<div class="detail">lý do LLM tự viết (DeepSeek trả kèm, LLM tự kể — không chắc là nguyên nhân thật): “${esc(ev.why)}”</div>`;
+  if (ev.options) inner += `<div class="opts">Các lựa chọn LLM có (✓ = LLM đã chọn): ${ev.options.map((o) => `<span class="opt ${(ev.chosen || []).includes(o) ? 'on' : ''}">${(ev.chosen || []).includes(o) ? '✓ ' : ''}${esc(o)}</span>`).join('')}</div>`;
+  if (ev.who === 'llm') inner += `<div class="why"><b>Lý do LLM tự viết</b> (LLM tự kể, không chắc là nguyên nhân thật): ${ev.why ? '“' + esc(ev.why) + '”' : '<i>lần này LLM không ghi lý do</i>'}</div>`;
   if (ev.raw) inner += `<details><summary>JSON gốc LLM trả về · ${esc(ev.tokens)} · gửi ${ev.sent} message</summary><pre>${esc(JSON.stringify(ev.raw, null, 2))}</pre></details>`;
   li.innerHTML = `<span class="num">${++n}</span><div class="box">${inner}</div>`;
   $('steps').appendChild(li); li.scrollIntoView({block: 'end'});
