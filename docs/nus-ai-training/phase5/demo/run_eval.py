@@ -17,6 +17,13 @@ import json
 import os
 import time
 
+import sys
+from pathlib import Path
+
+# Dùng lại agent của demo Session 5 (docs/nus-ai-training/phase3/session-05/demo)
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parents[1] / "phase3" / "session-05" / "demo"))
+
 import agent_openai_sdk as sdk
 import checkpoints as cp
 from run_demo import SCENARIOS
@@ -64,7 +71,7 @@ async def main():
             for num in CHECKS:
                 print(f"\n##### {name} | case {num} | run {r + 1}")
                 results.append({"model": name, "run": r + 1, **await run_case(model, num)})
-    json.dump(results, open("eval_results.json", "w"), ensure_ascii=False, indent=1)
+    json.dump(results, open(HERE / "eval_results.json", "w"), ensure_ascii=False, indent=1)
 
     print(f"\n{'model':<22}{'model đúng':>12}{'hệ thống an toàn':>18}{'latency TB':>12}{'token TB':>10}{'lỗi':>6}")
     for name in models:

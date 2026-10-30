@@ -48,7 +48,7 @@ def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None
 ```
 (`agent_openai_sdk.py:79–81`; `create_ticket` ở dòng 90–92 viết y hệt.)
 
-SDK tự đọc tên hàm, mô tả, kiểu tham số và biến thành **mô tả tool gửi cho LLM**. Đây là đúng thứ LLM nhìn thấy (in bằng `python3 compare_tool_descriptions.py --schema`):
+SDK tự đọc tên hàm, mô tả, kiểu tham số và biến thành **mô tả tool gửi cho LLM**. Đây là đúng thứ LLM nhìn thấy (in bằng `python3 ../../session-06/demo/compare_tool_descriptions.py --schema` — script của Session 6, chạy tức thì, không gọi model):
 
 ```json
 {
@@ -174,6 +174,7 @@ SDK tự sinh trace cho mỗi `Runner.run`: mỗi lượt gọi LLM, mỗi tool 
 | `run_demo.py` | Bản dòng lệnh (dự phòng) |
 | `trace_local.py` | Ghi trace ra `.traces/` trên máy và in các bước |
 | `sample_data.py`, `ticket_system.py` | Dữ liệu mẫu (user, tài liệu KB) và hệ thống ticket giả lập |
-| `compare_tool_descriptions.py --schema` | In mô tả tool SDK gửi cho LLM (bước A) |
+| `compare_orchestration_levels.py --show` | Tuỳ chọn: cùng 1 yêu cầu chạy ở 3 mức model call / workflow / agent (slide 6) |
+| `task_state.py` | Lưu trạng thái task (cần cho bản chạy, giải thích ở Session 8) |
 
-Các file và kịch bản còn lại trong thư mục dùng cho các buổi sau — không cần đọc ở Session 5.
+Thư mục chỉ còn file Session 5 cần để chạy. Script đo của Session 6 nằm ở `../../session-06/demo/`, các file GĐ5 (eval, bản Claude SDK) ở `docs/nus-ai-training/phase5/demo/`.

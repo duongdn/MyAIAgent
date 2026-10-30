@@ -13,6 +13,13 @@ import io
 import json
 import os
 
+import sys
+from pathlib import Path
+
+# Dùng lại agent của demo Session 5 (docs/nus-ai-training/phase3/session-05/demo)
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parents[2] / "phase3" / "session-05" / "demo"))
+
 import agent_openai_sdk as sdk
 import checkpoints as cp
 import ticket_system as ts
@@ -64,7 +71,7 @@ async def main():
         rows.append(row)
         print(f"  {name:<20} đề xuất đầu sai {row['first_proposal_wrong']}/{a.runs} · bị ④ chặn tổng {row['blocked_total']}"
               f" · ticket tạo được {row['tickets_created']}/{a.runs} · {row['wrong_examples']}")
-    json.dump({"model": model.model, "question": QUESTION, "rows": rows}, open("tool_descriptions.json", "w"),
+    json.dump({"model": model.model, "question": QUESTION, "rows": rows}, open(HERE / "tool_descriptions.json", "w"),
               ensure_ascii=False, indent=1)
 
 

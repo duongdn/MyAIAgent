@@ -1,22 +1,16 @@
 """
 Demo: Support agent THẬT (model thật) đọc knowledge base, đề xuất ticket và đi qua 5 điểm kiểm tra quyền.
-Hai bản, CÙNG logic kiểm tra (checkpoints.py), chỉ khác SDK:
-    --sdk openai  (mặc định) OpenAI Agents SDK — cùng SDK với Session 5–9.
-                  Model qua LLM gateway công ty (llm.nustechnology.com) — mặc định deepseek-v4.1-flash.
-    --sdk claude             Claude Agent SDK — dùng tài khoản Claude Code đã đăng nhập, không cần API key.
+OpenAI Agents SDK, model qua LLM gateway công ty (llm.nustechnology.com) — mặc định deepseek-v4.1-flash.
 
 CÀI ĐẶT (1 lần, từ thư mục chứa file này):
     python3 -m venv .venv && . .venv/bin/activate
     pip install -r requirements.txt
-    # --sdk openai: key gateway công ty trong config/.nus-llm-gateway-config.json (hoặc NUS_LLM_API_KEY)
-    #               provider khác: DEMO_PROVIDER=openai|deepseek (xem PROVIDERS trong agent_openai_sdk.py)
-    # --sdk claude: lệnh `claude` chạy được và đã đăng nhập
-    export DEMO_MODEL=...      # tuỳ chọn. openai SDK: deepseek-v4.1-flash (mặc định) | qwen-3.7-flash | glm-5.3-flash...
-                               #           claude SDK: sonnet (mặc định) | haiku | opus
+    # key gateway công ty trong config/.nus-llm-gateway-config.json (hoặc NUS_LLM_API_KEY)
+    # provider khác: DEMO_PROVIDER=openai|deepseek (xem PROVIDERS trong agent_openai_sdk.py)
+    export DEMO_MODEL=...      # tuỳ chọn: deepseek-v4.1-flash (mặc định) | qwen-3.7-flash | glm-5.3-flash...
 
 CHẠY:
     python3 run_demo.py                                 # 5 kịch bản, hỏi y/n khi cần duyệt
-    python3 run_demo.py --sdk claude --scenario 5       # cùng kịch bản trên Claude để so sánh
     python3 run_demo.py --compare --scenario 5          # chạy 1 kịch bản trên MỌI model của gateway → bảng so sánh
     python3 run_demo.py --scenario 2                    # chỉ kịch bản prompt injection
     python3 run_demo.py --scenario 2 --disable 4 --disable 5
@@ -43,7 +37,6 @@ import argparse
 import asyncio
 import io
 import os
-import shutil
 import sys
 
 import checkpoints as cp
@@ -106,13 +99,12 @@ async def main():
     p.add_argument("--approve", choices=["ask", "yes", "no", "later"], default="ask",
                    help="checkpoint ⑤: ask=hỏi y/n, yes/no=tự trả lời, later=lưu state và dừng chờ duyệt")
     p.add_argument("--fault", choices=["timeout_once", "down"], help="giả lập lỗi hệ thống ticket đích")
-    p.add_argument("--resume", metavar="TASK_ID", help="tiếp tục task đang AWAITING_APPROVAL (--sdk openai)")
+    p.add_argument("--resume", metavar="TASK_ID", help="tiếp tục task đang AWAITING_APPROVAL")
     p.add_argument("--trace", action="store_true", help="in trace của SDK (luôn ghi vào .traces/)")
     p.add_argument("--trace-only", action="store_true",
                    help="Session 5: như --trace nhưng ẩn log checkpoint (①–⑤ kiểm quyền, task state) — chỉ còn vòng lặp agent")
-    p.add_argument("--sdk", choices=["openai", "claude"], default="openai", help="SDK dùng để chạy agent")
     p.add_argument("--compare", action="store_true",
-                   help="chạy --scenario trên mọi model của gateway (--sdk openai), in bảng so sánh")
+                   help="chạy --scenario trên mọi model của gateway, in bảng so sánh")
     a = p.parse_args()
 
     if a.trace or a.trace_only:
@@ -122,17 +114,10 @@ async def main():
     if a.compare:
         return await compare(a)
 
-    if a.sdk == "openai":
-        import agent_openai_sdk as sdk  # import muộn: chỉ cần cài SDK đang dùng
-        provider = os.environ.get("DEMO_PROVIDER", "nus")
-        model = sdk.make_model(provider, os.environ.get("DEMO_MODEL"))
-        label = f"OpenAI Agents SDK + {provider}:{model.model}"
-    else:
-        if not shutil.which("claude"):
-            sys.exit("Không tìm thấy Claude Code (lệnh `claude`) — cài và đăng nhập trước, xem đầu file.")
-        import agent_claude_sdk as sdk
-        model = os.environ.get("DEMO_MODEL", "sonnet")
-        label = f"Claude Agent SDK + {model}"
+    import agent_openai_sdk as sdk
+    provider = os.environ.get("DEMO_PROVIDER", "nus")
+    model = sdk.make_model(provider, os.environ.get("DEMO_MODEL"))
+    label = f"OpenAI Agents SDK + {provider}:{model.model}"
     print(f"Agent: {label}" + (f" | ⚠ TẮT checkpoint: {', '.join(sorted(a.disable))}" if a.disable else ""))
 
     if a.resume:

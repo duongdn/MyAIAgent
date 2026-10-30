@@ -1,0 +1,1 @@
+claude-agent-sdk==0.2.165  # agent_claude_sdk.py (bản Claude, GĐ5 — chưa nối, làm sau)

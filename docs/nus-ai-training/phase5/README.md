@@ -25,7 +25,7 @@ https://docs.google.com/presentation/d/1Stt_wQjaHJtLND_dFI0S3iWA4l_OTxjKB2_cOwRz
   - `build-phase5-session-deck.js`: ⚠ xoá toàn bộ slide rồi dựng lại
   - `apply-phase5-owasp-patch.js`, `apply-phase5-operations-patch.js`: sửa trực tiếp 1 phần, không dựng lại cả deck
   - `phase5-owasp-llm-top10-content.js`, `phase5-operations-slides.js`: nội dung dùng chung
-- Demo: `docs/nus-ai-training/phase3/session-05/demo/` (dùng chung với GĐ3). Số eval trên slide 12 lấy từ `eval_results.json` (`run_eval.py`)
+- Demo: agent dùng chung `docs/nus-ai-training/phase3/session-05/demo/`. Eval của GĐ5: `docs/nus-ai-training/phase5/demo/run_eval.py` → `eval_results.json` (số trên slide 12)
 - Đọc deck/render ảnh: `scripts/nus-ai-training/phase3/deck-tools/`
 
 ## Lưu ý

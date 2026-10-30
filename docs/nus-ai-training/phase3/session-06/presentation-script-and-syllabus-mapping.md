@@ -28,7 +28,7 @@ Không còn dòng nào của PDF thiếu slide.
 - [ ] `cd docs/nus-ai-training/phase3/session-05/demo`, kích hoạt venv đã cài `requirements.txt`
 - [ ] Key gateway có trong `config/.nus-llm-gateway-config.json` (không chiếu file này lên màn hình)
 - [ ] Chạy thử 1 lần cả 3 lệnh live ở dưới (gateway "ấm", khỏi chờ lâu)
-- [ ] Nếu muốn đo lại description: `python3 compare_tool_descriptions.py --runs 5` (khoảng 2 phút, chạy TRƯỚC buổi; ghi `tool_descriptions.json`)
+- [ ] Nếu muốn đo lại description: `python3 demo/compare_tool_descriptions.py --runs 5` (khoảng 2 phút, chạy TRƯỚC buổi; ghi `tool_descriptions.json`)
 - [ ] Gateway lỗi → dùng output in sẵn trên slide 7, 9, 11 (đều là output thật)
 
 ## C. Dòng thời gian
@@ -80,7 +80,7 @@ Không còn dòng nào của PDF thiếu slide.
 - Hàng dưới: output, error, side effect = application định nghĩa. Side effect tô cam: hay quên nhất.
 
 **Slide 9 · Model thật sự thấy gì — DEMO LIVE (3')**
-- Chạy: `python3 compare_tool_descriptions.py --schema` (tức thì, không gọi model).
+- Chạy: `python3 demo/compare_tool_descriptions.py --schema` (tức thì, không gọi model).
 - Chỉ vào output: không có output/error/side effect. `priority` chỉ là `"string"` → model chỉ còn description để đoán.
 
 **Slide 10 · Câu hỏi: đổi description, sai bao nhiêu? (1'30")** — cho lớp đoán bản mơ hồ sai mấy/5.
