@@ -70,7 +70,8 @@ function step(ev) {
   const li = document.createElement('li'); li.className = 'step ' + ev.who;
   let inner = `<span class="who">${ev.who === 'llm' ? 'LLM' : ev.who === 'app' ? 'APP' : 'NGƯỜI'}</span><div class="title">${esc(ev.title)}</div>`;
   if (ev.detail) inner += `<div class="detail">${esc(ev.detail)}</div>`;
-  if (ev.why) inner += `<div class="detail">lý do LLM tự viết: “${esc(ev.why)}”</div>`;
+  if (ev.options) inner += `<div class="detail">lựa chọn LLM có: ${ev.options.map(esc).join(' · ')}</div>`;
+  if (ev.why) inner += `<div class="detail">lý do LLM tự viết (DeepSeek trả kèm, LLM tự kể — không chắc là nguyên nhân thật): “${esc(ev.why)}”</div>`;
   if (ev.raw) inner += `<details><summary>JSON gốc LLM trả về · ${esc(ev.tokens)} · gửi ${ev.sent} message</summary><pre>${esc(JSON.stringify(ev.raw, null, 2))}</pre></details>`;
   li.innerHTML = `<span class="num">${++n}</span><div class="box">${inner}</div>`;
   $('steps').appendChild(li); li.scrollIntoView({block: 'end'});

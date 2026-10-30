@@ -62,8 +62,10 @@ class UITraceProcessor(TracingProcessor):
             out = (getattr(d, "output", None) or [{}])[0]
             usage = getattr(d, "usage", None) or {}
             why = " ".join((out.get("reasoning_content") or "").split())
-            why = why if len(why) <= 180 else why[:180] + "…"
-            base = {"type": "step", "who": "llm", "why": why,
+            why = why if len(why) <= 400 else why[:400] + "…"
+            # Các lựa chọn LLM có ở lượt này: mọi tool đã gửi kèm (tên lấy từ agent) + trả lời luôn không gọi tool
+            options = [t.name for t in (sdk.search_kb, sdk.create_ticket)] + ["trả lời luôn"]
+            base = {"type": "step", "who": "llm", "why": why, "options": options,
                     "tokens": f"{usage.get('input_tokens', '?')} vào + {usage.get('output_tokens', '?')} ra",
                     "sent": len(getattr(d, "input", None) or [])}
             calls = out.get("tool_calls") or []

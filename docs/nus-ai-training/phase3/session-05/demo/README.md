@@ -240,14 +240,43 @@ LLM trả lời cuối (không tool call → dừng): `"**E205 = ngân hàng t�
 - **Đơn giản hoá**: tra bằng từ khoá. RAG thật dùng embedding + vector search (Session 3–4).
 - **Hai kiểu**: trong agent, tra tài liệu là *tool* — LLM tự quyết gọi. RAG cổ điển = code tự tra, nhét vào prompt, gọi LLM 1 lần: `compare_orchestration_levels.py` → `model_call()`. Câu E205 chỉ cần kiểu cổ điển → đúng ý "yêu cầu nào chỉ cần RAG".
 
-## 7. Hai yêu cầu mẫu
+## 7. LLM chọn tool thế nào — vì sao chọn `search_kb`, đã cân nhắc những gì
+
+**Các lựa chọn LLM có ở mỗi lượt** = mọi tool app gửi kèm + trả lời luôn (không gọi tool):
+`search_kb` · `create_ticket` · trả lời luôn. Trang demo ghi dòng "lựa chọn LLM có" trong ô cam.
+
+**LLM chọn dựa trên gì** — chỉ dựa trên những gì app gửi trong request (mục 5E), không có gì khác:
+1. **System prompt**: "Luôn dùng search_kb trước và trích id tài liệu làm nguồn. Chỉ tạo ticket khi user yêu cầu."
+2. **Mô tả tool** (docstring): `search_kb` = "Tìm tài liệu trong knowledge base…"; `create_ticket` = "Tạo ticket hỗ trợ…".
+3. **Câu hỏi** của user.
+
+**Xem "lý do" được không?** Có 1 phần: DeepSeek trả kèm `reasoning_content` = đoạn LLM tự viết trước khi chọn (ô cam: "lý do LLM tự viết"). Lưu ý khi giảng:
+- Đây là LLM **tự kể**, không chắc là nguyên nhân thật bên trong model.
+- Có lúc rỗng (model không viết), có lúc rất ngắn ("Search KB first.").
+- Không phải model nào cũng trả: tuỳ model/nhà cung cấp; nhiều model không trả nguyên văn phần suy luận.
+
+**Cách chắc chắn hơn: đổi input, chạy lại, xem lựa chọn có đổi không.** Đo thật 30/10 (lượt 1, `deepseek-v4.1-flash`):
+
+| Thử | Kết quả | Lý do LLM tự viết (trích) |
+|---|---|---|
+| "Mã lỗi thanh toán E205 nghĩa là gì?" × 3 | 3/3 `search_kb` | "I should search the knowledge base first." / "Search KB first." / (rỗng) |
+| Cùng câu, **bỏ câu "Luôn dùng search_kb trước"** khỏi prompt × 3 | 3/3 vẫn `search_kb` | (rỗng) — chỉ mô tả tool + câu hỏi cũng đủ để chọn tra |
+| "Xin chào, bạn là ai?" × 2 | lần 1 **trả lời luôn**, lần 2 `search_kb` | "System prompt says always use search_kb… But this is a greeting" |
+| "Tạo ticket P3 cho billing-team: khách X lỗi E205." × 2 | `search_kb` trước (1 lần gọi 2 câu tra), chưa `create_ticket` ngay | "The user explicitly asks to create a ticket. But system prompt says always use search_kb first." |
+
+Đọc bảng:
+- Câu "Xin chào": **cùng input, 2 lần chọn khác nhau** — reasoning cho thấy LLM cân giữa luật trong prompt và việc câu hỏi chỉ là lời chào. Đó chính là "LLM tự chọn bước" (slide 5) và vì sao agent không ổn định (slide 10).
+- Câu tạo ticket: LLM ưu tiên luật trong system prompt ("tra trước") hơn lời user.
+- Muốn biết input nào quyết định → đổi từng input rồi đo lại (như dòng 2). Đo lặp nhiều lần là việc của eval, học ở Session 9.
+
+## 8. Hai yêu cầu mẫu
 
 | Nút | Câu hỏi | Agent làm gì (chạy thật) | Kết luận |
 |---|---|---|---|
 | ① Chỉ cần RAG | "Mã lỗi thanh toán E205 nghĩa là gì?" | `search_kb` → trả lời. 2 lượt gọi LLM, không ticket | Tra 1 lần rồi trả lời — **model call + RAG là đủ** |
 | ② Nhiều bước + tạo ticket | "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi." | `search_kb` → `create_ticket` → **dừng chờ duyệt** → Duyệt → T-1001 → trả lời. 3 lượt gọi LLM | **Nhiều bước + hành động**. Luôn tạo ticket → workflow là đủ (slide 9); tạo hay không tuỳ kết quả tra → agent (slide 11) |
 
-## 8. Câu hỏi hay gặp
+## 9. Câu hỏi hay gặp
 
 | Câu hỏi | Trả lời ngắn |
 |---|---|

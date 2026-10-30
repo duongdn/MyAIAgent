@@ -83,6 +83,7 @@ Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session
 
 **Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ cần RAG** ("Mã lỗi thanh toán E205 nghĩa là gì?").
 - Kết quả 30/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
+- Ô cam "LLM chọn tool": chỉ dòng "lựa chọn LLM có: search_kb · create_ticket · trả lời luôn" + "lý do LLM tự viết". Nói: "LLM chọn dựa trên system prompt + mô tả tool + câu hỏi; lý do là LLM tự kể, không chắc là nguyên nhân thật." Nếu lớp hỏi "sao biết nó cân nhắc gì": gõ "Xin chào, bạn là ai?" — có lần trả lời luôn, có lần vẫn tra (bảng đo thật: `demo/README.md` mục 7).
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
 - Chỉ RAG trên trace: ô "App chạy search_kb" = **R** (tra tài liệu) · kết quả tool gửi lại LLM = **A** (đưa vào ngữ cảnh) · "LLM trả lời cuối" có nguồn kb-002 = **G**. Code: `find_docs()` trong `agent_openai_sdk.py`. RAG thật dùng vector search (Session 3–4); demo tra bằng từ khoá cho gọn.
 
