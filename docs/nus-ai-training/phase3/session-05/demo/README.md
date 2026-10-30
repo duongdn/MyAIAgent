@@ -130,6 +130,18 @@ Slide 5 vẽ agent = **LLM** + **code app** chạy vòng lặp ①–④ với *
 
 Ý chính khi giảng: **phần vòng lặp là SDK lo** (slide 19); mình chỉ khai báo tool + agent rồi gọi `Runner.run`.
 
+### RAG nằm ở đâu
+Không có file/hàm tên "rag" — RAG chia ra 3 chỗ:
+
+| Chữ | Ở đâu | Câu E205 |
+|---|---|---|
+| **R – Retrieval** (tra tài liệu) | `checkpoints.search_kb()` + `relevant()`, dữ liệu `sample_data.KB_DOCS` (comment "RAG nằm ở đây" trong `checkpoints.py`) | Lọc theo quyền, giữ tài liệu chứa ≥2 từ của câu hỏi → `kb-a-001`, `kb-a-002` |
+| **A – Augmented** (đưa vào ngữ cảnh) | Output của tool `search_kb` → SDK gắn vào hội thoại thành message `tool` | Lượt 2 gửi 4 message (có tài liệu) thay vì 2 |
+| **G – Generation** (sinh câu trả lời) | Lượt gọi model cuối trong `Runner.run` | "E205 = ngân hàng từ chối (nguồn: kb-a-002)" |
+
+- **Đơn giản hoá**: tra bằng từ khoá, không embedding/vector DB (Session 3–4 mới học).
+- **Hai kiểu**: trong agent, tra tài liệu là *tool* — model tự quyết gọi. RAG cổ điển = code tự tra rồi nhét vào prompt, gọi model 1 lần: `compare_orchestration_levels.py` → `model_call()`. Câu E205 chỉ cần kiểu cổ điển là đủ → đúng ý "yêu cầu nào chỉ cần RAG" của đề cương.
+
 ## 4. Walkthrough từng bước
 
 ### Bước A — Tool: hàm Python bình thường + `@function_tool`

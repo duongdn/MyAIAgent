@@ -58,6 +58,7 @@ def kb_text():
         return cp.search_kb(me, "lỗi thanh toán mã E205")
 
 
+# RAG cổ điển: CODE tra KB (kb_text) → nhét tài liệu vào prompt → gọi model 1 lần. Không tool, không vòng lặp.
 async def model_call(client, model, usage):
     return await chat(client, model, f"Tài liệu:\n{kb_text()}\n\nTrả lời ngắn, có nguồn: {QUESTION}", usage)
 

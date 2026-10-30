@@ -109,6 +109,7 @@ MODEL_SETTINGS = ModelSettings(extra_body=None if os.environ.get("DEMO_CACHE") =
 # @function_tool đọc tên hàm + kiểu tham số (query: str, tenant: str | None) → JSON schema gửi cho model.
 # S2 viết schema cho OUTPUT (zod); ở đây schema cho THAM SỐ TOOL — model điền, app chạy.
 # description_override = mô tả tool model đọc để quyết định có gọi hay không.
+# RAG: tool này là bước Retrieval của RAG — model gọi, kết quả quay lại model để trả lời (xem checkpoints.py "RAG nằm ở đây")
 @function_tool(description_override=cp.SEARCH_KB_DESC)
 def search_kb(ctx: RunContextWrapper[cp.Session], query: str, tenant: str | None = None) -> str:
     """TOOL tra tài liệu. Model quyết định gọi; SDK parse JSON tool call rồi gọi hàm này.

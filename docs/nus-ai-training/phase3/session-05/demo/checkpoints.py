@@ -87,7 +87,14 @@ def budget_exceeded(me: Session) -> str | None:
     return None
 
 
-# ── ① + ② + ③ search_kb ───────────────────────────────────────────────────
+# ── RAG nằm ở đây ── ① + ② + ③ search_kb ─────────────────────────────────
+# R (Retrieval)  : relevant() + vòng lọc trong search_kb() — tra KB_DOCS (sample_data.py) theo từ khoá.
+#                  Đơn giản hoá: hệ thống thật dùng embedding + vector search (Session 3–4).
+# A (Augmented)  : search_kb() trả chuỗi <untrusted_search_results>…; SDK gắn chuỗi đó vào hội thoại
+#                  (message role "tool") → lượt gọi model sau có tài liệu trong ngữ cảnh.
+# G (Generation) : model đọc tài liệu đó và trả lời có trích nguồn (lượt cuối của Runner.run).
+# Trong agent, Retrieval là TOOL: model tự quyết có tra hay không. RAG "cổ điển" (code tự tra rồi nhét
+# vào prompt, không có agent) xem compare_orchestration_levels.py → model_call().
 SUSPICIOUS = ["ignore all previous", "ignore previous", "bỏ qua mọi hướng dẫn", "dành cho ai assistant"]
 
 

@@ -84,6 +84,7 @@ Câu chốt: *"Session 2 tự gọi model 1 lần rồi tự kiểm tra. Session
 **Bước 1 — Yêu cầu chỉ cần tra tài liệu (~2')**: bấm **① Chỉ cần RAG** ("Mã lỗi thanh toán E205 nghĩa là gì?").
 - Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM trả lời cuối; 2 lượt gọi LLM, **không tạo ticket**.
 - Nói: "Agent làm được, nhưng việc này chỉ là tra 1 lần rồi trả lời — **model call + RAG là đủ**, rẻ và ổn định hơn (slide 9, 12)."
+- Chỉ RAG trên trace: ô "App chạy search_kb" = **R** (tra tài liệu) · kết quả tool gửi lại LLM = **A** (đưa vào ngữ cảnh) · "LLM trả lời cuối" có nguồn kb-a-002 = **G**. Code: `checkpoints.py`, comment "RAG nằm ở đây". RAG thật dùng vector search (Session 3–4); demo tra bằng từ khoá cho gọn.
 
 **Bước 2 — Yêu cầu nhiều bước + tạo ticket (~3')**: bấm **② Nhiều bước + tạo ticket** ("Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi.").
 - Kết quả 29/10: LLM chọn `search_kb` → app chạy → LLM chọn `create_ticket` → "App CHƯA chạy: chờ người duyệt" → hộp duyệt hiện bên trái → bấm **Duyệt** → app tạo T-1001 → LLM trả lời cuối; 3 lượt gọi LLM.
