@@ -42,12 +42,12 @@ function demoSupportRequests() {
   // Slide mở phần demo: chỉ có chữ "Demo", nội dung chạy live trên terminal (xem notes)
   const s = blank(`[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — dòng "Ví dụ trong buổi": "Yêu cầu support nào chỉ cần RAG, yêu cầu nào cần nhiều bước và tạo ticket?" + gạch đầu dòng 3 (walkthrough agent tối thiểu).]
 Slide chỉ để mở phần demo — mọi nội dung nằm ở màn hình terminal. Demo live, model thật qua gateway công ty (docs/nus-ai-training/phase3/session-05/demo/, mỗi lệnh ~5–10 giây). Use case xuyên suốt Giai đoạn 3: support agent đọc knowledge base, trả lời có nguồn, tạo ticket khi cần.
-0) Walkthrough code (~2'): mở agent_openai_sdk.py, chỉ 3 chỗ — @function_tool (dòng 79–92, tools), build_agent (105–107, Agent), Runner.run (145, run/runner). Phần còn lại: "application tự quyết, học ở S6–S9". Chi tiết: session-05/presentation-script.md mục Demo.
+0) Walkthrough code (~3'): mở agent_openai_sdk.py (152 dòng), 5 khối — make_model (40), @function_tool (77–105, tools), build_agent (109–116, Agent), Runner.run (138, run/runner), set_trace_processors (53, trace). Chi tiết: session-05/presentation-script.md mục Demo.
 Trang demo: python3 demo_ui.py → http://localhost:8000 (2 nút câu mẫu, cột trace từng bước, nút Duyệt/Từ chối). Lệnh dưới là dự phòng.
 1) Nút ① hoặc python3 run_demo.py rag   → "Mã lỗi thanh toán E205 nghĩa là gì?"
-   Chạy 29/10: 2 lượt gọi LLM (LLM gọi search_kb rồi trả lời), 1.442 token vào, không tạo ticket. → Chỉ cần tra tài liệu rồi trả lời: model call + RAG là đủ, dùng agent là thừa.
+   Chạy 30/10: 2 lượt gọi LLM (LLM gọi search_kb rồi trả lời), 1.273 token vào, không tạo ticket. → Chỉ cần tra tài liệu rồi trả lời: model call + RAG là đủ, dùng agent là thừa.
 2) Nút ② (bấm Duyệt khi hỏi) hoặc python3 run_demo.py ticket --approve yes   → "Khách X báo lỗi thanh toán mã E205, xử lý sao? Tạo ticket cho billing team giúp tôi."
-   Chạy 29/10: 3 lượt (search_kb → create_ticket, dừng chờ duyệt → T-1001 → trả lời), 2.600 token vào. → Cần nhiều bước + hành động. Nếu lúc nào cũng tạo ticket → workflow (slide 9); nếu tạo hay không tuỳ kết quả tra → agent.
+   Chạy 30/10: 3 lượt (search_kb → create_ticket, dừng chờ duyệt → T-1001 → trả lời), 2.474 token vào. → Cần nhiều bước + hành động. Nếu lúc nào cũng tạo ticket → workflow (slide 9); nếu tạo hay không tuỳ kết quả tra → agent.
 Chỉ vào trace: dòng ② là LLM quyết định, dòng ③ là code app chạy (giống sơ đồ slide 5).
 
 --- Giữ từ slide cũ "Cùng một yêu cầu, 3 cách viết code" (đã bỏ khỏi deck 29/10) ---
@@ -58,7 +58,7 @@ Chạy live: python3 compare_orchestration_levels.py --runs 1 --show  (~25 giây
 - Workflow: thứ tự 4 bước nằm trong code. Model chỉ điền vào ô "phân loại" và ô "trả lời". Tham số ticket (P3, billing-team) code viết sẵn.
 - Agent: code chỉ khai báo mục tiêu + danh sách tool + max_turns. Gọi tool nào, mấy lần là model quyết định lúc chạy; SDK chạy vòng lặp.
 Cột phải là output thật: [CODE]/[MODEL] khớp màu ô tối/cam ở slide 6 (3 mức). Ở mức Agent, các dòng ①–④ là trace của SDK (chạy lại 29/10, cùng kiểu slide trace): lượt 1 LLM gọi search_kb 2 lần → lượt 2 gọi create_ticket, dừng chờ duyệt → lượt 3 trả lời.
-Chú ý khi chạy live: ở mức Agent sẽ có thêm dòng kiểm quyền + chờ duyệt create_ticket — đó là phần application kiểm soát, Session 7 sẽ giải thích; hôm nay chỉ cần nhìn số lượt và thứ tự bước.
+Hôm nay chỉ cần nhìn số lượt và thứ tự bước.
 Code rút gọn của 3 mức (compare_orchestration_levels.py):
 # 1 · Model call — gọi model đúng 1 lần
 docs = search_kb("lỗi E205")           # code
@@ -89,10 +89,9 @@ Trace in theo đúng vòng lặp ①–④ của slide 5 (chạy thật 28/10, d
 - ② LLM quyết định: lượt 1 gọi search_kb 2 lần (2 cách hỏi), lượt 2 gọi create_ticket, lượt 3 dừng và trả lời.
 - ③ APP chạy hàm thật; create_ticket dừng chờ người duyệt trước khi chạy.
 Tổng: 3 lượt gọi model, 2.707 token vào + 621 ra.
-Đọc trace theo concept của slide trước: cả khối = 1 lần Agent chạy; các lượt ① ② = Runner.run lặp; mỗi dòng ③ = một function_tool chạy; dòng 🛡 = Guardrail kiểm tra input.
+Đọc trace theo concept của slide trước: cả khối = 1 lần Agent chạy; các lượt ① ② = Runner.run lặp; mỗi dòng ③ = một function_tool chạy.
 Lệnh: python3 run_demo.py ticket --approve yes
-Trace thật dùng để vẽ slide (kịch bản 1, tool A = search_kb, tool B = create_ticket):
-🛡 guardrail no_card_number: qua
+Trace thật dùng để vẽ slide (câu ②, tool A = search_kb, tool B = create_ticket):
 ① APP → LLM  2 message · 574+154 token
 ② LLM: gọi search_kb ×2 {"query": "lỗi … E205"}
 ③ APP chạy search_kb → ④ kết quả gửi lại

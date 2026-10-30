@@ -114,7 +114,7 @@ Mở phần 03. Chỉ lại sơ đồ slide 5: phần "Code app" (vòng lặp �
 
   s = newSlide('03 · OpenAI Agents SDK', 'OpenAI Agents SDK: thư viện viết sẵn phần code app của agent', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — tên buổi "…và OpenAI Agents SDK hỗ trợ gì" + Nội dung giảng giải, gạch đầu dòng 3 (walkthrough agent tối thiểu trong OpenAI Agents SDK).]
 Nối từ slide 5: agent = LLM + phần "code app" bao quanh (gọi LLM, chạy tool, lặp tới khi xong). Phần code app đó ai cũng phải viết lại giống nhau → OpenAI đóng gói thành thư viện.
-- Cột trái: những việc phần code app phải làm nếu tự viết (vòng lặp ①–④ ở slide 5 + ghi log + kiểm tra input). Cột giữa: concept SDK lo việc đó. Cột phải: dùng thế nào.
+- Cột trái: những việc phần code app phải làm nếu tự viết (vòng lặp ①–④ ở slide 5 + ghi log). Cột giữa: concept SDK lo việc đó. Cột phải: dùng thế nào.
 - (Gộp từ 2 slide cũ "thư viện viết sẵn phần code app" + "Các thành phần chính".) SDK không quyết thay mình — tool nào được mở, quyền, dữ liệu, duyệt vẫn là việc của application → hỏi ở slide sau (21–22).
 Nguyên văn docs: "The OpenAI Agents SDK enables you to build agentic AI apps in a lightweight, easy-to-use package with very few abstractions"; có "a built-in loop that continues until the task is complete"; là "a production-ready upgrade of our previous experimentation for agents, Swarm"; dùng được cả "non-OpenAI providers" (demo của mình chạy model qua gateway công ty).
 Nếu lớp hỏi: SDK mã nguồn mở, có bản Python (demo dùng) và TypeScript; không bắt buộc dùng model của OpenAI — demo chạy model qua LLM gateway công ty.
@@ -126,25 +126,23 @@ Chuyển sang phần 03. Không học API mới: mỗi khái niệm SDK là mộ
 - Agent: khai báo instructions (system prompt), model, danh sách tool — "LLM + hướng dẫn + tool nó được dùng".
 - function_tool: biến một hàm Python thành tool; SDK tự sinh mô tả (tên, mô tả, JSON schema tham số) từ type hint + docstring để gửi cho LLM.
 - Runner.run: chính là vòng lặp ①–④ — gọi model, chạy tool model chọn, đưa kết quả lại, lặp tới khi có câu trả lời cuối hoặc chạm giới hạn số lượt (max_turns).
-- Trace: SDK tự ghi lại từng bước (model call, tool call, guardrail) — slide sau.
+- Trace: SDK tự ghi lại từng bước (model call, tool call) — slide sau.
 Code thật (rút gọn từ demo/agent_openai_sdk.py) xem ở phần demo cuối buổi:
   agent = Agent(name="Support agent", instructions=SYSTEM_PROMPT, model=model, tools=[search_kb, create_ticket])
-  result = await Runner.run(agent, "<câu hỏi>", context=session, max_turns=8)
+  result = await Runner.run(agent, "<câu hỏi>", max_turns=8)
 Lưu ý kỹ thuật: demo dùng gateway công ty qua OpenAIChatCompletionsModel (chuẩn Chat Completions — provider nào tương thích OpenAI cũng chạy).
 Nguồn từng ý:
 - 4 tên Agent · function_tool · Runner.run · Trace: khái niệm chính thức của SDK (docs: mục Agents, Tools, Running agents, Tracing). Docs mô tả agent là "LLMs equipped with instructions and tools".
 - Runner.run = vòng lặp: docs mục "The agent loop" — "We call the LLM for the current agent, with the current input"; nếu là câu trả lời cuối thì "the loop ends"; nếu LLM trả tool call thì "we run those tool calls, append the results, and re-run the loop"; quá max_turns thì báo lỗi MaxTurnsExceeded.
 - function_tool: docs mục Tools — "You can use any Python function as a tool"; tên tool lấy từ tên hàm, mô tả lấy từ docstring, "The schema for the function inputs is automatically created from the function's arguments".
 - Cột trái (nối với sơ đồ slide 5) là cách trainer đối chiếu; khớp với mô tả "The agent loop" ở trên.
-Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing
-- Guardrail: concept thứ 5 trong SDK — kiểm tra input/output của agent (docs: "Guardrails, which enable validation of agent inputs and outputs"); demo có guardrail no_card_number chặn số thẻ trong câu hỏi.`);
+Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing`);
   table(s, 30, 86, [270, 140, 250], [
     ['Code app phải làm (nếu tự viết)', 'Concept SDK', 'Dùng thế nào'],
     ['Khai báo LLM + hướng dẫn + danh sách tool', 'Agent', 'khai báo instructions, model, tools'],
     ['Biến hàm thành tool, mô tả cho LLM', 'function_tool', 'gắn vào hàm, SDK tự sinh mô tả'],
     ['Gọi LLM → chạy tool → gửi kết quả → lặp, quyết khi dừng', 'Runner.run', 'gọi 1 lần, SDK chạy cả vòng lặp'],
     ['Ghi log từng bước', 'Trace', 'SDK tự ghi'],
-    ['Kiểm tra input / output', 'Guardrail', 'khai báo hàm kiểm tra'],
   ], { rowH: 44, size: 12 });
 
   extra.traceLocate();
@@ -155,7 +153,6 @@ Link: openai.github.io/openai-agents-python/running_agents · /tools · /tracing
   s = newSlide('Ranh giới', 'SDK chạy loop — application giữ quyền quyết định', `[Đề cương: 02_Noi_dung_chi_tiet_chuong_trinh_dao_tao_AI.pdf, trang 4, mục Session 5 — Nội dung giảng giải, gạch đầu dòng 4: "Chỉ rõ phần SDK cung cấp và phần product vẫn phải tự quyết định."]\nCâu quan trọng nhất của Session 5 (nguyên văn trong đề cương).
 Đọc từng cặp: SDK có cơ chế, nhưng QUYẾT ĐỊNH là của application.
 Ví dụ: SDK có needs_approval để dừng chờ duyệt, nhưng hành động nào cần duyệt, ai được duyệt — application quyết.
-SDK có guardrail, nhưng guardrail lọc nội dung, KHÔNG phải phân quyền (Session 7).
 Câu hỏi kiểm tra: "Kiểm tra user thuộc tenant nào — SDK hay application?" → application, lấy từ session đăng nhập.
 Tên SDK trong cột giữa chưa giới thiệu ở slide 19 — giải thích 1 câu khi đọc tới:
 - max_turns: tham số của Runner.run, giới hạn số lượt gọi LLM; quá giới hạn thì SDK dừng và báo lỗi (MaxTurnsExceeded) — đây là "điều kiện dừng" do code đặt.
@@ -187,7 +184,7 @@ Tóm tắt 2 phút, mỗi thẻ ứng với một phần của buổi:
 - Khi nào dùng workflow → slide 9–10: viết ra giấy được hết các bước và nhánh (Anthropic: "predictability and consistency for well-defined tasks"); an toàn hơn vì model không tự chọn hành động (OWASP LLM06 Excessive Agency).
 - Khi nào dùng agent → slide 11: 3 dấu hiệu của OpenAI. Không có dấu hiệu nào → workflow.
 - Nguyên tắc → slide 12: Anthropic "finding the simplest solution possible, and only increasing complexity when needed"; workflow có nhiều mẫu (slide 13–17).
-- OpenAI Agents SDK → slide 19–22: SDK viết sẵn phần code app (Agent · function_tool · Runner.run · Trace · Guardrail); tool nào được mở, quyền, dữ liệu, duyệt, state, business rule vẫn do application quyết (Session 7 đi sâu).
+- OpenAI Agents SDK → slide 19–22: SDK viết sẵn phần code app (Agent · function_tool · Runner.run · Trace); tool nào được mở, quyền, dữ liệu, duyệt, state, business rule vẫn do application quyết (Session 7 đi sâu).
 Đối chiếu lại các use case lớp nêu ở slide 8.`, 'Ý chính của buổi');
 
   reviewQuestions([

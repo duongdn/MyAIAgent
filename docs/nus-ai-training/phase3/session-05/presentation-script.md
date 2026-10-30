@@ -53,7 +53,7 @@ Thiếu giờ: slide 13–17 chỉ đọc tiêu đề; demo chỉ chạy lệnh 
 
 ### 03 · OpenAI Agents SDK (25–33')
 - **18 · Câu hỏi**: "Agent nào cũng phải tự viết vòng lặp này?" → không, đã có thư viện.
-- **19 · SDK là thư viện viết sẵn phần code app**: bảng việc phải làm → concept (Agent · function_tool · Runner.run · Trace · Guardrail).
+- **19 · SDK là thư viện viết sẵn phần code app**: bảng việc phải làm → concept (Agent · function_tool · Runner.run · Trace).
 - **20 · Trace**: nhật ký từng bước; đọc để biết các bước, LLM chọn tool gì, sai ở đâu. Trace thật xem lúc demo.
 - **21 · Câu hỏi**: "Có SDK rồi — còn phải tự viết gì?"
 - **22 · Ranh giới**: SDK cung cấp cơ chế, application quyết. Giải thích 1 câu cho max_turns, needs_approval, RunState, context (notes).
