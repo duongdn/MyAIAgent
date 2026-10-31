@@ -118,3 +118,11 @@ DuongDN: 40m/40m
 5. Speedventory: 1 dòng PhucVT 10-26 Pending review — cần reviewer duyệt trước khi finalize.
 6. Crystal lang + Generator: DuongDN ko phải Manager → ko finalize được.
 7. Fountain Est vs Charged đóng băng 4 tuần, 17 dòng chưa triage — nhắc PM cập nhật?
+
+---
+
+## Recheck 2026-10-31 07:15 (+07) — WS live
+- **VuTQ Fountain: 20h** (4h × 5 ngày, đã log 29+30) → khớp plan 20h ✅ (Unresolved #2 đóng).
+- **KhanhHH Radio Data Center: 17h → 20h** (T6 log thêm, 10-30 = 3h) → tổng tuần ≈ **40h** ✅ (Unresolved #3 đóng).
+- HungPN Fountain vẫn 4h (ko log 28–30) → QC 17h/20h 🟡 còn.
+- Matrix JD 26/10: **đã gửi** 2026-10-30 20:53 (event `$xp29um9U_…`) — Unresolved #1 đóng.
